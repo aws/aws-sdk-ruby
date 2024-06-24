@@ -2623,8 +2623,7 @@
         "nuget",
         "generic",
         "ruby",
-        "swift",
-        "cargo"
+        "swift"
       ]
     },
     "PackageGroupAllowedRepository":{

@@ -5,12 +5,14 @@
     "endpointPrefix":"comprehend",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceFullName":"Amazon Comprehend",
     "serviceId":"Comprehend",
     "signatureVersion":"v4",
     "signingName":"comprehend",
     "targetPrefix":"Comprehend_20171127",
-    "uid":"comprehend-2017-11-27"
+    "uid":"comprehend-2017-11-27",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "BatchDetectDominantLanguage":{

@@ -12,7 +12,8 @@
     "signatureVersion":"v4",
     "signingName":"cloudhsm",
     "targetPrefix":"BaldrApiService",
-    "uid":"cloudhsmv2-2017-04-28"
+    "uid":"cloudhsmv2-2017-04-28",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CopyBackupToRegion":{

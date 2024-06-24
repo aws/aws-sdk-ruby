@@ -5,11 +5,13 @@
     "endpointPrefix":"devops-guru",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceFullName":"Amazon DevOps Guru",
     "serviceId":"DevOps Guru",
     "signatureVersion":"v4",
     "signingName":"devops-guru",
-    "uid":"devops-guru-2020-12-01"
+    "uid":"devops-guru-2020-12-01",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AddNotificationChannel":{
