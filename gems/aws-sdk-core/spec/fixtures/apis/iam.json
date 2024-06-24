@@ -5,13 +5,14 @@
     "endpointPrefix":"iam",
     "globalEndpoint":"iam.amazonaws.com",
     "protocol":"query",
+    "protocols":["query"],
     "serviceAbbreviation":"IAM",
     "serviceFullName":"AWS Identity and Access Management",
     "serviceId":"IAM",
     "signatureVersion":"v4",
-    "auth":["aws.auth#sigv4"],
     "uid":"iam-2010-05-08",
-    "xmlNamespace":"https://iam.amazonaws.com/doc/2010-05-08/"
+    "xmlNamespace":"https://iam.amazonaws.com/doc/2010-05-08/",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AddClientIDToOpenIDConnectProvider":{
@@ -221,7 +222,8 @@
         {"shape":"EntityAlreadyExistsException"},
         {"shape":"LimitExceededException"},
         {"shape":"ConcurrentModificationException"},
-        {"shape":"ServiceFailureException"}
+        {"shape":"ServiceFailureException"},
+        {"shape":"OpenIdIdpCommunicationErrorException"}
       ]
     },
     "CreatePolicy":{
@@ -823,10 +825,7 @@
       "output":{
         "shape":"GetAccessKeyLastUsedResponse",
         "resultWrapper":"GetAccessKeyLastUsedResult"
-      },
-      "errors":[
-        {"shape":"NoSuchEntityException"}
-      ]
+      }
     },
     "GetAccountAuthorizationDetails":{
       "name":"GetAccountAuthorizationDetails",
@@ -2780,10 +2779,7 @@
     },
     "CreateOpenIDConnectProviderRequest":{
       "type":"structure",
-      "required":[
-        "Url",
-        "ThumbprintList"
-      ],
+      "required":["Url"],
       "members":{
         "Url":{"shape":"OpenIDConnectProviderUrlType"},
         "ClientIDList":{"shape":"clientIDListType"},
@@ -4679,6 +4675,18 @@
       "max":255,
       "min":1
     },
+    "OpenIdIdpCommunicationErrorException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"openIdIdpCommunicationErrorExceptionMessage"}
+      },
+      "error":{
+        "code":"OpenIdIdpCommunicationError",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "OrganizationsDecisionDetail":{
       "type":"structure",
       "members":{
@@ -6102,6 +6110,7 @@
       "min":6
     },
     "noSuchEntityMessage":{"type":"string"},
+    "openIdIdpCommunicationErrorExceptionMessage":{"type":"string"},
     "organizationsEntityPathType":{
       "type":"string",
       "max":427,
