@@ -26,6 +26,7 @@ a default `:region` is searched for in the following locations:
 
       option(:sigv4a_signing_region_set,
              doc_type: Array,
+             rbs_type: 'Array[String]',
              docstring: <<-DOCS) do |cfg|
 A list of regions that should be signed with SigV4a signing. When
 not passed, a default `:sigv4a_signing_region_set` is searched for
