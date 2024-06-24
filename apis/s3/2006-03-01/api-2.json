@@ -11,7 +11,8 @@
     "serviceFullName":"Amazon Simple Storage Service",
     "serviceId":"S3",
     "signatureVersion":"s3",
-    "uid":"s3-2006-03-01"
+    "uid":"s3-2006-03-01",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AbortMultipartUpload":{
@@ -1301,7 +1302,8 @@
       },
       "staticContextParams":{
         "UseObjectLambdaEndpoint":{"value":true}
-      }
+      },
+      "unsignedPayload":true
     }
   },
   "shapes":{

@@ -5,13 +5,15 @@
     "endpointPrefix":"kendra",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceAbbreviation":"kendra",
     "serviceFullName":"AWSKendraFrontendService",
     "serviceId":"kendra",
     "signatureVersion":"v4",
     "signingName":"kendra",
     "targetPrefix":"AWSKendraFrontendService",
-    "uid":"kendra-2019-02-03"
+    "uid":"kendra-2019-02-03",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AssociateEntitiesToExperience":{

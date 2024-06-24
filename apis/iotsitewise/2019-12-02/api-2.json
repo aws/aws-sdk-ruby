@@ -5,11 +5,13 @@
     "endpointPrefix":"iotsitewise",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceFullName":"AWS IoT SiteWise",
     "serviceId":"IoTSiteWise",
     "signatureVersion":"v4",
     "signingName":"iotsitewise",
-    "uid":"iotsitewise-2019-12-02"
+    "uid":"iotsitewise-2019-12-02",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AssociateAssets":{

@@ -11,7 +11,8 @@
     "serviceId":"ManagedBlockchain",
     "signatureVersion":"v4",
     "signingName":"managedblockchain",
-    "uid":"managedblockchain-2018-09-24"
+    "uid":"managedblockchain-2018-09-24",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CreateAccessor":{

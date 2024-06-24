@@ -12,7 +12,8 @@
     "signatureVersion":"v4",
     "signingName":"datasync",
     "targetPrefix":"FmrsService",
-    "uid":"datasync-2018-11-09"
+    "uid":"datasync-2018-11-09",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AddStorageSystem":{
