@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2024-06-17)
+------------------
+
+* Feature - Doc-only update that adds name constraints as an allowed extension for ImportCertificateAuthorityCertificate.
+
 1.69.0 (2024-06-05)
 ------------------
 

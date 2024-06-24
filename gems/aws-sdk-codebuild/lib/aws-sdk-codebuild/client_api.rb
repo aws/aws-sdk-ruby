@@ -239,6 +239,7 @@ module Aws::CodeBuild
     S3ReportExportConfig = Shapes::StructureShape.new(name: 'S3ReportExportConfig')
     ScalingConfigurationInput = Shapes::StructureShape.new(name: 'ScalingConfigurationInput')
     ScalingConfigurationOutput = Shapes::StructureShape.new(name: 'ScalingConfigurationOutput')
+    ScopeConfiguration = Shapes::StructureShape.new(name: 'ScopeConfiguration')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
@@ -287,6 +288,7 @@ module Aws::CodeBuild
     WebhookBuildType = Shapes::StringShape.new(name: 'WebhookBuildType')
     WebhookFilter = Shapes::StructureShape.new(name: 'WebhookFilter')
     WebhookFilterType = Shapes::StringShape.new(name: 'WebhookFilterType')
+    WebhookScopeType = Shapes::StringShape.new(name: 'WebhookScopeType')
     WrapperBoolean = Shapes::BooleanShape.new(name: 'WrapperBoolean')
     WrapperDouble = Shapes::FloatShape.new(name: 'WrapperDouble')
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
@@ -568,6 +570,7 @@ module Aws::CodeBuild
     CreateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
     CreateWebhookInput.add_member(:build_type, Shapes::ShapeRef.new(shape: WebhookBuildType, location_name: "buildType"))
     CreateWebhookInput.add_member(:manual_creation, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "manualCreation"))
+    CreateWebhookInput.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
     CreateWebhookInput.struct_class = Types::CreateWebhookInput
 
     CreateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
@@ -1117,6 +1120,11 @@ module Aws::CodeBuild
     ScalingConfigurationOutput.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: FleetCapacity, location_name: "desiredCapacity"))
     ScalingConfigurationOutput.struct_class = Types::ScalingConfigurationOutput
 
+    ScopeConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ScopeConfiguration.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
+    ScopeConfiguration.add_member(:scope, Shapes::ShapeRef.new(shape: WebhookScopeType, required: true, location_name: "scope"))
+    ScopeConfiguration.struct_class = Types::ScopeConfiguration
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     SourceAuth.add_member(:type, Shapes::ShapeRef.new(shape: SourceAuthType, required: true, location_name: "type"))
@@ -1332,6 +1340,7 @@ module Aws::CodeBuild
     Webhook.add_member(:build_type, Shapes::ShapeRef.new(shape: WebhookBuildType, location_name: "buildType"))
     Webhook.add_member(:manual_creation, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "manualCreation"))
     Webhook.add_member(:last_modified_secret, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedSecret"))
+    Webhook.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: ScopeConfiguration, location_name: "scopeConfiguration"))
     Webhook.struct_class = Types::Webhook
 
     WebhookFilter.add_member(:type, Shapes::ShapeRef.new(shape: WebhookFilterType, required: true, location_name: "type"))
@@ -1347,6 +1356,7 @@ module Aws::CodeBuild
 
       api.metadata = {
         "apiVersion" => "2016-10-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codebuild",
         "jsonVersion" => "1.1",
         "protocol" => "json",

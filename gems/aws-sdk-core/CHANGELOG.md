@@ -7,6 +7,29 @@ Unreleased Changes
 
 * Issue - Enhance, refactor, and rebase protocols to be consistent. Ensure protocol tests are run for each engine.
 
+3.198.0 (2024-06-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Support `:plugins` option on all Clients or using `Aws.config[:plugins]`.
+
+3.197.2 (2024-06-20)
+------------------
+
+* Issue - fix issue in Endpoint `attr` matcher when path is only an array index.
+
+* Issue - Fix trailing slash in endpoint URLs for rest-json and rest-xml services.
+
+3.197.1 (2024-06-19)
+------------------
+
+* Issue - Support an array of string arguments for `Aws::ProcessCredentials` to be executed by `system`.
+
 3.197.0 (2024-06-05)
 ------------------
 

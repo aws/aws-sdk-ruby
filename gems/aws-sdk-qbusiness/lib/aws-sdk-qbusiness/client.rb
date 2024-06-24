@@ -91,6 +91,11 @@ module Aws::QBusiness
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -211,7 +216,6 @@ module Aws::QBusiness
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -308,7 +312,6 @@ module Aws::QBusiness
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -675,8 +678,7 @@ module Aws::QBusiness
     #   The identifier of the Amazon Q Business conversation.
     #
     # @option params [String] :parent_message_id
-    #   The identifier of the previous end user text input message in a
-    #   conversation.
+    #   The identifier of the previous system message in a conversation.
     #
     # @option params [Types::AttributeFilter] :attribute_filter
     #   Enables filtering of Amazon Q Business web experience responses based
@@ -899,7 +901,7 @@ module Aws::QBusiness
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#user-sub-tiers
     #
     # @option params [required, String] :display_name
     #   A name for the Amazon Q Business application.
@@ -937,6 +939,10 @@ module Aws::QBusiness
     # @option params [Types::AttachmentsConfiguration] :attachments_configuration
     #   An option to allow end users to upload files directly during chat.
     #
+    # @option params [Types::QAppsConfiguration] :q_apps_configuration
+    #   An option to allow end users to create and use Amazon Q Apps in the
+    #   web experience.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -961,6 +967,9 @@ module Aws::QBusiness
     #     client_token: "ClientToken",
     #     attachments_configuration: {
     #       attachments_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     q_apps_configuration: {
+    #       q_apps_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -1182,12 +1191,12 @@ module Aws::QBusiness
     #
     # @option params [String] :type
     #   The index type that's suitable for your needs. For more information
-    #   on what's included in each type of index or index tier, see [Amazon Q
-    #   Business tiers][1].
+    #   on what's included in each type of index, see [Amazon Q Business
+    #   tiers][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers
     #
     # @option params [String] :description
     #   A description for the Amazon Q Business index.
@@ -1878,6 +1887,7 @@ module Aws::QBusiness
     #   * {Types::GetApplicationResponse#updated_at #updated_at} => Time
     #   * {Types::GetApplicationResponse#error #error} => Types::ErrorDetail
     #   * {Types::GetApplicationResponse#attachments_configuration #attachments_configuration} => Types::AppliedAttachmentsConfiguration
+    #   * {Types::GetApplicationResponse#q_apps_configuration #q_apps_configuration} => Types::QAppsConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1900,6 +1910,7 @@ module Aws::QBusiness
     #   resp.error.error_message #=> String
     #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.attachments_configuration.attachments_control_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.q_apps_configuration.q_apps_control_mode #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplication AWS API Documentation
     #
@@ -3374,6 +3385,10 @@ module Aws::QBusiness
     # @option params [Types::AttachmentsConfiguration] :attachments_configuration
     #   An option to allow end users to upload files directly during chat.
     #
+    # @option params [Types::QAppsConfiguration] :q_apps_configuration
+    #   An option to allow end users to create and use Amazon Q Apps in the
+    #   web experience.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3386,6 +3401,9 @@ module Aws::QBusiness
     #     role_arn: "RoleArn",
     #     attachments_configuration: {
     #       attachments_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     q_apps_configuration: {
+    #       q_apps_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -3993,7 +4011,7 @@ module Aws::QBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

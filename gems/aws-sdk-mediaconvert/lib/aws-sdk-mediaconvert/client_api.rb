@@ -571,6 +571,8 @@ module Aws::MediaConvert
     ScalingBehavior = Shapes::StringShape.new(name: 'ScalingBehavior')
     SccDestinationFramerate = Shapes::StringShape.new(name: 'SccDestinationFramerate')
     SccDestinationSettings = Shapes::StructureShape.new(name: 'SccDestinationSettings')
+    SearchJobsRequest = Shapes::StructureShape.new(name: 'SearchJobsRequest')
+    SearchJobsResponse = Shapes::StructureShape.new(name: 'SearchJobsResponse')
     SimulateReservedQueue = Shapes::StringShape.new(name: 'SimulateReservedQueue')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     SpekeKeyProviderCmaf = Shapes::StructureShape.new(name: 'SpekeKeyProviderCmaf')
@@ -865,6 +867,7 @@ module Aws::MediaConvert
     __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 = Shapes::StringShape.new(name: '__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912')
     __stringPattern = Shapes::StringShape.new(name: '__stringPattern')
     __stringPattern010920405090509092 = Shapes::StringShape.new(name: '__stringPattern010920405090509092')
+    __stringPattern010920405090509092090909 = Shapes::StringShape.new(name: '__stringPattern010920405090509092090909')
     __stringPattern01D20305D205D = Shapes::StringShape.new(name: '__stringPattern01D20305D205D')
     __stringPattern0940191020191209301 = Shapes::StringShape.new(name: '__stringPattern0940191020191209301')
     __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = Shapes::StringShape.new(name: '__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12')
@@ -1160,6 +1163,7 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     CmafGroupSettings.add_member(:client_cache, Shapes::ShapeRef.new(shape: CmafClientCache, location_name: "clientCache"))
     CmafGroupSettings.add_member(:codec_specification, Shapes::ShapeRef.new(shape: CmafCodecSpecification, location_name: "codecSpecification"))
+    CmafGroupSettings.add_member(:dash_i_frame_trick_play_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "dashIFrameTrickPlayNameModifier"))
     CmafGroupSettings.add_member(:dash_manifest_style, Shapes::ShapeRef.new(shape: DashManifestStyle, location_name: "dashManifestStyle"))
     CmafGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
     CmafGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
@@ -1308,6 +1312,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfDashAdditionalManifest, location_name: "additionalManifests"))
     DashIsoGroupSettings.add_member(:audio_channel_config_scheme_id_uri, Shapes::ShapeRef.new(shape: DashIsoGroupAudioChannelConfigSchemeIdUri, location_name: "audioChannelConfigSchemeIdUri"))
     DashIsoGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
+    DashIsoGroupSettings.add_member(:dash_i_frame_trick_play_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "dashIFrameTrickPlayNameModifier"))
     DashIsoGroupSettings.add_member(:dash_manifest_style, Shapes::ShapeRef.new(shape: DashManifestStyle, location_name: "dashManifestStyle"))
     DashIsoGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
     DashIsoGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
@@ -1809,8 +1814,8 @@ module Aws::MediaConvert
     Input.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     Input.struct_class = Types::Input
 
-    InputClipping.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
-    InputClipping.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
+    InputClipping.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092090909, location_name: "endTimecode"))
+    InputClipping.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092090909, location_name: "startTimecode"))
     InputClipping.struct_class = Types::InputClipping
 
     InputDecryptionSettings.add_member(:decryption_mode, Shapes::ShapeRef.new(shape: DecryptionMode, location_name: "decryptionMode"))
@@ -1842,7 +1847,11 @@ module Aws::MediaConvert
     InputTemplate.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     InputTemplate.struct_class = Types::InputTemplate
 
+    InputVideoGenerator.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "channels"))
     InputVideoGenerator.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin50Max86400000, location_name: "duration"))
+    InputVideoGenerator.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
+    InputVideoGenerator.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max60000, location_name: "framerateNumerator"))
+    InputVideoGenerator.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin32000Max48000, location_name: "sampleRate"))
     InputVideoGenerator.struct_class = Types::InputVideoGenerator
 
     InsertableImage.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "duration"))
@@ -2256,7 +2265,7 @@ module Aws::MediaConvert
     Output.add_member(:caption_descriptions, Shapes::ShapeRef.new(shape: __listOfCaptionDescription, location_name: "captionDescriptions"))
     Output.add_member(:container_settings, Shapes::ShapeRef.new(shape: ContainerSettings, location_name: "containerSettings"))
     Output.add_member(:extension, Shapes::ShapeRef.new(shape: __string, location_name: "extension"))
-    Output.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "nameModifier"))
+    Output.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "nameModifier"))
     Output.add_member(:output_settings, Shapes::ShapeRef.new(shape: OutputSettings, location_name: "outputSettings"))
     Output.add_member(:preset, Shapes::ShapeRef.new(shape: __stringMin0, location_name: "preset"))
     Output.add_member(:video_description, Shapes::ShapeRef.new(shape: VideoDescription, location_name: "videoDescription"))
@@ -2399,6 +2408,18 @@ module Aws::MediaConvert
 
     SccDestinationSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: SccDestinationFramerate, location_name: "framerate"))
     SccDestinationSettings.struct_class = Types::SccDestinationSettings
+
+    SearchJobsRequest.add_member(:input_file, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "inputFile"))
+    SearchJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max20, location: "querystring", location_name: "maxResults"))
+    SearchJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    SearchJobsRequest.add_member(:order, Shapes::ShapeRef.new(shape: Order, location: "querystring", location_name: "order"))
+    SearchJobsRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "queue"))
+    SearchJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location: "querystring", location_name: "status"))
+    SearchJobsRequest.struct_class = Types::SearchJobsRequest
+
+    SearchJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: __listOfJob, location_name: "jobs"))
+    SearchJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    SearchJobsResponse.struct_class = Types::SearchJobsResponse
 
     SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: __stringPatternArnAwsUsGovAcm, location_name: "certificateArn"))
     SpekeKeyProvider.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
@@ -2807,6 +2828,7 @@ module Aws::MediaConvert
 
       api.metadata = {
         "apiVersion" => "2017-08-29",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mediaconvert",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
@@ -3169,6 +3191,26 @@ module Aws::MediaConvert
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:search_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/2017-08-29/search"
+        o.input = Shapes::ShapeRef.new(shape: SearchJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

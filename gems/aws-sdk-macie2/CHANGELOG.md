@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2024-06-14)
+------------------
+
+* Feature - This release adds support for managing the status of automated sensitive data discovery for individual accounts in an organization, and determining whether individual S3 buckets are included in the scope of the analyses.
+
 1.69.0 (2024-06-05)
 ------------------
 

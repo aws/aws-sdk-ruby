@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-06-24)
+------------------
+
+* Feature - Increases Converse API's document name length
+
+1.12.0 (2024-06-20)
+------------------
+
+* Feature - This release adds document support to Converse and ConverseStream APIs
+
+1.11.0 (2024-06-18)
+------------------
+
+* Feature - This release adds support for using Guardrails with the Converse and ConverseStream APIs.
+
 1.10.0 (2024-06-05)
 ------------------
 

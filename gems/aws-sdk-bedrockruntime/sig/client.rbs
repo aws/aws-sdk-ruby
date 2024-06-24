@@ -78,10 +78,11 @@ module Aws
       interface _ConverseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConverseResponse]
         def output: () -> Types::ConverseOutput
-        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "content_filtered")
+        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
         def usage: () -> Types::TokenUsage
         def metrics: () -> Types::ConverseMetrics
         def additional_model_response_fields: () -> untyped
+        def trace: () -> Types::ConverseTrace
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#converse-instance_method
       def converse: (
@@ -94,6 +95,13 @@ module Aws
                               text: ::String?,
                               image: {
                                 format: ("png" | "jpeg" | "gif" | "webp"),
+                                source: {
+                                  bytes: ::String?
+                                }
+                              }?,
+                              document: {
+                                format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                name: ::String,
                                 source: {
                                   bytes: ::String?
                                 }
@@ -116,10 +124,22 @@ module Aws
                                       source: {
                                         bytes: ::String?
                                       }
+                                    }?,
+                                    document: {
+                                      format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                      name: ::String,
+                                      source: {
+                                        bytes: ::String?
+                                      }
                                     }?
                                   },
                                 ],
                                 status: ("success" | "error")?
+                              }?,
+                              guard_content: {
+                                text: {
+                                  text: ::String
+                                }?
                               }?
                             },
                           ]
@@ -127,7 +147,12 @@ module Aws
                       ],
                       ?system: Array[
                         {
-                          text: ::String?
+                          text: ::String?,
+                          guard_content: {
+                            text: {
+                              text: ::String
+                            }?
+                          }?
                         },
                       ],
                       ?inference_config: {
@@ -159,6 +184,11 @@ module Aws
                           }?
                         }?
                       },
+                      ?guardrail_config: {
+                        guardrail_identifier: ::String,
+                        guardrail_version: ::String,
+                        trace: ("enabled" | "disabled")?
+                      },
                       ?additional_model_request_fields: {
                       },
                       ?additional_model_response_field_paths: Array[::String]
@@ -184,6 +214,13 @@ module Aws
                                          bytes: ::String?
                                        }
                                      }?,
+                                     document: {
+                                       format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                       name: ::String,
+                                       source: {
+                                         bytes: ::String?
+                                       }
+                                     }?,
                                      tool_use: {
                                        tool_use_id: ::String,
                                        name: ::String,
@@ -202,10 +239,22 @@ module Aws
                                              source: {
                                                bytes: ::String?
                                              }
+                                           }?,
+                                           document: {
+                                             format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                             name: ::String,
+                                             source: {
+                                               bytes: ::String?
+                                             }
                                            }?
                                          },
                                        ],
                                        status: ("success" | "error")?
+                                     }?,
+                                     guard_content: {
+                                       text: {
+                                         text: ::String
+                                       }?
                                      }?
                                    },
                                  ]
@@ -213,7 +262,12 @@ module Aws
                              ],
                              ?system: Array[
                                {
-                                 text: ::String?
+                                 text: ::String?,
+                                 guard_content: {
+                                   text: {
+                                     text: ::String
+                                   }?
+                                 }?
                                },
                              ],
                              ?inference_config: {
@@ -244,6 +298,12 @@ module Aws
                                    name: ::String
                                  }?
                                }?
+                             },
+                             ?guardrail_config: {
+                               guardrail_identifier: ::String,
+                               guardrail_version: ::String,
+                               trace: ("enabled" | "disabled")?,
+                               stream_processing_mode: ("sync" | "async")?
                              },
                              ?additional_model_request_fields: {
                              },

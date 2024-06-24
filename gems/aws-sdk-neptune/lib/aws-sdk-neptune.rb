@@ -53,6 +53,6 @@ require_relative 'aws-sdk-neptune/customizations'
 # @!group service
 module Aws::Neptune
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end

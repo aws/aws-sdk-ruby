@@ -1757,7 +1757,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html#rotate-secrets_lambda-functions-code
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotateSecretRequest AWS API Documentation

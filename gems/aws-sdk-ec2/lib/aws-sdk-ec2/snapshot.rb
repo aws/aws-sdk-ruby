@@ -59,9 +59,8 @@ module Aws::EC2
       data[:encrypted]
     end
 
-    # The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS
-    # key that was used to protect the volume encryption key for the parent
-    # volume.
+    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
+    # the volume encryption key for the parent volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -92,10 +91,10 @@ module Aws::EC2
     end
 
     # Encrypted Amazon EBS snapshots are copied asynchronously. If a
-    # snapshot copy operation fails (for example, if the proper Key
-    # Management Service (KMS) permissions are not obtained) this field
-    # displays error state details to help you diagnose why the error
-    # occurred. This parameter is only returned by DescribeSnapshots.
+    # snapshot copy operation fails (for example, if the proper KMS
+    # permissions are not obtained) this field displays error state details
+    # to help you diagnose why the error occurred. This parameter is only
+    # returned by DescribeSnapshots.
     # @return [String]
     def state_message
       data[:state_message]
@@ -384,10 +383,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     # @option options [String] :kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use for
-    #   Amazon EBS encryption. If this parameter is not specified, your KMS
-    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
-    #   state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is used.
+    #   If `KmsKeyId` is specified, the encrypted state must be `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -415,11 +413,10 @@ module Aws::EC2
     #   `PresignedUrl` must be signed using Amazon Web Services Signature
     #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
     #   algorithm for this parameter uses the same logic that is described in
-    #   [Authenticating Requests: Using Query Parameters (Amazon Web Services
-    #   Signature Version 4)][2] in the *Amazon Simple Storage Service API
-    #   Reference*. An invalid or improperly signed `PresignedUrl` will cause
-    #   the copy operation to fail asynchronously, and the snapshot will move
-    #   to an `error` state.
+    #   [ Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][2] in the *Amazon S3 API Reference*. An invalid
+    #   or improperly signed `PresignedUrl` will cause the copy operation to
+    #   fail asynchronously, and the snapshot will move to an `error` state.
     #
     #
     #

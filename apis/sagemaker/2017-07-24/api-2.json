@@ -338,6 +338,20 @@
         {"shape":"ResourceLimitExceeded"}
       ]
     },
+    "CreateHubContentReference":{
+      "name":"CreateHubContentReference",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateHubContentReferenceRequest"},
+      "output":{"shape":"CreateHubContentReferenceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ResourceInUse"},
+        {"shape":"ResourceLimitExceeded"}
+      ]
+    },
     "CreateHumanTaskUi":{
       "name":"CreateHumanTaskUi",
       "http":{
@@ -439,6 +453,18 @@
       "output":{"shape":"CreateLabelingJobResponse"},
       "errors":[
         {"shape":"ResourceInUse"},
+        {"shape":"ResourceLimitExceeded"}
+      ]
+    },
+    "CreateMlflowTrackingServer":{
+      "name":"CreateMlflowTrackingServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateMlflowTrackingServerRequest"},
+      "output":{"shape":"CreateMlflowTrackingServerResponse"},
+      "errors":[
         {"shape":"ResourceLimitExceeded"}
       ]
     },
@@ -604,6 +630,18 @@
       },
       "input":{"shape":"CreatePresignedDomainUrlRequest"},
       "output":{"shape":"CreatePresignedDomainUrlResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
+    "CreatePresignedMlflowTrackingServerUrl":{
+      "name":"CreatePresignedMlflowTrackingServerUrl",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePresignedMlflowTrackingServerUrlRequest"},
+      "output":{"shape":"CreatePresignedMlflowTrackingServerUrlResponse"},
       "errors":[
         {"shape":"ResourceNotFound"}
       ]
@@ -1002,6 +1040,17 @@
         {"shape":"ResourceNotFound"}
       ]
     },
+    "DeleteHubContentReference":{
+      "name":"DeleteHubContentReference",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteHubContentReferenceRequest"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
     "DeleteHumanTaskUi":{
       "name":"DeleteHumanTaskUi",
       "http":{
@@ -1066,6 +1115,18 @@
       "output":{"shape":"DeleteInferenceExperimentResponse"},
       "errors":[
         {"shape":"ConflictException"},
+        {"shape":"ResourceNotFound"}
+      ]
+    },
+    "DeleteMlflowTrackingServer":{
+      "name":"DeleteMlflowTrackingServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteMlflowTrackingServerRequest"},
+      "output":{"shape":"DeleteMlflowTrackingServerResponse"},
+      "errors":[
         {"shape":"ResourceNotFound"}
       ]
     },
@@ -1702,6 +1763,18 @@
       },
       "input":{"shape":"DescribeLineageGroupRequest"},
       "output":{"shape":"DescribeLineageGroupResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
+    "DescribeMlflowTrackingServer":{
+      "name":"DescribeMlflowTrackingServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeMlflowTrackingServerRequest"},
+      "output":{"shape":"DescribeMlflowTrackingServerResponse"},
       "errors":[
         {"shape":"ResourceNotFound"}
       ]
@@ -2483,6 +2556,15 @@
       "input":{"shape":"ListLineageGroupsRequest"},
       "output":{"shape":"ListLineageGroupsResponse"}
     },
+    "ListMlflowTrackingServers":{
+      "name":"ListMlflowTrackingServers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListMlflowTrackingServersRequest"},
+      "output":{"shape":"ListMlflowTrackingServersResponse"}
+    },
     "ListModelBiasJobDefinitions":{
       "name":"ListModelBiasJobDefinitions",
       "http":{
@@ -2956,6 +3038,19 @@
         {"shape":"ResourceNotFound"}
       ]
     },
+    "StartMlflowTrackingServer":{
+      "name":"StartMlflowTrackingServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartMlflowTrackingServerRequest"},
+      "output":{"shape":"StartMlflowTrackingServerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ConflictException"}
+      ]
+    },
     "StartMonitoringSchedule":{
       "name":"StartMonitoringSchedule",
       "http":{
@@ -3074,6 +3169,19 @@
       "input":{"shape":"StopLabelingJobRequest"},
       "errors":[
         {"shape":"ResourceNotFound"}
+      ]
+    },
+    "StopMlflowTrackingServer":{
+      "name":"StopMlflowTrackingServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopMlflowTrackingServerRequest"},
+      "output":{"shape":"StopMlflowTrackingServerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ConflictException"}
       ]
     },
     "StopMonitoringSchedule":{
@@ -3398,6 +3506,20 @@
       "errors":[
         {"shape":"ConflictException"},
         {"shape":"ResourceNotFound"}
+      ]
+    },
+    "UpdateMlflowTrackingServer":{
+      "name":"UpdateMlflowTrackingServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateMlflowTrackingServerRequest"},
+      "output":{"shape":"UpdateMlflowTrackingServerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ResourceLimitExceeded"},
+        {"shape":"ConflictException"}
       ]
     },
     "UpdateModelCard":{
@@ -5672,6 +5794,18 @@
       "type":"string",
       "pattern":"^[a-z]{3}\\d-az\\d$"
     },
+    "ClusterEbsVolumeConfig":{
+      "type":"structure",
+      "required":["VolumeSizeInGB"],
+      "members":{
+        "VolumeSizeInGB":{"shape":"ClusterEbsVolumeSizeInGB"}
+      }
+    },
+    "ClusterEbsVolumeSizeInGB":{
+      "type":"integer",
+      "max":16384,
+      "min":1
+    },
     "ClusterInstanceCount":{
       "type":"integer",
       "min":1
@@ -5685,7 +5819,8 @@
         "InstanceType":{"shape":"ClusterInstanceType"},
         "LifeCycleConfig":{"shape":"ClusterLifeCycleConfig"},
         "ExecutionRole":{"shape":"RoleArn"},
-        "ThreadsPerCore":{"shape":"ClusterThreadsPerCore"}
+        "ThreadsPerCore":{"shape":"ClusterThreadsPerCore"},
+        "InstanceStorageConfigs":{"shape":"ClusterInstanceStorageConfigs"}
       }
     },
     "ClusterInstanceGroupDetailsList":{
@@ -5713,7 +5848,8 @@
         "InstanceType":{"shape":"ClusterInstanceType"},
         "LifeCycleConfig":{"shape":"ClusterLifeCycleConfig"},
         "ExecutionRole":{"shape":"RoleArn"},
-        "ThreadsPerCore":{"shape":"ClusterThreadsPerCore"}
+        "ThreadsPerCore":{"shape":"ClusterThreadsPerCore"},
+        "InstanceStorageConfigs":{"shape":"ClusterInstanceStorageConfigs"}
       }
     },
     "ClusterInstanceGroupSpecifications":{
@@ -5746,6 +5882,18 @@
         "Status":{"shape":"ClusterInstanceStatus"},
         "Message":{"shape":"String"}
       }
+    },
+    "ClusterInstanceStorageConfig":{
+      "type":"structure",
+      "members":{
+        "EbsVolumeConfig":{"shape":"ClusterEbsVolumeConfig"}
+      },
+      "union":true
+    },
+    "ClusterInstanceStorageConfigs":{
+      "type":"list",
+      "member":{"shape":"ClusterInstanceStorageConfig"},
+      "max":1
     },
     "ClusterInstanceType":{
       "type":"string",
@@ -5828,6 +5976,7 @@
         "LaunchTime":{"shape":"Timestamp"},
         "LifeCycleConfig":{"shape":"ClusterLifeCycleConfig"},
         "ThreadsPerCore":{"shape":"ClusterThreadsPerCore"},
+        "InstanceStorageConfigs":{"shape":"ClusterInstanceStorageConfigs"},
         "PrivatePrimaryIp":{"shape":"ClusterPrivatePrimaryIp"},
         "PrivateDnsHostname":{"shape":"ClusterPrivateDnsHostname"},
         "Placement":{"shape":"ClusterInstancePlacement"}
@@ -5837,7 +5986,7 @@
       "type":"string",
       "max":256,
       "min":1,
-      "pattern":"^[a-zA-Z][-a-zA-Z0-9]*$"
+      "pattern":"^i-[a-f0-9]{8}(?:[a-f0-9]{9})?$"
     },
     "ClusterNodeSummaries":{
       "type":"list",
@@ -6856,6 +7005,31 @@
         "FlowDefinitionArn":{"shape":"FlowDefinitionArn"}
       }
     },
+    "CreateHubContentReferenceRequest":{
+      "type":"structure",
+      "required":[
+        "HubName",
+        "SageMakerPublicHubContentArn"
+      ],
+      "members":{
+        "HubName":{"shape":"HubNameOrArn"},
+        "SageMakerPublicHubContentArn":{"shape":"SageMakerPublicHubContentArn"},
+        "HubContentName":{"shape":"HubContentName"},
+        "MinVersion":{"shape":"HubContentVersion"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateHubContentReferenceResponse":{
+      "type":"structure",
+      "required":[
+        "HubArn",
+        "HubContentArn"
+      ],
+      "members":{
+        "HubArn":{"shape":"HubArn"},
+        "HubContentArn":{"shape":"HubContentArn"}
+      }
+    },
     "CreateHubRequest":{
       "type":"structure",
       "required":[
@@ -7080,6 +7254,30 @@
       "required":["LabelingJobArn"],
       "members":{
         "LabelingJobArn":{"shape":"LabelingJobArn"}
+      }
+    },
+    "CreateMlflowTrackingServerRequest":{
+      "type":"structure",
+      "required":[
+        "TrackingServerName",
+        "ArtifactStoreUri",
+        "RoleArn"
+      ],
+      "members":{
+        "TrackingServerName":{"shape":"TrackingServerName"},
+        "ArtifactStoreUri":{"shape":"S3Uri"},
+        "TrackingServerSize":{"shape":"TrackingServerSize"},
+        "MlflowVersion":{"shape":"MlflowVersion"},
+        "RoleArn":{"shape":"RoleArn"},
+        "AutomaticModelRegistration":{"shape":"Boolean"},
+        "WeeklyMaintenanceWindowStart":{"shape":"WeeklyMaintenanceWindowStart"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateMlflowTrackingServerResponse":{
+      "type":"structure",
+      "members":{
+        "TrackingServerArn":{"shape":"TrackingServerArn"}
       }
     },
     "CreateModelBiasJobDefinitionRequest":{
@@ -7402,6 +7600,21 @@
       "type":"structure",
       "members":{
         "AuthorizedUrl":{"shape":"PresignedDomainUrl"}
+      }
+    },
+    "CreatePresignedMlflowTrackingServerUrlRequest":{
+      "type":"structure",
+      "required":["TrackingServerName"],
+      "members":{
+        "TrackingServerName":{"shape":"TrackingServerName"},
+        "ExpiresInSeconds":{"shape":"ExpiresInSeconds"},
+        "SessionExpirationDurationInSeconds":{"shape":"SessionExpirationDurationInSeconds"}
+      }
+    },
+    "CreatePresignedMlflowTrackingServerUrlResponse":{
+      "type":"structure",
+      "members":{
+        "AuthorizedUrl":{"shape":"TrackingServerUrl"}
       }
     },
     "CreatePresignedNotebookInstanceUrlInput":{
@@ -8234,6 +8447,19 @@
       "members":{
       }
     },
+    "DeleteHubContentReferenceRequest":{
+      "type":"structure",
+      "required":[
+        "HubName",
+        "HubContentType",
+        "HubContentName"
+      ],
+      "members":{
+        "HubName":{"shape":"HubNameOrArn"},
+        "HubContentType":{"shape":"HubContentType"},
+        "HubContentName":{"shape":"HubContentName"}
+      }
+    },
     "DeleteHubContentRequest":{
       "type":"structure",
       "required":[
@@ -8243,7 +8469,7 @@
         "HubContentVersion"
       ],
       "members":{
-        "HubName":{"shape":"HubName"},
+        "HubName":{"shape":"HubNameOrArn"},
         "HubContentType":{"shape":"HubContentType"},
         "HubContentName":{"shape":"HubContentName"},
         "HubContentVersion":{"shape":"HubContentVersion"}
@@ -8253,7 +8479,7 @@
       "type":"structure",
       "required":["HubName"],
       "members":{
-        "HubName":{"shape":"HubName"}
+        "HubName":{"shape":"HubNameOrArn"}
       }
     },
     "DeleteHumanTaskUiRequest":{
@@ -8320,6 +8546,19 @@
       "required":["InferenceExperimentArn"],
       "members":{
         "InferenceExperimentArn":{"shape":"InferenceExperimentArn"}
+      }
+    },
+    "DeleteMlflowTrackingServerRequest":{
+      "type":"structure",
+      "required":["TrackingServerName"],
+      "members":{
+        "TrackingServerName":{"shape":"TrackingServerName"}
+      }
+    },
+    "DeleteMlflowTrackingServerResponse":{
+      "type":"structure",
+      "members":{
+        "TrackingServerArn":{"shape":"TrackingServerArn"}
       }
     },
     "DeleteModelBiasJobDefinitionRequest":{
@@ -9356,7 +9595,7 @@
         "HubContentName"
       ],
       "members":{
-        "HubName":{"shape":"HubName"},
+        "HubName":{"shape":"HubNameOrArn"},
         "HubContentType":{"shape":"HubContentType"},
         "HubContentName":{"shape":"HubContentName"},
         "HubContentVersion":{"shape":"HubContentVersion"}
@@ -9388,6 +9627,9 @@
         "HubContentDescription":{"shape":"HubContentDescription"},
         "HubContentMarkdown":{"shape":"HubContentMarkdown"},
         "HubContentDocument":{"shape":"HubContentDocument"},
+        "SageMakerPublicHubContentArn":{"shape":"SageMakerPublicHubContentArn"},
+        "ReferenceMinVersion":{"shape":"ReferenceMinVersion"},
+        "SupportStatus":{"shape":"HubContentSupportStatus"},
         "HubContentSearchKeywords":{"shape":"HubContentSearchKeywordList"},
         "HubContentDependencies":{"shape":"HubContentDependencyList"},
         "HubContentStatus":{"shape":"HubContentStatus"},
@@ -9399,7 +9641,7 @@
       "type":"structure",
       "required":["HubName"],
       "members":{
-        "HubName":{"shape":"HubName"}
+        "HubName":{"shape":"HubNameOrArn"}
       }
     },
     "DescribeHubResponse":{
@@ -9697,6 +9939,33 @@
         "LineageGroupArn":{"shape":"LineageGroupArn"},
         "DisplayName":{"shape":"ExperimentEntityName"},
         "Description":{"shape":"ExperimentDescription"},
+        "CreationTime":{"shape":"Timestamp"},
+        "CreatedBy":{"shape":"UserContext"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "LastModifiedBy":{"shape":"UserContext"}
+      }
+    },
+    "DescribeMlflowTrackingServerRequest":{
+      "type":"structure",
+      "required":["TrackingServerName"],
+      "members":{
+        "TrackingServerName":{"shape":"TrackingServerName"}
+      }
+    },
+    "DescribeMlflowTrackingServerResponse":{
+      "type":"structure",
+      "members":{
+        "TrackingServerArn":{"shape":"TrackingServerArn"},
+        "TrackingServerName":{"shape":"TrackingServerName"},
+        "ArtifactStoreUri":{"shape":"S3Uri"},
+        "TrackingServerSize":{"shape":"TrackingServerSize"},
+        "MlflowVersion":{"shape":"MlflowVersion"},
+        "RoleArn":{"shape":"RoleArn"},
+        "TrackingServerStatus":{"shape":"TrackingServerStatus"},
+        "IsActive":{"shape":"IsTrackingServerActive"},
+        "TrackingServerUrl":{"shape":"TrackingServerUrl"},
+        "WeeklyMaintenanceWindowStart":{"shape":"WeeklyMaintenanceWindowStart"},
+        "AutomaticModelRegistration":{"shape":"Boolean"},
         "CreationTime":{"shape":"Timestamp"},
         "CreatedBy":{"shape":"UserContext"},
         "LastModifiedTime":{"shape":"Timestamp"},
@@ -12234,14 +12503,17 @@
       "members":{
         "HubContentName":{"shape":"HubContentName"},
         "HubContentArn":{"shape":"HubContentArn"},
+        "SageMakerPublicHubContentArn":{"shape":"SageMakerPublicHubContentArn"},
         "HubContentVersion":{"shape":"HubContentVersion"},
         "HubContentType":{"shape":"HubContentType"},
         "DocumentSchemaVersion":{"shape":"DocumentSchemaVersion"},
         "HubContentDisplayName":{"shape":"HubContentDisplayName"},
         "HubContentDescription":{"shape":"HubContentDescription"},
+        "SupportStatus":{"shape":"HubContentSupportStatus"},
         "HubContentSearchKeywords":{"shape":"HubContentSearchKeywordList"},
         "HubContentStatus":{"shape":"HubContentStatus"},
-        "CreationTime":{"shape":"Timestamp"}
+        "CreationTime":{"shape":"Timestamp"},
+        "OriginalCreationTime":{"shape":"Timestamp"}
       }
     },
     "HubContentInfoList":{
@@ -12250,8 +12522,7 @@
     },
     "HubContentMarkdown":{
       "type":"string",
-      "max":65535,
-      "pattern":".*"
+      "max":65535
     },
     "HubContentName":{
       "type":"string",
@@ -12281,11 +12552,19 @@
         "DeleteFailed"
       ]
     },
+    "HubContentSupportStatus":{
+      "type":"string",
+      "enum":[
+        "Supported",
+        "Deprecated"
+      ]
+    },
     "HubContentType":{
       "type":"string",
       "enum":[
         "Model",
-        "Notebook"
+        "Notebook",
+        "ModelReference"
       ]
     },
     "HubContentVersion":{
@@ -12332,6 +12611,10 @@
       "type":"string",
       "max":63,
       "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+    },
+    "HubNameOrArn":{
+      "type":"string",
+      "pattern":"^(arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:(\\d{12}|aws):hub\\/)?[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
     },
     "HubS3StorageConfig":{
       "type":"structure",
@@ -13081,7 +13364,7 @@
         "HubContentVersion":{"shape":"HubContentVersion"},
         "HubContentType":{"shape":"HubContentType"},
         "DocumentSchemaVersion":{"shape":"DocumentSchemaVersion"},
-        "HubName":{"shape":"HubName"},
+        "HubName":{"shape":"HubNameOrArn"},
         "HubContentDisplayName":{"shape":"HubContentDisplayName"},
         "HubContentDescription":{"shape":"HubContentDescription"},
         "HubContentMarkdown":{"shape":"HubContentMarkdown"},
@@ -13331,6 +13614,13 @@
       "type":"string",
       "enum":["ShadowMode"]
     },
+    "InferenceHubAccessConfig":{
+      "type":"structure",
+      "required":["HubContentArn"],
+      "members":{
+        "HubContentArn":{"shape":"HubContentArn"}
+      }
+    },
     "InferenceImage":{
       "type":"string",
       "max":256
@@ -13349,7 +13639,6 @@
     "InferenceRecommendation":{
       "type":"structure",
       "required":[
-        "Metrics",
         "EndpointConfiguration",
         "ModelConfiguration"
       ],
@@ -13737,6 +14026,13 @@
     "IotRoleAlias":{
       "type":"string",
       "pattern":"^arn:aws[a-z\\-]*:iam::\\d{12}:rolealias/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+    },
+    "IsTrackingServerActive":{
+      "type":"string",
+      "enum":[
+        "Active",
+        "Inactive"
+      ]
     },
     "ItemIdentifierAttributeName":{
       "type":"string",
@@ -14720,7 +15016,7 @@
         "HubContentName"
       ],
       "members":{
-        "HubName":{"shape":"HubName"},
+        "HubName":{"shape":"HubNameOrArn"},
         "HubContentType":{"shape":"HubContentType"},
         "HubContentName":{"shape":"HubContentName"},
         "MinVersion":{"shape":"HubContentVersion"},
@@ -14748,7 +15044,7 @@
         "HubContentType"
       ],
       "members":{
-        "HubName":{"shape":"HubName"},
+        "HubName":{"shape":"HubNameOrArn"},
         "HubContentType":{"shape":"HubContentType"},
         "NameContains":{"shape":"NameContains"},
         "MaxSchemaVersion":{"shape":"DocumentSchemaVersion"},
@@ -15052,6 +15348,26 @@
     "ListMaxResults":{
       "type":"integer",
       "max":100
+    },
+    "ListMlflowTrackingServersRequest":{
+      "type":"structure",
+      "members":{
+        "CreatedAfter":{"shape":"Timestamp"},
+        "CreatedBefore":{"shape":"Timestamp"},
+        "TrackingServerStatus":{"shape":"TrackingServerStatus"},
+        "MlflowVersion":{"shape":"MlflowVersion"},
+        "SortBy":{"shape":"SortTrackingServerBy"},
+        "SortOrder":{"shape":"SortOrder"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "ListMlflowTrackingServersResponse":{
+      "type":"structure",
+      "members":{
+        "TrackingServerSummaries":{"shape":"TrackingServerSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
     },
     "ListModelBiasJobDefinitionsRequest":{
       "type":"structure",
@@ -16067,6 +16383,11 @@
       "type":"string",
       "max":1,
       "pattern":"1|2"
+    },
+    "MlflowVersion":{
+      "type":"string",
+      "max":16,
+      "pattern":"^[0-9]*.[0-9]*.[0-9]*"
     },
     "Model":{
       "type":"structure",
@@ -19540,12 +19861,6 @@
     },
     "RecommendationMetrics":{
       "type":"structure",
-      "required":[
-        "CostPerHour",
-        "CostPerInference",
-        "MaxInvocations",
-        "ModelLatency"
-      ],
       "members":{
         "CostPerHour":{"shape":"Float"},
         "CostPerInference":{"shape":"Float"},
@@ -19639,6 +19954,12 @@
       "max":128,
       "min":1,
       "pattern":".*"
+    },
+    "ReferenceMinVersion":{
+      "type":"string",
+      "max":14,
+      "min":5,
+      "pattern":"^\\d{1,4}.\\d{1,4}.\\d{1,4}$"
     },
     "RegisterDevicesRequest":{
       "type":"structure",
@@ -20051,7 +20372,8 @@
         "S3Uri":{"shape":"S3ModelUri"},
         "S3DataType":{"shape":"S3ModelDataType"},
         "CompressionType":{"shape":"ModelCompressionType"},
-        "ModelAccessConfig":{"shape":"ModelAccessConfig"}
+        "ModelAccessConfig":{"shape":"ModelAccessConfig"},
+        "HubAccessConfig":{"shape":"InferenceHubAccessConfig"}
       }
     },
     "S3ModelDataType":{
@@ -20100,6 +20422,11 @@
     "SageMakerImageVersionAliases":{
       "type":"list",
       "member":{"shape":"SageMakerImageVersionAlias"}
+    },
+    "SageMakerPublicHubContentArn":{
+      "type":"string",
+      "max":255,
+      "pattern":"^arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:aws:hub-content\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}\\/Model\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"
     },
     "SagemakerServicecatalogStatus":{
       "type":"string",
@@ -20566,6 +20893,14 @@
         "CreationTime"
       ]
     },
+    "SortTrackingServerBy":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime",
+        "Status"
+      ]
+    },
     "SortTrialComponentsBy":{
       "type":"string",
       "enum":[
@@ -20781,6 +21116,19 @@
         "InferenceExperimentArn":{"shape":"InferenceExperimentArn"}
       }
     },
+    "StartMlflowTrackingServerRequest":{
+      "type":"structure",
+      "required":["TrackingServerName"],
+      "members":{
+        "TrackingServerName":{"shape":"TrackingServerName"}
+      }
+    },
+    "StartMlflowTrackingServerResponse":{
+      "type":"structure",
+      "members":{
+        "TrackingServerArn":{"shape":"TrackingServerArn"}
+      }
+    },
     "StartMonitoringScheduleRequest":{
       "type":"structure",
       "required":["MonitoringScheduleName"],
@@ -20936,6 +21284,19 @@
       "required":["LabelingJobName"],
       "members":{
         "LabelingJobName":{"shape":"LabelingJobName"}
+      }
+    },
+    "StopMlflowTrackingServerRequest":{
+      "type":"structure",
+      "required":["TrackingServerName"],
+      "members":{
+        "TrackingServerName":{"shape":"TrackingServerName"}
+      }
+    },
+    "StopMlflowTrackingServerResponse":{
+      "type":"structure",
+      "members":{
+        "TrackingServerArn":{"shape":"TrackingServerArn"}
       }
     },
     "StopMonitoringScheduleRequest":{
@@ -21517,6 +21878,69 @@
       "type":"string",
       "max":256,
       "min":1
+    },
+    "TrackingServerArn":{
+      "type":"string",
+      "max":2048,
+      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-tracking-server/.*"
+    },
+    "TrackingServerName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}"
+    },
+    "TrackingServerSize":{
+      "type":"string",
+      "enum":[
+        "Small",
+        "Medium",
+        "Large"
+      ]
+    },
+    "TrackingServerStatus":{
+      "type":"string",
+      "enum":[
+        "Creating",
+        "Created",
+        "CreateFailed",
+        "Updating",
+        "Updated",
+        "UpdateFailed",
+        "Deleting",
+        "DeleteFailed",
+        "Stopping",
+        "Stopped",
+        "StopFailed",
+        "Starting",
+        "Started",
+        "StartFailed",
+        "MaintenanceInProgress",
+        "MaintenanceComplete",
+        "MaintenanceFailed"
+      ]
+    },
+    "TrackingServerSummary":{
+      "type":"structure",
+      "members":{
+        "TrackingServerArn":{"shape":"TrackingServerArn"},
+        "TrackingServerName":{"shape":"TrackingServerName"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "TrackingServerStatus":{"shape":"TrackingServerStatus"},
+        "IsActive":{"shape":"IsTrackingServerActive"},
+        "MlflowVersion":{"shape":"MlflowVersion"}
+      }
+    },
+    "TrackingServerSummaryList":{
+      "type":"list",
+      "member":{"shape":"TrackingServerSummary"},
+      "max":100,
+      "min":0
+    },
+    "TrackingServerUrl":{
+      "type":"string",
+      "max":2048
     },
     "TrafficDurationInSeconds":{
       "type":"integer",
@@ -22692,7 +23116,7 @@
       "type":"structure",
       "required":["HubName"],
       "members":{
-        "HubName":{"shape":"HubName"},
+        "HubName":{"shape":"HubNameOrArn"},
         "HubDescription":{"shape":"HubDescription"},
         "HubDisplayName":{"shape":"HubDisplayName"},
         "HubSearchKeywords":{"shape":"HubSearchKeywordList"}
@@ -22797,6 +23221,23 @@
       "required":["InferenceExperimentArn"],
       "members":{
         "InferenceExperimentArn":{"shape":"InferenceExperimentArn"}
+      }
+    },
+    "UpdateMlflowTrackingServerRequest":{
+      "type":"structure",
+      "required":["TrackingServerName"],
+      "members":{
+        "TrackingServerName":{"shape":"TrackingServerName"},
+        "ArtifactStoreUri":{"shape":"S3Uri"},
+        "TrackingServerSize":{"shape":"TrackingServerSize"},
+        "AutomaticModelRegistration":{"shape":"Boolean"},
+        "WeeklyMaintenanceWindowStart":{"shape":"WeeklyMaintenanceWindowStart"}
+      }
+    },
+    "UpdateMlflowTrackingServerResponse":{
+      "type":"structure",
+      "members":{
+        "TrackingServerArn":{"shape":"TrackingServerArn"}
       }
     },
     "UpdateModelCardRequest":{
@@ -23355,6 +23796,11 @@
         "ResourceRetainedBillableTimeInSeconds":{"shape":"ResourceRetainedBillableTimeInSeconds"},
         "ReusedByJob":{"shape":"TrainingJobName"}
       }
+    },
+    "WeeklyMaintenanceWindowStart":{
+      "type":"string",
+      "max":9,
+      "pattern":"(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):([0-5]\\d)"
     },
     "WorkerAccessConfiguration":{
       "type":"structure",

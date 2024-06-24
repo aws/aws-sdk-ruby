@@ -346,6 +346,7 @@ module Aws::WorkSpacesWeb
     CreateIdentityProviderRequest.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, required: true, location_name: "identityProviderName"))
     CreateIdentityProviderRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "identityProviderType"))
     CreateIdentityProviderRequest.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
+    CreateIdentityProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateIdentityProviderRequest.struct_class = Types::CreateIdentityProviderRequest
 
     CreateIdentityProviderResponse.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location_name: "identityProviderArn"))
@@ -408,6 +409,7 @@ module Aws::WorkSpacesWeb
     CreateUserSettingsRequest.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     CreateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, required: true, location_name: "copyAllowed"))
     CreateUserSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
+    CreateUserSettingsRequest.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     CreateUserSettingsRequest.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     CreateUserSettingsRequest.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, required: true, location_name: "downloadAllowed"))
     CreateUserSettingsRequest.add_member(:idle_disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleDisconnectTimeoutInMinutes, location_name: "idleDisconnectTimeoutInMinutes"))
@@ -859,6 +861,7 @@ module Aws::WorkSpacesWeb
     UpdateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateUserSettingsRequest.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UpdateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
+    UpdateUserSettingsRequest.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UpdateUserSettingsRequest.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     UpdateUserSettingsRequest.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "downloadAllowed"))
     UpdateUserSettingsRequest.add_member(:idle_disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleDisconnectTimeoutInMinutes, location_name: "idleDisconnectTimeoutInMinutes"))
@@ -887,6 +890,7 @@ module Aws::WorkSpacesWeb
     UserSettings.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UserSettings.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
     UserSettings.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
+    UserSettings.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UserSettings.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     UserSettings.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "downloadAllowed"))
     UserSettings.add_member(:idle_disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleDisconnectTimeoutInMinutes, location_name: "idleDisconnectTimeoutInMinutes"))
@@ -900,6 +904,7 @@ module Aws::WorkSpacesWeb
 
     UserSettingsSummary.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UserSettingsSummary.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
+    UserSettingsSummary.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UserSettingsSummary.add_member(:disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: DisconnectTimeoutInMinutes, location_name: "disconnectTimeoutInMinutes"))
     UserSettingsSummary.add_member(:download_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "downloadAllowed"))
     UserSettingsSummary.add_member(:idle_disconnect_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleDisconnectTimeoutInMinutes, location_name: "idleDisconnectTimeoutInMinutes"))
@@ -991,6 +996,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:associate_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1251,6 +1257,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:disassociate_ip_access_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1264,6 +1271,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:disassociate_network_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1277,6 +1285,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:disassociate_trust_store, Seahorse::Model::Operation.new.tap do |o|
@@ -1290,6 +1299,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:disassociate_user_access_logging_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1303,6 +1313,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:disassociate_user_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1316,6 +1327,7 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_browser_settings, Seahorse::Model::Operation.new.tap do |o|

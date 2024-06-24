@@ -2244,9 +2244,11 @@ module Aws::Rekognition
 
       api.metadata = {
         "apiVersion" => "2016-06-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rekognition",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Rekognition",
         "serviceId" => "Rekognition",
         "signatureVersion" => "v4",

@@ -526,8 +526,8 @@ module Aws::EC2
     #   The ID of the AMI. An AMI ID is required to launch an instance and
     #   must be specified here or in a launch template.
     # @option options [String] :instance_type
-    #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   The instance type. For more information, see [Amazon EC2 instance
+    #   types][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -572,32 +572,30 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     # @option options [required, Integer] :max_count
-    #   The maximum number of instances to launch. If you specify more
-    #   instances than Amazon EC2 can launch in the target Availability Zone,
-    #   Amazon EC2 launches the largest possible number of instances above
-    #   `MinCount`.
+    #   The maximum number of instances to launch. If you specify a value that
+    #   is more capacity than Amazon EC2 can launch in the target Availability
+    #   Zone, Amazon EC2 launches the largest possible number of instances
+    #   above the specified minimum count.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for the
-    #   specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can I
-    #   run in Amazon EC2][1] in the Amazon EC2 FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     # @option options [required, Integer] :min_count
-    #   The minimum number of instances to launch. If you specify a minimum
-    #   that is more instances than Amazon EC2 can launch in the target
-    #   Availability Zone, Amazon EC2 launches no instances.
+    #   The minimum number of instances to launch. If you specify a value that
+    #   is more capacity than Amazon EC2 can provide in the target
+    #   Availability Zone, Amazon EC2 does not launch any instances.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for the
-    #   specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can I
-    #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
     #   Specifies whether detailed monitoring is enabled for the instance.
     # @option options [Types::Placement] :placement
@@ -636,16 +634,15 @@ module Aws::EC2
     #   Default: Amazon EC2 uses the default security group.
     # @option options [String] :user_data
     #   The user data script to make available to the instance. For more
-    #   information, see [Run commands on your Linux instance at launch][1]
-    #   and [Run commands on your Windows instance at launch][2]. If you are
-    #   using a command line tool, base64-encoding is performed for you, and
-    #   you can load the text from a file. Otherwise, you must provide
-    #   base64-encoded text. User data is limited to 16 KB.
+    #   information, see [Run commands on your Amazon EC2 instance at
+    #   launch][1] in the *Amazon EC2 User Guide*. If you are using a command
+    #   line tool, base64-encoding is performed for you, and you can load the
+    #   text from a file. Otherwise, you must provide base64-encoded text.
+    #   User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     # @option options [String] :additional_info
     #   Reserved.
     # @option options [String] :client_token
@@ -788,8 +785,8 @@ module Aws::EC2
     # @option options [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. This
     #   parameter is valid only if the instance meets the [hibernation
-    #   prerequisites][1]. For more information, see [Hibernate your
-    #   instance][2] in the *Amazon EC2 User Guide*.
+    #   prerequisites][1]. For more information, see [Hibernate your Amazon
+    #   EC2 instance][2] in the *Amazon EC2 User Guide*.
     #
     #   You can't enable hibernation and Amazon Web Services Nitro Enclaves
     #   on the same instance.
@@ -1002,11 +999,11 @@ module Aws::EC2
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @option options [Boolean] :enable_primary_ipv_6
     #   If you’re creating a network interface in a dual-stack or IPv6-only
     #   subnet, you have the option to assign a primary IPv6 IP address. A
@@ -1506,6 +1503,10 @@ module Aws::EC2
     #     (`ip-name` \| `resource-name`).
     #
     #   * `private-ip-address` - The private IPv4 address of the instance.
+    #     This can only be used to filter by the primary IP address of the
+    #     network interface attached to the instance. To filter by additional
+    #     IP addresses assigned to the network interface, use the filter
+    #     `network-interface.addresses.private-ip-address`.
     #
     #   * `product-code` - The product code associated with the AMI used to
     #     launch the instance.

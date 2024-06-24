@@ -16,6 +16,7 @@ require_relative 'aws-sdk-ivsrealtime/client_api'
 require_relative 'aws-sdk-ivsrealtime/plugins/endpoints.rb'
 require_relative 'aws-sdk-ivsrealtime/client'
 require_relative 'aws-sdk-ivsrealtime/errors'
+require_relative 'aws-sdk-ivsrealtime/waiters'
 require_relative 'aws-sdk-ivsrealtime/resource'
 require_relative 'aws-sdk-ivsrealtime/endpoint_parameters'
 require_relative 'aws-sdk-ivsrealtime/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-ivsrealtime/customizations'
 # @!group service
 module Aws::IVSRealTime
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.21.0'
 
 end

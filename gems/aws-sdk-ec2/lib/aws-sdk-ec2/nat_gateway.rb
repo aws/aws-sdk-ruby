@@ -91,12 +91,11 @@ module Aws::EC2
     end
 
     # Reserved. If you need to sustain traffic greater than the [documented
-    # limits][1], contact us through the [Support Center][2].
+    # limits][1], contact Amazon Web Services Support.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    # [2]: https://console.aws.amazon.com/support/home?
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways
     # @return [Types::ProvisionedBandwidth]
     def provisioned_bandwidth
       data[:provisioned_bandwidth]

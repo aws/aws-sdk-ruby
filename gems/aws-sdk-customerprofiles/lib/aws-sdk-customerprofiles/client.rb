@@ -89,6 +89,11 @@ module Aws::CustomerProfiles
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -209,7 +214,6 @@ module Aws::CustomerProfiles
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -297,7 +301,6 @@ module Aws::CustomerProfiles
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -592,11 +595,23 @@ module Aws::CustomerProfiles
     # [Cross-service confused deputy prevention][3] for sample policies that
     # you should apply.
     #
+    # <note markdown="1"> It is not possible to associate a Customer Profiles domain with an
+    # Amazon Connect Instance directly from the API. If you would like to
+    # create a domain and associate a Customer Profiles domain, use the
+    # Amazon Connect admin website. For more information, see [Enable
+    # Customer Profiles][4].
+    #
+    #  Each Amazon Connect instance can be associated with only one domain.
+    # Multiple Amazon Connect instances can be associated with one domain.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html
     # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-customer-profiles.html#enable-customer-profiles-step1
     #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
@@ -961,7 +976,7 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #
     # @option params [String] :account_number
-    #   A unique account number that you have given to the customer.
+    #   An account number that you have given to the customer.
     #
     # @option params [String] :additional_information
     #   Any additional information relevant to the customer’s profile.
@@ -1989,6 +2004,8 @@ module Aws::CustomerProfiles
     #   * {Types::GetProfileObjectTypeResponse#encryption_key #encryption_key} => String
     #   * {Types::GetProfileObjectTypeResponse#allow_profile_creation #allow_profile_creation} => Boolean
     #   * {Types::GetProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
+    #   * {Types::GetProfileObjectTypeResponse#max_available_profile_object_count #max_available_profile_object_count} => Integer
+    #   * {Types::GetProfileObjectTypeResponse#max_profile_object_count #max_profile_object_count} => Integer
     #   * {Types::GetProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::GetProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::GetProfileObjectTypeResponse#created_at #created_at} => Time
@@ -2011,6 +2028,8 @@ module Aws::CustomerProfiles
     #   resp.encryption_key #=> String
     #   resp.allow_profile_creation #=> Boolean
     #   resp.source_last_updated_timestamp_format #=> String
+    #   resp.max_available_profile_object_count #=> Integer
+    #   resp.max_profile_object_count #=> Integer
     #   resp.fields #=> Hash
     #   resp.fields["name"].source #=> String
     #   resp.fields["name"].target #=> String
@@ -2672,6 +2691,8 @@ module Aws::CustomerProfiles
     #   resp.items[0].description #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].max_profile_object_count #=> Integer
+    #   resp.items[0].max_available_profile_object_count #=> Integer
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -3224,6 +3245,9 @@ module Aws::CustomerProfiles
     #   The format of your `sourceLastUpdatedTimestamp` that was previously
     #   set up.
     #
+    # @option params [Integer] :max_profile_object_count
+    #   The amount of profile object max count assigned to the object type
+    #
     # @option params [Hash<String,Types::ObjectTypeField>] :fields
     #   A map of the name and ObjectType field.
     #
@@ -3242,6 +3266,8 @@ module Aws::CustomerProfiles
     #   * {Types::PutProfileObjectTypeResponse#encryption_key #encryption_key} => String
     #   * {Types::PutProfileObjectTypeResponse#allow_profile_creation #allow_profile_creation} => Boolean
     #   * {Types::PutProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
+    #   * {Types::PutProfileObjectTypeResponse#max_profile_object_count #max_profile_object_count} => Integer
+    #   * {Types::PutProfileObjectTypeResponse#max_available_profile_object_count #max_available_profile_object_count} => Integer
     #   * {Types::PutProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::PutProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::PutProfileObjectTypeResponse#created_at #created_at} => Time
@@ -3259,6 +3285,7 @@ module Aws::CustomerProfiles
     #     encryption_key: "encryptionKey",
     #     allow_profile_creation: false,
     #     source_last_updated_timestamp_format: "string1To255",
+    #     max_profile_object_count: 1,
     #     fields: {
     #       "name" => {
     #         source: "text",
@@ -3288,6 +3315,8 @@ module Aws::CustomerProfiles
     #   resp.encryption_key #=> String
     #   resp.allow_profile_creation #=> Boolean
     #   resp.source_last_updated_timestamp_format #=> String
+    #   resp.max_profile_object_count #=> Integer
+    #   resp.max_available_profile_object_count #=> Integer
     #   resp.fields #=> Hash
     #   resp.fields["name"].source #=> String
     #   resp.fields["name"].target #=> String
@@ -3839,7 +3868,7 @@ module Aws::CustomerProfiles
     #   Any additional information relevant to the customer’s profile.
     #
     # @option params [String] :account_number
-    #   A unique account number that you have given to the customer.
+    #   An account number that you have given to the customer.
     #
     # @option params [String] :party_type
     #   The type of profile used to describe the customer.
@@ -4013,7 +4042,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

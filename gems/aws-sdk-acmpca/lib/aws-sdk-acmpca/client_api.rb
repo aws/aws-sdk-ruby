@@ -551,6 +551,7 @@ module Aws::ACMPCA
 
       api.metadata = {
         "apiVersion" => "2017-08-22",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "acm-pca",
         "jsonVersion" => "1.1",
         "protocol" => "json",

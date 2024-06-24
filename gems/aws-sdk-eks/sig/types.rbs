@@ -690,6 +690,19 @@ module Aws::EKS
       attr_accessor selectors: ::Array[Types::FargateProfileSelector]
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor health: Types::FargateProfileHealth
+      SENSITIVE: []
+    end
+
+    class FargateProfileHealth
+      attr_accessor issues: ::Array[Types::FargateProfileIssue]
+      SENSITIVE: []
+    end
+
+    class FargateProfileIssue
+      attr_accessor code: ("PodExecutionRoleAlreadyInUse" | "AccessDenied" | "ClusterUnreachable" | "InternalFailure")
+      attr_accessor message: ::String
+      attr_accessor resource_ids: ::Array[::String]
       SENSITIVE: []
     end
 

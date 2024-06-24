@@ -716,7 +716,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
+    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption
     # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html
     #
     # @!attribute [rw] enabled

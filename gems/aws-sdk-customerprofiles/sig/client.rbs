@@ -646,6 +646,8 @@ module Aws
         def encryption_key: () -> ::String
         def allow_profile_creation: () -> bool
         def source_last_updated_timestamp_format: () -> ::String
+        def max_available_profile_object_count: () -> ::Integer
+        def max_profile_object_count: () -> ::Integer
         def fields: () -> ::Hash[::String, Types::ObjectTypeField]
         def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
         def created_at: () -> ::Time
@@ -1045,6 +1047,8 @@ module Aws
         def encryption_key: () -> ::String
         def allow_profile_creation: () -> bool
         def source_last_updated_timestamp_format: () -> ::String
+        def max_profile_object_count: () -> ::Integer
+        def max_available_profile_object_count: () -> ::Integer
         def fields: () -> ::Hash[::String, Types::ObjectTypeField]
         def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
         def created_at: () -> ::Time
@@ -1061,6 +1065,7 @@ module Aws
                                      ?encryption_key: ::String,
                                      ?allow_profile_creation: bool,
                                      ?source_last_updated_timestamp_format: ::String,
+                                     ?max_profile_object_count: ::Integer,
                                      ?fields: Hash[::String, {
                                          source: ::String?,
                                          target: ::String?,

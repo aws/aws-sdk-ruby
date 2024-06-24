@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.181.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.180.0 (2024-06-20)
+------------------
+
+* Feature - Fix Glue paginators for Jobs, JobRuns, Triggers, Blueprints and Workflows.
+
+1.179.0 (2024-06-17)
+------------------
+
+* Feature - This release introduces a new feature, Usage profiles. Usage profiles allow the AWS Glue admin to create different profiles for various classes of users within the account, enforcing limits and defaults for jobs and sessions.
+
 1.178.0 (2024-06-13)
 ------------------
 

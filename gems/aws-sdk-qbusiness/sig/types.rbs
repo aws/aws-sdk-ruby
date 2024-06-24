@@ -319,6 +319,7 @@ module Aws::QBusiness
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       attr_accessor attachments_configuration: Types::AttachmentsConfiguration
+      attr_accessor q_apps_configuration: Types::QAppsConfiguration
       SENSITIVE: []
     end
 
@@ -746,6 +747,7 @@ module Aws::QBusiness
       attr_accessor updated_at: ::Time
       attr_accessor error: Types::ErrorDetail
       attr_accessor attachments_configuration: Types::AppliedAttachmentsConfiguration
+      attr_accessor q_apps_configuration: Types::QAppsConfiguration
       SENSITIVE: []
     end
 
@@ -1287,6 +1289,11 @@ module Aws::QBusiness
     class PutGroupResponse < Aws::EmptyStructure
     end
 
+    class QAppsConfiguration
+      attr_accessor q_apps_control_mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -1480,6 +1487,7 @@ module Aws::QBusiness
       attr_accessor description: ::String
       attr_accessor role_arn: ::String
       attr_accessor attachments_configuration: Types::AttachmentsConfiguration
+      attr_accessor q_apps_configuration: Types::QAppsConfiguration
       SENSITIVE: []
     end
 

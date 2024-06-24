@@ -15,9 +15,9 @@ module Aws::CostOptimizationHub
 
     class AccountEnrollmentStatus
       attr_accessor account_id: ::String
-      attr_accessor created_timestamp: ::Time
-      attr_accessor last_updated_timestamp: ::Time
       attr_accessor status: ("Active" | "Inactive")
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor created_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -28,10 +28,10 @@ module Aws::CostOptimizationHub
     end
 
     class ComputeConfiguration
-      attr_accessor architecture: ::String
-      attr_accessor memory_size_in_mb: ::Integer
-      attr_accessor platform: ::String
       attr_accessor v_cpu: ::Float
+      attr_accessor memory_size_in_mb: ::Integer
+      attr_accessor architecture: ::String
+      attr_accessor platform: ::String
       SENSITIVE: []
     end
 
@@ -43,9 +43,14 @@ module Aws::CostOptimizationHub
 
     class ComputeSavingsPlansConfiguration
       attr_accessor account_scope: ::String
-      attr_accessor hourly_commitment: ::String
-      attr_accessor payment_option: ::String
       attr_accessor term: ::String
+      attr_accessor payment_option: ::String
+      attr_accessor hourly_commitment: ::String
+      SENSITIVE: []
+    end
+
+    class DbInstanceConfiguration
+      attr_accessor db_instance_class: ::String
       SENSITIVE: []
     end
 
@@ -56,9 +61,9 @@ module Aws::CostOptimizationHub
     end
 
     class EbsVolumeConfiguration
-      attr_accessor attachment_state: ::String
-      attr_accessor performance: Types::BlockStoragePerformanceConfiguration
       attr_accessor storage: Types::StorageConfiguration
+      attr_accessor performance: Types::BlockStoragePerformanceConfiguration
+      attr_accessor attachment_state: ::String
       SENSITIVE: []
     end
 
@@ -92,11 +97,11 @@ module Aws::CostOptimizationHub
 
     class Ec2InstanceSavingsPlansConfiguration
       attr_accessor account_scope: ::String
+      attr_accessor term: ::String
+      attr_accessor payment_option: ::String
       attr_accessor hourly_commitment: ::String
       attr_accessor instance_family: ::String
-      attr_accessor payment_option: ::String
       attr_accessor savings_plans_region: ::String
-      attr_accessor term: ::String
       SENSITIVE: []
     end
 
@@ -108,21 +113,21 @@ module Aws::CostOptimizationHub
 
     class Ec2ReservedInstancesConfiguration
       attr_accessor account_scope: ::String
-      attr_accessor current_generation: ::String
-      attr_accessor instance_family: ::String
-      attr_accessor instance_type: ::String
-      attr_accessor monthly_recurring_cost: ::String
+      attr_accessor service: ::String
       attr_accessor normalized_units_to_purchase: ::String
+      attr_accessor term: ::String
+      attr_accessor payment_option: ::String
       attr_accessor number_of_instances_to_purchase: ::String
       attr_accessor offering_class: ::String
-      attr_accessor payment_option: ::String
-      attr_accessor platform: ::String
+      attr_accessor instance_family: ::String
+      attr_accessor instance_type: ::String
       attr_accessor reserved_instances_region: ::String
-      attr_accessor service: ::String
-      attr_accessor size_flex_eligible: bool
+      attr_accessor current_generation: ::String
+      attr_accessor platform: ::String
       attr_accessor tenancy: ::String
-      attr_accessor term: ::String
+      attr_accessor size_flex_eligible: bool
       attr_accessor upfront_cost: ::String
+      attr_accessor monthly_recurring_cost: ::String
       SENSITIVE: []
     end
 
@@ -145,40 +150,40 @@ module Aws::CostOptimizationHub
 
     class ElastiCacheReservedInstancesConfiguration
       attr_accessor account_scope: ::String
-      attr_accessor current_generation: ::String
+      attr_accessor service: ::String
+      attr_accessor normalized_units_to_purchase: ::String
+      attr_accessor term: ::String
+      attr_accessor payment_option: ::String
+      attr_accessor number_of_instances_to_purchase: ::String
       attr_accessor instance_family: ::String
       attr_accessor instance_type: ::String
-      attr_accessor monthly_recurring_cost: ::String
-      attr_accessor normalized_units_to_purchase: ::String
-      attr_accessor number_of_instances_to_purchase: ::String
-      attr_accessor payment_option: ::String
       attr_accessor reserved_instances_region: ::String
-      attr_accessor service: ::String
+      attr_accessor current_generation: ::String
       attr_accessor size_flex_eligible: bool
-      attr_accessor term: ::String
       attr_accessor upfront_cost: ::String
+      attr_accessor monthly_recurring_cost: ::String
       SENSITIVE: []
     end
 
     class EstimatedDiscounts
-      attr_accessor other_discount: ::Float
-      attr_accessor reserved_instances_discount: ::Float
       attr_accessor savings_plans_discount: ::Float
+      attr_accessor reserved_instances_discount: ::Float
+      attr_accessor other_discount: ::Float
       SENSITIVE: []
     end
 
     class Filter
-      attr_accessor account_ids: ::Array[::String]
-      attr_accessor action_types: ::Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")]
-      attr_accessor implementation_efforts: ::Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]
-      attr_accessor recommendation_ids: ::Array[::String]
-      attr_accessor regions: ::Array[::String]
-      attr_accessor resource_arns: ::Array[::String]
-      attr_accessor resource_ids: ::Array[::String]
-      attr_accessor resource_types: ::Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances")]
       attr_accessor restart_needed: bool
       attr_accessor rollback_possible: bool
+      attr_accessor implementation_efforts: ::Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor resource_types: ::Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")]
+      attr_accessor action_types: ::Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resource_ids: ::Array[::String]
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor recommendation_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -186,8 +191,8 @@ module Aws::CostOptimizationHub
     end
 
     class GetPreferencesResponse
-      attr_accessor member_account_discount_visibility: ("All" | "None")
       attr_accessor savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts")
+      attr_accessor member_account_discount_visibility: ("All" | "None")
       SENSITIVE: []
     end
 
@@ -197,28 +202,28 @@ module Aws::CostOptimizationHub
     end
 
     class GetRecommendationResponse
-      attr_accessor account_id: ::String
-      attr_accessor action_type: ("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")
-      attr_accessor cost_calculation_lookback_period_in_days: ::Integer
-      attr_accessor currency_code: ::String
-      attr_accessor current_resource_details: Types::ResourceDetails
-      attr_accessor current_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances")
-      attr_accessor estimated_monthly_cost: ::Float
-      attr_accessor estimated_monthly_savings: ::Float
-      attr_accessor estimated_savings_over_cost_calculation_lookback_period: ::Float
-      attr_accessor estimated_savings_percentage: ::Float
-      attr_accessor implementation_effort: ("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")
-      attr_accessor last_refresh_timestamp: ::Time
       attr_accessor recommendation_id: ::String
-      attr_accessor recommendation_lookback_period_in_days: ::Integer
-      attr_accessor recommended_resource_details: Types::ResourceDetails
-      attr_accessor recommended_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances")
-      attr_accessor region: ::String
-      attr_accessor resource_arn: ::String
       attr_accessor resource_id: ::String
-      attr_accessor restart_needed: bool
-      attr_accessor rollback_possible: bool
+      attr_accessor resource_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor recommendation_lookback_period_in_days: ::Integer
+      attr_accessor cost_calculation_lookback_period_in_days: ::Integer
+      attr_accessor estimated_savings_percentage: ::Float
+      attr_accessor estimated_savings_over_cost_calculation_lookback_period: ::Float
+      attr_accessor current_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")
+      attr_accessor recommended_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")
+      attr_accessor region: ::String
       attr_accessor source: ("ComputeOptimizer" | "CostExplorer")
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor estimated_monthly_savings: ::Float
+      attr_accessor estimated_monthly_cost: ::Float
+      attr_accessor implementation_effort: ("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")
+      attr_accessor restart_needed: bool
+      attr_accessor action_type: ("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")
+      attr_accessor rollback_possible: bool
+      attr_accessor current_resource_details: Types::ResourceDetails
+      attr_accessor recommended_resource_details: Types::ResourceDetails
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -245,16 +250,16 @@ module Aws::CostOptimizationHub
     end
 
     class ListEnrollmentStatusesRequest
-      attr_accessor account_id: ::String
       attr_accessor include_organization_info: bool
-      attr_accessor max_results: ::Integer
+      attr_accessor account_id: ::String
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListEnrollmentStatusesResponse
-      attr_accessor include_member_accounts: bool
       attr_accessor items: ::Array[Types::AccountEnrollmentStatus]
+      attr_accessor include_member_accounts: bool
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -268,20 +273,20 @@ module Aws::CostOptimizationHub
     end
 
     class ListRecommendationSummariesResponse
-      attr_accessor currency_code: ::String
       attr_accessor estimated_total_deduped_savings: ::Float
-      attr_accessor group_by: ::String
       attr_accessor items: ::Array[Types::RecommendationSummary]
+      attr_accessor group_by: ::String
+      attr_accessor currency_code: ::String
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListRecommendationsRequest
       attr_accessor filter: Types::Filter
+      attr_accessor order_by: Types::OrderBy
       attr_accessor include_all_recommendations: bool
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor order_by: Types::OrderBy
       SENSITIVE: []
     end
 
@@ -299,23 +304,48 @@ module Aws::CostOptimizationHub
 
     class OpenSearchReservedInstancesConfiguration
       attr_accessor account_scope: ::String
-      attr_accessor current_generation: ::String
-      attr_accessor instance_type: ::String
-      attr_accessor monthly_recurring_cost: ::String
-      attr_accessor normalized_units_to_purchase: ::String
-      attr_accessor number_of_instances_to_purchase: ::String
-      attr_accessor payment_option: ::String
-      attr_accessor reserved_instances_region: ::String
       attr_accessor service: ::String
-      attr_accessor size_flex_eligible: bool
+      attr_accessor normalized_units_to_purchase: ::String
       attr_accessor term: ::String
+      attr_accessor payment_option: ::String
+      attr_accessor number_of_instances_to_purchase: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor reserved_instances_region: ::String
+      attr_accessor current_generation: ::String
+      attr_accessor size_flex_eligible: bool
       attr_accessor upfront_cost: ::String
+      attr_accessor monthly_recurring_cost: ::String
       SENSITIVE: []
     end
 
     class OrderBy
       attr_accessor dimension: ::String
       attr_accessor order: ("Asc" | "Desc")
+      SENSITIVE: []
+    end
+
+    class RdsDbInstance
+      attr_accessor configuration: Types::RdsDbInstanceConfiguration
+      attr_accessor cost_calculation: Types::ResourceCostCalculation
+      SENSITIVE: []
+    end
+
+    class RdsDbInstanceConfiguration
+      attr_accessor instance: Types::DbInstanceConfiguration
+      SENSITIVE: []
+    end
+
+    class RdsDbInstanceStorage
+      attr_accessor configuration: Types::RdsDbInstanceStorageConfiguration
+      attr_accessor cost_calculation: Types::ResourceCostCalculation
+      SENSITIVE: []
+    end
+
+    class RdsDbInstanceStorageConfiguration
+      attr_accessor storage_type: ::String
+      attr_accessor allocated_storage_in_gb: ::Float
+      attr_accessor iops: ::Float
+      attr_accessor storage_throughput: ::Float
       SENSITIVE: []
     end
 
@@ -327,53 +357,53 @@ module Aws::CostOptimizationHub
 
     class RdsReservedInstancesConfiguration
       attr_accessor account_scope: ::String
+      attr_accessor service: ::String
+      attr_accessor normalized_units_to_purchase: ::String
+      attr_accessor term: ::String
+      attr_accessor payment_option: ::String
+      attr_accessor number_of_instances_to_purchase: ::String
+      attr_accessor instance_family: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor reserved_instances_region: ::String
+      attr_accessor size_flex_eligible: bool
       attr_accessor current_generation: ::String
+      attr_accessor upfront_cost: ::String
+      attr_accessor monthly_recurring_cost: ::String
+      attr_accessor license_model: ::String
       attr_accessor database_edition: ::String
       attr_accessor database_engine: ::String
       attr_accessor deployment_option: ::String
-      attr_accessor instance_family: ::String
-      attr_accessor instance_type: ::String
-      attr_accessor license_model: ::String
-      attr_accessor monthly_recurring_cost: ::String
-      attr_accessor normalized_units_to_purchase: ::String
-      attr_accessor number_of_instances_to_purchase: ::String
-      attr_accessor payment_option: ::String
-      attr_accessor reserved_instances_region: ::String
-      attr_accessor service: ::String
-      attr_accessor size_flex_eligible: bool
-      attr_accessor term: ::String
-      attr_accessor upfront_cost: ::String
       SENSITIVE: []
     end
 
     class Recommendation
+      attr_accessor recommendation_id: ::String
       attr_accessor account_id: ::String
-      attr_accessor action_type: ::String
-      attr_accessor currency_code: ::String
-      attr_accessor current_resource_summary: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
       attr_accessor current_resource_type: ::String
-      attr_accessor estimated_monthly_cost: ::Float
+      attr_accessor recommended_resource_type: ::String
       attr_accessor estimated_monthly_savings: ::Float
       attr_accessor estimated_savings_percentage: ::Float
+      attr_accessor estimated_monthly_cost: ::Float
+      attr_accessor currency_code: ::String
       attr_accessor implementation_effort: ::String
-      attr_accessor last_refresh_timestamp: ::Time
-      attr_accessor recommendation_id: ::String
-      attr_accessor recommendation_lookback_period_in_days: ::Integer
-      attr_accessor recommended_resource_summary: ::String
-      attr_accessor recommended_resource_type: ::String
-      attr_accessor region: ::String
-      attr_accessor resource_arn: ::String
-      attr_accessor resource_id: ::String
       attr_accessor restart_needed: bool
+      attr_accessor action_type: ::String
       attr_accessor rollback_possible: bool
+      attr_accessor current_resource_summary: ::String
+      attr_accessor recommended_resource_summary: ::String
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor recommendation_lookback_period_in_days: ::Integer
       attr_accessor source: ("ComputeOptimizer" | "CostExplorer")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class RecommendationSummary
-      attr_accessor estimated_monthly_savings: ::Float
       attr_accessor group: ::String
+      attr_accessor estimated_monthly_savings: ::Float
       attr_accessor recommendation_count: ::Integer
       SENSITIVE: []
     end
@@ -386,18 +416,18 @@ module Aws::CostOptimizationHub
 
     class RedshiftReservedInstancesConfiguration
       attr_accessor account_scope: ::String
-      attr_accessor current_generation: ::String
+      attr_accessor service: ::String
+      attr_accessor normalized_units_to_purchase: ::String
+      attr_accessor term: ::String
+      attr_accessor payment_option: ::String
+      attr_accessor number_of_instances_to_purchase: ::String
       attr_accessor instance_family: ::String
       attr_accessor instance_type: ::String
-      attr_accessor monthly_recurring_cost: ::String
-      attr_accessor normalized_units_to_purchase: ::String
-      attr_accessor number_of_instances_to_purchase: ::String
-      attr_accessor payment_option: ::String
       attr_accessor reserved_instances_region: ::String
-      attr_accessor service: ::String
       attr_accessor size_flex_eligible: bool
-      attr_accessor term: ::String
+      attr_accessor current_generation: ::String
       attr_accessor upfront_cost: ::String
+      attr_accessor monthly_recurring_cost: ::String
       SENSITIVE: []
     end
 
@@ -407,61 +437,67 @@ module Aws::CostOptimizationHub
     end
 
     class ReservedInstancesPricing
-      attr_accessor estimated_monthly_amortized_reservation_cost: ::Float
       attr_accessor estimated_on_demand_cost: ::Float
       attr_accessor monthly_reservation_eligible_cost: ::Float
       attr_accessor savings_percentage: ::Float
+      attr_accessor estimated_monthly_amortized_reservation_cost: ::Float
       SENSITIVE: []
     end
 
     class ResourceCostCalculation
-      attr_accessor pricing: Types::ResourcePricing
       attr_accessor usages: ::Array[Types::Usage]
+      attr_accessor pricing: Types::ResourcePricing
       SENSITIVE: []
     end
 
     class ResourceDetails
-      attr_accessor compute_savings_plans: Types::ComputeSavingsPlans
+      attr_accessor lambda_function: Types::LambdaFunction
+      attr_accessor ecs_service: Types::EcsService
+      attr_accessor ec2_instance: Types::Ec2Instance
       attr_accessor ebs_volume: Types::EbsVolume
       attr_accessor ec2_auto_scaling_group: Types::Ec2AutoScalingGroup
-      attr_accessor ec2_instance: Types::Ec2Instance
-      attr_accessor ec2_instance_savings_plans: Types::Ec2InstanceSavingsPlans
       attr_accessor ec2_reserved_instances: Types::Ec2ReservedInstances
-      attr_accessor ecs_service: Types::EcsService
-      attr_accessor elasti_cache_reserved_instances: Types::ElastiCacheReservedInstances
-      attr_accessor lambda_function: Types::LambdaFunction
-      attr_accessor open_search_reserved_instances: Types::OpenSearchReservedInstances
       attr_accessor rds_reserved_instances: Types::RdsReservedInstances
+      attr_accessor elasti_cache_reserved_instances: Types::ElastiCacheReservedInstances
+      attr_accessor open_search_reserved_instances: Types::OpenSearchReservedInstances
       attr_accessor redshift_reserved_instances: Types::RedshiftReservedInstances
+      attr_accessor ec2_instance_savings_plans: Types::Ec2InstanceSavingsPlans
+      attr_accessor compute_savings_plans: Types::ComputeSavingsPlans
       attr_accessor sage_maker_savings_plans: Types::SageMakerSavingsPlans
+      attr_accessor rds_db_instance: Types::RdsDbInstance
+      attr_accessor rds_db_instance_storage: Types::RdsDbInstanceStorage
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class ComputeSavingsPlans < ResourceDetails
+      class LambdaFunction < ResourceDetails
+      end
+      class EcsService < ResourceDetails
+      end
+      class Ec2Instance < ResourceDetails
       end
       class EbsVolume < ResourceDetails
       end
       class Ec2AutoScalingGroup < ResourceDetails
       end
-      class Ec2Instance < ResourceDetails
-      end
-      class Ec2InstanceSavingsPlans < ResourceDetails
-      end
       class Ec2ReservedInstances < ResourceDetails
-      end
-      class EcsService < ResourceDetails
-      end
-      class ElastiCacheReservedInstances < ResourceDetails
-      end
-      class LambdaFunction < ResourceDetails
-      end
-      class OpenSearchReservedInstances < ResourceDetails
       end
       class RdsReservedInstances < ResourceDetails
       end
+      class ElastiCacheReservedInstances < ResourceDetails
+      end
+      class OpenSearchReservedInstances < ResourceDetails
+      end
       class RedshiftReservedInstances < ResourceDetails
       end
+      class Ec2InstanceSavingsPlans < ResourceDetails
+      end
+      class ComputeSavingsPlans < ResourceDetails
+      end
       class SageMakerSavingsPlans < ResourceDetails
+      end
+      class RdsDbInstance < ResourceDetails
+      end
+      class RdsDbInstanceStorage < ResourceDetails
       end
       class Unknown < ResourceDetails
       end
@@ -474,10 +510,10 @@ module Aws::CostOptimizationHub
     end
 
     class ResourcePricing
-      attr_accessor estimated_cost_after_discounts: ::Float
       attr_accessor estimated_cost_before_discounts: ::Float
-      attr_accessor estimated_discounts: Types::EstimatedDiscounts
       attr_accessor estimated_net_unused_amortized_commitments: ::Float
+      attr_accessor estimated_discounts: Types::EstimatedDiscounts
+      attr_accessor estimated_cost_after_discounts: ::Float
       SENSITIVE: []
     end
 
@@ -489,9 +525,9 @@ module Aws::CostOptimizationHub
 
     class SageMakerSavingsPlansConfiguration
       attr_accessor account_scope: ::String
-      attr_accessor hourly_commitment: ::String
-      attr_accessor payment_option: ::String
       attr_accessor term: ::String
+      attr_accessor payment_option: ::String
+      attr_accessor hourly_commitment: ::String
       SENSITIVE: []
     end
 
@@ -501,16 +537,16 @@ module Aws::CostOptimizationHub
     end
 
     class SavingsPlansPricing
-      attr_accessor estimated_monthly_commitment: ::Float
-      attr_accessor estimated_on_demand_cost: ::Float
       attr_accessor monthly_savings_plans_eligible_cost: ::Float
+      attr_accessor estimated_monthly_commitment: ::Float
       attr_accessor savings_percentage: ::Float
+      attr_accessor estimated_on_demand_cost: ::Float
       SENSITIVE: []
     end
 
     class StorageConfiguration
-      attr_accessor size_in_gb: ::Float
       attr_accessor type: ::String
+      attr_accessor size_in_gb: ::Float
       SENSITIVE: []
     end
 
@@ -526,8 +562,8 @@ module Aws::CostOptimizationHub
     end
 
     class UpdateEnrollmentStatusRequest
-      attr_accessor include_member_accounts: bool
       attr_accessor status: ("Active" | "Inactive")
+      attr_accessor include_member_accounts: bool
       SENSITIVE: []
     end
 
@@ -537,30 +573,30 @@ module Aws::CostOptimizationHub
     end
 
     class UpdatePreferencesRequest
-      attr_accessor member_account_discount_visibility: ("All" | "None")
       attr_accessor savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts")
+      attr_accessor member_account_discount_visibility: ("All" | "None")
       SENSITIVE: []
     end
 
     class UpdatePreferencesResponse
-      attr_accessor member_account_discount_visibility: ("All" | "None")
       attr_accessor savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts")
+      attr_accessor member_account_discount_visibility: ("All" | "None")
       SENSITIVE: []
     end
 
     class Usage
+      attr_accessor usage_type: ::String
+      attr_accessor usage_amount: ::Float
       attr_accessor operation: ::String
       attr_accessor product_code: ::String
       attr_accessor unit: ::String
-      attr_accessor usage_amount: ::Float
-      attr_accessor usage_type: ::String
       SENSITIVE: []
     end
 
     class ValidationException
-      attr_accessor fields: ::Array[Types::ValidationExceptionDetail]
       attr_accessor message: ::String
       attr_accessor reason: ("FieldValidationFailed" | "Other")
+      attr_accessor fields: ::Array[Types::ValidationExceptionDetail]
       SENSITIVE: []
     end
 

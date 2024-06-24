@@ -16,6 +16,7 @@ require_relative 'aws-sdk-artifact/client_api'
 require_relative 'aws-sdk-artifact/plugins/endpoints.rb'
 require_relative 'aws-sdk-artifact/client'
 require_relative 'aws-sdk-artifact/errors'
+require_relative 'aws-sdk-artifact/waiters'
 require_relative 'aws-sdk-artifact/resource'
 require_relative 'aws-sdk-artifact/endpoint_parameters'
 require_relative 'aws-sdk-artifact/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-artifact/customizations'
 # @!group service
 module Aws::Artifact
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.5.0'
 
 end

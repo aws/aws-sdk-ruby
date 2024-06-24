@@ -34,7 +34,7 @@ module Aws::CodeArtifact
     end
 
     class AssociatedPackage
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor association_type: ("STRONG" | "WEAK")
@@ -53,7 +53,7 @@ module Aws::CodeArtifact
       attr_accessor domain_owner: ::String
       attr_accessor source_repository: ::String
       attr_accessor destination_repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor versions: ::Array[::String]
@@ -150,7 +150,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       SENSITIVE: []
@@ -165,7 +165,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor versions: ::Array[::String]
@@ -231,7 +231,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       SENSITIVE: []
@@ -246,7 +246,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor package_version: ::String
@@ -287,7 +287,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor versions: ::Array[::String]
@@ -334,7 +334,7 @@ module Aws::CodeArtifact
     class GetAssociatedPackageGroupRequest
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       SENSITIVE: []
@@ -374,7 +374,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor package_version: ::String
@@ -395,7 +395,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor package_version: ::String
@@ -403,7 +403,7 @@ module Aws::CodeArtifact
     end
 
     class GetPackageVersionReadmeResult
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor version: ::String
@@ -416,7 +416,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       SENSITIVE: []
     end
 
@@ -511,7 +511,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor package_version: ::String
@@ -521,7 +521,7 @@ module Aws::CodeArtifact
     end
 
     class ListPackageVersionAssetsResult
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor version: ::String
@@ -535,7 +535,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor package_version: ::String
@@ -544,7 +544,7 @@ module Aws::CodeArtifact
     end
 
     class ListPackageVersionDependenciesResult
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor version: ::String
@@ -558,7 +558,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
@@ -571,7 +571,7 @@ module Aws::CodeArtifact
 
     class ListPackageVersionsResult
       attr_accessor default_display_version: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor versions: ::Array[Types::PackageVersionSummary]
@@ -583,7 +583,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package_prefix: ::String
       attr_accessor max_results: ::Integer
@@ -662,7 +662,7 @@ module Aws::CodeArtifact
     end
 
     class PackageDescription
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor name: ::String
       attr_accessor origin_configuration: Types::PackageOriginConfiguration
@@ -732,7 +732,7 @@ module Aws::CodeArtifact
     end
 
     class PackageSummary
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor origin_configuration: Types::PackageOriginConfiguration
@@ -740,7 +740,7 @@ module Aws::CodeArtifact
     end
 
     class PackageVersionDescription
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package_name: ::String
       attr_accessor display_name: ::String
@@ -780,7 +780,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor package_version: ::String
@@ -792,7 +792,7 @@ module Aws::CodeArtifact
     end
 
     class PublishPackageVersionResult
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor version: ::String
@@ -819,7 +819,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor restrictions: Types::PackageOriginRestrictions
@@ -860,7 +860,7 @@ module Aws::CodeArtifact
 
     class RepositoryExternalConnectionInfo
       attr_accessor external_connection_name: ::String
-      attr_accessor package_format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor package_format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor status: ("Available")
       SENSITIVE: []
     end
@@ -967,7 +967,7 @@ module Aws::CodeArtifact
       attr_accessor domain: ::String
       attr_accessor domain_owner: ::String
       attr_accessor repository: ::String
-      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
       attr_accessor namespace: ::String
       attr_accessor package: ::String
       attr_accessor versions: ::Array[::String]

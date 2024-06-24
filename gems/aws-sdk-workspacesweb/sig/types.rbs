@@ -158,6 +158,7 @@ module Aws::WorkSpacesWeb
       attr_accessor identity_provider_name: ::String
       attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
       attr_accessor portal_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:identity_provider_details, :identity_provider_name]
     end
 
@@ -244,6 +245,7 @@ module Aws::WorkSpacesWeb
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor copy_allowed: ("Disabled" | "Enabled")
       attr_accessor customer_managed_key: ::String
+      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor disconnect_timeout_in_minutes: ::Integer
       attr_accessor download_allowed: ("Disabled" | "Enabled")
       attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
@@ -863,6 +865,7 @@ module Aws::WorkSpacesWeb
       attr_accessor client_token: ::String
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor disconnect_timeout_in_minutes: ::Integer
       attr_accessor download_allowed: ("Disabled" | "Enabled")
       attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
@@ -897,6 +900,7 @@ module Aws::WorkSpacesWeb
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor copy_allowed: ("Disabled" | "Enabled")
       attr_accessor customer_managed_key: ::String
+      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor disconnect_timeout_in_minutes: ::Integer
       attr_accessor download_allowed: ("Disabled" | "Enabled")
       attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
@@ -910,6 +914,7 @@ module Aws::WorkSpacesWeb
     class UserSettingsSummary
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor disconnect_timeout_in_minutes: ::Integer
       attr_accessor download_allowed: ("Disabled" | "Enabled")
       attr_accessor idle_disconnect_timeout_in_minutes: ::Integer

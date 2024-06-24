@@ -63,8 +63,8 @@ module Aws::EC2
       data[:encrypted]
     end
 
-    # The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS
-    # key that was used to protect the volume encryption key for the volume.
+    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
+    # the volume encryption key for the volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -554,11 +554,7 @@ module Aws::EC2
     # @option options [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1,000; if the value is
-    #   larger than 1,000, only 1,000 results are returned. If this parameter
-    #   is not used, then all items are returned. You cannot specify this
-    #   parameter and the volume IDs parameter in the same request. For more
-    #   information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #

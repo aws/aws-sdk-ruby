@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.85.0 (2024-06-17)
+------------------
+
+* Feature - Updating SDK example for KMS DeriveSharedSecret API.
+
 1.84.0 (2024-06-13)
 ------------------
 

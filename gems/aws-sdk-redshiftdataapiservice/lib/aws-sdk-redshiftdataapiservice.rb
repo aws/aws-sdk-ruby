@@ -52,6 +52,6 @@ require_relative 'aws-sdk-redshiftdataapiservice/customizations'
 # @!group service
 module Aws::RedshiftDataAPIService
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end

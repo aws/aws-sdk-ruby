@@ -89,6 +89,11 @@ module Aws::Glue
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -209,7 +214,6 @@ module Aws::Glue
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -297,7 +301,6 @@ module Aws::Glue
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -1971,6 +1974,7 @@ module Aws::Glue
     #   resp.jobs[0].source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
     #   resp.jobs[0].source_control_details.auth_token #=> String
     #   resp.jobs[0].maintenance_window #=> String
+    #   resp.jobs[0].profile_name #=> String
     #   resp.jobs_not_found #=> Array
     #   resp.jobs_not_found[0] #=> String
     #
@@ -2307,6 +2311,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -2377,6 +2382,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -4515,6 +4521,7 @@ module Aws::Glue
     #   resp.session.execution_time #=> Float
     #   resp.session.dpu_seconds #=> Float
     #   resp.session.idle_timeout #=> Integer
+    #   resp.session.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSession AWS API Documentation
     #
@@ -4829,6 +4836,66 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_trigger(params = {}, options = {})
       req = build_request(:create_trigger, params)
+      req.send_request(options)
+    end
+
+    # Creates an Glue usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile.
+    #
+    # @option params [String] :description
+    #   A description of the usage profile.
+    #
+    # @option params [required, Types::ProfileConfiguration] :configuration
+    #   A `ProfileConfiguration` object specifying the job and session values
+    #   for the profile.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags applied to the usage profile.
+    #
+    # @return [Types::CreateUsageProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUsageProfileResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_usage_profile({
+    #     name: "NameString", # required
+    #     description: "DescriptionString",
+    #     configuration: { # required
+    #       session_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #       job_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUsageProfile AWS API Documentation
+    #
+    # @overload create_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def create_usage_profile(params = {}, options = {})
+      req = build_request(:create_usage_profile, params)
       req.send_request(options)
     end
 
@@ -5735,6 +5802,28 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_trigger(params = {}, options = {})
       req = build_request(:delete_trigger, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Glue specified usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_usage_profile({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUsageProfile AWS API Documentation
+    #
+    # @overload delete_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_usage_profile(params = {}, options = {})
+      req = build_request(:delete_usage_profile, params)
       req.send_request(options)
     end
 
@@ -8301,6 +8390,7 @@ module Aws::Glue
     #   resp.job.source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
     #   resp.job.source_control_details.auth_token #=> String
     #   resp.job.maintenance_window #=> String
+    #   resp.job.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -8363,7 +8453,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the metadata for a given job run.
+    # Retrieves the metadata for a given job run. Job run history is
+    # accessible for 90 days for your workflow and job run.
     #
     # @option params [required, String] :job_name
     #   Name of the job definition being run.
@@ -8417,6 +8508,7 @@ module Aws::Glue
     #   resp.job_run.dpu_seconds #=> Float
     #   resp.job_run.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job_run.maintenance_window #=> String
+    #   resp.job_run.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -8485,6 +8577,7 @@ module Aws::Glue
     #   resp.job_runs[0].dpu_seconds #=> Float
     #   resp.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job_runs[0].maintenance_window #=> String
+    #   resp.job_runs[0].profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -9404,6 +9497,7 @@ module Aws::Glue
     #   resp.jobs[0].source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
     #   resp.jobs[0].source_control_details.auth_token #=> String
     #   resp.jobs[0].maintenance_window #=> String
+    #   resp.jobs[0].profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -10794,6 +10888,7 @@ module Aws::Glue
     #   resp.session.execution_time #=> Float
     #   resp.session.dpu_seconds #=> Float
     #   resp.session.idle_timeout #=> Integer
+    #   resp.session.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSession AWS API Documentation
     #
@@ -12164,6 +12259,53 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves information about the specified Glue usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile to retrieve.
+    #
+    # @return [Types::GetUsageProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUsageProfileResponse#name #name} => String
+    #   * {Types::GetUsageProfileResponse#description #description} => String
+    #   * {Types::GetUsageProfileResponse#configuration #configuration} => Types::ProfileConfiguration
+    #   * {Types::GetUsageProfileResponse#created_on #created_on} => Time
+    #   * {Types::GetUsageProfileResponse#last_modified_on #last_modified_on} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_profile({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.configuration.session_configuration #=> Hash
+    #   resp.configuration.session_configuration["NameString"].default_value #=> String
+    #   resp.configuration.session_configuration["NameString"].allowed_values #=> Array
+    #   resp.configuration.session_configuration["NameString"].allowed_values[0] #=> String
+    #   resp.configuration.session_configuration["NameString"].min_value #=> String
+    #   resp.configuration.session_configuration["NameString"].max_value #=> String
+    #   resp.configuration.job_configuration #=> Hash
+    #   resp.configuration.job_configuration["NameString"].default_value #=> String
+    #   resp.configuration.job_configuration["NameString"].allowed_values #=> Array
+    #   resp.configuration.job_configuration["NameString"].allowed_values[0] #=> String
+    #   resp.configuration.job_configuration["NameString"].min_value #=> String
+    #   resp.configuration.job_configuration["NameString"].max_value #=> String
+    #   resp.created_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUsageProfile AWS API Documentation
+    #
+    # @overload get_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def get_usage_profile(params = {}, options = {})
+      req = build_request(:get_usage_profile, params)
+      req.send_request(options)
+    end
+
     # Retrieves a specified function definition from the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -12377,6 +12519,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -12447,6 +12590,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -12470,7 +12614,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the metadata for a given workflow run.
+    # Retrieves the metadata for a given workflow run. Job run history is
+    # accessible for 90 days for your workflow and job run.
     #
     # @option params [required, String] :name
     #   Name of the workflow being run.
@@ -12570,6 +12715,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -12733,6 +12879,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -13696,6 +13843,7 @@ module Aws::Glue
     #   resp.sessions[0].execution_time #=> Float
     #   resp.sessions[0].dpu_seconds #=> Float
     #   resp.sessions[0].idle_timeout #=> Integer
+    #   resp.sessions[0].profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSessions AWS API Documentation
@@ -13879,6 +14027,46 @@ module Aws::Glue
     # @param [Hash] params ({})
     def list_triggers(params = {}, options = {})
       req = build_request(:list_triggers, params)
+      req.send_request(options)
+    end
+
+    # List all the Glue usage profiles.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, included if this is a continuation call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of usage profiles to return in a single response.
+    #
+    # @return [Types::ListUsageProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUsageProfilesResponse#profiles #profiles} => Array&lt;Types::UsageProfileDefinition&gt;
+    #   * {Types::ListUsageProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_usage_profiles({
+    #     next_token: "OrchestrationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profiles #=> Array
+    #   resp.profiles[0].name #=> String
+    #   resp.profiles[0].description #=> String
+    #   resp.profiles[0].created_on #=> Time
+    #   resp.profiles[0].last_modified_on #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListUsageProfiles AWS API Documentation
+    #
+    # @overload list_usage_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_usage_profiles(params = {}, options = {})
+      req = build_request(:list_usage_profiles, params)
       req.send_request(options)
     end
 
@@ -17205,6 +17393,60 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Update an Glue usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile.
+    #
+    # @option params [String] :description
+    #   A description of the usage profile.
+    #
+    # @option params [required, Types::ProfileConfiguration] :configuration
+    #   A `ProfileConfiguration` object specifying the job and session values
+    #   for the profile.
+    #
+    # @return [Types::UpdateUsageProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUsageProfileResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_usage_profile({
+    #     name: "NameString", # required
+    #     description: "DescriptionString",
+    #     configuration: { # required
+    #       session_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #       job_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUsageProfile AWS API Documentation
+    #
+    # @overload update_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def update_usage_profile(params = {}, options = {})
+      req = build_request(:update_usage_profile, params)
+      req.send_request(options)
+    end
+
     # Updates an existing function definition in the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -17314,7 +17556,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.181.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

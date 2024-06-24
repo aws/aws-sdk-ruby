@@ -121,6 +121,17 @@ module Aws
                                        ) -> _AcceptSubscriptionRequestResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptSubscriptionRequestResponseSuccess
 
+      interface _AssociateEnvironmentRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateEnvironmentRoleOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#associate_environment_role-instance_method
+      def associate_environment_role: (
+                                        domain_identifier: ::String,
+                                        environment_identifier: ::String,
+                                        environment_role_arn: ::String
+                                      ) -> _AssociateEnvironmentRoleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateEnvironmentRoleResponseSuccess
+
       interface _CancelMetadataGenerationRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelMetadataGenerationRunOutput]
       end
@@ -429,6 +440,9 @@ module Aws
       def create_environment: (
                                 ?description: ::String,
                                 domain_identifier: ::String,
+                                ?environment_account_identifier: ::String,
+                                ?environment_account_region: ::String,
+                                ?environment_blueprint_identifier: ::String,
                                 environment_profile_identifier: ::String,
                                 ?glossary_terms: Array[::String],
                                 name: ::String,
@@ -441,6 +455,29 @@ module Aws
                                 ]
                               ) -> _CreateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateEnvironmentActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentActionOutput]
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def parameters: () -> Types::ActionParameters
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_environment_action-instance_method
+      def create_environment_action: (
+                                       ?description: ::String,
+                                       domain_identifier: ::String,
+                                       environment_identifier: ::String,
+                                       name: ::String,
+                                       parameters: {
+                                         aws_console_link: {
+                                           uri: ::String?
+                                         }?
+                                       }
+                                     ) -> _CreateEnvironmentActionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentActionResponseSuccess
 
       interface _CreateEnvironmentProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentProfileOutput]
@@ -776,7 +813,9 @@ module Aws
         def name: () -> ::String
         def project_id: () -> ::String
         def publish_on_import: () -> bool
+        def retain_permissions_on_revoke_failure: () -> bool
         def schedule: () -> Types::ScheduleConfiguration
+        def self_grant_status: () -> Types::SelfGrantStatusOutput
         def status: () -> ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
         def type: () -> ::String
         def updated_at: () -> ::Time
@@ -785,7 +824,8 @@ module Aws
       def delete_data_source: (
                                 ?client_token: ::String,
                                 domain_identifier: ::String,
-                                identifier: ::String
+                                identifier: ::String,
+                                ?retain_permissions_on_revoke_failure: bool
                               ) -> _DeleteDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
 
@@ -807,6 +847,14 @@ module Aws
                                 identifier: ::String
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_environment_action-instance_method
+      def delete_environment_action: (
+                                       domain_identifier: ::String,
+                                       environment_identifier: ::String,
+                                       identifier: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _DeleteEnvironmentBlueprintConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentBlueprintConfigurationOutput]
@@ -939,6 +987,17 @@ module Aws
                                           ) -> _DeleteTimeSeriesDataPointsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTimeSeriesDataPointsResponseSuccess
 
+      interface _DisassociateEnvironmentRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateEnvironmentRoleOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#disassociate_environment_role-instance_method
+      def disassociate_environment_role: (
+                                           domain_identifier: ::String,
+                                           environment_identifier: ::String,
+                                           environment_role_arn: ::String
+                                         ) -> _DisassociateEnvironmentRoleResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateEnvironmentRoleResponseSuccess
+
       interface _GetAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetOutput]
         def created_at: () -> ::Time
@@ -1011,6 +1070,7 @@ module Aws
         def publish_on_import: () -> bool
         def recommendation: () -> Types::RecommendationConfiguration
         def schedule: () -> Types::ScheduleConfiguration
+        def self_grant_status: () -> Types::SelfGrantStatusOutput
         def status: () -> ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
         def type: () -> ::String
         def updated_at: () -> ::Time
@@ -1096,6 +1156,23 @@ module Aws
                              identifier: ::String
                            ) -> _GetEnvironmentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetEnvironmentActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentActionOutput]
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def parameters: () -> Types::ActionParameters
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment_action-instance_method
+      def get_environment_action: (
+                                    domain_identifier: ::String,
+                                    environment_identifier: ::String,
+                                    identifier: ::String
+                                  ) -> _GetEnvironmentActionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentActionResponseSuccess
 
       interface _GetEnvironmentBlueprintResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentBlueprintOutput]
@@ -1505,6 +1582,20 @@ module Aws
                           ?status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
                         ) -> _ListDomainsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListEnvironmentActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentActionsOutput]
+        def items: () -> ::Array[Types::EnvironmentActionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_environment_actions-instance_method
+      def list_environment_actions: (
+                                      domain_identifier: ::String,
+                                      environment_identifier: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListEnvironmentActionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentActionsResponseSuccess
 
       interface _ListEnvironmentBlueprintConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentBlueprintConfigurationsOutput]
@@ -2087,7 +2178,9 @@ module Aws
         def project_id: () -> ::String
         def publish_on_import: () -> bool
         def recommendation: () -> Types::RecommendationConfiguration
+        def retain_permissions_on_revoke_failure: () -> bool
         def schedule: () -> Types::ScheduleConfiguration
+        def self_grant_status: () -> Types::SelfGrantStatusOutput
         def status: () -> ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
         def type: () -> ::String
         def updated_at: () -> ::Time
@@ -2155,6 +2248,7 @@ module Aws
                                 ?recommendation: {
                                   enable_business_name_generation: bool?
                                 },
+                                ?retain_permissions_on_revoke_failure: bool,
                                 ?schedule: {
                                   schedule: ::String?,
                                   timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")?
@@ -2218,6 +2312,30 @@ module Aws
                                 ?name: ::String
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateEnvironmentActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentActionOutput]
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def environment_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def parameters: () -> Types::ActionParameters
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_environment_action-instance_method
+      def update_environment_action: (
+                                       ?description: ::String,
+                                       domain_identifier: ::String,
+                                       environment_identifier: ::String,
+                                       identifier: ::String,
+                                       ?name: ::String,
+                                       ?parameters: {
+                                         aws_console_link: {
+                                           uri: ::String?
+                                         }?
+                                       }
+                                     ) -> _UpdateEnvironmentActionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentActionResponseSuccess
 
       interface _UpdateEnvironmentProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentProfileOutput]

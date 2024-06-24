@@ -237,6 +237,29 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The parameters of the environment action.
+    #
+    # @note ActionParameters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ActionParameters is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ActionParameters corresponding to the set member.
+    #
+    # @!attribute [rw] aws_console_link
+    #   The console link specified as part of the environment action.
+    #   @return [Types::AwsConsoleLinkParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ActionParameters AWS API Documentation
+    #
+    class ActionParameters < Struct.new(
+      :aws_console_link,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsConsoleLink < ActionParameters; end
+      class Unknown < ActionParameters; end
+    end
+
     # A Amazon DataZone inventory asset.
     #
     # @!attribute [rw] additional_attributes
@@ -644,6 +667,49 @@ module Aws::DataZone
       :updated_at,
       :updated_by)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment role
+    #   is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the Amazon DataZone environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_role_arn
+    #   The ARN of the environment role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateEnvironmentRoleInput AWS API Documentation
+    #
+    class AssociateEnvironmentRoleInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :environment_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateEnvironmentRoleOutput AWS API Documentation
+    #
+    class AssociateEnvironmentRoleOutput < Aws::EmptyStructure; end
+
+    # The parameters of the console link specified as part of the
+    # environment action.
+    #
+    # @!attribute [rw] uri
+    #   The URI of the console link specified as part of the environment
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AwsConsoleLinkParameters AWS API Documentation
+    #
+    class AwsConsoleLinkParameters < Struct.new(
+      :uri)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1597,12 +1663,96 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] description
+    #   The description of the environment action that is being created in
+    #   the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment action
+    #   is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment in which the environment action is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentActionInput AWS API Documentation
+    #
+    class CreateEnvironmentActionInput < Struct.new(
+      :description,
+      :domain_identifier,
+      :environment_identifier,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain in which the environment action is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The ID of the environment in which the environment is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentActionOutput AWS API Documentation
+    #
+    class CreateEnvironmentActionOutput < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
     #   The description of the Amazon DataZone environment.
     #   @return [String]
     #
     # @!attribute [rw] domain_identifier
     #   The identifier of the Amazon DataZone domain in which the
     #   environment is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_account_identifier
+    #   The ID of the account in which the environment is being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_account_region
+    #   The region of the account in which the environment is being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_blueprint_identifier
+    #   The ID of the blueprint with which the environment is being created.
     #   @return [String]
     #
     # @!attribute [rw] environment_profile_identifier
@@ -1633,6 +1783,9 @@ module Aws::DataZone
     class CreateEnvironmentInput < Struct.new(
       :description,
       :domain_identifier,
+      :environment_account_identifier,
+      :environment_account_region,
+      :environment_blueprint_identifier,
       :environment_profile_identifier,
       :glossary_terms,
       :name,
@@ -3265,12 +3418,18 @@ module Aws::DataZone
     #   The identifier of the data source that is deleted.
     #   @return [String]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataSourceInput AWS API Documentation
     #
     class DeleteDataSourceInput < Struct.new(
       :client_token,
       :domain_identifier,
-      :identifier)
+      :identifier,
+      :retain_permissions_on_revoke_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3341,9 +3500,18 @@ module Aws::DataZone
     #   inventory are to be also automatically published to the catalog.
     #   @return [Boolean]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule of runs for this data source.
     #   @return [Types::ScheduleConfiguration]
+    #
+    # @!attribute [rw] self_grant_status
+    #   Specifies the status of the self-granting functionality.
+    #   @return [Types::SelfGrantStatusOutput]
     #
     # @!attribute [rw] status
     #   The status of this data source.
@@ -3375,7 +3543,9 @@ module Aws::DataZone
       :name,
       :project_id,
       :publish_on_import,
+      :retain_permissions_on_revoke_failure,
       :schedule,
+      :self_grant_status,
       :status,
       :type,
       :updated_at)
@@ -3419,6 +3589,29 @@ module Aws::DataZone
     #
     class DeleteDomainOutput < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment action
+    #   is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment where an environment action is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the environment action that is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteEnvironmentActionInput AWS API Documentation
+    #
+    class DeleteEnvironmentActionInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3875,6 +4068,33 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment role is
+    #   disassociated.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_role_arn
+    #   The ARN of the environment role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateEnvironmentRoleInput AWS API Documentation
+    #
+    class DisassociateEnvironmentRoleInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :environment_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateEnvironmentRoleOutput AWS API Documentation
+    #
+    class DisassociateEnvironmentRoleOutput < Aws::EmptyStructure; end
+
     # A summary of a Amazon DataZone domain.
     #
     # @!attribute [rw] arn
@@ -3927,6 +4147,47 @@ module Aws::DataZone
       :portal_url,
       :status)
       SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The details about the specified action configured for an environment.
+    # For example, the details of the specified console links for an
+    # analytics tool that is available in this environment.
+    #
+    # @!attribute [rw] description
+    #   The environment action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The Amazon DataZone domain ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentActionSummary AWS API Documentation
+    #
+    class EnvironmentActionSummary < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4785,6 +5046,10 @@ module Aws::DataZone
     #   The schedule of the data source runs.
     #   @return [Types::ScheduleConfiguration]
     #
+    # @!attribute [rw] self_grant_status
+    #   Specifies the status of the self-granting functionality.
+    #   @return [Types::SelfGrantStatusOutput]
+    #
     # @!attribute [rw] status
     #   The status of the data source.
     #   @return [String]
@@ -4818,6 +5083,7 @@ module Aws::DataZone
       :publish_on_import,
       :recommendation,
       :schedule,
+      :self_grant_status,
       :status,
       :type,
       :updated_at)
@@ -4993,6 +5259,67 @@ module Aws::DataZone
       :single_sign_on,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the
+    #   `GetEnvironmentAction` API is invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the environment action
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentActionInput AWS API Documentation
+    #
+    class GetEnvironmentActionInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain in which the environment action
+    #   lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentActionOutput AWS API Documentation
+    #
+    class GetEnvironmentActionOutput < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6596,6 +6923,20 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of the self granting status.
+    #
+    # @!attribute [rw] self_grant_status_details
+    #   The details for the self granting status for a Glue data source.
+    #   @return [Array<Types::SelfGrantStatusDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlueSelfGrantStatusOutput AWS API Documentation
+    #
+    class GlueSelfGrantStatusOutput < Struct.new(
+      :self_grant_status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a listing for which a subscription is granted.
     #
     # @note GrantedEntity is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GrantedEntity corresponding to the set member.
@@ -7040,6 +7381,68 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDomainsOutput AWS API Documentation
     #
     class ListDomainsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment
+    #   actions are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the envrironment whose environment actions are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of environment actions to return in a single call
+    #   to `ListEnvironmentActions`. When the number of environment actions
+    #   to be listed is greater than the value of `MaxResults`, the response
+    #   contains a `NextToken` value that you can use in a subsequent call
+    #   to `ListEnvironmentActions` to list the next set of environment
+    #   actions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of environment actions is greater than the default
+    #   value for the `MaxResults` parameter, or if you explicitly specify a
+    #   value for `MaxResults` that is less than the number of environment
+    #   actions, the response includes a pagination token named `NextToken`.
+    #   You can specify this `NextToken` value in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment
+    #   actions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentActionsInput AWS API Documentation
+    #
+    class ListEnvironmentActionsInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of `ListEnvironmentActions`.
+    #   @return [Array<Types::EnvironmentActionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of environment actions is greater than the default
+    #   value for the `MaxResults` parameter, or if you explicitly specify a
+    #   value for `MaxResults` that is less than the number of environment
+    #   actions, the response includes a pagination token named `NextToken`.
+    #   You can specify this `NextToken` value in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment
+    #   actions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentActionsOutput AWS API Documentation
+    #
+    class ListEnvironmentActionsOutput < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -8779,6 +9182,22 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details for the self granting status for an Amazon Redshift data
+    # source.
+    #
+    # @!attribute [rw] self_grant_status_details
+    #   The details for the self granting status for an Amazon Redshift data
+    #   source.
+    #   @return [Array<Types::SelfGrantStatusDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RedshiftSelfGrantStatusOutput AWS API Documentation
+    #
+    class RedshiftSelfGrantStatusOutput < Struct.new(
+      :self_grant_status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of the Amazon Redshift Serverless workgroup storage.
     #
     # @!attribute [rw] workgroup_name
@@ -9752,6 +10171,63 @@ module Aws::DataZone
       :next_token)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The details for the self granting status.
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database used for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_cause
+    #   The reason for why the operation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema used in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The self granting status of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SelfGrantStatusDetail AWS API Documentation
+    #
+    class SelfGrantStatusDetail < Struct.new(
+      :database_name,
+      :failure_cause,
+      :schema_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for the self granting status for a data source.
+    #
+    # @note SelfGrantStatusOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SelfGrantStatusOutput corresponding to the set member.
+    #
+    # @!attribute [rw] glue_self_grant_status
+    #   The details for the self granting status for a Glue data source.
+    #   @return [Types::GlueSelfGrantStatusOutput]
+    #
+    # @!attribute [rw] redshift_self_grant_status
+    #   The details for the self granting status for an Amazon Redshift data
+    #   source.
+    #   @return [Types::RedshiftSelfGrantStatusOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SelfGrantStatusOutput AWS API Documentation
+    #
+    class SelfGrantStatusOutput < Struct.new(
+      :glue_self_grant_status,
+      :redshift_self_grant_status,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GlueSelfGrantStatus < SelfGrantStatusOutput; end
+      class RedshiftSelfGrantStatus < SelfGrantStatusOutput; end
+      class Unknown < SelfGrantStatusOutput; end
     end
 
     # The request has exceeded the specified service quota.
@@ -10819,6 +11295,11 @@ module Aws::DataZone
     #   action.
     #   @return [Types::RecommendationConfiguration]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule to be updated as part of the `UpdateDataSource` action.
     #   @return [Types::ScheduleConfiguration]
@@ -10835,6 +11316,7 @@ module Aws::DataZone
       :name,
       :publish_on_import,
       :recommendation,
+      :retain_permissions_on_revoke_failure,
       :schedule)
       SENSITIVE = [:asset_forms_input, :description, :name, :schedule]
       include Aws::Structure
@@ -10913,9 +11395,18 @@ module Aws::DataZone
     #   action.
     #   @return [Types::RecommendationConfiguration]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule to be updated as part of the `UpdateDataSource` action.
     #   @return [Types::ScheduleConfiguration]
+    #
+    # @!attribute [rw] self_grant_status
+    #   Specifies the status of the self-granting functionality.
+    #   @return [Types::SelfGrantStatusOutput]
     #
     # @!attribute [rw] status
     #   The status to be updated as part of the `UpdateDataSource` action.
@@ -10948,7 +11439,9 @@ module Aws::DataZone
       :project_id,
       :publish_on_import,
       :recommendation,
+      :retain_permissions_on_revoke_failure,
       :schedule,
+      :self_grant_status,
       :status,
       :type,
       :updated_at)
@@ -11033,6 +11526,80 @@ module Aws::DataZone
       :last_updated_at,
       :name,
       :single_sign_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentActionInput AWS API Documentation
+    #
+    class UpdateEnvironmentActionInput < Struct.new(
+      :description,
+      :domain_identifier,
+      :environment_identifier,
+      :identifier,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The domain ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentActionOutput AWS API Documentation
+    #
+    class UpdateEnvironmentActionOutput < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end

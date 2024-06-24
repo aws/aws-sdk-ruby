@@ -91,6 +91,11 @@ module Aws::BedrockRuntime
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -211,7 +216,6 @@ module Aws::BedrockRuntime
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -308,7 +312,6 @@ module Aws::BedrockRuntime
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -428,15 +431,19 @@ module Aws::BedrockRuntime
     # provides a consistent interface that works with all models that
     # support messages. This allows you to write code once and use it with
     # different models. Should a model have unique inference parameters, you
-    # can also pass those unique parameters to the model. For more
-    # information, see [Run inference][1] in the Bedrock User Guide.
+    # can also pass those unique parameters to the model.
+    #
+    # For information about the Converse API, see *Use the Converse API* in
+    # the *Amazon Bedrock User Guide*. To use a guardrail, see *Use a
+    # guardrail with the Converse API* in the *Amazon Bedrock User Guide*.
+    # To use a tool with a model, see *Tool use (Function calling)* in the
+    # *Amazon Bedrock User Guide*
+    #
+    # For example code, see *Converse API examples* in the *Amazon Bedrock
+    # User Guide*.
     #
     # This operation requires permission for the `bedrock:InvokeModel`
     # action.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
     # @option params [required, String] :model_id
     #   The identifier for the model that you want to call.
@@ -483,6 +490,10 @@ module Aws::BedrockRuntime
     #
     #    </note>
     #
+    # @option params [Types::GuardrailConfiguration] :guardrail_config
+    #   Configuration information for a guardrail that you want to use in the
+    #   request.
+    #
     # @option params [Hash,Array,String,Numeric,Boolean] :additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
     #   base set of inference parameters that `Converse` supports in the
@@ -501,8 +512,8 @@ module Aws::BedrockRuntime
     # @option params [Array<String>] :additional_model_response_field_paths
     #   Additional model parameters field paths to return in the response.
     #   `Converse` returns the requested fields as a JSON Pointer object in
-    #   the `additionalModelResultFields` field. The following is example JSON
-    #   for `additionalModelResponseFieldPaths`.
+    #   the `additionalModelResponseFields` field. The following is example
+    #   JSON for `additionalModelResponseFieldPaths`.
     #
     #   `[ "/stop_sequence" ]`
     #
@@ -525,6 +536,7 @@ module Aws::BedrockRuntime
     #   * {Types::ConverseResponse#usage #usage} => Types::TokenUsage
     #   * {Types::ConverseResponse#metrics #metrics} => Types::ConverseMetrics
     #   * {Types::ConverseResponse#additional_model_response_fields #additional_model_response_fields} => Hash,Array,String,Numeric,Boolean
+    #   * {Types::ConverseResponse#trace #trace} => Types::ConverseTrace
     #
     # @example Request syntax with placeholder values
     #
@@ -538,6 +550,13 @@ module Aws::BedrockRuntime
     #             text: "String",
     #             image: {
     #               format: "png", # required, accepts png, jpeg, gif, webp
+    #               source: { # required
+    #                 bytes: "data",
+    #               },
+    #             },
+    #             document: {
+    #               format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #               name: "DocumentBlockNameString", # required
     #               source: { # required
     #                 bytes: "data",
     #               },
@@ -561,9 +580,21 @@ module Aws::BedrockRuntime
     #                       bytes: "data",
     #                     },
     #                   },
+    #                   document: {
+    #                     format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #                     name: "DocumentBlockNameString", # required
+    #                     source: { # required
+    #                       bytes: "data",
+    #                     },
+    #                   },
     #                 },
     #               ],
     #               status: "success", # accepts success, error
+    #             },
+    #             guard_content: {
+    #               text: {
+    #                 text: "String", # required
+    #               },
     #             },
     #           },
     #         ],
@@ -572,6 +603,11 @@ module Aws::BedrockRuntime
     #     system: [
     #       {
     #         text: "NonEmptyString",
+    #         guard_content: {
+    #           text: {
+    #             text: "String", # required
+    #           },
+    #         },
     #       },
     #     ],
     #     inference_config: {
@@ -603,6 +639,11 @@ module Aws::BedrockRuntime
     #         },
     #       },
     #     },
+    #     guardrail_config: {
+    #       guardrail_identifier: "GuardrailIdentifier", # required
+    #       guardrail_version: "GuardrailVersion", # required
+    #       trace: "enabled", # accepts enabled, disabled
+    #     },
     #     additional_model_request_fields: {
     #     },
     #     additional_model_response_field_paths: ["ConverseRequestAdditionalModelResponseFieldPathsListMemberString"],
@@ -615,6 +656,9 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].text #=> String
     #   resp.output.message.content[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.output.message.content[0].image.source.bytes #=> String
+    #   resp.output.message.content[0].document.format #=> String, one of "pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"
+    #   resp.output.message.content[0].document.name #=> String
+    #   resp.output.message.content[0].document.source.bytes #=> String
     #   resp.output.message.content[0].tool_use.tool_use_id #=> String
     #   resp.output.message.content[0].tool_use.name #=> String
     #   resp.output.message.content[0].tool_result.tool_use_id #=> String
@@ -622,12 +666,69 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].tool_result.content[0].text #=> String
     #   resp.output.message.content[0].tool_result.content[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.output.message.content[0].tool_result.content[0].image.source.bytes #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.format #=> String, one of "pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"
+    #   resp.output.message.content[0].tool_result.content[0].document.name #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.status #=> String, one of "success", "error"
-    #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "content_filtered"
+    #   resp.output.message.content[0].guard_content.text.text #=> String
+    #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered"
     #   resp.usage.input_tokens #=> Integer
     #   resp.usage.output_tokens #=> Integer
     #   resp.usage.total_tokens #=> Integer
     #   resp.metrics.latency_ms #=> Integer
+    #   resp.trace.guardrail.model_output #=> Array
+    #   resp.trace.guardrail.model_output[0] #=> String
+    #   resp.trace.guardrail.input_assessment #=> Hash
+    #   resp.trace.guardrail.input_assessment["String"].topic_policy.topics #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].topic_policy.topics[0].name #=> String
+    #   resp.trace.guardrail.input_assessment["String"].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   resp.trace.guardrail.input_assessment["String"].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.input_assessment["String"].content_policy.filters #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   resp.trace.guardrail.input_assessment["String"].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.trace.guardrail.input_assessment["String"].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.input_assessment["String"].word_policy.custom_words #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].word_policy.custom_words[0].match #=> String
+    #   resp.trace.guardrail.input_assessment["String"].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists[0].match #=> String
+    #   resp.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   resp.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities[0].match #=> String
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].name #=> String
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].match #=> String
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].regex #=> String
+    #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   resp.trace.guardrail.output_assessments #=> Hash
+    #   resp.trace.guardrail.output_assessments["String"] #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics[0].name #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.output_assessments["String"][0].word_policy.custom_words #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].word_policy.custom_words[0].match #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists[0].match #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   resp.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].name #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].match #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].regex #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/Converse AWS API Documentation
     #
@@ -643,23 +744,27 @@ module Aws::BedrockRuntime
     # works with all Amazon Bedrock models that support messages. This
     # allows you to write code once and use it with different models. Should
     # a model have unique inference parameters, you can also pass those
-    # unique parameters to the model. For more information, see [Run
-    # inference][1] in the Bedrock User Guide.
+    # unique parameters to the model.
     #
     # To find out if a model supports streaming, call
-    # [GetFoundationModel][2] and check the `responseStreamingSupported`
+    # [GetFoundationModel][1] and check the `responseStreamingSupported`
     # field in the response.
     #
-    # For example code, see *Invoke model with streaming code example* in
-    # the *Amazon Bedrock User Guide*.
+    # For information about the Converse API, see *Use the Converse API* in
+    # the *Amazon Bedrock User Guide*. To use a guardrail, see *Use a
+    # guardrail with the Converse API* in the *Amazon Bedrock User Guide*.
+    # To use a tool with a model, see *Tool use (Function calling)* in the
+    # *Amazon Bedrock User Guide*
+    #
+    # For example code, see *Conversation streaming example* in the *Amazon
+    # Bedrock User Guide*.
     #
     # This operation requires permission for the
     # `bedrock:InvokeModelWithResponseStream` action.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html
     #
     # @option params [required, String] :model_id
     #   The ID for the model.
@@ -705,6 +810,10 @@ module Aws::BedrockRuntime
     #
     #    </note>
     #
+    # @option params [Types::GuardrailStreamConfiguration] :guardrail_config
+    #   Configuration information for a guardrail that you want to use in the
+    #   request.
+    #
     # @option params [Hash,Array,String,Numeric,Boolean] :additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
     #   base set of inference parameters that `ConverseStream` supports in the
@@ -718,7 +827,7 @@ module Aws::BedrockRuntime
     # @option params [Array<String>] :additional_model_response_field_paths
     #   Additional model parameters field paths to return in the response.
     #   `ConverseStream` returns the requested fields as a JSON Pointer object
-    #   in the `additionalModelResultFields` field. The following is example
+    #   in the `additionalModelResponseFields` field. The following is example
     #   JSON for `additionalModelResponseFieldPaths`.
     #
     #   `[ "/stop_sequence" ]`
@@ -919,6 +1028,13 @@ module Aws::BedrockRuntime
     #                 bytes: "data",
     #               },
     #             },
+    #             document: {
+    #               format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #               name: "DocumentBlockNameString", # required
+    #               source: { # required
+    #                 bytes: "data",
+    #               },
+    #             },
     #             tool_use: {
     #               tool_use_id: "ToolUseId", # required
     #               name: "ToolName", # required
@@ -938,9 +1054,21 @@ module Aws::BedrockRuntime
     #                       bytes: "data",
     #                     },
     #                   },
+    #                   document: {
+    #                     format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #                     name: "DocumentBlockNameString", # required
+    #                     source: { # required
+    #                       bytes: "data",
+    #                     },
+    #                   },
     #                 },
     #               ],
     #               status: "success", # accepts success, error
+    #             },
+    #             guard_content: {
+    #               text: {
+    #                 text: "String", # required
+    #               },
     #             },
     #           },
     #         ],
@@ -949,6 +1077,11 @@ module Aws::BedrockRuntime
     #     system: [
     #       {
     #         text: "NonEmptyString",
+    #         guard_content: {
+    #           text: {
+    #             text: "String", # required
+    #           },
+    #         },
     #       },
     #     ],
     #     inference_config: {
@@ -980,6 +1113,12 @@ module Aws::BedrockRuntime
     #         },
     #       },
     #     },
+    #     guardrail_config: {
+    #       guardrail_identifier: "GuardrailIdentifier", # required
+    #       guardrail_version: "GuardrailVersion", # required
+    #       trace: "enabled", # accepts enabled, disabled
+    #       stream_processing_mode: "sync", # accepts sync, async
+    #     },
     #     additional_model_request_fields: {
     #     },
     #     additional_model_response_field_paths: ["ConverseStreamRequestAdditionalModelResponseFieldPathsListMemberString"],
@@ -1008,13 +1147,66 @@ module Aws::BedrockRuntime
     #   event.content_block_index #=> Integer
     #
     #   For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
-    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "content_filtered"
+    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered"
     #
     #   For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
     #   event.usage.input_tokens #=> Integer
     #   event.usage.output_tokens #=> Integer
     #   event.usage.total_tokens #=> Integer
     #   event.metrics.latency_ms #=> Integer
+    #   event.trace.guardrail.model_output #=> Array
+    #   event.trace.guardrail.model_output[0] #=> String
+    #   event.trace.guardrail.input_assessment #=> Hash
+    #   event.trace.guardrail.input_assessment["String"].topic_policy.topics #=> Array
+    #   event.trace.guardrail.input_assessment["String"].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail.input_assessment["String"].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail.input_assessment["String"].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.input_assessment["String"].content_policy.filters #=> Array
+    #   event.trace.guardrail.input_assessment["String"].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail.input_assessment["String"].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail.input_assessment["String"].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.input_assessment["String"].word_policy.custom_words #=> Array
+    #   event.trace.guardrail.input_assessment["String"].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail.input_assessment["String"].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail.input_assessment["String"].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.pii_entities[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   event.trace.guardrail.output_assessments #=> Hash
+    #   event.trace.guardrail.output_assessments["String"] #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics[0].name #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   event.trace.guardrail.output_assessments["String"][0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.output_assessments["String"][0].word_policy.custom_words #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].word_policy.custom_words[0].match #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists[0].match #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail.output_assessments["String"][0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.pii_entities[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].name #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].match #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].regex #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
     #
     #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -1069,10 +1261,10 @@ module Aws::BedrockRuntime
     #
     # @option params [required, String, StringIO, File] :body
     #   The prompt and inference parameters in the format specified in the
-    #   `contentType` in the header. To see the format and content of the
-    #   request and response bodies for different models, refer to [Inference
-    #   parameters][1]. For more information, see [Run inference][2] in the
-    #   Bedrock User Guide.
+    #   `contentType` in the header. You must provide the body in JSON format.
+    #   To see the format and content of the request and response bodies for
+    #   different models, refer to [Inference parameters][1]. For more
+    #   information, see [Run inference][2] in the Bedrock User Guide.
     #
     #
     #
@@ -1080,7 +1272,7 @@ module Aws::BedrockRuntime
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
     # @option params [String] :content_type
-    #   The MIME type of the input data in the request. The default value is
+    #   The MIME type of the input data in the request. You must specify
     #   `application/json`.
     #
     # @option params [String] :accept
@@ -1187,10 +1379,10 @@ module Aws::BedrockRuntime
     #
     # @option params [required, String, StringIO, File] :body
     #   The prompt and inference parameters in the format specified in the
-    #   `contentType` in the header. To see the format and content of the
-    #   request and response bodies for different models, refer to [Inference
-    #   parameters][1]. For more information, see [Run inference][2] in the
-    #   Bedrock User Guide.
+    #   `contentType` in the header. You must provide the body in JSON format.
+    #   To see the format and content of the request and response bodies for
+    #   different models, refer to [Inference parameters][1]. For more
+    #   information, see [Run inference][2] in the Bedrock User Guide.
     #
     #
     #
@@ -1198,7 +1390,7 @@ module Aws::BedrockRuntime
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
     # @option params [String] :content_type
-    #   The MIME type of the input data in the request. The default value is
+    #   The MIME type of the input data in the request. You must specify
     #   `application/json`.
     #
     # @option params [String] :accept
@@ -1464,7 +1656,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

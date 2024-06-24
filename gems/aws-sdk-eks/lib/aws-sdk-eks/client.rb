@@ -89,6 +89,11 @@ module Aws::EKS
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -209,7 +214,6 @@ module Aws::EKS
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -297,7 +301,6 @@ module Aws::EKS
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -1435,6 +1438,11 @@ module Aws::EKS
     #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
+    #   resp.fargate_profile.health.issues #=> Array
+    #   resp.fargate_profile.health.issues[0].code #=> String, one of "PodExecutionRoleAlreadyInUse", "AccessDenied", "ClusterUnreachable", "InternalFailure"
+    #   resp.fargate_profile.health.issues[0].message #=> String
+    #   resp.fargate_profile.health.issues[0].resource_ids #=> Array
+    #   resp.fargate_profile.health.issues[0].resource_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateFargateProfile AWS API Documentation
     #
@@ -2162,6 +2170,11 @@ module Aws::EKS
     #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
+    #   resp.fargate_profile.health.issues #=> Array
+    #   resp.fargate_profile.health.issues[0].code #=> String, one of "PodExecutionRoleAlreadyInUse", "AccessDenied", "ClusterUnreachable", "InternalFailure"
+    #   resp.fargate_profile.health.issues[0].message #=> String
+    #   resp.fargate_profile.health.issues[0].resource_ids #=> Array
+    #   resp.fargate_profile.health.issues[0].resource_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteFargateProfile AWS API Documentation
     #
@@ -2843,6 +2856,11 @@ module Aws::EKS
     #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
+    #   resp.fargate_profile.health.issues #=> Array
+    #   resp.fargate_profile.health.issues[0].code #=> String, one of "PodExecutionRoleAlreadyInUse", "AccessDenied", "ClusterUnreachable", "InternalFailure"
+    #   resp.fargate_profile.health.issues[0].message #=> String
+    #   resp.fargate_profile.health.issues[0].resource_ids #=> Array
+    #   resp.fargate_profile.health.issues[0].resource_ids[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5043,7 +5061,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

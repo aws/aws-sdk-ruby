@@ -89,6 +89,11 @@ module Aws::Artifact
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -209,7 +214,6 @@ module Aws::Artifact
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -297,7 +301,6 @@ module Aws::Artifact
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -419,6 +422,21 @@ module Aws::Artifact
     #
     #   * {Types::GetAccountSettingsResponse#account_settings #account_settings} => Types::AccountSettings
     #
+    #
+    # @example Example: Invoke GetAccountSettings operation
+    #
+    #   # Get the current account settings.
+    #
+    #   resp = client.get_account_settings({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_settings: {
+    #       notification_subscription_status: "SUBSCRIBED", 
+    #     }, 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.account_settings.notification_subscription_status #=> String, one of "SUBSCRIBED", "NOT_SUBSCRIBED"
@@ -446,6 +464,24 @@ module Aws::Artifact
     # @return [Types::GetReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetReportResponse#document_presigned_url #document_presigned_url} => String
+    #
+    #
+    # @example Example: Invoke GetReport operation on the latest version of a specific report
+    #
+    #   # The GetReport operation is invoked on a reportId and on a optional version.
+    #   # Callers must provide a termToken, which is provided by the GetTermForReport
+    #   # operation. If callers do not provide a version, it will default to the
+    #   # report's latest version
+    #
+    #   resp = client.get_report({
+    #     report_id: "report-1hVFddebtfDNJAUf", 
+    #     term_token: "term-token-gPFEGk7CF4wS901w7ppYclt7", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     document_presigned_url: "<Presigned S3 URL>", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -480,6 +516,36 @@ module Aws::Artifact
     #
     #   * {Types::GetReportMetadataResponse#report_details #report_details} => Types::ReportDetail
     #
+    #
+    # @example Example: Invoke GetReportMetadata operation on the latest version of a specific report
+    #
+    #   # The GetReportMetadata operation is invoked on a reportId and on a optional version.
+    #   # If callers do not provide a version, it will default to the report's latest version.
+    #
+    #   resp = client.get_report_metadata({
+    #     report_id: "report-bqhUJF3FrQZsMJpb", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     report_details: {
+    #       version: 1, 
+    #       name: "Name of report", 
+    #       arn: "arn:aws:artifact:us-east-1::report/report-bqhUJF3FrQZsMJpb:1", 
+    #       category: "Artifact Category", 
+    #       company_name: "AWS", 
+    #       created_at: Time.parse("2022-05-27T23:17:00.343940Z"), 
+    #       description: "Description of report", 
+    #       id: "report-bqhUJF3FrQZsMJpb", 
+    #       period_end: Time.parse("2022-04-01T20:32:04Z"), 
+    #       period_start: Time.parse("2022-04-01T20:32:04Z"), 
+    #       product_name: "Product of report", 
+    #       series: "Artifact Series", 
+    #       state: "PUBLISHED", 
+    #       term_arn: "arn:aws:artifact:us-east-1::term/term-gLJGG12NyPtYcmtu:1", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_report_metadata({
@@ -489,26 +555,26 @@ module Aws::Artifact
     #
     # @example Response structure
     #
-    #   resp.report_details.acceptance_type #=> String, one of "PASSTHROUGH", "EXPLICIT"
+    #   resp.report_details.id #=> String
+    #   resp.report_details.name #=> String
+    #   resp.report_details.description #=> String
+    #   resp.report_details.period_start #=> Time
+    #   resp.report_details.period_end #=> Time
+    #   resp.report_details.created_at #=> Time
+    #   resp.report_details.last_modified_at #=> Time
+    #   resp.report_details.deleted_at #=> Time
+    #   resp.report_details.state #=> String, one of "PUBLISHED", "UNPUBLISHED"
     #   resp.report_details.arn #=> String
+    #   resp.report_details.series #=> String
     #   resp.report_details.category #=> String
     #   resp.report_details.company_name #=> String
-    #   resp.report_details.created_at #=> Time
-    #   resp.report_details.deleted_at #=> Time
-    #   resp.report_details.description #=> String
-    #   resp.report_details.id #=> String
-    #   resp.report_details.last_modified_at #=> Time
-    #   resp.report_details.name #=> String
-    #   resp.report_details.period_end #=> Time
-    #   resp.report_details.period_start #=> Time
     #   resp.report_details.product_name #=> String
-    #   resp.report_details.sequence_number #=> Integer
-    #   resp.report_details.series #=> String
-    #   resp.report_details.state #=> String, one of "PUBLISHED", "UNPUBLISHED"
-    #   resp.report_details.status_message #=> String
     #   resp.report_details.term_arn #=> String
-    #   resp.report_details.upload_state #=> String, one of "PROCESSING", "COMPLETE", "FAILED", "FAULT"
     #   resp.report_details.version #=> Integer
+    #   resp.report_details.acceptance_type #=> String, one of "PASSTHROUGH", "EXPLICIT"
+    #   resp.report_details.sequence_number #=> Integer
+    #   resp.report_details.upload_state #=> String, one of "PROCESSING", "COMPLETE", "FAILED", "FAULT"
+    #   resp.report_details.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/GetReportMetadata AWS API Documentation
     #
@@ -531,6 +597,22 @@ module Aws::Artifact
     #
     #   * {Types::GetTermForReportResponse#document_presigned_url #document_presigned_url} => String
     #   * {Types::GetTermForReportResponse#term_token #term_token} => String
+    #
+    #
+    # @example Example: Invoke GetTermForReport operation on the latest version of a specific report
+    #
+    #   # The GetTermForReport operation is invoked on a reportId and on a optional version.
+    #   # If callers do not provide a version, it will default to the report's latest version.
+    #
+    #   resp = client.get_term_for_report({
+    #     report_id: "report-bqhUJF3FrQZsMJpb", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     document_presigned_url: "<Presigned S3 URL>", 
+    #     term_token: "term-token-gPFEGk7CF4wS901w7ppYclt7", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -563,10 +645,39 @@ module Aws::Artifact
     #
     # @return [Types::ListReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListReportsResponse#next_token #next_token} => String
     #   * {Types::ListReportsResponse#reports #reports} => Array&lt;Types::ReportSummary&gt;
+    #   * {Types::ListReportsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Invoke ListReports operation
+    #
+    #   # The ListReports operation returns a collection of report resources.
+    #
+    #   resp = client.list_reports({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7", 
+    #     reports: [
+    #       {
+    #         version: 1, 
+    #         name: "Name of report", 
+    #         arn: "arn:aws:artifact:us-east-1::report/report-bqhUJF3FrQZsMJpb", 
+    #         category: "Artifact Category", 
+    #         company_name: "AWS", 
+    #         description: "Description of report", 
+    #         id: "report-bqhUJF3FrQZsMJpb", 
+    #         period_end: Time.parse("2022-04-01T20:32:04Z"), 
+    #         period_start: Time.parse("2022-04-01T20:32:04Z"), 
+    #         product_name: "Product of report", 
+    #         series: "Artifact Series", 
+    #         state: "PUBLISHED", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -577,22 +688,23 @@ module Aws::Artifact
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.reports #=> Array
-    #   resp.reports[0].arn #=> String
-    #   resp.reports[0].category #=> String
-    #   resp.reports[0].company_name #=> String
-    #   resp.reports[0].description #=> String
     #   resp.reports[0].id #=> String
     #   resp.reports[0].name #=> String
-    #   resp.reports[0].period_end #=> Time
-    #   resp.reports[0].period_start #=> Time
-    #   resp.reports[0].product_name #=> String
-    #   resp.reports[0].series #=> String
     #   resp.reports[0].state #=> String, one of "PUBLISHED", "UNPUBLISHED"
-    #   resp.reports[0].status_message #=> String
-    #   resp.reports[0].upload_state #=> String, one of "PROCESSING", "COMPLETE", "FAILED", "FAULT"
+    #   resp.reports[0].arn #=> String
     #   resp.reports[0].version #=> Integer
+    #   resp.reports[0].upload_state #=> String, one of "PROCESSING", "COMPLETE", "FAILED", "FAULT"
+    #   resp.reports[0].description #=> String
+    #   resp.reports[0].period_start #=> Time
+    #   resp.reports[0].period_end #=> Time
+    #   resp.reports[0].series #=> String
+    #   resp.reports[0].category #=> String
+    #   resp.reports[0].company_name #=> String
+    #   resp.reports[0].product_name #=> String
+    #   resp.reports[0].status_message #=> String
+    #   resp.reports[0].acceptance_type #=> String, one of "PASSTHROUGH", "EXPLICIT"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListReports AWS API Documentation
     #
@@ -611,6 +723,22 @@ module Aws::Artifact
     # @return [Types::PutAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAccountSettingsResponse#account_settings #account_settings} => Types::AccountSettings
+    #
+    #
+    # @example Example: Invoke PutAccountSettings operation
+    #
+    #   # Set the account settings.
+    #
+    #   resp = client.put_account_settings({
+    #     notification_subscription_status: "SUBSCRIBED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     account_settings: {
+    #       notification_subscription_status: "SUBSCRIBED", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -644,7 +772,7 @@ module Aws::Artifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-artifact'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

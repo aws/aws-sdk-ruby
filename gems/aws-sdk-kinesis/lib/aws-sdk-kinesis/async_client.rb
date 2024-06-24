@@ -158,7 +158,6 @@ module Aws::Kinesis
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
@@ -240,7 +239,6 @@ module Aws::Kinesis
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -660,7 +658,7 @@ module Aws::Kinesis
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

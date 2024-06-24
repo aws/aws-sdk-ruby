@@ -28,7 +28,11 @@ module Aws
 
         val = if (index = parts.first[BRACKET_REGEX, 1])
                 # remove brackets and index from part before indexing
-                value[parts.first.gsub(BRACKET_REGEX, '')][index.to_i]
+                if (base = parts.first.gsub(BRACKET_REGEX, '')) && !base.empty?
+                  value[base][index.to_i]
+                else
+                  value[index.to_i]
+                end
               else
                 value[parts.first]
               end

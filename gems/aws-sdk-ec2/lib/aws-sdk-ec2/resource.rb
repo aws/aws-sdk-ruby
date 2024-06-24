@@ -291,8 +291,8 @@ module Aws::EC2
     #   The ID of the AMI. An AMI ID is required to launch an instance and
     #   must be specified here or in a launch template.
     # @option options [String] :instance_type
-    #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   The instance type. For more information, see [Amazon EC2 instance
+    #   types][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -337,32 +337,30 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     # @option options [required, Integer] :max_count
-    #   The maximum number of instances to launch. If you specify more
-    #   instances than Amazon EC2 can launch in the target Availability Zone,
-    #   Amazon EC2 launches the largest possible number of instances above
-    #   `MinCount`.
+    #   The maximum number of instances to launch. If you specify a value that
+    #   is more capacity than Amazon EC2 can launch in the target Availability
+    #   Zone, Amazon EC2 launches the largest possible number of instances
+    #   above the specified minimum count.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for the
-    #   specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can I
-    #   run in Amazon EC2][1] in the Amazon EC2 FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     # @option options [required, Integer] :min_count
-    #   The minimum number of instances to launch. If you specify a minimum
-    #   that is more instances than Amazon EC2 can launch in the target
-    #   Availability Zone, Amazon EC2 launches no instances.
+    #   The minimum number of instances to launch. If you specify a value that
+    #   is more capacity than Amazon EC2 can provide in the target
+    #   Availability Zone, Amazon EC2 does not launch any instances.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for the
-    #   specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can I
-    #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
     #   Specifies whether detailed monitoring is enabled for the instance.
     # @option options [Types::Placement] :placement
@@ -406,16 +404,15 @@ module Aws::EC2
     #   part of the network interface instead of using this parameter.
     # @option options [String] :user_data
     #   The user data script to make available to the instance. For more
-    #   information, see [Run commands on your Linux instance at launch][1]
-    #   and [Run commands on your Windows instance at launch][2]. If you are
-    #   using a command line tool, base64-encoding is performed for you, and
-    #   you can load the text from a file. Otherwise, you must provide
-    #   base64-encoded text. User data is limited to 16 KB.
+    #   information, see [Run commands on your Amazon EC2 instance at
+    #   launch][1] in the *Amazon EC2 User Guide*. If you are using a command
+    #   line tool, base64-encoding is performed for you, and you can load the
+    #   text from a file. Otherwise, you must provide base64-encoded text.
+    #   User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     # @option options [String] :additional_info
     #   Reserved.
     # @option options [String] :client_token
@@ -558,8 +555,8 @@ module Aws::EC2
     # @option options [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. This
     #   parameter is valid only if the instance meets the [hibernation
-    #   prerequisites][1]. For more information, see [Hibernate your
-    #   instance][2] in the *Amazon EC2 User Guide*.
+    #   prerequisites][1]. For more information, see [Hibernate your Amazon
+    #   EC2 instance][2] in the *Amazon EC2 User Guide*.
     #
     #   You can't enable hibernation and Amazon Web Services Nitro Enclaves
     #   on the same instance.
@@ -762,7 +759,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -850,7 +847,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
@@ -1003,11 +1000,11 @@ module Aws::EC2
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @option options [Boolean] :enable_primary_ipv_6
     #   If you’re creating a network interface in a dual-stack or IPv6-only
     #   subnet, you have the option to assign a primary IPv6 IP address. A
@@ -1128,7 +1125,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
@@ -1298,14 +1295,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the Regions
-    #   that support Local Zones, see [Local Zones locations][1].
+    #   that support Local Zones, see [Available Local Zones][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [String] :cidr_block
@@ -1500,12 +1497,11 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     # @option options [String] :kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use for
-    #   Amazon EBS encryption. If this parameter is not specified, your KMS
-    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
-    #   state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is used.
+    #   If `KmsKeyId` is specified, the encrypted state must be `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -1584,7 +1580,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     # @option options [Integer] :throughput
     #   The throughput to provision for a volume, with a maximum of 1,000
@@ -1600,7 +1596,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @return [Volume]
     def create_volume(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
@@ -2163,9 +2159,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :dhcp_options_ids
-    #   The IDs of one or more DHCP options sets.
-    #
-    #   Default: Describes all your DHCP options sets.
+    #   The IDs of DHCP option sets.
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
@@ -2778,6 +2772,10 @@ module Aws::EC2
     #     (`ip-name` \| `resource-name`).
     #
     #   * `private-ip-address` - The private IPv4 address of the instance.
+    #     This can only be used to filter by the primary IP address of the
+    #     network interface attached to the instance. To filter by additional
+    #     IP addresses assigned to the network interface, use the filter
+    #     `network-interface.addresses.private-ip-address`.
     #
     #   * `product-code` - The product code associated with the AMI used to
     #     launch the instance.
@@ -3196,8 +3194,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :network_acl_ids
     #   The IDs of the network ACLs.
-    #
-    #   Default: Describes all your network ACLs.
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
@@ -3576,8 +3572,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :route_table_ids
     #   The IDs of the route tables.
-    #
-    #   Default: Describes all your route tables.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
@@ -4336,8 +4330,6 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC.
     # @option options [Array<String>] :vpc_ids
     #   The IDs of the VPCs.
-    #
-    #   Default: Describes all your VPCs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

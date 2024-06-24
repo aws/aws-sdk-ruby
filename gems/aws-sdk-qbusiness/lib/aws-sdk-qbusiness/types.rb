@@ -535,8 +535,7 @@ module Aws::QBusiness
     # @!attribute [rw] contains_any
     #   Returns `true` when a document contains any of the specified
     #   document attributes or metadata fields. Supported for the following
-    #   [document attribute value types][1]: `dateValue`, `longValue`,
-    #   `stringListValue` and `stringValue`.
+    #   [document attribute value types][1]: `stringListValue`.
     #
     #
     #
@@ -959,8 +958,7 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] parent_message_id
-    #   The identifier of the previous end user text input message in a
-    #   conversation.
+    #   The identifier of the previous system message in a conversation.
     #   @return [String]
     #
     # @!attribute [rw] attribute_filter
@@ -1260,6 +1258,11 @@ module Aws::QBusiness
     #   An option to allow end users to upload files directly during chat.
     #   @return [Types::AttachmentsConfiguration]
     #
+    # @!attribute [rw] q_apps_configuration
+    #   An option to allow end users to create and use Amazon Q Apps in the
+    #   web experience.
+    #   @return [Types::QAppsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -1270,7 +1273,8 @@ module Aws::QBusiness
       :encryption_configuration,
       :tags,
       :client_token,
-      :attachments_configuration)
+      :attachments_configuration,
+      :q_apps_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1420,12 +1424,12 @@ module Aws::QBusiness
     #
     # @!attribute [rw] type
     #   The index type that's suitable for your needs. For more information
-    #   on what's included in each type of index or index tier, see [Amazon
-    #   Q Business tiers][1].
+    #   on what's included in each type of index, see [Amazon Q Business
+    #   tiers][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2889,6 +2893,11 @@ module Aws::QBusiness
     #   chat.
     #   @return [Types::AppliedAttachmentsConfiguration]
     #
+    # @!attribute [rw] q_apps_configuration
+    #   Settings for whether end users can create and use Amazon Q Apps in
+    #   the web experience.
+    #   @return [Types::QAppsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -2903,7 +2912,8 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       :error,
-      :attachments_configuration)
+      :attachments_configuration,
+      :q_apps_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4988,6 +4998,21 @@ module Aws::QBusiness
     #
     class PutGroupResponse < Aws::EmptyStructure; end
 
+    # Configuration information about Amazon Q Apps. (preview feature)
+    #
+    # @!attribute [rw] q_apps_control_mode
+    #   Status information about whether end users can create and use Amazon
+    #   Q Apps in the web experience.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/QAppsConfiguration AWS API Documentation
+    #
+    class QAppsConfiguration < Struct.new(
+      :q_apps_control_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource you want to use doesn’t exist. Make sure you have
     # provided the correct resource and try again.
     #
@@ -5659,6 +5684,11 @@ module Aws::QBusiness
     #   An option to allow end users to upload files directly during chat.
     #   @return [Types::AttachmentsConfiguration]
     #
+    # @!attribute [rw] q_apps_configuration
+    #   An option to allow end users to create and use Amazon Q Apps in the
+    #   web experience.
+    #   @return [Types::QAppsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -5667,7 +5697,8 @@ module Aws::QBusiness
       :display_name,
       :description,
       :role_arn,
-      :attachments_configuration)
+      :attachments_configuration,
+      :q_apps_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

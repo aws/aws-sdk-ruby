@@ -89,6 +89,11 @@ module Aws::KMS
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -209,7 +214,6 @@ module Aws::KMS
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -297,7 +301,6 @@ module Aws::KMS
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -3153,13 +3156,14 @@ module Aws::KMS
     #   resp = client.derive_shared_secret({
     #     key_agreement_algorithm: "ECDH", # The key agreement algorithm used to derive the shared secret. The only valid value is ECDH.
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The key identifier for an asymmetric KMS key pair. The private key in the specified key pair is used to derive the shared secret.
-    #     public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvH3Yj0wbkLEpUl95Cv1cJVjsVNSjwGq3tCLnzXfhVwVvmzGN8pYj3U8nKwgouaHbBWNJYjP5VutbbkKS4Kv4GojwZBJyHN17kmxo8yTjRmjR15SKIQ8cqRA2uaERMLnpztIXdZp232PQPbWGxDyXYJ0aJ5EFSag+iSK341kr2kFTpINN7T1ZaX9vfXBdGR+VtkRKMWoHQeWzHrPZ+3irvpXNCKxGUxmPNsJSjPUhuSXT5+0VrY/LEYLQ5lUTrhU6z5/OK0kzaCc66DXc5ipSloS4Xyg+QcYSMxe9xuqO5HtzFImUSKBm1W6eDT6lHnSbpi7vXzNbIX7pWxKw9nmQvQIDAQAB", # The public key in your peer's asymmetric key pair.
+    #     public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvH3Yj0wbkLEpUl95Cv1cJVjsVNSjwGq3tCLnzXfhVwVvmzGN8pYj3U8nKwgouaHbBWNJYjP5VutbbkKS4Kv4GojwZBJyHN17kmxo8yTjRmjR15SKIQ8cqRA2uaERMLnpztIXdZp232PQPbWGxDyXYJ0aJ5EFSag", # The public key in your peer's asymmetric key pair.
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     key_agreement_algorithm: "ECDH", # The key agreement algorithm used to derive the shared secret.
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The asymmetric KMS key pair used to derive the shared secret.
+    #     key_origin: "AWS_KMS", # The source of the key material for the specified KMS key.
     #     shared_secret: "MEYCIQCKZLWyTk5runarx6XiAkU9gv3lbwPO/pHa+DXFehzdDwIhANwpsIV2g/9SPWLLsF6p/hiSskuIXMTRwqrMdVKWTMHG", # The raw secret derived from the specified key agreement algorithm, private key in the asymmetric KMS key, and your peer's public key.
     #   }
     #
@@ -10745,7 +10749,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

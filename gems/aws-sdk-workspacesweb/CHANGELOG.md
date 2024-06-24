@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-06-24)
+------------------
+
+* Feature - Added ability to enable DeepLinking functionality on a Portal via UserSettings as well as added support for IdentityProvider resource tagging.
+
 1.22.0 (2024-06-05)
 ------------------
 

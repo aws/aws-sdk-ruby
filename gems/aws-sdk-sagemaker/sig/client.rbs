@@ -234,6 +234,9 @@ module Aws
                                         compression_type: ("None" | "Gzip"),
                                         model_access_config: {
                                           accept_eula: bool
+                                        }?,
+                                        hub_access_config: {
+                                          hub_content_arn: ::String
                                         }?
                                       }?
                                     }?,
@@ -695,7 +698,14 @@ module Aws
                                   on_create: ::String
                                 },
                                 execution_role: ::String,
-                                threads_per_core: ::Integer?
+                                threads_per_core: ::Integer?,
+                                instance_storage_configs: Array[
+                                  {
+                                    ebs_volume_config: {
+                                      volume_size_in_gb: ::Integer
+                                    }?
+                                  },
+                                ]?
                               },
                             ],
                             ?vpc_config: {
@@ -1634,6 +1644,26 @@ module Aws
                       ) -> _CreateHubResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHubResponseSuccess
 
+      interface _CreateHubContentReferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHubContentReferenceResponse]
+        def hub_arn: () -> ::String
+        def hub_content_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_hub_content_reference-instance_method
+      def create_hub_content_reference: (
+                                          hub_name: ::String,
+                                          sage_maker_public_hub_content_arn: ::String,
+                                          ?hub_content_name: ::String,
+                                          ?min_version: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ]
+                                        ) -> _CreateHubContentReferenceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHubContentReferenceResponseSuccess
+
       interface _CreateHumanTaskUiResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateHumanTaskUiResponse]
         def human_task_ui_arn: () -> ::String
@@ -2314,6 +2344,28 @@ module Aws
                                ) -> _CreateLabelingJobResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLabelingJobResponseSuccess
 
+      interface _CreateMlflowTrackingServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMlflowTrackingServerResponse]
+        def tracking_server_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_mlflow_tracking_server-instance_method
+      def create_mlflow_tracking_server: (
+                                           tracking_server_name: ::String,
+                                           artifact_store_uri: ::String,
+                                           ?tracking_server_size: ("Small" | "Medium" | "Large"),
+                                           ?mlflow_version: ::String,
+                                           role_arn: ::String,
+                                           ?automatic_model_registration: bool,
+                                           ?weekly_maintenance_window_start: ::String,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]
+                                         ) -> _CreateMlflowTrackingServerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMlflowTrackingServerResponseSuccess
+
       interface _CreateModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelOutput]
         def model_arn: () -> ::String
@@ -2339,6 +2391,9 @@ module Aws
                                 compression_type: ("None" | "Gzip"),
                                 model_access_config: {
                                   accept_eula: bool
+                                }?,
+                                hub_access_config: {
+                                  hub_content_arn: ::String
                                 }?
                               }?
                             }?,
@@ -2368,6 +2423,9 @@ module Aws
                                   compression_type: ("None" | "Gzip"),
                                   model_access_config: {
                                     accept_eula: bool
+                                  }?,
+                                  hub_access_config: {
+                                    hub_content_arn: ::String
                                   }?
                                 }?
                               }?,
@@ -2653,6 +2711,9 @@ module Aws
                                             compression_type: ("None" | "Gzip"),
                                             model_access_config: {
                                               accept_eula: bool
+                                            }?,
+                                            hub_access_config: {
+                                              hub_content_arn: ::String
                                             }?
                                           }?
                                         }?,
@@ -2723,6 +2784,9 @@ module Aws
                                             compression_type: ("None" | "Gzip"),
                                             model_access_config: {
                                               accept_eula: bool
+                                            }?,
+                                            hub_access_config: {
+                                              hub_content_arn: ::String
                                             }?
                                           }?
                                         }?,
@@ -2871,6 +2935,9 @@ module Aws
                                               compression_type: ("None" | "Gzip"),
                                               model_access_config: {
                                                 accept_eula: bool
+                                              }?,
+                                              hub_access_config: {
+                                                hub_content_arn: ::String
                                               }?
                                             }?
                                           }?,
@@ -3239,6 +3306,18 @@ module Aws
                                          ?landing_uri: ::String
                                        ) -> _CreatePresignedDomainUrlResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePresignedDomainUrlResponseSuccess
+
+      interface _CreatePresignedMlflowTrackingServerUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePresignedMlflowTrackingServerUrlResponse]
+        def authorized_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_presigned_mlflow_tracking_server_url-instance_method
+      def create_presigned_mlflow_tracking_server_url: (
+                                                         tracking_server_name: ::String,
+                                                         ?expires_in_seconds: ::Integer,
+                                                         ?session_expiration_duration_in_seconds: ::Integer
+                                                       ) -> _CreatePresignedMlflowTrackingServerUrlResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePresignedMlflowTrackingServerUrlResponseSuccess
 
       interface _CreatePresignedNotebookInstanceUrlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePresignedNotebookInstanceUrlOutput]
@@ -4221,11 +4300,19 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_hub_content-instance_method
       def delete_hub_content: (
                                 hub_name: ::String,
-                                hub_content_type: ("Model" | "Notebook"),
+                                hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                 hub_content_name: ::String,
                                 hub_content_version: ::String
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_hub_content_reference-instance_method
+      def delete_hub_content_reference: (
+                                          hub_name: ::String,
+                                          hub_content_type: ("Model" | "Notebook" | "ModelReference"),
+                                          hub_content_name: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _DeleteHumanTaskUiResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHumanTaskUiResponse]
@@ -4277,6 +4364,16 @@ module Aws
                                          name: ::String
                                        ) -> _DeleteInferenceExperimentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInferenceExperimentResponseSuccess
+
+      interface _DeleteMlflowTrackingServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMlflowTrackingServerResponse]
+        def tracking_server_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_mlflow_tracking_server-instance_method
+      def delete_mlflow_tracking_server: (
+                                           tracking_server_name: ::String
+                                         ) -> _DeleteMlflowTrackingServerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMlflowTrackingServerResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_model-instance_method
       def delete_model: (
@@ -4976,7 +5073,7 @@ module Aws
         def hub_content_name: () -> ::String
         def hub_content_arn: () -> ::String
         def hub_content_version: () -> ::String
-        def hub_content_type: () -> ("Model" | "Notebook")
+        def hub_content_type: () -> ("Model" | "Notebook" | "ModelReference")
         def document_schema_version: () -> ::String
         def hub_name: () -> ::String
         def hub_arn: () -> ::String
@@ -4984,6 +5081,9 @@ module Aws
         def hub_content_description: () -> ::String
         def hub_content_markdown: () -> ::String
         def hub_content_document: () -> ::String
+        def sage_maker_public_hub_content_arn: () -> ::String
+        def reference_min_version: () -> ::String
+        def support_status: () -> ("Supported" | "Deprecated")
         def hub_content_search_keywords: () -> ::Array[::String]
         def hub_content_dependencies: () -> ::Array[Types::HubContentDependency]
         def hub_content_status: () -> ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
@@ -4993,7 +5093,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_hub_content-instance_method
       def describe_hub_content: (
                                   hub_name: ::String,
-                                  hub_content_type: ("Model" | "Notebook"),
+                                  hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                   hub_content_name: ::String,
                                   ?hub_content_version: ::String
                                 ) -> _DescribeHubContentResponseSuccess
@@ -5196,6 +5296,30 @@ module Aws
                                     lineage_group_name: ::String
                                   ) -> _DescribeLineageGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLineageGroupResponseSuccess
+
+      interface _DescribeMlflowTrackingServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMlflowTrackingServerResponse]
+        def tracking_server_arn: () -> ::String
+        def tracking_server_name: () -> ::String
+        def artifact_store_uri: () -> ::String
+        def tracking_server_size: () -> ("Small" | "Medium" | "Large")
+        def mlflow_version: () -> ::String
+        def role_arn: () -> ::String
+        def tracking_server_status: () -> ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+        def is_active: () -> ("Active" | "Inactive")
+        def tracking_server_url: () -> ::String
+        def weekly_maintenance_window_start: () -> ::String
+        def automatic_model_registration: () -> bool
+        def creation_time: () -> ::Time
+        def created_by: () -> Types::UserContext
+        def last_modified_time: () -> ::Time
+        def last_modified_by: () -> Types::UserContext
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_mlflow_tracking_server-instance_method
+      def describe_mlflow_tracking_server: (
+                                             tracking_server_name: ::String
+                                           ) -> _DescribeMlflowTrackingServerResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMlflowTrackingServerResponseSuccess
 
       interface _DescribeModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeModelOutput]
@@ -5878,7 +6002,7 @@ module Aws
       def import_hub_content: (
                                 hub_content_name: ::String,
                                 ?hub_content_version: ::String,
-                                hub_content_type: ("Model" | "Notebook"),
+                                hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                 document_schema_version: ::String,
                                 hub_name: ::String,
                                 ?hub_content_display_name: ::String,
@@ -6349,7 +6473,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_hub_content_versions-instance_method
       def list_hub_content_versions: (
                                        hub_name: ::String,
-                                       hub_content_type: ("Model" | "Notebook"),
+                                       hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                        hub_content_name: ::String,
                                        ?min_version: ::String,
                                        ?max_schema_version: ::String,
@@ -6370,7 +6494,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_hub_contents-instance_method
       def list_hub_contents: (
                                hub_name: ::String,
-                               hub_content_type: ("Model" | "Notebook"),
+                               hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                ?name_contains: ::String,
                                ?max_schema_version: ::String,
                                ?creation_time_before: ::Time,
@@ -6607,6 +6731,24 @@ module Aws
                                  ?max_results: ::Integer
                                ) -> _ListLineageGroupsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLineageGroupsResponseSuccess
+
+      interface _ListMlflowTrackingServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMlflowTrackingServersResponse]
+        def tracking_server_summaries: () -> ::Array[Types::TrackingServerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_mlflow_tracking_servers-instance_method
+      def list_mlflow_tracking_servers: (
+                                          ?created_after: ::Time,
+                                          ?created_before: ::Time,
+                                          ?tracking_server_status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed"),
+                                          ?mlflow_version: ::String,
+                                          ?sort_by: ("Name" | "CreationTime" | "Status"),
+                                          ?sort_order: ("Ascending" | "Descending"),
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListMlflowTrackingServersResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMlflowTrackingServersResponseSuccess
 
       interface _ListModelBiasJobDefinitionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListModelBiasJobDefinitionsResponse]
@@ -7428,6 +7570,16 @@ module Aws
                                       ) -> _StartInferenceExperimentResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInferenceExperimentResponseSuccess
 
+      interface _StartMlflowTrackingServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMlflowTrackingServerResponse]
+        def tracking_server_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#start_mlflow_tracking_server-instance_method
+      def start_mlflow_tracking_server: (
+                                          tracking_server_name: ::String
+                                        ) -> _StartMlflowTrackingServerResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMlflowTrackingServerResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#start_monitoring_schedule-instance_method
       def start_monitoring_schedule: (
                                        monitoring_schedule_name: ::String
@@ -7538,6 +7690,16 @@ module Aws
                                labeling_job_name: ::String
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StopMlflowTrackingServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopMlflowTrackingServerResponse]
+        def tracking_server_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#stop_mlflow_tracking_server-instance_method
+      def stop_mlflow_tracking_server: (
+                                         tracking_server_name: ::String
+                                       ) -> _StopMlflowTrackingServerResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopMlflowTrackingServerResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#stop_monitoring_schedule-instance_method
       def stop_monitoring_schedule: (
@@ -7671,7 +7833,14 @@ module Aws
                                   on_create: ::String
                                 },
                                 execution_role: ::String,
-                                threads_per_core: ::Integer?
+                                threads_per_core: ::Integer?,
+                                instance_storage_configs: Array[
+                                  {
+                                    ebs_volume_config: {
+                                      volume_size_in_gb: ::Integer
+                                    }?
+                                  },
+                                ]?
                               },
                             ]
                           ) -> _UpdateClusterResponseSuccess
@@ -8282,6 +8451,20 @@ module Aws
                                        ) -> _UpdateInferenceExperimentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInferenceExperimentResponseSuccess
 
+      interface _UpdateMlflowTrackingServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMlflowTrackingServerResponse]
+        def tracking_server_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_mlflow_tracking_server-instance_method
+      def update_mlflow_tracking_server: (
+                                           tracking_server_name: ::String,
+                                           ?artifact_store_uri: ::String,
+                                           ?tracking_server_size: ("Small" | "Medium" | "Large"),
+                                           ?automatic_model_registration: bool,
+                                           ?weekly_maintenance_window_start: ::String
+                                         ) -> _UpdateMlflowTrackingServerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMlflowTrackingServerResponseSuccess
+
       interface _UpdateModelCardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateModelCardResponse]
         def model_card_arn: () -> ::String
@@ -8322,6 +8505,9 @@ module Aws
                                               compression_type: ("None" | "Gzip"),
                                               model_access_config: {
                                                 accept_eula: bool
+                                              }?,
+                                              hub_access_config: {
+                                                hub_content_arn: ::String
                                               }?
                                             }?
                                           }?,
@@ -8360,6 +8546,9 @@ module Aws
                                             compression_type: ("None" | "Gzip"),
                                             model_access_config: {
                                               accept_eula: bool
+                                            }?,
+                                            hub_access_config: {
+                                              hub_content_arn: ::String
                                             }?
                                           }?
                                         }?,

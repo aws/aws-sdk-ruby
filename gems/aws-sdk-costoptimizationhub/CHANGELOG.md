@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2024-06-20)
+------------------
+
+* Feature - This release enables AWS Cost Optimization Hub to show cost optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+
 1.6.0 (2024-06-05)
 ------------------
 

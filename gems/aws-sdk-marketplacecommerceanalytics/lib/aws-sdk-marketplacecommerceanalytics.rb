@@ -52,6 +52,6 @@ require_relative 'aws-sdk-marketplacecommerceanalytics/customizations'
 # @!group service
 module Aws::MarketplaceCommerceAnalytics
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.58.0'
 
 end

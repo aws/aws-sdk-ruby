@@ -210,19 +210,19 @@ module Aws::Artifact
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   Pagination token to request the next page of resources.
-    #   @return [String]
-    #
     # @!attribute [rw] reports
     #   List of report resources.
     #   @return [Array<Types::ReportSummary>]
     #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page of resources.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListReportsResponse AWS API Documentation
     #
     class ListReportsResponse < Struct.new(
-      :next_token,
-      :reports)
+      :reports,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -253,117 +253,48 @@ module Aws::Artifact
 
     # Full detail for report resource metadata.
     #
-    # @!attribute [rw] acceptance_type
-    #   Acceptance type for report.
+    # @!attribute [rw] id
+    #   Unique resource ID for the report resource.
     #   @return [String]
     #
-    # @!attribute [rw] arn
-    #   ARN for the report resource.
+    # @!attribute [rw] name
+    #   Name for the report resource.
     #   @return [String]
     #
-    # @!attribute [rw] category
-    #   Category for the report resource.
+    # @!attribute [rw] description
+    #   Description for the report resource.
     #   @return [String]
     #
-    # @!attribute [rw] company_name
-    #   Associated company name for the report resource.
-    #   @return [String]
+    # @!attribute [rw] period_start
+    #   Timestamp indicating the report resource effective start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] period_end
+    #   Timestamp indicating the report resource effective end.
+    #   @return [Time]
     #
     # @!attribute [rw] created_at
     #   Timestamp indicating when the report resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   Timestamp indicating when the report resource was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] deleted_at
     #   Timestamp indicating when the report resource was deleted.
     #   @return [Time]
     #
-    # @!attribute [rw] description
-    #   Description for the report resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] id
-    #   Unique resource ID for the report resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] last_modified_at
-    #   Timestamp indicating when the report resource was last modified.
-    #   @return [Time]
-    #
-    # @!attribute [rw] name
-    #   Name for the report resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] period_end
-    #   Timestamp indicating the report resource effective end.
-    #   @return [Time]
-    #
-    # @!attribute [rw] period_start
-    #   Timestamp indicating the report resource effective start.
-    #   @return [Time]
-    #
-    # @!attribute [rw] product_name
-    #   Associated product name for the report resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] sequence_number
-    #   Sequence number to enforce optimistic locking.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] series
-    #   Series for the report resource.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   Current state of the report resource
     #   @return [String]
     #
-    # @!attribute [rw] status_message
-    #   The message associated with the current upload state.
-    #   @return [String]
-    #
-    # @!attribute [rw] term_arn
-    #   Unique resource ARN for term resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] upload_state
-    #   The current state of the document upload.
-    #   @return [String]
-    #
-    # @!attribute [rw] version
-    #   Version for the report resource.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ReportDetail AWS API Documentation
-    #
-    class ReportDetail < Struct.new(
-      :acceptance_type,
-      :arn,
-      :category,
-      :company_name,
-      :created_at,
-      :deleted_at,
-      :description,
-      :id,
-      :last_modified_at,
-      :name,
-      :period_end,
-      :period_start,
-      :product_name,
-      :sequence_number,
-      :series,
-      :state,
-      :status_message,
-      :term_arn,
-      :upload_state,
-      :version)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Summary for report resource.
-    #
     # @!attribute [rw] arn
     #   ARN for the report resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] series
+    #   Series for the report resource.
     #   @return [String]
     #
     # @!attribute [rw] category
@@ -374,9 +305,62 @@ module Aws::Artifact
     #   Associated company name for the report resource.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   Description for the report resource.
+    # @!attribute [rw] product_name
+    #   Associated product name for the report resource.
     #   @return [String]
+    #
+    # @!attribute [rw] term_arn
+    #   Unique resource ARN for term resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version for the report resource.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] acceptance_type
+    #   Acceptance type for report.
+    #   @return [String]
+    #
+    # @!attribute [rw] sequence_number
+    #   Sequence number to enforce optimistic locking.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upload_state
+    #   The current state of the document upload.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The message associated with the current upload state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ReportDetail AWS API Documentation
+    #
+    class ReportDetail < Struct.new(
+      :id,
+      :name,
+      :description,
+      :period_start,
+      :period_end,
+      :created_at,
+      :last_modified_at,
+      :deleted_at,
+      :state,
+      :arn,
+      :series,
+      :category,
+      :company_name,
+      :product_name,
+      :term_arn,
+      :version,
+      :acceptance_type,
+      :sequence_number,
+      :upload_state,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary for report resource.
     #
     # @!attribute [rw] id
     #   Unique resource ID for the report resource.
@@ -386,55 +370,76 @@ module Aws::Artifact
     #   Name for the report resource.
     #   @return [String]
     #
-    # @!attribute [rw] period_end
-    #   Timestamp indicating the report resource effective end.
-    #   @return [Time]
-    #
-    # @!attribute [rw] period_start
-    #   Timestamp indicating the report resource effective start.
-    #   @return [Time]
-    #
-    # @!attribute [rw] product_name
-    #   Associated product name for the report resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] series
-    #   Series for the report resource.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   Current state of the report resource.
     #   @return [String]
     #
-    # @!attribute [rw] status_message
-    #   The message associated with the current upload state.
-    #   @return [String]
-    #
-    # @!attribute [rw] upload_state
-    #   The current state of the document upload.
+    # @!attribute [rw] arn
+    #   ARN for the report resource.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   Version for the report resource.
     #   @return [Integer]
     #
+    # @!attribute [rw] upload_state
+    #   The current state of the document upload.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description for the report resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] period_start
+    #   Timestamp indicating the report resource effective start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] period_end
+    #   Timestamp indicating the report resource effective end.
+    #   @return [Time]
+    #
+    # @!attribute [rw] series
+    #   Series for the report resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   Category for the report resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] company_name
+    #   Associated company name for the report resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   Associated product name for the report resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The message associated with the current upload state.
+    #   @return [String]
+    #
+    # @!attribute [rw] acceptance_type
+    #   Acceptance type for report.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ReportSummary AWS API Documentation
     #
     class ReportSummary < Struct.new(
-      :arn,
-      :category,
-      :company_name,
-      :description,
       :id,
       :name,
-      :period_end,
-      :period_start,
-      :product_name,
-      :series,
       :state,
-      :status_message,
+      :arn,
+      :version,
       :upload_state,
-      :version)
+      :description,
+      :period_start,
+      :period_end,
+      :series,
+      :category,
+      :company_name,
+      :product_name,
+      :status_message,
+      :acceptance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -467,10 +472,6 @@ module Aws::Artifact
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] quota_code
-    #   Code for the affected quota.
-    #   @return [String]
-    #
     # @!attribute [rw] resource_id
     #   Identifier of the affected resource.
     #   @return [String]
@@ -483,14 +484,18 @@ module Aws::Artifact
     #   Code for the affected service.
     #   @return [String]
     #
+    # @!attribute [rw] quota_code
+    #   Code for the affected quota.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      :quota_code,
       :resource_id,
       :resource_type,
-      :service_code)
+      :service_code,
+      :quota_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -498,6 +503,10 @@ module Aws::Artifact
     # Request was denied due to request throttling.
     #
     # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   Code for the affected service.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
@@ -508,26 +517,18 @@ module Aws::Artifact
     #   Number of seconds in which the caller can retry the request.
     #   @return [Integer]
     #
-    # @!attribute [rw] service_code
-    #   Code for the affected service.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
+      :service_code,
       :quota_code,
-      :retry_after_seconds,
-      :service_code)
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Request fails to satisfy the constraints specified by an AWS service.
-    #
-    # @!attribute [rw] field_list
-    #   The field that caused the error, if applicable.
-    #   @return [Array<Types::ValidationExceptionField>]
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -536,31 +537,35 @@ module Aws::Artifact
     #   Reason the request failed validation.
     #   @return [String]
     #
+    # @!attribute [rw] field_list
+    #   The field that caused the error, if applicable.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :field_list,
       :message,
-      :reason)
+      :reason,
+      :field_list)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Validation exception message and name.
     #
-    # @!attribute [rw] message
-    #   Message describing why the field failed validation.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   Name of validation exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Message describing why the field failed validation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

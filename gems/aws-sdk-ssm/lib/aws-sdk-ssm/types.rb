@@ -9556,7 +9556,7 @@ module Aws::SSM
       :association_overview,
       :source_id,
       :source_type)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -10014,7 +10014,7 @@ module Aws::SSM
       :association_overview,
       :source_id,
       :source_type)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 

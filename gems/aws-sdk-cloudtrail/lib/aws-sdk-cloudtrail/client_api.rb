@@ -1264,6 +1264,7 @@ module Aws::CloudTrail
 
       api.metadata = {
         "apiVersion" => "2013-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cloudtrail",
         "jsonVersion" => "1.1",
         "protocol" => "json",

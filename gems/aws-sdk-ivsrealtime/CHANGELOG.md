@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2024-06-20)
+------------------
+
+* Feature - IVS Real-Time now offers customers the ability to record individual stage participants to S3.
+
 1.19.0 (2024-06-05)
 ------------------
 

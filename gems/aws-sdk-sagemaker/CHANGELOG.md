@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.249.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.248.0 (2024-06-20)
+------------------
+
+* Feature - Adds support for model references in Hub service, and adds support for cross-account access of Hubs
+
+1.247.0 (2024-06-18)
+------------------
+
+* Feature - Launched a new feature in SageMaker to provide managed MLflow Tracking Servers for customers to track ML experiments. This release also adds a new capability of attaching additional storage to SageMaker HyperPod cluster instances.
+
 1.246.0 (2024-06-07)
 ------------------
 

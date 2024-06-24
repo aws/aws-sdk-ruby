@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.113.0 (2024-06-20)
+------------------
+
+* Feature - Doc-only update for DynamoDB. Fixed Important note in 6 Global table APIs - CreateGlobalTable, DescribeGlobalTable, DescribeGlobalTableSettings, ListGlobalTables, UpdateGlobalTable, and UpdateGlobalTableSettings.
+
 1.112.0 (2024-06-05)
 ------------------
 

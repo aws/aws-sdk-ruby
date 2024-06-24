@@ -243,6 +243,12 @@ module Aws
                                roles_key: ::String?,
                                session_timeout_minutes: ::Integer?
                              }?,
+                             jwt_options: {
+                               enabled: bool?,
+                               subject_key: ::String?,
+                               roles_key: ::String?,
+                               public_key: ::String?
+                             }?,
                              anonymous_auth_enabled: bool?
                            },
                            ?tag_list: Array[
@@ -1018,6 +1024,12 @@ module Aws
                                       subject_key: ::String?,
                                       roles_key: ::String?,
                                       session_timeout_minutes: ::Integer?
+                                    }?,
+                                    jwt_options: {
+                                      enabled: bool?,
+                                      subject_key: ::String?,
+                                      roles_key: ::String?,
+                                      public_key: ::String?
                                     }?,
                                     anonymous_auth_enabled: bool?
                                   },

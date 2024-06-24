@@ -352,6 +352,7 @@ module Aws::MediaConvert
       attr_accessor base_url: ::String
       attr_accessor client_cache: ("DISABLED" | "ENABLED")
       attr_accessor codec_specification: ("RFC_6381" | "RFC_4281")
+      attr_accessor dash_i_frame_trick_play_name_modifier: ::String
       attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")
       attr_accessor destination: ::String
       attr_accessor destination_settings: Types::DestinationSettings
@@ -534,6 +535,7 @@ module Aws::MediaConvert
       attr_accessor additional_manifests: ::Array[Types::DashAdditionalManifest]
       attr_accessor audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")
       attr_accessor base_url: ::String
+      attr_accessor dash_i_frame_trick_play_name_modifier: ::String
       attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")
       attr_accessor destination: ::String
       attr_accessor destination_settings: Types::DestinationSettings
@@ -1203,7 +1205,11 @@ module Aws::MediaConvert
     end
 
     class InputVideoGenerator
+      attr_accessor channels: ::Integer
       attr_accessor duration: ::Integer
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor sample_rate: ::Integer
       SENSITIVE: []
     end
 
@@ -1901,6 +1907,22 @@ module Aws::MediaConvert
 
     class SccDestinationSettings
       attr_accessor framerate: ("FRAMERATE_23_97" | "FRAMERATE_24" | "FRAMERATE_25" | "FRAMERATE_29_97_DROPFRAME" | "FRAMERATE_29_97_NON_DROPFRAME")
+      SENSITIVE: []
+    end
+
+    class SearchJobsRequest
+      attr_accessor input_file: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      attr_accessor queue: ::String
+      attr_accessor status: ("SUBMITTED" | "PROGRESSING" | "COMPLETE" | "CANCELED" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class SearchJobsResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 

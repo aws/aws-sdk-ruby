@@ -9,9 +9,9 @@ module Seahorse
 
       let(:api) { Seahorse::Model::Api.new }
 
-      let(:client_class) { Base.define(api:api) }
+      let(:client_class) { Base.define(api: api) }
 
-      let(:client) { client_class.new(endpoint:'http://example.com') }
+      let(:client) { client_class.new(endpoint: 'http://example.com') }
 
       let(:plugin_a) { Class.new }
 
@@ -143,10 +143,10 @@ module Seahorse
 
         it 'builds and sends a request when it receives a request method' do
           expect(client).to receive(:build_request).
-            with(:operation_name, {foo:'bar'}).
+            with(:operation_name, { foo: 'bar' }).
             and_return(request)
           expect(request).to receive(:send_request)
-          client.operation_name(foo:'bar')
+          client.operation_name(foo: 'bar')
         end
 
         it 'passes block arguments to the request method' do
@@ -155,7 +155,7 @@ module Seahorse
             and_yield('chunk2').
             and_yield('chunk3')
           chunks = []
-          client.operation_name(foo:'bar') do |chunk|
+          client.operation_name(foo: 'bar') do |chunk|
             chunks << chunk
           end
           expect(chunks).to eq(%w(chunk1 chunk2 chunk3))
@@ -269,59 +269,111 @@ module Seahorse
 
         it 'has a defualt list of plugins' do
           client_class = Class.new(Base)
-          expect(client_class.plugins.to_a).to eq([
+          expected = [
             Plugins::Endpoint,
             Plugins::NetHttp,
             Plugins::RaiseResponseErrors,
             Plugins::ResponseTarget,
             Plugins::RequestCallback
-          ])
+          ]
+          expect(client_class.plugins.to_a).to eq(expected)
         end
 
       end
 
       describe '.new' do
 
-        let(:plugin) {
+        let(:plugin) do
           p = double('plugin')
           allow(p).to receive(:is_a?).with(kind_of(Class)).and_return(false)
           p
-        }
-
-        it 'instructs plugins to #before_initialize' do
-          options = { endpoint: 'http://foo.com' }
-          expect(plugin).to receive(:before_initialize).with(client_class, options)
-          client_class.add_plugin(plugin)
-          client_class.new(options)
         end
 
-        it 'instructs plugins to #add_options' do
-          expect(plugin).to receive(:add_options) do |config|
-            config.add_option(:foo, 'bar')
-            config.add_option(:endpoint, 'http://foo.com')
-            config.add_option(:regional_endpoint, false)
+        context 'class level plugin' do
+          it 'instructs plugins to #before_initialize' do
+            options = { endpoint: 'http://foo.com' }
+            expect(plugin).to receive(:before_initialize).with(client_class, options)
+            client_class.add_plugin(plugin)
+            client_class.new(options)
           end
-          client_class.add_plugin(plugin)
-          expect(client_class.new.config.foo).to eq('bar')
+
+          it 'instructs plugins to #add_options' do
+            expect(plugin).to receive(:add_options) do |config|
+              config.add_option(:foo, 'bar')
+              config.add_option(:endpoint, 'http://foo.com')
+              config.add_option(:regional_endpoint, false)
+            end
+            client_class.add_plugin(plugin)
+            expect(client_class.new.config.foo).to eq('bar')
+          end
+
+          it 'instructs plugins to #add_handlers' do
+            expect(plugin).to receive(:add_handlers).
+              with(kind_of(HandlerList), kind_of(Struct))
+            client_class.add_plugin(plugin)
+            client_class.new(endpoint: 'http://foo.com')
+          end
+
+          it 'instructs plugins to #after_initialize' do
+            expect(plugin).to receive(:after_initialize).with(kind_of(Client::Base))
+            client_class.add_plugin(plugin)
+            client_class.new(endpoint: 'http://foo.com')
+          end
+
+          it 'does not call methods that plugin does not respond to' do
+            plugin = Object.new
+            allow(plugin).to receive(:respond_to?).with(:before_initialize).and_return(false)
+            allow(plugin).to receive(:respond_to?).with(:add_options).and_return(false)
+            allow(plugin).to receive(:respond_to?).with(:add_handlers).and_return(false)
+            allow(plugin).to receive(:respond_to?).with(:after_initialize).and_return(false)
+            expect(plugin).not_to receive(:before_initialize)
+            expect(plugin).not_to receive(:add_options)
+            expect(plugin).not_to receive(:add_handlers)
+            expect(plugin).not_to receive(:after_initialize)
+            client_class.add_plugin(plugin)
+            client_class.new(endpoint: 'http://foo.com')
+          end
         end
 
-        it 'instructs plugins to #add_handlers' do
-          expect(plugin).to receive(:add_handlers).
-            with(kind_of(HandlerList), kind_of(Struct))
-          client_class.add_plugin(plugin)
-          client_class.new(endpoint:'http://foo.com')
-        end
+        context 'instance level plugin' do
+          it 'instructs plugins to #before_initialize' do
+            options = { endpoint: 'http://foo.com', plugins: [plugin] }
+            expect(plugin).to receive(:before_initialize).with(client_class, options)
+            client_class.new(options)
+          end
 
-        it 'instructs plugins to #after_initialize' do
-          expect(plugin).to receive(:after_initialize).with(kind_of(Client::Base))
-          client_class.add_plugin(plugin)
-          client_class.new(endpoint:'http://foo.com')
-        end
+          it 'instructs plugins to #add_options' do
+            expect(plugin).to receive(:add_options) do |config|
+              config.add_option(:foo, 'bar')
+              config.add_option(:endpoint, 'http://foo.com')
+              config.add_option(:regional_endpoint, false)
+            end
+            client_class.new(endpoint: 'http://foo.com', plugins: [plugin])
+          end
 
-        it 'does not call methods that plugin does not respond to' do
-          plugin = Object.new
-          client_class.add_plugin(plugin)
-          client_class.new(endpoint:'http://foo.com')
+          it 'instructs plugins to #add_handlers' do
+            expect(plugin).to receive(:add_handlers).
+              with(kind_of(HandlerList), kind_of(Struct))
+            client_class.new(endpoint: 'http://foo.com', plugins: [plugin])
+          end
+
+          it 'instructs plugins to #after_initialize' do
+            expect(plugin).to receive(:after_initialize).with(kind_of(Client::Base))
+            client_class.new(endpoint: 'http://foo.com', plugins: [plugin])
+          end
+
+          it 'does not call methods that plugin does not respond to' do
+            plugin = Object.new
+            allow(plugin).to receive(:respond_to?).with(:before_initialize).and_return(false)
+            allow(plugin).to receive(:respond_to?).with(:add_options).and_return(false)
+            allow(plugin).to receive(:respond_to?).with(:add_handlers).and_return(false)
+            allow(plugin).to receive(:respond_to?).with(:after_initialize).and_return(false)
+            expect(plugin).not_to receive(:before_initialize)
+            expect(plugin).not_to receive(:add_options)
+            expect(plugin).not_to receive(:add_handlers)
+            expect(plugin).not_to receive(:after_initialize)
+            client_class.new(endpoint: 'http://foo.com', plugins: [plugin])
+          end
         end
 
       end

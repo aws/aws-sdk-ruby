@@ -104,8 +104,8 @@ module Aws::Artifact
     ListReportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenAttribute, location: "querystring", location_name: "nextToken"))
     ListReportsRequest.struct_class = Types::ListReportsRequest
 
-    ListReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenAttribute, location_name: "nextToken"))
     ListReportsResponse.add_member(:reports, Shapes::ShapeRef.new(shape: ReportsList, location_name: "reports"))
+    ListReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenAttribute, location_name: "nextToken"))
     ListReportsResponse.struct_class = Types::ListReportsResponse
 
     PutAccountSettingsRequest.add_member(:notification_subscription_status, Shapes::ShapeRef.new(shape: NotificationSubscriptionStatus, location_name: "notificationSubscriptionStatus"))
@@ -114,42 +114,43 @@ module Aws::Artifact
     PutAccountSettingsResponse.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "accountSettings"))
     PutAccountSettingsResponse.struct_class = Types::PutAccountSettingsResponse
 
-    ReportDetail.add_member(:acceptance_type, Shapes::ShapeRef.new(shape: AcceptanceType, location_name: "acceptanceType"))
+    ReportDetail.add_member(:id, Shapes::ShapeRef.new(shape: ReportId, location_name: "id"))
+    ReportDetail.add_member(:name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "name"))
+    ReportDetail.add_member(:description, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "description"))
+    ReportDetail.add_member(:period_start, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodStart"))
+    ReportDetail.add_member(:period_end, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodEnd"))
+    ReportDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "createdAt"))
+    ReportDetail.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "lastModifiedAt"))
+    ReportDetail.add_member(:deleted_at, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "deletedAt"))
+    ReportDetail.add_member(:state, Shapes::ShapeRef.new(shape: PublishedState, location_name: "state"))
     ReportDetail.add_member(:arn, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "arn"))
+    ReportDetail.add_member(:series, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "series"))
     ReportDetail.add_member(:category, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "category"))
     ReportDetail.add_member(:company_name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "companyName"))
-    ReportDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "createdAt"))
-    ReportDetail.add_member(:deleted_at, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "deletedAt"))
-    ReportDetail.add_member(:description, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "description"))
-    ReportDetail.add_member(:id, Shapes::ShapeRef.new(shape: ReportId, location_name: "id"))
-    ReportDetail.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "lastModifiedAt"))
-    ReportDetail.add_member(:name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "name"))
-    ReportDetail.add_member(:period_end, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodEnd"))
-    ReportDetail.add_member(:period_start, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodStart"))
     ReportDetail.add_member(:product_name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "productName"))
-    ReportDetail.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumberAttribute, location_name: "sequenceNumber"))
-    ReportDetail.add_member(:series, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "series"))
-    ReportDetail.add_member(:state, Shapes::ShapeRef.new(shape: PublishedState, location_name: "state"))
-    ReportDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
     ReportDetail.add_member(:term_arn, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "termArn"))
-    ReportDetail.add_member(:upload_state, Shapes::ShapeRef.new(shape: UploadState, location_name: "uploadState"))
     ReportDetail.add_member(:version, Shapes::ShapeRef.new(shape: VersionAttribute, location_name: "version"))
+    ReportDetail.add_member(:acceptance_type, Shapes::ShapeRef.new(shape: AcceptanceType, location_name: "acceptanceType"))
+    ReportDetail.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumberAttribute, location_name: "sequenceNumber"))
+    ReportDetail.add_member(:upload_state, Shapes::ShapeRef.new(shape: UploadState, location_name: "uploadState"))
+    ReportDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
     ReportDetail.struct_class = Types::ReportDetail
 
-    ReportSummary.add_member(:arn, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "arn"))
-    ReportSummary.add_member(:category, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "category"))
-    ReportSummary.add_member(:company_name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "companyName"))
-    ReportSummary.add_member(:description, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "description"))
     ReportSummary.add_member(:id, Shapes::ShapeRef.new(shape: ReportId, location_name: "id"))
     ReportSummary.add_member(:name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "name"))
-    ReportSummary.add_member(:period_end, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodEnd"))
-    ReportSummary.add_member(:period_start, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodStart"))
-    ReportSummary.add_member(:product_name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "productName"))
-    ReportSummary.add_member(:series, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "series"))
     ReportSummary.add_member(:state, Shapes::ShapeRef.new(shape: PublishedState, location_name: "state"))
-    ReportSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
-    ReportSummary.add_member(:upload_state, Shapes::ShapeRef.new(shape: UploadState, location_name: "uploadState"))
+    ReportSummary.add_member(:arn, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "arn"))
     ReportSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionAttribute, location_name: "version"))
+    ReportSummary.add_member(:upload_state, Shapes::ShapeRef.new(shape: UploadState, location_name: "uploadState"))
+    ReportSummary.add_member(:description, Shapes::ShapeRef.new(shape: LongStringAttribute, location_name: "description"))
+    ReportSummary.add_member(:period_start, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodStart"))
+    ReportSummary.add_member(:period_end, Shapes::ShapeRef.new(shape: TimestampAttribute, location_name: "periodEnd"))
+    ReportSummary.add_member(:series, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "series"))
+    ReportSummary.add_member(:category, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "category"))
+    ReportSummary.add_member(:company_name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "companyName"))
+    ReportSummary.add_member(:product_name, Shapes::ShapeRef.new(shape: ShortStringAttribute, location_name: "productName"))
+    ReportSummary.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "statusMessage"))
+    ReportSummary.add_member(:acceptance_type, Shapes::ShapeRef.new(shape: AcceptanceType, location_name: "acceptanceType"))
     ReportSummary.struct_class = Types::ReportSummary
 
     ReportsList.member = Shapes::ShapeRef.new(shape: ReportSummary)
@@ -160,25 +161,25 @@ module Aws::Artifact
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceCode"))
+    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
-    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
+    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
@@ -191,9 +192,10 @@ module Aws::Artifact
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "artifact",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Artifact",
         "serviceId" => "Artifact",
         "signatureVersion" => "v4",

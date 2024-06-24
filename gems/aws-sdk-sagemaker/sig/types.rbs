@@ -673,6 +673,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterEbsVolumeConfig
+      attr_accessor volume_size_in_gb: ::Integer
+      SENSITIVE: []
+    end
+
     class ClusterInstanceGroupDetails
       attr_accessor current_count: ::Integer
       attr_accessor target_count: ::Integer
@@ -681,6 +686,7 @@ module Aws::SageMaker
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
+      attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
       SENSITIVE: []
     end
 
@@ -691,6 +697,7 @@ module Aws::SageMaker
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
+      attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
       SENSITIVE: []
     end
 
@@ -704,6 +711,17 @@ module Aws::SageMaker
       attr_accessor status: ("Running" | "Failure" | "Pending" | "ShuttingDown" | "SystemUpdating")
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class ClusterInstanceStorageConfig
+      attr_accessor ebs_volume_config: Types::ClusterEbsVolumeConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EbsVolumeConfig < ClusterInstanceStorageConfig
+      end
+      class Unknown < ClusterInstanceStorageConfig
+      end
     end
 
     class ClusterLifeCycleConfig
@@ -720,6 +738,7 @@ module Aws::SageMaker
       attr_accessor launch_time: ::Time
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor threads_per_core: ::Integer
+      attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
       attr_accessor private_primary_ip: ::String
       attr_accessor private_dns_hostname: ::String
       attr_accessor placement: Types::ClusterInstancePlacement
@@ -1219,6 +1238,21 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateHubContentReferenceRequest
+      attr_accessor hub_name: ::String
+      attr_accessor sage_maker_public_hub_content_arn: ::String
+      attr_accessor hub_content_name: ::String
+      attr_accessor min_version: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHubContentReferenceResponse
+      attr_accessor hub_arn: ::String
+      attr_accessor hub_content_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateHubRequest
       attr_accessor hub_name: ::String
       attr_accessor hub_description: ::String
@@ -1364,6 +1398,23 @@ module Aws::SageMaker
 
     class CreateLabelingJobResponse
       attr_accessor labeling_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor tracking_server_size: ("Small" | "Medium" | "Large")
+      attr_accessor mlflow_version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor automatic_model_registration: bool
+      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
       SENSITIVE: []
     end
 
@@ -1589,6 +1640,18 @@ module Aws::SageMaker
     end
 
     class CreatePresignedDomainUrlResponse
+      attr_accessor authorized_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePresignedMlflowTrackingServerUrlRequest
+      attr_accessor tracking_server_name: ::String
+      attr_accessor expires_in_seconds: ::Integer
+      attr_accessor session_expiration_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreatePresignedMlflowTrackingServerUrlResponse
       attr_accessor authorized_url: ::String
       SENSITIVE: []
     end
@@ -2109,9 +2172,16 @@ module Aws::SageMaker
     class DeleteFlowDefinitionResponse < Aws::EmptyStructure
     end
 
+    class DeleteHubContentReferenceRequest
+      attr_accessor hub_name: ::String
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_name: ::String
+      SENSITIVE: []
+    end
+
     class DeleteHubContentRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
       SENSITIVE: []
@@ -2165,6 +2235,16 @@ module Aws::SageMaker
 
     class DeleteInferenceExperimentResponse
       attr_accessor inference_experiment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
       SENSITIVE: []
     end
 
@@ -2866,7 +2946,7 @@ module Aws::SageMaker
 
     class DescribeHubContentRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
       SENSITIVE: []
@@ -2876,7 +2956,7 @@ module Aws::SageMaker
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_arn: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_name: ::String
       attr_accessor hub_arn: ::String
@@ -2884,6 +2964,9 @@ module Aws::SageMaker
       attr_accessor hub_content_description: ::String
       attr_accessor hub_content_markdown: ::String
       attr_accessor hub_content_document: ::String
+      attr_accessor sage_maker_public_hub_content_arn: ::String
+      attr_accessor reference_min_version: ::String
+      attr_accessor support_status: ("Supported" | "Deprecated")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor hub_content_dependencies: ::Array[Types::HubContentDependency]
       attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
@@ -3102,6 +3185,30 @@ module Aws::SageMaker
       attr_accessor lineage_group_arn: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor created_by: Types::UserContext
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_by: Types::UserContext
+      SENSITIVE: []
+    end
+
+    class DescribeMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
+      attr_accessor tracking_server_name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor tracking_server_size: ("Small" | "Medium" | "Large")
+      attr_accessor mlflow_version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tracking_server_status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+      attr_accessor is_active: ("Active" | "Inactive")
+      attr_accessor tracking_server_url: ::String
+      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor automatic_model_registration: bool
       attr_accessor creation_time: ::Time
       attr_accessor created_by: Types::UserContext
       attr_accessor last_modified_time: ::Time
@@ -4323,14 +4430,17 @@ module Aws::SageMaker
     class HubContentInfo
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_arn: ::String
+      attr_accessor sage_maker_public_hub_content_arn: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_content_display_name: ::String
       attr_accessor hub_content_description: ::String
+      attr_accessor support_status: ("Supported" | "Deprecated")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
       attr_accessor creation_time: ::Time
+      attr_accessor original_creation_time: ::Time
       SENSITIVE: []
     end
 
@@ -4615,7 +4725,7 @@ module Aws::SageMaker
     class ImportHubContentRequest
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_name: ::String
       attr_accessor hub_content_display_name: ::String
@@ -4729,6 +4839,11 @@ module Aws::SageMaker
       attr_accessor completion_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceHubAccessConfig
+      attr_accessor hub_content_arn: ::String
       SENSITIVE: []
     end
 
@@ -5436,7 +5551,7 @@ module Aws::SageMaker
 
     class ListHubContentVersionsRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor hub_content_name: ::String
       attr_accessor min_version: ::String
       attr_accessor max_schema_version: ::String
@@ -5457,7 +5572,7 @@ module Aws::SageMaker
 
     class ListHubContentsRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor name_contains: ::String
       attr_accessor max_schema_version: ::String
       attr_accessor creation_time_before: ::Time
@@ -5697,6 +5812,24 @@ module Aws::SageMaker
 
     class ListLineageGroupsResponse
       attr_accessor lineage_group_summaries: ::Array[Types::LineageGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMlflowTrackingServersRequest
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor tracking_server_status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+      attr_accessor mlflow_version: ::String
+      attr_accessor sort_by: ("Name" | "CreationTime" | "Status")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMlflowTrackingServersResponse
+      attr_accessor tracking_server_summaries: ::Array[Types::TrackingServerSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -7978,6 +8111,7 @@ module Aws::SageMaker
       attr_accessor s3_data_type: ("S3Prefix" | "S3Object")
       attr_accessor compression_type: ("None" | "Gzip")
       attr_accessor model_access_config: Types::ModelAccessConfig
+      attr_accessor hub_access_config: Types::InferenceHubAccessConfig
       SENSITIVE: []
     end
 
@@ -8261,6 +8395,16 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class StartMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
+      SENSITIVE: []
+    end
+
     class StartMonitoringScheduleRequest
       attr_accessor monitoring_schedule_name: ::String
       SENSITIVE: []
@@ -8334,6 +8478,16 @@ module Aws::SageMaker
 
     class StopLabelingJobRequest
       attr_accessor labeling_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
       SENSITIVE: []
     end
 
@@ -8521,6 +8675,17 @@ module Aws::SageMaker
     class TimeSeriesTransformations
       attr_accessor filling: ::Hash[::String, ::Hash[("frontfill" | "middlefill" | "backfill" | "futurefill" | "frontfill_value" | "middlefill_value" | "backfill_value" | "futurefill_value"), ::String]]
       attr_accessor aggregation: ::Hash[::String, ("sum" | "avg" | "first" | "min" | "max")]
+      SENSITIVE: []
+    end
+
+    class TrackingServerSummary
+      attr_accessor tracking_server_arn: ::String
+      attr_accessor tracking_server_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor tracking_server_status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+      attr_accessor is_active: ("Active" | "Inactive")
+      attr_accessor mlflow_version: ::String
       SENSITIVE: []
     end
 
@@ -9154,6 +9319,20 @@ module Aws::SageMaker
 
     class UpdateInferenceExperimentResponse
       attr_accessor inference_experiment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor tracking_server_size: ("Small" | "Medium" | "Large")
+      attr_accessor automatic_model_registration: bool
+      attr_accessor weekly_maintenance_window_start: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
       SENSITIVE: []
     end
 

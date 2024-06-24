@@ -2,6 +2,7 @@
   "version":"2.0",
   "metadata":{
     "apiVersion":"2023-11-27",
+    "auth":["aws.auth#sigv4"],
     "endpointPrefix":"qbusiness",
     "protocol":"rest-json",
     "protocolSettings":{"h2":"eventstream"},
@@ -1730,7 +1731,8 @@
           "shape":"ClientToken",
           "idempotencyToken":true
         },
-        "attachmentsConfiguration":{"shape":"AttachmentsConfiguration"}
+        "attachmentsConfiguration":{"shape":"AttachmentsConfiguration"},
+        "qAppsConfiguration":{"shape":"QAppsConfiguration"}
       }
     },
     "CreateApplicationResponse":{
@@ -2653,7 +2655,8 @@
         "createdAt":{"shape":"Timestamp"},
         "updatedAt":{"shape":"Timestamp"},
         "error":{"shape":"ErrorDetail"},
-        "attachmentsConfiguration":{"shape":"AppliedAttachmentsConfiguration"}
+        "attachmentsConfiguration":{"shape":"AppliedAttachmentsConfiguration"},
+        "qAppsConfiguration":{"shape":"QAppsConfiguration"}
       }
     },
     "GetChatControlsConfigurationRequest":{
@@ -3995,6 +3998,20 @@
       "members":{
       }
     },
+    "QAppsConfiguration":{
+      "type":"structure",
+      "required":["qAppsControlMode"],
+      "members":{
+        "qAppsControlMode":{"shape":"QAppsControlMode"}
+      }
+    },
+    "QAppsControlMode":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "ReadAccessType":{
       "type":"string",
       "enum":[
@@ -4532,7 +4549,8 @@
         "displayName":{"shape":"ApplicationName"},
         "description":{"shape":"Description"},
         "roleArn":{"shape":"RoleArn"},
-        "attachmentsConfiguration":{"shape":"AttachmentsConfiguration"}
+        "attachmentsConfiguration":{"shape":"AttachmentsConfiguration"},
+        "qAppsConfiguration":{"shape":"QAppsConfiguration"}
       }
     },
     "UpdateApplicationResponse":{

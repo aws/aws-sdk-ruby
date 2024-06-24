@@ -142,6 +142,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::CreateTableOptimizer.build(context)
           when :create_trigger
             Aws::Glue::Endpoints::CreateTrigger.build(context)
+          when :create_usage_profile
+            Aws::Glue::Endpoints::CreateUsageProfile.build(context)
           when :create_user_defined_function
             Aws::Glue::Endpoints::CreateUserDefinedFunction.build(context)
           when :create_workflow
@@ -194,6 +196,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::DeleteTableVersion.build(context)
           when :delete_trigger
             Aws::Glue::Endpoints::DeleteTrigger.build(context)
+          when :delete_usage_profile
+            Aws::Glue::Endpoints::DeleteUsageProfile.build(context)
           when :delete_user_defined_function
             Aws::Glue::Endpoints::DeleteUserDefinedFunction.build(context)
           when :delete_workflow
@@ -322,6 +326,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::GetUnfilteredPartitionsMetadata.build(context)
           when :get_unfiltered_table_metadata
             Aws::Glue::Endpoints::GetUnfilteredTableMetadata.build(context)
+          when :get_usage_profile
+            Aws::Glue::Endpoints::GetUsageProfile.build(context)
           when :get_user_defined_function
             Aws::Glue::Endpoints::GetUserDefinedFunction.build(context)
           when :get_user_defined_functions
@@ -374,6 +380,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::ListTableOptimizerRuns.build(context)
           when :list_triggers
             Aws::Glue::Endpoints::ListTriggers.build(context)
+          when :list_usage_profiles
+            Aws::Glue::Endpoints::ListUsageProfiles.build(context)
           when :list_workflows
             Aws::Glue::Endpoints::ListWorkflows.build(context)
           when :put_data_catalog_encryption_settings
@@ -480,6 +488,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::UpdateTableOptimizer.build(context)
           when :update_trigger
             Aws::Glue::Endpoints::UpdateTrigger.build(context)
+          when :update_usage_profile
+            Aws::Glue::Endpoints::UpdateUsageProfile.build(context)
           when :update_user_defined_function
             Aws::Glue::Endpoints::UpdateUserDefinedFunction.build(context)
           when :update_workflow

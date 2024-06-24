@@ -52,6 +52,6 @@ require_relative 'aws-sdk-timestreaminfluxdb/customizations'
 # @!group service
 module Aws::TimestreamInfluxDB
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end

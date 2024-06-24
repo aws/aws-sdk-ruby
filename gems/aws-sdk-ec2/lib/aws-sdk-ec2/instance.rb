@@ -1179,13 +1179,13 @@ module Aws::EC2
     #   `instanceInitiatedShutdownBehavior` attribute.
     # @option options [Types::AttributeBooleanValue] :disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For more
-    #   information, see [Stop Protection][1].
+    #   information, see [Enable stop protection for your instance][1].
     #
     #
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(instance_id: @id)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2024-06-24)
+------------------
+
+* Feature - This release includes changes to ProfileObjectType APIs, adds functionality top set and get capacity for profile object types.
+
 1.44.0 (2024-06-05)
 ------------------
 

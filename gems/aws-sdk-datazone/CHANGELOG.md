@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2024-06-14)
+------------------
+
+* Feature - This release introduces a new default service blueprint for custom environment creation.
+
 1.8.0 (2024-06-05)
 ------------------
 

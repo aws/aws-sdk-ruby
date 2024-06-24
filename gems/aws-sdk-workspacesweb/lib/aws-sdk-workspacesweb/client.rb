@@ -89,6 +89,11 @@ module Aws::WorkSpacesWeb
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -209,7 +214,6 @@ module Aws::WorkSpacesWeb
     #         'https://example.com'
     #         'http://example.com:123'
     #
-    #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
     #     for endpoint discovery enabled operations. Defaults to 1000.
@@ -297,7 +301,6 @@ module Aws::WorkSpacesWeb
     #       functionality of `standard` mode along with automatic client side
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
-    #
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
@@ -779,6 +782,10 @@ module Aws::WorkSpacesWeb
     # @option params [required, String] :portal_arn
     #   The ARN of the web portal.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the identity provider resource. A tag is a
+    #   key-value pair.
+    #
     # @return [Types::CreateIdentityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIdentityProviderResponse#identity_provider_arn #identity_provider_arn} => String
@@ -793,6 +800,12 @@ module Aws::WorkSpacesWeb
     #     identity_provider_name: "IdentityProviderName", # required
     #     identity_provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
     #     portal_arn: "ARN", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -840,8 +853,8 @@ module Aws::WorkSpacesWeb
     #   The IP rules of the IP access settings.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to add to the browser settings resource. A tag is a key-value
-    #   pair.
+    #   The tags to add to the IP access settings resource. A tag is a
+    #   key-value pair.
     #
     # @return [Types::CreateIpAccessSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1181,6 +1194,10 @@ module Aws::WorkSpacesWeb
     #   The customer managed key used to encrypt sensitive information in the
     #   user settings.
     #
+    # @option params [String] :deep_link_allowed
+    #   Specifies whether the user can use deep links that open automatically
+    #   when connecting to a session.
+    #
     # @option params [Integer] :disconnect_timeout_in_minutes
     #   The amount of time that a streaming session remains active after users
     #   disconnect.
@@ -1238,6 +1255,7 @@ module Aws::WorkSpacesWeb
     #     },
     #     copy_allowed: "Disabled", # required, accepts Disabled, Enabled
     #     customer_managed_key: "keyArn",
+    #     deep_link_allowed: "Disabled", # accepts Disabled, Enabled
     #     disconnect_timeout_in_minutes: 1,
     #     download_allowed: "Disabled", # required, accepts Disabled, Enabled
     #     idle_disconnect_timeout_in_minutes: 1,
@@ -1921,6 +1939,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.customer_managed_key #=> String
+    #   resp.user_settings.deep_link_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
@@ -2344,6 +2363,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].name #=> String
     #   resp.user_settings[0].cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings[0].copy_allowed #=> String, one of "Disabled", "Enabled"
+    #   resp.user_settings[0].deep_link_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings[0].disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings[0].download_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings[0].idle_disconnect_timeout_in_minutes #=> Integer
@@ -2949,6 +2969,10 @@ module Aws::WorkSpacesWeb
     #   Specifies whether the user can copy text from the streaming session to
     #   the local device.
     #
+    # @option params [String] :deep_link_allowed
+    #   Specifies whether the user can use deep links that open automatically
+    #   when connecting to a session.
+    #
     # @option params [Integer] :disconnect_timeout_in_minutes
     #   The amount of time that a streaming session remains active after users
     #   disconnect.
@@ -3001,6 +3025,7 @@ module Aws::WorkSpacesWeb
     #       ],
     #     },
     #     copy_allowed: "Disabled", # accepts Disabled, Enabled
+    #     deep_link_allowed: "Disabled", # accepts Disabled, Enabled
     #     disconnect_timeout_in_minutes: 1,
     #     download_allowed: "Disabled", # accepts Disabled, Enabled
     #     idle_disconnect_timeout_in_minutes: 1,
@@ -3026,6 +3051,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.cookie_synchronization_configuration.blocklist[0].path #=> String
     #   resp.user_settings.copy_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.customer_managed_key #=> String
+    #   resp.user_settings.deep_link_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.disconnect_timeout_in_minutes #=> Integer
     #   resp.user_settings.download_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.user_settings.idle_disconnect_timeout_in_minutes #=> Integer
@@ -3056,7 +3082,7 @@ module Aws::WorkSpacesWeb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

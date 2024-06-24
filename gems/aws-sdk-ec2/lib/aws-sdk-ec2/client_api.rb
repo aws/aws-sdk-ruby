@@ -15739,7 +15739,7 @@ module Aws::EC2
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ec2",
         "protocol" => "ec2",
-        "protocols" => ["query"],
+        "protocols" => ["ec2"],
         "serviceAbbreviation" => "Amazon EC2",
         "serviceFullName" => "Amazon Elastic Compute Cloud",
         "serviceId" => "EC2",

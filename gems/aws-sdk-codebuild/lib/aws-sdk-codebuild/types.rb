@@ -1852,6 +1852,15 @@ module Aws::CodeBuild
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration for global or organization webhooks.
+    #
+    #   <note markdown="1"> Global or organization webhooks are only available for GitHub and
+    #   Github Enterprise webhooks.
+    #
+    #    </note>
+    #   @return [Types::ScopeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
@@ -1859,7 +1868,8 @@ module Aws::CodeBuild
       :branch_filter,
       :filter_groups,
       :build_type,
-      :manual_creation)
+      :manual_creation,
+      :scope_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5450,6 +5460,34 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains configuration information about the scope for a webhook.
+    #
+    # @!attribute [rw] name
+    #   The name of either the enterprise or organization that will send
+    #   webhook events to CodeBuild, depending on if the webhook is a global
+    #   or organization webhook respectively.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the GitHub Enterprise organization. Note that this
+    #   parameter is only required if your project's source type is
+    #   GITHUB\_ENTERPRISE
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The type of scope for a GitHub webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ScopeConfiguration AWS API Documentation
+    #
+    class ScopeConfiguration < Struct.new(
+      :name,
+      :domain,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the authorization settings for CodeBuild to access
     # the source code to be built.
     #
@@ -6961,6 +6999,15 @@ module Aws::CodeBuild
     #   token was modified.
     #   @return [Time]
     #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration for global or organization webhooks.
+    #
+    #   <note markdown="1"> Global or organization webhooks are only available for GitHub and
+    #   Github Enterprise webhooks.
+    #
+    #    </note>
+    #   @return [Types::ScopeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook AWS API Documentation
     #
     class Webhook < Struct.new(
@@ -6971,7 +7018,8 @@ module Aws::CodeBuild
       :filter_groups,
       :build_type,
       :manual_creation,
-      :last_modified_secret)
+      :last_modified_secret,
+      :scope_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7067,6 +7115,15 @@ module Aws::CodeBuild
     #       regular expression `pattern`.
     #
     #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
+    #
+    #        </note>
+    #
+    #   * REPOSITORY\_NAME
+    #
+    #     * A webhook triggers a build when the repository name matches the
+    #       regular expression pattern.
+    #
+    #       <note markdown="1"> Works with GitHub global or organization webhooks only.
     #
     #        </note>
     #

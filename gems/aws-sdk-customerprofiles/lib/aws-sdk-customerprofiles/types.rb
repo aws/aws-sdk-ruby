@@ -957,7 +957,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] account_number
-    #   A unique account number that you have given to the customer.
+    #   An account number that you have given to the customer.
     #   @return [String]
     #
     # @!attribute [rw] additional_information
@@ -2389,6 +2389,14 @@ module Aws::CustomerProfiles
     #   set up.
     #   @return [String]
     #
+    # @!attribute [rw] max_available_profile_object_count
+    #   The amount of provisioned profile object max count available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_profile_object_count
+    #   The amount of profile object max count assigned to the object type.
+    #   @return [Integer]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -2420,6 +2428,8 @@ module Aws::CustomerProfiles
       :encryption_key,
       :allow_profile_creation,
       :source_last_updated_timestamp_format,
+      :max_available_profile_object_count,
+      :max_profile_object_count,
       :fields,
       :keys,
       :created_at,
@@ -3334,6 +3344,14 @@ module Aws::CustomerProfiles
     #   The timestamp of when the domain was most recently edited.
     #   @return [Time]
     #
+    # @!attribute [rw] max_profile_object_count
+    #   The amount of profile object max count assigned to the object type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_available_profile_object_count
+    #   The amount of provisioned profile object max count available.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -3346,6 +3364,8 @@ module Aws::CustomerProfiles
       :description,
       :created_at,
       :last_updated_at,
+      :max_profile_object_count,
+      :max_available_profile_object_count,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3990,7 +4010,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] account_number
-    #   A unique account number that you have given to the customer.
+    #   An account number that you have given to the customer.
     #   @return [String]
     #
     # @!attribute [rw] additional_information
@@ -4331,6 +4351,10 @@ module Aws::CustomerProfiles
     #   set up.
     #   @return [String]
     #
+    # @!attribute [rw] max_profile_object_count
+    #   The amount of profile object max count assigned to the object type
+    #   @return [Integer]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -4355,6 +4379,7 @@ module Aws::CustomerProfiles
       :encryption_key,
       :allow_profile_creation,
       :source_last_updated_timestamp_format,
+      :max_profile_object_count,
       :fields,
       :keys,
       :tags)
@@ -4403,6 +4428,14 @@ module Aws::CustomerProfiles
     #   [1]: https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html
     #   @return [String]
     #
+    # @!attribute [rw] max_profile_object_count
+    #   The amount of profile object max count assigned to the object type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_available_profile_object_count
+    #   The amount of provisioned profile object max count available.
+    #   @return [Integer]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -4434,6 +4467,8 @@ module Aws::CustomerProfiles
       :encryption_key,
       :allow_profile_creation,
       :source_last_updated_timestamp_format,
+      :max_profile_object_count,
+      :max_available_profile_object_count,
       :fields,
       :keys,
       :created_at,
@@ -5416,7 +5451,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] account_number
-    #   A unique account number that you have given to the customer.
+    #   An account number that you have given to the customer.
     #   @return [String]
     #
     # @!attribute [rw] party_type

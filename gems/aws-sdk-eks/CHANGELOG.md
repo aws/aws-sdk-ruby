@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2024-06-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.105.0 (2024-06-18)
+------------------
+
+* Feature - This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response.
+
 1.104.0 (2024-06-05)
 ------------------
 

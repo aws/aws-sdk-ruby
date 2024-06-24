@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'thread'
-
 module Seahorse
   module Client
     class Base
@@ -60,6 +58,7 @@ module Seahorse
       def build_config(plugins, options)
         config = Configuration.new
         config.add_option(:api)
+        config.add_option(:plugins)
         plugins.each do |plugin|
           plugin.add_options(config) if plugin.respond_to?(:add_options)
         end
@@ -96,9 +95,9 @@ module Seahorse
       class << self
 
         def new(options = {})
-          plugins = build_plugins
           options = options.dup
-          before_initialize(plugins, options)
+          plugins = build_plugins(self.plugins + options.fetch(:plugins, []))
+          plugins = before_initialize(plugins, options)
           client = allocate
           client.send(:initialize, plugins, options)
           client
@@ -209,17 +208,28 @@ module Seahorse
           include(operations_module)
         end
 
-        def build_plugins
+        def build_plugins(plugins)
           plugins.map { |plugin| plugin.is_a?(Class) ? plugin.new : plugin }
         end
 
         def before_initialize(plugins, options)
-          plugins.each do |plugin|
-            plugin.before_initialize(self, options) if plugin.respond_to?(:before_initialize)
+          queue = Queue.new
+          plugins.each { |plugin| queue.push(plugin) }
+          until queue.empty?
+            plugin = queue.pop
+            next unless plugin.respond_to?(:before_initialize)
+
+            plugins_before = options.fetch(:plugins, [])
+            plugin.before_initialize(self, options)
+            plugins_after = build_plugins(options.fetch(:plugins, []) - plugins_before)
+            # Plugins with before_initialize can add other plugins
+            plugins_after.each { |p| queue.push(p); plugins << p }
           end
+          plugins
         end
 
         def inherited(subclass)
+          super
           subclass.instance_variable_set('@plugins', PluginList.new(@plugins))
         end
 

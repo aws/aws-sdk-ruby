@@ -62,6 +62,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::AcceptPredictions.build(context)
           when :accept_subscription_request
             Aws::DataZone::Endpoints::AcceptSubscriptionRequest.build(context)
+          when :associate_environment_role
+            Aws::DataZone::Endpoints::AssociateEnvironmentRole.build(context)
           when :cancel_metadata_generation_run
             Aws::DataZone::Endpoints::CancelMetadataGenerationRun.build(context)
           when :cancel_subscription
@@ -78,6 +80,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::CreateDomain.build(context)
           when :create_environment
             Aws::DataZone::Endpoints::CreateEnvironment.build(context)
+          when :create_environment_action
+            Aws::DataZone::Endpoints::CreateEnvironmentAction.build(context)
           when :create_environment_profile
             Aws::DataZone::Endpoints::CreateEnvironmentProfile.build(context)
           when :create_form_type
@@ -112,6 +116,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DeleteDomain.build(context)
           when :delete_environment
             Aws::DataZone::Endpoints::DeleteEnvironment.build(context)
+          when :delete_environment_action
+            Aws::DataZone::Endpoints::DeleteEnvironmentAction.build(context)
           when :delete_environment_blueprint_configuration
             Aws::DataZone::Endpoints::DeleteEnvironmentBlueprintConfiguration.build(context)
           when :delete_environment_profile
@@ -136,6 +142,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DeleteSubscriptionTarget.build(context)
           when :delete_time_series_data_points
             Aws::DataZone::Endpoints::DeleteTimeSeriesDataPoints.build(context)
+          when :disassociate_environment_role
+            Aws::DataZone::Endpoints::DisassociateEnvironmentRole.build(context)
           when :get_asset
             Aws::DataZone::Endpoints::GetAsset.build(context)
           when :get_asset_type
@@ -148,6 +156,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetDomain.build(context)
           when :get_environment
             Aws::DataZone::Endpoints::GetEnvironment.build(context)
+          when :get_environment_action
+            Aws::DataZone::Endpoints::GetEnvironmentAction.build(context)
           when :get_environment_blueprint
             Aws::DataZone::Endpoints::GetEnvironmentBlueprint.build(context)
           when :get_environment_blueprint_configuration
@@ -192,6 +202,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListDataSources.build(context)
           when :list_domains
             Aws::DataZone::Endpoints::ListDomains.build(context)
+          when :list_environment_actions
+            Aws::DataZone::Endpoints::ListEnvironmentActions.build(context)
           when :list_environment_blueprint_configurations
             Aws::DataZone::Endpoints::ListEnvironmentBlueprintConfigurations.build(context)
           when :list_environment_blueprints
@@ -254,6 +266,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::UpdateDomain.build(context)
           when :update_environment
             Aws::DataZone::Endpoints::UpdateEnvironment.build(context)
+          when :update_environment_action
+            Aws::DataZone::Endpoints::UpdateEnvironmentAction.build(context)
           when :update_environment_profile
             Aws::DataZone::Endpoints::UpdateEnvironmentProfile.build(context)
           when :update_glossary

@@ -37,6 +37,11 @@ module {{module_name}}
     {{#client_constructor}}
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     {{>documentation}}
     {{/client_constructor}}
     def initialize(*args)
