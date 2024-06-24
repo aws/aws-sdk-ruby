@@ -85,9 +85,6 @@ module BuildTools
         members.delete('DestinationRegion')
         members.delete('PresignedUrl')
       end
-
-      # temporary
-      api['metadata']['protocols'] = ['ec2']
     end
 
     api('Glacier') do |api|

@@ -828,7 +828,7 @@
                     "byteValue": 5,
                     "doubleValue": 1.889,
                     "falseBooleanValue": false,
-                    "floatValue": 7.624,
+                    "floatValue": 7.625,
                     "integerValue": 256,
                     "longValue": 9873,
                     "shortValue": 9898,
@@ -839,7 +839,7 @@
                 "serialized": {
                     "method": "POST",
                     "uri": "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-                    "body": "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==",
+                    "body": "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kD0AABsaW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==",
                     "headers": {
                         "Content-Type": "application/cbor",
                         "smithy-protocol": "rpc-v2-cbor"
