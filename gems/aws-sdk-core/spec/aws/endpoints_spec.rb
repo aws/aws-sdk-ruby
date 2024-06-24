@@ -318,7 +318,7 @@ module Aws
           let(:auth_schemes) { [{ 'name' => 'sigv4-s3express' }] }
 
           it 'defaults the signing region from config' do
-            expect_auth_scheme({ 'signingRegion' => 'us-stubbed-1' })
+            expect_auth({ 'signingRegion' => 'us-stubbed-1' })
             client.operation
           end
         end

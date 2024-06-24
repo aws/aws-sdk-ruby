@@ -15,7 +15,7 @@ module Sigv4Helper
       if auth_scheme['name'] == 'sigv4a'
         mock_signature = Aws::Sigv4::Signature.new(headers: {})
         signer = double('sigv4a_signer', sign_request: mock_signature)
-        region = region_override || args.first['signingRegionSet'].join(',')
+        region = region || args.first['signingRegionSet'].join(',')
 
         expect(Aws::Sigv4::Signer).to receive(:new)
           .with(hash_including(signing_algorithm: :sigv4a, region: region))

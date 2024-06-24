@@ -40,7 +40,7 @@ module Aws
       private
 
       def merge_signing_defaults(auth_scheme, config)
-        if %w[sigv4 sigv4a].include?(auth_scheme['name'])
+        if %w[sigv4 sigv4a sigv4-s3express].include?(auth_scheme['name'])
           auth_scheme['signingName'] ||= sigv4_name(config)
           if auth_scheme['name'] == 'sigv4a'
             # config option supersedes endpoint properties
