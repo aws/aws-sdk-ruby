@@ -11,8 +11,7 @@
     "serviceId":"Connect",
     "signatureVersion":"v4",
     "signingName":"connect",
-    "uid":"connect-2017-08-08",
-    "auth":["aws.auth#sigv4"]
+    "uid":"connect-2017-08-08"
   },
   "operations":{
     "ActivateEvaluationForm":{

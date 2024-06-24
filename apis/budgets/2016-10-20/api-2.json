@@ -11,8 +11,7 @@
     "serviceId":"Budgets",
     "signatureVersion":"v4",
     "targetPrefix":"AWSBudgetServiceGateway",
-    "uid":"budgets-2016-10-20",
-    "auth":["aws.auth#sigv4"]
+    "uid":"budgets-2016-10-20"
   },
   "operations":{
     "CreateBudget":{

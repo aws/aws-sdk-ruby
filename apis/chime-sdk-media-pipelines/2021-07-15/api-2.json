@@ -4,13 +4,11 @@
     "apiVersion":"2021-07-15",
     "endpointPrefix":"media-pipelines-chime",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceFullName":"Amazon Chime SDK Media Pipelines",
     "serviceId":"Chime SDK Media Pipelines",
     "signatureVersion":"v4",
     "signingName":"chime",
-    "uid":"chime-sdk-media-pipelines-2021-07-15",
-    "auth":["aws.auth#sigv4"]
+    "uid":"chime-sdk-media-pipelines-2021-07-15"
   },
   "operations":{
     "CreateMediaCapturePipeline":{

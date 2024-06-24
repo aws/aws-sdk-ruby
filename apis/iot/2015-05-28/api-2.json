@@ -4,13 +4,11 @@
     "apiVersion":"2015-05-28",
     "endpointPrefix":"iot",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceFullName":"AWS IoT",
     "serviceId":"IoT",
     "signatureVersion":"v4",
     "signingName":"iot",
-    "uid":"iot-2015-05-28",
-    "auth":["aws.auth#sigv4"]
+    "uid":"iot-2015-05-28"
   },
   "operations":{
     "AcceptCertificateTransfer":{

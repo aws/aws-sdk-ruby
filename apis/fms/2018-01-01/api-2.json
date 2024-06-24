@@ -11,8 +11,7 @@
     "serviceId":"FMS",
     "signatureVersion":"v4",
     "targetPrefix":"AWSFMS_20180101",
-    "uid":"fms-2018-01-01",
-    "auth":["aws.auth#sigv4"]
+    "uid":"fms-2018-01-01"
   },
   "operations":{
     "AssociateAdminAccount":{

@@ -5,13 +5,11 @@
     "endpointPrefix":"ebs",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceAbbreviation":"Amazon EBS",
     "serviceFullName":"Amazon Elastic Block Store",
     "serviceId":"EBS",
     "signatureVersion":"v4",
-    "uid":"ebs-2019-11-02",
-    "auth":["aws.auth#sigv4"]
+    "uid":"ebs-2019-11-02"
   },
   "operations":{
     "CompleteSnapshot":{
@@ -100,8 +98,7 @@
         {"shape":"ServiceQuotaExceededException"},
         {"shape":"InternalServerException"}
       ],
-      "authtype":"v4-unsigned-body",
-      "unsignedPayload":true
+      "authtype":"v4-unsigned-body"
     },
     "StartSnapshot":{
       "name":"StartSnapshot",

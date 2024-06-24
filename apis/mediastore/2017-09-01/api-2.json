@@ -5,15 +5,13 @@
     "endpointPrefix":"mediastore",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceAbbreviation":"MediaStore",
     "serviceFullName":"AWS Elemental MediaStore",
     "serviceId":"MediaStore",
     "signatureVersion":"v4",
     "signingName":"mediastore",
     "targetPrefix":"MediaStore_20170901",
-    "uid":"mediastore-2017-09-01",
-    "auth":["aws.auth#sigv4"]
+    "uid":"mediastore-2017-09-01"
   },
   "operations":{
     "CreateContainer":{
