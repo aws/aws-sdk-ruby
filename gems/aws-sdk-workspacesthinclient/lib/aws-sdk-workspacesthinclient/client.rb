@@ -472,6 +472,10 @@ module Aws::WorkSpacesThinClient
     #   A map of the key-value pairs of the tag or tags to assign to the
     #   resource.
     #
+    # @option params [Hash<String,String>] :device_creation_tags
+    #   A map of the key-value pairs of the tag or tags to assign to the newly
+    #   created devices for this environment.
+    #
     # @return [Types::CreateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentResponse#environment #environment} => Types::EnvironmentSummary
@@ -498,6 +502,9 @@ module Aws::WorkSpacesThinClient
     #     client_token: "ClientToken",
     #     tags: {
     #       "String" => "String",
+    #     },
+    #     device_creation_tags: {
+    #       "DeviceCreationTagKey" => "DeviceCreationTagValue",
     #     },
     #   })
     #
@@ -766,6 +773,8 @@ module Aws::WorkSpacesThinClient
     #   resp.environment.kms_key_arn #=> String
     #   resp.environment.tags #=> Hash
     #   resp.environment.tags["String"] #=> String
+    #   resp.environment.device_creation_tags #=> Hash
+    #   resp.environment.device_creation_tags["DeviceCreationTagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/GetEnvironment AWS API Documentation
     #
@@ -1161,6 +1170,10 @@ module Aws::WorkSpacesThinClient
     # @option params [String] :desired_software_set_id
     #   The ID of the software set to apply.
     #
+    # @option params [Hash<String,String>] :device_creation_tags
+    #   A map of the key-value pairs of the tag or tags to assign to the newly
+    #   created devices for this environment.
+    #
     # @return [Types::UpdateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEnvironmentResponse#environment #environment} => Types::EnvironmentSummary
@@ -1184,6 +1197,9 @@ module Aws::WorkSpacesThinClient
     #     },
     #     software_set_update_mode: "USE_LATEST", # accepts USE_LATEST, USE_DESIRED
     #     desired_software_set_id: "SoftwareSetIdOrEmptyString",
+    #     device_creation_tags: {
+    #       "DeviceCreationTagKey" => "DeviceCreationTagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1258,7 +1274,7 @@ module Aws::WorkSpacesThinClient
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesthinclient'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

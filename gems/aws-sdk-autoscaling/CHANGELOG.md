@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2024-06-25)
+------------------
+
+* Feature - Doc only update for Auto Scaling's TargetTrackingMetricDataQuery
+
 1.110.0 (2024-06-24)
 ------------------
 

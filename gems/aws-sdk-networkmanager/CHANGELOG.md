@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2024-06-25)
+------------------
+
+* Feature - This is model changes & documentation update for the Asynchronous Error Reporting feature for AWS Cloud WAN. This feature allows customers to view errors that occur while their resources are being provisioned, enabling customers to fix their resources without needing external support.
+
 1.46.0 (2024-06-24)
 ------------------
 

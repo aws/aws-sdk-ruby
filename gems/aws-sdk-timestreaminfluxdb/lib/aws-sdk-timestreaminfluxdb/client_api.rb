@@ -336,7 +336,6 @@ module Aws::TimestreamInfluxDB
         "endpointPrefix" => "timestream-influxdb",
         "jsonVersion" => "1.0",
         "protocol" => "json",
-        "ripServiceName" => "timestream-influxdb",
         "serviceAbbreviation" => "Timestream InfluxDB",
         "serviceFullName" => "Timestream InfluxDB",
         "serviceId" => "Timestream InfluxDB",

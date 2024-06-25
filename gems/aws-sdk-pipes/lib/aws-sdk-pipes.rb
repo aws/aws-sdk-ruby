@@ -53,6 +53,6 @@ require_relative 'aws-sdk-pipes/customizations'
 # @!group service
 module Aws::Pipes
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

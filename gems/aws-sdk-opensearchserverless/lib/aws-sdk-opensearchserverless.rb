@@ -52,6 +52,6 @@ require_relative 'aws-sdk-opensearchserverless/customizations'
 # @!group service
 module Aws::OpenSearchServerless
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

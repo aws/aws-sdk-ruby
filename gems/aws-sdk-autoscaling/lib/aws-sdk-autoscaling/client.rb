@@ -430,12 +430,12 @@ module Aws::AutoScaling
     # there are target groups attached to your Auto Scaling group, the
     # instances are also registered with the target groups.
     #
-    # For more information, see [Attach EC2 instances to your Auto Scaling
-    # group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Detach or attach instances][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-detach-attach-instances.html
     #
     # @option params [Array<String>] :instance_ids
     #   The IDs of the instances. You can specify up to 20 instances.
@@ -971,7 +971,7 @@ module Aws::AutoScaling
     #   (`LaunchConfigurationName` or `InstanceId`).
     #
     #   <note markdown="1"> The launch template that is specified must be configured for use with
-    #   an Auto Scaling group. For more information, see [Creating a launch
+    #   an Auto Scaling group. For more information, see [Create a launch
     #   template for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
     #   User Guide*.
     #
@@ -995,8 +995,9 @@ module Aws::AutoScaling
     #   specified, Amazon EC2 Auto Scaling uses the configuration values from
     #   the specified instance to create a new launch configuration. To get
     #   the instance ID, use the Amazon EC2 [DescribeInstances][1] API
-    #   operation. For more information, see [Creating an Auto Scaling group
-    #   using an EC2 instance][2] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   operation. For more information, see [Create an Auto Scaling group
+    #   using parameters from an existing instance][2] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
@@ -1039,7 +1040,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
     #
     # @option params [Array<String>] :availability_zones
     #   A list of Availability Zones where instances in the Auto Scaling group
@@ -1072,14 +1073,14 @@ module Aws::AutoScaling
     #
     #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
     #   default health check and cannot be disabled. For more information, see
-    #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   [Health checks for instances in an Auto Scaling group][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously set.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html
     #
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
@@ -1120,8 +1121,9 @@ module Aws::AutoScaling
     # @option params [Array<String>] :termination_policies
     #   A policy or a list of policies that are used to select the instance to
     #   terminate. These policies are executed in the order that you list
-    #   them. For more information, see [Work with Amazon EC2 Auto Scaling
-    #   termination policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   them. For more information, see [Configure termination policies for
+    #   Amazon EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #   Valid values: `Default` \| `AllocationStrategy` \|
     #   `ClosestToNextInstanceHour` \| `NewestInstance` \| `OldestInstance` \|
@@ -1136,7 +1138,7 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   see [Use instance scale-in protection][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
     #
     #
@@ -1192,7 +1194,7 @@ module Aws::AutoScaling
     #   The maximum amount of time, in seconds, that an instance can be in
     #   service. The default is null. If specified, the value must be either 0
     #   or a number equal to or greater than 86,400 seconds (1 day). For more
-    #   information, see [Replacing Auto Scaling instances based on maximum
+    #   information, see [Replace Auto Scaling instances based on maximum
     #   instance lifetime][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
@@ -1206,7 +1208,7 @@ module Aws::AutoScaling
     #   The unit of measurement for the value specified for desired capacity.
     #   Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
     #   attribute-based instance type selection only. For more information,
-    #   see [Creating an Auto Scaling group using attribute-based instance
+    #   see [Create a mixed instances group using attribute-based instance
     #   type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   By default, Amazon EC2 Auto Scaling specifies `units`, which
@@ -1216,7 +1218,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
     #
     # @option params [Integer] :default_instance_warmup
     #   The amount of time, in seconds, until a new instance is considered to
@@ -1559,7 +1561,7 @@ module Aws::AutoScaling
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html
-    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-configurations.html
     # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html
     #
     # @option params [required, String] :launch_configuration_name
@@ -1568,8 +1570,8 @@ module Aws::AutoScaling
     #
     # @option params [String] :image_id
     #   The ID of the Amazon Machine Image (AMI) that was assigned during
-    #   registration. For more information, see [Finding a Linux AMI][1] in
-    #   the *Amazon EC2 User Guide for Linux Instances*.
+    #   registration. For more information, see [Find a Linux AMI][1] in the
+    #   *Amazon EC2 User Guide for Linux Instances*.
     #
     #   If you specify `InstanceId`, an `ImageId` is not required.
     #
@@ -1579,8 +1581,8 @@ module Aws::AutoScaling
     #
     # @option params [String] :key_name
     #   The name of the key pair. For more information, see [Amazon EC2 key
-    #   pairs and Linux instances][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances*.
+    #   pairs and Amazon EC2 instances][1] in the *Amazon EC2 User Guide for
+    #   Linux Instances*.
     #
     #
     #
@@ -1589,12 +1591,12 @@ module Aws::AutoScaling
     # @option params [Array<String>] :security_groups
     #   A list that contains the security group IDs to assign to the instances
     #   in the Auto Scaling group. For more information, see [Control traffic
-    #   to resources using security groups][1] in the *Amazon Virtual Private
-    #   Cloud User Guide*.
+    #   to your Amazon Web Services resources using security groups][1] in the
+    #   *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html
     #
     # @option params [String] :classic_link_vpc_id
     #   Available for backward compatibility.
@@ -1624,12 +1626,12 @@ module Aws::AutoScaling
     #   override any other instance attributes, specify them as part of the
     #   same request.
     #
-    #   For more information, see [Creating a launch configuration using an
-    #   EC2 instance][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Create a launch configuration][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html
     #
     # @option params [String] :instance_type
     #   Specifies the instance type of the EC2 instance. For information about
@@ -1688,8 +1690,8 @@ module Aws::AutoScaling
     #   When detailed monitoring is enabled, Amazon CloudWatch generates
     #   metrics every minute and your account is charged a fee. When you
     #   disable detailed monitoring, CloudWatch generates metrics every 5
-    #   minutes. For more information, see [Configure Monitoring for Auto
-    #   Scaling Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   minutes. For more information, see [Configure monitoring for Auto
+    #   Scaling instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1740,7 +1742,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
     #
     # @option params [Boolean] :associate_public_ip_address
     #   Specifies whether to assign a public IPv4 address to the group's
@@ -1753,8 +1755,8 @@ module Aws::AutoScaling
     #
     #   If you specify `true`, each instance in the Auto Scaling group
     #   receives a unique public IPv4 address. For more information, see
-    #   [Launching Auto Scaling instances in a VPC][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   [Provide network connectivity for your Auto Scaling instances using
+    #   Amazon VPC][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   If you specify this property, you must specify at least one subnet for
     #   `VPCZoneIdentifier` when you create your group.
@@ -1769,22 +1771,16 @@ module Aws::AutoScaling
     #   hardware and can only be launched into a VPC. To launch dedicated
     #   instances into a shared tenancy VPC (a VPC with the instance placement
     #   tenancy attribute set to `default`), you must set the value of this
-    #   property to `dedicated`. For more information, see [Configuring
-    #   instance tenancy with Amazon EC2 Auto Scaling][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   property to `dedicated`.
     #
     #   If you specify `PlacementTenancy`, you must specify at least one
     #   subnet for `VPCZoneIdentifier` when you create your group.
     #
     #   Valid values: `default` \| `dedicated`
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
-    #
     # @option params [Types::InstanceMetadataOptions] :metadata_options
     #   The metadata options for the instances. For more information, see
-    #   [Configuring the Instance Metadata Options][1] in the *Amazon EC2 Auto
+    #   [Configure the instance metadata options][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
     #
     #
@@ -2117,8 +2113,8 @@ module Aws::AutoScaling
     # deletes the underlying alarm action, but does not delete the alarm,
     # even if it no longer has an associated action.
     #
-    # For more information, see [Deleting a scaling policy][1] in the
-    # *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Delete a scaling policy][1] in the *Amazon
+    # EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -3754,7 +3750,7 @@ module Aws::AutoScaling
     # Region.
     #
     # When scaling events occur, you see a record of the scaling activity in
-    # the scaling activities. For more information, see [Verifying a scaling
+    # the scaling activities. For more information, see [Verify a scaling
     # activity for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
     # User Guide*.
     #
@@ -4133,8 +4129,8 @@ module Aws::AutoScaling
     # Describes the termination policies supported by Amazon EC2 Auto
     # Scaling.
     #
-    # For more information, see [Work with Amazon EC2 Auto Scaling
-    # termination policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Configure termination policies for Amazon
+    # EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -4345,12 +4341,12 @@ module Aws::AutoScaling
     # are target groups attached to the Auto Scaling group, the instances
     # are deregistered from the target groups.
     #
-    # For more information, see [Detach EC2 instances from your Auto Scaling
-    # group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Detach or attach instances][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-detach-attach-instances.html
     #
     # @option params [Array<String>] :instance_ids
     #   The IDs of the instances. You can specify up to 20 instances.
@@ -4656,12 +4652,12 @@ module Aws::AutoScaling
     #
     #   If you omit this property, all metrics are disabled.
     #
-    #   For more information, see [Auto Scaling group metrics][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Amazon CloudWatch metrics for Amazon EC2
+    #   Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-metrics.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4757,12 +4753,12 @@ module Aws::AutoScaling
     #   If you specify `Granularity` and don't specify any metrics, all
     #   metrics are enabled.
     #
-    #   For more information, see [Auto Scaling group metrics][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Amazon CloudWatch metrics for Amazon EC2
+    #   Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-metrics.html
     #
     # @option params [required, String] :granularity
     #   The frequency at which Amazon EC2 Auto Scaling sends aggregated data
@@ -4910,7 +4906,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
     #
     # @option params [Float] :metric_value
     #   The metric value to compare to `BreachThreshold`. This enables you to
@@ -5316,16 +5312,15 @@ module Aws::AutoScaling
     #
     # This configuration overwrites any existing configuration.
     #
-    # For more information, see [Getting Amazon SNS notifications when your
-    # Auto Scaling group scales][1] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # For more information, see [Amazon SNS notification options for Amazon
+    # EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     # If you exceed your maximum limit of SNS topics, which is 10 per Auto
     # Scaling group, the call fails.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-sns-notifications.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -5472,7 +5467,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
     #
     # @option params [String] :metric_aggregation_type
     #   The aggregation type for the CloudWatch metrics. The valid values are
@@ -5535,7 +5530,7 @@ module Aws::AutoScaling
     #
     # @option params [Boolean] :enabled
     #   Indicates whether the scaling policy is enabled or disabled. The
-    #   default is enabled. For more information, see [Disabling a scaling
+    #   default is enabled. For more information, see [Disable a scaling
     #   policy for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
     #   User Guide*.
     #
@@ -5635,7 +5630,7 @@ module Aws::AutoScaling
     #         unit: "MetricUnit",
     #         metrics: [
     #           {
-    #             id: "XmlStringMaxLen255", # required
+    #             id: "XmlStringMaxLen64", # required
     #             expression: "XmlStringMaxLen2047",
     #             metric_stat: {
     #               metric: { # required
@@ -5789,7 +5784,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -5904,18 +5899,17 @@ module Aws::AutoScaling
     # warm pool is a pool of pre-initialized EC2 instances that sits
     # alongside the Auto Scaling group. Whenever your application needs to
     # scale out, the Auto Scaling group can draw on the warm pool to meet
-    # its new desired capacity. For more information and example
-    # configurations, see [Warm pools for Amazon EC2 Auto Scaling][1] in the
-    # *Amazon EC2 Auto Scaling User Guide*.
+    # its new desired capacity.
     #
     # This operation must be called from the Region in which the Auto
-    # Scaling group was created. This operation cannot be called on an Auto
-    # Scaling group that has a mixed instances policy or a launch template
-    # or launch configuration that requests Spot Instances.
+    # Scaling group was created.
     #
     # You can view the instances in the warm pool using the DescribeWarmPool
     # API call. If you are no longer using a warm pool, you can delete it by
     # calling the DeleteWarmPool API.
+    #
+    # For more information, see [Warm pools for Amazon EC2 Auto Scaling][1]
+    # in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -6084,7 +6078,7 @@ module Aws::AutoScaling
     # Resumes the specified suspended auto scaling processes, or all
     # suspended process, for the specified Auto Scaling group.
     #
-    # For more information, see [Suspending and resuming scaling
+    # For more information, see [Suspend and resume Amazon EC2 Auto Scaling
     # processes][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
@@ -6216,7 +6210,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-manual-scaling.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -6265,12 +6259,12 @@ module Aws::AutoScaling
 
     # Sets the health status of the specified instance.
     #
-    # For more information, see [Health checks for Auto Scaling
-    # instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Health checks for instances in an Auto
+    # Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -6287,13 +6281,13 @@ module Aws::AutoScaling
     #   call respects the grace period. Set this to `False`, to have the call
     #   not respect the grace period associated with the group.
     #
-    #   For more information about the health check grace period, see
-    #   [CreateAutoScalingGroup][1] in the *Amazon EC2 Auto Scaling API
-    #   Reference*.
+    #   For more information about the health check grace period, see [Set the
+    #   health check grace period for an Auto Scaling group][1] in the *Amazon
+    #   EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6327,9 +6321,8 @@ module Aws::AutoScaling
     # Updates the instance protection settings of the specified instances.
     # This operation cannot be called on instances in a warm pool.
     #
-    # For more information about preventing instances that are part of an
-    # Auto Scaling group from terminating on scale in, see [Using instance
-    # scale-in protection][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Use instance scale-in protection][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     # If you exceed your maximum limit of instance IDs, which is 50 per Auto
     # Scaling group, the call fails.
@@ -6630,8 +6623,8 @@ module Aws::AutoScaling
     #
     # If you suspend either the `Launch` or `Terminate` process types, it
     # can prevent other process types from functioning properly. For more
-    # information, see [Suspending and resuming scaling processes][1] in the
-    # *Amazon EC2 Auto Scaling User Guide*.
+    # information, see [Suspend and resume Amazon EC2 Auto Scaling
+    # processes][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     # To resume processes that have been suspended, call the ResumeProcesses
     # API.
@@ -6713,13 +6706,12 @@ module Aws::AutoScaling
     # Availability Zones. If you decrement the desired capacity, your Auto
     # Scaling group can become unbalanced between Availability Zones. Amazon
     # EC2 Auto Scaling tries to rebalance the group, and rebalancing might
-    # terminate instances in other zones. For more information, see
-    # [Rebalancing activities][1] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # terminate instances in other zones. For more information, see [Manual
+    # scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -6877,7 +6869,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
     #
     # @option params [Array<String>] :availability_zones
     #   One or more Availability Zones for the group.
@@ -6887,14 +6879,14 @@ module Aws::AutoScaling
     #
     #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
     #   default health check and cannot be disabled. For more information, see
-    #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   [Health checks for instances in an Auto Scaling group][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously set.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html
     #
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
@@ -6932,8 +6924,9 @@ module Aws::AutoScaling
     # @option params [Array<String>] :termination_policies
     #   A policy or a list of policies that are used to select the instances
     #   to terminate. The policies are executed in the order that you list
-    #   them. For more information, see [Work with Amazon EC2 Auto Scaling
-    #   termination policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   them. For more information, see [Configure termination policies for
+    #   Amazon EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #   Valid values: `Default` \| `AllocationStrategy` \|
     #   `ClosestToNextInstanceHour` \| `NewestInstance` \| `OldestInstance` \|
@@ -6948,7 +6941,7 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   see [Use instance scale-in protection][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
     #
     #
@@ -6993,7 +6986,7 @@ module Aws::AutoScaling
     #   The unit of measurement for the value specified for desired capacity.
     #   Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
     #   attribute-based instance type selection only. For more information,
-    #   see [Creating an Auto Scaling group using attribute-based instance
+    #   see [Create a mixed instances group using attribute-based instance
     #   type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   By default, Amazon EC2 Auto Scaling specifies `units`, which
@@ -7003,7 +6996,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
     #
     # @option params [Integer] :default_instance_warmup
     #   The amount of time, in seconds, until a new instance is considered to
@@ -7193,7 +7186,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

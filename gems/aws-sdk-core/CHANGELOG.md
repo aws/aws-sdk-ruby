@@ -5,6 +5,9 @@ Unreleased Changes
 
 * Feature - Support configuration for sigv4a signing regions using `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`, `sigv4a_signing_region_set` shared config, or the `sigv4a_signing_region_set` client option.
 
+3.199.0 (2024-06-25)
+------------------
+
 * Feature - Support RpcV2 protocol.
 
 * Feature - Add CBOR encoder and decoder.

@@ -55,8 +55,8 @@ module Aws::AutoScaling
 
     # The name of the key pair.
     #
-    # For more information, see [Amazon EC2 Key Pairs][1] in the *Amazon EC2
-    # User Guide for Linux Instances*.
+    # For more information, see [Amazon EC2 key pairs and Amazon EC2
+    # instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -67,12 +67,13 @@ module Aws::AutoScaling
     end
 
     # A list that contains the security groups to assign to the instances in
-    # the Auto Scaling group. For more information, see [Security Groups for
-    # Your VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # the Auto Scaling group. For more information, see [Control traffic to
+    # your Amazon Web Services resources using security groups][1] in the
+    # *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html
     # @return [Array<String>]
     def security_groups
       data[:security_groups]
@@ -133,7 +134,7 @@ module Aws::AutoScaling
     # The block device mapping entries that define the block devices to
     # attach to the instances at launch. By default, the block devices
     # specified in the block device mapping for the AMI are used. For more
-    # information, see [Block Device Mapping][1] in the *Amazon EC2 User
+    # information, see [Block device mappings][1] in the *Amazon EC2 User
     # Guide for Linux Instances*.
     #
     #
@@ -147,8 +148,8 @@ module Aws::AutoScaling
     # Controls whether instances in this group are launched with detailed
     # (`true`) or basic (`false`) monitoring.
     #
-    # For more information, see [Configure Monitoring for Auto Scaling
-    # Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For more information, see [Configure monitoring for Auto Scaling
+    # instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -161,12 +162,12 @@ module Aws::AutoScaling
     # The maximum hourly price to be paid for any Spot Instance launched to
     # fulfill the request. Spot Instances are launched when the price you
     # specify exceeds the current Spot price. For more information, see
-    # [Requesting Spot Instances][1] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # [Requesting Spot Instances for fault-tolerant and flexible
+    # applications][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-template-spot-instances.html
     # @return [String]
     def spot_price
       data[:spot_price]
@@ -194,12 +195,12 @@ module Aws::AutoScaling
 
     # Specifies whether the launch configuration is optimized for EBS I/O
     # (`true`) or not (`false`). For more information, see [Amazon
-    # EBS-Optimized Instances][1] in the *Amazon EC2 User Guide for Linux
+    # EBS-optimized instances][1] in the *Amazon EC2 User Guide for Linux
     # Instances*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
     # @return [Boolean]
     def ebs_optimized
       data[:ebs_optimized]
@@ -211,9 +212,9 @@ module Aws::AutoScaling
     # option to assign a public IPv4 address on the subnet. If the instance
     # is launched into a nondefault subnet, the default is not to assign a
     # public IPv4 address, unless you enabled the option to assign a public
-    # IPv4 address on the subnet. For more information, see [Launching Auto
-    # Scaling instances in a VPC][1] in the *Amazon EC2 Auto Scaling User
-    # Guide*.
+    # IPv4 address on the subnet. For more information, see [Provide network
+    # connectivity for your Auto Scaling instances using Amazon VPC][1] in
+    # the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -226,20 +227,13 @@ module Aws::AutoScaling
     # The tenancy of the instance, either `default` or `dedicated`. An
     # instance with `dedicated` tenancy runs on isolated, single-tenant
     # hardware and can only be launched into a VPC.
-    #
-    # For more information, see [Configuring instance tenancy with Amazon
-    # EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html
     # @return [String]
     def placement_tenancy
       data[:placement_tenancy]
     end
 
     # The metadata options for the instances. For more information, see
-    # [Configuring the Instance Metadata Options][1] in the *Amazon EC2 Auto
+    # [Configure the instance metadata options][1] in the *Amazon EC2 Auto
     # Scaling User Guide*.
     #
     #

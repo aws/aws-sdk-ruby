@@ -31,6 +31,9 @@ module Aws::NetworkManager
     AssociateTransitGatewayConnectPeerRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayConnectPeerRequest')
     AssociateTransitGatewayConnectPeerResponse = Shapes::StructureShape.new(name: 'AssociateTransitGatewayConnectPeerResponse')
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
+    AttachmentError = Shapes::StructureShape.new(name: 'AttachmentError')
+    AttachmentErrorCode = Shapes::StringShape.new(name: 'AttachmentErrorCode')
+    AttachmentErrorList = Shapes::ListShape.new(name: 'AttachmentErrorList')
     AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentList = Shapes::ListShape.new(name: 'AttachmentList')
     AttachmentState = Shapes::StringShape.new(name: 'AttachmentState')
@@ -53,6 +56,9 @@ module Aws::NetworkManager
     ConnectPeerBgpConfiguration = Shapes::StructureShape.new(name: 'ConnectPeerBgpConfiguration')
     ConnectPeerBgpConfigurationList = Shapes::ListShape.new(name: 'ConnectPeerBgpConfigurationList')
     ConnectPeerConfiguration = Shapes::StructureShape.new(name: 'ConnectPeerConfiguration')
+    ConnectPeerError = Shapes::StructureShape.new(name: 'ConnectPeerError')
+    ConnectPeerErrorCode = Shapes::StringShape.new(name: 'ConnectPeerErrorCode')
+    ConnectPeerErrorList = Shapes::ListShape.new(name: 'ConnectPeerErrorList')
     ConnectPeerId = Shapes::StringShape.new(name: 'ConnectPeerId')
     ConnectPeerIdList = Shapes::ListShape.new(name: 'ConnectPeerIdList')
     ConnectPeerState = Shapes::StringShape.new(name: 'ConnectPeerState')
@@ -290,10 +296,14 @@ module Aws::NetworkManager
     PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
     Peering = Shapes::StructureShape.new(name: 'Peering')
+    PeeringError = Shapes::StructureShape.new(name: 'PeeringError')
+    PeeringErrorCode = Shapes::StringShape.new(name: 'PeeringErrorCode')
+    PeeringErrorList = Shapes::ListShape.new(name: 'PeeringErrorList')
     PeeringId = Shapes::StringShape.new(name: 'PeeringId')
     PeeringList = Shapes::ListShape.new(name: 'PeeringList')
     PeeringState = Shapes::StringShape.new(name: 'PeeringState')
     PeeringType = Shapes::StringShape.new(name: 'PeeringType')
+    PermissionsErrorContext = Shapes::StructureShape.new(name: 'PermissionsErrorContext')
     ProposedNetworkFunctionGroupChange = Shapes::StructureShape.new(name: 'ProposedNetworkFunctionGroupChange')
     ProposedSegmentChange = Shapes::StructureShape.new(name: 'ProposedSegmentChange')
     PutCoreNetworkPolicyRequest = Shapes::StructureShape.new(name: 'PutCoreNetworkPolicyRequest')
@@ -477,7 +487,16 @@ module Aws::NetworkManager
     Attachment.add_member(:proposed_network_function_group_change, Shapes::ShapeRef.new(shape: ProposedNetworkFunctionGroupChange, location_name: "ProposedNetworkFunctionGroupChange"))
     Attachment.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     Attachment.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "UpdatedAt"))
+    Attachment.add_member(:last_modification_errors, Shapes::ShapeRef.new(shape: AttachmentErrorList, location_name: "LastModificationErrors"))
     Attachment.struct_class = Types::Attachment
+
+    AttachmentError.add_member(:code, Shapes::ShapeRef.new(shape: AttachmentErrorCode, location_name: "Code"))
+    AttachmentError.add_member(:message, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "Message"))
+    AttachmentError.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    AttachmentError.add_member(:request_id, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "RequestId"))
+    AttachmentError.struct_class = Types::AttachmentError
+
+    AttachmentErrorList.member = Shapes::ShapeRef.new(shape: AttachmentError)
 
     AttachmentList.member = Shapes::ShapeRef.new(shape: Attachment)
 
@@ -510,6 +529,7 @@ module Aws::NetworkManager
     ConnectPeer.add_member(:configuration, Shapes::ShapeRef.new(shape: ConnectPeerConfiguration, location_name: "Configuration"))
     ConnectPeer.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ConnectPeer.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: SubnetArn, location_name: "SubnetArn"))
+    ConnectPeer.add_member(:last_modification_errors, Shapes::ShapeRef.new(shape: ConnectPeerErrorList, location_name: "LastModificationErrors"))
     ConnectPeer.struct_class = Types::ConnectPeer
 
     ConnectPeerAssociation.add_member(:connect_peer_id, Shapes::ShapeRef.new(shape: ConnectPeerId, location_name: "ConnectPeerId"))
@@ -535,6 +555,14 @@ module Aws::NetworkManager
     ConnectPeerConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: TunnelProtocol, location_name: "Protocol"))
     ConnectPeerConfiguration.add_member(:bgp_configurations, Shapes::ShapeRef.new(shape: ConnectPeerBgpConfigurationList, location_name: "BgpConfigurations"))
     ConnectPeerConfiguration.struct_class = Types::ConnectPeerConfiguration
+
+    ConnectPeerError.add_member(:code, Shapes::ShapeRef.new(shape: ConnectPeerErrorCode, location_name: "Code"))
+    ConnectPeerError.add_member(:message, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "Message"))
+    ConnectPeerError.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    ConnectPeerError.add_member(:request_id, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "RequestId"))
+    ConnectPeerError.struct_class = Types::ConnectPeerError
+
+    ConnectPeerErrorList.member = Shapes::ShapeRef.new(shape: ConnectPeerError)
 
     ConnectPeerIdList.member = Shapes::ShapeRef.new(shape: ConnectPeerId)
 
@@ -1451,9 +1479,22 @@ module Aws::NetworkManager
     Peering.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     Peering.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Peering.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
+    Peering.add_member(:last_modification_errors, Shapes::ShapeRef.new(shape: PeeringErrorList, location_name: "LastModificationErrors"))
     Peering.struct_class = Types::Peering
 
+    PeeringError.add_member(:code, Shapes::ShapeRef.new(shape: PeeringErrorCode, location_name: "Code"))
+    PeeringError.add_member(:message, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "Message"))
+    PeeringError.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    PeeringError.add_member(:request_id, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "RequestId"))
+    PeeringError.add_member(:missing_permissions_context, Shapes::ShapeRef.new(shape: PermissionsErrorContext, location_name: "MissingPermissionsContext"))
+    PeeringError.struct_class = Types::PeeringError
+
+    PeeringErrorList.member = Shapes::ShapeRef.new(shape: PeeringError)
+
     PeeringList.member = Shapes::ShapeRef.new(shape: Peering)
+
+    PermissionsErrorContext.add_member(:missing_permission, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "MissingPermission"))
+    PermissionsErrorContext.struct_class = Types::PermissionsErrorContext
 
     ProposedNetworkFunctionGroupChange.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ProposedNetworkFunctionGroupChange.add_member(:attachment_policy_rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "AttachmentPolicyRuleNumber"))

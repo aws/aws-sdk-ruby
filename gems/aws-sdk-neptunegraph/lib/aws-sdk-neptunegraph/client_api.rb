@@ -702,7 +702,6 @@ module Aws::NeptuneGraph
         "endpointPrefix" => "neptune-graph",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
-        "ripServiceName" => "neptune-graph",
         "serviceAbbreviation" => "Neptune Graph",
         "serviceFullName" => "Amazon Neptune Graph",
         "serviceId" => "Neptune Graph",

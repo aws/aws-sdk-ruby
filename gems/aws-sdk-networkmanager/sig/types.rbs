@@ -103,6 +103,15 @@ module Aws::NetworkManager
       attr_accessor proposed_network_function_group_change: Types::ProposedNetworkFunctionGroupChange
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor last_modification_errors: ::Array[Types::AttachmentError]
+      SENSITIVE: []
+    end
+
+    class AttachmentError
+      attr_accessor code: ("VPC_NOT_FOUND" | "SUBNET_NOT_FOUND" | "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE" | "SUBNET_NO_FREE_ADDRESSES" | "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE" | "SUBNET_NO_IPV6_CIDRS" | "VPN_CONNECTION_NOT_FOUND" | "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED")
+      attr_accessor message: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 
@@ -146,6 +155,7 @@ module Aws::NetworkManager
       attr_accessor configuration: Types::ConnectPeerConfiguration
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor subnet_arn: ::String
+      attr_accessor last_modification_errors: ::Array[Types::ConnectPeerError]
       SENSITIVE: []
     end
 
@@ -172,6 +182,14 @@ module Aws::NetworkManager
       attr_accessor inside_cidr_blocks: ::Array[::String]
       attr_accessor protocol: ("GRE" | "NO_ENCAP")
       attr_accessor bgp_configurations: ::Array[Types::ConnectPeerBgpConfiguration]
+      SENSITIVE: []
+    end
+
+    class ConnectPeerError
+      attr_accessor code: ("EDGE_LOCATION_NO_FREE_IPS" | "EDGE_LOCATION_PEER_DUPLICATE" | "SUBNET_NOT_FOUND" | "IP_OUTSIDE_SUBNET_CIDR_RANGE" | "INVALID_INSIDE_CIDR_BLOCK" | "NO_ASSOCIATED_CIDR_BLOCK")
+      attr_accessor message: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 
@@ -1336,6 +1354,21 @@ module Aws::NetworkManager
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor created_at: ::Time
+      attr_accessor last_modification_errors: ::Array[Types::PeeringError]
+      SENSITIVE: []
+    end
+
+    class PeeringError
+      attr_accessor code: ("TRANSIT_GATEWAY_NOT_FOUND" | "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED" | "MISSING_PERMISSIONS" | "INTERNAL_ERROR" | "EDGE_LOCATION_PEER_DUPLICATE" | "INVALID_TRANSIT_GATEWAY_STATE")
+      attr_accessor message: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor missing_permissions_context: Types::PermissionsErrorContext
+      SENSITIVE: []
+    end
+
+    class PermissionsErrorContext
+      attr_accessor missing_permission: ::String
       SENSITIVE: []
     end
 

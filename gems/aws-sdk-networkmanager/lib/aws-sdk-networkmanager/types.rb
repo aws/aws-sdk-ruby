@@ -306,6 +306,10 @@ module Aws::NetworkManager
     #   The timestamp when the attachment was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modification_errors
+    #   Describes the error associated with the attachment request.
+    #   @return [Array<Types::AttachmentError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Attachment AWS API Documentation
     #
     class Attachment < Struct.new(
@@ -324,7 +328,37 @@ module Aws::NetworkManager
       :proposed_segment_change,
       :proposed_network_function_group_change,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :last_modification_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the error associated with an attachment request.
+    #
+    # @!attribute [rw] code
+    #   The error code for the attachment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the error `code`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the requested attachment resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the attachment request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AttachmentError AWS API Documentation
+    #
+    class AttachmentError < Struct.new(
+      :code,
+      :message,
+      :resource_arn,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -463,6 +497,10 @@ module Aws::NetworkManager
     #   protocol is NO\_ENCAP.
     #   @return [String]
     #
+    # @!attribute [rw] last_modification_errors
+    #   Describes the error associated with the attachment request.
+    #   @return [Array<Types::ConnectPeerError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeer AWS API Documentation
     #
     class ConnectPeer < Struct.new(
@@ -474,7 +512,8 @@ module Aws::NetworkManager
       :created_at,
       :configuration,
       :tags,
-      :subnet_arn)
+      :subnet_arn,
+      :last_modification_errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -572,6 +611,35 @@ module Aws::NetworkManager
       :inside_cidr_blocks,
       :protocol,
       :bgp_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an error associated with a Connect peer request
+    #
+    # @!attribute [rw] code
+    #   The error code for the Connect peer request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the error `code`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the requested Connect peer resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the Connect peer request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerError AWS API Documentation
+    #
+    class ConnectPeerError < Struct.new(
+      :code,
+      :message,
+      :resource_arn,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4603,6 +4671,10 @@ module Aws::NetworkManager
     #   The timestamp when the attachment peer was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modification_errors
+    #   Describes the error associated with the Connect peer request.
+    #   @return [Array<Types::PeeringError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Peering AWS API Documentation
     #
     class Peering < Struct.new(
@@ -4615,7 +4687,57 @@ module Aws::NetworkManager
       :edge_location,
       :resource_arn,
       :tags,
-      :created_at)
+      :created_at,
+      :last_modification_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an error associated with a peering request.
+    #
+    # @!attribute [rw] code
+    #   The error code for the peering request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the error `code`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the requested peering resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the Peering request.
+    #   @return [String]
+    #
+    # @!attribute [rw] missing_permissions_context
+    #   Provides additional information about missing permissions for the
+    #   peering error.
+    #   @return [Types::PermissionsErrorContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PeeringError AWS API Documentation
+    #
+    class PeeringError < Struct.new(
+      :code,
+      :message,
+      :resource_arn,
+      :request_id,
+      :missing_permissions_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes additional information about missing permissions.
+    #
+    # @!attribute [rw] missing_permission
+    #   The missing permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PermissionsErrorContext AWS API Documentation
+    #
+    class PermissionsErrorContext < Struct.new(
+      :missing_permission)
       SENSITIVE = []
       include Aws::Structure
     end

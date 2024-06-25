@@ -1490,7 +1490,7 @@ module Aws::AutoScaling
 
     TargetTrackingMetricDataQueries.member = Shapes::ShapeRef.new(shape: TargetTrackingMetricDataQuery)
 
-    TargetTrackingMetricDataQuery.add_member(:id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "Id"))
+    TargetTrackingMetricDataQuery.add_member(:id, Shapes::ShapeRef.new(shape: XmlStringMaxLen64, required: true, location_name: "Id"))
     TargetTrackingMetricDataQuery.add_member(:expression, Shapes::ShapeRef.new(shape: XmlStringMaxLen2047, location_name: "Expression"))
     TargetTrackingMetricDataQuery.add_member(:metric_stat, Shapes::ShapeRef.new(shape: TargetTrackingMetricStat, location_name: "MetricStat"))
     TargetTrackingMetricDataQuery.add_member(:label, Shapes::ShapeRef.new(shape: XmlStringMetricLabel, location_name: "Label"))
@@ -1571,8 +1571,10 @@ module Aws::AutoScaling
 
       api.metadata = {
         "apiVersion" => "2011-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "autoscaling",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceFullName" => "Auto Scaling",
         "serviceId" => "Auto Scaling",
         "signatureVersion" => "v4",

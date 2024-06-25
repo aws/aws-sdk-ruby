@@ -52,6 +52,6 @@ require_relative 'aws-sdk-lookoutequipment/customizations'
 # @!group service
 module Aws::LookoutEquipment
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end

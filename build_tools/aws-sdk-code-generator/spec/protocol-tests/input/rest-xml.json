@@ -1045,7 +1045,10 @@
                 "serialized": {
                     "method": "POST",
                     "uri": "/EnumPayload",
-                    "body": "enumvalue"
+                    "body": "enumvalue",
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    }
                 }
             }
         ]
@@ -2182,7 +2185,10 @@
                 "serialized": {
                     "method": "POST",
                     "uri": "/StringPayload",
-                    "body": "rawstring"
+                    "body": "rawstring",
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    }
                 }
             }
         ]

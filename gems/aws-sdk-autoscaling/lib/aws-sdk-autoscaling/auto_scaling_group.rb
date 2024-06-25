@@ -567,12 +567,12 @@ module Aws::AutoScaling
     #
     #   If you omit this property, all metrics are disabled.
     #
-    #   For more information, see [Auto Scaling group metrics][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Amazon CloudWatch metrics for Amazon EC2
+    #   Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-metrics.html
     # @return [EmptyStructure]
     def disable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -637,12 +637,12 @@ module Aws::AutoScaling
     #   If you specify `Granularity` and don't specify any metrics, all
     #   metrics are enabled.
     #
-    #   For more information, see [Auto Scaling group metrics][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Amazon CloudWatch metrics for Amazon EC2
+    #   Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-metrics.html
     # @option options [required, String] :granularity
     #   The frequency at which Amazon EC2 Auto Scaling sends aggregated data
     #   to CloudWatch. The only valid value is `1Minute`.
@@ -692,7 +692,7 @@ module Aws::AutoScaling
     #         unit: "MetricUnit",
     #         metrics: [
     #           {
-    #             id: "XmlStringMaxLen255", # required
+    #             id: "XmlStringMaxLen64", # required
     #             expression: "XmlStringMaxLen2047",
     #             metric_stat: {
     #               metric: { # required
@@ -884,7 +884,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
     # @option options [String] :metric_aggregation_type
     #   The aggregation type for the CloudWatch metrics. The valid values are
     #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
@@ -942,7 +942,7 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
     # @option options [Boolean] :enabled
     #   Indicates whether the scaling policy is enabled or disabled. The
-    #   default is enabled. For more information, see [Disabling a scaling
+    #   default is enabled. For more information, see [Disable a scaling
     #   policy for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
     #   User Guide*.
     #
@@ -1316,7 +1316,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
     # @option options [Array<String>] :availability_zones
     #   One or more Availability Zones for the group.
     # @option options [String] :health_check_type
@@ -1324,14 +1324,14 @@ module Aws::AutoScaling
     #
     #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
     #   default health check and cannot be disabled. For more information, see
-    #   [Health checks for Auto Scaling instances][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   [Health checks for instances in an Auto Scaling group][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously set.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
@@ -1365,8 +1365,9 @@ module Aws::AutoScaling
     # @option options [Array<String>] :termination_policies
     #   A policy or a list of policies that are used to select the instances
     #   to terminate. The policies are executed in the order that you list
-    #   them. For more information, see [Work with Amazon EC2 Auto Scaling
-    #   termination policies][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   them. For more information, see [Configure termination policies for
+    #   Amazon EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #   Valid values: `Default` \| `AllocationStrategy` \|
     #   `ClosestToNextInstanceHour` \| `NewestInstance` \| `OldestInstance` \|
@@ -1380,7 +1381,7 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   see [Use instance scale-in protection][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
     #
     #
@@ -1420,7 +1421,7 @@ module Aws::AutoScaling
     #   The unit of measurement for the value specified for desired capacity.
     #   Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
     #   attribute-based instance type selection only. For more information,
-    #   see [Creating an Auto Scaling group using attribute-based instance
+    #   see [Create a mixed instances group using attribute-based instance
     #   type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   By default, Amazon EC2 Auto Scaling specifies `units`, which
@@ -1430,7 +1431,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
     # @option options [Integer] :default_instance_warmup
     #   The amount of time, in seconds, until a new instance is considered to
     #   have finished initializing and resource consumption to become stable

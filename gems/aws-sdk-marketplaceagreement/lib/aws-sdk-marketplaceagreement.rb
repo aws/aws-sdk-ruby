@@ -52,6 +52,6 @@ require_relative 'aws-sdk-marketplaceagreement/customizations'
 # @!group service
 module Aws::MarketplaceAgreement
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end
