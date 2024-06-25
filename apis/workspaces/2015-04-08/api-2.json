@@ -5,13 +5,11 @@
     "endpointPrefix":"workspaces",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceFullName":"Amazon WorkSpaces",
     "serviceId":"WorkSpaces",
     "signatureVersion":"v4",
     "targetPrefix":"WorkspacesService",
-    "uid":"workspaces-2015-04-08",
-    "auth":["aws.auth#sigv4"]
+    "uid":"workspaces-2015-04-08"
   },
   "operations":{
     "AcceptAccountLinkInvitation":{

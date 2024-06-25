@@ -5,13 +5,11 @@
     "endpointPrefix":"runtime.sagemaker",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceFullName":"Amazon SageMaker Runtime",
     "serviceId":"SageMaker Runtime",
     "signatureVersion":"v4",
     "signingName":"sagemaker",
-    "uid":"runtime.sagemaker-2017-05-13",
-    "auth":["aws.auth#sigv4"]
+    "uid":"runtime.sagemaker-2017-05-13"
   },
   "operations":{
     "InvokeEndpoint":{

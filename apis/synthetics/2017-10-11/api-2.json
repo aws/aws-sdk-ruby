@@ -5,14 +5,12 @@
     "endpointPrefix":"synthetics",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceAbbreviation":"Synthetics",
     "serviceFullName":"Synthetics",
     "serviceId":"synthetics",
     "signatureVersion":"v4",
     "signingName":"synthetics",
-    "uid":"synthetics-2017-10-11",
-    "auth":["aws.auth#sigv4"]
+    "uid":"synthetics-2017-10-11"
   },
   "operations":{
     "AssociateResource":{

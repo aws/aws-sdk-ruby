@@ -5,13 +5,11 @@
     "endpointPrefix":"models.lex",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceFullName":"Amazon Lex Model Building Service",
     "serviceId":"Lex Model Building Service",
     "signatureVersion":"v4",
     "signingName":"lex",
-    "uid":"lex-models-2017-04-19",
-    "auth":["aws.auth#sigv4"]
+    "uid":"lex-models-2017-04-19"
   },
   "operations":{
     "CreateBotVersion":{

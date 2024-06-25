@@ -5,15 +5,13 @@
     "endpointPrefix":"ce",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceAbbreviation":"AWS Cost Explorer",
     "serviceFullName":"AWS Cost Explorer Service",
     "serviceId":"Cost Explorer",
     "signatureVersion":"v4",
     "signingName":"ce",
     "targetPrefix":"AWSInsightsIndexService",
-    "uid":"ce-2017-10-25",
-    "auth":["aws.auth#sigv4"]
+    "uid":"ce-2017-10-25"
   },
   "operations":{
     "CreateAnomalyMonitor":{

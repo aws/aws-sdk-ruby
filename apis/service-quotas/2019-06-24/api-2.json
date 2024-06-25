@@ -5,13 +5,11 @@
     "endpointPrefix":"servicequotas",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceFullName":"Service Quotas",
     "serviceId":"Service Quotas",
     "signatureVersion":"v4",
     "targetPrefix":"ServiceQuotasV20190624",
-    "uid":"service-quotas-2019-06-24",
-    "auth":["aws.auth#sigv4"]
+    "uid":"service-quotas-2019-06-24"
   },
   "operations":{
     "AssociateServiceQuotaTemplate":{

@@ -11,8 +11,7 @@
     "signatureVersion":"v4",
     "signingName":"aws-marketplace",
     "targetPrefix":"AWSMPEntitlementService",
-    "uid":"entitlement.marketplace-2017-01-11",
-    "auth":["aws.auth#sigv4"]
+    "uid":"entitlement.marketplace-2017-01-11"
   },
   "operations":{
     "GetEntitlements":{

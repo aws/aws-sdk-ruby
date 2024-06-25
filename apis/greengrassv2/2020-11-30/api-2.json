@@ -9,8 +9,7 @@
     "serviceFullName":"AWS IoT Greengrass V2",
     "serviceId":"GreengrassV2",
     "signatureVersion":"v4",
-    "uid":"greengrassv2-2020-11-30",
-    "auth":["aws.auth#sigv4"]
+    "uid":"greengrassv2-2020-11-30"
   },
   "operations":{
     "AssociateServiceRoleToAccount":{

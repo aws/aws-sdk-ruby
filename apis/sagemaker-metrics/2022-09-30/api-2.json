@@ -4,14 +4,12 @@
     "apiVersion":"2022-09-30",
     "endpointPrefix":"metrics.sagemaker",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceAbbreviation":"SageMaker Metrics",
     "serviceFullName":"Amazon SageMaker Metrics Service",
     "serviceId":"SageMaker Metrics",
     "signatureVersion":"v4",
     "signingName":"sagemaker",
-    "uid":"sagemaker-metrics-2022-09-30",
-    "auth":["aws.auth#sigv4"]
+    "uid":"sagemaker-metrics-2022-09-30"
   },
   "operations":{
     "BatchPutMetrics":{

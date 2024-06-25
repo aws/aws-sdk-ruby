@@ -6,14 +6,12 @@
     "jsonVersion":"1.1",
     "protocol":"rest-json",
     "protocolSettings":{"h2":"eventstream"},
-    "protocols":["rest-json"],
     "serviceAbbreviation":"Lex Runtime V2",
     "serviceFullName":"Amazon Lex Runtime V2",
     "serviceId":"Lex Runtime V2",
     "signatureVersion":"v4",
     "signingName":"lex",
-    "uid":"runtime.lex.v2-2020-08-07",
-    "auth":["aws.auth#sigv4"]
+    "uid":"runtime.lex.v2-2020-08-07"
   },
   "operations":{
     "DeleteSession":{
@@ -105,8 +103,7 @@
         {"shape":"DependencyFailedException"},
         {"shape":"BadGatewayException"}
       ],
-      "authtype":"v4-unsigned-body",
-      "unsignedPayload":true
+      "authtype":"v4-unsigned-body"
     },
     "StartConversation":{
       "name":"StartConversation",

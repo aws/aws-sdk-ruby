@@ -11,8 +11,7 @@
     "serviceId":"Amplify",
     "signatureVersion":"v4",
     "signingName":"amplify",
-    "uid":"amplify-2017-07-25",
-    "auth":["aws.auth#sigv4"]
+    "uid":"amplify-2017-07-25"
   },
   "operations":{
     "CreateApp":{

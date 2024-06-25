@@ -5,14 +5,12 @@
     "endpointPrefix":"kinesisanalytics",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceAbbreviation":"Kinesis Analytics",
     "serviceFullName":"Amazon Kinesis Analytics",
     "serviceId":"Kinesis Analytics",
     "signatureVersion":"v4",
     "targetPrefix":"KinesisAnalytics_20150814",
-    "uid":"kinesisanalytics-2015-08-14",
-    "auth":["aws.auth#sigv4"]
+    "uid":"kinesisanalytics-2015-08-14"
   },
   "operations":{
     "AddApplicationCloudWatchLoggingOption":{
