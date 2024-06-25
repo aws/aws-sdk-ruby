@@ -5,13 +5,15 @@
     "endpointPrefix":"applicationinsights",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceAbbreviation":"Application Insights",
     "serviceFullName":"Amazon CloudWatch Application Insights",
     "serviceId":"Application Insights",
     "signatureVersion":"v4",
     "signingName":"applicationinsights",
     "targetPrefix":"EC2WindowsBarleyService",
-    "uid":"application-insights-2018-11-25"
+    "uid":"application-insights-2018-11-25",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AddWorkload":{
