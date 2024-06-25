@@ -52,6 +52,6 @@ require_relative 'aws-sdk-opensearchservice/customizations'
 # @!group service
 module Aws::OpenSearchService
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end

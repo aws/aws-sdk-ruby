@@ -44,7 +44,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<DatetimeOffsetsResponse xmlns=\"https://example.com/\">\n    <datetime>2019-12-16T22:48:18-01:00</datetime>\n    <RequestId>requestid</RequestId>\n</DatetimeOffsetsResponse>\n"
+                    "body": "<DatetimeOffsetsResponse xmlns=\"https://example.com/\">\n    <datetime>2019-12-16T22:48:18-01:00</datetime>\n    <requestId>requestid</requestId>\n</DatetimeOffsetsResponse>\n"
                 }
             },
             {
@@ -68,7 +68,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<DatetimeOffsetsResponse xmlns=\"https://example.com/\">\n    <datetime>2019-12-17T00:48:18+01:00</datetime>\n    <RequestId>requestid</RequestId>\n</DatetimeOffsetsResponse>\n"
+                    "body": "<DatetimeOffsetsResponse xmlns=\"https://example.com/\">\n    <datetime>2019-12-17T00:48:18+01:00</datetime>\n    <requestId>requestid</requestId>\n</DatetimeOffsetsResponse>\n"
                 }
             }
         ]
@@ -109,7 +109,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<EmptyInputAndEmptyOutputResponse xmlns=\"https://example.com/\">\n    <RequestId>requestid</RequestId>\n</EmptyInputAndEmptyOutputResponse>\n"
+                    "body": "<EmptyInputAndEmptyOutputResponse xmlns=\"https://example.com/\">\n    <requestId>requestid</requestId>\n</EmptyInputAndEmptyOutputResponse>\n"
                 }
             }
         ]
@@ -159,7 +159,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<FractionalSecondsResponse xmlns=\"https://example.com/\">\n    <datetime>2000-01-02T20:34:56.123Z</datetime>\n    <RequestId>requestid</RequestId>\n</FractionalSecondsResponse>\n"
+                    "body": "<FractionalSecondsResponse xmlns=\"https://example.com/\">\n    <datetime>2000-01-02T20:34:56.123Z</datetime>\n    <requestId>requestid</requestId>\n</FractionalSecondsResponse>\n"
                 }
             }
         ]
@@ -209,7 +209,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<GreetingWithErrorsResponse xmlns=\"https://example.com/\">\n    <greeting>Hello</greeting>\n    <RequestId>requestid</RequestId>\n</GreetingWithErrorsResponse>\n"
+                    "body": "<GreetingWithErrorsResponse xmlns=\"https://example.com/\">\n    <greeting>Hello</greeting>\n    <requestId>requestid</requestId>\n</GreetingWithErrorsResponse>\n"
                 }
             }
         ]
@@ -265,7 +265,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>InvalidGreeting</Code>\n            <Message>Hi</Message>\n        </Error>\n    </Errors>\n    <RequestId>foo-id</RequestId>\n</Response>\n"
+                    "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>InvalidGreeting</Code>\n            <Message>Hi</Message>\n        </Error>\n    </Errors>\n    <RequestID>foo-id</RequestID>\n</Response>\n"
                 }
             }
         ]
@@ -333,7 +333,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>ComplexError</Code>\n            <Message>Hi</Message>\n            <TopLevel>Top level</TopLevel>\n            <Nested>\n                <Foo>bar</Foo>\n            </Nested>\n        </Error>\n    </Errors>\n    <RequestId>foo-id</RequestId>\n</Response>\n"
+                    "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>ComplexError</Code>\n            <Message>Hi</Message>\n            <TopLevel>Top level</TopLevel>\n            <Nested>\n                <Foo>bar</Foo>\n            </Nested>\n        </Error>\n    </Errors>\n    <RequestID>foo-id</RequestID>\n</Response>\n"
                 }
             }
         ]
@@ -384,7 +384,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<IgnoresWrappingXmlNameResponse xmlns=\"https://example.com/\">\n    <foo>bar</foo>\n    <RequestId>requestid</RequestId>\n</IgnoresWrappingXmlNameResponse>\n"
+                    "body": "<IgnoresWrappingXmlNameResponse xmlns=\"https://example.com/\">\n    <foo>bar</foo>\n    <requestId>requestid</requestId>\n</IgnoresWrappingXmlNameResponse>\n"
                 }
             }
         ]
@@ -425,7 +425,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<NoInputAndOutputResponse xmlns=\"https://example.com/\">\n    <RequestId>requestid</RequestId>\n</NoInputAndOutputResponse>\n"
+                    "body": "<NoInputAndOutputResponse xmlns=\"https://example.com/\">\n    <requestId>requestid</requestId>\n</NoInputAndOutputResponse>\n"
                 }
             }
         ]
@@ -508,7 +508,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<RecursiveXmlShapesResponse xmlns=\"https://example.com/\">\n    <nested>\n        <foo>Foo1</foo>\n        <nested>\n            <bar>Bar1</bar>\n            <recursiveMember>\n                <foo>Foo2</foo>\n                <nested>\n                    <bar>Bar2</bar>\n                </nested>\n            </recursiveMember>\n        </nested>\n    </nested>\n    <RequestId>requestid</RequestId>\n</RecursiveXmlShapesResponse>\n"
+                    "body": "<RecursiveXmlShapesResponse xmlns=\"https://example.com/\">\n    <nested>\n        <foo>Foo1</foo>\n        <nested>\n            <bar>Bar1</bar>\n            <recursiveMember>\n                <foo>Foo2</foo>\n                <nested>\n                    <bar>Bar2</bar>\n                </nested>\n            </recursiveMember>\n        </nested>\n    </nested>\n    <requestId>requestid</requestId>\n</RecursiveXmlShapesResponse>\n"
                 }
             }
         ]
@@ -614,7 +614,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<SimpleScalarXmlPropertiesResponse xmlns=\"https://example.com/\">\n    <stringValue>string</stringValue>\n    <emptyStringValue/>\n    <trueBooleanValue>true</trueBooleanValue>\n    <falseBooleanValue>false</falseBooleanValue>\n    <byteValue>1</byteValue>\n    <shortValue>2</shortValue>\n    <integerValue>3</integerValue>\n    <longValue>4</longValue>\n    <floatValue>5.5</floatValue>\n    <DoubleDribble>6.5</DoubleDribble>\n    <RequestId>requestid</RequestId>\n</SimpleScalarXmlPropertiesResponse>\n"
+                    "body": "<SimpleScalarXmlPropertiesResponse xmlns=\"https://example.com/\">\n    <stringValue>string</stringValue>\n    <emptyStringValue/>\n    <trueBooleanValue>true</trueBooleanValue>\n    <falseBooleanValue>false</falseBooleanValue>\n    <byteValue>1</byteValue>\n    <shortValue>2</shortValue>\n    <integerValue>3</integerValue>\n    <longValue>4</longValue>\n    <floatValue>5.5</floatValue>\n    <DoubleDribble>6.5</DoubleDribble>\n    <requestId>requestid</requestId>\n</SimpleScalarXmlPropertiesResponse>\n"
                 }
             },
             {
@@ -739,7 +739,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlBlobsResponse xmlns=\"https://example.com/\">\n    <data>dmFsdWU=</data>\n    <RequestId>requestid</RequestId>\n</XmlBlobsResponse>\n"
+                    "body": "<XmlBlobsResponse xmlns=\"https://example.com/\">\n    <data>dmFsdWU=</data>\n    <requestId>requestid</requestId>\n</XmlBlobsResponse>\n"
                 }
             }
         ]
@@ -788,7 +788,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlEmptyBlobsResponse xmlns=\"https://example.com/\">\n    <data></data>\n    <RequestId>requestid</RequestId>\n</XmlEmptyBlobsResponse>\n"
+                    "body": "<XmlEmptyBlobsResponse xmlns=\"https://example.com/\">\n    <data></data>\n    <requestId>requestid</requestId>\n</XmlEmptyBlobsResponse>\n"
                 }
             },
             {
@@ -812,7 +812,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlEmptyBlobsResponse xmlns=\"https://example.com/\">\n    <data/>\n    <RequestId>requestid</RequestId>\n</XmlEmptyBlobsResponse>\n"
+                    "body": "<XmlEmptyBlobsResponse xmlns=\"https://example.com/\">\n    <data/>\n    <requestId>requestid</requestId>\n</XmlEmptyBlobsResponse>\n"
                 }
             }
         ]
@@ -1134,7 +1134,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlEnumsResponse xmlns=\"https://example.com/\">\n    <fooEnum1>Foo</fooEnum1>\n    <fooEnum2>0</fooEnum2>\n    <fooEnum3>1</fooEnum3>\n    <fooEnumList>\n        <member>Foo</member>\n        <member>0</member>\n    </fooEnumList>\n    <fooEnumSet>\n        <member>Foo</member>\n        <member>0</member>\n    </fooEnumSet>\n    <fooEnumMap>\n        <entry>\n            <key>hi</key>\n            <value>Foo</value>\n        </entry>\n        <entry>\n            <key>zero</key>\n            <value>0</value>\n        </entry>\n    </fooEnumMap>\n    <RequestId>requestid</RequestId>\n</XmlEnumsResponse>\n"
+                    "body": "<XmlEnumsResponse xmlns=\"https://example.com/\">\n    <fooEnum1>Foo</fooEnum1>\n    <fooEnum2>0</fooEnum2>\n    <fooEnum3>1</fooEnum3>\n    <fooEnumList>\n        <member>Foo</member>\n        <member>0</member>\n    </fooEnumList>\n    <fooEnumSet>\n        <member>Foo</member>\n        <member>0</member>\n    </fooEnumSet>\n    <fooEnumMap>\n        <entry>\n            <key>hi</key>\n            <value>Foo</value>\n        </entry>\n        <entry>\n            <key>zero</key>\n            <value>0</value>\n        </entry>\n    </fooEnumMap>\n    <requestId>requestid</requestId>\n</XmlEnumsResponse>\n"
                 }
             }
         ]
@@ -1238,7 +1238,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlIntEnumsResponse xmlns=\"https://example.com/\">\n    <intEnum1>1</intEnum1>\n    <intEnum2>2</intEnum2>\n    <intEnum3>3</intEnum3>\n    <intEnumList>\n        <member>1</member>\n        <member>2</member>\n    </intEnumList>\n    <intEnumSet>\n        <member>1</member>\n        <member>2</member>\n    </intEnumSet>\n    <intEnumMap>\n        <entry>\n            <key>a</key>\n            <value>1</value>\n        </entry>\n        <entry>\n            <key>b</key>\n            <value>2</value>\n        </entry>\n    </intEnumMap>\n    <RequestId>requestid</RequestId>\n</XmlIntEnumsResponse>\n"
+                    "body": "<XmlIntEnumsResponse xmlns=\"https://example.com/\">\n    <intEnum1>1</intEnum1>\n    <intEnum2>2</intEnum2>\n    <intEnum3>3</intEnum3>\n    <intEnumList>\n        <member>1</member>\n        <member>2</member>\n    </intEnumList>\n    <intEnumSet>\n        <member>1</member>\n        <member>2</member>\n    </intEnumSet>\n    <intEnumMap>\n        <entry>\n            <key>a</key>\n            <value>1</value>\n        </entry>\n        <entry>\n            <key>b</key>\n            <value>2</value>\n        </entry>\n    </intEnumMap>\n    <requestId>requestid</requestId>\n</XmlIntEnumsResponse>\n"
                 }
             }
         ]
@@ -1517,7 +1517,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlListsResponse xmlns=\"https://example.com/\">\n    <stringList>\n        <member>foo</member>\n        <member>bar</member>\n    </stringList>\n    <stringSet>\n        <member>foo</member>\n        <member>bar</member>\n    </stringSet>\n    <integerList>\n        <member>1</member>\n        <member>2</member>\n    </integerList>\n    <booleanList>\n        <member>true</member>\n        <member>false</member>\n    </booleanList>\n    <timestampList>\n        <member>2014-04-29T18:30:38Z</member>\n        <member>2014-04-29T18:30:38Z</member>\n    </timestampList>\n    <enumList>\n        <member>Foo</member>\n        <member>0</member>\n    </enumList>\n    <intEnumList>\n        <member>1</member>\n        <member>2</member>\n    </intEnumList>\n    <nestedStringList>\n        <member>\n            <member>foo</member>\n            <member>bar</member>\n        </member>\n        <member>\n            <member>baz</member>\n            <member>qux</member>\n        </member>\n    </nestedStringList>\n    <renamed>\n        <item>foo</item>\n        <item>bar</item>\n    </renamed>\n    <flattenedList>hi</flattenedList>\n    <flattenedList>bye</flattenedList>\n    <customName>yep</customName>\n    <customName>nope</customName>\n    <flattenedListWithMemberNamespace xmlns=\"https://xml-member.example.com\">a</flattenedListWithMemberNamespace>\n    <flattenedListWithMemberNamespace xmlns=\"https://xml-member.example.com\">b</flattenedListWithMemberNamespace>\n    <flattenedListWithNamespace>a</flattenedListWithNamespace>\n    <flattenedListWithNamespace>b</flattenedListWithNamespace>\n    <myStructureList>\n        <item>\n            <value>1</value>\n            <other>2</other>\n        </item>\n        <item>\n            <value>3</value>\n            <other>4</other>\n        </item>\n    </myStructureList>\n    <RequestId>requestid</RequestId>\n</XmlListsResponse>\n"
+                    "body": "<XmlListsResponse xmlns=\"https://example.com/\">\n    <stringList>\n        <member>foo</member>\n        <member>bar</member>\n    </stringList>\n    <stringSet>\n        <member>foo</member>\n        <member>bar</member>\n    </stringSet>\n    <integerList>\n        <member>1</member>\n        <member>2</member>\n    </integerList>\n    <booleanList>\n        <member>true</member>\n        <member>false</member>\n    </booleanList>\n    <timestampList>\n        <member>2014-04-29T18:30:38Z</member>\n        <member>2014-04-29T18:30:38Z</member>\n    </timestampList>\n    <enumList>\n        <member>Foo</member>\n        <member>0</member>\n    </enumList>\n    <intEnumList>\n        <member>1</member>\n        <member>2</member>\n    </intEnumList>\n    <nestedStringList>\n        <member>\n            <member>foo</member>\n            <member>bar</member>\n        </member>\n        <member>\n            <member>baz</member>\n            <member>qux</member>\n        </member>\n    </nestedStringList>\n    <renamed>\n        <item>foo</item>\n        <item>bar</item>\n    </renamed>\n    <flattenedList>hi</flattenedList>\n    <flattenedList>bye</flattenedList>\n    <customName>yep</customName>\n    <customName>nope</customName>\n    <flattenedListWithMemberNamespace xmlns=\"https://xml-member.example.com\">a</flattenedListWithMemberNamespace>\n    <flattenedListWithMemberNamespace xmlns=\"https://xml-member.example.com\">b</flattenedListWithMemberNamespace>\n    <flattenedListWithNamespace>a</flattenedListWithNamespace>\n    <flattenedListWithNamespace>b</flattenedListWithNamespace>\n    <myStructureList>\n        <item>\n            <value>1</value>\n            <other>2</other>\n        </item>\n        <item>\n            <value>3</value>\n            <other>4</other>\n        </item>\n    </myStructureList>\n    <requestId>requestid</requestId>\n</XmlListsResponse>\n"
                 }
             }
         ]
@@ -1597,7 +1597,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlNamespacesResponse xmlns=\"https://example.com/\">\n    <nested>\n        <foo xmlns:baz=\"http://baz.com\">Foo</foo>\n        <values xmlns=\"http://qux.com\">\n            <member xmlns=\"http://bux.com\">Bar</member>\n            <member xmlns=\"http://bux.com\">Baz</member>\n        </values>\n    </nested>\n    <RequestId>requestid</RequestId>\n</XmlNamespacesResponse>\n"
+                    "body": "<XmlNamespacesResponse xmlns=\"https://example.com/\">\n    <nested>\n        <foo xmlns:baz=\"http://baz.com\">Foo</foo>\n        <values xmlns=\"http://qux.com\">\n            <member xmlns=\"http://bux.com\">Bar</member>\n            <member xmlns=\"http://bux.com\">Baz</member>\n        </values>\n    </nested>\n    <requestId>requestid</requestId>\n</XmlNamespacesResponse>\n"
                 }
             }
         ]
@@ -1689,7 +1689,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <normal>2014-04-29T18:30:38Z</normal>\n    <RequestId>requestid</RequestId>\n</XmlTimestampsResponse>\n"
+                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <normal>2014-04-29T18:30:38Z</normal>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n"
                 }
             },
             {
@@ -1714,7 +1714,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <dateTime>2014-04-29T18:30:38Z</dateTime>\n    <RequestId>requestid</RequestId>\n</XmlTimestampsResponse>\n"
+                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <dateTime>2014-04-29T18:30:38Z</dateTime>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n"
                 }
             },
             {
@@ -1739,7 +1739,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>\n    <RequestId>requestid</RequestId>\n</XmlTimestampsResponse>\n"
+                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n"
                 }
             },
             {
@@ -1764,7 +1764,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <epochSeconds>1398796238</epochSeconds>\n    <RequestId>requestid</RequestId>\n</XmlTimestampsResponse>\n"
+                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <epochSeconds>1398796238</epochSeconds>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n"
                 }
             },
             {
@@ -1789,7 +1789,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>\n    <RequestId>requestid</RequestId>\n</XmlTimestampsResponse>\n"
+                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n"
                 }
             },
             {
@@ -1814,7 +1814,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>\n    <RequestId>requestid</RequestId>\n</XmlTimestampsResponse>\n"
+                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n"
                 }
             },
             {
@@ -1839,7 +1839,7 @@
                     "headers": {
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
-                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>\n    <RequestId>requestid</RequestId>\n</XmlTimestampsResponse>\n"
+                    "body": "<XmlTimestampsResponse xmlns=\"https://example.com/\">\n    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>\n    <requestId>requestid</requestId>\n</XmlTimestampsResponse>\n"
                 }
             }
         ]

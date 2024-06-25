@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.463.0 (2024-06-25)
+------------------
+
+* Feature - This release is for the launch of the new u7ib-12tb.224xlarge, R8g, c7gn.metal and mac2-m1ultra.metal instance types
+
 1.462.0 (2024-06-24)
 ------------------
 

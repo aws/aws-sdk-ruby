@@ -52,6 +52,6 @@ require_relative 'aws-sdk-supportapp/customizations'
 # @!group service
 module Aws::SupportApp
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

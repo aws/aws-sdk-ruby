@@ -52,6 +52,6 @@ require_relative 'aws-sdk-panorama/customizations'
 # @!group service
 module Aws::Panorama
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

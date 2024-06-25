@@ -1093,6 +1093,9 @@
                 },
                 "response": {
                     "status_code": 200,
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    },
                     "body": "enumvalue"
                 }
             }
@@ -1596,6 +1599,9 @@
                 },
                 "response": {
                     "status_code": 200,
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    },
                     "body": "rawstring"
                 }
             }

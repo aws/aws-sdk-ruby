@@ -1336,7 +1336,10 @@
                 "serialized": {
                     "method": "POST",
                     "uri": "/EnumPayload",
-                    "body": "enumvalue"
+                    "body": "enumvalue",
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    }
                 }
             }
         ]
@@ -2246,7 +2249,13 @@
                 "serialized": {
                     "method": "POST",
                     "uri": "/StringPayload",
-                    "body": "rawstring"
+                    "body": "rawstring",
+                    "headers": {
+                        "Content-Type": "text/plain"
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -5454,6 +5463,42 @@
                     },
                     "requireHeaders": [
                         "Content-Length"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for TestNoInputNoPayload operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {},
+        "cases": [
+            {
+                "id": "RestJsonHttpWithNoInput",
+                "given": {
+                    "name": "TestNoInputNoPayload",
+                    "http": {
+                        "method": "GET",
+                        "requestUri": "/no_input_no_payload",
+                        "responseCode": 200
+                    },
+                    "documentation": "<p>This example operation has no input and serializes a request without an HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
+                },
+                "description": "Serializes a GET request for an operation with no input, and therefore no modeled body",
+                "params": {},
+                "serialized": {
+                    "method": "GET",
+                    "uri": "/no_input_no_payload",
+                    "body": "",
+                    "forbidHeaders": [
+                        "Content-Length",
+                        "Content-Type"
                     ]
                 }
             }

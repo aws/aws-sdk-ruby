@@ -394,7 +394,6 @@ module Aws::ManagedBlockchainQuery
         "endpointPrefix" => "managedblockchain-query",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
-        "ripServiceName" => "chainquery",
         "serviceFullName" => "Amazon Managed Blockchain Query",
         "serviceId" => "ManagedBlockchain Query",
         "signatureVersion" => "v4",

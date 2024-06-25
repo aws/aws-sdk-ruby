@@ -31,7 +31,8 @@ module Aws::WorkSpacesThinClient
       attr_accessor kms_key_arn: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:name, :desktop_endpoint, :tags]
+      attr_accessor device_creation_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :desktop_endpoint, :tags, :device_creation_tags]
     end
 
     class CreateEnvironmentResponse
@@ -131,7 +132,8 @@ module Aws::WorkSpacesThinClient
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:name, :desktop_endpoint, :tags]
+      attr_accessor device_creation_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :desktop_endpoint, :tags, :device_creation_tags]
     end
 
     class EnvironmentSummary
@@ -337,7 +339,8 @@ module Aws::WorkSpacesThinClient
       attr_accessor maintenance_window: Types::MaintenanceWindow
       attr_accessor software_set_update_mode: ("USE_LATEST" | "USE_DESIRED")
       attr_accessor desired_software_set_id: ::String
-      SENSITIVE: [:name, :desktop_endpoint]
+      attr_accessor device_creation_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :desktop_endpoint, :device_creation_tags]
     end
 
     class UpdateEnvironmentResponse

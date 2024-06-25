@@ -57,7 +57,7 @@ module Aws::AutoScaling
     end
 
     # The lifecycle state for the instance. The `Quarantined` state is not
-    # used. For information about lifecycle states, see [Instance
+    # used. For more information, see [Amazon EC2 Auto Scaling instance
     # lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     # Valid values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
@@ -71,7 +71,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html
     # @return [String]
     def lifecycle_state
       data[:lifecycle_state]
@@ -369,13 +369,13 @@ module Aws::AutoScaling
     #   call respects the grace period. Set this to `False`, to have the call
     #   not respect the grace period associated with the group.
     #
-    #   For more information about the health check grace period, see
-    #   [CreateAutoScalingGroup][1] in the *Amazon EC2 Auto Scaling API
-    #   Reference*.
+    #   For more information about the health check grace period, see [Set the
+    #   health check grace period for an Auto Scaling group][1] in the *Amazon
+    #   EC2 Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html
     # @return [EmptyStructure]
     def set_health(options = {})
       options = options.merge(instance_id: @id)

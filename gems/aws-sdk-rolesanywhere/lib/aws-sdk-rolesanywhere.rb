@@ -52,6 +52,6 @@ require_relative 'aws-sdk-rolesanywhere/customizations'
 # @!group service
 module Aws::RolesAnywhere
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

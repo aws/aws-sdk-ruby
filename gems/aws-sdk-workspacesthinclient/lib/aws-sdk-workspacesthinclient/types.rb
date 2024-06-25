@@ -112,6 +112,11 @@ module Aws::WorkSpacesThinClient
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] device_creation_tags
+    #   A map of the key-value pairs of the tag or tags to assign to the
+    #   newly created devices for this environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/CreateEnvironmentRequest AWS API Documentation
     #
     class CreateEnvironmentRequest < Struct.new(
@@ -124,8 +129,9 @@ module Aws::WorkSpacesThinClient
       :desired_software_set_id,
       :kms_key_arn,
       :client_token,
-      :tags)
-      SENSITIVE = [:name, :desktop_endpoint, :tags]
+      :tags,
+      :device_creation_tags)
+      SENSITIVE = [:name, :desktop_endpoint, :tags, :device_creation_tags]
       include Aws::Structure
     end
 
@@ -555,6 +561,11 @@ module Aws::WorkSpacesThinClient
     #   The tag keys and optional values for the resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] device_creation_tags
+    #   "The tag keys and optional values for the newly created devices for
+    #   this environment."
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/Environment AWS API Documentation
     #
     class Environment < Struct.new(
@@ -576,8 +587,9 @@ module Aws::WorkSpacesThinClient
       :updated_at,
       :arn,
       :kms_key_arn,
-      :tags)
-      SENSITIVE = [:name, :desktop_endpoint, :tags]
+      :tags,
+      :device_creation_tags)
+      SENSITIVE = [:name, :desktop_endpoint, :tags, :device_creation_tags]
       include Aws::Structure
     end
 
@@ -1297,6 +1309,11 @@ module Aws::WorkSpacesThinClient
     #   The ID of the software set to apply.
     #   @return [String]
     #
+    # @!attribute [rw] device_creation_tags
+    #   A map of the key-value pairs of the tag or tags to assign to the
+    #   newly created devices for this environment.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/UpdateEnvironmentRequest AWS API Documentation
     #
     class UpdateEnvironmentRequest < Struct.new(
@@ -1307,8 +1324,9 @@ module Aws::WorkSpacesThinClient
       :software_set_update_schedule,
       :maintenance_window,
       :software_set_update_mode,
-      :desired_software_set_id)
-      SENSITIVE = [:name, :desktop_endpoint]
+      :desired_software_set_id,
+      :device_creation_tags)
+      SENSITIVE = [:name, :desktop_endpoint, :device_creation_tags]
       include Aws::Structure
     end
 

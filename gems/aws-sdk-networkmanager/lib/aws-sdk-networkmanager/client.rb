@@ -462,6 +462,11 @@ module Aws::NetworkManager
     #   resp.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
+    #   resp.attachment.last_modification_errors #=> Array
+    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.attachment.last_modification_errors[0].message #=> String
+    #   resp.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.attachment.last_modification_errors[0].request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AcceptAttachment AWS API Documentation
     #
@@ -756,6 +761,11 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
+    #   resp.connect_attachment.attachment.last_modification_errors #=> Array
+    #   resp.connect_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.connect_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.connect_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.connect_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.connect_attachment.transport_attachment_id #=> String
     #   resp.connect_attachment.options.protocol #=> String, one of "GRE", "NO_ENCAP"
     #
@@ -849,6 +859,11 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags[0].key #=> String
     #   resp.connect_peer.tags[0].value #=> String
     #   resp.connect_peer.subnet_arn #=> String
+    #   resp.connect_peer.last_modification_errors #=> Array
+    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK"
+    #   resp.connect_peer.last_modification_errors[0].message #=> String
+    #   resp.connect_peer.last_modification_errors[0].resource_arn #=> String
+    #   resp.connect_peer.last_modification_errors[0].request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectPeer AWS API Documentation
     #
@@ -1380,6 +1395,11 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.site_to_site_vpn_attachment.vpn_connection_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateSiteToSiteVpnAttachment AWS API Documentation
@@ -1440,6 +1460,12 @@ module Aws::NetworkManager
     #   resp.transit_gateway_peering.peering.tags[0].key #=> String
     #   resp.transit_gateway_peering.peering.tags[0].value #=> String
     #   resp.transit_gateway_peering.peering.created_at #=> Time
+    #   resp.transit_gateway_peering.peering.last_modification_errors #=> Array
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].message #=> String
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].resource_arn #=> String
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].request_id #=> String
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].missing_permissions_context.missing_permission #=> String
     #   resp.transit_gateway_peering.transit_gateway_arn #=> String
     #   resp.transit_gateway_peering.transit_gateway_peering_attachment_id #=> String
     #
@@ -1517,6 +1543,11 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.created_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.updated_at #=> Time
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors #=> Array
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.transit_gateway_route_table_attachment.peering_id #=> String
     #   resp.transit_gateway_route_table_attachment.transit_gateway_route_table_arn #=> String
     #
@@ -1603,6 +1634,11 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
+    #   resp.vpc_attachment.attachment.last_modification_errors #=> Array
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.vpc_attachment.subnet_arns #=> Array
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
@@ -1660,6 +1696,11 @@ module Aws::NetworkManager
     #   resp.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
+    #   resp.attachment.last_modification_errors #=> Array
+    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.attachment.last_modification_errors[0].message #=> String
+    #   resp.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.attachment.last_modification_errors[0].request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteAttachment AWS API Documentation
     #
@@ -1707,6 +1748,11 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags[0].key #=> String
     #   resp.connect_peer.tags[0].value #=> String
     #   resp.connect_peer.subnet_arn #=> String
+    #   resp.connect_peer.last_modification_errors #=> Array
+    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK"
+    #   resp.connect_peer.last_modification_errors[0].message #=> String
+    #   resp.connect_peer.last_modification_errors[0].resource_arn #=> String
+    #   resp.connect_peer.last_modification_errors[0].request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnectPeer AWS API Documentation
     #
@@ -2023,6 +2069,12 @@ module Aws::NetworkManager
     #   resp.peering.tags[0].key #=> String
     #   resp.peering.tags[0].value #=> String
     #   resp.peering.created_at #=> Time
+    #   resp.peering.last_modification_errors #=> Array
+    #   resp.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.peering.last_modification_errors[0].message #=> String
+    #   resp.peering.last_modification_errors[0].resource_arn #=> String
+    #   resp.peering.last_modification_errors[0].request_id #=> String
+    #   resp.peering.last_modification_errors[0].missing_permissions_context.missing_permission #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeletePeering AWS API Documentation
     #
@@ -2407,6 +2459,11 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
+    #   resp.connect_attachment.attachment.last_modification_errors #=> Array
+    #   resp.connect_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.connect_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.connect_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.connect_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.connect_attachment.transport_attachment_id #=> String
     #   resp.connect_attachment.options.protocol #=> String, one of "GRE", "NO_ENCAP"
     #
@@ -2456,6 +2513,11 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags[0].key #=> String
     #   resp.connect_peer.tags[0].value #=> String
     #   resp.connect_peer.subnet_arn #=> String
+    #   resp.connect_peer.last_modification_errors #=> Array
+    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK"
+    #   resp.connect_peer.last_modification_errors[0].message #=> String
+    #   resp.connect_peer.last_modification_errors[0].resource_arn #=> String
+    #   resp.connect_peer.last_modification_errors[0].request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeer AWS API Documentation
     #
@@ -3716,6 +3778,11 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.site_to_site_vpn_attachment.vpn_connection_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetSiteToSiteVpnAttachment AWS API Documentation
@@ -3862,6 +3929,12 @@ module Aws::NetworkManager
     #   resp.transit_gateway_peering.peering.tags[0].key #=> String
     #   resp.transit_gateway_peering.peering.tags[0].value #=> String
     #   resp.transit_gateway_peering.peering.created_at #=> Time
+    #   resp.transit_gateway_peering.peering.last_modification_errors #=> Array
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].message #=> String
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].resource_arn #=> String
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].request_id #=> String
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].missing_permissions_context.missing_permission #=> String
     #   resp.transit_gateway_peering.transit_gateway_arn #=> String
     #   resp.transit_gateway_peering.transit_gateway_peering_attachment_id #=> String
     #
@@ -3967,6 +4040,11 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.created_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.updated_at #=> Time
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors #=> Array
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.transit_gateway_route_table_attachment.peering_id #=> String
     #   resp.transit_gateway_route_table_attachment.transit_gateway_route_table_arn #=> String
     #
@@ -4022,6 +4100,11 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
+    #   resp.vpc_attachment.attachment.last_modification_errors #=> Array
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.vpc_attachment.subnet_arns #=> Array
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
@@ -4103,6 +4186,11 @@ module Aws::NetworkManager
     #   resp.attachments[0].proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachments[0].created_at #=> Time
     #   resp.attachments[0].updated_at #=> Time
+    #   resp.attachments[0].last_modification_errors #=> Array
+    #   resp.attachments[0].last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.attachments[0].last_modification_errors[0].message #=> String
+    #   resp.attachments[0].last_modification_errors[0].resource_arn #=> String
+    #   resp.attachments[0].last_modification_errors[0].request_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachments AWS API Documentation
@@ -4352,6 +4440,12 @@ module Aws::NetworkManager
     #   resp.peerings[0].tags[0].key #=> String
     #   resp.peerings[0].tags[0].value #=> String
     #   resp.peerings[0].created_at #=> Time
+    #   resp.peerings[0].last_modification_errors #=> Array
+    #   resp.peerings[0].last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.peerings[0].last_modification_errors[0].message #=> String
+    #   resp.peerings[0].last_modification_errors[0].resource_arn #=> String
+    #   resp.peerings[0].last_modification_errors[0].request_id #=> String
+    #   resp.peerings[0].last_modification_errors[0].missing_permissions_context.missing_permission #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListPeerings AWS API Documentation
@@ -4575,6 +4669,11 @@ module Aws::NetworkManager
     #   resp.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
+    #   resp.attachment.last_modification_errors #=> Array
+    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.attachment.last_modification_errors[0].message #=> String
+    #   resp.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.attachment.last_modification_errors[0].request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RejectAttachment AWS API Documentation
     #
@@ -5309,6 +5408,11 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
+    #   resp.vpc_attachment.attachment.last_modification_errors #=> Array
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED"
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].message #=> String
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].resource_arn #=> String
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].request_id #=> String
     #   resp.vpc_attachment.subnet_arns #=> Array
     #   resp.vpc_attachment.subnet_arns[0] #=> String
     #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
@@ -5336,7 +5440,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

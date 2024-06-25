@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.199.0 (2024-06-25)
+------------------
+
 * Feature - Support RpcV2 protocol.
 
 * Feature - Add CBOR encoder and decoder.

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-docdbelastic/customizations'
 # @!group service
 module Aws::DocDBElastic
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.17.0'
 
 end

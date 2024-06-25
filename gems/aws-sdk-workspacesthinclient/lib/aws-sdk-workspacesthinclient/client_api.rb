@@ -32,6 +32,9 @@ module Aws::WorkSpacesThinClient
     DesktopEndpoint = Shapes::StringShape.new(name: 'DesktopEndpoint')
     DesktopType = Shapes::StringShape.new(name: 'DesktopType')
     Device = Shapes::StructureShape.new(name: 'Device')
+    DeviceCreationTagKey = Shapes::StringShape.new(name: 'DeviceCreationTagKey')
+    DeviceCreationTagValue = Shapes::StringShape.new(name: 'DeviceCreationTagValue')
+    DeviceCreationTagsMap = Shapes::MapShape.new(name: 'DeviceCreationTagsMap')
     DeviceId = Shapes::StringShape.new(name: 'DeviceId')
     DeviceList = Shapes::ListShape.new(name: 'DeviceList')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
@@ -126,6 +129,7 @@ module Aws::WorkSpacesThinClient
     CreateEnvironmentRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateEnvironmentRequest.add_member(:device_creation_tags, Shapes::ShapeRef.new(shape: DeviceCreationTagsMap, location_name: "deviceCreationTags"))
     CreateEnvironmentRequest.struct_class = Types::CreateEnvironmentRequest
 
     CreateEnvironmentResponse.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentSummary, location_name: "environment"))
@@ -175,6 +179,9 @@ module Aws::WorkSpacesThinClient
     Device.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     Device.struct_class = Types::Device
 
+    DeviceCreationTagsMap.key = Shapes::ShapeRef.new(shape: DeviceCreationTagKey)
+    DeviceCreationTagsMap.value = Shapes::ShapeRef.new(shape: DeviceCreationTagValue)
+
     DeviceList.member = Shapes::ShapeRef.new(shape: DeviceSummary)
 
     DeviceSummary.add_member(:id, Shapes::ShapeRef.new(shape: DeviceId, location_name: "id"))
@@ -213,6 +220,7 @@ module Aws::WorkSpacesThinClient
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     Environment.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     Environment.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    Environment.add_member(:device_creation_tags, Shapes::ShapeRef.new(shape: DeviceCreationTagsMap, location_name: "deviceCreationTags"))
     Environment.struct_class = Types::Environment
 
     EnvironmentList.member = Shapes::ShapeRef.new(shape: EnvironmentSummary)
@@ -372,6 +380,7 @@ module Aws::WorkSpacesThinClient
     UpdateEnvironmentRequest.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "maintenanceWindow"))
     UpdateEnvironmentRequest.add_member(:software_set_update_mode, Shapes::ShapeRef.new(shape: SoftwareSetUpdateMode, location_name: "softwareSetUpdateMode"))
     UpdateEnvironmentRequest.add_member(:desired_software_set_id, Shapes::ShapeRef.new(shape: SoftwareSetIdOrEmptyString, location_name: "desiredSoftwareSetId"))
+    UpdateEnvironmentRequest.add_member(:device_creation_tags, Shapes::ShapeRef.new(shape: DeviceCreationTagsMap, location_name: "deviceCreationTags"))
     UpdateEnvironmentRequest.struct_class = Types::UpdateEnvironmentRequest
 
     UpdateEnvironmentResponse.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentSummary, location_name: "environment"))
@@ -403,8 +412,8 @@ module Aws::WorkSpacesThinClient
       api.metadata = {
         "apiVersion" => "2023-08-22",
         "endpointPrefix" => "thinclient",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon WorkSpaces Thin Client",
         "serviceId" => "WorkSpaces Thin Client",
         "signatureVersion" => "v4",
