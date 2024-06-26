@@ -150,6 +150,15 @@ module Aws
                                         ) -> _DeleteEncoderConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEncoderConfigurationResponseSuccess
 
+      interface _DeletePublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePublicKeyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#delete_public_key-instance_method
+      def delete_public_key: (
+                               arn: ::String
+                             ) -> _DeletePublicKeyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePublicKeyResponseSuccess
+
       interface _DeleteStageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStageResponse]
       end
@@ -211,6 +220,16 @@ module Aws
                            ) -> _GetParticipantResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParticipantResponseSuccess
 
+      interface _GetPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPublicKeyResponse]
+        def public_key: () -> Types::PublicKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_public_key-instance_method
+      def get_public_key: (
+                            arn: ::String
+                          ) -> _GetPublicKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPublicKeyResponseSuccess
+
       interface _GetStageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStageResponse]
         def stage: () -> Types::Stage
@@ -241,6 +260,18 @@ module Aws
                                        arn: ::String
                                      ) -> _GetStorageConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStorageConfigurationResponseSuccess
+
+      interface _ImportPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportPublicKeyResponse]
+        def public_key: () -> Types::PublicKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#import_public_key-instance_method
+      def import_public_key: (
+                               public_key_material: ::String,
+                               ?name: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _ImportPublicKeyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportPublicKeyResponseSuccess
 
       interface _ListCompositionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCompositionsResponse]
@@ -300,6 +331,18 @@ module Aws
                                ?filter_by_recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED")
                              ) -> _ListParticipantsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParticipantsResponseSuccess
+
+      interface _ListPublicKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPublicKeysResponse]
+        def public_keys: () -> ::Array[Types::PublicKeySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_public_keys-instance_method
+      def list_public_keys: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListPublicKeysResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPublicKeysResponseSuccess
 
       interface _ListStageSessionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStageSessionsResponse]

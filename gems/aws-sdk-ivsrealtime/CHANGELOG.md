@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-06-26)
+------------------
+
+* Feature - IVS Real-Time now offers customers the ability to upload public keys for customer vended participant tokens.
+
 1.22.0 (2024-06-25)
 ------------------
 

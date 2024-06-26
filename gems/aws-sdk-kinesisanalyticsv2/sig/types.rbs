@@ -20,6 +20,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_arn: ::String
       attr_accessor application_version_id: ::Integer
       attr_accessor cloud_watch_logging_option_descriptions: ::Array[Types::CloudWatchLoggingOptionDescription]
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -93,6 +94,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_arn: ::String
       attr_accessor application_version_id: ::Integer
       attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -120,6 +122,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor environment_properties: Types::EnvironmentProperties
       attr_accessor application_code_configuration: Types::ApplicationCodeConfiguration
       attr_accessor application_snapshot_configuration: Types::ApplicationSnapshotConfiguration
+      attr_accessor application_system_rollback_configuration: Types::ApplicationSystemRollbackConfiguration
       attr_accessor vpc_configurations: ::Array[Types::VpcConfiguration]
       attr_accessor zeppelin_application_configuration: Types::ZeppelinApplicationConfiguration
       SENSITIVE: []
@@ -132,6 +135,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor flink_application_configuration_description: Types::FlinkApplicationConfigurationDescription
       attr_accessor environment_property_descriptions: Types::EnvironmentPropertyDescriptions
       attr_accessor application_snapshot_configuration_description: Types::ApplicationSnapshotConfigurationDescription
+      attr_accessor application_system_rollback_configuration_description: Types::ApplicationSystemRollbackConfigurationDescription
       attr_accessor vpc_configuration_descriptions: ::Array[Types::VpcConfigurationDescription]
       attr_accessor zeppelin_application_configuration_description: Types::ZeppelinApplicationConfigurationDescription
       SENSITIVE: []
@@ -143,6 +147,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor flink_application_configuration_update: Types::FlinkApplicationConfigurationUpdate
       attr_accessor environment_property_updates: Types::EnvironmentPropertyUpdates
       attr_accessor application_snapshot_configuration_update: Types::ApplicationSnapshotConfigurationUpdate
+      attr_accessor application_system_rollback_configuration_update: Types::ApplicationSystemRollbackConfigurationUpdate
       attr_accessor vpc_configuration_updates: ::Array[Types::VpcConfigurationUpdate]
       attr_accessor zeppelin_application_configuration_update: Types::ZeppelinApplicationConfigurationUpdate
       SENSITIVE: []
@@ -163,6 +168,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_maintenance_configuration_description: Types::ApplicationMaintenanceConfigurationDescription
       attr_accessor application_version_updated_from: ::Integer
       attr_accessor application_version_rolled_back_from: ::Integer
+      attr_accessor application_version_create_timestamp: ::Time
       attr_accessor conditional_token: ::String
       attr_accessor application_version_rolled_back_to: ::Integer
       attr_accessor application_mode: ("STREAMING" | "INTERACTIVE")
@@ -177,6 +183,25 @@ module Aws::KinesisAnalyticsV2
 
     class ApplicationMaintenanceConfigurationUpdate
       attr_accessor application_maintenance_window_start_time_update: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationOperationInfo
+      attr_accessor operation: ::String
+      attr_accessor operation_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor operation_status: ("IN_PROGRESS" | "CANCELLED" | "SUCCESSFUL" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ApplicationOperationInfoDetails
+      attr_accessor operation: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor operation_status: ("IN_PROGRESS" | "CANCELLED" | "SUCCESSFUL" | "FAILED")
+      attr_accessor application_version_change_details: Types::ApplicationVersionChangeDetails
+      attr_accessor operation_failure_details: Types::OperationFailureDetails
       SENSITIVE: []
     end
 
@@ -208,6 +233,27 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_version_id: ::Integer
       attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18")
       attr_accessor application_mode: ("STREAMING" | "INTERACTIVE")
+      SENSITIVE: []
+    end
+
+    class ApplicationSystemRollbackConfiguration
+      attr_accessor rollback_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ApplicationSystemRollbackConfigurationDescription
+      attr_accessor rollback_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ApplicationSystemRollbackConfigurationUpdate
+      attr_accessor rollback_enabled_update: bool
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionChangeDetails
+      attr_accessor application_version_updated_from: ::Integer
+      attr_accessor application_version_updated_to: ::Integer
       SENSITIVE: []
     end
 
@@ -376,6 +422,7 @@ module Aws::KinesisAnalyticsV2
       attr_accessor application_arn: ::String
       attr_accessor application_version_id: ::Integer
       attr_accessor cloud_watch_logging_option_descriptions: ::Array[Types::CloudWatchLoggingOptionDescription]
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -448,6 +495,7 @@ module Aws::KinesisAnalyticsV2
     class DeleteApplicationVpcConfigurationResponse
       attr_accessor application_arn: ::String
       attr_accessor application_version_id: ::Integer
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -463,6 +511,17 @@ module Aws::KinesisAnalyticsV2
 
     class DeployAsApplicationConfigurationUpdate
       attr_accessor s3_content_location_update: Types::S3ContentBaseLocationUpdate
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationOperationRequest
+      attr_accessor application_name: ::String
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationOperationResponse
+      attr_accessor application_operation_info_details: Types::ApplicationOperationInfoDetails
       SENSITIVE: []
     end
 
@@ -533,6 +592,11 @@ module Aws::KinesisAnalyticsV2
 
     class EnvironmentPropertyUpdates
       attr_accessor property_groups: ::Array[Types::PropertyGroup]
+      SENSITIVE: []
+    end
+
+    class ErrorInfo
+      attr_accessor error_string: ::String
       SENSITIVE: []
     end
 
@@ -770,6 +834,21 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
+    class ListApplicationOperationsRequest
+      attr_accessor application_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor operation: ::String
+      attr_accessor operation_status: ("IN_PROGRESS" | "CANCELLED" | "SUCCESSFUL" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListApplicationOperationsResponse
+      attr_accessor application_operation_info_list: ::Array[Types::ApplicationOperationInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListApplicationSnapshotsRequest
       attr_accessor application_name: ::String
       attr_accessor limit: ::Integer
@@ -849,6 +928,12 @@ module Aws::KinesisAnalyticsV2
       attr_accessor configuration_type_update: ("DEFAULT" | "CUSTOM")
       attr_accessor metrics_level_update: ("APPLICATION" | "TASK" | "OPERATOR" | "PARALLELISM")
       attr_accessor log_level_update: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class OperationFailureDetails
+      attr_accessor rollback_operation_id: ::String
+      attr_accessor error_info: Types::ErrorInfo
       SENSITIVE: []
     end
 
@@ -971,6 +1056,7 @@ module Aws::KinesisAnalyticsV2
 
     class RollbackApplicationResponse
       attr_accessor application_detail: Types::ApplicationDetail
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -1111,7 +1197,9 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
-    class StartApplicationResponse < Aws::EmptyStructure
+    class StartApplicationResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
     end
 
     class StopApplicationRequest
@@ -1120,7 +1208,9 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
-    class StopApplicationResponse < Aws::EmptyStructure
+    class StopApplicationResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
     end
 
     class Tag
@@ -1190,6 +1280,7 @@ module Aws::KinesisAnalyticsV2
 
     class UpdateApplicationResponse
       attr_accessor application_detail: Types::ApplicationDetail
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 

@@ -452,6 +452,7 @@ module Aws::KinesisAnalyticsV2
     #   * {Types::AddApplicationCloudWatchLoggingOptionResponse#application_arn #application_arn} => String
     #   * {Types::AddApplicationCloudWatchLoggingOptionResponse#application_version_id #application_version_id} => Integer
     #   * {Types::AddApplicationCloudWatchLoggingOptionResponse#cloud_watch_logging_option_descriptions #cloud_watch_logging_option_descriptions} => Array&lt;Types::CloudWatchLoggingOptionDescription&gt;
+    #   * {Types::AddApplicationCloudWatchLoggingOptionResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -472,6 +473,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
     #   resp.cloud_watch_logging_option_descriptions[0].role_arn #=> String
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationCloudWatchLoggingOption AWS API Documentation
     #
@@ -886,6 +888,7 @@ module Aws::KinesisAnalyticsV2
     #   * {Types::AddApplicationVpcConfigurationResponse#application_arn #application_arn} => String
     #   * {Types::AddApplicationVpcConfigurationResponse#application_version_id #application_version_id} => Integer
     #   * {Types::AddApplicationVpcConfigurationResponse#vpc_configuration_description #vpc_configuration_description} => Types::VpcConfigurationDescription
+    #   * {Types::AddApplicationVpcConfigurationResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -909,6 +912,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.vpc_configuration_description.subnet_ids[0] #=> String
     #   resp.vpc_configuration_description.security_group_ids #=> Array
     #   resp.vpc_configuration_description.security_group_ids[0] #=> String
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfiguration AWS API Documentation
     #
@@ -1111,6 +1115,9 @@ module Aws::KinesisAnalyticsV2
     #       application_snapshot_configuration: {
     #         snapshots_enabled: false, # required
     #       },
+    #       application_system_rollback_configuration: {
+    #         rollback_enabled: false, # required
+    #       },
     #       vpc_configurations: [
     #         {
     #           subnet_ids: ["SubnetId"], # required
@@ -1249,6 +1256,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
@@ -1276,6 +1284,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #   resp.application_detail.application_version_updated_from #=> Integer
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
+    #   resp.application_detail.application_version_create_timestamp #=> Time
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
     #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
@@ -1428,6 +1437,7 @@ module Aws::KinesisAnalyticsV2
     #   * {Types::DeleteApplicationCloudWatchLoggingOptionResponse#application_arn #application_arn} => String
     #   * {Types::DeleteApplicationCloudWatchLoggingOptionResponse#application_version_id #application_version_id} => Integer
     #   * {Types::DeleteApplicationCloudWatchLoggingOptionResponse#cloud_watch_logging_option_descriptions #cloud_watch_logging_option_descriptions} => Array&lt;Types::CloudWatchLoggingOptionDescription&gt;
+    #   * {Types::DeleteApplicationCloudWatchLoggingOptionResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1446,6 +1456,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
     #   resp.cloud_watch_logging_option_descriptions[0].role_arn #=> String
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationCloudWatchLoggingOption AWS API Documentation
     #
@@ -1657,6 +1668,7 @@ module Aws::KinesisAnalyticsV2
     #
     #   * {Types::DeleteApplicationVpcConfigurationResponse#application_arn #application_arn} => String
     #   * {Types::DeleteApplicationVpcConfigurationResponse#application_version_id #application_version_id} => Integer
+    #   * {Types::DeleteApplicationVpcConfigurationResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1671,6 +1683,7 @@ module Aws::KinesisAnalyticsV2
     #
     #   resp.application_arn #=> String
     #   resp.application_version_id #=> Integer
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfiguration AWS API Documentation
     #
@@ -1791,6 +1804,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
@@ -1818,6 +1832,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #   resp.application_detail.application_version_updated_from #=> Integer
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
+    #   resp.application_detail.application_version_create_timestamp #=> Time
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
     #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
@@ -1828,6 +1843,46 @@ module Aws::KinesisAnalyticsV2
     # @param [Hash] params ({})
     def describe_application(params = {}, options = {})
       req = build_request(:describe_application, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specific operation performed on a Managed
+    # Service for Apache Flink application
+    #
+    # @option params [required, String] :application_name
+    #   The name of the application
+    #
+    # @option params [required, String] :operation_id
+    #   Identifier of the Operation
+    #
+    # @return [Types::DescribeApplicationOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApplicationOperationResponse#application_operation_info_details #application_operation_info_details} => Types::ApplicationOperationInfoDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_application_operation({
+    #     application_name: "ApplicationName", # required
+    #     operation_id: "OperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_operation_info_details.operation #=> String
+    #   resp.application_operation_info_details.start_time #=> Time
+    #   resp.application_operation_info_details.end_time #=> Time
+    #   resp.application_operation_info_details.operation_status #=> String, one of "IN_PROGRESS", "CANCELLED", "SUCCESSFUL", "FAILED"
+    #   resp.application_operation_info_details.application_version_change_details.application_version_updated_from #=> Integer
+    #   resp.application_operation_info_details.application_version_change_details.application_version_updated_to #=> Integer
+    #   resp.application_operation_info_details.operation_failure_details.rollback_operation_id #=> String
+    #   resp.application_operation_info_details.operation_failure_details.error_info.error_string #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationOperation AWS API Documentation
+    #
+    # @overload describe_application_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_application_operation(params = {}, options = {})
+      req = build_request(:describe_application_operation, params)
       req.send_request(options)
     end
 
@@ -1981,6 +2036,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_version_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_version_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_version_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
@@ -2008,6 +2064,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #   resp.application_version_detail.application_version_updated_from #=> Integer
     #   resp.application_version_detail.application_version_rolled_back_from #=> Integer
+    #   resp.application_version_detail.application_version_create_timestamp #=> Time
     #   resp.application_version_detail.conditional_token #=> String
     #   resp.application_version_detail.application_version_rolled_back_to #=> Integer
     #   resp.application_version_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
@@ -2104,6 +2161,61 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
+    # Lists information about operations performed on a Managed Service for
+    # Apache Flink application
+    #
+    # @option params [required, String] :application_name
+    #   The name of the application
+    #
+    # @option params [Integer] :limit
+    #   Limit on the number of records returned in the response
+    #
+    # @option params [String] :next_token
+    #   If a previous command returned a pagination token, pass it into this
+    #   value to retrieve the next set of results
+    #
+    # @option params [String] :operation
+    #   Type of operation performed on an application
+    #
+    # @option params [String] :operation_status
+    #   Status of the operation performed on an application
+    #
+    # @return [Types::ListApplicationOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationOperationsResponse#application_operation_info_list #application_operation_info_list} => Array&lt;Types::ApplicationOperationInfo&gt;
+    #   * {Types::ListApplicationOperationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_application_operations({
+    #     application_name: "ApplicationName", # required
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #     operation: "Operation",
+    #     operation_status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELLED, SUCCESSFUL, FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_operation_info_list #=> Array
+    #   resp.application_operation_info_list[0].operation #=> String
+    #   resp.application_operation_info_list[0].operation_id #=> String
+    #   resp.application_operation_info_list[0].start_time #=> Time
+    #   resp.application_operation_info_list[0].end_time #=> Time
+    #   resp.application_operation_info_list[0].operation_status #=> String, one of "IN_PROGRESS", "CANCELLED", "SUCCESSFUL", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationOperations AWS API Documentation
+    #
+    # @overload list_application_operations(params = {})
+    # @param [Hash] params ({})
+    def list_application_operations(params = {}, options = {})
+      req = build_request(:list_application_operations, params)
+      req.send_request(options)
+    end
+
     # Lists information about the current application snapshots.
     #
     # @option params [required, String] :application_name
@@ -2122,6 +2234,8 @@ module Aws::KinesisAnalyticsV2
     #
     #   * {Types::ListApplicationSnapshotsResponse#snapshot_summaries #snapshot_summaries} => Array&lt;Types::SnapshotDetails&gt;
     #   * {Types::ListApplicationSnapshotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2183,6 +2297,8 @@ module Aws::KinesisAnalyticsV2
     #   * {Types::ListApplicationVersionsResponse#application_version_summaries #application_version_summaries} => Array&lt;Types::ApplicationVersionSummary&gt;
     #   * {Types::ListApplicationVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_application_versions({
@@ -2231,6 +2347,8 @@ module Aws::KinesisAnalyticsV2
     #
     #   * {Types::ListApplicationsResponse#application_summaries #application_summaries} => Array&lt;Types::ApplicationSummary&gt;
     #   * {Types::ListApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2295,17 +2413,15 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Reverts the application to the previous running version. You can roll
-    # back an application if you suspect it is stuck in a transient status.
+    # back an application if you suspect it is stuck in a transient status
+    # or in the running status.
     #
-    # You can roll back an application only if it is in the `UPDATING` or
-    # `AUTOSCALING` status.
+    # You can roll back an application only if it is in the `UPDATING`,
+    # `AUTOSCALING`, or `RUNNING` statuses.
     #
     # When you rollback an application, it loads state data from the last
     # successful snapshot. If the application has no snapshots, Managed
     # Service for Apache Flink rejects the rollback request.
-    #
-    # This action is not supported for Managed Service for Apache Flink for
-    # SQL applications.
     #
     # @option params [required, String] :application_name
     #   The name of the application.
@@ -2317,6 +2433,7 @@ module Aws::KinesisAnalyticsV2
     # @return [Types::RollbackApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RollbackApplicationResponse#application_detail #application_detail} => Types::ApplicationDetail
+    #   * {Types::RollbackApplicationResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2411,6 +2528,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
@@ -2438,9 +2556,11 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #   resp.application_detail.application_version_updated_from #=> Integer
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
+    #   resp.application_detail.application_version_create_timestamp #=> Time
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
     #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RollbackApplication AWS API Documentation
     #
@@ -2462,7 +2582,9 @@ module Aws::KinesisAnalyticsV2
     #   Identifies the run configuration (start parameters) of a Managed
     #   Service for Apache Flink application.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::StartApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartApplicationResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2486,6 +2608,10 @@ module Aws::KinesisAnalyticsV2
     #       },
     #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StartApplication AWS API Documentation
     #
@@ -2528,7 +2654,9 @@ module Aws::KinesisAnalyticsV2
     #   The application must be in the `STARTING`, `UPDATING`, `STOPPING`,
     #   `AUTOSCALING`, or `RUNNING` status.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::StopApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopApplicationResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2536,6 +2664,10 @@ module Aws::KinesisAnalyticsV2
     #     application_name: "ApplicationName", # required
     #     force: false,
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplication AWS API Documentation
     #
@@ -2669,6 +2801,7 @@ module Aws::KinesisAnalyticsV2
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application_detail #application_detail} => Types::ApplicationDetail
+    #   * {Types::UpdateApplicationResponse#operation_id #operation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2813,6 +2946,9 @@ module Aws::KinesisAnalyticsV2
     #       },
     #       application_snapshot_configuration_update: {
     #         snapshots_enabled_update: false, # required
+    #       },
+    #       application_system_rollback_configuration_update: {
+    #         rollback_enabled_update: false, # required
     #       },
     #       vpc_configuration_updates: [
     #         {
@@ -2959,6 +3095,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
@@ -2986,9 +3123,11 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_maintenance_configuration_description.application_maintenance_window_end_time #=> String
     #   resp.application_detail.application_version_updated_from #=> Integer
     #   resp.application_detail.application_version_rolled_back_from #=> Integer
+    #   resp.application_detail.application_version_create_timestamp #=> Time
     #   resp.application_detail.conditional_token #=> String
     #   resp.application_detail.application_version_rolled_back_to #=> Integer
     #   resp.application_detail.application_mode #=> String, one of "STREAMING", "INTERACTIVE"
+    #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplication AWS API Documentation
     #
@@ -3077,7 +3216,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

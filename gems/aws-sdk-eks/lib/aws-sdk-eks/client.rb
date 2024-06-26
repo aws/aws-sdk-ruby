@@ -1078,6 +1078,16 @@ module Aws::EKS
     # @option params [Types::CreateAccessConfigRequest] :access_config
     #   The access configuration for the cluster.
     #
+    # @option params [Boolean] :bootstrap_self_managed_addons
+    #   If you set this value to `False` when creating a cluster, the default
+    #   networking add-ons will not be installed.
+    #
+    #   The default networking addons include vpc-cni, coredns, and
+    #   kube-proxy.
+    #
+    #   Use this option when you plan to install third-party alternative
+    #   add-ons or self-manage the default networking add-ons.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -1155,6 +1165,7 @@ module Aws::EKS
     #       bootstrap_cluster_creator_admin_permissions: false,
     #       authentication_mode: "API", # accepts API, API_AND_CONFIG_MAP, CONFIG_MAP
     #     },
+    #     bootstrap_self_managed_addons: false,
     #   })
     #
     # @example Response structure
@@ -5061,7 +5072,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

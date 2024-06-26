@@ -250,6 +250,20 @@ module Aws::KinesisAnalyticsV2
       end
     end
 
+    class DescribeApplicationOperation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::KinesisAnalyticsV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeApplicationSnapshot
       def self.build(context)
         unless context.config.regional_endpoint
@@ -279,6 +293,20 @@ module Aws::KinesisAnalyticsV2
     end
 
     class DiscoverInputSchema
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::KinesisAnalyticsV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListApplicationOperations
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

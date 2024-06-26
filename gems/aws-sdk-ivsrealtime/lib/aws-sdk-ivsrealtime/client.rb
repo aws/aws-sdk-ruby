@@ -564,7 +564,8 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [Types::AutoParticipantRecordingConfiguration] :auto_participant_recording_configuration
-    #   Auto participant recording configuration object attached to the stage.
+    #   Configuration object for individual participant recording, to attach
+    #   to the new stage.
     #
     # @return [Types::CreateStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -604,6 +605,8 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.storage_configuration_arn #=> String
     #   resp.stage.auto_participant_recording_configuration.media_types #=> Array
     #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
+    #   resp.stage.endpoints.events #=> String
+    #   resp.stage.endpoints.whip #=> String
     #   resp.participant_tokens #=> Array
     #   resp.participant_tokens[0].participant_id #=> String
     #   resp.participant_tokens[0].token #=> String
@@ -700,6 +703,30 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def delete_encoder_configuration(params = {}, options = {})
       req = build_request(:delete_encoder_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified public key used to sign stage participant
+    # tokens. This invalidates future participant tokens generated using the
+    # key pair’s private key.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the public key to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_public_key({
+    #     arn: "PublicKeyArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeletePublicKey AWS API Documentation
+    #
+    # @overload delete_public_key(params = {})
+    # @param [Hash] params ({})
+    def delete_public_key(params = {}, options = {})
+      req = build_request(:delete_public_key, params)
       req.send_request(options)
     end
 
@@ -935,6 +962,39 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Gets information for the specified public key.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the public key for which the information is to be retrieved.
+    #
+    # @return [Types::GetPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPublicKeyResponse#public_key #public_key} => Types::PublicKey
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_public_key({
+    #     arn: "PublicKeyArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_key.arn #=> String
+    #   resp.public_key.name #=> String
+    #   resp.public_key.public_key_material #=> String
+    #   resp.public_key.fingerprint #=> String
+    #   resp.public_key.tags #=> Hash
+    #   resp.public_key.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetPublicKey AWS API Documentation
+    #
+    # @overload get_public_key(params = {})
+    # @param [Hash] params ({})
+    def get_public_key(params = {}, options = {})
+      req = build_request(:get_public_key, params)
+      req.send_request(options)
+    end
+
     # Gets information for the specified stage.
     #
     # @option params [required, String] :arn
@@ -960,6 +1020,8 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.storage_configuration_arn #=> String
     #   resp.stage.auto_participant_recording_configuration.media_types #=> Array
     #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
+    #   resp.stage.endpoints.events #=> String
+    #   resp.stage.endpoints.whip #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStage AWS API Documentation
     #
@@ -1033,6 +1095,57 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def get_storage_configuration(params = {}, options = {})
       req = build_request(:get_storage_configuration, params)
+      req.send_request(options)
+    end
+
+    # Import a public key to be used for signing stage participant tokens.
+    #
+    # @option params [required, String] :public_key_material
+    #   The content of the public key to be imported.
+    #
+    # @option params [String] :name
+    #   Name of the public key to be imported.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::ImportPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportPublicKeyResponse#public_key #public_key} => Types::PublicKey
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_public_key({
+    #     public_key_material: "PublicKeyMaterial", # required
+    #     name: "PublicKeyName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_key.arn #=> String
+    #   resp.public_key.name #=> String
+    #   resp.public_key.public_key_material #=> String
+    #   resp.public_key.fingerprint #=> String
+    #   resp.public_key.tags #=> Hash
+    #   resp.public_key.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ImportPublicKey AWS API Documentation
+    #
+    # @overload import_public_key(params = {})
+    # @param [Hash] params ({})
+    def import_public_key(params = {}, options = {})
+      req = build_request(:import_public_key, params)
       req.send_request(options)
     end
 
@@ -1270,6 +1383,48 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def list_participants(params = {}, options = {})
       req = build_request(:list_participants, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about all public keys in your account, in the
+    # AWS region where the API request is processed.
+    #
+    # @option params [String] :next_token
+    #   The first public key to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
+    #
+    # @return [Types::ListPublicKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPublicKeysResponse#public_keys #public_keys} => Array&lt;Types::PublicKeySummary&gt;
+    #   * {Types::ListPublicKeysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_public_keys({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_keys #=> Array
+    #   resp.public_keys[0].arn #=> String
+    #   resp.public_keys[0].name #=> String
+    #   resp.public_keys[0].tags #=> Hash
+    #   resp.public_keys[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListPublicKeys AWS API Documentation
+    #
+    # @overload list_public_keys(params = {})
+    # @param [Hash] params ({})
+    def list_public_keys(params = {}, options = {})
+      req = build_request(:list_public_keys, params)
       req.send_request(options)
     end
 
@@ -1679,9 +1834,9 @@ module Aws::IVSRealTime
     #   Name of the stage to be updated.
     #
     # @option params [Types::AutoParticipantRecordingConfiguration] :auto_participant_recording_configuration
-    #   Auto-participant-recording configuration object to attach to the
-    #   stage. Auto-participant-recording configuration cannot be updated
-    #   while recording is active.
+    #   Configuration object for individual participant recording, to attach
+    #   to the stage. Note that this cannot be updated while recording is
+    #   active.
     #
     # @return [Types::UpdateStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1708,6 +1863,8 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.storage_configuration_arn #=> String
     #   resp.stage.auto_participant_recording_configuration.media_types #=> Array
     #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
+    #   resp.stage.endpoints.events #=> String
+    #   resp.stage.endpoints.whip #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateStage AWS API Documentation
     #
@@ -1731,7 +1888,7 @@ module Aws::IVSRealTime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

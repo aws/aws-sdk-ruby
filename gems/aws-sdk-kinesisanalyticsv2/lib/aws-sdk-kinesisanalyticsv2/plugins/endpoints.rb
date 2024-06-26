@@ -92,12 +92,16 @@ module Aws::KinesisAnalyticsV2
             Aws::KinesisAnalyticsV2::Endpoints::DeleteApplicationVpcConfiguration.build(context)
           when :describe_application
             Aws::KinesisAnalyticsV2::Endpoints::DescribeApplication.build(context)
+          when :describe_application_operation
+            Aws::KinesisAnalyticsV2::Endpoints::DescribeApplicationOperation.build(context)
           when :describe_application_snapshot
             Aws::KinesisAnalyticsV2::Endpoints::DescribeApplicationSnapshot.build(context)
           when :describe_application_version
             Aws::KinesisAnalyticsV2::Endpoints::DescribeApplicationVersion.build(context)
           when :discover_input_schema
             Aws::KinesisAnalyticsV2::Endpoints::DiscoverInputSchema.build(context)
+          when :list_application_operations
+            Aws::KinesisAnalyticsV2::Endpoints::ListApplicationOperations.build(context)
           when :list_application_snapshots
             Aws::KinesisAnalyticsV2::Endpoints::ListApplicationSnapshots.build(context)
           when :list_application_versions

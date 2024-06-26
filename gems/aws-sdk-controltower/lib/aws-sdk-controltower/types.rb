@@ -159,7 +159,7 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # A filter object that lets you call `ListCOntrolOperations` with a
+    # A filter object that lets you call `ListControlOperations` with a
     # specific filter.
     #
     # @!attribute [rw] control_identifiers
@@ -559,7 +559,8 @@ module Aws::ControlTower
     #   @return [Array<Types::EnabledBaselineParameterSummary>]
     #
     # @!attribute [rw] status_summary
-    #   The deployment summary of the enabled control.
+    #   The deployment summary of an `EnabledControl` or `EnabledBaseline`
+    #   resource.
     #   @return [Types::EnablementStatusSummary]
     #
     # @!attribute [rw] target_identifier
@@ -657,7 +658,8 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] status_summary
-    #   The deployment summary of the enabled control.
+    #   The deployment summary of an `EnabledControl` or `EnabledBaseline`
+    #   resource.
     #   @return [Types::EnablementStatusSummary]
     #
     # @!attribute [rw] target_identifier
@@ -830,23 +832,26 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # The deployment summary of the enabled control.
+    # The deployment summary of an `EnabledControl` or `EnabledBaseline`
+    # resource.
     #
     # @!attribute [rw] last_operation_identifier
-    #   The last operation identifier for the enabled control.
+    #   The last operation identifier for the enabled resource.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The deployment status of the enabled control.
+    #   The deployment status of the enabled resource.
     #
     #   Valid values:
     #
-    #   * `SUCCEEDED`: The `enabledControl` configuration was deployed
-    #     successfully.
+    #   * `SUCCEEDED`: The `EnabledControl` or `EnabledBaseline`
+    #     configuration was deployed successfully.
     #
-    #   * `UNDER_CHANGE`: The `enabledControl` configuration is changing.
+    #   * `UNDER_CHANGE`: The `EnabledControl` or `EnabledBaseline`
+    #     configuration is changing.
     #
-    #   * `FAILED`: The `enabledControl` configuration failed to deploy.
+    #   * `FAILED`: The `EnabledControl` or `EnabledBaseline` configuration
+    #     failed to deploy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnablementStatusSummary AWS API Documentation
@@ -1127,6 +1132,10 @@ module Aws::ControlTower
     #   The landing zone operation end time.
     #   @return [Time]
     #
+    # @!attribute [rw] operation_identifier
+    #   The `operationIdentifier` of the landing zone operation.
+    #   @return [String]
+    #
     # @!attribute [rw] operation_type
     #   The landing zone operation type.
     #
@@ -1164,10 +1173,56 @@ module Aws::ControlTower
     #
     class LandingZoneOperationDetail < Struct.new(
       :end_time,
+      :operation_identifier,
       :operation_type,
       :start_time,
       :status,
       :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter object that lets you call `ListLandingZoneOperations` with a
+    # specific filter.
+    #
+    # @!attribute [rw] statuses
+    #   The statuses of the set of landing zone operations selected by the
+    #   filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] types
+    #   The set of landing zone operation types selected by the filter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneOperationFilter AWS API Documentation
+    #
+    class LandingZoneOperationFilter < Struct.new(
+      :statuses,
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a summary of information about a landing zone operation.
+    #
+    # @!attribute [rw] operation_identifier
+    #   The `operationIdentifier` of the landing zone operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The type of the landing zone operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the landing zone operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneOperationSummary AWS API Documentation
+    #
+    class LandingZoneOperationSummary < Struct.new(
+      :operation_identifier,
+      :operation_type,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1244,7 +1299,7 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] control_operations
-    #   Returns a list of output from control operations. PLACEHOLDER
+    #   Returns a list of output from control operations.
     #   @return [Array<Types::ControlOperationSummary>]
     #
     # @!attribute [rw] next_token
@@ -1302,7 +1357,7 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] filter
-    #   An input filter for the `ListCEnabledControls` API that lets you
+    #   An input filter for the `ListEnabledControls` API that lets you
     #   select the types of control operations to view.
     #   @return [Types::EnabledControlFilter]
     #
@@ -1349,6 +1404,48 @@ module Aws::ControlTower
     #
     class ListEnabledControlsOutput < Struct.new(
       :enabled_controls,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   An input filter for the `ListLandingZoneOperations` API that lets
+    #   you select the types of landing zone operations to view.
+    #   @return [Types::LandingZoneOperationFilter]
+    #
+    # @!attribute [rw] max_results
+    #   How many results to return per API call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to continue the list from a previous API call with the
+    #   same parameters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZoneOperationsInput AWS API Documentation
+    #
+    class ListLandingZoneOperationsInput < Struct.new(
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] landing_zone_operations
+    #   Lists landing zone operations.
+    #   @return [Array<Types::LandingZoneOperationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Retrieves the next page of results. If the string is empty, the
+    #   response is the end of the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZoneOperationsOutput AWS API Documentation
+    #
+    class ListLandingZoneOperationsOutput < Struct.new(
+      :landing_zone_operations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1660,9 +1757,11 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The manifest JSON file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [Launch your landing
-    #   zone][1].
+    #   The manifest file (JSON) is a text file that describes your Amazon
+    #   Web Services resources. For an example, review [Launch your landing
+    #   zone][1]. The example manifest file contains each of the available
+    #   parameters. The schema for the landing zone's JSON manifest file is
+    #   not published, by design.
     #
     #
     #

@@ -37,6 +37,8 @@ module Aws::IVSRealTime
     CreateStorageConfigurationResponse = Shapes::StructureShape.new(name: 'CreateStorageConfigurationResponse')
     DeleteEncoderConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEncoderConfigurationRequest')
     DeleteEncoderConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteEncoderConfigurationResponse')
+    DeletePublicKeyRequest = Shapes::StructureShape.new(name: 'DeletePublicKeyRequest')
+    DeletePublicKeyResponse = Shapes::StructureShape.new(name: 'DeletePublicKeyResponse')
     DeleteStageRequest = Shapes::StructureShape.new(name: 'DeleteStageRequest')
     DeleteStageResponse = Shapes::StructureShape.new(name: 'DeleteStageResponse')
     DeleteStorageConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteStorageConfigurationRequest')
@@ -70,6 +72,8 @@ module Aws::IVSRealTime
     GetEncoderConfigurationResponse = Shapes::StructureShape.new(name: 'GetEncoderConfigurationResponse')
     GetParticipantRequest = Shapes::StructureShape.new(name: 'GetParticipantRequest')
     GetParticipantResponse = Shapes::StructureShape.new(name: 'GetParticipantResponse')
+    GetPublicKeyRequest = Shapes::StructureShape.new(name: 'GetPublicKeyRequest')
+    GetPublicKeyResponse = Shapes::StructureShape.new(name: 'GetPublicKeyResponse')
     GetStageRequest = Shapes::StructureShape.new(name: 'GetStageRequest')
     GetStageResponse = Shapes::StructureShape.new(name: 'GetStageResponse')
     GetStageSessionRequest = Shapes::StructureShape.new(name: 'GetStageSessionRequest')
@@ -79,6 +83,8 @@ module Aws::IVSRealTime
     GridConfiguration = Shapes::StructureShape.new(name: 'GridConfiguration')
     GridGap = Shapes::IntegerShape.new(name: 'GridGap')
     Height = Shapes::IntegerShape.new(name: 'Height')
+    ImportPublicKeyRequest = Shapes::StructureShape.new(name: 'ImportPublicKeyRequest')
+    ImportPublicKeyResponse = Shapes::StructureShape.new(name: 'ImportPublicKeyResponse')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LayoutConfiguration = Shapes::StructureShape.new(name: 'LayoutConfiguration')
     ListCompositionsRequest = Shapes::StructureShape.new(name: 'ListCompositionsRequest')
@@ -89,6 +95,8 @@ module Aws::IVSRealTime
     ListParticipantEventsResponse = Shapes::StructureShape.new(name: 'ListParticipantEventsResponse')
     ListParticipantsRequest = Shapes::StructureShape.new(name: 'ListParticipantsRequest')
     ListParticipantsResponse = Shapes::StructureShape.new(name: 'ListParticipantsResponse')
+    ListPublicKeysRequest = Shapes::StructureShape.new(name: 'ListPublicKeysRequest')
+    ListPublicKeysResponse = Shapes::StructureShape.new(name: 'ListPublicKeysResponse')
     ListStageSessionsRequest = Shapes::StructureShape.new(name: 'ListStageSessionsRequest')
     ListStageSessionsResponse = Shapes::StructureShape.new(name: 'ListStageSessionsResponse')
     ListStagesRequest = Shapes::StructureShape.new(name: 'ListStagesRequest')
@@ -101,6 +109,7 @@ module Aws::IVSRealTime
     MaxEncoderConfigurationResults = Shapes::IntegerShape.new(name: 'MaxEncoderConfigurationResults')
     MaxParticipantEventResults = Shapes::IntegerShape.new(name: 'MaxParticipantEventResults')
     MaxParticipantResults = Shapes::IntegerShape.new(name: 'MaxParticipantResults')
+    MaxPublicKeyResults = Shapes::IntegerShape.new(name: 'MaxPublicKeyResults')
     MaxStageResults = Shapes::IntegerShape.new(name: 'MaxStageResults')
     MaxStageSessionResults = Shapes::IntegerShape.new(name: 'MaxStageSessionResults')
     MaxStorageConfigurationResults = Shapes::IntegerShape.new(name: 'MaxStorageConfigurationResults')
@@ -138,6 +147,13 @@ module Aws::IVSRealTime
     PipOffset = Shapes::IntegerShape.new(name: 'PipOffset')
     PipPosition = Shapes::StringShape.new(name: 'PipPosition')
     PipWidth = Shapes::IntegerShape.new(name: 'PipWidth')
+    PublicKey = Shapes::StructureShape.new(name: 'PublicKey')
+    PublicKeyArn = Shapes::StringShape.new(name: 'PublicKeyArn')
+    PublicKeyFingerprint = Shapes::StringShape.new(name: 'PublicKeyFingerprint')
+    PublicKeyList = Shapes::ListShape.new(name: 'PublicKeyList')
+    PublicKeyMaterial = Shapes::StringShape.new(name: 'PublicKeyMaterial')
+    PublicKeyName = Shapes::StringShape.new(name: 'PublicKeyName')
+    PublicKeySummary = Shapes::StructureShape.new(name: 'PublicKeySummary')
     Published = Shapes::BooleanShape.new(name: 'Published')
     RecordingConfiguration = Shapes::StructureShape.new(name: 'RecordingConfiguration')
     RecordingConfigurationFormat = Shapes::StringShape.new(name: 'RecordingConfigurationFormat')
@@ -150,6 +166,8 @@ module Aws::IVSRealTime
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Stage = Shapes::StructureShape.new(name: 'Stage')
     StageArn = Shapes::StringShape.new(name: 'StageArn')
+    StageEndpoint = Shapes::StringShape.new(name: 'StageEndpoint')
+    StageEndpoints = Shapes::StructureShape.new(name: 'StageEndpoints')
     StageName = Shapes::StringShape.new(name: 'StageName')
     StageSession = Shapes::StructureShape.new(name: 'StageSession')
     StageSessionId = Shapes::StringShape.new(name: 'StageSessionId')
@@ -262,6 +280,11 @@ module Aws::IVSRealTime
 
     DeleteEncoderConfigurationResponse.struct_class = Types::DeleteEncoderConfigurationResponse
 
+    DeletePublicKeyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PublicKeyArn, required: true, location_name: "arn"))
+    DeletePublicKeyRequest.struct_class = Types::DeletePublicKeyRequest
+
+    DeletePublicKeyResponse.struct_class = Types::DeletePublicKeyResponse
+
     DeleteStageRequest.add_member(:arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "arn"))
     DeleteStageRequest.struct_class = Types::DeleteStageRequest
 
@@ -351,6 +374,12 @@ module Aws::IVSRealTime
     GetParticipantResponse.add_member(:participant, Shapes::ShapeRef.new(shape: Participant, location_name: "participant"))
     GetParticipantResponse.struct_class = Types::GetParticipantResponse
 
+    GetPublicKeyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PublicKeyArn, required: true, location_name: "arn"))
+    GetPublicKeyRequest.struct_class = Types::GetPublicKeyRequest
+
+    GetPublicKeyResponse.add_member(:public_key, Shapes::ShapeRef.new(shape: PublicKey, location_name: "publicKey"))
+    GetPublicKeyResponse.struct_class = Types::GetPublicKeyResponse
+
     GetStageRequest.add_member(:arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "arn"))
     GetStageRequest.struct_class = Types::GetStageRequest
 
@@ -376,6 +405,14 @@ module Aws::IVSRealTime
     GridConfiguration.add_member(:video_fill_mode, Shapes::ShapeRef.new(shape: VideoFillMode, location_name: "videoFillMode"))
     GridConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
     GridConfiguration.struct_class = Types::GridConfiguration
+
+    ImportPublicKeyRequest.add_member(:public_key_material, Shapes::ShapeRef.new(shape: PublicKeyMaterial, required: true, location_name: "publicKeyMaterial"))
+    ImportPublicKeyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PublicKeyName, location_name: "name"))
+    ImportPublicKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ImportPublicKeyRequest.struct_class = Types::ImportPublicKeyRequest
+
+    ImportPublicKeyResponse.add_member(:public_key, Shapes::ShapeRef.new(shape: PublicKey, location_name: "publicKey"))
+    ImportPublicKeyResponse.struct_class = Types::ImportPublicKeyResponse
 
     InternalServerException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -426,6 +463,14 @@ module Aws::IVSRealTime
     ListParticipantsResponse.add_member(:participants, Shapes::ShapeRef.new(shape: ParticipantList, required: true, location_name: "participants"))
     ListParticipantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListParticipantsResponse.struct_class = Types::ListParticipantsResponse
+
+    ListPublicKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPublicKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPublicKeyResults, location_name: "maxResults"))
+    ListPublicKeysRequest.struct_class = Types::ListPublicKeysRequest
+
+    ListPublicKeysResponse.add_member(:public_keys, Shapes::ShapeRef.new(shape: PublicKeyList, required: true, location_name: "publicKeys"))
+    ListPublicKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPublicKeysResponse.struct_class = Types::ListPublicKeysResponse
 
     ListStageSessionsRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     ListStageSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -529,6 +574,20 @@ module Aws::IVSRealTime
     PipConfiguration.add_member(:pip_height, Shapes::ShapeRef.new(shape: PipHeight, location_name: "pipHeight"))
     PipConfiguration.struct_class = Types::PipConfiguration
 
+    PublicKey.add_member(:arn, Shapes::ShapeRef.new(shape: PublicKeyArn, location_name: "arn"))
+    PublicKey.add_member(:name, Shapes::ShapeRef.new(shape: PublicKeyName, location_name: "name"))
+    PublicKey.add_member(:public_key_material, Shapes::ShapeRef.new(shape: PublicKeyMaterial, location_name: "publicKeyMaterial"))
+    PublicKey.add_member(:fingerprint, Shapes::ShapeRef.new(shape: PublicKeyFingerprint, location_name: "fingerprint"))
+    PublicKey.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PublicKey.struct_class = Types::PublicKey
+
+    PublicKeyList.member = Shapes::ShapeRef.new(shape: PublicKeySummary)
+
+    PublicKeySummary.add_member(:arn, Shapes::ShapeRef.new(shape: PublicKeyArn, location_name: "arn"))
+    PublicKeySummary.add_member(:name, Shapes::ShapeRef.new(shape: PublicKeyName, location_name: "name"))
+    PublicKeySummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PublicKeySummary.struct_class = Types::PublicKeySummary
+
     RecordingConfiguration.add_member(:format, Shapes::ShapeRef.new(shape: RecordingConfigurationFormat, location_name: "format"))
     RecordingConfiguration.struct_class = Types::RecordingConfiguration
 
@@ -554,7 +613,12 @@ module Aws::IVSRealTime
     Stage.add_member(:active_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "activeSessionId"))
     Stage.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Stage.add_member(:auto_participant_recording_configuration, Shapes::ShapeRef.new(shape: AutoParticipantRecordingConfiguration, location_name: "autoParticipantRecordingConfiguration"))
+    Stage.add_member(:endpoints, Shapes::ShapeRef.new(shape: StageEndpoints, location_name: "endpoints"))
     Stage.struct_class = Types::Stage
+
+    StageEndpoints.add_member(:events, Shapes::ShapeRef.new(shape: StageEndpoint, location_name: "events"))
+    StageEndpoints.add_member(:whip, Shapes::ShapeRef.new(shape: StageEndpoint, location_name: "whip"))
+    StageEndpoints.struct_class = Types::StageEndpoints
 
     StageSession.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sessionId"))
     StageSession.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
@@ -648,8 +712,8 @@ module Aws::IVSRealTime
       api.metadata = {
         "apiVersion" => "2020-07-14",
         "endpointPrefix" => "ivsrealtime",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "ivsrealtime",
         "serviceFullName" => "Amazon Interactive Video Service RealTime",
         "serviceId" => "IVS RealTime",
@@ -725,6 +789,19 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePublicKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeletePublicKey"
+        o.input = Shapes::ShapeRef.new(shape: DeletePublicKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePublicKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:delete_stage, Seahorse::Model::Operation.new.tap do |o|
@@ -805,6 +882,17 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPublicKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetPublicKey"
+        o.input = Shapes::ShapeRef.new(shape: GetPublicKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPublicKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_stage, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStage"
         o.http_method = "POST"
@@ -839,6 +927,19 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:import_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportPublicKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/ImportPublicKey"
+        o.input = Shapes::ShapeRef.new(shape: ImportPublicKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportPublicKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:list_compositions, Seahorse::Model::Operation.new.tap do |o|
@@ -901,6 +1002,22 @@ module Aws::IVSRealTime
         o.http_request_uri = "/ListParticipants"
         o.input = Shapes::ShapeRef.new(shape: ListParticipantsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListParticipantsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_public_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPublicKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListPublicKeys"
+        o.input = Shapes::ShapeRef.new(shape: ListPublicKeysRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPublicKeysResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(

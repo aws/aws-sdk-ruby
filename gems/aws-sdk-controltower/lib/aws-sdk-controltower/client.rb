@@ -538,14 +538,14 @@ module Aws::ControlTower
     end
 
     # This API call turns off a control. It starts an asynchronous operation
-    # that deletes AWS resources on the specified organizational unit and
-    # the accounts it contains. The resources will vary according to the
-    # control that you specify. For usage examples, see [ *the Amazon Web
-    # Services Control Tower User Guide* ][1].
+    # that deletes Amazon Web Services resources on the specified
+    # organizational unit and the accounts it contains. The resources will
+    # vary according to the control that you specify. For usage examples,
+    # see the [ *Controls Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
@@ -656,12 +656,11 @@ module Aws::ControlTower
     # that creates Amazon Web Services resources on the specified
     # organizational unit and the accounts it contains. The resources
     # created will vary according to the control that you specify. For usage
-    # examples, see [ *the Amazon Web Services Control Tower User Guide*
-    # ][1].
+    # examples, see the [ *Controls Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
@@ -806,12 +805,12 @@ module Aws::ControlTower
 
     # Returns the status of a particular `EnableControl` or `DisableControl`
     # operation. Displays a message in case of error. Details for an
-    # operation are available for 90 days. For usage examples, see [ *the
-    # Amazon Web Services Control Tower User Guide* ][1].
+    # operation are available for 90 days. For usage examples, see the [
+    # *Controls Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :operation_identifier
     #   The ID of the asynchronous operation, which is used to track status.
@@ -885,12 +884,12 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Retrieves details about an enabled control. For usage examples, see [
-    # *the Amazon Web Services Control Tower User Guide* ][1].
+    # Retrieves details about an enabled control. For usage examples, see
+    # the [ *Controls Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :enabled_control_identifier
     #   The `controlIdentifier` of the enabled control.
@@ -979,6 +978,7 @@ module Aws::ControlTower
     # @example Response structure
     #
     #   resp.operation_details.end_time #=> Time
+    #   resp.operation_details.operation_identifier #=> String
     #   resp.operation_details.operation_type #=> String, one of "DELETE", "CREATE", "UPDATE", "RESET"
     #   resp.operation_details.start_time #=> Time
     #   resp.operation_details.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
@@ -1037,7 +1037,12 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Provides a list of operations in progress or queued.
+    # Provides a list of operations in progress or queued. For usage
+    # examples, see [ListControlOperation examples][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html#list-control-operations-api-examples
     #
     # @option params [Types::ControlOperationFilter] :filter
     #   An input filter for the `ListControlOperations` API that lets you
@@ -1153,16 +1158,15 @@ module Aws::ControlTower
 
     # Lists the controls enabled by Amazon Web Services Control Tower on the
     # specified organizational unit and the accounts it contains. For usage
-    # examples, see [ *the Amazon Web Services Control Tower User Guide*
-    # ][1].
+    # examples, see the [ *Controls Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [Types::EnabledControlFilter] :filter
-    #   An input filter for the `ListCEnabledControls` API that lets you
-    #   select the types of control operations to view.
+    #   An input filter for the `ListEnabledControls` API that lets you select
+    #   the types of control operations to view.
     #
     # @option params [Integer] :max_results
     #   How many results to return per API call.
@@ -1219,6 +1223,55 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Lists all landing zone operations from the past 90 days. Results are
+    # sorted by time, with the most recent operation first.
+    #
+    # @option params [Types::LandingZoneOperationFilter] :filter
+    #   An input filter for the `ListLandingZoneOperations` API that lets you
+    #   select the types of landing zone operations to view.
+    #
+    # @option params [Integer] :max_results
+    #   How many results to return per API call.
+    #
+    # @option params [String] :next_token
+    #   The token to continue the list from a previous API call with the same
+    #   parameters.
+    #
+    # @return [Types::ListLandingZoneOperationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLandingZoneOperationsOutput#landing_zone_operations #landing_zone_operations} => Array&lt;Types::LandingZoneOperationSummary&gt;
+    #   * {Types::ListLandingZoneOperationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_landing_zone_operations({
+    #     filter: {
+    #       statuses: ["SUCCEEDED"], # accepts SUCCEEDED, FAILED, IN_PROGRESS
+    #       types: ["DELETE"], # accepts DELETE, CREATE, UPDATE, RESET
+    #     },
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.landing_zone_operations #=> Array
+    #   resp.landing_zone_operations[0].operation_identifier #=> String
+    #   resp.landing_zone_operations[0].operation_type #=> String, one of "DELETE", "CREATE", "UPDATE", "RESET"
+    #   resp.landing_zone_operations[0].status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZoneOperations AWS API Documentation
+    #
+    # @overload list_landing_zone_operations(params = {})
+    # @param [Hash] params ({})
+    def list_landing_zone_operations(params = {}, options = {})
+      req = build_request(:list_landing_zone_operations, params)
+      req.send_request(options)
+    end
+
     # Returns the landing zone ARN for the landing zone deployed in your
     # managed account. This API also creates an ARN for existing accounts
     # that do not yet have a landing zone ARN.
@@ -1262,12 +1315,11 @@ module Aws::ControlTower
     end
 
     # Returns a list of tags associated with the resource. For usage
-    # examples, see [ *the Amazon Web Services Control Tower User Guide*
-    # ][1].
+    # examples, see the [ *Controls Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource.
@@ -1334,7 +1386,11 @@ module Aws::ControlTower
 
     # This API call resets a landing zone. It starts an asynchronous
     # operation that resets the landing zone to the parameters specified in
-    # its original configuration.
+    # the original configuration, which you specified in the manifest file.
+    # Nothing in the manifest file's original landing zone configuration is
+    # changed during the reset process, by default. This API is not the same
+    # as a rollback of a landing zone version, which is not a supported
+    # operation.
     #
     # @option params [required, String] :landing_zone_identifier
     #   The unique identifier of the landing zone.
@@ -1362,12 +1418,12 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Applies tags to a resource. For usage examples, see [ *the Amazon Web
-    # Services Control Tower User Guide* ][1].
+    # Applies tags to a resource. For usage examples, see the [ *Controls
+    # Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource to be tagged.
@@ -1395,12 +1451,12 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
-    # Removes tags from a resource. For usage examples, see [ *the Amazon
-    # Web Services Control Tower User Guide* ][1].
+    # Removes tags from a resource. For usage examples, see the [ *Controls
+    # Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource.
@@ -1483,18 +1539,18 @@ module Aws::ControlTower
     # accept the request.
     #
     # If the enabled control shows an `EnablementStatus` of FAILED, Amazon
-    # Web Services Control Tower will update the control to match any valid
+    # Web Services Control Tower updates the control to match any valid
     # parameters that you supply.
     #
     # If the `DriftSummary` status for the control shows as DRIFTED, you
     # cannot call this API. Instead, you can update the control by calling
     # `DisableControl` and again calling `EnableControl`, or you can run an
-    # extending governance operation. For usage examples, see [ *the Amazon
-    # Web Services Control Tower User Guide* ][1]
+    # extending governance operation. For usage examples, see the [
+    # *Controls Reference Guide* ][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
+    # [1]: https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html
     #
     # @option params [required, String] :enabled_control_identifier
     #   The ARN of the enabled control that will be updated.
@@ -1542,9 +1598,11 @@ module Aws::ControlTower
     #   The unique identifier of the landing zone.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The manifest JSON file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [Launch your landing
-    #   zone][1].
+    #   The manifest file (JSON) is a text file that describes your Amazon Web
+    #   Services resources. For an example, review [Launch your landing
+    #   zone][1]. The example manifest file contains each of the available
+    #   parameters. The schema for the landing zone's JSON manifest file is
+    #   not published, by design.
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -1597,7 +1655,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

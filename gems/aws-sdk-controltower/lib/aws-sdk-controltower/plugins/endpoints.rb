@@ -92,6 +92,8 @@ module Aws::ControlTower
             Aws::ControlTower::Endpoints::ListEnabledBaselines.build(context)
           when :list_enabled_controls
             Aws::ControlTower::Endpoints::ListEnabledControls.build(context)
+          when :list_landing_zone_operations
+            Aws::ControlTower::Endpoints::ListLandingZoneOperations.build(context)
           when :list_landing_zones
             Aws::ControlTower::Endpoints::ListLandingZones.build(context)
           when :list_tags_for_resource

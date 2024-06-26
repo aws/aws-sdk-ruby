@@ -113,6 +113,14 @@ module Aws::IVSRealTime
     class DeleteEncoderConfigurationResponse < Aws::EmptyStructure
     end
 
+    class DeletePublicKeyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePublicKeyResponse < Aws::EmptyStructure
+    end
+
     class DeleteStageRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -225,6 +233,16 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class GetPublicKeyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicKeyResponse
+      attr_accessor public_key: Types::PublicKey
+      SENSITIVE: []
+    end
+
     class GetStageRequest
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -262,6 +280,18 @@ module Aws::IVSRealTime
       attr_accessor video_aspect_ratio: ("AUTO" | "VIDEO" | "SQUARE" | "PORTRAIT")
       attr_accessor video_fill_mode: ("FILL" | "COVER" | "CONTAIN")
       attr_accessor grid_gap: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportPublicKeyRequest
+      attr_accessor public_key_material: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ImportPublicKeyResponse
+      attr_accessor public_key: Types::PublicKey
       SENSITIVE: []
     end
 
@@ -331,6 +361,18 @@ module Aws::IVSRealTime
 
     class ListParticipantsResponse
       attr_accessor participants: ::Array[Types::ParticipantSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublicKeysRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPublicKeysResponse
+      attr_accessor public_keys: ::Array[Types::PublicKeySummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -449,6 +491,22 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class PublicKey
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor public_key_material: ::String
+      attr_accessor fingerprint: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PublicKeySummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class RecordingConfiguration
       attr_accessor format: ("HLS")
       SENSITIVE: []
@@ -487,6 +545,13 @@ module Aws::IVSRealTime
       attr_accessor active_session_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration
+      attr_accessor endpoints: Types::StageEndpoints
+      SENSITIVE: []
+    end
+
+    class StageEndpoints
+      attr_accessor events: ::String
+      attr_accessor whip: ::String
       SENSITIVE: []
     end
 

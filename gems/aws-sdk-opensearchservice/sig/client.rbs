@@ -282,6 +282,11 @@ module Aws
                            },
                            ?software_update_options: {
                              auto_software_update_enabled: bool?
+                           },
+                           ?aiml_options: {
+                             natural_language_query_generation_options: {
+                               desired_state: ("ENABLED" | "DISABLED")?
+                             }?
                            }
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
@@ -1061,6 +1066,11 @@ module Aws
                                   },
                                   ?software_update_options: {
                                     auto_software_update_enabled: bool?
+                                  },
+                                  ?aiml_options: {
+                                    natural_language_query_generation_options: {
+                                      desired_state: ("ENABLED" | "DISABLED")?
+                                    }?
                                   }
                                 ) -> _UpdateDomainConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess

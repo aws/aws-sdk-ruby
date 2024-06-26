@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2024-06-26)
+------------------
+
+* Feature - Added support for disabling unmanaged addons during cluster creation.
+
 1.107.0 (2024-06-25)
 ------------------
 

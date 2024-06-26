@@ -92,8 +92,13 @@ module Aws::ControlTower
     LandingZoneDriftStatus = Shapes::StringShape.new(name: 'LandingZoneDriftStatus')
     LandingZoneDriftStatusSummary = Shapes::StructureShape.new(name: 'LandingZoneDriftStatusSummary')
     LandingZoneOperationDetail = Shapes::StructureShape.new(name: 'LandingZoneOperationDetail')
+    LandingZoneOperationFilter = Shapes::StructureShape.new(name: 'LandingZoneOperationFilter')
     LandingZoneOperationStatus = Shapes::StringShape.new(name: 'LandingZoneOperationStatus')
+    LandingZoneOperationStatuses = Shapes::ListShape.new(name: 'LandingZoneOperationStatuses')
+    LandingZoneOperationSummary = Shapes::StructureShape.new(name: 'LandingZoneOperationSummary')
     LandingZoneOperationType = Shapes::StringShape.new(name: 'LandingZoneOperationType')
+    LandingZoneOperationTypes = Shapes::ListShape.new(name: 'LandingZoneOperationTypes')
+    LandingZoneOperations = Shapes::ListShape.new(name: 'LandingZoneOperations')
     LandingZoneStatus = Shapes::StringShape.new(name: 'LandingZoneStatus')
     LandingZoneSummary = Shapes::StructureShape.new(name: 'LandingZoneSummary')
     LandingZoneVersion = Shapes::StringShape.new(name: 'LandingZoneVersion')
@@ -110,6 +115,9 @@ module Aws::ControlTower
     ListEnabledBaselinesOutput = Shapes::StructureShape.new(name: 'ListEnabledBaselinesOutput')
     ListEnabledControlsInput = Shapes::StructureShape.new(name: 'ListEnabledControlsInput')
     ListEnabledControlsOutput = Shapes::StructureShape.new(name: 'ListEnabledControlsOutput')
+    ListLandingZoneOperationsInput = Shapes::StructureShape.new(name: 'ListLandingZoneOperationsInput')
+    ListLandingZoneOperationsMaxResults = Shapes::IntegerShape.new(name: 'ListLandingZoneOperationsMaxResults')
+    ListLandingZoneOperationsOutput = Shapes::StructureShape.new(name: 'ListLandingZoneOperationsOutput')
     ListLandingZonesInput = Shapes::StructureShape.new(name: 'ListLandingZonesInput')
     ListLandingZonesMaxResults = Shapes::IntegerShape.new(name: 'ListLandingZonesMaxResults')
     ListLandingZonesOutput = Shapes::StructureShape.new(name: 'ListLandingZonesOutput')
@@ -401,11 +409,27 @@ module Aws::ControlTower
     LandingZoneDriftStatusSummary.struct_class = Types::LandingZoneDriftStatusSummary
 
     LandingZoneOperationDetail.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    LandingZoneOperationDetail.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, location_name: "operationIdentifier"))
     LandingZoneOperationDetail.add_member(:operation_type, Shapes::ShapeRef.new(shape: LandingZoneOperationType, location_name: "operationType"))
     LandingZoneOperationDetail.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     LandingZoneOperationDetail.add_member(:status, Shapes::ShapeRef.new(shape: LandingZoneOperationStatus, location_name: "status"))
     LandingZoneOperationDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     LandingZoneOperationDetail.struct_class = Types::LandingZoneOperationDetail
+
+    LandingZoneOperationFilter.add_member(:statuses, Shapes::ShapeRef.new(shape: LandingZoneOperationStatuses, location_name: "statuses"))
+    LandingZoneOperationFilter.add_member(:types, Shapes::ShapeRef.new(shape: LandingZoneOperationTypes, location_name: "types"))
+    LandingZoneOperationFilter.struct_class = Types::LandingZoneOperationFilter
+
+    LandingZoneOperationStatuses.member = Shapes::ShapeRef.new(shape: LandingZoneOperationStatus)
+
+    LandingZoneOperationSummary.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, location_name: "operationIdentifier"))
+    LandingZoneOperationSummary.add_member(:operation_type, Shapes::ShapeRef.new(shape: LandingZoneOperationType, location_name: "operationType"))
+    LandingZoneOperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: LandingZoneOperationStatus, location_name: "status"))
+    LandingZoneOperationSummary.struct_class = Types::LandingZoneOperationSummary
+
+    LandingZoneOperationTypes.member = Shapes::ShapeRef.new(shape: LandingZoneOperationType)
+
+    LandingZoneOperations.member = Shapes::ShapeRef.new(shape: LandingZoneOperationSummary)
 
     LandingZoneSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     LandingZoneSummary.struct_class = Types::LandingZoneSummary
@@ -445,6 +469,15 @@ module Aws::ControlTower
     ListEnabledControlsOutput.add_member(:enabled_controls, Shapes::ShapeRef.new(shape: EnabledControls, required: true, location_name: "enabledControls"))
     ListEnabledControlsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListEnabledControlsOutput.struct_class = Types::ListEnabledControlsOutput
+
+    ListLandingZoneOperationsInput.add_member(:filter, Shapes::ShapeRef.new(shape: LandingZoneOperationFilter, location_name: "filter"))
+    ListLandingZoneOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLandingZoneOperationsMaxResults, location_name: "maxResults"))
+    ListLandingZoneOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListLandingZoneOperationsInput.struct_class = Types::ListLandingZoneOperationsInput
+
+    ListLandingZoneOperationsOutput.add_member(:landing_zone_operations, Shapes::ShapeRef.new(shape: LandingZoneOperations, required: true, location_name: "landingZoneOperations"))
+    ListLandingZoneOperationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListLandingZoneOperationsOutput.struct_class = Types::ListLandingZoneOperationsOutput
 
     ListLandingZonesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLandingZonesMaxResults, location_name: "maxResults"))
     ListLandingZonesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -544,6 +577,7 @@ module Aws::ControlTower
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "controltower",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
@@ -798,6 +832,24 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_landing_zone_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLandingZoneOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-landingzone-operations"
+        o.input = Shapes::ShapeRef.new(shape: ListLandingZoneOperationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListLandingZoneOperationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

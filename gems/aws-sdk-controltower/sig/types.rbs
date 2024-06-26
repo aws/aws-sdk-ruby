@@ -324,10 +324,24 @@ module Aws::ControlTower
 
     class LandingZoneOperationDetail
       attr_accessor end_time: ::Time
+      attr_accessor operation_identifier: ::String
       attr_accessor operation_type: ("DELETE" | "CREATE" | "UPDATE" | "RESET")
       attr_accessor start_time: ::Time
       attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
       attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class LandingZoneOperationFilter
+      attr_accessor statuses: ::Array[("SUCCEEDED" | "FAILED" | "IN_PROGRESS")]
+      attr_accessor types: ::Array[("DELETE" | "CREATE" | "UPDATE" | "RESET")]
+      SENSITIVE: []
+    end
+
+    class LandingZoneOperationSummary
+      attr_accessor operation_identifier: ::String
+      attr_accessor operation_type: ("DELETE" | "CREATE" | "UPDATE" | "RESET")
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
       SENSITIVE: []
     end
 
@@ -384,6 +398,19 @@ module Aws::ControlTower
 
     class ListEnabledControlsOutput
       attr_accessor enabled_controls: ::Array[Types::EnabledControlSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLandingZoneOperationsInput
+      attr_accessor filter: Types::LandingZoneOperationFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLandingZoneOperationsOutput
+      attr_accessor landing_zone_operations: ::Array[Types::LandingZoneOperationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
