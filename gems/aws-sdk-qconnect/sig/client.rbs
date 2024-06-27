@@ -122,6 +122,25 @@ module Aws
                           ) -> _CreateContentResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContentResponseSuccess
 
+      interface _CreateContentAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContentAssociationResponse]
+        def content_association: () -> Types::ContentAssociationData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#create_content_association-instance_method
+      def create_content_association: (
+                                        association: {
+                                          amazon_connect_guide_association: {
+                                            flow_id: ::String?
+                                          }?
+                                        },
+                                        association_type: ("AMAZON_CONNECT_GUIDE"),
+                                        ?client_token: ::String,
+                                        content_id: ::String,
+                                        knowledge_base_id: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateContentAssociationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContentAssociationResponseSuccess
+
       interface _CreateKnowledgeBaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateKnowledgeBaseResponse]
         def knowledge_base: () -> Types::KnowledgeBaseData
@@ -243,6 +262,17 @@ module Aws
                           ) -> _DeleteContentResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContentResponseSuccess
 
+      interface _DeleteContentAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContentAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#delete_content_association-instance_method
+      def delete_content_association: (
+                                        content_association_id: ::String,
+                                        content_id: ::String,
+                                        knowledge_base_id: ::String
+                                      ) -> _DeleteContentAssociationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContentAssociationResponseSuccess
+
       interface _DeleteImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImportJobResponse]
       end
@@ -303,6 +333,18 @@ module Aws
                          knowledge_base_id: ::String
                        ) -> _GetContentResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContentResponseSuccess
+
+      interface _GetContentAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContentAssociationResponse]
+        def content_association: () -> Types::ContentAssociationData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#get_content_association-instance_method
+      def get_content_association: (
+                                     content_association_id: ::String,
+                                     content_id: ::String,
+                                     knowledge_base_id: ::String
+                                   ) -> _GetContentAssociationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContentAssociationResponseSuccess
 
       interface _GetContentSummaryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetContentSummaryResponse]
@@ -396,6 +438,20 @@ module Aws
                              ?next_token: ::String
                            ) -> _ListAssistantsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssistantsResponseSuccess
+
+      interface _ListContentAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContentAssociationsResponse]
+        def content_association_summaries: () -> ::Array[Types::ContentAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_content_associations-instance_method
+      def list_content_associations: (
+                                       content_id: ::String,
+                                       knowledge_base_id: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListContentAssociationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContentAssociationsResponseSuccess
 
       interface _ListContentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListContentsResponse]

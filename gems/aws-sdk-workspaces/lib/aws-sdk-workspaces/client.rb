@@ -1310,6 +1310,96 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates a pool of WorkSpaces.
+    #
+    # @option params [required, String] :pool_name
+    #   The name of the WorkSpaces pool.
+    #
+    # @option params [required, String] :description
+    #   The WorkSpaces pool description.
+    #
+    # @option params [required, String] :bundle_id
+    #   The identifier of the bundle for the WorkSpaces pool.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory for the WorkSpaces pool.
+    #
+    # @option params [required, Types::Capacity] :capacity
+    #   The user capacity of the WorkSpaces pool.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the WorkSpaces pool.
+    #
+    # @option params [Types::ApplicationSettingsRequest] :application_settings
+    #   Indicates the application settings of the WorkSpaces pool.
+    #
+    # @option params [Types::TimeoutSettings] :timeout_settings
+    #   Indicates the timeout settings of the WorkSpaces pool.
+    #
+    # @return [Types::CreateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspacesPoolResult#workspaces_pool #workspaces_pool} => Types::WorkspacesPool
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspaces_pool({
+    #     pool_name: "WorkspacesPoolName", # required
+    #     description: "UpdateDescription", # required
+    #     bundle_id: "BundleId", # required
+    #     directory_id: "DirectoryId", # required
+    #     capacity: { # required
+    #       desired_user_sessions: 1, # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     application_settings: {
+    #       status: "DISABLED", # required, accepts DISABLED, ENABLED
+    #       settings_group: "SettingsGroup",
+    #     },
+    #     timeout_settings: {
+    #       disconnect_timeout_in_seconds: 1,
+    #       idle_disconnect_timeout_in_seconds: 1,
+    #       max_user_duration_in_seconds: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspaces_pool.pool_id #=> String
+    #   resp.workspaces_pool.pool_arn #=> String
+    #   resp.workspaces_pool.capacity_status.available_user_sessions #=> Integer
+    #   resp.workspaces_pool.capacity_status.desired_user_sessions #=> Integer
+    #   resp.workspaces_pool.capacity_status.actual_user_sessions #=> Integer
+    #   resp.workspaces_pool.capacity_status.active_user_sessions #=> Integer
+    #   resp.workspaces_pool.pool_name #=> String
+    #   resp.workspaces_pool.description #=> String
+    #   resp.workspaces_pool.state #=> String, one of "CREATING", "DELETING", "RUNNING", "STARTING", "STOPPED", "STOPPING", "UPDATING"
+    #   resp.workspaces_pool.created_at #=> Time
+    #   resp.workspaces_pool.bundle_id #=> String
+    #   resp.workspaces_pool.directory_id #=> String
+    #   resp.workspaces_pool.errors #=> Array
+    #   resp.workspaces_pool.errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_IS_MISSING", "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "WORKSPACES_POOL_STOPPED", "WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING", "DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE", "DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID", "DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND", "DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND", "DOMAIN_JOIN_ERROR_SECRET_INVALID", "BUNDLE_NOT_FOUND", "DIRECTORY_NOT_FOUND", "INSUFFICIENT_PERMISSIONS_ERROR", "DEFAULT_OU_IS_MISSING"
+    #   resp.workspaces_pool.errors[0].error_message #=> String
+    #   resp.workspaces_pool.application_settings.status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.workspaces_pool.application_settings.settings_group #=> String
+    #   resp.workspaces_pool.application_settings.s3_bucket_name #=> String
+    #   resp.workspaces_pool.timeout_settings.disconnect_timeout_in_seconds #=> Integer
+    #   resp.workspaces_pool.timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
+    #   resp.workspaces_pool.timeout_settings.max_user_duration_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPool AWS API Documentation
+    #
+    # @overload create_workspaces_pool(params = {})
+    # @param [Hash] params ({})
+    def create_workspaces_pool(params = {}, options = {})
+      req = build_request(:create_workspaces_pool, params)
+      req.send_request(options)
+    end
+
     # Deletes the account link invitation.
     #
     # @option params [required, String] :link_id
@@ -2362,6 +2452,9 @@ module Aws::WorkSpaces
     #   The identifiers of the directories. If the value is null, all
     #   directories are retrieved.
     #
+    # @option params [Array<String>] :workspace_directory_names
+    #   The names of the WorkSpace directories.
+    #
     # @option params [Integer] :limit
     #   The maximum number of directories to return.
     #
@@ -2380,6 +2473,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.describe_workspace_directories({
     #     directory_ids: ["DirectoryId"],
+    #     workspace_directory_names: ["WorkspaceDirectoryName"],
     #     limit: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -2397,7 +2491,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].dns_ip_addresses[0] #=> String
     #   resp.directories[0].customer_user_name #=> String
     #   resp.directories[0].iam_role_id #=> String
-    #   resp.directories[0].directory_type #=> String, one of "SIMPLE_AD", "AD_CONNECTOR"
+    #   resp.directories[0].directory_type #=> String, one of "SIMPLE_AD", "AD_CONNECTOR", "CUSTOMER_MANAGED"
     #   resp.directories[0].workspace_security_group_id #=> String
     #   resp.directories[0].state #=> String, one of "REGISTERING", "REGISTERED", "DEREGISTERING", "DEREGISTERED", "ERROR"
     #   resp.directories[0].workspace_creation_properties.enable_work_docs #=> Boolean
@@ -2406,6 +2500,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
     #   resp.directories[0].workspace_creation_properties.user_enabled_as_local_administrator #=> Boolean
     #   resp.directories[0].workspace_creation_properties.enable_maintenance_mode #=> Boolean
+    #   resp.directories[0].workspace_creation_properties.instance_iam_role_arn #=> String
     #   resp.directories[0].ip_group_ids #=> Array
     #   resp.directories[0].ip_group_ids[0] #=> String
     #   resp.directories[0].workspace_access_properties.device_type_windows #=> String, one of "ALLOW", "DENY"
@@ -2427,6 +2522,21 @@ module Aws::WorkSpaces
     #   resp.directories[0].saml_properties.relay_state_parameter_name #=> String
     #   resp.directories[0].certificate_based_auth_properties.status #=> String, one of "DISABLED", "ENABLED"
     #   resp.directories[0].certificate_based_auth_properties.certificate_authority_arn #=> String
+    #   resp.directories[0].workspace_directory_name #=> String
+    #   resp.directories[0].workspace_directory_description #=> String
+    #   resp.directories[0].user_identity_type #=> String, one of "CUSTOMER_MANAGED", "AWS_DIRECTORY_SERVICE"
+    #   resp.directories[0].workspace_type #=> String, one of "PERSONAL", "POOLS"
+    #   resp.directories[0].active_directory_config.domain_name #=> String
+    #   resp.directories[0].active_directory_config.service_account_secret_arn #=> String
+    #   resp.directories[0].streaming_properties.streaming_experience_preferred_protocol #=> String, one of "TCP", "UDP"
+    #   resp.directories[0].streaming_properties.user_settings #=> Array
+    #   resp.directories[0].streaming_properties.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "PRINTING_TO_LOCAL_DEVICE", "SMART_CARD"
+    #   resp.directories[0].streaming_properties.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].streaming_properties.user_settings[0].maximum_length #=> Integer
+    #   resp.directories[0].streaming_properties.storage_connectors #=> Array
+    #   resp.directories[0].streaming_properties.storage_connectors[0].connector_type #=> String, one of "HOME_FOLDER"
+    #   resp.directories[0].streaming_properties.storage_connectors[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
@@ -2716,6 +2826,130 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def describe_workspaces_connection_status(params = {}, options = {})
       req = build_request(:describe_workspaces_connection_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes the streaming sessions for a specified
+    # WorkSpaces pool.
+    #
+    # @option params [required, String] :pool_id
+    #   The identifier of the WorkSpaces pool.
+    #
+    # @option params [String] :user_id
+    #   The identifier of the user.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @return [Types::DescribeWorkspacesPoolSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspacesPoolSessionsResult#sessions #sessions} => Array&lt;Types::WorkspacesPoolSession&gt;
+    #   * {Types::DescribeWorkspacesPoolSessionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspaces_pool_sessions({
+    #     pool_id: "WorkspacesPoolId", # required
+    #     user_id: "WorkspacesPoolUserId",
+    #     limit: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].authentication_type #=> String, one of "SAML"
+    #   resp.sessions[0].connection_state #=> String, one of "CONNECTED", "NOT_CONNECTED"
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].instance_id #=> String
+    #   resp.sessions[0].pool_id #=> String
+    #   resp.sessions[0].expiration_time #=> Time
+    #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
+    #   resp.sessions[0].network_access_configuration.eni_id #=> String
+    #   resp.sessions[0].start_time #=> Time
+    #   resp.sessions[0].user_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPoolSessions AWS API Documentation
+    #
+    # @overload describe_workspaces_pool_sessions(params = {})
+    # @param [Hash] params ({})
+    def describe_workspaces_pool_sessions(params = {}, options = {})
+      req = build_request(:describe_workspaces_pool_sessions, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified WorkSpaces pool.
+    #
+    # @option params [Array<String>] :pool_ids
+    #   The identifier of the WorkSpaces pool.
+    #
+    # @option params [Array<Types::DescribeWorkspacesPoolsFilter>] :filters
+    #   The filter conditions for the WorkSpaces pool to return.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of items to return.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @return [Types::DescribeWorkspacesPoolsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspacesPoolsResult#workspaces_pools #workspaces_pools} => Array&lt;Types::WorkspacesPool&gt;
+    #   * {Types::DescribeWorkspacesPoolsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspaces_pools({
+    #     pool_ids: ["WorkspacesPoolId"],
+    #     filters: [
+    #       {
+    #         name: "PoolName", # required, accepts PoolName
+    #         values: ["DescribeWorkspacesPoolsFilterValue"], # required
+    #         operator: "EQUALS", # required, accepts EQUALS, NOTEQUALS, CONTAINS, NOTCONTAINS
+    #       },
+    #     ],
+    #     limit: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspaces_pools #=> Array
+    #   resp.workspaces_pools[0].pool_id #=> String
+    #   resp.workspaces_pools[0].pool_arn #=> String
+    #   resp.workspaces_pools[0].capacity_status.available_user_sessions #=> Integer
+    #   resp.workspaces_pools[0].capacity_status.desired_user_sessions #=> Integer
+    #   resp.workspaces_pools[0].capacity_status.actual_user_sessions #=> Integer
+    #   resp.workspaces_pools[0].capacity_status.active_user_sessions #=> Integer
+    #   resp.workspaces_pools[0].pool_name #=> String
+    #   resp.workspaces_pools[0].description #=> String
+    #   resp.workspaces_pools[0].state #=> String, one of "CREATING", "DELETING", "RUNNING", "STARTING", "STOPPED", "STOPPING", "UPDATING"
+    #   resp.workspaces_pools[0].created_at #=> Time
+    #   resp.workspaces_pools[0].bundle_id #=> String
+    #   resp.workspaces_pools[0].directory_id #=> String
+    #   resp.workspaces_pools[0].errors #=> Array
+    #   resp.workspaces_pools[0].errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_IS_MISSING", "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "WORKSPACES_POOL_STOPPED", "WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING", "DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE", "DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID", "DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND", "DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND", "DOMAIN_JOIN_ERROR_SECRET_INVALID", "BUNDLE_NOT_FOUND", "DIRECTORY_NOT_FOUND", "INSUFFICIENT_PERMISSIONS_ERROR", "DEFAULT_OU_IS_MISSING"
+    #   resp.workspaces_pools[0].errors[0].error_message #=> String
+    #   resp.workspaces_pools[0].application_settings.status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.workspaces_pools[0].application_settings.settings_group #=> String
+    #   resp.workspaces_pools[0].application_settings.s3_bucket_name #=> String
+    #   resp.workspaces_pools[0].timeout_settings.disconnect_timeout_in_seconds #=> Integer
+    #   resp.workspaces_pools[0].timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
+    #   resp.workspaces_pools[0].timeout_settings.max_user_duration_in_seconds #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPools AWS API Documentation
+    #
+    # @overload describe_workspaces_pools(params = {})
+    # @param [Hash] params ({})
+    def describe_workspaces_pools(params = {}, options = {})
+      req = build_request(:describe_workspaces_pools, params)
       req.send_request(options)
     end
 
@@ -3445,6 +3679,47 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Modifies the specified streaming properties.
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource.
+    #
+    # @option params [Types::StreamingProperties] :streaming_properties
+    #   The streaming properties to configure.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_streaming_properties({
+    #     resource_id: "DirectoryId", # required
+    #     streaming_properties: {
+    #       streaming_experience_preferred_protocol: "TCP", # accepts TCP, UDP
+    #       user_settings: [
+    #         {
+    #           action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, PRINTING_TO_LOCAL_DEVICE, SMART_CARD
+    #           permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           maximum_length: 1,
+    #         },
+    #       ],
+    #       storage_connectors: [
+    #         {
+    #           connector_type: "HOME_FOLDER", # required, accepts HOME_FOLDER
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyStreamingProperties AWS API Documentation
+    #
+    # @overload modify_streaming_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_streaming_properties(params = {}, options = {})
+      req = build_request(:modify_streaming_properties, params)
+      req.send_request(options)
+    end
+
     # Specifies which devices and operating systems users can use to access
     # their WorkSpaces. For more information, see [ Control Device
     # Access][1].
@@ -3508,6 +3783,7 @@ module Aws::WorkSpaces
     #       custom_security_group_id: "SecurityGroupId",
     #       user_enabled_as_local_administrator: false,
     #       enable_maintenance_mode: false,
+    #       instance_iam_role_arn: "ARN",
     #     },
     #   })
     #
@@ -3706,7 +3982,7 @@ module Aws::WorkSpaces
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role
     #
-    # @option params [required, String] :directory_id
+    # @option params [String] :directory_id
     #   The identifier of the directory. You cannot register a directory if it
     #   does not have a status of Active. If the directory does not have a
     #   status of Active, you will receive an InvalidResourceStateException
@@ -3722,7 +3998,7 @@ module Aws::WorkSpaces
     #   conditions are not met, you will receive an
     #   OperationNotSupportedException error.
     #
-    # @option params [required, Boolean] :enable_work_docs
+    # @option params [Boolean] :enable_work_docs
     #   Indicates whether Amazon WorkDocs is enabled or disabled. If you have
     #   enabled this parameter and WorkDocs is not available in the Region,
     #   you will receive an OperationNotSupportedException error. Set
@@ -3746,14 +4022,33 @@ module Aws::WorkSpaces
     # @option params [Array<Types::Tag>] :tags
     #   The tags associated with the directory.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [String] :workspace_directory_name
+    #   The name of the directory to register.
+    #
+    # @option params [String] :workspace_directory_description
+    #   Description of the directory to register.
+    #
+    # @option params [String] :user_identity_type
+    #   The type of identity management the user is using.
+    #
+    # @option params [String] :workspace_type
+    #   Indicates whether the directory's WorkSpace type is personal or
+    #   pools.
+    #
+    # @option params [Types::ActiveDirectoryConfig] :active_directory_config
+    #   The active directory config of the directory.
+    #
+    # @return [Types::RegisterWorkspaceDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterWorkspaceDirectoryResult#directory_id #directory_id} => String
+    #   * {Types::RegisterWorkspaceDirectoryResult#state #state} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_workspace_directory({
-    #     directory_id: "DirectoryId", # required
+    #     directory_id: "DirectoryId",
     #     subnet_ids: ["SubnetId"],
-    #     enable_work_docs: false, # required
+    #     enable_work_docs: false,
     #     enable_self_service: false,
     #     tenancy: "DEDICATED", # accepts DEDICATED, SHARED
     #     tags: [
@@ -3762,7 +4057,20 @@ module Aws::WorkSpaces
     #         value: "TagValue",
     #       },
     #     ],
+    #     workspace_directory_name: "WorkspaceDirectoryName",
+    #     workspace_directory_description: "WorkspaceDirectoryDescription",
+    #     user_identity_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE
+    #     workspace_type: "PERSONAL", # accepts PERSONAL, POOLS
+    #     active_directory_config: {
+    #       domain_name: "DomainName", # required
+    #       service_account_secret_arn: "SecretsManagerArn", # required
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_id #=> String
+    #   resp.state #=> String, one of "REGISTERING", "REGISTERED", "DEREGISTERING", "DEREGISTERED", "ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectory AWS API Documentation
     #
@@ -3908,6 +4216,31 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Starts the specified WorkSpaces pool.
+    #
+    # You cannot start a WorkSpace pool unless it has a running mode of
+    # `AutoStop` and a state of `STOPPED`.
+    #
+    # @option params [required, String] :pool_id
+    #   The identifier of the WorkSpaces pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_workspaces_pool({
+    #     pool_id: "WorkspacesPoolId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesPool AWS API Documentation
+    #
+    # @overload start_workspaces_pool(params = {})
+    # @param [Hash] params ({})
+    def start_workspaces_pool(params = {}, options = {})
+      req = build_request(:start_workspaces_pool, params)
+      req.send_request(options)
+    end
+
     # Stops the specified WorkSpaces.
     #
     # You cannot stop a WorkSpace unless it has a running mode of `AutoStop`
@@ -3943,6 +4276,32 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def stop_workspaces(params = {}, options = {})
       req = build_request(:stop_workspaces, params)
+      req.send_request(options)
+    end
+
+    # Stops the specifiedWorkSpaces pool.
+    #
+    # You cannot stop a WorkSpace pool unless it has a running mode of
+    # `AutoStop` and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or
+    # `ERROR`.
+    #
+    # @option params [required, String] :pool_id
+    #   The identifier of the WorkSpaces pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_workspaces_pool({
+    #     pool_id: "WorkspacesPoolId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesPool AWS API Documentation
+    #
+    # @overload stop_workspaces_pool(params = {})
+    # @param [Hash] params ({})
+    def stop_workspaces_pool(params = {}, options = {})
+      req = build_request(:stop_workspaces_pool, params)
       req.send_request(options)
     end
 
@@ -4012,6 +4371,50 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def terminate_workspaces(params = {}, options = {})
       req = build_request(:terminate_workspaces, params)
+      req.send_request(options)
+    end
+
+    # Terminates the specified WorkSpaces pool.
+    #
+    # @option params [required, String] :pool_id
+    #   The identifier of the WorkSpaces pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_workspaces_pool({
+    #     pool_id: "WorkspacesPoolId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPool AWS API Documentation
+    #
+    # @overload terminate_workspaces_pool(params = {})
+    # @param [Hash] params ({})
+    def terminate_workspaces_pool(params = {}, options = {})
+      req = build_request(:terminate_workspaces_pool, params)
+      req.send_request(options)
+    end
+
+    # Terminates the WorkSpaces pool session.
+    #
+    # @option params [required, String] :session_id
+    #   The identifier of the WorkSpaces pool session.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_workspaces_pool_session({
+    #     session_id: "AmazonUuid", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPoolSession AWS API Documentation
+    #
+    # @overload terminate_workspaces_pool_session(params = {})
+    # @param [Hash] params ({})
+    def terminate_workspaces_pool_session(params = {}, options = {})
+      req = build_request(:terminate_workspaces_pool_session, params)
       req.send_request(options)
     end
 
@@ -4240,6 +4643,87 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Updates the specified WorkSpaces pool.
+    #
+    # @option params [required, String] :pool_id
+    #   The identifier of the specified WorkSpaces pool to update.
+    #
+    # @option params [String] :description
+    #   Describes the specified WorkSpaces pool to update.
+    #
+    # @option params [String] :bundle_id
+    #   The identifier of the bundle.
+    #
+    # @option params [String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [Types::Capacity] :capacity
+    #   The desired capacity for the WorkSpaces pool.
+    #
+    # @option params [Types::ApplicationSettingsRequest] :application_settings
+    #   The persistent application settings for users in the pool.
+    #
+    # @option params [Types::TimeoutSettings] :timeout_settings
+    #   Indicates the timeout settings of the specified WorkSpaces pool.
+    #
+    # @return [Types::UpdateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateWorkspacesPoolResult#workspaces_pool #workspaces_pool} => Types::WorkspacesPool
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspaces_pool({
+    #     pool_id: "WorkspacesPoolId", # required
+    #     description: "UpdateDescription",
+    #     bundle_id: "BundleId",
+    #     directory_id: "DirectoryId",
+    #     capacity: {
+    #       desired_user_sessions: 1, # required
+    #     },
+    #     application_settings: {
+    #       status: "DISABLED", # required, accepts DISABLED, ENABLED
+    #       settings_group: "SettingsGroup",
+    #     },
+    #     timeout_settings: {
+    #       disconnect_timeout_in_seconds: 1,
+    #       idle_disconnect_timeout_in_seconds: 1,
+    #       max_user_duration_in_seconds: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspaces_pool.pool_id #=> String
+    #   resp.workspaces_pool.pool_arn #=> String
+    #   resp.workspaces_pool.capacity_status.available_user_sessions #=> Integer
+    #   resp.workspaces_pool.capacity_status.desired_user_sessions #=> Integer
+    #   resp.workspaces_pool.capacity_status.actual_user_sessions #=> Integer
+    #   resp.workspaces_pool.capacity_status.active_user_sessions #=> Integer
+    #   resp.workspaces_pool.pool_name #=> String
+    #   resp.workspaces_pool.description #=> String
+    #   resp.workspaces_pool.state #=> String, one of "CREATING", "DELETING", "RUNNING", "STARTING", "STOPPED", "STOPPING", "UPDATING"
+    #   resp.workspaces_pool.created_at #=> Time
+    #   resp.workspaces_pool.bundle_id #=> String
+    #   resp.workspaces_pool.directory_id #=> String
+    #   resp.workspaces_pool.errors #=> Array
+    #   resp.workspaces_pool.errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_IS_MISSING", "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "WORKSPACES_POOL_STOPPED", "WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING", "DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE", "DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID", "DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND", "DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND", "DOMAIN_JOIN_ERROR_SECRET_INVALID", "BUNDLE_NOT_FOUND", "DIRECTORY_NOT_FOUND", "INSUFFICIENT_PERMISSIONS_ERROR", "DEFAULT_OU_IS_MISSING"
+    #   resp.workspaces_pool.errors[0].error_message #=> String
+    #   resp.workspaces_pool.application_settings.status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.workspaces_pool.application_settings.settings_group #=> String
+    #   resp.workspaces_pool.application_settings.s3_bucket_name #=> String
+    #   resp.workspaces_pool.timeout_settings.disconnect_timeout_in_seconds #=> Integer
+    #   resp.workspaces_pool.timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
+    #   resp.workspaces_pool.timeout_settings.max_user_duration_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPool AWS API Documentation
+    #
+    # @overload update_workspaces_pool(params = {})
+    # @param [Hash] params ({})
+    def update_workspaces_pool(params = {}, options = {})
+      req = build_request(:update_workspaces_pool, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4253,7 +4737,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

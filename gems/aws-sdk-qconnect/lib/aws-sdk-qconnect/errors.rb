@@ -33,6 +33,7 @@ module Aws::QConnect
   # * {RequestTimeoutException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {ThrottlingException}
   # * {TooManyTagsException}
   # * {ValidationException}
   #
@@ -138,6 +139,25 @@ module Aws::QConnect
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QConnect::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

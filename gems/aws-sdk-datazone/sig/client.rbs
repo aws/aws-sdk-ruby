@@ -1324,6 +1324,32 @@ module Aws
                                     ) -> _GetIamPortalLoginUrlResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIamPortalLoginUrlResponseSuccess
 
+      interface _GetLineageNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLineageNodeOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def downstream_nodes: () -> ::Array[Types::LineageNodeReference]
+        def event_timestamp: () -> ::Time
+        def forms_output: () -> ::Array[Types::FormOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def source_identifier: () -> ::String
+        def type_name: () -> ::String
+        def type_revision: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def upstream_nodes: () -> ::Array[Types::LineageNodeReference]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_lineage_node-instance_method
+      def get_lineage_node: (
+                              domain_identifier: ::String,
+                              ?event_timestamp: ::Time,
+                              identifier: ::String
+                            ) -> _GetLineageNodeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLineageNodeResponseSuccess
+
       interface _GetListingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetListingOutput]
         def created_at: () -> ::Time
@@ -1664,6 +1690,24 @@ module Aws
                              ) -> _ListEnvironmentsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
 
+      interface _ListLineageNodeHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLineageNodeHistoryOutput]
+        def next_token: () -> ::String
+        def nodes: () -> ::Array[Types::LineageNodeSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_lineage_node_history-instance_method
+      def list_lineage_node_history: (
+                                       ?direction: ("UPSTREAM" | "DOWNSTREAM"),
+                                       domain_identifier: ::String,
+                                       ?event_timestamp_gte: ::Time,
+                                       ?event_timestamp_lte: ::Time,
+                                       identifier: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?sort_order: ("ASCENDING" | "DESCENDING")
+                                     ) -> _ListLineageNodeHistoryResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLineageNodeHistoryResponseSuccess
+
       interface _ListMetadataGenerationRunsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMetadataGenerationRunsOutput]
         def items: () -> ::Array[Types::MetadataGenerationRunItem]
@@ -1830,6 +1874,17 @@ module Aws
                                           ?started_at: ::Time
                                         ) -> _ListTimeSeriesDataPointsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTimeSeriesDataPointsResponseSuccess
+
+      interface _PostLineageEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostLineageEventOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#post_lineage_event-instance_method
+      def post_lineage_event: (
+                                ?client_token: ::String,
+                                domain_identifier: ::String,
+                                event: ::String
+                              ) -> _PostLineageEventResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostLineageEventResponseSuccess
 
       interface _PostTimeSeriesDataPointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PostTimeSeriesDataPointsOutput]
@@ -2068,7 +2123,7 @@ module Aws
                               attribute: ::String
                             },
                           ],
-                          search_scope: ("ASSET_TYPE" | "FORM_TYPE"),
+                          search_scope: ("ASSET_TYPE" | "FORM_TYPE" | "LINEAGE_NODE_TYPE"),
                           ?search_text: ::String,
                           ?sort: {
                             attribute: ::String,

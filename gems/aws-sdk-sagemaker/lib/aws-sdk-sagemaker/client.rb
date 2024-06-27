@@ -2655,6 +2655,10 @@ module Aws::SageMaker
     #           },
     #         },
     #       ],
+    #       studio_web_portal_settings: {
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
+    #       },
     #     },
     #     domain_settings: {
     #       security_group_ids: ["SecurityGroupId"],
@@ -9183,6 +9187,10 @@ module Aws::SageMaker
     #           },
     #         },
     #       ],
+    #       studio_web_portal_settings: {
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
+    #       },
     #     },
     #   })
     #
@@ -10081,7 +10089,8 @@ module Aws::SageMaker
     #   The name of the hub to delete the hub content reference from.
     #
     # @option params [required, String] :hub_content_type
-    #   The type of hub content to delete.
+    #   The type of hub content reference to delete. The only supported type
+    #   of hub content reference to delete is `ModelReference`.
     #
     # @option params [required, String] :hub_content_name
     #   The name of the hub content to delete.
@@ -12290,6 +12299,10 @@ module Aws::SageMaker
     #   resp.default_user_settings.custom_file_system_configs #=> Array
     #   resp.default_user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_id #=> String
     #   resp.default_user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
+    #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools #=> Array
+    #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects"
+    #   resp.default_user_settings.studio_web_portal_settings.hidden_app_types #=> Array
+    #   resp.default_user_settings.studio_web_portal_settings.hidden_app_types[0] #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.domain_settings.security_group_ids #=> Array
     #   resp.domain_settings.security_group_ids[0] #=> String
     #   resp.domain_settings.r_studio_server_pro_domain_settings.domain_execution_role_arn #=> String
@@ -16273,6 +16286,10 @@ module Aws::SageMaker
     #   resp.user_settings.custom_file_system_configs #=> Array
     #   resp.user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_id #=> String
     #   resp.user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
+    #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools #=> Array
+    #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects"
+    #   resp.user_settings.studio_web_portal_settings.hidden_app_types #=> Array
+    #   resp.user_settings.studio_web_portal_settings.hidden_app_types[0] #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -24535,6 +24552,10 @@ module Aws::SageMaker
     #           },
     #         },
     #       ],
+    #       studio_web_portal_settings: {
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
+    #       },
     #     },
     #     domain_settings_for_update: {
     #       r_studio_server_pro_domain_settings_for_update: {
@@ -26734,6 +26755,10 @@ module Aws::SageMaker
     #           },
     #         },
     #       ],
+    #       studio_web_portal_settings: {
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
+    #       },
     #     },
     #   })
     #
@@ -27013,7 +27038,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.250.0'
+      context[:gem_version] = '1.251.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2763,13 +2763,19 @@ module Aws::QuickSight
     #   The configuration of a page break for a section.
     #   @return [Types::SectionPageBreakConfiguration]
     #
+    # @!attribute [rw] repeat_configuration
+    #   Describes the configurations that are required to declare a section
+    #   as repeating.
+    #   @return [Types::BodySectionRepeatConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BodySectionConfiguration AWS API Documentation
     #
     class BodySectionConfiguration < Struct.new(
       :section_id,
       :content,
       :style,
-      :page_break_configuration)
+      :page_break_configuration,
+      :repeat_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2784,6 +2790,122 @@ module Aws::QuickSight
     #
     class BodySectionContent < Struct.new(
       :layout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the **Category** dataset column and constraints for the
+    # dynamic values used to repeat the contents of a section.
+    #
+    # @!attribute [rw] column
+    #   A column of a data set.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] limit
+    #   Number of values to use from the column for repetition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_by_metrics
+    #   Sort criteria on the column values that you use for repetition.
+    #   @return [Array<Types::ColumnSort>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BodySectionDynamicCategoryDimensionConfiguration AWS API Documentation
+    #
+    class BodySectionDynamicCategoryDimensionConfiguration < Struct.new(
+      :column,
+      :limit,
+      :sort_by_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the **Numeric** dataset column and constraints for the
+    # dynamic values used to repeat the contents of a section.
+    #
+    # @!attribute [rw] column
+    #   A column of a data set.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] limit
+    #   Number of values to use from the column for repetition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_by_metrics
+    #   Sort criteria on the column values that you use for repetition.
+    #   @return [Array<Types::ColumnSort>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BodySectionDynamicNumericDimensionConfiguration AWS API Documentation
+    #
+    class BodySectionDynamicNumericDimensionConfiguration < Struct.new(
+      :column,
+      :limit,
+      :sort_by_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configurations that are required to declare a section as
+    # repeating.
+    #
+    # @!attribute [rw] dimension_configurations
+    #   List of `BodySectionRepeatDimensionConfiguration` values that
+    #   describe the dataset column and constraints for the column used to
+    #   repeat the contents of a section.
+    #   @return [Array<Types::BodySectionRepeatDimensionConfiguration>]
+    #
+    # @!attribute [rw] page_break_configuration
+    #   Page break configuration to apply for each repeating instance.
+    #   @return [Types::BodySectionRepeatPageBreakConfiguration]
+    #
+    # @!attribute [rw] non_repeating_visuals
+    #   List of visuals to exclude from repetition in repeating sections.
+    #   The visuals will render identically, and ignore the repeating
+    #   configurations in all repeating instances.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BodySectionRepeatConfiguration AWS API Documentation
+    #
+    class BodySectionRepeatConfiguration < Struct.new(
+      :dimension_configurations,
+      :page_break_configuration,
+      :non_repeating_visuals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the dataset column and constraints for the dynamic values
+    # used to repeat the contents of a section. The dataset column is either
+    # **Category** or **Numeric** column configuration
+    #
+    # @!attribute [rw] dynamic_category_dimension_configuration
+    #   Describes the **Category** dataset column and constraints around the
+    #   dynamic values that will be used in repeating the section contents.
+    #   @return [Types::BodySectionDynamicCategoryDimensionConfiguration]
+    #
+    # @!attribute [rw] dynamic_numeric_dimension_configuration
+    #   Describes the **Numeric** dataset column and constraints around the
+    #   dynamic values used to repeat the contents of a section.
+    #   @return [Types::BodySectionDynamicNumericDimensionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BodySectionRepeatDimensionConfiguration AWS API Documentation
+    #
+    class BodySectionRepeatDimensionConfiguration < Struct.new(
+      :dynamic_category_dimension_configuration,
+      :dynamic_numeric_dimension_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The page break configuration to apply for each repeating instance.
+    #
+    # @!attribute [rw] after
+    #   The configuration of a page break after a section.
+    #   @return [Types::SectionAfterPageBreak]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BodySectionRepeatPageBreakConfiguration AWS API Documentation
+    #
+    class BodySectionRepeatPageBreakConfiguration < Struct.new(
+      :after)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3365,6 +3487,33 @@ module Aws::QuickSight
       :filter_list_configuration,
       :custom_filter_list_configuration,
       :custom_filter_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `CategoryInnerFilter` filters text values for the `NestedFilter`.
+    #
+    # @!attribute [rw] column
+    #   A column of a data set.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration for a `CategoryFilter`.
+    #
+    #   This is a union type structure. For this structure to be valid, only
+    #   one of the attributes can be defined.
+    #   @return [Types::CategoryFilterConfiguration]
+    #
+    # @!attribute [rw] default_filter_control_configuration
+    #   The default configuration for all dependent controls of the filter.
+    #   @return [Types::DefaultFilterControlConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CategoryInnerFilter AWS API Documentation
+    #
+    class CategoryInnerFilter < Struct.new(
+      :column,
+      :configuration,
+      :default_filter_control_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14121,6 +14270,11 @@ module Aws::QuickSight
     #   given column.
     #   @return [Types::TopBottomFilter]
     #
+    # @!attribute [rw] nested_filter
+    #   A `NestedFilter` filters data with a subset of data that is defined
+    #   by the nested inner filter.
+    #   @return [Types::NestedFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Filter AWS API Documentation
     #
     class Filter < Struct.new(
@@ -14130,7 +14284,8 @@ module Aws::QuickSight
       :time_equality_filter,
       :time_range_filter,
       :relative_dates_filter,
-      :top_bottom_filter)
+      :top_bottom_filter,
+      :nested_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17220,6 +17375,21 @@ module Aws::QuickSight
       :ingestion_size_in_bytes,
       :request_source,
       :request_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `InnerFilter` defines the subset of data to be used with the
+    # `NestedFilter`.
+    #
+    # @!attribute [rw] category_inner_filter
+    #   A `CategoryInnerFilter` filters text values for the `NestedFilter`.
+    #   @return [Types::CategoryInnerFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InnerFilter AWS API Documentation
+    #
+    class InnerFilter < Struct.new(
+      :category_inner_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20815,6 +20985,39 @@ module Aws::QuickSight
     #
     class NegativeValueConfiguration < Struct.new(
       :display_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `NestedFilter` filters data with a subset of data that is defined by
+    # the nested inner filter.
+    #
+    # @!attribute [rw] filter_id
+    #   An identifier that uniquely identifies a filter within a dashboard,
+    #   analysis, or template.
+    #   @return [String]
+    #
+    # @!attribute [rw] column
+    #   The column that the filter is applied to.
+    #   @return [Types::ColumnIdentifier]
+    #
+    # @!attribute [rw] include_inner_set
+    #   A boolean condition to include or exclude the subset that is defined
+    #   by the values of the nested inner filter.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] inner_filter
+    #   The `InnerFilter` defines the subset of data to be used with the
+    #   `NestedFilter`.
+    #   @return [Types::InnerFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NestedFilter AWS API Documentation
+    #
+    class NestedFilter < Struct.new(
+      :filter_id,
+      :column,
+      :include_inner_set,
+      :inner_filter)
       SENSITIVE = []
       include Aws::Structure
     end

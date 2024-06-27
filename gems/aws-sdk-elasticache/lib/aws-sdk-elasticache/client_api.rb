@@ -2034,6 +2034,7 @@ module Aws::ElastiCache
 
       api.metadata = {
         "apiVersion" => "2015-02-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "elasticache",
         "protocol" => "query",
         "protocols" => ["query"],

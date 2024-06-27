@@ -145,7 +145,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -208,13 +208,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -225,8 +229,7 @@ module Aws::ApplicationAutoScaling
     #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -234,8 +237,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -289,10 +292,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -326,7 +332,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -389,13 +395,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -406,8 +416,7 @@ module Aws::ApplicationAutoScaling
     #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -415,8 +424,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -470,10 +479,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -503,7 +515,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -566,13 +578,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -584,8 +600,7 @@ module Aws::ApplicationAutoScaling
     #   string consists of the service namespace, resource type, and scaling
     #   property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -593,8 +608,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -648,10 +663,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -680,7 +698,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -743,13 +761,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -762,8 +784,7 @@ module Aws::ApplicationAutoScaling
     #   property. If you specify a scalable dimension, you must also specify
     #   a resource ID.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -771,8 +792,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -826,10 +847,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -889,7 +913,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -952,13 +976,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -970,8 +998,7 @@ module Aws::ApplicationAutoScaling
     #   namespace, resource type, and scaling property. If you specify a
     #   scalable dimension, you must also specify a resource ID.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -979,8 +1006,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -1034,10 +1061,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1115,7 +1145,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -1178,13 +1208,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -1196,8 +1230,7 @@ module Aws::ApplicationAutoScaling
     #   namespace, resource type, and scaling property. If you specify a
     #   scalable dimension, you must also specify a resource ID.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -1205,8 +1238,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -1260,10 +1293,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1328,7 +1364,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -1391,13 +1427,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -1409,8 +1449,7 @@ module Aws::ApplicationAutoScaling
     #   namespace, resource type, and scaling property. If you specify a
     #   scalable dimension, you must also specify a resource ID.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -1418,8 +1457,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -1473,10 +1512,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1641,7 +1683,7 @@ module Aws::ApplicationAutoScaling
     # Describes the reason for an activity that isn't scaled (*not scaled
     # activity*), in machine-readable format. For help interpreting the not
     # scaled reason details, see [Scaling activities for Application Auto
-    # Scaling][1].
+    # Scaling][1] in the *Application Auto Scaling User Guide*.
     #
     #
     #
@@ -1707,16 +1749,12 @@ module Aws::ApplicationAutoScaling
     # Represents a predefined metric for a target tracking scaling policy to
     # use with Application Auto Scaling.
     #
-    # Only the Amazon Web Services that you're using send metrics to Amazon
-    # CloudWatch. To determine whether a desired metric already exists by
-    # looking up its namespace and dimension using the CloudWatch metrics
-    # dashboard in the console, follow the procedure in [Monitor your
-    # resources using CloudWatch][1] in the *Application Auto Scaling User
-    # Guide*.
+    # For more information, [Predefined metrics for target tracking scaling
+    # policies][1] in the *Application Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/monitor-cloudwatch-metrics.html#predefined-metrics
     #
     # @!attribute [rw] predefined_metric_type
     #   The metric type. The `ALBRequestCountPerTarget` metric type applies
@@ -1783,7 +1821,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -1846,13 +1884,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -1863,8 +1905,7 @@ module Aws::ApplicationAutoScaling
     #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -1872,8 +1913,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -1927,10 +1968,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -2031,13 +2075,12 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information and examples, see [Example scheduled actions
-    #   for Application Auto Scaling][1] in the *Application Auto Scaling
-    #   User Guide*.
+    #   For more information, see [Schedule recurring scaling actions using
+    #   cron expressions][1] in the *Application Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-using-cron-expressions.html
     #   @return [String]
     #
     # @!attribute [rw] timezone
@@ -2066,7 +2109,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -2129,13 +2172,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -2146,8 +2193,7 @@ module Aws::ApplicationAutoScaling
     #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -2155,8 +2201,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -2210,10 +2256,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2266,7 +2315,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -2329,13 +2378,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -2347,8 +2400,7 @@ module Aws::ApplicationAutoScaling
     #   string consists of the service namespace, resource type, and scaling
     #   property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -2356,8 +2408,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -2411,10 +2463,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2438,7 +2493,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * SageMaker endpoint variants
     #
-    #   * SageMaker Serverless endpoint provisioned concurrency
+    #   * SageMaker inference components
+    #
+    #   * SageMaker serverless endpoint provisioned concurrency
     #
     #   * Spot Fleets
     #
@@ -2485,12 +2542,12 @@ module Aws::ApplicationAutoScaling
     #
     #   If the service supports service-linked roles, Application Auto
     #   Scaling uses a service-linked role, which it creates if it does not
-    #   yet exist. For more information, see [Application Auto Scaling IAM
-    #   roles][1].
+    #   yet exist. For more information, see [How Application Auto Scaling
+    #   works with IAM][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-roles
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html
     #   @return [String]
     #
     # @!attribute [rw] suspended_state
@@ -2514,8 +2571,8 @@ module Aws::ApplicationAutoScaling
     #     all scaling activities that involve scheduled actions are
     #     suspended.
     #
-    #   For more information, see [Suspending and resuming scaling][1] in
-    #   the *Application Auto Scaling User Guide*.
+    #   For more information, see [Suspend and resume scaling][1] in the
+    #   *Application Auto Scaling User Guide*.
     #
     #
     #
@@ -2599,7 +2656,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -2662,13 +2719,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -2680,8 +2741,7 @@ module Aws::ApplicationAutoScaling
     #   string consists of the service namespace, resource type, and scaling
     #   property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -2689,8 +2749,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -2744,10 +2804,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2846,7 +2909,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -2909,13 +2972,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -2926,8 +2993,7 @@ module Aws::ApplicationAutoScaling
     #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -2935,8 +3001,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -2990,10 +3056,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3084,7 +3153,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -3147,13 +3216,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -3164,8 +3237,7 @@ module Aws::ApplicationAutoScaling
     #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -3173,8 +3245,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -3228,10 +3300,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -3317,13 +3392,12 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information and examples, see [Example scheduled actions
-    #   for Application Auto Scaling][1] in the *Application Auto Scaling
-    #   User Guide*.
+    #   For more information, see [Schedule recurring scaling actions using
+    #   cron expressions][1] in the *Application Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-using-cron-expressions.html
     #   @return [String]
     #
     # @!attribute [rw] timezone
@@ -3338,7 +3412,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
+    #     `service/my-cluster/my-service`.
     #
     #   * Spot Fleet - The resource type is `spot-fleet-request` and the
     #     unique identifier is the Spot Fleet request ID. Example:
@@ -3401,13 +3475,17 @@ module Aws::ApplicationAutoScaling
     #   * Neptune cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:mycluster`.
     #
-    #   * SageMaker Serverless endpoint - The resource type is `variant` and
+    #   * SageMaker serverless endpoint - The resource type is `variant` and
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * SageMaker inference component - The resource type is
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
+    #
+    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #     unique identifier is the pool ID. Example:
+    #     `workspacespool/wspool-123456`.
     #
     #
     #
@@ -3418,8 +3496,7 @@ module Aws::ApplicationAutoScaling
     #   The scalable dimension. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
-    #   * `ecs:service:DesiredCount` - The desired task count of an ECS
-    #     service.
+    #   * `ecs:service:DesiredCount` - The task count of an ECS service.
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
@@ -3427,8 +3504,8 @@ module Aws::ApplicationAutoScaling
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
     #     Spot Fleet.
     #
-    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
-    #     AppStream 2.0 fleet.
+    #   * `appstream:fleet:DesiredCapacity` - The capacity of an AppStream
+    #     2.0 fleet.
     #
     #   * `dynamodb:table:ReadCapacityUnits` - The provisioned read capacity
     #     for a DynamoDB table.
@@ -3482,10 +3559,13 @@ module Aws::ApplicationAutoScaling
     #     an Amazon Neptune DB cluster.
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
-    #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #     provisioned concurrency for a SageMaker serverless endpoint.
     #
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
+    #
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
+    #     a WorkSpaces pool.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3726,7 +3806,7 @@ module Aws::ApplicationAutoScaling
     #
     #   For information about the rules that apply to tag keys and tag
     #   values, see [User-defined tag restrictions][1] in the *Amazon Web
-    #   Services Billing and Cost Management User Guide*.
+    #   Services Billing User Guide*.
     #
     #
     #
@@ -3881,7 +3961,7 @@ module Aws::ApplicationAutoScaling
     end
 
     # This structure defines the CloudWatch metric to return, along with the
-    # statistic, period, and unit.
+    # statistic and unit.
     #
     # For more information about the CloudWatch terminology below, see
     # [Amazon CloudWatch concepts][1] in the *Amazon CloudWatch User Guide*.

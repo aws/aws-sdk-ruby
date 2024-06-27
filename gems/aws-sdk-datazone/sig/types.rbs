@@ -1561,6 +1561,32 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class GetLineageNodeInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetLineageNodeOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor downstream_nodes: ::Array[Types::LineageNodeReference]
+      attr_accessor event_timestamp: ::Time
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor source_identifier: ::String
+      attr_accessor type_name: ::String
+      attr_accessor type_revision: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor upstream_nodes: ::Array[Types::LineageNodeReference]
+      SENSITIVE: []
+    end
+
     class GetListingInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -1847,6 +1873,41 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class LineageNodeReference
+      attr_accessor event_timestamp: ::Time
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class LineageNodeSummary
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor source_identifier: ::String
+      attr_accessor type_name: ::String
+      attr_accessor type_revision: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class LineageNodeTypeItem
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor forms_output: ::Hash[::String, Types::FormEntryOutput]
+      attr_accessor name: ::String
+      attr_accessor revision: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
     class ListAssetRevisionsInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -2000,6 +2061,24 @@ module Aws::DataZone
     class ListEnvironmentsOutput
       attr_accessor items: ::Array[Types::EnvironmentSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLineageNodeHistoryInput
+      attr_accessor direction: ("UPSTREAM" | "DOWNSTREAM")
+      attr_accessor domain_identifier: ::String
+      attr_accessor event_timestamp_gte: ::Time
+      attr_accessor event_timestamp_lte: ::Time
+      attr_accessor identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListLineageNodeHistoryOutput
+      attr_accessor next_token: ::String
+      attr_accessor nodes: ::Array[Types::LineageNodeSummary]
       SENSITIVE: []
     end
 
@@ -2271,6 +2350,16 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor type: ("PROJECT")
       SENSITIVE: []
+    end
+
+    class PostLineageEventInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor event: ::String
+      SENSITIVE: [:event]
+    end
+
+    class PostLineageEventOutput < Aws::EmptyStructure
     end
 
     class PostTimeSeriesDataPointsInput
@@ -2623,7 +2712,7 @@ module Aws::DataZone
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor search_in: ::Array[Types::SearchInItem]
-      attr_accessor search_scope: ("ASSET_TYPE" | "FORM_TYPE")
+      attr_accessor search_scope: ("ASSET_TYPE" | "FORM_TYPE" | "LINEAGE_NODE_TYPE")
       attr_accessor search_text: ::String
       attr_accessor sort: Types::SearchSort
       SENSITIVE: []
@@ -2639,12 +2728,15 @@ module Aws::DataZone
     class SearchTypesResultItem
       attr_accessor asset_type_item: Types::AssetTypeItem
       attr_accessor form_type_item: Types::FormTypeData
+      attr_accessor lineage_node_type_item: Types::LineageNodeTypeItem
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AssetTypeItem < SearchTypesResultItem
       end
       class FormTypeItem < SearchTypesResultItem
+      end
+      class LineageNodeTypeItem < SearchTypesResultItem
       end
       class Unknown < SearchTypesResultItem
       end

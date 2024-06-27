@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2024-06-27)
+------------------
+
+* Feature - Adds CreateContentAssociation, ListContentAssociations, GetContentAssociation, and DeleteContentAssociation APIs.
+
 1.11.0 (2024-06-25)
 ------------------
 

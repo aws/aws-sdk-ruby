@@ -3984,7 +3984,12 @@ module Aws::SageMaker
 
     # Defines the configuration for attaching an additional Amazon Elastic
     # Block Store (EBS) volume to each instance of the SageMaker HyperPod
-    # cluster instance group.
+    # cluster instance group. To learn more, see [SageMaker HyperPod release
+    # notes: June 20, 2024][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
     #
     # @!attribute [rw] volume_size_in_gb
     #   The size in gigabytes (GB) of the additional EBS volume to be
@@ -4164,7 +4169,12 @@ module Aws::SageMaker
     end
 
     # Defines the configuration for attaching additional storage to the
-    # instances in the SageMaker HyperPod cluster instance group.
+    # instances in the SageMaker HyperPod cluster instance group. To learn
+    # more, see [SageMaker HyperPod release notes: June 20, 2024][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620
     #
     # @note ClusterInstanceStorageConfig is a union - when making an API calls you must set exactly one of the members.
     #
@@ -11051,7 +11061,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hub_content_type
-    #   The type of hub content to delete.
+    #   The type of hub content reference to delete. The only supported type
+    #   of hub content reference to delete is `ModelReference`.
     #   @return [String]
     #
     # @!attribute [rw] hub_content_name
@@ -40763,6 +40774,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Studio settings. If these settings are applied on a user level, they
+    # take priority over the settings applied on a domain level.
+    #
+    # @!attribute [rw] hidden_ml_tools
+    #   The machine learning tools that are hidden from the Studio left
+    #   navigation pane.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hidden_app_types
+    #   The [Applications supported in Studio][1] that are hidden from the
+    #   Studio left navigation pane.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-apps.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StudioWebPortalSettings AWS API Documentation
+    #
+    class StudioWebPortalSettings < Struct.new(
+      :hidden_ml_tools,
+      :hidden_app_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a work team of a vendor that does the labelling job.
     #
     # @!attribute [rw] workteam_arn
@@ -45890,6 +45927,11 @@ module Aws::SageMaker
     #   Studio.
     #   @return [Array<Types::CustomFileSystemConfig>]
     #
+    # @!attribute [rw] studio_web_portal_settings
+    #   Studio settings. If these settings are applied on a user level, they
+    #   take priority over the settings applied on a domain level.
+    #   @return [Types::StudioWebPortalSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
@@ -45908,7 +45950,8 @@ module Aws::SageMaker
       :default_landing_uri,
       :studio_web_portal,
       :custom_posix_user_config,
-      :custom_file_system_configs)
+      :custom_file_system_configs,
+      :studio_web_portal_settings)
       SENSITIVE = []
       include Aws::Structure
     end

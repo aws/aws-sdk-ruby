@@ -698,11 +698,44 @@ module Aws::QuickSight
       attr_accessor content: Types::BodySectionContent
       attr_accessor style: Types::SectionStyle
       attr_accessor page_break_configuration: Types::SectionPageBreakConfiguration
+      attr_accessor repeat_configuration: Types::BodySectionRepeatConfiguration
       SENSITIVE: []
     end
 
     class BodySectionContent
       attr_accessor layout: Types::SectionLayoutConfiguration
+      SENSITIVE: []
+    end
+
+    class BodySectionDynamicCategoryDimensionConfiguration
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor limit: ::Integer
+      attr_accessor sort_by_metrics: ::Array[Types::ColumnSort]
+      SENSITIVE: []
+    end
+
+    class BodySectionDynamicNumericDimensionConfiguration
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor limit: ::Integer
+      attr_accessor sort_by_metrics: ::Array[Types::ColumnSort]
+      SENSITIVE: []
+    end
+
+    class BodySectionRepeatConfiguration
+      attr_accessor dimension_configurations: ::Array[Types::BodySectionRepeatDimensionConfiguration]
+      attr_accessor page_break_configuration: Types::BodySectionRepeatPageBreakConfiguration
+      attr_accessor non_repeating_visuals: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BodySectionRepeatDimensionConfiguration
+      attr_accessor dynamic_category_dimension_configuration: Types::BodySectionDynamicCategoryDimensionConfiguration
+      attr_accessor dynamic_numeric_dimension_configuration: Types::BodySectionDynamicNumericDimensionConfiguration
+      SENSITIVE: []
+    end
+
+    class BodySectionRepeatPageBreakConfiguration
+      attr_accessor after: Types::SectionAfterPageBreak
       SENSITIVE: []
     end
 
@@ -859,6 +892,13 @@ module Aws::QuickSight
       attr_accessor filter_list_configuration: Types::FilterListConfiguration
       attr_accessor custom_filter_list_configuration: Types::CustomFilterListConfiguration
       attr_accessor custom_filter_configuration: Types::CustomFilterConfiguration
+      SENSITIVE: []
+    end
+
+    class CategoryInnerFilter
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor configuration: Types::CategoryFilterConfiguration
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
       SENSITIVE: []
     end
 
@@ -3596,6 +3636,7 @@ module Aws::QuickSight
       attr_accessor time_range_filter: Types::TimeRangeFilter
       attr_accessor relative_dates_filter: Types::RelativeDatesFilter
       attr_accessor top_bottom_filter: Types::TopBottomFilter
+      attr_accessor nested_filter: Types::NestedFilter
       SENSITIVE: []
     end
 
@@ -4355,6 +4396,11 @@ module Aws::QuickSight
       attr_accessor ingestion_size_in_bytes: ::Integer
       attr_accessor request_source: ("MANUAL" | "SCHEDULED")
       attr_accessor request_type: ("INITIAL_INGESTION" | "EDIT" | "INCREMENTAL_REFRESH" | "FULL_REFRESH")
+      SENSITIVE: []
+    end
+
+    class InnerFilter
+      attr_accessor category_inner_filter: Types::CategoryInnerFilter
       SENSITIVE: []
     end
 
@@ -5339,6 +5385,14 @@ module Aws::QuickSight
 
     class NegativeValueConfiguration
       attr_accessor display_mode: ("POSITIVE" | "NEGATIVE")
+      SENSITIVE: []
+    end
+
+    class NestedFilter
+      attr_accessor filter_id: ::String
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor include_inner_set: bool
+      attr_accessor inner_filter: Types::InnerFilter
       SENSITIVE: []
     end
 

@@ -1100,7 +1100,11 @@ module Aws
                                    file_system_path: ::String?
                                  }?
                                },
-                             ]?
+                             ]?,
+                             studio_web_portal_settings: {
+                               hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                               hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
+                             }?
                            },
                            ?domain_settings: {
                              security_group_ids: Array[::String]?,
@@ -4039,7 +4043,11 @@ module Aws
                                          file_system_path: ::String?
                                        }?
                                      },
-                                   ]?
+                                   ]?,
+                                   studio_web_portal_settings: {
+                                     hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                                     hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
+                                   }?
                                  }
                                ) -> _CreateUserProfileResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserProfileResponseSuccess
@@ -8074,7 +8082,11 @@ module Aws
                                    file_system_path: ::String?
                                  }?
                                },
-                             ]?
+                             ]?,
+                             studio_web_portal_settings: {
+                               hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                               hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
+                             }?
                            },
                            ?domain_settings_for_update: {
                              r_studio_server_pro_domain_settings_for_update: {
@@ -9133,7 +9145,11 @@ module Aws
                                          file_system_path: ::String?
                                        }?
                                      },
-                                   ]?
+                                   ]?,
+                                   studio_web_portal_settings: {
+                                     hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                                     hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
+                                   }?
                                  }
                                ) -> _UpdateUserProfileResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserProfileResponseSuccess

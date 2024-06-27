@@ -226,7 +226,7 @@ module Aws::MQ
     ConflictException.struct_class = Types::ConflictException
 
     CreateBrokerInput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
-    CreateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "autoMinorVersionUpgrade"))
+    CreateBrokerInput.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     CreateBrokerInput.add_member(:broker_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "brokerName"))
     CreateBrokerInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
     CreateBrokerInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: __string, location_name: "creatorRequestId", metadata: {"idempotencyToken"=>true}))
@@ -235,7 +235,7 @@ module Aws::MQ
     CreateBrokerInput.add_member(:data_replication_primary_broker_arn, Shapes::ShapeRef.new(shape: __string, location_name: "dataReplicationPrimaryBrokerArn"))
     CreateBrokerInput.add_member(:encryption_options, Shapes::ShapeRef.new(shape: EncryptionOptions, location_name: "encryptionOptions"))
     CreateBrokerInput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
-    CreateBrokerInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "engineVersion"))
+    CreateBrokerInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateBrokerInput.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "hostInstanceType"))
     CreateBrokerInput.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataInput, location_name: "ldapServerMetadata"))
     CreateBrokerInput.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
@@ -253,14 +253,14 @@ module Aws::MQ
     CreateBrokerOutput.struct_class = Types::CreateBrokerOutput
 
     CreateBrokerRequest.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
-    CreateBrokerRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "autoMinorVersionUpgrade"))
+    CreateBrokerRequest.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoMinorVersionUpgrade"))
     CreateBrokerRequest.add_member(:broker_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "brokerName"))
     CreateBrokerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationId, location_name: "configuration"))
     CreateBrokerRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: __string, location_name: "creatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreateBrokerRequest.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, required: true, location_name: "deploymentMode"))
     CreateBrokerRequest.add_member(:encryption_options, Shapes::ShapeRef.new(shape: EncryptionOptions, location_name: "encryptionOptions"))
     CreateBrokerRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
-    CreateBrokerRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "engineVersion"))
+    CreateBrokerRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateBrokerRequest.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "hostInstanceType"))
     CreateBrokerRequest.add_member(:ldap_server_metadata, Shapes::ShapeRef.new(shape: LdapServerMetadataInput, location_name: "ldapServerMetadata"))
     CreateBrokerRequest.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
@@ -281,7 +281,7 @@ module Aws::MQ
 
     CreateConfigurationInput.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateConfigurationInput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
-    CreateConfigurationInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "engineVersion"))
+    CreateConfigurationInput.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateConfigurationInput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateConfigurationInput.struct_class = Types::CreateConfigurationInput
@@ -296,7 +296,7 @@ module Aws::MQ
 
     CreateConfigurationRequest.add_member(:authentication_strategy, Shapes::ShapeRef.new(shape: AuthenticationStrategy, location_name: "authenticationStrategy"))
     CreateConfigurationRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "engineType"))
-    CreateConfigurationRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "engineVersion"))
+    CreateConfigurationRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "engineVersion"))
     CreateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateConfigurationRequest.struct_class = Types::CreateConfigurationRequest
@@ -821,6 +821,7 @@ module Aws::MQ
 
       api.metadata = {
         "apiVersion" => "2017-11-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mq",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -944,6 +944,8 @@ module Aws::SageMaker
     GroupingAttributeName = Shapes::StringShape.new(name: 'GroupingAttributeName')
     GroupingAttributeNames = Shapes::ListShape.new(name: 'GroupingAttributeNames')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    HiddenAppTypesList = Shapes::ListShape.new(name: 'HiddenAppTypesList')
+    HiddenMlToolsList = Shapes::ListShape.new(name: 'HiddenMlToolsList')
     HolidayConfig = Shapes::ListShape.new(name: 'HolidayConfig')
     HolidayConfigAttributes = Shapes::StructureShape.new(name: 'HolidayConfigAttributes')
     HookParameters = Shapes::MapShape.new(name: 'HookParameters')
@@ -1389,6 +1391,7 @@ module Aws::SageMaker
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
     MinimumInstanceMetadataServiceVersion = Shapes::StringShape.new(name: 'MinimumInstanceMetadataServiceVersion')
+    MlTools = Shapes::StringShape.new(name: 'MlTools')
     MlflowVersion = Shapes::StringShape.new(name: 'MlflowVersion')
     Model = Shapes::StructureShape.new(name: 'Model')
     ModelAccessConfig = Shapes::StructureShape.new(name: 'ModelAccessConfig')
@@ -2023,6 +2026,7 @@ module Aws::SageMaker
     StudioLifecycleConfigSortKey = Shapes::StringShape.new(name: 'StudioLifecycleConfigSortKey')
     StudioLifecycleConfigsList = Shapes::ListShape.new(name: 'StudioLifecycleConfigsList')
     StudioWebPortal = Shapes::StringShape.new(name: 'StudioWebPortal')
+    StudioWebPortalSettings = Shapes::StructureShape.new(name: 'StudioWebPortalSettings')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     Subnets = Shapes::ListShape.new(name: 'Subnets')
     SubscribedWorkteam = Shapes::StructureShape.new(name: 'SubscribedWorkteam')
@@ -5869,6 +5873,10 @@ module Aws::SageMaker
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
 
+    HiddenAppTypesList.member = Shapes::ShapeRef.new(shape: AppType)
+
+    HiddenMlToolsList.member = Shapes::ShapeRef.new(shape: MlTools)
+
     HolidayConfig.member = Shapes::ShapeRef.new(shape: HolidayConfigAttributes)
 
     HolidayConfigAttributes.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, location_name: "CountryCode"))
@@ -9239,6 +9247,10 @@ module Aws::SageMaker
 
     StudioLifecycleConfigsList.member = Shapes::ShapeRef.new(shape: StudioLifecycleConfigDetails)
 
+    StudioWebPortalSettings.add_member(:hidden_ml_tools, Shapes::ShapeRef.new(shape: HiddenMlToolsList, location_name: "HiddenMlTools"))
+    StudioWebPortalSettings.add_member(:hidden_app_types, Shapes::ShapeRef.new(shape: HiddenAppTypesList, location_name: "HiddenAppTypes"))
+    StudioWebPortalSettings.struct_class = Types::StudioWebPortalSettings
+
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     SubscribedWorkteam.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, required: true, location_name: "WorkteamArn"))
@@ -10077,6 +10089,7 @@ module Aws::SageMaker
     UserSettings.add_member(:studio_web_portal, Shapes::ShapeRef.new(shape: StudioWebPortal, location_name: "StudioWebPortal"))
     UserSettings.add_member(:custom_posix_user_config, Shapes::ShapeRef.new(shape: CustomPosixUserConfig, location_name: "CustomPosixUserConfig"))
     UserSettings.add_member(:custom_file_system_configs, Shapes::ShapeRef.new(shape: CustomFileSystemConfigs, location_name: "CustomFileSystemConfigs"))
+    UserSettings.add_member(:studio_web_portal_settings, Shapes::ShapeRef.new(shape: StudioWebPortalSettings, location_name: "StudioWebPortalSettings"))
     UserSettings.struct_class = Types::UserSettings
 
     VariantProperty.add_member(:variant_property_type, Shapes::ShapeRef.new(shape: VariantPropertyType, required: true, location_name: "VariantPropertyType"))

@@ -3154,6 +3154,7 @@ module Aws::CloudFront
 
       api.metadata = {
         "apiVersion" => "2020-05-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cloudfront",
         "globalEndpoint" => "cloudfront.amazonaws.com",
         "protocol" => "rest-xml",

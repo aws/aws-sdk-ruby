@@ -763,7 +763,7 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # Returns the details of the DB instance’s server certificate.
+    # The details of the DB instance’s server certificate.
     #
     # For more information, see [Using SSL/TLS to encrypt a connection to a
     # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
@@ -940,7 +940,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] certificate_details
-    #   Returns the details of the DB instance’s server certificate.
+    #   The details of the DB instance’s server certificate.
     #
     #   For more information, see [Using SSL/TLS to encrypt a connection to
     #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
@@ -2155,7 +2155,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #   @return [String]
@@ -7109,7 +7109,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] certificate_details
-    #   Returns the details of the DB instance’s server certificate.
+    #   The details of the DB instance’s server certificate.
     #
     #   For more information, see [Using SSL/TLS to encrypt a connection to
     #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
@@ -21207,8 +21207,9 @@ module Aws::RDS
     # * The current number CPU cores and threads is set to a non-default
     #   value.
     #
-    # For more information, see [Configuring the Processor of the DB
-    # Instance Class][1] in the <i>Amazon RDS User Guide. </i>
+    # For more information, see [ Configuring the processor for a DB
+    # instance class in RDS for Oracle][1] in the <i>Amazon RDS User Guide.
+    # </i>
     #
     #
     #
@@ -21220,7 +21221,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of a processor feature name.
+    #   The value of a processor feature.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ProcessorFeature AWS API Documentation

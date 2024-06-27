@@ -439,6 +439,7 @@ module Aws::ApplicationAutoScaling
 
       api.metadata = {
         "apiVersion" => "2016-02-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "application-autoscaling",
         "jsonVersion" => "1.1",
         "protocol" => "json",

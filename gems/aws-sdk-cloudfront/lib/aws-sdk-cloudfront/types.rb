@@ -269,9 +269,9 @@ module Aws::CloudFront
     # *Amazon CloudFront Developer Guide*.
     #
     # If you don't want to specify any cache behaviors, include only an
-    # empty `CacheBehaviors` element. For more information, see
-    # [CacheBehaviors][2]. Don't include an empty `CacheBehavior` element
-    # because this is invalid.
+    # empty `CacheBehaviors` element. Don't specify an empty individual
+    # `CacheBehavior` element, because this is invalid. For more
+    # information, see [CacheBehaviors][2].
     #
     # To delete all cache behaviors in an existing distribution, update the
     # distribution configuration and include only an empty `CacheBehaviors`
@@ -998,7 +998,9 @@ module Aws::CloudFront
     #
     # @!attribute [rw] items
     #   A complex type that contains the HTTP methods that you want
-    #   CloudFront to cache responses to.
+    #   CloudFront to cache responses to. Valid values for `CachedMethods`
+    #   include `GET`, `HEAD`, and `OPTIONS`, depending on which caching
+    #   option you choose. For more information, see the preceding section.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CachedMethods AWS API Documentation

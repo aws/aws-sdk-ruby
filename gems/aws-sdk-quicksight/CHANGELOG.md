@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-06-27)
+------------------
+
+* Feature - Adding support for Repeating Sections, Nested Filters
+
 1.115.0 (2024-06-25)
 ------------------
 

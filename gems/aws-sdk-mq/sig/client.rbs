@@ -80,7 +80,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#create_broker-instance_method
       def create_broker: (
                            ?authentication_strategy: ("SIMPLE" | "LDAP"),
-                           auto_minor_version_upgrade: bool,
+                           ?auto_minor_version_upgrade: bool,
                            broker_name: ::String,
                            ?configuration: {
                              id: ::String,
@@ -93,7 +93,7 @@ module Aws
                              use_aws_owned_key: bool
                            },
                            engine_type: ("ACTIVEMQ" | "RABBITMQ"),
-                           engine_version: ::String,
+                           ?engine_version: ::String,
                            host_instance_type: ::String,
                            ?ldap_server_metadata: {
                              hosts: Array[::String],
@@ -149,7 +149,7 @@ module Aws
       def create_configuration: (
                                   ?authentication_strategy: ("SIMPLE" | "LDAP"),
                                   engine_type: ("ACTIVEMQ" | "RABBITMQ"),
-                                  engine_version: ::String,
+                                  ?engine_version: ::String,
                                   name: ::String,
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateConfigurationResponseSuccess

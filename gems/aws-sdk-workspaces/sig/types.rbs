@@ -42,6 +42,12 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class ActiveDirectoryConfig
+      attr_accessor domain_name: ::String
+      attr_accessor service_account_secret_arn: ::String
+      SENSITIVE: []
+    end
+
     class ApplicationNotSupportedException < Aws::EmptyStructure
     end
 
@@ -53,6 +59,19 @@ module Aws::WorkSpaces
       attr_accessor last_updated_time: ::Time
       attr_accessor state: ("PENDING_INSTALL" | "PENDING_INSTALL_DEPLOYMENT" | "PENDING_UNINSTALL" | "PENDING_UNINSTALL_DEPLOYMENT" | "INSTALLING" | "UNINSTALLING" | "ERROR" | "COMPLETED" | "REMOVED")
       attr_accessor state_reason: Types::AssociationStateReason
+      SENSITIVE: []
+    end
+
+    class ApplicationSettingsRequest
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor settings_group: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSettingsResponse
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor settings_group: ::String
+      attr_accessor s3_bucket_name: ::String
       SENSITIVE: []
     end
 
@@ -110,6 +129,19 @@ module Aws::WorkSpaces
       attr_accessor last_updated_time: ::Time
       attr_accessor state: ("PENDING_INSTALL" | "PENDING_INSTALL_DEPLOYMENT" | "PENDING_UNINSTALL" | "PENDING_UNINSTALL_DEPLOYMENT" | "INSTALLING" | "UNINSTALLING" | "ERROR" | "COMPLETED" | "REMOVED")
       attr_accessor state_reason: Types::AssociationStateReason
+      SENSITIVE: []
+    end
+
+    class Capacity
+      attr_accessor desired_user_sessions: ::Integer
+      SENSITIVE: []
+    end
+
+    class CapacityStatus
+      attr_accessor available_user_sessions: ::Integer
+      attr_accessor desired_user_sessions: ::Integer
+      attr_accessor actual_user_sessions: ::Integer
+      attr_accessor active_user_sessions: ::Integer
       SENSITIVE: []
     end
 
@@ -306,6 +338,23 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class CreateWorkspacesPoolRequest
+      attr_accessor pool_name: ::String
+      attr_accessor description: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor capacity: Types::Capacity
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor application_settings: Types::ApplicationSettingsRequest
+      attr_accessor timeout_settings: Types::TimeoutSettings
+      SENSITIVE: []
+    end
+
+    class CreateWorkspacesPoolResult
+      attr_accessor workspaces_pool: Types::WorkspacesPool
+      SENSITIVE: []
+    end
+
     class CreateWorkspacesRequest
       attr_accessor workspaces: ::Array[Types::WorkspaceRequest]
       SENSITIVE: []
@@ -348,6 +397,7 @@ module Aws::WorkSpaces
       attr_accessor custom_security_group_id: ::String
       attr_accessor user_enabled_as_local_administrator: bool
       attr_accessor enable_maintenance_mode: bool
+      attr_accessor instance_iam_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -629,6 +679,7 @@ module Aws::WorkSpaces
 
     class DescribeWorkspaceDirectoriesRequest
       attr_accessor directory_ids: ::Array[::String]
+      attr_accessor workspace_directory_names: ::Array[::String]
       attr_accessor limit: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -687,6 +738,41 @@ module Aws::WorkSpaces
 
     class DescribeWorkspacesConnectionStatusResult
       attr_accessor workspaces_connection_status: ::Array[Types::WorkspaceConnectionStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesPoolSessionsRequest
+      attr_accessor pool_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesPoolSessionsResult
+      attr_accessor sessions: ::Array[Types::WorkspacesPoolSession]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesPoolsFilter
+      attr_accessor name: ("PoolName")
+      attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("EQUALS" | "NOTEQUALS" | "CONTAINS" | "NOTCONTAINS")
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesPoolsRequest
+      attr_accessor pool_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::DescribeWorkspacesPoolsFilter]
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspacesPoolsResult
+      attr_accessor workspaces_pools: ::Array[Types::WorkspacesPool]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -963,6 +1049,15 @@ module Aws::WorkSpaces
     class ModifySelfservicePermissionsResult < Aws::EmptyStructure
     end
 
+    class ModifyStreamingPropertiesRequest
+      attr_accessor resource_id: ::String
+      attr_accessor streaming_properties: Types::StreamingProperties
+      SENSITIVE: []
+    end
+
+    class ModifyStreamingPropertiesResult < Aws::EmptyStructure
+    end
+
     class ModifyWorkspaceAccessPropertiesRequest
       attr_accessor resource_id: ::String
       attr_accessor workspace_access_properties: Types::WorkspaceAccessProperties
@@ -998,6 +1093,12 @@ module Aws::WorkSpaces
     end
 
     class ModifyWorkspaceStateResult < Aws::EmptyStructure
+    end
+
+    class NetworkAccessConfiguration
+      attr_accessor eni_private_ip_address: ::String
+      attr_accessor eni_id: ::String
+      SENSITIVE: []
     end
 
     class OperatingSystem
@@ -1064,10 +1165,18 @@ module Aws::WorkSpaces
       attr_accessor enable_self_service: bool
       attr_accessor tenancy: ("DEDICATED" | "SHARED")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor workspace_directory_name: ::String
+      attr_accessor workspace_directory_description: ::String
+      attr_accessor user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE")
+      attr_accessor workspace_type: ("PERSONAL" | "POOLS")
+      attr_accessor active_directory_config: Types::ActiveDirectoryConfig
       SENSITIVE: []
     end
 
-    class RegisterWorkspaceDirectoryResult < Aws::EmptyStructure
+    class RegisterWorkspaceDirectoryResult
+      attr_accessor directory_id: ::String
+      attr_accessor state: ("REGISTERING" | "REGISTERED" | "DEREGISTERING" | "DEREGISTERED" | "ERROR")
+      SENSITIVE: []
     end
 
     class RejectAccountLinkInvitationRequest
@@ -1191,6 +1300,14 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class StartWorkspacesPoolRequest
+      attr_accessor pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartWorkspacesPoolResult < Aws::EmptyStructure
+    end
+
     class StartWorkspacesRequest
       attr_accessor start_workspace_requests: ::Array[Types::StartRequest]
       SENSITIVE: []
@@ -1206,6 +1323,14 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class StopWorkspacesPoolRequest
+      attr_accessor pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopWorkspacesPoolResult < Aws::EmptyStructure
+    end
+
     class StopWorkspacesRequest
       attr_accessor stop_workspace_requests: ::Array[Types::StopRequest]
       SENSITIVE: []
@@ -1213,6 +1338,19 @@ module Aws::WorkSpaces
 
     class StopWorkspacesResult
       attr_accessor failed_requests: ::Array[Types::FailedWorkspaceChangeRequest]
+      SENSITIVE: []
+    end
+
+    class StorageConnector
+      attr_accessor connector_type: ("HOME_FOLDER")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class StreamingProperties
+      attr_accessor streaming_experience_preferred_protocol: ("TCP" | "UDP")
+      attr_accessor user_settings: ::Array[Types::UserSetting]
+      attr_accessor storage_connectors: ::Array[Types::StorageConnector]
       SENSITIVE: []
     end
 
@@ -1227,6 +1365,22 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class TerminateWorkspacesPoolRequest
+      attr_accessor pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateWorkspacesPoolResult < Aws::EmptyStructure
+    end
+
+    class TerminateWorkspacesPoolSessionRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateWorkspacesPoolSessionResult < Aws::EmptyStructure
+    end
+
     class TerminateWorkspacesRequest
       attr_accessor terminate_workspace_requests: ::Array[Types::TerminateRequest]
       SENSITIVE: []
@@ -1234,6 +1388,13 @@ module Aws::WorkSpaces
 
     class TerminateWorkspacesResult
       attr_accessor failed_requests: ::Array[Types::FailedWorkspaceChangeRequest]
+      SENSITIVE: []
+    end
+
+    class TimeoutSettings
+      attr_accessor disconnect_timeout_in_seconds: ::Integer
+      attr_accessor idle_disconnect_timeout_in_seconds: ::Integer
+      attr_accessor max_user_duration_in_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -1299,6 +1460,29 @@ module Aws::WorkSpaces
     end
 
     class UpdateWorkspaceImagePermissionResult < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspacesPoolRequest
+      attr_accessor pool_id: ::String
+      attr_accessor description: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor capacity: Types::Capacity
+      attr_accessor application_settings: Types::ApplicationSettingsRequest
+      attr_accessor timeout_settings: Types::TimeoutSettings
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspacesPoolResult
+      attr_accessor workspaces_pool: Types::WorkspacesPool
+      SENSITIVE: []
+    end
+
+    class UserSetting
+      attr_accessor action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "PRINTING_TO_LOCAL_DEVICE" | "SMART_CARD")
+      attr_accessor permission: ("ENABLED" | "DISABLED")
+      attr_accessor maximum_length: ::Integer
+      SENSITIVE: []
     end
 
     class UserStorage
@@ -1395,6 +1579,7 @@ module Aws::WorkSpaces
       attr_accessor custom_security_group_id: ::String
       attr_accessor user_enabled_as_local_administrator: bool
       attr_accessor enable_maintenance_mode: bool
+      attr_accessor instance_iam_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1407,7 +1592,7 @@ module Aws::WorkSpaces
       attr_accessor dns_ip_addresses: ::Array[::String]
       attr_accessor customer_user_name: ::String
       attr_accessor iam_role_id: ::String
-      attr_accessor directory_type: ("SIMPLE_AD" | "AD_CONNECTOR")
+      attr_accessor directory_type: ("SIMPLE_AD" | "AD_CONNECTOR" | "CUSTOMER_MANAGED")
       attr_accessor workspace_security_group_id: ::String
       attr_accessor state: ("REGISTERING" | "REGISTERED" | "DEREGISTERING" | "DEREGISTERED" | "ERROR")
       attr_accessor workspace_creation_properties: Types::DefaultWorkspaceCreationProperties
@@ -1417,6 +1602,13 @@ module Aws::WorkSpaces
       attr_accessor selfservice_permissions: Types::SelfservicePermissions
       attr_accessor saml_properties: Types::SamlProperties
       attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties
+      attr_accessor workspace_directory_name: ::String
+      attr_accessor workspace_directory_description: ::String
+      attr_accessor user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE")
+      attr_accessor workspace_type: ("PERSONAL" | "POOLS")
+      attr_accessor active_directory_config: Types::ActiveDirectoryConfig
+      attr_accessor streaming_properties: Types::StreamingProperties
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -1481,6 +1673,41 @@ module Aws::WorkSpaces
       attr_accessor group_name: ::String
       attr_accessor group_desc: ::String
       attr_accessor user_rules: ::Array[Types::IpRuleItem]
+      SENSITIVE: []
+    end
+
+    class WorkspacesPool
+      attr_accessor pool_id: ::String
+      attr_accessor pool_arn: ::String
+      attr_accessor capacity_status: Types::CapacityStatus
+      attr_accessor pool_name: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("CREATING" | "DELETING" | "RUNNING" | "STARTING" | "STOPPED" | "STOPPING" | "UPDATING")
+      attr_accessor created_at: ::Time
+      attr_accessor bundle_id: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor errors: ::Array[Types::WorkspacesPoolError]
+      attr_accessor application_settings: Types::ApplicationSettingsResponse
+      attr_accessor timeout_settings: Types::TimeoutSettings
+      SENSITIVE: []
+    end
+
+    class WorkspacesPoolError
+      attr_accessor error_code: ("IAM_SERVICE_ROLE_IS_MISSING" | "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION" | "NETWORK_INTERFACE_LIMIT_EXCEEDED" | "INTERNAL_SERVICE_ERROR" | "MACHINE_ROLE_IS_MISSING" | "STS_DISABLED_IN_REGION" | "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION" | "SUBNET_NOT_FOUND" | "IMAGE_NOT_FOUND" | "INVALID_SUBNET_CONFIGURATION" | "SECURITY_GROUPS_NOT_FOUND" | "IGW_NOT_ATTACHED" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION" | "WORKSPACES_POOL_STOPPED" | "WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE" | "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND" | "DOMAIN_JOIN_ERROR_ACCESS_DENIED" | "DOMAIN_JOIN_ERROR_LOGON_FAILURE" | "DOMAIN_JOIN_ERROR_INVALID_PARAMETER" | "DOMAIN_JOIN_ERROR_MORE_DATA" | "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN" | "DOMAIN_JOIN_ERROR_NOT_SUPPORTED" | "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME" | "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED" | "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED" | "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED" | "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR" | "DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING" | "DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE" | "DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID" | "DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND" | "DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND" | "DOMAIN_JOIN_ERROR_SECRET_INVALID" | "BUNDLE_NOT_FOUND" | "DIRECTORY_NOT_FOUND" | "INSUFFICIENT_PERMISSIONS_ERROR" | "DEFAULT_OU_IS_MISSING")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspacesPoolSession
+      attr_accessor authentication_type: ("SAML")
+      attr_accessor connection_state: ("CONNECTED" | "NOT_CONNECTED")
+      attr_accessor session_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor expiration_time: ::Time
+      attr_accessor network_access_configuration: Types::NetworkAccessConfiguration
+      attr_accessor start_time: ::Time
+      attr_accessor user_id: ::String
       SENSITIVE: []
     end
   end

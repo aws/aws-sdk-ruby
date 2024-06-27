@@ -898,6 +898,7 @@ module Aws::ChimeSDKMediaPipelines
     #           language_model_name: "ModelName",
     #           filter_partial_results: false,
     #           identify_language: false,
+    #           identify_multiple_languages: false,
     #           language_options: "LanguageOptions",
     #           preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #           vocabulary_names: "VocabularyNames",
@@ -985,6 +986,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_language #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_multiple_languages #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_options #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_names #=> String
@@ -1150,13 +1152,40 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Creates an Kinesis video stream pool for the media pipeline.
+    # Creates an Amazon Kinesis Video Stream pool for use with media stream
+    # pipelines.
+    #
+    # <note markdown="1"> If a meeting uses an opt-in Region as its [MediaRegion][1], the KVS
+    # stream must be in that same Region. For example, if a meeting uses the
+    # `af-south-1` Region, the KVS stream must also be in `af-south-1`.
+    # However, if the meeting uses a Region that AWS turns on by default,
+    # the KVS stream can be in any available Region, including an opt-in
+    # Region. For example, if the meeting uses `ca-central-1`, the KVS
+    # stream can be in `eu-west-2`, `us-east-1`, `af-south-1`, or any other
+    # Region that the Amazon Chime SDK supports.
+    #
+    #  To learn which AWS Region a meeting uses, call the [GetMeeting][2] API
+    # and use the [MediaRegion][1] parameter from the response.
+    #
+    #  For more information about opt-in Regions, refer to [Available
+    # Regions][3] in the *Amazon Chime SDK Developer Guide*, and [Specify
+    # which AWS Regions your account can use][4], in the *AWS Account
+    # Management Reference Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html#chimesdk-meeting-chime_CreateMeeting-request-MediaRegion
+    # [2]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetMeeting.html
+    # [3]: https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions.html
+    # [4]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#rande-manage-enable.html
     #
     # @option params [required, Types::KinesisVideoStreamConfiguration] :stream_configuration
-    #   The configuration settings for the video stream.
+    #   The configuration settings for the stream.
     #
     # @option params [required, String] :pool_name
-    #   The name of the video stream pool.
+    #   The name of the pool.
     #
     # @option params [String] :client_request_token
     #   The token assigned to the client making the request.
@@ -1165,7 +1194,7 @@ module Aws::ChimeSDKMediaPipelines
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags assigned to the video stream pool.
+    #   The tags assigned to the stream pool.
     #
     # @return [Types::CreateMediaPipelineKinesisVideoStreamPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1348,10 +1377,11 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Deletes an Kinesis video stream pool.
+    # Deletes an Amazon Kinesis Video Stream pool.
     #
     # @option params [required, String] :identifier
-    #   The ID of the pool being deleted.
+    #   The unique identifier of the requested resource. Valid values include
+    #   the name and ARN of the media pipeline Kinesis Video Stream pool.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1497,6 +1527,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_language #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_multiple_languages #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_options #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_names #=> String
@@ -1682,7 +1713,8 @@ module Aws::ChimeSDKMediaPipelines
     # Gets an Kinesis video stream pool.
     #
     # @option params [required, String] :identifier
-    #   The ID of the video stream pool.
+    #   The unique identifier of the requested resource. Valid values include
+    #   the name and ARN of the media pipeline Kinesis Video Stream pool.
     #
     # @return [Types::GetMediaPipelineKinesisVideoStreamPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2300,6 +2332,7 @@ module Aws::ChimeSDKMediaPipelines
     #           language_model_name: "ModelName",
     #           filter_partial_results: false,
     #           identify_language: false,
+    #           identify_multiple_languages: false,
     #           language_options: "LanguageOptions",
     #           preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
     #           vocabulary_names: "VocabularyNames",
@@ -2380,6 +2413,7 @@ module Aws::ChimeSDKMediaPipelines
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_model_name #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.filter_partial_results #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_language #=> Boolean
+    #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.identify_multiple_languages #=> Boolean
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.language_options #=> String
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR"
     #   resp.media_insights_pipeline_configuration.elements[0].amazon_transcribe_processor_configuration.vocabulary_names #=> String
@@ -2433,10 +2467,11 @@ module Aws::ChimeSDKMediaPipelines
       req.send_request(options)
     end
 
-    # Updates an Kinesis video stream pool in a media pipeline.
+    # Updates an Amazon Kinesis Video Stream pool in a media pipeline.
     #
     # @option params [required, String] :identifier
-    #   The ID of the video stream pool.
+    #   The unique identifier of the requested resource. Valid values include
+    #   the name and ARN of the media pipeline Kinesis Video Stream pool.
     #
     # @option params [Types::KinesisVideoStreamConfigurationUpdate] :stream_configuration
     #   The configuration settings for the video stream.
@@ -2488,7 +2523,7 @@ module Aws::ChimeSDKMediaPipelines
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

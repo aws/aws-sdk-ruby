@@ -8543,6 +8543,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class StudioWebPortalSettings
+      attr_accessor hidden_ml_tools: ::Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]
+      attr_accessor hidden_app_types: ::Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]
+      SENSITIVE: []
+    end
+
     class SubscribedWorkteam
       attr_accessor workteam_arn: ::String
       attr_accessor marketplace_title: ::String
@@ -9595,6 +9601,7 @@ module Aws::SageMaker
       attr_accessor studio_web_portal: ("ENABLED" | "DISABLED")
       attr_accessor custom_posix_user_config: Types::CustomPosixUserConfig
       attr_accessor custom_file_system_configs: ::Array[Types::CustomFileSystemConfig]
+      attr_accessor studio_web_portal_settings: Types::StudioWebPortalSettings
       SENSITIVE: []
     end
 
