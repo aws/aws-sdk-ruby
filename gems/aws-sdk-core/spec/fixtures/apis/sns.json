@@ -4,12 +4,14 @@
     "apiVersion":"2010-03-31",
     "endpointPrefix":"sns",
     "protocol":"query",
+    "protocols":["query"],
     "serviceAbbreviation":"Amazon SNS",
     "serviceFullName":"Amazon Simple Notification Service",
     "serviceId":"SNS",
     "signatureVersion":"v4",
     "uid":"sns-2010-03-31",
-    "xmlNamespace":"http://sns.amazonaws.com/doc/2010-03-31/"
+    "xmlNamespace":"http://sns.amazonaws.com/doc/2010-03-31/",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AddPermission":{
@@ -60,7 +62,9 @@
         {"shape":"InvalidParameterException"},
         {"shape":"NotFoundException"},
         {"shape":"InternalErrorException"},
-        {"shape":"AuthorizationErrorException"}
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"FilterPolicyLimitExceededException"},
+        {"shape":"ReplayLimitExceededException"}
       ]
     },
     "CreatePlatformApplication":{
@@ -98,6 +102,26 @@
         {"shape":"NotFoundException"}
       ]
     },
+    "CreateSMSSandboxPhoneNumber":{
+      "name":"CreateSMSSandboxPhoneNumber",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateSMSSandboxPhoneNumberInput"},
+      "output":{
+        "shape":"CreateSMSSandboxPhoneNumberResult",
+        "resultWrapper":"CreateSMSSandboxPhoneNumberResult"
+      },
+      "errors":[
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"OptedOutException"},
+        {"shape":"UserErrorException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
     "CreateTopic":{
       "name":"CreateTopic",
       "http":{
@@ -114,7 +138,11 @@
         {"shape":"TopicLimitExceededException"},
         {"shape":"InternalErrorException"},
         {"shape":"AuthorizationErrorException"},
-        {"shape":"InvalidSecurityException"}
+        {"shape":"InvalidSecurityException"},
+        {"shape":"TagLimitExceededException"},
+        {"shape":"StaleTagException"},
+        {"shape":"TagPolicyException"},
+        {"shape":"ConcurrentAccessException"}
       ]
     },
     "DeleteEndpoint":{
@@ -143,6 +171,26 @@
         {"shape":"AuthorizationErrorException"}
       ]
     },
+    "DeleteSMSSandboxPhoneNumber":{
+      "name":"DeleteSMSSandboxPhoneNumber",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteSMSSandboxPhoneNumberInput"},
+      "output":{
+        "shape":"DeleteSMSSandboxPhoneNumberResult",
+        "resultWrapper":"DeleteSMSSandboxPhoneNumberResult"
+      },
+      "errors":[
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"UserErrorException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
     "DeleteTopic":{
       "name":"DeleteTopic",
       "http":{
@@ -152,9 +200,32 @@
       "input":{"shape":"DeleteTopicInput"},
       "errors":[
         {"shape":"InvalidParameterException"},
+        {"shape":"InvalidStateException"},
         {"shape":"InternalErrorException"},
         {"shape":"AuthorizationErrorException"},
-        {"shape":"NotFoundException"}
+        {"shape":"NotFoundException"},
+        {"shape":"StaleTagException"},
+        {"shape":"TagPolicyException"},
+        {"shape":"ConcurrentAccessException"}
+      ]
+    },
+    "GetDataProtectionPolicy":{
+      "name":"GetDataProtectionPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDataProtectionPolicyInput"},
+      "output":{
+        "shape":"GetDataProtectionPolicyResponse",
+        "resultWrapper":"GetDataProtectionPolicyResult"
+      },
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"NotFoundException"},
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"InvalidSecurityException"}
       ]
     },
     "GetEndpointAttributes":{
@@ -209,6 +280,23 @@
         {"shape":"InternalErrorException"},
         {"shape":"AuthorizationErrorException"},
         {"shape":"InvalidParameterException"}
+      ]
+    },
+    "GetSMSSandboxAccountStatus":{
+      "name":"GetSMSSandboxAccountStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetSMSSandboxAccountStatusInput"},
+      "output":{
+        "shape":"GetSMSSandboxAccountStatusResult",
+        "resultWrapper":"GetSMSSandboxAccountStatusResult"
+      },
+      "errors":[
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"ThrottledException"}
       ]
     },
     "GetSubscriptionAttributes":{
@@ -266,6 +354,25 @@
         {"shape":"NotFoundException"}
       ]
     },
+    "ListOriginationNumbers":{
+      "name":"ListOriginationNumbers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListOriginationNumbersRequest"},
+      "output":{
+        "shape":"ListOriginationNumbersResult",
+        "resultWrapper":"ListOriginationNumbersResult"
+      },
+      "errors":[
+        {"shape":"InternalErrorException"},
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"ThrottledException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ValidationException"}
+      ]
+    },
     "ListPhoneNumbersOptedOut":{
       "name":"ListPhoneNumbersOptedOut",
       "http":{
@@ -301,6 +408,25 @@
         {"shape":"AuthorizationErrorException"}
       ]
     },
+    "ListSMSSandboxPhoneNumbers":{
+      "name":"ListSMSSandboxPhoneNumbers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSMSSandboxPhoneNumbersInput"},
+      "output":{
+        "shape":"ListSMSSandboxPhoneNumbersResult",
+        "resultWrapper":"ListSMSSandboxPhoneNumbersResult"
+      },
+      "errors":[
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottledException"}
+      ]
+    },
     "ListSubscriptions":{
       "name":"ListSubscriptions",
       "http":{
@@ -334,6 +460,25 @@
         {"shape":"InternalErrorException"},
         {"shape":"NotFoundException"},
         {"shape":"AuthorizationErrorException"}
+      ]
+    },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{
+        "shape":"ListTagsForResourceResponse",
+        "resultWrapper":"ListTagsForResourceResult"
+      },
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TagPolicyException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"ConcurrentAccessException"}
       ]
     },
     "ListTopics":{
@@ -396,6 +541,56 @@
         {"shape":"KMSOptInRequired"},
         {"shape":"KMSThrottlingException"},
         {"shape":"KMSAccessDeniedException"},
+        {"shape":"InvalidSecurityException"},
+        {"shape":"ValidationException"}
+      ]
+    },
+    "PublishBatch":{
+      "name":"PublishBatch",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PublishBatchInput"},
+      "output":{
+        "shape":"PublishBatchResponse",
+        "resultWrapper":"PublishBatchResult"
+      },
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"NotFoundException"},
+        {"shape":"EndpointDisabledException"},
+        {"shape":"PlatformApplicationDisabledException"},
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"BatchEntryIdsNotDistinctException"},
+        {"shape":"BatchRequestTooLongException"},
+        {"shape":"EmptyBatchRequestException"},
+        {"shape":"InvalidBatchEntryIdException"},
+        {"shape":"TooManyEntriesInBatchRequestException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSNotFoundException"},
+        {"shape":"KMSOptInRequired"},
+        {"shape":"KMSThrottlingException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"InvalidSecurityException"},
+        {"shape":"ValidationException"}
+      ]
+    },
+    "PutDataProtectionPolicy":{
+      "name":"PutDataProtectionPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutDataProtectionPolicyInput"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"NotFoundException"},
+        {"shape":"AuthorizationErrorException"},
         {"shape":"InvalidSecurityException"}
       ]
     },
@@ -469,6 +664,7 @@
       "errors":[
         {"shape":"InvalidParameterException"},
         {"shape":"FilterPolicyLimitExceededException"},
+        {"shape":"ReplayLimitExceededException"},
         {"shape":"InternalErrorException"},
         {"shape":"NotFoundException"},
         {"shape":"AuthorizationErrorException"}
@@ -503,11 +699,33 @@
       "errors":[
         {"shape":"SubscriptionLimitExceededException"},
         {"shape":"FilterPolicyLimitExceededException"},
+        {"shape":"ReplayLimitExceededException"},
         {"shape":"InvalidParameterException"},
         {"shape":"InternalErrorException"},
         {"shape":"NotFoundException"},
         {"shape":"AuthorizationErrorException"},
         {"shape":"InvalidSecurityException"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{
+        "shape":"TagResourceResponse",
+        "resultWrapper":"TagResourceResult"
+      },
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TagLimitExceededException"},
+        {"shape":"StaleTagException"},
+        {"shape":"TagPolicyException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"ConcurrentAccessException"}
       ]
     },
     "Unsubscribe":{
@@ -523,6 +741,47 @@
         {"shape":"AuthorizationErrorException"},
         {"shape":"NotFoundException"},
         {"shape":"InvalidSecurityException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{
+        "shape":"UntagResourceResponse",
+        "resultWrapper":"UntagResourceResult"
+      },
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TagLimitExceededException"},
+        {"shape":"StaleTagException"},
+        {"shape":"TagPolicyException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"ConcurrentAccessException"}
+      ]
+    },
+    "VerifySMSSandboxPhoneNumber":{
+      "name":"VerifySMSSandboxPhoneNumber",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"VerifySMSSandboxPhoneNumberInput"},
+      "output":{
+        "shape":"VerifySMSSandboxPhoneNumberResult",
+        "resultWrapper":"VerifySMSSandboxPhoneNumberResult"
+      },
+      "errors":[
+        {"shape":"AuthorizationErrorException"},
+        {"shape":"InternalErrorException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"VerificationException"},
+        {"shape":"ThrottledException"}
       ]
     }
   },
@@ -546,6 +805,11 @@
         "ActionName":{"shape":"ActionsList"}
       }
     },
+    "AmazonResourceName":{
+      "type":"string",
+      "max":1011,
+      "min":1
+    },
     "AuthorizationErrorException":{
       "type":"structure",
       "members":{
@@ -557,6 +821,48 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "BatchEntryIdsNotDistinctException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"BatchEntryIdsNotDistinct",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "BatchRequestTooLongException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"BatchRequestTooLong",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "BatchResultErrorEntry":{
+      "type":"structure",
+      "required":[
+        "Id",
+        "Code",
+        "SenderFault"
+      ],
+      "members":{
+        "Id":{"shape":"String"},
+        "Code":{"shape":"String"},
+        "Message":{"shape":"String"},
+        "SenderFault":{"shape":"boolean"}
+      }
+    },
+    "BatchResultErrorEntryList":{
+      "type":"list",
+      "member":{"shape":"BatchResultErrorEntry"}
     },
     "Binary":{"type":"blob"},
     "CheckIfPhoneNumberIsOptedOutInput":{
@@ -571,6 +877,18 @@
       "members":{
         "isOptedOut":{"shape":"boolean"}
       }
+    },
+    "ConcurrentAccessException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"ConcurrentAccess",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "ConfirmSubscriptionInput":{
       "type":"structure",
@@ -628,12 +946,27 @@
         "Attributes":{"shape":"MapStringToString"}
       }
     },
+    "CreateSMSSandboxPhoneNumberInput":{
+      "type":"structure",
+      "required":["PhoneNumber"],
+      "members":{
+        "PhoneNumber":{"shape":"PhoneNumberString"},
+        "LanguageCode":{"shape":"LanguageCodeString"}
+      }
+    },
+    "CreateSMSSandboxPhoneNumberResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "CreateTopicInput":{
       "type":"structure",
       "required":["Name"],
       "members":{
         "Name":{"shape":"topicName"},
-        "Attributes":{"shape":"TopicAttributesMap"}
+        "Attributes":{"shape":"TopicAttributesMap"},
+        "Tags":{"shape":"TagList"},
+        "DataProtectionPolicy":{"shape":"attributeValue"}
       }
     },
     "CreateTopicResponse":{
@@ -660,12 +993,36 @@
         "PlatformApplicationArn":{"shape":"String"}
       }
     },
+    "DeleteSMSSandboxPhoneNumberInput":{
+      "type":"structure",
+      "required":["PhoneNumber"],
+      "members":{
+        "PhoneNumber":{"shape":"PhoneNumberString"}
+      }
+    },
+    "DeleteSMSSandboxPhoneNumberResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteTopicInput":{
       "type":"structure",
       "required":["TopicArn"],
       "members":{
         "TopicArn":{"shape":"topicARN"}
       }
+    },
+    "EmptyBatchRequestException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"EmptyBatchRequest",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "Endpoint":{
       "type":"structure",
@@ -697,6 +1054,19 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "GetDataProtectionPolicyInput":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{"shape":"topicARN"}
+      }
+    },
+    "GetDataProtectionPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "DataProtectionPolicy":{"shape":"attributeValue"}
+      }
     },
     "GetEndpointAttributesInput":{
       "type":"structure",
@@ -734,6 +1104,18 @@
       "type":"structure",
       "members":{
         "attributes":{"shape":"MapStringToString"}
+      }
+    },
+    "GetSMSSandboxAccountStatusInput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetSMSSandboxAccountStatusResult":{
+      "type":"structure",
+      "required":["IsInSandbox"],
+      "members":{
+        "IsInSandbox":{"shape":"boolean"}
       }
     },
     "GetSubscriptionAttributesInput":{
@@ -774,6 +1156,18 @@
       "exception":true,
       "fault":true
     },
+    "InvalidBatchEntryIdException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"InvalidBatchEntryId",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidParameterException":{
       "type":"structure",
       "members":{
@@ -809,6 +1203,23 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "InvalidStateException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"InvalidState",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "Iso2CountryCode":{
+      "type":"string",
+      "max":2,
+      "pattern":"^[A-Za-z]{2}$"
     },
     "KMSAccessDeniedException":{
       "type":"structure",
@@ -882,6 +1293,24 @@
       },
       "exception":true
     },
+    "LanguageCodeString":{
+      "type":"string",
+      "enum":[
+        "en-US",
+        "en-GB",
+        "es-419",
+        "es-ES",
+        "de-DE",
+        "fr-CA",
+        "fr-FR",
+        "it-IT",
+        "ja-JP",
+        "pt-BR",
+        "kr-KR",
+        "zh-CN",
+        "zh-TW"
+      ]
+    },
     "ListEndpointsByPlatformApplicationInput":{
       "type":"structure",
       "required":["PlatformApplicationArn"],
@@ -904,6 +1333,20 @@
     "ListOfPlatformApplications":{
       "type":"list",
       "member":{"shape":"PlatformApplication"}
+    },
+    "ListOriginationNumbersRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"nextToken"},
+        "MaxResults":{"shape":"MaxItemsListOriginationNumbers"}
+      }
+    },
+    "ListOriginationNumbersResult":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"nextToken"},
+        "PhoneNumbers":{"shape":"PhoneNumberInformationList"}
+      }
     },
     "ListPhoneNumbersOptedOutInput":{
       "type":"structure",
@@ -929,6 +1372,21 @@
       "members":{
         "PlatformApplications":{"shape":"ListOfPlatformApplications"},
         "NextToken":{"shape":"String"}
+      }
+    },
+    "ListSMSSandboxPhoneNumbersInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"nextToken"},
+        "MaxResults":{"shape":"MaxItems"}
+      }
+    },
+    "ListSMSSandboxPhoneNumbersResult":{
+      "type":"structure",
+      "required":["PhoneNumbers"],
+      "members":{
+        "PhoneNumbers":{"shape":"SMSSandboxPhoneNumberList"},
+        "NextToken":{"shape":"string"}
       }
     },
     "ListString":{
@@ -963,6 +1421,19 @@
         "NextToken":{"shape":"nextToken"}
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{"shape":"AmazonResourceName"}
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "ListTopicsInput":{
       "type":"structure",
       "members":{
@@ -980,6 +1451,16 @@
       "type":"map",
       "key":{"shape":"String"},
       "value":{"shape":"String"}
+    },
+    "MaxItems":{
+      "type":"integer",
+      "max":100,
+      "min":1
+    },
+    "MaxItemsListOriginationNumbers":{
+      "type":"integer",
+      "max":30,
+      "min":1
     },
     "MessageAttributeMap":{
       "type":"map",
@@ -1013,6 +1494,24 @@
       },
       "exception":true
     },
+    "NumberCapability":{
+      "type":"string",
+      "enum":[
+        "SMS",
+        "MMS",
+        "VOICE"
+      ]
+    },
+    "NumberCapabilityList":{
+      "type":"list",
+      "member":{"shape":"NumberCapability"}
+    },
+    "OTPCode":{
+      "type":"string",
+      "max":8,
+      "min":5,
+      "pattern":"^[0-9]+$"
+    },
     "OptInPhoneNumberInput":{
       "type":"structure",
       "required":["phoneNumber"],
@@ -1025,10 +1524,46 @@
       "members":{
       }
     },
-    "PhoneNumber":{"type":"string"},
+    "OptedOutException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"OptedOut",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "PhoneNumber":{
+      "type":"string",
+      "sensitive":true
+    },
+    "PhoneNumberInformation":{
+      "type":"structure",
+      "members":{
+        "CreatedAt":{"shape":"Timestamp"},
+        "PhoneNumber":{"shape":"PhoneNumber"},
+        "Status":{"shape":"String"},
+        "Iso2CountryCode":{"shape":"Iso2CountryCode"},
+        "RouteType":{"shape":"RouteType"},
+        "NumberCapabilities":{"shape":"NumberCapabilityList"}
+      }
+    },
+    "PhoneNumberInformationList":{
+      "type":"list",
+      "member":{"shape":"PhoneNumberInformation"}
+    },
     "PhoneNumberList":{
       "type":"list",
       "member":{"shape":"PhoneNumber"}
+    },
+    "PhoneNumberString":{
+      "type":"string",
+      "max":20,
+      "pattern":"^(\\+[0-9]{8,}|[0-9]{0,9})$",
+      "sensitive":true
     },
     "PlatformApplication":{
       "type":"structure",
@@ -1049,23 +1584,87 @@
       },
       "exception":true
     },
+    "PublishBatchInput":{
+      "type":"structure",
+      "required":[
+        "TopicArn",
+        "PublishBatchRequestEntries"
+      ],
+      "members":{
+        "TopicArn":{"shape":"topicARN"},
+        "PublishBatchRequestEntries":{"shape":"PublishBatchRequestEntryList"}
+      }
+    },
+    "PublishBatchRequestEntry":{
+      "type":"structure",
+      "required":[
+        "Id",
+        "Message"
+      ],
+      "members":{
+        "Id":{"shape":"String"},
+        "Message":{"shape":"message"},
+        "Subject":{"shape":"subject"},
+        "MessageStructure":{"shape":"messageStructure"},
+        "MessageAttributes":{"shape":"MessageAttributeMap"},
+        "MessageDeduplicationId":{"shape":"String"},
+        "MessageGroupId":{"shape":"String"}
+      }
+    },
+    "PublishBatchRequestEntryList":{
+      "type":"list",
+      "member":{"shape":"PublishBatchRequestEntry"}
+    },
+    "PublishBatchResponse":{
+      "type":"structure",
+      "members":{
+        "Successful":{"shape":"PublishBatchResultEntryList"},
+        "Failed":{"shape":"BatchResultErrorEntryList"}
+      }
+    },
+    "PublishBatchResultEntry":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"String"},
+        "MessageId":{"shape":"messageId"},
+        "SequenceNumber":{"shape":"String"}
+      }
+    },
+    "PublishBatchResultEntryList":{
+      "type":"list",
+      "member":{"shape":"PublishBatchResultEntry"}
+    },
     "PublishInput":{
       "type":"structure",
       "required":["Message"],
       "members":{
         "TopicArn":{"shape":"topicARN"},
         "TargetArn":{"shape":"String"},
-        "PhoneNumber":{"shape":"String"},
+        "PhoneNumber":{"shape":"PhoneNumber"},
         "Message":{"shape":"message"},
         "Subject":{"shape":"subject"},
         "MessageStructure":{"shape":"messageStructure"},
-        "MessageAttributes":{"shape":"MessageAttributeMap"}
+        "MessageAttributes":{"shape":"MessageAttributeMap"},
+        "MessageDeduplicationId":{"shape":"String"},
+        "MessageGroupId":{"shape":"String"}
       }
     },
     "PublishResponse":{
       "type":"structure",
       "members":{
-        "MessageId":{"shape":"messageId"}
+        "MessageId":{"shape":"messageId"},
+        "SequenceNumber":{"shape":"String"}
+      }
+    },
+    "PutDataProtectionPolicyInput":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "DataProtectionPolicy"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"topicARN"},
+        "DataProtectionPolicy":{"shape":"attributeValue"}
       }
     },
     "RemovePermissionInput":{
@@ -1078,6 +1677,56 @@
         "TopicArn":{"shape":"topicARN"},
         "Label":{"shape":"label"}
       }
+    },
+    "ReplayLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"ReplayLimitExceeded",
+        "httpStatusCode":403,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"ResourceNotFound",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "RouteType":{
+      "type":"string",
+      "enum":[
+        "Transactional",
+        "Promotional",
+        "Premium"
+      ]
+    },
+    "SMSSandboxPhoneNumber":{
+      "type":"structure",
+      "members":{
+        "PhoneNumber":{"shape":"PhoneNumberString"},
+        "Status":{"shape":"SMSSandboxPhoneNumberVerificationStatus"}
+      }
+    },
+    "SMSSandboxPhoneNumberList":{
+      "type":"list",
+      "member":{"shape":"SMSSandboxPhoneNumber"}
+    },
+    "SMSSandboxPhoneNumberVerificationStatus":{
+      "type":"string",
+      "enum":[
+        "Pending",
+        "Verified"
+      ]
     },
     "SetEndpointAttributesInput":{
       "type":"structure",
@@ -1137,6 +1786,18 @@
         "AttributeValue":{"shape":"attributeValue"}
       }
     },
+    "StaleTagException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"StaleTag",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "String":{"type":"string"},
     "SubscribeInput":{
       "type":"structure",
@@ -1189,6 +1850,75 @@
       "type":"list",
       "member":{"shape":"Subscription"}
     },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"TagLimitExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagPolicyException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"TagPolicy",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Tags"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"AmazonResourceName"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "ThrottledException":{
       "type":"structure",
       "members":{
@@ -1197,6 +1927,19 @@
       "error":{
         "code":"Throttled",
         "httpStatusCode":429,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "Timestamp":{"type":"timestamp"},
+    "TooManyEntriesInBatchRequestException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"TooManyEntriesInBatchRequest",
+        "httpStatusCode":400,
         "senderFault":true
       },
       "exception":true
@@ -1233,6 +1976,75 @@
       "required":["SubscriptionArn"],
       "members":{
         "SubscriptionArn":{"shape":"subscriptionARN"}
+      }
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"AmazonResourceName"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UserErrorException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"string"}
+      },
+      "error":{
+        "code":"UserError",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ValidationException":{
+      "type":"structure",
+      "required":["Message"],
+      "members":{
+        "Message":{"shape":"string"}
+      },
+      "error":{
+        "code":"ValidationException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "VerificationException":{
+      "type":"structure",
+      "required":[
+        "Message",
+        "Status"
+      ],
+      "members":{
+        "Message":{"shape":"string"},
+        "Status":{"shape":"string"}
+      },
+      "exception":true
+    },
+    "VerifySMSSandboxPhoneNumberInput":{
+      "type":"structure",
+      "required":[
+        "PhoneNumber",
+        "OneTimePassword"
+      ],
+      "members":{
+        "PhoneNumber":{"shape":"PhoneNumberString"},
+        "OneTimePassword":{"shape":"OTPCode"}
+      }
+    },
+    "VerifySMSSandboxPhoneNumberResult":{
+      "type":"structure",
+      "members":{
       }
     },
     "account":{"type":"string"},

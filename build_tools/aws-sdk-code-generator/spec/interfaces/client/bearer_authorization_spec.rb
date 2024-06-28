@@ -5,7 +5,7 @@ require_relative '../../spec_helper'
 describe 'Client Interface:' do
   describe 'SignatureVersion: bearer' do
     before(:all) do
-      SpecHelper.generate_service(['BearerAuth'], multiple_files: false)
+      SpecHelper.generate_service(['LegacySignBearerAuth'], multiple_files: false)
     end
 
     let(:token) { 'token' }
@@ -13,7 +13,7 @@ describe 'Client Interface:' do
     let(:token_provider) { Aws::StaticTokenProvider.new(token) }
 
     let(:client) do
-      BearerAuth::Client.new(
+      LegacySignBearerAuth::Client.new(
         region: 'us-west-2',
         stub_responses: true,
         token_provider: token_provider,
@@ -51,7 +51,7 @@ describe 'Client Interface:' do
 
   describe 'SignatureVersion: v4' do
     before(:all) do
-      SpecHelper.generate_service(['V4WithBearer'], multiple_files: false)
+      SpecHelper.generate_service(['LegacySignV4WithBearer'], multiple_files: false)
     end
 
     let(:token) { 'token' }
@@ -59,7 +59,7 @@ describe 'Client Interface:' do
     let(:token_provider) { Aws::StaticTokenProvider.new(token) }
 
     let(:client) do
-      V4WithBearer::Client.new(
+      LegacySignV4WithBearer::Client.new(
         region: 'us-west-2',
         stub_responses: true,
         token_provider: token_provider,

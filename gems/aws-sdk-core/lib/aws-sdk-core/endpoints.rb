@@ -14,9 +14,15 @@ require_relative 'endpoints/templater'
 require_relative 'endpoints/tree_rule'
 require_relative 'endpoints/url'
 
+require 'aws-sigv4'
+
 module Aws
   # @api private
   module Endpoints
+    supported_auth_traits = %w[aws.auth#sigv4 smithy.api#httpBearerAuth smithy.api#noAuth]
+    supported_auth_traits += ['aws.auth#sigv4a'] if Aws::Sigv4::Signer.use_crt?
+    SUPPORTED_AUTH_TRAITS = supported_auth_traits.freeze
+
     class << self
       def resolve_auth_scheme(context, endpoint)
         if endpoint && (auth_schemes = endpoint.properties['authSchemes'])
@@ -33,8 +39,64 @@ module Aws
 
       private
 
+      def merge_signing_defaults(auth_scheme, config)
+        if %w[sigv4 sigv4a sigv4-s3express].include?(auth_scheme['name'])
+          auth_scheme['signingName'] ||= sigv4_name(config)
+          if auth_scheme['name'] == 'sigv4a'
+            # config option supersedes endpoint properties
+            auth_scheme['signingRegionSet'] =
+              config.sigv4a_signing_region_set || auth_scheme['signingRegionSet'] || [config.region]
+          else
+            auth_scheme['signingRegion'] ||= config.region
+          end
+        end
+        auth_scheme
+      end
+
+      def sigv4_name(config)
+        config.api.metadata['signingName'] ||
+          config.api.metadata['endpointPrefix']
+      end
+
       def default_auth_scheme(context)
-        case default_api_authtype(context)
+        if (auth_list = default_api_auth(context))
+          auth = auth_list.find { |a| SUPPORTED_AUTH_TRAITS.include?(a) }
+          case auth
+          when 'aws.auth#sigv4', 'aws.auth#sigv4a'
+            auth_scheme = { 'name' => auth.split('#').last }
+            if s3_or_s3v4_signature_version?(context)
+              auth_scheme = auth_scheme.merge(
+                'disableDoubleEncoding' => true,
+                'disableNormalizePath' => true
+              )
+            end
+            merge_signing_defaults(auth_scheme, context.config)
+          when 'smithy.api#httpBearerAuth'
+            { 'name' => 'bearer' }
+          when 'smithy.api#noAuth'
+            { 'name' => 'none' }
+          else
+            raise 'No supported auth trait for this endpoint.'
+          end
+        else
+          legacy_default_auth_scheme(context)
+        end
+      end
+
+      def default_api_auth(context)
+        context.config.api.operation(context.operation_name)['auth'] ||
+          context.config.api.metadata['auth']
+      end
+
+      def s3_or_s3v4_signature_version?(context)
+        %w[s3 s3v4].include?(context.config.api.metadata['signatureVersion'])
+      end
+
+      # Legacy auth resolution - looks for deprecated signatureVersion
+      # and authType traits.
+
+      def legacy_default_auth_scheme(context)
+        case legacy_default_api_authtype(context)
         when 'v4', 'v4-unsigned-body'
           auth_scheme = { 'name' => 'sigv4' }
           merge_signing_defaults(auth_scheme, context.config)
@@ -52,27 +114,11 @@ module Aws
         end
       end
 
-      def merge_signing_defaults(auth_scheme, config)
-        if %w[sigv4 sigv4a sigv4-s3express].include?(auth_scheme['name'])
-          auth_scheme['signingName'] ||= sigv4_name(config)
-          if auth_scheme['name'] == 'sigv4a'
-            auth_scheme['signingRegionSet'] ||= ['*']
-          else
-            auth_scheme['signingRegion'] ||= config.region
-          end
-        end
-        auth_scheme
-      end
-
-      def default_api_authtype(context)
+      def legacy_default_api_authtype(context)
         context.config.api.operation(context.operation_name)['authtype'] ||
           context.config.api.metadata['signatureVersion']
       end
 
-      def sigv4_name(config)
-        config.api.metadata['signingName'] ||
-          config.api.metadata['endpointPrefix']
-      end
     end
   end
 end
