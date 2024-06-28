@@ -216,6 +216,22 @@ module BuildTools
       end
     end
 
+    # SimpleDB does not adhere to the query protocol guidelines because it
+    # uses both flattened and locationName. Query protocol is supposed to
+    # ignore location name (xmlName) when flattened (xmlFlattened) is used.
+    api('SimpleDB') do |api|
+      api['shapes'].each do |_, shape|
+        next unless shape['type'] == 'structure'
+
+        shape['members'].each do |_name, member|
+          member_ref = api['shapes'][member['shape']]
+          next unless member_ref['flattened']
+
+          member['locationName'] = member_ref['member']['locationName']
+        end
+      end
+    end
+
     smoke('SMS') do |smoke|
       smoke['testCases'] = []
     end
