@@ -5,15 +5,13 @@
     "endpointPrefix":"ssm-contacts",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceAbbreviation":"SSM Contacts",
     "serviceFullName":"AWS Systems Manager Incident Manager Contacts",
     "serviceId":"SSM Contacts",
     "signatureVersion":"v4",
     "signingName":"ssm-contacts",
     "targetPrefix":"SSMContacts",
-    "uid":"ssm-contacts-2021-05-03",
-    "auth":["aws.auth#sigv4"]
+    "uid":"ssm-contacts-2021-05-03"
   },
   "operations":{
     "AcceptPage":{

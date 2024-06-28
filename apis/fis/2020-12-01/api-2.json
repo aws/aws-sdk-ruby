@@ -5,14 +5,12 @@
     "endpointPrefix":"fis",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceAbbreviation":"FIS",
     "serviceFullName":"AWS Fault Injection Simulator",
     "serviceId":"fis",
     "signatureVersion":"v4",
     "signingName":"fis",
-    "uid":"fis-2020-12-01",
-    "auth":["aws.auth#sigv4"]
+    "uid":"fis-2020-12-01"
   },
   "operations":{
     "CreateExperimentTemplate":{

@@ -5,13 +5,11 @@
     "endpointPrefix":"workmail",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceFullName":"Amazon WorkMail",
     "serviceId":"WorkMail",
     "signatureVersion":"v4",
     "targetPrefix":"WorkMailService",
-    "uid":"workmail-2017-10-01",
-    "auth":["aws.auth#sigv4"]
+    "uid":"workmail-2017-10-01"
   },
   "operations":{
     "AssociateDelegateToResource":{

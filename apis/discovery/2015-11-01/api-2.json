@@ -10,8 +10,7 @@
     "serviceId":"Application Discovery Service",
     "signatureVersion":"v4",
     "targetPrefix":"AWSPoseidonService_V2015_11_01",
-    "uid":"discovery-2015-11-01",
-    "auth":["aws.auth#sigv4"]
+    "uid":"discovery-2015-11-01"
   },
   "operations":{
     "AssociateConfigurationItemsToApplication":{

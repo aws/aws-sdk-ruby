@@ -5,14 +5,12 @@
     "endpointPrefix":"cloudhsm",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceAbbreviation":"CloudHSM",
     "serviceFullName":"Amazon CloudHSM",
     "serviceId":"CloudHSM",
     "signatureVersion":"v4",
     "targetPrefix":"CloudHsmFrontendService",
-    "uid":"cloudhsm-2014-05-30",
-    "auth":["aws.auth#sigv4"]
+    "uid":"cloudhsm-2014-05-30"
   },
   "operations":{
     "AddTagsToResource":{
