@@ -4,12 +4,10 @@
     "apiVersion":"2016-04-12",
     "endpointPrefix":"xray",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceFullName":"AWS X-Ray",
     "serviceId":"XRay",
     "signatureVersion":"v4",
-    "uid":"xray-2016-04-12",
-    "auth":["aws.auth#sigv4"]
+    "uid":"xray-2016-04-12"
   },
   "operations":{
     "BatchGetTraces":{

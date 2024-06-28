@@ -5,13 +5,11 @@
     "endpointPrefix":"textract",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceFullName":"Amazon Textract",
     "serviceId":"Textract",
     "signatureVersion":"v4",
     "targetPrefix":"Textract",
-    "uid":"textract-2018-06-27",
-    "auth":["aws.auth#sigv4"]
+    "uid":"textract-2018-06-27"
   },
   "operations":{
     "AnalyzeDocument":{

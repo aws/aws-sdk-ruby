@@ -5,14 +5,12 @@
     "endpointPrefix":"models-v2-lex",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceAbbreviation":"Lex Models V2",
     "serviceFullName":"Amazon Lex Model Building V2",
     "serviceId":"Lex Models V2",
     "signatureVersion":"v4",
     "signingName":"lex",
-    "uid":"models.lex.v2-2020-08-07",
-    "auth":["aws.auth#sigv4"]
+    "uid":"models.lex.v2-2020-08-07"
   },
   "operations":{
     "BatchCreateCustomVocabularyItem":{

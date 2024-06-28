@@ -5,14 +5,12 @@
     "endpointPrefix":"forecastquery",
     "jsonVersion":"1.1",
     "protocol":"json",
-    "protocols":["json"],
     "serviceFullName":"Amazon Forecast Query Service",
     "serviceId":"forecastquery",
     "signatureVersion":"v4",
     "signingName":"forecast",
     "targetPrefix":"AmazonForecastRuntime",
-    "uid":"forecastquery-2018-06-26",
-    "auth":["aws.auth#sigv4"]
+    "uid":"forecastquery-2018-06-26"
   },
   "operations":{
     "QueryForecast":{

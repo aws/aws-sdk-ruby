@@ -5,13 +5,11 @@
     "endpointPrefix":"app-integrations",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
-    "protocols":["rest-json"],
     "serviceFullName":"Amazon AppIntegrations Service",
     "serviceId":"AppIntegrations",
     "signatureVersion":"v4",
     "signingName":"app-integrations",
-    "uid":"appintegrations-2020-07-29",
-    "auth":["aws.auth#sigv4"]
+    "uid":"appintegrations-2020-07-29"
   },
   "operations":{
     "CreateApplication":{

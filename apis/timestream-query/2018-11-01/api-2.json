@@ -12,8 +12,7 @@
     "signatureVersion":"v4",
     "signingName":"timestream",
     "targetPrefix":"Timestream_20181101",
-    "uid":"timestream-query-2018-11-01",
-    "auth":["aws.auth#sigv4"]
+    "uid":"timestream-query-2018-11-01"
   },
   "operations":{
     "CancelQuery":{

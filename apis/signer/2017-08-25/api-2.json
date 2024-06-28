@@ -11,8 +11,7 @@
     "serviceId":"signer",
     "signatureVersion":"v4",
     "signingName":"signer",
-    "uid":"signer-2017-08-25",
-    "auth":["aws.auth#sigv4"]
+    "uid":"signer-2017-08-25"
   },
   "operations":{
     "AddProfilePermission":{
