@@ -5,10 +5,12 @@
     "endpointPrefix":"workdocs",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceFullName":"Amazon WorkDocs",
     "serviceId":"WorkDocs",
     "signatureVersion":"v4",
-    "uid":"workdocs-2016-05-01"
+    "uid":"workdocs-2016-05-01",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AbortDocumentVersionUpload":{

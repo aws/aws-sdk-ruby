@@ -4,10 +4,12 @@
     "apiVersion":"2015-03-31",
     "endpointPrefix":"lambda",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceFullName":"AWS Lambda",
     "serviceId":"Lambda",
     "signatureVersion":"v4",
-    "uid":"lambda-2015-03-31"
+    "uid":"lambda-2015-03-31",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AddLayerVersionPermission":{

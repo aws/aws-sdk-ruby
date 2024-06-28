@@ -4,10 +4,12 @@
     "apiVersion":"2018-05-01",
     "endpointPrefix":"chime",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceFullName":"Amazon Chime",
     "serviceId":"Chime",
     "signatureVersion":"v4",
-    "uid":"chime-2018-05-01"
+    "uid":"chime-2018-05-01",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AssociatePhoneNumberWithUser":{

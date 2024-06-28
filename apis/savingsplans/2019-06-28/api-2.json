@@ -6,11 +6,13 @@
     "globalEndpoint":"savingsplans.amazonaws.com",
     "jsonVersion":"1.0",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceAbbreviation":"AWSSavingsPlans",
     "serviceFullName":"AWS Savings Plans",
     "serviceId":"savingsplans",
     "signatureVersion":"v4",
-    "uid":"savingsplans-2019-06-28"
+    "uid":"savingsplans-2019-06-28",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CreateSavingsPlan":{
