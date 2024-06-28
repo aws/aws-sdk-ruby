@@ -5,11 +5,13 @@
     "endpointPrefix":"frauddetector",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceFullName":"Amazon Fraud Detector",
     "serviceId":"FraudDetector",
     "signatureVersion":"v4",
     "targetPrefix":"AWSHawksNestServiceFacade",
-    "uid":"frauddetector-2019-11-15"
+    "uid":"frauddetector-2019-11-15",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "BatchCreateVariable":{

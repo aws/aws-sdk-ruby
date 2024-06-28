@@ -5,12 +5,14 @@
     "endpointPrefix":"dax",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceAbbreviation":"Amazon DAX",
     "serviceFullName":"Amazon DynamoDB Accelerator (DAX)",
     "serviceId":"DAX",
     "signatureVersion":"v4",
     "targetPrefix":"AmazonDAXV3",
-    "uid":"dax-2017-04-19"
+    "uid":"dax-2017-04-19",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CreateCluster":{

@@ -5,12 +5,14 @@
     "endpointPrefix":"health",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceAbbreviation":"AWSHealth",
     "serviceFullName":"AWS Health APIs and Notifications",
     "serviceId":"Health",
     "signatureVersion":"v4",
     "targetPrefix":"AWSHealth_20160804",
-    "uid":"health-2016-08-04"
+    "uid":"health-2016-08-04",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "DescribeAffectedAccountsForOrganization":{

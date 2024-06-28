@@ -11,7 +11,8 @@
     "signatureVersion":"v4",
     "signingName":"transcribe",
     "targetPrefix":"Transcribe",
-    "uid":"transcribe-2017-10-26"
+    "uid":"transcribe-2017-10-26",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CreateCallAnalyticsCategory":{

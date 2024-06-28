@@ -5,12 +5,14 @@
     "endpointPrefix":"codestar-connections",
     "jsonVersion":"1.0",
     "protocol":"json",
+    "protocols":["json"],
     "serviceFullName":"AWS CodeStar connections",
     "serviceId":"CodeStar connections",
     "signatureVersion":"v4",
     "signingName":"codestar-connections",
     "targetPrefix":"com.amazonaws.codestar.connections.CodeStar_connections_20191201",
-    "uid":"codestar-connections-2019-12-01"
+    "uid":"codestar-connections-2019-12-01",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CreateConnection":{
