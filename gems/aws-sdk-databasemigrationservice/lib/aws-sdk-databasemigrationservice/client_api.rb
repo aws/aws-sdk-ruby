@@ -2680,9 +2680,11 @@ module Aws::DatabaseMigrationService
 
       api.metadata = {
         "apiVersion" => "2016-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "dms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Database Migration Service",
         "serviceId" => "Database Migration Service",
         "signatureVersion" => "v4",

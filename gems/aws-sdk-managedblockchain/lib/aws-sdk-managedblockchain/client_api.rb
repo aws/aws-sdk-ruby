@@ -677,6 +677,7 @@ module Aws::ManagedBlockchain
 
       api.metadata = {
         "apiVersion" => "2018-09-24",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "managedblockchain",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

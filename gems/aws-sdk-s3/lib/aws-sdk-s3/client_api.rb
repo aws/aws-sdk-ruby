@@ -2760,6 +2760,7 @@ module Aws::S3
 
       api.metadata = {
         "apiVersion" => "2006-03-01",
+        "auth" => ["aws.auth#sigv4"],
         "checksumFormat" => "md5",
         "endpointPrefix" => "s3",
         "globalEndpoint" => "s3.amazonaws.com",

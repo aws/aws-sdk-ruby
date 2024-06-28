@@ -647,9 +647,11 @@ module Aws::EMRContainers
 
       api.metadata = {
         "apiVersion" => "2020-10-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "emr-containers",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon EMR Containers",
         "serviceId" => "EMR containers",
         "signatureVersion" => "v4",

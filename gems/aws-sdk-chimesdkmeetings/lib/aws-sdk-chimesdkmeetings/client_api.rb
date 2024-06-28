@@ -416,8 +416,10 @@ module Aws::ChimeSDKMeetings
 
       api.metadata = {
         "apiVersion" => "2021-07-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "meetings-chime",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Chime SDK Meetings",
         "serviceId" => "Chime SDK Meetings",
         "signatureVersion" => "v4",

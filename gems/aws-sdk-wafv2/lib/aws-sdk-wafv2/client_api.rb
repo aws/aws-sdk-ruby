@@ -1708,6 +1708,7 @@ module Aws::WAFV2
 
       api.metadata = {
         "apiVersion" => "2019-07-29",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "wafv2",
         "jsonVersion" => "1.1",
         "protocol" => "json",

@@ -483,6 +483,7 @@ module Aws::EMR
     #             },
     #           ],
     #           custom_ami_id: "XmlStringMaxLen256",
+    #           priority: 1.0,
     #         },
     #       ],
     #       launch_specifications: {
@@ -490,10 +491,10 @@ module Aws::EMR
     #           timeout_duration_minutes: 1, # required
     #           timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #           block_duration_minutes: 1,
-    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified
+    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified, capacity-optimized-prioritized
     #         },
     #         on_demand_specification: {
-    #           allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #           allocation_strategy: "lowest-price", # required, accepts lowest-price, prioritized
     #           capacity_reservation_options: {
     #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #             capacity_reservation_preference: "open", # accepts open, none
@@ -2010,11 +2011,12 @@ module Aws::EMR
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].device #=> String
     #   resp.instance_fleets[0].instance_type_specifications[0].ebs_optimized #=> Boolean
     #   resp.instance_fleets[0].instance_type_specifications[0].custom_ami_id #=> String
+    #   resp.instance_fleets[0].instance_type_specifications[0].priority #=> Float
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_duration_minutes #=> Integer
     #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_action #=> String, one of "SWITCH_TO_ON_DEMAND", "TERMINATE_CLUSTER"
     #   resp.instance_fleets[0].launch_specifications.spot_specification.block_duration_minutes #=> Integer
-    #   resp.instance_fleets[0].launch_specifications.spot_specification.allocation_strategy #=> String, one of "capacity-optimized", "price-capacity-optimized", "lowest-price", "diversified"
-    #   resp.instance_fleets[0].launch_specifications.on_demand_specification.allocation_strategy #=> String, one of "lowest-price"
+    #   resp.instance_fleets[0].launch_specifications.spot_specification.allocation_strategy #=> String, one of "capacity-optimized", "price-capacity-optimized", "lowest-price", "diversified", "capacity-optimized-prioritized"
+    #   resp.instance_fleets[0].launch_specifications.on_demand_specification.allocation_strategy #=> String, one of "lowest-price", "prioritized"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_resource_group_arn #=> String
@@ -3534,6 +3536,7 @@ module Aws::EMR
     #                 },
     #               ],
     #               custom_ami_id: "XmlStringMaxLen256",
+    #               priority: 1.0,
     #             },
     #           ],
     #           launch_specifications: {
@@ -3541,10 +3544,10 @@ module Aws::EMR
     #               timeout_duration_minutes: 1, # required
     #               timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
     #               block_duration_minutes: 1,
-    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified
+    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified, capacity-optimized-prioritized
     #             },
     #             on_demand_specification: {
-    #               allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #               allocation_strategy: "lowest-price", # required, accepts lowest-price, prioritized
     #               capacity_reservation_options: {
     #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #                 capacity_reservation_preference: "open", # accepts open, none
@@ -4172,7 +4175,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

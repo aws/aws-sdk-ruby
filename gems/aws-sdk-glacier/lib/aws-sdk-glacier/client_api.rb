@@ -603,9 +603,11 @@ module Aws::Glacier
 
       api.metadata = {
         "apiVersion" => "2012-06-01",
+        "auth" => ["aws.auth#sigv4"],
         "checksumFormat" => "sha256",
         "endpointPrefix" => "glacier",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Glacier",
         "serviceId" => "Glacier",
         "signatureVersion" => "v4",

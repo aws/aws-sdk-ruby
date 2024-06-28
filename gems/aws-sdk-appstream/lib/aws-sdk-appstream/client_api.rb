@@ -1454,9 +1454,11 @@ module Aws::AppStream
 
       api.metadata = {
         "apiVersion" => "2016-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "appstream2",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon AppStream",
         "serviceId" => "AppStream",
         "signatureVersion" => "v4",

@@ -1365,9 +1365,11 @@ module Aws::AuditManager
 
       api.metadata = {
         "apiVersion" => "2017-07-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "auditmanager",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Audit Manager",
         "serviceId" => "AuditManager",
         "signatureVersion" => "v4",

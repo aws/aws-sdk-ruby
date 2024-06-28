@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2024-06-28)
+------------------
+
+* Feature - Added support for Red Hat Enterprise Linux 8 on Amazon WorkSpaces Personal.
+
 1.107.0 (2024-06-27)
 ------------------
 

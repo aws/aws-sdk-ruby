@@ -143,9 +143,11 @@ module Aws::SagemakerEdgeManager
 
       api.metadata = {
         "apiVersion" => "2020-09-23",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "edge.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Sagemaker Edge Manager",
         "serviceId" => "Sagemaker Edge",
         "signatureVersion" => "v4",

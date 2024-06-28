@@ -1466,6 +1466,7 @@ module Aws::Personalize
 
       api.metadata = {
         "apiVersion" => "2018-05-22",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "personalize",
         "jsonVersion" => "1.1",
         "protocol" => "json",

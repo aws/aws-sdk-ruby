@@ -1944,9 +1944,11 @@ module Aws::ServiceCatalog
 
       api.metadata = {
         "apiVersion" => "2015-12-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "servicecatalog",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Service Catalog",
         "serviceId" => "Service Catalog",
         "signatureVersion" => "v4",

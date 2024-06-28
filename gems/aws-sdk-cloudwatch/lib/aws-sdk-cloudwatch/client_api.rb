@@ -1017,8 +1017,10 @@ module Aws::CloudWatch
 
       api.metadata = {
         "apiVersion" => "2010-08-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "monitoring",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "CloudWatch",
         "serviceFullName" => "Amazon CloudWatch",
         "serviceId" => "CloudWatch",

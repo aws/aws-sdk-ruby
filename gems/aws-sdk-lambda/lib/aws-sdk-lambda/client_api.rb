@@ -1511,8 +1511,10 @@ module Aws::Lambda
 
       api.metadata = {
         "apiVersion" => "2015-03-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "lambda",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Lambda",
         "serviceId" => "Lambda",
         "signatureVersion" => "v4",

@@ -1087,9 +1087,11 @@ module Aws::LookoutEquipment
 
       api.metadata = {
         "apiVersion" => "2020-12-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "lookoutequipment",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "LookoutEquipment",
         "serviceFullName" => "Amazon Lookout for Equipment",
         "serviceId" => "LookoutEquipment",

@@ -1257,9 +1257,11 @@ module Aws::DevOpsGuru
 
       api.metadata = {
         "apiVersion" => "2020-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "devops-guru",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon DevOps Guru",
         "serviceId" => "DevOps Guru",
         "signatureVersion" => "v4",

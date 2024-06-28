@@ -837,6 +837,7 @@ module Aws::Amplify
 
       api.metadata = {
         "apiVersion" => "2017-07-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "amplify",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -884,9 +884,11 @@ module Aws::MarketplaceCatalog
 
       api.metadata = {
         "apiVersion" => "2018-09-17",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "catalog.marketplace",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWS Marketplace Catalog",
         "serviceFullName" => "AWS Marketplace Catalog Service",
         "serviceId" => "Marketplace Catalog",

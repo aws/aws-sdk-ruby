@@ -347,9 +347,11 @@ module Aws::HealthLake
 
       api.metadata = {
         "apiVersion" => "2017-07-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "healthlake",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "HealthLake",
         "serviceFullName" => "Amazon HealthLake",
         "serviceId" => "HealthLake",

@@ -1065,6 +1065,7 @@ module Aws::States
 
       api.metadata = {
         "apiVersion" => "2016-11-23",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "states",
         "jsonVersion" => "1.0",
         "protocol" => "json",

@@ -72,9 +72,11 @@ module Aws::WorkMailMessageFlow
 
       api.metadata = {
         "apiVersion" => "2019-05-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "workmailmessageflow",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon WorkMail Message Flow",
         "serviceId" => "WorkMailMessageFlow",
         "signatureVersion" => "v4",

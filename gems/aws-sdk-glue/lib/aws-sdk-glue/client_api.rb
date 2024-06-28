@@ -361,6 +361,8 @@ module Aws::Glue
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceMap = Shapes::MapShape.new(name: 'DataSourceMap')
     Database = Shapes::StructureShape.new(name: 'Database')
+    DatabaseAttributes = Shapes::StringShape.new(name: 'DatabaseAttributes')
+    DatabaseAttributesList = Shapes::ListShape.new(name: 'DatabaseAttributesList')
     DatabaseIdentifier = Shapes::StructureShape.new(name: 'DatabaseIdentifier')
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
@@ -2667,6 +2669,8 @@ module Aws::Glue
     Database.add_member(:federated_database, Shapes::ShapeRef.new(shape: FederatedDatabase, location_name: "FederatedDatabase"))
     Database.struct_class = Types::Database
 
+    DatabaseAttributesList.member = Shapes::ShapeRef.new(shape: DatabaseAttributes)
+
     DatabaseIdentifier.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DatabaseIdentifier.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     DatabaseIdentifier.add_member(:region, Shapes::ShapeRef.new(shape: NameString, location_name: "Region"))
@@ -3360,6 +3364,7 @@ module Aws::Glue
     GetDatabasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetDatabasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetDatabasesRequest.add_member(:resource_share_type, Shapes::ShapeRef.new(shape: ResourceShareType, location_name: "ResourceShareType"))
+    GetDatabasesRequest.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: DatabaseAttributesList, location_name: "AttributesToGet"))
     GetDatabasesRequest.struct_class = Types::GetDatabasesRequest
 
     GetDatabasesResponse.add_member(:database_list, Shapes::ShapeRef.new(shape: DatabaseList, required: true, location_name: "DatabaseList"))

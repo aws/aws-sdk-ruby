@@ -4585,6 +4585,8 @@ module Aws::Connect
     #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.name #=> String
     #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.value #=> String
     #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.proficiency_level #=> Float
+    #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.match_criteria.agents_criteria.agent_ids #=> Array
+    #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.match_criteria.agents_criteria.agent_ids[0] #=> String
     #   resp.contact.routing_criteria.steps[0].expression.attribute_condition.comparison_operator #=> String
     #   resp.contact.routing_criteria.steps[0].expression.and_expression #=> Array
     #   resp.contact.routing_criteria.steps[0].expression.and_expression[0] #=> Types::Expression
@@ -7913,49 +7915,6 @@ module Aws::Connect
     #
     #     UI name: [Cases created][37]
     #
-    #   CONTACTS\_ABANDONED
-    #
-    #   : Unit: Count
-    #
-    #     Metric filter:
-    #
-    #     * Valid values: `API`\| `Incoming` \| `Outbound` \| `Transfer` \|
-    #       `Callback` \| `Queue_Transfer`\| `Disconnect`
-    #
-    #     ^
-    #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
-    #     RoutingStepExpression, Q in Connect
-    #
-    #     UI name: [Contact abandoned][38]
-    #
-    #   CONTACTS\_ABANDONED\_IN\_X
-    #
-    #   : Unit: Count
-    #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     contact/segmentAttributes/connect:Subtype, Q in Connect
-    #
-    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
-    #
-    #     UI name: [Contacts abandoned in X seconds][39]
-    #
-    #   CONTACTS\_ANSWERED\_IN\_X
-    #
-    #   : Unit: Count
-    #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     contact/segmentAttributes/connect:Subtype, Q in Connect
-    #
-    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
-    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
-    #     `LT` (for "Less than").
-    #
-    #     UI name: [Contacts answered in X seconds][40]
-    #
     #   CONTACTS\_CREATED
     #
     #   : Unit: Count
@@ -7965,7 +7924,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts created][41]
+    #     UI name: [Contacts created][38]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7981,7 +7940,7 @@ module Aws::Connect
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression, Q in Connect
     #
-    #     UI name: [API contacts handled][42]
+    #     UI name: [API contacts handled][39]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7996,7 +7955,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts handled (connected to agent timestamp)][43]
+    #     UI name: [Contacts handled (connected to agent timestamp)][40]
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -8006,7 +7965,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts hold disconnect][43]
+    #     UI name: [Contacts hold disconnect][40]
     #
     #   CONTACTS\_ON\_HOLD\_AGENT\_DISCONNECT
     #
@@ -8015,7 +7974,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts hold agent disconnect][44]
+    #     UI name: [Contacts hold agent disconnect][41]
     #
     #   CONTACTS\_ON\_HOLD\_CUSTOMER\_DISCONNECT
     #
@@ -8024,7 +7983,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts hold customer disconnect][45]
+    #     UI name: [Contacts hold customer disconnect][42]
     #
     #   CONTACTS\_PUT\_ON\_HOLD
     #
@@ -8033,7 +7992,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts put on hold][45]
+    #     UI name: [Contacts put on hold][42]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_EXTERNAL
     #
@@ -8042,7 +8001,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts transferred out external][46]
+    #     UI name: [Contacts transferred out external][43]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_INTERNAL
     #
@@ -8051,7 +8010,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts transferred out internal][47]
+    #     UI name: [Contacts transferred out internal][44]
     #
     #   CONTACTS\_QUEUED
     #
@@ -8061,7 +8020,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts queued][48]
+    #     UI name: [Contacts queued][45]
     #
     #   CONTACTS\_QUEUED\_BY\_ENQUEUE
     #
@@ -8070,7 +8029,21 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Contacts queued (enqueue timestamp)][49]
+    #     UI name: [Contacts queued (enqueue timestamp)][46]
+    #
+    #   CONTACTS\_REMOVED\_FROM\_QUEUE\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Q in
+    #     Connect
+    #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
+    #
+    #     UI name: This metric is not available in Amazon Connect admin
+    #     website.
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -8083,7 +8056,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
-    #     UI name: [Contacts resolved in X][50]
+    #     UI name: [Contacts resolved in X][47]
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
@@ -8093,7 +8066,7 @@ module Aws::Connect
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts transferred out][51]
+    #     UI name: [Contacts transferred out][48]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -8107,7 +8080,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts transferred out by agent][52]
+    #     UI name: [Contacts transferred out by agent][49]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
     #
@@ -8117,7 +8090,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts transferred out queue][52]
+    #     UI name: [Contacts transferred out queue][49]
     #
     #   CURRENT\_CASES
     #
@@ -8127,7 +8100,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Current cases][53]
+    #     UI name: [Current cases][50]
     #
     #   FLOWS\_OUTCOME
     #
@@ -8139,7 +8112,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome][54]
+    #     UI name: [Flows outcome][51]
     #
     #   FLOWS\_STARTED
     #
@@ -8150,7 +8123,7 @@ module Aws::Connect
     #     resource ID, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows started][55]
+    #     UI name: [Flows started][52]
     #
     #   MAX\_FLOW\_TIME
     #
@@ -8162,7 +8135,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Maximum flow time][56]
+    #     UI name: [Maximum flow time][53]
     #
     #   MAX\_QUEUED\_TIME
     #
@@ -8172,7 +8145,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Maximum queued time][57]
+    #     UI name: [Maximum queued time][54]
     #
     #   MIN\_FLOW\_TIME
     #
@@ -8184,7 +8157,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Minimum flow time][58]
+    #     UI name: [Minimum flow time][55]
     #
     #   PERCENT\_CASES\_FIRST\_CONTACT\_RESOLVED
     #
@@ -8194,7 +8167,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved on first contact][59]
+    #     UI name: [Cases resolved on first contact][56]
     #
     #   PERCENT\_CONTACTS\_STEP\_EXPIRED
     #
@@ -8202,7 +8175,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, RoutingStepExpression
     #
-    #     UI name: Not available
+    #     UI name: This metric is available in Real-time Metrics UI but not on
+    #     the Historical Metrics UI.
     #
     #   PERCENT\_CONTACTS\_STEP\_JOINED
     #
@@ -8210,7 +8184,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, RoutingStepExpression
     #
-    #     UI name: Not available
+    #     UI name: This metric is available in Real-time Metrics UI but not on
+    #     the Historical Metrics UI.
     #
     #   PERCENT\_FLOWS\_OUTCOME
     #
@@ -8224,7 +8199,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome percentage][60].
+    #     UI name: [Flows outcome percentage][57].
     #
     #     <note markdown="1"> The `FLOWS_OUTCOME_TYPE` is not a valid grouping.
     #
@@ -8241,7 +8216,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Non-talk time percent][61]
+    #     UI name: [Non-talk time percent][58]
     #
     #   PERCENT\_TALK\_TIME
     #
@@ -8254,7 +8229,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Talk time percent][62]
+    #     UI name: [Talk time percent][59]
     #
     #   PERCENT\_TALK\_TIME\_AGENT
     #
@@ -8267,7 +8242,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Agent talk time percent][63]
+    #     UI name: [Agent talk time percent][60]
     #
     #   PERCENT\_TALK\_TIME\_CUSTOMER
     #
@@ -8280,7 +8255,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Customer talk time percent][64]
+    #     UI name: [Customer talk time percent][61]
     #
     #   REOPENED\_CASE\_ACTIONS
     #
@@ -8290,7 +8265,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases reopened][65]
+    #     UI name: [Cases reopened][62]
     #
     #   RESOLVED\_CASE\_ACTIONS
     #
@@ -8300,7 +8275,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved][66]
+    #     UI name: [Cases resolved][63]
     #
     #   SERVICE\_LEVEL
     #
@@ -8315,7 +8290,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
-    #     UI name: [Service level X][67]
+    #     UI name: [Service level X][64]
     #
     #   STEP\_CONTACTS\_QUEUED
     #
@@ -8323,7 +8298,8 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, RoutingStepExpression
     #
-    #     UI name: Not available
+    #     UI name: This metric is available in Real-time Metrics UI but not on
+    #     the Historical Metrics UI.
     #
     #   SUM\_AFTER\_CONTACT\_WORK\_TIME
     #
@@ -8332,7 +8308,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [After contact work time][68]
+    #     UI name: [After contact work time][65]
     #
     #   SUM\_CONNECTING\_TIME\_AGENT
     #
@@ -8345,12 +8321,55 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
-    #     UI name: [Agent API connecting time][69]
+    #     UI name: [Agent API connecting time][66]
     #
     #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
     #     metric.
     #
     #      </note>
+    #
+    #   SUM\_CONTACTS\_ABANDONED
+    #
+    #   : Unit: Count
+    #
+    #     Metric filter:
+    #
+    #     * Valid values: `API`\| `Incoming` \| `Outbound` \| `Transfer` \|
+    #       `Callback` \| `Queue_Transfer`\| `Disconnect`
+    #
+    #     ^
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression, Q in Connect
+    #
+    #     UI name: [Contact abandoned][67]
+    #
+    #   SUM\_CONTACTS\_ABANDONED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
+    #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
+    #
+    #     UI name: [Contacts abandoned in X seconds][68]
+    #
+    #   SUM\_CONTACTS\_ANSWERED\_IN\_X
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype, Q in Connect
+    #
+    #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
+    #     604800 (inclusive), in seconds. For `Comparison`, you must enter
+    #     `LT` (for "Less than").
+    #
+    #     UI name: [Contacts answered in X seconds][69]
     #
     #   SUM\_CONTACT\_FLOW\_TIME
     #
@@ -8365,8 +8384,7 @@ module Aws::Connect
     #
     #   : Unit: Seconds
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
     #     UI name: [Agent on contact time][71]
     #
@@ -8386,8 +8404,7 @@ module Aws::Connect
     #
     #   : Unit: Seconds
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
     #     UI name: [Error status time][73]
     #
@@ -8499,38 +8516,38 @@ module Aws::Connect
     #   [35]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical
     #   [36]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical
     #   [37]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##cases-created-historical
-    #   [38]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
-    #   [39]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
-    #   [40]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
-    #   [41]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-created-historical
-    #   [42]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#api-contacts-handled-historical
-    #   [43]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
-    #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical
-    #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
-    #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-external-historical
-    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
-    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical
-    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical
-    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
-    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
-    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
-    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
-    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
-    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-started-historical
-    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-flow-time-historical
-    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
-    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#minimum-flow-time-historical
-    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
-    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
-    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
-    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical
-    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
-    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical
-    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
-    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historicall
-    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
-    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
-    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time
+    #   [38]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-created-historical
+    #   [39]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#api-contacts-handled-historical
+    #   [40]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
+    #   [41]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical
+    #   [42]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
+    #   [43]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-external-historical
+    #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
+    #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical
+    #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical
+    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
+    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
+    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
+    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
+    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
+    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-started-historical
+    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-flow-time-historical
+    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
+    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#minimum-flow-time-historical
+    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
+    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
+    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
+    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical
+    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
+    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical
+    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
+    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historical
+    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
+    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
+    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time
+    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
+    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
+    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
     #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical
     #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical
     #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
@@ -8799,6 +8816,32 @@ module Aws::Connect
     # Amazon Pinpoint, into an Amazon Connect instance. You can call this
     # API only in the same Amazon Web Services Region where the Amazon
     # Connect instance was created.
+    #
+    # Call the [DescribePhoneNumber][1] API to verify the status of a
+    # previous `ImportPhoneNumber` operation.
+    #
+    # If you plan to claim or import numbers and then release numbers
+    # frequently, contact us for a service quota exception. Otherwise, it is
+    # possible you will be blocked from claiming and releasing any more
+    # numbers until up to 180 days past the oldest number released has
+    # expired.
+    #
+    # By default you can claim or import and then release up to 200% of your
+    # maximum number of active phone numbers. If you claim or import and
+    # then release phone numbers using the UI or API during a rolling 180
+    # day cycle that exceeds 200% of your phone number service level quota,
+    # you will be blocked from claiming or importing any more numbers until
+    # 180 days past the oldest number released has expired.
+    #
+    # For example, if you already have 99 claimed or imported numbers and a
+    # service level quota of 99 phone numbers, and in any 180 day period you
+    # release 99, claim 99, and then release 99, you will have exceeded the
+    # 200% limit. At that point you are blocked from claiming any more
+    # numbers until you open an Amazon Web Services Support ticket.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -13569,14 +13612,20 @@ module Aws::Connect
     # chat durations. For more information, contact Amazon Web Services
     # Support.
     #
-    # For more information about chat, see [Chat][3] in the *Amazon Connect
-    # Administrator Guide*.
+    # For more information about chat, see the following topics in the
+    # *Amazon Connect Administrator Guide*:
+    #
+    # * [Concepts: Web and mobile messaging capabilities in Amazon
+    #   Connect][3]
+    #
+    # * [Amazon Connect Chat security best practices][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
-    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/chat.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -13878,9 +13927,19 @@ module Aws::Connect
     # chat message streaming][1] in the *Amazon Connect Administrator
     # Guide*.
     #
+    # For more information about chat, see the following topics in the
+    # *Amazon Connect Administrator Guide*:
+    #
+    # * [Concepts: Web and mobile messaging capabilities in Amazon
+    #   Connect][2]
+    #
+    # * [Amazon Connect Chat security best practices][3]
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -17493,7 +17552,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

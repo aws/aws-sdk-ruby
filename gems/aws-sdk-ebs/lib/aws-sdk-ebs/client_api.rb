@@ -215,9 +215,11 @@ module Aws::EBS
 
       api.metadata = {
         "apiVersion" => "2019-11-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ebs",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon EBS",
         "serviceFullName" => "Amazon Elastic Block Store",
         "serviceId" => "EBS",

@@ -1160,6 +1160,7 @@ module Aws::LakeFormation
 
       api.metadata = {
         "apiVersion" => "2017-03-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "lakeformation",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

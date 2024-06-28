@@ -338,6 +338,11 @@ module Aws::PI
     #     `GroupBy` or `Partition` parameters.
     #
     #   * A single filter for any other dimension in this dimension group.
+    #
+    #   <note markdown="1"> The `db.sql.db_id` filter isn't available for RDS for SQL Server DB
+    #   instances.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] max_results
@@ -1529,6 +1534,11 @@ module Aws::PI
     #     `GroupBy` parameter.
     #
     #   * A single filter for any other dimension in this dimension group.
+    #
+    #   <note markdown="1"> The `db.sql.db_id` filter isn't available for RDS for SQL Server DB
+    #   instances.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/MetricQuery AWS API Documentation

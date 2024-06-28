@@ -490,9 +490,11 @@ module Aws::CodeGuruReviewer
 
       api.metadata = {
         "apiVersion" => "2019-09-19",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codeguru-reviewer",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "CodeGuruReviewer",
         "serviceFullName" => "Amazon CodeGuru Reviewer",
         "serviceId" => "CodeGuru Reviewer",

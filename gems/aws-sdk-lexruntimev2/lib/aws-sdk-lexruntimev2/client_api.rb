@@ -458,10 +458,12 @@ module Aws::LexRuntimeV2
 
       api.metadata = {
         "apiVersion" => "2020-08-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "runtime-v2-lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocolSettings" => {"h2"=>"eventstream"},
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Lex Runtime V2",
         "serviceFullName" => "Amazon Lex Runtime V2",
         "serviceId" => "Lex Runtime V2",

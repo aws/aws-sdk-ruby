@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-06-28)
+------------------
+
+* Feature - Support for Flink 1.19 in Managed Service for Apache Flink
+
 1.60.0 (2024-06-26)
 ------------------
 

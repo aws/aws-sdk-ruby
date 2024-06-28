@@ -249,9 +249,11 @@ module Aws::RecycleBin
 
       api.metadata = {
         "apiVersion" => "2021-06-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rbin",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Recycle Bin",
         "serviceId" => "rbin",
         "signatureVersion" => "v4",

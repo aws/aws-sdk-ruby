@@ -101,9 +101,11 @@ module Aws::EC2InstanceConnect
 
       api.metadata = {
         "apiVersion" => "2018-04-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ec2-instance-connect",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "EC2 Instance Connect",
         "serviceFullName" => "AWS EC2 Instance Connect",
         "serviceId" => "EC2 Instance Connect",

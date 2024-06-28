@@ -578,9 +578,11 @@ module Aws::Detective
 
       api.metadata = {
         "apiVersion" => "2018-10-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.detective",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Detective",
         "serviceId" => "Detective",
         "signatureVersion" => "v4",

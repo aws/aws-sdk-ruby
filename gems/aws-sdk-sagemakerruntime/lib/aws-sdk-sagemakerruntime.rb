@@ -53,6 +53,6 @@ require_relative 'aws-sdk-sagemakerruntime/event_streams'
 # @!group service
 module Aws::SageMakerRuntime
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end

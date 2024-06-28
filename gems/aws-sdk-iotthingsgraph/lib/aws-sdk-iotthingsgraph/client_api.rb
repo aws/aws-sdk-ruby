@@ -618,9 +618,11 @@ module Aws::IoTThingsGraph
 
       api.metadata = {
         "apiVersion" => "2018-09-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "iotthingsgraph",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS IoT Things Graph",
         "serviceId" => "IoTThingsGraph",
         "signatureVersion" => "v4",

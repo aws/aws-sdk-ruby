@@ -82,6 +82,7 @@ module Aws::MarketplaceEntitlementService
 
       api.metadata = {
         "apiVersion" => "2017-01-11",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "entitlement.marketplace",
         "jsonVersion" => "1.1",
         "protocol" => "json",

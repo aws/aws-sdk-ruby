@@ -523,6 +523,7 @@ module Aws::Chatbot
 
       api.metadata = {
         "apiVersion" => "2017-10-11",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "chatbot",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -935,6 +935,7 @@ module Aws::EMR
     InstanceTypeConfig.add_member(:ebs_configuration, Shapes::ShapeRef.new(shape: EbsConfiguration, location_name: "EbsConfiguration"))
     InstanceTypeConfig.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
     InstanceTypeConfig.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
+    InstanceTypeConfig.add_member(:priority, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "Priority"))
     InstanceTypeConfig.struct_class = Types::InstanceTypeConfig
 
     InstanceTypeConfigList.member = Shapes::ShapeRef.new(shape: InstanceTypeConfig)
@@ -947,6 +948,7 @@ module Aws::EMR
     InstanceTypeSpecification.add_member(:ebs_block_devices, Shapes::ShapeRef.new(shape: EbsBlockDeviceList, location_name: "EbsBlockDevices"))
     InstanceTypeSpecification.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EbsOptimized"))
     InstanceTypeSpecification.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
+    InstanceTypeSpecification.add_member(:priority, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "Priority"))
     InstanceTypeSpecification.struct_class = Types::InstanceTypeSpecification
 
     InstanceTypeSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceTypeSpecification)
@@ -1618,9 +1620,11 @@ module Aws::EMR
 
       api.metadata = {
         "apiVersion" => "2009-03-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "elasticmapreduce",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon EMR",
         "serviceFullName" => "Amazon EMR",
         "serviceId" => "EMR",

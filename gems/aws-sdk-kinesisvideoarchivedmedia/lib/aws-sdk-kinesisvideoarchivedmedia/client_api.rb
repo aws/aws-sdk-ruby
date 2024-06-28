@@ -251,8 +251,10 @@ module Aws::KinesisVideoArchivedMedia
 
       api.metadata = {
         "apiVersion" => "2017-09-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kinesisvideo",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Kinesis Video Archived Media",
         "serviceFullName" => "Amazon Kinesis Video Streams Archived Media",
         "serviceId" => "Kinesis Video Archived Media",

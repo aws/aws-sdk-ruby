@@ -1210,8 +1210,10 @@ module Aws::ElasticBeanstalk
 
       api.metadata = {
         "apiVersion" => "2010-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "elasticbeanstalk",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Elastic Beanstalk",
         "serviceFullName" => "AWS Elastic Beanstalk",
         "serviceId" => "Elastic Beanstalk",

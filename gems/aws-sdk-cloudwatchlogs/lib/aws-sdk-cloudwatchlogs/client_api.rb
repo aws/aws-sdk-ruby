@@ -1291,9 +1291,11 @@ module Aws::CloudWatchLogs
 
       api.metadata = {
         "apiVersion" => "2014-03-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "logs",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon CloudWatch Logs",
         "serviceId" => "CloudWatch Logs",
         "signatureVersion" => "v4",

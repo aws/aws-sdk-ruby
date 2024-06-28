@@ -665,9 +665,11 @@ module Aws::KinesisAnalytics
 
       api.metadata = {
         "apiVersion" => "2015-08-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kinesisanalytics",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Kinesis Analytics",
         "serviceFullName" => "Amazon Kinesis Analytics",
         "serviceId" => "Kinesis Analytics",

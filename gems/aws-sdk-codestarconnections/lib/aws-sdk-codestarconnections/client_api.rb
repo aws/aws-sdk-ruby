@@ -574,9 +574,11 @@ module Aws::CodeStarconnections
 
       api.metadata = {
         "apiVersion" => "2019-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codestar-connections",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS CodeStar connections",
         "serviceId" => "CodeStar connections",
         "signatureVersion" => "v4",

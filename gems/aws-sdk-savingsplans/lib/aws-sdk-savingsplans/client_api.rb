@@ -391,10 +391,12 @@ module Aws::SavingsPlans
 
       api.metadata = {
         "apiVersion" => "2019-06-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "savingsplans",
         "globalEndpoint" => "savingsplans.amazonaws.com",
         "jsonVersion" => "1.0",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWSSavingsPlans",
         "serviceFullName" => "AWS Savings Plans",
         "serviceId" => "savingsplans",

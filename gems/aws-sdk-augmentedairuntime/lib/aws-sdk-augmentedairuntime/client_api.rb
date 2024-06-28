@@ -138,8 +138,10 @@ module Aws::AugmentedAIRuntime
 
       api.metadata = {
         "apiVersion" => "2019-11-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "a2i-runtime.sagemaker",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Augmented AI Runtime",
         "serviceId" => "SageMaker A2I Runtime",
         "signatureVersion" => "v4",

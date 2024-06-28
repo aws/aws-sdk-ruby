@@ -151,9 +151,11 @@ module Aws::SageMakerRuntime
 
       api.metadata = {
         "apiVersion" => "2017-05-13",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "runtime.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon SageMaker Runtime",
         "serviceId" => "SageMaker Runtime",
         "signatureVersion" => "v4",

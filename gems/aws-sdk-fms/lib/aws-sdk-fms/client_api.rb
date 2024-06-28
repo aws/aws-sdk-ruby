@@ -1312,6 +1312,7 @@ module Aws::FMS
 
       api.metadata = {
         "apiVersion" => "2018-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "fms",
         "jsonVersion" => "1.1",
         "protocol" => "json",

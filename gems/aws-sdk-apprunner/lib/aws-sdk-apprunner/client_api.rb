@@ -785,9 +785,11 @@ module Aws::AppRunner
 
       api.metadata = {
         "apiVersion" => "2020-05-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "apprunner",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS App Runner",
         "serviceId" => "AppRunner",
         "signatureVersion" => "v4",

@@ -741,7 +741,7 @@ module Aws::MediaStoreData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastoredata'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

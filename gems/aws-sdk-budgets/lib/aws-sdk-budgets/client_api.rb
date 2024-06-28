@@ -607,6 +607,7 @@ module Aws::Budgets
 
       api.metadata = {
         "apiVersion" => "2016-10-20",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "budgets",
         "jsonVersion" => "1.1",
         "protocol" => "json",

@@ -1362,8 +1362,10 @@ module Aws::ChimeSDKVoice
 
       api.metadata = {
         "apiVersion" => "2022-08-03",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "voice-chime",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Chime SDK Voice",
         "serviceId" => "Chime SDK Voice",
         "signatureVersion" => "v4",

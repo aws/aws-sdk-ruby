@@ -1244,6 +1244,7 @@ module Aws::AppSync
 
       api.metadata = {
         "apiVersion" => "2017-07-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "appsync",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

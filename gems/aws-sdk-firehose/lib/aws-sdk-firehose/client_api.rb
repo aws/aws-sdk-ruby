@@ -1081,6 +1081,7 @@ module Aws::Firehose
 
       api.metadata = {
         "apiVersion" => "2015-08-04",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "firehose",
         "jsonVersion" => "1.1",
         "protocol" => "json",

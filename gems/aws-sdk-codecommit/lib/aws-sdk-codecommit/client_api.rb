@@ -2130,9 +2130,11 @@ module Aws::CodeCommit
 
       api.metadata = {
         "apiVersion" => "2015-04-13",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codecommit",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "CodeCommit",
         "serviceFullName" => "AWS CodeCommit",
         "serviceId" => "CodeCommit",

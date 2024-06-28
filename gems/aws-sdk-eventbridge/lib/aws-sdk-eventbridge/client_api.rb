@@ -1398,6 +1398,7 @@ module Aws::EventBridge
 
       api.metadata = {
         "apiVersion" => "2015-10-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "events",
         "jsonVersion" => "1.1",
         "protocol" => "json",

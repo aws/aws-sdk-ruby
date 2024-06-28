@@ -207,6 +207,7 @@ module Aws::SSOOIDC
 
       api.metadata = {
         "apiVersion" => "2019-06-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "oidc",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

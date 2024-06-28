@@ -1197,6 +1197,7 @@ module Aws::ElasticLoadBalancingV2
 
       api.metadata = {
         "apiVersion" => "2015-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "elasticloadbalancing",
         "protocol" => "query",
         "protocols" => ["query"],

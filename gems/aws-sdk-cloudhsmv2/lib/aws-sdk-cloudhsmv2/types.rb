@@ -10,8 +10,8 @@
 module Aws::CloudHSMV2
   module Types
 
-    # Contains information about a backup of an AWS CloudHSM cluster. All
-    # backup objects contain the `BackupId`, `BackupState`, `ClusterId`, and
+    # Contains information about a backup of an CloudHSM cluster. All backup
+    # objects contain the `BackupId`, `BackupState`, `ClusterId`, and
     # `CreateTimestamp` parameters. Backups that were copied into a
     # destination region additionally contain the `CopyTimestamp`,
     # `SourceBackup`, `SourceCluster`, and `SourceRegion` parameters. A
@@ -20,6 +20,10 @@ module Aws::CloudHSMV2
     #
     # @!attribute [rw] backup_id
     #   The identifier (ID) of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_arn
+    #   The Amazon Resource Name (ARN) of the backup.
     #   @return [String]
     #
     # @!attribute [rw] backup_state
@@ -69,7 +73,7 @@ module Aws::CloudHSMV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] hsm_type
-    #   The HSM type of the cluster that was backed up.
+    #   The HSM type used to create the backup.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -80,6 +84,7 @@ module Aws::CloudHSMV2
     #
     class Backup < Struct.new(
       :backup_id,
+      :backup_arn,
       :backup_state,
       :cluster_id,
       :create_timestamp,
@@ -129,7 +134,7 @@ module Aws::CloudHSMV2
     #   @return [String]
     #
     # @!attribute [rw] aws_hardware_certificate
-    #   The HSM hardware certificate issued (signed) by AWS CloudHSM.
+    #   The HSM hardware certificate issued (signed) by CloudHSM.
     #   @return [String]
     #
     # @!attribute [rw] manufacturer_hardware_certificate
@@ -168,8 +173,8 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # The request was rejected because of an AWS CloudHSM internal failure.
-    # The request can be retried.
+    # The request was rejected because of an CloudHSM internal failure. The
+    # request can be retried.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -236,7 +241,7 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # Contains information about an AWS CloudHSM cluster.
+    # Contains information about an CloudHSM cluster.
     #
     # @!attribute [rw] backup_policy
     #   The cluster's backup policy.
@@ -385,9 +390,11 @@ module Aws::CloudHSMV2
     #   @return [String]
     #
     # @!attribute [rw] source_backup_id
-    #   The identifier (ID) of the cluster backup to restore. Use this value
-    #   to restore the cluster from a backup instead of creating a new
-    #   cluster. To find the backup ID, use DescribeBackups.
+    #   The identifier (ID) or the Amazon Resource Name (ARN) of the cluster
+    #   backup to restore. Use this value to restore the cluster from a
+    #   backup instead of creating a new cluster. To find the backup ID or
+    #   ARN, use DescribeBackups. *If using a backup in another account, the
+    #   full ARN must be supplied.*
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -565,6 +572,37 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource from which the policy
+    #   will be removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource from which the policy was
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy previously attached to the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The `NextToken` value that you received in the previous response.
     #   Use this value to get more backups.
@@ -599,6 +637,26 @@ module Aws::CloudHSMV2
     #   with a backup retention policy defined at the cluster.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] shared
+    #   Describe backups that are shared with you.
+    #
+    #   <note markdown="1"> By default when using this option, the command returns backups that
+    #   have been shared using a standard Resource Access Manager resource
+    #   share. In order for a backup that was shared using the
+    #   PutResourcePolicy command to be returned, the share must be promoted
+    #   to a standard resource share using the RAM
+    #   [PromoteResourceShareCreatedFromPolicy][1] API operation. For more
+    #   information about sharing backups, see [ Working with shared
+    #   backups][2] in the CloudHSM User Guide.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/ram/promote-resource-share-created-from-policy.html
+    #   [2]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/sharing.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] sort_ascending
     #   Designates whether or not to sort the return backups by ascending
     #   chronological order of generation.
@@ -610,6 +668,7 @@ module Aws::CloudHSMV2
       :next_token,
       :max_results,
       :filters,
+      :shared,
       :sort_ascending)
       SENSITIVE = []
       include Aws::Structure
@@ -721,7 +780,32 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
-    # Contains information about a hardware security module (HSM) in an AWS
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which a policy is
+    #   attached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The policy attached to a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a hardware security module (HSM) in an
     # CloudHSM cluster.
     #
     # @!attribute [rw] availability_zone
@@ -885,7 +969,7 @@ module Aws::CloudHSMV2
     end
 
     # @!attribute [rw] backup
-    #   Contains information about a backup of an AWS CloudHSM cluster. All
+    #   Contains information about a backup of an CloudHSM cluster. All
     #   backup objects contain the `BackupId`, `BackupState`, `ClusterId`,
     #   and `CreateTimestamp` parameters. Backups that were copied into a
     #   destination region additionally contain the `CopyTimestamp`,
@@ -921,13 +1005,56 @@ module Aws::CloudHSMV2
     end
 
     # @!attribute [rw] cluster
-    #   Contains information about an AWS CloudHSM cluster.
+    #   Contains information about an CloudHSM cluster.
     #   @return [Types::Cluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyClusterResponse AWS API Documentation
     #
     class ModifyClusterResponse < Struct.new(
       :cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which you want to
+    #   attach a policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy you want to associate with a resource.
+    #
+    #   For an example policy, see [ Working with shared backups][1] in the
+    #   CloudHSM User Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which a policy is
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy attached to a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :resource_arn,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end

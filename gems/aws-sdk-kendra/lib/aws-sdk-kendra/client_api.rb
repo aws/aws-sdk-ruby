@@ -2478,9 +2478,11 @@ module Aws::Kendra
 
       api.metadata = {
         "apiVersion" => "2019-02-03",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kendra",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "kendra",
         "serviceFullName" => "AWSKendraFrontendService",
         "serviceId" => "kendra",

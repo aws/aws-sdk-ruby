@@ -1227,7 +1227,7 @@ module Aws::WorkSpaces
     #           user_volume_size_gib: 1,
     #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #           protocols: ["PCOIP"], # accepts PCOIP, WSP
-    #           operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
+    #           operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, RHEL_8
     #         },
     #         tags: [
     #           {
@@ -1256,7 +1256,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols #=> Array
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
-    #   resp.failed_requests[0].workspace_request.workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8"
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -1285,7 +1285,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.pending_requests[0].workspace_properties.protocols #=> Array
     #   resp.pending_requests[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
-    #   resp.pending_requests[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
+    #   resp.pending_requests[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8"
     #   resp.pending_requests[0].modification_states #=> Array
     #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -1313,28 +1313,28 @@ module Aws::WorkSpaces
     # Creates a pool of WorkSpaces.
     #
     # @option params [required, String] :pool_name
-    #   The name of the WorkSpaces pool.
+    #   The name of the pool.
     #
     # @option params [required, String] :description
-    #   The WorkSpaces pool description.
+    #   The pool description.
     #
     # @option params [required, String] :bundle_id
-    #   The identifier of the bundle for the WorkSpaces pool.
+    #   The identifier of the bundle for the pool.
     #
     # @option params [required, String] :directory_id
-    #   The identifier of the directory for the WorkSpaces pool.
+    #   The identifier of the directory for the pool.
     #
     # @option params [required, Types::Capacity] :capacity
-    #   The user capacity of the WorkSpaces pool.
+    #   The user capacity of the pool.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags for the WorkSpaces pool.
+    #   The tags for the pool.
     #
     # @option params [Types::ApplicationSettingsRequest] :application_settings
-    #   Indicates the application settings of the WorkSpaces pool.
+    #   Indicates the application settings of the pool.
     #
     # @option params [Types::TimeoutSettings] :timeout_settings
-    #   Indicates the timeout settings of the WorkSpaces pool.
+    #   Indicates the timeout settings of the pool.
     #
     # @return [Types::CreateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1888,7 +1888,7 @@ module Aws::WorkSpaces
     #     application_ids: ["WorkSpaceApplicationId"],
     #     compute_type_names: ["VALUE"], # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #     license_type: "LICENSED", # accepts LICENSED, UNLICENSED
-    #     operating_system_names: ["AMAZON_LINUX_2"], # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
+    #     operating_system_names: ["AMAZON_LINUX_2"], # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, RHEL_8
     #     owner: "WorkSpaceApplicationOwner",
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -1907,7 +1907,7 @@ module Aws::WorkSpaces
     #   resp.applications[0].supported_compute_type_names #=> Array
     #   resp.applications[0].supported_compute_type_names[0] #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.applications[0].supported_operating_system_names #=> Array
-    #   resp.applications[0].supported_operating_system_names[0] #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
+    #   resp.applications[0].supported_operating_system_names[0] #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplications AWS API Documentation
@@ -2763,7 +2763,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.workspaces[0].workspace_properties.protocols #=> Array
     #   resp.workspaces[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
-    #   resp.workspaces[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022"
+    #   resp.workspaces[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "RHEL_8"
     #   resp.workspaces[0].modification_states #=> Array
     #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -2830,10 +2830,10 @@ module Aws::WorkSpaces
     end
 
     # Retrieves a list that describes the streaming sessions for a specified
-    # WorkSpaces pool.
+    # pool.
     #
     # @option params [required, String] :pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #
     # @option params [String] :user_id
     #   The identifier of the user.
@@ -2883,13 +2883,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the specified WorkSpaces pool.
+    # Describes the specified WorkSpaces Pools.
     #
     # @option params [Array<String>] :pool_ids
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the WorkSpaces Pools.
     #
     # @option params [Array<Types::DescribeWorkspacesPoolsFilter>] :filters
-    #   The filter conditions for the WorkSpaces pool to return.
+    #   The filter conditions for the WorkSpaces Pool to return.
     #
     # @option params [Integer] :limit
     #   The maximum number of items to return.
@@ -3833,7 +3833,7 @@ module Aws::WorkSpaces
     #       user_volume_size_gib: 1,
     #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #       protocols: ["PCOIP"], # accepts PCOIP, WSP
-    #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
+    #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, RHEL_8
     #     },
     #     data_replication: "NO_REPLICATION", # accepts NO_REPLICATION, PRIMARY_AS_SOURCE
     #   })
@@ -4216,13 +4216,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Starts the specified WorkSpaces pool.
+    # Starts the specified pool.
     #
-    # You cannot start a WorkSpace pool unless it has a running mode of
-    # `AutoStop` and a state of `STOPPED`.
+    # You cannot start a pool unless it has a running mode of `AutoStop` and
+    # a state of `STOPPED`.
     #
     # @option params [required, String] :pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4279,14 +4279,14 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Stops the specifiedWorkSpaces pool.
+    # Stops the specified pool.
     #
     # You cannot stop a WorkSpace pool unless it has a running mode of
     # `AutoStop` and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or
     # `ERROR`.
     #
     # @option params [required, String] :pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4374,10 +4374,10 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Terminates the specified WorkSpaces pool.
+    # Terminates the specified pool.
     #
     # @option params [required, String] :pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4396,10 +4396,10 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Terminates the WorkSpaces pool session.
+    # Terminates the pool session.
     #
     # @option params [required, String] :session_id
-    #   The identifier of the WorkSpaces pool session.
+    #   The identifier of the pool session.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4643,13 +4643,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Updates the specified WorkSpaces pool.
+    # Updates the specified pool.
     #
     # @option params [required, String] :pool_id
-    #   The identifier of the specified WorkSpaces pool to update.
+    #   The identifier of the specified pool to update.
     #
     # @option params [String] :description
-    #   Describes the specified WorkSpaces pool to update.
+    #   Describes the specified pool to update.
     #
     # @option params [String] :bundle_id
     #   The identifier of the bundle.
@@ -4658,13 +4658,13 @@ module Aws::WorkSpaces
     #   The identifier of the directory.
     #
     # @option params [Types::Capacity] :capacity
-    #   The desired capacity for the WorkSpaces pool.
+    #   The desired capacity for the pool.
     #
     # @option params [Types::ApplicationSettingsRequest] :application_settings
     #   The persistent application settings for users in the pool.
     #
     # @option params [Types::TimeoutSettings] :timeout_settings
-    #   Indicates the timeout settings of the specified WorkSpaces pool.
+    #   Indicates the timeout settings of the specified pool.
     #
     # @return [Types::UpdateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4737,7 +4737,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

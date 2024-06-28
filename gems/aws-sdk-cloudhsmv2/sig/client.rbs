@@ -158,6 +158,17 @@ module Aws
                       ) -> _DeleteHsmResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHsmResponseSuccess
 
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSMV2/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    ?resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
       interface _DescribeBackupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupsResponse]
         def backups: () -> ::Array[Types::Backup]
@@ -168,6 +179,7 @@ module Aws
                               ?next_token: ::String,
                               ?max_results: ::Integer,
                               ?filters: Hash[::String, Array[::String]],
+                              ?shared: bool,
                               ?sort_ascending: bool
                             ) -> _DescribeBackupsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupsResponseSuccess
@@ -184,6 +196,16 @@ module Aws
                                ?max_results: ::Integer
                              ) -> _DescribeClustersResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClustersResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSMV2/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 ?resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
 
       interface _InitializeClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InitializeClusterResponse]
@@ -235,6 +257,18 @@ module Aws
                             cluster_id: ::String
                           ) -> _ModifyClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudHSMV2/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 ?resource_arn: ::String,
+                                 ?policy: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
 
       interface _RestoreBackupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RestoreBackupResponse]

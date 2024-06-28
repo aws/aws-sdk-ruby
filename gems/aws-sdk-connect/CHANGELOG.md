@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2024-06-28)
+------------------
+
+* Feature - This release supports showing PreferredAgentRouting step via DescribeContact API.
+
 1.164.0 (2024-06-25)
 ------------------
 

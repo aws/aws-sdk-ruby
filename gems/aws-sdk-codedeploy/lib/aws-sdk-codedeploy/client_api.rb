@@ -1436,9 +1436,11 @@ module Aws::CodeDeploy
 
       api.metadata = {
         "apiVersion" => "2014-10-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codedeploy",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "CodeDeploy",
         "serviceFullName" => "AWS CodeDeploy",
         "serviceId" => "CodeDeploy",

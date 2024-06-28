@@ -529,7 +529,7 @@ module Aws::WorkSpaces
       attr_accessor application_ids: ::Array[::String]
       attr_accessor compute_type_names: ::Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")]
       attr_accessor license_type: ("LICENSED" | "UNLICENSED")
-      attr_accessor operating_system_names: ::Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")]
+      attr_accessor operating_system_names: ::Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8")]
       attr_accessor owner: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -1504,7 +1504,7 @@ module Aws::WorkSpaces
       attr_accessor owner: ::String
       attr_accessor state: ("PENDING" | "ERROR" | "AVAILABLE" | "UNINSTALL_ONLY")
       attr_accessor supported_compute_type_names: ::Array[("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")]
-      attr_accessor supported_operating_system_names: ::Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")]
+      attr_accessor supported_operating_system_names: ::Array[("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8")]
       SENSITIVE: []
     end
 
@@ -1635,7 +1635,7 @@ module Aws::WorkSpaces
       attr_accessor user_volume_size_gib: ::Integer
       attr_accessor compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")
       attr_accessor protocols: ::Array[("PCOIP" | "WSP")]
-      attr_accessor operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022")
+      attr_accessor operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "RHEL_8")
       SENSITIVE: []
     end
 

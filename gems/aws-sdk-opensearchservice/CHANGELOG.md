@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2024-06-28)
+------------------
+
+* Feature - This release removes support for enabling or disabling Natural Language Query Processing feature for Amazon OpenSearch Service domains.
+
 1.47.0 (2024-06-26)
 ------------------
 

@@ -958,8 +958,10 @@ module Aws::IoTAnalytics
 
       api.metadata = {
         "apiVersion" => "2017-11-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "iotanalytics",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT Analytics",
         "serviceId" => "IoTAnalytics",
         "signatureVersion" => "v4",

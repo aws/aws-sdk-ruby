@@ -2273,9 +2273,11 @@ module Aws::GameLift
 
       api.metadata = {
         "apiVersion" => "2015-10-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "gamelift",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon GameLift",
         "serviceId" => "GameLift",
         "signatureVersion" => "v4",

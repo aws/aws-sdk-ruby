@@ -1481,8 +1481,10 @@ module Aws::APIGateway
 
       api.metadata = {
         "apiVersion" => "2015-07-09",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "apigateway",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon API Gateway",
         "serviceId" => "API Gateway",
         "signatureVersion" => "v4",

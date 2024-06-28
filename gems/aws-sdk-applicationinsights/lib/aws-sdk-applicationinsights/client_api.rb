@@ -702,9 +702,11 @@ module Aws::ApplicationInsights
 
       api.metadata = {
         "apiVersion" => "2018-11-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "applicationinsights",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Application Insights",
         "serviceFullName" => "Amazon CloudWatch Application Insights",
         "serviceId" => "Application Insights",

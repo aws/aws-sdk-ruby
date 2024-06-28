@@ -148,6 +148,7 @@ module Aws::PersonalizeRuntime
 
       api.metadata = {
         "apiVersion" => "2018-05-22",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "personalize-runtime",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

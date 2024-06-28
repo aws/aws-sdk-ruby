@@ -394,8 +394,10 @@ module Aws::ResourceGroups
 
       api.metadata = {
         "apiVersion" => "2017-11-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "resource-groups",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Resource Groups",
         "serviceFullName" => "AWS Resource Groups",
         "serviceId" => "Resource Groups",

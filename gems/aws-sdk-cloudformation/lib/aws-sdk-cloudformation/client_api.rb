@@ -2206,6 +2206,7 @@ module Aws::CloudFormation
 
       api.metadata = {
         "apiVersion" => "2010-05-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cloudformation",
         "protocol" => "query",
         "protocols" => ["query"],

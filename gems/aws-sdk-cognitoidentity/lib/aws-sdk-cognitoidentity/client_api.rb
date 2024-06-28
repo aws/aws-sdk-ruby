@@ -423,9 +423,11 @@ module Aws::CognitoIdentity
 
       api.metadata = {
         "apiVersion" => "2014-06-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cognito-identity",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Cognito Identity",
         "serviceId" => "Cognito Identity",
         "signatureVersion" => "v4",

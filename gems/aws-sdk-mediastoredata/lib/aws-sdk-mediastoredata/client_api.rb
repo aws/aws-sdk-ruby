@@ -134,8 +134,10 @@ module Aws::MediaStoreData
 
       api.metadata = {
         "apiVersion" => "2017-09-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "data.mediastore",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "MediaStore Data",
         "serviceFullName" => "AWS Elemental MediaStore Data Plane",
         "serviceId" => "MediaStore Data",

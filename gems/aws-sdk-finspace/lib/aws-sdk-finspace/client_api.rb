@@ -1348,9 +1348,11 @@ module Aws::Finspace
 
       api.metadata = {
         "apiVersion" => "2021-03-12",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "finspace",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "finspace",
         "serviceFullName" => "FinSpace User Environment Management service",
         "serviceId" => "finspace",

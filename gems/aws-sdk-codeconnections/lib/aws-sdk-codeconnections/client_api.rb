@@ -574,9 +574,11 @@ module Aws::CodeConnections
 
       api.metadata = {
         "apiVersion" => "2023-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codeconnections",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS CodeConnections",
         "serviceId" => "CodeConnections",
         "signatureVersion" => "v4",

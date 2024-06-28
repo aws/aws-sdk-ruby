@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.200.0 (2024-06-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.199.0 (2024-06-25)
 ------------------
 

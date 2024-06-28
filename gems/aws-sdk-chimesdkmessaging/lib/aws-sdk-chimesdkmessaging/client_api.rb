@@ -969,8 +969,10 @@ module Aws::ChimeSDKMessaging
 
       api.metadata = {
         "apiVersion" => "2021-05-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "messaging-chime",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Chime SDK Messaging",
         "serviceId" => "Chime SDK Messaging",
         "signatureVersion" => "v4",

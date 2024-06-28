@@ -148,9 +148,11 @@ module Aws::SageMakerFeatureStoreRuntime
 
       api.metadata = {
         "apiVersion" => "2020-07-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "featurestore-runtime.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon SageMaker Feature Store Runtime",
         "serviceId" => "SageMaker FeatureStore Runtime",
         "signatureVersion" => "v4",

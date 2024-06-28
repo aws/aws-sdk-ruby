@@ -1832,9 +1832,11 @@ module Aws::Backup
 
       api.metadata = {
         "apiVersion" => "2018-11-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "backup",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Backup",
         "serviceId" => "Backup",
         "signatureVersion" => "v4",

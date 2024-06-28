@@ -2158,9 +2158,11 @@ module Aws::IoTSiteWise
 
       api.metadata = {
         "apiVersion" => "2019-12-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "iotsitewise",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT SiteWise",
         "serviceId" => "IoTSiteWise",
         "signatureVersion" => "v4",

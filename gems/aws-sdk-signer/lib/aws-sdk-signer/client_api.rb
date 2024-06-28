@@ -524,6 +524,7 @@ module Aws::Signer
 
       api.metadata = {
         "apiVersion" => "2017-08-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "signer",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

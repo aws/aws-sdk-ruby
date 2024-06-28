@@ -329,9 +329,11 @@ module Aws::IoTDeviceAdvisor
 
       api.metadata = {
         "apiVersion" => "2020-09-18",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.iotdeviceadvisor",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWSIoTDeviceAdvisor",
         "serviceFullName" => "AWS IoT Core Device Advisor",
         "serviceId" => "IotDeviceAdvisor",

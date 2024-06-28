@@ -1718,8 +1718,10 @@ module Aws::Neptune
 
       api.metadata = {
         "apiVersion" => "2014-10-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rds",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Amazon Neptune",
         "serviceFullName" => "Amazon Neptune",
         "serviceId" => "Neptune",

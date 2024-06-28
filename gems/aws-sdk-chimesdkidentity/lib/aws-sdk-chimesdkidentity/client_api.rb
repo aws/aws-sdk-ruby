@@ -519,8 +519,10 @@ module Aws::ChimeSDKIdentity
 
       api.metadata = {
         "apiVersion" => "2021-04-20",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "identity-chime",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Chime SDK Identity",
         "serviceId" => "Chime SDK Identity",
         "signatureVersion" => "v4",

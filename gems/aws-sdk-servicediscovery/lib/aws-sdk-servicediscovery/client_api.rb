@@ -655,9 +655,11 @@ module Aws::ServiceDiscovery
 
       api.metadata = {
         "apiVersion" => "2017-03-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "servicediscovery",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "ServiceDiscovery",
         "serviceFullName" => "AWS Cloud Map",
         "serviceId" => "ServiceDiscovery",

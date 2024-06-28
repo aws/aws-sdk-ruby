@@ -109,9 +109,11 @@ module Aws::MigrationHubConfig
 
       api.metadata = {
         "apiVersion" => "2019-06-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "migrationhub-config",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Migration Hub Config",
         "serviceId" => "MigrationHub Config",
         "signatureVersion" => "v4",

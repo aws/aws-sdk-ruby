@@ -1422,9 +1422,11 @@ module Aws::RoboMaker
 
       api.metadata = {
         "apiVersion" => "2018-06-29",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "robomaker",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "RoboMaker",
         "serviceFullName" => "AWS RoboMaker",
         "serviceId" => "RoboMaker",

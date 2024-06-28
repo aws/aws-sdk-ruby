@@ -816,6 +816,7 @@ module Aws::GreengrassV2
 
       api.metadata = {
         "apiVersion" => "2020-11-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "greengrass",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

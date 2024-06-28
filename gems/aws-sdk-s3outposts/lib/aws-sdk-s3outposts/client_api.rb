@@ -160,9 +160,11 @@ module Aws::S3Outposts
 
       api.metadata = {
         "apiVersion" => "2017-07-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "s3-outposts",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon S3 Outposts",
         "serviceFullName" => "Amazon S3 on Outposts",
         "serviceId" => "S3Outposts",

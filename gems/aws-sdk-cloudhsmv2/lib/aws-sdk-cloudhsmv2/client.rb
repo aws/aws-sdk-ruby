@@ -423,7 +423,10 @@ module Aws::CloudHSMV2
 
     # @!group API Operations
 
-    # Copy an AWS CloudHSM cluster backup to a different region.
+    # Copy an CloudHSM cluster backup to a different region.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM backup in a different Amazon Web Services account.
     #
     # @option params [required, String] :destination_region
     #   The AWS region that will contain your copied CloudHSM cluster backup.
@@ -470,7 +473,11 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Creates a new AWS CloudHSM cluster.
+    # Creates a new CloudHSM cluster.
+    #
+    # **Cross-account use:** Yes. To perform this operation with an CloudHSM
+    # backup in a different AWS account, specify the full backup ARN in the
+    # value of the SourceBackupId parameter.
     #
     # @option params [Types::BackupRetentionPolicy] :backup_retention_policy
     #   A policy that defines how the service retains backups.
@@ -480,9 +487,11 @@ module Aws::CloudHSMV2
     #   `hsm1.medium` and `hsm2m.medium`.
     #
     # @option params [String] :source_backup_id
-    #   The identifier (ID) of the cluster backup to restore. Use this value
-    #   to restore the cluster from a backup instead of creating a new
-    #   cluster. To find the backup ID, use DescribeBackups.
+    #   The identifier (ID) or the Amazon Resource Name (ARN) of the cluster
+    #   backup to restore. Use this value to restore the cluster from a backup
+    #   instead of creating a new cluster. To find the backup ID or ARN, use
+    #   DescribeBackups. *If using a backup in another account, the full ARN
+    #   must be supplied.*
     #
     # @option params [required, Array<String>] :subnet_ids
     #   The identifiers (IDs) of the subnets where you are creating the
@@ -512,7 +521,7 @@ module Aws::CloudHSMV2
     #       value: "BackupRetentionValue",
     #     },
     #     hsm_type: "HsmType", # required
-    #     source_backup_id: "BackupId",
+    #     source_backup_id: "BackupArn",
     #     subnet_ids: ["SubnetId"], # required
     #     tag_list: [
     #       {
@@ -567,8 +576,11 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Creates a new hardware security module (HSM) in the specified AWS
-    # CloudHSM cluster.
+    # Creates a new hardware security module (HSM) in the specified CloudHSM
+    # cluster.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM cluster in a different Amazon Web Service account.
     #
     # @option params [required, String] :cluster_id
     #   The identifier (ID) of the HSM's cluster. To find the cluster ID, use
@@ -616,9 +628,12 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Deletes a specified AWS CloudHSM backup. A backup can be restored up
-    # to 7 days after the DeleteBackup request is made. For more information
-    # on restoring a backup, see RestoreBackup.
+    # Deletes a specified CloudHSM backup. A backup can be restored up to 7
+    # days after the DeleteBackup request is made. For more information on
+    # restoring a backup, see RestoreBackup.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM backup in a different Amazon Web Services account.
     #
     # @option params [required, String] :backup_id
     #   The ID of the backup to be deleted. To find the ID of a backup, use
@@ -637,6 +652,7 @@ module Aws::CloudHSMV2
     # @example Response structure
     #
     #   resp.backup.backup_id #=> String
+    #   resp.backup.backup_arn #=> String
     #   resp.backup.backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
     #   resp.backup.cluster_id #=> String
     #   resp.backup.create_timestamp #=> Time
@@ -661,10 +677,13 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Deletes the specified AWS CloudHSM cluster. Before you can delete a
+    # Deletes the specified CloudHSM cluster. Before you can delete a
     # cluster, you must delete all HSMs in the cluster. To see if the
     # cluster contains any HSMs, use DescribeClusters. To delete an HSM, use
     # DeleteHsm.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM cluster in a different Amazon Web Services account.
     #
     # @option params [required, String] :cluster_id
     #   The identifier (ID) of the cluster that you are deleting. To find the
@@ -729,6 +748,9 @@ module Aws::CloudHSMV2
     # interface (ENI), or the ID of the HSM's ENI. You need to specify only
     # one of these values. To find these values, use DescribeClusters.
     #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM hsm in a different Amazon Web Services account.
+    #
     # @option params [required, String] :cluster_id
     #   The identifier (ID) of the cluster that contains the HSM that you are
     #   deleting.
@@ -770,7 +792,46 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Gets information about backups of AWS CloudHSM clusters.
+    # Deletes an CloudHSM resource policy. Deleting a resource policy will
+    # result in the resource being unshared and removed from any RAM
+    # resource shares. Deleting the resource policy attached to a backup
+    # will not impact any clusters created from that backup.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM resource in a different Amazon Web Services account.
+    #
+    # @option params [String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource from which the policy will
+    #   be removed.
+    #
+    # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::DeleteResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "CloudHsmArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets information about backups of CloudHSM clusters. Lists either the
+    # backups you own or the backups shared with you when the Shared
+    # parameter is true.
     #
     # This is a paginated operation, which means that each response might
     # contain only a subset of all the backups. When the response contains
@@ -778,6 +839,9 @@ module Aws::CloudHSMV2
     # value in a subsequent `DescribeBackups` request to get more backups.
     # When you receive a response with no `NextToken` (or an empty or null
     # value), that means there are no more backups to get.
+    #
+    # **Cross-account use:** Yes. Customers can describe backups in other
+    # Amazon Web Services accounts that are shared with them.
     #
     # @option params [String] :next_token
     #   The `NextToken` value that you received in the previous response. Use
@@ -809,6 +873,25 @@ module Aws::CloudHSMV2
     #   from the backup retention policy. `False` returns all backups with a
     #   backup retention policy defined at the cluster.
     #
+    # @option params [Boolean] :shared
+    #   Describe backups that are shared with you.
+    #
+    #   <note markdown="1"> By default when using this option, the command returns backups that
+    #   have been shared using a standard Resource Access Manager resource
+    #   share. In order for a backup that was shared using the
+    #   PutResourcePolicy command to be returned, the share must be promoted
+    #   to a standard resource share using the RAM
+    #   [PromoteResourceShareCreatedFromPolicy][1] API operation. For more
+    #   information about sharing backups, see [ Working with shared
+    #   backups][2] in the CloudHSM User Guide.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/ram/promote-resource-share-created-from-policy.html
+    #   [2]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/sharing.html
+    #
     # @option params [Boolean] :sort_ascending
     #   Designates whether or not to sort the return backups by ascending
     #   chronological order of generation.
@@ -828,6 +911,7 @@ module Aws::CloudHSMV2
     #     filters: {
     #       "Field" => ["String"],
     #     },
+    #     shared: false,
     #     sort_ascending: false,
     #   })
     #
@@ -835,6 +919,7 @@ module Aws::CloudHSMV2
     #
     #   resp.backups #=> Array
     #   resp.backups[0].backup_id #=> String
+    #   resp.backups[0].backup_arn #=> String
     #   resp.backups[0].backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
     #   resp.backups[0].cluster_id #=> String
     #   resp.backups[0].create_timestamp #=> Time
@@ -860,7 +945,7 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Gets information about AWS CloudHSM clusters.
+    # Gets information about CloudHSM clusters.
     #
     # This is a paginated operation, which means that each response might
     # contain only a subset of all the clusters. When the response contains
@@ -868,6 +953,9 @@ module Aws::CloudHSMV2
     # value in a subsequent `DescribeClusters` request to get more clusters.
     # When you receive a response with no `NextToken` (or an empty or null
     # value), that means there are no more clusters to get.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on
+    # CloudHSM clusters in a different Amazon Web Services account.
     #
     # @option params [Hash<String,Array>] :filters
     #   One or more filters to limit the items returned in the response.
@@ -954,11 +1042,46 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Claims an AWS CloudHSM cluster by submitting the cluster certificate
+    # Retrieves the resource policy document attached to a given resource.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM resource in a different Amazon Web Services account.
+    #
+    # @option params [String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which a policy is
+    #   attached.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "CloudHsmArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Claims an CloudHSM cluster by submitting the cluster certificate
     # issued by your issuing certificate authority (CA) and the CA's root
     # certificate. Before you can claim a cluster, you must sign the
     # cluster's certificate signing request (CSR) with your issuing CA. To
     # get the cluster's CSR, use DescribeClusters.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM cluster in a different Amazon Web Services account.
     #
     # @option params [required, String] :cluster_id
     #   The identifier (ID) of the cluster that you are claiming. To find the
@@ -1003,7 +1126,7 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Gets a list of tags for the specified AWS CloudHSM cluster.
+    # Gets a list of tags for the specified CloudHSM cluster.
     #
     # This is a paginated operation, which means that each response might
     # contain only a subset of all the tags. When the response contains only
@@ -1011,6 +1134,9 @@ module Aws::CloudHSMV2
     # subsequent `ListTags` request to get more tags. When you receive a
     # response with no `NextToken` (or an empty or null value), that means
     # there are no more tags to get.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM resource in a different Amazon Web Services account.
     #
     # @option params [required, String] :resource_id
     #   The cluster identifier (ID) for the cluster whose tags you are
@@ -1056,7 +1182,10 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Modifies attributes for AWS CloudHSM backup.
+    # Modifies attributes for CloudHSM backup.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM backup in a different Amazon Web Services account.
     #
     # @option params [required, String] :backup_id
     #   The identifier (ID) of the backup to modify. To find the ID of a
@@ -1082,6 +1211,7 @@ module Aws::CloudHSMV2
     # @example Response structure
     #
     #   resp.backup.backup_id #=> String
+    #   resp.backup.backup_arn #=> String
     #   resp.backup.backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
     #   resp.backup.cluster_id #=> String
     #   resp.backup.create_timestamp #=> Time
@@ -1106,7 +1236,10 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Modifies AWS CloudHSM cluster.
+    # Modifies CloudHSM cluster.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM cluster in a different Amazon Web Services account.
     #
     # @option params [required, Types::BackupRetentionPolicy] :backup_retention_policy
     #   A policy that defines how the service retains backups.
@@ -1173,9 +1306,83 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Restores a specified AWS CloudHSM backup that is in the
-    # `PENDING_DELETION` state. For mor information on deleting a backup,
-    # see DeleteBackup.
+    # Creates or updates an CloudHSM resource policy. A resource policy
+    # helps you to define the IAM entity (for example, an Amazon Web
+    # Services account) that can manage your CloudHSM resources. The
+    # following resources support CloudHSM resource policies:
+    #
+    # * Backup - The resource policy allows you to describe the backup and
+    #   restore a cluster from the backup in another Amazon Web Services
+    #   account.
+    #
+    # ^
+    #
+    # In order to share a backup, it must be in a 'READY' state and you
+    # must own it.
+    #
+    # While you can share a backup using the CloudHSM PutResourcePolicy
+    # operation, we recommend using Resource Access Manager (RAM) instead.
+    # Using RAM provides multiple benefits as it creates the policy for you,
+    # allows multiple resources to be shared at one time, and increases the
+    # discoverability of shared resources. If you use PutResourcePolicy and
+    # want consumers to be able to describe the backups you share with them,
+    # you must promote the backup to a standard RAM Resource Share using the
+    # RAM PromoteResourceShareCreatedFromPolicy API operation. For more
+    # information, see [ Working with shared backups][1] in the CloudHSM
+    # User Guide
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM resource in a different Amazon Web Services account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/sharing.html
+    #
+    # @option params [String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which you want to attach
+    #   a policy.
+    #
+    # @option params [String] :policy
+    #   The policy you want to associate with a resource.
+    #
+    #   For an example policy, see [ Working with shared backups][1] in the
+    #   CloudHSM User Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/sharing.html
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#resource_arn #resource_arn} => String
+    #   * {Types::PutResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "CloudHsmArn",
+    #     policy: "ResourcePolicy",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Restores a specified CloudHSM backup that is in the `PENDING_DELETION`
+    # state. For more information on deleting a backup, see DeleteBackup.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM backup in a different Amazon Web Services account.
     #
     # @option params [required, String] :backup_id
     #   The ID of the backup to be restored. To find the ID of a backup, use
@@ -1194,6 +1401,7 @@ module Aws::CloudHSMV2
     # @example Response structure
     #
     #   resp.backup.backup_id #=> String
+    #   resp.backup.backup_arn #=> String
     #   resp.backup.backup_state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETED", "PENDING_DELETION"
     #   resp.backup.cluster_id #=> String
     #   resp.backup.create_timestamp #=> Time
@@ -1218,8 +1426,11 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Adds or overwrites one or more tags for the specified AWS CloudHSM
+    # Adds or overwrites one or more tags for the specified CloudHSM
     # cluster.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM resource in a different Amazon Web Services account.
     #
     # @option params [required, String] :resource_id
     #   The cluster identifier (ID) for the cluster that you are tagging. To
@@ -1251,8 +1462,10 @@ module Aws::CloudHSMV2
       req.send_request(options)
     end
 
-    # Removes the specified tag or tags from the specified AWS CloudHSM
-    # cluster.
+    # Removes the specified tag or tags from the specified CloudHSM cluster.
+    #
+    # **Cross-account use:** No. You cannot perform this operation on an
+    # CloudHSM resource in a different Amazon Web Services account.
     #
     # @option params [required, String] :resource_id
     #   The cluster identifier (ID) for the cluster whose tags you are
@@ -1293,7 +1506,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

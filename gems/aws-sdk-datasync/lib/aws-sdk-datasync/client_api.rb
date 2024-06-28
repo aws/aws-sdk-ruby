@@ -1362,6 +1362,7 @@ module Aws::DataSync
 
       api.metadata = {
         "apiVersion" => "2018-11-09",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "datasync",
         "jsonVersion" => "1.1",
         "protocol" => "json",

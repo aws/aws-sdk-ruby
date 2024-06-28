@@ -786,9 +786,11 @@ module Aws::SSMContacts
 
       api.metadata = {
         "apiVersion" => "2021-05-03",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ssm-contacts",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "SSM Contacts",
         "serviceFullName" => "AWS Systems Manager Incident Manager Contacts",
         "serviceId" => "SSM Contacts",

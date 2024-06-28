@@ -1012,6 +1012,7 @@ module Aws::TranscribeService
 
       api.metadata = {
         "apiVersion" => "2017-10-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "transcribe",
         "jsonVersion" => "1.1",
         "protocol" => "json",
