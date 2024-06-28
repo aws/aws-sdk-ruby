@@ -5,12 +5,14 @@
     "endpointPrefix":"worklink",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceAbbreviation":"WorkLink",
     "serviceFullName":"Amazon WorkLink",
     "serviceId":"WorkLink",
     "signatureVersion":"v4",
     "signingName":"worklink",
-    "uid":"worklink-2018-09-25"
+    "uid":"worklink-2018-09-25",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "AssociateDomain":{
