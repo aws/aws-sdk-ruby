@@ -5,12 +5,14 @@
     "endpointPrefix":"codeconnections",
     "jsonVersion":"1.0",
     "protocol":"json",
+    "protocols":["json"],
     "serviceFullName":"AWS CodeConnections",
     "serviceId":"CodeConnections",
     "signatureVersion":"v4",
     "signingName":"codeconnections",
     "targetPrefix":"com.amazonaws.codeconnections.CodeConnections_20231201",
-    "uid":"codeconnections-2023-12-01"
+    "uid":"codeconnections-2023-12-01",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CreateConnection":{

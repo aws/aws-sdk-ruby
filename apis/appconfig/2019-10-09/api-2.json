@@ -5,12 +5,14 @@
     "endpointPrefix":"appconfig",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceAbbreviation":"AppConfig",
     "serviceFullName":"Amazon AppConfig",
     "serviceId":"AppConfig",
     "signatureVersion":"v4",
     "signingName":"appconfig",
-    "uid":"appconfig-2019-10-09"
+    "uid":"appconfig-2019-10-09",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "CreateApplication":{
