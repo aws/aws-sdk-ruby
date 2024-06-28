@@ -275,12 +275,15 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The broker engine's version. For a list of supported
-    #   engine versions, see, [Supported engines][1].
+    #   The broker engine version. Defaults to the latest available version
+    #   for the specified broker engine type. For a list of supported engine
+    #   versions, see the [ActiveMQ version management][1] and the [RabbitMQ
+    #   version management][2] sections in the Amazon MQ Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+    #   [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -412,11 +415,15 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Enables automatic upgrades to new minor versions for brokers, as new
+    #   Enables automatic upgrades to new patch versions for brokers as new
     #   versions are released and supported by Amazon MQ. Automatic upgrades
-    #   occur during the scheduled maintenance window of the broker or after
-    #   a manual broker reboot. Set to true by default, if no value is
-    #   specified.
+    #   occur during the scheduled maintenance window or after a manual
+    #   broker reboot. Set to true by default, if no value is specified.
+    #
+    #   <note markdown="1">Must be set to true for ActiveMQ brokers version 5.18 and above and
+    #   for RabbitMQ brokers version 3.13 and above.
+    #
+    #   </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] broker_name
@@ -475,12 +482,15 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The broker engine's version. For a list of supported
-    #   engine versions, see [Supported engines][1].
+    #   The broker engine version. Defaults to the latest available version
+    #   for the specified broker engine type. For more information, see the
+    #   [ActiveMQ version management][1] and the [RabbitMQ version
+    #   management][2] sections in the Amazon MQ Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+    #   [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -741,12 +751,15 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Required. The broker engine's version. For a list of supported
-    #   engine versions, see [Supported engines][1].
+    #   The broker engine version. Defaults to the latest available version
+    #   for the specified broker engine type. For more information, see the
+    #   [ActiveMQ version management][1] and the [RabbitMQ version
+    #   management][2] sections in the Amazon MQ Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+    #   [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1171,10 +1184,10 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Enables automatic upgrades to new minor versions for brokers, as new
+    #   Enables automatic upgrades to new patch versions for brokers as new
     #   versions are released and supported by Amazon MQ. Automatic upgrades
-    #   occur during the scheduled maintenance window of the broker or after
-    #   a manual broker reboot.
+    #   occur during the scheduled maintenance window or after a manual
+    #   broker reboot.
     #   @return [Boolean]
     #
     # @!attribute [rw] broker_arn
@@ -1231,12 +1244,14 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The broker engine's version. For a list of supported engine
-    #   versions, see [Supported engines][1].
+    #   The broker engine version. For more information, see the [ActiveMQ
+    #   version management][1] and the [RabbitMQ version management][2]
+    #   sections in the Amazon MQ Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+    #   [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -1273,12 +1288,14 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] pending_engine_version
-    #   The broker engine version to upgrade to. For a list of supported
-    #   engine versions, see [Supported engines][1].
+    #   The broker engine version to upgrade to. For more information, see
+    #   the [ActiveMQ version management][1] and the [RabbitMQ version
+    #   management][2] sections in the Amazon MQ Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+    #   [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
     #   @return [String]
     #
     # @!attribute [rw] pending_host_instance_type
@@ -2561,10 +2578,15 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Enables automatic upgrades to new minor versions for brokers, as new
+    #   Enables automatic upgrades to new patch versions for brokers as new
     #   versions are released and supported by Amazon MQ. Automatic upgrades
-    #   occur during the scheduled maintenance window of the broker or after
-    #   a manual broker reboot.
+    #   occur during the scheduled maintenance window or after a manual
+    #   broker reboot.
+    #
+    #   <note markdown="1">Must be set to true for ActiveMQ brokers version 5.18 and above and
+    #   for RabbitMQ brokers version 3.13 and above.
+    #
+    #   </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] configuration
@@ -2576,12 +2598,20 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The broker engine version. For a list of supported engine versions,
-    #   see [Supported engines][1].
+    #   The broker engine version. For more information, see the [ActiveMQ
+    #   version management][1] and the [RabbitMQ version management][2]
+    #   sections in the Amazon MQ Developer Guide.
+    #
+    #   <note markdown="1">When upgrading to ActiveMQ version 5.18 and above or RabbitMQ
+    #   version 3.13 and above, you must have autoMinorVersionUpgrade set to
+    #   true for the broker.
+    #
+    #   </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+    #   [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type
@@ -2637,9 +2667,10 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   The new boolean value that specifies whether broker engines
-    #   automatically upgrade to new minor versions as new versions are
-    #   released and supported by Amazon MQ.
+    #   Enables automatic upgrades to new patch versions for brokers as new
+    #   versions are released and supported by Amazon MQ. Automatic upgrades
+    #   occur during the scheduled maintenance window or after a manual
+    #   broker reboot.
     #   @return [Boolean]
     #
     # @!attribute [rw] broker_id
@@ -2660,12 +2691,14 @@ module Aws::MQ
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The broker engine version to upgrade to. For a list of supported
-    #   engine versions, see [Supported engines][1].
+    #   The broker engine version to upgrade to. For more information, see
+    #   the [ActiveMQ version management][1] and the [RabbitMQ version
+    #   management][2] sections in the Amazon MQ Developer Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
+    #   [1]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/activemq-version-management.html
+    #   [2]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/rabbitmq-version-management.html
     #   @return [String]
     #
     # @!attribute [rw] host_instance_type

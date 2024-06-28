@@ -64,12 +64,18 @@ module Aws::KinesisAnalyticsV2
     #   SQL-based Kinesis Data Analytics application.
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     #
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking AddApplicationCloudWatchLoggingOption
+    #   request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationCloudWatchLoggingOptionResponse AWS API Documentation
     #
     class AddApplicationCloudWatchLoggingOptionResponse < Struct.new(
       :application_arn,
       :application_version_id,
-      :cloud_watch_logging_option_descriptions)
+      :cloud_watch_logging_option_descriptions,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -350,12 +356,17 @@ module Aws::KinesisAnalyticsV2
     #   The parameters of the new VPC configuration.
     #   @return [Types::VpcConfigurationDescription]
     #
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking AddApplicationVpcConfiguration request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfigurationResponse AWS API Documentation
     #
     class AddApplicationVpcConfigurationResponse < Struct.new(
       :application_arn,
       :application_version_id,
-      :vpc_configuration_description)
+      :vpc_configuration_description,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -448,6 +459,11 @@ module Aws::KinesisAnalyticsV2
     #   Apache Flink application.
     #   @return [Types::ApplicationSnapshotConfiguration]
     #
+    # @!attribute [rw] application_system_rollback_configuration
+    #   Describes system rollback configuration for a Managed Service for
+    #   Apache Flink application
+    #   @return [Types::ApplicationSystemRollbackConfiguration]
+    #
     # @!attribute [rw] vpc_configurations
     #   The array of descriptions of VPC configurations available to the
     #   application.
@@ -466,6 +482,7 @@ module Aws::KinesisAnalyticsV2
       :environment_properties,
       :application_code_configuration,
       :application_snapshot_configuration,
+      :application_system_rollback_configuration,
       :vpc_configurations,
       :zeppelin_application_configuration)
       SENSITIVE = []
@@ -504,6 +521,11 @@ module Aws::KinesisAnalyticsV2
     #   Apache Flink application.
     #   @return [Types::ApplicationSnapshotConfigurationDescription]
     #
+    # @!attribute [rw] application_system_rollback_configuration_description
+    #   Describes system rollback configuration for a Managed Service for
+    #   Apache Flink application
+    #   @return [Types::ApplicationSystemRollbackConfigurationDescription]
+    #
     # @!attribute [rw] vpc_configuration_descriptions
     #   The array of descriptions of VPC configurations available to the
     #   application.
@@ -523,6 +545,7 @@ module Aws::KinesisAnalyticsV2
       :flink_application_configuration_description,
       :environment_property_descriptions,
       :application_snapshot_configuration_description,
+      :application_system_rollback_configuration_description,
       :vpc_configuration_descriptions,
       :zeppelin_application_configuration_description)
       SENSITIVE = []
@@ -555,6 +578,11 @@ module Aws::KinesisAnalyticsV2
     #   Apache Flink application.
     #   @return [Types::ApplicationSnapshotConfigurationUpdate]
     #
+    # @!attribute [rw] application_system_rollback_configuration_update
+    #   Describes system rollback configuration for a Managed Service for
+    #   Apache Flink application
+    #   @return [Types::ApplicationSystemRollbackConfigurationUpdate]
+    #
     # @!attribute [rw] vpc_configuration_updates
     #   Updates to the array of descriptions of VPC configurations available
     #   to the application.
@@ -573,6 +601,7 @@ module Aws::KinesisAnalyticsV2
       :flink_application_configuration_update,
       :environment_property_updates,
       :application_snapshot_configuration_update,
+      :application_system_rollback_configuration_update,
       :vpc_configuration_updates,
       :zeppelin_application_configuration_update)
       SENSITIVE = []
@@ -645,6 +674,10 @@ module Aws::KinesisAnalyticsV2
     #   application version when `RollbackApplication` was called.
     #   @return [Integer]
     #
+    # @!attribute [rw] application_version_create_timestamp
+    #   The current timestamp when the application version was created.
+    #   @return [Time]
+    #
     # @!attribute [rw] conditional_token
     #   A value you use to implement strong concurrency for application
     #   updates.
@@ -677,6 +710,7 @@ module Aws::KinesisAnalyticsV2
       :application_maintenance_configuration_description,
       :application_version_updated_from,
       :application_version_rolled_back_from,
+      :application_version_create_timestamp,
       :conditional_token,
       :application_version_rolled_back_to,
       :application_mode)
@@ -713,6 +747,82 @@ module Aws::KinesisAnalyticsV2
     #
     class ApplicationMaintenanceConfigurationUpdate < Struct.new(
       :application_maintenance_window_start_time_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a description of the operation, such as the type and status
+    # of operation
+    #
+    # @!attribute [rw] operation
+    #   Type of operation performed on an application
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   Identifier of the Operation
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp at which the operation was created
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp at which the operation finished for the application
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_status
+    #   Status of the operation performed on an application
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationOperationInfo AWS API Documentation
+    #
+    class ApplicationOperationInfo < Struct.new(
+      :operation,
+      :operation_id,
+      :start_time,
+      :end_time,
+      :operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a description of the operation, such as the operation-type
+    # and status
+    #
+    # @!attribute [rw] operation
+    #   Type of operation performed on an application
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp at which the operation was created
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp at which the operation finished for the application
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_status
+    #   Status of the operation performed on an application
+    #   @return [String]
+    #
+    # @!attribute [rw] application_version_change_details
+    #   Contains information about the application version changes due to an
+    #   operation
+    #   @return [Types::ApplicationVersionChangeDetails]
+    #
+    # @!attribute [rw] operation_failure_details
+    #   Provides a description of the operation failure
+    #   @return [Types::OperationFailureDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationOperationInfoDetails AWS API Documentation
+    #
+    class ApplicationOperationInfoDetails < Struct.new(
+      :operation,
+      :start_time,
+      :end_time,
+      :operation_status,
+      :application_version_change_details,
+      :operation_failure_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -826,6 +936,75 @@ module Aws::KinesisAnalyticsV2
       :application_version_id,
       :runtime_environment,
       :application_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes system rollback configuration for a Managed Service for
+    # Apache Flink application
+    #
+    # @!attribute [rw] rollback_enabled
+    #   Describes whether system rollbacks are enabled for a Managed Service
+    #   for Apache Flink application
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSystemRollbackConfiguration AWS API Documentation
+    #
+    class ApplicationSystemRollbackConfiguration < Struct.new(
+      :rollback_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes system rollback configuration for a Managed Service for
+    # Apache Flink application
+    #
+    # @!attribute [rw] rollback_enabled
+    #   Describes whether system rollbacks are enabled for a Managed Service
+    #   for Apache Flink application
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSystemRollbackConfigurationDescription AWS API Documentation
+    #
+    class ApplicationSystemRollbackConfigurationDescription < Struct.new(
+      :rollback_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes system rollback configuration for a Managed Service for
+    # Apache Flink application
+    #
+    # @!attribute [rw] rollback_enabled_update
+    #   Describes whether system rollbacks are enabled for a Managed Service
+    #   for Apache Flink application
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSystemRollbackConfigurationUpdate AWS API Documentation
+    #
+    class ApplicationSystemRollbackConfigurationUpdate < Struct.new(
+      :rollback_enabled_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the application version changes due to an
+    # operation
+    #
+    # @!attribute [rw] application_version_updated_from
+    #   The operation was performed on this version of the application
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_version_updated_to
+    #   The operation execution resulted in the transition to the following
+    #   version of the application
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationVersionChangeDetails AWS API Documentation
+    #
+    class ApplicationVersionChangeDetails < Struct.new(
+      :application_version_updated_from,
+      :application_version_updated_to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1581,12 +1760,18 @@ module Aws::KinesisAnalyticsV2
     #   application.
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     #
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking DeleteApplicationCloudWatchLoggingOption
+    #   request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationCloudWatchLoggingOptionResponse AWS API Documentation
     #
     class DeleteApplicationCloudWatchLoggingOptionResponse < Struct.new(
       :application_arn,
       :application_version_id,
-      :cloud_watch_logging_option_descriptions)
+      :cloud_watch_logging_option_descriptions,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1821,11 +2006,16 @@ module Aws::KinesisAnalyticsV2
     #   The updated version ID of the application.
     #   @return [Integer]
     #
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking DeleteApplicationVpcConfiguration request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfigurationResponse AWS API Documentation
     #
     class DeleteApplicationVpcConfigurationResponse < Struct.new(
       :application_arn,
-      :application_version_id)
+      :application_version_id,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1877,6 +2067,42 @@ module Aws::KinesisAnalyticsV2
     #
     class DeployAsApplicationConfigurationUpdate < Struct.new(
       :s3_content_location_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request for information about a specific operation performed on a
+    # Managed Service for Apache Flink application
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   Identifier of the Operation
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationOperationRequest AWS API Documentation
+    #
+    class DescribeApplicationOperationRequest < Struct.new(
+      :application_name,
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details of the operation corresponding to the operation-ID on
+    # a Managed Service for Apache Flink application
+    #
+    # @!attribute [rw] application_operation_info_details
+    #   Provides a description of the operation, such as the operation-type
+    #   and status
+    #   @return [Types::ApplicationOperationInfoDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationOperationResponse AWS API Documentation
+    #
+    class DescribeApplicationOperationResponse < Struct.new(
+      :application_operation_info_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2098,6 +2324,20 @@ module Aws::KinesisAnalyticsV2
     #
     class EnvironmentPropertyUpdates < Struct.new(
       :property_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a description of the operation failure error
+    #
+    # @!attribute [rw] error_string
+    #   Error message resulting in failure of the operation
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ErrorInfo AWS API Documentation
+    #
+    class ErrorInfo < Struct.new(
+      :error_string)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3102,6 +3342,61 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # Request to list operations performed on an application
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Limit on the number of records returned in the response
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If a previous command returned a pagination token, pass it into this
+    #   value to retrieve the next set of results
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   Type of operation performed on an application
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_status
+    #   Status of the operation performed on an application
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationOperationsRequest AWS API Documentation
+    #
+    class ListApplicationOperationsRequest < Struct.new(
+      :application_name,
+      :limit,
+      :next_token,
+      :operation,
+      :operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response with the list of operations for an application
+    #
+    # @!attribute [rw] application_operation_info_list
+    #   List of ApplicationOperationInfo for an application
+    #   @return [Array<Types::ApplicationOperationInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   If a previous command returned a pagination token, pass it into this
+    #   value to retrieve the next set of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationOperationsResponse AWS API Documentation
+    #
+    class ListApplicationOperationsResponse < Struct.new(
+      :application_operation_info_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_name
     #   The name of an existing application.
     #   @return [String]
@@ -3417,6 +3712,26 @@ module Aws::KinesisAnalyticsV2
       :configuration_type_update,
       :metrics_level_update,
       :log_level_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a description of the operation failure
+    #
+    # @!attribute [rw] rollback_operation_id
+    #   Provides the operation ID of a system-rollback operation executed
+    #   due to failure in the current operation
+    #   @return [String]
+    #
+    # @!attribute [rw] error_info
+    #   Provides a description of the operation failure error
+    #   @return [Types::ErrorInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/OperationFailureDetails AWS API Documentation
+    #
+    class OperationFailureDetails < Struct.new(
+      :rollback_operation_id,
+      :error_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3973,10 +4288,15 @@ module Aws::KinesisAnalyticsV2
     #   configurations.
     #   @return [Types::ApplicationDetail]
     #
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking RollbackApplication request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RollbackApplicationResponse AWS API Documentation
     #
     class RollbackApplicationResponse < Struct.new(
-      :application_detail)
+      :application_detail,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4489,9 +4809,17 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking StartApplication request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StartApplicationResponse AWS API Documentation
     #
-    class StartApplicationResponse < Aws::EmptyStructure; end
+    class StartApplicationResponse < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] application_name
     #   The name of the running application to stop.
@@ -4526,9 +4854,17 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking StopApplication request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplicationResponse AWS API Documentation
     #
-    class StopApplicationResponse < Aws::EmptyStructure; end
+    class StopApplicationResponse < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A key-value pair (the value is optional) that you can define and
     # assign to Amazon resources. If you specify a tag that already exists,
@@ -4762,10 +5098,15 @@ module Aws::KinesisAnalyticsV2
     #   Describes application updates.
     #   @return [Types::ApplicationDetail]
     #
+    # @!attribute [rw] operation_id
+    #   Operation ID for tracking UpdateApplication request
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/UpdateApplicationResponse AWS API Documentation
     #
     class UpdateApplicationResponse < Struct.new(
-      :application_detail)
+      :application_detail,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end

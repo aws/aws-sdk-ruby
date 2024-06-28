@@ -299,6 +299,7 @@ module Aws::ChimeSDKMediaPipelines
     AmazonTranscribeProcessorConfiguration.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
     AmazonTranscribeProcessorConfiguration.add_member(:filter_partial_results, Shapes::ShapeRef.new(shape: Boolean, location_name: "FilterPartialResults"))
     AmazonTranscribeProcessorConfiguration.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
+    AmazonTranscribeProcessorConfiguration.add_member(:identify_multiple_languages, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyMultipleLanguages"))
     AmazonTranscribeProcessorConfiguration.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
     AmazonTranscribeProcessorConfiguration.add_member(:preferred_language, Shapes::ShapeRef.new(shape: CallAnalyticsLanguageCode, location_name: "PreferredLanguage"))
     AmazonTranscribeProcessorConfiguration.add_member(:vocabulary_names, Shapes::ShapeRef.new(shape: VocabularyNames, location_name: "VocabularyNames"))
@@ -991,8 +992,10 @@ module Aws::ChimeSDKMediaPipelines
 
       api.metadata = {
         "apiVersion" => "2021-07-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "media-pipelines-chime",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Chime SDK Media Pipelines",
         "serviceId" => "Chime SDK Media Pipelines",
         "signatureVersion" => "v4",

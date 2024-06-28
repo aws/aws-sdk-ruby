@@ -78,6 +78,7 @@ module Aws
         def application_arn: () -> ::String
         def application_version_id: () -> ::Integer
         def cloud_watch_logging_option_descriptions: () -> ::Array[Types::CloudWatchLoggingOptionDescription]
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_cloud_watch_logging_option-instance_method
       def add_application_cloud_watch_logging_option: (
@@ -237,6 +238,7 @@ module Aws
         def application_arn: () -> ::String
         def application_version_id: () -> ::Integer
         def vpc_configuration_description: () -> Types::VpcConfigurationDescription
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_vpc_configuration-instance_method
       def add_application_vpc_configuration: (
@@ -394,6 +396,9 @@ module Aws
                                   application_snapshot_configuration: {
                                     snapshots_enabled: bool
                                   }?,
+                                  application_system_rollback_configuration: {
+                                    rollback_enabled: bool
+                                  }?,
                                   vpc_configurations: Array[
                                     {
                                       subnet_ids: Array[::String],
@@ -484,6 +489,7 @@ module Aws
         def application_arn: () -> ::String
         def application_version_id: () -> ::Integer
         def cloud_watch_logging_option_descriptions: () -> ::Array[Types::CloudWatchLoggingOptionDescription]
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_cloud_watch_logging_option-instance_method
       def delete_application_cloud_watch_logging_option: (
@@ -548,6 +554,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationVpcConfigurationResponse]
         def application_arn: () -> ::String
         def application_version_id: () -> ::Integer
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_vpc_configuration-instance_method
       def delete_application_vpc_configuration: (
@@ -568,6 +575,17 @@ module Aws
                                   ?include_additional_details: bool
                                 ) -> _DescribeApplicationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationResponseSuccess
+
+      interface _DescribeApplicationOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationOperationResponse]
+        def application_operation_info_details: () -> Types::ApplicationOperationInfoDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#describe_application_operation-instance_method
+      def describe_application_operation: (
+                                            application_name: ::String,
+                                            operation_id: ::String
+                                          ) -> _DescribeApplicationOperationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationOperationResponseSuccess
 
       interface _DescribeApplicationSnapshotResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationSnapshotResponse]
@@ -616,6 +634,21 @@ module Aws
                                    }
                                  ) -> _DiscoverInputSchemaResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscoverInputSchemaResponseSuccess
+
+      interface _ListApplicationOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationOperationsResponse]
+        def application_operation_info_list: () -> ::Array[Types::ApplicationOperationInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#list_application_operations-instance_method
+      def list_application_operations: (
+                                         application_name: ::String,
+                                         ?limit: ::Integer,
+                                         ?next_token: ::String,
+                                         ?operation: ::String,
+                                         ?operation_status: ("IN_PROGRESS" | "CANCELLED" | "SUCCESSFUL" | "FAILED")
+                                       ) -> _ListApplicationOperationsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationOperationsResponseSuccess
 
       interface _ListApplicationSnapshotsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationSnapshotsResponse]
@@ -668,6 +701,7 @@ module Aws
       interface _RollbackApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RollbackApplicationResponse]
         def application_detail: () -> Types::ApplicationDetail
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#rollback_application-instance_method
       def rollback_application: (
@@ -678,6 +712,7 @@ module Aws
 
       interface _StartApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartApplicationResponse]
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#start_application-instance_method
       def start_application: (
@@ -704,6 +739,7 @@ module Aws
 
       interface _StopApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopApplicationResponse]
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#stop_application-instance_method
       def stop_application: (
@@ -740,6 +776,7 @@ module Aws
       interface _UpdateApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
         def application_detail: () -> Types::ApplicationDetail
+        def operation_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#update_application-instance_method
       def update_application: (
@@ -881,6 +918,9 @@ module Aws
                                   }?,
                                   application_snapshot_configuration_update: {
                                     snapshots_enabled_update: bool
+                                  }?,
+                                  application_system_rollback_configuration_update: {
+                                    rollback_enabled_update: bool
                                   }?,
                                   vpc_configuration_updates: Array[
                                     {

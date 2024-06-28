@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2024-06-26)
+------------------
+
+* Feature - Added ListLandingZoneOperations API.
+
 1.24.0 (2024-06-25)
 ------------------
 

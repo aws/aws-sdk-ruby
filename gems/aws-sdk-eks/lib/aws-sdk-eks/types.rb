@@ -1442,6 +1442,17 @@ module Aws::EKS
     #   The access configuration for the cluster.
     #   @return [Types::CreateAccessConfigRequest]
     #
+    # @!attribute [rw] bootstrap_self_managed_addons
+    #   If you set this value to `False` when creating a cluster, the
+    #   default networking add-ons will not be installed.
+    #
+    #   The default networking addons include vpc-cni, coredns, and
+    #   kube-proxy.
+    #
+    #   Use this option when you plan to install third-party alternative
+    #   add-ons or self-manage the default networking add-ons.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -1455,7 +1466,8 @@ module Aws::EKS
       :tags,
       :encryption_config,
       :outpost_config,
-      :access_config)
+      :access_config,
+      :bootstrap_self_managed_addons)
       SENSITIVE = []
       include Aws::Structure
     end

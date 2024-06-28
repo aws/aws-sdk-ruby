@@ -199,7 +199,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     # @option options [required, String] :engine

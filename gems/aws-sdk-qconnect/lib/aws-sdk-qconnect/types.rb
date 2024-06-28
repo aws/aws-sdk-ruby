@@ -23,6 +23,25 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # Content association data for a [step-by-step guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html
+    #
+    # @!attribute [rw] flow_id
+    #   The Amazon Resource Name (ARN) of an Amazon Connect flow.
+    #   Step-by-step guides are a type of flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AmazonConnectGuideAssociationData AWS API Documentation
+    #
+    class AmazonConnectGuideAssociationData < Struct.new(
+      :flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information for Amazon AppIntegrations to automatically
     # ingest content.
     #
@@ -480,6 +499,141 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # The contents of a content association.
+    #
+    # @note ContentAssociationContents is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ContentAssociationContents is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContentAssociationContents corresponding to the set member.
+    #
+    # @!attribute [rw] amazon_connect_guide_association
+    #   The data of the step-by-step guide association.
+    #   @return [Types::AmazonConnectGuideAssociationData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ContentAssociationContents AWS API Documentation
+    #
+    class ContentAssociationContents < Struct.new(
+      :amazon_connect_guide_association,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AmazonConnectGuideAssociation < ContentAssociationContents; end
+      class Unknown < ContentAssociationContents; end
+    end
+
+    # Information about the content association.
+    #
+    # @!attribute [rw] association_data
+    #   The content association.
+    #   @return [Types::ContentAssociationContents]
+    #
+    # @!attribute [rw] association_type
+    #   The type of association.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_arn
+    #   The Amazon Resource Name (ARN) of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_association_arn
+    #   The Amazon Resource Name (ARN) of the content association.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_association_id
+    #   The identifier of the content association. Can be either the ID or
+    #   the ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_id
+    #   The identifier of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ContentAssociationData AWS API Documentation
+    #
+    class ContentAssociationData < Struct.new(
+      :association_data,
+      :association_type,
+      :content_arn,
+      :content_association_arn,
+      :content_association_id,
+      :content_id,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a content association.
+    #
+    # @!attribute [rw] association_data
+    #   The content association.
+    #   @return [Types::ContentAssociationContents]
+    #
+    # @!attribute [rw] association_type
+    #   The type of association.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_arn
+    #   The Amazon Resource Name (ARN) of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_association_arn
+    #   The Amazon Resource Name (ARN) of the content association.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_association_id
+    #   The identifier of the content association. Can be either the ID or
+    #   the ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_id
+    #   The identifier of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_arn
+    #   The Amazon Resource Name (ARN) of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ContentAssociationSummary AWS API Documentation
+    #
+    class ContentAssociationSummary < Struct.new(
+      :association_data,
+      :association_type,
+      :content_arn,
+      :content_association_arn,
+      :content_association_id,
+      :content_id,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the content.
     #
     # @!attribute [rw] content_arn
@@ -833,6 +987,67 @@ module Aws::QConnect
     #
     class CreateAssistantResponse < Struct.new(
       :assistant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association
+    #   The identifier of the associated resource.
+    #   @return [Types::ContentAssociationContents]
+    #
+    # @!attribute [rw] association_type
+    #   The type of association.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] content_id
+    #   The identifier of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateContentAssociationRequest AWS API Documentation
+    #
+    class CreateContentAssociationRequest < Struct.new(
+      :association,
+      :association_type,
+      :client_token,
+      :content_id,
+      :knowledge_base_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content_association
+    #   The association between Amazon Q in Connect content and another
+    #   resource.
+    #   @return [Types::ContentAssociationData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateContentAssociationResponse AWS API Documentation
+    #
+    class CreateContentAssociationResponse < Struct.new(
+      :content_association)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1297,6 +1512,33 @@ module Aws::QConnect
     #
     class DeleteAssistantResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] content_association_id
+    #   The identifier of the content association. Can be either the ID or
+    #   the ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_id
+    #   The identifier of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteContentAssociationRequest AWS API Documentation
+    #
+    class DeleteContentAssociationRequest < Struct.new(
+      :content_association_id,
+      :content_id,
+      :knowledge_base_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteContentAssociationResponse AWS API Documentation
+    #
+    class DeleteContentAssociationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] content_id
     #   The identifier of the content. Can be either the ID or the ARN. URLs
     #   cannot contain the ARN.
@@ -1576,6 +1818,42 @@ module Aws::QConnect
     #
     class GetAssistantResponse < Struct.new(
       :assistant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content_association_id
+    #   The identifier of the content association. Can be either the ID or
+    #   the ARN. URLs cannot contain the ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_id
+    #   The identifier of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetContentAssociationRequest AWS API Documentation
+    #
+    class GetContentAssociationRequest < Struct.new(
+      :content_association_id,
+      :content_id,
+      :knowledge_base_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content_association
+    #   The association between Amazon Q in Connect content and another
+    #   resource.
+    #   @return [Types::ContentAssociationData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetContentAssociationResponse AWS API Documentation
+    #
+    class GetContentAssociationResponse < Struct.new(
+      :content_association)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1885,7 +2163,7 @@ module Aws::QConnect
     #   @return [Types::ExternalSourceConfiguration]
     #
     # @!attribute [rw] failed_record_report
-    #   The link to donwload the information of resource data that failed to
+    #   The link to download the information of resource data that failed to
     #   be imported.
     #   @return [String]
     #
@@ -2269,6 +2547,53 @@ module Aws::QConnect
     #
     class ListAssistantsResponse < Struct.new(
       :assistant_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content_id
+    #   The identifier of the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListContentAssociationsRequest AWS API Documentation
+    #
+    class ListContentAssociationsRequest < Struct.new(
+      :content_id,
+      :knowledge_base_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content_association_summaries
+    #   Summary information about content associations.
+    #   @return [Array<Types::ContentAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListContentAssociationsResponse AWS API Documentation
+    #
+    class ListContentAssociationsResponse < Struct.new(
+      :content_association_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4117,6 +4442,19 @@ module Aws::QConnect
     class TextData < Struct.new(
       :excerpt,
       :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The throttling limit has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

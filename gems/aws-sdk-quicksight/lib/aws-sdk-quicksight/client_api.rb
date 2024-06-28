@@ -206,6 +206,14 @@ module Aws::QuickSight
     BodySectionConfiguration = Shapes::StructureShape.new(name: 'BodySectionConfiguration')
     BodySectionConfigurationList = Shapes::ListShape.new(name: 'BodySectionConfigurationList')
     BodySectionContent = Shapes::StructureShape.new(name: 'BodySectionContent')
+    BodySectionDynamicCategoryDimensionConfiguration = Shapes::StructureShape.new(name: 'BodySectionDynamicCategoryDimensionConfiguration')
+    BodySectionDynamicDimensionLimit = Shapes::IntegerShape.new(name: 'BodySectionDynamicDimensionLimit')
+    BodySectionDynamicDimensionSortConfigurationList = Shapes::ListShape.new(name: 'BodySectionDynamicDimensionSortConfigurationList')
+    BodySectionDynamicNumericDimensionConfiguration = Shapes::StructureShape.new(name: 'BodySectionDynamicNumericDimensionConfiguration')
+    BodySectionRepeatConfiguration = Shapes::StructureShape.new(name: 'BodySectionRepeatConfiguration')
+    BodySectionRepeatDimensionConfiguration = Shapes::StructureShape.new(name: 'BodySectionRepeatDimensionConfiguration')
+    BodySectionRepeatDimensionConfigurationList = Shapes::ListShape.new(name: 'BodySectionRepeatDimensionConfigurationList')
+    BodySectionRepeatPageBreakConfiguration = Shapes::StructureShape.new(name: 'BodySectionRepeatPageBreakConfiguration')
     BookmarksConfigurations = Shapes::StructureShape.new(name: 'BookmarksConfigurations')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
@@ -244,6 +252,7 @@ module Aws::QuickSight
     CategoryFilterMatchOperator = Shapes::StringShape.new(name: 'CategoryFilterMatchOperator')
     CategoryFilterSelectAllOptions = Shapes::StringShape.new(name: 'CategoryFilterSelectAllOptions')
     CategoryFilterType = Shapes::StringShape.new(name: 'CategoryFilterType')
+    CategoryInnerFilter = Shapes::StructureShape.new(name: 'CategoryInnerFilter')
     CategoryValue = Shapes::StringShape.new(name: 'CategoryValue')
     CategoryValueList = Shapes::ListShape.new(name: 'CategoryValueList')
     CellValueSynonym = Shapes::StructureShape.new(name: 'CellValueSynonym')
@@ -901,6 +910,7 @@ module Aws::QuickSight
     IngestionStatus = Shapes::StringShape.new(name: 'IngestionStatus')
     IngestionType = Shapes::StringShape.new(name: 'IngestionType')
     Ingestions = Shapes::ListShape.new(name: 'Ingestions')
+    InnerFilter = Shapes::StructureShape.new(name: 'InnerFilter')
     InputColumn = Shapes::StructureShape.new(name: 'InputColumn')
     InputColumnDataType = Shapes::StringShape.new(name: 'InputColumnDataType')
     InputColumnList = Shapes::ListShape.new(name: 'InputColumnList')
@@ -1089,12 +1099,14 @@ module Aws::QuickSight
     NegativeFormat = Shapes::StructureShape.new(name: 'NegativeFormat')
     NegativeValueConfiguration = Shapes::StructureShape.new(name: 'NegativeValueConfiguration')
     NegativeValueDisplayMode = Shapes::StringShape.new(name: 'NegativeValueDisplayMode')
+    NestedFilter = Shapes::StructureShape.new(name: 'NestedFilter')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
     NetworkInterfaceStatus = Shapes::StringShape.new(name: 'NetworkInterfaceStatus')
     NewDefaultValues = Shapes::StructureShape.new(name: 'NewDefaultValues')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NonRepeatingVisualsList = Shapes::ListShape.new(name: 'NonRepeatingVisualsList')
     NullString = Shapes::StringShape.new(name: 'NullString')
     NullValueFormatConfiguration = Shapes::StructureShape.new(name: 'NullValueFormatConfiguration')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
@@ -2426,12 +2438,39 @@ module Aws::QuickSight
     BodySectionConfiguration.add_member(:content, Shapes::ShapeRef.new(shape: BodySectionContent, required: true, location_name: "Content"))
     BodySectionConfiguration.add_member(:style, Shapes::ShapeRef.new(shape: SectionStyle, location_name: "Style"))
     BodySectionConfiguration.add_member(:page_break_configuration, Shapes::ShapeRef.new(shape: SectionPageBreakConfiguration, location_name: "PageBreakConfiguration"))
+    BodySectionConfiguration.add_member(:repeat_configuration, Shapes::ShapeRef.new(shape: BodySectionRepeatConfiguration, location_name: "RepeatConfiguration"))
     BodySectionConfiguration.struct_class = Types::BodySectionConfiguration
 
     BodySectionConfigurationList.member = Shapes::ShapeRef.new(shape: BodySectionConfiguration)
 
     BodySectionContent.add_member(:layout, Shapes::ShapeRef.new(shape: SectionLayoutConfiguration, location_name: "Layout"))
     BodySectionContent.struct_class = Types::BodySectionContent
+
+    BodySectionDynamicCategoryDimensionConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
+    BodySectionDynamicCategoryDimensionConfiguration.add_member(:limit, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionLimit, location_name: "Limit", metadata: {"box"=>true}))
+    BodySectionDynamicCategoryDimensionConfiguration.add_member(:sort_by_metrics, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionSortConfigurationList, location_name: "SortByMetrics"))
+    BodySectionDynamicCategoryDimensionConfiguration.struct_class = Types::BodySectionDynamicCategoryDimensionConfiguration
+
+    BodySectionDynamicDimensionSortConfigurationList.member = Shapes::ShapeRef.new(shape: ColumnSort)
+
+    BodySectionDynamicNumericDimensionConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
+    BodySectionDynamicNumericDimensionConfiguration.add_member(:limit, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionLimit, location_name: "Limit", metadata: {"box"=>true}))
+    BodySectionDynamicNumericDimensionConfiguration.add_member(:sort_by_metrics, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionSortConfigurationList, location_name: "SortByMetrics"))
+    BodySectionDynamicNumericDimensionConfiguration.struct_class = Types::BodySectionDynamicNumericDimensionConfiguration
+
+    BodySectionRepeatConfiguration.add_member(:dimension_configurations, Shapes::ShapeRef.new(shape: BodySectionRepeatDimensionConfigurationList, location_name: "DimensionConfigurations"))
+    BodySectionRepeatConfiguration.add_member(:page_break_configuration, Shapes::ShapeRef.new(shape: BodySectionRepeatPageBreakConfiguration, location_name: "PageBreakConfiguration"))
+    BodySectionRepeatConfiguration.add_member(:non_repeating_visuals, Shapes::ShapeRef.new(shape: NonRepeatingVisualsList, location_name: "NonRepeatingVisuals"))
+    BodySectionRepeatConfiguration.struct_class = Types::BodySectionRepeatConfiguration
+
+    BodySectionRepeatDimensionConfiguration.add_member(:dynamic_category_dimension_configuration, Shapes::ShapeRef.new(shape: BodySectionDynamicCategoryDimensionConfiguration, location_name: "DynamicCategoryDimensionConfiguration"))
+    BodySectionRepeatDimensionConfiguration.add_member(:dynamic_numeric_dimension_configuration, Shapes::ShapeRef.new(shape: BodySectionDynamicNumericDimensionConfiguration, location_name: "DynamicNumericDimensionConfiguration"))
+    BodySectionRepeatDimensionConfiguration.struct_class = Types::BodySectionRepeatDimensionConfiguration
+
+    BodySectionRepeatDimensionConfigurationList.member = Shapes::ShapeRef.new(shape: BodySectionRepeatDimensionConfiguration)
+
+    BodySectionRepeatPageBreakConfiguration.add_member(:after, Shapes::ShapeRef.new(shape: SectionAfterPageBreak, location_name: "After"))
+    BodySectionRepeatPageBreakConfiguration.struct_class = Types::BodySectionRepeatPageBreakConfiguration
 
     BookmarksConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     BookmarksConfigurations.struct_class = Types::BookmarksConfigurations
@@ -2554,6 +2593,11 @@ module Aws::QuickSight
     CategoryFilterConfiguration.add_member(:custom_filter_list_configuration, Shapes::ShapeRef.new(shape: CustomFilterListConfiguration, location_name: "CustomFilterListConfiguration"))
     CategoryFilterConfiguration.add_member(:custom_filter_configuration, Shapes::ShapeRef.new(shape: CustomFilterConfiguration, location_name: "CustomFilterConfiguration"))
     CategoryFilterConfiguration.struct_class = Types::CategoryFilterConfiguration
+
+    CategoryInnerFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
+    CategoryInnerFilter.add_member(:configuration, Shapes::ShapeRef.new(shape: CategoryFilterConfiguration, required: true, location_name: "Configuration"))
+    CategoryInnerFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
+    CategoryInnerFilter.struct_class = Types::CategoryInnerFilter
 
     CategoryValueList.member = Shapes::ShapeRef.new(shape: CategoryValue)
 
@@ -4701,6 +4745,7 @@ module Aws::QuickSight
     Filter.add_member(:time_range_filter, Shapes::ShapeRef.new(shape: TimeRangeFilter, location_name: "TimeRangeFilter"))
     Filter.add_member(:relative_dates_filter, Shapes::ShapeRef.new(shape: RelativeDatesFilter, location_name: "RelativeDatesFilter"))
     Filter.add_member(:top_bottom_filter, Shapes::ShapeRef.new(shape: TopBottomFilter, location_name: "TopBottomFilter"))
+    Filter.add_member(:nested_filter, Shapes::ShapeRef.new(shape: NestedFilter, location_name: "NestedFilter"))
     Filter.struct_class = Types::Filter
 
     FilterControl.add_member(:date_time_picker, Shapes::ShapeRef.new(shape: FilterDateTimePickerControl, location_name: "DateTimePicker"))
@@ -5324,6 +5369,9 @@ module Aws::QuickSight
     Ingestion.struct_class = Types::Ingestion
 
     Ingestions.member = Shapes::ShapeRef.new(shape: Ingestion)
+
+    InnerFilter.add_member(:category_inner_filter, Shapes::ShapeRef.new(shape: CategoryInnerFilter, location_name: "CategoryInnerFilter"))
+    InnerFilter.struct_class = Types::InnerFilter
 
     InputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "Name"))
     InputColumn.add_member(:type, Shapes::ShapeRef.new(shape: InputColumnDataType, required: true, location_name: "Type"))
@@ -6073,6 +6121,12 @@ module Aws::QuickSight
     NegativeValueConfiguration.add_member(:display_mode, Shapes::ShapeRef.new(shape: NegativeValueDisplayMode, required: true, location_name: "DisplayMode"))
     NegativeValueConfiguration.struct_class = Types::NegativeValueConfiguration
 
+    NestedFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
+    NestedFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
+    NestedFilter.add_member(:include_inner_set, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "IncludeInnerSet"))
+    NestedFilter.add_member(:inner_filter, Shapes::ShapeRef.new(shape: InnerFilter, required: true, location_name: "InnerFilter"))
+    NestedFilter.struct_class = Types::NestedFilter
+
     NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     NetworkInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     NetworkInterface.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -6087,6 +6141,8 @@ module Aws::QuickSight
     NewDefaultValues.add_member(:date_time_static_values, Shapes::ShapeRef.new(shape: DateTimeDatasetParameterValueList, location_name: "DateTimeStaticValues"))
     NewDefaultValues.add_member(:integer_static_values, Shapes::ShapeRef.new(shape: IntegerDatasetParameterValueList, location_name: "IntegerStaticValues"))
     NewDefaultValues.struct_class = Types::NewDefaultValues
+
+    NonRepeatingVisualsList.member = Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId)
 
     NullValueFormatConfiguration.add_member(:null_string, Shapes::ShapeRef.new(shape: NullString, required: true, location_name: "NullString"))
     NullValueFormatConfiguration.struct_class = Types::NullValueFormatConfiguration
@@ -8761,6 +8817,7 @@ module Aws::QuickSight
 
       api.metadata = {
         "apiVersion" => "2018-04-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "quicksight",
         "jsonVersion" => "1.0",
         "protocol" => "rest-json",

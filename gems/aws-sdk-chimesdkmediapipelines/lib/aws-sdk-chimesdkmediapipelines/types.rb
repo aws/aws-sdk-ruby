@@ -220,6 +220,12 @@ module Aws::ChimeSDKMediaPipelines
     # A structure that contains the configuration settings for an Amazon
     # Transcribe processor.
     #
+    # <note markdown="1"> Calls to this API must include a `LanguageCode`, `IdentifyLanguage`,
+    # or `IdentifyMultipleLanguages` parameter. If you include more than one
+    # of those parameters, your transcription job fails.
+    #
+    #  </note>
+    #
     # @!attribute [rw] language_code
     #   The language code that represents the language spoken in your audio.
     #
@@ -383,6 +389,10 @@ module Aws::ChimeSDKMediaPipelines
     #   Turns language identification on or off.
     #   @return [Boolean]
     #
+    # @!attribute [rw] identify_multiple_languages
+    #   Turns language identification on or off for multiple languages.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] language_options
     #   The language options for the transcription, such as automatic
     #   language detection.
@@ -418,6 +428,7 @@ module Aws::ChimeSDKMediaPipelines
       :language_model_name,
       :filter_partial_results,
       :identify_language,
+      :identify_multiple_languages,
       :language_options,
       :preferred_language,
       :vocabulary_names,
@@ -1048,11 +1059,11 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # @!attribute [rw] stream_configuration
-    #   The configuration settings for the video stream.
+    #   The configuration settings for the stream.
     #   @return [Types::KinesisVideoStreamConfiguration]
     #
     # @!attribute [rw] pool_name
-    #   The name of the video stream pool.
+    #   The name of the pool.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1063,7 +1074,7 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the video stream pool.
+    #   The tags assigned to the stream pool.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaPipelineKinesisVideoStreamPoolRequest AWS API Documentation
@@ -1078,7 +1089,11 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # @!attribute [rw] kinesis_video_stream_pool_configuration
-    #   The configuration for the Kinesis video stream pool.
+    #   The configuration for applying the streams to the pool.
+    #
+    #   <note markdown="1">
+    #
+    #    </note>
     #   @return [Types::KinesisVideoStreamPoolConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/CreateMediaPipelineKinesisVideoStreamPoolResponse AWS API Documentation
@@ -1172,7 +1187,9 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # @!attribute [rw] identifier
-    #   The ID of the pool being deleted.
+    #   The unique identifier of the requested resource. Valid values
+    #   include the name and ARN of the media pipeline Kinesis Video Stream
+    #   pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/DeleteMediaPipelineKinesisVideoStreamPoolRequest AWS API Documentation
@@ -1312,7 +1329,9 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # @!attribute [rw] identifier
-    #   The ID of the video stream pool.
+    #   The unique identifier of the requested resource. Valid values
+    #   include the name and ARN of the media pipeline Kinesis Video Stream
+    #   pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/GetMediaPipelineKinesisVideoStreamPoolRequest AWS API Documentation
@@ -1550,6 +1569,32 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # The configuration of an Kinesis video stream.
+    #
+    # <note markdown="1"> If a meeting uses an opt-in Region as its [MediaRegion][1], the KVS
+    # stream must be in that same Region. For example, if a meeting uses the
+    # `af-south-1` Region, the KVS stream must also be in `af-south-1`.
+    # However, if the meeting uses a Region that AWS turns on by default,
+    # the KVS stream can be in any available Region, including an opt-in
+    # Region. For example, if the meeting uses `ca-central-1`, the KVS
+    # stream can be in `eu-west-2`, `us-east-1`, `af-south-1`, or any other
+    # Region that the Amazon Chime SDK supports.
+    #
+    #  To learn which AWS Region a meeting uses, call the [GetMeeting][2] API
+    # and use the [MediaRegion][1] parameter from the response.
+    #
+    #  For more information about opt-in Regions, refer to [Available
+    # Regions][3] in the *Amazon Chime SDK Developer Guide*, and [Specify
+    # which AWS Regions your account can use][4], in the *AWS Account
+    # Management Reference Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html#chimesdk-meeting-chime_CreateMeeting-request-MediaRegion
+    # [2]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetMeeting.html
+    # [3]: https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions.html
+    # [4]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#rande-manage-enable.html
     #
     # @!attribute [rw] region
     #   The Amazon Web Services Region of the video stream.
@@ -2499,7 +2544,8 @@ module Aws::ChimeSDKMediaPipelines
     # Structure that contains the settings for a media stream sink.
     #
     # @!attribute [rw] sink_arn
-    #   The ARN of the media stream sink.
+    #   The ARN of the Kinesis Video Stream pool returned by the
+    #   CreateMediaPipelineKinesisVideoStreamPool API.
     #   @return [String]
     #
     # @!attribute [rw] sink_type
@@ -2532,7 +2578,7 @@ module Aws::ChimeSDKMediaPipelines
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   The ARN of the media stream source.
+    #   The ARN of the meeting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-media-pipelines-2021-07-15/MediaStreamSource AWS API Documentation
@@ -3332,7 +3378,9 @@ module Aws::ChimeSDKMediaPipelines
     end
 
     # @!attribute [rw] identifier
-    #   The ID of the video stream pool.
+    #   The unique identifier of the requested resource. Valid values
+    #   include the name and ARN of the media pipeline Kinesis Video Stream
+    #   pool.
     #   @return [String]
     #
     # @!attribute [rw] stream_configuration

@@ -682,6 +682,103 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Creates an association between a content resource in a knowledge base
+    # and [step-by-step guides][1]. Step-by-step guides offer instructions
+    # to agents for resolving common customer issues. You create a content
+    # association to integrate Amazon Q in Connect and step-by-step guides.
+    #
+    # After you integrate Amazon Q and step-by-step guides, when Amazon Q
+    # provides a recommendation to an agent based on the intent that it's
+    # detected, it also provides them with the option to start the
+    # step-by-step guide that you have associated with the content.
+    #
+    # Note the following limitations:
+    #
+    # * You can create only one content association for each content
+    #   resource in a knowledge base.
+    #
+    # * You can associate a step-by-step guide with multiple content
+    #   resources.
+    #
+    # For more information, see [Integrate Amazon Q in Connect with
+    # step-by-step guides][2] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html
+    #
+    # @option params [required, Types::ContentAssociationContents] :association
+    #   The identifier of the associated resource.
+    #
+    # @option params [required, String] :association_type
+    #   The type of association.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :content_id
+    #   The identifier of the content.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateContentAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContentAssociationResponse#content_association #content_association} => Types::ContentAssociationData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_content_association({
+    #     association: { # required
+    #       amazon_connect_guide_association: {
+    #         flow_id: "GenericArn",
+    #       },
+    #     },
+    #     association_type: "AMAZON_CONNECT_GUIDE", # required, accepts AMAZON_CONNECT_GUIDE
+    #     client_token: "ClientToken",
+    #     content_id: "UuidOrArn", # required
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content_association.association_data.amazon_connect_guide_association.flow_id #=> String
+    #   resp.content_association.association_type #=> String, one of "AMAZON_CONNECT_GUIDE"
+    #   resp.content_association.content_arn #=> String
+    #   resp.content_association.content_association_arn #=> String
+    #   resp.content_association.content_association_id #=> String
+    #   resp.content_association.content_id #=> String
+    #   resp.content_association.knowledge_base_arn #=> String
+    #   resp.content_association.knowledge_base_id #=> String
+    #   resp.content_association.tags #=> Hash
+    #   resp.content_association.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateContentAssociation AWS API Documentation
+    #
+    # @overload create_content_association(params = {})
+    # @param [Hash] params ({})
+    def create_content_association(params = {}, options = {})
+      req = build_request(:create_content_association, params)
+      req.send_request(options)
+    end
+
     # Creates a knowledge base.
     #
     # <note markdown="1"> When using this API, you cannot reuse [Amazon AppIntegrations][1]
@@ -1123,6 +1220,45 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Deletes the content association.
+    #
+    # For more information about content associations--what they are and
+    # when they are used--see [Integrate Amazon Q in Connect with
+    # step-by-step guides][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html
+    #
+    # @option params [required, String] :content_association_id
+    #   The identifier of the content association. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :content_id
+    #   The identifier of the content.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_content_association({
+    #     content_association_id: "UuidOrArn", # required
+    #     content_id: "UuidOrArn", # required
+    #     knowledge_base_id: "UuidOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteContentAssociation AWS API Documentation
+    #
+    # @overload delete_content_association(params = {})
+    # @param [Hash] params ({})
+    def delete_content_association(params = {}, options = {})
+      req = build_request(:delete_content_association, params)
+      req.send_request(options)
+    end
+
     # Deletes the quick response import job.
     #
     # @option params [required, String] :import_job_id
@@ -1343,6 +1479,60 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def get_content(params = {}, options = {})
       req = build_request(:get_content, params)
+      req.send_request(options)
+    end
+
+    # Returns the content association.
+    #
+    # For more information about content associations--what they are and
+    # when they are used--see [Integrate Amazon Q in Connect with
+    # step-by-step guides][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html
+    #
+    # @option params [required, String] :content_association_id
+    #   The identifier of the content association. Can be either the ID or the
+    #   ARN. URLs cannot contain the ARN.
+    #
+    # @option params [required, String] :content_id
+    #   The identifier of the content.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base.
+    #
+    # @return [Types::GetContentAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContentAssociationResponse#content_association #content_association} => Types::ContentAssociationData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_content_association({
+    #     content_association_id: "UuidOrArn", # required
+    #     content_id: "UuidOrArn", # required
+    #     knowledge_base_id: "UuidOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content_association.association_data.amazon_connect_guide_association.flow_id #=> String
+    #   resp.content_association.association_type #=> String, one of "AMAZON_CONNECT_GUIDE"
+    #   resp.content_association.content_arn #=> String
+    #   resp.content_association.content_association_arn #=> String
+    #   resp.content_association.content_association_id #=> String
+    #   resp.content_association.content_id #=> String
+    #   resp.content_association.knowledge_base_arn #=> String
+    #   resp.content_association.knowledge_base_id #=> String
+    #   resp.content_association.tags #=> Hash
+    #   resp.content_association.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetContentAssociation AWS API Documentation
+    #
+    # @overload get_content_association(params = {})
+    # @param [Hash] params ({})
+    def get_content_association(params = {}, options = {})
+      req = build_request(:get_content_association, params)
       req.send_request(options)
     end
 
@@ -1804,6 +1994,70 @@ module Aws::QConnect
     # @param [Hash] params ({})
     def list_assistants(params = {}, options = {})
       req = build_request(:list_assistants, params)
+      req.send_request(options)
+    end
+
+    # Lists the content associations.
+    #
+    # For more information about content associations--what they are and
+    # when they are used--see [Integrate Amazon Q in Connect with
+    # step-by-step guides][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html
+    #
+    # @option params [required, String] :content_id
+    #   The identifier of the content.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListContentAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContentAssociationsResponse#content_association_summaries #content_association_summaries} => Array&lt;Types::ContentAssociationSummary&gt;
+    #   * {Types::ListContentAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_content_associations({
+    #     content_id: "UuidOrArn", # required
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content_association_summaries #=> Array
+    #   resp.content_association_summaries[0].association_data.amazon_connect_guide_association.flow_id #=> String
+    #   resp.content_association_summaries[0].association_type #=> String, one of "AMAZON_CONNECT_GUIDE"
+    #   resp.content_association_summaries[0].content_arn #=> String
+    #   resp.content_association_summaries[0].content_association_arn #=> String
+    #   resp.content_association_summaries[0].content_association_id #=> String
+    #   resp.content_association_summaries[0].content_id #=> String
+    #   resp.content_association_summaries[0].knowledge_base_arn #=> String
+    #   resp.content_association_summaries[0].knowledge_base_id #=> String
+    #   resp.content_association_summaries[0].tags #=> Hash
+    #   resp.content_association_summaries[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListContentAssociations AWS API Documentation
+    #
+    # @overload list_content_associations(params = {})
+    # @param [Hash] params ({})
+    def list_content_associations(params = {}, options = {})
+      req = build_request(:list_content_associations, params)
       req.send_request(options)
     end
 
@@ -3121,7 +3375,7 @@ module Aws::QConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

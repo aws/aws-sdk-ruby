@@ -464,7 +464,7 @@ module Aws::MQ
     #   Optional. The authentication strategy used to secure the broker. The
     #   default is SIMPLE.
     #
-    # @option params [required, Boolean] :auto_minor_version_upgrade
+    # @option params [Boolean] :auto_minor_version_upgrade
     #
     # @option params [required, String] :broker_name
     #
@@ -484,7 +484,7 @@ module Aws::MQ
     # @option params [required, String] :engine_type
     #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
     #
-    # @option params [required, String] :engine_version
+    # @option params [String] :engine_version
     #
     # @option params [required, String] :host_instance_type
     #
@@ -531,7 +531,7 @@ module Aws::MQ
     #
     #   resp = client.create_broker({
     #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #     auto_minor_version_upgrade: false, # required
+    #     auto_minor_version_upgrade: false,
     #     broker_name: "__string", # required
     #     configuration: {
     #       id: "__string", # required
@@ -544,7 +544,7 @@ module Aws::MQ
     #       use_aws_owned_key: false, # required
     #     },
     #     engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
-    #     engine_version: "__string", # required
+    #     engine_version: "__string",
     #     host_instance_type: "__string", # required
     #     ldap_server_metadata: {
     #       hosts: ["__string"], # required
@@ -613,7 +613,7 @@ module Aws::MQ
     # @option params [required, String] :engine_type
     #   The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
     #
-    # @option params [required, String] :engine_version
+    # @option params [String] :engine_version
     #
     # @option params [required, String] :name
     #
@@ -633,7 +633,7 @@ module Aws::MQ
     #   resp = client.create_configuration({
     #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
     #     engine_type: "ACTIVEMQ", # required, accepts ACTIVEMQ, RABBITMQ
-    #     engine_version: "__string", # required
+    #     engine_version: "__string",
     #     name: "__string", # required
     #     tags: {
     #       "__string" => "__string",
@@ -1650,7 +1650,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

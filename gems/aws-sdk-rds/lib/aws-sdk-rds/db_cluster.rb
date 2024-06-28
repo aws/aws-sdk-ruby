@@ -696,7 +696,7 @@ module Aws::RDS
       data[:storage_throughput]
     end
 
-    # Returns the details of the DB instance’s server certificate.
+    # The details of the DB instance’s server certificate.
     #
     # For more information, see [Using SSL/TLS to encrypt a connection to a
     # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
@@ -1005,7 +1005,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     # @option options [required, String] :engine

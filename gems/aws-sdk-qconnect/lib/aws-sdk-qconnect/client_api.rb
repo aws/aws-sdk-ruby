@@ -14,6 +14,7 @@ module Aws::QConnect
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AmazonConnectGuideAssociationData = Shapes::StructureShape.new(name: 'AmazonConnectGuideAssociationData')
     AndConditions = Shapes::ListShape.new(name: 'AndConditions')
     AppIntegrationsConfiguration = Shapes::StructureShape.new(name: 'AppIntegrationsConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -42,6 +43,11 @@ module Aws::QConnect
     ContactAttributeKeys = Shapes::ListShape.new(name: 'ContactAttributeKeys')
     ContactAttributeValue = Shapes::StringShape.new(name: 'ContactAttributeValue')
     ContactAttributes = Shapes::MapShape.new(name: 'ContactAttributes')
+    ContentAssociationContents = Shapes::UnionShape.new(name: 'ContentAssociationContents')
+    ContentAssociationData = Shapes::StructureShape.new(name: 'ContentAssociationData')
+    ContentAssociationSummary = Shapes::StructureShape.new(name: 'ContentAssociationSummary')
+    ContentAssociationSummaryList = Shapes::ListShape.new(name: 'ContentAssociationSummaryList')
+    ContentAssociationType = Shapes::StringShape.new(name: 'ContentAssociationType')
     ContentData = Shapes::StructureShape.new(name: 'ContentData')
     ContentDataDetails = Shapes::StructureShape.new(name: 'ContentDataDetails')
     ContentFeedbackData = Shapes::UnionShape.new(name: 'ContentFeedbackData')
@@ -56,6 +62,8 @@ module Aws::QConnect
     CreateAssistantAssociationResponse = Shapes::StructureShape.new(name: 'CreateAssistantAssociationResponse')
     CreateAssistantRequest = Shapes::StructureShape.new(name: 'CreateAssistantRequest')
     CreateAssistantResponse = Shapes::StructureShape.new(name: 'CreateAssistantResponse')
+    CreateContentAssociationRequest = Shapes::StructureShape.new(name: 'CreateContentAssociationRequest')
+    CreateContentAssociationResponse = Shapes::StructureShape.new(name: 'CreateContentAssociationResponse')
     CreateContentRequest = Shapes::StructureShape.new(name: 'CreateContentRequest')
     CreateContentResponse = Shapes::StructureShape.new(name: 'CreateContentResponse')
     CreateKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseRequest')
@@ -72,6 +80,8 @@ module Aws::QConnect
     DeleteAssistantAssociationResponse = Shapes::StructureShape.new(name: 'DeleteAssistantAssociationResponse')
     DeleteAssistantRequest = Shapes::StructureShape.new(name: 'DeleteAssistantRequest')
     DeleteAssistantResponse = Shapes::StructureShape.new(name: 'DeleteAssistantResponse')
+    DeleteContentAssociationRequest = Shapes::StructureShape.new(name: 'DeleteContentAssociationRequest')
+    DeleteContentAssociationResponse = Shapes::StructureShape.new(name: 'DeleteContentAssociationResponse')
     DeleteContentRequest = Shapes::StructureShape.new(name: 'DeleteContentRequest')
     DeleteContentResponse = Shapes::StructureShape.new(name: 'DeleteContentResponse')
     DeleteImportJobRequest = Shapes::StructureShape.new(name: 'DeleteImportJobRequest')
@@ -97,6 +107,8 @@ module Aws::QConnect
     GetAssistantAssociationResponse = Shapes::StructureShape.new(name: 'GetAssistantAssociationResponse')
     GetAssistantRequest = Shapes::StructureShape.new(name: 'GetAssistantRequest')
     GetAssistantResponse = Shapes::StructureShape.new(name: 'GetAssistantResponse')
+    GetContentAssociationRequest = Shapes::StructureShape.new(name: 'GetContentAssociationRequest')
+    GetContentAssociationResponse = Shapes::StructureShape.new(name: 'GetContentAssociationResponse')
     GetContentRequest = Shapes::StructureShape.new(name: 'GetContentRequest')
     GetContentResponse = Shapes::StructureShape.new(name: 'GetContentResponse')
     GetContentSummaryRequest = Shapes::StructureShape.new(name: 'GetContentSummaryRequest')
@@ -135,6 +147,8 @@ module Aws::QConnect
     ListAssistantAssociationsResponse = Shapes::StructureShape.new(name: 'ListAssistantAssociationsResponse')
     ListAssistantsRequest = Shapes::StructureShape.new(name: 'ListAssistantsRequest')
     ListAssistantsResponse = Shapes::StructureShape.new(name: 'ListAssistantsResponse')
+    ListContentAssociationsRequest = Shapes::StructureShape.new(name: 'ListContentAssociationsRequest')
+    ListContentAssociationsResponse = Shapes::StructureShape.new(name: 'ListContentAssociationsResponse')
     ListContentsRequest = Shapes::StructureShape.new(name: 'ListContentsRequest')
     ListContentsResponse = Shapes::StructureShape.new(name: 'ListContentsResponse')
     ListImportJobsRequest = Shapes::StructureShape.new(name: 'ListImportJobsRequest')
@@ -253,6 +267,7 @@ module Aws::QConnect
     Tags = Shapes::MapShape.new(name: 'Tags')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     TextData = Shapes::StructureShape.new(name: 'TextData')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeToLive = Shapes::IntegerShape.new(name: 'TimeToLive')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -275,6 +290,9 @@ module Aws::QConnect
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AmazonConnectGuideAssociationData.add_member(:flow_id, Shapes::ShapeRef.new(shape: GenericArn, location_name: "flowId"))
+    AmazonConnectGuideAssociationData.struct_class = Types::AmazonConnectGuideAssociationData
 
     AndConditions.member = Shapes::ShapeRef.new(shape: TagCondition)
 
@@ -365,6 +383,36 @@ module Aws::QConnect
     ContactAttributes.key = Shapes::ShapeRef.new(shape: ContactAttributeKey)
     ContactAttributes.value = Shapes::ShapeRef.new(shape: ContactAttributeValue)
 
+    ContentAssociationContents.add_member(:amazon_connect_guide_association, Shapes::ShapeRef.new(shape: AmazonConnectGuideAssociationData, location_name: "amazonConnectGuideAssociation"))
+    ContentAssociationContents.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContentAssociationContents.add_member_subclass(:amazon_connect_guide_association, Types::ContentAssociationContents::AmazonConnectGuideAssociation)
+    ContentAssociationContents.add_member_subclass(:unknown, Types::ContentAssociationContents::Unknown)
+    ContentAssociationContents.struct_class = Types::ContentAssociationContents
+
+    ContentAssociationData.add_member(:association_data, Shapes::ShapeRef.new(shape: ContentAssociationContents, required: true, location_name: "associationData"))
+    ContentAssociationData.add_member(:association_type, Shapes::ShapeRef.new(shape: ContentAssociationType, required: true, location_name: "associationType"))
+    ContentAssociationData.add_member(:content_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "contentArn"))
+    ContentAssociationData.add_member(:content_association_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "contentAssociationArn"))
+    ContentAssociationData.add_member(:content_association_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "contentAssociationId"))
+    ContentAssociationData.add_member(:content_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "contentId"))
+    ContentAssociationData.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
+    ContentAssociationData.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
+    ContentAssociationData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ContentAssociationData.struct_class = Types::ContentAssociationData
+
+    ContentAssociationSummary.add_member(:association_data, Shapes::ShapeRef.new(shape: ContentAssociationContents, required: true, location_name: "associationData"))
+    ContentAssociationSummary.add_member(:association_type, Shapes::ShapeRef.new(shape: ContentAssociationType, required: true, location_name: "associationType"))
+    ContentAssociationSummary.add_member(:content_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "contentArn"))
+    ContentAssociationSummary.add_member(:content_association_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "contentAssociationArn"))
+    ContentAssociationSummary.add_member(:content_association_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "contentAssociationId"))
+    ContentAssociationSummary.add_member(:content_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "contentId"))
+    ContentAssociationSummary.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "knowledgeBaseArn"))
+    ContentAssociationSummary.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "knowledgeBaseId"))
+    ContentAssociationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ContentAssociationSummary.struct_class = Types::ContentAssociationSummary
+
+    ContentAssociationSummaryList.member = Shapes::ShapeRef.new(shape: ContentAssociationSummary)
+
     ContentData.add_member(:content_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "contentArn"))
     ContentData.add_member(:content_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "contentId"))
     ContentData.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "contentType"))
@@ -435,6 +483,17 @@ module Aws::QConnect
 
     CreateAssistantResponse.add_member(:assistant, Shapes::ShapeRef.new(shape: AssistantData, location_name: "assistant"))
     CreateAssistantResponse.struct_class = Types::CreateAssistantResponse
+
+    CreateContentAssociationRequest.add_member(:association, Shapes::ShapeRef.new(shape: ContentAssociationContents, required: true, location_name: "association"))
+    CreateContentAssociationRequest.add_member(:association_type, Shapes::ShapeRef.new(shape: ContentAssociationType, required: true, location_name: "associationType"))
+    CreateContentAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateContentAssociationRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
+    CreateContentAssociationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    CreateContentAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateContentAssociationRequest.struct_class = Types::CreateContentAssociationRequest
+
+    CreateContentAssociationResponse.add_member(:content_association, Shapes::ShapeRef.new(shape: ContentAssociationData, location_name: "contentAssociation"))
+    CreateContentAssociationResponse.struct_class = Types::CreateContentAssociationResponse
 
     CreateContentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -525,6 +584,13 @@ module Aws::QConnect
 
     DeleteAssistantResponse.struct_class = Types::DeleteAssistantResponse
 
+    DeleteContentAssociationRequest.add_member(:content_association_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentAssociationId"))
+    DeleteContentAssociationRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
+    DeleteContentAssociationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    DeleteContentAssociationRequest.struct_class = Types::DeleteContentAssociationRequest
+
+    DeleteContentAssociationResponse.struct_class = Types::DeleteContentAssociationResponse
+
     DeleteContentRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
     DeleteContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     DeleteContentRequest.struct_class = Types::DeleteContentRequest
@@ -592,6 +658,14 @@ module Aws::QConnect
 
     GetAssistantResponse.add_member(:assistant, Shapes::ShapeRef.new(shape: AssistantData, location_name: "assistant"))
     GetAssistantResponse.struct_class = Types::GetAssistantResponse
+
+    GetContentAssociationRequest.add_member(:content_association_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentAssociationId"))
+    GetContentAssociationRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
+    GetContentAssociationRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    GetContentAssociationRequest.struct_class = Types::GetContentAssociationRequest
+
+    GetContentAssociationResponse.add_member(:content_association, Shapes::ShapeRef.new(shape: ContentAssociationData, location_name: "contentAssociation"))
+    GetContentAssociationResponse.struct_class = Types::GetContentAssociationResponse
 
     GetContentRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
     GetContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -735,6 +809,16 @@ module Aws::QConnect
     ListAssistantsResponse.add_member(:assistant_summaries, Shapes::ShapeRef.new(shape: AssistantList, required: true, location_name: "assistantSummaries"))
     ListAssistantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAssistantsResponse.struct_class = Types::ListAssistantsResponse
+
+    ListContentAssociationsRequest.add_member(:content_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "contentId"))
+    ListContentAssociationsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    ListContentAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListContentAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContentAssociationsRequest.struct_class = Types::ListContentAssociationsRequest
+
+    ListContentAssociationsResponse.add_member(:content_association_summaries, Shapes::ShapeRef.new(shape: ContentAssociationSummaryList, required: true, location_name: "contentAssociationSummaries"))
+    ListContentAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListContentAssociationsResponse.struct_class = Types::ListContentAssociationsResponse
 
     ListContentsRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     ListContentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1134,6 +1218,9 @@ module Aws::QConnect
     TextData.add_member(:title, Shapes::ShapeRef.new(shape: DocumentText, location_name: "title"))
     TextData.struct_class = Types::TextData
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, location_name: "resourceName"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
@@ -1251,6 +1338,20 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_content_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContentAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: CreateContentAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContentAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_knowledge_base, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateKnowledgeBase"
         o.http_method = "POST"
@@ -1321,6 +1422,17 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_content_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContentAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations/{contentAssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContentAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContentAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_import_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteImportJob"
         o.http_method = "DELETE"
@@ -1384,6 +1496,17 @@ module Aws::QConnect
         o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}"
         o.input = Shapes::ShapeRef.new(shape: GetContentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetContentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_content_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContentAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations/{contentAssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetContentAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContentAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1481,6 +1604,23 @@ module Aws::QConnect
         o.output = Shapes::ShapeRef.new(shape: ListAssistantsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_content_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContentAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: ListContentAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContentAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

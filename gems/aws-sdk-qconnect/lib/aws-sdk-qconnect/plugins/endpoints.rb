@@ -64,6 +64,8 @@ module Aws::QConnect
             Aws::QConnect::Endpoints::CreateAssistantAssociation.build(context)
           when :create_content
             Aws::QConnect::Endpoints::CreateContent.build(context)
+          when :create_content_association
+            Aws::QConnect::Endpoints::CreateContentAssociation.build(context)
           when :create_knowledge_base
             Aws::QConnect::Endpoints::CreateKnowledgeBase.build(context)
           when :create_quick_response
@@ -76,6 +78,8 @@ module Aws::QConnect
             Aws::QConnect::Endpoints::DeleteAssistantAssociation.build(context)
           when :delete_content
             Aws::QConnect::Endpoints::DeleteContent.build(context)
+          when :delete_content_association
+            Aws::QConnect::Endpoints::DeleteContentAssociation.build(context)
           when :delete_import_job
             Aws::QConnect::Endpoints::DeleteImportJob.build(context)
           when :delete_knowledge_base
@@ -88,6 +92,8 @@ module Aws::QConnect
             Aws::QConnect::Endpoints::GetAssistantAssociation.build(context)
           when :get_content
             Aws::QConnect::Endpoints::GetContent.build(context)
+          when :get_content_association
+            Aws::QConnect::Endpoints::GetContentAssociation.build(context)
           when :get_content_summary
             Aws::QConnect::Endpoints::GetContentSummary.build(context)
           when :get_import_job
@@ -104,6 +110,8 @@ module Aws::QConnect
             Aws::QConnect::Endpoints::ListAssistantAssociations.build(context)
           when :list_assistants
             Aws::QConnect::Endpoints::ListAssistants.build(context)
+          when :list_content_associations
+            Aws::QConnect::Endpoints::ListContentAssociations.build(context)
           when :list_contents
             Aws::QConnect::Endpoints::ListContents.build(context)
           when :list_import_jobs

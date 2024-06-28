@@ -22,14 +22,15 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # Object specifying an auto-participant-recording configuration.
+    # Object specifying a configuration for individual participant
+    # recording.
     #
     # @!attribute [rw] storage_configuration_arn
-    #   ARN of the StorageConfiguration resource to use for auto participant
-    #   recording. Default: "" (empty string, no storage configuration is
-    #   specified). Individual participant recording cannot be started
-    #   unless a storage configuration is specified, when a Stage is created
-    #   or updated.
+    #   ARN of the StorageConfiguration resource to use for individual
+    #   participant recording. Default: `""` (empty string, no storage
+    #   configuration is specified). Individual participant recording cannot
+    #   be started unless a storage configuration is specified, when a Stage
+    #   is created or updated.
     #   @return [String]
     #
     # @!attribute [rw] media_types
@@ -311,8 +312,8 @@ module Aws::IVSRealTime
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] auto_participant_recording_configuration
-    #   Auto participant recording configuration object attached to the
-    #   stage.
+    #   Configuration object for individual participant recording, to attach
+    #   to the new stage.
     #   @return [Types::AutoParticipantRecordingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStageRequest AWS API Documentation
@@ -402,6 +403,22 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteEncoderConfigurationResponse AWS API Documentation
     #
     class DeleteEncoderConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] arn
+    #   ARN of the public key to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeletePublicKeyRequest AWS API Documentation
+    #
+    class DeletePublicKeyRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeletePublicKeyResponse AWS API Documentation
+    #
+    class DeletePublicKeyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
     #   ARN of the stage to be deleted.
@@ -780,6 +797,30 @@ module Aws::IVSRealTime
     end
 
     # @!attribute [rw] arn
+    #   ARN of the public key for which the information is to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetPublicKeyRequest AWS API Documentation
+    #
+    class GetPublicKeyRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_key
+    #   The public key that is returned.
+    #   @return [Types::PublicKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetPublicKeyResponse AWS API Documentation
+    #
+    class GetPublicKeyResponse < Struct.new(
+      :public_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
     #   ARN of the stage for which the information is to be retrieved.
     #   @return [String]
     #
@@ -867,6 +908,7 @@ module Aws::IVSRealTime
     #   This attribute name identifies the featured slot. A participant with
     #   this attribute set to `"true"` (as a string value) in
     #   ParticipantTokenConfiguration is placed in the featured slot.
+    #   Default: `""` (no featured participant).
     #   @return [String]
     #
     # @!attribute [rw] omit_stopped_video
@@ -875,13 +917,16 @@ module Aws::IVSRealTime
     #   @return [Boolean]
     #
     # @!attribute [rw] video_aspect_ratio
-    #   Sets the non-featured participant display mode. Default: `VIDEO`.
+    #   Sets the non-featured participant display mode, to control the
+    #   aspect ratio of video tiles. `VIDEO` is 16:9, `SQUARE` is 1:1, and
+    #   `PORTRAIT` is 3:4. Default: `VIDEO`.
     #   @return [String]
     #
     # @!attribute [rw] video_fill_mode
-    #   Defines how video fits within the participant tile. When not set,
-    #   `videoFillMode` defaults to `COVER` fill mode for participants in
-    #   the grid and to `CONTAIN` fill mode for featured participants.
+    #   Defines how video content fits within the participant tile: `FILL`
+    #   (stretched), `COVER` (cropped), or `CONTAIN` (letterboxed). When not
+    #   set, `videoFillMode` defaults to `COVER` fill mode for participants
+    #   in the grid and to `CONTAIN` fill mode for featured participants.
     #   @return [String]
     #
     # @!attribute [rw] grid_gap
@@ -897,6 +942,48 @@ module Aws::IVSRealTime
       :video_aspect_ratio,
       :video_fill_mode,
       :grid_gap)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_key_material
+    #   The content of the public key to be imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the public key to be imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ImportPublicKeyRequest AWS API Documentation
+    #
+    class ImportPublicKeyRequest < Struct.new(
+      :public_key_material,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_key
+    #   The public key that was imported.
+    #   @return [Types::PublicKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ImportPublicKeyResponse AWS API Documentation
+    #
+    class ImportPublicKeyResponse < Struct.new(
+      :public_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1148,6 +1235,42 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The first public key to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 50.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListPublicKeysRequest AWS API Documentation
+    #
+    class ListPublicKeysRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_keys
+    #   List of the matching public keys (summary information only).
+    #   @return [Array<Types::PublicKeySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more public keys than `maxResults`, use `nextToken` in
+    #   the request to get the next set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListPublicKeysResponse AWS API Documentation
+    #
+    class ListPublicKeysResponse < Struct.new(
+      :public_keys,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] stage_arn
     #   Stage ARN.
     #   @return [String]
@@ -1350,18 +1473,18 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] recording_s3_bucket_name
     #   Name of the S3 bucket to where the participant is being recorded, if
-    #   individual participant recording is enabled, or "" (empty string),
+    #   individual participant recording is enabled, or `""` (empty string),
     #   if recording is not enabled.
     #   @return [String]
     #
     # @!attribute [rw] recording_s3_prefix
-    #   S3 prefix of the S3 bucket to where the participant is being
-    #   recorded, if individual participant recording is enabled, or ""
-    #   (empty string), if recording is not enabled.
+    #   S3 prefix of the S3 bucket where the participant is being recorded,
+    #   if individual participant recording is enabled, or `""` (empty
+    #   string), if recording is not enabled.
     #   @return [String]
     #
     # @!attribute [rw] recording_state
-    #   Participant’s recording state.
+    #   The participant’s recording state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Participant AWS API Documentation
@@ -1415,7 +1538,7 @@ module Aws::IVSRealTime
     #   @return [Boolean]
     #
     # @!attribute [rw] recording_state
-    #   Participant’s recording state.
+    #   The participant’s recording state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ParticipantSummary AWS API Documentation
@@ -1552,6 +1675,7 @@ module Aws::IVSRealTime
     #   This attribute name identifies the featured slot. A participant with
     #   this attribute set to `"true"` (as a string value) in
     #   ParticipantTokenConfiguration is placed in the featured slot.
+    #   Default: `""` (no featured participant).
     #   @return [String]
     #
     # @!attribute [rw] omit_stopped_video
@@ -1560,7 +1684,8 @@ module Aws::IVSRealTime
     #   @return [Boolean]
     #
     # @!attribute [rw] video_fill_mode
-    #   Defines how video fits within the participant tile. Default:
+    #   Defines how video content fits within the participant tile: `FILL`
+    #   (stretched), `COVER` (cropped), or `CONTAIN` (letterboxed). Default:
     #   `COVER`.
     #   @return [String]
     #
@@ -1570,14 +1695,16 @@ module Aws::IVSRealTime
     #   @return [Integer]
     #
     # @!attribute [rw] pip_participant_attribute
-    #   Identifies the PiP slot. A participant with this attribute set to
-    #   `"true"` (as a string value) in ParticipantTokenConfiguration is
-    #   placed in the PiP slot.
+    #   Specifies the participant for the PiP window. A participant with
+    #   this attribute set to `"true"` (as a string value) in
+    #   ParticipantTokenConfiguration is placed in the PiP slot. Default:
+    #   `""` (no PiP participant).
     #   @return [String]
     #
     # @!attribute [rw] pip_behavior
-    #   Defines PiP behavior when all participants have left. Default:
-    #   `STATIC`.
+    #   Defines PiP behavior when all participants have left: `STATIC`
+    #   (maintains original position/size) or `DYNAMIC` (expands to full
+    #   composition). Default: `STATIC`.
     #   @return [String]
     #
     # @!attribute [rw] pip_offset
@@ -1615,6 +1742,81 @@ module Aws::IVSRealTime
       :pip_position,
       :pip_width,
       :pip_height)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying a public key used to sign stage participant tokens.
+    #
+    # @!attribute [rw] arn
+    #   Public key ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Public key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key_material
+    #   Public key material.
+    #   @return [String]
+    #
+    # @!attribute [rw] fingerprint
+    #   The public key fingerprint, a short string used to identify or
+    #   verify the full public key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/PublicKey AWS API Documentation
+    #
+    class PublicKey < Struct.new(
+      :arn,
+      :name,
+      :public_key_material,
+      :fingerprint,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a public key.
+    #
+    # @!attribute [rw] arn
+    #   Public key ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Public key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/PublicKeySummary AWS API Documentation
+    #
+    class PublicKeySummary < Struct.new(
+      :arn,
+      :name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1744,9 +1946,13 @@ module Aws::IVSRealTime
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] auto_participant_recording_configuration
-    #   Auto-participant-recording configuration object attached to the
-    #   stage.
+    #   Configuration object for individual participant recording, attached
+    #   to the stage.
     #   @return [Types::AutoParticipantRecordingConfiguration]
+    #
+    # @!attribute [rw] endpoints
+    #   Summary information about various endpoints for a stage.
+    #   @return [Types::StageEndpoints]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Stage AWS API Documentation
     #
@@ -1755,7 +1961,27 @@ module Aws::IVSRealTime
       :name,
       :active_session_id,
       :tags,
-      :auto_participant_recording_configuration)
+      :auto_participant_recording_configuration,
+      :endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about various endpoints for a stage.
+    #
+    # @!attribute [rw] events
+    #   Events endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] whip
+    #   WHIP endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StageEndpoints AWS API Documentation
+    #
+    class StageEndpoints < Struct.new(
+      :events,
+      :whip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2068,9 +2294,9 @@ module Aws::IVSRealTime
     #   @return [String]
     #
     # @!attribute [rw] auto_participant_recording_configuration
-    #   Auto-participant-recording configuration object to attach to the
-    #   stage. Auto-participant-recording configuration cannot be updated
-    #   while recording is active.
+    #   Configuration object for individual participant recording, to attach
+    #   to the stage. Note that this cannot be updated while recording is
+    #   active.
     #   @return [Types::AutoParticipantRecordingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateStageRequest AWS API Documentation

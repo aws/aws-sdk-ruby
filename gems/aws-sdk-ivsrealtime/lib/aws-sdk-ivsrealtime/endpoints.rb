@@ -82,6 +82,20 @@ module Aws::IVSRealTime
       end
     end
 
+    class DeletePublicKey
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVSRealTime::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteStage
       def self.build(context)
         unless context.config.regional_endpoint
@@ -166,6 +180,20 @@ module Aws::IVSRealTime
       end
     end
 
+    class GetPublicKey
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVSRealTime::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetStage
       def self.build(context)
         unless context.config.regional_endpoint
@@ -195,6 +223,20 @@ module Aws::IVSRealTime
     end
 
     class GetStorageConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVSRealTime::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ImportPublicKey
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -251,6 +293,20 @@ module Aws::IVSRealTime
     end
 
     class ListParticipants
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVSRealTime::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListPublicKeys
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

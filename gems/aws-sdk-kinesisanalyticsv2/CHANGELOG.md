@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2024-06-26)
+------------------
+
+* Feature - This release adds support for new ListApplicationOperations and DescribeApplicationOperation APIs. It adds a new configuration to enable system rollbacks, adds field ApplicationVersionCreateTimestamp for clarity and improves support for pagination for APIs.
+
 1.59.0 (2024-06-25)
 ------------------
 

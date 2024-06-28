@@ -358,6 +358,37 @@ module Aws
                              ) -> _CreateWorkspacesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspacesResponseSuccess
 
+      interface _CreateWorkspacesPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspacesPoolResult]
+        def workspaces_pool: () -> Types::WorkspacesPool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#create_workspaces_pool-instance_method
+      def create_workspaces_pool: (
+                                    pool_name: ::String,
+                                    description: ::String,
+                                    bundle_id: ::String,
+                                    directory_id: ::String,
+                                    capacity: {
+                                      desired_user_sessions: ::Integer
+                                    },
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String?
+                                      },
+                                    ],
+                                    ?application_settings: {
+                                      status: ("DISABLED" | "ENABLED"),
+                                      settings_group: ::String?
+                                    },
+                                    ?timeout_settings: {
+                                      disconnect_timeout_in_seconds: ::Integer?,
+                                      idle_disconnect_timeout_in_seconds: ::Integer?,
+                                      max_user_duration_in_seconds: ::Integer?
+                                    }
+                                  ) -> _CreateWorkspacesPoolResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspacesPoolResponseSuccess
+
       interface _DeleteAccountLinkInvitationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountLinkInvitationResult]
         def account_link: () -> Types::AccountLink
@@ -651,6 +682,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspace_directories-instance_method
       def describe_workspace_directories: (
                                             ?directory_ids: Array[::String],
+                                            ?workspace_directory_names: Array[::String],
                                             ?limit: ::Integer,
                                             ?next_token: ::String
                                           ) -> _DescribeWorkspaceDirectoriesResponseSuccess
@@ -723,6 +755,40 @@ module Aws
                                                    ?next_token: ::String
                                                  ) -> _DescribeWorkspacesConnectionStatusResponseSuccess
                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspacesConnectionStatusResponseSuccess
+
+      interface _DescribeWorkspacesPoolSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspacesPoolSessionsResult]
+        def sessions: () -> ::Array[Types::WorkspacesPoolSession]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspaces_pool_sessions-instance_method
+      def describe_workspaces_pool_sessions: (
+                                               pool_id: ::String,
+                                               ?user_id: ::String,
+                                               ?limit: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeWorkspacesPoolSessionsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspacesPoolSessionsResponseSuccess
+
+      interface _DescribeWorkspacesPoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkspacesPoolsResult]
+        def workspaces_pools: () -> ::Array[Types::WorkspacesPool]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_workspaces_pools-instance_method
+      def describe_workspaces_pools: (
+                                       ?pool_ids: Array[::String],
+                                       ?filters: Array[
+                                         {
+                                           name: ("PoolName"),
+                                           values: Array[::String],
+                                           operator: ("EQUALS" | "NOTEQUALS" | "CONTAINS" | "NOTCONTAINS")
+                                         },
+                                       ],
+                                       ?limit: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribeWorkspacesPoolsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspacesPoolsResponseSuccess
 
       interface _DisassociateConnectionAliasResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateConnectionAliasResult]
@@ -950,6 +1016,31 @@ module Aws
                                           ) -> _ModifySelfservicePermissionsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifySelfservicePermissionsResponseSuccess
 
+      interface _ModifyStreamingPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyStreamingPropertiesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_streaming_properties-instance_method
+      def modify_streaming_properties: (
+                                         resource_id: ::String,
+                                         ?streaming_properties: {
+                                           streaming_experience_preferred_protocol: ("TCP" | "UDP")?,
+                                           user_settings: Array[
+                                             {
+                                               action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "PRINTING_TO_LOCAL_DEVICE" | "SMART_CARD"),
+                                               permission: ("ENABLED" | "DISABLED"),
+                                               maximum_length: ::Integer?
+                                             },
+                                           ]?,
+                                           storage_connectors: Array[
+                                             {
+                                               connector_type: ("HOME_FOLDER"),
+                                               status: ("ENABLED" | "DISABLED")
+                                             },
+                                           ]?
+                                         }
+                                       ) -> _ModifyStreamingPropertiesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyStreamingPropertiesResponseSuccess
+
       interface _ModifyWorkspaceAccessPropertiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyWorkspaceAccessPropertiesResult]
       end
@@ -981,7 +1072,8 @@ module Aws
                                                     default_ou: ::String?,
                                                     custom_security_group_id: ::String?,
                                                     user_enabled_as_local_administrator: bool?,
-                                                    enable_maintenance_mode: bool?
+                                                    enable_maintenance_mode: bool?,
+                                                    instance_iam_role_arn: ::String?
                                                   }
                                                 ) -> _ModifyWorkspaceCreationPropertiesResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyWorkspaceCreationPropertiesResponseSuccess
@@ -1045,12 +1137,14 @@ module Aws
 
       interface _RegisterWorkspaceDirectoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterWorkspaceDirectoryResult]
+        def directory_id: () -> ::String
+        def state: () -> ("REGISTERING" | "REGISTERED" | "DEREGISTERING" | "DEREGISTERED" | "ERROR")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#register_workspace_directory-instance_method
       def register_workspace_directory: (
-                                          directory_id: ::String,
+                                          ?directory_id: ::String,
                                           ?subnet_ids: Array[::String],
-                                          enable_work_docs: bool,
+                                          ?enable_work_docs: bool,
                                           ?enable_self_service: bool,
                                           ?tenancy: ("DEDICATED" | "SHARED"),
                                           ?tags: Array[
@@ -1058,9 +1152,17 @@ module Aws
                                               key: ::String,
                                               value: ::String?
                                             },
-                                          ]
+                                          ],
+                                          ?workspace_directory_name: ::String,
+                                          ?workspace_directory_description: ::String,
+                                          ?user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE"),
+                                          ?workspace_type: ("PERSONAL" | "POOLS"),
+                                          ?active_directory_config: {
+                                            domain_name: ::String,
+                                            service_account_secret_arn: ::String
+                                          }
                                         ) -> _RegisterWorkspaceDirectoryResponseSuccess
-                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterWorkspaceDirectoryResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterWorkspaceDirectoryResponseSuccess
 
       interface _RejectAccountLinkInvitationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RejectAccountLinkInvitationResult]
@@ -1106,6 +1208,15 @@ module Aws
                             ) -> _StartWorkspacesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkspacesResponseSuccess
 
+      interface _StartWorkspacesPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartWorkspacesPoolResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#start_workspaces_pool-instance_method
+      def start_workspaces_pool: (
+                                   pool_id: ::String
+                                 ) -> _StartWorkspacesPoolResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkspacesPoolResponseSuccess
+
       interface _StopWorkspacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopWorkspacesResult]
         def failed_requests: () -> ::Array[Types::FailedWorkspaceChangeRequest]
@@ -1120,6 +1231,15 @@ module Aws
                            ) -> _StopWorkspacesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopWorkspacesResponseSuccess
 
+      interface _StopWorkspacesPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopWorkspacesPoolResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#stop_workspaces_pool-instance_method
+      def stop_workspaces_pool: (
+                                  pool_id: ::String
+                                ) -> _StopWorkspacesPoolResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopWorkspacesPoolResponseSuccess
+
       interface _TerminateWorkspacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TerminateWorkspacesResult]
         def failed_requests: () -> ::Array[Types::FailedWorkspaceChangeRequest]
@@ -1133,6 +1253,24 @@ module Aws
                                   ]
                                 ) -> _TerminateWorkspacesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateWorkspacesResponseSuccess
+
+      interface _TerminateWorkspacesPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateWorkspacesPoolResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#terminate_workspaces_pool-instance_method
+      def terminate_workspaces_pool: (
+                                       pool_id: ::String
+                                     ) -> _TerminateWorkspacesPoolResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateWorkspacesPoolResponseSuccess
+
+      interface _TerminateWorkspacesPoolSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateWorkspacesPoolSessionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#terminate_workspaces_pool_session-instance_method
+      def terminate_workspaces_pool_session: (
+                                               session_id: ::String
+                                             ) -> _TerminateWorkspacesPoolSessionResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateWorkspacesPoolSessionResponseSuccess
 
       interface _UpdateConnectClientAddInResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectClientAddInResult]
@@ -1194,6 +1332,31 @@ module Aws
                                                shared_account_id: ::String
                                              ) -> _UpdateWorkspaceImagePermissionResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceImagePermissionResponseSuccess
+
+      interface _UpdateWorkspacesPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkspacesPoolResult]
+        def workspaces_pool: () -> Types::WorkspacesPool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#update_workspaces_pool-instance_method
+      def update_workspaces_pool: (
+                                    pool_id: ::String,
+                                    ?description: ::String,
+                                    ?bundle_id: ::String,
+                                    ?directory_id: ::String,
+                                    ?capacity: {
+                                      desired_user_sessions: ::Integer
+                                    },
+                                    ?application_settings: {
+                                      status: ("DISABLED" | "ENABLED"),
+                                      settings_group: ::String?
+                                    },
+                                    ?timeout_settings: {
+                                      disconnect_timeout_in_seconds: ::Integer?,
+                                      idle_disconnect_timeout_in_seconds: ::Integer?,
+                                      max_user_duration_in_seconds: ::Integer?
+                                    }
+                                  ) -> _UpdateWorkspacesPoolResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspacesPoolResponseSuccess
     end
   end
 end

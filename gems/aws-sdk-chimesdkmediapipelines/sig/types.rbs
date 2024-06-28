@@ -44,6 +44,7 @@ module Aws::ChimeSDKMediaPipelines
       attr_accessor language_model_name: ::String
       attr_accessor filter_partial_results: bool
       attr_accessor identify_language: bool
+      attr_accessor identify_multiple_languages: bool
       attr_accessor language_options: ::String
       attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
       attr_accessor vocabulary_names: ::String

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.251.0 (2024-06-27)
+------------------
+
+* Feature - Add capability for Admins to customize Studio experience for the user by showing or hiding Apps and MLTools.
+
 1.250.0 (2024-06-25)
 ------------------
 

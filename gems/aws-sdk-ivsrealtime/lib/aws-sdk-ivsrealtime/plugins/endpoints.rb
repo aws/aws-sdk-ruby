@@ -68,6 +68,8 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::CreateStorageConfiguration.build(context)
           when :delete_encoder_configuration
             Aws::IVSRealTime::Endpoints::DeleteEncoderConfiguration.build(context)
+          when :delete_public_key
+            Aws::IVSRealTime::Endpoints::DeletePublicKey.build(context)
           when :delete_stage
             Aws::IVSRealTime::Endpoints::DeleteStage.build(context)
           when :delete_storage_configuration
@@ -80,12 +82,16 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::GetEncoderConfiguration.build(context)
           when :get_participant
             Aws::IVSRealTime::Endpoints::GetParticipant.build(context)
+          when :get_public_key
+            Aws::IVSRealTime::Endpoints::GetPublicKey.build(context)
           when :get_stage
             Aws::IVSRealTime::Endpoints::GetStage.build(context)
           when :get_stage_session
             Aws::IVSRealTime::Endpoints::GetStageSession.build(context)
           when :get_storage_configuration
             Aws::IVSRealTime::Endpoints::GetStorageConfiguration.build(context)
+          when :import_public_key
+            Aws::IVSRealTime::Endpoints::ImportPublicKey.build(context)
           when :list_compositions
             Aws::IVSRealTime::Endpoints::ListCompositions.build(context)
           when :list_encoder_configurations
@@ -94,6 +100,8 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::ListParticipantEvents.build(context)
           when :list_participants
             Aws::IVSRealTime::Endpoints::ListParticipants.build(context)
+          when :list_public_keys
+            Aws::IVSRealTime::Endpoints::ListPublicKeys.build(context)
           when :list_stage_sessions
             Aws::IVSRealTime::Endpoints::ListStageSessions.build(context)
           when :list_stages

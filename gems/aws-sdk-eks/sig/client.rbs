@@ -219,7 +219,8 @@ module Aws
                             ?access_config: {
                               bootstrap_cluster_creator_admin_permissions: bool?,
                               authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")?
-                            }
+                            },
+                            ?bootstrap_self_managed_addons: bool
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 

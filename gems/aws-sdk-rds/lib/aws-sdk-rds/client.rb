@@ -2635,7 +2635,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #
@@ -29953,8 +29953,6 @@ module Aws::RDS
     #
     # You can't export snapshot data from Db2 or RDS Custom DB instances.
     #
-    # You can't export cluster data from Multi-AZ DB clusters.
-    #
     # For more information on exporting DB snapshot data, see [Exporting DB
     # snapshot data to Amazon S3][1] in the *Amazon RDS User Guide* or
     # [Exporting DB cluster snapshot data to Amazon S3][2] in the *Amazon
@@ -31255,7 +31253,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.236.0'
+      context[:gem_version] = '1.237.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

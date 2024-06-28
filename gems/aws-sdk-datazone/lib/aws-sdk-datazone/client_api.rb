@@ -187,6 +187,7 @@ module Aws::DataZone
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DomainSummaries = Shapes::ListShape.new(name: 'DomainSummaries')
     DomainSummary = Shapes::StructureShape.new(name: 'DomainSummary')
+    EdgeDirection = Shapes::StringShape.new(name: 'EdgeDirection')
     EditedValue = Shapes::StringShape.new(name: 'EditedValue')
     EnableSetting = Shapes::StringShape.new(name: 'EnableSetting')
     EnabledRegionList = Shapes::ListShape.new(name: 'EnabledRegionList')
@@ -273,6 +274,8 @@ module Aws::DataZone
     GetGroupProfileOutput = Shapes::StructureShape.new(name: 'GetGroupProfileOutput')
     GetIamPortalLoginUrlInput = Shapes::StructureShape.new(name: 'GetIamPortalLoginUrlInput')
     GetIamPortalLoginUrlOutput = Shapes::StructureShape.new(name: 'GetIamPortalLoginUrlOutput')
+    GetLineageNodeInput = Shapes::StructureShape.new(name: 'GetLineageNodeInput')
+    GetLineageNodeOutput = Shapes::StructureShape.new(name: 'GetLineageNodeOutput')
     GetListingInput = Shapes::StructureShape.new(name: 'GetListingInput')
     GetListingOutput = Shapes::StructureShape.new(name: 'GetListingOutput')
     GetMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'GetMetadataGenerationRunInput')
@@ -329,6 +332,14 @@ module Aws::DataZone
     InventorySearchScope = Shapes::StringShape.new(name: 'InventorySearchScope')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LastName = Shapes::StringShape.new(name: 'LastName')
+    LineageEvent = Shapes::BlobShape.new(name: 'LineageEvent')
+    LineageNodeId = Shapes::StringShape.new(name: 'LineageNodeId')
+    LineageNodeIdentifier = Shapes::StringShape.new(name: 'LineageNodeIdentifier')
+    LineageNodeReference = Shapes::StructureShape.new(name: 'LineageNodeReference')
+    LineageNodeReferenceList = Shapes::ListShape.new(name: 'LineageNodeReferenceList')
+    LineageNodeSummaries = Shapes::ListShape.new(name: 'LineageNodeSummaries')
+    LineageNodeSummary = Shapes::StructureShape.new(name: 'LineageNodeSummary')
+    LineageNodeTypeItem = Shapes::StructureShape.new(name: 'LineageNodeTypeItem')
     ListAssetRevisionsInput = Shapes::StructureShape.new(name: 'ListAssetRevisionsInput')
     ListAssetRevisionsOutput = Shapes::StructureShape.new(name: 'ListAssetRevisionsOutput')
     ListDataSourceRunActivitiesInput = Shapes::StructureShape.new(name: 'ListDataSourceRunActivitiesInput')
@@ -350,6 +361,8 @@ module Aws::DataZone
     ListEnvironmentProfilesOutput = Shapes::StructureShape.new(name: 'ListEnvironmentProfilesOutput')
     ListEnvironmentsInput = Shapes::StructureShape.new(name: 'ListEnvironmentsInput')
     ListEnvironmentsOutput = Shapes::StructureShape.new(name: 'ListEnvironmentsOutput')
+    ListLineageNodeHistoryInput = Shapes::StructureShape.new(name: 'ListLineageNodeHistoryInput')
+    ListLineageNodeHistoryOutput = Shapes::StructureShape.new(name: 'ListLineageNodeHistoryOutput')
     ListMetadataGenerationRunsInput = Shapes::StructureShape.new(name: 'ListMetadataGenerationRunsInput')
     ListMetadataGenerationRunsOutput = Shapes::StructureShape.new(name: 'ListMetadataGenerationRunsOutput')
     ListNotificationsInput = Shapes::StructureShape.new(name: 'ListNotificationsInput')
@@ -400,6 +413,8 @@ module Aws::DataZone
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
     NotificationsList = Shapes::ListShape.new(name: 'NotificationsList')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PostLineageEventInput = Shapes::StructureShape.new(name: 'PostLineageEventInput')
+    PostLineageEventOutput = Shapes::StructureShape.new(name: 'PostLineageEventOutput')
     PostTimeSeriesDataPointsInput = Shapes::StructureShape.new(name: 'PostTimeSeriesDataPointsInput')
     PostTimeSeriesDataPointsOutput = Shapes::StructureShape.new(name: 'PostTimeSeriesDataPointsOutput')
     PredictionChoices = Shapes::ListShape.new(name: 'PredictionChoices')
@@ -1910,6 +1925,28 @@ module Aws::DataZone
     GetIamPortalLoginUrlOutput.add_member(:user_profile_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userProfileId"))
     GetIamPortalLoginUrlOutput.struct_class = Types::GetIamPortalLoginUrlOutput
 
+    GetLineageNodeInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetLineageNodeInput.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "timestamp"))
+    GetLineageNodeInput.add_member(:identifier, Shapes::ShapeRef.new(shape: LineageNodeIdentifier, required: true, location: "uri", location_name: "identifier"))
+    GetLineageNodeInput.struct_class = Types::GetLineageNodeInput
+
+    GetLineageNodeOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    GetLineageNodeOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    GetLineageNodeOutput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    GetLineageNodeOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    GetLineageNodeOutput.add_member(:downstream_nodes, Shapes::ShapeRef.new(shape: LineageNodeReferenceList, location_name: "downstreamNodes"))
+    GetLineageNodeOutput.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "eventTimestamp"))
+    GetLineageNodeOutput.add_member(:forms_output, Shapes::ShapeRef.new(shape: FormOutputList, location_name: "formsOutput"))
+    GetLineageNodeOutput.add_member(:id, Shapes::ShapeRef.new(shape: LineageNodeId, required: true, location_name: "id"))
+    GetLineageNodeOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    GetLineageNodeOutput.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "sourceIdentifier"))
+    GetLineageNodeOutput.add_member(:type_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "typeName"))
+    GetLineageNodeOutput.add_member(:type_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "typeRevision"))
+    GetLineageNodeOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    GetLineageNodeOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GetLineageNodeOutput.add_member(:upstream_nodes, Shapes::ShapeRef.new(shape: LineageNodeReferenceList, location_name: "upstreamNodes"))
+    GetLineageNodeOutput.struct_class = Types::GetLineageNodeOutput
+
     GetListingInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetListingInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ListingId, required: true, location: "uri", location_name: "identifier"))
     GetListingInput.add_member(:listing_revision, Shapes::ShapeRef.new(shape: Revision, location: "querystring", location_name: "listingRevision"))
@@ -2140,6 +2177,39 @@ module Aws::DataZone
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    LineageNodeReference.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "eventTimestamp"))
+    LineageNodeReference.add_member(:id, Shapes::ShapeRef.new(shape: LineageNodeId, location_name: "id"))
+    LineageNodeReference.struct_class = Types::LineageNodeReference
+
+    LineageNodeReferenceList.member = Shapes::ShapeRef.new(shape: LineageNodeReference)
+
+    LineageNodeSummaries.member = Shapes::ShapeRef.new(shape: LineageNodeSummary)
+
+    LineageNodeSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    LineageNodeSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    LineageNodeSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    LineageNodeSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    LineageNodeSummary.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "eventTimestamp"))
+    LineageNodeSummary.add_member(:id, Shapes::ShapeRef.new(shape: LineageNodeId, required: true, location_name: "id"))
+    LineageNodeSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    LineageNodeSummary.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "sourceIdentifier"))
+    LineageNodeSummary.add_member(:type_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "typeName"))
+    LineageNodeSummary.add_member(:type_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "typeRevision"))
+    LineageNodeSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    LineageNodeSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    LineageNodeSummary.struct_class = Types::LineageNodeSummary
+
+    LineageNodeTypeItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    LineageNodeTypeItem.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    LineageNodeTypeItem.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    LineageNodeTypeItem.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    LineageNodeTypeItem.add_member(:forms_output, Shapes::ShapeRef.new(shape: FormsOutputMap, required: true, location_name: "formsOutput"))
+    LineageNodeTypeItem.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    LineageNodeTypeItem.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revision"))
+    LineageNodeTypeItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    LineageNodeTypeItem.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    LineageNodeTypeItem.struct_class = Types::LineageNodeTypeItem
+
     ListAssetRevisionsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     ListAssetRevisionsInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location: "uri", location_name: "identifier"))
     ListAssetRevisionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -2257,6 +2327,20 @@ module Aws::DataZone
     ListEnvironmentsOutput.add_member(:items, Shapes::ShapeRef.new(shape: EnvironmentSummaries, required: true, location_name: "items"))
     ListEnvironmentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEnvironmentsOutput.struct_class = Types::ListEnvironmentsOutput
+
+    ListLineageNodeHistoryInput.add_member(:direction, Shapes::ShapeRef.new(shape: EdgeDirection, location: "querystring", location_name: "direction"))
+    ListLineageNodeHistoryInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    ListLineageNodeHistoryInput.add_member(:event_timestamp_gte, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "timestampGTE"))
+    ListLineageNodeHistoryInput.add_member(:event_timestamp_lte, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "timestampLTE"))
+    ListLineageNodeHistoryInput.add_member(:identifier, Shapes::ShapeRef.new(shape: LineageNodeIdentifier, required: true, location: "uri", location_name: "identifier"))
+    ListLineageNodeHistoryInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListLineageNodeHistoryInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListLineageNodeHistoryInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListLineageNodeHistoryInput.struct_class = Types::ListLineageNodeHistoryInput
+
+    ListLineageNodeHistoryOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLineageNodeHistoryOutput.add_member(:nodes, Shapes::ShapeRef.new(shape: LineageNodeSummaries, location_name: "nodes"))
+    ListLineageNodeHistoryOutput.struct_class = Types::ListLineageNodeHistoryOutput
 
     ListMetadataGenerationRunsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     ListMetadataGenerationRunsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -2462,6 +2546,15 @@ module Aws::DataZone
     NotificationSubjects.member = Shapes::ShapeRef.new(shape: String)
 
     NotificationsList.member = Shapes::ShapeRef.new(shape: NotificationOutput)
+
+    PostLineageEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    PostLineageEventInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    PostLineageEventInput.add_member(:event, Shapes::ShapeRef.new(shape: LineageEvent, required: true, location_name: "event"))
+    PostLineageEventInput.struct_class = Types::PostLineageEventInput
+    PostLineageEventInput[:payload] = :event
+    PostLineageEventInput[:payload_member] = PostLineageEventInput.member(:event)
+
+    PostLineageEventOutput.struct_class = Types::PostLineageEventOutput
 
     PostTimeSeriesDataPointsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     PostTimeSeriesDataPointsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -2758,9 +2851,11 @@ module Aws::DataZone
 
     SearchTypesResultItem.add_member(:asset_type_item, Shapes::ShapeRef.new(shape: AssetTypeItem, location_name: "assetTypeItem"))
     SearchTypesResultItem.add_member(:form_type_item, Shapes::ShapeRef.new(shape: FormTypeData, location_name: "formTypeItem"))
+    SearchTypesResultItem.add_member(:lineage_node_type_item, Shapes::ShapeRef.new(shape: LineageNodeTypeItem, location_name: "lineageNodeTypeItem"))
     SearchTypesResultItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SearchTypesResultItem.add_member_subclass(:asset_type_item, Types::SearchTypesResultItem::AssetTypeItem)
     SearchTypesResultItem.add_member_subclass(:form_type_item, Types::SearchTypesResultItem::FormTypeItem)
+    SearchTypesResultItem.add_member_subclass(:lineage_node_type_item, Types::SearchTypesResultItem::LineageNodeTypeItem)
     SearchTypesResultItem.add_member_subclass(:unknown, Types::SearchTypesResultItem::Unknown)
     SearchTypesResultItem.struct_class = Types::SearchTypesResultItem
 
@@ -4213,6 +4308,20 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:get_lineage_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLineageNode"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/lineage/nodes/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetLineageNodeInput)
+        o.output = Shapes::ShapeRef.new(shape: GetLineageNodeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:get_listing, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetListing"
         o.http_method = "GET"
@@ -4544,6 +4653,26 @@ module Aws::DataZone
         )
       end)
 
+      api.add_operation(:list_lineage_node_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLineageNodeHistory"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/lineage/nodes/{identifier}/history"
+        o.input = Shapes::ShapeRef.new(shape: ListLineageNodeHistoryInput)
+        o.output = Shapes::ShapeRef.new(shape: ListLineageNodeHistoryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_metadata_generation_runs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMetadataGenerationRuns"
         o.http_method = "GET"
@@ -4735,6 +4864,22 @@ module Aws::DataZone
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:post_lineage_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PostLineageEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/lineage/events"
+        o.input = Shapes::ShapeRef.new(shape: PostLineageEventInput)
+        o.output = Shapes::ShapeRef.new(shape: PostLineageEventOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
       api.add_operation(:post_time_series_data_points, Seahorse::Model::Operation.new.tap do |o|

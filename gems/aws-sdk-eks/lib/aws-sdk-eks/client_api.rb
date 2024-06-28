@@ -560,6 +560,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
     CreateClusterRequest.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigRequest, location_name: "outpostConfig"))
     CreateClusterRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: CreateAccessConfigRequest, location_name: "accessConfig"))
+    CreateClusterRequest.add_member(:bootstrap_self_managed_addons, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bootstrapSelfManagedAddons"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))

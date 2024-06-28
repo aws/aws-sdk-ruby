@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-06-27)
+------------------
+
+* Feature - Added support for WorkSpaces Pools.
+
 1.106.0 (2024-06-25)
 ------------------
 

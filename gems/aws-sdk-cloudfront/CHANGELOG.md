@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-06-27)
+------------------
+
+* Feature - Doc only update for CloudFront that fixes customer-reported issue
+
 1.94.0 (2024-06-25)
 ------------------
 

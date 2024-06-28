@@ -7248,7 +7248,13 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # List tags for a CloudFront resource.
+    # List tags for a CloudFront resource. For more information, see
+    # [Tagging a distribution][1] in the *Amazon CloudFront Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html
     #
     # @option params [required, String] :resource
     #   An ARN of a CloudFront resource.
@@ -7332,7 +7338,12 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Add tags to a CloudFront resource.
+    # Add tags to a CloudFront resource. For more information, see [Tagging
+    # a distribution][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html
     #
     # @option params [required, String] :resource
     #   An ARN of a CloudFront resource.
@@ -7445,7 +7456,13 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Remove tags from a CloudFront resource.
+    # Remove tags from a CloudFront resource. For more information, see
+    # [Tagging a distribution][1] in the *Amazon CloudFront Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/tagging.html
     #
     # @option params [required, String] :resource
     #   An ARN of a CloudFront resource.
@@ -9431,7 +9448,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

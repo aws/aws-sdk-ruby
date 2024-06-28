@@ -126,6 +126,25 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Information about the Active Directory config.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_secret_arn
+    #   Indicates the secret ARN on the service account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ActiveDirectoryConfig AWS API Documentation
+    #
+    class ActiveDirectoryConfig < Struct.new(
+      :domain_name,
+      :service_account_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified application is not supported.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ApplicationNotSupportedException AWS API Documentation
@@ -173,6 +192,60 @@ module Aws::WorkSpaces
       :last_updated_time,
       :state,
       :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The persistent application settings for users of a WorkSpaces pool.
+    #
+    # @!attribute [rw] status
+    #   Enables or disables persistent application settings for users during
+    #   their pool sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored. You can allow the same persistent
+    #   application settings to be used across multiple pools by specifying
+    #   the same settings group for each pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ApplicationSettingsRequest AWS API Documentation
+    #
+    class ApplicationSettingsRequest < Struct.new(
+      :status,
+      :settings_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the persistent application settings for users of a
+    # WorkSpaces pool.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether persistent application settings are enabled for
+    #   users during their pool sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings_group
+    #   The path prefix for the S3 bucket where users’ persistent
+    #   application settings are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The S3 bucket where users’ persistent application settings are
+    #   stored. When persistent application settings are enabled for the
+    #   first time for an account in an Amazon Web Services Region, an S3
+    #   bucket is created. The bucket is unique to the Amazon Web Services
+    #   account and the Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ApplicationSettingsResponse AWS API Documentation
+    #
+    class ApplicationSettingsResponse < Struct.new(
+      :status,
+      :settings_group,
+      :s3_bucket_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -342,6 +415,55 @@ module Aws::WorkSpaces
       :last_updated_time,
       :state,
       :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the user capacity for a WorkSpaces pool.
+    #
+    # @!attribute [rw] desired_user_sessions
+    #   The desired number of user sessions for a multi-session pool. This
+    #   is not allowed for single-session pools.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Capacity AWS API Documentation
+    #
+    class Capacity < Struct.new(
+      :desired_user_sessions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the capacity status for a WorkSpaces pool
+    #
+    # @!attribute [rw] available_user_sessions
+    #   The number of user sessions currently being used for pool sessions.
+    #   This only applies to multi-session pools.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] desired_user_sessions
+    #   The total number of sessions slots that are either running or
+    #   pending. This represents the total number of concurrent streaming
+    #   sessions your pool can support in a steady state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actual_user_sessions
+    #   The total number of session slots that are available for WorkSpaces
+    #   pools.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] active_user_sessions
+    #   The number of user sessions currently being used for pool sessions.
+    #   This only applies to multi-session pools.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CapacityStatus AWS API Documentation
+    #
+    class CapacityStatus < Struct.new(
+      :available_user_sessions,
+      :desired_user_sessions,
+      :actual_user_sessions,
+      :active_user_sessions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1012,6 +1134,65 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @!attribute [rw] pool_name
+    #   The name of the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The WorkSpaces pool description.
+    #   @return [String]
+    #
+    # @!attribute [rw] bundle_id
+    #   The identifier of the bundle for the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The user capacity of the WorkSpaces pool.
+    #   @return [Types::Capacity]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the WorkSpaces pool.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] application_settings
+    #   Indicates the application settings of the WorkSpaces pool.
+    #   @return [Types::ApplicationSettingsRequest]
+    #
+    # @!attribute [rw] timeout_settings
+    #   Indicates the timeout settings of the WorkSpaces pool.
+    #   @return [Types::TimeoutSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPoolRequest AWS API Documentation
+    #
+    class CreateWorkspacesPoolRequest < Struct.new(
+      :pool_name,
+      :description,
+      :bundle_id,
+      :directory_id,
+      :capacity,
+      :tags,
+      :application_settings,
+      :timeout_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspaces_pool
+    #   Indicates the WorkSpaces pool to create.
+    #   @return [Types::WorkspacesPool]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPoolResult AWS API Documentation
+    #
+    class CreateWorkspacesPoolResult < Struct.new(
+      :workspaces_pool)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] workspaces
     #   The WorkSpaces to create. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::WorkspaceRequest>]
@@ -1250,6 +1431,10 @@ module Aws::WorkSpaces
     #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_iam_role_arn
+    #   Indicates the IAM role ARN of the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultWorkspaceCreationProperties AWS API Documentation
     #
     class DefaultWorkspaceCreationProperties < Struct.new(
@@ -1258,7 +1443,8 @@ module Aws::WorkSpaces
       :default_ou,
       :custom_security_group_id,
       :user_enabled_as_local_administrator,
-      :enable_maintenance_mode)
+      :enable_maintenance_mode,
+      :instance_iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2060,6 +2246,10 @@ module Aws::WorkSpaces
     #   directories are retrieved.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] workspace_directory_names
+    #   The names of the WorkSpace directories.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] limit
     #   The maximum number of directories to return.
     #   @return [Integer]
@@ -2073,6 +2263,7 @@ module Aws::WorkSpaces
     #
     class DescribeWorkspaceDirectoriesRequest < Struct.new(
       :directory_ids,
+      :workspace_directory_names,
       :limit,
       :next_token)
       SENSITIVE = []
@@ -2254,6 +2445,122 @@ module Aws::WorkSpaces
     #
     class DescribeWorkspacesConnectionStatusResult < Struct.new(
       :workspaces_connection_status,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pool_id
+    #   The identifier of the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPoolSessionsRequest AWS API Documentation
+    #
+    class DescribeWorkspacesPoolSessionsRequest < Struct.new(
+      :pool_id,
+      :user_id,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   Describes the WorkSpaces pool sessions.
+    #   @return [Array<Types::WorkspacesPoolSession>]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPoolSessionsResult AWS API Documentation
+    #
+    class DescribeWorkspacesPoolSessionsResult < Struct.new(
+      :sessions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the filter conditions for the WorkSpaces pool to return.
+    #
+    # @!attribute [rw] name
+    #   The name of the pool to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values for filtering WorkSpaces pools.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator values for filtering WorkSpaces pools.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPoolsFilter AWS API Documentation
+    #
+    class DescribeWorkspacesPoolsFilter < Struct.new(
+      :name,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pool_ids
+    #   The identifier of the WorkSpaces pool.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filter conditions for the WorkSpaces pool to return.
+    #   @return [Array<Types::DescribeWorkspacesPoolsFilter>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPoolsRequest AWS API Documentation
+    #
+    class DescribeWorkspacesPoolsRequest < Struct.new(
+      :pool_ids,
+      :filters,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspaces_pools
+    #   Information about the WorkSpaces pools.
+    #   @return [Array<Types::WorkspacesPool>]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPoolsResult AWS API Documentation
+    #
+    class DescribeWorkspacesPoolsResult < Struct.new(
+      :workspaces_pools,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3289,6 +3596,27 @@ module Aws::WorkSpaces
     class ModifySelfservicePermissionsResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_id
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_properties
+    #   The streaming properties to configure.
+    #   @return [Types::StreamingProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyStreamingPropertiesRequest AWS API Documentation
+    #
+    class ModifyStreamingPropertiesRequest < Struct.new(
+      :resource_id,
+      :streaming_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyStreamingPropertiesResult AWS API Documentation
+    #
+    class ModifyStreamingPropertiesResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_id
     #   The identifier of the directory.
     #   @return [String]
     #
@@ -3377,6 +3705,28 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceStateResult AWS API Documentation
     #
     class ModifyWorkspaceStateResult < Aws::EmptyStructure; end
+
+    # Describes the network details of a WorkSpaces pool.
+    #
+    # @!attribute [rw] eni_private_ip_address
+    #   The private IP address of the elastic network interface that is
+    #   attached to instances in your VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] eni_id
+    #   The resource identifier of the elastic network interface that is
+    #   attached to instances in your VPC. All network interfaces have the
+    #   eni-xxxxxxxx resource identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/NetworkAccessConfiguration AWS API Documentation
+    #
+    class NetworkAccessConfiguration < Struct.new(
+      :eni_private_ip_address,
+      :eni_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The operating system that the image is running.
     #
@@ -3594,6 +3944,27 @@ module Aws::WorkSpaces
     #   The tags associated with the directory.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] workspace_directory_name
+    #   The name of the directory to register.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_directory_description
+    #   Description of the directory to register.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_identity_type
+    #   The type of identity management the user is using.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_type
+    #   Indicates whether the directory's WorkSpace type is personal or
+    #   pools.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory_config
+    #   The active directory config of the directory.
+    #   @return [Types::ActiveDirectoryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectoryRequest AWS API Documentation
     #
     class RegisterWorkspaceDirectoryRequest < Struct.new(
@@ -3602,14 +3973,32 @@ module Aws::WorkSpaces
       :enable_work_docs,
       :enable_self_service,
       :tenancy,
-      :tags)
+      :tags,
+      :workspace_directory_name,
+      :workspace_directory_description,
+      :user_identity_type,
+      :workspace_type,
+      :active_directory_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The registration status of the WorkSpace directory.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectoryResult AWS API Documentation
     #
-    class RegisterWorkspaceDirectoryResult < Aws::EmptyStructure; end
+    class RegisterWorkspaceDirectoryResult < Struct.new(
+      :directory_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] link_id
     #   The identifier of the account link
@@ -4017,6 +4406,22 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @!attribute [rw] pool_id
+    #   The identifier of the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesPoolRequest AWS API Documentation
+    #
+    class StartWorkspacesPoolRequest < Struct.new(
+      :pool_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesPoolResult AWS API Documentation
+    #
+    class StartWorkspacesPoolResult < Aws::EmptyStructure; end
+
     # @!attribute [rw] start_workspace_requests
     #   The WorkSpaces to start. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::StartRequest>]
@@ -4055,6 +4460,22 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @!attribute [rw] pool_id
+    #   The identifier of the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesPoolRequest AWS API Documentation
+    #
+    class StopWorkspacesPoolRequest < Struct.new(
+      :pool_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesPoolResult AWS API Documentation
+    #
+    class StopWorkspacesPoolResult < Aws::EmptyStructure; end
+
     # @!attribute [rw] stop_workspace_requests
     #   The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::StopRequest>]
@@ -4075,6 +4496,50 @@ module Aws::WorkSpaces
     #
     class StopWorkspacesResult < Struct.new(
       :failed_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the storage connector.
+    #
+    # @!attribute [rw] connector_type
+    #   The type of connector used to save user files.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates if the storage connetor is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StorageConnector AWS API Documentation
+    #
+    class StorageConnector < Struct.new(
+      :connector_type,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the streaming properties.
+    #
+    # @!attribute [rw] streaming_experience_preferred_protocol
+    #   Indicates the type of preferred protocol for the streaming
+    #   experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_settings
+    #   Indicates the permission settings asscoiated with the user.
+    #   @return [Array<Types::UserSetting>]
+    #
+    # @!attribute [rw] storage_connectors
+    #   Indicates the storage connector used
+    #   @return [Array<Types::StorageConnector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StreamingProperties AWS API Documentation
+    #
+    class StreamingProperties < Struct.new(
+      :streaming_experience_preferred_protocol,
+      :user_settings,
+      :storage_connectors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4112,6 +4577,38 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @!attribute [rw] pool_id
+    #   The identifier of the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPoolRequest AWS API Documentation
+    #
+    class TerminateWorkspacesPoolRequest < Struct.new(
+      :pool_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPoolResult AWS API Documentation
+    #
+    class TerminateWorkspacesPoolResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] session_id
+    #   The identifier of the WorkSpaces pool session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPoolSessionRequest AWS API Documentation
+    #
+    class TerminateWorkspacesPoolSessionRequest < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPoolSessionResult AWS API Documentation
+    #
+    class TerminateWorkspacesPoolSessionResult < Aws::EmptyStructure; end
+
     # @!attribute [rw] terminate_workspace_requests
     #   The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::TerminateRequest>]
@@ -4132,6 +4629,41 @@ module Aws::WorkSpaces
     #
     class TerminateWorkspacesResult < Struct.new(
       :failed_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the timeout settings for a WorkSpaces pool.
+    #
+    # @!attribute [rw] disconnect_timeout_in_seconds
+    #   Specifies the amount of time, in seconds, that a streaming session
+    #   remains active after users disconnect. If users try to reconnect to
+    #   the streaming session after a disconnection or network interruption
+    #   within the time set, they are connected to their previous session.
+    #   Otherwise, they are connected to a new session with a new streaming
+    #   instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] idle_disconnect_timeout_in_seconds
+    #   The amount of time in seconds a connection will stay active while
+    #   idle.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_user_duration_in_seconds
+    #   Specifies the maximum amount of time, in seconds, that a streaming
+    #   session can remain active. If users are still connected to a
+    #   streaming instance five minutes before this limit is reached, they
+    #   are prompted to save any open documents before being disconnected.
+    #   After this time elapses, the instance is terminated and replaced by
+    #   a new instance.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TimeoutSettings AWS API Documentation
+    #
+    class TimeoutSettings < Struct.new(
+      :disconnect_timeout_in_seconds,
+      :idle_disconnect_timeout_in_seconds,
+      :max_user_duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4328,6 +4860,85 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermissionResult AWS API Documentation
     #
     class UpdateWorkspaceImagePermissionResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] pool_id
+    #   The identifier of the specified WorkSpaces pool to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Describes the specified WorkSpaces pool to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] bundle_id
+    #   The identifier of the bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The desired capacity for the WorkSpaces pool.
+    #   @return [Types::Capacity]
+    #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users in the pool.
+    #   @return [Types::ApplicationSettingsRequest]
+    #
+    # @!attribute [rw] timeout_settings
+    #   Indicates the timeout settings of the specified WorkSpaces pool.
+    #   @return [Types::TimeoutSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPoolRequest AWS API Documentation
+    #
+    class UpdateWorkspacesPoolRequest < Struct.new(
+      :pool_id,
+      :description,
+      :bundle_id,
+      :directory_id,
+      :capacity,
+      :application_settings,
+      :timeout_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspaces_pool
+    #   Describes the specified WorkSpaces pool.
+    #   @return [Types::WorkspacesPool]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPoolResult AWS API Documentation
+    #
+    class UpdateWorkspacesPoolResult < Struct.new(
+      :workspaces_pool)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the user's permission settings.
+    #
+    # @!attribute [rw] action
+    #   Indicates the type of action.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   Indicates if the setting is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_length
+    #   Indicates the maximum character length for the specified user
+    #   setting.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UserSetting AWS API Documentation
+    #
+    class UserSetting < Struct.new(
+      :action,
+      :permission,
+      :maximum_length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes the user volume for a WorkSpace bundle.
     #
@@ -4834,6 +5445,10 @@ module Aws::WorkSpaces
     #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_iam_role_arn
+    #   Indicates the IAM role ARN of the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceCreationProperties AWS API Documentation
     #
     class WorkspaceCreationProperties < Struct.new(
@@ -4842,7 +5457,8 @@ module Aws::WorkSpaces
       :default_ou,
       :custom_security_group_id,
       :user_enabled_as_local_administrator,
-      :enable_maintenance_mode)
+      :enable_maintenance_mode,
+      :instance_iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4949,6 +5565,35 @@ module Aws::WorkSpaces
     #   for WorkSpaces login.
     #   @return [Types::CertificateBasedAuthProperties]
     #
+    # @!attribute [rw] workspace_directory_name
+    #   The name fo the WorkSpace directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_directory_description
+    #   The description of the WorkSpace directory
+    #   @return [String]
+    #
+    # @!attribute [rw] user_identity_type
+    #   Indicates the identity type of the specifired user.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_type
+    #   Indicates whether the directory's WorkSpace type is personal or
+    #   pools.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory_config
+    #   Information about the Active Directory config.
+    #   @return [Types::ActiveDirectoryConfig]
+    #
+    # @!attribute [rw] streaming_properties
+    #   The streaming properties to configure.
+    #   @return [Types::StreamingProperties]
+    #
+    # @!attribute [rw] error_message
+    #   The error message returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory AWS API Documentation
     #
     class WorkspaceDirectory < Struct.new(
@@ -4969,7 +5614,14 @@ module Aws::WorkSpaces
       :tenancy,
       :selfservice_permissions,
       :saml_properties,
-      :certificate_based_auth_properties)
+      :certificate_based_auth_properties,
+      :workspace_directory_name,
+      :workspace_directory_description,
+      :user_identity_type,
+      :workspace_type,
+      :active_directory_config,
+      :streaming_properties,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5297,6 +5949,153 @@ module Aws::WorkSpaces
       :group_name,
       :group_desc,
       :user_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a WorkSpaces pool.
+    #
+    # @!attribute [rw] pool_id
+    #   The identifier of a WorkSpaces pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_arn
+    #   The Amazon Resource Name (ARN) for the WorkSpaces pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_status
+    #   The capacity status for the pool
+    #   @return [Types::CapacityStatus]
+    #
+    # @!attribute [rw] pool_name
+    #   The name of the pool,
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time the pool was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bundle_id
+    #   The identifier of the bundle used by the pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory used by the pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The pool errors.
+    #   @return [Array<Types::WorkspacesPoolError>]
+    #
+    # @!attribute [rw] application_settings
+    #   The persistent application settings for users of the pool.
+    #   @return [Types::ApplicationSettingsResponse]
+    #
+    # @!attribute [rw] timeout_settings
+    #   The amount of time that a pool session remains active after users
+    #   disconnect. If they try to reconnect to the pool session after a
+    #   disconnection or network interruption within this time interval,
+    #   they are connected to their previous session. Otherwise, they are
+    #   connected to a new session with a new pool instance.
+    #   @return [Types::TimeoutSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesPool AWS API Documentation
+    #
+    class WorkspacesPool < Struct.new(
+      :pool_id,
+      :pool_arn,
+      :capacity_status,
+      :pool_name,
+      :description,
+      :state,
+      :created_at,
+      :bundle_id,
+      :directory_id,
+      :errors,
+      :application_settings,
+      :timeout_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a WorkSpaces pool error.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesPoolError AWS API Documentation
+    #
+    class WorkspacesPoolError < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a WorkSpaces pool session.
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication method. The user is authenticated using a
+    #   WorkSpaces pool URL (API) or SAML 2.0 federation (SAML).
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   Specifies whether a user is connected to the pool session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier for the instance hosting the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_id
+    #   The identifier of the pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The time that the pool session ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] network_access_configuration
+    #   Describes the network details of the pool.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the pool sission started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesPoolSession AWS API Documentation
+    #
+    class WorkspacesPoolSession < Struct.new(
+      :authentication_type,
+      :connection_state,
+      :session_id,
+      :instance_id,
+      :pool_id,
+      :expiration_time,
+      :network_access_configuration,
+      :start_time,
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end

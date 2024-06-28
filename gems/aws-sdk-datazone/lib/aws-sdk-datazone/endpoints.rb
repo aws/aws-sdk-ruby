@@ -766,6 +766,19 @@ module Aws::DataZone
       end
     end
 
+    class GetLineageNode
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetListing
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1013,6 +1026,19 @@ module Aws::DataZone
       end
     end
 
+    class ListLineageNodeHistory
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListMetadataGenerationRuns
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1131,6 +1157,19 @@ module Aws::DataZone
     end
 
     class ListTimeSeriesDataPoints
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PostLineageEvent
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

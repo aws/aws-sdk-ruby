@@ -295,6 +295,22 @@ module Aws
                                  ) -> _ListEnabledControlsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledControlsResponseSuccess
 
+      interface _ListLandingZoneOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLandingZoneOperationsOutput]
+        def landing_zone_operations: () -> ::Array[Types::LandingZoneOperationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_landing_zone_operations-instance_method
+      def list_landing_zone_operations: (
+                                          ?filter: {
+                                            statuses: Array[("SUCCEEDED" | "FAILED" | "IN_PROGRESS")]?,
+                                            types: Array[("DELETE" | "CREATE" | "UPDATE" | "RESET")]?
+                                          },
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListLandingZoneOperationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLandingZoneOperationsResponseSuccess
+
       interface _ListLandingZonesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLandingZonesOutput]
         def landing_zones: () -> ::Array[Types::LandingZoneSummary]

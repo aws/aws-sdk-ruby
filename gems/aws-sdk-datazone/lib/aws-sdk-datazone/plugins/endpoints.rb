@@ -174,6 +174,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetGroupProfile.build(context)
           when :get_iam_portal_login_url
             Aws::DataZone::Endpoints::GetIamPortalLoginUrl.build(context)
+          when :get_lineage_node
+            Aws::DataZone::Endpoints::GetLineageNode.build(context)
           when :get_listing
             Aws::DataZone::Endpoints::GetListing.build(context)
           when :get_metadata_generation_run
@@ -212,6 +214,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListEnvironmentProfiles.build(context)
           when :list_environments
             Aws::DataZone::Endpoints::ListEnvironments.build(context)
+          when :list_lineage_node_history
+            Aws::DataZone::Endpoints::ListLineageNodeHistory.build(context)
           when :list_metadata_generation_runs
             Aws::DataZone::Endpoints::ListMetadataGenerationRuns.build(context)
           when :list_notifications
@@ -232,6 +236,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListTagsForResource.build(context)
           when :list_time_series_data_points
             Aws::DataZone::Endpoints::ListTimeSeriesDataPoints.build(context)
+          when :post_lineage_event
+            Aws::DataZone::Endpoints::PostLineageEvent.build(context)
           when :post_time_series_data_points
             Aws::DataZone::Endpoints::PostTimeSeriesDataPoints.build(context)
           when :put_environment_blueprint_configuration

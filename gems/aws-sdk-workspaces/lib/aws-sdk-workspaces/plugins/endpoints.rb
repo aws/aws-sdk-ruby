@@ -90,6 +90,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::CreateWorkspaceImage.build(context)
           when :create_workspaces
             Aws::WorkSpaces::Endpoints::CreateWorkspaces.build(context)
+          when :create_workspaces_pool
+            Aws::WorkSpaces::Endpoints::CreateWorkspacesPool.build(context)
           when :delete_account_link_invitation
             Aws::WorkSpaces::Endpoints::DeleteAccountLinkInvitation.build(context)
           when :delete_client_branding
@@ -152,6 +154,10 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::DescribeWorkspaces.build(context)
           when :describe_workspaces_connection_status
             Aws::WorkSpaces::Endpoints::DescribeWorkspacesConnectionStatus.build(context)
+          when :describe_workspaces_pool_sessions
+            Aws::WorkSpaces::Endpoints::DescribeWorkspacesPoolSessions.build(context)
+          when :describe_workspaces_pools
+            Aws::WorkSpaces::Endpoints::DescribeWorkspacesPools.build(context)
           when :disassociate_connection_alias
             Aws::WorkSpaces::Endpoints::DisassociateConnectionAlias.build(context)
           when :disassociate_ip_groups
@@ -180,6 +186,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::ModifySamlProperties.build(context)
           when :modify_selfservice_permissions
             Aws::WorkSpaces::Endpoints::ModifySelfservicePermissions.build(context)
+          when :modify_streaming_properties
+            Aws::WorkSpaces::Endpoints::ModifyStreamingProperties.build(context)
           when :modify_workspace_access_properties
             Aws::WorkSpaces::Endpoints::ModifyWorkspaceAccessProperties.build(context)
           when :modify_workspace_creation_properties
@@ -202,10 +210,18 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::RevokeIpRules.build(context)
           when :start_workspaces
             Aws::WorkSpaces::Endpoints::StartWorkspaces.build(context)
+          when :start_workspaces_pool
+            Aws::WorkSpaces::Endpoints::StartWorkspacesPool.build(context)
           when :stop_workspaces
             Aws::WorkSpaces::Endpoints::StopWorkspaces.build(context)
+          when :stop_workspaces_pool
+            Aws::WorkSpaces::Endpoints::StopWorkspacesPool.build(context)
           when :terminate_workspaces
             Aws::WorkSpaces::Endpoints::TerminateWorkspaces.build(context)
+          when :terminate_workspaces_pool
+            Aws::WorkSpaces::Endpoints::TerminateWorkspacesPool.build(context)
+          when :terminate_workspaces_pool_session
+            Aws::WorkSpaces::Endpoints::TerminateWorkspacesPoolSession.build(context)
           when :update_connect_client_add_in
             Aws::WorkSpaces::Endpoints::UpdateConnectClientAddIn.build(context)
           when :update_connection_alias_permission
@@ -216,6 +232,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::UpdateWorkspaceBundle.build(context)
           when :update_workspace_image_permission
             Aws::WorkSpaces::Endpoints::UpdateWorkspaceImagePermission.build(context)
+          when :update_workspaces_pool
+            Aws::WorkSpaces::Endpoints::UpdateWorkspacesPool.build(context)
           end
         end
       end

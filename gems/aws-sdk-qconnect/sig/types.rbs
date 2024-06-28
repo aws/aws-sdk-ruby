@@ -13,6 +13,11 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class AmazonConnectGuideAssociationData
+      attr_accessor flow_id: ::String
+      SENSITIVE: []
+    end
+
     class AppIntegrationsConfiguration
       attr_accessor app_integration_arn: ::String
       attr_accessor object_fields: ::Array[::String]
@@ -122,6 +127,43 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class ContentAssociationContents
+      attr_accessor amazon_connect_guide_association: Types::AmazonConnectGuideAssociationData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AmazonConnectGuideAssociation < ContentAssociationContents
+      end
+      class Unknown < ContentAssociationContents
+      end
+    end
+
+    class ContentAssociationData
+      attr_accessor association_data: Types::ContentAssociationContents
+      attr_accessor association_type: ("AMAZON_CONNECT_GUIDE")
+      attr_accessor content_arn: ::String
+      attr_accessor content_association_arn: ::String
+      attr_accessor content_association_id: ::String
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ContentAssociationSummary
+      attr_accessor association_data: Types::ContentAssociationContents
+      attr_accessor association_type: ("AMAZON_CONNECT_GUIDE")
+      attr_accessor content_arn: ::String
+      attr_accessor content_association_arn: ::String
+      attr_accessor content_association_id: ::String
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ContentData
       attr_accessor content_arn: ::String
       attr_accessor content_id: ::String
@@ -206,6 +248,21 @@ module Aws::QConnect
 
     class CreateAssistantResponse
       attr_accessor assistant: Types::AssistantData
+      SENSITIVE: []
+    end
+
+    class CreateContentAssociationRequest
+      attr_accessor association: Types::ContentAssociationContents
+      attr_accessor association_type: ("AMAZON_CONNECT_GUIDE")
+      attr_accessor client_token: ::String
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateContentAssociationResponse
+      attr_accessor content_association: Types::ContentAssociationData
       SENSITIVE: []
     end
 
@@ -333,6 +390,16 @@ module Aws::QConnect
     class DeleteAssistantResponse < Aws::EmptyStructure
     end
 
+    class DeleteContentAssociationRequest
+      attr_accessor content_association_id: ::String
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContentAssociationResponse < Aws::EmptyStructure
+    end
+
     class DeleteContentRequest
       attr_accessor content_id: ::String
       attr_accessor knowledge_base_id: ::String
@@ -430,6 +497,18 @@ module Aws::QConnect
 
     class GetAssistantResponse
       attr_accessor assistant: Types::AssistantData
+      SENSITIVE: []
+    end
+
+    class GetContentAssociationRequest
+      attr_accessor content_association_id: ::String
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContentAssociationResponse
+      attr_accessor content_association: Types::ContentAssociationData
       SENSITIVE: []
     end
 
@@ -611,6 +690,20 @@ module Aws::QConnect
 
     class ListAssistantsResponse
       attr_accessor assistant_summaries: ::Array[Types::AssistantSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContentAssociationsRequest
+      attr_accessor content_id: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContentAssociationsResponse
+      attr_accessor content_association_summaries: ::Array[Types::ContentAssociationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1127,6 +1220,11 @@ module Aws::QConnect
     class TextData
       attr_accessor excerpt: Types::DocumentText
       attr_accessor title: Types::DocumentText
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
