@@ -238,7 +238,8 @@ module Aws
 
         # determine where (header vs trailer) a request checksum should be added
         def checksum_request_in(context)
-          if context.operation['authtype'].eql?('v4-unsigned-body')
+          if context.operation['unsignedPayload'] ||
+             context.operation['authtype'] == 'v4-unsigned-body'
             'trailer'
           else
             'header'

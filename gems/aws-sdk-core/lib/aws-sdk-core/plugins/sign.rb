@@ -159,15 +159,18 @@ module Aws
         private
 
         def apply_authtype(context, req)
-          # only used for eventstreaming at input
+          # only used for event streaming at input
           if context[:input_event_emitter]
             req.headers['X-Amz-Content-Sha256'] = 'STREAMING-AWS4-HMAC-SHA256-EVENTS'
-          else
-            if context.operation['authtype'].eql?('v4-unsigned-body') &&
-              req.endpoint.scheme.eql?('https')
-              req.headers['X-Amz-Content-Sha256'] ||= 'UNSIGNED-PAYLOAD'
-            end
+          elsif unsigned_payload?(context, req)
+            req.headers['X-Amz-Content-Sha256'] ||= 'UNSIGNED-PAYLOAD'
           end
+        end
+
+        def unsigned_payload?(context, req)
+          (context.operation['unsignedPayload'] ||
+            context.operation['authtype'] == 'v4-unsigned-body') &&
+            req.endpoint.scheme == 'https'
         end
 
         def reset_signature(req)

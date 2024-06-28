@@ -3,7 +3,8 @@
 module Aws
   module Plugins
     # @api private
-    # Necessary to keep after Endpoints 2.0
+    # Deprecated - does not look at new traits like `auth` and `unsignedPayload`
+    # Necessary to exist after endpoints 2.0 for old service clients + new core
     class SignatureV2 < Seahorse::Client::Plugin
 
       option(:v2_signer) do |cfg|

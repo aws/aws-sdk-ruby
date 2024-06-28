@@ -3,16 +3,16 @@
 require_relative '../../spec_helper'
 
 describe 'Client Interface:' do
-  describe 'Transfer Encoding' do
+  describe 'Legacy Transfer Encoding' do
     before(:all) do
-      SpecHelper.generate_service(['TransferEncoding'], multiple_files: false)
+      SpecHelper.generate_service(['LegacyTransferEncoding'], multiple_files: false)
     end
 
     let(:client) do
-      TransferEncoding::Client.new(stub_responses: true)
+      LegacyTransferEncoding::Client.new(stub_responses: true)
     end
 
-    it 'adds `Transfer-Encoding` header for `unsignedPayload` v4 auth' do
+    it 'adds `Transfer-Encoding` header for `v4-unsigned-body` auth types' do
       resp = client.unsigned_streaming(body: StringIO.new('hey'))
       expect(resp.context.http_request.headers['Transfer-Encoding']).to be(nil)
       expect(resp.context.http_request.headers['Content-Length']).to eq('3')
@@ -48,7 +48,7 @@ describe 'Client Interface:' do
       tf.unlink
     end
 
-    it 'allows `requireLength` and `unsignedPayload` for streaming operations' do
+    it 'allows `requireLength` and `v4-unsigned-body` for streaming operations' do
       resp = client.unsigned_require_len_streaming(body: StringIO.new('hey'))
       expect(resp.context.http_request.headers['Transfer-Encoding']).to be(nil)
       expect(resp.context.http_request.headers['Content-Length']).to eq('3')
