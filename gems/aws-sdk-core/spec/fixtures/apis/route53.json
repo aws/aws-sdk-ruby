@@ -5,32 +5,13 @@
     "endpointPrefix":"route53",
     "globalEndpoint":"route53.amazonaws.com",
     "protocol":"rest-xml",
-    "protocols":["rest-xml"],
     "serviceAbbreviation":"Route 53",
     "serviceFullName":"Amazon Route 53",
     "serviceId":"Route 53",
     "signatureVersion":"v4",
-    "uid":"route53-2013-04-01",
-    "auth":["aws.auth#sigv4"]
+    "uid":"route53-2013-04-01"
   },
   "operations":{
-    "ActivateKeySigningKey":{
-      "name":"ActivateKeySigningKey",
-      "http":{
-        "method":"POST",
-        "requestUri":"/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/activate"
-      },
-      "input":{"shape":"ActivateKeySigningKeyRequest"},
-      "output":{"shape":"ActivateKeySigningKeyResponse"},
-      "errors":[
-        {"shape":"ConcurrentModification"},
-        {"shape":"NoSuchKeySigningKey"},
-        {"shape":"InvalidKeySigningKeyStatus"},
-        {"shape":"InvalidSigningStatus"},
-        {"shape":"InvalidKMSArn"},
-        {"shape":"InvalidInput"}
-      ]
-    },
     "AssociateVPCWithHostedZone":{
       "name":"AssociateVPCWithHostedZone",
       "http":{
@@ -50,29 +31,7 @@
         {"shape":"InvalidInput"},
         {"shape":"PublicZoneVPCAssociation"},
         {"shape":"ConflictingDomainExists"},
-        {"shape":"LimitsExceeded"},
-        {"shape":"PriorRequestNotComplete"}
-      ]
-    },
-    "ChangeCidrCollection":{
-      "name":"ChangeCidrCollection",
-      "http":{
-        "method":"POST",
-        "requestUri":"/2013-04-01/cidrcollection/{CidrCollectionId}"
-      },
-      "input":{
-        "shape":"ChangeCidrCollectionRequest",
-        "locationName":"ChangeCidrCollectionRequest",
-        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"}
-      },
-      "output":{"shape":"ChangeCidrCollectionResponse"},
-      "errors":[
-        {"shape":"NoSuchCidrCollectionException"},
-        {"shape":"CidrCollectionVersionMismatchException"},
-        {"shape":"InvalidInput"},
-        {"shape":"CidrBlockInUseException"},
-        {"shape":"LimitsExceeded"},
-        {"shape":"ConcurrentModification"}
+        {"shape":"LimitsExceeded"}
       ]
     },
     "ChangeResourceRecordSets":{
@@ -113,26 +72,6 @@
         {"shape":"NoSuchHostedZone"},
         {"shape":"PriorRequestNotComplete"},
         {"shape":"ThrottlingException"}
-      ]
-    },
-    "CreateCidrCollection":{
-      "name":"CreateCidrCollection",
-      "http":{
-        "method":"POST",
-        "requestUri":"/2013-04-01/cidrcollection",
-        "responseCode":201
-      },
-      "input":{
-        "shape":"CreateCidrCollectionRequest",
-        "locationName":"CreateCidrCollectionRequest",
-        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"}
-      },
-      "output":{"shape":"CreateCidrCollectionResponse"},
-      "errors":[
-        {"shape":"LimitsExceeded"},
-        {"shape":"InvalidInput"},
-        {"shape":"CidrCollectionAlreadyExistsException"},
-        {"shape":"ConcurrentModification"}
       ]
     },
     "CreateHealthCheck":{
@@ -177,32 +116,6 @@
         {"shape":"ConflictingDomainExists"},
         {"shape":"NoSuchDelegationSet"},
         {"shape":"DelegationSetNotReusable"}
-      ]
-    },
-    "CreateKeySigningKey":{
-      "name":"CreateKeySigningKey",
-      "http":{
-        "method":"POST",
-        "requestUri":"/2013-04-01/keysigningkey",
-        "responseCode":201
-      },
-      "input":{
-        "shape":"CreateKeySigningKeyRequest",
-        "locationName":"CreateKeySigningKeyRequest",
-        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"}
-      },
-      "output":{"shape":"CreateKeySigningKeyResponse"},
-      "errors":[
-        {"shape":"NoSuchHostedZone"},
-        {"shape":"InvalidArgument"},
-        {"shape":"InvalidInput"},
-        {"shape":"InvalidKMSArn"},
-        {"shape":"InvalidKeySigningKeyStatus"},
-        {"shape":"InvalidSigningStatus"},
-        {"shape":"InvalidKeySigningKeyName"},
-        {"shape":"KeySigningKeyAlreadyExists"},
-        {"shape":"TooManyKeySigningKeys"},
-        {"shape":"ConcurrentModification"}
       ]
     },
     "CreateQueryLoggingConfig":{
@@ -332,39 +245,6 @@
         {"shape":"InvalidInput"}
       ]
     },
-    "DeactivateKeySigningKey":{
-      "name":"DeactivateKeySigningKey",
-      "http":{
-        "method":"POST",
-        "requestUri":"/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/deactivate"
-      },
-      "input":{"shape":"DeactivateKeySigningKeyRequest"},
-      "output":{"shape":"DeactivateKeySigningKeyResponse"},
-      "errors":[
-        {"shape":"ConcurrentModification"},
-        {"shape":"NoSuchKeySigningKey"},
-        {"shape":"InvalidKeySigningKeyStatus"},
-        {"shape":"InvalidSigningStatus"},
-        {"shape":"KeySigningKeyInUse"},
-        {"shape":"KeySigningKeyInParentDSRecord"},
-        {"shape":"InvalidInput"}
-      ]
-    },
-    "DeleteCidrCollection":{
-      "name":"DeleteCidrCollection",
-      "http":{
-        "method":"DELETE",
-        "requestUri":"/2013-04-01/cidrcollection/{CidrCollectionId}"
-      },
-      "input":{"shape":"DeleteCidrCollectionRequest"},
-      "output":{"shape":"DeleteCidrCollectionResponse"},
-      "errors":[
-        {"shape":"NoSuchCidrCollectionException"},
-        {"shape":"CidrCollectionInUseException"},
-        {"shape":"InvalidInput"},
-        {"shape":"ConcurrentModification"}
-      ]
-    },
     "DeleteHealthCheck":{
       "name":"DeleteHealthCheck",
       "http":{
@@ -393,23 +273,6 @@
         {"shape":"PriorRequestNotComplete"},
         {"shape":"InvalidInput"},
         {"shape":"InvalidDomainName"}
-      ]
-    },
-    "DeleteKeySigningKey":{
-      "name":"DeleteKeySigningKey",
-      "http":{
-        "method":"DELETE",
-        "requestUri":"/2013-04-01/keysigningkey/{HostedZoneId}/{Name}"
-      },
-      "input":{"shape":"DeleteKeySigningKeyRequest"},
-      "output":{"shape":"DeleteKeySigningKeyResponse"},
-      "errors":[
-        {"shape":"ConcurrentModification"},
-        {"shape":"NoSuchKeySigningKey"},
-        {"shape":"InvalidKeySigningKeyStatus"},
-        {"shape":"InvalidSigningStatus"},
-        {"shape":"InvalidKMSArn"},
-        {"shape":"InvalidInput"}
       ]
     },
     "DeleteQueryLoggingConfig":{
@@ -490,25 +353,6 @@
         {"shape":"InvalidInput"}
       ]
     },
-    "DisableHostedZoneDNSSEC":{
-      "name":"DisableHostedZoneDNSSEC",
-      "http":{
-        "method":"POST",
-        "requestUri":"/2013-04-01/hostedzone/{Id}/disable-dnssec"
-      },
-      "input":{"shape":"DisableHostedZoneDNSSECRequest"},
-      "output":{"shape":"DisableHostedZoneDNSSECResponse"},
-      "errors":[
-        {"shape":"NoSuchHostedZone"},
-        {"shape":"InvalidArgument"},
-        {"shape":"ConcurrentModification"},
-        {"shape":"KeySigningKeyInParentDSRecord"},
-        {"shape":"DNSSECNotFound"},
-        {"shape":"InvalidKeySigningKeyStatus"},
-        {"shape":"InvalidKMSArn"},
-        {"shape":"InvalidInput"}
-      ]
-    },
     "DisassociateVPCFromHostedZone":{
       "name":"DisassociateVPCFromHostedZone",
       "http":{
@@ -526,26 +370,6 @@
         {"shape":"InvalidVPCId"},
         {"shape":"VPCAssociationNotFound"},
         {"shape":"LastVPCAssociation"},
-        {"shape":"InvalidInput"}
-      ]
-    },
-    "EnableHostedZoneDNSSEC":{
-      "name":"EnableHostedZoneDNSSEC",
-      "http":{
-        "method":"POST",
-        "requestUri":"/2013-04-01/hostedzone/{Id}/enable-dnssec"
-      },
-      "input":{"shape":"EnableHostedZoneDNSSECRequest"},
-      "output":{"shape":"EnableHostedZoneDNSSECResponse"},
-      "errors":[
-        {"shape":"NoSuchHostedZone"},
-        {"shape":"InvalidArgument"},
-        {"shape":"ConcurrentModification"},
-        {"shape":"KeySigningKeyWithActiveStatusNotFound"},
-        {"shape":"InvalidKMSArn"},
-        {"shape":"HostedZonePartiallyDelegated"},
-        {"shape":"DNSSECNotFound"},
-        {"shape":"InvalidKeySigningKeyStatus"},
         {"shape":"InvalidInput"}
       ]
     },
@@ -582,20 +406,6 @@
       },
       "input":{"shape":"GetCheckerIpRangesRequest"},
       "output":{"shape":"GetCheckerIpRangesResponse"}
-    },
-    "GetDNSSEC":{
-      "name":"GetDNSSEC",
-      "http":{
-        "method":"GET",
-        "requestUri":"/2013-04-01/hostedzone/{Id}/dnssec"
-      },
-      "input":{"shape":"GetDNSSECRequest"},
-      "output":{"shape":"GetDNSSECResponse"},
-      "errors":[
-        {"shape":"NoSuchHostedZone"},
-        {"shape":"InvalidArgument"},
-        {"shape":"InvalidInput"}
-      ]
     },
     "GetGeoLocation":{
       "name":"GetGeoLocation",
@@ -773,45 +583,6 @@
       "input":{"shape":"GetTrafficPolicyInstanceCountRequest"},
       "output":{"shape":"GetTrafficPolicyInstanceCountResponse"}
     },
-    "ListCidrBlocks":{
-      "name":"ListCidrBlocks",
-      "http":{
-        "method":"GET",
-        "requestUri":"/2013-04-01/cidrcollection/{CidrCollectionId}/cidrblocks"
-      },
-      "input":{"shape":"ListCidrBlocksRequest"},
-      "output":{"shape":"ListCidrBlocksResponse"},
-      "errors":[
-        {"shape":"NoSuchCidrCollectionException"},
-        {"shape":"NoSuchCidrLocationException"},
-        {"shape":"InvalidInput"}
-      ]
-    },
-    "ListCidrCollections":{
-      "name":"ListCidrCollections",
-      "http":{
-        "method":"GET",
-        "requestUri":"/2013-04-01/cidrcollection"
-      },
-      "input":{"shape":"ListCidrCollectionsRequest"},
-      "output":{"shape":"ListCidrCollectionsResponse"},
-      "errors":[
-        {"shape":"InvalidInput"}
-      ]
-    },
-    "ListCidrLocations":{
-      "name":"ListCidrLocations",
-      "http":{
-        "method":"GET",
-        "requestUri":"/2013-04-01/cidrcollection/{CidrCollectionId}"
-      },
-      "input":{"shape":"ListCidrLocationsRequest"},
-      "output":{"shape":"ListCidrLocationsResponse"},
-      "errors":[
-        {"shape":"NoSuchCidrCollectionException"},
-        {"shape":"InvalidInput"}
-      ]
-    },
     "ListGeoLocations":{
       "name":"ListGeoLocations",
       "http":{
@@ -862,19 +633,6 @@
       "errors":[
         {"shape":"InvalidInput"},
         {"shape":"InvalidDomainName"}
-      ]
-    },
-    "ListHostedZonesByVPC":{
-      "name":"ListHostedZonesByVPC",
-      "http":{
-        "method":"GET",
-        "requestUri":"/2013-04-01/hostedzonesbyvpc"
-      },
-      "input":{"shape":"ListHostedZonesByVPCRequest"},
-      "output":{"shape":"ListHostedZonesByVPCResponse"},
-      "errors":[
-        {"shape":"InvalidInput"},
-        {"shape":"InvalidPaginationToken"}
       ]
     },
     "ListQueryLoggingConfigs":{
@@ -1077,8 +835,7 @@
       "output":{"shape":"UpdateHostedZoneCommentResponse"},
       "errors":[
         {"shape":"NoSuchHostedZone"},
-        {"shape":"InvalidInput"},
-        {"shape":"PriorRequestNotComplete"}
+        {"shape":"InvalidInput"}
       ]
     },
     "UpdateTrafficPolicyComment":{
@@ -1121,18 +878,6 @@
     }
   },
   "shapes":{
-    "ARN":{
-      "type":"string",
-      "max":2048,
-      "min":20,
-      "pattern":".*\\S.*"
-    },
-    "AWSAccountID":{"type":"string"},
-    "AWSRegion":{
-      "type":"string",
-      "max":64,
-      "min":1
-    },
     "AccountLimit":{
       "type":"structure",
       "required":[
@@ -1153,32 +898,6 @@
         "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER",
         "MAX_TRAFFIC_POLICIES_BY_OWNER"
       ]
-    },
-    "ActivateKeySigningKeyRequest":{
-      "type":"structure",
-      "required":[
-        "HostedZoneId",
-        "Name"
-      ],
-      "members":{
-        "HostedZoneId":{
-          "shape":"ResourceId",
-          "location":"uri",
-          "locationName":"HostedZoneId"
-        },
-        "Name":{
-          "shape":"SigningKeyName",
-          "location":"uri",
-          "locationName":"Name"
-        }
-      }
-    },
-    "ActivateKeySigningKeyResponse":{
-      "type":"structure",
-      "required":["ChangeInfo"],
-      "members":{
-        "ChangeInfo":{"shape":"ChangeInfo"}
-      }
     },
     "AlarmIdentifier":{
       "type":"structure",
@@ -1234,11 +953,6 @@
         "ChangeInfo":{"shape":"ChangeInfo"}
       }
     },
-    "Bias":{
-      "type":"integer",
-      "max":99,
-      "min":-99
-    },
     "Change":{
       "type":"structure",
       "required":[
@@ -1265,34 +979,6 @@
         "Comment":{"shape":"ResourceDescription"},
         "Changes":{"shape":"Changes"}
       }
-    },
-    "ChangeCidrCollectionRequest":{
-      "type":"structure",
-      "required":[
-        "Id",
-        "Changes"
-      ],
-      "members":{
-        "Id":{
-          "shape":"UUID",
-          "location":"uri",
-          "locationName":"CidrCollectionId"
-        },
-        "CollectionVersion":{"shape":"CollectionVersion"},
-        "Changes":{"shape":"CidrCollectionChanges"}
-      }
-    },
-    "ChangeCidrCollectionResponse":{
-      "type":"structure",
-      "required":["Id"],
-      "members":{
-        "Id":{"shape":"ChangeId"}
-      }
-    },
-    "ChangeId":{
-      "type":"string",
-      "max":6500,
-      "min":1
     },
     "ChangeInfo":{
       "type":"structure",
@@ -1383,127 +1069,6 @@
       },
       "max":256
     },
-    "Cidr":{
-      "type":"string",
-      "max":50,
-      "min":1,
-      "pattern":".*\\S.*"
-    },
-    "CidrBlockInUseException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":400},
-      "exception":true
-    },
-    "CidrBlockSummaries":{
-      "type":"list",
-      "member":{"shape":"CidrBlockSummary"}
-    },
-    "CidrBlockSummary":{
-      "type":"structure",
-      "members":{
-        "CidrBlock":{"shape":"Cidr"},
-        "LocationName":{"shape":"CidrLocationNameDefaultNotAllowed"}
-      }
-    },
-    "CidrCollection":{
-      "type":"structure",
-      "members":{
-        "Arn":{"shape":"ARN"},
-        "Id":{"shape":"UUID"},
-        "Name":{"shape":"CollectionName"},
-        "Version":{"shape":"CollectionVersion"}
-      }
-    },
-    "CidrCollectionAlreadyExistsException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"ErrorMessage"}
-      },
-      "exception":true
-    },
-    "CidrCollectionChange":{
-      "type":"structure",
-      "required":[
-        "LocationName",
-        "Action",
-        "CidrList"
-      ],
-      "members":{
-        "LocationName":{"shape":"CidrLocationNameDefaultNotAllowed"},
-        "Action":{"shape":"CidrCollectionChangeAction"},
-        "CidrList":{"shape":"CidrList"}
-      }
-    },
-    "CidrCollectionChangeAction":{
-      "type":"string",
-      "enum":[
-        "PUT",
-        "DELETE_IF_EXISTS"
-      ]
-    },
-    "CidrCollectionChanges":{
-      "type":"list",
-      "member":{"shape":"CidrCollectionChange"},
-      "max":1000,
-      "min":1
-    },
-    "CidrCollectionInUseException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":400},
-      "exception":true
-    },
-    "CidrCollectionVersionMismatchException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":409},
-      "exception":true
-    },
-    "CidrList":{
-      "type":"list",
-      "member":{
-        "shape":"Cidr",
-        "locationName":"Cidr"
-      },
-      "max":1000,
-      "min":1
-    },
-    "CidrLocationNameDefaultAllowed":{
-      "type":"string",
-      "max":16,
-      "min":1,
-      "pattern":"[0-9A-Za-z_\\-\\*]+"
-    },
-    "CidrLocationNameDefaultNotAllowed":{
-      "type":"string",
-      "max":16,
-      "min":1,
-      "pattern":"[0-9A-Za-z_\\-]+"
-    },
-    "CidrNonce":{
-      "type":"string",
-      "max":64,
-      "min":1,
-      "pattern":"\\p{ASCII}+"
-    },
-    "CidrRoutingConfig":{
-      "type":"structure",
-      "required":[
-        "CollectionId",
-        "LocationName"
-      ],
-      "members":{
-        "CollectionId":{"shape":"UUID"},
-        "LocationName":{"shape":"CidrLocationNameDefaultAllowed"}
-      }
-    },
     "CloudWatchAlarmConfiguration":{
       "type":"structure",
       "required":[
@@ -1536,61 +1101,19 @@
         "us-west-2",
         "ca-central-1",
         "eu-central-1",
-        "eu-central-2",
         "eu-west-1",
         "eu-west-2",
         "eu-west-3",
-        "ap-east-1",
-        "me-south-1",
-        "me-central-1",
         "ap-south-1",
-        "ap-south-2",
         "ap-southeast-1",
         "ap-southeast-2",
-        "ap-southeast-3",
         "ap-northeast-1",
         "ap-northeast-2",
         "ap-northeast-3",
         "eu-north-1",
-        "sa-east-1",
-        "cn-northwest-1",
-        "cn-north-1",
-        "af-south-1",
-        "eu-south-1",
-        "eu-south-2",
-        "us-gov-west-1",
-        "us-gov-east-1",
-        "us-iso-east-1",
-        "us-iso-west-1",
-        "us-isob-east-1",
-        "ap-southeast-4",
-        "il-central-1",
-        "ca-west-1"
+        "sa-east-1"
       ],
       "max":64,
-      "min":1
-    },
-    "CollectionName":{
-      "type":"string",
-      "max":64,
-      "min":1,
-      "pattern":"[0-9A-Za-z_\\-]+"
-    },
-    "CollectionSummaries":{
-      "type":"list",
-      "member":{"shape":"CollectionSummary"}
-    },
-    "CollectionSummary":{
-      "type":"structure",
-      "members":{
-        "Arn":{"shape":"ARN"},
-        "Id":{"shape":"UUID"},
-        "Name":{"shape":"CollectionName"},
-        "Version":{"shape":"CollectionVersion"}
-      }
-    },
-    "CollectionVersion":{
-      "type":"long",
       "min":1
     },
     "ComparisonOperator":{
@@ -1624,39 +1147,6 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
-    },
-    "Coordinates":{
-      "type":"structure",
-      "required":[
-        "Latitude",
-        "Longitude"
-      ],
-      "members":{
-        "Latitude":{"shape":"Latitude"},
-        "Longitude":{"shape":"Longitude"}
-      }
-    },
-    "CreateCidrCollectionRequest":{
-      "type":"structure",
-      "required":[
-        "Name",
-        "CallerReference"
-      ],
-      "members":{
-        "Name":{"shape":"CollectionName"},
-        "CallerReference":{"shape":"CidrNonce"}
-      }
-    },
-    "CreateCidrCollectionResponse":{
-      "type":"structure",
-      "members":{
-        "Collection":{"shape":"CidrCollection"},
-        "Location":{
-          "shape":"ResourceURI",
-          "location":"header",
-          "locationName":"Location"
-        }
-      }
     },
     "CreateHealthCheckRequest":{
       "type":"structure",
@@ -1711,40 +1201,6 @@
         "ChangeInfo":{"shape":"ChangeInfo"},
         "DelegationSet":{"shape":"DelegationSet"},
         "VPC":{"shape":"VPC"},
-        "Location":{
-          "shape":"ResourceURI",
-          "location":"header",
-          "locationName":"Location"
-        }
-      }
-    },
-    "CreateKeySigningKeyRequest":{
-      "type":"structure",
-      "required":[
-        "CallerReference",
-        "HostedZoneId",
-        "KeyManagementServiceArn",
-        "Name",
-        "Status"
-      ],
-      "members":{
-        "CallerReference":{"shape":"Nonce"},
-        "HostedZoneId":{"shape":"ResourceId"},
-        "KeyManagementServiceArn":{"shape":"SigningKeyString"},
-        "Name":{"shape":"SigningKeyName"},
-        "Status":{"shape":"SigningKeyStatus"}
-      }
-    },
-    "CreateKeySigningKeyResponse":{
-      "type":"structure",
-      "required":[
-        "ChangeInfo",
-        "KeySigningKey",
-        "Location"
-      ],
-      "members":{
-        "ChangeInfo":{"shape":"ChangeInfo"},
-        "KeySigningKey":{"shape":"KeySigningKey"},
         "Location":{
           "shape":"ResourceURI",
           "location":"header",
@@ -1922,47 +1378,6 @@
       "max":1024
     },
     "DNSRCode":{"type":"string"},
-    "DNSSECNotFound":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":400},
-      "exception":true
-    },
-    "DNSSECStatus":{
-      "type":"structure",
-      "members":{
-        "ServeSignature":{"shape":"ServeSignature"},
-        "StatusMessage":{"shape":"SigningKeyStatusMessage"}
-      }
-    },
-    "DeactivateKeySigningKeyRequest":{
-      "type":"structure",
-      "required":[
-        "HostedZoneId",
-        "Name"
-      ],
-      "members":{
-        "HostedZoneId":{
-          "shape":"ResourceId",
-          "location":"uri",
-          "locationName":"HostedZoneId"
-        },
-        "Name":{
-          "shape":"SigningKeyName",
-          "location":"uri",
-          "locationName":"Name"
-        }
-      }
-    },
-    "DeactivateKeySigningKeyResponse":{
-      "type":"structure",
-      "required":["ChangeInfo"],
-      "members":{
-        "ChangeInfo":{"shape":"ChangeInfo"}
-      }
-    },
     "DelegationSet":{
       "type":"structure",
       "required":["NameServers"],
@@ -2022,22 +1437,6 @@
         "locationName":"DelegationSet"
       }
     },
-    "DeleteCidrCollectionRequest":{
-      "type":"structure",
-      "required":["Id"],
-      "members":{
-        "Id":{
-          "shape":"UUID",
-          "location":"uri",
-          "locationName":"CidrCollectionId"
-        }
-      }
-    },
-    "DeleteCidrCollectionResponse":{
-      "type":"structure",
-      "members":{
-      }
-    },
     "DeleteHealthCheckRequest":{
       "type":"structure",
       "required":["HealthCheckId"],
@@ -2066,32 +1465,6 @@
       }
     },
     "DeleteHostedZoneResponse":{
-      "type":"structure",
-      "required":["ChangeInfo"],
-      "members":{
-        "ChangeInfo":{"shape":"ChangeInfo"}
-      }
-    },
-    "DeleteKeySigningKeyRequest":{
-      "type":"structure",
-      "required":[
-        "HostedZoneId",
-        "Name"
-      ],
-      "members":{
-        "HostedZoneId":{
-          "shape":"ResourceId",
-          "location":"uri",
-          "locationName":"HostedZoneId"
-        },
-        "Name":{
-          "shape":"SigningKeyName",
-          "location":"uri",
-          "locationName":"Name"
-        }
-      }
-    },
-    "DeleteKeySigningKeyResponse":{
       "type":"structure",
       "required":["ChangeInfo"],
       "members":{
@@ -2214,24 +1587,6 @@
       },
       "max":10
     },
-    "DisableHostedZoneDNSSECRequest":{
-      "type":"structure",
-      "required":["HostedZoneId"],
-      "members":{
-        "HostedZoneId":{
-          "shape":"ResourceId",
-          "location":"uri",
-          "locationName":"Id"
-        }
-      }
-    },
-    "DisableHostedZoneDNSSECResponse":{
-      "type":"structure",
-      "required":["ChangeInfo"],
-      "members":{
-        "ChangeInfo":{"shape":"ChangeInfo"}
-      }
-    },
     "Disabled":{"type":"boolean"},
     "DisassociateVPCComment":{"type":"string"},
     "DisassociateVPCFromHostedZoneRequest":{
@@ -2251,24 +1606,6 @@
       }
     },
     "DisassociateVPCFromHostedZoneResponse":{
-      "type":"structure",
-      "required":["ChangeInfo"],
-      "members":{
-        "ChangeInfo":{"shape":"ChangeInfo"}
-      }
-    },
-    "EnableHostedZoneDNSSECRequest":{
-      "type":"structure",
-      "required":["HostedZoneId"],
-      "members":{
-        "HostedZoneId":{
-          "shape":"ResourceId",
-          "location":"uri",
-          "locationName":"Id"
-        }
-      }
-    },
-    "EnableHostedZoneDNSSECResponse":{
       "type":"structure",
       "required":["ChangeInfo"],
       "members":{
@@ -2353,15 +1690,6 @@
       "max":64,
       "min":1
     },
-    "GeoProximityLocation":{
-      "type":"structure",
-      "members":{
-        "AWSRegion":{"shape":"AWSRegion"},
-        "LocalZoneGroup":{"shape":"LocalZoneGroup"},
-        "Coordinates":{"shape":"Coordinates"},
-        "Bias":{"shape":"Bias"}
-      }
-    },
     "GetAccountLimitRequest":{
       "type":"structure",
       "required":["Type"],
@@ -2389,7 +1717,7 @@
       "required":["Id"],
       "members":{
         "Id":{
-          "shape":"ChangeId",
+          "shape":"ResourceId",
           "location":"uri",
           "locationName":"Id"
         }
@@ -2412,28 +1740,6 @@
       "required":["CheckerIpRanges"],
       "members":{
         "CheckerIpRanges":{"shape":"CheckerIpRanges"}
-      }
-    },
-    "GetDNSSECRequest":{
-      "type":"structure",
-      "required":["HostedZoneId"],
-      "members":{
-        "HostedZoneId":{
-          "shape":"ResourceId",
-          "location":"uri",
-          "locationName":"Id"
-        }
-      }
-    },
-    "GetDNSSECResponse":{
-      "type":"structure",
-      "required":[
-        "Status",
-        "KeySigningKeys"
-      ],
-      "members":{
-        "Status":{"shape":"DNSSECStatus"},
-        "KeySigningKeys":{"shape":"KeySigningKeys"}
       }
     },
     "GetGeoLocationRequest":{
@@ -2758,8 +2064,7 @@
         "EnableSNI":{"shape":"EnableSNI"},
         "Regions":{"shape":"HealthCheckRegionList"},
         "AlarmIdentifier":{"shape":"AlarmIdentifier"},
-        "InsufficientDataHealthStatus":{"shape":"InsufficientDataHealthStatus"},
-        "RoutingControlArn":{"shape":"RoutingControlArn"}
+        "InsufficientDataHealthStatus":{"shape":"InsufficientDataHealthStatus"}
       }
     },
     "HealthCheckCount":{"type":"long"},
@@ -2829,8 +2134,7 @@
         "HTTPS_STR_MATCH",
         "TCP",
         "CALCULATED",
-        "CLOUDWATCH_METRIC",
-        "RECOVERY_CONTROL"
+        "CLOUDWATCH_METRIC"
       ]
     },
     "HealthCheckVersion":{
@@ -2929,49 +2233,7 @@
       },
       "exception":true
     },
-    "HostedZoneOwner":{
-      "type":"structure",
-      "members":{
-        "OwningAccount":{"shape":"AWSAccountID"},
-        "OwningService":{"shape":"HostedZoneOwningService"}
-      }
-    },
-    "HostedZoneOwningService":{
-      "type":"string",
-      "max":128
-    },
-    "HostedZonePartiallyDelegated":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "exception":true
-    },
     "HostedZoneRRSetCount":{"type":"long"},
-    "HostedZoneSummaries":{
-      "type":"list",
-      "member":{
-        "shape":"HostedZoneSummary",
-        "locationName":"HostedZoneSummary"
-      }
-    },
-    "HostedZoneSummary":{
-      "type":"structure",
-      "required":[
-        "HostedZoneId",
-        "Name",
-        "Owner"
-      ],
-      "members":{
-        "HostedZoneId":{"shape":"ResourceId"},
-        "Name":{"shape":"DNSName"},
-        "Owner":{"shape":"HostedZoneOwner"}
-      }
-    },
-    "HostedZoneType":{
-      "type":"string",
-      "enum":["PrivateHostedZone"]
-    },
     "HostedZones":{
       "type":"list",
       "member":{
@@ -3040,42 +2302,12 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
-    "InvalidKMSArn":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "exception":true
-    },
-    "InvalidKeySigningKeyName":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":400},
-      "exception":true
-    },
-    "InvalidKeySigningKeyStatus":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":400},
-      "exception":true
-    },
     "InvalidPaginationToken":{
       "type":"structure",
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true
-    },
-    "InvalidSigningStatus":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
       "exception":true
     },
     "InvalidTrafficPolicyDocument":{
@@ -3096,61 +2328,6 @@
     },
     "Inverted":{"type":"boolean"},
     "IsPrivateZone":{"type":"boolean"},
-    "KeySigningKey":{
-      "type":"structure",
-      "members":{
-        "Name":{"shape":"SigningKeyName"},
-        "KmsArn":{"shape":"SigningKeyString"},
-        "Flag":{"shape":"SigningKeyInteger"},
-        "SigningAlgorithmMnemonic":{"shape":"SigningKeyString"},
-        "SigningAlgorithmType":{"shape":"SigningKeyInteger"},
-        "DigestAlgorithmMnemonic":{"shape":"SigningKeyString"},
-        "DigestAlgorithmType":{"shape":"SigningKeyInteger"},
-        "KeyTag":{"shape":"SigningKeyTag"},
-        "DigestValue":{"shape":"SigningKeyString"},
-        "PublicKey":{"shape":"SigningKeyString"},
-        "DSRecord":{"shape":"SigningKeyString"},
-        "DNSKEYRecord":{"shape":"SigningKeyString"},
-        "Status":{"shape":"SigningKeyStatus"},
-        "StatusMessage":{"shape":"SigningKeyStatusMessage"},
-        "CreatedDate":{"shape":"TimeStamp"},
-        "LastModifiedDate":{"shape":"TimeStamp"}
-      }
-    },
-    "KeySigningKeyAlreadyExists":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":409},
-      "exception":true
-    },
-    "KeySigningKeyInParentDSRecord":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":400},
-      "exception":true
-    },
-    "KeySigningKeyInUse":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "exception":true
-    },
-    "KeySigningKeyWithActiveStatusNotFound":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "exception":true
-    },
-    "KeySigningKeys":{
-      "type":"list",
-      "member":{"shape":"KeySigningKey"}
-    },
     "LastVPCAssociation":{
       "type":"structure",
       "members":{
@@ -3158,12 +2335,6 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
-    },
-    "Latitude":{
-      "type":"string",
-      "max":6,
-      "min":1,
-      "pattern":"[-+]?[0-9]{1,2}(\\.[0-9]{0,2})?"
     },
     "LimitValue":{
       "type":"long",
@@ -3181,89 +2352,6 @@
       "members":{
         "ServicePrincipal":{"shape":"ServicePrincipal"},
         "Description":{"shape":"ResourceDescription"}
-      }
-    },
-    "ListCidrBlocksRequest":{
-      "type":"structure",
-      "required":["CollectionId"],
-      "members":{
-        "CollectionId":{
-          "shape":"UUID",
-          "location":"uri",
-          "locationName":"CidrCollectionId"
-        },
-        "LocationName":{
-          "shape":"CidrLocationNameDefaultNotAllowed",
-          "location":"querystring",
-          "locationName":"location"
-        },
-        "NextToken":{
-          "shape":"PaginationToken",
-          "location":"querystring",
-          "locationName":"nexttoken"
-        },
-        "MaxResults":{
-          "shape":"MaxResults",
-          "location":"querystring",
-          "locationName":"maxresults"
-        }
-      }
-    },
-    "ListCidrBlocksResponse":{
-      "type":"structure",
-      "members":{
-        "NextToken":{"shape":"PaginationToken"},
-        "CidrBlocks":{"shape":"CidrBlockSummaries"}
-      }
-    },
-    "ListCidrCollectionsRequest":{
-      "type":"structure",
-      "members":{
-        "NextToken":{
-          "shape":"PaginationToken",
-          "location":"querystring",
-          "locationName":"nexttoken"
-        },
-        "MaxResults":{
-          "shape":"MaxResults",
-          "location":"querystring",
-          "locationName":"maxresults"
-        }
-      }
-    },
-    "ListCidrCollectionsResponse":{
-      "type":"structure",
-      "members":{
-        "NextToken":{"shape":"PaginationToken"},
-        "CidrCollections":{"shape":"CollectionSummaries"}
-      }
-    },
-    "ListCidrLocationsRequest":{
-      "type":"structure",
-      "required":["CollectionId"],
-      "members":{
-        "CollectionId":{
-          "shape":"UUID",
-          "location":"uri",
-          "locationName":"CidrCollectionId"
-        },
-        "NextToken":{
-          "shape":"PaginationToken",
-          "location":"querystring",
-          "locationName":"nexttoken"
-        },
-        "MaxResults":{
-          "shape":"MaxResults",
-          "location":"querystring",
-          "locationName":"maxresults"
-        }
-      }
-    },
-    "ListCidrLocationsResponse":{
-      "type":"structure",
-      "members":{
-        "NextToken":{"shape":"PaginationToken"},
-        "CidrLocations":{"shape":"LocationSummaries"}
       }
     },
     "ListGeoLocationsRequest":{
@@ -3375,47 +2463,6 @@
         "MaxItems":{"shape":"PageMaxItems"}
       }
     },
-    "ListHostedZonesByVPCRequest":{
-      "type":"structure",
-      "required":[
-        "VPCId",
-        "VPCRegion"
-      ],
-      "members":{
-        "VPCId":{
-          "shape":"VPCId",
-          "location":"querystring",
-          "locationName":"vpcid"
-        },
-        "VPCRegion":{
-          "shape":"VPCRegion",
-          "location":"querystring",
-          "locationName":"vpcregion"
-        },
-        "MaxItems":{
-          "shape":"PageMaxItems",
-          "location":"querystring",
-          "locationName":"maxitems"
-        },
-        "NextToken":{
-          "shape":"PaginationToken",
-          "location":"querystring",
-          "locationName":"nexttoken"
-        }
-      }
-    },
-    "ListHostedZonesByVPCResponse":{
-      "type":"structure",
-      "required":[
-        "HostedZoneSummaries",
-        "MaxItems"
-      ],
-      "members":{
-        "HostedZoneSummaries":{"shape":"HostedZoneSummaries"},
-        "MaxItems":{"shape":"PageMaxItems"},
-        "NextToken":{"shape":"PaginationToken"}
-      }
-    },
     "ListHostedZonesRequest":{
       "type":"structure",
       "members":{
@@ -3433,11 +2480,6 @@
           "shape":"ResourceId",
           "location":"querystring",
           "locationName":"delegationsetid"
-        },
-        "HostedZoneType":{
-          "shape":"HostedZoneType",
-          "location":"querystring",
-          "locationName":"hostedzonetype"
         }
       }
     },
@@ -3847,27 +2889,6 @@
         "VPCs":{"shape":"VPCs"}
       }
     },
-    "LocalZoneGroup":{
-      "type":"string",
-      "max":64,
-      "min":1
-    },
-    "LocationSummaries":{
-      "type":"list",
-      "member":{"shape":"LocationSummary"}
-    },
-    "LocationSummary":{
-      "type":"structure",
-      "members":{
-        "LocationName":{"shape":"CidrLocationNameDefaultAllowed"}
-      }
-    },
-    "Longitude":{
-      "type":"string",
-      "max":7,
-      "min":1,
-      "pattern":"[-+]?[0-9]{1,3}(\\.[0-9]{0,2})?"
-    },
     "MaxResults":{"type":"string"},
     "MeasureLatency":{"type":"boolean"},
     "Message":{
@@ -3893,22 +2914,6 @@
       "type":"structure",
       "members":{
         "message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":404},
-      "exception":true
-    },
-    "NoSuchCidrCollectionException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":404},
-      "exception":true
-    },
-    "NoSuchCidrLocationException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"ErrorMessage"}
       },
       "error":{"httpStatusCode":404},
       "exception":true
@@ -3945,14 +2950,6 @@
       "exception":true
     },
     "NoSuchHostedZone":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "error":{"httpStatusCode":404},
-      "exception":true
-    },
-    "NoSuchKeySigningKey":{
       "type":"structure",
       "members":{
         "message":{"shape":"ErrorMessage"}
@@ -4005,7 +3002,7 @@
     "PageTruncated":{"type":"boolean"},
     "PaginationToken":{
       "type":"string",
-      "max":1024
+      "max":256
     },
     "Period":{
       "type":"integer",
@@ -4083,8 +3080,7 @@
         "SRV",
         "SPF",
         "AAAA",
-        "CAA",
-        "DS"
+        "CAA"
       ]
     },
     "RecordData":{
@@ -4161,9 +3157,7 @@
         "ResourceRecords":{"shape":"ResourceRecords"},
         "AliasTarget":{"shape":"AliasTarget"},
         "HealthCheckId":{"shape":"HealthCheckId"},
-        "TrafficPolicyInstanceId":{"shape":"TrafficPolicyInstanceId"},
-        "CidrRoutingConfig":{"shape":"CidrRoutingConfig"},
-        "GeoProximityLocation":{"shape":"GeoProximityLocation"}
+        "TrafficPolicyInstanceId":{"shape":"TrafficPolicyInstanceId"}
       }
     },
     "ResourceRecordSetFailover":{
@@ -4191,10 +3185,8 @@
         "eu-west-2",
         "eu-west-3",
         "eu-central-1",
-        "eu-central-2",
         "ap-southeast-1",
         "ap-southeast-2",
-        "ap-southeast-3",
         "ap-northeast-1",
         "ap-northeast-2",
         "ap-northeast-3",
@@ -4202,17 +3194,7 @@
         "sa-east-1",
         "cn-north-1",
         "cn-northwest-1",
-        "ap-east-1",
-        "me-south-1",
-        "me-central-1",
-        "ap-south-1",
-        "ap-south-2",
-        "af-south-1",
-        "eu-south-1",
-        "eu-south-2",
-        "ap-southeast-4",
-        "il-central-1",
-        "ca-west-1"
+        "ap-south-1"
       ],
       "max":64,
       "min":1
@@ -4271,45 +3253,13 @@
       "type":"string",
       "enum":["MAX_ZONES_BY_REUSABLE_DELEGATION_SET"]
     },
-    "RoutingControlArn":{
-      "type":"string",
-      "max":255,
-      "min":1
-    },
     "SearchString":{
       "type":"string",
       "max":255
     },
-    "ServeSignature":{
-      "type":"string",
-      "max":1024,
-      "min":1
-    },
     "ServicePrincipal":{
       "type":"string",
       "max":128
-    },
-    "SigningKeyInteger":{"type":"integer"},
-    "SigningKeyName":{
-      "type":"string",
-      "max":128,
-      "min":3
-    },
-    "SigningKeyStatus":{
-      "type":"string",
-      "max":150,
-      "min":5
-    },
-    "SigningKeyStatusMessage":{
-      "type":"string",
-      "max":512,
-      "min":0
-    },
-    "SigningKeyString":{"type":"string"},
-    "SigningKeyTag":{
-      "type":"integer",
-      "max":65536,
-      "min":0
     },
     "Statistic":{
       "type":"string",
@@ -4474,13 +3424,6 @@
         "message":{"shape":"ErrorMessage"}
       },
       "error":{"httpStatusCode":400},
-      "exception":true
-    },
-    "TooManyKeySigningKeys":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
       "exception":true
     },
     "TooManyTrafficPolicies":{
@@ -4654,10 +3597,6 @@
       "max":4
     },
     "TransportProtocol":{"type":"string"},
-    "UUID":{
-      "type":"string",
-      "pattern":"[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}"
-    },
     "UpdateHealthCheckRequest":{
       "type":"structure",
       "required":["HealthCheckId"],
@@ -4807,33 +3746,16 @@
         "eu-west-2",
         "eu-west-3",
         "eu-central-1",
-        "eu-central-2",
-        "ap-east-1",
-        "me-south-1",
-        "us-gov-west-1",
-        "us-gov-east-1",
-        "us-iso-east-1",
-        "us-iso-west-1",
-        "us-isob-east-1",
-        "me-central-1",
         "ap-southeast-1",
         "ap-southeast-2",
-        "ap-southeast-3",
         "ap-south-1",
-        "ap-south-2",
         "ap-northeast-1",
         "ap-northeast-2",
         "ap-northeast-3",
         "eu-north-1",
         "sa-east-1",
         "ca-central-1",
-        "cn-north-1",
-        "af-south-1",
-        "eu-south-1",
-        "eu-south-2",
-        "ap-southeast-4",
-        "il-central-1",
-        "ca-west-1"
+        "cn-north-1"
       ],
       "max":64,
       "min":1

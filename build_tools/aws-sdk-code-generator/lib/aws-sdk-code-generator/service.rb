@@ -52,7 +52,6 @@ module AwsSdkCodeGenerator
       @protocol_settings = metadata['protocolSettings'] || {}
       @api_version = metadata['apiVersion']
       @signature_version = metadata['signatureVersion']
-      @auth = api.fetch('metadata')['auth']
       @full_name = metadata['serviceFullName']
       @short_name = metadata['serviceAbbreviation'] || @full_name
 
@@ -159,9 +158,6 @@ module AwsSdkCodeGenerator
 
     # @return [String] The signature version, e.g. "v4"
     attr_reader :signature_version
-
-    # @return [Array<String>] A list of supported auth types
-    attr_reader :auth
 
     # @return [String] The full product name for the service,
     #   e.g. "Amazon Simple Storage Service".

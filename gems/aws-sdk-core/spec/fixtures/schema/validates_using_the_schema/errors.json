@@ -1,0 +1,4 @@
+[
+  { "match": "did not contain a required property of 'resources'" },
+  { "match": "contains additional properties" }
+]

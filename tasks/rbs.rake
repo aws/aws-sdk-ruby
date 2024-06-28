@@ -2,7 +2,7 @@ require 'rubygems'
 
 namespace :rbs do
   task :validate do
-    all_sigs = Dir.glob('gems/*/sig').map { |dir| "-I #{dir}" }.join(' ')
+    all_sigs = Dir.glob('gems/*/sig').map{ |dir| "-I #{dir}" }.join(' ')
     sh("bundle exec rbs #{all_sigs} validate") do |ok, _|
       abort('one or more rbs validate failed') unless ok
     end

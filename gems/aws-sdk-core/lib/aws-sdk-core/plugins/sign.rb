@@ -102,7 +102,7 @@ module Aws
           end
 
           region = if scheme_name == 'sigv4a'
-                     auth_scheme['signingRegionSet'].join(',')
+                     auth_scheme['signingRegionSet'].first
                    else
                      auth_scheme['signingRegion']
                    end

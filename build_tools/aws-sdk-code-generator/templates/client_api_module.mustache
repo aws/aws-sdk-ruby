@@ -77,9 +77,6 @@ module {{module_name}}
         {{#authtype}}
         o['authtype'] = "{{.}}"
         {{/authtype}}
-        {{#auth}}
-        o['auth'] = {{&auth}}
-        {{/auth}}
         {{#endpoint_trait}}
         o.endpoint_pattern = {
           {{#endpoint_pattern}}

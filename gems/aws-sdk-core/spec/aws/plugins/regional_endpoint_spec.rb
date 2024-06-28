@@ -85,68 +85,6 @@ module Aws
         end
       end
 
-      describe 'sigv4a region set option' do
-        before { ENV['AWS_REGION'] = 'region' }
-
-        it 'is nil by default' do
-          client = client_class.new
-          expect(client.config.sigv4a_signing_region_set).to be_nil
-        end
-
-        it 'can be configured with shared config' do
-          region_str = 'region1,region2'
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:sigv4a_signing_region_set)
-            .and_return(region_str)
-          client = client_class.new
-          expected = region_str.split(',')
-          expect(client.config.sigv4a_signing_region_set).to eq(expected)
-        end
-
-        it 'can be configured using env variable with precedence' do
-          region_str = 'region1,region2'
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:sigv4a_signing_region_set)
-            .and_return('shared-config-regions')
-          ENV['AWS_SIGV4A_SIGNING_REGION_SET'] = region_str
-          client = client_class.new
-          expected = region_str.split(',')
-          expect(client.config.sigv4a_signing_region_set).to eq(expected)
-        end
-
-        it 'can be configure through code with precedence' do
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:sigv4a_signing_region_set)
-            .and_return('shared-config-regions')
-          ENV['AWS_SIGV4A_SIGNING_REGION_SET'] = 'env-config-regions'
-          client = client_class.new(sigv4a_signing_region_set: ['region'])
-          expect(client.config.sigv4a_signing_region_set).to eq(['region'])
-        end
-
-        it 'rejects an empty set' do
-          expect do
-            client_class.new(sigv4a_signing_region_set: [])
-          end.to raise_error(Errors::InvalidRegionSetError)
-        end
-
-        it 'rejects non-array' do
-          expect do
-            client_class.new(sigv4a_signing_region_set: 'region')
-          end.to raise_error(Errors::InvalidRegionSetError)
-        end
-
-        it 'rejects empty and nil values' do
-          expect do
-            client_class.new(sigv4a_signing_region_set: [nil, ''])
-          end.to raise_error(Errors::InvalidRegionSetError)
-
-          client = client_class.new(
-            sigv4a_signing_region_set: [nil, '', 'region']
-          )
-          expect(client.config.sigv4a_signing_region_set).to eq(['region'])
-        end
-      end
-
       describe 'endpoint option' do
         it 'preserves legacy pre-endpoints2.0 behavior and sets the endpoint and regional_endpoint' do
           prefix = client_class.api.metadata['endpointPrefix']

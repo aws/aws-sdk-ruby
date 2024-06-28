@@ -198,7 +198,6 @@ module Aws
 
     config_reader(
       :region,
-      :sigv4a_signing_region_set,
       :ca_bundle,
       :credential_process,
       :endpoint_discovery_enabled,
