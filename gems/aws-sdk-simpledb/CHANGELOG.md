@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix query serialization with `aws-sdk-core` >= 3.192.0.
+* Issue - Fix query serialization with `aws-sdk-core` >= 3.192.
 
 1.49.0 (2024-06-25)
 ------------------
