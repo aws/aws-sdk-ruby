@@ -9,7 +9,7 @@
                         {
                             "target": "Id",
                             "source": "requestParameter",
-                            "path": "DBCluster.DBClusterIdentifier"
+                            "path": "DBClusterIdentifier"
                         }
                     ],
                     "path": "DBCluster"

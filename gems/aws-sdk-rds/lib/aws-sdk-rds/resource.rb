@@ -956,7 +956,7 @@ module Aws::RDS
         @client.create_db_cluster(options)
       end
       DBCluster.new(
-        id: options[:db_cluster][:db_cluster_identifier],
+        id: options[:db_cluster_identifier],
         data: resp.data.db_cluster,
         client: @client
       )

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix Aws::RDS::Resource#create_db_cluster throws NoMethodError on nil
+
 1.237.0 (2024-06-27)
 ------------------
 
