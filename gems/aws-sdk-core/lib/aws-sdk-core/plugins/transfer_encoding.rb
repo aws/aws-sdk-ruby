@@ -5,7 +5,7 @@ module Aws
 
     # For Streaming Input Operations, when `requiresLength` is enabled
     # checking whether `Content-Length` header can be set,
-    # for `unsignedPayload` and v4-unsigned-body` operations,
+    # for `unsignedPayload` and `v4-unsigned-body` operations,
     # set `Transfer-Encoding` header.
     class TransferEncoding < Seahorse::Client::Plugin
 
