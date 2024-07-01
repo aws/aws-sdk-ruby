@@ -114,7 +114,8 @@ module Aws
                                           properties: Hash[::String, ::String]?
                                         },
                                       ]?,
-                                      custom_ami_id: ::String?
+                                      custom_ami_id: ::String?,
+                                      priority: ::Float?
                                     },
                                   ]?,
                                   launch_specifications: {
@@ -122,10 +123,10 @@ module Aws
                                       timeout_duration_minutes: ::Integer,
                                       timeout_action: ("SWITCH_TO_ON_DEMAND" | "TERMINATE_CLUSTER"),
                                       block_duration_minutes: ::Integer?,
-                                      allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified")?
+                                      allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified" | "capacity-optimized-prioritized")?
                                     }?,
                                     on_demand_specification: {
-                                      allocation_strategy: ("lowest-price"),
+                                      allocation_strategy: ("lowest-price" | "prioritized"),
                                       capacity_reservation_options: {
                                         usage_strategy: ("use-capacity-reservations-first")?,
                                         capacity_reservation_preference: ("open" | "none")?,
@@ -972,7 +973,8 @@ module Aws
                                         properties: Hash[::String, ::String]?
                                       },
                                     ]?,
-                                    custom_ami_id: ::String?
+                                    custom_ami_id: ::String?,
+                                    priority: ::Float?
                                   },
                                 ]?,
                                 launch_specifications: {
@@ -980,10 +982,10 @@ module Aws
                                     timeout_duration_minutes: ::Integer,
                                     timeout_action: ("SWITCH_TO_ON_DEMAND" | "TERMINATE_CLUSTER"),
                                     block_duration_minutes: ::Integer?,
-                                    allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified")?
+                                    allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified" | "capacity-optimized-prioritized")?
                                   }?,
                                   on_demand_specification: {
-                                    allocation_strategy: ("lowest-price"),
+                                    allocation_strategy: ("lowest-price" | "prioritized"),
                                     capacity_reservation_options: {
                                       usage_strategy: ("use-capacity-reservations-first")?,
                                       capacity_reservation_preference: ("open" | "none")?,

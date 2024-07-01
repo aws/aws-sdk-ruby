@@ -1170,6 +1170,7 @@ module Aws::Route53Resolver
 
       api.metadata = {
         "apiVersion" => "2018-04-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "route53resolver",
         "jsonVersion" => "1.1",
         "protocol" => "json",

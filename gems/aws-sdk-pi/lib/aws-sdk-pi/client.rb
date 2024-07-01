@@ -624,6 +624,11 @@ module Aws::PI
     #
     #   * A single filter for any other dimension in this dimension group.
     #
+    #   <note markdown="1"> The `db.sql.db_id` filter isn't available for RDS for SQL Server DB
+    #   instances.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response. If more items
     #   exist than the specified `MaxRecords` value, a pagination token is
@@ -1412,7 +1417,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

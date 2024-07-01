@@ -214,9 +214,11 @@ module Aws::KendraRanking
 
       api.metadata = {
         "apiVersion" => "2022-10-19",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kendra-ranking",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Kendra Ranking",
         "serviceFullName" => "Amazon Kendra Intelligent Ranking",
         "serviceId" => "Kendra Ranking",

@@ -164,9 +164,11 @@ module Aws::IoTFleetHub
 
       api.metadata = {
         "apiVersion" => "2020-11-03",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.fleethub.iot",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT Fleet Hub",
         "serviceId" => "IoTFleetHub",
         "signatureVersion" => "v4",

@@ -564,8 +564,10 @@ module Aws::CloudSearch
 
       api.metadata = {
         "apiVersion" => "2013-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cloudsearch",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceFullName" => "Amazon CloudSearch",
         "serviceId" => "CloudSearch",
         "signatureVersion" => "v4",

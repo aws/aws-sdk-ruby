@@ -708,9 +708,11 @@ module Aws::AppConfig
 
       api.metadata = {
         "apiVersion" => "2019-10-09",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "appconfig",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AppConfig",
         "serviceFullName" => "Amazon AppConfig",
         "serviceId" => "AppConfig",

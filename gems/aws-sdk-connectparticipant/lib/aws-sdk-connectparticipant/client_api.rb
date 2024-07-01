@@ -285,9 +285,11 @@ module Aws::ConnectParticipant
 
       api.metadata = {
         "apiVersion" => "2018-09-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "participant.connect",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon Connect Participant",
         "serviceFullName" => "Amazon Connect Participant Service",
         "serviceId" => "ConnectParticipant",

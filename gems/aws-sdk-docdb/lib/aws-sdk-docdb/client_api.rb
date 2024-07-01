@@ -1259,8 +1259,10 @@ module Aws::DocDB
 
       api.metadata = {
         "apiVersion" => "2014-10-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rds",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Amazon DocDB",
         "serviceFullName" => "Amazon DocumentDB with MongoDB compatibility",
         "serviceId" => "DocDB",

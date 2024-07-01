@@ -10,6 +10,7 @@ module Aws::CloudHSMV2
 
     class Backup
       attr_accessor backup_id: ::String
+      attr_accessor backup_arn: ::String
       attr_accessor backup_state: ("CREATE_IN_PROGRESS" | "READY" | "DELETED" | "PENDING_DELETION")
       attr_accessor cluster_id: ::String
       attr_accessor create_timestamp: ::Time
@@ -162,10 +163,22 @@ module Aws::CloudHSMV2
       SENSITIVE: []
     end
 
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
     class DescribeBackupsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor shared: bool
       attr_accessor sort_ascending: bool
       SENSITIVE: []
     end
@@ -194,6 +207,16 @@ module Aws::CloudHSMV2
       attr_accessor source_region: ::String
       attr_accessor source_backup: ::String
       attr_accessor source_cluster: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
       SENSITIVE: []
     end
 
@@ -254,6 +277,18 @@ module Aws::CloudHSMV2
 
     class ModifyClusterResponse
       attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
       SENSITIVE: []
     end
 

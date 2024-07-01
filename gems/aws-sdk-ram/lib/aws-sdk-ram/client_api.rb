@@ -750,9 +750,11 @@ module Aws::RAM
 
       api.metadata = {
         "apiVersion" => "2018-01-04",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ram",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "RAM",
         "serviceFullName" => "AWS Resource Access Manager",
         "serviceId" => "RAM",

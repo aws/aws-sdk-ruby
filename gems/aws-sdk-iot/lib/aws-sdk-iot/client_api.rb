@@ -5276,8 +5276,10 @@ module Aws::IoT
 
       api.metadata = {
         "apiVersion" => "2015-05-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "iot",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT",
         "serviceId" => "IoT",
         "signatureVersion" => "v4",

@@ -1336,6 +1336,7 @@ module Aws::KinesisAnalyticsV2
 
       api.metadata = {
         "apiVersion" => "2018-05-23",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kinesisanalytics",
         "jsonVersion" => "1.1",
         "protocol" => "json",

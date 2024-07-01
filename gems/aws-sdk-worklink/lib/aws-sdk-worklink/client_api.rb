@@ -461,9 +461,11 @@ module Aws::WorkLink
 
       api.metadata = {
         "apiVersion" => "2018-09-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "worklink",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "WorkLink",
         "serviceFullName" => "Amazon WorkLink",
         "serviceId" => "WorkLink",

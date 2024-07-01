@@ -1191,6 +1191,7 @@ module Aws::SWF
 
       api.metadata = {
         "apiVersion" => "2012-01-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "swf",
         "jsonVersion" => "1.0",
         "protocol" => "json",

@@ -748,9 +748,11 @@ module Aws::Outposts
 
       api.metadata = {
         "apiVersion" => "2019-12-03",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "outposts",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Outposts",
         "serviceFullName" => "AWS Outposts",
         "serviceId" => "Outposts",

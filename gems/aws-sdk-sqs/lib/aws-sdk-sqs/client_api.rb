@@ -498,6 +498,7 @@ module Aws::SQS
 
       api.metadata = {
         "apiVersion" => "2012-11-05",
+        "auth" => ["aws.auth#sigv4"],
         "awsQueryCompatible" => {},
         "endpointPrefix" => "sqs",
         "errorPrefix" => "AWS.SimpleQueueService.",

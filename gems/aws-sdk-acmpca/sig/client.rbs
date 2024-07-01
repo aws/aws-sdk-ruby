@@ -80,8 +80,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#create_certificate_authority-instance_method
       def create_certificate_authority: (
                                           certificate_authority_configuration: {
-                                            key_algorithm: ("RSA_2048" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1"),
-                                            signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA"),
+                                            key_algorithm: ("RSA_2048" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "SM2"),
+                                            signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2"),
                                             subject: {
                                               country: ::String?,
                                               organization: ::String?,
@@ -181,7 +181,7 @@ module Aws
                                           },
                                           certificate_authority_type: ("ROOT" | "SUBORDINATE"),
                                           ?idempotency_token: ::String,
-                                          ?key_storage_security_standard: ("FIPS_140_2_LEVEL_2_OR_HIGHER" | "FIPS_140_2_LEVEL_3_OR_HIGHER"),
+                                          ?key_storage_security_standard: ("FIPS_140_2_LEVEL_2_OR_HIGHER" | "FIPS_140_2_LEVEL_3_OR_HIGHER" | "CCPC_LEVEL_1_OR_HIGHER"),
                                           ?tags: Array[
                                             {
                                               key: ::String,
@@ -420,7 +420,7 @@ module Aws
                                },
                                certificate_authority_arn: ::String,
                                csr: ::String,
-                               signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA"),
+                               signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2"),
                                ?template_arn: ::String,
                                validity: {
                                  value: ::Integer,

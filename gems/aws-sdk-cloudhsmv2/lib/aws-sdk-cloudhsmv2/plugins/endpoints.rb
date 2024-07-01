@@ -70,10 +70,14 @@ module Aws::CloudHSMV2
             Aws::CloudHSMV2::Endpoints::DeleteCluster.build(context)
           when :delete_hsm
             Aws::CloudHSMV2::Endpoints::DeleteHsm.build(context)
+          when :delete_resource_policy
+            Aws::CloudHSMV2::Endpoints::DeleteResourcePolicy.build(context)
           when :describe_backups
             Aws::CloudHSMV2::Endpoints::DescribeBackups.build(context)
           when :describe_clusters
             Aws::CloudHSMV2::Endpoints::DescribeClusters.build(context)
+          when :get_resource_policy
+            Aws::CloudHSMV2::Endpoints::GetResourcePolicy.build(context)
           when :initialize_cluster
             Aws::CloudHSMV2::Endpoints::InitializeCluster.build(context)
           when :list_tags
@@ -82,6 +86,8 @@ module Aws::CloudHSMV2
             Aws::CloudHSMV2::Endpoints::ModifyBackupAttributes.build(context)
           when :modify_cluster
             Aws::CloudHSMV2::Endpoints::ModifyCluster.build(context)
+          when :put_resource_policy
+            Aws::CloudHSMV2::Endpoints::PutResourcePolicy.build(context)
           when :restore_backup
             Aws::CloudHSMV2::Endpoints::RestoreBackup.build(context)
           when :tag_resource

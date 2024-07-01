@@ -692,9 +692,11 @@ module Aws::FinSpaceData
 
       api.metadata = {
         "apiVersion" => "2020-07-13",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "finspace-api",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "FinSpace Data",
         "serviceFullName" => "FinSpace Public API",
         "serviceId" => "finspace data",

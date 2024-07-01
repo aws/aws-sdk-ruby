@@ -557,8 +557,8 @@ module Aws::ACMPCA
     #
     #   resp = client.create_certificate_authority({
     #     certificate_authority_configuration: { # required
-    #       key_algorithm: "RSA_2048", # required, accepts RSA_2048, RSA_4096, EC_prime256v1, EC_secp384r1
-    #       signing_algorithm: "SHA256WITHECDSA", # required, accepts SHA256WITHECDSA, SHA384WITHECDSA, SHA512WITHECDSA, SHA256WITHRSA, SHA384WITHRSA, SHA512WITHRSA
+    #       key_algorithm: "RSA_2048", # required, accepts RSA_2048, RSA_4096, EC_prime256v1, EC_secp384r1, SM2
+    #       signing_algorithm: "SHA256WITHECDSA", # required, accepts SHA256WITHECDSA, SHA384WITHECDSA, SHA512WITHECDSA, SHA256WITHRSA, SHA384WITHRSA, SHA512WITHRSA, SM3WITHSM2
     #       subject: { # required
     #         country: "CountryCodeString",
     #         organization: "String64",
@@ -658,7 +658,7 @@ module Aws::ACMPCA
     #     },
     #     certificate_authority_type: "ROOT", # required, accepts ROOT, SUBORDINATE
     #     idempotency_token: "IdempotencyToken",
-    #     key_storage_security_standard: "FIPS_140_2_LEVEL_2_OR_HIGHER", # accepts FIPS_140_2_LEVEL_2_OR_HIGHER, FIPS_140_2_LEVEL_3_OR_HIGHER
+    #     key_storage_security_standard: "FIPS_140_2_LEVEL_2_OR_HIGHER", # accepts FIPS_140_2_LEVEL_2_OR_HIGHER, FIPS_140_2_LEVEL_3_OR_HIGHER, CCPC_LEVEL_1_OR_HIGHER
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1104,8 +1104,8 @@ module Aws::ACMPCA
     #   resp.certificate_authority.not_before #=> Time
     #   resp.certificate_authority.not_after #=> Time
     #   resp.certificate_authority.failure_reason #=> String, one of "REQUEST_TIMED_OUT", "UNSUPPORTED_ALGORITHM", "OTHER"
-    #   resp.certificate_authority.certificate_authority_configuration.key_algorithm #=> String, one of "RSA_2048", "RSA_4096", "EC_prime256v1", "EC_secp384r1"
-    #   resp.certificate_authority.certificate_authority_configuration.signing_algorithm #=> String, one of "SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA"
+    #   resp.certificate_authority.certificate_authority_configuration.key_algorithm #=> String, one of "RSA_2048", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "SM2"
+    #   resp.certificate_authority.certificate_authority_configuration.signing_algorithm #=> String, one of "SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SM3WITHSM2"
     #   resp.certificate_authority.certificate_authority_configuration.subject.country #=> String
     #   resp.certificate_authority.certificate_authority_configuration.subject.organization #=> String
     #   resp.certificate_authority.certificate_authority_configuration.subject.organizational_unit #=> String
@@ -1170,7 +1170,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.ocsp_configuration.enabled #=> Boolean
     #   resp.certificate_authority.revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authority.restorable_until #=> Time
-    #   resp.certificate_authority.key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
+    #   resp.certificate_authority.key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER", "CCPC_LEVEL_1_OR_HIGHER"
     #   resp.certificate_authority.usage_mode #=> String, one of "GENERAL_PURPOSE", "SHORT_LIVED_CERTIFICATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthority AWS API Documentation
@@ -1871,7 +1871,7 @@ module Aws::ACMPCA
     #     },
     #     certificate_authority_arn: "Arn", # required
     #     csr: "data", # required
-    #     signing_algorithm: "SHA256WITHECDSA", # required, accepts SHA256WITHECDSA, SHA384WITHECDSA, SHA512WITHECDSA, SHA256WITHRSA, SHA384WITHRSA, SHA512WITHRSA
+    #     signing_algorithm: "SHA256WITHECDSA", # required, accepts SHA256WITHECDSA, SHA384WITHECDSA, SHA512WITHECDSA, SHA256WITHRSA, SHA384WITHRSA, SHA512WITHRSA, SM3WITHSM2
     #     template_arn: "Arn",
     #     validity: { # required
     #       value: 1, # required
@@ -1952,8 +1952,8 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].not_before #=> Time
     #   resp.certificate_authorities[0].not_after #=> Time
     #   resp.certificate_authorities[0].failure_reason #=> String, one of "REQUEST_TIMED_OUT", "UNSUPPORTED_ALGORITHM", "OTHER"
-    #   resp.certificate_authorities[0].certificate_authority_configuration.key_algorithm #=> String, one of "RSA_2048", "RSA_4096", "EC_prime256v1", "EC_secp384r1"
-    #   resp.certificate_authorities[0].certificate_authority_configuration.signing_algorithm #=> String, one of "SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA"
+    #   resp.certificate_authorities[0].certificate_authority_configuration.key_algorithm #=> String, one of "RSA_2048", "RSA_4096", "EC_prime256v1", "EC_secp384r1", "SM2"
+    #   resp.certificate_authorities[0].certificate_authority_configuration.signing_algorithm #=> String, one of "SHA256WITHECDSA", "SHA384WITHECDSA", "SHA512WITHECDSA", "SHA256WITHRSA", "SHA384WITHRSA", "SHA512WITHRSA", "SM3WITHSM2"
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.country #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.organization #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.organizational_unit #=> String
@@ -2018,7 +2018,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.enabled #=> Boolean
     #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authorities[0].restorable_until #=> Time
-    #   resp.certificate_authorities[0].key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
+    #   resp.certificate_authorities[0].key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER", "CCPC_LEVEL_1_OR_HIGHER"
     #   resp.certificate_authorities[0].usage_mode #=> String, one of "GENERAL_PURPOSE", "SHORT_LIVED_CERTIFICATE"
     #   resp.next_token #=> String
     #
@@ -2624,7 +2624,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -222,10 +222,13 @@ module Aws::Mobile
 
       api.metadata = {
         "apiVersion" => "2017-07-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mobile",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Mobile",
+        "serviceId" => "Mobile",
         "signatureVersion" => "v4",
         "signingName" => "AWSMobileHubService",
         "uid" => "mobile-2017-07-01",

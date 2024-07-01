@@ -70,9 +70,11 @@ module Aws::MarketplaceCommerceAnalytics
 
       api.metadata = {
         "apiVersion" => "2015-07-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "marketplacecommerceanalytics",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Marketplace Commerce Analytics",
         "serviceId" => "Marketplace Commerce Analytics",
         "signatureVersion" => "v4",

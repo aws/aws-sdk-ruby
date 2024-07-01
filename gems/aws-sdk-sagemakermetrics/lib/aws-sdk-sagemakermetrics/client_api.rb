@@ -56,8 +56,10 @@ module Aws::SageMakerMetrics
 
       api.metadata = {
         "apiVersion" => "2022-09-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "metrics.sagemaker",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "SageMaker Metrics",
         "serviceFullName" => "Amazon SageMaker Metrics Service",
         "serviceId" => "SageMaker Metrics",

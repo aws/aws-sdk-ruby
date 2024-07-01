@@ -179,9 +179,11 @@ module Aws::IoTSecureTunneling
 
       api.metadata = {
         "apiVersion" => "2018-10-05",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.tunneling.iot",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS IoT Secure Tunneling",
         "serviceId" => "IoTSecureTunneling",
         "signatureVersion" => "v4",

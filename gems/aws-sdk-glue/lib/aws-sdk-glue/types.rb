@@ -10237,13 +10237,20 @@ module Aws::Glue
     #     as well as the databases in yor local account.
     #   @return [String]
     #
+    # @!attribute [rw] attributes_to_get
+    #   Specifies the database fields returned by the `GetDatabases` call.
+    #   This parameter doesn’t accept an empty list. The request must
+    #   include the `NAME`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabasesRequest AWS API Documentation
     #
     class GetDatabasesRequest < Struct.new(
       :catalog_id,
       :next_token,
       :max_results,
-      :resource_share_type)
+      :resource_share_type,
+      :attributes_to_get)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -718,6 +718,7 @@ module Aws::ApplicationDiscoveryService
 
       api.metadata = {
         "apiVersion" => "2015-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "discovery",
         "jsonVersion" => "1.1",
         "protocol" => "json",

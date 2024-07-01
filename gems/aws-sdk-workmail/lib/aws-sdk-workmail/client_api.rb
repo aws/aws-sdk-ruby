@@ -1473,9 +1473,11 @@ module Aws::WorkMail
 
       api.metadata = {
         "apiVersion" => "2017-10-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "workmail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon WorkMail",
         "serviceId" => "WorkMail",
         "signatureVersion" => "v4",

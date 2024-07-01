@@ -1216,9 +1216,11 @@ module Aws::CloudWatchEvents
 
       api.metadata = {
         "apiVersion" => "2015-10-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "events",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon CloudWatch Events",
         "serviceId" => "CloudWatch Events",
         "signatureVersion" => "v4",

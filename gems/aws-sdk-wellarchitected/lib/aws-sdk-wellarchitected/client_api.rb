@@ -1759,9 +1759,11 @@ module Aws::WellArchitected
 
       api.metadata = {
         "apiVersion" => "2020-03-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "wellarchitected",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Well-Architected",
         "serviceFullName" => "AWS Well-Architected Tool",
         "serviceId" => "WellArchitected",

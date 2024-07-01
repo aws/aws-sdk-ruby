@@ -455,9 +455,11 @@ module Aws::TranscribeStreamingService
 
       api.metadata = {
         "apiVersion" => "2017-10-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "transcribestreaming",
         "protocol" => "rest-json",
         "protocolSettings" => {"h2"=>"eventstream"},
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Transcribe Streaming Service",
         "serviceId" => "Transcribe Streaming",
         "signatureVersion" => "v4",

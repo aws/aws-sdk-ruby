@@ -804,9 +804,11 @@ module Aws::FIS
 
       api.metadata = {
         "apiVersion" => "2020-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "fis",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "FIS",
         "serviceFullName" => "AWS Fault Injection Simulator",
         "serviceId" => "fis",

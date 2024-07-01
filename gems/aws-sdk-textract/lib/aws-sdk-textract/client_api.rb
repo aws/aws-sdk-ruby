@@ -843,9 +843,11 @@ module Aws::Textract
 
       api.metadata = {
         "apiVersion" => "2018-06-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "textract",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Textract",
         "serviceId" => "Textract",
         "signatureVersion" => "v4",

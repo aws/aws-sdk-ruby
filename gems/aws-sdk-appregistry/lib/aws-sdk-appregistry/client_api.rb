@@ -462,9 +462,11 @@ module Aws::AppRegistry
 
       api.metadata = {
         "apiVersion" => "2020-06-24",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "servicecatalog-appregistry",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AppRegistry",
         "serviceFullName" => "AWS Service Catalog App Registry",
         "serviceId" => "Service Catalog AppRegistry",

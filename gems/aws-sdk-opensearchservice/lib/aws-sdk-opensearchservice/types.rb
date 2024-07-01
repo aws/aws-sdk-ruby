@@ -10,57 +10,6 @@
 module Aws::OpenSearchService
   module Types
 
-    # Container for parameters required to enable all machine learning
-    # features.
-    #
-    # @!attribute [rw] natural_language_query_generation_options
-    #   Container for parameters required for natural language query
-    #   generation on the specified domain.
-    #   @return [Types::NaturalLanguageQueryGenerationOptionsInput]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsInput AWS API Documentation
-    #
-    class AIMLOptionsInput < Struct.new(
-      :natural_language_query_generation_options)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Container for parameters representing the state of machine learning
-    # features on the specified domain.
-    #
-    # @!attribute [rw] natural_language_query_generation_options
-    #   Container for parameters required for natural language query
-    #   generation on the specified domain.
-    #   @return [Types::NaturalLanguageQueryGenerationOptionsOutput]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsOutput AWS API Documentation
-    #
-    class AIMLOptionsOutput < Struct.new(
-      :natural_language_query_generation_options)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The status of machine learning options on the specified domain.
-    #
-    # @!attribute [rw] options
-    #   Machine learning options on the specified domain.
-    #   @return [Types::AIMLOptionsOutput]
-    #
-    # @!attribute [rw] status
-    #   Provides the current status of an entity.
-    #   @return [Types::OptionStatus]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsStatus AWS API Documentation
-    #
-    class AIMLOptionsStatus < Struct.new(
-      :options,
-      :status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Information about an Amazon OpenSearch Service domain.
     #
     # @!attribute [rw] owner_id
@@ -1445,10 +1394,6 @@ module Aws::OpenSearchService
     #   Software update options for the domain.
     #   @return [Types::SoftwareUpdateOptions]
     #
-    # @!attribute [rw] aiml_options
-    #   Options for all machine learning features for the specified domain.
-    #   @return [Types::AIMLOptionsInput]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -1470,8 +1415,7 @@ module Aws::OpenSearchService
       :tag_list,
       :auto_tune_options,
       :off_peak_window_options,
-      :software_update_options,
-      :aiml_options)
+      :software_update_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2771,11 +2715,6 @@ module Aws::OpenSearchService
     #   modified.
     #   @return [Array<Types::ModifyingProperties>]
     #
-    # @!attribute [rw] aiml_options
-    #   Container for parameters required to enable all machine learning
-    #   features.
-    #   @return [Types::AIMLOptionsStatus]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainConfig AWS API Documentation
     #
     class DomainConfig < Struct.new(
@@ -2797,8 +2736,7 @@ module Aws::OpenSearchService
       :change_progress_details,
       :off_peak_window_options,
       :software_update_options,
-      :modifying_properties,
-      :aiml_options)
+      :modifying_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3229,11 +3167,6 @@ module Aws::OpenSearchService
     #   modified.
     #   @return [Array<Types::ModifyingProperties>]
     #
-    # @!attribute [rw] aiml_options
-    #   Container for parameters required to enable all machine learning
-    #   features.
-    #   @return [Types::AIMLOptionsOutput]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainStatus AWS API Documentation
     #
     class DomainStatus < Struct.new(
@@ -3268,8 +3201,7 @@ module Aws::OpenSearchService
       :off_peak_window_options,
       :software_update_options,
       :domain_processing_status,
-      :modifying_properties,
-      :aiml_options)
+      :modifying_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4764,44 +4696,6 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for parameters required to enable the natural language query
-    # generation feature.
-    #
-    # @!attribute [rw] desired_state
-    #   The desired state of the natural language query generation feature.
-    #   Valid values are ENABLED and DISABLED.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/NaturalLanguageQueryGenerationOptionsInput AWS API Documentation
-    #
-    class NaturalLanguageQueryGenerationOptionsInput < Struct.new(
-      :desired_state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Container for parameters representing the state of the natural
-    # language query generation feature on the specified domain.
-    #
-    # @!attribute [rw] desired_state
-    #   The desired state of the natural language query generation feature.
-    #   Valid values are ENABLED and DISABLED.
-    #   @return [String]
-    #
-    # @!attribute [rw] current_state
-    #   The current state of the natural language query generation feature,
-    #   indicating completion, in progress, or failure.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/NaturalLanguageQueryGenerationOptionsOutput AWS API Documentation
-    #
-    class NaturalLanguageQueryGenerationOptionsOutput < Struct.new(
-      :desired_state,
-      :current_state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Enables or disables node-to-node encryption. For more information, see
     # [Node-to-node encryption for Amazon OpenSearch Service][1].
     #
@@ -6221,10 +6115,6 @@ module Aws::OpenSearchService
     #   Service software update options for the domain.
     #   @return [Types::SoftwareUpdateOptions]
     #
-    # @!attribute [rw] aiml_options
-    #   Options for all machine learning features for the specified domain.
-    #   @return [Types::AIMLOptionsInput]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
     class UpdateDomainConfigRequest < Struct.new(
@@ -6246,8 +6136,7 @@ module Aws::OpenSearchService
       :dry_run,
       :dry_run_mode,
       :off_peak_window_options,
-      :software_update_options,
-      :aiml_options)
+      :software_update_options)
       SENSITIVE = []
       include Aws::Structure
     end

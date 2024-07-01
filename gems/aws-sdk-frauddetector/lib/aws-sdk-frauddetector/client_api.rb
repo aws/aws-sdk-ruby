@@ -1556,9 +1556,11 @@ module Aws::FraudDetector
 
       api.metadata = {
         "apiVersion" => "2019-11-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "frauddetector",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Fraud Detector",
         "serviceId" => "FraudDetector",
         "signatureVersion" => "v4",

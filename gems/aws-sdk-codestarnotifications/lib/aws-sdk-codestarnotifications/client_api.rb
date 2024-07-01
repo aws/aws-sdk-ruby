@@ -290,9 +290,11 @@ module Aws::CodeStarNotifications
 
       api.metadata = {
         "apiVersion" => "2019-10-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codestar-notifications",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS CodeStar Notifications",
         "serviceId" => "codestar notifications",
         "signatureVersion" => "v4",

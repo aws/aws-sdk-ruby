@@ -508,9 +508,11 @@ module Aws::Synthetics
 
       api.metadata = {
         "apiVersion" => "2017-10-11",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "synthetics",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Synthetics",
         "serviceFullName" => "Synthetics",
         "serviceId" => "synthetics",

@@ -708,9 +708,11 @@ module Aws::MachineLearning
 
       api.metadata = {
         "apiVersion" => "2014-12-12",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "machinelearning",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Machine Learning",
         "serviceId" => "Machine Learning",
         "signatureVersion" => "v4",

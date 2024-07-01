@@ -284,9 +284,11 @@ module Aws::IoT1ClickProjects
 
       api.metadata = {
         "apiVersion" => "2018-05-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "projects.iot1click",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWS IoT 1-Click Projects",
         "serviceFullName" => "AWS IoT 1-Click Projects Service",
         "serviceId" => "IoT 1Click Projects",

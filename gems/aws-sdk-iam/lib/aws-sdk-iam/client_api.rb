@@ -2122,9 +2122,11 @@ module Aws::IAM
 
       api.metadata = {
         "apiVersion" => "2010-05-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "iam",
         "globalEndpoint" => "iam.amazonaws.com",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "IAM",
         "serviceFullName" => "AWS Identity and Access Management",
         "serviceId" => "IAM",

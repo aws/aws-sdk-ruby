@@ -734,6 +734,7 @@ module Aws::EMR
       attr_accessor ebs_configuration: Types::EbsConfiguration
       attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor custom_ami_id: ::String
+      attr_accessor priority: ::Float
       SENSITIVE: []
     end
 
@@ -746,6 +747,7 @@ module Aws::EMR
       attr_accessor ebs_block_devices: ::Array[Types::EbsBlockDevice]
       attr_accessor ebs_optimized: bool
       attr_accessor custom_ami_id: ::String
+      attr_accessor priority: ::Float
       SENSITIVE: []
     end
 
@@ -1096,7 +1098,7 @@ module Aws::EMR
     end
 
     class OnDemandProvisioningSpecification
-      attr_accessor allocation_strategy: ("lowest-price")
+      attr_accessor allocation_strategy: ("lowest-price" | "prioritized")
       attr_accessor capacity_reservation_options: Types::OnDemandCapacityReservationOptions
       SENSITIVE: []
     end
@@ -1363,7 +1365,7 @@ module Aws::EMR
       attr_accessor timeout_duration_minutes: ::Integer
       attr_accessor timeout_action: ("SWITCH_TO_ON_DEMAND" | "TERMINATE_CLUSTER")
       attr_accessor block_duration_minutes: ::Integer
-      attr_accessor allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified")
+      attr_accessor allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified" | "capacity-optimized-prioritized")
       SENSITIVE: []
     end
 

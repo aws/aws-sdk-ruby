@@ -1882,6 +1882,7 @@ module Aws::FSx
 
       api.metadata = {
         "apiVersion" => "2018-03-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "fsx",
         "jsonVersion" => "1.1",
         "protocol" => "json",

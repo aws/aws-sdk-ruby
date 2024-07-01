@@ -401,9 +401,11 @@ module Aws::CodeStar
 
       api.metadata = {
         "apiVersion" => "2017-04-19",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codestar",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "CodeStar",
         "serviceFullName" => "AWS CodeStar",
         "serviceId" => "CodeStar",

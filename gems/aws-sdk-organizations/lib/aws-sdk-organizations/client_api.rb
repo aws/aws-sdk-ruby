@@ -915,9 +915,11 @@ module Aws::Organizations
 
       api.metadata = {
         "apiVersion" => "2016-11-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "organizations",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Organizations",
         "serviceFullName" => "AWS Organizations",
         "serviceId" => "Organizations",

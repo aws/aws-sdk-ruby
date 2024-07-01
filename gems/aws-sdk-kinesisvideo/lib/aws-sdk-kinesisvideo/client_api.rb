@@ -623,8 +623,10 @@ module Aws::KinesisVideo
 
       api.metadata = {
         "apiVersion" => "2017-09-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kinesisvideo",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Kinesis Video",
         "serviceFullName" => "Amazon Kinesis Video Streams",
         "serviceId" => "Kinesis Video",

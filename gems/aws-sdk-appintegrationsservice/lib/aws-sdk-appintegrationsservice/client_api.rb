@@ -461,9 +461,11 @@ module Aws::AppIntegrationsService
 
       api.metadata = {
         "apiVersion" => "2020-07-29",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "app-integrations",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon AppIntegrations Service",
         "serviceId" => "AppIntegrations",
         "signatureVersion" => "v4",

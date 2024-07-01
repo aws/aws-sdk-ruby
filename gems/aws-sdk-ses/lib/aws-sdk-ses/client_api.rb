@@ -1160,8 +1160,10 @@ module Aws::SES
 
       api.metadata = {
         "apiVersion" => "2010-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "email",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Amazon SES",
         "serviceFullName" => "Amazon Simple Email Service",
         "serviceId" => "SES",

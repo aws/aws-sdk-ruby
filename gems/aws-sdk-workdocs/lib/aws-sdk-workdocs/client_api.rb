@@ -987,9 +987,11 @@ module Aws::WorkDocs
 
       api.metadata = {
         "apiVersion" => "2016-05-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "workdocs",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon WorkDocs",
         "serviceId" => "WorkDocs",
         "signatureVersion" => "v4",

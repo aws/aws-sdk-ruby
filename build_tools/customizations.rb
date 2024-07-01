@@ -199,11 +199,11 @@ module BuildTools
     api('S3Control') do |api|
       # handled by endpoints 2.0
       api['operations'].each do |_key, operation|
-        # removes accountId host prefix trait and requiredness
-        # defensive - checks host prefix labels and removes only those from API
+        # Removes the accountId host prefix trait and requiredness.
+        # Checks the hostPrefix labels and removes only those from the API.
         next unless operation['endpoint'] &&
-                    (host_prefix = operation['endpoint']['hostPrefix'])
-                    host_prefix != '{AccountId}.'
+                    (host_prefix = operation['endpoint']['hostPrefix']) &&
+                    host_prefix == '{AccountId}.'
 
         operation['endpoint'].delete('hostPrefix')
 
@@ -212,6 +212,22 @@ module BuildTools
           input_shape = api['shapes'][operation['input']['shape']]
           input_shape['members'][label].delete('hostLabel')
           input_shape['required']&.delete(label)
+        end
+      end
+    end
+
+    # SimpleDB does not adhere to the query protocol guidelines because it
+    # uses both flattened and locationName. Query protocol is supposed to
+    # ignore location name (xmlName) when flattened (xmlFlattened) is used.
+    api('SimpleDB') do |api|
+      api['shapes'].each do |_, shape|
+        next unless shape['type'] == 'structure'
+
+        shape['members'].each do |_, member|
+          member_ref = api['shapes'][member['shape']]
+          next unless member_ref['flattened']
+
+          member['locationName'] = member_ref['member']['locationName']
         end
       end
     end

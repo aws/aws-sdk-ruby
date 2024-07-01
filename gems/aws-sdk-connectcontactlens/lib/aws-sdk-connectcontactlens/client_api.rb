@@ -122,9 +122,11 @@ module Aws::ConnectContactLens
 
       api.metadata = {
         "apiVersion" => "2020-08-21",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "contact-lens",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon Connect Contact Lens",
         "serviceFullName" => "Amazon Connect Contact Lens",
         "serviceId" => "Connect Contact Lens",

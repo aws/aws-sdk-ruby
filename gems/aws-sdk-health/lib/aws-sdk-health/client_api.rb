@@ -473,9 +473,11 @@ module Aws::Health
 
       api.metadata = {
         "apiVersion" => "2016-08-04",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "health",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWSHealth",
         "serviceFullName" => "AWS Health APIs and Notifications",
         "serviceId" => "Health",

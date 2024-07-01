@@ -308,9 +308,11 @@ module Aws::Lex
 
       api.metadata = {
         "apiVersion" => "2016-11-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "runtime.lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Lex Runtime Service",
         "serviceId" => "Lex Runtime Service",
         "signatureVersion" => "v4",

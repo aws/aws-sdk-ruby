@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-06-28)
+------------------
+
+* Feature - Noting that the filter db.sql.db_id isn't available for RDS for SQL Server DB instances.
+
 1.60.0 (2024-06-25)
 ------------------
 

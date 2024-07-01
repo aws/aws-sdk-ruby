@@ -600,10 +600,12 @@ module Aws::Kinesis
 
       api.metadata = {
         "apiVersion" => "2013-12-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kinesis",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "protocolSettings" => {"h2"=>"eventstream"},
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Kinesis",
         "serviceFullName" => "Amazon Kinesis",
         "serviceId" => "Kinesis",

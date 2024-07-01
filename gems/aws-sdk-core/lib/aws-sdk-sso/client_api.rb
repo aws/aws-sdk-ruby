@@ -111,9 +111,11 @@ module Aws::SSO
 
       api.metadata = {
         "apiVersion" => "2019-06-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "portal.sso",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "SSO",
         "serviceFullName" => "AWS Single Sign-On",
         "serviceId" => "SSO",

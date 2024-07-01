@@ -1002,8 +1002,10 @@ module Aws::XRay
 
       api.metadata = {
         "apiVersion" => "2016-04-12",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "xray",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS X-Ray",
         "serviceId" => "XRay",
         "signatureVersion" => "v4",

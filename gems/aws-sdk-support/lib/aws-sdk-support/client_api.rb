@@ -462,6 +462,7 @@ module Aws::Support
 
       api.metadata = {
         "apiVersion" => "2013-04-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "support",
         "jsonVersion" => "1.1",
         "protocol" => "json",

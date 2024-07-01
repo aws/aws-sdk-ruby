@@ -1625,9 +1625,11 @@ module Aws::Appflow
 
       api.metadata = {
         "apiVersion" => "2020-08-23",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "appflow",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Appflow",
         "serviceId" => "Appflow",
         "signatureVersion" => "v4",

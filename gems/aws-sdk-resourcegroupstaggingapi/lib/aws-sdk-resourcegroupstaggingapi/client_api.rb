@@ -244,9 +244,11 @@ module Aws::ResourceGroupsTaggingAPI
 
       api.metadata = {
         "apiVersion" => "2017-01-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "tagging",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Resource Groups Tagging API",
         "serviceId" => "Resource Groups Tagging API",
         "signatureVersion" => "v4",

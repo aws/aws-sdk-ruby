@@ -1360,9 +1360,11 @@ module Aws::WAFRegional
 
       api.metadata = {
         "apiVersion" => "2016-11-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "waf-regional",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "WAF Regional",
         "serviceFullName" => "AWS WAF Regional",
         "serviceId" => "WAF Regional",

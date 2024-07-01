@@ -3239,6 +3239,12 @@ module Aws::EMR
     #   The custom AMI ID to use for the instance type.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   The priority at which Amazon EMR launches the Amazon EC2 instances
+    #   with this instance type. Priority starts at 0, which is the highest
+    #   priority. Amazon EMR considers the highest priority first.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeConfig AWS API Documentation
     #
     class InstanceTypeConfig < Struct.new(
@@ -3248,7 +3254,8 @@ module Aws::EMR
       :bid_price_as_percentage_of_on_demand_price,
       :ebs_configuration,
       :configurations,
-      :custom_ami_id)
+      :custom_ami_id,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3304,6 +3311,12 @@ module Aws::EMR
     #   The custom AMI ID to use for the instance type.
     #   @return [String]
     #
+    # @!attribute [rw] priority
+    #   The priority at which Amazon EMR launches the Amazon EC2 instances
+    #   with this instance type. Priority starts at 0, which is the highest
+    #   priority. Amazon EMR considers the highest priority first.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeSpecification AWS API Documentation
     #
     class InstanceTypeSpecification < Struct.new(
@@ -3314,7 +3327,8 @@ module Aws::EMR
       :configurations,
       :ebs_block_devices,
       :ebs_optimized,
-      :custom_ami_id)
+      :custom_ami_id,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4872,8 +4886,11 @@ module Aws::EMR
     #
     # @!attribute [rw] allocation_strategy
     #   Specifies the strategy to use in launching On-Demand instance
-    #   fleets. Currently, the only option is `lowest-price` (the default),
-    #   which launches the lowest price first.
+    #   fleets. Available options are `lowest-price` and `prioritized`.
+    #   `lowest-price` specifies to launch the instances with the lowest
+    #   price first, and `prioritized` specifies that Amazon EMR should
+    #   launch the instances with the highest priority first. The default is
+    #   `lowest-price`.
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_options
@@ -6104,8 +6121,9 @@ module Aws::EMR
     #
     # @!attribute [rw] allocation_strategy
     #   Specifies one of the following strategies to launch Spot Instance
-    #   fleets: `price-capacity-optimized`, `capacity-optimized`,
-    #   `lowest-price`, or `diversified`. For more information on the
+    #   fleets: `capacity-optimized`, `price-capacity-optimized`,
+    #   `lowest-price`, or `diversified`, and
+    #   `capacity-optimized-prioritized`. For more information on the
     #   provisioning strategies, see [Allocation strategies for Spot
     #   Instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #

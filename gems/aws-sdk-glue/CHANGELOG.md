@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.183.0 (2024-06-28)
+------------------
+
+* Feature - Added AttributesToGet parameter to Glue GetDatabases, allowing caller to limit output to include only the database name.
+
 1.182.0 (2024-06-25)
 ------------------
 

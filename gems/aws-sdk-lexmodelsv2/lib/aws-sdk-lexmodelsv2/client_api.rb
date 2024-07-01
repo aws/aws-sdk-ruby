@@ -3852,9 +3852,11 @@ module Aws::LexModelsV2
 
       api.metadata = {
         "apiVersion" => "2020-08-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "models-v2-lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Lex Models V2",
         "serviceFullName" => "Amazon Lex Model Building V2",
         "serviceId" => "Lex Models V2",

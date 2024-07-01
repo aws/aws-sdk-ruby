@@ -1354,8 +1354,10 @@ module Aws::ElasticsearchService
 
       api.metadata = {
         "apiVersion" => "2015-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "es",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Elasticsearch Service",
         "serviceId" => "Elasticsearch Service",
         "signatureVersion" => "v4",

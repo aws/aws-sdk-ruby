@@ -1166,9 +1166,11 @@ module Aws::GlueDataBrew
 
       api.metadata = {
         "apiVersion" => "2017-07-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "databrew",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Glue DataBrew",
         "serviceId" => "DataBrew",
         "signatureVersion" => "v4",

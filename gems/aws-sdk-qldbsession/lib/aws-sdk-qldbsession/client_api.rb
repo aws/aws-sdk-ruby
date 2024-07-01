@@ -173,9 +173,11 @@ module Aws::QLDBSession
 
       api.metadata = {
         "apiVersion" => "2019-07-11",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "session.qldb",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "QLDB Session",
         "serviceFullName" => "Amazon QLDB Session",
         "serviceId" => "QLDB Session",

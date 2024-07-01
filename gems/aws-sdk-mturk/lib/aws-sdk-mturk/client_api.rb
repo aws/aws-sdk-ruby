@@ -702,9 +702,11 @@ module Aws::MTurk
 
       api.metadata = {
         "apiVersion" => "2017-01-17",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mturk-requester",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon MTurk",
         "serviceFullName" => "Amazon Mechanical Turk",
         "serviceId" => "MTurk",

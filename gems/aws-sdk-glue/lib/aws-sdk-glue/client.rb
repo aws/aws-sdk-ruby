@@ -7267,6 +7267,11 @@ module Aws::Glue
     #   * If set to `ALL`, will list the databases shared with your account,
     #     as well as the databases in yor local account.
     #
+    # @option params [Array<String>] :attributes_to_get
+    #   Specifies the database fields returned by the `GetDatabases` call.
+    #   This parameter doesn’t accept an empty list. The request must include
+    #   the `NAME`.
+    #
     # @return [Types::GetDatabasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDatabasesResponse#database_list #database_list} => Array&lt;Types::Database&gt;
@@ -7281,6 +7286,7 @@ module Aws::Glue
     #     next_token: "Token",
     #     max_results: 1,
     #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL, FEDERATED
+    #     attributes_to_get: ["NAME"], # accepts NAME
     #   })
     #
     # @example Response structure
@@ -17553,7 +17559,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.182.0'
+      context[:gem_version] = '1.183.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

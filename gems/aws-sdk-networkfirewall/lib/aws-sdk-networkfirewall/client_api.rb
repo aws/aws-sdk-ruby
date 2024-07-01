@@ -1052,9 +1052,11 @@ module Aws::NetworkFirewall
 
       api.metadata = {
         "apiVersion" => "2020-11-12",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "network-firewall",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Network Firewall",
         "serviceFullName" => "AWS Network Firewall",
         "serviceId" => "Network Firewall",

@@ -509,9 +509,11 @@ module Aws::Translate
 
       api.metadata = {
         "apiVersion" => "2017-07-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "translate",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Translate",
         "serviceId" => "Translate",
         "signatureVersion" => "v4",

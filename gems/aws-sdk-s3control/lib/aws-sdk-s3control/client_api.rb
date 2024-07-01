@@ -2012,8 +2012,10 @@ module Aws::S3Control
 
       api.metadata = {
         "apiVersion" => "2018-08-20",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "s3-control",
         "protocol" => "rest-xml",
+        "protocols" => ["rest-xml"],
         "serviceFullName" => "AWS S3 Control",
         "serviceId" => "S3 Control",
         "signatureVersion" => "s3v4",

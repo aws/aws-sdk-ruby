@@ -2806,8 +2806,10 @@ module Aws::Chime
 
       api.metadata = {
         "apiVersion" => "2018-05-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "chime",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Chime",
         "serviceId" => "Chime",
         "signatureVersion" => "v4",

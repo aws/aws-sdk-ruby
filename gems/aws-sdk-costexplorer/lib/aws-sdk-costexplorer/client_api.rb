@@ -1536,9 +1536,11 @@ module Aws::CostExplorer
 
       api.metadata = {
         "apiVersion" => "2017-10-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ce",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWS Cost Explorer",
         "serviceFullName" => "AWS Cost Explorer Service",
         "serviceId" => "Cost Explorer",

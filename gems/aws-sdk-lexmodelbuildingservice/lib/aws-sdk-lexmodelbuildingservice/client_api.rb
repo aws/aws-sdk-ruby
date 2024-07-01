@@ -1057,9 +1057,11 @@ module Aws::LexModelBuildingService
 
       api.metadata = {
         "apiVersion" => "2017-04-19",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "models.lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Lex Model Building Service",
         "serviceId" => "Lex Model Building Service",
         "signatureVersion" => "v4",

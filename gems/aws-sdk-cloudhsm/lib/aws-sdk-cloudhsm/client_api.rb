@@ -309,9 +309,11 @@ module Aws::CloudHSM
 
       api.metadata = {
         "apiVersion" => "2014-05-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cloudhsm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "CloudHSM",
         "serviceFullName" => "Amazon CloudHSM",
         "serviceId" => "CloudHSM",

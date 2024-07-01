@@ -1550,9 +1550,11 @@ module Aws::Route53
 
       api.metadata = {
         "apiVersion" => "2013-04-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "route53",
         "globalEndpoint" => "route53.amazonaws.com",
         "protocol" => "rest-xml",
+        "protocols" => ["rest-xml"],
         "serviceAbbreviation" => "Route 53",
         "serviceFullName" => "Amazon Route 53",
         "serviceId" => "Route 53",

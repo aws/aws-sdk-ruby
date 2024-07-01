@@ -460,6 +460,7 @@ module Aws::TimestreamQuery
 
       api.metadata = {
         "apiVersion" => "2018-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "query.timestream",
         "jsonVersion" => "1.0",
         "protocol" => "json",

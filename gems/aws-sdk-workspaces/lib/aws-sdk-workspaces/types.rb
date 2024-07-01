@@ -196,7 +196,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # The persistent application settings for users of a WorkSpaces pool.
+    # The persistent application settings for WorkSpaces Pools users.
     #
     # @!attribute [rw] status
     #   Enables or disables persistent application settings for users during
@@ -219,8 +219,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the persistent application settings for users of a
-    # WorkSpaces pool.
+    # Describes the persistent application settings for WorkSpaces Pools
+    # users.
     #
     # @!attribute [rw] status
     #   Specifies whether persistent application settings are enabled for
@@ -419,7 +419,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the user capacity for a WorkSpaces pool.
+    # Describes the user capacity for a pool of WorkSpaces.
     #
     # @!attribute [rw] desired_user_sessions
     #   The desired number of user sessions for a multi-session pool. This
@@ -434,7 +434,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the capacity status for a WorkSpaces pool
+    # Describes the capacity status for a pool of WorkSpaces.
     #
     # @!attribute [rw] available_user_sessions
     #   The number of user sessions currently being used for pool sessions.
@@ -448,8 +448,8 @@ module Aws::WorkSpaces
     #   @return [Integer]
     #
     # @!attribute [rw] actual_user_sessions
-    #   The total number of session slots that are available for WorkSpaces
-    #   pools.
+    #   The total number of session slots that are available for a pool of
+    #   WorkSpaces.
     #   @return [Integer]
     #
     # @!attribute [rw] active_user_sessions
@@ -1135,35 +1135,35 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] pool_name
-    #   The name of the WorkSpaces pool.
+    #   The name of the pool.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The WorkSpaces pool description.
+    #   The pool description.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
-    #   The identifier of the bundle for the WorkSpaces pool.
+    #   The identifier of the bundle for the pool.
     #   @return [String]
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the directory for the WorkSpaces pool.
+    #   The identifier of the directory for the pool.
     #   @return [String]
     #
     # @!attribute [rw] capacity
-    #   The user capacity of the WorkSpaces pool.
+    #   The user capacity of the pool.
     #   @return [Types::Capacity]
     #
     # @!attribute [rw] tags
-    #   The tags for the WorkSpaces pool.
+    #   The tags for the pool.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] application_settings
-    #   Indicates the application settings of the WorkSpaces pool.
+    #   Indicates the application settings of the pool.
     #   @return [Types::ApplicationSettingsRequest]
     #
     # @!attribute [rw] timeout_settings
-    #   Indicates the timeout settings of the WorkSpaces pool.
+    #   Indicates the timeout settings of the pool.
     #   @return [Types::TimeoutSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPoolRequest AWS API Documentation
@@ -1182,7 +1182,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] workspaces_pool
-    #   Indicates the WorkSpaces pool to create.
+    #   Indicates the pool to create.
     #   @return [Types::WorkspacesPool]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPoolResult AWS API Documentation
@@ -2451,7 +2451,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -2479,7 +2479,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] sessions
-    #   Describes the WorkSpaces pool sessions.
+    #   Describes the pool sessions.
     #   @return [Array<Types::WorkspacesPoolSession>]
     #
     # @!attribute [rw] next_token
@@ -2496,18 +2496,18 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the filter conditions for the WorkSpaces pool to return.
+    # Describes the filter conditions for WorkSpaces Pools to return.
     #
     # @!attribute [rw] name
     #   The name of the pool to filter.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values for filtering WorkSpaces pools.
+    #   The values for filtering WorkSpaces Pools.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operator
-    #   The operator values for filtering WorkSpaces pools.
+    #   The operator values for filtering WorkSpaces Pools.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPoolsFilter AWS API Documentation
@@ -2521,11 +2521,11 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] pool_ids
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the WorkSpaces Pools.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   The filter conditions for the WorkSpaces pool to return.
+    #   The filter conditions for the WorkSpaces Pool to return.
     #   @return [Array<Types::DescribeWorkspacesPoolsFilter>]
     #
     # @!attribute [rw] limit
@@ -2549,7 +2549,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] workspaces_pools
-    #   Information about the WorkSpaces pools.
+    #   Information about the WorkSpaces Pools.
     #   @return [Array<Types::WorkspacesPool>]
     #
     # @!attribute [rw] next_token
@@ -3706,7 +3706,7 @@ module Aws::WorkSpaces
     #
     class ModifyWorkspaceStateResult < Aws::EmptyStructure; end
 
-    # Describes the network details of a WorkSpaces pool.
+    # Describes the network details of a WorkSpaces Pool.
     #
     # @!attribute [rw] eni_private_ip_address
     #   The private IP address of the elastic network interface that is
@@ -4407,7 +4407,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesPoolRequest AWS API Documentation
@@ -4461,7 +4461,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesPoolRequest AWS API Documentation
@@ -4578,7 +4578,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] pool_id
-    #   The identifier of the WorkSpaces pool.
+    #   The identifier of the pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPoolRequest AWS API Documentation
@@ -4594,7 +4594,7 @@ module Aws::WorkSpaces
     class TerminateWorkspacesPoolResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] session_id
-    #   The identifier of the WorkSpaces pool session.
+    #   The identifier of the pool session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesPoolSessionRequest AWS API Documentation
@@ -4633,7 +4633,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the timeout settings for a WorkSpaces pool.
+    # Describes the timeout settings for a pool of WorkSpaces.
     #
     # @!attribute [rw] disconnect_timeout_in_seconds
     #   Specifies the amount of time, in seconds, that a streaming session
@@ -4862,11 +4862,11 @@ module Aws::WorkSpaces
     class UpdateWorkspaceImagePermissionResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] pool_id
-    #   The identifier of the specified WorkSpaces pool to update.
+    #   The identifier of the specified pool to update.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Describes the specified WorkSpaces pool to update.
+    #   Describes the specified pool to update.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -4878,7 +4878,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] capacity
-    #   The desired capacity for the WorkSpaces pool.
+    #   The desired capacity for the pool.
     #   @return [Types::Capacity]
     #
     # @!attribute [rw] application_settings
@@ -4886,7 +4886,7 @@ module Aws::WorkSpaces
     #   @return [Types::ApplicationSettingsRequest]
     #
     # @!attribute [rw] timeout_settings
-    #   Indicates the timeout settings of the specified WorkSpaces pool.
+    #   Indicates the timeout settings of the specified pool.
     #   @return [Types::TimeoutSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPoolRequest AWS API Documentation
@@ -4904,7 +4904,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] workspaces_pool
-    #   Describes the specified WorkSpaces pool.
+    #   Describes the specified pool.
     #   @return [Types::WorkspacesPool]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPoolResult AWS API Documentation
@@ -5953,14 +5953,14 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes a WorkSpaces pool.
+    # Describes a pool of WorkSpaces.
     #
     # @!attribute [rw] pool_id
-    #   The identifier of a WorkSpaces pool.
+    #   The identifier of a pool.
     #   @return [String]
     #
     # @!attribute [rw] pool_arn
-    #   The Amazon Resource Name (ARN) for the WorkSpaces pool.
+    #   The Amazon Resource Name (ARN) for the pool.
     #   @return [String]
     #
     # @!attribute [rw] capacity_status
@@ -6026,7 +6026,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes a WorkSpaces pool error.
+    # Describes a pool error.
     #
     # @!attribute [rw] error_code
     #   The error code.
@@ -6045,11 +6045,11 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes a WorkSpaces pool session.
+    # Describes a pool session.
     #
     # @!attribute [rw] authentication_type
     #   The authentication method. The user is authenticated using a
-    #   WorkSpaces pool URL (API) or SAML 2.0 federation (SAML).
+    #   WorkSpaces Pools URL (API) or SAML 2.0 federation (SAML).
     #   @return [String]
     #
     # @!attribute [rw] connection_state

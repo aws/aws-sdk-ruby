@@ -2117,6 +2117,7 @@ module Aws::Imagebuilder
 
       api.metadata = {
         "apiVersion" => "2019-12-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "imagebuilder",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

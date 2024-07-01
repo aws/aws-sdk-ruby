@@ -5,6 +5,15 @@ Unreleased Changes
 
 * Feature - Support configuration for sigv4a signing regions using `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`, `sigv4a_signing_region_set` shared config, or the `sigv4a_signing_region_set` client option.
 
+3.200.0 (2024-06-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.199.0 (2024-06-25)
 ------------------
 

@@ -283,9 +283,11 @@ module Aws::AutoScalingPlans
 
       api.metadata = {
         "apiVersion" => "2018-01-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "autoscaling-plans",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Auto Scaling Plans",
         "serviceId" => "Auto Scaling Plans",
         "signatureVersion" => "v4",

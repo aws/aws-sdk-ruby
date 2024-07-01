@@ -140,9 +140,11 @@ module Aws::PersonalizeEvents
 
       api.metadata = {
         "apiVersion" => "2018-03-22",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "personalize-events",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Personalize Events",
         "serviceId" => "Personalize Events",
         "signatureVersion" => "v4",

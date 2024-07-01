@@ -794,9 +794,11 @@ module Aws::PinpointEmail
 
       api.metadata = {
         "apiVersion" => "2018-07-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "email",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Pinpoint Email",
         "serviceFullName" => "Amazon Pinpoint Email Service",
         "serviceId" => "Pinpoint Email",

@@ -108,6 +108,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AgentsCriteria
+      attr_accessor agent_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AllowedCapabilities
       attr_accessor customer: Types::ParticipantCapabilities
       attr_accessor agent: Types::ParticipantCapabilities
@@ -309,6 +314,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor value: ::String
       attr_accessor proficiency_level: ::Float
+      attr_accessor match_criteria: Types::MatchCriteria
       attr_accessor comparison_operator: ::String
       SENSITIVE: []
     end
@@ -3183,6 +3189,11 @@ module Aws::Connect
     class ListViewsResponse
       attr_accessor views_summary_list: ::Array[Types::ViewSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MatchCriteria
+      attr_accessor agents_criteria: Types::AgentsCriteria
       SENSITIVE: []
     end
 

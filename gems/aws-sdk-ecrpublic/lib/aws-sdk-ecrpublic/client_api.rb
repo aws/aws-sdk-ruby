@@ -575,9 +575,11 @@ module Aws::ECRPublic
 
       api.metadata = {
         "apiVersion" => "2020-10-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.ecr-public",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon ECR Public",
         "serviceFullName" => "Amazon Elastic Container Registry Public",
         "serviceId" => "ECR PUBLIC",

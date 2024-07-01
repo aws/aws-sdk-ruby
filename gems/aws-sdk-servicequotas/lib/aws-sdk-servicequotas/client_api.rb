@@ -414,9 +414,11 @@ module Aws::ServiceQuotas
 
       api.metadata = {
         "apiVersion" => "2019-06-24",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "servicequotas",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Service Quotas",
         "serviceId" => "Service Quotas",
         "signatureVersion" => "v4",

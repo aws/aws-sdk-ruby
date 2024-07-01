@@ -600,9 +600,11 @@ module Aws::ComprehendMedical
 
       api.metadata = {
         "apiVersion" => "2018-10-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "comprehendmedical",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "ComprehendMedical",
         "serviceFullName" => "AWS Comprehend Medical",
         "serviceId" => "ComprehendMedical",

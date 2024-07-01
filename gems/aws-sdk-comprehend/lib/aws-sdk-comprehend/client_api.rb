@@ -2087,9 +2087,11 @@ module Aws::Comprehend
 
       api.metadata = {
         "apiVersion" => "2017-11-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "comprehend",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Comprehend",
         "serviceId" => "Comprehend",
         "signatureVersion" => "v4",

@@ -29,6 +29,8 @@ module Aws::Connect
     AgentFirstName = Shapes::StringShape.new(name: 'AgentFirstName')
     AgentHierarchyGroup = Shapes::StructureShape.new(name: 'AgentHierarchyGroup')
     AgentHierarchyGroups = Shapes::StructureShape.new(name: 'AgentHierarchyGroups')
+    AgentId = Shapes::StringShape.new(name: 'AgentId')
+    AgentIds = Shapes::ListShape.new(name: 'AgentIds')
     AgentInfo = Shapes::StructureShape.new(name: 'AgentInfo')
     AgentLastName = Shapes::StringShape.new(name: 'AgentLastName')
     AgentPauseDurationInSeconds = Shapes::IntegerShape.new(name: 'AgentPauseDurationInSeconds')
@@ -47,6 +49,7 @@ module Aws::Connect
     AgentStatusType = Shapes::StringShape.new(name: 'AgentStatusType')
     AgentStatusTypes = Shapes::ListShape.new(name: 'AgentStatusTypes')
     AgentUsername = Shapes::StringShape.new(name: 'AgentUsername')
+    AgentsCriteria = Shapes::StructureShape.new(name: 'AgentsCriteria')
     AgentsMinOneMaxHundred = Shapes::ListShape.new(name: 'AgentsMinOneMaxHundred')
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
     AllowedAccessControlTags = Shapes::MapShape.new(name: 'AllowedAccessControlTags')
@@ -702,6 +705,7 @@ module Aws::Connect
     ListViewsRequest = Shapes::StructureShape.new(name: 'ListViewsRequest')
     ListViewsResponse = Shapes::StructureShape.new(name: 'ListViewsResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MatchCriteria = Shapes::StructureShape.new(name: 'MatchCriteria')
     MaxResult10 = Shapes::IntegerShape.new(name: 'MaxResult10')
     MaxResult100 = Shapes::IntegerShape.new(name: 'MaxResult100')
     MaxResult1000 = Shapes::IntegerShape.new(name: 'MaxResult1000')
@@ -747,6 +751,7 @@ module Aws::Connect
     NotificationContentType = Shapes::StringShape.new(name: 'NotificationContentType')
     NotificationDeliveryType = Shapes::StringShape.new(name: 'NotificationDeliveryType')
     NotificationRecipientType = Shapes::StructureShape.new(name: 'NotificationRecipientType')
+    NullableProficiencyLevel = Shapes::FloatShape.new(name: 'NullableProficiencyLevel')
     NumberReference = Shapes::StructureShape.new(name: 'NumberReference')
     NumericQuestionPropertyAutomationLabel = Shapes::StringShape.new(name: 'NumericQuestionPropertyAutomationLabel')
     NumericQuestionPropertyValueAutomation = Shapes::StructureShape.new(name: 'NumericQuestionPropertyValueAutomation')
@@ -1355,6 +1360,8 @@ module Aws::Connect
     AgentHierarchyGroups.add_member(:l5_ids, Shapes::ShapeRef.new(shape: HierarchyGroupIdList, location_name: "L5Ids"))
     AgentHierarchyGroups.struct_class = Types::AgentHierarchyGroups
 
+    AgentIds.member = Shapes::ShapeRef.new(shape: AgentId)
+
     AgentInfo.add_member(:id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "Id"))
     AgentInfo.add_member(:connected_to_agent_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ConnectedToAgentTimestamp"))
     AgentInfo.add_member(:agent_pause_duration_in_seconds, Shapes::ShapeRef.new(shape: AgentPauseDurationInSeconds, location_name: "AgentPauseDurationInSeconds"))
@@ -1396,6 +1403,9 @@ module Aws::Connect
     AgentStatusSummaryList.member = Shapes::ShapeRef.new(shape: AgentStatusSummary)
 
     AgentStatusTypes.member = Shapes::ShapeRef.new(shape: AgentStatusType)
+
+    AgentsCriteria.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentIds, location_name: "AgentIds"))
+    AgentsCriteria.struct_class = Types::AgentsCriteria
 
     AgentsMinOneMaxHundred.member = Shapes::ShapeRef.new(shape: UserId)
 
@@ -1557,7 +1567,8 @@ module Aws::Connect
 
     AttributeCondition.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: "Name"))
     AttributeCondition.add_member(:value, Shapes::ShapeRef.new(shape: ProficiencyValue, location_name: "Value"))
-    AttributeCondition.add_member(:proficiency_level, Shapes::ShapeRef.new(shape: ProficiencyLevel, location_name: "ProficiencyLevel"))
+    AttributeCondition.add_member(:proficiency_level, Shapes::ShapeRef.new(shape: NullableProficiencyLevel, location_name: "ProficiencyLevel"))
+    AttributeCondition.add_member(:match_criteria, Shapes::ShapeRef.new(shape: MatchCriteria, location_name: "MatchCriteria"))
     AttributeCondition.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "ComparisonOperator"))
     AttributeCondition.struct_class = Types::AttributeCondition
 
@@ -3760,6 +3771,9 @@ module Aws::Connect
     ListViewsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ViewsNextToken, location_name: "NextToken"))
     ListViewsResponse.struct_class = Types::ListViewsResponse
 
+    MatchCriteria.add_member(:agents_criteria, Shapes::ShapeRef.new(shape: AgentsCriteria, location_name: "AgentsCriteria"))
+    MatchCriteria.struct_class = Types::MatchCriteria
+
     MaximumResultReturnedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     MaximumResultReturnedException.struct_class = Types::MaximumResultReturnedException
 
@@ -5613,6 +5627,7 @@ module Aws::Connect
 
       api.metadata = {
         "apiVersion" => "2017-08-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "connect",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -847,9 +847,6 @@ module Aws::OpenSearchService
     # @option params [Types::SoftwareUpdateOptions] :software_update_options
     #   Software update options for the domain.
     #
-    # @option params [Types::AIMLOptionsInput] :aiml_options
-    #   Options for all machine learning features for the specified domain.
-    #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResponse#domain_status #domain_status} => Types::DomainStatus
@@ -982,11 +979,6 @@ module Aws::OpenSearchService
     #     software_update_options: {
     #       auto_software_update_enabled: false,
     #     },
-    #     aiml_options: {
-    #       natural_language_query_generation_options: {
-    #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
-    #       },
-    #     },
     #   })
     #
     # @example Response structure
@@ -1089,8 +1081,6 @@ module Aws::OpenSearchService
     #   resp.domain_status.modifying_properties[0].active_value #=> String
     #   resp.domain_status.modifying_properties[0].pending_value #=> String
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
-    #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomain AWS API Documentation
     #
@@ -1456,8 +1446,6 @@ module Aws::OpenSearchService
     #   resp.domain_status.modifying_properties[0].active_value #=> String
     #   resp.domain_status.modifying_properties[0].pending_value #=> String
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
-    #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDomain AWS API Documentation
     #
@@ -1756,8 +1744,6 @@ module Aws::OpenSearchService
     #   resp.domain_status.modifying_properties[0].active_value #=> String
     #   resp.domain_status.modifying_properties[0].pending_value #=> String
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
-    #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomain AWS API Documentation
     #
@@ -2064,13 +2050,6 @@ module Aws::OpenSearchService
     #   resp.domain_config.modifying_properties[0].active_value #=> String
     #   resp.domain_config.modifying_properties[0].pending_value #=> String
     #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
-    #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
-    #   resp.domain_config.aiml_options.status.creation_date #=> Time
-    #   resp.domain_config.aiml_options.status.update_date #=> Time
-    #   resp.domain_config.aiml_options.status.update_version #=> Integer
-    #   resp.domain_config.aiml_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
-    #   resp.domain_config.aiml_options.status.pending_deletion #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainConfig AWS API Documentation
     #
@@ -2298,8 +2277,6 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].modifying_properties[0].active_value #=> String
     #   resp.domain_status_list[0].modifying_properties[0].pending_value #=> String
     #   resp.domain_status_list[0].modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
-    #   resp.domain_status_list[0].aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.domain_status_list[0].aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomains AWS API Documentation
     #
@@ -2450,8 +2427,6 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.modifying_properties[0].active_value #=> String
     #   resp.dry_run_config.modifying_properties[0].pending_value #=> String
     #   resp.dry_run_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
-    #   resp.dry_run_config.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.dry_run_config.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -4195,9 +4170,6 @@ module Aws::OpenSearchService
     # @option params [Types::SoftwareUpdateOptions] :software_update_options
     #   Service software update options for the domain.
     #
-    # @option params [Types::AIMLOptionsInput] :aiml_options
-    #   Options for all machine learning features for the specified domain.
-    #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigResponse#domain_config #domain_config} => Types::DomainConfig
@@ -4327,11 +4299,6 @@ module Aws::OpenSearchService
     #     },
     #     software_update_options: {
     #       auto_software_update_enabled: false,
-    #     },
-    #     aiml_options: {
-    #       natural_language_query_generation_options: {
-    #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
-    #       },
     #     },
     #   })
     #
@@ -4505,13 +4472,6 @@ module Aws::OpenSearchService
     #   resp.domain_config.modifying_properties[0].active_value #=> String
     #   resp.domain_config.modifying_properties[0].pending_value #=> String
     #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
-    #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
-    #   resp.domain_config.aiml_options.status.creation_date #=> Time
-    #   resp.domain_config.aiml_options.status.update_date #=> Time
-    #   resp.domain_config.aiml_options.status.update_version #=> Integer
-    #   resp.domain_config.aiml_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
-    #   resp.domain_config.aiml_options.status.pending_deletion #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #   resp.dry_run_progress_status.dry_run_id #=> String
@@ -4805,7 +4765,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

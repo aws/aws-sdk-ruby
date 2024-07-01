@@ -1017,9 +1017,11 @@ module Aws::MemoryDB
 
       api.metadata = {
         "apiVersion" => "2021-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "memory-db",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon MemoryDB",
         "serviceFullName" => "Amazon MemoryDB",
         "serviceId" => "MemoryDB",

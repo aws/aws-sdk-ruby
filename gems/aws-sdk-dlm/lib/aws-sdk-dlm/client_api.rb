@@ -455,9 +455,11 @@ module Aws::DLM
 
       api.metadata = {
         "apiVersion" => "2018-01-12",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "dlm",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon DLM",
         "serviceFullName" => "Amazon Data Lifecycle Manager",
         "serviceId" => "DLM",

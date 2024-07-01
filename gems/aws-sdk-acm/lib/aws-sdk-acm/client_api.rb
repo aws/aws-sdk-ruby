@@ -389,6 +389,7 @@ module Aws::ACM
 
       api.metadata = {
         "apiVersion" => "2015-12-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "acm",
         "jsonVersion" => "1.1",
         "protocol" => "json",

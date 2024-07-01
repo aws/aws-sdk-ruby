@@ -153,8 +153,10 @@ module Aws::IoTJobsDataPlane
 
       api.metadata = {
         "apiVersion" => "2017-09-29",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "data.jobs.iot",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT Jobs Data Plane",
         "serviceId" => "IoT Jobs Data Plane",
         "signatureVersion" => "v4",

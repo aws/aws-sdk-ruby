@@ -145,9 +145,11 @@ module Aws::Route53RecoveryCluster
 
       api.metadata = {
         "apiVersion" => "2019-12-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "route53-recovery-cluster",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Route53 Recovery Cluster",
         "serviceId" => "Route53 Recovery Cluster",
         "signatureVersion" => "v4",

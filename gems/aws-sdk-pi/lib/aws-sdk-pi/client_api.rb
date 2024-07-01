@@ -440,6 +440,7 @@ module Aws::PI
 
       api.metadata = {
         "apiVersion" => "2018-02-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "pi",
         "jsonVersion" => "1.1",
         "protocol" => "json",

@@ -1197,6 +1197,7 @@ module Aws::ECR
 
       api.metadata = {
         "apiVersion" => "2015-09-21",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.ecr",
         "jsonVersion" => "1.1",
         "protocol" => "json",

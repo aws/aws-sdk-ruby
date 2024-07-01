@@ -251,9 +251,11 @@ module Aws::STS
 
       api.metadata = {
         "apiVersion" => "2011-06-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "sts",
         "globalEndpoint" => "sts.amazonaws.com",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "AWS STS",
         "serviceFullName" => "AWS Security Token Service",
         "serviceId" => "STS",
