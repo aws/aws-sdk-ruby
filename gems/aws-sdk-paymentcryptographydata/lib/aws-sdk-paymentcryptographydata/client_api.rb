@@ -65,7 +65,6 @@ module Aws::PaymentCryptographyData
     HexLengthBetween4And128 = Shapes::StringShape.new(name: 'HexLengthBetween4And128')
     HexLengthEquals1 = Shapes::StringShape.new(name: 'HexLengthEquals1')
     HexLengthEquals16 = Shapes::StringShape.new(name: 'HexLengthEquals16')
-    HexLengthEquals2 = Shapes::StringShape.new(name: 'HexLengthEquals2')
     HexLengthEquals4 = Shapes::StringShape.new(name: 'HexLengthEquals4')
     HexLengthEquals8 = Shapes::StringShape.new(name: 'HexLengthEquals8')
     Ibm3624NaturalPin = Shapes::StructureShape.new(name: 'Ibm3624NaturalPin')
@@ -73,7 +72,7 @@ module Aws::PaymentCryptographyData
     Ibm3624PinOffset = Shapes::StructureShape.new(name: 'Ibm3624PinOffset')
     Ibm3624PinVerification = Shapes::StructureShape.new(name: 'Ibm3624PinVerification')
     Ibm3624RandomPin = Shapes::StructureShape.new(name: 'Ibm3624RandomPin')
-    IntegerRangeBetween0And9 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween0And9')
+    IntegerRangeBetween0And6 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween0And6')
     IntegerRangeBetween3And5Type = Shapes::IntegerShape.new(name: 'IntegerRangeBetween3And5Type')
     IntegerRangeBetween4And12 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween4And12')
     IntegerRangeBetween4And16 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween4And16')
@@ -81,6 +80,7 @@ module Aws::PaymentCryptographyData
     KeyArn = Shapes::StringShape.new(name: 'KeyArn')
     KeyArnOrKeyAliasType = Shapes::StringShape.new(name: 'KeyArnOrKeyAliasType')
     KeyCheckValue = Shapes::StringShape.new(name: 'KeyCheckValue')
+    KeyCheckValueAlgorithm = Shapes::StringShape.new(name: 'KeyCheckValueAlgorithm')
     MacAlgorithm = Shapes::StringShape.new(name: 'MacAlgorithm')
     MacAlgorithmDukpt = Shapes::StructureShape.new(name: 'MacAlgorithmDukpt')
     MacAlgorithmEmv = Shapes::StructureShape.new(name: 'MacAlgorithmEmv')
@@ -91,6 +91,7 @@ module Aws::PaymentCryptographyData
     NumberLengthBetween4And12 = Shapes::StringShape.new(name: 'NumberLengthBetween4And12')
     NumberLengthBetween4And16 = Shapes::StringShape.new(name: 'NumberLengthBetween4And16')
     NumberLengthEquals16 = Shapes::StringShape.new(name: 'NumberLengthEquals16')
+    NumberLengthEquals2 = Shapes::StringShape.new(name: 'NumberLengthEquals2')
     NumberLengthEquals3 = Shapes::StringShape.new(name: 'NumberLengthEquals3')
     NumberLengthEquals4 = Shapes::StringShape.new(name: 'NumberLengthEquals4')
     PaddingType = Shapes::StringShape.new(name: 'PaddingType')
@@ -113,6 +114,7 @@ module Aws::PaymentCryptographyData
     String = Shapes::StringShape.new(name: 'String')
     SymmetricEncryptionAttributes = Shapes::StructureShape.new(name: 'SymmetricEncryptionAttributes')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Tr31WrappedKeyBlock = Shapes::StringShape.new(name: 'Tr31WrappedKeyBlock')
     TranslatePinDataInput = Shapes::StructureShape.new(name: 'TranslatePinDataInput')
     TranslatePinDataOutput = Shapes::StructureShape.new(name: 'TranslatePinDataOutput')
     TranslationIsoFormats = Shapes::UnionShape.new(name: 'TranslationIsoFormats')
@@ -134,6 +136,8 @@ module Aws::PaymentCryptographyData
     VisaPin = Shapes::StructureShape.new(name: 'VisaPin')
     VisaPinVerification = Shapes::StructureShape.new(name: 'VisaPinVerification')
     VisaPinVerificationValue = Shapes::StructureShape.new(name: 'VisaPinVerificationValue')
+    WrappedKey = Shapes::StructureShape.new(name: 'WrappedKey')
+    WrappedKeyMaterial = Shapes::UnionShape.new(name: 'WrappedKeyMaterial')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -150,44 +154,44 @@ module Aws::PaymentCryptographyData
 
     CardGenerationAttributes.add_member(:amex_card_security_code_version_1, Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion1, location_name: "AmexCardSecurityCodeVersion1"))
     CardGenerationAttributes.add_member(:amex_card_security_code_version_2, Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion2, location_name: "AmexCardSecurityCodeVersion2"))
-    CardGenerationAttributes.add_member(:card_holder_verification_value, Shapes::ShapeRef.new(shape: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
     CardGenerationAttributes.add_member(:card_verification_value_1, Shapes::ShapeRef.new(shape: CardVerificationValue1, location_name: "CardVerificationValue1"))
     CardGenerationAttributes.add_member(:card_verification_value_2, Shapes::ShapeRef.new(shape: CardVerificationValue2, location_name: "CardVerificationValue2"))
+    CardGenerationAttributes.add_member(:card_holder_verification_value, Shapes::ShapeRef.new(shape: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
     CardGenerationAttributes.add_member(:dynamic_card_verification_code, Shapes::ShapeRef.new(shape: DynamicCardVerificationCode, location_name: "DynamicCardVerificationCode"))
     CardGenerationAttributes.add_member(:dynamic_card_verification_value, Shapes::ShapeRef.new(shape: DynamicCardVerificationValue, location_name: "DynamicCardVerificationValue"))
     CardGenerationAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CardGenerationAttributes.add_member_subclass(:amex_card_security_code_version_1, Types::CardGenerationAttributes::AmexCardSecurityCodeVersion1)
     CardGenerationAttributes.add_member_subclass(:amex_card_security_code_version_2, Types::CardGenerationAttributes::AmexCardSecurityCodeVersion2)
-    CardGenerationAttributes.add_member_subclass(:card_holder_verification_value, Types::CardGenerationAttributes::CardHolderVerificationValue)
     CardGenerationAttributes.add_member_subclass(:card_verification_value_1, Types::CardGenerationAttributes::CardVerificationValue1)
     CardGenerationAttributes.add_member_subclass(:card_verification_value_2, Types::CardGenerationAttributes::CardVerificationValue2)
+    CardGenerationAttributes.add_member_subclass(:card_holder_verification_value, Types::CardGenerationAttributes::CardHolderVerificationValue)
     CardGenerationAttributes.add_member_subclass(:dynamic_card_verification_code, Types::CardGenerationAttributes::DynamicCardVerificationCode)
     CardGenerationAttributes.add_member_subclass(:dynamic_card_verification_value, Types::CardGenerationAttributes::DynamicCardVerificationValue)
     CardGenerationAttributes.add_member_subclass(:unknown, Types::CardGenerationAttributes::Unknown)
     CardGenerationAttributes.struct_class = Types::CardGenerationAttributes
 
-    CardHolderVerificationValue.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
-    CardHolderVerificationValue.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     CardHolderVerificationValue.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthBetween2And8, required: true, location_name: "UnpredictableNumber"))
+    CardHolderVerificationValue.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
+    CardHolderVerificationValue.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     CardHolderVerificationValue.struct_class = Types::CardHolderVerificationValue
 
     CardVerificationAttributes.add_member(:amex_card_security_code_version_1, Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion1, location_name: "AmexCardSecurityCodeVersion1"))
     CardVerificationAttributes.add_member(:amex_card_security_code_version_2, Shapes::ShapeRef.new(shape: AmexCardSecurityCodeVersion2, location_name: "AmexCardSecurityCodeVersion2"))
-    CardVerificationAttributes.add_member(:card_holder_verification_value, Shapes::ShapeRef.new(shape: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
     CardVerificationAttributes.add_member(:card_verification_value_1, Shapes::ShapeRef.new(shape: CardVerificationValue1, location_name: "CardVerificationValue1"))
     CardVerificationAttributes.add_member(:card_verification_value_2, Shapes::ShapeRef.new(shape: CardVerificationValue2, location_name: "CardVerificationValue2"))
-    CardVerificationAttributes.add_member(:discover_dynamic_card_verification_code, Shapes::ShapeRef.new(shape: DiscoverDynamicCardVerificationCode, location_name: "DiscoverDynamicCardVerificationCode"))
+    CardVerificationAttributes.add_member(:card_holder_verification_value, Shapes::ShapeRef.new(shape: CardHolderVerificationValue, location_name: "CardHolderVerificationValue"))
     CardVerificationAttributes.add_member(:dynamic_card_verification_code, Shapes::ShapeRef.new(shape: DynamicCardVerificationCode, location_name: "DynamicCardVerificationCode"))
     CardVerificationAttributes.add_member(:dynamic_card_verification_value, Shapes::ShapeRef.new(shape: DynamicCardVerificationValue, location_name: "DynamicCardVerificationValue"))
+    CardVerificationAttributes.add_member(:discover_dynamic_card_verification_code, Shapes::ShapeRef.new(shape: DiscoverDynamicCardVerificationCode, location_name: "DiscoverDynamicCardVerificationCode"))
     CardVerificationAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CardVerificationAttributes.add_member_subclass(:amex_card_security_code_version_1, Types::CardVerificationAttributes::AmexCardSecurityCodeVersion1)
     CardVerificationAttributes.add_member_subclass(:amex_card_security_code_version_2, Types::CardVerificationAttributes::AmexCardSecurityCodeVersion2)
-    CardVerificationAttributes.add_member_subclass(:card_holder_verification_value, Types::CardVerificationAttributes::CardHolderVerificationValue)
     CardVerificationAttributes.add_member_subclass(:card_verification_value_1, Types::CardVerificationAttributes::CardVerificationValue1)
     CardVerificationAttributes.add_member_subclass(:card_verification_value_2, Types::CardVerificationAttributes::CardVerificationValue2)
-    CardVerificationAttributes.add_member_subclass(:discover_dynamic_card_verification_code, Types::CardVerificationAttributes::DiscoverDynamicCardVerificationCode)
+    CardVerificationAttributes.add_member_subclass(:card_holder_verification_value, Types::CardVerificationAttributes::CardHolderVerificationValue)
     CardVerificationAttributes.add_member_subclass(:dynamic_card_verification_code, Types::CardVerificationAttributes::DynamicCardVerificationCode)
     CardVerificationAttributes.add_member_subclass(:dynamic_card_verification_value, Types::CardVerificationAttributes::DynamicCardVerificationValue)
+    CardVerificationAttributes.add_member_subclass(:discover_dynamic_card_verification_code, Types::CardVerificationAttributes::DiscoverDynamicCardVerificationCode)
     CardVerificationAttributes.add_member_subclass(:unknown, Types::CardVerificationAttributes::Unknown)
     CardVerificationAttributes.struct_class = Types::CardVerificationAttributes
 
@@ -213,9 +217,10 @@ module Aws::PaymentCryptographyData
     CryptogramVerificationArpcMethod2.add_member(:proprietary_authentication_data, Shapes::ShapeRef.new(shape: HexLengthBetween1And16, location_name: "ProprietaryAuthenticationData"))
     CryptogramVerificationArpcMethod2.struct_class = Types::CryptogramVerificationArpcMethod2
 
+    DecryptDataInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location: "uri", location_name: "KeyIdentifier"))
     DecryptDataInput.add_member(:cipher_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "CipherText"))
     DecryptDataInput.add_member(:decryption_attributes, Shapes::ShapeRef.new(shape: EncryptionDecryptionAttributes, required: true, location_name: "DecryptionAttributes"))
-    DecryptDataInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location: "uri", location_name: "KeyIdentifier"))
+    DecryptDataInput.add_member(:wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "WrappedKey"))
     DecryptDataInput.struct_class = Types::DecryptDataInput
 
     DecryptDataOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
@@ -223,72 +228,73 @@ module Aws::PaymentCryptographyData
     DecryptDataOutput.add_member(:plain_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "PlainText"))
     DecryptDataOutput.struct_class = Types::DecryptDataOutput
 
-    DiscoverDynamicCardVerificationCode.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     DiscoverDynamicCardVerificationCode.add_member(:card_expiry_date, Shapes::ShapeRef.new(shape: NumberLengthEquals4, required: true, location_name: "CardExpiryDate"))
     DiscoverDynamicCardVerificationCode.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthBetween2And8, required: true, location_name: "UnpredictableNumber"))
+    DiscoverDynamicCardVerificationCode.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     DiscoverDynamicCardVerificationCode.struct_class = Types::DiscoverDynamicCardVerificationCode
 
-    DukptAttributes.add_member(:dukpt_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, required: true, location_name: "DukptDerivationType"))
     DukptAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
+    DukptAttributes.add_member(:dukpt_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, required: true, location_name: "DukptDerivationType"))
     DukptAttributes.struct_class = Types::DukptAttributes
 
+    DukptDerivationAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
     DukptDerivationAttributes.add_member(:dukpt_key_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptKeyDerivationType"))
     DukptDerivationAttributes.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, location_name: "DukptKeyVariant"))
-    DukptDerivationAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
     DukptDerivationAttributes.struct_class = Types::DukptDerivationAttributes
 
+    DukptEncryptionAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
+    DukptEncryptionAttributes.add_member(:mode, Shapes::ShapeRef.new(shape: DukptEncryptionMode, location_name: "Mode"))
     DukptEncryptionAttributes.add_member(:dukpt_key_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptKeyDerivationType"))
     DukptEncryptionAttributes.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, location_name: "DukptKeyVariant"))
     DukptEncryptionAttributes.add_member(:initialization_vector, Shapes::ShapeRef.new(shape: HexLength16Or32, location_name: "InitializationVector"))
-    DukptEncryptionAttributes.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
-    DukptEncryptionAttributes.add_member(:mode, Shapes::ShapeRef.new(shape: DukptEncryptionMode, location_name: "Mode"))
     DukptEncryptionAttributes.struct_class = Types::DukptEncryptionAttributes
 
-    DynamicCardVerificationCode.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
-    DynamicCardVerificationCode.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
-    DynamicCardVerificationCode.add_member(:track_data, Shapes::ShapeRef.new(shape: HexLengthBetween2And160, required: true, location_name: "TrackData"))
     DynamicCardVerificationCode.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthBetween2And8, required: true, location_name: "UnpredictableNumber"))
+    DynamicCardVerificationCode.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
+    DynamicCardVerificationCode.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
+    DynamicCardVerificationCode.add_member(:track_data, Shapes::ShapeRef.new(shape: HexLengthBetween2And160, required: true, location_name: "TrackData"))
     DynamicCardVerificationCode.struct_class = Types::DynamicCardVerificationCode
 
-    DynamicCardVerificationValue.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
+    DynamicCardVerificationValue.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     DynamicCardVerificationValue.add_member(:card_expiry_date, Shapes::ShapeRef.new(shape: NumberLengthEquals4, required: true, location_name: "CardExpiryDate"))
-    DynamicCardVerificationValue.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     DynamicCardVerificationValue.add_member(:service_code, Shapes::ShapeRef.new(shape: NumberLengthEquals3, required: true, location_name: "ServiceCode"))
+    DynamicCardVerificationValue.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     DynamicCardVerificationValue.struct_class = Types::DynamicCardVerificationValue
 
-    EmvEncryptionAttributes.add_member(:initialization_vector, Shapes::ShapeRef.new(shape: HexLength16Or32, location_name: "InitializationVector"))
     EmvEncryptionAttributes.add_member(:major_key_derivation_mode, Shapes::ShapeRef.new(shape: EmvMajorKeyDerivationMode, required: true, location_name: "MajorKeyDerivationMode"))
-    EmvEncryptionAttributes.add_member(:mode, Shapes::ShapeRef.new(shape: EmvEncryptionMode, location_name: "Mode"))
-    EmvEncryptionAttributes.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     EmvEncryptionAttributes.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    EmvEncryptionAttributes.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     EmvEncryptionAttributes.add_member(:session_derivation_data, Shapes::ShapeRef.new(shape: HexLengthEquals16, required: true, location_name: "SessionDerivationData"))
+    EmvEncryptionAttributes.add_member(:mode, Shapes::ShapeRef.new(shape: EmvEncryptionMode, location_name: "Mode"))
+    EmvEncryptionAttributes.add_member(:initialization_vector, Shapes::ShapeRef.new(shape: HexLength16Or32, location_name: "InitializationVector"))
     EmvEncryptionAttributes.struct_class = Types::EmvEncryptionAttributes
 
-    EncryptDataInput.add_member(:encryption_attributes, Shapes::ShapeRef.new(shape: EncryptionDecryptionAttributes, required: true, location_name: "EncryptionAttributes"))
     EncryptDataInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location: "uri", location_name: "KeyIdentifier"))
     EncryptDataInput.add_member(:plain_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4064, required: true, location_name: "PlainText"))
+    EncryptDataInput.add_member(:encryption_attributes, Shapes::ShapeRef.new(shape: EncryptionDecryptionAttributes, required: true, location_name: "EncryptionAttributes"))
+    EncryptDataInput.add_member(:wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "WrappedKey"))
     EncryptDataInput.struct_class = Types::EncryptDataInput
 
-    EncryptDataOutput.add_member(:cipher_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "CipherText"))
     EncryptDataOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
     EncryptDataOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue"))
+    EncryptDataOutput.add_member(:cipher_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "CipherText"))
     EncryptDataOutput.struct_class = Types::EncryptDataOutput
 
+    EncryptionDecryptionAttributes.add_member(:symmetric, Shapes::ShapeRef.new(shape: SymmetricEncryptionAttributes, location_name: "Symmetric"))
     EncryptionDecryptionAttributes.add_member(:asymmetric, Shapes::ShapeRef.new(shape: AsymmetricEncryptionAttributes, location_name: "Asymmetric"))
     EncryptionDecryptionAttributes.add_member(:dukpt, Shapes::ShapeRef.new(shape: DukptEncryptionAttributes, location_name: "Dukpt"))
     EncryptionDecryptionAttributes.add_member(:emv, Shapes::ShapeRef.new(shape: EmvEncryptionAttributes, location_name: "Emv"))
-    EncryptionDecryptionAttributes.add_member(:symmetric, Shapes::ShapeRef.new(shape: SymmetricEncryptionAttributes, location_name: "Symmetric"))
     EncryptionDecryptionAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EncryptionDecryptionAttributes.add_member_subclass(:symmetric, Types::EncryptionDecryptionAttributes::Symmetric)
     EncryptionDecryptionAttributes.add_member_subclass(:asymmetric, Types::EncryptionDecryptionAttributes::Asymmetric)
     EncryptionDecryptionAttributes.add_member_subclass(:dukpt, Types::EncryptionDecryptionAttributes::Dukpt)
     EncryptionDecryptionAttributes.add_member_subclass(:emv, Types::EncryptionDecryptionAttributes::Emv)
-    EncryptionDecryptionAttributes.add_member_subclass(:symmetric, Types::EncryptionDecryptionAttributes::Symmetric)
     EncryptionDecryptionAttributes.add_member_subclass(:unknown, Types::EncryptionDecryptionAttributes::Unknown)
     EncryptionDecryptionAttributes.struct_class = Types::EncryptionDecryptionAttributes
 
-    GenerateCardValidationDataInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: CardGenerationAttributes, required: true, location_name: "GenerationAttributes"))
     GenerateCardValidationDataInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
     GenerateCardValidationDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    GenerateCardValidationDataInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: CardGenerationAttributes, required: true, location_name: "GenerationAttributes"))
     GenerateCardValidationDataInput.add_member(:validation_data_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween3And5Type, location_name: "ValidationDataLength"))
     GenerateCardValidationDataInput.struct_class = Types::GenerateCardValidationDataInput
 
@@ -297,10 +303,10 @@ module Aws::PaymentCryptographyData
     GenerateCardValidationDataOutput.add_member(:validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween3And5, required: true, location_name: "ValidationData"))
     GenerateCardValidationDataOutput.struct_class = Types::GenerateCardValidationDataOutput
 
-    GenerateMacInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: MacAttributes, required: true, location_name: "GenerationAttributes"))
     GenerateMacInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
-    GenerateMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
     GenerateMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: HexEvenLengthBetween2And4096, required: true, location_name: "MessageData"))
+    GenerateMacInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: MacAttributes, required: true, location_name: "GenerationAttributes"))
+    GenerateMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
     GenerateMacInput.struct_class = Types::GenerateMacInput
 
     GenerateMacOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
@@ -308,76 +314,76 @@ module Aws::PaymentCryptographyData
     GenerateMacOutput.add_member(:mac, Shapes::ShapeRef.new(shape: HexLengthBetween4And128, required: true, location_name: "Mac"))
     GenerateMacOutput.struct_class = Types::GenerateMacOutput
 
+    GeneratePinDataInput.add_member(:generation_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "GenerationKeyIdentifier"))
     GeneratePinDataInput.add_member(:encryption_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "EncryptionKeyIdentifier"))
     GeneratePinDataInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: PinGenerationAttributes, required: true, location_name: "GenerationAttributes"))
-    GeneratePinDataInput.add_member(:generation_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "GenerationKeyIdentifier"))
-    GeneratePinDataInput.add_member(:pin_block_format, Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, required: true, location_name: "PinBlockFormat"))
     GeneratePinDataInput.add_member(:pin_data_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
     GeneratePinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    GeneratePinDataInput.add_member(:pin_block_format, Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, required: true, location_name: "PinBlockFormat"))
     GeneratePinDataInput.struct_class = Types::GeneratePinDataInput
 
-    GeneratePinDataOutput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
-    GeneratePinDataOutput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "EncryptionKeyArn"))
-    GeneratePinDataOutput.add_member(:encryption_key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "EncryptionKeyCheckValue"))
     GeneratePinDataOutput.add_member(:generation_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "GenerationKeyArn"))
     GeneratePinDataOutput.add_member(:generation_key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "GenerationKeyCheckValue"))
+    GeneratePinDataOutput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "EncryptionKeyArn"))
+    GeneratePinDataOutput.add_member(:encryption_key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "EncryptionKeyCheckValue"))
+    GeneratePinDataOutput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
     GeneratePinDataOutput.add_member(:pin_data, Shapes::ShapeRef.new(shape: PinData, required: true, location_name: "PinData"))
     GeneratePinDataOutput.struct_class = Types::GeneratePinDataOutput
 
     Ibm3624NaturalPin.add_member(:decimalization_table, Shapes::ShapeRef.new(shape: NumberLengthEquals16, required: true, location_name: "DecimalizationTable"))
-    Ibm3624NaturalPin.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
     Ibm3624NaturalPin.add_member(:pin_validation_data_pad_character, Shapes::ShapeRef.new(shape: HexLengthEquals1, required: true, location_name: "PinValidationDataPadCharacter"))
+    Ibm3624NaturalPin.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
     Ibm3624NaturalPin.struct_class = Types::Ibm3624NaturalPin
 
     Ibm3624PinFromOffset.add_member(:decimalization_table, Shapes::ShapeRef.new(shape: NumberLengthEquals16, required: true, location_name: "DecimalizationTable"))
-    Ibm3624PinFromOffset.add_member(:pin_offset, Shapes::ShapeRef.new(shape: NumberLengthBetween4And12, required: true, location_name: "PinOffset"))
-    Ibm3624PinFromOffset.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
     Ibm3624PinFromOffset.add_member(:pin_validation_data_pad_character, Shapes::ShapeRef.new(shape: HexLengthEquals1, required: true, location_name: "PinValidationDataPadCharacter"))
+    Ibm3624PinFromOffset.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
+    Ibm3624PinFromOffset.add_member(:pin_offset, Shapes::ShapeRef.new(shape: NumberLengthBetween4And12, required: true, location_name: "PinOffset"))
     Ibm3624PinFromOffset.struct_class = Types::Ibm3624PinFromOffset
 
-    Ibm3624PinOffset.add_member(:decimalization_table, Shapes::ShapeRef.new(shape: NumberLengthEquals16, required: true, location_name: "DecimalizationTable"))
     Ibm3624PinOffset.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
-    Ibm3624PinOffset.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
+    Ibm3624PinOffset.add_member(:decimalization_table, Shapes::ShapeRef.new(shape: NumberLengthEquals16, required: true, location_name: "DecimalizationTable"))
     Ibm3624PinOffset.add_member(:pin_validation_data_pad_character, Shapes::ShapeRef.new(shape: HexLengthEquals1, required: true, location_name: "PinValidationDataPadCharacter"))
+    Ibm3624PinOffset.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
     Ibm3624PinOffset.struct_class = Types::Ibm3624PinOffset
 
     Ibm3624PinVerification.add_member(:decimalization_table, Shapes::ShapeRef.new(shape: NumberLengthEquals16, required: true, location_name: "DecimalizationTable"))
-    Ibm3624PinVerification.add_member(:pin_offset, Shapes::ShapeRef.new(shape: NumberLengthBetween4And12, required: true, location_name: "PinOffset"))
-    Ibm3624PinVerification.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
     Ibm3624PinVerification.add_member(:pin_validation_data_pad_character, Shapes::ShapeRef.new(shape: HexLengthEquals1, required: true, location_name: "PinValidationDataPadCharacter"))
+    Ibm3624PinVerification.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
+    Ibm3624PinVerification.add_member(:pin_offset, Shapes::ShapeRef.new(shape: NumberLengthBetween4And12, required: true, location_name: "PinOffset"))
     Ibm3624PinVerification.struct_class = Types::Ibm3624PinVerification
 
     Ibm3624RandomPin.add_member(:decimalization_table, Shapes::ShapeRef.new(shape: NumberLengthEquals16, required: true, location_name: "DecimalizationTable"))
-    Ibm3624RandomPin.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
     Ibm3624RandomPin.add_member(:pin_validation_data_pad_character, Shapes::ShapeRef.new(shape: HexLengthEquals1, required: true, location_name: "PinValidationDataPadCharacter"))
+    Ibm3624RandomPin.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween4And16, required: true, location_name: "PinValidationData"))
     Ibm3624RandomPin.struct_class = Types::Ibm3624RandomPin
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    MacAlgorithmDukpt.add_member(:dukpt_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptDerivationType"))
-    MacAlgorithmDukpt.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, required: true, location_name: "DukptKeyVariant"))
     MacAlgorithmDukpt.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLengthBetween10And24, required: true, location_name: "KeySerialNumber"))
+    MacAlgorithmDukpt.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, required: true, location_name: "DukptKeyVariant"))
+    MacAlgorithmDukpt.add_member(:dukpt_derivation_type, Shapes::ShapeRef.new(shape: DukptDerivationType, location_name: "DukptDerivationType"))
     MacAlgorithmDukpt.struct_class = Types::MacAlgorithmDukpt
 
     MacAlgorithmEmv.add_member(:major_key_derivation_mode, Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, required: true, location_name: "MajorKeyDerivationMode"))
-    MacAlgorithmEmv.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     MacAlgorithmEmv.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    MacAlgorithmEmv.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     MacAlgorithmEmv.add_member(:session_key_derivation_mode, Shapes::ShapeRef.new(shape: SessionKeyDerivationMode, required: true, location_name: "SessionKeyDerivationMode"))
     MacAlgorithmEmv.add_member(:session_key_derivation_value, Shapes::ShapeRef.new(shape: SessionKeyDerivationValue, required: true, location_name: "SessionKeyDerivationValue"))
     MacAlgorithmEmv.struct_class = Types::MacAlgorithmEmv
 
     MacAttributes.add_member(:algorithm, Shapes::ShapeRef.new(shape: MacAlgorithm, location_name: "Algorithm"))
-    MacAttributes.add_member(:dukpt_cmac, Shapes::ShapeRef.new(shape: MacAlgorithmDukpt, location_name: "DukptCmac"))
+    MacAttributes.add_member(:emv_mac, Shapes::ShapeRef.new(shape: MacAlgorithmEmv, location_name: "EmvMac"))
     MacAttributes.add_member(:dukpt_iso_9797_algorithm_1, Shapes::ShapeRef.new(shape: MacAlgorithmDukpt, location_name: "DukptIso9797Algorithm1"))
     MacAttributes.add_member(:dukpt_iso_9797_algorithm_3, Shapes::ShapeRef.new(shape: MacAlgorithmDukpt, location_name: "DukptIso9797Algorithm3"))
-    MacAttributes.add_member(:emv_mac, Shapes::ShapeRef.new(shape: MacAlgorithmEmv, location_name: "EmvMac"))
+    MacAttributes.add_member(:dukpt_cmac, Shapes::ShapeRef.new(shape: MacAlgorithmDukpt, location_name: "DukptCmac"))
     MacAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     MacAttributes.add_member_subclass(:algorithm, Types::MacAttributes::Algorithm)
-    MacAttributes.add_member_subclass(:dukpt_cmac, Types::MacAttributes::DukptCmac)
+    MacAttributes.add_member_subclass(:emv_mac, Types::MacAttributes::EmvMac)
     MacAttributes.add_member_subclass(:dukpt_iso_9797_algorithm_1, Types::MacAttributes::DukptIso9797Algorithm1)
     MacAttributes.add_member_subclass(:dukpt_iso_9797_algorithm_3, Types::MacAttributes::DukptIso9797Algorithm3)
-    MacAttributes.add_member_subclass(:emv_mac, Types::MacAttributes::EmvMac)
+    MacAttributes.add_member_subclass(:dukpt_cmac, Types::MacAttributes::DukptCmac)
     MacAttributes.add_member_subclass(:unknown, Types::MacAttributes::Unknown)
     MacAttributes.struct_class = Types::MacAttributes
 
@@ -389,67 +395,69 @@ module Aws::PaymentCryptographyData
     PinData.add_member_subclass(:unknown, Types::PinData::Unknown)
     PinData.struct_class = Types::PinData
 
-    PinGenerationAttributes.add_member(:ibm_3624_natural_pin, Shapes::ShapeRef.new(shape: Ibm3624NaturalPin, location_name: "Ibm3624NaturalPin"))
-    PinGenerationAttributes.add_member(:ibm_3624_pin_from_offset, Shapes::ShapeRef.new(shape: Ibm3624PinFromOffset, location_name: "Ibm3624PinFromOffset"))
-    PinGenerationAttributes.add_member(:ibm_3624_pin_offset, Shapes::ShapeRef.new(shape: Ibm3624PinOffset, location_name: "Ibm3624PinOffset"))
-    PinGenerationAttributes.add_member(:ibm_3624_random_pin, Shapes::ShapeRef.new(shape: Ibm3624RandomPin, location_name: "Ibm3624RandomPin"))
     PinGenerationAttributes.add_member(:visa_pin, Shapes::ShapeRef.new(shape: VisaPin, location_name: "VisaPin"))
     PinGenerationAttributes.add_member(:visa_pin_verification_value, Shapes::ShapeRef.new(shape: VisaPinVerificationValue, location_name: "VisaPinVerificationValue"))
+    PinGenerationAttributes.add_member(:ibm_3624_pin_offset, Shapes::ShapeRef.new(shape: Ibm3624PinOffset, location_name: "Ibm3624PinOffset"))
+    PinGenerationAttributes.add_member(:ibm_3624_natural_pin, Shapes::ShapeRef.new(shape: Ibm3624NaturalPin, location_name: "Ibm3624NaturalPin"))
+    PinGenerationAttributes.add_member(:ibm_3624_random_pin, Shapes::ShapeRef.new(shape: Ibm3624RandomPin, location_name: "Ibm3624RandomPin"))
+    PinGenerationAttributes.add_member(:ibm_3624_pin_from_offset, Shapes::ShapeRef.new(shape: Ibm3624PinFromOffset, location_name: "Ibm3624PinFromOffset"))
     PinGenerationAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    PinGenerationAttributes.add_member_subclass(:ibm_3624_natural_pin, Types::PinGenerationAttributes::Ibm3624NaturalPin)
-    PinGenerationAttributes.add_member_subclass(:ibm_3624_pin_from_offset, Types::PinGenerationAttributes::Ibm3624PinFromOffset)
-    PinGenerationAttributes.add_member_subclass(:ibm_3624_pin_offset, Types::PinGenerationAttributes::Ibm3624PinOffset)
-    PinGenerationAttributes.add_member_subclass(:ibm_3624_random_pin, Types::PinGenerationAttributes::Ibm3624RandomPin)
     PinGenerationAttributes.add_member_subclass(:visa_pin, Types::PinGenerationAttributes::VisaPin)
     PinGenerationAttributes.add_member_subclass(:visa_pin_verification_value, Types::PinGenerationAttributes::VisaPinVerificationValue)
+    PinGenerationAttributes.add_member_subclass(:ibm_3624_pin_offset, Types::PinGenerationAttributes::Ibm3624PinOffset)
+    PinGenerationAttributes.add_member_subclass(:ibm_3624_natural_pin, Types::PinGenerationAttributes::Ibm3624NaturalPin)
+    PinGenerationAttributes.add_member_subclass(:ibm_3624_random_pin, Types::PinGenerationAttributes::Ibm3624RandomPin)
+    PinGenerationAttributes.add_member_subclass(:ibm_3624_pin_from_offset, Types::PinGenerationAttributes::Ibm3624PinFromOffset)
     PinGenerationAttributes.add_member_subclass(:unknown, Types::PinGenerationAttributes::Unknown)
     PinGenerationAttributes.struct_class = Types::PinGenerationAttributes
 
-    PinVerificationAttributes.add_member(:ibm_3624_pin, Shapes::ShapeRef.new(shape: Ibm3624PinVerification, location_name: "Ibm3624Pin"))
     PinVerificationAttributes.add_member(:visa_pin, Shapes::ShapeRef.new(shape: VisaPinVerification, location_name: "VisaPin"))
+    PinVerificationAttributes.add_member(:ibm_3624_pin, Shapes::ShapeRef.new(shape: Ibm3624PinVerification, location_name: "Ibm3624Pin"))
     PinVerificationAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    PinVerificationAttributes.add_member_subclass(:ibm_3624_pin, Types::PinVerificationAttributes::Ibm3624Pin)
     PinVerificationAttributes.add_member_subclass(:visa_pin, Types::PinVerificationAttributes::VisaPin)
+    PinVerificationAttributes.add_member_subclass(:ibm_3624_pin, Types::PinVerificationAttributes::Ibm3624Pin)
     PinVerificationAttributes.add_member_subclass(:unknown, Types::PinVerificationAttributes::Unknown)
     PinVerificationAttributes.struct_class = Types::PinVerificationAttributes
 
+    ReEncryptDataInput.add_member(:incoming_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location: "uri", location_name: "IncomingKeyIdentifier"))
+    ReEncryptDataInput.add_member(:outgoing_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "OutgoingKeyIdentifier"))
     ReEncryptDataInput.add_member(:cipher_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "CipherText"))
     ReEncryptDataInput.add_member(:incoming_encryption_attributes, Shapes::ShapeRef.new(shape: ReEncryptionAttributes, required: true, location_name: "IncomingEncryptionAttributes"))
-    ReEncryptDataInput.add_member(:incoming_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location: "uri", location_name: "IncomingKeyIdentifier"))
     ReEncryptDataInput.add_member(:outgoing_encryption_attributes, Shapes::ShapeRef.new(shape: ReEncryptionAttributes, required: true, location_name: "OutgoingEncryptionAttributes"))
-    ReEncryptDataInput.add_member(:outgoing_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "OutgoingKeyIdentifier"))
+    ReEncryptDataInput.add_member(:incoming_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "IncomingWrappedKey"))
+    ReEncryptDataInput.add_member(:outgoing_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "OutgoingWrappedKey"))
     ReEncryptDataInput.struct_class = Types::ReEncryptDataInput
 
-    ReEncryptDataOutput.add_member(:cipher_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "CipherText"))
     ReEncryptDataOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
     ReEncryptDataOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
+    ReEncryptDataOutput.add_member(:cipher_text, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And4096, required: true, location_name: "CipherText"))
     ReEncryptDataOutput.struct_class = Types::ReEncryptDataOutput
 
-    ReEncryptionAttributes.add_member(:dukpt, Shapes::ShapeRef.new(shape: DukptEncryptionAttributes, location_name: "Dukpt"))
     ReEncryptionAttributes.add_member(:symmetric, Shapes::ShapeRef.new(shape: SymmetricEncryptionAttributes, location_name: "Symmetric"))
+    ReEncryptionAttributes.add_member(:dukpt, Shapes::ShapeRef.new(shape: DukptEncryptionAttributes, location_name: "Dukpt"))
     ReEncryptionAttributes.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ReEncryptionAttributes.add_member_subclass(:dukpt, Types::ReEncryptionAttributes::Dukpt)
     ReEncryptionAttributes.add_member_subclass(:symmetric, Types::ReEncryptionAttributes::Symmetric)
+    ReEncryptionAttributes.add_member_subclass(:dukpt, Types::ReEncryptionAttributes::Dukpt)
     ReEncryptionAttributes.add_member_subclass(:unknown, Types::ReEncryptionAttributes::Unknown)
     ReEncryptionAttributes.struct_class = Types::ReEncryptionAttributes
 
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    SessionKeyAmex.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyAmex.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    SessionKeyAmex.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyAmex.struct_class = Types::SessionKeyAmex
 
-    SessionKeyDerivation.add_member(:amex, Shapes::ShapeRef.new(shape: SessionKeyAmex, location_name: "Amex"))
-    SessionKeyDerivation.add_member(:emv_2000, Shapes::ShapeRef.new(shape: SessionKeyEmv2000, location_name: "Emv2000"))
     SessionKeyDerivation.add_member(:emv_common, Shapes::ShapeRef.new(shape: SessionKeyEmvCommon, location_name: "EmvCommon"))
     SessionKeyDerivation.add_member(:mastercard, Shapes::ShapeRef.new(shape: SessionKeyMastercard, location_name: "Mastercard"))
+    SessionKeyDerivation.add_member(:emv_2000, Shapes::ShapeRef.new(shape: SessionKeyEmv2000, location_name: "Emv2000"))
+    SessionKeyDerivation.add_member(:amex, Shapes::ShapeRef.new(shape: SessionKeyAmex, location_name: "Amex"))
     SessionKeyDerivation.add_member(:visa, Shapes::ShapeRef.new(shape: SessionKeyVisa, location_name: "Visa"))
     SessionKeyDerivation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    SessionKeyDerivation.add_member_subclass(:amex, Types::SessionKeyDerivation::Amex)
-    SessionKeyDerivation.add_member_subclass(:emv_2000, Types::SessionKeyDerivation::Emv2000)
     SessionKeyDerivation.add_member_subclass(:emv_common, Types::SessionKeyDerivation::EmvCommon)
     SessionKeyDerivation.add_member_subclass(:mastercard, Types::SessionKeyDerivation::Mastercard)
+    SessionKeyDerivation.add_member_subclass(:emv_2000, Types::SessionKeyDerivation::Emv2000)
+    SessionKeyDerivation.add_member_subclass(:amex, Types::SessionKeyDerivation::Amex)
     SessionKeyDerivation.add_member_subclass(:visa, Types::SessionKeyDerivation::Visa)
     SessionKeyDerivation.add_member_subclass(:unknown, Types::SessionKeyDerivation::Unknown)
     SessionKeyDerivation.struct_class = Types::SessionKeyDerivation
@@ -462,46 +470,48 @@ module Aws::PaymentCryptographyData
     SessionKeyDerivationValue.add_member_subclass(:unknown, Types::SessionKeyDerivationValue::Unknown)
     SessionKeyDerivationValue.struct_class = Types::SessionKeyDerivationValue
 
-    SessionKeyEmv2000.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
-    SessionKeyEmv2000.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyEmv2000.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    SessionKeyEmv2000.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
+    SessionKeyEmv2000.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     SessionKeyEmv2000.struct_class = Types::SessionKeyEmv2000
 
-    SessionKeyEmvCommon.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
-    SessionKeyEmvCommon.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyEmvCommon.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    SessionKeyEmvCommon.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
+    SessionKeyEmvCommon.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     SessionKeyEmvCommon.struct_class = Types::SessionKeyEmvCommon
 
-    SessionKeyMastercard.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
-    SessionKeyMastercard.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyMastercard.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    SessionKeyMastercard.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
+    SessionKeyMastercard.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthBetween2And4, required: true, location_name: "ApplicationTransactionCounter"))
     SessionKeyMastercard.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthBetween2And8, required: true, location_name: "UnpredictableNumber"))
     SessionKeyMastercard.struct_class = Types::SessionKeyMastercard
 
-    SessionKeyVisa.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: HexLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyVisa.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
+    SessionKeyVisa.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyVisa.struct_class = Types::SessionKeyVisa
 
-    SymmetricEncryptionAttributes.add_member(:initialization_vector, Shapes::ShapeRef.new(shape: HexLength16Or32, location_name: "InitializationVector"))
     SymmetricEncryptionAttributes.add_member(:mode, Shapes::ShapeRef.new(shape: EncryptionMode, required: true, location_name: "Mode"))
+    SymmetricEncryptionAttributes.add_member(:initialization_vector, Shapes::ShapeRef.new(shape: HexLength16Or32, location_name: "InitializationVector"))
     SymmetricEncryptionAttributes.add_member(:padding_type, Shapes::ShapeRef.new(shape: PaddingType, location_name: "PaddingType"))
     SymmetricEncryptionAttributes.struct_class = Types::SymmetricEncryptionAttributes
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TranslatePinDataInput.add_member(:incoming_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "IncomingKeyIdentifier"))
+    TranslatePinDataInput.add_member(:outgoing_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "OutgoingKeyIdentifier"))
+    TranslatePinDataInput.add_member(:incoming_translation_attributes, Shapes::ShapeRef.new(shape: TranslationIsoFormats, required: true, location_name: "IncomingTranslationAttributes"))
+    TranslatePinDataInput.add_member(:outgoing_translation_attributes, Shapes::ShapeRef.new(shape: TranslationIsoFormats, required: true, location_name: "OutgoingTranslationAttributes"))
     TranslatePinDataInput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexEvenLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
     TranslatePinDataInput.add_member(:incoming_dukpt_attributes, Shapes::ShapeRef.new(shape: DukptDerivationAttributes, location_name: "IncomingDukptAttributes"))
-    TranslatePinDataInput.add_member(:incoming_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "IncomingKeyIdentifier"))
-    TranslatePinDataInput.add_member(:incoming_translation_attributes, Shapes::ShapeRef.new(shape: TranslationIsoFormats, required: true, location_name: "IncomingTranslationAttributes"))
     TranslatePinDataInput.add_member(:outgoing_dukpt_attributes, Shapes::ShapeRef.new(shape: DukptDerivationAttributes, location_name: "OutgoingDukptAttributes"))
-    TranslatePinDataInput.add_member(:outgoing_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "OutgoingKeyIdentifier"))
-    TranslatePinDataInput.add_member(:outgoing_translation_attributes, Shapes::ShapeRef.new(shape: TranslationIsoFormats, required: true, location_name: "OutgoingTranslationAttributes"))
+    TranslatePinDataInput.add_member(:incoming_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "IncomingWrappedKey"))
+    TranslatePinDataInput.add_member(:outgoing_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "OutgoingWrappedKey"))
     TranslatePinDataInput.struct_class = Types::TranslatePinDataInput
 
+    TranslatePinDataOutput.add_member(:pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "PinBlock"))
     TranslatePinDataOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
     TranslatePinDataOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
-    TranslatePinDataOutput.add_member(:pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "PinBlock"))
     TranslatePinDataOutput.struct_class = Types::TranslatePinDataOutput
 
     TranslationIsoFormats.add_member(:iso_format_0, Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat034, location_name: "IsoFormat0"))
@@ -521,37 +531,37 @@ module Aws::PaymentCryptographyData
 
     TranslationPinDataIsoFormat1.struct_class = Types::TranslationPinDataIsoFormat1
 
-    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.add_member(:path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "path"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
-    VerificationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     VerificationFailedException.add_member(:reason, Shapes::ShapeRef.new(shape: VerificationFailedReason, required: true, location_name: "Reason"))
+    VerificationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     VerificationFailedException.struct_class = Types::VerificationFailedException
 
-    VerifyAuthRequestCryptogramInput.add_member(:auth_request_cryptogram, Shapes::ShapeRef.new(shape: HexLengthEquals16, required: true, location_name: "AuthRequestCryptogram"))
-    VerifyAuthRequestCryptogramInput.add_member(:auth_response_attributes, Shapes::ShapeRef.new(shape: CryptogramAuthResponse, location_name: "AuthResponseAttributes"))
     VerifyAuthRequestCryptogramInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
+    VerifyAuthRequestCryptogramInput.add_member(:transaction_data, Shapes::ShapeRef.new(shape: HexLengthBetween2And1024, required: true, location_name: "TransactionData"))
+    VerifyAuthRequestCryptogramInput.add_member(:auth_request_cryptogram, Shapes::ShapeRef.new(shape: HexLengthEquals16, required: true, location_name: "AuthRequestCryptogram"))
     VerifyAuthRequestCryptogramInput.add_member(:major_key_derivation_mode, Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, required: true, location_name: "MajorKeyDerivationMode"))
     VerifyAuthRequestCryptogramInput.add_member(:session_key_derivation_attributes, Shapes::ShapeRef.new(shape: SessionKeyDerivation, required: true, location_name: "SessionKeyDerivationAttributes"))
-    VerifyAuthRequestCryptogramInput.add_member(:transaction_data, Shapes::ShapeRef.new(shape: HexLengthBetween2And1024, required: true, location_name: "TransactionData"))
+    VerifyAuthRequestCryptogramInput.add_member(:auth_response_attributes, Shapes::ShapeRef.new(shape: CryptogramAuthResponse, location_name: "AuthResponseAttributes"))
     VerifyAuthRequestCryptogramInput.struct_class = Types::VerifyAuthRequestCryptogramInput
 
-    VerifyAuthRequestCryptogramOutput.add_member(:auth_response_value, Shapes::ShapeRef.new(shape: HexLengthBetween1And16, location_name: "AuthResponseValue"))
     VerifyAuthRequestCryptogramOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
     VerifyAuthRequestCryptogramOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
+    VerifyAuthRequestCryptogramOutput.add_member(:auth_response_value, Shapes::ShapeRef.new(shape: HexLengthBetween1And16, location_name: "AuthResponseValue"))
     VerifyAuthRequestCryptogramOutput.struct_class = Types::VerifyAuthRequestCryptogramOutput
 
     VerifyCardValidationDataInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
     VerifyCardValidationDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
-    VerifyCardValidationDataInput.add_member(:validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween3And5, required: true, location_name: "ValidationData"))
     VerifyCardValidationDataInput.add_member(:verification_attributes, Shapes::ShapeRef.new(shape: CardVerificationAttributes, required: true, location_name: "VerificationAttributes"))
+    VerifyCardValidationDataInput.add_member(:validation_data, Shapes::ShapeRef.new(shape: NumberLengthBetween3And5, required: true, location_name: "ValidationData"))
     VerifyCardValidationDataInput.struct_class = Types::VerifyCardValidationDataInput
 
     VerifyCardValidationDataOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
@@ -559,42 +569,52 @@ module Aws::PaymentCryptographyData
     VerifyCardValidationDataOutput.struct_class = Types::VerifyCardValidationDataOutput
 
     VerifyMacInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
-    VerifyMacInput.add_member(:mac, Shapes::ShapeRef.new(shape: HexEvenLengthBetween4And128, required: true, location_name: "Mac"))
-    VerifyMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
     VerifyMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: HexEvenLengthBetween2And4096, required: true, location_name: "MessageData"))
+    VerifyMacInput.add_member(:mac, Shapes::ShapeRef.new(shape: HexEvenLengthBetween4And128, required: true, location_name: "Mac"))
     VerifyMacInput.add_member(:verification_attributes, Shapes::ShapeRef.new(shape: MacAttributes, required: true, location_name: "VerificationAttributes"))
+    VerifyMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
     VerifyMacInput.struct_class = Types::VerifyMacInput
 
     VerifyMacOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
     VerifyMacOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
     VerifyMacOutput.struct_class = Types::VerifyMacOutput
 
-    VerifyPinDataInput.add_member(:dukpt_attributes, Shapes::ShapeRef.new(shape: DukptAttributes, location_name: "DukptAttributes"))
-    VerifyPinDataInput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
+    VerifyPinDataInput.add_member(:verification_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "VerificationKeyIdentifier"))
     VerifyPinDataInput.add_member(:encryption_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "EncryptionKeyIdentifier"))
+    VerifyPinDataInput.add_member(:verification_attributes, Shapes::ShapeRef.new(shape: PinVerificationAttributes, required: true, location_name: "VerificationAttributes"))
+    VerifyPinDataInput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
+    VerifyPinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
     VerifyPinDataInput.add_member(:pin_block_format, Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, required: true, location_name: "PinBlockFormat"))
     VerifyPinDataInput.add_member(:pin_data_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
-    VerifyPinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: NumberLengthBetween12And19, required: true, location_name: "PrimaryAccountNumber"))
-    VerifyPinDataInput.add_member(:verification_attributes, Shapes::ShapeRef.new(shape: PinVerificationAttributes, required: true, location_name: "VerificationAttributes"))
-    VerifyPinDataInput.add_member(:verification_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "VerificationKeyIdentifier"))
+    VerifyPinDataInput.add_member(:dukpt_attributes, Shapes::ShapeRef.new(shape: DukptAttributes, location_name: "DukptAttributes"))
     VerifyPinDataInput.struct_class = Types::VerifyPinDataInput
 
-    VerifyPinDataOutput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "EncryptionKeyArn"))
-    VerifyPinDataOutput.add_member(:encryption_key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "EncryptionKeyCheckValue"))
     VerifyPinDataOutput.add_member(:verification_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "VerificationKeyArn"))
     VerifyPinDataOutput.add_member(:verification_key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "VerificationKeyCheckValue"))
+    VerifyPinDataOutput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "EncryptionKeyArn"))
+    VerifyPinDataOutput.add_member(:encryption_key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "EncryptionKeyCheckValue"))
     VerifyPinDataOutput.struct_class = Types::VerifyPinDataOutput
 
-    VisaPin.add_member(:pin_verification_key_index, Shapes::ShapeRef.new(shape: IntegerRangeBetween0And9, required: true, location_name: "PinVerificationKeyIndex"))
+    VisaPin.add_member(:pin_verification_key_index, Shapes::ShapeRef.new(shape: IntegerRangeBetween0And6, required: true, location_name: "PinVerificationKeyIndex"))
     VisaPin.struct_class = Types::VisaPin
 
-    VisaPinVerification.add_member(:pin_verification_key_index, Shapes::ShapeRef.new(shape: IntegerRangeBetween0And9, required: true, location_name: "PinVerificationKeyIndex"))
+    VisaPinVerification.add_member(:pin_verification_key_index, Shapes::ShapeRef.new(shape: IntegerRangeBetween0And6, required: true, location_name: "PinVerificationKeyIndex"))
     VisaPinVerification.add_member(:verification_value, Shapes::ShapeRef.new(shape: NumberLengthBetween4And12, required: true, location_name: "VerificationValue"))
     VisaPinVerification.struct_class = Types::VisaPinVerification
 
     VisaPinVerificationValue.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: HexLengthBetween16And32, required: true, location_name: "EncryptedPinBlock"))
-    VisaPinVerificationValue.add_member(:pin_verification_key_index, Shapes::ShapeRef.new(shape: IntegerRangeBetween0And9, required: true, location_name: "PinVerificationKeyIndex"))
+    VisaPinVerificationValue.add_member(:pin_verification_key_index, Shapes::ShapeRef.new(shape: IntegerRangeBetween0And6, required: true, location_name: "PinVerificationKeyIndex"))
     VisaPinVerificationValue.struct_class = Types::VisaPinVerificationValue
+
+    WrappedKey.add_member(:wrapped_key_material, Shapes::ShapeRef.new(shape: WrappedKeyMaterial, required: true, location_name: "WrappedKeyMaterial"))
+    WrappedKey.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    WrappedKey.struct_class = Types::WrappedKey
+
+    WrappedKeyMaterial.add_member(:tr_31_key_block, Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, location_name: "Tr31KeyBlock"))
+    WrappedKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WrappedKeyMaterial.add_member_subclass(:tr_31_key_block, Types::WrappedKeyMaterial::Tr31KeyBlock)
+    WrappedKeyMaterial.add_member_subclass(:unknown, Types::WrappedKeyMaterial::Unknown)
+    WrappedKeyMaterial.struct_class = Types::WrappedKeyMaterial
 
 
     # @api private
@@ -604,9 +624,10 @@ module Aws::PaymentCryptographyData
 
       api.metadata = {
         "apiVersion" => "2022-02-03",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "dataplane.payment-cryptography",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Payment Cryptography Data Plane",
         "serviceId" => "Payment Cryptography Data",
         "signatureVersion" => "v4",

@@ -16,6 +16,7 @@ require_relative 'aws-sdk-paymentcryptographydata/client_api'
 require_relative 'aws-sdk-paymentcryptographydata/plugins/endpoints.rb'
 require_relative 'aws-sdk-paymentcryptographydata/client'
 require_relative 'aws-sdk-paymentcryptographydata/errors'
+require_relative 'aws-sdk-paymentcryptographydata/waiters'
 require_relative 'aws-sdk-paymentcryptographydata/resource'
 require_relative 'aws-sdk-paymentcryptographydata/endpoint_parameters'
 require_relative 'aws-sdk-paymentcryptographydata/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-paymentcryptographydata/customizations'
 # @!group service
 module Aws::PaymentCryptographyData
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

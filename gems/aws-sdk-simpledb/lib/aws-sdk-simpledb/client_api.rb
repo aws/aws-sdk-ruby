@@ -77,25 +77,25 @@ module Aws::SimpleDB
     AttributeNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "AttributeName")
 
     BatchDeleteAttributesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
-    BatchDeleteAttributesRequest.add_member(:items, Shapes::ShapeRef.new(shape: DeletableItemList, required: true, location_name: "Items"))
+    BatchDeleteAttributesRequest.add_member(:items, Shapes::ShapeRef.new(shape: DeletableItemList, required: true, location_name: "Item"))
     BatchDeleteAttributesRequest.struct_class = Types::BatchDeleteAttributesRequest
 
     BatchPutAttributesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
-    BatchPutAttributesRequest.add_member(:items, Shapes::ShapeRef.new(shape: ReplaceableItemList, required: true, location_name: "Items"))
+    BatchPutAttributesRequest.add_member(:items, Shapes::ShapeRef.new(shape: ReplaceableItemList, required: true, location_name: "Item"))
     BatchPutAttributesRequest.struct_class = Types::BatchPutAttributesRequest
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     DeletableItem.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ItemName"))
-    DeletableItem.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "Attributes"))
+    DeletableItem.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "Attribute"))
     DeletableItem.struct_class = Types::DeletableItem
 
     DeletableItemList.member = Shapes::ShapeRef.new(shape: DeletableItem, location_name: "Item")
 
     DeleteAttributesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
     DeleteAttributesRequest.add_member(:item_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ItemName"))
-    DeleteAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "Attributes"))
+    DeleteAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "Attribute"))
     DeleteAttributesRequest.add_member(:expected, Shapes::ShapeRef.new(shape: UpdateCondition, location_name: "Expected"))
     DeleteAttributesRequest.struct_class = Types::DeleteAttributesRequest
 
@@ -121,11 +121,11 @@ module Aws::SimpleDB
 
     GetAttributesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
     GetAttributesRequest.add_member(:item_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ItemName"))
-    GetAttributesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
+    GetAttributesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeName"))
     GetAttributesRequest.add_member(:consistent_read, Shapes::ShapeRef.new(shape: Boolean, location_name: "ConsistentRead"))
     GetAttributesRequest.struct_class = Types::GetAttributesRequest
 
-    GetAttributesResult.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "Attributes"))
+    GetAttributesResult.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "Attribute"))
     GetAttributesResult.struct_class = Types::GetAttributesResult
 
     InvalidNextToken.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
@@ -145,7 +145,7 @@ module Aws::SimpleDB
 
     Item.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Item.add_member(:alternate_name_encoding, Shapes::ShapeRef.new(shape: String, location_name: "AlternateNameEncoding"))
-    Item.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, required: true, location_name: "Attributes"))
+    Item.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, required: true, location_name: "Attribute"))
     Item.struct_class = Types::Item
 
     ItemList.member = Shapes::ShapeRef.new(shape: Item, location_name: "Item")
@@ -154,7 +154,7 @@ module Aws::SimpleDB
     ListDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDomainsRequest.struct_class = Types::ListDomainsRequest
 
-    ListDomainsResult.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "DomainNames"))
+    ListDomainsResult.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "DomainName"))
     ListDomainsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDomainsResult.struct_class = Types::ListDomainsResult
 
@@ -184,7 +184,7 @@ module Aws::SimpleDB
 
     PutAttributesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
     PutAttributesRequest.add_member(:item_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ItemName"))
-    PutAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ReplaceableAttributeList, required: true, location_name: "Attributes"))
+    PutAttributesRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ReplaceableAttributeList, required: true, location_name: "Attribute"))
     PutAttributesRequest.add_member(:expected, Shapes::ShapeRef.new(shape: UpdateCondition, location_name: "Expected"))
     PutAttributesRequest.struct_class = Types::PutAttributesRequest
 
@@ -196,7 +196,7 @@ module Aws::SimpleDB
     ReplaceableAttributeList.member = Shapes::ShapeRef.new(shape: ReplaceableAttribute, location_name: "Attribute")
 
     ReplaceableItem.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ItemName"))
-    ReplaceableItem.add_member(:attributes, Shapes::ShapeRef.new(shape: ReplaceableAttributeList, required: true, location_name: "Attributes"))
+    ReplaceableItem.add_member(:attributes, Shapes::ShapeRef.new(shape: ReplaceableAttributeList, required: true, location_name: "Attribute"))
     ReplaceableItem.struct_class = Types::ReplaceableItem
 
     ReplaceableItemList.member = Shapes::ShapeRef.new(shape: ReplaceableItem, location_name: "Item")
@@ -209,7 +209,7 @@ module Aws::SimpleDB
     SelectRequest.add_member(:consistent_read, Shapes::ShapeRef.new(shape: Boolean, location_name: "ConsistentRead"))
     SelectRequest.struct_class = Types::SelectRequest
 
-    SelectResult.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
+    SelectResult.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Item"))
     SelectResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SelectResult.struct_class = Types::SelectResult
 

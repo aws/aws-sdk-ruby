@@ -305,7 +305,7 @@ module Aws
                                 max_unavailable: ::Integer?,
                                 max_unavailable_percentage: ::Integer?
                               },
-                              ?capacity_type: ("ON_DEMAND" | "SPOT"),
+                              ?capacity_type: ("ON_DEMAND" | "SPOT" | "CAPACITY_BLOCK"),
                               ?version: ::String,
                               ?release_version: ::String
                             ) -> _CreateNodegroupResponseSuccess

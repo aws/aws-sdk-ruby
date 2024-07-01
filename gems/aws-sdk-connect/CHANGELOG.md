@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2024-07-01)
+------------------
+
+* Feature - Authentication profiles are Amazon Connect resources (in gated preview) that allow you to configure authentication settings for users in your contact center. This release adds support for new ListAuthenticationProfiles, DescribeAuthenticationProfile and UpdateAuthenticationProfile APIs.
+
 1.165.0 (2024-06-28)
 ------------------
 

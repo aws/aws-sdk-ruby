@@ -1711,7 +1711,7 @@ module Aws::EKS
     #       max_unavailable: 1,
     #       max_unavailable_percentage: 1,
     #     },
-    #     capacity_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+    #     capacity_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT, CAPACITY_BLOCK
     #     version: "String",
     #     release_version: "String",
     #   })
@@ -1726,7 +1726,7 @@ module Aws::EKS
     #   resp.nodegroup.created_at #=> Time
     #   resp.nodegroup.modified_at #=> Time
     #   resp.nodegroup.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "DEGRADED"
-    #   resp.nodegroup.capacity_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.nodegroup.capacity_type #=> String, one of "ON_DEMAND", "SPOT", "CAPACITY_BLOCK"
     #   resp.nodegroup.scaling_config.min_size #=> Integer
     #   resp.nodegroup.scaling_config.max_size #=> Integer
     #   resp.nodegroup.scaling_config.desired_size #=> Integer
@@ -2225,7 +2225,7 @@ module Aws::EKS
     #   resp.nodegroup.created_at #=> Time
     #   resp.nodegroup.modified_at #=> Time
     #   resp.nodegroup.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "DEGRADED"
-    #   resp.nodegroup.capacity_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.nodegroup.capacity_type #=> String, one of "ON_DEMAND", "SPOT", "CAPACITY_BLOCK"
     #   resp.nodegroup.scaling_config.min_size #=> Integer
     #   resp.nodegroup.scaling_config.max_size #=> Integer
     #   resp.nodegroup.scaling_config.desired_size #=> Integer
@@ -3022,7 +3022,7 @@ module Aws::EKS
     #   resp.nodegroup.created_at #=> Time
     #   resp.nodegroup.modified_at #=> Time
     #   resp.nodegroup.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "DEGRADED"
-    #   resp.nodegroup.capacity_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.nodegroup.capacity_type #=> String, one of "ON_DEMAND", "SPOT", "CAPACITY_BLOCK"
     #   resp.nodegroup.scaling_config.min_size #=> Integer
     #   resp.nodegroup.scaling_config.max_size #=> Integer
     #   resp.nodegroup.scaling_config.desired_size #=> Integer
@@ -5072,7 +5072,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

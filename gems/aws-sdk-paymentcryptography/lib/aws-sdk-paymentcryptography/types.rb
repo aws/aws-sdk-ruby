@@ -842,7 +842,7 @@ module Aws::PaymentCryptography
     class ImportTr31KeyBlock < Struct.new(
       :wrapping_key_identifier,
       :wrapped_key_block)
-      SENSITIVE = []
+      SENSITIVE = [:wrapped_key_block]
       include Aws::Structure
     end
 

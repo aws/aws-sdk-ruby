@@ -1528,7 +1528,7 @@ module Aws::Connect
     # the pre-signed URL provided in the StartAttachedFileUpload API.
     #
     # @option params [required, String] :instance_id
-    #   The unique identifier of the Connect instance.
+    #   The unique identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :file_id
     #   The unique identifier of the attached file resource.
@@ -4505,6 +4505,60 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_agent_status(params = {}, options = {})
       req = build_request(:describe_agent_status, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
+    #
+    # Describes the target authentication profile.
+    #
+    # @option params [required, String] :authentication_profile_id
+    #   A unique identifier for the authentication profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @return [Types::DescribeAuthenticationProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAuthenticationProfileResponse#authentication_profile #authentication_profile} => Types::AuthenticationProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_authentication_profile({
+    #     authentication_profile_id: "AuthenticationProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authentication_profile.id #=> String
+    #   resp.authentication_profile.arn #=> String
+    #   resp.authentication_profile.name #=> String
+    #   resp.authentication_profile.description #=> String
+    #   resp.authentication_profile.allowed_ips #=> Array
+    #   resp.authentication_profile.allowed_ips[0] #=> String
+    #   resp.authentication_profile.blocked_ips #=> Array
+    #   resp.authentication_profile.blocked_ips[0] #=> String
+    #   resp.authentication_profile.is_default #=> Boolean
+    #   resp.authentication_profile.created_time #=> Time
+    #   resp.authentication_profile.last_modified_time #=> Time
+    #   resp.authentication_profile.last_modified_region #=> String
+    #   resp.authentication_profile.periodic_session_duration #=> Integer
+    #   resp.authentication_profile.max_session_duration #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAuthenticationProfile AWS API Documentation
+    #
+    # @overload describe_authentication_profile(params = {})
+    # @param [Hash] params ({})
+    def describe_authentication_profile(params = {}, options = {})
+      req = build_request(:describe_authentication_profile, params)
       req.send_request(options)
     end
 
@@ -9078,6 +9132,64 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
+    #
+    # Provides summary information about the authentication profiles in a
+    # specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListAuthenticationProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAuthenticationProfilesResponse#authentication_profile_summary_list #authentication_profile_summary_list} => Array&lt;Types::AuthenticationProfileSummary&gt;
+    #   * {Types::ListAuthenticationProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_authentication_profiles({
+    #     instance_id: "InstanceId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authentication_profile_summary_list #=> Array
+    #   resp.authentication_profile_summary_list[0].id #=> String
+    #   resp.authentication_profile_summary_list[0].arn #=> String
+    #   resp.authentication_profile_summary_list[0].name #=> String
+    #   resp.authentication_profile_summary_list[0].is_default #=> Boolean
+    #   resp.authentication_profile_summary_list[0].last_modified_time #=> Time
+    #   resp.authentication_profile_summary_list[0].last_modified_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAuthenticationProfiles AWS API Documentation
+    #
+    # @overload list_authentication_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_authentication_profiles(params = {}, options = {})
+      req = build_request(:list_authentication_profiles, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
     # For the specified version of Amazon Lex, returns a paginated list of
@@ -13483,7 +13595,7 @@ module Aws::Connect
     # Provides a pre-signed Amazon S3 URL in response for uploading your
     # content.
     #
-    # You may only use this API to upload attachments to a [Connect
+    # You may only use this API to upload attachments to an [Amazon Connect
     # Case][1].
     #
     #
@@ -13504,7 +13616,7 @@ module Aws::Connect
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :instance_id
-    #   The unique identifier of the Connect instance.
+    #   The unique identifier of the Amazon Connect instance.
     #
     # @option params [required, String] :file_name
     #   A case-sensitive name of the attached file being uploaded.
@@ -14384,10 +14496,9 @@ module Aws::Connect
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow for the call. To see the ContactFlowId in
     #   the Amazon Connect admin website, on the navigation menu go to
-    #   **Routing**, **Contact Flows**. Choose the flow. On the flow page,
-    #   under the name of the flow, choose **Show additional flow
-    #   information**. The ContactFlowId is the last part of the ARN, shown
-    #   here in bold:
+    #   **Routing**, **Flows**. Choose the flow. On the flow page, under the
+    #   name of the flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
@@ -15027,6 +15138,84 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_agent_status(params = {}, options = {})
       req = build_request(:update_agent_status, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
+    #
+    # Updates the selected authentication profile.
+    #
+    # @option params [required, String] :authentication_profile_id
+    #   A unique identifier for the authentication profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :name
+    #   The name for the authentication profile.
+    #
+    # @option params [String] :description
+    #   The description for the authentication profile.
+    #
+    # @option params [Array<String>] :allowed_ips
+    #   A list of IP address range strings that are allowed to access the
+    #   instance. For more information on how to configure IP addresses,
+    #   see[Configure session timeouts][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
+    #
+    # @option params [Array<String>] :blocked_ips
+    #   A list of IP address range strings that are blocked from accessing the
+    #   instance. For more information on how to configure IP addresses, For
+    #   more information on how to configure IP addresses, see [Configure
+    #   IP-based access control][1] in the *Amazon Connect Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac
+    #
+    # @option params [Integer] :periodic_session_duration
+    #   The short lived session duration configuration for users logged in to
+    #   Amazon Connect, in minutes. This value determines the maximum possible
+    #   time before an agent is authenticated. For more information, For more
+    #   information on how to configure IP addresses, see [Configure session
+    #   timeouts][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_authentication_profile({
+    #     authentication_profile_id: "AuthenticationProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     name: "AuthenticationProfileName",
+    #     description: "AuthenticationProfileDescription",
+    #     allowed_ips: ["IpCidr"],
+    #     blocked_ips: ["IpCidr"],
+    #     periodic_session_duration: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateAuthenticationProfile AWS API Documentation
+    #
+    # @overload update_authentication_profile(params = {})
+    # @param [Hash] params ({})
+    def update_authentication_profile(params = {}, options = {})
+      req = build_request(:update_authentication_profile, params)
       req.send_request(options)
     end
 
@@ -17552,7 +17741,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

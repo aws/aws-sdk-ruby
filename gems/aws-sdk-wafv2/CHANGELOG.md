@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-07-01)
+------------------
+
+* Feature - JSON body inspection: Update documentation to clarify that JSON parsing doesn't include full validation.
+
 1.86.0 (2024-06-28)
 ------------------
 

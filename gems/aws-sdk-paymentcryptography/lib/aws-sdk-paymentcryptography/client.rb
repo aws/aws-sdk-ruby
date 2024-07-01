@@ -1029,7 +1029,7 @@ module Aws::PaymentCryptography
     #         wrapping_key_certificate: "CertificateType", # required
     #         export_token: "ExportTokenId", # required
     #         key_block_format: "X9_TR34_2012", # required, accepts X9_TR34_2012
-    #         random_nonce: "HexLength16",
+    #         random_nonce: "EvenHexLengthBetween16And32",
     #         key_block_headers: {
     #           key_modes_of_use: {
     #             encrypt: false,
@@ -1659,7 +1659,7 @@ module Aws::PaymentCryptography
     #         import_token: "ImportTokenId", # required
     #         wrapped_key_block: "Tr34WrappedKeyBlock", # required
     #         key_block_format: "X9_TR34_2012", # required, accepts X9_TR34_2012
-    #         random_nonce: "HexLength16",
+    #         random_nonce: "EvenHexLengthBetween16And32",
     #       },
     #       key_cryptogram: {
     #         key_attributes: { # required
@@ -2384,7 +2384,7 @@ module Aws::PaymentCryptography
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-paymentcryptography'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

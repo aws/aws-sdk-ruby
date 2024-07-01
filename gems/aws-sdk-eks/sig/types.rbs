@@ -364,7 +364,7 @@ module Aws::EKS
       attr_accessor client_request_token: ::String
       attr_accessor launch_template: Types::LaunchTemplateSpecification
       attr_accessor update_config: Types::NodegroupUpdateConfig
-      attr_accessor capacity_type: ("ON_DEMAND" | "SPOT")
+      attr_accessor capacity_type: ("ON_DEMAND" | "SPOT" | "CAPACITY_BLOCK")
       attr_accessor version: ::String
       attr_accessor release_version: ::String
       SENSITIVE: []
@@ -1028,7 +1028,7 @@ module Aws::EKS
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "DEGRADED")
-      attr_accessor capacity_type: ("ON_DEMAND" | "SPOT")
+      attr_accessor capacity_type: ("ON_DEMAND" | "SPOT" | "CAPACITY_BLOCK")
       attr_accessor scaling_config: Types::NodegroupScalingConfig
       attr_accessor instance_types: ::Array[::String]
       attr_accessor subnets: ::Array[::String]

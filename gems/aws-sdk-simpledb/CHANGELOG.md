@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2024-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Fix query serialization with `aws-sdk-core` >= 3.192.
 
 1.49.0 (2024-06-25)

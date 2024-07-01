@@ -200,6 +200,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::DeleteVocabulary.build(context)
           when :describe_agent_status
             Aws::Connect::Endpoints::DescribeAgentStatus.build(context)
+          when :describe_authentication_profile
+            Aws::Connect::Endpoints::DescribeAuthenticationProfile.build(context)
           when :describe_contact
             Aws::Connect::Endpoints::DescribeContact.build(context)
           when :describe_contact_evaluation
@@ -304,6 +306,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListAnalyticsDataAssociations.build(context)
           when :list_approved_origins
             Aws::Connect::Endpoints::ListApprovedOrigins.build(context)
+          when :list_authentication_profiles
+            Aws::Connect::Endpoints::ListAuthenticationProfiles.build(context)
           when :list_bots
             Aws::Connect::Endpoints::ListBots.build(context)
           when :list_contact_evaluations
@@ -468,6 +472,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::UntagResource.build(context)
           when :update_agent_status
             Aws::Connect::Endpoints::UpdateAgentStatus.build(context)
+          when :update_authentication_profile
+            Aws::Connect::Endpoints::UpdateAuthenticationProfile.build(context)
           when :update_contact
             Aws::Connect::Endpoints::UpdateContact.build(context)
           when :update_contact_attributes

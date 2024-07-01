@@ -110,13 +110,13 @@ module Aws::PaymentCryptographyData
       end
 
       # @return [String]
-      def field_list
-        @data[:field_list]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def field_list
+        @data[:field_list]
       end
     end
 
@@ -130,13 +130,13 @@ module Aws::PaymentCryptographyData
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def reason
+        @data[:reason]
       end
 
       # @return [String]
-      def reason
-        @data[:reason]
+      def message
+        @message || @data[:message]
       end
     end
 

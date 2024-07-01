@@ -16,6 +16,7 @@ module Aws::Connect
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessTokenDuration = Shapes::IntegerShape.new(name: 'AccessTokenDuration')
     ActionSummaries = Shapes::ListShape.new(name: 'ActionSummaries')
     ActionSummary = Shapes::StructureShape.new(name: 'ActionSummary')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
@@ -108,6 +109,12 @@ module Aws::Connect
     AudioFeatures = Shapes::StructureShape.new(name: 'AudioFeatures')
     AudioQualityMetricsInfo = Shapes::StructureShape.new(name: 'AudioQualityMetricsInfo')
     AudioQualityScore = Shapes::FloatShape.new(name: 'AudioQualityScore')
+    AuthenticationProfile = Shapes::StructureShape.new(name: 'AuthenticationProfile')
+    AuthenticationProfileDescription = Shapes::StringShape.new(name: 'AuthenticationProfileDescription')
+    AuthenticationProfileId = Shapes::StringShape.new(name: 'AuthenticationProfileId')
+    AuthenticationProfileName = Shapes::StringShape.new(name: 'AuthenticationProfileName')
+    AuthenticationProfileSummary = Shapes::StructureShape.new(name: 'AuthenticationProfileSummary')
+    AuthenticationProfileSummaryList = Shapes::ListShape.new(name: 'AuthenticationProfileSummaryList')
     AutoAccept = Shapes::BooleanShape.new(name: 'AutoAccept')
     AvailableNumberSummary = Shapes::StructureShape.new(name: 'AvailableNumberSummary')
     AvailableNumbersList = Shapes::ListShape.new(name: 'AvailableNumbersList')
@@ -311,6 +318,8 @@ module Aws::Connect
     DeleteVocabularyResponse = Shapes::StructureShape.new(name: 'DeleteVocabularyResponse')
     DescribeAgentStatusRequest = Shapes::StructureShape.new(name: 'DescribeAgentStatusRequest')
     DescribeAgentStatusResponse = Shapes::StructureShape.new(name: 'DescribeAgentStatusResponse')
+    DescribeAuthenticationProfileRequest = Shapes::StructureShape.new(name: 'DescribeAuthenticationProfileRequest')
+    DescribeAuthenticationProfileResponse = Shapes::StructureShape.new(name: 'DescribeAuthenticationProfileResponse')
     DescribeContactEvaluationRequest = Shapes::StructureShape.new(name: 'DescribeContactEvaluationRequest')
     DescribeContactEvaluationResponse = Shapes::StructureShape.new(name: 'DescribeContactEvaluationResponse')
     DescribeContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DescribeContactFlowModuleRequest')
@@ -599,6 +608,8 @@ module Aws::Connect
     InvalidRequestExceptionReason = Shapes::UnionShape.new(name: 'InvalidRequestExceptionReason')
     InvisibleFieldInfo = Shapes::StructureShape.new(name: 'InvisibleFieldInfo')
     InvisibleTaskTemplateFields = Shapes::ListShape.new(name: 'InvisibleTaskTemplateFields')
+    IpCidr = Shapes::StringShape.new(name: 'IpCidr')
+    IpCidrList = Shapes::ListShape.new(name: 'IpCidrList')
     JoinToken = Shapes::StringShape.new(name: 'JoinToken')
     KeyId = Shapes::StringShape.new(name: 'KeyId')
     KinesisFirehoseConfig = Shapes::StructureShape.new(name: 'KinesisFirehoseConfig')
@@ -619,6 +630,8 @@ module Aws::Connect
     ListAnalyticsDataAssociationsResponse = Shapes::StructureShape.new(name: 'ListAnalyticsDataAssociationsResponse')
     ListApprovedOriginsRequest = Shapes::StructureShape.new(name: 'ListApprovedOriginsRequest')
     ListApprovedOriginsResponse = Shapes::StructureShape.new(name: 'ListApprovedOriginsResponse')
+    ListAuthenticationProfilesRequest = Shapes::StructureShape.new(name: 'ListAuthenticationProfilesRequest')
+    ListAuthenticationProfilesResponse = Shapes::StructureShape.new(name: 'ListAuthenticationProfilesResponse')
     ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
     ListBotsResponse = Shapes::StructureShape.new(name: 'ListBotsResponse')
     ListContactEvaluationsRequest = Shapes::StructureShape.new(name: 'ListContactEvaluationsRequest')
@@ -921,6 +934,7 @@ module Aws::Connect
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
     ReferenceTypes = Shapes::ListShape.new(name: 'ReferenceTypes')
     ReferenceValue = Shapes::StringShape.new(name: 'ReferenceValue')
+    RefreshTokenDuration = Shapes::IntegerShape.new(name: 'RefreshTokenDuration')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
     RehydrationType = Shapes::StringShape.new(name: 'RehydrationType')
     ReleasePhoneNumberRequest = Shapes::StructureShape.new(name: 'ReleasePhoneNumberRequest')
@@ -1175,6 +1189,7 @@ module Aws::Connect
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAgentStatusDescription = Shapes::StringShape.new(name: 'UpdateAgentStatusDescription')
     UpdateAgentStatusRequest = Shapes::StructureShape.new(name: 'UpdateAgentStatusRequest')
+    UpdateAuthenticationProfileRequest = Shapes::StructureShape.new(name: 'UpdateAuthenticationProfileRequest')
     UpdateCaseActionDefinition = Shapes::StructureShape.new(name: 'UpdateCaseActionDefinition')
     UpdateContactAttributesRequest = Shapes::StructureShape.new(name: 'UpdateContactAttributesRequest')
     UpdateContactAttributesResponse = Shapes::StructureShape.new(name: 'UpdateContactAttributesResponse')
@@ -1585,6 +1600,30 @@ module Aws::Connect
     AudioQualityMetricsInfo.add_member(:quality_score, Shapes::ShapeRef.new(shape: AudioQualityScore, location_name: "QualityScore"))
     AudioQualityMetricsInfo.add_member(:potential_quality_issues, Shapes::ShapeRef.new(shape: PotentialAudioQualityIssues, location_name: "PotentialQualityIssues"))
     AudioQualityMetricsInfo.struct_class = Types::AudioQualityMetricsInfo
+
+    AuthenticationProfile.add_member(:id, Shapes::ShapeRef.new(shape: AuthenticationProfileId, location_name: "Id"))
+    AuthenticationProfile.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    AuthenticationProfile.add_member(:name, Shapes::ShapeRef.new(shape: AuthenticationProfileName, location_name: "Name"))
+    AuthenticationProfile.add_member(:description, Shapes::ShapeRef.new(shape: AuthenticationProfileDescription, location_name: "Description"))
+    AuthenticationProfile.add_member(:allowed_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "AllowedIps"))
+    AuthenticationProfile.add_member(:blocked_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "BlockedIps"))
+    AuthenticationProfile.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    AuthenticationProfile.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    AuthenticationProfile.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    AuthenticationProfile.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    AuthenticationProfile.add_member(:periodic_session_duration, Shapes::ShapeRef.new(shape: AccessTokenDuration, location_name: "PeriodicSessionDuration"))
+    AuthenticationProfile.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: RefreshTokenDuration, location_name: "MaxSessionDuration"))
+    AuthenticationProfile.struct_class = Types::AuthenticationProfile
+
+    AuthenticationProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: AuthenticationProfileId, location_name: "Id"))
+    AuthenticationProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    AuthenticationProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: AuthenticationProfileName, location_name: "Name"))
+    AuthenticationProfileSummary.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    AuthenticationProfileSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    AuthenticationProfileSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    AuthenticationProfileSummary.struct_class = Types::AuthenticationProfileSummary
+
+    AuthenticationProfileSummaryList.member = Shapes::ShapeRef.new(shape: AuthenticationProfileSummary)
 
     AvailableNumberSummary.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
     AvailableNumberSummary.add_member(:phone_number_country_code, Shapes::ShapeRef.new(shape: PhoneNumberCountryCode, location_name: "PhoneNumberCountryCode"))
@@ -2355,6 +2394,13 @@ module Aws::Connect
 
     DescribeAgentStatusResponse.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "AgentStatus"))
     DescribeAgentStatusResponse.struct_class = Types::DescribeAgentStatusResponse
+
+    DescribeAuthenticationProfileRequest.add_member(:authentication_profile_id, Shapes::ShapeRef.new(shape: AuthenticationProfileId, required: true, location: "uri", location_name: "AuthenticationProfileId"))
+    DescribeAuthenticationProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeAuthenticationProfileRequest.struct_class = Types::DescribeAuthenticationProfileRequest
+
+    DescribeAuthenticationProfileResponse.add_member(:authentication_profile, Shapes::ShapeRef.new(shape: AuthenticationProfile, location_name: "AuthenticationProfile"))
+    DescribeAuthenticationProfileResponse.struct_class = Types::DescribeAuthenticationProfileResponse
 
     DescribeContactEvaluationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeContactEvaluationRequest.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationId"))
@@ -3290,6 +3336,8 @@ module Aws::Connect
 
     InvisibleTaskTemplateFields.member = Shapes::ShapeRef.new(shape: InvisibleFieldInfo)
 
+    IpCidrList.member = Shapes::ShapeRef.new(shape: IpCidr)
+
     KinesisFirehoseConfig.add_member(:firehose_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "FirehoseArn"))
     KinesisFirehoseConfig.struct_class = Types::KinesisFirehoseConfig
 
@@ -3347,6 +3395,15 @@ module Aws::Connect
     ListApprovedOriginsResponse.add_member(:origins, Shapes::ShapeRef.new(shape: OriginsList, location_name: "Origins"))
     ListApprovedOriginsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListApprovedOriginsResponse.struct_class = Types::ListApprovedOriginsResponse
+
+    ListAuthenticationProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListAuthenticationProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListAuthenticationProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAuthenticationProfilesRequest.struct_class = Types::ListAuthenticationProfilesRequest
+
+    ListAuthenticationProfilesResponse.add_member(:authentication_profile_summary_list, Shapes::ShapeRef.new(shape: AuthenticationProfileSummaryList, location_name: "AuthenticationProfileSummaryList"))
+    ListAuthenticationProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAuthenticationProfilesResponse.struct_class = Types::ListAuthenticationProfilesResponse
 
     ListBotsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListBotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -5072,6 +5129,15 @@ module Aws::Connect
     UpdateAgentStatusRequest.add_member(:reset_order_number, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetOrderNumber"))
     UpdateAgentStatusRequest.struct_class = Types::UpdateAgentStatusRequest
 
+    UpdateAuthenticationProfileRequest.add_member(:authentication_profile_id, Shapes::ShapeRef.new(shape: AuthenticationProfileId, required: true, location: "uri", location_name: "AuthenticationProfileId"))
+    UpdateAuthenticationProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateAuthenticationProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: AuthenticationProfileName, location_name: "Name"))
+    UpdateAuthenticationProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: AuthenticationProfileDescription, location_name: "Description"))
+    UpdateAuthenticationProfileRequest.add_member(:allowed_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "AllowedIps"))
+    UpdateAuthenticationProfileRequest.add_member(:blocked_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "BlockedIps"))
+    UpdateAuthenticationProfileRequest.add_member(:periodic_session_duration, Shapes::ShapeRef.new(shape: AccessTokenDuration, location_name: "PeriodicSessionDuration", metadata: {"box"=>true}))
+    UpdateAuthenticationProfileRequest.struct_class = Types::UpdateAuthenticationProfileRequest
+
     UpdateCaseActionDefinition.add_member(:fields, Shapes::ShapeRef.new(shape: FieldValues, required: true, location_name: "Fields"))
     UpdateCaseActionDefinition.struct_class = Types::UpdateCaseActionDefinition
 
@@ -6633,6 +6699,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:describe_authentication_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAuthenticationProfile"
+        o.http_method = "GET"
+        o.http_request_uri = "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAuthenticationProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAuthenticationProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:describe_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeContact"
         o.http_method = "GET"
@@ -7339,6 +7418,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_authentication_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAuthenticationProfiles"
+        o.http_method = "GET"
+        o.http_request_uri = "/authentication-profiles-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListAuthenticationProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAuthenticationProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -8738,6 +8836,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_authentication_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAuthenticationProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/authentication-profiles/{InstanceId}/{AuthenticationProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAuthenticationProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)

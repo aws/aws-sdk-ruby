@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-07-01)
+------------------
+
+* Feature - Updates EKS managed node groups to support EC2 Capacity Blocks for ML
+
 1.108.0 (2024-06-26)
 ------------------
 

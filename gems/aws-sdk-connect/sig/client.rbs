@@ -1210,6 +1210,17 @@ module Aws
                                  ) -> _DescribeAgentStatusResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAgentStatusResponseSuccess
 
+      interface _DescribeAuthenticationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAuthenticationProfileResponse]
+        def authentication_profile: () -> Types::AuthenticationProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_authentication_profile-instance_method
+      def describe_authentication_profile: (
+                                             authentication_profile_id: ::String,
+                                             instance_id: ::String
+                                           ) -> _DescribeAuthenticationProfileResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAuthenticationProfileResponseSuccess
+
       interface _DescribeContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContactResponse]
         def contact: () -> Types::Contact
@@ -1895,6 +1906,19 @@ module Aws
                                    ?max_results: ::Integer
                                  ) -> _ListApprovedOriginsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApprovedOriginsResponseSuccess
+
+      interface _ListAuthenticationProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAuthenticationProfilesResponse]
+        def authentication_profile_summary_list: () -> ::Array[Types::AuthenticationProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_authentication_profiles-instance_method
+      def list_authentication_profiles: (
+                                          instance_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListAuthenticationProfilesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAuthenticationProfilesResponseSuccess
 
       interface _ListBotsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBotsResponse]
@@ -3521,6 +3545,18 @@ module Aws
                                  ?reset_order_number: bool
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_authentication_profile-instance_method
+      def update_authentication_profile: (
+                                           authentication_profile_id: ::String,
+                                           instance_id: ::String,
+                                           ?name: ::String,
+                                           ?description: ::String,
+                                           ?allowed_ips: Array[::String],
+                                           ?blocked_ips: Array[::String],
+                                           ?periodic_session_duration: ::Integer
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UpdateContactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactResponse]

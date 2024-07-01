@@ -29,6 +29,7 @@ module Aws::PaymentCryptography
     DeleteKeyInput = Shapes::StructureShape.new(name: 'DeleteKeyInput')
     DeleteKeyInputDeleteKeyInDaysInteger = Shapes::IntegerShape.new(name: 'DeleteKeyInputDeleteKeyInDaysInteger')
     DeleteKeyOutput = Shapes::StructureShape.new(name: 'DeleteKeyOutput')
+    EvenHexLengthBetween16And32 = Shapes::StringShape.new(name: 'EvenHexLengthBetween16And32')
     ExportAttributes = Shapes::StructureShape.new(name: 'ExportAttributes')
     ExportDukptInitialKey = Shapes::StructureShape.new(name: 'ExportDukptInitialKey')
     ExportKeyCryptogram = Shapes::StructureShape.new(name: 'ExportKeyCryptogram')
@@ -48,7 +49,6 @@ module Aws::PaymentCryptography
     GetParametersForImportOutput = Shapes::StructureShape.new(name: 'GetParametersForImportOutput')
     GetPublicKeyCertificateInput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateInput')
     GetPublicKeyCertificateOutput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateOutput')
-    HexLength16 = Shapes::StringShape.new(name: 'HexLength16')
     HexLength20Or24 = Shapes::StringShape.new(name: 'HexLength20Or24')
     ImportKeyCryptogram = Shapes::StructureShape.new(name: 'ImportKeyCryptogram')
     ImportKeyInput = Shapes::StructureShape.new(name: 'ImportKeyInput')
@@ -203,7 +203,7 @@ module Aws::PaymentCryptography
     ExportTr34KeyBlock.add_member(:wrapping_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "WrappingKeyCertificate"))
     ExportTr34KeyBlock.add_member(:export_token, Shapes::ShapeRef.new(shape: ExportTokenId, required: true, location_name: "ExportToken"))
     ExportTr34KeyBlock.add_member(:key_block_format, Shapes::ShapeRef.new(shape: Tr34KeyBlockFormat, required: true, location_name: "KeyBlockFormat"))
-    ExportTr34KeyBlock.add_member(:random_nonce, Shapes::ShapeRef.new(shape: HexLength16, location_name: "RandomNonce"))
+    ExportTr34KeyBlock.add_member(:random_nonce, Shapes::ShapeRef.new(shape: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
     ExportTr34KeyBlock.add_member(:key_block_headers, Shapes::ShapeRef.new(shape: KeyBlockHeaders, location_name: "KeyBlockHeaders"))
     ExportTr34KeyBlock.struct_class = Types::ExportTr34KeyBlock
 
@@ -287,7 +287,7 @@ module Aws::PaymentCryptography
     ImportTr34KeyBlock.add_member(:import_token, Shapes::ShapeRef.new(shape: ImportTokenId, required: true, location_name: "ImportToken"))
     ImportTr34KeyBlock.add_member(:wrapped_key_block, Shapes::ShapeRef.new(shape: Tr34WrappedKeyBlock, required: true, location_name: "WrappedKeyBlock"))
     ImportTr34KeyBlock.add_member(:key_block_format, Shapes::ShapeRef.new(shape: Tr34KeyBlockFormat, required: true, location_name: "KeyBlockFormat"))
-    ImportTr34KeyBlock.add_member(:random_nonce, Shapes::ShapeRef.new(shape: HexLength16, location_name: "RandomNonce"))
+    ImportTr34KeyBlock.add_member(:random_nonce, Shapes::ShapeRef.new(shape: EvenHexLengthBetween16And32, location_name: "RandomNonce"))
     ImportTr34KeyBlock.struct_class = Types::ImportTr34KeyBlock
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -454,9 +454,11 @@ module Aws::PaymentCryptography
 
       api.metadata = {
         "apiVersion" => "2021-09-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "controlplane.payment-cryptography",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Payment Cryptography Control Plane",
         "serviceId" => "Payment Cryptography",
         "signatureVersion" => "v4",

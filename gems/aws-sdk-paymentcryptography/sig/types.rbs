@@ -240,7 +240,7 @@ module Aws::PaymentCryptography
     class ImportTr31KeyBlock
       attr_accessor wrapping_key_identifier: ::String
       attr_accessor wrapped_key_block: ::String
-      SENSITIVE: []
+      SENSITIVE: [:wrapped_key_block]
     end
 
     class ImportTr34KeyBlock

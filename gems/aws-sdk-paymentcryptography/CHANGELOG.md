@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-07-01)
+------------------
+
+* Feature - Added further restrictions on logging of potentially sensitive inputs and outputs.
+
 1.16.0 (2024-06-25)
 ------------------
 

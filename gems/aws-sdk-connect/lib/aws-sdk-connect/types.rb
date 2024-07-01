@@ -1238,6 +1238,169 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
+    #
+    # Information about an authentication profile. An authentication profile
+    # is a resource that stores the authentication settings for users in
+    # your contact center. You use authentication profiles to set up IP
+    # address range restrictions and session timeouts. For more information,
+    # see [Set IP address restrictions or session timeouts][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_ips
+    #   A list of IP address range strings that are allowed to access the
+    #   Amazon Connect instance. For more information about how to configure
+    #   IP addresses, see [Configure IP address based access control][1] in
+    #   the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] blocked_ips
+    #   A list of IP address range strings that are blocked from accessing
+    #   the Amazon Connect instance. For more information about how to
+    #   configure IP addresses, see [Configure IP address based access
+    #   control][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_default
+    #   Shows whether the authentication profile is the default
+    #   authentication profile for the Amazon Connect instance. The default
+    #   authentication profile applies to all agents in an Amazon Connect
+    #   instance, unless overridden by another authentication profile.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the authentication profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the authentication profile was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the authentication profile was
+    #   last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] periodic_session_duration
+    #   The short lived session duration configuration for users logged in
+    #   to Amazon Connect, in minutes. This value determines the maximum
+    #   possible time before an agent is authenticated. For more
+    #   information, see [Configure the session duration][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_session_duration
+    #   The long lived session duration for users logged in to Amazon
+    #   Connect, in minutes. After this time period, users must log in
+    #   again. For more information, see [Configure the session duration][1]
+    #   in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AuthenticationProfile AWS API Documentation
+    #
+    class AuthenticationProfile < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :allowed_ips,
+      :blocked_ips,
+      :is_default,
+      :created_time,
+      :last_modified_time,
+      :last_modified_region,
+      :periodic_session_duration,
+      :max_session_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
+    #
+    # A summary of a given authentication profile.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the authentication profile
+    #   summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the authentication profile summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Shows whether the authentication profile is the default
+    #   authentication profile for the Amazon Connect instance. The default
+    #   authentication profile applies to all agents in an Amazon Connect
+    #   instance, unless overridden by another authentication profile.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the authentication profile summary was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region when the authentication profile
+    #   summary was last modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AuthenticationProfileSummary AWS API Documentation
+    #
+    class AuthenticationProfileSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :is_default,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about available phone numbers.
     #
     # @!attribute [rw] phone_number
@@ -1830,7 +1993,7 @@ module Aws::Connect
     # Request to CompleteAttachedFileUpload API
     #
     # @!attribute [rw] instance_id
-    #   The unique identifier of the Connect instance.
+    #   The unique identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] file_id
@@ -5375,6 +5538,40 @@ module Aws::Connect
     #
     class DescribeAgentStatusResponse < Struct.new(
       :agent_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authentication_profile_id
+    #   A unique identifier for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAuthenticationProfileRequest AWS API Documentation
+    #
+    class DescribeAuthenticationProfileRequest < Struct.new(
+      :authentication_profile_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authentication_profile
+    #   The authentication profile object being described.
+    #   @return [Types::AuthenticationProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAuthenticationProfileResponse AWS API Documentation
+    #
+    class DescribeAuthenticationProfileResponse < Struct.new(
+      :authentication_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11553,6 +11750,53 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAuthenticationProfilesRequest AWS API Documentation
+    #
+    class ListAuthenticationProfilesRequest < Struct.new(
+      :instance_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authentication_profile_summary_list
+    #   A summary of a given authentication profile.
+    #   @return [Array<Types::AuthenticationProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAuthenticationProfilesResponse AWS API Documentation
+    #
+    class ListAuthenticationProfilesResponse < Struct.new(
+      :authentication_profile_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -16930,7 +17174,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_flows
-    #   Information about the contact flows.
+    #   Information about the flows.
     #   @return [Array<Types::ContactFlow>]
     #
     # @!attribute [rw] next_token
@@ -18266,7 +18510,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The unique identifier of the Connect instance.
+    #   The unique identifier of the Amazon Connect instance.
     #   @return [String]
     #
     # @!attribute [rw] file_name
@@ -19004,10 +19248,9 @@ module Aws::Connect
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for the call. To see the ContactFlowId in
     #   the Amazon Connect admin website, on the navigation menu go to
-    #   **Routing**, **Contact Flows**. Choose the flow. On the flow page,
-    #   under the name of the flow, choose **Show additional flow
-    #   information**. The ContactFlowId is the last part of the ARN, shown
-    #   here in bold:
+    #   **Routing**, **Flows**. Choose the flow. On the flow page, under the
+    #   name of the flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
@@ -20176,6 +20419,77 @@ module Aws::Connect
       :state,
       :display_order,
       :reset_order_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authentication_profile_id
+    #   A unique identifier for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the authentication profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_ips
+    #   A list of IP address range strings that are allowed to access the
+    #   instance. For more information on how to configure IP addresses,
+    #   see[Configure session timeouts][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] blocked_ips
+    #   A list of IP address range strings that are blocked from accessing
+    #   the instance. For more information on how to configure IP addresses,
+    #   For more information on how to configure IP addresses, see
+    #   [Configure IP-based access control][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] periodic_session_duration
+    #   The short lived session duration configuration for users logged in
+    #   to Amazon Connect, in minutes. This value determines the maximum
+    #   possible time before an agent is authenticated. For more
+    #   information, For more information on how to configure IP addresses,
+    #   see [Configure session timeouts][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateAuthenticationProfileRequest AWS API Documentation
+    #
+    class UpdateAuthenticationProfileRequest < Struct.new(
+      :authentication_profile_id,
+      :instance_id,
+      :name,
+      :description,
+      :allowed_ips,
+      :blocked_ips,
+      :periodic_session_duration)
       SENSITIVE = []
       include Aws::Structure
     end

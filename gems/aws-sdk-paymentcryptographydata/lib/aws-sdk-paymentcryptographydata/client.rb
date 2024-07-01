@@ -466,15 +466,23 @@ module Aws::PaymentCryptographyData
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
+    # @option params [required, String] :key_identifier
+    #   The `keyARN` of the encryption key that Amazon Web Services Payment
+    #   Cryptography uses for ciphertext decryption.
+    #
+    #   When a WrappedKeyBlock is provided, this value will be the identifier
+    #   to the key wrapping key. Otherwise, it is the key identifier used to
+    #   perform the operation.
+    #
     # @option params [required, String] :cipher_text
     #   The ciphertext to decrypt.
     #
     # @option params [required, Types::EncryptionDecryptionAttributes] :decryption_attributes
     #   The encryption key type and attributes for ciphertext decryption.
     #
-    # @option params [required, String] :key_identifier
-    #   The `keyARN` of the encryption key that Amazon Web Services Payment
-    #   Cryptography uses for ciphertext decryption.
+    # @option params [Types::WrappedKey] :wrapped_key
+    #   The WrappedKeyBlock containing the encryption key for ciphertext
+    #   decryption.
     #
     # @return [Types::DecryptDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -485,33 +493,39 @@ module Aws::PaymentCryptographyData
     # @example Request syntax with placeholder values
     #
     #   resp = client.decrypt_data({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
     #     cipher_text: "HexEvenLengthBetween16And4096", # required
     #     decryption_attributes: { # required
+    #       symmetric: {
+    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
+    #         initialization_vector: "HexLength16Or32",
+    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
+    #       },
     #       asymmetric: {
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         initialization_vector: "HexLength16Or32",
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #         mode: "ECB", # accepts ECB, CBC
     #       },
     #       emv: {
-    #         initialization_vector: "HexLength16Or32",
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         mode: "ECB", # accepts ECB, CBC
-    #         pan_sequence_number: "HexLengthEquals2", # required
     #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
     #         session_derivation_data: "HexLengthEquals16", # required
-    #       },
-    #       symmetric: {
+    #         mode: "ECB", # accepts ECB, CBC
     #         initialization_vector: "HexLength16Or32",
-    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #     },
-    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     wrapped_key: {
+    #       wrapped_key_material: { # required
+    #         tr_31_key_block: "Tr31WrappedKeyBlock",
+    #       },
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     },
     #   })
     #
     # @example Response structure
@@ -586,12 +600,13 @@ module Aws::PaymentCryptographyData
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
     #
-    # @option params [required, Types::EncryptionDecryptionAttributes] :encryption_attributes
-    #   The encryption key type and attributes for plaintext encryption.
-    #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
     #   Cryptography uses for plaintext encryption.
+    #
+    #   When a WrappedKeyBlock is provided, this value will be the identifier
+    #   to the key wrapping key. Otherwise, it is the key identifier used to
+    #   perform the operation.
     #
     # @option params [required, String] :plain_text
     #   The plaintext to be encrypted.
@@ -608,49 +623,62 @@ module Aws::PaymentCryptographyData
     #
     #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
     #
+    # @option params [required, Types::EncryptionDecryptionAttributes] :encryption_attributes
+    #   The encryption key type and attributes for plaintext encryption.
+    #
+    # @option params [Types::WrappedKey] :wrapped_key
+    #   The WrappedKeyBlock containing the encryption key for plaintext
+    #   encryption.
+    #
     # @return [Types::EncryptDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::EncryptDataOutput#cipher_text #cipher_text} => String
     #   * {Types::EncryptDataOutput#key_arn #key_arn} => String
     #   * {Types::EncryptDataOutput#key_check_value #key_check_value} => String
+    #   * {Types::EncryptDataOutput#cipher_text #cipher_text} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.encrypt_data({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     plain_text: "HexEvenLengthBetween16And4064", # required
     #     encryption_attributes: { # required
+    #       symmetric: {
+    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
+    #         initialization_vector: "HexLength16Or32",
+    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
+    #       },
     #       asymmetric: {
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         initialization_vector: "HexLength16Or32",
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #         mode: "ECB", # accepts ECB, CBC
     #       },
     #       emv: {
-    #         initialization_vector: "HexLength16Or32",
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         mode: "ECB", # accepts ECB, CBC
-    #         pan_sequence_number: "HexLengthEquals2", # required
     #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
     #         session_derivation_data: "HexLengthEquals16", # required
-    #       },
-    #       symmetric: {
+    #         mode: "ECB", # accepts ECB, CBC
     #         initialization_vector: "HexLength16Or32",
-    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #     },
-    #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     plain_text: "HexEvenLengthBetween16And4064", # required
+    #     wrapped_key: {
+    #       wrapped_key_material: { # required
+    #         tr_31_key_block: "Tr31WrappedKeyBlock",
+    #       },
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.cipher_text #=> String
     #   resp.key_arn #=> String
     #   resp.key_check_value #=> String
+    #   resp.cipher_text #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/EncryptData AWS API Documentation
     #
@@ -699,10 +727,6 @@ module Aws::PaymentCryptographyData
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
-    # @option params [required, Types::CardGenerationAttributes] :generation_attributes
-    #   The algorithm for generating CVV or CSC values for the card within
-    #   Amazon Web Services Payment Cryptography.
-    #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the CVK encryption key that Amazon Web Services
     #   Payment Cryptography uses to generate card data.
@@ -711,6 +735,10 @@ module Aws::PaymentCryptographyData
     #   The Primary Account Number (PAN), a unique identifier for a payment
     #   credit or debit card that associates the card with a specific account
     #   holder.
+    #
+    # @option params [required, Types::CardGenerationAttributes] :generation_attributes
+    #   The algorithm for generating CVV or CSC values for the card within
+    #   Amazon Web Services Payment Cryptography.
     #
     # @option params [Integer] :validation_data_length
     #   The length of the CVV or CSC to be generated. The default value is 3.
@@ -724,6 +752,8 @@ module Aws::PaymentCryptographyData
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_card_validation_data({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     primary_account_number: "NumberLengthBetween12And19", # required
     #     generation_attributes: { # required
     #       amex_card_security_code_version_1: {
     #         card_expiry_date: "NumberLengthEquals4", # required
@@ -732,11 +762,6 @@ module Aws::PaymentCryptographyData
     #         card_expiry_date: "NumberLengthEquals4", # required
     #         service_code: "NumberLengthEquals3", # required
     #       },
-    #       card_holder_verification_value: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         unpredictable_number: "HexLengthBetween2And8", # required
-    #       },
     #       card_verification_value_1: {
     #         card_expiry_date: "NumberLengthEquals4", # required
     #         service_code: "NumberLengthEquals3", # required
@@ -744,21 +769,24 @@ module Aws::PaymentCryptographyData
     #       card_verification_value_2: {
     #         card_expiry_date: "NumberLengthEquals4", # required
     #       },
-    #       dynamic_card_verification_code: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         track_data: "HexLengthBetween2And160", # required
+    #       card_holder_verification_value: {
     #         unpredictable_number: "HexLengthBetween2And8", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #       },
+    #       dynamic_card_verification_code: {
+    #         unpredictable_number: "HexLengthBetween2And8", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         track_data: "HexLengthBetween2And160", # required
     #       },
     #       dynamic_card_verification_value: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
     #         card_expiry_date: "NumberLengthEquals4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
     #         service_code: "NumberLengthEquals3", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #     },
-    #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     primary_account_number: "NumberLengthBetween12And19", # required
     #     validation_data_length: 1,
     #   })
     #
@@ -813,19 +841,19 @@ module Aws::PaymentCryptographyData
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
-    # @option params [required, Types::MacAttributes] :generation_attributes
-    #   The attributes and data values to use for MAC generation within Amazon
-    #   Web Services Payment Cryptography.
-    #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the MAC generation encryption key.
-    #
-    # @option params [Integer] :mac_length
-    #   The length of a MAC under generation.
     #
     # @option params [required, String] :message_data
     #   The data for which a MAC is under generation. This value must be
     #   hexBinary.
+    #
+    # @option params [required, Types::MacAttributes] :generation_attributes
+    #   The attributes and data values to use for MAC generation within Amazon
+    #   Web Services Payment Cryptography.
+    #
+    # @option params [Integer] :mac_length
+    #   The length of a MAC under generation.
     #
     # @return [Types::GenerateMacOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -836,37 +864,37 @@ module Aws::PaymentCryptographyData
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_mac({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     message_data: "HexEvenLengthBetween2And4096", # required
     #     generation_attributes: { # required
     #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
-    #       dukpt_cmac: {
-    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #       },
-    #       dukpt_iso_9797_algorithm_1: {
-    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #       },
-    #       dukpt_iso_9797_algorithm_3: {
-    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #       },
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         pan_sequence_number: "HexLengthEquals2", # required
     #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
     #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
     #         session_key_derivation_value: { # required
     #           application_cryptogram: "HexLengthEquals16",
     #           application_transaction_counter: "HexLengthBetween2And4",
     #         },
     #       },
+    #       dukpt_iso_9797_algorithm_1: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       },
+    #       dukpt_iso_9797_algorithm_3: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       },
+    #       dukpt_cmac: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       },
     #     },
-    #     key_identifier: "KeyArnOrKeyAliasType", # required
     #     mac_length: 1,
-    #     message_data: "HexEvenLengthBetween2And4096", # required
     #   })
     #
     # @example Response structure
@@ -918,6 +946,10 @@ module Aws::PaymentCryptographyData
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
+    # @option params [required, String] :generation_key_identifier
+    #   The `keyARN` of the PEK that Amazon Web Services Payment Cryptography
+    #   uses for pin data generation.
+    #
     # @option params [required, String] :encryption_key_identifier
     #   The `keyARN` of the PEK that Amazon Web Services Payment Cryptography
     #   uses to encrypt the PIN Block.
@@ -926,9 +958,13 @@ module Aws::PaymentCryptographyData
     #   The attributes and values to use for PIN, PVV, or PIN Offset
     #   generation.
     #
-    # @option params [required, String] :generation_key_identifier
-    #   The `keyARN` of the PEK that Amazon Web Services Payment Cryptography
-    #   uses for pin data generation.
+    # @option params [Integer] :pin_data_length
+    #   The length of PIN under generation.
+    #
+    # @option params [required, String] :primary_account_number
+    #   The Primary Account Number (PAN), a unique identifier for a payment
+    #   credit or debit card that associates the card with a specific account
+    #   holder.
     #
     # @option params [required, String] :pin_block_format
     #   The PIN encoding format for pin data generation as specified in ISO
@@ -942,50 +978,21 @@ module Aws::PaymentCryptographyData
     #   The `ISO_Format_3` PIN block format is the same as `ISO_Format_0`
     #   except that the fill digits are random values from 10 to 15.
     #
-    # @option params [Integer] :pin_data_length
-    #   The length of PIN under generation.
-    #
-    # @option params [required, String] :primary_account_number
-    #   The Primary Account Number (PAN), a unique identifier for a payment
-    #   credit or debit card that associates the card with a specific account
-    #   holder.
-    #
     # @return [Types::GeneratePinDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GeneratePinDataOutput#encrypted_pin_block #encrypted_pin_block} => String
-    #   * {Types::GeneratePinDataOutput#encryption_key_arn #encryption_key_arn} => String
-    #   * {Types::GeneratePinDataOutput#encryption_key_check_value #encryption_key_check_value} => String
     #   * {Types::GeneratePinDataOutput#generation_key_arn #generation_key_arn} => String
     #   * {Types::GeneratePinDataOutput#generation_key_check_value #generation_key_check_value} => String
+    #   * {Types::GeneratePinDataOutput#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::GeneratePinDataOutput#encryption_key_check_value #encryption_key_check_value} => String
+    #   * {Types::GeneratePinDataOutput#encrypted_pin_block #encrypted_pin_block} => String
     #   * {Types::GeneratePinDataOutput#pin_data #pin_data} => Types::PinData
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.generate_pin_data({
+    #     generation_key_identifier: "KeyArnOrKeyAliasType", # required
     #     encryption_key_identifier: "KeyArnOrKeyAliasType", # required
     #     generation_attributes: { # required
-    #       ibm_3624_natural_pin: {
-    #         decimalization_table: "NumberLengthEquals16", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
-    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #       },
-    #       ibm_3624_pin_from_offset: {
-    #         decimalization_table: "NumberLengthEquals16", # required
-    #         pin_offset: "NumberLengthBetween4And12", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
-    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #       },
-    #       ibm_3624_pin_offset: {
-    #         decimalization_table: "NumberLengthEquals16", # required
-    #         encrypted_pin_block: "HexLengthBetween16And32", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
-    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #       },
-    #       ibm_3624_random_pin: {
-    #         decimalization_table: "NumberLengthEquals16", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
-    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #       },
     #       visa_pin: {
     #         pin_verification_key_index: 1, # required
     #       },
@@ -993,20 +1000,41 @@ module Aws::PaymentCryptographyData
     #         encrypted_pin_block: "HexLengthBetween16And32", # required
     #         pin_verification_key_index: 1, # required
     #       },
+    #       ibm_3624_pin_offset: {
+    #         encrypted_pin_block: "HexLengthBetween16And32", # required
+    #         decimalization_table: "NumberLengthEquals16", # required
+    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
+    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #       },
+    #       ibm_3624_natural_pin: {
+    #         decimalization_table: "NumberLengthEquals16", # required
+    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
+    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #       },
+    #       ibm_3624_random_pin: {
+    #         decimalization_table: "NumberLengthEquals16", # required
+    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
+    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #       },
+    #       ibm_3624_pin_from_offset: {
+    #         decimalization_table: "NumberLengthEquals16", # required
+    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
+    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #         pin_offset: "NumberLengthBetween4And12", # required
+    #       },
     #     },
-    #     generation_key_identifier: "KeyArnOrKeyAliasType", # required
-    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3
     #     pin_data_length: 1,
     #     primary_account_number: "NumberLengthBetween12And19", # required
+    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3
     #   })
     #
     # @example Response structure
     #
-    #   resp.encrypted_pin_block #=> String
-    #   resp.encryption_key_arn #=> String
-    #   resp.encryption_key_check_value #=> String
     #   resp.generation_key_arn #=> String
     #   resp.generation_key_check_value #=> String
+    #   resp.encryption_key_arn #=> String
+    #   resp.encryption_key_check_value #=> String
+    #   resp.encrypted_pin_block #=> String
     #   resp.pin_data.pin_offset #=> String
     #   resp.pin_data.verification_value #=> String
     #
@@ -1019,24 +1047,19 @@ module Aws::PaymentCryptographyData
       req.send_request(options)
     end
 
-    # Re-encrypt ciphertext using DUKPT, Symmetric and Asymmetric Data
-    # Encryption Keys.
+    # Re-encrypt ciphertext using DUKPT or Symmetric data encryption keys.
     #
     # You can either generate an encryption key within Amazon Web Services
     # Payment Cryptography by calling [CreateKey][1] or import your own
     # encryption key by calling [ImportKey][2]. The `KeyArn` for use with
     # this operation must be in a compatible key state with `KeyModesOfUse`
-    # set to `Encrypt`. In asymmetric encryption, ciphertext is encrypted
-    # using public component (imported by calling [ImportKey][2]) of the
-    # asymmetric key pair created outside of Amazon Web Services Payment
-    # Cryptography.
+    # set to `Encrypt`.
     #
     # For symmetric and DUKPT encryption, Amazon Web Services Payment
-    # Cryptography supports `TDES` and `AES` algorithms. For asymmetric
-    # encryption, Amazon Web Services Payment Cryptography supports `RSA`.
-    # To encrypt using DUKPT, a DUKPT key must already exist within your
-    # account with `KeyModesOfUse` set to `DeriveKey` or a new DUKPT can be
-    # generated by calling [CreateKey][1].
+    # Cryptography supports `TDES` and `AES` algorithms. To encrypt using
+    # DUKPT, a DUKPT key must already exist within your account with
+    # `KeyModesOfUse` set to `DeriveKey` or a new DUKPT can be generated by
+    # calling [CreateKey][1].
     #
     # For information about valid keys for this operation, see
     # [Understanding key attributes][3] and [Key types for specific data
@@ -1064,6 +1087,17 @@ module Aws::PaymentCryptographyData
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
     #
+    # @option params [required, String] :incoming_key_identifier
+    #   The `keyARN` of the encryption key of incoming ciphertext data.
+    #
+    #   When a WrappedKeyBlock is provided, this value will be the identifier
+    #   to the key wrapping key. Otherwise, it is the key identifier used to
+    #   perform the operation.
+    #
+    # @option params [required, String] :outgoing_key_identifier
+    #   The `keyARN` of the encryption key of outgoing ciphertext data after
+    #   encryption by Amazon Web Services Payment Cryptography.
+    #
     # @option params [required, String] :cipher_text
     #   Ciphertext to be encrypted. The minimum allowed length is 16 bytes and
     #   maximum allowed length is 4096 bytes.
@@ -1071,64 +1105,78 @@ module Aws::PaymentCryptographyData
     # @option params [required, Types::ReEncryptionAttributes] :incoming_encryption_attributes
     #   The attributes and values for incoming ciphertext.
     #
-    # @option params [required, String] :incoming_key_identifier
-    #   The `keyARN` of the encryption key of incoming ciphertext data.
-    #
     # @option params [required, Types::ReEncryptionAttributes] :outgoing_encryption_attributes
     #   The attributes and values for outgoing ciphertext data after
     #   encryption by Amazon Web Services Payment Cryptography.
     #
-    # @option params [required, String] :outgoing_key_identifier
-    #   The `keyARN` of the encryption key of outgoing ciphertext data after
-    #   encryption by Amazon Web Services Payment Cryptography.
+    # @option params [Types::WrappedKey] :incoming_wrapped_key
+    #   The WrappedKeyBlock containing the encryption key of incoming
+    #   ciphertext data.
+    #
+    # @option params [Types::WrappedKey] :outgoing_wrapped_key
+    #   The WrappedKeyBlock containing the encryption key of outgoing
+    #   ciphertext data after encryption by Amazon Web Services Payment
+    #   Cryptography.
     #
     # @return [Types::ReEncryptDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ReEncryptDataOutput#cipher_text #cipher_text} => String
     #   * {Types::ReEncryptDataOutput#key_arn #key_arn} => String
     #   * {Types::ReEncryptDataOutput#key_check_value #key_check_value} => String
+    #   * {Types::ReEncryptDataOutput#cipher_text #cipher_text} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.re_encrypt_data({
+    #     incoming_key_identifier: "KeyArnOrKeyAliasType", # required
+    #     outgoing_key_identifier: "KeyArnOrKeyAliasType", # required
     #     cipher_text: "HexEvenLengthBetween16And4096", # required
     #     incoming_encryption_attributes: { # required
+    #       symmetric: {
+    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
+    #         initialization_vector: "HexLength16Or32",
+    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
+    #       },
     #       dukpt: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         initialization_vector: "HexLength16Or32",
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #         mode: "ECB", # accepts ECB, CBC
-    #       },
-    #       symmetric: {
-    #         initialization_vector: "HexLength16Or32",
-    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #     },
-    #     incoming_key_identifier: "KeyArnOrKeyAliasType", # required
     #     outgoing_encryption_attributes: { # required
+    #       symmetric: {
+    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
+    #         initialization_vector: "HexLength16Or32",
+    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
+    #       },
     #       dukpt: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
     #         initialization_vector: "HexLength16Or32",
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #         mode: "ECB", # accepts ECB, CBC
-    #       },
-    #       symmetric: {
-    #         initialization_vector: "HexLength16Or32",
-    #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #     },
-    #     outgoing_key_identifier: "KeyArnOrKeyAliasType", # required
+    #     incoming_wrapped_key: {
+    #       wrapped_key_material: { # required
+    #         tr_31_key_block: "Tr31WrappedKeyBlock",
+    #       },
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     },
+    #     outgoing_wrapped_key: {
+    #       wrapped_key_material: { # required
+    #         tr_31_key_block: "Tr31WrappedKeyBlock",
+    #       },
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.cipher_text #=> String
     #   resp.key_arn #=> String
     #   resp.key_check_value #=> String
+    #   resp.cipher_text #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/ReEncryptData AWS API Documentation
     #
@@ -1185,6 +1233,26 @@ module Aws::PaymentCryptographyData
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
+    # @option params [required, String] :incoming_key_identifier
+    #   The `keyARN` of the encryption key under which incoming PIN block data
+    #   is encrypted. This key type can be PEK or BDK.
+    #
+    #   When a WrappedKeyBlock is provided, this value will be the identifier
+    #   to the key wrapping key for PIN block. Otherwise, it is the key
+    #   identifier used to perform the operation.
+    #
+    # @option params [required, String] :outgoing_key_identifier
+    #   The `keyARN` of the encryption key for encrypting outgoing PIN block
+    #   data. This key type can be PEK or BDK.
+    #
+    # @option params [required, Types::TranslationIsoFormats] :incoming_translation_attributes
+    #   The format of the incoming PIN block data for translation within
+    #   Amazon Web Services Payment Cryptography.
+    #
+    # @option params [required, Types::TranslationIsoFormats] :outgoing_translation_attributes
+    #   The format of the outgoing PIN block data after translation by Amazon
+    #   Web Services Payment Cryptography.
+    #
     # @option params [required, String] :encrypted_pin_block
     #   The encrypted PIN block data that Amazon Web Services Payment
     #   Cryptography translates.
@@ -1193,42 +1261,29 @@ module Aws::PaymentCryptographyData
     #   The attributes and values to use for incoming DUKPT encryption key for
     #   PIN block translation.
     #
-    # @option params [required, String] :incoming_key_identifier
-    #   The `keyARN` of the encryption key under which incoming PIN block data
-    #   is encrypted. This key type can be PEK or BDK.
-    #
-    # @option params [required, Types::TranslationIsoFormats] :incoming_translation_attributes
-    #   The format of the incoming PIN block data for translation within
-    #   Amazon Web Services Payment Cryptography.
-    #
     # @option params [Types::DukptDerivationAttributes] :outgoing_dukpt_attributes
     #   The attributes and values to use for outgoing DUKPT encryption key
     #   after PIN block translation.
     #
-    # @option params [required, String] :outgoing_key_identifier
-    #   The `keyARN` of the encryption key for encrypting outgoing PIN block
-    #   data. This key type can be PEK or BDK.
+    # @option params [Types::WrappedKey] :incoming_wrapped_key
+    #   The WrappedKeyBlock containing the encryption key under which incoming
+    #   PIN block data is encrypted.
     #
-    # @option params [required, Types::TranslationIsoFormats] :outgoing_translation_attributes
-    #   The format of the outgoing PIN block data after translation by Amazon
-    #   Web Services Payment Cryptography.
+    # @option params [Types::WrappedKey] :outgoing_wrapped_key
+    #   The WrappedKeyBlock containing the encryption key for encrypting
+    #   outgoing PIN block data.
     #
     # @return [Types::TranslatePinDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::TranslatePinDataOutput#pin_block #pin_block} => String
     #   * {Types::TranslatePinDataOutput#key_arn #key_arn} => String
     #   * {Types::TranslatePinDataOutput#key_check_value #key_check_value} => String
-    #   * {Types::TranslatePinDataOutput#pin_block #pin_block} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.translate_pin_data({
-    #     encrypted_pin_block: "HexEvenLengthBetween16And32", # required
-    #     incoming_dukpt_attributes: {
-    #       dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #       dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #       key_serial_number: "HexLengthBetween10And24", # required
-    #     },
     #     incoming_key_identifier: "KeyArnOrKeyAliasType", # required
+    #     outgoing_key_identifier: "KeyArnOrKeyAliasType", # required
     #     incoming_translation_attributes: { # required
     #       iso_format_0: {
     #         primary_account_number: "NumberLengthBetween12And19", # required
@@ -1242,12 +1297,6 @@ module Aws::PaymentCryptographyData
     #         primary_account_number: "NumberLengthBetween12And19", # required
     #       },
     #     },
-    #     outgoing_dukpt_attributes: {
-    #       dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #       dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #       key_serial_number: "HexLengthBetween10And24", # required
-    #     },
-    #     outgoing_key_identifier: "KeyArnOrKeyAliasType", # required
     #     outgoing_translation_attributes: { # required
     #       iso_format_0: {
     #         primary_account_number: "NumberLengthBetween12And19", # required
@@ -1261,13 +1310,36 @@ module Aws::PaymentCryptographyData
     #         primary_account_number: "NumberLengthBetween12And19", # required
     #       },
     #     },
+    #     encrypted_pin_block: "HexEvenLengthBetween16And32", # required
+    #     incoming_dukpt_attributes: {
+    #       key_serial_number: "HexLengthBetween10And24", # required
+    #       dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #     },
+    #     outgoing_dukpt_attributes: {
+    #       key_serial_number: "HexLengthBetween10And24", # required
+    #       dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #     },
+    #     incoming_wrapped_key: {
+    #       wrapped_key_material: { # required
+    #         tr_31_key_block: "Tr31WrappedKeyBlock",
+    #       },
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     },
+    #     outgoing_wrapped_key: {
+    #       wrapped_key_material: { # required
+    #         tr_31_key_block: "Tr31WrappedKeyBlock",
+    #       },
+    #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.pin_block #=> String
     #   resp.key_arn #=> String
     #   resp.key_check_value #=> String
-    #   resp.pin_block #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslatePinData AWS API Documentation
     #
@@ -1317,19 +1389,19 @@ module Aws::PaymentCryptographyData
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
+    # @option params [required, String] :key_identifier
+    #   The `keyARN` of the major encryption key that Amazon Web Services
+    #   Payment Cryptography uses for ARQC verification.
+    #
+    # @option params [required, String] :transaction_data
+    #   The transaction data that Amazon Web Services Payment Cryptography
+    #   uses for ARQC verification. The same transaction is used for ARQC
+    #   generation outside of Amazon Web Services Payment Cryptography.
+    #
     # @option params [required, String] :auth_request_cryptogram
     #   The auth request cryptogram imported into Amazon Web Services Payment
     #   Cryptography for ARQC verification using a major encryption key and
     #   transaction data.
-    #
-    # @option params [Types::CryptogramAuthResponse] :auth_response_attributes
-    #   The attributes and values for auth request cryptogram verification.
-    #   These parameters are required in case using ARPC Method 1 or Method 2
-    #   for ARQC verification.
-    #
-    # @option params [required, String] :key_identifier
-    #   The `keyARN` of the major encryption key that Amazon Web Services
-    #   Payment Cryptography uses for ARQC verification.
     #
     # @option params [required, String] :major_key_derivation_mode
     #   The method to use when deriving the major encryption key for ARQC
@@ -1343,21 +1415,50 @@ module Aws::PaymentCryptographyData
     #   attributes were used for ARQC generation outside of Amazon Web
     #   Services Payment Cryptography.
     #
-    # @option params [required, String] :transaction_data
-    #   The transaction data that Amazon Web Services Payment Cryptography
-    #   uses for ARQC verification. The same transaction is used for ARQC
-    #   generation outside of Amazon Web Services Payment Cryptography.
+    # @option params [Types::CryptogramAuthResponse] :auth_response_attributes
+    #   The attributes and values for auth request cryptogram verification.
+    #   These parameters are required in case using ARPC Method 1 or Method 2
+    #   for ARQC verification.
     #
     # @return [Types::VerifyAuthRequestCryptogramOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::VerifyAuthRequestCryptogramOutput#auth_response_value #auth_response_value} => String
     #   * {Types::VerifyAuthRequestCryptogramOutput#key_arn #key_arn} => String
     #   * {Types::VerifyAuthRequestCryptogramOutput#key_check_value #key_check_value} => String
+    #   * {Types::VerifyAuthRequestCryptogramOutput#auth_response_value #auth_response_value} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.verify_auth_request_cryptogram({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     transaction_data: "HexLengthBetween2And1024", # required
     #     auth_request_cryptogram: "HexLengthEquals16", # required
+    #     major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #     session_key_derivation_attributes: { # required
+    #       emv_common: {
+    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #       },
+    #       mastercard: {
+    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         unpredictable_number: "HexLengthBetween2And8", # required
+    #       },
+    #       emv_2000: {
+    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #       },
+    #       amex: {
+    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #       },
+    #       visa: {
+    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #       },
+    #     },
     #     auth_response_attributes: {
     #       arpc_method_1: {
     #         auth_response_code: "HexLengthEquals4", # required
@@ -1367,42 +1468,13 @@ module Aws::PaymentCryptographyData
     #         proprietary_authentication_data: "HexLengthBetween1And16",
     #       },
     #     },
-    #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #     session_key_derivation_attributes: { # required
-    #       amex: {
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         primary_account_number: "NumberLengthBetween12And19", # required
-    #       },
-    #       emv_2000: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         primary_account_number: "NumberLengthBetween12And19", # required
-    #       },
-    #       emv_common: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         primary_account_number: "NumberLengthBetween12And19", # required
-    #       },
-    #       mastercard: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         primary_account_number: "NumberLengthBetween12And19", # required
-    #         unpredictable_number: "HexLengthBetween2And8", # required
-    #       },
-    #       visa: {
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         primary_account_number: "NumberLengthBetween12And19", # required
-    #       },
-    #     },
-    #     transaction_data: "HexLengthBetween2And1024", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.auth_response_value #=> String
     #   resp.key_arn #=> String
     #   resp.key_check_value #=> String
+    #   resp.auth_response_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VerifyAuthRequestCryptogram AWS API Documentation
     #
@@ -1460,13 +1532,13 @@ module Aws::PaymentCryptographyData
     #   credit or debit card that associates the card with a specific account
     #   holder.
     #
-    # @option params [required, String] :validation_data
-    #   The CVV or CSC value for use for card data verification within Amazon
-    #   Web Services Payment Cryptography.
-    #
     # @option params [required, Types::CardVerificationAttributes] :verification_attributes
     #   The algorithm to use for verification of card data within Amazon Web
     #   Services Payment Cryptography.
+    #
+    # @option params [required, String] :validation_data
+    #   The CVV or CSC value for use for card data verification within Amazon
+    #   Web Services Payment Cryptography.
     #
     # @return [Types::VerifyCardValidationDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1478,7 +1550,6 @@ module Aws::PaymentCryptographyData
     #   resp = client.verify_card_validation_data({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
     #     primary_account_number: "NumberLengthBetween12And19", # required
-    #     validation_data: "NumberLengthBetween3And5", # required
     #     verification_attributes: { # required
     #       amex_card_security_code_version_1: {
     #         card_expiry_date: "NumberLengthEquals4", # required
@@ -1487,11 +1558,6 @@ module Aws::PaymentCryptographyData
     #         card_expiry_date: "NumberLengthEquals4", # required
     #         service_code: "NumberLengthEquals3", # required
     #       },
-    #       card_holder_verification_value: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         unpredictable_number: "HexLengthBetween2And8", # required
-    #       },
     #       card_verification_value_1: {
     #         card_expiry_date: "NumberLengthEquals4", # required
     #         service_code: "NumberLengthEquals3", # required
@@ -1499,24 +1565,30 @@ module Aws::PaymentCryptographyData
     #       card_verification_value_2: {
     #         card_expiry_date: "NumberLengthEquals4", # required
     #       },
-    #       discover_dynamic_card_verification_code: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         card_expiry_date: "NumberLengthEquals4", # required
+    #       card_holder_verification_value: {
     #         unpredictable_number: "HexLengthBetween2And8", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #       dynamic_card_verification_code: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
-    #         track_data: "HexLengthBetween2And160", # required
     #         unpredictable_number: "HexLengthBetween2And8", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         track_data: "HexLengthBetween2And160", # required
     #       },
     #       dynamic_card_verification_value: {
-    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
     #         card_expiry_date: "NumberLengthEquals4", # required
-    #         pan_sequence_number: "HexLengthEquals2", # required
     #         service_code: "NumberLengthEquals3", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
+    #       },
+    #       discover_dynamic_card_verification_code: {
+    #         card_expiry_date: "NumberLengthEquals4", # required
+    #         unpredictable_number: "HexLengthBetween2And8", # required
+    #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #     },
+    #     validation_data: "NumberLengthBetween3And5", # required
     #   })
     #
     # @example Response structure
@@ -1565,19 +1637,19 @@ module Aws::PaymentCryptographyData
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
     #   Cryptography uses to verify MAC data.
     #
-    # @option params [required, String] :mac
-    #   The MAC being verified.
-    #
-    # @option params [Integer] :mac_length
-    #   The length of the MAC.
-    #
     # @option params [required, String] :message_data
     #   The data on for which MAC is under verification. This value must be
     #   hexBinary.
     #
+    # @option params [required, String] :mac
+    #   The MAC being verified.
+    #
     # @option params [required, Types::MacAttributes] :verification_attributes
     #   The attributes and data values to use for MAC verification within
     #   Amazon Web Services Payment Cryptography.
+    #
+    # @option params [Integer] :mac_length
+    #   The length of the MAC.
     #
     # @return [Types::VerifyMacOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1588,37 +1660,37 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.verify_mac({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     mac: "HexEvenLengthBetween4And128", # required
-    #     mac_length: 1,
     #     message_data: "HexEvenLengthBetween2And4096", # required
+    #     mac: "HexEvenLengthBetween4And128", # required
     #     verification_attributes: { # required
     #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
-    #       dukpt_cmac: {
-    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #       },
-    #       dukpt_iso_9797_algorithm_1: {
-    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #       },
-    #       dukpt_iso_9797_algorithm_3: {
-    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         key_serial_number: "HexLengthBetween10And24", # required
-    #       },
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         pan_sequence_number: "HexLengthEquals2", # required
     #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
     #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
     #         session_key_derivation_value: { # required
     #           application_cryptogram: "HexLengthEquals16",
     #           application_transaction_counter: "HexLengthBetween2And4",
     #         },
     #       },
+    #       dukpt_iso_9797_algorithm_1: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       },
+    #       dukpt_iso_9797_algorithm_3: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       },
+    #       dukpt_cmac: {
+    #         key_serial_number: "HexLengthBetween10And24", # required
+    #         dukpt_key_variant: "BIDIRECTIONAL", # required, accepts BIDIRECTIONAL, REQUEST, RESPONSE
+    #         dukpt_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #       },
     #     },
+    #     mac_length: 1,
     #   })
     #
     # @example Response structure
@@ -1666,16 +1738,24 @@ module Aws::PaymentCryptographyData
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
     #
-    # @option params [Types::DukptAttributes] :dukpt_attributes
-    #   The attributes and values for the DUKPT encrypted PIN block data.
+    # @option params [required, String] :verification_key_identifier
+    #   The `keyARN` of the PIN verification key.
+    #
+    # @option params [required, String] :encryption_key_identifier
+    #   The `keyARN` of the encryption key under which the PIN block data is
+    #   encrypted. This key type can be PEK or BDK.
+    #
+    # @option params [required, Types::PinVerificationAttributes] :verification_attributes
+    #   The attributes and values for PIN data verification.
     #
     # @option params [required, String] :encrypted_pin_block
     #   The encrypted PIN block data that Amazon Web Services Payment
     #   Cryptography verifies.
     #
-    # @option params [required, String] :encryption_key_identifier
-    #   The `keyARN` of the encryption key under which the PIN block data is
-    #   encrypted. This key type can be PEK or BDK.
+    # @option params [required, String] :primary_account_number
+    #   The Primary Account Number (PAN), a unique identifier for a payment
+    #   credit or debit card that associates the card with a specific account
+    #   holder.
     #
     # @option params [required, String] :pin_block_format
     #   The PIN encoding format for pin data generation as specified in ISO
@@ -1692,57 +1772,49 @@ module Aws::PaymentCryptographyData
     # @option params [Integer] :pin_data_length
     #   The length of PIN being verified.
     #
-    # @option params [required, String] :primary_account_number
-    #   The Primary Account Number (PAN), a unique identifier for a payment
-    #   credit or debit card that associates the card with a specific account
-    #   holder.
-    #
-    # @option params [required, Types::PinVerificationAttributes] :verification_attributes
-    #   The attributes and values for PIN data verification.
-    #
-    # @option params [required, String] :verification_key_identifier
-    #   The `keyARN` of the PIN verification key.
+    # @option params [Types::DukptAttributes] :dukpt_attributes
+    #   The attributes and values for the DUKPT encrypted PIN block data.
     #
     # @return [Types::VerifyPinDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::VerifyPinDataOutput#encryption_key_arn #encryption_key_arn} => String
-    #   * {Types::VerifyPinDataOutput#encryption_key_check_value #encryption_key_check_value} => String
     #   * {Types::VerifyPinDataOutput#verification_key_arn #verification_key_arn} => String
     #   * {Types::VerifyPinDataOutput#verification_key_check_value #verification_key_check_value} => String
+    #   * {Types::VerifyPinDataOutput#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::VerifyPinDataOutput#encryption_key_check_value #encryption_key_check_value} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.verify_pin_data({
-    #     dukpt_attributes: {
-    #       dukpt_derivation_type: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
-    #       key_serial_number: "HexLengthBetween10And24", # required
-    #     },
-    #     encrypted_pin_block: "HexLengthBetween16And32", # required
+    #     verification_key_identifier: "KeyArnOrKeyAliasType", # required
     #     encryption_key_identifier: "KeyArnOrKeyAliasType", # required
-    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3
-    #     pin_data_length: 1,
-    #     primary_account_number: "NumberLengthBetween12And19", # required
     #     verification_attributes: { # required
-    #       ibm_3624_pin: {
-    #         decimalization_table: "NumberLengthEquals16", # required
-    #         pin_offset: "NumberLengthBetween4And12", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
-    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #       },
     #       visa_pin: {
     #         pin_verification_key_index: 1, # required
     #         verification_value: "NumberLengthBetween4And12", # required
     #       },
+    #       ibm_3624_pin: {
+    #         decimalization_table: "NumberLengthEquals16", # required
+    #         pin_validation_data_pad_character: "HexLengthEquals1", # required
+    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #         pin_offset: "NumberLengthBetween4And12", # required
+    #       },
     #     },
-    #     verification_key_identifier: "KeyArnOrKeyAliasType", # required
+    #     encrypted_pin_block: "HexLengthBetween16And32", # required
+    #     primary_account_number: "NumberLengthBetween12And19", # required
+    #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3
+    #     pin_data_length: 1,
+    #     dukpt_attributes: {
+    #       key_serial_number: "HexLengthBetween10And24", # required
+    #       dukpt_derivation_type: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.encryption_key_arn #=> String
-    #   resp.encryption_key_check_value #=> String
     #   resp.verification_key_arn #=> String
     #   resp.verification_key_check_value #=> String
+    #   resp.encryption_key_arn #=> String
+    #   resp.encryption_key_check_value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VerifyPinData AWS API Documentation
     #
@@ -1766,7 +1838,7 @@ module Aws::PaymentCryptographyData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
