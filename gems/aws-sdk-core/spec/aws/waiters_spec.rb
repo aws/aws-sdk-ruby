@@ -6,10 +6,10 @@ module Aws
   module Waiters
     describe 'Waiters' do
 
-      dir = File.expand_path('../../fixtures/waiters', __FILE__)
+      dir = File.expand_path('../../fixtures', __FILE__)
       WaiterTest = ApiHelper.sample_service(
-        api: JSON.load_file("#{dir}/api.json"),
-        waiters: JSON.load_file("#{dir}/waiters.json")
+        api: JSON.load_file("#{dir}/apis/dynamodb.json"),
+        waiters: JSON.load_file("#{dir}/waiters/dynamodb.json")
       )
 
       let(:client) {

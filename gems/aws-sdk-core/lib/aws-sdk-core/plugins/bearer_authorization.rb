@@ -4,6 +4,8 @@ module Aws
   # @api private
   module Plugins
     # @api private
+    # Deprecated - does not look at new traits like `auth` and `unsignedPayload`
+    # Necessary to exist after endpoints 2.0 for old service clients + new core
     class BearerAuthorization < Seahorse::Client::Plugin
 
       option(:token_provider,

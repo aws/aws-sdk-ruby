@@ -5,7 +5,8 @@ require 'aws-sigv4'
 module Aws
   module Plugins
     # @api private
-    # Necessary to exist after endpoints 2.0
+    # Deprecated - does not look at new traits like `auth` and `unsignedPayload`
+    # Necessary to exist after endpoints 2.0 for old service clients + new core
     class SignatureV4 < Seahorse::Client::Plugin
 
       V4_AUTH = %w[v4 v4-unsigned-payload v4-unsigned-body]

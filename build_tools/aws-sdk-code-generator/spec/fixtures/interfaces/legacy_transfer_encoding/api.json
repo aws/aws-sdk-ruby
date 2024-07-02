@@ -3,7 +3,7 @@
   "metadata":{
     "endpointPrefix":"svc",
     "protocol": "rest-json",
-    "auth":["aws.auth#sigv4"]
+    "signatureVersion":"v4"
   },
   "operations": {
     "Streaming": {
@@ -29,7 +29,7 @@
         "requestUri": "/"
       },
       "input": {"shape": "UnsignedRequireLenStreamingRequest"},
-      "unsignedPayload":true
+      "authtype":"v4-unsigned-body"
     },
     "UnsignedStreaming": {
       "name": "UnsignedStreaming",
@@ -38,7 +38,7 @@
         "requestUri": "/"
       },
       "input": {"shape": "UnsignedStreamingRequest"},
-      "unsignedPayload":true
+      "authtype":"v4-unsigned-body"
     }
   },
   "shapes": {

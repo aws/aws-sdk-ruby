@@ -131,7 +131,8 @@ module AwsSdkCodeGenerator
       # @return [Boolean]
       def streaming_input?(shape, operation)
         shape['streaming'] && operation &&
-          operation['authtype'] == "v4-unsigned-body"
+          (operation['unsignedPayload'] ||
+          operation['authtype'] == 'v4-unsigned-body')
       end
 
       def plural?(resource)

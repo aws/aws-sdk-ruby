@@ -77,6 +77,12 @@ module {{module_name}}
         {{#authtype}}
         o['authtype'] = "{{.}}"
         {{/authtype}}
+        {{#unsigned_payload}}
+        o['unsignedPayload'] = true
+        {{/unsigned_payload}}
+        {{#auth}}
+        o['auth'] = {{&auth}}
+        {{/auth}}
         {{#endpoint_trait}}
         o.endpoint_pattern = {
           {{#endpoint_pattern}}

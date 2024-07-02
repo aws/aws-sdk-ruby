@@ -28,6 +28,18 @@ module Aws
           },
           'SomeOperationStreaming' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
+            'unsignedPayload' => true,
+            'input' => { 'shape' => 'SomeOperationRequest' },
+            'output' => { 'shape' => 'StructureShape' },
+            'httpChecksum' => {
+              "requestChecksumRequired" => true,
+              "requestAlgorithmMember" => "ChecksumAlgorithm",
+              "requestValidationModeMember" => "ChecksumMode",
+              "responseAlgorithms" => ["CRC32", "SHA256", "SHA1"]
+            }
+          },
+          'SomeOperationStreamingLegacyAuth' => {
+            'http' => { 'method' => 'POST', 'requestUri' => '/' },
             'authtype' => 'v4-unsigned-body',
             'input' => { 'shape' => 'SomeOperationRequest' },
             'output' => { 'shape' => 'StructureShape' },
@@ -89,6 +101,11 @@ module Aws
 
         it 'uses crc32 in the trailer' do
           resp = client.some_operation_streaming(checksum_algorithm: 'CRC32')
+          expect(resp.context.http_request.headers['x-amz-trailer']).to eq 'x-amz-checksum-crc32'
+        end
+
+        it 'uses crc32 in the trailer using legacy auth' do
+          resp = client.some_operation_streaming_legacy_auth(checksum_algorithm: 'CRC32')
           expect(resp.context.http_request.headers['x-amz-trailer']).to eq 'x-amz-checksum-crc32'
         end
 

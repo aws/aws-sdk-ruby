@@ -251,6 +251,8 @@ module AwsSdkCodeGenerator
             end
             o.authorizer = operation['authorizer'] if operation.key?('authorizer')
             o.authtype = operation['authtype'] if operation.key?('authtype')
+            o.unsigned_payload = operation['unsignedPayload'] if operation.key?('unsignedPayload')
+            o.auth = operation['auth'] if operation.key?('auth')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
             o.async = @service.protocol_settings['h2'] == 'eventstream' &&
@@ -597,6 +599,12 @@ module AwsSdkCodeGenerator
 
         # @return [String,nil]
         attr_accessor :authtype
+
+        # @return [Boolean,nil]
+        attr_accessor :unsigned_payload
+
+        # @return [Array<String>]
+        attr_accessor :auth
 
         # @return [Boolean]
         attr_accessor :endpoint_trait

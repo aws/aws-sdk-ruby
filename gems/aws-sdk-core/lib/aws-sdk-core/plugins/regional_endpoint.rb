@@ -24,6 +24,21 @@ a default `:region` is searched for in the following locations:
         resolve_region(cfg)
       end
 
+      option(:sigv4a_signing_region_set,
+             doc_type: Array,
+             rbs_type: 'Array[String]',
+             docstring: <<-DOCS) do |cfg|
+A list of regions that should be signed with SigV4a signing. When
+not passed, a default `:sigv4a_signing_region_set` is searched for
+in the following locations:
+
+* `Aws.config[:sigv4a_signing_region_set]`
+* `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
+* `~/.aws/config`
+        DOCS
+        resolve_sigv4a_signing_region_set(cfg)
+      end
+
       option(:use_dualstack_endpoint,
         doc_type: 'Boolean',
         docstring: <<-DOCS) do |cfg|
@@ -65,9 +80,17 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
       end
 
       def after_initialize(client)
-        if client.config.region.nil? || client.config.region == ''
-          raise Errors::MissingRegionError
-        end
+        region = client.config.region
+        raise Errors::MissingRegionError if region.nil? || region == ''
+
+        region_set = client.config.sigv4a_signing_region_set
+        return if region_set.nil?
+        raise Errors::InvalidRegionSetError unless region_set.is_a?(Array)
+
+        region_set = region_set.compact.reject(&:empty?)
+        raise Errors::InvalidRegionSetError if region_set.empty?
+
+        client.config.sigv4a_signing_region_set = region_set
       end
 
       class << self
@@ -79,6 +102,12 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           env_region = nil if env_region == ''
           cfg_region = Aws.shared_config.region(profile: cfg.profile)
           env_region || cfg_region
+        end
+
+        def resolve_sigv4a_signing_region_set(cfg)
+          value = ENV['AWS_SIGV4A_SIGNING_REGION_SET']
+          value ||= Aws.shared_config.sigv4a_signing_region_set(profile: cfg.profile)
+          value.split(',') if value
         end
 
         def resolve_use_dualstack_endpoint(cfg)
