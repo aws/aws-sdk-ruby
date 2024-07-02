@@ -314,6 +314,15 @@ module Aws::MachineLearning
     #
     #   @option options [String] :session_token
     #
+    #   @option options [Array] :sigv4a_signing_region_set
+    #     A list of regions that should be signed with SigV4a signing. When
+    #     not passed, a default `:sigv4a_signing_region_set` is searched for
+    #     in the following locations:
+    #
+    #     * `Aws.config[:sigv4a_signing_region_set]`
+    #     * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
+    #     * `~/.aws/config`
+    #
     #   @option options [Boolean] :simple_json (false)
     #     Disables request parameter conversion, validation, and formatting.
     #     Also disables response data type conversions. The request parameters
@@ -2452,7 +2461,7 @@ module Aws::MachineLearning
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-machinelearning'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

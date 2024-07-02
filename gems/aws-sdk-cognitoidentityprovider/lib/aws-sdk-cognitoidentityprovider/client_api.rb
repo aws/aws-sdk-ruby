@@ -2528,6 +2528,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: AssociateSoftwareTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSoftwareTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -2544,6 +2545,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ChangePasswordRequest)
         o.output = Shapes::ShapeRef.new(shape: ChangePasswordResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2564,6 +2566,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ConfirmDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: ConfirmDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2586,6 +2589,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ConfirmForgotPasswordRequest)
         o.output = Shapes::ShapeRef.new(shape: ConfirmForgotPasswordResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2611,6 +2615,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ConfirmSignUpRequest)
         o.output = Shapes::ShapeRef.new(shape: ConfirmSignUpResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2781,6 +2786,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: DeleteUserRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2799,6 +2805,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: DeleteUserAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteUserAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2949,6 +2956,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ForgetDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2968,6 +2976,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ForgotPasswordRequest)
         o.output = Shapes::ShapeRef.new(shape: ForgotPasswordResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3005,6 +3014,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: GetDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3087,6 +3097,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: GetUserRequest)
         o.output = Shapes::ShapeRef.new(shape: GetUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3105,6 +3116,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: GetUserAttributeVerificationCodeRequest)
         o.output = Shapes::ShapeRef.new(shape: GetUserAttributeVerificationCodeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3144,6 +3156,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: GlobalSignOutRequest)
         o.output = Shapes::ShapeRef.new(shape: GlobalSignOutResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3161,6 +3174,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: InitiateAuthRequest)
         o.output = Shapes::ShapeRef.new(shape: InitiateAuthResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3185,6 +3199,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ListDevicesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDevicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -3362,6 +3377,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: ResendConfirmationCodeRequest)
         o.output = Shapes::ShapeRef.new(shape: ResendConfirmationCodeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3386,6 +3402,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: RespondToAuthChallengeRequest)
         o.output = Shapes::ShapeRef.new(shape: RespondToAuthChallengeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3416,6 +3433,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: RevokeTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: RevokeTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -3474,6 +3492,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: SetUserMFAPreferenceRequest)
         o.output = Shapes::ShapeRef.new(shape: SetUserMFAPreferenceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3507,6 +3526,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: SetUserSettingsRequest)
         o.output = Shapes::ShapeRef.new(shape: SetUserSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3524,6 +3544,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: SignUpRequest)
         o.output = Shapes::ShapeRef.new(shape: SignUpResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3603,6 +3624,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: UpdateAuthEventFeedbackRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAuthEventFeedbackResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -3619,6 +3641,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: UpdateDeviceStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDeviceStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -3679,6 +3702,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: UpdateUserAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateUserAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3755,6 +3779,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: VerifySoftwareTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: VerifySoftwareTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -3778,6 +3803,7 @@ module Aws::CognitoIdentityProvider
         o.http_method = "POST"
         o.http_request_uri = "/"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: VerifyUserAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: VerifyUserAttributeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

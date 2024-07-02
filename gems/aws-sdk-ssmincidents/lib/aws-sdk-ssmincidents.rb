@@ -53,6 +53,6 @@ require_relative 'aws-sdk-ssmincidents/customizations'
 # @!group service
 module Aws::SSMIncidents
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end

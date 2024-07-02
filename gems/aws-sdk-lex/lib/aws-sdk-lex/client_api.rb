@@ -350,6 +350,7 @@ module Aws::Lex
         o.http_method = "POST"
         o.http_request_uri = "/bot/{botName}/alias/{botAlias}/user/{userId}/content"
         o['authtype'] = "v4-unsigned-body"
+        o['unsignedPayload'] = true
         o.input = Shapes::ShapeRef.new(shape: PostContentRequest)
         o.output = Shapes::ShapeRef.new(shape: PostContentResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

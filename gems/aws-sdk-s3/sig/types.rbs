@@ -1132,6 +1132,12 @@ module Aws::S3
       attr_accessor if_unmodified_since: ::Time
       attr_accessor key: ::String
       attr_accessor range: ::String
+      attr_accessor response_cache_control: ::String
+      attr_accessor response_content_disposition: ::String
+      attr_accessor response_content_encoding: ::String
+      attr_accessor response_content_language: ::String
+      attr_accessor response_content_type: ::String
+      attr_accessor response_expires: ::Time
       attr_accessor version_id: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String

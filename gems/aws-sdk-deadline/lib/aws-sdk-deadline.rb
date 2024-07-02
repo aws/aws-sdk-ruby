@@ -53,6 +53,6 @@ require_relative 'aws-sdk-deadline/customizations'
 # @!group service
 module Aws::Deadline
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.6.0'
 
 end

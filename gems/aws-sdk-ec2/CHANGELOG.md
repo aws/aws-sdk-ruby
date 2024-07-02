@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.464.0 (2024-07-02)
+------------------
+
+* Feature - Documentation updates for Elastic Compute Cloud (EC2).
+
 1.463.0 (2024-06-25)
 ------------------
 

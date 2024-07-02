@@ -201,6 +201,7 @@ module Aws::MediaStoreData
         o.http_method = "PUT"
         o.http_request_uri = "/{Path+}"
         o['authtype'] = "v4-unsigned-body"
+        o['unsignedPayload'] = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectResponse)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)

@@ -1169,10 +1169,14 @@ module Aws::EC2
     #   This option is supported only for HVM instances. Specifying this
     #   option with a PV instance can make it unreachable.
     # @option options [Types::BlobAttributeValue] :user_data
-    #   Changes the instance's user data to the specified value. If you are
-    #   using an Amazon Web Services SDK or command line tool, base64-encoding
-    #   is performed for you, and you can load the text from a file.
-    #   Otherwise, you must provide base64-encoded text.
+    #   Changes the instance's user data to the specified value. User data
+    #   must be base64-encoded. Depending on the tool or SDK that you're
+    #   using, the base64-encoding might be performed for you. For more
+    #   information, see [Work with instance user data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
     # @option options [String] :value
     #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
     #   `userData`, `disableApiTermination`, or
@@ -1656,7 +1660,8 @@ module Aws::EC2
     #   * `volume-type` - The Amazon EBS volume type (`gp2` \| `gp3` \| `io1`
     #     \| `io2` \| `st1` \| `sc1`\| `standard`)
     # @option options [Array<String>] :volume_ids
-    #   The volume IDs.
+    #   The volume IDs. If not specified, then all volumes are included in the
+    #   response.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

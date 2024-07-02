@@ -48,6 +48,7 @@ module Aws
                       ?sdk_ua_app_id: String,
                       ?secret_access_key: String,
                       ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
                       ?stub_responses: untyped,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
@@ -10135,7 +10136,7 @@ module Aws
                                        ?group_name: ::String,
                                        ?host_id: ::String,
                                        instance_id: ::String,
-                                       ?tenancy: ("dedicated" | "host"),
+                                       ?tenancy: ("default" | "dedicated" | "host"),
                                        ?partition_number: ::Integer,
                                        ?host_resource_group_arn: ::String,
                                        ?group_id: ::String

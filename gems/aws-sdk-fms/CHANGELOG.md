@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-07-02)
+------------------
+
+* Feature - Increases Customer API's ManagedServiceData length
+
 1.75.0 (2024-06-28)
 ------------------
 

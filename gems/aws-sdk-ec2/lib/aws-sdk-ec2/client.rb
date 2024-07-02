@@ -316,6 +316,15 @@ module Aws::EC2
     #
     #   @option options [String] :session_token
     #
+    #   @option options [Array] :sigv4a_signing_region_set
+    #     A list of regions that should be signed with SigV4a signing. When
+    #     not passed, a default `:sigv4a_signing_region_set` is searched for
+    #     in the following locations:
+    #
+    #     * `Aws.config[:sigv4a_signing_region_set]`
+    #     * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
+    #     * `~/.aws/config`
+    #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
     #     fake responses are generated and returned. You can specify
@@ -7144,16 +7153,14 @@ module Aws::EC2
     #   VPC will be associated with the endpoint.
     #
     # @option params [Boolean] :preserve_client_ip
-    #   Indicates whether your client's IP address is preserved as the
-    #   source. The value is `true` or `false`.
+    #   Indicates whether the client IP address is preserved as the source.
+    #   The following are the possible values.
     #
-    #   * If `true`, your client's IP address is used when you connect to a
-    #     resource.
+    #   * `true` - Use the client IP address as the source.
     #
-    #   * If `false`, the elastic network interface IP address is used when
-    #     you connect to a resource.
+    #   * `false` - Use the network interface IP address as the source.
     #
-    #   Default: `true`
+    #   Default: `false`
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -14176,7 +14183,14 @@ module Aws::EC2
     #   action can appear to complete, but eventually fails.
     #
     # @option params [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create the
+    #   volume.
+    #
+    #   If you intend to use a volume with an instance running on an outpost,
+    #   then you must create the volume on the same outpost as the instance.
+    #   You can't use a volume created in an Amazon Web Services Region with
+    #   an instance on an Amazon Web Services outpost, or the other way
+    #   around.
     #
     # @option params [Integer] :size
     #   The size of the volume, in GiBs. You must specify either a snapshot ID
@@ -36281,7 +36295,8 @@ module Aws::EC2
     #     \| `io2` \| `st1` \| `sc1`\| `standard`)
     #
     # @option params [Array<String>] :volume_ids
-    #   The volume IDs.
+    #   The volume IDs. If not specified, then all volumes are included in the
+    #   response.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47267,10 +47282,14 @@ module Aws::EC2
     #   option with a PV instance can make it unreachable.
     #
     # @option params [Types::BlobAttributeValue] :user_data
-    #   Changes the instance's user data to the specified value. If you are
-    #   using an Amazon Web Services SDK or command line tool, base64-encoding
-    #   is performed for you, and you can load the text from a file.
-    #   Otherwise, you must provide base64-encoded text.
+    #   Changes the instance's user data to the specified value. User data
+    #   must be base64-encoded. Depending on the tool or SDK that you're
+    #   using, the base64-encoding might be performed for you. For more
+    #   information, see [Work with instance user data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
     #
     # @option params [String] :value
     #   A new value for the attribute. Use only with the `kernel`, `ramdisk`,
@@ -47980,7 +47999,7 @@ module Aws::EC2
     #     group_name: "PlacementGroupName",
     #     host_id: "DedicatedHostId",
     #     instance_id: "InstanceId", # required
-    #     tenancy: "dedicated", # accepts dedicated, host
+    #     tenancy: "default", # accepts default, dedicated, host
     #     partition_number: 1,
     #     host_resource_group_arn: "String",
     #     group_id: "PlacementGroupId",
@@ -56341,16 +56360,14 @@ module Aws::EC2
     #   part of the network interface instead of using this parameter.
     #
     # @option params [String] :user_data
-    #   The user data script to make available to the instance. For more
-    #   information, see [Run commands on your Amazon EC2 instance at
-    #   launch][1] in the *Amazon EC2 User Guide*. If you are using a command
-    #   line tool, base64-encoding is performed for you, and you can load the
-    #   text from a file. Otherwise, you must provide base64-encoded text.
-    #   User data is limited to 16 KB.
+    #   The user data to make available to the instance. User data must be
+    #   base64-encoded. Depending on the tool or SDK that you're using, the
+    #   base64-encoding might be performed for you. For more information, see
+    #   [Work with instance user data][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -59471,7 +59488,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.463.0'
+      context[:gem_version] = '1.464.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

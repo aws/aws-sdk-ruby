@@ -1531,6 +1531,12 @@ module Aws::S3
     HeadObjectRequest.add_member(:if_unmodified_since, Shapes::ShapeRef.new(shape: IfUnmodifiedSince, location: "header", location_name: "If-Unmodified-Since"))
     HeadObjectRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key", metadata: {"contextParam"=>{"name"=>"Key"}}))
     HeadObjectRequest.add_member(:range, Shapes::ShapeRef.new(shape: Range, location: "header", location_name: "Range"))
+    HeadObjectRequest.add_member(:response_cache_control, Shapes::ShapeRef.new(shape: ResponseCacheControl, location: "querystring", location_name: "response-cache-control"))
+    HeadObjectRequest.add_member(:response_content_disposition, Shapes::ShapeRef.new(shape: ResponseContentDisposition, location: "querystring", location_name: "response-content-disposition"))
+    HeadObjectRequest.add_member(:response_content_encoding, Shapes::ShapeRef.new(shape: ResponseContentEncoding, location: "querystring", location_name: "response-content-encoding"))
+    HeadObjectRequest.add_member(:response_content_language, Shapes::ShapeRef.new(shape: ResponseContentLanguage, location: "querystring", location_name: "response-content-language"))
+    HeadObjectRequest.add_member(:response_content_type, Shapes::ShapeRef.new(shape: ResponseContentType, location: "querystring", location_name: "response-content-type"))
+    HeadObjectRequest.add_member(:response_expires, Shapes::ShapeRef.new(shape: ResponseExpires, location: "querystring", location_name: "response-expires"))
     HeadObjectRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
     HeadObjectRequest.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
     HeadObjectRequest.add_member(:sse_customer_key, Shapes::ShapeRef.new(shape: SSECustomerKey, location: "header", location_name: "x-amz-server-side-encryption-customer-key"))
@@ -3830,6 +3836,7 @@ module Aws::S3
         o.http_method = "POST"
         o.http_request_uri = "/WriteGetObjectResponse"
         o['authtype'] = "v4-unsigned-body"
+        o['unsignedPayload'] = true
         o.endpoint_pattern = {
           "hostPrefix" => "{RequestRoute}.",
         }

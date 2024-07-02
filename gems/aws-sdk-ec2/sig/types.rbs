@@ -10579,7 +10579,7 @@ module Aws::EC2
       attr_accessor group_name: ::String
       attr_accessor host_id: ::String
       attr_accessor instance_id: ::String
-      attr_accessor tenancy: ("dedicated" | "host")
+      attr_accessor tenancy: ("default" | "dedicated" | "host")
       attr_accessor partition_number: ::Integer
       attr_accessor host_resource_group_arn: ::String
       attr_accessor group_id: ::String

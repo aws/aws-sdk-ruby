@@ -53,6 +53,6 @@ require_relative 'aws-sdk-cloudwatchlogs/event_streams'
 # @!group service
 module Aws::CloudWatchLogs
 
-  GEM_VERSION = '1.86.0'
+  GEM_VERSION = '1.87.0'
 
 end

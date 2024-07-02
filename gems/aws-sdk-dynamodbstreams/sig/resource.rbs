@@ -48,6 +48,7 @@ module Aws
                         ?sdk_ua_app_id: String,
                         ?secret_access_key: String,
                         ?session_token: String,
+                        ?sigv4a_signing_region_set: Array[String],
                         ?simple_attributes: bool,
                         ?simple_json: bool,
                         ?stub_responses: untyped,

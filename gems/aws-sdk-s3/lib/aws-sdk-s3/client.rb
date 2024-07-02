@@ -414,6 +414,15 @@ module Aws::S3
     #
     #   @option options [String] :session_token
     #
+    #   @option options [Array] :sigv4a_signing_region_set
+    #     A list of regions that should be signed with SigV4a signing. When
+    #     not passed, a default `:sigv4a_signing_region_set` is searched for
+    #     in the following locations:
+    #
+    #     * `Aws.config[:sigv4a_signing_region_set]`
+    #     * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
+    #     * `~/.aws/config`
+    #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
     #     fake responses are generated and returned. You can specify
@@ -1204,8 +1213,7 @@ module Aws::S3
     # : When the request is an HTTP 1.1 request, the response is chunk
     #   encoded. When the request is not an HTTP 1.1 request, the response
     #   would not contain the `Content-Length`. You always need to read the
-    #   entire response body to check if the copy succeeds. to keep the
-    #   connection alive while we copy the data.
+    #   entire response body to check if the copy succeeds.
     #
     #   * If the copy is successful, you receive a response with information
     #     about the copied object.
@@ -2331,19 +2339,6 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
-    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -2358,6 +2353,19 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -4490,15 +4498,6 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -4511,6 +4510,15 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4720,7 +4728,7 @@ module Aws::S3
     #       permission.
     #
     #     * <b> <code>s3:DeleteObjectVersion</code> </b> - To delete a
-    #       specific version of an object from a versiong-enabled bucket,
+    #       specific version of an object from a versioning-enabled bucket,
     #       you must specify the `s3:DeleteObjectVersion` permission.
     #
     #   * **Directory bucket permissions** - To grant access to this API
@@ -4921,42 +4929,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -4989,6 +4961,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -8738,6 +8746,27 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -8760,27 +8789,6 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -9426,6 +9434,24 @@ module Aws::S3
     #   the Range is not satisfiable, S3 returns a `416 - Requested Range Not
     #   Satisfiable` error.
     #
+    # @option params [String] :response_cache_control
+    #   Sets the `Cache-Control` header of the response.
+    #
+    # @option params [String] :response_content_disposition
+    #   Sets the `Content-Disposition` header of the response.
+    #
+    # @option params [String] :response_content_encoding
+    #   Sets the `Content-Encoding` header of the response.
+    #
+    # @option params [String] :response_content_language
+    #   Sets the `Content-Language` header of the response.
+    #
+    # @option params [String] :response_content_type
+    #   Sets the `Content-Type` header of the response.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :response_expires
+    #   Sets the `Expires` header of the response.
+    #
     # @option params [String] :version_id
     #   Version ID used to reference a specific version of the object.
     #
@@ -9568,6 +9594,12 @@ module Aws::S3
     #     if_unmodified_since: Time.now,
     #     key: "ObjectKey", # required
     #     range: "Range",
+    #     response_cache_control: "ResponseCacheControl",
+    #     response_content_disposition: "ResponseContentDisposition",
+    #     response_content_encoding: "ResponseContentEncoding",
+    #     response_content_language: "ResponseContentLanguage",
+    #     response_content_type: "ResponseContentType",
+    #     response_expires: Time.now,
     #     version_id: "ObjectVersionId",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -11185,8 +11217,8 @@ module Aws::S3
     # @option params [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the response.
     #   If using `url`, non-ASCII characters used in an object's key name
-    #   will be URL encoded. For example, the object test\_file(3).png will
-    #   appear as test\_file%283%29.png.
+    #   will be URL encoded. For example, the object `test_file(3).png` will
+    #   appear as `test_file%283%29.png`.
     #
     # @option params [Integer] :max_keys
     #   Sets the maximum number of keys returned in the response. By default,
@@ -15413,6 +15445,23 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
     # @example Example: To upload an object and specify server-side encryption and object tags
     #
     #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
@@ -15433,22 +15482,6 @@ module Aws::S3
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
-    #   }
-    #
     # @example Example: To upload an object (specify optional headers)
     #
     #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
@@ -15467,24 +15500,6 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Example: To upload object and specify user-defined metadata
@@ -15508,6 +15523,24 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
     # @example Example: To upload an object and specify canned ACL.
     #
     #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
@@ -15526,21 +15559,20 @@ module Aws::S3
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
-    # @example Example: To upload an object
+    # @example Example: To create an object.
     #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Streaming a file from disk
@@ -17963,7 +17995,7 @@ module Aws::S3
     #       the object copy to the destination bucket.
     #
     #     For information about permissions required to use the multipart
-    #     upload API, see [Multipart Upload and Permissions][7] in the
+    #     upload API, see [Multipart upload API and permissions][7] in the
     #     *Amazon S3 User Guide*.
     #
     #   * **Directory bucket permissions** - You must have permissions in a
@@ -17973,9 +18005,9 @@ module Aws::S3
     #     * If the source object that you want to copy is in a directory
     #       bucket, you must have the <b>
     #       <code>s3express:CreateSession</code> </b> permission in the
-    #       `Action` element of a policy to read the object . By default,
-    #       the session is in the `ReadWrite` mode. If you want to restrict
-    #       the access, you can explicitly set the `s3express:SessionMode`
+    #       `Action` element of a policy to read the object. By default, the
+    #       session is in the `ReadWrite` mode. If you want to restrict the
+    #       access, you can explicitly set the `s3express:SessionMode`
     #       condition key to `ReadOnly` on the copy source bucket.
     #
     #     * If the copy destination is a directory bucket, you must have the
@@ -18042,7 +18074,7 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
@@ -18831,7 +18863,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

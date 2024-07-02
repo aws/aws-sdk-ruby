@@ -52,6 +52,6 @@ require_relative 'aws-sdk-applicationsignals/customizations'
 # @!group service
 module Aws::ApplicationSignals
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end

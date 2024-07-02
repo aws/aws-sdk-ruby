@@ -300,6 +300,7 @@ module Aws::EBS
         o.http_method = "PUT"
         o.http_request_uri = "/snapshots/{snapshotId}/blocks/{blockIndex}"
         o['authtype'] = "v4-unsigned-body"
+        o['unsignedPayload'] = true
         o.input = Shapes::ShapeRef.new(shape: PutSnapshotBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: PutSnapshotBlockResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

@@ -53,6 +53,6 @@ require_relative 'aws-sdk-migrationhuborchestrator/customizations'
 # @!group service
 module Aws::MigrationHubOrchestrator
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

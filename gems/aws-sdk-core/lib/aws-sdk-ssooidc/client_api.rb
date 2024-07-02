@@ -225,6 +225,7 @@ module Aws::SSOOIDC
         o.http_method = "POST"
         o.http_request_uri = "/token"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: CreateTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -265,6 +266,7 @@ module Aws::SSOOIDC
         o.http_method = "POST"
         o.http_request_uri = "/client/register"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: RegisterClientRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterClientResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -280,6 +282,7 @@ module Aws::SSOOIDC
         o.http_method = "POST"
         o.http_request_uri = "/device_authorization"
         o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: StartDeviceAuthorizationRequest)
         o.output = Shapes::ShapeRef.new(shape: StartDeviceAuthorizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)

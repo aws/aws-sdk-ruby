@@ -3299,7 +3299,7 @@ module Aws::S3
 
     # @!attribute [rw] credentials
     #   The established temporary security credentials for the created
-    #   session..
+    #   session.
     #   @return [Types::SessionCredentials]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateSessionOutput AWS API Documentation
@@ -8452,6 +8452,30 @@ module Aws::S3
     #   Not Satisfiable` error.
     #   @return [String]
     #
+    # @!attribute [rw] response_cache_control
+    #   Sets the `Cache-Control` header of the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_content_disposition
+    #   Sets the `Content-Disposition` header of the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_content_encoding
+    #   Sets the `Content-Encoding` header of the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_content_language
+    #   Sets the `Content-Language` header of the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_content_type
+    #   Sets the `Content-Type` header of the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_expires
+    #   Sets the `Expires` header of the response.
+    #   @return [Time]
+    #
     # @!attribute [rw] version_id
     #   Version ID used to reference a specific version of the object.
     #
@@ -8543,6 +8567,12 @@ module Aws::S3
       :if_unmodified_since,
       :key,
       :range,
+      :response_cache_control,
+      :response_content_disposition,
+      :response_content_encoding,
+      :response_content_language,
+      :response_content_type,
+      :response_expires,
       :version_id,
       :sse_customer_algorithm,
       :sse_customer_key,
@@ -8559,10 +8589,11 @@ module Aws::S3
     #
     # @!attribute [rw] suffix
     #   A suffix that is appended to a request that is for a directory on
-    #   the website endpoint (for example,if the suffix is index.html and
-    #   you make a request to samplebucket/images/ the data that is returned
-    #   will be for the object with the key name images/index.html) The
-    #   suffix must not be empty and must not include a slash character.
+    #   the website endpoint. (For example, if the suffix is `index.html`
+    #   and you make a request to `samplebucket/images/`, the data that is
+    #   returned will be for the object with the key name
+    #   `images/index.html`.) The suffix must not be empty and must not
+    #   include a slash character.
     #
     #   Replacement must be made for object keys containing special
     #   characters (such as carriage returns) when using XML requests. For
@@ -10122,7 +10153,7 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object keys in the
     #   response. If using `url`, non-ASCII characters used in an object's
     #   key name will be URL encoded. For example, the object
-    #   test\_file(3).png will appear as test\_file%283%29.png.
+    #   `test_file(3).png` will appear as `test_file%283%29.png`.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -10478,7 +10509,7 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object keys in the
     #   response. If using `url`, non-ASCII characters used in an object's
     #   key name will be URL encoded. For example, the object
-    #   test\_file(3).png will appear as test\_file%283%29.png.
+    #   `test_file(3).png` will appear as `test_file%283%29.png`.
     #   @return [String]
     #
     # @!attribute [rw] max_keys
@@ -11173,10 +11204,10 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] newer_noncurrent_versions
-    #   Specifies how many newer noncurrent versions must exist before
-    #   Amazon S3 can perform the associated action on a given version. If
-    #   there are this many more recent noncurrent versions, Amazon S3 will
-    #   take the associated action. For more information about noncurrent
+    #   Specifies how many noncurrent versions Amazon S3 will retain. You
+    #   can specify up to 100 noncurrent versions to retain. Amazon S3 will
+    #   permanently delete any additional noncurrent versions beyond the
+    #   specified number to retain. For more information about noncurrent
     #   versions, see [Lifecycle configuration elements][1] in the *Amazon
     #   S3 User Guide*.
     #
@@ -11220,12 +11251,12 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] newer_noncurrent_versions
-    #   Specifies how many newer noncurrent versions must exist before
-    #   Amazon S3 can perform the associated action on a given version. If
-    #   there are this many more recent noncurrent versions, Amazon S3 will
-    #   take the associated action. For more information about noncurrent
-    #   versions, see [Lifecycle configuration elements][1] in the *Amazon
-    #   S3 User Guide*.
+    #   Specifies how many noncurrent versions Amazon S3 will retain in the
+    #   same storage class before transitioning objects. You can specify up
+    #   to 100 noncurrent versions to retain. Amazon S3 will transition any
+    #   additional noncurrent versions beyond the specified number to
+    #   retain. For more information about noncurrent versions, see
+    #   [Lifecycle configuration elements][1] in the *Amazon S3 User Guide*.
     #
     #
     #

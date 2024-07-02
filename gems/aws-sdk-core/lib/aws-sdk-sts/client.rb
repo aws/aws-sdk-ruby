@@ -314,6 +314,15 @@ module Aws::STS
     #
     #   @option options [String] :session_token
     #
+    #   @option options [Array] :sigv4a_signing_region_set
+    #     A list of regions that should be signed with SigV4a signing. When
+    #     not passed, a default `:sigv4a_signing_region_set` is searched for
+    #     in the following locations:
+    #
+    #     * `Aws.config[:sigv4a_signing_region_set]`
+    #     * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
+    #     * `~/.aws/config`
+    #
     #   @option options [String] :sts_regional_endpoints ("regional")
     #     Passing in 'regional' to enable regional endpoint for STS for all supported
     #     regions (except 'aws-global'). Using 'legacy' mode will force all legacy
@@ -2380,7 +2389,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.200.0'
+      context[:gem_version] = '3.201.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

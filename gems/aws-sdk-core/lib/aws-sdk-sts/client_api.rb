@@ -280,7 +280,7 @@ module Aws::STS
         o.name = "AssumeRoleWithSAML"
         o.http_method = "POST"
         o.http_request_uri = "/"
-        o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: AssumeRoleWithSAMLRequest)
         o.output = Shapes::ShapeRef.new(shape: AssumeRoleWithSAMLResponse)
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
@@ -295,7 +295,7 @@ module Aws::STS
         o.name = "AssumeRoleWithWebIdentity"
         o.http_method = "POST"
         o.http_request_uri = "/"
-        o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: AssumeRoleWithWebIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: AssumeRoleWithWebIdentityResponse)
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)

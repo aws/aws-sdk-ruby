@@ -52,6 +52,6 @@ require_relative 'aws-sdk-fis/customizations'
 # @!group service
 module Aws::FIS
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end

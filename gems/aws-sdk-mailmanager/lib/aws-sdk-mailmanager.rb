@@ -52,6 +52,6 @@ require_relative 'aws-sdk-mailmanager/customizations'
 # @!group service
 module Aws::MailManager
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end

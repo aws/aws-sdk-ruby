@@ -536,6 +536,7 @@ module Aws::LexRuntimeV2
         o.http_method = "POST"
         o.http_request_uri = "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/utterance"
         o['authtype'] = "v4-unsigned-body"
+        o['unsignedPayload'] = true
         o.input = Shapes::ShapeRef.new(shape: RecognizeUtteranceRequest)
         o.output = Shapes::ShapeRef.new(shape: RecognizeUtteranceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

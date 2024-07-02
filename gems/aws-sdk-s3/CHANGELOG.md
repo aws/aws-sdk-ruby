@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2024-07-02)
+------------------
+
+* Feature - Added response overrides to Head Object requests.
+
 1.155.0 (2024-06-28)
 ------------------
 

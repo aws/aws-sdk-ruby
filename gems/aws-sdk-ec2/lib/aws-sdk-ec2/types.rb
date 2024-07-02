@@ -3814,7 +3814,31 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the address pool.
+    #   The state of the address range.
+    #
+    #   * `advertised`: The address range is being advertised to the
+    #     internet by Amazon Web Services.
+    #
+    #   * `deprovisioned`: The address range is deprovisioned.
+    #
+    #   * `failed-deprovision`: The request to deprovision the address range
+    #     was unsuccessful. Ensure that all EIPs from the range have been
+    #     deallocated and try again.
+    #
+    #   * `failed-provision`: The request to provision the address range was
+    #     unsuccessful.
+    #
+    #   * `pending-deprovision`: You’ve submitted a request to deprovision
+    #     an address range and it's pending.
+    #
+    #   * `pending-provision`: You’ve submitted a request to provision an
+    #     address range and it's pending.
+    #
+    #   * `provisioned`: The address range is provisioned and can be
+    #     advertised. The range is not currently advertised.
+    #
+    #   * `provisioned-not-publicly-advertisable`: The address range is
+    #     provisioned and cannot be advertised.
     #   @return [String]
     #
     # @!attribute [rw] network_border_group
@@ -8288,16 +8312,14 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] preserve_client_ip
-    #   Indicates whether your client's IP address is preserved as the
-    #   source. The value is `true` or `false`.
+    #   Indicates whether the client IP address is preserved as the source.
+    #   The following are the possible values.
     #
-    #   * If `true`, your client's IP address is used when you connect to a
-    #     resource.
+    #   * `true` - Use the client IP address as the source.
     #
-    #   * If `false`, the elastic network interface IP address is used when
-    #     you connect to a resource.
+    #   * `false` - Use the network interface IP address as the source.
     #
-    #   Default: `true`
+    #   Default: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
@@ -12498,7 +12520,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   The Amazon Resource Name (ARN) of the Outpost on which to create the
+    #   volume.
+    #
+    #   If you intend to use a volume with an instance running on an
+    #   outpost, then you must create the volume on the same outpost as the
+    #   instance. You can't use a volume created in an Amazon Web Services
+    #   Region with an instance on an Amazon Web Services outpost, or the
+    #   other way around.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -27196,7 +27225,8 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] volume_ids
-    #   The volume IDs.
+    #   The volume IDs. If not specified, then all volumes are included in
+    #   the response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -40911,7 +40941,7 @@ module Aws::EC2
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is based on the per vCPU or per memory
     #   price instead of the per instance price.
     #
@@ -41386,7 +41416,7 @@ module Aws::EC2
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is based on the per vCPU or per memory
     #   price instead of the per instance price.
     #
@@ -47863,10 +47893,14 @@ module Aws::EC2
     #   @return [Types::AttributeValue]
     #
     # @!attribute [rw] user_data
-    #   Changes the instance's user data to the specified value. If you are
-    #   using an Amazon Web Services SDK or command line tool,
-    #   base64-encoding is performed for you, and you can load the text from
-    #   a file. Otherwise, you must provide base64-encoded text.
+    #   Changes the instance's user data to the specified value. User data
+    #   must be base64-encoded. Depending on the tool or SDK that you're
+    #   using, the base64-encoding might be performed for you. For more
+    #   information, see [Work with instance user data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
     #   @return [Types::BlobAttributeValue]
     #
     # @!attribute [rw] value
@@ -59105,16 +59139,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The user data script to make available to the instance. For more
-    #   information, see [Run commands on your Amazon EC2 instance at
-    #   launch][1] in the *Amazon EC2 User Guide*. If you are using a
-    #   command line tool, base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide
-    #   base64-encoded text. User data is limited to 16 KB.
+    #   The user data to make available to the instance. User data must be
+    #   base64-encoded. Depending on the tool or SDK that you're using, the
+    #   base64-encoding might be performed for you. For more information,
+    #   see [Work with instance user data][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html
     #   @return [String]
     #
     # @!attribute [rw] additional_info

@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.201.0 (2024-07-02)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Support `auth` trait to enable SigV4a based services.
 
 * Feature - Support configuration for sigv4a signing regions using `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`, `sigv4a_signing_region_set` shared config, or the `sigv4a_signing_region_set` client option.

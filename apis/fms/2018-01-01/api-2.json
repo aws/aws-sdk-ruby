@@ -1742,7 +1742,7 @@
     },
     "ManagedServiceData":{
       "type":"string",
-      "max":10000,
+      "max":30000,
       "min":1,
       "pattern":"^((?!\\\\[nr]).)+"
     },

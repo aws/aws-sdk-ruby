@@ -544,6 +544,12 @@ module Aws::S3
     #     if_none_match: "IfNoneMatch",
     #     if_unmodified_since: Time.now,
     #     range: "Range",
+    #     response_cache_control: "ResponseCacheControl",
+    #     response_content_disposition: "ResponseContentDisposition",
+    #     response_content_encoding: "ResponseContentEncoding",
+    #     response_content_language: "ResponseContentLanguage",
+    #     response_content_type: "ResponseContentType",
+    #     response_expires: Time.now,
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
@@ -630,6 +636,18 @@ module Aws::S3
     #   satisfiable, only the `ContentLength` is affected in the response. If
     #   the Range is not satisfiable, S3 returns a `416 - Requested Range Not
     #   Satisfiable` error.
+    # @option options [String] :response_cache_control
+    #   Sets the `Cache-Control` header of the response.
+    # @option options [String] :response_content_disposition
+    #   Sets the `Content-Disposition` header of the response.
+    # @option options [String] :response_content_encoding
+    #   Sets the `Content-Encoding` header of the response.
+    # @option options [String] :response_content_language
+    #   Sets the `Content-Language` header of the response.
+    # @option options [String] :response_content_type
+    #   Sets the `Content-Type` header of the response.
+    # @option options [Time,DateTime,Date,Integer,String] :response_expires
+    #   Sets the `Expires` header of the response.
     # @option options [String] :sse_customer_algorithm
     #   Specifies the algorithm to use when encrypting the object (for
     #   example, AES256).
