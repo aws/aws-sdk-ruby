@@ -499,7 +499,9 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Deprecated. Use AllocateHostedConnection instead.
+    # <note markdown="1"> Deprecated. Use AllocateHostedConnection instead.
+    #
+    #  </note>
     #
     # Creates a hosted connection on an interconnect.
     #
@@ -628,10 +630,10 @@ module Aws::DirectConnect
     #
     # @option params [required, String] :bandwidth
     #   The bandwidth of the connection. The possible values are 50Mbps,
-    #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and
-    #   10Gbps. Note that only those Direct Connect Partners who have met
-    #   specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or
-    #   10Gbps hosted connection.
+    #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps,
+    #   10Gbps, and 25Gbps. Note that only those Direct Connect Partners who
+    #   have met specific requirements are allowed to create a 1Gbps, 2Gbps,
+    #   5Gbps, 10Gbps, or 25Gbps hosted connection.
     #
     # @option params [required, String] :connection_name
     #   The name of the hosted connection.
@@ -2086,7 +2088,7 @@ module Aws::DirectConnect
     #   The name of the interconnect.
     #
     # @option params [required, String] :bandwidth
-    #   The port bandwidth, in Gbps. The possible values are 1 and 10.
+    #   The port bandwidth, in Gbps. The possible values are 1, 10, and 100.
     #
     # @option params [required, String] :location
     #   The location of the interconnect.
@@ -2169,12 +2171,13 @@ module Aws::DirectConnect
     # that uses the Link Aggregation Control Protocol (LACP) to aggregate
     # multiple interfaces, enabling you to treat them as a single interface.
     #
-    # All connections in a LAG must use the same bandwidth (either 1Gbps or
-    # 10Gbps) and must terminate at the same Direct Connect endpoint.
+    # All connections in a LAG must use the same bandwidth (either 1Gbps,
+    # 10Gbps, 100Gbps, or 400Gbps) and must terminate at the same Direct
+    # Connect endpoint.
     #
-    # You can have up to 10 dedicated connections per LAG. Regardless of
-    # this limit, if you request more connections for the LAG than Direct
-    # Connect can allocate on a single endpoint, no LAG is created.
+    # You can have up to 10 dedicated connections per location. Regardless
+    # of this limit, if you request more connections for the LAG than Direct
+    # Connect can allocate on a single endpoint, no LAG is created..
     #
     # You can specify an existing physical dedicated connection or
     # interconnect to include in the LAG (which counts towards the total
@@ -2193,14 +2196,16 @@ module Aws::DirectConnect
     # @option params [required, Integer] :number_of_connections
     #   The number of physical dedicated connections initially provisioned and
     #   bundled by the LAG. You can have a maximum of four connections when
-    #   the port speed is 1G or 10G, or two when the port speed is 100G.
+    #   the port speed is 1Gbps or 10Gbps, or two when the port speed is
+    #   100Gbps or 400Gbps.
     #
     # @option params [required, String] :location
     #   The location for the LAG.
     #
     # @option params [required, String] :connections_bandwidth
     #   The bandwidth of the individual physical dedicated connections bundled
-    #   by the LAG. The possible values are 1Gbps and 10Gbps.
+    #   by the LAG. The possible values are 1Gbps,10Gbps, 100Gbps, and
+    #   400Gbps.
     #
     # @option params [required, String] :lag_name
     #   The name of the LAG.
@@ -2354,7 +2359,7 @@ module Aws::DirectConnect
     # Regions. Connecting the private virtual interface to a VGW only
     # provides access to a single VPC within the same Region.
     #
-    # Setting the MTU of a virtual interface to 9001 (jumbo frames) can
+    # Setting the MTU of a virtual interface to 8500 (jumbo frames) can
     # cause an update to the underlying physical connection if it wasn't
     # updated to support jumbo frames. Updating the connection disrupts
     # network connectivity for all virtual interfaces associated with the
@@ -3159,7 +3164,9 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Deprecated. Use DescribeLoa instead.
+    # <note markdown="1"> Deprecated. Use DescribeLoa instead.
+    #
+    #  </note>
     #
     # Gets the LOA-CFA for a connection.
     #
@@ -3269,7 +3276,9 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Deprecated. Use DescribeHostedConnections instead.
+    # <note markdown="1"> Deprecated. Use DescribeHostedConnections instead.
+    #
+    #  </note>
     #
     # Lists the connections that have been provisioned on the specified
     # interconnect.
@@ -3688,7 +3697,9 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Deprecated. Use DescribeLoa instead.
+    # <note markdown="1"> Deprecated. Use DescribeLoa instead.
+    #
+    #  </note>
     #
     # Gets the LOA-CFA for the specified interconnect.
     #
@@ -4031,11 +4042,21 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # <note markdown="1"> Deprecated. Use `DescribeVpnGateways` instead. See
+    # [DescribeVPNGateways][1] in the *Amazon Elastic Compute Cloud API
+    # Reference*.
+    #
+    #  </note>
+    #
     # Lists the virtual private gateways owned by the Amazon Web Services
     # account.
     #
     # You can create one or more Direct Connect private virtual interfaces
     # linked to a virtual private gateway.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnGateways.html
     #
     # @return [Types::VirtualGateways] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4837,7 +4858,7 @@ module Aws::DirectConnect
     # Updates the specified attributes of the specified virtual private
     # interface.
     #
-    # Setting the MTU of a virtual interface to 9001 (jumbo frames) can
+    # Setting the MTU of a virtual interface to 8500 (jumbo frames) can
     # cause an update to the underlying physical connection if it wasn't
     # updated to support jumbo frames. Updating the connection disrupts
     # network connectivity for all virtual interfaces associated with the
@@ -4851,7 +4872,7 @@ module Aws::DirectConnect
     #
     # @option params [Integer] :mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500.
     #
     # @option params [Boolean] :enable_site_link
     #   Indicates whether to enable or disable SiteLink.
@@ -4961,7 +4982,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

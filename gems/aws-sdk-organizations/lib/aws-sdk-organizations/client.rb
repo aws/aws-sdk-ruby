@@ -895,12 +895,11 @@ module Aws::Organizations
     # * When you create an account in an organization using the
     #   Organizations console, API, or CLI commands, the information
     #   required for the account to operate as a standalone account, such as
-    #   a payment method and signing the end user license agreement (EULA)
-    #   is *not* automatically collected. If you must remove an account from
-    #   your organization later, you can do so only after you provide the
-    #   missing information. For more information, see [Considerations
-    #   before removing an account from an organization][4] in the
-    #   *Organizations User Guide*.
+    #   a payment method is *not* automatically collected. If you must
+    #   remove an account from your organization later, you can do so only
+    #   after you provide the missing information. For more information, see
+    #   [Considerations before removing an account from an organization][4]
+    #   in the *Organizations User Guide*.
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [Amazon Web Services
@@ -5784,7 +5783,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

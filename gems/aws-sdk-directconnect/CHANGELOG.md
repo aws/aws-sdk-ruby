@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-07-03)
+------------------
+
+* Feature - This update includes documentation for support of new native 400 GBps ports for Direct Connect.
+
 1.76.0 (2024-07-02)
 ------------------
 

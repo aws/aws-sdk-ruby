@@ -534,10 +534,8 @@ module Aws::Organizations
     # * MASTER\_ACCOUNT\_ADDRESS\_DOES\_NOT\_MATCH\_MARKETPLACE: To create
     #   an account in this organization, you first must migrate the
     #   organization's management account to the marketplace that
-    #   corresponds to the management account's address. For example,
-    #   accounts with India addresses must be associated with the AISPL
-    #   marketplace. All accounts in an organization must be associated with
-    #   the same marketplace.
+    #   corresponds to the management account's address. All accounts in an
+    #   organization must be associated with the same marketplace.
     #
     # * MASTER\_ACCOUNT\_MISSING\_BUSINESS\_LICENSE: Applies only to the
     #   Amazon Web Services Regions in China. To create an organization, the

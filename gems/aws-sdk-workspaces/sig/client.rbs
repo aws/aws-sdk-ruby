@@ -284,10 +284,10 @@ module Aws
                                        name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN")?
                                      },
                                      user_storage: {
-                                       capacity: ::String?
+                                       capacity: ::String
                                      },
                                      ?root_storage: {
-                                       capacity: ::String?
+                                       capacity: ::String
                                      },
                                      ?tags: Array[
                                        {

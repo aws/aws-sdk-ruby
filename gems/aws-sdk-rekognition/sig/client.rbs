@@ -170,7 +170,8 @@ module Aws
                               dataset_arn: ::String?
                             },
                             dataset_type: ("TRAIN" | "TEST"),
-                            project_arn: ::String
+                            project_arn: ::String,
+                            ?tags: Hash[::String, ::String]
                           ) -> _CreateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
 
@@ -200,7 +201,8 @@ module Aws
       def create_project: (
                             project_name: ::String,
                             ?feature: ("CONTENT_MODERATION" | "CUSTOM_LABELS"),
-                            ?auto_update: ("ENABLED" | "DISABLED")
+                            ?auto_update: ("ENABLED" | "DISABLED"),
+                            ?tags: Hash[::String, ::String]
                           ) -> _CreateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
 

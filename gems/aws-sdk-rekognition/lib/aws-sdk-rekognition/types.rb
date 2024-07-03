@@ -903,10 +903,16 @@ module Aws::Rekognition
     #   want to asssign the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   dataset.
+    #   @return [Hash<String,String>]
+    #
     class CreateDatasetRequest < Struct.new(
       :dataset_source,
       :dataset_type,
-      :project_arn)
+      :project_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1006,10 +1012,16 @@ module Aws::Rekognition
     #   adapters.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   project.
+    #   @return [Hash<String,String>]
+    #
     class CreateProjectRequest < Struct.new(
       :project_name,
       :feature,
-      :auto_update)
+      :auto_update,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2399,8 +2411,9 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] moderation_labels
-    #   Array of detected Moderation labels and the time, in milliseconds
-    #   from the start of the video, they were detected.
+    #   Array of detected Moderation labels. For video operations, this
+    #   includes the time, in milliseconds from the start of the video, they
+    #   were detected.
     #   @return [Array<Types::ModerationLabel>]
     #
     # @!attribute [rw] moderation_model_version

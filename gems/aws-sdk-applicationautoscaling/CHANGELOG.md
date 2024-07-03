@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-07-03)
+------------------
+
+* Feature - Doc only update for Application Auto Scaling that fixes resource name.
+
 1.88.0 (2024-07-02)
 ------------------
 

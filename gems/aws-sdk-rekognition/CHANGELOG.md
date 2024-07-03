@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2024-07-03)
+------------------
+
+* Feature - This release adds support for tagging projects and datasets with the CreateProject and CreateDataset APIs.
+
 1.101.0 (2024-07-02)
 ------------------
 

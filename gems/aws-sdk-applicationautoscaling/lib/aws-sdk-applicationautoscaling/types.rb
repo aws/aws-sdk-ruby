@@ -216,7 +216,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -297,8 +297,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -403,7 +403,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -484,8 +484,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -586,7 +586,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -668,8 +668,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -769,7 +769,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -852,8 +852,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -984,7 +984,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -1066,8 +1066,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1216,7 +1216,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -1298,8 +1298,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1435,7 +1435,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -1517,8 +1517,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1892,7 +1892,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -1973,8 +1973,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -2180,7 +2180,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -2261,8 +2261,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2386,7 +2386,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -2468,8 +2468,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2727,7 +2727,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -2809,8 +2809,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2980,7 +2980,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -3061,8 +3061,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3224,7 +3224,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -3305,8 +3305,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -3483,7 +3483,7 @@ module Aws::ApplicationAutoScaling
     #     `inference-component` and the unique identifier is the resource
     #     ID. Example: `inference-component/my-inference-component`.
     #
-    #   * Amazon WorkSpaces - The resource type is `workspacespool` and the
+    #   * Pool of WorkSpaces - The resource type is `workspacespool` and the
     #     unique identifier is the pool ID. Example:
     #     `workspacespool/wspool-123456`.
     #
@@ -3564,8 +3564,8 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
     #     copies across an endpoint for a SageMaker inference component.
     #
-    #   * `workspaces:workspacespool:DesiredUserSessions` - The capacity of
-    #     a WorkSpaces pool.
+    #   * `workspaces:workspacespool:DesiredUserSessions` - The number of
+    #     user sessions for the WorkSpaces in the pool.
     #   @return [String]
     #
     # @!attribute [rw] start_time

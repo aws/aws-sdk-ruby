@@ -215,6 +215,7 @@ module Aws::Rekognition
       attr_accessor dataset_source: Types::DatasetSource
       attr_accessor dataset_type: ("TRAIN" | "TEST")
       attr_accessor project_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -245,6 +246,7 @@ module Aws::Rekognition
       attr_accessor project_name: ::String
       attr_accessor feature: ("CONTENT_MODERATION" | "CUSTOM_LABELS")
       attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

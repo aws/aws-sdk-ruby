@@ -1064,6 +1064,10 @@ module Aws::Rekognition
     #   The ARN of the Amazon Rekognition Custom Labels project to which you
     #   want to asssign the dataset.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   dataset.
+    #
     # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatasetResponse#dataset_arn #dataset_arn} => String
@@ -1106,6 +1110,9 @@ module Aws::Rekognition
     #     },
     #     dataset_type: "TRAIN", # required, accepts TRAIN, TEST
     #     project_arn: "ProjectArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1199,6 +1206,10 @@ module Aws::Rekognition
     #   effort. Required argument for Content Moderation. Applicable only to
     #   adapters.
     #
+    # @option params [Hash<String,String>] :tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   project.
+    #
     # @return [Types::CreateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectResponse#project_arn #project_arn} => String
@@ -1223,6 +1234,9 @@ module Aws::Rekognition
     #     project_name: "ProjectName", # required
     #     feature: "CONTENT_MODERATION", # accepts CONTENT_MODERATION, CUSTOM_LABELS
     #     auto_update: "ENABLED", # accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4484,6 +4498,10 @@ module Aws::Rekognition
     # `GetlabelDetection` and populate the `NextToken` request parameter
     # with the token value returned from the previous call to
     # `GetLabelDetection`.
+    #
+    # If you are retrieving results while using the Amazon Simple
+    # Notification Service, note that you will receive an "ERROR"
+    # notification if the job encounters an issue.
     #
     # @option params [required, String] :job_id
     #   Job identifier for the label detection operation for which you want
@@ -8414,7 +8432,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

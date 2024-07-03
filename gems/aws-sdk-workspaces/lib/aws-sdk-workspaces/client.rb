@@ -1091,10 +1091,10 @@ module Aws::WorkSpaces
     #       name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #     },
     #     user_storage: { # required
-    #       capacity: "NonEmptyString",
+    #       capacity: "NonEmptyString", # required
     #     },
     #     root_storage: {
-    #       capacity: "NonEmptyString",
+    #       capacity: "NonEmptyString", # required
     #     },
     #     tags: [
     #       {
@@ -4746,7 +4746,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -48,7 +48,7 @@ module Aws::DirectConnect
 
     # @!attribute [rw] direct_connect_gateway_association
     #   Information about an association between a Direct Connect gateway
-    #   and a virtual private gateway or transit gateway.
+    #   and a virtual gateway or transit gateway.
     #   @return [Types::DirectConnectGatewayAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposalResult AWS API Documentation
@@ -109,9 +109,9 @@ module Aws::DirectConnect
     # @!attribute [rw] bandwidth
     #   The bandwidth of the connection. The possible values are 50Mbps,
     #   100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps,
-    #   and 10Gbps. Note that only those Direct Connect Partners who have
-    #   met specific requirements are allowed to create a 1Gbps, 2Gbps,
-    #   5Gbps or 10Gbps hosted connection.
+    #   10Gbps, and 25Gbps. Note that only those Direct Connect Partners who
+    #   have met specific requirements are allowed to create a 1Gbps, 2Gbps,
+    #   5Gbps, 10Gbps, or 25Gbps hosted connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_name
@@ -212,7 +212,7 @@ module Aws::DirectConnect
     end
 
     # @!attribute [rw] virtual_interface
-    #   Information about a virtual interface.
+    #   Information about the transit virtual interface.
     #   @return [Types::VirtualInterface]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateTransitVirtualInterfaceResult AWS API Documentation
@@ -1102,7 +1102,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] bandwidth
-    #   The port bandwidth, in Gbps. The possible values are 1 and 10.
+    #   The port bandwidth, in Gbps. The possible values are 1, 10, and 100.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -1137,8 +1137,8 @@ module Aws::DirectConnect
     # @!attribute [rw] number_of_connections
     #   The number of physical dedicated connections initially provisioned
     #   and bundled by the LAG. You can have a maximum of four connections
-    #   when the port speed is 1G or 10G, or two when the port speed is
-    #   100G.
+    #   when the port speed is 1Gbps or 10Gbps, or two when the port speed
+    #   is 100Gbps or 400Gbps.
     #   @return [Integer]
     #
     # @!attribute [rw] location
@@ -1147,7 +1147,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] connections_bandwidth
     #   The bandwidth of the individual physical dedicated connections
-    #   bundled by the LAG. The possible values are 1Gbps and 10Gbps.
+    #   bundled by the LAG. The possible values are 1Gbps,10Gbps, 100Gbps,
+    #   and 400Gbps.
     #   @return [String]
     #
     # @!attribute [rw] lag_name
@@ -2484,12 +2485,14 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] connections_bandwidth
     #   The individual bandwidth of the physical connections bundled by the
-    #   LAG. The possible values are 1Gbps and 10Gbps.
+    #   LAG. The possible values are 1Gbps, 10Gbps, 100Gbps, or 400 Gbps..
     #   @return [String]
     #
     # @!attribute [rw] number_of_connections
-    #   The number of physical dedicated connections bundled by the LAG, up
-    #   to a maximum of 10.
+    #   The number of physical dedicated connections initially provisioned
+    #   and bundled by the LAG. You can have a maximum of four connections
+    #   when the port speed is 1 Gbps or 10 Gbps, or two when the port speed
+    #   is 100 Gbps or 400 Gbps.
     #   @return [Integer]
     #
     # @!attribute [rw] lag_id
@@ -2869,7 +2872,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500.
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -2947,7 +2950,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500.
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
@@ -3536,8 +3539,8 @@ module Aws::DirectConnect
     end
 
     # @!attribute [rw] direct_connect_gateway
-    #   Information about a Direct Connect gateway, which enables you to
-    #   connect virtual interfaces and virtual private gateway or transit
+    #   Informaiton about a Direct Connect gateway, which enables you to
+    #   connect virtual interfaces and virtual private gateways or transit
     #   gateways.
     #   @return [Types::DirectConnectGateway]
     #
@@ -3586,7 +3589,7 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] mtu
     #   The maximum transmission unit (MTU), in bytes. The supported values
-    #   are 1500 and 9001. The default value is 1500.
+    #   are 1500 and 8500. The default value is 1500.
     #   @return [Integer]
     #
     # @!attribute [rw] enable_site_link
@@ -3672,8 +3675,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_type
-    #   The type of virtual interface. The possible values are `private` and
-    #   `public`.
+    #   The type of virtual interface. The possible values are `private`,
+    #   `public` and `transit`.
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_name

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-07-03)
+------------------
+
+* Feature - Fix create workspace bundle RootStorage/UserStorage to accept non null values
+
 1.109.0 (2024-07-02)
 ------------------
 

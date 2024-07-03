@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-07-03)
+------------------
+
+* Feature - Added a new reason under ConstraintViolationException in RegisterDelegatedAdministrator API to prevent registering suspended accounts as delegated administrator of a service.
+
 1.94.0 (2024-07-02)
 ------------------
 

@@ -1470,7 +1470,7 @@ module Aws::WorkSpaces
 
     RevokeIpRulesResult.struct_class = Types::RevokeIpRulesResult
 
-    RootStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Capacity"))
+    RootStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Capacity"))
     RootStorage.struct_class = Types::RootStorage
 
     SamlProperties.add_member(:status, Shapes::ShapeRef.new(shape: SamlStatusEnum, location_name: "Status"))
@@ -1647,7 +1647,7 @@ module Aws::WorkSpaces
 
     UserSettings.member = Shapes::ShapeRef.new(shape: UserSetting)
 
-    UserStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Capacity"))
+    UserStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Capacity"))
     UserStorage.struct_class = Types::UserStorage
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
