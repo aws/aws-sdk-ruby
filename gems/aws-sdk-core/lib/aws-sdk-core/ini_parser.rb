@@ -14,7 +14,7 @@ module Aws
           line = line.split(/^|\s;/).first # remove comments
           profile = line.match(/^\[([^\[\]]+)\]\s*(#.+)?$/) unless line.nil?
           if profile
-            current_profile = profile[1]
+            current_profile = profile[1].split.join(' ') # remove whitespaces
             named_profile = current_profile.match(/^profile\s+(.+?)$/)
             current_profile = named_profile[1] if named_profile
           elsif current_profile
