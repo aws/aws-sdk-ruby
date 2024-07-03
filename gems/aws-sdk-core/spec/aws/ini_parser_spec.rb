@@ -1,79 +1,47 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require_relative '../spec_helper'
+
+# TODO: could move this to a helper module if needed
+def test_cases
+  dir = File.expand_path('../../test-cases', __FILE__)
+  file = JSON.load_file("#{dir}/config-file-parser-tests.json")
+  file['tests']
+end
 
 module Aws
   describe IniParser do
-    let(:mock_config) {
-      <<-FILE
-[default]
-aws_access_key_id = AKIABLAHBLAHBLAH
-aws_secret_access_key = secretSECRET+secret/SECRET
-region = us-east-1
-s3 =
-   region = us-west-2
-ec2 =
-   region = us-west-1
+    subject { described_class }
 
-[other]
-aws_access_key_id = AKIAFOOBARFOOBAR
-aws_secret_access_key = fooBAR+foo/BAR
-region = ap-northeast-1
-rds =
-   region = ap-northeast-2
-s3 =
-   region = ap-southeast-1
+    context '.ini_parse' do
+      test_cases.each do |test_case|
+        it(test_case['name']) do
+          input_file = test_case['input']['configFile']
+          expected_output = test_case['output']
+          output = subject.ini_parse(input_file)
 
-[profile third]
-region = sa-east-1
-
-[sso-session dev]
-sso_region = us-east-1
-
-[sso-session 'profile with spaces']
-sso_region = us-east-1
-
-[services test-services]
-s3 =
-   endpoint_url = https://localhost:8000
-
-[profile blank-property]
-aws_session_token = 
-s3 = 
-   region = ap-southeast-1
-   blank_sub_property = 
-
-      FILE
-    }
-
-    let(:parsed) { IniParser.ini_parse(mock_config) }
-
-    it 'can parse basic attributes' do
-      expect(parsed['default']['aws_access_key_id']).to eq("AKIABLAHBLAHBLAH")
-      expect(parsed['other']['region']).to eq("ap-northeast-1")
-    end
-
-    it 'can parse and strip the "profile" prefix from profile names' do
-      expect(parsed['third']['region']).to eq("sa-east-1")
-    end
-
-    it 'can parse nested configuration' do
-      expect(parsed['default']['s3']['region']).to eq("us-west-2")
-      expect(parsed['other']['s3']['region']).to eq("ap-southeast-1")
-    end
-
-    it 'can parse sso-session sections' do
-      expect(parsed['sso-session dev']['sso_region']).to eq('us-east-1')
-    end
-
-    it 'can parse services sections' do
-      expect(parsed['services test-services']['s3']['endpoint_url']).to eq('https://localhost:8000')
-    end
-
-    it 'can parse blank properties mixed with nested configurations with spaces' do
-      expect(parsed['blank-property']['aws_session_token']).to eq(' ')
-      expect(parsed['blank-property']['s3']['region']).to eq('ap-southeast-1')
-      expect(parsed['blank-property']['s3']['blank_sub_property']).to eq(' ')
+          if (expected_profiles = expected_output['profiles'])
+            # covering empty files
+            if expected_profiles.empty?
+              expect(output).to be_empty
+            else
+              expected_profiles.each do |profile, properties|
+                # handle empty profiles
+                if profile.empty?
+                  expect(output[profile]).to be_nil
+                else
+                  properties.each do |k, v|
+                    expect(output[profile][k]).to eql(v)
+                  end
+                end
+              end
+            end
+          elsif (expected_error = expected_output['errorContaining'])
+            # TODO: need to ensure this error type makes sense
+            expect(output).to raise_error(ArgumentError, expected_error)
+          end
+        end
+      end
     end
   end
 end
