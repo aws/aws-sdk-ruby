@@ -339,7 +339,7 @@ module Aws
       if @parsed_config
         credential_process ||= @parsed_config.fetch(profile, {})['credential_process']
       end
-      ProcessCredentials.new(credential_process) if credential_process
+      ProcessCredentials.new([credential_process]) if credential_process
     end
 
     def credentials_from_shared(profile, _opts)
