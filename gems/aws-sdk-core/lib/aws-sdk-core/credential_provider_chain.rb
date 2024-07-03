@@ -84,7 +84,7 @@ module Aws
     def static_profile_process_credentials(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
         process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
-        ProcessCredentials.new(process_provider) if process_provider
+        ProcessCredentials.new([process_provider]) if process_provider
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -117,9 +117,9 @@ module Aws
 
     def process_credentials(options)
       profile_name = determine_profile_name(options)
-      if Aws.shared_config.config_enabled? &&
-         (process_provider = Aws.shared_config.credential_process(profile: profile_name))
-        ProcessCredentials.new(process_provider)
+      if Aws.shared_config.config_enabled?
+        process_provider = Aws.shared_config.credential_process(profile: profile_name)
+        ProcessCredentials.new([process_provider]) if process_provider
       end
     rescue Errors::NoSuchProfileError
       nil

@@ -4,10 +4,6 @@ require_relative '../spec_helper'
 
 module Aws
   describe 'Credential Resolution Chain' do
-    before(:each) do
-      allow_any_instance_of(ProcessCredentials).to receive(:warn)
-    end
-
     let(:mock_credential_file) do
       File.expand_path(
         File.join(
@@ -35,6 +31,8 @@ module Aws
 
     before(:each) do
       allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+
+      expect_any_instance_of(ProcessCredentials).not_to receive(:warn)
     end
 
     describe 'default behavior' do
