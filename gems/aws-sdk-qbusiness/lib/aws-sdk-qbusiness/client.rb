@@ -952,6 +952,14 @@ module Aws::QBusiness
     #   An option to allow end users to create and use Amazon Q Apps in the
     #   web experience.
     #
+    # @option params [Types::PersonalizationConfiguration] :personalization_configuration
+    #   Configuration information about chat response personalization. For
+    #   more information, see [Personalizing chat responses][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -979,6 +987,9 @@ module Aws::QBusiness
     #     },
     #     q_apps_configuration: {
     #       q_apps_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     personalization_configuration: {
+    #       personalization_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -1897,6 +1908,7 @@ module Aws::QBusiness
     #   * {Types::GetApplicationResponse#error #error} => Types::ErrorDetail
     #   * {Types::GetApplicationResponse#attachments_configuration #attachments_configuration} => Types::AppliedAttachmentsConfiguration
     #   * {Types::GetApplicationResponse#q_apps_configuration #q_apps_configuration} => Types::QAppsConfiguration
+    #   * {Types::GetApplicationResponse#personalization_configuration #personalization_configuration} => Types::PersonalizationConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1920,6 +1932,7 @@ module Aws::QBusiness
     #   resp.error.error_code #=> String, one of "InternalError", "InvalidRequest", "ResourceInactive", "ResourceNotFound"
     #   resp.attachments_configuration.attachments_control_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.q_apps_configuration.q_apps_control_mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.personalization_configuration.personalization_control_mode #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplication AWS API Documentation
     #
@@ -3398,6 +3411,14 @@ module Aws::QBusiness
     #   An option to allow end users to create and use Amazon Q Apps in the
     #   web experience.
     #
+    # @option params [Types::PersonalizationConfiguration] :personalization_configuration
+    #   Configuration information about chat response personalization. For
+    #   more information, see [Personalizing chat responses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3413,6 +3434,9 @@ module Aws::QBusiness
     #     },
     #     q_apps_configuration: {
     #       q_apps_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #     personalization_configuration: {
+    #       personalization_control_mode: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -4020,7 +4044,7 @@ module Aws::QBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

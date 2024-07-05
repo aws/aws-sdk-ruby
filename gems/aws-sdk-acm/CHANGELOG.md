@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-07-05)
+------------------
+
+* Feature - Documentation updates, including fixes for xml formatting, broken links, and ListCertificates description.
+
 1.73.0 (2024-07-02)
 ------------------
 

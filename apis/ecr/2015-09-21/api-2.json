@@ -2087,7 +2087,7 @@
     "ReplicationDestinationList":{
       "type":"list",
       "member":{"shape":"ReplicationDestination"},
-      "max":25,
+      "max":100,
       "min":0
     },
     "ReplicationError":{"type":"string"},

@@ -320,6 +320,7 @@ module Aws::QBusiness
       attr_accessor client_token: ::String
       attr_accessor attachments_configuration: Types::AttachmentsConfiguration
       attr_accessor q_apps_configuration: Types::QAppsConfiguration
+      attr_accessor personalization_configuration: Types::PersonalizationConfiguration
       SENSITIVE: []
     end
 
@@ -748,6 +749,7 @@ module Aws::QBusiness
       attr_accessor error: Types::ErrorDetail
       attr_accessor attachments_configuration: Types::AppliedAttachmentsConfiguration
       attr_accessor q_apps_configuration: Types::QAppsConfiguration
+      attr_accessor personalization_configuration: Types::PersonalizationConfiguration
       SENSITIVE: []
     end
 
@@ -1204,6 +1206,11 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class PersonalizationConfiguration
+      attr_accessor personalization_control_mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class Plugin
       attr_accessor plugin_id: ::String
       attr_accessor display_name: ::String
@@ -1488,6 +1495,7 @@ module Aws::QBusiness
       attr_accessor role_arn: ::String
       attr_accessor attachments_configuration: Types::AttachmentsConfiguration
       attr_accessor q_apps_configuration: Types::QAppsConfiguration
+      attr_accessor personalization_configuration: Types::PersonalizationConfiguration
       SENSITIVE: []
     end
 

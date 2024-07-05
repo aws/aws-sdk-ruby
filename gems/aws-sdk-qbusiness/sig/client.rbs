@@ -370,6 +370,9 @@ module Aws
                                 },
                                 ?q_apps_configuration: {
                                   q_apps_control_mode: ("ENABLED" | "DISABLED")
+                                },
+                                ?personalization_configuration: {
+                                  personalization_control_mode: ("ENABLED" | "DISABLED")
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -732,6 +735,7 @@ module Aws
         def updated_at: () -> ::Time
         def attachments_configuration: () -> Types::AppliedAttachmentsConfiguration
         def q_apps_configuration: () -> Types::QAppsConfiguration
+        def personalization_configuration: () -> Types::PersonalizationConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_application-instance_method
       def get_application: (
@@ -1165,6 +1169,9 @@ module Aws
                                 },
                                 ?q_apps_configuration: {
                                   q_apps_control_mode: ("ENABLED" | "DISABLED")
+                                },
+                                ?personalization_configuration: {
+                                  personalization_control_mode: ("ENABLED" | "DISABLED")
                                 }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess

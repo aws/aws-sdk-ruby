@@ -1263,6 +1263,15 @@ module Aws::QBusiness
     #   web experience.
     #   @return [Types::QAppsConfiguration]
     #
+    # @!attribute [rw] personalization_configuration
+    #   Configuration information about chat response personalization. For
+    #   more information, see [Personalizing chat responses][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+    #   @return [Types::PersonalizationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -1274,7 +1283,8 @@ module Aws::QBusiness
       :tags,
       :client_token,
       :attachments_configuration,
-      :q_apps_configuration)
+      :q_apps_configuration,
+      :personalization_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2898,6 +2908,15 @@ module Aws::QBusiness
     #   the web experience.
     #   @return [Types::QAppsConfiguration]
     #
+    # @!attribute [rw] personalization_configuration
+    #   Configuration information about chat response personalization. For
+    #   more information, see [Personalizing chat responses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+    #   @return [Types::PersonalizationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -2913,7 +2932,8 @@ module Aws::QBusiness
       :updated_at,
       :error,
       :attachments_configuration,
-      :q_apps_configuration)
+      :q_apps_configuration,
+      :personalization_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4711,6 +4731,27 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Configuration information about chat response personalization. For
+    # more information, see [Personalizing chat responses][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+    #
+    # @!attribute [rw] personalization_control_mode
+    #   An option to allow Amazon Q Business to customize chat responses
+    #   using user specific metadata—specifically, location and job
+    #   information—in your IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PersonalizationConfiguration AWS API Documentation
+    #
+    class PersonalizationConfiguration < Struct.new(
+      :personalization_control_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Amazon Q Business plugin and its configuration.
     #
     # @!attribute [rw] plugin_id
@@ -5689,6 +5730,15 @@ module Aws::QBusiness
     #   web experience.
     #   @return [Types::QAppsConfiguration]
     #
+    # @!attribute [rw] personalization_configuration
+    #   Configuration information about chat response personalization. For
+    #   more information, see [Personalizing chat responses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
+    #   @return [Types::PersonalizationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -5698,7 +5748,8 @@ module Aws::QBusiness
       :description,
       :role_arn,
       :attachments_configuration,
-      :q_apps_configuration)
+      :q_apps_configuration,
+      :personalization_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

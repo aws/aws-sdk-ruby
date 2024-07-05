@@ -15,13 +15,13 @@ module Aws::PaymentCryptographyData
 
     class AmexCardSecurityCodeVersion1
       attr_accessor card_expiry_date: ::String
-      SENSITIVE: []
+      SENSITIVE: [:card_expiry_date]
     end
 
     class AmexCardSecurityCodeVersion2
       attr_accessor card_expiry_date: ::String
       attr_accessor service_code: ::String
-      SENSITIVE: []
+      SENSITIVE: [:card_expiry_date, :service_code]
     end
 
     class AsymmetricEncryptionAttributes
@@ -100,12 +100,12 @@ module Aws::PaymentCryptographyData
     class CardVerificationValue1
       attr_accessor card_expiry_date: ::String
       attr_accessor service_code: ::String
-      SENSITIVE: []
+      SENSITIVE: [:card_expiry_date, :service_code]
     end
 
     class CardVerificationValue2
       attr_accessor card_expiry_date: ::String
-      SENSITIVE: []
+      SENSITIVE: [:card_expiry_date]
     end
 
     class CryptogramAuthResponse
@@ -130,7 +130,7 @@ module Aws::PaymentCryptographyData
     class CryptogramVerificationArpcMethod2
       attr_accessor card_status_update: ::String
       attr_accessor proprietary_authentication_data: ::String
-      SENSITIVE: []
+      SENSITIVE: [:proprietary_authentication_data]
     end
 
     class DecryptDataInput
@@ -152,7 +152,7 @@ module Aws::PaymentCryptographyData
       attr_accessor card_expiry_date: ::String
       attr_accessor unpredictable_number: ::String
       attr_accessor application_transaction_counter: ::String
-      SENSITIVE: []
+      SENSITIVE: [:card_expiry_date]
     end
 
     class DukptAttributes
@@ -182,7 +182,7 @@ module Aws::PaymentCryptographyData
       attr_accessor pan_sequence_number: ::String
       attr_accessor application_transaction_counter: ::String
       attr_accessor track_data: ::String
-      SENSITIVE: []
+      SENSITIVE: [:track_data]
     end
 
     class DynamicCardVerificationValue
@@ -190,7 +190,7 @@ module Aws::PaymentCryptographyData
       attr_accessor card_expiry_date: ::String
       attr_accessor service_code: ::String
       attr_accessor application_transaction_counter: ::String
-      SENSITIVE: []
+      SENSITIVE: [:card_expiry_date, :service_code]
     end
 
     class EmvEncryptionAttributes
@@ -200,7 +200,7 @@ module Aws::PaymentCryptographyData
       attr_accessor session_derivation_data: ::String
       attr_accessor mode: ("ECB" | "CBC")
       attr_accessor initialization_vector: ::String
-      SENSITIVE: [:primary_account_number, :initialization_vector]
+      SENSITIVE: [:primary_account_number, :session_derivation_data, :initialization_vector]
     end
 
     class EncryptDataInput
@@ -250,7 +250,7 @@ module Aws::PaymentCryptographyData
       attr_accessor key_arn: ::String
       attr_accessor key_check_value: ::String
       attr_accessor validation_data: ::String
-      SENSITIVE: []
+      SENSITIVE: [:validation_data]
     end
 
     class GenerateMacInput
@@ -265,7 +265,7 @@ module Aws::PaymentCryptographyData
       attr_accessor key_arn: ::String
       attr_accessor key_check_value: ::String
       attr_accessor mac: ::String
-      SENSITIVE: []
+      SENSITIVE: [:mac]
     end
 
     class GeneratePinDataInput
@@ -285,14 +285,14 @@ module Aws::PaymentCryptographyData
       attr_accessor encryption_key_check_value: ::String
       attr_accessor encrypted_pin_block: ::String
       attr_accessor pin_data: Types::PinData
-      SENSITIVE: []
+      SENSITIVE: [:encrypted_pin_block]
     end
 
     class Ibm3624NaturalPin
       attr_accessor decimalization_table: ::String
       attr_accessor pin_validation_data_pad_character: ::String
       attr_accessor pin_validation_data: ::String
-      SENSITIVE: []
+      SENSITIVE: [:decimalization_table, :pin_validation_data]
     end
 
     class Ibm3624PinFromOffset
@@ -300,7 +300,7 @@ module Aws::PaymentCryptographyData
       attr_accessor pin_validation_data_pad_character: ::String
       attr_accessor pin_validation_data: ::String
       attr_accessor pin_offset: ::String
-      SENSITIVE: []
+      SENSITIVE: [:decimalization_table, :pin_validation_data, :pin_offset]
     end
 
     class Ibm3624PinOffset
@@ -308,7 +308,7 @@ module Aws::PaymentCryptographyData
       attr_accessor decimalization_table: ::String
       attr_accessor pin_validation_data_pad_character: ::String
       attr_accessor pin_validation_data: ::String
-      SENSITIVE: []
+      SENSITIVE: [:encrypted_pin_block, :decimalization_table, :pin_validation_data]
     end
 
     class Ibm3624PinVerification
@@ -316,14 +316,14 @@ module Aws::PaymentCryptographyData
       attr_accessor pin_validation_data_pad_character: ::String
       attr_accessor pin_validation_data: ::String
       attr_accessor pin_offset: ::String
-      SENSITIVE: []
+      SENSITIVE: [:decimalization_table, :pin_validation_data, :pin_offset]
     end
 
     class Ibm3624RandomPin
       attr_accessor decimalization_table: ::String
       attr_accessor pin_validation_data_pad_character: ::String
       attr_accessor pin_validation_data: ::String
-      SENSITIVE: []
+      SENSITIVE: [:decimalization_table, :pin_validation_data]
     end
 
     class InternalServerException
@@ -374,7 +374,7 @@ module Aws::PaymentCryptographyData
       attr_accessor pin_offset: ::String
       attr_accessor verification_value: ::String
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:pin_offset, :verification_value]
 
       class PinOffset < PinData
       end
@@ -494,7 +494,7 @@ module Aws::PaymentCryptographyData
       attr_accessor application_cryptogram: ::String
       attr_accessor application_transaction_counter: ::String
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:application_cryptogram]
 
       class ApplicationCryptogram < SessionKeyDerivationValue
       end
@@ -561,7 +561,7 @@ module Aws::PaymentCryptographyData
       attr_accessor pin_block: ::String
       attr_accessor key_arn: ::String
       attr_accessor key_check_value: ::String
-      SENSITIVE: []
+      SENSITIVE: [:pin_block]
     end
 
     class TranslationIsoFormats
@@ -617,14 +617,14 @@ module Aws::PaymentCryptographyData
       attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
       attr_accessor session_key_derivation_attributes: Types::SessionKeyDerivation
       attr_accessor auth_response_attributes: Types::CryptogramAuthResponse
-      SENSITIVE: []
+      SENSITIVE: [:transaction_data, :auth_request_cryptogram]
     end
 
     class VerifyAuthRequestCryptogramOutput
       attr_accessor key_arn: ::String
       attr_accessor key_check_value: ::String
       attr_accessor auth_response_value: ::String
-      SENSITIVE: []
+      SENSITIVE: [:auth_response_value]
     end
 
     class VerifyCardValidationDataInput
@@ -632,7 +632,7 @@ module Aws::PaymentCryptographyData
       attr_accessor primary_account_number: ::String
       attr_accessor verification_attributes: Types::CardVerificationAttributes
       attr_accessor validation_data: ::String
-      SENSITIVE: [:primary_account_number]
+      SENSITIVE: [:primary_account_number, :validation_data]
     end
 
     class VerifyCardValidationDataOutput
@@ -665,7 +665,7 @@ module Aws::PaymentCryptographyData
       attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3")
       attr_accessor pin_data_length: ::Integer
       attr_accessor dukpt_attributes: Types::DukptAttributes
-      SENSITIVE: [:primary_account_number]
+      SENSITIVE: [:encrypted_pin_block, :primary_account_number]
     end
 
     class VerifyPinDataOutput
@@ -684,13 +684,13 @@ module Aws::PaymentCryptographyData
     class VisaPinVerification
       attr_accessor pin_verification_key_index: ::Integer
       attr_accessor verification_value: ::String
-      SENSITIVE: []
+      SENSITIVE: [:verification_value]
     end
 
     class VisaPinVerificationValue
       attr_accessor encrypted_pin_block: ::String
       attr_accessor pin_verification_key_index: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:encrypted_pin_block]
     end
 
     class WrappedKey
