@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.953.0 (2024-07-08)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::QApps`.
+
 1.952.0 (2024-07-05)
 ------------------
 

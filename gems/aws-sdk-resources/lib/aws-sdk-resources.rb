@@ -294,6 +294,7 @@ module Aws
   autoload :PrivateNetworks, 'aws-sdk-privatenetworks'
   autoload :PrometheusService, 'aws-sdk-prometheusservice'
   autoload :Proton, 'aws-sdk-proton'
+  autoload :QApps, 'aws-sdk-qapps'
   autoload :QBusiness, 'aws-sdk-qbusiness'
   autoload :QConnect, 'aws-sdk-qconnect'
   autoload :QLDB, 'aws-sdk-qldb'

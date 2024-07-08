@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.198.0 (2024-07-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-qapps` gem.
+
 3.197.0 (2024-06-12)
 ------------------
 

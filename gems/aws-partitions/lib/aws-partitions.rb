@@ -531,6 +531,7 @@ module Aws
             'PrivateNetworks' => 'private-networks',
             'PrometheusService' => 'aps',
             'Proton' => 'proton',
+            'QApps' => 'data.qapps',
             'QBusiness' => 'qbusiness',
             'QConnect' => 'wisdom',
             'QLDB' => 'qldb',

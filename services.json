@@ -914,6 +914,9 @@
   "Proton": {
     "models": "proton/2020-07-20"
   },
+  "QApps": {
+    "models": "qapps/2023-11-27"
+  },
   "QBusiness": {
     "models": "qbusiness/2023-11-27"
   },
