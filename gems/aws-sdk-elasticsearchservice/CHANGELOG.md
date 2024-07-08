@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add smoke test.
+
 1.89.0 (2024-07-02)
 ------------------
 
