@@ -1,0 +1,62 @@
+{
+  "description": [
+    "These are test descriptions that describe how specific data should be loaded from a profile file based on a ",
+    "profile name.",
+    "See 'profile-tests.schema.json' for a description of this file's structure."
+  ],
+  "testSuites": [
+    {
+      "profiles": {
+        "default": {
+          "aws_access_key_id": "123",
+          "aws_secret_access_key": "456"
+        },
+        "session": {
+          "aws_access_key_id": "123",
+          "aws_secret_access_key": "456",
+          "aws_session_token": "789"
+        },
+        "role": {
+          "role_arn": "arn:aws:iam::123456789:role/MyRole",
+          "source_profile": "default",
+          "aws_access_key_id": "should-be-ignored",
+          "aws_secret_access_key": "should-be-ignored",
+          "aws_session_token": "should-be-ignored"
+        },
+        "region": {
+          "region": "us-east-1"
+        }
+      },
+      "regionTests": {
+        "name": "Regions can be loaded from profiles",
+        "profile": "region",
+        "output": {
+          "region": "us-east-1"
+        }
+      },
+      "credentialsTests": [
+        {
+          "name": "Role credentials have highest priority",
+          "profile": "role",
+          "output": {
+            "credentialType": "assumeRole"
+          }
+        },
+        {
+          "name": "Session credentials have next highest priority",
+          "profile": "session",
+          "output": {
+            "credentialType": "session"
+          }
+        },
+        {
+          "name": "Basic credentials have lowest priority",
+          "profile": "default",
+          "output": {
+            "credentialType": "basic"
+          }
+        }
+      ]
+    }
+  ]
+}
