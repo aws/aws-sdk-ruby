@@ -330,7 +330,7 @@ module Aws
                                 ?ontap_configuration: {
                                   automatic_backup_retention_days: ::Integer?,
                                   daily_automatic_backup_start_time: ::String?,
-                                  deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2"),
+                                  deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2"),
                                   endpoint_ip_address_range: ::String?,
                                   fsx_admin_password: ::String?,
                                   disk_iops_configuration: {
@@ -350,7 +350,7 @@ module Aws
                                   copy_tags_to_backups: bool?,
                                   copy_tags_to_volumes: bool?,
                                   daily_automatic_backup_start_time: ::String?,
-                                  deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1"),
+                                  deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "SINGLE_AZ_HA_1" | "SINGLE_AZ_HA_2" | "MULTI_AZ_1"),
                                   throughput_capacity: ::Integer,
                                   weekly_maintenance_start_time: ::String?,
                                   disk_iops_configuration: {
@@ -465,7 +465,7 @@ module Aws
                                               copy_tags_to_backups: bool?,
                                               copy_tags_to_volumes: bool?,
                                               daily_automatic_backup_start_time: ::String?,
-                                              deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1"),
+                                              deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "SINGLE_AZ_HA_1" | "SINGLE_AZ_HA_2" | "MULTI_AZ_1"),
                                               throughput_capacity: ::Integer,
                                               weekly_maintenance_start_time: ::String?,
                                               disk_iops_configuration: {
@@ -1186,7 +1186,8 @@ module Aws
                                   throughput_capacity: ::Integer?,
                                   add_route_table_ids: Array[::String]?,
                                   remove_route_table_ids: Array[::String]?,
-                                  throughput_capacity_per_ha_pair: ::Integer?
+                                  throughput_capacity_per_ha_pair: ::Integer?,
+                                  ha_pairs: ::Integer?
                                 },
                                 ?open_zfs_configuration: {
                                   automatic_backup_retention_days: ::Integer?,

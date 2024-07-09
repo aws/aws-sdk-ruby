@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2024-07-09)
+------------------
+
+* Feature - This release deprecates dataProductItem field from SearchInventoryResultItem, along with some unused DataProduct shapes
+
 1.13.0 (2024-07-02)
 ------------------
 

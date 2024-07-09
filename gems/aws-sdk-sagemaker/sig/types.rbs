@@ -61,6 +61,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AdditionalModelDataSource
+      attr_accessor channel_name: ::String
+      attr_accessor s3_data_source: Types::S3ModelDataSource
+      SENSITIVE: []
+    end
+
     class AdditionalS3DataSource
       attr_accessor s3_data_type: ("S3Object" | "S3Prefix")
       attr_accessor s3_uri: ::String
@@ -123,6 +129,12 @@ module Aws::SageMaker
     class AlgorithmValidationSpecification
       attr_accessor validation_role: ::String
       attr_accessor validation_profiles: ::Array[Types::AlgorithmValidationProfile]
+      SENSITIVE: []
+    end
+
+    class AmazonQSettings
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor q_profile_arn: ::String
       SENSITIVE: []
     end
 
@@ -858,6 +870,7 @@ module Aws::SageMaker
       attr_accessor mode: ("SingleModel" | "MultiModel")
       attr_accessor model_data_url: ::String
       attr_accessor model_data_source: Types::ModelDataSource
+      attr_accessor additional_model_data_sources: ::Array[Types::AdditionalModelDataSource]
       attr_accessor environment: ::Hash[::String, ::String]
       attr_accessor model_package_name: ::String
       attr_accessor inference_specification_name: ::String
@@ -1611,6 +1624,25 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateOptimizationJobRequest
+      attr_accessor optimization_job_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor model_source: Types::OptimizationJobModelSource
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor optimization_environment: ::Hash[::String, ::String]
+      attr_accessor optimization_configs: ::Array[Types::OptimizationConfig]
+      attr_accessor output_config: Types::OptimizationJobOutputConfig
+      attr_accessor stopping_condition: Types::StoppingCondition
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor vpc_config: Types::OptimizationVpcConfig
+      SENSITIVE: []
+    end
+
+    class CreateOptimizationJobResponse
+      attr_accessor optimization_job_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreatePipelineRequest
       attr_accessor pipeline_name: ::String
       attr_accessor pipeline_display_name: ::String
@@ -2300,6 +2332,11 @@ module Aws::SageMaker
 
     class DeleteNotebookInstanceLifecycleConfigInput
       attr_accessor notebook_instance_lifecycle_config_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOptimizationJobRequest
+      attr_accessor optimization_job_name: ::String
       SENSITIVE: []
     end
 
@@ -3453,6 +3490,32 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DescribeOptimizationJobRequest
+      attr_accessor optimization_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOptimizationJobResponse
+      attr_accessor optimization_job_arn: ::String
+      attr_accessor optimization_job_status: ("INPROGRESS" | "COMPLETED" | "FAILED" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor optimization_start_time: ::Time
+      attr_accessor optimization_end_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor optimization_job_name: ::String
+      attr_accessor model_source: Types::OptimizationJobModelSource
+      attr_accessor optimization_environment: ::Hash[::String, ::String]
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor optimization_configs: ::Array[Types::OptimizationConfig]
+      attr_accessor output_config: Types::OptimizationJobOutputConfig
+      attr_accessor optimization_output: Types::OptimizationOutput
+      attr_accessor role_arn: ::String
+      attr_accessor stopping_condition: Types::StoppingCondition
+      attr_accessor vpc_config: Types::OptimizationVpcConfig
+      SENSITIVE: []
+    end
+
     class DescribePipelineDefinitionForExecutionRequest
       attr_accessor pipeline_execution_arn: ::String
       SENSITIVE: []
@@ -3885,6 +3948,7 @@ module Aws::SageMaker
       attr_accessor r_studio_server_pro_domain_settings: Types::RStudioServerProDomainSettings
       attr_accessor execution_role_identity_config: ("USER_PROFILE_NAME" | "DISABLED")
       attr_accessor docker_settings: Types::DockerSettings
+      attr_accessor amazon_q_settings: Types::AmazonQSettings
       SENSITIVE: []
     end
 
@@ -3893,6 +3957,7 @@ module Aws::SageMaker
       attr_accessor execution_role_identity_config: ("USER_PROFILE_NAME" | "DISABLED")
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor docker_settings: Types::DockerSettings
+      attr_accessor amazon_q_settings: Types::AmazonQSettings
       SENSITIVE: []
     end
 
@@ -6134,6 +6199,27 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ListOptimizationJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor last_modified_time_after: ::Time
+      attr_accessor last_modified_time_before: ::Time
+      attr_accessor optimization_contains: ::String
+      attr_accessor name_contains: ::String
+      attr_accessor status_equals: ("INPROGRESS" | "COMPLETED" | "FAILED" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor sort_by: ("Name" | "CreationTime" | "Status")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListOptimizationJobsResponse
+      attr_accessor optimization_job_summaries: ::Array[Types::OptimizationJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPipelineExecutionStepsRequest
       attr_accessor pipeline_execution_arn: ::String
       attr_accessor next_token: ::String
@@ -6636,6 +6722,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ModelCompilationConfig
+      attr_accessor image: ::String
+      attr_accessor override_environment: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ModelConfiguration
       attr_accessor inference_specification_name: ::String
       attr_accessor environment_parameters: ::Array[Types::EnvironmentParameter]
@@ -6934,6 +7026,12 @@ module Aws::SageMaker
       attr_accessor endpoint_input: Types::EndpointInput
       attr_accessor batch_transform_input: Types::BatchTransformInput
       attr_accessor ground_truth_s3_input: Types::MonitoringGroundTruthS3Input
+      SENSITIVE: []
+    end
+
+    class ModelQuantizationConfig
+      attr_accessor image: ::String
+      attr_accessor override_environment: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -7288,6 +7386,66 @@ module Aws::SageMaker
 
     class OnlineStoreSecurityConfig
       attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class OptimizationConfig
+      attr_accessor model_quantization_config: Types::ModelQuantizationConfig
+      attr_accessor model_compilation_config: Types::ModelCompilationConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ModelQuantizationConfig < OptimizationConfig
+      end
+      class ModelCompilationConfig < OptimizationConfig
+      end
+      class Unknown < OptimizationConfig
+      end
+    end
+
+    class OptimizationJobModelSource
+      attr_accessor s3: Types::OptimizationJobModelSourceS3
+      SENSITIVE: []
+    end
+
+    class OptimizationJobModelSourceS3
+      attr_accessor s3_uri: ::String
+      attr_accessor model_access_config: Types::OptimizationModelAccessConfig
+      SENSITIVE: []
+    end
+
+    class OptimizationJobOutputConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor s3_output_location: ::String
+      SENSITIVE: []
+    end
+
+    class OptimizationJobSummary
+      attr_accessor optimization_job_name: ::String
+      attr_accessor optimization_job_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor optimization_job_status: ("INPROGRESS" | "COMPLETED" | "FAILED" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor optimization_start_time: ::Time
+      attr_accessor optimization_end_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor optimization_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OptimizationModelAccessConfig
+      attr_accessor accept_eula: bool
+      SENSITIVE: []
+    end
+
+    class OptimizationOutput
+      attr_accessor recommended_inference_image: ::String
+      SENSITIVE: []
+    end
+
+    class OptimizationVpcConfig
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -8498,6 +8656,11 @@ module Aws::SageMaker
 
     class StopNotebookInstanceInput
       attr_accessor notebook_instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopOptimizationJobRequest
+      attr_accessor optimization_job_name: ::String
       SENSITIVE: []
     end
 

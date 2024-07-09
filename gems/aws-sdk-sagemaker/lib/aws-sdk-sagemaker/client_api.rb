@@ -28,6 +28,9 @@ module Aws::SageMaker
     AdditionalCodeRepositoryNamesOrUrls = Shapes::ListShape.new(name: 'AdditionalCodeRepositoryNamesOrUrls')
     AdditionalInferenceSpecificationDefinition = Shapes::StructureShape.new(name: 'AdditionalInferenceSpecificationDefinition')
     AdditionalInferenceSpecifications = Shapes::ListShape.new(name: 'AdditionalInferenceSpecifications')
+    AdditionalModelChannelName = Shapes::StringShape.new(name: 'AdditionalModelChannelName')
+    AdditionalModelDataSource = Shapes::StructureShape.new(name: 'AdditionalModelDataSource')
+    AdditionalModelDataSources = Shapes::ListShape.new(name: 'AdditionalModelDataSources')
     AdditionalS3DataSource = Shapes::StructureShape.new(name: 'AdditionalS3DataSource')
     AdditionalS3DataSourceDataType = Shapes::StringShape.new(name: 'AdditionalS3DataSourceDataType')
     AgentVersion = Shapes::StructureShape.new(name: 'AgentVersion')
@@ -50,6 +53,7 @@ module Aws::SageMaker
     AlgorithmValidationProfile = Shapes::StructureShape.new(name: 'AlgorithmValidationProfile')
     AlgorithmValidationProfiles = Shapes::ListShape.new(name: 'AlgorithmValidationProfiles')
     AlgorithmValidationSpecification = Shapes::StructureShape.new(name: 'AlgorithmValidationSpecification')
+    AmazonQSettings = Shapes::StructureShape.new(name: 'AmazonQSettings')
     AnnotationConsolidationConfig = Shapes::StructureShape.new(name: 'AnnotationConsolidationConfig')
     AppArn = Shapes::StringShape.new(name: 'AppArn')
     AppDetails = Shapes::StructureShape.new(name: 'AppDetails')
@@ -432,6 +436,8 @@ module Aws::SageMaker
     CreateNotebookInstanceLifecycleConfigInput = Shapes::StructureShape.new(name: 'CreateNotebookInstanceLifecycleConfigInput')
     CreateNotebookInstanceLifecycleConfigOutput = Shapes::StructureShape.new(name: 'CreateNotebookInstanceLifecycleConfigOutput')
     CreateNotebookInstanceOutput = Shapes::StructureShape.new(name: 'CreateNotebookInstanceOutput')
+    CreateOptimizationJobRequest = Shapes::StructureShape.new(name: 'CreateOptimizationJobRequest')
+    CreateOptimizationJobResponse = Shapes::StructureShape.new(name: 'CreateOptimizationJobResponse')
     CreatePipelineRequest = Shapes::StructureShape.new(name: 'CreatePipelineRequest')
     CreatePipelineResponse = Shapes::StructureShape.new(name: 'CreatePipelineResponse')
     CreatePresignedDomainUrlRequest = Shapes::StructureShape.new(name: 'CreatePresignedDomainUrlRequest')
@@ -558,6 +564,7 @@ module Aws::SageMaker
     DeleteMonitoringScheduleRequest = Shapes::StructureShape.new(name: 'DeleteMonitoringScheduleRequest')
     DeleteNotebookInstanceInput = Shapes::StructureShape.new(name: 'DeleteNotebookInstanceInput')
     DeleteNotebookInstanceLifecycleConfigInput = Shapes::StructureShape.new(name: 'DeleteNotebookInstanceLifecycleConfigInput')
+    DeleteOptimizationJobRequest = Shapes::StructureShape.new(name: 'DeleteOptimizationJobRequest')
     DeletePipelineRequest = Shapes::StructureShape.new(name: 'DeletePipelineRequest')
     DeletePipelineResponse = Shapes::StructureShape.new(name: 'DeletePipelineResponse')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
@@ -681,6 +688,8 @@ module Aws::SageMaker
     DescribeNotebookInstanceLifecycleConfigInput = Shapes::StructureShape.new(name: 'DescribeNotebookInstanceLifecycleConfigInput')
     DescribeNotebookInstanceLifecycleConfigOutput = Shapes::StructureShape.new(name: 'DescribeNotebookInstanceLifecycleConfigOutput')
     DescribeNotebookInstanceOutput = Shapes::StructureShape.new(name: 'DescribeNotebookInstanceOutput')
+    DescribeOptimizationJobRequest = Shapes::StructureShape.new(name: 'DescribeOptimizationJobRequest')
+    DescribeOptimizationJobResponse = Shapes::StructureShape.new(name: 'DescribeOptimizationJobResponse')
     DescribePipelineDefinitionForExecutionRequest = Shapes::StructureShape.new(name: 'DescribePipelineDefinitionForExecutionRequest')
     DescribePipelineDefinitionForExecutionResponse = Shapes::StructureShape.new(name: 'DescribePipelineDefinitionForExecutionResponse')
     DescribePipelineExecutionRequest = Shapes::StructureShape.new(name: 'DescribePipelineExecutionRequest')
@@ -1303,6 +1312,9 @@ module Aws::SageMaker
     ListNotebookInstanceLifecycleConfigsOutput = Shapes::StructureShape.new(name: 'ListNotebookInstanceLifecycleConfigsOutput')
     ListNotebookInstancesInput = Shapes::StructureShape.new(name: 'ListNotebookInstancesInput')
     ListNotebookInstancesOutput = Shapes::StructureShape.new(name: 'ListNotebookInstancesOutput')
+    ListOptimizationJobsRequest = Shapes::StructureShape.new(name: 'ListOptimizationJobsRequest')
+    ListOptimizationJobsResponse = Shapes::StructureShape.new(name: 'ListOptimizationJobsResponse')
+    ListOptimizationJobsSortBy = Shapes::StringShape.new(name: 'ListOptimizationJobsSortBy')
     ListPipelineExecutionStepsRequest = Shapes::StructureShape.new(name: 'ListPipelineExecutionStepsRequest')
     ListPipelineExecutionStepsResponse = Shapes::StructureShape.new(name: 'ListPipelineExecutionStepsResponse')
     ListPipelineExecutionsRequest = Shapes::StructureShape.new(name: 'ListPipelineExecutionsRequest')
@@ -1425,6 +1437,7 @@ module Aws::SageMaker
     ModelCardVersionSummary = Shapes::StructureShape.new(name: 'ModelCardVersionSummary')
     ModelCardVersionSummaryList = Shapes::ListShape.new(name: 'ModelCardVersionSummaryList')
     ModelClientConfig = Shapes::StructureShape.new(name: 'ModelClientConfig')
+    ModelCompilationConfig = Shapes::StructureShape.new(name: 'ModelCompilationConfig')
     ModelCompressionType = Shapes::StringShape.new(name: 'ModelCompressionType')
     ModelConfiguration = Shapes::StructureShape.new(name: 'ModelConfiguration')
     ModelDashboardEndpoint = Shapes::StructureShape.new(name: 'ModelDashboardEndpoint')
@@ -1489,6 +1502,7 @@ module Aws::SageMaker
     ModelQualityAppSpecification = Shapes::StructureShape.new(name: 'ModelQualityAppSpecification')
     ModelQualityBaselineConfig = Shapes::StructureShape.new(name: 'ModelQualityBaselineConfig')
     ModelQualityJobInput = Shapes::StructureShape.new(name: 'ModelQualityJobInput')
+    ModelQuantizationConfig = Shapes::StructureShape.new(name: 'ModelQuantizationConfig')
     ModelRegisterSettings = Shapes::StructureShape.new(name: 'ModelRegisterSettings')
     ModelSetupTime = Shapes::IntegerShape.new(name: 'ModelSetupTime')
     ModelSortKey = Shapes::StringShape.new(name: 'ModelSortKey')
@@ -1615,6 +1629,28 @@ module Aws::SageMaker
     OnlineStoreSecurityConfig = Shapes::StructureShape.new(name: 'OnlineStoreSecurityConfig')
     OnlineStoreTotalSizeBytes = Shapes::IntegerShape.new(name: 'OnlineStoreTotalSizeBytes')
     Operator = Shapes::StringShape.new(name: 'Operator')
+    OptimizationConfig = Shapes::UnionShape.new(name: 'OptimizationConfig')
+    OptimizationConfigs = Shapes::ListShape.new(name: 'OptimizationConfigs')
+    OptimizationContainerImage = Shapes::StringShape.new(name: 'OptimizationContainerImage')
+    OptimizationJobArn = Shapes::StringShape.new(name: 'OptimizationJobArn')
+    OptimizationJobDeploymentInstanceType = Shapes::StringShape.new(name: 'OptimizationJobDeploymentInstanceType')
+    OptimizationJobEnvironmentVariables = Shapes::MapShape.new(name: 'OptimizationJobEnvironmentVariables')
+    OptimizationJobModelSource = Shapes::StructureShape.new(name: 'OptimizationJobModelSource')
+    OptimizationJobModelSourceS3 = Shapes::StructureShape.new(name: 'OptimizationJobModelSourceS3')
+    OptimizationJobOutputConfig = Shapes::StructureShape.new(name: 'OptimizationJobOutputConfig')
+    OptimizationJobStatus = Shapes::StringShape.new(name: 'OptimizationJobStatus')
+    OptimizationJobSummaries = Shapes::ListShape.new(name: 'OptimizationJobSummaries')
+    OptimizationJobSummary = Shapes::StructureShape.new(name: 'OptimizationJobSummary')
+    OptimizationModelAcceptEula = Shapes::BooleanShape.new(name: 'OptimizationModelAcceptEula')
+    OptimizationModelAccessConfig = Shapes::StructureShape.new(name: 'OptimizationModelAccessConfig')
+    OptimizationOutput = Shapes::StructureShape.new(name: 'OptimizationOutput')
+    OptimizationType = Shapes::StringShape.new(name: 'OptimizationType')
+    OptimizationTypes = Shapes::ListShape.new(name: 'OptimizationTypes')
+    OptimizationVpcConfig = Shapes::StructureShape.new(name: 'OptimizationVpcConfig')
+    OptimizationVpcSecurityGroupId = Shapes::StringShape.new(name: 'OptimizationVpcSecurityGroupId')
+    OptimizationVpcSecurityGroupIds = Shapes::ListShape.new(name: 'OptimizationVpcSecurityGroupIds')
+    OptimizationVpcSubnetId = Shapes::StringShape.new(name: 'OptimizationVpcSubnetId')
+    OptimizationVpcSubnets = Shapes::ListShape.new(name: 'OptimizationVpcSubnets')
     OptionalDouble = Shapes::FloatShape.new(name: 'OptionalDouble')
     OptionalInteger = Shapes::IntegerShape.new(name: 'OptionalInteger')
     OptionalVolumeSizeInGB = Shapes::IntegerShape.new(name: 'OptionalVolumeSizeInGB')
@@ -1759,6 +1795,7 @@ module Aws::SageMaker
     PublicWorkforceTaskPrice = Shapes::StructureShape.new(name: 'PublicWorkforceTaskPrice')
     PutModelPackageGroupPolicyInput = Shapes::StructureShape.new(name: 'PutModelPackageGroupPolicyInput')
     PutModelPackageGroupPolicyOutput = Shapes::StructureShape.new(name: 'PutModelPackageGroupPolicyOutput')
+    QProfileArn = Shapes::StringShape.new(name: 'QProfileArn')
     QualityCheckStepMetadata = Shapes::StructureShape.new(name: 'QualityCheckStepMetadata')
     QueryFilters = Shapes::StructureShape.new(name: 'QueryFilters')
     QueryLineageMaxDepth = Shapes::IntegerShape.new(name: 'QueryLineageMaxDepth')
@@ -2001,6 +2038,7 @@ module Aws::SageMaker
     StopMlflowTrackingServerResponse = Shapes::StructureShape.new(name: 'StopMlflowTrackingServerResponse')
     StopMonitoringScheduleRequest = Shapes::StructureShape.new(name: 'StopMonitoringScheduleRequest')
     StopNotebookInstanceInput = Shapes::StructureShape.new(name: 'StopNotebookInstanceInput')
+    StopOptimizationJobRequest = Shapes::StructureShape.new(name: 'StopOptimizationJobRequest')
     StopPipelineExecutionRequest = Shapes::StructureShape.new(name: 'StopPipelineExecutionRequest')
     StopPipelineExecutionResponse = Shapes::StructureShape.new(name: 'StopPipelineExecutionResponse')
     StopProcessingJobRequest = Shapes::StructureShape.new(name: 'StopProcessingJobRequest')
@@ -2361,6 +2399,12 @@ module Aws::SageMaker
 
     AdditionalInferenceSpecifications.member = Shapes::ShapeRef.new(shape: AdditionalInferenceSpecificationDefinition)
 
+    AdditionalModelDataSource.add_member(:channel_name, Shapes::ShapeRef.new(shape: AdditionalModelChannelName, required: true, location_name: "ChannelName"))
+    AdditionalModelDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3ModelDataSource, required: true, location_name: "S3DataSource"))
+    AdditionalModelDataSource.struct_class = Types::AdditionalModelDataSource
+
+    AdditionalModelDataSources.member = Shapes::ShapeRef.new(shape: AdditionalModelDataSource)
+
     AdditionalS3DataSource.add_member(:s3_data_type, Shapes::ShapeRef.new(shape: AdditionalS3DataSourceDataType, required: true, location_name: "S3DataType"))
     AdditionalS3DataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     AdditionalS3DataSource.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
@@ -2420,6 +2464,10 @@ module Aws::SageMaker
     AlgorithmValidationSpecification.add_member(:validation_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ValidationRole"))
     AlgorithmValidationSpecification.add_member(:validation_profiles, Shapes::ShapeRef.new(shape: AlgorithmValidationProfiles, required: true, location_name: "ValidationProfiles"))
     AlgorithmValidationSpecification.struct_class = Types::AlgorithmValidationSpecification
+
+    AmazonQSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    AmazonQSettings.add_member(:q_profile_arn, Shapes::ShapeRef.new(shape: QProfileArn, location_name: "QProfileArn"))
+    AmazonQSettings.struct_class = Types::AmazonQSettings
 
     AnnotationConsolidationConfig.add_member(:annotation_consolidation_lambda_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "AnnotationConsolidationLambdaArn"))
     AnnotationConsolidationConfig.struct_class = Types::AnnotationConsolidationConfig
@@ -3040,6 +3088,7 @@ module Aws::SageMaker
     ContainerDefinition.add_member(:mode, Shapes::ShapeRef.new(shape: ContainerMode, location_name: "Mode"))
     ContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     ContainerDefinition.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "ModelDataSource"))
+    ContainerDefinition.add_member(:additional_model_data_sources, Shapes::ShapeRef.new(shape: AdditionalModelDataSources, location_name: "AdditionalModelDataSources"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ContainerDefinition.add_member(:model_package_name, Shapes::ShapeRef.new(shape: VersionedArnOrName, location_name: "ModelPackageName"))
     ContainerDefinition.add_member(:inference_specification_name, Shapes::ShapeRef.new(shape: InferenceSpecificationName, location_name: "InferenceSpecificationName"))
@@ -3624,6 +3673,21 @@ module Aws::SageMaker
     CreateNotebookInstanceOutput.add_member(:notebook_instance_arn, Shapes::ShapeRef.new(shape: NotebookInstanceArn, location_name: "NotebookInstanceArn"))
     CreateNotebookInstanceOutput.struct_class = Types::CreateNotebookInstanceOutput
 
+    CreateOptimizationJobRequest.add_member(:optimization_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "OptimizationJobName"))
+    CreateOptimizationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateOptimizationJobRequest.add_member(:model_source, Shapes::ShapeRef.new(shape: OptimizationJobModelSource, required: true, location_name: "ModelSource"))
+    CreateOptimizationJobRequest.add_member(:deployment_instance_type, Shapes::ShapeRef.new(shape: OptimizationJobDeploymentInstanceType, required: true, location_name: "DeploymentInstanceType"))
+    CreateOptimizationJobRequest.add_member(:optimization_environment, Shapes::ShapeRef.new(shape: OptimizationJobEnvironmentVariables, location_name: "OptimizationEnvironment"))
+    CreateOptimizationJobRequest.add_member(:optimization_configs, Shapes::ShapeRef.new(shape: OptimizationConfigs, required: true, location_name: "OptimizationConfigs"))
+    CreateOptimizationJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OptimizationJobOutputConfig, required: true, location_name: "OutputConfig"))
+    CreateOptimizationJobRequest.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
+    CreateOptimizationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateOptimizationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: OptimizationVpcConfig, location_name: "VpcConfig"))
+    CreateOptimizationJobRequest.struct_class = Types::CreateOptimizationJobRequest
+
+    CreateOptimizationJobResponse.add_member(:optimization_job_arn, Shapes::ShapeRef.new(shape: OptimizationJobArn, required: true, location_name: "OptimizationJobArn"))
+    CreateOptimizationJobResponse.struct_class = Types::CreateOptimizationJobResponse
+
     CreatePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "PipelineName"))
     CreatePipelineRequest.add_member(:pipeline_display_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "PipelineDisplayName"))
     CreatePipelineRequest.add_member(:pipeline_definition, Shapes::ShapeRef.new(shape: PipelineDefinition, location_name: "PipelineDefinition"))
@@ -4131,6 +4195,9 @@ module Aws::SageMaker
 
     DeleteNotebookInstanceLifecycleConfigInput.add_member(:notebook_instance_lifecycle_config_name, Shapes::ShapeRef.new(shape: NotebookInstanceLifecycleConfigName, required: true, location_name: "NotebookInstanceLifecycleConfigName"))
     DeleteNotebookInstanceLifecycleConfigInput.struct_class = Types::DeleteNotebookInstanceLifecycleConfigInput
+
+    DeleteOptimizationJobRequest.add_member(:optimization_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "OptimizationJobName"))
+    DeleteOptimizationJobRequest.struct_class = Types::DeleteOptimizationJobRequest
 
     DeletePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "PipelineName"))
     DeletePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -5056,6 +5123,28 @@ module Aws::SageMaker
     DescribeNotebookInstanceOutput.add_member(:instance_metadata_service_configuration, Shapes::ShapeRef.new(shape: InstanceMetadataServiceConfiguration, location_name: "InstanceMetadataServiceConfiguration"))
     DescribeNotebookInstanceOutput.struct_class = Types::DescribeNotebookInstanceOutput
 
+    DescribeOptimizationJobRequest.add_member(:optimization_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "OptimizationJobName"))
+    DescribeOptimizationJobRequest.struct_class = Types::DescribeOptimizationJobRequest
+
+    DescribeOptimizationJobResponse.add_member(:optimization_job_arn, Shapes::ShapeRef.new(shape: OptimizationJobArn, required: true, location_name: "OptimizationJobArn"))
+    DescribeOptimizationJobResponse.add_member(:optimization_job_status, Shapes::ShapeRef.new(shape: OptimizationJobStatus, required: true, location_name: "OptimizationJobStatus"))
+    DescribeOptimizationJobResponse.add_member(:optimization_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "OptimizationStartTime"))
+    DescribeOptimizationJobResponse.add_member(:optimization_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "OptimizationEndTime"))
+    DescribeOptimizationJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
+    DescribeOptimizationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, required: true, location_name: "LastModifiedTime"))
+    DescribeOptimizationJobResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    DescribeOptimizationJobResponse.add_member(:optimization_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "OptimizationJobName"))
+    DescribeOptimizationJobResponse.add_member(:model_source, Shapes::ShapeRef.new(shape: OptimizationJobModelSource, required: true, location_name: "ModelSource"))
+    DescribeOptimizationJobResponse.add_member(:optimization_environment, Shapes::ShapeRef.new(shape: OptimizationJobEnvironmentVariables, location_name: "OptimizationEnvironment"))
+    DescribeOptimizationJobResponse.add_member(:deployment_instance_type, Shapes::ShapeRef.new(shape: OptimizationJobDeploymentInstanceType, required: true, location_name: "DeploymentInstanceType"))
+    DescribeOptimizationJobResponse.add_member(:optimization_configs, Shapes::ShapeRef.new(shape: OptimizationConfigs, required: true, location_name: "OptimizationConfigs"))
+    DescribeOptimizationJobResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: OptimizationJobOutputConfig, required: true, location_name: "OutputConfig"))
+    DescribeOptimizationJobResponse.add_member(:optimization_output, Shapes::ShapeRef.new(shape: OptimizationOutput, location_name: "OptimizationOutput"))
+    DescribeOptimizationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    DescribeOptimizationJobResponse.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
+    DescribeOptimizationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: OptimizationVpcConfig, location_name: "VpcConfig"))
+    DescribeOptimizationJobResponse.struct_class = Types::DescribeOptimizationJobResponse
+
     DescribePipelineDefinitionForExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
     DescribePipelineDefinitionForExecutionRequest.struct_class = Types::DescribePipelineDefinitionForExecutionRequest
 
@@ -5417,12 +5506,14 @@ module Aws::SageMaker
     DomainSettings.add_member(:r_studio_server_pro_domain_settings, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettings, location_name: "RStudioServerProDomainSettings"))
     DomainSettings.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettings.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
+    DomainSettings.add_member(:amazon_q_settings, Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: "AmazonQSettings"))
     DomainSettings.struct_class = Types::DomainSettings
 
     DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
     DomainSettingsForUpdate.add_member(:execution_role_identity_config, Shapes::ShapeRef.new(shape: ExecutionRoleIdentityConfig, location_name: "ExecutionRoleIdentityConfig"))
     DomainSettingsForUpdate.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
     DomainSettingsForUpdate.add_member(:docker_settings, Shapes::ShapeRef.new(shape: DockerSettings, location_name: "DockerSettings"))
+    DomainSettingsForUpdate.add_member(:amazon_q_settings, Shapes::ShapeRef.new(shape: AmazonQSettings, location_name: "AmazonQSettings"))
     DomainSettingsForUpdate.struct_class = Types::DomainSettingsForUpdate
 
     DriftCheckBaselines.add_member(:bias, Shapes::ShapeRef.new(shape: DriftCheckBias, location_name: "Bias"))
@@ -7283,6 +7374,23 @@ module Aws::SageMaker
     ListNotebookInstancesOutput.add_member(:notebook_instances, Shapes::ShapeRef.new(shape: NotebookInstanceSummaryList, location_name: "NotebookInstances"))
     ListNotebookInstancesOutput.struct_class = Types::ListNotebookInstancesOutput
 
+    ListOptimizationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOptimizationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListOptimizationJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTimeAfter"))
+    ListOptimizationJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTimeBefore"))
+    ListOptimizationJobsRequest.add_member(:last_modified_time_after, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTimeAfter"))
+    ListOptimizationJobsRequest.add_member(:last_modified_time_before, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTimeBefore"))
+    ListOptimizationJobsRequest.add_member(:optimization_contains, Shapes::ShapeRef.new(shape: NameContains, location_name: "OptimizationContains"))
+    ListOptimizationJobsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: NameContains, location_name: "NameContains"))
+    ListOptimizationJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: OptimizationJobStatus, location_name: "StatusEquals"))
+    ListOptimizationJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListOptimizationJobsSortBy, location_name: "SortBy"))
+    ListOptimizationJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListOptimizationJobsRequest.struct_class = Types::ListOptimizationJobsRequest
+
+    ListOptimizationJobsResponse.add_member(:optimization_job_summaries, Shapes::ShapeRef.new(shape: OptimizationJobSummaries, required: true, location_name: "OptimizationJobSummaries"))
+    ListOptimizationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOptimizationJobsResponse.struct_class = Types::ListOptimizationJobsResponse
+
     ListPipelineExecutionStepsRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
     ListPipelineExecutionStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPipelineExecutionStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -7673,6 +7781,10 @@ module Aws::SageMaker
     ModelClientConfig.add_member(:invocations_max_retries, Shapes::ShapeRef.new(shape: InvocationsMaxRetries, location_name: "InvocationsMaxRetries"))
     ModelClientConfig.struct_class = Types::ModelClientConfig
 
+    ModelCompilationConfig.add_member(:image, Shapes::ShapeRef.new(shape: OptimizationContainerImage, location_name: "Image"))
+    ModelCompilationConfig.add_member(:override_environment, Shapes::ShapeRef.new(shape: OptimizationJobEnvironmentVariables, location_name: "OverrideEnvironment"))
+    ModelCompilationConfig.struct_class = Types::ModelCompilationConfig
+
     ModelConfiguration.add_member(:inference_specification_name, Shapes::ShapeRef.new(shape: InferenceSpecificationName, location_name: "InferenceSpecificationName"))
     ModelConfiguration.add_member(:environment_parameters, Shapes::ShapeRef.new(shape: EnvironmentParameters, location_name: "EnvironmentParameters"))
     ModelConfiguration.add_member(:compilation_job_name, Shapes::ShapeRef.new(shape: RecommendationJobCompilationJobName, location_name: "CompilationJobName"))
@@ -7926,6 +8038,10 @@ module Aws::SageMaker
     ModelQualityJobInput.add_member(:batch_transform_input, Shapes::ShapeRef.new(shape: BatchTransformInput, location_name: "BatchTransformInput"))
     ModelQualityJobInput.add_member(:ground_truth_s3_input, Shapes::ShapeRef.new(shape: MonitoringGroundTruthS3Input, required: true, location_name: "GroundTruthS3Input"))
     ModelQualityJobInput.struct_class = Types::ModelQualityJobInput
+
+    ModelQuantizationConfig.add_member(:image, Shapes::ShapeRef.new(shape: OptimizationContainerImage, location_name: "Image"))
+    ModelQuantizationConfig.add_member(:override_environment, Shapes::ShapeRef.new(shape: OptimizationJobEnvironmentVariables, location_name: "OverrideEnvironment"))
+    ModelQuantizationConfig.struct_class = Types::ModelQuantizationConfig
 
     ModelRegisterSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
     ModelRegisterSettings.add_member(:cross_account_model_register_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "CrossAccountModelRegisterRoleArn"))
@@ -8229,6 +8345,59 @@ module Aws::SageMaker
 
     OnlineStoreSecurityConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     OnlineStoreSecurityConfig.struct_class = Types::OnlineStoreSecurityConfig
+
+    OptimizationConfig.add_member(:model_quantization_config, Shapes::ShapeRef.new(shape: ModelQuantizationConfig, location_name: "ModelQuantizationConfig"))
+    OptimizationConfig.add_member(:model_compilation_config, Shapes::ShapeRef.new(shape: ModelCompilationConfig, location_name: "ModelCompilationConfig"))
+    OptimizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OptimizationConfig.add_member_subclass(:model_quantization_config, Types::OptimizationConfig::ModelQuantizationConfig)
+    OptimizationConfig.add_member_subclass(:model_compilation_config, Types::OptimizationConfig::ModelCompilationConfig)
+    OptimizationConfig.add_member_subclass(:unknown, Types::OptimizationConfig::Unknown)
+    OptimizationConfig.struct_class = Types::OptimizationConfig
+
+    OptimizationConfigs.member = Shapes::ShapeRef.new(shape: OptimizationConfig)
+
+    OptimizationJobEnvironmentVariables.key = Shapes::ShapeRef.new(shape: NonEmptyString256)
+    OptimizationJobEnvironmentVariables.value = Shapes::ShapeRef.new(shape: String256)
+
+    OptimizationJobModelSource.add_member(:s3, Shapes::ShapeRef.new(shape: OptimizationJobModelSourceS3, location_name: "S3"))
+    OptimizationJobModelSource.struct_class = Types::OptimizationJobModelSource
+
+    OptimizationJobModelSourceS3.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    OptimizationJobModelSourceS3.add_member(:model_access_config, Shapes::ShapeRef.new(shape: OptimizationModelAccessConfig, location_name: "ModelAccessConfig"))
+    OptimizationJobModelSourceS3.struct_class = Types::OptimizationJobModelSourceS3
+
+    OptimizationJobOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    OptimizationJobOutputConfig.add_member(:s3_output_location, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputLocation"))
+    OptimizationJobOutputConfig.struct_class = Types::OptimizationJobOutputConfig
+
+    OptimizationJobSummaries.member = Shapes::ShapeRef.new(shape: OptimizationJobSummary)
+
+    OptimizationJobSummary.add_member(:optimization_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "OptimizationJobName"))
+    OptimizationJobSummary.add_member(:optimization_job_arn, Shapes::ShapeRef.new(shape: OptimizationJobArn, required: true, location_name: "OptimizationJobArn"))
+    OptimizationJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
+    OptimizationJobSummary.add_member(:optimization_job_status, Shapes::ShapeRef.new(shape: OptimizationJobStatus, required: true, location_name: "OptimizationJobStatus"))
+    OptimizationJobSummary.add_member(:optimization_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "OptimizationStartTime"))
+    OptimizationJobSummary.add_member(:optimization_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "OptimizationEndTime"))
+    OptimizationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "LastModifiedTime"))
+    OptimizationJobSummary.add_member(:deployment_instance_type, Shapes::ShapeRef.new(shape: OptimizationJobDeploymentInstanceType, required: true, location_name: "DeploymentInstanceType"))
+    OptimizationJobSummary.add_member(:optimization_types, Shapes::ShapeRef.new(shape: OptimizationTypes, required: true, location_name: "OptimizationTypes"))
+    OptimizationJobSummary.struct_class = Types::OptimizationJobSummary
+
+    OptimizationModelAccessConfig.add_member(:accept_eula, Shapes::ShapeRef.new(shape: OptimizationModelAcceptEula, required: true, location_name: "AcceptEula"))
+    OptimizationModelAccessConfig.struct_class = Types::OptimizationModelAccessConfig
+
+    OptimizationOutput.add_member(:recommended_inference_image, Shapes::ShapeRef.new(shape: OptimizationContainerImage, location_name: "RecommendedInferenceImage"))
+    OptimizationOutput.struct_class = Types::OptimizationOutput
+
+    OptimizationTypes.member = Shapes::ShapeRef.new(shape: OptimizationType)
+
+    OptimizationVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: OptimizationVpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    OptimizationVpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: OptimizationVpcSubnets, required: true, location_name: "Subnets"))
+    OptimizationVpcConfig.struct_class = Types::OptimizationVpcConfig
+
+    OptimizationVpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: OptimizationVpcSecurityGroupId)
+
+    OptimizationVpcSubnets.member = Shapes::ShapeRef.new(shape: OptimizationVpcSubnetId)
 
     OutputConfig.add_member(:s3_output_location, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputLocation"))
     OutputConfig.add_member(:target_device, Shapes::ShapeRef.new(shape: TargetDevice, location_name: "TargetDevice"))
@@ -9216,6 +9385,9 @@ module Aws::SageMaker
 
     StopNotebookInstanceInput.add_member(:notebook_instance_name, Shapes::ShapeRef.new(shape: NotebookInstanceName, required: true, location_name: "NotebookInstanceName"))
     StopNotebookInstanceInput.struct_class = Types::StopNotebookInstanceInput
+
+    StopOptimizationJobRequest.add_member(:optimization_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "OptimizationJobName"))
+    StopOptimizationJobRequest.struct_class = Types::StopOptimizationJobRequest
 
     StopPipelineExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
     StopPipelineExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -10659,6 +10831,16 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:create_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateOptimizationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateOptimizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
       api.add_operation(:create_pipeline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePipeline"
         o.http_method = "POST"
@@ -11174,6 +11356,15 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:delete_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOptimizationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:delete_pipeline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePipeline"
         o.http_method = "POST"
@@ -11685,6 +11876,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeNotebookInstanceLifecycleConfigInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeNotebookInstanceLifecycleConfigOutput)
+      end)
+
+      api.add_operation(:describe_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOptimizationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOptimizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:describe_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -12686,6 +12886,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_optimization_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOptimizationJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListOptimizationJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOptimizationJobsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_pipeline_execution_steps, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPipelineExecutionSteps"
         o.http_method = "POST"
@@ -13215,6 +13429,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopNotebookInstanceInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:stop_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopOptimizationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:stop_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|

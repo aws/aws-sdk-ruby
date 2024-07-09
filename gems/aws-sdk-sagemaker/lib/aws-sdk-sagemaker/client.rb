@@ -2688,6 +2688,10 @@ module Aws::SageMaker
     #         enable_docker_access: "ENABLED", # accepts ENABLED, DISABLED
     #         vpc_only_trusted_accounts: ["AccountId"],
     #       },
+    #       amazon_q_settings: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         q_profile_arn: "QProfileArn",
+    #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
     #     vpc_id: "VpcId", # required
@@ -5686,6 +5690,22 @@ module Aws::SageMaker
     #           },
     #         },
     #       },
+    #       additional_model_data_sources: [
+    #         {
+    #           channel_name: "AdditionalModelChannelName", # required
+    #           s3_data_source: { # required
+    #             s3_uri: "S3ModelUri", # required
+    #             s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #             compression_type: "None", # required, accepts None, Gzip
+    #             model_access_config: {
+    #               accept_eula: false, # required
+    #             },
+    #             hub_access_config: {
+    #               hub_content_arn: "HubContentArn", # required
+    #             },
+    #           },
+    #         },
+    #       ],
     #       environment: {
     #         "EnvironmentKey" => "EnvironmentValue",
     #       },
@@ -5720,6 +5740,22 @@ module Aws::SageMaker
     #             },
     #           },
     #         },
+    #         additional_model_data_sources: [
+    #           {
+    #             channel_name: "AdditionalModelChannelName", # required
+    #             s3_data_source: { # required
+    #               s3_uri: "S3ModelUri", # required
+    #               s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #               compression_type: "None", # required, accepts None, Gzip
+    #               model_access_config: {
+    #                 accept_eula: false, # required
+    #               },
+    #               hub_access_config: {
+    #                 hub_content_arn: "HubContentArn", # required
+    #               },
+    #             },
+    #           },
+    #         ],
     #         environment: {
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
@@ -7327,6 +7363,169 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_notebook_instance_lifecycle_config(params = {}, options = {})
       req = build_request(:create_notebook_instance_lifecycle_config, params)
+      req.send_request(options)
+    end
+
+    # Creates a job that optimizes a model for inference performance. To
+    # create the job, you provide the location of a source model, and you
+    # provide the settings for the optimization techniques that you want the
+    # job to apply. When the job completes successfully, SageMaker uploads
+    # the new optimized model to the output destination that you specify.
+    #
+    # For more information about how to use this action, and about the
+    # supported optimization techniques, see [Optimize model inference with
+    # Amazon SageMaker][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-optimize.html
+    #
+    # @option params [required, String] :optimization_job_name
+    #   A custom name for the new optimization job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #
+    #   During model optimization, Amazon SageMaker needs your permission to:
+    #
+    #   * Read input data from an S3 bucket
+    #
+    #   * Write model artifacts to an S3 bucket
+    #
+    #   * Write logs to Amazon CloudWatch Logs
+    #
+    #   * Publish metrics to Amazon CloudWatch
+    #
+    #   You grant permissions for all of these tasks to an IAM role. To pass
+    #   this role to Amazon SageMaker, the caller of this API must have the
+    #   `iam:PassRole` permission. For more information, see [Amazon SageMaker
+    #   Roles.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #
+    # @option params [required, Types::OptimizationJobModelSource] :model_source
+    #   The location of the source model to optimize with an optimization job.
+    #
+    # @option params [required, String] :deployment_instance_type
+    #   The type of instance that hosts the optimized model that you create
+    #   with the optimization job.
+    #
+    # @option params [Hash<String,String>] :optimization_environment
+    #   The environment variables to set in the model container.
+    #
+    # @option params [required, Array<Types::OptimizationConfig>] :optimization_configs
+    #   Settings for each of the optimization techniques that the job applies.
+    #
+    # @option params [required, Types::OptimizationJobOutputConfig] :output_config
+    #   Details for where to store the optimized model that you create with
+    #   the optimization job.
+    #
+    # @option params [required, Types::StoppingCondition] :stopping_condition
+    #   Specifies a limit to how long a job can run. When the job reaches the
+    #   time limit, SageMaker ends the job. Use this API to cap costs.
+    #
+    #   To stop a training job, SageMaker sends the algorithm the `SIGTERM`
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
+    #
+    #   The training algorithms provided by SageMaker automatically save the
+    #   intermediate results of a model training job when possible. This
+    #   attempt to save artifacts is only a best effort case as model might
+    #   not be in a state from which it can be saved. For example, if training
+    #   has just started, the model might not be ready to save. When saved,
+    #   this intermediate data is a valid model artifact. You can use it to
+    #   create a model with `CreateModel`.
+    #
+    #   <note markdown="1"> The Neural Topic Model (NTM) currently does not support saving
+    #   intermediate model artifacts. When training NTMs, make sure that the
+    #   maximum runtime is sufficient for the training job to complete.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs associated with the optimization job. For
+    #   more information, see [Tagging Amazon Web Services resources][1] in
+    #   the *Amazon Web Services General Reference Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @option params [Types::OptimizationVpcConfig] :vpc_config
+    #   A VPC in Amazon VPC that your optimized model has access to.
+    #
+    # @return [Types::CreateOptimizationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOptimizationJobResponse#optimization_job_arn #optimization_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_optimization_job({
+    #     optimization_job_name: "EntityName", # required
+    #     role_arn: "RoleArn", # required
+    #     model_source: { # required
+    #       s3: {
+    #         s3_uri: "S3Uri",
+    #         model_access_config: {
+    #           accept_eula: false, # required
+    #         },
+    #       },
+    #     },
+    #     deployment_instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.12xlarge, ml.g6.16xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.inf2.xlarge, ml.inf2.8xlarge, ml.inf2.24xlarge, ml.inf2.48xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge
+    #     optimization_environment: {
+    #       "NonEmptyString256" => "String256",
+    #     },
+    #     optimization_configs: [ # required
+    #       {
+    #         model_quantization_config: {
+    #           image: "OptimizationContainerImage",
+    #           override_environment: {
+    #             "NonEmptyString256" => "String256",
+    #           },
+    #         },
+    #         model_compilation_config: {
+    #           image: "OptimizationContainerImage",
+    #           override_environment: {
+    #             "NonEmptyString256" => "String256",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     output_config: { # required
+    #       kms_key_id: "KmsKeyId",
+    #       s3_output_location: "S3Uri", # required
+    #     },
+    #     stopping_condition: { # required
+    #       max_runtime_in_seconds: 1,
+    #       max_wait_time_in_seconds: 1,
+    #       max_pending_time_in_seconds: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     vpc_config: {
+    #       security_group_ids: ["OptimizationVpcSecurityGroupId"], # required
+    #       subnets: ["OptimizationVpcSubnetId"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.optimization_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateOptimizationJob AWS API Documentation
+    #
+    # @overload create_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def create_optimization_job(params = {}, options = {})
+      req = build_request(:create_optimization_job, params)
       req.send_request(options)
     end
 
@@ -10585,6 +10784,28 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an optimization job.
+    #
+    # @option params [required, String] :optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_optimization_job({
+    #     optimization_job_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteOptimizationJob AWS API Documentation
+    #
+    # @overload delete_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def delete_optimization_job(params = {}, options = {})
+      req = build_request(:delete_optimization_job, params)
+      req.send_request(options)
+    end
+
     # Deletes a pipeline if there are no running instances of the pipeline.
     # To delete a pipeline, you must stop all running instances of the
     # pipeline using the `StopPipelineExecution` API. When you delete a
@@ -12326,6 +12547,8 @@ module Aws::SageMaker
     #   resp.domain_settings.docker_settings.enable_docker_access #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_settings.docker_settings.vpc_only_trusted_accounts #=> Array
     #   resp.domain_settings.docker_settings.vpc_only_trusted_accounts[0] #=> String
+    #   resp.domain_settings.amazon_q_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.domain_settings.amazon_q_settings.q_profile_arn #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -14219,6 +14442,13 @@ module Aws::SageMaker
     #   resp.primary_container.model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.primary_container.model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.primary_container.model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.primary_container.additional_model_data_sources #=> Array
+    #   resp.primary_container.additional_model_data_sources[0].channel_name #=> String
+    #   resp.primary_container.additional_model_data_sources[0].s3_data_source.s3_uri #=> String
+    #   resp.primary_container.additional_model_data_sources[0].s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.primary_container.additional_model_data_sources[0].s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.primary_container.additional_model_data_sources[0].s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.primary_container.additional_model_data_sources[0].s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
     #   resp.primary_container.model_package_name #=> String
@@ -14236,6 +14466,13 @@ module Aws::SageMaker
     #   resp.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
+    #   resp.containers[0].additional_model_data_sources #=> Array
+    #   resp.containers[0].additional_model_data_sources[0].channel_name #=> String
+    #   resp.containers[0].additional_model_data_sources[0].s3_data_source.s3_uri #=> String
+    #   resp.containers[0].additional_model_data_sources[0].s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.containers[0].additional_model_data_sources[0].s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.containers[0].additional_model_data_sources[0].s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.containers[0].additional_model_data_sources[0].s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.containers[0].environment #=> Hash
     #   resp.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.containers[0].model_package_name #=> String
@@ -15186,6 +15423,80 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_notebook_instance_lifecycle_config(params = {}, options = {})
       req = build_request(:describe_notebook_instance_lifecycle_config, params)
+      req.send_request(options)
+    end
+
+    # Provides the properties of the specified optimization job.
+    #
+    # @option params [required, String] :optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #
+    # @return [Types::DescribeOptimizationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOptimizationJobResponse#optimization_job_arn #optimization_job_arn} => String
+    #   * {Types::DescribeOptimizationJobResponse#optimization_job_status #optimization_job_status} => String
+    #   * {Types::DescribeOptimizationJobResponse#optimization_start_time #optimization_start_time} => Time
+    #   * {Types::DescribeOptimizationJobResponse#optimization_end_time #optimization_end_time} => Time
+    #   * {Types::DescribeOptimizationJobResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeOptimizationJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeOptimizationJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeOptimizationJobResponse#optimization_job_name #optimization_job_name} => String
+    #   * {Types::DescribeOptimizationJobResponse#model_source #model_source} => Types::OptimizationJobModelSource
+    #   * {Types::DescribeOptimizationJobResponse#optimization_environment #optimization_environment} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeOptimizationJobResponse#deployment_instance_type #deployment_instance_type} => String
+    #   * {Types::DescribeOptimizationJobResponse#optimization_configs #optimization_configs} => Array&lt;Types::OptimizationConfig&gt;
+    #   * {Types::DescribeOptimizationJobResponse#output_config #output_config} => Types::OptimizationJobOutputConfig
+    #   * {Types::DescribeOptimizationJobResponse#optimization_output #optimization_output} => Types::OptimizationOutput
+    #   * {Types::DescribeOptimizationJobResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeOptimizationJobResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
+    #   * {Types::DescribeOptimizationJobResponse#vpc_config #vpc_config} => Types::OptimizationVpcConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_optimization_job({
+    #     optimization_job_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.optimization_job_arn #=> String
+    #   resp.optimization_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
+    #   resp.optimization_start_time #=> Time
+    #   resp.optimization_end_time #=> Time
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.optimization_job_name #=> String
+    #   resp.model_source.s3.s3_uri #=> String
+    #   resp.model_source.s3.model_access_config.accept_eula #=> Boolean
+    #   resp.optimization_environment #=> Hash
+    #   resp.optimization_environment["NonEmptyString256"] #=> String
+    #   resp.deployment_instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.12xlarge", "ml.g6.16xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.inf2.xlarge", "ml.inf2.8xlarge", "ml.inf2.24xlarge", "ml.inf2.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.optimization_configs #=> Array
+    #   resp.optimization_configs[0].model_quantization_config.image #=> String
+    #   resp.optimization_configs[0].model_quantization_config.override_environment #=> Hash
+    #   resp.optimization_configs[0].model_quantization_config.override_environment["NonEmptyString256"] #=> String
+    #   resp.optimization_configs[0].model_compilation_config.image #=> String
+    #   resp.optimization_configs[0].model_compilation_config.override_environment #=> Hash
+    #   resp.optimization_configs[0].model_compilation_config.override_environment["NonEmptyString256"] #=> String
+    #   resp.output_config.kms_key_id #=> String
+    #   resp.output_config.s3_output_location #=> String
+    #   resp.optimization_output.recommended_inference_image #=> String
+    #   resp.role_arn #=> String
+    #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
+    #   resp.stopping_condition.max_wait_time_in_seconds #=> Integer
+    #   resp.stopping_condition.max_pending_time_in_seconds #=> Integer
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.vpc_config.subnets #=> Array
+    #   resp.vpc_config.subnets[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeOptimizationJob AWS API Documentation
+    #
+    # @overload describe_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def describe_optimization_job(params = {}, options = {})
+      req = build_request(:describe_optimization_job, params)
       req.send_request(options)
     end
 
@@ -21274,6 +21585,100 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists the optimization jobs in your account and their properties.
+    #
+    # @option params [String] :next_token
+    #   A token that you use to get the next set of results following a
+    #   truncated response. If the response to the previous request was
+    #   truncated, that response provides the value for this token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of optimization jobs to return in the response. The
+    #   default is 50.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Filters the results to only those optimization jobs that were created
+    #   after the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Filters the results to only those optimization jobs that were created
+    #   before the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   Filters the results to only those optimization jobs that were updated
+    #   after the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   Filters the results to only those optimization jobs that were updated
+    #   before the specified time.
+    #
+    # @option params [String] :optimization_contains
+    #   Filters the results to only those optimization jobs that apply the
+    #   specified optimization techniques. You can specify either
+    #   `Quantization` or `Compilation`.
+    #
+    # @option params [String] :name_contains
+    #   Filters the results to only those optimization jobs with a name that
+    #   contains the specified string.
+    #
+    # @option params [String] :status_equals
+    #   Filters the results to only those optimization jobs with the specified
+    #   status.
+    #
+    # @option params [String] :sort_by
+    #   The field by which to sort the optimization jobs in the response. The
+    #   default is `CreationTime`
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results. The default is `Ascending`
+    #
+    # @return [Types::ListOptimizationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOptimizationJobsResponse#optimization_job_summaries #optimization_job_summaries} => Array&lt;Types::OptimizationJobSummary&gt;
+    #   * {Types::ListOptimizationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_optimization_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     optimization_contains: "NameContains",
+    #     name_contains: "NameContains",
+    #     status_equals: "INPROGRESS", # accepts INPROGRESS, COMPLETED, FAILED, STARTING, STOPPING, STOPPED
+    #     sort_by: "Name", # accepts Name, CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.optimization_job_summaries #=> Array
+    #   resp.optimization_job_summaries[0].optimization_job_name #=> String
+    #   resp.optimization_job_summaries[0].optimization_job_arn #=> String
+    #   resp.optimization_job_summaries[0].creation_time #=> Time
+    #   resp.optimization_job_summaries[0].optimization_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
+    #   resp.optimization_job_summaries[0].optimization_start_time #=> Time
+    #   resp.optimization_job_summaries[0].optimization_end_time #=> Time
+    #   resp.optimization_job_summaries[0].last_modified_time #=> Time
+    #   resp.optimization_job_summaries[0].deployment_instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.12xlarge", "ml.g6.16xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.inf2.xlarge", "ml.inf2.8xlarge", "ml.inf2.24xlarge", "ml.inf2.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge"
+    #   resp.optimization_job_summaries[0].optimization_types #=> Array
+    #   resp.optimization_job_summaries[0].optimization_types[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListOptimizationJobs AWS API Documentation
+    #
+    # @overload list_optimization_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_optimization_jobs(params = {}, options = {})
+      req = build_request(:list_optimization_jobs, params)
+      req.send_request(options)
+    end
+
     # Gets a list of `PipeLineExecutionStep` objects.
     #
     # @option params [String] :pipeline_execution_arn
@@ -23793,6 +24198,28 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Ends a running inference optimization job.
+    #
+    # @option params [required, String] :optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_optimization_job({
+    #     optimization_job_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopOptimizationJob AWS API Documentation
+    #
+    # @overload stop_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def stop_optimization_job(params = {}, options = {})
+      req = build_request(:stop_optimization_job, params)
+      req.send_request(options)
+    end
+
     # Stops a pipeline execution.
     #
     # **Callback Step**
@@ -24584,6 +25011,10 @@ module Aws::SageMaker
     #       docker_settings: {
     #         enable_docker_access: "ENABLED", # accepts ENABLED, DISABLED
     #         vpc_only_trusted_accounts: ["AccountId"],
+    #       },
+    #       amazon_q_settings: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         q_profile_arn: "QProfileArn",
     #       },
     #     },
     #     app_security_group_management: "Service", # accepts Service, Customer
@@ -27047,7 +27478,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.252.0'
+      context[:gem_version] = '1.253.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

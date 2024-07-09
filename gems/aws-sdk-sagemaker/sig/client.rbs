@@ -1125,6 +1125,10 @@ module Aws
                              docker_settings: {
                                enable_docker_access: ("ENABLED" | "DISABLED")?,
                                vpc_only_trusted_accounts: Array[::String]?
+                             }?,
+                             amazon_q_settings: {
+                               status: ("ENABLED" | "DISABLED")?,
+                               q_profile_arn: ::String?
                              }?
                            },
                            subnet_ids: Array[::String],
@@ -2402,6 +2406,22 @@ module Aws
                                 }?
                               }?
                             }?,
+                            additional_model_data_sources: Array[
+                              {
+                                channel_name: ::String,
+                                s3_data_source: {
+                                  s3_uri: ::String,
+                                  s3_data_type: ("S3Prefix" | "S3Object"),
+                                  compression_type: ("None" | "Gzip"),
+                                  model_access_config: {
+                                    accept_eula: bool
+                                  }?,
+                                  hub_access_config: {
+                                    hub_content_arn: ::String
+                                  }?
+                                }
+                              },
+                            ]?,
                             environment: Hash[::String, ::String]?,
                             model_package_name: ::String?,
                             inference_specification_name: ::String?,
@@ -2434,6 +2454,22 @@ module Aws
                                   }?
                                 }?
                               }?,
+                              additional_model_data_sources: Array[
+                                {
+                                  channel_name: ::String,
+                                  s3_data_source: {
+                                    s3_uri: ::String,
+                                    s3_data_type: ("S3Prefix" | "S3Object"),
+                                    compression_type: ("None" | "Gzip"),
+                                    model_access_config: {
+                                      accept_eula: bool
+                                    }?,
+                                    hub_access_config: {
+                                      hub_content_arn: ::String
+                                    }?
+                                  }
+                                },
+                              ]?,
                               environment: Hash[::String, ::String]?,
                               model_package_name: ::String?,
                               inference_specification_name: ::String?,
@@ -3267,6 +3303,58 @@ module Aws
                                                        ]
                                                      ) -> _CreateNotebookInstanceLifecycleConfigResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotebookInstanceLifecycleConfigResponseSuccess
+
+      interface _CreateOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOptimizationJobResponse]
+        def optimization_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_optimization_job-instance_method
+      def create_optimization_job: (
+                                     optimization_job_name: ::String,
+                                     role_arn: ::String,
+                                     model_source: {
+                                       s3: {
+                                         s3_uri: ::String?,
+                                         model_access_config: {
+                                           accept_eula: bool
+                                         }?
+                                       }?
+                                     },
+                                     deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge"),
+                                     ?optimization_environment: Hash[::String, ::String],
+                                     optimization_configs: Array[
+                                       {
+                                         model_quantization_config: {
+                                           image: ::String?,
+                                           override_environment: Hash[::String, ::String]?
+                                         }?,
+                                         model_compilation_config: {
+                                           image: ::String?,
+                                           override_environment: Hash[::String, ::String]?
+                                         }?
+                                       },
+                                     ],
+                                     output_config: {
+                                       kms_key_id: ::String?,
+                                       s3_output_location: ::String
+                                     },
+                                     stopping_condition: {
+                                       max_runtime_in_seconds: ::Integer?,
+                                       max_wait_time_in_seconds: ::Integer?,
+                                       max_pending_time_in_seconds: ::Integer?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?vpc_config: {
+                                       security_group_ids: Array[::String],
+                                       subnets: Array[::String]
+                                     }
+                                   ) -> _CreateOptimizationJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOptimizationJobResponseSuccess
 
       interface _CreatePipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineResponse]
@@ -4450,6 +4538,12 @@ module Aws
                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_optimization_job-instance_method
+      def delete_optimization_job: (
+                                     optimization_job_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeletePipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePipelineResponse]
         def pipeline_arn: () -> ::String
@@ -5566,6 +5660,32 @@ module Aws
                                                          notebook_instance_lifecycle_config_name: ::String
                                                        ) -> _DescribeNotebookInstanceLifecycleConfigResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotebookInstanceLifecycleConfigResponseSuccess
+
+      interface _DescribeOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOptimizationJobResponse]
+        def optimization_job_arn: () -> ::String
+        def optimization_job_status: () -> ("INPROGRESS" | "COMPLETED" | "FAILED" | "STARTING" | "STOPPING" | "STOPPED")
+        def optimization_start_time: () -> ::Time
+        def optimization_end_time: () -> ::Time
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def failure_reason: () -> ::String
+        def optimization_job_name: () -> ::String
+        def model_source: () -> Types::OptimizationJobModelSource
+        def optimization_environment: () -> ::Hash[::String, ::String]
+        def deployment_instance_type: () -> ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+        def optimization_configs: () -> ::Array[Types::OptimizationConfig]
+        def output_config: () -> Types::OptimizationJobOutputConfig
+        def optimization_output: () -> Types::OptimizationOutput
+        def role_arn: () -> ::String
+        def stopping_condition: () -> Types::StoppingCondition
+        def vpc_config: () -> Types::OptimizationVpcConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_optimization_job-instance_method
+      def describe_optimization_job: (
+                                       optimization_job_name: ::String
+                                     ) -> _DescribeOptimizationJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOptimizationJobResponseSuccess
 
       interface _DescribePipelineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribePipelineResponse]
@@ -7066,6 +7186,27 @@ module Aws
                                    ) -> _ListNotebookInstancesResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebookInstancesResponseSuccess
 
+      interface _ListOptimizationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOptimizationJobsResponse]
+        def optimization_job_summaries: () -> ::Array[Types::OptimizationJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_optimization_jobs-instance_method
+      def list_optimization_jobs: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?creation_time_after: ::Time,
+                                    ?creation_time_before: ::Time,
+                                    ?last_modified_time_after: ::Time,
+                                    ?last_modified_time_before: ::Time,
+                                    ?optimization_contains: ::String,
+                                    ?name_contains: ::String,
+                                    ?status_equals: ("INPROGRESS" | "COMPLETED" | "FAILED" | "STARTING" | "STOPPING" | "STOPPED"),
+                                    ?sort_by: ("Name" | "CreationTime" | "Status"),
+                                    ?sort_order: ("Ascending" | "Descending")
+                                  ) -> _ListOptimizationJobsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOptimizationJobsResponseSuccess
+
       interface _ListPipelineExecutionStepsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineExecutionStepsResponse]
         def pipeline_execution_steps: () -> ::Array[Types::PipelineExecutionStep]
@@ -7722,6 +7863,12 @@ module Aws
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#stop_optimization_job-instance_method
+      def stop_optimization_job: (
+                                   optimization_job_name: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _StopPipelineExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopPipelineExecutionResponse]
         def pipeline_execution_arn: () -> ::String
@@ -8107,6 +8254,10 @@ module Aws
                              docker_settings: {
                                enable_docker_access: ("ENABLED" | "DISABLED")?,
                                vpc_only_trusted_accounts: Array[::String]?
+                             }?,
+                             amazon_q_settings: {
+                               status: ("ENABLED" | "DISABLED")?,
+                               q_profile_arn: ::String?
                              }?
                            },
                            ?app_security_group_management: ("Service" | "Customer"),

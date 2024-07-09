@@ -223,6 +223,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Data sources that are available to your model in addition to the one
+    # that you specify for `ModelDataSource` when you use the `CreateModel`
+    # action.
+    #
+    # @!attribute [rw] channel_name
+    #   A custom name for this `AdditionalModelDataSource` object.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_source
+    #   Specifies the S3 location of ML model data to deploy.
+    #   @return [Types::S3ModelDataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AdditionalModelDataSource AWS API Documentation
+    #
+    class AdditionalModelDataSource < Struct.new(
+      :channel_name,
+      :s3_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A data source used for training or inference that is in addition to
     # the input dataset or model data.
     #
@@ -589,6 +610,26 @@ module Aws::SageMaker
     class AlgorithmValidationSpecification < Struct.new(
       :validation_role,
       :validation_profiles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of settings that configure the Amazon Q experience within
+    # the domain.
+    #
+    # @!attribute [rw] status
+    #   Whether Amazon Q has been enabled within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] q_profile_arn
+    #   The ARN of the Amazon Q profile used within the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AmazonQSettings AWS API Documentation
+    #
+    class AmazonQSettings < Struct.new(
+      :status,
+      :q_profile_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4812,6 +4853,12 @@ module Aws::SageMaker
     #    </note>
     #   @return [Types::ModelDataSource]
     #
+    # @!attribute [rw] additional_model_data_sources
+    #   Data sources that are available to your model in addition to the one
+    #   that you specify for `ModelDataSource` when you use the
+    #   `CreateModel` action.
+    #   @return [Array<Types::AdditionalModelDataSource>]
+    #
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container.
     #
@@ -4844,6 +4891,7 @@ module Aws::SageMaker
       :mode,
       :model_data_url,
       :model_data_source,
+      :additional_model_data_sources,
       :environment,
       :model_package_name,
       :inference_specification_name,
@@ -8674,6 +8722,126 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] optimization_job_name
+    #   A custom name for the new optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #
+    #   During model optimization, Amazon SageMaker needs your permission
+    #   to:
+    #
+    #   * Read input data from an S3 bucket
+    #
+    #   * Write model artifacts to an S3 bucket
+    #
+    #   * Write logs to Amazon CloudWatch Logs
+    #
+    #   * Publish metrics to Amazon CloudWatch
+    #
+    #   You grant permissions for all of these tasks to an IAM role. To pass
+    #   this role to Amazon SageMaker, the caller of this API must have the
+    #   `iam:PassRole` permission. For more information, see [Amazon
+    #   SageMaker Roles.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_source
+    #   The location of the source model to optimize with an optimization
+    #   job.
+    #   @return [Types::OptimizationJobModelSource]
+    #
+    # @!attribute [rw] deployment_instance_type
+    #   The type of instance that hosts the optimized model that you create
+    #   with the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_environment
+    #   The environment variables to set in the model container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] optimization_configs
+    #   Settings for each of the optimization techniques that the job
+    #   applies.
+    #   @return [Array<Types::OptimizationConfig>]
+    #
+    # @!attribute [rw] output_config
+    #   Details for where to store the optimized model that you create with
+    #   the optimization job.
+    #   @return [Types::OptimizationJobOutputConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   Specifies a limit to how long a job can run. When the job reaches
+    #   the time limit, SageMaker ends the job. Use this API to cap costs.
+    #
+    #   To stop a training job, SageMaker sends the algorithm the `SIGTERM`
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts, so the
+    #   results of training are not lost.
+    #
+    #   The training algorithms provided by SageMaker automatically save the
+    #   intermediate results of a model training job when possible. This
+    #   attempt to save artifacts is only a best effort case as model might
+    #   not be in a state from which it can be saved. For example, if
+    #   training has just started, the model might not be ready to save.
+    #   When saved, this intermediate data is a valid model artifact. You
+    #   can use it to create a model with `CreateModel`.
+    #
+    #   <note markdown="1"> The Neural Topic Model (NTM) currently does not support saving
+    #   intermediate model artifacts. When training NTMs, make sure that the
+    #   maximum runtime is sufficient for the training job to complete.
+    #
+    #    </note>
+    #   @return [Types::StoppingCondition]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs associated with the optimization job. For
+    #   more information, see [Tagging Amazon Web Services resources][1] in
+    #   the *Amazon Web Services General Reference Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] vpc_config
+    #   A VPC in Amazon VPC that your optimized model has access to.
+    #   @return [Types::OptimizationVpcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateOptimizationJobRequest AWS API Documentation
+    #
+    class CreateOptimizationJobRequest < Struct.new(
+      :optimization_job_name,
+      :role_arn,
+      :model_source,
+      :deployment_instance_type,
+      :optimization_environment,
+      :optimization_configs,
+      :output_config,
+      :stopping_condition,
+      :tags,
+      :vpc_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] optimization_job_arn
+    #   The Amazon Resource Name (ARN) of the optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateOptimizationJobResponse AWS API Documentation
+    #
+    class CreateOptimizationJobResponse < Struct.new(
+      :optimization_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pipeline_name
     #   The name of the pipeline.
     #   @return [String]
@@ -11382,6 +11550,18 @@ module Aws::SageMaker
     #
     class DeleteNotebookInstanceLifecycleConfigInput < Struct.new(
       :notebook_instance_lifecycle_config_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteOptimizationJobRequest AWS API Documentation
+    #
+    class DeleteOptimizationJobRequest < Struct.new(
+      :optimization_job_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16373,6 +16553,135 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeOptimizationJobRequest AWS API Documentation
+    #
+    class DescribeOptimizationJobRequest < Struct.new(
+      :optimization_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] optimization_job_arn
+    #   The Amazon Resource Name (ARN) of the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_job_status
+    #   The current status of the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_start_time
+    #   The time when the optimization job started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimization_end_time
+    #   The time when the optimization job finished processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when you created the optimization job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the optimization job was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the optimization job status is `FAILED`, the reason for the
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_source
+    #   The location of the source model to optimize with an optimization
+    #   job.
+    #   @return [Types::OptimizationJobModelSource]
+    #
+    # @!attribute [rw] optimization_environment
+    #   The environment variables to set in the model container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] deployment_instance_type
+    #   The type of instance that hosts the optimized model that you create
+    #   with the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_configs
+    #   Settings for each of the optimization techniques that the job
+    #   applies.
+    #   @return [Array<Types::OptimizationConfig>]
+    #
+    # @!attribute [rw] output_config
+    #   Details for where to store the optimized model that you create with
+    #   the optimization job.
+    #   @return [Types::OptimizationJobOutputConfig]
+    #
+    # @!attribute [rw] optimization_output
+    #   Output values produced by an optimization job.
+    #   @return [Types::OptimizationOutput]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that you assigned to the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopping_condition
+    #   Specifies a limit to how long a job can run. When the job reaches
+    #   the time limit, SageMaker ends the job. Use this API to cap costs.
+    #
+    #   To stop a training job, SageMaker sends the algorithm the `SIGTERM`
+    #   signal, which delays job termination for 120 seconds. Algorithms can
+    #   use this 120-second window to save the model artifacts, so the
+    #   results of training are not lost.
+    #
+    #   The training algorithms provided by SageMaker automatically save the
+    #   intermediate results of a model training job when possible. This
+    #   attempt to save artifacts is only a best effort case as model might
+    #   not be in a state from which it can be saved. For example, if
+    #   training has just started, the model might not be ready to save.
+    #   When saved, this intermediate data is a valid model artifact. You
+    #   can use it to create a model with `CreateModel`.
+    #
+    #   <note markdown="1"> The Neural Topic Model (NTM) currently does not support saving
+    #   intermediate model artifacts. When training NTMs, make sure that the
+    #   maximum runtime is sufficient for the training job to complete.
+    #
+    #    </note>
+    #   @return [Types::StoppingCondition]
+    #
+    # @!attribute [rw] vpc_config
+    #   A VPC in Amazon VPC that your optimized model has access to.
+    #   @return [Types::OptimizationVpcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeOptimizationJobResponse AWS API Documentation
+    #
+    class DescribeOptimizationJobResponse < Struct.new(
+      :optimization_job_arn,
+      :optimization_job_status,
+      :optimization_start_time,
+      :optimization_end_time,
+      :creation_time,
+      :last_modified_time,
+      :failure_reason,
+      :optimization_job_name,
+      :model_source,
+      :optimization_environment,
+      :deployment_instance_type,
+      :optimization_configs,
+      :output_config,
+      :optimization_output,
+      :role_arn,
+      :stopping_condition,
+      :vpc_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -18292,13 +18601,20 @@ module Aws::SageMaker
     #   interaction.
     #   @return [Types::DockerSettings]
     #
+    # @!attribute [rw] amazon_q_settings
+    #   A collection of settings that configure the Amazon Q experience
+    #   within the domain. The `AuthMode` that you use to create the domain
+    #   must be `SSO`.
+    #   @return [Types::AmazonQSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
     #
     class DomainSettings < Struct.new(
       :security_group_ids,
       :r_studio_server_pro_domain_settings,
       :execution_role_identity_config,
-      :docker_settings)
+      :docker_settings,
+      :amazon_q_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18333,13 +18649,19 @@ module Aws::SageMaker
     #   interaction.
     #   @return [Types::DockerSettings]
     #
+    # @!attribute [rw] amazon_q_settings
+    #   A collection of settings that configure the Amazon Q experience
+    #   within the domain.
+    #   @return [Types::AmazonQSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
       :r_studio_server_pro_domain_settings_for_update,
       :execution_role_identity_config,
       :security_group_ids,
-      :docker_settings)
+      :docker_settings,
+      :amazon_q_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29506,6 +29828,99 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   A token that you use to get the next set of results following a
+    #   truncated response. If the response to the previous request was
+    #   truncated, that response provides the value for this token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of optimization jobs to return in the response.
+    #   The default is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Filters the results to only those optimization jobs that were
+    #   created after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Filters the results to only those optimization jobs that were
+    #   created before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   Filters the results to only those optimization jobs that were
+    #   updated after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   Filters the results to only those optimization jobs that were
+    #   updated before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimization_contains
+    #   Filters the results to only those optimization jobs that apply the
+    #   specified optimization techniques. You can specify either
+    #   `Quantization` or `Compilation`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   Filters the results to only those optimization jobs with a name that
+    #   contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   Filters the results to only those optimization jobs with the
+    #   specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field by which to sort the optimization jobs in the response.
+    #   The default is `CreationTime`
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListOptimizationJobsRequest AWS API Documentation
+    #
+    class ListOptimizationJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :optimization_contains,
+      :name_contains,
+      :status_equals,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] optimization_job_summaries
+    #   A list of optimization jobs and their properties that matches any of
+    #   the filters you specified in the request.
+    #   @return [Array<Types::OptimizationJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in a subsequent request to get the next set of
+    #   results following a truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListOptimizationJobsResponse AWS API Documentation
+    #
+    class ListOptimizationJobsResponse < Struct.new(
+      :optimization_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -31544,6 +31959,28 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Settings for the model compilation technique that's applied by a
+    # model optimization job.
+    #
+    # @!attribute [rw] image
+    #   The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to
+    #   run the optimization.
+    #   @return [String]
+    #
+    # @!attribute [rw] override_environment
+    #   Environment variables that override the default ones in the model
+    #   container.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelCompilationConfig AWS API Documentation
+    #
+    class ModelCompilationConfig < Struct.new(
+      :image,
+      :override_environment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the model configuration. Includes the specification name and
     # environment parameters.
     #
@@ -32883,6 +33320,28 @@ module Aws::SageMaker
       :endpoint_input,
       :batch_transform_input,
       :ground_truth_s3_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the model quantization technique that's applied by a
+    # model optimization job.
+    #
+    # @!attribute [rw] image
+    #   The URI of an LMI DLC in Amazon ECR. SageMaker uses this image to
+    #   run the optimization.
+    #   @return [String]
+    #
+    # @!attribute [rw] override_environment
+    #   Environment variables that override the default ones in the model
+    #   container.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelQuantizationConfig AWS API Documentation
+    #
+    class ModelQuantizationConfig < Struct.new(
+      :image,
+      :override_environment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34469,6 +34928,221 @@ module Aws::SageMaker
     #
     class OnlineStoreSecurityConfig < Struct.new(
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for an optimization technique that you apply with a model
+    # optimization job.
+    #
+    # @note OptimizationConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note OptimizationConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OptimizationConfig corresponding to the set member.
+    #
+    # @!attribute [rw] model_quantization_config
+    #   Settings for the model quantization technique that's applied by a
+    #   model optimization job.
+    #   @return [Types::ModelQuantizationConfig]
+    #
+    # @!attribute [rw] model_compilation_config
+    #   Settings for the model compilation technique that's applied by a
+    #   model optimization job.
+    #   @return [Types::ModelCompilationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationConfig AWS API Documentation
+    #
+    class OptimizationConfig < Struct.new(
+      :model_quantization_config,
+      :model_compilation_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ModelQuantizationConfig < OptimizationConfig; end
+      class ModelCompilationConfig < OptimizationConfig; end
+      class Unknown < OptimizationConfig; end
+    end
+
+    # The location of the source model to optimize with an optimization job.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon S3 location of a source model to optimize with an
+    #   optimization job.
+    #   @return [Types::OptimizationJobModelSourceS3]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationJobModelSource AWS API Documentation
+    #
+    class OptimizationJobModelSource < Struct.new(
+      :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location of a source model to optimize with an
+    # optimization job.
+    #
+    # @!attribute [rw] s3_uri
+    #   An Amazon S3 URI that locates a source model to optimize with an
+    #   optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_access_config
+    #   The access configuration settings for the source ML model for an
+    #   optimization job, where you can accept the model end-user license
+    #   agreement (EULA).
+    #   @return [Types::OptimizationModelAccessConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationJobModelSourceS3 AWS API Documentation
+    #
+    class OptimizationJobModelSourceS3 < Struct.new(
+      :s3_uri,
+      :model_access_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details for where to store the optimized model that you create with
+    # the optimization job.
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of a key in Amazon Web Services KMS.
+    #   SageMaker uses they key to encrypt the artifacts of the optimized
+    #   model when SageMaker uploads the model to Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_location
+    #   The Amazon S3 URI for where to store the optimized model that you
+    #   create with an optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationJobOutputConfig AWS API Documentation
+    #
+    class OptimizationJobOutputConfig < Struct.new(
+      :kms_key_id,
+      :s3_output_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarizes an optimization job by providing some of its key
+    # properties.
+    #
+    # @!attribute [rw] optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_job_arn
+    #   The Amazon Resource Name (ARN) of the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when you created the optimization job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimization_job_status
+    #   The current status of the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_start_time
+    #   The time when the optimization job started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimization_end_time
+    #   The time when the optimization job finished processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the optimization job was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deployment_instance_type
+    #   The type of instance that hosts the optimized model that you create
+    #   with the optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_types
+    #   The optimization techniques that are applied by the optimization
+    #   job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationJobSummary AWS API Documentation
+    #
+    class OptimizationJobSummary < Struct.new(
+      :optimization_job_name,
+      :optimization_job_arn,
+      :creation_time,
+      :optimization_job_status,
+      :optimization_start_time,
+      :optimization_end_time,
+      :last_modified_time,
+      :deployment_instance_type,
+      :optimization_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access configuration settings for the source ML model for an
+    # optimization job, where you can accept the model end-user license
+    # agreement (EULA).
+    #
+    # @!attribute [rw] accept_eula
+    #   Specifies agreement to the model end-user license agreement (EULA).
+    #   The `AcceptEula` value must be explicitly defined as `True` in order
+    #   to accept the EULA that this model requires. You are responsible for
+    #   reviewing and complying with any applicable license terms and making
+    #   sure they are acceptable for your use case before downloading or
+    #   using a model.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationModelAccessConfig AWS API Documentation
+    #
+    class OptimizationModelAccessConfig < Struct.new(
+      :accept_eula)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output values produced by an optimization job.
+    #
+    # @!attribute [rw] recommended_inference_image
+    #   The image that SageMaker recommends that you use to host the
+    #   optimized model that you created with an optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationOutput AWS API Documentation
+    #
+    class OptimizationOutput < Struct.new(
+      :recommended_inference_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A VPC in Amazon VPC that's accessible to an optimized that you create
+    # with an optimization job. You can control access to and from your
+    # resources by configuring a VPC. For more information, see [Give
+    # SageMaker Access to Resources in your Amazon VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs, in the form `sg-xxxxxxxx`. Specify the
+    #   security groups for the VPC that is specified in the `Subnets`
+    #   field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC to which you want to connect your
+    #   optimized model.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OptimizationVpcConfig AWS API Documentation
+    #
+    class OptimizationVpcConfig < Struct.new(
+      :security_group_ids,
+      :subnets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40597,6 +41271,18 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] optimization_job_name
+    #   The name that you assigned to the optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopOptimizationJobRequest AWS API Documentation
+    #
+    class StopOptimizationJobRequest < Struct.new(
+      :optimization_job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pipeline_execution_arn
     #   The Amazon Resource Name (ARN) of the pipeline execution.
     #   @return [String]
@@ -40667,11 +41353,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies a limit to how long a model training job or model
-    # compilation job can run. It also specifies how long a managed spot
-    # training job has to complete. When the job reaches the time limit,
-    # SageMaker ends the training or compilation job. Use this API to cap
-    # model training costs.
+    # Specifies a limit to how long a job can run. When the job reaches the
+    # time limit, SageMaker ends the job. Use this API to cap costs.
     #
     # To stop a training job, SageMaker sends the algorithm the `SIGTERM`
     # signal, which delays job termination for 120 seconds. Algorithms can
