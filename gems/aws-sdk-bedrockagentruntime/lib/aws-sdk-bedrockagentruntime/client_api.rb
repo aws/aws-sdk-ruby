@@ -37,15 +37,23 @@ module Aws::BedrockAgentRuntime
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ByteContentBlob = Shapes::BlobShape.new(name: 'ByteContentBlob')
     ByteContentDoc = Shapes::StructureShape.new(name: 'ByteContentDoc')
+    ByteContentFile = Shapes::StructureShape.new(name: 'ByteContentFile')
     Citation = Shapes::StructureShape.new(name: 'Citation')
     Citations = Shapes::ListShape.new(name: 'Citations')
+    CodeInterpreterInvocationInput = Shapes::StructureShape.new(name: 'CodeInterpreterInvocationInput')
+    CodeInterpreterInvocationOutput = Shapes::StructureShape.new(name: 'CodeInterpreterInvocationOutput')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentBody = Shapes::StructureShape.new(name: 'ContentBody')
     ContentMap = Shapes::MapShape.new(name: 'ContentMap')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreationMode = Shapes::StringShape.new(name: 'CreationMode')
+    DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
+    DeleteAgentMemoryRequest = Shapes::StructureShape.new(name: 'DeleteAgentMemoryRequest')
+    DeleteAgentMemoryResponse = Shapes::StructureShape.new(name: 'DeleteAgentMemoryResponse')
     DependencyFailedException = Shapes::StructureShape.new(name: 'DependencyFailedException')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     Double = Shapes::FloatShape.new(name: 'Double')
+    ExecutionType = Shapes::StringShape.new(name: 'ExecutionType')
     ExternalSource = Shapes::StructureShape.new(name: 'ExternalSource')
     ExternalSourceType = Shapes::StringShape.new(name: 'ExternalSourceType')
     ExternalSources = Shapes::ListShape.new(name: 'ExternalSources')
@@ -53,11 +61,27 @@ module Aws::BedrockAgentRuntime
     ExternalSourcesRetrieveAndGenerateConfiguration = Shapes::StructureShape.new(name: 'ExternalSourcesRetrieveAndGenerateConfiguration')
     FailureReasonString = Shapes::StringShape.new(name: 'FailureReasonString')
     FailureTrace = Shapes::StructureShape.new(name: 'FailureTrace')
+    FileBody = Shapes::BlobShape.new(name: 'FileBody')
+    FilePart = Shapes::StructureShape.new(name: 'FilePart')
+    FileSource = Shapes::StructureShape.new(name: 'FileSource')
+    FileSourceType = Shapes::StringShape.new(name: 'FileSourceType')
+    FileUseCase = Shapes::StringShape.new(name: 'FileUseCase')
+    Files = Shapes::ListShape.new(name: 'Files')
     FilterAttribute = Shapes::StructureShape.new(name: 'FilterAttribute')
     FilterKey = Shapes::StringShape.new(name: 'FilterKey')
     FilterValue = Shapes::DocumentShape.new(name: 'FilterValue', document: true)
     FinalResponse = Shapes::StructureShape.new(name: 'FinalResponse')
     FinalResponseString = Shapes::StringShape.new(name: 'FinalResponseString')
+    FlowAliasIdentifier = Shapes::StringShape.new(name: 'FlowAliasIdentifier')
+    FlowCompletionEvent = Shapes::StructureShape.new(name: 'FlowCompletionEvent')
+    FlowCompletionReason = Shapes::StringShape.new(name: 'FlowCompletionReason')
+    FlowIdentifier = Shapes::StringShape.new(name: 'FlowIdentifier')
+    FlowInput = Shapes::StructureShape.new(name: 'FlowInput')
+    FlowInputContent = Shapes::UnionShape.new(name: 'FlowInputContent')
+    FlowInputs = Shapes::ListShape.new(name: 'FlowInputs')
+    FlowOutputContent = Shapes::UnionShape.new(name: 'FlowOutputContent')
+    FlowOutputEvent = Shapes::StructureShape.new(name: 'FlowOutputEvent')
+    FlowResponseStream = Shapes::StructureShape.new(name: 'FlowResponseStream')
     Function = Shapes::StringShape.new(name: 'Function')
     FunctionInvocationInput = Shapes::StructureShape.new(name: 'FunctionInvocationInput')
     FunctionParameter = Shapes::StructureShape.new(name: 'FunctionParameter')
@@ -65,6 +89,8 @@ module Aws::BedrockAgentRuntime
     FunctionResult = Shapes::StructureShape.new(name: 'FunctionResult')
     GeneratedResponsePart = Shapes::StructureShape.new(name: 'GeneratedResponsePart')
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
+    GetAgentMemoryRequest = Shapes::StructureShape.new(name: 'GetAgentMemoryRequest')
+    GetAgentMemoryResponse = Shapes::StructureShape.new(name: 'GetAgentMemoryResponse')
     GuadrailAction = Shapes::StringShape.new(name: 'GuadrailAction')
     GuardrailAction = Shapes::StringShape.new(name: 'GuardrailAction')
     GuardrailAssessment = Shapes::StructureShape.new(name: 'GuardrailAssessment')
@@ -101,6 +127,8 @@ module Aws::BedrockAgentRuntime
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     InferenceConfig = Shapes::StructureShape.new(name: 'InferenceConfig')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
+    InputFile = Shapes::StructureShape.new(name: 'InputFile')
+    InputFiles = Shapes::ListShape.new(name: 'InputFiles')
     InputText = Shapes::StringShape.new(name: 'InputText')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -111,7 +139,11 @@ module Aws::BedrockAgentRuntime
     InvocationType = Shapes::StringShape.new(name: 'InvocationType')
     InvokeAgentRequest = Shapes::StructureShape.new(name: 'InvokeAgentRequest')
     InvokeAgentResponse = Shapes::StructureShape.new(name: 'InvokeAgentResponse')
+    InvokeFlowRequest = Shapes::StructureShape.new(name: 'InvokeFlowRequest')
+    InvokeFlowResponse = Shapes::StructureShape.new(name: 'InvokeFlowResponse')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    KnowledgeBaseConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseConfiguration')
+    KnowledgeBaseConfigurations = Shapes::ListShape.new(name: 'KnowledgeBaseConfigurations')
     KnowledgeBaseId = Shapes::StringShape.new(name: 'KnowledgeBaseId')
     KnowledgeBaseLookupInput = Shapes::StructureShape.new(name: 'KnowledgeBaseLookupInput')
     KnowledgeBaseLookupInputString = Shapes::StringShape.new(name: 'KnowledgeBaseLookupInputString')
@@ -125,14 +157,26 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseVectorSearchConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseVectorSearchConfiguration')
     KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
+    Memories = Shapes::ListShape.new(name: 'Memories')
+    Memory = Shapes::UnionShape.new(name: 'Memory')
+    MemoryId = Shapes::StringShape.new(name: 'MemoryId')
+    MemorySessionSummary = Shapes::StructureShape.new(name: 'MemorySessionSummary')
+    MemoryType = Shapes::StringShape.new(name: 'MemoryType')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     ModelInvocationInput = Shapes::StructureShape.new(name: 'ModelInvocationInput')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NodeName = Shapes::StringShape.new(name: 'NodeName')
+    NodeOutputName = Shapes::StringShape.new(name: 'NodeOutputName')
+    NodeType = Shapes::StringShape.new(name: 'NodeType')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     Observation = Shapes::StructureShape.new(name: 'Observation')
+    OrchestrationConfiguration = Shapes::StructureShape.new(name: 'OrchestrationConfiguration')
     OrchestrationTrace = Shapes::UnionShape.new(name: 'OrchestrationTrace')
+    OutputFile = Shapes::StructureShape.new(name: 'OutputFile')
+    OutputFiles = Shapes::ListShape.new(name: 'OutputFiles')
     OutputString = Shapes::StringShape.new(name: 'OutputString')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
     ParameterList = Shapes::ListShape.new(name: 'ParameterList')
@@ -150,6 +194,8 @@ module Aws::BedrockAgentRuntime
     PromptText = Shapes::StringShape.new(name: 'PromptText')
     PromptType = Shapes::StringShape.new(name: 'PromptType')
     PropertyParameters = Shapes::StructureShape.new(name: 'PropertyParameters')
+    QueryTransformationConfiguration = Shapes::StructureShape.new(name: 'QueryTransformationConfiguration')
+    QueryTransformationType = Shapes::StringShape.new(name: 'QueryTransformationType')
     RAGStopSequences = Shapes::ListShape.new(name: 'RAGStopSequences')
     RAGStopSequencesMemberString = Shapes::StringShape.new(name: 'RAGStopSequencesMemberString')
     Rationale = Shapes::StructureShape.new(name: 'Rationale')
@@ -162,6 +208,7 @@ module Aws::BedrockAgentRuntime
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
     RetrievalFilter = Shapes::UnionShape.new(name: 'RetrievalFilter')
     RetrievalFilterList = Shapes::ListShape.new(name: 'RetrievalFilterList')
+    RetrievalResultConfluenceLocation = Shapes::StructureShape.new(name: 'RetrievalResultConfluenceLocation')
     RetrievalResultContent = Shapes::StructureShape.new(name: 'RetrievalResultContent')
     RetrievalResultLocation = Shapes::StructureShape.new(name: 'RetrievalResultLocation')
     RetrievalResultLocationType = Shapes::StringShape.new(name: 'RetrievalResultLocationType')
@@ -169,6 +216,9 @@ module Aws::BedrockAgentRuntime
     RetrievalResultMetadataKey = Shapes::StringShape.new(name: 'RetrievalResultMetadataKey')
     RetrievalResultMetadataValue = Shapes::DocumentShape.new(name: 'RetrievalResultMetadataValue', document: true)
     RetrievalResultS3Location = Shapes::StructureShape.new(name: 'RetrievalResultS3Location')
+    RetrievalResultSalesforceLocation = Shapes::StructureShape.new(name: 'RetrievalResultSalesforceLocation')
+    RetrievalResultSharePointLocation = Shapes::StructureShape.new(name: 'RetrievalResultSharePointLocation')
+    RetrievalResultWebLocation = Shapes::StructureShape.new(name: 'RetrievalResultWebLocation')
     RetrieveAndGenerateConfiguration = Shapes::StructureShape.new(name: 'RetrieveAndGenerateConfiguration')
     RetrieveAndGenerateInput = Shapes::StructureShape.new(name: 'RetrieveAndGenerateInput')
     RetrieveAndGenerateInputTextString = Shapes::StringShape.new(name: 'RetrieveAndGenerateInputTextString')
@@ -184,6 +234,7 @@ module Aws::BedrockAgentRuntime
     ReturnControlInvocationResults = Shapes::ListShape.new(name: 'ReturnControlInvocationResults')
     ReturnControlPayload = Shapes::StructureShape.new(name: 'ReturnControlPayload')
     S3ObjectDoc = Shapes::StructureShape.new(name: 'S3ObjectDoc')
+    S3ObjectFile = Shapes::StructureShape.new(name: 'S3ObjectFile')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchType = Shapes::StringShape.new(name: 'SearchType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -196,6 +247,7 @@ module Aws::BedrockAgentRuntime
     SpanStartInteger = Shapes::IntegerShape.new(name: 'SpanStartInteger')
     StopSequences = Shapes::ListShape.new(name: 'StopSequences')
     String = Shapes::StringShape.new(name: 'String')
+    SummaryText = Shapes::StringShape.new(name: 'SummaryText')
     Temperature = Shapes::FloatShape.new(name: 'Temperature')
     TextInferenceConfig = Shapes::StructureShape.new(name: 'TextInferenceConfig')
     TextPromptTemplate = Shapes::StringShape.new(name: 'TextPromptTemplate')
@@ -216,7 +268,9 @@ module Aws::BedrockAgentRuntime
 
     ActionGroupInvocationInput.add_member(:action_group_name, Shapes::ShapeRef.new(shape: ActionGroupName, location_name: "actionGroupName"))
     ActionGroupInvocationInput.add_member(:api_path, Shapes::ShapeRef.new(shape: ApiPath, location_name: "apiPath"))
+    ActionGroupInvocationInput.add_member(:execution_type, Shapes::ShapeRef.new(shape: ExecutionType, location_name: "executionType"))
     ActionGroupInvocationInput.add_member(:function, Shapes::ShapeRef.new(shape: Function, location_name: "function"))
+    ActionGroupInvocationInput.add_member(:invocation_id, Shapes::ShapeRef.new(shape: String, location_name: "invocationId"))
     ActionGroupInvocationInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
     ActionGroupInvocationInput.add_member(:request_body, Shapes::ShapeRef.new(shape: RequestBody, location_name: "requestBody"))
     ActionGroupInvocationInput.add_member(:verb, Shapes::ShapeRef.new(shape: Verb, location_name: "verb"))
@@ -268,11 +322,25 @@ module Aws::BedrockAgentRuntime
     ByteContentDoc.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "identifier"))
     ByteContentDoc.struct_class = Types::ByteContentDoc
 
+    ByteContentFile.add_member(:data, Shapes::ShapeRef.new(shape: ByteContentBlob, required: true, location_name: "data"))
+    ByteContentFile.add_member(:media_type, Shapes::ShapeRef.new(shape: MimeType, required: true, location_name: "mediaType"))
+    ByteContentFile.struct_class = Types::ByteContentFile
+
     Citation.add_member(:generated_response_part, Shapes::ShapeRef.new(shape: GeneratedResponsePart, location_name: "generatedResponsePart"))
     Citation.add_member(:retrieved_references, Shapes::ShapeRef.new(shape: RetrievedReferences, location_name: "retrievedReferences"))
     Citation.struct_class = Types::Citation
 
     Citations.member = Shapes::ShapeRef.new(shape: Citation)
+
+    CodeInterpreterInvocationInput.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    CodeInterpreterInvocationInput.add_member(:files, Shapes::ShapeRef.new(shape: Files, location_name: "files"))
+    CodeInterpreterInvocationInput.struct_class = Types::CodeInterpreterInvocationInput
+
+    CodeInterpreterInvocationOutput.add_member(:execution_error, Shapes::ShapeRef.new(shape: String, location_name: "executionError"))
+    CodeInterpreterInvocationOutput.add_member(:execution_output, Shapes::ShapeRef.new(shape: String, location_name: "executionOutput"))
+    CodeInterpreterInvocationOutput.add_member(:execution_timeout, Shapes::ShapeRef.new(shape: Boolean, location_name: "executionTimeout"))
+    CodeInterpreterInvocationOutput.add_member(:files, Shapes::ShapeRef.new(shape: Files, location_name: "files"))
+    CodeInterpreterInvocationOutput.struct_class = Types::CodeInterpreterInvocationOutput
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -282,6 +350,13 @@ module Aws::BedrockAgentRuntime
 
     ContentMap.key = Shapes::ShapeRef.new(shape: String)
     ContentMap.value = Shapes::ShapeRef.new(shape: Parameters)
+
+    DeleteAgentMemoryRequest.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location: "uri", location_name: "agentAliasId"))
+    DeleteAgentMemoryRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: AgentId, required: true, location: "uri", location_name: "agentId"))
+    DeleteAgentMemoryRequest.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, location: "querystring", location_name: "memoryId"))
+    DeleteAgentMemoryRequest.struct_class = Types::DeleteAgentMemoryRequest
+
+    DeleteAgentMemoryResponse.struct_class = Types::DeleteAgentMemoryResponse
 
     DependencyFailedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     DependencyFailedException.add_member(:resource_name, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "resourceName"))
@@ -309,12 +384,62 @@ module Aws::BedrockAgentRuntime
     FailureTrace.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     FailureTrace.struct_class = Types::FailureTrace
 
+    FilePart.add_member(:files, Shapes::ShapeRef.new(shape: OutputFiles, location_name: "files"))
+    FilePart.struct_class = Types::FilePart
+
+    FileSource.add_member(:byte_content, Shapes::ShapeRef.new(shape: ByteContentFile, location_name: "byteContent"))
+    FileSource.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3ObjectFile, location_name: "s3Location"))
+    FileSource.add_member(:source_type, Shapes::ShapeRef.new(shape: FileSourceType, required: true, location_name: "sourceType"))
+    FileSource.struct_class = Types::FileSource
+
+    Files.member = Shapes::ShapeRef.new(shape: String)
+
     FilterAttribute.add_member(:key, Shapes::ShapeRef.new(shape: FilterKey, required: true, location_name: "key"))
     FilterAttribute.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, required: true, location_name: "value"))
     FilterAttribute.struct_class = Types::FilterAttribute
 
     FinalResponse.add_member(:text, Shapes::ShapeRef.new(shape: FinalResponseString, location_name: "text"))
     FinalResponse.struct_class = Types::FinalResponse
+
+    FlowCompletionEvent.add_member(:completion_reason, Shapes::ShapeRef.new(shape: FlowCompletionReason, required: true, location_name: "completionReason"))
+    FlowCompletionEvent.struct_class = Types::FlowCompletionEvent
+
+    FlowInput.add_member(:content, Shapes::ShapeRef.new(shape: FlowInputContent, required: true, location_name: "content"))
+    FlowInput.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowInput.add_member(:node_output_name, Shapes::ShapeRef.new(shape: NodeOutputName, required: true, location_name: "nodeOutputName"))
+    FlowInput.struct_class = Types::FlowInput
+
+    FlowInputContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
+    FlowInputContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowInputContent.add_member_subclass(:document, Types::FlowInputContent::Document)
+    FlowInputContent.add_member_subclass(:unknown, Types::FlowInputContent::Unknown)
+    FlowInputContent.struct_class = Types::FlowInputContent
+
+    FlowInputs.member = Shapes::ShapeRef.new(shape: FlowInput)
+
+    FlowOutputContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
+    FlowOutputContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowOutputContent.add_member_subclass(:document, Types::FlowOutputContent::Document)
+    FlowOutputContent.add_member_subclass(:unknown, Types::FlowOutputContent::Unknown)
+    FlowOutputContent.struct_class = Types::FlowOutputContent
+
+    FlowOutputEvent.add_member(:content, Shapes::ShapeRef.new(shape: FlowOutputContent, required: true, location_name: "content"))
+    FlowOutputEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowOutputEvent.add_member(:node_type, Shapes::ShapeRef.new(shape: NodeType, required: true, location_name: "nodeType"))
+    FlowOutputEvent.struct_class = Types::FlowOutputEvent
+
+    FlowResponseStream.add_member(:access_denied_exception, Shapes::ShapeRef.new(shape: AccessDeniedException, location_name: "accessDeniedException"))
+    FlowResponseStream.add_member(:bad_gateway_exception, Shapes::ShapeRef.new(shape: BadGatewayException, location_name: "badGatewayException"))
+    FlowResponseStream.add_member(:conflict_exception, Shapes::ShapeRef.new(shape: ConflictException, location_name: "conflictException"))
+    FlowResponseStream.add_member(:dependency_failed_exception, Shapes::ShapeRef.new(shape: DependencyFailedException, location_name: "dependencyFailedException"))
+    FlowResponseStream.add_member(:flow_completion_event, Shapes::ShapeRef.new(shape: FlowCompletionEvent, event: true, location_name: "flowCompletionEvent"))
+    FlowResponseStream.add_member(:flow_output_event, Shapes::ShapeRef.new(shape: FlowOutputEvent, event: true, location_name: "flowOutputEvent"))
+    FlowResponseStream.add_member(:internal_server_exception, Shapes::ShapeRef.new(shape: InternalServerException, location_name: "internalServerException"))
+    FlowResponseStream.add_member(:resource_not_found_exception, Shapes::ShapeRef.new(shape: ResourceNotFoundException, location_name: "resourceNotFoundException"))
+    FlowResponseStream.add_member(:service_quota_exceeded_exception, Shapes::ShapeRef.new(shape: ServiceQuotaExceededException, location_name: "serviceQuotaExceededException"))
+    FlowResponseStream.add_member(:throttling_exception, Shapes::ShapeRef.new(shape: ThrottlingException, location_name: "throttlingException"))
+    FlowResponseStream.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, location_name: "validationException"))
+    FlowResponseStream.struct_class = Types::FlowResponseStream
 
     FunctionInvocationInput.add_member(:action_group, Shapes::ShapeRef.new(shape: String, required: true, location_name: "actionGroup"))
     FunctionInvocationInput.add_member(:function, Shapes::ShapeRef.new(shape: String, location_name: "function"))
@@ -342,6 +467,18 @@ module Aws::BedrockAgentRuntime
     GenerationConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "inferenceConfig"))
     GenerationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
     GenerationConfiguration.struct_class = Types::GenerationConfiguration
+
+    GetAgentMemoryRequest.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, required: true, location: "uri", location_name: "agentAliasId"))
+    GetAgentMemoryRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: AgentId, required: true, location: "uri", location_name: "agentId"))
+    GetAgentMemoryRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxItems"))
+    GetAgentMemoryRequest.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "querystring", location_name: "memoryId"))
+    GetAgentMemoryRequest.add_member(:memory_type, Shapes::ShapeRef.new(shape: MemoryType, required: true, location: "querystring", location_name: "memoryType"))
+    GetAgentMemoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetAgentMemoryRequest.struct_class = Types::GetAgentMemoryRequest
+
+    GetAgentMemoryResponse.add_member(:memory_contents, Shapes::ShapeRef.new(shape: Memories, location_name: "memoryContents"))
+    GetAgentMemoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetAgentMemoryResponse.struct_class = Types::GetAgentMemoryResponse
 
     GuardrailAssessment.add_member(:content_policy, Shapes::ShapeRef.new(shape: GuardrailContentPolicyAssessment, location_name: "contentPolicy"))
     GuardrailAssessment.add_member(:sensitive_information_policy, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyAssessment, location_name: "sensitiveInformationPolicy"))
@@ -427,10 +564,18 @@ module Aws::BedrockAgentRuntime
     InferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
     InferenceConfiguration.struct_class = Types::InferenceConfiguration
 
+    InputFile.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    InputFile.add_member(:source, Shapes::ShapeRef.new(shape: FileSource, required: true, location_name: "source"))
+    InputFile.add_member(:use_case, Shapes::ShapeRef.new(shape: FileUseCase, required: true, location_name: "useCase"))
+    InputFile.struct_class = Types::InputFile
+
+    InputFiles.member = Shapes::ShapeRef.new(shape: InputFile)
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
     InvocationInput.add_member(:action_group_invocation_input, Shapes::ShapeRef.new(shape: ActionGroupInvocationInput, location_name: "actionGroupInvocationInput"))
+    InvocationInput.add_member(:code_interpreter_invocation_input, Shapes::ShapeRef.new(shape: CodeInterpreterInvocationInput, location_name: "codeInterpreterInvocationInput"))
     InvocationInput.add_member(:invocation_type, Shapes::ShapeRef.new(shape: InvocationType, location_name: "invocationType"))
     InvocationInput.add_member(:knowledge_base_lookup_input, Shapes::ShapeRef.new(shape: KnowledgeBaseLookupInput, location_name: "knowledgeBaseLookupInput"))
     InvocationInput.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
@@ -459,16 +604,34 @@ module Aws::BedrockAgentRuntime
     InvokeAgentRequest.add_member(:enable_trace, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTrace"))
     InvokeAgentRequest.add_member(:end_session, Shapes::ShapeRef.new(shape: Boolean, location_name: "endSession"))
     InvokeAgentRequest.add_member(:input_text, Shapes::ShapeRef.new(shape: InputText, location_name: "inputText"))
+    InvokeAgentRequest.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, location_name: "memoryId"))
     InvokeAgentRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
     InvokeAgentRequest.add_member(:session_state, Shapes::ShapeRef.new(shape: SessionState, location_name: "sessionState"))
     InvokeAgentRequest.struct_class = Types::InvokeAgentRequest
 
     InvokeAgentResponse.add_member(:completion, Shapes::ShapeRef.new(shape: ResponseStream, required: true, eventstream: true, location_name: "completion"))
     InvokeAgentResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, required: true, location: "header", location_name: "x-amzn-bedrock-agent-content-type"))
+    InvokeAgentResponse.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, location: "header", location_name: "x-amz-bedrock-agent-memory-id"))
     InvokeAgentResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "header", location_name: "x-amz-bedrock-agent-session-id"))
     InvokeAgentResponse.struct_class = Types::InvokeAgentResponse
     InvokeAgentResponse[:payload] = :completion
     InvokeAgentResponse[:payload_member] = InvokeAgentResponse.member(:completion)
+
+    InvokeFlowRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "flowAliasIdentifier"))
+    InvokeFlowRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
+    InvokeFlowRequest.add_member(:inputs, Shapes::ShapeRef.new(shape: FlowInputs, required: true, location_name: "inputs"))
+    InvokeFlowRequest.struct_class = Types::InvokeFlowRequest
+
+    InvokeFlowResponse.add_member(:response_stream, Shapes::ShapeRef.new(shape: FlowResponseStream, required: true, eventstream: true, location_name: "responseStream"))
+    InvokeFlowResponse.struct_class = Types::InvokeFlowResponse
+    InvokeFlowResponse[:payload] = :response_stream
+    InvokeFlowResponse[:payload_member] = InvokeFlowResponse.member(:response_stream)
+
+    KnowledgeBaseConfiguration.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location_name: "knowledgeBaseId"))
+    KnowledgeBaseConfiguration.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseRetrievalConfiguration, required: true, location_name: "retrievalConfiguration"))
+    KnowledgeBaseConfiguration.struct_class = Types::KnowledgeBaseConfiguration
+
+    KnowledgeBaseConfigurations.member = Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration)
 
     KnowledgeBaseLookupInput.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: TraceKnowledgeBaseId, location_name: "knowledgeBaseId"))
     KnowledgeBaseLookupInput.add_member(:text, Shapes::ShapeRef.new(shape: KnowledgeBaseLookupInputString, location_name: "text"))
@@ -494,6 +657,7 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:generation_configuration, Shapes::ShapeRef.new(shape: GenerationConfiguration, location_name: "generationConfiguration"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location_name: "knowledgeBaseId"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
+    KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:orchestration_configuration, Shapes::ShapeRef.new(shape: OrchestrationConfiguration, location_name: "orchestrationConfiguration"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseRetrievalConfiguration, location_name: "retrievalConfiguration"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.struct_class = Types::KnowledgeBaseRetrieveAndGenerateConfiguration
 
@@ -501,6 +665,21 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseVectorSearchConfiguration.add_member(:number_of_results, Shapes::ShapeRef.new(shape: KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger, location_name: "numberOfResults", metadata: {"box"=>true}))
     KnowledgeBaseVectorSearchConfiguration.add_member(:override_search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "overrideSearchType"))
     KnowledgeBaseVectorSearchConfiguration.struct_class = Types::KnowledgeBaseVectorSearchConfiguration
+
+    Memories.member = Shapes::ShapeRef.new(shape: Memory)
+
+    Memory.add_member(:session_summary, Shapes::ShapeRef.new(shape: MemorySessionSummary, location_name: "sessionSummary"))
+    Memory.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Memory.add_member_subclass(:session_summary, Types::Memory::SessionSummary)
+    Memory.add_member_subclass(:unknown, Types::Memory::Unknown)
+    Memory.struct_class = Types::Memory
+
+    MemorySessionSummary.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, location_name: "memoryId"))
+    MemorySessionSummary.add_member(:session_expiry_time, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "sessionExpiryTime"))
+    MemorySessionSummary.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
+    MemorySessionSummary.add_member(:session_start_time, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "sessionStartTime"))
+    MemorySessionSummary.add_member(:summary_text, Shapes::ShapeRef.new(shape: SummaryText, location_name: "summaryText"))
+    MemorySessionSummary.struct_class = Types::MemorySessionSummary
 
     ModelInvocationInput.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfiguration"))
     ModelInvocationInput.add_member(:override_lambda, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "overrideLambda"))
@@ -512,12 +691,16 @@ module Aws::BedrockAgentRuntime
     ModelInvocationInput.struct_class = Types::ModelInvocationInput
 
     Observation.add_member(:action_group_invocation_output, Shapes::ShapeRef.new(shape: ActionGroupInvocationOutput, location_name: "actionGroupInvocationOutput"))
+    Observation.add_member(:code_interpreter_invocation_output, Shapes::ShapeRef.new(shape: CodeInterpreterInvocationOutput, location_name: "codeInterpreterInvocationOutput"))
     Observation.add_member(:final_response, Shapes::ShapeRef.new(shape: FinalResponse, location_name: "finalResponse"))
     Observation.add_member(:knowledge_base_lookup_output, Shapes::ShapeRef.new(shape: KnowledgeBaseLookupOutput, location_name: "knowledgeBaseLookupOutput"))
     Observation.add_member(:reprompt_response, Shapes::ShapeRef.new(shape: RepromptResponse, location_name: "repromptResponse"))
     Observation.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     Observation.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
     Observation.struct_class = Types::Observation
+
+    OrchestrationConfiguration.add_member(:query_transformation_configuration, Shapes::ShapeRef.new(shape: QueryTransformationConfiguration, required: true, location_name: "queryTransformationConfiguration"))
+    OrchestrationConfiguration.struct_class = Types::OrchestrationConfiguration
 
     OrchestrationTrace.add_member(:invocation_input, Shapes::ShapeRef.new(shape: InvocationInput, location_name: "invocationInput"))
     OrchestrationTrace.add_member(:model_invocation_input, Shapes::ShapeRef.new(shape: ModelInvocationInput, location_name: "modelInvocationInput"))
@@ -530,6 +713,13 @@ module Aws::BedrockAgentRuntime
     OrchestrationTrace.add_member_subclass(:rationale, Types::OrchestrationTrace::Rationale)
     OrchestrationTrace.add_member_subclass(:unknown, Types::OrchestrationTrace::Unknown)
     OrchestrationTrace.struct_class = Types::OrchestrationTrace
+
+    OutputFile.add_member(:bytes, Shapes::ShapeRef.new(shape: FileBody, location_name: "bytes"))
+    OutputFile.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    OutputFile.add_member(:type, Shapes::ShapeRef.new(shape: MimeType, location_name: "type"))
+    OutputFile.struct_class = Types::OutputFile
+
+    OutputFiles.member = Shapes::ShapeRef.new(shape: OutputFile)
 
     Parameter.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     Parameter.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
@@ -584,6 +774,9 @@ module Aws::BedrockAgentRuntime
     PropertyParameters.add_member(:properties, Shapes::ShapeRef.new(shape: ParameterList, location_name: "properties"))
     PropertyParameters.struct_class = Types::PropertyParameters
 
+    QueryTransformationConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: QueryTransformationType, required: true, location_name: "type"))
+    QueryTransformationConfiguration.struct_class = Types::QueryTransformationConfiguration
+
     RAGStopSequences.member = Shapes::ShapeRef.new(shape: RAGStopSequencesMemberString)
 
     Rationale.add_member(:text, Shapes::ShapeRef.new(shape: RationaleString, location_name: "text"))
@@ -608,6 +801,7 @@ module Aws::BedrockAgentRuntime
     ResponseStream.add_member(:chunk, Shapes::ShapeRef.new(shape: PayloadPart, event: true, location_name: "chunk"))
     ResponseStream.add_member(:conflict_exception, Shapes::ShapeRef.new(shape: ConflictException, location_name: "conflictException"))
     ResponseStream.add_member(:dependency_failed_exception, Shapes::ShapeRef.new(shape: DependencyFailedException, location_name: "dependencyFailedException"))
+    ResponseStream.add_member(:files, Shapes::ShapeRef.new(shape: FilePart, event: true, location_name: "files"))
     ResponseStream.add_member(:internal_server_exception, Shapes::ShapeRef.new(shape: InternalServerException, location_name: "internalServerException"))
     ResponseStream.add_member(:resource_not_found_exception, Shapes::ShapeRef.new(shape: ResourceNotFoundException, location_name: "resourceNotFoundException"))
     ResponseStream.add_member(:return_control, Shapes::ShapeRef.new(shape: ReturnControlPayload, event: true, location_name: "returnControl"))
@@ -649,11 +843,18 @@ module Aws::BedrockAgentRuntime
 
     RetrievalFilterList.member = Shapes::ShapeRef.new(shape: RetrievalFilter)
 
+    RetrievalResultConfluenceLocation.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    RetrievalResultConfluenceLocation.struct_class = Types::RetrievalResultConfluenceLocation
+
     RetrievalResultContent.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "text"))
     RetrievalResultContent.struct_class = Types::RetrievalResultContent
 
+    RetrievalResultLocation.add_member(:confluence_location, Shapes::ShapeRef.new(shape: RetrievalResultConfluenceLocation, location_name: "confluenceLocation"))
     RetrievalResultLocation.add_member(:s3_location, Shapes::ShapeRef.new(shape: RetrievalResultS3Location, location_name: "s3Location"))
+    RetrievalResultLocation.add_member(:salesforce_location, Shapes::ShapeRef.new(shape: RetrievalResultSalesforceLocation, location_name: "salesforceLocation"))
+    RetrievalResultLocation.add_member(:share_point_location, Shapes::ShapeRef.new(shape: RetrievalResultSharePointLocation, location_name: "sharePointLocation"))
     RetrievalResultLocation.add_member(:type, Shapes::ShapeRef.new(shape: RetrievalResultLocationType, required: true, location_name: "type"))
+    RetrievalResultLocation.add_member(:web_location, Shapes::ShapeRef.new(shape: RetrievalResultWebLocation, location_name: "webLocation"))
     RetrievalResultLocation.struct_class = Types::RetrievalResultLocation
 
     RetrievalResultMetadata.key = Shapes::ShapeRef.new(shape: RetrievalResultMetadataKey)
@@ -661,6 +862,15 @@ module Aws::BedrockAgentRuntime
 
     RetrievalResultS3Location.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "uri"))
     RetrievalResultS3Location.struct_class = Types::RetrievalResultS3Location
+
+    RetrievalResultSalesforceLocation.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    RetrievalResultSalesforceLocation.struct_class = Types::RetrievalResultSalesforceLocation
+
+    RetrievalResultSharePointLocation.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    RetrievalResultSharePointLocation.struct_class = Types::RetrievalResultSharePointLocation
+
+    RetrievalResultWebLocation.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    RetrievalResultWebLocation.struct_class = Types::RetrievalResultWebLocation
 
     RetrieveAndGenerateConfiguration.add_member(:external_sources_configuration, Shapes::ShapeRef.new(shape: ExternalSourcesRetrieveAndGenerateConfiguration, location_name: "externalSourcesConfiguration"))
     RetrieveAndGenerateConfiguration.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseRetrieveAndGenerateConfiguration, location_name: "knowledgeBaseConfiguration"))
@@ -714,13 +924,18 @@ module Aws::BedrockAgentRuntime
     S3ObjectDoc.add_member(:uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "uri"))
     S3ObjectDoc.struct_class = Types::S3ObjectDoc
 
+    S3ObjectFile.add_member(:uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "uri"))
+    S3ObjectFile.struct_class = Types::S3ObjectFile
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SessionAttributesMap.key = Shapes::ShapeRef.new(shape: String)
     SessionAttributesMap.value = Shapes::ShapeRef.new(shape: String)
 
+    SessionState.add_member(:files, Shapes::ShapeRef.new(shape: InputFiles, location_name: "files"))
     SessionState.add_member(:invocation_id, Shapes::ShapeRef.new(shape: String, location_name: "invocationId"))
+    SessionState.add_member(:knowledge_base_configurations, Shapes::ShapeRef.new(shape: KnowledgeBaseConfigurations, location_name: "knowledgeBaseConfigurations"))
     SessionState.add_member(:prompt_session_attributes, Shapes::ShapeRef.new(shape: PromptSessionAttributesMap, location_name: "promptSessionAttributes"))
     SessionState.add_member(:return_control_invocation_results, Shapes::ShapeRef.new(shape: ReturnControlInvocationResults, location_name: "returnControlInvocationResults"))
     SessionState.add_member(:session_attributes, Shapes::ShapeRef.new(shape: SessionAttributesMap, location_name: "sessionAttributes"))
@@ -787,12 +1002,69 @@ module Aws::BedrockAgentRuntime
         "uid" => "bedrock-agent-runtime-2023-07-26",
       }
 
+      api.add_operation(:delete_agent_memory, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAgentMemory"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/agents/{agentId}/agentAliases/{agentAliasId}/memories"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAgentMemoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAgentMemoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:get_agent_memory, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentMemory"
+        o.http_method = "GET"
+        o.http_request_uri = "/agents/{agentId}/agentAliases/{agentAliasId}/memories"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentMemoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentMemoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:invoke_agent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "InvokeAgent"
         o.http_method = "POST"
         o.http_request_uri = "/agents/{agentId}/agentAliases/{agentAliasId}/sessions/{sessionId}/text"
         o.input = Shapes::ShapeRef.new(shape: InvokeAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:invoke_flow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InvokeFlow"
+        o.http_method = "POST"
+        o.http_request_uri = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: InvokeFlowRequest)
+        o.output = Shapes::ShapeRef.new(shape: InvokeFlowResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

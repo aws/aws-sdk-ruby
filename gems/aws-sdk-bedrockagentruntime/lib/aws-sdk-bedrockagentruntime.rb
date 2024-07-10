@@ -33,7 +33,7 @@ require_relative 'aws-sdk-bedrockagentruntime/event_streams'
 # structure.
 #
 #     bedrock_agent_runtime = Aws::BedrockAgentRuntime::Client.new
-#     resp = bedrock_agent_runtime.invoke_agent(params)
+#     resp = bedrock_agent_runtime.delete_agent_memory(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-bedrockagentruntime/event_streams'
 # @!group service
 module Aws::BedrockAgentRuntime
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

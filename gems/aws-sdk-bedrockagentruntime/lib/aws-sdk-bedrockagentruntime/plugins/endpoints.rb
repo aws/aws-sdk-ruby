@@ -58,8 +58,14 @@ module Aws::BedrockAgentRuntime
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :delete_agent_memory
+            Aws::BedrockAgentRuntime::Endpoints::DeleteAgentMemory.build(context)
+          when :get_agent_memory
+            Aws::BedrockAgentRuntime::Endpoints::GetAgentMemory.build(context)
           when :invoke_agent
             Aws::BedrockAgentRuntime::Endpoints::InvokeAgent.build(context)
+          when :invoke_flow
+            Aws::BedrockAgentRuntime::Endpoints::InvokeFlow.build(context)
           when :retrieve
             Aws::BedrockAgentRuntime::Endpoints::Retrieve.build(context)
           when :retrieve_and_generate

@@ -897,9 +897,11 @@ module Aws::GroundStation
 
       api.metadata = {
         "apiVersion" => "2019-05-23",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "groundstation",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Ground Station",
         "serviceId" => "GroundStation",
         "signatureVersion" => "v4",

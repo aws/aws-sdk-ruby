@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-07-10)
+------------------
+
+* Feature - This feature allows AWS Batch Jobs with EKS container orchestration type to be run as Multi-Node Parallel Jobs.
+
 1.93.0 (2024-07-02)
 ------------------
 

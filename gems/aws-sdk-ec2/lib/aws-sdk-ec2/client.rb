@@ -7676,16 +7676,18 @@ module Aws::EC2
     #   The ID of the scope in which you would like to create the IPAM pool.
     #
     # @option params [String] :locale
-    #   In IPAM, the locale is the Amazon Web Services Region where you want
-    #   to make an IPAM pool available for allocations. Only resources in the
-    #   same Region as the locale of the pool can get IP address allocations
-    #   from the pool. You can only allocate a CIDR for a VPC, for example,
-    #   from an IPAM pool that shares a locale with the VPC’s Region. Note
-    #   that once you choose a Locale for a pool, you cannot modify it. If you
-    #   do not choose a locale, resources in Regions others than the IPAM's
-    #   home region cannot use CIDRs from this pool.
+    #   In IPAM, the locale is the Amazon Web Services Region or, for IPAM
+    #   IPv4 pools in the public scope, the network border group for an Amazon
+    #   Web Services Local Zone where you want to make an IPAM pool available
+    #   for allocations ([supported Local Zones][1]). If you do not choose a
+    #   locale, resources in Regions others than the IPAM's home region
+    #   cannot use CIDRs from this pool.
     #
     #   Possible values: Any Amazon Web Services Region, such as us-east-1.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
     #
     # @option params [String] :source_ipam_pool_id
     #   The ID of the source IPAM pool. Use this option to create a pool
@@ -10797,6 +10799,17 @@ module Aws::EC2
     #   and the value `TeamA`, specify `tag:Owner` for the filter name and
     #   `TeamA` for the filter value.
     #
+    # @option params [String] :network_border_group
+    #   The Availability Zone (AZ) or Local Zone (LZ) network border group
+    #   that the resource that the IP address is assigned to is in. Defaults
+    #   to an AZ network border group. For more information on available Local
+    #   Zones, see [Local Zone availability][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
+    #
     # @return [Types::CreatePublicIpv4PoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePublicIpv4PoolResult#pool_id #pool_id} => String
@@ -10816,6 +10829,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     network_border_group: "String",
     #   })
     #
     # @example Response structure
@@ -17267,6 +17281,17 @@ module Aws::EC2
     # @option params [required, String] :pool_id
     #   The ID of the public IPv4 pool you want to delete.
     #
+    # @option params [String] :network_border_group
+    #   The Availability Zone (AZ) or Local Zone (LZ) network border group
+    #   that the resource that the IP address is assigned to is in. Defaults
+    #   to an AZ network border group. For more information on available Local
+    #   Zones, see [Local Zone availability][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
+    #
     # @return [Types::DeletePublicIpv4PoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeletePublicIpv4PoolResult#return_value #return_value} => Boolean
@@ -17276,6 +17301,7 @@ module Aws::EC2
     #   resp = client.delete_public_ipv_4_pool({
     #     dry_run: false,
     #     pool_id: "Ipv4PoolEc2Id", # required
+    #     network_border_group: "String",
     #   })
     #
     # @example Response structure
@@ -42476,7 +42502,9 @@ module Aws::EC2
     #   resp.ipam_discovered_resource_cidrs[0].resource_tags[0].value #=> String
     #   resp.ipam_discovered_resource_cidrs[0].ip_usage #=> Float
     #   resp.ipam_discovered_resource_cidrs[0].vpc_id #=> String
+    #   resp.ipam_discovered_resource_cidrs[0].network_interface_attachment_status #=> String, one of "available", "in-use"
     #   resp.ipam_discovered_resource_cidrs[0].sample_time #=> Time
+    #   resp.ipam_discovered_resource_cidrs[0].availability_zone_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredResourceCidrs AWS API Documentation
@@ -42736,6 +42764,7 @@ module Aws::EC2
     #   resp.ipam_resource_cidrs[0].management_state #=> String, one of "managed", "unmanaged", "ignored"
     #   resp.ipam_resource_cidrs[0].overlap_status #=> String, one of "overlapping", "nonoverlapping", "ignored"
     #   resp.ipam_resource_cidrs[0].vpc_id #=> String
+    #   resp.ipam_resource_cidrs[0].availability_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamResourceCidrs AWS API Documentation
     #
@@ -48327,6 +48356,7 @@ module Aws::EC2
     #   resp.ipam_resource_cidr.management_state #=> String, one of "managed", "unmanaged", "ignored"
     #   resp.ipam_resource_cidr.overlap_status #=> String, one of "overlapping", "nonoverlapping", "ignored"
     #   resp.ipam_resource_cidr.vpc_id #=> String
+    #   resp.ipam_resource_cidr.availability_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamResourceCidr AWS API Documentation
     #
@@ -52391,6 +52421,17 @@ module Aws::EC2
     #   The netmask length of the CIDR you would like to allocate to the
     #   public IPv4 pool.
     #
+    # @option params [String] :network_border_group
+    #   The Availability Zone (AZ) or Local Zone (LZ) network border group
+    #   that the resource that the IP address is assigned to is in. Defaults
+    #   to an AZ network border group. For more information on available Local
+    #   Zones, see [Local Zone availability][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
+    #
     # @return [Types::ProvisionPublicIpv4PoolCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProvisionPublicIpv4PoolCidrResult#pool_id #pool_id} => String
@@ -52403,6 +52444,7 @@ module Aws::EC2
     #     ipam_pool_id: "IpamPoolId", # required
     #     pool_id: "Ipv4PoolEc2Id", # required
     #     netmask_length: 1, # required
+    #     network_border_group: "String",
     #   })
     #
     # @example Response structure
@@ -59488,7 +59530,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.464.0'
+      context[:gem_version] = '1.465.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8530,16 +8530,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   In IPAM, the locale is the Amazon Web Services Region where you want
-    #   to make an IPAM pool available for allocations. Only resources in
-    #   the same Region as the locale of the pool can get IP address
-    #   allocations from the pool. You can only allocate a CIDR for a VPC,
-    #   for example, from an IPAM pool that shares a locale with the VPC’s
-    #   Region. Note that once you choose a Locale for a pool, you cannot
-    #   modify it. If you do not choose a locale, resources in Regions
-    #   others than the IPAM's home region cannot use CIDRs from this pool.
+    #   In IPAM, the locale is the Amazon Web Services Region or, for IPAM
+    #   IPv4 pools in the public scope, the network border group for an
+    #   Amazon Web Services Local Zone where you want to make an IPAM pool
+    #   available for allocations ([supported Local Zones][1]). If you do
+    #   not choose a locale, resources in Regions others than the IPAM's
+    #   home region cannot use CIDRs from this pool.
     #
     #   Possible values: Any Amazon Web Services Region, such as us-east-1.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
     #   @return [String]
     #
     # @!attribute [rw] source_ipam_pool_id
@@ -10087,11 +10089,24 @@ module Aws::EC2
     #   name and `TeamA` for the filter value.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] network_border_group
+    #   The Availability Zone (AZ) or Local Zone (LZ) network border group
+    #   that the resource that the IP address is assigned to is in. Defaults
+    #   to an AZ network border group. For more information on available
+    #   Local Zones, see [Local Zone availability][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePublicIpv4PoolRequest AWS API Documentation
     #
     class CreatePublicIpv4PoolRequest < Struct.new(
       :dry_run,
-      :tag_specifications)
+      :tag_specifications,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14806,11 +14821,24 @@ module Aws::EC2
     #   The ID of the public IPv4 pool you want to delete.
     #   @return [String]
     #
+    # @!attribute [rw] network_border_group
+    #   The Availability Zone (AZ) or Local Zone (LZ) network border group
+    #   that the resource that the IP address is assigned to is in. Defaults
+    #   to an AZ network border group. For more information on available
+    #   Local Zones, see [Local Zone availability][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeletePublicIpv4PoolRequest AWS API Documentation
     #
     class DeletePublicIpv4PoolRequest < Struct.new(
       :dry_run,
-      :pool_id)
+      :pool_id,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42562,8 +42590,15 @@ module Aws::EC2
     #   @return [Types::IpamPublicAddressTags]
     #
     # @!attribute [rw] network_border_group
-    #   The network border group that the resource that the IP address is
-    #   assigned to is in.
+    #   The Availability Zone (AZ) or Local Zone (LZ) network border group
+    #   that the resource that the IP address is assigned to is in. Defaults
+    #   to an AZ network border group. For more information on available
+    #   Local Zones, see [Local Zone availability][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -42658,9 +42693,18 @@ module Aws::EC2
     #   The VPC ID.
     #   @return [String]
     #
+    # @!attribute [rw] network_interface_attachment_status
+    #   For elastic IP addresses, this is the status of an attached network
+    #   interface.
+    #   @return [String]
+    #
     # @!attribute [rw] sample_time
     #   The last successful resource discovery time.
     #   @return [Time]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamDiscoveredResourceCidr AWS API Documentation
     #
@@ -42674,7 +42718,9 @@ module Aws::EC2
       :resource_tags,
       :ip_usage,
       :vpc_id,
-      :sample_time)
+      :network_interface_attachment_status,
+      :sample_time,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42792,14 +42838,16 @@ module Aws::EC2
     #
     # @!attribute [rw] locale
     #   The locale of the IPAM pool. In IPAM, the locale is the Amazon Web
-    #   Services Region where you want to make an IPAM pool available for
-    #   allocations. Only resources in the same Region as the locale of the
-    #   pool can get IP address allocations from the pool. You can only
-    #   allocate a CIDR for a VPC, for example, from an IPAM pool that
-    #   shares a locale with the VPC’s Region. Note that once you choose a
-    #   Locale for a pool, you cannot modify it. If you choose an Amazon Web
-    #   Services Region for locale that has not been configured as an
-    #   operating Region for the IPAM, you'll get an error.
+    #   Services Region or, for IPAM IPv4 pools in the public scope, the
+    #   network border group for an Amazon Web Services Local Zone where you
+    #   want to make an IPAM pool available for allocations ([supported
+    #   Local Zones][1]). If you choose an Amazon Web Services Region for
+    #   locale that has not been configured as an operating Region for the
+    #   IPAM, you'll get an error.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
     #   @return [String]
     #
     # @!attribute [rw] pool_depth
@@ -43259,6 +43307,10 @@ module Aws::EC2
     #   The ID of a VPC.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamResourceCidr AWS API Documentation
     #
     class IpamResourceCidr < Struct.new(
@@ -43276,7 +43328,8 @@ module Aws::EC2
       :compliance_status,
       :management_state,
       :overlap_status,
-      :vpc_id)
+      :vpc_id,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54594,13 +54647,26 @@ module Aws::EC2
     #   public IPv4 pool.
     #   @return [Integer]
     #
+    # @!attribute [rw] network_border_group
+    #   The Availability Zone (AZ) or Local Zone (LZ) network border group
+    #   that the resource that the IP address is assigned to is in. Defaults
+    #   to an AZ network border group. For more information on available
+    #   Local Zones, see [Local Zone availability][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionPublicIpv4PoolCidrRequest AWS API Documentation
     #
     class ProvisionPublicIpv4PoolCidrRequest < Struct.new(
       :dry_run,
       :ipam_pool_id,
       :pool_id,
-      :netmask_length)
+      :netmask_length,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end

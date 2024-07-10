@@ -55,6 +55,7 @@ module Aws::Bedrock
       attr_accessor content_policy_config: Types::GuardrailContentPolicyConfig
       attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
       attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
+      attr_accessor contextual_grounding_policy_config: Types::GuardrailContextualGroundingPolicyConfig
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_id: ::String
@@ -350,6 +351,7 @@ module Aws::Bedrock
       attr_accessor content_policy: Types::GuardrailContentPolicy
       attr_accessor word_policy: Types::GuardrailWordPolicy
       attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicy
+      attr_accessor contextual_grounding_policy: Types::GuardrailContextualGroundingPolicy
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status_reasons: ::Array[::String]
@@ -441,6 +443,28 @@ module Aws::Bedrock
 
     class GuardrailContentPolicyConfig
       attr_accessor filters_config: ::Array[Types::GuardrailContentFilterConfig]
+      SENSITIVE: []
+    end
+
+    class GuardrailContextualGroundingFilter
+      attr_accessor type: ("GROUNDING" | "RELEVANCE")
+      attr_accessor threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class GuardrailContextualGroundingFilterConfig
+      attr_accessor type: ("GROUNDING" | "RELEVANCE")
+      attr_accessor threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class GuardrailContextualGroundingPolicy
+      attr_accessor filters: ::Array[Types::GuardrailContextualGroundingFilter]
+      SENSITIVE: []
+    end
+
+    class GuardrailContextualGroundingPolicyConfig
+      attr_accessor filters_config: ::Array[Types::GuardrailContextualGroundingFilterConfig]
       SENSITIVE: []
     end
 
@@ -826,6 +850,7 @@ module Aws::Bedrock
       attr_accessor content_policy_config: Types::GuardrailContentPolicyConfig
       attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
       attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
+      attr_accessor contextual_grounding_policy_config: Types::GuardrailContextualGroundingPolicyConfig
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_id: ::String

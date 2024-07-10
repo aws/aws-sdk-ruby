@@ -3318,6 +3318,10 @@ module Aws::Batch
     #   The details for the init containers.
     #   @return [Array<Types::EksAttemptContainerDetail>]
     #
+    # @!attribute [rw] eks_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] pod_name
     #   The name of the pod for this job attempt.
     #   @return [String]
@@ -3349,6 +3353,7 @@ module Aws::Batch
     class EksAttemptDetail < Struct.new(
       :containers,
       :init_containers,
+      :eks_cluster_arn,
       :pod_name,
       :node_name,
       :started_at,
@@ -6180,13 +6185,19 @@ module Aws::Batch
     #   for the existing resources of a job.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] eks_properties_override
+    #   An object that contains the properties that you want to replace for
+    #   the existing Amazon EKS resources of a job.
+    #   @return [Types::EksPropertiesOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodePropertyOverride AWS API Documentation
     #
     class NodePropertyOverride < Struct.new(
       :target_nodes,
       :container_overrides,
       :ecs_properties_override,
-      :instance_types)
+      :instance_types,
+      :eks_properties_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6226,13 +6237,19 @@ module Aws::Batch
     #   for a multi-node parallel job.
     #   @return [Types::EcsProperties]
     #
+    # @!attribute [rw] eks_properties
+    #   This is an object that represents the properties of the node range
+    #   for a multi-node parallel job.
+    #   @return [Types::EksProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeRangeProperty AWS API Documentation
     #
     class NodeRangeProperty < Struct.new(
       :target_nodes,
       :container,
       :instance_types,
-      :ecs_properties)
+      :ecs_properties,
+      :eks_properties)
       SENSITIVE = []
       include Aws::Structure
     end

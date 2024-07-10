@@ -436,7 +436,101 @@ module Aws::BedrockAgentRuntime
 
     # @!group API Operations
 
-    # <note markdown="1"> The CLI doesn't support `InvokeAgent`.
+    # Deletes memory from the specified memory identifier.
+    #
+    # @option params [required, String] :agent_alias_id
+    #   The unique identifier of an alias of an agent.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent to which the alias belongs.
+    #
+    # @option params [String] :memory_id
+    #   The unique identifier of the memory.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_agent_memory({
+    #     agent_alias_id: "AgentAliasId", # required
+    #     agent_id: "AgentId", # required
+    #     memory_id: "MemoryId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/DeleteAgentMemory AWS API Documentation
+    #
+    # @overload delete_agent_memory(params = {})
+    # @param [Hash] params ({})
+    def delete_agent_memory(params = {}, options = {})
+      req = build_request(:delete_agent_memory, params)
+      req.send_request(options)
+    end
+
+    # Gets the sessions stored in the memory of the agent.
+    #
+    # @option params [required, String] :agent_alias_id
+    #   The unique identifier of an alias of an agent.
+    #
+    # @option params [required, String] :agent_id
+    #   The unique identifier of the agent to which the alias belongs.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of items to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [required, String] :memory_id
+    #   The unique identifier of the memory.
+    #
+    # @option params [required, String] :memory_type
+    #   The type of memory.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the maxItems value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::GetAgentMemoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentMemoryResponse#memory_contents #memory_contents} => Array&lt;Types::Memory&gt;
+    #   * {Types::GetAgentMemoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_memory({
+    #     agent_alias_id: "AgentAliasId", # required
+    #     agent_id: "AgentId", # required
+    #     max_items: 1,
+    #     memory_id: "MemoryId", # required
+    #     memory_type: "SESSION_SUMMARY", # required, accepts SESSION_SUMMARY
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.memory_contents #=> Array
+    #   resp.memory_contents[0].session_summary.memory_id #=> String
+    #   resp.memory_contents[0].session_summary.session_expiry_time #=> Time
+    #   resp.memory_contents[0].session_summary.session_id #=> String
+    #   resp.memory_contents[0].session_summary.session_start_time #=> Time
+    #   resp.memory_contents[0].session_summary.summary_text #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetAgentMemory AWS API Documentation
+    #
+    # @overload get_agent_memory(params = {})
+    # @param [Hash] params ({})
+    def get_agent_memory(params = {}, options = {})
+      req = build_request(:get_agent_memory, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> The CLI doesn't support streaming operations in Amazon Bedrock,
+    # including `InvokeAgent`.
     #
     #  </note>
     #
@@ -501,6 +595,9 @@ module Aws::BedrockAgentRuntime
     #
     #    </note>
     #
+    # @option params [String] :memory_id
+    #   The unique identifier of the agent memory.
+    #
     # @option params [required, String] :session_id
     #   The unique identifier of the session. Use the same value across
     #   requests to continue the same conversation.
@@ -522,6 +619,7 @@ module Aws::BedrockAgentRuntime
     #
     #   * {Types::InvokeAgentResponse#completion #completion} => Types::ResponseStream
     #   * {Types::InvokeAgentResponse#content_type #content_type} => String
+    #   * {Types::InvokeAgentResponse#memory_id #memory_id} => String
     #   * {Types::InvokeAgentResponse#session_id #session_id} => String
     #
     # @example EventStream Operation Example
@@ -582,6 +680,9 @@ module Aws::BedrockAgentRuntime
     #       handler.on_dependency_failed_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #       end
+    #       handler.on_files_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::files
+    #       end
     #       handler.on_internal_server_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #       end
@@ -625,6 +726,9 @@ module Aws::BedrockAgentRuntime
     #       stream.on_dependency_failed_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
     #       end
+    #       stream.on_files_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::files
+    #       end
     #       stream.on_internal_server_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
     #       end
@@ -667,6 +771,9 @@ module Aws::BedrockAgentRuntime
     #       end
     #       handler.on_dependency_failed_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #       end
+    #       handler.on_files_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::files
     #       end
     #       handler.on_internal_server_exception_event do |event|
     #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
@@ -714,9 +821,104 @@ module Aws::BedrockAgentRuntime
     #     enable_trace: false,
     #     end_session: false,
     #     input_text: "InputText",
+    #     memory_id: "MemoryId",
     #     session_id: "SessionId", # required
     #     session_state: {
+    #       files: [
+    #         {
+    #           name: "String", # required
+    #           source: { # required
+    #             byte_content: {
+    #               data: "data", # required
+    #               media_type: "MimeType", # required
+    #             },
+    #             s3_location: {
+    #               uri: "S3Uri", # required
+    #             },
+    #             source_type: "S3", # required, accepts S3, BYTE_CONTENT
+    #           },
+    #           use_case: "CODE_INTERPRETER", # required, accepts CODE_INTERPRETER, CHAT
+    #         },
+    #       ],
     #       invocation_id: "String",
+    #       knowledge_base_configurations: [
+    #         {
+    #           knowledge_base_id: "KnowledgeBaseId", # required
+    #           retrieval_configuration: { # required
+    #             vector_search_configuration: { # required
+    #               filter: {
+    #                 and_all: [
+    #                   {
+    #                     # recursive RetrievalFilter
+    #                   },
+    #                 ],
+    #                 equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 greater_than: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 greater_than_or_equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 in: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 less_than: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 less_than_or_equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 list_contains: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 not_equals: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 not_in: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 or_all: [
+    #                   {
+    #                     # recursive RetrievalFilter
+    #                   },
+    #                 ],
+    #                 starts_with: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #                 string_contains: {
+    #                   key: "FilterKey", # required
+    #                   value: { # required
+    #                   },
+    #                 },
+    #               },
+    #               number_of_results: 1,
+    #               override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #             },
+    #           },
+    #         },
+    #       ],
     #       prompt_session_attributes: {
     #         "String" => "String",
     #       },
@@ -756,7 +958,7 @@ module Aws::BedrockAgentRuntime
     #
     #   All events are available at resp.completion:
     #   resp.completion #=> Enumerator
-    #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
+    #   resp.completion.event_types #=> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :files, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
     #
     #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -772,8 +974,12 @@ module Aws::BedrockAgentRuntime
     #   event.attribution.citations[0].generated_response_part.text_response_part.text #=> String
     #   event.attribution.citations[0].retrieved_references #=> Array
     #   event.attribution.citations[0].retrieved_references[0].content.text #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.confluence_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].location.s3_location.uri #=> String
-    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
+    #   event.attribution.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.share_point_location.url #=> String
+    #   event.attribution.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT"
+    #   event.attribution.citations[0].retrieved_references[0].location.web_location.url #=> String
     #   event.attribution.citations[0].retrieved_references[0].metadata #=> Hash
     #   event.bytes #=> String
     #
@@ -783,6 +989,12 @@ module Aws::BedrockAgentRuntime
     #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #   event.resource_name #=> String
+    #
+    #   For :files event available at #on_files_event callback and response eventstream enumerator:
+    #   event.files #=> Array
+    #   event.files[0].bytes #=> String
+    #   event.files[0].name #=> String
+    #   event.files[0].type #=> String
     #
     #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -879,7 +1091,9 @@ module Aws::BedrockAgentRuntime
     #   event.trace.guardrail_trace.trace_id #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.action_group_name #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.api_path #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.execution_type #=> String, one of "LAMBDA", "RETURN_CONTROL"
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.function #=> String
+    #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.invocation_id #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters #=> Array
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].name #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.parameters[0].type #=> String
@@ -890,7 +1104,10 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].type #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.request_body.content["String"][0].value #=> String
     #   event.trace.orchestration_trace.invocation_input.action_group_invocation_input.verb #=> String
-    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH"
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.code #=> String
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files #=> Array
+    #   event.trace.orchestration_trace.invocation_input.code_interpreter_invocation_input.files[0] #=> String
+    #   event.trace.orchestration_trace.invocation_input.invocation_type #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "FINISH", "ACTION_GROUP_CODE_INTERPRETER"
     #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.knowledge_base_id #=> String
     #   event.trace.orchestration_trace.invocation_input.knowledge_base_lookup_input.text #=> String
     #   event.trace.orchestration_trace.invocation_input.trace_id #=> String
@@ -907,11 +1124,20 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
     #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
     #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
     #   event.trace.orchestration_trace.observation.final_response.text #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.confluence_location.url #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.s3_location.uri #=> String
-    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.salesforce_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.share_point_location.url #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT"
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].location.web_location.url #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].metadata #=> Hash
     #   event.trace.orchestration_trace.observation.reprompt_response.source #=> String, one of "ACTION_GROUP", "KNOWLEDGE_BASE", "PARSER"
     #   event.trace.orchestration_trace.observation.reprompt_response.text #=> String
@@ -953,6 +1179,7 @@ module Aws::BedrockAgentRuntime
     #   event.message #=> String
     #
     #   resp.content_type #=> String
+    #   resp.memory_id #=> String
     #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeAgent AWS API Documentation
@@ -975,6 +1202,288 @@ module Aws::BedrockAgentRuntime
       yield(event_stream_handler) if block_given?
 
       req = build_request(:invoke_agent, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
+    end
+
+    # Invokes an alias of a flow to run the inputs that you specify and
+    # return the output of each node as a stream. If there's an error, the
+    # error is returned. For more information, see [Test a flow in Amazon
+    # Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html
+    #
+    # @option params [required, String] :flow_alias_identifier
+    #   The unique identifier of the flow alias.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @option params [required, Array<Types::FlowInput>] :inputs
+    #   A list of objects, each containing information about an input into the
+    #   flow.
+    #
+    # @return [Types::InvokeFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeFlowResponse#response_stream #response_stream} => Types::FlowResponseStream
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #invoke_flow
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
+    #
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #invoke_flow call directly. Hybrid
+    #   pattern of both is also supported.
+    #
+    #   `:event_stream_handler` option takes in either a Proc object or
+    #   Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream object.
+    #
+    #   Usage pattern a): Callbacks with a block attached to #invoke_flow
+    #     Example for registering callbacks for all event types and an error event
+    #
+    #     client.invoke_flow( # params input# ) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): Pass in `:event_stream_handler` for #invoke_flow
+    #
+    #     1) Create a Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
+    #       handler.on_access_denied_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #       end
+    #       handler.on_bad_gateway_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       end
+    #       handler.on_conflict_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #       end
+    #       handler.on_dependency_failed_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #       end
+    #       handler.on_flow_completion_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #       end
+    #       handler.on_flow_output_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #       end
+    #       handler.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #       end
+    #       handler.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #       end
+    #       handler.on_service_quota_exceeded_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #       end
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::validationException
+    #       end
+    #
+    #     client.invoke_flow( # params input #, event_stream_handler: handler)
+    #
+    #     2) Use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_access_denied_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #       end
+    #       stream.on_bad_gateway_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       end
+    #       stream.on_conflict_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #       end
+    #       stream.on_dependency_failed_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #       end
+    #       stream.on_flow_completion_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #       end
+    #       stream.on_flow_output_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #       end
+    #       stream.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #       end
+    #       stream.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #       end
+    #       stream.on_service_quota_exceeded_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #       end
+    #       stream.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #       end
+    #       stream.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::validationException
+    #       end
+    #     end
+    #
+    #     client.invoke_flow( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): Hybrid pattern of a) and b)
+    #
+    #       handler = Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream.new
+    #       handler.on_access_denied_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::accessDeniedException
+    #       end
+    #       handler.on_bad_gateway_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::badGatewayException
+    #       end
+    #       handler.on_conflict_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::conflictException
+    #       end
+    #       handler.on_dependency_failed_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::dependencyFailedException
+    #       end
+    #       handler.on_flow_completion_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowCompletionEvent
+    #       end
+    #       handler.on_flow_output_event_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::flowOutputEvent
+    #       end
+    #       handler.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::internalServerException
+    #       end
+    #       handler.on_resource_not_found_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::resourceNotFoundException
+    #       end
+    #       handler.on_service_quota_exceeded_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::serviceQuotaExceededException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::throttlingException
+    #       end
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockAgentRuntime::Types::validationException
+    #       end
+    #
+    #     client.invoke_flow( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   You can also iterate through events after the response complete.
+    #
+    #   Events are available at resp.response_stream # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_flow({
+    #     flow_alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #     inputs: [ # required
+    #       {
+    #         content: { # required
+    #           document: {
+    #           },
+    #         },
+    #         node_name: "NodeName", # required
+    #         node_output_name: "NodeOutputName", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   All events are available at resp.response_stream:
+    #   resp.response_stream #=> Enumerator
+    #   resp.response_stream.event_types #=> [:access_denied_exception, :bad_gateway_exception, :conflict_exception, :dependency_failed_exception, :flow_completion_event, :flow_output_event, :internal_server_exception, :resource_not_found_exception, :service_quota_exceeded_exception, :throttling_exception, :validation_exception]
+    #
+    #   For :access_denied_exception event available at #on_access_denied_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :bad_gateway_exception event available at #on_bad_gateway_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :dependency_failed_exception event available at #on_dependency_failed_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.resource_name #=> String
+    #
+    #   For :flow_completion_event event available at #on_flow_completion_event_event callback and response eventstream enumerator:
+    #   event.completion_reason #=> String, one of "SUCCESS"
+    #
+    #   For :flow_output_event event available at #on_flow_output_event_event callback and response eventstream enumerator:
+    #   event.node_name #=> String
+    #   event.node_type #=> String, one of "FlowInputNode", "FlowOutputNode", "LambdaFunctionNode", "KnowledgeBaseNode", "PromptNode", "ConditionNode", "LexNode"
+    #
+    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :resource_not_found_exception event available at #on_resource_not_found_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeFlow AWS API Documentation
+    #
+    # @overload invoke_flow(params = {})
+    # @param [Hash] params ({})
+    def invoke_flow(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::FlowResponseStream then handler
+        when Proc then EventStreams::FlowResponseStream.new.tap(&handler)
+        when nil then EventStreams::FlowResponseStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::BedrockAgentRuntime::EventStreams::FlowResponseStream"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:invoke_flow, params)
 
       req.context[:event_stream_handler] = event_stream_handler
       req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
@@ -1098,8 +1607,12 @@ module Aws::BedrockAgentRuntime
     #   resp.next_token #=> String
     #   resp.retrieval_results #=> Array
     #   resp.retrieval_results[0].content.text #=> String
+    #   resp.retrieval_results[0].location.confluence_location.url #=> String
     #   resp.retrieval_results[0].location.s3_location.uri #=> String
-    #   resp.retrieval_results[0].location.type #=> String, one of "S3"
+    #   resp.retrieval_results[0].location.salesforce_location.url #=> String
+    #   resp.retrieval_results[0].location.share_point_location.url #=> String
+    #   resp.retrieval_results[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT"
+    #   resp.retrieval_results[0].location.web_location.url #=> String
     #   resp.retrieval_results[0].metadata #=> Hash
     #   resp.retrieval_results[0].score #=> Float
     #
@@ -1131,8 +1644,12 @@ module Aws::BedrockAgentRuntime
     #   Contains details about the session with the knowledge base.
     #
     # @option params [String] :session_id
-    #   The unique identifier of the session. Reuse the same value to continue
-    #   the same session with the knowledge base.
+    #   The unique identifier of the session. When you first make a
+    #   `RetrieveAndGenerate` request, Amazon Bedrock automatically generates
+    #   this value. You must reuse this value for all subsequent requests in
+    #   the same conversational session. This value allows Amazon Bedrock to
+    #   maintain context and knowledge from previous interactions. You can't
+    #   explicitly set the `sessionId` yourself.
     #
     # @return [Types::RetrieveAndGenerateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1209,6 +1726,11 @@ module Aws::BedrockAgentRuntime
     #         },
     #         knowledge_base_id: "KnowledgeBaseId", # required
     #         model_arn: "BedrockModelArn", # required
+    #         orchestration_configuration: {
+    #           query_transformation_configuration: { # required
+    #             type: "QUERY_DECOMPOSITION", # required, accepts QUERY_DECOMPOSITION
+    #           },
+    #         },
     #         retrieval_configuration: {
     #           vector_search_configuration: { # required
     #             filter: {
@@ -1299,8 +1821,12 @@ module Aws::BedrockAgentRuntime
     #   resp.citations[0].generated_response_part.text_response_part.text #=> String
     #   resp.citations[0].retrieved_references #=> Array
     #   resp.citations[0].retrieved_references[0].content.text #=> String
+    #   resp.citations[0].retrieved_references[0].location.confluence_location.url #=> String
     #   resp.citations[0].retrieved_references[0].location.s3_location.uri #=> String
-    #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3"
+    #   resp.citations[0].retrieved_references[0].location.salesforce_location.url #=> String
+    #   resp.citations[0].retrieved_references[0].location.share_point_location.url #=> String
+    #   resp.citations[0].retrieved_references[0].location.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT"
+    #   resp.citations[0].retrieved_references[0].location.web_location.url #=> String
     #   resp.citations[0].retrieved_references[0].metadata #=> Hash
     #   resp.guardrail_action #=> String, one of "INTERVENED", "NONE"
     #   resp.output.text #=> String
@@ -1328,7 +1854,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

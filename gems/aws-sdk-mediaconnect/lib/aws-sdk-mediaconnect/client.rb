@@ -672,6 +672,7 @@ module Aws::MediaConnect
     #         vpc_interface_attachment: {
     #           vpc_interface_name: "__string",
     #         },
+    #         output_status: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     ],
     #   })
@@ -726,6 +727,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].bridge_arn #=> String
     #   resp.outputs[0].bridge_ports #=> Array
     #   resp.outputs[0].bridge_ports[0] #=> Integer
+    #   resp.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputs AWS API Documentation
     #
@@ -1177,6 +1179,7 @@ module Aws::MediaConnect
     #         vpc_interface_attachment: {
     #           vpc_interface_name: "__string",
     #         },
+    #         output_status: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     ],
     #     source: {
@@ -1389,6 +1392,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
     #   resp.flow.outputs[0].bridge_ports[0] #=> Integer
+    #   resp.flow.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -1848,6 +1852,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
     #   resp.flow.outputs[0].bridge_ports[0] #=> Integer
+    #   resp.flow.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -3332,6 +3337,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
     #   resp.flow.outputs[0].bridge_ports[0] #=> Integer
+    #   resp.flow.outputs[0].output_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -3676,6 +3682,11 @@ module Aws::MediaConnect
     # @option params [Types::VpcInterfaceAttachment] :vpc_interface_attachment
     #   The name of the VPC interface attachment to use for this output.
     #
+    # @option params [String] :output_status
+    #   An indication of whether the output should transmit data or not. If
+    #   you don't specify the outputStatus field in your request,
+    #   MediaConnect leaves the value unchanged.
+    #
     # @return [Types::UpdateFlowOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowOutputResponse#flow_arn #flow_arn} => String
@@ -3731,6 +3742,7 @@ module Aws::MediaConnect
     #     vpc_interface_attachment: {
     #       vpc_interface_name: "__string",
     #     },
+    #     output_status: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3782,6 +3794,7 @@ module Aws::MediaConnect
     #   resp.output.bridge_arn #=> String
     #   resp.output.bridge_ports #=> Array
     #   resp.output.bridge_ports[0] #=> Integer
+    #   resp.output.output_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutput AWS API Documentation
     #
@@ -4033,7 +4046,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

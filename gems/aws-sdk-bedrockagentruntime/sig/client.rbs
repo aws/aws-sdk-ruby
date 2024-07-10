@@ -76,10 +76,38 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _DeleteAgentMemoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentMemoryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#delete_agent_memory-instance_method
+      def delete_agent_memory: (
+                                 agent_alias_id: ::String,
+                                 agent_id: ::String,
+                                 ?memory_id: ::String
+                               ) -> _DeleteAgentMemoryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentMemoryResponseSuccess
+
+      interface _GetAgentMemoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentMemoryResponse]
+        def memory_contents: () -> ::Array[Types::Memory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#get_agent_memory-instance_method
+      def get_agent_memory: (
+                              agent_alias_id: ::String,
+                              agent_id: ::String,
+                              ?max_items: ::Integer,
+                              memory_id: ::String,
+                              memory_type: ("SESSION_SUMMARY"),
+                              ?next_token: ::String
+                            ) -> _GetAgentMemoryResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentMemoryResponseSuccess
+
       interface _InvokeAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAgentResponse]
         def completion: () -> Types::ResponseStream
         def content_type: () -> ::String
+        def memory_id: () -> ::String
         def session_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#invoke_agent-instance_method
@@ -89,9 +117,100 @@ module Aws
                           ?enable_trace: bool,
                           ?end_session: bool,
                           ?input_text: ::String,
+                          ?memory_id: ::String,
                           session_id: ::String,
                           ?session_state: {
+                            files: Array[
+                              {
+                                name: ::String,
+                                source: {
+                                  byte_content: {
+                                    data: ::String,
+                                    media_type: ::String
+                                  }?,
+                                  s3_location: {
+                                    uri: ::String
+                                  }?,
+                                  source_type: ("S3" | "BYTE_CONTENT")
+                                },
+                                use_case: ("CODE_INTERPRETER" | "CHAT")
+                              },
+                            ]?,
                             invocation_id: ::String?,
+                            knowledge_base_configurations: Array[
+                              {
+                                knowledge_base_id: ::String,
+                                retrieval_configuration: {
+                                  vector_search_configuration: {
+                                    filter: {
+                                      and_all: Array[
+                                        untyped,
+                                      ]?,
+                                      equals: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      greater_than: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      greater_than_or_equals: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      in: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      less_than: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      less_than_or_equals: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      list_contains: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      not_equals: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      not_in: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      or_all: Array[
+                                        untyped,
+                                      ]?,
+                                      starts_with: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?,
+                                      string_contains: {
+                                        key: ::String,
+                                        value: {
+                                        }
+                                      }?
+                                    }?,
+                                    number_of_results: ::Integer?,
+                                    override_search_type: ("HYBRID" | "SEMANTIC")?
+                                  }
+                                }
+                              },
+                            ]?,
                             prompt_session_attributes: Hash[::String, ::String]?,
                             return_control_invocation_results: Array[
                               {
@@ -119,6 +238,27 @@ module Aws
                           }
                         ) ?{ (*untyped) -> void } -> _InvokeAgentResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAgentResponseSuccess
+
+      interface _InvokeFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeFlowResponse]
+        def response_stream: () -> Types::FlowResponseStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentRuntime/Client.html#invoke_flow-instance_method
+      def invoke_flow: (
+                         flow_alias_identifier: ::String,
+                         flow_identifier: ::String,
+                         inputs: Array[
+                           {
+                             content: {
+                               document: {
+                               }?
+                             },
+                             node_name: ::String,
+                             node_output_name: ::String
+                           },
+                         ]
+                       ) ?{ (*untyped) -> void } -> _InvokeFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeFlowResponseSuccess
 
       interface _RetrieveResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveResponse]
@@ -274,6 +414,11 @@ module Aws
                                        }?,
                                        knowledge_base_id: ::String,
                                        model_arn: ::String,
+                                       orchestration_configuration: {
+                                         query_transformation_configuration: {
+                                           type: ("QUERY_DECOMPOSITION")
+                                         }
+                                       }?,
                                        retrieval_configuration: {
                                          vector_search_configuration: {
                                            filter: {

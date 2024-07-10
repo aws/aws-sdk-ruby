@@ -212,7 +212,8 @@ module Aws
                                   stream_id: ::String?,
                                   vpc_interface_attachment: {
                                     vpc_interface_name: ::String?
-                                  }?
+                                  }?,
+                                  output_status: ("ENABLED" | "DISABLED")?
                                 },
                               ]
                             ) -> _AddFlowOutputsResponseSuccess
@@ -452,7 +453,8 @@ module Aws
                              stream_id: ::String?,
                              vpc_interface_attachment: {
                                vpc_interface_name: ::String?
-                             }?
+                             }?,
+                             output_status: ("ENABLED" | "DISABLED")?
                            },
                          ],
                          ?source: {
@@ -1183,7 +1185,8 @@ module Aws
                                 ?stream_id: ::String,
                                 ?vpc_interface_attachment: {
                                   vpc_interface_name: ::String?
-                                }
+                                },
+                                ?output_status: ("ENABLED" | "DISABLED")
                               ) -> _UpdateFlowOutputResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowOutputResponseSuccess
 

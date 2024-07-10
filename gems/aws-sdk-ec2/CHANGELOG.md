@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.465.0 (2024-07-10)
+------------------
+
+* Feature - Add parameters to enable provisioning IPAM BYOIPv4 space at a Local Zone Network Border Group level
+
 1.464.0 (2024-07-02)
 ------------------
 

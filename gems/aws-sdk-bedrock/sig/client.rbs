@@ -205,6 +205,14 @@ module Aws
                                   },
                                 ]?
                               },
+                              ?contextual_grounding_policy_config: {
+                                filters_config: Array[
+                                  {
+                                    type: ("GROUNDING" | "RELEVANCE"),
+                                    threshold: ::Float
+                                  },
+                                ]
+                              },
                               blocked_input_messaging: ::String,
                               blocked_outputs_messaging: ::String,
                               ?kms_key_id: ::String,
@@ -400,6 +408,7 @@ module Aws
         def content_policy: () -> Types::GuardrailContentPolicy
         def word_policy: () -> Types::GuardrailWordPolicy
         def sensitive_information_policy: () -> Types::GuardrailSensitiveInformationPolicy
+        def contextual_grounding_policy: () -> Types::GuardrailContextualGroundingPolicy
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status_reasons: () -> ::Array[::String]
@@ -712,6 +721,14 @@ module Aws
                                     action: ("BLOCK" | "ANONYMIZE")
                                   },
                                 ]?
+                              },
+                              ?contextual_grounding_policy_config: {
+                                filters_config: Array[
+                                  {
+                                    type: ("GROUNDING" | "RELEVANCE"),
+                                    threshold: ::Float
+                                  },
+                                ]
                               },
                               blocked_input_messaging: ::String,
                               blocked_outputs_messaging: ::String,

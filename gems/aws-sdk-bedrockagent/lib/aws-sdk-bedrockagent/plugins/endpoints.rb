@@ -68,8 +68,18 @@ module Aws::BedrockAgent
             Aws::BedrockAgent::Endpoints::CreateAgentAlias.build(context)
           when :create_data_source
             Aws::BedrockAgent::Endpoints::CreateDataSource.build(context)
+          when :create_flow
+            Aws::BedrockAgent::Endpoints::CreateFlow.build(context)
+          when :create_flow_alias
+            Aws::BedrockAgent::Endpoints::CreateFlowAlias.build(context)
+          when :create_flow_version
+            Aws::BedrockAgent::Endpoints::CreateFlowVersion.build(context)
           when :create_knowledge_base
             Aws::BedrockAgent::Endpoints::CreateKnowledgeBase.build(context)
+          when :create_prompt
+            Aws::BedrockAgent::Endpoints::CreatePrompt.build(context)
+          when :create_prompt_version
+            Aws::BedrockAgent::Endpoints::CreatePromptVersion.build(context)
           when :delete_agent
             Aws::BedrockAgent::Endpoints::DeleteAgent.build(context)
           when :delete_agent_action_group
@@ -80,8 +90,16 @@ module Aws::BedrockAgent
             Aws::BedrockAgent::Endpoints::DeleteAgentVersion.build(context)
           when :delete_data_source
             Aws::BedrockAgent::Endpoints::DeleteDataSource.build(context)
+          when :delete_flow
+            Aws::BedrockAgent::Endpoints::DeleteFlow.build(context)
+          when :delete_flow_alias
+            Aws::BedrockAgent::Endpoints::DeleteFlowAlias.build(context)
+          when :delete_flow_version
+            Aws::BedrockAgent::Endpoints::DeleteFlowVersion.build(context)
           when :delete_knowledge_base
             Aws::BedrockAgent::Endpoints::DeleteKnowledgeBase.build(context)
+          when :delete_prompt
+            Aws::BedrockAgent::Endpoints::DeletePrompt.build(context)
           when :disassociate_agent_knowledge_base
             Aws::BedrockAgent::Endpoints::DisassociateAgentKnowledgeBase.build(context)
           when :get_agent
@@ -96,10 +114,18 @@ module Aws::BedrockAgent
             Aws::BedrockAgent::Endpoints::GetAgentVersion.build(context)
           when :get_data_source
             Aws::BedrockAgent::Endpoints::GetDataSource.build(context)
+          when :get_flow
+            Aws::BedrockAgent::Endpoints::GetFlow.build(context)
+          when :get_flow_alias
+            Aws::BedrockAgent::Endpoints::GetFlowAlias.build(context)
+          when :get_flow_version
+            Aws::BedrockAgent::Endpoints::GetFlowVersion.build(context)
           when :get_ingestion_job
             Aws::BedrockAgent::Endpoints::GetIngestionJob.build(context)
           when :get_knowledge_base
             Aws::BedrockAgent::Endpoints::GetKnowledgeBase.build(context)
+          when :get_prompt
+            Aws::BedrockAgent::Endpoints::GetPrompt.build(context)
           when :list_agent_action_groups
             Aws::BedrockAgent::Endpoints::ListAgentActionGroups.build(context)
           when :list_agent_aliases
@@ -112,14 +138,24 @@ module Aws::BedrockAgent
             Aws::BedrockAgent::Endpoints::ListAgents.build(context)
           when :list_data_sources
             Aws::BedrockAgent::Endpoints::ListDataSources.build(context)
+          when :list_flow_aliases
+            Aws::BedrockAgent::Endpoints::ListFlowAliases.build(context)
+          when :list_flow_versions
+            Aws::BedrockAgent::Endpoints::ListFlowVersions.build(context)
+          when :list_flows
+            Aws::BedrockAgent::Endpoints::ListFlows.build(context)
           when :list_ingestion_jobs
             Aws::BedrockAgent::Endpoints::ListIngestionJobs.build(context)
           when :list_knowledge_bases
             Aws::BedrockAgent::Endpoints::ListKnowledgeBases.build(context)
+          when :list_prompts
+            Aws::BedrockAgent::Endpoints::ListPrompts.build(context)
           when :list_tags_for_resource
             Aws::BedrockAgent::Endpoints::ListTagsForResource.build(context)
           when :prepare_agent
             Aws::BedrockAgent::Endpoints::PrepareAgent.build(context)
+          when :prepare_flow
+            Aws::BedrockAgent::Endpoints::PrepareFlow.build(context)
           when :start_ingestion_job
             Aws::BedrockAgent::Endpoints::StartIngestionJob.build(context)
           when :tag_resource
@@ -136,8 +172,14 @@ module Aws::BedrockAgent
             Aws::BedrockAgent::Endpoints::UpdateAgentKnowledgeBase.build(context)
           when :update_data_source
             Aws::BedrockAgent::Endpoints::UpdateDataSource.build(context)
+          when :update_flow
+            Aws::BedrockAgent::Endpoints::UpdateFlow.build(context)
+          when :update_flow_alias
+            Aws::BedrockAgent::Endpoints::UpdateFlowAlias.build(context)
           when :update_knowledge_base
             Aws::BedrockAgent::Endpoints::UpdateKnowledgeBase.build(context)
+          when :update_prompt
+            Aws::BedrockAgent::Endpoints::UpdatePrompt.build(context)
           end
         end
       end

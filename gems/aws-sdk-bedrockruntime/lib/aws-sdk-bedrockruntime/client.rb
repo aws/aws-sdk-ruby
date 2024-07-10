@@ -436,6 +436,94 @@ module Aws::BedrockRuntime
 
     # @!group API Operations
 
+    # The action to apply a guardrail.
+    #
+    # @option params [required, String] :guardrail_identifier
+    #   The guardrail identifier used in the request to apply the guardrail.
+    #
+    # @option params [required, String] :guardrail_version
+    #   The guardrail version used in the request to apply the guardrail.
+    #
+    # @option params [required, String] :source
+    #   The source of data used in the request to apply the guardrail.
+    #
+    # @option params [required, Array<Types::GuardrailContentBlock>] :content
+    #   The content details used in the request to apply the guardrail.
+    #
+    # @return [Types::ApplyGuardrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ApplyGuardrailResponse#usage #usage} => Types::GuardrailUsage
+    #   * {Types::ApplyGuardrailResponse#action #action} => String
+    #   * {Types::ApplyGuardrailResponse#outputs #outputs} => Array&lt;Types::GuardrailOutputContent&gt;
+    #   * {Types::ApplyGuardrailResponse#assessments #assessments} => Array&lt;Types::GuardrailAssessment&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.apply_guardrail({
+    #     guardrail_identifier: "GuardrailIdentifier", # required
+    #     guardrail_version: "GuardrailVersion", # required
+    #     source: "INPUT", # required, accepts INPUT, OUTPUT
+    #     content: [ # required
+    #       {
+    #         text: {
+    #           text: "String", # required
+    #           qualifiers: ["grounding_source"], # accepts grounding_source, query, guard_content
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage.topic_policy_units #=> Integer
+    #   resp.usage.content_policy_units #=> Integer
+    #   resp.usage.word_policy_units #=> Integer
+    #   resp.usage.sensitive_information_policy_units #=> Integer
+    #   resp.usage.sensitive_information_policy_free_units #=> Integer
+    #   resp.usage.contextual_grounding_policy_units #=> Integer
+    #   resp.action #=> String, one of "NONE", "GUARDRAIL_INTERVENED"
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].text #=> String
+    #   resp.assessments #=> Array
+    #   resp.assessments[0].topic_policy.topics #=> Array
+    #   resp.assessments[0].topic_policy.topics[0].name #=> String
+    #   resp.assessments[0].topic_policy.topics[0].type #=> String, one of "DENY"
+    #   resp.assessments[0].topic_policy.topics[0].action #=> String, one of "BLOCKED"
+    #   resp.assessments[0].content_policy.filters #=> Array
+    #   resp.assessments[0].content_policy.filters[0].type #=> String, one of "INSULTS", "HATE", "SEXUAL", "VIOLENCE", "MISCONDUCT", "PROMPT_ATTACK"
+    #   resp.assessments[0].content_policy.filters[0].confidence #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
+    #   resp.assessments[0].word_policy.custom_words #=> Array
+    #   resp.assessments[0].word_policy.custom_words[0].match #=> String
+    #   resp.assessments[0].word_policy.custom_words[0].action #=> String, one of "BLOCKED"
+    #   resp.assessments[0].word_policy.managed_word_lists #=> Array
+    #   resp.assessments[0].word_policy.managed_word_lists[0].match #=> String
+    #   resp.assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   resp.assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
+    #   resp.assessments[0].sensitive_information_policy.pii_entities #=> Array
+    #   resp.assessments[0].sensitive_information_policy.pii_entities[0].match #=> String
+    #   resp.assessments[0].sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   resp.assessments[0].sensitive_information_policy.pii_entities[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   resp.assessments[0].sensitive_information_policy.regexes #=> Array
+    #   resp.assessments[0].sensitive_information_policy.regexes[0].name #=> String
+    #   resp.assessments[0].sensitive_information_policy.regexes[0].match #=> String
+    #   resp.assessments[0].sensitive_information_policy.regexes[0].regex #=> String
+    #   resp.assessments[0].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   resp.assessments[0].contextual_grounding_policy.filters #=> Array
+    #   resp.assessments[0].contextual_grounding_policy.filters[0].type #=> String, one of "GROUNDING", "RELEVANCE"
+    #   resp.assessments[0].contextual_grounding_policy.filters[0].threshold #=> Float
+    #   resp.assessments[0].contextual_grounding_policy.filters[0].score #=> Float
+    #   resp.assessments[0].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ApplyGuardrail AWS API Documentation
+    #
+    # @overload apply_guardrail(params = {})
+    # @param [Hash] params ({})
+    def apply_guardrail(params = {}, options = {})
+      req = build_request(:apply_guardrail, params)
+      req.send_request(options)
+    end
+
     # Sends messages to the specified Amazon Bedrock model. `Converse`
     # provides a consistent interface that works with all models that
     # support messages. This allows you to write code once and use it with
@@ -603,6 +691,7 @@ module Aws::BedrockRuntime
     #             guard_content: {
     #               text: {
     #                 text: "String", # required
+    #                 qualifiers: ["grounding_source"], # accepts grounding_source, query, guard_content
     #               },
     #             },
     #           },
@@ -615,6 +704,7 @@ module Aws::BedrockRuntime
     #         guard_content: {
     #           text: {
     #             text: "String", # required
+    #             qualifiers: ["grounding_source"], # accepts grounding_source, query, guard_content
     #           },
     #         },
     #       },
@@ -680,6 +770,8 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].tool_result.content[0].document.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.status #=> String, one of "success", "error"
     #   resp.output.message.content[0].guard_content.text.text #=> String
+    #   resp.output.message.content[0].guard_content.text.qualifiers #=> Array
+    #   resp.output.message.content[0].guard_content.text.qualifiers[0] #=> String, one of "grounding_source", "query", "guard_content"
     #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered"
     #   resp.usage.input_tokens #=> Integer
     #   resp.usage.output_tokens #=> Integer
@@ -712,6 +804,11 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].match #=> String
     #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].regex #=> String
     #   resp.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].type #=> String, one of "GROUNDING", "RELEVANCE"
+    #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].threshold #=> Float
+    #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].score #=> Float
+    #   resp.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
     #   resp.trace.guardrail.output_assessments #=> Hash
     #   resp.trace.guardrail.output_assessments["String"] #=> Array
     #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -738,6 +835,11 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].match #=> String
     #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].regex #=> String
     #   resp.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].type #=> String, one of "GROUNDING", "RELEVANCE"
+    #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].threshold #=> Float
+    #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].score #=> Float
+    #   resp.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/Converse AWS API Documentation
     #
@@ -1077,6 +1179,7 @@ module Aws::BedrockRuntime
     #             guard_content: {
     #               text: {
     #                 text: "String", # required
+    #                 qualifiers: ["grounding_source"], # accepts grounding_source, query, guard_content
     #               },
     #             },
     #           },
@@ -1089,6 +1192,7 @@ module Aws::BedrockRuntime
     #         guard_content: {
     #           text: {
     #             text: "String", # required
+    #             qualifiers: ["grounding_source"], # accepts grounding_source, query, guard_content
     #           },
     #         },
     #       },
@@ -1190,6 +1294,11 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].match #=> String
     #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].regex #=> String
     #   event.trace.guardrail.input_assessment["String"].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters #=> Array
+    #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].type #=> String, one of "GROUNDING", "RELEVANCE"
+    #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].threshold #=> Float
+    #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].score #=> Float
+    #   event.trace.guardrail.input_assessment["String"].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
     #   event.trace.guardrail.output_assessments #=> Hash
     #   event.trace.guardrail.output_assessments["String"] #=> Array
     #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -1216,6 +1325,11 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].match #=> String
     #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].regex #=> String
     #   event.trace.guardrail.output_assessments["String"][0].sensitive_information_policy.regexes[0].action #=> String, one of "ANONYMIZED", "BLOCKED"
+    #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].type #=> String, one of "GROUNDING", "RELEVANCE"
+    #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].threshold #=> Float
+    #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].score #=> Float
+    #   event.trace.guardrail.output_assessments["String"][0].contextual_grounding_policy.filters[0].action #=> String, one of "BLOCKED", "NONE"
     #
     #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -1665,7 +1779,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

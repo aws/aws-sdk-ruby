@@ -105,6 +105,10 @@ module Aws
                           },
                           ?idle_session_ttl_in_seconds: ::Integer,
                           ?instruction: ::String,
+                          ?memory_configuration: {
+                            enabled_memory_types: Array[("SESSION_SUMMARY")],
+                            storage_days: ::Integer?
+                          },
                           ?prompt_override_configuration: {
                             override_lambda: ::String?,
                             prompt_configurations: Array[
@@ -164,7 +168,7 @@ module Aws
                                            },
                                          ]?
                                        },
-                                       ?parent_action_group_signature: ("AMAZON.UserInput")
+                                       ?parent_action_group_signature: ("AMAZON.UserInput" | "AMAZON.CodeInterpreter")
                                      ) -> _CreateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentActionGroupResponseSuccess
 
@@ -197,12 +201,98 @@ module Aws
                                 ?client_token: ::String,
                                 ?data_deletion_policy: ("RETAIN" | "DELETE"),
                                 data_source_configuration: {
+                                  confluence_configuration: {
+                                    crawler_configuration: {
+                                      filter_configuration: {
+                                        pattern_object_filter: {
+                                          filters: Array[
+                                            {
+                                              exclusion_filters: Array[::String]?,
+                                              inclusion_filters: Array[::String]?,
+                                              object_type: ::String
+                                            },
+                                          ]
+                                        }?,
+                                        type: ("PATTERN")
+                                      }?
+                                    }?,
+                                    source_configuration: {
+                                      auth_type: ("BASIC" | "OAUTH2_CLIENT_CREDENTIALS"),
+                                      credentials_secret_arn: ::String,
+                                      host_type: ("SAAS"),
+                                      host_url: ::String
+                                    }
+                                  }?,
                                   s3_configuration: {
                                     bucket_arn: ::String,
                                     bucket_owner_account_id: ::String?,
                                     inclusion_prefixes: Array[::String]?
                                   }?,
-                                  type: ("S3")
+                                  salesforce_configuration: {
+                                    crawler_configuration: {
+                                      filter_configuration: {
+                                        pattern_object_filter: {
+                                          filters: Array[
+                                            {
+                                              exclusion_filters: Array[::String]?,
+                                              inclusion_filters: Array[::String]?,
+                                              object_type: ::String
+                                            },
+                                          ]
+                                        }?,
+                                        type: ("PATTERN")
+                                      }?
+                                    }?,
+                                    source_configuration: {
+                                      auth_type: ("OAUTH2_CLIENT_CREDENTIALS"),
+                                      credentials_secret_arn: ::String,
+                                      host_url: ::String
+                                    }
+                                  }?,
+                                  share_point_configuration: {
+                                    crawler_configuration: {
+                                      filter_configuration: {
+                                        pattern_object_filter: {
+                                          filters: Array[
+                                            {
+                                              exclusion_filters: Array[::String]?,
+                                              inclusion_filters: Array[::String]?,
+                                              object_type: ::String
+                                            },
+                                          ]
+                                        }?,
+                                        type: ("PATTERN")
+                                      }?
+                                    }?,
+                                    source_configuration: {
+                                      auth_type: ("OAUTH2_CLIENT_CREDENTIALS"),
+                                      credentials_secret_arn: ::String,
+                                      domain: ::String,
+                                      host_type: ("ONLINE"),
+                                      site_urls: Array[::String],
+                                      tenant_id: ::String?
+                                    }
+                                  }?,
+                                  type: ("S3" | "WEB" | "CONFLUENCE" | "SALESFORCE" | "SHAREPOINT"),
+                                  web_configuration: {
+                                    crawler_configuration: {
+                                      crawler_limits: {
+                                        rate_limit: ::Integer?
+                                      }?,
+                                      exclusion_filters: Array[::String]?,
+                                      inclusion_filters: Array[::String]?,
+                                      scope: ("HOST_ONLY" | "SUBDOMAINS")?
+                                    }?,
+                                    source_configuration: {
+                                      url_configuration: {
+                                        seed_urls: Array[
+                                          {
+                                            url: ::String?
+                                          },
+                                        ]?
+                                      }
+                                    }
+                                  }?
                                 },
                                 ?description: ::String,
                                 knowledge_base_id: ::String,
@@ -212,15 +302,240 @@ module Aws
                                 },
                                 ?vector_ingestion_configuration: {
                                   chunking_configuration: {
-                                    chunking_strategy: ("FIXED_SIZE" | "NONE"),
+                                    chunking_strategy: ("FIXED_SIZE" | "NONE" | "HIERARCHICAL" | "SEMANTIC"),
                                     fixed_size_chunking_configuration: {
                                       max_tokens: ::Integer,
                                       overlap_percentage: ::Integer
+                                    }?,
+                                    hierarchical_chunking_configuration: {
+                                      level_configurations: Array[
+                                        {
+                                          max_tokens: ::Integer
+                                        },
+                                      ],
+                                      overlap_tokens: ::Integer
+                                    }?,
+                                    semantic_chunking_configuration: {
+                                      breakpoint_percentile_threshold: ::Integer,
+                                      buffer_size: ::Integer,
+                                      max_tokens: ::Integer
                                     }?
+                                  }?,
+                                  custom_transformation_configuration: {
+                                    intermediate_storage: {
+                                      s3_location: {
+                                        uri: ::String
+                                      }
+                                    },
+                                    transformations: Array[
+                                      {
+                                        step_to_apply: ("POST_CHUNKING"),
+                                        transformation_function: {
+                                          transformation_lambda_configuration: {
+                                            lambda_arn: ::String
+                                          }
+                                        }
+                                      },
+                                    ]
+                                  }?,
+                                  parsing_configuration: {
+                                    bedrock_foundation_model_configuration: {
+                                      model_arn: ::String,
+                                      parsing_prompt: {
+                                        parsing_prompt_text: ::String
+                                      }?
+                                    }?,
+                                    parsing_strategy: ("BEDROCK_FOUNDATION_MODEL")
                                   }?
                                 }
                               ) -> _CreateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
+
+      interface _CreateFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def definition: () -> Types::FlowDefinition
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+        def updated_at: () -> ::Time
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_flow-instance_method
+      def create_flow: (
+                         ?client_token: ::String,
+                         ?customer_encryption_key_arn: ::String,
+                         ?definition: {
+                           connections: Array[
+                             {
+                               configuration: {
+                                 conditional: {
+                                   condition: ::String
+                                 }?,
+                                 data: {
+                                   source_output: ::String,
+                                   target_input: ::String
+                                 }?
+                               }?,
+                               name: ::String,
+                               source: ::String,
+                               target: ::String,
+                               type: ("Data" | "Conditional")
+                             },
+                           ]?,
+                           nodes: Array[
+                             {
+                               configuration: {
+                                 agent: {
+                                   agent_alias_arn: ::String
+                                 }?,
+                                 collector: {
+                                 }?,
+                                 condition: {
+                                   conditions: Array[
+                                     {
+                                       expression: ::String?,
+                                       name: ::String
+                                     },
+                                   ]
+                                 }?,
+                                 input: {
+                                 }?,
+                                 iterator: {
+                                 }?,
+                                 knowledge_base: {
+                                   knowledge_base_id: ::String,
+                                   model_id: ::String?
+                                 }?,
+                                 lambda_function: {
+                                   lambda_arn: ::String
+                                 }?,
+                                 lex: {
+                                   bot_alias_arn: ::String,
+                                   locale_id: ::String
+                                 }?,
+                                 output: {
+                                 }?,
+                                 prompt: {
+                                   source_configuration: {
+                                     inline: {
+                                       inference_configuration: {
+                                         text: {
+                                           max_tokens: ::Integer?,
+                                           stop_sequences: Array[::String]?,
+                                           temperature: ::Float?,
+                                           top_k: ::Integer?,
+                                           top_p: ::Float?
+                                         }?
+                                       }?,
+                                       model_id: ::String,
+                                       template_configuration: {
+                                         text: {
+                                           input_variables: Array[
+                                             {
+                                               name: ::String?
+                                             },
+                                           ]?,
+                                           text: ::String
+                                         }?
+                                       },
+                                       template_type: ("TEXT")
+                                     }?,
+                                     resource: {
+                                       prompt_arn: ::String
+                                     }?
+                                   }
+                                 }?,
+                                 retrieval: {
+                                   service_configuration: {
+                                     s3: {
+                                       bucket_name: ::String
+                                     }?
+                                   }
+                                 }?,
+                                 storage: {
+                                   service_configuration: {
+                                     s3: {
+                                       bucket_name: ::String
+                                     }?
+                                   }
+                                 }?
+                               }?,
+                               inputs: Array[
+                                 {
+                                   expression: ::String,
+                                   name: ::String,
+                                   type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+                                 },
+                               ]?,
+                               name: ::String,
+                               outputs: Array[
+                                 {
+                                   name: ::String,
+                                   type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+                                 },
+                               ]?,
+                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                             },
+                           ]?
+                         },
+                         ?description: ::String,
+                         execution_role_arn: ::String,
+                         name: ::String,
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreateFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowResponseSuccess
+
+      interface _CreateFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowAliasResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def flow_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def routing_configuration: () -> ::Array[Types::FlowAliasRoutingConfigurationListItem]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_flow_alias-instance_method
+      def create_flow_alias: (
+                               ?client_token: ::String,
+                               ?description: ::String,
+                               flow_identifier: ::String,
+                               name: ::String,
+                               routing_configuration: Array[
+                                 {
+                                   flow_version: ::String?
+                                 },
+                               ],
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateFlowAliasResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowAliasResponseSuccess
+
+      interface _CreateFlowVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowVersionResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def definition: () -> Types::FlowDefinition
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_flow_version-instance_method
+      def create_flow_version: (
+                                 ?client_token: ::String,
+                                 ?description: ::String,
+                                 flow_identifier: ::String
+                               ) -> _CreateFlowVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowVersionResponseSuccess
 
       interface _CreateKnowledgeBaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateKnowledgeBaseResponse]
@@ -303,6 +618,78 @@ module Aws
                                  ) -> _CreateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
 
+      interface _CreatePromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePromptResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def default_variant: () -> ::String
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def updated_at: () -> ::Time
+        def variants: () -> ::Array[Types::PromptVariant]
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_prompt-instance_method
+      def create_prompt: (
+                           ?client_token: ::String,
+                           ?customer_encryption_key_arn: ::String,
+                           ?default_variant: ::String,
+                           ?description: ::String,
+                           name: ::String,
+                           ?tags: Hash[::String, ::String],
+                           ?variants: Array[
+                             {
+                               inference_configuration: {
+                                 text: {
+                                   max_tokens: ::Integer?,
+                                   stop_sequences: Array[::String]?,
+                                   temperature: ::Float?,
+                                   top_k: ::Integer?,
+                                   top_p: ::Float?
+                                 }?
+                               }?,
+                               model_id: ::String?,
+                               name: ::String,
+                               template_configuration: {
+                                 text: {
+                                   input_variables: Array[
+                                     {
+                                       name: ::String?
+                                     },
+                                   ]?,
+                                   text: ::String
+                                 }?
+                               }?,
+                               template_type: ("TEXT")
+                             },
+                           ]
+                         ) -> _CreatePromptResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePromptResponseSuccess
+
+      interface _CreatePromptVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePromptVersionResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def default_variant: () -> ::String
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def updated_at: () -> ::Time
+        def variants: () -> ::Array[Types::PromptVariant]
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_prompt_version-instance_method
+      def create_prompt_version: (
+                                   ?client_token: ::String,
+                                   ?description: ::String,
+                                   prompt_identifier: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreatePromptVersionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePromptVersionResponseSuccess
+
       interface _DeleteAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentResponse]
         def agent_id: () -> ::String
@@ -367,6 +754,42 @@ module Aws
                               ) -> _DeleteDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
 
+      interface _DeleteFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlowResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_flow-instance_method
+      def delete_flow: (
+                         flow_identifier: ::String,
+                         ?skip_resource_in_use_check: bool
+                       ) -> _DeleteFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowResponseSuccess
+
+      interface _DeleteFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlowAliasResponse]
+        def flow_id: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_flow_alias-instance_method
+      def delete_flow_alias: (
+                               alias_identifier: ::String,
+                               flow_identifier: ::String
+                             ) -> _DeleteFlowAliasResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowAliasResponseSuccess
+
+      interface _DeleteFlowVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlowVersionResponse]
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_flow_version-instance_method
+      def delete_flow_version: (
+                                 flow_identifier: ::String,
+                                 flow_version: ::String,
+                                 ?skip_resource_in_use_check: bool
+                               ) -> _DeleteFlowVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowVersionResponseSuccess
+
       interface _DeleteKnowledgeBaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKnowledgeBaseResponse]
         def knowledge_base_id: () -> ::String
@@ -377,6 +800,18 @@ module Aws
                                    knowledge_base_id: ::String
                                  ) -> _DeleteKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnowledgeBaseResponseSuccess
+
+      interface _DeletePromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePromptResponse]
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_prompt-instance_method
+      def delete_prompt: (
+                           prompt_identifier: ::String,
+                           ?prompt_version: ::String
+                         ) -> _DeletePromptResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePromptResponseSuccess
 
       interface _DisassociateAgentKnowledgeBaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAgentKnowledgeBaseResponse]
@@ -456,6 +891,65 @@ module Aws
                            ) -> _GetDataSourceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
 
+      interface _GetFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def definition: () -> Types::FlowDefinition
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+        def updated_at: () -> ::Time
+        def validations: () -> ::Array[Types::FlowValidation]
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_flow-instance_method
+      def get_flow: (
+                      flow_identifier: ::String
+                    ) -> _GetFlowResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowResponseSuccess
+
+      interface _GetFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowAliasResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def flow_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def routing_configuration: () -> ::Array[Types::FlowAliasRoutingConfigurationListItem]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_flow_alias-instance_method
+      def get_flow_alias: (
+                            alias_identifier: ::String,
+                            flow_identifier: ::String
+                          ) -> _GetFlowAliasResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowAliasResponseSuccess
+
+      interface _GetFlowVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowVersionResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def definition: () -> Types::FlowDefinition
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_flow_version-instance_method
+      def get_flow_version: (
+                              flow_identifier: ::String,
+                              flow_version: ::String
+                            ) -> _GetFlowVersionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowVersionResponseSuccess
+
       interface _GetIngestionJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestionJobResponse]
         def ingestion_job: () -> Types::IngestionJob
@@ -477,6 +971,26 @@ module Aws
                                 knowledge_base_id: ::String
                               ) -> _GetKnowledgeBaseResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKnowledgeBaseResponseSuccess
+
+      interface _GetPromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPromptResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def default_variant: () -> ::String
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def updated_at: () -> ::Time
+        def variants: () -> ::Array[Types::PromptVariant]
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_prompt-instance_method
+      def get_prompt: (
+                        prompt_identifier: ::String,
+                        ?prompt_version: ::String
+                      ) -> _GetPromptResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPromptResponseSuccess
 
       interface _ListAgentActionGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentActionGroupsResponse]
@@ -557,6 +1071,44 @@ module Aws
                              ) -> _ListDataSourcesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
 
+      interface _ListFlowAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowAliasesResponse]
+        def flow_alias_summaries: () -> ::Array[Types::FlowAliasSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_flow_aliases-instance_method
+      def list_flow_aliases: (
+                               flow_identifier: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListFlowAliasesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowAliasesResponseSuccess
+
+      interface _ListFlowVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowVersionsResponse]
+        def flow_version_summaries: () -> ::Array[Types::FlowVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_flow_versions-instance_method
+      def list_flow_versions: (
+                                flow_identifier: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListFlowVersionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowVersionsResponseSuccess
+
+      interface _ListFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowsResponse]
+        def flow_summaries: () -> ::Array[Types::FlowSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_flows-instance_method
+      def list_flows: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListFlowsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowsResponseSuccess
+
       interface _ListIngestionJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestionJobsResponse]
         def ingestion_job_summaries: () -> ::Array[Types::IngestionJobSummary]
@@ -594,6 +1146,19 @@ module Aws
                                 ) -> _ListKnowledgeBasesResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKnowledgeBasesResponseSuccess
 
+      interface _ListPromptsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPromptsResponse]
+        def next_token: () -> ::String
+        def prompt_summaries: () -> ::Array[Types::PromptSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_prompts-instance_method
+      def list_prompts: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?prompt_identifier: ::String
+                        ) -> _ListPromptsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPromptsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Hash[::String, ::String]
@@ -616,6 +1181,17 @@ module Aws
                            agent_id: ::String
                          ) -> _PrepareAgentResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PrepareAgentResponseSuccess
+
+      interface _PrepareFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PrepareFlowResponse]
+        def id: () -> ::String
+        def status: () -> ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#prepare_flow-instance_method
+      def prepare_flow: (
+                          flow_identifier: ::String
+                        ) -> _PrepareFlowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PrepareFlowResponseSuccess
 
       interface _StartIngestionJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartIngestionJobResponse]
@@ -668,6 +1244,10 @@ module Aws
                           },
                           ?idle_session_ttl_in_seconds: ::Integer,
                           ?instruction: ::String,
+                          ?memory_configuration: {
+                            enabled_memory_types: Array[("SESSION_SUMMARY")],
+                            storage_days: ::Integer?
+                          },
                           ?prompt_override_configuration: {
                             override_lambda: ::String?,
                             prompt_configurations: Array[
@@ -726,7 +1306,7 @@ module Aws
                                            },
                                          ]?
                                        },
-                                       ?parent_action_group_signature: ("AMAZON.UserInput")
+                                       ?parent_action_group_signature: ("AMAZON.UserInput" | "AMAZON.CodeInterpreter")
                                      ) -> _UpdateAgentActionGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentActionGroupResponseSuccess
 
@@ -771,12 +1351,98 @@ module Aws
       def update_data_source: (
                                 ?data_deletion_policy: ("RETAIN" | "DELETE"),
                                 data_source_configuration: {
+                                  confluence_configuration: {
+                                    crawler_configuration: {
+                                      filter_configuration: {
+                                        pattern_object_filter: {
+                                          filters: Array[
+                                            {
+                                              exclusion_filters: Array[::String]?,
+                                              inclusion_filters: Array[::String]?,
+                                              object_type: ::String
+                                            },
+                                          ]
+                                        }?,
+                                        type: ("PATTERN")
+                                      }?
+                                    }?,
+                                    source_configuration: {
+                                      auth_type: ("BASIC" | "OAUTH2_CLIENT_CREDENTIALS"),
+                                      credentials_secret_arn: ::String,
+                                      host_type: ("SAAS"),
+                                      host_url: ::String
+                                    }
+                                  }?,
                                   s3_configuration: {
                                     bucket_arn: ::String,
                                     bucket_owner_account_id: ::String?,
                                     inclusion_prefixes: Array[::String]?
                                   }?,
-                                  type: ("S3")
+                                  salesforce_configuration: {
+                                    crawler_configuration: {
+                                      filter_configuration: {
+                                        pattern_object_filter: {
+                                          filters: Array[
+                                            {
+                                              exclusion_filters: Array[::String]?,
+                                              inclusion_filters: Array[::String]?,
+                                              object_type: ::String
+                                            },
+                                          ]
+                                        }?,
+                                        type: ("PATTERN")
+                                      }?
+                                    }?,
+                                    source_configuration: {
+                                      auth_type: ("OAUTH2_CLIENT_CREDENTIALS"),
+                                      credentials_secret_arn: ::String,
+                                      host_url: ::String
+                                    }
+                                  }?,
+                                  share_point_configuration: {
+                                    crawler_configuration: {
+                                      filter_configuration: {
+                                        pattern_object_filter: {
+                                          filters: Array[
+                                            {
+                                              exclusion_filters: Array[::String]?,
+                                              inclusion_filters: Array[::String]?,
+                                              object_type: ::String
+                                            },
+                                          ]
+                                        }?,
+                                        type: ("PATTERN")
+                                      }?
+                                    }?,
+                                    source_configuration: {
+                                      auth_type: ("OAUTH2_CLIENT_CREDENTIALS"),
+                                      credentials_secret_arn: ::String,
+                                      domain: ::String,
+                                      host_type: ("ONLINE"),
+                                      site_urls: Array[::String],
+                                      tenant_id: ::String?
+                                    }
+                                  }?,
+                                  type: ("S3" | "WEB" | "CONFLUENCE" | "SALESFORCE" | "SHAREPOINT"),
+                                  web_configuration: {
+                                    crawler_configuration: {
+                                      crawler_limits: {
+                                        rate_limit: ::Integer?
+                                      }?,
+                                      exclusion_filters: Array[::String]?,
+                                      inclusion_filters: Array[::String]?,
+                                      scope: ("HOST_ONLY" | "SUBDOMAINS")?
+                                    }?,
+                                    source_configuration: {
+                                      url_configuration: {
+                                        seed_urls: Array[
+                                          {
+                                            url: ::String?
+                                          },
+                                        ]?
+                                      }
+                                    }
+                                  }?
                                 },
                                 data_source_id: ::String,
                                 ?description: ::String,
@@ -787,15 +1453,217 @@ module Aws
                                 },
                                 ?vector_ingestion_configuration: {
                                   chunking_configuration: {
-                                    chunking_strategy: ("FIXED_SIZE" | "NONE"),
+                                    chunking_strategy: ("FIXED_SIZE" | "NONE" | "HIERARCHICAL" | "SEMANTIC"),
                                     fixed_size_chunking_configuration: {
                                       max_tokens: ::Integer,
                                       overlap_percentage: ::Integer
+                                    }?,
+                                    hierarchical_chunking_configuration: {
+                                      level_configurations: Array[
+                                        {
+                                          max_tokens: ::Integer
+                                        },
+                                      ],
+                                      overlap_tokens: ::Integer
+                                    }?,
+                                    semantic_chunking_configuration: {
+                                      breakpoint_percentile_threshold: ::Integer,
+                                      buffer_size: ::Integer,
+                                      max_tokens: ::Integer
                                     }?
+                                  }?,
+                                  custom_transformation_configuration: {
+                                    intermediate_storage: {
+                                      s3_location: {
+                                        uri: ::String
+                                      }
+                                    },
+                                    transformations: Array[
+                                      {
+                                        step_to_apply: ("POST_CHUNKING"),
+                                        transformation_function: {
+                                          transformation_lambda_configuration: {
+                                            lambda_arn: ::String
+                                          }
+                                        }
+                                      },
+                                    ]
+                                  }?,
+                                  parsing_configuration: {
+                                    bedrock_foundation_model_configuration: {
+                                      model_arn: ::String,
+                                      parsing_prompt: {
+                                        parsing_prompt_text: ::String
+                                      }?
+                                    }?,
+                                    parsing_strategy: ("BEDROCK_FOUNDATION_MODEL")
                                   }?
                                 }
                               ) -> _UpdateDataSourceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def definition: () -> Types::FlowDefinition
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+        def updated_at: () -> ::Time
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_flow-instance_method
+      def update_flow: (
+                         ?customer_encryption_key_arn: ::String,
+                         ?definition: {
+                           connections: Array[
+                             {
+                               configuration: {
+                                 conditional: {
+                                   condition: ::String
+                                 }?,
+                                 data: {
+                                   source_output: ::String,
+                                   target_input: ::String
+                                 }?
+                               }?,
+                               name: ::String,
+                               source: ::String,
+                               target: ::String,
+                               type: ("Data" | "Conditional")
+                             },
+                           ]?,
+                           nodes: Array[
+                             {
+                               configuration: {
+                                 agent: {
+                                   agent_alias_arn: ::String
+                                 }?,
+                                 collector: {
+                                 }?,
+                                 condition: {
+                                   conditions: Array[
+                                     {
+                                       expression: ::String?,
+                                       name: ::String
+                                     },
+                                   ]
+                                 }?,
+                                 input: {
+                                 }?,
+                                 iterator: {
+                                 }?,
+                                 knowledge_base: {
+                                   knowledge_base_id: ::String,
+                                   model_id: ::String?
+                                 }?,
+                                 lambda_function: {
+                                   lambda_arn: ::String
+                                 }?,
+                                 lex: {
+                                   bot_alias_arn: ::String,
+                                   locale_id: ::String
+                                 }?,
+                                 output: {
+                                 }?,
+                                 prompt: {
+                                   source_configuration: {
+                                     inline: {
+                                       inference_configuration: {
+                                         text: {
+                                           max_tokens: ::Integer?,
+                                           stop_sequences: Array[::String]?,
+                                           temperature: ::Float?,
+                                           top_k: ::Integer?,
+                                           top_p: ::Float?
+                                         }?
+                                       }?,
+                                       model_id: ::String,
+                                       template_configuration: {
+                                         text: {
+                                           input_variables: Array[
+                                             {
+                                               name: ::String?
+                                             },
+                                           ]?,
+                                           text: ::String
+                                         }?
+                                       },
+                                       template_type: ("TEXT")
+                                     }?,
+                                     resource: {
+                                       prompt_arn: ::String
+                                     }?
+                                   }
+                                 }?,
+                                 retrieval: {
+                                   service_configuration: {
+                                     s3: {
+                                       bucket_name: ::String
+                                     }?
+                                   }
+                                 }?,
+                                 storage: {
+                                   service_configuration: {
+                                     s3: {
+                                       bucket_name: ::String
+                                     }?
+                                   }
+                                 }?
+                               }?,
+                               inputs: Array[
+                                 {
+                                   expression: ::String,
+                                   name: ::String,
+                                   type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+                                 },
+                               ]?,
+                               name: ::String,
+                               outputs: Array[
+                                 {
+                                   name: ::String,
+                                   type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+                                 },
+                               ]?,
+                               type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector")
+                             },
+                           ]?
+                         },
+                         ?description: ::String,
+                         execution_role_arn: ::String,
+                         flow_identifier: ::String,
+                         name: ::String
+                       ) -> _UpdateFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowResponseSuccess
+
+      interface _UpdateFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowAliasResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def flow_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def routing_configuration: () -> ::Array[Types::FlowAliasRoutingConfigurationListItem]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_flow_alias-instance_method
+      def update_flow_alias: (
+                               alias_identifier: ::String,
+                               ?description: ::String,
+                               flow_identifier: ::String,
+                               name: ::String,
+                               routing_configuration: Array[
+                                 {
+                                   flow_version: ::String?
+                                 },
+                               ]
+                             ) -> _UpdateFlowAliasResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowAliasResponseSuccess
 
       interface _UpdateKnowledgeBaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKnowledgeBaseResponse]
@@ -876,6 +1744,55 @@ module Aws
                                    }
                                  ) -> _UpdateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseResponseSuccess
+
+      interface _UpdatePromptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePromptResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def customer_encryption_key_arn: () -> ::String
+        def default_variant: () -> ::String
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def updated_at: () -> ::Time
+        def variants: () -> ::Array[Types::PromptVariant]
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_prompt-instance_method
+      def update_prompt: (
+                           ?customer_encryption_key_arn: ::String,
+                           ?default_variant: ::String,
+                           ?description: ::String,
+                           name: ::String,
+                           prompt_identifier: ::String,
+                           ?variants: Array[
+                             {
+                               inference_configuration: {
+                                 text: {
+                                   max_tokens: ::Integer?,
+                                   stop_sequences: Array[::String]?,
+                                   temperature: ::Float?,
+                                   top_k: ::Integer?,
+                                   top_p: ::Float?
+                                 }?
+                               }?,
+                               model_id: ::String?,
+                               name: ::String,
+                               template_configuration: {
+                                 text: {
+                                   input_variables: Array[
+                                     {
+                                       name: ::String?
+                                     },
+                                   ]?,
+                                   text: ::String
+                                 }?
+                               }?,
+                               template_type: ("TEXT")
+                             },
+                           ]
+                         ) -> _UpdatePromptResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePromptResponseSuccess
     end
   end
 end

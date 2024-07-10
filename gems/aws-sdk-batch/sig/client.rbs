@@ -689,6 +689,106 @@ module Aws
                                                  ]?
                                                },
                                              ]
+                                           }?,
+                                           eks_properties: {
+                                             pod_properties: {
+                                               service_account_name: ::String?,
+                                               host_network: bool?,
+                                               dns_policy: ::String?,
+                                               image_pull_secrets: Array[
+                                                 {
+                                                   name: ::String
+                                                 },
+                                               ]?,
+                                               containers: Array[
+                                                 {
+                                                   name: ::String?,
+                                                   image: ::String,
+                                                   image_pull_policy: ::String?,
+                                                   command: Array[::String]?,
+                                                   args: Array[::String]?,
+                                                   env: Array[
+                                                     {
+                                                       name: ::String,
+                                                       value: ::String?
+                                                     },
+                                                   ]?,
+                                                   resources: {
+                                                     limits: Hash[::String, ::String]?,
+                                                     requests: Hash[::String, ::String]?
+                                                   }?,
+                                                   volume_mounts: Array[
+                                                     {
+                                                       name: ::String?,
+                                                       mount_path: ::String?,
+                                                       read_only: bool?
+                                                     },
+                                                   ]?,
+                                                   security_context: {
+                                                     run_as_user: ::Integer?,
+                                                     run_as_group: ::Integer?,
+                                                     privileged: bool?,
+                                                     allow_privilege_escalation: bool?,
+                                                     read_only_root_filesystem: bool?,
+                                                     run_as_non_root: bool?
+                                                   }?
+                                                 },
+                                               ]?,
+                                               init_containers: Array[
+                                                 {
+                                                   name: ::String?,
+                                                   image: ::String,
+                                                   image_pull_policy: ::String?,
+                                                   command: Array[::String]?,
+                                                   args: Array[::String]?,
+                                                   env: Array[
+                                                     {
+                                                       name: ::String,
+                                                       value: ::String?
+                                                     },
+                                                   ]?,
+                                                   resources: {
+                                                     limits: Hash[::String, ::String]?,
+                                                     requests: Hash[::String, ::String]?
+                                                   }?,
+                                                   volume_mounts: Array[
+                                                     {
+                                                       name: ::String?,
+                                                       mount_path: ::String?,
+                                                       read_only: bool?
+                                                     },
+                                                   ]?,
+                                                   security_context: {
+                                                     run_as_user: ::Integer?,
+                                                     run_as_group: ::Integer?,
+                                                     privileged: bool?,
+                                                     allow_privilege_escalation: bool?,
+                                                     read_only_root_filesystem: bool?,
+                                                     run_as_non_root: bool?
+                                                   }?
+                                                 },
+                                               ]?,
+                                               volumes: Array[
+                                                 {
+                                                   name: ::String,
+                                                   host_path: {
+                                                     path: ::String?
+                                                   }?,
+                                                   empty_dir: {
+                                                     medium: ::String?,
+                                                     size_limit: ::String?
+                                                   }?,
+                                                   secret: {
+                                                     secret_name: ::String,
+                                                     optional: bool?
+                                                   }?
+                                                 },
+                                               ]?,
+                                               metadata: {
+                                                 labels: Hash[::String, ::String]?
+                                               }?,
+                                               share_process_namespace: bool?
+                                             }?
                                            }?
                                          },
                                        ]
@@ -1022,7 +1122,50 @@ module Aws
                                   },
                                 ]?
                               }?,
-                              instance_types: Array[::String]?
+                              instance_types: Array[::String]?,
+                              eks_properties_override: {
+                                pod_properties: {
+                                  containers: Array[
+                                    {
+                                      name: ::String?,
+                                      image: ::String?,
+                                      command: Array[::String]?,
+                                      args: Array[::String]?,
+                                      env: Array[
+                                        {
+                                          name: ::String,
+                                          value: ::String?
+                                        },
+                                      ]?,
+                                      resources: {
+                                        limits: Hash[::String, ::String]?,
+                                        requests: Hash[::String, ::String]?
+                                      }?
+                                    },
+                                  ]?,
+                                  init_containers: Array[
+                                    {
+                                      name: ::String?,
+                                      image: ::String?,
+                                      command: Array[::String]?,
+                                      args: Array[::String]?,
+                                      env: Array[
+                                        {
+                                          name: ::String,
+                                          value: ::String?
+                                        },
+                                      ]?,
+                                      resources: {
+                                        limits: Hash[::String, ::String]?,
+                                        requests: Hash[::String, ::String]?
+                                      }?
+                                    },
+                                  ]?,
+                                  metadata: {
+                                    labels: Hash[::String, ::String]?
+                                  }?
+                                }?
+                              }?
                             },
                           ]?
                         },

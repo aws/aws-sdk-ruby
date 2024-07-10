@@ -155,6 +155,7 @@ module Aws::MediaConnect
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Offering = Shapes::StructureShape.new(name: 'Offering')
     Output = Shapes::StructureShape.new(name: 'Output')
+    OutputStatus = Shapes::StringShape.new(name: 'OutputStatus')
     PriceUnits = Shapes::StringShape.new(name: 'PriceUnits')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
@@ -389,6 +390,7 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     AddOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     AddOutputRequest.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
+    AddOutputRequest.add_member(:output_status, Shapes::ShapeRef.new(shape: OutputStatus, location_name: "outputStatus"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
@@ -896,6 +898,7 @@ module Aws::MediaConnect
     Output.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
     Output.add_member(:bridge_arn, Shapes::ShapeRef.new(shape: __string, location_name: "bridgeArn"))
     Output.add_member(:bridge_ports, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "bridgePorts"))
+    Output.add_member(:output_status, Shapes::ShapeRef.new(shape: OutputStatus, location_name: "outputStatus"))
     Output.struct_class = Types::Output
 
     PurchaseOfferingRequest.add_member(:offering_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringArn"))
@@ -1208,6 +1211,7 @@ module Aws::MediaConnect
     UpdateFlowOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     UpdateFlowOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     UpdateFlowOutputRequest.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
+    UpdateFlowOutputRequest.add_member(:output_status, Shapes::ShapeRef.new(shape: OutputStatus, location_name: "outputStatus"))
     UpdateFlowOutputRequest.struct_class = Types::UpdateFlowOutputRequest
 
     UpdateFlowOutputResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
@@ -1368,6 +1372,7 @@ module Aws::MediaConnect
 
       api.metadata = {
         "apiVersion" => "2018-11-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mediaconnect",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

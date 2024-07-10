@@ -76,6 +76,29 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ApplyGuardrailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplyGuardrailResponse]
+        def usage: () -> Types::GuardrailUsage
+        def action: () -> ("NONE" | "GUARDRAIL_INTERVENED")
+        def outputs: () -> ::Array[Types::GuardrailOutputContent]
+        def assessments: () -> ::Array[Types::GuardrailAssessment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#apply_guardrail-instance_method
+      def apply_guardrail: (
+                             guardrail_identifier: ::String,
+                             guardrail_version: ::String,
+                             source: ("INPUT" | "OUTPUT"),
+                             content: Array[
+                               {
+                                 text: {
+                                   text: ::String,
+                                   qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
+                                 }?
+                               },
+                             ]
+                           ) -> _ApplyGuardrailResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplyGuardrailResponseSuccess
+
       interface _ConverseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConverseResponse]
         def output: () -> Types::ConverseOutput
@@ -139,7 +162,8 @@ module Aws
                               }?,
                               guard_content: {
                                 text: {
-                                  text: ::String
+                                  text: ::String,
+                                  qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
                                 }?
                               }?
                             },
@@ -151,7 +175,8 @@ module Aws
                           text: ::String?,
                           guard_content: {
                             text: {
-                              text: ::String
+                              text: ::String,
+                              qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
                             }?
                           }?
                         },
@@ -254,7 +279,8 @@ module Aws
                                      }?,
                                      guard_content: {
                                        text: {
-                                         text: ::String
+                                         text: ::String,
+                                         qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
                                        }?
                                      }?
                                    },
@@ -266,7 +292,8 @@ module Aws
                                  text: ::String?,
                                  guard_content: {
                                    text: {
-                                     text: ::String
+                                     text: ::String,
+                                     qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
                                    }?
                                  }?
                                },
