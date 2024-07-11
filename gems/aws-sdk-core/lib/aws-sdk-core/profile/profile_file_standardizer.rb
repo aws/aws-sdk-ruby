@@ -23,20 +23,19 @@ module Aws
           raw_profile_name.start_with?('profile ') ||
           raw_profile_name.start_with?("profile\t")
 
-        standardized_profile_name =
-          if @file_type == :config
-            if raw_profile_name_has_profile_prefix
-              raw_profile_name['profile'.length..-1].strip
-            elsif raw_profile_name == 'default'
-              'default'
-            else
-              puts "Ignoring profile '#{raw_profile_name}' because it did not " \
-                   "start with 'profile ' and it was not 'default'."
-              next
-            end
+        if @file_type == :config
+          if raw_profile_name_has_profile_prefix
+            standardized_profile_name = raw_profile_name['profile'.length..-1].strip
+          elsif raw_profile_name == 'default'
+            standardized_profile_name = 'default'
           else
-            raw_profile_name
+            puts "Ignoring profile '#{raw_profile_name}' because it did not " \
+                 "start with 'profile ' and it was not 'default'."
+            next
           end
+        else
+          standardized_profile_name = raw_profile_name
+        end
 
         unless ProfileFileUtils.valid_identifier?(standardized_profile_name)
           puts "Ignoring profile '#{standardized_profile_name}' because it was " \
