@@ -8,6 +8,22 @@
 module Aws::OpenSearchService
   module Types
 
+    class AIMLOptionsInput
+      attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput
+      SENSITIVE: []
+    end
+
+    class AIMLOptionsOutput
+      attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput
+      SENSITIVE: []
+    end
+
+    class AIMLOptionsStatus
+      attr_accessor options: Types::AIMLOptionsOutput
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
     class AWSDomainInformation
       attr_accessor owner_id: ::String
       attr_accessor domain_name: ::String
@@ -328,6 +344,7 @@ module Aws::OpenSearchService
       attr_accessor auto_tune_options: Types::AutoTuneOptionsInput
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions
       attr_accessor software_update_options: Types::SoftwareUpdateOptions
+      attr_accessor aiml_options: Types::AIMLOptionsInput
       SENSITIVE: []
     end
 
@@ -697,6 +714,7 @@ module Aws::OpenSearchService
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptionsStatus
       attr_accessor software_update_options: Types::SoftwareUpdateOptionsStatus
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
+      attr_accessor aiml_options: Types::AIMLOptionsStatus
       SENSITIVE: []
     end
 
@@ -796,6 +814,7 @@ module Aws::OpenSearchService
       attr_accessor software_update_options: Types::SoftwareUpdateOptions
       attr_accessor domain_processing_status: ("Creating" | "Active" | "Modifying" | "UpgradingEngineVersion" | "UpdatingServiceSoftware" | "Isolated" | "Deleting")
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
+      attr_accessor aiml_options: Types::AIMLOptionsOutput
       SENSITIVE: []
     end
 
@@ -1196,6 +1215,17 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class NaturalLanguageQueryGenerationOptionsInput
+      attr_accessor desired_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class NaturalLanguageQueryGenerationOptionsOutput
+      attr_accessor desired_state: ("ENABLED" | "DISABLED")
+      attr_accessor current_state: ("NOT_ENABLED" | "ENABLE_COMPLETE" | "ENABLE_IN_PROGRESS" | "ENABLE_FAILED" | "DISABLE_COMPLETE" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED")
+      SENSITIVE: []
+    end
+
     class NodeToNodeEncryptionOptions
       attr_accessor enabled: bool
       SENSITIVE: []
@@ -1536,6 +1566,7 @@ module Aws::OpenSearchService
       attr_accessor dry_run_mode: ("Basic" | "Verbose")
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions
       attr_accessor software_update_options: Types::SoftwareUpdateOptions
+      attr_accessor aiml_options: Types::AIMLOptionsInput
       SENSITIVE: []
     end
 

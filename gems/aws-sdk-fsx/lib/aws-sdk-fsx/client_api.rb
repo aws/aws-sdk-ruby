@@ -1716,6 +1716,7 @@ module Aws::FSx
     UpdateFileSystemOntapConfiguration.add_member(:add_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "AddRouteTableIds"))
     UpdateFileSystemOntapConfiguration.add_member(:remove_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RemoveRouteTableIds"))
     UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    UpdateFileSystemOntapConfiguration.add_member(:ha_pairs, Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
     UpdateFileSystemOntapConfiguration.struct_class = Types::UpdateFileSystemOntapConfiguration
 
     UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))

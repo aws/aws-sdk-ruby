@@ -1732,7 +1732,8 @@
           "idempotencyToken":true
         },
         "attachmentsConfiguration":{"shape":"AttachmentsConfiguration"},
-        "qAppsConfiguration":{"shape":"QAppsConfiguration"}
+        "qAppsConfiguration":{"shape":"QAppsConfiguration"},
+        "personalizationConfiguration":{"shape":"PersonalizationConfiguration"}
       }
     },
     "CreateApplicationResponse":{
@@ -2656,7 +2657,8 @@
         "updatedAt":{"shape":"Timestamp"},
         "error":{"shape":"ErrorDetail"},
         "attachmentsConfiguration":{"shape":"AppliedAttachmentsConfiguration"},
-        "qAppsConfiguration":{"shape":"QAppsConfiguration"}
+        "qAppsConfiguration":{"shape":"QAppsConfiguration"},
+        "personalizationConfiguration":{"shape":"PersonalizationConfiguration"}
       }
     },
     "GetChatControlsConfigurationRequest":{
@@ -3820,6 +3822,20 @@
       "type":"string",
       "sensitive":true
     },
+    "PersonalizationConfiguration":{
+      "type":"structure",
+      "required":["personalizationControlMode"],
+      "members":{
+        "personalizationControlMode":{"shape":"PersonalizationControlMode"}
+      }
+    },
+    "PersonalizationControlMode":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "Plugin":{
       "type":"structure",
       "members":{
@@ -4550,7 +4566,8 @@
         "description":{"shape":"Description"},
         "roleArn":{"shape":"RoleArn"},
         "attachmentsConfiguration":{"shape":"AttachmentsConfiguration"},
-        "qAppsConfiguration":{"shape":"QAppsConfiguration"}
+        "qAppsConfiguration":{"shape":"QAppsConfiguration"},
+        "personalizationConfiguration":{"shape":"PersonalizationConfiguration"}
       }
     },
     "UpdateApplicationResponse":{

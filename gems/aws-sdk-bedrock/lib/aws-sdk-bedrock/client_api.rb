@@ -106,6 +106,15 @@ module Aws::Bedrock
     GuardrailContentFiltersConfig = Shapes::ListShape.new(name: 'GuardrailContentFiltersConfig')
     GuardrailContentPolicy = Shapes::StructureShape.new(name: 'GuardrailContentPolicy')
     GuardrailContentPolicyConfig = Shapes::StructureShape.new(name: 'GuardrailContentPolicyConfig')
+    GuardrailContextualGroundingFilter = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingFilter')
+    GuardrailContextualGroundingFilterConfig = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingFilterConfig')
+    GuardrailContextualGroundingFilterConfigThresholdDouble = Shapes::FloatShape.new(name: 'GuardrailContextualGroundingFilterConfigThresholdDouble')
+    GuardrailContextualGroundingFilterThresholdDouble = Shapes::FloatShape.new(name: 'GuardrailContextualGroundingFilterThresholdDouble')
+    GuardrailContextualGroundingFilterType = Shapes::StringShape.new(name: 'GuardrailContextualGroundingFilterType')
+    GuardrailContextualGroundingFilters = Shapes::ListShape.new(name: 'GuardrailContextualGroundingFilters')
+    GuardrailContextualGroundingFiltersConfig = Shapes::ListShape.new(name: 'GuardrailContextualGroundingFiltersConfig')
+    GuardrailContextualGroundingPolicy = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingPolicy')
+    GuardrailContextualGroundingPolicyConfig = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingPolicyConfig')
     GuardrailDescription = Shapes::StringShape.new(name: 'GuardrailDescription')
     GuardrailDraftVersion = Shapes::StringShape.new(name: 'GuardrailDraftVersion')
     GuardrailFailureRecommendation = Shapes::StringShape.new(name: 'GuardrailFailureRecommendation')
@@ -300,6 +309,7 @@ module Aws::Bedrock
     CreateGuardrailRequest.add_member(:content_policy_config, Shapes::ShapeRef.new(shape: GuardrailContentPolicyConfig, location_name: "contentPolicyConfig"))
     CreateGuardrailRequest.add_member(:word_policy_config, Shapes::ShapeRef.new(shape: GuardrailWordPolicyConfig, location_name: "wordPolicyConfig"))
     CreateGuardrailRequest.add_member(:sensitive_information_policy_config, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyConfig, location_name: "sensitiveInformationPolicyConfig"))
+    CreateGuardrailRequest.add_member(:contextual_grounding_policy_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyConfig, location_name: "contextualGroundingPolicyConfig"))
     CreateGuardrailRequest.add_member(:blocked_input_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedInputMessaging"))
     CreateGuardrailRequest.add_member(:blocked_outputs_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedOutputsMessaging"))
     CreateGuardrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
@@ -533,6 +543,7 @@ module Aws::Bedrock
     GetGuardrailResponse.add_member(:content_policy, Shapes::ShapeRef.new(shape: GuardrailContentPolicy, location_name: "contentPolicy"))
     GetGuardrailResponse.add_member(:word_policy, Shapes::ShapeRef.new(shape: GuardrailWordPolicy, location_name: "wordPolicy"))
     GetGuardrailResponse.add_member(:sensitive_information_policy, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicy, location_name: "sensitiveInformationPolicy"))
+    GetGuardrailResponse.add_member(:contextual_grounding_policy, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicy, location_name: "contextualGroundingPolicy"))
     GetGuardrailResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     GetGuardrailResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     GetGuardrailResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: GuardrailStatusReasons, location_name: "statusReasons"))
@@ -610,6 +621,24 @@ module Aws::Bedrock
 
     GuardrailContentPolicyConfig.add_member(:filters_config, Shapes::ShapeRef.new(shape: GuardrailContentFiltersConfig, required: true, location_name: "filtersConfig"))
     GuardrailContentPolicyConfig.struct_class = Types::GuardrailContentPolicyConfig
+
+    GuardrailContextualGroundingFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterType, required: true, location_name: "type"))
+    GuardrailContextualGroundingFilter.add_member(:threshold, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterThresholdDouble, required: true, location_name: "threshold"))
+    GuardrailContextualGroundingFilter.struct_class = Types::GuardrailContextualGroundingFilter
+
+    GuardrailContextualGroundingFilterConfig.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterType, required: true, location_name: "type"))
+    GuardrailContextualGroundingFilterConfig.add_member(:threshold, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterConfigThresholdDouble, required: true, location_name: "threshold"))
+    GuardrailContextualGroundingFilterConfig.struct_class = Types::GuardrailContextualGroundingFilterConfig
+
+    GuardrailContextualGroundingFilters.member = Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilter)
+
+    GuardrailContextualGroundingFiltersConfig.member = Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterConfig)
+
+    GuardrailContextualGroundingPolicy.add_member(:filters, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilters, required: true, location_name: "filters"))
+    GuardrailContextualGroundingPolicy.struct_class = Types::GuardrailContextualGroundingPolicy
+
+    GuardrailContextualGroundingPolicyConfig.add_member(:filters_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFiltersConfig, required: true, location_name: "filtersConfig"))
+    GuardrailContextualGroundingPolicyConfig.struct_class = Types::GuardrailContextualGroundingPolicyConfig
 
     GuardrailFailureRecommendations.member = Shapes::ShapeRef.new(shape: GuardrailFailureRecommendation)
 
@@ -934,6 +963,7 @@ module Aws::Bedrock
     UpdateGuardrailRequest.add_member(:content_policy_config, Shapes::ShapeRef.new(shape: GuardrailContentPolicyConfig, location_name: "contentPolicyConfig"))
     UpdateGuardrailRequest.add_member(:word_policy_config, Shapes::ShapeRef.new(shape: GuardrailWordPolicyConfig, location_name: "wordPolicyConfig"))
     UpdateGuardrailRequest.add_member(:sensitive_information_policy_config, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyConfig, location_name: "sensitiveInformationPolicyConfig"))
+    UpdateGuardrailRequest.add_member(:contextual_grounding_policy_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyConfig, location_name: "contextualGroundingPolicyConfig"))
     UpdateGuardrailRequest.add_member(:blocked_input_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedInputMessaging"))
     UpdateGuardrailRequest.add_member(:blocked_outputs_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedOutputsMessaging"))
     UpdateGuardrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))

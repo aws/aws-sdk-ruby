@@ -1884,6 +1884,14 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_arn #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.operation #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.parameters #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.parameters["ParameterName"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].condition #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].target_column #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_source.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_source.data.source_type #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_source.data.connection.value #=> String
@@ -8306,6 +8314,14 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.inputs[0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_arn #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_version #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.operation #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.parameters #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.parameters["ParameterName"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].condition #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].value #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].target_column #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_source.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_source.data.source_type #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_source.data.connection.value #=> String
@@ -9413,6 +9429,14 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_arn #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_reference.recipe_version #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.operation #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.parameters #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].action.parameters["ParameterName"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].condition #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].value #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].recipe.recipe_steps[0].condition_expressions[0].target_column #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_source.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_source.data.source_type #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_source.data.connection.value #=> String
@@ -17568,7 +17592,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.184.0'
+      context[:gem_version] = '1.185.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

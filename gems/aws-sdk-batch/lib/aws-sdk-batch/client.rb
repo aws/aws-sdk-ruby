@@ -1722,6 +1722,71 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.service_account_name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.host_network #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.dns_policy #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.image_pull_secrets #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.image_pull_secrets[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].image #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].image_pull_policy #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].command #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].command[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].args #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].args[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].env #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].env[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].env[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.limits #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.limits["String"] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.requests #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.requests["String"] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_user #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_group #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.privileged #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.allow_privilege_escalation #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].image #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].image_pull_policy #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].command #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].command[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].args #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].args[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].env #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].env[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].env[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.limits #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.limits["String"] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.requests #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.requests["String"] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_user #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_group #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.privileged #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.allow_privilege_escalation #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].empty_dir.medium #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].empty_dir.size_limit #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].secret.secret_name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].secret.optional #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.labels #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.labels["String"] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
     #   resp.job_definitions[0].tags #=> Hash
     #   resp.job_definitions[0].tags["TagKey"] #=> String
     #   resp.job_definitions[0].propagate_tags #=> Boolean
@@ -2306,6 +2371,71 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.service_account_name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.host_network #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.dns_policy #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.image_pull_secrets #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.image_pull_secrets[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].image #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].image_pull_policy #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].command #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].command[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].args #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].args[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].env #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].env[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].env[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.limits #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.limits["String"] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.requests #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].resources.requests["String"] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_user #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_group #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.privileged #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.allow_privilege_escalation #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].image #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].image_pull_policy #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].command #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].command[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].args #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].args[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].env #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].env[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].env[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.limits #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.limits["String"] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.requests #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].resources.requests["String"] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_user #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_group #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.privileged #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.allow_privilege_escalation #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].empty_dir.medium #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].empty_dir.size_limit #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].secret.secret_name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].secret.optional #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.labels #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.labels["String"] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -2396,6 +2526,7 @@ module Aws::Batch
     #   resp.jobs[0].eks_attempts[0].init_containers[0].name #=> String
     #   resp.jobs[0].eks_attempts[0].init_containers[0].exit_code #=> Integer
     #   resp.jobs[0].eks_attempts[0].init_containers[0].reason #=> String
+    #   resp.jobs[0].eks_attempts[0].eks_cluster_arn #=> String
     #   resp.jobs[0].eks_attempts[0].pod_name #=> String
     #   resp.jobs[0].eks_attempts[0].node_name #=> String
     #   resp.jobs[0].eks_attempts[0].started_at #=> Integer
@@ -3444,6 +3575,116 @@ module Aws::Batch
     #               },
     #             ],
     #           },
+    #           eks_properties: {
+    #             pod_properties: {
+    #               service_account_name: "String",
+    #               host_network: false,
+    #               dns_policy: "String",
+    #               image_pull_secrets: [
+    #                 {
+    #                   name: "String", # required
+    #                 },
+    #               ],
+    #               containers: [
+    #                 {
+    #                   name: "String",
+    #                   image: "String", # required
+    #                   image_pull_policy: "String",
+    #                   command: ["String"],
+    #                   args: ["String"],
+    #                   env: [
+    #                     {
+    #                       name: "String", # required
+    #                       value: "String",
+    #                     },
+    #                   ],
+    #                   resources: {
+    #                     limits: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                     requests: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                   },
+    #                   volume_mounts: [
+    #                     {
+    #                       name: "String",
+    #                       mount_path: "String",
+    #                       read_only: false,
+    #                     },
+    #                   ],
+    #                   security_context: {
+    #                     run_as_user: 1,
+    #                     run_as_group: 1,
+    #                     privileged: false,
+    #                     allow_privilege_escalation: false,
+    #                     read_only_root_filesystem: false,
+    #                     run_as_non_root: false,
+    #                   },
+    #                 },
+    #               ],
+    #               init_containers: [
+    #                 {
+    #                   name: "String",
+    #                   image: "String", # required
+    #                   image_pull_policy: "String",
+    #                   command: ["String"],
+    #                   args: ["String"],
+    #                   env: [
+    #                     {
+    #                       name: "String", # required
+    #                       value: "String",
+    #                     },
+    #                   ],
+    #                   resources: {
+    #                     limits: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                     requests: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                   },
+    #                   volume_mounts: [
+    #                     {
+    #                       name: "String",
+    #                       mount_path: "String",
+    #                       read_only: false,
+    #                     },
+    #                   ],
+    #                   security_context: {
+    #                     run_as_user: 1,
+    #                     run_as_group: 1,
+    #                     privileged: false,
+    #                     allow_privilege_escalation: false,
+    #                     read_only_root_filesystem: false,
+    #                     run_as_non_root: false,
+    #                   },
+    #                 },
+    #               ],
+    #               volumes: [
+    #                 {
+    #                   name: "String", # required
+    #                   host_path: {
+    #                     path: "String",
+    #                   },
+    #                   empty_dir: {
+    #                     medium: "String",
+    #                     size_limit: "Quantity",
+    #                   },
+    #                   secret: {
+    #                     secret_name: "String", # required
+    #                     optional: false,
+    #                   },
+    #                 },
+    #               ],
+    #               metadata: {
+    #                 labels: {
+    #                   "String" => "String",
+    #                 },
+    #               },
+    #               share_process_namespace: false,
+    #             },
+    #           },
     #         },
     #       ],
     #     },
@@ -3974,6 +4215,59 @@ module Aws::Batch
     #             ],
     #           },
     #           instance_types: ["String"],
+    #           eks_properties_override: {
+    #             pod_properties: {
+    #               containers: [
+    #                 {
+    #                   name: "String",
+    #                   image: "String",
+    #                   command: ["String"],
+    #                   args: ["String"],
+    #                   env: [
+    #                     {
+    #                       name: "String", # required
+    #                       value: "String",
+    #                     },
+    #                   ],
+    #                   resources: {
+    #                     limits: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                     requests: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               init_containers: [
+    #                 {
+    #                   name: "String",
+    #                   image: "String",
+    #                   command: ["String"],
+    #                   args: ["String"],
+    #                   env: [
+    #                     {
+    #                       name: "String", # required
+    #                       value: "String",
+    #                     },
+    #                   ],
+    #                   resources: {
+    #                     limits: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                     requests: {
+    #                       "String" => "Quantity",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               metadata: {
+    #                 labels: {
+    #                   "String" => "String",
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #       ],
     #     },
@@ -4573,7 +4867,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

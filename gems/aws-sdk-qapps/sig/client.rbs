@@ -1,0 +1,625 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module QApps
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#associate_library_item_review-instance_method
+      def associate_library_item_review: (
+                                           instance_id: ::String,
+                                           library_item_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#associate_q_app_with_user-instance_method
+      def associate_q_app_with_user: (
+                                       instance_id: ::String,
+                                       app_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateLibraryItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLibraryItemOutput]
+        def library_item_id: () -> ::String
+        def status: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def rating_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#create_library_item-instance_method
+      def create_library_item: (
+                                 instance_id: ::String,
+                                 app_id: ::String,
+                                 app_version: ::Integer,
+                                 categories: Array[::String]
+                               ) -> _CreateLibraryItemResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLibraryItemResponseSuccess
+
+      interface _CreateQAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQAppOutput]
+        def app_id: () -> ::String
+        def app_arn: () -> ::String
+        def title: () -> ::String
+        def description: () -> ::String
+        def initial_prompt: () -> ::String
+        def app_version: () -> ::Integer
+        def status: () -> ("PUBLISHED" | "DRAFT" | "DELETED")
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def required_capabilities: () -> ::Array[("FileUpload" | "CreatorMode" | "RetrievalMode" | "PluginMode")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#create_q_app-instance_method
+      def create_q_app: (
+                          instance_id: ::String,
+                          title: ::String,
+                          ?description: ::String,
+                          app_definition: {
+                            cards: Array[
+                              {
+                                text_input: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  placeholder: ::String?,
+                                  default_value: ::String?
+                                }?,
+                                q_query: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  prompt: ::String,
+                                  output_source: ("approved-sources" | "llm")?,
+                                  attribute_filter: {
+                                    and_all_filters: Array[
+                                      untyped,
+                                    ]?,
+                                    or_all_filters: Array[
+                                      untyped,
+                                    ]?,
+                                    not_filter: untyped?,
+                                    equals_to: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    contains_all: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    contains_any: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    greater_than: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    greater_than_or_equals: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    less_than: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    less_than_or_equals: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?
+                                  }?
+                                }?,
+                                q_plugin: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  prompt: ::String,
+                                  plugin_id: ::String
+                                }?,
+                                file_upload: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  filename: ::String?,
+                                  file_id: ::String?,
+                                  allow_override: bool?
+                                }?
+                              },
+                            ],
+                            initial_prompt: ::String?
+                          },
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateQAppResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQAppResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#delete_library_item-instance_method
+      def delete_library_item: (
+                                 instance_id: ::String,
+                                 library_item_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#delete_q_app-instance_method
+      def delete_q_app: (
+                          instance_id: ::String,
+                          app_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#disassociate_library_item_review-instance_method
+      def disassociate_library_item_review: (
+                                              instance_id: ::String,
+                                              library_item_id: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#disassociate_q_app_from_user-instance_method
+      def disassociate_q_app_from_user: (
+                                          instance_id: ::String,
+                                          app_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetLibraryItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLibraryItemOutput]
+        def library_item_id: () -> ::String
+        def app_id: () -> ::String
+        def app_version: () -> ::Integer
+        def categories: () -> ::Array[Types::Category]
+        def status: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def rating_count: () -> ::Integer
+        def is_rated_by_user: () -> bool
+        def user_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#get_library_item-instance_method
+      def get_library_item: (
+                              instance_id: ::String,
+                              library_item_id: ::String,
+                              ?app_id: ::String
+                            ) -> _GetLibraryItemResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLibraryItemResponseSuccess
+
+      interface _GetQAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQAppOutput]
+        def app_id: () -> ::String
+        def app_arn: () -> ::String
+        def title: () -> ::String
+        def description: () -> ::String
+        def initial_prompt: () -> ::String
+        def app_version: () -> ::Integer
+        def status: () -> ("PUBLISHED" | "DRAFT" | "DELETED")
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def required_capabilities: () -> ::Array[("FileUpload" | "CreatorMode" | "RetrievalMode" | "PluginMode")]
+        def app_definition: () -> Types::AppDefinition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#get_q_app-instance_method
+      def get_q_app: (
+                       instance_id: ::String,
+                       app_id: ::String
+                     ) -> _GetQAppResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQAppResponseSuccess
+
+      interface _GetQAppSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQAppSessionOutput]
+        def session_id: () -> ::String
+        def session_arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "WAITING" | "COMPLETED")
+        def card_status: () -> ::Hash[::String, Types::CardStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#get_q_app_session-instance_method
+      def get_q_app_session: (
+                               instance_id: ::String,
+                               session_id: ::String
+                             ) -> _GetQAppSessionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQAppSessionResponseSuccess
+
+      interface _ImportDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportDocumentOutput]
+        def file_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#import_document-instance_method
+      def import_document: (
+                             instance_id: ::String,
+                             card_id: ::String,
+                             app_id: ::String,
+                             file_contents_base_64: ::String,
+                             file_name: ::String,
+                             scope: ("APPLICATION" | "SESSION"),
+                             ?session_id: ::String
+                           ) -> _ImportDocumentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDocumentResponseSuccess
+
+      interface _ListLibraryItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLibraryItemsOutput]
+        def library_items: () -> ::Array[Types::LibraryItemMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#list_library_items-instance_method
+      def list_library_items: (
+                                instance_id: ::String,
+                                ?limit: ::Integer,
+                                ?next_token: ::String,
+                                ?category_id: ::String
+                              ) -> _ListLibraryItemsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLibraryItemsResponseSuccess
+
+      interface _ListQAppsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQAppsOutput]
+        def apps: () -> ::Array[Types::UserAppItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#list_q_apps-instance_method
+      def list_q_apps: (
+                         instance_id: ::String,
+                         ?limit: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListQAppsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQAppsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PredictQAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PredictQAppOutput]
+        def app: () -> Types::PredictAppDefinition
+        def problem_statement: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#predict_q_app-instance_method
+      def predict_q_app: (
+                           instance_id: ::String,
+                           ?options: {
+                             conversation: Array[
+                               {
+                                 body: ::String,
+                                 type: ("USER" | "SYSTEM")
+                               },
+                             ]?,
+                             problem_statement: ::String?
+                           }
+                         ) -> _PredictQAppResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PredictQAppResponseSuccess
+
+      interface _StartQAppSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQAppSessionOutput]
+        def session_id: () -> ::String
+        def session_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#start_q_app_session-instance_method
+      def start_q_app_session: (
+                                 instance_id: ::String,
+                                 app_id: ::String,
+                                 app_version: ::Integer,
+                                 ?initial_values: Array[
+                                   {
+                                     card_id: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _StartQAppSessionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQAppSessionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#stop_q_app_session-instance_method
+      def stop_q_app_session: (
+                                instance_id: ::String,
+                                session_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateLibraryItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLibraryItemOutput]
+        def library_item_id: () -> ::String
+        def app_id: () -> ::String
+        def app_version: () -> ::Integer
+        def categories: () -> ::Array[Types::Category]
+        def status: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def rating_count: () -> ::Integer
+        def is_rated_by_user: () -> bool
+        def user_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#update_library_item-instance_method
+      def update_library_item: (
+                                 instance_id: ::String,
+                                 library_item_id: ::String,
+                                 ?status: ("PUBLISHED" | "DISABLED"),
+                                 ?categories: Array[::String]
+                               ) -> _UpdateLibraryItemResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLibraryItemResponseSuccess
+
+      interface _UpdateQAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQAppOutput]
+        def app_id: () -> ::String
+        def app_arn: () -> ::String
+        def title: () -> ::String
+        def description: () -> ::String
+        def initial_prompt: () -> ::String
+        def app_version: () -> ::Integer
+        def status: () -> ("PUBLISHED" | "DRAFT" | "DELETED")
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def required_capabilities: () -> ::Array[("FileUpload" | "CreatorMode" | "RetrievalMode" | "PluginMode")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#update_q_app-instance_method
+      def update_q_app: (
+                          instance_id: ::String,
+                          app_id: ::String,
+                          ?title: ::String,
+                          ?description: ::String,
+                          ?app_definition: {
+                            cards: Array[
+                              {
+                                text_input: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  placeholder: ::String?,
+                                  default_value: ::String?
+                                }?,
+                                q_query: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  prompt: ::String,
+                                  output_source: ("approved-sources" | "llm")?,
+                                  attribute_filter: {
+                                    and_all_filters: Array[
+                                      untyped,
+                                    ]?,
+                                    or_all_filters: Array[
+                                      untyped,
+                                    ]?,
+                                    not_filter: untyped?,
+                                    equals_to: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    contains_all: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    contains_any: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    greater_than: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    greater_than_or_equals: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    less_than: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?,
+                                    less_than_or_equals: {
+                                      name: ::String,
+                                      value: {
+                                        string_value: ::String?,
+                                        string_list_value: Array[::String]?,
+                                        long_value: ::Integer?,
+                                        date_value: ::Time?
+                                      }
+                                    }?
+                                  }?
+                                }?,
+                                q_plugin: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  prompt: ::String,
+                                  plugin_id: ::String
+                                }?,
+                                file_upload: {
+                                  title: ::String,
+                                  id: ::String,
+                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin"),
+                                  filename: ::String?,
+                                  file_id: ::String?,
+                                  allow_override: bool?
+                                }?
+                              },
+                            ],
+                            initial_prompt: ::String?
+                          }
+                        ) -> _UpdateQAppResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQAppResponseSuccess
+
+      interface _UpdateQAppSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQAppSessionOutput]
+        def session_id: () -> ::String
+        def session_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#update_q_app_session-instance_method
+      def update_q_app_session: (
+                                  instance_id: ::String,
+                                  session_id: ::String,
+                                  ?values: Array[
+                                    {
+                                      card_id: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _UpdateQAppSessionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQAppSessionResponseSuccess
+    end
+  end
+end
+

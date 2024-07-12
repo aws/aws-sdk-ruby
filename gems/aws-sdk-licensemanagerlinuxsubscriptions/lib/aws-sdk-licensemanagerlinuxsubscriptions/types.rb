@@ -10,6 +10,23 @@
 module Aws::LicenseManagerLinuxSubscriptions
   module Types
 
+    # @!attribute [rw] subscription_provider_arn
+    #   The Amazon Resource Name (ARN) of the subscription provider resource
+    #   to deregister.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/DeregisterSubscriptionProviderRequest AWS API Documentation
+    #
+    class DeregisterSubscriptionProviderRequest < Struct.new(
+      :subscription_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/DeregisterSubscriptionProviderResponse AWS API Documentation
+    #
+    class DeregisterSubscriptionProviderResponse < Aws::EmptyStructure; end
+
     # A filter object that is used to return more specific results from a
     # describe operation. Filters can be used to match a set of resources by
     # specific criteria.
@@ -32,6 +49,63 @@ module Aws::LicenseManagerLinuxSubscriptions
       :name,
       :operator,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription_provider_arn
+    #   The Amazon Resource Name (ARN) of the BYOL registration resource to
+    #   get details for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/GetRegisteredSubscriptionProviderRequest AWS API Documentation
+    #
+    class GetRegisteredSubscriptionProviderRequest < Struct.new(
+      :subscription_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] last_successful_data_retrieval_time
+    #   The timestamp from the last time License Manager retrieved
+    #   subscription details from your registered third-party Linux
+    #   subscription provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the third-party access secret
+    #   stored in Secrets Manager for the BYOL registration resource
+    #   specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_arn
+    #   The Amazon Resource Name (ARN) for the BYOL registration resource
+    #   specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_source
+    #   The subscription provider for the BYOL registration resource
+    #   specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_status
+    #   The status of the Linux subscription provider access token from the
+    #   last successful subscription data request.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_status_message
+    #   The detailed message from your subscription provider token status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/GetRegisteredSubscriptionProviderResponse AWS API Documentation
+    #
+    class GetRegisteredSubscriptionProviderResponse < Struct.new(
+      :last_successful_data_retrieval_time,
+      :secret_arn,
+      :subscription_provider_arn,
+      :subscription_provider_source,
+      :subscription_provider_status,
+      :subscription_provider_status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -89,6 +163,11 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   The AMI ID used to launch the instance.
     #   @return [String]
     #
+    # @!attribute [rw] dual_subscription
+    #   Indicates that you have two different license subscriptions for the
+    #   same software on your instance.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_id
     #   The instance ID of the resource.
     #   @return [String]
@@ -99,6 +178,10 @@ module Aws::LicenseManagerLinuxSubscriptions
     #
     # @!attribute [rw] last_updated_time
     #   The time in which the last discovery updated the instance details.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_version
+    #   The operating system software version that runs on your instance.
     #   @return [String]
     #
     # @!attribute [rw] product_code
@@ -114,12 +197,28 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   The Region the instance is running in.
     #   @return [String]
     #
+    # @!attribute [rw] registered_with_subscription_provider
+    #   Indicates that your instance uses a BYOL license subscription from a
+    #   third-party Linux subscription provider that you've registered with
+    #   License Manager.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the instance.
     #   @return [String]
     #
     # @!attribute [rw] subscription_name
-    #   The name of the subscription being used by the instance.
+    #   The name of the license subscription that the instance uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_create_time
+    #   The timestamp when you registered the third-party Linux subscription
+    #   provider for the subscription that the instance uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_update_time
+    #   The timestamp from the last time that the instance synced with the
+    #   registered third-party Linux subscription provider.
     #   @return [String]
     #
     # @!attribute [rw] usage_operation
@@ -137,13 +236,18 @@ module Aws::LicenseManagerLinuxSubscriptions
     class Instance < Struct.new(
       :account_id,
       :ami_id,
+      :dual_subscription,
       :instance_id,
       :instance_type,
       :last_updated_time,
+      :os_version,
       :product_code,
       :region,
+      :registered_with_subscription_provider,
       :status,
       :subscription_name,
+      :subscription_provider_create_time,
+      :subscription_provider_update_time,
       :usage_operation)
       SENSITIVE = []
       include Aws::Structure
@@ -186,31 +290,34 @@ module Aws::LicenseManagerLinuxSubscriptions
     # limit if parameters in request increases.
     #
     # @!attribute [rw] filters
-    #   An array of structures that you can use to filter the results to
-    #   those that match one or more sets of key-value pairs that you
-    #   specify. For example, you can filter by the name of `AmiID` with an
-    #   optional operator to see subscriptions that match, partially match,
-    #   or don't match a certain Amazon Machine Image (AMI) ID.
+    #   An array of structures that you can use to filter the results by
+    #   your specified criteria. For example, you can specify `Region` in
+    #   the `Name`, with the `contains` operator to list all subscriptions
+    #   that match a partial string in the `Value`, such as `us-west`.
     #
-    #   The valid names for this filter are:
-    #
-    #   * `AmiID`
-    #
-    #   * `InstanceID`
+    #   For each filter, you can specify one of the following values for the
+    #   `Name` key to streamline results:
     #
     #   * `AccountID`
     #
-    #   * `Status`
+    #   * `AmiID`
     #
-    #   * `Region`
+    #   * `DualSubscription`
     #
-    #   * `UsageOperation`
-    #
-    #   * `ProductCode`
+    #   * `InstanceID`
     #
     #   * `InstanceType`
     #
-    #   The valid Operators for this filter are:
+    #   * `ProductCode`
+    #
+    #   * `Region`
+    #
+    #   * `Status`
+    #
+    #   * `UsageOperation`
+    #
+    #   For each filter, you can use one of the following `Operator` values
+    #   to define the behavior of the filter:
     #
     #   * `contains`
     #
@@ -220,11 +327,12 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in a single call.
+    #   The maximum items to return in a request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Token for the next set of results.
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListLinuxSubscriptionInstancesRequest AWS API Documentation
@@ -242,7 +350,10 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] next_token
-    #   Token for the next set of results.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service hasn't
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListLinuxSubscriptionInstancesResponse AWS API Documentation
@@ -280,11 +391,12 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in a single call.
+    #   The maximum items to return in a request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Token for the next set of results.
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListLinuxSubscriptionsRequest AWS API Documentation
@@ -298,7 +410,10 @@ module Aws::LicenseManagerLinuxSubscriptions
     end
 
     # @!attribute [rw] next_token
-    #   Token for the next set of results.
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service hasn't
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
     #   @return [String]
     #
     # @!attribute [rw] subscriptions
@@ -310,6 +425,191 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ListLinuxSubscriptionsResponse < Struct.new(
       :next_token,
       :subscriptions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum items to return in a request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_sources
+    #   To filter your results, specify which subscription providers to
+    #   return in the list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListRegisteredSubscriptionProvidersRequest AWS API Documentation
+    #
+    class ListRegisteredSubscriptionProvidersRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :subscription_provider_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The next token used for paginated responses. When this field isn't
+    #   empty, there are additional elements that the service hasn't
+    #   included in this request. Use this token with the next request to
+    #   retrieve additional objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_subscription_providers
+    #   The list of BYOL registration resources that fit the criteria you
+    #   specified in the request.
+    #   @return [Array<Types::RegisteredSubscriptionProvider>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListRegisteredSubscriptionProvidersResponse AWS API Documentation
+    #
+    class ListRegisteredSubscriptionProvidersResponse < Struct.new(
+      :next_token,
+      :registered_subscription_providers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to list
+    #   metadata tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The metadata tags for the requested resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the secret where you've stored
+    #   your subscription provider's access token. For RHEL subscriptions
+    #   managed through the Red Hat Subscription Manager (RHSM), the secret
+    #   contains your Red Hat Offline token.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_source
+    #   The supported Linux subscription provider to register.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata tags to assign to your registered Linux subscription
+    #   provider resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/RegisterSubscriptionProviderRequest AWS API Documentation
+    #
+    class RegisterSubscriptionProviderRequest < Struct.new(
+      :secret_arn,
+      :subscription_provider_source,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription_provider_arn
+    #   The Amazon Resource Name (ARN) of the Linux subscription provider
+    #   resource that you registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_source
+    #   The Linux subscription provider that you registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_status
+    #   Indicates the status of the registration action for the Linux
+    #   subscription provider that you requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/RegisterSubscriptionProviderResponse AWS API Documentation
+    #
+    class RegisterSubscriptionProviderResponse < Struct.new(
+      :subscription_provider_arn,
+      :subscription_provider_source,
+      :subscription_provider_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A third-party provider for operating system (OS) platform software and
+    # license subscriptions, such as Red Hat. When you register a
+    # third-party Linux subscription provider, License Manager can get
+    # subscription data from the registered provider.
+    #
+    # @!attribute [rw] last_successful_data_retrieval_time
+    #   The timestamp from the last time that License Manager accessed
+    #   third-party subscription data for your account from your registered
+    #   Linux subscription provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret that
+    #   stores your registered Linux subscription provider access token. For
+    #   RHEL account subscriptions, this is the offline token.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_arn
+    #   The Amazon Resource Name (ARN) of the Linux subscription provider
+    #   resource that you registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_source
+    #   A supported third-party Linux subscription provider. License Manager
+    #   currently supports Red Hat subscriptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_status
+    #   Indicates the status of your registered Linux subscription provider
+    #   access token from the last time License Manager retrieved
+    #   subscription data. For RHEL account subscriptions, this is the
+    #   status of the offline token.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_provider_status_message
+    #   A detailed message that's associated with your BYOL subscription
+    #   provider token status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/RegisteredSubscriptionProvider AWS API Documentation
+    #
+    class RegisteredSubscriptionProvider < Struct.new(
+      :last_successful_data_retrieval_time,
+      :secret_arn,
+      :subscription_provider_arn,
+      :subscription_provider_source,
+      :subscription_provider_status,
+      :subscription_provider_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Unable to find the requested Amazon Web Services resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -342,6 +642,29 @@ module Aws::LicenseManagerLinuxSubscriptions
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
+    #   to which to add the specified metadata tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata tags to assign to the Amazon Web Services resource.
+    #   Tags are formatted as key value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -354,6 +677,28 @@ module Aws::LicenseManagerLinuxSubscriptions
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
+    #   to remove the metadata tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of metadata tag keys to remove from the requested resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = [:tag_keys]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] allow_update
     #   Describes if updates are allowed to the service settings for Linux

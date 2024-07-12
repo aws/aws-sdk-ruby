@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2024-07-10)
+------------------
+
+* Feature - Documentation update specifying OEM ephemeris units of measurement
+
 1.51.0 (2024-07-02)
 ------------------
 

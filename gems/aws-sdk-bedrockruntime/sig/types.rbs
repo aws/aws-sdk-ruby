@@ -16,6 +16,22 @@ module Aws::BedrockRuntime
     class AnyToolChoice < Aws::EmptyStructure
     end
 
+    class ApplyGuardrailRequest
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      attr_accessor source: ("INPUT" | "OUTPUT")
+      attr_accessor content: ::Array[Types::GuardrailContentBlock]
+      SENSITIVE: []
+    end
+
+    class ApplyGuardrailResponse
+      attr_accessor usage: Types::GuardrailUsage
+      attr_accessor action: ("NONE" | "GUARDRAIL_INTERVENED")
+      attr_accessor outputs: ::Array[Types::GuardrailOutputContent]
+      attr_accessor assessments: ::Array[Types::GuardrailAssessment]
+      SENSITIVE: []
+    end
+
     class AutoToolChoice < Aws::EmptyStructure
     end
 
@@ -191,6 +207,7 @@ module Aws::BedrockRuntime
       attr_accessor content_policy: Types::GuardrailContentPolicyAssessment
       attr_accessor word_policy: Types::GuardrailWordPolicyAssessment
       attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicyAssessment
+      attr_accessor contextual_grounding_policy: Types::GuardrailContextualGroundingPolicyAssessment
       SENSITIVE: []
     end
 
@@ -199,6 +216,17 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_version: ::String
       attr_accessor trace: ("enabled" | "disabled")
       SENSITIVE: []
+    end
+
+    class GuardrailContentBlock
+      attr_accessor text: Types::GuardrailTextBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < GuardrailContentBlock
+      end
+      class Unknown < GuardrailContentBlock
+      end
     end
 
     class GuardrailContentFilter
@@ -210,6 +238,19 @@ module Aws::BedrockRuntime
 
     class GuardrailContentPolicyAssessment
       attr_accessor filters: ::Array[Types::GuardrailContentFilter]
+      SENSITIVE: []
+    end
+
+    class GuardrailContextualGroundingFilter
+      attr_accessor type: ("GROUNDING" | "RELEVANCE")
+      attr_accessor threshold: ::Float
+      attr_accessor score: ::Float
+      attr_accessor action: ("BLOCKED" | "NONE")
+      SENSITIVE: []
+    end
+
+    class GuardrailContextualGroundingPolicyAssessment
+      attr_accessor filters: ::Array[Types::GuardrailContextualGroundingFilter]
       SENSITIVE: []
     end
 
@@ -226,6 +267,7 @@ module Aws::BedrockRuntime
 
     class GuardrailConverseTextBlock
       attr_accessor text: ::String
+      attr_accessor qualifiers: ::Array[("grounding_source" | "query" | "guard_content")]
       SENSITIVE: []
     end
 
@@ -239,6 +281,11 @@ module Aws::BedrockRuntime
       attr_accessor match: ::String
       attr_accessor type: ("PROFANITY")
       attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailOutputContent
+      attr_accessor text: ::String
       SENSITIVE: []
     end
 
@@ -271,6 +318,12 @@ module Aws::BedrockRuntime
       SENSITIVE: []
     end
 
+    class GuardrailTextBlock
+      attr_accessor text: ::String
+      attr_accessor qualifiers: ::Array[("grounding_source" | "query" | "guard_content")]
+      SENSITIVE: []
+    end
+
     class GuardrailTopic
       attr_accessor name: ::String
       attr_accessor type: ("DENY")
@@ -287,6 +340,16 @@ module Aws::BedrockRuntime
       attr_accessor model_output: ::Array[::String]
       attr_accessor input_assessment: ::Hash[::String, Types::GuardrailAssessment]
       attr_accessor output_assessments: ::Hash[::String, ::Array[Types::GuardrailAssessment]]
+      SENSITIVE: []
+    end
+
+    class GuardrailUsage
+      attr_accessor topic_policy_units: ::Integer
+      attr_accessor content_policy_units: ::Integer
+      attr_accessor word_policy_units: ::Integer
+      attr_accessor sensitive_information_policy_units: ::Integer
+      attr_accessor sensitive_information_policy_free_units: ::Integer
+      attr_accessor contextual_grounding_policy_units: ::Integer
       SENSITIVE: []
     end
 

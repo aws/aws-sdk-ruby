@@ -574,51 +574,38 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Creates a guardrail to block topics and to filter out harmful content.
+    # Creates a guardrail to block topics and to implement safeguards for
+    # your generative AI applications.
     #
-    # * Specify a `name` and optional `description`.
+    # You can configure the following policies in a guardrail to avoid
+    # undesirable and harmful content, filter out denied topics and words,
+    # and remove sensitive information for privacy protection.
     #
-    # * Specify messages for when the guardrail successfully blocks a prompt
-    #   or a model response in the `blockedInputMessaging` and
-    #   `blockedOutputsMessaging` fields.
+    # * **Content filters** - Adjust filter strengths to block input prompts
+    #   or model responses containing harmful content.
     #
-    # * Specify topics for the guardrail to deny in the `topicPolicyConfig`
-    #   object. Each [GuardrailTopicConfig][1] object in the `topicsConfig`
-    #   list pertains to one topic.
+    # * **Denied topics** - Define a set of topics that are undesirable in
+    #   the context of your application. These topics will be blocked if
+    #   detected in user queries or model responses.
     #
-    #   * Give a `name` and `description` so that the guardrail can properly
-    #     identify the topic.
+    # * **Word filters** - Configure filters to block undesirable words,
+    #   phrases, and profanity. Such words can include offensive terms,
+    #   competitor names etc.
     #
-    #   * Specify `DENY` in the `type` field.
+    # * **Sensitive information filters** - Block or mask sensitive
+    #   information such as personally identifiable information (PII) or
+    #   custom regex in user inputs and model responses.
     #
-    #   * (Optional) Provide up to five prompts that you would categorize as
-    #     belonging to the topic in the `examples` list.
+    # In addition to the above policies, you can also configure the messages
+    # to be returned to the user if a user input or model response is in
+    # violation of the policies defined in the guardrail.
     #
-    # * Specify filter strengths for the harmful categories defined in
-    #   Amazon Bedrock in the `contentPolicyConfig` object. Each
-    #   [GuardrailContentFilterConfig][2] object in the `filtersConfig` list
-    #   pertains to a harmful category. For more information, see [Content
-    #   filters][3]. For more information about the fields in a content
-    #   filter, see [GuardrailContentFilterConfig][2].
-    #
-    #   * Specify the category in the `type` field.
-    #
-    #   * Specify the strength of the filter for prompts in the
-    #     `inputStrength` field and for model responses in the `strength`
-    #     field of the [GuardrailContentFilterConfig][2].
-    #
-    # * (Optional) For security, include the ARN of a KMS key in the
-    #   `kmsKeyId` field.
-    #
-    # * (Optional) Attach any tags to the guardrail in the `tags` object.
-    #   For more information, see [Tag resources][4].
+    # For more information, see [Guardrails for Amazon Bedrock][1] in the
+    # *Amazon Bedrock User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html
-    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters
-    # [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html
     #
     # @option params [required, String] :name
     #   The name to give the guardrail.
@@ -637,6 +624,10 @@ module Aws::Bedrock
     #
     # @option params [Types::GuardrailSensitiveInformationPolicyConfig] :sensitive_information_policy_config
     #   The sensitive information policy to configure for the guardrail.
+    #
+    # @option params [Types::GuardrailContextualGroundingPolicyConfig] :contextual_grounding_policy_config
+    #   The contextual grounding policy configuration used to create a
+    #   guardrail.
     #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
@@ -723,6 +714,14 @@ module Aws::Bedrock
     #         },
     #       ],
     #     },
+    #     contextual_grounding_policy_config: {
+    #       filters_config: [ # required
+    #         {
+    #           type: "GROUNDING", # required, accepts GROUNDING, RELEVANCE
+    #           threshold: 1.0, # required
+    #         },
+    #       ],
+    #     },
     #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
     #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
     #     kms_key_id: "KmsKeyId",
@@ -756,7 +755,7 @@ module Aws::Bedrock
     # compare the configuration with another version.
     #
     # @option params [required, String] :guardrail_identifier
-    #   The unique identifier of the guardrail.
+    #   The unique identifier of the guardrail. This can be an ID or the ARN.
     #
     # @option params [String] :description
     #   A description of the guardrail version.
@@ -1096,7 +1095,7 @@ module Aws::Bedrock
     #   `guardrailVersion` field.
     #
     # @option params [required, String] :guardrail_identifier
-    #   The unique identifier of the guardrail.
+    #   The unique identifier of the guardrail. This can be an ID or the ARN.
     #
     # @option params [String] :guardrail_version
     #   The version of the guardrail.
@@ -1346,7 +1345,8 @@ module Aws::Bedrock
     # response returns details for the `DRAFT` version.
     #
     # @option params [required, String] :guardrail_identifier
-    #   The unique identifier of the guardrail for which to get details.
+    #   The unique identifier of the guardrail for which to get details. This
+    #   can be an ID or the ARN.
     #
     # @option params [String] :guardrail_version
     #   The version of the guardrail for which to get details. If you don't
@@ -1365,6 +1365,7 @@ module Aws::Bedrock
     #   * {Types::GetGuardrailResponse#content_policy #content_policy} => Types::GuardrailContentPolicy
     #   * {Types::GetGuardrailResponse#word_policy #word_policy} => Types::GuardrailWordPolicy
     #   * {Types::GetGuardrailResponse#sensitive_information_policy #sensitive_information_policy} => Types::GuardrailSensitiveInformationPolicy
+    #   * {Types::GetGuardrailResponse#contextual_grounding_policy #contextual_grounding_policy} => Types::GuardrailContextualGroundingPolicy
     #   * {Types::GetGuardrailResponse#created_at #created_at} => Time
     #   * {Types::GetGuardrailResponse#updated_at #updated_at} => Time
     #   * {Types::GetGuardrailResponse#status_reasons #status_reasons} => Array&lt;String&gt;
@@ -1410,6 +1411,9 @@ module Aws::Bedrock
     #   resp.sensitive_information_policy.regexes[0].description #=> String
     #   resp.sensitive_information_policy.regexes[0].pattern #=> String
     #   resp.sensitive_information_policy.regexes[0].action #=> String, one of "BLOCK", "ANONYMIZE"
+    #   resp.contextual_grounding_policy.filters #=> Array
+    #   resp.contextual_grounding_policy.filters[0].type #=> String, one of "GROUNDING", "RELEVANCE"
+    #   resp.contextual_grounding_policy.filters[0].threshold #=> Float
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reasons #=> Array
@@ -1829,7 +1833,7 @@ module Aws::Bedrock
     # `ListGuardrails` request to see the next batch of results.
     #
     # @option params [String] :guardrail_identifier
-    #   The unique identifier of the guardrail.
+    #   The unique identifier of the guardrail. This can be an ID or the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -2277,18 +2281,14 @@ module Aws::Bedrock
     # * (Optional) For security, include the ARN of a KMS key in the
     #   `kmsKeyId` field.
     #
-    # * (Optional) Attach any tags to the guardrail in the `tags` object.
-    #   For more information, see [Tag resources][4].
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html
-    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters
-    # [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-content-filters
     #
     # @option params [required, String] :guardrail_identifier
-    #   The unique identifier of the guardrail
+    #   The unique identifier of the guardrail. This can be an ID or the ARN.
     #
     # @option params [required, String] :name
     #   A name for the guardrail.
@@ -2307,6 +2307,10 @@ module Aws::Bedrock
     #
     # @option params [Types::GuardrailSensitiveInformationPolicyConfig] :sensitive_information_policy_config
     #   The sensitive information policy to configure for the guardrail.
+    #
+    # @option params [Types::GuardrailContextualGroundingPolicyConfig] :contextual_grounding_policy_config
+    #   The contextual grounding policy configuration used to update a
+    #   guardrail.
     #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
@@ -2374,6 +2378,14 @@ module Aws::Bedrock
     #           description: "GuardrailRegexConfigDescriptionString",
     #           pattern: "GuardrailRegexConfigPatternString", # required
     #           action: "BLOCK", # required, accepts BLOCK, ANONYMIZE
+    #         },
+    #       ],
+    #     },
+    #     contextual_grounding_policy_config: {
+    #       filters_config: [ # required
+    #         {
+    #           type: "GROUNDING", # required, accepts GROUNDING, RELEVANCE
+    #           threshold: 1.0, # required
     #         },
     #       ],
     #     },
@@ -2458,7 +2470,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

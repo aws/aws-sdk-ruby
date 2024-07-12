@@ -503,11 +503,11 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.decrypt_data({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     cipher_text: "HexEvenLengthBetween16And4096", # required
+    #     cipher_text: "CipherTextType", # required
     #     decryption_attributes: { # required
     #       symmetric: {
     #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       asymmetric: {
@@ -518,15 +518,15 @@ module Aws::PaymentCryptographyData
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #       },
     #       emv: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         session_derivation_data: "HexLengthEquals16", # required
+    #         session_derivation_data: "SessionDerivationDataType", # required
     #         mode: "ECB", # accepts ECB, CBC
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #       },
     #     },
     #     wrapped_key: {
@@ -649,11 +649,11 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.encrypt_data({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     plain_text: "HexEvenLengthBetween16And4064", # required
+    #     plain_text: "PlainTextType", # required
     #     encryption_attributes: { # required
     #       symmetric: {
     #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       asymmetric: {
@@ -664,15 +664,15 @@ module Aws::PaymentCryptographyData
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #       },
     #       emv: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         session_derivation_data: "HexLengthEquals16", # required
+    #         session_derivation_data: "SessionDerivationDataType", # required
     #         mode: "ECB", # accepts ECB, CBC
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #       },
     #     },
     #     wrapped_key: {
@@ -762,21 +762,21 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.generate_card_validation_data({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     primary_account_number: "NumberLengthBetween12And19", # required
+    #     primary_account_number: "PrimaryAccountNumberType", # required
     #     generation_attributes: { # required
     #       amex_card_security_code_version_1: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
     #       },
     #       amex_card_security_code_version_2: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
-    #         service_code: "NumberLengthEquals3", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
+    #         service_code: "ServiceCodeType", # required
     #       },
     #       card_verification_value_1: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
-    #         service_code: "NumberLengthEquals3", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
+    #         service_code: "ServiceCodeType", # required
     #       },
     #       card_verification_value_2: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
     #       },
     #       card_holder_verification_value: {
     #         unpredictable_number: "HexLengthBetween2And8", # required
@@ -787,12 +787,12 @@ module Aws::PaymentCryptographyData
     #         unpredictable_number: "HexLengthBetween2And8", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         track_data: "HexLengthBetween2And160", # required
+    #         track_data: "TrackDataType", # required
     #       },
     #       dynamic_card_verification_value: {
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         card_expiry_date: "NumberLengthEquals4", # required
-    #         service_code: "NumberLengthEquals3", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
+    #         service_code: "ServiceCodeType", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #     },
@@ -874,16 +874,16 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.generate_mac({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     message_data: "HexEvenLengthBetween2And4096", # required
+    #     message_data: "MessageDataType", # required
     #     generation_attributes: { # required
     #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
     #         session_key_derivation_value: { # required
-    #           application_cryptogram: "HexLengthEquals16",
+    #           application_cryptogram: "ApplicationCryptogramType",
     #           application_transaction_counter: "HexLengthBetween2And4",
     #         },
     #       },
@@ -1006,34 +1006,34 @@ module Aws::PaymentCryptographyData
     #         pin_verification_key_index: 1, # required
     #       },
     #       visa_pin_verification_value: {
-    #         encrypted_pin_block: "HexLengthBetween16And32", # required
+    #         encrypted_pin_block: "EncryptedPinBlockType", # required
     #         pin_verification_key_index: 1, # required
     #       },
     #       ibm_3624_pin_offset: {
-    #         encrypted_pin_block: "HexLengthBetween16And32", # required
-    #         decimalization_table: "NumberLengthEquals16", # required
+    #         encrypted_pin_block: "EncryptedPinBlockType", # required
+    #         decimalization_table: "DecimalizationTableType", # required
     #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #         pin_validation_data: "PinValidationDataType", # required
     #       },
     #       ibm_3624_natural_pin: {
-    #         decimalization_table: "NumberLengthEquals16", # required
+    #         decimalization_table: "DecimalizationTableType", # required
     #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #         pin_validation_data: "PinValidationDataType", # required
     #       },
     #       ibm_3624_random_pin: {
-    #         decimalization_table: "NumberLengthEquals16", # required
+    #         decimalization_table: "DecimalizationTableType", # required
     #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
+    #         pin_validation_data: "PinValidationDataType", # required
     #       },
     #       ibm_3624_pin_from_offset: {
-    #         decimalization_table: "NumberLengthEquals16", # required
+    #         decimalization_table: "DecimalizationTableType", # required
     #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
-    #         pin_offset: "NumberLengthBetween4And12", # required
+    #         pin_validation_data: "PinValidationDataType", # required
+    #         pin_offset: "PinOffsetType", # required
     #       },
     #     },
     #     pin_data_length: 1,
-    #     primary_account_number: "NumberLengthBetween12And19", # required
+    #     primary_account_number: "PrimaryAccountNumberType", # required
     #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3
     #   })
     #
@@ -1138,11 +1138,11 @@ module Aws::PaymentCryptographyData
     #   resp = client.re_encrypt_data({
     #     incoming_key_identifier: "KeyArnOrKeyAliasType", # required
     #     outgoing_key_identifier: "KeyArnOrKeyAliasType", # required
-    #     cipher_text: "HexEvenLengthBetween16And4096", # required
+    #     cipher_text: "CipherTextType", # required
     #     incoming_encryption_attributes: { # required
     #       symmetric: {
     #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
@@ -1150,13 +1150,13 @@ module Aws::PaymentCryptographyData
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #       },
     #     },
     #     outgoing_encryption_attributes: { # required
     #       symmetric: {
     #         mode: "ECB", # required, accepts ECB, CBC, CFB, CFB1, CFB8, CFB64, CFB128, OFB
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #         padding_type: "PKCS1", # accepts PKCS1, OAEP_SHA1, OAEP_SHA256, OAEP_SHA512
     #       },
     #       dukpt: {
@@ -1164,7 +1164,7 @@ module Aws::PaymentCryptographyData
     #         mode: "ECB", # accepts ECB, CBC
     #         dukpt_key_derivation_type: "TDES_2KEY", # accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256
     #         dukpt_key_variant: "BIDIRECTIONAL", # accepts BIDIRECTIONAL, REQUEST, RESPONSE
-    #         initialization_vector: "HexLength16Or32",
+    #         initialization_vector: "InitializationVectorType",
     #       },
     #     },
     #     incoming_wrapped_key: {
@@ -1295,28 +1295,28 @@ module Aws::PaymentCryptographyData
     #     outgoing_key_identifier: "KeyArnOrKeyAliasType", # required
     #     incoming_translation_attributes: { # required
     #       iso_format_0: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #       iso_format_1: {
     #       },
     #       iso_format_3: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #       iso_format_4: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #     },
     #     outgoing_translation_attributes: { # required
     #       iso_format_0: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #       iso_format_1: {
     #       },
     #       iso_format_3: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #       iso_format_4: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #     },
     #     encrypted_pin_block: "HexEvenLengthBetween16And32", # required
@@ -1439,32 +1439,32 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.verify_auth_request_cryptogram({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     transaction_data: "HexLengthBetween2And1024", # required
-    #     auth_request_cryptogram: "HexLengthEquals16", # required
+    #     transaction_data: "TransactionDataType", # required
+    #     auth_request_cryptogram: "AuthRequestCryptogramType", # required
     #     major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #     session_key_derivation_attributes: { # required
     #       emv_common: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #       mastercard: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
     #         unpredictable_number: "HexLengthBetween2And8", # required
     #       },
     #       emv_2000: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #       amex: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #       },
     #       visa: {
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #       },
     #     },
@@ -1474,7 +1474,7 @@ module Aws::PaymentCryptographyData
     #       },
     #       arpc_method_2: {
     #         card_status_update: "HexLengthEquals8", # required
-    #         proprietary_authentication_data: "HexLengthBetween1And16",
+    #         proprietary_authentication_data: "ProprietaryAuthenticationDataType",
     #       },
     #     },
     #   })
@@ -1558,21 +1558,21 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.verify_card_validation_data({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     primary_account_number: "NumberLengthBetween12And19", # required
+    #     primary_account_number: "PrimaryAccountNumberType", # required
     #     verification_attributes: { # required
     #       amex_card_security_code_version_1: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
     #       },
     #       amex_card_security_code_version_2: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
-    #         service_code: "NumberLengthEquals3", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
+    #         service_code: "ServiceCodeType", # required
     #       },
     #       card_verification_value_1: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
-    #         service_code: "NumberLengthEquals3", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
+    #         service_code: "ServiceCodeType", # required
     #       },
     #       card_verification_value_2: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
     #       },
     #       card_holder_verification_value: {
     #         unpredictable_number: "HexLengthBetween2And8", # required
@@ -1583,21 +1583,21 @@ module Aws::PaymentCryptographyData
     #         unpredictable_number: "HexLengthBetween2And8", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
-    #         track_data: "HexLengthBetween2And160", # required
+    #         track_data: "TrackDataType", # required
     #       },
     #       dynamic_card_verification_value: {
     #         pan_sequence_number: "NumberLengthEquals2", # required
-    #         card_expiry_date: "NumberLengthEquals4", # required
-    #         service_code: "NumberLengthEquals3", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
+    #         service_code: "ServiceCodeType", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #       discover_dynamic_card_verification_code: {
-    #         card_expiry_date: "NumberLengthEquals4", # required
+    #         card_expiry_date: "CardExpiryDateType", # required
     #         unpredictable_number: "HexLengthBetween2And8", # required
     #         application_transaction_counter: "HexLengthBetween2And4", # required
     #       },
     #     },
-    #     validation_data: "NumberLengthBetween3And5", # required
+    #     validation_data: "ValidationDataType", # required
     #   })
     #
     # @example Response structure
@@ -1669,17 +1669,17 @@ module Aws::PaymentCryptographyData
     #
     #   resp = client.verify_mac({
     #     key_identifier: "KeyArnOrKeyAliasType", # required
-    #     message_data: "HexEvenLengthBetween2And4096", # required
-    #     mac: "HexEvenLengthBetween4And128", # required
+    #     message_data: "MessageDataType", # required
+    #     mac: "MacType", # required
     #     verification_attributes: { # required
     #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
-    #         primary_account_number: "NumberLengthBetween12And19", # required
+    #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         session_key_derivation_mode: "EMV_COMMON_SESSION_KEY", # required, accepts EMV_COMMON_SESSION_KEY, EMV2000, AMEX, MASTERCARD_SESSION_KEY, VISA
     #         session_key_derivation_value: { # required
-    #           application_cryptogram: "HexLengthEquals16",
+    #           application_cryptogram: "ApplicationCryptogramType",
     #           application_transaction_counter: "HexLengthBetween2And4",
     #         },
     #       },
@@ -1799,17 +1799,17 @@ module Aws::PaymentCryptographyData
     #     verification_attributes: { # required
     #       visa_pin: {
     #         pin_verification_key_index: 1, # required
-    #         verification_value: "NumberLengthBetween4And12", # required
+    #         verification_value: "VerificationValueType", # required
     #       },
     #       ibm_3624_pin: {
-    #         decimalization_table: "NumberLengthEquals16", # required
+    #         decimalization_table: "DecimalizationTableType", # required
     #         pin_validation_data_pad_character: "HexLengthEquals1", # required
-    #         pin_validation_data: "NumberLengthBetween4And16", # required
-    #         pin_offset: "NumberLengthBetween4And12", # required
+    #         pin_validation_data: "PinValidationDataType", # required
+    #         pin_offset: "PinOffsetType", # required
     #       },
     #     },
-    #     encrypted_pin_block: "HexLengthBetween16And32", # required
-    #     primary_account_number: "NumberLengthBetween12And19", # required
+    #     encrypted_pin_block: "EncryptedPinBlockType", # required
+    #     primary_account_number: "PrimaryAccountNumberType", # required
     #     pin_block_format: "ISO_FORMAT_0", # required, accepts ISO_FORMAT_0, ISO_FORMAT_3
     #     pin_data_length: 1,
     #     dukpt_attributes: {
@@ -1847,7 +1847,7 @@ module Aws::PaymentCryptographyData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

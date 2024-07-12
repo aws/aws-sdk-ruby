@@ -600,6 +600,7 @@ module Aws::Batch
 
     EksAttemptDetail.add_member(:containers, Shapes::ShapeRef.new(shape: EksAttemptContainerDetails, location_name: "containers"))
     EksAttemptDetail.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksAttemptContainerDetails, location_name: "initContainers"))
+    EksAttemptDetail.add_member(:eks_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "eksClusterArn"))
     EksAttemptDetail.add_member(:pod_name, Shapes::ShapeRef.new(shape: String, location_name: "podName"))
     EksAttemptDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
     EksAttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
@@ -1004,6 +1005,7 @@ module Aws::Batch
     NodePropertyOverride.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
     NodePropertyOverride.add_member(:ecs_properties_override, Shapes::ShapeRef.new(shape: EcsPropertiesOverride, location_name: "ecsPropertiesOverride"))
     NodePropertyOverride.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
+    NodePropertyOverride.add_member(:eks_properties_override, Shapes::ShapeRef.new(shape: EksPropertiesOverride, location_name: "eksPropertiesOverride"))
     NodePropertyOverride.struct_class = Types::NodePropertyOverride
 
     NodePropertyOverrides.member = Shapes::ShapeRef.new(shape: NodePropertyOverride)
@@ -1014,6 +1016,7 @@ module Aws::Batch
     NodeRangeProperty.add_member(:container, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "container"))
     NodeRangeProperty.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "instanceTypes"))
     NodeRangeProperty.add_member(:ecs_properties, Shapes::ShapeRef.new(shape: EcsProperties, location_name: "ecsProperties"))
+    NodeRangeProperty.add_member(:eks_properties, Shapes::ShapeRef.new(shape: EksProperties, location_name: "eksProperties"))
     NodeRangeProperty.struct_class = Types::NodeRangeProperty
 
     ParametersMap.key = Shapes::ShapeRef.new(shape: String)

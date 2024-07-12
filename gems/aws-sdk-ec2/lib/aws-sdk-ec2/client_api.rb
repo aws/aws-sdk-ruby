@@ -1814,6 +1814,7 @@ module Aws::EC2
     IpamManagementState = Shapes::StringShape.new(name: 'IpamManagementState')
     IpamMaxResults = Shapes::IntegerShape.new(name: 'IpamMaxResults')
     IpamNetmaskLength = Shapes::IntegerShape.new(name: 'IpamNetmaskLength')
+    IpamNetworkInterfaceAttachmentStatus = Shapes::StringShape.new(name: 'IpamNetworkInterfaceAttachmentStatus')
     IpamOperatingRegion = Shapes::StructureShape.new(name: 'IpamOperatingRegion')
     IpamOperatingRegionSet = Shapes::ListShape.new(name: 'IpamOperatingRegionSet')
     IpamOverlapStatus = Shapes::StringShape.new(name: 'IpamOverlapStatus')
@@ -5031,6 +5032,7 @@ module Aws::EC2
 
     CreatePublicIpv4PoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreatePublicIpv4PoolRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreatePublicIpv4PoolRequest.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "NetworkBorderGroup"))
     CreatePublicIpv4PoolRequest.struct_class = Types::CreatePublicIpv4PoolRequest
 
     CreatePublicIpv4PoolResult.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolEc2Id, location_name: "poolId"))
@@ -5897,6 +5899,7 @@ module Aws::EC2
 
     DeletePublicIpv4PoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeletePublicIpv4PoolRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolEc2Id, required: true, location_name: "PoolId"))
+    DeletePublicIpv4PoolRequest.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "NetworkBorderGroup"))
     DeletePublicIpv4PoolRequest.struct_class = Types::DeletePublicIpv4PoolRequest
 
     DeletePublicIpv4PoolResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnValue"))
@@ -10539,7 +10542,9 @@ module Aws::EC2
     IpamDiscoveredResourceCidr.add_member(:resource_tags, Shapes::ShapeRef.new(shape: IpamResourceTagList, location_name: "resourceTagSet"))
     IpamDiscoveredResourceCidr.add_member(:ip_usage, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "ipUsage"))
     IpamDiscoveredResourceCidr.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    IpamDiscoveredResourceCidr.add_member(:network_interface_attachment_status, Shapes::ShapeRef.new(shape: IpamNetworkInterfaceAttachmentStatus, location_name: "networkInterfaceAttachmentStatus"))
     IpamDiscoveredResourceCidr.add_member(:sample_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "sampleTime"))
+    IpamDiscoveredResourceCidr.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     IpamDiscoveredResourceCidr.struct_class = Types::IpamDiscoveredResourceCidr
 
     IpamDiscoveredResourceCidrSet.member = Shapes::ShapeRef.new(shape: IpamDiscoveredResourceCidr, location_name: "item")
@@ -10651,6 +10656,7 @@ module Aws::EC2
     IpamResourceCidr.add_member(:management_state, Shapes::ShapeRef.new(shape: IpamManagementState, location_name: "managementState"))
     IpamResourceCidr.add_member(:overlap_status, Shapes::ShapeRef.new(shape: IpamOverlapStatus, location_name: "overlapStatus"))
     IpamResourceCidr.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    IpamResourceCidr.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     IpamResourceCidr.struct_class = Types::IpamResourceCidr
 
     IpamResourceCidrSet.member = Shapes::ShapeRef.new(shape: IpamResourceCidr, location_name: "item")
@@ -12840,6 +12846,7 @@ module Aws::EC2
     ProvisionPublicIpv4PoolCidrRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
     ProvisionPublicIpv4PoolCidrRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolEc2Id, required: true, location_name: "PoolId"))
     ProvisionPublicIpv4PoolCidrRequest.add_member(:netmask_length, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NetmaskLength"))
+    ProvisionPublicIpv4PoolCidrRequest.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "NetworkBorderGroup"))
     ProvisionPublicIpv4PoolCidrRequest.struct_class = Types::ProvisionPublicIpv4PoolCidrRequest
 
     ProvisionPublicIpv4PoolCidrResult.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolEc2Id, location_name: "poolId"))

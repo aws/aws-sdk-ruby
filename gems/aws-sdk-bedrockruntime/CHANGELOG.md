@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-07-10)
+------------------
+
+* Feature - Add support for contextual grounding check and ApplyGuardrail API for Guardrails for Amazon Bedrock.
+
 1.15.0 (2024-07-02)
 ------------------
 

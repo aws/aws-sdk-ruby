@@ -13,6 +13,9 @@ module Aws::OpenSearchService
 
     include Seahorse::Model
 
+    AIMLOptionsInput = Shapes::StructureShape.new(name: 'AIMLOptionsInput')
+    AIMLOptionsOutput = Shapes::StructureShape.new(name: 'AIMLOptionsOutput')
+    AIMLOptionsStatus = Shapes::StructureShape.new(name: 'AIMLOptionsStatus')
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccount = Shapes::StringShape.new(name: 'AWSAccount')
     AWSDomainInformation = Shapes::StructureShape.new(name: 'AWSDomainInformation')
@@ -294,6 +297,10 @@ module Aws::OpenSearchService
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
     ModifyingProperties = Shapes::StructureShape.new(name: 'ModifyingProperties')
     ModifyingPropertiesList = Shapes::ListShape.new(name: 'ModifyingPropertiesList')
+    NaturalLanguageQueryGenerationCurrentState = Shapes::StringShape.new(name: 'NaturalLanguageQueryGenerationCurrentState')
+    NaturalLanguageQueryGenerationDesiredState = Shapes::StringShape.new(name: 'NaturalLanguageQueryGenerationDesiredState')
+    NaturalLanguageQueryGenerationOptionsInput = Shapes::StructureShape.new(name: 'NaturalLanguageQueryGenerationOptionsInput')
+    NaturalLanguageQueryGenerationOptionsOutput = Shapes::StructureShape.new(name: 'NaturalLanguageQueryGenerationOptionsOutput')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NodeId = Shapes::StringShape.new(name: 'NodeId')
     NodeStatus = Shapes::StringShape.new(name: 'NodeStatus')
@@ -458,6 +465,16 @@ module Aws::OpenSearchService
     WindowStartTime = Shapes::StructureShape.new(name: 'WindowStartTime')
     ZoneAwarenessConfig = Shapes::StructureShape.new(name: 'ZoneAwarenessConfig')
     ZoneStatus = Shapes::StringShape.new(name: 'ZoneStatus')
+
+    AIMLOptionsInput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsInput, location_name: "NaturalLanguageQueryGenerationOptions"))
+    AIMLOptionsInput.struct_class = Types::AIMLOptionsInput
+
+    AIMLOptionsOutput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsOutput, location_name: "NaturalLanguageQueryGenerationOptions"))
+    AIMLOptionsOutput.struct_class = Types::AIMLOptionsOutput
+
+    AIMLOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AIMLOptionsOutput, location_name: "Options"))
+    AIMLOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
+    AIMLOptionsStatus.struct_class = Types::AIMLOptionsStatus
 
     AWSDomainInformation.add_member(:owner_id, Shapes::ShapeRef.new(shape: OwnerId, location_name: "OwnerId"))
     AWSDomainInformation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -713,6 +730,7 @@ module Aws::OpenSearchService
     CreateDomainRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsInput, location_name: "AutoTuneOptions"))
     CreateDomainRequest.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
     CreateDomainRequest.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
+    CreateDomainRequest.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsInput, location_name: "AIMLOptions"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
@@ -971,6 +989,7 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptionsStatus, location_name: "OffPeakWindowOptions"))
     DomainConfig.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptionsStatus, location_name: "SoftwareUpdateOptions"))
     DomainConfig.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
+    DomainConfig.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsStatus, location_name: "AIMLOptions"))
     DomainConfig.struct_class = Types::DomainConfig
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
@@ -1064,6 +1083,7 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
     DomainStatus.add_member(:domain_processing_status, Shapes::ShapeRef.new(shape: DomainProcessingStatusType, location_name: "DomainProcessingStatus"))
     DomainStatus.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
+    DomainStatus.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsOutput, location_name: "AIMLOptions"))
     DomainStatus.struct_class = Types::DomainStatus
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
@@ -1370,6 +1390,13 @@ module Aws::OpenSearchService
 
     ModifyingPropertiesList.member = Shapes::ShapeRef.new(shape: ModifyingProperties)
 
+    NaturalLanguageQueryGenerationOptionsInput.add_member(:desired_state, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationDesiredState, location_name: "DesiredState"))
+    NaturalLanguageQueryGenerationOptionsInput.struct_class = Types::NaturalLanguageQueryGenerationOptionsInput
+
+    NaturalLanguageQueryGenerationOptionsOutput.add_member(:desired_state, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationDesiredState, location_name: "DesiredState"))
+    NaturalLanguageQueryGenerationOptionsOutput.add_member(:current_state, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationCurrentState, location_name: "CurrentState"))
+    NaturalLanguageQueryGenerationOptionsOutput.struct_class = Types::NaturalLanguageQueryGenerationOptionsOutput
+
     NodeToNodeEncryptionOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     NodeToNodeEncryptionOptions.struct_class = Types::NodeToNodeEncryptionOptions
 
@@ -1646,6 +1673,7 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:dry_run_mode, Shapes::ShapeRef.new(shape: DryRunMode, location_name: "DryRunMode"))
     UpdateDomainConfigRequest.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
     UpdateDomainConfigRequest.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
+    UpdateDomainConfigRequest.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsInput, location_name: "AIMLOptions"))
     UpdateDomainConfigRequest.struct_class = Types::UpdateDomainConfigRequest
 
     UpdateDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))

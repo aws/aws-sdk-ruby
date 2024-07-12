@@ -565,6 +565,12 @@ module Aws::MediaConnect
     #   The name of the VPC interface attachment to use for this output.
     #   @return [Types::VpcInterfaceAttachment]
     #
+    # @!attribute [rw] output_status
+    #   An indication of whether the new output should be enabled or
+    #   disabled as soon as it is created. If you don't specify the
+    #   outputStatus field in your request, MediaConnect sets it to ENABLED.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
@@ -582,7 +588,8 @@ module Aws::MediaConnect
       :sender_control_port,
       :smoothing_latency,
       :stream_id,
-      :vpc_interface_attachment)
+      :vpc_interface_attachment,
+      :output_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3183,6 +3190,10 @@ module Aws::MediaConnect
     #   The bridge output ports currently in use.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] output_status
+    #   An indication of whether the output is transmitting data or not.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Output AWS API Documentation
     #
     class Output < Struct.new(
@@ -3200,7 +3211,8 @@ module Aws::MediaConnect
       :transport,
       :vpc_interface_attachment,
       :bridge_arn,
-      :bridge_ports)
+      :bridge_ports,
+      :output_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4792,6 +4804,12 @@ module Aws::MediaConnect
     #   The name of the VPC interface attachment to use for this output.
     #   @return [Types::VpcInterfaceAttachment]
     #
+    # @!attribute [rw] output_status
+    #   An indication of whether the output should transmit data or not. If
+    #   you don't specify the outputStatus field in your request,
+    #   MediaConnect leaves the value unchanged.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
     class UpdateFlowOutputRequest < Struct.new(
@@ -4811,7 +4829,8 @@ module Aws::MediaConnect
       :sender_ip_address,
       :smoothing_latency,
       :stream_id,
-      :vpc_interface_attachment)
+      :vpc_interface_attachment,
+      :output_status)
       SENSITIVE = []
       include Aws::Structure
     end

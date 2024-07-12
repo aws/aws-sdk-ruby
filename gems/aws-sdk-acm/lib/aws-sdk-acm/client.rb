@@ -718,11 +718,14 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Retrieves an Amazon-issued certificate and its certificate chain. The
-    # chain consists of the certificate of the issuing CA and the
-    # intermediate certificates of any other subordinate CAs. All of the
-    # certificates are base64 encoded. You can use [OpenSSL][1] to decode
-    # the certificates and inspect individual fields.
+    # Retrieves a certificate and its certificate chain. The certificate may
+    # be either a public or private certificate issued using the ACM
+    # `RequestCertificate` action, or a certificate imported into ACM using
+    # the `ImportCertificate` action. The chain consists of the certificate
+    # of the issuing CA and the intermediate certificates of any other
+    # subordinate CAs. All of the certificates are base64 encoded. You can
+    # use [OpenSSL][1] to decode the certificates and inspect individual
+    # fields.
     #
     #
     #
@@ -788,12 +791,6 @@ module Aws::ACM
     #   that is protected by a password or a passphrase.
     #
     # * The private key must be no larger than 5 KB (5,120 bytes).
-    #
-    # * If the certificate you are importing is not self-signed, you must
-    #   enter its certificate chain.
-    #
-    # * If a certificate chain is included, the issuer must be the subject
-    #   of one of the certificates in the chain.
     #
     # * The certificate, private key, and certificate chain must be
     #   PEM-encoded.
@@ -888,11 +885,15 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Retrieves a list of certificate ARNs and domain names. You can request
-    # that only certificates that match a specific status be listed. You can
-    # also filter by specific attributes of the certificate. Default
-    # filtering returns only `RSA_2048` certificates. For more information,
-    # see Filters.
+    # Retrieves a list of certificate ARNs and domain names. By default, the
+    # API returns RSA\_2048 certificates. To return all certificates in the
+    # account, include the `keyType` filter with the values `[RSA_1024,
+    # RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1,
+    # EC_secp521r1]`.
+    #
+    # In addition to `keyType`, you can also filter by the
+    # `CertificateStatuses`, `keyUsage`, and `extendedKeyUsage` attributes
+    # on the certificate. For more information, see Filters.
     #
     # @option params [Array<String>] :certificate_statuses
     #   Filter the certificate list by status value.
@@ -1287,13 +1288,36 @@ module Aws::ACM
     #   ACM certificates. Elliptic Curve Digital Signature Algorithm (ECDSA)
     #   keys are smaller, offering security comparable to RSA keys but with
     #   greater computing efficiency. However, ECDSA is not supported by all
-    #   network clients. Some AWS services may require RSA keys, or only
-    #   support ECDSA keys of a particular size, while others allow the use of
-    #   either RSA and ECDSA keys to ensure that compatibility is not broken.
-    #   Check the requirements for the AWS service where you plan to deploy
-    #   your certificate.
+    #   network clients. Some Amazon Web Services services may require RSA
+    #   keys, or only support ECDSA keys of a particular size, while others
+    #   allow the use of either RSA and ECDSA keys to ensure that
+    #   compatibility is not broken. Check the requirements for the Amazon Web
+    #   Services service where you plan to deploy your certificate. For more
+    #   information about selecting an algorithm, see [Key algorithms][1].
+    #
+    #   <note markdown="1"> Algorithms supported for an ACM certificate request include:
+    #
+    #    * `RSA_2048`
+    #
+    #   * `EC_prime256v1`
+    #
+    #   * `EC_secp384r1`
+    #
+    #    Other listed algorithms are for imported certificates only.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> When you request a private PKI certificate signed by a CA from Amazon
+    #   Web Services Private CA, the specified signing algorithm family (RSA
+    #   or ECDSA) must match the algorithm family of the CA's secret key.
+    #
+    #    </note>
     #
     #   Default: RSA\_2048
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1463,7 +1487,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -803,6 +803,13 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ConditionExpression
+      attr_accessor condition: ::String
+      attr_accessor value: ::String
+      attr_accessor target_column: ::String
+      SENSITIVE: []
+    end
+
     class ConfigurationObject
       attr_accessor default_value: ::String
       attr_accessor allowed_values: ::Array[::String]
@@ -4337,12 +4344,25 @@ module Aws::Glue
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
       attr_accessor recipe_reference: Types::RecipeReference
+      attr_accessor recipe_steps: ::Array[Types::RecipeStep]
+      SENSITIVE: []
+    end
+
+    class RecipeAction
+      attr_accessor operation: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class RecipeReference
       attr_accessor recipe_arn: ::String
       attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class RecipeStep
+      attr_accessor action: Types::RecipeAction
+      attr_accessor condition_expressions: ::Array[Types::ConditionExpression]
       SENSITIVE: []
     end
 

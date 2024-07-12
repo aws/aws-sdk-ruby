@@ -304,6 +304,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-privatenetworks', '~> 1')
   spec.add_dependency('aws-sdk-prometheusservice', '~> 1')
   spec.add_dependency('aws-sdk-proton', '~> 1')
+  spec.add_dependency('aws-sdk-qapps', '~> 1')
   spec.add_dependency('aws-sdk-qbusiness', '~> 1')
   spec.add_dependency('aws-sdk-qconnect', '~> 1')
   spec.add_dependency('aws-sdk-qldb', '~> 1')

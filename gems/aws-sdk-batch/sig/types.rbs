@@ -443,6 +443,7 @@ module Aws::Batch
     class EksAttemptDetail
       attr_accessor containers: ::Array[Types::EksAttemptContainerDetail]
       attr_accessor init_containers: ::Array[Types::EksAttemptContainerDetail]
+      attr_accessor eks_cluster_arn: ::String
       attr_accessor pod_name: ::String
       attr_accessor node_name: ::String
       attr_accessor started_at: ::Integer
@@ -889,6 +890,7 @@ module Aws::Batch
       attr_accessor container_overrides: Types::ContainerOverrides
       attr_accessor ecs_properties_override: Types::EcsPropertiesOverride
       attr_accessor instance_types: ::Array[::String]
+      attr_accessor eks_properties_override: Types::EksPropertiesOverride
       SENSITIVE: []
     end
 
@@ -897,6 +899,7 @@ module Aws::Batch
       attr_accessor container: Types::ContainerProperties
       attr_accessor instance_types: ::Array[::String]
       attr_accessor ecs_properties: Types::EcsProperties
+      attr_accessor eks_properties: Types::EksProperties
       SENSITIVE: []
     end
 

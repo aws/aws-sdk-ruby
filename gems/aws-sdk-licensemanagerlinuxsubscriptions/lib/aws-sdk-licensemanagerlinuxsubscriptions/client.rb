@@ -425,7 +425,71 @@ module Aws::LicenseManagerLinuxSubscriptions
 
     # @!group API Operations
 
-    # Lists the Linux subscriptions service settings.
+    # Remove a third-party subscription provider from the Bring Your Own
+    # License (BYOL) subscriptions registered to your account.
+    #
+    # @option params [required, String] :subscription_provider_arn
+    #   The Amazon Resource Name (ARN) of the subscription provider resource
+    #   to deregister.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_subscription_provider({
+    #     subscription_provider_arn: "SubscriptionProviderArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/DeregisterSubscriptionProvider AWS API Documentation
+    #
+    # @overload deregister_subscription_provider(params = {})
+    # @param [Hash] params ({})
+    def deregister_subscription_provider(params = {}, options = {})
+      req = build_request(:deregister_subscription_provider, params)
+      req.send_request(options)
+    end
+
+    # Get details for a Bring Your Own License (BYOL) subscription that's
+    # registered to your account.
+    #
+    # @option params [required, String] :subscription_provider_arn
+    #   The Amazon Resource Name (ARN) of the BYOL registration resource to
+    #   get details for.
+    #
+    # @return [Types::GetRegisteredSubscriptionProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegisteredSubscriptionProviderResponse#last_successful_data_retrieval_time #last_successful_data_retrieval_time} => String
+    #   * {Types::GetRegisteredSubscriptionProviderResponse#secret_arn #secret_arn} => String
+    #   * {Types::GetRegisteredSubscriptionProviderResponse#subscription_provider_arn #subscription_provider_arn} => String
+    #   * {Types::GetRegisteredSubscriptionProviderResponse#subscription_provider_source #subscription_provider_source} => String
+    #   * {Types::GetRegisteredSubscriptionProviderResponse#subscription_provider_status #subscription_provider_status} => String
+    #   * {Types::GetRegisteredSubscriptionProviderResponse#subscription_provider_status_message #subscription_provider_status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_registered_subscription_provider({
+    #     subscription_provider_arn: "SubscriptionProviderArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.last_successful_data_retrieval_time #=> String
+    #   resp.secret_arn #=> String
+    #   resp.subscription_provider_arn #=> String
+    #   resp.subscription_provider_source #=> String, one of "RedHat"
+    #   resp.subscription_provider_status #=> String, one of "ACTIVE", "INVALID", "PENDING"
+    #   resp.subscription_provider_status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/GetRegisteredSubscriptionProvider AWS API Documentation
+    #
+    # @overload get_registered_subscription_provider(params = {})
+    # @param [Hash] params ({})
+    def get_registered_subscription_provider(params = {}, options = {})
+      req = build_request(:get_registered_subscription_provider, params)
+      req.send_request(options)
+    end
+
+    # Lists the Linux subscriptions service settings for your account.
     #
     # @return [Types::GetServiceSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -460,31 +524,34 @@ module Aws::LicenseManagerLinuxSubscriptions
     # commercial Linux subscriptions.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   An array of structures that you can use to filter the results to those
-    #   that match one or more sets of key-value pairs that you specify. For
-    #   example, you can filter by the name of `AmiID` with an optional
-    #   operator to see subscriptions that match, partially match, or don't
-    #   match a certain Amazon Machine Image (AMI) ID.
+    #   An array of structures that you can use to filter the results by your
+    #   specified criteria. For example, you can specify `Region` in the
+    #   `Name`, with the `contains` operator to list all subscriptions that
+    #   match a partial string in the `Value`, such as `us-west`.
     #
-    #   The valid names for this filter are:
-    #
-    #   * `AmiID`
-    #
-    #   * `InstanceID`
+    #   For each filter, you can specify one of the following values for the
+    #   `Name` key to streamline results:
     #
     #   * `AccountID`
     #
-    #   * `Status`
+    #   * `AmiID`
     #
-    #   * `Region`
+    #   * `DualSubscription`
     #
-    #   * `UsageOperation`
-    #
-    #   * `ProductCode`
+    #   * `InstanceID`
     #
     #   * `InstanceType`
     #
-    #   The valid Operators for this filter are:
+    #   * `ProductCode`
+    #
+    #   * `Region`
+    #
+    #   * `Status`
+    #
+    #   * `UsageOperation`
+    #
+    #   For each filter, you can use one of the following `Operator` values to
+    #   define the behavior of the filter:
     #
     #   * `contains`
     #
@@ -493,10 +560,11 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   * `Notequal`
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in a single call.
+    #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   Token for the next set of results.
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
     #
     # @return [Types::ListLinuxSubscriptionInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -524,14 +592,19 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   resp.instances #=> Array
     #   resp.instances[0].account_id #=> String
     #   resp.instances[0].ami_id #=> String
+    #   resp.instances[0].dual_subscription #=> String
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].instance_type #=> String
     #   resp.instances[0].last_updated_time #=> String
+    #   resp.instances[0].os_version #=> String
     #   resp.instances[0].product_code #=> Array
     #   resp.instances[0].product_code[0] #=> String
     #   resp.instances[0].region #=> String
+    #   resp.instances[0].registered_with_subscription_provider #=> String
     #   resp.instances[0].status #=> String
     #   resp.instances[0].subscription_name #=> String
+    #   resp.instances[0].subscription_provider_create_time #=> String
+    #   resp.instances[0].subscription_provider_update_time #=> String
     #   resp.instances[0].usage_operation #=> String
     #   resp.next_token #=> String
     #
@@ -570,10 +643,11 @@ module Aws::LicenseManagerLinuxSubscriptions
     #   * `Notequal`
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in a single call.
+    #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
-    #   Token for the next set of results.
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
     #
     # @return [Types::ListLinuxSubscriptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -610,6 +684,191 @@ module Aws::LicenseManagerLinuxSubscriptions
     # @param [Hash] params ({})
     def list_linux_subscriptions(params = {}, options = {})
       req = build_request(:list_linux_subscriptions, params)
+      req.send_request(options)
+    end
+
+    # List Bring Your Own License (BYOL) subscription registration resources
+    # for your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum items to return in a request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the nextToken
+    #   from a previously truncated response.
+    #
+    # @option params [Array<String>] :subscription_provider_sources
+    #   To filter your results, specify which subscription providers to return
+    #   in the list.
+    #
+    # @return [Types::ListRegisteredSubscriptionProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegisteredSubscriptionProvidersResponse#next_token #next_token} => String
+    #   * {Types::ListRegisteredSubscriptionProvidersResponse#registered_subscription_providers #registered_subscription_providers} => Array&lt;Types::RegisteredSubscriptionProvider&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_registered_subscription_providers({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     subscription_provider_sources: ["RedHat"], # accepts RedHat
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.registered_subscription_providers #=> Array
+    #   resp.registered_subscription_providers[0].last_successful_data_retrieval_time #=> String
+    #   resp.registered_subscription_providers[0].secret_arn #=> String
+    #   resp.registered_subscription_providers[0].subscription_provider_arn #=> String
+    #   resp.registered_subscription_providers[0].subscription_provider_source #=> String, one of "RedHat"
+    #   resp.registered_subscription_providers[0].subscription_provider_status #=> String, one of "ACTIVE", "INVALID", "PENDING"
+    #   resp.registered_subscription_providers[0].subscription_provider_status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListRegisteredSubscriptionProviders AWS API Documentation
+    #
+    # @overload list_registered_subscription_providers(params = {})
+    # @param [Hash] params ({})
+    def list_registered_subscription_providers(params = {}, options = {})
+      req = build_request(:list_registered_subscription_providers, params)
+      req.send_request(options)
+    end
+
+    # List the metadata tags that are assigned to the specified Amazon Web
+    # Services resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to list
+    #   metadata tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "SubscriptionProviderArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Register the supported third-party subscription provider for your
+    # Bring Your Own License (BYOL) subscription.
+    #
+    # @option params [required, String] :secret_arn
+    #   The Amazon Resource Name (ARN) of the secret where you've stored your
+    #   subscription provider's access token. For RHEL subscriptions managed
+    #   through the Red Hat Subscription Manager (RHSM), the secret contains
+    #   your Red Hat Offline token.
+    #
+    # @option params [required, String] :subscription_provider_source
+    #   The supported Linux subscription provider to register.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata tags to assign to your registered Linux subscription
+    #   provider resource.
+    #
+    # @return [Types::RegisterSubscriptionProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterSubscriptionProviderResponse#subscription_provider_arn #subscription_provider_arn} => String
+    #   * {Types::RegisterSubscriptionProviderResponse#subscription_provider_source #subscription_provider_source} => String
+    #   * {Types::RegisterSubscriptionProviderResponse#subscription_provider_status #subscription_provider_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_subscription_provider({
+    #     secret_arn: "SecretArn", # required
+    #     subscription_provider_source: "RedHat", # required, accepts RedHat
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_provider_arn #=> String
+    #   resp.subscription_provider_source #=> String, one of "RedHat"
+    #   resp.subscription_provider_status #=> String, one of "ACTIVE", "INVALID", "PENDING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/RegisterSubscriptionProvider AWS API Documentation
+    #
+    # @overload register_subscription_provider(params = {})
+    # @param [Hash] params ({})
+    def register_subscription_provider(params = {}, options = {})
+      req = build_request(:register_subscription_provider, params)
+      req.send_request(options)
+    end
+
+    # Add metadata tags to the specified Amazon Web Services resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource to
+    #   which to add the specified metadata tags.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The metadata tags to assign to the Amazon Web Services resource. Tags
+    #   are formatted as key value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "SubscriptionProviderArn", # required
+    #     tags: { # required
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove one or more metadata tag from the specified Amazon Web Services
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource to
+    #   remove the metadata tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of metadata tag keys to remove from the requested resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "SubscriptionProviderArn", # required
+    #     tag_keys: ["String"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-linux-subscriptions-2018-05-10/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -681,7 +940,7 @@ module Aws::LicenseManagerLinuxSubscriptions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanagerlinuxsubscriptions'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

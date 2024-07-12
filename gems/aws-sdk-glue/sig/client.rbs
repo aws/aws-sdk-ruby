@@ -1840,7 +1840,22 @@ module Aws
                               recipe_reference: {
                                 recipe_arn: ::String,
                                 recipe_version: ::String
-                              }
+                              }?,
+                              recipe_steps: Array[
+                                {
+                                  action: {
+                                    operation: ::String,
+                                    parameters: Hash[::String, ::String]?
+                                  },
+                                  condition_expressions: Array[
+                                    {
+                                      condition: ::String,
+                                      value: ::String?,
+                                      target_column: ::String
+                                    },
+                                  ]?
+                                },
+                              ]?
                             }?,
                             snowflake_source: {
                               name: ::String,
@@ -6255,7 +6270,22 @@ module Aws
                                 recipe_reference: {
                                   recipe_arn: ::String,
                                   recipe_version: ::String
-                                }
+                                }?,
+                                recipe_steps: Array[
+                                  {
+                                    action: {
+                                      operation: ::String,
+                                      parameters: Hash[::String, ::String]?
+                                    },
+                                    condition_expressions: Array[
+                                      {
+                                        condition: ::String,
+                                        value: ::String?,
+                                        target_column: ::String
+                                      },
+                                    ]?
+                                  },
+                                ]?
                               }?,
                               snowflake_source: {
                                 name: ::String,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-07-05)
+------------------
+
+* Feature - Add personalization to Q Applications. Customers can enable or disable personalization when creating or updating a Q application with the personalization configuration.
+
 1.10.0 (2024-07-02)
 ------------------
 

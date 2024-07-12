@@ -295,6 +295,8 @@ module Aws::QBusiness
     NumberAttributeBoostingType = Shapes::StringShape.new(name: 'NumberAttributeBoostingType')
     OAuth2ClientCredentialConfiguration = Shapes::StructureShape.new(name: 'OAuth2ClientCredentialConfiguration')
     Payload = Shapes::StringShape.new(name: 'Payload')
+    PersonalizationConfiguration = Shapes::StructureShape.new(name: 'PersonalizationConfiguration')
+    PersonalizationControlMode = Shapes::StringShape.new(name: 'PersonalizationControlMode')
     Plugin = Shapes::StructureShape.new(name: 'Plugin')
     PluginArn = Shapes::StringShape.new(name: 'PluginArn')
     PluginAuthConfiguration = Shapes::UnionShape.new(name: 'PluginAuthConfiguration')
@@ -682,6 +684,7 @@ module Aws::QBusiness
     CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateApplicationRequest.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AttachmentsConfiguration, location_name: "attachmentsConfiguration"))
     CreateApplicationRequest.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
+    CreateApplicationRequest.add_member(:personalization_configuration, Shapes::ShapeRef.new(shape: PersonalizationConfiguration, location_name: "personalizationConfiguration"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
@@ -1014,6 +1017,7 @@ module Aws::QBusiness
     GetApplicationResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
     GetApplicationResponse.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AppliedAttachmentsConfiguration, location_name: "attachmentsConfiguration"))
     GetApplicationResponse.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
+    GetApplicationResponse.add_member(:personalization_configuration, Shapes::ShapeRef.new(shape: PersonalizationConfiguration, location_name: "personalizationConfiguration"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
     GetChatControlsConfigurationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
@@ -1363,6 +1367,9 @@ module Aws::QBusiness
     OAuth2ClientCredentialConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     OAuth2ClientCredentialConfiguration.struct_class = Types::OAuth2ClientCredentialConfiguration
 
+    PersonalizationConfiguration.add_member(:personalization_control_mode, Shapes::ShapeRef.new(shape: PersonalizationControlMode, required: true, location_name: "personalizationControlMode"))
+    PersonalizationConfiguration.struct_class = Types::PersonalizationConfiguration
+
     Plugin.add_member(:plugin_id, Shapes::ShapeRef.new(shape: PluginId, location_name: "pluginId"))
     Plugin.add_member(:display_name, Shapes::ShapeRef.new(shape: PluginName, location_name: "displayName"))
     Plugin.add_member(:type, Shapes::ShapeRef.new(shape: PluginType, location_name: "type"))
@@ -1582,6 +1589,7 @@ module Aws::QBusiness
     UpdateApplicationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     UpdateApplicationRequest.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AttachmentsConfiguration, location_name: "attachmentsConfiguration"))
     UpdateApplicationRequest.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
+    UpdateApplicationRequest.add_member(:personalization_configuration, Shapes::ShapeRef.new(shape: PersonalizationConfiguration, location_name: "personalizationConfiguration"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse

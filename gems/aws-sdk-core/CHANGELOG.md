@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.201.1 (2024-07-05)
+------------------
+
 * Issue - Fix `Aws::ProcessCredentials` warning in cases where shared config is used.
 
 3.201.0 (2024-07-02)

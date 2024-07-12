@@ -15,6 +15,8 @@ module Aws::BedrockRuntime
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AnyToolChoice = Shapes::StructureShape.new(name: 'AnyToolChoice')
+    ApplyGuardrailRequest = Shapes::StructureShape.new(name: 'ApplyGuardrailRequest')
+    ApplyGuardrailResponse = Shapes::StructureShape.new(name: 'ApplyGuardrailResponse')
     AutoToolChoice = Shapes::StructureShape.new(name: 'AutoToolChoice')
     Body = Shapes::BlobShape.new(name: 'Body')
     ContentBlock = Shapes::UnionShape.new(name: 'ContentBlock')
@@ -47,18 +49,35 @@ module Aws::BedrockRuntime
     DocumentFormat = Shapes::StringShape.new(name: 'DocumentFormat')
     DocumentSource = Shapes::UnionShape.new(name: 'DocumentSource')
     DocumentSourceBytesBlob = Shapes::BlobShape.new(name: 'DocumentSourceBytesBlob')
+    GuardrailAction = Shapes::StringShape.new(name: 'GuardrailAction')
     GuardrailAssessment = Shapes::StructureShape.new(name: 'GuardrailAssessment')
     GuardrailAssessmentList = Shapes::ListShape.new(name: 'GuardrailAssessmentList')
     GuardrailAssessmentListMap = Shapes::MapShape.new(name: 'GuardrailAssessmentListMap')
     GuardrailAssessmentMap = Shapes::MapShape.new(name: 'GuardrailAssessmentMap')
     GuardrailConfiguration = Shapes::StructureShape.new(name: 'GuardrailConfiguration')
+    GuardrailContentBlock = Shapes::UnionShape.new(name: 'GuardrailContentBlock')
+    GuardrailContentBlockList = Shapes::ListShape.new(name: 'GuardrailContentBlockList')
     GuardrailContentFilter = Shapes::StructureShape.new(name: 'GuardrailContentFilter')
     GuardrailContentFilterConfidence = Shapes::StringShape.new(name: 'GuardrailContentFilterConfidence')
     GuardrailContentFilterList = Shapes::ListShape.new(name: 'GuardrailContentFilterList')
     GuardrailContentFilterType = Shapes::StringShape.new(name: 'GuardrailContentFilterType')
     GuardrailContentPolicyAction = Shapes::StringShape.new(name: 'GuardrailContentPolicyAction')
     GuardrailContentPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailContentPolicyAssessment')
+    GuardrailContentPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailContentPolicyUnitsProcessed')
+    GuardrailContentQualifier = Shapes::StringShape.new(name: 'GuardrailContentQualifier')
+    GuardrailContentQualifierList = Shapes::ListShape.new(name: 'GuardrailContentQualifierList')
+    GuardrailContentSource = Shapes::StringShape.new(name: 'GuardrailContentSource')
+    GuardrailContextualGroundingFilter = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingFilter')
+    GuardrailContextualGroundingFilterScoreDouble = Shapes::FloatShape.new(name: 'GuardrailContextualGroundingFilterScoreDouble')
+    GuardrailContextualGroundingFilterThresholdDouble = Shapes::FloatShape.new(name: 'GuardrailContextualGroundingFilterThresholdDouble')
+    GuardrailContextualGroundingFilterType = Shapes::StringShape.new(name: 'GuardrailContextualGroundingFilterType')
+    GuardrailContextualGroundingFilters = Shapes::ListShape.new(name: 'GuardrailContextualGroundingFilters')
+    GuardrailContextualGroundingPolicyAction = Shapes::StringShape.new(name: 'GuardrailContextualGroundingPolicyAction')
+    GuardrailContextualGroundingPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingPolicyAssessment')
+    GuardrailContextualGroundingPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailContextualGroundingPolicyUnitsProcessed')
     GuardrailConverseContentBlock = Shapes::UnionShape.new(name: 'GuardrailConverseContentBlock')
+    GuardrailConverseContentQualifier = Shapes::StringShape.new(name: 'GuardrailConverseContentQualifier')
+    GuardrailConverseContentQualifierList = Shapes::ListShape.new(name: 'GuardrailConverseContentQualifierList')
     GuardrailConverseTextBlock = Shapes::StructureShape.new(name: 'GuardrailConverseTextBlock')
     GuardrailCustomWord = Shapes::StructureShape.new(name: 'GuardrailCustomWord')
     GuardrailCustomWordList = Shapes::ListShape.new(name: 'GuardrailCustomWordList')
@@ -66,6 +85,8 @@ module Aws::BedrockRuntime
     GuardrailManagedWord = Shapes::StructureShape.new(name: 'GuardrailManagedWord')
     GuardrailManagedWordList = Shapes::ListShape.new(name: 'GuardrailManagedWordList')
     GuardrailManagedWordType = Shapes::StringShape.new(name: 'GuardrailManagedWordType')
+    GuardrailOutputContent = Shapes::StructureShape.new(name: 'GuardrailOutputContent')
+    GuardrailOutputContentList = Shapes::ListShape.new(name: 'GuardrailOutputContentList')
     GuardrailOutputText = Shapes::StringShape.new(name: 'GuardrailOutputText')
     GuardrailPiiEntityFilter = Shapes::StructureShape.new(name: 'GuardrailPiiEntityFilter')
     GuardrailPiiEntityFilterList = Shapes::ListShape.new(name: 'GuardrailPiiEntityFilterList')
@@ -74,18 +95,24 @@ module Aws::BedrockRuntime
     GuardrailRegexFilterList = Shapes::ListShape.new(name: 'GuardrailRegexFilterList')
     GuardrailSensitiveInformationPolicyAction = Shapes::StringShape.new(name: 'GuardrailSensitiveInformationPolicyAction')
     GuardrailSensitiveInformationPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailSensitiveInformationPolicyAssessment')
+    GuardrailSensitiveInformationPolicyFreeUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailSensitiveInformationPolicyFreeUnitsProcessed')
+    GuardrailSensitiveInformationPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailSensitiveInformationPolicyUnitsProcessed')
     GuardrailStreamConfiguration = Shapes::StructureShape.new(name: 'GuardrailStreamConfiguration')
     GuardrailStreamProcessingMode = Shapes::StringShape.new(name: 'GuardrailStreamProcessingMode')
+    GuardrailTextBlock = Shapes::StructureShape.new(name: 'GuardrailTextBlock')
     GuardrailTopic = Shapes::StructureShape.new(name: 'GuardrailTopic')
     GuardrailTopicList = Shapes::ListShape.new(name: 'GuardrailTopicList')
     GuardrailTopicPolicyAction = Shapes::StringShape.new(name: 'GuardrailTopicPolicyAction')
     GuardrailTopicPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailTopicPolicyAssessment')
+    GuardrailTopicPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailTopicPolicyUnitsProcessed')
     GuardrailTopicType = Shapes::StringShape.new(name: 'GuardrailTopicType')
     GuardrailTrace = Shapes::StringShape.new(name: 'GuardrailTrace')
     GuardrailTraceAssessment = Shapes::StructureShape.new(name: 'GuardrailTraceAssessment')
+    GuardrailUsage = Shapes::StructureShape.new(name: 'GuardrailUsage')
     GuardrailVersion = Shapes::StringShape.new(name: 'GuardrailVersion')
     GuardrailWordPolicyAction = Shapes::StringShape.new(name: 'GuardrailWordPolicyAction')
     GuardrailWordPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailWordPolicyAssessment')
+    GuardrailWordPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailWordPolicyUnitsProcessed')
     ImageBlock = Shapes::StructureShape.new(name: 'ImageBlock')
     ImageFormat = Shapes::StringShape.new(name: 'ImageFormat')
     ImageSource = Shapes::UnionShape.new(name: 'ImageSource')
@@ -153,6 +180,18 @@ module Aws::BedrockRuntime
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AnyToolChoice.struct_class = Types::AnyToolChoice
+
+    ApplyGuardrailRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, required: true, location: "uri", location_name: "guardrailIdentifier"))
+    ApplyGuardrailRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, required: true, location: "uri", location_name: "guardrailVersion"))
+    ApplyGuardrailRequest.add_member(:source, Shapes::ShapeRef.new(shape: GuardrailContentSource, required: true, location_name: "source"))
+    ApplyGuardrailRequest.add_member(:content, Shapes::ShapeRef.new(shape: GuardrailContentBlockList, required: true, location_name: "content"))
+    ApplyGuardrailRequest.struct_class = Types::ApplyGuardrailRequest
+
+    ApplyGuardrailResponse.add_member(:usage, Shapes::ShapeRef.new(shape: GuardrailUsage, required: true, location_name: "usage"))
+    ApplyGuardrailResponse.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailAction, required: true, location_name: "action"))
+    ApplyGuardrailResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: GuardrailOutputContentList, required: true, location_name: "outputs"))
+    ApplyGuardrailResponse.add_member(:assessments, Shapes::ShapeRef.new(shape: GuardrailAssessmentList, required: true, location_name: "assessments"))
+    ApplyGuardrailResponse.struct_class = Types::ApplyGuardrailResponse
 
     AutoToolChoice.struct_class = Types::AutoToolChoice
 
@@ -286,6 +325,7 @@ module Aws::BedrockRuntime
     GuardrailAssessment.add_member(:content_policy, Shapes::ShapeRef.new(shape: GuardrailContentPolicyAssessment, location_name: "contentPolicy"))
     GuardrailAssessment.add_member(:word_policy, Shapes::ShapeRef.new(shape: GuardrailWordPolicyAssessment, location_name: "wordPolicy"))
     GuardrailAssessment.add_member(:sensitive_information_policy, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyAssessment, location_name: "sensitiveInformationPolicy"))
+    GuardrailAssessment.add_member(:contextual_grounding_policy, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyAssessment, location_name: "contextualGroundingPolicy"))
     GuardrailAssessment.struct_class = Types::GuardrailAssessment
 
     GuardrailAssessmentList.member = Shapes::ShapeRef.new(shape: GuardrailAssessment)
@@ -301,6 +341,14 @@ module Aws::BedrockRuntime
     GuardrailConfiguration.add_member(:trace, Shapes::ShapeRef.new(shape: GuardrailTrace, location_name: "trace"))
     GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
 
+    GuardrailContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: GuardrailTextBlock, location_name: "text"))
+    GuardrailContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GuardrailContentBlock.add_member_subclass(:text, Types::GuardrailContentBlock::Text)
+    GuardrailContentBlock.add_member_subclass(:unknown, Types::GuardrailContentBlock::Unknown)
+    GuardrailContentBlock.struct_class = Types::GuardrailContentBlock
+
+    GuardrailContentBlockList.member = Shapes::ShapeRef.new(shape: GuardrailContentBlock)
+
     GuardrailContentFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContentFilterType, required: true, location_name: "type"))
     GuardrailContentFilter.add_member(:confidence, Shapes::ShapeRef.new(shape: GuardrailContentFilterConfidence, required: true, location_name: "confidence"))
     GuardrailContentFilter.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailContentPolicyAction, required: true, location_name: "action"))
@@ -311,13 +359,29 @@ module Aws::BedrockRuntime
     GuardrailContentPolicyAssessment.add_member(:filters, Shapes::ShapeRef.new(shape: GuardrailContentFilterList, required: true, location_name: "filters"))
     GuardrailContentPolicyAssessment.struct_class = Types::GuardrailContentPolicyAssessment
 
+    GuardrailContentQualifierList.member = Shapes::ShapeRef.new(shape: GuardrailContentQualifier)
+
+    GuardrailContextualGroundingFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterType, required: true, location_name: "type"))
+    GuardrailContextualGroundingFilter.add_member(:threshold, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterThresholdDouble, required: true, location_name: "threshold"))
+    GuardrailContextualGroundingFilter.add_member(:score, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterScoreDouble, required: true, location_name: "score"))
+    GuardrailContextualGroundingFilter.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyAction, required: true, location_name: "action"))
+    GuardrailContextualGroundingFilter.struct_class = Types::GuardrailContextualGroundingFilter
+
+    GuardrailContextualGroundingFilters.member = Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilter)
+
+    GuardrailContextualGroundingPolicyAssessment.add_member(:filters, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilters, location_name: "filters"))
+    GuardrailContextualGroundingPolicyAssessment.struct_class = Types::GuardrailContextualGroundingPolicyAssessment
+
     GuardrailConverseContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: GuardrailConverseTextBlock, location_name: "text"))
     GuardrailConverseContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     GuardrailConverseContentBlock.add_member_subclass(:text, Types::GuardrailConverseContentBlock::Text)
     GuardrailConverseContentBlock.add_member_subclass(:unknown, Types::GuardrailConverseContentBlock::Unknown)
     GuardrailConverseContentBlock.struct_class = Types::GuardrailConverseContentBlock
 
+    GuardrailConverseContentQualifierList.member = Shapes::ShapeRef.new(shape: GuardrailConverseContentQualifier)
+
     GuardrailConverseTextBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "text"))
+    GuardrailConverseTextBlock.add_member(:qualifiers, Shapes::ShapeRef.new(shape: GuardrailConverseContentQualifierList, location_name: "qualifiers"))
     GuardrailConverseTextBlock.struct_class = Types::GuardrailConverseTextBlock
 
     GuardrailCustomWord.add_member(:match, Shapes::ShapeRef.new(shape: String, required: true, location_name: "match"))
@@ -332,6 +396,11 @@ module Aws::BedrockRuntime
     GuardrailManagedWord.struct_class = Types::GuardrailManagedWord
 
     GuardrailManagedWordList.member = Shapes::ShapeRef.new(shape: GuardrailManagedWord)
+
+    GuardrailOutputContent.add_member(:text, Shapes::ShapeRef.new(shape: GuardrailOutputText, location_name: "text"))
+    GuardrailOutputContent.struct_class = Types::GuardrailOutputContent
+
+    GuardrailOutputContentList.member = Shapes::ShapeRef.new(shape: GuardrailOutputContent)
 
     GuardrailPiiEntityFilter.add_member(:match, Shapes::ShapeRef.new(shape: String, required: true, location_name: "match"))
     GuardrailPiiEntityFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailPiiEntityType, required: true, location_name: "type"))
@@ -358,6 +427,10 @@ module Aws::BedrockRuntime
     GuardrailStreamConfiguration.add_member(:stream_processing_mode, Shapes::ShapeRef.new(shape: GuardrailStreamProcessingMode, location_name: "streamProcessingMode"))
     GuardrailStreamConfiguration.struct_class = Types::GuardrailStreamConfiguration
 
+    GuardrailTextBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "text"))
+    GuardrailTextBlock.add_member(:qualifiers, Shapes::ShapeRef.new(shape: GuardrailContentQualifierList, location_name: "qualifiers"))
+    GuardrailTextBlock.struct_class = Types::GuardrailTextBlock
+
     GuardrailTopic.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     GuardrailTopic.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailTopicType, required: true, location_name: "type"))
     GuardrailTopic.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailTopicPolicyAction, required: true, location_name: "action"))
@@ -372,6 +445,14 @@ module Aws::BedrockRuntime
     GuardrailTraceAssessment.add_member(:input_assessment, Shapes::ShapeRef.new(shape: GuardrailAssessmentMap, location_name: "inputAssessment"))
     GuardrailTraceAssessment.add_member(:output_assessments, Shapes::ShapeRef.new(shape: GuardrailAssessmentListMap, location_name: "outputAssessments"))
     GuardrailTraceAssessment.struct_class = Types::GuardrailTraceAssessment
+
+    GuardrailUsage.add_member(:topic_policy_units, Shapes::ShapeRef.new(shape: GuardrailTopicPolicyUnitsProcessed, required: true, location_name: "topicPolicyUnits"))
+    GuardrailUsage.add_member(:content_policy_units, Shapes::ShapeRef.new(shape: GuardrailContentPolicyUnitsProcessed, required: true, location_name: "contentPolicyUnits"))
+    GuardrailUsage.add_member(:word_policy_units, Shapes::ShapeRef.new(shape: GuardrailWordPolicyUnitsProcessed, required: true, location_name: "wordPolicyUnits"))
+    GuardrailUsage.add_member(:sensitive_information_policy_units, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyUnitsProcessed, required: true, location_name: "sensitiveInformationPolicyUnits"))
+    GuardrailUsage.add_member(:sensitive_information_policy_free_units, Shapes::ShapeRef.new(shape: GuardrailSensitiveInformationPolicyFreeUnitsProcessed, required: true, location_name: "sensitiveInformationPolicyFreeUnits"))
+    GuardrailUsage.add_member(:contextual_grounding_policy_units, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyUnitsProcessed, required: true, location_name: "contextualGroundingPolicyUnits"))
+    GuardrailUsage.struct_class = Types::GuardrailUsage
 
     GuardrailWordPolicyAssessment.add_member(:custom_words, Shapes::ShapeRef.new(shape: GuardrailCustomWordList, required: true, location_name: "customWords"))
     GuardrailWordPolicyAssessment.add_member(:managed_word_lists, Shapes::ShapeRef.new(shape: GuardrailManagedWordList, required: true, location_name: "managedWordLists"))
@@ -585,6 +666,20 @@ module Aws::BedrockRuntime
         "signingName" => "bedrock",
         "uid" => "bedrock-runtime-2023-09-30",
       }
+
+      api.add_operation(:apply_guardrail, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ApplyGuardrail"
+        o.http_method = "POST"
+        o.http_request_uri = "/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply"
+        o.input = Shapes::ShapeRef.new(shape: ApplyGuardrailRequest)
+        o.output = Shapes::ShapeRef.new(shape: ApplyGuardrailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
 
       api.add_operation(:converse, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Converse"

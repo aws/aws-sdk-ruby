@@ -34,7 +34,7 @@ module Aws::PaymentCryptographyData
     #
     class AmexCardSecurityCodeVersion1 < Struct.new(
       :card_expiry_date)
-      SENSITIVE = []
+      SENSITIVE = [:card_expiry_date]
       include Aws::Structure
     end
 
@@ -55,7 +55,7 @@ module Aws::PaymentCryptographyData
     class AmexCardSecurityCodeVersion2 < Struct.new(
       :card_expiry_date,
       :service_code)
-      SENSITIVE = []
+      SENSITIVE = [:card_expiry_date, :service_code]
       include Aws::Structure
     end
 
@@ -256,7 +256,7 @@ module Aws::PaymentCryptographyData
     class CardVerificationValue1 < Struct.new(
       :card_expiry_date,
       :service_code)
-      SENSITIVE = []
+      SENSITIVE = [:card_expiry_date, :service_code]
       include Aws::Structure
     end
 
@@ -271,7 +271,7 @@ module Aws::PaymentCryptographyData
     #
     class CardVerificationValue2 < Struct.new(
       :card_expiry_date)
-      SENSITIVE = []
+      SENSITIVE = [:card_expiry_date]
       include Aws::Structure
     end
 
@@ -341,7 +341,7 @@ module Aws::PaymentCryptographyData
     class CryptogramVerificationArpcMethod2 < Struct.new(
       :card_status_update,
       :proprietary_authentication_data)
-      SENSITIVE = []
+      SENSITIVE = [:proprietary_authentication_data]
       include Aws::Structure
     end
 
@@ -427,7 +427,7 @@ module Aws::PaymentCryptographyData
       :card_expiry_date,
       :unpredictable_number,
       :application_transaction_counter)
-      SENSITIVE = []
+      SENSITIVE = [:card_expiry_date]
       include Aws::Structure
     end
 
@@ -562,7 +562,7 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_transaction_counter,
       :track_data)
-      SENSITIVE = []
+      SENSITIVE = [:track_data]
       include Aws::Structure
     end
 
@@ -594,7 +594,7 @@ module Aws::PaymentCryptographyData
       :card_expiry_date,
       :service_code,
       :application_transaction_counter)
-      SENSITIVE = []
+      SENSITIVE = [:card_expiry_date, :service_code]
       include Aws::Structure
     end
 
@@ -641,7 +641,7 @@ module Aws::PaymentCryptographyData
       :session_derivation_data,
       :mode,
       :initialization_vector)
-      SENSITIVE = [:primary_account_number, :initialization_vector]
+      SENSITIVE = [:primary_account_number, :session_derivation_data, :initialization_vector]
       include Aws::Structure
     end
 
@@ -817,7 +817,7 @@ module Aws::PaymentCryptographyData
       :key_arn,
       :key_check_value,
       :validation_data)
-      SENSITIVE = []
+      SENSITIVE = [:validation_data]
       include Aws::Structure
     end
 
@@ -875,7 +875,7 @@ module Aws::PaymentCryptographyData
       :key_arn,
       :key_check_value,
       :mac)
-      SENSITIVE = []
+      SENSITIVE = [:mac]
       include Aws::Structure
     end
 
@@ -979,7 +979,7 @@ module Aws::PaymentCryptographyData
       :encryption_key_check_value,
       :encrypted_pin_block,
       :pin_data)
-      SENSITIVE = []
+      SENSITIVE = [:encrypted_pin_block]
       include Aws::Structure
     end
 
@@ -1006,7 +1006,7 @@ module Aws::PaymentCryptographyData
       :decimalization_table,
       :pin_validation_data_pad_character,
       :pin_validation_data)
-      SENSITIVE = []
+      SENSITIVE = [:decimalization_table, :pin_validation_data]
       include Aws::Structure
     end
 
@@ -1038,7 +1038,7 @@ module Aws::PaymentCryptographyData
       :pin_validation_data_pad_character,
       :pin_validation_data,
       :pin_offset)
-      SENSITIVE = []
+      SENSITIVE = [:decimalization_table, :pin_validation_data, :pin_offset]
       include Aws::Structure
     end
 
@@ -1073,7 +1073,7 @@ module Aws::PaymentCryptographyData
       :decimalization_table,
       :pin_validation_data_pad_character,
       :pin_validation_data)
-      SENSITIVE = []
+      SENSITIVE = [:encrypted_pin_block, :decimalization_table, :pin_validation_data]
       include Aws::Structure
     end
 
@@ -1105,7 +1105,7 @@ module Aws::PaymentCryptographyData
       :pin_validation_data_pad_character,
       :pin_validation_data,
       :pin_offset)
-      SENSITIVE = []
+      SENSITIVE = [:decimalization_table, :pin_validation_data, :pin_offset]
       include Aws::Structure
     end
 
@@ -1131,7 +1131,7 @@ module Aws::PaymentCryptographyData
       :decimalization_table,
       :pin_validation_data_pad_character,
       :pin_validation_data)
-      SENSITIVE = []
+      SENSITIVE = [:decimalization_table, :pin_validation_data]
       include Aws::Structure
     end
 
@@ -1291,7 +1291,7 @@ module Aws::PaymentCryptographyData
       :pin_offset,
       :verification_value,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:pin_offset, :verification_value]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -1597,7 +1597,7 @@ module Aws::PaymentCryptographyData
       :application_cryptogram,
       :application_transaction_counter,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:application_cryptogram]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -1849,7 +1849,7 @@ module Aws::PaymentCryptographyData
       :pin_block,
       :key_arn,
       :key_check_value)
-      SENSITIVE = []
+      SENSITIVE = [:pin_block]
       include Aws::Structure
     end
 
@@ -2019,7 +2019,7 @@ module Aws::PaymentCryptographyData
       :major_key_derivation_mode,
       :session_key_derivation_attributes,
       :auth_response_attributes)
-      SENSITIVE = []
+      SENSITIVE = [:transaction_data, :auth_request_cryptogram]
       include Aws::Structure
     end
 
@@ -2048,7 +2048,7 @@ module Aws::PaymentCryptographyData
       :key_arn,
       :key_check_value,
       :auth_response_value)
-      SENSITIVE = []
+      SENSITIVE = [:auth_response_value]
       include Aws::Structure
     end
 
@@ -2080,7 +2080,7 @@ module Aws::PaymentCryptographyData
       :primary_account_number,
       :verification_attributes,
       :validation_data)
-      SENSITIVE = [:primary_account_number]
+      SENSITIVE = [:primary_account_number, :validation_data]
       include Aws::Structure
     end
 
@@ -2221,7 +2221,7 @@ module Aws::PaymentCryptographyData
       :pin_block_format,
       :pin_data_length,
       :dukpt_attributes)
-      SENSITIVE = [:primary_account_number]
+      SENSITIVE = [:encrypted_pin_block, :primary_account_number]
       include Aws::Structure
     end
 
@@ -2296,7 +2296,7 @@ module Aws::PaymentCryptographyData
     class VisaPinVerification < Struct.new(
       :pin_verification_key_index,
       :verification_value)
-      SENSITIVE = []
+      SENSITIVE = [:verification_value]
       include Aws::Structure
     end
 
@@ -2317,7 +2317,7 @@ module Aws::PaymentCryptographyData
     class VisaPinVerificationValue < Struct.new(
       :encrypted_pin_block,
       :pin_verification_key_index)
-      SENSITIVE = []
+      SENSITIVE = [:encrypted_pin_block]
       include Aws::Structure
     end
 

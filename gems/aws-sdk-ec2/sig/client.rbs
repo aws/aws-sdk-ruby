@@ -2817,7 +2817,8 @@ module Aws
                                             },
                                           ]?
                                         },
-                                      ]
+                                      ],
+                                      ?network_border_group: ::String
                                     ) -> _CreatePublicIpv4PoolResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublicIpv4PoolResponseSuccess
 
@@ -4373,7 +4374,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#delete_public_ipv_4_pool-instance_method
       def delete_public_ipv_4_pool: (
                                       ?dry_run: bool,
-                                      pool_id: ::String
+                                      pool_id: ::String,
+                                      ?network_border_group: ::String
                                     ) -> _DeletePublicIpv4PoolResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePublicIpv4PoolResponseSuccess
 
@@ -11193,7 +11195,8 @@ module Aws
                                               ?dry_run: bool,
                                               ipam_pool_id: ::String,
                                               pool_id: ::String,
-                                              netmask_length: ::Integer
+                                              netmask_length: ::Integer,
+                                              ?network_border_group: ::String
                                             ) -> _ProvisionPublicIpv4PoolCidrResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProvisionPublicIpv4PoolCidrResponseSuccess
 

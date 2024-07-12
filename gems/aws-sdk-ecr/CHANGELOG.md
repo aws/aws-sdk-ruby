@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-07-05)
+------------------
+
+* Feature - This release for Amazon ECR makes change to bring the SDK into sync with the API.
+
 1.77.0 (2024-07-02)
 ------------------
 

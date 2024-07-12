@@ -58,6 +58,8 @@ module Aws::BedrockRuntime
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :apply_guardrail
+            Aws::BedrockRuntime::Endpoints::ApplyGuardrail.build(context)
           when :converse
             Aws::BedrockRuntime::Endpoints::Converse.build(context)
           when :converse_stream

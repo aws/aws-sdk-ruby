@@ -154,6 +154,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateNotebookInstance.build(context)
           when :create_notebook_instance_lifecycle_config
             Aws::SageMaker::Endpoints::CreateNotebookInstanceLifecycleConfig.build(context)
+          when :create_optimization_job
+            Aws::SageMaker::Endpoints::CreateOptimizationJob.build(context)
           when :create_pipeline
             Aws::SageMaker::Endpoints::CreatePipeline.build(context)
           when :create_presigned_domain_url
@@ -266,6 +268,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteNotebookInstance.build(context)
           when :delete_notebook_instance_lifecycle_config
             Aws::SageMaker::Endpoints::DeleteNotebookInstanceLifecycleConfig.build(context)
+          when :delete_optimization_job
+            Aws::SageMaker::Endpoints::DeleteOptimizationJob.build(context)
           when :delete_pipeline
             Aws::SageMaker::Endpoints::DeletePipeline.build(context)
           when :delete_project
@@ -382,6 +386,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeNotebookInstance.build(context)
           when :describe_notebook_instance_lifecycle_config
             Aws::SageMaker::Endpoints::DescribeNotebookInstanceLifecycleConfig.build(context)
+          when :describe_optimization_job
+            Aws::SageMaker::Endpoints::DescribeOptimizationJob.build(context)
           when :describe_pipeline
             Aws::SageMaker::Endpoints::DescribePipeline.build(context)
           when :describe_pipeline_definition_for_execution
@@ -544,6 +550,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListNotebookInstanceLifecycleConfigs.build(context)
           when :list_notebook_instances
             Aws::SageMaker::Endpoints::ListNotebookInstances.build(context)
+          when :list_optimization_jobs
+            Aws::SageMaker::Endpoints::ListOptimizationJobs.build(context)
           when :list_pipeline_execution_steps
             Aws::SageMaker::Endpoints::ListPipelineExecutionSteps.build(context)
           when :list_pipeline_executions
@@ -634,6 +642,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::StopMonitoringSchedule.build(context)
           when :stop_notebook_instance
             Aws::SageMaker::Endpoints::StopNotebookInstance.build(context)
+          when :stop_optimization_job
+            Aws::SageMaker::Endpoints::StopOptimizationJob.build(context)
           when :stop_pipeline_execution
             Aws::SageMaker::Endpoints::StopPipelineExecution.build(context)
           when :stop_processing_job

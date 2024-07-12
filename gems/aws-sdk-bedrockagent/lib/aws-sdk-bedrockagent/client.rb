@@ -503,9 +503,13 @@ module Aws::BedrockAgent
     #     After this time expires, the subsequent `InvokeAgent` request
     #     begins a new session.
     #
+    # * To enable your agent to retain conversational context across
+    #   multiple sessions, include a `memoryConfiguration` object. For more
+    #   information, see [Configure memory][1].
+    #
     # * To override the default prompt behavior for agent orchestration and
     #   to use advanced prompts, include a `promptOverrideConfiguration`
-    #   object. For more information, see [Advanced prompts][1].
+    #   object. For more information, see [Advanced prompts][2].
     #
     # * If you agent fails to be created, the response returns a list of
     #   `failureReasons` alongside a list of `recommendedActions` for you to
@@ -513,7 +517,8 @@ module Aws::BedrockAgent
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
     # @option params [required, String] :agent_name
     #   A name for the agent that you create.
@@ -562,6 +567,9 @@ module Aws::BedrockAgent
     #   Instructions that tell the agent what it should do and how it should
     #   interact with users.
     #
+    # @option params [Types::MemoryConfiguration] :memory_configuration
+    #   Contains the details of the memory configured for the agent.
+    #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
     #   Contains configurations to override prompts in different parts of an
     #   agent sequence. For more information, see [Advanced prompts][1].
@@ -592,6 +600,10 @@ module Aws::BedrockAgent
     #     },
     #     idle_session_ttl_in_seconds: 1,
     #     instruction: "Instruction",
+    #     memory_configuration: {
+    #       enabled_memory_types: ["SESSION_SUMMARY"], # required, accepts SESSION_SUMMARY
+    #       storage_days: 1,
+    #     },
     #     prompt_override_configuration: {
     #       override_lambda: "LambdaArn",
     #       prompt_configurations: [ # required
@@ -635,6 +647,9 @@ module Aws::BedrockAgent
     #   resp.agent.guardrail_configuration.guardrail_version #=> String
     #   resp.agent.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent.instruction #=> String
+    #   resp.agent.memory_configuration.enabled_memory_types #=> Array
+    #   resp.agent.memory_configuration.enabled_memory_types[0] #=> String, one of "SESSION_SUMMARY"
+    #   resp.agent.memory_configuration.storage_days #=> Integer
     #   resp.agent.prepared_at #=> Time
     #   resp.agent.prompt_override_configuration.override_lambda #=> String
     #   resp.agent.prompt_override_configuration.prompt_configurations #=> Array
@@ -668,13 +683,18 @@ module Aws::BedrockAgent
     #
     # To allow your agent to request the user for additional information
     # when trying to complete a task, add an action group with the
-    # `parentActionGroupSignature` field set to `AMAZON.UserInput`. You must
-    # leave the `description`, `apiSchema`, and `actionGroupExecutor` fields
-    # blank for this action group. During orchestration, if your agent
-    # determines that it needs to invoke an API in an action group, but
-    # doesn't have enough information to complete the API request, it will
-    # invoke this action group instead and return an [Observation][1]
-    # reprompting the user for more information.
+    # `parentActionGroupSignature` field set to `AMAZON.UserInput`.
+    #
+    # To allow your agent to generate, run, and troubleshoot code when
+    # trying to complete a task, add an action group with the
+    # `parentActionGroupSignature` field set to `AMAZON.CodeInterpreter`.
+    #
+    # You must leave the `description`, `apiSchema`, and
+    # `actionGroupExecutor` fields blank for this action group. During
+    # orchestration, if your agent determines that it needs to invoke an API
+    # in an action group, but doesn't have enough information to complete
+    # the API request, it will invoke this action group instead and return
+    # an [Observation][1] reprompting the user for more information.
     #
     #
     #
@@ -740,6 +760,11 @@ module Aws::BedrockAgent
     #   You must leave the `description`, `apiSchema`, and
     #   `actionGroupExecutor` fields blank for this action group.
     #
+    #   To allow your agent to generate, run, and troubleshoot code when
+    #   trying to complete a task, set this field to `AMAZON.CodeInterpreter`.
+    #   You must leave the `description`, `apiSchema`, and
+    #   `actionGroupExecutor` fields blank for this action group.
+    #
     #   During orchestration, if your agent determines that it needs to invoke
     #   an API in an action group, but doesn't have enough information to
     #   complete the API request, it will invoke this action group instead and
@@ -788,7 +813,7 @@ module Aws::BedrockAgent
     #         },
     #       ],
     #     },
-    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
+    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput, AMAZON.CodeInterpreter
     #   })
     #
     # @example Response structure
@@ -813,7 +838,7 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
-    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
+    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput", "AMAZON.CodeInterpreter"
     #   resp.agent_action_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentActionGroup AWS API Documentation
@@ -909,10 +934,10 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Sets up a data source to be added to a knowledge base.
+    # Creates a data source connector for a knowledge base.
     #
     # You can't change the `chunkingConfiguration` after you create the
-    # data source.
+    # data source connector.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -928,10 +953,21 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :data_deletion_policy
-    #   The data deletion policy assigned to the data source.
+    #   The data deletion policy for the data source.
+    #
+    #   You can set the data deletion policy to:
+    #
+    #   * DELETE: Deletes all underlying data belonging to the data source
+    #     from the vector store upon deletion of a knowledge base or data
+    #     source resource. Note that the vector store itself is not deleted,
+    #     only the underlying data. This flag is ignored if an Amazon Web
+    #     Services account is deleted.
+    #
+    #   * RETAIN: Retains all underlying data in your vector store upon
+    #     deletion of a knowledge base or data source resource.
     #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
-    #   Contains metadata about where the data source is stored.
+    #   The connection configuration for the data source.
     #
     # @option params [String] :description
     #   A description of the data source.
@@ -959,12 +995,98 @@ module Aws::BedrockAgent
     #     client_token: "ClientToken",
     #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
+    #       confluence_configuration: {
+    #         crawler_configuration: {
+    #           filter_configuration: {
+    #             pattern_object_filter: {
+    #               filters: [ # required
+    #                 {
+    #                   exclusion_filters: ["FilterPattern"],
+    #                   inclusion_filters: ["FilterPattern"],
+    #                   object_type: "FilteredObjectType", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "PATTERN", # required, accepts PATTERN
+    #           },
+    #         },
+    #         source_configuration: { # required
+    #           auth_type: "BASIC", # required, accepts BASIC, OAUTH2_CLIENT_CREDENTIALS
+    #           credentials_secret_arn: "SecretArn", # required
+    #           host_type: "SAAS", # required, accepts SAAS
+    #           host_url: "HttpsUrl", # required
+    #         },
+    #       },
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
     #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
-    #       type: "S3", # required, accepts S3
+    #       salesforce_configuration: {
+    #         crawler_configuration: {
+    #           filter_configuration: {
+    #             pattern_object_filter: {
+    #               filters: [ # required
+    #                 {
+    #                   exclusion_filters: ["FilterPattern"],
+    #                   inclusion_filters: ["FilterPattern"],
+    #                   object_type: "FilteredObjectType", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "PATTERN", # required, accepts PATTERN
+    #           },
+    #         },
+    #         source_configuration: { # required
+    #           auth_type: "OAUTH2_CLIENT_CREDENTIALS", # required, accepts OAUTH2_CLIENT_CREDENTIALS
+    #           credentials_secret_arn: "SecretArn", # required
+    #           host_url: "HttpsUrl", # required
+    #         },
+    #       },
+    #       share_point_configuration: {
+    #         crawler_configuration: {
+    #           filter_configuration: {
+    #             pattern_object_filter: {
+    #               filters: [ # required
+    #                 {
+    #                   exclusion_filters: ["FilterPattern"],
+    #                   inclusion_filters: ["FilterPattern"],
+    #                   object_type: "FilteredObjectType", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "PATTERN", # required, accepts PATTERN
+    #           },
+    #         },
+    #         source_configuration: { # required
+    #           auth_type: "OAUTH2_CLIENT_CREDENTIALS", # required, accepts OAUTH2_CLIENT_CREDENTIALS
+    #           credentials_secret_arn: "SecretArn", # required
+    #           domain: "SharePointDomain", # required
+    #           host_type: "ONLINE", # required, accepts ONLINE
+    #           site_urls: ["HttpsUrl"], # required
+    #           tenant_id: "Microsoft365TenantId",
+    #         },
+    #       },
+    #       type: "S3", # required, accepts S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT
+    #       web_configuration: {
+    #         crawler_configuration: {
+    #           crawler_limits: {
+    #             rate_limit: 1,
+    #           },
+    #           exclusion_filters: ["FilterPattern"],
+    #           inclusion_filters: ["FilterPattern"],
+    #           scope: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS
+    #         },
+    #         source_configuration: { # required
+    #           url_configuration: { # required
+    #             seed_urls: [
+    #               {
+    #                 url: "Url",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     knowledge_base_id: "Id", # required
@@ -974,11 +1096,50 @@ module Aws::BedrockAgent
     #     },
     #     vector_ingestion_configuration: {
     #       chunking_configuration: {
-    #         chunking_strategy: "FIXED_SIZE", # required, accepts FIXED_SIZE, NONE
+    #         chunking_strategy: "FIXED_SIZE", # required, accepts FIXED_SIZE, NONE, HIERARCHICAL, SEMANTIC
     #         fixed_size_chunking_configuration: {
     #           max_tokens: 1, # required
     #           overlap_percentage: 1, # required
     #         },
+    #         hierarchical_chunking_configuration: {
+    #           level_configurations: [ # required
+    #             {
+    #               max_tokens: 1, # required
+    #             },
+    #           ],
+    #           overlap_tokens: 1, # required
+    #         },
+    #         semantic_chunking_configuration: {
+    #           breakpoint_percentile_threshold: 1, # required
+    #           buffer_size: 1, # required
+    #           max_tokens: 1, # required
+    #         },
+    #       },
+    #       custom_transformation_configuration: {
+    #         intermediate_storage: { # required
+    #           s3_location: { # required
+    #             uri: "S3BucketUri", # required
+    #           },
+    #         },
+    #         transformations: [ # required
+    #           {
+    #             step_to_apply: "POST_CHUNKING", # required, accepts POST_CHUNKING
+    #             transformation_function: { # required
+    #               transformation_lambda_configuration: { # required
+    #                 lambda_arn: "LambdaArn", # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       parsing_configuration: {
+    #         bedrock_foundation_model_configuration: {
+    #           model_arn: "BedrockModelArn", # required
+    #           parsing_prompt: {
+    #             parsing_prompt_text: "ParsingPromptText", # required
+    #           },
+    #         },
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL
     #       },
     #     },
     #   })
@@ -987,11 +1148,54 @@ module Aws::BedrockAgent
     #
     #   resp.data_source.created_at #=> Time
     #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.auth_type #=> String, one of "BASIC", "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.host_type #=> String, one of "SAAS"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.host_url #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
-    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.auth_type #=> String, one of "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.host_url #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.auth_type #=> String, one of "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.domain #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.host_type #=> String, one of "ONLINE"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.site_urls #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.site_urls[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.tenant_id #=> String
+    #   resp.data_source.data_source_configuration.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT"
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.data_source.data_source_configuration.web_configuration.source_configuration.url_configuration.seed_urls #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.source_configuration.url_configuration.seed_urls[0].url #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
     #   resp.data_source.failure_reasons #=> Array
@@ -1001,9 +1205,22 @@ module Aws::BedrockAgent
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
     #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
-    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.intermediate_storage.s3_location.uri #=> String
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateDataSource AWS API Documentation
     #
@@ -1011,6 +1228,464 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def create_data_source(params = {}, options = {})
       req = build_request(:create_data_source, params)
+      req.send_request(options)
+    end
+
+    # Creates a prompt flow that you can use to send an input through
+    # various steps to yield an output. Configure nodes, each of which
+    # corresponds to a step of the flow, and create connections between the
+    # nodes to create paths to different outputs. For more information, see
+    # [How it works][1] and [Create a flow in Amazon Bedrock][2] in the
+    # Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-how-it-works.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-create.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
+    #
+    # @option params [Types::FlowDefinition] :definition
+    #   A definition of the nodes and connections between nodes in the flow.
+    #
+    # @option params [String] :description
+    #   A description for the flow.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the service role with permissions to
+    #   create and manage a flow. For more information, see [Create a service
+    #   role for flows in Amazon Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-permissions.html
+    #
+    # @option params [required, String] :name
+    #   A name for the flow.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags that you want to attach to the flow. For more information,
+    #   see [Tagging resources in Amazon Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #
+    # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFlowResponse#arn #arn} => String
+    #   * {Types::CreateFlowResponse#created_at #created_at} => Time
+    #   * {Types::CreateFlowResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::CreateFlowResponse#definition #definition} => Types::FlowDefinition
+    #   * {Types::CreateFlowResponse#description #description} => String
+    #   * {Types::CreateFlowResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::CreateFlowResponse#id #id} => String
+    #   * {Types::CreateFlowResponse#name #name} => String
+    #   * {Types::CreateFlowResponse#status #status} => String
+    #   * {Types::CreateFlowResponse#updated_at #updated_at} => Time
+    #   * {Types::CreateFlowResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_flow({
+    #     client_token: "ClientToken",
+    #     customer_encryption_key_arn: "KmsKeyArn",
+    #     definition: {
+    #       connections: [
+    #         {
+    #           configuration: {
+    #             conditional: {
+    #               condition: "FlowConditionName", # required
+    #             },
+    #             data: {
+    #               source_output: "FlowNodeOutputName", # required
+    #               target_input: "FlowNodeInputName", # required
+    #             },
+    #           },
+    #           name: "FlowConnectionName", # required
+    #           source: "FlowNodeName", # required
+    #           target: "FlowNodeName", # required
+    #           type: "Data", # required, accepts Data, Conditional
+    #         },
+    #       ],
+    #       nodes: [
+    #         {
+    #           configuration: {
+    #             agent: {
+    #               agent_alias_arn: "AgentAliasArn", # required
+    #             },
+    #             collector: {
+    #             },
+    #             condition: {
+    #               conditions: [ # required
+    #                 {
+    #                   expression: "FlowConditionExpression",
+    #                   name: "FlowConditionName", # required
+    #                 },
+    #               ],
+    #             },
+    #             input: {
+    #             },
+    #             iterator: {
+    #             },
+    #             knowledge_base: {
+    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               model_id: "ModelIdentifier",
+    #             },
+    #             lambda_function: {
+    #               lambda_arn: "LambdaArn", # required
+    #             },
+    #             lex: {
+    #               bot_alias_arn: "LexBotAliasArn", # required
+    #               locale_id: "LexBotLocaleId", # required
+    #             },
+    #             output: {
+    #             },
+    #             prompt: {
+    #               source_configuration: { # required
+    #                 inline: {
+    #                   inference_configuration: {
+    #                     text: {
+    #                       max_tokens: 1,
+    #                       stop_sequences: ["String"],
+    #                       temperature: 1.0,
+    #                       top_k: 1,
+    #                       top_p: 1.0,
+    #                     },
+    #                   },
+    #                   model_id: "PromptModelIdentifier", # required
+    #                   template_configuration: { # required
+    #                     text: {
+    #                       input_variables: [
+    #                         {
+    #                           name: "PromptInputVariableName",
+    #                         },
+    #                       ],
+    #                       text: "TextPrompt", # required
+    #                     },
+    #                   },
+    #                   template_type: "TEXT", # required, accepts TEXT
+    #                 },
+    #                 resource: {
+    #                   prompt_arn: "PromptArn", # required
+    #                 },
+    #               },
+    #             },
+    #             retrieval: {
+    #               service_configuration: { # required
+    #                 s3: {
+    #                   bucket_name: "S3BucketName", # required
+    #                 },
+    #               },
+    #             },
+    #             storage: {
+    #               service_configuration: { # required
+    #                 s3: {
+    #                   bucket_name: "S3BucketName", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           inputs: [
+    #             {
+    #               expression: "FlowNodeInputExpression", # required
+    #               name: "FlowNodeInputName", # required
+    #               type: "String", # required, accepts String, Number, Boolean, Object, Array
+    #             },
+    #           ],
+    #           name: "FlowNodeName", # required
+    #           outputs: [
+    #             {
+    #               name: "FlowNodeOutputName", # required
+    #               type: "String", # required, accepts String, Number, Boolean, Object, Array
+    #             },
+    #           ],
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #         },
+    #       ],
+    #     },
+    #     description: "FlowDescription",
+    #     execution_role_arn: "FlowExecutionRoleArn", # required
+    #     name: "FlowName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.definition.connections #=> Array
+    #   resp.definition.connections[0].configuration.conditional.condition #=> String
+    #   resp.definition.connections[0].configuration.data.source_output #=> String
+    #   resp.definition.connections[0].configuration.data.target_input #=> String
+    #   resp.definition.connections[0].name #=> String
+    #   resp.definition.connections[0].source #=> String
+    #   resp.definition.connections[0].target #=> String
+    #   resp.definition.connections[0].type #=> String, one of "Data", "Conditional"
+    #   resp.definition.nodes #=> Array
+    #   resp.definition.nodes[0].configuration.agent.agent_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
+    #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].expression #=> String
+    #   resp.definition.nodes[0].inputs[0].name #=> String
+    #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].name #=> String
+    #   resp.definition.nodes[0].outputs #=> Array
+    #   resp.definition.nodes[0].outputs[0].name #=> String
+    #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #   resp.updated_at #=> Time
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateFlow AWS API Documentation
+    #
+    # @overload create_flow(params = {})
+    # @param [Hash] params ({})
+    def create_flow(params = {}, options = {})
+      req = build_request(:create_flow, params)
+      req.send_request(options)
+    end
+
+    # Creates an alias of a flow for deployment. For more information, see
+    # [Deploy a flow in Amazon Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :description
+    #   A description for the alias.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow for which to create an alias.
+    #
+    # @option params [required, String] :name
+    #   A name for the alias.
+    #
+    # @option params [required, Array<Types::FlowAliasRoutingConfigurationListItem>] :routing_configuration
+    #   Contains information about the version to which to map the alias.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags that you want to attach to the alias of the flow. For more
+    #   information, see [Tagging resources in Amazon Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #
+    # @return [Types::CreateFlowAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFlowAliasResponse#arn #arn} => String
+    #   * {Types::CreateFlowAliasResponse#created_at #created_at} => Time
+    #   * {Types::CreateFlowAliasResponse#description #description} => String
+    #   * {Types::CreateFlowAliasResponse#flow_id #flow_id} => String
+    #   * {Types::CreateFlowAliasResponse#id #id} => String
+    #   * {Types::CreateFlowAliasResponse#name #name} => String
+    #   * {Types::CreateFlowAliasResponse#routing_configuration #routing_configuration} => Array&lt;Types::FlowAliasRoutingConfigurationListItem&gt;
+    #   * {Types::CreateFlowAliasResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_flow_alias({
+    #     client_token: "ClientToken",
+    #     description: "Description",
+    #     flow_identifier: "FlowIdentifier", # required
+    #     name: "Name", # required
+    #     routing_configuration: [ # required
+    #       {
+    #         flow_version: "Version",
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.flow_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.routing_configuration #=> Array
+    #   resp.routing_configuration[0].flow_version #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateFlowAlias AWS API Documentation
+    #
+    # @overload create_flow_alias(params = {})
+    # @param [Hash] params ({})
+    def create_flow_alias(params = {}, options = {})
+      req = build_request(:create_flow_alias, params)
+      req.send_request(options)
+    end
+
+    # Creates a version of the flow that you can deploy. For more
+    # information, see [Deploy a flow in Amazon Bedrock][1] in the Amazon
+    # Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :description
+    #   A description of the version of the flow.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow that you want to create a version
+    #   of.
+    #
+    # @return [Types::CreateFlowVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFlowVersionResponse#arn #arn} => String
+    #   * {Types::CreateFlowVersionResponse#created_at #created_at} => Time
+    #   * {Types::CreateFlowVersionResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::CreateFlowVersionResponse#definition #definition} => Types::FlowDefinition
+    #   * {Types::CreateFlowVersionResponse#description #description} => String
+    #   * {Types::CreateFlowVersionResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::CreateFlowVersionResponse#id #id} => String
+    #   * {Types::CreateFlowVersionResponse#name #name} => String
+    #   * {Types::CreateFlowVersionResponse#status #status} => String
+    #   * {Types::CreateFlowVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_flow_version({
+    #     client_token: "ClientToken",
+    #     description: "FlowDescription",
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.definition.connections #=> Array
+    #   resp.definition.connections[0].configuration.conditional.condition #=> String
+    #   resp.definition.connections[0].configuration.data.source_output #=> String
+    #   resp.definition.connections[0].configuration.data.target_input #=> String
+    #   resp.definition.connections[0].name #=> String
+    #   resp.definition.connections[0].source #=> String
+    #   resp.definition.connections[0].target #=> String
+    #   resp.definition.connections[0].type #=> String, one of "Data", "Conditional"
+    #   resp.definition.nodes #=> Array
+    #   resp.definition.nodes[0].configuration.agent.agent_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
+    #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].expression #=> String
+    #   resp.definition.nodes[0].inputs[0].name #=> String
+    #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].name #=> String
+    #   resp.definition.nodes[0].outputs #=> Array
+    #   resp.definition.nodes[0].outputs[0].name #=> String
+    #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateFlowVersion AWS API Documentation
+    #
+    # @overload create_flow_version(params = {})
+    # @param [Hash] params ({})
+    def create_flow_version(params = {}, options = {})
+      req = build_request(:create_flow_version, params)
       req.send_request(options)
     end
 
@@ -1238,6 +1913,239 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Creates a prompt in your prompt library that you can add to a flow.
+    # For more information, see [Prompt management in Amazon Bedrock][1],
+    # [Create a prompt using Prompt management][2] and [Prompt flows in
+    # Amazon Bedrock][3] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
+    #
+    # @option params [String] :default_variant
+    #   The name of the default variant for the prompt. This value must match
+    #   the `name` field in the relevant [PromptVariant][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptVariant.html
+    #
+    # @option params [String] :description
+    #   A description for the prompt.
+    #
+    # @option params [required, String] :name
+    #   A name for the prompt.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags that you want to attach to the prompt. For more information,
+    #   see [Tagging resources in Amazon Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #
+    # @option params [Array<Types::PromptVariant>] :variants
+    #   A list of objects, each containing details about a variant of the
+    #   prompt.
+    #
+    # @return [Types::CreatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePromptResponse#arn #arn} => String
+    #   * {Types::CreatePromptResponse#created_at #created_at} => Time
+    #   * {Types::CreatePromptResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::CreatePromptResponse#default_variant #default_variant} => String
+    #   * {Types::CreatePromptResponse#description #description} => String
+    #   * {Types::CreatePromptResponse#id #id} => String
+    #   * {Types::CreatePromptResponse#name #name} => String
+    #   * {Types::CreatePromptResponse#updated_at #updated_at} => Time
+    #   * {Types::CreatePromptResponse#variants #variants} => Array&lt;Types::PromptVariant&gt;
+    #   * {Types::CreatePromptResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_prompt({
+    #     client_token: "ClientToken",
+    #     customer_encryption_key_arn: "KmsKeyArn",
+    #     default_variant: "PromptVariantName",
+    #     description: "PromptDescription",
+    #     name: "PromptName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     variants: [
+    #       {
+    #         inference_configuration: {
+    #           text: {
+    #             max_tokens: 1,
+    #             stop_sequences: ["String"],
+    #             temperature: 1.0,
+    #             top_k: 1,
+    #             top_p: 1.0,
+    #           },
+    #         },
+    #         model_id: "PromptModelIdentifier",
+    #         name: "PromptVariantName", # required
+    #         template_configuration: {
+    #           text: {
+    #             input_variables: [
+    #               {
+    #                 name: "PromptInputVariableName",
+    #               },
+    #             ],
+    #             text: "TextPrompt", # required
+    #           },
+    #         },
+    #         template_type: "TEXT", # required, accepts TEXT
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.default_variant #=> String
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.updated_at #=> Time
+    #   resp.variants #=> Array
+    #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
+    #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
+    #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.variants[0].inference_configuration.text.temperature #=> Float
+    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
+    #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].model_id #=> String
+    #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.text.input_variables #=> Array
+    #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.text.text #=> String
+    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreatePrompt AWS API Documentation
+    #
+    # @overload create_prompt(params = {})
+    # @param [Hash] params ({})
+    def create_prompt(params = {}, options = {})
+      req = build_request(:create_prompt, params)
+      req.send_request(options)
+    end
+
+    # Creates a static snapshot of your prompt that can be deployed to
+    # production. For more information, see [Deploy prompts using Prompt
+    # management by creating versions][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :description
+    #   A description for the version of the prompt.
+    #
+    # @option params [required, String] :prompt_identifier
+    #   The unique identifier of the prompt that you want to create a version
+    #   of.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Any tags that you want to attach to the version of the prompt. For
+    #   more information, see [Tagging resources in Amazon Bedrock][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #
+    # @return [Types::CreatePromptVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePromptVersionResponse#arn #arn} => String
+    #   * {Types::CreatePromptVersionResponse#created_at #created_at} => Time
+    #   * {Types::CreatePromptVersionResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::CreatePromptVersionResponse#default_variant #default_variant} => String
+    #   * {Types::CreatePromptVersionResponse#description #description} => String
+    #   * {Types::CreatePromptVersionResponse#id #id} => String
+    #   * {Types::CreatePromptVersionResponse#name #name} => String
+    #   * {Types::CreatePromptVersionResponse#updated_at #updated_at} => Time
+    #   * {Types::CreatePromptVersionResponse#variants #variants} => Array&lt;Types::PromptVariant&gt;
+    #   * {Types::CreatePromptVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_prompt_version({
+    #     client_token: "ClientToken",
+    #     description: "PromptDescription",
+    #     prompt_identifier: "PromptIdentifier", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.default_variant #=> String
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.updated_at #=> Time
+    #   resp.variants #=> Array
+    #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
+    #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
+    #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.variants[0].inference_configuration.text.temperature #=> Float
+    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
+    #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].model_id #=> String
+    #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.text.input_variables #=> Array
+    #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.text.text #=> String
+    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreatePromptVersion AWS API Documentation
+    #
+    # @overload create_prompt_version(params = {})
+    # @param [Hash] params ({})
+    def create_prompt_version(params = {}, options = {})
+      req = build_request(:create_prompt_version, params)
+      req.send_request(options)
+    end
+
     # Deletes an agent.
     #
     # @option params [required, String] :agent_id
@@ -1425,6 +2333,115 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Deletes a flow.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @option params [Boolean] :skip_resource_in_use_check
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
+    #
+    # @return [Types::DeleteFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFlowResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_flow({
+    #     flow_identifier: "FlowIdentifier", # required
+    #     skip_resource_in_use_check: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteFlow AWS API Documentation
+    #
+    # @overload delete_flow(params = {})
+    # @param [Hash] params ({})
+    def delete_flow(params = {}, options = {})
+      req = build_request(:delete_flow, params)
+      req.send_request(options)
+    end
+
+    # Deletes an alias of a flow.
+    #
+    # @option params [required, String] :alias_identifier
+    #   The unique identifier of the alias to be deleted.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow that the alias belongs to.
+    #
+    # @return [Types::DeleteFlowAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFlowAliasResponse#flow_id #flow_id} => String
+    #   * {Types::DeleteFlowAliasResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_flow_alias({
+    #     alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_id #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteFlowAlias AWS API Documentation
+    #
+    # @overload delete_flow_alias(params = {})
+    # @param [Hash] params ({})
+    def delete_flow_alias(params = {}, options = {})
+      req = build_request(:delete_flow_alias, params)
+      req.send_request(options)
+    end
+
+    # Deletes a version of a flow.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow whose version that you want to
+    #   delete
+    #
+    # @option params [required, String] :flow_version
+    #   The version of the flow that you want to delete.
+    #
+    # @option params [Boolean] :skip_resource_in_use_check
+    #   By default, this value is `false` and deletion is stopped if the
+    #   resource is in use. If you set it to `true`, the resource will be
+    #   deleted even if the resource is in use.
+    #
+    # @return [Types::DeleteFlowVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFlowVersionResponse#id #id} => String
+    #   * {Types::DeleteFlowVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_flow_version({
+    #     flow_identifier: "FlowIdentifier", # required
+    #     flow_version: "NumericalVersion", # required
+    #     skip_resource_in_use_check: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteFlowVersion AWS API Documentation
+    #
+    # @overload delete_flow_version(params = {})
+    # @param [Hash] params ({})
+    def delete_flow_version(params = {}, options = {})
+      req = build_request(:delete_flow_version, params)
+      req.send_request(options)
+    end
+
     # Deletes a knowledge base. Before deleting a knowledge base, you should
     # disassociate the knowledge base from any agents that it is associated
     # with by making a [DisassociateAgentKnowledgeBase][1] request.
@@ -1458,6 +2475,48 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def delete_knowledge_base(params = {}, options = {})
       req = build_request(:delete_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Deletes a prompt or a prompt version from the Prompt management tool.
+    # For more information, see [Delete prompts from the Prompt management
+    # tool][1] and [Delete a version of a prompt from the Prompt management
+    # tool][2] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-delete.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-delete.html
+    #
+    # @option params [required, String] :prompt_identifier
+    #   The unique identifier of the prompt.
+    #
+    # @option params [String] :prompt_version
+    #   The version of the prompt to delete.
+    #
+    # @return [Types::DeletePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePromptResponse#id #id} => String
+    #   * {Types::DeletePromptResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_prompt({
+    #     prompt_identifier: "PromptIdentifier", # required
+    #     prompt_version: "NumericalVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeletePrompt AWS API Documentation
+    #
+    # @overload delete_prompt(params = {})
+    # @param [Hash] params ({})
+    def delete_prompt(params = {}, options = {})
+      req = build_request(:delete_prompt, params)
       req.send_request(options)
     end
 
@@ -1527,6 +2586,9 @@ module Aws::BedrockAgent
     #   resp.agent.guardrail_configuration.guardrail_version #=> String
     #   resp.agent.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent.instruction #=> String
+    #   resp.agent.memory_configuration.enabled_memory_types #=> Array
+    #   resp.agent.memory_configuration.enabled_memory_types[0] #=> String, one of "SESSION_SUMMARY"
+    #   resp.agent.memory_configuration.storage_days #=> Integer
     #   resp.agent.prepared_at #=> Time
     #   resp.agent.prompt_override_configuration.override_lambda #=> String
     #   resp.agent.prompt_override_configuration.prompt_configurations #=> Array
@@ -1600,7 +2662,7 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
-    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
+    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput", "AMAZON.CodeInterpreter"
     #   resp.agent_action_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetAgentActionGroup AWS API Documentation
@@ -1743,6 +2805,9 @@ module Aws::BedrockAgent
     #   resp.agent_version.guardrail_configuration.guardrail_version #=> String
     #   resp.agent_version.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent_version.instruction #=> String
+    #   resp.agent_version.memory_configuration.enabled_memory_types #=> Array
+    #   resp.agent_version.memory_configuration.enabled_memory_types[0] #=> String, one of "SESSION_SUMMARY"
+    #   resp.agent_version.memory_configuration.storage_days #=> Integer
     #   resp.agent_version.prompt_override_configuration.override_lambda #=> String
     #   resp.agent_version.prompt_override_configuration.prompt_configurations #=> Array
     #   resp.agent_version.prompt_override_configuration.prompt_configurations[0].base_prompt_template #=> String
@@ -1794,11 +2859,54 @@ module Aws::BedrockAgent
     #
     #   resp.data_source.created_at #=> Time
     #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.auth_type #=> String, one of "BASIC", "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.host_type #=> String, one of "SAAS"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.host_url #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
-    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.auth_type #=> String, one of "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.host_url #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.auth_type #=> String, one of "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.domain #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.host_type #=> String, one of "ONLINE"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.site_urls #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.site_urls[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.tenant_id #=> String
+    #   resp.data_source.data_source_configuration.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT"
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.data_source.data_source_configuration.web_configuration.source_configuration.url_configuration.seed_urls #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.source_configuration.url_configuration.seed_urls[0].url #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
     #   resp.data_source.failure_reasons #=> Array
@@ -1808,9 +2916,22 @@ module Aws::BedrockAgent
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
     #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
-    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.intermediate_storage.s3_location.uri #=> String
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetDataSource AWS API Documentation
     #
@@ -1818,6 +2939,251 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def get_data_source(params = {}, options = {})
       req = build_request(:get_data_source, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a flow. For more information, see [Manage
+    # a flow in Amazon Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-manage.html
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @return [Types::GetFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFlowResponse#arn #arn} => String
+    #   * {Types::GetFlowResponse#created_at #created_at} => Time
+    #   * {Types::GetFlowResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::GetFlowResponse#definition #definition} => Types::FlowDefinition
+    #   * {Types::GetFlowResponse#description #description} => String
+    #   * {Types::GetFlowResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetFlowResponse#id #id} => String
+    #   * {Types::GetFlowResponse#name #name} => String
+    #   * {Types::GetFlowResponse#status #status} => String
+    #   * {Types::GetFlowResponse#updated_at #updated_at} => Time
+    #   * {Types::GetFlowResponse#validations #validations} => Array&lt;Types::FlowValidation&gt;
+    #   * {Types::GetFlowResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_flow({
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.definition.connections #=> Array
+    #   resp.definition.connections[0].configuration.conditional.condition #=> String
+    #   resp.definition.connections[0].configuration.data.source_output #=> String
+    #   resp.definition.connections[0].configuration.data.target_input #=> String
+    #   resp.definition.connections[0].name #=> String
+    #   resp.definition.connections[0].source #=> String
+    #   resp.definition.connections[0].target #=> String
+    #   resp.definition.connections[0].type #=> String, one of "Data", "Conditional"
+    #   resp.definition.nodes #=> Array
+    #   resp.definition.nodes[0].configuration.agent.agent_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
+    #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].expression #=> String
+    #   resp.definition.nodes[0].inputs[0].name #=> String
+    #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].name #=> String
+    #   resp.definition.nodes[0].outputs #=> Array
+    #   resp.definition.nodes[0].outputs[0].name #=> String
+    #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #   resp.updated_at #=> Time
+    #   resp.validations #=> Array
+    #   resp.validations[0].message #=> String
+    #   resp.validations[0].severity #=> String, one of "Warning", "Error"
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetFlow AWS API Documentation
+    #
+    # @overload get_flow(params = {})
+    # @param [Hash] params ({})
+    def get_flow(params = {}, options = {})
+      req = build_request(:get_flow, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a flow. For more information, see [Deploy
+    # a flow in Amazon Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html
+    #
+    # @option params [required, String] :alias_identifier
+    #   The unique identifier of the alias for which to retrieve information.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow that the alias belongs to.
+    #
+    # @return [Types::GetFlowAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFlowAliasResponse#arn #arn} => String
+    #   * {Types::GetFlowAliasResponse#created_at #created_at} => Time
+    #   * {Types::GetFlowAliasResponse#description #description} => String
+    #   * {Types::GetFlowAliasResponse#flow_id #flow_id} => String
+    #   * {Types::GetFlowAliasResponse#id #id} => String
+    #   * {Types::GetFlowAliasResponse#name #name} => String
+    #   * {Types::GetFlowAliasResponse#routing_configuration #routing_configuration} => Array&lt;Types::FlowAliasRoutingConfigurationListItem&gt;
+    #   * {Types::GetFlowAliasResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_flow_alias({
+    #     alias_identifier: "FlowAliasIdentifier", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.flow_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.routing_configuration #=> Array
+    #   resp.routing_configuration[0].flow_version #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetFlowAlias AWS API Documentation
+    #
+    # @overload get_flow_alias(params = {})
+    # @param [Hash] params ({})
+    def get_flow_alias(params = {}, options = {})
+      req = build_request(:get_flow_alias, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a version of a flow. For more information,
+    # see [Deploy a flow in Amazon Bedrock][1] in the Amazon Bedrock User
+    # Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow for which to get information.
+    #
+    # @option params [required, String] :flow_version
+    #   The version of the flow for which to get information.
+    #
+    # @return [Types::GetFlowVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFlowVersionResponse#arn #arn} => String
+    #   * {Types::GetFlowVersionResponse#created_at #created_at} => Time
+    #   * {Types::GetFlowVersionResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::GetFlowVersionResponse#definition #definition} => Types::FlowDefinition
+    #   * {Types::GetFlowVersionResponse#description #description} => String
+    #   * {Types::GetFlowVersionResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetFlowVersionResponse#id #id} => String
+    #   * {Types::GetFlowVersionResponse#name #name} => String
+    #   * {Types::GetFlowVersionResponse#status #status} => String
+    #   * {Types::GetFlowVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_flow_version({
+    #     flow_identifier: "FlowIdentifier", # required
+    #     flow_version: "NumericalVersion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.definition.connections #=> Array
+    #   resp.definition.connections[0].configuration.conditional.condition #=> String
+    #   resp.definition.connections[0].configuration.data.source_output #=> String
+    #   resp.definition.connections[0].configuration.data.target_input #=> String
+    #   resp.definition.connections[0].name #=> String
+    #   resp.definition.connections[0].source #=> String
+    #   resp.definition.connections[0].target #=> String
+    #   resp.definition.connections[0].type #=> String, one of "Data", "Conditional"
+    #   resp.definition.nodes #=> Array
+    #   resp.definition.nodes[0].configuration.agent.agent_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
+    #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].expression #=> String
+    #   resp.definition.nodes[0].inputs[0].name #=> String
+    #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].name #=> String
+    #   resp.definition.nodes[0].outputs #=> Array
+    #   resp.definition.nodes[0].outputs[0].name #=> String
+    #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetFlowVersion AWS API Documentation
+    #
+    # @overload get_flow_version(params = {})
+    # @param [Hash] params ({})
+    def get_flow_version(params = {}, options = {})
+      req = build_request(:get_flow_version, params)
       req.send_request(options)
     end
 
@@ -1946,6 +3312,77 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def get_knowledge_base(params = {}, options = {})
       req = build_request(:get_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a prompt or a version of it. For more
+    # information, see [View information about prompts using Prompt
+    # management][1] and [View information about a version of your
+    # prompt][2] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-view.html
+    #
+    # @option params [required, String] :prompt_identifier
+    #   The unique identifier of the prompt.
+    #
+    # @option params [String] :prompt_version
+    #   The version of the prompt about which you want to retrieve
+    #   information.
+    #
+    # @return [Types::GetPromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPromptResponse#arn #arn} => String
+    #   * {Types::GetPromptResponse#created_at #created_at} => Time
+    #   * {Types::GetPromptResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::GetPromptResponse#default_variant #default_variant} => String
+    #   * {Types::GetPromptResponse#description #description} => String
+    #   * {Types::GetPromptResponse#id #id} => String
+    #   * {Types::GetPromptResponse#name #name} => String
+    #   * {Types::GetPromptResponse#updated_at #updated_at} => Time
+    #   * {Types::GetPromptResponse#variants #variants} => Array&lt;Types::PromptVariant&gt;
+    #   * {Types::GetPromptResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_prompt({
+    #     prompt_identifier: "PromptIdentifier", # required
+    #     prompt_version: "Version",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.default_variant #=> String
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.updated_at #=> Time
+    #   resp.variants #=> Array
+    #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
+    #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
+    #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.variants[0].inference_configuration.text.temperature #=> Float
+    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
+    #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].model_id #=> String
+    #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.text.input_variables #=> Array
+    #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.text.text #=> String
+    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetPrompt AWS API Documentation
+    #
+    # @overload get_prompt(params = {})
+    # @param [Hash] params ({})
+    def get_prompt(params = {}, options = {})
+      req = build_request(:get_prompt, params)
       req.send_request(options)
     end
 
@@ -2275,6 +3712,175 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Returns a list of aliases for a flow.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow for which aliases are being
+    #   returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListFlowAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowAliasesResponse#flow_alias_summaries #flow_alias_summaries} => Array&lt;Types::FlowAliasSummary&gt;
+    #   * {Types::ListFlowAliasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flow_aliases({
+    #     flow_identifier: "FlowIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_alias_summaries #=> Array
+    #   resp.flow_alias_summaries[0].arn #=> String
+    #   resp.flow_alias_summaries[0].created_at #=> Time
+    #   resp.flow_alias_summaries[0].description #=> String
+    #   resp.flow_alias_summaries[0].flow_id #=> String
+    #   resp.flow_alias_summaries[0].id #=> String
+    #   resp.flow_alias_summaries[0].name #=> String
+    #   resp.flow_alias_summaries[0].routing_configuration #=> Array
+    #   resp.flow_alias_summaries[0].routing_configuration[0].flow_version #=> String
+    #   resp.flow_alias_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListFlowAliases AWS API Documentation
+    #
+    # @overload list_flow_aliases(params = {})
+    # @param [Hash] params ({})
+    def list_flow_aliases(params = {}, options = {})
+      req = build_request(:list_flow_aliases, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of information about each flow. For more information,
+    # see [Deploy a flow in Amazon Bedrock][1] in the Amazon Bedrock User
+    # Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListFlowVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowVersionsResponse#flow_version_summaries #flow_version_summaries} => Array&lt;Types::FlowVersionSummary&gt;
+    #   * {Types::ListFlowVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flow_versions({
+    #     flow_identifier: "FlowIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_version_summaries #=> Array
+    #   resp.flow_version_summaries[0].arn #=> String
+    #   resp.flow_version_summaries[0].created_at #=> Time
+    #   resp.flow_version_summaries[0].id #=> String
+    #   resp.flow_version_summaries[0].status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #   resp.flow_version_summaries[0].version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListFlowVersions AWS API Documentation
+    #
+    # @overload list_flow_versions(params = {})
+    # @param [Hash] params ({})
+    def list_flow_versions(params = {}, options = {})
+      req = build_request(:list_flow_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of flows and information about each flow. For more
+    # information, see [Manage a flow in Amazon Bedrock][1] in the Amazon
+    # Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-manage.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListFlowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowsResponse#flow_summaries #flow_summaries} => Array&lt;Types::FlowSummary&gt;
+    #   * {Types::ListFlowsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flows({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_summaries #=> Array
+    #   resp.flow_summaries[0].arn #=> String
+    #   resp.flow_summaries[0].created_at #=> Time
+    #   resp.flow_summaries[0].description #=> String
+    #   resp.flow_summaries[0].id #=> String
+    #   resp.flow_summaries[0].name #=> String
+    #   resp.flow_summaries[0].status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #   resp.flow_summaries[0].updated_at #=> Time
+    #   resp.flow_summaries[0].version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListFlows AWS API Documentation
+    #
+    # @overload list_flows(params = {})
+    # @param [Hash] params ({})
+    def list_flows(params = {}, options = {})
+      req = build_request(:list_flows, params)
+      req.send_request(options)
+    end
+
     # Lists the ingestion jobs for a data source and information about each
     # of them.
     #
@@ -2407,6 +4013,66 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Returns a list of prompts from the Prompt management tool and
+    # information about each prompt. For more information, see [View
+    # information about prompts using Prompt management][1] in the Amazon
+    # Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [String] :prompt_identifier
+    #   The unique identifier of the prompt.
+    #
+    # @return [Types::ListPromptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPromptsResponse#next_token #next_token} => String
+    #   * {Types::ListPromptsResponse#prompt_summaries #prompt_summaries} => Array&lt;Types::PromptSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_prompts({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     prompt_identifier: "PromptIdentifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.prompt_summaries #=> Array
+    #   resp.prompt_summaries[0].arn #=> String
+    #   resp.prompt_summaries[0].created_at #=> Time
+    #   resp.prompt_summaries[0].description #=> String
+    #   resp.prompt_summaries[0].id #=> String
+    #   resp.prompt_summaries[0].name #=> String
+    #   resp.prompt_summaries[0].updated_at #=> Time
+    #   resp.prompt_summaries[0].version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListPrompts AWS API Documentation
+    #
+    # @overload list_prompts(params = {})
+    # @param [Hash] params ({})
+    def list_prompts(params = {}, options = {})
+      req = build_request(:list_prompts, params)
+      req.send_request(options)
+    end
+
     # List all the tags for the resource you specify.
     #
     # @option params [required, String] :resource_arn
@@ -2469,6 +4135,42 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def prepare_agent(params = {}, options = {})
       req = build_request(:prepare_agent, params)
+      req.send_request(options)
+    end
+
+    # Prepares the `DRAFT` version of a flow so that it can be invoked. For
+    # more information, see [Test a flow in Amazon Bedrock][1] in the Amazon
+    # Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @return [Types::PrepareFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PrepareFlowResponse#id #id} => String
+    #   * {Types::PrepareFlowResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.prepare_flow({
+    #     flow_identifier: "FlowIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PrepareFlow AWS API Documentation
+    #
+    # @overload prepare_flow(params = {})
+    # @param [Hash] params ({})
+    def prepare_flow(params = {}, options = {})
+      req = build_request(:prepare_flow, params)
       req.send_request(options)
     end
 
@@ -2639,6 +4341,9 @@ module Aws::BedrockAgent
     #   Specifies new instructions that tell the agent what it should do and
     #   how it should interact with users.
     #
+    # @option params [Types::MemoryConfiguration] :memory_configuration
+    #   Specifies the new memory configuration for the agent.
+    #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
     #   Contains configurations to override prompts in different parts of an
     #   agent sequence. For more information, see [Advanced prompts][1].
@@ -2666,6 +4371,10 @@ module Aws::BedrockAgent
     #     },
     #     idle_session_ttl_in_seconds: 1,
     #     instruction: "Instruction",
+    #     memory_configuration: {
+    #       enabled_memory_types: ["SESSION_SUMMARY"], # required, accepts SESSION_SUMMARY
+    #       storage_days: 1,
+    #     },
     #     prompt_override_configuration: {
     #       override_lambda: "LambdaArn",
     #       prompt_configurations: [ # required
@@ -2706,6 +4415,9 @@ module Aws::BedrockAgent
     #   resp.agent.guardrail_configuration.guardrail_version #=> String
     #   resp.agent.idle_session_ttl_in_seconds #=> Integer
     #   resp.agent.instruction #=> String
+    #   resp.agent.memory_configuration.enabled_memory_types #=> Array
+    #   resp.agent.memory_configuration.enabled_memory_types[0] #=> String, one of "SESSION_SUMMARY"
+    #   resp.agent.memory_configuration.storage_days #=> Integer
     #   resp.agent.prepared_at #=> Time
     #   resp.agent.prompt_override_configuration.override_lambda #=> String
     #   resp.agent.prompt_override_configuration.prompt_configurations #=> Array
@@ -2832,7 +4544,7 @@ module Aws::BedrockAgent
     #         },
     #       ],
     #     },
-    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput
+    #     parent_action_group_signature: "AMAZON.UserInput", # accepts AMAZON.UserInput, AMAZON.CodeInterpreter
     #   })
     #
     # @example Response structure
@@ -2857,7 +4569,7 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
-    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput"
+    #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput", "AMAZON.CodeInterpreter"
     #   resp.agent_action_group.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentActionGroup AWS API Documentation
@@ -2997,16 +4709,17 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Updates configurations for a data source.
+    # Updates the configurations for a data source connector.
     #
     # You can't change the `chunkingConfiguration` after you create the
-    # data source. Specify the existing `chunkingConfiguration`.
+    # data source connector. Specify the existing `chunkingConfiguration`.
     #
     # @option params [String] :data_deletion_policy
-    #   The data deletion policy of the updated data source.
+    #   The data deletion policy for the data source that you want to update.
     #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
-    #   Contains details about the storage configuration of the data source.
+    #   The connection configuration for the data source that you want to
+    #   update.
     #
     # @option params [required, String] :data_source_id
     #   The unique identifier of the data source.
@@ -3015,8 +4728,7 @@ module Aws::BedrockAgent
     #   Specifies a new description for the data source.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The unique identifier of the knowledge base to which the data source
-    #   belongs.
+    #   The unique identifier of the knowledge base for the data source.
     #
     # @option params [required, String] :name
     #   Specifies a new name for the data source.
@@ -3036,12 +4748,98 @@ module Aws::BedrockAgent
     #   resp = client.update_data_source({
     #     data_deletion_policy: "RETAIN", # accepts RETAIN, DELETE
     #     data_source_configuration: { # required
+    #       confluence_configuration: {
+    #         crawler_configuration: {
+    #           filter_configuration: {
+    #             pattern_object_filter: {
+    #               filters: [ # required
+    #                 {
+    #                   exclusion_filters: ["FilterPattern"],
+    #                   inclusion_filters: ["FilterPattern"],
+    #                   object_type: "FilteredObjectType", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "PATTERN", # required, accepts PATTERN
+    #           },
+    #         },
+    #         source_configuration: { # required
+    #           auth_type: "BASIC", # required, accepts BASIC, OAUTH2_CLIENT_CREDENTIALS
+    #           credentials_secret_arn: "SecretArn", # required
+    #           host_type: "SAAS", # required, accepts SAAS
+    #           host_url: "HttpsUrl", # required
+    #         },
+    #       },
     #       s3_configuration: {
     #         bucket_arn: "S3BucketArn", # required
     #         bucket_owner_account_id: "BucketOwnerAccountId",
     #         inclusion_prefixes: ["S3Prefix"],
     #       },
-    #       type: "S3", # required, accepts S3
+    #       salesforce_configuration: {
+    #         crawler_configuration: {
+    #           filter_configuration: {
+    #             pattern_object_filter: {
+    #               filters: [ # required
+    #                 {
+    #                   exclusion_filters: ["FilterPattern"],
+    #                   inclusion_filters: ["FilterPattern"],
+    #                   object_type: "FilteredObjectType", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "PATTERN", # required, accepts PATTERN
+    #           },
+    #         },
+    #         source_configuration: { # required
+    #           auth_type: "OAUTH2_CLIENT_CREDENTIALS", # required, accepts OAUTH2_CLIENT_CREDENTIALS
+    #           credentials_secret_arn: "SecretArn", # required
+    #           host_url: "HttpsUrl", # required
+    #         },
+    #       },
+    #       share_point_configuration: {
+    #         crawler_configuration: {
+    #           filter_configuration: {
+    #             pattern_object_filter: {
+    #               filters: [ # required
+    #                 {
+    #                   exclusion_filters: ["FilterPattern"],
+    #                   inclusion_filters: ["FilterPattern"],
+    #                   object_type: "FilteredObjectType", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "PATTERN", # required, accepts PATTERN
+    #           },
+    #         },
+    #         source_configuration: { # required
+    #           auth_type: "OAUTH2_CLIENT_CREDENTIALS", # required, accepts OAUTH2_CLIENT_CREDENTIALS
+    #           credentials_secret_arn: "SecretArn", # required
+    #           domain: "SharePointDomain", # required
+    #           host_type: "ONLINE", # required, accepts ONLINE
+    #           site_urls: ["HttpsUrl"], # required
+    #           tenant_id: "Microsoft365TenantId",
+    #         },
+    #       },
+    #       type: "S3", # required, accepts S3, WEB, CONFLUENCE, SALESFORCE, SHAREPOINT
+    #       web_configuration: {
+    #         crawler_configuration: {
+    #           crawler_limits: {
+    #             rate_limit: 1,
+    #           },
+    #           exclusion_filters: ["FilterPattern"],
+    #           inclusion_filters: ["FilterPattern"],
+    #           scope: "HOST_ONLY", # accepts HOST_ONLY, SUBDOMAINS
+    #         },
+    #         source_configuration: { # required
+    #           url_configuration: { # required
+    #             seed_urls: [
+    #               {
+    #                 url: "Url",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
     #     },
     #     data_source_id: "Id", # required
     #     description: "Description",
@@ -3052,11 +4850,50 @@ module Aws::BedrockAgent
     #     },
     #     vector_ingestion_configuration: {
     #       chunking_configuration: {
-    #         chunking_strategy: "FIXED_SIZE", # required, accepts FIXED_SIZE, NONE
+    #         chunking_strategy: "FIXED_SIZE", # required, accepts FIXED_SIZE, NONE, HIERARCHICAL, SEMANTIC
     #         fixed_size_chunking_configuration: {
     #           max_tokens: 1, # required
     #           overlap_percentage: 1, # required
     #         },
+    #         hierarchical_chunking_configuration: {
+    #           level_configurations: [ # required
+    #             {
+    #               max_tokens: 1, # required
+    #             },
+    #           ],
+    #           overlap_tokens: 1, # required
+    #         },
+    #         semantic_chunking_configuration: {
+    #           breakpoint_percentile_threshold: 1, # required
+    #           buffer_size: 1, # required
+    #           max_tokens: 1, # required
+    #         },
+    #       },
+    #       custom_transformation_configuration: {
+    #         intermediate_storage: { # required
+    #           s3_location: { # required
+    #             uri: "S3BucketUri", # required
+    #           },
+    #         },
+    #         transformations: [ # required
+    #           {
+    #             step_to_apply: "POST_CHUNKING", # required, accepts POST_CHUNKING
+    #             transformation_function: { # required
+    #               transformation_lambda_configuration: { # required
+    #                 lambda_arn: "LambdaArn", # required
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       parsing_configuration: {
+    #         bedrock_foundation_model_configuration: {
+    #           model_arn: "BedrockModelArn", # required
+    #           parsing_prompt: {
+    #             parsing_prompt_text: "ParsingPromptText", # required
+    #           },
+    #         },
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL
     #       },
     #     },
     #   })
@@ -3065,11 +4902,54 @@ module Aws::BedrockAgent
     #
     #   resp.data_source.created_at #=> Time
     #   resp.data_source.data_deletion_policy #=> String, one of "RETAIN", "DELETE"
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.auth_type #=> String, one of "BASIC", "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.host_type #=> String, one of "SAAS"
+    #   resp.data_source.data_source_configuration.confluence_configuration.source_configuration.host_url #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_arn #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.bucket_owner_account_id #=> String
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.data_source.data_source_configuration.s3_configuration.inclusion_prefixes[0] #=> String
-    #   resp.data_source.data_source_configuration.type #=> String, one of "S3"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.auth_type #=> String, one of "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.salesforce_configuration.source_configuration.host_url #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters[0].object_type #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.type #=> String, one of "PATTERN"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.auth_type #=> String, one of "OAUTH2_CLIENT_CREDENTIALS"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.credentials_secret_arn #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.domain #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.host_type #=> String, one of "ONLINE"
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.site_urls #=> Array
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.site_urls[0] #=> String
+    #   resp.data_source.data_source_configuration.share_point_configuration.source_configuration.tenant_id #=> String
+    #   resp.data_source.data_source_configuration.type #=> String, one of "S3", "WEB", "CONFLUENCE", "SALESFORCE", "SHAREPOINT"
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.exclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.inclusion_filters #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.data_source.data_source_configuration.web_configuration.crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.data_source.data_source_configuration.web_configuration.source_configuration.url_configuration.seed_urls #=> Array
+    #   resp.data_source.data_source_configuration.web_configuration.source_configuration.url_configuration.seed_urls[0].url #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.description #=> String
     #   resp.data_source.failure_reasons #=> Array
@@ -3079,9 +4959,22 @@ module Aws::BedrockAgent
     #   resp.data_source.server_side_encryption_configuration.kms_key_arn #=> String
     #   resp.data_source.status #=> String, one of "AVAILABLE", "DELETING", "DELETE_UNSUCCESSFUL"
     #   resp.data_source.updated_at #=> Time
-    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE"
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
     #   resp.data_source.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.intermediate_storage.s3_location.uri #=> String
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
+    #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateDataSource AWS API Documentation
     #
@@ -3089,6 +4982,311 @@ module Aws::BedrockAgent
     # @param [Hash] params ({})
     def update_data_source(params = {}, options = {})
       req = build_request(:update_data_source, params)
+      req.send_request(options)
+    end
+
+    # Modifies a flow. Include both fields that you want to keep and fields
+    # that you want to change. For more information, see [How it works][1]
+    # and [Create a flow in Amazon Bedrock][2] in the Amazon Bedrock User
+    # Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-how-it-works.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-create.html
+    #
+    # @option params [String] :customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
+    #
+    # @option params [Types::FlowDefinition] :definition
+    #   A definition of the nodes and the connections between the nodes in the
+    #   flow.
+    #
+    # @option params [String] :description
+    #   A description for the flow.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the service role with permissions to
+    #   create and manage a flow. For more information, see [Create a service
+    #   role for flows in Amazon Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-permissions.html
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @option params [required, String] :name
+    #   A name for the flow.
+    #
+    # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFlowResponse#arn #arn} => String
+    #   * {Types::UpdateFlowResponse#created_at #created_at} => Time
+    #   * {Types::UpdateFlowResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::UpdateFlowResponse#definition #definition} => Types::FlowDefinition
+    #   * {Types::UpdateFlowResponse#description #description} => String
+    #   * {Types::UpdateFlowResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::UpdateFlowResponse#id #id} => String
+    #   * {Types::UpdateFlowResponse#name #name} => String
+    #   * {Types::UpdateFlowResponse#status #status} => String
+    #   * {Types::UpdateFlowResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateFlowResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_flow({
+    #     customer_encryption_key_arn: "KmsKeyArn",
+    #     definition: {
+    #       connections: [
+    #         {
+    #           configuration: {
+    #             conditional: {
+    #               condition: "FlowConditionName", # required
+    #             },
+    #             data: {
+    #               source_output: "FlowNodeOutputName", # required
+    #               target_input: "FlowNodeInputName", # required
+    #             },
+    #           },
+    #           name: "FlowConnectionName", # required
+    #           source: "FlowNodeName", # required
+    #           target: "FlowNodeName", # required
+    #           type: "Data", # required, accepts Data, Conditional
+    #         },
+    #       ],
+    #       nodes: [
+    #         {
+    #           configuration: {
+    #             agent: {
+    #               agent_alias_arn: "AgentAliasArn", # required
+    #             },
+    #             collector: {
+    #             },
+    #             condition: {
+    #               conditions: [ # required
+    #                 {
+    #                   expression: "FlowConditionExpression",
+    #                   name: "FlowConditionName", # required
+    #                 },
+    #               ],
+    #             },
+    #             input: {
+    #             },
+    #             iterator: {
+    #             },
+    #             knowledge_base: {
+    #               knowledge_base_id: "KnowledgeBaseId", # required
+    #               model_id: "ModelIdentifier",
+    #             },
+    #             lambda_function: {
+    #               lambda_arn: "LambdaArn", # required
+    #             },
+    #             lex: {
+    #               bot_alias_arn: "LexBotAliasArn", # required
+    #               locale_id: "LexBotLocaleId", # required
+    #             },
+    #             output: {
+    #             },
+    #             prompt: {
+    #               source_configuration: { # required
+    #                 inline: {
+    #                   inference_configuration: {
+    #                     text: {
+    #                       max_tokens: 1,
+    #                       stop_sequences: ["String"],
+    #                       temperature: 1.0,
+    #                       top_k: 1,
+    #                       top_p: 1.0,
+    #                     },
+    #                   },
+    #                   model_id: "PromptModelIdentifier", # required
+    #                   template_configuration: { # required
+    #                     text: {
+    #                       input_variables: [
+    #                         {
+    #                           name: "PromptInputVariableName",
+    #                         },
+    #                       ],
+    #                       text: "TextPrompt", # required
+    #                     },
+    #                   },
+    #                   template_type: "TEXT", # required, accepts TEXT
+    #                 },
+    #                 resource: {
+    #                   prompt_arn: "PromptArn", # required
+    #                 },
+    #               },
+    #             },
+    #             retrieval: {
+    #               service_configuration: { # required
+    #                 s3: {
+    #                   bucket_name: "S3BucketName", # required
+    #                 },
+    #               },
+    #             },
+    #             storage: {
+    #               service_configuration: { # required
+    #                 s3: {
+    #                   bucket_name: "S3BucketName", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           inputs: [
+    #             {
+    #               expression: "FlowNodeInputExpression", # required
+    #               name: "FlowNodeInputName", # required
+    #               type: "String", # required, accepts String, Number, Boolean, Object, Array
+    #             },
+    #           ],
+    #           name: "FlowNodeName", # required
+    #           outputs: [
+    #             {
+    #               name: "FlowNodeOutputName", # required
+    #               type: "String", # required, accepts String, Number, Boolean, Object, Array
+    #             },
+    #           ],
+    #           type: "Input", # required, accepts Input, Output, KnowledgeBase, Condition, Lex, Prompt, LambdaFunction, Storage, Agent, Retrieval, Iterator, Collector
+    #         },
+    #       ],
+    #     },
+    #     description: "FlowDescription",
+    #     execution_role_arn: "FlowExecutionRoleArn", # required
+    #     flow_identifier: "FlowIdentifier", # required
+    #     name: "FlowName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.definition.connections #=> Array
+    #   resp.definition.connections[0].configuration.conditional.condition #=> String
+    #   resp.definition.connections[0].configuration.data.source_output #=> String
+    #   resp.definition.connections[0].configuration.data.target_input #=> String
+    #   resp.definition.connections[0].name #=> String
+    #   resp.definition.connections[0].source #=> String
+    #   resp.definition.connections[0].target #=> String
+    #   resp.definition.connections[0].type #=> String, one of "Data", "Conditional"
+    #   resp.definition.nodes #=> Array
+    #   resp.definition.nodes[0].configuration.agent.agent_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions #=> Array
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].expression #=> String
+    #   resp.definition.nodes[0].configuration.condition.conditions[0].name #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.knowledge_base_id #=> String
+    #   resp.definition.nodes[0].configuration.knowledge_base.model_id #=> String
+    #   resp.definition.nodes[0].configuration.lambda_function.lambda_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.bot_alias_arn #=> String
+    #   resp.definition.nodes[0].configuration.lex.locale_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.max_tokens #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.temperature #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_k #=> Integer
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.inference_configuration.text.top_p #=> Float
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.model_id #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables #=> Array
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.input_variables[0].name #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_configuration.text.text #=> String
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.inline.template_type #=> String, one of "TEXT"
+    #   resp.definition.nodes[0].configuration.prompt.source_configuration.resource.prompt_arn #=> String
+    #   resp.definition.nodes[0].configuration.retrieval.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].configuration.storage.service_configuration.s3.bucket_name #=> String
+    #   resp.definition.nodes[0].inputs #=> Array
+    #   resp.definition.nodes[0].inputs[0].expression #=> String
+    #   resp.definition.nodes[0].inputs[0].name #=> String
+    #   resp.definition.nodes[0].inputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].name #=> String
+    #   resp.definition.nodes[0].outputs #=> Array
+    #   resp.definition.nodes[0].outputs[0].name #=> String
+    #   resp.definition.nodes[0].outputs[0].type #=> String, one of "String", "Number", "Boolean", "Object", "Array"
+    #   resp.definition.nodes[0].type #=> String, one of "Input", "Output", "KnowledgeBase", "Condition", "Lex", "Prompt", "LambdaFunction", "Storage", "Agent", "Retrieval", "Iterator", "Collector"
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "Failed", "Prepared", "Preparing", "NotPrepared"
+    #   resp.updated_at #=> Time
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateFlow AWS API Documentation
+    #
+    # @overload update_flow(params = {})
+    # @param [Hash] params ({})
+    def update_flow(params = {}, options = {})
+      req = build_request(:update_flow, params)
+      req.send_request(options)
+    end
+
+    # Modifies the alias of a flow. Include both fields that you want to
+    # keep and ones that you want to change. For more information, see
+    # [Deploy a flow in Amazon Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/flows-deploy.html
+    #
+    # @option params [required, String] :alias_identifier
+    #   The unique identifier of the alias.
+    #
+    # @option params [String] :description
+    #   A description for the flow alias.
+    #
+    # @option params [required, String] :flow_identifier
+    #   The unique identifier of the flow.
+    #
+    # @option params [required, String] :name
+    #   The name of the flow alias.
+    #
+    # @option params [required, Array<Types::FlowAliasRoutingConfigurationListItem>] :routing_configuration
+    #   Contains information about the version to which to map the alias.
+    #
+    # @return [Types::UpdateFlowAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFlowAliasResponse#arn #arn} => String
+    #   * {Types::UpdateFlowAliasResponse#created_at #created_at} => Time
+    #   * {Types::UpdateFlowAliasResponse#description #description} => String
+    #   * {Types::UpdateFlowAliasResponse#flow_id #flow_id} => String
+    #   * {Types::UpdateFlowAliasResponse#id #id} => String
+    #   * {Types::UpdateFlowAliasResponse#name #name} => String
+    #   * {Types::UpdateFlowAliasResponse#routing_configuration #routing_configuration} => Array&lt;Types::FlowAliasRoutingConfigurationListItem&gt;
+    #   * {Types::UpdateFlowAliasResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_flow_alias({
+    #     alias_identifier: "FlowAliasIdentifier", # required
+    #     description: "Description",
+    #     flow_identifier: "FlowIdentifier", # required
+    #     name: "Name", # required
+    #     routing_configuration: [ # required
+    #       {
+    #         flow_version: "Version",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.flow_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.routing_configuration #=> Array
+    #   resp.routing_configuration[0].flow_version #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateFlowAlias AWS API Documentation
+    #
+    # @overload update_flow_alias(params = {})
+    # @param [Hash] params ({})
+    def update_flow_alias(params = {}, options = {})
+      req = build_request(:update_flow_alias, params)
       req.send_request(options)
     end
 
@@ -3275,6 +5473,123 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
+    # Modifies a prompt in your prompt library. Include both fields that you
+    # want to keep and fields that you want to replace. For more
+    # information, see [Prompt management in Amazon Bedrock][1] and [Edit
+    # prompts in your prompt library][2] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-edit
+    #
+    # @option params [String] :customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
+    #
+    # @option params [String] :default_variant
+    #   The name of the default variant for the prompt. This value must match
+    #   the `name` field in the relevant [PromptVariant][1] object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptVariant.html
+    #
+    # @option params [String] :description
+    #   A description for the prompt.
+    #
+    # @option params [required, String] :name
+    #   A name for the prompt.
+    #
+    # @option params [required, String] :prompt_identifier
+    #   The unique identifier of the prompt.
+    #
+    # @option params [Array<Types::PromptVariant>] :variants
+    #   A list of objects, each containing details about a variant of the
+    #   prompt.
+    #
+    # @return [Types::UpdatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePromptResponse#arn #arn} => String
+    #   * {Types::UpdatePromptResponse#created_at #created_at} => Time
+    #   * {Types::UpdatePromptResponse#customer_encryption_key_arn #customer_encryption_key_arn} => String
+    #   * {Types::UpdatePromptResponse#default_variant #default_variant} => String
+    #   * {Types::UpdatePromptResponse#description #description} => String
+    #   * {Types::UpdatePromptResponse#id #id} => String
+    #   * {Types::UpdatePromptResponse#name #name} => String
+    #   * {Types::UpdatePromptResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdatePromptResponse#variants #variants} => Array&lt;Types::PromptVariant&gt;
+    #   * {Types::UpdatePromptResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_prompt({
+    #     customer_encryption_key_arn: "KmsKeyArn",
+    #     default_variant: "PromptVariantName",
+    #     description: "PromptDescription",
+    #     name: "PromptName", # required
+    #     prompt_identifier: "PromptIdentifier", # required
+    #     variants: [
+    #       {
+    #         inference_configuration: {
+    #           text: {
+    #             max_tokens: 1,
+    #             stop_sequences: ["String"],
+    #             temperature: 1.0,
+    #             top_k: 1,
+    #             top_p: 1.0,
+    #           },
+    #         },
+    #         model_id: "PromptModelIdentifier",
+    #         name: "PromptVariantName", # required
+    #         template_configuration: {
+    #           text: {
+    #             input_variables: [
+    #               {
+    #                 name: "PromptInputVariableName",
+    #               },
+    #             ],
+    #             text: "TextPrompt", # required
+    #           },
+    #         },
+    #         template_type: "TEXT", # required, accepts TEXT
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.customer_encryption_key_arn #=> String
+    #   resp.default_variant #=> String
+    #   resp.description #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.updated_at #=> Time
+    #   resp.variants #=> Array
+    #   resp.variants[0].inference_configuration.text.max_tokens #=> Integer
+    #   resp.variants[0].inference_configuration.text.stop_sequences #=> Array
+    #   resp.variants[0].inference_configuration.text.stop_sequences[0] #=> String
+    #   resp.variants[0].inference_configuration.text.temperature #=> Float
+    #   resp.variants[0].inference_configuration.text.top_k #=> Integer
+    #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].model_id #=> String
+    #   resp.variants[0].name #=> String
+    #   resp.variants[0].template_configuration.text.input_variables #=> Array
+    #   resp.variants[0].template_configuration.text.input_variables[0].name #=> String
+    #   resp.variants[0].template_configuration.text.text #=> String
+    #   resp.variants[0].template_type #=> String, one of "TEXT"
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdatePrompt AWS API Documentation
+    #
+    # @overload update_prompt(params = {})
+    # @param [Hash] params ({})
+    def update_prompt(params = {}, options = {})
+      req = build_request(:update_prompt, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3288,7 +5603,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

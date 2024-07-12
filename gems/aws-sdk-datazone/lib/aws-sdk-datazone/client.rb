@@ -8461,7 +8461,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

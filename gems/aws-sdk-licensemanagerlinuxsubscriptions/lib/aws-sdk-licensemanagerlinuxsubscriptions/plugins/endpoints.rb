@@ -58,12 +58,26 @@ module Aws::LicenseManagerLinuxSubscriptions
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :deregister_subscription_provider
+            Aws::LicenseManagerLinuxSubscriptions::Endpoints::DeregisterSubscriptionProvider.build(context)
+          when :get_registered_subscription_provider
+            Aws::LicenseManagerLinuxSubscriptions::Endpoints::GetRegisteredSubscriptionProvider.build(context)
           when :get_service_settings
             Aws::LicenseManagerLinuxSubscriptions::Endpoints::GetServiceSettings.build(context)
           when :list_linux_subscription_instances
             Aws::LicenseManagerLinuxSubscriptions::Endpoints::ListLinuxSubscriptionInstances.build(context)
           when :list_linux_subscriptions
             Aws::LicenseManagerLinuxSubscriptions::Endpoints::ListLinuxSubscriptions.build(context)
+          when :list_registered_subscription_providers
+            Aws::LicenseManagerLinuxSubscriptions::Endpoints::ListRegisteredSubscriptionProviders.build(context)
+          when :list_tags_for_resource
+            Aws::LicenseManagerLinuxSubscriptions::Endpoints::ListTagsForResource.build(context)
+          when :register_subscription_provider
+            Aws::LicenseManagerLinuxSubscriptions::Endpoints::RegisterSubscriptionProvider.build(context)
+          when :tag_resource
+            Aws::LicenseManagerLinuxSubscriptions::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::LicenseManagerLinuxSubscriptions::Endpoints::UntagResource.build(context)
           when :update_service_settings
             Aws::LicenseManagerLinuxSubscriptions::Endpoints::UpdateServiceSettings.build(context)
           end

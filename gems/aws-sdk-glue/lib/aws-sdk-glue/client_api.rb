@@ -206,6 +206,8 @@ module Aws::Glue
     ConcurrentRunsExceededException = Shapes::StructureShape.new(name: 'ConcurrentRunsExceededException')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionCheckFailureException = Shapes::StructureShape.new(name: 'ConditionCheckFailureException')
+    ConditionExpression = Shapes::StructureShape.new(name: 'ConditionExpression')
+    ConditionExpressionList = Shapes::ListShape.new(name: 'ConditionExpressionList')
     ConditionList = Shapes::ListShape.new(name: 'ConditionList')
     ConfigValueString = Shapes::StringShape.new(name: 'ConfigValueString')
     ConfigurationMap = Shapes::MapShape.new(name: 'ConfigurationMap')
@@ -367,6 +369,8 @@ module Aws::Glue
     DatabaseInput = Shapes::StructureShape.new(name: 'DatabaseInput')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
+    DatabrewCondition = Shapes::StringShape.new(name: 'DatabrewCondition')
+    DatabrewConditionValue = Shapes::StringShape.new(name: 'DatabrewConditionValue')
     Datatype = Shapes::StructureShape.new(name: 'Datatype')
     DateColumnStatisticsData = Shapes::StructureShape.new(name: 'DateColumnStatisticsData')
     DecimalColumnStatisticsData = Shapes::StructureShape.new(name: 'DecimalColumnStatisticsData')
@@ -861,6 +865,7 @@ module Aws::Glue
     OAuth2PropertiesInput = Shapes::StructureShape.new(name: 'OAuth2PropertiesInput')
     OneInput = Shapes::ListShape.new(name: 'OneInput')
     OpenTableFormatInput = Shapes::StructureShape.new(name: 'OpenTableFormatInput')
+    Operation = Shapes::StringShape.new(name: 'Operation')
     OperationNotSupportedException = Shapes::StructureShape.new(name: 'OperationNotSupportedException')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
     Option = Shapes::StructureShape.new(name: 'Option')
@@ -886,6 +891,9 @@ module Aws::Glue
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParamType = Shapes::StringShape.new(name: 'ParamType')
+    ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
+    ParameterName = Shapes::StringShape.new(name: 'ParameterName')
+    ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
     ParquetCompressionType = Shapes::StringShape.new(name: 'ParquetCompressionType')
@@ -943,7 +951,10 @@ module Aws::Glue
     QuerySessionContext = Shapes::StructureShape.new(name: 'QuerySessionContext')
     QuoteChar = Shapes::StringShape.new(name: 'QuoteChar')
     Recipe = Shapes::StructureShape.new(name: 'Recipe')
+    RecipeAction = Shapes::StructureShape.new(name: 'RecipeAction')
     RecipeReference = Shapes::StructureShape.new(name: 'RecipeReference')
+    RecipeStep = Shapes::StructureShape.new(name: 'RecipeStep')
+    RecipeSteps = Shapes::ListShape.new(name: 'RecipeSteps')
     RecipeVersion = Shapes::StringShape.new(name: 'RecipeVersion')
     RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
     RecrawlBehavior = Shapes::StringShape.new(name: 'RecrawlBehavior')
@@ -1145,6 +1156,7 @@ module Aws::Glue
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
+    TargetColumn = Shapes::StringShape.new(name: 'TargetColumn')
     TargetFormat = Shapes::StringShape.new(name: 'TargetFormat')
     TaskRun = Shapes::StructureShape.new(name: 'TaskRun')
     TaskRunFilterCriteria = Shapes::StructureShape.new(name: 'TaskRunFilterCriteria')
@@ -1971,6 +1983,13 @@ module Aws::Glue
 
     ConditionCheckFailureException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     ConditionCheckFailureException.struct_class = Types::ConditionCheckFailureException
+
+    ConditionExpression.add_member(:condition, Shapes::ShapeRef.new(shape: DatabrewCondition, required: true, location_name: "Condition"))
+    ConditionExpression.add_member(:value, Shapes::ShapeRef.new(shape: DatabrewConditionValue, location_name: "Value"))
+    ConditionExpression.add_member(:target_column, Shapes::ShapeRef.new(shape: TargetColumn, required: true, location_name: "TargetColumn"))
+    ConditionExpression.struct_class = Types::ConditionExpression
+
+    ConditionExpressionList.member = Shapes::ShapeRef.new(shape: ConditionExpression)
 
     ConditionList.member = Shapes::ShapeRef.new(shape: Condition)
 
@@ -4641,6 +4660,9 @@ module Aws::Glue
     PIIDetection.add_member(:mask_value, Shapes::ShapeRef.new(shape: MaskValue, location_name: "MaskValue"))
     PIIDetection.struct_class = Types::PIIDetection
 
+    ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
+    ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
     ParametersMap.key = Shapes::ShapeRef.new(shape: KeyString)
     ParametersMap.value = Shapes::ShapeRef.new(shape: ParametersMapValue)
 
@@ -4802,12 +4824,23 @@ module Aws::Glue
 
     Recipe.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     Recipe.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
-    Recipe.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, required: true, location_name: "RecipeReference"))
+    Recipe.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, location_name: "RecipeReference"))
+    Recipe.add_member(:recipe_steps, Shapes::ShapeRef.new(shape: RecipeSteps, location_name: "RecipeSteps"))
     Recipe.struct_class = Types::Recipe
+
+    RecipeAction.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, required: true, location_name: "Operation"))
+    RecipeAction.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "Parameters"))
+    RecipeAction.struct_class = Types::RecipeAction
 
     RecipeReference.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "RecipeArn"))
     RecipeReference.add_member(:recipe_version, Shapes::ShapeRef.new(shape: RecipeVersion, required: true, location_name: "RecipeVersion"))
     RecipeReference.struct_class = Types::RecipeReference
+
+    RecipeStep.add_member(:action, Shapes::ShapeRef.new(shape: RecipeAction, required: true, location_name: "Action"))
+    RecipeStep.add_member(:condition_expressions, Shapes::ShapeRef.new(shape: ConditionExpressionList, location_name: "ConditionExpressions"))
+    RecipeStep.struct_class = Types::RecipeStep
+
+    RecipeSteps.member = Shapes::ShapeRef.new(shape: RecipeStep)
 
     RecrawlPolicy.add_member(:recrawl_behavior, Shapes::ShapeRef.new(shape: RecrawlBehavior, location_name: "RecrawlBehavior"))
     RecrawlPolicy.struct_class = Types::RecrawlPolicy

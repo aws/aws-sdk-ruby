@@ -166,6 +166,7 @@ module Aws::MediaConnect
       attr_accessor smoothing_latency: ::Integer
       attr_accessor stream_id: ::String
       attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      attr_accessor output_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -875,6 +876,7 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
       attr_accessor bridge_arn: ::String
       attr_accessor bridge_ports: ::Array[::Integer]
+      attr_accessor output_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1295,6 +1297,7 @@ module Aws::MediaConnect
       attr_accessor smoothing_latency: ::Integer
       attr_accessor stream_id: ::String
       attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      attr_accessor output_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

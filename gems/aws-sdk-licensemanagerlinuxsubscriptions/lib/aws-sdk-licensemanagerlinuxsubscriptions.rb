@@ -32,7 +32,7 @@ require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/customizations'
 # structure.
 #
 #     license_manager_linux_subscriptions = Aws::LicenseManagerLinuxSubscriptions::Client.new
-#     resp = license_manager_linux_subscriptions.get_service_settings(params)
+#     resp = license_manager_linux_subscriptions.deregister_subscription_provider(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-licensemanagerlinuxsubscriptions/customizations'
 # @!group service
 module Aws::LicenseManagerLinuxSubscriptions
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end

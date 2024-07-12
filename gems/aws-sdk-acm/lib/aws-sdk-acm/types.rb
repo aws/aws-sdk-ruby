@@ -321,30 +321,20 @@ module Aws::ACM
     #   certificate and additional domain names that can be used to connect
     #   to the website.
     #
-    #   When called by [ListCertificates][1], this parameter will only
-    #   return the first 100 subject alternative names included in the
-    #   certificate. To display the full list of subject alternative names,
-    #   use [DescribeCertificate][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
-    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+    #   When called by ListCertificates, this parameter will only return the
+    #   first 100 subject alternative names included in the certificate. To
+    #   display the full list of subject alternative names, use
+    #   DescribeCertificate.
     #   @return [Array<String>]
     #
     # @!attribute [rw] has_additional_subject_alternative_names
-    #   When called by [ListCertificates][1], indicates whether the full
-    #   list of subject alternative names has been included in the response.
-    #   If false, the response includes all of the subject alternative names
+    #   When called by ListCertificates, indicates whether the full list of
+    #   subject alternative names has been included in the response. If
+    #   false, the response includes all of the subject alternative names
     #   included in the certificate. If true, the response only includes the
     #   first 100 subject alternative names included in the certificate. To
     #   display the full list of subject alternative names, use
-    #   [DescribeCertificate][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
-    #   [2]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
+    #   DescribeCertificate.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -560,9 +550,9 @@ module Aws::ACM
     #
     #   * `PENDING_VALIDATION`
     #
-    #   * ``SUCCESS
+    #   * `SUCCESS`
     #
-    #   * ``FAILED
+    #   * `FAILED`
     #   @return [String]
     #
     # @!attribute [rw] resource_record
@@ -1337,13 +1327,38 @@ module Aws::ACM
     #   for ACM certificates. Elliptic Curve Digital Signature Algorithm
     #   (ECDSA) keys are smaller, offering security comparable to RSA keys
     #   but with greater computing efficiency. However, ECDSA is not
-    #   supported by all network clients. Some AWS services may require RSA
-    #   keys, or only support ECDSA keys of a particular size, while others
-    #   allow the use of either RSA and ECDSA keys to ensure that
-    #   compatibility is not broken. Check the requirements for the AWS
-    #   service where you plan to deploy your certificate.
+    #   supported by all network clients. Some Amazon Web Services services
+    #   may require RSA keys, or only support ECDSA keys of a particular
+    #   size, while others allow the use of either RSA and ECDSA keys to
+    #   ensure that compatibility is not broken. Check the requirements for
+    #   the Amazon Web Services service where you plan to deploy your
+    #   certificate. For more information about selecting an algorithm, see
+    #   [Key algorithms][1].
+    #
+    #   <note markdown="1"> Algorithms supported for an ACM certificate request include:
+    #
+    #    * `RSA_2048`
+    #
+    #   * `EC_prime256v1`
+    #
+    #   * `EC_secp384r1`
+    #
+    #    Other listed algorithms are for imported certificates only.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> When you request a private PKI certificate signed by a CA from
+    #   Amazon Web Services Private CA, the specified signing algorithm
+    #   family (RSA or ECDSA) must match the algorithm family of the CA's
+    #   secret key.
+    #
+    #    </note>
     #
     #   Default: RSA\_2048
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation

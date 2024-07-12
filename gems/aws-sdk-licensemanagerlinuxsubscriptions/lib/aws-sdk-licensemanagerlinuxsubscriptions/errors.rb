@@ -28,6 +28,7 @@ module Aws::LicenseManagerLinuxSubscriptions
   #
   # ## Error Classes
   # * {InternalServerException}
+  # * {ResourceNotFoundException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -42,6 +43,21 @@ module Aws::LicenseManagerLinuxSubscriptions
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::LicenseManagerLinuxSubscriptions::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LicenseManagerLinuxSubscriptions::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -3021,6 +3021,31 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Condition expression defined in the Glue Studio data preparation
+    # recipe node.
+    #
+    # @!attribute [rw] condition
+    #   The condition of the condition expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the condition expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_column
+    #   The target column of the condition expressions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConditionExpression AWS API Documentation
+    #
+    class ConditionExpression < Struct.new(
+      :condition,
+      :value,
+      :target_column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the values that an admin sets for each job or session
     # parameter configured in a Glue usage profile.
     #
@@ -17756,12 +17781,36 @@ module Aws::Glue
     #   A reference to the DataBrew recipe used by the node.
     #   @return [Types::RecipeReference]
     #
+    # @!attribute [rw] recipe_steps
+    #   Transform steps used in the recipe node.
+    #   @return [Array<Types::RecipeStep>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Recipe AWS API Documentation
     #
     class Recipe < Struct.new(
       :name,
       :inputs,
-      :recipe_reference)
+      :recipe_reference,
+      :recipe_steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Actions defined in the Glue Studio data preparation recipe node.
+    #
+    # @!attribute [rw] operation
+    #   The operation of the recipe action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the recipe action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RecipeAction AWS API Documentation
+    #
+    class RecipeAction < Struct.new(
+      :operation,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17781,6 +17830,25 @@ module Aws::Glue
     class RecipeReference < Struct.new(
       :recipe_arn,
       :recipe_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A recipe step used in a Glue Studio data preparation recipe node.
+    #
+    # @!attribute [rw] action
+    #   The transformation action of the recipe step.
+    #   @return [Types::RecipeAction]
+    #
+    # @!attribute [rw] condition_expressions
+    #   The condition expressions for the recipe step.
+    #   @return [Array<Types::ConditionExpression>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RecipeStep AWS API Documentation
+    #
+    class RecipeStep < Struct.new(
+      :action,
+      :condition_expressions)
       SENSITIVE = []
       include Aws::Structure
     end

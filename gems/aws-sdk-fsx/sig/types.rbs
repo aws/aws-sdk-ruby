@@ -23,10 +23,10 @@ module Aws::FSx
     end
 
     class AdministrativeAction
-      attr_accessor administrative_action_type: ("FILE_SYSTEM_UPDATE" | "STORAGE_OPTIMIZATION" | "FILE_SYSTEM_ALIAS_ASSOCIATION" | "FILE_SYSTEM_ALIAS_DISASSOCIATION" | "VOLUME_UPDATE" | "SNAPSHOT_UPDATE" | "RELEASE_NFS_V3_LOCKS" | "VOLUME_RESTORE" | "THROUGHPUT_OPTIMIZATION" | "IOPS_OPTIMIZATION" | "STORAGE_TYPE_OPTIMIZATION" | "MISCONFIGURED_STATE_RECOVERY" | "VOLUME_UPDATE_WITH_SNAPSHOT" | "VOLUME_INITIALIZE_WITH_SNAPSHOT")
+      attr_accessor administrative_action_type: ("FILE_SYSTEM_UPDATE" | "STORAGE_OPTIMIZATION" | "FILE_SYSTEM_ALIAS_ASSOCIATION" | "FILE_SYSTEM_ALIAS_DISASSOCIATION" | "VOLUME_UPDATE" | "SNAPSHOT_UPDATE" | "RELEASE_NFS_V3_LOCKS" | "VOLUME_RESTORE" | "THROUGHPUT_OPTIMIZATION" | "IOPS_OPTIMIZATION" | "STORAGE_TYPE_OPTIMIZATION" | "MISCONFIGURED_STATE_RECOVERY" | "VOLUME_UPDATE_WITH_SNAPSHOT" | "VOLUME_INITIALIZE_WITH_SNAPSHOT" | "DOWNLOAD_DATA_FROM_BACKUP")
       attr_accessor progress_percent: ::Integer
       attr_accessor request_time: ::Time
-      attr_accessor status: ("FAILED" | "IN_PROGRESS" | "PENDING" | "COMPLETED" | "UPDATED_OPTIMIZING")
+      attr_accessor status: ("FAILED" | "IN_PROGRESS" | "PENDING" | "COMPLETED" | "UPDATED_OPTIMIZING" | "OPTIMIZING")
       attr_accessor target_file_system_values: Types::FileSystem
       attr_accessor failure_details: Types::AdministrativeActionFailureDetails
       attr_accessor target_volume_values: Types::Volume
@@ -313,7 +313,7 @@ module Aws::FSx
     class CreateFileSystemOntapConfiguration
       attr_accessor automatic_backup_retention_days: ::Integer
       attr_accessor daily_automatic_backup_start_time: ::String
-      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2")
       attr_accessor endpoint_ip_address_range: ::String
       attr_accessor fsx_admin_password: ::String
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
@@ -331,7 +331,7 @@ module Aws::FSx
       attr_accessor copy_tags_to_backups: bool
       attr_accessor copy_tags_to_volumes: bool
       attr_accessor daily_automatic_backup_start_time: ::String
-      attr_accessor deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1")
+      attr_accessor deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "SINGLE_AZ_HA_1" | "SINGLE_AZ_HA_2" | "MULTI_AZ_1")
       attr_accessor throughput_capacity: ::Integer
       attr_accessor weekly_maintenance_start_time: ::String
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
@@ -1176,7 +1176,7 @@ module Aws::FSx
     class OntapFileSystemConfiguration
       attr_accessor automatic_backup_retention_days: ::Integer
       attr_accessor daily_automatic_backup_start_time: ::String
-      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")
+      attr_accessor deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_2")
       attr_accessor endpoint_ip_address_range: ::String
       attr_accessor endpoints: Types::FileSystemEndpoints
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
@@ -1231,7 +1231,7 @@ module Aws::FSx
       attr_accessor copy_tags_to_backups: bool
       attr_accessor copy_tags_to_volumes: bool
       attr_accessor daily_automatic_backup_start_time: ::String
-      attr_accessor deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1")
+      attr_accessor deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "SINGLE_AZ_HA_1" | "SINGLE_AZ_HA_2" | "MULTI_AZ_1")
       attr_accessor throughput_capacity: ::Integer
       attr_accessor weekly_maintenance_start_time: ::String
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration
@@ -1573,6 +1573,7 @@ module Aws::FSx
       attr_accessor add_route_table_ids: ::Array[::String]
       attr_accessor remove_route_table_ids: ::Array[::String]
       attr_accessor throughput_capacity_per_ha_pair: ::Integer
+      attr_accessor ha_pairs: ::Integer
       SENSITIVE: [:fsx_admin_password]
     end
 

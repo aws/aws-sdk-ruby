@@ -73,6 +73,30 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _DeregisterSubscriptionProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterSubscriptionProviderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerLinuxSubscriptions/Client.html#deregister_subscription_provider-instance_method
+      def deregister_subscription_provider: (
+                                              subscription_provider_arn: ::String
+                                            ) -> _DeregisterSubscriptionProviderResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterSubscriptionProviderResponseSuccess
+
+      interface _GetRegisteredSubscriptionProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegisteredSubscriptionProviderResponse]
+        def last_successful_data_retrieval_time: () -> ::String
+        def secret_arn: () -> ::String
+        def subscription_provider_arn: () -> ::String
+        def subscription_provider_source: () -> ("RedHat")
+        def subscription_provider_status: () -> ("ACTIVE" | "INVALID" | "PENDING")
+        def subscription_provider_status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerLinuxSubscriptions/Client.html#get_registered_subscription_provider-instance_method
+      def get_registered_subscription_provider: (
+                                                  subscription_provider_arn: ::String
+                                                ) -> _GetRegisteredSubscriptionProviderResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegisteredSubscriptionProviderResponseSuccess
+
       interface _GetServiceSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceSettingsResponse]
         def home_regions: () -> ::Array[::String]
@@ -123,6 +147,63 @@ module Aws
                                       ?next_token: ::String
                                     ) -> _ListLinuxSubscriptionsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLinuxSubscriptionsResponseSuccess
+
+      interface _ListRegisteredSubscriptionProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegisteredSubscriptionProvidersResponse]
+        def next_token: () -> ::String
+        def registered_subscription_providers: () -> ::Array[Types::RegisteredSubscriptionProvider]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerLinuxSubscriptions/Client.html#list_registered_subscription_providers-instance_method
+      def list_registered_subscription_providers: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?subscription_provider_sources: Array[("RedHat")]
+                                                  ) -> _ListRegisteredSubscriptionProvidersResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegisteredSubscriptionProvidersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerLinuxSubscriptions/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterSubscriptionProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterSubscriptionProviderResponse]
+        def subscription_provider_arn: () -> ::String
+        def subscription_provider_source: () -> ("RedHat")
+        def subscription_provider_status: () -> ("ACTIVE" | "INVALID" | "PENDING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerLinuxSubscriptions/Client.html#register_subscription_provider-instance_method
+      def register_subscription_provider: (
+                                            secret_arn: ::String,
+                                            subscription_provider_source: ("RedHat"),
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _RegisterSubscriptionProviderResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterSubscriptionProviderResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerLinuxSubscriptions/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerLinuxSubscriptions/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
       interface _UpdateServiceSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceSettingsResponse]

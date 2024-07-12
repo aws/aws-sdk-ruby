@@ -32,6 +32,60 @@ module Aws::BedrockRuntime
     #
     class AnyToolChoice < Aws::EmptyStructure; end
 
+    # @!attribute [rw] guardrail_identifier
+    #   The guardrail identifier used in the request to apply the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   The guardrail version used in the request to apply the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of data used in the request to apply the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content details used in the request to apply the guardrail.
+    #   @return [Array<Types::GuardrailContentBlock>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ApplyGuardrailRequest AWS API Documentation
+    #
+    class ApplyGuardrailRequest < Struct.new(
+      :guardrail_identifier,
+      :guardrail_version,
+      :source,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] usage
+    #   The usage details in the response from the guardrail.
+    #   @return [Types::GuardrailUsage]
+    #
+    # @!attribute [rw] action
+    #   The action taken in the response from the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   The output details in the response from the guardrail.
+    #   @return [Array<Types::GuardrailOutputContent>]
+    #
+    # @!attribute [rw] assessments
+    #   The assessment details in the response from the guardrail.
+    #   @return [Array<Types::GuardrailAssessment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ApplyGuardrailResponse AWS API Documentation
+    #
+    class ApplyGuardrailResponse < Struct.new(
+      :usage,
+      :action,
+      :outputs,
+      :assessments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Model automatically decides if a tool should be called or whether
     # to generate text instead. For example, `\{"auto" : \{\}\}`.
     #
@@ -42,7 +96,12 @@ module Aws::BedrockRuntime
     class AutoToolChoice < Aws::EmptyStructure; end
 
     # A block of content for a message that you pass to, or receive from, a
-    # model with the Converse API (Converse and ConverseStream).
+    # model with the [Converse][1] or [ConverseStream][2] API operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
     #
     # @note ContentBlock is a union - when making an API calls you must set exactly one of the members.
     #
@@ -403,8 +462,12 @@ module Aws::BedrockRuntime
     #   @return [Types::ConverseStreamMetrics]
     #
     # @!attribute [rw] trace
-    #   The trace object in the response from ConverseStream that contains
-    #   information about the guardrail behavior.
+    #   The trace object in the response from [ConverseStream][1] that
+    #   contains information about the guardrail behavior.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
     #   @return [Types::ConverseStreamTrace]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStreamMetadataEvent AWS API Documentation
@@ -540,8 +603,12 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The trace object in a response from ConverseStream. Currently, you can
-    # only trace guardrails.
+    # The trace object in a response from [ConverseStream][1]. Currently,
+    # you can only trace guardrails.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
     #
     # @!attribute [rw] guardrail
     #   The guardrail trace object.
@@ -555,8 +622,12 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The trace object in a response from Converse. Currently, you can only
-    # trace guardrails.
+    # The trace object in a response from [Converse][1]. Currently, you can
+    # only trace guardrails.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
     #
     # @!attribute [rw] guardrail
     #   The guardrail trace object.
@@ -570,21 +641,31 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # A document to include in a message when sending a [Converse][1] or
-    # [ConverseStream][2] request. You can include up to 5 documents in a
-    # request. The maximum document size is 50 MB.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+    # A document to include in a message.
     #
     # @!attribute [rw] format
     #   The format of a document, or its extension.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A name for the document.
+    #   A name for the document. The name can only contain the following
+    #   characters:
+    #
+    #   * Alphanumeric characters
+    #
+    #   * Whitespace characters (no more than one in a row)
+    #
+    #   * Hyphens
+    #
+    #   * Parentheses
+    #
+    #   * Square brackets
+    #
+    #   <note markdown="1"> This field is vulnerable to prompt injections, because the model
+    #   might inadvertently interpret it as instructions. Therefore, we
+    #   recommend that you specify a neutral name.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -601,22 +682,15 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # Contains the content of the document included in a message when
-    # sending a [Converse][1] or [ConverseStream][2] request or in the
-    # response.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+    # Contains the content of a document.
     #
     # @note DocumentSource is a union - when making an API calls you must set exactly one of the members.
     #
     # @note DocumentSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DocumentSource corresponding to the set member.
     #
     # @!attribute [rw] bytes
-    #   A base64-encoded string of a UTF-8 encoded file, that is the
-    #   document to include in the message.
+    #   The raw bytes for the document. If you use an Amazon Web Services
+    #   SDK, you don't need to encode the bytes in base64.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/DocumentSource AWS API Documentation
@@ -651,19 +725,28 @@ module Aws::BedrockRuntime
     #   The sensitive information policy.
     #   @return [Types::GuardrailSensitiveInformationPolicyAssessment]
     #
+    # @!attribute [rw] contextual_grounding_policy
+    #   The contextual grounding policy used for the guardrail assessment.
+    #   @return [Types::GuardrailContextualGroundingPolicyAssessment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailAssessment AWS API Documentation
     #
     class GuardrailAssessment < Struct.new(
       :topic_policy,
       :content_policy,
       :word_policy,
-      :sensitive_information_policy)
+      :sensitive_information_policy,
+      :contextual_grounding_policy)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Configuration information for a guardrail that you use with the
-    # Converse action.
+    # [Converse][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
     #
     # @!attribute [rw] guardrail_identifier
     #   The identifier for the guardrail.
@@ -685,6 +768,27 @@ module Aws::BedrockRuntime
       :trace)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The content block to be evaluated by the guardrail.
+    #
+    # @note GuardrailContentBlock is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] text
+    #   Text within content block to be evaluated by the guardrail.
+    #   @return [Types::GuardrailTextBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailContentBlock AWS API Documentation
+    #
+    class GuardrailContentBlock < Struct.new(
+      :text,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < GuardrailContentBlock; end
+      class Unknown < GuardrailContentBlock; end
     end
 
     # The content filter for a guardrail.
@@ -725,8 +829,58 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # A content block for selective guarding with the Converse API (Converse
-    # and ConverseStream).
+    # The details for the guardrails contextual grounding filter.
+    #
+    # @!attribute [rw] type
+    #   The contextual grounding filter type.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold used by contextual grounding filter to determine
+    #   whether the content is grounded or not.
+    #   @return [Float]
+    #
+    # @!attribute [rw] score
+    #   The score generated by contextual grounding filter.
+    #   @return [Float]
+    #
+    # @!attribute [rw] action
+    #   The action performed by the guardrails contextual grounding filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailContextualGroundingFilter AWS API Documentation
+    #
+    class GuardrailContextualGroundingFilter < Struct.new(
+      :type,
+      :threshold,
+      :score,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The policy assessment details for the guardrails contextual grounding
+    # filter.
+    #
+    # @!attribute [rw] filters
+    #   The filter details for the guardrails contextual grounding filter.
+    #   @return [Array<Types::GuardrailContextualGroundingFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailContextualGroundingPolicyAssessment AWS API Documentation
+    #
+    class GuardrailContextualGroundingPolicyAssessment < Struct.new(
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A content block for selective guarding with the [Converse][1] or
+    # [ConverseStream][2] API operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
     #
     # @note GuardrailConverseContentBlock is a union - when making an API calls you must set exactly one of the members.
     #
@@ -756,10 +910,16 @@ module Aws::BedrockRuntime
     #   The text that you want to guard.
     #   @return [String]
     #
+    # @!attribute [rw] qualifiers
+    #   The qualifier details for the guardrails contextual grounding
+    #   filter.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailConverseTextBlock AWS API Documentation
     #
     class GuardrailConverseTextBlock < Struct.new(
-      :text)
+      :text,
+      :qualifiers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -803,6 +963,20 @@ module Aws::BedrockRuntime
       :match,
       :type,
       :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output content produced by the guardrail.
+    #
+    # @!attribute [rw] text
+    #   The specific text for the output content produced by the guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailOutputContent AWS API Documentation
+    #
+    class GuardrailOutputContent < Struct.new(
+      :text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -913,6 +1087,25 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # The text block to be evaluated by the guardrail.
+    #
+    # @!attribute [rw] text
+    #   The input text details to be evaluated by the guardrail.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifiers
+    #   The qualifiers describing the text block.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailTextBlock AWS API Documentation
+    #
+    class GuardrailTextBlock < Struct.new(
+      :text,
+      :qualifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a topic guardrail.
     #
     # @!attribute [rw] name
@@ -977,6 +1170,46 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # The details on the use of the guardrail.
+    #
+    # @!attribute [rw] topic_policy_units
+    #   The topic policy units processed by the guardrail.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content_policy_units
+    #   The content policy units processed by the guardrail.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] word_policy_units
+    #   The word policy units processed by the guardrail.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sensitive_information_policy_units
+    #   The sensitive information policy units processed by the guardrail.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sensitive_information_policy_free_units
+    #   The sensitive information policy free units processed by the
+    #   guardrail.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] contextual_grounding_policy_units
+    #   The contextual grounding policy units processed by the guardrail.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailUsage AWS API Documentation
+    #
+    class GuardrailUsage < Struct.new(
+      :topic_policy_units,
+      :content_policy_units,
+      :word_policy_units,
+      :sensitive_information_policy_units,
+      :sensitive_information_policy_free_units,
+      :contextual_grounding_policy_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The word policy assessment.
     #
     # @!attribute [rw] custom_words
@@ -1023,7 +1256,7 @@ module Aws::BedrockRuntime
     #
     # @!attribute [rw] bytes
     #   The raw image bytes for the image. If you use an AWS SDK, you don't
-    #   need to base64 encode the image bytes.
+    #   need to encode the image bytes in base64.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ImageSource AWS API Documentation
@@ -1359,7 +1592,19 @@ module Aws::BedrockRuntime
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The message content.
+    #   The message content. Note the following restrictions:
+    #
+    #   * You can include up to 20 images. Each image's size, height, and
+    #     width must be no more than 3.75 MB, 8000 px, and 8000 px,
+    #     respectively.
+    #
+    #   * You can include up to five documents. Each document's size must
+    #     be no more than 4.5 MB.
+    #
+    #   * If you include a `ContentBlock` with a `document` field in the
+    #     array, you must also include a `ContentBlock` with a `text` field.
+    #
+    #   * You can only include images and documents if the `role` is `user`.
     #   @return [Array<Types::ContentBlock>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/Message AWS API Documentation
@@ -1553,11 +1798,16 @@ module Aws::BedrockRuntime
     #   @return [String]
     #
     # @!attribute [rw] guard_content
-    #   A content block to assess with the guardrail. Use with the Converse
-    #   API (Converse and ConverseStream).
+    #   A content block to assess with the guardrail. Use with the
+    #   [Converse][1] or [ConverseStream][2] API operations.
     #
     #   For more information, see *Use a guardrail with the Converse API* in
     #   the *Amazon Bedrock User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
     #   @return [Types::GuardrailConverseContentBlock]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/SystemContentBlock AWS API Documentation
@@ -1613,7 +1863,13 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # Information about a tool that you can use with the Converse API.
+    # Information about a tool that you can use with the Converse API. For
+    # more information, see [Tool use (function calling)][1] in the Amazon
+    # Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @note Tool is a union - when making an API calls you must set exactly one of the members.
     #
@@ -1671,12 +1927,18 @@ module Aws::BedrockRuntime
       class Unknown < ToolChoice; end
     end
 
-    # Configuration information for the tools that you pass to a model.
+    # Configuration information for the tools that you pass to a model. For
+    # more information, see [Tool use (function calling)][1] in the Amazon
+    # Bedrock User Guide.
     #
     # <note markdown="1"> This field is only supported by Anthropic Claude 3, Cohere Command R,
     # Cohere Command R+, and Mistral Large models.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @!attribute [rw] tools
     #   An array of tools that you want to pass to a model.

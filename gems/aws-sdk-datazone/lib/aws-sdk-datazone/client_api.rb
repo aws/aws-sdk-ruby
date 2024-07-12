@@ -1246,11 +1246,11 @@ module Aws::DataZone
     DataProductItem.add_member(:item_id, Shapes::ShapeRef.new(shape: DataProductId, location_name: "itemId"))
     DataProductItem.struct_class = Types::DataProductItem
 
-    DataProductItems.member = Shapes::ShapeRef.new(shape: DataProductItem)
+    DataProductItems.member = Shapes::ShapeRef.new(shape: DataProductItem, deprecated: true)
 
     DataProductSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     DataProductSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
-    DataProductSummary.add_member(:data_product_items, Shapes::ShapeRef.new(shape: DataProductItems, location_name: "dataProductItems"))
+    DataProductSummary.add_member(:data_product_items, Shapes::ShapeRef.new(shape: DataProductItems, deprecated: true, location_name: "dataProductItems"))
     DataProductSummary.add_member(:description, Shapes::ShapeRef.new(shape: DataProductDescription, location_name: "description"))
     DataProductSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
     DataProductSummary.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
@@ -2786,7 +2786,7 @@ module Aws::DataZone
     SearchInput.struct_class = Types::SearchInput
 
     SearchInventoryResultItem.add_member(:asset_item, Shapes::ShapeRef.new(shape: AssetItem, location_name: "assetItem"))
-    SearchInventoryResultItem.add_member(:data_product_item, Shapes::ShapeRef.new(shape: DataProductSummary, location_name: "dataProductItem"))
+    SearchInventoryResultItem.add_member(:data_product_item, Shapes::ShapeRef.new(shape: DataProductSummary, deprecated: true, location_name: "dataProductItem", metadata: {"deprecatedMessage"=>"This field is deprecated."}))
     SearchInventoryResultItem.add_member(:glossary_item, Shapes::ShapeRef.new(shape: GlossaryItem, location_name: "glossaryItem"))
     SearchInventoryResultItem.add_member(:glossary_term_item, Shapes::ShapeRef.new(shape: GlossaryTermItem, location_name: "glossaryTermItem"))
     SearchInventoryResultItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
