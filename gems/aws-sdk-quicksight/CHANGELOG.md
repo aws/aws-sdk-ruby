@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2024-07-12)
+------------------
+
+* Feature - Vega ally control options and Support for Reviewed Answers in Topics
+
 1.117.0 (2024-07-02)
 ------------------
 

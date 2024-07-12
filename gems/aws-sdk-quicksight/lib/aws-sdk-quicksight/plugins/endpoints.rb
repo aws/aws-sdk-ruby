@@ -58,6 +58,10 @@ module Aws::QuickSight
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_create_topic_reviewed_answer
+            Aws::QuickSight::Endpoints::BatchCreateTopicReviewedAnswer.build(context)
+          when :batch_delete_topic_reviewed_answer
+            Aws::QuickSight::Endpoints::BatchDeleteTopicReviewedAnswer.build(context)
           when :cancel_ingestion
             Aws::QuickSight::Endpoints::CancelIngestion.build(context)
           when :create_account_customization
@@ -302,6 +306,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListThemes.build(context)
           when :list_topic_refresh_schedules
             Aws::QuickSight::Endpoints::ListTopicRefreshSchedules.build(context)
+          when :list_topic_reviewed_answers
+            Aws::QuickSight::Endpoints::ListTopicReviewedAnswers.build(context)
           when :list_topics
             Aws::QuickSight::Endpoints::ListTopics.build(context)
           when :list_user_groups

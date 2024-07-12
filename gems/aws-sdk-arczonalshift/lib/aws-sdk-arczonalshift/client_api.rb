@@ -19,6 +19,7 @@ module Aws::ARCZonalShift
     AutoshiftAppliedStatus = Shapes::StringShape.new(name: 'AutoshiftAppliedStatus')
     AutoshiftExecutionStatus = Shapes::StringShape.new(name: 'AutoshiftExecutionStatus')
     AutoshiftInResource = Shapes::StructureShape.new(name: 'AutoshiftInResource')
+    AutoshiftObserverNotificationStatus = Shapes::StringShape.new(name: 'AutoshiftObserverNotificationStatus')
     AutoshiftSummaries = Shapes::ListShape.new(name: 'AutoshiftSummaries')
     AutoshiftSummary = Shapes::StructureShape.new(name: 'AutoshiftSummary')
     AutoshiftsInResource = Shapes::ListShape.new(name: 'AutoshiftsInResource')
@@ -40,6 +41,8 @@ module Aws::ARCZonalShift
     DeletePracticeRunConfigurationResponse = Shapes::StructureShape.new(name: 'DeletePracticeRunConfigurationResponse')
     ExpiresIn = Shapes::StringShape.new(name: 'ExpiresIn')
     ExpiryTime = Shapes::TimestampShape.new(name: 'ExpiryTime')
+    GetAutoshiftObserverNotificationStatusRequest = Shapes::StructureShape.new(name: 'GetAutoshiftObserverNotificationStatusRequest')
+    GetAutoshiftObserverNotificationStatusResponse = Shapes::StructureShape.new(name: 'GetAutoshiftObserverNotificationStatusResponse')
     GetManagedResourceRequest = Shapes::StructureShape.new(name: 'GetManagedResourceRequest')
     GetManagedResourceResponse = Shapes::StructureShape.new(name: 'GetManagedResourceResponse')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -62,6 +65,8 @@ module Aws::ARCZonalShift
     StartZonalShiftRequest = Shapes::StructureShape.new(name: 'StartZonalShiftRequest')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UpdateAutoshiftObserverNotificationStatusRequest = Shapes::StructureShape.new(name: 'UpdateAutoshiftObserverNotificationStatusRequest')
+    UpdateAutoshiftObserverNotificationStatusResponse = Shapes::StructureShape.new(name: 'UpdateAutoshiftObserverNotificationStatusResponse')
     UpdatePracticeRunConfigurationRequest = Shapes::StructureShape.new(name: 'UpdatePracticeRunConfigurationRequest')
     UpdatePracticeRunConfigurationResponse = Shapes::StructureShape.new(name: 'UpdatePracticeRunConfigurationResponse')
     UpdateZonalAutoshiftConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateZonalAutoshiftConfigurationRequest')
@@ -142,6 +147,11 @@ module Aws::ARCZonalShift
     DeletePracticeRunConfigurationResponse.add_member(:zonal_autoshift_status, Shapes::ShapeRef.new(shape: ZonalAutoshiftStatus, required: true, location_name: "zonalAutoshiftStatus"))
     DeletePracticeRunConfigurationResponse.struct_class = Types::DeletePracticeRunConfigurationResponse
 
+    GetAutoshiftObserverNotificationStatusRequest.struct_class = Types::GetAutoshiftObserverNotificationStatusRequest
+
+    GetAutoshiftObserverNotificationStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: AutoshiftObserverNotificationStatus, required: true, location_name: "status"))
+    GetAutoshiftObserverNotificationStatusResponse.struct_class = Types::GetAutoshiftObserverNotificationStatusResponse
+
     GetManagedResourceRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "resourceIdentifier"))
     GetManagedResourceRequest.struct_class = Types::GetManagedResourceRequest
 
@@ -214,6 +224,12 @@ module Aws::ARCZonalShift
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UpdateAutoshiftObserverNotificationStatusRequest.add_member(:status, Shapes::ShapeRef.new(shape: AutoshiftObserverNotificationStatus, required: true, location_name: "status"))
+    UpdateAutoshiftObserverNotificationStatusRequest.struct_class = Types::UpdateAutoshiftObserverNotificationStatusRequest
+
+    UpdateAutoshiftObserverNotificationStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: AutoshiftObserverNotificationStatus, required: true, location_name: "status"))
+    UpdateAutoshiftObserverNotificationStatusResponse.struct_class = Types::UpdateAutoshiftObserverNotificationStatusResponse
+
     UpdatePracticeRunConfigurationRequest.add_member(:blocked_dates, Shapes::ShapeRef.new(shape: BlockedDates, location_name: "blockedDates"))
     UpdatePracticeRunConfigurationRequest.add_member(:blocked_windows, Shapes::ShapeRef.new(shape: BlockedWindows, location_name: "blockedWindows"))
     UpdatePracticeRunConfigurationRequest.add_member(:blocking_alarms, Shapes::ShapeRef.new(shape: ControlConditions, location_name: "blockingAlarms"))
@@ -285,9 +301,11 @@ module Aws::ARCZonalShift
 
       api.metadata = {
         "apiVersion" => "2022-10-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "arc-zonal-shift",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS ARC - Zonal Shift",
         "serviceId" => "ARC Zonal Shift",
         "signatureVersion" => "v4",
@@ -334,6 +352,17 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_autoshift_observer_notification_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAutoshiftObserverNotificationStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/autoshift-observer-notification"
+        o.input = Shapes::ShapeRef.new(shape: GetAutoshiftObserverNotificationStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAutoshiftObserverNotificationStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -413,6 +442,18 @@ module Aws::ARCZonalShift
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_autoshift_observer_notification_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAutoshiftObserverNotificationStatus"
+        o.http_method = "PUT"
+        o.http_request_uri = "/autoshift-observer-notification"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAutoshiftObserverNotificationStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAutoshiftObserverNotificationStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

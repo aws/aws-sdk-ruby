@@ -32,7 +32,7 @@ require_relative 'aws-sdk-quicksight/customizations'
 # structure.
 #
 #     quick_sight = Aws::QuickSight::Client.new
-#     resp = quick_sight.cancel_ingestion(params)
+#     resp = quick_sight.batch_create_topic_reviewed_answer(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-quicksight/customizations'
 # @!group service
 module Aws::QuickSight
 
-  GEM_VERSION = '1.117.0'
+  GEM_VERSION = '1.118.0'
 
 end

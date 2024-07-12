@@ -349,41 +349,41 @@ module Aws::ACMPCA
     end
 
     class ListCertificateAuthoritiesRequest
-      attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       attr_accessor resource_owner: ("SELF" | "OTHER_ACCOUNTS")
       SENSITIVE: []
     end
 
     class ListCertificateAuthoritiesResponse
-      attr_accessor certificate_authorities: ::Array[Types::CertificateAuthority]
       attr_accessor next_token: ::String
+      attr_accessor certificate_authorities: ::Array[Types::CertificateAuthority]
       SENSITIVE: []
     end
 
     class ListPermissionsRequest
-      attr_accessor certificate_authority_arn: ::String
-      attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor certificate_authority_arn: ::String
       SENSITIVE: []
     end
 
     class ListPermissionsResponse
-      attr_accessor permissions: ::Array[Types::Permission]
       attr_accessor next_token: ::String
+      attr_accessor permissions: ::Array[Types::Permission]
       SENSITIVE: []
     end
 
     class ListTagsRequest
-      attr_accessor certificate_authority_arn: ::String
-      attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor certificate_authority_arn: ::String
       SENSITIVE: []
     end
 
     class ListTagsResponse
-      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

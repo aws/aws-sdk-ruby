@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-07-12)
+------------------
+
+* Feature - This feature adds exceptions to the Customer API to avoid throwing Internal Service errors
+
 1.63.0 (2024-07-02)
 ------------------
 

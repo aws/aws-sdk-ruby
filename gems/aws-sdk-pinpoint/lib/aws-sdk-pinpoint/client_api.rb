@@ -3514,6 +3514,7 @@ module Aws::Pinpoint
 
       api.metadata = {
         "apiVersion" => "2016-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "pinpoint",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2024-07-12)
+------------------
+
+* Feature - Minor refactoring of C2J model for AWS Private CA
+
 1.74.0 (2024-07-02)
 ------------------
 

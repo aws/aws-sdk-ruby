@@ -75,6 +75,14 @@ module Aws::ARCZonalShift
       SENSITIVE: []
     end
 
+    class GetAutoshiftObserverNotificationStatusRequest < Aws::EmptyStructure
+    end
+
+    class GetAutoshiftObserverNotificationStatusResponse
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class GetManagedResourceRequest
       attr_accessor resource_identifier: ::String
       SENSITIVE: []
@@ -170,6 +178,16 @@ module Aws::ARCZonalShift
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAutoshiftObserverNotificationStatusRequest
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateAutoshiftObserverNotificationStatusResponse
+      attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

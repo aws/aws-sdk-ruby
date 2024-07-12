@@ -128,6 +128,15 @@ module Aws
                                              ) -> _DeletePracticeRunConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePracticeRunConfigurationResponseSuccess
 
+      interface _GetAutoshiftObserverNotificationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoshiftObserverNotificationStatusResponse]
+        def status: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#get_autoshift_observer_notification_status-instance_method
+      def get_autoshift_observer_notification_status: (
+                                                      ) -> _GetAutoshiftObserverNotificationStatusResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutoshiftObserverNotificationStatusResponseSuccess
+
       interface _GetManagedResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedResourceResponse]
         def applied_weights: () -> ::Hash[::String, ::Float]
@@ -201,6 +210,16 @@ module Aws
                                resource_identifier: ::String
                              ) -> _StartZonalShiftResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartZonalShiftResponseSuccess
+
+      interface _UpdateAutoshiftObserverNotificationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAutoshiftObserverNotificationStatusResponse]
+        def status: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCZonalShift/Client.html#update_autoshift_observer_notification_status-instance_method
+      def update_autoshift_observer_notification_status: (
+                                                           status: ("ENABLED" | "DISABLED")
+                                                         ) -> _UpdateAutoshiftObserverNotificationStatusResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutoshiftObserverNotificationStatusResponseSuccess
 
       interface _UpdatePracticeRunConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePracticeRunConfigurationResponse]

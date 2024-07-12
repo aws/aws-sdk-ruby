@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.239.0 (2024-07-12)
+------------------
+
+* Feature - Update path for CreateDBCluster resource identifier, and Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
 1.238.0 (2024-07-02)
 ------------------
 

@@ -1027,6 +1027,8 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
       end)
 
       api.add_operation(:create_cross_account_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -1052,6 +1054,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
       end)
 
       api.add_operation(:create_custom_routing_endpoint_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1122,6 +1125,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: AssociatedListenerFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
       end)
 
       api.add_operation(:delete_cross_account_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -1148,6 +1152,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: AssociatedListenerFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
       end)
 
       api.add_operation(:delete_custom_routing_endpoint_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1535,6 +1540,9 @@ module Aws::GlobalAccelerator
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AcceleratorNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AttachmentNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
@@ -1611,6 +1619,8 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_accelerator_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -1623,6 +1633,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
       end)
 
       api.add_operation(:update_cross_account_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -1648,6 +1659,8 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: AcceleratorNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_custom_routing_accelerator_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -1660,6 +1673,7 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
       end)
 
       api.add_operation(:update_custom_routing_listener, Seahorse::Model::Operation.new.tap do |o|

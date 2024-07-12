@@ -1446,7 +1446,7 @@ module Aws::ACMPCA
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have its
     #   policy retrieved. You can find the CA's ARN by calling the
-    #   ListCertificateAuthorities action.
+    #   ListCertificateAuthorities action.      </p>
     #
     # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1527,46 +1527,44 @@ module Aws::ACMPCA
     # Amazon Web Services Private CA allows the following extensions to be
     # marked critical in the imported CA certificate or chain.
     #
-    # * Authority key identifier
-    #
     # * Basic constraints (*must* be marked critical)
     #
-    # * Certificate policies
-    #
-    # * Extended key usage
-    #
-    # * Inhibit anyPolicy
-    #
-    # * Issuer alternative name
+    # * Subject alternative names
     #
     # * Key usage
     #
-    # * Name constraints
+    # * Extended key usage
     #
-    # * Policy mappings
-    #
-    # * Subject alternative name
-    #
-    # * Subject directory attributes
+    # * Authority key identifier
     #
     # * Subject key identifier
     #
+    # * Issuer alternative name
+    #
+    # * Subject directory attributes
+    #
     # * Subject information access
+    #
+    # * Certificate policies
+    #
+    # * Policy mappings
+    #
+    # * Inhibit anyPolicy
     #
     # Amazon Web Services Private CA rejects the following extensions when
     # they are marked critical in an imported CA certificate or chain.
     #
-    # * Authority information access
-    #
-    # * CRL distribution points
-    #
-    # * Freshest CRL
+    # * Name constraints
     #
     # * Policy constraints
     #
-    # Amazon Web Services Private Certificate Authority will also reject any
-    # other extension marked as critical not contained on the preceding list
-    # of allowed extensions.
+    # * CRL distribution points
+    #
+    # * Authority information access
+    #
+    # * Freshest CRL
+    #
+    # * Any other extension
     #
     #
     #
@@ -1913,12 +1911,6 @@ module Aws::ACMPCA
     #
     # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #
-    # @option params [String] :next_token
-    #   Use this parameter when paginating results in a subsequent request
-    #   after you receive a response with truncated results. Set it to the
-    #   value of the `NextToken` parameter from the response you just
-    #   received.
-    #
     # @option params [Integer] :max_results
     #   Use this parameter when paginating results to specify the maximum
     #   number of items to return in the response on each page. If additional
@@ -1929,27 +1921,34 @@ module Aws::ACMPCA
     #   Although the maximum value is 1000, the action only returns a maximum
     #   of 100 items.
     #
+    # @option params [String] :next_token
+    #   Use this parameter when paginating results in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of the `NextToken` parameter from the response you just
+    #   received.
+    #
     # @option params [String] :resource_owner
     #   Use this parameter to filter the returned set of certificate
     #   authorities based on their owner. The default is SELF.
     #
     # @return [Types::ListCertificateAuthoritiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListCertificateAuthoritiesResponse#certificate_authorities #certificate_authorities} => Array&lt;Types::CertificateAuthority&gt;
     #   * {Types::ListCertificateAuthoritiesResponse#next_token #next_token} => String
+    #   * {Types::ListCertificateAuthoritiesResponse#certificate_authorities #certificate_authorities} => Array&lt;Types::CertificateAuthority&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_certificate_authorities({
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
     #     resource_owner: "SELF", # accepts SELF, OTHER_ACCOUNTS
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.certificate_authorities #=> Array
     #   resp.certificate_authorities[0].arn #=> String
     #   resp.certificate_authorities[0].owner_account #=> String
@@ -2029,7 +2028,6 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].restorable_until #=> Time
     #   resp.certificate_authorities[0].key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER", "CCPC_LEVEL_1_OR_HIGHER"
     #   resp.certificate_authorities[0].usage_mode #=> String, one of "GENERAL_PURPOSE", "SHORT_LIVED_CERTIFICATE"
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListCertificateAuthorities AWS API Documentation
     #
@@ -2072,6 +2070,18 @@ module Aws::ACMPCA
     # [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html
     # [3]: https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html
     #
+    # @option params [Integer] :max_results
+    #   When paginating results, use this parameter to specify the maximum
+    #   number of items to return in the response. If additional items exist
+    #   beyond the number you specify, the **NextToken** element is sent in
+    #   the response. Use this **NextToken** value in a subsequent request to
+    #   retrieve additional items.
+    #
+    # @option params [String] :next_token
+    #   When paginating results, use this parameter in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of **NextToken** from the response you just received.
+    #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA to inspect. You can
     #   find the ARN by calling the [ListCertificateAuthorities][1] action.
@@ -2084,35 +2094,24 @@ module Aws::ACMPCA
     #
     #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #
-    # @option params [String] :next_token
-    #   When paginating results, use this parameter in a subsequent request
-    #   after you receive a response with truncated results. Set it to the
-    #   value of **NextToken** from the response you just received.
-    #
-    # @option params [Integer] :max_results
-    #   When paginating results, use this parameter to specify the maximum
-    #   number of items to return in the response. If additional items exist
-    #   beyond the number you specify, the **NextToken** element is sent in
-    #   the response. Use this **NextToken** value in a subsequent request to
-    #   retrieve additional items.
-    #
     # @return [Types::ListPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPermissionsResponse#permissions #permissions} => Array&lt;Types::Permission&gt;
     #   * {Types::ListPermissionsResponse#next_token #next_token} => String
+    #   * {Types::ListPermissionsResponse#permissions #permissions} => Array&lt;Types::Permission&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permissions({
-    #     certificate_authority_arn: "Arn", # required
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
+    #     certificate_authority_arn: "Arn", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.permissions #=> Array
     #   resp.permissions[0].certificate_authority_arn #=> String
     #   resp.permissions[0].created_at #=> Time
@@ -2121,7 +2120,6 @@ module Aws::ACMPCA
     #   resp.permissions[0].actions #=> Array
     #   resp.permissions[0].actions[0] #=> String, one of "IssueCertificate", "GetCertificate", "ListPermissions"
     #   resp.permissions[0].policy #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListPermissions AWS API Documentation
     #
@@ -2144,6 +2142,18 @@ module Aws::ACMPCA
     # [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html
     # [2]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html
     #
+    # @option params [Integer] :max_results
+    #   Use this parameter when paginating results to specify the maximum
+    #   number of items to return in the response. If additional items exist
+    #   beyond the number you specify, the **NextToken** element is sent in
+    #   the response. Use this **NextToken** value in a subsequent request to
+    #   retrieve additional items.
+    #
+    # @option params [String] :next_token
+    #   Use this parameter when paginating results in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of **NextToken** from the response you just received.
+    #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
     #   [CreateCertificateAuthority][1] action. This must be of the form:
@@ -2155,39 +2165,27 @@ module Aws::ACMPCA
     #
     #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #
-    # @option params [String] :next_token
-    #   Use this parameter when paginating results in a subsequent request
-    #   after you receive a response with truncated results. Set it to the
-    #   value of **NextToken** from the response you just received.
-    #
-    # @option params [Integer] :max_results
-    #   Use this parameter when paginating results to specify the maximum
-    #   number of items to return in the response. If additional items exist
-    #   beyond the number you specify, the **NextToken** element is sent in
-    #   the response. Use this **NextToken** value in a subsequent request to
-    #   retrieve additional items.
-    #
     # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsResponse#next_token #next_token} => String
+    #   * {Types::ListTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags({
-    #     certificate_authority_arn: "Arn", # required
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
+    #     certificate_authority_arn: "Arn", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListTags AWS API Documentation
     #
@@ -2633,7 +2631,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2701,9 +2699,9 @@ module Aws::ACMPCA
     #
     # | waiter_name                       | params                                               | :delay   | :max_attempts |
     # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
-    # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
-    # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
-    # | certificate_issued                | {Client#get_certificate}                             | 1        | 60            |
+    # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 40            |
+    # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 40            |
+    # | certificate_issued                | {Client#get_certificate}                             | 1        | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

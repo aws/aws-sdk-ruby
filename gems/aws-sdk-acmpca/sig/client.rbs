@@ -437,40 +437,40 @@ module Aws
 
       interface _ListCertificateAuthoritiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificateAuthoritiesResponse]
-        def certificate_authorities: () -> ::Array[Types::CertificateAuthority]
         def next_token: () -> ::String
+        def certificate_authorities: () -> ::Array[Types::CertificateAuthority]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#list_certificate_authorities-instance_method
       def list_certificate_authorities: (
-                                          ?next_token: ::String,
                                           ?max_results: ::Integer,
+                                          ?next_token: ::String,
                                           ?resource_owner: ("SELF" | "OTHER_ACCOUNTS")
                                         ) -> _ListCertificateAuthoritiesResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCertificateAuthoritiesResponseSuccess
 
       interface _ListPermissionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionsResponse]
-        def permissions: () -> ::Array[Types::Permission]
         def next_token: () -> ::String
+        def permissions: () -> ::Array[Types::Permission]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#list_permissions-instance_method
       def list_permissions: (
-                              certificate_authority_arn: ::String,
+                              ?max_results: ::Integer,
                               ?next_token: ::String,
-                              ?max_results: ::Integer
+                              certificate_authority_arn: ::String
                             ) -> _ListPermissionsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionsResponseSuccess
 
       interface _ListTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
-        def tags: () -> ::Array[Types::Tag]
         def next_token: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#list_tags-instance_method
       def list_tags: (
-                       certificate_authority_arn: ::String,
+                       ?max_results: ::Integer,
                        ?next_token: ::String,
-                       ?max_results: ::Integer
+                       certificate_authority_arn: ::String
                      ) -> _ListTagsResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
 

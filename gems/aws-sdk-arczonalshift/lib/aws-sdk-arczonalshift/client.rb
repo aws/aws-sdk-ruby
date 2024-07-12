@@ -478,6 +478,11 @@ module Aws::ARCZonalShift
     # application health during practice runs and, optionally, a *blocking
     # alarm*, to block practice runs from starting.
     #
+    # When a resource has a practice run configuration, Route 53 ARC starts
+    # zonal shifts for the resource weekly, to shift traffic for practice
+    # runs. Practice runs help you to ensure that shifting away traffic from
+    # an Availability Zone during an autoshift is safe for your application.
+    #
     # For more information, see [ Considerations when you configure zonal
     # autoshift][1] in the Amazon Route 53 Application Recovery Controller
     # Developer Guide.
@@ -532,8 +537,8 @@ module Aws::ARCZonalShift
     #   Availability Zone.
     #
     # @option params [required, String] :resource_identifier
-    #   The identifier of the resource to shift away traffic for when a
-    #   practice run starts a zonal shift. The identifier is the Amazon
+    #   The identifier of the resource that Amazon Web Services shifts traffic
+    #   for with a practice run zonal shift. The identifier is the Amazon
     #   Resource Name (ARN) for the resource.
     #
     #   At this time, supported resources are Network Load Balancers and
@@ -628,6 +633,41 @@ module Aws::ARCZonalShift
       req.send_request(options)
     end
 
+    # Returns the status of autoshift observer notification. Autoshift
+    # observer notification enables you to be notified, through Amazon
+    # EventBridge, when there is an autoshift event for zonal autoshift.
+    #
+    # If the status is `ENABLED`, Route 53 ARC includes all autoshift events
+    # when you use the EventBridge pattern `Autoshift In Progress`. When the
+    # status is `DISABLED`, Route 53 ARC includes only autoshift events for
+    # autoshifts when one or more of your resources is included in the
+    # autoshift.
+    #
+    # For more information, see [ Notifications for practice runs and
+    # autoshifts][1] in the Amazon Route 53 Application Recovery Controller
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html#ZAShiftNotification
+    #
+    # @return [Types::GetAutoshiftObserverNotificationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAutoshiftObserverNotificationStatusResponse#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/GetAutoshiftObserverNotificationStatus AWS API Documentation
+    #
+    # @overload get_autoshift_observer_notification_status(params = {})
+    # @param [Hash] params ({})
+    def get_autoshift_observer_notification_status(params = {}, options = {})
+      req = build_request(:get_autoshift_observer_notification_status, params)
+      req.send_request(options)
+    end
+
     # Get information about a resource that's been registered for zonal
     # shifts with Amazon Route 53 Application Recovery Controller in this
     # Amazon Web Services Region. Resources that are registered for zonal
@@ -639,8 +679,9 @@ module Aws::ARCZonalShift
     # with cross-zone load balancing turned off.
     #
     # @option params [required, String] :resource_identifier
-    #   The identifier for the resource to shift away traffic for. The
-    #   identifier is the Amazon Resource Name (ARN) for the resource.
+    #   The identifier for the resource that Amazon Web Services shifts
+    #   traffic for. The identifier is the Amazon Resource Name (ARN) for the
+    #   resource.
     #
     #   At this time, supported resources are Network Load Balancers and
     #   Application Load Balancers with cross-zone load balancing turned off.
@@ -701,7 +742,9 @@ module Aws::ARCZonalShift
       req.send_request(options)
     end
 
-    # Returns the active autoshifts for a specified resource.
+    # Returns a list of autoshifts for an Amazon Web Services Region. By
+    # default, the call returns only `ACTIVE` autoshifts. Optionally, you
+    # can specify the `status` parameter to return `COMPLETED` autoshifts.
     #
     # @option params [Integer] :max_results
     #   The number of objects that you want to return with this call.
@@ -818,7 +861,7 @@ module Aws::ARCZonalShift
     # Lists all active and completed zonal shifts in Amazon Route 53
     # Application Recovery Controller in your Amazon Web Services account in
     # this Amazon Web Services Region. `ListZonalShifts` returns
-    # customer-started zonal shifts, as well as practice run zonal shifts
+    # customer-initiated zonal shifts, as well as practice run zonal shifts
     # that Route 53 ARC started on your behalf for zonal autoshift.
     #
     # The `ListZonalShifts` operation does not list autoshifts. For more
@@ -920,10 +963,10 @@ module Aws::ARCZonalShift
     # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html
     #
     # @option params [required, String] :away_from
-    #   The Availability Zone that traffic is moved away from for a resource
-    #   when you start a zonal shift. Until the zonal shift expires or you
-    #   cancel it, traffic for the resource is instead moved to other
-    #   Availability Zones in the Amazon Web Services Region.
+    #   The Availability Zone (for example, `use1-az1`) that traffic is moved
+    #   away from for a resource when you start a zonal shift. Until the zonal
+    #   shift expires or you cancel it, traffic for the resource is instead
+    #   moved to other Availability Zones in the Amazon Web Services Region.
     #
     # @option params [required, String] :comment
     #   A comment that you enter about the zonal shift. Only the latest
@@ -952,8 +995,9 @@ module Aws::ARCZonalShift
     #   means the zonal shift expires in 120 minutes (2 hours).
     #
     # @option params [required, String] :resource_identifier
-    #   The identifier for the resource to shift away traffic for. The
-    #   identifier is the Amazon Resource Name (ARN) for the resource.
+    #   The identifier for the resource that Amazon Web Services shifts
+    #   traffic for. The identifier is the Amazon Resource Name (ARN) for the
+    #   resource.
     #
     #   At this time, supported resources are Network Load Balancers and
     #   Application Load Balancers with cross-zone load balancing turned off.
@@ -993,6 +1037,55 @@ module Aws::ARCZonalShift
     # @param [Hash] params ({})
     def start_zonal_shift(params = {}, options = {})
       req = build_request(:start_zonal_shift, params)
+      req.send_request(options)
+    end
+
+    # Update the status of autoshift observer notification. Autoshift
+    # observer notification enables you to be notified, through Amazon
+    # EventBridge, when there is an autoshift event for zonal autoshift.
+    #
+    # If the status is `ENABLED`, Route 53 ARC includes all autoshift events
+    # when you use the EventBridge pattern `Autoshift In Progress`. When the
+    # status is `DISABLED`, Route 53 ARC includes only autoshift events for
+    # autoshifts when one or more of your resources is included in the
+    # autoshift.
+    #
+    # For more information, see [ Notifications for practice runs and
+    # autoshifts][1] in the Amazon Route 53 Application Recovery Controller
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html#ZAShiftNotification
+    #
+    # @option params [required, String] :status
+    #   The status to set for autoshift observer notification. If the status
+    #   is `ENABLED`, Route 53 ARC includes all autoshift events when you use
+    #   the Amazon EventBridge pattern `Autoshift In Progress`. When the
+    #   status is `DISABLED`, Route 53 ARC includes only autoshift events for
+    #   autoshifts when one or more of your resources is included in the
+    #   autoshift.
+    #
+    # @return [Types::UpdateAutoshiftObserverNotificationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAutoshiftObserverNotificationStatusResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_autoshift_observer_notification_status({
+    #     status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdateAutoshiftObserverNotificationStatus AWS API Documentation
+    #
+    # @overload update_autoshift_observer_notification_status(params = {})
+    # @param [Hash] params ({})
+    def update_autoshift_observer_notification_status(params = {}, options = {})
+      req = build_request(:update_autoshift_observer_notification_status, params)
       req.send_request(options)
     end
 
@@ -1095,12 +1188,20 @@ module Aws::ARCZonalShift
       req.send_request(options)
     end
 
-    # You can update the zonal autoshift status for a resource, to enable or
-    # disable zonal autoshift. When zonal autoshift is `ENABLED`, Amazon Web
-    # Services shifts away resource traffic from an Availability Zone, on
-    # your behalf, when Amazon Web Services determines that there's an
-    # issue in the Availability Zone that could potentially affect
-    # customers.
+    # The zonal autoshift configuration for a resource includes the practice
+    # run configuration and the status for running autoshifts, zonal
+    # autoshift status. When a resource has a practice run configuation,
+    # Route 53 ARC starts weekly zonal shifts for the resource, to shift
+    # traffic away from an Availability Zone. Weekly practice runs help you
+    # to make sure that your application can continue to operate normally
+    # with the loss of one Availability Zone.
+    #
+    # You can update the zonal autoshift autoshift status to enable or
+    # disable zonal autoshift. When zonal autoshift is `ENABLED`, you
+    # authorize Amazon Web Services to shift away resource traffic for an
+    # application from an Availability Zone during events, on your behalf,
+    # to help reduce time to recovery. Traffic is also shifted away for the
+    # required weekly practice runs.
     #
     # @option params [required, String] :resource_identifier
     #   The identifier for the resource that you want to update the zonal
@@ -1109,7 +1210,10 @@ module Aws::ARCZonalShift
     #
     # @option params [required, String] :zonal_autoshift_status
     #   The zonal autoshift status for the resource that you want to update
-    #   the zonal autoshift configuration for.
+    #   the zonal autoshift configuration for. Choose `ENABLED` to authorize
+    #   Amazon Web Services to shift away resource traffic for an application
+    #   from an Availability Zone during events, on your behalf, to help
+    #   reduce time to recovery.
     #
     # @return [Types::UpdateZonalAutoshiftConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1221,7 +1325,7 @@ module Aws::ARCZonalShift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-arczonalshift'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

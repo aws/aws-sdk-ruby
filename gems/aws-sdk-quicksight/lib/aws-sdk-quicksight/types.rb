@@ -196,6 +196,35 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The definition of an Agg function.
+    #
+    # @!attribute [rw] aggregation
+    #   The aggregation of an Agg function.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_function_parameters
+    #   The aggregation parameters for an Agg function.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] period
+    #   The period of an Agg function.
+    #   @return [String]
+    #
+    # @!attribute [rw] period_field
+    #   The period field for an Agg function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AggFunction AWS API Documentation
+    #
+    class AggFunction < Struct.new(
+      :aggregation,
+      :aggregation_function_parameters,
+      :period,
+      :period_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An aggregation function aggregates values from a dimension or measure.
     #
     # This is a union type structure. For this structure to be valid, only
@@ -240,6 +269,25 @@ module Aws::QuickSight
       :categorical_aggregation_function,
       :date_aggregation_function,
       :attribute_aggregation_function)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of an `AggregationPartitionBy`.
+    #
+    # @!attribute [rw] field_name
+    #   The field Name for an `AggregationPartitionBy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_granularity
+    #   The `TimeGranularity` for an `AggregationPartitionBy`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AggregationPartitionBy AWS API Documentation
+    #
+    class AggregationPartitionBy < Struct.new(
+      :field_name,
+      :time_granularity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -626,6 +674,30 @@ module Aws::QuickSight
       :status,
       :created_time,
       :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of the Anchor.
+    #
+    # @!attribute [rw] anchor_type
+    #   The `AnchorType` for the Anchor.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_granularity
+    #   The `TimeGranularity` of the Anchor.
+    #   @return [String]
+    #
+    # @!attribute [rw] offset
+    #   The offset of the Anchor.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Anchor AWS API Documentation
+    #
+    class Anchor < Struct.new(
+      :anchor_type,
+      :time_granularity,
+      :offset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2691,6 +2763,134 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that you want to create a
+    #   reviewed answer in.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID for the topic reviewed answer that you want to create. This
+    #   ID is unique per Amazon Web Services Region for each Amazon Web
+    #   Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] answers
+    #   The definition of the Answers to be created.
+    #   @return [Array<Types::CreateTopicReviewedAnswer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchCreateTopicReviewedAnswerRequest AWS API Documentation
+    #
+    class BatchCreateTopicReviewedAnswerRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :answers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID for the topic reviewed answer that you want to create. This
+    #   ID is unique per Amazon Web Services Region for each Amazon Web
+    #   Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] succeeded_answers
+    #   The definition of Answers that are successfully created.
+    #   @return [Array<Types::SucceededTopicReviewedAnswer>]
+    #
+    # @!attribute [rw] invalid_answers
+    #   The definition of Answers that are invalid and not created.
+    #   @return [Array<Types::InvalidTopicReviewedAnswer>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchCreateTopicReviewedAnswerResponse AWS API Documentation
+    #
+    class BatchCreateTopicReviewedAnswerResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :succeeded_answers,
+      :invalid_answers,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that you want to delete a
+    #   reviewed answers in.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID for the topic reviewed answer that you want to delete. This
+    #   ID is unique per Amazon Web Services Region for each Amazon Web
+    #   Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer_ids
+    #   The Answer IDs of the Answers to be deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeleteTopicReviewedAnswerRequest AWS API Documentation
+    #
+    class BatchDeleteTopicReviewedAnswerRequest < Struct.new(
+      :aws_account_id,
+      :topic_id,
+      :answer_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID of the topic reviewed answer that you want to delete. This ID
+    #   is unique per Amazon Web Services Region for each Amazon Web
+    #   Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] succeeded_answers
+    #   The definition of Answers that are successfully deleted.
+    #   @return [Array<Types::SucceededTopicReviewedAnswer>]
+    #
+    # @!attribute [rw] invalid_answers
+    #   The definition of Answers that are invalid and not deleted.
+    #   @return [Array<Types::InvalidTopicReviewedAnswer>]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeleteTopicReviewedAnswerResponse AWS API Documentation
+    #
+    class BatchDeleteTopicReviewedAnswerResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :succeeded_answers,
+      :invalid_answers,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters that are required to connect to a Google BigQuery data
     # source.
     #
@@ -3607,6 +3807,25 @@ module Aws::QuickSight
     #
     class CollectiveConstant < Struct.new(
       :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `CollectiveConstantEntry`.
+    #
+    # @!attribute [rw] constant_type
+    #   The `ConstantType` of a `CollectiveConstantEntry`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a `CollectiveConstantEntry`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CollectiveConstantEntry AWS API Documentation
+    #
+    class CollectiveConstantEntry < Struct.new(
+      :constant_type,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4530,6 +4749,39 @@ module Aws::QuickSight
     class ContributionAnalysisDefault < Struct.new(
       :measure_field_id,
       :contributor_dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for the `ContributionAnalysisFactor`.
+    #
+    # @!attribute [rw] field_name
+    #   The field name of the `ContributionAnalysisFactor`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ContributionAnalysisFactor AWS API Documentation
+    #
+    class ContributionAnalysisFactor < Struct.new(
+      :field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for the `ContributionAnalysisTimeRanges`.
+    #
+    # @!attribute [rw] start_range
+    #   The start range for the `ContributionAnalysisTimeRanges`.
+    #   @return [Types::TopicIRFilterOption]
+    #
+    # @!attribute [rw] end_range
+    #   The end range for the `ContributionAnalysisTimeRanges`.
+    #   @return [Types::TopicIRFilterOption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ContributionAnalysisTimeRanges AWS API Documentation
+    #
+    class ContributionAnalysisTimeRanges < Struct.new(
+      :start_range,
+      :end_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6439,6 +6691,45 @@ module Aws::QuickSight
       :refresh_arn,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `CreateTopicReviewedAnswer`.
+    #
+    # @!attribute [rw] answer_id
+    #   The answer ID for the `CreateTopicReviewedAnswer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Dataset arn for the `CreateTopicReviewedAnswer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] question
+    #   The Question to be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] mir
+    #   The Mir for the `CreateTopicReviewedAnswer`.
+    #   @return [Types::TopicIR]
+    #
+    # @!attribute [rw] primary_visual
+    #   The `PrimaryVisual` for the `CreateTopicReviewedAnswer`.
+    #   @return [Types::TopicVisual]
+    #
+    # @!attribute [rw] template
+    #   The template for the `CreateTopicReviewedAnswer`.
+    #   @return [Types::TopicTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTopicReviewedAnswer AWS API Documentation
+    #
+    class CreateTopicReviewedAnswer < Struct.new(
+      :answer_id,
+      :dataset_arn,
+      :question,
+      :mir,
+      :primary_visual,
+      :template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9021,12 +9312,24 @@ module Aws::QuickSight
     #   The configuration of info icon label options.
     #   @return [Types::SheetControlInfoIconLabelOptions]
     #
+    # @!attribute [rw] helper_text_visibility
+    #   The helper text visibility of the
+    #   `DateTimePickerControlDisplayOptions`.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_icon_visibility
+    #   The date icon visibility of the
+    #   `DateTimePickerControlDisplayOptions`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DateTimePickerControlDisplayOptions AWS API Documentation
     #
     class DateTimePickerControlDisplayOptions < Struct.new(
       :title_options,
       :date_time_format,
-      :info_icon_label_options)
+      :info_icon_label_options,
+      :helper_text_visibility,
+      :date_icon_visibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14290,6 +14593,30 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The definition for the `FilterAggMetrics`.
+    #
+    # @!attribute [rw] metric_operand
+    #   The metric operand of the `FilterAggMetrics`.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] function
+    #   The function for the `FilterAggMetrics`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_direction
+    #   The sort direction for `FilterAggMetrics`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterAggMetrics AWS API Documentation
+    #
+    class FilterAggMetrics < Struct.new(
+      :metric_operand,
+      :function,
+      :sort_direction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The control of a filter that is used to interact with a dashboard or
     # an analysis.
     #
@@ -17267,6 +17594,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The definition for the identifier.
+    #
+    # @!attribute [rw] identity
+    #   The identity of the identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Identifier AWS API Documentation
+    #
+    class Identifier < Struct.new(
+      :identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The parameters for an IAM Identity Center configuration.
     #
     # @!attribute [rw] enable_identity_propagation
@@ -17712,6 +18053,25 @@ module Aws::QuickSight
     class InvalidRequestException < Struct.new(
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `InvalidTopicReviewedAnswer`.
+    #
+    # @!attribute [rw] answer_id
+    #   The answer ID for the `InvalidTopicReviewedAnswer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error that is returned for the `InvalidTopicReviewedAnswer`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidTopicReviewedAnswer AWS API Documentation
+    #
+    class InvalidTopicReviewedAnswer < Struct.new(
+      :answer_id,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20212,6 +20572,60 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that containd the reviewed
+    #   answers that you want listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_id
+    #   The ID for the topic that contains the reviewed answer that you want
+    #   to list. This ID is unique per Amazon Web Services Region for each
+    #   Amazon Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTopicReviewedAnswersRequest AWS API Documentation
+    #
+    class ListTopicReviewedAnswersRequest < Struct.new(
+      :aws_account_id,
+      :topic_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] topic_id
+    #   The ID for the topic that contains the reviewed answer that you want
+    #   to list. This ID is unique per Amazon Web Services Region for each
+    #   Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] answers
+    #   The definition of all Answers in the topic.
+    #   @return [Array<Types::TopicReviewedAnswer>]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTopicReviewedAnswersResponse AWS API Documentation
+    #
+    class ListTopicReviewedAnswersResponse < Struct.new(
+      :topic_id,
+      :topic_arn,
+      :answers,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the topics
     #   that you want to list.
     #   @return [String]
@@ -20893,6 +21307,20 @@ module Aws::QuickSight
     class NamedEntityDefinitionMetric < Struct.new(
       :aggregation,
       :aggregation_function_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `NamedEntityRef`.
+    #
+    # @!attribute [rw] named_entity_name
+    #   The `NamedEntityName` for the `NamedEntityRef`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/NamedEntityRef AWS API Documentation
+    #
+    class NamedEntityRef < Struct.new(
+      :named_entity_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26582,6 +27010,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The definition for the slot.
+    #
+    # @!attribute [rw] slot_id
+    #   The slot ID of the slot.
+    #   @return [String]
+    #
+    # @!attribute [rw] visual_id
+    #   The visual ID for the slot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Slot AWS API Documentation
+    #
+    class Slot < Struct.new(
+      :slot_id,
+      :visual_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configures the properties of a chart's axes that are used by small
     # multiples panels.
     #
@@ -27619,6 +28066,20 @@ module Aws::QuickSight
       :value_cell_style,
       :metric_header_cell_style,
       :style_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `SucceededTopicReviewedAnswer`.
+    #
+    # @!attribute [rw] answer_id
+    #   The answer ID for the `SucceededTopicReviewedAnswer`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SucceededTopicReviewedAnswer AWS API Documentation
+    #
+    class SucceededTopicReviewedAnswer < Struct.new(
+      :answer_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29851,6 +30312,40 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The definition for a `TopicConstantValue`.
+    #
+    # @!attribute [rw] constant_type
+    #   The constant type of a `TopicConstantValue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the `TopicConstantValue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum
+    #   The minimum for the `TopicConstantValue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum
+    #   The maximum for the `TopicConstantValue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_list
+    #   The value list of the `TopicConstantValue`.
+    #   @return [Array<Types::CollectiveConstantEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicConstantValue AWS API Documentation
+    #
+    class TopicConstantValue < Struct.new(
+      :constant_type,
+      :value,
+      :minimum,
+      :maximum,
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filter used to restrict data based on a range of dates or times.
     #
     # @!attribute [rw] inclusive
@@ -29968,6 +30463,292 @@ module Aws::QuickSight
       :date_range_filter,
       :relative_date_filter)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicIR`.
+    #
+    # @!attribute [rw] metrics
+    #   The metrics for the `TopicIR`.
+    #   @return [Array<Types::TopicIRMetric>]
+    #
+    # @!attribute [rw] group_by_list
+    #   The GroupBy list for the `TopicIR`.
+    #   @return [Array<Types::TopicIRGroupBy>]
+    #
+    # @!attribute [rw] filters
+    #   The filters for the `TopicIR`.
+    #   @return [Array<Array<Types::TopicIRFilterOption>>]
+    #
+    # @!attribute [rw] sort
+    #   The sort for the `TopicIR`.
+    #   @return [Types::TopicSortClause]
+    #
+    # @!attribute [rw] contribution_analysis
+    #   The contribution analysis for the `TopicIR`.
+    #   @return [Types::TopicIRContributionAnalysis]
+    #
+    # @!attribute [rw] visual
+    #   The visual for the `TopicIR`.
+    #   @return [Types::VisualOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicIR AWS API Documentation
+    #
+    class TopicIR < Struct.new(
+      :metrics,
+      :group_by_list,
+      :filters,
+      :sort,
+      :contribution_analysis,
+      :visual)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of a `TopicIRComparisonMethod`.
+    #
+    # @!attribute [rw] type
+    #   The type for the `TopicIRComparisonMethod`.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period for the `TopicIRComparisonMethod`.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_size
+    #   The window size for the `TopicIRComparisonMethod`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicIRComparisonMethod AWS API Documentation
+    #
+    class TopicIRComparisonMethod < Struct.new(
+      :type,
+      :period,
+      :window_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicIRContributionAnalysis`.
+    #
+    # @!attribute [rw] factors
+    #   The factors for a `TopicIRContributionAnalysis`.
+    #   @return [Array<Types::ContributionAnalysisFactor>]
+    #
+    # @!attribute [rw] time_ranges
+    #   The time ranges for the `TopicIRContributionAnalysis`.
+    #   @return [Types::ContributionAnalysisTimeRanges]
+    #
+    # @!attribute [rw] direction
+    #   The direction for the `TopicIRContributionAnalysis`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_type
+    #   The sort type for the `TopicIRContributionAnalysis`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicIRContributionAnalysis AWS API Documentation
+    #
+    class TopicIRContributionAnalysis < Struct.new(
+      :factors,
+      :time_ranges,
+      :direction,
+      :sort_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicIRFilterOption`.
+    #
+    # @!attribute [rw] filter_type
+    #   The filter type for the `TopicIRFilterOption`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_class
+    #   The filter class for the `TopicIRFilterOption`.
+    #   @return [String]
+    #
+    # @!attribute [rw] operand_field
+    #   The operand field for the `TopicIRFilterOption`.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] function
+    #   The function for the `TopicIRFilterOption`.
+    #   @return [String]
+    #
+    # @!attribute [rw] constant
+    #   The constant for the `TopicIRFilterOption`.
+    #   @return [Types::TopicConstantValue]
+    #
+    # @!attribute [rw] inverse
+    #   The inverse for the `TopicIRFilterOption`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] null_filter
+    #   The null filter for the `TopicIRFilterOption`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation
+    #   The aggregation for the `TopicIRFilterOption`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_function_parameters
+    #   The aggregation function parameters for the `TopicIRFilterOption`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] aggregation_partition_by
+    #   The `AggregationPartitionBy` for the `TopicIRFilterOption`.
+    #   @return [Array<Types::AggregationPartitionBy>]
+    #
+    # @!attribute [rw] range
+    #   The range for the `TopicIRFilterOption`.
+    #   @return [Types::TopicConstantValue]
+    #
+    # @!attribute [rw] inclusive
+    #   The inclusive for the `TopicIRFilterOption`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] time_granularity
+    #   The time granularity for the `TopicIRFilterOption`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_next_offset
+    #   The last next offset for the `TopicIRFilterOption`.
+    #   @return [Types::TopicConstantValue]
+    #
+    # @!attribute [rw] agg_metrics
+    #   The agg metrics for the `TopicIRFilterOption`.
+    #   @return [Array<Types::FilterAggMetrics>]
+    #
+    # @!attribute [rw] top_bottom_limit
+    #   The `TopBottomLimit` for the `TopicIRFilterOption`.
+    #   @return [Types::TopicConstantValue]
+    #
+    # @!attribute [rw] sort_direction
+    #   The sort direction for the `TopicIRFilterOption`.
+    #   @return [String]
+    #
+    # @!attribute [rw] anchor
+    #   The anchor for the `TopicIRFilterOption`.
+    #   @return [Types::Anchor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicIRFilterOption AWS API Documentation
+    #
+    class TopicIRFilterOption < Struct.new(
+      :filter_type,
+      :filter_class,
+      :operand_field,
+      :function,
+      :constant,
+      :inverse,
+      :null_filter,
+      :aggregation,
+      :aggregation_function_parameters,
+      :aggregation_partition_by,
+      :range,
+      :inclusive,
+      :time_granularity,
+      :last_next_offset,
+      :agg_metrics,
+      :top_bottom_limit,
+      :sort_direction,
+      :anchor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicIRGroupBy`.
+    #
+    # @!attribute [rw] field_name
+    #   The field name for the `TopicIRGroupBy`.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] time_granularity
+    #   The time granularity for the `TopicIRGroupBy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   The sort for the `TopicIRGroupBy`.
+    #   @return [Types::TopicSortClause]
+    #
+    # @!attribute [rw] display_format
+    #   The display format for the `TopicIRGroupBy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_format_options
+    #   A structure that represents additional options for display
+    #   formatting.
+    #   @return [Types::DisplayFormatOptions]
+    #
+    # @!attribute [rw] named_entity
+    #   The named entity for the `TopicIRGroupBy`.
+    #   @return [Types::NamedEntityRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicIRGroupBy AWS API Documentation
+    #
+    class TopicIRGroupBy < Struct.new(
+      :field_name,
+      :time_granularity,
+      :sort,
+      :display_format,
+      :display_format_options,
+      :named_entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicIRMetric`.
+    #
+    # @!attribute [rw] metric_id
+    #   The metric ID for the `TopicIRMetric`.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] function
+    #   The function for the `TopicIRMetric`.
+    #   @return [Types::AggFunction]
+    #
+    # @!attribute [rw] operands
+    #   The operands for the `TopicIRMetric`.
+    #   @return [Array<Types::Identifier>]
+    #
+    # @!attribute [rw] comparison_method
+    #   The comparison method for the `TopicIRMetric`.
+    #   @return [Types::TopicIRComparisonMethod]
+    #
+    # @!attribute [rw] expression
+    #   The expression for the `TopicIRMetric`.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_field_references
+    #   The calculated field references for the `TopicIRMetric`.
+    #   @return [Array<Types::Identifier>]
+    #
+    # @!attribute [rw] display_format
+    #   The display format for the `TopicIRMetric`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_format_options
+    #   A structure that represents additional options for display
+    #   formatting.
+    #   @return [Types::DisplayFormatOptions]
+    #
+    # @!attribute [rw] named_entity
+    #   The named entity for the `TopicIRMetric`.
+    #   @return [Types::NamedEntityRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicIRMetric AWS API Documentation
+    #
+    class TopicIRMetric < Struct.new(
+      :metric_id,
+      :function,
+      :operands,
+      :comparison_method,
+      :expression,
+      :calculated_field_references,
+      :display_format,
+      :display_format_options,
+      :named_entity)
+      SENSITIVE = [:expression]
       include Aws::Structure
     end
 
@@ -30208,6 +30989,50 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The deinition for a `TopicReviewedAnswer`.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the reviewed answer.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer_id
+    #   The answer ID of the reviewed answer.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Dataset ARN for the `TopicReviewedAnswer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] question
+    #   The question for the `TopicReviewedAnswer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] mir
+    #   The mir for the `TopicReviewedAnswer`.
+    #   @return [Types::TopicIR]
+    #
+    # @!attribute [rw] primary_visual
+    #   The primary visual for the `TopicReviewedAnswer`.
+    #   @return [Types::TopicVisual]
+    #
+    # @!attribute [rw] template
+    #   The template for the `TopicReviewedAnswer`.
+    #   @return [Types::TopicTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicReviewedAnswer AWS API Documentation
+    #
+    class TopicReviewedAnswer < Struct.new(
+      :arn,
+      :answer_id,
+      :dataset_arn,
+      :question,
+      :mir,
+      :primary_visual,
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that represents a singular filter constant, used in
     # filters to specify a single value to match against.
     #
@@ -30225,6 +31050,25 @@ module Aws::QuickSight
     class TopicSingularFilterConstant < Struct.new(
       :constant_type,
       :singular_constant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicSortClause`.
+    #
+    # @!attribute [rw] operand
+    #   The operand for a `TopicSortClause`.
+    #   @return [Types::Identifier]
+    #
+    # @!attribute [rw] sort_direction
+    #   The sort direction for the `TopicSortClause`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicSortClause AWS API Documentation
+    #
+    class TopicSortClause < Struct.new(
+      :operand,
+      :sort_direction)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30255,6 +31099,54 @@ module Aws::QuickSight
       :topic_id,
       :name,
       :user_experience_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicTemplate`.
+    #
+    # @!attribute [rw] template_type
+    #   The template type for the `TopicTemplate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] slots
+    #   The slots for the `TopicTemplate`.
+    #   @return [Array<Types::Slot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicTemplate AWS API Documentation
+    #
+    class TopicTemplate < Struct.new(
+      :template_type,
+      :slots)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `TopicVisual`.
+    #
+    # @!attribute [rw] visual_id
+    #   The visual ID for the `TopicVisual`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role for the `TopicVisual`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ir
+    #   The ir for the `TopicVisual`.
+    #   @return [Types::TopicIR]
+    #
+    # @!attribute [rw] supporting_visuals
+    #   The supporting visuals for the `TopicVisual`.
+    #   @return [Array<Types::TopicVisual>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TopicVisual AWS API Documentation
+    #
+    class TopicVisual < Struct.new(
+      :visual_id,
+      :role,
+      :ir,
+      :supporting_visuals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33961,6 +34853,20 @@ module Aws::QuickSight
     #
     class VisualMenuOption < Struct.new(
       :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition for a `VisualOptions`.
+    #
+    # @!attribute [rw] type
+    #   The type for a `VisualOptions`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualOptions AWS API Documentation
+    #
+    class VisualOptions < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

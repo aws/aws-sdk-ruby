@@ -64,6 +64,8 @@ module Aws::ARCZonalShift
             Aws::ARCZonalShift::Endpoints::CreatePracticeRunConfiguration.build(context)
           when :delete_practice_run_configuration
             Aws::ARCZonalShift::Endpoints::DeletePracticeRunConfiguration.build(context)
+          when :get_autoshift_observer_notification_status
+            Aws::ARCZonalShift::Endpoints::GetAutoshiftObserverNotificationStatus.build(context)
           when :get_managed_resource
             Aws::ARCZonalShift::Endpoints::GetManagedResource.build(context)
           when :list_autoshifts
@@ -74,6 +76,8 @@ module Aws::ARCZonalShift
             Aws::ARCZonalShift::Endpoints::ListZonalShifts.build(context)
           when :start_zonal_shift
             Aws::ARCZonalShift::Endpoints::StartZonalShift.build(context)
+          when :update_autoshift_observer_notification_status
+            Aws::ARCZonalShift::Endpoints::UpdateAutoshiftObserverNotificationStatus.build(context)
           when :update_practice_run_configuration
             Aws::ARCZonalShift::Endpoints::UpdatePracticeRunConfiguration.build(context)
           when :update_zonal_autoshift_configuration

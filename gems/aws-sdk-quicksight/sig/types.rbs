@@ -51,11 +51,25 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AggFunction
+      attr_accessor aggregation: ("SUM" | "MIN" | "MAX" | "COUNT" | "AVERAGE" | "DISTINCT_COUNT" | "STDEV" | "STDEVP" | "VAR" | "VARP" | "PERCENTILE" | "MEDIAN" | "PTD_SUM" | "PTD_MIN" | "PTD_MAX" | "PTD_COUNT" | "PTD_DISTINCT_COUNT" | "PTD_AVERAGE" | "COLUMN" | "CUSTOM")
+      attr_accessor aggregation_function_parameters: ::Hash[::String, ::String]
+      attr_accessor period: ("SECOND" | "MINUTE" | "HOUR" | "DAY" | "WEEK" | "MONTH" | "QUARTER" | "YEAR")
+      attr_accessor period_field: ::String
+      SENSITIVE: []
+    end
+
     class AggregationFunction
       attr_accessor numerical_aggregation_function: Types::NumericalAggregationFunction
       attr_accessor categorical_aggregation_function: ("COUNT" | "DISTINCT_COUNT")
       attr_accessor date_aggregation_function: ("COUNT" | "DISTINCT_COUNT" | "MIN" | "MAX")
       attr_accessor attribute_aggregation_function: Types::AttributeAggregationFunction
+      SENSITIVE: []
+    end
+
+    class AggregationPartitionBy
+      attr_accessor field_name: ::String
+      attr_accessor time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")
       SENSITIVE: []
     end
 
@@ -142,6 +156,13 @@ module Aws::QuickSight
       attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Anchor
+      attr_accessor anchor_type: ("TODAY")
+      attr_accessor time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")
+      attr_accessor offset: ::Integer
       SENSITIVE: []
     end
 
@@ -676,6 +697,40 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class BatchCreateTopicReviewedAnswerRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor topic_id: ::String
+      attr_accessor answers: ::Array[Types::CreateTopicReviewedAnswer]
+      SENSITIVE: []
+    end
+
+    class BatchCreateTopicReviewedAnswerResponse
+      attr_accessor topic_id: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor succeeded_answers: ::Array[Types::SucceededTopicReviewedAnswer]
+      attr_accessor invalid_answers: ::Array[Types::InvalidTopicReviewedAnswer]
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTopicReviewedAnswerRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor topic_id: ::String
+      attr_accessor answer_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTopicReviewedAnswerResponse
+      attr_accessor topic_id: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor succeeded_answers: ::Array[Types::SucceededTopicReviewedAnswer]
+      attr_accessor invalid_answers: ::Array[Types::InvalidTopicReviewedAnswer]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class BigQueryParameters
       attr_accessor project_id: ::String
       attr_accessor data_set_region: ::String
@@ -930,6 +985,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class CollectiveConstantEntry
+      attr_accessor constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class ColorScale
       attr_accessor colors: ::Array[Types::DataColor]
       attr_accessor color_fill_type: ("DISCRETE" | "GRADIENT")
@@ -1174,6 +1235,17 @@ module Aws::QuickSight
     class ContributionAnalysisDefault
       attr_accessor measure_field_id: ::String
       attr_accessor contributor_dimensions: ::Array[Types::ColumnIdentifier]
+      SENSITIVE: []
+    end
+
+    class ContributionAnalysisFactor
+      attr_accessor field_name: ::String
+      SENSITIVE: []
+    end
+
+    class ContributionAnalysisTimeRanges
+      attr_accessor start_range: Types::TopicIRFilterOption
+      attr_accessor end_range: Types::TopicIRFilterOption
       SENSITIVE: []
     end
 
@@ -1595,6 +1667,16 @@ module Aws::QuickSight
       attr_accessor refresh_arn: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateTopicReviewedAnswer
+      attr_accessor answer_id: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor question: ::String
+      attr_accessor mir: Types::TopicIR
+      attr_accessor primary_visual: Types::TopicVisual
+      attr_accessor template: Types::TopicTemplate
       SENSITIVE: []
     end
 
@@ -2200,6 +2282,8 @@ module Aws::QuickSight
       attr_accessor title_options: Types::LabelOptions
       attr_accessor date_time_format: ::String
       attr_accessor info_icon_label_options: Types::SheetControlInfoIconLabelOptions
+      attr_accessor helper_text_visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor date_icon_visibility: ("HIDDEN" | "VISIBLE")
       SENSITIVE: []
     end
 
@@ -3640,6 +3724,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class FilterAggMetrics
+      attr_accessor metric_operand: Types::Identifier
+      attr_accessor function: ("SUM" | "MIN" | "MAX" | "COUNT" | "AVERAGE" | "DISTINCT_COUNT" | "STDEV" | "STDEVP" | "VAR" | "VARP" | "PERCENTILE" | "MEDIAN" | "PTD_SUM" | "PTD_MIN" | "PTD_MAX" | "PTD_COUNT" | "PTD_DISTINCT_COUNT" | "PTD_AVERAGE" | "COLUMN" | "CUSTOM")
+      attr_accessor sort_direction: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
     class FilterControl
       attr_accessor date_time_picker: Types::FilterDateTimePickerControl
       attr_accessor list: Types::FilterListControl
@@ -4368,6 +4459,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class Identifier
+      attr_accessor identity: ::String
+      SENSITIVE: []
+    end
+
     class IdentityCenterConfiguration
       attr_accessor enable_identity_propagation: bool
       SENSITIVE: []
@@ -4489,6 +4585,12 @@ module Aws::QuickSight
     class InvalidRequestException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTopicReviewedAnswer
+      attr_accessor answer_id: ::String
+      attr_accessor error: ("INTERNAL_ERROR" | "MISSING_ANSWER" | "DATASET_DOES_NOT_EXIST" | "INVALID_DATASET_ARN" | "DUPLICATED_ANSWER" | "INVALID_DATA" | "MISSING_REQUIRED_FIELDS")
       SENSITIVE: []
     end
 
@@ -5168,6 +5270,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ListTopicReviewedAnswersRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor topic_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicReviewedAnswersResponse
+      attr_accessor topic_id: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor answers: ::Array[Types::TopicReviewedAnswer]
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class ListTopicsRequest
       attr_accessor aws_account_id: ::String
       attr_accessor next_token: ::String
@@ -5358,6 +5475,11 @@ module Aws::QuickSight
     class NamedEntityDefinitionMetric
       attr_accessor aggregation: ("SUM" | "MIN" | "MAX" | "COUNT" | "AVERAGE" | "DISTINCT_COUNT" | "STDEV" | "STDEVP" | "VAR" | "VARP" | "PERCENTILE" | "MEDIAN" | "CUSTOM")
       attr_accessor aggregation_function_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NamedEntityRef
+      attr_accessor named_entity_name: ::String
       SENSITIVE: []
     end
 
@@ -6772,6 +6894,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class Slot
+      attr_accessor slot_id: ::String
+      attr_accessor visual_id: ::String
+      SENSITIVE: []
+    end
+
     class SmallMultiplesAxisProperties
       attr_accessor scale: ("SHARED" | "INDEPENDENT")
       attr_accessor placement: ("OUTSIDE" | "INSIDE")
@@ -7031,6 +7159,11 @@ module Aws::QuickSight
       attr_accessor value_cell_style: Types::TableCellStyle
       attr_accessor metric_header_cell_style: Types::TableCellStyle
       attr_accessor style_targets: ::Array[Types::TableStyleTarget]
+      SENSITIVE: []
+    end
+
+    class SucceededTopicReviewedAnswer
+      attr_accessor answer_id: ::String
       SENSITIVE: []
     end
 
@@ -7602,6 +7735,15 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class TopicConstantValue
+      attr_accessor constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")
+      attr_accessor value: ::String
+      attr_accessor minimum: ::String
+      attr_accessor maximum: ::String
+      attr_accessor value_list: ::Array[Types::CollectiveConstantEntry]
+      SENSITIVE: []
+    end
+
     class TopicDateRangeFilter
       attr_accessor inclusive: bool
       attr_accessor constant: Types::TopicRangeFilterConstant
@@ -7629,6 +7771,76 @@ module Aws::QuickSight
       attr_accessor date_range_filter: Types::TopicDateRangeFilter
       attr_accessor relative_date_filter: Types::TopicRelativeDateFilter
       SENSITIVE: []
+    end
+
+    class TopicIR
+      attr_accessor metrics: ::Array[Types::TopicIRMetric]
+      attr_accessor group_by_list: ::Array[Types::TopicIRGroupBy]
+      attr_accessor filters: ::Array[::Array[Types::TopicIRFilterOption]]
+      attr_accessor sort: Types::TopicSortClause
+      attr_accessor contribution_analysis: Types::TopicIRContributionAnalysis
+      attr_accessor visual: Types::VisualOptions
+      SENSITIVE: []
+    end
+
+    class TopicIRComparisonMethod
+      attr_accessor type: ("DIFF" | "PERC_DIFF" | "DIFF_AS_PERC" | "POP_CURRENT_DIFF_AS_PERC" | "POP_CURRENT_DIFF" | "POP_OVERTIME_DIFF_AS_PERC" | "POP_OVERTIME_DIFF" | "PERCENT_OF_TOTAL" | "RUNNING_SUM" | "MOVING_AVERAGE")
+      attr_accessor period: ("SECOND" | "MINUTE" | "HOUR" | "DAY" | "WEEK" | "MONTH" | "QUARTER" | "YEAR")
+      attr_accessor window_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class TopicIRContributionAnalysis
+      attr_accessor factors: ::Array[Types::ContributionAnalysisFactor]
+      attr_accessor time_ranges: Types::ContributionAnalysisTimeRanges
+      attr_accessor direction: ("INCREASE" | "DECREASE" | "NEUTRAL")
+      attr_accessor sort_type: ("ABSOLUTE_DIFFERENCE" | "CONTRIBUTION_PERCENTAGE" | "DEVIATION_FROM_EXPECTED" | "PERCENTAGE_DIFFERENCE")
+      SENSITIVE: []
+    end
+
+    class TopicIRFilterOption
+      attr_accessor filter_type: ("CATEGORY_FILTER" | "NUMERIC_EQUALITY_FILTER" | "NUMERIC_RANGE_FILTER" | "DATE_RANGE_FILTER" | "RELATIVE_DATE_FILTER" | "TOP_BOTTOM_FILTER" | "EQUALS" | "RANK_LIMIT_FILTER" | "ACCEPT_ALL_FILTER")
+      attr_accessor filter_class: ("ENFORCED_VALUE_FILTER" | "CONDITIONAL_VALUE_FILTER" | "NAMED_VALUE_FILTER")
+      attr_accessor operand_field: Types::Identifier
+      attr_accessor function: ("CONTAINS" | "EXACT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS_STRING" | "PREVIOUS" | "THIS" | "LAST" | "NEXT" | "NOW")
+      attr_accessor constant: Types::TopicConstantValue
+      attr_accessor inverse: bool
+      attr_accessor null_filter: ("ALL_VALUES" | "NON_NULLS_ONLY" | "NULLS_ONLY")
+      attr_accessor aggregation: ("SUM" | "MIN" | "MAX" | "COUNT" | "AVERAGE" | "DISTINCT_COUNT" | "STDEV" | "STDEVP" | "VAR" | "VARP" | "PERCENTILE" | "MEDIAN" | "PTD_SUM" | "PTD_MIN" | "PTD_MAX" | "PTD_COUNT" | "PTD_DISTINCT_COUNT" | "PTD_AVERAGE" | "COLUMN" | "CUSTOM")
+      attr_accessor aggregation_function_parameters: ::Hash[::String, ::String]
+      attr_accessor aggregation_partition_by: ::Array[Types::AggregationPartitionBy]
+      attr_accessor range: Types::TopicConstantValue
+      attr_accessor inclusive: bool
+      attr_accessor time_granularity: ("YEAR" | "QUARTER" | "MONTH" | "WEEK" | "DAY" | "HOUR" | "MINUTE" | "SECOND" | "MILLISECOND")
+      attr_accessor last_next_offset: Types::TopicConstantValue
+      attr_accessor agg_metrics: ::Array[Types::FilterAggMetrics]
+      attr_accessor top_bottom_limit: Types::TopicConstantValue
+      attr_accessor sort_direction: ("ASCENDING" | "DESCENDING")
+      attr_accessor anchor: Types::Anchor
+      SENSITIVE: []
+    end
+
+    class TopicIRGroupBy
+      attr_accessor field_name: Types::Identifier
+      attr_accessor time_granularity: ("SECOND" | "MINUTE" | "HOUR" | "DAY" | "WEEK" | "MONTH" | "QUARTER" | "YEAR")
+      attr_accessor sort: Types::TopicSortClause
+      attr_accessor display_format: ("AUTO" | "PERCENT" | "CURRENCY" | "NUMBER" | "DATE" | "STRING")
+      attr_accessor display_format_options: Types::DisplayFormatOptions
+      attr_accessor named_entity: Types::NamedEntityRef
+      SENSITIVE: []
+    end
+
+    class TopicIRMetric
+      attr_accessor metric_id: Types::Identifier
+      attr_accessor function: Types::AggFunction
+      attr_accessor operands: ::Array[Types::Identifier]
+      attr_accessor comparison_method: Types::TopicIRComparisonMethod
+      attr_accessor expression: ::String
+      attr_accessor calculated_field_references: ::Array[Types::Identifier]
+      attr_accessor display_format: ("AUTO" | "PERCENT" | "CURRENCY" | "NUMBER" | "DATE" | "STRING")
+      attr_accessor display_format_options: Types::DisplayFormatOptions
+      attr_accessor named_entity: Types::NamedEntityRef
+      SENSITIVE: [:expression]
     end
 
     class TopicNamedEntity
@@ -7691,9 +7903,26 @@ module Aws::QuickSight
       SENSITIVE: [:constant]
     end
 
+    class TopicReviewedAnswer
+      attr_accessor arn: ::String
+      attr_accessor answer_id: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor question: ::String
+      attr_accessor mir: Types::TopicIR
+      attr_accessor primary_visual: Types::TopicVisual
+      attr_accessor template: Types::TopicTemplate
+      SENSITIVE: []
+    end
+
     class TopicSingularFilterConstant
       attr_accessor constant_type: ("SINGULAR" | "RANGE" | "COLLECTIVE")
       attr_accessor singular_constant: ::String
+      SENSITIVE: []
+    end
+
+    class TopicSortClause
+      attr_accessor operand: Types::Identifier
+      attr_accessor sort_direction: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end
 
@@ -7702,6 +7931,20 @@ module Aws::QuickSight
       attr_accessor topic_id: ::String
       attr_accessor name: ::String
       attr_accessor user_experience_version: ("LEGACY" | "NEW_READER_EXPERIENCE")
+      SENSITIVE: []
+    end
+
+    class TopicTemplate
+      attr_accessor template_type: ::String
+      attr_accessor slots: ::Array[Types::Slot]
+      SENSITIVE: []
+    end
+
+    class TopicVisual
+      attr_accessor visual_id: ::String
+      attr_accessor role: ("PRIMARY" | "COMPLIMENTARY" | "MULTI_INTENT" | "FALLBACK" | "FRAGMENT")
+      attr_accessor ir: Types::TopicIR
+      attr_accessor supporting_visuals: ::Array[Types::TopicVisual]
       SENSITIVE: []
     end
 
@@ -8579,6 +8822,11 @@ module Aws::QuickSight
 
     class VisualMenuOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class VisualOptions
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 

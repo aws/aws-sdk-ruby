@@ -1402,7 +1402,7 @@ module Aws::ACMPCA
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have
     #   its policy retrieved. You can find the CA's ARN by calling the
-    #   ListCertificateAuthorities action.
+    #   ListCertificateAuthorities action.      </p>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetPolicyRequest AWS API Documentation
@@ -1813,13 +1813,6 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   Use this parameter when paginating results in a subsequent request
-    #   after you receive a response with truncated results. Set it to the
-    #   value of the `NextToken` parameter from the response you just
-    #   received.
-    #   @return [String]
-    #
     # @!attribute [rw] max_results
     #   Use this parameter when paginating results to specify the maximum
     #   number of items to return in the response on each page. If
@@ -1831,6 +1824,13 @@ module Aws::ACMPCA
     #   maximum of 100 items.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   Use this parameter when paginating results in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of the `NextToken` parameter from the response you just
+    #   received.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_owner
     #   Use this parameter to filter the returned set of certificate
     #   authorities based on their owner. The default is SELF.
@@ -1839,32 +1839,46 @@ module Aws::ACMPCA
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListCertificateAuthoritiesRequest AWS API Documentation
     #
     class ListCertificateAuthoritiesRequest < Struct.new(
-      :next_token,
       :max_results,
+      :next_token,
       :resource_owner)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] certificate_authorities
-    #   Summary information about each certificate authority you have
-    #   created.
-    #   @return [Array<Types::CertificateAuthority>]
-    #
     # @!attribute [rw] next_token
     #   When the list is truncated, this value is present and should be used
     #   for the `NextToken` parameter in a subsequent pagination request.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_authorities
+    #   Summary information about each certificate authority you have
+    #   created.
+    #   @return [Array<Types::CertificateAuthority>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListCertificateAuthoritiesResponse AWS API Documentation
     #
     class ListCertificateAuthoritiesResponse < Struct.new(
-      :certificate_authorities,
-      :next_token)
+      :next_token,
+      :certificate_authorities)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   When paginating results, use this parameter to specify the maximum
+    #   number of items to return in the response. If additional items exist
+    #   beyond the number you specify, the **NextToken** element is sent in
+    #   the response. Use this **NextToken** value in a subsequent request
+    #   to retrieve additional items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When paginating results, use this parameter in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of **NextToken** from the response you just received.
+    #   @return [String]
+    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA to inspect. You
     #   can find the ARN by calling the [ListCertificateAuthorities][1]
@@ -1878,50 +1892,50 @@ module Aws::ACMPCA
     #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
     #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   When paginating results, use this parameter in a subsequent request
-    #   after you receive a response with truncated results. Set it to the
-    #   value of **NextToken** from the response you just received.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   When paginating results, use this parameter to specify the maximum
-    #   number of items to return in the response. If additional items exist
-    #   beyond the number you specify, the **NextToken** element is sent in
-    #   the response. Use this **NextToken** value in a subsequent request
-    #   to retrieve additional items.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListPermissionsRequest AWS API Documentation
     #
     class ListPermissionsRequest < Struct.new(
-      :certificate_authority_arn,
+      :max_results,
       :next_token,
-      :max_results)
+      :certificate_authority_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   When the list is truncated, this value is present and should be used
+    #   for the **NextToken** parameter in a subsequent pagination request.
+    #   @return [String]
+    #
     # @!attribute [rw] permissions
     #   Summary information about each permission assigned by the specified
     #   private CA, including the action enabled, the policy provided, and
     #   the time of creation.
     #   @return [Array<Types::Permission>]
     #
-    # @!attribute [rw] next_token
-    #   When the list is truncated, this value is present and should be used
-    #   for the **NextToken** parameter in a subsequent pagination request.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListPermissionsResponse AWS API Documentation
     #
     class ListPermissionsResponse < Struct.new(
-      :permissions,
-      :next_token)
+      :next_token,
+      :permissions)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   Use this parameter when paginating results to specify the maximum
+    #   number of items to return in the response. If additional items exist
+    #   beyond the number you specify, the **NextToken** element is sent in
+    #   the response. Use this **NextToken** value in a subsequent request
+    #   to retrieve additional items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Use this parameter when paginating results in a subsequent request
+    #   after you receive a response with truncated results. Set it to the
+    #   value of **NextToken** from the response you just received.
+    #   @return [String]
+    #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) that was returned when you called the
     #   [CreateCertificateAuthority][1] action. This must be of the form:
@@ -1934,44 +1948,30 @@ module Aws::ACMPCA
     #   [1]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
     #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   Use this parameter when paginating results in a subsequent request
-    #   after you receive a response with truncated results. Set it to the
-    #   value of **NextToken** from the response you just received.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   Use this parameter when paginating results to specify the maximum
-    #   number of items to return in the response. If additional items exist
-    #   beyond the number you specify, the **NextToken** element is sent in
-    #   the response. Use this **NextToken** value in a subsequent request
-    #   to retrieve additional items.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListTagsRequest AWS API Documentation
     #
     class ListTagsRequest < Struct.new(
-      :certificate_authority_arn,
+      :max_results,
       :next_token,
-      :max_results)
+      :certificate_authority_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] tags
-    #   The tags associated with your private CA.
-    #   @return [Array<Types::Tag>]
-    #
     # @!attribute [rw] next_token
     #   When the list is truncated, this value is present and should be used
     #   for the **NextToken** parameter in a subsequent pagination request.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags associated with your private CA.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListTagsResponse AWS API Documentation
     #
     class ListTagsResponse < Struct.new(
-      :tags,
-      :next_token)
+      :next_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

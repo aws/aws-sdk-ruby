@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-07-12)
+------------------
+
+* Feature - Adds the option to subscribe to get notifications when a zonal autoshift occurs in a region.
+
 1.18.0 (2024-07-02)
 ------------------
 

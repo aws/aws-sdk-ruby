@@ -36,18 +36,18 @@ module Aws::ARCZonalShift
     #
     # @!attribute [rw] applied_status
     #   The `appliedStatus` field specifies which application traffic shift
-    #   is in effect for a resource when there is more than one traffic
-    #   shift active. There can be more than one application traffic shift
+    #   is in effect for a resource when there is more than one active
+    #   traffic shift. There can be more than one application traffic shift
     #   in progress at the same time - that is, practice run zonal shifts,
-    #   customer-started zonal shifts, or an autoshift. The `appliedStatus`
-    #   field for an autoshift for a resource can have one of two values:
-    #   `APPLIED` or `NOT_APPLIED`. The zonal shift or autoshift that is
-    #   currently in effect for the resource has an applied status set to
-    #   `APPLIED`.
+    #   customer-initiated zonal shifts, or an autoshift. The
+    #   `appliedStatus` field for a shift that is in progress for a resource
+    #   can have one of two values: `APPLIED` or `NOT_APPLIED`. The zonal
+    #   shift or autoshift that is currently in effect for the resource has
+    #   an `appliedStatus` set to `APPLIED`.
     #
     #   The overall principle for precedence is that zonal shifts that you
     #   start as a customer take precedence autoshifts, which take
-    #   precedence over practice runs. That is, customer-started zonal
+    #   precedence over practice runs. That is, customer-initiated zonal
     #   shifts &gt; autoshifts &gt; practice run zonal shifts.
     #
     #   For more information, see [How zonal autoshift and practice runs
@@ -60,13 +60,13 @@ module Aws::ARCZonalShift
     #   @return [String]
     #
     # @!attribute [rw] away_from
-    #   The Availability Zone that traffic is shifted away from for a
-    #   resource, when Amazon Web Services starts an autoshift. Until the
-    #   autoshift ends, traffic for the resource is instead directed to
-    #   other Availability Zones in the Amazon Web Services Region. An
-    #   autoshift can end for a resource, for example, when Amazon Web
-    #   Services ends the autoshift for the Availability Zone or when you
-    #   disable zonal autoshift for the resource.
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   shifted away from for a resource, when Amazon Web Services starts an
+    #   autoshift. Until the autoshift ends, traffic for the resource is
+    #   instead directed to other Availability Zones in the Amazon Web
+    #   Services Region. An autoshift can end for a resource, for example,
+    #   when Amazon Web Services ends the autoshift for the Availability
+    #   Zone or when you disable zonal autoshift for the resource.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -99,13 +99,13 @@ module Aws::ARCZonalShift
     # You can stop an autoshift for a resource by disabling zonal autoshift.
     #
     # @!attribute [rw] away_from
-    #   The Availability Zone that traffic is shifted away from for a
-    #   resource when Amazon Web Services starts an autoshift. Until the
-    #   autoshift ends, traffic for the resource is instead directed to
-    #   other Availability Zones in the Amazon Web Services Region. An
-    #   autoshift can end for a resource, for example, when Amazon Web
-    #   Services ends the autoshift for the Availability Zone or when you
-    #   disable zonal autoshift for the resource.
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   shifted away from for a resource when Amazon Web Services starts an
+    #   autoshift. Until the autoshift ends, traffic for the resource is
+    #   instead directed to other Availability Zones in the Amazon Web
+    #   Services Region. An autoshift can end for a resource, for example,
+    #   when Amazon Web Services ends the autoshift for the Availability
+    #   Zone or when you disable zonal autoshift for the resource.
     #   @return [String]
     #
     # @!attribute [rw] end_time
@@ -173,7 +173,7 @@ module Aws::ARCZonalShift
     # to use with the practice run. The alarms that you specify are an
     # *outcome alarm*, to monitor application health during practice runs
     # and, optionally, a *blocking alarm*, to block practice runs from
-    # starting.
+    # starting or to interrupt a practice run in progress.
     #
     # Control condition alarms do not apply for autoshifts.
     #
@@ -186,12 +186,13 @@ module Aws::ARCZonalShift
     # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html
     #
     # @!attribute [rw] alarm_identifier
-    #   The Amazon Resource Name (ARN) for the Amazon CloudWatch alarm that
+    #   The Amazon Resource Name (ARN) for an Amazon CloudWatch alarm that
     #   you specify as a control condition for a practice run.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of alarm specified for a practice run. The only valid value
+    #   The type of alarm specified for a practice run. You can only specify
+    #   Amazon CloudWatch alarms for practice runs, so the only valid value
     #   is `CLOUDWATCH`.
     #   @return [String]
     #
@@ -254,9 +255,9 @@ module Aws::ARCZonalShift
     #   @return [Array<Types::ControlCondition>]
     #
     # @!attribute [rw] resource_identifier
-    #   The identifier of the resource to shift away traffic for when a
-    #   practice run starts a zonal shift. The identifier is the Amazon
-    #   Resource Name (ARN) for the resource.
+    #   The identifier of the resource that Amazon Web Services shifts
+    #   traffic for with a practice run zonal shift. The identifier is the
+    #   Amazon Resource Name (ARN) for the resource.
     #
     #   At this time, supported resources are Network Load Balancers and
     #   Application Load Balancers with cross-zone load balancing turned
@@ -291,12 +292,12 @@ module Aws::ARCZonalShift
     #   @return [Types::PracticeRunConfiguration]
     #
     # @!attribute [rw] zonal_autoshift_status
-    #   The status for zonal autoshift for a resource. When you specify the
-    #   autoshift status as `ENABLED`, Amazon Web Services shifts traffic
-    #   away from shifts away application resource traffic from an
-    #   Availability Zone, on your behalf, when Amazon Web Services
-    #   determines that there's an issue in the Availability Zone that
-    #   could potentially affect customers.
+    #   The status for zonal autoshift for a resource. When you specify
+    #   `ENABLED` for the autoshift status, Amazon Web Services shifts
+    #   traffic away from shifts away application resource traffic from an
+    #   Availability Zone, on your behalf, when internal telemetry indicates
+    #   that there is an Availability Zone impairment that could potentially
+    #   impact customers.
     #
     #   When you enable zonal autoshift, you must also configure practice
     #   runs for the resource.
@@ -350,9 +351,33 @@ module Aws::ARCZonalShift
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/GetAutoshiftObserverNotificationStatusRequest AWS API Documentation
+    #
+    class GetAutoshiftObserverNotificationStatusRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] status
+    #   The status of autoshift observer notification. If the status is
+    #   `ENABLED`, Route 53 ARC includes all autoshift events when you use
+    #   the Amazon EventBridge pattern `Autoshift In Progress`. When the
+    #   status is `DISABLED`, Route 53 ARC includes only autoshift events
+    #   for autoshifts when one or more of your resources is included in the
+    #   autoshift.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/GetAutoshiftObserverNotificationStatusResponse AWS API Documentation
+    #
+    class GetAutoshiftObserverNotificationStatusResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_identifier
-    #   The identifier for the resource to shift away traffic for. The
-    #   identifier is the Amazon Resource Name (ARN) for the resource.
+    #   The identifier for the resource that Amazon Web Services shifts
+    #   traffic for. The identifier is the Amazon Resource Name (ARN) for
+    #   the resource.
     #
     #   At this time, supported resources are Network Load Balancers and
     #   Application Load Balancers with cross-zone load balancing turned
@@ -658,7 +683,14 @@ module Aws::ARCZonalShift
 
     # A practice run configuration for a resource includes the Amazon
     # CloudWatch alarms that you've specified for a practice run, as well
-    # as any blocked dates or blocked windows for the practice run.
+    # as any blocked dates or blocked windows for the practice run. When a
+    # resource has a practice run configuration, Route 53 ARC shifts traffic
+    # for the resource weekly for practice runs.
+    #
+    # Practice runs are required for zonal autoshift. The zonal shifts that
+    # Route 53 ARC starts for practice runs help you to ensure that shifting
+    # away traffic from an Availability Zone during an autoshift is safe for
+    # your application.
     #
     # You can update or delete a practice run configuration. Before you
     # delete a practice run configuration, you must disable zonal autoshift
@@ -718,10 +750,11 @@ module Aws::ARCZonalShift
     end
 
     # @!attribute [rw] away_from
-    #   The Availability Zone that traffic is moved away from for a resource
-    #   when you start a zonal shift. Until the zonal shift expires or you
-    #   cancel it, traffic for the resource is instead moved to other
-    #   Availability Zones in the Amazon Web Services Region.
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   moved away from for a resource when you start a zonal shift. Until
+    #   the zonal shift expires or you cancel it, traffic for the resource
+    #   is instead moved to other Availability Zones in the Amazon Web
+    #   Services Region.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -753,8 +786,9 @@ module Aws::ARCZonalShift
     #   @return [String]
     #
     # @!attribute [rw] resource_identifier
-    #   The identifier for the resource to shift away traffic for. The
-    #   identifier is the Amazon Resource Name (ARN) for the resource.
+    #   The identifier for the resource that Amazon Web Services shifts
+    #   traffic for. The identifier is the Amazon Resource Name (ARN) for
+    #   the resource.
     #
     #   At this time, supported resources are Network Load Balancers and
     #   Application Load Balancers with cross-zone load balancing turned
@@ -781,6 +815,35 @@ module Aws::ARCZonalShift
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status to set for autoshift observer notification. If the status
+    #   is `ENABLED`, Route 53 ARC includes all autoshift events when you
+    #   use the Amazon EventBridge pattern `Autoshift In Progress`. When the
+    #   status is `DISABLED`, Route 53 ARC includes only autoshift events
+    #   for autoshifts when one or more of your resources is included in the
+    #   autoshift.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdateAutoshiftObserverNotificationStatusRequest AWS API Documentation
+    #
+    class UpdateAutoshiftObserverNotificationStatusRequest < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status for autoshift observer notification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdateAutoshiftObserverNotificationStatusResponse AWS API Documentation
+    #
+    class UpdateAutoshiftObserverNotificationStatusResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -881,7 +944,10 @@ module Aws::ARCZonalShift
     #
     # @!attribute [rw] zonal_autoshift_status
     #   The zonal autoshift status for the resource that you want to update
-    #   the zonal autoshift configuration for.
+    #   the zonal autoshift configuration for. Choose `ENABLED` to authorize
+    #   Amazon Web Services to shift away resource traffic for an
+    #   application from an Availability Zone during events, on your behalf,
+    #   to help reduce time to recovery.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdateZonalAutoshiftConfigurationRequest AWS API Documentation
@@ -900,8 +966,7 @@ module Aws::ARCZonalShift
     #   @return [String]
     #
     # @!attribute [rw] zonal_autoshift_status
-    #   The zonal autoshift status for the resource that you updated the
-    #   zonal autoshift configuration for.
+    #   The updated zonal autoshift status for the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-zonal-shift-2022-10-30/UpdateZonalAutoshiftConfigurationResponse AWS API Documentation
@@ -975,10 +1040,11 @@ module Aws::ARCZonalShift
     end
 
     # @!attribute [rw] away_from
-    #   The Availability Zone that traffic is moved away from for a resource
-    #   when you start a zonal shift. Until the zonal shift expires or you
-    #   cancel it, traffic for the resource is instead moved to other
-    #   Availability Zones in the Amazon Web Services Region.
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   moved away from for a resource when you start a zonal shift. Until
+    #   the zonal shift expires or you cancel it, traffic for the resource
+    #   is instead moved to other Availability Zones in the Amazon Web
+    #   Services Region.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -988,7 +1054,7 @@ module Aws::ARCZonalShift
     #   @return [String]
     #
     # @!attribute [rw] expiry_time
-    #   The expiry time (expiration time) for a customer-started zonal
+    #   The expiry time (expiration time) for a customer-initiated zonal
     #   shift. A zonal shift is temporary and must be set to expire when you
     #   start the zonal shift. You can initially set a zonal shift to expire
     #   in a maximum of three days (72 hours). However, you can update a
@@ -1003,8 +1069,9 @@ module Aws::ARCZonalShift
     #   @return [Time]
     #
     # @!attribute [rw] resource_identifier
-    #   The identifier for the resource to shift away traffic for. The
-    #   identifier is the Amazon Resource Name (ARN) for the resource.
+    #   The identifier for the resource that Amazon Web Services shifts
+    #   traffic for. The identifier is the Amazon Resource Name (ARN) for
+    #   the resource.
     #
     #   At this time, supported resources are Network Load Balancers and
     #   Application Load Balancers with cross-zone load balancing turned
@@ -1051,18 +1118,18 @@ module Aws::ARCZonalShift
     #
     # @!attribute [rw] applied_status
     #   The `appliedStatus` field specifies which application traffic shift
-    #   is in effect for a resource when there is more than one traffic
-    #   shift active. There can be more than one application traffic shift
+    #   is in effect for a resource when there is more than one active
+    #   traffic shift. There can be more than one application traffic shift
     #   in progress at the same time - that is, practice run zonal shifts,
-    #   customer-started zonal shifts, or an autoshift. The `appliedStatus`
-    #   field for an autoshift for a resource can have one of two values:
-    #   `APPLIED` or `NOT_APPLIED`. The zonal shift or autoshift that is
-    #   currently in effect for the resource has an applied status set to
-    #   `APPLIED`.
+    #   customer-initiated zonal shifts, or an autoshift. The
+    #   `appliedStatus` field for a shift that is in progress for a resource
+    #   can have one of two values: `APPLIED` or `NOT_APPLIED`. The zonal
+    #   shift or autoshift that is currently in effect for the resource has
+    #   an `appliedStatus` set to `APPLIED`.
     #
     #   The overall principle for precedence is that zonal shifts that you
     #   start as a customer take precedence autoshifts, which take
-    #   precedence over practice runs. That is, customer-started zonal
+    #   precedence over practice runs. That is, customer-initiated zonal
     #   shifts &gt; autoshifts &gt; practice run zonal shifts.
     #
     #   For more information, see [How zonal autoshift and practice runs
@@ -1075,20 +1142,21 @@ module Aws::ARCZonalShift
     #   @return [String]
     #
     # @!attribute [rw] away_from
-    #   The Availability Zone that traffic is moved away from for a resource
-    #   when you start a zonal shift. Until the zonal shift expires or you
-    #   cancel it, traffic for the resource is instead moved to other
-    #   Availability Zones in the Amazon Web Services Region.
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   moved away from for a resource when you start a zonal shift. Until
+    #   the zonal shift expires or you cancel it, traffic for the resource
+    #   is instead moved to other Availability Zones in the Amazon Web
+    #   Services Region.
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   A comment that you enter about the zonal shift. Only the latest
-    #   comment is retained; no comment history is maintained. That is, a
-    #   new comment overwrites any existing comment string.
+    #   A comment that you enter for a customer-initiated zonal shift. Only
+    #   the latest comment is retained; no comment history is maintained.
+    #   That is, a new comment overwrites any existing comment string.
     #   @return [String]
     #
     # @!attribute [rw] expiry_time
-    #   The expiry time (expiration time) for a customer-started zonal
+    #   The expiry time (expiration time) for a customer-initiated zonal
     #   shift. A zonal shift is temporary and must be set to expire when you
     #   start the zonal shift. You can initially set a zonal shift to expire
     #   in a maximum of three days (72 hours). However, you can update a
@@ -1169,17 +1237,18 @@ module Aws::ARCZonalShift
     # and zonal shifts that Route 53 ARC starts on your behalf for practice
     # runs with zonal autoshift.
     #
-    # Zonal shifts are temporary, including customer-started zonal shifts
+    # Zonal shifts are temporary, including customer-initiated zonal shifts
     # and the zonal autoshift practice run zonal shifts that Route 53 ARC
     # starts weekly, on your behalf. A zonal shift that a customer starts
     # can be active for up to three days (72 hours). A practice run zonal
     # shift has a 30 minute duration.
     #
     # @!attribute [rw] away_from
-    #   The Availability Zone that traffic is moved away from for a resource
-    #   when you start a zonal shift. Until the zonal shift expires or you
-    #   cancel it, traffic for the resource is instead moved to other
-    #   Availability Zones in the Amazon Web Services Region.
+    #   The Availability Zone (for example, `use1-az1`) that traffic is
+    #   moved away from for a resource when you start a zonal shift. Until
+    #   the zonal shift expires or you cancel it, traffic for the resource
+    #   is instead moved to other Availability Zones in the Amazon Web
+    #   Services Region.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -1189,7 +1258,7 @@ module Aws::ARCZonalShift
     #   @return [String]
     #
     # @!attribute [rw] expiry_time
-    #   The expiry time (expiration time) for a customer-started zonal
+    #   The expiry time (expiration time) for a customer-initiated zonal
     #   shift. A zonal shift is temporary and must be set to expire when you
     #   start the zonal shift. You can initially set a zonal shift to expire
     #   in a maximum of three days (72 hours). However, you can update a

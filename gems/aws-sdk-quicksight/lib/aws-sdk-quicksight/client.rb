@@ -425,6 +425,870 @@ module Aws::QuickSight
 
     # @!group API Operations
 
+    # Creates new reviewed answers for a Q Topic.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that you want to create a
+    #   reviewed answer in.
+    #
+    # @option params [required, String] :topic_id
+    #   The ID for the topic reviewed answer that you want to create. This ID
+    #   is unique per Amazon Web Services Region for each Amazon Web Services
+    #   account.
+    #
+    # @option params [required, Array<Types::CreateTopicReviewedAnswer>] :answers
+    #   The definition of the Answers to be created.
+    #
+    # @return [Types::BatchCreateTopicReviewedAnswerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateTopicReviewedAnswerResponse#topic_id #topic_id} => String
+    #   * {Types::BatchCreateTopicReviewedAnswerResponse#topic_arn #topic_arn} => String
+    #   * {Types::BatchCreateTopicReviewedAnswerResponse#succeeded_answers #succeeded_answers} => Array&lt;Types::SucceededTopicReviewedAnswer&gt;
+    #   * {Types::BatchCreateTopicReviewedAnswerResponse#invalid_answers #invalid_answers} => Array&lt;Types::InvalidTopicReviewedAnswer&gt;
+    #   * {Types::BatchCreateTopicReviewedAnswerResponse#status #status} => Integer
+    #   * {Types::BatchCreateTopicReviewedAnswerResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_topic_reviewed_answer({
+    #     aws_account_id: "AwsAccountId", # required
+    #     topic_id: "TopicId", # required
+    #     answers: [ # required
+    #       {
+    #         answer_id: "AnswerId", # required
+    #         dataset_arn: "Arn", # required
+    #         question: "LimitedString", # required
+    #         mir: {
+    #           metrics: [
+    #             {
+    #               metric_id: {
+    #                 identity: "LimitedString", # required
+    #               },
+    #               function: {
+    #                 aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                 aggregation_function_parameters: {
+    #                   "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                 },
+    #                 period: "SECOND", # accepts SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+    #                 period_field: "LimitedString",
+    #               },
+    #               operands: [
+    #                 {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #               ],
+    #               comparison_method: {
+    #                 type: "DIFF", # accepts DIFF, PERC_DIFF, DIFF_AS_PERC, POP_CURRENT_DIFF_AS_PERC, POP_CURRENT_DIFF, POP_OVERTIME_DIFF_AS_PERC, POP_OVERTIME_DIFF, PERCENT_OF_TOTAL, RUNNING_SUM, MOVING_AVERAGE
+    #                 period: "SECOND", # accepts SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+    #                 window_size: 1,
+    #               },
+    #               expression: "Expression",
+    #               calculated_field_references: [
+    #                 {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #               ],
+    #               display_format: "AUTO", # accepts AUTO, PERCENT, CURRENCY, NUMBER, DATE, STRING
+    #               display_format_options: {
+    #                 use_blank_cell_format: false,
+    #                 blank_cell_format: "LimitedString",
+    #                 date_format: "LimitedString",
+    #                 decimal_separator: "COMMA", # accepts COMMA, DOT
+    #                 grouping_separator: "LimitedString",
+    #                 use_grouping: false,
+    #                 fraction_digits: 1,
+    #                 prefix: "LimitedString",
+    #                 suffix: "LimitedString",
+    #                 unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                 negative_format: {
+    #                   prefix: "LimitedString",
+    #                   suffix: "LimitedString",
+    #                 },
+    #                 currency_symbol: "LimitedString",
+    #               },
+    #               named_entity: {
+    #                 named_entity_name: "LimitedString",
+    #               },
+    #             },
+    #           ],
+    #           group_by_list: [
+    #             {
+    #               field_name: {
+    #                 identity: "LimitedString", # required
+    #               },
+    #               time_granularity: "SECOND", # accepts SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+    #               sort: {
+    #                 operand: {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #                 sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #               },
+    #               display_format: "AUTO", # accepts AUTO, PERCENT, CURRENCY, NUMBER, DATE, STRING
+    #               display_format_options: {
+    #                 use_blank_cell_format: false,
+    #                 blank_cell_format: "LimitedString",
+    #                 date_format: "LimitedString",
+    #                 decimal_separator: "COMMA", # accepts COMMA, DOT
+    #                 grouping_separator: "LimitedString",
+    #                 use_grouping: false,
+    #                 fraction_digits: 1,
+    #                 prefix: "LimitedString",
+    #                 suffix: "LimitedString",
+    #                 unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                 negative_format: {
+    #                   prefix: "LimitedString",
+    #                   suffix: "LimitedString",
+    #                 },
+    #                 currency_symbol: "LimitedString",
+    #               },
+    #               named_entity: {
+    #                 named_entity_name: "LimitedString",
+    #               },
+    #             },
+    #           ],
+    #           filters: [
+    #             [
+    #               {
+    #                 filter_type: "CATEGORY_FILTER", # accepts CATEGORY_FILTER, NUMERIC_EQUALITY_FILTER, NUMERIC_RANGE_FILTER, DATE_RANGE_FILTER, RELATIVE_DATE_FILTER, TOP_BOTTOM_FILTER, EQUALS, RANK_LIMIT_FILTER, ACCEPT_ALL_FILTER
+    #                 filter_class: "ENFORCED_VALUE_FILTER", # accepts ENFORCED_VALUE_FILTER, CONDITIONAL_VALUE_FILTER, NAMED_VALUE_FILTER
+    #                 operand_field: {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #                 function: "CONTAINS", # accepts CONTAINS, EXACT, STARTS_WITH, ENDS_WITH, CONTAINS_STRING, PREVIOUS, THIS, LAST, NEXT, NOW
+    #                 constant: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 inverse: false,
+    #                 null_filter: "ALL_VALUES", # accepts ALL_VALUES, NON_NULLS_ONLY, NULLS_ONLY
+    #                 aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                 aggregation_function_parameters: {
+    #                   "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                 },
+    #                 aggregation_partition_by: [
+    #                   {
+    #                     field_name: "LimitedString",
+    #                     time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   },
+    #                 ],
+    #                 range: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 inclusive: false,
+    #                 time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                 last_next_offset: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 agg_metrics: [
+    #                   {
+    #                     metric_operand: {
+    #                       identity: "LimitedString", # required
+    #                     },
+    #                     function: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                     sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                   },
+    #                 ],
+    #                 top_bottom_limit: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                 anchor: {
+    #                   anchor_type: "TODAY", # accepts TODAY
+    #                   time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   offset: 1,
+    #                 },
+    #               },
+    #             ],
+    #           ],
+    #           sort: {
+    #             operand: {
+    #               identity: "LimitedString", # required
+    #             },
+    #             sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #           },
+    #           contribution_analysis: {
+    #             factors: [
+    #               {
+    #                 field_name: "LimitedString",
+    #               },
+    #             ],
+    #             time_ranges: {
+    #               start_range: {
+    #                 filter_type: "CATEGORY_FILTER", # accepts CATEGORY_FILTER, NUMERIC_EQUALITY_FILTER, NUMERIC_RANGE_FILTER, DATE_RANGE_FILTER, RELATIVE_DATE_FILTER, TOP_BOTTOM_FILTER, EQUALS, RANK_LIMIT_FILTER, ACCEPT_ALL_FILTER
+    #                 filter_class: "ENFORCED_VALUE_FILTER", # accepts ENFORCED_VALUE_FILTER, CONDITIONAL_VALUE_FILTER, NAMED_VALUE_FILTER
+    #                 operand_field: {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #                 function: "CONTAINS", # accepts CONTAINS, EXACT, STARTS_WITH, ENDS_WITH, CONTAINS_STRING, PREVIOUS, THIS, LAST, NEXT, NOW
+    #                 constant: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 inverse: false,
+    #                 null_filter: "ALL_VALUES", # accepts ALL_VALUES, NON_NULLS_ONLY, NULLS_ONLY
+    #                 aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                 aggregation_function_parameters: {
+    #                   "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                 },
+    #                 aggregation_partition_by: [
+    #                   {
+    #                     field_name: "LimitedString",
+    #                     time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   },
+    #                 ],
+    #                 range: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 inclusive: false,
+    #                 time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                 last_next_offset: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 agg_metrics: [
+    #                   {
+    #                     metric_operand: {
+    #                       identity: "LimitedString", # required
+    #                     },
+    #                     function: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                     sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                   },
+    #                 ],
+    #                 top_bottom_limit: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                 anchor: {
+    #                   anchor_type: "TODAY", # accepts TODAY
+    #                   time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   offset: 1,
+    #                 },
+    #               },
+    #               end_range: {
+    #                 filter_type: "CATEGORY_FILTER", # accepts CATEGORY_FILTER, NUMERIC_EQUALITY_FILTER, NUMERIC_RANGE_FILTER, DATE_RANGE_FILTER, RELATIVE_DATE_FILTER, TOP_BOTTOM_FILTER, EQUALS, RANK_LIMIT_FILTER, ACCEPT_ALL_FILTER
+    #                 filter_class: "ENFORCED_VALUE_FILTER", # accepts ENFORCED_VALUE_FILTER, CONDITIONAL_VALUE_FILTER, NAMED_VALUE_FILTER
+    #                 operand_field: {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #                 function: "CONTAINS", # accepts CONTAINS, EXACT, STARTS_WITH, ENDS_WITH, CONTAINS_STRING, PREVIOUS, THIS, LAST, NEXT, NOW
+    #                 constant: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 inverse: false,
+    #                 null_filter: "ALL_VALUES", # accepts ALL_VALUES, NON_NULLS_ONLY, NULLS_ONLY
+    #                 aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                 aggregation_function_parameters: {
+    #                   "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                 },
+    #                 aggregation_partition_by: [
+    #                   {
+    #                     field_name: "LimitedString",
+    #                     time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   },
+    #                 ],
+    #                 range: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 inclusive: false,
+    #                 time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                 last_next_offset: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 agg_metrics: [
+    #                   {
+    #                     metric_operand: {
+    #                       identity: "LimitedString", # required
+    #                     },
+    #                     function: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                     sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                   },
+    #                 ],
+    #                 top_bottom_limit: {
+    #                   constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                   value: "ConstantValueString",
+    #                   minimum: "ConstantValueString",
+    #                   maximum: "ConstantValueString",
+    #                   value_list: [
+    #                     {
+    #                       constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                       value: "ConstantValueString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                 anchor: {
+    #                   anchor_type: "TODAY", # accepts TODAY
+    #                   time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   offset: 1,
+    #                 },
+    #               },
+    #             },
+    #             direction: "INCREASE", # accepts INCREASE, DECREASE, NEUTRAL
+    #             sort_type: "ABSOLUTE_DIFFERENCE", # accepts ABSOLUTE_DIFFERENCE, CONTRIBUTION_PERCENTAGE, DEVIATION_FROM_EXPECTED, PERCENTAGE_DIFFERENCE
+    #           },
+    #           visual: {
+    #             type: "LimitedString",
+    #           },
+    #         },
+    #         primary_visual: {
+    #           visual_id: "LimitedString",
+    #           role: "PRIMARY", # accepts PRIMARY, COMPLIMENTARY, MULTI_INTENT, FALLBACK, FRAGMENT
+    #           ir: {
+    #             metrics: [
+    #               {
+    #                 metric_id: {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #                 function: {
+    #                   aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                   aggregation_function_parameters: {
+    #                     "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                   },
+    #                   period: "SECOND", # accepts SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+    #                   period_field: "LimitedString",
+    #                 },
+    #                 operands: [
+    #                   {
+    #                     identity: "LimitedString", # required
+    #                   },
+    #                 ],
+    #                 comparison_method: {
+    #                   type: "DIFF", # accepts DIFF, PERC_DIFF, DIFF_AS_PERC, POP_CURRENT_DIFF_AS_PERC, POP_CURRENT_DIFF, POP_OVERTIME_DIFF_AS_PERC, POP_OVERTIME_DIFF, PERCENT_OF_TOTAL, RUNNING_SUM, MOVING_AVERAGE
+    #                   period: "SECOND", # accepts SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+    #                   window_size: 1,
+    #                 },
+    #                 expression: "Expression",
+    #                 calculated_field_references: [
+    #                   {
+    #                     identity: "LimitedString", # required
+    #                   },
+    #                 ],
+    #                 display_format: "AUTO", # accepts AUTO, PERCENT, CURRENCY, NUMBER, DATE, STRING
+    #                 display_format_options: {
+    #                   use_blank_cell_format: false,
+    #                   blank_cell_format: "LimitedString",
+    #                   date_format: "LimitedString",
+    #                   decimal_separator: "COMMA", # accepts COMMA, DOT
+    #                   grouping_separator: "LimitedString",
+    #                   use_grouping: false,
+    #                   fraction_digits: 1,
+    #                   prefix: "LimitedString",
+    #                   suffix: "LimitedString",
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   negative_format: {
+    #                     prefix: "LimitedString",
+    #                     suffix: "LimitedString",
+    #                   },
+    #                   currency_symbol: "LimitedString",
+    #                 },
+    #                 named_entity: {
+    #                   named_entity_name: "LimitedString",
+    #                 },
+    #               },
+    #             ],
+    #             group_by_list: [
+    #               {
+    #                 field_name: {
+    #                   identity: "LimitedString", # required
+    #                 },
+    #                 time_granularity: "SECOND", # accepts SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR
+    #                 sort: {
+    #                   operand: {
+    #                     identity: "LimitedString", # required
+    #                   },
+    #                   sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                 },
+    #                 display_format: "AUTO", # accepts AUTO, PERCENT, CURRENCY, NUMBER, DATE, STRING
+    #                 display_format_options: {
+    #                   use_blank_cell_format: false,
+    #                   blank_cell_format: "LimitedString",
+    #                   date_format: "LimitedString",
+    #                   decimal_separator: "COMMA", # accepts COMMA, DOT
+    #                   grouping_separator: "LimitedString",
+    #                   use_grouping: false,
+    #                   fraction_digits: 1,
+    #                   prefix: "LimitedString",
+    #                   suffix: "LimitedString",
+    #                   unit_scaler: "NONE", # accepts NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, TRILLIONS
+    #                   negative_format: {
+    #                     prefix: "LimitedString",
+    #                     suffix: "LimitedString",
+    #                   },
+    #                   currency_symbol: "LimitedString",
+    #                 },
+    #                 named_entity: {
+    #                   named_entity_name: "LimitedString",
+    #                 },
+    #               },
+    #             ],
+    #             filters: [
+    #               [
+    #                 {
+    #                   filter_type: "CATEGORY_FILTER", # accepts CATEGORY_FILTER, NUMERIC_EQUALITY_FILTER, NUMERIC_RANGE_FILTER, DATE_RANGE_FILTER, RELATIVE_DATE_FILTER, TOP_BOTTOM_FILTER, EQUALS, RANK_LIMIT_FILTER, ACCEPT_ALL_FILTER
+    #                   filter_class: "ENFORCED_VALUE_FILTER", # accepts ENFORCED_VALUE_FILTER, CONDITIONAL_VALUE_FILTER, NAMED_VALUE_FILTER
+    #                   operand_field: {
+    #                     identity: "LimitedString", # required
+    #                   },
+    #                   function: "CONTAINS", # accepts CONTAINS, EXACT, STARTS_WITH, ENDS_WITH, CONTAINS_STRING, PREVIOUS, THIS, LAST, NEXT, NOW
+    #                   constant: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   inverse: false,
+    #                   null_filter: "ALL_VALUES", # accepts ALL_VALUES, NON_NULLS_ONLY, NULLS_ONLY
+    #                   aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                   aggregation_function_parameters: {
+    #                     "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                   },
+    #                   aggregation_partition_by: [
+    #                     {
+    #                       field_name: "LimitedString",
+    #                       time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                     },
+    #                   ],
+    #                   range: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   inclusive: false,
+    #                   time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   last_next_offset: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   agg_metrics: [
+    #                     {
+    #                       metric_operand: {
+    #                         identity: "LimitedString", # required
+    #                       },
+    #                       function: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                       sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                     },
+    #                   ],
+    #                   top_bottom_limit: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                   anchor: {
+    #                     anchor_type: "TODAY", # accepts TODAY
+    #                     time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                     offset: 1,
+    #                   },
+    #                 },
+    #               ],
+    #             ],
+    #             sort: {
+    #               operand: {
+    #                 identity: "LimitedString", # required
+    #               },
+    #               sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #             },
+    #             contribution_analysis: {
+    #               factors: [
+    #                 {
+    #                   field_name: "LimitedString",
+    #                 },
+    #               ],
+    #               time_ranges: {
+    #                 start_range: {
+    #                   filter_type: "CATEGORY_FILTER", # accepts CATEGORY_FILTER, NUMERIC_EQUALITY_FILTER, NUMERIC_RANGE_FILTER, DATE_RANGE_FILTER, RELATIVE_DATE_FILTER, TOP_BOTTOM_FILTER, EQUALS, RANK_LIMIT_FILTER, ACCEPT_ALL_FILTER
+    #                   filter_class: "ENFORCED_VALUE_FILTER", # accepts ENFORCED_VALUE_FILTER, CONDITIONAL_VALUE_FILTER, NAMED_VALUE_FILTER
+    #                   operand_field: {
+    #                     identity: "LimitedString", # required
+    #                   },
+    #                   function: "CONTAINS", # accepts CONTAINS, EXACT, STARTS_WITH, ENDS_WITH, CONTAINS_STRING, PREVIOUS, THIS, LAST, NEXT, NOW
+    #                   constant: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   inverse: false,
+    #                   null_filter: "ALL_VALUES", # accepts ALL_VALUES, NON_NULLS_ONLY, NULLS_ONLY
+    #                   aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                   aggregation_function_parameters: {
+    #                     "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                   },
+    #                   aggregation_partition_by: [
+    #                     {
+    #                       field_name: "LimitedString",
+    #                       time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                     },
+    #                   ],
+    #                   range: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   inclusive: false,
+    #                   time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   last_next_offset: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   agg_metrics: [
+    #                     {
+    #                       metric_operand: {
+    #                         identity: "LimitedString", # required
+    #                       },
+    #                       function: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                       sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                     },
+    #                   ],
+    #                   top_bottom_limit: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                   anchor: {
+    #                     anchor_type: "TODAY", # accepts TODAY
+    #                     time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                     offset: 1,
+    #                   },
+    #                 },
+    #                 end_range: {
+    #                   filter_type: "CATEGORY_FILTER", # accepts CATEGORY_FILTER, NUMERIC_EQUALITY_FILTER, NUMERIC_RANGE_FILTER, DATE_RANGE_FILTER, RELATIVE_DATE_FILTER, TOP_BOTTOM_FILTER, EQUALS, RANK_LIMIT_FILTER, ACCEPT_ALL_FILTER
+    #                   filter_class: "ENFORCED_VALUE_FILTER", # accepts ENFORCED_VALUE_FILTER, CONDITIONAL_VALUE_FILTER, NAMED_VALUE_FILTER
+    #                   operand_field: {
+    #                     identity: "LimitedString", # required
+    #                   },
+    #                   function: "CONTAINS", # accepts CONTAINS, EXACT, STARTS_WITH, ENDS_WITH, CONTAINS_STRING, PREVIOUS, THIS, LAST, NEXT, NOW
+    #                   constant: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   inverse: false,
+    #                   null_filter: "ALL_VALUES", # accepts ALL_VALUES, NON_NULLS_ONLY, NULLS_ONLY
+    #                   aggregation: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                   aggregation_function_parameters: {
+    #                     "AggFunctionParamKey" => "AggFunctionParamValue",
+    #                   },
+    #                   aggregation_partition_by: [
+    #                     {
+    #                       field_name: "LimitedString",
+    #                       time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                     },
+    #                   ],
+    #                   range: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   inclusive: false,
+    #                   time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                   last_next_offset: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   agg_metrics: [
+    #                     {
+    #                       metric_operand: {
+    #                         identity: "LimitedString", # required
+    #                       },
+    #                       function: "SUM", # accepts SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, PTD_SUM, PTD_MIN, PTD_MAX, PTD_COUNT, PTD_DISTINCT_COUNT, PTD_AVERAGE, COLUMN, CUSTOM
+    #                       sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                     },
+    #                   ],
+    #                   top_bottom_limit: {
+    #                     constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                     value: "ConstantValueString",
+    #                     minimum: "ConstantValueString",
+    #                     maximum: "ConstantValueString",
+    #                     value_list: [
+    #                       {
+    #                         constant_type: "SINGULAR", # accepts SINGULAR, RANGE, COLLECTIVE
+    #                         value: "ConstantValueString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   sort_direction: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #                   anchor: {
+    #                     anchor_type: "TODAY", # accepts TODAY
+    #                     time_granularity: "YEAR", # accepts YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND
+    #                     offset: 1,
+    #                   },
+    #                 },
+    #               },
+    #               direction: "INCREASE", # accepts INCREASE, DECREASE, NEUTRAL
+    #               sort_type: "ABSOLUTE_DIFFERENCE", # accepts ABSOLUTE_DIFFERENCE, CONTRIBUTION_PERCENTAGE, DEVIATION_FROM_EXPECTED, PERCENTAGE_DIFFERENCE
+    #             },
+    #             visual: {
+    #               type: "LimitedString",
+    #             },
+    #           },
+    #           supporting_visuals: [
+    #             {
+    #               # recursive TopicVisual
+    #             },
+    #           ],
+    #         },
+    #         template: {
+    #           template_type: "LimitedString",
+    #           slots: [
+    #             {
+    #               slot_id: "LimitedString",
+    #               visual_id: "LimitedString",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_id #=> String
+    #   resp.topic_arn #=> String
+    #   resp.succeeded_answers #=> Array
+    #   resp.succeeded_answers[0].answer_id #=> String
+    #   resp.invalid_answers #=> Array
+    #   resp.invalid_answers[0].answer_id #=> String
+    #   resp.invalid_answers[0].error #=> String, one of "INTERNAL_ERROR", "MISSING_ANSWER", "DATASET_DOES_NOT_EXIST", "INVALID_DATASET_ARN", "DUPLICATED_ANSWER", "INVALID_DATA", "MISSING_REQUIRED_FIELDS"
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchCreateTopicReviewedAnswer AWS API Documentation
+    #
+    # @overload batch_create_topic_reviewed_answer(params = {})
+    # @param [Hash] params ({})
+    def batch_create_topic_reviewed_answer(params = {}, options = {})
+      req = build_request(:batch_create_topic_reviewed_answer, params)
+      req.send_request(options)
+    end
+
+    # Deletes reviewed answers for Q Topic.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that you want to delete a
+    #   reviewed answers in.
+    #
+    # @option params [required, String] :topic_id
+    #   The ID for the topic reviewed answer that you want to delete. This ID
+    #   is unique per Amazon Web Services Region for each Amazon Web Services
+    #   account.
+    #
+    # @option params [Array<String>] :answer_ids
+    #   The Answer IDs of the Answers to be deleted.
+    #
+    # @return [Types::BatchDeleteTopicReviewedAnswerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteTopicReviewedAnswerResponse#topic_id #topic_id} => String
+    #   * {Types::BatchDeleteTopicReviewedAnswerResponse#topic_arn #topic_arn} => String
+    #   * {Types::BatchDeleteTopicReviewedAnswerResponse#succeeded_answers #succeeded_answers} => Array&lt;Types::SucceededTopicReviewedAnswer&gt;
+    #   * {Types::BatchDeleteTopicReviewedAnswerResponse#invalid_answers #invalid_answers} => Array&lt;Types::InvalidTopicReviewedAnswer&gt;
+    #   * {Types::BatchDeleteTopicReviewedAnswerResponse#request_id #request_id} => String
+    #   * {Types::BatchDeleteTopicReviewedAnswerResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_topic_reviewed_answer({
+    #     aws_account_id: "AwsAccountId", # required
+    #     topic_id: "TopicId", # required
+    #     answer_ids: ["AnswerId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_id #=> String
+    #   resp.topic_arn #=> String
+    #   resp.succeeded_answers #=> Array
+    #   resp.succeeded_answers[0].answer_id #=> String
+    #   resp.invalid_answers #=> Array
+    #   resp.invalid_answers[0].answer_id #=> String
+    #   resp.invalid_answers[0].error #=> String, one of "INTERNAL_ERROR", "MISSING_ANSWER", "DATASET_DOES_NOT_EXIST", "INVALID_DATASET_ARN", "DUPLICATED_ANSWER", "INVALID_DATA", "MISSING_REQUIRED_FIELDS"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeleteTopicReviewedAnswer AWS API Documentation
+    #
+    # @overload batch_delete_topic_reviewed_answer(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_topic_reviewed_answer(params = {}, options = {})
+      req = build_request(:batch_delete_topic_reviewed_answer, params)
+      req.send_request(options)
+    end
+
     # Cancels an ongoing ingestion of data into SPICE.
     #
     # @option params [required, String] :aws_account_id
@@ -9184,6 +10048,479 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Lists all reviewed answers for a Q Topic.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that containd the reviewed
+    #   answers that you want listed.
+    #
+    # @option params [required, String] :topic_id
+    #   The ID for the topic that contains the reviewed answer that you want
+    #   to list. This ID is unique per Amazon Web Services Region for each
+    #   Amazon Web Services account.
+    #
+    # @return [Types::ListTopicReviewedAnswersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTopicReviewedAnswersResponse#topic_id #topic_id} => String
+    #   * {Types::ListTopicReviewedAnswersResponse#topic_arn #topic_arn} => String
+    #   * {Types::ListTopicReviewedAnswersResponse#answers #answers} => Array&lt;Types::TopicReviewedAnswer&gt;
+    #   * {Types::ListTopicReviewedAnswersResponse#status #status} => Integer
+    #   * {Types::ListTopicReviewedAnswersResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_topic_reviewed_answers({
+    #     aws_account_id: "AwsAccountId", # required
+    #     topic_id: "TopicId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.topic_id #=> String
+    #   resp.topic_arn #=> String
+    #   resp.answers #=> Array
+    #   resp.answers[0].arn #=> String
+    #   resp.answers[0].answer_id #=> String
+    #   resp.answers[0].dataset_arn #=> String
+    #   resp.answers[0].question #=> String
+    #   resp.answers[0].mir.metrics #=> Array
+    #   resp.answers[0].mir.metrics[0].metric_id.identity #=> String
+    #   resp.answers[0].mir.metrics[0].function.aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].mir.metrics[0].function.aggregation_function_parameters #=> Hash
+    #   resp.answers[0].mir.metrics[0].function.aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].mir.metrics[0].function.period #=> String, one of "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"
+    #   resp.answers[0].mir.metrics[0].function.period_field #=> String
+    #   resp.answers[0].mir.metrics[0].operands #=> Array
+    #   resp.answers[0].mir.metrics[0].operands[0].identity #=> String
+    #   resp.answers[0].mir.metrics[0].comparison_method.type #=> String, one of "DIFF", "PERC_DIFF", "DIFF_AS_PERC", "POP_CURRENT_DIFF_AS_PERC", "POP_CURRENT_DIFF", "POP_OVERTIME_DIFF_AS_PERC", "POP_OVERTIME_DIFF", "PERCENT_OF_TOTAL", "RUNNING_SUM", "MOVING_AVERAGE"
+    #   resp.answers[0].mir.metrics[0].comparison_method.period #=> String, one of "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"
+    #   resp.answers[0].mir.metrics[0].comparison_method.window_size #=> Integer
+    #   resp.answers[0].mir.metrics[0].expression #=> String
+    #   resp.answers[0].mir.metrics[0].calculated_field_references #=> Array
+    #   resp.answers[0].mir.metrics[0].calculated_field_references[0].identity #=> String
+    #   resp.answers[0].mir.metrics[0].display_format #=> String, one of "AUTO", "PERCENT", "CURRENCY", "NUMBER", "DATE", "STRING"
+    #   resp.answers[0].mir.metrics[0].display_format_options.use_blank_cell_format #=> Boolean
+    #   resp.answers[0].mir.metrics[0].display_format_options.blank_cell_format #=> String
+    #   resp.answers[0].mir.metrics[0].display_format_options.date_format #=> String
+    #   resp.answers[0].mir.metrics[0].display_format_options.decimal_separator #=> String, one of "COMMA", "DOT"
+    #   resp.answers[0].mir.metrics[0].display_format_options.grouping_separator #=> String
+    #   resp.answers[0].mir.metrics[0].display_format_options.use_grouping #=> Boolean
+    #   resp.answers[0].mir.metrics[0].display_format_options.fraction_digits #=> Integer
+    #   resp.answers[0].mir.metrics[0].display_format_options.prefix #=> String
+    #   resp.answers[0].mir.metrics[0].display_format_options.suffix #=> String
+    #   resp.answers[0].mir.metrics[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].mir.metrics[0].display_format_options.negative_format.prefix #=> String
+    #   resp.answers[0].mir.metrics[0].display_format_options.negative_format.suffix #=> String
+    #   resp.answers[0].mir.metrics[0].display_format_options.currency_symbol #=> String
+    #   resp.answers[0].mir.metrics[0].named_entity.named_entity_name #=> String
+    #   resp.answers[0].mir.group_by_list #=> Array
+    #   resp.answers[0].mir.group_by_list[0].field_name.identity #=> String
+    #   resp.answers[0].mir.group_by_list[0].time_granularity #=> String, one of "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"
+    #   resp.answers[0].mir.group_by_list[0].sort.operand.identity #=> String
+    #   resp.answers[0].mir.group_by_list[0].sort.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.group_by_list[0].display_format #=> String, one of "AUTO", "PERCENT", "CURRENCY", "NUMBER", "DATE", "STRING"
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.use_blank_cell_format #=> Boolean
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.blank_cell_format #=> String
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.date_format #=> String
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.decimal_separator #=> String, one of "COMMA", "DOT"
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.grouping_separator #=> String
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.use_grouping #=> Boolean
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.fraction_digits #=> Integer
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.prefix #=> String
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.suffix #=> String
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.negative_format.prefix #=> String
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.negative_format.suffix #=> String
+    #   resp.answers[0].mir.group_by_list[0].display_format_options.currency_symbol #=> String
+    #   resp.answers[0].mir.group_by_list[0].named_entity.named_entity_name #=> String
+    #   resp.answers[0].mir.filters #=> Array
+    #   resp.answers[0].mir.filters[0] #=> Array
+    #   resp.answers[0].mir.filters[0][0].filter_type #=> String, one of "CATEGORY_FILTER", "NUMERIC_EQUALITY_FILTER", "NUMERIC_RANGE_FILTER", "DATE_RANGE_FILTER", "RELATIVE_DATE_FILTER", "TOP_BOTTOM_FILTER", "EQUALS", "RANK_LIMIT_FILTER", "ACCEPT_ALL_FILTER"
+    #   resp.answers[0].mir.filters[0][0].filter_class #=> String, one of "ENFORCED_VALUE_FILTER", "CONDITIONAL_VALUE_FILTER", "NAMED_VALUE_FILTER"
+    #   resp.answers[0].mir.filters[0][0].operand_field.identity #=> String
+    #   resp.answers[0].mir.filters[0][0].function #=> String, one of "CONTAINS", "EXACT", "STARTS_WITH", "ENDS_WITH", "CONTAINS_STRING", "PREVIOUS", "THIS", "LAST", "NEXT", "NOW"
+    #   resp.answers[0].mir.filters[0][0].constant.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].constant.value #=> String
+    #   resp.answers[0].mir.filters[0][0].constant.minimum #=> String
+    #   resp.answers[0].mir.filters[0][0].constant.maximum #=> String
+    #   resp.answers[0].mir.filters[0][0].constant.value_list #=> Array
+    #   resp.answers[0].mir.filters[0][0].constant.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].constant.value_list[0].value #=> String
+    #   resp.answers[0].mir.filters[0][0].inverse #=> Boolean
+    #   resp.answers[0].mir.filters[0][0].null_filter #=> String, one of "ALL_VALUES", "NON_NULLS_ONLY", "NULLS_ONLY"
+    #   resp.answers[0].mir.filters[0][0].aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].mir.filters[0][0].aggregation_function_parameters #=> Hash
+    #   resp.answers[0].mir.filters[0][0].aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].mir.filters[0][0].aggregation_partition_by #=> Array
+    #   resp.answers[0].mir.filters[0][0].aggregation_partition_by[0].field_name #=> String
+    #   resp.answers[0].mir.filters[0][0].aggregation_partition_by[0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.filters[0][0].range.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].range.value #=> String
+    #   resp.answers[0].mir.filters[0][0].range.minimum #=> String
+    #   resp.answers[0].mir.filters[0][0].range.maximum #=> String
+    #   resp.answers[0].mir.filters[0][0].range.value_list #=> Array
+    #   resp.answers[0].mir.filters[0][0].range.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].range.value_list[0].value #=> String
+    #   resp.answers[0].mir.filters[0][0].inclusive #=> Boolean
+    #   resp.answers[0].mir.filters[0][0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.filters[0][0].last_next_offset.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].last_next_offset.value #=> String
+    #   resp.answers[0].mir.filters[0][0].last_next_offset.minimum #=> String
+    #   resp.answers[0].mir.filters[0][0].last_next_offset.maximum #=> String
+    #   resp.answers[0].mir.filters[0][0].last_next_offset.value_list #=> Array
+    #   resp.answers[0].mir.filters[0][0].last_next_offset.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].last_next_offset.value_list[0].value #=> String
+    #   resp.answers[0].mir.filters[0][0].agg_metrics #=> Array
+    #   resp.answers[0].mir.filters[0][0].agg_metrics[0].metric_operand.identity #=> String
+    #   resp.answers[0].mir.filters[0][0].agg_metrics[0].function #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].mir.filters[0][0].agg_metrics[0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.filters[0][0].top_bottom_limit.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].top_bottom_limit.value #=> String
+    #   resp.answers[0].mir.filters[0][0].top_bottom_limit.minimum #=> String
+    #   resp.answers[0].mir.filters[0][0].top_bottom_limit.maximum #=> String
+    #   resp.answers[0].mir.filters[0][0].top_bottom_limit.value_list #=> Array
+    #   resp.answers[0].mir.filters[0][0].top_bottom_limit.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.filters[0][0].top_bottom_limit.value_list[0].value #=> String
+    #   resp.answers[0].mir.filters[0][0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.filters[0][0].anchor.anchor_type #=> String, one of "TODAY"
+    #   resp.answers[0].mir.filters[0][0].anchor.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.filters[0][0].anchor.offset #=> Integer
+    #   resp.answers[0].mir.sort.operand.identity #=> String
+    #   resp.answers[0].mir.sort.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.contribution_analysis.factors #=> Array
+    #   resp.answers[0].mir.contribution_analysis.factors[0].field_name #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.filter_type #=> String, one of "CATEGORY_FILTER", "NUMERIC_EQUALITY_FILTER", "NUMERIC_RANGE_FILTER", "DATE_RANGE_FILTER", "RELATIVE_DATE_FILTER", "TOP_BOTTOM_FILTER", "EQUALS", "RANK_LIMIT_FILTER", "ACCEPT_ALL_FILTER"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.filter_class #=> String, one of "ENFORCED_VALUE_FILTER", "CONDITIONAL_VALUE_FILTER", "NAMED_VALUE_FILTER"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.operand_field.identity #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.function #=> String, one of "CONTAINS", "EXACT", "STARTS_WITH", "ENDS_WITH", "CONTAINS_STRING", "PREVIOUS", "THIS", "LAST", "NEXT", "NOW"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.constant.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.constant.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.constant.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.constant.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.constant.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.constant.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.constant.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.inverse #=> Boolean
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.null_filter #=> String, one of "ALL_VALUES", "NON_NULLS_ONLY", "NULLS_ONLY"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.aggregation_function_parameters #=> Hash
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.aggregation_partition_by #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.aggregation_partition_by[0].field_name #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.aggregation_partition_by[0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.range.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.range.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.range.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.range.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.range.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.range.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.range.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.inclusive #=> Boolean
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.last_next_offset.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.last_next_offset.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.last_next_offset.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.last_next_offset.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.last_next_offset.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.last_next_offset.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.last_next_offset.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.agg_metrics #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.agg_metrics[0].metric_operand.identity #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.agg_metrics[0].function #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.agg_metrics[0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.top_bottom_limit.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.top_bottom_limit.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.top_bottom_limit.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.anchor.anchor_type #=> String, one of "TODAY"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.anchor.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.start_range.anchor.offset #=> Integer
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.filter_type #=> String, one of "CATEGORY_FILTER", "NUMERIC_EQUALITY_FILTER", "NUMERIC_RANGE_FILTER", "DATE_RANGE_FILTER", "RELATIVE_DATE_FILTER", "TOP_BOTTOM_FILTER", "EQUALS", "RANK_LIMIT_FILTER", "ACCEPT_ALL_FILTER"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.filter_class #=> String, one of "ENFORCED_VALUE_FILTER", "CONDITIONAL_VALUE_FILTER", "NAMED_VALUE_FILTER"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.operand_field.identity #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.function #=> String, one of "CONTAINS", "EXACT", "STARTS_WITH", "ENDS_WITH", "CONTAINS_STRING", "PREVIOUS", "THIS", "LAST", "NEXT", "NOW"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.constant.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.constant.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.constant.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.constant.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.constant.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.constant.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.constant.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.inverse #=> Boolean
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.null_filter #=> String, one of "ALL_VALUES", "NON_NULLS_ONLY", "NULLS_ONLY"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.aggregation_function_parameters #=> Hash
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.aggregation_partition_by #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.aggregation_partition_by[0].field_name #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.aggregation_partition_by[0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.range.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.range.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.range.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.range.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.range.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.range.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.range.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.inclusive #=> Boolean
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.last_next_offset.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.last_next_offset.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.last_next_offset.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.last_next_offset.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.last_next_offset.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.last_next_offset.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.last_next_offset.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.agg_metrics #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.agg_metrics[0].metric_operand.identity #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.agg_metrics[0].function #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.agg_metrics[0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.top_bottom_limit.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.top_bottom_limit.minimum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.top_bottom_limit.maximum #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value_list #=> Array
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value_list[0].value #=> String
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.anchor.anchor_type #=> String, one of "TODAY"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.anchor.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].mir.contribution_analysis.time_ranges.end_range.anchor.offset #=> Integer
+    #   resp.answers[0].mir.contribution_analysis.direction #=> String, one of "INCREASE", "DECREASE", "NEUTRAL"
+    #   resp.answers[0].mir.contribution_analysis.sort_type #=> String, one of "ABSOLUTE_DIFFERENCE", "CONTRIBUTION_PERCENTAGE", "DEVIATION_FROM_EXPECTED", "PERCENTAGE_DIFFERENCE"
+    #   resp.answers[0].mir.visual.type #=> String
+    #   resp.answers[0].primary_visual.visual_id #=> String
+    #   resp.answers[0].primary_visual.role #=> String, one of "PRIMARY", "COMPLIMENTARY", "MULTI_INTENT", "FALLBACK", "FRAGMENT"
+    #   resp.answers[0].primary_visual.ir.metrics #=> Array
+    #   resp.answers[0].primary_visual.ir.metrics[0].metric_id.identity #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].function.aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].primary_visual.ir.metrics[0].function.aggregation_function_parameters #=> Hash
+    #   resp.answers[0].primary_visual.ir.metrics[0].function.aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].function.period #=> String, one of "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"
+    #   resp.answers[0].primary_visual.ir.metrics[0].function.period_field #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].operands #=> Array
+    #   resp.answers[0].primary_visual.ir.metrics[0].operands[0].identity #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].comparison_method.type #=> String, one of "DIFF", "PERC_DIFF", "DIFF_AS_PERC", "POP_CURRENT_DIFF_AS_PERC", "POP_CURRENT_DIFF", "POP_OVERTIME_DIFF_AS_PERC", "POP_OVERTIME_DIFF", "PERCENT_OF_TOTAL", "RUNNING_SUM", "MOVING_AVERAGE"
+    #   resp.answers[0].primary_visual.ir.metrics[0].comparison_method.period #=> String, one of "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"
+    #   resp.answers[0].primary_visual.ir.metrics[0].comparison_method.window_size #=> Integer
+    #   resp.answers[0].primary_visual.ir.metrics[0].expression #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].calculated_field_references #=> Array
+    #   resp.answers[0].primary_visual.ir.metrics[0].calculated_field_references[0].identity #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format #=> String, one of "AUTO", "PERCENT", "CURRENCY", "NUMBER", "DATE", "STRING"
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.use_blank_cell_format #=> Boolean
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.blank_cell_format #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.date_format #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.decimal_separator #=> String, one of "COMMA", "DOT"
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.grouping_separator #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.use_grouping #=> Boolean
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.fraction_digits #=> Integer
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.prefix #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.suffix #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.negative_format.prefix #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.negative_format.suffix #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].display_format_options.currency_symbol #=> String
+    #   resp.answers[0].primary_visual.ir.metrics[0].named_entity.named_entity_name #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list #=> Array
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].field_name.identity #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].time_granularity #=> String, one of "SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "QUARTER", "YEAR"
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].sort.operand.identity #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].sort.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format #=> String, one of "AUTO", "PERCENT", "CURRENCY", "NUMBER", "DATE", "STRING"
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.use_blank_cell_format #=> Boolean
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.blank_cell_format #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.date_format #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.decimal_separator #=> String, one of "COMMA", "DOT"
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.grouping_separator #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.use_grouping #=> Boolean
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.fraction_digits #=> Integer
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.prefix #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.suffix #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.unit_scaler #=> String, one of "NONE", "AUTO", "THOUSANDS", "MILLIONS", "BILLIONS", "TRILLIONS"
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.negative_format.prefix #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.negative_format.suffix #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].display_format_options.currency_symbol #=> String
+    #   resp.answers[0].primary_visual.ir.group_by_list[0].named_entity.named_entity_name #=> String
+    #   resp.answers[0].primary_visual.ir.filters #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0] #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0][0].filter_type #=> String, one of "CATEGORY_FILTER", "NUMERIC_EQUALITY_FILTER", "NUMERIC_RANGE_FILTER", "DATE_RANGE_FILTER", "RELATIVE_DATE_FILTER", "TOP_BOTTOM_FILTER", "EQUALS", "RANK_LIMIT_FILTER", "ACCEPT_ALL_FILTER"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].filter_class #=> String, one of "ENFORCED_VALUE_FILTER", "CONDITIONAL_VALUE_FILTER", "NAMED_VALUE_FILTER"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].operand_field.identity #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].function #=> String, one of "CONTAINS", "EXACT", "STARTS_WITH", "ENDS_WITH", "CONTAINS_STRING", "PREVIOUS", "THIS", "LAST", "NEXT", "NOW"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].constant.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].constant.value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].constant.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].constant.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].constant.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0][0].constant.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].constant.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].inverse #=> Boolean
+    #   resp.answers[0].primary_visual.ir.filters[0][0].null_filter #=> String, one of "ALL_VALUES", "NON_NULLS_ONLY", "NULLS_ONLY"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].aggregation_function_parameters #=> Hash
+    #   resp.answers[0].primary_visual.ir.filters[0][0].aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].aggregation_partition_by #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0][0].aggregation_partition_by[0].field_name #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].aggregation_partition_by[0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].range.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].range.value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].range.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].range.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].range.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0][0].range.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].range.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].inclusive #=> Boolean
+    #   resp.answers[0].primary_visual.ir.filters[0][0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].last_next_offset.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].last_next_offset.value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].last_next_offset.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].last_next_offset.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].last_next_offset.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0][0].last_next_offset.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].last_next_offset.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].agg_metrics #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0][0].agg_metrics[0].metric_operand.identity #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].agg_metrics[0].function #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].agg_metrics[0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].top_bottom_limit.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].top_bottom_limit.value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].top_bottom_limit.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].top_bottom_limit.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].top_bottom_limit.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.filters[0][0].top_bottom_limit.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].top_bottom_limit.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.filters[0][0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].anchor.anchor_type #=> String, one of "TODAY"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].anchor.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.filters[0][0].anchor.offset #=> Integer
+    #   resp.answers[0].primary_visual.ir.sort.operand.identity #=> String
+    #   resp.answers[0].primary_visual.ir.sort.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.factors #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.factors[0].field_name #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.filter_type #=> String, one of "CATEGORY_FILTER", "NUMERIC_EQUALITY_FILTER", "NUMERIC_RANGE_FILTER", "DATE_RANGE_FILTER", "RELATIVE_DATE_FILTER", "TOP_BOTTOM_FILTER", "EQUALS", "RANK_LIMIT_FILTER", "ACCEPT_ALL_FILTER"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.filter_class #=> String, one of "ENFORCED_VALUE_FILTER", "CONDITIONAL_VALUE_FILTER", "NAMED_VALUE_FILTER"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.operand_field.identity #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.function #=> String, one of "CONTAINS", "EXACT", "STARTS_WITH", "ENDS_WITH", "CONTAINS_STRING", "PREVIOUS", "THIS", "LAST", "NEXT", "NOW"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.constant.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.constant.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.constant.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.constant.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.constant.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.constant.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.constant.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.inverse #=> Boolean
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.null_filter #=> String, one of "ALL_VALUES", "NON_NULLS_ONLY", "NULLS_ONLY"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.aggregation_function_parameters #=> Hash
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.aggregation_partition_by #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.aggregation_partition_by[0].field_name #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.aggregation_partition_by[0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.range.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.range.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.range.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.range.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.range.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.range.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.range.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.inclusive #=> Boolean
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.last_next_offset.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.last_next_offset.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.last_next_offset.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.last_next_offset.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.last_next_offset.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.last_next_offset.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.last_next_offset.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.agg_metrics #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.agg_metrics[0].metric_operand.identity #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.agg_metrics[0].function #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.agg_metrics[0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.top_bottom_limit.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.top_bottom_limit.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.top_bottom_limit.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.top_bottom_limit.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.anchor.anchor_type #=> String, one of "TODAY"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.anchor.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.start_range.anchor.offset #=> Integer
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.filter_type #=> String, one of "CATEGORY_FILTER", "NUMERIC_EQUALITY_FILTER", "NUMERIC_RANGE_FILTER", "DATE_RANGE_FILTER", "RELATIVE_DATE_FILTER", "TOP_BOTTOM_FILTER", "EQUALS", "RANK_LIMIT_FILTER", "ACCEPT_ALL_FILTER"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.filter_class #=> String, one of "ENFORCED_VALUE_FILTER", "CONDITIONAL_VALUE_FILTER", "NAMED_VALUE_FILTER"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.operand_field.identity #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.function #=> String, one of "CONTAINS", "EXACT", "STARTS_WITH", "ENDS_WITH", "CONTAINS_STRING", "PREVIOUS", "THIS", "LAST", "NEXT", "NOW"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.constant.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.constant.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.constant.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.constant.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.constant.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.constant.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.constant.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.inverse #=> Boolean
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.null_filter #=> String, one of "ALL_VALUES", "NON_NULLS_ONLY", "NULLS_ONLY"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.aggregation #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.aggregation_function_parameters #=> Hash
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.aggregation_function_parameters["AggFunctionParamKey"] #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.aggregation_partition_by #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.aggregation_partition_by[0].field_name #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.aggregation_partition_by[0].time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.range.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.range.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.range.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.range.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.range.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.range.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.range.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.inclusive #=> Boolean
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.last_next_offset.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.last_next_offset.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.last_next_offset.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.last_next_offset.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.last_next_offset.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.last_next_offset.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.last_next_offset.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.agg_metrics #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.agg_metrics[0].metric_operand.identity #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.agg_metrics[0].function #=> String, one of "SUM", "MIN", "MAX", "COUNT", "AVERAGE", "DISTINCT_COUNT", "STDEV", "STDEVP", "VAR", "VARP", "PERCENTILE", "MEDIAN", "PTD_SUM", "PTD_MIN", "PTD_MAX", "PTD_COUNT", "PTD_DISTINCT_COUNT", "PTD_AVERAGE", "COLUMN", "CUSTOM"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.agg_metrics[0].sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.top_bottom_limit.constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.top_bottom_limit.minimum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.top_bottom_limit.maximum #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value_list #=> Array
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value_list[0].constant_type #=> String, one of "SINGULAR", "RANGE", "COLLECTIVE"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.top_bottom_limit.value_list[0].value #=> String
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.sort_direction #=> String, one of "ASCENDING", "DESCENDING"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.anchor.anchor_type #=> String, one of "TODAY"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.anchor.time_granularity #=> String, one of "YEAR", "QUARTER", "MONTH", "WEEK", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.time_ranges.end_range.anchor.offset #=> Integer
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.direction #=> String, one of "INCREASE", "DECREASE", "NEUTRAL"
+    #   resp.answers[0].primary_visual.ir.contribution_analysis.sort_type #=> String, one of "ABSOLUTE_DIFFERENCE", "CONTRIBUTION_PERCENTAGE", "DEVIATION_FROM_EXPECTED", "PERCENTAGE_DIFFERENCE"
+    #   resp.answers[0].primary_visual.ir.visual.type #=> String
+    #   resp.answers[0].primary_visual.supporting_visuals #=> Array
+    #   resp.answers[0].primary_visual.supporting_visuals[0] #=> Types::TopicVisual
+    #   resp.answers[0].template.template_type #=> String
+    #   resp.answers[0].template.slots #=> Array
+    #   resp.answers[0].template.slots[0].slot_id #=> String
+    #   resp.answers[0].template.slots[0].visual_id #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListTopicReviewedAnswers AWS API Documentation
+    #
+    # @overload list_topic_reviewed_answers(params = {})
+    # @param [Hash] params ({})
+    def list_topic_reviewed_answers(params = {}, options = {})
+      req = build_request(:list_topic_reviewed_answers, params)
+      req.send_request(options)
+    end
+
     # Lists all of the topics within an account.
     #
     # @option params [required, String] :aws_account_id
@@ -13905,7 +15242,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
