@@ -104,7 +104,7 @@ module AwsSdkCodeGenerator
             when 'useAccountIdRouting' then nil # TODO
             else
               # catch all, possible code generated config options
-              [downcase(raw_key), raw_value]
+              [underscore(raw_key), raw_value]
             end
           end
 
