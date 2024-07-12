@@ -6,37 +6,28 @@ module Aws
   describe ProfileFileFactory do
     subject { described_class }
 
-    context '.parse' do
-      file = File.join(File.dirname(__FILE__),'config-file-parser-tests.json')
+    context '#create' do
+      file = File.join(File.dirname(__FILE__),'config-file-location-tests.json')
       test_cases = JSON.load_file(file)['tests']
 
-      def parse(input)
-        config_file = input['configFile']
-        credentials_file = input['credentialsFile']
-        if config_file
-          raw_config_file = ProfileFileParser.new(config_file).parse
-          standardized_config_file = ProfileFileStandardizer.new(raw_config_file, :config).standardize
+      def with_env(env, &block)
+        env.each do |key, value|
+          ENV[key] = value
         end
-        if credentials_file
-          raw_credentials_file = ProfileFileParser.new(credentials_file).parse
-          standardized_credentials_file = ProfileFileStandardizer.new(raw_credentials_file, :credentials).standardize
+        block.call
+        env.each do |key, _|
+          ENV.delete(key)
         end
-        ProfileFile.new(standardized_config_file || {}, standardized_credentials_file || {}).profiles
       end
 
       test_cases.each do |test_case|
         it "passes: #{test_case['name']}" do
-          expected = test_case['output']
-
-
-          if expected.key?('profiles')
-            actual = parse(test_case['input'])
-            expect(actual).to eq(expected['profiles'])
-          elsif expected.key?('errorContaining')
-            expect { parse(test_case['input']) }
-              .to raise_error(
-                ArgumentError, include(expected['errorContaining'])
-              )
+          allow(Dir).to receive(:home).and_return(test_case['languageSpecificHome'])
+          expect(Pathname).to receive(:new).with(test_case['configLocation']).and_return(double(readable?: true, read: ''))
+          expect(Pathname).to receive(:new).with(test_case['credentialsLocation']).and_return(double(readable?: true, read: ''))
+          factory = subject.new
+          with_env(test_case['environment']) do
+            factory.create
           end
         end
       end

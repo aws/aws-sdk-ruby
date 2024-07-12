@@ -21,10 +21,12 @@ RSpec.configure do |config|
   # Module to help check service signing
   config.include Sigv4Helper
 
-  config.before(:each) do
+  config.before(:all) do
     # Clear the current ENV to avoid loading credentials.
     ENV.keep_if { |k, _| k == 'PATH' }
+  end
 
+  config.before(:each) do
     # disable loading credentials from shared file
     allow(Dir).to receive(:home).and_raise(ArgumentError)
 

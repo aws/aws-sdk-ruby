@@ -42,6 +42,8 @@ module Aws
     end
 
     def user_home_directory
+      require 'byebug'
+      byebug
       if ENV['HOME']
         ENV['HOME']
       elsif ENV['USERPROFILE']
