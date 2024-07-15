@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Ensure that nested sensitive members are filtered.
+* Issue - Ensure that nested sensitive members and sensitive members of lists and maps are filtered.
 
 3.201.1 (2024-07-05)
 ------------------
