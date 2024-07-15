@@ -1,7 +1,7 @@
 {
   "metadata": {
     "endpointPrefix": "svc",
-    "serviceId": "sensitive_svc",
+    "serviceId": "sample_svc",
     "protocol": "rest-json"
   },
   "operations":{
