@@ -92,7 +92,7 @@ module AwsSdkCodeGenerator
           case member_target["type"]
           when 'map'
             key_shape = @api['shapes'][member_target['key']['shape']]
-            value_shape = @api['shapes'][member_target['key']['shape']]
+            value_shape = @api['shapes'][member_target['value']['shape']]
             sensitive ||= !!(key_shape['sensitive'] || value_shape['sensitive'])
           when 'list'
             list_member = @api['shapes'][member_target['member']['shape']]
