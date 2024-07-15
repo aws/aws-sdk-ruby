@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "endpointPrefix": "svc",
+    "serviceId": "sensitive_svc",
+    "protocol": "rest-json"
+  },
+  "operations":{
+    "KitchenSinkOperation": {
+      "name":"KitchenSinkOperation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/KitchenSinkOperation"
+      },
+      "input":{"shape":"KitchenSink"},
+      "output":{"shape":"KitchenSink"}
+    }
+  },
+  "shapes": {
+    "KitchenSink": {
+      "type": "structure",
+      "members": {
+        "Blob": {
+          "shape": "Blob"
+        },
+        "Boolean": {
+          "shape": "Boolean"
+        },
+        "Double": {
+          "shape": "Double"
+        },
+        "EmptyStruct": {
+          "shape": "EmptyStruct"
+        },
+        "Float": {
+          "shape": "Float"
+        },
+        "Integer": {
+          "shape": "Integer"
+        },
+        "JsonValue": {
+          "shape": "JsonValue",
+          "jsonvalue": true
+        },
+        "ListOfStrings": {
+          "shape": "ListOfStrings"
+        },
+        "ListOfStructs": {
+          "shape": "ListOfStructs"
+        },
+        "Long": {
+          "shape": "Long"
+        },
+        "MapOfListsOfStrings": {
+          "shape": "MapOfListsOfStrings"
+        },
+        "MapOfMaps": {
+          "shape": "MapOfMapOfStrings"
+        },
+        "MapOfStrings": {
+          "shape": "MapOfStrings"
+        },
+        "MapOfStructs": {
+          "shape": "MapOfStructs"
+        },
+        "SimpleStruct": {
+          "shape": "SimpleStruct"
+        },
+        "String": {
+          "shape": "String"
+        },
+        "StructWithJsonName": {
+          "shape": "StructWithJsonName"
+        },
+        "Timestamp": {
+          "shape": "Timestamp"
+        }
+      }
+    },
+    "Blob": {
+      "type": "blob",
+      "sensitive": true
+    },
+    "Boolean": {
+      "type": "boolean",
+      "box": true,
+      "sensitive": true
+    },
+    "Double": {
+      "type": "double",
+      "box": true,
+      "sensitive": true
+    },
+    "EmptyStruct": {
+      "type": "structure",
+      "members": {}
+    },
+    "Float": {
+      "type": "float",
+      "box": true,
+      "sensitive": true
+    },
+    "Integer": {
+      "type": "integer",
+      "box": true,
+      "sensitive": true
+    },
+    "JsonValue": {
+      "type": "string",
+      "sensitive": true
+    },
+    "ListOfListOfStrings": {
+      "type": "list",
+      "member": {
+        "shape": "ListOfStrings"
+      }
+    },
+    "ListOfStrings": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "ListOfStructs": {
+      "type": "list",
+      "member": {
+        "shape": "SimpleStruct"
+      }
+    },
+    "Long": {
+      "type": "long",
+      "box": true,
+      "sensitive": true
+    },
+    "MapOfListsOfStrings": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "ListOfStrings"
+      }
+    },
+    "MapOfMapOfStrings": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "MapOfStrings"
+      }
+    },
+    "MapOfStrings": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
+    "MapOfStructs": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "SimpleStruct"
+      }
+    },
+    "ListOfKitchenSinks": {
+      "type": "list",
+      "member": {
+        "shape": "KitchenSink"
+      }
+    },
+    "MapOfKitchenSinks": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "KitchenSink"
+      }
+    },
+    "SimpleStruct": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String"
+        }
+      },
+      "sensitive": true
+    },
+    "String": {
+      "type": "string",
+      "sensitive": true
+    },
+    "StructWithJsonName": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "String"
+        }
+      }
+    },
+    "Timestamp": {
+      "type": "timestamp",
+      "sensitive": true
+    }
+  }
+}
