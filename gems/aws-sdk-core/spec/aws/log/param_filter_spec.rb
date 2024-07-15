@@ -26,6 +26,13 @@ module Aws
         include Aws::Structure
       end
 
+      class ComplexSensitiveType < Struct.new(
+        :nested
+      )
+        SENSITIVE = []
+        include Aws::Structure
+      end
+
       describe '#filter' do
         it 'filters sensitive hash params' do
           filtered = subject.filter(
@@ -53,6 +60,16 @@ module Aws
           instance = UnionType.new(sensitive_member: 'sensitive')
           filtered = subject.filter(instance, UnionType)
           expect(filtered).to eq(sensitive_member: '[FILTERED]')
+        end
+
+        it 'filters nested sensitive params' do
+          filtered = subject.filter(
+            {nested: { password: 'peccy', peccy_id: 'peccy-id' }},
+            ComplexSensitiveType
+          )
+          expect(filtered).to eq(nested: {
+            password: '[FILTERED]', peccy_id: 'peccy-id'
+          })
         end
 
         context 'with additional filters' do
