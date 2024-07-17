@@ -55,14 +55,14 @@ module Aws
           filtered[key] = if @enabled && filters.include?(key)
             '[FILTERED]'
           else
-            filter(value, type)
+            filter(value, value.class)
           end
         end
         filtered
       end
 
       def filter_array(values, type)
-        values.map { |value| filter(value, type) }
+        values.map { |value| filter(value, value.class) }
       end
 
     end
