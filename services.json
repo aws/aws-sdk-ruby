@@ -804,7 +804,8 @@
     "models": "migrationhubstrategy/2020-02-19"
   },
   "Mobile": {
-    "models": "mobile/2017-07-01"
+    "models": "mobile/2017-07-01",
+    "deprecated": true
   },
   "Neptune": {
     "models": "neptune/2014-10-31",
