@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS Mobile Hub has been removed from the SDK because it has been discontinued.
+
 1.54.0 (2024-07-02)
 ------------------
 
