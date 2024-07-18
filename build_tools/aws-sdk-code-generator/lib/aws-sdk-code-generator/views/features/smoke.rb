@@ -85,13 +85,14 @@ module AwsSdkCodeGenerator
             when 'sigv4aRegionSet' then nil # TODO
             when 'uri' then ['endpoint', raw_value]
             when 'useFips' then ['use_fips_endpoint', raw_value]
-            when 'useDualStack' then ['use_dualstack_endpoint', raw_value]
+            when 'useDualstack' then ['use_dualstack_endpoint', raw_value]
             # service specific
             when 'useGlobalEndpoint'
               value = raw_value == 'true' ? 'legacy' : 'regional'
-              if @service.name == 'S3'
+              case @service.name
+              when 'S3'
                 ['s3_us_east_1_regional_endpoint', value]
-              elsif @service.name == 'STS'
+              when 'STS'
                 ['sts_regional_endpoints', value]
               end
             # s3 specific
