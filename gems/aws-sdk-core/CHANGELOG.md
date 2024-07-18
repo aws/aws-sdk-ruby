@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow modeled types to be used for Union inputs.
 * Issue - Ensure that nested sensitive members and sensitive members of lists and maps are filtered.
 
 3.201.1 (2024-07-05)
