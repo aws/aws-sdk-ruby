@@ -397,7 +397,7 @@ module Aws::AppRunner
       :port,
       :runtime_environment_variables,
       :runtime_environment_secrets)
-      SENSITIVE = [:build_command, :start_command]
+      SENSITIVE = [:build_command, :start_command, :runtime_environment_variables, :runtime_environment_secrets]
       include Aws::Structure
     end
 
@@ -1516,7 +1516,7 @@ module Aws::AppRunner
       :start_command,
       :port,
       :runtime_environment_secrets)
-      SENSITIVE = [:start_command]
+      SENSITIVE = [:runtime_environment_variables, :start_command, :runtime_environment_secrets]
       include Aws::Structure
     end
 

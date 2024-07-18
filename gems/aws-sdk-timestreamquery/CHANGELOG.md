@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2024-07-18)
+------------------
+
+* Feature - Doc-only update for TimestreamQuery. Added guidance about the accepted valid value for the QueryPricingModel parameter.
+
 1.37.0 (2024-07-02)
 ------------------
 

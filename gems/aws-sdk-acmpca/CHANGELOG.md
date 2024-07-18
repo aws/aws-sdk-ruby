@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-07-18)
+------------------
+
+* Feature - Fix broken waiters for the acm-pca client.  Waiters broke in version 1.13.144 of the Boto3 SDK.
+
 1.75.0 (2024-07-12)
 ------------------
 

@@ -2855,7 +2855,7 @@ module Aws::ChimeSDKMediaPipelines
     class SelectedVideoStreams < Struct.new(
       :attendee_ids,
       :external_user_ids)
-      SENSITIVE = []
+      SENSITIVE = [:external_user_ids]
       include Aws::Structure
     end
 

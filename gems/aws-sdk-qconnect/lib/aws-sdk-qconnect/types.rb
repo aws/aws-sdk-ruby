@@ -1316,7 +1316,7 @@ module Aws::QConnect
       :name,
       :shortcut_key,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channels]
       include Aws::Structure
     end
 
@@ -2128,7 +2128,7 @@ module Aws::QConnect
     class GroupingConfiguration < Struct.new(
       :criteria,
       :values)
-      SENSITIVE = [:criteria]
+      SENSITIVE = [:criteria, :values]
       include Aws::Structure
     end
 
@@ -3223,7 +3223,7 @@ module Aws::QConnect
       :shortcut_key,
       :status,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channels]
       include Aws::Structure
     end
 
@@ -3547,7 +3547,7 @@ module Aws::QConnect
       :shortcut_key,
       :status,
       :tags)
-      SENSITIVE = [:attributes_interpolated, :attributes_not_interpolated]
+      SENSITIVE = [:attributes_interpolated, :attributes_not_interpolated, :channels]
       include Aws::Structure
     end
 
@@ -3635,7 +3635,7 @@ module Aws::QConnect
       :quick_response_id,
       :status,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channels]
       include Aws::Structure
     end
 
@@ -4693,7 +4693,7 @@ module Aws::QConnect
       :remove_grouping_configuration,
       :remove_shortcut_key,
       :shortcut_key)
-      SENSITIVE = []
+      SENSITIVE = [:channels]
       include Aws::Structure
     end
 

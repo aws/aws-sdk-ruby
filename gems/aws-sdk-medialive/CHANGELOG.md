@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2024-07-18)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports the SRT protocol via the new SRT Caller input type.
+
 1.126.0 (2024-07-02)
 ------------------
 

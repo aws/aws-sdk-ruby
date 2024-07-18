@@ -75,45 +75,45 @@ module Aws
 
       interface _CreateChatTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateChatTokenResponse]
-        def session_expiration_time: () -> ::Time
         def token: () -> ::String
         def token_expiration_time: () -> ::Time
+        def session_expiration_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#create_chat_token-instance_method
       def create_chat_token: (
-                               ?attributes: Hash[::String, ::String],
-                               ?capabilities: Array[("SEND_MESSAGE" | "DISCONNECT_USER" | "DELETE_MESSAGE")],
                                room_identifier: ::String,
+                               user_id: ::String,
+                               ?capabilities: Array[("SEND_MESSAGE" | "DISCONNECT_USER" | "DELETE_MESSAGE")],
                                ?session_duration_in_minutes: ::Integer,
-                               user_id: ::String
+                               ?attributes: Hash[::String, ::String]
                              ) -> _CreateChatTokenResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChatTokenResponseSuccess
 
       interface _CreateLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoggingConfigurationResponse]
         def arn: () -> ::String
-        def create_time: () -> ::Time
-        def destination_configuration: () -> Types::DestinationConfiguration
         def id: () -> ::String
+        def create_time: () -> ::Time
+        def update_time: () -> ::Time
         def name: () -> ::String
+        def destination_configuration: () -> Types::DestinationConfiguration
         def state: () -> ("ACTIVE")
         def tags: () -> ::Hash[::String, ::String]
-        def update_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#create_logging_configuration-instance_method
       def create_logging_configuration: (
+                                          ?name: ::String,
                                           destination_configuration: {
+                                            s3: {
+                                              bucket_name: ::String
+                                            }?,
                                             cloud_watch_logs: {
                                               log_group_name: ::String
                                             }?,
                                             firehose: {
                                               delivery_stream_name: ::String
-                                            }?,
-                                            s3: {
-                                              bucket_name: ::String
                                             }?
                                           },
-                                          ?name: ::String,
                                           ?tags: Hash[::String, ::String]
                                         ) -> _CreateLoggingConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoggingConfigurationResponseSuccess
@@ -121,27 +121,27 @@ module Aws
       interface _CreateRoomResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRoomResponse]
         def arn: () -> ::String
-        def create_time: () -> ::Time
         def id: () -> ::String
-        def logging_configuration_identifiers: () -> ::Array[::String]
-        def maximum_message_length: () -> ::Integer
-        def maximum_message_rate_per_second: () -> ::Integer
-        def message_review_handler: () -> Types::MessageReviewHandler
         def name: () -> ::String
-        def tags: () -> ::Hash[::String, ::String]
+        def create_time: () -> ::Time
         def update_time: () -> ::Time
+        def maximum_message_rate_per_second: () -> ::Integer
+        def maximum_message_length: () -> ::Integer
+        def message_review_handler: () -> Types::MessageReviewHandler
+        def tags: () -> ::Hash[::String, ::String]
+        def logging_configuration_identifiers: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#create_room-instance_method
       def create_room: (
-                         ?logging_configuration_identifiers: Array[::String],
-                         ?maximum_message_length: ::Integer,
-                         ?maximum_message_rate_per_second: ::Integer,
-                         ?message_review_handler: {
-                           fallback_result: ("ALLOW" | "DENY")?,
-                           uri: ::String?
-                         },
                          ?name: ::String,
-                         ?tags: Hash[::String, ::String]
+                         ?maximum_message_rate_per_second: ::Integer,
+                         ?maximum_message_length: ::Integer,
+                         ?message_review_handler: {
+                           uri: ::String?,
+                           fallback_result: ("ALLOW" | "DENY")?
+                         },
+                         ?tags: Hash[::String, ::String],
+                         ?logging_configuration_identifiers: Array[::String]
                        ) -> _CreateRoomResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoomResponseSuccess
 
@@ -157,9 +157,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#delete_message-instance_method
       def delete_message: (
+                            room_identifier: ::String,
                             id: ::String,
-                            ?reason: ::String,
-                            room_identifier: ::String
+                            ?reason: ::String
                           ) -> _DeleteMessageResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMessageResponseSuccess
 
@@ -174,22 +174,22 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#disconnect_user-instance_method
       def disconnect_user: (
-                             ?reason: ::String,
                              room_identifier: ::String,
-                             user_id: ::String
+                             user_id: ::String,
+                             ?reason: ::String
                            ) -> _DisconnectUserResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisconnectUserResponseSuccess
 
       interface _GetLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLoggingConfigurationResponse]
         def arn: () -> ::String
-        def create_time: () -> ::Time
-        def destination_configuration: () -> Types::DestinationConfiguration
         def id: () -> ::String
+        def create_time: () -> ::Time
+        def update_time: () -> ::Time
         def name: () -> ::String
+        def destination_configuration: () -> Types::DestinationConfiguration
         def state: () -> ("CREATING" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "ACTIVE")
         def tags: () -> ::Hash[::String, ::String]
-        def update_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#get_logging_configuration-instance_method
       def get_logging_configuration: (
@@ -200,15 +200,15 @@ module Aws
       interface _GetRoomResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRoomResponse]
         def arn: () -> ::String
-        def create_time: () -> ::Time
         def id: () -> ::String
-        def logging_configuration_identifiers: () -> ::Array[::String]
-        def maximum_message_length: () -> ::Integer
-        def maximum_message_rate_per_second: () -> ::Integer
-        def message_review_handler: () -> Types::MessageReviewHandler
         def name: () -> ::String
-        def tags: () -> ::Hash[::String, ::String]
+        def create_time: () -> ::Time
         def update_time: () -> ::Time
+        def maximum_message_rate_per_second: () -> ::Integer
+        def maximum_message_length: () -> ::Integer
+        def message_review_handler: () -> Types::MessageReviewHandler
+        def tags: () -> ::Hash[::String, ::String]
+        def logging_configuration_identifiers: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#get_room-instance_method
       def get_room: (
@@ -223,23 +223,23 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#list_logging_configurations-instance_method
       def list_logging_configurations: (
-                                         ?max_results: ::Integer,
-                                         ?next_token: ::String
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
                                        ) -> _ListLoggingConfigurationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLoggingConfigurationsResponseSuccess
 
       interface _ListRoomsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRoomsResponse]
-        def next_token: () -> ::String
         def rooms: () -> ::Array[Types::RoomSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#list_rooms-instance_method
       def list_rooms: (
-                        ?logging_configuration_identifier: ::String,
+                        ?name: ::String,
+                        ?next_token: ::String,
                         ?max_results: ::Integer,
                         ?message_review_handler_uri: ::String,
-                        ?name: ::String,
-                        ?next_token: ::String
+                        ?logging_configuration_identifier: ::String
                       ) -> _ListRoomsResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoomsResponseSuccess
 
@@ -259,9 +259,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#send_event-instance_method
       def send_event: (
-                        ?attributes: Hash[::String, ::String],
+                        room_identifier: ::String,
                         event_name: ::String,
-                        room_identifier: ::String
+                        ?attributes: Hash[::String, ::String]
                       ) -> _SendEventResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEventResponseSuccess
 
@@ -288,56 +288,56 @@ module Aws
       interface _UpdateLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLoggingConfigurationResponse]
         def arn: () -> ::String
-        def create_time: () -> ::Time
-        def destination_configuration: () -> Types::DestinationConfiguration
         def id: () -> ::String
+        def create_time: () -> ::Time
+        def update_time: () -> ::Time
         def name: () -> ::String
+        def destination_configuration: () -> Types::DestinationConfiguration
         def state: () -> ("ACTIVE")
         def tags: () -> ::Hash[::String, ::String]
-        def update_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#update_logging_configuration-instance_method
       def update_logging_configuration: (
+                                          identifier: ::String,
+                                          ?name: ::String,
                                           ?destination_configuration: {
+                                            s3: {
+                                              bucket_name: ::String
+                                            }?,
                                             cloud_watch_logs: {
                                               log_group_name: ::String
                                             }?,
                                             firehose: {
                                               delivery_stream_name: ::String
-                                            }?,
-                                            s3: {
-                                              bucket_name: ::String
                                             }?
-                                          },
-                                          identifier: ::String,
-                                          ?name: ::String
+                                          }
                                         ) -> _UpdateLoggingConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
 
       interface _UpdateRoomResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoomResponse]
         def arn: () -> ::String
-        def create_time: () -> ::Time
         def id: () -> ::String
-        def logging_configuration_identifiers: () -> ::Array[::String]
-        def maximum_message_length: () -> ::Integer
-        def maximum_message_rate_per_second: () -> ::Integer
-        def message_review_handler: () -> Types::MessageReviewHandler
         def name: () -> ::String
-        def tags: () -> ::Hash[::String, ::String]
+        def create_time: () -> ::Time
         def update_time: () -> ::Time
+        def maximum_message_rate_per_second: () -> ::Integer
+        def maximum_message_length: () -> ::Integer
+        def message_review_handler: () -> Types::MessageReviewHandler
+        def tags: () -> ::Hash[::String, ::String]
+        def logging_configuration_identifiers: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#update_room-instance_method
       def update_room: (
                          identifier: ::String,
-                         ?logging_configuration_identifiers: Array[::String],
-                         ?maximum_message_length: ::Integer,
+                         ?name: ::String,
                          ?maximum_message_rate_per_second: ::Integer,
+                         ?maximum_message_length: ::Integer,
                          ?message_review_handler: {
-                           fallback_result: ("ALLOW" | "DENY")?,
-                           uri: ::String?
+                           uri: ::String?,
+                           fallback_result: ("ALLOW" | "DENY")?
                          },
-                         ?name: ::String
+                         ?logging_configuration_identifiers: Array[::String]
                        ) -> _UpdateRoomResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoomResponseSuccess
     end

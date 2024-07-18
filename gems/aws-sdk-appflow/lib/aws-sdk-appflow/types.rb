@@ -1463,7 +1463,7 @@ module Aws::Appflow
     class CustomAuthCredentials < Struct.new(
       :custom_authentication_type,
       :credentials_map)
-      SENSITIVE = []
+      SENSITIVE = [:credentials_map]
       include Aws::Structure
     end
 

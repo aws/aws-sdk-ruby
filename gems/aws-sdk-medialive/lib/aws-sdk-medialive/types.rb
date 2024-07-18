@@ -2322,6 +2322,10 @@ module Aws::MediaLive
     #   inputSecurityGroups property.
     #   @return [Types::InputVpcRequest]
     #
+    # @!attribute [rw] srt_settings
+    #   The settings associated with an SRT input.
+    #   @return [Types::SrtSettingsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
     class CreateInput < Struct.new(
@@ -2335,7 +2339,8 @@ module Aws::MediaLive
       :sources,
       :tags,
       :type,
-      :vpc)
+      :vpc,
+      :srt_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2381,6 +2386,12 @@ module Aws::MediaLive
     #   inputSecurityGroups property.
     #   @return [Types::InputVpcRequest]
     #
+    # @!attribute [rw] srt_settings
+    #   Configures the sources for this SRT input. For a single-pipeline
+    #   input, include one srtCallerSource in the array. For a
+    #   standard-pipeline input, include two srtCallerSource.
+    #   @return [Types::SrtSettingsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputRequest AWS API Documentation
     #
     class CreateInputRequest < Struct.new(
@@ -2394,7 +2405,8 @@ module Aws::MediaLive
       :sources,
       :tags,
       :type,
-      :vpc)
+      :vpc,
+      :srt_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3393,6 +3405,10 @@ module Aws::MediaLive
     #   The different types of inputs that AWS Elemental MediaLive supports.
     #   @return [String]
     #
+    # @!attribute [rw] srt_settings
+    #   The configured sources for this SRT input.
+    #   @return [Types::SrtSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputResponse AWS API Documentation
     #
     class DescribeInputResponse < Struct.new(
@@ -3411,7 +3427,8 @@ module Aws::MediaLive
       :sources,
       :state,
       :tags,
-      :type)
+      :type,
+      :srt_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4069,7 +4086,7 @@ module Aws::MediaLive
     #
     # @!attribute [rw] bitrate
     #   Average bitrate in bits/second. Valid bitrates depend on the coding
-    #   mode. // * @affectsRightSizing true
+    #   mode.
     #   @return [Float]
     #
     # @!attribute [rw] coding_mode
@@ -4954,7 +4971,16 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] filter_settings
-    #   Optional filters that you can apply to an encode.
+    #   Optional. Both filters reduce bandwidth by removing imperceptible
+    #   details. You can enable one of the filters. We recommend that you
+    #   try both filters and observe the results to decide which one to use.
+    #   The Temporal Filter reduces bandwidth by removing imperceptible
+    #   details in the content. It combines perceptual filtering and motion
+    #   compensated temporal filtering (MCTF). It operates independently of
+    #   the compression level. The Bandwidth Reduction filter is a
+    #   perceptual filter located within the encoding loop. It adapts to the
+    #   current compression level to filter imperceptible signals. This
+    #   filter works only when the resolution is 1080p or lower.
     #   @return [Types::H264FilterSettings]
     #
     # @!attribute [rw] fixed_afd
@@ -5340,7 +5366,16 @@ module Aws::MediaLive
     #   @return [Types::H265ColorSpaceSettings]
     #
     # @!attribute [rw] filter_settings
-    #   Optional filters that you can apply to an encode.
+    #   Optional. Both filters reduce bandwidth by removing imperceptible
+    #   details. You can enable one of the filters. We recommend that you
+    #   try both filters and observe the results to decide which one to use.
+    #   The Temporal Filter reduces bandwidth by removing imperceptible
+    #   details in the content. It combines perceptual filtering and motion
+    #   compensated temporal filtering (MCTF). It operates independently of
+    #   the compression level. The Bandwidth Reduction filter is a
+    #   perceptual filter located within the encoding loop. It adapts to the
+    #   current compression level to filter imperceptible signals. This
+    #   filter works only when the resolution is 1080p or lower.
     #   @return [Types::H265FilterSettings]
     #
     # @!attribute [rw] fixed_afd
@@ -6373,6 +6408,10 @@ module Aws::MediaLive
     #   The different types of inputs that AWS Elemental MediaLive supports.
     #   @return [String]
     #
+    # @!attribute [rw] srt_settings
+    #   The settings associated with an SRT input.
+    #   @return [Types::SrtSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input AWS API Documentation
     #
     class Input < Struct.new(
@@ -6391,7 +6430,8 @@ module Aws::MediaLive
       :sources,
       :state,
       :tags,
-      :type)
+      :type,
+      :srt_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12508,6 +12548,10 @@ module Aws::MediaLive
     #   PULL type Inputs. Leave Destinations empty.
     #   @return [Array<Types::InputSourceRequest>]
     #
+    # @!attribute [rw] srt_settings
+    #   The settings associated with an SRT input.
+    #   @return [Types::SrtSettingsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
     class UpdateInput < Struct.new(
@@ -12517,7 +12561,8 @@ module Aws::MediaLive
       :media_connect_flows,
       :name,
       :role_arn,
-      :sources)
+      :sources,
+      :srt_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12691,6 +12736,12 @@ module Aws::MediaLive
     # @!attribute [rw] sources
     #   @return [Array<Types::InputSourceRequest>]
     #
+    # @!attribute [rw] srt_settings
+    #   Configures the sources for this SRT input. For a single-pipeline
+    #   input, include one srtCallerSource in the array. For a
+    #   standard-pipeline input, include two srtCallerSource.
+    #   @return [Types::SrtSettingsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputRequest AWS API Documentation
     #
     class UpdateInputRequest < Struct.new(
@@ -12701,7 +12752,8 @@ module Aws::MediaLive
       :media_connect_flows,
       :name,
       :role_arn,
-      :sources)
+      :sources,
+      :srt_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17386,6 +17438,165 @@ module Aws::MediaLive
       :modified_at,
       :name,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The decryption settings for the SRT caller source. Present only if the
+    # source has decryption enabled.
+    #
+    # @!attribute [rw] algorithm
+    #   The algorithm used to encrypt content.
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase_secret_arn
+    #   The ARN for the secret in Secrets Manager. Someone in your
+    #   organization must create a secret and provide you with its ARN. The
+    #   secret holds the passphrase that MediaLive uses to decrypt the
+    #   source content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtCallerDecryption AWS API Documentation
+    #
+    class SrtCallerDecryption < Struct.new(
+      :algorithm,
+      :passphrase_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Complete these parameters only if the content is encrypted.
+    #
+    # @!attribute [rw] algorithm
+    #   The algorithm used to encrypt content.
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase_secret_arn
+    #   The ARN for the secret in Secrets Manager. Someone in your
+    #   organization must create a secret and provide you with its ARN. This
+    #   secret holds the passphrase that MediaLive will use to decrypt the
+    #   source content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtCallerDecryptionRequest AWS API Documentation
+    #
+    class SrtCallerDecryptionRequest < Struct.new(
+      :algorithm,
+      :passphrase_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a source that uses SRT as the connection
+    # protocol. In terms of establishing the connection, MediaLive is always
+    # caller and the upstream system is always the listener. In terms of
+    # transmission of the source content, MediaLive is always the receiver
+    # and the upstream system is always the sender.
+    #
+    # @!attribute [rw] decryption
+    #   The decryption settings for the SRT caller source. Present only if
+    #   the source has decryption enabled.
+    #   @return [Types::SrtCallerDecryption]
+    #
+    # @!attribute [rw] minimum_latency
+    #   The preferred latency (in milliseconds) for implementing packet loss
+    #   and recovery. Packet recovery is a key feature of SRT.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] srt_listener_address
+    #   The IP address at the upstream system (the listener) that MediaLive
+    #   (the caller) connects to.
+    #   @return [String]
+    #
+    # @!attribute [rw] srt_listener_port
+    #   The port at the upstream system (the listener) that MediaLive (the
+    #   caller) connects to.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID, if the upstream system uses this identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtCallerSource AWS API Documentation
+    #
+    class SrtCallerSource < Struct.new(
+      :decryption,
+      :minimum_latency,
+      :srt_listener_address,
+      :srt_listener_port,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the connection for a source that uses SRT as the connection
+    # protocol. In terms of establishing the connection, MediaLive is always
+    # the caller and the upstream system is always the listener. In terms of
+    # transmission of the source content, MediaLive is always the receiver
+    # and the upstream system is always the sender.
+    #
+    # @!attribute [rw] decryption
+    #   Complete these parameters only if the content is encrypted.
+    #   @return [Types::SrtCallerDecryptionRequest]
+    #
+    # @!attribute [rw] minimum_latency
+    #   The preferred latency (in milliseconds) for implementing packet loss
+    #   and recovery. Packet recovery is a key feature of SRT. Obtain this
+    #   value from the operator at the upstream system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] srt_listener_address
+    #   The IP address at the upstream system (the listener) that MediaLive
+    #   (the caller) will connect to.
+    #   @return [String]
+    #
+    # @!attribute [rw] srt_listener_port
+    #   The port at the upstream system (the listener) that MediaLive (the
+    #   caller) will connect to.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_id
+    #   This value is required if the upstream system uses this identifier
+    #   because without it, the SRT handshake between MediaLive (the caller)
+    #   and the upstream system (the listener) might fail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtCallerSourceRequest AWS API Documentation
+    #
+    class SrtCallerSourceRequest < Struct.new(
+      :decryption,
+      :minimum_latency,
+      :srt_listener_address,
+      :srt_listener_port,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured sources for this SRT input.
+    #
+    # @!attribute [rw] srt_caller_sources
+    #   @return [Array<Types::SrtCallerSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtSettings AWS API Documentation
+    #
+    class SrtSettings < Struct.new(
+      :srt_caller_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the sources for this SRT input. For a single-pipeline
+    # input, include one srtCallerSource in the array. For a
+    # standard-pipeline input, include two srtCallerSource.
+    #
+    # @!attribute [rw] srt_caller_sources
+    #   @return [Array<Types::SrtCallerSourceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SrtSettingsRequest AWS API Documentation
+    #
+    class SrtSettingsRequest < Struct.new(
+      :srt_caller_sources)
       SENSITIVE = []
       include Aws::Structure
     end

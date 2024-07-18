@@ -782,7 +782,7 @@ module Aws::FraudDetector
       :variable_type,
       :description,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:elements]
       include Aws::Structure
     end
 
@@ -1700,7 +1700,7 @@ module Aws::FraudDetector
       :current_label,
       :label_timestamp,
       :entities)
-      SENSITIVE = []
+      SENSITIVE = [:event_variables, :entities]
       include Aws::Structure
     end
 
@@ -2509,7 +2509,7 @@ module Aws::FraudDetector
       :event_timestamp,
       :event_variables,
       :external_model_endpoint_data_blobs)
-      SENSITIVE = [:external_model_endpoint_data_blobs]
+      SENSITIVE = [:entities, :event_variables, :external_model_endpoint_data_blobs]
       include Aws::Structure
     end
 
@@ -2604,7 +2604,7 @@ module Aws::FraudDetector
     class GetEventTypesResult < Struct.new(
       :event_types,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:event_types]
       include Aws::Structure
     end
 
@@ -2733,7 +2733,7 @@ module Aws::FraudDetector
     class GetListElementsResult < Struct.new(
       :elements,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:elements]
       include Aws::Structure
     end
 
@@ -4227,7 +4227,7 @@ module Aws::FraudDetector
       :assigned_label,
       :label_timestamp,
       :entities)
-      SENSITIVE = []
+      SENSITIVE = [:event_variables, :entities]
       include Aws::Structure
     end
 
@@ -4720,7 +4720,7 @@ module Aws::FraudDetector
       :description,
       :update_mode,
       :variable_type)
-      SENSITIVE = []
+      SENSITIVE = [:elements]
       include Aws::Structure
     end
 

@@ -1501,7 +1501,7 @@ module Aws::EMRServerless
       :entry_point,
       :entry_point_arguments,
       :spark_submit_parameters)
-      SENSITIVE = [:entry_point, :spark_submit_parameters]
+      SENSITIVE = [:entry_point, :entry_point_arguments, :spark_submit_parameters]
       include Aws::Structure
     end
 

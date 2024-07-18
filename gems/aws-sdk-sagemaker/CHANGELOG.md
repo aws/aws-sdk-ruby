@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.254.0 (2024-07-18)
+------------------
+
+* Feature - SageMaker Training supports R5, T3 and R5D instances family. And SageMaker Processing supports G5 and R5D instances family.
+
 1.253.0 (2024-07-09)
 ------------------
 

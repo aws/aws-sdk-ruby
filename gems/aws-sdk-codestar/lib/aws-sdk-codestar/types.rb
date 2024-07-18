@@ -997,7 +997,7 @@ module Aws::CodeStar
       :source,
       :role_arn,
       :stack_parameters)
-      SENSITIVE = []
+      SENSITIVE = [:stack_parameters]
       include Aws::Structure
     end
 

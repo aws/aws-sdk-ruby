@@ -1281,7 +1281,7 @@ module Aws::SNS
     class ListPhoneNumbersOptedOutResponse < Struct.new(
       :phone_numbers,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:phone_numbers]
       include Aws::Structure
     end
 

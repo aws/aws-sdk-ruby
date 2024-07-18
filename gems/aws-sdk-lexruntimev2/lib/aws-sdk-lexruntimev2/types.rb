@@ -58,7 +58,7 @@ module Aws::LexRuntimeV2
       :name,
       :time_to_live,
       :context_attributes)
-      SENSITIVE = []
+      SENSITIVE = [:context_attributes]
       include Aws::Structure
     end
 

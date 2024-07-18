@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2024-07-18)
+------------------
+
+* Feature - Set default endpoint for aws partition. Requests from all regions in aws partition will be forward to us-east-1 endpoint.
+
 1.4.0 (2024-07-02)
 ------------------
 

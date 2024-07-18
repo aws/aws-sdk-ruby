@@ -35,6 +35,7 @@ module Aws::MediaLive
     AccessibilityType = Shapes::StringShape.new(name: 'AccessibilityType')
     AccountConfiguration = Shapes::StructureShape.new(name: 'AccountConfiguration')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
+    Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
     ArchiveCdnSettings = Shapes::StructureShape.new(name: 'ArchiveCdnSettings')
     ArchiveContainerSettings = Shapes::StructureShape.new(name: 'ArchiveContainerSettings')
@@ -734,6 +735,12 @@ module Aws::MediaLive
     SmoothGroupTimestampOffsetMode = Shapes::StringShape.new(name: 'SmoothGroupTimestampOffsetMode')
     Smpte2038DataPreference = Shapes::StringShape.new(name: 'Smpte2038DataPreference')
     SmpteTtDestinationSettings = Shapes::StructureShape.new(name: 'SmpteTtDestinationSettings')
+    SrtCallerDecryption = Shapes::StructureShape.new(name: 'SrtCallerDecryption')
+    SrtCallerDecryptionRequest = Shapes::StructureShape.new(name: 'SrtCallerDecryptionRequest')
+    SrtCallerSource = Shapes::StructureShape.new(name: 'SrtCallerSource')
+    SrtCallerSourceRequest = Shapes::StructureShape.new(name: 'SrtCallerSourceRequest')
+    SrtSettings = Shapes::StructureShape.new(name: 'SrtSettings')
+    SrtSettingsRequest = Shapes::StructureShape.new(name: 'SrtSettingsRequest')
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
     StartChannelRequest = Shapes::StructureShape.new(name: 'StartChannelRequest')
     StartChannelResponse = Shapes::StructureShape.new(name: 'StartChannelResponse')
@@ -995,6 +1002,8 @@ module Aws::MediaLive
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
     __listOfSignalMapSummary = Shapes::ListShape.new(name: '__listOfSignalMapSummary')
+    __listOfSrtCallerSource = Shapes::ListShape.new(name: '__listOfSrtCallerSource')
+    __listOfSrtCallerSourceRequest = Shapes::ListShape.new(name: '__listOfSrtCallerSourceRequest')
     __listOfThumbnail = Shapes::ListShape.new(name: '__listOfThumbnail')
     __listOfThumbnailDetail = Shapes::ListShape.new(name: '__listOfThumbnailDetail')
     __listOfTransferringInputDeviceSummary = Shapes::ListShape.new(name: '__listOfTransferringInputDeviceSummary')
@@ -1697,6 +1706,7 @@ module Aws::MediaLive
     CreateInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateInput.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInput.add_member(:vpc, Shapes::ShapeRef.new(shape: InputVpcRequest, location_name: "vpc"))
+    CreateInput.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
     CreateInput.struct_class = Types::CreateInput
 
     CreateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
@@ -1710,6 +1720,7 @@ module Aws::MediaLive
     CreateInputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateInputRequest.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInputRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: InputVpcRequest, location_name: "vpc"))
+    CreateInputRequest.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
     CreateInputRequest.struct_class = Types::CreateInputRequest
 
     CreateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
@@ -2031,6 +2042,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:state, Shapes::ShapeRef.new(shape: InputState, location_name: "state"))
     DescribeInputResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeInputResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
+    DescribeInputResponse.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettings, location_name: "srtSettings"))
     DescribeInputResponse.struct_class = Types::DescribeInputResponse
 
     DescribeInputSecurityGroupRequest.add_member(:input_security_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputSecurityGroupId"))
@@ -2728,6 +2740,7 @@ module Aws::MediaLive
     Input.add_member(:state, Shapes::ShapeRef.new(shape: InputState, location_name: "state"))
     Input.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Input.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
+    Input.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettings, location_name: "srtSettings"))
     Input.struct_class = Types::Input
 
     InputAttachment.add_member(:automatic_input_failover_settings, Shapes::ShapeRef.new(shape: AutomaticInputFailoverSettings, location_name: "automaticInputFailoverSettings"))
@@ -3796,6 +3809,34 @@ module Aws::MediaLive
 
     SmpteTtDestinationSettings.struct_class = Types::SmpteTtDestinationSettings
 
+    SrtCallerDecryption.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, location_name: "algorithm"))
+    SrtCallerDecryption.add_member(:passphrase_secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "passphraseSecretArn"))
+    SrtCallerDecryption.struct_class = Types::SrtCallerDecryption
+
+    SrtCallerDecryptionRequest.add_member(:algorithm, Shapes::ShapeRef.new(shape: Algorithm, location_name: "algorithm"))
+    SrtCallerDecryptionRequest.add_member(:passphrase_secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "passphraseSecretArn"))
+    SrtCallerDecryptionRequest.struct_class = Types::SrtCallerDecryptionRequest
+
+    SrtCallerSource.add_member(:decryption, Shapes::ShapeRef.new(shape: SrtCallerDecryption, location_name: "decryption"))
+    SrtCallerSource.add_member(:minimum_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "minimumLatency"))
+    SrtCallerSource.add_member(:srt_listener_address, Shapes::ShapeRef.new(shape: __string, location_name: "srtListenerAddress"))
+    SrtCallerSource.add_member(:srt_listener_port, Shapes::ShapeRef.new(shape: __string, location_name: "srtListenerPort"))
+    SrtCallerSource.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
+    SrtCallerSource.struct_class = Types::SrtCallerSource
+
+    SrtCallerSourceRequest.add_member(:decryption, Shapes::ShapeRef.new(shape: SrtCallerDecryptionRequest, location_name: "decryption"))
+    SrtCallerSourceRequest.add_member(:minimum_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "minimumLatency"))
+    SrtCallerSourceRequest.add_member(:srt_listener_address, Shapes::ShapeRef.new(shape: __string, location_name: "srtListenerAddress"))
+    SrtCallerSourceRequest.add_member(:srt_listener_port, Shapes::ShapeRef.new(shape: __string, location_name: "srtListenerPort"))
+    SrtCallerSourceRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
+    SrtCallerSourceRequest.struct_class = Types::SrtCallerSourceRequest
+
+    SrtSettings.add_member(:srt_caller_sources, Shapes::ShapeRef.new(shape: __listOfSrtCallerSource, location_name: "srtCallerSources"))
+    SrtSettings.struct_class = Types::SrtSettings
+
+    SrtSettingsRequest.add_member(:srt_caller_sources, Shapes::ShapeRef.new(shape: __listOfSrtCallerSourceRequest, location_name: "srtCallerSources"))
+    SrtSettingsRequest.struct_class = Types::SrtSettingsRequest
+
     StandardHlsSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
     StandardHlsSettings.add_member(:m3u_8_settings, Shapes::ShapeRef.new(shape: M3u8Settings, required: true, location_name: "m3u8Settings"))
     StandardHlsSettings.struct_class = Types::StandardHlsSettings
@@ -4395,6 +4436,7 @@ module Aws::MediaLive
     UpdateInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
+    UpdateInput.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
     UpdateInput.struct_class = Types::UpdateInput
 
     UpdateInputDevice.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "hdDeviceSettings"))
@@ -4436,6 +4478,7 @@ module Aws::MediaLive
     UpdateInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateInputRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
+    UpdateInputRequest.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
     UpdateInputRequest.struct_class = Types::UpdateInputRequest
 
     UpdateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
@@ -4674,6 +4717,10 @@ module Aws::MediaLive
 
     __listOfSignalMapSummary.member = Shapes::ShapeRef.new(shape: SignalMapSummary)
 
+    __listOfSrtCallerSource.member = Shapes::ShapeRef.new(shape: SrtCallerSource)
+
+    __listOfSrtCallerSourceRequest.member = Shapes::ShapeRef.new(shape: SrtCallerSourceRequest)
+
     __listOfThumbnail.member = Shapes::ShapeRef.new(shape: Thumbnail)
 
     __listOfThumbnailDetail.member = Shapes::ShapeRef.new(shape: ThumbnailDetail)
@@ -4700,6 +4747,7 @@ module Aws::MediaLive
 
       api.metadata = {
         "apiVersion" => "2017-10-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "medialive",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

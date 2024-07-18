@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.240.0 (2024-07-18)
+------------------
+
+* Feature - Updates Amazon RDS documentation to specify an eventual consistency model for DescribePendingMaintenanceActions.
+
 1.239.0 (2024-07-12)
 ------------------
 

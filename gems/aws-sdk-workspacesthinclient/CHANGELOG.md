@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-07-18)
+------------------
+
+* Feature - Documentation update for WorkSpaces Thin Client.
+
 1.10.0 (2024-07-02)
 ------------------
 

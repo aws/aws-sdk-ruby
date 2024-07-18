@@ -2575,6 +2575,59 @@ module Aws
                                     ) -> _ResumeContactRecordingResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumeContactRecordingResponseSuccess
 
+      interface _SearchAgentStatusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchAgentStatusesResponse]
+        def agent_statuses: () -> ::Array[Types::AgentStatus]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_agent_statuses-instance_method
+      def search_agent_statuses: (
+                                   instance_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?search_filter: {
+                                     attribute_filter: {
+                                       or_conditions: Array[
+                                         {
+                                           tag_conditions: Array[
+                                             {
+                                               tag_key: ::String?,
+                                               tag_value: ::String?
+                                             },
+                                           ]?
+                                         },
+                                       ]?,
+                                       and_condition: {
+                                         tag_conditions: Array[
+                                           {
+                                             tag_key: ::String?,
+                                             tag_value: ::String?
+                                           },
+                                         ]?
+                                       }?,
+                                       tag_condition: {
+                                         tag_key: ::String?,
+                                         tag_value: ::String?
+                                       }?
+                                     }?
+                                   },
+                                   ?search_criteria: {
+                                     or_conditions: Array[
+                                       untyped,
+                                     ]?,
+                                     and_conditions: Array[
+                                       untyped,
+                                     ]?,
+                                     string_condition: {
+                                       field_name: ::String?,
+                                       value: ::String?,
+                                       comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                     }?
+                                   }
+                                 ) -> _SearchAgentStatusesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAgentStatusesResponseSuccess
+
       interface _SearchAvailablePhoneNumbersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchAvailablePhoneNumbersResponse]
         def next_token: () -> ::String
@@ -3094,6 +3147,59 @@ module Aws
                                     ) -> _SearchSecurityProfilesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSecurityProfilesResponseSuccess
 
+      interface _SearchUserHierarchyGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchUserHierarchyGroupsResponse]
+        def user_hierarchy_groups: () -> ::Array[Types::HierarchyGroup]
+        def next_token: () -> ::String
+        def approximate_total_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#search_user_hierarchy_groups-instance_method
+      def search_user_hierarchy_groups: (
+                                          instance_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          ?search_filter: {
+                                            attribute_filter: {
+                                              or_conditions: Array[
+                                                {
+                                                  tag_conditions: Array[
+                                                    {
+                                                      tag_key: ::String?,
+                                                      tag_value: ::String?
+                                                    },
+                                                  ]?
+                                                },
+                                              ]?,
+                                              and_condition: {
+                                                tag_conditions: Array[
+                                                  {
+                                                    tag_key: ::String?,
+                                                    tag_value: ::String?
+                                                  },
+                                                ]?
+                                              }?,
+                                              tag_condition: {
+                                                tag_key: ::String?,
+                                                tag_value: ::String?
+                                              }?
+                                            }?
+                                          },
+                                          ?search_criteria: {
+                                            or_conditions: Array[
+                                              untyped,
+                                            ]?,
+                                            and_conditions: Array[
+                                              untyped,
+                                            ]?,
+                                            string_condition: {
+                                              field_name: ::String?,
+                                              value: ::String?,
+                                              comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                            }?
+                                          }
+                                        ) -> _SearchUserHierarchyGroupsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUserHierarchyGroupsResponseSuccess
+
       interface _SearchUsersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchUsersResponse]
         def users: () -> ::Array[Types::UserSearchSummary]
@@ -3174,6 +3280,24 @@ module Aws
                               field_name: ::String?,
                               value: ::String?,
                               comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                            }?,
+                            list_condition: {
+                              target_list_type: ("PROFICIENCIES")?,
+                              conditions: Array[
+                                {
+                                  string_condition: {
+                                    field_name: ::String?,
+                                    value: ::String?,
+                                    comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                                  }?,
+                                  number_condition: {
+                                    field_name: ::String?,
+                                    min_value: ::Integer?,
+                                    max_value: ::Integer?,
+                                    comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+                                  }?
+                                },
+                              ]?
                             }?,
                             hierarchy_group_condition: {
                               value: ::String?,

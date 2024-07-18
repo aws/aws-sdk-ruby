@@ -2631,7 +2631,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2699,9 +2699,9 @@ module Aws::ACMPCA
     #
     # | waiter_name                       | params                                               | :delay   | :max_attempts |
     # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
-    # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 40            |
-    # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 40            |
-    # | certificate_issued                | {Client#get_certificate}                             | 1        | 120           |
+    # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
+    # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
+    # | certificate_issued                | {Client#get_certificate}                             | 1        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

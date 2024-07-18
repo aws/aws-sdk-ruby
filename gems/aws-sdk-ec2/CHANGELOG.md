@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.466.0 (2024-07-18)
+------------------
+
+* Feature - Amazon VPC IP Address Manager (IPAM) now supports Bring-Your-Own-IP (BYOIP) for IP addresses registered with any Internet Registry. This feature uses DNS TXT records to validate ownership of a public IP address range.
+
 1.465.0 (2024-07-10)
 ------------------
 

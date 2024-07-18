@@ -127,59 +127,59 @@ module Aws::Ivschat
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateChatTokenRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ChatTokenAttributes, location_name: "attributes"))
-    CreateChatTokenRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: ChatTokenCapabilities, location_name: "capabilities"))
     CreateChatTokenRequest.add_member(:room_identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "roomIdentifier"))
-    CreateChatTokenRequest.add_member(:session_duration_in_minutes, Shapes::ShapeRef.new(shape: SessionDurationInMinutes, location_name: "sessionDurationInMinutes"))
     CreateChatTokenRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserID, required: true, location_name: "userId"))
+    CreateChatTokenRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: ChatTokenCapabilities, location_name: "capabilities"))
+    CreateChatTokenRequest.add_member(:session_duration_in_minutes, Shapes::ShapeRef.new(shape: SessionDurationInMinutes, location_name: "sessionDurationInMinutes"))
+    CreateChatTokenRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ChatTokenAttributes, location_name: "attributes"))
     CreateChatTokenRequest.struct_class = Types::CreateChatTokenRequest
 
-    CreateChatTokenResponse.add_member(:session_expiration_time, Shapes::ShapeRef.new(shape: Time, location_name: "sessionExpirationTime"))
     CreateChatTokenResponse.add_member(:token, Shapes::ShapeRef.new(shape: ChatToken, location_name: "token"))
     CreateChatTokenResponse.add_member(:token_expiration_time, Shapes::ShapeRef.new(shape: Time, location_name: "tokenExpirationTime"))
+    CreateChatTokenResponse.add_member(:session_expiration_time, Shapes::ShapeRef.new(shape: Time, location_name: "sessionExpirationTime"))
     CreateChatTokenResponse.struct_class = Types::CreateChatTokenResponse
 
-    CreateLoggingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateLoggingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: LoggingConfigurationName, location_name: "name"))
+    CreateLoggingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateLoggingConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateLoggingConfigurationRequest.struct_class = Types::CreateLoggingConfigurationRequest
 
     CreateLoggingConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: LoggingConfigurationArn, location_name: "arn"))
-    CreateLoggingConfigurationResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
-    CreateLoggingConfigurationResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     CreateLoggingConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: LoggingConfigurationID, location_name: "id"))
+    CreateLoggingConfigurationResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
+    CreateLoggingConfigurationResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     CreateLoggingConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: LoggingConfigurationName, location_name: "name"))
+    CreateLoggingConfigurationResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     CreateLoggingConfigurationResponse.add_member(:state, Shapes::ShapeRef.new(shape: CreateLoggingConfigurationState, location_name: "state"))
     CreateLoggingConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateLoggingConfigurationResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     CreateLoggingConfigurationResponse.struct_class = Types::CreateLoggingConfigurationResponse
 
-    CreateRoomRequest.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
-    CreateRoomRequest.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
-    CreateRoomRequest.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
-    CreateRoomRequest.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
     CreateRoomRequest.add_member(:name, Shapes::ShapeRef.new(shape: RoomName, location_name: "name"))
+    CreateRoomRequest.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
+    CreateRoomRequest.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
+    CreateRoomRequest.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
     CreateRoomRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateRoomRequest.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
     CreateRoomRequest.struct_class = Types::CreateRoomRequest
 
     CreateRoomResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RoomArn, location_name: "arn"))
-    CreateRoomResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     CreateRoomResponse.add_member(:id, Shapes::ShapeRef.new(shape: RoomID, location_name: "id"))
-    CreateRoomResponse.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
-    CreateRoomResponse.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
-    CreateRoomResponse.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
-    CreateRoomResponse.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
     CreateRoomResponse.add_member(:name, Shapes::ShapeRef.new(shape: RoomName, location_name: "name"))
-    CreateRoomResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateRoomResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     CreateRoomResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
+    CreateRoomResponse.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
+    CreateRoomResponse.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
+    CreateRoomResponse.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
+    CreateRoomResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateRoomResponse.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
     CreateRoomResponse.struct_class = Types::CreateRoomResponse
 
     DeleteLoggingConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifier, required: true, location_name: "identifier"))
     DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
 
+    DeleteMessageRequest.add_member(:room_identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "roomIdentifier"))
     DeleteMessageRequest.add_member(:id, Shapes::ShapeRef.new(shape: MessageID, required: true, location_name: "id"))
     DeleteMessageRequest.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
-    DeleteMessageRequest.add_member(:room_identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "roomIdentifier"))
     DeleteMessageRequest.struct_class = Types::DeleteMessageRequest
 
     DeleteMessageResponse.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
@@ -188,19 +188,19 @@ module Aws::Ivschat
     DeleteRoomRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "identifier"))
     DeleteRoomRequest.struct_class = Types::DeleteRoomRequest
 
+    DestinationConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "s3"))
     DestinationConfiguration.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogsDestinationConfiguration, location_name: "cloudWatchLogs"))
     DestinationConfiguration.add_member(:firehose, Shapes::ShapeRef.new(shape: FirehoseDestinationConfiguration, location_name: "firehose"))
-    DestinationConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "s3"))
     DestinationConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DestinationConfiguration.add_member_subclass(:s3, Types::DestinationConfiguration::S3)
     DestinationConfiguration.add_member_subclass(:cloud_watch_logs, Types::DestinationConfiguration::CloudWatchLogs)
     DestinationConfiguration.add_member_subclass(:firehose, Types::DestinationConfiguration::Firehose)
-    DestinationConfiguration.add_member_subclass(:s3, Types::DestinationConfiguration::S3)
     DestinationConfiguration.add_member_subclass(:unknown, Types::DestinationConfiguration::Unknown)
     DestinationConfiguration.struct_class = Types::DestinationConfiguration
 
-    DisconnectUserRequest.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
     DisconnectUserRequest.add_member(:room_identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "roomIdentifier"))
     DisconnectUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserID, required: true, location_name: "userId"))
+    DisconnectUserRequest.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
     DisconnectUserRequest.struct_class = Types::DisconnectUserRequest
 
     DisconnectUserResponse.struct_class = Types::DisconnectUserResponse
@@ -215,50 +215,50 @@ module Aws::Ivschat
     GetLoggingConfigurationRequest.struct_class = Types::GetLoggingConfigurationRequest
 
     GetLoggingConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: LoggingConfigurationArn, location_name: "arn"))
-    GetLoggingConfigurationResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
-    GetLoggingConfigurationResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     GetLoggingConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: LoggingConfigurationID, location_name: "id"))
+    GetLoggingConfigurationResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
+    GetLoggingConfigurationResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     GetLoggingConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: LoggingConfigurationName, location_name: "name"))
+    GetLoggingConfigurationResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     GetLoggingConfigurationResponse.add_member(:state, Shapes::ShapeRef.new(shape: LoggingConfigurationState, location_name: "state"))
     GetLoggingConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    GetLoggingConfigurationResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     GetLoggingConfigurationResponse.struct_class = Types::GetLoggingConfigurationResponse
 
     GetRoomRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "identifier"))
     GetRoomRequest.struct_class = Types::GetRoomRequest
 
     GetRoomResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RoomArn, location_name: "arn"))
-    GetRoomResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     GetRoomResponse.add_member(:id, Shapes::ShapeRef.new(shape: RoomID, location_name: "id"))
-    GetRoomResponse.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
-    GetRoomResponse.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
-    GetRoomResponse.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
-    GetRoomResponse.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
     GetRoomResponse.add_member(:name, Shapes::ShapeRef.new(shape: RoomName, location_name: "name"))
-    GetRoomResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    GetRoomResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     GetRoomResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
+    GetRoomResponse.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
+    GetRoomResponse.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
+    GetRoomResponse.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
+    GetRoomResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    GetRoomResponse.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
     GetRoomResponse.struct_class = Types::GetRoomResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListLoggingConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxLoggingConfigurationResults, location_name: "maxResults"))
     ListLoggingConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListLoggingConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxLoggingConfigurationResults, location_name: "maxResults"))
     ListLoggingConfigurationsRequest.struct_class = Types::ListLoggingConfigurationsRequest
 
     ListLoggingConfigurationsResponse.add_member(:logging_configurations, Shapes::ShapeRef.new(shape: LoggingConfigurationList, required: true, location_name: "loggingConfigurations"))
     ListLoggingConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListLoggingConfigurationsResponse.struct_class = Types::ListLoggingConfigurationsResponse
 
-    ListRoomsRequest.add_member(:logging_configuration_identifier, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifier, location_name: "loggingConfigurationIdentifier"))
-    ListRoomsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxRoomResults, location_name: "maxResults"))
-    ListRoomsRequest.add_member(:message_review_handler_uri, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "messageReviewHandlerUri"))
     ListRoomsRequest.add_member(:name, Shapes::ShapeRef.new(shape: RoomName, location_name: "name"))
     ListRoomsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRoomsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxRoomResults, location_name: "maxResults"))
+    ListRoomsRequest.add_member(:message_review_handler_uri, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "messageReviewHandlerUri"))
+    ListRoomsRequest.add_member(:logging_configuration_identifier, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifier, location_name: "loggingConfigurationIdentifier"))
     ListRoomsRequest.struct_class = Types::ListRoomsRequest
 
-    ListRoomsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRoomsResponse.add_member(:rooms, Shapes::ShapeRef.new(shape: RoomList, required: true, location_name: "rooms"))
+    ListRoomsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRoomsResponse.struct_class = Types::ListRoomsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -272,17 +272,17 @@ module Aws::Ivschat
     LoggingConfigurationList.member = Shapes::ShapeRef.new(shape: LoggingConfigurationSummary)
 
     LoggingConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: LoggingConfigurationArn, location_name: "arn"))
-    LoggingConfigurationSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
-    LoggingConfigurationSummary.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     LoggingConfigurationSummary.add_member(:id, Shapes::ShapeRef.new(shape: LoggingConfigurationID, location_name: "id"))
+    LoggingConfigurationSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
+    LoggingConfigurationSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     LoggingConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: LoggingConfigurationName, location_name: "name"))
+    LoggingConfigurationSummary.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     LoggingConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: LoggingConfigurationState, location_name: "state"))
     LoggingConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    LoggingConfigurationSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     LoggingConfigurationSummary.struct_class = Types::LoggingConfigurationSummary
 
-    MessageReviewHandler.add_member(:fallback_result, Shapes::ShapeRef.new(shape: FallbackResult, location_name: "fallbackResult"))
     MessageReviewHandler.add_member(:uri, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "uri"))
+    MessageReviewHandler.add_member(:fallback_result, Shapes::ShapeRef.new(shape: FallbackResult, location_name: "fallbackResult"))
     MessageReviewHandler.struct_class = Types::MessageReviewHandler
 
     PendingVerification.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -296,30 +296,30 @@ module Aws::Ivschat
     RoomList.member = Shapes::ShapeRef.new(shape: RoomSummary)
 
     RoomSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RoomArn, location_name: "arn"))
-    RoomSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     RoomSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoomID, location_name: "id"))
-    RoomSummary.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
-    RoomSummary.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
     RoomSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoomName, location_name: "name"))
-    RoomSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RoomSummary.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
+    RoomSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     RoomSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
+    RoomSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RoomSummary.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
     RoomSummary.struct_class = Types::RoomSummary
 
     S3DestinationConfiguration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
     S3DestinationConfiguration.struct_class = Types::S3DestinationConfiguration
 
-    SendEventRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: EventAttributes, location_name: "attributes"))
-    SendEventRequest.add_member(:event_name, Shapes::ShapeRef.new(shape: EventName, required: true, location_name: "eventName"))
     SendEventRequest.add_member(:room_identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "roomIdentifier"))
+    SendEventRequest.add_member(:event_name, Shapes::ShapeRef.new(shape: EventName, required: true, location_name: "eventName"))
+    SendEventRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: EventAttributes, location_name: "attributes"))
     SendEventRequest.struct_class = Types::SendEventRequest
 
     SendEventResponse.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
     SendEventResponse.struct_class = Types::SendEventResponse
 
-    ServiceQuotaExceededException.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, required: true, location_name: "limit"))
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    ServiceQuotaExceededException.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, required: true, location_name: "limit"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -333,10 +333,10 @@ module Aws::Ivschat
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
-    ThrottlingException.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, required: true, location_name: "limit"))
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ThrottlingException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     ThrottlingException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    ThrottlingException.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, required: true, location_name: "limit"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -345,48 +345,48 @@ module Aws::Ivschat
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateLoggingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     UpdateLoggingConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifier, required: true, location_name: "identifier"))
     UpdateLoggingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: LoggingConfigurationName, location_name: "name"))
+    UpdateLoggingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     UpdateLoggingConfigurationRequest.struct_class = Types::UpdateLoggingConfigurationRequest
 
     UpdateLoggingConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: LoggingConfigurationArn, location_name: "arn"))
-    UpdateLoggingConfigurationResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
-    UpdateLoggingConfigurationResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     UpdateLoggingConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: LoggingConfigurationID, location_name: "id"))
+    UpdateLoggingConfigurationResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
+    UpdateLoggingConfigurationResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     UpdateLoggingConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: LoggingConfigurationName, location_name: "name"))
+    UpdateLoggingConfigurationResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
     UpdateLoggingConfigurationResponse.add_member(:state, Shapes::ShapeRef.new(shape: UpdateLoggingConfigurationState, location_name: "state"))
     UpdateLoggingConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    UpdateLoggingConfigurationResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
     UpdateLoggingConfigurationResponse.struct_class = Types::UpdateLoggingConfigurationResponse
 
     UpdateRoomRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: RoomIdentifier, required: true, location_name: "identifier"))
-    UpdateRoomRequest.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
-    UpdateRoomRequest.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
-    UpdateRoomRequest.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
-    UpdateRoomRequest.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
     UpdateRoomRequest.add_member(:name, Shapes::ShapeRef.new(shape: RoomName, location_name: "name"))
+    UpdateRoomRequest.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
+    UpdateRoomRequest.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
+    UpdateRoomRequest.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
+    UpdateRoomRequest.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
     UpdateRoomRequest.struct_class = Types::UpdateRoomRequest
 
     UpdateRoomResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RoomArn, location_name: "arn"))
-    UpdateRoomResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     UpdateRoomResponse.add_member(:id, Shapes::ShapeRef.new(shape: RoomID, location_name: "id"))
-    UpdateRoomResponse.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
-    UpdateRoomResponse.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
-    UpdateRoomResponse.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
-    UpdateRoomResponse.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
     UpdateRoomResponse.add_member(:name, Shapes::ShapeRef.new(shape: RoomName, location_name: "name"))
-    UpdateRoomResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    UpdateRoomResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: Time, location_name: "createTime"))
     UpdateRoomResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Time, location_name: "updateTime"))
+    UpdateRoomResponse.add_member(:maximum_message_rate_per_second, Shapes::ShapeRef.new(shape: RoomMaxMessageRatePerSecond, location_name: "maximumMessageRatePerSecond"))
+    UpdateRoomResponse.add_member(:maximum_message_length, Shapes::ShapeRef.new(shape: RoomMaxMessageLength, location_name: "maximumMessageLength"))
+    UpdateRoomResponse.add_member(:message_review_handler, Shapes::ShapeRef.new(shape: MessageReviewHandler, location_name: "messageReviewHandler"))
+    UpdateRoomResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    UpdateRoomResponse.add_member(:logging_configuration_identifiers, Shapes::ShapeRef.new(shape: LoggingConfigurationIdentifierList, location_name: "loggingConfigurationIdentifiers"))
     UpdateRoomResponse.struct_class = Types::UpdateRoomResponse
 
-    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
+    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
@@ -399,9 +399,10 @@ module Aws::Ivschat
 
       api.metadata = {
         "apiVersion" => "2020-07-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ivschat",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "ivschat",
         "serviceFullName" => "Amazon Interactive Video Service Chat",
         "serviceId" => "ivschat",

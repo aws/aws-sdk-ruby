@@ -1499,6 +1499,12 @@ module Aws::TimestreamQuery
     #
     # @!attribute [rw] query_pricing_model
     #   The pricing model for queries in an account.
+    #
+    #   <note markdown="1"> The `QueryPricingModel` parameter is used by several Timestream
+    #   operations; however, the `UpdateAccountSettings` API operation
+    #   doesn't recognize any values other than `COMPUTE_UNITS`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/UpdateAccountSettingsRequest AWS API Documentation

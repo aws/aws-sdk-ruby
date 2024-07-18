@@ -802,7 +802,7 @@ module Aws::LocationService
       :car_mode_options,
       :truck_mode_options,
       :key)
-      SENSITIVE = [:key]
+      SENSITIVE = [:departure_positions, :destination_positions, :key]
       include Aws::Structure
     end
 
@@ -840,7 +840,7 @@ module Aws::LocationService
       :snapped_departure_positions,
       :snapped_destination_positions,
       :summary)
-      SENSITIVE = []
+      SENSITIVE = [:snapped_departure_positions, :snapped_destination_positions]
       include Aws::Structure
     end
 
@@ -1094,7 +1094,7 @@ module Aws::LocationService
       :arrival_time,
       :optimize_for,
       :key)
-      SENSITIVE = [:departure_position, :destination_position, :key]
+      SENSITIVE = [:departure_position, :destination_position, :waypoint_positions, :key]
       include Aws::Structure
     end
 
@@ -3956,7 +3956,7 @@ module Aws::LocationService
     #
     class LegGeometry < Struct.new(
       :line_string)
-      SENSITIVE = []
+      SENSITIVE = [:line_string]
       include Aws::Structure
     end
 

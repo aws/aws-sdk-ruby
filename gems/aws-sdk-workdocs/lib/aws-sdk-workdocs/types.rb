@@ -1522,7 +1522,7 @@ module Aws::WorkDocs
       :creator_id,
       :thumbnail,
       :source)
-      SENSITIVE = [:name]
+      SENSITIVE = [:name, :thumbnail, :source]
       include Aws::Structure
     end
 

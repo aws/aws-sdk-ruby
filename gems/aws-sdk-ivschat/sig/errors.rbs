@@ -31,21 +31,21 @@ module Aws
         def resource_type: () -> ::String
       end
       class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
-        def limit: () -> ::String
         def message: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
+        def limit: () -> ::String
       end
       class ThrottlingException < ::Aws::Errors::ServiceError
-        def limit: () -> ::String
         def message: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
+        def limit: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
-        def field_list: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
+        def field_list: () -> ::String
       end
     end
   end

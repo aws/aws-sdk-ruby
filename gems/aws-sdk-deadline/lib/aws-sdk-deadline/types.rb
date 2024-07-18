@@ -565,7 +565,7 @@ module Aws::Deadline
     class Attachments < Struct.new(
       :file_system,
       :manifests)
-      SENSITIVE = []
+      SENSITIVE = [:manifests]
       include Aws::Structure
     end
 
@@ -1397,7 +1397,7 @@ module Aws::Deadline
       :required_file_system_location_names,
       :role_arn,
       :tags)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :required_file_system_location_names]
       include Aws::Structure
     end
 
@@ -1445,7 +1445,7 @@ module Aws::Deadline
       :farm_id,
       :file_system_locations,
       :os_family)
-      SENSITIVE = []
+      SENSITIVE = [:file_system_locations]
       include Aws::Structure
     end
 
@@ -3314,7 +3314,7 @@ module Aws::Deadline
       :status,
       :updated_at,
       :updated_by)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :required_file_system_location_names]
       include Aws::Structure
     end
 
@@ -3727,7 +3727,7 @@ module Aws::Deadline
       :file_system_locations,
       :os_family,
       :storage_profile_id)
-      SENSITIVE = []
+      SENSITIVE = [:file_system_locations]
       include Aws::Structure
     end
 
@@ -3791,7 +3791,7 @@ module Aws::Deadline
       :storage_profile_id,
       :updated_at,
       :updated_by)
-      SENSITIVE = []
+      SENSITIVE = [:file_system_locations]
       include Aws::Structure
     end
 
@@ -4181,7 +4181,7 @@ module Aws::Deadline
       :path_mapping_rules,
       :queue_role_arn,
       :schema_version)
-      SENSITIVE = [:parameters]
+      SENSITIVE = [:parameters, :path_mapping_rules]
       include Aws::Structure
     end
 
@@ -8652,7 +8652,7 @@ module Aws::Deadline
       :required_file_system_location_names_to_add,
       :required_file_system_location_names_to_remove,
       :role_arn)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :required_file_system_location_names_to_add, :required_file_system_location_names_to_remove]
       include Aws::Structure
     end
 
@@ -8792,7 +8792,7 @@ module Aws::Deadline
       :file_system_locations_to_remove,
       :os_family,
       :storage_profile_id)
-      SENSITIVE = []
+      SENSITIVE = [:file_system_locations_to_add, :file_system_locations_to_remove]
       include Aws::Structure
     end
 

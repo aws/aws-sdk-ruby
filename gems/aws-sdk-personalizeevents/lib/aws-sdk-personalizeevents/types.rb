@@ -140,7 +140,7 @@ module Aws::PersonalizeEvents
       :recommendation_id,
       :impression,
       :properties)
-      SENSITIVE = [:action_id, :user_id, :properties]
+      SENSITIVE = [:action_id, :user_id, :impression, :properties]
       include Aws::Structure
     end
 
@@ -259,7 +259,7 @@ module Aws::PersonalizeEvents
       :recommendation_id,
       :impression,
       :metric_attribution)
-      SENSITIVE = [:item_id, :properties]
+      SENSITIVE = [:item_id, :properties, :impression]
       include Aws::Structure
     end
 
@@ -408,7 +408,7 @@ module Aws::PersonalizeEvents
       :user_id,
       :session_id,
       :event_list)
-      SENSITIVE = [:user_id]
+      SENSITIVE = [:user_id, :event_list]
       include Aws::Structure
     end
 

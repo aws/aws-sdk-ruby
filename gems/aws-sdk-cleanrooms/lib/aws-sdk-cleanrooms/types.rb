@@ -437,7 +437,7 @@ module Aws::CleanRooms
       :source,
       :analysis_parameters,
       :validations)
-      SENSITIVE = [:source]
+      SENSITIVE = [:source, :analysis_parameters]
       include Aws::Structure
     end
 
@@ -903,7 +903,7 @@ module Aws::CleanRooms
       :source,
       :analysis_parameters,
       :validations)
-      SENSITIVE = [:source]
+      SENSITIVE = [:source, :analysis_parameters]
       include Aws::Structure
     end
 
@@ -1928,7 +1928,7 @@ module Aws::CleanRooms
       :source,
       :tags,
       :analysis_parameters)
-      SENSITIVE = [:source]
+      SENSITIVE = [:source, :analysis_parameters]
       include Aws::Structure
     end
 

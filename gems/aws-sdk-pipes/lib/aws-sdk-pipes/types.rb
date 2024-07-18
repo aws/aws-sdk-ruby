@@ -38,7 +38,7 @@ module Aws::Pipes
       :subnets,
       :security_groups,
       :assign_public_ip)
-      SENSITIVE = []
+      SENSITIVE = [:subnets, :security_groups]
       include Aws::Structure
     end
 
@@ -511,7 +511,7 @@ module Aws::Pipes
       :role_arn,
       :tags,
       :log_configuration)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :tags]
       include Aws::Structure
     end
 
@@ -742,7 +742,7 @@ module Aws::Pipes
       :creation_time,
       :last_modified_time,
       :log_configuration)
-      SENSITIVE = [:description]
+      SENSITIVE = [:description, :tags]
       include Aws::Structure
     end
 
@@ -1269,7 +1269,7 @@ module Aws::Pipes
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -1501,7 +1501,7 @@ module Aws::Pipes
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters)
-      SENSITIVE = []
+      SENSITIVE = [:path_parameter_values, :header_parameters, :query_string_parameters]
       include Aws::Structure
     end
 
@@ -2035,7 +2035,7 @@ module Aws::Pipes
       :credentials,
       :server_root_ca_certificate,
       :vpc)
-      SENSITIVE = [:topic_name, :consumer_group_id]
+      SENSITIVE = [:topic_name, :additional_bootstrap_servers, :consumer_group_id]
       include Aws::Structure
     end
 
@@ -2351,7 +2351,7 @@ module Aws::Pipes
       :path_parameter_values,
       :header_parameters,
       :query_string_parameters)
-      SENSITIVE = []
+      SENSITIVE = [:path_parameter_values, :header_parameters, :query_string_parameters]
       include Aws::Structure
     end
 
@@ -2544,7 +2544,7 @@ module Aws::Pipes
       :statement_name,
       :with_event,
       :sqls)
-      SENSITIVE = [:database, :db_user, :statement_name]
+      SENSITIVE = [:database, :db_user, :statement_name, :sqls]
       include Aws::Structure
     end
 
@@ -2965,7 +2965,7 @@ module Aws::Pipes
     class SelfManagedKafkaAccessConfigurationVpc < Struct.new(
       :subnets,
       :security_group)
-      SENSITIVE = []
+      SENSITIVE = [:subnets, :security_group]
       include Aws::Structure
     end
 
@@ -3178,7 +3178,7 @@ module Aws::Pipes
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 

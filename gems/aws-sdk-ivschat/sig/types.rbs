@@ -26,61 +26,61 @@ module Aws::Ivschat
     end
 
     class CreateChatTokenRequest
-      attr_accessor attributes: ::Hash[::String, ::String]
-      attr_accessor capabilities: ::Array[("SEND_MESSAGE" | "DISCONNECT_USER" | "DELETE_MESSAGE")]
       attr_accessor room_identifier: ::String
-      attr_accessor session_duration_in_minutes: ::Integer
       attr_accessor user_id: ::String
-      SENSITIVE: [:attributes, :user_id]
+      attr_accessor capabilities: ::Array[("SEND_MESSAGE" | "DISCONNECT_USER" | "DELETE_MESSAGE")]
+      attr_accessor session_duration_in_minutes: ::Integer
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:user_id, :attributes]
     end
 
     class CreateChatTokenResponse
-      attr_accessor session_expiration_time: ::Time
       attr_accessor token: ::String
       attr_accessor token_expiration_time: ::Time
+      attr_accessor session_expiration_time: ::Time
       SENSITIVE: [:token]
     end
 
     class CreateLoggingConfigurationRequest
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor name: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreateLoggingConfigurationResponse
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
       attr_accessor name: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor state: ("ACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor update_time: ::Time
       SENSITIVE: []
     end
 
     class CreateRoomRequest
-      attr_accessor logging_configuration_identifiers: ::Array[::String]
-      attr_accessor maximum_message_length: ::Integer
-      attr_accessor maximum_message_rate_per_second: ::Integer
-      attr_accessor message_review_handler: Types::MessageReviewHandler
       attr_accessor name: ::String
+      attr_accessor maximum_message_rate_per_second: ::Integer
+      attr_accessor maximum_message_length: ::Integer
+      attr_accessor message_review_handler: Types::MessageReviewHandler
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor logging_configuration_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
     class CreateRoomResponse
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
       attr_accessor id: ::String
-      attr_accessor logging_configuration_identifiers: ::Array[::String]
-      attr_accessor maximum_message_length: ::Integer
-      attr_accessor maximum_message_rate_per_second: ::Integer
-      attr_accessor message_review_handler: Types::MessageReviewHandler
       attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
+      attr_accessor maximum_message_rate_per_second: ::Integer
+      attr_accessor maximum_message_length: ::Integer
+      attr_accessor message_review_handler: Types::MessageReviewHandler
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor logging_configuration_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -90,9 +90,9 @@ module Aws::Ivschat
     end
 
     class DeleteMessageRequest
+      attr_accessor room_identifier: ::String
       attr_accessor id: ::String
       attr_accessor reason: ::String
-      attr_accessor room_identifier: ::String
       SENSITIVE: []
     end
 
@@ -107,26 +107,26 @@ module Aws::Ivschat
     end
 
     class DestinationConfiguration
+      attr_accessor s3: Types::S3DestinationConfiguration
       attr_accessor cloud_watch_logs: Types::CloudWatchLogsDestinationConfiguration
       attr_accessor firehose: Types::FirehoseDestinationConfiguration
-      attr_accessor s3: Types::S3DestinationConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
+      class S3 < DestinationConfiguration
+      end
       class CloudWatchLogs < DestinationConfiguration
       end
       class Firehose < DestinationConfiguration
-      end
-      class S3 < DestinationConfiguration
       end
       class Unknown < DestinationConfiguration
       end
     end
 
     class DisconnectUserRequest
-      attr_accessor reason: ::String
       attr_accessor room_identifier: ::String
       attr_accessor user_id: ::String
+      attr_accessor reason: ::String
       SENSITIVE: [:user_id]
     end
 
@@ -145,13 +145,13 @@ module Aws::Ivschat
 
     class GetLoggingConfigurationResponse
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
       attr_accessor name: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "ACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor update_time: ::Time
       SENSITIVE: []
     end
 
@@ -162,15 +162,15 @@ module Aws::Ivschat
 
     class GetRoomResponse
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
       attr_accessor id: ::String
-      attr_accessor logging_configuration_identifiers: ::Array[::String]
-      attr_accessor maximum_message_length: ::Integer
-      attr_accessor maximum_message_rate_per_second: ::Integer
-      attr_accessor message_review_handler: Types::MessageReviewHandler
       attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
+      attr_accessor maximum_message_rate_per_second: ::Integer
+      attr_accessor maximum_message_length: ::Integer
+      attr_accessor message_review_handler: Types::MessageReviewHandler
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor logging_configuration_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -180,8 +180,8 @@ module Aws::Ivschat
     end
 
     class ListLoggingConfigurationsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -192,17 +192,17 @@ module Aws::Ivschat
     end
 
     class ListRoomsRequest
-      attr_accessor logging_configuration_identifier: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor message_review_handler_uri: ::String
       attr_accessor name: ::String
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor message_review_handler_uri: ::String
+      attr_accessor logging_configuration_identifier: ::String
       SENSITIVE: []
     end
 
     class ListRoomsResponse
-      attr_accessor next_token: ::String
       attr_accessor rooms: ::Array[Types::RoomSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -218,19 +218,19 @@ module Aws::Ivschat
 
     class LoggingConfigurationSummary
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
       attr_accessor name: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "ACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor update_time: ::Time
       SENSITIVE: []
     end
 
     class MessageReviewHandler
-      attr_accessor fallback_result: ("ALLOW" | "DENY")
       attr_accessor uri: ::String
+      attr_accessor fallback_result: ("ALLOW" | "DENY")
       SENSITIVE: []
     end
 
@@ -248,13 +248,13 @@ module Aws::Ivschat
 
     class RoomSummary
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
       attr_accessor id: ::String
-      attr_accessor logging_configuration_identifiers: ::Array[::String]
-      attr_accessor message_review_handler: Types::MessageReviewHandler
       attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor message_review_handler: Types::MessageReviewHandler
+      attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor logging_configuration_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -264,9 +264,9 @@ module Aws::Ivschat
     end
 
     class SendEventRequest
-      attr_accessor attributes: ::Hash[::String, ::String]
-      attr_accessor event_name: ::String
       attr_accessor room_identifier: ::String
+      attr_accessor event_name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -276,10 +276,10 @@ module Aws::Ivschat
     end
 
     class ServiceQuotaExceededException
-      attr_accessor limit: ::Integer
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ("ROOM")
+      attr_accessor limit: ::Integer
       SENSITIVE: []
     end
 
@@ -293,10 +293,10 @@ module Aws::Ivschat
     end
 
     class ThrottlingException
-      attr_accessor limit: ::Integer
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ("ROOM")
+      attr_accessor limit: ::Integer
       SENSITIVE: []
     end
 
@@ -310,58 +310,58 @@ module Aws::Ivschat
     end
 
     class UpdateLoggingConfigurationRequest
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor identifier: ::String
       attr_accessor name: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       SENSITIVE: []
     end
 
     class UpdateLoggingConfigurationResponse
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
       attr_accessor name: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor state: ("ACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor update_time: ::Time
       SENSITIVE: []
     end
 
     class UpdateRoomRequest
       attr_accessor identifier: ::String
-      attr_accessor logging_configuration_identifiers: ::Array[::String]
-      attr_accessor maximum_message_length: ::Integer
-      attr_accessor maximum_message_rate_per_second: ::Integer
-      attr_accessor message_review_handler: Types::MessageReviewHandler
       attr_accessor name: ::String
+      attr_accessor maximum_message_rate_per_second: ::Integer
+      attr_accessor maximum_message_length: ::Integer
+      attr_accessor message_review_handler: Types::MessageReviewHandler
+      attr_accessor logging_configuration_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
     class UpdateRoomResponse
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
       attr_accessor id: ::String
-      attr_accessor logging_configuration_identifiers: ::Array[::String]
-      attr_accessor maximum_message_length: ::Integer
-      attr_accessor maximum_message_rate_per_second: ::Integer
-      attr_accessor message_review_handler: Types::MessageReviewHandler
       attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
+      attr_accessor maximum_message_rate_per_second: ::Integer
+      attr_accessor maximum_message_length: ::Integer
+      attr_accessor message_review_handler: Types::MessageReviewHandler
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor logging_configuration_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("UNKNOWN_OPERATION" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
   end

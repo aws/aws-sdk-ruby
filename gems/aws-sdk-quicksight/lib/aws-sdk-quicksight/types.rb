@@ -7232,7 +7232,7 @@ module Aws::QuickSight
       :integer_values,
       :decimal_values,
       :date_time_values)
-      SENSITIVE = []
+      SENSITIVE = [:string_values, :integer_values, :decimal_values, :date_time_values]
       include Aws::Structure
     end
 
@@ -9192,7 +9192,7 @@ module Aws::QuickSight
       :dynamic_value,
       :static_values,
       :rolling_date)
-      SENSITIVE = []
+      SENSITIVE = [:static_values]
       include Aws::Structure
     end
 
@@ -9255,7 +9255,7 @@ module Aws::QuickSight
     class DateTimeParameter < Struct.new(
       :name,
       :values)
-      SENSITIVE = []
+      SENSITIVE = [:values]
       include Aws::Structure
     end
 
@@ -9421,7 +9421,7 @@ module Aws::QuickSight
     class DecimalDefaultValues < Struct.new(
       :dynamic_value,
       :static_values)
-      SENSITIVE = []
+      SENSITIVE = [:static_values]
       include Aws::Structure
     end
 
@@ -9440,7 +9440,7 @@ module Aws::QuickSight
     class DecimalParameter < Struct.new(
       :name,
       :values)
-      SENSITIVE = []
+      SENSITIVE = [:values]
       include Aws::Structure
     end
 
@@ -17895,7 +17895,7 @@ module Aws::QuickSight
     class IntegerDefaultValues < Struct.new(
       :dynamic_value,
       :static_values)
-      SENSITIVE = []
+      SENSITIVE = [:static_values]
       include Aws::Structure
     end
 
@@ -17914,7 +17914,7 @@ module Aws::QuickSight
     class IntegerParameter < Struct.new(
       :name,
       :values)
-      SENSITIVE = []
+      SENSITIVE = [:values]
       include Aws::Structure
     end
 
@@ -26486,7 +26486,7 @@ module Aws::QuickSight
       :truthy_cell_value_synonyms,
       :falsey_cell_value,
       :falsey_cell_value_synonyms)
-      SENSITIVE = [:truthy_cell_value, :falsey_cell_value]
+      SENSITIVE = [:truthy_cell_value, :truthy_cell_value_synonyms, :falsey_cell_value, :falsey_cell_value_synonyms]
       include Aws::Structure
     end
 
@@ -27914,7 +27914,7 @@ module Aws::QuickSight
     class StringDefaultValues < Struct.new(
       :dynamic_value,
       :static_values)
-      SENSITIVE = []
+      SENSITIVE = [:static_values]
       include Aws::Structure
     end
 
@@ -27952,7 +27952,7 @@ module Aws::QuickSight
     class StringParameter < Struct.new(
       :name,
       :values)
-      SENSITIVE = []
+      SENSITIVE = [:values]
       include Aws::Structure
     end
 

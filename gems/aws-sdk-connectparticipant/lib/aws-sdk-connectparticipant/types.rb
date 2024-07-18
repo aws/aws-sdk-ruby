@@ -888,7 +888,7 @@ module Aws::ConnectParticipant
       :input_schema,
       :template,
       :actions)
-      SENSITIVE = [:input_schema, :template]
+      SENSITIVE = [:input_schema, :template, :actions]
       include Aws::Structure
     end
 

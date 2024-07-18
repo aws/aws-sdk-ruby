@@ -134,6 +134,11 @@ module Aws::Firehose
       SENSITIVE: []
     end
 
+    class CatalogConfiguration
+      attr_accessor catalog_arn: ::String
+      SENSITIVE: []
+    end
+
     class CloudWatchLoggingOptions
       attr_accessor enabled: bool
       attr_accessor log_group_name: ::String
@@ -169,6 +174,7 @@ module Aws::Firehose
       attr_accessor amazon_open_search_serverless_destination_configuration: Types::AmazonOpenSearchServerlessDestinationConfiguration
       attr_accessor msk_source_configuration: Types::MSKSourceConfiguration
       attr_accessor snowflake_destination_configuration: Types::SnowflakeDestinationConfiguration
+      attr_accessor iceberg_destination_configuration: Types::IcebergDestinationConfiguration
       SENSITIVE: []
     end
 
@@ -253,6 +259,15 @@ module Aws::Firehose
       attr_accessor http_endpoint_destination_description: Types::HttpEndpointDestinationDescription
       attr_accessor snowflake_destination_description: Types::SnowflakeDestinationDescription
       attr_accessor amazon_open_search_serverless_destination_description: Types::AmazonOpenSearchServerlessDestinationDescription
+      attr_accessor iceberg_destination_description: Types::IcebergDestinationDescription
+      SENSITIVE: []
+    end
+
+    class DestinationTableConfiguration
+      attr_accessor destination_table_name: ::String
+      attr_accessor destination_database_name: ::String
+      attr_accessor unique_keys: ::Array[::String]
+      attr_accessor s3_error_output_prefix: ::String
       SENSITIVE: []
     end
 
@@ -482,6 +497,45 @@ module Aws::Firehose
       SENSITIVE: []
     end
 
+    class IcebergDestinationConfiguration
+      attr_accessor destination_table_configuration_list: ::Array[Types::DestinationTableConfiguration]
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor retry_options: Types::RetryOptions
+      attr_accessor role_arn: ::String
+      attr_accessor catalog_configuration: Types::CatalogConfiguration
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class IcebergDestinationDescription
+      attr_accessor destination_table_configuration_list: ::Array[Types::DestinationTableConfiguration]
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor retry_options: Types::RetryOptions
+      attr_accessor role_arn: ::String
+      attr_accessor catalog_configuration: Types::CatalogConfiguration
+      attr_accessor s3_destination_description: Types::S3DestinationDescription
+      SENSITIVE: []
+    end
+
+    class IcebergDestinationUpdate
+      attr_accessor destination_table_configuration_list: ::Array[Types::DestinationTableConfiguration]
+      attr_accessor buffering_hints: Types::BufferingHints
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor processing_configuration: Types::ProcessingConfiguration
+      attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
+      attr_accessor retry_options: Types::RetryOptions
+      attr_accessor role_arn: ::String
+      attr_accessor catalog_configuration: Types::CatalogConfiguration
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      SENSITIVE: []
+    end
+
     class InputFormatConfiguration
       attr_accessor deserializer: Types::Deserializer
       SENSITIVE: []
@@ -557,6 +611,7 @@ module Aws::Firehose
       attr_accessor msk_cluster_arn: ::String
       attr_accessor topic_name: ::String
       attr_accessor authentication_configuration: Types::AuthenticationConfiguration
+      attr_accessor read_from_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -565,6 +620,7 @@ module Aws::Firehose
       attr_accessor topic_name: ::String
       attr_accessor authentication_configuration: Types::AuthenticationConfiguration
       attr_accessor delivery_start_timestamp: ::Time
+      attr_accessor read_from_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -790,6 +846,12 @@ module Aws::Firehose
       SENSITIVE: []
     end
 
+    class SnowflakeBufferingHints
+      attr_accessor size_in_m_bs: ::Integer
+      attr_accessor interval_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class SnowflakeDestinationConfiguration
       attr_accessor account_url: ::String
       attr_accessor private_key: ::String
@@ -810,6 +872,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_configuration: Types::S3DestinationConfiguration
       attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
+      attr_accessor buffering_hints: Types::SnowflakeBufferingHints
       SENSITIVE: [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
     end
 
@@ -831,6 +894,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_destination_description: Types::S3DestinationDescription
       attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
+      attr_accessor buffering_hints: Types::SnowflakeBufferingHints
       SENSITIVE: [:account_url, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
     end
 
@@ -853,6 +917,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_update: Types::S3DestinationUpdate
       attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
+      attr_accessor buffering_hints: Types::SnowflakeBufferingHints
       SENSITIVE: [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
     end
 
@@ -988,6 +1053,7 @@ module Aws::Firehose
       attr_accessor http_endpoint_destination_update: Types::HttpEndpointDestinationUpdate
       attr_accessor amazon_open_search_serverless_destination_update: Types::AmazonOpenSearchServerlessDestinationUpdate
       attr_accessor snowflake_destination_update: Types::SnowflakeDestinationUpdate
+      attr_accessor iceberg_destination_update: Types::IcebergDestinationUpdate
       SENSITIVE: []
     end
 

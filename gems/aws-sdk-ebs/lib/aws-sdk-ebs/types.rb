@@ -329,7 +329,7 @@ module Aws::EBS
       :volume_size,
       :block_size,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:changed_blocks]
       include Aws::Structure
     end
 

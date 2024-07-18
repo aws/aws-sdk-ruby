@@ -634,6 +634,27 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Describes the containers where the destination Apache Iceberg Tables
+    # are persisted.
+    #
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] catalog_arn
+    #   Specifies the Glue catalog ARN indentifier of the destination Apache
+    #   Iceberg Tables. You must specify the ARN in the format
+    #   `arn:aws:glue:region:account-id:catalog`.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CatalogConfiguration AWS API Documentation
+    #
+    class CatalogConfiguration < Struct.new(
+      :catalog_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the Amazon CloudWatch logging options for your delivery
     # stream.
     #
@@ -836,6 +857,12 @@ module Aws::Firehose
     #   Configure Snowflake destination
     #   @return [Types::SnowflakeDestinationConfiguration]
     #
+    # @!attribute [rw] iceberg_destination_configuration
+    #   Configure Apache Iceberg Tables destination.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::IcebergDestinationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
     #
     class CreateDeliveryStreamInput < Struct.new(
@@ -853,7 +880,8 @@ module Aws::Firehose
       :tags,
       :amazon_open_search_serverless_destination_configuration,
       :msk_source_configuration,
-      :snowflake_destination_configuration)
+      :snowflake_destination_configuration,
+      :iceberg_destination_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1260,6 +1288,12 @@ module Aws::Firehose
     #   Service.
     #   @return [Types::AmazonOpenSearchServerlessDestinationDescription]
     #
+    # @!attribute [rw] iceberg_destination_description
+    #   Describes a destination in Apache Iceberg Tables.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::IcebergDestinationDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription AWS API Documentation
     #
     class DestinationDescription < Struct.new(
@@ -1272,7 +1306,51 @@ module Aws::Firehose
       :splunk_destination_description,
       :http_endpoint_destination_description,
       :snowflake_destination_description,
-      :amazon_open_search_serverless_destination_description)
+      :amazon_open_search_serverless_destination_description,
+      :iceberg_destination_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of a destination in Apache Iceberg Tables.
+    #
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] destination_table_name
+    #   Specifies the name of the Apache Iceberg Table.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_database_name
+    #   The name of the Apache Iceberg database.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_keys
+    #   A list of unique keys for a given Apache Iceberg table. Firehose
+    #   will use these for running Create/Update/Delete operations on the
+    #   given Iceberg table.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_error_output_prefix
+    #   The table specific S3 error output prefix. All the errors that
+    #   occurred while delivering to this table will be prefixed with this
+    #   value in S3 destination.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationTableConfiguration AWS API Documentation
+    #
+    class DestinationTableConfiguration < Struct.new(
+      :destination_table_name,
+      :destination_database_name,
+      :unique_keys,
+      :s3_error_output_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2517,6 +2595,228 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Specifies the destination configure settings for Apache Iceberg Table.
+    #
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] destination_table_configuration_list
+    #   Provides a list of `DestinationTableConfigurations` which Firehose
+    #   uses to deliver data to Apache Iceberg tables.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<Types::DestinationTableConfiguration>]
+    #
+    # @!attribute [rw] buffering_hints
+    #   Describes hints for the buffering to perform before delivering data
+    #   to the destination. These options are treated as hints, and
+    #   therefore Firehose might choose to use different values when it is
+    #   optimal. The `SizeInMBs` and `IntervalInSeconds` parameters are
+    #   optional. However, if specify a value for one of them, you must also
+    #   provide a value for the other.
+    #   @return [Types::BufferingHints]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Describes how Firehose will backup records. Currently,Firehose only
+    #   supports `FailedDataOnly` for preview.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Firehose is unable to deliver data to an
+    #   Amazon S3 prefix.
+    #   @return [Types::RetryOptions]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Apache Iceberg tables role.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_configuration
+    #   Configuration describing where the destination Apache Iceberg Tables
+    #   are persisted.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::CatalogConfiguration]
+    #
+    # @!attribute [rw] s3_configuration
+    #   Describes the configuration of a destination in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/IcebergDestinationConfiguration AWS API Documentation
+    #
+    class IcebergDestinationConfiguration < Struct.new(
+      :destination_table_configuration_list,
+      :buffering_hints,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :s3_backup_mode,
+      :retry_options,
+      :role_arn,
+      :catalog_configuration,
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a destination in Apache Iceberg Tables.
+    #
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] destination_table_configuration_list
+    #   Provides a list of `DestinationTableConfigurations` which Firehose
+    #   uses to deliver data to Apache Iceberg tables.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<Types::DestinationTableConfiguration>]
+    #
+    # @!attribute [rw] buffering_hints
+    #   Describes hints for the buffering to perform before delivering data
+    #   to the destination. These options are treated as hints, and
+    #   therefore Firehose might choose to use different values when it is
+    #   optimal. The `SizeInMBs` and `IntervalInSeconds` parameters are
+    #   optional. However, if specify a value for one of them, you must also
+    #   provide a value for the other.
+    #   @return [Types::BufferingHints]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Describes how Firehose will backup records. Currently,Firehose only
+    #   supports `FailedDataOnly` for preview.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Firehose is unable to deliver data to an
+    #   Amazon S3 prefix.
+    #   @return [Types::RetryOptions]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_configuration
+    #   Configuration describing where the destination Iceberg tables are
+    #   persisted.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::CatalogConfiguration]
+    #
+    # @!attribute [rw] s3_destination_description
+    #   Describes a destination in Amazon S3.
+    #   @return [Types::S3DestinationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/IcebergDestinationDescription AWS API Documentation
+    #
+    class IcebergDestinationDescription < Struct.new(
+      :destination_table_configuration_list,
+      :buffering_hints,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :s3_backup_mode,
+      :retry_options,
+      :role_arn,
+      :catalog_configuration,
+      :s3_destination_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an update for a destination in Apache Iceberg Tables.
+    #
+    # Amazon Data Firehose is in preview release and is subject to change.
+    #
+    # @!attribute [rw] destination_table_configuration_list
+    #   Provides a list of `DestinationTableConfigurations` which Firehose
+    #   uses to deliver data to Apache Iceberg tables.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Array<Types::DestinationTableConfiguration>]
+    #
+    # @!attribute [rw] buffering_hints
+    #   Describes hints for the buffering to perform before delivering data
+    #   to the destination. These options are treated as hints, and
+    #   therefore Firehose might choose to use different values when it is
+    #   optimal. The `SizeInMBs` and `IntervalInSeconds` parameters are
+    #   optional. However, if specify a value for one of them, you must also
+    #   provide a value for the other.
+    #   @return [Types::BufferingHints]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Describes how Firehose will backup records. Currently,Firehose only
+    #   supports `FailedDataOnly` for preview.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Firehose is unable to deliver data to an
+    #   Amazon S3 prefix.
+    #   @return [Types::RetryOptions]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Apache Iceberg Tables role.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_configuration
+    #   Configuration describing where the destination Iceberg tables are
+    #   persisted.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::CatalogConfiguration]
+    #
+    # @!attribute [rw] s3_configuration
+    #   Describes the configuration of a destination in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/IcebergDestinationUpdate AWS API Documentation
+    #
+    class IcebergDestinationUpdate < Struct.new(
+      :destination_table_configuration_list,
+      :buffering_hints,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :s3_backup_mode,
+      :retry_options,
+      :role_arn,
+      :catalog_configuration,
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the deserializer you want to use to convert the format of
     # the input data. This parameter is required if `Enabled` is set to
     # true.
@@ -2807,12 +3107,23 @@ module Aws::Firehose
     #   The authentication configuration of the Amazon MSK cluster.
     #   @return [Types::AuthenticationConfiguration]
     #
+    # @!attribute [rw] read_from_timestamp
+    #   The start date and time in UTC for the offset position within your
+    #   MSK topic from where Firehose begins to read. By default, this is
+    #   set to timestamp when Firehose becomes Active.
+    #
+    #   If you want to create a Firehose stream with Earliest start position
+    #   from SDK or CLI, you need to set the `ReadFromTimestamp` parameter
+    #   to Epoch (1970-01-01T00:00:00Z).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/MSKSourceConfiguration AWS API Documentation
     #
     class MSKSourceConfiguration < Struct.new(
       :msk_cluster_arn,
       :topic_name,
-      :authentication_configuration)
+      :authentication_configuration,
+      :read_from_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2837,13 +3148,24 @@ module Aws::Firehose
     #   MSK cluster starting with this timestamp.
     #   @return [Time]
     #
+    # @!attribute [rw] read_from_timestamp
+    #   The start date and time in UTC for the offset position within your
+    #   MSK topic from where Firehose begins to read. By default, this is
+    #   set to timestamp when Firehose becomes Active.
+    #
+    #   If you want to create a Firehose stream with Earliest start position
+    #   from SDK or CLI, you need to set the `ReadFromTimestampUTC`
+    #   parameter to Epoch (1970-01-01T00:00:00Z).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/MSKSourceDescription AWS API Documentation
     #
     class MSKSourceDescription < Struct.new(
       :msk_cluster_arn,
       :topic_name,
       :authentication_configuration,
-      :delivery_start_timestamp)
+      :delivery_start_timestamp,
+      :read_from_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3944,6 +4266,29 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Describes the buffering to perform before delivering data to the
+    # Snowflake destination. If you do not specify any value, Firehose uses
+    # the default values.
+    #
+    # @!attribute [rw] size_in_m_bs
+    #   Buffer incoming data to the specified size, in MBs, before
+    #   delivering it to the destination. The default value is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_in_seconds
+    #   Buffer incoming data for the specified period of time, in seconds,
+    #   before delivering it to the destination. The default value is 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeBufferingHints AWS API Documentation
+    #
+    class SnowflakeBufferingHints < Struct.new(
+      :size_in_m_bs,
+      :interval_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configure Snowflake destination
     #
     # @!attribute [rw] account_url
@@ -4053,6 +4398,12 @@ module Aws::Firehose
     #   The configuration that defines how you access secrets for Snowflake.
     #   @return [Types::SecretsManagerConfiguration]
     #
+    # @!attribute [rw] buffering_hints
+    #   Describes the buffering to perform before delivering data to the
+    #   Snowflake destination. If you do not specify any value, Firehose
+    #   uses the default values.
+    #   @return [Types::SnowflakeBufferingHints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationConfiguration AWS API Documentation
     #
     class SnowflakeDestinationConfiguration < Struct.new(
@@ -4074,7 +4425,8 @@ module Aws::Firehose
       :retry_options,
       :s3_backup_mode,
       :s3_configuration,
-      :secrets_manager_configuration)
+      :secrets_manager_configuration,
+      :buffering_hints)
       SENSITIVE = [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
       include Aws::Structure
     end
@@ -4168,6 +4520,12 @@ module Aws::Firehose
     #   The configuration that defines how you access secrets for Snowflake.
     #   @return [Types::SecretsManagerConfiguration]
     #
+    # @!attribute [rw] buffering_hints
+    #   Describes the buffering to perform before delivering data to the
+    #   Snowflake destination. If you do not specify any value, Firehose
+    #   uses the default values.
+    #   @return [Types::SnowflakeBufferingHints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationDescription AWS API Documentation
     #
     class SnowflakeDestinationDescription < Struct.new(
@@ -4187,7 +4545,8 @@ module Aws::Firehose
       :retry_options,
       :s3_backup_mode,
       :s3_destination_description,
-      :secrets_manager_configuration)
+      :secrets_manager_configuration,
+      :buffering_hints)
       SENSITIVE = [:account_url, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
       include Aws::Structure
     end
@@ -4307,6 +4666,11 @@ module Aws::Firehose
     #   Describes the Secrets Manager configuration in Snowflake.
     #   @return [Types::SecretsManagerConfiguration]
     #
+    # @!attribute [rw] buffering_hints
+    #   Describes the buffering to perform before delivering data to the
+    #   Snowflake destination.
+    #   @return [Types::SnowflakeBufferingHints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationUpdate AWS API Documentation
     #
     class SnowflakeDestinationUpdate < Struct.new(
@@ -4327,7 +4691,8 @@ module Aws::Firehose
       :retry_options,
       :s3_backup_mode,
       :s3_update,
-      :secrets_manager_configuration)
+      :secrets_manager_configuration,
+      :buffering_hints)
       SENSITIVE = [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
       include Aws::Structure
     end
@@ -4868,6 +5233,12 @@ module Aws::Firehose
     #   Update to the Snowflake destination configuration settings.
     #   @return [Types::SnowflakeDestinationUpdate]
     #
+    # @!attribute [rw] iceberg_destination_update
+    #   Describes an update for a destination in Apache Iceberg Tables.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #   @return [Types::IcebergDestinationUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation
     #
     class UpdateDestinationInput < Struct.new(
@@ -4882,7 +5253,8 @@ module Aws::Firehose
       :splunk_destination_update,
       :http_endpoint_destination_update,
       :amazon_open_search_serverless_destination_update,
-      :snowflake_destination_update)
+      :snowflake_destination_update,
+      :iceberg_destination_update)
       SENSITIVE = []
       include Aws::Structure
     end

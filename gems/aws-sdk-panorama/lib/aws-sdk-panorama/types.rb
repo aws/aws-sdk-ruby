@@ -290,7 +290,7 @@ module Aws::Panorama
       :output_package_version,
       :template_parameters,
       :template_type)
-      SENSITIVE = []
+      SENSITIVE = [:template_parameters]
       include Aws::Structure
     end
 
@@ -885,7 +885,7 @@ module Aws::Panorama
       :status_message,
       :template_parameters,
       :template_type)
-      SENSITIVE = []
+      SENSITIVE = [:template_parameters]
       include Aws::Structure
     end
 

@@ -66,7 +66,7 @@ module Aws::PersonalizeRuntime
       :num_results,
       :filter_arn,
       :filter_values)
-      SENSITIVE = []
+      SENSITIVE = [:filter_values]
       include Aws::Structure
     end
 
@@ -174,7 +174,7 @@ module Aws::PersonalizeRuntime
       :filter_arn,
       :filter_values,
       :metadata_columns)
-      SENSITIVE = []
+      SENSITIVE = [:context, :filter_values]
       include Aws::Structure
     end
 
@@ -302,7 +302,7 @@ module Aws::PersonalizeRuntime
       :recommender_arn,
       :promotions,
       :metadata_columns)
-      SENSITIVE = []
+      SENSITIVE = [:context, :filter_values]
       include Aws::Structure
     end
 
@@ -474,7 +474,7 @@ module Aws::PersonalizeRuntime
       :percent_promoted_items,
       :filter_arn,
       :filter_values)
-      SENSITIVE = []
+      SENSITIVE = [:filter_values]
       include Aws::Structure
     end
 

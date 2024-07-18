@@ -2473,7 +2473,7 @@ module Aws::MailManager
     #
     class ReplaceRecipientAction < Struct.new(
       :replace_with)
-      SENSITIVE = []
+      SENSITIVE = [:replace_with]
       include Aws::Structure
     end
 
@@ -3428,7 +3428,7 @@ module Aws::MailManager
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
-      SENSITIVE = []
+      SENSITIVE = [:tag_keys]
       include Aws::Structure
     end
 

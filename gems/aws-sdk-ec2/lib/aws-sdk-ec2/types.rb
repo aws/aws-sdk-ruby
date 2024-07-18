@@ -8525,19 +8525,77 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipam_id
+    #   The ID of the IPAM that will create the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Token tags.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamExternalResourceVerificationTokenRequest AWS API Documentation
+    #
+    class CreateIpamExternalResourceVerificationTokenRequest < Struct.new(
+      :dry_run,
+      :ipam_id,
+      :tag_specifications,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_external_resource_verification_token
+    #   The verification token.
+    #   @return [Types::IpamExternalResourceVerificationToken]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamExternalResourceVerificationTokenResult AWS API Documentation
+    #
+    class CreateIpamExternalResourceVerificationTokenResult < Struct.new(
+      :ipam_external_resource_verification_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] ipam_scope_id
     #   The ID of the scope in which you would like to create the IPAM pool.
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   In IPAM, the locale is the Amazon Web Services Region or, for IPAM
-    #   IPv4 pools in the public scope, the network border group for an
-    #   Amazon Web Services Local Zone where you want to make an IPAM pool
-    #   available for allocations ([supported Local Zones][1]). If you do
-    #   not choose a locale, resources in Regions others than the IPAM's
-    #   home region cannot use CIDRs from this pool.
+    #   The locale for the pool should be one of the following:
     #
-    #   Possible values: Any Amazon Web Services Region, such as us-east-1.
+    #   * An Amazon Web Services Region where you want this IPAM pool to be
+    #     available for allocations.
+    #
+    #   * The network border group for an Amazon Web Services Local Zone
+    #     where you want this IPAM pool to be available for allocations
+    #     ([supported Local Zones][1]). This option is only available for
+    #     IPAM IPv4 pools in the public scope.
+    #
+    #   If you do not choose a locale, resources in Regions others than the
+    #   IPAM's home region cannot use CIDRs from this pool.
+    #
+    #   Possible values: Any Amazon Web Services Region or supported Amazon
+    #   Web Services Local Zone.
     #
     #
     #
@@ -13979,6 +14037,38 @@ module Aws::EC2
     class DeleteInternetGatewayRequest < Struct.new(
       :dry_run,
       :internet_gateway_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_external_resource_verification_token_id
+    #   The token ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpamExternalResourceVerificationTokenRequest AWS API Documentation
+    #
+    class DeleteIpamExternalResourceVerificationTokenRequest < Struct.new(
+      :dry_run,
+      :ipam_external_resource_verification_token_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_external_resource_verification_token
+    #   The verification token.
+    #   @return [Types::IpamExternalResourceVerificationToken]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpamExternalResourceVerificationTokenResult AWS API Documentation
+    #
+    class DeleteIpamExternalResourceVerificationTokenResult < Struct.new(
+      :ipam_external_resource_verification_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21067,6 +21157,84 @@ module Aws::EC2
     #   One or more filters for the request. For more information about
     #   filtering, see [Filtering CLI output][1].
     #
+    #   Available filters:
+    #
+    #   * `ipam-arn`
+    #
+    #   * `ipam-external-resource-verification-token-arn`
+    #
+    #   * `ipam-external-resource-verification-token-id`
+    #
+    #   * `ipam-id`
+    #
+    #   * `ipam-region`
+    #
+    #   * `state`
+    #
+    #   * `status`
+    #
+    #   * `token-name`
+    #
+    #   * `token-value`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of tokens to return in one page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipam_external_resource_verification_token_ids
+    #   Verification token IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamExternalResourceVerificationTokensRequest AWS API Documentation
+    #
+    class DescribeIpamExternalResourceVerificationTokensRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :next_token,
+      :max_results,
+      :ipam_external_resource_verification_token_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_external_resource_verification_tokens
+    #   Verification tokens.
+    #   @return [Array<Types::IpamExternalResourceVerificationToken>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamExternalResourceVerificationTokensResult AWS API Documentation
+    #
+    class DescribeIpamExternalResourceVerificationTokensResult < Struct.new(
+      :next_token,
+      :ipam_external_resource_verification_tokens)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters for the request. For more information about
+    #   filtering, see [Filtering CLI output][1].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html
@@ -23213,8 +23381,14 @@ module Aws::EC2
     # @!attribute [rw] group_names
     #   The names of the placement groups.
     #
-    #   Default: Describes all your placement groups, or only those
-    #   otherwise specified.
+    #   Constraints:
+    #
+    #   * You can specify a name only if the placement group is owned by
+    #     your account.
+    #
+    #   * If a placement group is *shared* with your account, specifying the
+    #     name results in an error. You must use the `GroupId` parameter
+    #     instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] group_ids
@@ -33322,7 +33496,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
-    #   The number of units provided by the specified instance type.
+    #   The number of units provided by the specified instance type. These
+    #   are the same units that you chose to set the target capacity in
+    #   terms of instances, or a performance characteristic such as vCPUs,
+    #   memory, or I/O.
+    #
+    #   If the target capacity divided by this value is not a whole number,
+    #   Amazon EC2 rounds the number of instances to the next whole number.
+    #   If this value is not specified, the default is 1.
     #
     #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
     #   `price-capacity-optimized` allocation strategies is per *unit* hour
@@ -33426,7 +33607,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
-    #   The number of units provided by the specified instance type.
+    #   The number of units provided by the specified instance type. These
+    #   are the same units that you chose to set the target capacity in
+    #   terms of instances, or a performance characteristic such as vCPUs,
+    #   memory, or I/O.
+    #
+    #   If the target capacity divided by this value is not a whole number,
+    #   Amazon EC2 rounds the number of instances to the next whole number.
+    #   If this value is not specified, the default is 1.
     #
     #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
     #   `price-capacity-optimized` allocation strategies is per *unit* hour
@@ -42694,8 +42882,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interface_attachment_status
-    #   For elastic IP addresses, this is the status of an attached network
-    #   interface.
+    #   For elastic network interfaces, this is the status of whether or not
+    #   the elastic network interface is attached.
     #   @return [String]
     #
     # @!attribute [rw] sample_time
@@ -42763,6 +42951,74 @@ module Aws::EC2
     class IpamDiscoveryFailureReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A verification token is an Amazon Web Services-generated random value
+    # that you can use to prove ownership of an external resource. For
+    # example, you can use a verification token to validate that you control
+    # a public IP address range when you bring an IP address range to Amazon
+    # Web Services (BYOIP).
+    #
+    # @!attribute [rw] ipam_external_resource_verification_token_id
+    #   The ID of the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_external_resource_verification_token_arn
+    #   Token ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_id
+    #   The ID of the IPAM that created the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_arn
+    #   ARN of the IPAM that created the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_region
+    #   Region of the IPAM that created the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_value
+    #   Token value.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_name
+    #   Token name.
+    #   @return [String]
+    #
+    # @!attribute [rw] not_after
+    #   Token expiration.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   Token status.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Token tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] state
+    #   Token state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamExternalResourceVerificationToken AWS API Documentation
+    #
+    class IpamExternalResourceVerificationToken < Struct.new(
+      :ipam_external_resource_verification_token_id,
+      :ipam_external_resource_verification_token_arn,
+      :ipam_id,
+      :ipam_arn,
+      :ipam_region,
+      :token_value,
+      :token_name,
+      :not_after,
+      :status,
+      :tags,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42837,13 +43093,21 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   The locale of the IPAM pool. In IPAM, the locale is the Amazon Web
-    #   Services Region or, for IPAM IPv4 pools in the public scope, the
-    #   network border group for an Amazon Web Services Local Zone where you
-    #   want to make an IPAM pool available for allocations ([supported
-    #   Local Zones][1]). If you choose an Amazon Web Services Region for
-    #   locale that has not been configured as an operating Region for the
-    #   IPAM, you'll get an error.
+    #   The locale of the IPAM pool.
+    #
+    #   The locale for the pool should be one of the following:
+    #
+    #   * An Amazon Web Services Region where you want this IPAM pool to be
+    #     available for allocations.
+    #
+    #   * The network border group for an Amazon Web Services Local Zone
+    #     where you want this IPAM pool to be available for allocations
+    #     ([supported Local Zones][1]). This option is only available for
+    #     IPAM IPv4 pools in the public scope.
+    #
+    #   If you choose an Amazon Web Services Region for locale that has not
+    #   been configured as an operating Region for the IPAM, you'll get an
+    #   error.
     #
     #
     #
@@ -45366,10 +45630,17 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
-    #   The number of units provided by the specified instance type.
+    #   The number of units provided by the specified instance type. These
+    #   are the same units that you chose to set the target capacity in
+    #   terms of instances, or a performance characteristic such as vCPUs,
+    #   memory, or I/O.
     #
-    #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
-    #   `price-capacity-optimized` allocation strategies is per *unit* hour
+    #   If the target capacity divided by this value is not a whole number,
+    #   Amazon EC2 rounds the number of instances to the next whole number.
+    #   If this value is not specified, the default is 1.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowestPrice` and
+    #   `priceCapacityOptimized` allocation strategies is per *unit* hour
     #   (where the instance price is divided by the specified weight).
     #   However, if all the specified weights are above the requested
     #   `TargetCapacity`, resulting in only 1 instance being launched, the
@@ -54577,8 +54848,8 @@ module Aws::EC2
     #
     # @!attribute [rw] cidr_authorization_context
     #   A signed document that proves that you are authorized to bring a
-    #   specified IP address range to Amazon using BYOIP. This option
-    #   applies to public pools only.
+    #   specified IP address range to Amazon using BYOIP. This option only
+    #   applies to IPv4 and IPv6 pools in the public scope.
     #   @return [Types::IpamCidrAuthorizationContext]
     #
     # @!attribute [rw] netmask_length
@@ -54602,6 +54873,17 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] verification_method
+    #   The method for verifying control of a public IP address range.
+    #   Defaults to `remarks-x509` if not specified. This option only
+    #   applies to IPv4 and IPv6 pools in the public scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_external_resource_verification_token_id
+    #   Verification token ID. This option only applies to IPv4 and IPv6
+    #   pools in the public scope.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionIpamPoolCidrRequest AWS API Documentation
     #
     class ProvisionIpamPoolCidrRequest < Struct.new(
@@ -54610,7 +54892,9 @@ module Aws::EC2
       :cidr,
       :cidr_authorization_context,
       :netmask_length,
-      :client_token)
+      :client_token,
+      :verification_method,
+      :ipam_external_resource_verification_token_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61783,6 +62067,15 @@ module Aws::EC2
     #   If the target capacity divided by this value is not a whole number,
     #   Amazon EC2 rounds the number of instances to the next whole number.
     #   If this value is not specified, the default is 1.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowestPrice` and
+    #   `priceCapacityOptimized` allocation strategies is per *unit* hour
+    #   (where the instance price is divided by the specified weight).
+    #   However, if all the specified weights are above the requested
+    #   `TargetCapacity`, resulting in only 1 instance being launched, the
+    #   price used is per *instance* hour.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] tag_specifications
@@ -67836,16 +68129,12 @@ module Aws::EC2
 
     # Describes the modification status of an EBS volume.
     #
-    # If the volume has never been modified, some element values will be
-    # null.
-    #
     # @!attribute [rw] volume_id
     #   The ID of the volume.
     #   @return [String]
     #
     # @!attribute [rw] modification_state
-    #   The current modification state. The modification state is null for
-    #   unmodified volumes.
+    #   The current modification state.
     #   @return [String]
     #
     # @!attribute [rw] status_message

@@ -69,9 +69,9 @@ module Aws::ACMPCA
   #
   # | waiter_name                       | params                                               | :delay   | :max_attempts |
   # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
-  # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 40            |
-  # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 40            |
-  # | certificate_issued                | {Client#get_certificate}                             | 1        | 120           |
+  # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
+  # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
+  # | certificate_issued                | {Client#get_certificate}                             | 1        | 60            |
   #
   module Waiters
 
@@ -80,33 +80,33 @@ module Aws::ACMPCA
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :max_attempts (60)
       # @option options [Integer] :delay (3)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 40,
+          max_attempts: 60,
           delay: 3,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_certificate_authority_audit_report,
             acceptors: [
               {
+                "state" => "success",
                 "matcher" => "path",
                 "argument" => "audit_report_status",
-                "state" => "success",
                 "expected" => "SUCCESS"
               },
               {
+                "state" => "failure",
                 "matcher" => "path",
                 "argument" => "audit_report_status",
-                "state" => "failure",
                 "expected" => "FAILED"
               },
               {
-                "matcher" => "error",
                 "state" => "failure",
+                "matcher" => "error",
                 "expected" => "AccessDeniedException"
               }
             ]
@@ -130,31 +130,31 @@ module Aws::ACMPCA
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :max_attempts (60)
       # @option options [Integer] :delay (3)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 40,
+          max_attempts: 60,
           delay: 3,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_certificate_authority_csr,
             acceptors: [
               {
-                "matcher" => "error",
                 "state" => "success",
-                "expected" => false
+                "matcher" => "status",
+                "expected" => 200
               },
               {
-                "matcher" => "error",
                 "state" => "retry",
+                "matcher" => "error",
                 "expected" => "RequestInProgressException"
               },
               {
-                "matcher" => "error",
                 "state" => "failure",
+                "matcher" => "error",
                 "expected" => "AccessDeniedException"
               }
             ]
@@ -178,31 +178,31 @@ module Aws::ACMPCA
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (120)
+      # @option options [Integer] :max_attempts (60)
       # @option options [Integer] :delay (1)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 120,
+          max_attempts: 60,
           delay: 1,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_certificate,
             acceptors: [
               {
-                "matcher" => "error",
                 "state" => "success",
-                "expected" => false
+                "matcher" => "status",
+                "expected" => 200
               },
               {
-                "matcher" => "error",
                 "state" => "retry",
+                "matcher" => "error",
                 "expected" => "RequestInProgressException"
               },
               {
-                "matcher" => "error",
                 "state" => "failure",
+                "matcher" => "error",
                 "expected" => "AccessDeniedException"
               }
             ]

@@ -655,7 +655,7 @@ module Aws::ChimeSDKMessaging
       :sub_channel_id,
       :content_type,
       :target)
-      SENSITIVE = [:content, :metadata, :content_type]
+      SENSITIVE = [:content, :metadata, :message_attributes, :content_type]
       include Aws::Structure
     end
 
@@ -724,7 +724,7 @@ module Aws::ChimeSDKMessaging
       :message_attributes,
       :sub_channel_id,
       :content_type)
-      SENSITIVE = [:content, :metadata, :content_type]
+      SENSITIVE = [:content, :metadata, :message_attributes, :content_type]
       include Aws::Structure
     end
 
@@ -848,7 +848,7 @@ module Aws::ChimeSDKMessaging
       :message_attributes,
       :content_type,
       :target)
-      SENSITIVE = [:content, :metadata, :content_type]
+      SENSITIVE = [:content, :metadata, :message_attributes, :content_type]
       include Aws::Structure
     end
 
@@ -2522,7 +2522,7 @@ module Aws::ChimeSDKMessaging
     #
     class MessageAttributeValue < Struct.new(
       :string_values)
-      SENSITIVE = []
+      SENSITIVE = [:string_values]
       include Aws::Structure
     end
 
@@ -3017,7 +3017,7 @@ module Aws::ChimeSDKMessaging
       :sub_channel_id,
       :content_type,
       :target)
-      SENSITIVE = [:content, :metadata, :client_request_token, :content_type]
+      SENSITIVE = [:content, :metadata, :client_request_token, :message_attributes, :content_type]
       include Aws::Structure
     end
 
@@ -3220,7 +3220,7 @@ module Aws::ChimeSDKMessaging
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
-      SENSITIVE = []
+      SENSITIVE = [:tag_keys]
       include Aws::Structure
     end
 

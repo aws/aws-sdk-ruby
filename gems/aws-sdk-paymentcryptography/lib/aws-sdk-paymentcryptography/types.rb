@@ -1106,7 +1106,7 @@ module Aws::PaymentCryptography
       :key_exportability,
       :key_version,
       :optional_blocks)
-      SENSITIVE = []
+      SENSITIVE = [:optional_blocks]
       include Aws::Structure
     end
 

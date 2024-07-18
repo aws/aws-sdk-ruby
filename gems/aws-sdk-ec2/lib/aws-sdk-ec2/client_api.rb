@@ -445,6 +445,8 @@ module Aws::EC2
     CreateInstanceExportTaskResult = Shapes::StructureShape.new(name: 'CreateInstanceExportTaskResult')
     CreateInternetGatewayRequest = Shapes::StructureShape.new(name: 'CreateInternetGatewayRequest')
     CreateInternetGatewayResult = Shapes::StructureShape.new(name: 'CreateInternetGatewayResult')
+    CreateIpamExternalResourceVerificationTokenRequest = Shapes::StructureShape.new(name: 'CreateIpamExternalResourceVerificationTokenRequest')
+    CreateIpamExternalResourceVerificationTokenResult = Shapes::StructureShape.new(name: 'CreateIpamExternalResourceVerificationTokenResult')
     CreateIpamPoolRequest = Shapes::StructureShape.new(name: 'CreateIpamPoolRequest')
     CreateIpamPoolResult = Shapes::StructureShape.new(name: 'CreateIpamPoolResult')
     CreateIpamRequest = Shapes::StructureShape.new(name: 'CreateIpamRequest')
@@ -632,6 +634,8 @@ module Aws::EC2
     DeleteInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'DeleteInstanceEventWindowRequest')
     DeleteInstanceEventWindowResult = Shapes::StructureShape.new(name: 'DeleteInstanceEventWindowResult')
     DeleteInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteInternetGatewayRequest')
+    DeleteIpamExternalResourceVerificationTokenRequest = Shapes::StructureShape.new(name: 'DeleteIpamExternalResourceVerificationTokenRequest')
+    DeleteIpamExternalResourceVerificationTokenResult = Shapes::StructureShape.new(name: 'DeleteIpamExternalResourceVerificationTokenResult')
     DeleteIpamPoolRequest = Shapes::StructureShape.new(name: 'DeleteIpamPoolRequest')
     DeleteIpamPoolResult = Shapes::StructureShape.new(name: 'DeleteIpamPoolResult')
     DeleteIpamRequest = Shapes::StructureShape.new(name: 'DeleteIpamRequest')
@@ -907,6 +911,8 @@ module Aws::EC2
     DescribeIpamByoasnMaxResults = Shapes::IntegerShape.new(name: 'DescribeIpamByoasnMaxResults')
     DescribeIpamByoasnRequest = Shapes::StructureShape.new(name: 'DescribeIpamByoasnRequest')
     DescribeIpamByoasnResult = Shapes::StructureShape.new(name: 'DescribeIpamByoasnResult')
+    DescribeIpamExternalResourceVerificationTokensRequest = Shapes::StructureShape.new(name: 'DescribeIpamExternalResourceVerificationTokensRequest')
+    DescribeIpamExternalResourceVerificationTokensResult = Shapes::StructureShape.new(name: 'DescribeIpamExternalResourceVerificationTokensResult')
     DescribeIpamPoolsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolsRequest')
     DescribeIpamPoolsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolsResult')
     DescribeIpamResourceDiscoveriesRequest = Shapes::StructureShape.new(name: 'DescribeIpamResourceDiscoveriesRequest')
@@ -1810,6 +1816,10 @@ module Aws::EC2
     IpamDiscoveredResourceCidrSet = Shapes::ListShape.new(name: 'IpamDiscoveredResourceCidrSet')
     IpamDiscoveryFailureCode = Shapes::StringShape.new(name: 'IpamDiscoveryFailureCode')
     IpamDiscoveryFailureReason = Shapes::StructureShape.new(name: 'IpamDiscoveryFailureReason')
+    IpamExternalResourceVerificationToken = Shapes::StructureShape.new(name: 'IpamExternalResourceVerificationToken')
+    IpamExternalResourceVerificationTokenId = Shapes::StringShape.new(name: 'IpamExternalResourceVerificationTokenId')
+    IpamExternalResourceVerificationTokenSet = Shapes::ListShape.new(name: 'IpamExternalResourceVerificationTokenSet')
+    IpamExternalResourceVerificationTokenState = Shapes::StringShape.new(name: 'IpamExternalResourceVerificationTokenState')
     IpamId = Shapes::StringShape.new(name: 'IpamId')
     IpamManagementState = Shapes::StringShape.new(name: 'IpamManagementState')
     IpamMaxResults = Shapes::IntegerShape.new(name: 'IpamMaxResults')
@@ -2866,6 +2876,7 @@ module Aws::EC2
     ThroughResourcesStatementRequest = Shapes::StructureShape.new(name: 'ThroughResourcesStatementRequest')
     ThroughResourcesStatementRequestList = Shapes::ListShape.new(name: 'ThroughResourcesStatementRequestList')
     TieringOperationStatus = Shapes::StringShape.new(name: 'TieringOperationStatus')
+    TokenState = Shapes::StringShape.new(name: 'TokenState')
     TotalLocalStorageGB = Shapes::StructureShape.new(name: 'TotalLocalStorageGB')
     TotalLocalStorageGBRequest = Shapes::StructureShape.new(name: 'TotalLocalStorageGBRequest')
     TotalMediaMemory = Shapes::IntegerShape.new(name: 'TotalMediaMemory')
@@ -3046,6 +3057,7 @@ module Aws::EC2
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValidationWarning = Shapes::StructureShape.new(name: 'ValidationWarning')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
+    VerificationMethod = Shapes::StringShape.new(name: 'VerificationMethod')
     VerifiedAccessEndpoint = Shapes::StructureShape.new(name: 'VerifiedAccessEndpoint')
     VerifiedAccessEndpointAttachmentType = Shapes::StringShape.new(name: 'VerifiedAccessEndpointAttachmentType')
     VerifiedAccessEndpointEniOptions = Shapes::StructureShape.new(name: 'VerifiedAccessEndpointEniOptions')
@@ -4784,6 +4796,15 @@ module Aws::EC2
     CreateInternetGatewayResult.add_member(:internet_gateway, Shapes::ShapeRef.new(shape: InternetGateway, location_name: "internetGateway"))
     CreateInternetGatewayResult.struct_class = Types::CreateInternetGatewayResult
 
+    CreateIpamExternalResourceVerificationTokenRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateIpamExternalResourceVerificationTokenRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
+    CreateIpamExternalResourceVerificationTokenRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateIpamExternalResourceVerificationTokenRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIpamExternalResourceVerificationTokenRequest.struct_class = Types::CreateIpamExternalResourceVerificationTokenRequest
+
+    CreateIpamExternalResourceVerificationTokenResult.add_member(:ipam_external_resource_verification_token, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationToken, location_name: "ipamExternalResourceVerificationToken"))
+    CreateIpamExternalResourceVerificationTokenResult.struct_class = Types::CreateIpamExternalResourceVerificationTokenResult
+
     CreateIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateIpamPoolRequest.add_member(:ipam_scope_id, Shapes::ShapeRef.new(shape: IpamScopeId, required: true, location_name: "IpamScopeId"))
     CreateIpamPoolRequest.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "Locale"))
@@ -5726,6 +5747,13 @@ module Aws::EC2
     DeleteInternetGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteInternetGatewayRequest.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: InternetGatewayId, required: true, location_name: "internetGatewayId"))
     DeleteInternetGatewayRequest.struct_class = Types::DeleteInternetGatewayRequest
+
+    DeleteIpamExternalResourceVerificationTokenRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteIpamExternalResourceVerificationTokenRequest.add_member(:ipam_external_resource_verification_token_id, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationTokenId, required: true, location_name: "IpamExternalResourceVerificationTokenId"))
+    DeleteIpamExternalResourceVerificationTokenRequest.struct_class = Types::DeleteIpamExternalResourceVerificationTokenRequest
+
+    DeleteIpamExternalResourceVerificationTokenResult.add_member(:ipam_external_resource_verification_token, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationToken, location_name: "ipamExternalResourceVerificationToken"))
+    DeleteIpamExternalResourceVerificationTokenResult.struct_class = Types::DeleteIpamExternalResourceVerificationTokenResult
 
     DeleteIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteIpamPoolRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -6843,6 +6871,17 @@ module Aws::EC2
     DescribeIpamByoasnResult.add_member(:byoasns, Shapes::ShapeRef.new(shape: ByoasnSet, location_name: "byoasnSet"))
     DescribeIpamByoasnResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeIpamByoasnResult.struct_class = Types::DescribeIpamByoasnResult
+
+    DescribeIpamExternalResourceVerificationTokensRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpamExternalResourceVerificationTokensRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIpamExternalResourceVerificationTokensRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpamExternalResourceVerificationTokensRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IpamMaxResults, location_name: "MaxResults"))
+    DescribeIpamExternalResourceVerificationTokensRequest.add_member(:ipam_external_resource_verification_token_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "IpamExternalResourceVerificationTokenId"))
+    DescribeIpamExternalResourceVerificationTokensRequest.struct_class = Types::DescribeIpamExternalResourceVerificationTokensRequest
+
+    DescribeIpamExternalResourceVerificationTokensResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIpamExternalResourceVerificationTokensResult.add_member(:ipam_external_resource_verification_tokens, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationTokenSet, location_name: "ipamExternalResourceVerificationTokenSet"))
+    DescribeIpamExternalResourceVerificationTokensResult.struct_class = Types::DescribeIpamExternalResourceVerificationTokensResult
 
     DescribeIpamPoolsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeIpamPoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -10553,6 +10592,21 @@ module Aws::EC2
     IpamDiscoveryFailureReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     IpamDiscoveryFailureReason.struct_class = Types::IpamDiscoveryFailureReason
 
+    IpamExternalResourceVerificationToken.add_member(:ipam_external_resource_verification_token_id, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationTokenId, location_name: "ipamExternalResourceVerificationTokenId"))
+    IpamExternalResourceVerificationToken.add_member(:ipam_external_resource_verification_token_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ipamExternalResourceVerificationTokenArn"))
+    IpamExternalResourceVerificationToken.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, location_name: "ipamId"))
+    IpamExternalResourceVerificationToken.add_member(:ipam_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ipamArn"))
+    IpamExternalResourceVerificationToken.add_member(:ipam_region, Shapes::ShapeRef.new(shape: String, location_name: "ipamRegion"))
+    IpamExternalResourceVerificationToken.add_member(:token_value, Shapes::ShapeRef.new(shape: String, location_name: "tokenValue"))
+    IpamExternalResourceVerificationToken.add_member(:token_name, Shapes::ShapeRef.new(shape: String, location_name: "tokenName"))
+    IpamExternalResourceVerificationToken.add_member(:not_after, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "notAfter"))
+    IpamExternalResourceVerificationToken.add_member(:status, Shapes::ShapeRef.new(shape: TokenState, location_name: "status"))
+    IpamExternalResourceVerificationToken.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    IpamExternalResourceVerificationToken.add_member(:state, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationTokenState, location_name: "state"))
+    IpamExternalResourceVerificationToken.struct_class = Types::IpamExternalResourceVerificationToken
+
+    IpamExternalResourceVerificationTokenSet.member = Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationToken, location_name: "item")
+
     IpamOperatingRegion.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "regionName"))
     IpamOperatingRegion.struct_class = Types::IpamOperatingRegion
 
@@ -12837,6 +12891,8 @@ module Aws::EC2
     ProvisionIpamPoolCidrRequest.add_member(:cidr_authorization_context, Shapes::ShapeRef.new(shape: IpamCidrAuthorizationContext, location_name: "CidrAuthorizationContext"))
     ProvisionIpamPoolCidrRequest.add_member(:netmask_length, Shapes::ShapeRef.new(shape: Integer, location_name: "NetmaskLength"))
     ProvisionIpamPoolCidrRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ProvisionIpamPoolCidrRequest.add_member(:verification_method, Shapes::ShapeRef.new(shape: VerificationMethod, location_name: "VerificationMethod"))
+    ProvisionIpamPoolCidrRequest.add_member(:ipam_external_resource_verification_token_id, Shapes::ShapeRef.new(shape: IpamExternalResourceVerificationTokenId, location_name: "IpamExternalResourceVerificationTokenId"))
     ProvisionIpamPoolCidrRequest.struct_class = Types::ProvisionIpamPoolCidrRequest
 
     ProvisionIpamPoolCidrResult.add_member(:ipam_pool_cidr, Shapes::ShapeRef.new(shape: IpamPoolCidr, location_name: "ipamPoolCidr"))
@@ -16363,6 +16419,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateIpamResult)
       end)
 
+      api.add_operation(:create_ipam_external_resource_verification_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIpamExternalResourceVerificationToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateIpamExternalResourceVerificationTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIpamExternalResourceVerificationTokenResult)
+      end)
+
       api.add_operation(:create_ipam_pool, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIpamPool"
         o.http_method = "POST"
@@ -16969,6 +17033,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteIpamRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteIpamResult)
+      end)
+
+      api.add_operation(:delete_ipam_external_resource_verification_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIpamExternalResourceVerificationToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIpamExternalResourceVerificationTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIpamExternalResourceVerificationTokenResult)
       end)
 
       api.add_operation(:delete_ipam_pool, Seahorse::Model::Operation.new.tap do |o|
@@ -18195,6 +18267,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeIpamByoasnRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeIpamByoasnResult)
+      end)
+
+      api.add_operation(:describe_ipam_external_resource_verification_tokens, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpamExternalResourceVerificationTokens"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpamExternalResourceVerificationTokensRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpamExternalResourceVerificationTokensResult)
       end)
 
       api.add_operation(:describe_ipam_pools, Seahorse::Model::Operation.new.tap do |o|

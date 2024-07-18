@@ -94,7 +94,7 @@ module Aws::ApplicationDiscoveryService
       :collection_status,
       :agent_type,
       :registered_time)
-      SENSITIVE = []
+      SENSITIVE = [:agent_network_info_list]
       include Aws::Structure
     end
 

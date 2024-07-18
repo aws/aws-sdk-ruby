@@ -639,7 +639,7 @@ module Aws::BedrockAgentRuntime
     class FilePart < Struct.new(
       :files,
       :event_type)
-      SENSITIVE = []
+      SENSITIVE = [:files]
       include Aws::Structure
     end
 
@@ -1392,7 +1392,7 @@ module Aws::BedrockAgentRuntime
       :input_assessments,
       :output_assessments,
       :trace_id)
-      SENSITIVE = []
+      SENSITIVE = [:input_assessments, :output_assessments]
       include Aws::Structure
     end
 
@@ -2858,7 +2858,7 @@ module Aws::BedrockAgentRuntime
       :starts_with,
       :string_contains,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:and_all, :or_all]
       include Aws::Structure
       include Aws::Structure::Union
 

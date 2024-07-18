@@ -464,7 +464,7 @@ module Aws::WorkSpacesWeb
       :client_token,
       :customer_managed_key,
       :tags)
-      SENSITIVE = [:browser_policy]
+      SENSITIVE = [:browser_policy, :tags]
       include Aws::Structure
     end
 
@@ -593,7 +593,7 @@ module Aws::WorkSpacesWeb
       :identity_provider_type,
       :portal_arn,
       :tags)
-      SENSITIVE = [:identity_provider_details, :identity_provider_name]
+      SENSITIVE = [:identity_provider_details, :identity_provider_name, :tags]
       include Aws::Structure
     end
 
@@ -659,7 +659,7 @@ module Aws::WorkSpacesWeb
       :display_name,
       :ip_rules,
       :tags)
-      SENSITIVE = [:description, :display_name, :ip_rules]
+      SENSITIVE = [:description, :display_name, :ip_rules, :tags]
       include Aws::Structure
     end
 
@@ -718,7 +718,7 @@ module Aws::WorkSpacesWeb
       :subnet_ids,
       :tags,
       :vpc_id)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -802,7 +802,7 @@ module Aws::WorkSpacesWeb
       :instance_type,
       :max_concurrent_sessions,
       :tags)
-      SENSITIVE = [:display_name]
+      SENSITIVE = [:display_name, :tags]
       include Aws::Structure
     end
 
@@ -853,7 +853,7 @@ module Aws::WorkSpacesWeb
       :certificate_list,
       :client_token,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -899,7 +899,7 @@ module Aws::WorkSpacesWeb
       :client_token,
       :kinesis_stream_arn,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -1006,7 +1006,7 @@ module Aws::WorkSpacesWeb
       :print_allowed,
       :tags,
       :upload_allowed)
-      SENSITIVE = [:cookie_synchronization_configuration]
+      SENSITIVE = [:cookie_synchronization_configuration, :tags]
       include Aws::Structure
     end
 
@@ -1945,7 +1945,7 @@ module Aws::WorkSpacesWeb
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -2494,7 +2494,7 @@ module Aws::WorkSpacesWeb
       :client_token,
       :resource_arn,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -2600,7 +2600,7 @@ module Aws::WorkSpacesWeb
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
-      SENSITIVE = []
+      SENSITIVE = [:tag_keys]
       include Aws::Structure
     end
 

@@ -356,6 +356,65 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to return agent statuses.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::AgentStatusSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,  
+    #   `description`, `state`, `type`, `displayOrder`,  and `resourceID`.
+    #
+    #    </note>
+    #   @return [Array<Types::AgentStatusSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,  
+    #   `description`, `state`, `type`, `displayOrder`,  and `resourceID`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusSearchCriteria AWS API Documentation
+    #
+    class AgentStatusSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @!attribute [rw] attribute_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * The top level list specifies conditions that need to be applied
+    #     with `OR` operator.
+    #
+    #   * The inner list specifies conditions that need to be applied with
+    #     `AND` operator.
+    #   @return [Types::ControlPlaneAttributeFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusSearchFilter AWS API Documentation
+    #
+    class AgentStatusSearchFilter < Struct.new(
+      :attribute_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information for an agent status.
     #
     # @!attribute [rw] id
@@ -1990,6 +2049,21 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A list of conditions which would be applied together with an `AND`
+    # condition.
+    #
+    # @!attribute [rw] tag_conditions
+    #   A leaf node condition which can be used to specify a tag condition.
+    #   @return [Array<Types::TagCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CommonAttributeAndCondition AWS API Documentation
+    #
+    class CommonAttributeAndCondition < Struct.new(
+      :tag_conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request to CompleteAttachedFileUpload API
     #
     # @!attribute [rw] instance_id
@@ -2028,6 +2102,33 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CompleteAttachedFileUploadResponse AWS API Documentation
     #
     class CompleteAttachedFileUploadResponse < Aws::EmptyStructure; end
+
+    # A leaf node condition which can be used to specify a ProficiencyName,
+    # ProficiencyValue and ProficiencyLimit.
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and 
+    #   `value`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @!attribute [rw] number_condition
+    #   A leaf node condition which can be used to specify a numeric
+    #   condition.
+    #   @return [Types::NumberCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :string_condition,
+      :number_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Operation cannot be performed at this time as there is a conflict with
     # another operation or contact state.
@@ -2485,11 +2586,6 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
-    #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
-    #   `description`.
-    #
-    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModuleSearchCriteria AWS API Documentation
@@ -2581,11 +2677,6 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
-    #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
-    #   `description`.
-    #
-    #    </note>
     #   @return [Types::StringCondition]
     #
     # @!attribute [rw] type_condition
@@ -2806,6 +2897,41 @@ module Aws::Connect
     class ContactSearchSummaryQueueInfo < Struct.new(
       :id,
       :enqueue_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that can be used to specify Tag conditions inside the
+    # `SearchFilter`. This accepts an `OR` or `AND` (List of List) input
+    # where:
+    #
+    # * The top level list specifies conditions that need to be applied with
+    #   `OR` operator.
+    #
+    # * The inner list specifies conditions that need to be applied with
+    #   `AND` operator.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::CommonAttributeAndCondition>]
+    #
+    # @!attribute [rw] and_condition
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Types::CommonAttributeAndCondition]
+    #
+    # @!attribute [rw] tag_condition
+    #   A leaf node condition which can be used to specify a tag condition,
+    #   for example, `HAVE BPO = 123`.
+    #   @return [Types::TagCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ControlPlaneAttributeFilter AWS API Documentation
+    #
+    class ControlPlaneAttributeFilter < Struct.new(
+      :or_conditions,
+      :and_condition,
+      :tag_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9594,8 +9720,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
-    #     UI name: This metric is not available in Amazon Connect admin
-    #     website.
+    #     UI name: [Contacts removed from queue in X seconds][47]
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -9608,7 +9733,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
-    #     UI name: [Contacts resolved in X][47]
+    #     UI name: [Contacts resolved in X][48]
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
@@ -9618,7 +9743,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, Feature,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts transferred out][48]
+    #     UI name: [Contacts transferred out][49]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -9632,7 +9757,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts transferred out by agent][49]
+    #     UI name: [Contacts transferred out by agent][50]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
     #
@@ -9642,7 +9767,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts transferred out queue][49]
+    #     UI name: [Contacts transferred out queue][50]
     #
     #   CURRENT\_CASES
     #
@@ -9652,7 +9777,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Current cases][50]
+    #     UI name: [Current cases][51]
     #
     #   FLOWS\_OUTCOME
     #
@@ -9664,7 +9789,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome][51]
+    #     UI name: [Flows outcome][52]
     #
     #   FLOWS\_STARTED
     #
@@ -9675,7 +9800,7 @@ module Aws::Connect
     #     resource ID, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows started][52]
+    #     UI name: [Flows started][53]
     #
     #   MAX\_FLOW\_TIME
     #
@@ -9687,7 +9812,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Maximum flow time][53]
+    #     UI name: [Maximum flow time][54]
     #
     #   MAX\_QUEUED\_TIME
     #
@@ -9697,7 +9822,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Maximum queued time][54]
+    #     UI name: [Maximum queued time][55]
     #
     #   MIN\_FLOW\_TIME
     #
@@ -9709,7 +9834,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Minimum flow time][55]
+    #     UI name: [Minimum flow time][56]
     #
     #   PERCENT\_CASES\_FIRST\_CONTACT\_RESOLVED
     #
@@ -9719,7 +9844,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved on first contact][56]
+    #     UI name: [Cases resolved on first contact][57]
     #
     #   PERCENT\_CONTACTS\_STEP\_EXPIRED
     #
@@ -9751,7 +9876,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome percentage][57].
+    #     UI name: [Flows outcome percentage][58].
     #
     #     <note markdown="1"> The `FLOWS_OUTCOME_TYPE` is not a valid grouping.
     #
@@ -9768,7 +9893,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Non-talk time percent][58]
+    #     UI name: [Non-talk time percent][59]
     #
     #   PERCENT\_TALK\_TIME
     #
@@ -9781,7 +9906,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Talk time percent][59]
+    #     UI name: [Talk time percent][60]
     #
     #   PERCENT\_TALK\_TIME\_AGENT
     #
@@ -9794,7 +9919,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Agent talk time percent][60]
+    #     UI name: [Agent talk time percent][61]
     #
     #   PERCENT\_TALK\_TIME\_CUSTOMER
     #
@@ -9807,7 +9932,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Customer talk time percent][61]
+    #     UI name: [Customer talk time percent][62]
     #
     #   REOPENED\_CASE\_ACTIONS
     #
@@ -9817,7 +9942,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases reopened][62]
+    #     UI name: [Cases reopened][63]
     #
     #   RESOLVED\_CASE\_ACTIONS
     #
@@ -9827,7 +9952,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved][63]
+    #     UI name: [Cases resolved][64]
     #
     #   SERVICE\_LEVEL
     #
@@ -9842,7 +9967,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
-    #     UI name: [Service level X][64]
+    #     UI name: [Service level X][65]
     #
     #   STEP\_CONTACTS\_QUEUED
     #
@@ -9860,7 +9985,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [After contact work time][65]
+    #     UI name: [After contact work time][66]
     #
     #   SUM\_CONNECTING\_TIME\_AGENT
     #
@@ -9873,7 +9998,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
-    #     UI name: [Agent API connecting time][66]
+    #     UI name: [Agent API connecting time][67]
     #
     #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for
     #     this metric.
@@ -9895,7 +10020,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression, Q in Connect
     #
-    #     UI name: [Contact abandoned][67]
+    #     UI name: [Contact abandoned][68]
     #
     #   SUM\_CONTACTS\_ABANDONED\_IN\_X
     #
@@ -9908,7 +10033,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
-    #     UI name: [Contacts abandoned in X seconds][68]
+    #     UI name: [Contacts abandoned in X seconds][69]
     #
     #   SUM\_CONTACTS\_ANSWERED\_IN\_X
     #
@@ -9921,7 +10046,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
-    #     UI name: [Contacts answered in X seconds][69]
+    #     UI name: [Contacts answered in X seconds][70]
     #
     #   SUM\_CONTACT\_FLOW\_TIME
     #
@@ -9930,7 +10055,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contact flow time][70]
+    #     UI name: [Contact flow time][71]
     #
     #   SUM\_CONTACT\_TIME\_AGENT
     #
@@ -9939,7 +10064,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Agent on contact time][71]
+    #     UI name: [Agent on contact time][72]
     #
     #   SUM\_CONTACTS\_DISCONNECTED
     #
@@ -9951,7 +10076,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contact disconnected][72]
+    #     UI name: [Contact disconnected][73]
     #
     #   SUM\_ERROR\_STATUS\_TIME\_AGENT
     #
@@ -9960,7 +10085,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Error status time][73]
+    #     UI name: [Error status time][74]
     #
     #   SUM\_HANDLE\_TIME
     #
@@ -9969,7 +10094,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contact handle time][74]
+    #     UI name: [Contact handle time][75]
     #
     #   SUM\_HOLD\_TIME
     #
@@ -9978,7 +10103,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Customer hold time][75]
+    #     UI name: [Customer hold time][76]
     #
     #   SUM\_IDLE\_TIME\_AGENT
     #
@@ -9987,7 +10112,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Agent idle time][76]
+    #     UI name: [Agent idle time][77]
     #
     #   SUM\_INTERACTION\_AND\_HOLD\_TIME
     #
@@ -9996,7 +10121,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Agent interaction and hold time][77]
+    #     UI name: [Agent interaction and hold time][78]
     #
     #   SUM\_INTERACTION\_TIME
     #
@@ -10005,7 +10130,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
-    #     UI name: [Agent interaction time][78]
+    #     UI name: [Agent interaction time][79]
     #
     #   SUM\_NON\_PRODUCTIVE\_TIME\_AGENT
     #
@@ -10014,7 +10139,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Non-Productive Time][79]
+    #     UI name: [Non-Productive Time][80]
     #
     #   SUM\_ONLINE\_TIME\_AGENT
     #
@@ -10023,7 +10148,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Online time][80]
+    #     UI name: [Online time][81]
     #
     #   SUM\_RETRY\_CALLBACK\_ATTEMPTS
     #
@@ -10032,7 +10157,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Callback attempts][81]
+    #     UI name: [Callback attempts][82]
     #
     #
     #
@@ -10082,41 +10207,42 @@ module Aws::Connect
     #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
     #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical
     #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical
-    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
-    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
-    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
-    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
-    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
-    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-started-historical
-    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-flow-time-historical
-    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
-    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#minimum-flow-time-historical
-    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
-    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
-    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
-    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical
-    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
-    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical
-    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
-    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historical
-    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
-    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
-    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time
-    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
-    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
-    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
-    #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical
-    #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical
-    #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
-    #   [73]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical
-    #   [74]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical
-    #   [75]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical
-    #   [76]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica
-    #   [77]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical
-    #   [78]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-time-historical
-    #   [79]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical
-    #   [80]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#online-time-historical
-    #   [81]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical
+    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-removed-historical
+    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
+    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
+    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
+    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
+    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
+    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-started-historical
+    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-flow-time-historical
+    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
+    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#minimum-flow-time-historical
+    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
+    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
+    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
+    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical
+    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
+    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical
+    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
+    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historical
+    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
+    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
+    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time
+    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
+    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
+    #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
+    #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical
+    #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical
+    #   [73]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
+    #   [74]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical
+    #   [75]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical
+    #   [76]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical
+    #   [77]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica
+    #   [78]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical
+    #   [79]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-time-historical
+    #   [80]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical
+    #   [81]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#online-time-historical
+    #   [82]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical
     #   @return [Array<Types::MetricV2>]
     #
     # @!attribute [rw] next_token
@@ -11837,6 +11963,27 @@ module Aws::Connect
     class ListBotsResponse < Struct.new(
       :lex_bots,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A leaf node condition which can be used to specify a List condition to
+    # search users with attributes included in Lists like Proficiencies.
+    #
+    # @!attribute [rw] target_list_type
+    #   The type of target list that will be used to filter the users.
+    #   @return [String]
+    #
+    # @!attribute [rw] conditions
+    #   A list of Condition objects which would be applied together with an
+    #   AND condition.
+    #   @return [Array<Types::Condition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListCondition AWS API Documentation
+    #
+    class ListCondition < Struct.new(
+      :target_list_type,
+      :conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14469,6 +14616,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A leaf node condition which can be used to specify a numeric
+    # condition.
+    #
+    # <note markdown="1"> The currently supported value for `FieldName` is `limit`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field in the number condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_value
+    #   The minValue to be used while evaluating the number condition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_value
+    #   The maxValue to be used while evaluating the number condition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] comparison_type
+    #   The type of comparison to be made when evaluating the number
+    #   condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/NumberCondition AWS API Documentation
+    #
+    class NumberCondition < Struct.new(
+      :field_name,
+      :min_value,
+      :max_value,
+      :comparison_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a reference when the `referenceType` is `NUMBER`.
     # Otherwise, null.
     #
@@ -14924,11 +15106,6 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
-    #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
-    #   `description`.
-    #
-    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeSearchCriteria AWS API Documentation
@@ -16993,6 +17170,64 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::AgentStatusSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return agent statuses.
+    #   @return [Types::AgentStatusSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAgentStatusesRequest AWS API Documentation
+    #
+    class SearchAgentStatusesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_statuses
+    #   The search criteria to be used to return agent statuses.
+    #   @return [Array<Types::AgentStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of agent statuses which matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAgentStatusesResponse AWS API Documentation
+    #
+    class SearchAgentStatusesResponse < Struct.new(
+      :agent_statuses,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or
     #   traffic distribution groups that phone number inbound traffic is
@@ -17663,6 +17898,24 @@ module Aws::Connect
     #   The list of resource types to be used to search tags from. If not
     #   provided or if any empty list is provided, this API will search from
     #   all supported resource types.
+    #
+    #   **Supported resource types**
+    #
+    #   * AGENT
+    #
+    #   * ROUTING\_PROFILE
+    #
+    #   * STANDARD\_QUEUE
+    #
+    #   * SECURITY\_PROFILE
+    #
+    #   * OPERATING\_HOURS
+    #
+    #   * PROMPT
+    #
+    #   * CONTACT\_FLOW
+    #
+    #   * FLOW\_MODULE
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -17853,6 +18106,65 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::UserHierarchyGroupSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return UserHierarchyGroups.
+    #   @return [Types::UserHierarchyGroupSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchUserHierarchyGroupsRequest AWS API Documentation
+    #
+    class SearchUserHierarchyGroupsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_hierarchy_groups
+    #   Information about the userHierarchyGroups.
+    #   @return [Array<Types::HierarchyGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of userHierarchyGroups which matched your search
+    #   query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchUserHierarchyGroupsResponse AWS API Documentation
+    #
+    class SearchUserHierarchyGroupsResponse < Struct.new(
+      :user_hierarchy_groups,
+      :next_token,
+      :approximate_total_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -18033,7 +18345,7 @@ module Aws::Connect
     class SearchableContactAttributesCriteria < Struct.new(
       :key,
       :values)
-      SENSITIVE = [:key]
+      SENSITIVE = [:key, :values]
       include Aws::Structure
     end
 
@@ -18160,11 +18472,6 @@ module Aws::Connect
     # @!attribute [rw] string_condition
     #   A leaf node condition which can be used to specify a string
     #   condition.
-    #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name` and
-    #   `description`.
-    #
-    #    </note>
     #   @return [Types::StringCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSearchCriteria AWS API Documentation
@@ -19465,11 +19772,6 @@ module Aws::Connect
 
     # A leaf node condition which can be used to specify a string condition.
     #
-    # <note markdown="1"> The currently supported values for `FieldName` are `name` and
-    # `description`.
-    #
-    #  </note>
-    #
     # @!attribute [rw] field_name
     #   The name of the field in the string condition.
     #   @return [String]
@@ -20253,7 +20555,7 @@ module Aws::Connect
       :participant_role,
       :search_text,
       :match_type)
-      SENSITIVE = []
+      SENSITIVE = [:search_text]
       include Aws::Structure
     end
 
@@ -22509,6 +22811,59 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The search criteria to be used to return userHierarchyGroup.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an OR
+    #   condition.
+    #   @return [Array<Types::UserHierarchyGroupSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an AND
+    #   condition.
+    #   @return [Array<Types::UserHierarchyGroupSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #
+    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,  
+    #   `parentId`, `levelId`, and `resourceID`.
+    #
+    #    </note>
+    #   @return [Types::StringCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserHierarchyGroupSearchCriteria AWS API Documentation
+    #
+    class UserHierarchyGroupSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @!attribute [rw] attribute_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   SearchFilter. This accepts an OR or AND (List of List) input where:
+    #
+    #   * The top level list specifies conditions that need to be applied
+    #     with `OR` operator.
+    #
+    #   * The inner list specifies conditions that need to be applied with
+    #     `AND` operator.
+    #   @return [Types::ControlPlaneAttributeFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserHierarchyGroupSearchFilter AWS API Documentation
+    #
+    class UserHierarchyGroupSearchFilter < Struct.new(
+      :attribute_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the identity of a user.
     #
     # <note markdown="1"> For Amazon Connect instances that are created with the
@@ -22744,6 +23099,12 @@ module Aws::Connect
     #   `ResourceId`.
     #   @return [Types::StringCondition]
     #
+    # @!attribute [rw] list_condition
+    #   A leaf node condition which can be used to specify a List condition
+    #   to search users with attributes included in Lists like
+    #   Proficiencies.
+    #   @return [Types::ListCondition]
+    #
     # @!attribute [rw] hierarchy_group_condition
     #   A leaf node condition which can be used to specify a hierarchy group
     #   condition.
@@ -22755,6 +23116,7 @@ module Aws::Connect
       :or_conditions,
       :and_conditions,
       :string_condition,
+      :list_condition,
       :hierarchy_group_condition)
       SENSITIVE = []
       include Aws::Structure
@@ -23002,7 +23364,7 @@ module Aws::Connect
       :input_schema,
       :template,
       :actions)
-      SENSITIVE = [:input_schema]
+      SENSITIVE = [:input_schema, :actions]
       include Aws::Structure
     end
 
@@ -23023,7 +23385,7 @@ module Aws::Connect
     class ViewInputContent < Struct.new(
       :template,
       :actions)
-      SENSITIVE = []
+      SENSITIVE = [:actions]
       include Aws::Structure
     end
 

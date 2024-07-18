@@ -608,8 +608,9 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
       attr_accessor vpc: Types::InputVpcRequest
+      attr_accessor srt_settings: Types::SrtSettingsRequest
       SENSITIVE: []
     end
 
@@ -623,8 +624,9 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
       attr_accessor vpc: Types::InputVpcRequest
+      attr_accessor srt_settings: Types::SrtSettingsRequest
       SENSITIVE: []
     end
 
@@ -956,7 +958,8 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+      attr_accessor srt_settings: Types::SrtSettings
       SENSITIVE: []
     end
 
@@ -1600,7 +1603,8 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+      attr_accessor srt_settings: Types::SrtSettings
       SENSITIVE: []
     end
 
@@ -3230,6 +3234,7 @@ module Aws::MediaLive
       attr_accessor name: ::String
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
+      attr_accessor srt_settings: Types::SrtSettingsRequest
       SENSITIVE: []
     end
 
@@ -3279,6 +3284,7 @@ module Aws::MediaLive
       attr_accessor name: ::String
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
+      attr_accessor srt_settings: Types::SrtSettingsRequest
       SENSITIVE: []
     end
 
@@ -4575,6 +4581,46 @@ module Aws::MediaLive
       attr_accessor modified_at: ::Time
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SrtCallerDecryption
+      attr_accessor algorithm: ("AES128" | "AES192" | "AES256")
+      attr_accessor passphrase_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SrtCallerDecryptionRequest
+      attr_accessor algorithm: ("AES128" | "AES192" | "AES256")
+      attr_accessor passphrase_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SrtCallerSource
+      attr_accessor decryption: Types::SrtCallerDecryption
+      attr_accessor minimum_latency: ::Integer
+      attr_accessor srt_listener_address: ::String
+      attr_accessor srt_listener_port: ::String
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class SrtCallerSourceRequest
+      attr_accessor decryption: Types::SrtCallerDecryptionRequest
+      attr_accessor minimum_latency: ::Integer
+      attr_accessor srt_listener_address: ::String
+      attr_accessor srt_listener_port: ::String
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class SrtSettings
+      attr_accessor srt_caller_sources: ::Array[Types::SrtCallerSource]
+      SENSITIVE: []
+    end
+
+    class SrtSettingsRequest
+      attr_accessor srt_caller_sources: ::Array[Types::SrtCallerSourceRequest]
       SENSITIVE: []
     end
   end

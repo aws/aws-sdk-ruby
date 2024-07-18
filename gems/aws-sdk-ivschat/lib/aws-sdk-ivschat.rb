@@ -16,6 +16,7 @@ require_relative 'aws-sdk-ivschat/client_api'
 require_relative 'aws-sdk-ivschat/plugins/endpoints.rb'
 require_relative 'aws-sdk-ivschat/client'
 require_relative 'aws-sdk-ivschat/errors'
+require_relative 'aws-sdk-ivschat/waiters'
 require_relative 'aws-sdk-ivschat/resource'
 require_relative 'aws-sdk-ivschat/endpoint_parameters'
 require_relative 'aws-sdk-ivschat/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-ivschat/customizations'
 # @!group service
 module Aws::Ivschat
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

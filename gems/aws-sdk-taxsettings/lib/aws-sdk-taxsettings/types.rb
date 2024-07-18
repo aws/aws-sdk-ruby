@@ -820,7 +820,7 @@ module Aws::TaxSettings
     class ListTaxRegistrationsResponse < Struct.new(
       :account_details,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:account_details]
       include Aws::Structure
     end
 

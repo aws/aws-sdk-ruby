@@ -780,7 +780,7 @@ module Aws::Bedrock
       :task_type,
       :dataset,
       :metric_names)
-      SENSITIVE = []
+      SENSITIVE = [:metric_names]
       include Aws::Structure
     end
 
@@ -1354,7 +1354,7 @@ module Aws::Bedrock
       :blocked_input_messaging,
       :blocked_outputs_messaging,
       :kms_key_arn)
-      SENSITIVE = [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
+      SENSITIVE = [:name, :description, :status_reasons, :failure_recommendations, :blocked_input_messaging, :blocked_outputs_messaging]
       include Aws::Structure
     end
 
@@ -2346,7 +2346,7 @@ module Aws::Bedrock
       :definition,
       :examples,
       :type)
-      SENSITIVE = [:name, :definition]
+      SENSITIVE = [:name, :definition, :examples]
       include Aws::Structure
     end
 
@@ -2376,7 +2376,7 @@ module Aws::Bedrock
       :definition,
       :examples,
       :type)
-      SENSITIVE = [:name, :definition]
+      SENSITIVE = [:name, :definition, :examples]
       include Aws::Structure
     end
 

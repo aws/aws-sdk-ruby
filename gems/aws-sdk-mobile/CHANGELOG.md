@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2024-07-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - AWS Mobile Hub has been removed from the SDK because it has been discontinued.
 
 1.54.0 (2024-07-02)

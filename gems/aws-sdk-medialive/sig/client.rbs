@@ -1401,10 +1401,24 @@ module Aws
                             },
                           ],
                           ?tags: Hash[::String, ::String],
-                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE"),
+                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER"),
                           ?vpc: {
                             security_group_ids: Array[::String]?,
                             subnet_ids: Array[::String]
+                          },
+                          ?srt_settings: {
+                            srt_caller_sources: Array[
+                              {
+                                decryption: {
+                                  algorithm: ("AES128" | "AES192" | "AES256")?,
+                                  passphrase_secret_arn: ::String?
+                                }?,
+                                minimum_latency: ::Integer?,
+                                srt_listener_address: ::String?,
+                                srt_listener_port: ::String?,
+                                stream_id: ::String?
+                              },
+                            ]?
                           }
                         ) -> _CreateInputResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInputResponseSuccess
@@ -1666,7 +1680,8 @@ module Aws
         def sources: () -> ::Array[Types::InputSource]
         def state: () -> ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
         def tags: () -> ::Hash[::String, ::String]
-        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+        def srt_settings: () -> Types::SrtSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_input-instance_method
       def describe_input: (
@@ -3279,7 +3294,21 @@ module Aws
                               url: ::String?,
                               username: ::String?
                             },
-                          ]
+                          ],
+                          ?srt_settings: {
+                            srt_caller_sources: Array[
+                              {
+                                decryption: {
+                                  algorithm: ("AES128" | "AES192" | "AES256")?,
+                                  passphrase_secret_arn: ::String?
+                                }?,
+                                minimum_latency: ::Integer?,
+                                srt_listener_address: ::String?,
+                                srt_listener_port: ::String?,
+                                stream_id: ::String?
+                              },
+                            ]?
+                          }
                         ) -> _UpdateInputResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInputResponseSuccess
 

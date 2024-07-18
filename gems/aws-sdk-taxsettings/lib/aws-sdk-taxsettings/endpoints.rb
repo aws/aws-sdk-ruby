@@ -18,10 +18,10 @@ module Aws::TaxSettings
           endpoint = context.config.endpoint.to_s
         end
         Aws::TaxSettings::EndpointParameters.new(
-          region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          region: context.config.region,
         )
       end
     end
@@ -32,10 +32,10 @@ module Aws::TaxSettings
           endpoint = context.config.endpoint.to_s
         end
         Aws::TaxSettings::EndpointParameters.new(
-          region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          region: context.config.region,
         )
       end
     end
@@ -46,10 +46,10 @@ module Aws::TaxSettings
           endpoint = context.config.endpoint.to_s
         end
         Aws::TaxSettings::EndpointParameters.new(
-          region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          region: context.config.region,
         )
       end
     end
@@ -60,10 +60,10 @@ module Aws::TaxSettings
           endpoint = context.config.endpoint.to_s
         end
         Aws::TaxSettings::EndpointParameters.new(
-          region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          region: context.config.region,
         )
       end
     end
@@ -74,10 +74,10 @@ module Aws::TaxSettings
           endpoint = context.config.endpoint.to_s
         end
         Aws::TaxSettings::EndpointParameters.new(
-          region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          region: context.config.region,
         )
       end
     end
@@ -88,10 +88,10 @@ module Aws::TaxSettings
           endpoint = context.config.endpoint.to_s
         end
         Aws::TaxSettings::EndpointParameters.new(
-          region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          region: context.config.region,
         )
       end
     end
@@ -102,10 +102,10 @@ module Aws::TaxSettings
           endpoint = context.config.endpoint.to_s
         end
         Aws::TaxSettings::EndpointParameters.new(
-          region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
           endpoint: endpoint,
+          region: context.config.region,
         )
       end
     end

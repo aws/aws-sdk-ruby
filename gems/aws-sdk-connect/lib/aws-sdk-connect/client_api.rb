@@ -41,9 +41,13 @@ module Aws::Connect
     AgentStatus = Shapes::StructureShape.new(name: 'AgentStatus')
     AgentStatusDescription = Shapes::StringShape.new(name: 'AgentStatusDescription')
     AgentStatusId = Shapes::StringShape.new(name: 'AgentStatusId')
+    AgentStatusList = Shapes::ListShape.new(name: 'AgentStatusList')
     AgentStatusName = Shapes::StringShape.new(name: 'AgentStatusName')
     AgentStatusOrderNumber = Shapes::IntegerShape.new(name: 'AgentStatusOrderNumber')
     AgentStatusReference = Shapes::StructureShape.new(name: 'AgentStatusReference')
+    AgentStatusSearchConditionList = Shapes::ListShape.new(name: 'AgentStatusSearchConditionList')
+    AgentStatusSearchCriteria = Shapes::StructureShape.new(name: 'AgentStatusSearchCriteria')
+    AgentStatusSearchFilter = Shapes::StructureShape.new(name: 'AgentStatusSearchFilter')
     AgentStatusState = Shapes::StringShape.new(name: 'AgentStatusState')
     AgentStatusSummary = Shapes::StructureShape.new(name: 'AgentStatusSummary')
     AgentStatusSummaryList = Shapes::ListShape.new(name: 'AgentStatusSummaryList')
@@ -153,12 +157,16 @@ module Aws::Connect
     ClaimPhoneNumberResponse = Shapes::StructureShape.new(name: 'ClaimPhoneNumberResponse')
     ClaimedPhoneNumberSummary = Shapes::StructureShape.new(name: 'ClaimedPhoneNumberSummary')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CommonAttributeAndCondition = Shapes::StructureShape.new(name: 'CommonAttributeAndCondition')
+    CommonAttributeOrConditionList = Shapes::ListShape.new(name: 'CommonAttributeOrConditionList')
     CommonNameLength127 = Shapes::StringShape.new(name: 'CommonNameLength127')
     Comparison = Shapes::StringShape.new(name: 'Comparison')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     CompleteAttachedFileUploadRequest = Shapes::StructureShape.new(name: 'CompleteAttachedFileUploadRequest')
     CompleteAttachedFileUploadResponse = Shapes::StructureShape.new(name: 'CompleteAttachedFileUploadResponse')
     Concurrency = Shapes::IntegerShape.new(name: 'Concurrency')
+    Condition = Shapes::StructureShape.new(name: 'Condition')
+    Conditions = Shapes::ListShape.new(name: 'Conditions')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionData = Shapes::StructureShape.new(name: 'ConnectionData')
     Contact = Shapes::StructureShape.new(name: 'Contact')
@@ -211,6 +219,7 @@ module Aws::Connect
     Contacts = Shapes::ListShape.new(name: 'Contacts')
     Content = Shapes::StringShape.new(name: 'Content')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    ControlPlaneAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneAttributeFilter')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
     ControlPlaneUserAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneUserAttributeFilter')
     CreateAgentStatusRequest = Shapes::StructureShape.new(name: 'CreateAgentStatusRequest')
@@ -634,6 +643,7 @@ module Aws::Connect
     ListAuthenticationProfilesResponse = Shapes::StructureShape.new(name: 'ListAuthenticationProfilesResponse')
     ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
     ListBotsResponse = Shapes::StructureShape.new(name: 'ListBotsResponse')
+    ListCondition = Shapes::StructureShape.new(name: 'ListCondition')
     ListContactEvaluationsRequest = Shapes::StructureShape.new(name: 'ListContactEvaluationsRequest')
     ListContactEvaluationsResponse = Shapes::StructureShape.new(name: 'ListContactEvaluationsResponse')
     ListContactFlowModulesRequest = Shapes::StructureShape.new(name: 'ListContactFlowModulesRequest')
@@ -765,6 +775,9 @@ module Aws::Connect
     NotificationDeliveryType = Shapes::StringShape.new(name: 'NotificationDeliveryType')
     NotificationRecipientType = Shapes::StructureShape.new(name: 'NotificationRecipientType')
     NullableProficiencyLevel = Shapes::FloatShape.new(name: 'NullableProficiencyLevel')
+    NullableProficiencyLimitValue = Shapes::IntegerShape.new(name: 'NullableProficiencyLimitValue')
+    NumberComparisonType = Shapes::StringShape.new(name: 'NumberComparisonType')
+    NumberCondition = Shapes::StructureShape.new(name: 'NumberCondition')
     NumberReference = Shapes::StructureShape.new(name: 'NumberReference')
     NumericQuestionPropertyAutomationLabel = Shapes::StringShape.new(name: 'NumericQuestionPropertyAutomationLabel')
     NumericQuestionPropertyValueAutomation = Shapes::StructureShape.new(name: 'NumericQuestionPropertyValueAutomation')
@@ -990,6 +1003,8 @@ module Aws::Connect
     RuleTriggerEventSource = Shapes::StructureShape.new(name: 'RuleTriggerEventSource')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SearchAgentStatusesRequest = Shapes::StructureShape.new(name: 'SearchAgentStatusesRequest')
+    SearchAgentStatusesResponse = Shapes::StructureShape.new(name: 'SearchAgentStatusesResponse')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
     SearchContactFlowModulesRequest = Shapes::StructureShape.new(name: 'SearchContactFlowModulesRequest')
@@ -1020,6 +1035,8 @@ module Aws::Connect
     SearchSecurityProfilesResponse = Shapes::StructureShape.new(name: 'SearchSecurityProfilesResponse')
     SearchText = Shapes::StringShape.new(name: 'SearchText')
     SearchTextList = Shapes::ListShape.new(name: 'SearchTextList')
+    SearchUserHierarchyGroupsRequest = Shapes::StructureShape.new(name: 'SearchUserHierarchyGroupsRequest')
+    SearchUserHierarchyGroupsResponse = Shapes::StructureShape.new(name: 'SearchUserHierarchyGroupsResponse')
     SearchUsersRequest = Shapes::StructureShape.new(name: 'SearchUsersRequest')
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
     SearchVocabulariesRequest = Shapes::StructureShape.new(name: 'SearchVocabulariesRequest')
@@ -1130,6 +1147,7 @@ module Aws::Connect
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagValueString = Shapes::StringShape.new(name: 'TagValueString')
     TagsList = Shapes::ListShape.new(name: 'TagsList')
+    TargetListType = Shapes::StringShape.new(name: 'TargetListType')
     TaskActionDefinition = Shapes::StructureShape.new(name: 'TaskActionDefinition')
     TaskDescriptionExpression = Shapes::StringShape.new(name: 'TaskDescriptionExpression')
     TaskNameExpression = Shapes::StringShape.new(name: 'TaskNameExpression')
@@ -1272,6 +1290,10 @@ module Aws::Connect
     UserDataFilters = Shapes::StructureShape.new(name: 'UserDataFilters')
     UserDataHierarchyGroups = Shapes::ListShape.new(name: 'UserDataHierarchyGroups')
     UserDataList = Shapes::ListShape.new(name: 'UserDataList')
+    UserHierarchyGroupList = Shapes::ListShape.new(name: 'UserHierarchyGroupList')
+    UserHierarchyGroupSearchConditionList = Shapes::ListShape.new(name: 'UserHierarchyGroupSearchConditionList')
+    UserHierarchyGroupSearchCriteria = Shapes::StructureShape.new(name: 'UserHierarchyGroupSearchCriteria')
+    UserHierarchyGroupSearchFilter = Shapes::StructureShape.new(name: 'UserHierarchyGroupSearchFilter')
     UserId = Shapes::StringShape.new(name: 'UserId')
     UserIdList = Shapes::ListShape.new(name: 'UserIdList')
     UserIdentityInfo = Shapes::StructureShape.new(name: 'UserIdentityInfo')
@@ -1402,10 +1424,22 @@ module Aws::Connect
     AgentStatus.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     AgentStatus.struct_class = Types::AgentStatus
 
+    AgentStatusList.member = Shapes::ShapeRef.new(shape: AgentStatus)
+
     AgentStatusReference.add_member(:status_start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StatusStartTimestamp"))
     AgentStatusReference.add_member(:status_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "StatusArn"))
     AgentStatusReference.add_member(:status_name, Shapes::ShapeRef.new(shape: AgentStatusName, location_name: "StatusName"))
     AgentStatusReference.struct_class = Types::AgentStatusReference
+
+    AgentStatusSearchConditionList.member = Shapes::ShapeRef.new(shape: AgentStatusSearchCriteria)
+
+    AgentStatusSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: AgentStatusSearchConditionList, location_name: "OrConditions"))
+    AgentStatusSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: AgentStatusSearchConditionList, location_name: "AndConditions"))
+    AgentStatusSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    AgentStatusSearchCriteria.struct_class = Types::AgentStatusSearchCriteria
+
+    AgentStatusSearchFilter.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: ControlPlaneAttributeFilter, location_name: "AttributeFilter"))
+    AgentStatusSearchFilter.struct_class = Types::AgentStatusSearchFilter
 
     AgentStatusSummary.add_member(:id, Shapes::ShapeRef.new(shape: AgentStatusId, location_name: "Id"))
     AgentStatusSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -1726,12 +1760,23 @@ module Aws::Connect
     ClaimedPhoneNumberSummary.add_member(:source_phone_number_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourcePhoneNumberArn"))
     ClaimedPhoneNumberSummary.struct_class = Types::ClaimedPhoneNumberSummary
 
+    CommonAttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
+    CommonAttributeAndCondition.struct_class = Types::CommonAttributeAndCondition
+
+    CommonAttributeOrConditionList.member = Shapes::ShapeRef.new(shape: CommonAttributeAndCondition)
+
     CompleteAttachedFileUploadRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CompleteAttachedFileUploadRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
     CompleteAttachedFileUploadRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
     CompleteAttachedFileUploadRequest.struct_class = Types::CompleteAttachedFileUploadRequest
 
     CompleteAttachedFileUploadResponse.struct_class = Types::CompleteAttachedFileUploadResponse
+
+    Condition.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    Condition.add_member(:number_condition, Shapes::ShapeRef.new(shape: NumberCondition, location_name: "NumberCondition"))
+    Condition.struct_class = Types::Condition
+
+    Conditions.member = Shapes::ShapeRef.new(shape: Condition)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -1896,6 +1941,11 @@ module Aws::Connect
     ContactTagMap.value = Shapes::ShapeRef.new(shape: ContactTagValue)
 
     Contacts.member = Shapes::ShapeRef.new(shape: ContactSearchSummary)
+
+    ControlPlaneAttributeFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: CommonAttributeOrConditionList, location_name: "OrConditions"))
+    ControlPlaneAttributeFilter.add_member(:and_condition, Shapes::ShapeRef.new(shape: CommonAttributeAndCondition, location_name: "AndCondition"))
+    ControlPlaneAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
+    ControlPlaneAttributeFilter.struct_class = Types::ControlPlaneAttributeFilter
 
     ControlPlaneTagFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: TagOrConditionList, location_name: "OrConditions"))
     ControlPlaneTagFilter.add_member(:and_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "AndConditions"))
@@ -3415,6 +3465,10 @@ module Aws::Connect
     ListBotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListBotsResponse.struct_class = Types::ListBotsResponse
 
+    ListCondition.add_member(:target_list_type, Shapes::ShapeRef.new(shape: TargetListType, location_name: "TargetListType"))
+    ListCondition.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
+    ListCondition.struct_class = Types::ListCondition
+
     ListContactEvaluationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListContactEvaluationsRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "querystring", location_name: "contactId"))
     ListContactEvaluationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -3911,6 +3965,12 @@ module Aws::Connect
     NotificationRecipientType.add_member(:user_tags, Shapes::ShapeRef.new(shape: UserTagMap, location_name: "UserTags"))
     NotificationRecipientType.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
     NotificationRecipientType.struct_class = Types::NotificationRecipientType
+
+    NumberCondition.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
+    NumberCondition.add_member(:min_value, Shapes::ShapeRef.new(shape: NullableProficiencyLimitValue, location_name: "MinValue"))
+    NumberCondition.add_member(:max_value, Shapes::ShapeRef.new(shape: NullableProficiencyLimitValue, location_name: "MaxValue"))
+    NumberCondition.add_member(:comparison_type, Shapes::ShapeRef.new(shape: NumberComparisonType, location_name: "ComparisonType"))
+    NumberCondition.struct_class = Types::NumberCondition
 
     NumberReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     NumberReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
@@ -4484,6 +4544,18 @@ module Aws::Connect
     S3Config.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     S3Config.struct_class = Types::S3Config
 
+    SearchAgentStatusesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchAgentStatusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchAgentStatusesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchAgentStatusesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: AgentStatusSearchFilter, location_name: "SearchFilter"))
+    SearchAgentStatusesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: AgentStatusSearchCriteria, location_name: "SearchCriteria"))
+    SearchAgentStatusesRequest.struct_class = Types::SearchAgentStatusesRequest
+
+    SearchAgentStatusesResponse.add_member(:agent_statuses, Shapes::ShapeRef.new(shape: AgentStatusList, location_name: "AgentStatuses"))
+    SearchAgentStatusesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchAgentStatusesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchAgentStatusesResponse.struct_class = Types::SearchAgentStatusesResponse
+
     SearchAvailablePhoneNumbersRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetArn"))
     SearchAvailablePhoneNumbersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     SearchAvailablePhoneNumbersRequest.add_member(:phone_number_country_code, Shapes::ShapeRef.new(shape: PhoneNumberCountryCode, required: true, location_name: "PhoneNumberCountryCode"))
@@ -4643,6 +4715,18 @@ module Aws::Connect
     SearchSecurityProfilesResponse.struct_class = Types::SearchSecurityProfilesResponse
 
     SearchTextList.member = Shapes::ShapeRef.new(shape: SearchText)
+
+    SearchUserHierarchyGroupsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchUserHierarchyGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchUserHierarchyGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchUserHierarchyGroupsRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: UserHierarchyGroupSearchFilter, location_name: "SearchFilter"))
+    SearchUserHierarchyGroupsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: UserHierarchyGroupSearchCriteria, location_name: "SearchCriteria"))
+    SearchUserHierarchyGroupsRequest.struct_class = Types::SearchUserHierarchyGroupsRequest
+
+    SearchUserHierarchyGroupsResponse.add_member(:user_hierarchy_groups, Shapes::ShapeRef.new(shape: UserHierarchyGroupList, location_name: "UserHierarchyGroups"))
+    SearchUserHierarchyGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchUserHierarchyGroupsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchUserHierarchyGroupsResponse.struct_class = Types::SearchUserHierarchyGroupsResponse
 
     SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
@@ -5527,6 +5611,18 @@ module Aws::Connect
 
     UserDataList.member = Shapes::ShapeRef.new(shape: UserData)
 
+    UserHierarchyGroupList.member = Shapes::ShapeRef.new(shape: HierarchyGroup)
+
+    UserHierarchyGroupSearchConditionList.member = Shapes::ShapeRef.new(shape: UserHierarchyGroupSearchCriteria)
+
+    UserHierarchyGroupSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: UserHierarchyGroupSearchConditionList, location_name: "OrConditions"))
+    UserHierarchyGroupSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: UserHierarchyGroupSearchConditionList, location_name: "AndConditions"))
+    UserHierarchyGroupSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    UserHierarchyGroupSearchCriteria.struct_class = Types::UserHierarchyGroupSearchCriteria
+
+    UserHierarchyGroupSearchFilter.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: ControlPlaneAttributeFilter, location_name: "AttributeFilter"))
+    UserHierarchyGroupSearchFilter.struct_class = Types::UserHierarchyGroupSearchFilter
+
     UserIdList.member = Shapes::ShapeRef.new(shape: UserId)
 
     UserIdentityInfo.add_member(:first_name, Shapes::ShapeRef.new(shape: AgentFirstName, location_name: "FirstName"))
@@ -5575,6 +5671,7 @@ module Aws::Connect
     UserSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: UserSearchConditionList, location_name: "OrConditions"))
     UserSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: UserSearchConditionList, location_name: "AndConditions"))
     UserSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    UserSearchCriteria.add_member(:list_condition, Shapes::ShapeRef.new(shape: ListCondition, location_name: "ListCondition"))
     UserSearchCriteria.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
     UserSearchCriteria.struct_class = Types::UserSearchCriteria
 
@@ -8312,6 +8409,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:search_agent_statuses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchAgentStatuses"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-agent-statuses"
+        o.input = Shapes::ShapeRef.new(shape: SearchAgentStatusesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchAgentStatusesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_available_phone_numbers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchAvailablePhoneNumbers"
         o.http_method = "POST"
@@ -8527,6 +8643,25 @@ module Aws::Connect
         o.http_request_uri = "/search-security-profiles"
         o.input = Shapes::ShapeRef.new(shape: SearchSecurityProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchSecurityProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_user_hierarchy_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchUserHierarchyGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-user-hierarchy-groups"
+        o.input = Shapes::ShapeRef.new(shape: SearchUserHierarchyGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchUserHierarchyGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

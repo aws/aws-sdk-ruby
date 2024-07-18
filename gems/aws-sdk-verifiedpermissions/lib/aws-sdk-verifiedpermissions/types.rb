@@ -274,7 +274,7 @@ module Aws::VerifiedPermissions
       :decision,
       :determining_policies,
       :errors)
-      SENSITIVE = []
+      SENSITIVE = [:errors]
       include Aws::Structure
     end
 
@@ -420,7 +420,7 @@ module Aws::VerifiedPermissions
       :decision,
       :determining_policies,
       :errors)
-      SENSITIVE = []
+      SENSITIVE = [:errors]
       include Aws::Structure
     end
 
@@ -542,7 +542,7 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :client_ids,
       :group_configuration)
-      SENSITIVE = []
+      SENSITIVE = [:client_ids]
       include Aws::Structure
     end
 
@@ -602,7 +602,7 @@ module Aws::VerifiedPermissions
       :client_ids,
       :issuer,
       :group_configuration)
-      SENSITIVE = []
+      SENSITIVE = [:client_ids]
       include Aws::Structure
     end
 
@@ -662,7 +662,7 @@ module Aws::VerifiedPermissions
       :client_ids,
       :issuer,
       :group_configuration)
-      SENSITIVE = []
+      SENSITIVE = [:client_ids]
       include Aws::Structure
     end
 
@@ -1829,7 +1829,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       :namespaces)
-      SENSITIVE = [:schema]
+      SENSITIVE = [:schema, :namespaces]
       include Aws::Structure
     end
 
@@ -1882,7 +1882,7 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :discovery_url,
       :open_id_issuer)
-      SENSITIVE = []
+      SENSITIVE = [:client_ids]
       include Aws::Structure
     end
 
@@ -2008,7 +2008,7 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :discovery_url,
       :open_id_issuer)
-      SENSITIVE = []
+      SENSITIVE = [:client_ids]
       include Aws::Structure
     end
 
@@ -2103,7 +2103,7 @@ module Aws::VerifiedPermissions
       :decision,
       :determining_policies,
       :errors)
-      SENSITIVE = []
+      SENSITIVE = [:errors]
       include Aws::Structure
     end
 
@@ -2212,7 +2212,7 @@ module Aws::VerifiedPermissions
       :determining_policies,
       :errors,
       :principal)
-      SENSITIVE = []
+      SENSITIVE = [:errors]
       include Aws::Structure
     end
 
@@ -2849,7 +2849,7 @@ module Aws::VerifiedPermissions
     class OpenIdConnectIdentityTokenConfiguration < Struct.new(
       :principal_id_claim,
       :client_ids)
-      SENSITIVE = [:principal_id_claim]
+      SENSITIVE = [:principal_id_claim, :client_ids]
       include Aws::Structure
     end
 
@@ -2882,7 +2882,7 @@ module Aws::VerifiedPermissions
     class OpenIdConnectIdentityTokenConfigurationDetail < Struct.new(
       :principal_id_claim,
       :client_ids)
-      SENSITIVE = [:principal_id_claim]
+      SENSITIVE = [:principal_id_claim, :client_ids]
       include Aws::Structure
     end
 
@@ -2915,7 +2915,7 @@ module Aws::VerifiedPermissions
     class OpenIdConnectIdentityTokenConfigurationItem < Struct.new(
       :principal_id_claim,
       :client_ids)
-      SENSITIVE = [:principal_id_claim]
+      SENSITIVE = [:principal_id_claim, :client_ids]
       include Aws::Structure
     end
 
@@ -3405,7 +3405,7 @@ module Aws::VerifiedPermissions
       :namespaces,
       :created_date,
       :last_updated_date)
-      SENSITIVE = []
+      SENSITIVE = [:namespaces]
       include Aws::Structure
     end
 
@@ -3763,7 +3763,7 @@ module Aws::VerifiedPermissions
       :user_pool_arn,
       :client_ids,
       :group_configuration)
-      SENSITIVE = []
+      SENSITIVE = [:client_ids]
       include Aws::Structure
     end
 
@@ -4013,7 +4013,7 @@ module Aws::VerifiedPermissions
     class UpdateOpenIdConnectIdentityTokenConfiguration < Struct.new(
       :principal_id_claim,
       :client_ids)
-      SENSITIVE = [:principal_id_claim]
+      SENSITIVE = [:principal_id_claim, :client_ids]
       include Aws::Structure
     end
 

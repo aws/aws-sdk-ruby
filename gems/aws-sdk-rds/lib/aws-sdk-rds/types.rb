@@ -2723,13 +2723,14 @@ module Aws::RDS
     # @!attribute [rw] publicly_accessible
     #   Specifies whether the DB cluster is publicly accessible.
     #
-    #   When the DB cluster is publicly accessible, its Domain Name System
-    #   (DNS) endpoint resolves to the private IP address from within the DB
-    #   cluster's virtual private cloud (VPC). It resolves to the public IP
-    #   address from outside of the DB cluster's VPC. Access to the DB
-    #   cluster is ultimately controlled by the security group it uses. That
-    #   public access isn't permitted if the security group assigned to the
-    #   DB cluster doesn't permit it.
+    #   When the DB cluster is publicly accessible and you connect from
+    #   outside of the DB cluster's virtual private cloud (VPC), its Domain
+    #   Name System (DNS) endpoint resolves to the public IP address. When
+    #   you connect from within the same VPC as the DB cluster, the endpoint
+    #   resolves to the private IP address. Access to the DB cluster is
+    #   ultimately controlled by the security group it uses. That public
+    #   access isn't permitted if the security group assigned to the DB
+    #   cluster doesn't permit it.
     #
     #   When the DB cluster isn't publicly accessible, it is an internal DB
     #   cluster with a DNS name that resolves to a private IP address.
@@ -4010,10 +4011,11 @@ module Aws::RDS
     # @!attribute [rw] publicly_accessible
     #   Specifies whether the DB instance is publicly accessible.
     #
-    #   When the DB instance is publicly accessible, its Domain Name System
-    #   (DNS) endpoint resolves to the private IP address from within the DB
-    #   instance's virtual private cloud (VPC). It resolves to the public
-    #   IP address from outside of the DB instance's VPC. Access to the DB
+    #   When the DB instance is publicly accessible and you connect from
+    #   outside of the DB instance's virtual private cloud (VPC), its
+    #   Domain Name System (DNS) endpoint resolves to the public IP address.
+    #   When you connect from within the same VPC as the DB instance, the
+    #   endpoint resolves to the private IP address. Access to the DB
     #   instance is ultimately controlled by the security group it uses.
     #   That public access is not permitted if the security group assigned
     #   to the DB instance doesn't permit it.
@@ -6958,13 +6960,14 @@ module Aws::RDS
     # @!attribute [rw] publicly_accessible
     #   Indicates whether the DB cluster is publicly accessible.
     #
-    #   When the DB cluster is publicly accessible, its Domain Name System
-    #   (DNS) endpoint resolves to the private IP address from within the DB
-    #   cluster's virtual private cloud (VPC). It resolves to the public IP
-    #   address from outside of the DB cluster's VPC. Access to the DB
-    #   cluster is ultimately controlled by the security group it uses. That
-    #   public access isn't permitted if the security group assigned to the
-    #   DB cluster doesn't permit it.
+    #   When the DB cluster is publicly accessible and you connect from
+    #   outside of the DB cluster's virtual private cloud (VPC), its Domain
+    #   Name System (DNS) endpoint resolves to the public IP address. When
+    #   you connect from within the same VPC as the DB cluster, the endpoint
+    #   resolves to the private IP address. Access to the DB cluster is
+    #   ultimately controlled by the security group it uses. That public
+    #   access isn't permitted if the security group assigned to the DB
+    #   cluster doesn't permit it.
     #
     #   When the DB cluster isn't publicly accessible, it is an internal DB
     #   cluster with a DNS name that resolves to a private IP address.
@@ -8698,10 +8701,11 @@ module Aws::RDS
     # @!attribute [rw] publicly_accessible
     #   Indicates whether the DB instance is publicly accessible.
     #
-    #   When the DB cluster is publicly accessible, its Domain Name System
-    #   (DNS) endpoint resolves to the private IP address from within the DB
-    #   cluster's virtual private cloud (VPC). It resolves to the public IP
-    #   address from outside of the DB cluster's VPC. Access to the DB
+    #   When the DB instance is publicly accessible and you connect from
+    #   outside of the DB instance's virtual private cloud (VPC), its
+    #   Domain Name System (DNS) endpoint resolves to the public IP address.
+    #   When you connect from within the same VPC as the DB instance, the
+    #   endpoint resolves to the private IP address. Access to the DB
     #   cluster is ultimately controlled by the security group it uses. That
     #   public access isn't permitted if the security group assigned to the
     #   DB cluster doesn't permit it.
@@ -11268,6 +11272,16 @@ module Aws::RDS
     #   DB cluster is deleted. This parameter isn't case-sensitive. The
     #   default is to remove automated backups immediately after the DB
     #   cluster is deleted.
+    #
+    #   <note markdown="1"> You must delete automated backups for Amazon RDS Multi-AZ DB
+    #   clusters. For more information about managing automated backups for
+    #   RDS Multi-AZ DB clusters, see [Managing automated backups][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ManagingAutomatedBackups.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage AWS API Documentation
@@ -12231,7 +12245,7 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `customer`
+    #   * `user`
     #
     #   * `engine`
     #
@@ -18599,13 +18613,14 @@ module Aws::RDS
     # @!attribute [rw] publicly_accessible
     #   Specifies whether the DB instance is publicly accessible.
     #
-    #   When the DB cluster is publicly accessible, its Domain Name System
-    #   (DNS) endpoint resolves to the private IP address from within the DB
-    #   cluster's virtual private cloud (VPC). It resolves to the public IP
-    #   address from outside of the DB cluster's VPC. Access to the DB
-    #   cluster is ultimately controlled by the security group it uses. That
-    #   public access isn't permitted if the security group assigned to the
-    #   DB cluster doesn't permit it.
+    #   When the DB instance is publicly accessible and you connect from
+    #   outside of the DB instance's virtual private cloud (VPC), its
+    #   Domain Name System (DNS) endpoint resolves to the public IP address.
+    #   When you connect from within the same VPC as the DB instance, the
+    #   endpoint resolves to the private IP address. Access to the DB
+    #   instance is ultimately controlled by the security group it uses.
+    #   That public access isn't permitted if the security group assigned
+    #   to the DB instance doesn't permit it.
     #
     #   When the DB instance isn't publicly accessible, it is an internal
     #   DB instance with a DNS name that resolves to a private IP address.

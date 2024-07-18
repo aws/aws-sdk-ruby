@@ -3335,7 +3335,7 @@ module Aws::Proton
     class ListComponentOutputsOutput < Struct.new(
       :next_token,
       :outputs)
-      SENSITIVE = []
+      SENSITIVE = [:outputs]
       include Aws::Structure
     end
 
@@ -3590,7 +3590,7 @@ module Aws::Proton
     class ListEnvironmentOutputsOutput < Struct.new(
       :next_token,
       :outputs)
-      SENSITIVE = []
+      SENSITIVE = [:outputs]
       include Aws::Structure
     end
 
@@ -3898,7 +3898,7 @@ module Aws::Proton
     class ListServiceInstanceOutputsOutput < Struct.new(
       :next_token,
       :outputs)
-      SENSITIVE = []
+      SENSITIVE = [:outputs]
       include Aws::Structure
     end
 
@@ -4078,7 +4078,7 @@ module Aws::Proton
     class ListServicePipelineOutputsOutput < Struct.new(
       :next_token,
       :outputs)
-      SENSITIVE = []
+      SENSITIVE = [:outputs]
       include Aws::Structure
     end
 
@@ -4324,7 +4324,7 @@ module Aws::Proton
       :resource_arn,
       :status,
       :status_message)
-      SENSITIVE = [:status_message]
+      SENSITIVE = [:outputs, :status_message]
       include Aws::Structure
     end
 

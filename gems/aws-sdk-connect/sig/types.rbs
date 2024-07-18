@@ -98,6 +98,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AgentStatusSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::AgentStatusSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::AgentStatusSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class AgentStatusSearchFilter
+      attr_accessor attribute_filter: Types::ControlPlaneAttributeFilter
+      SENSITIVE: []
+    end
+
     class AgentStatusSummary
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -486,6 +498,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CommonAttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      SENSITIVE: []
+    end
+
     class CompleteAttachedFileUploadRequest
       attr_accessor instance_id: ::String
       attr_accessor file_id: ::String
@@ -494,6 +511,12 @@ module Aws::Connect
     end
 
     class CompleteAttachedFileUploadResponse < Aws::EmptyStructure
+    end
+
+    class Condition
+      attr_accessor string_condition: Types::StringCondition
+      attr_accessor number_condition: Types::NumberCondition
+      SENSITIVE: []
     end
 
     class ConflictException
@@ -667,6 +690,13 @@ module Aws::Connect
     class ContactSearchSummaryQueueInfo
       attr_accessor id: ::String
       attr_accessor enqueue_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ControlPlaneAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::CommonAttributeAndCondition]
+      attr_accessor and_condition: Types::CommonAttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
       SENSITIVE: []
     end
 
@@ -2669,6 +2699,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListCondition
+      attr_accessor target_list_type: ("PROFICIENCIES")
+      attr_accessor conditions: ::Array[Types::Condition]
+      SENSITIVE: []
+    end
+
     class ListContactEvaluationsRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_id: ::String
@@ -3344,6 +3380,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class NumberCondition
+      attr_accessor field_name: ::String
+      attr_accessor min_value: ::Integer
+      attr_accessor max_value: ::Integer
+      attr_accessor comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")
+      SENSITIVE: []
+    end
+
     class NumberReference
       attr_accessor name: ::String
       attr_accessor value: ::String
@@ -4010,6 +4054,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class SearchAgentStatusesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::AgentStatusSearchFilter
+      attr_accessor search_criteria: Types::AgentStatusSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchAgentStatusesResponse
+      attr_accessor agent_statuses: ::Array[Types::AgentStatus]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
     class SearchAvailablePhoneNumbersRequest
       attr_accessor target_arn: ::String
       attr_accessor instance_id: ::String
@@ -4215,6 +4275,22 @@ module Aws::Connect
 
     class SearchSecurityProfilesResponse
       attr_accessor security_profiles: ::Array[Types::SecurityProfileSearchSummary]
+      attr_accessor next_token: ::String
+      attr_accessor approximate_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchUserHierarchyGroupsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor search_filter: Types::UserHierarchyGroupSearchFilter
+      attr_accessor search_criteria: Types::UserHierarchyGroupSearchCriteria
+      SENSITIVE: []
+    end
+
+    class SearchUserHierarchyGroupsResponse
+      attr_accessor user_hierarchy_groups: ::Array[Types::HierarchyGroup]
       attr_accessor next_token: ::String
       attr_accessor approximate_total_count: ::Integer
       SENSITIVE: []
@@ -5330,6 +5406,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class UserHierarchyGroupSearchCriteria
+      attr_accessor or_conditions: ::Array[Types::UserHierarchyGroupSearchCriteria]
+      attr_accessor and_conditions: ::Array[Types::UserHierarchyGroupSearchCriteria]
+      attr_accessor string_condition: Types::StringCondition
+      SENSITIVE: []
+    end
+
+    class UserHierarchyGroupSearchFilter
+      attr_accessor attribute_filter: Types::ControlPlaneAttributeFilter
+      SENSITIVE: []
+    end
+
     class UserIdentityInfo
       attr_accessor first_name: ::String
       attr_accessor last_name: ::String
@@ -5387,6 +5475,7 @@ module Aws::Connect
       attr_accessor or_conditions: ::Array[Types::UserSearchCriteria]
       attr_accessor and_conditions: ::Array[Types::UserSearchCriteria]
       attr_accessor string_condition: Types::StringCondition
+      attr_accessor list_condition: Types::ListCondition
       attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
       SENSITIVE: []
     end

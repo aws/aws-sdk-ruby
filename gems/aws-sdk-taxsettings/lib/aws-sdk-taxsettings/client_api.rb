@@ -417,6 +417,7 @@ module Aws::TaxSettings
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "tax",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

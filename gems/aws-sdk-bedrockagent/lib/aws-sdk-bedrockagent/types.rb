@@ -6411,7 +6411,7 @@ module Aws::BedrockAgent
       :bucket_arn,
       :bucket_owner_account_id,
       :inclusion_prefixes)
-      SENSITIVE = []
+      SENSITIVE = [:inclusion_prefixes]
       include Aws::Structure
     end
 

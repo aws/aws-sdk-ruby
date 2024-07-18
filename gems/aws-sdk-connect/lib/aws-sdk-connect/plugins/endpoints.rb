@@ -404,6 +404,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ResumeContact.build(context)
           when :resume_contact_recording
             Aws::Connect::Endpoints::ResumeContactRecording.build(context)
+          when :search_agent_statuses
+            Aws::Connect::Endpoints::SearchAgentStatuses.build(context)
           when :search_available_phone_numbers
             Aws::Connect::Endpoints::SearchAvailablePhoneNumbers.build(context)
           when :search_contact_flow_modules
@@ -428,6 +430,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::SearchRoutingProfiles.build(context)
           when :search_security_profiles
             Aws::Connect::Endpoints::SearchSecurityProfiles.build(context)
+          when :search_user_hierarchy_groups
+            Aws::Connect::Endpoints::SearchUserHierarchyGroups.build(context)
           when :search_users
             Aws::Connect::Endpoints::SearchUsers.build(context)
           when :search_vocabularies

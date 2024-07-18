@@ -481,7 +481,7 @@ module Aws::Chime
       :voice_connector_group_id,
       :e164_phone_numbers,
       :force_associate)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -520,7 +520,7 @@ module Aws::Chime
       :voice_connector_id,
       :e164_phone_numbers,
       :force_associate)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -2250,7 +2250,7 @@ module Aws::Chime
     class CreatePhoneNumberOrderRequest < Struct.new(
       :product_type,
       :e164_phone_numbers)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -2311,7 +2311,7 @@ module Aws::Chime
       :number_selection_behavior,
       :geo_match_level,
       :geo_match_params)
-      SENSITIVE = [:name]
+      SENSITIVE = [:participant_phone_numbers, :name]
       include Aws::Structure
     end
 
@@ -2427,7 +2427,7 @@ module Aws::Chime
       :to_phone_number,
       :sip_media_application_id,
       :sip_headers)
-      SENSITIVE = [:from_phone_number, :to_phone_number]
+      SENSITIVE = [:from_phone_number, :to_phone_number, :sip_headers]
       include Aws::Structure
     end
 
@@ -3096,7 +3096,7 @@ module Aws::Chime
     class DeleteVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
       :usernames)
-      SENSITIVE = []
+      SENSITIVE = [:usernames]
       include Aws::Structure
     end
 
@@ -3425,7 +3425,7 @@ module Aws::Chime
     class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
       :e164_phone_numbers)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -3456,7 +3456,7 @@ module Aws::Chime
     class DisassociatePhoneNumbersFromVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
       :e164_phone_numbers)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -4723,7 +4723,7 @@ module Aws::Chime
       :account_id,
       :user_email_list,
       :user_type)
-      SENSITIVE = []
+      SENSITIVE = [:user_email_list]
       include Aws::Structure
     end
 
@@ -5934,7 +5934,7 @@ module Aws::Chime
     #
     class ListVoiceConnectorTerminationCredentialsResponse < Struct.new(
       :usernames)
-      SENSITIVE = []
+      SENSITIVE = [:usernames]
       include Aws::Structure
     end
 
@@ -7495,7 +7495,7 @@ module Aws::Chime
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :e164_phone_numbers,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -7517,7 +7517,7 @@ module Aws::Chime
     class SelectedVideoStreams < Struct.new(
       :attendee_ids,
       :external_user_ids)
-      SENSITIVE = []
+      SENSITIVE = [:external_user_ids]
       include Aws::Structure
     end
 
@@ -8150,7 +8150,7 @@ module Aws::Chime
       :meeting_id,
       :attendee_id,
       :tag_keys)
-      SENSITIVE = []
+      SENSITIVE = [:tag_keys]
       include Aws::Structure
     end
 
@@ -8167,7 +8167,7 @@ module Aws::Chime
     class UntagMeetingRequest < Struct.new(
       :meeting_id,
       :tag_keys)
-      SENSITIVE = []
+      SENSITIVE = [:tag_keys]
       include Aws::Structure
     end
 
@@ -8184,7 +8184,7 @@ module Aws::Chime
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
-      SENSITIVE = [:resource_arn]
+      SENSITIVE = [:resource_arn, :tag_keys]
       include Aws::Structure
     end
 
@@ -8687,7 +8687,7 @@ module Aws::Chime
       :sip_media_application_id,
       :transaction_id,
       :arguments)
-      SENSITIVE = []
+      SENSITIVE = [:arguments]
       include Aws::Structure
     end
 

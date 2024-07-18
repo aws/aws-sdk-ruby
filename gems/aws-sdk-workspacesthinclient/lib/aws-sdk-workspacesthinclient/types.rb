@@ -562,8 +562,8 @@ module Aws::WorkSpacesThinClient
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] device_creation_tags
-    #   "The tag keys and optional values for the newly created devices for
-    #   this environment."
+    #   The tag keys and optional values for the newly created devices for
+    #   this environment.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/Environment AWS API Documentation

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-workspacesthinclient/customizations'
 # @!group service
 module Aws::WorkSpacesThinClient
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

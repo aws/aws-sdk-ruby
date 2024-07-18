@@ -610,6 +610,11 @@ module Aws::Firehose
     # @option params [Types::SnowflakeDestinationConfiguration] :snowflake_destination_configuration
     #   Configure Snowflake destination
     #
+    # @option params [Types::IcebergDestinationConfiguration] :iceberg_destination_configuration
+    #   Configure Apache Iceberg Tables destination.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #
     # @return [Types::CreateDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeliveryStreamOutput#delivery_stream_arn #delivery_stream_arn} => String
@@ -1181,6 +1186,7 @@ module Aws::Firehose
     #         role_arn: "RoleARN", # required
     #         connectivity: "PUBLIC", # required, accepts PUBLIC, PRIVATE
     #       },
+    #       read_from_timestamp: Time.now,
     #     },
     #     snowflake_destination_configuration: {
     #       account_url: "SnowflakeAccountUrl", # required
@@ -1250,6 +1256,73 @@ module Aws::Firehose
     #         secret_arn: "SecretARN",
     #         role_arn: "RoleARN",
     #         enabled: false, # required
+    #       },
+    #       buffering_hints: {
+    #         size_in_m_bs: 1,
+    #         interval_in_seconds: 1,
+    #       },
+    #     },
+    #     iceberg_destination_configuration: {
+    #       destination_table_configuration_list: [
+    #         {
+    #           destination_table_name: "NonEmptyStringWithoutWhitespace", # required
+    #           destination_database_name: "NonEmptyStringWithoutWhitespace", # required
+    #           unique_keys: ["NonEmptyStringWithoutWhitespace"],
+    #           s3_error_output_prefix: "ErrorOutputPrefix",
+    #         },
+    #       ],
+    #       buffering_hints: {
+    #         size_in_m_bs: 1,
+    #         interval_in_seconds: 1,
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       role_arn: "RoleARN", # required
+    #       catalog_configuration: { # required
+    #         catalog_arn: "GlueDataCatalogARN",
+    #       },
+    #       s3_configuration: { # required
+    #         role_arn: "RoleARN", # required
+    #         bucket_arn: "BucketARN", # required
+    #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
     #       },
     #     },
     #   })
@@ -1385,6 +1458,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.source.msk_source_description.authentication_configuration.role_arn #=> String
     #   resp.delivery_stream_description.source.msk_source_description.authentication_configuration.connectivity #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.delivery_stream_description.source.msk_source_description.delivery_start_timestamp #=> Time
+    #   resp.delivery_stream_description.source.msk_source_description.read_from_timestamp #=> Time
     #   resp.delivery_stream_description.destinations #=> Array
     #   resp.delivery_stream_description.destinations[0].destination_id #=> String
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.role_arn #=> String
@@ -1689,6 +1763,8 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.secrets_manager_configuration.secret_arn #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.secrets_manager_configuration.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.secrets_manager_configuration.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.buffering_hints.interval_in_seconds #=> Integer
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.collection_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.index_name #=> String
@@ -1723,6 +1799,39 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.security_group_ids #=> Array
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.security_group_ids[0] #=> String
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.vpc_id #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.destination_table_configuration_list #=> Array
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.destination_table_configuration_list[0].destination_table_name #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.destination_table_configuration_list[0].destination_database_name #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.destination_table_configuration_list[0].unique_keys #=> Array
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.destination_table_configuration_list[0].unique_keys[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.destination_table_configuration_list[0].s3_error_output_prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.processing_configuration.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.processing_configuration.processors #=> Array
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Decompression", "CloudWatchLogProcessing", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.processing_configuration.processors[0].parameters #=> Array
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter", "CompressionFormat", "DataMessageExtraction"
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_backup_mode #=> String, one of "FailedDataOnly", "AllData"
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.retry_options.duration_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.catalog_configuration.catalog_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.bucket_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.error_output_prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].iceberg_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.has_more_destinations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream AWS API Documentation
@@ -2346,6 +2455,11 @@ module Aws::Firehose
     # @option params [Types::SnowflakeDestinationUpdate] :snowflake_destination_update
     #   Update to the Snowflake destination configuration settings.
     #
+    # @option params [Types::IcebergDestinationUpdate] :iceberg_destination_update
+    #   Describes an update for a destination in Apache Iceberg Tables.
+    #
+    #   Amazon Data Firehose is in preview release and is subject to change.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2943,6 +3057,73 @@ module Aws::Firehose
     #         role_arn: "RoleARN",
     #         enabled: false, # required
     #       },
+    #       buffering_hints: {
+    #         size_in_m_bs: 1,
+    #         interval_in_seconds: 1,
+    #       },
+    #     },
+    #     iceberg_destination_update: {
+    #       destination_table_configuration_list: [
+    #         {
+    #           destination_table_name: "NonEmptyStringWithoutWhitespace", # required
+    #           destination_database_name: "NonEmptyStringWithoutWhitespace", # required
+    #           unique_keys: ["NonEmptyStringWithoutWhitespace"],
+    #           s3_error_output_prefix: "ErrorOutputPrefix",
+    #         },
+    #       ],
+    #       buffering_hints: {
+    #         size_in_m_bs: 1,
+    #         interval_in_seconds: 1,
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Decompression, CloudWatchLogProcessing, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       s3_backup_mode: "FailedDataOnly", # accepts FailedDataOnly, AllData
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       role_arn: "RoleARN",
+    #       catalog_configuration: {
+    #         catalog_arn: "GlueDataCatalogARN",
+    #       },
+    #       s3_configuration: {
+    #         role_arn: "RoleARN", # required
+    #         bucket_arn: "BucketARN", # required
+    #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -2968,7 +3149,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

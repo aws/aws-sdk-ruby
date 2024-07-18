@@ -10,11 +10,6 @@
 module Aws::TaxSettings
   # Endpoint parameters used to influence endpoints per request.
   #
-  # @!attribute region
-  #   The AWS region used to dispatch the request.
-  #
-  #   @return [String]
-  #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
@@ -30,26 +25,30 @@ module Aws::TaxSettings
   #
   #   @return [String]
   #
+  # @!attribute region
+  #   The AWS region used to dispatch the request.
+  #
+  #   @return [String]
+  #
   EndpointParameters = Struct.new(
-    :region,
     :use_dual_stack,
     :use_fips,
     :endpoint,
+    :region,
   ) do
     include Aws::Structure
 
     # @api private
     class << self
       PARAM_MAP = {
-        'Region' => :region,
         'UseDualStack' => :use_dual_stack,
         'UseFIPS' => :use_fips,
         'Endpoint' => :endpoint,
+        'Region' => :region,
       }.freeze
     end
 
     def initialize(options = {})
-      self[:region] = options[:region]
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
       if self[:use_dual_stack].nil?
@@ -61,6 +60,7 @@ module Aws::TaxSettings
         raise ArgumentError, "Missing required EndpointParameter: :use_fips"
       end
       self[:endpoint] = options[:endpoint]
+      self[:region] = options[:region]
     end
   end
 end

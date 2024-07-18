@@ -443,51 +443,51 @@ module Aws::Ivschat
     # Encryption keys are owned by Amazon IVS Chat and never used directly
     # by your application.
     #
-    # @option params [Hash<String,String>] :attributes
-    #   Application-provided attributes to encode into the token and attach to
-    #   a chat session. Map keys and values can contain UTF-8 encoded text.
-    #   The maximum length of this field is 1 KB total.
+    # @option params [required, String] :room_identifier
+    #   Identifier of the room that the client is trying to access. Currently
+    #   this must be an ARN.
+    #
+    # @option params [required, String] :user_id
+    #   Application-provided ID that uniquely identifies the user associated
+    #   with this token. This can be any UTF-8 encoded text.
     #
     # @option params [Array<String>] :capabilities
     #   Set of capabilities that the user is allowed to perform in the room.
     #   Default: None (the capability to view messages is implicitly included
     #   in all requests).
     #
-    # @option params [required, String] :room_identifier
-    #   Identifier of the room that the client is trying to access. Currently
-    #   this must be an ARN.
-    #
     # @option params [Integer] :session_duration_in_minutes
     #   Session duration (in minutes), after which the session expires.
     #   Default: 60 (1 hour).
     #
-    # @option params [required, String] :user_id
-    #   Application-provided ID that uniquely identifies the user associated
-    #   with this token. This can be any UTF-8 encoded text.
+    # @option params [Hash<String,String>] :attributes
+    #   Application-provided attributes to encode into the token and attach to
+    #   a chat session. Map keys and values can contain UTF-8 encoded text.
+    #   The maximum length of this field is 1 KB total.
     #
     # @return [Types::CreateChatTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateChatTokenResponse#session_expiration_time #session_expiration_time} => Time
     #   * {Types::CreateChatTokenResponse#token #token} => String
     #   * {Types::CreateChatTokenResponse#token_expiration_time #token_expiration_time} => Time
+    #   * {Types::CreateChatTokenResponse#session_expiration_time #session_expiration_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_chat_token({
+    #     room_identifier: "RoomIdentifier", # required
+    #     user_id: "UserID", # required
+    #     capabilities: ["SEND_MESSAGE"], # accepts SEND_MESSAGE, DISCONNECT_USER, DELETE_MESSAGE
+    #     session_duration_in_minutes: 1,
     #     attributes: {
     #       "String" => "String",
     #     },
-    #     capabilities: ["SEND_MESSAGE"], # accepts SEND_MESSAGE, DISCONNECT_USER, DELETE_MESSAGE
-    #     room_identifier: "RoomIdentifier", # required
-    #     session_duration_in_minutes: 1,
-    #     user_id: "UserID", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.session_expiration_time #=> Time
     #   resp.token #=> String
     #   resp.token_expiration_time #=> Time
+    #   resp.session_expiration_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/CreateChatToken AWS API Documentation
     #
@@ -501,14 +501,14 @@ module Aws::Ivschat
     # Creates a logging configuration that allows clients to store and
     # record sent messages.
     #
+    # @option params [String] :name
+    #   Logging-configuration name. The value does not need to be unique.
+    #
     # @option params [required, Types::DestinationConfiguration] :destination_configuration
     #   A complex type that contains a destination configuration for where
     #   chat content will be logged. There can be only one type of destination
     #   (`cloudWatchLogs`, `firehose`, or `s3`) in a
     #   `destinationConfiguration`.
-    #
-    # @option params [String] :name
-    #   Logging-configuration name. The value does not need to be unique.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to attach to the resource. Array of maps, each of the form
@@ -524,29 +524,29 @@ module Aws::Ivschat
     # @return [Types::CreateLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoggingConfigurationResponse#arn #arn} => String
-    #   * {Types::CreateLoggingConfigurationResponse#create_time #create_time} => Time
-    #   * {Types::CreateLoggingConfigurationResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
     #   * {Types::CreateLoggingConfigurationResponse#id #id} => String
+    #   * {Types::CreateLoggingConfigurationResponse#create_time #create_time} => Time
+    #   * {Types::CreateLoggingConfigurationResponse#update_time #update_time} => Time
     #   * {Types::CreateLoggingConfigurationResponse#name #name} => String
+    #   * {Types::CreateLoggingConfigurationResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
     #   * {Types::CreateLoggingConfigurationResponse#state #state} => String
     #   * {Types::CreateLoggingConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::CreateLoggingConfigurationResponse#update_time #update_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_logging_configuration({
+    #     name: "LoggingConfigurationName",
     #     destination_configuration: { # required
+    #       s3: {
+    #         bucket_name: "BucketName", # required
+    #       },
     #       cloud_watch_logs: {
     #         log_group_name: "LogGroupName", # required
     #       },
     #       firehose: {
     #         delivery_stream_name: "DeliveryStreamName", # required
     #       },
-    #       s3: {
-    #         bucket_name: "BucketName", # required
-    #       },
     #     },
-    #     name: "LoggingConfigurationName",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -555,16 +555,16 @@ module Aws::Ivschat
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.id #=> String
     #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.name #=> String
+    #   resp.destination_configuration.s3.bucket_name #=> String
     #   resp.destination_configuration.cloud_watch_logs.log_group_name #=> String
     #   resp.destination_configuration.firehose.delivery_stream_name #=> String
-    #   resp.destination_configuration.s3.bucket_name #=> String
-    #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.state #=> String, one of "ACTIVE"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/CreateLoggingConfiguration AWS API Documentation
     #
@@ -577,23 +577,20 @@ module Aws::Ivschat
 
     # Creates a room that allows clients to connect and pass messages.
     #
-    # @option params [Array<String>] :logging_configuration_identifiers
-    #   Array of logging-configuration identifiers attached to the room.
+    # @option params [String] :name
+    #   Room name. The value does not need to be unique.
+    #
+    # @option params [Integer] :maximum_message_rate_per_second
+    #   Maximum number of messages per second that can be sent to the room (by
+    #   all clients). Default: 10.
     #
     # @option params [Integer] :maximum_message_length
     #   Maximum number of characters in a single message. Messages are
     #   expected to be UTF-8 encoded and this limit applies specifically to
     #   rune/code-point count, not number of bytes. Default: 500.
     #
-    # @option params [Integer] :maximum_message_rate_per_second
-    #   Maximum number of messages per second that can be sent to the room (by
-    #   all clients). Default: 10.
-    #
     # @option params [Types::MessageReviewHandler] :message_review_handler
     #   Configuration information for optional review of messages.
-    #
-    # @option params [String] :name
-    #   Room name. The value does not need to be unique.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to attach to the resource. Array of maps, each of the form
@@ -606,50 +603,53 @@ module Aws::Ivschat
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
+    # @option params [Array<String>] :logging_configuration_identifiers
+    #   Array of logging-configuration identifiers attached to the room.
+    #
     # @return [Types::CreateRoomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoomResponse#arn #arn} => String
-    #   * {Types::CreateRoomResponse#create_time #create_time} => Time
     #   * {Types::CreateRoomResponse#id #id} => String
-    #   * {Types::CreateRoomResponse#logging_configuration_identifiers #logging_configuration_identifiers} => Array&lt;String&gt;
-    #   * {Types::CreateRoomResponse#maximum_message_length #maximum_message_length} => Integer
-    #   * {Types::CreateRoomResponse#maximum_message_rate_per_second #maximum_message_rate_per_second} => Integer
-    #   * {Types::CreateRoomResponse#message_review_handler #message_review_handler} => Types::MessageReviewHandler
     #   * {Types::CreateRoomResponse#name #name} => String
-    #   * {Types::CreateRoomResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateRoomResponse#create_time #create_time} => Time
     #   * {Types::CreateRoomResponse#update_time #update_time} => Time
+    #   * {Types::CreateRoomResponse#maximum_message_rate_per_second #maximum_message_rate_per_second} => Integer
+    #   * {Types::CreateRoomResponse#maximum_message_length #maximum_message_length} => Integer
+    #   * {Types::CreateRoomResponse#message_review_handler #message_review_handler} => Types::MessageReviewHandler
+    #   * {Types::CreateRoomResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateRoomResponse#logging_configuration_identifiers #logging_configuration_identifiers} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_room({
-    #     logging_configuration_identifiers: ["LoggingConfigurationIdentifier"],
-    #     maximum_message_length: 1,
-    #     maximum_message_rate_per_second: 1,
-    #     message_review_handler: {
-    #       fallback_result: "ALLOW", # accepts ALLOW, DENY
-    #       uri: "LambdaArn",
-    #     },
     #     name: "RoomName",
+    #     maximum_message_rate_per_second: 1,
+    #     maximum_message_length: 1,
+    #     message_review_handler: {
+    #       uri: "LambdaArn",
+    #       fallback_result: "ALLOW", # accepts ALLOW, DENY
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     logging_configuration_identifiers: ["LoggingConfigurationIdentifier"],
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.create_time #=> Time
     #   resp.id #=> String
-    #   resp.logging_configuration_identifiers #=> Array
-    #   resp.logging_configuration_identifiers[0] #=> String
-    #   resp.maximum_message_length #=> Integer
-    #   resp.maximum_message_rate_per_second #=> Integer
-    #   resp.message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
-    #   resp.message_review_handler.uri #=> String
     #   resp.name #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.maximum_message_rate_per_second #=> Integer
+    #   resp.maximum_message_length #=> Integer
+    #   resp.message_review_handler.uri #=> String
+    #   resp.message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
+    #   resp.logging_configuration_identifiers #=> Array
+    #   resp.logging_configuration_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/CreateRoom AWS API Documentation
     #
@@ -692,6 +692,10 @@ module Aws::Ivschat
     #
     # [1]: https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html
     #
+    # @option params [required, String] :room_identifier
+    #   Identifier of the room where the message should be deleted. Currently
+    #   this must be an ARN.
+    #
     # @option params [required, String] :id
     #   ID of the message to be deleted. This is the `Id` field in the
     #   received message (see [ Message (Subscribe)][1] in the Chat Messaging
@@ -704,10 +708,6 @@ module Aws::Ivschat
     # @option params [String] :reason
     #   Reason for deleting the message.
     #
-    # @option params [required, String] :room_identifier
-    #   Identifier of the room where the message should be deleted. Currently
-    #   this must be an ARN.
-    #
     # @return [Types::DeleteMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteMessageResponse#id #id} => String
@@ -715,9 +715,9 @@ module Aws::Ivschat
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_message({
+    #     room_identifier: "RoomIdentifier", # required
     #     id: "MessageID", # required
     #     reason: "Reason",
-    #     room_identifier: "RoomIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -763,9 +763,6 @@ module Aws::Ivschat
     #
     # [1]: https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html
     #
-    # @option params [String] :reason
-    #   Reason for disconnecting the user.
-    #
     # @option params [required, String] :room_identifier
     #   Identifier of the room from which the user's clients should be
     #   disconnected. Currently this must be an ARN.
@@ -773,14 +770,17 @@ module Aws::Ivschat
     # @option params [required, String] :user_id
     #   ID of the user (connection) to disconnect from the room.
     #
+    # @option params [String] :reason
+    #   Reason for disconnecting the user.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disconnect_user({
-    #     reason: "Reason",
     #     room_identifier: "RoomIdentifier", # required
     #     user_id: "UserID", # required
+    #     reason: "Reason",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/DisconnectUser AWS API Documentation
@@ -800,13 +800,13 @@ module Aws::Ivschat
     # @return [Types::GetLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLoggingConfigurationResponse#arn #arn} => String
-    #   * {Types::GetLoggingConfigurationResponse#create_time #create_time} => Time
-    #   * {Types::GetLoggingConfigurationResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
     #   * {Types::GetLoggingConfigurationResponse#id #id} => String
+    #   * {Types::GetLoggingConfigurationResponse#create_time #create_time} => Time
+    #   * {Types::GetLoggingConfigurationResponse#update_time #update_time} => Time
     #   * {Types::GetLoggingConfigurationResponse#name #name} => String
+    #   * {Types::GetLoggingConfigurationResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
     #   * {Types::GetLoggingConfigurationResponse#state #state} => String
     #   * {Types::GetLoggingConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::GetLoggingConfigurationResponse#update_time #update_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -817,16 +817,16 @@ module Aws::Ivschat
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.id #=> String
     #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.name #=> String
+    #   resp.destination_configuration.s3.bucket_name #=> String
     #   resp.destination_configuration.cloud_watch_logs.log_group_name #=> String
     #   resp.destination_configuration.firehose.delivery_stream_name #=> String
-    #   resp.destination_configuration.s3.bucket_name #=> String
-    #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "ACTIVE"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/GetLoggingConfiguration AWS API Documentation
     #
@@ -846,15 +846,15 @@ module Aws::Ivschat
     # @return [Types::GetRoomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRoomResponse#arn #arn} => String
-    #   * {Types::GetRoomResponse#create_time #create_time} => Time
     #   * {Types::GetRoomResponse#id #id} => String
-    #   * {Types::GetRoomResponse#logging_configuration_identifiers #logging_configuration_identifiers} => Array&lt;String&gt;
-    #   * {Types::GetRoomResponse#maximum_message_length #maximum_message_length} => Integer
-    #   * {Types::GetRoomResponse#maximum_message_rate_per_second #maximum_message_rate_per_second} => Integer
-    #   * {Types::GetRoomResponse#message_review_handler #message_review_handler} => Types::MessageReviewHandler
     #   * {Types::GetRoomResponse#name #name} => String
-    #   * {Types::GetRoomResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetRoomResponse#create_time #create_time} => Time
     #   * {Types::GetRoomResponse#update_time #update_time} => Time
+    #   * {Types::GetRoomResponse#maximum_message_rate_per_second #maximum_message_rate_per_second} => Integer
+    #   * {Types::GetRoomResponse#maximum_message_length #maximum_message_length} => Integer
+    #   * {Types::GetRoomResponse#message_review_handler #message_review_handler} => Types::MessageReviewHandler
+    #   * {Types::GetRoomResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetRoomResponse#logging_configuration_identifiers #logging_configuration_identifiers} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -865,18 +865,18 @@ module Aws::Ivschat
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.create_time #=> Time
     #   resp.id #=> String
-    #   resp.logging_configuration_identifiers #=> Array
-    #   resp.logging_configuration_identifiers[0] #=> String
-    #   resp.maximum_message_length #=> Integer
-    #   resp.maximum_message_rate_per_second #=> Integer
-    #   resp.message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
-    #   resp.message_review_handler.uri #=> String
     #   resp.name #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.maximum_message_rate_per_second #=> Integer
+    #   resp.maximum_message_length #=> Integer
+    #   resp.message_review_handler.uri #=> String
+    #   resp.message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
+    #   resp.logging_configuration_identifiers #=> Array
+    #   resp.logging_configuration_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/GetRoom AWS API Documentation
     #
@@ -890,12 +890,12 @@ module Aws::Ivschat
     # Gets summary information about all your logging configurations in the
     # AWS region where the API request is processed.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of logging configurations to return. Default: 50.
-    #
     # @option params [String] :next_token
     #   The first logging configurations to retrieve. This is used for
     #   pagination; see the `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of logging configurations to return. Default: 50.
     #
     # @return [Types::ListLoggingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -907,24 +907,24 @@ module Aws::Ivschat
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_logging_configurations({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.logging_configurations #=> Array
     #   resp.logging_configurations[0].arn #=> String
+    #   resp.logging_configurations[0].id #=> String
     #   resp.logging_configurations[0].create_time #=> Time
+    #   resp.logging_configurations[0].update_time #=> Time
+    #   resp.logging_configurations[0].name #=> String
+    #   resp.logging_configurations[0].destination_configuration.s3.bucket_name #=> String
     #   resp.logging_configurations[0].destination_configuration.cloud_watch_logs.log_group_name #=> String
     #   resp.logging_configurations[0].destination_configuration.firehose.delivery_stream_name #=> String
-    #   resp.logging_configurations[0].destination_configuration.s3.bucket_name #=> String
-    #   resp.logging_configurations[0].id #=> String
-    #   resp.logging_configurations[0].name #=> String
     #   resp.logging_configurations[0].state #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "ACTIVE"
     #   resp.logging_configurations[0].tags #=> Hash
     #   resp.logging_configurations[0].tags["TagKey"] #=> String
-    #   resp.logging_configurations[0].update_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/ListLoggingConfigurations AWS API Documentation
@@ -940,15 +940,6 @@ module Aws::Ivschat
     # the API request is processed. Results are sorted in descending order
     # of `updateTime`.
     #
-    # @option params [String] :logging_configuration_identifier
-    #   Logging-configuration identifier.
-    #
-    # @option params [Integer] :max_results
-    #   Maximum number of rooms to return. Default: 50.
-    #
-    # @option params [String] :message_review_handler_uri
-    #   Filters the list to match the specified message review handler URI.
-    #
     # @option params [String] :name
     #   Filters the list to match the specified room name.
     #
@@ -956,38 +947,47 @@ module Aws::Ivschat
     #   The first room to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of rooms to return. Default: 50.
+    #
+    # @option params [String] :message_review_handler_uri
+    #   Filters the list to match the specified message review handler URI.
+    #
+    # @option params [String] :logging_configuration_identifier
+    #   Logging-configuration identifier.
+    #
     # @return [Types::ListRoomsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListRoomsResponse#next_token #next_token} => String
     #   * {Types::ListRoomsResponse#rooms #rooms} => Array&lt;Types::RoomSummary&gt;
+    #   * {Types::ListRoomsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_rooms({
-    #     logging_configuration_identifier: "LoggingConfigurationIdentifier",
-    #     max_results: 1,
-    #     message_review_handler_uri: "LambdaArn",
     #     name: "RoomName",
     #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     message_review_handler_uri: "LambdaArn",
+    #     logging_configuration_identifier: "LoggingConfigurationIdentifier",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.rooms #=> Array
     #   resp.rooms[0].arn #=> String
-    #   resp.rooms[0].create_time #=> Time
     #   resp.rooms[0].id #=> String
-    #   resp.rooms[0].logging_configuration_identifiers #=> Array
-    #   resp.rooms[0].logging_configuration_identifiers[0] #=> String
-    #   resp.rooms[0].message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
-    #   resp.rooms[0].message_review_handler.uri #=> String
     #   resp.rooms[0].name #=> String
+    #   resp.rooms[0].message_review_handler.uri #=> String
+    #   resp.rooms[0].message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
+    #   resp.rooms[0].create_time #=> Time
+    #   resp.rooms[0].update_time #=> Time
     #   resp.rooms[0].tags #=> Hash
     #   resp.rooms[0].tags["TagKey"] #=> String
-    #   resp.rooms[0].update_time #=> Time
+    #   resp.rooms[0].logging_configuration_identifiers #=> Array
+    #   resp.rooms[0].logging_configuration_identifiers[0] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/ListRooms AWS API Documentation
     #
@@ -1031,16 +1031,16 @@ module Aws::Ivschat
     # logic to send events to clients of a room; e.g., to notify clients to
     # change the way the chat UI is rendered.
     #
-    # @option params [Hash<String,String>] :attributes
-    #   Application-defined metadata to attach to the event sent to clients.
-    #   The maximum length of the metadata is 1 KB total.
+    # @option params [required, String] :room_identifier
+    #   Identifier of the room to which the event will be sent. Currently this
+    #   must be an ARN.
     #
     # @option params [required, String] :event_name
     #   Application-defined name of the event to send to clients.
     #
-    # @option params [required, String] :room_identifier
-    #   Identifier of the room to which the event will be sent. Currently this
-    #   must be an ARN.
+    # @option params [Hash<String,String>] :attributes
+    #   Application-defined metadata to attach to the event sent to clients.
+    #   The maximum length of the metadata is 1 KB total.
     #
     # @return [Types::SendEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1049,11 +1049,11 @@ module Aws::Ivschat
     # @example Request syntax with placeholder values
     #
     #   resp = client.send_event({
+    #     room_identifier: "RoomIdentifier", # required
+    #     event_name: "EventName", # required
     #     attributes: {
     #       "String" => "String",
     #     },
-    #     event_name: "EventName", # required
-    #     room_identifier: "RoomIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1141,60 +1141,60 @@ module Aws::Ivschat
 
     # Updates a specified logging configuration.
     #
-    # @option params [Types::DestinationConfiguration] :destination_configuration
-    #   A complex type that contains a destination configuration for where
-    #   chat content will be logged. There can be only one type of destination
-    #   (`cloudWatchLogs`, `firehose`, or `s3`) in a
-    #   `destinationConfiguration`.
-    #
     # @option params [required, String] :identifier
     #   Identifier of the logging configuration to be updated.
     #
     # @option params [String] :name
     #   Logging-configuration name. The value does not need to be unique.
     #
+    # @option params [Types::DestinationConfiguration] :destination_configuration
+    #   A complex type that contains a destination configuration for where
+    #   chat content will be logged. There can be only one type of destination
+    #   (`cloudWatchLogs`, `firehose`, or `s3`) in a
+    #   `destinationConfiguration`.
+    #
     # @return [Types::UpdateLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLoggingConfigurationResponse#arn #arn} => String
-    #   * {Types::UpdateLoggingConfigurationResponse#create_time #create_time} => Time
-    #   * {Types::UpdateLoggingConfigurationResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
     #   * {Types::UpdateLoggingConfigurationResponse#id #id} => String
+    #   * {Types::UpdateLoggingConfigurationResponse#create_time #create_time} => Time
+    #   * {Types::UpdateLoggingConfigurationResponse#update_time #update_time} => Time
     #   * {Types::UpdateLoggingConfigurationResponse#name #name} => String
+    #   * {Types::UpdateLoggingConfigurationResponse#destination_configuration #destination_configuration} => Types::DestinationConfiguration
     #   * {Types::UpdateLoggingConfigurationResponse#state #state} => String
     #   * {Types::UpdateLoggingConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::UpdateLoggingConfigurationResponse#update_time #update_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_logging_configuration({
+    #     identifier: "LoggingConfigurationIdentifier", # required
+    #     name: "LoggingConfigurationName",
     #     destination_configuration: {
+    #       s3: {
+    #         bucket_name: "BucketName", # required
+    #       },
     #       cloud_watch_logs: {
     #         log_group_name: "LogGroupName", # required
     #       },
     #       firehose: {
     #         delivery_stream_name: "DeliveryStreamName", # required
     #       },
-    #       s3: {
-    #         bucket_name: "BucketName", # required
-    #       },
     #     },
-    #     identifier: "LoggingConfigurationIdentifier", # required
-    #     name: "LoggingConfigurationName",
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.id #=> String
     #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.name #=> String
+    #   resp.destination_configuration.s3.bucket_name #=> String
     #   resp.destination_configuration.cloud_watch_logs.log_group_name #=> String
     #   resp.destination_configuration.firehose.delivery_stream_name #=> String
-    #   resp.destination_configuration.s3.bucket_name #=> String
-    #   resp.id #=> String
-    #   resp.name #=> String
     #   resp.state #=> String, one of "ACTIVE"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/UpdateLoggingConfiguration AWS API Documentation
     #
@@ -1210,68 +1210,68 @@ module Aws::Ivschat
     # @option params [required, String] :identifier
     #   Identifier of the room to be updated. Currently this must be an ARN.
     #
-    # @option params [Array<String>] :logging_configuration_identifiers
-    #   Array of logging-configuration identifiers attached to the room.
+    # @option params [String] :name
+    #   Room name. The value does not need to be unique.
+    #
+    # @option params [Integer] :maximum_message_rate_per_second
+    #   Maximum number of messages per second that can be sent to the room (by
+    #   all clients). Default: 10.
     #
     # @option params [Integer] :maximum_message_length
     #   The maximum number of characters in a single message. Messages are
     #   expected to be UTF-8 encoded and this limit applies specifically to
     #   rune/code-point count, not number of bytes. Default: 500.
     #
-    # @option params [Integer] :maximum_message_rate_per_second
-    #   Maximum number of messages per second that can be sent to the room (by
-    #   all clients). Default: 10.
-    #
     # @option params [Types::MessageReviewHandler] :message_review_handler
     #   Configuration information for optional review of messages. Specify an
     #   empty `uri` string to disassociate a message review handler from the
     #   specified room.
     #
-    # @option params [String] :name
-    #   Room name. The value does not need to be unique.
+    # @option params [Array<String>] :logging_configuration_identifiers
+    #   Array of logging-configuration identifiers attached to the room.
     #
     # @return [Types::UpdateRoomResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRoomResponse#arn #arn} => String
-    #   * {Types::UpdateRoomResponse#create_time #create_time} => Time
     #   * {Types::UpdateRoomResponse#id #id} => String
-    #   * {Types::UpdateRoomResponse#logging_configuration_identifiers #logging_configuration_identifiers} => Array&lt;String&gt;
-    #   * {Types::UpdateRoomResponse#maximum_message_length #maximum_message_length} => Integer
-    #   * {Types::UpdateRoomResponse#maximum_message_rate_per_second #maximum_message_rate_per_second} => Integer
-    #   * {Types::UpdateRoomResponse#message_review_handler #message_review_handler} => Types::MessageReviewHandler
     #   * {Types::UpdateRoomResponse#name #name} => String
-    #   * {Types::UpdateRoomResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateRoomResponse#create_time #create_time} => Time
     #   * {Types::UpdateRoomResponse#update_time #update_time} => Time
+    #   * {Types::UpdateRoomResponse#maximum_message_rate_per_second #maximum_message_rate_per_second} => Integer
+    #   * {Types::UpdateRoomResponse#maximum_message_length #maximum_message_length} => Integer
+    #   * {Types::UpdateRoomResponse#message_review_handler #message_review_handler} => Types::MessageReviewHandler
+    #   * {Types::UpdateRoomResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateRoomResponse#logging_configuration_identifiers #logging_configuration_identifiers} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_room({
     #     identifier: "RoomIdentifier", # required
-    #     logging_configuration_identifiers: ["LoggingConfigurationIdentifier"],
-    #     maximum_message_length: 1,
-    #     maximum_message_rate_per_second: 1,
-    #     message_review_handler: {
-    #       fallback_result: "ALLOW", # accepts ALLOW, DENY
-    #       uri: "LambdaArn",
-    #     },
     #     name: "RoomName",
+    #     maximum_message_rate_per_second: 1,
+    #     maximum_message_length: 1,
+    #     message_review_handler: {
+    #       uri: "LambdaArn",
+    #       fallback_result: "ALLOW", # accepts ALLOW, DENY
+    #     },
+    #     logging_configuration_identifiers: ["LoggingConfigurationIdentifier"],
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.create_time #=> Time
     #   resp.id #=> String
-    #   resp.logging_configuration_identifiers #=> Array
-    #   resp.logging_configuration_identifiers[0] #=> String
-    #   resp.maximum_message_length #=> Integer
-    #   resp.maximum_message_rate_per_second #=> Integer
-    #   resp.message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
-    #   resp.message_review_handler.uri #=> String
     #   resp.name #=> String
+    #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.maximum_message_rate_per_second #=> Integer
+    #   resp.maximum_message_length #=> Integer
+    #   resp.message_review_handler.uri #=> String
+    #   resp.message_review_handler.fallback_result #=> String, one of "ALLOW", "DENY"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
+    #   resp.logging_configuration_identifiers #=> Array
+    #   resp.logging_configuration_identifiers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/UpdateRoom AWS API Documentation
     #
@@ -1295,7 +1295,7 @@ module Aws::Ivschat
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivschat'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

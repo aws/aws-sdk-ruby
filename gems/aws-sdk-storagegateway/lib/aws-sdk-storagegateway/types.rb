@@ -2921,7 +2921,7 @@ module Aws::StorageGateway
       :supported_gateway_capacities,
       :host_environment_id,
       :software_version)
-      SENSITIVE = []
+      SENSITIVE = [:gateway_network_interfaces]
       include Aws::Structure
     end
 

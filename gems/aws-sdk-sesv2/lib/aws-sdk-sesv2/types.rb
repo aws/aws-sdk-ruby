@@ -5058,7 +5058,7 @@ module Aws::SESV2
       :isp,
       :last_delivery_event,
       :last_engagement_event)
-      SENSITIVE = []
+      SENSITIVE = [:from_email_address, :destination, :subject]
       include Aws::Structure
     end
 

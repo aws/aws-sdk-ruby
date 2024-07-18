@@ -1728,6 +1728,11 @@ module Aws::MediaLive
     #   property on Input creation. Not compatible with the
     #   inputSecurityGroups property.
     #
+    # @option params [Types::SrtSettingsRequest] :srt_settings
+    #   Configures the sources for this SRT input. For a single-pipeline
+    #   input, include one srtCallerSource in the array. For a
+    #   standard-pipeline input, include two srtCallerSource.
+    #
     # @return [Types::CreateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInputResponse#input #input} => Types::Input
@@ -1764,10 +1769,24 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
-    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE
+    #     type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE, SRT_CALLER
     #     vpc: {
     #       security_group_ids: ["__string"],
     #       subnet_ids: ["__string"], # required
+    #     },
+    #     srt_settings: {
+    #       srt_caller_sources: [
+    #         {
+    #           decryption: {
+    #             algorithm: "AES128", # accepts AES128, AES192, AES256
+    #             passphrase_secret_arn: "__string",
+    #           },
+    #           minimum_latency: 1,
+    #           srt_listener_address: "__string",
+    #           srt_listener_port: "__string",
+    #           stream_id: "__string",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1802,7 +1821,14 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER"
+    #   resp.input.srt_settings.srt_caller_sources #=> Array
+    #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].minimum_latency #=> Integer
+    #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
@@ -2059,7 +2085,14 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER"
+    #   resp.input.srt_settings.srt_caller_sources #=> Array
+    #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].minimum_latency #=> Integer
+    #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreatePartnerInput AWS API Documentation
     #
@@ -3866,6 +3899,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#state #state} => String
     #   * {Types::DescribeInputResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeInputResponse#type #type} => String
+    #   * {Types::DescribeInputResponse#srt_settings #srt_settings} => Types::SrtSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3904,7 +3938,14 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
-    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE"
+    #   resp.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER"
+    #   resp.srt_settings.srt_caller_sources #=> Array
+    #   resp.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
+    #   resp.srt_settings.srt_caller_sources[0].minimum_latency #=> Integer
+    #   resp.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
+    #   resp.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
+    #   resp.srt_settings.srt_caller_sources[0].stream_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4844,7 +4885,14 @@ module Aws::MediaLive
     #   resp.inputs[0].state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.inputs[0].tags #=> Hash
     #   resp.inputs[0].tags["__string"] #=> String
-    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE"
+    #   resp.inputs[0].type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER"
+    #   resp.inputs[0].srt_settings.srt_caller_sources #=> Array
+    #   resp.inputs[0].srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.inputs[0].srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
+    #   resp.inputs[0].srt_settings.srt_caller_sources[0].minimum_latency #=> Integer
+    #   resp.inputs[0].srt_settings.srt_caller_sources[0].srt_listener_address #=> String
+    #   resp.inputs[0].srt_settings.srt_caller_sources[0].srt_listener_port #=> String
+    #   resp.inputs[0].srt_settings.srt_caller_sources[0].stream_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputs AWS API Documentation
@@ -8427,6 +8475,11 @@ module Aws::MediaLive
     #
     # @option params [Array<Types::InputSourceRequest>] :sources
     #
+    # @option params [Types::SrtSettingsRequest] :srt_settings
+    #   Configures the sources for this SRT input. For a single-pipeline
+    #   input, include one srtCallerSource in the array. For a
+    #   standard-pipeline input, include two srtCallerSource.
+    #
     # @return [Types::UpdateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateInputResponse#input #input} => Types::Input
@@ -8460,6 +8513,20 @@ module Aws::MediaLive
     #         username: "__string",
     #       },
     #     ],
+    #     srt_settings: {
+    #       srt_caller_sources: [
+    #         {
+    #           decryption: {
+    #             algorithm: "AES128", # accepts AES128, AES192, AES256
+    #             passphrase_secret_arn: "__string",
+    #           },
+    #           minimum_latency: 1,
+    #           srt_listener_address: "__string",
+    #           srt_listener_port: "__string",
+    #           stream_id: "__string",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -8493,7 +8560,14 @@ module Aws::MediaLive
     #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
     #   resp.input.tags #=> Hash
     #   resp.input.tags["__string"] #=> String
-    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI", "TS_FILE", "SRT_CALLER"
+    #   resp.input.srt_settings.srt_caller_sources #=> Array
+    #   resp.input.srt_settings.srt_caller_sources[0].decryption.algorithm #=> String, one of "AES128", "AES192", "AES256"
+    #   resp.input.srt_settings.srt_caller_sources[0].decryption.passphrase_secret_arn #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].minimum_latency #=> Integer
+    #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
+    #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
@@ -11172,7 +11246,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

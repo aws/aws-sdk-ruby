@@ -1248,6 +1248,12 @@ module Aws::TimestreamQuery
     # @option params [String] :query_pricing_model
     #   The pricing model for queries in an account.
     #
+    #   <note markdown="1"> The `QueryPricingModel` parameter is used by several Timestream
+    #   operations; however, the `UpdateAccountSettings` API operation
+    #   doesn't recognize any values other than `COMPUTE_UNITS`.
+    #
+    #    </note>
+    #
     # @return [Types::UpdateAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAccountSettingsResponse#max_query_tcu #max_query_tcu} => Integer
@@ -1313,7 +1319,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

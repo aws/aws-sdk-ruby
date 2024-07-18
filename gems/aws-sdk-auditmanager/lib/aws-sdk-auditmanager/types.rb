@@ -217,7 +217,7 @@ module Aws::AuditManager
       :delegations,
       :system_evidence_count,
       :manual_evidence_count)
-      SENSITIVE = [:roles]
+      SENSITIVE = [:roles, :delegations]
       include Aws::Structure
     end
 
@@ -575,7 +575,7 @@ module Aws::AuditManager
       :delegations,
       :creation_time,
       :last_updated)
-      SENSITIVE = [:name, :description, :compliance_type, :assessment_reports_destination, :scope, :roles]
+      SENSITIVE = [:name, :description, :compliance_type, :assessment_reports_destination, :scope, :roles, :delegations]
       include Aws::Structure
     end
 
@@ -626,7 +626,7 @@ module Aws::AuditManager
       :delegations,
       :creation_time,
       :last_updated)
-      SENSITIVE = [:name, :compliance_type, :roles]
+      SENSITIVE = [:name, :compliance_type, :roles, :delegations]
       include Aws::Structure
     end
 
@@ -904,7 +904,7 @@ module Aws::AuditManager
     class BatchCreateDelegationByAssessmentResponse < Struct.new(
       :delegations,
       :errors)
-      SENSITIVE = [:errors]
+      SENSITIVE = [:delegations, :errors]
       include Aws::Structure
     end
 

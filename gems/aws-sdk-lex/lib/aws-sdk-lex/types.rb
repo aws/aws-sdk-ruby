@@ -35,7 +35,7 @@ module Aws::Lex
       :name,
       :time_to_live,
       :parameters)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 

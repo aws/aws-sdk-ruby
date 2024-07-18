@@ -411,6 +411,7 @@ module Aws::WorkSpacesThinClient
 
       api.metadata = {
         "apiVersion" => "2023-08-22",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "thinclient",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

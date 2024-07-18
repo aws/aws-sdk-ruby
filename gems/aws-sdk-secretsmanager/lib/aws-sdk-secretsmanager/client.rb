@@ -724,6 +724,12 @@ module Aws::SecretsManager
     # you need `kms:GenerateDataKey` and `kms:Decrypt` permission to the
     # key.
     #
+    # When you enter commands in a command shell, there is a risk of the
+    # command history being accessed or utilities having access to your
+    # command parameters. This is a concern if the command includes the
+    # value of a secret. Learn how to [Mitigate the risks of using
+    # command-line tools to store Secrets Manager secrets][7].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html
@@ -732,6 +738,7 @@ module Aws::SecretsManager
     # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
     # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [6]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [7]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html
     #
     # @option params [required, String] :name
     #   The name of the new secret.
@@ -2038,11 +2045,18 @@ module Aws::SecretsManager
     # more information, see [ IAM policy actions for Secrets Manager][2] and
     # [Authentication and access control in Secrets Manager][3].
     #
+    # When you enter commands in a command shell, there is a risk of the
+    # command history being accessed or utilities having access to your
+    # command parameters. This is a concern if the command includes the
+    # value of a secret. Learn how to [Mitigate the risks of using
+    # command-line tools to store Secrets Manager secrets][4].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to add a new version to.
@@ -2891,9 +2905,15 @@ module Aws::SecretsManager
     # a customer managed key, you must also have `kms:GenerateDataKey`,
     # `kms:Encrypt`, and `kms:Decrypt` permissions on the key. If you change
     # the KMS key and you don't have `kms:Encrypt` permission to the new
-    # key, Secrets Manager does not re-ecrypt existing secret versions with
+    # key, Secrets Manager does not re-encrypt existing secret versions with
     # the new key. For more information, see [ Secret encryption and
     # decryption][5].
+    #
+    # When you enter commands in a command shell, there is a risk of the
+    # command history being accessed or utilities having access to your
+    # command parameters. This is a concern if the command includes the
+    # value of a secret. Learn how to [Mitigate the risks of using
+    # command-line tools to store Secrets Manager secrets][6].
     #
     #
     #
@@ -2902,6 +2922,7 @@ module Aws::SecretsManager
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html
+    # [6]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security_cli-exposure-risks.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
@@ -2950,8 +2971,8 @@ module Aws::SecretsManager
     #   encrypt new secret versions as well as any existing versions with the
     #   staging labels `AWSCURRENT`, `AWSPENDING`, or `AWSPREVIOUS`. If you
     #   don't have `kms:Encrypt` permission to the new key, Secrets Manager
-    #   does not re-ecrypt existing secret versions with the new key. For more
-    #   information about versions and staging labels, see [Concepts:
+    #   does not re-encrypt existing secret versions with the new key. For
+    #   more information about versions and staging labels, see [Concepts:
     #   Version][1].
     #
     #   A key alias is always prefixed by `alias/`, for example
@@ -3347,7 +3368,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

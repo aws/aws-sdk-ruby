@@ -1805,7 +1805,7 @@ module Aws::BillingConductor
       :billing_groups,
       :arns,
       :account_ids)
-      SENSITIVE = []
+      SENSITIVE = [:names]
       include Aws::Structure
     end
 

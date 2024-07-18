@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-07-18)
+------------------
+
+* Feature - Documentation update for IVS Chat API Reference.
+
 1.27.0 (2024-07-02)
 ------------------
 

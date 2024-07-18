@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2024-07-18)
+------------------
+
+* Feature - Amazon Connect expands search API coverage for additional resources.  Search for hierarchy groups by name, ID, tag, or other criteria (new endpoint). Search for agent statuses by name, ID, tag, or other criteria (new endpoint). Search for users by their assigned proficiencies (enhanced endpoint)
+
 1.167.0 (2024-07-02)
 ------------------
 

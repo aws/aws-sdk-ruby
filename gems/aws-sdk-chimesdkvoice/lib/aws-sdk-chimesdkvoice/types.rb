@@ -97,7 +97,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_group_id,
       :e164_phone_numbers,
       :force_associate)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -136,7 +136,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :e164_phone_numbers,
       :force_associate)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -302,7 +302,7 @@ module Aws::ChimeSDKVoice
       :product_type,
       :e164_phone_numbers,
       :name)
-      SENSITIVE = [:name]
+      SENSITIVE = [:e164_phone_numbers, :name]
       include Aws::Structure
     end
 
@@ -363,7 +363,7 @@ module Aws::ChimeSDKVoice
       :number_selection_behavior,
       :geo_match_level,
       :geo_match_params)
-      SENSITIVE = [:name]
+      SENSITIVE = [:participant_phone_numbers, :name]
       include Aws::Structure
     end
 
@@ -410,7 +410,7 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :sip_headers,
       :arguments_map)
-      SENSITIVE = [:from_phone_number, :to_phone_number]
+      SENSITIVE = [:from_phone_number, :to_phone_number, :sip_headers, :arguments_map]
       include Aws::Structure
     end
 
@@ -848,7 +848,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
       :usernames)
-      SENSITIVE = []
+      SENSITIVE = [:usernames]
       include Aws::Structure
     end
 
@@ -901,7 +901,7 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
       :e164_phone_numbers)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -932,7 +932,7 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
       :e164_phone_numbers)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -1850,7 +1850,7 @@ module Aws::ChimeSDKVoice
     #
     class ListVoiceConnectorTerminationCredentialsResponse < Struct.new(
       :usernames)
-      SENSITIVE = []
+      SENSITIVE = [:usernames]
       include Aws::Structure
     end
 
@@ -2832,7 +2832,7 @@ module Aws::ChimeSDKVoice
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :e164_phone_numbers,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:e164_phone_numbers]
       include Aws::Structure
     end
 
@@ -2939,7 +2939,7 @@ module Aws::ChimeSDKVoice
     class SipMediaApplicationAlexaSkillConfiguration < Struct.new(
       :alexa_skill_status,
       :alexa_skill_ids)
-      SENSITIVE = []
+      SENSITIVE = [:alexa_skill_ids]
       include Aws::Structure
     end
 
@@ -3449,7 +3449,7 @@ module Aws::ChimeSDKVoice
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
-      SENSITIVE = [:resource_arn]
+      SENSITIVE = [:resource_arn, :tag_keys]
       include Aws::Structure
     end
 
@@ -3604,7 +3604,7 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :transaction_id,
       :arguments)
-      SENSITIVE = []
+      SENSITIVE = [:arguments]
       include Aws::Structure
     end
 

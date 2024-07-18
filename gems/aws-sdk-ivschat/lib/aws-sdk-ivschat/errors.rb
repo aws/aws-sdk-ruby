@@ -147,11 +147,6 @@ module Aws::Ivschat
       end
 
       # @return [String]
-      def limit
-        @data[:limit]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -164,6 +159,11 @@ module Aws::Ivschat
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+
+      # @return [String]
+      def limit
+        @data[:limit]
       end
     end
 
@@ -177,11 +177,6 @@ module Aws::Ivschat
       end
 
       # @return [String]
-      def limit
-        @data[:limit]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -195,6 +190,11 @@ module Aws::Ivschat
       def resource_type
         @data[:resource_type]
       end
+
+      # @return [String]
+      def limit
+        @data[:limit]
+      end
     end
 
     class ValidationException < ServiceError
@@ -207,11 +207,6 @@ module Aws::Ivschat
       end
 
       # @return [String]
-      def field_list
-        @data[:field_list]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -219,6 +214,11 @@ module Aws::Ivschat
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def field_list
+        @data[:field_list]
       end
     end
 

@@ -210,6 +210,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::CreateInternetGateway.build(context)
           when :create_ipam
             Aws::EC2::Endpoints::CreateIpam.build(context)
+          when :create_ipam_external_resource_verification_token
+            Aws::EC2::Endpoints::CreateIpamExternalResourceVerificationToken.build(context)
           when :create_ipam_pool
             Aws::EC2::Endpoints::CreateIpamPool.build(context)
           when :create_ipam_resource_discovery
@@ -362,6 +364,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeleteInternetGateway.build(context)
           when :delete_ipam
             Aws::EC2::Endpoints::DeleteIpam.build(context)
+          when :delete_ipam_external_resource_verification_token
+            Aws::EC2::Endpoints::DeleteIpamExternalResourceVerificationToken.build(context)
           when :delete_ipam_pool
             Aws::EC2::Endpoints::DeleteIpamPool.build(context)
           when :delete_ipam_resource_discovery
@@ -610,6 +614,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeInternetGateways.build(context)
           when :describe_ipam_byoasn
             Aws::EC2::Endpoints::DescribeIpamByoasn.build(context)
+          when :describe_ipam_external_resource_verification_tokens
+            Aws::EC2::Endpoints::DescribeIpamExternalResourceVerificationTokens.build(context)
           when :describe_ipam_pools
             Aws::EC2::Endpoints::DescribeIpamPools.build(context)
           when :describe_ipam_resource_discoveries
