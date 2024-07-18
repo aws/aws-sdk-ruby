@@ -44,13 +44,17 @@ setting, caching, and fallback behavior.
             list_objects_v2: 'READ',
             list_object_versions: 'READ',
             list_parts: 'READ',
+            head_bucket: 'READ',
+            get_object_attributes: 'READ',
             put_object: 'WRITE',
             put_object_acl: 'WRITE',
             delete_object: 'WRITE',
             abort_multipart_upload: 'WRITE',
             create_multipart_upload: 'WRITE',
             upload_part: 'WRITE',
-            complete_multipart_upload: 'WRITE'
+            complete_multipart_upload: 'WRITE',
+            delete_objects: 'WRITE',
+            copy_object: 'READWRITE'
           }.freeze
 
           def call(context)
@@ -59,10 +63,26 @@ setting, caching, and fallback behavior.
               params = context[:endpoint_params]
               permission = PERMISSION_MAP[context.operation_name]
 
+              key =
+                case context.operation_name
+                when :delete_objects
+                  delete_params = context.params[:delete]
+                  common_prefixes(delete_params[:objects].map { |o| o[:key] })
+                when :copy_object
+                  source_bucket, source_key = params[:copy_source].split('/', 2)
+                  if params[:bucket] != source_bucket
+                    raise ArgumentError,
+                          'source and destination bucket should be the same'
+                  end
+                  common_prefixes([params[:key], source_key])
+                else
+                  params[:key]
+                end
+
               provider = context.config.access_grants_credentials_provider
               credentials = provider.access_grants_credentials_for(
                 bucket: params[:bucket],
-                key: params[:key],
+                key: key,
                 prefix: params[:prefix],
                 permission: permission
               )
@@ -87,6 +107,39 @@ setting, caching, and fallback behavior.
 
           def s3_express_endpoint?(context)
             context[:endpoint_properties]['backend'] == 'S3Express'
+          end
+
+          def common_prefixes(keys)
+            return '' if keys.empty?
+
+            first_key = keys[0]
+            common_ancestor = first_key
+            last_prefix = ''
+            keys.each do |i|
+              until common_ancestor.empty?
+                break if i.start_with?(common_ancestor)
+
+                last_index = common_ancestor.rindex('/')
+                return '' if last_index.nil?
+
+                last_prefix = common_ancestor[(last_index + 1)..-1]
+                common_ancestor = common_ancestor[0...last_index]
+              end
+            end
+            new_common_ancestor = "#{common_ancestor}/#{last_prefix}"
+            keys.each do |i|
+              until last_prefix.empty?
+                break if i.start_with?(new_common_ancestor)
+
+                last_prefix = last_prefix[0...-1]
+                new_common_ancestor = "#{common_ancestor}/#{last_prefix}"
+              end
+            end
+            if new_common_ancestor == "#{first_key}/"
+              first_key
+            else
+              new_common_ancestor
+            end
           end
         end
 
