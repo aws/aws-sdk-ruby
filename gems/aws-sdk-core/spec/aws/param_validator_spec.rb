@@ -8,7 +8,11 @@ module Aws
   describe ParamValidator do
     let(:shapes) { ApiHelper.sample_shapes }
 
-    let(:api) { ApiHelper.sample_api(shapes: shapes) }
+    let(:service) { ApiHelper.sample_service(shapes: shapes) }
+
+    let(:api) { service.const_get(:ClientApi).const_get(:API) }
+
+    let(:types) { service.const_get(:Types) }
 
     def validate(params, expected_errors = [])
       rules = api.operation(:example_operation).input
@@ -98,9 +102,15 @@ module Aws
         validate({ string: 's', boolean: true }, 'multiple values provided to union')
       end
 
-      it 'access a struct with exactly one value set' do
+      it 'accepts a struct with exactly one value set' do
         shapes['StructureShape']['union'] = true
         validate({ string: 's' })
+      end
+
+      it 'accepts a modeled type' do
+        shapes['StructureShape']['union'] = true
+        input = types.const_get('StructureShape').new(string: 's')
+        validate(input)
       end
     end
 

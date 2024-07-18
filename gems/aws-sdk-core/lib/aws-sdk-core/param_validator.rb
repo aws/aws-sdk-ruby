@@ -71,7 +71,7 @@ module Aws
         end
 
         if @validate_required && shape.union
-          set_values = @input ? values.length : values.to_h.length
+          set_values = values.to_h.length
           if set_values > 1
             errors << "multiple values provided to union at #{context} - must contain exactly one of the supported types: #{shape.member_names.join(', ')}"
           elsif set_values == 0
