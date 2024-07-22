@@ -58,8 +58,11 @@ setting, caching, and fallback behavior.
           }.freeze
 
           def call(context)
+            provider = context.config.access_grants_credentials_provider
+
             if access_grants_operation?(context) &&
-               !s3_express_endpoint?(context)
+               !s3_express_endpoint?(context) &&
+               !head_bucket_call?(provider)
               params = context[:endpoint_params]
               permission = PERMISSION_MAP[context.operation_name]
 
@@ -79,7 +82,6 @@ setting, caching, and fallback behavior.
                   params[:key]
                 end
 
-              provider = context.config.access_grants_credentials_provider
               credentials = provider.access_grants_credentials_for(
                 bucket: params[:bucket],
                 key: key,
@@ -98,6 +100,12 @@ setting, caching, and fallback behavior.
             return block.call unless credentials
 
             Aws::Plugins::UserAgent.metric('S3_ACCESS_GRANTS', &block)
+          end
+
+          # HeadBucket is a supported call. When fetching credentials,
+          # this plugin is executed again, and becomes recursive.
+          def head_bucket_call?(provider)
+            provider.instance_variable_get(:@head_bucket_call)
           end
 
           def access_grants_operation?(context)
