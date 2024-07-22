@@ -27,6 +27,9 @@ module Aws
       class InvalidPaginationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class Ipv6CidrBlockNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String

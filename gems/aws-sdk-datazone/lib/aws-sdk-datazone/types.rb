@@ -260,6 +260,94 @@ module Aws::DataZone
       class Unknown < ActionParameters; end
     end
 
+    # The configuration details of the asset filter.
+    #
+    # @note AssetFilterConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AssetFilterConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AssetFilterConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] column_configuration
+    #   The column configuration of the asset filter.
+    #   @return [Types::ColumnFilterConfiguration]
+    #
+    # @!attribute [rw] row_configuration
+    #   The row configuration of the asset filter.
+    #   @return [Types::RowFilterConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetFilterConfiguration AWS API Documentation
+    #
+    class AssetFilterConfiguration < Struct.new(
+      :column_configuration,
+      :row_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ColumnConfiguration < AssetFilterConfiguration; end
+      class RowConfiguration < AssetFilterConfiguration; end
+      class Unknown < AssetFilterConfiguration; end
+    end
+
+    # The summary of the asset filter.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the asset filter was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the asset filter lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_column_names
+    #   The effective column names of the asset filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] effective_row_filter
+    #   The effective row filter of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that is displayed if the action does not succeed.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetFilterSummary AWS API Documentation
+    #
+    class AssetFilterSummary < Struct.new(
+      :asset_id,
+      :created_at,
+      :description,
+      :domain_id,
+      :effective_column_names,
+      :effective_row_filter,
+      :error_message,
+      :id,
+      :name,
+      :status)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
     # A Amazon DataZone inventory asset.
     #
     # @!attribute [rw] additional_attributes
@@ -850,6 +938,20 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The column configuration of the asset filter.
+    #
+    # @!attribute [rw] included_column_names
+    #   Specifies whether to include column names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ColumnFilterConfiguration AWS API Documentation
+    #
+    class ColumnFilterConfiguration < Struct.new(
+      :included_column_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of the parameters for the configurable environment action.
     #
     # @!attribute [rw] key
@@ -905,6 +1007,110 @@ module Aws::DataZone
     class ConflictException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_identifier
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration of the asset filter.
+    #   @return [Types::AssetFilterConfiguration]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain in which you want to create an asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateAssetFilterInput AWS API Documentation
+    #
+    class CreateAssetFilterInput < Struct.new(
+      :asset_identifier,
+      :client_token,
+      :configuration,
+      :description,
+      :domain_identifier,
+      :name)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration of the asset filter.
+    #   @return [Types::AssetFilterConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the asset filter was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the asset filter is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_column_names
+    #   The column names in the asset filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] effective_row_filter
+    #   The row filter in the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that is displayed if the asset filter is not
+    #   created successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateAssetFilterOutput AWS API Documentation
+    #
+    class CreateAssetFilterOutput < Struct.new(
+      :asset_id,
+      :configuration,
+      :created_at,
+      :description,
+      :domain_id,
+      :effective_column_names,
+      :effective_row_filter,
+      :error_message,
+      :id,
+      :name,
+      :status)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -3358,6 +3564,28 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] asset_identifier
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to delete an asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the asset filter that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteAssetFilterInput AWS API Documentation
+    #
+    class DeleteAssetFilterInput < Struct.new(
+      :asset_identifier,
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_identifier
     #   The ID of the Amazon DataZone domain in which the asset is deleted.
     #   @return [String]
@@ -4216,6 +4444,10 @@ module Aws::DataZone
     #   blueprint configuration.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_configurations
+    #   The provisioning configuration of a blueprint.
+    #   @return [Array<Types::ProvisioningConfiguration>]
+    #
     # @!attribute [rw] provisioning_role_arn
     #   The ARN of the provisioning role specified in the environment
     #   blueprint configuration.
@@ -4237,6 +4469,7 @@ module Aws::DataZone
       :enabled_regions,
       :environment_blueprint_id,
       :manage_access_role_arn,
+      :provisioning_configurations,
       :provisioning_role_arn,
       :regional_parameters,
       :updated_at)
@@ -4470,6 +4703,25 @@ module Aws::DataZone
       :status,
       :updated_at)
       SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # Specifies whether the value is equal to an expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might be equal to an expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EqualToExpression AWS API Documentation
+    #
+    class EqualToExpression < Struct.new(
+      :column_name,
+      :value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4734,6 +4986,91 @@ module Aws::DataZone
       :revision,
       :status)
       SENSITIVE = [:description, :model, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_identifier
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to get an asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAssetFilterInput AWS API Documentation
+    #
+    class GetAssetFilterInput < Struct.new(
+      :asset_identifier,
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_id
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration of the asset filter.
+    #   @return [Types::AssetFilterConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the asset filter was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where you want to get an asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_column_names
+    #   The column names of the asset filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] effective_row_filter
+    #   The row filter of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that is displayed if the action does not complete
+    #   successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAssetFilterOutput AWS API Documentation
+    #
+    class GetAssetFilterOutput < Struct.new(
+      :asset_id,
+      :configuration,
+      :created_at,
+      :description,
+      :domain_id,
+      :effective_column_names,
+      :effective_row_filter,
+      :error_message,
+      :id,
+      :name,
+      :status)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -5362,6 +5699,10 @@ module Aws::DataZone
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_configurations
+    #   The provisioning configuration of a blueprint.
+    #   @return [Array<Types::ProvisioningConfiguration>]
+    #
     # @!attribute [rw] provisioning_role_arn
     #   The ARN of the provisioning role with which this blueprint is
     #   created.
@@ -5383,6 +5724,7 @@ module Aws::DataZone
       :enabled_regions,
       :environment_blueprint_id,
       :manage_access_role_arn,
+      :provisioning_configurations,
       :provisioning_role_arn,
       :regional_parameters,
       :updated_at)
@@ -7090,6 +7432,44 @@ module Aws::DataZone
       class Unknown < GrantedEntityInput; end
     end
 
+    # Specifies whether the value is greater than an expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might be greater than an expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GreaterThanExpression AWS API Documentation
+    #
+    class GreaterThanExpression < Struct.new(
+      :column_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether the value is greater than or equal to an expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might be greater than or equal to an expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GreaterThanOrEqualToExpression AWS API Documentation
+    #
+    class GreaterThanOrEqualToExpression < Struct.new(
+      :column_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a group in Amazon DataZone.
     #
     # @!attribute [rw] group_id
@@ -7166,6 +7546,25 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # Specifies whether values are in the expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values that might be in the expression.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/InExpression AWS API Documentation
+    #
+    class InExpression < Struct.new(
+      :column_name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request has failed because of an unknown error, exception or
     # failure.
     #
@@ -7176,6 +7575,113 @@ module Aws::DataZone
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that the expression is not null.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IsNotNullExpression AWS API Documentation
+    #
+    class IsNotNullExpression < Struct.new(
+      :column_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that the expression is null.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IsNullExpression AWS API Documentation
+    #
+    class IsNullExpression < Struct.new(
+      :column_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lake Formation configuration of the Data Lake blueprint.
+    #
+    # @!attribute [rw] location_registration_exclude_s3_locations
+    #   Specifies certain Amazon S3 locations if you do not want Amazon
+    #   DataZone to automatically register them in hybrid mode.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] location_registration_role
+    #   The role that is used to manage read/write access to the chosen
+    #   Amazon S3 bucket(s) for Data Lake using AWS Lake Formation hybrid
+    #   access mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/LakeFormationConfiguration AWS API Documentation
+    #
+    class LakeFormationConfiguration < Struct.new(
+      :location_registration_exclude_s3_locations,
+      :location_registration_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that a value is less than an expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might be less than the expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/LessThanExpression AWS API Documentation
+    #
+    class LessThanExpression < Struct.new(
+      :column_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that a value is less than or equal to an expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might be less than or equal to an expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/LessThanOrEqualToExpression AWS API Documentation
+    #
+    class LessThanOrEqualToExpression < Struct.new(
+      :column_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that a value is like the expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might be like the expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/LikeExpression AWS API Documentation
+    #
+    class LikeExpression < Struct.new(
+      :column_name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7318,6 +7824,69 @@ module Aws::DataZone
       :revision,
       :updated_at,
       :updated_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_identifier
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to list asset filters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of asset filters to return in a single call to
+    #   `ListAssetFilters`. When the number of asset filters to be listed is
+    #   greater than the value of `MaxResults`, the response contains a
+    #   `NextToken` value that you can use in a subsequent call to
+    #   `ListAssetFilters` to list the next set of asset filters.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of asset filters is greater than the default value
+    #   for the `MaxResults` parameter, or if you explicitly specify a value
+    #   for `MaxResults` that is less than the number of asset filters, the
+    #   response includes a pagination token named `NextToken`. You can
+    #   specify this `NextToken` value in a subsequent call to
+    #   `ListAssetFilters` to list the next set of asset filters.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAssetFiltersInput AWS API Documentation
+    #
+    class ListAssetFiltersInput < Struct.new(
+      :asset_identifier,
+      :domain_identifier,
+      :max_results,
+      :next_token,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the `ListAssetFilters` action.
+    #   @return [Array<Types::AssetFilterSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of asset filters is greater than the default value
+    #   for the `MaxResults` parameter, or if you explicitly specify a value
+    #   for `MaxResults` that is less than the number of asset filters, the
+    #   response includes a pagination token named `NextToken`. You can
+    #   specify this `NextToken` value in a subsequent call to
+    #   `ListAssetFilters` to list the next set of asset filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAssetFiltersOutput AWS API Documentation
+    #
+    class ListAssetFiltersOutput < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9026,6 +9595,63 @@ module Aws::DataZone
       class Unknown < Model; end
     end
 
+    # Specifies that a value is not equal to the expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might not be equal to the expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotEqualToExpression AWS API Documentation
+    #
+    class NotEqualToExpression < Struct.new(
+      :column_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that a value is not in the expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value that might not be in the expression.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotInExpression AWS API Documentation
+    #
+    class NotInExpression < Struct.new(
+      :column_name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that a value might be not like the expression.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that might not be like the expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotLikeExpression AWS API Documentation
+    #
+    class NotLikeExpression < Struct.new(
+      :column_name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a notification generated in Amazon DataZone.
     #
     # @!attribute [rw] action_link
@@ -9321,6 +9947,29 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The provisioning configuration of the blueprint.
+    #
+    # @note ProvisioningConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProvisioningConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProvisioningConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] lake_formation_configuration
+    #   The Lake Formation configuration of the Data Lake blueprint.
+    #   @return [Types::LakeFormationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProvisioningConfiguration AWS API Documentation
+    #
+    class ProvisioningConfiguration < Struct.new(
+      :lake_formation_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LakeFormationConfiguration < ProvisioningConfiguration; end
+      class Unknown < ProvisioningConfiguration; end
+    end
+
     # The provisioning properties of an environment blueprint.
     #
     # @note ProvisioningProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProvisioningProperties corresponding to the set member.
@@ -9359,6 +10008,10 @@ module Aws::DataZone
     #   The ARN of the manage access role.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_configurations
+    #   The provisioning configuration of a blueprint.
+    #   @return [Array<Types::ProvisioningConfiguration>]
+    #
     # @!attribute [rw] provisioning_role_arn
     #   The ARN of the provisioning role.
     #   @return [String]
@@ -9374,6 +10027,7 @@ module Aws::DataZone
       :enabled_regions,
       :environment_blueprint_identifier,
       :manage_access_role_arn,
+      :provisioning_configurations,
       :provisioning_role_arn,
       :regional_parameters)
       SENSITIVE = []
@@ -9400,6 +10054,10 @@ module Aws::DataZone
     #   The ARN of the manage access role.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_configurations
+    #   The provisioning configuration of a blueprint.
+    #   @return [Array<Types::ProvisioningConfiguration>]
+    #
     # @!attribute [rw] provisioning_role_arn
     #   The ARN of the provisioning role.
     #   @return [String]
@@ -9420,6 +10078,7 @@ module Aws::DataZone
       :enabled_regions,
       :environment_blueprint_id,
       :manage_access_role_arn,
+      :provisioning_configurations,
       :provisioning_role_arn,
       :regional_parameters,
       :updated_at)
@@ -9972,6 +10631,149 @@ module Aws::DataZone
       :updated_by)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The row filter.
+    #
+    # @note RowFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RowFilter is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RowFilter corresponding to the set member.
+    #
+    # @!attribute [rw] and
+    #   The 'and' clause of the row filter.
+    #   @return [Array<Types::RowFilter>]
+    #
+    # @!attribute [rw] expression
+    #   The expression of the row filter.
+    #   @return [Types::RowFilterExpression]
+    #
+    # @!attribute [rw] or
+    #   The 'or' clause of the row filter.
+    #   @return [Array<Types::RowFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RowFilter AWS API Documentation
+    #
+    class RowFilter < Struct.new(
+      :and,
+      :expression,
+      :or,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class And < RowFilter; end
+      class Expression < RowFilter; end
+      class Or < RowFilter; end
+      class Unknown < RowFilter; end
+    end
+
+    # The row filter configuration details.
+    #
+    # @!attribute [rw] row_filter
+    #   The row filter.
+    #   @return [Types::RowFilter]
+    #
+    # @!attribute [rw] sensitive
+    #   Specifies whether the row filter is sensitive.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RowFilterConfiguration AWS API Documentation
+    #
+    class RowFilterConfiguration < Struct.new(
+      :row_filter,
+      :sensitive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The row filter expression.
+    #
+    # @note RowFilterExpression is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RowFilterExpression is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RowFilterExpression corresponding to the set member.
+    #
+    # @!attribute [rw] equal_to
+    #   The 'equal to' clause of the row filter expression.
+    #   @return [Types::EqualToExpression]
+    #
+    # @!attribute [rw] greater_than
+    #   The 'greater than' clause of the row filter expression.
+    #   @return [Types::GreaterThanExpression]
+    #
+    # @!attribute [rw] greater_than_or_equal_to
+    #   The 'greater than or equal to' clause of the filter expression.
+    #   @return [Types::GreaterThanOrEqualToExpression]
+    #
+    # @!attribute [rw] in
+    #   The 'in' clause of the row filter expression.
+    #   @return [Types::InExpression]
+    #
+    # @!attribute [rw] is_not_null
+    #   The 'is not null' clause of the row filter expression.
+    #   @return [Types::IsNotNullExpression]
+    #
+    # @!attribute [rw] is_null
+    #   The 'is null' clause of the row filter expression.
+    #   @return [Types::IsNullExpression]
+    #
+    # @!attribute [rw] less_than
+    #   The 'less than' clause of the row filter expression.
+    #   @return [Types::LessThanExpression]
+    #
+    # @!attribute [rw] less_than_or_equal_to
+    #   The 'less than or equal to' clause of the row filter expression.
+    #   @return [Types::LessThanOrEqualToExpression]
+    #
+    # @!attribute [rw] like
+    #   The 'like' clause of the row filter expression.
+    #   @return [Types::LikeExpression]
+    #
+    # @!attribute [rw] not_equal_to
+    #   The 'no equal to' clause of the row filter expression.
+    #   @return [Types::NotEqualToExpression]
+    #
+    # @!attribute [rw] not_in
+    #   The 'not in' clause of the row filter expression.
+    #   @return [Types::NotInExpression]
+    #
+    # @!attribute [rw] not_like
+    #   The 'not like' clause of the row filter expression.
+    #   @return [Types::NotLikeExpression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RowFilterExpression AWS API Documentation
+    #
+    class RowFilterExpression < Struct.new(
+      :equal_to,
+      :greater_than,
+      :greater_than_or_equal_to,
+      :in,
+      :is_not_null,
+      :is_null,
+      :less_than,
+      :less_than_or_equal_to,
+      :like,
+      :not_equal_to,
+      :not_in,
+      :not_like,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EqualTo < RowFilterExpression; end
+      class GreaterThan < RowFilterExpression; end
+      class GreaterThanOrEqualTo < RowFilterExpression; end
+      class In < RowFilterExpression; end
+      class IsNotNull < RowFilterExpression; end
+      class IsNull < RowFilterExpression; end
+      class LessThan < RowFilterExpression; end
+      class LessThanOrEqualTo < RowFilterExpression; end
+      class Like < RowFilterExpression; end
+      class NotEqualTo < RowFilterExpression; end
+      class NotIn < RowFilterExpression; end
+      class NotLike < RowFilterExpression; end
+      class Unknown < RowFilterExpression; end
     end
 
     # The asset statistics from the data source run.
@@ -11626,6 +12428,106 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] asset_identifier
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration of the asset filter.
+    #   @return [Types::AssetFilterConfiguration]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to update an asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetFilterInput AWS API Documentation
+    #
+    class UpdateAssetFilterInput < Struct.new(
+      :asset_identifier,
+      :configuration,
+      :description,
+      :domain_identifier,
+      :identifier,
+      :name)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_id
+    #   The ID of the data asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration of the asset filter.
+    #   @return [Types::AssetFilterConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the asset filter was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the asset filter was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_column_names
+    #   The column names of the asset filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] effective_row_filter
+    #   The row filter of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that is displayed if the action is not completed
+    #   successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the asset filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetFilterOutput AWS API Documentation
+    #
+    class UpdateAssetFilterOutput < Struct.new(
+      :asset_id,
+      :configuration,
+      :created_at,
+      :description,
+      :domain_id,
+      :effective_column_names,
+      :effective_row_filter,
+      :error_message,
+      :id,
+      :name,
+      :status)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
 
     # @!attribute [rw] asset_forms_input
     #   The asset forms to be updated as part of the `UpdateDataSource`

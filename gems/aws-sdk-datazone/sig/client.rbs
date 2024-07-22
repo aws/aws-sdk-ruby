@@ -213,6 +213,94 @@ module Aws
                         ) -> _CreateAssetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetResponseSuccess
 
+      interface _CreateAssetFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetFilterOutput]
+        def asset_id: () -> ::String
+        def configuration: () -> Types::AssetFilterConfiguration
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def effective_column_names: () -> ::Array[::String]
+        def effective_row_filter: () -> ::String
+        def error_message: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("VALID" | "INVALID")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_asset_filter-instance_method
+      def create_asset_filter: (
+                                 asset_identifier: ::String,
+                                 ?client_token: ::String,
+                                 configuration: {
+                                   column_configuration: {
+                                     included_column_names: Array[::String]?
+                                   }?,
+                                   row_configuration: {
+                                     row_filter: {
+                                       and: Array[
+                                         untyped,
+                                       ]?,
+                                       expression: {
+                                         equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         greater_than: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         greater_than_or_equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         in: {
+                                           column_name: ::String,
+                                           values: Array[::String]
+                                         }?,
+                                         is_not_null: {
+                                           column_name: ::String
+                                         }?,
+                                         is_null: {
+                                           column_name: ::String
+                                         }?,
+                                         less_than: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         less_than_or_equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         like: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         not_equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         not_in: {
+                                           column_name: ::String,
+                                           values: Array[::String]
+                                         }?,
+                                         not_like: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?
+                                       }?,
+                                       or: Array[
+                                         untyped,
+                                       ]?
+                                     },
+                                     sensitive: bool?
+                                   }?
+                                 },
+                                 ?description: ::String,
+                                 domain_identifier: ::String,
+                                 name: ::String
+                               ) -> _CreateAssetFilterResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetFilterResponseSuccess
+
       interface _CreateAssetRevisionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetRevisionOutput]
         def created_at: () -> ::Time
@@ -787,6 +875,14 @@ module Aws
                         ) -> _DeleteAssetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_asset_filter-instance_method
+      def delete_asset_filter: (
+                                 asset_identifier: ::String,
+                                 domain_identifier: ::String,
+                                 identifier: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeleteAssetTypeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetTypeOutput]
       end
@@ -1028,6 +1124,28 @@ module Aws
                      ) -> _GetAssetResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetResponseSuccess
 
+      interface _GetAssetFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetFilterOutput]
+        def asset_id: () -> ::String
+        def configuration: () -> Types::AssetFilterConfiguration
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def effective_column_names: () -> ::Array[::String]
+        def effective_row_filter: () -> ::String
+        def error_message: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("VALID" | "INVALID")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_asset_filter-instance_method
+      def get_asset_filter: (
+                              asset_identifier: ::String,
+                              domain_identifier: ::String,
+                              identifier: ::String
+                            ) -> _GetAssetFilterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetFilterResponseSuccess
+
       interface _GetAssetTypeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetTypeOutput]
         def created_at: () -> ::Time
@@ -1202,6 +1320,7 @@ module Aws
         def enabled_regions: () -> ::Array[::String]
         def environment_blueprint_id: () -> ::String
         def manage_access_role_arn: () -> ::String
+        def provisioning_configurations: () -> ::Array[Types::ProvisioningConfiguration]
         def provisioning_role_arn: () -> ::String
         def regional_parameters: () -> ::Hash[::String, ::Hash[::String, ::String]]
         def updated_at: () -> ::Time
@@ -1534,6 +1653,21 @@ module Aws
                               user_identifier: ::String
                             ) -> _GetUserProfileResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserProfileResponseSuccess
+
+      interface _ListAssetFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetFiltersOutput]
+        def items: () -> ::Array[Types::AssetFilterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_asset_filters-instance_method
+      def list_asset_filters: (
+                                asset_identifier: ::String,
+                                domain_identifier: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?status: ("VALID" | "INVALID")
+                              ) -> _ListAssetFiltersResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetFiltersResponseSuccess
 
       interface _ListAssetRevisionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetRevisionsOutput]
@@ -1919,6 +2053,7 @@ module Aws
         def enabled_regions: () -> ::Array[::String]
         def environment_blueprint_id: () -> ::String
         def manage_access_role_arn: () -> ::String
+        def provisioning_configurations: () -> ::Array[Types::ProvisioningConfiguration]
         def provisioning_role_arn: () -> ::String
         def regional_parameters: () -> ::Hash[::String, ::Hash[::String, ::String]]
         def updated_at: () -> ::Time
@@ -1929,6 +2064,14 @@ module Aws
                                                      enabled_regions: Array[::String],
                                                      environment_blueprint_identifier: ::String,
                                                      ?manage_access_role_arn: ::String,
+                                                     ?provisioning_configurations: Array[
+                                                       {
+                                                         lake_formation_configuration: {
+                                                           location_registration_exclude_s3_locations: Array[::String]?,
+                                                           location_registration_role: ::String?
+                                                         }?
+                                                       },
+                                                     ],
                                                      ?provisioning_role_arn: ::String,
                                                      ?regional_parameters: Hash[::String, Hash[::String, ::String]]
                                                    ) -> _PutEnvironmentBlueprintConfigurationResponseSuccess
@@ -2215,6 +2358,94 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAssetFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetFilterOutput]
+        def asset_id: () -> ::String
+        def configuration: () -> Types::AssetFilterConfiguration
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def effective_column_names: () -> ::Array[::String]
+        def effective_row_filter: () -> ::String
+        def error_message: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("VALID" | "INVALID")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_asset_filter-instance_method
+      def update_asset_filter: (
+                                 asset_identifier: ::String,
+                                 ?configuration: {
+                                   column_configuration: {
+                                     included_column_names: Array[::String]?
+                                   }?,
+                                   row_configuration: {
+                                     row_filter: {
+                                       and: Array[
+                                         untyped,
+                                       ]?,
+                                       expression: {
+                                         equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         greater_than: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         greater_than_or_equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         in: {
+                                           column_name: ::String,
+                                           values: Array[::String]
+                                         }?,
+                                         is_not_null: {
+                                           column_name: ::String
+                                         }?,
+                                         is_null: {
+                                           column_name: ::String
+                                         }?,
+                                         less_than: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         less_than_or_equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         like: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         not_equal_to: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?,
+                                         not_in: {
+                                           column_name: ::String,
+                                           values: Array[::String]
+                                         }?,
+                                         not_like: {
+                                           column_name: ::String,
+                                           value: ::String
+                                         }?
+                                       }?,
+                                       or: Array[
+                                         untyped,
+                                       ]?
+                                     },
+                                     sensitive: bool?
+                                   }?
+                                 },
+                                 ?description: ::String,
+                                 domain_identifier: ::String,
+                                 identifier: ::String,
+                                 ?name: ::String
+                               ) -> _UpdateAssetFilterResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetFilterResponseSuccess
 
       interface _UpdateDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceOutput]

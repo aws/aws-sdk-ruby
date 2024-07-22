@@ -77,6 +77,34 @@ module Aws::DataZone
       end
     end
 
+    class AssetFilterConfiguration
+      attr_accessor column_configuration: Types::ColumnFilterConfiguration
+      attr_accessor row_configuration: Types::RowFilterConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ColumnConfiguration < AssetFilterConfiguration
+      end
+      class RowConfiguration < AssetFilterConfiguration
+      end
+      class Unknown < AssetFilterConfiguration
+      end
+    end
+
+    class AssetFilterSummary
+      attr_accessor asset_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor effective_column_names: ::Array[::String]
+      attr_accessor effective_row_filter: ::String
+      attr_accessor error_message: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("VALID" | "INVALID")
+      SENSITIVE: [:description, :name]
+    end
+
     class AssetItem
       attr_accessor additional_attributes: Types::AssetItemAdditionalAttributes
       attr_accessor created_at: ::Time
@@ -229,6 +257,11 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ColumnFilterConfiguration
+      attr_accessor included_column_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ConfigurableActionParameter
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -245,6 +278,31 @@ module Aws::DataZone
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class CreateAssetFilterInput
+      attr_accessor asset_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor configuration: Types::AssetFilterConfiguration
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateAssetFilterOutput
+      attr_accessor asset_id: ::String
+      attr_accessor configuration: Types::AssetFilterConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor effective_column_names: ::Array[::String]
+      attr_accessor effective_row_filter: ::String
+      attr_accessor error_message: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("VALID" | "INVALID")
+      SENSITIVE: [:description, :name]
     end
 
     class CreateAssetInput
@@ -840,6 +898,13 @@ module Aws::DataZone
       SENSITIVE: [:name, :schedule]
     end
 
+    class DeleteAssetFilterInput
+      attr_accessor asset_identifier: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
     class DeleteAssetInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -1094,6 +1159,7 @@ module Aws::DataZone
       attr_accessor enabled_regions: ::Array[::String]
       attr_accessor environment_blueprint_id: ::String
       attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_configurations: ::Array[Types::ProvisioningConfiguration]
       attr_accessor provisioning_role_arn: ::String
       attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
       attr_accessor updated_at: ::Time
@@ -1153,6 +1219,12 @@ module Aws::DataZone
       attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "VALIDATION_FAILED" | "SUSPENDED" | "DISABLED" | "EXPIRED" | "DELETED" | "INACCESSIBLE")
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description, :name]
+    end
+
+    class EqualToExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
     end
 
     class FailureCause
@@ -1233,6 +1305,28 @@ module Aws::DataZone
       attr_accessor revision: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: [:description, :model, :name]
+    end
+
+    class GetAssetFilterInput
+      attr_accessor asset_identifier: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssetFilterOutput
+      attr_accessor asset_id: ::String
+      attr_accessor configuration: Types::AssetFilterConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor effective_column_names: ::Array[::String]
+      attr_accessor effective_row_filter: ::String
+      attr_accessor error_message: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("VALID" | "INVALID")
+      SENSITIVE: [:description, :name]
     end
 
     class GetAssetInput
@@ -1392,6 +1486,7 @@ module Aws::DataZone
       attr_accessor enabled_regions: ::Array[::String]
       attr_accessor environment_blueprint_id: ::String
       attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_configurations: ::Array[Types::ProvisioningConfiguration]
       attr_accessor provisioning_role_arn: ::String
       attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
       attr_accessor updated_at: ::Time
@@ -1844,6 +1939,18 @@ module Aws::DataZone
       end
     end
 
+    class GreaterThanExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GreaterThanOrEqualToExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class GroupDetails
       attr_accessor group_id: ::String
       SENSITIVE: []
@@ -1868,8 +1975,48 @@ module Aws::DataZone
       SENSITIVE: [:name]
     end
 
+    class InExpression
+      attr_accessor column_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IsNotNullExpression
+      attr_accessor column_name: ::String
+      SENSITIVE: []
+    end
+
+    class IsNullExpression
+      attr_accessor column_name: ::String
+      SENSITIVE: []
+    end
+
+    class LakeFormationConfiguration
+      attr_accessor location_registration_exclude_s3_locations: ::Array[::String]
+      attr_accessor location_registration_role: ::String
+      SENSITIVE: []
+    end
+
+    class LessThanExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class LessThanOrEqualToExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class LikeExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -1905,6 +2052,21 @@ module Aws::DataZone
       attr_accessor revision: ::String
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetFiltersInput
+      attr_accessor asset_identifier: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("VALID" | "INVALID")
+      SENSITIVE: []
+    end
+
+    class ListAssetFiltersOutput
+      attr_accessor items: ::Array[Types::AssetFilterSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -2330,6 +2492,24 @@ module Aws::DataZone
       end
     end
 
+    class NotEqualToExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class NotInExpression
+      attr_accessor column_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NotLikeExpression
+      attr_accessor column_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class NotificationOutput
       attr_accessor action_link: ::String
       attr_accessor creation_timestamp: ::Time
@@ -2409,6 +2589,17 @@ module Aws::DataZone
       SENSITIVE: [:description, :name]
     end
 
+    class ProvisioningConfiguration
+      attr_accessor lake_formation_configuration: Types::LakeFormationConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LakeFormationConfiguration < ProvisioningConfiguration
+      end
+      class Unknown < ProvisioningConfiguration
+      end
+    end
+
     class ProvisioningProperties
       attr_accessor cloud_formation: Types::CloudFormationProperties
       attr_accessor unknown: untyped
@@ -2425,6 +2616,7 @@ module Aws::DataZone
       attr_accessor enabled_regions: ::Array[::String]
       attr_accessor environment_blueprint_identifier: ::String
       attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_configurations: ::Array[Types::ProvisioningConfiguration]
       attr_accessor provisioning_role_arn: ::String
       attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
       SENSITIVE: []
@@ -2436,6 +2628,7 @@ module Aws::DataZone
       attr_accessor enabled_regions: ::Array[::String]
       attr_accessor environment_blueprint_id: ::String
       attr_accessor manage_access_role_arn: ::String
+      attr_accessor provisioning_configurations: ::Array[Types::ProvisioningConfiguration]
       attr_accessor provisioning_role_arn: ::String
       attr_accessor regional_parameters: ::Hash[::String, ::Hash[::String, ::String]]
       attr_accessor updated_at: ::Time
@@ -2591,6 +2784,73 @@ module Aws::DataZone
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       SENSITIVE: []
+    end
+
+    class RowFilter
+      attr_accessor and: ::Array[Types::RowFilter]
+      attr_accessor expression: Types::RowFilterExpression
+      attr_accessor or: ::Array[Types::RowFilter]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class And < RowFilter
+      end
+      class Expression < RowFilter
+      end
+      class Or < RowFilter
+      end
+      class Unknown < RowFilter
+      end
+    end
+
+    class RowFilterConfiguration
+      attr_accessor row_filter: Types::RowFilter
+      attr_accessor sensitive: bool
+      SENSITIVE: []
+    end
+
+    class RowFilterExpression
+      attr_accessor equal_to: Types::EqualToExpression
+      attr_accessor greater_than: Types::GreaterThanExpression
+      attr_accessor greater_than_or_equal_to: Types::GreaterThanOrEqualToExpression
+      attr_accessor in: Types::InExpression
+      attr_accessor is_not_null: Types::IsNotNullExpression
+      attr_accessor is_null: Types::IsNullExpression
+      attr_accessor less_than: Types::LessThanExpression
+      attr_accessor less_than_or_equal_to: Types::LessThanOrEqualToExpression
+      attr_accessor like: Types::LikeExpression
+      attr_accessor not_equal_to: Types::NotEqualToExpression
+      attr_accessor not_in: Types::NotInExpression
+      attr_accessor not_like: Types::NotLikeExpression
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EqualTo < RowFilterExpression
+      end
+      class GreaterThan < RowFilterExpression
+      end
+      class GreaterThanOrEqualTo < RowFilterExpression
+      end
+      class In < RowFilterExpression
+      end
+      class IsNotNull < RowFilterExpression
+      end
+      class IsNull < RowFilterExpression
+      end
+      class LessThan < RowFilterExpression
+      end
+      class LessThanOrEqualTo < RowFilterExpression
+      end
+      class Like < RowFilterExpression
+      end
+      class NotEqualTo < RowFilterExpression
+      end
+      class NotIn < RowFilterExpression
+      end
+      class NotLike < RowFilterExpression
+      end
+      class Unknown < RowFilterExpression
+      end
     end
 
     class RunStatisticsForAssets
@@ -3060,6 +3320,31 @@ module Aws::DataZone
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAssetFilterInput
+      attr_accessor asset_identifier: ::String
+      attr_accessor configuration: Types::AssetFilterConfiguration
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdateAssetFilterOutput
+      attr_accessor asset_id: ::String
+      attr_accessor configuration: Types::AssetFilterConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor effective_column_names: ::Array[::String]
+      attr_accessor effective_row_filter: ::String
+      attr_accessor error_message: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("VALID" | "INVALID")
+      SENSITIVE: [:description, :name]
     end
 
     class UpdateDataSourceInput

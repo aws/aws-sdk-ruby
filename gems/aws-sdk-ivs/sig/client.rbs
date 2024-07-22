@@ -86,8 +86,8 @@ module Aws
 
       interface _BatchGetStreamKeyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetStreamKeyResponse]
-        def errors: () -> ::Array[Types::BatchError]
         def stream_keys: () -> ::Array[Types::StreamKey]
+        def errors: () -> ::Array[Types::BatchError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#batch_get_stream_key-instance_method
       def batch_get_stream_key: (
@@ -118,15 +118,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_channel-instance_method
       def create_channel: (
-                            ?authorized: bool,
-                            ?insecure_ingest: bool,
-                            ?latency_mode: ("NORMAL" | "LOW"),
                             ?name: ::String,
-                            ?playback_restriction_policy_arn: ::String,
-                            ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
+                            ?latency_mode: ("NORMAL" | "LOW"),
+                            ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD"),
+                            ?authorized: bool,
                             ?recording_configuration_arn: ::String,
                             ?tags: Hash[::String, ::String],
-                            ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+                            ?insecure_ingest: bool,
+                            ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
+                            ?playback_restriction_policy_arn: ::String
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
@@ -150,23 +150,23 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_recording_configuration-instance_method
       def create_recording_configuration: (
+                                            ?name: ::String,
                                             destination_configuration: {
                                               s3: {
                                                 bucket_name: ::String
                                               }?
                                             },
-                                            ?name: ::String,
-                                            ?recording_reconnect_window_seconds: ::Integer,
-                                            ?rendition_configuration: {
-                                              rendition_selection: ("ALL" | "NONE" | "CUSTOM")?,
-                                              renditions: Array[("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")]?
-                                            },
                                             ?tags: Hash[::String, ::String],
                                             ?thumbnail_configuration: {
                                               recording_mode: ("DISABLED" | "INTERVAL")?,
-                                              resolution: ("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")?,
-                                              storage: Array[("SEQUENTIAL" | "LATEST")]?,
-                                              target_interval_seconds: ::Integer?
+                                              target_interval_seconds: ::Integer?,
+                                              resolution: ("SD" | "HD" | "FULL_HD" | "LOWEST_RESOLUTION")?,
+                                              storage: Array[("SEQUENTIAL" | "LATEST")]?
+                                            },
+                                            ?recording_reconnect_window_seconds: ::Integer,
+                                            ?rendition_configuration: {
+                                              rendition_selection: ("ALL" | "NONE" | "CUSTOM")?,
+                                              renditions: Array[("SD" | "HD" | "FULL_HD" | "LOWEST_RESOLUTION")]?
                                             }
                                           ) -> _CreateRecordingConfigurationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecordingConfigurationResponseSuccess
@@ -292,8 +292,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#import_playback_key_pair-instance_method
       def import_playback_key_pair: (
-                                      ?name: ::String,
                                       public_key_material: ::String,
+                                      ?name: ::String,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _ImportPlaybackKeyPairResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportPlaybackKeyPairResponseSuccess
@@ -306,10 +306,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_channels-instance_method
       def list_channels: (
                            ?filter_by_name: ::String,
-                           ?filter_by_playback_restriction_policy_arn: ::String,
                            ?filter_by_recording_configuration_arn: ::String,
-                           ?max_results: ::Integer,
-                           ?next_token: ::String
+                           ?filter_by_playback_restriction_policy_arn: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
                          ) -> _ListChannelsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
 
@@ -320,73 +320,73 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_playback_key_pairs-instance_method
       def list_playback_key_pairs: (
-                                     ?max_results: ::Integer,
-                                     ?next_token: ::String
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
                                    ) -> _ListPlaybackKeyPairsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlaybackKeyPairsResponseSuccess
 
       interface _ListPlaybackRestrictionPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPlaybackRestrictionPoliciesResponse]
-        def next_token: () -> ::String
         def playback_restriction_policies: () -> ::Array[Types::PlaybackRestrictionPolicySummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_playback_restriction_policies-instance_method
       def list_playback_restriction_policies: (
-                                                ?max_results: ::Integer,
-                                                ?next_token: ::String
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
                                               ) -> _ListPlaybackRestrictionPoliciesResponseSuccess
                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlaybackRestrictionPoliciesResponseSuccess
 
       interface _ListRecordingConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRecordingConfigurationsResponse]
-        def next_token: () -> ::String
         def recording_configurations: () -> ::Array[Types::RecordingConfigurationSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_recording_configurations-instance_method
       def list_recording_configurations: (
-                                           ?max_results: ::Integer,
-                                           ?next_token: ::String
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
                                          ) -> _ListRecordingConfigurationsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecordingConfigurationsResponseSuccess
 
       interface _ListStreamKeysResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamKeysResponse]
-        def next_token: () -> ::String
         def stream_keys: () -> ::Array[Types::StreamKeySummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_stream_keys-instance_method
       def list_stream_keys: (
                               channel_arn: ::String,
-                              ?max_results: ::Integer,
-                              ?next_token: ::String
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
                             ) -> _ListStreamKeysResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamKeysResponseSuccess
 
       interface _ListStreamSessionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamSessionsResponse]
-        def next_token: () -> ::String
         def stream_sessions: () -> ::Array[Types::StreamSessionSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_stream_sessions-instance_method
       def list_stream_sessions: (
                                   channel_arn: ::String,
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
                                 ) -> _ListStreamSessionsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamSessionsResponseSuccess
 
       interface _ListStreamsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamsResponse]
-        def next_token: () -> ::String
         def streams: () -> ::Array[Types::StreamSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_streams-instance_method
       def list_streams: (
                           ?filter_by: {
                             health: ("HEALTHY" | "STARVING" | "UNKNOWN")?
                           },
-                          ?max_results: ::Integer,
-                          ?next_token: ::String
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
                         ) -> _ListStreamsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamsResponseSuccess
 
@@ -454,14 +454,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#update_channel-instance_method
       def update_channel: (
                             arn: ::String,
-                            ?authorized: bool,
-                            ?insecure_ingest: bool,
-                            ?latency_mode: ("NORMAL" | "LOW"),
                             ?name: ::String,
-                            ?playback_restriction_policy_arn: ::String,
-                            ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
+                            ?latency_mode: ("NORMAL" | "LOW"),
+                            ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD"),
+                            ?authorized: bool,
                             ?recording_configuration_arn: ::String,
-                            ?type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+                            ?insecure_ingest: bool,
+                            ?preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY"),
+                            ?playback_restriction_policy_arn: ::String
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
 
@@ -471,9 +471,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#update_playback_restriction_policy-instance_method
       def update_playback_restriction_policy: (
+                                                arn: ::String,
                                                 ?allowed_countries: Array[::String],
                                                 ?allowed_origins: Array[::String],
-                                                arn: ::String,
                                                 ?enable_strict_origin_enforcement: bool,
                                                 ?name: ::String
                                               ) -> _UpdatePlaybackRestrictionPolicyResponseSuccess

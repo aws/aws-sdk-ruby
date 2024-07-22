@@ -14,10 +14,10 @@ module Aws::IVS
     end
 
     class AudioConfiguration
-      attr_accessor channels: ::Integer
       attr_accessor codec: ::String
-      attr_accessor sample_rate: ::Integer
       attr_accessor target_bitrate: ::Integer
+      attr_accessor sample_rate: ::Integer
+      attr_accessor channels: ::Integer
       SENSITIVE: []
     end
 
@@ -45,16 +45,16 @@ module Aws::IVS
     end
 
     class BatchGetStreamKeyResponse
-      attr_accessor errors: ::Array[Types::BatchError]
       attr_accessor stream_keys: ::Array[Types::StreamKey]
+      attr_accessor errors: ::Array[Types::BatchError]
       SENSITIVE: []
     end
 
     class BatchStartViewerSessionRevocationError
       attr_accessor channel_arn: ::String
+      attr_accessor viewer_id: ::String
       attr_accessor code: ::String
       attr_accessor message: ::String
-      attr_accessor viewer_id: ::String
       SENSITIVE: []
     end
 
@@ -77,18 +77,18 @@ module Aws::IVS
 
     class Channel
       attr_accessor arn: ::String
-      attr_accessor authorized: bool
-      attr_accessor ingest_endpoint: ::String
-      attr_accessor insecure_ingest: bool
-      attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
-      attr_accessor playback_restriction_policy_arn: ::String
-      attr_accessor playback_url: ::String
-      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
-      attr_accessor recording_configuration_arn: ::String
-      attr_accessor srt: Types::Srt
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      attr_accessor recording_configuration_arn: ::String
+      attr_accessor ingest_endpoint: ::String
+      attr_accessor playback_url: ::String
+      attr_accessor authorized: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor insecure_ingest: bool
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor srt: Types::Srt
+      attr_accessor playback_restriction_policy_arn: ::String
       SENSITIVE: []
     end
 
@@ -99,15 +99,15 @@ module Aws::IVS
 
     class ChannelSummary
       attr_accessor arn: ::String
-      attr_accessor authorized: bool
-      attr_accessor insecure_ingest: bool
-      attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
-      attr_accessor playback_restriction_policy_arn: ::String
-      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor authorized: bool
       attr_accessor recording_configuration_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor insecure_ingest: bool
       attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor playback_restriction_policy_arn: ::String
       SENSITIVE: []
     end
 
@@ -117,15 +117,15 @@ module Aws::IVS
     end
 
     class CreateChannelRequest
-      attr_accessor authorized: bool
-      attr_accessor insecure_ingest: bool
-      attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
-      attr_accessor playback_restriction_policy_arn: ::String
-      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
+      attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      attr_accessor authorized: bool
       attr_accessor recording_configuration_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      attr_accessor insecure_ingest: bool
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor playback_restriction_policy_arn: ::String
       SENSITIVE: []
     end
 
@@ -150,12 +150,12 @@ module Aws::IVS
     end
 
     class CreateRecordingConfigurationRequest
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor name: ::String
-      attr_accessor recording_reconnect_window_seconds: ::Integer
-      attr_accessor rendition_configuration: Types::RenditionConfiguration
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration
+      attr_accessor recording_reconnect_window_seconds: ::Integer
+      attr_accessor rendition_configuration: Types::RenditionConfiguration
       SENSITIVE: []
     end
 
@@ -280,8 +280,8 @@ module Aws::IVS
     end
 
     class ImportPlaybackKeyPairRequest
-      attr_accessor name: ::String
       attr_accessor public_key_material: ::String
+      attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -292,8 +292,8 @@ module Aws::IVS
     end
 
     class IngestConfiguration
-      attr_accessor audio: Types::AudioConfiguration
       attr_accessor video: Types::VideoConfiguration
+      attr_accessor audio: Types::AudioConfiguration
       SENSITIVE: []
     end
 
@@ -304,10 +304,10 @@ module Aws::IVS
 
     class ListChannelsRequest
       attr_accessor filter_by_name: ::String
-      attr_accessor filter_by_playback_restriction_policy_arn: ::String
       attr_accessor filter_by_recording_configuration_arn: ::String
-      attr_accessor max_results: ::Integer
+      attr_accessor filter_by_playback_restriction_policy_arn: ::String
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -318,8 +318,8 @@ module Aws::IVS
     end
 
     class ListPlaybackKeyPairsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -330,65 +330,65 @@ module Aws::IVS
     end
 
     class ListPlaybackRestrictionPoliciesRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListPlaybackRestrictionPoliciesResponse
-      attr_accessor next_token: ::String
       attr_accessor playback_restriction_policies: ::Array[Types::PlaybackRestrictionPolicySummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListRecordingConfigurationsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListRecordingConfigurationsResponse
-      attr_accessor next_token: ::String
       attr_accessor recording_configurations: ::Array[Types::RecordingConfigurationSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListStreamKeysRequest
       attr_accessor channel_arn: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListStreamKeysResponse
-      attr_accessor next_token: ::String
       attr_accessor stream_keys: ::Array[Types::StreamKeySummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListStreamSessionsRequest
       attr_accessor channel_arn: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListStreamSessionsResponse
-      attr_accessor next_token: ::String
       attr_accessor stream_sessions: ::Array[Types::StreamSessionSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListStreamsRequest
       attr_accessor filter_by: Types::StreamFilters
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListStreamsResponse
-      attr_accessor next_token: ::String
       attr_accessor streams: ::Array[Types::StreamSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -409,8 +409,8 @@ module Aws::IVS
 
     class PlaybackKeyPair
       attr_accessor arn: ::String
-      attr_accessor fingerprint: ::String
       attr_accessor name: ::String
+      attr_accessor fingerprint: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -423,9 +423,9 @@ module Aws::IVS
     end
 
     class PlaybackRestrictionPolicy
+      attr_accessor arn: ::String
       attr_accessor allowed_countries: ::Array[::String]
       attr_accessor allowed_origins: ::Array[::String]
-      attr_accessor arn: ::String
       attr_accessor enable_strict_origin_enforcement: bool
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -433,9 +433,9 @@ module Aws::IVS
     end
 
     class PlaybackRestrictionPolicySummary
+      attr_accessor arn: ::String
       attr_accessor allowed_countries: ::Array[::String]
       attr_accessor allowed_origins: ::Array[::String]
-      attr_accessor arn: ::String
       attr_accessor enable_strict_origin_enforcement: bool
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -450,20 +450,20 @@ module Aws::IVS
 
     class RecordingConfiguration
       attr_accessor arn: ::String
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor name: ::String
-      attr_accessor recording_reconnect_window_seconds: ::Integer
-      attr_accessor rendition_configuration: Types::RenditionConfiguration
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration
+      attr_accessor recording_reconnect_window_seconds: ::Integer
+      attr_accessor rendition_configuration: Types::RenditionConfiguration
       SENSITIVE: []
     end
 
     class RecordingConfigurationSummary
       attr_accessor arn: ::String
-      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor name: ::String
+      attr_accessor destination_configuration: Types::DestinationConfiguration
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -471,7 +471,7 @@ module Aws::IVS
 
     class RenditionConfiguration
       attr_accessor rendition_selection: ("ALL" | "NONE" | "CUSTOM")
-      attr_accessor renditions: ::Array[("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")]
+      attr_accessor renditions: ::Array[("SD" | "HD" | "FULL_HD" | "LOWEST_RESOLUTION")]
       SENSITIVE: []
     end
 
@@ -516,19 +516,19 @@ module Aws::IVS
 
     class Stream
       attr_accessor channel_arn: ::String
-      attr_accessor health: ("HEALTHY" | "STARVING" | "UNKNOWN")
+      attr_accessor stream_id: ::String
       attr_accessor playback_url: ::String
       attr_accessor start_time: ::Time
       attr_accessor state: ("LIVE" | "OFFLINE")
-      attr_accessor stream_id: ::String
+      attr_accessor health: ("HEALTHY" | "STARVING" | "UNKNOWN")
       attr_accessor viewer_count: ::Integer
       SENSITIVE: []
     end
 
     class StreamEvent
-      attr_accessor event_time: ::Time
       attr_accessor name: ::String
       attr_accessor type: ::String
+      attr_accessor event_time: ::Time
       SENSITIVE: []
     end
 
@@ -539,9 +539,9 @@ module Aws::IVS
 
     class StreamKey
       attr_accessor arn: ::String
+      attr_accessor value: ::String
       attr_accessor channel_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor value: ::String
       SENSITIVE: [:value]
     end
 
@@ -553,31 +553,31 @@ module Aws::IVS
     end
 
     class StreamSession
-      attr_accessor channel: Types::Channel
+      attr_accessor stream_id: ::String
+      attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
+      attr_accessor channel: Types::Channel
       attr_accessor ingest_configuration: Types::IngestConfiguration
       attr_accessor recording_configuration: Types::RecordingConfiguration
-      attr_accessor start_time: ::Time
-      attr_accessor stream_id: ::String
       attr_accessor truncated_events: ::Array[Types::StreamEvent]
       SENSITIVE: []
     end
 
     class StreamSessionSummary
+      attr_accessor stream_id: ::String
+      attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor has_error_event: bool
-      attr_accessor start_time: ::Time
-      attr_accessor stream_id: ::String
       SENSITIVE: []
     end
 
     class StreamSummary
       attr_accessor channel_arn: ::String
-      attr_accessor health: ("HEALTHY" | "STARVING" | "UNKNOWN")
-      attr_accessor start_time: ::Time
-      attr_accessor state: ("LIVE" | "OFFLINE")
       attr_accessor stream_id: ::String
+      attr_accessor state: ("LIVE" | "OFFLINE")
+      attr_accessor health: ("HEALTHY" | "STARVING" | "UNKNOWN")
       attr_accessor viewer_count: ::Integer
+      attr_accessor start_time: ::Time
       SENSITIVE: []
     end
 
@@ -602,9 +602,9 @@ module Aws::IVS
 
     class ThumbnailConfiguration
       attr_accessor recording_mode: ("DISABLED" | "INTERVAL")
-      attr_accessor resolution: ("FULL_HD" | "HD" | "SD" | "LOWEST_RESOLUTION")
-      attr_accessor storage: ::Array[("SEQUENTIAL" | "LATEST")]
       attr_accessor target_interval_seconds: ::Integer
+      attr_accessor resolution: ("SD" | "HD" | "FULL_HD" | "LOWEST_RESOLUTION")
+      attr_accessor storage: ::Array[("SEQUENTIAL" | "LATEST")]
       SENSITIVE: []
     end
 
@@ -619,14 +619,14 @@ module Aws::IVS
 
     class UpdateChannelRequest
       attr_accessor arn: ::String
-      attr_accessor authorized: bool
-      attr_accessor insecure_ingest: bool
-      attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor name: ::String
-      attr_accessor playback_restriction_policy_arn: ::String
-      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
-      attr_accessor recording_configuration_arn: ::String
+      attr_accessor latency_mode: ("NORMAL" | "LOW")
       attr_accessor type: ("BASIC" | "STANDARD" | "ADVANCED_SD" | "ADVANCED_HD")
+      attr_accessor authorized: bool
+      attr_accessor recording_configuration_arn: ::String
+      attr_accessor insecure_ingest: bool
+      attr_accessor preset: ("HIGHER_BANDWIDTH_DELIVERY" | "CONSTRAINED_BANDWIDTH_DELIVERY")
+      attr_accessor playback_restriction_policy_arn: ::String
       SENSITIVE: []
     end
 
@@ -636,9 +636,9 @@ module Aws::IVS
     end
 
     class UpdatePlaybackRestrictionPolicyRequest
+      attr_accessor arn: ::String
       attr_accessor allowed_countries: ::Array[::String]
       attr_accessor allowed_origins: ::Array[::String]
-      attr_accessor arn: ::String
       attr_accessor enable_strict_origin_enforcement: bool
       attr_accessor name: ::String
       SENSITIVE: []
@@ -655,8 +655,8 @@ module Aws::IVS
     end
 
     class VideoConfiguration
-      attr_accessor avc_level: ::String
       attr_accessor avc_profile: ::String
+      attr_accessor avc_level: ::String
       attr_accessor codec: ::String
       attr_accessor encoder: ::String
       attr_accessor target_bitrate: ::Integer

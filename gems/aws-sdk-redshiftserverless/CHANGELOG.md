@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2024-07-22)
+------------------
+
+* Feature - Adds dualstack support for Redshift Serverless workgroup.
+
 1.32.0 (2024-07-02)
 ------------------
 

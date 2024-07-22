@@ -258,7 +258,6 @@ module Aws
   autoload :MigrationHubOrchestrator, 'aws-sdk-migrationhuborchestrator'
   autoload :MigrationHubRefactorSpaces, 'aws-sdk-migrationhubrefactorspaces'
   autoload :MigrationHubStrategyRecommendations, 'aws-sdk-migrationhubstrategyrecommendations'
-  autoload :Mobile, 'aws-sdk-mobile'
   autoload :Neptune, 'aws-sdk-neptune'
   autoload :NeptuneGraph, 'aws-sdk-neptunegraph'
   autoload :Neptunedata, 'aws-sdk-neptunedata'

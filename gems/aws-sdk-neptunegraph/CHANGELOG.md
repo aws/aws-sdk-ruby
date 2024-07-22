@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2024-07-22)
+------------------
+
+* Feature - Amazon Neptune Analytics provides new options for customers to start with smaller graphs at a lower cost. CreateGraph, CreaateGraphImportTask, UpdateGraph and StartImportTask APIs will now allow 32 and 64 for `provisioned-memory`
+
 1.13.0 (2024-07-02)
 ------------------
 

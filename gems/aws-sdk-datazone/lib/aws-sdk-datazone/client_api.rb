@@ -27,6 +27,9 @@ module Aws::DataZone
     ActionLink = Shapes::StringShape.new(name: 'ActionLink')
     ActionParameters = Shapes::UnionShape.new(name: 'ActionParameters')
     ApplicableAssetTypes = Shapes::ListShape.new(name: 'ApplicableAssetTypes')
+    AssetFilterConfiguration = Shapes::UnionShape.new(name: 'AssetFilterConfiguration')
+    AssetFilterSummary = Shapes::StructureShape.new(name: 'AssetFilterSummary')
+    AssetFilters = Shapes::ListShape.new(name: 'AssetFilters')
     AssetId = Shapes::StringShape.new(name: 'AssetId')
     AssetIdentifier = Shapes::StringShape.new(name: 'AssetIdentifier')
     AssetItem = Shapes::StructureShape.new(name: 'AssetItem')
@@ -60,11 +63,15 @@ module Aws::DataZone
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudFormationProperties = Shapes::StructureShape.new(name: 'CloudFormationProperties')
+    ColumnFilterConfiguration = Shapes::StructureShape.new(name: 'ColumnFilterConfiguration')
+    ColumnNameList = Shapes::ListShape.new(name: 'ColumnNameList')
     ConfigurableActionParameter = Shapes::StructureShape.new(name: 'ConfigurableActionParameter')
     ConfigurableActionParameterList = Shapes::ListShape.new(name: 'ConfigurableActionParameterList')
     ConfigurableActionTypeAuthorization = Shapes::StringShape.new(name: 'ConfigurableActionTypeAuthorization')
     ConfigurableEnvironmentAction = Shapes::StructureShape.new(name: 'ConfigurableEnvironmentAction')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateAssetFilterInput = Shapes::StructureShape.new(name: 'CreateAssetFilterInput')
+    CreateAssetFilterOutput = Shapes::StructureShape.new(name: 'CreateAssetFilterOutput')
     CreateAssetInput = Shapes::StructureShape.new(name: 'CreateAssetInput')
     CreateAssetOutput = Shapes::StructureShape.new(name: 'CreateAssetOutput')
     CreateAssetRevisionInput = Shapes::StructureShape.new(name: 'CreateAssetRevisionInput')
@@ -137,6 +144,7 @@ module Aws::DataZone
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime', timestampFormat: "iso8601")
     DecisionComment = Shapes::StringShape.new(name: 'DecisionComment')
+    DeleteAssetFilterInput = Shapes::StructureShape.new(name: 'DeleteAssetFilterInput')
     DeleteAssetInput = Shapes::StructureShape.new(name: 'DeleteAssetInput')
     DeleteAssetOutput = Shapes::StructureShape.new(name: 'DeleteAssetOutput')
     DeleteAssetTypeInput = Shapes::StructureShape.new(name: 'DeleteAssetTypeInput')
@@ -215,6 +223,7 @@ module Aws::DataZone
     EnvironmentStatus = Shapes::StringShape.new(name: 'EnvironmentStatus')
     EnvironmentSummaries = Shapes::ListShape.new(name: 'EnvironmentSummaries')
     EnvironmentSummary = Shapes::StructureShape.new(name: 'EnvironmentSummary')
+    EqualToExpression = Shapes::StructureShape.new(name: 'EqualToExpression')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExternalIdentifier = Shapes::StringShape.new(name: 'ExternalIdentifier')
     FailureCause = Shapes::StructureShape.new(name: 'FailureCause')
@@ -225,7 +234,10 @@ module Aws::DataZone
     FilterExpressionExpressionString = Shapes::StringShape.new(name: 'FilterExpressionExpressionString')
     FilterExpressionType = Shapes::StringShape.new(name: 'FilterExpressionType')
     FilterExpressions = Shapes::ListShape.new(name: 'FilterExpressions')
+    FilterId = Shapes::StringShape.new(name: 'FilterId')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FilterName = Shapes::StringShape.new(name: 'FilterName')
+    FilterStatus = Shapes::StringShape.new(name: 'FilterStatus')
     FilterValueString = Shapes::StringShape.new(name: 'FilterValueString')
     FirstName = Shapes::StringShape.new(name: 'FirstName')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -244,6 +256,8 @@ module Aws::DataZone
     Forms = Shapes::StringShape.new(name: 'Forms')
     FormsInputMap = Shapes::MapShape.new(name: 'FormsInputMap')
     FormsOutputMap = Shapes::MapShape.new(name: 'FormsOutputMap')
+    GetAssetFilterInput = Shapes::StructureShape.new(name: 'GetAssetFilterInput')
+    GetAssetFilterOutput = Shapes::StructureShape.new(name: 'GetAssetFilterOutput')
     GetAssetInput = Shapes::StructureShape.new(name: 'GetAssetInput')
     GetAssetOutput = Shapes::StructureShape.new(name: 'GetAssetOutput')
     GetAssetTypeInput = Shapes::StructureShape.new(name: 'GetAssetTypeInput')
@@ -315,6 +329,8 @@ module Aws::DataZone
     GlueSelfGrantStatusOutput = Shapes::StructureShape.new(name: 'GlueSelfGrantStatusOutput')
     GrantedEntity = Shapes::UnionShape.new(name: 'GrantedEntity')
     GrantedEntityInput = Shapes::UnionShape.new(name: 'GrantedEntityInput')
+    GreaterThanExpression = Shapes::StructureShape.new(name: 'GreaterThanExpression')
+    GreaterThanOrEqualToExpression = Shapes::StructureShape.new(name: 'GreaterThanOrEqualToExpression')
     GroupDetails = Shapes::StructureShape.new(name: 'GroupDetails')
     GroupIdentifier = Shapes::StringShape.new(name: 'GroupIdentifier')
     GroupProfileId = Shapes::StringShape.new(name: 'GroupProfileId')
@@ -327,11 +343,18 @@ module Aws::DataZone
     IamUserProfileDetails = Shapes::StructureShape.new(name: 'IamUserProfileDetails')
     Import = Shapes::StructureShape.new(name: 'Import')
     ImportList = Shapes::ListShape.new(name: 'ImportList')
+    InExpression = Shapes::StructureShape.new(name: 'InExpression')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InventorySearchScope = Shapes::StringShape.new(name: 'InventorySearchScope')
+    IsNotNullExpression = Shapes::StructureShape.new(name: 'IsNotNullExpression')
+    IsNullExpression = Shapes::StructureShape.new(name: 'IsNullExpression')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    LakeFormationConfiguration = Shapes::StructureShape.new(name: 'LakeFormationConfiguration')
     LastName = Shapes::StringShape.new(name: 'LastName')
+    LessThanExpression = Shapes::StructureShape.new(name: 'LessThanExpression')
+    LessThanOrEqualToExpression = Shapes::StructureShape.new(name: 'LessThanOrEqualToExpression')
+    LikeExpression = Shapes::StructureShape.new(name: 'LikeExpression')
     LineageEvent = Shapes::BlobShape.new(name: 'LineageEvent')
     LineageNodeId = Shapes::StringShape.new(name: 'LineageNodeId')
     LineageNodeIdentifier = Shapes::StringShape.new(name: 'LineageNodeIdentifier')
@@ -340,6 +363,8 @@ module Aws::DataZone
     LineageNodeSummaries = Shapes::ListShape.new(name: 'LineageNodeSummaries')
     LineageNodeSummary = Shapes::StructureShape.new(name: 'LineageNodeSummary')
     LineageNodeTypeItem = Shapes::StructureShape.new(name: 'LineageNodeTypeItem')
+    ListAssetFiltersInput = Shapes::StructureShape.new(name: 'ListAssetFiltersInput')
+    ListAssetFiltersOutput = Shapes::StructureShape.new(name: 'ListAssetFiltersOutput')
     ListAssetRevisionsInput = Shapes::StructureShape.new(name: 'ListAssetRevisionsInput')
     ListAssetRevisionsOutput = Shapes::StructureShape.new(name: 'ListAssetRevisionsOutput')
     ListDataSourceRunActivitiesInput = Shapes::StructureShape.new(name: 'ListDataSourceRunActivitiesInput')
@@ -405,6 +430,9 @@ module Aws::DataZone
     MetadataMap = Shapes::MapShape.new(name: 'MetadataMap')
     Model = Shapes::UnionShape.new(name: 'Model')
     Name = Shapes::StringShape.new(name: 'Name')
+    NotEqualToExpression = Shapes::StructureShape.new(name: 'NotEqualToExpression')
+    NotInExpression = Shapes::StructureShape.new(name: 'NotInExpression')
+    NotLikeExpression = Shapes::StructureShape.new(name: 'NotLikeExpression')
     NotificationOutput = Shapes::StructureShape.new(name: 'NotificationOutput')
     NotificationResource = Shapes::StructureShape.new(name: 'NotificationResource')
     NotificationResourceType = Shapes::StringShape.new(name: 'NotificationResourceType')
@@ -427,6 +455,8 @@ module Aws::DataZone
     ProjectStatus = Shapes::StringShape.new(name: 'ProjectStatus')
     ProjectSummaries = Shapes::ListShape.new(name: 'ProjectSummaries')
     ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
+    ProvisioningConfiguration = Shapes::UnionShape.new(name: 'ProvisioningConfiguration')
+    ProvisioningConfigurationList = Shapes::ListShape.new(name: 'ProvisioningConfigurationList')
     ProvisioningProperties = Shapes::UnionShape.new(name: 'ProvisioningProperties')
     PutEnvironmentBlueprintConfigurationInput = Shapes::StructureShape.new(name: 'PutEnvironmentBlueprintConfigurationInput')
     PutEnvironmentBlueprintConfigurationOutput = Shapes::StructureShape.new(name: 'PutEnvironmentBlueprintConfigurationOutput')
@@ -470,7 +500,13 @@ module Aws::DataZone
     RevokeSubscriptionInput = Shapes::StructureShape.new(name: 'RevokeSubscriptionInput')
     RevokeSubscriptionOutput = Shapes::StructureShape.new(name: 'RevokeSubscriptionOutput')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RowFilter = Shapes::UnionShape.new(name: 'RowFilter')
+    RowFilterConfiguration = Shapes::StructureShape.new(name: 'RowFilterConfiguration')
+    RowFilterExpression = Shapes::UnionShape.new(name: 'RowFilterExpression')
+    RowFilterList = Shapes::ListShape.new(name: 'RowFilterList')
     RunStatisticsForAssets = Shapes::StructureShape.new(name: 'RunStatisticsForAssets')
+    S3Location = Shapes::StringShape.new(name: 'S3Location')
+    S3LocationList = Shapes::ListShape.new(name: 'S3LocationList')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     SearchGroupProfilesInput = Shapes::StructureShape.new(name: 'SearchGroupProfilesInput')
     SearchGroupProfilesOutput = Shapes::StructureShape.new(name: 'SearchGroupProfilesOutput')
@@ -513,6 +549,7 @@ module Aws::DataZone
     StartMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'StartMetadataGenerationRunInput')
     StartMetadataGenerationRunOutput = Shapes::StructureShape.new(name: 'StartMetadataGenerationRunOutput')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SubscribedAsset = Shapes::StructureShape.new(name: 'SubscribedAsset')
     SubscribedAssetListing = Shapes::StructureShape.new(name: 'SubscribedAssetListing')
     SubscribedAssets = Shapes::ListShape.new(name: 'SubscribedAssets')
@@ -580,6 +617,8 @@ module Aws::DataZone
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAssetFilterInput = Shapes::StructureShape.new(name: 'UpdateAssetFilterInput')
+    UpdateAssetFilterOutput = Shapes::StructureShape.new(name: 'UpdateAssetFilterOutput')
     UpdateDataSourceInput = Shapes::StructureShape.new(name: 'UpdateDataSourceInput')
     UpdateDataSourceOutput = Shapes::StructureShape.new(name: 'UpdateDataSourceOutput')
     UpdateDomainInput = Shapes::StructureShape.new(name: 'UpdateDomainInput')
@@ -683,6 +722,28 @@ module Aws::DataZone
     ActionParameters.struct_class = Types::ActionParameters
 
     ApplicableAssetTypes.member = Shapes::ShapeRef.new(shape: TypeName)
+
+    AssetFilterConfiguration.add_member(:column_configuration, Shapes::ShapeRef.new(shape: ColumnFilterConfiguration, location_name: "columnConfiguration"))
+    AssetFilterConfiguration.add_member(:row_configuration, Shapes::ShapeRef.new(shape: RowFilterConfiguration, location_name: "rowConfiguration"))
+    AssetFilterConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AssetFilterConfiguration.add_member_subclass(:column_configuration, Types::AssetFilterConfiguration::ColumnConfiguration)
+    AssetFilterConfiguration.add_member_subclass(:row_configuration, Types::AssetFilterConfiguration::RowConfiguration)
+    AssetFilterConfiguration.add_member_subclass(:unknown, Types::AssetFilterConfiguration::Unknown)
+    AssetFilterConfiguration.struct_class = Types::AssetFilterConfiguration
+
+    AssetFilterSummary.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
+    AssetFilterSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    AssetFilterSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    AssetFilterSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    AssetFilterSummary.add_member(:effective_column_names, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "effectiveColumnNames"))
+    AssetFilterSummary.add_member(:effective_row_filter, Shapes::ShapeRef.new(shape: String, location_name: "effectiveRowFilter"))
+    AssetFilterSummary.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    AssetFilterSummary.add_member(:id, Shapes::ShapeRef.new(shape: FilterId, required: true, location_name: "id"))
+    AssetFilterSummary.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
+    AssetFilterSummary.add_member(:status, Shapes::ShapeRef.new(shape: FilterStatus, location_name: "status"))
+    AssetFilterSummary.struct_class = Types::AssetFilterSummary
+
+    AssetFilters.member = Shapes::ShapeRef.new(shape: AssetFilterSummary)
 
     AssetItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: AssetItemAdditionalAttributes, location_name: "additionalAttributes"))
     AssetItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
@@ -808,6 +869,11 @@ module Aws::DataZone
     CloudFormationProperties.add_member(:template_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "templateUrl"))
     CloudFormationProperties.struct_class = Types::CloudFormationProperties
 
+    ColumnFilterConfiguration.add_member(:included_column_names, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "includedColumnNames"))
+    ColumnFilterConfiguration.struct_class = Types::ColumnFilterConfiguration
+
+    ColumnNameList.member = Shapes::ShapeRef.new(shape: String)
+
     ConfigurableActionParameter.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     ConfigurableActionParameter.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     ConfigurableActionParameter.struct_class = Types::ConfigurableActionParameter
@@ -821,6 +887,27 @@ module Aws::DataZone
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
+    CreateAssetFilterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssetFilterInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AssetFilterConfiguration, required: true, location_name: "configuration"))
+    CreateAssetFilterInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAssetFilterInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    CreateAssetFilterInput.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
+    CreateAssetFilterInput.struct_class = Types::CreateAssetFilterInput
+
+    CreateAssetFilterOutput.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
+    CreateAssetFilterOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: AssetFilterConfiguration, required: true, location_name: "configuration"))
+    CreateAssetFilterOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    CreateAssetFilterOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateAssetFilterOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    CreateAssetFilterOutput.add_member(:effective_column_names, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "effectiveColumnNames"))
+    CreateAssetFilterOutput.add_member(:effective_row_filter, Shapes::ShapeRef.new(shape: String, location_name: "effectiveRowFilter"))
+    CreateAssetFilterOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    CreateAssetFilterOutput.add_member(:id, Shapes::ShapeRef.new(shape: FilterId, required: true, location_name: "id"))
+    CreateAssetFilterOutput.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
+    CreateAssetFilterOutput.add_member(:status, Shapes::ShapeRef.new(shape: FilterStatus, location_name: "status"))
+    CreateAssetFilterOutput.struct_class = Types::CreateAssetFilterOutput
 
     CreateAssetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAssetInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1328,6 +1415,11 @@ module Aws::DataZone
     DataSourceSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     DataSourceSummary.struct_class = Types::DataSourceSummary
 
+    DeleteAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
+    DeleteAssetFilterInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    DeleteAssetFilterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: FilterId, required: true, location: "uri", location_name: "identifier"))
+    DeleteAssetFilterInput.struct_class = Types::DeleteAssetFilterInput
+
     DeleteAssetInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteAssetInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location: "uri", location_name: "identifier"))
     DeleteAssetInput.struct_class = Types::DeleteAssetInput
@@ -1526,6 +1618,7 @@ module Aws::DataZone
     EnvironmentBlueprintConfigurationItem.add_member(:enabled_regions, Shapes::ShapeRef.new(shape: EnabledRegionList, location_name: "enabledRegions"))
     EnvironmentBlueprintConfigurationItem.add_member(:environment_blueprint_id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "environmentBlueprintId"))
     EnvironmentBlueprintConfigurationItem.add_member(:manage_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "manageAccessRoleArn"))
+    EnvironmentBlueprintConfigurationItem.add_member(:provisioning_configurations, Shapes::ShapeRef.new(shape: ProvisioningConfigurationList, location_name: "provisioningConfigurations"))
     EnvironmentBlueprintConfigurationItem.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "provisioningRoleArn"))
     EnvironmentBlueprintConfigurationItem.add_member(:regional_parameters, Shapes::ShapeRef.new(shape: RegionalParameterMap, location_name: "regionalParameters"))
     EnvironmentBlueprintConfigurationItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
@@ -1585,6 +1678,10 @@ module Aws::DataZone
     EnvironmentSummary.add_member(:status, Shapes::ShapeRef.new(shape: EnvironmentStatus, location_name: "status"))
     EnvironmentSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     EnvironmentSummary.struct_class = Types::EnvironmentSummary
+
+    EqualToExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    EqualToExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    EqualToExpression.struct_class = Types::EqualToExpression
 
     FailureCause.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     FailureCause.struct_class = Types::FailureCause
@@ -1658,6 +1755,24 @@ module Aws::DataZone
 
     FormsOutputMap.key = Shapes::ShapeRef.new(shape: FormName)
     FormsOutputMap.value = Shapes::ShapeRef.new(shape: FormEntryOutput)
+
+    GetAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
+    GetAssetFilterInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetAssetFilterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: FilterId, required: true, location: "uri", location_name: "identifier"))
+    GetAssetFilterInput.struct_class = Types::GetAssetFilterInput
+
+    GetAssetFilterOutput.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
+    GetAssetFilterOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: AssetFilterConfiguration, required: true, location_name: "configuration"))
+    GetAssetFilterOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    GetAssetFilterOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetAssetFilterOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    GetAssetFilterOutput.add_member(:effective_column_names, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "effectiveColumnNames"))
+    GetAssetFilterOutput.add_member(:effective_row_filter, Shapes::ShapeRef.new(shape: String, location_name: "effectiveRowFilter"))
+    GetAssetFilterOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    GetAssetFilterOutput.add_member(:id, Shapes::ShapeRef.new(shape: FilterId, required: true, location_name: "id"))
+    GetAssetFilterOutput.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
+    GetAssetFilterOutput.add_member(:status, Shapes::ShapeRef.new(shape: FilterStatus, location_name: "status"))
+    GetAssetFilterOutput.struct_class = Types::GetAssetFilterOutput
 
     GetAssetInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetAssetInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location: "uri", location_name: "identifier"))
@@ -1789,6 +1904,7 @@ module Aws::DataZone
     GetEnvironmentBlueprintConfigurationOutput.add_member(:enabled_regions, Shapes::ShapeRef.new(shape: EnabledRegionList, location_name: "enabledRegions"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:environment_blueprint_id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "environmentBlueprintId"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:manage_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "manageAccessRoleArn"))
+    GetEnvironmentBlueprintConfigurationOutput.add_member(:provisioning_configurations, Shapes::ShapeRef.new(shape: ProvisioningConfigurationList, location_name: "provisioningConfigurations"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "provisioningRoleArn"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:regional_parameters, Shapes::ShapeRef.new(shape: RegionalParameterMap, location_name: "regionalParameters"))
     GetEnvironmentBlueprintConfigurationOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
@@ -2154,6 +2270,14 @@ module Aws::DataZone
     GrantedEntityInput.add_member_subclass(:unknown, Types::GrantedEntityInput::Unknown)
     GrantedEntityInput.struct_class = Types::GrantedEntityInput
 
+    GreaterThanExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    GreaterThanExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    GreaterThanExpression.struct_class = Types::GreaterThanExpression
+
+    GreaterThanOrEqualToExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    GreaterThanOrEqualToExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    GreaterThanOrEqualToExpression.struct_class = Types::GreaterThanOrEqualToExpression
+
     GroupDetails.add_member(:group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupId"))
     GroupDetails.struct_class = Types::GroupDetails
 
@@ -2174,8 +2298,34 @@ module Aws::DataZone
 
     ImportList.member = Shapes::ShapeRef.new(shape: Import)
 
+    InExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    InExpression.add_member(:values, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "values"))
+    InExpression.struct_class = Types::InExpression
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    IsNotNullExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    IsNotNullExpression.struct_class = Types::IsNotNullExpression
+
+    IsNullExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    IsNullExpression.struct_class = Types::IsNullExpression
+
+    LakeFormationConfiguration.add_member(:location_registration_exclude_s3_locations, Shapes::ShapeRef.new(shape: S3LocationList, location_name: "locationRegistrationExcludeS3Locations"))
+    LakeFormationConfiguration.add_member(:location_registration_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "locationRegistrationRole"))
+    LakeFormationConfiguration.struct_class = Types::LakeFormationConfiguration
+
+    LessThanExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    LessThanExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    LessThanExpression.struct_class = Types::LessThanExpression
+
+    LessThanOrEqualToExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    LessThanOrEqualToExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    LessThanOrEqualToExpression.struct_class = Types::LessThanOrEqualToExpression
+
+    LikeExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    LikeExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    LikeExpression.struct_class = Types::LikeExpression
 
     LineageNodeReference.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "eventTimestamp"))
     LineageNodeReference.add_member(:id, Shapes::ShapeRef.new(shape: LineageNodeId, location_name: "id"))
@@ -2209,6 +2359,17 @@ module Aws::DataZone
     LineageNodeTypeItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     LineageNodeTypeItem.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     LineageNodeTypeItem.struct_class = Types::LineageNodeTypeItem
+
+    ListAssetFiltersInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
+    ListAssetFiltersInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    ListAssetFiltersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAssetFiltersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAssetFiltersInput.add_member(:status, Shapes::ShapeRef.new(shape: FilterStatus, location: "querystring", location_name: "status"))
+    ListAssetFiltersInput.struct_class = Types::ListAssetFiltersInput
+
+    ListAssetFiltersOutput.add_member(:items, Shapes::ShapeRef.new(shape: AssetFilters, required: true, location_name: "items"))
+    ListAssetFiltersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListAssetFiltersOutput.struct_class = Types::ListAssetFiltersOutput
 
     ListAssetRevisionsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     ListAssetRevisionsInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location: "uri", location_name: "identifier"))
@@ -2525,6 +2686,18 @@ module Aws::DataZone
     Model.add_member_subclass(:unknown, Types::Model::Unknown)
     Model.struct_class = Types::Model
 
+    NotEqualToExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    NotEqualToExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    NotEqualToExpression.struct_class = Types::NotEqualToExpression
+
+    NotInExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    NotInExpression.add_member(:values, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "values"))
+    NotInExpression.struct_class = Types::NotInExpression
+
+    NotLikeExpression.add_member(:column_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "columnName"))
+    NotLikeExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    NotLikeExpression.struct_class = Types::NotLikeExpression
+
     NotificationOutput.add_member(:action_link, Shapes::ShapeRef.new(shape: ActionLink, required: true, location_name: "actionLink"))
     NotificationOutput.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTimestamp"))
     NotificationOutput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainIdentifier"))
@@ -2597,6 +2770,14 @@ module Aws::DataZone
     ProjectSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     ProjectSummary.struct_class = Types::ProjectSummary
 
+    ProvisioningConfiguration.add_member(:lake_formation_configuration, Shapes::ShapeRef.new(shape: LakeFormationConfiguration, location_name: "lakeFormationConfiguration"))
+    ProvisioningConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProvisioningConfiguration.add_member_subclass(:lake_formation_configuration, Types::ProvisioningConfiguration::LakeFormationConfiguration)
+    ProvisioningConfiguration.add_member_subclass(:unknown, Types::ProvisioningConfiguration::Unknown)
+    ProvisioningConfiguration.struct_class = Types::ProvisioningConfiguration
+
+    ProvisioningConfigurationList.member = Shapes::ShapeRef.new(shape: ProvisioningConfiguration)
+
     ProvisioningProperties.add_member(:cloud_formation, Shapes::ShapeRef.new(shape: CloudFormationProperties, location_name: "cloudFormation"))
     ProvisioningProperties.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProvisioningProperties.add_member_subclass(:cloud_formation, Types::ProvisioningProperties::CloudFormation)
@@ -2607,6 +2788,7 @@ module Aws::DataZone
     PutEnvironmentBlueprintConfigurationInput.add_member(:enabled_regions, Shapes::ShapeRef.new(shape: EnabledRegionList, required: true, location_name: "enabledRegions"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:environment_blueprint_identifier, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location: "uri", location_name: "environmentBlueprintIdentifier"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:manage_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "manageAccessRoleArn"))
+    PutEnvironmentBlueprintConfigurationInput.add_member(:provisioning_configurations, Shapes::ShapeRef.new(shape: ProvisioningConfigurationList, location_name: "provisioningConfigurations"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "provisioningRoleArn"))
     PutEnvironmentBlueprintConfigurationInput.add_member(:regional_parameters, Shapes::ShapeRef.new(shape: RegionalParameterMap, location_name: "regionalParameters"))
     PutEnvironmentBlueprintConfigurationInput.struct_class = Types::PutEnvironmentBlueprintConfigurationInput
@@ -2616,6 +2798,7 @@ module Aws::DataZone
     PutEnvironmentBlueprintConfigurationOutput.add_member(:enabled_regions, Shapes::ShapeRef.new(shape: EnabledRegionList, location_name: "enabledRegions"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:environment_blueprint_id, Shapes::ShapeRef.new(shape: EnvironmentBlueprintId, required: true, location_name: "environmentBlueprintId"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:manage_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "manageAccessRoleArn"))
+    PutEnvironmentBlueprintConfigurationOutput.add_member(:provisioning_configurations, Shapes::ShapeRef.new(shape: ProvisioningConfigurationList, location_name: "provisioningConfigurations"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:provisioning_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "provisioningRoleArn"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:regional_parameters, Shapes::ShapeRef.new(shape: RegionalParameterMap, location_name: "regionalParameters"))
     PutEnvironmentBlueprintConfigurationOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
@@ -2746,12 +2929,58 @@ module Aws::DataZone
     RevokeSubscriptionOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     RevokeSubscriptionOutput.struct_class = Types::RevokeSubscriptionOutput
 
+    RowFilter.add_member(:and, Shapes::ShapeRef.new(shape: RowFilterList, location_name: "and"))
+    RowFilter.add_member(:expression, Shapes::ShapeRef.new(shape: RowFilterExpression, location_name: "expression"))
+    RowFilter.add_member(:or, Shapes::ShapeRef.new(shape: RowFilterList, location_name: "or"))
+    RowFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RowFilter.add_member_subclass(:and, Types::RowFilter::And)
+    RowFilter.add_member_subclass(:expression, Types::RowFilter::Expression)
+    RowFilter.add_member_subclass(:or, Types::RowFilter::Or)
+    RowFilter.add_member_subclass(:unknown, Types::RowFilter::Unknown)
+    RowFilter.struct_class = Types::RowFilter
+
+    RowFilterConfiguration.add_member(:row_filter, Shapes::ShapeRef.new(shape: RowFilter, required: true, location_name: "rowFilter"))
+    RowFilterConfiguration.add_member(:sensitive, Shapes::ShapeRef.new(shape: Boolean, location_name: "sensitive"))
+    RowFilterConfiguration.struct_class = Types::RowFilterConfiguration
+
+    RowFilterExpression.add_member(:equal_to, Shapes::ShapeRef.new(shape: EqualToExpression, location_name: "equalTo"))
+    RowFilterExpression.add_member(:greater_than, Shapes::ShapeRef.new(shape: GreaterThanExpression, location_name: "greaterThan"))
+    RowFilterExpression.add_member(:greater_than_or_equal_to, Shapes::ShapeRef.new(shape: GreaterThanOrEqualToExpression, location_name: "greaterThanOrEqualTo"))
+    RowFilterExpression.add_member(:in, Shapes::ShapeRef.new(shape: InExpression, location_name: "in"))
+    RowFilterExpression.add_member(:is_not_null, Shapes::ShapeRef.new(shape: IsNotNullExpression, location_name: "isNotNull"))
+    RowFilterExpression.add_member(:is_null, Shapes::ShapeRef.new(shape: IsNullExpression, location_name: "isNull"))
+    RowFilterExpression.add_member(:less_than, Shapes::ShapeRef.new(shape: LessThanExpression, location_name: "lessThan"))
+    RowFilterExpression.add_member(:less_than_or_equal_to, Shapes::ShapeRef.new(shape: LessThanOrEqualToExpression, location_name: "lessThanOrEqualTo"))
+    RowFilterExpression.add_member(:like, Shapes::ShapeRef.new(shape: LikeExpression, location_name: "like"))
+    RowFilterExpression.add_member(:not_equal_to, Shapes::ShapeRef.new(shape: NotEqualToExpression, location_name: "notEqualTo"))
+    RowFilterExpression.add_member(:not_in, Shapes::ShapeRef.new(shape: NotInExpression, location_name: "notIn"))
+    RowFilterExpression.add_member(:not_like, Shapes::ShapeRef.new(shape: NotLikeExpression, location_name: "notLike"))
+    RowFilterExpression.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RowFilterExpression.add_member_subclass(:equal_to, Types::RowFilterExpression::EqualTo)
+    RowFilterExpression.add_member_subclass(:greater_than, Types::RowFilterExpression::GreaterThan)
+    RowFilterExpression.add_member_subclass(:greater_than_or_equal_to, Types::RowFilterExpression::GreaterThanOrEqualTo)
+    RowFilterExpression.add_member_subclass(:in, Types::RowFilterExpression::In)
+    RowFilterExpression.add_member_subclass(:is_not_null, Types::RowFilterExpression::IsNotNull)
+    RowFilterExpression.add_member_subclass(:is_null, Types::RowFilterExpression::IsNull)
+    RowFilterExpression.add_member_subclass(:less_than, Types::RowFilterExpression::LessThan)
+    RowFilterExpression.add_member_subclass(:less_than_or_equal_to, Types::RowFilterExpression::LessThanOrEqualTo)
+    RowFilterExpression.add_member_subclass(:like, Types::RowFilterExpression::Like)
+    RowFilterExpression.add_member_subclass(:not_equal_to, Types::RowFilterExpression::NotEqualTo)
+    RowFilterExpression.add_member_subclass(:not_in, Types::RowFilterExpression::NotIn)
+    RowFilterExpression.add_member_subclass(:not_like, Types::RowFilterExpression::NotLike)
+    RowFilterExpression.add_member_subclass(:unknown, Types::RowFilterExpression::Unknown)
+    RowFilterExpression.struct_class = Types::RowFilterExpression
+
+    RowFilterList.member = Shapes::ShapeRef.new(shape: RowFilter)
+
     RunStatisticsForAssets.add_member(:added, Shapes::ShapeRef.new(shape: Integer, location_name: "added"))
     RunStatisticsForAssets.add_member(:failed, Shapes::ShapeRef.new(shape: Integer, location_name: "failed"))
     RunStatisticsForAssets.add_member(:skipped, Shapes::ShapeRef.new(shape: Integer, location_name: "skipped"))
     RunStatisticsForAssets.add_member(:unchanged, Shapes::ShapeRef.new(shape: Integer, location_name: "unchanged"))
     RunStatisticsForAssets.add_member(:updated, Shapes::ShapeRef.new(shape: Integer, location_name: "updated"))
     RunStatisticsForAssets.struct_class = Types::RunStatisticsForAssets
+
+    S3LocationList.member = Shapes::ShapeRef.new(shape: S3Location)
 
     ScheduleConfiguration.add_member(:schedule, Shapes::ShapeRef.new(shape: CronString, location_name: "schedule"))
     ScheduleConfiguration.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
@@ -2935,6 +3164,8 @@ module Aws::DataZone
     StartMetadataGenerationRunOutput.add_member(:status, Shapes::ShapeRef.new(shape: MetadataGenerationRunStatus, location_name: "status"))
     StartMetadataGenerationRunOutput.add_member(:type, Shapes::ShapeRef.new(shape: MetadataGenerationRunType, location_name: "type"))
     StartMetadataGenerationRunOutput.struct_class = Types::StartMetadataGenerationRunOutput
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SubscribedAsset.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
     SubscribedAsset.add_member(:asset_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "assetRevision"))
@@ -3134,6 +3365,27 @@ module Aws::DataZone
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
+    UpdateAssetFilterInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AssetFilterConfiguration, location_name: "configuration"))
+    UpdateAssetFilterInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAssetFilterInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    UpdateAssetFilterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: FilterId, required: true, location: "uri", location_name: "identifier"))
+    UpdateAssetFilterInput.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    UpdateAssetFilterInput.struct_class = Types::UpdateAssetFilterInput
+
+    UpdateAssetFilterOutput.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
+    UpdateAssetFilterOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: AssetFilterConfiguration, required: true, location_name: "configuration"))
+    UpdateAssetFilterOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    UpdateAssetFilterOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateAssetFilterOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    UpdateAssetFilterOutput.add_member(:effective_column_names, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "effectiveColumnNames"))
+    UpdateAssetFilterOutput.add_member(:effective_row_filter, Shapes::ShapeRef.new(shape: String, location_name: "effectiveRowFilter"))
+    UpdateAssetFilterOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    UpdateAssetFilterOutput.add_member(:id, Shapes::ShapeRef.new(shape: FilterId, required: true, location_name: "id"))
+    UpdateAssetFilterOutput.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
+    UpdateAssetFilterOutput.add_member(:status, Shapes::ShapeRef.new(shape: FilterStatus, location_name: "status"))
+    UpdateAssetFilterOutput.struct_class = Types::UpdateAssetFilterOutput
 
     UpdateDataSourceInput.add_member(:asset_forms_input, Shapes::ShapeRef.new(shape: FormInputList, location_name: "assetFormsInput"))
     UpdateDataSourceInput.add_member(:configuration, Shapes::ShapeRef.new(shape: DataSourceConfigurationInput, location_name: "configuration"))
@@ -3540,6 +3792,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:create_asset_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAssetFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters"
+        o.input = Shapes::ShapeRef.new(shape: CreateAssetFilterInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateAssetFilterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:create_asset_revision, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAssetRevision"
         o.http_method = "POST"
@@ -3827,6 +4095,21 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:delete_asset_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAssetFilter"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAssetFilterInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:delete_asset_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAssetType"
         o.http_method = "DELETE"
@@ -4098,6 +4381,20 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/assets/{identifier}"
         o.input = Shapes::ShapeRef.new(shape: GetAssetInput)
         o.output = Shapes::ShapeRef.new(shape: GetAssetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:get_asset_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAssetFilter"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetAssetFilterInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAssetFilterOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -4446,6 +4743,26 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:list_asset_filters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssetFilters"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters"
+        o.input = Shapes::ShapeRef.new(shape: ListAssetFiltersInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAssetFiltersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_asset_revisions, Seahorse::Model::Operation.new.tap do |o|
@@ -5111,6 +5428,21 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_asset_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAssetFilter"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAssetFilterInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAssetFilterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 

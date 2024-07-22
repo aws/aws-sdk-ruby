@@ -362,7 +362,7 @@ module Aws::RedshiftServerless
     #   scheduler.redshift.amazonaws.com) to assume permissions on your
     #   behalf. For more information about the IAM role to use with the
     #   Amazon Redshift scheduler, see [Using Identity-Based Policies for
-    #   Amazon Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #   Amazon Redshift][1] in the Amazon Redshift Management Guide
     #
     #
     #
@@ -645,6 +645,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC instead of over the internet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type that the workgroup supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #   @return [String]
+    #
     # @!attribute [rw] max_capacity
     #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
     #   to serve queries. The max capacity is specified in RPUs.
@@ -686,6 +691,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :ip_address_type,
       :max_capacity,
       :namespace_name,
       :port,
@@ -1408,6 +1414,21 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # There are no subnets in your VPC with associated IPv6 CIDR blocks. To
+    # use dual-stack mode, associate an IPv6 CIDR block with each subnet in
+    # your VPC.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/Ipv6CidrBlockNotFoundException AWS API Documentation
+    #
+    class Ipv6CidrBlockNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] custom_domain_certificate_arn
     #   The custom domain name’s certificate Amazon resource name (ARN).
     #   @return [String]
@@ -2057,6 +2078,10 @@ module Aws::RedshiftServerless
     #   The availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] ipv6_address
+    #   The IPv6 address of the network interface within the subnet.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   The unique identifier of the network interface.
     #   @return [String]
@@ -2073,6 +2098,7 @@ module Aws::RedshiftServerless
     #
     class NetworkInterface < Struct.new(
       :availability_zone,
+      :ipv6_address,
       :network_interface_id,
       :private_ip_address,
       :subnet_id)
@@ -2544,7 +2570,7 @@ module Aws::RedshiftServerless
     #   scheduler.redshift.amazonaws.com) to assume permissions on your
     #   behalf. For more information about the IAM role to use with the
     #   Amazon Redshift scheduler, see [Using Identity-Based Policies for
-    #   Amazon Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #   Amazon Redshift][1] in the Amazon Redshift Management Guide
     #
     #
     #
@@ -3206,7 +3232,7 @@ module Aws::RedshiftServerless
     #   scheduler.redshift.amazonaws.com) to assume permissions on your
     #   behalf. For more information about the IAM role to use with the
     #   Amazon Redshift scheduler, see [Using Identity-Based Policies for
-    #   Amazon Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #   Amazon Redshift][1] in the Amazon Redshift Management Guide
     #
     #
     #
@@ -3403,6 +3429,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type that the workgroup supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #   @return [String]
+    #
     # @!attribute [rw] max_capacity
     #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
     #   to serve queries. The max capacity is specified in RPUs.
@@ -3437,6 +3468,7 @@ module Aws::RedshiftServerless
       :base_capacity,
       :config_parameters,
       :enhanced_vpc_routing,
+      :ip_address_type,
       :max_capacity,
       :port,
       :publicly_accessible,
@@ -3624,6 +3656,11 @@ module Aws::RedshiftServerless
     #   route traffic through your VPC.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type that the workgroup supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #   @return [String]
+    #
     # @!attribute [rw] max_capacity
     #   The maximum data-warehouse capacity Amazon Redshift Serverless uses
     #   to serve queries. The max capacity is specified in RPUs.
@@ -3699,6 +3736,7 @@ module Aws::RedshiftServerless
       :custom_domain_name,
       :endpoint,
       :enhanced_vpc_routing,
+      :ip_address_type,
       :max_capacity,
       :namespace_name,
       :patch_version,

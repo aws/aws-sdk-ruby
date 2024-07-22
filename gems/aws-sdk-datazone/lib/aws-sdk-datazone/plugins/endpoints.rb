@@ -70,6 +70,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::CancelSubscription.build(context)
           when :create_asset
             Aws::DataZone::Endpoints::CreateAsset.build(context)
+          when :create_asset_filter
+            Aws::DataZone::Endpoints::CreateAssetFilter.build(context)
           when :create_asset_revision
             Aws::DataZone::Endpoints::CreateAssetRevision.build(context)
           when :create_asset_type
@@ -108,6 +110,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::CreateUserProfile.build(context)
           when :delete_asset
             Aws::DataZone::Endpoints::DeleteAsset.build(context)
+          when :delete_asset_filter
+            Aws::DataZone::Endpoints::DeleteAssetFilter.build(context)
           when :delete_asset_type
             Aws::DataZone::Endpoints::DeleteAssetType.build(context)
           when :delete_data_source
@@ -146,6 +150,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DisassociateEnvironmentRole.build(context)
           when :get_asset
             Aws::DataZone::Endpoints::GetAsset.build(context)
+          when :get_asset_filter
+            Aws::DataZone::Endpoints::GetAssetFilter.build(context)
           when :get_asset_type
             Aws::DataZone::Endpoints::GetAssetType.build(context)
           when :get_data_source
@@ -194,6 +200,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetTimeSeriesDataPoint.build(context)
           when :get_user_profile
             Aws::DataZone::Endpoints::GetUserProfile.build(context)
+          when :list_asset_filters
+            Aws::DataZone::Endpoints::ListAssetFilters.build(context)
           when :list_asset_revisions
             Aws::DataZone::Endpoints::ListAssetRevisions.build(context)
           when :list_data_source_run_activities
@@ -266,6 +274,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::DataZone::Endpoints::UntagResource.build(context)
+          when :update_asset_filter
+            Aws::DataZone::Endpoints::UpdateAssetFilter.build(context)
           when :update_data_source
             Aws::DataZone::Endpoints::UpdateDataSource.build(context)
           when :update_domain

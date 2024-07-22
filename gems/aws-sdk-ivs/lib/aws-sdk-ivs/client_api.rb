@@ -199,10 +199,10 @@ module Aws::IVS
     AccessDeniedException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AudioConfiguration.add_member(:channels, Shapes::ShapeRef.new(shape: Integer, location_name: "channels"))
     AudioConfiguration.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "codec"))
-    AudioConfiguration.add_member(:sample_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate"))
     AudioConfiguration.add_member(:target_bitrate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate"))
+    AudioConfiguration.add_member(:sample_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate"))
+    AudioConfiguration.add_member(:channels, Shapes::ShapeRef.new(shape: Integer, location_name: "channels"))
     AudioConfiguration.struct_class = Types::AudioConfiguration
 
     BatchError.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
@@ -222,14 +222,14 @@ module Aws::IVS
     BatchGetStreamKeyRequest.add_member(:arns, Shapes::ShapeRef.new(shape: StreamKeyArnList, required: true, location_name: "arns"))
     BatchGetStreamKeyRequest.struct_class = Types::BatchGetStreamKeyRequest
 
-    BatchGetStreamKeyResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchErrors, location_name: "errors"))
     BatchGetStreamKeyResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeys, location_name: "streamKeys"))
+    BatchGetStreamKeyResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchErrors, location_name: "errors"))
     BatchGetStreamKeyResponse.struct_class = Types::BatchGetStreamKeyResponse
 
     BatchStartViewerSessionRevocationError.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
+    BatchStartViewerSessionRevocationError.add_member(:viewer_id, Shapes::ShapeRef.new(shape: ViewerId, required: true, location_name: "viewerId"))
     BatchStartViewerSessionRevocationError.add_member(:code, Shapes::ShapeRef.new(shape: errorCode, location_name: "code"))
     BatchStartViewerSessionRevocationError.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
-    BatchStartViewerSessionRevocationError.add_member(:viewer_id, Shapes::ShapeRef.new(shape: ViewerId, required: true, location_name: "viewerId"))
     BatchStartViewerSessionRevocationError.struct_class = Types::BatchStartViewerSessionRevocationError
 
     BatchStartViewerSessionRevocationErrors.member = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationError)
@@ -248,18 +248,18 @@ module Aws::IVS
     BatchStartViewerSessionRevocationViewerSessionList.member = Shapes::ShapeRef.new(shape: BatchStartViewerSessionRevocationViewerSession)
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
-    Channel.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
-    Channel.add_member(:ingest_endpoint, Shapes::ShapeRef.new(shape: IngestEndpoint, location_name: "ingestEndpoint"))
-    Channel.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
-    Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    Channel.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
-    Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
-    Channel.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
-    Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
-    Channel.add_member(:srt, Shapes::ShapeRef.new(shape: Srt, location_name: "srt"))
-    Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     Channel.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
+    Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    Channel.add_member(:ingest_endpoint, Shapes::ShapeRef.new(shape: IngestEndpoint, location_name: "ingestEndpoint"))
+    Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
+    Channel.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
+    Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Channel.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
+    Channel.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
+    Channel.add_member(:srt, Shapes::ShapeRef.new(shape: Srt, location_name: "srt"))
+    Channel.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     Channel.struct_class = Types::Channel
 
     ChannelArnList.member = Shapes::ShapeRef.new(shape: ChannelArn)
@@ -270,15 +270,15 @@ module Aws::IVS
     ChannelNotBroadcasting.struct_class = Types::ChannelNotBroadcasting
 
     ChannelSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
-    ChannelSummary.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
-    ChannelSummary.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
-    ChannelSummary.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    ChannelSummary.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
-    ChannelSummary.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
+    ChannelSummary.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    ChannelSummary.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
     ChannelSummary.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ChannelSummary.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
     ChannelSummary.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
+    ChannelSummary.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
+    ChannelSummary.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
@@ -286,15 +286,15 @@ module Aws::IVS
     ConflictException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
-    CreateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
-    CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    CreateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
-    CreateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
+    CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    CreateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
+    CreateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
     CreateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
+    CreateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
+    CreateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
+    CreateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -311,12 +311,12 @@ module Aws::IVS
     CreatePlaybackRestrictionPolicyResponse.add_member(:playback_restriction_policy, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicy, location_name: "playbackRestrictionPolicy"))
     CreatePlaybackRestrictionPolicyResponse.struct_class = Types::CreatePlaybackRestrictionPolicyResponse
 
-    CreateRecordingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateRecordingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
-    CreateRecordingConfigurationRequest.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
-    CreateRecordingConfigurationRequest.add_member(:rendition_configuration, Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
+    CreateRecordingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateRecordingConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateRecordingConfigurationRequest.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
+    CreateRecordingConfigurationRequest.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
+    CreateRecordingConfigurationRequest.add_member(:rendition_configuration, Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
     CreateRecordingConfigurationRequest.struct_class = Types::CreateRecordingConfigurationRequest
 
     CreateRecordingConfigurationResponse.add_member(:recording_configuration, Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
@@ -392,81 +392,81 @@ module Aws::IVS
     GetStreamSessionResponse.add_member(:stream_session, Shapes::ShapeRef.new(shape: StreamSession, location_name: "streamSession"))
     GetStreamSessionResponse.struct_class = Types::GetStreamSessionResponse
 
-    ImportPlaybackKeyPairRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
     ImportPlaybackKeyPairRequest.add_member(:public_key_material, Shapes::ShapeRef.new(shape: PlaybackPublicKeyMaterial, required: true, location_name: "publicKeyMaterial"))
+    ImportPlaybackKeyPairRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
     ImportPlaybackKeyPairRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ImportPlaybackKeyPairRequest.struct_class = Types::ImportPlaybackKeyPairRequest
 
     ImportPlaybackKeyPairResponse.add_member(:key_pair, Shapes::ShapeRef.new(shape: PlaybackKeyPair, location_name: "keyPair"))
     ImportPlaybackKeyPairResponse.struct_class = Types::ImportPlaybackKeyPairResponse
 
-    IngestConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfiguration, location_name: "audio"))
     IngestConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfiguration, location_name: "video"))
+    IngestConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfiguration, location_name: "audio"))
     IngestConfiguration.struct_class = Types::IngestConfiguration
 
     InternalServerException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     InternalServerException.struct_class = Types::InternalServerException
 
     ListChannelsRequest.add_member(:filter_by_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "filterByName"))
-    ListChannelsRequest.add_member(:filter_by_playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "filterByPlaybackRestrictionPolicyArn"))
     ListChannelsRequest.add_member(:filter_by_recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "filterByRecordingConfigurationArn"))
-    ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxChannelResults, location_name: "maxResults"))
+    ListChannelsRequest.add_member(:filter_by_playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "filterByPlaybackRestrictionPolicyArn"))
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxChannelResults, location_name: "maxResults"))
     ListChannelsRequest.struct_class = Types::ListChannelsRequest
 
     ListChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelList, required: true, location_name: "channels"))
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
 
-    ListPlaybackKeyPairsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPlaybackKeyPairResults, location_name: "maxResults"))
     ListPlaybackKeyPairsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPlaybackKeyPairsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPlaybackKeyPairResults, location_name: "maxResults"))
     ListPlaybackKeyPairsRequest.struct_class = Types::ListPlaybackKeyPairsRequest
 
     ListPlaybackKeyPairsResponse.add_member(:key_pairs, Shapes::ShapeRef.new(shape: PlaybackKeyPairList, required: true, location_name: "keyPairs"))
     ListPlaybackKeyPairsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackKeyPairsResponse.struct_class = Types::ListPlaybackKeyPairsResponse
 
-    ListPlaybackRestrictionPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPlaybackRestrictionPolicyResults, location_name: "maxResults"))
     ListPlaybackRestrictionPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPlaybackRestrictionPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPlaybackRestrictionPolicyResults, location_name: "maxResults"))
     ListPlaybackRestrictionPoliciesRequest.struct_class = Types::ListPlaybackRestrictionPoliciesRequest
 
-    ListPlaybackRestrictionPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackRestrictionPoliciesResponse.add_member(:playback_restriction_policies, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyList, required: true, location_name: "playbackRestrictionPolicies"))
+    ListPlaybackRestrictionPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackRestrictionPoliciesResponse.struct_class = Types::ListPlaybackRestrictionPoliciesResponse
 
-    ListRecordingConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxRecordingConfigurationResults, location_name: "maxResults"))
     ListRecordingConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecordingConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxRecordingConfigurationResults, location_name: "maxResults"))
     ListRecordingConfigurationsRequest.struct_class = Types::ListRecordingConfigurationsRequest
 
-    ListRecordingConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRecordingConfigurationsResponse.add_member(:recording_configurations, Shapes::ShapeRef.new(shape: RecordingConfigurationList, required: true, location_name: "recordingConfigurations"))
+    ListRecordingConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRecordingConfigurationsResponse.struct_class = Types::ListRecordingConfigurationsResponse
 
     ListStreamKeysRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
-    ListStreamKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamKeyResults, location_name: "maxResults"))
     ListStreamKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamKeyResults, location_name: "maxResults"))
     ListStreamKeysRequest.struct_class = Types::ListStreamKeysRequest
 
-    ListStreamKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamKeysResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeyList, required: true, location_name: "streamKeys"))
+    ListStreamKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamKeysResponse.struct_class = Types::ListStreamKeysResponse
 
     ListStreamSessionsRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
-    ListStreamSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
     ListStreamSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
     ListStreamSessionsRequest.struct_class = Types::ListStreamSessionsRequest
 
-    ListStreamSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamSessionsResponse.add_member(:stream_sessions, Shapes::ShapeRef.new(shape: StreamSessionList, required: true, location_name: "streamSessions"))
+    ListStreamSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamSessionsResponse.struct_class = Types::ListStreamSessionsResponse
 
     ListStreamsRequest.add_member(:filter_by, Shapes::ShapeRef.new(shape: StreamFilters, location_name: "filterBy"))
-    ListStreamsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
     ListStreamsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
     ListStreamsRequest.struct_class = Types::ListStreamsRequest
 
-    ListStreamsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamsResponse.add_member(:streams, Shapes::ShapeRef.new(shape: StreamList, required: true, location_name: "streams"))
+    ListStreamsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamsResponse.struct_class = Types::ListStreamsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -479,8 +479,8 @@ module Aws::IVS
     PendingVerification.struct_class = Types::PendingVerification
 
     PlaybackKeyPair.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, location_name: "arn"))
-    PlaybackKeyPair.add_member(:fingerprint, Shapes::ShapeRef.new(shape: PlaybackKeyPairFingerprint, location_name: "fingerprint"))
     PlaybackKeyPair.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
+    PlaybackKeyPair.add_member(:fingerprint, Shapes::ShapeRef.new(shape: PlaybackKeyPairFingerprint, location_name: "fingerprint"))
     PlaybackKeyPair.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PlaybackKeyPair.struct_class = Types::PlaybackKeyPair
 
@@ -491,9 +491,9 @@ module Aws::IVS
     PlaybackKeyPairSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PlaybackKeyPairSummary.struct_class = Types::PlaybackKeyPairSummary
 
+    PlaybackRestrictionPolicy.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
     PlaybackRestrictionPolicy.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, required: true, location_name: "allowedCountries"))
     PlaybackRestrictionPolicy.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, required: true, location_name: "allowedOrigins"))
-    PlaybackRestrictionPolicy.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
     PlaybackRestrictionPolicy.add_member(:enable_strict_origin_enforcement, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
     PlaybackRestrictionPolicy.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
     PlaybackRestrictionPolicy.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -505,9 +505,9 @@ module Aws::IVS
 
     PlaybackRestrictionPolicyList.member = Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicySummary)
 
+    PlaybackRestrictionPolicySummary.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
     PlaybackRestrictionPolicySummary.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, required: true, location_name: "allowedCountries"))
     PlaybackRestrictionPolicySummary.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, required: true, location_name: "allowedOrigins"))
-    PlaybackRestrictionPolicySummary.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
     PlaybackRestrictionPolicySummary.add_member(:enable_strict_origin_enforcement, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
     PlaybackRestrictionPolicySummary.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
     PlaybackRestrictionPolicySummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -518,20 +518,20 @@ module Aws::IVS
     PutMetadataRequest.struct_class = Types::PutMetadataRequest
 
     RecordingConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: RecordingConfigurationArn, required: true, location_name: "arn"))
-    RecordingConfiguration.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     RecordingConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
-    RecordingConfiguration.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
-    RecordingConfiguration.add_member(:rendition_configuration, Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
+    RecordingConfiguration.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     RecordingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RecordingConfiguration.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
+    RecordingConfiguration.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: RecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
+    RecordingConfiguration.add_member(:rendition_configuration, Shapes::ShapeRef.new(shape: RenditionConfiguration, location_name: "renditionConfiguration"))
     RecordingConfiguration.struct_class = Types::RecordingConfiguration
 
     RecordingConfigurationList.member = Shapes::ShapeRef.new(shape: RecordingConfigurationSummary)
 
     RecordingConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RecordingConfigurationArn, required: true, location_name: "arn"))
-    RecordingConfigurationSummary.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     RecordingConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
+    RecordingConfigurationSummary.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     RecordingConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RecordingConfigurationSummary.struct_class = Types::RecordingConfigurationSummary
@@ -568,17 +568,17 @@ module Aws::IVS
     StopStreamResponse.struct_class = Types::StopStreamResponse
 
     Stream.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
-    Stream.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
+    Stream.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
     Stream.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
     Stream.add_member(:start_time, Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
     Stream.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
-    Stream.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    Stream.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
     Stream.add_member(:viewer_count, Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount"))
     Stream.struct_class = Types::Stream
 
-    StreamEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: Time, location_name: "eventTime"))
     StreamEvent.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     StreamEvent.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    StreamEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: Time, location_name: "eventTime"))
     StreamEvent.struct_class = Types::StreamEvent
 
     StreamEvents.member = Shapes::ShapeRef.new(shape: StreamEvent)
@@ -587,9 +587,9 @@ module Aws::IVS
     StreamFilters.struct_class = Types::StreamFilters
 
     StreamKey.add_member(:arn, Shapes::ShapeRef.new(shape: StreamKeyArn, location_name: "arn"))
+    StreamKey.add_member(:value, Shapes::ShapeRef.new(shape: StreamKeyValue, location_name: "value"))
     StreamKey.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
     StreamKey.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    StreamKey.add_member(:value, Shapes::ShapeRef.new(shape: StreamKeyValue, location_name: "value"))
     StreamKey.struct_class = Types::StreamKey
 
     StreamKeyArnList.member = Shapes::ShapeRef.new(shape: StreamKeyArn)
@@ -605,29 +605,29 @@ module Aws::IVS
 
     StreamList.member = Shapes::ShapeRef.new(shape: StreamSummary)
 
-    StreamSession.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    StreamSession.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    StreamSession.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
     StreamSession.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
+    StreamSession.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     StreamSession.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
     StreamSession.add_member(:recording_configuration, Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
-    StreamSession.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
-    StreamSession.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
     StreamSession.add_member(:truncated_events, Shapes::ShapeRef.new(shape: StreamEvents, location_name: "truncatedEvents"))
     StreamSession.struct_class = Types::StreamSession
 
     StreamSessionList.member = Shapes::ShapeRef.new(shape: StreamSessionSummary)
 
+    StreamSessionSummary.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    StreamSessionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
     StreamSessionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     StreamSessionSummary.add_member(:has_error_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "hasErrorEvent"))
-    StreamSessionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
-    StreamSessionSummary.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
     StreamSessionSummary.struct_class = Types::StreamSessionSummary
 
     StreamSummary.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
-    StreamSummary.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
-    StreamSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
-    StreamSummary.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
     StreamSummary.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    StreamSummary.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
+    StreamSummary.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
     StreamSummary.add_member(:viewer_count, Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount"))
+    StreamSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
     StreamSummary.struct_class = Types::StreamSummary
 
     StreamUnavailable.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
@@ -648,9 +648,9 @@ module Aws::IVS
     ThrottlingException.struct_class = Types::ThrottlingException
 
     ThumbnailConfiguration.add_member(:recording_mode, Shapes::ShapeRef.new(shape: RecordingMode, location_name: "recordingMode"))
+    ThumbnailConfiguration.add_member(:target_interval_seconds, Shapes::ShapeRef.new(shape: TargetIntervalSeconds, location_name: "targetIntervalSeconds"))
     ThumbnailConfiguration.add_member(:resolution, Shapes::ShapeRef.new(shape: ThumbnailConfigurationResolution, location_name: "resolution"))
     ThumbnailConfiguration.add_member(:storage, Shapes::ShapeRef.new(shape: ThumbnailConfigurationStorageList, location_name: "storage"))
-    ThumbnailConfiguration.add_member(:target_interval_seconds, Shapes::ShapeRef.new(shape: TargetIntervalSeconds, location_name: "targetIntervalSeconds"))
     ThumbnailConfiguration.struct_class = Types::ThumbnailConfiguration
 
     ThumbnailConfigurationStorageList.member = Shapes::ShapeRef.new(shape: ThumbnailConfigurationStorage)
@@ -662,22 +662,22 @@ module Aws::IVS
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateChannelRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "arn"))
-    UpdateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
-    UpdateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
-    UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    UpdateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
-    UpdateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
-    UpdateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     UpdateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
+    UpdateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
+    UpdateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    UpdateChannelRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureIngest"))
+    UpdateChannelRequest.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
+    UpdateChannelRequest.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
+    UpdatePlaybackRestrictionPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
     UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
     UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
-    UpdatePlaybackRestrictionPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
     UpdatePlaybackRestrictionPolicyRequest.add_member(:enable_strict_origin_enforcement, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyEnableStrictOriginEnforcement, location_name: "enableStrictOriginEnforcement"))
     UpdatePlaybackRestrictionPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyName, location_name: "name"))
     UpdatePlaybackRestrictionPolicyRequest.struct_class = Types::UpdatePlaybackRestrictionPolicyRequest
@@ -688,8 +688,8 @@ module Aws::IVS
     ValidationException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ValidationException.struct_class = Types::ValidationException
 
-    VideoConfiguration.add_member(:avc_level, Shapes::ShapeRef.new(shape: String, location_name: "avcLevel"))
     VideoConfiguration.add_member(:avc_profile, Shapes::ShapeRef.new(shape: String, location_name: "avcProfile"))
+    VideoConfiguration.add_member(:avc_level, Shapes::ShapeRef.new(shape: String, location_name: "avcLevel"))
     VideoConfiguration.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "codec"))
     VideoConfiguration.add_member(:encoder, Shapes::ShapeRef.new(shape: String, location_name: "encoder"))
     VideoConfiguration.add_member(:target_bitrate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate"))
@@ -706,9 +706,10 @@ module Aws::IVS
 
       api.metadata = {
         "apiVersion" => "2020-07-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ivs",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon IVS",
         "serviceFullName" => "Amazon Interactive Video Service",
         "serviceId" => "ivs",

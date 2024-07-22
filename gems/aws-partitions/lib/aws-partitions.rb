@@ -495,7 +495,6 @@ module Aws
             'MigrationHubOrchestrator' => 'migrationhub-orchestrator',
             'MigrationHubRefactorSpaces' => 'refactor-spaces',
             'MigrationHubStrategyRecommendations' => 'migrationhub-strategy',
-            'Mobile' => 'mobile',
             'Neptune' => 'rds',
             'NeptuneGraph' => 'neptune-graph',
             'Neptunedata' => 'neptune-db',

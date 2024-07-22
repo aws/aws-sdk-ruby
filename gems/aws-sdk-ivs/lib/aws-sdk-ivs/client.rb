@@ -445,20 +445,20 @@ module Aws::IVS
     #
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
-    #   resp.channels[0].authorized #=> Boolean
-    #   resp.channels[0].ingest_endpoint #=> String
-    #   resp.channels[0].insecure_ingest #=> Boolean
-    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
-    #   resp.channels[0].playback_restriction_policy_arn #=> String
-    #   resp.channels[0].playback_url #=> String
-    #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.channels[0].recording_configuration_arn #=> String
-    #   resp.channels[0].srt.endpoint #=> String
-    #   resp.channels[0].srt.passphrase #=> String
+    #   resp.channels[0].ingest_endpoint #=> String
+    #   resp.channels[0].playback_url #=> String
+    #   resp.channels[0].authorized #=> Boolean
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
-    #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
+    #   resp.channels[0].insecure_ingest #=> Boolean
+    #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channels[0].srt.endpoint #=> String
+    #   resp.channels[0].srt.passphrase #=> String
+    #   resp.channels[0].playback_restriction_policy_arn #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -480,8 +480,8 @@ module Aws::IVS
     #
     # @return [Types::BatchGetStreamKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::BatchGetStreamKeyResponse#errors #errors} => Array&lt;Types::BatchError&gt;
     #   * {Types::BatchGetStreamKeyResponse#stream_keys #stream_keys} => Array&lt;Types::StreamKey&gt;
+    #   * {Types::BatchGetStreamKeyResponse#errors #errors} => Array&lt;Types::BatchError&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -491,16 +491,16 @@ module Aws::IVS
     #
     # @example Response structure
     #
+    #   resp.stream_keys #=> Array
+    #   resp.stream_keys[0].arn #=> String
+    #   resp.stream_keys[0].value #=> String
+    #   resp.stream_keys[0].channel_arn #=> String
+    #   resp.stream_keys[0].tags #=> Hash
+    #   resp.stream_keys[0].tags["TagKey"] #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
     #   resp.errors[0].message #=> String
-    #   resp.stream_keys #=> Array
-    #   resp.stream_keys[0].arn #=> String
-    #   resp.stream_keys[0].channel_arn #=> String
-    #   resp.stream_keys[0].tags #=> Hash
-    #   resp.stream_keys[0].tags["TagKey"] #=> String
-    #   resp.stream_keys[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchGetStreamKey AWS API Documentation
     #
@@ -537,9 +537,9 @@ module Aws::IVS
     #
     #   resp.errors #=> Array
     #   resp.errors[0].channel_arn #=> String
+    #   resp.errors[0].viewer_id #=> String
     #   resp.errors[0].code #=> String
     #   resp.errors[0].message #=> String
-    #   resp.errors[0].viewer_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchStartViewerSessionRevocation AWS API Documentation
     #
@@ -552,33 +552,27 @@ module Aws::IVS
 
     # Creates a new channel and an associated stream key to start streaming.
     #
-    # @option params [Boolean] :authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #   Default: `false`.
-    #
-    # @option params [Boolean] :insecure_ingest
-    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
-    #   `false`.
+    # @option params [String] :name
+    #   Channel name.
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
     #   Default: `LOW`.
     #
-    # @option params [String] :name
-    #   Channel name.
+    # @option params [String] :type
+    #   Channel type, which determines the allowable resolution and bitrate.
+    #   *If you exceed the allowable input resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Default: `STANDARD`. For
+    #   details, see [Channel Types][1].
     #
-    # @option params [String] :playback_restriction_policy_arn
-    #   Playback-restriction-policy ARN. A valid ARN value here both specifies
-    #   the ARN and enables playback restriction. Default: "" (empty string,
-    #   no playback restriction policy is applied).
     #
-    # @option params [String] :preset
-    #   Optional transcode preset for the channel. This is selectable only for
-    #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
-    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other
-    #   channel types (`BASIC` and `STANDARD`), `preset` is the empty string
-    #   (`""`).
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
+    #
+    # @option params [Boolean] :authorized
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
     #
     # @option params [String] :recording_configuration_arn
     #   Recording-configuration ARN. A valid ARN value here both specifies the
@@ -596,15 +590,21 @@ module Aws::IVS
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
-    # @option params [String] :type
-    #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable input resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Default: `STANDARD`. For
-    #   details, see [Channel Types][1].
+    # @option params [Boolean] :insecure_ingest
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #
+    # @option params [String] :preset
+    #   Optional transcode preset for the channel. This is selectable only for
+    #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other
+    #   channel types (`BASIC` and `STANDARD`), `preset` is the empty string
+    #   (`""`).
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
+    # @option params [String] :playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both specifies
+    #   the ARN and enables playback restriction. Default: "" (empty string,
+    #   no playback restriction policy is applied).
     #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -614,41 +614,41 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_channel({
-    #     authorized: false,
-    #     insecure_ingest: false,
-    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
-    #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
-    #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
+    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
+    #     type: "BASIC", # accepts BASIC, STANDARD, ADVANCED_SD, ADVANCED_HD
+    #     authorized: false,
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     type: "BASIC", # accepts BASIC, STANDARD, ADVANCED_SD, ADVANCED_HD
+    #     insecure_ingest: false,
+    #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
+    #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.channel.arn #=> String
-    #   resp.channel.authorized #=> Boolean
-    #   resp.channel.ingest_endpoint #=> String
-    #   resp.channel.insecure_ingest #=> Boolean
-    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
-    #   resp.channel.playback_restriction_policy_arn #=> String
-    #   resp.channel.playback_url #=> String
-    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.channel.recording_configuration_arn #=> String
-    #   resp.channel.srt.endpoint #=> String
-    #   resp.channel.srt.passphrase #=> String
+    #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
+    #   resp.channel.insecure_ingest #=> Boolean
+    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
+    #   resp.channel.playback_restriction_policy_arn #=> String
     #   resp.stream_key.arn #=> String
+    #   resp.stream_key.value #=> String
     #   resp.stream_key.channel_arn #=> String
     #   resp.stream_key.tags #=> Hash
     #   resp.stream_key.tags["TagKey"] #=> String
-    #   resp.stream_key.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannel AWS API Documentation
     #
@@ -718,11 +718,11 @@ module Aws::IVS
     #
     # @example Response structure
     #
+    #   resp.playback_restriction_policy.arn #=> String
     #   resp.playback_restriction_policy.allowed_countries #=> Array
     #   resp.playback_restriction_policy.allowed_countries[0] #=> String
     #   resp.playback_restriction_policy.allowed_origins #=> Array
     #   resp.playback_restriction_policy.allowed_origins[0] #=> String
-    #   resp.playback_restriction_policy.arn #=> String
     #   resp.playback_restriction_policy.enable_strict_origin_enforcement #=> Boolean
     #   resp.playback_restriction_policy.name #=> String
     #   resp.playback_restriction_policy.tags #=> Hash
@@ -753,21 +753,12 @@ module Aws::IVS
     # configuration and create a new one with an S3 bucket from the correct
     # region.
     #
-    # @option params [required, Types::DestinationConfiguration] :destination_configuration
-    #   A complex type that contains a destination configuration for where
-    #   recorded video will be stored.
-    #
     # @option params [String] :name
     #   Recording-configuration name. The value does not need to be unique.
     #
-    # @option params [Integer] :recording_reconnect_window_seconds
-    #   If a broadcast disconnects and then reconnects within the specified
-    #   interval, the multiple streams will be considered a single broadcast
-    #   and merged together. Default: 0.
-    #
-    # @option params [Types::RenditionConfiguration] :rendition_configuration
-    #   Object that describes which renditions should be recorded for a
-    #   stream.
+    # @option params [required, Types::DestinationConfiguration] :destination_configuration
+    #   A complex type that contains a destination configuration for where
+    #   recorded video will be stored.
     #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
@@ -785,6 +776,15 @@ module Aws::IVS
     #   thumbnails for a live session and modify the interval at which
     #   thumbnails are generated for the live session.
     #
+    # @option params [Integer] :recording_reconnect_window_seconds
+    #   If a broadcast disconnects and then reconnects within the specified
+    #   interval, the multiple streams will be considered a single broadcast
+    #   and merged together. Default: 0.
+    #
+    # @option params [Types::RenditionConfiguration] :rendition_configuration
+    #   Object that describes which renditions should be recorded for a
+    #   stream.
+    #
     # @return [Types::CreateRecordingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRecordingConfigurationResponse#recording_configuration #recording_configuration} => Types::RecordingConfiguration
@@ -792,45 +792,45 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_recording_configuration({
+    #     name: "RecordingConfigurationName",
     #     destination_configuration: { # required
     #       s3: {
     #         bucket_name: "S3DestinationBucketName", # required
     #       },
-    #     },
-    #     name: "RecordingConfigurationName",
-    #     recording_reconnect_window_seconds: 1,
-    #     rendition_configuration: {
-    #       rendition_selection: "ALL", # accepts ALL, NONE, CUSTOM
-    #       renditions: ["FULL_HD"], # accepts FULL_HD, HD, SD, LOWEST_RESOLUTION
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #     thumbnail_configuration: {
     #       recording_mode: "DISABLED", # accepts DISABLED, INTERVAL
-    #       resolution: "FULL_HD", # accepts FULL_HD, HD, SD, LOWEST_RESOLUTION
-    #       storage: ["SEQUENTIAL"], # accepts SEQUENTIAL, LATEST
     #       target_interval_seconds: 1,
+    #       resolution: "SD", # accepts SD, HD, FULL_HD, LOWEST_RESOLUTION
+    #       storage: ["SEQUENTIAL"], # accepts SEQUENTIAL, LATEST
+    #     },
+    #     recording_reconnect_window_seconds: 1,
+    #     rendition_configuration: {
+    #       rendition_selection: "ALL", # accepts ALL, NONE, CUSTOM
+    #       renditions: ["SD"], # accepts SD, HD, FULL_HD, LOWEST_RESOLUTION
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.recording_configuration.arn #=> String
-    #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.name #=> String
-    #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
-    #   resp.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
-    #   resp.recording_configuration.rendition_configuration.renditions #=> Array
-    #   resp.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
     #   resp.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
-    #   resp.recording_configuration.thumbnail_configuration.resolution #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
+    #   resp.recording_configuration.thumbnail_configuration.resolution #=> String, one of "SD", "HD", "FULL_HD", "LOWEST_RESOLUTION"
     #   resp.recording_configuration.thumbnail_configuration.storage #=> Array
     #   resp.recording_configuration.thumbnail_configuration.storage[0] #=> String, one of "SEQUENTIAL", "LATEST"
-    #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
+    #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
+    #   resp.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
+    #   resp.recording_configuration.rendition_configuration.renditions #=> Array
+    #   resp.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "SD", "HD", "FULL_HD", "LOWEST_RESOLUTION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfiguration AWS API Documentation
     #
@@ -880,10 +880,10 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.stream_key.arn #=> String
+    #   resp.stream_key.value #=> String
     #   resp.stream_key.channel_arn #=> String
     #   resp.stream_key.tags #=> Hash
     #   resp.stream_key.tags["TagKey"] #=> String
-    #   resp.stream_key.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateStreamKey AWS API Documentation
     #
@@ -1047,20 +1047,20 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.channel.arn #=> String
-    #   resp.channel.authorized #=> Boolean
-    #   resp.channel.ingest_endpoint #=> String
-    #   resp.channel.insecure_ingest #=> Boolean
-    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
-    #   resp.channel.playback_restriction_policy_arn #=> String
-    #   resp.channel.playback_url #=> String
-    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.channel.recording_configuration_arn #=> String
-    #   resp.channel.srt.endpoint #=> String
-    #   resp.channel.srt.passphrase #=> String
+    #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
+    #   resp.channel.insecure_ingest #=> Boolean
+    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
+    #   resp.channel.playback_restriction_policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetChannel AWS API Documentation
     #
@@ -1097,8 +1097,8 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.key_pair.arn #=> String
-    #   resp.key_pair.fingerprint #=> String
     #   resp.key_pair.name #=> String
+    #   resp.key_pair.fingerprint #=> String
     #   resp.key_pair.tags #=> Hash
     #   resp.key_pair.tags["TagKey"] #=> String
     #
@@ -1128,11 +1128,11 @@ module Aws::IVS
     #
     # @example Response structure
     #
+    #   resp.playback_restriction_policy.arn #=> String
     #   resp.playback_restriction_policy.allowed_countries #=> Array
     #   resp.playback_restriction_policy.allowed_countries[0] #=> String
     #   resp.playback_restriction_policy.allowed_origins #=> Array
     #   resp.playback_restriction_policy.allowed_origins[0] #=> String
-    #   resp.playback_restriction_policy.arn #=> String
     #   resp.playback_restriction_policy.enable_strict_origin_enforcement #=> Boolean
     #   resp.playback_restriction_policy.name #=> String
     #   resp.playback_restriction_policy.tags #=> Hash
@@ -1165,20 +1165,20 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.recording_configuration.arn #=> String
-    #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.name #=> String
-    #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
-    #   resp.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
-    #   resp.recording_configuration.rendition_configuration.renditions #=> Array
-    #   resp.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
     #   resp.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
-    #   resp.recording_configuration.thumbnail_configuration.resolution #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
+    #   resp.recording_configuration.thumbnail_configuration.resolution #=> String, one of "SD", "HD", "FULL_HD", "LOWEST_RESOLUTION"
     #   resp.recording_configuration.thumbnail_configuration.storage #=> Array
     #   resp.recording_configuration.thumbnail_configuration.storage[0] #=> String, one of "SEQUENTIAL", "LATEST"
-    #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
+    #   resp.recording_configuration.recording_reconnect_window_seconds #=> Integer
+    #   resp.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
+    #   resp.recording_configuration.rendition_configuration.renditions #=> Array
+    #   resp.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "SD", "HD", "FULL_HD", "LOWEST_RESOLUTION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetRecordingConfiguration AWS API Documentation
     #
@@ -1208,11 +1208,11 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.stream.channel_arn #=> String
-    #   resp.stream.health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
+    #   resp.stream.stream_id #=> String
     #   resp.stream.playback_url #=> String
     #   resp.stream.start_time #=> Time
     #   resp.stream.state #=> String, one of "LIVE", "OFFLINE"
-    #   resp.stream.stream_id #=> String
+    #   resp.stream.health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
     #   resp.stream.viewer_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStream AWS API Documentation
@@ -1242,10 +1242,10 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.stream_key.arn #=> String
+    #   resp.stream_key.value #=> String
     #   resp.stream_key.channel_arn #=> String
     #   resp.stream_key.tags #=> Hash
     #   resp.stream_key.tags["TagKey"] #=> String
-    #   resp.stream_key.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamKey AWS API Documentation
     #
@@ -1279,55 +1279,55 @@ module Aws::IVS
     #
     # @example Response structure
     #
+    #   resp.stream_session.stream_id #=> String
+    #   resp.stream_session.start_time #=> Time
+    #   resp.stream_session.end_time #=> Time
     #   resp.stream_session.channel.arn #=> String
-    #   resp.stream_session.channel.authorized #=> Boolean
-    #   resp.stream_session.channel.ingest_endpoint #=> String
-    #   resp.stream_session.channel.insecure_ingest #=> Boolean
-    #   resp.stream_session.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.stream_session.channel.name #=> String
-    #   resp.stream_session.channel.playback_restriction_policy_arn #=> String
-    #   resp.stream_session.channel.playback_url #=> String
-    #   resp.stream_session.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.stream_session.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.stream_session.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.stream_session.channel.recording_configuration_arn #=> String
-    #   resp.stream_session.channel.srt.endpoint #=> String
-    #   resp.stream_session.channel.srt.passphrase #=> String
+    #   resp.stream_session.channel.ingest_endpoint #=> String
+    #   resp.stream_session.channel.playback_url #=> String
+    #   resp.stream_session.channel.authorized #=> Boolean
     #   resp.stream_session.channel.tags #=> Hash
     #   resp.stream_session.channel.tags["TagKey"] #=> String
-    #   resp.stream_session.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
-    #   resp.stream_session.end_time #=> Time
-    #   resp.stream_session.ingest_configuration.audio.channels #=> Integer
-    #   resp.stream_session.ingest_configuration.audio.codec #=> String
-    #   resp.stream_session.ingest_configuration.audio.sample_rate #=> Integer
-    #   resp.stream_session.ingest_configuration.audio.target_bitrate #=> Integer
-    #   resp.stream_session.ingest_configuration.video.avc_level #=> String
+    #   resp.stream_session.channel.insecure_ingest #=> Boolean
+    #   resp.stream_session.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.stream_session.channel.srt.endpoint #=> String
+    #   resp.stream_session.channel.srt.passphrase #=> String
+    #   resp.stream_session.channel.playback_restriction_policy_arn #=> String
     #   resp.stream_session.ingest_configuration.video.avc_profile #=> String
+    #   resp.stream_session.ingest_configuration.video.avc_level #=> String
     #   resp.stream_session.ingest_configuration.video.codec #=> String
     #   resp.stream_session.ingest_configuration.video.encoder #=> String
     #   resp.stream_session.ingest_configuration.video.target_bitrate #=> Integer
     #   resp.stream_session.ingest_configuration.video.target_framerate #=> Integer
     #   resp.stream_session.ingest_configuration.video.video_height #=> Integer
     #   resp.stream_session.ingest_configuration.video.video_width #=> Integer
+    #   resp.stream_session.ingest_configuration.audio.codec #=> String
+    #   resp.stream_session.ingest_configuration.audio.target_bitrate #=> Integer
+    #   resp.stream_session.ingest_configuration.audio.sample_rate #=> Integer
+    #   resp.stream_session.ingest_configuration.audio.channels #=> Integer
     #   resp.stream_session.recording_configuration.arn #=> String
-    #   resp.stream_session.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.stream_session.recording_configuration.name #=> String
-    #   resp.stream_session.recording_configuration.recording_reconnect_window_seconds #=> Integer
-    #   resp.stream_session.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
-    #   resp.stream_session.recording_configuration.rendition_configuration.renditions #=> Array
-    #   resp.stream_session.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.stream_session.recording_configuration.destination_configuration.s3.bucket_name #=> String
     #   resp.stream_session.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.stream_session.recording_configuration.tags #=> Hash
     #   resp.stream_session.recording_configuration.tags["TagKey"] #=> String
     #   resp.stream_session.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
-    #   resp.stream_session.recording_configuration.thumbnail_configuration.resolution #=> String, one of "FULL_HD", "HD", "SD", "LOWEST_RESOLUTION"
+    #   resp.stream_session.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
+    #   resp.stream_session.recording_configuration.thumbnail_configuration.resolution #=> String, one of "SD", "HD", "FULL_HD", "LOWEST_RESOLUTION"
     #   resp.stream_session.recording_configuration.thumbnail_configuration.storage #=> Array
     #   resp.stream_session.recording_configuration.thumbnail_configuration.storage[0] #=> String, one of "SEQUENTIAL", "LATEST"
-    #   resp.stream_session.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
-    #   resp.stream_session.start_time #=> Time
-    #   resp.stream_session.stream_id #=> String
+    #   resp.stream_session.recording_configuration.recording_reconnect_window_seconds #=> Integer
+    #   resp.stream_session.recording_configuration.rendition_configuration.rendition_selection #=> String, one of "ALL", "NONE", "CUSTOM"
+    #   resp.stream_session.recording_configuration.rendition_configuration.renditions #=> Array
+    #   resp.stream_session.recording_configuration.rendition_configuration.renditions[0] #=> String, one of "SD", "HD", "FULL_HD", "LOWEST_RESOLUTION"
     #   resp.stream_session.truncated_events #=> Array
-    #   resp.stream_session.truncated_events[0].event_time #=> Time
     #   resp.stream_session.truncated_events[0].name #=> String
     #   resp.stream_session.truncated_events[0].type #=> String
+    #   resp.stream_session.truncated_events[0].event_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamSession AWS API Documentation
     #
@@ -1348,11 +1348,11 @@ module Aws::IVS
     #
     # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
     #
-    # @option params [String] :name
-    #   Playback-key-pair name. The value does not need to be unique.
-    #
     # @option params [required, String] :public_key_material
     #   The public portion of a customer-generated key pair.
+    #
+    # @option params [String] :name
+    #   Playback-key-pair name. The value does not need to be unique.
     #
     # @option params [Hash<String,String>] :tags
     #   Any tags provided with the request are added to the playback key pair
@@ -1372,8 +1372,8 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_playback_key_pair({
-    #     name: "PlaybackKeyPairName",
     #     public_key_material: "PlaybackPublicKeyMaterial", # required
+    #     name: "PlaybackKeyPairName",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1382,8 +1382,8 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.key_pair.arn #=> String
-    #   resp.key_pair.fingerprint #=> String
     #   resp.key_pair.name #=> String
+    #   resp.key_pair.fingerprint #=> String
     #   resp.key_pair.tags #=> Hash
     #   resp.key_pair.tags["TagKey"] #=> String
     #
@@ -1406,19 +1406,19 @@ module Aws::IVS
     # @option params [String] :filter_by_name
     #   Filters the channel list to match the specified name.
     #
-    # @option params [String] :filter_by_playback_restriction_policy_arn
-    #   Filters the channel list to match the specified policy.
-    #
     # @option params [String] :filter_by_recording_configuration_arn
     #   Filters the channel list to match the specified
     #   recording-configuration ARN.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of channels to return. Default: 100.
+    # @option params [String] :filter_by_playback_restriction_policy_arn
+    #   Filters the channel list to match the specified policy.
     #
     # @option params [String] :next_token
     #   The first channel to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of channels to return. Default: 100.
     #
     # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1431,26 +1431,26 @@ module Aws::IVS
     #
     #   resp = client.list_channels({
     #     filter_by_name: "ChannelName",
-    #     filter_by_playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
-    #     max_results: 1,
+    #     filter_by_playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
-    #   resp.channels[0].authorized #=> Boolean
-    #   resp.channels[0].insecure_ingest #=> Boolean
-    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
-    #   resp.channels[0].playback_restriction_policy_arn #=> String
-    #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channels[0].authorized #=> Boolean
     #   resp.channels[0].recording_configuration_arn #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
+    #   resp.channels[0].insecure_ingest #=> Boolean
     #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
+    #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channels[0].playback_restriction_policy_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListChannels AWS API Documentation
@@ -1470,13 +1470,13 @@ module Aws::IVS
     #
     # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of key pairs to return. Default: your service quota or
-    #   100, whichever is smaller.
-    #
     # @option params [String] :next_token
     #   The first key pair to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of key pairs to return. Default: your service quota or
+    #   100, whichever is smaller.
     #
     # @return [Types::ListPlaybackKeyPairsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1488,8 +1488,8 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_playback_key_pairs({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -1512,40 +1512,40 @@ module Aws::IVS
 
     # Gets summary information about playback restriction policies.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of policies to return. Default: 1.
-    #
     # @option params [String] :next_token
     #   The first policy to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of policies to return. Default: 1.
+    #
     # @return [Types::ListPlaybackRestrictionPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPlaybackRestrictionPoliciesResponse#next_token #next_token} => String
     #   * {Types::ListPlaybackRestrictionPoliciesResponse#playback_restriction_policies #playback_restriction_policies} => Array&lt;Types::PlaybackRestrictionPolicySummary&gt;
+    #   * {Types::ListPlaybackRestrictionPoliciesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_playback_restriction_policies({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.playback_restriction_policies #=> Array
+    #   resp.playback_restriction_policies[0].arn #=> String
     #   resp.playback_restriction_policies[0].allowed_countries #=> Array
     #   resp.playback_restriction_policies[0].allowed_countries[0] #=> String
     #   resp.playback_restriction_policies[0].allowed_origins #=> Array
     #   resp.playback_restriction_policies[0].allowed_origins[0] #=> String
-    #   resp.playback_restriction_policies[0].arn #=> String
     #   resp.playback_restriction_policies[0].enable_strict_origin_enforcement #=> Boolean
     #   resp.playback_restriction_policies[0].name #=> String
     #   resp.playback_restriction_policies[0].tags #=> Hash
     #   resp.playback_restriction_policies[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackRestrictionPolicies AWS API Documentation
     #
@@ -1560,38 +1560,38 @@ module Aws::IVS
     # account, in the Amazon Web Services region where the API request is
     # processed.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of recording configurations to return. Default: your
-    #   service quota or 100, whichever is smaller.
-    #
     # @option params [String] :next_token
     #   The first recording configuration to retrieve. This is used for
     #   pagination; see the `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of recording configurations to return. Default: your
+    #   service quota or 100, whichever is smaller.
+    #
     # @return [Types::ListRecordingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListRecordingConfigurationsResponse#next_token #next_token} => String
     #   * {Types::ListRecordingConfigurationsResponse#recording_configurations #recording_configurations} => Array&lt;Types::RecordingConfigurationSummary&gt;
+    #   * {Types::ListRecordingConfigurationsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recording_configurations({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.recording_configurations #=> Array
     #   resp.recording_configurations[0].arn #=> String
-    #   resp.recording_configurations[0].destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configurations[0].name #=> String
+    #   resp.recording_configurations[0].destination_configuration.s3.bucket_name #=> String
     #   resp.recording_configurations[0].state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configurations[0].tags #=> Hash
     #   resp.recording_configurations[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurations AWS API Documentation
     #
@@ -1607,17 +1607,17 @@ module Aws::IVS
     # @option params [required, String] :channel_arn
     #   Channel ARN used to filter the list.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of streamKeys to return. Default: 1.
-    #
     # @option params [String] :next_token
     #   The first stream key to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of streamKeys to return. Default: 1.
+    #
     # @return [Types::ListStreamKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStreamKeysResponse#next_token #next_token} => String
     #   * {Types::ListStreamKeysResponse#stream_keys #stream_keys} => Array&lt;Types::StreamKeySummary&gt;
+    #   * {Types::ListStreamKeysResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1625,18 +1625,18 @@ module Aws::IVS
     #
     #   resp = client.list_stream_keys({
     #     channel_arn: "ChannelArn", # required
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.stream_keys #=> Array
     #   resp.stream_keys[0].arn #=> String
     #   resp.stream_keys[0].channel_arn #=> String
     #   resp.stream_keys[0].tags #=> Hash
     #   resp.stream_keys[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamKeys AWS API Documentation
     #
@@ -1653,17 +1653,17 @@ module Aws::IVS
     # @option params [required, String] :channel_arn
     #   Channel ARN used to filter the list.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of streams to return. Default: 100.
-    #
     # @option params [String] :next_token
     #   The first stream to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of streams to return. Default: 100.
+    #
     # @return [Types::ListStreamSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStreamSessionsResponse#next_token #next_token} => String
     #   * {Types::ListStreamSessionsResponse#stream_sessions #stream_sessions} => Array&lt;Types::StreamSessionSummary&gt;
+    #   * {Types::ListStreamSessionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1671,18 +1671,18 @@ module Aws::IVS
     #
     #   resp = client.list_stream_sessions({
     #     channel_arn: "ChannelArn", # required
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.stream_sessions #=> Array
+    #   resp.stream_sessions[0].stream_id #=> String
+    #   resp.stream_sessions[0].start_time #=> Time
     #   resp.stream_sessions[0].end_time #=> Time
     #   resp.stream_sessions[0].has_error_event #=> Boolean
-    #   resp.stream_sessions[0].start_time #=> Time
-    #   resp.stream_sessions[0].stream_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamSessions AWS API Documentation
     #
@@ -1699,17 +1699,17 @@ module Aws::IVS
     # @option params [Types::StreamFilters] :filter_by
     #   Filters the stream list to match the specified criterion.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of streams to return. Default: 100.
-    #
     # @option params [String] :next_token
     #   The first stream to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of streams to return. Default: 100.
+    #
     # @return [Types::ListStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStreamsResponse#next_token #next_token} => String
     #   * {Types::ListStreamsResponse#streams #streams} => Array&lt;Types::StreamSummary&gt;
+    #   * {Types::ListStreamsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1719,20 +1719,20 @@ module Aws::IVS
     #     filter_by: {
     #       health: "HEALTHY", # accepts HEALTHY, STARVING, UNKNOWN
     #     },
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.streams #=> Array
     #   resp.streams[0].channel_arn #=> String
-    #   resp.streams[0].health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
-    #   resp.streams[0].start_time #=> Time
-    #   resp.streams[0].state #=> String, one of "LIVE", "OFFLINE"
     #   resp.streams[0].stream_id #=> String
+    #   resp.streams[0].state #=> String, one of "LIVE", "OFFLINE"
+    #   resp.streams[0].health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
     #   resp.streams[0].viewer_count #=> Integer
+    #   resp.streams[0].start_time #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreams AWS API Documentation
     #
@@ -1960,36 +1960,12 @@ module Aws::IVS
     # @option params [required, String] :arn
     #   ARN of the channel to be updated.
     #
-    # @option params [Boolean] :authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #
-    # @option params [Boolean] :insecure_ingest
-    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
-    #   `false`.
+    # @option params [String] :name
+    #   Channel name.
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
-    #
-    # @option params [String] :name
-    #   Channel name.
-    #
-    # @option params [String] :playback_restriction_policy_arn
-    #   Playback-restriction-policy ARN. A valid ARN value here both specifies
-    #   the ARN and enables playback restriction. If this is set to an empty
-    #   string, playback restriction policy is disabled.
-    #
-    # @option params [String] :preset
-    #   Optional transcode preset for the channel. This is selectable only for
-    #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
-    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other
-    #   channel types (`BASIC` and `STANDARD`), `preset` is the empty string
-    #   (`""`).
-    #
-    # @option params [String] :recording_configuration_arn
-    #   Recording-configuration ARN. A valid ARN value here both specifies the
-    #   ARN and enables recording. If this is set to an empty string,
-    #   recording is disabled.
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
@@ -2001,6 +1977,30 @@ module Aws::IVS
     #
     #   [1]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
     #
+    # @option params [Boolean] :authorized
+    #   Whether the channel is private (enabled for playback authorization).
+    #
+    # @option params [String] :recording_configuration_arn
+    #   Recording-configuration ARN. A valid ARN value here both specifies the
+    #   ARN and enables recording. If this is set to an empty string,
+    #   recording is disabled.
+    #
+    # @option params [Boolean] :insecure_ingest
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
+    #
+    # @option params [String] :preset
+    #   Optional transcode preset for the channel. This is selectable only for
+    #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
+    #   types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other
+    #   channel types (`BASIC` and `STANDARD`), `preset` is the empty string
+    #   (`""`).
+    #
+    # @option params [String] :playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both specifies
+    #   the ARN and enables playback restriction. If this is set to an empty
+    #   string, playback restriction policy is disabled.
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#channel #channel} => Types::Channel
@@ -2009,33 +2009,33 @@ module Aws::IVS
     #
     #   resp = client.update_channel({
     #     arn: "ChannelArn", # required
-    #     authorized: false,
-    #     insecure_ingest: false,
-    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
-    #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
-    #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
-    #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
+    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     type: "BASIC", # accepts BASIC, STANDARD, ADVANCED_SD, ADVANCED_HD
+    #     authorized: false,
+    #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
+    #     insecure_ingest: false,
+    #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
+    #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.channel.arn #=> String
-    #   resp.channel.authorized #=> Boolean
-    #   resp.channel.ingest_endpoint #=> String
-    #   resp.channel.insecure_ingest #=> Boolean
-    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
-    #   resp.channel.playback_restriction_policy_arn #=> String
-    #   resp.channel.playback_url #=> String
-    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
     #   resp.channel.recording_configuration_arn #=> String
-    #   resp.channel.srt.endpoint #=> String
-    #   resp.channel.srt.passphrase #=> String
+    #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.playback_url #=> String
+    #   resp.channel.authorized #=> Boolean
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD", "ADVANCED_SD", "ADVANCED_HD"
+    #   resp.channel.insecure_ingest #=> Boolean
+    #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
+    #   resp.channel.srt.endpoint #=> String
+    #   resp.channel.srt.passphrase #=> String
+    #   resp.channel.playback_restriction_policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannel AWS API Documentation
     #
@@ -2047,6 +2047,9 @@ module Aws::IVS
     end
 
     # Updates a specified playback restriction policy.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the playback-restriction-policy to be updated.
     #
     # @option params [Array<String>] :allowed_countries
     #   A list of country codes that control geoblocking restriction. Allowed
@@ -2067,9 +2070,6 @@ module Aws::IVS
     #
     #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
     #
-    # @option params [required, String] :arn
-    #   ARN of the playback-restriction-policy to be updated.
-    #
     # @option params [Boolean] :enable_strict_origin_enforcement
     #   Whether channel playback is constrained by origin site. Default:
     #   `false`.
@@ -2085,20 +2085,20 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_playback_restriction_policy({
+    #     arn: "PlaybackRestrictionPolicyArn", # required
     #     allowed_countries: ["PlaybackRestrictionPolicyAllowedCountry"],
     #     allowed_origins: ["PlaybackRestrictionPolicyAllowedOrigin"],
-    #     arn: "PlaybackRestrictionPolicyArn", # required
     #     enable_strict_origin_enforcement: false,
     #     name: "PlaybackRestrictionPolicyName",
     #   })
     #
     # @example Response structure
     #
+    #   resp.playback_restriction_policy.arn #=> String
     #   resp.playback_restriction_policy.allowed_countries #=> Array
     #   resp.playback_restriction_policy.allowed_countries[0] #=> String
     #   resp.playback_restriction_policy.allowed_origins #=> Array
     #   resp.playback_restriction_policy.allowed_origins[0] #=> String
-    #   resp.playback_restriction_policy.arn #=> String
     #   resp.playback_restriction_policy.enable_strict_origin_enforcement #=> Boolean
     #   resp.playback_restriction_policy.name #=> String
     #   resp.playback_restriction_policy.tags #=> Hash
@@ -2126,7 +2126,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

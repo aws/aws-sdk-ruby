@@ -830,6 +830,176 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Creates a data asset filter.
+    #
+    # @option params [required, String] :asset_identifier
+    #   The ID of the data asset.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::AssetFilterConfiguration] :configuration
+    #   The configuration of the asset filter.
+    #
+    # @option params [String] :description
+    #   The description of the asset filter.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain in which you want to create an asset filter.
+    #
+    # @option params [required, String] :name
+    #   The name of the asset filter.
+    #
+    # @return [Types::CreateAssetFilterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAssetFilterOutput#asset_id #asset_id} => String
+    #   * {Types::CreateAssetFilterOutput#configuration #configuration} => Types::AssetFilterConfiguration
+    #   * {Types::CreateAssetFilterOutput#created_at #created_at} => Time
+    #   * {Types::CreateAssetFilterOutput#description #description} => String
+    #   * {Types::CreateAssetFilterOutput#domain_id #domain_id} => String
+    #   * {Types::CreateAssetFilterOutput#effective_column_names #effective_column_names} => Array&lt;String&gt;
+    #   * {Types::CreateAssetFilterOutput#effective_row_filter #effective_row_filter} => String
+    #   * {Types::CreateAssetFilterOutput#error_message #error_message} => String
+    #   * {Types::CreateAssetFilterOutput#id #id} => String
+    #   * {Types::CreateAssetFilterOutput#name #name} => String
+    #   * {Types::CreateAssetFilterOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_asset_filter({
+    #     asset_identifier: "AssetId", # required
+    #     client_token: "String",
+    #     configuration: { # required
+    #       column_configuration: {
+    #         included_column_names: ["String"],
+    #       },
+    #       row_configuration: {
+    #         row_filter: { # required
+    #           and: [
+    #             {
+    #               # recursive RowFilter
+    #             },
+    #           ],
+    #           expression: {
+    #             equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             greater_than: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             greater_than_or_equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             in: {
+    #               column_name: "String", # required
+    #               values: ["String"], # required
+    #             },
+    #             is_not_null: {
+    #               column_name: "String", # required
+    #             },
+    #             is_null: {
+    #               column_name: "String", # required
+    #             },
+    #             less_than: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             less_than_or_equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             like: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             not_equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             not_in: {
+    #               column_name: "String", # required
+    #               values: ["String"], # required
+    #             },
+    #             not_like: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #           },
+    #           or: [
+    #             {
+    #               # recursive RowFilter
+    #             },
+    #           ],
+    #         },
+    #         sensitive: false,
+    #       },
+    #     },
+    #     description: "Description",
+    #     domain_identifier: "DomainId", # required
+    #     name: "FilterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_id #=> String
+    #   resp.configuration.column_configuration.included_column_names #=> Array
+    #   resp.configuration.column_configuration.included_column_names[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.and #=> Array
+    #   resp.configuration.row_configuration.row_filter.and[0] #=> Types::RowFilter
+    #   resp.configuration.row_configuration.row_filter.expression.equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than_or_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than_or_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.in.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.in.values #=> Array
+    #   resp.configuration.row_configuration.row_filter.expression.in.values[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.is_not_null.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.is_null.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than_or_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than_or_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.like.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.like.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.values #=> Array
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.values[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_like.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_like.value #=> String
+    #   resp.configuration.row_configuration.row_filter.or #=> Array
+    #   resp.configuration.row_configuration.row_filter.or[0] #=> Types::RowFilter
+    #   resp.configuration.row_configuration.sensitive #=> Boolean
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.effective_column_names #=> Array
+    #   resp.effective_column_names[0] #=> String
+    #   resp.effective_row_filter #=> String
+    #   resp.error_message #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "VALID", "INVALID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateAssetFilter AWS API Documentation
+    #
+    # @overload create_asset_filter(params = {})
+    # @param [Hash] params ({})
+    def create_asset_filter(params = {}, options = {})
+      req = build_request(:create_asset_filter, params)
+      req.send_request(options)
+    end
+
     # Creates a revision of the asset.
     #
     # @option params [String] :client_token
@@ -2409,6 +2579,36 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Deletes an asset filter.
+    #
+    # @option params [required, String] :asset_identifier
+    #   The ID of the data asset.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to delete an asset filter.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the asset filter that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_asset_filter({
+    #     asset_identifier: "AssetId", # required
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "FilterId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteAssetFilter AWS API Documentation
+    #
+    # @overload delete_asset_filter(params = {})
+    # @param [Hash] params ({})
+    def delete_asset_filter(params = {}, options = {})
+      req = build_request(:delete_asset_filter, params)
+      req.send_request(options)
+    end
+
     # Deletes an asset type in Amazon DataZone.
     #
     # @option params [required, String] :domain_identifier
@@ -3167,6 +3367,93 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Gets an asset filter.
+    #
+    # @option params [required, String] :asset_identifier
+    #   The ID of the data asset.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to get an asset filter.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the asset filter.
+    #
+    # @return [Types::GetAssetFilterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAssetFilterOutput#asset_id #asset_id} => String
+    #   * {Types::GetAssetFilterOutput#configuration #configuration} => Types::AssetFilterConfiguration
+    #   * {Types::GetAssetFilterOutput#created_at #created_at} => Time
+    #   * {Types::GetAssetFilterOutput#description #description} => String
+    #   * {Types::GetAssetFilterOutput#domain_id #domain_id} => String
+    #   * {Types::GetAssetFilterOutput#effective_column_names #effective_column_names} => Array&lt;String&gt;
+    #   * {Types::GetAssetFilterOutput#effective_row_filter #effective_row_filter} => String
+    #   * {Types::GetAssetFilterOutput#error_message #error_message} => String
+    #   * {Types::GetAssetFilterOutput#id #id} => String
+    #   * {Types::GetAssetFilterOutput#name #name} => String
+    #   * {Types::GetAssetFilterOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_asset_filter({
+    #     asset_identifier: "AssetId", # required
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "FilterId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_id #=> String
+    #   resp.configuration.column_configuration.included_column_names #=> Array
+    #   resp.configuration.column_configuration.included_column_names[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.and #=> Array
+    #   resp.configuration.row_configuration.row_filter.and[0] #=> Types::RowFilter
+    #   resp.configuration.row_configuration.row_filter.expression.equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than_or_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than_or_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.in.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.in.values #=> Array
+    #   resp.configuration.row_configuration.row_filter.expression.in.values[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.is_not_null.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.is_null.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than_or_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than_or_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.like.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.like.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.values #=> Array
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.values[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_like.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_like.value #=> String
+    #   resp.configuration.row_configuration.row_filter.or #=> Array
+    #   resp.configuration.row_configuration.row_filter.or[0] #=> Types::RowFilter
+    #   resp.configuration.row_configuration.sensitive #=> Boolean
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.effective_column_names #=> Array
+    #   resp.effective_column_names[0] #=> String
+    #   resp.effective_row_filter #=> String
+    #   resp.error_message #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "VALID", "INVALID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAssetFilter AWS API Documentation
+    #
+    # @overload get_asset_filter(params = {})
+    # @param [Hash] params ({})
+    def get_asset_filter(params = {}, options = {})
+      req = build_request(:get_asset_filter, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon DataZone asset type.
     #
     # @option params [required, String] :domain_identifier
@@ -3668,6 +3955,7 @@ module Aws::DataZone
     #   * {Types::GetEnvironmentBlueprintConfigurationOutput#enabled_regions #enabled_regions} => Array&lt;String&gt;
     #   * {Types::GetEnvironmentBlueprintConfigurationOutput#environment_blueprint_id #environment_blueprint_id} => String
     #   * {Types::GetEnvironmentBlueprintConfigurationOutput#manage_access_role_arn #manage_access_role_arn} => String
+    #   * {Types::GetEnvironmentBlueprintConfigurationOutput#provisioning_configurations #provisioning_configurations} => Array&lt;Types::ProvisioningConfiguration&gt;
     #   * {Types::GetEnvironmentBlueprintConfigurationOutput#provisioning_role_arn #provisioning_role_arn} => String
     #   * {Types::GetEnvironmentBlueprintConfigurationOutput#regional_parameters #regional_parameters} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::GetEnvironmentBlueprintConfigurationOutput#updated_at #updated_at} => Time
@@ -3687,6 +3975,10 @@ module Aws::DataZone
     #   resp.enabled_regions[0] #=> String
     #   resp.environment_blueprint_id #=> String
     #   resp.manage_access_role_arn #=> String
+    #   resp.provisioning_configurations #=> Array
+    #   resp.provisioning_configurations[0].lake_formation_configuration.location_registration_exclude_s3_locations #=> Array
+    #   resp.provisioning_configurations[0].lake_formation_configuration.location_registration_exclude_s3_locations[0] #=> String
+    #   resp.provisioning_configurations[0].lake_formation_configuration.location_registration_role #=> String
     #   resp.provisioning_role_arn #=> String
     #   resp.regional_parameters #=> Hash
     #   resp.regional_parameters["RegionName"] #=> Hash
@@ -4627,6 +4919,74 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Lists asset filters.
+    #
+    # @option params [required, String] :asset_identifier
+    #   The ID of the data asset.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to list asset filters.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of asset filters to return in a single call to
+    #   `ListAssetFilters`. When the number of asset filters to be listed is
+    #   greater than the value of `MaxResults`, the response contains a
+    #   `NextToken` value that you can use in a subsequent call to
+    #   `ListAssetFilters` to list the next set of asset filters.
+    #
+    # @option params [String] :next_token
+    #   When the number of asset filters is greater than the default value for
+    #   the `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of asset filters, the
+    #   response includes a pagination token named `NextToken`. You can
+    #   specify this `NextToken` value in a subsequent call to
+    #   `ListAssetFilters` to list the next set of asset filters.
+    #
+    # @option params [String] :status
+    #   The status of the asset filter.
+    #
+    # @return [Types::ListAssetFiltersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetFiltersOutput#items #items} => Array&lt;Types::AssetFilterSummary&gt;
+    #   * {Types::ListAssetFiltersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_filters({
+    #     asset_identifier: "AssetId", # required
+    #     domain_identifier: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     status: "VALID", # accepts VALID, INVALID
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].asset_id #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].description #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].effective_column_names #=> Array
+    #   resp.items[0].effective_column_names[0] #=> String
+    #   resp.items[0].effective_row_filter #=> String
+    #   resp.items[0].error_message #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].status #=> String, one of "VALID", "INVALID"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAssetFilters AWS API Documentation
+    #
+    # @overload list_asset_filters(params = {})
+    # @param [Hash] params ({})
+    def list_asset_filters(params = {}, options = {})
+      req = build_request(:list_asset_filters, params)
+      req.send_request(options)
+    end
+
     # Lists the revisions for the asset.
     #
     # @option params [required, String] :domain_identifier
@@ -5078,6 +5438,10 @@ module Aws::DataZone
     #   resp.items[0].enabled_regions[0] #=> String
     #   resp.items[0].environment_blueprint_id #=> String
     #   resp.items[0].manage_access_role_arn #=> String
+    #   resp.items[0].provisioning_configurations #=> Array
+    #   resp.items[0].provisioning_configurations[0].lake_formation_configuration.location_registration_exclude_s3_locations #=> Array
+    #   resp.items[0].provisioning_configurations[0].lake_formation_configuration.location_registration_exclude_s3_locations[0] #=> String
+    #   resp.items[0].provisioning_configurations[0].lake_formation_configuration.location_registration_role #=> String
     #   resp.items[0].provisioning_role_arn #=> String
     #   resp.items[0].regional_parameters #=> Hash
     #   resp.items[0].regional_parameters["RegionName"] #=> Hash
@@ -6326,6 +6690,9 @@ module Aws::DataZone
     # @option params [String] :manage_access_role_arn
     #   The ARN of the manage access role.
     #
+    # @option params [Array<Types::ProvisioningConfiguration>] :provisioning_configurations
+    #   The provisioning configuration of a blueprint.
+    #
     # @option params [String] :provisioning_role_arn
     #   The ARN of the provisioning role.
     #
@@ -6339,6 +6706,7 @@ module Aws::DataZone
     #   * {Types::PutEnvironmentBlueprintConfigurationOutput#enabled_regions #enabled_regions} => Array&lt;String&gt;
     #   * {Types::PutEnvironmentBlueprintConfigurationOutput#environment_blueprint_id #environment_blueprint_id} => String
     #   * {Types::PutEnvironmentBlueprintConfigurationOutput#manage_access_role_arn #manage_access_role_arn} => String
+    #   * {Types::PutEnvironmentBlueprintConfigurationOutput#provisioning_configurations #provisioning_configurations} => Array&lt;Types::ProvisioningConfiguration&gt;
     #   * {Types::PutEnvironmentBlueprintConfigurationOutput#provisioning_role_arn #provisioning_role_arn} => String
     #   * {Types::PutEnvironmentBlueprintConfigurationOutput#regional_parameters #regional_parameters} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::PutEnvironmentBlueprintConfigurationOutput#updated_at #updated_at} => Time
@@ -6350,6 +6718,14 @@ module Aws::DataZone
     #     enabled_regions: ["RegionName"], # required
     #     environment_blueprint_identifier: "EnvironmentBlueprintId", # required
     #     manage_access_role_arn: "RoleArn",
+    #     provisioning_configurations: [
+    #       {
+    #         lake_formation_configuration: {
+    #           location_registration_exclude_s3_locations: ["S3Location"],
+    #           location_registration_role: "RoleArn",
+    #         },
+    #       },
+    #     ],
     #     provisioning_role_arn: "RoleArn",
     #     regional_parameters: {
     #       "RegionName" => {
@@ -6366,6 +6742,10 @@ module Aws::DataZone
     #   resp.enabled_regions[0] #=> String
     #   resp.environment_blueprint_id #=> String
     #   resp.manage_access_role_arn #=> String
+    #   resp.provisioning_configurations #=> Array
+    #   resp.provisioning_configurations[0].lake_formation_configuration.location_registration_exclude_s3_locations #=> Array
+    #   resp.provisioning_configurations[0].lake_formation_configuration.location_registration_exclude_s3_locations[0] #=> String
+    #   resp.provisioning_configurations[0].lake_formation_configuration.location_registration_role #=> String
     #   resp.provisioning_role_arn #=> String
     #   resp.regional_parameters #=> Hash
     #   resp.regional_parameters["RegionName"] #=> Hash
@@ -7334,6 +7714,172 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an asset filter.
+    #
+    # @option params [required, String] :asset_identifier
+    #   The ID of the data asset.
+    #
+    # @option params [Types::AssetFilterConfiguration] :configuration
+    #   The configuration of the asset filter.
+    #
+    # @option params [String] :description
+    #   The description of the asset filter.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to update an asset filter.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the asset filter.
+    #
+    # @option params [String] :name
+    #   The name of the asset filter.
+    #
+    # @return [Types::UpdateAssetFilterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAssetFilterOutput#asset_id #asset_id} => String
+    #   * {Types::UpdateAssetFilterOutput#configuration #configuration} => Types::AssetFilterConfiguration
+    #   * {Types::UpdateAssetFilterOutput#created_at #created_at} => Time
+    #   * {Types::UpdateAssetFilterOutput#description #description} => String
+    #   * {Types::UpdateAssetFilterOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateAssetFilterOutput#effective_column_names #effective_column_names} => Array&lt;String&gt;
+    #   * {Types::UpdateAssetFilterOutput#effective_row_filter #effective_row_filter} => String
+    #   * {Types::UpdateAssetFilterOutput#error_message #error_message} => String
+    #   * {Types::UpdateAssetFilterOutput#id #id} => String
+    #   * {Types::UpdateAssetFilterOutput#name #name} => String
+    #   * {Types::UpdateAssetFilterOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_asset_filter({
+    #     asset_identifier: "AssetId", # required
+    #     configuration: {
+    #       column_configuration: {
+    #         included_column_names: ["String"],
+    #       },
+    #       row_configuration: {
+    #         row_filter: { # required
+    #           and: [
+    #             {
+    #               # recursive RowFilter
+    #             },
+    #           ],
+    #           expression: {
+    #             equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             greater_than: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             greater_than_or_equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             in: {
+    #               column_name: "String", # required
+    #               values: ["String"], # required
+    #             },
+    #             is_not_null: {
+    #               column_name: "String", # required
+    #             },
+    #             is_null: {
+    #               column_name: "String", # required
+    #             },
+    #             less_than: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             less_than_or_equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             like: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             not_equal_to: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #             not_in: {
+    #               column_name: "String", # required
+    #               values: ["String"], # required
+    #             },
+    #             not_like: {
+    #               column_name: "String", # required
+    #               value: "String", # required
+    #             },
+    #           },
+    #           or: [
+    #             {
+    #               # recursive RowFilter
+    #             },
+    #           ],
+    #         },
+    #         sensitive: false,
+    #       },
+    #     },
+    #     description: "Description",
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "FilterId", # required
+    #     name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_id #=> String
+    #   resp.configuration.column_configuration.included_column_names #=> Array
+    #   resp.configuration.column_configuration.included_column_names[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.and #=> Array
+    #   resp.configuration.row_configuration.row_filter.and[0] #=> Types::RowFilter
+    #   resp.configuration.row_configuration.row_filter.expression.equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than_or_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.greater_than_or_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.in.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.in.values #=> Array
+    #   resp.configuration.row_configuration.row_filter.expression.in.values[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.is_not_null.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.is_null.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than_or_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.less_than_or_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.like.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.like.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_equal_to.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_equal_to.value #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.values #=> Array
+    #   resp.configuration.row_configuration.row_filter.expression.not_in.values[0] #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_like.column_name #=> String
+    #   resp.configuration.row_configuration.row_filter.expression.not_like.value #=> String
+    #   resp.configuration.row_configuration.row_filter.or #=> Array
+    #   resp.configuration.row_configuration.row_filter.or[0] #=> Types::RowFilter
+    #   resp.configuration.row_configuration.sensitive #=> Boolean
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.effective_column_names #=> Array
+    #   resp.effective_column_names[0] #=> String
+    #   resp.effective_row_filter #=> String
+    #   resp.error_message #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "VALID", "INVALID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetFilter AWS API Documentation
+    #
+    # @overload update_asset_filter(params = {})
+    # @param [Hash] params ({})
+    def update_asset_filter(params = {}, options = {})
+      req = build_request(:update_asset_filter, params)
       req.send_request(options)
     end
 
@@ -8461,7 +9007,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

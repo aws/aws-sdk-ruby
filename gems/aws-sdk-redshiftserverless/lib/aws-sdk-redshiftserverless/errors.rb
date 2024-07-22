@@ -32,6 +32,7 @@ module Aws::RedshiftServerless
   # * {InsufficientCapacityException}
   # * {InternalServerException}
   # * {InvalidPaginationException}
+  # * {Ipv6CidrBlockNotFoundException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
@@ -122,6 +123,21 @@ module Aws::RedshiftServerless
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RedshiftServerless::Types::InvalidPaginationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class Ipv6CidrBlockNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RedshiftServerless::Types::Ipv6CidrBlockNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

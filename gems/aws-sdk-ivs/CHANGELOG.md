@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-07-22)
+------------------
+
+* Feature - Documentation update for IVS Low Latency API Reference.
+
 1.52.0 (2024-07-02)
 ------------------
 

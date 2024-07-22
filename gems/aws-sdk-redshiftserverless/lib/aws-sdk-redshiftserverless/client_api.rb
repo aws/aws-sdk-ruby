@@ -96,6 +96,8 @@ module Aws::RedshiftServerless
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidPaginationException = Shapes::StructureShape.new(name: 'InvalidPaginationException')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    Ipv6CidrBlockNotFoundException = Shapes::StructureShape.new(name: 'Ipv6CidrBlockNotFoundException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     ListCustomDomainAssociationsRequest = Shapes::StructureShape.new(name: 'ListCustomDomainAssociationsRequest')
     ListCustomDomainAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCustomDomainAssociationsRequestMaxResultsInteger')
@@ -347,6 +349,7 @@ module Aws::RedshiftServerless
     CreateWorkgroupRequest.add_member(:base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "baseCapacity"))
     CreateWorkgroupRequest.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     CreateWorkgroupRequest.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
+    CreateWorkgroupRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateWorkgroupRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     CreateWorkgroupRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     CreateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
@@ -523,6 +526,9 @@ module Aws::RedshiftServerless
     InvalidPaginationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidPaginationException.struct_class = Types::InvalidPaginationException
 
+    Ipv6CidrBlockNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    Ipv6CidrBlockNotFoundException.struct_class = Types::Ipv6CidrBlockNotFoundException
+
     ListCustomDomainAssociationsRequest.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
     ListCustomDomainAssociationsRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
     ListCustomDomainAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCustomDomainAssociationsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
@@ -650,6 +656,7 @@ module Aws::RedshiftServerless
     NamespaceList.member = Shapes::ShapeRef.new(shape: Namespace)
 
     NetworkInterface.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    NetworkInterface.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
@@ -931,6 +938,7 @@ module Aws::RedshiftServerless
     UpdateWorkgroupRequest.add_member(:base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "baseCapacity"))
     UpdateWorkgroupRequest.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     UpdateWorkgroupRequest.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
+    UpdateWorkgroupRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     UpdateWorkgroupRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     UpdateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     UpdateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
@@ -982,6 +990,7 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
     Workgroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     Workgroup.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
+    Workgroup.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     Workgroup.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     Workgroup.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
     Workgroup.add_member(:patch_version, Shapes::ShapeRef.new(shape: String, location_name: "patchVersion"))
@@ -1136,6 +1145,7 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundException)
       end)
 
       api.add_operation(:delete_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
@@ -1746,6 +1756,7 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: Ipv6CidrBlockNotFoundException)
       end)
     end
 

@@ -699,9 +699,10 @@ module Aws::NeptuneGraph
 
       api.metadata = {
         "apiVersion" => "2023-11-29",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "neptune-graph",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Neptune Graph",
         "serviceFullName" => "Amazon Neptune Graph",
         "serviceId" => "Neptune Graph",

@@ -602,6 +602,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.subnet_ids[0] #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces #=> Array
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.endpoint.vpc_endpoint.network_interfaces[0].ipv6_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].subnet_id #=> String
@@ -754,7 +755,7 @@ module Aws::RedshiftServerless
     #   scheduler.redshift.amazonaws.com) to assume permissions on your
     #   behalf. For more information about the IAM role to use with the Amazon
     #   Redshift scheduler, see [Using Identity-Based Policies for Amazon
-    #   Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #   Redshift][1] in the Amazon Redshift Management Guide
     #
     #
     #
@@ -1068,6 +1069,10 @@ module Aws::RedshiftServerless
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC instead of over the internet.
     #
+    # @option params [String] :ip_address_type
+    #   The IP address type that the workgroup supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #
     # @option params [Integer] :max_capacity
     #   The maximum data-warehouse capacity Amazon Redshift Serverless uses to
     #   serve queries. The max capacity is specified in RPUs.
@@ -1110,6 +1115,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     ip_address_type: "IpAddressType",
     #     max_capacity: 1,
     #     namespace_name: "NamespaceName", # required
     #     port: 1,
@@ -1142,12 +1148,14 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].ipv6_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
@@ -1225,6 +1233,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.subnet_ids[0] #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces #=> Array
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.endpoint.vpc_endpoint.network_interfaces[0].ipv6_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].subnet_id #=> String
@@ -1514,12 +1523,14 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].ipv6_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
@@ -1682,6 +1693,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.subnet_ids[0] #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces #=> Array
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.endpoint.vpc_endpoint.network_interfaces[0].ipv6_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].subnet_id #=> String
@@ -2019,12 +2031,14 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].ipv6_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
@@ -2153,6 +2167,7 @@ module Aws::RedshiftServerless
     #   resp.endpoints[0].subnet_ids[0] #=> String
     #   resp.endpoints[0].vpc_endpoint.network_interfaces #=> Array
     #   resp.endpoints[0].vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.endpoints[0].vpc_endpoint.network_interfaces[0].ipv6_address #=> String
     #   resp.endpoints[0].vpc_endpoint.network_interfaces[0].network_interface_id #=> String
     #   resp.endpoints[0].vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.endpoints[0].vpc_endpoint.network_interfaces[0].subnet_id #=> String
@@ -2671,12 +2686,14 @@ module Aws::RedshiftServerless
     #   resp.workgroups[0].endpoint.vpc_endpoints #=> Array
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].network_interfaces #=> Array
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.workgroups[0].endpoint.vpc_endpoints[0].network_interfaces[0].ipv6_address #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroups[0].endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroups[0].enhanced_vpc_routing #=> Boolean
+    #   resp.workgroups[0].ip_address_type #=> String
     #   resp.workgroups[0].max_capacity #=> Integer
     #   resp.workgroups[0].namespace_name #=> String
     #   resp.workgroups[0].patch_version #=> String
@@ -3180,6 +3197,7 @@ module Aws::RedshiftServerless
     #   resp.endpoint.subnet_ids[0] #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces #=> Array
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].availability_zone #=> String
+    #   resp.endpoint.vpc_endpoint.network_interfaces[0].ipv6_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].network_interface_id #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].private_ip_address #=> String
     #   resp.endpoint.vpc_endpoint.network_interfaces[0].subnet_id #=> String
@@ -3311,7 +3329,7 @@ module Aws::RedshiftServerless
     #   scheduler.redshift.amazonaws.com) to assume permissions on your
     #   behalf. For more information about the IAM role to use with the Amazon
     #   Redshift scheduler, see [Using Identity-Based Policies for Amazon
-    #   Redshift][1] in the Amazon Redshift Cluster Management Guide
+    #   Redshift][1] in the Amazon Redshift Management Guide
     #
     #
     #
@@ -3580,6 +3598,10 @@ module Aws::RedshiftServerless
     #   cloud (VPC) routing, which forces Amazon Redshift Serverless to route
     #   traffic through your VPC.
     #
+    # @option params [String] :ip_address_type
+    #   The IP address type that the workgroup supports. Possible values are
+    #   `ipv4` and `dualstack`.
+    #
     # @option params [Integer] :max_capacity
     #   The maximum data-warehouse capacity Amazon Redshift Serverless uses to
     #   serve queries. The max capacity is specified in RPUs.
@@ -3617,6 +3639,7 @@ module Aws::RedshiftServerless
     #       },
     #     ],
     #     enhanced_vpc_routing: false,
+    #     ip_address_type: "IpAddressType",
     #     max_capacity: 1,
     #     port: 1,
     #     publicly_accessible: false,
@@ -3642,12 +3665,14 @@ module Aws::RedshiftServerless
     #   resp.workgroup.endpoint.vpc_endpoints #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces #=> Array
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].availability_zone #=> String
+    #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].ipv6_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].network_interface_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].private_ip_address #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].network_interfaces[0].subnet_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_endpoint_id #=> String
     #   resp.workgroup.endpoint.vpc_endpoints[0].vpc_id #=> String
     #   resp.workgroup.enhanced_vpc_routing #=> Boolean
+    #   resp.workgroup.ip_address_type #=> String
     #   resp.workgroup.max_capacity #=> Integer
     #   resp.workgroup.namespace_name #=> String
     #   resp.workgroup.patch_version #=> String
@@ -3685,7 +3710,7 @@ module Aws::RedshiftServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -166,6 +166,7 @@ module Aws::RedshiftServerless
       attr_accessor base_capacity: ::Integer
       attr_accessor config_parameters: ::Array[Types::ConfigParameter]
       attr_accessor enhanced_vpc_routing: bool
+      attr_accessor ip_address_type: ::String
       attr_accessor max_capacity: ::Integer
       attr_accessor namespace_name: ::String
       attr_accessor port: ::Integer
@@ -429,6 +430,11 @@ module Aws::RedshiftServerless
       SENSITIVE: []
     end
 
+    class Ipv6CidrBlockNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ListCustomDomainAssociationsRequest
       attr_accessor custom_domain_certificate_arn: ::String
       attr_accessor custom_domain_name: ::String
@@ -599,6 +605,7 @@ module Aws::RedshiftServerless
 
     class NetworkInterface
       attr_accessor availability_zone: ::String
+      attr_accessor ipv6_address: ::String
       attr_accessor network_interface_id: ::String
       attr_accessor private_ip_address: ::String
       attr_accessor subnet_id: ::String
@@ -949,6 +956,7 @@ module Aws::RedshiftServerless
       attr_accessor base_capacity: ::Integer
       attr_accessor config_parameters: ::Array[Types::ConfigParameter]
       attr_accessor enhanced_vpc_routing: bool
+      attr_accessor ip_address_type: ::String
       attr_accessor max_capacity: ::Integer
       attr_accessor port: ::Integer
       attr_accessor publicly_accessible: bool
@@ -1002,6 +1010,7 @@ module Aws::RedshiftServerless
       attr_accessor custom_domain_name: ::String
       attr_accessor endpoint: Types::Endpoint
       attr_accessor enhanced_vpc_routing: bool
+      attr_accessor ip_address_type: ::String
       attr_accessor max_capacity: ::Integer
       attr_accessor namespace_name: ::String
       attr_accessor patch_version: ::String
