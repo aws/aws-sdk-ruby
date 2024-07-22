@@ -20,14 +20,16 @@ module SpecHelper
     def parse_request(request)
       lines = request.lines.to_a
 
-      http_method, request_uri, _ = lines.shift.split
+      req_def = lines.shift
+      http_method, request_uri = req_def.split(' ', 2)
+      request_uri = request_uri.gsub(" HTTP/1.1\n", '')
 
       # escape the uri
       uri_path, querystring = request_uri.split('?', 2)
       if querystring
         querystring = querystring.split('&').map do |key_value|
           key, value = key_value.split('=')
-          key = Aws::Sigv4::Signer.uri_escape(key)
+          key = Aws::Sigv4::Signer.uri_escape(key) unless key.include? '%E1'
           value = Aws::Sigv4::Signer.uri_escape(value.to_s)
           "#{key}=#{value}"
         end.join('&')
@@ -62,6 +64,30 @@ module SpecHelper
         headers: headers,
         body: lines.join,
       }
+    end
+
+    def downcase_headers(headers)
+      (headers || {}).transform_keys(&:downcase)
+    end
+
+    def split_query_to_params(query)
+      params = { }
+
+      return params unless query
+
+      query.split('&').each do |p|
+        k,v = p.split('=')
+        if params.key? k
+          if params[k].is_a?(Array)
+            params[k] << v
+          else
+            params[k] = [params[k], v]
+          end
+        else
+          params[k] = v
+        end
+      end
+      params
     end
   end
 end

@@ -22,6 +22,12 @@ unless defined?(JRUBY_VERSION)
   gem 'ox'
 end
 
+if defined?(JRUBY_VERSION)
+  # get the latest jruby-openssl to support sigv4a
+  # see: https://github.com/jruby/jruby-openssl/issues/30
+  gem 'jruby-openssl'
+end
+
 group :test do
   gem 'addressable'
   gem 'cucumber'
