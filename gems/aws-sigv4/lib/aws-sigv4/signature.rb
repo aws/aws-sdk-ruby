@@ -32,6 +32,9 @@ module Aws
       # @return [String] For debugging purposes.
       attr_accessor :content_sha256
 
+      # @return [String] For debugging purposes.
+      attr_accessor :signature
+
       # @return [Hash] Internal data for debugging purposes.
       attr_accessor :extra
     end

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `sigv4a` signing algorithm without `aws-crt`.
+
 1.8.0 (2023-11-28)
 ------------------
 

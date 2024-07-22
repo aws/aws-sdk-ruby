@@ -1,6 +1,6 @@
 POST
 /
-p=
+p%20aram1=val%20ue1
 host:example.amazonaws.com
 x-amz-date:20150830T123600Z
 

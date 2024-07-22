@@ -130,8 +130,7 @@ module Aws
       #   every other AWS service as of late 2016.
       #
       # @option options [Symbol] :signing_algorithm (:sigv4) The
-      #   algorithm to use for signing.  :sigv4a is only supported when
-      #   `aws-crt` is available.
+      #   algorithm to use for signing.
       #
       # @option options [Boolean] :omit_session_token (false)
       #   (Supported only when `aws-crt` is available) If `true`,
@@ -154,12 +153,6 @@ module Aws
         @signing_algorithm = options.fetch(:signing_algorithm, :sigv4)
         @normalize_path = options.fetch(:normalize_path, true)
         @omit_session_token = options.fetch(:omit_session_token, false)
-
-        if @signing_algorithm == :sigv4a && !Signer.use_crt?
-          raise ArgumentError, 'You are attempting to sign a' \
-' request with sigv4a which requires the `aws-crt` gem.'\
-' Please install the gem or add it to your gemfile.'
-        end
 
         if @signing_algorithm == 'sigv4-s3express'.to_sym &&
            Signer.use_crt? && Aws::Crt::GEM_VERSION <= '0.1.9'
@@ -249,6 +242,7 @@ module Aws
 
         http_method = extract_http_method(request)
         url = extract_url(request)
+        Signer.normalize_path(url) if @normalize_path
         headers = downcase_headers(request[:headers])
 
         datetime = headers['x-amz-date']
@@ -261,7 +255,7 @@ module Aws
         sigv4_headers = {}
         sigv4_headers['host'] = headers['host'] || host(url)
         sigv4_headers['x-amz-date'] = datetime
-        if creds.session_token
+        if creds.session_token && !@omit_session_token
           if @signing_algorithm == 'sigv4-s3express'.to_sym
             sigv4_headers['x-amz-s3session-token'] = creds.session_token
           else
@@ -271,26 +265,45 @@ module Aws
 
         sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
 
+        if @signing_algorithm == :sigv4a && @region && !@region.empty?
+          sigv4_headers['x-amz-region-set'] = @region
+        end
         headers = headers.merge(sigv4_headers) # merge so we do not modify given headers hash
+
+        algorithm = sts_algorithm
 
         # compute signature parts
         creq = canonical_request(http_method, url, headers, content_sha256)
-        sts = string_to_sign(datetime, creq)
-        sig = signature(creds.secret_access_key, date, sts)
+        sts = string_to_sign(datetime, creq, algorithm)
+
+        sig =
+          if @signing_algorithm == :sigv4a
+            asymmetric_signature(creds, sts)
+          else
+            signature(creds.secret_access_key, date, sts)
+          end
+
+        algorithm = sts_algorithm
 
         # apply signature
         sigv4_headers['authorization'] = [
-          "AWS4-HMAC-SHA256 Credential=#{credential(creds, date)}",
+          "#{algorithm} Credential=#{credential(creds, date)}",
           "SignedHeaders=#{signed_headers(headers)}",
           "Signature=#{sig}",
         ].join(', ')
+
+        # skip signing the session token, but include it in the headers
+        if creds.session_token && @omit_session_token
+          sigv4_headers['x-amz-security-token'] = creds.session_token
+        end
 
         # Returning the signature components.
         Signature.new(
           headers: sigv4_headers,
           string_to_sign: sts,
           canonical_request: creq,
-          content_sha256: content_sha256
+          content_sha256: content_sha256,
+          signature: sig
         )
       end
 
@@ -424,6 +437,7 @@ module Aws
 
         http_method = extract_http_method(options)
         url = extract_url(options)
+        Signer.normalize_path(url) if @normalize_path
 
         headers = downcase_headers(options[:headers])
         headers['host'] ||= host(url)
@@ -436,8 +450,10 @@ module Aws
         content_sha256 ||= options[:body_digest]
         content_sha256 ||= sha256_hexdigest(options[:body] || '')
 
+        algorithm = sts_algorithm
+
         params = {}
-        params['X-Amz-Algorithm'] = 'AWS4-HMAC-SHA256'
+        params['X-Amz-Algorithm'] = algorithm
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
         params['X-Amz-Expires'] = presigned_url_expiration(options, expiration, Time.strptime(datetime, "%Y%m%dT%H%M%S%Z")).to_s
@@ -450,6 +466,10 @@ module Aws
         end
         params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
+        if @signing_algorithm == :sigv4a && @region
+          params['X-Amz-Region-Set'] = @region
+        end
+
         params = params.map do |key, value|
           "#{uri_escape(key)}=#{uri_escape(value)}"
         end.join('&')
@@ -461,12 +481,22 @@ module Aws
         end
 
         creq = canonical_request(http_method, url, headers, content_sha256)
-        sts = string_to_sign(datetime, creq)
-        url.query += '&X-Amz-Signature=' + signature(creds.secret_access_key, date, sts)
+        sts = string_to_sign(datetime, creq, algorithm)
+        signature =
+          if @signing_algorithm == :sigv4a
+            asymmetric_signature(creds, sts)
+          else
+            signature(creds.secret_access_key, date, sts)
+          end
+        url.query += '&X-Amz-Signature=' + signature
         url
       end
 
       private
+
+      def sts_algorithm
+        @signing_algorithm == :sigv4a ? 'AWS4-ECDSA-P256-SHA256' : 'AWS4-HMAC-SHA256'
+      end
 
       def canonical_request(http_method, url, headers, content_sha256)
         [
@@ -479,9 +509,9 @@ module Aws
         ].join("\n")
       end
 
-      def string_to_sign(datetime, canonical_request)
+      def string_to_sign(datetime, canonical_request, algorithm)
         [
-          'AWS4-HMAC-SHA256',
+          algorithm,
           datetime,
           credential_scope(datetime[0,8]),
           sha256_hexdigest(canonical_request),
@@ -514,10 +544,10 @@ module Aws
       def credential_scope(date)
         [
           date,
-          @region,
+          (@region unless @signing_algorithm == :sigv4a),
           @service,
-          'aws4_request',
-        ].join('/')
+          'aws4_request'
+        ].compact.join('/')
       end
 
       def credential(credentials, date)
@@ -530,6 +560,16 @@ module Aws
         k_service = hmac(k_region, @service)
         k_credentials = hmac(k_service, 'aws4_request')
         hexhmac(k_credentials, string_to_sign)
+      end
+
+      def asymmetric_signature(creds, string_to_sign)
+        ec, _ = Aws::Sigv4::AsymmetricCredentials.derive_asymmetric_key(
+          creds.access_key_id, creds.secret_access_key
+        )
+        sts_digest = OpenSSL::Digest::SHA256.digest(string_to_sign)
+        s = ec.dsa_sign_asn1(sts_digest)
+
+        Digest.hexencode(s)
       end
 
       # Comparing to original signature v4 algorithm,
@@ -899,6 +939,18 @@ module Aws
           end
         end
 
+        # @api private
+        def normalize_path(uri)
+          normalized_path = Pathname.new(uri.path).cleanpath.to_s
+          # Pathname is probably not correct to use. Empty paths will
+          # resolve to "." and should be disregarded
+          normalized_path = '' if normalized_path == '.'
+          # Ensure trailing slashes are correctly preserved
+          if uri.path.end_with?('/') && !normalized_path.end_with?('/')
+            normalized_path << '/'
+          end
+          uri.path = normalized_path
+        end
       end
     end
   end
