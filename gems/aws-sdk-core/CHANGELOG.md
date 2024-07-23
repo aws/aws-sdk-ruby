@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add `disableNormalizePath` when resolving auth_scheme for S3.
+
 3.201.2 (2024-07-18)
 ------------------
 

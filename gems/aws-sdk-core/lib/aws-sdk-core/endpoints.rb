@@ -42,6 +42,13 @@ module Aws
       def merge_signing_defaults(auth_scheme, config)
         if %w[sigv4 sigv4a sigv4-s3express].include?(auth_scheme['name'])
           auth_scheme['signingName'] ||= sigv4_name(config)
+
+          # back fill disableNormalizePath for S3 until it gets correctly set in the rules
+          if auth_scheme['signingName'] == 's3' &&
+            !auth_scheme.include?('disableNormalizePath') &&
+            auth_scheme.include?('disableDoubleEncoding')
+            auth_scheme['disableNormalizePath'] = auth_scheme['disableDoubleEncoding']
+          end
           if auth_scheme['name'] == 'sigv4a'
             # config option supersedes endpoint properties
             auth_scheme['signingRegionSet'] =
