@@ -138,8 +138,8 @@ module Aws
       #   but is treated as "unsigned" and does not contribute
       #   to the authorization signature.
       #
-      # @option options [Boolean] :normalize_path (true) (Supported only when `aws-crt` is available)
-      #   When `true`, the uri paths will be normalized when building the canonical request
+      # @option options [Boolean] :normalize_path (true) When `true`, the
+      #   uri paths will be normalized when building the canonical request.
       def initialize(options = {})
         @service = extract_service(options)
         @region = extract_region(options)
