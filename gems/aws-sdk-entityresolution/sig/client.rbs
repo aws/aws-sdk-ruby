@@ -119,7 +119,7 @@ module Aws
       def create_id_mapping_workflow: (
                                         ?description: ::String,
                                         id_mapping_techniques: {
-                                          id_mapping_type: ("PROVIDER"),
+                                          id_mapping_type: ("PROVIDER" | "RULE_BASED"),
                                           provider_properties: {
                                             intermediate_source_configuration: {
                                               intermediate_s3_path: ::String
@@ -127,6 +127,17 @@ module Aws
                                             provider_configuration: {
                                             }?,
                                             provider_service_arn: ::String
+                                          }?,
+                                          rule_based_properties: {
+                                            attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                                            record_matching_model: ("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET"),
+                                            rule_definition_type: ("SOURCE" | "TARGET"),
+                                            rules: Array[
+                                              {
+                                                matching_keys: Array[::String],
+                                                rule_name: ::String
+                                              },
+                                            ]?
                                           }?
                                         },
                                         input_source_config: Array[
@@ -142,7 +153,7 @@ module Aws
                                             output_s3_path: ::String
                                           },
                                         ],
-                                        role_arn: ::String,
+                                        ?role_arn: ::String,
                                         ?tags: Hash[::String, ::String],
                                         workflow_name: ::String
                                       ) -> _CreateIdMappingWorkflowResponseSuccess
@@ -166,11 +177,22 @@ module Aws
                                  ?description: ::String,
                                  ?id_mapping_workflow_properties: Array[
                                    {
-                                     id_mapping_type: ("PROVIDER"),
+                                     id_mapping_type: ("PROVIDER" | "RULE_BASED"),
                                      provider_properties: {
                                        provider_configuration: {
                                        }?,
                                        provider_service_arn: ::String
+                                     }?,
+                                     rule_based_properties: {
+                                       attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")?,
+                                       record_matching_models: Array[("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")]?,
+                                       rule_definition_types: Array[("SOURCE" | "TARGET")]?,
+                                       rules: Array[
+                                         {
+                                           matching_keys: Array[::String],
+                                           rule_name: ::String
+                                         },
+                                       ]?
                                      }?
                                    },
                                  ],
@@ -236,6 +258,7 @@ module Aws
                                         resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
                                         rule_based_properties: {
                                           attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                                          match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")?,
                                           rules: Array[
                                             {
                                               matching_keys: Array[::String],
@@ -264,6 +287,7 @@ module Aws
                                      {
                                        field_name: ::String,
                                        group_name: ::String?,
+                                       hashed: bool?,
                                        match_key: ::String?,
                                        sub_type: ::String?,
                                        type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID")
@@ -657,7 +681,7 @@ module Aws
       def update_id_mapping_workflow: (
                                         ?description: ::String,
                                         id_mapping_techniques: {
-                                          id_mapping_type: ("PROVIDER"),
+                                          id_mapping_type: ("PROVIDER" | "RULE_BASED"),
                                           provider_properties: {
                                             intermediate_source_configuration: {
                                               intermediate_s3_path: ::String
@@ -665,6 +689,17 @@ module Aws
                                             provider_configuration: {
                                             }?,
                                             provider_service_arn: ::String
+                                          }?,
+                                          rule_based_properties: {
+                                            attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                                            record_matching_model: ("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET"),
+                                            rule_definition_type: ("SOURCE" | "TARGET"),
+                                            rules: Array[
+                                              {
+                                                matching_keys: Array[::String],
+                                                rule_name: ::String
+                                              },
+                                            ]?
                                           }?
                                         },
                                         input_source_config: Array[
@@ -680,7 +715,7 @@ module Aws
                                             output_s3_path: ::String
                                           },
                                         ],
-                                        role_arn: ::String,
+                                        ?role_arn: ::String,
                                         workflow_name: ::String
                                       ) -> _UpdateIdMappingWorkflowResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdMappingWorkflowResponseSuccess
@@ -702,11 +737,22 @@ module Aws
                                  ?description: ::String,
                                  ?id_mapping_workflow_properties: Array[
                                    {
-                                     id_mapping_type: ("PROVIDER"),
+                                     id_mapping_type: ("PROVIDER" | "RULE_BASED"),
                                      provider_properties: {
                                        provider_configuration: {
                                        }?,
                                        provider_service_arn: ::String
+                                     }?,
+                                     rule_based_properties: {
+                                       attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")?,
+                                       record_matching_models: Array[("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")]?,
+                                       rule_definition_types: Array[("SOURCE" | "TARGET")]?,
+                                       rules: Array[
+                                         {
+                                           matching_keys: Array[::String],
+                                           rule_name: ::String
+                                         },
+                                       ]?
                                      }?
                                    },
                                  ],
@@ -769,6 +815,7 @@ module Aws
                                         resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
                                         rule_based_properties: {
                                           attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                                          match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")?,
                                           rules: Array[
                                             {
                                               matching_keys: Array[::String],
@@ -796,6 +843,7 @@ module Aws
                                      {
                                        field_name: ::String,
                                        group_name: ::String?,
+                                       hashed: bool?,
                                        match_key: ::String?,
                                        sub_type: ::String?,
                                        type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID")

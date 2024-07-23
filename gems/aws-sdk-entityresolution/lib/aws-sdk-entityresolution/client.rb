@@ -445,6 +445,11 @@ module Aws::EntityResolution
     #   Determines whether the permissions specified in the policy are to be
     #   allowed (`Allow`) or denied (`Deny`).
     #
+    #   If you set the value of the `effect` parameter to `Deny` for the
+    #   `AddPolicyStatement` operation, you must also set the value of the
+    #   `effect` parameter in the `policy` to `Deny` for the `PutPolicy`
+    #   operation.
+    #
     # @option params [required, Array<String>] :principal
     #   The Amazon Web Services service or Amazon Web Services account that
     #   can access the resource defined as ARN.
@@ -540,8 +545,8 @@ module Aws::EntityResolution
     #   A description of the workflow.
     #
     # @option params [required, Types::IdMappingTechniques] :id_mapping_techniques
-    #   An object which defines the `idMappingType` and the
-    #   `providerProperties`.
+    #   An object which defines the ID mapping technique and any additional
+    #   configurations.
     #
     # @option params [required, Array<Types::IdMappingWorkflowInputSource>] :input_source_config
     #   A list of `InputSource` objects, which have the fields
@@ -551,7 +556,7 @@ module Aws::EntityResolution
     #   A list of `IdMappingWorkflowOutputSource` objects, each of which
     #   contains fields `OutputS3Path` and `Output`.
     #
-    # @option params [required, String] :role_arn
+    # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to create resources on your behalf as part of
     #   workflow execution.
@@ -578,7 +583,7 @@ module Aws::EntityResolution
     #   resp = client.create_id_mapping_workflow({
     #     description: "Description",
     #     id_mapping_techniques: { # required
-    #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER, RULE_BASED
     #       provider_properties: {
     #         intermediate_source_configuration: {
     #           intermediate_s3_path: "S3Path", # required
@@ -586,6 +591,17 @@ module Aws::EntityResolution
     #         provider_configuration: {
     #         },
     #         provider_service_arn: "ProviderServiceArn", # required
+    #       },
+    #       rule_based_properties: {
+    #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
+    #         record_matching_model: "ONE_SOURCE_TO_ONE_TARGET", # required, accepts ONE_SOURCE_TO_ONE_TARGET, MANY_SOURCE_TO_ONE_TARGET
+    #         rule_definition_type: "SOURCE", # required, accepts SOURCE, TARGET
+    #         rules: [
+    #           {
+    #             matching_keys: ["AttributeName"], # required
+    #             rule_name: "RuleRuleNameString", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     input_source_config: [ # required
@@ -601,7 +617,7 @@ module Aws::EntityResolution
     #         output_s3_path: "S3Path", # required
     #       },
     #     ],
-    #     role_arn: "RoleArn", # required
+    #     role_arn: "IdMappingRoleArn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -611,9 +627,16 @@ module Aws::EntityResolution
     # @example Response structure
     #
     #   resp.description #=> String
-    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.id_mapping_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.id_mapping_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.id_mapping_techniques.rule_based_properties.record_matching_model #=> String, one of "ONE_SOURCE_TO_ONE_TARGET", "MANY_SOURCE_TO_ONE_TARGET"
+    #   resp.id_mapping_techniques.rule_based_properties.rule_definition_type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_techniques.rule_based_properties.rules #=> Array
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].matching_keys #=> Array
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].rule_name #=> String
     #   resp.input_source_config #=> Array
     #   resp.input_source_config[0].input_source_arn #=> String
     #   resp.input_source_config[0].schema_name #=> String
@@ -689,11 +712,22 @@ module Aws::EntityResolution
     #     description: "Description",
     #     id_mapping_workflow_properties: [
     #       {
-    #         id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #         id_mapping_type: "PROVIDER", # required, accepts PROVIDER, RULE_BASED
     #         provider_properties: {
     #           provider_configuration: {
     #           },
     #           provider_service_arn: "ProviderServiceArn", # required
+    #         },
+    #         rule_based_properties: {
+    #           attribute_matching_model: "ONE_TO_ONE", # accepts ONE_TO_ONE, MANY_TO_MANY
+    #           record_matching_models: ["ONE_SOURCE_TO_ONE_TARGET"], # accepts ONE_SOURCE_TO_ONE_TARGET, MANY_SOURCE_TO_ONE_TARGET
+    #           rule_definition_types: ["SOURCE"], # accepts SOURCE, TARGET
+    #           rules: [
+    #             {
+    #               matching_keys: ["AttributeName"], # required
+    #               rule_name: "RuleRuleNameString", # required
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -716,8 +750,17 @@ module Aws::EntityResolution
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id_mapping_workflow_properties #=> Array
-    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_workflow_properties[0].provider_properties.provider_service_arn #=> String
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.record_matching_models #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.record_matching_models[0] #=> String, one of "ONE_SOURCE_TO_ONE_TARGET", "MANY_SOURCE_TO_ONE_TARGET"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rule_definition_types #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rule_definition_types[0] #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].matching_keys #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].matching_keys[0] #=> String
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].rule_name #=> String
     #   resp.id_namespace_arn #=> String
     #   resp.id_namespace_name #=> String
     #   resp.input_source_config #=> Array
@@ -824,6 +867,7 @@ module Aws::EntityResolution
     #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING, PROVIDER
     #       rule_based_properties: {
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
+    #         match_purpose: "IDENTIFIER_GENERATION", # accepts IDENTIFIER_GENERATION, INDEXING
     #         rules: [ # required
     #           {
     #             matching_keys: ["AttributeName"], # required
@@ -858,6 +902,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.resolution_techniques.rule_based_properties.match_purpose #=> String, one of "IDENTIFIER_GENERATION", "INDEXING"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
@@ -910,6 +955,7 @@ module Aws::EntityResolution
     #       {
     #         field_name: "AttributeName", # required
     #         group_name: "AttributeName",
+    #         hashed: false,
     #         match_key: "AttributeName",
     #         sub_type: "AttributeName",
     #         type: "NAME", # required, accepts NAME, NAME_FIRST, NAME_MIDDLE, NAME_LAST, ADDRESS, ADDRESS_STREET1, ADDRESS_STREET2, ADDRESS_STREET3, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_COUNTRY, ADDRESS_POSTALCODE, PHONE, PHONE_NUMBER, PHONE_COUNTRYCODE, EMAIL_ADDRESS, UNIQUE_ID, DATE, STRING, PROVIDER_ID
@@ -927,6 +973,7 @@ module Aws::EntityResolution
     #   resp.mapped_input_fields #=> Array
     #   resp.mapped_input_fields[0].field_name #=> String
     #   resp.mapped_input_fields[0].group_name #=> String
+    #   resp.mapped_input_fields[0].hashed #=> Boolean
     #   resp.mapped_input_fields[0].match_key #=> String
     #   resp.mapped_input_fields[0].sub_type #=> String
     #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING", "PROVIDER_ID"
@@ -1129,6 +1176,9 @@ module Aws::EntityResolution
     #   resp.job_id #=> String
     #   resp.metrics.input_records #=> Integer
     #   resp.metrics.records_not_processed #=> Integer
+    #   resp.metrics.total_mapped_records #=> Integer
+    #   resp.metrics.total_mapped_source_records #=> Integer
+    #   resp.metrics.total_mapped_target_records #=> Integer
     #   resp.metrics.total_records_processed #=> Integer
     #   resp.output_source_config #=> Array
     #   resp.output_source_config[0].kms_arn #=> String
@@ -1174,9 +1224,16 @@ module Aws::EntityResolution
     #
     #   resp.created_at #=> Time
     #   resp.description #=> String
-    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.id_mapping_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.id_mapping_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.id_mapping_techniques.rule_based_properties.record_matching_model #=> String, one of "ONE_SOURCE_TO_ONE_TARGET", "MANY_SOURCE_TO_ONE_TARGET"
+    #   resp.id_mapping_techniques.rule_based_properties.rule_definition_type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_techniques.rule_based_properties.rules #=> Array
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].matching_keys #=> Array
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].rule_name #=> String
     #   resp.input_source_config #=> Array
     #   resp.input_source_config[0].input_source_arn #=> String
     #   resp.input_source_config[0].schema_name #=> String
@@ -1229,8 +1286,17 @@ module Aws::EntityResolution
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id_mapping_workflow_properties #=> Array
-    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_workflow_properties[0].provider_properties.provider_service_arn #=> String
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.record_matching_models #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.record_matching_models[0] #=> String, one of "ONE_SOURCE_TO_ONE_TARGET", "MANY_SOURCE_TO_ONE_TARGET"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rule_definition_types #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rule_definition_types[0] #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].matching_keys #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].matching_keys[0] #=> String
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].rule_name #=> String
     #   resp.id_namespace_arn #=> String
     #   resp.id_namespace_name #=> String
     #   resp.input_source_config #=> Array
@@ -1391,6 +1457,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.resolution_techniques.rule_based_properties.match_purpose #=> String, one of "IDENTIFIER_GENERATION", "INDEXING"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
@@ -1541,6 +1608,7 @@ module Aws::EntityResolution
     #   resp.mapped_input_fields #=> Array
     #   resp.mapped_input_fields[0].field_name #=> String
     #   resp.mapped_input_fields[0].group_name #=> String
+    #   resp.mapped_input_fields[0].hashed #=> Boolean
     #   resp.mapped_input_fields[0].match_key #=> String
     #   resp.mapped_input_fields[0].sub_type #=> String
     #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING", "PROVIDER_ID"
@@ -1671,6 +1739,8 @@ module Aws::EntityResolution
     #   resp.id_namespace_summaries #=> Array
     #   resp.id_namespace_summaries[0].created_at #=> Time
     #   resp.id_namespace_summaries[0].description #=> String
+    #   resp.id_namespace_summaries[0].id_mapping_workflow_properties #=> Array
+    #   resp.id_namespace_summaries[0].id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_namespace_summaries[0].id_namespace_arn #=> String
     #   resp.id_namespace_summaries[0].id_namespace_name #=> String
     #   resp.id_namespace_summaries[0].type #=> String, one of "SOURCE", "TARGET"
@@ -1900,6 +1970,11 @@ module Aws::EntityResolution
     # @option params [required, String] :policy
     #   The resource-based policy.
     #
+    #   If you set the value of the `effect` parameter in the `policy` to
+    #   `Deny` for the `PutPolicy` operation, you must also set the value of
+    #   the `effect` parameter to `Deny` for the `AddPolicyStatement`
+    #   operation.
+    #
     # @option params [String] :token
     #   A unique identifier for the current revision of the policy.
     #
@@ -2081,8 +2156,8 @@ module Aws::EntityResolution
     #   A description of the workflow.
     #
     # @option params [required, Types::IdMappingTechniques] :id_mapping_techniques
-    #   An object which defines the `idMappingType` and the
-    #   `providerProperties`.
+    #   An object which defines the ID mapping technique and any additional
+    #   configurations.
     #
     # @option params [required, Array<Types::IdMappingWorkflowInputSource>] :input_source_config
     #   A list of `InputSource` objects, which have the fields
@@ -2092,7 +2167,7 @@ module Aws::EntityResolution
     #   A list of `OutputSource` objects, each of which contains fields
     #   `OutputS3Path` and `KMSArn`.
     #
-    # @option params [required, String] :role_arn
+    # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. Entity Resolution
     #   assumes this role to access Amazon Web Services resources on your
     #   behalf.
@@ -2115,7 +2190,7 @@ module Aws::EntityResolution
     #   resp = client.update_id_mapping_workflow({
     #     description: "Description",
     #     id_mapping_techniques: { # required
-    #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #       id_mapping_type: "PROVIDER", # required, accepts PROVIDER, RULE_BASED
     #       provider_properties: {
     #         intermediate_source_configuration: {
     #           intermediate_s3_path: "S3Path", # required
@@ -2123,6 +2198,17 @@ module Aws::EntityResolution
     #         provider_configuration: {
     #         },
     #         provider_service_arn: "ProviderServiceArn", # required
+    #       },
+    #       rule_based_properties: {
+    #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
+    #         record_matching_model: "ONE_SOURCE_TO_ONE_TARGET", # required, accepts ONE_SOURCE_TO_ONE_TARGET, MANY_SOURCE_TO_ONE_TARGET
+    #         rule_definition_type: "SOURCE", # required, accepts SOURCE, TARGET
+    #         rules: [
+    #           {
+    #             matching_keys: ["AttributeName"], # required
+    #             rule_name: "RuleRuleNameString", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     input_source_config: [ # required
@@ -2138,16 +2224,23 @@ module Aws::EntityResolution
     #         output_s3_path: "S3Path", # required
     #       },
     #     ],
-    #     role_arn: "RoleArn", # required
+    #     role_arn: "IdMappingRoleArn",
     #     workflow_name: "EntityName", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.description #=> String
-    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.id_mapping_techniques.provider_properties.provider_service_arn #=> String
+    #   resp.id_mapping_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.id_mapping_techniques.rule_based_properties.record_matching_model #=> String, one of "ONE_SOURCE_TO_ONE_TARGET", "MANY_SOURCE_TO_ONE_TARGET"
+    #   resp.id_mapping_techniques.rule_based_properties.rule_definition_type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_techniques.rule_based_properties.rules #=> Array
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].matching_keys #=> Array
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
+    #   resp.id_mapping_techniques.rule_based_properties.rules[0].rule_name #=> String
     #   resp.input_source_config #=> Array
     #   resp.input_source_config[0].input_source_arn #=> String
     #   resp.input_source_config[0].schema_name #=> String
@@ -2207,11 +2300,22 @@ module Aws::EntityResolution
     #     description: "Description",
     #     id_mapping_workflow_properties: [
     #       {
-    #         id_mapping_type: "PROVIDER", # required, accepts PROVIDER
+    #         id_mapping_type: "PROVIDER", # required, accepts PROVIDER, RULE_BASED
     #         provider_properties: {
     #           provider_configuration: {
     #           },
     #           provider_service_arn: "ProviderServiceArn", # required
+    #         },
+    #         rule_based_properties: {
+    #           attribute_matching_model: "ONE_TO_ONE", # accepts ONE_TO_ONE, MANY_TO_MANY
+    #           record_matching_models: ["ONE_SOURCE_TO_ONE_TARGET"], # accepts ONE_SOURCE_TO_ONE_TARGET, MANY_SOURCE_TO_ONE_TARGET
+    #           rule_definition_types: ["SOURCE"], # accepts SOURCE, TARGET
+    #           rules: [
+    #             {
+    #               matching_keys: ["AttributeName"], # required
+    #               rule_name: "RuleRuleNameString", # required
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -2230,8 +2334,17 @@ module Aws::EntityResolution
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id_mapping_workflow_properties #=> Array
-    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER"
+    #   resp.id_mapping_workflow_properties[0].id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_workflow_properties[0].provider_properties.provider_service_arn #=> String
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.record_matching_models #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.record_matching_models[0] #=> String, one of "ONE_SOURCE_TO_ONE_TARGET", "MANY_SOURCE_TO_ONE_TARGET"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rule_definition_types #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rule_definition_types[0] #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].matching_keys #=> Array
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].matching_keys[0] #=> String
+    #   resp.id_mapping_workflow_properties[0].rule_based_properties.rules[0].rule_name #=> String
     #   resp.id_namespace_arn #=> String
     #   resp.id_namespace_name #=> String
     #   resp.input_source_config #=> Array
@@ -2331,6 +2444,7 @@ module Aws::EntityResolution
     #       resolution_type: "RULE_MATCHING", # required, accepts RULE_MATCHING, ML_MATCHING, PROVIDER
     #       rule_based_properties: {
     #         attribute_matching_model: "ONE_TO_ONE", # required, accepts ONE_TO_ONE, MANY_TO_MANY
+    #         match_purpose: "IDENTIFIER_GENERATION", # accepts IDENTIFIER_GENERATION, INDEXING
     #         rules: [ # required
     #           {
     #             matching_keys: ["AttributeName"], # required
@@ -2362,6 +2476,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.attribute_matching_model #=> String, one of "ONE_TO_ONE", "MANY_TO_MANY"
+    #   resp.resolution_techniques.rule_based_properties.match_purpose #=> String, one of "IDENTIFIER_GENERATION", "INDEXING"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].matching_keys[0] #=> String
@@ -2413,6 +2528,7 @@ module Aws::EntityResolution
     #       {
     #         field_name: "AttributeName", # required
     #         group_name: "AttributeName",
+    #         hashed: false,
     #         match_key: "AttributeName",
     #         sub_type: "AttributeName",
     #         type: "NAME", # required, accepts NAME, NAME_FIRST, NAME_MIDDLE, NAME_LAST, ADDRESS, ADDRESS_STREET1, ADDRESS_STREET2, ADDRESS_STREET3, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_COUNTRY, ADDRESS_POSTALCODE, PHONE, PHONE_NUMBER, PHONE_COUNTRYCODE, EMAIL_ADDRESS, UNIQUE_ID, DATE, STRING, PROVIDER_ID
@@ -2427,6 +2543,7 @@ module Aws::EntityResolution
     #   resp.mapped_input_fields #=> Array
     #   resp.mapped_input_fields[0].field_name #=> String
     #   resp.mapped_input_fields[0].group_name #=> String
+    #   resp.mapped_input_fields[0].hashed #=> Boolean
     #   resp.mapped_input_fields[0].match_key #=> String
     #   resp.mapped_input_fields[0].sub_type #=> String
     #   resp.mapped_input_fields[0].type #=> String, one of "NAME", "NAME_FIRST", "NAME_MIDDLE", "NAME_LAST", "ADDRESS", "ADDRESS_STREET1", "ADDRESS_STREET2", "ADDRESS_STREET3", "ADDRESS_CITY", "ADDRESS_STATE", "ADDRESS_COUNTRY", "ADDRESS_POSTALCODE", "PHONE", "PHONE_NUMBER", "PHONE_COUNTRYCODE", "EMAIL_ADDRESS", "UNIQUE_ID", "DATE", "STRING", "PROVIDER_ID"
@@ -2455,7 +2572,7 @@ module Aws::EntityResolution
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

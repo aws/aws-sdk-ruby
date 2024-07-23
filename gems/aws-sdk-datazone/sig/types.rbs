@@ -796,27 +796,6 @@ module Aws::DataZone
       SENSITIVE: [:description]
     end
 
-    class DataProductItem
-      attr_accessor domain_id: ::String
-      attr_accessor item_id: ::String
-      SENSITIVE: []
-    end
-
-    class DataProductSummary
-      attr_accessor created_at: ::Time
-      attr_accessor created_by: ::String
-      attr_accessor data_product_items: ::Array[Types::DataProductItem]
-      attr_accessor description: ::String
-      attr_accessor domain_id: ::String
-      attr_accessor glossary_terms: ::Array[::String]
-      attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor owning_project_id: ::String
-      attr_accessor updated_at: ::Time
-      attr_accessor updated_by: ::String
-      SENSITIVE: [:description, :name]
-    end
-
     class DataSourceConfigurationInput
       attr_accessor glue_run_configuration: Types::GlueRunConfigurationInput
       attr_accessor redshift_run_configuration: Types::RedshiftRunConfigurationInput
@@ -2904,15 +2883,12 @@ module Aws::DataZone
 
     class SearchInventoryResultItem
       attr_accessor asset_item: Types::AssetItem
-      attr_accessor data_product_item: Types::DataProductSummary
       attr_accessor glossary_item: Types::GlossaryItem
       attr_accessor glossary_term_item: Types::GlossaryTermItem
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AssetItem < SearchInventoryResultItem
-      end
-      class DataProductItem < SearchInventoryResultItem
       end
       class GlossaryItem < SearchInventoryResultItem
       end

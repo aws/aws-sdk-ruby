@@ -10,8 +10,7 @@
 module Aws::EntityResolution
   module Types
 
-    # You do not have sufficient access to perform this action. `HTTP Status
-    # Code: 403`
+    # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -43,6 +42,11 @@ module Aws::EntityResolution
     # @!attribute [rw] effect
     #   Determines whether the permissions specified in the policy are to be
     #   allowed (`Allow`) or denied (`Deny`).
+    #
+    #   If you set the value of the `effect` parameter to `Deny` for the
+    #   `AddPolicyStatement` operation, you must also set the value of the
+    #   `effect` parameter in the `policy` to `Deny` for the `PutPolicy`
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -142,8 +146,7 @@ module Aws::EntityResolution
 
     # The request could not be processed because of conflict in the current
     # state of the resource. Example: Workflow already exists, Schema
-    # already exists, Workflow is currently running, etc. `HTTP Status Code:
-    # 400`
+    # already exists, Workflow is currently running, etc.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -161,8 +164,8 @@ module Aws::EntityResolution
     #   @return [String]
     #
     # @!attribute [rw] id_mapping_techniques
-    #   An object which defines the `idMappingType` and the
-    #   `providerProperties`.
+    #   An object which defines the ID mapping technique and any additional
+    #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
     # @!attribute [rw] input_source_config
@@ -210,8 +213,8 @@ module Aws::EntityResolution
     #   @return [String]
     #
     # @!attribute [rw] id_mapping_techniques
-    #   An object which defines the `idMappingType` and the
-    #   `providerProperties`.
+    #   An object which defines the ID mapping technique and any additional
+    #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
     # @!attribute [rw] input_source_config
@@ -731,7 +734,7 @@ module Aws::EntityResolution
 
     # The request was rejected because it attempted to create resources
     # beyond the current Entity Resolution account limits. The error message
-    # describes the limit exceeded. `HTTP Status Code: 402`
+    # describes the limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -835,8 +838,8 @@ module Aws::EntityResolution
     #   @return [String]
     #
     # @!attribute [rw] id_mapping_techniques
-    #   An object which defines the `idMappingType` and the
-    #   `providerProperties`.
+    #   An object which defines the ID mapping technique and any additional
+    #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
     # @!attribute [rw] input_source_config
@@ -1353,19 +1356,32 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `InputRecords`, `TotalRecordsProcessed`,
-    # `MatchIDs`, and `RecordsNotProcessed`.
+    # An object containing `InputRecords`, `RecordsNotProcessed`,
+    # `TotalRecordsProcessed`, `TotalMappedRecords`,
+    # `TotalMappedSourceRecords`, and `TotalMappedTargetRecords`.
     #
     # @!attribute [rw] input_records
-    #   The total number of input records.
+    #   The total number of records that were input for processing.
     #   @return [Integer]
     #
     # @!attribute [rw] records_not_processed
     #   The total number of records that did not get processed.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_mapped_records
+    #   The total number of records that were mapped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_mapped_source_records
+    #   The total number of mapped source records.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_mapped_target_records
+    #   The total number of distinct mapped target records.
+    #   @return [Integer]
+    #
     # @!attribute [rw] total_records_processed
-    #   The total number of records processed.
+    #   The total number of records that were processed.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdMappingJobMetrics AWS API Documentation
@@ -1373,6 +1389,9 @@ module Aws::EntityResolution
     class IdMappingJobMetrics < Struct.new(
       :input_records,
       :records_not_processed,
+      :total_mapped_records,
+      :total_mapped_source_records,
+      :total_mapped_target_records,
       :total_records_processed)
       SENSITIVE = []
       include Aws::Structure
@@ -1405,7 +1424,59 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object which defines the ID mapping techniques and provider
+    # An object that defines the list of matching rules to run in an ID
+    # mapping workflow.
+    #
+    # @!attribute [rw] attribute_matching_model
+    #   The comparison type. You can either choose `ONE_TO_ONE` or
+    #   `MANY_TO_MANY` as the `attributeMatchingModel`.
+    #
+    #   If you choose `MANY_TO_MANY`, the system can match attributes across
+    #   the sub-types of an attribute type. For example, if the value of the
+    #   `Email` field of Profile A matches the value of the `BusinessEmail`
+    #   field of Profile B, the two profiles are matched on the `Email`
+    #   attribute type.
+    #
+    #   If you choose `ONE_TO_ONE`, the system can only match attributes if
+    #   the sub-types are an exact match. For example, for the `Email`
+    #   attribute type, the system will only consider it a match if the
+    #   value of the `Email` field of Profile A matches the value of the
+    #   `Email` field of Profile B.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_matching_model
+    #   The type of matching record that is allowed to be used in an ID
+    #   mapping workflow.
+    #
+    #   If the value is set to `ONE_SOURCE_TO_ONE_TARGET`, only one record
+    #   in the source can be matched to the same record in the target.
+    #
+    #   If the value is set to `MANY_SOURCE_TO_ONE_TARGET`, multiple records
+    #   in the source can be matched to one record in the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_definition_type
+    #   The set of rules you can use in an ID mapping workflow. The
+    #   limitations specified for the source or target to define the match
+    #   rules must be compatible.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   The rules that can be used for ID mapping.
+    #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdMappingRuleBasedProperties AWS API Documentation
+    #
+    class IdMappingRuleBasedProperties < Struct.new(
+      :attribute_matching_model,
+      :record_matching_model,
+      :rule_definition_type,
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object which defines the ID mapping technique and any additional
     # configurations.
     #
     # @!attribute [rw] id_mapping_type
@@ -1417,11 +1488,17 @@ module Aws::EntityResolution
     #   the provider service.
     #   @return [Types::ProviderProperties]
     #
+    # @!attribute [rw] rule_based_properties
+    #   An object which defines any additional configurations required by
+    #   rule-based matching.
+    #   @return [Types::IdMappingRuleBasedProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdMappingTechniques AWS API Documentation
     #
     class IdMappingTechniques < Struct.new(
       :id_mapping_type,
-      :provider_properties)
+      :provider_properties,
+      :rule_based_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1429,7 +1506,8 @@ module Aws::EntityResolution
     # An object containing `InputSourceARN`, `SchemaName`, and `Type`.
     #
     # @!attribute [rw] input_source_arn
-    #   An Glue table ARN for the input source table.
+    #   An Glue table Amazon Resource Name (ARN) or a matching workflow ARN
+    #   for the input source table.
     #   @return [String]
     #
     # @!attribute [rw] schema_name
@@ -1443,7 +1521,7 @@ module Aws::EntityResolution
     #   The `SOURCE` contains configurations for `sourceId` data that will
     #   be processed in an ID mapping workflow.
     #
-    #   The `TARGET` contains a configuration of `targetId` to which all
+    #   The `TARGET` contains a configuration of `targetId` which all
     #   `sourceIds` will resolve to.
     #   @return [String]
     #
@@ -1509,7 +1587,22 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object containing `IdMappingType` and `ProviderProperties`.
+    # The settings for the ID namespace for the ID mapping workflow job.
+    #
+    # @!attribute [rw] id_mapping_type
+    #   The type of ID mapping.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdNamespaceIdMappingWorkflowMetadata AWS API Documentation
+    #
+    class IdNamespaceIdMappingWorkflowMetadata < Struct.new(
+      :id_mapping_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing `IdMappingType`, `ProviderProperties`, and
+    # `RuleBasedProperties`.
     #
     # @!attribute [rw] id_mapping_type
     #   The type of ID mapping.
@@ -1520,11 +1613,17 @@ module Aws::EntityResolution
     #   the provider service.
     #   @return [Types::NamespaceProviderProperties]
     #
+    # @!attribute [rw] rule_based_properties
+    #   An object which defines any additional configurations required by
+    #   rule-based matching.
+    #   @return [Types::NamespaceRuleBasedProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdNamespaceIdMappingWorkflowProperties AWS API Documentation
     #
     class IdNamespaceIdMappingWorkflowProperties < Struct.new(
       :id_mapping_type,
-      :provider_properties)
+      :provider_properties,
+      :rule_based_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1532,7 +1631,8 @@ module Aws::EntityResolution
     # An object containing `InputSourceARN` and `SchemaName`.
     #
     # @!attribute [rw] input_source_arn
-    #   An Glue table ARN for the input source table.
+    #   An Glue table Amazon Resource Name (ARN) or a matching workflow ARN
+    #   for the input source table.
     #   @return [String]
     #
     # @!attribute [rw] schema_name
@@ -1558,6 +1658,11 @@ module Aws::EntityResolution
     #   The description of the ID namespace.
     #   @return [String]
     #
+    # @!attribute [rw] id_mapping_workflow_properties
+    #   An object which defines any additional configurations required by
+    #   the ID mapping workflow.
+    #   @return [Array<Types::IdNamespaceIdMappingWorkflowMetadata>]
+    #
     # @!attribute [rw] id_namespace_arn
     #   The Amazon Resource Name (ARN) of the ID namespace.
     #   @return [String]
@@ -1573,7 +1678,7 @@ module Aws::EntityResolution
     #   The `SOURCE` contains configurations for `sourceId` data that will
     #   be processed in an ID mapping workflow.
     #
-    #   The `TARGET` contains a configuration of `targetId` to which all
+    #   The `TARGET` contains a configuration of `targetId` which all
     #   `sourceIds` will resolve to.
     #   @return [String]
     #
@@ -1586,6 +1691,7 @@ module Aws::EntityResolution
     class IdNamespaceSummary < Struct.new(
       :created_at,
       :description,
+      :id_mapping_workflow_properties,
       :id_namespace_arn,
       :id_namespace_name,
       :type,
@@ -1621,7 +1727,7 @@ module Aws::EntityResolution
     #   @return [Boolean]
     #
     # @!attribute [rw] input_source_arn
-    #   An Glue table ARN for the input source table.
+    #   An Glue table Amazon Resource Name (ARN) for the input source table.
     #   @return [String]
     #
     # @!attribute [rw] schema_name
@@ -1655,7 +1761,7 @@ module Aws::EntityResolution
     end
 
     # This exception occurs when there is an internal failure in the Entity
-    # Resolution service. `HTTP Status Code: 500`
+    # Resolution service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2095,6 +2201,57 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
+    # The rule-based properties of an ID namespace. These properties define
+    # how the ID namespace can be used in an ID mapping workflow.
+    #
+    # @!attribute [rw] attribute_matching_model
+    #   The comparison type. You can either choose `ONE_TO_ONE` or
+    #   `MANY_TO_MANY` as the `attributeMatchingModel`.
+    #
+    #   If you choose `MANY_TO_MANY`, the system can match attributes across
+    #   the sub-types of an attribute type. For example, if the value of the
+    #   `Email` field of Profile A matches the value of `BusinessEmail`
+    #   field of Profile B, the two profiles are matched on the `Email`
+    #   attribute type.
+    #
+    #   If you choose `ONE_TO_ONE`, the system can only match attributes if
+    #   the sub-types are an exact match. For example, for the `Email`
+    #   attribute type, the system will only consider it a match if the
+    #   value of the `Email` field of Profile A matches the value of the
+    #   `Email` field of Profile B.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_matching_models
+    #   The type of matching record that is allowed to be used in an ID
+    #   mapping workflow.
+    #
+    #   If the value is set to `ONE_SOURCE_TO_ONE_TARGET`, only one record
+    #   in the source is matched to one record in the target.
+    #
+    #   If the value is set to `MANY_SOURCE_TO_ONE_TARGET`, all matching
+    #   records in the source are matched to one record in the target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rule_definition_types
+    #   The sets of rules you can use in an ID mapping workflow. The
+    #   limitations specified for the source and target must be compatible.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rules
+    #   The rules for the ID namespace.
+    #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/NamespaceRuleBasedProperties AWS API Documentation
+    #
+    class NamespaceRuleBasedProperties < Struct.new(
+      :attribute_matching_model,
+      :record_matching_models,
+      :rule_definition_types,
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of `OutputAttribute` objects, each of which have the fields
     # `Name` and `Hashed`. Each of these objects selects a column to be
     # included in the output table, and whether the values of the column
@@ -2371,6 +2528,11 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] policy
     #   The resource-based policy.
+    #
+    #   If you set the value of the `effect` parameter in the `policy` to
+    #   `Deny` for the `PutPolicy` operation, you must also set the value of
+    #   the `effect` parameter to `Deny` for the `AddPolicyStatement`
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] token
@@ -2436,7 +2598,7 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # The resource could not be found. `HTTP Status Code: 404`
+    # The resource could not be found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2470,20 +2632,35 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
-    # An object which defines the list of matching rules to run and has a
-    # field `Rules`, which is a list of rule objects.
+    # An object which defines the list of matching rules to run in a
+    # matching workflow. RuleBasedProperties contain a `Rules` field, which
+    # is a list of rule objects.
     #
     # @!attribute [rw] attribute_matching_model
     #   The comparison type. You can either choose `ONE_TO_ONE` or
-    #   `MANY_TO_MANY` as the AttributeMatchingModel. When choosing
-    #   `MANY_TO_MANY`, the system can match attributes across the sub-types
-    #   of an attribute type. For example, if the value of the `Email` field
-    #   of Profile A and the value of `BusinessEmail` field of Profile B
-    #   matches, the two profiles are matched on the `Email` type. When
-    #   choosing `ONE_TO_ONE` ,the system can only match if the sub-types
-    #   are exact matches. For example, only when the value of the `Email`
-    #   field of Profile A and the value of the `Email` field of Profile B
-    #   matches, the two profiles are matched on the `Email` type.
+    #   `MANY_TO_MANY` as the `attributeMatchingModel`.
+    #
+    #   If you choose `MANY_TO_MANY`, the system can match attributes across
+    #   the sub-types of an attribute type. For example, if the value of the
+    #   `Email` field of Profile A and the value of `BusinessEmail` field of
+    #   Profile B matches, the two profiles are matched on the `Email`
+    #   attribute type.
+    #
+    #   If you choose `ONE_TO_ONE`, the system can only match attributes if
+    #   the sub-types are an exact match. For example, for the `Email`
+    #   attribute type, the system will only consider it a match if the
+    #   value of the `Email` field of Profile A matches the value of the
+    #   `Email` field of Profile B.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_purpose
+    #   An indicator of whether to generate IDs and index the data or not.
+    #
+    #   If you choose `IDENTIFIER_GENERATION`, the process generates IDs and
+    #   indexes the data.
+    #
+    #   If you choose `INDEXING`, the process indexes the data without
+    #   generating IDs.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -2495,13 +2672,14 @@ module Aws::EntityResolution
     #
     class RuleBasedProperties < Struct.new(
       :attribute_matching_model,
+      :match_purpose,
       :rules)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An object containing `FieldName`, `Type`, `GroupName`, `MatchKey`, and
-    # `SubType`.
+    # An object containing `FieldName`, `Type`, `GroupName`, `MatchKey`,
+    # `Hashing`, and `SubType`.
     #
     # @!attribute [rw] field_name
     #   A string containing the field name.
@@ -2517,15 +2695,25 @@ module Aws::EntityResolution
     #   value.
     #   @return [String]
     #
+    # @!attribute [rw] hashed
+    #   Indicates if the column values are hashed in the schema input. If
+    #   the value is set to `TRUE`, the column values are hashed. If the
+    #   value is set to `FALSE`, the column values are cleartext.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] match_key
     #   A key that allows grouping of multiple input attributes into a
-    #   unified matching group. For example, consider a scenario where the
-    #   source table contains various addresses, such as `business_address`
-    #   and `shipping_address`. By assigning a `matchKey` called `address`
-    #   to both attributes, Entity Resolution will match records across
-    #   these fields to create a consolidated matching group. If no
-    #   `matchKey` is specified for a column, it won't be utilized for
-    #   matching purposes but will still be included in the output table.
+    #   unified matching group.
+    #
+    #   For example, consider a scenario where the source table contains
+    #   various addresses, such as `business_address` and
+    #   `shipping_address`. By assigning a `matchKey` called `address` to
+    #   both attributes, Entity Resolution will match records across these
+    #   fields to create a consolidated matching group.
+    #
+    #   If no `matchKey` is specified for a column, it won't be utilized
+    #   for matching purposes but will still be included in the output
+    #   table.
     #   @return [String]
     #
     # @!attribute [rw] sub_type
@@ -2541,6 +2729,7 @@ module Aws::EntityResolution
     class SchemaInputAttribute < Struct.new(
       :field_name,
       :group_name,
+      :hashed,
       :match_key,
       :sub_type,
       :type)
@@ -2664,8 +2853,7 @@ module Aws::EntityResolution
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
-    # The request was denied due to request throttling. `HTTP Status Code:
-    # 429`
+    # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2704,8 +2892,8 @@ module Aws::EntityResolution
     #   @return [String]
     #
     # @!attribute [rw] id_mapping_techniques
-    #   An object which defines the `idMappingType` and the
-    #   `providerProperties`.
+    #   An object which defines the ID mapping technique and any additional
+    #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
     # @!attribute [rw] input_source_config
@@ -2746,8 +2934,8 @@ module Aws::EntityResolution
     #   @return [String]
     #
     # @!attribute [rw] id_mapping_techniques
-    #   An object which defines the `idMappingType` and the
-    #   `providerProperties`.
+    #   An object which defines the ID mapping technique and any additional
+    #   configurations.
     #   @return [Types::IdMappingTechniques]
     #
     # @!attribute [rw] input_source_config
@@ -3041,7 +3229,7 @@ module Aws::EntityResolution
     end
 
     # The input fails to satisfy the constraints specified by Entity
-    # Resolution. `HTTP Status Code: 400`
+    # Resolution.
     #
     # @!attribute [rw] message
     #   @return [String]

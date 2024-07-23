@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2024-07-23)
+------------------
+
+* Feature - Support First Party ID Mapping
+
 1.14.0 (2024-07-02)
 ------------------
 

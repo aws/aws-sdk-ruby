@@ -79,6 +79,9 @@ module Aws::EntityResolution
     IdMappingJobMetrics = Shapes::StructureShape.new(name: 'IdMappingJobMetrics')
     IdMappingJobOutputSource = Shapes::StructureShape.new(name: 'IdMappingJobOutputSource')
     IdMappingJobOutputSourceConfig = Shapes::ListShape.new(name: 'IdMappingJobOutputSourceConfig')
+    IdMappingRoleArn = Shapes::StringShape.new(name: 'IdMappingRoleArn')
+    IdMappingRuleBasedProperties = Shapes::StructureShape.new(name: 'IdMappingRuleBasedProperties')
+    IdMappingRuleBasedPropertiesRulesList = Shapes::ListShape.new(name: 'IdMappingRuleBasedPropertiesRulesList')
     IdMappingTechniques = Shapes::StructureShape.new(name: 'IdMappingTechniques')
     IdMappingType = Shapes::StringShape.new(name: 'IdMappingType')
     IdMappingWorkflowArn = Shapes::StringShape.new(name: 'IdMappingWorkflowArn')
@@ -88,8 +91,12 @@ module Aws::EntityResolution
     IdMappingWorkflowList = Shapes::ListShape.new(name: 'IdMappingWorkflowList')
     IdMappingWorkflowOutputSource = Shapes::StructureShape.new(name: 'IdMappingWorkflowOutputSource')
     IdMappingWorkflowOutputSourceConfig = Shapes::ListShape.new(name: 'IdMappingWorkflowOutputSourceConfig')
+    IdMappingWorkflowRuleDefinitionType = Shapes::StringShape.new(name: 'IdMappingWorkflowRuleDefinitionType')
+    IdMappingWorkflowRuleDefinitionTypeList = Shapes::ListShape.new(name: 'IdMappingWorkflowRuleDefinitionTypeList')
     IdMappingWorkflowSummary = Shapes::StructureShape.new(name: 'IdMappingWorkflowSummary')
     IdNamespaceArn = Shapes::StringShape.new(name: 'IdNamespaceArn')
+    IdNamespaceIdMappingWorkflowMetadata = Shapes::StructureShape.new(name: 'IdNamespaceIdMappingWorkflowMetadata')
+    IdNamespaceIdMappingWorkflowMetadataList = Shapes::ListShape.new(name: 'IdNamespaceIdMappingWorkflowMetadataList')
     IdNamespaceIdMappingWorkflowProperties = Shapes::StructureShape.new(name: 'IdNamespaceIdMappingWorkflowProperties')
     IdNamespaceIdMappingWorkflowPropertiesList = Shapes::ListShape.new(name: 'IdNamespaceIdMappingWorkflowPropertiesList')
     IdNamespaceInputSource = Shapes::StructureShape.new(name: 'IdNamespaceInputSource')
@@ -137,10 +144,13 @@ module Aws::EntityResolution
     ListSchemaMappingsOutput = Shapes::StructureShape.new(name: 'ListSchemaMappingsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    MatchPurpose = Shapes::StringShape.new(name: 'MatchPurpose')
     MatchingWorkflowArn = Shapes::StringShape.new(name: 'MatchingWorkflowArn')
     MatchingWorkflowList = Shapes::ListShape.new(name: 'MatchingWorkflowList')
     MatchingWorkflowSummary = Shapes::StructureShape.new(name: 'MatchingWorkflowSummary')
     NamespaceProviderProperties = Shapes::StructureShape.new(name: 'NamespaceProviderProperties')
+    NamespaceRuleBasedProperties = Shapes::StructureShape.new(name: 'NamespaceRuleBasedProperties')
+    NamespaceRuleBasedPropertiesRulesList = Shapes::ListShape.new(name: 'NamespaceRuleBasedPropertiesRulesList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OutputAttribute = Shapes::StructureShape.new(name: 'OutputAttribute')
     OutputSource = Shapes::StructureShape.new(name: 'OutputSource')
@@ -165,6 +175,8 @@ module Aws::EntityResolution
     RecordAttributeMap = Shapes::MapShape.new(name: 'RecordAttributeMap')
     RecordAttributeMapKeyString = Shapes::StringShape.new(name: 'RecordAttributeMapKeyString')
     RecordAttributeMapValueString = Shapes::StringShape.new(name: 'RecordAttributeMapValueString')
+    RecordMatchingModel = Shapes::StringShape.new(name: 'RecordMatchingModel')
+    RecordMatchingModelList = Shapes::ListShape.new(name: 'RecordMatchingModelList')
     RequiredBucketActionsList = Shapes::ListShape.new(name: 'RequiredBucketActionsList')
     ResolutionTechniques = Shapes::StructureShape.new(name: 'ResolutionTechniques')
     ResolutionType = Shapes::StringShape.new(name: 'ResolutionType')
@@ -256,7 +268,7 @@ module Aws::EntityResolution
     CreateIdMappingWorkflowInput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
     CreateIdMappingWorkflowInput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     CreateIdMappingWorkflowInput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
-    CreateIdMappingWorkflowInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateIdMappingWorkflowInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     CreateIdMappingWorkflowInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateIdMappingWorkflowInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "workflowName"))
     CreateIdMappingWorkflowInput.struct_class = Types::CreateIdMappingWorkflowInput
@@ -265,7 +277,7 @@ module Aws::EntityResolution
     CreateIdMappingWorkflowOutput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
     CreateIdMappingWorkflowOutput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     CreateIdMappingWorkflowOutput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
-    CreateIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     CreateIdMappingWorkflowOutput.add_member(:workflow_arn, Shapes::ShapeRef.new(shape: IdMappingWorkflowArn, required: true, location_name: "workflowArn"))
     CreateIdMappingWorkflowOutput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "workflowName"))
     CreateIdMappingWorkflowOutput.struct_class = Types::CreateIdMappingWorkflowOutput
@@ -398,7 +410,7 @@ module Aws::EntityResolution
     GetIdMappingWorkflowOutput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
     GetIdMappingWorkflowOutput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     GetIdMappingWorkflowOutput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
-    GetIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    GetIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     GetIdMappingWorkflowOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetIdMappingWorkflowOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     GetIdMappingWorkflowOutput.add_member(:workflow_arn, Shapes::ShapeRef.new(shape: IdMappingWorkflowArn, required: true, location_name: "workflowArn"))
@@ -500,6 +512,9 @@ module Aws::EntityResolution
 
     IdMappingJobMetrics.add_member(:input_records, Shapes::ShapeRef.new(shape: Integer, location_name: "inputRecords"))
     IdMappingJobMetrics.add_member(:records_not_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "recordsNotProcessed"))
+    IdMappingJobMetrics.add_member(:total_mapped_records, Shapes::ShapeRef.new(shape: Integer, location_name: "totalMappedRecords"))
+    IdMappingJobMetrics.add_member(:total_mapped_source_records, Shapes::ShapeRef.new(shape: Integer, location_name: "totalMappedSourceRecords"))
+    IdMappingJobMetrics.add_member(:total_mapped_target_records, Shapes::ShapeRef.new(shape: Integer, location_name: "totalMappedTargetRecords"))
     IdMappingJobMetrics.add_member(:total_records_processed, Shapes::ShapeRef.new(shape: Integer, location_name: "totalRecordsProcessed"))
     IdMappingJobMetrics.struct_class = Types::IdMappingJobMetrics
 
@@ -510,8 +525,17 @@ module Aws::EntityResolution
 
     IdMappingJobOutputSourceConfig.member = Shapes::ShapeRef.new(shape: IdMappingJobOutputSource)
 
+    IdMappingRuleBasedProperties.add_member(:attribute_matching_model, Shapes::ShapeRef.new(shape: AttributeMatchingModel, required: true, location_name: "attributeMatchingModel"))
+    IdMappingRuleBasedProperties.add_member(:record_matching_model, Shapes::ShapeRef.new(shape: RecordMatchingModel, required: true, location_name: "recordMatchingModel"))
+    IdMappingRuleBasedProperties.add_member(:rule_definition_type, Shapes::ShapeRef.new(shape: IdMappingWorkflowRuleDefinitionType, required: true, location_name: "ruleDefinitionType"))
+    IdMappingRuleBasedProperties.add_member(:rules, Shapes::ShapeRef.new(shape: IdMappingRuleBasedPropertiesRulesList, location_name: "rules"))
+    IdMappingRuleBasedProperties.struct_class = Types::IdMappingRuleBasedProperties
+
+    IdMappingRuleBasedPropertiesRulesList.member = Shapes::ShapeRef.new(shape: Rule)
+
     IdMappingTechniques.add_member(:id_mapping_type, Shapes::ShapeRef.new(shape: IdMappingType, required: true, location_name: "idMappingType"))
     IdMappingTechniques.add_member(:provider_properties, Shapes::ShapeRef.new(shape: ProviderProperties, location_name: "providerProperties"))
+    IdMappingTechniques.add_member(:rule_based_properties, Shapes::ShapeRef.new(shape: IdMappingRuleBasedProperties, location_name: "ruleBasedProperties"))
     IdMappingTechniques.struct_class = Types::IdMappingTechniques
 
     IdMappingWorkflowInputSource.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceInputSourceARNString, required: true, location_name: "inputSourceARN"))
@@ -529,14 +553,22 @@ module Aws::EntityResolution
 
     IdMappingWorkflowOutputSourceConfig.member = Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSource)
 
+    IdMappingWorkflowRuleDefinitionTypeList.member = Shapes::ShapeRef.new(shape: IdMappingWorkflowRuleDefinitionType)
+
     IdMappingWorkflowSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     IdMappingWorkflowSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     IdMappingWorkflowSummary.add_member(:workflow_arn, Shapes::ShapeRef.new(shape: IdMappingWorkflowArn, required: true, location_name: "workflowArn"))
     IdMappingWorkflowSummary.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "workflowName"))
     IdMappingWorkflowSummary.struct_class = Types::IdMappingWorkflowSummary
 
+    IdNamespaceIdMappingWorkflowMetadata.add_member(:id_mapping_type, Shapes::ShapeRef.new(shape: IdMappingType, required: true, location_name: "idMappingType"))
+    IdNamespaceIdMappingWorkflowMetadata.struct_class = Types::IdNamespaceIdMappingWorkflowMetadata
+
+    IdNamespaceIdMappingWorkflowMetadataList.member = Shapes::ShapeRef.new(shape: IdNamespaceIdMappingWorkflowMetadata)
+
     IdNamespaceIdMappingWorkflowProperties.add_member(:id_mapping_type, Shapes::ShapeRef.new(shape: IdMappingType, required: true, location_name: "idMappingType"))
     IdNamespaceIdMappingWorkflowProperties.add_member(:provider_properties, Shapes::ShapeRef.new(shape: NamespaceProviderProperties, location_name: "providerProperties"))
+    IdNamespaceIdMappingWorkflowProperties.add_member(:rule_based_properties, Shapes::ShapeRef.new(shape: NamespaceRuleBasedProperties, location_name: "ruleBasedProperties"))
     IdNamespaceIdMappingWorkflowProperties.struct_class = Types::IdNamespaceIdMappingWorkflowProperties
 
     IdNamespaceIdMappingWorkflowPropertiesList.member = Shapes::ShapeRef.new(shape: IdNamespaceIdMappingWorkflowProperties)
@@ -551,6 +583,7 @@ module Aws::EntityResolution
 
     IdNamespaceSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     IdNamespaceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    IdNamespaceSummary.add_member(:id_mapping_workflow_properties, Shapes::ShapeRef.new(shape: IdNamespaceIdMappingWorkflowMetadataList, location_name: "idMappingWorkflowProperties"))
     IdNamespaceSummary.add_member(:id_namespace_arn, Shapes::ShapeRef.new(shape: IdNamespaceArn, required: true, location_name: "idNamespaceArn"))
     IdNamespaceSummary.add_member(:id_namespace_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "idNamespaceName"))
     IdNamespaceSummary.add_member(:type, Shapes::ShapeRef.new(shape: IdNamespaceType, required: true, location_name: "type"))
@@ -672,6 +705,14 @@ module Aws::EntityResolution
     NamespaceProviderProperties.add_member(:provider_service_arn, Shapes::ShapeRef.new(shape: ProviderServiceArn, required: true, location_name: "providerServiceArn"))
     NamespaceProviderProperties.struct_class = Types::NamespaceProviderProperties
 
+    NamespaceRuleBasedProperties.add_member(:attribute_matching_model, Shapes::ShapeRef.new(shape: AttributeMatchingModel, location_name: "attributeMatchingModel"))
+    NamespaceRuleBasedProperties.add_member(:record_matching_models, Shapes::ShapeRef.new(shape: RecordMatchingModelList, location_name: "recordMatchingModels"))
+    NamespaceRuleBasedProperties.add_member(:rule_definition_types, Shapes::ShapeRef.new(shape: IdMappingWorkflowRuleDefinitionTypeList, location_name: "ruleDefinitionTypes"))
+    NamespaceRuleBasedProperties.add_member(:rules, Shapes::ShapeRef.new(shape: NamespaceRuleBasedPropertiesRulesList, location_name: "rules"))
+    NamespaceRuleBasedProperties.struct_class = Types::NamespaceRuleBasedProperties
+
+    NamespaceRuleBasedPropertiesRulesList.member = Shapes::ShapeRef.new(shape: Rule)
+
     OutputAttribute.add_member(:hashed, Shapes::ShapeRef.new(shape: Boolean, location_name: "hashed"))
     OutputAttribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, required: true, location_name: "name"))
     OutputAttribute.struct_class = Types::OutputAttribute
@@ -746,6 +787,8 @@ module Aws::EntityResolution
     RecordAttributeMap.key = Shapes::ShapeRef.new(shape: RecordAttributeMapKeyString)
     RecordAttributeMap.value = Shapes::ShapeRef.new(shape: RecordAttributeMapValueString)
 
+    RecordMatchingModelList.member = Shapes::ShapeRef.new(shape: RecordMatchingModel)
+
     RequiredBucketActionsList.member = Shapes::ShapeRef.new(shape: String)
 
     ResolutionTechniques.add_member(:provider_properties, Shapes::ShapeRef.new(shape: ProviderProperties, location_name: "providerProperties"))
@@ -761,6 +804,7 @@ module Aws::EntityResolution
     Rule.struct_class = Types::Rule
 
     RuleBasedProperties.add_member(:attribute_matching_model, Shapes::ShapeRef.new(shape: AttributeMatchingModel, required: true, location_name: "attributeMatchingModel"))
+    RuleBasedProperties.add_member(:match_purpose, Shapes::ShapeRef.new(shape: MatchPurpose, location_name: "matchPurpose"))
     RuleBasedProperties.add_member(:rules, Shapes::ShapeRef.new(shape: RuleBasedPropertiesRulesList, required: true, location_name: "rules"))
     RuleBasedProperties.struct_class = Types::RuleBasedProperties
 
@@ -770,6 +814,7 @@ module Aws::EntityResolution
 
     SchemaInputAttribute.add_member(:field_name, Shapes::ShapeRef.new(shape: AttributeName, required: true, location_name: "fieldName"))
     SchemaInputAttribute.add_member(:group_name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "groupName"))
+    SchemaInputAttribute.add_member(:hashed, Shapes::ShapeRef.new(shape: Boolean, location_name: "hashed"))
     SchemaInputAttribute.add_member(:match_key, Shapes::ShapeRef.new(shape: AttributeName, location_name: "matchKey"))
     SchemaInputAttribute.add_member(:sub_type, Shapes::ShapeRef.new(shape: AttributeName, location_name: "subType"))
     SchemaInputAttribute.add_member(:type, Shapes::ShapeRef.new(shape: SchemaAttributeType, required: true, location_name: "type"))
@@ -834,7 +879,7 @@ module Aws::EntityResolution
     UpdateIdMappingWorkflowInput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
     UpdateIdMappingWorkflowInput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     UpdateIdMappingWorkflowInput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
-    UpdateIdMappingWorkflowInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    UpdateIdMappingWorkflowInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     UpdateIdMappingWorkflowInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location: "uri", location_name: "workflowName"))
     UpdateIdMappingWorkflowInput.struct_class = Types::UpdateIdMappingWorkflowInput
 
@@ -842,7 +887,7 @@ module Aws::EntityResolution
     UpdateIdMappingWorkflowOutput.add_member(:id_mapping_techniques, Shapes::ShapeRef.new(shape: IdMappingTechniques, required: true, location_name: "idMappingTechniques"))
     UpdateIdMappingWorkflowOutput.add_member(:input_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowInputSourceConfig, required: true, location_name: "inputSourceConfig"))
     UpdateIdMappingWorkflowOutput.add_member(:output_source_config, Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSourceConfig, location_name: "outputSourceConfig"))
-    UpdateIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    UpdateIdMappingWorkflowOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IdMappingRoleArn, location_name: "roleArn"))
     UpdateIdMappingWorkflowOutput.add_member(:workflow_arn, Shapes::ShapeRef.new(shape: IdMappingWorkflowArn, required: true, location_name: "workflowArn"))
     UpdateIdMappingWorkflowOutput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "workflowName"))
     UpdateIdMappingWorkflowOutput.struct_class = Types::UpdateIdMappingWorkflowOutput
@@ -905,9 +950,11 @@ module Aws::EntityResolution
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "entityresolution",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWSEntityResolution",
         "serviceFullName" => "AWS EntityResolution",
         "serviceId" => "EntityResolution",

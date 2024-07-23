@@ -918,10 +918,14 @@ module Aws::Connect
     RealTimeContactAnalysisOutputType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisOutputType')
     RealTimeContactAnalysisPointOfInterest = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisPointOfInterest')
     RealTimeContactAnalysisPointsOfInterest = Shapes::ListShape.new(name: 'RealTimeContactAnalysisPointsOfInterest')
+    RealTimeContactAnalysisPostContactSummaryContent = Shapes::StringShape.new(name: 'RealTimeContactAnalysisPostContactSummaryContent')
+    RealTimeContactAnalysisPostContactSummaryFailureCode = Shapes::StringShape.new(name: 'RealTimeContactAnalysisPostContactSummaryFailureCode')
+    RealTimeContactAnalysisPostContactSummaryStatus = Shapes::StringShape.new(name: 'RealTimeContactAnalysisPostContactSummaryStatus')
     RealTimeContactAnalysisSegmentAttachments = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentAttachments')
     RealTimeContactAnalysisSegmentCategories = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentCategories')
     RealTimeContactAnalysisSegmentEvent = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentEvent')
     RealTimeContactAnalysisSegmentIssues = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentIssues')
+    RealTimeContactAnalysisSegmentPostContactSummary = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentPostContactSummary')
     RealTimeContactAnalysisSegmentTranscript = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentTranscript')
     RealTimeContactAnalysisSegmentType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSegmentType')
     RealTimeContactAnalysisSegmentTypes = Shapes::ListShape.new(name: 'RealTimeContactAnalysisSegmentTypes')
@@ -4296,6 +4300,11 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentIssues.add_member(:issues_detected, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisIssuesDetected, required: true, location_name: "IssuesDetected"))
     RealTimeContactAnalysisSegmentIssues.struct_class = Types::RealTimeContactAnalysisSegmentIssues
 
+    RealTimeContactAnalysisSegmentPostContactSummary.add_member(:content, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPostContactSummaryContent, location_name: "Content"))
+    RealTimeContactAnalysisSegmentPostContactSummary.add_member(:status, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPostContactSummaryStatus, required: true, location_name: "Status"))
+    RealTimeContactAnalysisSegmentPostContactSummary.add_member(:failure_code, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPostContactSummaryFailureCode, location_name: "FailureCode"))
+    RealTimeContactAnalysisSegmentPostContactSummary.struct_class = Types::RealTimeContactAnalysisSegmentPostContactSummary
+
     RealTimeContactAnalysisSegmentTranscript.add_member(:id, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisId256, required: true, location_name: "Id"))
     RealTimeContactAnalysisSegmentTranscript.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "ParticipantId"))
     RealTimeContactAnalysisSegmentTranscript.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, required: true, location_name: "ParticipantRole"))
@@ -4336,12 +4345,14 @@ module Aws::Connect
     RealtimeContactAnalysisSegment.add_member(:issues, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentIssues, location_name: "Issues"))
     RealtimeContactAnalysisSegment.add_member(:event, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentEvent, location_name: "Event"))
     RealtimeContactAnalysisSegment.add_member(:attachments, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentAttachments, location_name: "Attachments"))
+    RealtimeContactAnalysisSegment.add_member(:post_contact_summary, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentPostContactSummary, location_name: "PostContactSummary"))
     RealtimeContactAnalysisSegment.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RealtimeContactAnalysisSegment.add_member_subclass(:transcript, Types::RealtimeContactAnalysisSegment::Transcript)
     RealtimeContactAnalysisSegment.add_member_subclass(:categories, Types::RealtimeContactAnalysisSegment::Categories)
     RealtimeContactAnalysisSegment.add_member_subclass(:issues, Types::RealtimeContactAnalysisSegment::Issues)
     RealtimeContactAnalysisSegment.add_member_subclass(:event, Types::RealtimeContactAnalysisSegment::Event)
     RealtimeContactAnalysisSegment.add_member_subclass(:attachments, Types::RealtimeContactAnalysisSegment::Attachments)
+    RealtimeContactAnalysisSegment.add_member_subclass(:post_contact_summary, Types::RealtimeContactAnalysisSegment::PostContactSummary)
     RealtimeContactAnalysisSegment.add_member_subclass(:unknown, Types::RealtimeContactAnalysisSegment::Unknown)
     RealtimeContactAnalysisSegment.struct_class = Types::RealtimeContactAnalysisSegment
 

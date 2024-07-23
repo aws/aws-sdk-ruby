@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2024-07-23)
+------------------
+
+* Feature - Added PostContactSummary segment type on ListRealTimeContactAnalysisSegmentsV2 API
+
 1.168.0 (2024-07-18)
 ------------------
 

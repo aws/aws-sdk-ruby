@@ -431,16 +431,23 @@ module Aws::CleanRoomsML
     # and storing the audience model. The audience model can be used in
     # multiple calls to the StartAudienceGenerationJob API.
     #
-    # @option params [String] :description
-    #   The description of the audience model.
+    # @option params [Time,DateTime,Date,Integer,String] :training_data_start_time
+    #   The start date and time of the training window.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :training_data_end_time
+    #   The end date and time of the training window.
+    #
+    # @option params [required, String] :name
+    #   The name of the audience model resource.
+    #
+    # @option params [required, String] :training_dataset_arn
+    #   The Amazon Resource Name (ARN) of the training dataset for this
+    #   audience model.
     #
     # @option params [String] :kms_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
     #   encrypt and decrypt customer-owned data in the trained ML model and
     #   the associated data.
-    #
-    # @option params [required, String] :name
-    #   The name of the audience model resource.
     #
     # @option params [Hash<String,String>] :tags
     #   The optional metadata that you apply to the resource to help you
@@ -474,15 +481,8 @@ module Aws::CleanRoomsML
     #     limit of 50 tags. Tags with only the key prefix of aws do not count
     #     against your tags per resource limit.
     #
-    # @option params [Time,DateTime,Date,Integer,String] :training_data_end_time
-    #   The end date and time of the training window.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :training_data_start_time
-    #   The start date and time of the training window.
-    #
-    # @option params [required, String] :training_dataset_arn
-    #   The Amazon Resource Name (ARN) of the training dataset for this
-    #   audience model.
+    # @option params [String] :description
+    #   The description of the audience model.
     #
     # @return [Types::CreateAudienceModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -491,15 +491,15 @@ module Aws::CleanRoomsML
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_audience_model({
-    #     description: "ResourceDescription",
-    #     kms_key_arn: "KmsKeyArn",
+    #     training_data_start_time: Time.now,
+    #     training_data_end_time: Time.now,
     #     name: "NameString", # required
+    #     training_dataset_arn: "TrainingDatasetArn", # required
+    #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     training_data_end_time: Time.now,
-    #     training_data_start_time: Time.now,
-    #     training_dataset_arn: "TrainingDatasetArn", # required
+    #     description: "ResourceDescription",
     #   })
     #
     # @example Response structure
@@ -518,42 +518,12 @@ module Aws::CleanRoomsML
     # Defines the information necessary to create a configured audience
     # model.
     #
+    # @option params [required, String] :name
+    #   The name of the configured audience model.
+    #
     # @option params [required, String] :audience_model_arn
     #   The Amazon Resource Name (ARN) of the audience model to use for the
     #   configured audience model.
-    #
-    # @option params [Types::AudienceSizeConfig] :audience_size_config
-    #   Configure the list of output sizes of audiences that can be created
-    #   using this configured audience model. A request to
-    #   StartAudienceGenerationJob that uses this configured audience model
-    #   must have an `audienceSize` selected from this list. You can use the
-    #   `ABSOLUTE` AudienceSize to configure out audience sizes using the
-    #   count of identifiers in the output. You can use the `Percentage`
-    #   AudienceSize to configure sizes in the range 1-100 percent.
-    #
-    # @option params [String] :child_resource_tag_on_create_policy
-    #   Configure how the service tags audience generation jobs created using
-    #   this configured audience model. If you specify `NONE`, the tags from
-    #   the StartAudienceGenerationJob request determine the tags of the
-    #   audience generation job. If you specify `FROM_PARENT_RESOURCE`, the
-    #   audience generation job inherits the tags from the configured audience
-    #   model, by default. Tags in the StartAudienceGenerationJob will
-    #   override the default.
-    #
-    #   When the client is in a different account than the configured audience
-    #   model, the tags from the client are never applied to a resource in the
-    #   caller's account.
-    #
-    # @option params [String] :description
-    #   The description of the configured audience model.
-    #
-    # @option params [Integer] :min_matching_seed_size
-    #   The minimum number of users from the seed audience that must match
-    #   with users in the training data of the audience model. The default
-    #   value is 500.
-    #
-    # @option params [required, String] :name
-    #   The name of the configured audience model.
     #
     # @option params [required, Types::ConfiguredAudienceModelOutputConfig] :output_config
     #   Configure the Amazon S3 location and IAM Role for audiences created
@@ -563,8 +533,25 @@ module Aws::CleanRoomsML
     #   Amazon S3 KMS-SSE, then the Role must also have the required KMS
     #   permissions.
     #
+    # @option params [String] :description
+    #   The description of the configured audience model.
+    #
     # @option params [required, Array<String>] :shared_audience_metrics
     #   Whether audience metrics are shared.
+    #
+    # @option params [Integer] :min_matching_seed_size
+    #   The minimum number of users from the seed audience that must match
+    #   with users in the training data of the audience model. The default
+    #   value is 500.
+    #
+    # @option params [Types::AudienceSizeConfig] :audience_size_config
+    #   Configure the list of output sizes of audiences that can be created
+    #   using this configured audience model. A request to
+    #   StartAudienceGenerationJob that uses this configured audience model
+    #   must have an `audienceSize` selected from this list. You can use the
+    #   `ABSOLUTE` AudienceSize to configure out audience sizes using the
+    #   count of identifiers in the output. You can use the `Percentage`
+    #   AudienceSize to configure sizes in the range 1-100 percent.
     #
     # @option params [Hash<String,String>] :tags
     #   The optional metadata that you apply to the resource to help you
@@ -598,6 +585,19 @@ module Aws::CleanRoomsML
     #     limit of 50 tags. Tags with only the key prefix of aws do not count
     #     against your tags per resource limit.
     #
+    # @option params [String] :child_resource_tag_on_create_policy
+    #   Configure how the service tags audience generation jobs created using
+    #   this configured audience model. If you specify `NONE`, the tags from
+    #   the StartAudienceGenerationJob request determine the tags of the
+    #   audience generation job. If you specify `FROM_PARENT_RESOURCE`, the
+    #   audience generation job inherits the tags from the configured audience
+    #   model, by default. Tags in the StartAudienceGenerationJob will
+    #   override the default.
+    #
+    #   When the client is in a different account than the configured audience
+    #   model, the tags from the client are never applied to a resource in the
+    #   caller's account.
+    #
     # @return [Types::CreateConfiguredAudienceModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConfiguredAudienceModelResponse#configured_audience_model_arn #configured_audience_model_arn} => String
@@ -605,15 +605,8 @@ module Aws::CleanRoomsML
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_configured_audience_model({
-    #     audience_model_arn: "AudienceModelArn", # required
-    #     audience_size_config: {
-    #       audience_size_bins: [1], # required
-    #       audience_size_type: "ABSOLUTE", # required, accepts ABSOLUTE, PERCENTAGE
-    #     },
-    #     child_resource_tag_on_create_policy: "FROM_PARENT_RESOURCE", # accepts FROM_PARENT_RESOURCE, NONE
-    #     description: "ResourceDescription",
-    #     min_matching_seed_size: 1,
     #     name: "NameString", # required
+    #     audience_model_arn: "AudienceModelArn", # required
     #     output_config: { # required
     #       destination: { # required
     #         s3_destination: { # required
@@ -622,10 +615,17 @@ module Aws::CleanRoomsML
     #       },
     #       role_arn: "IamRoleArn", # required
     #     },
+    #     description: "ResourceDescription",
     #     shared_audience_metrics: ["ALL"], # required, accepts ALL, NONE
+    #     min_matching_seed_size: 1,
+    #     audience_size_config: {
+    #       audience_size_type: "ABSOLUTE", # required, accepts ABSOLUTE, PERCENTAGE
+    #       audience_size_bins: [1], # required
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     child_resource_tag_on_create_policy: "FROM_PARENT_RESOURCE", # accepts FROM_PARENT_RESOURCE, NONE
     #   })
     #
     # @example Response structure
@@ -645,9 +645,6 @@ module Aws::CleanRoomsML
     # Clean Rooms ML, the `TrainingDataset` is metadata that points to a
     # Glue table, which is read only during `AudienceModel` creation.
     #
-    # @option params [String] :description
-    #   The description of the training dataset.
-    #
     # @option params [required, String] :name
     #   The name of the training dataset. This name must be unique in your
     #   account and region.
@@ -658,6 +655,11 @@ module Aws::CleanRoomsML
     #
     #   Passing a role across AWS accounts is not allowed. If you pass a role
     #   that isn't in your account, you get an `AccessDeniedException` error.
+    #
+    # @option params [required, Array<Types::Dataset>] :training_data
+    #   An array of information that lists the Dataset objects, which
+    #   specifies the dataset type and details on its location and schema. You
+    #   must provide a role that has read access to these tables.
     #
     # @option params [Hash<String,String>] :tags
     #   The optional metadata that you apply to the resource to help you
@@ -691,10 +693,8 @@ module Aws::CleanRoomsML
     #     limit of 50 tags. Tags with only the key prefix of aws do not count
     #     against your tags per resource limit.
     #
-    # @option params [required, Array<Types::Dataset>] :training_data
-    #   An array of information that lists the Dataset objects, which
-    #   specifies the dataset type and details on its location and schema. You
-    #   must provide a role that has read access to these tables.
+    # @option params [String] :description
+    #   The description of the training dataset.
     #
     # @return [Types::CreateTrainingDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -703,32 +703,32 @@ module Aws::CleanRoomsML
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_training_dataset({
-    #     description: "ResourceDescription",
     #     name: "NameString", # required
     #     role_arn: "IamRoleArn", # required
-    #     tags: {
-    #       "TagKey" => "TagValue",
-    #     },
     #     training_data: [ # required
     #       {
+    #         type: "INTERACTIONS", # required, accepts INTERACTIONS
     #         input_config: { # required
-    #           data_source: { # required
-    #             glue_data_source: { # required
-    #               catalog_id: "AccountId",
-    #               database_name: "GlueDatabaseName", # required
-    #               table_name: "GlueTableName", # required
-    #             },
-    #           },
     #           schema: [ # required
     #             {
     #               column_name: "ColumnName", # required
     #               column_types: ["USER_ID"], # required, accepts USER_ID, ITEM_ID, TIMESTAMP, CATEGORICAL_FEATURE, NUMERICAL_FEATURE
     #             },
     #           ],
+    #           data_source: { # required
+    #             glue_data_source: { # required
+    #               table_name: "GlueTableName", # required
+    #               database_name: "GlueDatabaseName", # required
+    #               catalog_id: "AccountId",
+    #             },
+    #           },
     #         },
-    #         type: "INTERACTIONS", # required, accepts INTERACTIONS
     #       },
     #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     description: "ResourceDescription",
     #   })
     #
     # @example Response structure
@@ -878,20 +878,21 @@ module Aws::CleanRoomsML
     #
     # @return [Types::GetAudienceGenerationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAudienceGenerationJobResponse#audience_generation_job_arn #audience_generation_job_arn} => String
-    #   * {Types::GetAudienceGenerationJobResponse#collaboration_id #collaboration_id} => String
-    #   * {Types::GetAudienceGenerationJobResponse#configured_audience_model_arn #configured_audience_model_arn} => String
     #   * {Types::GetAudienceGenerationJobResponse#create_time #create_time} => Time
-    #   * {Types::GetAudienceGenerationJobResponse#description #description} => String
-    #   * {Types::GetAudienceGenerationJobResponse#include_seed_in_output #include_seed_in_output} => Boolean
-    #   * {Types::GetAudienceGenerationJobResponse#metrics #metrics} => Types::AudienceQualityMetrics
+    #   * {Types::GetAudienceGenerationJobResponse#update_time #update_time} => Time
+    #   * {Types::GetAudienceGenerationJobResponse#audience_generation_job_arn #audience_generation_job_arn} => String
     #   * {Types::GetAudienceGenerationJobResponse#name #name} => String
-    #   * {Types::GetAudienceGenerationJobResponse#seed_audience #seed_audience} => Types::AudienceGenerationJobDataSource
-    #   * {Types::GetAudienceGenerationJobResponse#started_by #started_by} => String
+    #   * {Types::GetAudienceGenerationJobResponse#description #description} => String
     #   * {Types::GetAudienceGenerationJobResponse#status #status} => String
     #   * {Types::GetAudienceGenerationJobResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetAudienceGenerationJobResponse#configured_audience_model_arn #configured_audience_model_arn} => String
+    #   * {Types::GetAudienceGenerationJobResponse#seed_audience #seed_audience} => Types::AudienceGenerationJobDataSource
+    #   * {Types::GetAudienceGenerationJobResponse#include_seed_in_output #include_seed_in_output} => Boolean
+    #   * {Types::GetAudienceGenerationJobResponse#collaboration_id #collaboration_id} => String
+    #   * {Types::GetAudienceGenerationJobResponse#metrics #metrics} => Types::AudienceQualityMetrics
+    #   * {Types::GetAudienceGenerationJobResponse#started_by #started_by} => String
     #   * {Types::GetAudienceGenerationJobResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::GetAudienceGenerationJobResponse#update_time #update_time} => Time
+    #   * {Types::GetAudienceGenerationJobResponse#protected_query_identifier #protected_query_identifier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -901,27 +902,32 @@ module Aws::CleanRoomsML
     #
     # @example Response structure
     #
-    #   resp.audience_generation_job_arn #=> String
-    #   resp.collaboration_id #=> String
-    #   resp.configured_audience_model_arn #=> String
     #   resp.create_time #=> Time
+    #   resp.update_time #=> Time
+    #   resp.audience_generation_job_arn #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.status_details.status_code #=> String
+    #   resp.status_details.message #=> String
+    #   resp.configured_audience_model_arn #=> String
+    #   resp.seed_audience.data_source.s3_uri #=> String
+    #   resp.seed_audience.role_arn #=> String
+    #   resp.seed_audience.sql_parameters.query_string #=> String
+    #   resp.seed_audience.sql_parameters.analysis_template_arn #=> String
+    #   resp.seed_audience.sql_parameters.parameters #=> Hash
+    #   resp.seed_audience.sql_parameters.parameters["ParameterKey"] #=> String
     #   resp.include_seed_in_output #=> Boolean
-    #   resp.metrics.recall_metric #=> Float
+    #   resp.collaboration_id #=> String
     #   resp.metrics.relevance_metrics #=> Array
     #   resp.metrics.relevance_metrics[0].audience_size.type #=> String, one of "ABSOLUTE", "PERCENTAGE"
     #   resp.metrics.relevance_metrics[0].audience_size.value #=> Integer
     #   resp.metrics.relevance_metrics[0].score #=> Float
-    #   resp.name #=> String
-    #   resp.seed_audience.data_source.s3_uri #=> String
-    #   resp.seed_audience.role_arn #=> String
+    #   resp.metrics.recall_metric #=> Float
     #   resp.started_by #=> String
-    #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
-    #   resp.status_details.message #=> String
-    #   resp.status_details.status_code #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
+    #   resp.protected_query_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetAudienceGenerationJob AWS API Documentation
     #
@@ -940,18 +946,18 @@ module Aws::CleanRoomsML
     #
     # @return [Types::GetAudienceModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAudienceModelResponse#audience_model_arn #audience_model_arn} => String
     #   * {Types::GetAudienceModelResponse#create_time #create_time} => Time
-    #   * {Types::GetAudienceModelResponse#description #description} => String
-    #   * {Types::GetAudienceModelResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::GetAudienceModelResponse#update_time #update_time} => Time
+    #   * {Types::GetAudienceModelResponse#training_data_start_time #training_data_start_time} => Time
+    #   * {Types::GetAudienceModelResponse#training_data_end_time #training_data_end_time} => Time
+    #   * {Types::GetAudienceModelResponse#audience_model_arn #audience_model_arn} => String
     #   * {Types::GetAudienceModelResponse#name #name} => String
+    #   * {Types::GetAudienceModelResponse#training_dataset_arn #training_dataset_arn} => String
     #   * {Types::GetAudienceModelResponse#status #status} => String
     #   * {Types::GetAudienceModelResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetAudienceModelResponse#kms_key_arn #kms_key_arn} => String
     #   * {Types::GetAudienceModelResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::GetAudienceModelResponse#training_data_end_time #training_data_end_time} => Time
-    #   * {Types::GetAudienceModelResponse#training_data_start_time #training_data_start_time} => Time
-    #   * {Types::GetAudienceModelResponse#training_dataset_arn #training_dataset_arn} => String
-    #   * {Types::GetAudienceModelResponse#update_time #update_time} => Time
+    #   * {Types::GetAudienceModelResponse#description #description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -961,20 +967,20 @@ module Aws::CleanRoomsML
     #
     # @example Response structure
     #
-    #   resp.audience_model_arn #=> String
     #   resp.create_time #=> Time
-    #   resp.description #=> String
-    #   resp.kms_key_arn #=> String
+    #   resp.update_time #=> Time
+    #   resp.training_data_start_time #=> Time
+    #   resp.training_data_end_time #=> Time
+    #   resp.audience_model_arn #=> String
     #   resp.name #=> String
+    #   resp.training_dataset_arn #=> String
     #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
-    #   resp.status_details.message #=> String
     #   resp.status_details.status_code #=> String
+    #   resp.status_details.message #=> String
+    #   resp.kms_key_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.training_data_end_time #=> Time
-    #   resp.training_data_start_time #=> Time
-    #   resp.training_dataset_arn #=> String
-    #   resp.update_time #=> Time
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetAudienceModel AWS API Documentation
     #
@@ -993,19 +999,19 @@ module Aws::CleanRoomsML
     #
     # @return [Types::GetConfiguredAudienceModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetConfiguredAudienceModelResponse#audience_model_arn #audience_model_arn} => String
-    #   * {Types::GetConfiguredAudienceModelResponse#audience_size_config #audience_size_config} => Types::AudienceSizeConfig
-    #   * {Types::GetConfiguredAudienceModelResponse#child_resource_tag_on_create_policy #child_resource_tag_on_create_policy} => String
-    #   * {Types::GetConfiguredAudienceModelResponse#configured_audience_model_arn #configured_audience_model_arn} => String
     #   * {Types::GetConfiguredAudienceModelResponse#create_time #create_time} => Time
-    #   * {Types::GetConfiguredAudienceModelResponse#description #description} => String
-    #   * {Types::GetConfiguredAudienceModelResponse#min_matching_seed_size #min_matching_seed_size} => Integer
-    #   * {Types::GetConfiguredAudienceModelResponse#name #name} => String
-    #   * {Types::GetConfiguredAudienceModelResponse#output_config #output_config} => Types::ConfiguredAudienceModelOutputConfig
-    #   * {Types::GetConfiguredAudienceModelResponse#shared_audience_metrics #shared_audience_metrics} => Array&lt;String&gt;
-    #   * {Types::GetConfiguredAudienceModelResponse#status #status} => String
-    #   * {Types::GetConfiguredAudienceModelResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetConfiguredAudienceModelResponse#update_time #update_time} => Time
+    #   * {Types::GetConfiguredAudienceModelResponse#configured_audience_model_arn #configured_audience_model_arn} => String
+    #   * {Types::GetConfiguredAudienceModelResponse#name #name} => String
+    #   * {Types::GetConfiguredAudienceModelResponse#audience_model_arn #audience_model_arn} => String
+    #   * {Types::GetConfiguredAudienceModelResponse#output_config #output_config} => Types::ConfiguredAudienceModelOutputConfig
+    #   * {Types::GetConfiguredAudienceModelResponse#description #description} => String
+    #   * {Types::GetConfiguredAudienceModelResponse#status #status} => String
+    #   * {Types::GetConfiguredAudienceModelResponse#shared_audience_metrics #shared_audience_metrics} => Array&lt;String&gt;
+    #   * {Types::GetConfiguredAudienceModelResponse#min_matching_seed_size #min_matching_seed_size} => Integer
+    #   * {Types::GetConfiguredAudienceModelResponse#audience_size_config #audience_size_config} => Types::AudienceSizeConfig
+    #   * {Types::GetConfiguredAudienceModelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetConfiguredAudienceModelResponse#child_resource_tag_on_create_policy #child_resource_tag_on_create_policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1015,24 +1021,24 @@ module Aws::CleanRoomsML
     #
     # @example Response structure
     #
-    #   resp.audience_model_arn #=> String
-    #   resp.audience_size_config.audience_size_bins #=> Array
-    #   resp.audience_size_config.audience_size_bins[0] #=> Integer
-    #   resp.audience_size_config.audience_size_type #=> String, one of "ABSOLUTE", "PERCENTAGE"
-    #   resp.child_resource_tag_on_create_policy #=> String, one of "FROM_PARENT_RESOURCE", "NONE"
-    #   resp.configured_audience_model_arn #=> String
     #   resp.create_time #=> Time
-    #   resp.description #=> String
-    #   resp.min_matching_seed_size #=> Integer
+    #   resp.update_time #=> Time
+    #   resp.configured_audience_model_arn #=> String
     #   resp.name #=> String
+    #   resp.audience_model_arn #=> String
     #   resp.output_config.destination.s3_destination.s3_uri #=> String
     #   resp.output_config.role_arn #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "ACTIVE"
     #   resp.shared_audience_metrics #=> Array
     #   resp.shared_audience_metrics[0] #=> String, one of "ALL", "NONE"
-    #   resp.status #=> String, one of "ACTIVE"
+    #   resp.min_matching_seed_size #=> Integer
+    #   resp.audience_size_config.audience_size_type #=> String, one of "ABSOLUTE", "PERCENTAGE"
+    #   resp.audience_size_config.audience_size_bins #=> Array
+    #   resp.audience_size_config.audience_size_bins[0] #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.update_time #=> Time
+    #   resp.child_resource_tag_on_create_policy #=> String, one of "FROM_PARENT_RESOURCE", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredAudienceModel AWS API Documentation
     #
@@ -1085,14 +1091,14 @@ module Aws::CleanRoomsML
     # @return [Types::GetTrainingDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTrainingDatasetResponse#create_time #create_time} => Time
-    #   * {Types::GetTrainingDatasetResponse#description #description} => String
-    #   * {Types::GetTrainingDatasetResponse#name #name} => String
-    #   * {Types::GetTrainingDatasetResponse#role_arn #role_arn} => String
-    #   * {Types::GetTrainingDatasetResponse#status #status} => String
-    #   * {Types::GetTrainingDatasetResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::GetTrainingDatasetResponse#training_data #training_data} => Array&lt;Types::Dataset&gt;
-    #   * {Types::GetTrainingDatasetResponse#training_dataset_arn #training_dataset_arn} => String
     #   * {Types::GetTrainingDatasetResponse#update_time #update_time} => Time
+    #   * {Types::GetTrainingDatasetResponse#training_dataset_arn #training_dataset_arn} => String
+    #   * {Types::GetTrainingDatasetResponse#name #name} => String
+    #   * {Types::GetTrainingDatasetResponse#training_data #training_data} => Array&lt;Types::Dataset&gt;
+    #   * {Types::GetTrainingDatasetResponse#status #status} => String
+    #   * {Types::GetTrainingDatasetResponse#role_arn #role_arn} => String
+    #   * {Types::GetTrainingDatasetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetTrainingDatasetResponse#description #description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1103,23 +1109,23 @@ module Aws::CleanRoomsML
     # @example Response structure
     #
     #   resp.create_time #=> Time
-    #   resp.description #=> String
+    #   resp.update_time #=> Time
+    #   resp.training_dataset_arn #=> String
     #   resp.name #=> String
-    #   resp.role_arn #=> String
-    #   resp.status #=> String, one of "ACTIVE"
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
     #   resp.training_data #=> Array
-    #   resp.training_data[0].input_config.data_source.glue_data_source.catalog_id #=> String
-    #   resp.training_data[0].input_config.data_source.glue_data_source.database_name #=> String
-    #   resp.training_data[0].input_config.data_source.glue_data_source.table_name #=> String
+    #   resp.training_data[0].type #=> String, one of "INTERACTIONS"
     #   resp.training_data[0].input_config.schema #=> Array
     #   resp.training_data[0].input_config.schema[0].column_name #=> String
     #   resp.training_data[0].input_config.schema[0].column_types #=> Array
     #   resp.training_data[0].input_config.schema[0].column_types[0] #=> String, one of "USER_ID", "ITEM_ID", "TIMESTAMP", "CATEGORICAL_FEATURE", "NUMERICAL_FEATURE"
-    #   resp.training_data[0].type #=> String, one of "INTERACTIONS"
-    #   resp.training_dataset_arn #=> String
-    #   resp.update_time #=> Time
+    #   resp.training_data[0].input_config.data_source.glue_data_source.table_name #=> String
+    #   resp.training_data[0].input_config.data_source.glue_data_source.database_name #=> String
+    #   resp.training_data[0].input_config.data_source.glue_data_source.catalog_id #=> String
+    #   resp.status #=> String, one of "ACTIVE"
+    #   resp.role_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainingDataset AWS API Documentation
     #
@@ -1132,47 +1138,47 @@ module Aws::CleanRoomsML
 
     # Returns a list of the audience export jobs.
     #
-    # @option params [String] :audience_generation_job_arn
-    #   The Amazon Resource Name (ARN) of the audience generation job that you
-    #   are interested in.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
-    #
     # @option params [String] :next_token
     #   The token value retrieved from a previous call to access the next page
     #   of results.
     #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
+    # @option params [String] :audience_generation_job_arn
+    #   The Amazon Resource Name (ARN) of the audience generation job that you
+    #   are interested in.
+    #
     # @return [Types::ListAudienceExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListAudienceExportJobsResponse#audience_export_jobs #audience_export_jobs} => Array&lt;Types::AudienceExportJobSummary&gt;
     #   * {Types::ListAudienceExportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListAudienceExportJobsResponse#audience_export_jobs #audience_export_jobs} => Array&lt;Types::AudienceExportJobSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_audience_export_jobs({
-    #     audience_generation_job_arn: "AudienceGenerationJobArn",
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
+    #     audience_generation_job_arn: "AudienceGenerationJobArn",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.audience_export_jobs #=> Array
+    #   resp.audience_export_jobs[0].create_time #=> Time
+    #   resp.audience_export_jobs[0].update_time #=> Time
+    #   resp.audience_export_jobs[0].name #=> String
     #   resp.audience_export_jobs[0].audience_generation_job_arn #=> String
     #   resp.audience_export_jobs[0].audience_size.type #=> String, one of "ABSOLUTE", "PERCENTAGE"
     #   resp.audience_export_jobs[0].audience_size.value #=> Integer
-    #   resp.audience_export_jobs[0].create_time #=> Time
     #   resp.audience_export_jobs[0].description #=> String
-    #   resp.audience_export_jobs[0].name #=> String
-    #   resp.audience_export_jobs[0].output_location #=> String
     #   resp.audience_export_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE"
-    #   resp.audience_export_jobs[0].status_details.message #=> String
     #   resp.audience_export_jobs[0].status_details.status_code #=> String
-    #   resp.audience_export_jobs[0].update_time #=> Time
-    #   resp.next_token #=> String
+    #   resp.audience_export_jobs[0].status_details.message #=> String
+    #   resp.audience_export_jobs[0].output_location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceExportJobs AWS API Documentation
     #
@@ -1185,50 +1191,50 @@ module Aws::CleanRoomsML
 
     # Returns a list of audience generation jobs.
     #
-    # @option params [String] :collaboration_id
-    #   The identifier of the collaboration that contains the audience
-    #   generation jobs that you are interested in.
+    # @option params [String] :next_token
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
     #
     # @option params [String] :configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model that
     #   was used for the audience generation jobs that you are interested in.
     #
-    # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
-    #
-    # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    # @option params [String] :collaboration_id
+    #   The identifier of the collaboration that contains the audience
+    #   generation jobs that you are interested in.
     #
     # @return [Types::ListAudienceGenerationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListAudienceGenerationJobsResponse#audience_generation_jobs #audience_generation_jobs} => Array&lt;Types::AudienceGenerationJobSummary&gt;
     #   * {Types::ListAudienceGenerationJobsResponse#next_token #next_token} => String
+    #   * {Types::ListAudienceGenerationJobsResponse#audience_generation_jobs #audience_generation_jobs} => Array&lt;Types::AudienceGenerationJobSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_audience_generation_jobs({
-    #     collaboration_id: "UUID",
-    #     configured_audience_model_arn: "ConfiguredAudienceModelArn",
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
+    #     configured_audience_model_arn: "ConfiguredAudienceModelArn",
+    #     collaboration_id: "UUID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.audience_generation_jobs #=> Array
-    #   resp.audience_generation_jobs[0].audience_generation_job_arn #=> String
-    #   resp.audience_generation_jobs[0].collaboration_id #=> String
-    #   resp.audience_generation_jobs[0].configured_audience_model_arn #=> String
-    #   resp.audience_generation_jobs[0].create_time #=> Time
-    #   resp.audience_generation_jobs[0].description #=> String
-    #   resp.audience_generation_jobs[0].name #=> String
-    #   resp.audience_generation_jobs[0].started_by #=> String
-    #   resp.audience_generation_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
-    #   resp.audience_generation_jobs[0].update_time #=> Time
     #   resp.next_token #=> String
+    #   resp.audience_generation_jobs #=> Array
+    #   resp.audience_generation_jobs[0].create_time #=> Time
+    #   resp.audience_generation_jobs[0].update_time #=> Time
+    #   resp.audience_generation_jobs[0].audience_generation_job_arn #=> String
+    #   resp.audience_generation_jobs[0].name #=> String
+    #   resp.audience_generation_jobs[0].description #=> String
+    #   resp.audience_generation_jobs[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.audience_generation_jobs[0].configured_audience_model_arn #=> String
+    #   resp.audience_generation_jobs[0].collaboration_id #=> String
+    #   resp.audience_generation_jobs[0].started_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceGenerationJobs AWS API Documentation
     #
@@ -1241,38 +1247,38 @@ module Aws::CleanRoomsML
 
     # Returns a list of audience models.
     #
-    # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
-    #
     # @option params [String] :next_token
     #   The token value retrieved from a previous call to access the next page
     #   of results.
     #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
     # @return [Types::ListAudienceModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListAudienceModelsResponse#audience_models #audience_models} => Array&lt;Types::AudienceModelSummary&gt;
     #   * {Types::ListAudienceModelsResponse#next_token #next_token} => String
+    #   * {Types::ListAudienceModelsResponse#audience_models #audience_models} => Array&lt;Types::AudienceModelSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_audience_models({
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.audience_models #=> Array
-    #   resp.audience_models[0].audience_model_arn #=> String
-    #   resp.audience_models[0].create_time #=> Time
-    #   resp.audience_models[0].description #=> String
-    #   resp.audience_models[0].name #=> String
-    #   resp.audience_models[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
-    #   resp.audience_models[0].training_dataset_arn #=> String
-    #   resp.audience_models[0].update_time #=> Time
     #   resp.next_token #=> String
+    #   resp.audience_models #=> Array
+    #   resp.audience_models[0].create_time #=> Time
+    #   resp.audience_models[0].update_time #=> Time
+    #   resp.audience_models[0].audience_model_arn #=> String
+    #   resp.audience_models[0].name #=> String
+    #   resp.audience_models[0].training_dataset_arn #=> String
+    #   resp.audience_models[0].status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.audience_models[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceModels AWS API Documentation
     #
@@ -1285,40 +1291,40 @@ module Aws::CleanRoomsML
 
     # Returns a list of the configured audience models.
     #
-    # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
-    #
     # @option params [String] :next_token
     #   The token value retrieved from a previous call to access the next page
     #   of results.
     #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
+    #
     # @return [Types::ListConfiguredAudienceModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListConfiguredAudienceModelsResponse#configured_audience_models #configured_audience_models} => Array&lt;Types::ConfiguredAudienceModelSummary&gt;
     #   * {Types::ListConfiguredAudienceModelsResponse#next_token #next_token} => String
+    #   * {Types::ListConfiguredAudienceModelsResponse#configured_audience_models #configured_audience_models} => Array&lt;Types::ConfiguredAudienceModelSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configured_audience_models({
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.configured_audience_models #=> Array
-    #   resp.configured_audience_models[0].audience_model_arn #=> String
-    #   resp.configured_audience_models[0].configured_audience_model_arn #=> String
     #   resp.configured_audience_models[0].create_time #=> Time
-    #   resp.configured_audience_models[0].description #=> String
+    #   resp.configured_audience_models[0].update_time #=> Time
     #   resp.configured_audience_models[0].name #=> String
+    #   resp.configured_audience_models[0].audience_model_arn #=> String
     #   resp.configured_audience_models[0].output_config.destination.s3_destination.s3_uri #=> String
     #   resp.configured_audience_models[0].output_config.role_arn #=> String
+    #   resp.configured_audience_models[0].description #=> String
+    #   resp.configured_audience_models[0].configured_audience_model_arn #=> String
     #   resp.configured_audience_models[0].status #=> String, one of "ACTIVE"
-    #   resp.configured_audience_models[0].update_time #=> Time
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredAudienceModels AWS API Documentation
     #
@@ -1361,12 +1367,12 @@ module Aws::CleanRoomsML
 
     # Returns a list of training datasets.
     #
-    # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
-    #
     # @option params [String] :next_token
     #   The token value retrieved from a previous call to access the next page
     #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListTrainingDatasetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1378,8 +1384,8 @@ module Aws::CleanRoomsML
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_training_datasets({
-    #     max_results: 1,
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -1387,11 +1393,11 @@ module Aws::CleanRoomsML
     #   resp.next_token #=> String
     #   resp.training_datasets #=> Array
     #   resp.training_datasets[0].create_time #=> Time
-    #   resp.training_datasets[0].description #=> String
+    #   resp.training_datasets[0].update_time #=> Time
+    #   resp.training_datasets[0].training_dataset_arn #=> String
     #   resp.training_datasets[0].name #=> String
     #   resp.training_datasets[0].status #=> String, one of "ACTIVE"
-    #   resp.training_datasets[0].training_dataset_arn #=> String
-    #   resp.training_datasets[0].update_time #=> Time
+    #   resp.training_datasets[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainingDatasets AWS API Documentation
     #
@@ -1411,12 +1417,12 @@ module Aws::CleanRoomsML
     # @option params [required, String] :configured_audience_model_policy
     #   The IAM resource policy.
     #
-    # @option params [String] :policy_existence_condition
-    #   Use this to prevent unexpected concurrent modification of the policy.
-    #
     # @option params [String] :previous_policy_hash
     #   A cryptographic hash of the contents of the policy used to prevent
     #   unexpected concurrent modification of the policy.
+    #
+    # @option params [String] :policy_existence_condition
+    #   Use this to prevent unexpected concurrent modification of the policy.
     #
     # @return [Types::PutConfiguredAudienceModelPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1428,8 +1434,8 @@ module Aws::CleanRoomsML
     #   resp = client.put_configured_audience_model_policy({
     #     configured_audience_model_arn: "ConfiguredAudienceModelArn", # required
     #     configured_audience_model_policy: "ResourcePolicy", # required
-    #     policy_existence_condition: "POLICY_MUST_EXIST", # accepts POLICY_MUST_EXIST, POLICY_MUST_NOT_EXIST
     #     previous_policy_hash: "Hash",
+    #     policy_existence_condition: "POLICY_MUST_EXIST", # accepts POLICY_MUST_EXIST, POLICY_MUST_NOT_EXIST
     #   })
     #
     # @example Response structure
@@ -1449,6 +1455,9 @@ module Aws::CleanRoomsML
     # Export an audience of a specified size after you have generated an
     # audience.
     #
+    # @option params [required, String] :name
+    #   The name of the audience export job.
+    #
     # @option params [required, String] :audience_generation_job_arn
     #   The Amazon Resource Name (ARN) of the audience generation job that you
     #   want to export.
@@ -1460,21 +1469,18 @@ module Aws::CleanRoomsML
     # @option params [String] :description
     #   The description of the audience export job.
     #
-    # @option params [required, String] :name
-    #   The name of the audience export job.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_audience_export_job({
+    #     name: "NameString", # required
     #     audience_generation_job_arn: "AudienceGenerationJobArn", # required
     #     audience_size: { # required
     #       type: "ABSOLUTE", # required, accepts ABSOLUTE, PERCENTAGE
     #       value: 1, # required
     #     },
     #     description: "ResourceDescription",
-    #     name: "NameString", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartAudienceExportJob AWS API Documentation
@@ -1488,26 +1494,26 @@ module Aws::CleanRoomsML
 
     # Information necessary to start the audience generation job.
     #
-    # @option params [String] :collaboration_id
-    #   The identifier of the collaboration that contains the audience
-    #   generation job.
+    # @option params [required, String] :name
+    #   The name of the audience generation job.
     #
     # @option params [required, String] :configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model that
     #   is used for this audience generation job.
     #
-    # @option params [String] :description
-    #   The description of the audience generation job.
+    # @option params [required, Types::AudienceGenerationJobDataSource] :seed_audience
+    #   The seed audience that is used to generate the audience.
     #
     # @option params [Boolean] :include_seed_in_output
     #   Whether the seed audience is included in the audience generation
     #   output.
     #
-    # @option params [required, String] :name
-    #   The name of the audience generation job.
+    # @option params [String] :collaboration_id
+    #   The identifier of the collaboration that contains the audience
+    #   generation job.
     #
-    # @option params [required, Types::AudienceGenerationJobDataSource] :seed_audience
-    #   The seed audience that is used to generate the audience.
+    # @option params [String] :description
+    #   The description of the audience generation job.
     #
     # @option params [Hash<String,String>] :tags
     #   The optional metadata that you apply to the resource to help you
@@ -1548,17 +1554,24 @@ module Aws::CleanRoomsML
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_audience_generation_job({
-    #     collaboration_id: "UUID",
-    #     configured_audience_model_arn: "ConfiguredAudienceModelArn", # required
-    #     description: "ResourceDescription",
-    #     include_seed_in_output: false,
     #     name: "NameString", # required
+    #     configured_audience_model_arn: "ConfiguredAudienceModelArn", # required
     #     seed_audience: { # required
-    #       data_source: { # required
+    #       data_source: {
     #         s3_uri: "S3Path", # required
     #       },
     #       role_arn: "IamRoleArn", # required
+    #       sql_parameters: {
+    #         query_string: "ProtectedQuerySQLParametersQueryStringString",
+    #         analysis_template_arn: "AnalysisTemplateArn",
+    #         parameters: {
+    #           "ParameterKey" => "ParameterValue",
+    #         },
+    #       },
     #     },
+    #     include_seed_in_output: false,
+    #     collaboration_id: "UUID",
+    #     description: "ResourceDescription",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1666,29 +1679,29 @@ module Aws::CleanRoomsML
     # model. Updates that impact audience generation jobs take effect when a
     # new job starts, but do not impact currently running jobs.
     #
-    # @option params [String] :audience_model_arn
-    #   The Amazon Resource Name (ARN) of the new audience model that you want
-    #   to use.
-    #
-    # @option params [Types::AudienceSizeConfig] :audience_size_config
-    #   The new audience size configuration.
-    #
     # @option params [required, String] :configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model that
     #   you want to update.
     #
-    # @option params [String] :description
-    #   The new description of the configured audience model.
+    # @option params [Types::ConfiguredAudienceModelOutputConfig] :output_config
+    #   The new output configuration.
+    #
+    # @option params [String] :audience_model_arn
+    #   The Amazon Resource Name (ARN) of the new audience model that you want
+    #   to use.
+    #
+    # @option params [Array<String>] :shared_audience_metrics
+    #   The new value for whether to share audience metrics.
     #
     # @option params [Integer] :min_matching_seed_size
     #   The minimum number of users from the seed audience that must match
     #   with users in the training data of the audience model.
     #
-    # @option params [Types::ConfiguredAudienceModelOutputConfig] :output_config
-    #   The new output configuration.
+    # @option params [Types::AudienceSizeConfig] :audience_size_config
+    #   The new audience size configuration.
     #
-    # @option params [Array<String>] :shared_audience_metrics
-    #   The new value for whether to share audience metrics.
+    # @option params [String] :description
+    #   The new description of the configured audience model.
     #
     # @return [Types::UpdateConfiguredAudienceModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1697,14 +1710,7 @@ module Aws::CleanRoomsML
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_configured_audience_model({
-    #     audience_model_arn: "AudienceModelArn",
-    #     audience_size_config: {
-    #       audience_size_bins: [1], # required
-    #       audience_size_type: "ABSOLUTE", # required, accepts ABSOLUTE, PERCENTAGE
-    #     },
     #     configured_audience_model_arn: "ConfiguredAudienceModelArn", # required
-    #     description: "ResourceDescription",
-    #     min_matching_seed_size: 1,
     #     output_config: {
     #       destination: { # required
     #         s3_destination: { # required
@@ -1713,7 +1719,14 @@ module Aws::CleanRoomsML
     #       },
     #       role_arn: "IamRoleArn", # required
     #     },
+    #     audience_model_arn: "AudienceModelArn",
     #     shared_audience_metrics: ["ALL"], # accepts ALL, NONE
+    #     min_matching_seed_size: 1,
+    #     audience_size_config: {
+    #       audience_size_type: "ABSOLUTE", # required, accepts ABSOLUTE, PERCENTAGE
+    #       audience_size_bins: [1], # required
+    #     },
+    #     description: "ResourceDescription",
     #   })
     #
     # @example Response structure
@@ -1742,7 +1755,7 @@ module Aws::CleanRoomsML
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

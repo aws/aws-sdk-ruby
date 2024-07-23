@@ -36,7 +36,7 @@ module Aws::CleanRooms
 
     class AnalysisRule
       attr_accessor collaboration_id: ::String
-      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
       attr_accessor name: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
@@ -62,6 +62,13 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class AnalysisRuleIdMappingTable
+      attr_accessor join_columns: ::Array[::String]
+      attr_accessor query_constraints: ::Array[Types::QueryConstraint]
+      attr_accessor dimension_columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AnalysisRuleList
       attr_accessor join_columns: ::Array[::String]
       attr_accessor allowed_join_operators: ::Array[("OR" | "AND")]
@@ -84,6 +91,7 @@ module Aws::CleanRooms
       attr_accessor list: Types::AnalysisRuleList
       attr_accessor aggregation: Types::AnalysisRuleAggregation
       attr_accessor custom: Types::AnalysisRuleCustom
+      attr_accessor id_mapping_table: Types::AnalysisRuleIdMappingTable
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -92,6 +100,8 @@ module Aws::CleanRooms
       class Aggregation < AnalysisRulePolicyV1
       end
       class Custom < AnalysisRulePolicyV1
+      end
+      class IdMappingTable < AnalysisRulePolicyV1
       end
       class Unknown < AnalysisRulePolicyV1
       end
@@ -179,7 +189,7 @@ module Aws::CleanRooms
 
     class BatchGetSchemaAnalysisRuleError
       attr_accessor name: ::String
-      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
       attr_accessor code: ::String
       attr_accessor message: ::String
       SENSITIVE: []
@@ -288,6 +298,37 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: ::String
       attr_accessor creator_account_id: ::String
       attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CollaborationIdNamespaceAssociation
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferenceProperties
+      attr_accessor id_mapping_config: Types::IdMappingConfig
+      SENSITIVE: []
+    end
+
+    class CollaborationIdNamespaceAssociationSummary
+      attr_accessor arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor update_time: ::Time
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor creator_account_id: ::String
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferencePropertiesSummary
       SENSITIVE: []
     end
 
@@ -571,6 +612,36 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class CreateIdMappingTableInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_reference_config: Types::IdMappingTableInputReferenceConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdMappingTableOutput
+      attr_accessor id_mapping_table: Types::IdMappingTable
+      SENSITIVE: []
+    end
+
+    class CreateIdNamespaceAssociationInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor id_mapping_config: Types::IdMappingConfig
+      SENSITIVE: []
+    end
+
+    class CreateIdNamespaceAssociationOutput
+      attr_accessor id_namespace_association: Types::IdNamespaceAssociation
+      SENSITIVE: []
+    end
+
     class CreateMembershipInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
@@ -657,6 +728,24 @@ module Aws::CleanRooms
     end
 
     class DeleteConfiguredTableOutput < Aws::EmptyStructure
+    end
+
+    class DeleteIdMappingTableInput
+      attr_accessor id_mapping_table_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdMappingTableOutput < Aws::EmptyStructure
+    end
+
+    class DeleteIdNamespaceAssociationInput
+      attr_accessor id_namespace_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdNamespaceAssociationOutput < Aws::EmptyStructure
     end
 
     class DeleteMemberInput
@@ -790,6 +879,17 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class GetCollaborationIdNamespaceAssociationInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor id_namespace_association_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCollaborationIdNamespaceAssociationOutput
+      attr_accessor collaboration_id_namespace_association: Types::CollaborationIdNamespaceAssociation
+      SENSITIVE: []
+    end
+
     class GetCollaborationInput
       attr_accessor collaboration_identifier: ::String
       SENSITIVE: []
@@ -854,6 +954,28 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class GetIdMappingTableInput
+      attr_accessor id_mapping_table_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdMappingTableOutput
+      attr_accessor id_mapping_table: Types::IdMappingTable
+      SENSITIVE: []
+    end
+
+    class GetIdNamespaceAssociationInput
+      attr_accessor id_namespace_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdNamespaceAssociationOutput
+      attr_accessor id_namespace_association: Types::IdNamespaceAssociation
+      SENSITIVE: []
+    end
+
     class GetMembershipInput
       attr_accessor membership_identifier: ::String
       SENSITIVE: []
@@ -889,7 +1011,7 @@ module Aws::CleanRooms
     class GetSchemaAnalysisRuleInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
       SENSITIVE: []
     end
 
@@ -912,6 +1034,115 @@ module Aws::CleanRooms
     class GlueTableReference
       attr_accessor table_name: ::String
       attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class IdMappingConfig
+      attr_accessor allow_use_as_dimension_column: bool
+      SENSITIVE: []
+    end
+
+    class IdMappingTable
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor input_reference_config: Types::IdMappingTableInputReferenceConfig
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor input_reference_properties: Types::IdMappingTableInputReferenceProperties
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdMappingTableInputReferenceConfig
+      attr_accessor input_reference_arn: ::String
+      attr_accessor manage_resource_policies: bool
+      SENSITIVE: []
+    end
+
+    class IdMappingTableInputReferenceProperties
+      attr_accessor id_mapping_table_input_source: ::Array[Types::IdMappingTableInputSource]
+      SENSITIVE: []
+    end
+
+    class IdMappingTableInputSource
+      attr_accessor id_namespace_association_id: ::String
+      attr_accessor type: ("SOURCE" | "TARGET")
+      SENSITIVE: []
+    end
+
+    class IdMappingTableSchemaTypeProperties
+      attr_accessor id_mapping_table_input_source: ::Array[Types::IdMappingTableInputSource]
+      SENSITIVE: []
+    end
+
+    class IdMappingTableSummary
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor input_reference_config: Types::IdMappingTableInputReferenceConfig
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IdNamespaceAssociation
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferenceProperties
+      attr_accessor id_mapping_config: Types::IdMappingConfig
+      SENSITIVE: []
+    end
+
+    class IdNamespaceAssociationInputReferenceConfig
+      attr_accessor input_reference_arn: ::String
+      attr_accessor manage_resource_policies: bool
+      SENSITIVE: []
+    end
+
+    class IdNamespaceAssociationInputReferenceProperties
+      attr_accessor id_namespace_type: ("SOURCE" | "TARGET")
+      attr_accessor id_mapping_workflows_supported: ::Array[untyped]
+      SENSITIVE: []
+    end
+
+    class IdNamespaceAssociationInputReferencePropertiesSummary
+      attr_accessor id_namespace_type: ("SOURCE" | "TARGET")
+      SENSITIVE: []
+    end
+
+    class IdNamespaceAssociationSummary
+      attr_accessor membership_id: ::String
+      attr_accessor membership_arn: ::String
+      attr_accessor collaboration_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor input_reference_config: Types::IdNamespaceAssociationInputReferenceConfig
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_reference_properties: Types::IdNamespaceAssociationInputReferencePropertiesSummary
       SENSITIVE: []
     end
 
@@ -956,6 +1187,19 @@ module Aws::CleanRooms
     class ListCollaborationConfiguredAudienceModelAssociationsOutput
       attr_accessor collaboration_configured_audience_model_association_summaries: ::Array[Types::CollaborationConfiguredAudienceModelAssociationSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCollaborationIdNamespaceAssociationsInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCollaborationIdNamespaceAssociationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor collaboration_id_namespace_association_summaries: ::Array[Types::CollaborationIdNamespaceAssociationSummary]
       SENSITIVE: []
     end
 
@@ -1037,6 +1281,32 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ListIdMappingTablesInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIdMappingTablesOutput
+      attr_accessor id_mapping_table_summaries: ::Array[Types::IdMappingTableSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdNamespaceAssociationsInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIdNamespaceAssociationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor id_namespace_association_summaries: ::Array[Types::IdNamespaceAssociationSummary]
+      SENSITIVE: []
+    end
+
     class ListMembersInput
       attr_accessor collaboration_identifier: ::String
       attr_accessor next_token: ::String
@@ -1106,7 +1376,7 @@ module Aws::CleanRooms
 
     class ListSchemasInput
       attr_accessor collaboration_identifier: ::String
-      attr_accessor schema_type: ("TABLE")
+      attr_accessor schema_type: ("TABLE" | "ID_MAPPING_TABLE")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -1212,6 +1482,17 @@ module Aws::CleanRooms
 
     class PaymentConfiguration
       attr_accessor query_compute: Types::QueryComputePaymentConfig
+      SENSITIVE: []
+    end
+
+    class PopulateIdMappingTableInput
+      attr_accessor id_mapping_table_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class PopulateIdMappingTableOutput
+      attr_accessor id_mapping_job_id: ::String
       SENSITIVE: []
     end
 
@@ -1434,6 +1715,22 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class QueryConstraint
+      attr_accessor require_overlap: Types::QueryConstraintRequireOverlap
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RequireOverlap < QueryConstraint
+      end
+      class Unknown < QueryConstraint
+      end
+    end
+
+    class QueryConstraintRequireOverlap
+      attr_accessor columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -1444,7 +1741,7 @@ module Aws::CleanRooms
     class Schema
       attr_accessor columns: ::Array[Types::Column]
       attr_accessor partition_keys: ::Array[Types::Column]
-      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")]
       attr_accessor analysis_method: ("DIRECT_QUERY")
       attr_accessor creator_account_id: ::String
       attr_accessor name: ::String
@@ -1453,42 +1750,54 @@ module Aws::CleanRooms
       attr_accessor description: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
-      attr_accessor type: ("TABLE")
+      attr_accessor type: ("TABLE" | "ID_MAPPING_TABLE")
       attr_accessor schema_status_details: ::Array[Types::SchemaStatusDetail]
+      attr_accessor schema_type_properties: Types::SchemaTypeProperties
       SENSITIVE: []
     end
 
     class SchemaAnalysisRuleRequest
       attr_accessor name: ::String
-      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
       SENSITIVE: []
     end
 
     class SchemaStatusDetail
       attr_accessor status: ("READY" | "NOT_READY")
       attr_accessor reasons: ::Array[Types::SchemaStatusReason]
-      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
-      attr_accessor configurations: ::Array[("DIFFERENTIAL_PRIVACY")]
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
+      attr_accessor configurations: ::Array[("DIFFERENTIAL_PRIVACY" | "CUSTOM_ANALYSIS_NOT_ALLOWED" | "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS" | "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED" | "ID_MAPPING_TABLE_NOT_POPULATED")]
       SENSITIVE: []
     end
 
     class SchemaStatusReason
-      attr_accessor code: ("ANALYSIS_RULE_MISSING" | "ANALYSIS_TEMPLATES_NOT_CONFIGURED" | "ANALYSIS_PROVIDERS_NOT_CONFIGURED" | "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED")
+      attr_accessor code: ("ANALYSIS_RULE_MISSING" | "ANALYSIS_TEMPLATES_NOT_CONFIGURED" | "ANALYSIS_PROVIDERS_NOT_CONFIGURED" | "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED" | "ID_MAPPING_TABLE_NOT_POPULATED")
       attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class SchemaSummary
       attr_accessor name: ::String
-      attr_accessor type: ("TABLE")
+      attr_accessor type: ("TABLE" | "ID_MAPPING_TABLE")
       attr_accessor creator_account_id: ::String
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor collaboration_id: ::String
       attr_accessor collaboration_arn: ::String
-      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")]
       attr_accessor analysis_method: ("DIRECT_QUERY")
       SENSITIVE: []
+    end
+
+    class SchemaTypeProperties
+      attr_accessor id_mapping_table: Types::IdMappingTableSchemaTypeProperties
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IdMappingTable < SchemaTypeProperties
+      end
+      class Unknown < SchemaTypeProperties
+      end
     end
 
     class ServiceQuotaExceededException
@@ -1616,6 +1925,33 @@ module Aws::CleanRooms
 
     class UpdateConfiguredTableOutput
       attr_accessor configured_table: Types::ConfiguredTable
+      SENSITIVE: []
+    end
+
+    class UpdateIdMappingTableInput
+      attr_accessor id_mapping_table_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIdMappingTableOutput
+      attr_accessor id_mapping_table: Types::IdMappingTable
+      SENSITIVE: []
+    end
+
+    class UpdateIdNamespaceAssociationInput
+      attr_accessor id_namespace_association_identifier: ::String
+      attr_accessor membership_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor id_mapping_config: Types::IdMappingConfig
+      SENSITIVE: []
+    end
+
+    class UpdateIdNamespaceAssociationOutput
+      attr_accessor id_namespace_association: Types::IdNamespaceAssociation
       SENSITIVE: []
     end
 

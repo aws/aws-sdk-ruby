@@ -3029,7 +3029,7 @@ module Aws::Connect
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor output_type: ("Raw" | "Redacted")
-      attr_accessor segment_types: ::Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments")]
+      attr_accessor segment_types: ::Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary")]
       SENSITIVE: []
     end
 
@@ -3756,6 +3756,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class RealTimeContactAnalysisSegmentPostContactSummary
+      attr_accessor content: ::String
+      attr_accessor status: ("FAILED" | "COMPLETED")
+      attr_accessor failure_code: ("QUOTA_EXCEEDED" | "INSUFFICIENT_CONVERSATION_CONTENT" | "FAILED_SAFETY_GUIDELINES" | "INVALID_ANALYSIS_CONFIGURATION" | "INTERNAL_ERROR")
+      SENSITIVE: []
+    end
+
     class RealTimeContactAnalysisSegmentTranscript
       attr_accessor id: ::String
       attr_accessor participant_id: ::String
@@ -3804,6 +3811,7 @@ module Aws::Connect
       attr_accessor issues: Types::RealTimeContactAnalysisSegmentIssues
       attr_accessor event: Types::RealTimeContactAnalysisSegmentEvent
       attr_accessor attachments: Types::RealTimeContactAnalysisSegmentAttachments
+      attr_accessor post_contact_summary: Types::RealTimeContactAnalysisSegmentPostContactSummary
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -3816,6 +3824,8 @@ module Aws::Connect
       class Event < RealtimeContactAnalysisSegment
       end
       class Attachments < RealtimeContactAnalysisSegment
+      end
+      class PostContactSummary < RealtimeContactAnalysisSegment
       end
       class Unknown < RealtimeContactAnalysisSegment
       end

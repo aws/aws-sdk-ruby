@@ -231,6 +231,32 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Defines details for the analysis rule ID mapping table.
+    #
+    # @!attribute [rw] join_columns
+    #   The columns that query runners are allowed to use in an INNER JOIN
+    #   statement.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_constraints
+    #   The query constraints of the analysis rule ID mapping table.
+    #   @return [Array<Types::QueryConstraint>]
+    #
+    # @!attribute [rw] dimension_columns
+    #   The columns that query runners are allowed to select, group by, or
+    #   filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRuleIdMappingTable AWS API Documentation
+    #
+    class AnalysisRuleIdMappingTable < Struct.new(
+      :join_columns,
+      :query_constraints,
+      :dimension_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A type of analysis rule that enables row-level analysis.
     #
     # @!attribute [rw] join_columns
@@ -300,12 +326,17 @@ module Aws::CleanRooms
     #   table.
     #   @return [Types::AnalysisRuleCustom]
     #
+    # @!attribute [rw] id_mapping_table
+    #   The ID mapping table.
+    #   @return [Types::AnalysisRuleIdMappingTable]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRulePolicyV1 AWS API Documentation
     #
     class AnalysisRulePolicyV1 < Struct.new(
       :list,
       :aggregation,
       :custom,
+      :id_mapping_table,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -314,6 +345,7 @@ module Aws::CleanRooms
       class List < AnalysisRulePolicyV1; end
       class Aggregation < AnalysisRulePolicyV1; end
       class Custom < AnalysisRulePolicyV1; end
+      class IdMappingTable < AnalysisRulePolicyV1; end
       class Unknown < AnalysisRulePolicyV1; end
     end
 
@@ -1000,7 +1032,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration. Only
-    #   supports AWS account ID.
+    #   supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -1068,7 +1100,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration. Only
-    #   supports AWS account ID.
+    #   supports Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1087,6 +1119,156 @@ module Aws::CleanRooms
       :collaboration_id,
       :creator_account_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines details for the collaboration ID namespace association.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the collaboration ID namespace
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains the
+    #   collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   the collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The unique identifier of the Amazon Web Services account that
+    #   created the collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the collaboration ID namespace association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the collaboration ID namespace was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration that's necessary to create the
+    #   collaboration ID namespace association.
+    #   @return [Types::IdNamespaceAssociationInputReferenceConfig]
+    #
+    # @!attribute [rw] input_reference_properties
+    #   The input reference properties that are needed to create the
+    #   collaboration ID namespace association.
+    #   @return [Types::IdNamespaceAssociationInputReferenceProperties]
+    #
+    # @!attribute [rw] id_mapping_config
+    #   The configuration settings for the ID mapping table.
+    #   @return [Types::IdMappingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationIdNamespaceAssociation AWS API Documentation
+    #
+    class CollaborationIdNamespaceAssociation < Struct.new(
+      :id,
+      :arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :name,
+      :description,
+      :creator_account_id,
+      :create_time,
+      :update_time,
+      :input_reference_config,
+      :input_reference_properties,
+      :id_mapping_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about the collaboration ID namespace
+    # association.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the collaboration ID namespace
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the collaboration ID namespace association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the collaboration ID namespace
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   this collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains this
+    #   collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The Amazon Web Services account that created this collaboration ID
+    #   namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration that's used to create the
+    #   collaboration ID namespace association.
+    #   @return [Types::IdNamespaceAssociationInputReferenceConfig]
+    #
+    # @!attribute [rw] name
+    #   The name of the collaboration ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the collaboration ID namepsace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_properties
+    #   The input reference properties that are used to create the
+    #   collaboration ID namespace association.
+    #   @return [Types::IdNamespaceAssociationInputReferencePropertiesSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationIdNamespaceAssociationSummary AWS API Documentation
+    #
+    class CollaborationIdNamespaceAssociationSummary < Struct.new(
+      :arn,
+      :create_time,
+      :id,
+      :update_time,
+      :collaboration_arn,
+      :collaboration_id,
+      :creator_account_id,
+      :input_reference_config,
+      :name,
+      :description,
+      :input_reference_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2232,6 +2414,116 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration needed to create the ID mapping
+    #   table.
+    #   @return [Types::IdMappingTableInputReferenceConfig]
+    #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+    #   This value is used to encrypt the mapping table data that is stored
+    #   by Clean Rooms.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIdMappingTableInput AWS API Documentation
+    #
+    class CreateIdMappingTableInput < Struct.new(
+      :membership_identifier,
+      :name,
+      :description,
+      :input_reference_config,
+      :tags,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_mapping_table
+    #   The ID mapping table that was created.
+    #   @return [Types::IdMappingTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIdMappingTableOutput AWS API Documentation
+    #
+    class CreateIdMappingTableOutput < Struct.new(
+      :id_mapping_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID
+    #   namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration needed to create the ID namespace
+    #   association.
+    #   @return [Types::IdNamespaceAssociationInputReferenceConfig]
+    #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] name
+    #   The name for the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_mapping_config
+    #   The configuration settings for the ID mapping table.
+    #   @return [Types::IdMappingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIdNamespaceAssociationInput AWS API Documentation
+    #
+    class CreateIdNamespaceAssociationInput < Struct.new(
+      :membership_identifier,
+      :input_reference_config,
+      :tags,
+      :name,
+      :description,
+      :id_mapping_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_namespace_association
+    #   The ID namespace association that was created.
+    #   @return [Types::IdNamespaceAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIdNamespaceAssociationOutput AWS API Documentation
+    #
+    class CreateIdNamespaceAssociationOutput < Struct.new(
+      :id_namespace_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] collaboration_identifier
     #   The unique ID for the associated collaboration.
     #   @return [String]
@@ -2505,6 +2797,52 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredTableOutput AWS API Documentation
     #
     class DeleteConfiguredTableOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIdMappingTableInput AWS API Documentation
+    #
+    class DeleteIdMappingTableInput < Struct.new(
+      :id_mapping_table_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIdMappingTableOutput AWS API Documentation
+    #
+    class DeleteIdMappingTableOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want
+    #   to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID
+    #   namespace association that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIdNamespaceAssociationInput AWS API Documentation
+    #
+    class DeleteIdNamespaceAssociationInput < Struct.new(
+      :id_namespace_association_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIdNamespaceAssociationOutput AWS API Documentation
+    #
+    class DeleteIdNamespaceAssociationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] collaboration_identifier
     #   The unique identifier for the associated collaboration.
@@ -2916,6 +3254,37 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] collaboration_identifier
+    #   The unique identifier of the collaboration that contains the ID
+    #   namespace association that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want
+    #   to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationIdNamespaceAssociationInput AWS API Documentation
+    #
+    class GetCollaborationIdNamespaceAssociationInput < Struct.new(
+      :collaboration_identifier,
+      :id_namespace_association_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_id_namespace_association
+    #   The ID namespace association that you requested.
+    #   @return [Types::CollaborationIdNamespaceAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationIdNamespaceAssociationOutput AWS API Documentation
+    #
+    class GetCollaborationIdNamespaceAssociationOutput < Struct.new(
+      :collaboration_id_namespace_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
     #   The identifier for the collaboration.
     #   @return [String]
     #
@@ -3084,6 +3453,68 @@ module Aws::CleanRooms
     #
     class GetConfiguredTableOutput < Struct.new(
       :configured_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table identifier that you
+    #   want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIdMappingTableInput AWS API Documentation
+    #
+    class GetIdMappingTableInput < Struct.new(
+      :id_mapping_table_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_mapping_table
+    #   The ID mapping table that you requested.
+    #   @return [Types::IdMappingTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIdMappingTableOutput AWS API Documentation
+    #
+    class GetIdMappingTableOutput < Struct.new(
+      :id_mapping_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want
+    #   to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID
+    #   namespace association that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIdNamespaceAssociationInput AWS API Documentation
+    #
+    class GetIdNamespaceAssociationInput < Struct.new(
+      :id_namespace_association_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_namespace_association
+    #   The ID namespace association that you requested.
+    #   @return [Types::IdNamespaceAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIdNamespaceAssociationOutput AWS API Documentation
+    #
+    class GetIdNamespaceAssociationOutput < Struct.new(
+      :id_namespace_association)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3260,6 +3691,458 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # The configuration settings for the ID mapping table.
+    #
+    # @!attribute [rw] allow_use_as_dimension_column
+    #   An indicator as to whether you can use your column as a dimension
+    #   column in the ID mapping table (`TRUE`) or not (`FALSE`).
+    #
+    #   Default is `FALSE`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingConfig AWS API Documentation
+    #
+    class IdMappingConfig < Struct.new(
+      :allow_use_as_dimension_column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes information about the ID mapping table.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration for the ID mapping table.
+    #   @return [Types::IdMappingTableInputReferenceConfig]
+    #
+    # @!attribute [rw] membership_id
+    #   The unique identifier of the membership resource for the ID mapping
+    #   table.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership resource for the ID
+    #   mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains this ID
+    #   mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   this ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the ID mapping table was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ID mapping table was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_reference_properties
+    #   The input reference properties for the ID mapping table.
+    #   @return [Types::IdMappingTableInputReferenceProperties]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTable AWS API Documentation
+    #
+    class IdMappingTable < Struct.new(
+      :id,
+      :arn,
+      :input_reference_config,
+      :membership_id,
+      :membership_arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :description,
+      :name,
+      :create_time,
+      :update_time,
+      :input_reference_properties,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the input reference configuration for the ID mapping table.
+    #
+    # @!attribute [rw] input_reference_arn
+    #   The Amazon Resource Name (ARN) of the referenced resource in Entity
+    #   Resolution. Valid values are ID mapping workflow ARNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] manage_resource_policies
+    #   When `TRUE`, Clean Rooms manages permissions for the ID mapping
+    #   table resource.
+    #
+    #   When `FALSE`, the resource owner manages permissions for the ID
+    #   mapping table resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTableInputReferenceConfig AWS API Documentation
+    #
+    class IdMappingTableInputReferenceConfig < Struct.new(
+      :input_reference_arn,
+      :manage_resource_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input reference properties for the ID mapping table.
+    #
+    # @!attribute [rw] id_mapping_table_input_source
+    #   The input source of the ID mapping table.
+    #   @return [Array<Types::IdMappingTableInputSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTableInputReferenceProperties AWS API Documentation
+    #
+    class IdMappingTableInputReferenceProperties < Struct.new(
+      :id_mapping_table_input_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input source of the ID mapping table.
+    #
+    # @!attribute [rw] id_namespace_association_id
+    #   The unique identifier of the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the input source of the ID mapping table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTableInputSource AWS API Documentation
+    #
+    class IdMappingTableInputSource < Struct.new(
+      :id_namespace_association_id,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional properties that are specific to the type of the associated
+    # schema.
+    #
+    # @!attribute [rw] id_mapping_table_input_source
+    #   Defines which ID namespace associations are used to create the ID
+    #   mapping table.
+    #   @return [Array<Types::IdMappingTableInputSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTableSchemaTypeProperties AWS API Documentation
+    #
+    class IdMappingTableSchemaTypeProperties < Struct.new(
+      :id_mapping_table_input_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about the ID mapping table.
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   this ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains this ID
+    #   mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The unique identifier of the membership resource for this ID mapping
+    #   table.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership resource for this
+    #   ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which this ID mapping table was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which this ID mapping table was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of this ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of this ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration for the ID mapping table.
+    #   @return [Types::IdMappingTableInputReferenceConfig]
+    #
+    # @!attribute [rw] name
+    #   The name of this ID mapping table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdMappingTableSummary AWS API Documentation
+    #
+    class IdMappingTableSummary < Struct.new(
+      :collaboration_arn,
+      :collaboration_id,
+      :membership_id,
+      :membership_arn,
+      :create_time,
+      :update_time,
+      :id,
+      :arn,
+      :description,
+      :input_reference_config,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information to create the ID namespace association.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for this ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The unique identifier of the membership resource for this ID
+    #   namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership resource for this
+    #   ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains this ID
+    #   namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   this ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of this ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the ID namespace association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the ID namespace association was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration for the ID namespace association.
+    #   @return [Types::IdNamespaceAssociationInputReferenceConfig]
+    #
+    # @!attribute [rw] input_reference_properties
+    #   The input reference properties for the ID namespace association.
+    #   @return [Types::IdNamespaceAssociationInputReferenceProperties]
+    #
+    # @!attribute [rw] id_mapping_config
+    #   The configuration settings for the ID mapping table.
+    #   @return [Types::IdMappingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdNamespaceAssociation AWS API Documentation
+    #
+    class IdNamespaceAssociation < Struct.new(
+      :id,
+      :arn,
+      :membership_id,
+      :membership_arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :name,
+      :description,
+      :create_time,
+      :update_time,
+      :input_reference_config,
+      :input_reference_properties,
+      :id_mapping_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the information for the ID namespace association input
+    # reference configuration.
+    #
+    # @!attribute [rw] input_reference_arn
+    #   The Amazon Resource Name (ARN) of the Entity Resolution resource
+    #   that is being associated to the collaboration. Valid resource ARNs
+    #   are from the ID namespaces that you own.
+    #   @return [String]
+    #
+    # @!attribute [rw] manage_resource_policies
+    #   When `TRUE`, Clean Rooms manages permissions for the ID namespace
+    #   association resource.
+    #
+    #   When `FALSE`, the resource owner manages permissions for the ID
+    #   namespace association resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdNamespaceAssociationInputReferenceConfig AWS API Documentation
+    #
+    class IdNamespaceAssociationInputReferenceConfig < Struct.new(
+      :input_reference_arn,
+      :manage_resource_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the information for the ID namespace association input
+    # reference properties.
+    #
+    # @!attribute [rw] id_namespace_type
+    #   The ID namespace type for this ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_mapping_workflows_supported
+    #   Defines how ID mapping workflows are supported for this ID namespace
+    #   association.
+    #   @return [Array<Hash,Array,String,Numeric,Boolean>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdNamespaceAssociationInputReferenceProperties AWS API Documentation
+    #
+    class IdNamespaceAssociationInputReferenceProperties < Struct.new(
+      :id_namespace_type,
+      :id_mapping_workflows_supported)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about the ID namespace association input
+    # reference properties.
+    #
+    # @!attribute [rw] id_namespace_type
+    #   The ID namespace type for this ID namespace association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdNamespaceAssociationInputReferencePropertiesSummary AWS API Documentation
+    #
+    class IdNamespaceAssociationInputReferencePropertiesSummary < Struct.new(
+      :id_namespace_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about the ID namespace association.
+    #
+    # @!attribute [rw] membership_id
+    #   The unique identifier of the membership resource for this ID
+    #   namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership resource for this
+    #   ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   this ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains this ID
+    #   namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which this ID namespace association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which this ID namespace association has been
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of this ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_config
+    #   The input reference configuration details for this ID namespace
+    #   association.
+    #   @return [Types::IdNamespaceAssociationInputReferenceConfig]
+    #
+    # @!attribute [rw] name
+    #   The name of the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_reference_properties
+    #   The input reference properties for this ID namespace association.
+    #   @return [Types::IdNamespaceAssociationInputReferencePropertiesSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IdNamespaceAssociationSummary AWS API Documentation
+    #
+    class IdNamespaceAssociationSummary < Struct.new(
+      :membership_id,
+      :membership_arn,
+      :collaboration_arn,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :id,
+      :arn,
+      :input_reference_config,
+      :name,
+      :description,
+      :input_reference_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unexpected error during processing of request.
     #
     # @!attribute [rw] message
@@ -3278,12 +4161,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisTemplatesInput AWS API Documentation
@@ -3297,8 +4182,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] analysis_template_summaries
@@ -3320,12 +4204,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationAnalysisTemplatesInput AWS API Documentation
@@ -3339,8 +4225,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_analysis_template_summaries
@@ -3362,12 +4247,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsInput AWS API Documentation
@@ -3386,8 +4273,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::CollaborationConfiguredAudienceModelAssociationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsOutput AWS API Documentation
@@ -3400,18 +4286,61 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] collaboration_identifier
-    #   A unique identifier for one of your collaborations.
+    #   The unique identifier of the collaboration that contains the ID
+    #   namespace associations that you want to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum size of the results that is returned per call. Service
     #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   nextToken even if the maximum results has not been met.&gt;
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationIdNamespaceAssociationsInput AWS API Documentation
+    #
+    class ListCollaborationIdNamespaceAssociationsInput < Struct.new(
+      :collaboration_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value provided to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id_namespace_association_summaries
+    #   The summary information of the collaboration ID namespace
+    #   associations that you requested.
+    #   @return [Array<Types::CollaborationIdNamespaceAssociationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationIdNamespaceAssociationsOutput AWS API Documentation
+    #
+    class ListCollaborationIdNamespaceAssociationsOutput < Struct.new(
+      :next_token,
+      :collaboration_id_namespace_association_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for one of your collaborations.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetTemplatesInput AWS API Documentation
@@ -3425,8 +4354,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_privacy_budget_template_summaries
@@ -3453,14 +4381,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsInput AWS API Documentation
@@ -3479,8 +4407,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::CollaborationPrivacyBudgetSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsOutput AWS API Documentation
@@ -3493,14 +4420,14 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] member_status
@@ -3518,8 +4445,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_list
@@ -3541,14 +4467,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredAudienceModelAssociationsInput AWS API Documentation
@@ -3585,12 +4511,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTableAssociationsInput AWS API Documentation
@@ -3608,8 +4536,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::ConfiguredTableAssociationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTableAssociationsOutput AWS API Documentation
@@ -3622,12 +4549,14 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTablesInput AWS API Documentation
@@ -3644,8 +4573,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::ConfiguredTableSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTablesOutput AWS API Documentation
@@ -3657,17 +4585,104 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   tables that you want to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIdMappingTablesInput AWS API Documentation
+    #
+    class ListIdMappingTablesInput < Struct.new(
+      :membership_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_mapping_table_summaries
+    #   The summary information of the ID mapping tables that you requested.
+    #   @return [Array<Types::IdMappingTableSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token value provided to access the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIdMappingTablesOutput AWS API Documentation
+    #
+    class ListIdMappingTablesOutput < Struct.new(
+      :id_mapping_table_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID
+    #   namespace association that you want to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIdNamespaceAssociationsInput AWS API Documentation
+    #
+    class ListIdNamespaceAssociationsInput < Struct.new(
+      :membership_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value provided to access the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_namespace_association_summaries
+    #   The summary information of the ID namespace associations that you
+    #   requested.
+    #   @return [Array<Types::IdNamespaceAssociationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIdNamespaceAssociationsOutput AWS API Documentation
+    #
+    class ListIdNamespaceAssociationsOutput < Struct.new(
+      :next_token,
+      :id_namespace_association_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] collaboration_identifier
     #   The identifier of the collaboration in which the members are listed.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembersInput AWS API Documentation
@@ -3681,8 +4696,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] member_summaries
@@ -3699,12 +4713,14 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -3722,8 +4738,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] membership_summaries
@@ -3746,14 +4761,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetTemplatesInput AWS API Documentation
@@ -3767,8 +4782,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] privacy_budget_template_summaries
@@ -3797,14 +4811,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsInput AWS API Documentation
@@ -3825,8 +4839,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::PrivacyBudgetSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsOutput AWS API Documentation
@@ -3847,14 +4860,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service can return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedQueriesInput AWS API Documentation
@@ -3869,8 +4882,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] protected_queries
@@ -3892,17 +4904,18 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] schema_type
-    #   If present, filter schemas by schema type. The only valid schema
-    #   type is currently `TABLE`.
+    #   If present, filter schemas by schema type.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one.
+    #   The service might return a `nextToken` even if the `maxResults`
+    #   value has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListSchemasInput AWS API Documentation
@@ -3921,8 +4934,7 @@ module Aws::CleanRooms
     #   @return [Array<Types::SchemaSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListSchemasOutput AWS API Documentation
@@ -4308,6 +5320,38 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table that you want to
+    #   populate.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to populate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulateIdMappingTableInput AWS API Documentation
+    #
+    class PopulateIdMappingTableInput < Struct.new(
+      :id_mapping_table_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_mapping_job_id
+    #   The unique identifier of the mapping job that will populate the ID
+    #   mapping table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulateIdMappingTableOutput AWS API Documentation
+    #
+    class PopulateIdMappingTableOutput < Struct.new(
+      :id_mapping_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] membership_identifier
     #   A unique identifier for one of your memberships for a collaboration.
     #   Accepts a membership ID.
@@ -4510,7 +5554,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   Specifies the epislon and noise parameters for the privacy budget
+    #   Specifies the epsilon and noise parameters for the privacy budget
     #   template.
     #   @return [Types::PrivacyBudgetTemplateParametersOutput]
     #
@@ -5006,6 +6050,42 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Provides any necessary query constraint information.
+    #
+    # @note QueryConstraint is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of QueryConstraint corresponding to the set member.
+    #
+    # @!attribute [rw] require_overlap
+    #   An array of column names that specifies which columns are required
+    #   in the JOIN statement.
+    #   @return [Types::QueryConstraintRequireOverlap]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/QueryConstraint AWS API Documentation
+    #
+    class QueryConstraint < Struct.new(
+      :require_overlap,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RequireOverlap < QueryConstraint; end
+      class Unknown < QueryConstraint; end
+    end
+
+    # Provides the name of the columns that are required to overlap.
+    #
+    # @!attribute [rw] columns
+    #   The columns that are required to overlap.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/QueryConstraintRequireOverlap AWS API Documentation
+    #
+    class QueryConstraintRequireOverlap < Struct.new(
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request references a resource which does not exist.
     #
     # @!attribute [rw] message
@@ -5032,7 +6112,7 @@ module Aws::CleanRooms
     # A schema is a relation within a collaboration.
     #
     # @!attribute [rw] columns
-    #   The columns for the relation this schema represents.
+    #   The columns for the relation that this schema represents.
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] partition_keys
@@ -5040,13 +6120,13 @@ module Aws::CleanRooms
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] analysis_rule_types
-    #   The analysis rule types associated with the schema. Currently, only
-    #   one entry is present.
+    #   The analysis rule types that are associated with the schema.
+    #   Currently, only one entry is present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
     #   The analysis method for the schema. The only valid value is
-    #   currently DIRECT\_QUERY.
+    #   currently `DIRECT_QUERY`.
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
@@ -5064,7 +6144,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] collaboration_arn
-    #   The unique ARN for the collaboration that the schema belongs to.
+    #   The unique Amazon Resource Name (ARN) for the collaboration that the
+    #   schema belongs to.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5072,21 +6153,25 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The time the schema was created.
+    #   The time at which the schema was created.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   The time the schema was last updated.
+    #   The most recent time at which the schema was updated.
     #   @return [Time]
     #
     # @!attribute [rw] type
-    #   The type of schema. The only valid value is currently `TABLE`.
+    #   The type of schema.
     #   @return [String]
     #
     # @!attribute [rw] schema_status_details
     #   Details about the status of the schema. Currently, only one entry is
     #   present.
     #   @return [Array<Types::SchemaStatusDetail>]
+    #
+    # @!attribute [rw] schema_type_properties
+    #   The schema type properties.
+    #   @return [Types::SchemaTypeProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Schema AWS API Documentation
     #
@@ -5103,7 +6188,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :type,
-      :schema_status_details)
+      :schema_status_details,
+      :schema_type_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5191,8 +6277,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of schema object. The only valid schema type is currently
-    #   `TABLE`.
+    #   The type of schema object.
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
@@ -5240,6 +6325,27 @@ module Aws::CleanRooms
       :analysis_method)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Information about the schema type properties.
+    #
+    # @note SchemaTypeProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SchemaTypeProperties corresponding to the set member.
+    #
+    # @!attribute [rw] id_mapping_table
+    #   The ID mapping table for the schema type properties.
+    #   @return [Types::IdMappingTableSchemaTypeProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaTypeProperties AWS API Documentation
+    #
+    class SchemaTypeProperties < Struct.new(
+      :id_mapping_table,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class IdMappingTable < SchemaTypeProperties; end
+      class Unknown < SchemaTypeProperties; end
     end
 
     # Request denied because service quota has been exceeded.
@@ -5608,6 +6714,93 @@ module Aws::CleanRooms
     #
     class UpdateConfiguredTableOutput < Struct.new(
       :configured_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table that you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the ID mapping table.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIdMappingTableInput AWS API Documentation
+    #
+    class UpdateIdMappingTableInput < Struct.new(
+      :id_mapping_table_identifier,
+      :membership_identifier,
+      :description,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_mapping_table
+    #   The updated ID mapping table.
+    #   @return [Types::IdMappingTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIdMappingTableOutput AWS API Documentation
+    #
+    class UpdateIdMappingTableOutput < Struct.new(
+      :id_mapping_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want
+    #   to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   The unique identifier of the membership that contains the ID
+    #   namespace association that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the ID namespace association.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_mapping_config
+    #   The configuration settings for the ID mapping table.
+    #   @return [Types::IdMappingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIdNamespaceAssociationInput AWS API Documentation
+    #
+    class UpdateIdNamespaceAssociationInput < Struct.new(
+      :id_namespace_association_identifier,
+      :membership_identifier,
+      :name,
+      :description,
+      :id_mapping_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id_namespace_association
+    #   The updated ID namespace association.
+    #   @return [Types::IdNamespaceAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIdNamespaceAssociationOutput AWS API Documentation
+    #
+    class UpdateIdNamespaceAssociationOutput < Struct.new(
+      :id_namespace_association)
       SENSITIVE = []
       include Aws::Structure
     end

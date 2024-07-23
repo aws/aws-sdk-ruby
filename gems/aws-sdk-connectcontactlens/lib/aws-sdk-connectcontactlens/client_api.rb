@@ -37,6 +37,10 @@ module Aws::ConnectContactLens
     ParticipantRole = Shapes::StringShape.new(name: 'ParticipantRole')
     PointOfInterest = Shapes::StructureShape.new(name: 'PointOfInterest')
     PointsOfInterest = Shapes::ListShape.new(name: 'PointsOfInterest')
+    PostContactSummary = Shapes::StructureShape.new(name: 'PostContactSummary')
+    PostContactSummaryContent = Shapes::StringShape.new(name: 'PostContactSummaryContent')
+    PostContactSummaryFailureCode = Shapes::StringShape.new(name: 'PostContactSummaryFailureCode')
+    PostContactSummaryStatus = Shapes::StringShape.new(name: 'PostContactSummaryStatus')
     RealtimeContactAnalysisSegment = Shapes::StructureShape.new(name: 'RealtimeContactAnalysisSegment')
     RealtimeContactAnalysisSegments = Shapes::ListShape.new(name: 'RealtimeContactAnalysisSegments')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -92,8 +96,14 @@ module Aws::ConnectContactLens
 
     PointsOfInterest.member = Shapes::ShapeRef.new(shape: PointOfInterest)
 
+    PostContactSummary.add_member(:content, Shapes::ShapeRef.new(shape: PostContactSummaryContent, location_name: "Content"))
+    PostContactSummary.add_member(:status, Shapes::ShapeRef.new(shape: PostContactSummaryStatus, required: true, location_name: "Status"))
+    PostContactSummary.add_member(:failure_code, Shapes::ShapeRef.new(shape: PostContactSummaryFailureCode, location_name: "FailureCode"))
+    PostContactSummary.struct_class = Types::PostContactSummary
+
     RealtimeContactAnalysisSegment.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
     RealtimeContactAnalysisSegment.add_member(:categories, Shapes::ShapeRef.new(shape: Categories, location_name: "Categories"))
+    RealtimeContactAnalysisSegment.add_member(:post_contact_summary, Shapes::ShapeRef.new(shape: PostContactSummary, location_name: "PostContactSummary"))
     RealtimeContactAnalysisSegment.struct_class = Types::RealtimeContactAnalysisSegment
 
     RealtimeContactAnalysisSegments.member = Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegment)

@@ -2254,7 +2254,7 @@ module Aws
                                                         ?max_results: ::Integer,
                                                         ?next_token: ::String,
                                                         output_type: ("Raw" | "Redacted"),
-                                                        segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments")]
+                                                        segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary")]
                                                       ) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
 

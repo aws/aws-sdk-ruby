@@ -7093,20 +7093,6 @@ module Aws::DataZone
     #   resp.items[0].asset_item.owning_project_id #=> String
     #   resp.items[0].asset_item.type_identifier #=> String
     #   resp.items[0].asset_item.type_revision #=> String
-    #   resp.items[0].data_product_item.created_at #=> Time
-    #   resp.items[0].data_product_item.created_by #=> String
-    #   resp.items[0].data_product_item.data_product_items #=> Array
-    #   resp.items[0].data_product_item.data_product_items[0].domain_id #=> String
-    #   resp.items[0].data_product_item.data_product_items[0].item_id #=> String
-    #   resp.items[0].data_product_item.description #=> String
-    #   resp.items[0].data_product_item.domain_id #=> String
-    #   resp.items[0].data_product_item.glossary_terms #=> Array
-    #   resp.items[0].data_product_item.glossary_terms[0] #=> String
-    #   resp.items[0].data_product_item.id #=> String
-    #   resp.items[0].data_product_item.name #=> String
-    #   resp.items[0].data_product_item.owning_project_id #=> String
-    #   resp.items[0].data_product_item.updated_at #=> Time
-    #   resp.items[0].data_product_item.updated_by #=> String
     #   resp.items[0].glossary_item.created_at #=> Time
     #   resp.items[0].glossary_item.created_by #=> String
     #   resp.items[0].glossary_item.description #=> String
@@ -9007,7 +8993,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

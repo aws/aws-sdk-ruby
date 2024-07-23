@@ -518,7 +518,7 @@ module Aws::CleanRooms
     #   resp.schemas[0].partition_keys[0].name #=> String
     #   resp.schemas[0].partition_keys[0].type #=> String
     #   resp.schemas[0].analysis_rule_types #=> Array
-    #   resp.schemas[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.schemas[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schemas[0].analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.schemas[0].creator_account_id #=> String
     #   resp.schemas[0].name #=> String
@@ -527,15 +527,18 @@ module Aws::CleanRooms
     #   resp.schemas[0].description #=> String
     #   resp.schemas[0].create_time #=> Time
     #   resp.schemas[0].update_time #=> Time
-    #   resp.schemas[0].type #=> String, one of "TABLE"
+    #   resp.schemas[0].type #=> String, one of "TABLE", "ID_MAPPING_TABLE"
     #   resp.schemas[0].schema_status_details #=> Array
     #   resp.schemas[0].schema_status_details[0].status #=> String, one of "READY", "NOT_READY"
     #   resp.schemas[0].schema_status_details[0].reasons #=> Array
-    #   resp.schemas[0].schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+    #   resp.schemas[0].schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
     #   resp.schemas[0].schema_status_details[0].reasons[0].message #=> String
-    #   resp.schemas[0].schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.schemas[0].schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schemas[0].schema_status_details[0].configurations #=> Array
-    #   resp.schemas[0].schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.schemas[0].schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY", "CUSTOM_ANALYSIS_NOT_ALLOWED", "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS", "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
+    #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
+    #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
+    #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
     #   resp.errors #=> Array
     #   resp.errors[0].name #=> String
     #   resp.errors[0].code #=> String
@@ -571,7 +574,7 @@ module Aws::CleanRooms
     #     schema_analysis_rule_requests: [ # required
     #       {
     #         name: "TableAlias", # required
-    #         type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
+    #         type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM, ID_MAPPING_TABLE
     #       },
     #     ],
     #   })
@@ -580,7 +583,7 @@ module Aws::CleanRooms
     #
     #   resp.analysis_rules #=> Array
     #   resp.analysis_rules[0].collaboration_id #=> String
-    #   resp.analysis_rules[0].type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.analysis_rules[0].type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.analysis_rules[0].name #=> String
     #   resp.analysis_rules[0].create_time #=> Time
     #   resp.analysis_rules[0].update_time #=> Time
@@ -613,9 +616,16 @@ module Aws::CleanRooms
     #   resp.analysis_rules[0].policy.v1.custom.allowed_analysis_providers[0] #=> String
     #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rules[0].policy.v1.id_mapping_table.join_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.id_mapping_table.join_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.id_mapping_table.query_constraints #=> Array
+    #   resp.analysis_rules[0].policy.v1.id_mapping_table.query_constraints[0].require_overlap.columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.id_mapping_table.query_constraints[0].require_overlap.columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.id_mapping_table.dimension_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.id_mapping_table.dimension_columns[0] #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].name #=> String
-    #   resp.errors[0].type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.errors[0].type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.errors[0].code #=> String
     #   resp.errors[0].message #=> String
     #
@@ -1155,6 +1165,155 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Creates an ID mapping table.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table.
+    #
+    # @option params [required, String] :name
+    #   A name for the ID mapping table.
+    #
+    # @option params [String] :description
+    #   A description of the ID mapping table.
+    #
+    # @option params [required, Types::IdMappingTableInputReferenceConfig] :input_reference_config
+    #   The input reference configuration needed to create the ID mapping
+    #   table.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+    #   This value is used to encrypt the mapping table data that is stored by
+    #   Clean Rooms.
+    #
+    # @return [Types::CreateIdMappingTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIdMappingTableOutput#id_mapping_table #id_mapping_table} => Types::IdMappingTable
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_id_mapping_table({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     name: "ResourceAlias", # required
+    #     description: "ResourceDescription",
+    #     input_reference_config: { # required
+    #       input_reference_arn: "IdMappingTableInputReferenceArn", # required
+    #       manage_resource_policies: false, # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     kms_key_arn: "KMSKeyArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_mapping_table.id #=> String
+    #   resp.id_mapping_table.arn #=> String
+    #   resp.id_mapping_table.input_reference_config.input_reference_arn #=> String
+    #   resp.id_mapping_table.input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_mapping_table.membership_id #=> String
+    #   resp.id_mapping_table.membership_arn #=> String
+    #   resp.id_mapping_table.collaboration_id #=> String
+    #   resp.id_mapping_table.collaboration_arn #=> String
+    #   resp.id_mapping_table.description #=> String
+    #   resp.id_mapping_table.name #=> String
+    #   resp.id_mapping_table.create_time #=> Time
+    #   resp.id_mapping_table.update_time #=> Time
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source #=> Array
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source[0].id_namespace_association_id #=> String
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_table.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIdMappingTable AWS API Documentation
+    #
+    # @overload create_id_mapping_table(params = {})
+    # @param [Hash] params ({})
+    def create_id_mapping_table(params = {}, options = {})
+      req = build_request(:create_id_mapping_table, params)
+      req.send_request(options)
+    end
+
+    # Creates an ID namespace association.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID namespace
+    #   association.
+    #
+    # @option params [required, Types::IdNamespaceAssociationInputReferenceConfig] :input_reference_config
+    #   The input reference configuration needed to create the ID namespace
+    #   association.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #
+    # @option params [required, String] :name
+    #   The name for the ID namespace association.
+    #
+    # @option params [String] :description
+    #   The description of the ID namespace association.
+    #
+    # @option params [Types::IdMappingConfig] :id_mapping_config
+    #   The configuration settings for the ID mapping table.
+    #
+    # @return [Types::CreateIdNamespaceAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIdNamespaceAssociationOutput#id_namespace_association #id_namespace_association} => Types::IdNamespaceAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_id_namespace_association({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     input_reference_config: { # required
+    #       input_reference_arn: "IdNamespaceAssociationInputReferenceArn", # required
+    #       manage_resource_policies: false, # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     name: "GenericResourceName", # required
+    #     description: "ResourceDescription",
+    #     id_mapping_config: {
+    #       allow_use_as_dimension_column: false, # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_namespace_association.id #=> String
+    #   resp.id_namespace_association.arn #=> String
+    #   resp.id_namespace_association.membership_id #=> String
+    #   resp.id_namespace_association.membership_arn #=> String
+    #   resp.id_namespace_association.collaboration_id #=> String
+    #   resp.id_namespace_association.collaboration_arn #=> String
+    #   resp.id_namespace_association.name #=> String
+    #   resp.id_namespace_association.description #=> String
+    #   resp.id_namespace_association.create_time #=> Time
+    #   resp.id_namespace_association.update_time #=> Time
+    #   resp.id_namespace_association.input_reference_config.input_reference_arn #=> String
+    #   resp.id_namespace_association.input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_namespace_association.input_reference_properties.id_namespace_type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_namespace_association.input_reference_properties.id_mapping_workflows_supported #=> Array
+    #   resp.id_namespace_association.id_mapping_config.allow_use_as_dimension_column #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateIdNamespaceAssociation AWS API Documentation
+    #
+    # @overload create_id_namespace_association(params = {})
+    # @param [Hash] params ({})
+    def create_id_namespace_association(params = {}, options = {})
+      req = build_request(:create_id_namespace_association, params)
+      req.send_request(options)
+    end
+
     # Creates a membership for a specific collaboration identifier and joins
     # the collaboration.
     #
@@ -1479,6 +1638,61 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Deletes an ID mapping table.
+    #
+    # @option params [required, String] :id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table that you want to delete.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_id_mapping_table({
+    #     id_mapping_table_identifier: "UUID", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIdMappingTable AWS API Documentation
+    #
+    # @overload delete_id_mapping_table(params = {})
+    # @param [Hash] params ({})
+    def delete_id_mapping_table(params = {}, options = {})
+      req = build_request(:delete_id_mapping_table, params)
+      req.send_request(options)
+    end
+
+    # Deletes an ID namespace association.
+    #
+    # @option params [required, String] :id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want to
+    #   delete.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID namespace
+    #   association that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_id_namespace_association({
+    #     id_namespace_association_identifier: "IdNamespaceAssociationIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteIdNamespaceAssociation AWS API Documentation
+    #
+    # @overload delete_id_namespace_association(params = {})
+    # @param [Hash] params ({})
+    def delete_id_namespace_association(params = {}, options = {})
+      req = build_request(:delete_id_namespace_association, params)
+      req.send_request(options)
+    end
+
     # Removes the specified member from a collaboration. The removed member
     # is placed in the Removed status and can't interact with the
     # collaboration. The removed member's data is inaccessible to active
@@ -1755,6 +1969,53 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Retrieves an ID namespace association from a specific collaboration.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The unique identifier of the collaboration that contains the ID
+    #   namespace association that you want to retrieve.
+    #
+    # @option params [required, String] :id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want to
+    #   retrieve.
+    #
+    # @return [Types::GetCollaborationIdNamespaceAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCollaborationIdNamespaceAssociationOutput#collaboration_id_namespace_association #collaboration_id_namespace_association} => Types::CollaborationIdNamespaceAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_collaboration_id_namespace_association({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     id_namespace_association_identifier: "IdNamespaceAssociationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_id_namespace_association.id #=> String
+    #   resp.collaboration_id_namespace_association.arn #=> String
+    #   resp.collaboration_id_namespace_association.collaboration_id #=> String
+    #   resp.collaboration_id_namespace_association.collaboration_arn #=> String
+    #   resp.collaboration_id_namespace_association.name #=> String
+    #   resp.collaboration_id_namespace_association.description #=> String
+    #   resp.collaboration_id_namespace_association.creator_account_id #=> String
+    #   resp.collaboration_id_namespace_association.create_time #=> Time
+    #   resp.collaboration_id_namespace_association.update_time #=> Time
+    #   resp.collaboration_id_namespace_association.input_reference_config.input_reference_arn #=> String
+    #   resp.collaboration_id_namespace_association.input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.collaboration_id_namespace_association.input_reference_properties.id_namespace_type #=> String, one of "SOURCE", "TARGET"
+    #   resp.collaboration_id_namespace_association.input_reference_properties.id_mapping_workflows_supported #=> Array
+    #   resp.collaboration_id_namespace_association.id_mapping_config.allow_use_as_dimension_column #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationIdNamespaceAssociation AWS API Documentation
+    #
+    # @overload get_collaboration_id_namespace_association(params = {})
+    # @param [Hash] params ({})
+    def get_collaboration_id_namespace_association(params = {}, options = {})
+      req = build_request(:get_collaboration_id_namespace_association, params)
+      req.send_request(options)
+    end
+
     # Returns details about a specified privacy budget template.
     #
     # @option params [required, String] :collaboration_identifier
@@ -1994,6 +2255,103 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Retrieves an ID mapping table.
+    #
+    # @option params [required, String] :id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table identifier that you want
+    #   to retrieve.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to retrieve.
+    #
+    # @return [Types::GetIdMappingTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdMappingTableOutput#id_mapping_table #id_mapping_table} => Types::IdMappingTable
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_id_mapping_table({
+    #     id_mapping_table_identifier: "UUID", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_mapping_table.id #=> String
+    #   resp.id_mapping_table.arn #=> String
+    #   resp.id_mapping_table.input_reference_config.input_reference_arn #=> String
+    #   resp.id_mapping_table.input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_mapping_table.membership_id #=> String
+    #   resp.id_mapping_table.membership_arn #=> String
+    #   resp.id_mapping_table.collaboration_id #=> String
+    #   resp.id_mapping_table.collaboration_arn #=> String
+    #   resp.id_mapping_table.description #=> String
+    #   resp.id_mapping_table.name #=> String
+    #   resp.id_mapping_table.create_time #=> Time
+    #   resp.id_mapping_table.update_time #=> Time
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source #=> Array
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source[0].id_namespace_association_id #=> String
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_table.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIdMappingTable AWS API Documentation
+    #
+    # @overload get_id_mapping_table(params = {})
+    # @param [Hash] params ({})
+    def get_id_mapping_table(params = {}, options = {})
+      req = build_request(:get_id_mapping_table, params)
+      req.send_request(options)
+    end
+
+    # Retrieves an ID namespace association.
+    #
+    # @option params [required, String] :id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want to
+    #   retrieve.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID namespace
+    #   association that you want to retrieve.
+    #
+    # @return [Types::GetIdNamespaceAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdNamespaceAssociationOutput#id_namespace_association #id_namespace_association} => Types::IdNamespaceAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_id_namespace_association({
+    #     id_namespace_association_identifier: "IdNamespaceAssociationIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_namespace_association.id #=> String
+    #   resp.id_namespace_association.arn #=> String
+    #   resp.id_namespace_association.membership_id #=> String
+    #   resp.id_namespace_association.membership_arn #=> String
+    #   resp.id_namespace_association.collaboration_id #=> String
+    #   resp.id_namespace_association.collaboration_arn #=> String
+    #   resp.id_namespace_association.name #=> String
+    #   resp.id_namespace_association.description #=> String
+    #   resp.id_namespace_association.create_time #=> Time
+    #   resp.id_namespace_association.update_time #=> Time
+    #   resp.id_namespace_association.input_reference_config.input_reference_arn #=> String
+    #   resp.id_namespace_association.input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_namespace_association.input_reference_properties.id_namespace_type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_namespace_association.input_reference_properties.id_mapping_workflows_supported #=> Array
+    #   resp.id_namespace_association.id_mapping_config.allow_use_as_dimension_column #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetIdNamespaceAssociation AWS API Documentation
+    #
+    # @overload get_id_namespace_association(params = {})
+    # @param [Hash] params ({})
+    def get_id_namespace_association(params = {}, options = {})
+      req = build_request(:get_id_namespace_association, params)
+      req.send_request(options)
+    end
+
     # Retrieves a specified membership for an identifier.
     #
     # @option params [required, String] :membership_identifier
@@ -2168,7 +2526,7 @@ module Aws::CleanRooms
     #   resp.schema.partition_keys[0].name #=> String
     #   resp.schema.partition_keys[0].type #=> String
     #   resp.schema.analysis_rule_types #=> Array
-    #   resp.schema.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.schema.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schema.analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.schema.creator_account_id #=> String
     #   resp.schema.name #=> String
@@ -2177,15 +2535,18 @@ module Aws::CleanRooms
     #   resp.schema.description #=> String
     #   resp.schema.create_time #=> Time
     #   resp.schema.update_time #=> Time
-    #   resp.schema.type #=> String, one of "TABLE"
+    #   resp.schema.type #=> String, one of "TABLE", "ID_MAPPING_TABLE"
     #   resp.schema.schema_status_details #=> Array
     #   resp.schema.schema_status_details[0].status #=> String, one of "READY", "NOT_READY"
     #   resp.schema.schema_status_details[0].reasons #=> Array
-    #   resp.schema.schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+    #   resp.schema.schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
     #   resp.schema.schema_status_details[0].reasons[0].message #=> String
-    #   resp.schema.schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.schema.schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schema.schema_status_details[0].configurations #=> Array
-    #   resp.schema.schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.schema.schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY", "CUSTOM_ANALYSIS_NOT_ALLOWED", "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS", "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
+    #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
+    #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
+    #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetSchema AWS API Documentation
     #
@@ -2219,13 +2580,13 @@ module Aws::CleanRooms
     #   resp = client.get_schema_analysis_rule({
     #     collaboration_identifier: "CollaborationIdentifier", # required
     #     name: "TableAlias", # required
-    #     type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
+    #     type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM, ID_MAPPING_TABLE
     #   })
     #
     # @example Response structure
     #
     #   resp.analysis_rule.collaboration_id #=> String
-    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.analysis_rule.name #=> String
     #   resp.analysis_rule.create_time #=> Time
     #   resp.analysis_rule.update_time #=> Time
@@ -2258,6 +2619,13 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
+    #   resp.analysis_rule.policy.v1.id_mapping_table.join_columns #=> Array
+    #   resp.analysis_rule.policy.v1.id_mapping_table.join_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.id_mapping_table.query_constraints #=> Array
+    #   resp.analysis_rule.policy.v1.id_mapping_table.query_constraints[0].require_overlap.columns #=> Array
+    #   resp.analysis_rule.policy.v1.id_mapping_table.query_constraints[0].require_overlap.columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.id_mapping_table.dimension_columns #=> Array
+    #   resp.analysis_rule.policy.v1.id_mapping_table.dimension_columns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetSchemaAnalysisRule AWS API Documentation
     #
@@ -2274,11 +2642,13 @@ module Aws::CleanRooms
     #   The identifier for a membership resource.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2326,11 +2696,13 @@ module Aws::CleanRooms
     #   belong to. Currently accepts collaboration ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListCollaborationAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2377,11 +2749,13 @@ module Aws::CleanRooms
     #   model association belongs to. Accepts a collaboration ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListCollaborationConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2421,6 +2795,61 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Returns a list of the ID namespace associations in a collaboration.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The unique identifier of the collaboration that contains the ID
+    #   namespace associations that you want to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.&gt;
+    #
+    # @return [Types::ListCollaborationIdNamespaceAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCollaborationIdNamespaceAssociationsOutput#next_token #next_token} => String
+    #   * {Types::ListCollaborationIdNamespaceAssociationsOutput#collaboration_id_namespace_association_summaries #collaboration_id_namespace_association_summaries} => Array&lt;Types::CollaborationIdNamespaceAssociationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_collaboration_id_namespace_associations({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.collaboration_id_namespace_association_summaries #=> Array
+    #   resp.collaboration_id_namespace_association_summaries[0].arn #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].create_time #=> Time
+    #   resp.collaboration_id_namespace_association_summaries[0].id #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].update_time #=> Time
+    #   resp.collaboration_id_namespace_association_summaries[0].collaboration_arn #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].collaboration_id #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].creator_account_id #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].input_reference_config.input_reference_arn #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.collaboration_id_namespace_association_summaries[0].name #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].description #=> String
+    #   resp.collaboration_id_namespace_association_summaries[0].input_reference_properties.id_namespace_type #=> String, one of "SOURCE", "TARGET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationIdNamespaceAssociations AWS API Documentation
+    #
+    # @overload list_collaboration_id_namespace_associations(params = {})
+    # @param [Hash] params ({})
+    def list_collaboration_id_namespace_associations(params = {}, options = {})
+      req = build_request(:list_collaboration_id_namespace_associations, params)
+      req.send_request(options)
+    end
+
     # Returns an array that summarizes each privacy budget template in a
     # specified collaboration.
     #
@@ -2428,13 +2857,13 @@ module Aws::CleanRooms
     #   A unique identifier for one of your collaborations.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListCollaborationPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2484,13 +2913,13 @@ module Aws::CleanRooms
     #   Specifies the type of the privacy budget.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @return [Types::ListCollaborationPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2540,13 +2969,13 @@ module Aws::CleanRooms
     # invited to.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @option params [String] :member_status
     #   The caller's status in a collaboration.
@@ -2598,13 +3027,13 @@ module Aws::CleanRooms
     #   audience model associations that you want to retrieve.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2653,11 +3082,13 @@ module Aws::CleanRooms
     #   associations for. Currently accepts the membership ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListConfiguredTableAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2699,11 +3130,13 @@ module Aws::CleanRooms
     # Lists configured tables.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListConfiguredTablesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2741,17 +3174,130 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Returns a list of ID mapping tables.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   tables that you want to view.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #
+    # @return [Types::ListIdMappingTablesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdMappingTablesOutput#id_mapping_table_summaries #id_mapping_table_summaries} => Array&lt;Types::IdMappingTableSummary&gt;
+    #   * {Types::ListIdMappingTablesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_id_mapping_tables({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_mapping_table_summaries #=> Array
+    #   resp.id_mapping_table_summaries[0].collaboration_arn #=> String
+    #   resp.id_mapping_table_summaries[0].collaboration_id #=> String
+    #   resp.id_mapping_table_summaries[0].membership_id #=> String
+    #   resp.id_mapping_table_summaries[0].membership_arn #=> String
+    #   resp.id_mapping_table_summaries[0].create_time #=> Time
+    #   resp.id_mapping_table_summaries[0].update_time #=> Time
+    #   resp.id_mapping_table_summaries[0].id #=> String
+    #   resp.id_mapping_table_summaries[0].arn #=> String
+    #   resp.id_mapping_table_summaries[0].description #=> String
+    #   resp.id_mapping_table_summaries[0].input_reference_config.input_reference_arn #=> String
+    #   resp.id_mapping_table_summaries[0].input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_mapping_table_summaries[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIdMappingTables AWS API Documentation
+    #
+    # @overload list_id_mapping_tables(params = {})
+    # @param [Hash] params ({})
+    def list_id_mapping_tables(params = {}, options = {})
+      req = build_request(:list_id_mapping_tables, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ID namespace associations.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID namespace
+    #   association that you want to view.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #
+    # @return [Types::ListIdNamespaceAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdNamespaceAssociationsOutput#next_token #next_token} => String
+    #   * {Types::ListIdNamespaceAssociationsOutput#id_namespace_association_summaries #id_namespace_association_summaries} => Array&lt;Types::IdNamespaceAssociationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_id_namespace_associations({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.id_namespace_association_summaries #=> Array
+    #   resp.id_namespace_association_summaries[0].membership_id #=> String
+    #   resp.id_namespace_association_summaries[0].membership_arn #=> String
+    #   resp.id_namespace_association_summaries[0].collaboration_arn #=> String
+    #   resp.id_namespace_association_summaries[0].collaboration_id #=> String
+    #   resp.id_namespace_association_summaries[0].create_time #=> Time
+    #   resp.id_namespace_association_summaries[0].update_time #=> Time
+    #   resp.id_namespace_association_summaries[0].id #=> String
+    #   resp.id_namespace_association_summaries[0].arn #=> String
+    #   resp.id_namespace_association_summaries[0].input_reference_config.input_reference_arn #=> String
+    #   resp.id_namespace_association_summaries[0].input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_namespace_association_summaries[0].name #=> String
+    #   resp.id_namespace_association_summaries[0].description #=> String
+    #   resp.id_namespace_association_summaries[0].input_reference_properties.id_namespace_type #=> String, one of "SOURCE", "TARGET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListIdNamespaceAssociations AWS API Documentation
+    #
+    # @overload list_id_namespace_associations(params = {})
+    # @param [Hash] params ({})
+    def list_id_namespace_associations(params = {}, options = {})
+      req = build_request(:list_id_namespace_associations, params)
+      req.send_request(options)
+    end
+
     # Lists all members within a collaboration.
     #
     # @option params [required, String] :collaboration_identifier
     #   The identifier of the collaboration in which the members are listed.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListMembersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2795,11 +3341,13 @@ module Aws::CleanRooms
     # Lists all memberships resources within the caller's account.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @option params [String] :status
     #   A filter which will return only memberships in the specified status.
@@ -2855,13 +3403,13 @@ module Aws::CleanRooms
     #   this membership belongs to. Accepts a membership ID.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2913,13 +3461,13 @@ module Aws::CleanRooms
     #   The privacy budget type.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service may return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2975,13 +3523,13 @@ module Aws::CleanRooms
     #   A filter on the status of the protected query.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call. Service
-    #   chooses a default if it has not been set. Service can return a
-    #   nextToken even if the maximum results has not been met.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListProtectedQueriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3025,15 +3573,16 @@ module Aws::CleanRooms
     #   Currently accepts a collaboration ID.
     #
     # @option params [String] :schema_type
-    #   If present, filter schemas by schema type. The only valid schema type
-    #   is currently `TABLE`.
+    #   If present, filter schemas by schema type.
     #
     # @option params [String] :next_token
-    #   The token value retrieved from a previous call to access the next page
-    #   of results.
+    #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of the results that is returned per call.
+    #   The maximum number of results that are returned for an API request
+    #   call. The service chooses a default number if you don't set one. The
+    #   service might return a `nextToken` even if the `maxResults` value
+    #   has not been met.
     #
     # @return [Types::ListSchemasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3046,7 +3595,7 @@ module Aws::CleanRooms
     #
     #   resp = client.list_schemas({
     #     collaboration_identifier: "CollaborationIdentifier", # required
-    #     schema_type: "TABLE", # accepts TABLE
+    #     schema_type: "TABLE", # accepts TABLE, ID_MAPPING_TABLE
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #   })
@@ -3055,14 +3604,14 @@ module Aws::CleanRooms
     #
     #   resp.schema_summaries #=> Array
     #   resp.schema_summaries[0].name #=> String
-    #   resp.schema_summaries[0].type #=> String, one of "TABLE"
+    #   resp.schema_summaries[0].type #=> String, one of "TABLE", "ID_MAPPING_TABLE"
     #   resp.schema_summaries[0].creator_account_id #=> String
     #   resp.schema_summaries[0].create_time #=> Time
     #   resp.schema_summaries[0].update_time #=> Time
     #   resp.schema_summaries[0].collaboration_id #=> String
     #   resp.schema_summaries[0].collaboration_arn #=> String
     #   resp.schema_summaries[0].analysis_rule_types #=> Array
-    #   resp.schema_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.schema_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schema_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY"
     #   resp.next_token #=> String
     #
@@ -3102,6 +3651,41 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Defines the information that's necessary to populate an ID mapping
+    # table.
+    #
+    # @option params [required, String] :id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table that you want to
+    #   populate.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to populate.
+    #
+    # @return [Types::PopulateIdMappingTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PopulateIdMappingTableOutput#id_mapping_job_id #id_mapping_job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.populate_id_mapping_table({
+    #     id_mapping_table_identifier: "UUID", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_mapping_job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulateIdMappingTable AWS API Documentation
+    #
+    # @overload populate_id_mapping_table(params = {})
+    # @param [Hash] params ({})
+    def populate_id_mapping_table(params = {}, options = {})
+      req = build_request(:populate_id_mapping_table, params)
       req.send_request(options)
     end
 
@@ -3658,6 +4242,125 @@ module Aws::CleanRooms
       req.send_request(options)
     end
 
+    # Provides the details that are necessary to update an ID mapping table.
+    #
+    # @option params [required, String] :id_mapping_table_identifier
+    #   The unique identifier of the ID mapping table that you want to update.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID mapping
+    #   table that you want to update.
+    #
+    # @option params [String] :description
+    #   A new description for the ID mapping table.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+    #
+    # @return [Types::UpdateIdMappingTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdMappingTableOutput#id_mapping_table #id_mapping_table} => Types::IdMappingTable
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_id_mapping_table({
+    #     id_mapping_table_identifier: "UUID", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     description: "ResourceDescription",
+    #     kms_key_arn: "KMSKeyArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_mapping_table.id #=> String
+    #   resp.id_mapping_table.arn #=> String
+    #   resp.id_mapping_table.input_reference_config.input_reference_arn #=> String
+    #   resp.id_mapping_table.input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_mapping_table.membership_id #=> String
+    #   resp.id_mapping_table.membership_arn #=> String
+    #   resp.id_mapping_table.collaboration_id #=> String
+    #   resp.id_mapping_table.collaboration_arn #=> String
+    #   resp.id_mapping_table.description #=> String
+    #   resp.id_mapping_table.name #=> String
+    #   resp.id_mapping_table.create_time #=> Time
+    #   resp.id_mapping_table.update_time #=> Time
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source #=> Array
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source[0].id_namespace_association_id #=> String
+    #   resp.id_mapping_table.input_reference_properties.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_mapping_table.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIdMappingTable AWS API Documentation
+    #
+    # @overload update_id_mapping_table(params = {})
+    # @param [Hash] params ({})
+    def update_id_mapping_table(params = {}, options = {})
+      req = build_request(:update_id_mapping_table, params)
+      req.send_request(options)
+    end
+
+    # Provides the details that are necessary to update an ID namespace
+    # association.
+    #
+    # @option params [required, String] :id_namespace_association_identifier
+    #   The unique identifier of the ID namespace association that you want to
+    #   update.
+    #
+    # @option params [required, String] :membership_identifier
+    #   The unique identifier of the membership that contains the ID namespace
+    #   association that you want to update.
+    #
+    # @option params [String] :name
+    #   A new name for the ID namespace association.
+    #
+    # @option params [String] :description
+    #   A new description for the ID namespace association.
+    #
+    # @option params [Types::IdMappingConfig] :id_mapping_config
+    #   The configuration settings for the ID mapping table.
+    #
+    # @return [Types::UpdateIdNamespaceAssociationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdNamespaceAssociationOutput#id_namespace_association #id_namespace_association} => Types::IdNamespaceAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_id_namespace_association({
+    #     id_namespace_association_identifier: "IdNamespaceAssociationIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     name: "GenericResourceName",
+    #     description: "ResourceDescription",
+    #     id_mapping_config: {
+    #       allow_use_as_dimension_column: false, # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id_namespace_association.id #=> String
+    #   resp.id_namespace_association.arn #=> String
+    #   resp.id_namespace_association.membership_id #=> String
+    #   resp.id_namespace_association.membership_arn #=> String
+    #   resp.id_namespace_association.collaboration_id #=> String
+    #   resp.id_namespace_association.collaboration_arn #=> String
+    #   resp.id_namespace_association.name #=> String
+    #   resp.id_namespace_association.description #=> String
+    #   resp.id_namespace_association.create_time #=> Time
+    #   resp.id_namespace_association.update_time #=> Time
+    #   resp.id_namespace_association.input_reference_config.input_reference_arn #=> String
+    #   resp.id_namespace_association.input_reference_config.manage_resource_policies #=> Boolean
+    #   resp.id_namespace_association.input_reference_properties.id_namespace_type #=> String, one of "SOURCE", "TARGET"
+    #   resp.id_namespace_association.input_reference_properties.id_mapping_workflows_supported #=> Array
+    #   resp.id_namespace_association.id_mapping_config.allow_use_as_dimension_column #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateIdNamespaceAssociation AWS API Documentation
+    #
+    # @overload update_id_namespace_association(params = {})
+    # @param [Hash] params ({})
+    def update_id_namespace_association(params = {}, options = {})
+      req = build_request(:update_id_namespace_association, params)
+      req.send_request(options)
+    end
+
     # Updates a membership.
     #
     # @option params [required, String] :membership_identifier
@@ -3855,7 +4558,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-07-23)
+------------------
+
+* Feature - This release adds AWS Entity Resolution integration to associate ID namespaces & ID mapping workflow resources as part of ID namespace association and  ID mapping table  in AWS Clean Rooms. It also introduces a new ID_MAPPING_TABLE analysis rule to manage the protection on ID mapping table.
+
 1.25.0 (2024-07-18)
 ------------------
 

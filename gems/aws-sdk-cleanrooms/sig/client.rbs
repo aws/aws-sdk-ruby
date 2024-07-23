@@ -108,7 +108,7 @@ module Aws
                                             schema_analysis_rule_requests: Array[
                                               {
                                                 name: ::String,
-                                                type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                                type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
                                               },
                                             ]
                                           ) -> _BatchGetSchemaAnalysisRuleResponseSuccess
@@ -277,6 +277,44 @@ module Aws
                                                ) -> _CreateConfiguredTableAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredTableAssociationResponseSuccess
 
+      interface _CreateIdMappingTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdMappingTableOutput]
+        def id_mapping_table: () -> Types::IdMappingTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_id_mapping_table-instance_method
+      def create_id_mapping_table: (
+                                     membership_identifier: ::String,
+                                     name: ::String,
+                                     ?description: ::String,
+                                     input_reference_config: {
+                                       input_reference_arn: ::String,
+                                       manage_resource_policies: bool
+                                     },
+                                     ?tags: Hash[::String, ::String],
+                                     ?kms_key_arn: ::String
+                                   ) -> _CreateIdMappingTableResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdMappingTableResponseSuccess
+
+      interface _CreateIdNamespaceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdNamespaceAssociationOutput]
+        def id_namespace_association: () -> Types::IdNamespaceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_id_namespace_association-instance_method
+      def create_id_namespace_association: (
+                                             membership_identifier: ::String,
+                                             input_reference_config: {
+                                               input_reference_arn: ::String,
+                                               manage_resource_policies: bool
+                                             },
+                                             ?tags: Hash[::String, ::String],
+                                             name: ::String,
+                                             ?description: ::String,
+                                             ?id_mapping_config: {
+                                               allow_use_as_dimension_column: bool
+                                             }
+                                           ) -> _CreateIdNamespaceAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdNamespaceAssociationResponseSuccess
+
       interface _CreateMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMembershipOutput]
         def membership: () -> Types::Membership
@@ -381,6 +419,26 @@ module Aws
                                                ) -> _DeleteConfiguredTableAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfiguredTableAssociationResponseSuccess
 
+      interface _DeleteIdMappingTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdMappingTableOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_id_mapping_table-instance_method
+      def delete_id_mapping_table: (
+                                     id_mapping_table_identifier: ::String,
+                                     membership_identifier: ::String
+                                   ) -> _DeleteIdMappingTableResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdMappingTableResponseSuccess
+
+      interface _DeleteIdNamespaceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdNamespaceAssociationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_id_namespace_association-instance_method
+      def delete_id_namespace_association: (
+                                             id_namespace_association_identifier: ::String,
+                                             membership_identifier: ::String
+                                           ) -> _DeleteIdNamespaceAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdNamespaceAssociationResponseSuccess
+
       interface _DeleteMemberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMemberOutput]
       end
@@ -453,6 +511,17 @@ module Aws
                                                                    ) -> _GetCollaborationConfiguredAudienceModelAssociationResponseSuccess
                                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationConfiguredAudienceModelAssociationResponseSuccess
 
+      interface _GetCollaborationIdNamespaceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationIdNamespaceAssociationOutput]
+        def collaboration_id_namespace_association: () -> Types::CollaborationIdNamespaceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_collaboration_id_namespace_association-instance_method
+      def get_collaboration_id_namespace_association: (
+                                                        collaboration_identifier: ::String,
+                                                        id_namespace_association_identifier: ::String
+                                                      ) -> _GetCollaborationIdNamespaceAssociationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationIdNamespaceAssociationResponseSuccess
+
       interface _GetCollaborationPrivacyBudgetTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationPrivacyBudgetTemplateOutput]
         def collaboration_privacy_budget_template: () -> Types::CollaborationPrivacyBudgetTemplate
@@ -507,6 +576,28 @@ module Aws
                                             ) -> _GetConfiguredTableAssociationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredTableAssociationResponseSuccess
 
+      interface _GetIdMappingTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdMappingTableOutput]
+        def id_mapping_table: () -> Types::IdMappingTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_id_mapping_table-instance_method
+      def get_id_mapping_table: (
+                                  id_mapping_table_identifier: ::String,
+                                  membership_identifier: ::String
+                                ) -> _GetIdMappingTableResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdMappingTableResponseSuccess
+
+      interface _GetIdNamespaceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdNamespaceAssociationOutput]
+        def id_namespace_association: () -> Types::IdNamespaceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_id_namespace_association-instance_method
+      def get_id_namespace_association: (
+                                          id_namespace_association_identifier: ::String,
+                                          membership_identifier: ::String
+                                        ) -> _GetIdNamespaceAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdNamespaceAssociationResponseSuccess
+
       interface _GetMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMembershipOutput]
         def membership: () -> Types::Membership
@@ -558,7 +649,7 @@ module Aws
       def get_schema_analysis_rule: (
                                       collaboration_identifier: ::String,
                                       name: ::String,
-                                      type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                      type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
                                     ) -> _GetSchemaAnalysisRuleResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaAnalysisRuleResponseSuccess
 
@@ -600,6 +691,19 @@ module Aws
                                                                        ?max_results: ::Integer
                                                                      ) -> _ListCollaborationConfiguredAudienceModelAssociationsResponseSuccess
                                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationConfiguredAudienceModelAssociationsResponseSuccess
+
+      interface _ListCollaborationIdNamespaceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationIdNamespaceAssociationsOutput]
+        def next_token: () -> ::String
+        def collaboration_id_namespace_association_summaries: () -> ::Array[Types::CollaborationIdNamespaceAssociationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_id_namespace_associations-instance_method
+      def list_collaboration_id_namespace_associations: (
+                                                          collaboration_identifier: ::String,
+                                                          ?next_token: ::String,
+                                                          ?max_results: ::Integer
+                                                        ) -> _ListCollaborationIdNamespaceAssociationsResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationIdNamespaceAssociationsResponseSuccess
 
       interface _ListCollaborationPrivacyBudgetTemplatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationPrivacyBudgetTemplatesOutput]
@@ -679,6 +783,32 @@ module Aws
                                   ) -> _ListConfiguredTablesResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfiguredTablesResponseSuccess
 
+      interface _ListIdMappingTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdMappingTablesOutput]
+        def id_mapping_table_summaries: () -> ::Array[Types::IdMappingTableSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_id_mapping_tables-instance_method
+      def list_id_mapping_tables: (
+                                    membership_identifier: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListIdMappingTablesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdMappingTablesResponseSuccess
+
+      interface _ListIdNamespaceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdNamespaceAssociationsOutput]
+        def next_token: () -> ::String
+        def id_namespace_association_summaries: () -> ::Array[Types::IdNamespaceAssociationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_id_namespace_associations-instance_method
+      def list_id_namespace_associations: (
+                                            membership_identifier: ::String,
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListIdNamespaceAssociationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdNamespaceAssociationsResponseSuccess
+
       interface _ListMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersOutput]
         def next_token: () -> ::String
@@ -754,7 +884,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_schemas-instance_method
       def list_schemas: (
                           collaboration_identifier: ::String,
-                          ?schema_type: ("TABLE"),
+                          ?schema_type: ("TABLE" | "ID_MAPPING_TABLE"),
                           ?next_token: ::String,
                           ?max_results: ::Integer
                         ) -> _ListSchemasResponseSuccess
@@ -769,6 +899,17 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PopulateIdMappingTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PopulateIdMappingTableOutput]
+        def id_mapping_job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#populate_id_mapping_table-instance_method
+      def populate_id_mapping_table: (
+                                       id_mapping_table_identifier: ::String,
+                                       membership_identifier: ::String
+                                     ) -> _PopulateIdMappingTableResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PopulateIdMappingTableResponseSuccess
 
       interface _PreviewPrivacyImpactResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PreviewPrivacyImpactOutput]
@@ -943,6 +1084,35 @@ module Aws
                                                  ?role_arn: ::String
                                                ) -> _UpdateConfiguredTableAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredTableAssociationResponseSuccess
+
+      interface _UpdateIdMappingTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdMappingTableOutput]
+        def id_mapping_table: () -> Types::IdMappingTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_id_mapping_table-instance_method
+      def update_id_mapping_table: (
+                                     id_mapping_table_identifier: ::String,
+                                     membership_identifier: ::String,
+                                     ?description: ::String,
+                                     ?kms_key_arn: ::String
+                                   ) -> _UpdateIdMappingTableResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdMappingTableResponseSuccess
+
+      interface _UpdateIdNamespaceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdNamespaceAssociationOutput]
+        def id_namespace_association: () -> Types::IdNamespaceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_id_namespace_association-instance_method
+      def update_id_namespace_association: (
+                                             id_namespace_association_identifier: ::String,
+                                             membership_identifier: ::String,
+                                             ?name: ::String,
+                                             ?description: ::String,
+                                             ?id_mapping_config: {
+                                               allow_use_as_dimension_column: bool
+                                             }
+                                           ) -> _UpdateIdNamespaceAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdNamespaceAssociationResponseSuccess
 
       interface _UpdateMembershipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMembershipOutput]

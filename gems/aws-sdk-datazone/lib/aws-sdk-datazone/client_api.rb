@@ -120,12 +120,6 @@ module Aws::DataZone
     CustomParameterList = Shapes::ListShape.new(name: 'CustomParameterList')
     DataAssetActivityStatus = Shapes::StringShape.new(name: 'DataAssetActivityStatus')
     DataPointIdentifier = Shapes::StringShape.new(name: 'DataPointIdentifier')
-    DataProductDescription = Shapes::StringShape.new(name: 'DataProductDescription')
-    DataProductId = Shapes::StringShape.new(name: 'DataProductId')
-    DataProductItem = Shapes::StructureShape.new(name: 'DataProductItem')
-    DataProductItems = Shapes::ListShape.new(name: 'DataProductItems')
-    DataProductName = Shapes::StringShape.new(name: 'DataProductName')
-    DataProductSummary = Shapes::StructureShape.new(name: 'DataProductSummary')
     DataSourceConfigurationInput = Shapes::UnionShape.new(name: 'DataSourceConfigurationInput')
     DataSourceConfigurationOutput = Shapes::UnionShape.new(name: 'DataSourceConfigurationOutput')
     DataSourceErrorMessage = Shapes::StructureShape.new(name: 'DataSourceErrorMessage')
@@ -1328,25 +1322,6 @@ module Aws::DataZone
     CustomParameter.struct_class = Types::CustomParameter
 
     CustomParameterList.member = Shapes::ShapeRef.new(shape: CustomParameter)
-
-    DataProductItem.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "domainId"))
-    DataProductItem.add_member(:item_id, Shapes::ShapeRef.new(shape: DataProductId, location_name: "itemId"))
-    DataProductItem.struct_class = Types::DataProductItem
-
-    DataProductItems.member = Shapes::ShapeRef.new(shape: DataProductItem, deprecated: true)
-
-    DataProductSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
-    DataProductSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
-    DataProductSummary.add_member(:data_product_items, Shapes::ShapeRef.new(shape: DataProductItems, deprecated: true, location_name: "dataProductItems"))
-    DataProductSummary.add_member(:description, Shapes::ShapeRef.new(shape: DataProductDescription, location_name: "description"))
-    DataProductSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
-    DataProductSummary.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
-    DataProductSummary.add_member(:id, Shapes::ShapeRef.new(shape: DataProductId, required: true, location_name: "id"))
-    DataProductSummary.add_member(:name, Shapes::ShapeRef.new(shape: DataProductName, required: true, location_name: "name"))
-    DataProductSummary.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
-    DataProductSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
-    DataProductSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
-    DataProductSummary.struct_class = Types::DataProductSummary
 
     DataSourceConfigurationInput.add_member(:glue_run_configuration, Shapes::ShapeRef.new(shape: GlueRunConfigurationInput, location_name: "glueRunConfiguration"))
     DataSourceConfigurationInput.add_member(:redshift_run_configuration, Shapes::ShapeRef.new(shape: RedshiftRunConfigurationInput, location_name: "redshiftRunConfiguration"))
@@ -3015,12 +2990,10 @@ module Aws::DataZone
     SearchInput.struct_class = Types::SearchInput
 
     SearchInventoryResultItem.add_member(:asset_item, Shapes::ShapeRef.new(shape: AssetItem, location_name: "assetItem"))
-    SearchInventoryResultItem.add_member(:data_product_item, Shapes::ShapeRef.new(shape: DataProductSummary, deprecated: true, location_name: "dataProductItem", metadata: {"deprecatedMessage"=>"This field is deprecated."}))
     SearchInventoryResultItem.add_member(:glossary_item, Shapes::ShapeRef.new(shape: GlossaryItem, location_name: "glossaryItem"))
     SearchInventoryResultItem.add_member(:glossary_term_item, Shapes::ShapeRef.new(shape: GlossaryTermItem, location_name: "glossaryTermItem"))
     SearchInventoryResultItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SearchInventoryResultItem.add_member_subclass(:asset_item, Types::SearchInventoryResultItem::AssetItem)
-    SearchInventoryResultItem.add_member_subclass(:data_product_item, Types::SearchInventoryResultItem::DataProductItem)
     SearchInventoryResultItem.add_member_subclass(:glossary_item, Types::SearchInventoryResultItem::GlossaryItem)
     SearchInventoryResultItem.add_member_subclass(:glossary_term_item, Types::SearchInventoryResultItem::GlossaryTermItem)
     SearchInventoryResultItem.add_member_subclass(:unknown, Types::SearchInventoryResultItem::Unknown)

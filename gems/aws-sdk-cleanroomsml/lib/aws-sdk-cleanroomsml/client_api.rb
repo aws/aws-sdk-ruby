@@ -15,6 +15,7 @@ module Aws::CleanRoomsML
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AnalysisTemplateArn = Shapes::StringShape.new(name: 'AnalysisTemplateArn')
     AudienceDestination = Shapes::StructureShape.new(name: 'AudienceDestination')
     AudienceExportJobList = Shapes::ListShape.new(name: 'AudienceExportJobList')
     AudienceExportJobStatus = Shapes::StringShape.new(name: 'AudienceExportJobStatus')
@@ -97,7 +98,12 @@ module Aws::CleanRoomsML
     MinMatchingSeedSize = Shapes::IntegerShape.new(name: 'MinMatchingSeedSize')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
+    ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
+    ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PolicyExistenceCondition = Shapes::StringShape.new(name: 'PolicyExistenceCondition')
+    ProtectedQuerySQLParameters = Shapes::StructureShape.new(name: 'ProtectedQuerySQLParameters')
+    ProtectedQuerySQLParametersQueryStringString = Shapes::StringShape.new(name: 'ProtectedQuerySQLParametersQueryStringString')
     PutConfiguredAudienceModelPolicyRequest = Shapes::StructureShape.new(name: 'PutConfiguredAudienceModelPolicyRequest')
     PutConfiguredAudienceModelPolicyResponse = Shapes::StructureShape.new(name: 'PutConfiguredAudienceModelPolicyResponse')
     RelevanceMetric = Shapes::StructureShape.new(name: 'RelevanceMetric')
@@ -142,47 +148,48 @@ module Aws::CleanRoomsML
 
     AudienceExportJobList.member = Shapes::ShapeRef.new(shape: AudienceExportJobSummary)
 
+    AudienceExportJobSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
+    AudienceExportJobSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    AudienceExportJobSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     AudienceExportJobSummary.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
     AudienceExportJobSummary.add_member(:audience_size, Shapes::ShapeRef.new(shape: AudienceSize, required: true, location_name: "audienceSize"))
-    AudienceExportJobSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
     AudienceExportJobSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    AudienceExportJobSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    AudienceExportJobSummary.add_member(:output_location, Shapes::ShapeRef.new(shape: S3Path, location_name: "outputLocation"))
     AudienceExportJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: AudienceExportJobStatus, required: true, location_name: "status"))
     AudienceExportJobSummary.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
-    AudienceExportJobSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    AudienceExportJobSummary.add_member(:output_location, Shapes::ShapeRef.new(shape: S3Path, location_name: "outputLocation"))
     AudienceExportJobSummary.struct_class = Types::AudienceExportJobSummary
 
-    AudienceGenerationJobDataSource.add_member(:data_source, Shapes::ShapeRef.new(shape: S3ConfigMap, required: true, location_name: "dataSource"))
+    AudienceGenerationJobDataSource.add_member(:data_source, Shapes::ShapeRef.new(shape: S3ConfigMap, location_name: "dataSource"))
     AudienceGenerationJobDataSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
+    AudienceGenerationJobDataSource.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParameters, location_name: "sqlParameters"))
     AudienceGenerationJobDataSource.struct_class = Types::AudienceGenerationJobDataSource
 
     AudienceGenerationJobList.member = Shapes::ShapeRef.new(shape: AudienceGenerationJobSummary)
 
-    AudienceGenerationJobSummary.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
-    AudienceGenerationJobSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location_name: "collaborationId"))
-    AudienceGenerationJobSummary.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
     AudienceGenerationJobSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    AudienceGenerationJobSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    AudienceGenerationJobSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    AudienceGenerationJobSummary.add_member(:started_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "startedBy"))
-    AudienceGenerationJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: AudienceGenerationJobStatus, required: true, location_name: "status"))
     AudienceGenerationJobSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    AudienceGenerationJobSummary.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
+    AudienceGenerationJobSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    AudienceGenerationJobSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    AudienceGenerationJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: AudienceGenerationJobStatus, required: true, location_name: "status"))
+    AudienceGenerationJobSummary.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    AudienceGenerationJobSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location_name: "collaborationId"))
+    AudienceGenerationJobSummary.add_member(:started_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "startedBy"))
     AudienceGenerationJobSummary.struct_class = Types::AudienceGenerationJobSummary
 
     AudienceModelList.member = Shapes::ShapeRef.new(shape: AudienceModelSummary)
 
-    AudienceModelSummary.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
     AudienceModelSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    AudienceModelSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    AudienceModelSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    AudienceModelSummary.add_member(:status, Shapes::ShapeRef.new(shape: AudienceModelStatus, required: true, location_name: "status"))
-    AudienceModelSummary.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
     AudienceModelSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    AudienceModelSummary.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
+    AudienceModelSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    AudienceModelSummary.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
+    AudienceModelSummary.add_member(:status, Shapes::ShapeRef.new(shape: AudienceModelStatus, required: true, location_name: "status"))
+    AudienceModelSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     AudienceModelSummary.struct_class = Types::AudienceModelSummary
 
-    AudienceQualityMetrics.add_member(:recall_metric, Shapes::ShapeRef.new(shape: Double, location_name: "recallMetric"))
     AudienceQualityMetrics.add_member(:relevance_metrics, Shapes::ShapeRef.new(shape: RelevanceMetrics, required: true, location_name: "relevanceMetrics"))
+    AudienceQualityMetrics.add_member(:recall_metric, Shapes::ShapeRef.new(shape: Double, location_name: "recallMetric"))
     AudienceQualityMetrics.struct_class = Types::AudienceQualityMetrics
 
     AudienceSize.add_member(:type, Shapes::ShapeRef.new(shape: AudienceSizeType, required: true, location_name: "type"))
@@ -191,8 +198,8 @@ module Aws::CleanRoomsML
 
     AudienceSizeBins.member = Shapes::ShapeRef.new(shape: AudienceSizeValue)
 
-    AudienceSizeConfig.add_member(:audience_size_bins, Shapes::ShapeRef.new(shape: AudienceSizeBins, required: true, location_name: "audienceSizeBins"))
     AudienceSizeConfig.add_member(:audience_size_type, Shapes::ShapeRef.new(shape: AudienceSizeType, required: true, location_name: "audienceSizeType"))
+    AudienceSizeConfig.add_member(:audience_size_bins, Shapes::ShapeRef.new(shape: AudienceSizeBins, required: true, location_name: "audienceSizeBins"))
     AudienceSizeConfig.struct_class = Types::AudienceSizeConfig
 
     ColumnSchema.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "columnName"))
@@ -207,50 +214,50 @@ module Aws::CleanRoomsML
     ConfiguredAudienceModelOutputConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
     ConfiguredAudienceModelOutputConfig.struct_class = Types::ConfiguredAudienceModelOutputConfig
 
-    ConfiguredAudienceModelSummary.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
-    ConfiguredAudienceModelSummary.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
     ConfiguredAudienceModelSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    ConfiguredAudienceModelSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    ConfiguredAudienceModelSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    ConfiguredAudienceModelSummary.add_member(:output_config, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelOutputConfig, required: true, location_name: "outputConfig"))
-    ConfiguredAudienceModelSummary.add_member(:status, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelStatus, required: true, location_name: "status"))
     ConfiguredAudienceModelSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    ConfiguredAudienceModelSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    ConfiguredAudienceModelSummary.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
+    ConfiguredAudienceModelSummary.add_member(:output_config, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelOutputConfig, required: true, location_name: "outputConfig"))
+    ConfiguredAudienceModelSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    ConfiguredAudienceModelSummary.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    ConfiguredAudienceModelSummary.add_member(:status, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelStatus, required: true, location_name: "status"))
     ConfiguredAudienceModelSummary.struct_class = Types::ConfiguredAudienceModelSummary
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateAudienceModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    CreateAudienceModelRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    CreateAudienceModelRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    CreateAudienceModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateAudienceModelRequest.add_member(:training_data_end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "trainingDataEndTime"))
     CreateAudienceModelRequest.add_member(:training_data_start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "trainingDataStartTime"))
+    CreateAudienceModelRequest.add_member(:training_data_end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "trainingDataEndTime"))
+    CreateAudienceModelRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     CreateAudienceModelRequest.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
+    CreateAudienceModelRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    CreateAudienceModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAudienceModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateAudienceModelRequest.struct_class = Types::CreateAudienceModelRequest
 
     CreateAudienceModelResponse.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
     CreateAudienceModelResponse.struct_class = Types::CreateAudienceModelResponse
 
-    CreateConfiguredAudienceModelRequest.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
-    CreateConfiguredAudienceModelRequest.add_member(:audience_size_config, Shapes::ShapeRef.new(shape: AudienceSizeConfig, location_name: "audienceSizeConfig"))
-    CreateConfiguredAudienceModelRequest.add_member(:child_resource_tag_on_create_policy, Shapes::ShapeRef.new(shape: TagOnCreatePolicy, location_name: "childResourceTagOnCreatePolicy"))
-    CreateConfiguredAudienceModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    CreateConfiguredAudienceModelRequest.add_member(:min_matching_seed_size, Shapes::ShapeRef.new(shape: MinMatchingSeedSize, location_name: "minMatchingSeedSize"))
     CreateConfiguredAudienceModelRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    CreateConfiguredAudienceModelRequest.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
     CreateConfiguredAudienceModelRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelOutputConfig, required: true, location_name: "outputConfig"))
+    CreateConfiguredAudienceModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateConfiguredAudienceModelRequest.add_member(:shared_audience_metrics, Shapes::ShapeRef.new(shape: MetricsList, required: true, location_name: "sharedAudienceMetrics"))
+    CreateConfiguredAudienceModelRequest.add_member(:min_matching_seed_size, Shapes::ShapeRef.new(shape: MinMatchingSeedSize, location_name: "minMatchingSeedSize"))
+    CreateConfiguredAudienceModelRequest.add_member(:audience_size_config, Shapes::ShapeRef.new(shape: AudienceSizeConfig, location_name: "audienceSizeConfig"))
     CreateConfiguredAudienceModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateConfiguredAudienceModelRequest.add_member(:child_resource_tag_on_create_policy, Shapes::ShapeRef.new(shape: TagOnCreatePolicy, location_name: "childResourceTagOnCreatePolicy"))
     CreateConfiguredAudienceModelRequest.struct_class = Types::CreateConfiguredAudienceModelRequest
 
     CreateConfiguredAudienceModelResponse.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
     CreateConfiguredAudienceModelResponse.struct_class = Types::CreateConfiguredAudienceModelResponse
 
-    CreateTrainingDatasetRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateTrainingDatasetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     CreateTrainingDatasetRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
-    CreateTrainingDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateTrainingDatasetRequest.add_member(:training_data, Shapes::ShapeRef.new(shape: CreateTrainingDatasetRequestTrainingDataList, required: true, location_name: "trainingData"))
+    CreateTrainingDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateTrainingDatasetRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateTrainingDatasetRequest.struct_class = Types::CreateTrainingDatasetRequest
 
     CreateTrainingDatasetRequestTrainingDataList.member = Shapes::ShapeRef.new(shape: Dataset)
@@ -261,12 +268,12 @@ module Aws::CleanRoomsML
     DataSource.add_member(:glue_data_source, Shapes::ShapeRef.new(shape: GlueDataSource, required: true, location_name: "glueDataSource"))
     DataSource.struct_class = Types::DataSource
 
-    Dataset.add_member(:input_config, Shapes::ShapeRef.new(shape: DatasetInputConfig, required: true, location_name: "inputConfig"))
     Dataset.add_member(:type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location_name: "type"))
+    Dataset.add_member(:input_config, Shapes::ShapeRef.new(shape: DatasetInputConfig, required: true, location_name: "inputConfig"))
     Dataset.struct_class = Types::Dataset
 
-    DatasetInputConfig.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     DatasetInputConfig.add_member(:schema, Shapes::ShapeRef.new(shape: DatasetInputConfigSchemaList, required: true, location_name: "schema"))
+    DatasetInputConfig.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     DatasetInputConfig.struct_class = Types::DatasetInputConfig
 
     DatasetInputConfigSchemaList.member = Shapes::ShapeRef.new(shape: ColumnSchema)
@@ -291,37 +298,38 @@ module Aws::CleanRoomsML
     GetAudienceGenerationJobRequest.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location: "uri", location_name: "audienceGenerationJobArn"))
     GetAudienceGenerationJobRequest.struct_class = Types::GetAudienceGenerationJobRequest
 
-    GetAudienceGenerationJobResponse.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
-    GetAudienceGenerationJobResponse.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location_name: "collaborationId"))
-    GetAudienceGenerationJobResponse.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
     GetAudienceGenerationJobResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    GetAudienceGenerationJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    GetAudienceGenerationJobResponse.add_member(:include_seed_in_output, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeSeedInOutput"))
-    GetAudienceGenerationJobResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: AudienceQualityMetrics, location_name: "metrics"))
+    GetAudienceGenerationJobResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetAudienceGenerationJobResponse.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
     GetAudienceGenerationJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    GetAudienceGenerationJobResponse.add_member(:seed_audience, Shapes::ShapeRef.new(shape: AudienceGenerationJobDataSource, location_name: "seedAudience"))
-    GetAudienceGenerationJobResponse.add_member(:started_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "startedBy"))
+    GetAudienceGenerationJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetAudienceGenerationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: AudienceGenerationJobStatus, required: true, location_name: "status"))
     GetAudienceGenerationJobResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
+    GetAudienceGenerationJobResponse.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    GetAudienceGenerationJobResponse.add_member(:seed_audience, Shapes::ShapeRef.new(shape: AudienceGenerationJobDataSource, location_name: "seedAudience"))
+    GetAudienceGenerationJobResponse.add_member(:include_seed_in_output, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeSeedInOutput"))
+    GetAudienceGenerationJobResponse.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location_name: "collaborationId"))
+    GetAudienceGenerationJobResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: AudienceQualityMetrics, location_name: "metrics"))
+    GetAudienceGenerationJobResponse.add_member(:started_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "startedBy"))
     GetAudienceGenerationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetAudienceGenerationJobResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetAudienceGenerationJobResponse.add_member(:protected_query_identifier, Shapes::ShapeRef.new(shape: String, location_name: "protectedQueryIdentifier"))
     GetAudienceGenerationJobResponse.struct_class = Types::GetAudienceGenerationJobResponse
 
     GetAudienceModelRequest.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location: "uri", location_name: "audienceModelArn"))
     GetAudienceModelRequest.struct_class = Types::GetAudienceModelRequest
 
-    GetAudienceModelResponse.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
     GetAudienceModelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    GetAudienceModelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    GetAudienceModelResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    GetAudienceModelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetAudienceModelResponse.add_member(:training_data_start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "trainingDataStartTime"))
+    GetAudienceModelResponse.add_member(:training_data_end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "trainingDataEndTime"))
+    GetAudienceModelResponse.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
     GetAudienceModelResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    GetAudienceModelResponse.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
     GetAudienceModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: AudienceModelStatus, required: true, location_name: "status"))
     GetAudienceModelResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
+    GetAudienceModelResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetAudienceModelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetAudienceModelResponse.add_member(:training_data_end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "trainingDataEndTime"))
-    GetAudienceModelResponse.add_member(:training_data_start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "trainingDataStartTime"))
-    GetAudienceModelResponse.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
-    GetAudienceModelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetAudienceModelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetAudienceModelResponse.struct_class = Types::GetAudienceModelResponse
 
     GetConfiguredAudienceModelPolicyRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location: "uri", location_name: "configuredAudienceModelArn"))
@@ -335,73 +343,73 @@ module Aws::CleanRoomsML
     GetConfiguredAudienceModelRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location: "uri", location_name: "configuredAudienceModelArn"))
     GetConfiguredAudienceModelRequest.struct_class = Types::GetConfiguredAudienceModelRequest
 
-    GetConfiguredAudienceModelResponse.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
-    GetConfiguredAudienceModelResponse.add_member(:audience_size_config, Shapes::ShapeRef.new(shape: AudienceSizeConfig, location_name: "audienceSizeConfig"))
-    GetConfiguredAudienceModelResponse.add_member(:child_resource_tag_on_create_policy, Shapes::ShapeRef.new(shape: TagOnCreatePolicy, location_name: "childResourceTagOnCreatePolicy"))
-    GetConfiguredAudienceModelResponse.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
     GetConfiguredAudienceModelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    GetConfiguredAudienceModelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    GetConfiguredAudienceModelResponse.add_member(:min_matching_seed_size, Shapes::ShapeRef.new(shape: MinMatchingSeedSize, location_name: "minMatchingSeedSize"))
-    GetConfiguredAudienceModelResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    GetConfiguredAudienceModelResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelOutputConfig, required: true, location_name: "outputConfig"))
-    GetConfiguredAudienceModelResponse.add_member(:shared_audience_metrics, Shapes::ShapeRef.new(shape: MetricsList, required: true, location_name: "sharedAudienceMetrics"))
-    GetConfiguredAudienceModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelStatus, required: true, location_name: "status"))
-    GetConfiguredAudienceModelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetConfiguredAudienceModelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetConfiguredAudienceModelResponse.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    GetConfiguredAudienceModelResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    GetConfiguredAudienceModelResponse.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, required: true, location_name: "audienceModelArn"))
+    GetConfiguredAudienceModelResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelOutputConfig, required: true, location_name: "outputConfig"))
+    GetConfiguredAudienceModelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    GetConfiguredAudienceModelResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelStatus, required: true, location_name: "status"))
+    GetConfiguredAudienceModelResponse.add_member(:shared_audience_metrics, Shapes::ShapeRef.new(shape: MetricsList, required: true, location_name: "sharedAudienceMetrics"))
+    GetConfiguredAudienceModelResponse.add_member(:min_matching_seed_size, Shapes::ShapeRef.new(shape: MinMatchingSeedSize, location_name: "minMatchingSeedSize"))
+    GetConfiguredAudienceModelResponse.add_member(:audience_size_config, Shapes::ShapeRef.new(shape: AudienceSizeConfig, location_name: "audienceSizeConfig"))
+    GetConfiguredAudienceModelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetConfiguredAudienceModelResponse.add_member(:child_resource_tag_on_create_policy, Shapes::ShapeRef.new(shape: TagOnCreatePolicy, location_name: "childResourceTagOnCreatePolicy"))
     GetConfiguredAudienceModelResponse.struct_class = Types::GetConfiguredAudienceModelResponse
 
     GetTrainingDatasetRequest.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location: "uri", location_name: "trainingDatasetArn"))
     GetTrainingDatasetRequest.struct_class = Types::GetTrainingDatasetRequest
 
     GetTrainingDatasetResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    GetTrainingDatasetResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    GetTrainingDatasetResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
-    GetTrainingDatasetResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
-    GetTrainingDatasetResponse.add_member(:status, Shapes::ShapeRef.new(shape: TrainingDatasetStatus, required: true, location_name: "status"))
-    GetTrainingDatasetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    GetTrainingDatasetResponse.add_member(:training_data, Shapes::ShapeRef.new(shape: DatasetList, required: true, location_name: "trainingData"))
-    GetTrainingDatasetResponse.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
     GetTrainingDatasetResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    GetTrainingDatasetResponse.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
+    GetTrainingDatasetResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    GetTrainingDatasetResponse.add_member(:training_data, Shapes::ShapeRef.new(shape: DatasetList, required: true, location_name: "trainingData"))
+    GetTrainingDatasetResponse.add_member(:status, Shapes::ShapeRef.new(shape: TrainingDatasetStatus, required: true, location_name: "status"))
+    GetTrainingDatasetResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
+    GetTrainingDatasetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetTrainingDatasetResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetTrainingDatasetResponse.struct_class = Types::GetTrainingDatasetResponse
 
-    GlueDataSource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "catalogId"))
-    GlueDataSource.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
     GlueDataSource.add_member(:table_name, Shapes::ShapeRef.new(shape: GlueTableName, required: true, location_name: "tableName"))
+    GlueDataSource.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
+    GlueDataSource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "catalogId"))
     GlueDataSource.struct_class = Types::GlueDataSource
 
-    ListAudienceExportJobsRequest.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, location: "querystring", location_name: "audienceGenerationJobArn"))
-    ListAudienceExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAudienceExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAudienceExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAudienceExportJobsRequest.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, location: "querystring", location_name: "audienceGenerationJobArn"))
     ListAudienceExportJobsRequest.struct_class = Types::ListAudienceExportJobsRequest
 
-    ListAudienceExportJobsResponse.add_member(:audience_export_jobs, Shapes::ShapeRef.new(shape: AudienceExportJobList, required: true, location_name: "audienceExportJobs"))
     ListAudienceExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAudienceExportJobsResponse.add_member(:audience_export_jobs, Shapes::ShapeRef.new(shape: AudienceExportJobList, required: true, location_name: "audienceExportJobs"))
     ListAudienceExportJobsResponse.struct_class = Types::ListAudienceExportJobsResponse
 
-    ListAudienceGenerationJobsRequest.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location: "querystring", location_name: "collaborationId"))
-    ListAudienceGenerationJobsRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, location: "querystring", location_name: "configuredAudienceModelArn"))
-    ListAudienceGenerationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAudienceGenerationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAudienceGenerationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAudienceGenerationJobsRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, location: "querystring", location_name: "configuredAudienceModelArn"))
+    ListAudienceGenerationJobsRequest.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location: "querystring", location_name: "collaborationId"))
     ListAudienceGenerationJobsRequest.struct_class = Types::ListAudienceGenerationJobsRequest
 
-    ListAudienceGenerationJobsResponse.add_member(:audience_generation_jobs, Shapes::ShapeRef.new(shape: AudienceGenerationJobList, required: true, location_name: "audienceGenerationJobs"))
     ListAudienceGenerationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAudienceGenerationJobsResponse.add_member(:audience_generation_jobs, Shapes::ShapeRef.new(shape: AudienceGenerationJobList, required: true, location_name: "audienceGenerationJobs"))
     ListAudienceGenerationJobsResponse.struct_class = Types::ListAudienceGenerationJobsResponse
 
-    ListAudienceModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAudienceModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAudienceModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAudienceModelsRequest.struct_class = Types::ListAudienceModelsRequest
 
-    ListAudienceModelsResponse.add_member(:audience_models, Shapes::ShapeRef.new(shape: AudienceModelList, required: true, location_name: "audienceModels"))
     ListAudienceModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAudienceModelsResponse.add_member(:audience_models, Shapes::ShapeRef.new(shape: AudienceModelList, required: true, location_name: "audienceModels"))
     ListAudienceModelsResponse.struct_class = Types::ListAudienceModelsResponse
 
-    ListConfiguredAudienceModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListConfiguredAudienceModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListConfiguredAudienceModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListConfiguredAudienceModelsRequest.struct_class = Types::ListConfiguredAudienceModelsRequest
 
-    ListConfiguredAudienceModelsResponse.add_member(:configured_audience_models, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelList, required: true, location_name: "configuredAudienceModels"))
     ListConfiguredAudienceModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListConfiguredAudienceModelsResponse.add_member(:configured_audience_models, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelList, required: true, location_name: "configuredAudienceModels"))
     ListConfiguredAudienceModelsResponse.struct_class = Types::ListConfiguredAudienceModelsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -410,8 +418,8 @@ module Aws::CleanRoomsML
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    ListTrainingDatasetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListTrainingDatasetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTrainingDatasetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListTrainingDatasetsRequest.struct_class = Types::ListTrainingDatasetsRequest
 
     ListTrainingDatasetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -420,10 +428,18 @@ module Aws::CleanRoomsML
 
     MetricsList.member = Shapes::ShapeRef.new(shape: SharedAudienceMetrics)
 
+    ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterKey)
+    ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    ProtectedQuerySQLParameters.add_member(:query_string, Shapes::ShapeRef.new(shape: ProtectedQuerySQLParametersQueryStringString, location_name: "queryString"))
+    ProtectedQuerySQLParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: "analysisTemplateArn"))
+    ProtectedQuerySQLParameters.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "parameters"))
+    ProtectedQuerySQLParameters.struct_class = Types::ProtectedQuerySQLParameters
+
     PutConfiguredAudienceModelPolicyRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location: "uri", location_name: "configuredAudienceModelArn"))
     PutConfiguredAudienceModelPolicyRequest.add_member(:configured_audience_model_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "configuredAudienceModelPolicy"))
-    PutConfiguredAudienceModelPolicyRequest.add_member(:policy_existence_condition, Shapes::ShapeRef.new(shape: PolicyExistenceCondition, location_name: "policyExistenceCondition"))
     PutConfiguredAudienceModelPolicyRequest.add_member(:previous_policy_hash, Shapes::ShapeRef.new(shape: Hash, location_name: "previousPolicyHash"))
+    PutConfiguredAudienceModelPolicyRequest.add_member(:policy_existence_condition, Shapes::ShapeRef.new(shape: PolicyExistenceCondition, location_name: "policyExistenceCondition"))
     PutConfiguredAudienceModelPolicyRequest.struct_class = Types::PutConfiguredAudienceModelPolicyRequest
 
     PutConfiguredAudienceModelPolicyResponse.add_member(:configured_audience_model_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "configuredAudienceModelPolicy"))
@@ -445,26 +461,26 @@ module Aws::CleanRoomsML
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    StartAudienceExportJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     StartAudienceExportJobRequest.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
     StartAudienceExportJobRequest.add_member(:audience_size, Shapes::ShapeRef.new(shape: AudienceSize, required: true, location_name: "audienceSize"))
     StartAudienceExportJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    StartAudienceExportJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     StartAudienceExportJobRequest.struct_class = Types::StartAudienceExportJobRequest
 
-    StartAudienceGenerationJobRequest.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location_name: "collaborationId"))
-    StartAudienceGenerationJobRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
-    StartAudienceGenerationJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    StartAudienceGenerationJobRequest.add_member(:include_seed_in_output, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeSeedInOutput"))
     StartAudienceGenerationJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
+    StartAudienceGenerationJobRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
     StartAudienceGenerationJobRequest.add_member(:seed_audience, Shapes::ShapeRef.new(shape: AudienceGenerationJobDataSource, required: true, location_name: "seedAudience"))
+    StartAudienceGenerationJobRequest.add_member(:include_seed_in_output, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeSeedInOutput"))
+    StartAudienceGenerationJobRequest.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, location_name: "collaborationId"))
+    StartAudienceGenerationJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     StartAudienceGenerationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartAudienceGenerationJobRequest.struct_class = Types::StartAudienceGenerationJobRequest
 
     StartAudienceGenerationJobResponse.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
     StartAudienceGenerationJobResponse.struct_class = Types::StartAudienceGenerationJobResponse
 
-    StatusDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     StatusDetails.add_member(:status_code, Shapes::ShapeRef.new(shape: String, location_name: "statusCode"))
+    StatusDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     StatusDetails.struct_class = Types::StatusDetails
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -481,11 +497,11 @@ module Aws::CleanRoomsML
     TrainingDatasetList.member = Shapes::ShapeRef.new(shape: TrainingDatasetSummary)
 
     TrainingDatasetSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
-    TrainingDatasetSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    TrainingDatasetSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    TrainingDatasetSummary.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
     TrainingDatasetSummary.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     TrainingDatasetSummary.add_member(:status, Shapes::ShapeRef.new(shape: TrainingDatasetStatus, required: true, location_name: "status"))
-    TrainingDatasetSummary.add_member(:training_dataset_arn, Shapes::ShapeRef.new(shape: TrainingDatasetArn, required: true, location_name: "trainingDatasetArn"))
-    TrainingDatasetSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
+    TrainingDatasetSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     TrainingDatasetSummary.struct_class = Types::TrainingDatasetSummary
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TaggableArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -494,13 +510,13 @@ module Aws::CleanRoomsML
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateConfiguredAudienceModelRequest.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, location_name: "audienceModelArn"))
-    UpdateConfiguredAudienceModelRequest.add_member(:audience_size_config, Shapes::ShapeRef.new(shape: AudienceSizeConfig, location_name: "audienceSizeConfig"))
     UpdateConfiguredAudienceModelRequest.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location: "uri", location_name: "configuredAudienceModelArn"))
-    UpdateConfiguredAudienceModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
-    UpdateConfiguredAudienceModelRequest.add_member(:min_matching_seed_size, Shapes::ShapeRef.new(shape: MinMatchingSeedSize, location_name: "minMatchingSeedSize"))
     UpdateConfiguredAudienceModelRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelOutputConfig, location_name: "outputConfig"))
+    UpdateConfiguredAudienceModelRequest.add_member(:audience_model_arn, Shapes::ShapeRef.new(shape: AudienceModelArn, location_name: "audienceModelArn"))
     UpdateConfiguredAudienceModelRequest.add_member(:shared_audience_metrics, Shapes::ShapeRef.new(shape: MetricsList, location_name: "sharedAudienceMetrics"))
+    UpdateConfiguredAudienceModelRequest.add_member(:min_matching_seed_size, Shapes::ShapeRef.new(shape: MinMatchingSeedSize, location_name: "minMatchingSeedSize"))
+    UpdateConfiguredAudienceModelRequest.add_member(:audience_size_config, Shapes::ShapeRef.new(shape: AudienceSizeConfig, location_name: "audienceSizeConfig"))
+    UpdateConfiguredAudienceModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     UpdateConfiguredAudienceModelRequest.struct_class = Types::UpdateConfiguredAudienceModelRequest
 
     UpdateConfiguredAudienceModelResponse.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
@@ -517,9 +533,10 @@ module Aws::CleanRoomsML
 
       api.metadata = {
         "apiVersion" => "2023-09-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cleanrooms-ml",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Clean Rooms ML",
         "serviceId" => "CleanRoomsML",
         "signatureVersion" => "v4",

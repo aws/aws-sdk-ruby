@@ -16,6 +16,7 @@ require_relative 'aws-sdk-cleanroomsml/client_api'
 require_relative 'aws-sdk-cleanroomsml/plugins/endpoints.rb'
 require_relative 'aws-sdk-cleanroomsml/client'
 require_relative 'aws-sdk-cleanroomsml/errors'
+require_relative 'aws-sdk-cleanroomsml/waiters'
 require_relative 'aws-sdk-cleanroomsml/resource'
 require_relative 'aws-sdk-cleanroomsml/endpoint_parameters'
 require_relative 'aws-sdk-cleanroomsml/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-cleanroomsml/customizations'
 # @!group service
 module Aws::CleanRoomsML
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

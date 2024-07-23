@@ -3215,72 +3215,6 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # @!attribute [rw] domain_id
-    #   @return [String]
-    #
-    # @!attribute [rw] item_id
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductItem AWS API Documentation
-    #
-    class DataProductItem < Struct.new(
-      :domain_id,
-      :item_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] created_at
-    #   @return [Time]
-    #
-    # @!attribute [rw] created_by
-    #   @return [String]
-    #
-    # @!attribute [rw] data_product_items
-    #   @return [Array<Types::DataProductItem>]
-    #
-    # @!attribute [rw] description
-    #   @return [String]
-    #
-    # @!attribute [rw] domain_id
-    #   @return [String]
-    #
-    # @!attribute [rw] glossary_terms
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] id
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] owning_project_id
-    #   @return [String]
-    #
-    # @!attribute [rw] updated_at
-    #   @return [Time]
-    #
-    # @!attribute [rw] updated_by
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductSummary AWS API Documentation
-    #
-    class DataProductSummary < Struct.new(
-      :created_at,
-      :created_by,
-      :data_product_items,
-      :description,
-      :domain_id,
-      :glossary_terms,
-      :id,
-      :name,
-      :owning_project_id,
-      :updated_at,
-      :updated_by)
-      SENSITIVE = [:description, :name]
-      include Aws::Structure
-    end
-
     # The configuration of the data source.
     #
     # @note DataSourceConfigurationInput is a union - when making an API calls you must set exactly one of the members.
@@ -10981,10 +10915,6 @@ module Aws::DataZone
     #   The asset item included in the search results.
     #   @return [Types::AssetItem]
     #
-    # @!attribute [rw] data_product_item
-    #   The data product item included in the search results.
-    #   @return [Types::DataProductSummary]
-    #
     # @!attribute [rw] glossary_item
     #   The glossary item included in the search results.
     #   @return [Types::GlossaryItem]
@@ -10997,7 +10927,6 @@ module Aws::DataZone
     #
     class SearchInventoryResultItem < Struct.new(
       :asset_item,
-      :data_product_item,
       :glossary_item,
       :glossary_term_item,
       :unknown)
@@ -11006,7 +10935,6 @@ module Aws::DataZone
       include Aws::Structure::Union
 
       class AssetItem < SearchInventoryResultItem; end
-      class DataProductItem < SearchInventoryResultItem; end
       class GlossaryItem < SearchInventoryResultItem; end
       class GlossaryTermItem < SearchInventoryResultItem; end
       class Unknown < SearchInventoryResultItem; end

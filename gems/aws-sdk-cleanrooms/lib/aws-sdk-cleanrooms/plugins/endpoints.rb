@@ -76,6 +76,10 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::CreateConfiguredTableAnalysisRule.build(context)
           when :create_configured_table_association
             Aws::CleanRooms::Endpoints::CreateConfiguredTableAssociation.build(context)
+          when :create_id_mapping_table
+            Aws::CleanRooms::Endpoints::CreateIdMappingTable.build(context)
+          when :create_id_namespace_association
+            Aws::CleanRooms::Endpoints::CreateIdNamespaceAssociation.build(context)
           when :create_membership
             Aws::CleanRooms::Endpoints::CreateMembership.build(context)
           when :create_privacy_budget_template
@@ -92,6 +96,10 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::DeleteConfiguredTableAnalysisRule.build(context)
           when :delete_configured_table_association
             Aws::CleanRooms::Endpoints::DeleteConfiguredTableAssociation.build(context)
+          when :delete_id_mapping_table
+            Aws::CleanRooms::Endpoints::DeleteIdMappingTable.build(context)
+          when :delete_id_namespace_association
+            Aws::CleanRooms::Endpoints::DeleteIdNamespaceAssociation.build(context)
           when :delete_member
             Aws::CleanRooms::Endpoints::DeleteMember.build(context)
           when :delete_membership
@@ -106,6 +114,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::GetCollaborationAnalysisTemplate.build(context)
           when :get_collaboration_configured_audience_model_association
             Aws::CleanRooms::Endpoints::GetCollaborationConfiguredAudienceModelAssociation.build(context)
+          when :get_collaboration_id_namespace_association
+            Aws::CleanRooms::Endpoints::GetCollaborationIdNamespaceAssociation.build(context)
           when :get_collaboration_privacy_budget_template
             Aws::CleanRooms::Endpoints::GetCollaborationPrivacyBudgetTemplate.build(context)
           when :get_configured_audience_model_association
@@ -116,6 +126,10 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::GetConfiguredTableAnalysisRule.build(context)
           when :get_configured_table_association
             Aws::CleanRooms::Endpoints::GetConfiguredTableAssociation.build(context)
+          when :get_id_mapping_table
+            Aws::CleanRooms::Endpoints::GetIdMappingTable.build(context)
+          when :get_id_namespace_association
+            Aws::CleanRooms::Endpoints::GetIdNamespaceAssociation.build(context)
           when :get_membership
             Aws::CleanRooms::Endpoints::GetMembership.build(context)
           when :get_privacy_budget_template
@@ -132,6 +146,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::ListCollaborationAnalysisTemplates.build(context)
           when :list_collaboration_configured_audience_model_associations
             Aws::CleanRooms::Endpoints::ListCollaborationConfiguredAudienceModelAssociations.build(context)
+          when :list_collaboration_id_namespace_associations
+            Aws::CleanRooms::Endpoints::ListCollaborationIdNamespaceAssociations.build(context)
           when :list_collaboration_privacy_budget_templates
             Aws::CleanRooms::Endpoints::ListCollaborationPrivacyBudgetTemplates.build(context)
           when :list_collaboration_privacy_budgets
@@ -144,6 +160,10 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::ListConfiguredTableAssociations.build(context)
           when :list_configured_tables
             Aws::CleanRooms::Endpoints::ListConfiguredTables.build(context)
+          when :list_id_mapping_tables
+            Aws::CleanRooms::Endpoints::ListIdMappingTables.build(context)
+          when :list_id_namespace_associations
+            Aws::CleanRooms::Endpoints::ListIdNamespaceAssociations.build(context)
           when :list_members
             Aws::CleanRooms::Endpoints::ListMembers.build(context)
           when :list_memberships
@@ -158,6 +178,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::ListSchemas.build(context)
           when :list_tags_for_resource
             Aws::CleanRooms::Endpoints::ListTagsForResource.build(context)
+          when :populate_id_mapping_table
+            Aws::CleanRooms::Endpoints::PopulateIdMappingTable.build(context)
           when :preview_privacy_impact
             Aws::CleanRooms::Endpoints::PreviewPrivacyImpact.build(context)
           when :start_protected_query
@@ -178,6 +200,10 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::UpdateConfiguredTableAnalysisRule.build(context)
           when :update_configured_table_association
             Aws::CleanRooms::Endpoints::UpdateConfiguredTableAssociation.build(context)
+          when :update_id_mapping_table
+            Aws::CleanRooms::Endpoints::UpdateIdMappingTable.build(context)
+          when :update_id_namespace_association
+            Aws::CleanRooms::Endpoints::UpdateIdNamespaceAssociation.build(context)
           when :update_membership
             Aws::CleanRooms::Endpoints::UpdateMembership.build(context)
           when :update_privacy_budget_template

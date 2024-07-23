@@ -39,6 +39,18 @@ module Aws::CleanRoomsML
 
     # Provides information about the audience export job.
     #
+    # @!attribute [rw] create_time
+    #   The time at which the audience export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the audience export job was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the audience export job.
+    #   @return [String]
+    #
     # @!attribute [rw] audience_generation_job_arn
     #   The Amazon Resource Name (ARN) of the audience generation job that
     #   was exported.
@@ -49,20 +61,8 @@ module Aws::CleanRoomsML
     #   the configured audience model.
     #   @return [Types::AudienceSize]
     #
-    # @!attribute [rw] create_time
-    #   The time at which the audience export job was created.
-    #   @return [Time]
-    #
     # @!attribute [rw] description
     #   The description of the audience export job.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the audience export job.
-    #   @return [String]
-    #
-    # @!attribute [rw] output_location
-    #   The Amazon S3 bucket where the audience export is stored.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -73,22 +73,22 @@ module Aws::CleanRoomsML
     #   Details about the status of a resource.
     #   @return [Types::StatusDetails]
     #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the audience export job was updated.
-    #   @return [Time]
+    # @!attribute [rw] output_location
+    #   The Amazon S3 bucket where the audience export is stored.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceExportJobSummary AWS API Documentation
     #
     class AudienceExportJobSummary < Struct.new(
+      :create_time,
+      :update_time,
+      :name,
       :audience_generation_job_arn,
       :audience_size,
-      :create_time,
       :description,
-      :name,
-      :output_location,
       :status,
       :status_details,
-      :update_time)
+      :output_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -110,27 +110,48 @@ module Aws::CleanRoomsML
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that can read the Amazon S3 bucket where the
-    #   training data is stored.
+    #   seed audience is stored.
     #   @return [String]
+    #
+    # @!attribute [rw] sql_parameters
+    #   The protected SQL query parameters.
+    #   @return [Types::ProtectedQuerySQLParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceGenerationJobDataSource AWS API Documentation
     #
     class AudienceGenerationJobDataSource < Struct.new(
       :data_source,
-      :role_arn)
-      SENSITIVE = []
+      :role_arn,
+      :sql_parameters)
+      SENSITIVE = [:sql_parameters]
       include Aws::Structure
     end
 
     # Provides information about the configured audience generation job.
     #
+    # @!attribute [rw] create_time
+    #   The time at which the audience generation job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the audience generation job was
+    #   updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] audience_generation_job_arn
     #   The Amazon Resource Name (ARN) of the audience generation job.
     #   @return [String]
     #
-    # @!attribute [rw] collaboration_id
-    #   The identifier of the collaboration that contains this audience
-    #   generation job.
+    # @!attribute [rw] name
+    #   The name of the audience generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the audience generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the audience generation job.
     #   @return [String]
     #
     # @!attribute [rw] configured_audience_model_arn
@@ -138,67 +159,47 @@ module Aws::CleanRoomsML
     #   was used for this audience generation job.
     #   @return [String]
     #
-    # @!attribute [rw] create_time
-    #   The time at which the audience generation job was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] description
-    #   The description of the audience generation job.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the audience generation job.
+    # @!attribute [rw] collaboration_id
+    #   The identifier of the collaboration that contains this audience
+    #   generation job.
     #   @return [String]
     #
     # @!attribute [rw] started_by
     #   The AWS Account that submitted the job.
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of the audience generation job.
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the audience generation job was
-    #   updated.
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceGenerationJobSummary AWS API Documentation
     #
     class AudienceGenerationJobSummary < Struct.new(
-      :audience_generation_job_arn,
-      :collaboration_id,
-      :configured_audience_model_arn,
       :create_time,
-      :description,
+      :update_time,
+      :audience_generation_job_arn,
       :name,
-      :started_by,
+      :description,
       :status,
-      :update_time)
+      :configured_audience_model_arn,
+      :collaboration_id,
+      :started_by)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Information about the audience model.
     #
-    # @!attribute [rw] audience_model_arn
-    #   The Amazon Resource Name (ARN) of the audience model.
-    #   @return [String]
-    #
     # @!attribute [rw] create_time
     #   The time at which the audience model was created.
     #   @return [Time]
     #
-    # @!attribute [rw] description
-    #   The description of the audience model.
+    # @!attribute [rw] update_time
+    #   The most recent time at which the audience model was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] audience_model_arn
+    #   The Amazon Resource Name (ARN) of the audience model.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the audience model.
     #   @return [String]
     #
     # @!attribute [rw] training_dataset_arn
@@ -206,25 +207,33 @@ module Aws::CleanRoomsML
     #   for the audience model.
     #   @return [String]
     #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the audience model was updated.
-    #   @return [Time]
+    # @!attribute [rw] status
+    #   The status of the audience model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the audience model.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceModelSummary AWS API Documentation
     #
     class AudienceModelSummary < Struct.new(
-      :audience_model_arn,
       :create_time,
-      :description,
+      :update_time,
+      :audience_model_arn,
       :name,
-      :status,
       :training_dataset_arn,
-      :update_time)
+      :status,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Metrics that describe the quality of the generated audience.
+    #
+    # @!attribute [rw] relevance_metrics
+    #   The relevance scores of the generated audience.
+    #   @return [Array<Types::RelevanceMetric>]
     #
     # @!attribute [rw] recall_metric
     #   The recall score of the generated audience. Recall is the percentage
@@ -236,15 +245,11 @@ module Aws::CleanRoomsML
     #   to random selection.
     #   @return [Float]
     #
-    # @!attribute [rw] relevance_metrics
-    #   The relevance scores of the generated audience.
-    #   @return [Array<Types::RelevanceMetric>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceQualityMetrics AWS API Documentation
     #
     class AudienceQualityMetrics < Struct.new(
-      :recall_metric,
-      :relevance_metrics)
+      :relevance_metrics,
+      :recall_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -273,28 +278,30 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # Configure the list of audience output sizes that can be created. A
-    # request to StartAudienceGenerationJob that uses this configured
-    # audience model must have an `audienceSize` selected from this list.
-    # You can use the `ABSOLUTE` AudienceSize to configure out audience
-    # sizes using the count of identifiers in the output. You can use the
-    # `Percentage` AudienceSize to configure sizes in the range 1-100
-    # percent.
+    # Returns the relevance scores at these audience sizes when used in the
+    # GetAudienceGenerationJob for a specified audience generation job and
+    # configured audience model.
     #
-    # @!attribute [rw] audience_size_bins
-    #   An array of the different audience output sizes.
-    #   @return [Array<Integer>]
+    # Specifies the list of allowed `audienceSize` values when used in the
+    # StartAudienceExportJob for an audience generation job. You can use the
+    # `ABSOLUTE` AudienceSize to configure out audience sizes using the
+    # count of identifiers in the output. You can use the `Percentage`
+    # AudienceSize to configure sizes in the range 1-100 percent.
     #
     # @!attribute [rw] audience_size_type
     #   Whether the audience output sizes are defined as an absolute number
     #   or a percentage.
     #   @return [String]
     #
+    # @!attribute [rw] audience_size_bins
+    #   An array of the different audience output sizes.
+    #   @return [Array<Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AudienceSizeConfig AWS API Documentation
     #
     class AudienceSizeConfig < Struct.new(
-      :audience_size_bins,
-      :audience_size_type)
+      :audience_size_type,
+      :audience_size_bins)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -341,9 +348,30 @@ module Aws::CleanRoomsML
 
     # Information about the configured audience model.
     #
+    # @!attribute [rw] create_time
+    #   The time at which the configured audience model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured audience model was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured audience model.
+    #   @return [String]
+    #
     # @!attribute [rw] audience_model_arn
     #   The Amazon Resource Name (ARN) of the audience model that was used
     #   to create the configured audience model.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   The output configuration of the configured audience model.
+    #   @return [Types::ConfiguredAudienceModelOutputConfig]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured audience model.
     #   @return [String]
     #
     # @!attribute [rw] configured_audience_model_arn
@@ -351,42 +379,21 @@ module Aws::CleanRoomsML
     #   you are interested in.
     #   @return [String]
     #
-    # @!attribute [rw] create_time
-    #   The time at which the configured audience model was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] description
-    #   The description of the configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] output_config
-    #   The output configuration of the configured audience model.
-    #   @return [Types::ConfiguredAudienceModelOutputConfig]
-    #
     # @!attribute [rw] status
     #   The status of the configured audience model.
     #   @return [String]
     #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the configured audience model was
-    #   updated.
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ConfiguredAudienceModelSummary AWS API Documentation
     #
     class ConfiguredAudienceModelSummary < Struct.new(
-      :audience_model_arn,
-      :configured_audience_model_arn,
       :create_time,
-      :description,
+      :update_time,
       :name,
+      :audience_model_arn,
       :output_config,
-      :status,
-      :update_time)
+      :description,
+      :configured_audience_model_arn,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -405,18 +412,27 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # @!attribute [rw] description
-    #   The description of the audience model.
+    # @!attribute [rw] training_data_start_time
+    #   The start date and time of the training window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_data_end_time
+    #   The end date and time of the training window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the audience model resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_dataset_arn
+    #   The Amazon Resource Name (ARN) of the training dataset for this
+    #   audience model.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key. This key is used to
     #   encrypt and decrypt customer-owned data in the trained ML model and
     #   the associated data.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the audience model resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -452,29 +468,20 @@ module Aws::CleanRoomsML
     #     of aws do not count against your tags per resource limit.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] training_data_end_time
-    #   The end date and time of the training window.
-    #   @return [Time]
-    #
-    # @!attribute [rw] training_data_start_time
-    #   The start date and time of the training window.
-    #   @return [Time]
-    #
-    # @!attribute [rw] training_dataset_arn
-    #   The Amazon Resource Name (ARN) of the training dataset for this
-    #   audience model.
+    # @!attribute [rw] description
+    #   The description of the audience model.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateAudienceModelRequest AWS API Documentation
     #
     class CreateAudienceModelRequest < Struct.new(
-      :description,
-      :kms_key_arn,
-      :name,
-      :tags,
-      :training_data_end_time,
       :training_data_start_time,
-      :training_dataset_arn)
+      :training_data_end_time,
+      :name,
+      :training_dataset_arn,
+      :kms_key_arn,
+      :tags,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -491,47 +498,13 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the configured audience model.
+    #   @return [String]
+    #
     # @!attribute [rw] audience_model_arn
     #   The Amazon Resource Name (ARN) of the audience model to use for the
     #   configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] audience_size_config
-    #   Configure the list of output sizes of audiences that can be created
-    #   using this configured audience model. A request to
-    #   StartAudienceGenerationJob that uses this configured audience model
-    #   must have an `audienceSize` selected from this list. You can use the
-    #   `ABSOLUTE` AudienceSize to configure out audience sizes using the
-    #   count of identifiers in the output. You can use the `Percentage`
-    #   AudienceSize to configure sizes in the range 1-100 percent.
-    #   @return [Types::AudienceSizeConfig]
-    #
-    # @!attribute [rw] child_resource_tag_on_create_policy
-    #   Configure how the service tags audience generation jobs created
-    #   using this configured audience model. If you specify `NONE`, the
-    #   tags from the StartAudienceGenerationJob request determine the tags
-    #   of the audience generation job. If you specify
-    #   `FROM_PARENT_RESOURCE`, the audience generation job inherits the
-    #   tags from the configured audience model, by default. Tags in the
-    #   StartAudienceGenerationJob will override the default.
-    #
-    #   When the client is in a different account than the configured
-    #   audience model, the tags from the client are never applied to a
-    #   resource in the caller's account.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description of the configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] min_matching_seed_size
-    #   The minimum number of users from the seed audience that must match
-    #   with users in the training data of the audience model. The default
-    #   value is 500.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] name
-    #   The name of the configured audience model.
     #   @return [String]
     #
     # @!attribute [rw] output_config
@@ -543,9 +516,29 @@ module Aws::CleanRoomsML
     #   KMS permissions.
     #   @return [Types::ConfiguredAudienceModelOutputConfig]
     #
+    # @!attribute [rw] description
+    #   The description of the configured audience model.
+    #   @return [String]
+    #
     # @!attribute [rw] shared_audience_metrics
     #   Whether audience metrics are shared.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_matching_seed_size
+    #   The minimum number of users from the seed audience that must match
+    #   with users in the training data of the audience model. The default
+    #   value is 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audience_size_config
+    #   Configure the list of output sizes of audiences that can be created
+    #   using this configured audience model. A request to
+    #   StartAudienceGenerationJob that uses this configured audience model
+    #   must have an `audienceSize` selected from this list. You can use the
+    #   `ABSOLUTE` AudienceSize to configure out audience sizes using the
+    #   count of identifiers in the output. You can use the `Percentage`
+    #   AudienceSize to configure sizes in the range 1-100 percent.
+    #   @return [Types::AudienceSizeConfig]
     #
     # @!attribute [rw] tags
     #   The optional metadata that you apply to the resource to help you
@@ -580,18 +573,32 @@ module Aws::CleanRoomsML
     #     of aws do not count against your tags per resource limit.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] child_resource_tag_on_create_policy
+    #   Configure how the service tags audience generation jobs created
+    #   using this configured audience model. If you specify `NONE`, the
+    #   tags from the StartAudienceGenerationJob request determine the tags
+    #   of the audience generation job. If you specify
+    #   `FROM_PARENT_RESOURCE`, the audience generation job inherits the
+    #   tags from the configured audience model, by default. Tags in the
+    #   StartAudienceGenerationJob will override the default.
+    #
+    #   When the client is in a different account than the configured
+    #   audience model, the tags from the client are never applied to a
+    #   resource in the caller's account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateConfiguredAudienceModelRequest AWS API Documentation
     #
     class CreateConfiguredAudienceModelRequest < Struct.new(
-      :audience_model_arn,
-      :audience_size_config,
-      :child_resource_tag_on_create_policy,
-      :description,
-      :min_matching_seed_size,
       :name,
+      :audience_model_arn,
       :output_config,
+      :description,
       :shared_audience_metrics,
-      :tags)
+      :min_matching_seed_size,
+      :audience_size_config,
+      :tags,
+      :child_resource_tag_on_create_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -608,10 +615,6 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # @!attribute [rw] description
-    #   The description of the training dataset.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the training dataset. This name must be unique in your
     #   account and region.
@@ -625,6 +628,12 @@ module Aws::CleanRoomsML
     #   role that isn't in your account, you get an `AccessDeniedException`
     #   error.
     #   @return [String]
+    #
+    # @!attribute [rw] training_data
+    #   An array of information that lists the Dataset objects, which
+    #   specifies the dataset type and details on its location and schema.
+    #   You must provide a role that has read access to these tables.
+    #   @return [Array<Types::Dataset>]
     #
     # @!attribute [rw] tags
     #   The optional metadata that you apply to the resource to help you
@@ -659,20 +668,18 @@ module Aws::CleanRoomsML
     #     of aws do not count against your tags per resource limit.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] training_data
-    #   An array of information that lists the Dataset objects, which
-    #   specifies the dataset type and details on its location and schema.
-    #   You must provide a role that has read access to these tables.
-    #   @return [Array<Types::Dataset>]
+    # @!attribute [rw] description
+    #   The description of the training dataset.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/CreateTrainingDatasetRequest AWS API Documentation
     #
     class CreateTrainingDatasetRequest < Struct.new(
-      :description,
       :name,
       :role_arn,
+      :training_data,
       :tags,
-      :training_data)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -708,40 +715,40 @@ module Aws::CleanRoomsML
     # Defines where the training dataset is located, what type of data it
     # contains, and how to access the data.
     #
+    # @!attribute [rw] type
+    #   What type of information is found in the dataset.
+    #   @return [String]
+    #
     # @!attribute [rw] input_config
     #   A DatasetInputConfig object that defines the data source and schema
     #   mapping.
     #   @return [Types::DatasetInputConfig]
     #
-    # @!attribute [rw] type
-    #   What type of information is found in the dataset.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/Dataset AWS API Documentation
     #
     class Dataset < Struct.new(
-      :input_config,
-      :type)
+      :type,
+      :input_config)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Defines the Glue data source and schema mapping information.
     #
+    # @!attribute [rw] schema
+    #   The schema information for the training data.
+    #   @return [Array<Types::ColumnSchema>]
+    #
     # @!attribute [rw] data_source
     #   A DataSource object that specifies the Glue data source for the
     #   training data.
     #   @return [Types::DataSource]
     #
-    # @!attribute [rw] schema
-    #   The schema information for the training data.
-    #   @return [Array<Types::ColumnSchema>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DatasetInputConfig AWS API Documentation
     #
     class DatasetInputConfig < Struct.new(
-      :data_source,
-      :schema)
+      :schema,
+      :data_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -824,27 +831,45 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] create_time
+    #   The time at which the audience generation job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the audience generation job was
+    #   updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] audience_generation_job_arn
     #   The Amazon Resource Name (ARN) of the audience generation job.
     #   @return [String]
     #
-    # @!attribute [rw] collaboration_id
-    #   The identifier of the collaboration that this audience generation
-    #   job is associated with.
+    # @!attribute [rw] name
+    #   The name of the audience generation job.
     #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the audience generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the audience generation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Details about the status of the audience generation job.
+    #   @return [Types::StatusDetails]
     #
     # @!attribute [rw] configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model used
     #   for this audience generation job.
     #   @return [String]
     #
-    # @!attribute [rw] create_time
-    #   The time at which the audience generation job was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] description
-    #   The description of the audience generation job.
-    #   @return [String]
+    # @!attribute [rw] seed_audience
+    #   The seed audience that was used for this audience generation job.
+    #   This field will be null if the account calling the API is the
+    #   account that started this audience generation job.
+    #   @return [Types::AudienceGenerationJobDataSource]
     #
     # @!attribute [rw] include_seed_in_output
     #   Configure whether the seed users are included in the output
@@ -856,59 +881,47 @@ module Aws::CleanRoomsML
     #   the seed.
     #   @return [Boolean]
     #
+    # @!attribute [rw] collaboration_id
+    #   The identifier of the collaboration that this audience generation
+    #   job is associated with.
+    #   @return [String]
+    #
     # @!attribute [rw] metrics
     #   The relevance scores for different audience sizes and the recall
     #   score of the generated audience.
     #   @return [Types::AudienceQualityMetrics]
     #
-    # @!attribute [rw] name
-    #   The name of the audience generation job.
-    #   @return [String]
-    #
-    # @!attribute [rw] seed_audience
-    #   The seed audience that was used for this audience generation job.
-    #   This field will be null if the account calling the API is the
-    #   account that started this audience generation job.
-    #   @return [Types::AudienceGenerationJobDataSource]
-    #
     # @!attribute [rw] started_by
     #   The AWS account that started this audience generation job.
     #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the audience generation job.
-    #   @return [String]
-    #
-    # @!attribute [rw] status_details
-    #   Details about the status of the audience generation job.
-    #   @return [Types::StatusDetails]
     #
     # @!attribute [rw] tags
     #   The tags that are associated to this audience generation job.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the audience generation job was
-    #   updated.
-    #   @return [Time]
+    # @!attribute [rw] protected_query_identifier
+    #   The unique identifier of the protected query for this audience
+    #   generation job.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetAudienceGenerationJobResponse AWS API Documentation
     #
     class GetAudienceGenerationJobResponse < Struct.new(
-      :audience_generation_job_arn,
-      :collaboration_id,
-      :configured_audience_model_arn,
       :create_time,
-      :description,
-      :include_seed_in_output,
-      :metrics,
+      :update_time,
+      :audience_generation_job_arn,
       :name,
-      :seed_audience,
-      :started_by,
+      :description,
       :status,
       :status_details,
+      :configured_audience_model_arn,
+      :seed_audience,
+      :include_seed_in_output,
+      :collaboration_id,
+      :metrics,
+      :started_by,
       :tags,
-      :update_time)
+      :protected_query_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -926,24 +939,33 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # @!attribute [rw] audience_model_arn
-    #   The Amazon Resource Name (ARN) of the audience model.
-    #   @return [String]
-    #
     # @!attribute [rw] create_time
     #   The time at which the audience model was created.
     #   @return [Time]
     #
-    # @!attribute [rw] description
-    #   The description of the audience model.
-    #   @return [String]
+    # @!attribute [rw] update_time
+    #   The most recent time at which the audience model was updated.
+    #   @return [Time]
     #
-    # @!attribute [rw] kms_key_arn
-    #   The KMS key ARN used for the audience model.
+    # @!attribute [rw] training_data_start_time
+    #   The start date specified for the training window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_data_end_time
+    #   The end date specified for the training window.
+    #   @return [Time]
+    #
+    # @!attribute [rw] audience_model_arn
+    #   The Amazon Resource Name (ARN) of the audience model.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the audience model.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_dataset_arn
+    #   The Amazon Resource Name (ARN) of the training dataset that was used
+    #   for this audience model.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -954,42 +976,33 @@ module Aws::CleanRoomsML
     #   Details about the status of the audience model.
     #   @return [Types::StatusDetails]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The KMS key ARN used for the audience model.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags that are assigned to the audience model.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] training_data_end_time
-    #   The end date specified for the training window.
-    #   @return [Time]
-    #
-    # @!attribute [rw] training_data_start_time
-    #   The start date specified for the training window.
-    #   @return [Time]
-    #
-    # @!attribute [rw] training_dataset_arn
-    #   The Amazon Resource Name (ARN) of the training dataset that was used
-    #   for this audience model.
+    # @!attribute [rw] description
+    #   The description of the audience model.
     #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the audience model was updated.
-    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetAudienceModelResponse AWS API Documentation
     #
     class GetAudienceModelResponse < Struct.new(
-      :audience_model_arn,
       :create_time,
-      :description,
-      :kms_key_arn,
+      :update_time,
+      :training_data_start_time,
+      :training_data_end_time,
+      :audience_model_arn,
       :name,
+      :training_dataset_arn,
       :status,
       :status_details,
+      :kms_key_arn,
       :tags,
-      :training_data_end_time,
-      :training_data_start_time,
-      :training_dataset_arn,
-      :update_time)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1044,10 +1057,48 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] create_time
+    #   The time at which the configured audience model was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured audience model was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configured_audience_model_arn
+    #   The Amazon Resource Name (ARN) of the configured audience model.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured audience model.
+    #   @return [String]
+    #
     # @!attribute [rw] audience_model_arn
     #   The Amazon Resource Name (ARN) of the audience model used for this
     #   configured audience model.
     #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   The output configuration of the configured audience model
+    #   @return [Types::ConfiguredAudienceModelOutputConfig]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured audience model.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the configured audience model.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_audience_metrics
+    #   Whether audience metrics are shared.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_matching_seed_size
+    #   The minimum number of users from the seed audience that must match
+    #   with users in the training data of the audience model.
+    #   @return [Integer]
     #
     # @!attribute [rw] audience_size_config
     #   The list of output sizes of audiences that can be created using this
@@ -1059,69 +1110,31 @@ module Aws::CleanRoomsML
     #   in the range 1-100 percent.
     #   @return [Types::AudienceSizeConfig]
     #
+    # @!attribute [rw] tags
+    #   The tags that are associated to this configured audience model.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] child_resource_tag_on_create_policy
     #   Provides the `childResourceTagOnCreatePolicy` that was used for this
     #   configured audience model.
     #   @return [String]
     #
-    # @!attribute [rw] configured_audience_model_arn
-    #   The Amazon Resource Name (ARN) of the configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] create_time
-    #   The time at which the configured audience model was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] description
-    #   The description of the configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] min_matching_seed_size
-    #   The minimum number of users from the seed audience that must match
-    #   with users in the training data of the audience model.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] name
-    #   The name of the configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] output_config
-    #   The output configuration of the configured audience model
-    #   @return [Types::ConfiguredAudienceModelOutputConfig]
-    #
-    # @!attribute [rw] shared_audience_metrics
-    #   Whether audience metrics are shared.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] status
-    #   The status of the configured audience model.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tags that are associated to this configured audience model.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the configured audience model was
-    #   updated.
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetConfiguredAudienceModelResponse AWS API Documentation
     #
     class GetConfiguredAudienceModelResponse < Struct.new(
-      :audience_model_arn,
-      :audience_size_config,
-      :child_resource_tag_on_create_policy,
-      :configured_audience_model_arn,
       :create_time,
-      :description,
-      :min_matching_seed_size,
+      :update_time,
+      :configured_audience_model_arn,
       :name,
+      :audience_model_arn,
       :output_config,
-      :shared_audience_metrics,
+      :description,
       :status,
+      :shared_audience_metrics,
+      :min_matching_seed_size,
+      :audience_size_config,
       :tags,
-      :update_time)
+      :child_resource_tag_on_create_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1143,124 +1156,128 @@ module Aws::CleanRoomsML
     #   The time at which the training dataset was created.
     #   @return [Time]
     #
-    # @!attribute [rw] description
-    #   The description of the training dataset.
+    # @!attribute [rw] update_time
+    #   The most recent time at which the training dataset was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_dataset_arn
+    #   The Amazon Resource Name (ARN) of the training dataset.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the training dataset.
     #   @return [String]
     #
-    # @!attribute [rw] role_arn
-    #   The IAM role used to read the training data.
-    #   @return [String]
+    # @!attribute [rw] training_data
+    #   Metadata about the requested training data.
+    #   @return [Array<Types::Dataset>]
     #
     # @!attribute [rw] status
     #   The status of the training dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role used to read the training data.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags that are assigned to this training dataset.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] training_data
-    #   Metadata about the requested training data.
-    #   @return [Array<Types::Dataset>]
-    #
-    # @!attribute [rw] training_dataset_arn
-    #   The Amazon Resource Name (ARN) of the training dataset.
+    # @!attribute [rw] description
+    #   The description of the training dataset.
     #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the training dataset was updated.
-    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GetTrainingDatasetResponse AWS API Documentation
     #
     class GetTrainingDatasetResponse < Struct.new(
       :create_time,
-      :description,
-      :name,
-      :role_arn,
-      :status,
-      :tags,
-      :training_data,
+      :update_time,
       :training_dataset_arn,
-      :update_time)
+      :name,
+      :training_data,
+      :status,
+      :role_arn,
+      :tags,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Defines the Glue data source that contains the training data.
     #
-    # @!attribute [rw] catalog_id
-    #   The Glue catalog that contains the training data.
+    # @!attribute [rw] table_name
+    #   The Glue table that contains the training data.
     #   @return [String]
     #
     # @!attribute [rw] database_name
     #   The Glue database that contains the training data.
     #   @return [String]
     #
-    # @!attribute [rw] table_name
-    #   The Glue table that contains the training data.
+    # @!attribute [rw] catalog_id
+    #   The Glue catalog that contains the training data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/GlueDataSource AWS API Documentation
     #
     class GlueDataSource < Struct.new(
-      :catalog_id,
+      :table_name,
       :database_name,
-      :table_name)
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] audience_generation_job_arn
-    #   The Amazon Resource Name (ARN) of the audience generation job that
-    #   you are interested in.
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    # @!attribute [rw] audience_generation_job_arn
+    #   The Amazon Resource Name (ARN) of the audience generation job that
+    #   you are interested in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceExportJobsRequest AWS API Documentation
     #
     class ListAudienceExportJobsRequest < Struct.new(
-      :audience_generation_job_arn,
+      :next_token,
       :max_results,
-      :next_token)
+      :audience_generation_job_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] audience_export_jobs
-    #   The audience export jobs that match the request.
-    #   @return [Array<Types::AudienceExportJobSummary>]
-    #
     # @!attribute [rw] next_token
     #   The token value retrieved from a previous call to access the next
     #   page of results.
     #   @return [String]
     #
+    # @!attribute [rw] audience_export_jobs
+    #   The audience export jobs that match the request.
+    #   @return [Array<Types::AudienceExportJobSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceExportJobsResponse AWS API Documentation
     #
     class ListAudienceExportJobsResponse < Struct.new(
-      :audience_export_jobs,
-      :next_token)
+      :next_token,
+      :audience_export_jobs)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] collaboration_id
-    #   The identifier of the collaboration that contains the audience
-    #   generation jobs that you are interested in.
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
     #
     # @!attribute [rw] configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model that
@@ -1268,112 +1285,108 @@ module Aws::CleanRoomsML
     #   in.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
+    # @!attribute [rw] collaboration_id
+    #   The identifier of the collaboration that contains the audience
+    #   generation jobs that you are interested in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceGenerationJobsRequest AWS API Documentation
     #
     class ListAudienceGenerationJobsRequest < Struct.new(
-      :collaboration_id,
-      :configured_audience_model_arn,
+      :next_token,
       :max_results,
-      :next_token)
+      :configured_audience_model_arn,
+      :collaboration_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
     # @!attribute [rw] audience_generation_jobs
     #   The audience generation jobs that match the request.
     #   @return [Array<Types::AudienceGenerationJobSummary>]
     #
-    # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceGenerationJobsResponse AWS API Documentation
     #
     class ListAudienceGenerationJobsResponse < Struct.new(
-      :audience_generation_jobs,
-      :next_token)
+      :next_token,
+      :audience_generation_jobs)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token value retrieved from a previous call to access the next
     #   page of results.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceModelsRequest AWS API Documentation
     #
     class ListAudienceModelsRequest < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
     # @!attribute [rw] audience_models
     #   The audience models that match the request.
     #   @return [Array<Types::AudienceModelSummary>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceModelsResponse AWS API Documentation
+    #
+    class ListAudienceModelsResponse < Struct.new(
+      :next_token,
+      :audience_models)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The token value retrieved from a previous call to access the next
     #   page of results.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListAudienceModelsResponse AWS API Documentation
-    #
-    class ListAudienceModelsResponse < Struct.new(
-      :audience_models,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @!attribute [rw] max_results
     #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   The token value retrieved from a previous call to access the next
-    #   page of results.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredAudienceModelsRequest AWS API Documentation
     #
     class ListConfiguredAudienceModelsRequest < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] configured_audience_models
-    #   The configured audience models.
-    #   @return [Array<Types::ConfiguredAudienceModelSummary>]
-    #
     # @!attribute [rw] next_token
     #   The token value retrieved from a previous call to access the next
     #   page of results.
     #   @return [String]
     #
+    # @!attribute [rw] configured_audience_models
+    #   The configured audience models.
+    #   @return [Array<Types::ConfiguredAudienceModelSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListConfiguredAudienceModelsResponse AWS API Documentation
     #
     class ListConfiguredAudienceModelsResponse < Struct.new(
-      :configured_audience_models,
-      :next_token)
+      :next_token,
+      :configured_audience_models)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1403,20 +1416,20 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The maximum size of the results that is returned per call.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token value retrieved from a previous call to access the next
     #   page of results.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ListTrainingDatasetsRequest AWS API Documentation
     #
     class ListTrainingDatasetsRequest < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1439,6 +1452,31 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # The parameters for the SQL type Protected Query.
+    #
+    # @!attribute [rw] query_string
+    #   The query string to be submitted.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_template_arn
+    #   The Amazon Resource Name (ARN) associated with the analysis template
+    #   within a collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The protected query SQL parameters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ProtectedQuerySQLParameters AWS API Documentation
+    #
+    class ProtectedQuerySQLParameters < Struct.new(
+      :query_string,
+      :analysis_template_arn,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model that
     #   the resource policy will govern.
@@ -1448,14 +1486,14 @@ module Aws::CleanRoomsML
     #   The IAM resource policy.
     #   @return [String]
     #
-    # @!attribute [rw] policy_existence_condition
-    #   Use this to prevent unexpected concurrent modification of the
-    #   policy.
-    #   @return [String]
-    #
     # @!attribute [rw] previous_policy_hash
     #   A cryptographic hash of the contents of the policy used to prevent
     #   unexpected concurrent modification of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_existence_condition
+    #   Use this to prevent unexpected concurrent modification of the
+    #   policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/PutConfiguredAudienceModelPolicyRequest AWS API Documentation
@@ -1463,8 +1501,8 @@ module Aws::CleanRoomsML
     class PutConfiguredAudienceModelPolicyRequest < Struct.new(
       :configured_audience_model_arn,
       :configured_audience_model_policy,
-      :policy_existence_condition,
-      :previous_policy_hash)
+      :previous_policy_hash,
+      :policy_existence_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1547,6 +1585,10 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the audience export job.
+    #   @return [String]
+    #
     # @!attribute [rw] audience_generation_job_arn
     #   The Amazon Resource Name (ARN) of the audience generation job that
     #   you want to export.
@@ -1561,24 +1603,19 @@ module Aws::CleanRoomsML
     #   The description of the audience export job.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the audience export job.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartAudienceExportJobRequest AWS API Documentation
     #
     class StartAudienceExportJobRequest < Struct.new(
+      :name,
       :audience_generation_job_arn,
       :audience_size,
-      :description,
-      :name)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] collaboration_id
-    #   The identifier of the collaboration that contains the audience
-    #   generation job.
+    # @!attribute [rw] name
+    #   The name of the audience generation job.
     #   @return [String]
     #
     # @!attribute [rw] configured_audience_model_arn
@@ -1586,22 +1623,23 @@ module Aws::CleanRoomsML
     #   is used for this audience generation job.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The description of the audience generation job.
-    #   @return [String]
+    # @!attribute [rw] seed_audience
+    #   The seed audience that is used to generate the audience.
+    #   @return [Types::AudienceGenerationJobDataSource]
     #
     # @!attribute [rw] include_seed_in_output
     #   Whether the seed audience is included in the audience generation
     #   output.
     #   @return [Boolean]
     #
-    # @!attribute [rw] name
-    #   The name of the audience generation job.
+    # @!attribute [rw] collaboration_id
+    #   The identifier of the collaboration that contains the audience
+    #   generation job.
     #   @return [String]
     #
-    # @!attribute [rw] seed_audience
-    #   The seed audience that is used to generate the audience.
-    #   @return [Types::AudienceGenerationJobDataSource]
+    # @!attribute [rw] description
+    #   The description of the audience generation job.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   The optional metadata that you apply to the resource to help you
@@ -1639,12 +1677,12 @@ module Aws::CleanRoomsML
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StartAudienceGenerationJobRequest AWS API Documentation
     #
     class StartAudienceGenerationJobRequest < Struct.new(
-      :collaboration_id,
-      :configured_audience_model_arn,
-      :description,
-      :include_seed_in_output,
       :name,
+      :configured_audience_model_arn,
       :seed_audience,
+      :include_seed_in_output,
+      :collaboration_id,
+      :description,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1664,23 +1702,23 @@ module Aws::CleanRoomsML
 
     # Details about the status of a resource.
     #
-    # @!attribute [rw] message
-    #   The error message that was returned. The message is intended for
-    #   human consumption and can change at any time. Use the `statusCode`
-    #   for programmatic error handling.
-    #   @return [String]
-    #
     # @!attribute [rw] status_code
     #   The status code that was returned. The status code is intended for
     #   programmatic error handling. Clean Rooms ML will not change the
     #   status code for existing error conditions.
     #   @return [String]
     #
+    # @!attribute [rw] message
+    #   The error message that was returned. The message is intended for
+    #   human consumption and can change at any time. Use the `statusCode`
+    #   for programmatic error handling.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/StatusDetails AWS API Documentation
     #
     class StatusDetails < Struct.new(
-      :message,
-      :status_code)
+      :status_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1742,8 +1780,12 @@ module Aws::CleanRoomsML
     #   The time at which the training dataset was created.
     #   @return [Time]
     #
-    # @!attribute [rw] description
-    #   The description of the training dataset.
+    # @!attribute [rw] update_time
+    #   The most recent time at which the training dataset was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_dataset_arn
+    #   The Amazon Resource Name (ARN) of the training dataset.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1754,23 +1796,19 @@ module Aws::CleanRoomsML
     #   The status of the training dataset.
     #   @return [String]
     #
-    # @!attribute [rw] training_dataset_arn
-    #   The Amazon Resource Name (ARN) of the training dataset.
+    # @!attribute [rw] description
+    #   The description of the training dataset.
     #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The most recent time at which the training dataset was updated.
-    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/TrainingDatasetSummary AWS API Documentation
     #
     class TrainingDatasetSummary < Struct.new(
       :create_time,
-      :description,
+      :update_time,
+      :training_dataset_arn,
       :name,
       :status,
-      :training_dataset_arn,
-      :update_time)
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1797,47 +1835,47 @@ module Aws::CleanRoomsML
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] audience_model_arn
-    #   The Amazon Resource Name (ARN) of the new audience model that you
-    #   want to use.
-    #   @return [String]
-    #
-    # @!attribute [rw] audience_size_config
-    #   The new audience size configuration.
-    #   @return [Types::AudienceSizeConfig]
-    #
     # @!attribute [rw] configured_audience_model_arn
     #   The Amazon Resource Name (ARN) of the configured audience model that
     #   you want to update.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The new description of the configured audience model.
+    # @!attribute [rw] output_config
+    #   The new output configuration.
+    #   @return [Types::ConfiguredAudienceModelOutputConfig]
+    #
+    # @!attribute [rw] audience_model_arn
+    #   The Amazon Resource Name (ARN) of the new audience model that you
+    #   want to use.
     #   @return [String]
+    #
+    # @!attribute [rw] shared_audience_metrics
+    #   The new value for whether to share audience metrics.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] min_matching_seed_size
     #   The minimum number of users from the seed audience that must match
     #   with users in the training data of the audience model.
     #   @return [Integer]
     #
-    # @!attribute [rw] output_config
-    #   The new output configuration.
-    #   @return [Types::ConfiguredAudienceModelOutputConfig]
+    # @!attribute [rw] audience_size_config
+    #   The new audience size configuration.
+    #   @return [Types::AudienceSizeConfig]
     #
-    # @!attribute [rw] shared_audience_metrics
-    #   The new value for whether to share audience metrics.
-    #   @return [Array<String>]
+    # @!attribute [rw] description
+    #   The new description of the configured audience model.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/UpdateConfiguredAudienceModelRequest AWS API Documentation
     #
     class UpdateConfiguredAudienceModelRequest < Struct.new(
-      :audience_model_arn,
-      :audience_size_config,
       :configured_audience_model_arn,
-      :description,
-      :min_matching_seed_size,
       :output_config,
-      :shared_audience_metrics)
+      :audience_model_arn,
+      :shared_audience_metrics,
+      :min_matching_seed_size,
+      :audience_size_config,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end

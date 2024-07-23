@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-07-23)
+------------------
+
+* Feature - Adds SQL query as the source of seed audience for audience generation job.
+
 1.9.0 (2024-07-02)
 ------------------
 

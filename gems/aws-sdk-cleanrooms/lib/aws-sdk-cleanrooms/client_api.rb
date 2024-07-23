@@ -36,6 +36,8 @@ module Aws::CleanRooms
     AnalysisRuleCustom = Shapes::StructureShape.new(name: 'AnalysisRuleCustom')
     AnalysisRuleCustomAllowedAnalysesList = Shapes::ListShape.new(name: 'AnalysisRuleCustomAllowedAnalysesList')
     AnalysisRuleCustomAllowedAnalysisProvidersList = Shapes::ListShape.new(name: 'AnalysisRuleCustomAllowedAnalysisProvidersList')
+    AnalysisRuleIdMappingTable = Shapes::StructureShape.new(name: 'AnalysisRuleIdMappingTable')
+    AnalysisRuleIdMappingTableJoinColumnsList = Shapes::ListShape.new(name: 'AnalysisRuleIdMappingTableJoinColumnsList')
     AnalysisRuleList = Shapes::StructureShape.new(name: 'AnalysisRuleList')
     AnalysisRuleListJoinColumnsList = Shapes::ListShape.new(name: 'AnalysisRuleListJoinColumnsList')
     AnalysisRulePolicy = Shapes::UnionShape.new(name: 'AnalysisRulePolicy')
@@ -82,6 +84,9 @@ module Aws::CleanRooms
     CollaborationConfiguredAudienceModelAssociationSummary = Shapes::StructureShape.new(name: 'CollaborationConfiguredAudienceModelAssociationSummary')
     CollaborationConfiguredAudienceModelAssociationSummaryList = Shapes::ListShape.new(name: 'CollaborationConfiguredAudienceModelAssociationSummaryList')
     CollaborationDescription = Shapes::StringShape.new(name: 'CollaborationDescription')
+    CollaborationIdNamespaceAssociation = Shapes::StructureShape.new(name: 'CollaborationIdNamespaceAssociation')
+    CollaborationIdNamespaceAssociationSummary = Shapes::StructureShape.new(name: 'CollaborationIdNamespaceAssociationSummary')
+    CollaborationIdNamespaceAssociationSummaryList = Shapes::ListShape.new(name: 'CollaborationIdNamespaceAssociationSummaryList')
     CollaborationIdentifier = Shapes::StringShape.new(name: 'CollaborationIdentifier')
     CollaborationName = Shapes::StringShape.new(name: 'CollaborationName')
     CollaborationPrivacyBudgetSummary = Shapes::StructureShape.new(name: 'CollaborationPrivacyBudgetSummary')
@@ -132,6 +137,10 @@ module Aws::CleanRooms
     CreateConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAssociationOutput')
     CreateConfiguredTableInput = Shapes::StructureShape.new(name: 'CreateConfiguredTableInput')
     CreateConfiguredTableOutput = Shapes::StructureShape.new(name: 'CreateConfiguredTableOutput')
+    CreateIdMappingTableInput = Shapes::StructureShape.new(name: 'CreateIdMappingTableInput')
+    CreateIdMappingTableOutput = Shapes::StructureShape.new(name: 'CreateIdMappingTableOutput')
+    CreateIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'CreateIdNamespaceAssociationInput')
+    CreateIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'CreateIdNamespaceAssociationOutput')
     CreateMembershipInput = Shapes::StructureShape.new(name: 'CreateMembershipInput')
     CreateMembershipOutput = Shapes::StructureShape.new(name: 'CreateMembershipOutput')
     CreatePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'CreatePrivacyBudgetTemplateInput')
@@ -149,6 +158,10 @@ module Aws::CleanRooms
     DeleteConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAssociationOutput')
     DeleteConfiguredTableInput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableInput')
     DeleteConfiguredTableOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableOutput')
+    DeleteIdMappingTableInput = Shapes::StructureShape.new(name: 'DeleteIdMappingTableInput')
+    DeleteIdMappingTableOutput = Shapes::StructureShape.new(name: 'DeleteIdMappingTableOutput')
+    DeleteIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'DeleteIdNamespaceAssociationInput')
+    DeleteIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'DeleteIdNamespaceAssociationOutput')
     DeleteMemberInput = Shapes::StructureShape.new(name: 'DeleteMemberInput')
     DeleteMemberOutput = Shapes::StructureShape.new(name: 'DeleteMemberOutput')
     DeleteMembershipInput = Shapes::StructureShape.new(name: 'DeleteMembershipInput')
@@ -178,16 +191,20 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateParametersOutput = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateParametersOutput')
     DifferentialPrivacyTemplateUpdateParameters = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateUpdateParameters')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     Double = Shapes::FloatShape.new(name: 'Double')
     Epsilon = Shapes::IntegerShape.new(name: 'Epsilon')
     FilterableMemberStatus = Shapes::StringShape.new(name: 'FilterableMemberStatus')
     Float = Shapes::FloatShape.new(name: 'Float')
+    GenericResourceName = Shapes::StringShape.new(name: 'GenericResourceName')
     GetAnalysisTemplateInput = Shapes::StructureShape.new(name: 'GetAnalysisTemplateInput')
     GetAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'GetAnalysisTemplateOutput')
     GetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'GetCollaborationAnalysisTemplateInput')
     GetCollaborationAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'GetCollaborationAnalysisTemplateOutput')
     GetCollaborationConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'GetCollaborationConfiguredAudienceModelAssociationInput')
     GetCollaborationConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'GetCollaborationConfiguredAudienceModelAssociationOutput')
+    GetCollaborationIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'GetCollaborationIdNamespaceAssociationInput')
+    GetCollaborationIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'GetCollaborationIdNamespaceAssociationOutput')
     GetCollaborationInput = Shapes::StructureShape.new(name: 'GetCollaborationInput')
     GetCollaborationOutput = Shapes::StructureShape.new(name: 'GetCollaborationOutput')
     GetCollaborationPrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'GetCollaborationPrivacyBudgetTemplateInput')
@@ -200,6 +217,10 @@ module Aws::CleanRooms
     GetConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'GetConfiguredTableAssociationOutput')
     GetConfiguredTableInput = Shapes::StructureShape.new(name: 'GetConfiguredTableInput')
     GetConfiguredTableOutput = Shapes::StructureShape.new(name: 'GetConfiguredTableOutput')
+    GetIdMappingTableInput = Shapes::StructureShape.new(name: 'GetIdMappingTableInput')
+    GetIdMappingTableOutput = Shapes::StructureShape.new(name: 'GetIdMappingTableOutput')
+    GetIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'GetIdNamespaceAssociationInput')
+    GetIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'GetIdNamespaceAssociationOutput')
     GetMembershipInput = Shapes::StructureShape.new(name: 'GetMembershipInput')
     GetMembershipOutput = Shapes::StructureShape.new(name: 'GetMembershipOutput')
     GetPrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'GetPrivacyBudgetTemplateInput')
@@ -213,10 +234,33 @@ module Aws::CleanRooms
     GlueDatabaseName = Shapes::StringShape.new(name: 'GlueDatabaseName')
     GlueTableName = Shapes::StringShape.new(name: 'GlueTableName')
     GlueTableReference = Shapes::StructureShape.new(name: 'GlueTableReference')
+    IdMappingConfig = Shapes::StructureShape.new(name: 'IdMappingConfig')
+    IdMappingTable = Shapes::StructureShape.new(name: 'IdMappingTable')
+    IdMappingTableArn = Shapes::StringShape.new(name: 'IdMappingTableArn')
+    IdMappingTableInputReferenceArn = Shapes::StringShape.new(name: 'IdMappingTableInputReferenceArn')
+    IdMappingTableInputReferenceConfig = Shapes::StructureShape.new(name: 'IdMappingTableInputReferenceConfig')
+    IdMappingTableInputReferenceProperties = Shapes::StructureShape.new(name: 'IdMappingTableInputReferenceProperties')
+    IdMappingTableInputSource = Shapes::StructureShape.new(name: 'IdMappingTableInputSource')
+    IdMappingTableInputSourceList = Shapes::ListShape.new(name: 'IdMappingTableInputSourceList')
+    IdMappingTableSchemaTypeProperties = Shapes::StructureShape.new(name: 'IdMappingTableSchemaTypeProperties')
+    IdMappingTableSummary = Shapes::StructureShape.new(name: 'IdMappingTableSummary')
+    IdMappingTableSummaryList = Shapes::ListShape.new(name: 'IdMappingTableSummaryList')
+    IdMappingWorkflowsSupported = Shapes::ListShape.new(name: 'IdMappingWorkflowsSupported')
+    IdNamespaceAssociation = Shapes::StructureShape.new(name: 'IdNamespaceAssociation')
+    IdNamespaceAssociationArn = Shapes::StringShape.new(name: 'IdNamespaceAssociationArn')
+    IdNamespaceAssociationIdentifier = Shapes::StringShape.new(name: 'IdNamespaceAssociationIdentifier')
+    IdNamespaceAssociationInputReferenceArn = Shapes::StringShape.new(name: 'IdNamespaceAssociationInputReferenceArn')
+    IdNamespaceAssociationInputReferenceConfig = Shapes::StructureShape.new(name: 'IdNamespaceAssociationInputReferenceConfig')
+    IdNamespaceAssociationInputReferenceProperties = Shapes::StructureShape.new(name: 'IdNamespaceAssociationInputReferenceProperties')
+    IdNamespaceAssociationInputReferencePropertiesSummary = Shapes::StructureShape.new(name: 'IdNamespaceAssociationInputReferencePropertiesSummary')
+    IdNamespaceAssociationSummary = Shapes::StructureShape.new(name: 'IdNamespaceAssociationSummary')
+    IdNamespaceAssociationSummaryList = Shapes::ListShape.new(name: 'IdNamespaceAssociationSummaryList')
+    IdNamespaceType = Shapes::StringShape.new(name: 'IdNamespaceType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JoinOperator = Shapes::StringShape.new(name: 'JoinOperator')
     JoinOperatorsList = Shapes::ListShape.new(name: 'JoinOperatorsList')
     JoinRequiredOption = Shapes::StringShape.new(name: 'JoinRequiredOption')
+    KMSKeyArn = Shapes::StringShape.new(name: 'KMSKeyArn')
     KeyPrefix = Shapes::StringShape.new(name: 'KeyPrefix')
     ListAnalysisTemplatesInput = Shapes::StructureShape.new(name: 'ListAnalysisTemplatesInput')
     ListAnalysisTemplatesOutput = Shapes::StructureShape.new(name: 'ListAnalysisTemplatesOutput')
@@ -224,6 +268,8 @@ module Aws::CleanRooms
     ListCollaborationAnalysisTemplatesOutput = Shapes::StructureShape.new(name: 'ListCollaborationAnalysisTemplatesOutput')
     ListCollaborationConfiguredAudienceModelAssociationsInput = Shapes::StructureShape.new(name: 'ListCollaborationConfiguredAudienceModelAssociationsInput')
     ListCollaborationConfiguredAudienceModelAssociationsOutput = Shapes::StructureShape.new(name: 'ListCollaborationConfiguredAudienceModelAssociationsOutput')
+    ListCollaborationIdNamespaceAssociationsInput = Shapes::StructureShape.new(name: 'ListCollaborationIdNamespaceAssociationsInput')
+    ListCollaborationIdNamespaceAssociationsOutput = Shapes::StructureShape.new(name: 'ListCollaborationIdNamespaceAssociationsOutput')
     ListCollaborationPrivacyBudgetTemplatesInput = Shapes::StructureShape.new(name: 'ListCollaborationPrivacyBudgetTemplatesInput')
     ListCollaborationPrivacyBudgetTemplatesOutput = Shapes::StructureShape.new(name: 'ListCollaborationPrivacyBudgetTemplatesOutput')
     ListCollaborationPrivacyBudgetsInput = Shapes::StructureShape.new(name: 'ListCollaborationPrivacyBudgetsInput')
@@ -236,6 +282,10 @@ module Aws::CleanRooms
     ListConfiguredTableAssociationsOutput = Shapes::StructureShape.new(name: 'ListConfiguredTableAssociationsOutput')
     ListConfiguredTablesInput = Shapes::StructureShape.new(name: 'ListConfiguredTablesInput')
     ListConfiguredTablesOutput = Shapes::StructureShape.new(name: 'ListConfiguredTablesOutput')
+    ListIdMappingTablesInput = Shapes::StructureShape.new(name: 'ListIdMappingTablesInput')
+    ListIdMappingTablesOutput = Shapes::StructureShape.new(name: 'ListIdMappingTablesOutput')
+    ListIdNamespaceAssociationsInput = Shapes::StructureShape.new(name: 'ListIdNamespaceAssociationsInput')
+    ListIdNamespaceAssociationsOutput = Shapes::StructureShape.new(name: 'ListIdNamespaceAssociationsOutput')
     ListMembersInput = Shapes::StructureShape.new(name: 'ListMembersInput')
     ListMembersOutput = Shapes::StructureShape.new(name: 'ListMembersOutput')
     ListMembershipsInput = Shapes::StructureShape.new(name: 'ListMembershipsInput')
@@ -276,6 +326,8 @@ module Aws::CleanRooms
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PaymentConfiguration = Shapes::StructureShape.new(name: 'PaymentConfiguration')
+    PopulateIdMappingTableInput = Shapes::StructureShape.new(name: 'PopulateIdMappingTableInput')
+    PopulateIdMappingTableOutput = Shapes::StructureShape.new(name: 'PopulateIdMappingTableOutput')
     PreviewPrivacyImpactInput = Shapes::StructureShape.new(name: 'PreviewPrivacyImpactInput')
     PreviewPrivacyImpactOutput = Shapes::StructureShape.new(name: 'PreviewPrivacyImpactOutput')
     PreviewPrivacyImpactParametersInput = Shapes::UnionShape.new(name: 'PreviewPrivacyImpactParametersInput')
@@ -313,6 +365,9 @@ module Aws::CleanRooms
     ProtectedQuerySummaryList = Shapes::ListShape.new(name: 'ProtectedQuerySummaryList')
     ProtectedQueryType = Shapes::StringShape.new(name: 'ProtectedQueryType')
     QueryComputePaymentConfig = Shapes::StructureShape.new(name: 'QueryComputePaymentConfig')
+    QueryConstraint = Shapes::UnionShape.new(name: 'QueryConstraint')
+    QueryConstraintList = Shapes::ListShape.new(name: 'QueryConstraintList')
+    QueryConstraintRequireOverlap = Shapes::StructureShape.new(name: 'QueryConstraintRequireOverlap')
     QueryTables = Shapes::ListShape.new(name: 'QueryTables')
     ResourceAlias = Shapes::StringShape.new(name: 'ResourceAlias')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
@@ -338,6 +393,7 @@ module Aws::CleanRooms
     SchemaSummary = Shapes::StructureShape.new(name: 'SchemaSummary')
     SchemaSummaryList = Shapes::ListShape.new(name: 'SchemaSummaryList')
     SchemaType = Shapes::StringShape.new(name: 'SchemaType')
+    SchemaTypeProperties = Shapes::UnionShape.new(name: 'SchemaTypeProperties')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartProtectedQueryInput = Shapes::StructureShape.new(name: 'StartProtectedQueryInput')
     StartProtectedQueryOutput = Shapes::StructureShape.new(name: 'StartProtectedQueryOutput')
@@ -370,6 +426,10 @@ module Aws::CleanRooms
     UpdateConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAssociationOutput')
     UpdateConfiguredTableInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableInput')
     UpdateConfiguredTableOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableOutput')
+    UpdateIdMappingTableInput = Shapes::StructureShape.new(name: 'UpdateIdMappingTableInput')
+    UpdateIdMappingTableOutput = Shapes::StructureShape.new(name: 'UpdateIdMappingTableOutput')
+    UpdateIdNamespaceAssociationInput = Shapes::StructureShape.new(name: 'UpdateIdNamespaceAssociationInput')
+    UpdateIdNamespaceAssociationOutput = Shapes::StructureShape.new(name: 'UpdateIdNamespaceAssociationOutput')
     UpdateMembershipInput = Shapes::StructureShape.new(name: 'UpdateMembershipInput')
     UpdateMembershipOutput = Shapes::StructureShape.new(name: 'UpdateMembershipOutput')
     UpdatePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'UpdatePrivacyBudgetTemplateInput')
@@ -438,6 +498,13 @@ module Aws::CleanRooms
 
     AnalysisRuleCustomAllowedAnalysisProvidersList.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    AnalysisRuleIdMappingTable.add_member(:join_columns, Shapes::ShapeRef.new(shape: AnalysisRuleIdMappingTableJoinColumnsList, required: true, location_name: "joinColumns"))
+    AnalysisRuleIdMappingTable.add_member(:query_constraints, Shapes::ShapeRef.new(shape: QueryConstraintList, required: true, location_name: "queryConstraints"))
+    AnalysisRuleIdMappingTable.add_member(:dimension_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "dimensionColumns"))
+    AnalysisRuleIdMappingTable.struct_class = Types::AnalysisRuleIdMappingTable
+
+    AnalysisRuleIdMappingTableJoinColumnsList.member = Shapes::ShapeRef.new(shape: AnalysisRuleColumnName)
+
     AnalysisRuleList.add_member(:join_columns, Shapes::ShapeRef.new(shape: AnalysisRuleListJoinColumnsList, required: true, location_name: "joinColumns"))
     AnalysisRuleList.add_member(:allowed_join_operators, Shapes::ShapeRef.new(shape: JoinOperatorsList, location_name: "allowedJoinOperators"))
     AnalysisRuleList.add_member(:list_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "listColumns"))
@@ -454,10 +521,12 @@ module Aws::CleanRooms
     AnalysisRulePolicyV1.add_member(:list, Shapes::ShapeRef.new(shape: AnalysisRuleList, location_name: "list"))
     AnalysisRulePolicyV1.add_member(:aggregation, Shapes::ShapeRef.new(shape: AnalysisRuleAggregation, location_name: "aggregation"))
     AnalysisRulePolicyV1.add_member(:custom, Shapes::ShapeRef.new(shape: AnalysisRuleCustom, location_name: "custom"))
+    AnalysisRulePolicyV1.add_member(:id_mapping_table, Shapes::ShapeRef.new(shape: AnalysisRuleIdMappingTable, location_name: "idMappingTable"))
     AnalysisRulePolicyV1.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AnalysisRulePolicyV1.add_member_subclass(:list, Types::AnalysisRulePolicyV1::List)
     AnalysisRulePolicyV1.add_member_subclass(:aggregation, Types::AnalysisRulePolicyV1::Aggregation)
     AnalysisRulePolicyV1.add_member_subclass(:custom, Types::AnalysisRulePolicyV1::Custom)
+    AnalysisRulePolicyV1.add_member_subclass(:id_mapping_table, Types::AnalysisRulePolicyV1::IdMappingTable)
     AnalysisRulePolicyV1.add_member_subclass(:unknown, Types::AnalysisRulePolicyV1::Unknown)
     AnalysisRulePolicyV1.struct_class = Types::AnalysisRulePolicyV1
 
@@ -633,6 +702,35 @@ module Aws::CleanRooms
     CollaborationConfiguredAudienceModelAssociationSummary.struct_class = Types::CollaborationConfiguredAudienceModelAssociationSummary
 
     CollaborationConfiguredAudienceModelAssociationSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationConfiguredAudienceModelAssociationSummary)
+
+    CollaborationIdNamespaceAssociation.add_member(:id, Shapes::ShapeRef.new(shape: IdNamespaceAssociationIdentifier, required: true, location_name: "id"))
+    CollaborationIdNamespaceAssociation.add_member(:arn, Shapes::ShapeRef.new(shape: IdNamespaceAssociationArn, required: true, location_name: "arn"))
+    CollaborationIdNamespaceAssociation.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationIdNamespaceAssociation.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    CollaborationIdNamespaceAssociation.add_member(:name, Shapes::ShapeRef.new(shape: GenericResourceName, required: true, location_name: "name"))
+    CollaborationIdNamespaceAssociation.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CollaborationIdNamespaceAssociation.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    CollaborationIdNamespaceAssociation.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationIdNamespaceAssociation.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationIdNamespaceAssociation.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    CollaborationIdNamespaceAssociation.add_member(:input_reference_properties, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceProperties, required: true, location_name: "inputReferenceProperties"))
+    CollaborationIdNamespaceAssociation.add_member(:id_mapping_config, Shapes::ShapeRef.new(shape: IdMappingConfig, location_name: "idMappingConfig"))
+    CollaborationIdNamespaceAssociation.struct_class = Types::CollaborationIdNamespaceAssociation
+
+    CollaborationIdNamespaceAssociationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: IdNamespaceAssociationArn, required: true, location_name: "arn"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:id, Shapes::ShapeRef.new(shape: IdNamespaceAssociationIdentifier, required: true, location_name: "id"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:name, Shapes::ShapeRef.new(shape: GenericResourceName, required: true, location_name: "name"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CollaborationIdNamespaceAssociationSummary.add_member(:input_reference_properties, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferencePropertiesSummary, required: true, location_name: "inputReferenceProperties"))
+    CollaborationIdNamespaceAssociationSummary.struct_class = Types::CollaborationIdNamespaceAssociationSummary
+
+    CollaborationIdNamespaceAssociationSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationIdNamespaceAssociationSummary)
 
     CollaborationPrivacyBudgetSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     CollaborationPrivacyBudgetSummary.add_member(:privacy_budget_template_id, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location_name: "privacyBudgetTemplateId"))
@@ -868,6 +966,28 @@ module Aws::CleanRooms
     CreateConfiguredTableOutput.add_member(:configured_table, Shapes::ShapeRef.new(shape: ConfiguredTable, required: true, location_name: "configuredTable"))
     CreateConfiguredTableOutput.struct_class = Types::CreateConfiguredTableOutput
 
+    CreateIdMappingTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    CreateIdMappingTableInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceAlias, required: true, location_name: "name"))
+    CreateIdMappingTableInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CreateIdMappingTableInput.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdMappingTableInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    CreateIdMappingTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateIdMappingTableInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    CreateIdMappingTableInput.struct_class = Types::CreateIdMappingTableInput
+
+    CreateIdMappingTableOutput.add_member(:id_mapping_table, Shapes::ShapeRef.new(shape: IdMappingTable, required: true, location_name: "idMappingTable"))
+    CreateIdMappingTableOutput.struct_class = Types::CreateIdMappingTableOutput
+
+    CreateIdNamespaceAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    CreateIdNamespaceAssociationInput.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    CreateIdNamespaceAssociationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateIdNamespaceAssociationInput.add_member(:name, Shapes::ShapeRef.new(shape: GenericResourceName, required: true, location_name: "name"))
+    CreateIdNamespaceAssociationInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CreateIdNamespaceAssociationInput.add_member(:id_mapping_config, Shapes::ShapeRef.new(shape: IdMappingConfig, location_name: "idMappingConfig"))
+    CreateIdNamespaceAssociationInput.struct_class = Types::CreateIdNamespaceAssociationInput
+
+    CreateIdNamespaceAssociationOutput.add_member(:id_namespace_association, Shapes::ShapeRef.new(shape: IdNamespaceAssociation, required: true, location_name: "idNamespaceAssociation"))
+    CreateIdNamespaceAssociationOutput.struct_class = Types::CreateIdNamespaceAssociationOutput
+
     CreateMembershipInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location_name: "collaborationIdentifier"))
     CreateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateMembershipInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -927,6 +1047,18 @@ module Aws::CleanRooms
     DeleteConfiguredTableInput.struct_class = Types::DeleteConfiguredTableInput
 
     DeleteConfiguredTableOutput.struct_class = Types::DeleteConfiguredTableOutput
+
+    DeleteIdMappingTableInput.add_member(:id_mapping_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "idMappingTableIdentifier"))
+    DeleteIdMappingTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DeleteIdMappingTableInput.struct_class = Types::DeleteIdMappingTableInput
+
+    DeleteIdMappingTableOutput.struct_class = Types::DeleteIdMappingTableOutput
+
+    DeleteIdNamespaceAssociationInput.add_member(:id_namespace_association_identifier, Shapes::ShapeRef.new(shape: IdNamespaceAssociationIdentifier, required: true, location: "uri", location_name: "idNamespaceAssociationIdentifier"))
+    DeleteIdNamespaceAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DeleteIdNamespaceAssociationInput.struct_class = Types::DeleteIdNamespaceAssociationInput
+
+    DeleteIdNamespaceAssociationOutput.struct_class = Types::DeleteIdNamespaceAssociationOutput
 
     DeleteMemberInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     DeleteMemberInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "uri", location_name: "accountId"))
@@ -1022,6 +1154,13 @@ module Aws::CleanRooms
     GetCollaborationConfiguredAudienceModelAssociationOutput.add_member(:collaboration_configured_audience_model_association, Shapes::ShapeRef.new(shape: CollaborationConfiguredAudienceModelAssociation, required: true, location_name: "collaborationConfiguredAudienceModelAssociation"))
     GetCollaborationConfiguredAudienceModelAssociationOutput.struct_class = Types::GetCollaborationConfiguredAudienceModelAssociationOutput
 
+    GetCollaborationIdNamespaceAssociationInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    GetCollaborationIdNamespaceAssociationInput.add_member(:id_namespace_association_identifier, Shapes::ShapeRef.new(shape: IdNamespaceAssociationIdentifier, required: true, location: "uri", location_name: "idNamespaceAssociationIdentifier"))
+    GetCollaborationIdNamespaceAssociationInput.struct_class = Types::GetCollaborationIdNamespaceAssociationInput
+
+    GetCollaborationIdNamespaceAssociationOutput.add_member(:collaboration_id_namespace_association, Shapes::ShapeRef.new(shape: CollaborationIdNamespaceAssociation, required: true, location_name: "collaborationIdNamespaceAssociation"))
+    GetCollaborationIdNamespaceAssociationOutput.struct_class = Types::GetCollaborationIdNamespaceAssociationOutput
+
     GetCollaborationInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     GetCollaborationInput.struct_class = Types::GetCollaborationInput
 
@@ -1062,6 +1201,20 @@ module Aws::CleanRooms
     GetConfiguredTableOutput.add_member(:configured_table, Shapes::ShapeRef.new(shape: ConfiguredTable, required: true, location_name: "configuredTable"))
     GetConfiguredTableOutput.struct_class = Types::GetConfiguredTableOutput
 
+    GetIdMappingTableInput.add_member(:id_mapping_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "idMappingTableIdentifier"))
+    GetIdMappingTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetIdMappingTableInput.struct_class = Types::GetIdMappingTableInput
+
+    GetIdMappingTableOutput.add_member(:id_mapping_table, Shapes::ShapeRef.new(shape: IdMappingTable, required: true, location_name: "idMappingTable"))
+    GetIdMappingTableOutput.struct_class = Types::GetIdMappingTableOutput
+
+    GetIdNamespaceAssociationInput.add_member(:id_namespace_association_identifier, Shapes::ShapeRef.new(shape: IdNamespaceAssociationIdentifier, required: true, location: "uri", location_name: "idNamespaceAssociationIdentifier"))
+    GetIdNamespaceAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetIdNamespaceAssociationInput.struct_class = Types::GetIdNamespaceAssociationInput
+
+    GetIdNamespaceAssociationOutput.add_member(:id_namespace_association, Shapes::ShapeRef.new(shape: IdNamespaceAssociation, required: true, location_name: "idNamespaceAssociation"))
+    GetIdNamespaceAssociationOutput.struct_class = Types::GetIdNamespaceAssociationOutput
+
     GetMembershipInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetMembershipInput.struct_class = Types::GetMembershipInput
 
@@ -1101,6 +1254,99 @@ module Aws::CleanRooms
     GlueTableReference.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDatabaseName, required: true, location_name: "databaseName"))
     GlueTableReference.struct_class = Types::GlueTableReference
 
+    IdMappingConfig.add_member(:allow_use_as_dimension_column, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allowUseAsDimensionColumn"))
+    IdMappingConfig.struct_class = Types::IdMappingConfig
+
+    IdMappingTable.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    IdMappingTable.add_member(:arn, Shapes::ShapeRef.new(shape: IdMappingTableArn, required: true, location_name: "arn"))
+    IdMappingTable.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdMappingTableInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    IdMappingTable.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    IdMappingTable.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    IdMappingTable.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    IdMappingTable.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    IdMappingTable.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    IdMappingTable.add_member(:name, Shapes::ShapeRef.new(shape: ResourceAlias, required: true, location_name: "name"))
+    IdMappingTable.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IdMappingTable.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    IdMappingTable.add_member(:input_reference_properties, Shapes::ShapeRef.new(shape: IdMappingTableInputReferenceProperties, required: true, location_name: "inputReferenceProperties"))
+    IdMappingTable.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    IdMappingTable.struct_class = Types::IdMappingTable
+
+    IdMappingTableInputReferenceConfig.add_member(:input_reference_arn, Shapes::ShapeRef.new(shape: IdMappingTableInputReferenceArn, required: true, location_name: "inputReferenceArn"))
+    IdMappingTableInputReferenceConfig.add_member(:manage_resource_policies, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "manageResourcePolicies"))
+    IdMappingTableInputReferenceConfig.struct_class = Types::IdMappingTableInputReferenceConfig
+
+    IdMappingTableInputReferenceProperties.add_member(:id_mapping_table_input_source, Shapes::ShapeRef.new(shape: IdMappingTableInputSourceList, required: true, location_name: "idMappingTableInputSource"))
+    IdMappingTableInputReferenceProperties.struct_class = Types::IdMappingTableInputReferenceProperties
+
+    IdMappingTableInputSource.add_member(:id_namespace_association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "idNamespaceAssociationId"))
+    IdMappingTableInputSource.add_member(:type, Shapes::ShapeRef.new(shape: IdNamespaceType, required: true, location_name: "type"))
+    IdMappingTableInputSource.struct_class = Types::IdMappingTableInputSource
+
+    IdMappingTableInputSourceList.member = Shapes::ShapeRef.new(shape: IdMappingTableInputSource)
+
+    IdMappingTableSchemaTypeProperties.add_member(:id_mapping_table_input_source, Shapes::ShapeRef.new(shape: IdMappingTableInputSourceList, required: true, location_name: "idMappingTableInputSource"))
+    IdMappingTableSchemaTypeProperties.struct_class = Types::IdMappingTableSchemaTypeProperties
+
+    IdMappingTableSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    IdMappingTableSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    IdMappingTableSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
+    IdMappingTableSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    IdMappingTableSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IdMappingTableSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    IdMappingTableSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    IdMappingTableSummary.add_member(:arn, Shapes::ShapeRef.new(shape: IdMappingTableArn, required: true, location_name: "arn"))
+    IdMappingTableSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    IdMappingTableSummary.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdMappingTableInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    IdMappingTableSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceAlias, required: true, location_name: "name"))
+    IdMappingTableSummary.struct_class = Types::IdMappingTableSummary
+
+    IdMappingTableSummaryList.member = Shapes::ShapeRef.new(shape: IdMappingTableSummary)
+
+    IdMappingWorkflowsSupported.member = Shapes::ShapeRef.new(shape: Document)
+
+    IdNamespaceAssociation.add_member(:id, Shapes::ShapeRef.new(shape: IdNamespaceAssociationIdentifier, required: true, location_name: "id"))
+    IdNamespaceAssociation.add_member(:arn, Shapes::ShapeRef.new(shape: IdNamespaceAssociationArn, required: true, location_name: "arn"))
+    IdNamespaceAssociation.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    IdNamespaceAssociation.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    IdNamespaceAssociation.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    IdNamespaceAssociation.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    IdNamespaceAssociation.add_member(:name, Shapes::ShapeRef.new(shape: GenericResourceName, required: true, location_name: "name"))
+    IdNamespaceAssociation.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    IdNamespaceAssociation.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IdNamespaceAssociation.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    IdNamespaceAssociation.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    IdNamespaceAssociation.add_member(:input_reference_properties, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceProperties, required: true, location_name: "inputReferenceProperties"))
+    IdNamespaceAssociation.add_member(:id_mapping_config, Shapes::ShapeRef.new(shape: IdMappingConfig, location_name: "idMappingConfig"))
+    IdNamespaceAssociation.struct_class = Types::IdNamespaceAssociation
+
+    IdNamespaceAssociationInputReferenceConfig.add_member(:input_reference_arn, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceArn, required: true, location_name: "inputReferenceArn"))
+    IdNamespaceAssociationInputReferenceConfig.add_member(:manage_resource_policies, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "manageResourcePolicies"))
+    IdNamespaceAssociationInputReferenceConfig.struct_class = Types::IdNamespaceAssociationInputReferenceConfig
+
+    IdNamespaceAssociationInputReferenceProperties.add_member(:id_namespace_type, Shapes::ShapeRef.new(shape: IdNamespaceType, required: true, location_name: "idNamespaceType"))
+    IdNamespaceAssociationInputReferenceProperties.add_member(:id_mapping_workflows_supported, Shapes::ShapeRef.new(shape: IdMappingWorkflowsSupported, required: true, location_name: "idMappingWorkflowsSupported"))
+    IdNamespaceAssociationInputReferenceProperties.struct_class = Types::IdNamespaceAssociationInputReferenceProperties
+
+    IdNamespaceAssociationInputReferencePropertiesSummary.add_member(:id_namespace_type, Shapes::ShapeRef.new(shape: IdNamespaceType, required: true, location_name: "idNamespaceType"))
+    IdNamespaceAssociationInputReferencePropertiesSummary.struct_class = Types::IdNamespaceAssociationInputReferencePropertiesSummary
+
+    IdNamespaceAssociationSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
+    IdNamespaceAssociationSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    IdNamespaceAssociationSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    IdNamespaceAssociationSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    IdNamespaceAssociationSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    IdNamespaceAssociationSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    IdNamespaceAssociationSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    IdNamespaceAssociationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: IdNamespaceAssociationArn, required: true, location_name: "arn"))
+    IdNamespaceAssociationSummary.add_member(:input_reference_config, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferenceConfig, required: true, location_name: "inputReferenceConfig"))
+    IdNamespaceAssociationSummary.add_member(:name, Shapes::ShapeRef.new(shape: GenericResourceName, required: true, location_name: "name"))
+    IdNamespaceAssociationSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    IdNamespaceAssociationSummary.add_member(:input_reference_properties, Shapes::ShapeRef.new(shape: IdNamespaceAssociationInputReferencePropertiesSummary, required: true, location_name: "inputReferenceProperties"))
+    IdNamespaceAssociationSummary.struct_class = Types::IdNamespaceAssociationSummary
+
+    IdNamespaceAssociationSummaryList.member = Shapes::ShapeRef.new(shape: IdNamespaceAssociationSummary)
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -1132,6 +1378,15 @@ module Aws::CleanRooms
     ListCollaborationConfiguredAudienceModelAssociationsOutput.add_member(:collaboration_configured_audience_model_association_summaries, Shapes::ShapeRef.new(shape: CollaborationConfiguredAudienceModelAssociationSummaryList, required: true, location_name: "collaborationConfiguredAudienceModelAssociationSummaries"))
     ListCollaborationConfiguredAudienceModelAssociationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListCollaborationConfiguredAudienceModelAssociationsOutput.struct_class = Types::ListCollaborationConfiguredAudienceModelAssociationsOutput
+
+    ListCollaborationIdNamespaceAssociationsInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    ListCollaborationIdNamespaceAssociationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCollaborationIdNamespaceAssociationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCollaborationIdNamespaceAssociationsInput.struct_class = Types::ListCollaborationIdNamespaceAssociationsInput
+
+    ListCollaborationIdNamespaceAssociationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCollaborationIdNamespaceAssociationsOutput.add_member(:collaboration_id_namespace_association_summaries, Shapes::ShapeRef.new(shape: CollaborationIdNamespaceAssociationSummaryList, required: true, location_name: "collaborationIdNamespaceAssociationSummaries"))
+    ListCollaborationIdNamespaceAssociationsOutput.struct_class = Types::ListCollaborationIdNamespaceAssociationsOutput
 
     ListCollaborationPrivacyBudgetTemplatesInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     ListCollaborationPrivacyBudgetTemplatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -1186,6 +1441,24 @@ module Aws::CleanRooms
     ListConfiguredTablesOutput.add_member(:configured_table_summaries, Shapes::ShapeRef.new(shape: ConfiguredTableSummaryList, required: true, location_name: "configuredTableSummaries"))
     ListConfiguredTablesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListConfiguredTablesOutput.struct_class = Types::ListConfiguredTablesOutput
+
+    ListIdMappingTablesInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListIdMappingTablesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListIdMappingTablesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListIdMappingTablesInput.struct_class = Types::ListIdMappingTablesInput
+
+    ListIdMappingTablesOutput.add_member(:id_mapping_table_summaries, Shapes::ShapeRef.new(shape: IdMappingTableSummaryList, required: true, location_name: "idMappingTableSummaries"))
+    ListIdMappingTablesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListIdMappingTablesOutput.struct_class = Types::ListIdMappingTablesOutput
+
+    ListIdNamespaceAssociationsInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListIdNamespaceAssociationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListIdNamespaceAssociationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListIdNamespaceAssociationsInput.struct_class = Types::ListIdNamespaceAssociationsInput
+
+    ListIdNamespaceAssociationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListIdNamespaceAssociationsOutput.add_member(:id_namespace_association_summaries, Shapes::ShapeRef.new(shape: IdNamespaceAssociationSummaryList, required: true, location_name: "idNamespaceAssociationSummaries"))
+    ListIdNamespaceAssociationsOutput.struct_class = Types::ListIdNamespaceAssociationsOutput
 
     ListMembersInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     ListMembersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -1326,6 +1599,13 @@ module Aws::CleanRooms
 
     PaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: QueryComputePaymentConfig, required: true, location_name: "queryCompute"))
     PaymentConfiguration.struct_class = Types::PaymentConfiguration
+
+    PopulateIdMappingTableInput.add_member(:id_mapping_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "idMappingTableIdentifier"))
+    PopulateIdMappingTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    PopulateIdMappingTableInput.struct_class = Types::PopulateIdMappingTableInput
+
+    PopulateIdMappingTableOutput.add_member(:id_mapping_job_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "idMappingJobId"))
+    PopulateIdMappingTableOutput.struct_class = Types::PopulateIdMappingTableOutput
 
     PreviewPrivacyImpactInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     PreviewPrivacyImpactInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PreviewPrivacyImpactParametersInput, required: true, location_name: "parameters"))
@@ -1481,6 +1761,17 @@ module Aws::CleanRooms
     QueryComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
     QueryComputePaymentConfig.struct_class = Types::QueryComputePaymentConfig
 
+    QueryConstraint.add_member(:require_overlap, Shapes::ShapeRef.new(shape: QueryConstraintRequireOverlap, location_name: "requireOverlap"))
+    QueryConstraint.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    QueryConstraint.add_member_subclass(:require_overlap, Types::QueryConstraint::RequireOverlap)
+    QueryConstraint.add_member_subclass(:unknown, Types::QueryConstraint::Unknown)
+    QueryConstraint.struct_class = Types::QueryConstraint
+
+    QueryConstraintList.member = Shapes::ShapeRef.new(shape: QueryConstraint)
+
+    QueryConstraintRequireOverlap.add_member(:columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "columns"))
+    QueryConstraintRequireOverlap.struct_class = Types::QueryConstraintRequireOverlap
+
     QueryTables.member = Shapes::ShapeRef.new(shape: TableAlias)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1503,6 +1794,7 @@ module Aws::CleanRooms
     Schema.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     Schema.add_member(:type, Shapes::ShapeRef.new(shape: SchemaType, required: true, location_name: "type"))
     Schema.add_member(:schema_status_details, Shapes::ShapeRef.new(shape: SchemaStatusDetailList, required: true, location_name: "schemaStatusDetails"))
+    Schema.add_member(:schema_type_properties, Shapes::ShapeRef.new(shape: SchemaTypeProperties, location_name: "schemaTypeProperties"))
     Schema.struct_class = Types::Schema
 
     SchemaAnalysisRuleList.member = Shapes::ShapeRef.new(shape: AnalysisRule)
@@ -1543,6 +1835,12 @@ module Aws::CleanRooms
     SchemaSummary.struct_class = Types::SchemaSummary
 
     SchemaSummaryList.member = Shapes::ShapeRef.new(shape: SchemaSummary)
+
+    SchemaTypeProperties.add_member(:id_mapping_table, Shapes::ShapeRef.new(shape: IdMappingTableSchemaTypeProperties, location_name: "idMappingTable"))
+    SchemaTypeProperties.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SchemaTypeProperties.add_member_subclass(:id_mapping_table, Types::SchemaTypeProperties::IdMappingTable)
+    SchemaTypeProperties.add_member_subclass(:unknown, Types::SchemaTypeProperties::Unknown)
+    SchemaTypeProperties.struct_class = Types::SchemaTypeProperties
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.add_member(:quota_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaName"))
@@ -1636,6 +1934,25 @@ module Aws::CleanRooms
     UpdateConfiguredTableOutput.add_member(:configured_table, Shapes::ShapeRef.new(shape: ConfiguredTable, required: true, location_name: "configuredTable"))
     UpdateConfiguredTableOutput.struct_class = Types::UpdateConfiguredTableOutput
 
+    UpdateIdMappingTableInput.add_member(:id_mapping_table_identifier, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "idMappingTableIdentifier"))
+    UpdateIdMappingTableInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdateIdMappingTableInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    UpdateIdMappingTableInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "kmsKeyArn"))
+    UpdateIdMappingTableInput.struct_class = Types::UpdateIdMappingTableInput
+
+    UpdateIdMappingTableOutput.add_member(:id_mapping_table, Shapes::ShapeRef.new(shape: IdMappingTable, required: true, location_name: "idMappingTable"))
+    UpdateIdMappingTableOutput.struct_class = Types::UpdateIdMappingTableOutput
+
+    UpdateIdNamespaceAssociationInput.add_member(:id_namespace_association_identifier, Shapes::ShapeRef.new(shape: IdNamespaceAssociationIdentifier, required: true, location: "uri", location_name: "idNamespaceAssociationIdentifier"))
+    UpdateIdNamespaceAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdateIdNamespaceAssociationInput.add_member(:name, Shapes::ShapeRef.new(shape: GenericResourceName, location_name: "name"))
+    UpdateIdNamespaceAssociationInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    UpdateIdNamespaceAssociationInput.add_member(:id_mapping_config, Shapes::ShapeRef.new(shape: IdMappingConfig, location_name: "idMappingConfig"))
+    UpdateIdNamespaceAssociationInput.struct_class = Types::UpdateIdNamespaceAssociationInput
+
+    UpdateIdNamespaceAssociationOutput.add_member(:id_namespace_association, Shapes::ShapeRef.new(shape: IdNamespaceAssociation, required: true, location_name: "idNamespaceAssociation"))
+    UpdateIdNamespaceAssociationOutput.struct_class = Types::UpdateIdNamespaceAssociationOutput
+
     UpdateMembershipInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     UpdateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, location_name: "queryLogStatus"))
     UpdateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
@@ -1680,9 +1997,10 @@ module Aws::CleanRooms
 
       api.metadata = {
         "apiVersion" => "2022-02-17",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cleanrooms",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Clean Rooms Service",
         "serviceId" => "CleanRooms",
         "signatureVersion" => "v4",
@@ -1816,6 +2134,36 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_id_mapping_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIdMappingTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idmappingtables"
+        o.input = Shapes::ShapeRef.new(shape: CreateIdMappingTableInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateIdMappingTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_id_namespace_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIdNamespaceAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idnamespaceassociations"
+        o.input = Shapes::ShapeRef.new(shape: CreateIdNamespaceAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateIdNamespaceAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_membership, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMembership"
         o.http_method = "POST"
@@ -1925,6 +2273,32 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_id_mapping_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIdMappingTable"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIdMappingTableInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIdMappingTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_id_namespace_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIdNamespaceAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIdNamespaceAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIdNamespaceAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_member, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMember"
         o.http_method = "DELETE"
@@ -2017,6 +2391,19 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_collaboration_id_namespace_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCollaborationIdNamespaceAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCollaborationIdNamespaceAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCollaborationIdNamespaceAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_collaboration_privacy_budget_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCollaborationPrivacyBudgetTemplate"
         o.http_method = "GET"
@@ -2075,6 +2462,32 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetConfiguredTableAssociationInput)
         o.output = Shapes::ShapeRef.new(shape: GetConfiguredTableAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_id_mapping_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIdMappingTable"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetIdMappingTableInput)
+        o.output = Shapes::ShapeRef.new(shape: GetIdMappingTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_id_namespace_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIdNamespaceAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetIdNamespaceAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetIdNamespaceAssociationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2204,6 +2617,25 @@ module Aws::CleanRooms
         )
       end)
 
+      api.add_operation(:list_collaboration_id_namespace_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCollaborationIdNamespaceAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/idnamespaceassociations"
+        o.input = Shapes::ShapeRef.new(shape: ListCollaborationIdNamespaceAssociationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCollaborationIdNamespaceAssociationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_collaboration_privacy_budget_templates, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCollaborationPrivacyBudgetTemplates"
         o.http_method = "GET"
@@ -2304,6 +2736,44 @@ module Aws::CleanRooms
         o.http_request_uri = "/configuredTables"
         o.input = Shapes::ShapeRef.new(shape: ListConfiguredTablesInput)
         o.output = Shapes::ShapeRef.new(shape: ListConfiguredTablesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_id_mapping_tables, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIdMappingTables"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idmappingtables"
+        o.input = Shapes::ShapeRef.new(shape: ListIdMappingTablesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListIdMappingTablesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_id_namespace_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIdNamespaceAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idnamespaceassociations"
+        o.input = Shapes::ShapeRef.new(shape: ListIdNamespaceAssociationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListIdNamespaceAssociationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2439,6 +2909,20 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:populate_id_mapping_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PopulateIdMappingTable"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}/populate"
+        o.input = Shapes::ShapeRef.new(shape: PopulateIdMappingTableInput)
+        o.output = Shapes::ShapeRef.new(shape: PopulateIdMappingTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:preview_privacy_impact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PreviewPrivacyImpact"
         o.http_method = "POST"
@@ -2559,6 +3043,32 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAssociationInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAssociationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_id_mapping_table, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIdMappingTable"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idmappingtables/{idMappingTableIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIdMappingTableInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIdMappingTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_id_namespace_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIdNamespaceAssociation"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/idnamespaceassociations/{idNamespaceAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIdNamespaceAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIdNamespaceAssociationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

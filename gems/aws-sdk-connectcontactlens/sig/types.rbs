@@ -65,9 +65,17 @@ module Aws::ConnectContactLens
       SENSITIVE: []
     end
 
+    class PostContactSummary
+      attr_accessor content: ::String
+      attr_accessor status: ("FAILED" | "COMPLETED")
+      attr_accessor failure_code: ("QUOTA_EXCEEDED" | "INSUFFICIENT_CONVERSATION_CONTENT" | "FAILED_SAFETY_GUIDELINES" | "INVALID_ANALYSIS_CONFIGURATION" | "INTERNAL_ERROR")
+      SENSITIVE: []
+    end
+
     class RealtimeContactAnalysisSegment
       attr_accessor transcript: Types::Transcript
       attr_accessor categories: Types::Categories
+      attr_accessor post_contact_summary: Types::PostContactSummary
       SENSITIVE: []
     end
 

@@ -373,6 +373,9 @@ module Aws::EntityResolution
     class IdMappingJobMetrics
       attr_accessor input_records: ::Integer
       attr_accessor records_not_processed: ::Integer
+      attr_accessor total_mapped_records: ::Integer
+      attr_accessor total_mapped_source_records: ::Integer
+      attr_accessor total_mapped_target_records: ::Integer
       attr_accessor total_records_processed: ::Integer
       SENSITIVE: []
     end
@@ -384,9 +387,18 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class IdMappingRuleBasedProperties
+      attr_accessor attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")
+      attr_accessor record_matching_model: ("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")
+      attr_accessor rule_definition_type: ("SOURCE" | "TARGET")
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
     class IdMappingTechniques
-      attr_accessor id_mapping_type: ("PROVIDER")
+      attr_accessor id_mapping_type: ("PROVIDER" | "RULE_BASED")
       attr_accessor provider_properties: Types::ProviderProperties
+      attr_accessor rule_based_properties: Types::IdMappingRuleBasedProperties
       SENSITIVE: []
     end
 
@@ -411,9 +423,15 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class IdNamespaceIdMappingWorkflowMetadata
+      attr_accessor id_mapping_type: ("PROVIDER" | "RULE_BASED")
+      SENSITIVE: []
+    end
+
     class IdNamespaceIdMappingWorkflowProperties
-      attr_accessor id_mapping_type: ("PROVIDER")
+      attr_accessor id_mapping_type: ("PROVIDER" | "RULE_BASED")
       attr_accessor provider_properties: Types::NamespaceProviderProperties
+      attr_accessor rule_based_properties: Types::NamespaceRuleBasedProperties
       SENSITIVE: []
     end
 
@@ -426,6 +444,7 @@ module Aws::EntityResolution
     class IdNamespaceSummary
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor id_mapping_workflow_properties: ::Array[Types::IdNamespaceIdMappingWorkflowMetadata]
       attr_accessor id_namespace_arn: ::String
       attr_accessor id_namespace_name: ::String
       attr_accessor type: ("SOURCE" | "TARGET")
@@ -590,6 +609,14 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class NamespaceRuleBasedProperties
+      attr_accessor attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")
+      attr_accessor record_matching_models: ::Array[("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")]
+      attr_accessor rule_definition_types: ::Array[("SOURCE" | "TARGET")]
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
     class OutputAttribute
       attr_accessor hashed: bool
       attr_accessor name: ::String
@@ -700,6 +727,7 @@ module Aws::EntityResolution
 
     class RuleBasedProperties
       attr_accessor attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")
+      attr_accessor match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")
       attr_accessor rules: ::Array[Types::Rule]
       SENSITIVE: []
     end
@@ -707,6 +735,7 @@ module Aws::EntityResolution
     class SchemaInputAttribute
       attr_accessor field_name: ::String
       attr_accessor group_name: ::String
+      attr_accessor hashed: bool
       attr_accessor match_key: ::String
       attr_accessor sub_type: ::String
       attr_accessor type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID")

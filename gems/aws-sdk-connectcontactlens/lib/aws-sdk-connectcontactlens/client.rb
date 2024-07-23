@@ -434,7 +434,7 @@ module Aws::ConnectContactLens
     #   The identifier of the contact.
     #
     # @option params [Integer] :max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -476,6 +476,9 @@ module Aws::ConnectContactLens
     #   resp.segments[0].categories.matched_details["CategoryName"].points_of_interest #=> Array
     #   resp.segments[0].categories.matched_details["CategoryName"].points_of_interest[0].begin_offset_millis #=> Integer
     #   resp.segments[0].categories.matched_details["CategoryName"].points_of_interest[0].end_offset_millis #=> Integer
+    #   resp.segments[0].post_contact_summary.content #=> String
+    #   resp.segments[0].post_contact_summary.status #=> String, one of "FAILED", "COMPLETED"
+    #   resp.segments[0].post_contact_summary.failure_code #=> String, one of "QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INVALID_ANALYSIS_CONFIGURATION", "INTERNAL_ERROR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/ListRealtimeContactAnalysisSegments AWS API Documentation
@@ -500,7 +503,7 @@ module Aws::ConnectContactLens
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcontactlens'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

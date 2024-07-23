@@ -2510,6 +2510,8 @@ module Aws::AppSync
     #   * {Types::ListApiKeysResponse#api_keys #api_keys} => Array&lt;Types::ApiKey&gt;
     #   * {Types::ListApiKeysResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_api_keys({
@@ -2553,6 +2555,8 @@ module Aws::AppSync
     #
     #   * {Types::ListDataSourcesResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
     #   * {Types::ListDataSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2620,6 +2624,8 @@ module Aws::AppSync
     #   * {Types::ListDomainNamesResponse#domain_name_configs #domain_name_configs} => Array&lt;Types::DomainNameConfig&gt;
     #   * {Types::ListDomainNamesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_domain_names({
@@ -2663,6 +2669,8 @@ module Aws::AppSync
     #
     #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionConfiguration&gt;
     #   * {Types::ListFunctionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2722,6 +2730,8 @@ module Aws::AppSync
     #
     #   * {Types::ListGraphqlApisResponse#graphql_apis #graphql_apis} => Array&lt;Types::GraphqlApi&gt;
     #   * {Types::ListGraphqlApisResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2816,6 +2826,8 @@ module Aws::AppSync
     #   * {Types::ListResolversResponse#resolvers #resolvers} => Array&lt;Types::Resolver&gt;
     #   * {Types::ListResolversResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resolvers({
@@ -2880,6 +2892,8 @@ module Aws::AppSync
     #   * {Types::ListResolversByFunctionResponse#resolvers #resolvers} => Array&lt;Types::Resolver&gt;
     #   * {Types::ListResolversByFunctionResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resolvers_by_function({
@@ -2940,6 +2954,8 @@ module Aws::AppSync
     #
     #   * {Types::ListSourceApiAssociationsResponse#source_api_association_summaries #source_api_association_summaries} => Array&lt;Types::SourceApiAssociationSummary&gt;
     #   * {Types::ListSourceApiAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3020,6 +3036,8 @@ module Aws::AppSync
     #   * {Types::ListTypesResponse#types #types} => Array&lt;Types::Type&gt;
     #   * {Types::ListTypesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_types({
@@ -3076,6 +3094,8 @@ module Aws::AppSync
     #
     #   * {Types::ListTypesByAssociationResponse#types #types} => Array&lt;Types::Type&gt;
     #   * {Types::ListTypesByAssociationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4280,7 +4300,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

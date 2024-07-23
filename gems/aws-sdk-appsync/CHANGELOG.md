@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2024-07-23)
+------------------
+
+* Feature - Adding support for paginators in AppSync list APIs
+
 1.81.0 (2024-07-02)
 ------------------
 

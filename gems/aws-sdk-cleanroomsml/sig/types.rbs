@@ -19,51 +19,52 @@ module Aws::CleanRoomsML
     end
 
     class AudienceExportJobSummary
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor name: ::String
       attr_accessor audience_generation_job_arn: ::String
       attr_accessor audience_size: Types::AudienceSize
-      attr_accessor create_time: ::Time
       attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor output_location: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE")
       attr_accessor status_details: Types::StatusDetails
-      attr_accessor update_time: ::Time
+      attr_accessor output_location: ::String
       SENSITIVE: []
     end
 
     class AudienceGenerationJobDataSource
       attr_accessor data_source: Types::S3ConfigMap
       attr_accessor role_arn: ::String
-      SENSITIVE: []
+      attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters
+      SENSITIVE: [:sql_parameters]
     end
 
     class AudienceGenerationJobSummary
-      attr_accessor audience_generation_job_arn: ::String
-      attr_accessor collaboration_id: ::String
-      attr_accessor configured_audience_model_arn: ::String
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor started_by: ::String
-      attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor update_time: ::Time
+      attr_accessor audience_generation_job_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor collaboration_id: ::String
+      attr_accessor started_by: ::String
       SENSITIVE: []
     end
 
     class AudienceModelSummary
-      attr_accessor audience_model_arn: ::String
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
-      attr_accessor training_dataset_arn: ::String
       attr_accessor update_time: ::Time
+      attr_accessor audience_model_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor training_dataset_arn: ::String
+      attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
     class AudienceQualityMetrics
-      attr_accessor recall_metric: ::Float
       attr_accessor relevance_metrics: ::Array[Types::RelevanceMetric]
+      attr_accessor recall_metric: ::Float
       SENSITIVE: []
     end
 
@@ -74,8 +75,8 @@ module Aws::CleanRoomsML
     end
 
     class AudienceSizeConfig
-      attr_accessor audience_size_bins: ::Array[::Integer]
       attr_accessor audience_size_type: ("ABSOLUTE" | "PERCENTAGE")
+      attr_accessor audience_size_bins: ::Array[::Integer]
       SENSITIVE: []
     end
 
@@ -92,14 +93,14 @@ module Aws::CleanRoomsML
     end
 
     class ConfiguredAudienceModelSummary
-      attr_accessor audience_model_arn: ::String
-      attr_accessor configured_audience_model_arn: ::String
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig
-      attr_accessor status: ("ACTIVE")
       attr_accessor update_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor audience_model_arn: ::String
+      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig
+      attr_accessor description: ::String
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor status: ("ACTIVE")
       SENSITIVE: []
     end
 
@@ -109,13 +110,13 @@ module Aws::CleanRoomsML
     end
 
     class CreateAudienceModelRequest
-      attr_accessor description: ::String
-      attr_accessor kms_key_arn: ::String
-      attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor training_data_end_time: ::Time
       attr_accessor training_data_start_time: ::Time
+      attr_accessor training_data_end_time: ::Time
+      attr_accessor name: ::String
       attr_accessor training_dataset_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -125,15 +126,15 @@ module Aws::CleanRoomsML
     end
 
     class CreateConfiguredAudienceModelRequest
-      attr_accessor audience_model_arn: ::String
-      attr_accessor audience_size_config: Types::AudienceSizeConfig
-      attr_accessor child_resource_tag_on_create_policy: ("FROM_PARENT_RESOURCE" | "NONE")
-      attr_accessor description: ::String
-      attr_accessor min_matching_seed_size: ::Integer
       attr_accessor name: ::String
+      attr_accessor audience_model_arn: ::String
       attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig
+      attr_accessor description: ::String
       attr_accessor shared_audience_metrics: ::Array[("ALL" | "NONE")]
+      attr_accessor min_matching_seed_size: ::Integer
+      attr_accessor audience_size_config: Types::AudienceSizeConfig
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor child_resource_tag_on_create_policy: ("FROM_PARENT_RESOURCE" | "NONE")
       SENSITIVE: []
     end
 
@@ -143,11 +144,11 @@ module Aws::CleanRoomsML
     end
 
     class CreateTrainingDatasetRequest
-      attr_accessor description: ::String
       attr_accessor name: ::String
       attr_accessor role_arn: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor training_data: ::Array[Types::Dataset]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -162,14 +163,14 @@ module Aws::CleanRoomsML
     end
 
     class Dataset
-      attr_accessor input_config: Types::DatasetInputConfig
       attr_accessor type: ("INTERACTIONS")
+      attr_accessor input_config: Types::DatasetInputConfig
       SENSITIVE: []
     end
 
     class DatasetInputConfig
-      attr_accessor data_source: Types::DataSource
       attr_accessor schema: ::Array[Types::ColumnSchema]
+      attr_accessor data_source: Types::DataSource
       SENSITIVE: []
     end
 
@@ -204,20 +205,21 @@ module Aws::CleanRoomsML
     end
 
     class GetAudienceGenerationJobResponse
-      attr_accessor audience_generation_job_arn: ::String
-      attr_accessor collaboration_id: ::String
-      attr_accessor configured_audience_model_arn: ::String
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor include_seed_in_output: bool
-      attr_accessor metrics: Types::AudienceQualityMetrics
+      attr_accessor update_time: ::Time
+      attr_accessor audience_generation_job_arn: ::String
       attr_accessor name: ::String
-      attr_accessor seed_audience: Types::AudienceGenerationJobDataSource
-      attr_accessor started_by: ::String
+      attr_accessor description: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor status_details: Types::StatusDetails
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor seed_audience: Types::AudienceGenerationJobDataSource
+      attr_accessor include_seed_in_output: bool
+      attr_accessor collaboration_id: ::String
+      attr_accessor metrics: Types::AudienceQualityMetrics
+      attr_accessor started_by: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor update_time: ::Time
+      attr_accessor protected_query_identifier: ::String
       SENSITIVE: []
     end
 
@@ -227,18 +229,18 @@ module Aws::CleanRoomsML
     end
 
     class GetAudienceModelResponse
-      attr_accessor audience_model_arn: ::String
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor kms_key_arn: ::String
+      attr_accessor update_time: ::Time
+      attr_accessor training_data_start_time: ::Time
+      attr_accessor training_data_end_time: ::Time
+      attr_accessor audience_model_arn: ::String
       attr_accessor name: ::String
+      attr_accessor training_dataset_arn: ::String
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor status_details: Types::StatusDetails
+      attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor training_data_end_time: ::Time
-      attr_accessor training_data_start_time: ::Time
-      attr_accessor training_dataset_arn: ::String
-      attr_accessor update_time: ::Time
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -260,19 +262,19 @@ module Aws::CleanRoomsML
     end
 
     class GetConfiguredAudienceModelResponse
-      attr_accessor audience_model_arn: ::String
-      attr_accessor audience_size_config: Types::AudienceSizeConfig
-      attr_accessor child_resource_tag_on_create_policy: ("FROM_PARENT_RESOURCE" | "NONE")
-      attr_accessor configured_audience_model_arn: ::String
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor min_matching_seed_size: ::Integer
-      attr_accessor name: ::String
-      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig
-      attr_accessor shared_audience_metrics: ::Array[("ALL" | "NONE")]
-      attr_accessor status: ("ACTIVE")
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor update_time: ::Time
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor audience_model_arn: ::String
+      attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE")
+      attr_accessor shared_audience_metrics: ::Array[("ALL" | "NONE")]
+      attr_accessor min_matching_seed_size: ::Integer
+      attr_accessor audience_size_config: Types::AudienceSizeConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor child_resource_tag_on_create_policy: ("FROM_PARENT_RESOURCE" | "NONE")
       SENSITIVE: []
     end
 
@@ -283,72 +285,72 @@ module Aws::CleanRoomsML
 
     class GetTrainingDatasetResponse
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor role_arn: ::String
-      attr_accessor status: ("ACTIVE")
-      attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor training_data: ::Array[Types::Dataset]
-      attr_accessor training_dataset_arn: ::String
       attr_accessor update_time: ::Time
+      attr_accessor training_dataset_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor training_data: ::Array[Types::Dataset]
+      attr_accessor status: ("ACTIVE")
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
     class GlueDataSource
-      attr_accessor catalog_id: ::String
-      attr_accessor database_name: ::String
       attr_accessor table_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
 
     class ListAudienceExportJobsRequest
-      attr_accessor audience_generation_job_arn: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor audience_generation_job_arn: ::String
       SENSITIVE: []
     end
 
     class ListAudienceExportJobsResponse
-      attr_accessor audience_export_jobs: ::Array[Types::AudienceExportJobSummary]
       attr_accessor next_token: ::String
+      attr_accessor audience_export_jobs: ::Array[Types::AudienceExportJobSummary]
       SENSITIVE: []
     end
 
     class ListAudienceGenerationJobsRequest
-      attr_accessor collaboration_id: ::String
-      attr_accessor configured_audience_model_arn: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor configured_audience_model_arn: ::String
+      attr_accessor collaboration_id: ::String
       SENSITIVE: []
     end
 
     class ListAudienceGenerationJobsResponse
-      attr_accessor audience_generation_jobs: ::Array[Types::AudienceGenerationJobSummary]
       attr_accessor next_token: ::String
+      attr_accessor audience_generation_jobs: ::Array[Types::AudienceGenerationJobSummary]
       SENSITIVE: []
     end
 
     class ListAudienceModelsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListAudienceModelsResponse
-      attr_accessor audience_models: ::Array[Types::AudienceModelSummary]
       attr_accessor next_token: ::String
+      attr_accessor audience_models: ::Array[Types::AudienceModelSummary]
       SENSITIVE: []
     end
 
     class ListConfiguredAudienceModelsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListConfiguredAudienceModelsResponse
-      attr_accessor configured_audience_models: ::Array[Types::ConfiguredAudienceModelSummary]
       attr_accessor next_token: ::String
+      attr_accessor configured_audience_models: ::Array[Types::ConfiguredAudienceModelSummary]
       SENSITIVE: []
     end
 
@@ -363,8 +365,8 @@ module Aws::CleanRoomsML
     end
 
     class ListTrainingDatasetsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -374,11 +376,18 @@ module Aws::CleanRoomsML
       SENSITIVE: []
     end
 
+    class ProtectedQuerySQLParameters
+      attr_accessor query_string: ::String
+      attr_accessor analysis_template_arn: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class PutConfiguredAudienceModelPolicyRequest
       attr_accessor configured_audience_model_arn: ::String
       attr_accessor configured_audience_model_policy: ::String
-      attr_accessor policy_existence_condition: ("POLICY_MUST_EXIST" | "POLICY_MUST_NOT_EXIST")
       attr_accessor previous_policy_hash: ::String
+      attr_accessor policy_existence_condition: ("POLICY_MUST_EXIST" | "POLICY_MUST_NOT_EXIST")
       SENSITIVE: []
     end
 
@@ -410,20 +419,20 @@ module Aws::CleanRoomsML
     end
 
     class StartAudienceExportJobRequest
+      attr_accessor name: ::String
       attr_accessor audience_generation_job_arn: ::String
       attr_accessor audience_size: Types::AudienceSize
       attr_accessor description: ::String
-      attr_accessor name: ::String
       SENSITIVE: []
     end
 
     class StartAudienceGenerationJobRequest
-      attr_accessor collaboration_id: ::String
-      attr_accessor configured_audience_model_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor include_seed_in_output: bool
       attr_accessor name: ::String
+      attr_accessor configured_audience_model_arn: ::String
       attr_accessor seed_audience: Types::AudienceGenerationJobDataSource
+      attr_accessor include_seed_in_output: bool
+      attr_accessor collaboration_id: ::String
+      attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -434,8 +443,8 @@ module Aws::CleanRoomsML
     end
 
     class StatusDetails
-      attr_accessor message: ::String
       attr_accessor status_code: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -450,11 +459,11 @@ module Aws::CleanRoomsML
 
     class TrainingDatasetSummary
       attr_accessor create_time: ::Time
-      attr_accessor description: ::String
+      attr_accessor update_time: ::Time
+      attr_accessor training_dataset_arn: ::String
       attr_accessor name: ::String
       attr_accessor status: ("ACTIVE")
-      attr_accessor training_dataset_arn: ::String
-      attr_accessor update_time: ::Time
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -468,13 +477,13 @@ module Aws::CleanRoomsML
     end
 
     class UpdateConfiguredAudienceModelRequest
-      attr_accessor audience_model_arn: ::String
-      attr_accessor audience_size_config: Types::AudienceSizeConfig
       attr_accessor configured_audience_model_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor min_matching_seed_size: ::Integer
       attr_accessor output_config: Types::ConfiguredAudienceModelOutputConfig
+      attr_accessor audience_model_arn: ::String
       attr_accessor shared_audience_metrics: ::Array[("ALL" | "NONE")]
+      attr_accessor min_matching_seed_size: ::Integer
+      attr_accessor audience_size_config: Types::AudienceSizeConfig
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 

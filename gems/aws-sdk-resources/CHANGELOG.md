@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.199.0 (2024-07-23)
+------------------
+
 * Feature - Removed a dependency on the deprecated `aws-sdk-mobile` gem.
 
 3.198.0 (2024-07-08)
