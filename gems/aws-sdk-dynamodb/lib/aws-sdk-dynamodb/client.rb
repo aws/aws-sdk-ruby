@@ -455,7 +455,8 @@ module Aws::DynamoDB
     # stored in DynamoDB, using PartiQL. Each read statement in a
     # `BatchExecuteStatement` must specify an equality condition on all key
     # attributes. This enforces that each `SELECT` statement in a batch
-    # returns at most a single item.
+    # returns at most a single item. For more information, see [Running
+    # batch operations with PartiQL for DynamoDB ][1].
     #
     # <note markdown="1"> The entire batch must consist of either read statements or write
     # statements, you cannot mix both in one batch.
@@ -464,12 +465,13 @@ module Aws::DynamoDB
     #
     # A HTTP 200 response does not mean that all statements in the
     # BatchExecuteStatement succeeded. Error details for individual
-    # statements can be found under the [Error][1] field of the
+    # statements can be found under the [Error][2] field of the
     # `BatchStatementResponse` for each statement.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchStatementResponse.html#DDB-Type-BatchStatementResponse-Error
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-reference.multiplestatements.batching.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchStatementResponse.html#DDB-Type-BatchStatementResponse-Error
     #
     # @option params [required, Array<Types::BatchStatementRequest>] :statements
     #   The list of PartiQL statements representing the batch to run.
@@ -857,9 +859,13 @@ module Aws::DynamoDB
     # request with those unprocessed items until all items have been
     # processed.
     #
-    # If *none* of the items can be processed due to insufficient
-    # provisioned throughput on all of the tables in the request, then
-    # `BatchWriteItem` returns a `ProvisionedThroughputExceededException`.
+    # For tables and indexes with provisioned capacity, if none of the items
+    # can be processed due to insufficient provisioned throughput on all of
+    # the tables in the request, then `BatchWriteItem` returns a
+    # `ProvisionedThroughputExceededException`. For all tables and indexes,
+    # if none of the items can be processed due to other throttling
+    # scenarios (such as exceeding partition level limits), then
+    # `BatchWriteItem` returns a `ThrottlingException`.
     #
     # If DynamoDB returns any unprocessed items, you should retry the batch
     # operation on those items. However, *we strongly recommend that you use
@@ -2224,7 +2230,8 @@ module Aws::DynamoDB
     #
     # <note markdown="1"> DynamoDB might continue to accept data read and write operations, such
     # as `GetItem` and `PutItem`, on a table in the `DELETING` state until
-    # the table deletion is complete.
+    # the table deletion is complete. For the full list of table states, see
+    # [TableStatus][1].
     #
     #  </note>
     #
@@ -2235,6 +2242,10 @@ module Aws::DynamoDB
     # the stream is automatically deleted after 24 hours.
     #
     # Use the `DescribeTable` action to check the status of the table.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TableDescription.html#DDB-Type-TableDescription-TableStatus
     #
     # @option params [required, String] :table_name
     #   The name of the table to delete. You can also provide the Amazon
@@ -8365,7 +8376,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

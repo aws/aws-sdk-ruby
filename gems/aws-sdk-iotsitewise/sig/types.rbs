@@ -1044,7 +1044,7 @@ module Aws::IoTSiteWise
       attr_accessor gateway_id: ::String
       attr_accessor capability_namespace: ::String
       attr_accessor capability_configuration: ::String
-      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -1235,13 +1235,14 @@ module Aws::IoTSiteWise
 
     class GatewayCapabilitySummary
       attr_accessor capability_namespace: ::String
-      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
     class GatewayPlatform
       attr_accessor greengrass: Types::Greengrass
       attr_accessor greengrass_v2: Types::GreengrassV2
+      attr_accessor siemens_ie: Types::SiemensIE
       SENSITIVE: []
     end
 
@@ -1857,6 +1858,11 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class SiemensIE
+      attr_accessor iot_core_thing_name: ::String
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2025,7 +2031,7 @@ module Aws::IoTSiteWise
 
     class UpdateGatewayCapabilityConfigurationResponse
       attr_accessor capability_namespace: ::String
-      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 

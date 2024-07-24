@@ -224,7 +224,8 @@ module Aws
                                                        list: {
                                                          join_columns: Array[::String],
                                                          allowed_join_operators: Array[("OR" | "AND")]?,
-                                                         list_columns: Array[::String]
+                                                         list_columns: Array[::String],
+                                                         additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?
                                                        }?,
                                                        aggregation: {
                                                          aggregate_columns: Array[
@@ -244,11 +245,14 @@ module Aws
                                                              minimum: ::Integer,
                                                              type: ("COUNT_DISTINCT")
                                                            },
-                                                         ]
+                                                         ],
+                                                         additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?
                                                        }?,
                                                        custom: {
                                                          allowed_analyses: Array[::String],
                                                          allowed_analysis_providers: Array[::String]?,
+                                                         additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?,
+                                                         disallowed_output_columns: Array[::String]?,
                                                          differential_privacy: {
                                                            columns: Array[
                                                              {
@@ -276,6 +280,34 @@ module Aws
                                                  ?tags: Hash[::String, ::String]
                                                ) -> _CreateConfiguredTableAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredTableAssociationResponseSuccess
+
+      interface _CreateConfiguredTableAssociationAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfiguredTableAssociationAnalysisRuleOutput]
+        def analysis_rule: () -> Types::ConfiguredTableAssociationAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_configured_table_association_analysis_rule-instance_method
+      def create_configured_table_association_analysis_rule: (
+                                                               membership_identifier: ::String,
+                                                               configured_table_association_identifier: ::String,
+                                                               analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM"),
+                                                               analysis_rule_policy: {
+                                                                 v1: {
+                                                                   list: {
+                                                                     allowed_result_receivers: Array[::String]?,
+                                                                     allowed_additional_analyses: Array[::String]?
+                                                                   }?,
+                                                                   aggregation: {
+                                                                     allowed_result_receivers: Array[::String]?,
+                                                                     allowed_additional_analyses: Array[::String]?
+                                                                   }?,
+                                                                   custom: {
+                                                                     allowed_result_receivers: Array[::String]?,
+                                                                     allowed_additional_analyses: Array[::String]?
+                                                                   }?
+                                                                 }?
+                                                               }
+                                                             ) -> _CreateConfiguredTableAssociationAnalysisRuleResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredTableAssociationAnalysisRuleResponseSuccess
 
       interface _CreateIdMappingTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdMappingTableOutput]
@@ -418,6 +450,17 @@ module Aws
                                                  membership_identifier: ::String
                                                ) -> _DeleteConfiguredTableAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfiguredTableAssociationResponseSuccess
+
+      interface _DeleteConfiguredTableAssociationAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfiguredTableAssociationAnalysisRuleOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_configured_table_association_analysis_rule-instance_method
+      def delete_configured_table_association_analysis_rule: (
+                                                               membership_identifier: ::String,
+                                                               configured_table_association_identifier: ::String,
+                                                               analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                                             ) -> _DeleteConfiguredTableAssociationAnalysisRuleResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfiguredTableAssociationAnalysisRuleResponseSuccess
 
       interface _DeleteIdMappingTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdMappingTableOutput]
@@ -575,6 +618,18 @@ module Aws
                                               membership_identifier: ::String
                                             ) -> _GetConfiguredTableAssociationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredTableAssociationResponseSuccess
+
+      interface _GetConfiguredTableAssociationAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfiguredTableAssociationAnalysisRuleOutput]
+        def analysis_rule: () -> Types::ConfiguredTableAssociationAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_configured_table_association_analysis_rule-instance_method
+      def get_configured_table_association_analysis_rule: (
+                                                            membership_identifier: ::String,
+                                                            configured_table_association_identifier: ::String,
+                                                            analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                                          ) -> _GetConfiguredTableAssociationAnalysisRuleResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredTableAssociationAnalysisRuleResponseSuccess
 
       interface _GetIdMappingTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIdMappingTableOutput]
@@ -946,6 +1001,9 @@ module Aws
                                          result_format: ("CSV" | "PARQUET"),
                                          bucket: ::String,
                                          key_prefix: ::String?
+                                       }?,
+                                       member: {
+                                         account_id: ::String
                                        }?
                                      }
                                    }
@@ -1034,7 +1092,8 @@ module Aws
                                                        list: {
                                                          join_columns: Array[::String],
                                                          allowed_join_operators: Array[("OR" | "AND")]?,
-                                                         list_columns: Array[::String]
+                                                         list_columns: Array[::String],
+                                                         additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?
                                                        }?,
                                                        aggregation: {
                                                          aggregate_columns: Array[
@@ -1054,11 +1113,14 @@ module Aws
                                                              minimum: ::Integer,
                                                              type: ("COUNT_DISTINCT")
                                                            },
-                                                         ]
+                                                         ],
+                                                         additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?
                                                        }?,
                                                        custom: {
                                                          allowed_analyses: Array[::String],
                                                          allowed_analysis_providers: Array[::String]?,
+                                                         additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?,
+                                                         disallowed_output_columns: Array[::String]?,
                                                          differential_privacy: {
                                                            columns: Array[
                                                              {
@@ -1084,6 +1146,34 @@ module Aws
                                                  ?role_arn: ::String
                                                ) -> _UpdateConfiguredTableAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredTableAssociationResponseSuccess
+
+      interface _UpdateConfiguredTableAssociationAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfiguredTableAssociationAnalysisRuleOutput]
+        def analysis_rule: () -> Types::ConfiguredTableAssociationAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_configured_table_association_analysis_rule-instance_method
+      def update_configured_table_association_analysis_rule: (
+                                                               membership_identifier: ::String,
+                                                               configured_table_association_identifier: ::String,
+                                                               analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM"),
+                                                               analysis_rule_policy: {
+                                                                 v1: {
+                                                                   list: {
+                                                                     allowed_result_receivers: Array[::String]?,
+                                                                     allowed_additional_analyses: Array[::String]?
+                                                                   }?,
+                                                                   aggregation: {
+                                                                     allowed_result_receivers: Array[::String]?,
+                                                                     allowed_additional_analyses: Array[::String]?
+                                                                   }?,
+                                                                   custom: {
+                                                                     allowed_result_receivers: Array[::String]?,
+                                                                     allowed_additional_analyses: Array[::String]?
+                                                                   }?
+                                                                 }?
+                                                               }
+                                                             ) -> _UpdateConfiguredTableAssociationAnalysisRuleResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredTableAssociationAnalysisRuleResponseSuccess
 
       interface _UpdateIdMappingTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdMappingTableOutput]

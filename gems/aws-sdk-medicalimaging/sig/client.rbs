@@ -85,13 +85,17 @@ module Aws
                             source_image_set_id: ::String,
                             copy_image_set_information: {
                               source_image_set: {
-                                latest_version_id: ::String
+                                latest_version_id: ::String,
+                                dicom_copies: {
+                                  copiable_attributes: ::String
+                                }?
                               },
                               destination_image_set: {
                                 image_set_id: ::String,
                                 latest_version_id: ::String
                               }?
-                            }
+                            },
+                            ?force: bool
                           ) -> _CopyImageSetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyImageSetResponseSuccess
 
@@ -182,6 +186,7 @@ module Aws
         def deleted_at: () -> ::Time
         def message: () -> ::String
         def image_set_arn: () -> ::String
+        def overrides: () -> Types::Overrides
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_image_set-instance_method
       def get_image_set: (
@@ -351,11 +356,13 @@ module Aws
                                        datastore_id: ::String,
                                        image_set_id: ::String,
                                        latest_version_id: ::String,
+                                       ?force: bool,
                                        update_image_set_metadata_updates: {
                                          dicom_updates: {
                                            removable_attributes: ::String?,
                                            updatable_attributes: ::String?
-                                         }?
+                                         }?,
+                                         revert_to_version_id: ::String?
                                        }
                                      ) -> _UpdateImageSetMetadataResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImageSetMetadataResponseSuccess

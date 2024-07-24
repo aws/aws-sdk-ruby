@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-07-24)
+------------------
+
+* Feature - Update for rebrand to AWS End User Messaging SMS and Voice.
+
 1.20.0 (2024-07-02)
 ------------------
 

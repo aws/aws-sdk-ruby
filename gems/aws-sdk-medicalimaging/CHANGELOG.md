@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2024-07-24)
+------------------
+
+* Feature - CopyImageSet API adds copying selected instances between image sets, and overriding inconsistent metadata with a force parameter. UpdateImageSetMetadata API enables reverting to prior versions; updates to Study, Series, and SOP Instance UIDs; and updates to private elements, with a force parameter.
+
 1.14.0 (2024-07-02)
 ------------------
 

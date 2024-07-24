@@ -279,6 +279,7 @@ module Aws::IoTSiteWise
     ForwardingConfigState = Shapes::StringShape.new(name: 'ForwardingConfigState')
     GatewayCapabilitySummaries = Shapes::ListShape.new(name: 'GatewayCapabilitySummaries')
     GatewayCapabilitySummary = Shapes::StructureShape.new(name: 'GatewayCapabilitySummary')
+    GatewayName = Shapes::StringShape.new(name: 'GatewayName')
     GatewayPlatform = Shapes::StructureShape.new(name: 'GatewayPlatform')
     GatewaySummaries = Shapes::ListShape.new(name: 'GatewaySummaries')
     GatewaySummary = Shapes::StructureShape.new(name: 'GatewaySummary')
@@ -315,6 +316,7 @@ module Aws::IoTSiteWise
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     IntervalWindowInSeconds = Shapes::IntegerShape.new(name: 'IntervalWindowInSeconds')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IotCoreThingName = Shapes::StringShape.new(name: 'IotCoreThingName')
     JobConfiguration = Shapes::StructureShape.new(name: 'JobConfiguration')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobSummaries = Shapes::ListShape.new(name: 'JobSummaries')
@@ -432,6 +434,7 @@ module Aws::IoTSiteWise
     ScalarType = Shapes::StringShape.new(name: 'ScalarType')
     ScalarValue = Shapes::StringShape.new(name: 'ScalarValue')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SiemensIE = Shapes::StructureShape.new(name: 'SiemensIE')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -1095,7 +1098,7 @@ module Aws::IoTSiteWise
     CreateDashboardResponse.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "dashboardArn"))
     CreateDashboardResponse.struct_class = Types::CreateDashboardResponse
 
-    CreateGatewayRequest.add_member(:gateway_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "gatewayName"))
+    CreateGatewayRequest.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, required: true, location_name: "gatewayName"))
     CreateGatewayRequest.add_member(:gateway_platform, Shapes::ShapeRef.new(shape: GatewayPlatform, required: true, location_name: "gatewayPlatform"))
     CreateGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateGatewayRequest.struct_class = Types::CreateGatewayRequest
@@ -1369,7 +1372,7 @@ module Aws::IoTSiteWise
     DescribeGatewayRequest.struct_class = Types::DescribeGatewayRequest
 
     DescribeGatewayResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "gatewayId"))
-    DescribeGatewayResponse.add_member(:gateway_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "gatewayName"))
+    DescribeGatewayResponse.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, required: true, location_name: "gatewayName"))
     DescribeGatewayResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "gatewayArn"))
     DescribeGatewayResponse.add_member(:gateway_platform, Shapes::ShapeRef.new(shape: GatewayPlatform, location_name: "gatewayPlatform"))
     DescribeGatewayResponse.add_member(:gateway_capability_summaries, Shapes::ShapeRef.new(shape: GatewayCapabilitySummaries, required: true, location_name: "gatewayCapabilitySummaries"))
@@ -1516,12 +1519,13 @@ module Aws::IoTSiteWise
 
     GatewayPlatform.add_member(:greengrass, Shapes::ShapeRef.new(shape: Greengrass, location_name: "greengrass"))
     GatewayPlatform.add_member(:greengrass_v2, Shapes::ShapeRef.new(shape: GreengrassV2, location_name: "greengrassV2"))
+    GatewayPlatform.add_member(:siemens_ie, Shapes::ShapeRef.new(shape: SiemensIE, location_name: "siemensIE"))
     GatewayPlatform.struct_class = Types::GatewayPlatform
 
     GatewaySummaries.member = Shapes::ShapeRef.new(shape: GatewaySummary)
 
     GatewaySummary.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "gatewayId"))
-    GatewaySummary.add_member(:gateway_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "gatewayName"))
+    GatewaySummary.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, required: true, location_name: "gatewayName"))
     GatewaySummary.add_member(:gateway_platform, Shapes::ShapeRef.new(shape: GatewayPlatform, location_name: "gatewayPlatform"))
     GatewaySummary.add_member(:gateway_capability_summaries, Shapes::ShapeRef.new(shape: GatewayCapabilitySummaries, location_name: "gatewayCapabilitySummaries"))
     GatewaySummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
@@ -1970,6 +1974,9 @@ module Aws::IoTSiteWise
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    SiemensIE.add_member(:iot_core_thing_name, Shapes::ShapeRef.new(shape: IotCoreThingName, required: true, location_name: "iotCoreThingName"))
+    SiemensIE.struct_class = Types::SiemensIE
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -2104,7 +2111,7 @@ module Aws::IoTSiteWise
     UpdateGatewayCapabilityConfigurationResponse.struct_class = Types::UpdateGatewayCapabilityConfigurationResponse
 
     UpdateGatewayRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "gatewayId"))
-    UpdateGatewayRequest.add_member(:gateway_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "gatewayName"))
+    UpdateGatewayRequest.add_member(:gateway_name, Shapes::ShapeRef.new(shape: GatewayName, required: true, location_name: "gatewayName"))
     UpdateGatewayRequest.struct_class = Types::UpdateGatewayRequest
 
     UpdatePortalRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "portalId"))
@@ -2556,6 +2563,7 @@ module Aws::IoTSiteWise
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

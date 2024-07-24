@@ -396,7 +396,8 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] matching_event_types
     #   An array of event types that determine which events to log. If
-    #   "ALL" is used, then Amazon Pinpoint logs every event type.
+    #   "ALL" is used, then AWS End User Messaging SMS and Voice logs
+    #   every event type.
     #
     #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
     #
@@ -410,7 +411,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] kinesis_firehose_destination
     #   An object that contains information about an event destination for
-    #   logging to Amazon Kinesis Data Firehose.
+    #   logging to Amazon Data Firehose.
     #   @return [Types::KinesisFirehoseDestination]
     #
     # @!attribute [rw] sns_destination
@@ -531,6 +532,13 @@ module Aws::PinpointSMSVoiceV2
     #   DescribePhoneNumbers to find the values for PhoneNumberId and
     #   PhoneNumberArn while DescribeSenderIds can be used to get the values
     #   for SenderId and SenderIdArn.
+    #
+    #   After the pool is created you can add more origination identities to
+    #   the pool by using [AssociateOriginationIdentity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
     #   @return [String]
     #
     # @!attribute [rw] iso_country_code
@@ -541,7 +549,8 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] message_type
     #   The type of message. Valid values are TRANSACTIONAL for messages
     #   that are critical or time-sensitive and PROMOTIONAL for messages
-    #   that aren't critical or time-sensitive.
+    #   that aren't critical or time-sensitive. After the pool is created
+    #   the MessageType can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection_enabled
@@ -616,10 +625,11 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
-    #   numbers, Amazon Pinpoint automatically replies with a customizable
-    #   message and adds the end recipient to the OptOutList. When set to
-    #   true you're responsible for responding to HELP and STOP requests.
-    #   You're also responsible for tracking and honoring opt-out requests.
+    #   numbers, AWS End User Messaging SMS and Voice automatically replies
+    #   with a customizable message and adds the end recipient to the
+    #   OptOutList. When set to true you're responsible for responding to
+    #   HELP and STOP requests. You're also responsible for tracking and
+    #   honoring opt-out requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] opt_out_list_name
@@ -627,7 +637,9 @@ module Aws::PinpointSMSVoiceV2
     #   @return [String]
     #
     # @!attribute [rw] shared_routes_enabled
-    #   Indicates whether shared routes are enabled for the pool.
+    #   Indicates whether shared routes are enabled for the pool. Set to
+    #   false and only origination identities in this pool are used to send
+    #   messages.
     #   @return [Boolean]
     #
     # @!attribute [rw] deletion_protection_enabled
@@ -1562,10 +1574,11 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
-    #   numbers, Amazon Pinpoint automatically replies with a customizable
-    #   message and adds the end recipient to the OptOutList. When set to
-    #   true you're responsible for responding to HELP and STOP requests.
-    #   You're also responsible for tracking and honoring opt-out requests.
+    #   numbers, AWS End User Messaging SMS and Voice automatically replies
+    #   with a customizable message and adds the end recipient to the
+    #   OptOutList. When set to true you're responsible for responding to
+    #   HELP and STOP requests. You're also responsible for tracking and
+    #   honoring opt-out requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] opt_out_list_name
@@ -3095,8 +3108,8 @@ module Aws::PinpointSMSVoiceV2
     # Contains information about an event destination.
     #
     # Event destinations are associated with configuration sets, which
-    # enable you to publish message sending events to CloudWatch, Kinesis
-    # Data Firehose, or Amazon SNS.
+    # enable you to publish message sending events to CloudWatch, Firehose,
+    # or Amazon SNS.
     #
     # @!attribute [rw] event_destination_name
     #   The name of the EventDestination.
@@ -3121,7 +3134,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] kinesis_firehose_destination
     #   An object that contains information about an event destination for
-    #   logging to Amazon Kinesis Data Firehose.
+    #   logging to Amazon Data Firehose.
     #   @return [Types::KinesisFirehoseDestination]
     #
     # @!attribute [rw] sns_destination
@@ -3178,7 +3191,7 @@ module Aws::PinpointSMSVoiceV2
     #   contain the details for the requested NumberCapability. The Key is
     #   the two-letter ISO country code. For a list of supported ISO country
     #   codes, see [Supported countries and regions (SMS channel)][1] in the
-    #   Amazon Pinpoint SMS user guide.
+    #   AWS End User Messaging SMS User Guide.
     #
     #
     #
@@ -3261,15 +3274,15 @@ module Aws::PinpointSMSVoiceV2
 
     # Contains the delivery stream Amazon Resource Name (ARN), and the ARN
     # of the Identity and Access Management (IAM) role associated with a
-    # Kinesis Data Firehose event destination.
+    # Firehose event destination.
     #
-    # Event destinations, such as Kinesis Data Firehose, are associated with
+    # Event destinations, such as Firehose, are associated with
     # configuration sets, which enable you to publish message sending
     # events.
     #
     # @!attribute [rw] iam_role_arn
     #   The ARN of an Identity and Access Management role that is able to
-    #   write event data to an Amazon Kinesis Data Firehose destination.
+    #   write event data to an Amazon Data Firehose destination.
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_arn
@@ -3629,12 +3642,12 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   When set to false an end recipient sends a message that begins with
-    #   HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
-    #   automatically replies with a customizable message and adds the end
-    #   recipient to the OptOutList. When set to true you're responsible
-    #   for responding to HELP and STOP requests. You're also responsible
-    #   for tracking and honoring opt-out request. For more information see
-    #   [Self-managed opt-outs][1]
+    #   HELP or STOP to one of your dedicated numbers, AWS End User
+    #   Messaging SMS and Voice automatically replies with a customizable
+    #   message and adds the end recipient to the OptOutList. When set to
+    #   true you're responsible for responding to HELP and STOP requests.
+    #   You're also responsible for tracking and honoring opt-out request.
+    #   For more information see [Self-managed opt-outs][1]
     #
     #
     #
@@ -3746,12 +3759,12 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   When set to false, an end recipient sends a message that begins with
-    #   HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
-    #   automatically replies with a customizable message and adds the end
-    #   recipient to the OptOutList. When set to true you're responsible
-    #   for responding to HELP and STOP requests. You're also responsible
-    #   for tracking and honoring opt-out requests. For more information see
-    #   [Self-managed opt-outs][1]
+    #   HELP or STOP to one of your dedicated numbers, AWS End User
+    #   Messaging SMS and Voice automatically replies with a customizable
+    #   message and adds the end recipient to the OptOutList. When set to
+    #   true you're responsible for responding to HELP and STOP requests.
+    #   You're also responsible for tracking and honoring opt-out requests.
+    #   For more information see [Self-managed opt-outs][1]
     #
     #
     #
@@ -3767,10 +3780,9 @@ module Aws::PinpointSMSVoiceV2
     #
     #   By default, this is set to `False`. If you set this value to `True`,
     #   your messages are sent using phone numbers or sender IDs (depending
-    #   on the country) that are shared with other Amazon Pinpoint users. In
-    #   some countries, such as the United States, senders aren't allowed
-    #   to use shared routes and must use a dedicated phone number or short
-    #   code.
+    #   on the country) that are shared with other users. In some countries,
+    #   such as the United States, senders aren't allowed to use shared
+    #   routes and must use a dedicated phone number or short code.
     #   @return [Boolean]
     #
     # @!attribute [rw] deletion_protection_enabled
@@ -4854,10 +4866,11 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
-    #   numbers, Amazon Pinpoint automatically replies with a customizable
-    #   message and adds the end recipient to the OptOutList. When set to
-    #   true you're responsible for responding to HELP and STOP requests.
-    #   You're also responsible for tracking and honoring opt-out requests.
+    #   numbers, AWS End User Messaging SMS and Voice automatically replies
+    #   with a customizable message and adds the end recipient to the
+    #   OptOutList. When set to true you're responsible for responding to
+    #   HELP and STOP requests. You're also responsible for tracking and
+    #   honoring opt-out requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] opt_out_list_name
@@ -5093,10 +5106,11 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
-    #   numbers, Amazon Pinpoint automatically replies with a customizable
-    #   message and adds the end recipient to the OptOutList. When set to
-    #   true you're responsible for responding to HELP and STOP requests.
-    #   You're also responsible for tracking and honoring opt-out requests.
+    #   numbers, AWS End User Messaging SMS and Voice automatically replies
+    #   with a customizable message and adds the end recipient to the
+    #   OptOutList. When set to true you're responsible for responding to
+    #   HELP and STOP requests. You're also responsible for tracking and
+    #   honoring opt-out requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] opt_out_list_name
@@ -5513,11 +5527,16 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] max_price
     #   The maximum amount that you want to spend, in US dollars, per each
-    #   text message part. A text message can contain multiple parts.
+    #   text message. If the calculated amount to send the text message is
+    #   greater than `MaxPrice`, the message is not sent and an error is
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] time_to_live
-    #   How long the text message is valid for. By default this is 72 hours.
+    #   How long the text message is valid for, in seconds. By default this
+    #   is 72 hours. If the messages isn't handed off before the TTL
+    #   expires we stop attempting to hand off the message and return
+    #   `TTL_EXPIRED` event.
     #   @return [Integer]
     #
     # @!attribute [rw] context
@@ -5532,6 +5551,17 @@ module Aws::PinpointSMSVoiceV2
     #   information see [Special requirements for sending SMS messages to
     #   recipients in India][1].
     #
+    #   * `IN_ENTITY_ID` The entity ID or Principal Entity (PE) ID that you
+    #     received after completing the sender ID registration process.
+    #
+    #   * `IN_TEMPLATE_ID` The template ID that you received after
+    #     completing the sender ID registration process.
+    #
+    #     Make sure that the Template ID that you specify matches your
+    #     message template exactly. If your message doesn't match the
+    #     template that you provided during the registration process, the
+    #     mobile carriers might reject your message.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
@@ -5539,7 +5569,17 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] dry_run
     #   When set to true, the message is checked and validated, but isn't
-    #   sent to the end recipient.
+    #   sent to the end recipient. You are not charged for using `DryRun`.
+    #
+    #   The Message Parts per Second (MPS) limit when using `DryRun` is
+    #   five. If your origination identity has a lower MPS limit then the
+    #   lower MPS limit is used. For more information about MPS limits, see
+    #   [Message Parts per Second (MPS) limits][1] in the *AWS End User
+    #   Messaging SMS User Guide*..
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html
     #   @return [Boolean]
     #
     # @!attribute [rw] protect_configuration_id
@@ -5674,12 +5714,11 @@ module Aws::PinpointSMSVoiceV2
 
     # The alphanumeric sender ID in a specific country that you want to
     # describe. For more information on sender IDs see [Requesting sender
-    # IDs for SMS messaging with Amazon Pinpoint ][1] in the *Amazon
-    # Pinpoint User Guide*.
+    # IDs ][1] in the *AWS End User Messaging SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sender-id-request.html
     #
     # @!attribute [rw] sender_id
     #   The unique identifier of the sender.
@@ -5995,15 +6034,14 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # Describes the current Amazon Pinpoint monthly spend limits for sending
-    # voice and text messages. For more information on increasing your
-    # monthly spend limit, see [ Requesting increases to your monthly SMS
-    # spending quota for Amazon Pinpoint ][1] in the *Amazon Pinpoint User
-    # Guide*.
+    # Describes the current monthly spend limits for sending voice and text
+    # messages. For more information on increasing your monthly spend limit,
+    # see [ Requesting a spending quota increase ][1] in the *AWS End User
+    # Messaging SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html
     #
     # @!attribute [rw] name
     #   The name for the SpendLimit.
@@ -6289,7 +6327,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] kinesis_firehose_destination
     #   An object that contains information about an event destination for
-    #   logging to Kinesis Data Firehose.
+    #   logging to Firehose.
     #   @return [Types::KinesisFirehoseDestination]
     #
     # @!attribute [rw] sns_destination
@@ -6357,10 +6395,11 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
-    #   numbers, Amazon Pinpoint automatically replies with a customizable
-    #   message and adds the end recipient to the OptOutList. When set to
-    #   true you're responsible for responding to HELP and STOP requests.
-    #   You're also responsible for tracking and honoring opt-out requests.
+    #   numbers, AWS End User Messaging SMS and Voice automatically replies
+    #   with a customizable message and adds the end recipient to the
+    #   OptOutList. When set to true you're responsible for responding to
+    #   HELP and STOP requests. You're also responsible for tracking and
+    #   honoring opt-out requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] opt_out_list_name
@@ -6512,10 +6551,11 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
-    #   numbers, Amazon Pinpoint automatically replies with a customizable
-    #   message and adds the end recipient to the OptOutList. When set to
-    #   true you're responsible for responding to HELP and STOP requests.
-    #   You're also responsible for tracking and honoring opt-out requests.
+    #   numbers, AWS End User Messaging SMS and Voice automatically replies
+    #   with a customizable message and adds the end recipient to the
+    #   OptOutList. When set to true you're responsible for responding to
+    #   HELP and STOP requests. You're also responsible for tracking and
+    #   honoring opt-out requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] opt_out_list_name
@@ -6578,11 +6618,11 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   When an end recipient sends a message that begins with HELP or STOP
-    #   to one of your dedicated numbers, Amazon Pinpoint automatically
-    #   replies with a customizable message and adds the end recipient to
-    #   the OptOutList. When set to true you're responsible for responding
-    #   to HELP and STOP requests. You're also responsible for tracking and
-    #   honoring opt-out requests.
+    #   to one of your dedicated numbers, AWS End User Messaging SMS and
+    #   Voice automatically replies with a customizable message and adds the
+    #   end recipient to the OptOutList. When set to true you're
+    #   responsible for responding to HELP and STOP requests. You're also
+    #   responsible for tracking and honoring opt-out requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] opt_out_list_name
@@ -6637,7 +6677,7 @@ module Aws::PinpointSMSVoiceV2
     #   contain the details for the requested NumberCapability. The Key is
     #   the two-letter ISO country code. For a list of supported ISO country
     #   codes, see [Supported countries and regions (SMS channel)][1] in the
-    #   Amazon Pinpoint SMS user guide.
+    #   AWS End User Messaging SMS User Guide.
     #
     #
     #

@@ -607,15 +607,14 @@ module Aws::PinpointSMSVoiceV2
     # Creates a new event destination in a configuration set.
     #
     # An event destination is a location where you send message events. The
-    # event options are Amazon CloudWatch, Amazon Kinesis Data Firehose, or
-    # Amazon SNS. For example, when a message is delivered successfully, you
-    # can send information about that event to an event destination, or send
+    # event options are Amazon CloudWatch, Amazon Data Firehose, or Amazon
+    # SNS. For example, when a message is delivered successfully, you can
+    # send information about that event to an event destination, or send
     # notifications to endpoints that are subscribed to an Amazon SNS topic.
     #
     # Each configuration set can contain between 0 and 5 event destinations.
     # Each event destination can contain a reference to a single
-    # destination, such as a CloudWatch or Kinesis Data Firehose
-    # destination.
+    # destination, such as a CloudWatch or Firehose destination.
     #
     # @option params [required, String] :configuration_set_name
     #   Either the name of the configuration set or the configuration set ARN
@@ -628,7 +627,8 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [required, Array<String>] :matching_event_types
     #   An array of event types that determine which events to log. If "ALL"
-    #   is used, then Amazon Pinpoint logs every event type.
+    #   is used, then AWS End User Messaging SMS and Voice logs every event
+    #   type.
     #
     #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
     #
@@ -640,7 +640,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [Types::KinesisFirehoseDestination] :kinesis_firehose_destination
     #   An object that contains information about an event destination for
-    #   logging to Amazon Kinesis Data Firehose.
+    #   logging to Amazon Data Firehose.
     #
     # @option params [Types::SnsDestination] :sns_destination
     #   An object that contains information about an event destination for
@@ -713,8 +713,8 @@ module Aws::PinpointSMSVoiceV2
     # with the keyword "STOP," an entry for the phone number is added to
     # the opt-out list. In addition to STOP, your recipients can use any
     # supported opt-out keyword, such as CANCEL or OPTOUT. For a list of
-    # supported opt-out keywords, see [ SMS opt out ][1] in the *Amazon
-    # Pinpoint User Guide*.
+    # supported opt-out keywords, see [ SMS opt out ][1] in the *AWS End
+    # User Messaging SMS User Guide*.
     #
     #
     #
@@ -795,6 +795,13 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumberArn while DescribeSenderIds can be used to get the values
     #   for SenderId and SenderIdArn.
     #
+    #   After the pool is created you can add more origination identities to
+    #   the pool by using [AssociateOriginationIdentity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
+    #
     # @option params [required, String] :iso_country_code
     #   The new two-character code, in ISO 3166-1 alpha-2 format, for the
     #   country or region of the new pool.
@@ -802,7 +809,8 @@ module Aws::PinpointSMSVoiceV2
     # @option params [required, String] :message_type
     #   The type of message. Valid values are TRANSACTIONAL for messages that
     #   are critical or time-sensitive and PROMOTIONAL for messages that
-    #   aren't critical or time-sensitive.
+    #   aren't critical or time-sensitive. After the pool is created the
+    #   MessageType can't be changed.
     #
     # @option params [Boolean] :deletion_protection_enabled
     #   By default this is set to false. When set to true the pool can't be
@@ -1448,8 +1456,8 @@ module Aws::PinpointSMSVoiceV2
     # number or pool. It is also a specific word or phrase that an end user
     # can send to your number to elicit a response, such as an informational
     # message or a special offer. When your number receives a message that
-    # begins with a keyword, Amazon Pinpoint responds with a customizable
-    # message.
+    # begins with a keyword, AWS End User Messaging SMS and Voice responds
+    # with a customizable message.
     #
     # Keywords "HELP" and "STOP" can't be deleted or modified.
     #
@@ -1833,11 +1841,11 @@ module Aws::PinpointSMSVoiceV2
     # text messages. Deleting a spend limit override will set the
     # `EnforcedLimit` to equal the `MaxLimit`, which is controlled by Amazon
     # Web Services. For more information on spend limits (quotas) see
-    # [Amazon Pinpoint quotas ][1] in the *Amazon Pinpoint Developer Guide*.
+    # [Quotas ][1] in the *AWS End User Messaging SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html
     #
     # @return [Types::DeleteTextMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1894,11 +1902,11 @@ module Aws::PinpointSMSVoiceV2
     # voice messages. Deleting a spend limit override sets the
     # `EnforcedLimit` equal to the `MaxLimit`, which is controlled by Amazon
     # Web Services. For more information on spending limits (quotas) see
-    # [Amazon Pinpoint quotas][1] in the *Amazon Pinpoint Developer Guide*.
+    # [Quotas ][1] in the *AWS End User Messaging SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html
     #
     # @return [Types::DeleteVoiceMessageSpendLimitOverrideResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1923,9 +1931,9 @@ module Aws::PinpointSMSVoiceV2
     # you're ready to move your account out of the sandbox, create an
     # Amazon Web Services Support case for a service limit increase request.
     #
-    # New Amazon Pinpoint accounts are placed into an SMS or voice sandbox.
-    # The sandbox protects both Amazon Web Services end recipients and SMS
-    # or voice recipients from fraud and abuse.
+    # New accounts are placed into an SMS or voice sandbox. The sandbox
+    # protects both Amazon Web Services end recipients and SMS or voice
+    # recipients from fraud and abuse.
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results. You don't
@@ -1964,19 +1972,20 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Describes the current Amazon Pinpoint SMS Voice V2 resource quotas for
-    # your account. The description for a quota includes the quota name,
-    # current usage toward that quota, and the quota's maximum value.
+    # Describes the current AWS End User Messaging SMS and Voice SMS Voice
+    # V2 resource quotas for your account. The description for a quota
+    # includes the quota name, current usage toward that quota, and the
+    # quota's maximum value.
     #
     # When you establish an Amazon Web Services account, the account has
     # initial quotas on the maximum number of configuration sets, opt-out
     # lists, phone numbers, and pools that you can create in a given Region.
-    # For more information see [ Amazon Pinpoint quotas ][1] in the *Amazon
-    # Pinpoint Developer Guide*.
+    # For more information see [Quotas ][1] in the *AWS End User Messaging
+    # SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results. You don't
@@ -2100,8 +2109,8 @@ module Aws::PinpointSMSVoiceV2
     # number or pool. It is also a specific word or phrase that an end user
     # can send to your number to elicit a response, such as an informational
     # message or a special offer. When your number receives a message that
-    # begins with a keyword, Amazon Pinpoint responds with a customizable
-    # message.
+    # begins with a keyword, AWS End User Messaging SMS and Voice responds
+    # with a customizable message.
     #
     # If you specify a keyword that isn't valid, an error is returned.
     #
@@ -3036,18 +3045,18 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Describes the current Amazon Pinpoint monthly spend limits for sending
-    # voice and text messages.
+    # Describes the current monthly spend limits for sending voice and text
+    # messages.
     #
     # When you establish an Amazon Web Services account, the account has
     # initial monthly spend limit in a given Region. For more information on
     # increasing your monthly spend limit, see [ Requesting increases to
-    # your monthly SMS spending quota for Amazon Pinpoint ][1] in the
-    # *Amazon Pinpoint User Guide*.
+    # your monthly SMS, MMS, or Voice spending quota ][1] in the *AWS End
+    # User Messaging SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results. You don't
@@ -3500,8 +3509,8 @@ module Aws::PinpointSMSVoiceV2
     # number or pool. It is also a specific word or phrase that an end user
     # can send to your number to elicit a response, such as an informational
     # message or a special offer. When your number receives a message that
-    # begins with a keyword, Amazon Pinpoint responds with a customizable
-    # message.
+    # begins with a keyword, AWS End User Messaging SMS and Voice responds
+    # with a customizable message.
     #
     # If you specify a keyword that isn't valid, an error is returned.
     #
@@ -3774,12 +3783,12 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Request an origination phone number for use in your account. For more
-    # information on phone number request see [ Requesting a number ][1] in
-    # the *Amazon Pinpoint User Guide*.
+    # information on phone number request see [Request a phone number][1] in
+    # the *AWS End User Messaging SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-request.html
     #
     # @option params [required, String] :iso_country_code
     #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
@@ -4142,17 +4151,19 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Creates a new text message and sends it to a recipient's phone
-    # number.
+    # number. SendTextMessage only sends an SMS message to one recipient
+    # each time it is invoked.
     #
     # SMS throughput limits are measured in Message Parts per Second (MPS).
     # Your MPS limit depends on the destination country of your messages, as
     # well as the type of phone number (origination number) that you use to
-    # send the message. For more information, see [Message Parts per Second
-    # (MPS) limits][1] in the *Amazon Pinpoint User Guide*.
+    # send the message. For more information about MPS, see [Message Parts
+    # per Second (MPS) limits][1] in the *AWS End User Messaging SMS User
+    # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-limitations-mps.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html
     #
     # @option params [required, String] :destination_phone_number
     #   The destination phone number in E.164 format.
@@ -4180,10 +4191,15 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [String] :max_price
     #   The maximum amount that you want to spend, in US dollars, per each
-    #   text message part. A text message can contain multiple parts.
+    #   text message. If the calculated amount to send the text message is
+    #   greater than `MaxPrice`, the message is not sent and an error is
+    #   returned.
     #
     # @option params [Integer] :time_to_live
-    #   How long the text message is valid for. By default this is 72 hours.
+    #   How long the text message is valid for, in seconds. By default this is
+    #   72 hours. If the messages isn't handed off before the TTL expires we
+    #   stop attempting to hand off the message and return `TTL_EXPIRED`
+    #   event.
     #
     # @option params [Hash<String,String>] :context
     #   You can specify custom data in this field. If you do, that data is
@@ -4196,13 +4212,34 @@ module Aws::PinpointSMSVoiceV2
     #   [Special requirements for sending SMS messages to recipients in
     #   India][1].
     #
+    #   * `IN_ENTITY_ID` The entity ID or Principal Entity (PE) ID that you
+    #     received after completing the sender ID registration process.
+    #
+    #   * `IN_TEMPLATE_ID` The template ID that you received after completing
+    #     the sender ID registration process.
+    #
+    #     Make sure that the Template ID that you specify matches your message
+    #     template exactly. If your message doesn't match the template that
+    #     you provided during the registration process, the mobile carriers
+    #     might reject your message.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
     #
     # @option params [Boolean] :dry_run
     #   When set to true, the message is checked and validated, but isn't
-    #   sent to the end recipient.
+    #   sent to the end recipient. You are not charged for using `DryRun`.
+    #
+    #   The Message Parts per Second (MPS) limit when using `DryRun` is five.
+    #   If your origination identity has a lower MPS limit then the lower MPS
+    #   limit is used. For more information about MPS limits, see [Message
+    #   Parts per Second (MPS) limits][1] in the *AWS End User Messaging SMS
+    #   User Guide*..
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/sms-limitations-mps.html
     #
     # @option params [String] :protect_configuration_id
     #   The unique identifier for the protect configuration.
@@ -4245,9 +4282,9 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Allows you to send a request that sends a voice message through Amazon
-    # Pinpoint. This operation uses [Amazon Polly][1] to convert a text
-    # script into a voice message.
+    # Allows you to send a request that sends a voice message. This
+    # operation uses [Amazon Polly][1] to convert a text script into a voice
+    # message.
     #
     #
     #
@@ -4600,17 +4637,16 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Adds or overwrites only the specified tags for the specified Amazon
-    # Pinpoint SMS Voice, version 2 resource. When you specify an existing
-    # tag key, the value is overwritten with the new value. Each resource
-    # can have a maximum of 50 tags. Each tag consists of a key and an
-    # optional value. Tag keys must be unique per resource. For more
-    # information about tags, see [ Tagging Amazon Pinpoint resources][1] in
-    # the *Amazon Pinpoint Developer Guide*.
+    # Adds or overwrites only the specified tags for the specified resource.
+    # When you specify an existing tag key, the value is overwritten with
+    # the new value. Each resource can have a maximum of 50 tags. Each tag
+    # consists of a key and an optional value. Tag keys must be unique per
+    # resource. For more information about tags, see [Tags ][1] in the *AWS
+    # End User Messaging SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -4642,14 +4678,13 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Removes the association of the specified tags from an Amazon Pinpoint
-    # SMS Voice V2 resource. For more information on tags see [ Tagging
-    # Amazon Pinpoint resources][1] in the *Amazon Pinpoint Developer
-    # Guide*.
+    # Removes the association of the specified tags from a resource. For
+    # more information on tags see [Tags ][1] in the *AWS End User Messaging
+    # SMS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html
+    # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-tags.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -4676,13 +4711,13 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Updates an existing event destination in a configuration set. You can
-    # update the IAM role ARN for CloudWatch Logs and Kinesis Data Firehose.
-    # You can also enable or disable the event destination.
+    # update the IAM role ARN for CloudWatch Logs and Firehose. You can also
+    # enable or disable the event destination.
     #
     # You may want to update an event destination to change its matching
     # event types or updating the destination resource ARN. You can't
-    # change an event destination's type between CloudWatch Logs, Kinesis
-    # Data Firehose, and Amazon SNS.
+    # change an event destination's type between CloudWatch Logs, Firehose,
+    # and Amazon SNS.
     #
     # @option params [required, String] :configuration_set_name
     #   The configuration set to update with the new event destination. Valid
@@ -4708,7 +4743,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [Types::KinesisFirehoseDestination] :kinesis_firehose_destination
     #   An object that contains information about an event destination for
-    #   logging to Kinesis Data Firehose.
+    #   logging to Firehose.
     #
     # @option params [Types::SnsDestination] :sns_destination
     #   An object that contains information about an event destination that
@@ -4788,11 +4823,12 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [Boolean] :self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a message
-    #   that begins with HELP or STOP to one of your dedicated numbers, Amazon
-    #   Pinpoint automatically replies with a customizable message and adds
-    #   the end recipient to the OptOutList. When set to true you're
-    #   responsible for responding to HELP and STOP requests. You're also
-    #   responsible for tracking and honoring opt-out requests.
+    #   that begins with HELP or STOP to one of your dedicated numbers, AWS
+    #   End User Messaging SMS and Voice automatically replies with a
+    #   customizable message and adds the end recipient to the OptOutList.
+    #   When set to true you're responsible for responding to HELP and STOP
+    #   requests. You're also responsible for tracking and honoring opt-out
+    #   requests.
     #
     # @option params [String] :opt_out_list_name
     #   The OptOutList to add the phone number to. Valid values for this field
@@ -4886,11 +4922,12 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [Boolean] :self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a message
-    #   that begins with HELP or STOP to one of your dedicated numbers, Amazon
-    #   Pinpoint automatically replies with a customizable message and adds
-    #   the end recipient to the OptOutList. When set to true you're
-    #   responsible for responding to HELP and STOP requests. You're also
-    #   responsible for tracking and honoring opt-out requests.
+    #   that begins with HELP or STOP to one of your dedicated numbers, AWS
+    #   End User Messaging SMS and Voice automatically replies with a
+    #   customizable message and adds the end recipient to the OptOutList.
+    #   When set to true you're responsible for responding to HELP and STOP
+    #   requests. You're also responsible for tracking and honoring opt-out
+    #   requests.
     #
     # @option params [String] :opt_out_list_name
     #   The OptOutList to associate with the pool. Valid values are either
@@ -5011,7 +5048,7 @@ module Aws::PinpointSMSVoiceV2
     #   contain the details for the requested NumberCapability. The Key is the
     #   two-letter ISO country code. For a list of supported ISO country
     #   codes, see [Supported countries and regions (SMS channel)][1] in the
-    #   Amazon Pinpoint SMS user guide.
+    #   AWS End User Messaging SMS User Guide.
     #
     #
     #
@@ -5162,7 +5199,7 @@ module Aws::PinpointSMSVoiceV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

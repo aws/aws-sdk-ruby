@@ -138,6 +138,20 @@ module Aws::CleanRooms
       end
     end
 
+    class CreateConfiguredTableAssociationAnalysisRule
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CleanRooms::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateIdMappingTable
       def self.build(context)
         unless context.config.regional_endpoint
@@ -265,6 +279,20 @@ module Aws::CleanRooms
     end
 
     class DeleteConfiguredTableAssociation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CleanRooms::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteConfiguredTableAssociationAnalysisRule
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -475,6 +503,20 @@ module Aws::CleanRooms
     end
 
     class GetConfiguredTableAssociation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CleanRooms::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetConfiguredTableAssociationAnalysisRule
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -993,6 +1035,20 @@ module Aws::CleanRooms
     end
 
     class UpdateConfiguredTableAssociation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CleanRooms::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateConfiguredTableAssociationAnalysisRule
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

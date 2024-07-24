@@ -1868,9 +1868,11 @@ module Aws::PinpointSMSVoiceV2
 
       api.metadata = {
         "apiVersion" => "2022-03-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "sms-voice",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Pinpoint SMS Voice V2",
         "serviceId" => "Pinpoint SMS Voice V2",
         "signatureVersion" => "v4",

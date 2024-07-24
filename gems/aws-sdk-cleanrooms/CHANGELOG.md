@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-07-24)
+------------------
+
+* Feature - Three enhancements to the AWS Clean Rooms: Disallowed Output Columns, Flexible Result Receivers, SQL as a Seed
+
 1.26.0 (2024-07-23)
 ------------------
 

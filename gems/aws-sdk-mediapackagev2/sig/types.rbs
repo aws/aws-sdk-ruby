@@ -527,7 +527,7 @@ module Aws::MediaPackageV2
     class SpekeKeyProvider
       attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration
       attr_accessor resource_id: ::String
-      attr_accessor drm_systems: ::Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE")]
+      attr_accessor drm_systems: ::Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")]
       attr_accessor role_arn: ::String
       attr_accessor url: ::String
       SENSITIVE: []

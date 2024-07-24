@@ -135,12 +135,19 @@ module Aws::MedicalImaging
     #   Copy image set information.
     #   @return [Types::CopyImageSetInformation]
     #
+    # @!attribute [rw] force
+    #   Setting this flag will force the `CopyImageSet` operation, even if
+    #   Patient, Study, or Series level metadata are mismatched across the
+    #   `sourceImageSet` and `destinationImageSet`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/CopyImageSetRequest AWS API Documentation
     #
     class CopyImageSetRequest < Struct.new(
       :datastore_id,
       :source_image_set_id,
-      :copy_image_set_information)
+      :copy_image_set_information,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -173,10 +180,16 @@ module Aws::MedicalImaging
     #   The latest version identifier for the source image set.
     #   @return [String]
     #
+    # @!attribute [rw] dicom_copies
+    #   Contains `MetadataCopies` structure and wraps information related to
+    #   specific copy use cases. For example, when copying subsets.
+    #   @return [Types::MetadataCopies]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/CopySourceImageSetInformation AWS API Documentation
     #
     class CopySourceImageSetInformation < Struct.new(
-      :latest_version_id)
+      :latest_version_id,
+      :dicom_copies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -873,6 +886,13 @@ module Aws::MedicalImaging
     #   The Amazon Resource Name (ARN) assigned to the image set.
     #   @return [String]
     #
+    # @!attribute [rw] overrides
+    #   This object contains the details of any overrides used while
+    #   creating a specific image set version. If an image set was copied or
+    #   updated using the `force` flag, this object will contain the
+    #   `forced` flag.
+    #   @return [Types::Overrides]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetImageSetResponse AWS API Documentation
     #
     class GetImageSetResponse < Struct.new(
@@ -885,7 +905,8 @@ module Aws::MedicalImaging
       :updated_at,
       :deleted_at,
       :message,
-      :image_set_arn)
+      :image_set_arn,
+      :overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -938,6 +959,12 @@ module Aws::MedicalImaging
     #   The error message thrown if an image set action fails.
     #   @return [String]
     #
+    # @!attribute [rw] overrides
+    #   Contains details on overrides used when creating the returned
+    #   version of an image set. For example, if `forced` exists, the
+    #   `forced` flag was used when creating the image set.
+    #   @return [Types::Overrides]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/ImageSetProperties AWS API Documentation
     #
     class ImageSetProperties < Struct.new(
@@ -948,7 +975,8 @@ module Aws::MedicalImaging
       :created_at,
       :updated_at,
       :deleted_at,
-      :message)
+      :message,
+      :overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1160,6 +1188,22 @@ module Aws::MedicalImaging
       include Aws::Structure
     end
 
+    # Contains copiable `Attributes` structure and wraps information related
+    # to specific copy use cases. For example, when copying subsets.
+    #
+    # @!attribute [rw] copiable_attributes
+    #   The JSON string used to specify a subset of SOP Instances to copy
+    #   from source to destination image set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/MetadataCopies AWS API Documentation
+    #
+    class MetadataCopies < Struct.new(
+      :copiable_attributes)
+      SENSITIVE = [:copiable_attributes]
+      include Aws::Structure
+    end
+
     # Contains DICOMUpdates.
     #
     # @note MetadataUpdates is a union - when making an API calls you must set exactly one of the members.
@@ -1169,17 +1213,47 @@ module Aws::MedicalImaging
     #   `updatableAttributes`.
     #   @return [Types::DICOMUpdates]
     #
+    # @!attribute [rw] revert_to_version_id
+    #   Specifies the previous image set version ID to revert the current
+    #   image set back to.
+    #
+    #   <note markdown="1"> You must provide either `revertToVersionId` or `DICOMUpdates` in
+    #   your request. A `ValidationException` error is thrown if both
+    #   parameters are provided at the same time.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/MetadataUpdates AWS API Documentation
     #
     class MetadataUpdates < Struct.new(
       :dicom_updates,
+      :revert_to_version_id,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DicomUpdates < MetadataUpdates; end
+      class RevertToVersionId < MetadataUpdates; end
       class Unknown < MetadataUpdates; end
+    end
+
+    # Specifies the overrides used in image set modification calls to
+    # `CopyImageSet` and `UpdateImageSetMetadata`.
+    #
+    # @!attribute [rw] forced
+    #   Setting this flag will force the `CopyImageSet` and
+    #   `UpdateImageSetMetadata` operations, even if Patient, Study, or
+    #   Series level metadata are mismatched.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/Overrides AWS API Documentation
+    #
+    class Overrides < Struct.new(
+      :forced)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The request references a resource which does not exist.
@@ -1527,6 +1601,17 @@ module Aws::MedicalImaging
     #   The latest image set version identifier.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   Setting this flag will force the `UpdateImageSetMetadata` operation
+    #   for the following attributes:
+    #
+    #   * `Tag.StudyInstanceUID`, `Tag.SeriesInstanceUID`,
+    #     `Tag.SOPInstanceUID`, and `Tag.StudyID`
+    #
+    #   * Adding, removing, or updating private tags for an individual SOP
+    #     Instance
+    #   @return [Boolean]
+    #
     # @!attribute [rw] update_image_set_metadata_updates
     #   Update image set metadata updates.
     #   @return [Types::MetadataUpdates]
@@ -1537,6 +1622,7 @@ module Aws::MedicalImaging
       :datastore_id,
       :image_set_id,
       :latest_version_id,
+      :force,
       :update_image_set_metadata_updates)
       SENSITIVE = []
       include Aws::Structure

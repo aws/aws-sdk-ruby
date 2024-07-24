@@ -76,6 +76,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::CreateConfiguredTableAnalysisRule.build(context)
           when :create_configured_table_association
             Aws::CleanRooms::Endpoints::CreateConfiguredTableAssociation.build(context)
+          when :create_configured_table_association_analysis_rule
+            Aws::CleanRooms::Endpoints::CreateConfiguredTableAssociationAnalysisRule.build(context)
           when :create_id_mapping_table
             Aws::CleanRooms::Endpoints::CreateIdMappingTable.build(context)
           when :create_id_namespace_association
@@ -96,6 +98,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::DeleteConfiguredTableAnalysisRule.build(context)
           when :delete_configured_table_association
             Aws::CleanRooms::Endpoints::DeleteConfiguredTableAssociation.build(context)
+          when :delete_configured_table_association_analysis_rule
+            Aws::CleanRooms::Endpoints::DeleteConfiguredTableAssociationAnalysisRule.build(context)
           when :delete_id_mapping_table
             Aws::CleanRooms::Endpoints::DeleteIdMappingTable.build(context)
           when :delete_id_namespace_association
@@ -126,6 +130,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::GetConfiguredTableAnalysisRule.build(context)
           when :get_configured_table_association
             Aws::CleanRooms::Endpoints::GetConfiguredTableAssociation.build(context)
+          when :get_configured_table_association_analysis_rule
+            Aws::CleanRooms::Endpoints::GetConfiguredTableAssociationAnalysisRule.build(context)
           when :get_id_mapping_table
             Aws::CleanRooms::Endpoints::GetIdMappingTable.build(context)
           when :get_id_namespace_association
@@ -200,6 +206,8 @@ module Aws::CleanRooms
             Aws::CleanRooms::Endpoints::UpdateConfiguredTableAnalysisRule.build(context)
           when :update_configured_table_association
             Aws::CleanRooms::Endpoints::UpdateConfiguredTableAssociation.build(context)
+          when :update_configured_table_association_analysis_rule
+            Aws::CleanRooms::Endpoints::UpdateConfiguredTableAssociationAnalysisRule.build(context)
           when :update_id_mapping_table
             Aws::CleanRooms::Endpoints::UpdateIdMappingTable.build(context)
           when :update_id_namespace_association

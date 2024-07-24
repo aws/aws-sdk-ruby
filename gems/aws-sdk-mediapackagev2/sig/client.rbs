@@ -164,7 +164,7 @@ module Aws
                                             preset_speke_20_video: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")
                                           },
                                           resource_id: ::String,
-                                          drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE")],
+                                          drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
                                           role_arn: ::String,
                                           url: ::String
                                         }
@@ -556,7 +556,7 @@ module Aws
                                             preset_speke_20_video: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")
                                           },
                                           resource_id: ::String,
-                                          drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE")],
+                                          drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
                                           role_arn: ::String,
                                           url: ::String
                                         }

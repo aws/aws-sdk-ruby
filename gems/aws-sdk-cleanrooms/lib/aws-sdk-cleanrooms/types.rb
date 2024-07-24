@@ -188,6 +188,15 @@ module Aws::CleanRooms
     #   returned.
     #   @return [Array<Types::AggregationConstraint>]
     #
+    # @!attribute [rw] additional_analyses
+    #   An indicator as to whether additional analyses (such as Clean Rooms
+    #   ML) can be applied to the output of the direct query.
+    #
+    #   The `additionalAnalyses` parameter is currently supported for the
+    #   list analysis rule (`AnalysisRuleList`) and the custom analysis rule
+    #   (`AnalysisRuleCustom`).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRuleAggregation AWS API Documentation
     #
     class AnalysisRuleAggregation < Struct.new(
@@ -197,7 +206,8 @@ module Aws::CleanRooms
       :allowed_join_operators,
       :dimension_columns,
       :scalar_functions,
-      :output_constraints)
+      :output_constraints,
+      :additional_analyses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -217,6 +227,16 @@ module Aws::CleanRooms
     #   is `ANY_QUERY`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_analyses
+    #   An indicator as to whether additional analyses (such as Clean Rooms
+    #   ML) can be applied to the output of the direct query.
+    #   @return [String]
+    #
+    # @!attribute [rw] disallowed_output_columns
+    #   A list of columns that aren't allowed to be shown in the query
+    #   output.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] differential_privacy
     #   The differential privacy configuration.
     #   @return [Types::DifferentialPrivacyConfiguration]
@@ -226,6 +246,8 @@ module Aws::CleanRooms
     class AnalysisRuleCustom < Struct.new(
       :allowed_analyses,
       :allowed_analysis_providers,
+      :additional_analyses,
+      :disallowed_output_columns,
       :differential_privacy)
       SENSITIVE = []
       include Aws::Structure
@@ -273,12 +295,18 @@ module Aws::CleanRooms
     #   Columns that can be listed in the output.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_analyses
+    #   An indicator as to whether additional analyses (such as Clean Rooms
+    #   ML) can be applied to the output of the direct query.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRuleList AWS API Documentation
     #
     class AnalysisRuleList < Struct.new(
       :join_columns,
       :allowed_join_operators,
-      :list_columns)
+      :list_columns,
+      :additional_analyses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1032,7 +1060,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration. Only
-    #   supports Amazon Web Services account ID.
+    #   supports AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -1100,7 +1128,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] creator_account_id
     #   The identifier used to reference members of the collaboration. Only
-    #   supports Amazon Web Services account ID.
+    #   supports AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1547,6 +1575,27 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # The configuration details.
+    #
+    # @note ConfigurationDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigurationDetails corresponding to the set member.
+    #
+    # @!attribute [rw] direct_analysis_configuration_details
+    #   The direct analysis configuration details.
+    #   @return [Types::DirectAnalysisConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfigurationDetails AWS API Documentation
+    #
+    class ConfigurationDetails < Struct.new(
+      :direct_analysis_configuration_details,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DirectAnalysisConfigurationDetails < ConfigurationDetails; end
+      class Unknown < ConfigurationDetails; end
+    end
+
     # Details about the configured audience model association.
     #
     # @!attribute [rw] id
@@ -1914,6 +1963,10 @@ module Aws::CleanRooms
     #   A description of the configured table association.
     #   @return [String]
     #
+    # @!attribute [rw] analysis_rule_types
+    #   The analysis rule types for the configured table association.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] create_time
     #   The time the configured table association was created.
     #   @return [Time]
@@ -1934,10 +1987,194 @@ module Aws::CleanRooms
       :role_arn,
       :name,
       :description,
+      :analysis_rule_types,
       :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # An analysis rule for a configured table association. This analysis
+    # rule specifies how data from the table can be used within its
+    # associated collaboration. In the console, the
+    # `ConfiguredTableAssociationAnalysisRule` is referred to as the
+    # *collaboration analysis rule*.
+    #
+    # @!attribute [rw] membership_identifier
+    #   The membership identifier for the configured table association
+    #   analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_table_association_id
+    #   The unique identifier for the configured table association.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_table_association_arn
+    #   The Amazon Resource Name (ARN) of the configured table association.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy of the configured table association analysis rule.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRulePolicy]
+    #
+    # @!attribute [rw] type
+    #   The type of the configured table association analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The creation time of the configured table association analysis rule.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The update time of the configured table association analysis rule.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationAnalysisRule AWS API Documentation
+    #
+    class ConfiguredTableAssociationAnalysisRule < Struct.new(
+      :membership_identifier,
+      :configured_table_association_id,
+      :configured_table_association_arn,
+      :policy,
+      :type,
+      :create_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured table association analysis rule applied to a configured
+    # table with the aggregation analysis rule.
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The list of collaboration members who are allowed to receive results
+    #   of queries run with this configured table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The list of resources or wildcards (ARNs) that are allowed to
+    #   perform additional analysis on query output.
+    #
+    #   The `allowedAdditionalAnalyses` parameter is currently supported for
+    #   the list analysis rule (`AnalysisRuleList`) and the custom analysis
+    #   rule (`AnalysisRuleCustom`).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationAnalysisRuleAggregation AWS API Documentation
+    #
+    class ConfiguredTableAssociationAnalysisRuleAggregation < Struct.new(
+      :allowed_result_receivers,
+      :allowed_additional_analyses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured table association analysis rule applied to a configured
+    # table with the custom analysis rule.
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The list of collaboration members who are allowed to receive results
+    #   of queries run with this configured table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The list of resources or wildcards (ARNs) that are allowed to
+    #   perform additional analysis on query output.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationAnalysisRuleCustom AWS API Documentation
+    #
+    class ConfiguredTableAssociationAnalysisRuleCustom < Struct.new(
+      :allowed_result_receivers,
+      :allowed_additional_analyses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured table association analysis rule applied to a configured
+    # table with the list analysis rule.
+    #
+    # @!attribute [rw] allowed_result_receivers
+    #   The list of collaboration members who are allowed to receive results
+    #   of queries run with this configured table.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_additional_analyses
+    #   The list of resources or wildcards (ARNs) that are allowed to
+    #   perform additional analysis on query output.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationAnalysisRuleList AWS API Documentation
+    #
+    class ConfiguredTableAssociationAnalysisRuleList < Struct.new(
+      :allowed_result_receivers,
+      :allowed_additional_analyses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controls on the query specifications that can be run on an associated
+    # configured table.
+    #
+    # @note ConfiguredTableAssociationAnalysisRulePolicy is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ConfiguredTableAssociationAnalysisRulePolicy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfiguredTableAssociationAnalysisRulePolicy corresponding to the set member.
+    #
+    # @!attribute [rw] v1
+    #   The policy for the configured table association analysis rule.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRulePolicyV1]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationAnalysisRulePolicy AWS API Documentation
+    #
+    class ConfiguredTableAssociationAnalysisRulePolicy < Struct.new(
+      :v1,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class V1 < ConfiguredTableAssociationAnalysisRulePolicy; end
+      class Unknown < ConfiguredTableAssociationAnalysisRulePolicy; end
+    end
+
+    # Controls on the query specifications that can be run on an associated
+    # configured table.
+    #
+    # @note ConfiguredTableAssociationAnalysisRulePolicyV1 is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ConfiguredTableAssociationAnalysisRulePolicyV1 is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfiguredTableAssociationAnalysisRulePolicyV1 corresponding to the set member.
+    #
+    # @!attribute [rw] list
+    #   Analysis rule type that enables only list queries on a configured
+    #   table.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRuleList]
+    #
+    # @!attribute [rw] aggregation
+    #   Analysis rule type that enables only aggregation queries on a
+    #   configured table.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRuleAggregation]
+    #
+    # @!attribute [rw] custom
+    #   Analysis rule type that enables the table owner to approve custom
+    #   SQL queries on their configured tables. It supports differential
+    #   privacy.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRuleCustom]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAssociationAnalysisRulePolicyV1 AWS API Documentation
+    #
+    class ConfiguredTableAssociationAnalysisRulePolicyV1 < Struct.new(
+      :list,
+      :aggregation,
+      :custom,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class List < ConfiguredTableAssociationAnalysisRulePolicyV1; end
+      class Aggregation < ConfiguredTableAssociationAnalysisRulePolicyV1; end
+      class Custom < ConfiguredTableAssociationAnalysisRulePolicyV1; end
+      class Unknown < ConfiguredTableAssociationAnalysisRulePolicyV1; end
     end
 
     # The configured table association summary for the objects listed by the
@@ -2191,7 +2428,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] collaboration
-    #   The entire created collaboration object.
+    #   The collaboration.
     #   @return [Types::Collaboration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationOutput AWS API Documentation
@@ -2278,7 +2515,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] analysis_rule_policy
-    #   The entire created configured table analysis rule object.
+    #   The analysis rule policy that was created for the configured table.
     #   @return [Types::ConfiguredTableAnalysisRulePolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableAnalysisRuleInput AWS API Documentation
@@ -2292,12 +2529,56 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] analysis_rule
-    #   The entire created analysis rule.
+    #   The analysis rule that was created for the configured table.
     #   @return [Types::ConfiguredTableAnalysisRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableAnalysisRuleOutput AWS API Documentation
     #
     class CreateConfiguredTableAnalysisRuleOutput < Struct.new(
+      :analysis_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_table_association_identifier
+    #   The unique ID for the configured table association. Currently
+    #   accepts the configured table association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_policy
+    #   The analysis rule policy that was created for the configured table
+    #   association.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRulePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableAssociationAnalysisRuleInput AWS API Documentation
+    #
+    class CreateConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :configured_table_association_identifier,
+      :analysis_rule_type,
+      :analysis_rule_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rule
+    #   The analysis rule for the conﬁgured table association. In the
+    #   console, the `ConfiguredTableAssociationAnalysisRule` is referred to
+    #   as the *collaboration analysis rule*.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableAssociationAnalysisRuleOutput AWS API Documentation
+    #
+    class CreateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule)
       SENSITIVE = []
       include Aws::Structure
@@ -2349,7 +2630,7 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] configured_table_association
-    #   The entire configured table association object.
+    #   The configured table association.
     #   @return [Types::ConfiguredTableAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableAssociationOutput AWS API Documentation
@@ -2757,6 +3038,34 @@ module Aws::CleanRooms
     #
     class DeleteConfiguredTableAnalysisRuleOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_table_association_identifier
+    #   The identiﬁer for the conﬁgured table association that's related to
+    #   the analysis rule that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of the analysis rule that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredTableAssociationAnalysisRuleInput AWS API Documentation
+    #
+    class DeleteConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :configured_table_association_identifier,
+      :analysis_rule_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredTableAssociationAnalysisRuleOutput AWS API Documentation
+    #
+    class DeleteConfiguredTableAssociationAnalysisRuleOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] configured_table_association_identifier
     #   The unique ID for the configured table association to be deleted.
     #   Currently accepts the configured table ID.
@@ -3162,6 +3471,21 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # The direct analysis configuration details.
+    #
+    # @!attribute [rw] receiver_account_ids
+    #   The account IDs for the member who received the results of a
+    #   protected query.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DirectAnalysisConfigurationDetails AWS API Documentation
+    #
+    class DirectAnalysisConfigurationDetails < Struct.new(
+      :receiver_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] membership_identifier
     #   The identifier for a membership resource.
     #   @return [String]
@@ -3397,6 +3721,44 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredTableAnalysisRuleOutput AWS API Documentation
     #
     class GetConfiguredTableAnalysisRuleOutput < Struct.new(
+      :analysis_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_table_association_identifier
+    #   The identiﬁer for the conﬁgured table association that's related to
+    #   the analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The type of analysis rule that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredTableAssociationAnalysisRuleInput AWS API Documentation
+    #
+    class GetConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :configured_table_association_identifier,
+      :analysis_rule_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rule
+    #   The analysis rule for the conﬁgured table association. In the
+    #   console, the `ConfiguredTableAssociationAnalysisRule` is referred to
+    #   as the *collaboration analysis rule*.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredTableAssociationAnalysisRuleOutput AWS API Documentation
+    #
+    class GetConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule)
       SENSITIVE = []
       include Aws::Structure
@@ -4161,14 +4523,12 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisTemplatesInput AWS API Documentation
@@ -4182,7 +4542,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] analysis_template_summaries
@@ -4204,14 +4565,12 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationAnalysisTemplatesInput AWS API Documentation
@@ -4225,7 +4584,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_analysis_template_summaries
@@ -4247,14 +4607,12 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsInput AWS API Documentation
@@ -4273,7 +4631,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::CollaborationConfiguredAudienceModelAssociationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsOutput AWS API Documentation
@@ -4333,14 +4692,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetTemplatesInput AWS API Documentation
@@ -4354,7 +4713,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_privacy_budget_template_summaries
@@ -4381,14 +4741,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsInput AWS API Documentation
@@ -4407,7 +4767,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::CollaborationPrivacyBudgetSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsOutput AWS API Documentation
@@ -4420,14 +4781,14 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #   @return [Integer]
     #
     # @!attribute [rw] member_status
@@ -4445,7 +4806,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] collaboration_list
@@ -4467,14 +4829,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredAudienceModelAssociationsInput AWS API Documentation
@@ -4511,14 +4873,12 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTableAssociationsInput AWS API Documentation
@@ -4536,7 +4896,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::ConfiguredTableAssociationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTableAssociationsOutput AWS API Documentation
@@ -4549,14 +4910,12 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTablesInput AWS API Documentation
@@ -4573,7 +4932,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::ConfiguredTableSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredTablesOutput AWS API Documentation
@@ -4675,14 +5035,12 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembersInput AWS API Documentation
@@ -4696,7 +5054,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] member_summaries
@@ -4713,14 +5072,12 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -4738,7 +5095,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] membership_summaries
@@ -4761,14 +5119,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetTemplatesInput AWS API Documentation
@@ -4782,7 +5140,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] privacy_budget_template_summaries
@@ -4811,14 +5170,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsInput AWS API Documentation
@@ -4839,7 +5198,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::PrivacyBudgetSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsOutput AWS API Documentation
@@ -4860,14 +5220,14 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service can return a
+    #   nextToken even if the maximum results has not been met.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedQueriesInput AWS API Documentation
@@ -4882,7 +5242,8 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] protected_queries
@@ -4904,18 +5265,17 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] schema_type
-    #   If present, filter schemas by schema type.
+    #   If present, filter schemas by schema type. The only valid schema
+    #   type is currently `TABLE`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one.
-    #   The service might return a `nextToken` even if the `maxResults`
-    #   value has not been met.
+    #   The maximum size of the results that is returned per call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListSchemasInput AWS API Documentation
@@ -4934,7 +5294,8 @@ module Aws::CleanRooms
     #   @return [Array<Types::SchemaSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListSchemasOutput AWS API Documentation
@@ -5810,6 +6171,20 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Contains configuration details for the protected query member output.
+    #
+    # @!attribute [rw] account_id
+    #   The unique identifier for the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryMemberOutputConfiguration AWS API Documentation
+    #
+    class ProtectedQueryMemberOutputConfiguration < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the protected query output.
     #
     # @note ProtectedQueryOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProtectedQueryOutput corresponding to the set member.
@@ -5846,20 +6221,27 @@ module Aws::CleanRooms
     # @note ProtectedQueryOutputConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProtectedQueryOutputConfiguration corresponding to the set member.
     #
     # @!attribute [rw] s3
-    #   Required configuration for a protected query with an `S3` output
+    #   Required configuration for a protected query with an `s3` output
     #   type.
     #   @return [Types::ProtectedQueryS3OutputConfiguration]
+    #
+    # @!attribute [rw] member
+    #   Required configuration for a protected query with a `member` output
+    #   type.
+    #   @return [Types::ProtectedQueryMemberOutputConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryOutputConfiguration AWS API Documentation
     #
     class ProtectedQueryOutputConfiguration < Struct.new(
       :s3,
+      :member,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class S3 < ProtectedQueryOutputConfiguration; end
+      class Member < ProtectedQueryOutputConfiguration; end
       class Unknown < ProtectedQueryOutputConfiguration; end
     end
 
@@ -5973,7 +6355,7 @@ module Aws::CleanRooms
     # Contains statistics about the execution of the protected query.
     #
     # @!attribute [rw] total_duration_in_millis
-    #   The duration of the Protected Query, from creation until query
+    #   The duration of the protected query, from creation until query
     #   completion.
     #   @return [Integer]
     #
@@ -6010,6 +6392,10 @@ module Aws::CleanRooms
     #   `TIMED\_OUT`.
     #   @return [String]
     #
+    # @!attribute [rw] receiver_configurations
+    #   The receiver configuration.
+    #   @return [Array<Types::ReceiverConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQuerySummary AWS API Documentation
     #
     class ProtectedQuerySummary < Struct.new(
@@ -6017,7 +6403,8 @@ module Aws::CleanRooms
       :membership_id,
       :membership_arn,
       :create_time,
-      :status)
+      :status,
+      :receiver_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6086,6 +6473,28 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # The receiver configuration for a protected query.
+    #
+    # @!attribute [rw] analysis_type
+    #   The type of analysis for the protected query. The results of the
+    #   query can be analyzed directly (`DIRECT_ANALYSIS`) or used as input
+    #   into additional analyses (`ADDITIONAL_ANALYSIS`), such as a query
+    #   that is a seed for a lookalike ML model.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_details
+    #   The configuration details of the receiver configuration.
+    #   @return [Types::ConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ReceiverConfiguration AWS API Documentation
+    #
+    class ReceiverConfiguration < Struct.new(
+      :analysis_type,
+      :configuration_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request references a resource which does not exist.
     #
     # @!attribute [rw] message
@@ -6112,7 +6521,7 @@ module Aws::CleanRooms
     # A schema is a relation within a collaboration.
     #
     # @!attribute [rw] columns
-    #   The columns for the relation that this schema represents.
+    #   The columns for the relation this schema represents.
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] partition_keys
@@ -6120,13 +6529,13 @@ module Aws::CleanRooms
     #   @return [Array<Types::Column>]
     #
     # @!attribute [rw] analysis_rule_types
-    #   The analysis rule types that are associated with the schema.
-    #   Currently, only one entry is present.
+    #   The analysis rule types associated with the schema. Currently, only
+    #   one entry is present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] analysis_method
     #   The analysis method for the schema. The only valid value is
-    #   currently `DIRECT_QUERY`.
+    #   currently DIRECT\_QUERY.
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
@@ -6144,8 +6553,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] collaboration_arn
-    #   The unique Amazon Resource Name (ARN) for the collaboration that the
-    #   schema belongs to.
+    #   The unique ARN for the collaboration that the schema belongs to.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6153,15 +6561,15 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The time at which the schema was created.
+    #   The time the schema was created.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   The most recent time at which the schema was updated.
+    #   The time the schema was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] type
-    #   The type of schema.
+    #   The type of schema. The only valid value is currently `TABLE`.
     #   @return [String]
     #
     # @!attribute [rw] schema_status_details
@@ -6223,7 +6631,7 @@ module Aws::CleanRooms
     # queries on this schema.
     #
     # @!attribute [rw] status
-    #   The status of the schema.
+    #   The status of the schema, indicating if it is ready to query.
     #   @return [String]
     #
     # @!attribute [rw] reasons
@@ -6240,13 +6648,21 @@ module Aws::CleanRooms
     #   type.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] analysis_type
+    #   The type of analysis that can be performed on the schema.
+    #
+    #   A schema can have an `analysisType` of `DIRECT_ANALYSIS`,
+    #   `ADDITIONAL_ANALYSIS_FOR_AUDIENCE_GENERATION`, or both.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaStatusDetail AWS API Documentation
     #
     class SchemaStatusDetail < Struct.new(
       :status,
       :reasons,
       :analysis_rule_type,
-      :configurations)
+      :configurations,
+      :analysis_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6277,7 +6693,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of schema object.
+    #   The type of schema object. The only valid schema type is currently
+    #   `TABLE`.
     #   @return [String]
     #
     # @!attribute [rw] creator_account_id
@@ -6636,6 +7053,49 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredTableAnalysisRuleOutput AWS API Documentation
     #
     class UpdateConfiguredTableAnalysisRuleOutput < Struct.new(
+      :analysis_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_table_association_identifier
+    #   The identifier for the configured table association to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The analysis rule type that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_rule_policy
+    #   The updated analysis rule policy for the conﬁgured table
+    #   association.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRulePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredTableAssociationAnalysisRuleInput AWS API Documentation
+    #
+    class UpdateConfiguredTableAssociationAnalysisRuleInput < Struct.new(
+      :membership_identifier,
+      :configured_table_association_identifier,
+      :analysis_rule_type,
+      :analysis_rule_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rule
+    #   The updated analysis rule for the conﬁgured table association. In
+    #   the console, the `ConfiguredTableAssociationAnalysisRule` is
+    #   referred to as the *collaboration analysis rule*.
+    #   @return [Types::ConfiguredTableAssociationAnalysisRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredTableAssociationAnalysisRuleOutput AWS API Documentation
+    #
+    class UpdateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule)
       SENSITIVE = []
       include Aws::Structure

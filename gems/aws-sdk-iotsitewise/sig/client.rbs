@@ -614,6 +614,9 @@ module Aws
                               }?,
                               greengrass_v2: {
                                 core_device_thing_name: ::String
+                              }?,
+                              siemens_ie: {
+                                iot_core_thing_name: ::String
                               }?
                             },
                             ?tags: Hash[::String, ::String]
@@ -956,7 +959,7 @@ module Aws
         def gateway_id: () -> ::String
         def capability_namespace: () -> ::String
         def capability_configuration: () -> ::String
-        def capability_sync_status: () -> ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+        def capability_sync_status: () -> ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN" | "NOT_APPLICABLE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_gateway_capability_configuration-instance_method
       def describe_gateway_capability_configuration: (
@@ -1857,7 +1860,7 @@ module Aws
       interface _UpdateGatewayCapabilityConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayCapabilityConfigurationResponse]
         def capability_namespace: () -> ::String
-        def capability_sync_status: () -> ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+        def capability_sync_status: () -> ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN" | "NOT_APPLICABLE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_gateway_capability_configuration-instance_method
       def update_gateway_capability_configuration: (

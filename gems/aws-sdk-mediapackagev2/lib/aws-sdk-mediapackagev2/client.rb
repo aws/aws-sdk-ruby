@@ -1251,7 +1251,7 @@ module Aws::MediaPackageV2
     #             preset_speke_20_video: "PRESET_VIDEO_1", # required, accepts PRESET_VIDEO_1, PRESET_VIDEO_2, PRESET_VIDEO_3, PRESET_VIDEO_4, PRESET_VIDEO_5, PRESET_VIDEO_6, PRESET_VIDEO_7, PRESET_VIDEO_8, SHARED, UNENCRYPTED
     #           },
     #           resource_id: "SpekeKeyProviderResourceIdString", # required
-    #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE
+    #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE, IRDETO
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
     #         },
@@ -1349,7 +1349,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.resource_id #=> String
     #   resp.segment.encryption.speke_key_provider.drm_systems #=> Array
-    #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE"
+    #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.created_at #=> Time
@@ -2033,7 +2033,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.resource_id #=> String
     #   resp.segment.encryption.speke_key_provider.drm_systems #=> Array
-    #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE"
+    #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.created_at #=> Time
@@ -3224,7 +3224,7 @@ module Aws::MediaPackageV2
     #             preset_speke_20_video: "PRESET_VIDEO_1", # required, accepts PRESET_VIDEO_1, PRESET_VIDEO_2, PRESET_VIDEO_3, PRESET_VIDEO_4, PRESET_VIDEO_5, PRESET_VIDEO_6, PRESET_VIDEO_7, PRESET_VIDEO_8, SHARED, UNENCRYPTED
     #           },
     #           resource_id: "SpekeKeyProviderResourceIdString", # required
-    #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE
+    #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE, IRDETO
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
     #         },
@@ -3319,7 +3319,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.encryption_contract_configuration.preset_speke_20_video #=> String, one of "PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"
     #   resp.segment.encryption.speke_key_provider.resource_id #=> String
     #   resp.segment.encryption.speke_key_provider.drm_systems #=> Array
-    #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE"
+    #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
     #   resp.created_at #=> Time
@@ -3394,7 +3394,7 @@ module Aws::MediaPackageV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

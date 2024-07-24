@@ -45,6 +45,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_id: ::String
       attr_accessor source_image_set_id: ::String
       attr_accessor copy_image_set_information: Types::CopyImageSetInformation
+      attr_accessor force: bool
       SENSITIVE: []
     end
 
@@ -57,6 +58,7 @@ module Aws::MedicalImaging
 
     class CopySourceImageSetInformation
       attr_accessor latest_version_id: ::String
+      attr_accessor dicom_copies: Types::MetadataCopies
       SENSITIVE: []
     end
 
@@ -255,6 +257,7 @@ module Aws::MedicalImaging
       attr_accessor deleted_at: ::Time
       attr_accessor message: ::String
       attr_accessor image_set_arn: ::String
+      attr_accessor overrides: Types::Overrides
       SENSITIVE: []
     end
 
@@ -272,6 +275,7 @@ module Aws::MedicalImaging
       attr_accessor updated_at: ::Time
       attr_accessor deleted_at: ::Time
       attr_accessor message: ::String
+      attr_accessor overrides: Types::Overrides
       SENSITIVE: []
     end
 
@@ -340,15 +344,28 @@ module Aws::MedicalImaging
       SENSITIVE: []
     end
 
+    class MetadataCopies
+      attr_accessor copiable_attributes: ::String
+      SENSITIVE: [:copiable_attributes]
+    end
+
     class MetadataUpdates
       attr_accessor dicom_updates: Types::DICOMUpdates
+      attr_accessor revert_to_version_id: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class DicomUpdates < MetadataUpdates
       end
+      class RevertToVersionId < MetadataUpdates
+      end
       class Unknown < MetadataUpdates
       end
+    end
+
+    class Overrides
+      attr_accessor forced: bool
+      SENSITIVE: []
     end
 
     class ResourceNotFoundException
@@ -472,6 +489,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_id: ::String
       attr_accessor image_set_id: ::String
       attr_accessor latest_version_id: ::String
+      attr_accessor force: bool
       attr_accessor update_image_set_metadata_updates: Types::MetadataUpdates
       SENSITIVE: []
     end

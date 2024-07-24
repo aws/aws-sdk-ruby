@@ -687,7 +687,6 @@ module Aws::MediaPackageV2
 
       api.metadata = {
         "apiVersion" => "2022-12-25",
-        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mediapackagev2",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2024-07-24)
+------------------
+
+* Feature - Adds support for creating SiteWise Edge gateways that run on a Siemens Industrial Edge Device.
+
 1.67.0 (2024-07-02)
 ------------------
 

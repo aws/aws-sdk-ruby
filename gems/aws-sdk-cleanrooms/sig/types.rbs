@@ -52,12 +52,15 @@ module Aws::CleanRooms
       attr_accessor dimension_columns: ::Array[::String]
       attr_accessor scalar_functions: ::Array[("ABS" | "CAST" | "CEILING" | "COALESCE" | "CONVERT" | "CURRENT_DATE" | "DATEADD" | "EXTRACT" | "FLOOR" | "GETDATE" | "LN" | "LOG" | "LOWER" | "ROUND" | "RTRIM" | "SQRT" | "SUBSTRING" | "TO_CHAR" | "TO_DATE" | "TO_NUMBER" | "TO_TIMESTAMP" | "TRIM" | "TRUNC" | "UPPER")]
       attr_accessor output_constraints: ::Array[Types::AggregationConstraint]
+      attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
       SENSITIVE: []
     end
 
     class AnalysisRuleCustom
       attr_accessor allowed_analyses: ::Array[::String]
       attr_accessor allowed_analysis_providers: ::Array[::String]
+      attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
+      attr_accessor disallowed_output_columns: ::Array[::String]
       attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration
       SENSITIVE: []
     end
@@ -73,6 +76,7 @@ module Aws::CleanRooms
       attr_accessor join_columns: ::Array[::String]
       attr_accessor allowed_join_operators: ::Array[("OR" | "AND")]
       attr_accessor list_columns: ::Array[::String]
+      attr_accessor additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")
       SENSITIVE: []
     end
 
@@ -392,6 +396,17 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ConfigurationDetails
+      attr_accessor direct_analysis_configuration_details: Types::DirectAnalysisConfigurationDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DirectAnalysisConfigurationDetails < ConfigurationDetails
+      end
+      class Unknown < ConfigurationDetails
+      end
+    end
+
     class ConfiguredAudienceModelAssociation
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -485,9 +500,67 @@ module Aws::CleanRooms
       attr_accessor role_arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor analysis_rule_types: ::Array[("AGGREGATION" | "LIST" | "CUSTOM")]
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       SENSITIVE: []
+    end
+
+    class ConfiguredTableAssociationAnalysisRule
+      attr_accessor membership_identifier: ::String
+      attr_accessor configured_table_association_id: ::String
+      attr_accessor configured_table_association_arn: ::String
+      attr_accessor policy: Types::ConfiguredTableAssociationAnalysisRulePolicy
+      attr_accessor type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableAssociationAnalysisRuleAggregation
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor allowed_additional_analyses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableAssociationAnalysisRuleCustom
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor allowed_additional_analyses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableAssociationAnalysisRuleList
+      attr_accessor allowed_result_receivers: ::Array[::String]
+      attr_accessor allowed_additional_analyses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfiguredTableAssociationAnalysisRulePolicy
+      attr_accessor v1: Types::ConfiguredTableAssociationAnalysisRulePolicyV1
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class V1 < ConfiguredTableAssociationAnalysisRulePolicy
+      end
+      class Unknown < ConfiguredTableAssociationAnalysisRulePolicy
+      end
+    end
+
+    class ConfiguredTableAssociationAnalysisRulePolicyV1
+      attr_accessor list: Types::ConfiguredTableAssociationAnalysisRuleList
+      attr_accessor aggregation: Types::ConfiguredTableAssociationAnalysisRuleAggregation
+      attr_accessor custom: Types::ConfiguredTableAssociationAnalysisRuleCustom
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class List < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
+      class Aggregation < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
+      class Custom < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
+      class Unknown < ConfiguredTableAssociationAnalysisRulePolicyV1
+      end
     end
 
     class ConfiguredTableAssociationSummary
@@ -579,6 +652,19 @@ module Aws::CleanRooms
 
     class CreateConfiguredTableAnalysisRuleOutput
       attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableAssociationAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor configured_table_association_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy
+      SENSITIVE: []
+    end
+
+    class CreateConfiguredTableAssociationAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::ConfiguredTableAssociationAnalysisRule
       SENSITIVE: []
     end
 
@@ -711,6 +797,16 @@ module Aws::CleanRooms
     end
 
     class DeleteConfiguredTableAnalysisRuleOutput < Aws::EmptyStructure
+    end
+
+    class DeleteConfiguredTableAssociationAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor configured_table_association_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class DeleteConfiguredTableAssociationAnalysisRuleOutput < Aws::EmptyStructure
     end
 
     class DeleteConfiguredTableAssociationInput
@@ -846,6 +942,11 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class DirectAnalysisConfigurationDetails
+      attr_accessor receiver_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class GetAnalysisTemplateInput
       attr_accessor membership_identifier: ::String
       attr_accessor analysis_template_identifier: ::String
@@ -930,6 +1031,18 @@ module Aws::CleanRooms
 
     class GetConfiguredTableAnalysisRuleOutput
       attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableAssociationAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor configured_table_association_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class GetConfiguredTableAssociationAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::ConfiguredTableAssociationAnalysisRule
       SENSITIVE: []
     end
 
@@ -1637,6 +1750,11 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ProtectedQueryMemberOutputConfiguration
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
     class ProtectedQueryOutput
       attr_accessor s3: Types::ProtectedQueryS3Output
       attr_accessor member_list: ::Array[Types::ProtectedQuerySingleMemberOutput]
@@ -1653,10 +1771,13 @@ module Aws::CleanRooms
 
     class ProtectedQueryOutputConfiguration
       attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration
+      attr_accessor member: Types::ProtectedQueryMemberOutputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class S3 < ProtectedQueryOutputConfiguration
+      end
+      class Member < ProtectedQueryOutputConfiguration
       end
       class Unknown < ProtectedQueryOutputConfiguration
       end
@@ -1707,6 +1828,7 @@ module Aws::CleanRooms
       attr_accessor membership_arn: ::String
       attr_accessor create_time: ::Time
       attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "TIMED_OUT")
+      attr_accessor receiver_configurations: ::Array[Types::ReceiverConfiguration]
       SENSITIVE: []
     end
 
@@ -1728,6 +1850,12 @@ module Aws::CleanRooms
 
     class QueryConstraintRequireOverlap
       attr_accessor columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReceiverConfiguration
+      attr_accessor analysis_type: ("DIRECT_ANALYSIS" | "ADDITIONAL_ANALYSIS")
+      attr_accessor configuration_details: Types::ConfigurationDetails
       SENSITIVE: []
     end
 
@@ -1766,12 +1894,13 @@ module Aws::CleanRooms
       attr_accessor status: ("READY" | "NOT_READY")
       attr_accessor reasons: ::Array[Types::SchemaStatusReason]
       attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM" | "ID_MAPPING_TABLE")
-      attr_accessor configurations: ::Array[("DIFFERENTIAL_PRIVACY" | "CUSTOM_ANALYSIS_NOT_ALLOWED" | "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS" | "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED" | "ID_MAPPING_TABLE_NOT_POPULATED")]
+      attr_accessor configurations: ::Array[("DIFFERENTIAL_PRIVACY")]
+      attr_accessor analysis_type: ("DIRECT_ANALYSIS" | "ADDITIONAL_ANALYSIS")
       SENSITIVE: []
     end
 
     class SchemaStatusReason
-      attr_accessor code: ("ANALYSIS_RULE_MISSING" | "ANALYSIS_TEMPLATES_NOT_CONFIGURED" | "ANALYSIS_PROVIDERS_NOT_CONFIGURED" | "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED" | "ID_MAPPING_TABLE_NOT_POPULATED")
+      attr_accessor code: ("ANALYSIS_RULE_MISSING" | "ANALYSIS_TEMPLATES_NOT_CONFIGURED" | "ANALYSIS_PROVIDERS_NOT_CONFIGURED" | "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED" | "ID_MAPPING_TABLE_NOT_POPULATED" | "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED" | "ADDITIONAL_ANALYSES_NOT_CONFIGURED" | "RESULT_RECEIVERS_NOT_CONFIGURED" | "ADDITIONAL_ANALYSES_NOT_ALLOWED" | "RESULT_RECEIVERS_NOT_ALLOWED" | "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1900,6 +2029,19 @@ module Aws::CleanRooms
 
     class UpdateConfiguredTableAnalysisRuleOutput
       attr_accessor analysis_rule: Types::ConfiguredTableAnalysisRule
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableAssociationAnalysisRuleInput
+      attr_accessor membership_identifier: ::String
+      attr_accessor configured_table_association_identifier: ::String
+      attr_accessor analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+      attr_accessor analysis_rule_policy: Types::ConfiguredTableAssociationAnalysisRulePolicy
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguredTableAssociationAnalysisRuleOutput
+      attr_accessor analysis_rule: Types::ConfiguredTableAssociationAnalysisRule
       SENSITIVE: []
     end
 

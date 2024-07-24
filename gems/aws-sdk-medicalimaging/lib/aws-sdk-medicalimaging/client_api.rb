@@ -16,8 +16,10 @@ module Aws::MedicalImaging
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CopiableAttributes = Shapes::StringShape.new(name: 'CopiableAttributes')
     CopyDestinationImageSet = Shapes::StructureShape.new(name: 'CopyDestinationImageSet')
     CopyDestinationImageSetProperties = Shapes::StructureShape.new(name: 'CopyDestinationImageSetProperties')
     CopyImageSetInformation = Shapes::StructureShape.new(name: 'CopyImageSetInformation')
@@ -100,9 +102,11 @@ module Aws::MedicalImaging
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetadataCopies = Shapes::StructureShape.new(name: 'MetadataCopies')
     MetadataUpdates = Shapes::UnionShape.new(name: 'MetadataUpdates')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Operator = Shapes::StringShape.new(name: 'Operator')
+    Overrides = Shapes::StructureShape.new(name: 'Overrides')
     PayloadBlob = Shapes::BlobShape.new(name: 'PayloadBlob', streaming: true)
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -161,6 +165,7 @@ module Aws::MedicalImaging
     CopyImageSetRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location: "uri", location_name: "datastoreId"))
     CopyImageSetRequest.add_member(:source_image_set_id, Shapes::ShapeRef.new(shape: ImageSetId, required: true, location: "uri", location_name: "sourceImageSetId"))
     CopyImageSetRequest.add_member(:copy_image_set_information, Shapes::ShapeRef.new(shape: CopyImageSetInformation, required: true, location_name: "copyImageSetInformation"))
+    CopyImageSetRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "force"))
     CopyImageSetRequest.struct_class = Types::CopyImageSetRequest
     CopyImageSetRequest[:payload] = :copy_image_set_information
     CopyImageSetRequest[:payload_member] = CopyImageSetRequest.member(:copy_image_set_information)
@@ -171,6 +176,7 @@ module Aws::MedicalImaging
     CopyImageSetResponse.struct_class = Types::CopyImageSetResponse
 
     CopySourceImageSetInformation.add_member(:latest_version_id, Shapes::ShapeRef.new(shape: ImageSetExternalVersionId, required: true, location_name: "latestVersionId"))
+    CopySourceImageSetInformation.add_member(:dicom_copies, Shapes::ShapeRef.new(shape: MetadataCopies, location_name: "DICOMCopies"))
     CopySourceImageSetInformation.struct_class = Types::CopySourceImageSetInformation
 
     CopySourceImageSetProperties.add_member(:image_set_id, Shapes::ShapeRef.new(shape: ImageSetId, required: true, location_name: "imageSetId"))
@@ -331,6 +337,7 @@ module Aws::MedicalImaging
     GetImageSetResponse.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Date, location_name: "deletedAt"))
     GetImageSetResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     GetImageSetResponse.add_member(:image_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "imageSetArn"))
+    GetImageSetResponse.add_member(:overrides, Shapes::ShapeRef.new(shape: Overrides, location_name: "overrides"))
     GetImageSetResponse.struct_class = Types::GetImageSetResponse
 
     ImageFrameInformation.add_member(:image_frame_id, Shapes::ShapeRef.new(shape: ImageFrameId, required: true, location_name: "imageFrameId"))
@@ -344,6 +351,7 @@ module Aws::MedicalImaging
     ImageSetProperties.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt"))
     ImageSetProperties.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Date, location_name: "deletedAt"))
     ImageSetProperties.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ImageSetProperties.add_member(:overrides, Shapes::ShapeRef.new(shape: Overrides, location_name: "overrides"))
     ImageSetProperties.struct_class = Types::ImageSetProperties
 
     ImageSetPropertiesList.member = Shapes::ShapeRef.new(shape: ImageSetProperties)
@@ -395,11 +403,19 @@ module Aws::MedicalImaging
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MetadataCopies.add_member(:copiable_attributes, Shapes::ShapeRef.new(shape: CopiableAttributes, required: true, location_name: "copiableAttributes"))
+    MetadataCopies.struct_class = Types::MetadataCopies
+
     MetadataUpdates.add_member(:dicom_updates, Shapes::ShapeRef.new(shape: DICOMUpdates, location_name: "DICOMUpdates"))
+    MetadataUpdates.add_member(:revert_to_version_id, Shapes::ShapeRef.new(shape: ImageSetExternalVersionId, location_name: "revertToVersionId"))
     MetadataUpdates.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     MetadataUpdates.add_member_subclass(:dicom_updates, Types::MetadataUpdates::DicomUpdates)
+    MetadataUpdates.add_member_subclass(:revert_to_version_id, Types::MetadataUpdates::RevertToVersionId)
     MetadataUpdates.add_member_subclass(:unknown, Types::MetadataUpdates::Unknown)
     MetadataUpdates.struct_class = Types::MetadataUpdates
+
+    Overrides.add_member(:forced, Shapes::ShapeRef.new(shape: Boolean, location_name: "forced"))
+    Overrides.struct_class = Types::Overrides
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -494,6 +510,7 @@ module Aws::MedicalImaging
     UpdateImageSetMetadataRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location: "uri", location_name: "datastoreId"))
     UpdateImageSetMetadataRequest.add_member(:image_set_id, Shapes::ShapeRef.new(shape: ImageSetId, required: true, location: "uri", location_name: "imageSetId"))
     UpdateImageSetMetadataRequest.add_member(:latest_version_id, Shapes::ShapeRef.new(shape: ImageSetExternalVersionId, required: true, location: "querystring", location_name: "latestVersion"))
+    UpdateImageSetMetadataRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "force"))
     UpdateImageSetMetadataRequest.add_member(:update_image_set_metadata_updates, Shapes::ShapeRef.new(shape: MetadataUpdates, required: true, location_name: "updateImageSetMetadataUpdates"))
     UpdateImageSetMetadataRequest.struct_class = Types::UpdateImageSetMetadataRequest
     UpdateImageSetMetadataRequest[:payload] = :update_image_set_metadata_updates
@@ -520,6 +537,7 @@ module Aws::MedicalImaging
 
       api.metadata = {
         "apiVersion" => "2023-07-19",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "medical-imaging",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

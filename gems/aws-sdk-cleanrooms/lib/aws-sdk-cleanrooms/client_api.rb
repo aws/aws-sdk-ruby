@@ -16,6 +16,8 @@ module Aws::CleanRooms
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedExceptionReason')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AdditionalAnalyses = Shapes::StringShape.new(name: 'AdditionalAnalyses')
+    AdditionalAnalysesResourceArn = Shapes::StringShape.new(name: 'AdditionalAnalysesResourceArn')
     AggregateColumn = Shapes::StructureShape.new(name: 'AggregateColumn')
     AggregateColumnColumnNamesList = Shapes::ListShape.new(name: 'AggregateColumnColumnNamesList')
     AggregateFunctionName = Shapes::StringShape.new(name: 'AggregateFunctionName')
@@ -23,7 +25,9 @@ module Aws::CleanRooms
     AggregationConstraintMinimumInteger = Shapes::IntegerShape.new(name: 'AggregationConstraintMinimumInteger')
     AggregationConstraints = Shapes::ListShape.new(name: 'AggregationConstraints')
     AggregationType = Shapes::StringShape.new(name: 'AggregationType')
+    AllowedAdditionalAnalyses = Shapes::ListShape.new(name: 'AllowedAdditionalAnalyses')
     AllowedColumnList = Shapes::ListShape.new(name: 'AllowedColumnList')
+    AllowedResultReceivers = Shapes::ListShape.new(name: 'AllowedResultReceivers')
     AnalysisFormat = Shapes::StringShape.new(name: 'AnalysisFormat')
     AnalysisMethod = Shapes::StringShape.new(name: 'AnalysisMethod')
     AnalysisParameter = Shapes::StructureShape.new(name: 'AnalysisParameter')
@@ -60,6 +64,7 @@ module Aws::CleanRooms
     AnalysisTemplateValidationStatusReason = Shapes::StructureShape.new(name: 'AnalysisTemplateValidationStatusReason')
     AnalysisTemplateValidationStatusReasonList = Shapes::ListShape.new(name: 'AnalysisTemplateValidationStatusReasonList')
     AnalysisTemplateValidationType = Shapes::StringShape.new(name: 'AnalysisTemplateValidationType')
+    AnalysisType = Shapes::StringShape.new(name: 'AnalysisType')
     BatchGetCollaborationAnalysisTemplateError = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
@@ -101,6 +106,7 @@ module Aws::CleanRooms
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
+    ConfigurationDetails = Shapes::UnionShape.new(name: 'ConfigurationDetails')
     ConfiguredAudienceModelArn = Shapes::StringShape.new(name: 'ConfiguredAudienceModelArn')
     ConfiguredAudienceModelAssociation = Shapes::StructureShape.new(name: 'ConfiguredAudienceModelAssociation')
     ConfiguredAudienceModelAssociationArn = Shapes::StringShape.new(name: 'ConfiguredAudienceModelAssociationArn')
@@ -116,6 +122,14 @@ module Aws::CleanRooms
     ConfiguredTableAnalysisRuleTypeList = Shapes::ListShape.new(name: 'ConfiguredTableAnalysisRuleTypeList')
     ConfiguredTableArn = Shapes::StringShape.new(name: 'ConfiguredTableArn')
     ConfiguredTableAssociation = Shapes::StructureShape.new(name: 'ConfiguredTableAssociation')
+    ConfiguredTableAssociationAnalysisRule = Shapes::StructureShape.new(name: 'ConfiguredTableAssociationAnalysisRule')
+    ConfiguredTableAssociationAnalysisRuleAggregation = Shapes::StructureShape.new(name: 'ConfiguredTableAssociationAnalysisRuleAggregation')
+    ConfiguredTableAssociationAnalysisRuleCustom = Shapes::StructureShape.new(name: 'ConfiguredTableAssociationAnalysisRuleCustom')
+    ConfiguredTableAssociationAnalysisRuleList = Shapes::StructureShape.new(name: 'ConfiguredTableAssociationAnalysisRuleList')
+    ConfiguredTableAssociationAnalysisRulePolicy = Shapes::UnionShape.new(name: 'ConfiguredTableAssociationAnalysisRulePolicy')
+    ConfiguredTableAssociationAnalysisRulePolicyV1 = Shapes::UnionShape.new(name: 'ConfiguredTableAssociationAnalysisRulePolicyV1')
+    ConfiguredTableAssociationAnalysisRuleType = Shapes::StringShape.new(name: 'ConfiguredTableAssociationAnalysisRuleType')
+    ConfiguredTableAssociationAnalysisRuleTypeList = Shapes::ListShape.new(name: 'ConfiguredTableAssociationAnalysisRuleTypeList')
     ConfiguredTableAssociationArn = Shapes::StringShape.new(name: 'ConfiguredTableAssociationArn')
     ConfiguredTableAssociationIdentifier = Shapes::StringShape.new(name: 'ConfiguredTableAssociationIdentifier')
     ConfiguredTableAssociationSummary = Shapes::StructureShape.new(name: 'ConfiguredTableAssociationSummary')
@@ -133,6 +147,8 @@ module Aws::CleanRooms
     CreateConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'CreateConfiguredAudienceModelAssociationOutput')
     CreateConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAnalysisRuleInput')
     CreateConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAnalysisRuleOutput')
+    CreateConfiguredTableAssociationAnalysisRuleInput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAssociationAnalysisRuleInput')
+    CreateConfiguredTableAssociationAnalysisRuleOutput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAssociationAnalysisRuleOutput')
     CreateConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAssociationInput')
     CreateConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAssociationOutput')
     CreateConfiguredTableInput = Shapes::StructureShape.new(name: 'CreateConfiguredTableInput')
@@ -154,6 +170,8 @@ module Aws::CleanRooms
     DeleteConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredAudienceModelAssociationOutput')
     DeleteConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAnalysisRuleInput')
     DeleteConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAnalysisRuleOutput')
+    DeleteConfiguredTableAssociationAnalysisRuleInput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAssociationAnalysisRuleInput')
+    DeleteConfiguredTableAssociationAnalysisRuleOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAssociationAnalysisRuleOutput')
     DeleteConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAssociationInput')
     DeleteConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAssociationOutput')
     DeleteConfiguredTableInput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableInput')
@@ -190,6 +208,7 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateParametersInput = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateParametersInput')
     DifferentialPrivacyTemplateParametersOutput = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateParametersOutput')
     DifferentialPrivacyTemplateUpdateParameters = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateUpdateParameters')
+    DirectAnalysisConfigurationDetails = Shapes::StructureShape.new(name: 'DirectAnalysisConfigurationDetails')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -213,6 +232,8 @@ module Aws::CleanRooms
     GetConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'GetConfiguredAudienceModelAssociationOutput')
     GetConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'GetConfiguredTableAnalysisRuleInput')
     GetConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'GetConfiguredTableAnalysisRuleOutput')
+    GetConfiguredTableAssociationAnalysisRuleInput = Shapes::StructureShape.new(name: 'GetConfiguredTableAssociationAnalysisRuleInput')
+    GetConfiguredTableAssociationAnalysisRuleOutput = Shapes::StructureShape.new(name: 'GetConfiguredTableAssociationAnalysisRuleOutput')
     GetConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'GetConfiguredTableAssociationInput')
     GetConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'GetConfiguredTableAssociationOutput')
     GetConfiguredTableInput = Shapes::StructureShape.new(name: 'GetConfiguredTableInput')
@@ -348,6 +369,7 @@ module Aws::CleanRooms
     ProtectedQuery = Shapes::StructureShape.new(name: 'ProtectedQuery')
     ProtectedQueryError = Shapes::StructureShape.new(name: 'ProtectedQueryError')
     ProtectedQueryIdentifier = Shapes::StringShape.new(name: 'ProtectedQueryIdentifier')
+    ProtectedQueryMemberOutputConfiguration = Shapes::StructureShape.new(name: 'ProtectedQueryMemberOutputConfiguration')
     ProtectedQueryMemberOutputList = Shapes::ListShape.new(name: 'ProtectedQueryMemberOutputList')
     ProtectedQueryOutput = Shapes::UnionShape.new(name: 'ProtectedQueryOutput')
     ProtectedQueryOutputConfiguration = Shapes::UnionShape.new(name: 'ProtectedQueryOutputConfiguration')
@@ -369,6 +391,9 @@ module Aws::CleanRooms
     QueryConstraintList = Shapes::ListShape.new(name: 'QueryConstraintList')
     QueryConstraintRequireOverlap = Shapes::StructureShape.new(name: 'QueryConstraintRequireOverlap')
     QueryTables = Shapes::ListShape.new(name: 'QueryTables')
+    ReceiverAccountIds = Shapes::ListShape.new(name: 'ReceiverAccountIds')
+    ReceiverConfiguration = Shapes::StructureShape.new(name: 'ReceiverConfiguration')
+    ReceiverConfigurationsList = Shapes::ListShape.new(name: 'ReceiverConfigurationsList')
     ResourceAlias = Shapes::StringShape.new(name: 'ResourceAlias')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -422,6 +447,8 @@ module Aws::CleanRooms
     UpdateConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredAudienceModelAssociationOutput')
     UpdateConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAnalysisRuleInput')
     UpdateConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAnalysisRuleOutput')
+    UpdateConfiguredTableAssociationAnalysisRuleInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAssociationAnalysisRuleInput')
+    UpdateConfiguredTableAssociationAnalysisRuleOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAssociationAnalysisRuleOutput')
     UpdateConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAssociationInput')
     UpdateConfiguredTableAssociationOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAssociationOutput')
     UpdateConfiguredTableInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableInput')
@@ -459,7 +486,11 @@ module Aws::CleanRooms
 
     AggregationConstraints.member = Shapes::ShapeRef.new(shape: AggregationConstraint)
 
+    AllowedAdditionalAnalyses.member = Shapes::ShapeRef.new(shape: AdditionalAnalysesResourceArn)
+
     AllowedColumnList.member = Shapes::ShapeRef.new(shape: ColumnName)
+
+    AllowedResultReceivers.member = Shapes::ShapeRef.new(shape: AccountId)
 
     AnalysisParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "name"))
     AnalysisParameter.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, required: true, location_name: "type"))
@@ -483,6 +514,7 @@ module Aws::CleanRooms
     AnalysisRuleAggregation.add_member(:dimension_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "dimensionColumns"))
     AnalysisRuleAggregation.add_member(:scalar_functions, Shapes::ShapeRef.new(shape: ScalarFunctionsList, required: true, location_name: "scalarFunctions"))
     AnalysisRuleAggregation.add_member(:output_constraints, Shapes::ShapeRef.new(shape: AggregationConstraints, required: true, location_name: "outputConstraints"))
+    AnalysisRuleAggregation.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
     AnalysisRuleAggregation.struct_class = Types::AnalysisRuleAggregation
 
     AnalysisRuleAggregationAggregateColumnsList.member = Shapes::ShapeRef.new(shape: AggregateColumn)
@@ -491,6 +523,8 @@ module Aws::CleanRooms
 
     AnalysisRuleCustom.add_member(:allowed_analyses, Shapes::ShapeRef.new(shape: AnalysisRuleCustomAllowedAnalysesList, required: true, location_name: "allowedAnalyses"))
     AnalysisRuleCustom.add_member(:allowed_analysis_providers, Shapes::ShapeRef.new(shape: AnalysisRuleCustomAllowedAnalysisProvidersList, location_name: "allowedAnalysisProviders"))
+    AnalysisRuleCustom.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
+    AnalysisRuleCustom.add_member(:disallowed_output_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, location_name: "disallowedOutputColumns"))
     AnalysisRuleCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
     AnalysisRuleCustom.struct_class = Types::AnalysisRuleCustom
 
@@ -508,6 +542,7 @@ module Aws::CleanRooms
     AnalysisRuleList.add_member(:join_columns, Shapes::ShapeRef.new(shape: AnalysisRuleListJoinColumnsList, required: true, location_name: "joinColumns"))
     AnalysisRuleList.add_member(:allowed_join_operators, Shapes::ShapeRef.new(shape: JoinOperatorsList, location_name: "allowedJoinOperators"))
     AnalysisRuleList.add_member(:list_columns, Shapes::ShapeRef.new(shape: AnalysisRuleColumnList, required: true, location_name: "listColumns"))
+    AnalysisRuleList.add_member(:additional_analyses, Shapes::ShapeRef.new(shape: AdditionalAnalyses, location_name: "additionalAnalyses"))
     AnalysisRuleList.struct_class = Types::AnalysisRuleList
 
     AnalysisRuleListJoinColumnsList.member = Shapes::ShapeRef.new(shape: AnalysisRuleColumnName)
@@ -790,6 +825,12 @@ module Aws::CleanRooms
 
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
 
+    ConfigurationDetails.add_member(:direct_analysis_configuration_details, Shapes::ShapeRef.new(shape: DirectAnalysisConfigurationDetails, location_name: "directAnalysisConfigurationDetails"))
+    ConfigurationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfigurationDetails.add_member_subclass(:direct_analysis_configuration_details, Types::ConfigurationDetails::DirectAnalysisConfigurationDetails)
+    ConfigurationDetails.add_member_subclass(:unknown, Types::ConfigurationDetails::Unknown)
+    ConfigurationDetails.struct_class = Types::ConfigurationDetails
+
     ConfiguredAudienceModelAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location_name: "id"))
     ConfiguredAudienceModelAssociation.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationArn, required: true, location_name: "arn"))
     ConfiguredAudienceModelAssociation.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
@@ -866,9 +907,49 @@ module Aws::CleanRooms
     ConfiguredTableAssociation.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     ConfiguredTableAssociation.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
     ConfiguredTableAssociation.add_member(:description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "description"))
+    ConfiguredTableAssociation.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleTypeList, location_name: "analysisRuleTypes"))
     ConfiguredTableAssociation.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     ConfiguredTableAssociation.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     ConfiguredTableAssociation.struct_class = Types::ConfiguredTableAssociation
+
+    ConfiguredTableAssociationAnalysisRule.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipIdentifier"))
+    ConfiguredTableAssociationAnalysisRule.add_member(:configured_table_association_id, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location_name: "configuredTableAssociationId"))
+    ConfiguredTableAssociationAnalysisRule.add_member(:configured_table_association_arn, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationArn, required: true, location_name: "configuredTableAssociationArn"))
+    ConfiguredTableAssociationAnalysisRule.add_member(:policy, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRulePolicy, required: true, location_name: "policy"))
+    ConfiguredTableAssociationAnalysisRule.add_member(:type, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleType, required: true, location_name: "type"))
+    ConfiguredTableAssociationAnalysisRule.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    ConfiguredTableAssociationAnalysisRule.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    ConfiguredTableAssociationAnalysisRule.struct_class = Types::ConfiguredTableAssociationAnalysisRule
+
+    ConfiguredTableAssociationAnalysisRuleAggregation.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    ConfiguredTableAssociationAnalysisRuleAggregation.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    ConfiguredTableAssociationAnalysisRuleAggregation.struct_class = Types::ConfiguredTableAssociationAnalysisRuleAggregation
+
+    ConfiguredTableAssociationAnalysisRuleCustom.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    ConfiguredTableAssociationAnalysisRuleCustom.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    ConfiguredTableAssociationAnalysisRuleCustom.struct_class = Types::ConfiguredTableAssociationAnalysisRuleCustom
+
+    ConfiguredTableAssociationAnalysisRuleList.add_member(:allowed_result_receivers, Shapes::ShapeRef.new(shape: AllowedResultReceivers, location_name: "allowedResultReceivers"))
+    ConfiguredTableAssociationAnalysisRuleList.add_member(:allowed_additional_analyses, Shapes::ShapeRef.new(shape: AllowedAdditionalAnalyses, location_name: "allowedAdditionalAnalyses"))
+    ConfiguredTableAssociationAnalysisRuleList.struct_class = Types::ConfiguredTableAssociationAnalysisRuleList
+
+    ConfiguredTableAssociationAnalysisRulePolicy.add_member(:v1, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRulePolicyV1, location_name: "v1"))
+    ConfiguredTableAssociationAnalysisRulePolicy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfiguredTableAssociationAnalysisRulePolicy.add_member_subclass(:v1, Types::ConfiguredTableAssociationAnalysisRulePolicy::V1)
+    ConfiguredTableAssociationAnalysisRulePolicy.add_member_subclass(:unknown, Types::ConfiguredTableAssociationAnalysisRulePolicy::Unknown)
+    ConfiguredTableAssociationAnalysisRulePolicy.struct_class = Types::ConfiguredTableAssociationAnalysisRulePolicy
+
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member(:list, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleList, location_name: "list"))
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member(:aggregation, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleAggregation, location_name: "aggregation"))
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member(:custom, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleCustom, location_name: "custom"))
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member_subclass(:list, Types::ConfiguredTableAssociationAnalysisRulePolicyV1::List)
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member_subclass(:aggregation, Types::ConfiguredTableAssociationAnalysisRulePolicyV1::Aggregation)
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member_subclass(:custom, Types::ConfiguredTableAssociationAnalysisRulePolicyV1::Custom)
+    ConfiguredTableAssociationAnalysisRulePolicyV1.add_member_subclass(:unknown, Types::ConfiguredTableAssociationAnalysisRulePolicyV1::Unknown)
+    ConfiguredTableAssociationAnalysisRulePolicyV1.struct_class = Types::ConfiguredTableAssociationAnalysisRulePolicyV1
+
+    ConfiguredTableAssociationAnalysisRuleTypeList.member = Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleType)
 
     ConfiguredTableAssociationSummary.add_member(:configured_table_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "configuredTableId"))
     ConfiguredTableAssociationSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
@@ -943,6 +1024,15 @@ module Aws::CleanRooms
 
     CreateConfiguredTableAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRule, required: true, location_name: "analysisRule"))
     CreateConfiguredTableAnalysisRuleOutput.struct_class = Types::CreateConfiguredTableAnalysisRuleOutput
+
+    CreateConfiguredTableAssociationAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    CreateConfiguredTableAssociationAnalysisRuleInput.add_member(:configured_table_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location: "uri", location_name: "configuredTableAssociationIdentifier"))
+    CreateConfiguredTableAssociationAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleType, required: true, location_name: "analysisRuleType"))
+    CreateConfiguredTableAssociationAnalysisRuleInput.add_member(:analysis_rule_policy, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRulePolicy, required: true, location_name: "analysisRulePolicy"))
+    CreateConfiguredTableAssociationAnalysisRuleInput.struct_class = Types::CreateConfiguredTableAssociationAnalysisRuleInput
+
+    CreateConfiguredTableAssociationAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRule, required: true, location_name: "analysisRule"))
+    CreateConfiguredTableAssociationAnalysisRuleOutput.struct_class = Types::CreateConfiguredTableAssociationAnalysisRuleOutput
 
     CreateConfiguredTableAssociationInput.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
     CreateConfiguredTableAssociationInput.add_member(:description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "description"))
@@ -1036,6 +1126,13 @@ module Aws::CleanRooms
     DeleteConfiguredTableAnalysisRuleInput.struct_class = Types::DeleteConfiguredTableAnalysisRuleInput
 
     DeleteConfiguredTableAnalysisRuleOutput.struct_class = Types::DeleteConfiguredTableAnalysisRuleOutput
+
+    DeleteConfiguredTableAssociationAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DeleteConfiguredTableAssociationAnalysisRuleInput.add_member(:configured_table_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location: "uri", location_name: "configuredTableAssociationIdentifier"))
+    DeleteConfiguredTableAssociationAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
+    DeleteConfiguredTableAssociationAnalysisRuleInput.struct_class = Types::DeleteConfiguredTableAssociationAnalysisRuleInput
+
+    DeleteConfiguredTableAssociationAnalysisRuleOutput.struct_class = Types::DeleteConfiguredTableAssociationAnalysisRuleOutput
 
     DeleteConfiguredTableAssociationInput.add_member(:configured_table_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location: "uri", location_name: "configuredTableAssociationIdentifier"))
     DeleteConfiguredTableAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
@@ -1133,6 +1230,9 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateUpdateParameters.add_member(:users_noise_per_query, Shapes::ShapeRef.new(shape: UsersNoisePerQuery, location_name: "usersNoisePerQuery"))
     DifferentialPrivacyTemplateUpdateParameters.struct_class = Types::DifferentialPrivacyTemplateUpdateParameters
 
+    DirectAnalysisConfigurationDetails.add_member(:receiver_account_ids, Shapes::ShapeRef.new(shape: ReceiverAccountIds, location_name: "receiverAccountIds"))
+    DirectAnalysisConfigurationDetails.struct_class = Types::DirectAnalysisConfigurationDetails
+
     GetAnalysisTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetAnalysisTemplateInput.add_member(:analysis_template_identifier, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location: "uri", location_name: "analysisTemplateIdentifier"))
     GetAnalysisTemplateInput.struct_class = Types::GetAnalysisTemplateInput
@@ -1187,6 +1287,14 @@ module Aws::CleanRooms
 
     GetConfiguredTableAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRule, required: true, location_name: "analysisRule"))
     GetConfiguredTableAnalysisRuleOutput.struct_class = Types::GetConfiguredTableAnalysisRuleOutput
+
+    GetConfiguredTableAssociationAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetConfiguredTableAssociationAnalysisRuleInput.add_member(:configured_table_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location: "uri", location_name: "configuredTableAssociationIdentifier"))
+    GetConfiguredTableAssociationAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
+    GetConfiguredTableAssociationAnalysisRuleInput.struct_class = Types::GetConfiguredTableAssociationAnalysisRuleInput
+
+    GetConfiguredTableAssociationAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRule, required: true, location_name: "analysisRule"))
+    GetConfiguredTableAssociationAnalysisRuleOutput.struct_class = Types::GetConfiguredTableAssociationAnalysisRuleOutput
 
     GetConfiguredTableAssociationInput.add_member(:configured_table_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location: "uri", location_name: "configuredTableAssociationIdentifier"))
     GetConfiguredTableAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
@@ -1708,6 +1816,9 @@ module Aws::CleanRooms
     ProtectedQueryError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     ProtectedQueryError.struct_class = Types::ProtectedQueryError
 
+    ProtectedQueryMemberOutputConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    ProtectedQueryMemberOutputConfiguration.struct_class = Types::ProtectedQueryMemberOutputConfiguration
+
     ProtectedQueryMemberOutputList.member = Shapes::ShapeRef.new(shape: ProtectedQuerySingleMemberOutput)
 
     ProtectedQueryOutput.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3Output, location_name: "s3"))
@@ -1719,8 +1830,10 @@ module Aws::CleanRooms
     ProtectedQueryOutput.struct_class = Types::ProtectedQueryOutput
 
     ProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
+    ProtectedQueryOutputConfiguration.add_member(:member, Shapes::ShapeRef.new(shape: ProtectedQueryMemberOutputConfiguration, location_name: "member"))
     ProtectedQueryOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProtectedQueryOutputConfiguration.add_member_subclass(:s3, Types::ProtectedQueryOutputConfiguration::S3)
+    ProtectedQueryOutputConfiguration.add_member_subclass(:member, Types::ProtectedQueryOutputConfiguration::Member)
     ProtectedQueryOutputConfiguration.add_member_subclass(:unknown, Types::ProtectedQueryOutputConfiguration::Unknown)
     ProtectedQueryOutputConfiguration.struct_class = Types::ProtectedQueryOutputConfiguration
 
@@ -1754,6 +1867,7 @@ module Aws::CleanRooms
     ProtectedQuerySummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
     ProtectedQuerySummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     ProtectedQuerySummary.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedQueryStatus, required: true, location_name: "status"))
+    ProtectedQuerySummary.add_member(:receiver_configurations, Shapes::ShapeRef.new(shape: ReceiverConfigurationsList, required: true, location_name: "receiverConfigurations"))
     ProtectedQuerySummary.struct_class = Types::ProtectedQuerySummary
 
     ProtectedQuerySummaryList.member = Shapes::ShapeRef.new(shape: ProtectedQuerySummary)
@@ -1773,6 +1887,14 @@ module Aws::CleanRooms
     QueryConstraintRequireOverlap.struct_class = Types::QueryConstraintRequireOverlap
 
     QueryTables.member = Shapes::ShapeRef.new(shape: TableAlias)
+
+    ReceiverAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    ReceiverConfiguration.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, required: true, location_name: "analysisType"))
+    ReceiverConfiguration.add_member(:configuration_details, Shapes::ShapeRef.new(shape: ConfigurationDetails, location_name: "configurationDetails"))
+    ReceiverConfiguration.struct_class = Types::ReceiverConfiguration
+
+    ReceiverConfigurationsList.member = Shapes::ShapeRef.new(shape: ReceiverConfiguration)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -1813,6 +1935,7 @@ module Aws::CleanRooms
     SchemaStatusDetail.add_member(:reasons, Shapes::ShapeRef.new(shape: SchemaStatusReasonList, location_name: "reasons"))
     SchemaStatusDetail.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: AnalysisRuleType, location_name: "analysisRuleType"))
     SchemaStatusDetail.add_member(:configurations, Shapes::ShapeRef.new(shape: SchemaConfigurationList, location_name: "configurations"))
+    SchemaStatusDetail.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, required: true, location_name: "analysisType"))
     SchemaStatusDetail.struct_class = Types::SchemaStatusDetail
 
     SchemaStatusDetailList.member = Shapes::ShapeRef.new(shape: SchemaStatusDetail)
@@ -1916,6 +2039,15 @@ module Aws::CleanRooms
 
     UpdateConfiguredTableAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRule, required: true, location_name: "analysisRule"))
     UpdateConfiguredTableAnalysisRuleOutput.struct_class = Types::UpdateConfiguredTableAnalysisRuleOutput
+
+    UpdateConfiguredTableAssociationAnalysisRuleInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdateConfiguredTableAssociationAnalysisRuleInput.add_member(:configured_table_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location: "uri", location_name: "configuredTableAssociationIdentifier"))
+    UpdateConfiguredTableAssociationAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
+    UpdateConfiguredTableAssociationAnalysisRuleInput.add_member(:analysis_rule_policy, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRulePolicy, required: true, location_name: "analysisRulePolicy"))
+    UpdateConfiguredTableAssociationAnalysisRuleInput.struct_class = Types::UpdateConfiguredTableAssociationAnalysisRuleInput
+
+    UpdateConfiguredTableAssociationAnalysisRuleOutput.add_member(:analysis_rule, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationAnalysisRule, required: true, location_name: "analysisRule"))
+    UpdateConfiguredTableAssociationAnalysisRuleOutput.struct_class = Types::UpdateConfiguredTableAssociationAnalysisRuleOutput
 
     UpdateConfiguredTableAssociationInput.add_member(:configured_table_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableAssociationIdentifier, required: true, location: "uri", location_name: "configuredTableAssociationIdentifier"))
     UpdateConfiguredTableAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
@@ -2134,6 +2266,20 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_configured_table_association_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConfiguredTableAssociationAnalysisRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule"
+        o.input = Shapes::ShapeRef.new(shape: CreateConfiguredTableAssociationAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateConfiguredTableAssociationAnalysisRuleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_id_mapping_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIdMappingTable"
         o.http_method = "POST"
@@ -2265,6 +2411,20 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: DeleteConfiguredTableAssociationInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteConfiguredTableAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_configured_table_association_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConfiguredTableAssociationAnalysisRule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConfiguredTableAssociationAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConfiguredTableAssociationAnalysisRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -2462,6 +2622,19 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetConfiguredTableAssociationInput)
         o.output = Shapes::ShapeRef.new(shape: GetConfiguredTableAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_configured_table_association_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConfiguredTableAssociationAnalysisRule"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}"
+        o.input = Shapes::ShapeRef.new(shape: GetConfiguredTableAssociationAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: GetConfiguredTableAssociationAnalysisRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3042,6 +3215,20 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAssociationInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_configured_table_association_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfiguredTableAssociationAnalysisRule"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}/analysisRule/{analysisRuleType}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAssociationAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConfiguredTableAssociationAnalysisRuleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

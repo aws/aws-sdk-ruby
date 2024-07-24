@@ -436,6 +436,11 @@ module Aws::MedicalImaging
     # @option params [required, Types::CopyImageSetInformation] :copy_image_set_information
     #   Copy image set information.
     #
+    # @option params [Boolean] :force
+    #   Setting this flag will force the `CopyImageSet` operation, even if
+    #   Patient, Study, or Series level metadata are mismatched across the
+    #   `sourceImageSet` and `destinationImageSet`.
+    #
     # @return [Types::CopyImageSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyImageSetResponse#datastore_id #datastore_id} => String
@@ -450,12 +455,16 @@ module Aws::MedicalImaging
     #     copy_image_set_information: { # required
     #       source_image_set: { # required
     #         latest_version_id: "ImageSetExternalVersionId", # required
+    #         dicom_copies: {
+    #           copiable_attributes: "CopiableAttributes", # required
+    #         },
     #       },
     #       destination_image_set: {
     #         image_set_id: "ImageSetId", # required
     #         latest_version_id: "ImageSetExternalVersionId", # required
     #       },
     #     },
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -754,6 +763,7 @@ module Aws::MedicalImaging
     #   * {Types::GetImageSetResponse#deleted_at #deleted_at} => Time
     #   * {Types::GetImageSetResponse#message #message} => String
     #   * {Types::GetImageSetResponse#image_set_arn #image_set_arn} => String
+    #   * {Types::GetImageSetResponse#overrides #overrides} => Types::Overrides
     #
     # @example Request syntax with placeholder values
     #
@@ -775,6 +785,7 @@ module Aws::MedicalImaging
     #   resp.deleted_at #=> Time
     #   resp.message #=> String
     #   resp.image_set_arn #=> String
+    #   resp.overrides.forced #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetImageSet AWS API Documentation
     #
@@ -967,6 +978,7 @@ module Aws::MedicalImaging
     #   resp.image_set_properties_list[0].updated_at #=> Time
     #   resp.image_set_properties_list[0].deleted_at #=> Time
     #   resp.image_set_properties_list[0].message #=> String
+    #   resp.image_set_properties_list[0].overrides.forced #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/ListImageSetVersions AWS API Documentation
@@ -1248,6 +1260,16 @@ module Aws::MedicalImaging
     # @option params [required, String] :latest_version_id
     #   The latest image set version identifier.
     #
+    # @option params [Boolean] :force
+    #   Setting this flag will force the `UpdateImageSetMetadata` operation
+    #   for the following attributes:
+    #
+    #   * `Tag.StudyInstanceUID`, `Tag.SeriesInstanceUID`,
+    #     `Tag.SOPInstanceUID`, and `Tag.StudyID`
+    #
+    #   * Adding, removing, or updating private tags for an individual SOP
+    #     Instance
+    #
     # @option params [required, Types::MetadataUpdates] :update_image_set_metadata_updates
     #   Update image set metadata updates.
     #
@@ -1268,11 +1290,13 @@ module Aws::MedicalImaging
     #     datastore_id: "DatastoreId", # required
     #     image_set_id: "ImageSetId", # required
     #     latest_version_id: "ImageSetExternalVersionId", # required
+    #     force: false,
     #     update_image_set_metadata_updates: { # required
     #       dicom_updates: {
     #         removable_attributes: "data",
     #         updatable_attributes: "data",
     #       },
+    #       revert_to_version_id: "ImageSetExternalVersionId",
     #     },
     #   })
     #
@@ -1309,7 +1333,7 @@ module Aws::MedicalImaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

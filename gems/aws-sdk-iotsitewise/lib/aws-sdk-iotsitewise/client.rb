@@ -1152,7 +1152,7 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html
     #
     # @option params [required, String] :asset_model_name
-    #   A unique, friendly name for the asset model.
+    #   A unique name for the asset model.
     #
     # @option params [String] :asset_model_description
     #   A description for the asset model.
@@ -1193,13 +1193,15 @@ module Aws::IoTSiteWise
     #
     #   <note markdown="1"> When creating custom composite models, you need to use
     #   [CreateAssetModelCompositeModel][1]. For more information, see
-    #   &lt;LINK&gt;.
+    #   [Creating custom composite models (Components)][2] in the *IoT
+    #   SiteWise User Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-custom-composite-models.html
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -1500,7 +1502,7 @@ module Aws::IoTSiteWise
     #   A description for the composite model.
     #
     # @option params [required, String] :asset_model_composite_model_name
-    #   A unique, friendly name for the composite model.
+    #   A unique name for the composite model.
     #
     # @option params [required, String] :asset_model_composite_model_type
     #   The composite model type. Valid values are `AWS/ALARM`, `CUSTOM`, or `
@@ -1515,18 +1517,21 @@ module Aws::IoTSiteWise
     #   not need to pass this option.**
     #
     # @option params [String] :composed_asset_model_id
-    #   The ID of a composite model on this asset.
+    #   The ID of a component model which is reused to create this composite
+    #   model.
     #
     # @option params [Array<Types::AssetModelPropertyDefinition>] :asset_model_composite_model_properties
     #   The property definitions of the composite model. For more information,
-    #   see &lt;LINK&gt;.
+    #   see [ Inline custom composite models][1] in the *IoT SiteWise User
+    #   Guide*.
     #
     #   You can specify up to 200 properties per composite model. For more
-    #   information, see [Quotas][1] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html#inline-composite-models
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #
     # @return [Types::CreateAssetModelCompositeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1814,7 +1819,7 @@ module Aws::IoTSiteWise
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html
     #
     # @option params [required, String] :gateway_name
-    #   A unique, friendly name for the gateway.
+    #   A unique name for the gateway.
     #
     # @option params [required, Types::GatewayPlatform] :gateway_platform
     #   The gateway's platform. You can only specify one platform in a
@@ -1837,13 +1842,16 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_gateway({
-    #     gateway_name: "Name", # required
+    #     gateway_name: "GatewayName", # required
     #     gateway_platform: { # required
     #       greengrass: {
     #         group_arn: "ARN", # required
     #       },
     #       greengrass_v2: {
     #         core_device_thing_name: "CoreDeviceThingName", # required
+    #       },
+    #       siemens_ie: {
+    #         iot_core_thing_name: "IotCoreThingName", # required
     #       },
     #     },
     #     tags: {
@@ -3300,9 +3308,10 @@ module Aws::IoTSiteWise
     #   resp.gateway_arn #=> String
     #   resp.gateway_platform.greengrass.group_arn #=> String
     #   resp.gateway_platform.greengrass_v2.core_device_thing_name #=> String
+    #   resp.gateway_platform.siemens_ie.iot_core_thing_name #=> String
     #   resp.gateway_capability_summaries #=> Array
     #   resp.gateway_capability_summaries[0].capability_namespace #=> String
-    #   resp.gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
+    #   resp.gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN", "NOT_APPLICABLE"
     #   resp.creation_date #=> Time
     #   resp.last_update_date #=> Time
     #
@@ -3354,7 +3363,7 @@ module Aws::IoTSiteWise
     #   resp.gateway_id #=> String
     #   resp.capability_namespace #=> String
     #   resp.capability_configuration #=> String
-    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
+    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN", "NOT_APPLICABLE"
     #
     # @overload describe_gateway_capability_configuration(params = {})
     # @param [Hash] params ({})
@@ -5093,9 +5102,10 @@ module Aws::IoTSiteWise
     #   resp.gateway_summaries[0].gateway_name #=> String
     #   resp.gateway_summaries[0].gateway_platform.greengrass.group_arn #=> String
     #   resp.gateway_summaries[0].gateway_platform.greengrass_v2.core_device_thing_name #=> String
+    #   resp.gateway_summaries[0].gateway_platform.siemens_ie.iot_core_thing_name #=> String
     #   resp.gateway_summaries[0].gateway_capability_summaries #=> Array
     #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_namespace #=> String
-    #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
+    #   resp.gateway_summaries[0].gateway_capability_summaries[0].capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN", "NOT_APPLICABLE"
     #   resp.gateway_summaries[0].creation_date #=> Time
     #   resp.gateway_summaries[0].last_update_date #=> Time
     #   resp.next_token #=> String
@@ -5720,22 +5730,23 @@ module Aws::IoTSiteWise
     # information, see [Updating assets and models][1] in the *IoT SiteWise
     # User Guide*.
     #
-    # This operation overwrites the existing model with the provided model.
-    # To avoid deleting your asset model's properties or hierarchies, you
-    # must include their IDs and definitions in the updated asset model
-    # payload. For more information, see [DescribeAssetModel][2].
+    # If you remove a property from an asset model, IoT SiteWise deletes all
+    # previous data for that property. You can’t change the type or data
+    # type of an existing property.
     #
-    #  If you remove a property from an asset model, IoT SiteWise deletes
-    # all
-    # previous data for that property. If you remove a hierarchy definition
-    # from an asset model, IoT SiteWise disassociates every asset associated
-    # with that hierarchy. You can't change the type or data type of an
-    # existing property.
+    #  To replace an existing asset model property with a new one with the
+    # same `name`, do the following:
+    #
+    #  1.  Submit an `UpdateAssetModel` request with the entire existing
+    #     property removed.
+    #
+    # 2.  Submit a second `UpdateAssetModel` request that includes the new
+    #     property. The new asset property will have the same `name` as the
+    #     previous one and IoT SiteWise will generate a new unique `id`.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
-    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
     #
     # @option params [required, String] :asset_model_id
     #   The ID of the asset model to update. This can be either the actual ID
@@ -5748,7 +5759,7 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #
     # @option params [required, String] :asset_model_name
-    #   A unique, friendly name for the asset model.
+    #   A unique name for the asset model.
     #
     # @option params [String] :asset_model_description
     #   A description for the asset model.
@@ -5790,13 +5801,15 @@ module Aws::IoTSiteWise
     #
     #   <note markdown="1"> When creating custom composite models, you need to use
     #   [CreateAssetModelCompositeModel][1]. For more information, see
-    #   &lt;LINK&gt;.
+    #   [Creating custom composite models (Components)][2] in the *IoT
+    #   SiteWise User Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-custom-composite-models.html
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -6062,7 +6075,7 @@ module Aws::IoTSiteWise
     #   A description for the composite model.
     #
     # @option params [required, String] :asset_model_composite_model_name
-    #   A unique, friendly name for the composite model.
+    #   A unique name for the composite model.
     #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
@@ -6074,14 +6087,16 @@ module Aws::IoTSiteWise
     #
     # @option params [Array<Types::AssetModelProperty>] :asset_model_composite_model_properties
     #   The property definitions of the composite model. For more information,
-    #   see &lt;LINK&gt;.
+    #   see [ Inline custom composite models][1] in the *IoT SiteWise User
+    #   Guide*.
     #
     #   You can specify up to 200 properties per composite model. For more
-    #   information, see [Quotas][1] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html#inline-composite-models
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #
     # @return [Types::UpdateAssetModelCompositeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6342,7 +6357,7 @@ module Aws::IoTSiteWise
     #   The ID of the gateway to update.
     #
     # @option params [required, String] :gateway_name
-    #   A unique, friendly name for the gateway.
+    #   A unique name for the gateway.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6350,7 +6365,7 @@ module Aws::IoTSiteWise
     #
     #   resp = client.update_gateway({
     #     gateway_id: "ID", # required
-    #     gateway_name: "Name", # required
+    #     gateway_name: "GatewayName", # required
     #   })
     #
     # @overload update_gateway(params = {})
@@ -6407,7 +6422,7 @@ module Aws::IoTSiteWise
     # @example Response structure
     #
     #   resp.capability_namespace #=> String
-    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN"
+    #   resp.capability_sync_status #=> String, one of "IN_SYNC", "OUT_OF_SYNC", "SYNC_FAILED", "UNKNOWN", "NOT_APPLICABLE"
     #
     # @overload update_gateway_capability_configuration(params = {})
     # @param [Hash] params ({})
@@ -6561,7 +6576,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

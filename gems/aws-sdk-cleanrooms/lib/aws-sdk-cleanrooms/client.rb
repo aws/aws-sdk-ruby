@@ -531,11 +531,12 @@ module Aws::CleanRooms
     #   resp.schemas[0].schema_status_details #=> Array
     #   resp.schemas[0].schema_status_details[0].status #=> String, one of "READY", "NOT_READY"
     #   resp.schemas[0].schema_status_details[0].reasons #=> Array
-    #   resp.schemas[0].schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
+    #   resp.schemas[0].schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED", "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_CONFIGURED", "RESULT_RECEIVERS_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_ALLOWED", "RESULT_RECEIVERS_NOT_ALLOWED", "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"
     #   resp.schemas[0].schema_status_details[0].reasons[0].message #=> String
     #   resp.schemas[0].schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schemas[0].schema_status_details[0].configurations #=> Array
-    #   resp.schemas[0].schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY", "CUSTOM_ANALYSIS_NOT_ALLOWED", "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS", "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
+    #   resp.schemas[0].schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.schemas[0].schema_status_details[0].analysis_type #=> String, one of "DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
@@ -593,6 +594,7 @@ module Aws::CleanRooms
     #   resp.analysis_rules[0].policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rules[0].policy.v1.list.list_columns #=> Array
     #   resp.analysis_rules[0].policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.list.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rules[0].policy.v1.aggregation.aggregate_columns #=> Array
     #   resp.analysis_rules[0].policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
     #   resp.analysis_rules[0].policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
@@ -610,10 +612,14 @@ module Aws::CleanRooms
     #   resp.analysis_rules[0].policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rules[0].policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rules[0].policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rules[0].policy.v1.aggregation.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rules[0].policy.v1.custom.allowed_analyses #=> Array
     #   resp.analysis_rules[0].policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rules[0].policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rules[0].policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rules[0].policy.v1.custom.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rules[0].policy.v1.custom.disallowed_output_columns #=> Array
+    #   resp.analysis_rules[0].policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rules[0].policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rules[0].policy.v1.id_mapping_table.join_columns #=> Array
@@ -997,7 +1003,7 @@ module Aws::CleanRooms
     #   The type of analysis rule.
     #
     # @option params [required, Types::ConfiguredTableAnalysisRulePolicy] :analysis_rule_policy
-    #   The entire created configured table analysis rule object.
+    #   The analysis rule policy that was created for the configured table.
     #
     # @return [Types::CreateConfiguredTableAnalysisRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1014,6 +1020,7 @@ module Aws::CleanRooms
     #           join_columns: ["AnalysisRuleColumnName"], # required
     #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           list_columns: ["AnalysisRuleColumnName"], # required
+    #           additional_analyses: "ALLOWED", # accepts ALLOWED, REQUIRED, NOT_ALLOWED
     #         },
     #         aggregation: {
     #           aggregate_columns: [ # required
@@ -1034,10 +1041,13 @@ module Aws::CleanRooms
     #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
     #             },
     #           ],
+    #           additional_analyses: "ALLOWED", # accepts ALLOWED, REQUIRED, NOT_ALLOWED
     #         },
     #         custom: {
     #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"], # required
     #           allowed_analysis_providers: ["AccountId"],
+    #           additional_analyses: "ALLOWED", # accepts ALLOWED, REQUIRED, NOT_ALLOWED
+    #           disallowed_output_columns: ["AnalysisRuleColumnName"],
     #           differential_privacy: {
     #             columns: [ # required
     #               {
@@ -1060,6 +1070,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
@@ -1077,10 +1088,14 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.aggregation.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
@@ -1153,6 +1168,8 @@ module Aws::CleanRooms
     #   resp.configured_table_association.role_arn #=> String
     #   resp.configured_table_association.name #=> String
     #   resp.configured_table_association.description #=> String
+    #   resp.configured_table_association.analysis_rule_types #=> Array
+    #   resp.configured_table_association.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.configured_table_association.create_time #=> Time
     #   resp.configured_table_association.update_time #=> Time
     #
@@ -1162,6 +1179,81 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def create_configured_table_association(params = {}, options = {})
       req = build_request(:create_configured_table_association, params)
+      req.send_request(options)
+    end
+
+    # Creates a new analysis rule for an associated configured table.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #
+    # @option params [required, String] :configured_table_association_identifier
+    #   The unique ID for the configured table association. Currently accepts
+    #   the configured table association ID.
+    #
+    # @option params [required, String] :analysis_rule_type
+    #   The type of analysis rule.
+    #
+    # @option params [required, Types::ConfiguredTableAssociationAnalysisRulePolicy] :analysis_rule_policy
+    #   The analysis rule policy that was created for the configured table
+    #   association.
+    #
+    # @return [Types::CreateConfiguredTableAssociationAnalysisRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConfiguredTableAssociationAnalysisRuleOutput#analysis_rule #analysis_rule} => Types::ConfiguredTableAssociationAnalysisRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_configured_table_association_analysis_rule({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     configured_table_association_identifier: "ConfiguredTableAssociationIdentifier", # required
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
+    #     analysis_rule_policy: { # required
+    #       v1: {
+    #         list: {
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #         },
+    #         aggregation: {
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #         },
+    #         custom: {
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_rule.membership_identifier #=> String
+    #   resp.analysis_rule.configured_table_association_id #=> String
+    #   resp.analysis_rule.configured_table_association_arn #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.analysis_rule.create_time #=> Time
+    #   resp.analysis_rule.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredTableAssociationAnalysisRule AWS API Documentation
+    #
+    # @overload create_configured_table_association_analysis_rule(params = {})
+    # @param [Hash] params ({})
+    def create_configured_table_association_analysis_rule(params = {}, options = {})
+      req = build_request(:create_configured_table_association_analysis_rule, params)
       req.send_request(options)
     end
 
@@ -1635,6 +1727,38 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def delete_configured_table_association(params = {}, options = {})
       req = build_request(:delete_configured_table_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes an analysis rule for a configured table association.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #
+    # @option params [required, String] :configured_table_association_identifier
+    #   The identiﬁer for the conﬁgured table association that's related to
+    #   the analysis rule that you want to delete.
+    #
+    # @option params [required, String] :analysis_rule_type
+    #   The type of the analysis rule that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configured_table_association_analysis_rule({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     configured_table_association_identifier: "ConfiguredTableAssociationIdentifier", # required
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredTableAssociationAnalysisRule AWS API Documentation
+    #
+    # @overload delete_configured_table_association_analysis_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_configured_table_association_analysis_rule(params = {}, options = {})
+      req = build_request(:delete_configured_table_association_analysis_rule, params)
       req.send_request(options)
     end
 
@@ -2175,6 +2299,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
@@ -2192,10 +2317,14 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.aggregation.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
@@ -2243,6 +2372,8 @@ module Aws::CleanRooms
     #   resp.configured_table_association.role_arn #=> String
     #   resp.configured_table_association.name #=> String
     #   resp.configured_table_association.description #=> String
+    #   resp.configured_table_association.analysis_rule_types #=> Array
+    #   resp.configured_table_association.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.configured_table_association.create_time #=> Time
     #   resp.configured_table_association.update_time #=> Time
     #
@@ -2252,6 +2383,61 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def get_configured_table_association(params = {}, options = {})
       req = build_request(:get_configured_table_association, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the analysis rule for a configured table association.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #
+    # @option params [required, String] :configured_table_association_identifier
+    #   The identiﬁer for the conﬁgured table association that's related to
+    #   the analysis rule.
+    #
+    # @option params [required, String] :analysis_rule_type
+    #   The type of analysis rule that you want to retrieve.
+    #
+    # @return [Types::GetConfiguredTableAssociationAnalysisRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfiguredTableAssociationAnalysisRuleOutput#analysis_rule #analysis_rule} => Types::ConfiguredTableAssociationAnalysisRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configured_table_association_analysis_rule({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     configured_table_association_identifier: "ConfiguredTableAssociationIdentifier", # required
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_rule.membership_identifier #=> String
+    #   resp.analysis_rule.configured_table_association_id #=> String
+    #   resp.analysis_rule.configured_table_association_arn #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.analysis_rule.create_time #=> Time
+    #   resp.analysis_rule.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredTableAssociationAnalysisRule AWS API Documentation
+    #
+    # @overload get_configured_table_association_analysis_rule(params = {})
+    # @param [Hash] params ({})
+    def get_configured_table_association_analysis_rule(params = {}, options = {})
+      req = build_request(:get_configured_table_association_analysis_rule, params)
       req.send_request(options)
     end
 
@@ -2475,6 +2661,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
@@ -2539,11 +2726,12 @@ module Aws::CleanRooms
     #   resp.schema.schema_status_details #=> Array
     #   resp.schema.schema_status_details[0].status #=> String, one of "READY", "NOT_READY"
     #   resp.schema.schema_status_details[0].reasons #=> Array
-    #   resp.schema.schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
+    #   resp.schema.schema_status_details[0].reasons[0].code #=> String, one of "ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED", "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_CONFIGURED", "RESULT_RECEIVERS_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_ALLOWED", "RESULT_RECEIVERS_NOT_ALLOWED", "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"
     #   resp.schema.schema_status_details[0].reasons[0].message #=> String
     #   resp.schema.schema_status_details[0].analysis_rule_type #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schema.schema_status_details[0].configurations #=> Array
-    #   resp.schema.schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY", "CUSTOM_ANALYSIS_NOT_ALLOWED", "NO_MEMBER_ACCOUNT_ALLOWED_TO_PROVIDE_ANALYSIS", "DIFFERENTIAL_PRIVACY_BUDGET_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED"
+    #   resp.schema.schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.schema.schema_status_details[0].analysis_type #=> String, one of "DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
@@ -2596,6 +2784,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
@@ -2613,10 +2802,14 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.aggregation.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.policy.v1.id_mapping_table.join_columns #=> Array
@@ -2642,13 +2835,11 @@ module Aws::CleanRooms
     #   The identifier for a membership resource.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2696,13 +2887,11 @@ module Aws::CleanRooms
     #   belong to. Currently accepts collaboration ID.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListCollaborationAnalysisTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2749,13 +2938,11 @@ module Aws::CleanRooms
     #   model association belongs to. Accepts a collaboration ID.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListCollaborationConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2857,13 +3044,13 @@ module Aws::CleanRooms
     #   A unique identifier for one of your collaborations.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #
     # @return [Types::ListCollaborationPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2913,13 +3100,13 @@ module Aws::CleanRooms
     #   Specifies the type of the privacy budget.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @return [Types::ListCollaborationPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2969,13 +3156,13 @@ module Aws::CleanRooms
     # invited to.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #
     # @option params [String] :member_status
     #   The caller's status in a collaboration.
@@ -3027,13 +3214,13 @@ module Aws::CleanRooms
     #   audience model associations that you want to retrieve.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #
     # @return [Types::ListConfiguredAudienceModelAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3082,13 +3269,11 @@ module Aws::CleanRooms
     #   associations for. Currently accepts the membership ID.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListConfiguredTableAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3130,13 +3315,11 @@ module Aws::CleanRooms
     # Lists configured tables.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListConfiguredTablesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3291,13 +3474,11 @@ module Aws::CleanRooms
     #   The identifier of the collaboration in which the members are listed.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListMembersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3341,13 +3522,11 @@ module Aws::CleanRooms
     # Lists all memberships resources within the caller's account.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @option params [String] :status
     #   A filter which will return only memberships in the specified status.
@@ -3403,13 +3582,13 @@ module Aws::CleanRooms
     #   this membership belongs to. Accepts a membership ID.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #
     # @return [Types::ListPrivacyBudgetTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3461,13 +3640,13 @@ module Aws::CleanRooms
     #   The privacy budget type.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
     #
     # @return [Types::ListPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3523,13 +3702,13 @@ module Aws::CleanRooms
     #   A filter on the status of the protected query.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service can return a
+    #   nextToken even if the maximum results has not been met.
     #
     # @return [Types::ListProtectedQueriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3556,6 +3735,10 @@ module Aws::CleanRooms
     #   resp.protected_queries[0].membership_arn #=> String
     #   resp.protected_queries[0].create_time #=> Time
     #   resp.protected_queries[0].status #=> String, one of "SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS", "TIMED_OUT"
+    #   resp.protected_queries[0].receiver_configurations #=> Array
+    #   resp.protected_queries[0].receiver_configurations[0].analysis_type #=> String, one of "DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"
+    #   resp.protected_queries[0].receiver_configurations[0].configuration_details.direct_analysis_configuration_details.receiver_account_ids #=> Array
+    #   resp.protected_queries[0].receiver_configurations[0].configuration_details.direct_analysis_configuration_details.receiver_account_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedQueries AWS API Documentation
     #
@@ -3573,16 +3756,15 @@ module Aws::CleanRooms
     #   Currently accepts a collaboration ID.
     #
     # @option params [String] :schema_type
-    #   If present, filter schemas by schema type.
+    #   If present, filter schemas by schema type. The only valid schema type
+    #   is currently `TABLE`.
     #
     # @option params [String] :next_token
-    #   The pagination token that's used to fetch the next set of results.
+    #   The token value retrieved from a previous call to access the next page
+    #   of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned for an API request
-    #   call. The service chooses a default number if you don't set one. The
-    #   service might return a `nextToken` even if the `maxResults` value
-    #   has not been met.
+    #   The maximum size of the results that is returned per call.
     #
     # @return [Types::ListSchemasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3768,6 +3950,9 @@ module Aws::CleanRooms
     #           bucket: "ProtectedQueryS3OutputConfigurationBucketString", # required
     #           key_prefix: "KeyPrefix",
     #         },
+    #         member: {
+    #           account_id: "AccountId", # required
+    #         },
     #       },
     #     },
     #   })
@@ -3786,6 +3971,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
@@ -4107,6 +4293,7 @@ module Aws::CleanRooms
     #           join_columns: ["AnalysisRuleColumnName"], # required
     #           allowed_join_operators: ["OR"], # accepts OR, AND
     #           list_columns: ["AnalysisRuleColumnName"], # required
+    #           additional_analyses: "ALLOWED", # accepts ALLOWED, REQUIRED, NOT_ALLOWED
     #         },
     #         aggregation: {
     #           aggregate_columns: [ # required
@@ -4127,10 +4314,13 @@ module Aws::CleanRooms
     #               type: "COUNT_DISTINCT", # required, accepts COUNT_DISTINCT
     #             },
     #           ],
+    #           additional_analyses: "ALLOWED", # accepts ALLOWED, REQUIRED, NOT_ALLOWED
     #         },
     #         custom: {
     #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"], # required
     #           allowed_analysis_providers: ["AccountId"],
+    #           additional_analyses: "ALLOWED", # accepts ALLOWED, REQUIRED, NOT_ALLOWED
+    #           disallowed_output_columns: ["AnalysisRuleColumnName"],
     #           differential_privacy: {
     #             columns: [ # required
     #               {
@@ -4153,6 +4343,7 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.list.allowed_join_operators[0] #=> String, one of "OR", "AND"
     #   resp.analysis_rule.policy.v1.list.list_columns #=> Array
     #   resp.analysis_rule.policy.v1.list.list_columns[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names #=> Array
     #   resp.analysis_rule.policy.v1.aggregation.aggregate_columns[0].column_names[0] #=> String
@@ -4170,10 +4361,14 @@ module Aws::CleanRooms
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].column_name #=> String
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].minimum #=> Integer
     #   resp.analysis_rule.policy.v1.aggregation.output_constraints[0].type #=> String, one of "COUNT_DISTINCT"
+    #   resp.analysis_rule.policy.v1.aggregation.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analyses[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers #=> Array
     #   resp.analysis_rule.policy.v1.custom.allowed_analysis_providers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.additional_analyses #=> String, one of "ALLOWED", "REQUIRED", "NOT_ALLOWED"
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns #=> Array
+    #   resp.analysis_rule.policy.v1.custom.disallowed_output_columns[0] #=> String
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns #=> Array
     #   resp.analysis_rule.policy.v1.custom.differential_privacy.columns[0].name #=> String
     #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
@@ -4230,6 +4425,8 @@ module Aws::CleanRooms
     #   resp.configured_table_association.role_arn #=> String
     #   resp.configured_table_association.name #=> String
     #   resp.configured_table_association.description #=> String
+    #   resp.configured_table_association.analysis_rule_types #=> Array
+    #   resp.configured_table_association.analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
     #   resp.configured_table_association.create_time #=> Time
     #   resp.configured_table_association.update_time #=> Time
     #
@@ -4239,6 +4436,79 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def update_configured_table_association(params = {}, options = {})
       req = build_request(:update_configured_table_association, params)
+      req.send_request(options)
+    end
+
+    # Updates the analysis rule for a configured table association.
+    #
+    # @option params [required, String] :membership_identifier
+    #   A unique identifier for the membership that the configured table
+    #   association belongs to. Currently accepts the membership ID.
+    #
+    # @option params [required, String] :configured_table_association_identifier
+    #   The identifier for the configured table association to update.
+    #
+    # @option params [required, String] :analysis_rule_type
+    #   The analysis rule type that you want to update.
+    #
+    # @option params [required, Types::ConfiguredTableAssociationAnalysisRulePolicy] :analysis_rule_policy
+    #   The updated analysis rule policy for the conﬁgured table association.
+    #
+    # @return [Types::UpdateConfiguredTableAssociationAnalysisRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConfiguredTableAssociationAnalysisRuleOutput#analysis_rule #analysis_rule} => Types::ConfiguredTableAssociationAnalysisRule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configured_table_association_analysis_rule({
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     configured_table_association_identifier: "ConfiguredTableAssociationIdentifier", # required
+    #     analysis_rule_type: "AGGREGATION", # required, accepts AGGREGATION, LIST, CUSTOM
+    #     analysis_rule_policy: { # required
+    #       v1: {
+    #         list: {
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #         },
+    #         aggregation: {
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #         },
+    #         custom: {
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_rule.membership_identifier #=> String
+    #   resp.analysis_rule.configured_table_association_id #=> String
+    #   resp.analysis_rule.configured_table_association_arn #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.list.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.list.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.aggregation.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_result_receivers[0] #=> String
+    #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses #=> Array
+    #   resp.analysis_rule.policy.v1.custom.allowed_additional_analyses[0] #=> String
+    #   resp.analysis_rule.type #=> String, one of "AGGREGATION", "LIST", "CUSTOM"
+    #   resp.analysis_rule.create_time #=> Time
+    #   resp.analysis_rule.update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredTableAssociationAnalysisRule AWS API Documentation
+    #
+    # @overload update_configured_table_association_analysis_rule(params = {})
+    # @param [Hash] params ({})
+    def update_configured_table_association_analysis_rule(params = {}, options = {})
+      req = build_request(:update_configured_table_association_analysis_rule, params)
       req.send_request(options)
     end
 
@@ -4523,6 +4793,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.protected_query.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
@@ -4558,7 +4829,7 @@ module Aws::CleanRooms
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

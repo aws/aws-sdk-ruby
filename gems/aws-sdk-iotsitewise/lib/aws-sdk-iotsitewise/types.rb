@@ -527,7 +527,7 @@ module Aws::IoTSiteWise
     # Contains a summary of the composite model.
     #
     # @!attribute [rw] id
-    #   The ID of the the composite model that this summary describes..
+    #   The ID of the composite model that this summary describes..
     #   @return [String]
     #
     # @!attribute [rw] external_id
@@ -541,24 +541,16 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the the composite model that this summary describes..
+    #   The name of the composite model that this summary describes..
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of asset model.
-    #
-    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
-    #     create assets. Can't be included as a component in another asset
-    #     model.
-    #
-    #   * **COMPONENT\_MODEL** – A reusable component that you can include
-    #     in the composite models of other asset models. You can't create
-    #     assets directly from this type of asset model.
+    #   The composite model type. Valid values are `AWS/ALARM`, `CUSTOM`, or
+    #   ` AWS/L4E_ANOMALY`.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the the composite model that this summary
-    #   describes..
+    #   The description of the composite model that this summary describes..
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -2585,7 +2577,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] asset_model_composite_model_name
-    #   A unique, friendly name for the composite model.
+    #   A unique name for the composite model.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_composite_model_type
@@ -2603,19 +2595,22 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] composed_asset_model_id
-    #   The ID of a composite model on this asset.
+    #   The ID of a component model which is reused to create this composite
+    #   model.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_composite_model_properties
     #   The property definitions of the composite model. For more
-    #   information, see &lt;LINK&gt;.
+    #   information, see [ Inline custom composite models][1] in the *IoT
+    #   SiteWise User Guide*.
     #
     #   You can specify up to 200 properties per composite model. For more
-    #   information, see [Quotas][1] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html#inline-composite-models
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #   @return [Array<Types::AssetModelPropertyDefinition>]
     #
     class CreateAssetModelCompositeModelRequest < Struct.new(
@@ -2661,7 +2656,7 @@ module Aws::IoTSiteWise
     end
 
     # @!attribute [rw] asset_model_name
-    #   A unique, friendly name for the asset model.
+    #   A unique name for the asset model.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_description
@@ -2706,13 +2701,15 @@ module Aws::IoTSiteWise
     #
     #   <note markdown="1"> When creating custom composite models, you need to use
     #   [CreateAssetModelCompositeModel][1]. For more information, see
-    #   &lt;LINK&gt;.
+    #   [Creating custom composite models (Components)][2] in the *IoT
+    #   SiteWise User Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-custom-composite-models.html
     #   @return [Array<Types::AssetModelCompositeModelDefinition>]
     #
     # @!attribute [rw] client_token
@@ -3072,7 +3069,7 @@ module Aws::IoTSiteWise
     end
 
     # @!attribute [rw] gateway_name
-    #   A unique, friendly name for the gateway.
+    #   A unique name for the gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_platform
@@ -5325,9 +5322,15 @@ module Aws::IoTSiteWise
     #   A gateway that runs on IoT Greengrass V2.
     #   @return [Types::GreengrassV2]
     #
+    # @!attribute [rw] siemens_ie
+    #   A SiteWise Edge gateway that runs on a Siemens Industrial Edge
+    #   Device.
+    #   @return [Types::SiemensIE]
+    #
     class GatewayPlatform < Struct.new(
       :greengrass,
-      :greengrass_v2)
+      :greengrass_v2,
+      :siemens_ie)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5339,7 +5342,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
-    #   The name of the asset.
+    #   The name of the gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_platform
@@ -5760,13 +5763,13 @@ module Aws::IoTSiteWise
     # @!attribute [rw] group_arn
     #   The [ARN][1] of the Greengrass group. For more information about how
     #   to find a group's ARN, see [ListGroups][2] and [GetGroup][3] in the
-    #   *IoT Greengrass API Reference*.
+    #   *IoT Greengrass V1 API Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   [2]: https://docs.aws.amazon.com/greengrass/latest/apireference/listgroups-get.html
-    #   [3]: https://docs.aws.amazon.com/greengrass/latest/apireference/getgroup-get.html
+    #   [2]: https://docs.aws.amazon.com/greengrass/v1/apireference/listgroups-get.html
+    #   [3]: https://docs.aws.amazon.com/greengrass/v1/apireference/getgroup-get.html
     #   @return [String]
     #
     class Greengrass < Struct.new(
@@ -7724,6 +7727,19 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains details for a SiteWise Edge gateway that runs on a Siemens
+    # Industrial Edge Device.
+    #
+    # @!attribute [rw] iot_core_thing_name
+    #   The name of the IoT Thing for your SiteWise Edge gateway.
+    #   @return [String]
+    #
+    class SiemensIE < Struct.new(
+      :iot_core_thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The [ARN][1] of the resource to tag.
     #
@@ -8139,7 +8155,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] asset_model_composite_model_name
-    #   A unique, friendly name for the composite model.
+    #   A unique name for the composite model.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -8153,14 +8169,16 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_composite_model_properties
     #   The property definitions of the composite model. For more
-    #   information, see &lt;LINK&gt;.
+    #   information, see [ Inline custom composite models][1] in the *IoT
+    #   SiteWise User Guide*.
     #
     #   You can specify up to 200 properties per composite model. For more
-    #   information, see [Quotas][1] in the *IoT SiteWise User Guide*.
+    #   information, see [Quotas][2] in the *IoT SiteWise User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html#inline-composite-models
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #   @return [Array<Types::AssetModelProperty>]
     #
     class UpdateAssetModelCompositeModelRequest < Struct.new(
@@ -8208,7 +8226,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] asset_model_name
-    #   A unique, friendly name for the asset model.
+    #   A unique name for the asset model.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_description
@@ -8254,13 +8272,15 @@ module Aws::IoTSiteWise
     #
     #   <note markdown="1"> When creating custom composite models, you need to use
     #   [CreateAssetModelCompositeModel][1]. For more information, see
-    #   &lt;LINK&gt;.
+    #   [Creating custom composite models (Components)][2] in the *IoT
+    #   SiteWise User Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-custom-composite-models.html
     #   @return [Array<Types::AssetModelCompositeModel>]
     #
     # @!attribute [rw] client_token
@@ -8549,7 +8569,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
-    #   A unique, friendly name for the gateway.
+    #   A unique name for the gateway.
     #   @return [String]
     #
     class UpdateGatewayRequest < Struct.new(
@@ -8753,8 +8773,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] integer_value
-    #   Asset property data of type integer (number that's greater than or
-    #   equal to zero).
+    #   Asset property data of type integer (whole number).
     #   @return [Integer]
     #
     # @!attribute [rw] double_value
