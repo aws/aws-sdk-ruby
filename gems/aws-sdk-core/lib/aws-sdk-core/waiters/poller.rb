@@ -96,8 +96,13 @@ module Aws
       end
 
       def matches_error?(acceptor, response)
-        Aws::Errors::ServiceError === response.error &&
-        response.error.code == acceptor['expected'].delete('.')
+        case acceptor['expected']
+        when 'false' then response.error.nil?
+        when 'true' then !!response.error
+        else
+          response.error.is_a?(Aws::Errors::ServiceError) &&
+            response.error.code == acceptor['expected']
+        end
       end
 
       def path(acceptor)
@@ -107,7 +112,7 @@ module Aws
       def non_empty_array(acceptor, response, &block)
         if response.data
           values = JMESPath.search(path(acceptor), response.data)
-          Array === values && values.count > 0 ? yield(values) : false
+          values.is_a?(Array) && values.count > 0 ? yield(values) : false
         else
           false
         end
