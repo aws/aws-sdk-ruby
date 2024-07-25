@@ -177,9 +177,8 @@ module Aws
           end
         end
 
-        describe 'matching on expectd errors' do
-
-          it 'succeedes when an expected error is encountered' do
+        describe 'status matcher' do
+          it 'succeeds when an expected status is encountered' do
             attempts = 0
             client.handle do |context|
               attempts += 1
@@ -190,14 +189,60 @@ module Aws
             expect(attempts).to be(1)
           end
 
-          it 'fails when an expected error is not encountered' do
+          it 'fails when an expected status is not encountered' do
             expect {
               client.wait_until(:table_not_exists, table_name:'table') do |w|
                 w.delay = 0
               end
             }.to raise_error(Errors::TooManyAttemptsError)
           end
+        end
 
+        describe 'error matcher' do
+          context 'expected is an error code' do
+            it 'succeeds when matched' do
+              client.stub_responses(:describe_table, 'ResourceNotFoundException')
+              expect do
+                client.wait_until(:error_waiter_1, table_name: 'table') do |w|
+                  w.max_attempts = 1
+                end
+              end.not_to raise_error
+            end
+
+            it 'fails when there are no matches encountered' do
+              expect do
+                client.wait_until(:error_waiter_1, table_name: 'table') do |w|
+                  w.delay = 0
+                end
+              end.to raise_error(Errors::TooManyAttemptsError)
+            end
+          end
+
+          context 'expected is true' do
+            it 'succeeds when matched with any error' do
+              client.stub_responses(:describe_table, RuntimeError.new)
+              expect do
+                client.wait_until(:error_waiter_1, table_name: 'table') do |w|
+                  w.max_attempts = 1
+                end
+              end.not_to raise_error
+            end
+          end
+
+          context 'expected is false' do
+            it 'succeeds when a response with no error is received' do
+              client.stub_responses(
+                :describe_table,
+                'ResourceNotFoundException',
+                table: { table_status: 'ACTIVE' }
+              )
+              expect do
+                client.wait_until(:error_waiter_2, table_name: 'table') do |w|
+                  w.delay = 0
+                end
+              end.not_to raise_error
+            end
+          end
         end
 
         describe 'errors' do

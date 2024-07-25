@@ -30,6 +30,40 @@
           "state": "success"
         }
       ]
+    },
+    "ErrorWaiter1": {
+      "delay": 20,
+      "operation": "DescribeTable",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "expected": "ResourceNotFoundException",
+          "matcher": "error",
+          "state": "success"
+        },
+        {
+          "expected": "true",
+          "matcher": "error",
+          "state": "success"
+        }
+      ]
+    },
+    "ErrorWaiter2": {
+      "delay": 20,
+      "operation": "DescribeTable",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "expected": "ResourceNotFoundException",
+          "matcher": "error",
+          "state": "retry"
+        },
+        {
+          "expected": "false",
+          "matcher": "error",
+          "state": "success"
+        }
+      ]
     }
   }
 }
