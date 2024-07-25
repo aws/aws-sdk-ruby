@@ -8,6 +8,11 @@
 module Aws::States
   module Types
 
+    class ActivityAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ActivityDoesNotExist
       attr_accessor message: ::String
       SENSITIVE: []
@@ -92,6 +97,7 @@ module Aws::States
     class CreateActivityInput
       attr_accessor name: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: []
     end
 
@@ -124,6 +130,7 @@ module Aws::States
       attr_accessor tracing_configuration: Types::TracingConfiguration
       attr_accessor publish: bool
       attr_accessor version_description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: [:definition, :version_description]
     end
 
@@ -175,11 +182,13 @@ module Aws::States
       attr_accessor activity_arn: ::String
       attr_accessor name: ::String
       attr_accessor creation_date: ::Time
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: []
     end
 
     class DescribeExecutionInput
       attr_accessor execution_arn: ::String
+      attr_accessor included_data: ("ALL_DATA" | "METADATA_ONLY")
       SENSITIVE: []
     end
 
@@ -245,6 +254,7 @@ module Aws::States
 
     class DescribeStateMachineForExecutionInput
       attr_accessor execution_arn: ::String
+      attr_accessor included_data: ("ALL_DATA" | "METADATA_ONLY")
       SENSITIVE: []
     end
 
@@ -259,11 +269,13 @@ module Aws::States
       attr_accessor map_run_arn: ::String
       attr_accessor label: ::String
       attr_accessor revision_id: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: [:definition]
     end
 
     class DescribeStateMachineInput
       attr_accessor state_machine_arn: ::String
+      attr_accessor included_data: ("ALL_DATA" | "METADATA_ONLY")
       SENSITIVE: []
     end
 
@@ -280,7 +292,15 @@ module Aws::States
       attr_accessor label: ::String
       attr_accessor revision_id: ::String
       attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: [:definition, :description]
+    end
+
+    class EncryptionConfiguration
+      attr_accessor kms_key_id: ::String
+      attr_accessor kms_data_key_reuse_period_seconds: ::Integer
+      attr_accessor type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+      SENSITIVE: []
     end
 
     class ExecutionAbortedEventDetails
@@ -473,6 +493,11 @@ module Aws::States
       SENSITIVE: []
     end
 
+    class InvalidEncryptionConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class InvalidExecutionInput
       attr_accessor message: ::String
       SENSITIVE: []
@@ -499,6 +524,22 @@ module Aws::States
     end
 
     class InvalidTracingConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsAccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsInvalidStateException
+      attr_accessor kms_key_state: ("DISABLED" | "PENDING_DELETION" | "PENDING_IMPORT" | "UNAVAILABLE" | "CREATING")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsThrottlingException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -800,6 +841,7 @@ module Aws::States
       attr_accessor name: ::String
       attr_accessor input: ::String
       attr_accessor trace_header: ::String
+      attr_accessor included_data: ("ALL_DATA" | "METADATA_ONLY")
       SENSITIVE: [:input]
     end
 
@@ -1057,6 +1099,7 @@ module Aws::States
       attr_accessor tracing_configuration: Types::TracingConfiguration
       attr_accessor publish: bool
       attr_accessor version_description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: [:definition, :version_description]
     end
 

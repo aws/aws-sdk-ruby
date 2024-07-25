@@ -1489,6 +1489,9 @@ module Aws::CodeCommit
       SENSITIVE: []
     end
 
+    class OperationNotAllowedException < Aws::EmptyStructure
+    end
+
     class OriginApprovalRuleTemplate
       attr_accessor approval_rule_template_id: ::String
       attr_accessor approval_rule_template_name: ::String

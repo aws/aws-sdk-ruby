@@ -485,6 +485,12 @@ module Aws::BedrockRuntime
       SENSITIVE: []
     end
 
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
     class SpecificToolChoice
       attr_accessor name: ::String
       SENSITIVE: []
@@ -621,11 +627,11 @@ module Aws::BedrockRuntime
     end
 
     class ConverseStreamOutput < Enumerator[untyped, untyped]
-      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception]
+      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :service_unavailable_exception]
     end
 
     class ResponseStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception]
+      def event_types: () -> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception, :service_unavailable_exception]
     end
   end
 end

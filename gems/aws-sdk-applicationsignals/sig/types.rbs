@@ -87,6 +87,7 @@ module Aws::ApplicationSignals
       attr_accessor service: Types::Service
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
+      attr_accessor log_group_references: ::Array[::Hash[::String, ::String]]
       SENSITIVE: []
     end
 
@@ -253,6 +254,7 @@ module Aws::ApplicationSignals
       attr_accessor key_attributes: ::Hash[::String, ::String]
       attr_accessor attribute_maps: ::Array[::Hash[::String, ::String]]
       attr_accessor metric_references: ::Array[Types::MetricReference]
+      attr_accessor log_group_references: ::Array[::Hash[::String, ::String]]
       SENSITIVE: []
     end
 

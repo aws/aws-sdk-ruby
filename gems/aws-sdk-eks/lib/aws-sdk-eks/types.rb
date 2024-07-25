@@ -861,6 +861,17 @@ module Aws::EKS
     #   The access configuration for the cluster.
     #   @return [Types::AccessConfigResponse]
     #
+    # @!attribute [rw] upgrade_policy
+    #   This value indicates if extended support is enabled or disabled for
+    #   the cluster.
+    #
+    #   [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+    #   @return [Types::UpgradePolicyResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -884,7 +895,8 @@ module Aws::EKS
       :id,
       :health,
       :outpost_config,
-      :access_config)
+      :access_config,
+      :upgrade_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1453,6 +1465,12 @@ module Aws::EKS
     #   add-ons or self-manage the default networking add-ons.
     #   @return [Boolean]
     #
+    # @!attribute [rw] upgrade_policy
+    #   New clusters, by default, have extended support enabled. You can
+    #   disable extended support when creating a cluster by setting this
+    #   value to `STANDARD`.
+    #   @return [Types::UpgradePolicyRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -1467,7 +1485,8 @@ module Aws::EKS
       :encryption_config,
       :outpost_config,
       :access_config,
-      :bootstrap_self_managed_addons)
+      :bootstrap_self_managed_addons,
+      :upgrade_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5966,6 +5985,13 @@ module Aws::EKS
     #   The access configuration for the cluster.
     #   @return [Types::UpdateAccessConfigRequest]
     #
+    # @!attribute [rw] upgrade_policy
+    #   You can enable or disable extended support for clusters currently on
+    #   standard support. You cannot disable extended support once it
+    #   starts. You must enable extended support before your cluster exits
+    #   standard support.
+    #   @return [Types::UpgradePolicyRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest AWS API Documentation
     #
     class UpdateClusterConfigRequest < Struct.new(
@@ -5973,7 +5999,8 @@ module Aws::EKS
       :resources_vpc_config,
       :logging,
       :client_request_token,
-      :access_config)
+      :access_config,
+      :upgrade_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6333,6 +6360,66 @@ module Aws::EKS
     class UpdateTaintsPayload < Struct.new(
       :add_or_update_taints,
       :remove_taints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The support policy to use for the cluster. Extended support allows you
+    # to remain on specific Kubernetes versions for longer. Clusters in
+    # extended support have higher costs. The default value is `EXTENDED`.
+    # Use `STANDARD` to disable extended support.
+    #
+    # [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+    #
+    # @!attribute [rw] support_type
+    #   If the cluster is set to `EXTENDED`, it will enter extended support
+    #   at the end of standard support. If the cluster is set to `STANDARD`,
+    #   it will be automatically upgraded at the end of standard support.
+    #
+    #   [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpgradePolicyRequest AWS API Documentation
+    #
+    class UpgradePolicyRequest < Struct.new(
+      :support_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This value indicates if extended support is enabled or disabled for
+    # the cluster.
+    #
+    # [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+    #
+    # @!attribute [rw] support_type
+    #   If the cluster is set to `EXTENDED`, it will enter extended support
+    #   at the end of standard support. If the cluster is set to `STANDARD`,
+    #   it will be automatically upgraded at the end of standard support.
+    #
+    #   [Learn more about EKS Extended Support in the EKS User Guide.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/extended-support-control.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpgradePolicyResponse AWS API Documentation
+    #
+    class UpgradePolicyResponse < Struct.new(
+      :support_type)
       SENSITIVE = []
       include Aws::Structure
     end

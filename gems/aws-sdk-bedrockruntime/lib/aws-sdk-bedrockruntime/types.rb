@@ -1756,8 +1756,13 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The number of requests exceeds the service quota. Resubmit your
+    # Your request exceeds the service quota for your account. You can view
+    # your quotas at [Viewing service quotas][1]. You can resubmit your
     # request later.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/gs-request-quota.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1766,6 +1771,20 @@ module Aws::BedrockRuntime
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service isn't currently available. Try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1825,7 +1844,14 @@ module Aws::BedrockRuntime
       class Unknown < SystemContentBlock; end
     end
 
-    # The number of requests exceeds the limit. Resubmit your request later.
+    # Your request was throttled because of service-wide limitations.
+    # Resubmit your request later or in a different region. You can also
+    # purchase [Provisioned Throughput][1] to increase the rate or number of
+    # tokens you can process.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2175,7 +2201,8 @@ module Aws::BedrockRuntime
           :internal_server_exception,
           :model_stream_error_exception,
           :validation_exception,
-          :throttling_exception
+          :throttling_exception,
+          :service_unavailable_exception
         ]
       end
 
@@ -2197,7 +2224,8 @@ module Aws::BedrockRuntime
           :model_stream_error_exception,
           :validation_exception,
           :throttling_exception,
-          :model_timeout_exception
+          :model_timeout_exception,
+          :service_unavailable_exception
         ]
       end
 

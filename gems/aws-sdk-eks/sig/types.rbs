@@ -208,6 +208,7 @@ module Aws::EKS
       attr_accessor health: Types::ClusterHealth
       attr_accessor outpost_config: Types::OutpostConfigResponse
       attr_accessor access_config: Types::AccessConfigResponse
+      attr_accessor upgrade_policy: Types::UpgradePolicyResponse
       SENSITIVE: []
     end
 
@@ -308,6 +309,7 @@ module Aws::EKS
       attr_accessor outpost_config: Types::OutpostConfigRequest
       attr_accessor access_config: Types::CreateAccessConfigRequest
       attr_accessor bootstrap_self_managed_addons: bool
+      attr_accessor upgrade_policy: Types::UpgradePolicyRequest
       SENSITIVE: []
     end
 
@@ -1251,7 +1253,7 @@ module Aws::EKS
     class Update
       attr_accessor id: ::String
       attr_accessor status: ("InProgress" | "Failed" | "Cancelled" | "Successful")
-      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate")
+      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate")
       attr_accessor params: ::Array[Types::UpdateParam]
       attr_accessor created_at: ::Time
       attr_accessor errors: ::Array[Types::ErrorDetail]
@@ -1300,6 +1302,7 @@ module Aws::EKS
       attr_accessor logging: Types::Logging
       attr_accessor client_request_token: ::String
       attr_accessor access_config: Types::UpdateAccessConfigRequest
+      attr_accessor upgrade_policy: Types::UpgradePolicyRequest
       SENSITIVE: []
     end
 
@@ -1371,7 +1374,7 @@ module Aws::EKS
     end
 
     class UpdateParam
-      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations")
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -1392,6 +1395,16 @@ module Aws::EKS
     class UpdateTaintsPayload
       attr_accessor add_or_update_taints: ::Array[Types::Taint]
       attr_accessor remove_taints: ::Array[Types::Taint]
+      SENSITIVE: []
+    end
+
+    class UpgradePolicyRequest
+      attr_accessor support_type: ("STANDARD" | "EXTENDED")
+      SENSITIVE: []
+    end
+
+    class UpgradePolicyResponse
+      attr_accessor support_type: ("STANDARD" | "EXTENDED")
       SENSITIVE: []
     end
 

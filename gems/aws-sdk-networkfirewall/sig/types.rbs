@@ -526,7 +526,7 @@ module Aws::NetworkFirewall
     end
 
     class LogDestinationConfig
-      attr_accessor log_type: ("ALERT" | "FLOW")
+      attr_accessor log_type: ("ALERT" | "FLOW" | "TLS")
       attr_accessor log_destination_type: ("S3" | "CloudWatchLogs" | "KinesisDataFirehose")
       attr_accessor log_destination: ::Hash[::String, ::String]
       SENSITIVE: []

@@ -80,6 +80,8 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::DeleteLoadBalancer.build(context)
           when :delete_rule
             Aws::ElasticLoadBalancingV2::Endpoints::DeleteRule.build(context)
+          when :delete_shared_trust_store_association
+            Aws::ElasticLoadBalancingV2::Endpoints::DeleteSharedTrustStoreAssociation.build(context)
           when :delete_target_group
             Aws::ElasticLoadBalancingV2::Endpoints::DeleteTargetGroup.build(context)
           when :delete_trust_store
@@ -114,6 +116,8 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::DescribeTrustStoreRevocations.build(context)
           when :describe_trust_stores
             Aws::ElasticLoadBalancingV2::Endpoints::DescribeTrustStores.build(context)
+          when :get_resource_policy
+            Aws::ElasticLoadBalancingV2::Endpoints::GetResourcePolicy.build(context)
           when :get_trust_store_ca_certificates_bundle
             Aws::ElasticLoadBalancingV2::Endpoints::GetTrustStoreCaCertificatesBundle.build(context)
           when :get_trust_store_revocation_content

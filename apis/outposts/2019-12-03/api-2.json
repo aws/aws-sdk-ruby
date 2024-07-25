@@ -1231,7 +1231,8 @@
     "InstanceTypeItem":{
       "type":"structure",
       "members":{
-        "InstanceType":{"shape":"InstanceType"}
+        "InstanceType":{"shape":"InstanceType"},
+        "VCPUs":{"shape":"VCPUCount"}
       }
     },
     "InstanceTypeListDefinition":{
@@ -2210,6 +2211,10 @@
         "UPLINK_40G",
         "UPLINK_100G"
       ]
+    },
+    "VCPUCount":{
+      "type":"integer",
+      "box":true
     },
     "ValidationException":{
       "type":"structure",

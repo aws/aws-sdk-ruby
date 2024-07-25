@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2024-07-25)
+------------------
+
+* Feature - This release adds support for EKS cluster to manage extended support.
+
 1.110.0 (2024-07-02)
 ------------------
 

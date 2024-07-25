@@ -257,6 +257,7 @@ module Aws::EKS
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SupportType = Shapes::StringShape.new(name: 'SupportType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -294,6 +295,8 @@ module Aws::EKS
     UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
     UpdateTaintsPayload = Shapes::StructureShape.new(name: 'UpdateTaintsPayload')
     UpdateType = Shapes::StringShape.new(name: 'UpdateType')
+    UpgradePolicyRequest = Shapes::StructureShape.new(name: 'UpgradePolicyRequest')
+    UpgradePolicyResponse = Shapes::StructureShape.new(name: 'UpgradePolicyResponse')
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
     ZeroCapacity = Shapes::IntegerShape.new(name: 'ZeroCapacity')
@@ -483,6 +486,7 @@ module Aws::EKS
     Cluster.add_member(:health, Shapes::ShapeRef.new(shape: ClusterHealth, location_name: "health"))
     Cluster.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigResponse, location_name: "outpostConfig"))
     Cluster.add_member(:access_config, Shapes::ShapeRef.new(shape: AccessConfigResponse, location_name: "accessConfig"))
+    Cluster.add_member(:upgrade_policy, Shapes::ShapeRef.new(shape: UpgradePolicyResponse, location_name: "upgradePolicy"))
     Cluster.struct_class = Types::Cluster
 
     ClusterHealth.add_member(:issues, Shapes::ShapeRef.new(shape: ClusterIssueList, location_name: "issues"))
@@ -561,6 +565,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:outpost_config, Shapes::ShapeRef.new(shape: OutpostConfigRequest, location_name: "outpostConfig"))
     CreateClusterRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: CreateAccessConfigRequest, location_name: "accessConfig"))
     CreateClusterRequest.add_member(:bootstrap_self_managed_addons, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bootstrapSelfManagedAddons"))
+    CreateClusterRequest.add_member(:upgrade_policy, Shapes::ShapeRef.new(shape: UpgradePolicyRequest, location_name: "upgradePolicy"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -1315,6 +1320,7 @@ module Aws::EKS
     UpdateClusterConfigRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     UpdateClusterConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateClusterConfigRequest.add_member(:access_config, Shapes::ShapeRef.new(shape: UpdateAccessConfigRequest, location_name: "accessConfig"))
+    UpdateClusterConfigRequest.add_member(:upgrade_policy, Shapes::ShapeRef.new(shape: UpgradePolicyRequest, location_name: "upgradePolicy"))
     UpdateClusterConfigRequest.struct_class = Types::UpdateClusterConfigRequest
 
     UpdateClusterConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
@@ -1382,6 +1388,12 @@ module Aws::EKS
     UpdateTaintsPayload.add_member(:add_or_update_taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "addOrUpdateTaints"))
     UpdateTaintsPayload.add_member(:remove_taints, Shapes::ShapeRef.new(shape: taintsList, location_name: "removeTaints"))
     UpdateTaintsPayload.struct_class = Types::UpdateTaintsPayload
+
+    UpgradePolicyRequest.add_member(:support_type, Shapes::ShapeRef.new(shape: SupportType, location_name: "supportType"))
+    UpgradePolicyRequest.struct_class = Types::UpgradePolicyRequest
+
+    UpgradePolicyResponse.add_member(:support_type, Shapes::ShapeRef.new(shape: SupportType, location_name: "supportType"))
+    UpgradePolicyResponse.struct_class = Types::UpgradePolicyResponse
 
     VpcConfigRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "subnetIds"))
     VpcConfigRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))

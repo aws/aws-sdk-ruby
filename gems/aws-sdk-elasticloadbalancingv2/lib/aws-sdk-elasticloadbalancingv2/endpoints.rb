@@ -166,6 +166,20 @@ module Aws::ElasticLoadBalancingV2
       end
     end
 
+    class DeleteSharedTrustStoreAssociation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ElasticLoadBalancingV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteTargetGroup
       def self.build(context)
         unless context.config.regional_endpoint
@@ -391,6 +405,20 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DescribeTrustStores
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ElasticLoadBalancingV2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetResourcePolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

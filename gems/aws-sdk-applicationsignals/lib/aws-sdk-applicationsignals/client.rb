@@ -743,10 +743,14 @@ module Aws::ApplicationSignals
     #   in a raw HTTP Query API, it is formatted as be epoch time in seconds.
     #   For example: `1698778057`
     #
+    #   Your requested start time will be rounded to the nearest hour.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time period to retrieve information about. When used in
     #   a raw HTTP Query API, it is formatted as be epoch time in seconds. For
     #   example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #
     # @option params [required, Hash<String,String>] :key_attributes
     #   Use this field to specify which service you want to retrieve
@@ -777,6 +781,7 @@ module Aws::ApplicationSignals
     #   * {Types::GetServiceOutput#service #service} => Types::Service
     #   * {Types::GetServiceOutput#start_time #start_time} => Time
     #   * {Types::GetServiceOutput#end_time #end_time} => Time
+    #   * {Types::GetServiceOutput#log_group_references #log_group_references} => Array&lt;Hash&lt;String,String&gt;&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -802,8 +807,14 @@ module Aws::ApplicationSignals
     #   resp.service.metric_references[0].dimensions[0].name #=> String
     #   resp.service.metric_references[0].dimensions[0].value #=> String
     #   resp.service.metric_references[0].metric_name #=> String
+    #   resp.service.log_group_references #=> Array
+    #   resp.service.log_group_references[0] #=> Hash
+    #   resp.service.log_group_references[0]["KeyAttributeName"] #=> String
     #   resp.start_time #=> Time
     #   resp.end_time #=> Time
+    #   resp.log_group_references #=> Array
+    #   resp.log_group_references[0] #=> Hash
+    #   resp.log_group_references[0]["KeyAttributeName"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/GetService AWS API Documentation
     #
@@ -891,10 +902,14 @@ module Aws::ApplicationSignals
     #   in a raw HTTP Query API, it is formatted as be epoch time in seconds.
     #   For example: `1698778057`
     #
+    #   Your requested start time will be rounded to the nearest hour.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time period to retrieve information about. When used in
     #   a raw HTTP Query API, it is formatted as be epoch time in seconds. For
     #   example: `1698778057`
+    #
+    #   Your requested end time will be rounded to the nearest hour.
     #
     # @option params [required, Hash<String,String>] :key_attributes
     #   Use this field to specify which service you want to retrieve
@@ -986,10 +1001,14 @@ module Aws::ApplicationSignals
     #   in a raw HTTP Query API, it is formatted as be epoch time in seconds.
     #   For example: `1698778057`
     #
+    #   Your requested start time will be rounded to the nearest hour.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time period to retrieve information about. When used in
     #   a raw HTTP Query API, it is formatted as be epoch time in seconds. For
     #   example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #
     # @option params [required, Hash<String,String>] :key_attributes
     #   Use this field to specify which service you want to retrieve
@@ -1154,10 +1173,14 @@ module Aws::ApplicationSignals
     #   in a raw HTTP Query API, it is formatted as be epoch time in seconds.
     #   For example: `1698778057`
     #
+    #   Your requested start time will be rounded to the nearest hour.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time period to retrieve information about. When used in
     #   a raw HTTP Query API, it is formatted as be epoch time in seconds. For
     #   example: `1698778057`
+    #
+    #   Your requested end time will be rounded to the nearest hour.
     #
     # @option params [required, Hash<String,String>] :key_attributes
     #   Use this field to specify which service you want to retrieve
@@ -1246,10 +1269,14 @@ module Aws::ApplicationSignals
     #   in a raw HTTP Query API, it is formatted as be epoch time in seconds.
     #   For example: `1698778057`
     #
+    #   Your requested start time will be rounded to the nearest hour.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time period to retrieve information about. When used in
     #   a raw HTTP Query API, it is formatted as be epoch time in seconds. For
     #   example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in one operation. If you omit
@@ -1621,7 +1648,7 @@ module Aws::ApplicationSignals
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationsignals'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

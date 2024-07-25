@@ -168,6 +168,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetEnvironmentBlueprint.build(context)
           when :get_environment_blueprint_configuration
             Aws::DataZone::Endpoints::GetEnvironmentBlueprintConfiguration.build(context)
+          when :get_environment_credentials
+            Aws::DataZone::Endpoints::GetEnvironmentCredentials.build(context)
           when :get_environment_profile
             Aws::DataZone::Endpoints::GetEnvironmentProfile.build(context)
           when :get_form_type

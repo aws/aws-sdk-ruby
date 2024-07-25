@@ -147,6 +147,7 @@ module Aws::BedrockRuntime
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpecificToolChoice = Shapes::StructureShape.new(name: 'SpecificToolChoice')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     StopReason = Shapes::StringShape.new(name: 'StopReason')
@@ -285,6 +286,7 @@ module Aws::BedrockRuntime
     ConverseStreamOutput.add_member(:model_stream_error_exception, Shapes::ShapeRef.new(shape: ModelStreamErrorException, location_name: "modelStreamErrorException"))
     ConverseStreamOutput.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, location_name: "validationException"))
     ConverseStreamOutput.add_member(:throttling_exception, Shapes::ShapeRef.new(shape: ThrottlingException, location_name: "throttlingException"))
+    ConverseStreamOutput.add_member(:service_unavailable_exception, Shapes::ShapeRef.new(shape: ServiceUnavailableException, location_name: "serviceUnavailableException"))
     ConverseStreamOutput.struct_class = Types::ConverseStreamOutput
 
     ConverseStreamRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: ConversationalModelId, required: true, location: "uri", location_name: "modelId"))
@@ -556,10 +558,14 @@ module Aws::BedrockRuntime
     ResponseStream.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, location_name: "validationException"))
     ResponseStream.add_member(:throttling_exception, Shapes::ShapeRef.new(shape: ThrottlingException, location_name: "throttlingException"))
     ResponseStream.add_member(:model_timeout_exception, Shapes::ShapeRef.new(shape: ModelTimeoutException, location_name: "modelTimeoutException"))
+    ResponseStream.add_member(:service_unavailable_exception, Shapes::ShapeRef.new(shape: ServiceUnavailableException, location_name: "serviceUnavailableException"))
     ResponseStream.struct_class = Types::ResponseStream
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SpecificToolChoice.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     SpecificToolChoice.struct_class = Types::SpecificToolChoice
@@ -657,9 +663,10 @@ module Aws::BedrockRuntime
 
       api.metadata = {
         "apiVersion" => "2023-09-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "bedrock-runtime",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Bedrock Runtime",
         "serviceId" => "Bedrock Runtime",
         "signatureVersion" => "v4",
@@ -692,6 +699,7 @@ module Aws::BedrockRuntime
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ModelTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ModelNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ModelErrorException)
@@ -708,6 +716,7 @@ module Aws::BedrockRuntime
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ModelTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ModelNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ModelErrorException)
@@ -724,6 +733,7 @@ module Aws::BedrockRuntime
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ModelTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ModelNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -741,6 +751,7 @@ module Aws::BedrockRuntime
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ModelTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ModelStreamErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ModelNotReadyException)

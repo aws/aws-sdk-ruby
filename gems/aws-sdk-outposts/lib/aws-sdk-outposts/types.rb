@@ -968,10 +968,15 @@ module Aws::Outposts
     #   The instance type.
     #   @return [String]
     #
+    # @!attribute [rw] vcp_us
+    #   The number of default VCPUs in an instance type.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/InstanceTypeItem AWS API Documentation
     #
     class InstanceTypeItem < Struct.new(
-      :instance_type)
+      :instance_type,
+      :vcp_us)
       SENSITIVE = []
       include Aws::Structure
     end

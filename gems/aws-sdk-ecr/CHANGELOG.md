@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-07-25)
+------------------
+
+* Feature - API and documentation updates for Amazon ECR, adding support for creating, updating, describing and deleting ECR Repository Creation Template.
+
 1.78.0 (2024-07-05)
 ------------------
 

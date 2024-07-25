@@ -1332,6 +1332,20 @@ module Aws
                                                    ) -> _GetEnvironmentBlueprintConfigurationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentBlueprintConfigurationResponseSuccess
 
+      interface _GetEnvironmentCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentCredentialsOutput]
+        def access_key_id: () -> ::String
+        def expiration: () -> ::Time
+        def secret_access_key: () -> ::String
+        def session_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment_credentials-instance_method
+      def get_environment_credentials: (
+                                         domain_identifier: ::String,
+                                         environment_identifier: ::String
+                                       ) -> _GetEnvironmentCredentialsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentCredentialsResponseSuccess
+
       interface _GetEnvironmentProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentProfileOutput]
         def aws_account_id: () -> ::String

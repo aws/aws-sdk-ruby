@@ -385,6 +385,7 @@ module Aws::CodeCommit
     ObjectSize = Shapes::IntegerShape.new(name: 'ObjectSize')
     ObjectTypeEnum = Shapes::StringShape.new(name: 'ObjectTypeEnum')
     ObjectTypes = Shapes::StructureShape.new(name: 'ObjectTypes')
+    OperationNotAllowedException = Shapes::StructureShape.new(name: 'OperationNotAllowedException')
     OrderEnum = Shapes::StringShape.new(name: 'OrderEnum')
     OriginApprovalRuleTemplate = Shapes::StructureShape.new(name: 'OriginApprovalRuleTemplate')
     Overridden = Shapes::BooleanShape.new(name: 'Overridden')
@@ -1657,6 +1658,8 @@ module Aws::CodeCommit
     ObjectTypes.add_member(:base, Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "base"))
     ObjectTypes.struct_class = Types::ObjectTypes
 
+    OperationNotAllowedException.struct_class = Types::OperationNotAllowedException
+
     OriginApprovalRuleTemplate.add_member(:approval_rule_template_id, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateId, location_name: "approvalRuleTemplateId"))
     OriginApprovalRuleTemplate.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
     OriginApprovalRuleTemplate.struct_class = Types::OriginApprovalRuleTemplate
@@ -2412,6 +2415,7 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryDescriptionException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)

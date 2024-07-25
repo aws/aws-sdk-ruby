@@ -13,6 +13,7 @@ module Aws::States
 
     include Seahorse::Model
 
+    ActivityAlreadyExists = Shapes::StructureShape.new(name: 'ActivityAlreadyExists')
     ActivityDoesNotExist = Shapes::StructureShape.new(name: 'ActivityDoesNotExist')
     ActivityFailedEventDetails = Shapes::StructureShape.new(name: 'ActivityFailedEventDetails')
     ActivityLimitExceeded = Shapes::StructureShape.new(name: 'ActivityLimitExceeded')
@@ -63,6 +64,8 @@ module Aws::States
     DescribeStateMachineInput = Shapes::StructureShape.new(name: 'DescribeStateMachineInput')
     DescribeStateMachineOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineOutput')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventId = Shapes::IntegerShape.new(name: 'EventId')
     ExecutionAbortedEventDetails = Shapes::StructureShape.new(name: 'ExecutionAbortedEventDetails')
@@ -97,18 +100,26 @@ module Aws::States
     Identity = Shapes::StringShape.new(name: 'Identity')
     IncludeExecutionData = Shapes::BooleanShape.new(name: 'IncludeExecutionData')
     IncludeExecutionDataGetExecutionHistory = Shapes::BooleanShape.new(name: 'IncludeExecutionDataGetExecutionHistory')
+    IncludedData = Shapes::StringShape.new(name: 'IncludedData')
     InspectionData = Shapes::StructureShape.new(name: 'InspectionData')
     InspectionDataRequest = Shapes::StructureShape.new(name: 'InspectionDataRequest')
     InspectionDataResponse = Shapes::StructureShape.new(name: 'InspectionDataResponse')
     InspectionLevel = Shapes::StringShape.new(name: 'InspectionLevel')
     InvalidArn = Shapes::StructureShape.new(name: 'InvalidArn')
     InvalidDefinition = Shapes::StructureShape.new(name: 'InvalidDefinition')
+    InvalidEncryptionConfiguration = Shapes::StructureShape.new(name: 'InvalidEncryptionConfiguration')
     InvalidExecutionInput = Shapes::StructureShape.new(name: 'InvalidExecutionInput')
     InvalidLoggingConfiguration = Shapes::StructureShape.new(name: 'InvalidLoggingConfiguration')
     InvalidName = Shapes::StructureShape.new(name: 'InvalidName')
     InvalidOutput = Shapes::StructureShape.new(name: 'InvalidOutput')
     InvalidToken = Shapes::StructureShape.new(name: 'InvalidToken')
     InvalidTracingConfiguration = Shapes::StructureShape.new(name: 'InvalidTracingConfiguration')
+    KmsAccessDeniedException = Shapes::StructureShape.new(name: 'KmsAccessDeniedException')
+    KmsDataKeyReusePeriodSeconds = Shapes::IntegerShape.new(name: 'KmsDataKeyReusePeriodSeconds')
+    KmsInvalidStateException = Shapes::StructureShape.new(name: 'KmsInvalidStateException')
+    KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    KmsKeyState = Shapes::StringShape.new(name: 'KmsKeyState')
+    KmsThrottlingException = Shapes::StructureShape.new(name: 'KmsThrottlingException')
     LambdaFunctionFailedEventDetails = Shapes::StructureShape.new(name: 'LambdaFunctionFailedEventDetails')
     LambdaFunctionScheduleFailedEventDetails = Shapes::StructureShape.new(name: 'LambdaFunctionScheduleFailedEventDetails')
     LambdaFunctionScheduledEventDetails = Shapes::StructureShape.new(name: 'LambdaFunctionScheduledEventDetails')
@@ -254,6 +265,9 @@ module Aws::States
     includedDetails = Shapes::BooleanShape.new(name: 'includedDetails')
     truncated = Shapes::BooleanShape.new(name: 'truncated')
 
+    ActivityAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ActivityAlreadyExists.struct_class = Types::ActivityAlreadyExists
+
     ActivityDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ActivityDoesNotExist.struct_class = Types::ActivityDoesNotExist
 
@@ -311,6 +325,7 @@ module Aws::States
 
     CreateActivityInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateActivityInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateActivityInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateActivityInput.struct_class = Types::CreateActivityInput
 
     CreateActivityOutput.add_member(:activity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "activityArn"))
@@ -335,6 +350,7 @@ module Aws::States
     CreateStateMachineInput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     CreateStateMachineInput.add_member(:publish, Shapes::ShapeRef.new(shape: Publish, location_name: "publish"))
     CreateStateMachineInput.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "versionDescription"))
+    CreateStateMachineInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateStateMachineInput.struct_class = Types::CreateStateMachineInput
 
     CreateStateMachineOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -368,9 +384,11 @@ module Aws::States
     DescribeActivityOutput.add_member(:activity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "activityArn"))
     DescribeActivityOutput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     DescribeActivityOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    DescribeActivityOutput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     DescribeActivityOutput.struct_class = Types::DescribeActivityOutput
 
     DescribeExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    DescribeExecutionInput.add_member(:included_data, Shapes::ShapeRef.new(shape: IncludedData, location_name: "includedData"))
     DescribeExecutionInput.struct_class = Types::DescribeExecutionInput
 
     DescribeExecutionOutput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -424,6 +442,7 @@ module Aws::States
     DescribeStateMachineAliasOutput.struct_class = Types::DescribeStateMachineAliasOutput
 
     DescribeStateMachineForExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    DescribeStateMachineForExecutionInput.add_member(:included_data, Shapes::ShapeRef.new(shape: IncludedData, location_name: "includedData"))
     DescribeStateMachineForExecutionInput.struct_class = Types::DescribeStateMachineForExecutionInput
 
     DescribeStateMachineForExecutionOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -436,9 +455,11 @@ module Aws::States
     DescribeStateMachineForExecutionOutput.add_member(:map_run_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "mapRunArn"))
     DescribeStateMachineForExecutionOutput.add_member(:label, Shapes::ShapeRef.new(shape: MapRunLabel, location_name: "label"))
     DescribeStateMachineForExecutionOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    DescribeStateMachineForExecutionOutput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     DescribeStateMachineForExecutionOutput.struct_class = Types::DescribeStateMachineForExecutionOutput
 
     DescribeStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    DescribeStateMachineInput.add_member(:included_data, Shapes::ShapeRef.new(shape: IncludedData, location_name: "includedData"))
     DescribeStateMachineInput.struct_class = Types::DescribeStateMachineInput
 
     DescribeStateMachineOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -453,7 +474,13 @@ module Aws::States
     DescribeStateMachineOutput.add_member(:label, Shapes::ShapeRef.new(shape: MapRunLabel, location_name: "label"))
     DescribeStateMachineOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
     DescribeStateMachineOutput.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "description"))
+    DescribeStateMachineOutput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     DescribeStateMachineOutput.struct_class = Types::DescribeStateMachineOutput
+
+    EncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    EncryptionConfiguration.add_member(:kms_data_key_reuse_period_seconds, Shapes::ShapeRef.new(shape: KmsDataKeyReusePeriodSeconds, location_name: "kmsDataKeyReusePeriodSeconds", metadata: {"box"=>true}))
+    EncryptionConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "type"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     ExecutionAbortedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
     ExecutionAbortedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
@@ -605,6 +632,9 @@ module Aws::States
     InvalidDefinition.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidDefinition.struct_class = Types::InvalidDefinition
 
+    InvalidEncryptionConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidEncryptionConfiguration.struct_class = Types::InvalidEncryptionConfiguration
+
     InvalidExecutionInput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidExecutionInput.struct_class = Types::InvalidExecutionInput
 
@@ -622,6 +652,16 @@ module Aws::States
 
     InvalidTracingConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidTracingConfiguration.struct_class = Types::InvalidTracingConfiguration
+
+    KmsAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KmsAccessDeniedException.struct_class = Types::KmsAccessDeniedException
+
+    KmsInvalidStateException.add_member(:kms_key_state, Shapes::ShapeRef.new(shape: KmsKeyState, location_name: "kmsKeyState"))
+    KmsInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KmsInvalidStateException.struct_class = Types::KmsInvalidStateException
+
+    KmsThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KmsThrottlingException.struct_class = Types::KmsThrottlingException
 
     LambdaFunctionFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
     LambdaFunctionFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
@@ -836,6 +876,7 @@ module Aws::States
     StartSyncExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     StartSyncExecutionInput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     StartSyncExecutionInput.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "traceHeader"))
+    StartSyncExecutionInput.add_member(:included_data, Shapes::ShapeRef.new(shape: IncludedData, location_name: "includedData"))
     StartSyncExecutionInput.struct_class = Types::StartSyncExecutionInput
 
     StartSyncExecutionOutput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -1030,6 +1071,7 @@ module Aws::States
     UpdateStateMachineInput.add_member(:tracing_configuration, Shapes::ShapeRef.new(shape: TracingConfiguration, location_name: "tracingConfiguration"))
     UpdateStateMachineInput.add_member(:publish, Shapes::ShapeRef.new(shape: Publish, location_name: "publish"))
     UpdateStateMachineInput.add_member(:version_description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "versionDescription"))
+    UpdateStateMachineInput.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     UpdateStateMachineInput.struct_class = Types::UpdateStateMachineInput
 
     UpdateStateMachineOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
@@ -1085,8 +1127,12 @@ module Aws::States
         o.input = Shapes::ShapeRef.new(shape: CreateActivityInput)
         o.output = Shapes::ShapeRef.new(shape: CreateActivityOutput)
         o.errors << Shapes::ShapeRef.new(shape: ActivityLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ActivityAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: InvalidName)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEncryptionConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:create_state_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -1107,6 +1153,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEncryptionConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:create_state_machine_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1184,6 +1233,9 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: DescribeExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:describe_map_run, Seahorse::Model::Operation.new.tap do |o|
@@ -1204,6 +1256,9 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: DescribeStateMachineOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:describe_state_machine_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1225,6 +1280,9 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: DescribeStateMachineForExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:get_activity_task, Seahorse::Model::Operation.new.tap do |o|
@@ -1236,6 +1294,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: ActivityDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: ActivityWorkerLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:get_execution_history, Seahorse::Model::Operation.new.tap do |o|
@@ -1247,6 +1308,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1392,6 +1456,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: TaskDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
         o.errors << Shapes::ShapeRef.new(shape: TaskTimedOut)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:send_task_heartbeat, Seahorse::Model::Operation.new.tap do |o|
@@ -1415,6 +1482,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
         o.errors << Shapes::ShapeRef.new(shape: TaskTimedOut)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:start_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -1431,6 +1501,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:start_sync_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -1448,6 +1521,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:stop_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -1459,6 +1535,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: ExecutionDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1524,6 +1603,9 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEncryptionConfiguration)
+        o.errors << Shapes::ShapeRef.new(shape: KmsAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsThrottlingException)
       end)
 
       api.add_operation(:update_state_machine_alias, Seahorse::Model::Operation.new.tap do |o|

@@ -204,7 +204,8 @@ module Aws
                              ?mutual_authentication: {
                                mode: ::String?,
                                trust_store_arn: ::String?,
-                               ignore_client_certificate_expiry: bool?
+                               ignore_client_certificate_expiry: bool?,
+                               trust_store_association_status: ("active" | "removed")?
                              }
                            ) -> _CreateListenerResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListenerResponseSuccess
@@ -421,6 +422,16 @@ module Aws
                          rule_arn: ::String
                        ) -> _DeleteRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleResponseSuccess
+
+      interface _DeleteSharedTrustStoreAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSharedTrustStoreAssociationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#delete_shared_trust_store_association-instance_method
+      def delete_shared_trust_store_association: (
+                                                   trust_store_arn: ::String,
+                                                   resource_arn: ::String
+                                                 ) -> _DeleteSharedTrustStoreAssociationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSharedTrustStoreAssociationResponseSuccess
 
       interface _DeleteTargetGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTargetGroupOutput]
@@ -641,6 +652,16 @@ module Aws
                                  ) -> _DescribeTrustStoresResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustStoresResponseSuccess
 
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyOutput]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
       interface _GetTrustStoreCaCertificatesBundleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustStoreCaCertificatesBundleOutput]
         def location: () -> ::String
@@ -738,7 +759,8 @@ module Aws
                              ?mutual_authentication: {
                                mode: ::String?,
                                trust_store_arn: ::String?,
-                               ignore_client_certificate_expiry: bool?
+                               ignore_client_certificate_expiry: bool?,
+                               trust_store_association_status: ("active" | "removed")?
                              }
                            ) -> _ModifyListenerResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyListenerResponseSuccess

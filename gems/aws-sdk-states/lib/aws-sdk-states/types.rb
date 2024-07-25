@@ -10,6 +10,19 @@
 module Aws::States
   module Types
 
+    # Activity already exists. `EncryptionConfiguration` may not be updated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityAlreadyExists AWS API Documentation
+    #
+    class ActivityAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified activity does not exist.
     #
     # @!attribute [rw] message
@@ -328,11 +341,16 @@ module Aws::States
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] encryption_configuration
+    #   Settings to configure server-side encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityInput AWS API Documentation
     #
     class CreateActivityInput < Struct.new(
       :name,
-      :tags)
+      :tags,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -488,6 +506,10 @@ module Aws::States
     #   `false`, this API action throws `ValidationException`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_configuration
+    #   Settings to configure server-side encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput AWS API Documentation
     #
     class CreateStateMachineInput < Struct.new(
@@ -499,7 +521,8 @@ module Aws::States
       :tags,
       :tracing_configuration,
       :publish,
-      :version_description)
+      :version_description,
+      :encryption_configuration)
       SENSITIVE = [:definition, :version_description]
       include Aws::Structure
     end
@@ -633,12 +656,17 @@ module Aws::States
     #   The date the activity is created.
     #   @return [Time]
     #
+    # @!attribute [rw] encryption_configuration
+    #   Settings for configured server-side encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivityOutput AWS API Documentation
     #
     class DescribeActivityOutput < Struct.new(
       :activity_arn,
       :name,
-      :creation_date)
+      :creation_date,
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -647,10 +675,19 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the execution to describe.
     #   @return [String]
     #
+    # @!attribute [rw] included_data
+    #   If your state machine definition is encrypted with a KMS key,
+    #   callers must have `kms:Decrypt` permission to decrypt the
+    #   definition. Alternatively, you can call DescribeStateMachine API
+    #   with `includedData = METADATA_ONLY` to get a successful response
+    #   without the encrypted definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionInput AWS API Documentation
     #
     class DescribeExecutionInput < Struct.new(
-      :execution_arn)
+      :execution_arn,
+      :included_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -998,10 +1035,19 @@ module Aws::States
     #   machine information for.
     #   @return [String]
     #
+    # @!attribute [rw] included_data
+    #   If your state machine definition is encrypted with a KMS key,
+    #   callers must have `kms:Decrypt` permission to decrypt the
+    #   definition. Alternatively, you can call the API with `includedData =
+    #   METADATA_ONLY` to get a successful response without the encrypted
+    #   definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionInput AWS API Documentation
     #
     class DescribeStateMachineForExecutionInput < Struct.new(
-      :execution_arn)
+      :execution_arn,
+      :included_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1067,6 +1113,10 @@ module Aws::States
     #   `definition` and `roleArn`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_configuration
+    #   Settings to configure server-side encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionOutput AWS API Documentation
     #
     class DescribeStateMachineForExecutionOutput < Struct.new(
@@ -1079,7 +1129,8 @@ module Aws::States
       :tracing_configuration,
       :map_run_arn,
       :label,
-      :revision_id)
+      :revision_id,
+      :encryption_configuration)
       SENSITIVE = [:definition]
       include Aws::Structure
     end
@@ -1094,10 +1145,27 @@ module Aws::States
     #   example, `stateMachineARN:1`.
     #   @return [String]
     #
+    # @!attribute [rw] included_data
+    #   If your state machine definition is encrypted with a KMS key,
+    #   callers must have `kms:Decrypt` permission to decrypt the
+    #   definition. Alternatively, you can call the API with `includedData =
+    #   METADATA_ONLY` to get a successful response without the encrypted
+    #   definition.
+    #
+    #   <note markdown="1"> When calling a labelled ARN for an encrypted state machine, the
+    #   `includedData = METADATA_ONLY` parameter will not apply because Step
+    #   Functions needs to decrypt the entire state machine definition to
+    #   get the Distributed Map state’s definition. In this case, the API
+    #   caller needs to have `kms:Decrypt` permission.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineInput AWS API Documentation
     #
     class DescribeStateMachineInput < Struct.new(
-      :state_machine_arn)
+      :state_machine_arn,
+      :included_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1137,6 +1205,9 @@ module Aws::States
     # @!attribute [rw] definition
     #   The Amazon States Language definition of the state machine. See
     #   [Amazon States Language][1].
+    #
+    #   If called with `includedData = METADATA_ONLY`, the returned
+    #   definition will be `\{\}`.
     #
     #
     #
@@ -1187,6 +1258,10 @@ module Aws::States
     #   The description of the state machine version.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_configuration
+    #   Settings to configure server-side encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput AWS API Documentation
     #
     class DescribeStateMachineOutput < Struct.new(
@@ -1201,8 +1276,60 @@ module Aws::States
       :tracing_configuration,
       :label,
       :revision_id,
-      :description)
+      :description,
+      :encryption_configuration)
       SENSITIVE = [:definition, :description]
+      include Aws::Structure
+    end
+
+    # Settings to configure server-side encryption.
+    #
+    # For additional control over security, you can encrypt your data using
+    # a **customer-managed key** for Step Functions state machines and
+    # activities. You can configure a symmetric KMS key and data key reuse
+    # period when creating or updating a **State Machine**, and when
+    # creating an **Activity**. The execution history and state machine
+    # definition will be encrypted with the key applied to the State
+    # Machine. Activity inputs will be encrypted with the key applied to the
+    # Activity.
+    #
+    # <note markdown="1"> Step Functions automatically enables encryption at rest using Amazon
+    # Web Services owned keys at no charge. However, KMS charges apply when
+    # using a customer managed key. For more information about pricing, see
+    # [Key Management Service pricing][1].
+    #
+    #  </note>
+    #
+    # For more information on KMS, see [What is Key Management Service?][2]
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/kms/pricing/
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/overview.html
+    #
+    # @!attribute [rw] kms_key_id
+    #   An alias, alias ARN, key ID, or key ARN of a symmetric encryption
+    #   KMS key to encrypt data. To specify a KMS key in a different Amazon
+    #   Web Services account, you must use the key ARN or alias ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_data_key_reuse_period_seconds
+    #   Maximum duration that Step Functions will reuse data keys. When the
+    #   period expires, Step Functions will call `GenerateDataKey`. Only
+    #   applies to customer managed keys.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   Encryption type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :kms_key_id,
+      :kms_data_key_reuse_period_seconds,
+      :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2018,6 +2145,23 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Received when `encryptionConfiguration` is specified but various
+    # conditions exist which make the configuration invalid. For example, if
+    # `type` is set to `CUSTOMER_MANAGED_KMS_KEY`, but `kmsKeyId` is null,
+    # or `kmsDataKeyReusePeriodSeconds` is not between 60 and 900, or the
+    # KMS key is not symmetric or inactive.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidEncryptionConfiguration AWS API Documentation
+    #
+    class InvalidEncryptionConfiguration < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The provided JSON input data is not valid.
     #
     # @!attribute [rw] message
@@ -2031,6 +2175,8 @@ module Aws::States
       include Aws::Structure
     end
 
+    # Configuration is not valid.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2090,6 +2236,53 @@ module Aws::States
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidTracingConfiguration AWS API Documentation
     #
     class InvalidTracingConfiguration < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Either your KMS key policy or API caller does not have the required
+    # permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/KmsAccessDeniedException AWS API Documentation
+    #
+    class KmsAccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The KMS key is not in valid state, for example: Disabled or Deleted.
+    #
+    # @!attribute [rw] kms_key_state
+    #   Current status of the KMS; key. For example: `DISABLED`,
+    #   `PENDING_DELETION`, `PENDING_IMPORT`, `UNAVAILABLE`, `CREATING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/KmsInvalidStateException AWS API Documentation
+    #
+    class KmsInvalidStateException < Struct.new(
+      :kms_key_state,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Received when KMS returns `ThrottlingException` for a KMS call that
+    # Step Functions makes on behalf of the caller.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/KmsThrottlingException AWS API Documentation
+    #
+    class KmsThrottlingException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -3358,13 +3551,22 @@ module Aws::States
     #   in the request payload.
     #   @return [String]
     #
+    # @!attribute [rw] included_data
+    #   If your state machine definition is encrypted with a KMS key,
+    #   callers must have `kms:Decrypt` permission to decrypt the
+    #   definition. Alternatively, you can call the API with `includedData =
+    #   METADATA_ONLY` to get a successful response without the encrypted
+    #   definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartSyncExecutionInput AWS API Documentation
     #
     class StartSyncExecutionInput < Struct.new(
       :state_machine_arn,
       :name,
       :input,
-      :trace_header)
+      :trace_header,
+      :included_data)
       SENSITIVE = [:input]
       include Aws::Structure
     end
@@ -3640,6 +3842,8 @@ module Aws::States
       include Aws::Structure
     end
 
+    # State machine type is not supported.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -4333,6 +4537,10 @@ module Aws::States
     #   set `publish` to `true`.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_configuration
+    #   Settings to configure server-side encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput AWS API Documentation
     #
     class UpdateStateMachineInput < Struct.new(
@@ -4342,7 +4550,8 @@ module Aws::States
       :logging_configuration,
       :tracing_configuration,
       :publish,
-      :version_description)
+      :version_description,
+      :encryption_configuration)
       SENSITIVE = [:definition, :version_description]
       include Aws::Structure
     end

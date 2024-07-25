@@ -1492,6 +1492,20 @@ module Aws::DataZone
       SENSITIVE: [:description]
     end
 
+    class GetEnvironmentCredentialsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentCredentialsOutput
+      attr_accessor access_key_id: ::String
+      attr_accessor expiration: ::Time
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      SENSITIVE: []
+    end
+
     class GetEnvironmentInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String

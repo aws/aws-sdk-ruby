@@ -961,6 +961,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified association cannot be within the same account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteAssociationSameAccountException AWS API Documentation
+    #
+    class DeleteAssociationSameAccountException < Aws::EmptyStructure; end
+
     # @!attribute [rw] listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
@@ -1008,6 +1014,27 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteRuleOutput AWS API Documentation
     #
     class DeleteRuleOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteSharedTrustStoreAssociationInput AWS API Documentation
+    #
+    class DeleteSharedTrustStoreAssociationInput < Struct.new(
+      :trust_store_arn,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteSharedTrustStoreAssociationOutput AWS API Documentation
+    #
+    class DeleteSharedTrustStoreAssociationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -1460,7 +1487,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::TargetDescription>]
     #
     # @!attribute [rw] include
-    #   Used to inclue anomaly detection information.
+    #   Used to include anomaly detection information.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealthInput AWS API Documentation
@@ -1720,6 +1747,30 @@ module Aws::ElasticLoadBalancingV2
     class ForwardActionConfig < Struct.new(
       :target_groups,
       :target_group_stickiness_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/GetResourcePolicyInput AWS API Documentation
+    #
+    class GetResourcePolicyInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The content of the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/GetResourcePolicyOutput AWS API Documentation
+    #
+    class GetResourcePolicyOutput < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2744,12 +2795,17 @@ module Aws::ElasticLoadBalancingV2
     #   Indicates whether expired client certificates are ignored.
     #   @return [Boolean]
     #
+    # @!attribute [rw] trust_store_association_status
+    #   Indicates a shared trust stores association status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/MutualAuthenticationAttributes AWS API Documentation
     #
     class MutualAuthenticationAttributes < Struct.new(
       :mode,
       :trust_store_arn,
-      :ignore_client_certificate_expiry)
+      :ignore_client_certificate_expiry,
+      :trust_store_association_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2997,6 +3053,12 @@ module Aws::ElasticLoadBalancingV2
     #
     class ResourceInUseException < Aws::EmptyStructure; end
 
+    # The specified resource does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # Information about a revocation file.
     #
     # @!attribute [rw] s3_bucket
@@ -3233,6 +3295,12 @@ module Aws::ElasticLoadBalancingV2
     #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4
     #   and IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6
     #   only public addresses, with private IPv4 and IPv6 addresses).
+    #
+    #   Note: Application Load Balancer authentication only supports IPv4
+    #   addresses when connecting to an Identity Provider (IdP) or Amazon
+    #   Cognito endpoint. Without a public IPv4 address the load balancer
+    #   cannot complete the authentication process, resulting in HTTP 500
+    #   errors.
     #
     #   \[Network Load Balancers\] The IP address type. The possible values
     #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
@@ -4219,6 +4287,12 @@ module Aws::ElasticLoadBalancingV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The specified association does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TrustStoreAssociationNotFoundException AWS API Documentation
+    #
+    class TrustStoreAssociationNotFoundException < Aws::EmptyStructure; end
 
     # The specified trust store is currently in use.
     #

@@ -727,6 +727,19 @@ module Aws::DataZone
       end
     end
 
+    class GetEnvironmentCredentials
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetEnvironmentProfile
       def self.build(context)
         unless context.config.regional_endpoint

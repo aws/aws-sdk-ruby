@@ -5741,6 +5741,51 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which this environment and
+    #   its credentials exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment whose credentials this operation gets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentCredentialsInput AWS API Documentation
+    #
+    class GetEnvironmentCredentialsInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_key_id
+    #   The access key ID of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The expiration timestamp of the environment credentials.
+    #   @return [Time]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret access key of the environment credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The session token of the environment credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentCredentialsOutput AWS API Documentation
+    #
+    class GetEnvironmentCredentialsOutput < Struct.new(
+      :access_key_id,
+      :expiration,
+      :secret_access_key,
+      :session_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
     #   The ID of the Amazon DataZone domain where the environment exists.
     #   @return [String]
     #

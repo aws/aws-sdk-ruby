@@ -268,6 +268,8 @@ module Aws::DataZone
     GetEnvironmentBlueprintConfigurationOutput = Shapes::StructureShape.new(name: 'GetEnvironmentBlueprintConfigurationOutput')
     GetEnvironmentBlueprintInput = Shapes::StructureShape.new(name: 'GetEnvironmentBlueprintInput')
     GetEnvironmentBlueprintOutput = Shapes::StructureShape.new(name: 'GetEnvironmentBlueprintOutput')
+    GetEnvironmentCredentialsInput = Shapes::StructureShape.new(name: 'GetEnvironmentCredentialsInput')
+    GetEnvironmentCredentialsOutput = Shapes::StructureShape.new(name: 'GetEnvironmentCredentialsOutput')
     GetEnvironmentInput = Shapes::StructureShape.new(name: 'GetEnvironmentInput')
     GetEnvironmentOutput = Shapes::StructureShape.new(name: 'GetEnvironmentOutput')
     GetEnvironmentProfileInput = Shapes::StructureShape.new(name: 'GetEnvironmentProfileInput')
@@ -1900,6 +1902,16 @@ module Aws::DataZone
     GetEnvironmentBlueprintOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     GetEnvironmentBlueprintOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     GetEnvironmentBlueprintOutput.struct_class = Types::GetEnvironmentBlueprintOutput
+
+    GetEnvironmentCredentialsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetEnvironmentCredentialsInput.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentIdentifier"))
+    GetEnvironmentCredentialsInput.struct_class = Types::GetEnvironmentCredentialsInput
+
+    GetEnvironmentCredentialsOutput.add_member(:access_key_id, Shapes::ShapeRef.new(shape: String, location_name: "accessKeyId"))
+    GetEnvironmentCredentialsOutput.add_member(:expiration, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "expiration"))
+    GetEnvironmentCredentialsOutput.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: String, location_name: "secretAccessKey"))
+    GetEnvironmentCredentialsOutput.add_member(:session_token, Shapes::ShapeRef.new(shape: String, location_name: "sessionToken"))
+    GetEnvironmentCredentialsOutput.struct_class = Types::GetEnvironmentCredentialsOutput
 
     GetEnvironmentInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetEnvironmentInput.add_member(:identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "identifier"))
@@ -4485,6 +4497,20 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/environment-blueprint-configurations/{environmentBlueprintIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentBlueprintConfigurationInput)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentBlueprintConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:get_environment_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEnvironmentCredentials"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/credentials"
+        o.input = Shapes::ShapeRef.new(shape: GetEnvironmentCredentialsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetEnvironmentCredentialsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

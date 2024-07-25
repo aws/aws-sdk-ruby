@@ -62,6 +62,7 @@ module Aws::ApplicationSignals
     ListServicesOutput = Shapes::StructureShape.new(name: 'ListServicesOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LogGroupReferences = Shapes::ListShape.new(name: 'LogGroupReferences')
     Metric = Shapes::StructureShape.new(name: 'Metric')
     MetricDataQueries = Shapes::ListShape.new(name: 'MetricDataQueries')
     MetricDataQuery = Shapes::StructureShape.new(name: 'MetricDataQuery')
@@ -204,6 +205,7 @@ module Aws::ApplicationSignals
     GetServiceOutput.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     GetServiceOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     GetServiceOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetServiceOutput.add_member(:log_group_references, Shapes::ShapeRef.new(shape: LogGroupReferences, location_name: "LogGroupReferences"))
     GetServiceOutput.struct_class = Types::GetServiceOutput
 
     Goal.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
@@ -286,6 +288,8 @@ module Aws::ApplicationSignals
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LogGroupReferences.member = Shapes::ShapeRef.new(shape: Attributes)
+
     Metric.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     Metric.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     Metric.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
@@ -328,6 +332,7 @@ module Aws::ApplicationSignals
     Service.add_member(:key_attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "KeyAttributes"))
     Service.add_member(:attribute_maps, Shapes::ShapeRef.new(shape: AttributeMaps, location_name: "AttributeMaps"))
     Service.add_member(:metric_references, Shapes::ShapeRef.new(shape: MetricReferences, required: true, location_name: "MetricReferences"))
+    Service.add_member(:log_group_references, Shapes::ShapeRef.new(shape: LogGroupReferences, location_name: "LogGroupReferences"))
     Service.struct_class = Types::Service
 
     ServiceDependencies.member = Shapes::ShapeRef.new(shape: ServiceDependency)
@@ -473,6 +478,7 @@ module Aws::ApplicationSignals
 
       api.metadata = {
         "apiVersion" => "2024-04-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "application-signals",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

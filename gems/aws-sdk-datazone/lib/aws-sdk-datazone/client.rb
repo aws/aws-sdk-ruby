@@ -3994,6 +3994,45 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Gets the credentials of an environment in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which this environment and its
+    #   credentials exist.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment whose credentials this operation gets.
+    #
+    # @return [Types::GetEnvironmentCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnvironmentCredentialsOutput#access_key_id #access_key_id} => String
+    #   * {Types::GetEnvironmentCredentialsOutput#expiration #expiration} => Time
+    #   * {Types::GetEnvironmentCredentialsOutput#secret_access_key #secret_access_key} => String
+    #   * {Types::GetEnvironmentCredentialsOutput#session_token #session_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_environment_credentials({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_key_id #=> String
+    #   resp.expiration #=> Time
+    #   resp.secret_access_key #=> String
+    #   resp.session_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentCredentials AWS API Documentation
+    #
+    # @overload get_environment_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_environment_credentials(params = {}, options = {})
+      req = build_request(:get_environment_credentials, params)
+      req.send_request(options)
+    end
+
     # Gets an evinronment profile in Amazon DataZone.
     #
     # @option params [required, String] :domain_identifier
@@ -8993,7 +9032,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

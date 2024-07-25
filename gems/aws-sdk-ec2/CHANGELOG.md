@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.467.0 (2024-07-25)
+------------------
+
+* Feature - EC2 Fleet now supports using custom identifiers to reference Amazon Machine Images (AMI) in launch requests that are configured to choose from a diversified list of instance types.
+
 1.466.0 (2024-07-18)
 ------------------
 

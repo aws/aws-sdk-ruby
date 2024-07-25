@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-07-25)
+------------------
+
+* Feature - This release adds support for sharing trust stores across accounts and organizations through integration with AWS Resource Access Manager.
+
 1.108.0 (2024-07-02)
 ------------------
 

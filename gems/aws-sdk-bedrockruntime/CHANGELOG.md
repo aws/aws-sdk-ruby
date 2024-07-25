@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-07-25)
+------------------
+
+* Feature - Provides ServiceUnavailableException error message
+
 1.16.0 (2024-07-10)
 ------------------
 
