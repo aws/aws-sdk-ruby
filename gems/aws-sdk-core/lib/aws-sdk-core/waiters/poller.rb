@@ -101,7 +101,7 @@ module Aws
         when 'true' then !!response.error
         else
           response.error.is_a?(Aws::Errors::ServiceError) &&
-            response.error.code == acceptor['expected']
+            response.error.code == acceptor['expected'].delete('.')
         end
       end
 
