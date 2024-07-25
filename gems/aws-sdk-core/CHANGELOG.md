@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update waiters to handle expected boolean values when matching errors.
+
 3.201.3 (2024-07-23)
 ------------------
 
