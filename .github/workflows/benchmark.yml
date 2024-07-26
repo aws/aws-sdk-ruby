@@ -17,13 +17,13 @@ jobs:
   benchmark:
     runs-on: ubuntu-latest
     env:
+      GH_EVENT: ${{github.event_name}}
       GH_REF: ${{github.head_ref}}
       GH_REPO: ${{github.repository}}
-      GH_EVENT: ${{github.event_name}}
     strategy:
       fail-fast: false
       matrix:
-        ruby: [jruby-9.2, 2.6, 2.7, 3.2, 3.3]
+        ruby: [jruby-9.2, 2.7, 3.3]
 
     steps:
       - name: Setup Ruby
@@ -44,7 +44,7 @@ jobs:
       - name: Benchmark
         env:
           JRUBY_OPTS: -J-Xmx4g
-        run: EXECUTION_ENV=github-action bundle exec rake benchmark
+        run: EXECUTION_ENV=github-action bundle exec rake benchmark:run
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4

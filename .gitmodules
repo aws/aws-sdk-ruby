@@ -1,0 +1,4 @@
+[submodule "tasks/benchmark"]
+	path = tasks/benchmark
+	url = git@github.com:aws/aws-sdk-ruby-benchmark-tools.git
+	branch = initial-benchmarking
