@@ -57,9 +57,8 @@ jobs:
 
       - name: Install gems
         run: |
-          echo "${{ matrix.env }}=1" >> $GITHUB_ENV
           bundle config set --local with 'build test'
-          bundle install
+          {{ matrix.env }}=1 bundle install
 
       - name: Build SDK
         run: bundle exec rake build
