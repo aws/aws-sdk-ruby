@@ -9,7 +9,7 @@ module Benchmark
       end
 
       def client_module_name
-        :Kinesis
+        'Aws::Kinesis'
       end
 
       def operation_benchmarks

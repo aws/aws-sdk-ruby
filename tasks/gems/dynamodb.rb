@@ -9,7 +9,7 @@ module Benchmark
       end
 
       def client_module_name
-        :DynamoDB
+        'Aws::DynamoDB'
       end
 
       def operation_benchmarks

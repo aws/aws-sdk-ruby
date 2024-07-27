@@ -9,7 +9,7 @@ module Benchmark
       end
 
       def client_module_name
-        :CloudWatch
+        'Aws::CloudWatch'
       end
 
       def operation_benchmarks

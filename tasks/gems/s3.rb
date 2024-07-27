@@ -9,7 +9,7 @@ module Benchmark
       end
 
       def client_module_name
-        :S3
+        'Aws::S3'
       end
 
       def operation_benchmarks

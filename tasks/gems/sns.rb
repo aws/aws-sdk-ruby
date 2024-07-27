@@ -9,7 +9,7 @@ module Benchmark
       end
 
       def client_module_name
-        :SNS
+        'Aws::SNS'
       end
 
       def operation_benchmarks
