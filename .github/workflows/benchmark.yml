@@ -52,8 +52,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::469596866844:role/aws-sdk-ruby-performance-reporter
-          role-session-name: benchmark-report
+          role-to-assume: arn:aws:iam::373952703873:role/BenchmarkReporter
+          role-session-name: benchmark-reporter
           aws-region: us-west-2
 
       - name: Upload benchmark report
