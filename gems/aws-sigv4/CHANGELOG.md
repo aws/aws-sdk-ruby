@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add missing require of `pathname` to `Signer`.
+
 1.9.0 (2024-07-23)
 ------------------
 

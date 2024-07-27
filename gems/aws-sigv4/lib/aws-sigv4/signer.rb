@@ -6,6 +6,7 @@ require 'time'
 require 'uri'
 require 'set'
 require 'cgi'
+require 'pathname'
 require 'aws-eventstream'
 
 module Aws
