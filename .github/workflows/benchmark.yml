@@ -54,7 +54,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::373952703873:role/BenchmarkReporter
           role-session-name: benchmark-reporter
-          aws-region: us-west-2
+          aws-region: us-east-1
 
       - name: Upload benchmark report
         run: bundle exec rake benchmark:upload-report
