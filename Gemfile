@@ -8,13 +8,17 @@ gem 'rake', require: false
 gem 'aws-crt' if ENV['CRT']
 gem 'http-2'
 gem 'jmespath'
+if defined?(JRUBY_VERSION)
+  # get the latest jruby-openssl to support sigv4a
+  # see: https://github.com/jruby/jruby-openssl/issues/30
+  gem 'jruby-openssl'
+end
 
 # protocol parsers
 gem 'json'
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml', '= 3.2.6' # Temporary Workaround (https://github.com/ruby/rexml/issues/131)
-
 # These protocol parsers do not have java gems
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
@@ -22,24 +26,21 @@ unless defined?(JRUBY_VERSION)
   gem 'ox'
 end
 
-if defined?(JRUBY_VERSION)
-  # get the latest jruby-openssl to support sigv4a
-  # see: https://github.com/jruby/jruby-openssl/issues/30
-  gem 'jruby-openssl'
-end
+group :benchmark do
+  gem 'memory_profiler'
 
-group :test do
-  gem 'addressable'
-  gem 'cucumber'
-  gem 'webmock'
-
-  gem 'multipart-post'
-  gem 'rspec'
+  # required for uploading report/putting metrics
+  gem 'aws-sdk-cloudwatch'
+  gem 'aws-sdk-s3'
 end
 
 group :build do
   gem 'kramdown'
   gem 'mustache'
+end
+
+group :development do
+  gem 'rubocop', '1.28.0'
 end
 
 group :docs do
@@ -56,15 +57,15 @@ group :repl do
   gem 'pry'
 end
 
-group :development do
-  gem 'rubocop', '1.28.0'
-end
-
-group :benchmark do
-  gem 'benchmark'
-  gem 'memory_profiler'
-end
-
 group :signature do
   gem 'rbs', platforms: :ruby
+end
+
+group :test do
+  gem 'addressable'
+  gem 'cucumber'
+  gem 'webmock'
+
+  gem 'multipart-post'
+  gem 'rspec'
 end
