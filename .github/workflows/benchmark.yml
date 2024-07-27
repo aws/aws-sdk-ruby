@@ -32,6 +32,8 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
 
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install gems
         run: |
