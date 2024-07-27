@@ -38,7 +38,7 @@ jobs:
 
       - name: Install gems
         run: |
-          bundle config set --local without 'development docs repl signature'
+          bundle config set --local without 'development docs rbs repl'
           bundle install
 
       - name: Build SDK

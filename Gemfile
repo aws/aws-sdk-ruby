@@ -53,12 +53,12 @@ group :docs do
   gem 'yard-sitemap', '~> 1.0'
 end
 
-group :repl do
-  gem 'pry'
+group :rbs do
+  gem 'rbs', platforms: :ruby
 end
 
-group :signature do
-  gem 'rbs', platforms: :ruby
+group :repl do
+  gem 'pry'
 end
 
 group :test do
