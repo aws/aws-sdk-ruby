@@ -12,6 +12,10 @@ module Benchmark
         'aws-sdk-core'
       end
 
+      def gem_dir
+        "gems/#{gem_name}"
+      end
+
       # Core does not have a client and does not have any operation benchmarks
     end
   end

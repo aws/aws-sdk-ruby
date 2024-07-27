@@ -7,6 +7,10 @@ module Benchmark
         'aws-sdk-sns'
       end
 
+      def gem_dir
+        "gems/#{gem_name}"
+      end
+
       def client_module_name
         'Aws::SNS'
       end
