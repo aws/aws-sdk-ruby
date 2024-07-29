@@ -239,11 +239,11 @@ module Aws::MemoryDB
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The Redis engine version used by the cluster
+    #   The Redis OSS engine version used by the cluster
     #   @return [String]
     #
     # @!attribute [rw] engine_patch_version
-    #   The Redis engine patch version used by the cluster
+    #   The Redis OSS engine patch version used by the cluster
     #   @return [String]
     #
     # @!attribute [rw] parameter_group_name
@@ -375,7 +375,7 @@ module Aws::MemoryDB
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The Redis engine version used by the cluster
+    #   The Redis OSS engine version used by the cluster
     #   @return [String]
     #
     # @!attribute [rw] maintenance_window
@@ -685,7 +685,8 @@ module Aws::MemoryDB
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version number of the Redis engine to be used for the cluster.
+    #   The version number of the Redis OSS engine to be used for the
+    #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -1175,7 +1176,7 @@ module Aws::MemoryDB
     end
 
     # @!attribute [rw] engine_version
-    #   The Redis engine version
+    #   The Redis OSS engine version
     #   @return [String]
     #
     # @!attribute [rw] parameter_group_family
@@ -1846,7 +1847,7 @@ module Aws::MemoryDB
       include Aws::Structure
     end
 
-    # Provides details of the Redis engine version
+    # Provides details of the Redis OSS engine version
     #
     # @!attribute [rw] engine_version
     #   The engine version

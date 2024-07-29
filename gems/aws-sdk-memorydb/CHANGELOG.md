@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-07-29)
+------------------
+
+* Feature - Renaming full service name as it appears in developer documentation.
+
 1.29.0 (2024-07-02)
 ------------------
 
