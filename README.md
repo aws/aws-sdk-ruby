@@ -270,6 +270,14 @@ AWS CRT bindings are in developer preview and are available in the
 the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  You can install them
 by adding the `aws-crt` gem to your Gemfile. 
 
+[Sigv4a](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
+is an extension to Sigv4 that allows signatures that are valid in more than one region.
+Sigv4a is required to use some services/operations such as
+[S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
+and Amazon EventBridge Global Endpoints.  Sigv4a is supported natively in Ruby
+in the [aws-sigv4 gem](https://rubygems.org/gems/aws-sigv4) 
+in versions 1.9.1 and later.
+
 ## Getting Help
 
 Please use any of these resources for getting help:
