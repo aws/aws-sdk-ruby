@@ -27,9 +27,14 @@ module Benchmark
           },
           publish_large: {
             setup: proc do |_client|
-              { topic_arn: 'topic', subject: 'subject', message: 'message' * 1000, message_attributes: (0..100).map do |i|
-                                                                                                         ["key#{i}", { data_type: 'String', string_value: "string data#{i}" }]
-                                                                                                       end.to_h }
+              {
+                topic_arn: 'topic',
+                subject: 'subject',
+                message: 'message' * 1000,
+                message_attributes: (0..100).map do |i|
+                  ["key#{i}", { data_type: 'String', string_value: "string data#{i}" }]
+                end.to_h
+              }
             end,
             test: proc do |client, req|
               client.publish(req)

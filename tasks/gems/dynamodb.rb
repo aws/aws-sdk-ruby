@@ -56,9 +56,10 @@ module Benchmark
           batch_get_item_large: {
             n: 100,
             setup: proc do |client|
-              client.stub_responses(:batch_get_item, [{ responses: { 'table' => (0...100).map do |i|
-                                                                                  TestData.test_hash(10, i)
-                                                                                end } }])
+              client.stub_responses(
+                :batch_get_item,
+                [{ responses: { 'table' => (0...100).map { |i| TestData.test_hash(10, i) } } }]
+              )
               { request_items: { 'table' => { keys: (0...100).map { |i| { 'pk' => i } } } } }
             end,
             test: proc do |client, req|

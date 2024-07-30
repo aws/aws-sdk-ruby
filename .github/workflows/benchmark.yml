@@ -44,7 +44,7 @@ jobs:
       - name: Build SDK
         run: bundle exec rake build
 
-      - name: Benchmark Gems
+      - name: Benchmark gems
         env:
           JRUBY_OPTS: -J-Xmx4g
         run: bundle exec rake benchmark:run
