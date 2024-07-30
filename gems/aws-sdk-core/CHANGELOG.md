@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+3.201.4 (2024-07-30)
+------------------
+* Feature - Add opt-in auto-refresh functionality to `Aws::SharedCredentials`.
+
 3.201.3 (2024-07-23)
 ------------------
 
