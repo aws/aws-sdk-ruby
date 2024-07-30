@@ -4049,7 +4049,11 @@ module Aws::ElastiCache
     # ElastiCache immediately begins deleting the selected resources; you
     # cannot cancel or revert this operation.
     #
-    # <note markdown="1"> This operation is valid for Redis OSS only.
+    # <note markdown="1"> * `CreateSnapshot` permission is required to create a final snapshot.
+    #   Without this permission, the API call will fail with an `Access
+    #   Denied` exception.
+    #
+    # * This operation is valid for Redis OSS only.
     #
     #  </note>
     #
@@ -4189,6 +4193,12 @@ module Aws::ElastiCache
     end
 
     # Deletes a specified existing serverless cache.
+    #
+    # <note markdown="1"> `CreateServerlessCacheSnapshot` permission is required to create a
+    # final snapshot. Without this permission, the API call will fail with
+    # an `Access Denied` exception.
+    #
+    #  </note>
     #
     # @option params [required, String] :serverless_cache_name
     #   The identifier of the serverless cache to be deleted.
@@ -11363,7 +11373,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

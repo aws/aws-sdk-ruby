@@ -750,7 +750,7 @@ module Aws::Tnb
     end
 
     # Gets the details of a network function instance, including the
-    # instantation state and metadata from the function package descriptor
+    # instantiation state and metadata from the function package descriptor
     # in the network function package.
     #
     # A network function instance is a function in a function package .
@@ -992,7 +992,7 @@ module Aws::Tnb
     #   resp.metadata.last_modified #=> Time
     #   resp.ns_instance_description #=> String
     #   resp.ns_instance_name #=> String
-    #   resp.ns_state #=> String, one of "INSTANTIATED", "NOT_INSTANTIATED", "IMPAIRED", "STOPPED", "DELETED", "INSTANTIATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "TERMINATE_IN_PROGRESS"
+    #   resp.ns_state #=> String, one of "INSTANTIATED", "NOT_INSTANTIATED", "UPDATED", "IMPAIRED", "UPDATE_FAILED", "STOPPED", "DELETED", "INSTANTIATE_IN_PROGRESS", "INTENT_TO_UPDATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "TERMINATE_IN_PROGRESS"
     #   resp.nsd_id #=> String
     #   resp.nsd_info_id #=> String
     #   resp.tags #=> Hash
@@ -1027,6 +1027,7 @@ module Aws::Tnb
     #   * {Types::GetSolNetworkOperationOutput#operation_state #operation_state} => String
     #   * {Types::GetSolNetworkOperationOutput#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetSolNetworkOperationOutput#tasks #tasks} => Array&lt;Types::GetSolNetworkOperationTaskDetails&gt;
+    #   * {Types::GetSolNetworkOperationOutput#update_type #update_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1042,7 +1043,10 @@ module Aws::Tnb
     #   resp.id #=> String
     #   resp.lcm_operation_type #=> String, one of "INSTANTIATE", "UPDATE", "TERMINATE"
     #   resp.metadata.created_at #=> Time
+    #   resp.metadata.instantiate_metadata.nsd_info_id #=> String
     #   resp.metadata.last_modified #=> Time
+    #   resp.metadata.modify_vnf_info_metadata.vnf_instance_id #=> String
+    #   resp.metadata.update_ns_metadata.nsd_info_id #=> String
     #   resp.ns_instance_id #=> String
     #   resp.operation_state #=> String, one of "PROCESSING", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
     #   resp.tags #=> Hash
@@ -1056,6 +1060,7 @@ module Aws::Tnb
     #   resp.tasks[0].task_name #=> String
     #   resp.tasks[0].task_start_time #=> Time
     #   resp.tasks[0].task_status #=> String, one of "SCHEDULED", "STARTED", "IN_PROGRESS", "COMPLETED", "ERROR", "SKIPPED", "CANCELLED"
+    #   resp.update_type #=> String, one of "MODIFY_VNF_INFORMATION", "UPDATE_NS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/GetSolNetworkOperation AWS API Documentation
     #
@@ -1232,9 +1237,10 @@ module Aws::Tnb
     # @option params [Hash<String,String>] :tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use tags
+    #   to search and filter your resources or track your Amazon Web Services
+    #   costs.
     #
     # @return [Types::InstantiateSolNetworkInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1403,7 +1409,7 @@ module Aws::Tnb
     #   resp.network_instances[0].metadata.last_modified #=> Time
     #   resp.network_instances[0].ns_instance_description #=> String
     #   resp.network_instances[0].ns_instance_name #=> String
-    #   resp.network_instances[0].ns_state #=> String, one of "INSTANTIATED", "NOT_INSTANTIATED", "IMPAIRED", "STOPPED", "DELETED", "INSTANTIATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "TERMINATE_IN_PROGRESS"
+    #   resp.network_instances[0].ns_state #=> String, one of "INSTANTIATED", "NOT_INSTANTIATED", "UPDATED", "IMPAIRED", "UPDATE_FAILED", "STOPPED", "DELETED", "INSTANTIATE_IN_PROGRESS", "INTENT_TO_UPDATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "TERMINATE_IN_PROGRESS"
     #   resp.network_instances[0].nsd_id #=> String
     #   resp.network_instances[0].nsd_info_id #=> String
     #   resp.next_token #=> String
@@ -1429,6 +1435,10 @@ module Aws::Tnb
     # @option params [String] :next_token
     #   The token for the next page of results.
     #
+    # @option params [String] :ns_instance_id
+    #   Network instance id filter, to retrieve network operations associated
+    #   to a network instance.
+    #
     # @return [Types::ListSolNetworkOperationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSolNetworkOperationsOutput#network_operations #network_operations} => Array&lt;Types::ListSolNetworkOperationsInfo&gt;
@@ -1441,6 +1451,7 @@ module Aws::Tnb
     #   resp = client.list_sol_network_operations({
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     ns_instance_id: "NsInstanceId",
     #   })
     #
     # @example Response structure
@@ -1453,8 +1464,11 @@ module Aws::Tnb
     #   resp.network_operations[0].lcm_operation_type #=> String, one of "INSTANTIATE", "UPDATE", "TERMINATE"
     #   resp.network_operations[0].metadata.created_at #=> Time
     #   resp.network_operations[0].metadata.last_modified #=> Time
+    #   resp.network_operations[0].metadata.nsd_info_id #=> String
+    #   resp.network_operations[0].metadata.vnf_instance_id #=> String
     #   resp.network_operations[0].ns_instance_id #=> String
     #   resp.network_operations[0].operation_state #=> String, one of "PROCESSING", "COMPLETED", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.network_operations[0].update_type #=> String, one of "MODIFY_VNF_INFORMATION", "UPDATE_NS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/ListSolNetworkOperations AWS API Documentation
@@ -1708,9 +1722,10 @@ module Aws::Tnb
     # @option params [Hash<String,String>] :tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use tags
+    #   to search and filter your resources or track your Amazon Web Services
+    #   costs.
     #
     # @return [Types::TerminateSolNetworkInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1816,9 +1831,15 @@ module Aws::Tnb
     # TNB that can be deployed and on which life-cycle operations (like
     # terminate, update, and delete) can be performed.
     #
+    # Choose the *updateType* parameter to target the necessary update of
+    # the network instance.
+    #
     # @option params [Types::UpdateSolNetworkModify] :modify_vnf_info_data
     #   Identifies the network function information parameters and/or the
     #   configurable properties of the network function to be modified.
+    #
+    #   Include this property only if the update type is
+    #   `MODIFY_VNF_INFORMATION`.
     #
     # @option params [required, String] :ns_instance_id
     #   ID of the network instance.
@@ -1826,12 +1847,25 @@ module Aws::Tnb
     # @option params [Hash<String,String>] :tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use tags
+    #   to search and filter your resources or track your Amazon Web Services
+    #   costs.
+    #
+    # @option params [Types::UpdateSolNetworkServiceData] :update_ns
+    #   Identifies the network service descriptor and the configurable
+    #   properties of the descriptor, to be used for the update.
+    #
+    #   Include this property only if the update type is `UPDATE_NS`.
     #
     # @option params [required, String] :update_type
     #   The type of update.
+    #
+    #   * Use the `MODIFY_VNF_INFORMATION` update type, to update a specific
+    #     network function configuration, in the network instance.
+    #
+    #   * Use the `UPDATE_NS` update type, to update the network instance to a
+    #     new network service descriptor.
     #
     # @return [Types::UpdateSolNetworkInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1850,7 +1884,12 @@ module Aws::Tnb
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     update_type: "MODIFY_VNF_INFORMATION", # required, accepts MODIFY_VNF_INFORMATION
+    #     update_ns: {
+    #       additional_params_for_ns: {
+    #       },
+    #       nsd_info_id: "NsdInfoId", # required
+    #     },
+    #     update_type: "MODIFY_VNF_INFORMATION", # required, accepts MODIFY_VNF_INFORMATION, UPDATE_NS
     #   })
     #
     # @example Response structure
@@ -2044,7 +2083,7 @@ module Aws::Tnb
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-tnb'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

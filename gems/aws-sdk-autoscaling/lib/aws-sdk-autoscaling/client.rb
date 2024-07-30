@@ -1497,7 +1497,7 @@ module Aws::AutoScaling
     #     health_check_type: "XmlStringMaxLen32",
     #     health_check_grace_period: 1,
     #     placement_group: "XmlStringMaxLen255",
-    #     vpc_zone_identifier: "XmlStringMaxLen2047",
+    #     vpc_zone_identifier: "XmlStringMaxLen5000",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
     #     capacity_rebalance: false,
@@ -7158,7 +7158,7 @@ module Aws::AutoScaling
     #     health_check_type: "XmlStringMaxLen32",
     #     health_check_grace_period: 1,
     #     placement_group: "XmlStringMaxLen255",
-    #     vpc_zone_identifier: "XmlStringMaxLen2047",
+    #     vpc_zone_identifier: "XmlStringMaxLen5000",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
     #     service_linked_role_arn: "ResourceName",
@@ -7195,7 +7195,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -422,8 +422,7 @@ module Aws::WorkSpaces
     # Describes the user capacity for a pool of WorkSpaces.
     #
     # @!attribute [rw] desired_user_sessions
-    #   The desired number of user sessions for a multi-session pool. This
-    #   is not allowed for single-session pools.
+    #   The desired number of user sessions for the WorkSpaces in the pool.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Capacity AWS API Documentation
@@ -437,8 +436,10 @@ module Aws::WorkSpaces
     # Describes the capacity status for a pool of WorkSpaces.
     #
     # @!attribute [rw] available_user_sessions
-    #   The number of user sessions currently being used for pool sessions.
-    #   This only applies to multi-session pools.
+    #   The number of user sessions currently available for streaming from
+    #   your pool.
+    #
+    #   AvailableUserSessions = ActualUserSessions - ActiveUserSessions
     #   @return [Integer]
     #
     # @!attribute [rw] desired_user_sessions
@@ -448,13 +449,14 @@ module Aws::WorkSpaces
     #   @return [Integer]
     #
     # @!attribute [rw] actual_user_sessions
-    #   The total number of session slots that are available for a pool of
-    #   WorkSpaces.
+    #   The total number of user sessions that are available for streaming
+    #   or are currently streaming in your pool.
+    #
+    #   ActualUserSessions = AvailableUserSessions + ActiveUserSessions
     #   @return [Integer]
     #
     # @!attribute [rw] active_user_sessions
-    #   The number of user sessions currently being used for pool sessions.
-    #   This only applies to multi-session pools.
+    #   The number of user sessions currently being used for your pool.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CapacityStatus AWS API Documentation
@@ -5718,10 +5720,15 @@ module Aws::WorkSpaces
     #
     #    </note>
     #
+    #   Review your running mode to ensure you are using one that is optimal
+    #   for your needs and budget. For more information on switching running
+    #   modes, see [ Can I switch between hourly and monthly billing?][3]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
     #   [2]: http://aws.amazon.com/workspaces/core/
+    #   [3]: http://aws.amazon.com/workspaces-family/workspaces/faqs/#:~:text=Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%20on%20WorkSpaces%20Personal%3F
     #   @return [String]
     #
     # @!attribute [rw] running_mode_auto_stop_timeout_in_minutes

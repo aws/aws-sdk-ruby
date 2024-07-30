@@ -217,7 +217,7 @@ module Aws
         def metadata: () -> Types::GetSolNetworkInstanceMetadata
         def ns_instance_description: () -> ::String
         def ns_instance_name: () -> ::String
-        def ns_state: () -> ("INSTANTIATED" | "NOT_INSTANTIATED" | "IMPAIRED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
+        def ns_state: () -> ("INSTANTIATED" | "NOT_INSTANTIATED" | "UPDATED" | "IMPAIRED" | "UPDATE_FAILED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "INTENT_TO_UPDATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
         def nsd_id: () -> ::String
         def nsd_info_id: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
@@ -238,6 +238,7 @@ module Aws
         def operation_state: () -> ("PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
         def tags: () -> ::Hash[::String, ::String]
         def tasks: () -> ::Array[Types::GetSolNetworkOperationTaskDetails]
+        def update_type: () -> ("MODIFY_VNF_INFORMATION" | "UPDATE_NS")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_network_operation-instance_method
       def get_sol_network_operation: (
@@ -347,7 +348,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#list_sol_network_operations-instance_method
       def list_sol_network_operations: (
                                          ?max_results: ::Integer,
-                                         ?next_token: ::String
+                                         ?next_token: ::String,
+                                         ?ns_instance_id: ::String
                                        ) -> _ListSolNetworkOperationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolNetworkOperationsResponseSuccess
 
@@ -465,7 +467,12 @@ module Aws
                                          },
                                          ns_instance_id: ::String,
                                          ?tags: Hash[::String, ::String],
-                                         update_type: ("MODIFY_VNF_INFORMATION")
+                                         ?update_ns: {
+                                           additional_params_for_ns: {
+                                           }?,
+                                           nsd_info_id: ::String
+                                         },
+                                         update_type: ("MODIFY_VNF_INFORMATION" | "UPDATE_NS")
                                        ) -> _UpdateSolNetworkInstanceResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSolNetworkInstanceResponseSuccess
 

@@ -64,6 +64,7 @@ module Aws::Tnb
     GetSolVnfcResourceInfo = Shapes::StructureShape.new(name: 'GetSolVnfcResourceInfo')
     GetSolVnfcResourceInfoList = Shapes::ListShape.new(name: 'GetSolVnfcResourceInfoList')
     GetSolVnfcResourceInfoMetadata = Shapes::StructureShape.new(name: 'GetSolVnfcResourceInfoMetadata')
+    InstantiateMetadata = Shapes::StructureShape.new(name: 'InstantiateMetadata')
     InstantiateSolNetworkInstanceInput = Shapes::StructureShape.new(name: 'InstantiateSolNetworkInstanceInput')
     InstantiateSolNetworkInstanceOutput = Shapes::StructureShape.new(name: 'InstantiateSolNetworkInstanceOutput')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -101,6 +102,7 @@ module Aws::Tnb
     ListSolNetworkPackagesOutput = Shapes::StructureShape.new(name: 'ListSolNetworkPackagesOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    ModifyVnfInfoMetadata = Shapes::StructureShape.new(name: 'ModifyVnfInfoMetadata')
     NetworkArtifactMeta = Shapes::StructureShape.new(name: 'NetworkArtifactMeta')
     NsInstanceArn = Shapes::StringShape.new(name: 'NsInstanceArn')
     NsInstanceId = Shapes::StringShape.new(name: 'NsInstanceId')
@@ -127,6 +129,7 @@ module Aws::Tnb
     PutSolNetworkPackageContentMetadata = Shapes::StructureShape.new(name: 'PutSolNetworkPackageContentMetadata')
     PutSolNetworkPackageContentOutput = Shapes::StructureShape.new(name: 'PutSolNetworkPackageContentOutput')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SensitiveBlob = Shapes::BlobShape.new(name: 'SensitiveBlob')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
@@ -145,6 +148,7 @@ module Aws::Tnb
     ToscaOverride = Shapes::StructureShape.new(name: 'ToscaOverride')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateNsMetadata = Shapes::StructureShape.new(name: 'UpdateNsMetadata')
     UpdateSolFunctionPackageInput = Shapes::StructureShape.new(name: 'UpdateSolFunctionPackageInput')
     UpdateSolFunctionPackageOutput = Shapes::StructureShape.new(name: 'UpdateSolFunctionPackageOutput')
     UpdateSolNetworkInstanceInput = Shapes::StructureShape.new(name: 'UpdateSolNetworkInstanceInput')
@@ -152,6 +156,7 @@ module Aws::Tnb
     UpdateSolNetworkModify = Shapes::StructureShape.new(name: 'UpdateSolNetworkModify')
     UpdateSolNetworkPackageInput = Shapes::StructureShape.new(name: 'UpdateSolNetworkPackageInput')
     UpdateSolNetworkPackageOutput = Shapes::StructureShape.new(name: 'UpdateSolNetworkPackageOutput')
+    UpdateSolNetworkServiceData = Shapes::StructureShape.new(name: 'UpdateSolNetworkServiceData')
     UpdateSolNetworkType = Shapes::StringShape.new(name: 'UpdateSolNetworkType')
     UsageState = Shapes::StringShape.new(name: 'UsageState')
     ValidateSolFunctionPackageContentInput = Shapes::StructureShape.new(name: 'ValidateSolFunctionPackageContentInput')
@@ -315,7 +320,10 @@ module Aws::Tnb
     GetSolNetworkOperationInput.struct_class = Types::GetSolNetworkOperationInput
 
     GetSolNetworkOperationMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    GetSolNetworkOperationMetadata.add_member(:instantiate_metadata, Shapes::ShapeRef.new(shape: InstantiateMetadata, location_name: "instantiateMetadata"))
     GetSolNetworkOperationMetadata.add_member(:last_modified, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModified"))
+    GetSolNetworkOperationMetadata.add_member(:modify_vnf_info_metadata, Shapes::ShapeRef.new(shape: ModifyVnfInfoMetadata, location_name: "modifyVnfInfoMetadata"))
+    GetSolNetworkOperationMetadata.add_member(:update_ns_metadata, Shapes::ShapeRef.new(shape: UpdateNsMetadata, location_name: "updateNsMetadata"))
     GetSolNetworkOperationMetadata.struct_class = Types::GetSolNetworkOperationMetadata
 
     GetSolNetworkOperationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: NsLcmOpOccArn, required: true, location_name: "arn"))
@@ -327,6 +335,7 @@ module Aws::Tnb
     GetSolNetworkOperationOutput.add_member(:operation_state, Shapes::ShapeRef.new(shape: NsLcmOperationState, location_name: "operationState"))
     GetSolNetworkOperationOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetSolNetworkOperationOutput.add_member(:tasks, Shapes::ShapeRef.new(shape: GetSolNetworkOperationTasksList, location_name: "tasks"))
+    GetSolNetworkOperationOutput.add_member(:update_type, Shapes::ShapeRef.new(shape: UpdateSolNetworkType, location_name: "updateType"))
     GetSolNetworkOperationOutput.struct_class = Types::GetSolNetworkOperationOutput
 
     GetSolNetworkOperationTaskDetails.add_member(:task_context, Shapes::ShapeRef.new(shape: StringMap, location_name: "taskContext"))
@@ -392,6 +401,10 @@ module Aws::Tnb
     GetSolVnfcResourceInfoMetadata.add_member(:helm_chart, Shapes::ShapeRef.new(shape: String, location_name: "helmChart"))
     GetSolVnfcResourceInfoMetadata.add_member(:node_group, Shapes::ShapeRef.new(shape: String, location_name: "nodeGroup"))
     GetSolVnfcResourceInfoMetadata.struct_class = Types::GetSolVnfcResourceInfoMetadata
+
+    InstantiateMetadata.add_member(:additional_params_for_ns, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParamsForNs"))
+    InstantiateMetadata.add_member(:nsd_info_id, Shapes::ShapeRef.new(shape: NsdInfoId, required: true, location_name: "nsdInfoId"))
+    InstantiateMetadata.struct_class = Types::InstantiateMetadata
 
     InstantiateSolNetworkInstanceInput.add_member(:additional_params_for_ns, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParamsForNs"))
     InstantiateSolNetworkInstanceInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "dry_run"))
@@ -490,14 +503,18 @@ module Aws::Tnb
     ListSolNetworkOperationsInfo.add_member(:metadata, Shapes::ShapeRef.new(shape: ListSolNetworkOperationsMetadata, location_name: "metadata"))
     ListSolNetworkOperationsInfo.add_member(:ns_instance_id, Shapes::ShapeRef.new(shape: NsInstanceId, required: true, location_name: "nsInstanceId"))
     ListSolNetworkOperationsInfo.add_member(:operation_state, Shapes::ShapeRef.new(shape: NsLcmOperationState, required: true, location_name: "operationState"))
+    ListSolNetworkOperationsInfo.add_member(:update_type, Shapes::ShapeRef.new(shape: UpdateSolNetworkType, location_name: "updateType"))
     ListSolNetworkOperationsInfo.struct_class = Types::ListSolNetworkOperationsInfo
 
     ListSolNetworkOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListSolNetworkOperationsInputMaxResultsInteger, location: "querystring", location_name: "max_results"))
     ListSolNetworkOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextpage_opaque_marker"))
+    ListSolNetworkOperationsInput.add_member(:ns_instance_id, Shapes::ShapeRef.new(shape: NsInstanceId, location: "querystring", location_name: "nsInstanceId"))
     ListSolNetworkOperationsInput.struct_class = Types::ListSolNetworkOperationsInput
 
     ListSolNetworkOperationsMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     ListSolNetworkOperationsMetadata.add_member(:last_modified, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "lastModified"))
+    ListSolNetworkOperationsMetadata.add_member(:nsd_info_id, Shapes::ShapeRef.new(shape: NsdInfoId, location_name: "nsdInfoId"))
+    ListSolNetworkOperationsMetadata.add_member(:vnf_instance_id, Shapes::ShapeRef.new(shape: VnfInstanceId, location_name: "vnfInstanceId"))
     ListSolNetworkOperationsMetadata.struct_class = Types::ListSolNetworkOperationsMetadata
 
     ListSolNetworkOperationsOutput.add_member(:network_operations, Shapes::ShapeRef.new(shape: ListSolNetworkOperationsResources, location_name: "networkOperations"))
@@ -540,6 +557,10 @@ module Aws::Tnb
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    ModifyVnfInfoMetadata.add_member(:vnf_configurable_properties, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "vnfConfigurableProperties"))
+    ModifyVnfInfoMetadata.add_member(:vnf_instance_id, Shapes::ShapeRef.new(shape: VnfInstanceId, required: true, location_name: "vnfInstanceId"))
+    ModifyVnfInfoMetadata.struct_class = Types::ModifyVnfInfoMetadata
+
     NetworkArtifactMeta.add_member(:overrides, Shapes::ShapeRef.new(shape: OverrideList, location_name: "overrides"))
     NetworkArtifactMeta.struct_class = Types::NetworkArtifactMeta
 
@@ -550,7 +571,7 @@ module Aws::Tnb
     ProblemDetails.struct_class = Types::ProblemDetails
 
     PutSolFunctionPackageContentInput.add_member(:content_type, Shapes::ShapeRef.new(shape: PackageContentType, location: "header", location_name: "Content-Type"))
-    PutSolFunctionPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "file"))
+    PutSolFunctionPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: SensitiveBlob, required: true, location_name: "file"))
     PutSolFunctionPackageContentInput.add_member(:vnf_pkg_id, Shapes::ShapeRef.new(shape: VnfPkgId, required: true, location: "uri", location_name: "vnfPkgId"))
     PutSolFunctionPackageContentInput.struct_class = Types::PutSolFunctionPackageContentInput
     PutSolFunctionPackageContentInput[:payload] = :file
@@ -568,7 +589,7 @@ module Aws::Tnb
     PutSolFunctionPackageContentOutput.struct_class = Types::PutSolFunctionPackageContentOutput
 
     PutSolNetworkPackageContentInput.add_member(:content_type, Shapes::ShapeRef.new(shape: PackageContentType, location: "header", location_name: "Content-Type"))
-    PutSolNetworkPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "file"))
+    PutSolNetworkPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: SensitiveBlob, required: true, location_name: "file"))
     PutSolNetworkPackageContentInput.add_member(:nsd_info_id, Shapes::ShapeRef.new(shape: NsdInfoId, required: true, location: "uri", location_name: "nsdInfoId"))
     PutSolNetworkPackageContentInput.struct_class = Types::PutSolNetworkPackageContentInput
     PutSolNetworkPackageContentInput[:payload] = :file
@@ -627,6 +648,10 @@ module Aws::Tnb
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
+    UpdateNsMetadata.add_member(:additional_params_for_ns, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParamsForNs"))
+    UpdateNsMetadata.add_member(:nsd_info_id, Shapes::ShapeRef.new(shape: NsdInfoId, required: true, location_name: "nsdInfoId"))
+    UpdateNsMetadata.struct_class = Types::UpdateNsMetadata
+
     UpdateSolFunctionPackageInput.add_member(:operational_state, Shapes::ShapeRef.new(shape: OperationalState, required: true, location_name: "operationalState"))
     UpdateSolFunctionPackageInput.add_member(:vnf_pkg_id, Shapes::ShapeRef.new(shape: VnfPkgId, required: true, location: "uri", location_name: "vnfPkgId"))
     UpdateSolFunctionPackageInput.struct_class = Types::UpdateSolFunctionPackageInput
@@ -637,6 +662,7 @@ module Aws::Tnb
     UpdateSolNetworkInstanceInput.add_member(:modify_vnf_info_data, Shapes::ShapeRef.new(shape: UpdateSolNetworkModify, location_name: "modifyVnfInfoData"))
     UpdateSolNetworkInstanceInput.add_member(:ns_instance_id, Shapes::ShapeRef.new(shape: NsInstanceId, required: true, location: "uri", location_name: "nsInstanceId"))
     UpdateSolNetworkInstanceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdateSolNetworkInstanceInput.add_member(:update_ns, Shapes::ShapeRef.new(shape: UpdateSolNetworkServiceData, location_name: "updateNs"))
     UpdateSolNetworkInstanceInput.add_member(:update_type, Shapes::ShapeRef.new(shape: UpdateSolNetworkType, required: true, location_name: "updateType"))
     UpdateSolNetworkInstanceInput.struct_class = Types::UpdateSolNetworkInstanceInput
 
@@ -655,8 +681,12 @@ module Aws::Tnb
     UpdateSolNetworkPackageOutput.add_member(:nsd_operational_state, Shapes::ShapeRef.new(shape: NsdOperationalState, required: true, location_name: "nsdOperationalState"))
     UpdateSolNetworkPackageOutput.struct_class = Types::UpdateSolNetworkPackageOutput
 
+    UpdateSolNetworkServiceData.add_member(:additional_params_for_ns, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParamsForNs"))
+    UpdateSolNetworkServiceData.add_member(:nsd_info_id, Shapes::ShapeRef.new(shape: NsdInfoId, required: true, location_name: "nsdInfoId"))
+    UpdateSolNetworkServiceData.struct_class = Types::UpdateSolNetworkServiceData
+
     ValidateSolFunctionPackageContentInput.add_member(:content_type, Shapes::ShapeRef.new(shape: PackageContentType, location: "header", location_name: "Content-Type"))
-    ValidateSolFunctionPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "file"))
+    ValidateSolFunctionPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: SensitiveBlob, required: true, location_name: "file"))
     ValidateSolFunctionPackageContentInput.add_member(:vnf_pkg_id, Shapes::ShapeRef.new(shape: VnfPkgId, required: true, location: "uri", location_name: "vnfPkgId"))
     ValidateSolFunctionPackageContentInput.struct_class = Types::ValidateSolFunctionPackageContentInput
     ValidateSolFunctionPackageContentInput[:payload] = :file
@@ -674,7 +704,7 @@ module Aws::Tnb
     ValidateSolFunctionPackageContentOutput.struct_class = Types::ValidateSolFunctionPackageContentOutput
 
     ValidateSolNetworkPackageContentInput.add_member(:content_type, Shapes::ShapeRef.new(shape: PackageContentType, location: "header", location_name: "Content-Type"))
-    ValidateSolNetworkPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "file"))
+    ValidateSolNetworkPackageContentInput.add_member(:file, Shapes::ShapeRef.new(shape: SensitiveBlob, required: true, location_name: "file"))
     ValidateSolNetworkPackageContentInput.add_member(:nsd_info_id, Shapes::ShapeRef.new(shape: NsdInfoId, required: true, location: "uri", location_name: "nsdInfoId"))
     ValidateSolNetworkPackageContentInput.struct_class = Types::ValidateSolNetworkPackageContentInput
     ValidateSolNetworkPackageContentInput[:payload] = :file
@@ -705,9 +735,11 @@ module Aws::Tnb
 
       api.metadata = {
         "apiVersion" => "2008-10-21",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "tnb",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Telco Network Builder",
         "serviceId" => "tnb",
         "signatureVersion" => "v4",

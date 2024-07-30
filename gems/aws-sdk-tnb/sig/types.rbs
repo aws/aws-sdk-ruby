@@ -192,7 +192,7 @@ module Aws::Tnb
       attr_accessor metadata: Types::GetSolNetworkInstanceMetadata
       attr_accessor ns_instance_description: ::String
       attr_accessor ns_instance_name: ::String
-      attr_accessor ns_state: ("INSTANTIATED" | "NOT_INSTANTIATED" | "IMPAIRED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
+      attr_accessor ns_state: ("INSTANTIATED" | "NOT_INSTANTIATED" | "UPDATED" | "IMPAIRED" | "UPDATE_FAILED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "INTENT_TO_UPDATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
       attr_accessor nsd_id: ::String
       attr_accessor nsd_info_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -206,7 +206,10 @@ module Aws::Tnb
 
     class GetSolNetworkOperationMetadata
       attr_accessor created_at: ::Time
+      attr_accessor instantiate_metadata: Types::InstantiateMetadata
       attr_accessor last_modified: ::Time
+      attr_accessor modify_vnf_info_metadata: Types::ModifyVnfInfoMetadata
+      attr_accessor update_ns_metadata: Types::UpdateNsMetadata
       SENSITIVE: []
     end
 
@@ -220,6 +223,7 @@ module Aws::Tnb
       attr_accessor operation_state: ("PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor tasks: ::Array[Types::GetSolNetworkOperationTaskDetails]
+      attr_accessor update_type: ("MODIFY_VNF_INFORMATION" | "UPDATE_NS")
       SENSITIVE: [:tags]
     end
 
@@ -298,6 +302,12 @@ module Aws::Tnb
       attr_accessor cluster: ::String
       attr_accessor helm_chart: ::String
       attr_accessor node_group: ::String
+      SENSITIVE: []
+    end
+
+    class InstantiateMetadata
+      attr_accessor additional_params_for_ns: untyped
+      attr_accessor nsd_info_id: ::String
       SENSITIVE: []
     end
 
@@ -393,7 +403,7 @@ module Aws::Tnb
       attr_accessor metadata: Types::ListSolNetworkInstanceMetadata
       attr_accessor ns_instance_description: ::String
       attr_accessor ns_instance_name: ::String
-      attr_accessor ns_state: ("INSTANTIATED" | "NOT_INSTANTIATED" | "IMPAIRED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
+      attr_accessor ns_state: ("INSTANTIATED" | "NOT_INSTANTIATED" | "UPDATED" | "IMPAIRED" | "UPDATE_FAILED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "INTENT_TO_UPDATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
       attr_accessor nsd_id: ::String
       attr_accessor nsd_info_id: ::String
       SENSITIVE: []
@@ -425,18 +435,22 @@ module Aws::Tnb
       attr_accessor metadata: Types::ListSolNetworkOperationsMetadata
       attr_accessor ns_instance_id: ::String
       attr_accessor operation_state: ("PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor update_type: ("MODIFY_VNF_INFORMATION" | "UPDATE_NS")
       SENSITIVE: []
     end
 
     class ListSolNetworkOperationsInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor ns_instance_id: ::String
       SENSITIVE: []
     end
 
     class ListSolNetworkOperationsMetadata
       attr_accessor created_at: ::Time
       attr_accessor last_modified: ::Time
+      attr_accessor nsd_info_id: ::String
+      attr_accessor vnf_instance_id: ::String
       SENSITIVE: []
     end
 
@@ -490,6 +504,12 @@ module Aws::Tnb
       SENSITIVE: [:tags]
     end
 
+    class ModifyVnfInfoMetadata
+      attr_accessor vnf_configurable_properties: untyped
+      attr_accessor vnf_instance_id: ::String
+      SENSITIVE: []
+    end
+
     class NetworkArtifactMeta
       attr_accessor overrides: ::Array[Types::ToscaOverride]
       SENSITIVE: []
@@ -505,7 +525,7 @@ module Aws::Tnb
       attr_accessor content_type: ("application/zip")
       attr_accessor file: ::String
       attr_accessor vnf_pkg_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:file]
     end
 
     class PutSolFunctionPackageContentMetadata
@@ -527,7 +547,7 @@ module Aws::Tnb
       attr_accessor content_type: ("application/zip")
       attr_accessor file: ::String
       attr_accessor nsd_info_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:file]
     end
 
     class PutSolNetworkPackageContentMetadata
@@ -597,6 +617,12 @@ module Aws::Tnb
     class UntagResourceOutput < Aws::EmptyStructure
     end
 
+    class UpdateNsMetadata
+      attr_accessor additional_params_for_ns: untyped
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
     class UpdateSolFunctionPackageInput
       attr_accessor operational_state: ("ENABLED" | "DISABLED")
       attr_accessor vnf_pkg_id: ::String
@@ -612,7 +638,8 @@ module Aws::Tnb
       attr_accessor modify_vnf_info_data: Types::UpdateSolNetworkModify
       attr_accessor ns_instance_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor update_type: ("MODIFY_VNF_INFORMATION")
+      attr_accessor update_ns: Types::UpdateSolNetworkServiceData
+      attr_accessor update_type: ("MODIFY_VNF_INFORMATION" | "UPDATE_NS")
       SENSITIVE: [:tags]
     end
 
@@ -639,11 +666,17 @@ module Aws::Tnb
       SENSITIVE: []
     end
 
+    class UpdateSolNetworkServiceData
+      attr_accessor additional_params_for_ns: untyped
+      attr_accessor nsd_info_id: ::String
+      SENSITIVE: []
+    end
+
     class ValidateSolFunctionPackageContentInput
       attr_accessor content_type: ("application/zip")
       attr_accessor file: ::String
       attr_accessor vnf_pkg_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:file]
     end
 
     class ValidateSolFunctionPackageContentMetadata
@@ -665,7 +698,7 @@ module Aws::Tnb
       attr_accessor content_type: ("application/zip")
       attr_accessor file: ::String
       attr_accessor nsd_info_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:file]
     end
 
     class ValidateSolNetworkPackageContentMetadata

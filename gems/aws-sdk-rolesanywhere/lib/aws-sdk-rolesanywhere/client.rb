@@ -431,6 +431,10 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:CreateProfile`.
     #
+    # @option params [Boolean] :accept_role_session_name
+    #   Used to determine if a custom role session name will be accepted in a
+    #   temporary credential request.
+    #
     # @option params [Integer] :duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
@@ -473,6 +477,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_profile({
+    #     accept_role_session_name: false,
     #     duration_seconds: 1,
     #     enabled: false,
     #     managed_policy_arns: ["ManagedPolicyListMemberString"],
@@ -490,6 +495,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -629,6 +635,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -713,6 +720,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -842,6 +850,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -973,6 +982,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -1102,6 +1112,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -1369,6 +1380,7 @@ module Aws::RolesAnywhere
     #
     #   resp.next_token #=> String
     #   resp.profiles #=> Array
+    #   resp.profiles[0].accept_role_session_name #=> Boolean
     #   resp.profiles[0].attribute_mappings #=> Array
     #   resp.profiles[0].attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profiles[0].attribute_mappings[0].mapping_rules #=> Array
@@ -1565,6 +1577,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -1823,6 +1836,10 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:UpdateProfile`.
     #
+    # @option params [Boolean] :accept_role_session_name
+    #   Used to determine if a custom role session name will be accepted in a
+    #   temporary credential request.
+    #
     # @option params [Integer] :duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
@@ -1858,6 +1875,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_profile({
+    #     accept_role_session_name: false,
     #     duration_seconds: 1,
     #     managed_policy_arns: ["ManagedPolicyListMemberString"],
     #     name: "ResourceName",
@@ -1868,6 +1886,7 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
@@ -1973,7 +1992,7 @@ module Aws::RolesAnywhere
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

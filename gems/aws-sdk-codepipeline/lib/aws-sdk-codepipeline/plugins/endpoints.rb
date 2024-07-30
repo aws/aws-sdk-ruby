@@ -98,10 +98,16 @@ module Aws::CodePipeline
             Aws::CodePipeline::Endpoints::ListPipelineExecutions.build(context)
           when :list_pipelines
             Aws::CodePipeline::Endpoints::ListPipelines.build(context)
+          when :list_rule_executions
+            Aws::CodePipeline::Endpoints::ListRuleExecutions.build(context)
+          when :list_rule_types
+            Aws::CodePipeline::Endpoints::ListRuleTypes.build(context)
           when :list_tags_for_resource
             Aws::CodePipeline::Endpoints::ListTagsForResource.build(context)
           when :list_webhooks
             Aws::CodePipeline::Endpoints::ListWebhooks.build(context)
+          when :override_stage_condition
+            Aws::CodePipeline::Endpoints::OverrideStageCondition.build(context)
           when :poll_for_jobs
             Aws::CodePipeline::Endpoints::PollForJobs.build(context)
           when :poll_for_third_party_jobs
