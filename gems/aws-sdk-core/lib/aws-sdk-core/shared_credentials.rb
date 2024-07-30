@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require_relative 'ini_parser'
+require 'aws-sdk-core/refreshing_credentials'
 
 module Aws
   class SharedCredentials
-
     include CredentialProvider
     include RefreshingCredentials
 
@@ -32,27 +32,22 @@ module Aws
     # @option [String] :profile_name Defaults to 'default' or
     #   `ENV['AWS_PROFILE']`.
     #
+    # @option [Integer] :refresh_cycle Refresh interval in seconds. 
+    #   If not specified, auto-refresh will be disabled.
     def initialize(options = {})
+      super # Initializes RefreshingCredentials `@mutex`, `@before_refresh` and calls `refresh`
+
       shared_config = Aws.shared_config
-      @path = options[:path]
-      @path ||= shared_config.credentials_path
-      @profile_name = options[:profile_name]
-      @profile_name ||= ENV['AWS_PROFILE']
-      @profile_name ||= shared_config.profile_name
+      @path = options[:path] || shared_config.credentials_path
+      @profile_name = options[:profile_name] || ENV['AWS_PROFILE'] || shared_config.profile_name
 
       @refresh_cycle = options[:refresh_cycle]
-      # the default refresh cycle is one hour
-      @refresh_cycle ||= 60 * 60
 
-      # set last_refresh to 0 to trigger the refresh for the first time 
-      # call credentials method
-      @last_refresh = 0
-
-      # according to different dilivery service of credentials, the 
-      # expiration is different, so it should not value this variable here
-      @expiration = 0
-        
-      super
+      # Set last_refresh to 0 to trigger the refresh for the first time.
+      if @refresh_cycle
+        @last_refresh = Time.now.to_i - @refresh_cycle
+        refresh_if_near_expiration!
+      end
     end
 
     # @return [String]
@@ -70,9 +65,9 @@ module Aws
       parts = [
         self.class.name,
         "profile_name=#{profile_name.inspect}",
-        "path=#{path.inspect}",
-        "last_refresh=#{last_refresh}",
+        "path=#{path.inspect}"
       ]
+      parts << "last_refresh=#{last_refresh}" if @refresh_cycle
       "#<#{parts.join(' ')}>"
     end
 
@@ -85,10 +80,10 @@ module Aws
       !path.nil? && File.exist?(path) && File.readable?(path)
     end
 
-    private 
+    private
 
-    def load_config()
-      if @path && @path == Aws.shared_config.credentials_path
+    def load_config
+      if @path == Aws.shared_config.credentials_path
         Aws.shared_config
       else
         SharedConfig.new(
@@ -99,22 +94,26 @@ module Aws
     end
 
     def refresh
-      config = load_config  
-      @credentials = config.credentials(profile: @profile_name)
+      config = load_config
+      credentials_data = config.credentials(profile: @profile_name)
+      @access_key_id = credentials_data[:access_key_id]
+      @secret_access_key = credentials_data[:secret_access_key]
+      @session_token = credentials_data.fetch(:session_token, nil)
 
-      @last_refresh = Time.now
-      # here, according to different dilivery service of credentials, the 
-      # expiration is different, so it should not value this variable here
-      @expiration = 0
-    end
-
-    def near_expiration?
-      if Time.now >= @last_refresh + @refresh_cycle  
-        true
+      # Set the expiration only if `@refresh_cycle` is set
+      if @refresh_cycle
+        @last_refresh = Time.now.to_i
+        @expiration = @last_refresh + @refresh_cycle
       else
-        false
+        @expiration = nil
       end
+
+      @credentials = Aws::Credentials.new(@access_key_id, @secret_access_key, @session_token)
     end
 
+    def near_expiration?(expiration_length = 0)
+      return false unless @refresh_cycle
+      super(expiration_length)
+    end
   end
 end

@@ -136,23 +136,40 @@ aws_secret_access_key=commented-secret
       expect(creds).to eq(nil)
     end
 
-    it 'will refresh the cache credentials' do
-      creds_provider = SharedCredentials.new(path:mock_credential_file)
+    it 'will refresh the cached credentials when refresh_cycle is provided' do
+      creds_provider = SharedCredentials.new(path: mock_credential_file, refresh_cycle: 3600)
       creds = creds_provider.credentials
       expect(creds.access_key_id).to eq('ACCESS_KEY_0')
       expect(creds.secret_access_key).to eq('SECRET_KEY_0')
       expect(creds.session_token).to eq('TOKEN_0')
-
+    
       creds_provider.instance_variable_set(:@path, mock_config_file)
       expect(creds.access_key_id).to eq('ACCESS_KEY_0')
       expect(creds.secret_access_key).to eq('SECRET_KEY_0')
       expect(creds.session_token).to eq('TOKEN_0')
-
+    
       creds_provider.instance_variable_set(:@last_refresh, Time.now - 60*60)
       creds = creds_provider.credentials
       expect(creds.access_key_id).to eq('ACCESS_KEY_SHARED')
       expect(creds.secret_access_key).to eq('SECRET_KEY_SHARED')
       expect(creds.session_token).to eq('TOKEN_SHARED')
+    end
+
+    it 'does not auto-refresh when refresh_cycle is not provided' do
+      creds_provider = SharedCredentials.new(path: mock_credential_file)
+      creds = creds_provider.credentials
+      expect(creds.access_key_id).to eq('ACCESS_KEY_0')
+      expect(creds.secret_access_key).to eq('SECRET_KEY_0')
+      expect(creds.session_token).to eq('TOKEN_0')
+    
+      creds_provider.instance_variable_set(:@path, mock_config_file)
+      creds_provider.instance_variable_set(:@last_refresh, Time.now - 60*60)
+      
+      # Credentials should not change because refresh is disabled
+      creds = creds_provider.credentials
+      expect(creds.access_key_id).to eq('ACCESS_KEY_0')
+      expect(creds.secret_access_key).to eq('SECRET_KEY_0')
+      expect(creds.session_token).to eq('TOKEN_0')
     end
 
   end
