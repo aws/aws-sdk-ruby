@@ -62,7 +62,7 @@ setting, caching, and fallback behavior.
 
             if access_grants_operation?(context) &&
                !s3_express_endpoint?(context) &&
-               !head_bucket_call?(provider)
+               !credentials_head_bucket_call?(provider)
               params = context[:endpoint_params]
               permission = PERMISSION_MAP[context.operation_name]
 
@@ -75,7 +75,7 @@ setting, caching, and fallback behavior.
                   source_bucket, source_key = params[:copy_source].split('/', 2)
                   if params[:bucket] != source_bucket
                     raise ArgumentError,
-                          'source and destination bucket should be the same'
+                          'source and destination bucket must be the same'
                   end
                   common_prefixes([params[:key], source_key])
                 else
@@ -104,7 +104,7 @@ setting, caching, and fallback behavior.
 
           # HeadBucket is a supported call. When fetching credentials,
           # this plugin is executed again, and becomes recursive.
-          def head_bucket_call?(provider)
+          def credentials_head_bucket_call?(provider)
             provider.instance_variable_get(:@head_bucket_call)
           end
 
@@ -117,15 +117,18 @@ setting, caching, and fallback behavior.
             context[:endpoint_properties]['backend'] == 'S3Express'
           end
 
+          # Return the common prefix of the keys, regardless of the delimiter.
+          # For example, given keys ['foo/bar', 'foo/baz'], the common prefix
+          # is 'foo/ba'.
           def common_prefixes(keys)
             return '' if keys.empty?
 
             first_key = keys[0]
             common_ancestor = first_key
             last_prefix = ''
-            keys.each do |i|
+            keys.each do |k|
               until common_ancestor.empty?
-                break if i.start_with?(common_ancestor)
+                break if k.start_with?(common_ancestor)
 
                 last_index = common_ancestor.rindex('/')
                 return '' if last_index.nil?
@@ -135,9 +138,9 @@ setting, caching, and fallback behavior.
               end
             end
             new_common_ancestor = "#{common_ancestor}/#{last_prefix}"
-            keys.each do |i|
+            keys.each do |k|
               until last_prefix.empty?
-                break if i.start_with?(new_common_ancestor)
+                break if k.start_with?(new_common_ancestor)
 
                 last_prefix = last_prefix[0...-1]
                 new_common_ancestor = "#{common_ancestor}/#{last_prefix}"
