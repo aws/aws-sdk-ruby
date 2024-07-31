@@ -44,6 +44,11 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
+    # @!attribute [rw] accept_role_session_name
+    #   Used to determine if a custom role session name will be accepted in
+    #   a temporary credential request.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
@@ -90,6 +95,7 @@ module Aws::RolesAnywhere
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
+      :accept_role_session_name,
       :duration_seconds,
       :enabled,
       :managed_policy_arns,
@@ -583,6 +589,11 @@ module Aws::RolesAnywhere
 
     # The state of the profile after a read or write operation.
     #
+    # @!attribute [rw] accept_role_session_name
+    #   Used to determine if a custom role session name will be accepted in
+    #   a temporary credential request.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] attribute_mappings
     #   A mapping applied to the authenticating end-entity certificate.
     #   @return [Array<Types::AttributeMapping>]
@@ -649,6 +660,7 @@ module Aws::RolesAnywhere
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ProfileDetail AWS API Documentation
     #
     class ProfileDetail < Struct.new(
+      :accept_role_session_name,
       :attribute_mappings,
       :created_at,
       :created_by,
@@ -1158,6 +1170,11 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
+    # @!attribute [rw] accept_role_session_name
+    #   Used to determine if a custom role session name will be accepted in
+    #   a temporary credential request.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] duration_seconds
     #   Used to determine how long sessions vended using this profile are
     #   valid for. See the `Expiration` section of the [CreateSession API
@@ -1195,6 +1212,7 @@ module Aws::RolesAnywhere
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateProfileRequest AWS API Documentation
     #
     class UpdateProfileRequest < Struct.new(
+      :accept_role_session_name,
       :duration_seconds,
       :managed_policy_arns,
       :name,

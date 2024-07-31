@@ -717,15 +717,37 @@ module Aws::Tnb
     #   The date that the resource was created.
     #   @return [Time]
     #
+    # @!attribute [rw] instantiate_metadata
+    #   Metadata related to the network operation occurrence for network
+    #   instantiation. This is populated only if the lcmOperationType is
+    #   `INSTANTIATE`.
+    #   @return [Types::InstantiateMetadata]
+    #
     # @!attribute [rw] last_modified
     #   The date that the resource was last modified.
     #   @return [Time]
+    #
+    # @!attribute [rw] modify_vnf_info_metadata
+    #   Metadata related to the network operation occurrence for network
+    #   function updates in a network instance. This is populated only if
+    #   the lcmOperationType is `UPDATE` and the updateType is
+    #   `MODIFY_VNF_INFORMATION`.
+    #   @return [Types::ModifyVnfInfoMetadata]
+    #
+    # @!attribute [rw] update_ns_metadata
+    #   Metadata related to the network operation occurrence for network
+    #   instance updates. This is populated only if the lcmOperationType is
+    #   `UPDATE` and the updateType is `UPDATE_NS`.
+    #   @return [Types::UpdateNsMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/GetSolNetworkOperationMetadata AWS API Documentation
     #
     class GetSolNetworkOperationMetadata < Struct.new(
       :created_at,
-      :last_modified)
+      :instantiate_metadata,
+      :last_modified,
+      :modify_vnf_info_metadata,
+      :update_ns_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -769,6 +791,11 @@ module Aws::Tnb
     #   All tasks associated with this operation occurrence.
     #   @return [Array<Types::GetSolNetworkOperationTaskDetails>]
     #
+    # @!attribute [rw] update_type
+    #   Type of the update. Only present if the network operation
+    #   lcmOperationType is `UPDATE`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/GetSolNetworkOperationOutput AWS API Documentation
     #
     class GetSolNetworkOperationOutput < Struct.new(
@@ -780,7 +807,8 @@ module Aws::Tnb
       :ns_instance_id,
       :operation_state,
       :tags,
-      :tasks)
+      :tasks,
+      :update_type)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -1069,6 +1097,27 @@ module Aws::Tnb
       include Aws::Structure
     end
 
+    # Metadata related to the configuration properties used during
+    # instantiation of the network instance.
+    #
+    # @!attribute [rw] additional_params_for_ns
+    #   The configurable properties used during instantiation.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] nsd_info_id
+    #   The network service descriptor used for instantiating the network
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/InstantiateMetadata AWS API Documentation
+    #
+    class InstantiateMetadata < Struct.new(
+      :additional_params_for_ns,
+      :nsd_info_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] additional_params_for_ns
     #   Provides values for the configurable properties.
     #   @return [Hash,Array,String,Numeric,Boolean]
@@ -1087,9 +1136,10 @@ module Aws::Tnb
     # @!attribute [rw] tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use
+    #   tags to search and filter your resources or track your Amazon Web
+    #   Services costs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/InstantiateSolNetworkInstanceInput AWS API Documentation
@@ -1110,9 +1160,10 @@ module Aws::Tnb
     # @!attribute [rw] tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use
+    #   tags to search and filter your resources or track your Amazon Web
+    #   Services costs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/InstantiateSolNetworkInstanceOutput AWS API Documentation
@@ -1536,6 +1587,11 @@ module Aws::Tnb
     #   The state of the network operation.
     #   @return [String]
     #
+    # @!attribute [rw] update_type
+    #   Type of the update. Only present if the network operation
+    #   lcmOperationType is `UPDATE`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/ListSolNetworkOperationsInfo AWS API Documentation
     #
     class ListSolNetworkOperationsInfo < Struct.new(
@@ -1545,7 +1601,8 @@ module Aws::Tnb
       :lcm_operation_type,
       :metadata,
       :ns_instance_id,
-      :operation_state)
+      :operation_state,
+      :update_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1558,11 +1615,17 @@ module Aws::Tnb
     #   The token for the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] ns_instance_id
+    #   Network instance id filter, to retrieve network operations
+    #   associated to a network instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/ListSolNetworkOperationsInput AWS API Documentation
     #
     class ListSolNetworkOperationsInput < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :ns_instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1580,11 +1643,25 @@ module Aws::Tnb
     #   The date that the resource was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] nsd_info_id
+    #   The network service descriptor id used for the operation.
+    #
+    #   Only present if the updateType is `UPDATE_NS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vnf_instance_id
+    #   The network function id used for the operation.
+    #
+    #   Only present if the updateType is `MODIFY_VNF_INFO`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/ListSolNetworkOperationsMetadata AWS API Documentation
     #
     class ListSolNetworkOperationsMetadata < Struct.new(
       :created_at,
-      :last_modified)
+      :last_modified,
+      :nsd_info_id,
+      :vnf_instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1778,6 +1855,28 @@ module Aws::Tnb
       include Aws::Structure
     end
 
+    # Metadata related to the configuration properties used during update of
+    # a specific network function in a network instance.
+    #
+    # @!attribute [rw] vnf_configurable_properties
+    #   The configurable properties used during update of the network
+    #   function instance.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] vnf_instance_id
+    #   The network function instance that was updated in the network
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/ModifyVnfInfoMetadata AWS API Documentation
+    #
+    class ModifyVnfInfoMetadata < Struct.new(
+      :vnf_configurable_properties,
+      :vnf_instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata for network package artifacts.
     #
     # Artifacts are the contents of the package descriptor file and the
@@ -1833,7 +1932,7 @@ module Aws::Tnb
       :content_type,
       :file,
       :vnf_pkg_id)
-      SENSITIVE = []
+      SENSITIVE = [:file]
       include Aws::Structure
     end
 
@@ -1915,7 +2014,7 @@ module Aws::Tnb
       :content_type,
       :file,
       :nsd_info_id)
-      SENSITIVE = []
+      SENSITIVE = [:file]
       include Aws::Structure
     end
 
@@ -2039,9 +2138,10 @@ module Aws::Tnb
     # @!attribute [rw] tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use
+    #   tags to search and filter your resources or track your Amazon Web
+    #   Services costs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/TerminateSolNetworkInstanceInput AWS API Documentation
@@ -2060,9 +2160,10 @@ module Aws::Tnb
     # @!attribute [rw] tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use
+    #   tags to search and filter your resources or track your Amazon Web
+    #   Services costs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/TerminateSolNetworkInstanceOutput AWS API Documentation
@@ -2127,6 +2228,27 @@ module Aws::Tnb
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # Metadata related to the configuration properties used during update of
+    # a network instance.
+    #
+    # @!attribute [rw] additional_params_for_ns
+    #   The configurable properties used during update.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] nsd_info_id
+    #   The network service descriptor used for updating the network
+    #   instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/UpdateNsMetadata AWS API Documentation
+    #
+    class UpdateNsMetadata < Struct.new(
+      :additional_params_for_ns,
+      :nsd_info_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] operational_state
     #   Operational state of the function package.
     #   @return [String]
@@ -2159,6 +2281,9 @@ module Aws::Tnb
     # @!attribute [rw] modify_vnf_info_data
     #   Identifies the network function information parameters and/or the
     #   configurable properties of the network function to be modified.
+    #
+    #   Include this property only if the update type is
+    #   `MODIFY_VNF_INFORMATION`.
     #   @return [Types::UpdateSolNetworkModify]
     #
     # @!attribute [rw] ns_instance_id
@@ -2168,13 +2293,27 @@ module Aws::Tnb
     # @!attribute [rw] tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use
+    #   tags to search and filter your resources or track your Amazon Web
+    #   Services costs.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] update_ns
+    #   Identifies the network service descriptor and the configurable
+    #   properties of the descriptor, to be used for the update.
+    #
+    #   Include this property only if the update type is `UPDATE_NS`.
+    #   @return [Types::UpdateSolNetworkServiceData]
     #
     # @!attribute [rw] update_type
     #   The type of update.
+    #
+    #   * Use the `MODIFY_VNF_INFORMATION` update type, to update a specific
+    #     network function configuration, in the network instance.
+    #
+    #   * Use the `UPDATE_NS` update type, to update the network instance to
+    #     a new network service descriptor.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/UpdateSolNetworkInstanceInput AWS API Documentation
@@ -2183,6 +2322,7 @@ module Aws::Tnb
       :modify_vnf_info_data,
       :ns_instance_id,
       :tags,
+      :update_ns,
       :update_type)
       SENSITIVE = [:tags]
       include Aws::Structure
@@ -2195,9 +2335,10 @@ module Aws::Tnb
     # @!attribute [rw] tags
     #   A tag is a label that you assign to an Amazon Web Services resource.
     #   Each tag consists of a key and an optional value. When you use this
-    #   API, the tags are transferred to the network operation that is
-    #   created. Use tags to search and filter your resources or track your
-    #   Amazon Web Services costs.
+    #   API, the tags are only applied to the network operation that is
+    #   created. These tags are not applied to the network instance. Use
+    #   tags to search and filter your resources or track your Amazon Web
+    #   Services costs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/UpdateSolNetworkInstanceOutput AWS API Documentation
@@ -2265,6 +2406,27 @@ module Aws::Tnb
       include Aws::Structure
     end
 
+    # Information parameters and/or the configurable properties for a
+    # network descriptor used for update.
+    #
+    # @!attribute [rw] additional_params_for_ns
+    #   Values for the configurable properties declared in the network
+    #   service descriptor.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] nsd_info_id
+    #   ID of the network service descriptor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/tnb-2008-10-21/UpdateSolNetworkServiceData AWS API Documentation
+    #
+    class UpdateSolNetworkServiceData < Struct.new(
+      :additional_params_for_ns,
+      :nsd_info_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] content_type
     #   Function package content type.
     #   @return [String]
@@ -2283,7 +2445,7 @@ module Aws::Tnb
       :content_type,
       :file,
       :vnf_pkg_id)
-      SENSITIVE = []
+      SENSITIVE = [:file]
       include Aws::Structure
     end
 
@@ -2365,7 +2527,7 @@ module Aws::Tnb
       :content_type,
       :file,
       :nsd_info_id)
-      SENSITIVE = []
+      SENSITIVE = [:file]
       include Aws::Structure
     end
 

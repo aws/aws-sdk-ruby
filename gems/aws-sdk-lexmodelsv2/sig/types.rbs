@@ -344,13 +344,29 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class BedrockGuardrailConfiguration
+      attr_accessor identifier: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
     class BedrockKnowledgeStoreConfiguration
       attr_accessor bedrock_knowledge_base_arn: ::String
+      attr_accessor exact_response: bool
+      attr_accessor exact_response_fields: Types::BedrockKnowledgeStoreExactResponseFields
+      SENSITIVE: []
+    end
+
+    class BedrockKnowledgeStoreExactResponseFields
+      attr_accessor answer_field: ::String
       SENSITIVE: []
     end
 
     class BedrockModelSpecification
       attr_accessor model_arn: ::String
+      attr_accessor guardrail: Types::BedrockGuardrailConfiguration
+      attr_accessor trace_status: ("ENABLED" | "DISABLED")
+      attr_accessor custom_prompt: ::String
       SENSITIVE: []
     end
 

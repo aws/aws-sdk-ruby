@@ -72,7 +72,7 @@ module Aws::AppStream
       attr_accessor arn: ::String
       attr_accessor app_block_arn: ::String
       attr_accessor icon_s3_location: Types::S3Location
-      attr_accessor platforms: ::Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")]
+      attr_accessor platforms: ::Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")]
       attr_accessor instance_families: ::Array[::String]
       attr_accessor created_time: ::Time
       SENSITIVE: []
@@ -256,7 +256,7 @@ module Aws::AppStream
       attr_accessor launch_path: ::String
       attr_accessor working_directory: ::String
       attr_accessor launch_parameters: ::String
-      attr_accessor platforms: ::Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")]
+      attr_accessor platforms: ::Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")]
       attr_accessor instance_families: ::Array[::String]
       attr_accessor app_block_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -313,7 +313,7 @@ module Aws::AppStream
       attr_accessor idle_disconnect_timeout_in_seconds: ::Integer
       attr_accessor iam_role_arn: ::String
       attr_accessor stream_view: ("APP" | "DESKTOP")
-      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")
       attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor usb_device_filter_strings: ::Array[::String]
       attr_accessor session_script_s3_location: Types::S3Location
@@ -890,7 +890,7 @@ module Aws::AppStream
       attr_accessor idle_disconnect_timeout_in_seconds: ::Integer
       attr_accessor iam_role_arn: ::String
       attr_accessor stream_view: ("APP" | "DESKTOP")
-      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")
       attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor usb_device_filter_strings: ::Array[::String]
       attr_accessor session_script_s3_location: Types::S3Location
@@ -913,7 +913,7 @@ module Aws::AppStream
       attr_accessor visibility: ("PUBLIC" | "PRIVATE" | "SHARED")
       attr_accessor image_builder_supported: bool
       attr_accessor image_builder_name: ::String
-      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")
       attr_accessor description: ::String
       attr_accessor state_change_reason: Types::ImageStateChangeReason
       attr_accessor applications: ::Array[Types::Application]
@@ -933,7 +933,7 @@ module Aws::AppStream
       attr_accessor display_name: ::String
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor instance_type: ::String
-      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")
       attr_accessor iam_role_arn: ::String
       attr_accessor state: ("PENDING" | "UPDATING_AGENT" | "RUNNING" | "STOPPING" | "STOPPED" | "REBOOTING" | "SNAPSHOTTING" | "DELETING" | "FAILED" | "UPDATING" | "PENDING_QUALIFICATION")
       attr_accessor state_change_reason: Types::ImageBuilderStateChangeReason
@@ -1243,7 +1243,7 @@ module Aws::AppStream
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor display_name: ::String
-      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")
       attr_accessor instance_type: ::String
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor enable_default_internet_access: bool
@@ -1321,7 +1321,7 @@ module Aws::AppStream
       attr_accessor attributes_to_delete: ::Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE")]
       attr_accessor iam_role_arn: ::String
       attr_accessor stream_view: ("APP" | "DESKTOP")
-      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")
       attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor usb_device_filter_strings: ::Array[::String]
       attr_accessor session_script_s3_location: Types::S3Location

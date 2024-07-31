@@ -1204,11 +1204,16 @@ module Aws::WorkSpaces
     # * User-decoupled WorkSpaces are only supported by Amazon WorkSpaces
     #   Core.
     #
+    # * Review your running mode to ensure you are using one that is optimal
+    #   for your needs and budget. For more information on switching running
+    #   modes, see [ Can I switch between hourly and monthly billing?][2]
+    #
     #  </note>
     #
     #
     #
     # [1]: http://aws.amazon.com/workspaces/core/
+    # [2]: http://aws.amazon.com/workspaces-family/workspaces/faqs/#:~:text=Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%20on%20WorkSpaces%20Personal%3F
     #
     # @option params [required, Array<Types::WorkspaceRequest>] :workspaces
     #   The WorkSpaces to create. You can specify up to 25 WorkSpaces.
@@ -4746,7 +4751,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

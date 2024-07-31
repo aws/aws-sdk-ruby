@@ -204,7 +204,86 @@ module Aws
                                      },
                                    ],
                                    on_failure: {
-                                     result: ("ROLLBACK")?
+                                     result: ("ROLLBACK" | "FAIL")?,
+                                     conditions: Array[
+                                       {
+                                         result: ("ROLLBACK" | "FAIL")?,
+                                         rules: Array[
+                                           {
+                                             name: ::String,
+                                             rule_type_id: {
+                                               category: ("Rule"),
+                                               owner: ("AWS")?,
+                                               provider: ::String,
+                                               version: ::String?
+                                             },
+                                             configuration: Hash[::String, ::String]?,
+                                             input_artifacts: Array[
+                                               {
+                                                 name: ::String
+                                               },
+                                             ]?,
+                                             role_arn: ::String?,
+                                             region: ::String?,
+                                             timeout_in_minutes: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]?
+                                   }?,
+                                   on_success: {
+                                     conditions: Array[
+                                       {
+                                         result: ("ROLLBACK" | "FAIL")?,
+                                         rules: Array[
+                                           {
+                                             name: ::String,
+                                             rule_type_id: {
+                                               category: ("Rule"),
+                                               owner: ("AWS")?,
+                                               provider: ::String,
+                                               version: ::String?
+                                             },
+                                             configuration: Hash[::String, ::String]?,
+                                             input_artifacts: Array[
+                                               {
+                                                 name: ::String
+                                               },
+                                             ]?,
+                                             role_arn: ::String?,
+                                             region: ::String?,
+                                             timeout_in_minutes: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]
+                                   }?,
+                                   before_entry: {
+                                     conditions: Array[
+                                       {
+                                         result: ("ROLLBACK" | "FAIL")?,
+                                         rules: Array[
+                                           {
+                                             name: ::String,
+                                             rule_type_id: {
+                                               category: ("Rule"),
+                                               owner: ("AWS")?,
+                                               provider: ::String,
+                                               version: ::String?
+                                             },
+                                             configuration: Hash[::String, ::String]?,
+                                             input_artifacts: Array[
+                                               {
+                                                 name: ::String
+                                               },
+                                             ]?,
+                                             role_arn: ::String?,
+                                             region: ::String?,
+                                             timeout_in_minutes: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]
                                    }?
                                  },
                                ],
@@ -448,6 +527,37 @@ module Aws
                           ) -> _ListPipelinesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
 
+      interface _ListRuleExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleExecutionsOutput]
+        def rule_execution_details: () -> ::Array[Types::RuleExecutionDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_rule_executions-instance_method
+      def list_rule_executions: (
+                                  pipeline_name: ::String,
+                                  ?filter: {
+                                    pipeline_execution_id: ::String?,
+                                    latest_in_pipeline_execution: {
+                                      pipeline_execution_id: ::String,
+                                      start_time_range: ("Latest" | "All")
+                                    }?
+                                  },
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListRuleExecutionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleExecutionsResponseSuccess
+
+      interface _ListRuleTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleTypesOutput]
+        def rule_types: () -> ::Array[Types::RuleType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_rule_types-instance_method
+      def list_rule_types: (
+                             ?rule_owner_filter: ("AWS"),
+                             ?region_filter: ::String
+                           ) -> _ListRuleTypesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleTypesResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
         def tags: () -> ::Array[Types::Tag]
@@ -472,6 +582,15 @@ module Aws
                            ?max_results: ::Integer
                          ) -> _ListWebhooksResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebhooksResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#override_stage_condition-instance_method
+      def override_stage_condition: (
+                                      pipeline_name: ::String,
+                                      stage_name: ::String,
+                                      pipeline_execution_id: ::String,
+                                      condition_type: ("BEFORE_ENTRY" | "ON_SUCCESS")
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _PollForJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PollForJobsOutput]
@@ -846,7 +965,86 @@ module Aws
                                      },
                                    ],
                                    on_failure: {
-                                     result: ("ROLLBACK")?
+                                     result: ("ROLLBACK" | "FAIL")?,
+                                     conditions: Array[
+                                       {
+                                         result: ("ROLLBACK" | "FAIL")?,
+                                         rules: Array[
+                                           {
+                                             name: ::String,
+                                             rule_type_id: {
+                                               category: ("Rule"),
+                                               owner: ("AWS")?,
+                                               provider: ::String,
+                                               version: ::String?
+                                             },
+                                             configuration: Hash[::String, ::String]?,
+                                             input_artifacts: Array[
+                                               {
+                                                 name: ::String
+                                               },
+                                             ]?,
+                                             role_arn: ::String?,
+                                             region: ::String?,
+                                             timeout_in_minutes: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]?
+                                   }?,
+                                   on_success: {
+                                     conditions: Array[
+                                       {
+                                         result: ("ROLLBACK" | "FAIL")?,
+                                         rules: Array[
+                                           {
+                                             name: ::String,
+                                             rule_type_id: {
+                                               category: ("Rule"),
+                                               owner: ("AWS")?,
+                                               provider: ::String,
+                                               version: ::String?
+                                             },
+                                             configuration: Hash[::String, ::String]?,
+                                             input_artifacts: Array[
+                                               {
+                                                 name: ::String
+                                               },
+                                             ]?,
+                                             role_arn: ::String?,
+                                             region: ::String?,
+                                             timeout_in_minutes: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]
+                                   }?,
+                                   before_entry: {
+                                     conditions: Array[
+                                       {
+                                         result: ("ROLLBACK" | "FAIL")?,
+                                         rules: Array[
+                                           {
+                                             name: ::String,
+                                             rule_type_id: {
+                                               category: ("Rule"),
+                                               owner: ("AWS")?,
+                                               provider: ::String,
+                                               version: ::String?
+                                             },
+                                             configuration: Hash[::String, ::String]?,
+                                             input_artifacts: Array[
+                                               {
+                                                 name: ::String
+                                               },
+                                             ]?,
+                                             role_arn: ::String?,
+                                             region: ::String?,
+                                             timeout_in_minutes: ::Integer?
+                                           },
+                                         ]?
+                                       },
+                                     ]
                                    }?
                                  },
                                ],

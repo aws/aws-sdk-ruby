@@ -20,6 +20,7 @@ module Aws::RolesAnywhere
     end
 
     class CreateProfileRequest
+      attr_accessor accept_role_session_name: bool
       attr_accessor duration_seconds: ::Integer
       attr_accessor enabled: bool
       attr_accessor managed_policy_arns: ::Array[::String]
@@ -164,6 +165,7 @@ module Aws::RolesAnywhere
     end
 
     class ProfileDetail
+      attr_accessor accept_role_session_name: bool
       attr_accessor attribute_mappings: ::Array[Types::AttributeMapping]
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -347,6 +349,7 @@ module Aws::RolesAnywhere
     end
 
     class UpdateProfileRequest
+      attr_accessor accept_role_session_name: bool
       attr_accessor duration_seconds: ::Integer
       attr_accessor managed_policy_arns: ::Array[::String]
       attr_accessor name: ::String

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2024-07-30)
+------------------
+
+* Feature - Removing multi-session as it isn't supported for pools
+
 1.110.0 (2024-07-03)
 ------------------
 

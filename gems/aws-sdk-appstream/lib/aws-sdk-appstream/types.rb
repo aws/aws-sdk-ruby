@@ -1270,7 +1270,7 @@ module Aws::AppStream
     #   interval, they are connected to their previous session. Otherwise,
     #   they are connected to a new session with a new streaming instance.
     #
-    #   Specify a value between 60 and 360000.
+    #   Specify a value between 60 and 36000.
     #   @return [Integer]
     #
     # @!attribute [rw] description
@@ -1326,7 +1326,7 @@ module Aws::AppStream
     #   elapses, they are disconnected.
     #
     #   To prevent users from being disconnected due to inactivity, specify
-    #   a value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   a value of 0. Otherwise, specify a value between 60 and 36000. The
     #   default value is 0.
     #
     #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
@@ -3451,7 +3451,7 @@ module Aws::AppStream
     #   interval, they are connected to their previous session. Otherwise,
     #   they are connected to a new session with a new streaming instance.
     #
-    #   Specify a value between 60 and 360000.
+    #   Specify a value between 60 and 36000.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -3494,7 +3494,7 @@ module Aws::AppStream
     #   elapses, they are disconnected.
     #
     #   To prevent users from being disconnected due to inactivity, specify
-    #   a value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   a value of 0. Otherwise, specify a value between 60 and 36000. The
     #   default value is 0.
     #
     #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
@@ -5228,7 +5228,7 @@ module Aws::AppStream
     #   interval, they are connected to their previous session. Otherwise,
     #   they are connected to a new session with a new streaming instance.
     #
-    #   Specify a value between 60 and 360000.
+    #   Specify a value between 60 and 36000.
     #   @return [Integer]
     #
     # @!attribute [rw] delete_vpc_config
@@ -5267,7 +5267,7 @@ module Aws::AppStream
     #   elapses, they are disconnected.
     #
     #   To prevent users from being disconnected due to inactivity, specify
-    #   a value of 0. Otherwise, specify a value between 60 and 3600. The
+    #   a value of 0. Otherwise, specify a value between 60 and 36000. The
     #   default value is 0.
     #
     #   <note markdown="1"> If you enable this feature, we recommend that you specify a value
@@ -5630,9 +5630,6 @@ module Aws::AppStream
     #   This defaults to 20,971,520 (20 MB) when unspecified and the
     #   permission is `ENABLED`. This can't be specified when the
     #   permission is `DISABLED`.
-    #
-    #   This can only be specified for AlwaysOn and OnDemand fleets. The
-    #   attribute is not supported on Elastic fleets.
     #
     #   The value can be between 1 and 20,971,520 (20 MB).
     #   @return [Integer]

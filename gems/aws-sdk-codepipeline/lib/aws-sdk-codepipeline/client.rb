@@ -716,7 +716,92 @@ module Aws::CodePipeline
     #             },
     #           ],
     #           on_failure: {
-    #             result: "ROLLBACK", # accepts ROLLBACK
+    #             result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #             conditions: [
+    #               {
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 rules: [
+    #                   {
+    #                     name: "RuleName", # required
+    #                     rule_type_id: { # required
+    #                       category: "Rule", # required, accepts Rule
+    #                       owner: "AWS", # accepts AWS
+    #                       provider: "RuleProvider", # required
+    #                       version: "Version",
+    #                     },
+    #                     configuration: {
+    #                       "RuleConfigurationKey" => "RuleConfigurationValue",
+    #                     },
+    #                     input_artifacts: [
+    #                       {
+    #                         name: "ArtifactName", # required
+    #                       },
+    #                     ],
+    #                     role_arn: "RoleArn",
+    #                     region: "AWSRegionName",
+    #                     timeout_in_minutes: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           on_success: {
+    #             conditions: [ # required
+    #               {
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 rules: [
+    #                   {
+    #                     name: "RuleName", # required
+    #                     rule_type_id: { # required
+    #                       category: "Rule", # required, accepts Rule
+    #                       owner: "AWS", # accepts AWS
+    #                       provider: "RuleProvider", # required
+    #                       version: "Version",
+    #                     },
+    #                     configuration: {
+    #                       "RuleConfigurationKey" => "RuleConfigurationValue",
+    #                     },
+    #                     input_artifacts: [
+    #                       {
+    #                         name: "ArtifactName", # required
+    #                       },
+    #                     ],
+    #                     role_arn: "RoleArn",
+    #                     region: "AWSRegionName",
+    #                     timeout_in_minutes: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           before_entry: {
+    #             conditions: [ # required
+    #               {
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 rules: [
+    #                   {
+    #                     name: "RuleName", # required
+    #                     rule_type_id: { # required
+    #                       category: "Rule", # required, accepts Rule
+    #                       owner: "AWS", # accepts AWS
+    #                       provider: "RuleProvider", # required
+    #                       version: "Version",
+    #                     },
+    #                     configuration: {
+    #                       "RuleConfigurationKey" => "RuleConfigurationValue",
+    #                     },
+    #                     input_artifacts: [
+    #                       {
+    #                         name: "ArtifactName", # required
+    #                       },
+    #                     ],
+    #                     role_arn: "RoleArn",
+    #                     region: "AWSRegionName",
+    #                     timeout_in_minutes: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #           },
     #         },
     #       ],
@@ -811,7 +896,52 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
-    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_success.conditions #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].before_entry.conditions #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -1263,7 +1393,52 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
-    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_success.conditions #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].before_entry.conditions #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -1431,6 +1606,75 @@ module Aws::CodePipeline
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
     #   resp.stage_states[0].latest_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.stage_states[0].latest_execution.type #=> String, one of "STANDARD", "ROLLBACK"
+    #   resp.stage_states[0].before_entry_condition_state.latest_execution.status #=> String, one of "InProgress", "Failed", "Errored", "Succeeded", "Cancelled", "Abandoned", "Overridden"
+    #   resp.stage_states[0].before_entry_condition_state.latest_execution.summary #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states #=> Array
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Errored", "Succeeded", "Cancelled", "Abandoned", "Overridden"
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].latest_execution.summary #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].latest_execution.last_status_change #=> Time
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states #=> Array
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].rule_name #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].current_revision.revision_id #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].current_revision.revision_change_id #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].current_revision.created #=> Time
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.rule_execution_id #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.summary #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.last_status_change #=> Time
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.token #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.last_updated_by #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.external_execution_id #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.external_execution_url #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.error_details.code #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].latest_execution.error_details.message #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].entity_url #=> String
+    #   resp.stage_states[0].before_entry_condition_state.condition_states[0].rule_states[0].revision_url #=> String
+    #   resp.stage_states[0].on_success_condition_state.latest_execution.status #=> String, one of "InProgress", "Failed", "Errored", "Succeeded", "Cancelled", "Abandoned", "Overridden"
+    #   resp.stage_states[0].on_success_condition_state.latest_execution.summary #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states #=> Array
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Errored", "Succeeded", "Cancelled", "Abandoned", "Overridden"
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].latest_execution.summary #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].latest_execution.last_status_change #=> Time
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states #=> Array
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].rule_name #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].current_revision.revision_id #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].current_revision.revision_change_id #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].current_revision.created #=> Time
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.rule_execution_id #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.summary #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.last_status_change #=> Time
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.token #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.last_updated_by #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.external_execution_id #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.external_execution_url #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.error_details.code #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].latest_execution.error_details.message #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].entity_url #=> String
+    #   resp.stage_states[0].on_success_condition_state.condition_states[0].rule_states[0].revision_url #=> String
+    #   resp.stage_states[0].on_failure_condition_state.latest_execution.status #=> String, one of "InProgress", "Failed", "Errored", "Succeeded", "Cancelled", "Abandoned", "Overridden"
+    #   resp.stage_states[0].on_failure_condition_state.latest_execution.summary #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states #=> Array
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Errored", "Succeeded", "Cancelled", "Abandoned", "Overridden"
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].latest_execution.summary #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].latest_execution.last_status_change #=> Time
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states #=> Array
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].rule_name #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].current_revision.revision_id #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].current_revision.revision_change_id #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].current_revision.created #=> Time
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.rule_execution_id #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.summary #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.last_status_change #=> Time
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.token #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.last_updated_by #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.external_execution_id #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.external_execution_url #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.error_details.code #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].latest_execution.error_details.message #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].entity_url #=> String
+    #   resp.stage_states[0].on_failure_condition_state.condition_states[0].rule_states[0].revision_url #=> String
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -1792,6 +2036,141 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Lists the rule executions that have occurred in a pipeline configured
+    # for conditions with rules.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline for which you want to get execution summary
+    #   information.
+    #
+    # @option params [Types::RuleExecutionFilter] :filter
+    #   Input information used to filter rule execution history.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned nextToken
+    #   value. Pipeline history is limited to the most recent 12 months, based
+    #   on pipeline execution start times. Default value is 100.
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous `ListRuleExecutions`
+    #   call, which can be used to return the next set of rule executions in
+    #   the list.
+    #
+    # @return [Types::ListRuleExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRuleExecutionsOutput#rule_execution_details #rule_execution_details} => Array&lt;Types::RuleExecutionDetail&gt;
+    #   * {Types::ListRuleExecutionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rule_executions({
+    #     pipeline_name: "PipelineName", # required
+    #     filter: {
+    #       pipeline_execution_id: "PipelineExecutionId",
+    #       latest_in_pipeline_execution: {
+    #         pipeline_execution_id: "PipelineExecutionId", # required
+    #         start_time_range: "Latest", # required, accepts Latest, All
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_execution_details #=> Array
+    #   resp.rule_execution_details[0].pipeline_execution_id #=> String
+    #   resp.rule_execution_details[0].rule_execution_id #=> String
+    #   resp.rule_execution_details[0].pipeline_version #=> Integer
+    #   resp.rule_execution_details[0].stage_name #=> String
+    #   resp.rule_execution_details[0].rule_name #=> String
+    #   resp.rule_execution_details[0].start_time #=> Time
+    #   resp.rule_execution_details[0].last_update_time #=> Time
+    #   resp.rule_execution_details[0].updated_by #=> String
+    #   resp.rule_execution_details[0].status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
+    #   resp.rule_execution_details[0].input.rule_type_id.category #=> String, one of "Rule"
+    #   resp.rule_execution_details[0].input.rule_type_id.owner #=> String, one of "AWS"
+    #   resp.rule_execution_details[0].input.rule_type_id.provider #=> String
+    #   resp.rule_execution_details[0].input.rule_type_id.version #=> String
+    #   resp.rule_execution_details[0].input.configuration #=> Hash
+    #   resp.rule_execution_details[0].input.configuration["RuleConfigurationKey"] #=> String
+    #   resp.rule_execution_details[0].input.resolved_configuration #=> Hash
+    #   resp.rule_execution_details[0].input.resolved_configuration["String"] #=> String
+    #   resp.rule_execution_details[0].input.role_arn #=> String
+    #   resp.rule_execution_details[0].input.region #=> String
+    #   resp.rule_execution_details[0].input.input_artifacts #=> Array
+    #   resp.rule_execution_details[0].input.input_artifacts[0].name #=> String
+    #   resp.rule_execution_details[0].input.input_artifacts[0].s3location.bucket #=> String
+    #   resp.rule_execution_details[0].input.input_artifacts[0].s3location.key #=> String
+    #   resp.rule_execution_details[0].output.execution_result.external_execution_id #=> String
+    #   resp.rule_execution_details[0].output.execution_result.external_execution_summary #=> String
+    #   resp.rule_execution_details[0].output.execution_result.external_execution_url #=> String
+    #   resp.rule_execution_details[0].output.execution_result.error_details.code #=> String
+    #   resp.rule_execution_details[0].output.execution_result.error_details.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListRuleExecutions AWS API Documentation
+    #
+    # @overload list_rule_executions(params = {})
+    # @param [Hash] params ({})
+    def list_rule_executions(params = {}, options = {})
+      req = build_request(:list_rule_executions, params)
+      req.send_request(options)
+    end
+
+    # Lists the rules for the condition.
+    #
+    # @option params [String] :rule_owner_filter
+    #   The rule owner to filter on.
+    #
+    # @option params [String] :region_filter
+    #   The rule Region to filter on.
+    #
+    # @return [Types::ListRuleTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRuleTypesOutput#rule_types #rule_types} => Array&lt;Types::RuleType&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rule_types({
+    #     rule_owner_filter: "AWS", # accepts AWS
+    #     region_filter: "AWSRegionName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_types #=> Array
+    #   resp.rule_types[0].id.category #=> String, one of "Rule"
+    #   resp.rule_types[0].id.owner #=> String, one of "AWS"
+    #   resp.rule_types[0].id.provider #=> String
+    #   resp.rule_types[0].id.version #=> String
+    #   resp.rule_types[0].settings.third_party_configuration_url #=> String
+    #   resp.rule_types[0].settings.entity_url_template #=> String
+    #   resp.rule_types[0].settings.execution_url_template #=> String
+    #   resp.rule_types[0].settings.revision_url_template #=> String
+    #   resp.rule_types[0].rule_configuration_properties #=> Array
+    #   resp.rule_types[0].rule_configuration_properties[0].name #=> String
+    #   resp.rule_types[0].rule_configuration_properties[0].required #=> Boolean
+    #   resp.rule_types[0].rule_configuration_properties[0].key #=> Boolean
+    #   resp.rule_types[0].rule_configuration_properties[0].secret #=> Boolean
+    #   resp.rule_types[0].rule_configuration_properties[0].queryable #=> Boolean
+    #   resp.rule_types[0].rule_configuration_properties[0].description #=> String
+    #   resp.rule_types[0].rule_configuration_properties[0].type #=> String, one of "String", "Number", "Boolean"
+    #   resp.rule_types[0].input_artifact_details.minimum_count #=> Integer
+    #   resp.rule_types[0].input_artifact_details.maximum_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListRuleTypes AWS API Documentation
+    #
+    # @overload list_rule_types(params = {})
+    # @param [Hash] params ({})
+    def list_rule_types(params = {}, options = {})
+      req = build_request(:list_rule_types, params)
+      req.send_request(options)
+    end
+
     # Gets the set of key-value pairs (metadata) that are used to manage the
     # resource.
     #
@@ -1892,6 +2271,42 @@ module Aws::CodePipeline
     # @param [Hash] params ({})
     def list_webhooks(params = {}, options = {})
       req = build_request(:list_webhooks, params)
+      req.send_request(options)
+    end
+
+    # Used to override a stage condition.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline with the stage that will override the
+    #   condition.
+    #
+    # @option params [required, String] :stage_name
+    #   The name of the stage for the override.
+    #
+    # @option params [required, String] :pipeline_execution_id
+    #   The ID of the pipeline execution for the override.
+    #
+    # @option params [required, String] :condition_type
+    #   The type of condition to override for the stage, such as entry
+    #   conditions, failure conditions, or success conditions.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.override_stage_condition({
+    #     pipeline_name: "PipelineName", # required
+    #     stage_name: "StageName", # required
+    #     pipeline_execution_id: "PipelineExecutionId", # required
+    #     condition_type: "BEFORE_ENTRY", # required, accepts BEFORE_ENTRY, ON_SUCCESS
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OverrideStageCondition AWS API Documentation
+    #
+    # @overload override_stage_condition(params = {})
+    # @param [Hash] params ({})
+    def override_stage_condition(params = {}, options = {})
+      req = build_request(:override_stage_condition, params)
       req.send_request(options)
     end
 
@@ -2828,7 +3243,92 @@ module Aws::CodePipeline
     #             },
     #           ],
     #           on_failure: {
-    #             result: "ROLLBACK", # accepts ROLLBACK
+    #             result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #             conditions: [
+    #               {
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 rules: [
+    #                   {
+    #                     name: "RuleName", # required
+    #                     rule_type_id: { # required
+    #                       category: "Rule", # required, accepts Rule
+    #                       owner: "AWS", # accepts AWS
+    #                       provider: "RuleProvider", # required
+    #                       version: "Version",
+    #                     },
+    #                     configuration: {
+    #                       "RuleConfigurationKey" => "RuleConfigurationValue",
+    #                     },
+    #                     input_artifacts: [
+    #                       {
+    #                         name: "ArtifactName", # required
+    #                       },
+    #                     ],
+    #                     role_arn: "RoleArn",
+    #                     region: "AWSRegionName",
+    #                     timeout_in_minutes: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           on_success: {
+    #             conditions: [ # required
+    #               {
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 rules: [
+    #                   {
+    #                     name: "RuleName", # required
+    #                     rule_type_id: { # required
+    #                       category: "Rule", # required, accepts Rule
+    #                       owner: "AWS", # accepts AWS
+    #                       provider: "RuleProvider", # required
+    #                       version: "Version",
+    #                     },
+    #                     configuration: {
+    #                       "RuleConfigurationKey" => "RuleConfigurationValue",
+    #                     },
+    #                     input_artifacts: [
+    #                       {
+    #                         name: "ArtifactName", # required
+    #                       },
+    #                     ],
+    #                     role_arn: "RoleArn",
+    #                     region: "AWSRegionName",
+    #                     timeout_in_minutes: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           before_entry: {
+    #             conditions: [ # required
+    #               {
+    #                 result: "ROLLBACK", # accepts ROLLBACK, FAIL
+    #                 rules: [
+    #                   {
+    #                     name: "RuleName", # required
+    #                     rule_type_id: { # required
+    #                       category: "Rule", # required, accepts Rule
+    #                       owner: "AWS", # accepts AWS
+    #                       provider: "RuleProvider", # required
+    #                       version: "Version",
+    #                     },
+    #                     configuration: {
+    #                       "RuleConfigurationKey" => "RuleConfigurationValue",
+    #                     },
+    #                     input_artifacts: [
+    #                       {
+    #                         name: "ArtifactName", # required
+    #                       },
+    #                     ],
+    #                     role_arn: "RoleArn",
+    #                     region: "AWSRegionName",
+    #                     timeout_in_minutes: 1,
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #           },
     #         },
     #       ],
@@ -2917,7 +3417,52 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
-    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].on_failure.conditions[0].rules[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_success.conditions #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].on_success.conditions[0].rules[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].before_entry.conditions #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].result #=> String, one of "ROLLBACK", "FAIL"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].name #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.category #=> String, one of "Rule"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.owner #=> String, one of "AWS"
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.provider #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].rule_type_id.version #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].configuration #=> Hash
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].configuration["RuleConfigurationKey"] #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].input_artifacts #=> Array
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].input_artifacts[0].name #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].role_arn #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].region #=> String
+    #   resp.pipeline.stages[0].before_entry.conditions[0].rules[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -2975,7 +3520,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

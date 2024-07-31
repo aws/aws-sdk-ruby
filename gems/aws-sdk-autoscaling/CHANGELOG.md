@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2024-07-30)
+------------------
+
+* Feature - Increase the length limit for VPCZoneIdentifier from 2047 to 5000
+
 1.113.0 (2024-07-12)
 ------------------
 
