@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added support for opt-in credential refreshing in `SharedCredentials`. This allows users to enable or disable automatic credential refreshing by specifying the `:enable_refresh` option.
+
 3.201.3 (2024-07-23)
 ------------------
 
