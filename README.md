@@ -261,22 +261,8 @@ The AWS SDK for Ruby has optional functionality that requires the
 bindings to be included as a dependency with your application. This functionality includes:
 * CRC-32c support for [S3 Additional Checksums](https://aws.amazon.com/blogs/aws/new-additional-checksum-algorithms-for-amazon-s3/)
 
-If the required AWS Common Runtime dependency is not installed you will receive an error
-indicating that the required dependency is missing to use the associated functionality. To install this dependency follow
-the provided [instructions](#installing-the-aws-common-runtime-crt-dependency).
-
-### Installing the AWS Common Runtime (CRT) Dependency
 AWS CRT bindings are in developer preview and are available in the
-the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  You can install them
-by adding the `aws-crt` gem to your Gemfile. 
-
-[Sigv4a](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
-is an extension to Sigv4 that allows signatures that are valid in more than one region.
-Sigv4a is required to use some services/operations such as
-[S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
-and Amazon EventBridge Global Endpoints.  Sigv4a is supported natively in Ruby
-in the [aws-sigv4 gem](https://rubygems.org/gems/aws-sigv4) 
-in versions 1.9.1 and later.
+the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  You can install them by adding the `aws-crt` gem to your Gemfile.
 
 ## Getting Help
 
