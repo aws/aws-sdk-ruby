@@ -192,7 +192,7 @@ module Aws
       def sign_but_dont_send(
         req, expires_in, secure, time, unsigned_headers, hoist = true
       )
-        x_amz_headers = {}
+        headers = {}
 
         http_req = req.context.http_request
 
@@ -211,16 +211,18 @@ module Aws
 
           query = http_req.endpoint.query ? http_req.endpoint.query.split('&') : []
           http_req.headers.each do |key, value|
-            next unless key =~ /^x-amz/i
+            next if key == 'user-agent'
 
             if hoist
+              next unless key =~ /^x-amz/i
+
               value = Aws::Sigv4::Signer.uri_escape(value)
               key = Aws::Sigv4::Signer.uri_escape(key)
               # hoist x-amz-* headers to the querystring
               http_req.headers.delete(key)
               query << "#{key}=#{value}"
             else
-              x_amz_headers[key] = value
+              headers[key] = value
             end
           end
           http_req.endpoint.query = query.join('&') unless query.empty?
@@ -254,7 +256,7 @@ module Aws
           Seahorse::Client::Response.new(context: context, data: url)
         end
         # Return the headers
-        x_amz_headers
+        headers
       end
     end
   end

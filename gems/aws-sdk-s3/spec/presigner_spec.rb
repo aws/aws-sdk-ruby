@@ -334,13 +334,20 @@ module Aws
           expect(url).to match(/^https:\/\/my.website.com\/foo/)
         end
 
-        it 'returns x-amz-* headers instead of hoisting to the query string' do
+        it 'returns headers instead of hoisting to the query string' do
           signer = Presigner.new(client: client)
           url, headers = signer.presigned_request(
-            :put_object, bucket: 'aws-sdk', key: 'foo', acl: 'public-read'
+            :put_object,
+            bucket: 'aws-sdk',
+            key: 'foo',
+            acl: 'public-read',
+            content_md5: 'md5'
           )
-          expect(url).to match(/X-Amz-SignedHeaders=host%3Bx-amz-acl/)
-          expect(headers).to eq('x-amz-acl' => 'public-read')
+          expect(url).to match(/X-Amz-SignedHeaders=content-md5%3Bhost%3Bx-amz-acl/)
+          expect(headers).to eq({
+            'x-amz-acl' => 'public-read',
+            'content-md5' => 'md5'
+          })
         end
 
         context 'credential expiration' do

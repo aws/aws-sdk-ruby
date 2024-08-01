@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Return all headers (not x-amz headers) to be sent in `Aws::S3::Presigner#presigned_request`.
+
 1.157.0 (2024-08-01)
 ------------------
 
