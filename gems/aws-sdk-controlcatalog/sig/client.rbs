@@ -73,6 +73,20 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _GetControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetControlResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def behavior: () -> ("PREVENTIVE" | "PROACTIVE" | "DETECTIVE")
+        def region_configuration: () -> Types::RegionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#get_control-instance_method
+      def get_control: (
+                         control_arn: ::String
+                       ) -> _GetControlResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetControlResponseSuccess
+
       interface _ListCommonControlsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCommonControlsResponse]
         def common_controls: () -> ::Array[Types::CommonControlSummary]
@@ -80,17 +94,29 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#list_common_controls-instance_method
       def list_common_controls: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
                                   ?common_control_filter: {
                                     objectives: Array[
                                       {
                                         arn: ::String?
                                       },
                                     ]?
-                                  },
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String
+                                  }
                                 ) -> _ListCommonControlsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCommonControlsResponseSuccess
+
+      interface _ListControlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlsResponse]
+        def controls: () -> ::Array[Types::ControlSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#list_controls-instance_method
+      def list_controls: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListControlsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlsResponseSuccess
 
       interface _ListDomainsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
@@ -106,8 +132,8 @@ module Aws
 
       interface _ListObjectivesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectivesResponse]
-        def next_token: () -> ::String
         def objectives: () -> ::Array[Types::ObjectiveSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlCatalog/Client.html#list_objectives-instance_method
       def list_objectives: (

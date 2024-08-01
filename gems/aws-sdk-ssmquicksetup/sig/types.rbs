@@ -1,0 +1,211 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SSMQuickSetup
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationDefinition
+      attr_accessor id: ::String
+      attr_accessor local_deployment_administration_role_arn: ::String
+      attr_accessor local_deployment_execution_role_name: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      attr_accessor type_version: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationDefinitionInput
+      attr_accessor local_deployment_administration_role_arn: ::String
+      attr_accessor local_deployment_execution_role_name: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      attr_accessor type_version: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationDefinitionSummary
+      attr_accessor first_class_parameters: ::Hash[::String, ::String]
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      attr_accessor type_version: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationManagerSummary
+      attr_accessor configuration_definition_summaries: ::Array[Types::ConfigurationDefinitionSummary]
+      attr_accessor description: ::String
+      attr_accessor manager_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status_summaries: ::Array[Types::StatusSummary]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationManagerInput
+      attr_accessor configuration_definitions: ::Array[Types::ConfigurationDefinitionInput]
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateConfigurationManagerOutput
+      attr_accessor manager_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationManagerInput
+      attr_accessor manager_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetConfigurationManagerInput
+      attr_accessor manager_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationManagerOutput
+      attr_accessor configuration_definitions: ::Array[Types::ConfigurationDefinition]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor manager_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status_summaries: ::Array[Types::StatusSummary]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetServiceSettingsOutput
+      attr_accessor service_settings: Types::ServiceSettings
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationManagersInput
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_items: ::Integer
+      attr_accessor starting_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationManagersOutput
+      attr_accessor configuration_managers_list: ::Array[Types::ConfigurationManagerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuickSetupTypesOutput
+      attr_accessor quick_setup_type_list: ::Array[Types::QuickSetupTypeOutput]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::TagEntry]
+      SENSITIVE: [:tags]
+    end
+
+    class QuickSetupTypeOutput
+      attr_accessor latest_version: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSettings
+      attr_accessor explorer_enabling_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StatusSummary
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("INITIALIZING" | "DEPLOYING" | "SUCCEEDED" | "DELETING" | "STOPPING" | "FAILED" | "STOPPED" | "DELETE_FAILED" | "STOP_FAILED" | "NONE")
+      attr_accessor status_details: ::Hash[::String, ::String]
+      attr_accessor status_message: ::String
+      attr_accessor status_type: ("Deployment" | "AsyncExecutions")
+      SENSITIVE: []
+    end
+
+    class TagEntry
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationDefinitionInput
+      attr_accessor id: ::String
+      attr_accessor local_deployment_administration_role_arn: ::String
+      attr_accessor local_deployment_execution_role_name: ::String
+      attr_accessor manager_arn: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor type_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationManagerInput
+      attr_accessor description: ::String
+      attr_accessor manager_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSettingsInput
+      attr_accessor explorer_enabling_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

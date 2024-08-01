@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-08-01)
+------------------
+
+* Feature - Doc only update for changes to deletion API.
+
 1.30.0 (2024-07-29)
 ------------------
 

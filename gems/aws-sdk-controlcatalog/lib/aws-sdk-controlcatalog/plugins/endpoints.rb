@@ -58,8 +58,12 @@ module Aws::ControlCatalog
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :get_control
+            Aws::ControlCatalog::Endpoints::GetControl.build(context)
           when :list_common_controls
             Aws::ControlCatalog::Endpoints::ListCommonControls.build(context)
+          when :list_controls
+            Aws::ControlCatalog::Endpoints::ListControls.build(context)
           when :list_domains
             Aws::ControlCatalog::Endpoints::ListDomains.build(context)
           when :list_objectives

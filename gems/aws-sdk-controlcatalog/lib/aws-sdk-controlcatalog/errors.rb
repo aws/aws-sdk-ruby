@@ -29,6 +29,7 @@ module Aws::ControlCatalog
   # ## Error Classes
   # * {AccessDeniedException}
   # * {InternalServerException}
+  # * {ResourceNotFoundException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -69,6 +70,21 @@ module Aws::ControlCatalog
 
       def retryable?
         true
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ControlCatalog::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

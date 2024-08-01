@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.961.0 (2024-08-01)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SSMQuickSetup`.
+
 1.960.0 (2024-07-30)
 ------------------
 

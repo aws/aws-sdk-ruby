@@ -1179,6 +1179,12 @@ module Aws::MemoryDB
     # Deletes a cluster. It also deletes all associated nodes and node
     # endpoints
     #
+    # <note markdown="1"> `CreateSnapshot` permission is required to create a final snapshot.
+    # Without this permission, the API call will fail with an `Access
+    # Denied` exception.
+    #
+    #  </note>
+    #
     # @option params [required, String] :cluster_name
     #   The name of the cluster to be deleted
     #
@@ -2954,7 +2960,7 @@ module Aws::MemoryDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

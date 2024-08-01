@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2024-08-01)
+------------------
+
 * Feature - Support `head_bucket`, `get_object_attributes`, `delete_objects`, and `copy_object` for Access Grants.
 
 1.156.0 (2024-07-02)

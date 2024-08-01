@@ -16,6 +16,7 @@ require_relative 'aws-sdk-controlcatalog/client_api'
 require_relative 'aws-sdk-controlcatalog/plugins/endpoints.rb'
 require_relative 'aws-sdk-controlcatalog/client'
 require_relative 'aws-sdk-controlcatalog/errors'
+require_relative 'aws-sdk-controlcatalog/waiters'
 require_relative 'aws-sdk-controlcatalog/resource'
 require_relative 'aws-sdk-controlcatalog/endpoint_parameters'
 require_relative 'aws-sdk-controlcatalog/endpoint_provider'
@@ -32,7 +33,7 @@ require_relative 'aws-sdk-controlcatalog/customizations'
 # structure.
 #
 #     control_catalog = Aws::ControlCatalog::Client.new
-#     resp = control_catalog.list_common_controls(params)
+#     resp = control_catalog.get_control(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-controlcatalog/customizations'
 # @!group service
 module Aws::ControlCatalog
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

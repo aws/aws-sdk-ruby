@@ -1118,12 +1118,16 @@ module Aws::RDS
     #   A description for the copied DB cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::CopyDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1354,12 +1358,16 @@ module Aws::RDS
     #   to the target DB cluster snapshot. By default, tags are not copied.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1509,12 +1517,16 @@ module Aws::RDS
     #   A description for the copied DB parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::CopyDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1658,12 +1670,16 @@ module Aws::RDS
     #   another Amazon Web Services Region.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [Boolean] :copy_tags
     #   Specifies whether to copy all tags from the source DB snapshot to the
@@ -1916,12 +1932,16 @@ module Aws::RDS
     #   The description for the copied option group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::CopyOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2377,12 +2397,16 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.preparing.manifest
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [String] :source_custom_db_engine_version_identifier
     #   The ARN of a CEV to use as a source for creating a new CEV. You can
@@ -6075,12 +6099,16 @@ module Aws::RDS
     #   For more information, see CreateDBInstance.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [String] :db_subnet_group_name
     #   A DB subnet group for the DB instance. The new DB instance is created
@@ -7156,12 +7184,16 @@ module Aws::RDS
     #   Microsoft SQL Server support is `READ_WRITE`.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::CreateDBProxyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7338,6 +7370,10 @@ module Aws::RDS
     #   The maximum capacity of the DB shard group in Aurora capacity units
     #   (ACUs).
     #
+    # @option params [Float] :min_acu
+    #   The minimum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #
     # @option params [Boolean] :publicly_accessible
     #   Specifies whether the DB shard group is publicly accessible.
     #
@@ -7379,6 +7415,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
     #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
     #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#min_acu #min_acu} => Float
     #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
@@ -7391,6 +7428,7 @@ module Aws::RDS
     #     db_cluster_identifier: "String", # required
     #     compute_redundancy: 1,
     #     max_acu: 1.0, # required
+    #     min_acu: 1.0,
     #     publicly_accessible: false,
     #   })
     #
@@ -7400,6 +7438,7 @@ module Aws::RDS
     #   resp.db_shard_group_identifier #=> String
     #   resp.db_cluster_identifier #=> String
     #   resp.max_acu #=> Float
+    #   resp.min_acu #=> Float
     #   resp.compute_redundancy #=> Integer
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
@@ -7443,12 +7482,16 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::CreateDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7794,12 +7837,16 @@ module Aws::RDS
     #   created but not active.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::CreateEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8108,12 +8155,16 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [String] :data_filter
     #   Data filtering options for the integration. For more information, see
@@ -8410,12 +8461,16 @@ module Aws::RDS
     #   The `NCHAR` value for the tenant database.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::CreateTenantDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8868,14 +8923,14 @@ module Aws::RDS
     #
     # @option params [Boolean] :skip_final_snapshot
     #   Specifies whether to skip the creation of a final DB cluster snapshot
-    #   before the DB cluster is deleted. If skip is specified, no DB cluster
-    #   snapshot is created. If skip isn't specified, a DB cluster snapshot
-    #   is created before the DB cluster is deleted. By default, skip isn't
-    #   specified, and the DB cluster snapshot is created. By default, this
-    #   parameter is disabled.
+    #   before RDS deletes the DB cluster. If you set this value to `true`,
+    #   RDS doesn't create a final DB cluster snapshot. If you set this value
+    #   to `false` or don't specify it, RDS creates a DB cluster snapshot
+    #   before it deletes the DB cluster. By default, this parameter is
+    #   disabled, so RDS creates a final DB cluster snapshot.
     #
-    #   <note markdown="1"> You must specify a `FinalDBSnapshotIdentifier` parameter if
-    #   `SkipFinalSnapshot` is disabled.
+    #   <note markdown="1"> If `SkipFinalSnapshot` is disabled, you must specify a value for the
+    #   `FinalDBSnapshotIdentifier` parameter.
     #
     #    </note>
     #
@@ -8883,9 +8938,9 @@ module Aws::RDS
     #   The DB cluster snapshot identifier of the new DB cluster snapshot
     #   created when `SkipFinalSnapshot` is disabled.
     #
-    #   <note markdown="1"> Specifying this parameter and also skipping the creation of a final DB
-    #   cluster snapshot with the `SkipFinalShapshot` parameter results in an
-    #   error.
+    #   <note markdown="1"> If you specify this parameter and also skip the creation of a final DB
+    #   cluster snapshot with the `SkipFinalShapshot` parameter, the request
+    #   results in an error.
     #
     #    </note>
     #
@@ -8902,16 +8957,6 @@ module Aws::RDS
     #   cluster is deleted. This parameter isn't case-sensitive. The default
     #   is to remove automated backups immediately after the DB cluster is
     #   deleted.
-    #
-    #   <note markdown="1"> You must delete automated backups for Amazon RDS Multi-AZ DB clusters.
-    #   For more information about managing automated backups for RDS Multi-AZ
-    #   DB clusters, see [Managing automated backups][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ManagingAutomatedBackups.html
     #
     # @return [Types::DeleteDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10023,6 +10068,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
     #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
     #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#min_acu #min_acu} => Float
     #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
@@ -10040,6 +10086,7 @@ module Aws::RDS
     #   resp.db_shard_group_identifier #=> String
     #   resp.db_cluster_identifier #=> String
     #   resp.max_acu #=> Float
+    #   resp.min_acu #=> Float
     #   resp.compute_redundancy #=> Integer
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
@@ -11747,7 +11794,7 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `user`
+    #   * `customer`
     #
     #   * `engine`
     #
@@ -14325,6 +14372,7 @@ module Aws::RDS
     #   resp.db_shard_groups[0].db_shard_group_identifier #=> String
     #   resp.db_shard_groups[0].db_cluster_identifier #=> String
     #   resp.db_shard_groups[0].max_acu #=> Float
+    #   resp.db_shard_groups[0].min_acu #=> Float
     #   resp.db_shard_groups[0].compute_redundancy #=> Integer
     #   resp.db_shard_groups[0].status #=> String
     #   resp.db_shard_groups[0].publicly_accessible #=> Boolean
@@ -21730,12 +21778,17 @@ module Aws::RDS
     #   The maximum capacity of the DB shard group in Aurora capacity units
     #   (ACUs).
     #
+    # @option params [Float] :min_acu
+    #   The minimum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #
     # @return [Types::DBShardGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBShardGroup#db_shard_group_resource_id #db_shard_group_resource_id} => String
     #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
     #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
     #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#min_acu #min_acu} => Float
     #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
@@ -21746,6 +21799,7 @@ module Aws::RDS
     #   resp = client.modify_db_shard_group({
     #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #     max_acu: 1.0,
+    #     min_acu: 1.0,
     #   })
     #
     # @example Response structure
@@ -21754,6 +21808,7 @@ module Aws::RDS
     #   resp.db_shard_group_identifier #=> String
     #   resp.db_cluster_identifier #=> String
     #   resp.max_acu #=> Float
+    #   resp.min_acu #=> Float
     #   resp.compute_redundancy #=> Integer
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
@@ -23240,12 +23295,16 @@ module Aws::RDS
     #   Default: `1`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @return [Types::PurchaseReservedDBInstancesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23780,6 +23839,7 @@ module Aws::RDS
     #   * {Types::DBShardGroup#db_shard_group_identifier #db_shard_group_identifier} => String
     #   * {Types::DBShardGroup#db_cluster_identifier #db_cluster_identifier} => String
     #   * {Types::DBShardGroup#max_acu #max_acu} => Float
+    #   * {Types::DBShardGroup#min_acu #min_acu} => Float
     #   * {Types::DBShardGroup#compute_redundancy #compute_redundancy} => Integer
     #   * {Types::DBShardGroup#status #status} => String
     #   * {Types::DBShardGroup#publicly_accessible #publicly_accessible} => Boolean
@@ -23797,6 +23857,7 @@ module Aws::RDS
     #   resp.db_shard_group_identifier #=> String
     #   resp.db_cluster_identifier #=> String
     #   resp.max_acu #=> Float
+    #   resp.min_acu #=> Float
     #   resp.compute_redundancy #=> Integer
     #   resp.status #=> String
     #   resp.publicly_accessible #=> Boolean
@@ -24569,12 +24630,16 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [Boolean] :storage_encrypted
     #   Specifies whether the restored DB cluster is encrypted.
@@ -25976,12 +26041,16 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [String] :kms_key_id
     #   The Amazon Web Services KMS key identifier to use when restoring an
@@ -26815,12 +26884,16 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
@@ -28510,12 +28583,16 @@ module Aws::RDS
     #   snapshots of the DB instance. By default, tags are not copied.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @option params [String] :storage_type
     #   The storage type to associate with the DB instance.
@@ -31281,7 +31358,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.240.0'
+      context[:gem_version] = '1.241.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

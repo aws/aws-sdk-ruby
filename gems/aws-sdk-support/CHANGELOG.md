@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-08-01)
+------------------
+
+* Feature - Doc only updates to CaseDetails
+
 1.63.0 (2024-07-02)
 ------------------
 

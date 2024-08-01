@@ -748,6 +748,7 @@ module Aws
         def db_shard_group_identifier: () -> ::String
         def db_cluster_identifier: () -> ::String
         def max_acu: () -> ::Float
+        def min_acu: () -> ::Float
         def compute_redundancy: () -> ::Integer
         def status: () -> ::String
         def publicly_accessible: () -> bool
@@ -759,6 +760,7 @@ module Aws
                                    db_cluster_identifier: ::String,
                                    ?compute_redundancy: ::Integer,
                                    max_acu: ::Float,
+                                   ?min_acu: ::Float,
                                    ?publicly_accessible: bool
                                  ) -> _CreateDBShardGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBShardGroupResponseSuccess
@@ -1084,6 +1086,7 @@ module Aws
         def db_shard_group_identifier: () -> ::String
         def db_cluster_identifier: () -> ::String
         def max_acu: () -> ::Float
+        def min_acu: () -> ::Float
         def compute_redundancy: () -> ::Integer
         def status: () -> ::String
         def publicly_accessible: () -> bool
@@ -2537,6 +2540,7 @@ module Aws
         def db_shard_group_identifier: () -> ::String
         def db_cluster_identifier: () -> ::String
         def max_acu: () -> ::Float
+        def min_acu: () -> ::Float
         def compute_redundancy: () -> ::Integer
         def status: () -> ::String
         def publicly_accessible: () -> bool
@@ -2545,7 +2549,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_db_shard_group-instance_method
       def modify_db_shard_group: (
                                    db_shard_group_identifier: ::String,
-                                   ?max_acu: ::Float
+                                   ?max_acu: ::Float,
+                                   ?min_acu: ::Float
                                  ) -> _ModifyDBShardGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBShardGroupResponseSuccess
 
@@ -2752,6 +2757,7 @@ module Aws
         def db_shard_group_identifier: () -> ::String
         def db_cluster_identifier: () -> ::String
         def max_acu: () -> ::Float
+        def min_acu: () -> ::Float
         def compute_redundancy: () -> ::Integer
         def status: () -> ::String
         def publicly_accessible: () -> bool

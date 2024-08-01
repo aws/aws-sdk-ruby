@@ -1080,7 +1080,11 @@ module Aws
                                  {
                                    repository_url: ::String
                                  },
-                               ]?
+                               ]?,
+                               emr_settings: {
+                                 assumable_role_arns: Array[::String]?,
+                                 execution_role_arns: Array[::String]?
+                               }?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -1198,7 +1202,11 @@ module Aws
                                  {
                                    repository_url: ::String
                                  },
-                               ]?
+                               ]?,
+                               emr_settings: {
+                                 assumable_role_arns: Array[::String]?,
+                                 execution_role_arns: Array[::String]?
+                               }?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -4111,7 +4119,11 @@ module Aws
                                        {
                                          repository_url: ::String
                                        },
-                                     ]?
+                                     ]?,
+                                     emr_settings: {
+                                       assumable_role_arns: Array[::String]?,
+                                       execution_role_arns: Array[::String]?
+                                     }?
                                    }?,
                                    space_storage_settings: {
                                      default_ebs_storage_settings: {
@@ -8209,7 +8221,11 @@ module Aws
                                  {
                                    repository_url: ::String
                                  },
-                               ]?
+                               ]?,
+                               emr_settings: {
+                                 assumable_role_arns: Array[::String]?,
+                                 execution_role_arns: Array[::String]?
+                               }?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -8316,7 +8332,11 @@ module Aws
                                  {
                                    repository_url: ::String
                                  },
-                               ]?
+                               ]?,
+                               emr_settings: {
+                                 assumable_role_arns: Array[::String]?,
+                                 execution_role_arns: Array[::String]?
+                               }?
                              }?,
                              space_storage_settings: {
                                default_ebs_storage_settings: {
@@ -9276,7 +9296,11 @@ module Aws
                                        {
                                          repository_url: ::String
                                        },
-                                     ]?
+                                     ]?,
+                                     emr_settings: {
+                                       assumable_role_arns: Array[::String]?,
+                                       execution_role_arns: Array[::String]?
+                                     }?
                                    }?,
                                    space_storage_settings: {
                                      default_ebs_storage_settings: {

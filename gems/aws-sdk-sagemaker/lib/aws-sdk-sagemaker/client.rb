@@ -2643,6 +2643,10 @@ module Aws::SageMaker
     #             repository_url: "RepositoryUrl", # required
     #           },
     #         ],
+    #         emr_settings: {
+    #           assumable_role_arns: ["RoleArn"],
+    #           execution_role_arns: ["RoleArn"],
+    #         },
     #       },
     #       space_storage_settings: {
     #         default_ebs_storage_settings: {
@@ -2761,6 +2765,10 @@ module Aws::SageMaker
     #             repository_url: "RepositoryUrl", # required
     #           },
     #         ],
+    #         emr_settings: {
+    #           assumable_role_arns: ["RoleArn"],
+    #           execution_role_arns: ["RoleArn"],
+    #         },
     #       },
     #       space_storage_settings: {
     #         default_ebs_storage_settings: {
@@ -9374,6 +9382,10 @@ module Aws::SageMaker
     #             repository_url: "RepositoryUrl", # required
     #           },
     #         ],
+    #         emr_settings: {
+    #           assumable_role_arns: ["RoleArn"],
+    #           execution_role_arns: ["RoleArn"],
+    #         },
     #       },
     #       space_storage_settings: {
     #         default_ebs_storage_settings: {
@@ -12520,6 +12532,10 @@ module Aws::SageMaker
     #   resp.default_user_settings.jupyter_lab_app_settings.lifecycle_config_arns[0] #=> String
     #   resp.default_user_settings.jupyter_lab_app_settings.code_repositories #=> Array
     #   resp.default_user_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.emr_settings.assumable_role_arns #=> Array
+    #   resp.default_user_settings.jupyter_lab_app_settings.emr_settings.assumable_role_arns[0] #=> String
+    #   resp.default_user_settings.jupyter_lab_app_settings.emr_settings.execution_role_arns #=> Array
+    #   resp.default_user_settings.jupyter_lab_app_settings.emr_settings.execution_role_arns[0] #=> String
     #   resp.default_user_settings.space_storage_settings.default_ebs_storage_settings.default_ebs_volume_size_in_gb #=> Integer
     #   resp.default_user_settings.space_storage_settings.default_ebs_storage_settings.maximum_ebs_volume_size_in_gb #=> Integer
     #   resp.default_user_settings.default_landing_uri #=> String
@@ -12593,6 +12609,10 @@ module Aws::SageMaker
     #   resp.default_space_settings.jupyter_lab_app_settings.lifecycle_config_arns[0] #=> String
     #   resp.default_space_settings.jupyter_lab_app_settings.code_repositories #=> Array
     #   resp.default_space_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.default_space_settings.jupyter_lab_app_settings.emr_settings.assumable_role_arns #=> Array
+    #   resp.default_space_settings.jupyter_lab_app_settings.emr_settings.assumable_role_arns[0] #=> String
+    #   resp.default_space_settings.jupyter_lab_app_settings.emr_settings.execution_role_arns #=> Array
+    #   resp.default_space_settings.jupyter_lab_app_settings.emr_settings.execution_role_arns[0] #=> String
     #   resp.default_space_settings.space_storage_settings.default_ebs_storage_settings.default_ebs_volume_size_in_gb #=> Integer
     #   resp.default_space_settings.space_storage_settings.default_ebs_storage_settings.maximum_ebs_volume_size_in_gb #=> Integer
     #   resp.default_space_settings.custom_posix_user_config.uid #=> Integer
@@ -16597,6 +16617,10 @@ module Aws::SageMaker
     #   resp.user_settings.jupyter_lab_app_settings.lifecycle_config_arns[0] #=> String
     #   resp.user_settings.jupyter_lab_app_settings.code_repositories #=> Array
     #   resp.user_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.emr_settings.assumable_role_arns #=> Array
+    #   resp.user_settings.jupyter_lab_app_settings.emr_settings.assumable_role_arns[0] #=> String
+    #   resp.user_settings.jupyter_lab_app_settings.emr_settings.execution_role_arns #=> Array
+    #   resp.user_settings.jupyter_lab_app_settings.emr_settings.execution_role_arns[0] #=> String
     #   resp.user_settings.space_storage_settings.default_ebs_storage_settings.default_ebs_volume_size_in_gb #=> Integer
     #   resp.user_settings.space_storage_settings.default_ebs_storage_settings.maximum_ebs_volume_size_in_gb #=> Integer
     #   resp.user_settings.default_landing_uri #=> String
@@ -24967,6 +24991,10 @@ module Aws::SageMaker
     #             repository_url: "RepositoryUrl", # required
     #           },
     #         ],
+    #         emr_settings: {
+    #           assumable_role_arns: ["RoleArn"],
+    #           execution_role_arns: ["RoleArn"],
+    #         },
     #       },
     #       space_storage_settings: {
     #         default_ebs_storage_settings: {
@@ -25074,6 +25102,10 @@ module Aws::SageMaker
     #             repository_url: "RepositoryUrl", # required
     #           },
     #         ],
+    #         emr_settings: {
+    #           assumable_role_arns: ["RoleArn"],
+    #           execution_role_arns: ["RoleArn"],
+    #         },
     #       },
     #       space_storage_settings: {
     #         default_ebs_storage_settings: {
@@ -27174,6 +27206,10 @@ module Aws::SageMaker
     #             repository_url: "RepositoryUrl", # required
     #           },
     #         ],
+    #         emr_settings: {
+    #           assumable_role_arns: ["RoleArn"],
+    #           execution_role_arns: ["RoleArn"],
+    #         },
     #       },
     #       space_storage_settings: {
     #         default_ebs_storage_settings: {
@@ -27478,7 +27514,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.254.0'
+      context[:gem_version] = '1.255.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -64,6 +64,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::CreateGuardrail.build(context)
           when :create_guardrail_version
             Aws::Bedrock::Endpoints::CreateGuardrailVersion.build(context)
+          when :create_model_copy_job
+            Aws::Bedrock::Endpoints::CreateModelCopyJob.build(context)
           when :create_model_customization_job
             Aws::Bedrock::Endpoints::CreateModelCustomizationJob.build(context)
           when :create_provisioned_model_throughput
@@ -84,6 +86,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::GetFoundationModel.build(context)
           when :get_guardrail
             Aws::Bedrock::Endpoints::GetGuardrail.build(context)
+          when :get_model_copy_job
+            Aws::Bedrock::Endpoints::GetModelCopyJob.build(context)
           when :get_model_customization_job
             Aws::Bedrock::Endpoints::GetModelCustomizationJob.build(context)
           when :get_model_invocation_logging_configuration
@@ -98,6 +102,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::ListFoundationModels.build(context)
           when :list_guardrails
             Aws::Bedrock::Endpoints::ListGuardrails.build(context)
+          when :list_model_copy_jobs
+            Aws::Bedrock::Endpoints::ListModelCopyJobs.build(context)
           when :list_model_customization_jobs
             Aws::Bedrock::Endpoints::ListModelCustomizationJobs.build(context)
           when :list_provisioned_model_throughputs

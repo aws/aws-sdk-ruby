@@ -457,6 +457,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Support App                                       | Aws::SupportApp                          | aws-sdk-supportapp                          | 2021-08-20  |
 | AWS Systems Manager Incident Manager                  | Aws::SSMIncidents                        | aws-sdk-ssmincidents                        | 2018-05-10  |
 | AWS Systems Manager Incident Manager Contacts         | Aws::SSMContacts                         | aws-sdk-ssmcontacts                         | 2021-05-03  |
+| AWS Systems Manager QuickSetup                        | Aws::SSMQuickSetup                       | aws-sdk-ssmquicksetup                       | 2018-05-10  |
 | AWS Systems Manager for SAP                           | Aws::SsmSap                              | aws-sdk-ssmsap                              | 2018-05-10  |
 | AWS Telco Network Builder                             | Aws::Tnb                                 | aws-sdk-tnb                                 | 2008-10-21  |
 | AWS Transfer Family                                   | Aws::Transfer                            | aws-sdk-transfer                            | 2018-11-05  |
