@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2024-08-02)
+------------------
+
+* Feature - Customers are presented with the grouping recommendations and can determine if the recommendations are accurate and apply to their case. This feature simplifies onboarding by organizing resources into appropriate AppComponents.
+
 1.32.0 (2024-07-02)
 ------------------
 

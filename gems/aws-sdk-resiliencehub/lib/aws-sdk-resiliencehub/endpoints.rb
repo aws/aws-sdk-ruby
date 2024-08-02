@@ -12,6 +12,20 @@ module Aws::ResilienceHub
   # @api private
   module Endpoints
 
+    class AcceptResourceGroupingRecommendations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResilienceHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class AddDraftAppVersionResourceMappings
       def self.build(context)
         unless context.config.regional_endpoint
@@ -334,6 +348,20 @@ module Aws::ResilienceHub
       end
     end
 
+    class DescribeResourceGroupingRecommendationTask
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResilienceHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ImportResourcesToDraftAppVersion
       def self.build(context)
         unless context.config.regional_endpoint
@@ -544,6 +572,20 @@ module Aws::ResilienceHub
       end
     end
 
+    class ListResourceGroupingRecommendations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResilienceHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListSopRecommendations
       def self.build(context)
         unless context.config.regional_endpoint
@@ -642,6 +684,20 @@ module Aws::ResilienceHub
       end
     end
 
+    class RejectResourceGroupingRecommendations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResilienceHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class RemoveDraftAppVersionResourceMappings
       def self.build(context)
         unless context.config.regional_endpoint
@@ -671,6 +727,20 @@ module Aws::ResilienceHub
     end
 
     class StartAppAssessment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ResilienceHub::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StartResourceGroupingRecommendationTask
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

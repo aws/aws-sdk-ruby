@@ -425,11 +425,61 @@ module Aws::ResilienceHub
 
     # @!group API Operations
 
+    # Accepts the resource grouping recommendations suggested by Resilience
+    # Hub for your application.
+    #
+    # @option params [required, String] :app_arn
+    #   Amazon Resource Name (ARN) of the Resilience Hub application. The
+    #   format for this ARN is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, Array<Types::AcceptGroupingRecommendationEntry>] :entries
+    #   Indicates the list of resource grouping recommendations you want to
+    #   include in your application.
+    #
+    # @return [Types::AcceptResourceGroupingRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptResourceGroupingRecommendationsResponse#app_arn #app_arn} => String
+    #   * {Types::AcceptResourceGroupingRecommendationsResponse#failed_entries #failed_entries} => Array&lt;Types::FailedGroupingRecommendationEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_resource_grouping_recommendations({
+    #     app_arn: "Arn", # required
+    #     entries: [ # required
+    #       {
+    #         grouping_recommendation_id: "String255", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.failed_entries #=> Array
+    #   resp.failed_entries[0].error_message #=> String
+    #   resp.failed_entries[0].grouping_recommendation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/AcceptResourceGroupingRecommendations AWS API Documentation
+    #
+    # @overload accept_resource_grouping_recommendations(params = {})
+    # @param [Hash] params ({})
+    def accept_resource_grouping_recommendations(params = {}, options = {})
+      req = build_request(:accept_resource_grouping_recommendations, params)
+      req.send_request(options)
+    end
+
     # Adds the source of resource-maps to the draft version of an
     # application. During assessment, Resilience Hub will use these
     # resource-maps to resolve the latest physical ID for each resource in
     # the application template. For more information about different types
-    # of resources suported by Resilience Hub and how to add them in your
+    # of resources supported by Resilience Hub and how to add them in your
     # application, see [Step 2: How is your application managed?][1] in the
     # Resilience Hub User Guide.
     #
@@ -675,7 +725,7 @@ module Aws::ResilienceHub
     #
     #   resp.app.app_arn #=> String
     #   resp.app.assessment_schedule #=> String, one of "Disabled", "Daily"
-    #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected"
+    #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app.creation_time #=> Time
     #   resp.app.description #=> String
     #   resp.app.drift_status #=> String, one of "NotChecked", "NotDetected", "Detected"
@@ -1594,7 +1644,7 @@ module Aws::ResilienceHub
     #
     #   resp.app.app_arn #=> String
     #   resp.app.assessment_schedule #=> String, one of "Disabled", "Daily"
-    #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected"
+    #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app.creation_time #=> Time
     #   resp.app.description #=> String
     #   resp.app.drift_status #=> String, one of "NotChecked", "NotDetected", "Detected"
@@ -1660,7 +1710,7 @@ module Aws::ResilienceHub
     #   resp.assessment.compliance #=> Hash
     #   resp.assessment.compliance["DisruptionType"].achievable_rpo_in_secs #=> Integer
     #   resp.assessment.compliance["DisruptionType"].achievable_rto_in_secs #=> Integer
-    #   resp.assessment.compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.assessment.compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.assessment.compliance["DisruptionType"].current_rpo_in_secs #=> Integer
     #   resp.assessment.compliance["DisruptionType"].current_rto_in_secs #=> Integer
     #   resp.assessment.compliance["DisruptionType"].message #=> String
@@ -1668,7 +1718,7 @@ module Aws::ResilienceHub
     #   resp.assessment.compliance["DisruptionType"].rpo_reference_id #=> String
     #   resp.assessment.compliance["DisruptionType"].rto_description #=> String
     #   resp.assessment.compliance["DisruptionType"].rto_reference_id #=> String
-    #   resp.assessment.compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.assessment.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.assessment.cost.amount #=> Float
     #   resp.assessment.cost.currency #=> String
     #   resp.assessment.cost.frequency #=> String, one of "Hourly", "Daily", "Monthly", "Yearly"
@@ -1702,6 +1752,12 @@ module Aws::ResilienceHub
     #   resp.assessment.resource_errors_details.resource_errors[0].physical_resource_id #=> String
     #   resp.assessment.resource_errors_details.resource_errors[0].reason #=> String
     #   resp.assessment.start_time #=> Time
+    #   resp.assessment.summary.risk_recommendations #=> Array
+    #   resp.assessment.summary.risk_recommendations[0].app_components #=> Array
+    #   resp.assessment.summary.risk_recommendations[0].app_components[0] #=> String
+    #   resp.assessment.summary.risk_recommendations[0].recommendation #=> String
+    #   resp.assessment.summary.risk_recommendations[0].risk #=> String
+    #   resp.assessment.summary.summary #=> String
     #   resp.assessment.tags #=> Hash
     #   resp.assessment.tags["TagKey"] #=> String
     #   resp.assessment.version_name #=> String
@@ -1816,7 +1872,7 @@ module Aws::ResilienceHub
 
     # Describes a resource of the Resilience Hub application.
     #
-    # <note markdown="1"> This API accepts only one of the following parameters to descibe the
+    # <note markdown="1"> This API accepts only one of the following parameters to describe the
     # resource:
     #
     #  * `resourceName`
@@ -2119,6 +2175,51 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
+    # Describes the resource grouping recommendation tasks run by Resilience
+    # Hub for your application.
+    #
+    # @option params [required, String] :app_arn
+    #   Amazon Resource Name (ARN) of the Resilience Hub application. The
+    #   format for this ARN is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [String] :grouping_id
+    #   Indicates the identifier of the grouping recommendation task.
+    #
+    # @return [Types::DescribeResourceGroupingRecommendationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourceGroupingRecommendationTaskResponse#error_message #error_message} => String
+    #   * {Types::DescribeResourceGroupingRecommendationTaskResponse#grouping_id #grouping_id} => String
+    #   * {Types::DescribeResourceGroupingRecommendationTaskResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_grouping_recommendation_task({
+    #     app_arn: "Arn", # required
+    #     grouping_id: "String255",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_message #=> String
+    #   resp.grouping_id #=> String
+    #   resp.status #=> String, one of "Pending", "InProgress", "Failed", "Success"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/DescribeResourceGroupingRecommendationTask AWS API Documentation
+    #
+    # @overload describe_resource_grouping_recommendation_task(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_grouping_recommendation_task(params = {}, options = {})
+      req = build_request(:describe_resource_grouping_recommendation_task, params)
+      req.send_request(options)
+    end
+
     # Imports resources to Resilience Hub application draft version from
     # different input sources. For more information about the input sources
     # supported by Resilience Hub, see [Discover the structure and describe
@@ -2287,12 +2388,11 @@ module Aws::ResilienceHub
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Integer] :max_results
-    #   Indicates the maximum number of applications requested.
+    #   Indicates the maximum number of compliance drifts requested.
     #
     # @option params [String] :next_token
-    #   Indicates the unique token number of the next application to be
-    #   checked for compliance and regulatory requirements from the list of
-    #   applications.
+    #   Null, or the token from a previous call to get the next set of
+    #   results.
     #
     # @return [Types::ListAppAssessmentComplianceDriftsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2316,7 +2416,7 @@ module Aws::ResilienceHub
     #   resp.compliance_drifts[0].actual_value #=> Hash
     #   resp.compliance_drifts[0].actual_value["DisruptionType"].achievable_rpo_in_secs #=> Integer
     #   resp.compliance_drifts[0].actual_value["DisruptionType"].achievable_rto_in_secs #=> Integer
-    #   resp.compliance_drifts[0].actual_value["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.compliance_drifts[0].actual_value["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.compliance_drifts[0].actual_value["DisruptionType"].current_rpo_in_secs #=> Integer
     #   resp.compliance_drifts[0].actual_value["DisruptionType"].current_rto_in_secs #=> Integer
     #   resp.compliance_drifts[0].actual_value["DisruptionType"].message #=> String
@@ -2334,7 +2434,7 @@ module Aws::ResilienceHub
     #   resp.compliance_drifts[0].expected_value #=> Hash
     #   resp.compliance_drifts[0].expected_value["DisruptionType"].achievable_rpo_in_secs #=> Integer
     #   resp.compliance_drifts[0].expected_value["DisruptionType"].achievable_rto_in_secs #=> Integer
-    #   resp.compliance_drifts[0].expected_value["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.compliance_drifts[0].expected_value["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.compliance_drifts[0].expected_value["DisruptionType"].current_rpo_in_secs #=> Integer
     #   resp.compliance_drifts[0].expected_value["DisruptionType"].current_rto_in_secs #=> Integer
     #   resp.compliance_drifts[0].expected_value["DisruptionType"].message #=> String
@@ -2469,7 +2569,7 @@ module Aws::ResilienceHub
     #     app_arn: "Arn",
     #     assessment_name: "EntityName",
     #     assessment_status: ["Pending"], # accepts Pending, InProgress, Failed, Success
-    #     compliance_status: "PolicyBreached", # accepts PolicyBreached, PolicyMet
+    #     compliance_status: "PolicyBreached", # accepts PolicyBreached, PolicyMet, NotApplicable, MissingPolicy
     #     invoker: "User", # accepts User, System
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -2484,7 +2584,7 @@ module Aws::ResilienceHub
     #   resp.assessment_summaries[0].assessment_arn #=> String
     #   resp.assessment_summaries[0].assessment_name #=> String
     #   resp.assessment_summaries[0].assessment_status #=> String, one of "Pending", "InProgress", "Failed", "Success"
-    #   resp.assessment_summaries[0].compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.assessment_summaries[0].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.assessment_summaries[0].cost.amount #=> Float
     #   resp.assessment_summaries[0].cost.currency #=> String
     #   resp.assessment_summaries[0].cost.frequency #=> String, one of "Hourly", "Daily", "Monthly", "Yearly"
@@ -2550,7 +2650,7 @@ module Aws::ResilienceHub
     #   resp.component_compliances[0].compliance #=> Hash
     #   resp.component_compliances[0].compliance["DisruptionType"].achievable_rpo_in_secs #=> Integer
     #   resp.component_compliances[0].compliance["DisruptionType"].achievable_rto_in_secs #=> Integer
-    #   resp.component_compliances[0].compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.component_compliances[0].compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.component_compliances[0].compliance["DisruptionType"].current_rpo_in_secs #=> Integer
     #   resp.component_compliances[0].compliance["DisruptionType"].current_rto_in_secs #=> Integer
     #   resp.component_compliances[0].compliance["DisruptionType"].message #=> String
@@ -2570,7 +2670,7 @@ module Aws::ResilienceHub
     #   resp.component_compliances[0].resiliency_score.disruption_score #=> Hash
     #   resp.component_compliances[0].resiliency_score.disruption_score["DisruptionType"] #=> Float
     #   resp.component_compliances[0].resiliency_score.score #=> Float
-    #   resp.component_compliances[0].status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.component_compliances[0].status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppComponentCompliances AWS API Documentation
@@ -2628,7 +2728,7 @@ module Aws::ResilienceHub
     #   resp.component_recommendations[0].config_recommendations[0].compliance #=> Hash
     #   resp.component_recommendations[0].config_recommendations[0].compliance["DisruptionType"].achievable_rpo_in_secs #=> Integer
     #   resp.component_recommendations[0].config_recommendations[0].compliance["DisruptionType"].achievable_rto_in_secs #=> Integer
-    #   resp.component_recommendations[0].config_recommendations[0].compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.component_recommendations[0].config_recommendations[0].compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.component_recommendations[0].config_recommendations[0].compliance["DisruptionType"].current_rpo_in_secs #=> Integer
     #   resp.component_recommendations[0].config_recommendations[0].compliance["DisruptionType"].current_rto_in_secs #=> Integer
     #   resp.component_recommendations[0].config_recommendations[0].compliance["DisruptionType"].message #=> String
@@ -2644,7 +2744,7 @@ module Aws::ResilienceHub
     #   resp.component_recommendations[0].config_recommendations[0].name #=> String
     #   resp.component_recommendations[0].config_recommendations[0].optimization_type #=> String, one of "LeastCost", "LeastChange", "BestAZRecovery", "LeastErrors", "BestAttainable", "BestRegionRecovery"
     #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance #=> Hash
-    #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance["DisruptionType"].expected_compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance["DisruptionType"].expected_compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance["DisruptionType"].expected_rpo_description #=> String
     #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance["DisruptionType"].expected_rpo_in_secs #=> Integer
     #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance["DisruptionType"].expected_rto_description #=> String
@@ -2652,7 +2752,7 @@ module Aws::ResilienceHub
     #   resp.component_recommendations[0].config_recommendations[0].reference_id #=> String
     #   resp.component_recommendations[0].config_recommendations[0].suggested_changes #=> Array
     #   resp.component_recommendations[0].config_recommendations[0].suggested_changes[0] #=> String
-    #   resp.component_recommendations[0].recommendation_status #=> String, one of "BreachedUnattainable", "BreachedCanMeet", "MetCanImprove"
+    #   resp.component_recommendations[0].recommendation_status #=> String, one of "BreachedUnattainable", "BreachedCanMeet", "MetCanImprove", "MissingPolicy"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListAppComponentRecommendations AWS API Documentation
@@ -3054,7 +3154,7 @@ module Aws::ResilienceHub
     # @option params [Boolean] :reverse_order
     #   The application list is sorted based on the values of
     #   `lastAppComplianceEvaluationTime` field. By default, application list
-    #   is sorted in ascending order. To sort the appliation list in
+    #   is sorted in ascending order. To sort the application list in
     #   descending order, set this field to `True`.
     #
     # @option params [Time,DateTime,Date,Integer,String] :to_last_assessment_time
@@ -3085,7 +3185,7 @@ module Aws::ResilienceHub
     #   resp.app_summaries #=> Array
     #   resp.app_summaries[0].app_arn #=> String
     #   resp.app_summaries[0].assessment_schedule #=> String, one of "Disabled", "Daily"
-    #   resp.app_summaries[0].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected"
+    #   resp.app_summaries[0].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app_summaries[0].creation_time #=> Time
     #   resp.app_summaries[0].description #=> String
     #   resp.app_summaries[0].drift_status #=> String, one of "NotChecked", "NotDetected", "Detected"
@@ -3245,6 +3345,82 @@ module Aws::ResilienceHub
     # @param [Hash] params ({})
     def list_resiliency_policies(params = {}, options = {})
       req = build_request(:list_resiliency_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists the resource grouping recommendations suggested by Resilience
+    # Hub for your application.
+    #
+    # @option params [String] :app_arn
+    #   Amazon Resource Name (ARN) of the Resilience Hub application. The
+    #   format for this ARN is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of grouping recommendations to be displayed per
+    #   Resilience Hub application.
+    #
+    # @option params [String] :next_token
+    #   Null, or the token from a previous call to get the next set of
+    #   results.
+    #
+    # @return [Types::ListResourceGroupingRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceGroupingRecommendationsResponse#grouping_recommendations #grouping_recommendations} => Array&lt;Types::GroupingRecommendation&gt;
+    #   * {Types::ListResourceGroupingRecommendationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_grouping_recommendations({
+    #     app_arn: "Arn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grouping_recommendations #=> Array
+    #   resp.grouping_recommendations[0].confidence_level #=> String, one of "High", "Medium"
+    #   resp.grouping_recommendations[0].creation_time #=> Time
+    #   resp.grouping_recommendations[0].grouping_app_component.app_component_id #=> String
+    #   resp.grouping_recommendations[0].grouping_app_component.app_component_name #=> String
+    #   resp.grouping_recommendations[0].grouping_app_component.app_component_type #=> String
+    #   resp.grouping_recommendations[0].grouping_recommendation_id #=> String
+    #   resp.grouping_recommendations[0].recommendation_reasons #=> Array
+    #   resp.grouping_recommendations[0].recommendation_reasons[0] #=> String
+    #   resp.grouping_recommendations[0].rejection_reason #=> String, one of "DistinctBusinessPurpose", "SeparateDataConcern", "DistinctUserGroupHandling", "Other"
+    #   resp.grouping_recommendations[0].resources #=> Array
+    #   resp.grouping_recommendations[0].resources[0].logical_resource_id.eks_source_name #=> String
+    #   resp.grouping_recommendations[0].resources[0].logical_resource_id.identifier #=> String
+    #   resp.grouping_recommendations[0].resources[0].logical_resource_id.logical_stack_name #=> String
+    #   resp.grouping_recommendations[0].resources[0].logical_resource_id.resource_group_name #=> String
+    #   resp.grouping_recommendations[0].resources[0].logical_resource_id.terraform_source_name #=> String
+    #   resp.grouping_recommendations[0].resources[0].physical_resource_id.aws_account_id #=> String
+    #   resp.grouping_recommendations[0].resources[0].physical_resource_id.aws_region #=> String
+    #   resp.grouping_recommendations[0].resources[0].physical_resource_id.identifier #=> String
+    #   resp.grouping_recommendations[0].resources[0].physical_resource_id.type #=> String, one of "Arn", "Native"
+    #   resp.grouping_recommendations[0].resources[0].resource_name #=> String
+    #   resp.grouping_recommendations[0].resources[0].resource_type #=> String
+    #   resp.grouping_recommendations[0].resources[0].source_app_component_ids #=> Array
+    #   resp.grouping_recommendations[0].resources[0].source_app_component_ids[0] #=> String
+    #   resp.grouping_recommendations[0].score #=> Float
+    #   resp.grouping_recommendations[0].status #=> String, one of "Accepted", "Rejected", "PendingDecision"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListResourceGroupingRecommendations AWS API Documentation
+    #
+    # @overload list_resource_grouping_recommendations(params = {})
+    # @param [Hash] params ({})
+    def list_resource_grouping_recommendations(params = {}, options = {})
+      req = build_request(:list_resource_grouping_recommendations, params)
       req.send_request(options)
     end
 
@@ -3866,6 +4042,56 @@ module Aws::ResilienceHub
       req.send_request(options)
     end
 
+    # Rejects resource grouping recommendations.
+    #
+    # @option params [required, String] :app_arn
+    #   Amazon Resource Name (ARN) of the Resilience Hub application. The
+    #   format for this ARN is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, Array<Types::RejectGroupingRecommendationEntry>] :entries
+    #   Indicates the list of resource grouping recommendations you have
+    #   selected to exclude from your application.
+    #
+    # @return [Types::RejectResourceGroupingRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectResourceGroupingRecommendationsResponse#app_arn #app_arn} => String
+    #   * {Types::RejectResourceGroupingRecommendationsResponse#failed_entries #failed_entries} => Array&lt;Types::FailedGroupingRecommendationEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_resource_grouping_recommendations({
+    #     app_arn: "Arn", # required
+    #     entries: [ # required
+    #       {
+    #         grouping_recommendation_id: "String255", # required
+    #         rejection_reason: "DistinctBusinessPurpose", # accepts DistinctBusinessPurpose, SeparateDataConcern, DistinctUserGroupHandling, Other
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.failed_entries #=> Array
+    #   resp.failed_entries[0].error_message #=> String
+    #   resp.failed_entries[0].grouping_recommendation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/RejectResourceGroupingRecommendations AWS API Documentation
+    #
+    # @overload reject_resource_grouping_recommendations(params = {})
+    # @param [Hash] params ({})
+    def reject_resource_grouping_recommendations(params = {}, options = {})
+      req = build_request(:reject_resource_grouping_recommendations, params)
+      req.send_request(options)
+    end
+
     # Removes resource mappings from a draft application version.
     #
     # @option params [required, String] :app_arn
@@ -4041,7 +4267,7 @@ module Aws::ResilienceHub
     #   resp.assessment.compliance #=> Hash
     #   resp.assessment.compliance["DisruptionType"].achievable_rpo_in_secs #=> Integer
     #   resp.assessment.compliance["DisruptionType"].achievable_rto_in_secs #=> Integer
-    #   resp.assessment.compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.assessment.compliance["DisruptionType"].compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.assessment.compliance["DisruptionType"].current_rpo_in_secs #=> Integer
     #   resp.assessment.compliance["DisruptionType"].current_rto_in_secs #=> Integer
     #   resp.assessment.compliance["DisruptionType"].message #=> String
@@ -4049,7 +4275,7 @@ module Aws::ResilienceHub
     #   resp.assessment.compliance["DisruptionType"].rpo_reference_id #=> String
     #   resp.assessment.compliance["DisruptionType"].rto_description #=> String
     #   resp.assessment.compliance["DisruptionType"].rto_reference_id #=> String
-    #   resp.assessment.compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
+    #   resp.assessment.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotApplicable", "MissingPolicy"
     #   resp.assessment.cost.amount #=> Float
     #   resp.assessment.cost.currency #=> String
     #   resp.assessment.cost.frequency #=> String, one of "Hourly", "Daily", "Monthly", "Yearly"
@@ -4083,6 +4309,12 @@ module Aws::ResilienceHub
     #   resp.assessment.resource_errors_details.resource_errors[0].physical_resource_id #=> String
     #   resp.assessment.resource_errors_details.resource_errors[0].reason #=> String
     #   resp.assessment.start_time #=> Time
+    #   resp.assessment.summary.risk_recommendations #=> Array
+    #   resp.assessment.summary.risk_recommendations[0].app_components #=> Array
+    #   resp.assessment.summary.risk_recommendations[0].app_components[0] #=> String
+    #   resp.assessment.summary.risk_recommendations[0].recommendation #=> String
+    #   resp.assessment.summary.risk_recommendations[0].risk #=> String
+    #   resp.assessment.summary.summary #=> String
     #   resp.assessment.tags #=> Hash
     #   resp.assessment.tags["TagKey"] #=> String
     #   resp.assessment.version_name #=> String
@@ -4093,6 +4325,48 @@ module Aws::ResilienceHub
     # @param [Hash] params ({})
     def start_app_assessment(params = {}, options = {})
       req = build_request(:start_app_assessment, params)
+      req.send_request(options)
+    end
+
+    # Starts grouping recommendation task.
+    #
+    # @option params [required, String] :app_arn
+    #   Amazon Resource Name (ARN) of the Resilience Hub application. The
+    #   format for this ARN is:
+    #   arn:`partition`:resiliencehub:`region`:`account`:app/`app-id`. For
+    #   more information about ARNs, see [ Amazon Resource Names (ARNs)][1] in
+    #   the *Amazon Web Services General Reference* guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @return [Types::StartResourceGroupingRecommendationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartResourceGroupingRecommendationTaskResponse#app_arn #app_arn} => String
+    #   * {Types::StartResourceGroupingRecommendationTaskResponse#error_message #error_message} => String
+    #   * {Types::StartResourceGroupingRecommendationTaskResponse#grouping_id #grouping_id} => String
+    #   * {Types::StartResourceGroupingRecommendationTaskResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_resource_grouping_recommendation_task({
+    #     app_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_arn #=> String
+    #   resp.error_message #=> String
+    #   resp.grouping_id #=> String
+    #   resp.status #=> String, one of "Pending", "InProgress", "Failed", "Success"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/StartResourceGroupingRecommendationTask AWS API Documentation
+    #
+    # @overload start_resource_grouping_recommendation_task(params = {})
+    # @param [Hash] params ({})
+    def start_resource_grouping_recommendation_task(params = {}, options = {})
+      req = build_request(:start_resource_grouping_recommendation_task, params)
       req.send_request(options)
     end
 
@@ -4224,7 +4498,7 @@ module Aws::ResilienceHub
     #
     #   resp.app.app_arn #=> String
     #   resp.app.assessment_schedule #=> String, one of "Disabled", "Daily"
-    #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected"
+    #   resp.app.compliance_status #=> String, one of "PolicyBreached", "PolicyMet", "NotAssessed", "ChangesDetected", "NotApplicable", "MissingPolicy"
     #   resp.app.creation_time #=> Time
     #   resp.app.description #=> String
     #   resp.app.drift_status #=> String, one of "NotChecked", "NotDetected", "Detected"
@@ -4629,7 +4903,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -58,6 +58,8 @@ module Aws::ResilienceHub
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :accept_resource_grouping_recommendations
+            Aws::ResilienceHub::Endpoints::AcceptResourceGroupingRecommendations.build(context)
           when :add_draft_app_version_resource_mappings
             Aws::ResilienceHub::Endpoints::AddDraftAppVersionResourceMappings.build(context)
           when :batch_update_recommendation_status
@@ -104,6 +106,8 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::DescribeDraftAppVersionResourcesImportStatus.build(context)
           when :describe_resiliency_policy
             Aws::ResilienceHub::Endpoints::DescribeResiliencyPolicy.build(context)
+          when :describe_resource_grouping_recommendation_task
+            Aws::ResilienceHub::Endpoints::DescribeResourceGroupingRecommendationTask.build(context)
           when :import_resources_to_draft_app_version
             Aws::ResilienceHub::Endpoints::ImportResourcesToDraftAppVersion.build(context)
           when :list_alarm_recommendations
@@ -134,6 +138,8 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::ListRecommendationTemplates.build(context)
           when :list_resiliency_policies
             Aws::ResilienceHub::Endpoints::ListResiliencyPolicies.build(context)
+          when :list_resource_grouping_recommendations
+            Aws::ResilienceHub::Endpoints::ListResourceGroupingRecommendations.build(context)
           when :list_sop_recommendations
             Aws::ResilienceHub::Endpoints::ListSopRecommendations.build(context)
           when :list_suggested_resiliency_policies
@@ -148,12 +154,16 @@ module Aws::ResilienceHub
             Aws::ResilienceHub::Endpoints::PublishAppVersion.build(context)
           when :put_draft_app_version_template
             Aws::ResilienceHub::Endpoints::PutDraftAppVersionTemplate.build(context)
+          when :reject_resource_grouping_recommendations
+            Aws::ResilienceHub::Endpoints::RejectResourceGroupingRecommendations.build(context)
           when :remove_draft_app_version_resource_mappings
             Aws::ResilienceHub::Endpoints::RemoveDraftAppVersionResourceMappings.build(context)
           when :resolve_app_version_resources
             Aws::ResilienceHub::Endpoints::ResolveAppVersionResources.build(context)
           when :start_app_assessment
             Aws::ResilienceHub::Endpoints::StartAppAssessment.build(context)
+          when :start_resource_grouping_recommendation_task
+            Aws::ResilienceHub::Endpoints::StartResourceGroupingRecommendationTask.build(context)
           when :tag_resource
             Aws::ResilienceHub::Endpoints::TagResource.build(context)
           when :untag_resource

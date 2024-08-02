@@ -73,6 +73,22 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AcceptResourceGroupingRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptResourceGroupingRecommendationsResponse]
+        def app_arn: () -> ::String
+        def failed_entries: () -> ::Array[Types::FailedGroupingRecommendationEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#accept_resource_grouping_recommendations-instance_method
+      def accept_resource_grouping_recommendations: (
+                                                      app_arn: ::String,
+                                                      entries: Array[
+                                                        {
+                                                          grouping_recommendation_id: ::String
+                                                        },
+                                                      ]
+                                                    ) -> _AcceptResourceGroupingRecommendationsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptResourceGroupingRecommendationsResponseSuccess
+
       interface _AddDraftAppVersionResourceMappingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AddDraftAppVersionResourceMappingsResponse]
         def app_arn: () -> ::String
@@ -463,6 +479,19 @@ module Aws
                                       ) -> _DescribeResiliencyPolicyResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResiliencyPolicyResponseSuccess
 
+      interface _DescribeResourceGroupingRecommendationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceGroupingRecommendationTaskResponse]
+        def error_message: () -> ::String
+        def grouping_id: () -> ::String
+        def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_resource_grouping_recommendation_task-instance_method
+      def describe_resource_grouping_recommendation_task: (
+                                                            app_arn: ::String,
+                                                            ?grouping_id: ::String
+                                                          ) -> _DescribeResourceGroupingRecommendationTaskResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceGroupingRecommendationTaskResponseSuccess
+
       interface _ImportResourcesToDraftAppVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportResourcesToDraftAppVersionResponse]
         def app_arn: () -> ::String
@@ -540,7 +569,7 @@ module Aws
                                   ?app_arn: ::String,
                                   ?assessment_name: ::String,
                                   ?assessment_status: Array[("Pending" | "InProgress" | "Failed" | "Success")],
-                                  ?compliance_status: ("PolicyBreached" | "PolicyMet"),
+                                  ?compliance_status: ("PolicyBreached" | "PolicyMet" | "NotApplicable" | "MissingPolicy"),
                                   ?invoker: ("User" | "System"),
                                   ?max_results: ::Integer,
                                   ?next_token: ::String,
@@ -696,6 +725,19 @@ module Aws
                                     ) -> _ListResiliencyPoliciesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResiliencyPoliciesResponseSuccess
 
+      interface _ListResourceGroupingRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceGroupingRecommendationsResponse]
+        def grouping_recommendations: () -> ::Array[Types::GroupingRecommendation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_resource_grouping_recommendations-instance_method
+      def list_resource_grouping_recommendations: (
+                                                    ?app_arn: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListResourceGroupingRecommendationsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceGroupingRecommendationsResponseSuccess
+
       interface _ListSopRecommendationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSopRecommendationsResponse]
         def next_token: () -> ::String
@@ -786,6 +828,23 @@ module Aws
                                           ) -> _PutDraftAppVersionTemplateResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDraftAppVersionTemplateResponseSuccess
 
+      interface _RejectResourceGroupingRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectResourceGroupingRecommendationsResponse]
+        def app_arn: () -> ::String
+        def failed_entries: () -> ::Array[Types::FailedGroupingRecommendationEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#reject_resource_grouping_recommendations-instance_method
+      def reject_resource_grouping_recommendations: (
+                                                      app_arn: ::String,
+                                                      entries: Array[
+                                                        {
+                                                          grouping_recommendation_id: ::String,
+                                                          rejection_reason: ("DistinctBusinessPurpose" | "SeparateDataConcern" | "DistinctUserGroupHandling" | "Other")?
+                                                        },
+                                                      ]
+                                                    ) -> _RejectResourceGroupingRecommendationsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectResourceGroupingRecommendationsResponseSuccess
+
       interface _RemoveDraftAppVersionResourceMappingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RemoveDraftAppVersionResourceMappingsResponse]
         def app_arn: () -> ::String
@@ -830,6 +889,19 @@ module Aws
                                   ?tags: Hash[::String, ::String]
                                 ) -> _StartAppAssessmentResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAppAssessmentResponseSuccess
+
+      interface _StartResourceGroupingRecommendationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartResourceGroupingRecommendationTaskResponse]
+        def app_arn: () -> ::String
+        def error_message: () -> ::String
+        def grouping_id: () -> ::String
+        def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#start_resource_grouping_recommendation_task-instance_method
+      def start_resource_grouping_recommendation_task: (
+                                                         app_arn: ::String
+                                                       ) -> _StartResourceGroupingRecommendationTaskResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartResourceGroupingRecommendationTaskResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
