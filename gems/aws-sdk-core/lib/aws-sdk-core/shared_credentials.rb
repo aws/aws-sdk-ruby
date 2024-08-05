@@ -89,6 +89,10 @@ module Aws
 
     private
 
+    def refresh_if_necessary
+      refresh! if @enable_refresh && near_expiration?
+    end
+
     def sync_expiration_length
       @refresh_interval || self.class::SYNC_EXPIRATION_LENGTH
     end
