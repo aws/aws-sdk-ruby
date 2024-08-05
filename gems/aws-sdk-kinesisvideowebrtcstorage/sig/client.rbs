@@ -78,6 +78,13 @@ module Aws
                                   channel_arn: ::String
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideoWebRTCStorage/Client.html#join_storage_session_as_viewer-instance_method
+      def join_storage_session_as_viewer: (
+                                            channel_arn: ::String,
+                                            client_id: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
     end
   end
 end

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-datazone/customizations'
 # @!group service
 module Aws::DataZone
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end

@@ -551,6 +551,17 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listings[0].item.product_listing.description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.name #=> String
     #   resp.subscribed_listings[0].name #=> String
     #   resp.subscribed_listings[0].owner_project_id #=> String
     #   resp.subscribed_listings[0].owner_project_name #=> String
@@ -675,6 +686,17 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listing.item.product_listing.description #=> String
+    #   resp.subscribed_listing.item.product_listing.entity_id #=> String
+    #   resp.subscribed_listing.item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listing.item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listing.item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listing.item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.product_listing.name #=> String
     #   resp.subscribed_listing.name #=> String
     #   resp.subscribed_listing.owner_project_id #=> String
     #   resp.subscribed_listing.owner_project_name #=> String
@@ -1204,6 +1226,226 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def create_asset_type(params = {}, options = {})
       req = build_request(:create_asset_type, params)
+      req.send_request(options)
+    end
+
+    # Creates a data product.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   The description of the data product.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where the data product is created.
+    #
+    # @option params [Array<Types::FormInput>] :forms_input
+    #   The metadata forms of the data product.
+    #
+    # @option params [Array<String>] :glossary_terms
+    #   The glossary terms of the data product.
+    #
+    # @option params [Array<Types::DataProductItem>] :items
+    #   The data assets of the data product.
+    #
+    # @option params [required, String] :name
+    #   The name of the data product.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The ID of the owning project of the data product.
+    #
+    # @return [Types::CreateDataProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataProductOutput#created_at #created_at} => Time
+    #   * {Types::CreateDataProductOutput#created_by #created_by} => String
+    #   * {Types::CreateDataProductOutput#description #description} => String
+    #   * {Types::CreateDataProductOutput#domain_id #domain_id} => String
+    #   * {Types::CreateDataProductOutput#first_revision_created_at #first_revision_created_at} => Time
+    #   * {Types::CreateDataProductOutput#first_revision_created_by #first_revision_created_by} => String
+    #   * {Types::CreateDataProductOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
+    #   * {Types::CreateDataProductOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::CreateDataProductOutput#id #id} => String
+    #   * {Types::CreateDataProductOutput#items #items} => Array&lt;Types::DataProductItem&gt;
+    #   * {Types::CreateDataProductOutput#name #name} => String
+    #   * {Types::CreateDataProductOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::CreateDataProductOutput#revision #revision} => String
+    #   * {Types::CreateDataProductOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_product({
+    #     client_token: "ClientToken",
+    #     description: "DataProductDescription",
+    #     domain_identifier: "DomainId", # required
+    #     forms_input: [
+    #       {
+    #         content: "FormInputContentString",
+    #         form_name: "FormName", # required
+    #         type_identifier: "FormTypeIdentifier",
+    #         type_revision: "Revision",
+    #       },
+    #     ],
+    #     glossary_terms: ["GlossaryTermId"],
+    #     items: [
+    #       {
+    #         glossary_terms: ["GlossaryTermId"],
+    #         identifier: "EntityIdentifier", # required
+    #         item_type: "ASSET", # required, accepts ASSET
+    #         revision: "Revision",
+    #       },
+    #     ],
+    #     name: "DataProductName", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.first_revision_created_at #=> Time
+    #   resp.first_revision_created_by #=> String
+    #   resp.forms_output #=> Array
+    #   resp.forms_output[0].content #=> String
+    #   resp.forms_output[0].form_name #=> String
+    #   resp.forms_output[0].type_name #=> String
+    #   resp.forms_output[0].type_revision #=> String
+    #   resp.glossary_terms #=> Array
+    #   resp.glossary_terms[0] #=> String
+    #   resp.id #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].glossary_terms #=> Array
+    #   resp.items[0].glossary_terms[0] #=> String
+    #   resp.items[0].identifier #=> String
+    #   resp.items[0].item_type #=> String, one of "ASSET"
+    #   resp.items[0].revision #=> String
+    #   resp.name #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.revision #=> String
+    #   resp.status #=> String, one of "CREATED", "CREATING", "CREATE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDataProduct AWS API Documentation
+    #
+    # @overload create_data_product(params = {})
+    # @param [Hash] params ({})
+    def create_data_product(params = {}, options = {})
+      req = build_request(:create_data_product, params)
+      req.send_request(options)
+    end
+
+    # Creates a data product revision.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   The description of the data product revision.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where the data product revision is created.
+    #
+    # @option params [Array<Types::FormInput>] :forms_input
+    #   The metadata forms of the data product revision.
+    #
+    # @option params [Array<String>] :glossary_terms
+    #   The glossary terms of the data product revision.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the data product revision.
+    #
+    # @option params [Array<Types::DataProductItem>] :items
+    #   The data assets of the data product revision.
+    #
+    # @option params [required, String] :name
+    #   The name of the data product revision.
+    #
+    # @return [Types::CreateDataProductRevisionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataProductRevisionOutput#created_at #created_at} => Time
+    #   * {Types::CreateDataProductRevisionOutput#created_by #created_by} => String
+    #   * {Types::CreateDataProductRevisionOutput#description #description} => String
+    #   * {Types::CreateDataProductRevisionOutput#domain_id #domain_id} => String
+    #   * {Types::CreateDataProductRevisionOutput#first_revision_created_at #first_revision_created_at} => Time
+    #   * {Types::CreateDataProductRevisionOutput#first_revision_created_by #first_revision_created_by} => String
+    #   * {Types::CreateDataProductRevisionOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
+    #   * {Types::CreateDataProductRevisionOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::CreateDataProductRevisionOutput#id #id} => String
+    #   * {Types::CreateDataProductRevisionOutput#items #items} => Array&lt;Types::DataProductItem&gt;
+    #   * {Types::CreateDataProductRevisionOutput#name #name} => String
+    #   * {Types::CreateDataProductRevisionOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::CreateDataProductRevisionOutput#revision #revision} => String
+    #   * {Types::CreateDataProductRevisionOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_product_revision({
+    #     client_token: "ClientToken",
+    #     description: "DataProductDescription",
+    #     domain_identifier: "DomainId", # required
+    #     forms_input: [
+    #       {
+    #         content: "FormInputContentString",
+    #         form_name: "FormName", # required
+    #         type_identifier: "FormTypeIdentifier",
+    #         type_revision: "Revision",
+    #       },
+    #     ],
+    #     glossary_terms: ["GlossaryTermId"],
+    #     identifier: "DataProductId", # required
+    #     items: [
+    #       {
+    #         glossary_terms: ["GlossaryTermId"],
+    #         identifier: "EntityIdentifier", # required
+    #         item_type: "ASSET", # required, accepts ASSET
+    #         revision: "Revision",
+    #       },
+    #     ],
+    #     name: "DataProductName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.first_revision_created_at #=> Time
+    #   resp.first_revision_created_by #=> String
+    #   resp.forms_output #=> Array
+    #   resp.forms_output[0].content #=> String
+    #   resp.forms_output[0].form_name #=> String
+    #   resp.forms_output[0].type_name #=> String
+    #   resp.forms_output[0].type_revision #=> String
+    #   resp.glossary_terms #=> Array
+    #   resp.glossary_terms[0] #=> String
+    #   resp.id #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].glossary_terms #=> Array
+    #   resp.items[0].glossary_terms[0] #=> String
+    #   resp.items[0].identifier #=> String
+    #   resp.items[0].item_type #=> String, one of "ASSET"
+    #   resp.items[0].revision #=> String
+    #   resp.name #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.revision #=> String
+    #   resp.status #=> String, one of "CREATED", "CREATING", "CREATE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDataProductRevision AWS API Documentation
+    #
+    # @overload create_data_product_revision(params = {})
+    # @param [Hash] params ({})
+    def create_data_product_revision(params = {}, options = {})
+      req = build_request(:create_data_product_revision, params)
       req.send_request(options)
     end
 
@@ -2085,7 +2327,7 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     entity_identifier: "EntityIdentifier", # required
     #     entity_revision: "Revision",
-    #     entity_type: "ASSET", # required, accepts ASSET
+    #     entity_type: "ASSET", # required, accepts ASSET, DATA_PRODUCT
     #   })
     #
     # @example Response structure
@@ -2372,6 +2614,17 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listings[0].item.product_listing.description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.name #=> String
     #   resp.subscribed_listings[0].name #=> String
     #   resp.subscribed_listings[0].owner_project_id #=> String
     #   resp.subscribed_listings[0].owner_project_name #=> String
@@ -2553,7 +2806,7 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Delets an asset in Amazon DataZone.
+    # Deletes an asset in Amazon DataZone.
     #
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain in which the asset is deleted.
@@ -2633,6 +2886,33 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def delete_asset_type(params = {}, options = {})
       req = build_request(:delete_asset_type, params)
+      req.send_request(options)
+    end
+
+    # Deletes an data product in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the data product is
+    #   deleted.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the data product that is deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_product({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DataProductId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataProduct AWS API Documentation
+    #
+    # @overload delete_data_product(params = {})
+    # @param [Hash] params ({})
+    def delete_data_product(params = {}, options = {})
+      req = build_request(:delete_data_product, params)
       req.send_request(options)
     end
 
@@ -3512,6 +3792,78 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_asset_type(params = {}, options = {})
       req = build_request(:get_asset_type, params)
+      req.send_request(options)
+    end
+
+    # Gets the data product.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where the data product lives.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the data product.
+    #
+    # @option params [String] :revision
+    #   The revision of the data product.
+    #
+    # @return [Types::GetDataProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataProductOutput#created_at #created_at} => Time
+    #   * {Types::GetDataProductOutput#created_by #created_by} => String
+    #   * {Types::GetDataProductOutput#description #description} => String
+    #   * {Types::GetDataProductOutput#domain_id #domain_id} => String
+    #   * {Types::GetDataProductOutput#first_revision_created_at #first_revision_created_at} => Time
+    #   * {Types::GetDataProductOutput#first_revision_created_by #first_revision_created_by} => String
+    #   * {Types::GetDataProductOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
+    #   * {Types::GetDataProductOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::GetDataProductOutput#id #id} => String
+    #   * {Types::GetDataProductOutput#items #items} => Array&lt;Types::DataProductItem&gt;
+    #   * {Types::GetDataProductOutput#name #name} => String
+    #   * {Types::GetDataProductOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::GetDataProductOutput#revision #revision} => String
+    #   * {Types::GetDataProductOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_product({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DataProductId", # required
+    #     revision: "Revision",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.first_revision_created_at #=> Time
+    #   resp.first_revision_created_by #=> String
+    #   resp.forms_output #=> Array
+    #   resp.forms_output[0].content #=> String
+    #   resp.forms_output[0].form_name #=> String
+    #   resp.forms_output[0].type_name #=> String
+    #   resp.forms_output[0].type_revision #=> String
+    #   resp.glossary_terms #=> Array
+    #   resp.glossary_terms[0] #=> String
+    #   resp.id #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].glossary_terms #=> Array
+    #   resp.items[0].glossary_terms[0] #=> String
+    #   resp.items[0].identifier #=> String
+    #   resp.items[0].item_type #=> String, one of "ASSET"
+    #   resp.items[0].revision #=> String
+    #   resp.name #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.revision #=> String
+    #   resp.status #=> String, one of "CREATED", "CREATING", "CREATE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataProduct AWS API Documentation
+    #
+    # @overload get_data_product(params = {})
+    # @param [Hash] params ({})
+    def get_data_product(params = {}, options = {})
+      req = build_request(:get_data_product, params)
       req.send_request(options)
     end
 
@@ -4412,7 +4764,9 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Gets a listing (a record of an asset at a given time).
+    # Gets a listing (a record of an asset at a given time). If you specify
+    # a listing version, only details that are specific to that version are
+    # returned.
     #
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain.
@@ -4468,6 +4822,20 @@ module Aws::DataZone
     #   resp.item.asset_listing.latest_time_series_data_point_forms[0].type_identifier #=> String
     #   resp.item.asset_listing.latest_time_series_data_point_forms[0].type_revision #=> String
     #   resp.item.asset_listing.owning_project_id #=> String
+    #   resp.item.data_product_listing.created_at #=> Time
+    #   resp.item.data_product_listing.data_product_id #=> String
+    #   resp.item.data_product_listing.data_product_revision #=> String
+    #   resp.item.data_product_listing.forms #=> String
+    #   resp.item.data_product_listing.glossary_terms #=> Array
+    #   resp.item.data_product_listing.glossary_terms[0].name #=> String
+    #   resp.item.data_product_listing.glossary_terms[0].short_description #=> String
+    #   resp.item.data_product_listing.items #=> Array
+    #   resp.item.data_product_listing.items[0].glossary_terms #=> Array
+    #   resp.item.data_product_listing.items[0].glossary_terms[0].name #=> String
+    #   resp.item.data_product_listing.items[0].glossary_terms[0].short_description #=> String
+    #   resp.item.data_product_listing.items[0].listing_id #=> String
+    #   resp.item.data_product_listing.items[0].listing_revision #=> String
+    #   resp.item.data_product_listing.owning_project_id #=> String
     #   resp.listing_revision #=> String
     #   resp.name #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "INACTIVE"
@@ -4631,6 +4999,17 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listing.item.product_listing.description #=> String
+    #   resp.subscribed_listing.item.product_listing.entity_id #=> String
+    #   resp.subscribed_listing.item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listing.item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listing.item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listing.item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.product_listing.name #=> String
     #   resp.subscribed_listing.name #=> String
     #   resp.subscribed_listing.owner_project_id #=> String
     #   resp.subscribed_listing.owner_project_name #=> String
@@ -4763,6 +5142,17 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listings[0].item.product_listing.description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.name #=> String
     #   resp.subscribed_listings[0].name #=> String
     #   resp.subscribed_listings[0].owner_project_id #=> String
     #   resp.subscribed_listings[0].owner_project_name #=> String
@@ -5081,6 +5471,67 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def list_asset_revisions(params = {}, options = {})
       req = build_request(:list_asset_revisions, params)
+      req.send_request(options)
+    end
+
+    # Lists data product revisions.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain of the data product revisions that you want to
+    #   list.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the data product revision.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of asset filters to return in a single call to
+    #   `ListDataProductRevisions`. When the number of data product revisions
+    #   to be listed is greater than the value of `MaxResults`, the response
+    #   contains a `NextToken` value that you can use in a subsequent call to
+    #   `ListDataProductRevisions` to list the next set of data product
+    #   revisions.
+    #
+    # @option params [String] :next_token
+    #   When the number of data product revisions is greater than the default
+    #   value for the `MaxResults` parameter, or if you explicitly specify a
+    #   value for `MaxResults` that is less than the number of data product
+    #   revisions, the response includes a pagination token named `NextToken`.
+    #   You can specify this `NextToken` value in a subsequent call to
+    #   `ListDataProductRevisions` to list the next set of data product
+    #   revisions.
+    #
+    # @return [Types::ListDataProductRevisionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataProductRevisionsOutput#items #items} => Array&lt;Types::DataProductRevision&gt;
+    #   * {Types::ListDataProductRevisionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_product_revisions({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DataProductId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].revision #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDataProductRevisions AWS API Documentation
+    #
+    # @overload list_data_product_revisions(params = {})
+    # @param [Hash] params ({})
+    def list_data_product_revisions(params = {}, options = {})
+      req = build_request(:list_data_product_revisions, params)
       req.send_request(options)
     end
 
@@ -6143,6 +6594,9 @@ module Aws::DataZone
     #   You can specify this `NextToken` value in a subsequent call to
     #   `ListSubscriptionGrants` to list the next set of subscription grants.
     #
+    # @option params [String] :owning_project_id
+    #   The ID of the owning project of the subscription grants.
+    #
     # @option params [String] :sort_by
     #   Specifies the way of sorting the results of this action.
     #
@@ -6172,6 +6626,7 @@ module Aws::DataZone
     #     environment_id: "EnvironmentId",
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     owning_project_id: "ProjectId",
     #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     subscribed_listing_id: "ListingId",
@@ -6249,6 +6704,11 @@ module Aws::DataZone
     # @option params [String] :status
     #   Specifies the status of the subscription requests.
     #
+    #   <note markdown="1"> This is not a required parameter, but if not specified, by default,
+    #   Amazon DataZone returns only `PENDING` subscription requests.
+    #
+    #    </note>
+    #
     # @option params [String] :subscribed_listing_id
     #   The identifier of the subscribed listing.
     #
@@ -6294,6 +6754,17 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.items[0].subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.asset_listings #=> Array
+    #   resp.items[0].subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.description #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.entity_id #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.entity_revision #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.glossary_terms #=> Array
+    #   resp.items[0].subscribed_listings[0].item.product_listing.glossary_terms[0].name #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].subscribed_listings[0].item.product_listing.name #=> String
     #   resp.items[0].subscribed_listings[0].name #=> String
     #   resp.items[0].subscribed_listings[0].owner_project_id #=> String
     #   resp.items[0].subscribed_listings[0].owner_project_name #=> String
@@ -6435,6 +6906,11 @@ module Aws::DataZone
     # @option params [String] :status
     #   The status of the subscriptions that you want to list.
     #
+    #   <note markdown="1"> This is not a required parameter, but if not provided, by default,
+    #   Amazon DataZone returns only `APPROVED` subscriptions.
+    #
+    #    </note>
+    #
     # @option params [String] :subscribed_listing_id
     #   The identifier of the subscribed listing for the subscriptions that
     #   you want to list.
@@ -6483,6 +6959,17 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.items[0].subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.asset_listings #=> Array
+    #   resp.items[0].subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.description #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.entity_id #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.entity_revision #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.glossary_terms #=> Array
+    #   resp.items[0].subscribed_listing.item.product_listing.glossary_terms[0].name #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].subscribed_listing.item.product_listing.name #=> String
     #   resp.items[0].subscribed_listing.name #=> String
     #   resp.items[0].subscribed_listing.owner_project_id #=> String
     #   resp.items[0].subscribed_listing.owner_project_name #=> String
@@ -6923,6 +7410,17 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listings[0].item.product_listing.description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.name #=> String
     #   resp.subscribed_listings[0].name #=> String
     #   resp.subscribed_listings[0].owner_project_id #=> String
     #   resp.subscribed_listings[0].owner_project_name #=> String
@@ -6994,6 +7492,17 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listing.item.product_listing.description #=> String
+    #   resp.subscribed_listing.item.product_listing.entity_id #=> String
+    #   resp.subscribed_listing.item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listing.item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listing.item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listing.item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.product_listing.name #=> String
     #   resp.subscribed_listing.name #=> String
     #   resp.subscribed_listing.owner_project_id #=> String
     #   resp.subscribed_listing.owner_project_name #=> String
@@ -7090,7 +7599,7 @@ module Aws::DataZone
     #         attribute: "Attribute", # required
     #       },
     #     ],
-    #     search_scope: "ASSET", # required, accepts ASSET, GLOSSARY, GLOSSARY_TERM
+    #     search_scope: "ASSET", # required, accepts ASSET, GLOSSARY, GLOSSARY_TERM, DATA_PRODUCT
     #     search_text: "SearchText",
     #     sort: {
     #       attribute: "Attribute", # required
@@ -7132,6 +7641,17 @@ module Aws::DataZone
     #   resp.items[0].asset_item.owning_project_id #=> String
     #   resp.items[0].asset_item.type_identifier #=> String
     #   resp.items[0].asset_item.type_revision #=> String
+    #   resp.items[0].data_product_item.created_at #=> Time
+    #   resp.items[0].data_product_item.created_by #=> String
+    #   resp.items[0].data_product_item.description #=> String
+    #   resp.items[0].data_product_item.domain_id #=> String
+    #   resp.items[0].data_product_item.first_revision_created_at #=> Time
+    #   resp.items[0].data_product_item.first_revision_created_by #=> String
+    #   resp.items[0].data_product_item.glossary_terms #=> Array
+    #   resp.items[0].data_product_item.glossary_terms[0] #=> String
+    #   resp.items[0].data_product_item.id #=> String
+    #   resp.items[0].data_product_item.name #=> String
+    #   resp.items[0].data_product_item.owning_project_id #=> String
     #   resp.items[0].glossary_item.created_at #=> Time
     #   resp.items[0].glossary_item.created_by #=> String
     #   resp.items[0].glossary_item.description #=> String
@@ -7335,6 +7855,26 @@ module Aws::DataZone
     #   resp.items[0].asset_listing.listing_updated_by #=> String
     #   resp.items[0].asset_listing.name #=> String
     #   resp.items[0].asset_listing.owning_project_id #=> String
+    #   resp.items[0].data_product_listing.additional_attributes.forms #=> String
+    #   resp.items[0].data_product_listing.created_at #=> Time
+    #   resp.items[0].data_product_listing.description #=> String
+    #   resp.items[0].data_product_listing.entity_id #=> String
+    #   resp.items[0].data_product_listing.entity_revision #=> String
+    #   resp.items[0].data_product_listing.glossary_terms #=> Array
+    #   resp.items[0].data_product_listing.glossary_terms[0].name #=> String
+    #   resp.items[0].data_product_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].data_product_listing.items #=> Array
+    #   resp.items[0].data_product_listing.items[0].glossary_terms #=> Array
+    #   resp.items[0].data_product_listing.items[0].glossary_terms[0].name #=> String
+    #   resp.items[0].data_product_listing.items[0].glossary_terms[0].short_description #=> String
+    #   resp.items[0].data_product_listing.items[0].listing_id #=> String
+    #   resp.items[0].data_product_listing.items[0].listing_revision #=> String
+    #   resp.items[0].data_product_listing.listing_created_by #=> String
+    #   resp.items[0].data_product_listing.listing_id #=> String
+    #   resp.items[0].data_product_listing.listing_revision #=> String
+    #   resp.items[0].data_product_listing.listing_updated_by #=> String
+    #   resp.items[0].data_product_listing.name #=> String
+    #   resp.items[0].data_product_listing.owning_project_id #=> String
     #   resp.next_token #=> String
     #   resp.total_match_count #=> Integer
     #
@@ -8843,6 +9383,17 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_type #=> String
+    #   resp.subscribed_listings[0].item.product_listing.description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_id #=> String
+    #   resp.subscribed_listings[0].item.product_listing.entity_revision #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms #=> Array
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].name #=> String
+    #   resp.subscribed_listings[0].item.product_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.product_listing.name #=> String
     #   resp.subscribed_listings[0].name #=> String
     #   resp.subscribed_listings[0].owner_project_id #=> String
     #   resp.subscribed_listings[0].owner_project_name #=> String
@@ -9032,7 +9583,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

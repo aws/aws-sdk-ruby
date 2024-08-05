@@ -60,6 +60,8 @@ module Aws::KinesisVideoWebRTCStorage
           case context.operation_name
           when :join_storage_session
             Aws::KinesisVideoWebRTCStorage::Endpoints::JoinStorageSession.build(context)
+          when :join_storage_session_as_viewer
+            Aws::KinesisVideoWebRTCStorage::Endpoints::JoinStorageSessionAsViewer.build(context)
           end
         end
       end

@@ -348,6 +348,30 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The listing of the asset in a data product.
+    #
+    # @!attribute [rw] entity_id
+    #   The entity ID of the listing of the asset in a data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_revision
+    #   The entity revision of the listing of the asset in a data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type of the listing of the asset in a data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetInDataProductListingItem AWS API Documentation
+    #
+    class AssetInDataProductListingItem < Struct.new(
+      :entity_id,
+      :entity_revision,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A Amazon DataZone inventory asset.
     #
     # @!attribute [rw] additional_attributes
@@ -1555,6 +1579,264 @@ module Aws::DataZone
       :updated_at,
       :updated_by)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where the data product is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms_input
+    #   The metadata forms of the data product.
+    #   @return [Array<Types::FormInput>]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] items
+    #   The data assets of the data product.
+    #   @return [Array<Types::DataProductItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_identifier
+    #   The ID of the owning project of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDataProductInput AWS API Documentation
+    #
+    class CreateDataProductInput < Struct.new(
+      :client_token,
+      :description,
+      :domain_identifier,
+      :forms_input,
+      :glossary_terms,
+      :items,
+      :name,
+      :owning_project_identifier)
+      SENSITIVE = [:description, :forms_input, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data product was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the data product lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_revision_created_at
+    #   The timestamp at which the first revision of the data product was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] first_revision_created_by
+    #   The user who created the first revision of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms_output
+    #   The metadata forms of the data product.
+    #   @return [Array<Types::FormOutput>]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The data assets of the data product.
+    #   @return [Array<Types::DataProductItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the owning project of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDataProductOutput AWS API Documentation
+    #
+    class CreateDataProductOutput < Struct.new(
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :first_revision_created_at,
+      :first_revision_created_by,
+      :forms_output,
+      :glossary_terms,
+      :id,
+      :items,
+      :name,
+      :owning_project_id,
+      :revision,
+      :status)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where the data product revision is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms_input
+    #   The metadata forms of the data product revision.
+    #   @return [Array<Types::FormInput>]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product revision.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The data assets of the data product revision.
+    #   @return [Array<Types::DataProductItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the data product revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDataProductRevisionInput AWS API Documentation
+    #
+    class CreateDataProductRevisionInput < Struct.new(
+      :client_token,
+      :description,
+      :domain_identifier,
+      :forms_input,
+      :glossary_terms,
+      :identifier,
+      :items,
+      :name)
+      SENSITIVE = [:description, :forms_input, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data product revision is created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where data product revision is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_revision_created_at
+    #   The timestamp at which the first revision of the data product is
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] first_revision_created_by
+    #   The user who created the first revision of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms_output
+    #   The metadata forms of the data product revision.
+    #   @return [Array<Types::FormOutput>]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product revision.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The data assets of the data product revision.
+    #   @return [Array<Types::DataProductItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the owning project of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data product revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDataProductRevisionOutput AWS API Documentation
+    #
+    class CreateDataProductRevisionOutput < Struct.new(
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :first_revision_created_at,
+      :first_revision_created_by,
+      :forms_output,
+      :glossary_terms,
+      :id,
+      :items,
+      :name,
+      :owning_project_id,
+      :revision,
+      :status)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -3215,6 +3497,262 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The data product.
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_type
+    #   The type of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductItem AWS API Documentation
+    #
+    class DataProductItem < Struct.new(
+      :glossary_terms,
+      :identifier,
+      :item_type,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data product listing.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data product listing was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_product_id
+    #   The ID of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_product_revision
+    #   The revision of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The metadata forms of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product listing.
+    #   @return [Array<Types::DetailedGlossaryTerm>]
+    #
+    # @!attribute [rw] items
+    #   The data assets of the data product listing.
+    #   @return [Array<Types::ListingSummary>]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the owning project of the data product listing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductListing AWS API Documentation
+    #
+    class DataProductListing < Struct.new(
+      :created_at,
+      :data_product_id,
+      :data_product_revision,
+      :forms,
+      :glossary_terms,
+      :items,
+      :owning_project_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The asset of the data product listing.
+    #
+    # @!attribute [rw] additional_attributes
+    #   The additional attributes of the asset of the data product.
+    #   @return [Types::DataProductListingItemAdditionalAttributes]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the asset of the data product listing was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the asset of the asset of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The entity ID of the asset of the asset of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_revision
+    #   The revision of the asset of the asset of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the asset of the asset of the data product.
+    #   @return [Array<Types::DetailedGlossaryTerm>]
+    #
+    # @!attribute [rw] items
+    #   The data of the asset of the data product.
+    #   @return [Array<Types::ListingSummaryItem>]
+    #
+    # @!attribute [rw] listing_created_by
+    #   The timestamp at which the listing was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_id
+    #   The ID of the listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_revision
+    #   The revision of the listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_updated_by
+    #   The user who updated the listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the asset of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the owning project of the asset of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductListingItem AWS API Documentation
+    #
+    class DataProductListingItem < Struct.new(
+      :additional_attributes,
+      :created_at,
+      :description,
+      :entity_id,
+      :entity_revision,
+      :glossary_terms,
+      :items,
+      :listing_created_by,
+      :listing_id,
+      :listing_revision,
+      :listing_updated_by,
+      :name,
+      :owning_project_id)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The additional attributes of the asset of the data product.
+    #
+    # @!attribute [rw] forms
+    #   The metadata forms of the asset of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductListingItemAdditionalAttributes AWS API Documentation
+    #
+    class DataProductListingItemAdditionalAttributes < Struct.new(
+      :forms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data product.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data product was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the data product lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_revision_created_at
+    #   The timestamp at which first revision of the data product was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] first_revision_created_by
+    #   The user who created the first revision of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the owning project of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductResultItem AWS API Documentation
+    #
+    class DataProductResultItem < Struct.new(
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :first_revision_created_at,
+      :first_revision_created_by,
+      :glossary_terms,
+      :id,
+      :name,
+      :owning_project_id)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The data product revision.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data product revision was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the data product revision lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The data product revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DataProductRevision AWS API Documentation
+    #
+    class DataProductRevision < Struct.new(
+      :created_at,
+      :created_by,
+      :domain_id,
+      :id,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the data source.
     #
     # @note DataSourceConfigurationInput is a union - when making an API calls you must set exactly one of the members.
@@ -3562,6 +4100,28 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteAssetTypeOutput AWS API Documentation
     #
     class DeleteAssetTypeOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the data product is
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the data product that is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataProductInput AWS API Documentation
+    #
+    class DeleteDataProductInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataProductOutput AWS API Documentation
+    #
+    class DeleteDataProductOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that is provided to ensure the
@@ -5217,6 +5777,106 @@ module Aws::DataZone
       :updated_at,
       :updated_by)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where the data product lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataProductInput AWS API Documentation
+    #
+    class GetDataProductInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data product is created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the data product lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_revision_created_at
+    #   The timestamp at which the first revision of the data product is
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] first_revision_created_by
+    #   The user who created the first revision of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms_output
+    #   The metadata forms of the data product.
+    #   @return [Array<Types::FormOutput>]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The ID of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The data assets of the data product.
+    #   @return [Array<Types::DataProductItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the owning project of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the data product.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data product.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataProductOutput AWS API Documentation
+    #
+    class GetDataProductOutput < Struct.new(
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :first_revision_created_at,
+      :first_revision_created_by,
+      :forms_output,
+      :glossary_terms,
+      :id,
+      :items,
+      :name,
+      :owning_project_id,
+      :revision,
+      :status)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -7929,6 +8589,68 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the domain of the data product revisions that you want to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the data product revision.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of asset filters to return in a single call to
+    #   `ListDataProductRevisions`. When the number of data product
+    #   revisions to be listed is greater than the value of `MaxResults`,
+    #   the response contains a `NextToken` value that you can use in a
+    #   subsequent call to `ListDataProductRevisions` to list the next set
+    #   of data product revisions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of data product revisions is greater than the
+    #   default value for the `MaxResults` parameter, or if you explicitly
+    #   specify a value for `MaxResults` that is less than the number of
+    #   data product revisions, the response includes a pagination token
+    #   named `NextToken`. You can specify this `NextToken` value in a
+    #   subsequent call to `ListDataProductRevisions` to list the next set
+    #   of data product revisions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDataProductRevisionsInput AWS API Documentation
+    #
+    class ListDataProductRevisionsInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the `ListDataProductRevisions` action.
+    #   @return [Array<Types::DataProductRevision>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of data product revisions is greater than the
+    #   default value for the `MaxResults` parameter, or if you explicitly
+    #   specify a value for `MaxResults` that is less than the number of
+    #   data product revisions, the response includes a pagination token
+    #   named `NextToken`. You can specify this `NextToken` value in a
+    #   subsequent call to `ListDataProductRevisions` to list the next set
+    #   of data product revisions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDataProductRevisionsOutput AWS API Documentation
+    #
+    class ListDataProductRevisionsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
     #   The identifier of the Amazon DataZone domain in which to list data
     #   source run activities.
     #   @return [String]
@@ -8942,6 +9664,10 @@ module Aws::DataZone
     #   grants.
     #   @return [String]
     #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the owning project of the subscription grants.
+    #   @return [String]
+    #
     # @!attribute [rw] sort_by
     #   Specifies the way of sorting the results of this action.
     #   @return [String]
@@ -8969,6 +9695,7 @@ module Aws::DataZone
       :environment_id,
       :max_results,
       :next_token,
+      :owning_project_id,
       :sort_by,
       :sort_order,
       :subscribed_listing_id,
@@ -9042,6 +9769,11 @@ module Aws::DataZone
     #
     # @!attribute [rw] status
     #   Specifies the status of the subscription requests.
+    #
+    #   <note markdown="1"> This is not a required parameter, but if not specified, by default,
+    #   Amazon DataZone returns only `PENDING` subscription requests.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] subscribed_listing_id
@@ -9201,6 +9933,11 @@ module Aws::DataZone
     #
     # @!attribute [rw] status
     #   The status of the subscriptions that you want to list.
+    #
+    #   <note markdown="1"> This is not a required parameter, but if not provided, by default,
+    #   Amazon DataZone returns only `APPROVED` subscriptions.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] subscribed_listing_id
@@ -9366,16 +10103,22 @@ module Aws::DataZone
     #   An asset published in an Amazon DataZone catalog.
     #   @return [Types::AssetListing]
     #
+    # @!attribute [rw] data_product_listing
+    #   The data product listing.
+    #   @return [Types::DataProductListing]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListingItem AWS API Documentation
     #
     class ListingItem < Struct.new(
       :asset_listing,
+      :data_product_listing,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class AssetListing < ListingItem; end
+      class DataProductListing < ListingItem; end
       class Unknown < ListingItem; end
     end
 
@@ -9418,6 +10161,54 @@ module Aws::DataZone
     class ListingRevisionInput < Struct.new(
       :identifier,
       :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the listing of the data product.
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product.
+    #   @return [Array<Types::DetailedGlossaryTerm>]
+    #
+    # @!attribute [rw] listing_id
+    #   The ID of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_revision
+    #   The revision of the data product listing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListingSummary AWS API Documentation
+    #
+    class ListingSummary < Struct.new(
+      :glossary_terms,
+      :listing_id,
+      :listing_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The results of the data product summary.
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product listing.
+    #   @return [Array<Types::DetailedGlossaryTerm>]
+    #
+    # @!attribute [rw] listing_id
+    #   The ID of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] listing_revision
+    #   The revision of the data product listing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListingSummaryItem AWS API Documentation
+    #
+    class ListingSummaryItem < Struct.new(
+      :glossary_terms,
+      :listing_id,
+      :listing_revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10960,6 +11751,10 @@ module Aws::DataZone
     #   The asset item included in the search results.
     #   @return [Types::AssetItem]
     #
+    # @!attribute [rw] data_product_item
+    #   The data product.
+    #   @return [Types::DataProductResultItem]
+    #
     # @!attribute [rw] glossary_item
     #   The glossary item included in the search results.
     #   @return [Types::GlossaryItem]
@@ -10972,6 +11767,7 @@ module Aws::DataZone
     #
     class SearchInventoryResultItem < Struct.new(
       :asset_item,
+      :data_product_item,
       :glossary_item,
       :glossary_term_item,
       :unknown)
@@ -10980,6 +11776,7 @@ module Aws::DataZone
       include Aws::Structure::Union
 
       class AssetItem < SearchInventoryResultItem; end
+      class DataProductItem < SearchInventoryResultItem; end
       class GlossaryItem < SearchInventoryResultItem; end
       class GlossaryTermItem < SearchInventoryResultItem; end
       class Unknown < SearchInventoryResultItem; end
@@ -11104,16 +11901,22 @@ module Aws::DataZone
     #   action.
     #   @return [Types::AssetListingItem]
     #
+    # @!attribute [rw] data_product_listing
+    #   The data product listing.
+    #   @return [Types::DataProductListingItem]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SearchResultItem AWS API Documentation
     #
     class SearchResultItem < Struct.new(
       :asset_listing,
+      :data_product_listing,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class AssetListing < SearchResultItem; end
+      class DataProductListing < SearchResultItem; end
       class Unknown < SearchResultItem; end
     end
 
@@ -11785,16 +12588,22 @@ module Aws::DataZone
     #   The asset for which the subscription grant is created.
     #   @return [Types::SubscribedAssetListing]
     #
+    # @!attribute [rw] product_listing
+    #   The data product listing.
+    #   @return [Types::SubscribedProductListing]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedListingItem AWS API Documentation
     #
     class SubscribedListingItem < Struct.new(
       :asset_listing,
+      :product_listing,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class AssetListing < SubscribedListingItem; end
+      class ProductListing < SubscribedListingItem; end
       class Unknown < SubscribedListingItem; end
     end
 
@@ -11838,6 +12647,45 @@ module Aws::DataZone
 
       class Project < SubscribedPrincipalInput; end
       class Unknown < SubscribedPrincipalInput; end
+    end
+
+    # The data product listing.
+    #
+    # @!attribute [rw] asset_listings
+    #   The data assets of the data product listing.
+    #   @return [Array<Types::AssetInDataProductListingItem>]
+    #
+    # @!attribute [rw] description
+    #   The description of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The ID of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_revision
+    #   The revision of the data product listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] glossary_terms
+    #   The glossary terms of the data product listing.
+    #   @return [Array<Types::DetailedGlossaryTerm>]
+    #
+    # @!attribute [rw] name
+    #   The name of the data product listing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedProductListing AWS API Documentation
+    #
+    class SubscribedProductListing < Struct.new(
+      :asset_listings,
+      :description,
+      :entity_id,
+      :entity_revision,
+      :glossary_terms,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The project that has the subscription grant.
@@ -11906,7 +12754,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] subscription_id
-    #   The ID of the subscription grant.
+    #   The ID of the subscription.
     #   @return [String]
     #
     # @!attribute [rw] subscription_target_id

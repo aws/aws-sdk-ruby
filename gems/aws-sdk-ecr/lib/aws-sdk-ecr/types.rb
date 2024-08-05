@@ -496,7 +496,10 @@ module Aws::ECR
     #
     # @!attribute [rw] custom_role_arn
     #   The ARN of the role to be assumed by Amazon ECR. This role must be
-    #   in the same account as the registry that you are configuring.
+    #   in the same account as the registry that you are configuring. Amazon
+    #   ECR will assume your supplied role when the customRoleArn is
+    #   specified. When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryCreationTemplateRequest AWS API Documentation
@@ -1588,6 +1591,36 @@ module Aws::ECR
       :title,
       :type,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Basic scan type version name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSettingRequest AWS API Documentation
+    #
+    class GetAccountSettingRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Retrieves the basic scan type version name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Retrieves the value that specifies what basic scan type is being
+    #   used: `AWS_NATIVE` or `CLAIR`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSettingResponse AWS API Documentation
+    #
+    class GetAccountSettingResponse < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2927,6 +2960,41 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   Basic scan type version name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Setting value that determines what basic scan type is being used:
+    #   `AWS_NATIVE` or `CLAIR`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutAccountSettingRequest AWS API Documentation
+    #
+    class PutAccountSettingRequest < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Retrieves the the basic scan type version name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Retrieves the basic scan type value, either `AWS_NATIVE` or `-`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutAccountSettingResponse AWS API Documentation
+    #
+    class PutAccountSettingResponse < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to put the image. If you do not
@@ -3520,7 +3588,10 @@ module Aws::ECR
     #   @return [Array<String>]
     #
     # @!attribute [rw] custom_role_arn
-    #   The ARN of the role to be assumed by Amazon ECR.
+    #   The ARN of the role to be assumed by Amazon ECR. Amazon ECR will
+    #   assume your supplied role when the customRoleArn is specified. When
+    #   this field isn't specified, Amazon ECR will use the service-linked
+    #   role for the repository creation template.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -4292,7 +4363,10 @@ module Aws::ECR
     #
     # @!attribute [rw] custom_role_arn
     #   The ARN of the role to be assumed by Amazon ECR. This role must be
-    #   in the same account as the registry that you are configuring.
+    #   in the same account as the registry that you are configuring. Amazon
+    #   ECR will assume your supplied role when the customRoleArn is
+    #   specified. When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdateRepositoryCreationTemplateRequest AWS API Documentation

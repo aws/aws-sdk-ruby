@@ -1036,7 +1036,10 @@ module Aws::ECR
     #
     # @option params [String] :custom_role_arn
     #   The ARN of the role to be assumed by Amazon ECR. This role must be in
-    #   the same account as the registry that you are configuring.
+    #   the same account as the registry that you are configuring. Amazon ECR
+    #   will assume your supplied role when the customRoleArn is specified.
+    #   When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
     #
     # @return [Types::CreateRepositoryCreationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2074,6 +2077,36 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Retrieves the basic scan type version name.
+    #
+    # @option params [required, String] :name
+    #   Basic scan type version name.
+    #
+    # @return [Types::GetAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountSettingResponse#name #name} => String
+    #   * {Types::GetAccountSettingResponse#value #value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_setting({
+    #     name: "AccountSettingName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSetting AWS API Documentation
+    #
+    # @overload get_account_setting(params = {})
+    # @param [Hash] params ({})
+    def get_account_setting(params = {}, options = {})
+      req = build_request(:get_account_setting, params)
+      req.send_request(options)
+    end
+
     # Retrieves an authorization token. An authorization token represents
     # your IAM authentication credentials and can be used to access any
     # Amazon ECR registry that your IAM principal has access to. The
@@ -2607,6 +2640,42 @@ module Aws::ECR
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Allows you to change the basic scan type version by setting the `name`
+    # parameter to either `CLAIR` to `AWS_NATIVE`.
+    #
+    # @option params [required, String] :name
+    #   Basic scan type version name.
+    #
+    # @option params [required, String] :value
+    #   Setting value that determines what basic scan type is being used:
+    #   `AWS_NATIVE` or `CLAIR`.
+    #
+    # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountSettingResponse#name #name} => String
+    #   * {Types::PutAccountSettingResponse#value #value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_setting({
+    #     name: "AccountSettingName", # required
+    #     value: "AccountSettingValue", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutAccountSetting AWS API Documentation
+    #
+    # @overload put_account_setting(params = {})
+    # @param [Hash] params ({})
+    def put_account_setting(params = {}, options = {})
+      req = build_request(:put_account_setting, params)
       req.send_request(options)
     end
 
@@ -3339,7 +3408,10 @@ module Aws::ECR
     #
     # @option params [String] :custom_role_arn
     #   The ARN of the role to be assumed by Amazon ECR. This role must be in
-    #   the same account as the registry that you are configuring.
+    #   the same account as the registry that you are configuring. Amazon ECR
+    #   will assume your supplied role when the customRoleArn is specified.
+    #   When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
     #
     # @return [Types::UpdateRepositoryCreationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3571,7 +3643,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

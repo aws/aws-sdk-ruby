@@ -100,6 +100,8 @@ module Aws::ECR
             Aws::ECR::Endpoints::DescribeRepositories.build(context)
           when :describe_repository_creation_templates
             Aws::ECR::Endpoints::DescribeRepositoryCreationTemplates.build(context)
+          when :get_account_setting
+            Aws::ECR::Endpoints::GetAccountSetting.build(context)
           when :get_authorization_token
             Aws::ECR::Endpoints::GetAuthorizationToken.build(context)
           when :get_download_url_for_layer
@@ -120,6 +122,8 @@ module Aws::ECR
             Aws::ECR::Endpoints::ListImages.build(context)
           when :list_tags_for_resource
             Aws::ECR::Endpoints::ListTagsForResource.build(context)
+          when :put_account_setting
+            Aws::ECR::Endpoints::PutAccountSetting.build(context)
           when :put_image
             Aws::ECR::Endpoints::PutImage.build(context)
           when :put_image_scanning_configuration

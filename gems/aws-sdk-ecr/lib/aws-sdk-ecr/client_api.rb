@@ -13,6 +13,8 @@ module Aws::ECR
 
     include Seahorse::Model
 
+    AccountSettingName = Shapes::StringShape.new(name: 'AccountSettingName')
+    AccountSettingValue = Shapes::StringShape.new(name: 'AccountSettingValue')
     Arch = Shapes::StringShape.new(name: 'Arch')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
@@ -96,6 +98,8 @@ module Aws::ECR
     FindingSeverity = Shapes::StringShape.new(name: 'FindingSeverity')
     FindingSeverityCounts = Shapes::MapShape.new(name: 'FindingSeverityCounts')
     ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
+    GetAccountSettingRequest = Shapes::StructureShape.new(name: 'GetAccountSettingRequest')
+    GetAccountSettingResponse = Shapes::StructureShape.new(name: 'GetAccountSettingResponse')
     GetAuthorizationTokenRegistryIdList = Shapes::ListShape.new(name: 'GetAuthorizationTokenRegistryIdList')
     GetAuthorizationTokenRequest = Shapes::StructureShape.new(name: 'GetAuthorizationTokenRequest')
     GetAuthorizationTokenResponse = Shapes::StructureShape.new(name: 'GetAuthorizationTokenResponse')
@@ -207,6 +211,8 @@ module Aws::ECR
     PullThroughCacheRuleRepositoryPrefix = Shapes::StringShape.new(name: 'PullThroughCacheRuleRepositoryPrefix')
     PullThroughCacheRuleRepositoryPrefixList = Shapes::ListShape.new(name: 'PullThroughCacheRuleRepositoryPrefixList')
     PushTimestamp = Shapes::TimestampShape.new(name: 'PushTimestamp')
+    PutAccountSettingRequest = Shapes::StructureShape.new(name: 'PutAccountSettingRequest')
+    PutAccountSettingResponse = Shapes::StructureShape.new(name: 'PutAccountSettingResponse')
     PutImageRequest = Shapes::StructureShape.new(name: 'PutImageRequest')
     PutImageResponse = Shapes::StructureShape.new(name: 'PutImageResponse')
     PutImageScanningConfigurationRequest = Shapes::StructureShape.new(name: 'PutImageScanningConfigurationRequest')
@@ -638,6 +644,13 @@ module Aws::ECR
     FindingSeverityCounts.key = Shapes::ShapeRef.new(shape: FindingSeverity)
     FindingSeverityCounts.value = Shapes::ShapeRef.new(shape: SeverityCount)
 
+    GetAccountSettingRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountSettingName, required: true, location_name: "name"))
+    GetAccountSettingRequest.struct_class = Types::GetAccountSettingRequest
+
+    GetAccountSettingResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccountSettingName, location_name: "name"))
+    GetAccountSettingResponse.add_member(:value, Shapes::ShapeRef.new(shape: AccountSettingName, location_name: "value"))
+    GetAccountSettingResponse.struct_class = Types::GetAccountSettingResponse
+
     GetAuthorizationTokenRegistryIdList.member = Shapes::ShapeRef.new(shape: RegistryId)
 
     GetAuthorizationTokenRequest.add_member(:registry_ids, Shapes::ShapeRef.new(shape: GetAuthorizationTokenRegistryIdList, deprecated: true, location_name: "registryIds", metadata: {"deprecatedMessage"=>"This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."}))
@@ -933,6 +946,14 @@ module Aws::ECR
     PullThroughCacheRuleNotFoundException.struct_class = Types::PullThroughCacheRuleNotFoundException
 
     PullThroughCacheRuleRepositoryPrefixList.member = Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix)
+
+    PutAccountSettingRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountSettingName, required: true, location_name: "name"))
+    PutAccountSettingRequest.add_member(:value, Shapes::ShapeRef.new(shape: AccountSettingValue, required: true, location_name: "value"))
+    PutAccountSettingRequest.struct_class = Types::PutAccountSettingRequest
+
+    PutAccountSettingResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccountSettingName, location_name: "name"))
+    PutAccountSettingResponse.add_member(:value, Shapes::ShapeRef.new(shape: AccountSettingValue, location_name: "value"))
+    PutAccountSettingResponse.struct_class = Types::PutAccountSettingResponse
 
     PutImageRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutImageRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -1605,6 +1626,17 @@ module Aws::ECR
         )
       end)
 
+      api.add_operation(:get_account_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountSettingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:get_authorization_token, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAuthorizationToken"
         o.http_method = "POST"
@@ -1734,6 +1766,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:put_account_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountSettingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:put_image, Seahorse::Model::Operation.new.tap do |o|

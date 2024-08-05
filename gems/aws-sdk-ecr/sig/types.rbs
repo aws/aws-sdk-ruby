@@ -391,6 +391,17 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class GetAccountSettingRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingResponse
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class GetAuthorizationTokenRequest
       attr_accessor registry_ids: ::Array[::String]
       SENSITIVE: []
@@ -764,6 +775,18 @@ module Aws::ECR
 
     class PullThroughCacheRuleNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingRequest
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingResponse
+      attr_accessor name: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 

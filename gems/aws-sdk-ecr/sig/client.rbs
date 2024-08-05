@@ -411,6 +411,17 @@ module Aws
                                                   ) -> _DescribeRepositoryCreationTemplatesResponseSuccess
                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRepositoryCreationTemplatesResponseSuccess
 
+      interface _GetAccountSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingResponse]
+        def name: () -> ::String
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#get_account_setting-instance_method
+      def get_account_setting: (
+                                 name: ::String
+                               ) -> _GetAccountSettingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingResponseSuccess
+
       interface _GetAuthorizationTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAuthorizationTokenResponse]
         def authorization_data: () -> ::Array[Types::AuthorizationData]
@@ -547,6 +558,18 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutAccountSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSettingResponse]
+        def name: () -> ::String
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#put_account_setting-instance_method
+      def put_account_setting: (
+                                 name: ::String,
+                                 value: ::String
+                               ) -> _PutAccountSettingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSettingResponseSuccess
 
       interface _PutImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutImageResponse]

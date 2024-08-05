@@ -76,6 +76,10 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::CreateAssetRevision.build(context)
           when :create_asset_type
             Aws::DataZone::Endpoints::CreateAssetType.build(context)
+          when :create_data_product
+            Aws::DataZone::Endpoints::CreateDataProduct.build(context)
+          when :create_data_product_revision
+            Aws::DataZone::Endpoints::CreateDataProductRevision.build(context)
           when :create_data_source
             Aws::DataZone::Endpoints::CreateDataSource.build(context)
           when :create_domain
@@ -114,6 +118,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DeleteAssetFilter.build(context)
           when :delete_asset_type
             Aws::DataZone::Endpoints::DeleteAssetType.build(context)
+          when :delete_data_product
+            Aws::DataZone::Endpoints::DeleteDataProduct.build(context)
           when :delete_data_source
             Aws::DataZone::Endpoints::DeleteDataSource.build(context)
           when :delete_domain
@@ -154,6 +160,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetAssetFilter.build(context)
           when :get_asset_type
             Aws::DataZone::Endpoints::GetAssetType.build(context)
+          when :get_data_product
+            Aws::DataZone::Endpoints::GetDataProduct.build(context)
           when :get_data_source
             Aws::DataZone::Endpoints::GetDataSource.build(context)
           when :get_data_source_run
@@ -206,6 +214,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListAssetFilters.build(context)
           when :list_asset_revisions
             Aws::DataZone::Endpoints::ListAssetRevisions.build(context)
+          when :list_data_product_revisions
+            Aws::DataZone::Endpoints::ListDataProductRevisions.build(context)
           when :list_data_source_run_activities
             Aws::DataZone::Endpoints::ListDataSourceRunActivities.build(context)
           when :list_data_source_runs

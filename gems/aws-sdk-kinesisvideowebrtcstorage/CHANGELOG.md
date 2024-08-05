@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-08-05)
+------------------
+
+* Feature - Add JoinStorageSessionAsViewer API
+
 1.18.0 (2024-07-02)
 ------------------
 
