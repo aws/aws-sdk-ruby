@@ -70,7 +70,6 @@ module Aws
     end
 
     # Refreshes credentials from the shared credentials file.
-    # Refreshes credentials from the shared credentials file.
     def refresh
       shared_config = Aws.shared_config
 
@@ -88,13 +87,6 @@ module Aws
 
       # Set expiration time if credentials are present
       @expiration = @credentials ? (Time.now + @refresh_interval) : nil
-    end
-
-    # For testing purposes to check the refresh logic
-    # This method triggers the internal refresh logic as if the credentials
-    # were near expiration.
-    def force_refresh_check
-      refresh_if_near_expiration! if @enable_refresh
     end
 
     private

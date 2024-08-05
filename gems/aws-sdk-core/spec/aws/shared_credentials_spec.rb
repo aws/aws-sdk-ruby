@@ -146,10 +146,10 @@ module Aws
       initial_access_key = creds.credentials.access_key_id
       allow(creds).to receive(:refresh).and_call_original
 
-      # Simulate time passing to near expiration
-      sleep(refresh_interval + 1)
+      # Mock expiration logic by setting expiration time in the past
+      allow(creds).to receive(:near_expiration?).and_return(true)
 
-      creds.force_refresh_check
+      creds.refresh!
       refreshed_access_key = creds.credentials.access_key_id
       expect(creds).to have_received(:refresh).at_least(:once)
       expect(refreshed_access_key).to eq('ACCESS_KEY_0')
@@ -167,7 +167,10 @@ module Aws
 
       sleep(2)
 
-      creds.force_refresh_check
+      # Mock expiration logic by ensuring it's not near expiration
+      allow(creds).to receive(:near_expiration?).and_return(false)
+
+      creds.refresh!
 
       # Check credentials to ensure they are not refreshed
       refreshed_access_key = creds.credentials.access_key_id
