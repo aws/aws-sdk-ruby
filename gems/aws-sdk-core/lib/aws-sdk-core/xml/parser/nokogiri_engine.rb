@@ -12,7 +12,10 @@ module Aws
         end
 
         def parse(xml)
-          Nokogiri::XML::SAX::Parser.new(self).parse(xml)
+          p = Nokogiri::XML::SAX::Parser.new(self)
+          p.parse(xml) do |ctx|
+            ctx.recovery = true
+          end
         end
 
         def xmldecl(*args); end

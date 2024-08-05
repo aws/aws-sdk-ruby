@@ -8,20 +8,14 @@ module Aws
     describe Parser do
       [:ox, :oga, :nokogiri, :libxml, :rexml].each do |engine|
         describe("ENGINE: #{engine}") do
-
-          begin
-            Parser.engine = engine
-          rescue LoadError
-            next
-          end
-
           let(:shapes) { ApiHelper.sample_shapes }
 
-          let(:parser) {
+          let(:parser) do
             api = ApiHelper.sample_api(shapes:shapes)
             rules = api.operation(:example_operation).output
+            Parser.engine = engine
             Parser.new(rules)
-          }
+          end
 
           def parse(xml, to_h = true)
             data = parser.parse(xml)
@@ -408,6 +402,11 @@ module Aws
               </xml>
               XML
               expect(parse(xml)).to eq(string: 'a', nested: { string: 'b' })
+            end
+
+            it 'handles boundary characters' do
+              xml = "<xml><String>foo\bbar</String></xml>"
+              expect(parse(xml)).to eq(string: "foo\bbar")
             end
 
           end
