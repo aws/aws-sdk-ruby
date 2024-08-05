@@ -55,7 +55,10 @@ module Aws
     attr_reader :profile_name
 
     # @return [Credentials] The loaded credentials
-    attr_reader :credentials
+    def credentials
+      refresh_if_necessary
+      @credentials
+    end
 
     # @api private
     def inspect
@@ -90,7 +93,7 @@ module Aws
     private
 
     def refresh_if_necessary
-      refresh! if @enable_refresh && near_expiration?
+      refresh! if @enable_refresh && near_expiration?(@refresh_interval)
     end
 
     def sync_expiration_length
