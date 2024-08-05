@@ -70,6 +70,7 @@ module Aws
     end
 
     # Refreshes credentials from the shared credentials file.
+    # Refreshes credentials from the shared credentials file.
     def refresh
       shared_config = Aws.shared_config
 
@@ -85,20 +86,8 @@ module Aws
         @credentials = config.credentials(profile: @profile_name)
       end
 
-      if @credentials && @credentials.set?
-        # Credentials successfully loaded and set
-        @access_key_id = @credentials.access_key_id
-        @secret_access_key = @credentials.secret_access_key
-        @session_token = @credentials.session_token
-        @expiration = Time.now + @refresh_interval
-      else
-        # Incomplete or missing credentials
-        @credentials = nil
-        @access_key_id = nil
-        @secret_access_key = nil
-        @session_token = nil
-        @expiration = nil
-      end
+      # Set expiration time if credentials are present
+      @expiration = @credentials ? (Time.now + @refresh_interval) : nil
     end
 
     # For testing purposes to check the refresh logic
