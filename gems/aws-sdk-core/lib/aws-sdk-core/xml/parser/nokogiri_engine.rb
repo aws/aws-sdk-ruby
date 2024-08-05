@@ -41,7 +41,8 @@ module Aws
         end
 
         def error(msg)
-          if msg =~ /PCDATA invalid Char value (\d+)/
+          if msg =~ /PCDATA invalid Char value (\d+)/ ||
+             msg =~ /An invalid XML character \(Unicode: 0x([0-9a-fA-F]+)\)/ # jruby
             @stack.text([Regexp.last_match(1).to_i].pack('U*'))
           else
             @stack.error(msg)
