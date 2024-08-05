@@ -45,9 +45,7 @@ module Aws
       @path = options[:path] || Aws.shared_config.credentials_path
       @profile_name = options[:profile_name] || ENV['AWS_PROFILE'] || Aws.shared_config.profile_name
 
-      super(options) # This will call RefreshingCredentials#initialize
-
-      refresh # Initially load credentials
+      super(options)
     end
 
     # @return [String] The path to the credentials file
@@ -90,10 +88,6 @@ module Aws
     end
 
     private
-
-    def refresh_if_necessary
-      refresh! if @enable_refresh && near_expiration?
-    end
 
     def sync_expiration_length
       @refresh_interval || self.class::SYNC_EXPIRATION_LENGTH
