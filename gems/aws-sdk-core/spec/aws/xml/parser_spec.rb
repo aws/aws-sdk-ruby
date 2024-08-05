@@ -8,12 +8,17 @@ module Aws
     describe Parser do
       [:ox, :oga, :nokogiri, :libxml, :rexml].each do |engine|
         describe("ENGINE: #{engine}") do
+          before(:all) do
+            Parser.engine = engine
+          rescue LoadError
+            skip "Skipping tests for missing engine: #{engine}"
+          end
+
           let(:shapes) { ApiHelper.sample_shapes }
 
           let(:parser) do
             api = ApiHelper.sample_api(shapes:shapes)
             rules = api.operation(:example_operation).output
-            Parser.engine = engine
             Parser.new(rules)
           end
 
