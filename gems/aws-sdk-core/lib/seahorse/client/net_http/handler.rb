@@ -23,16 +23,11 @@ module Seahorse
 
         NETWORK_ERRORS = [
           SocketError, EOFError, IOError, Timeout::Error,
-          Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
-          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
-          Errno::EHOSTUNREACH, Errno::ECONNREFUSED,
+          Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE, Errno::EINVAL,
+          Errno::ETIMEDOUT, Errno::EHOSTUNREACH, Errno::ECONNREFUSED,
+          OpenSSL::SSL::SSLError, OpenSSL::SSL::SSLErrorWaitReadable,
           Net::HTTPFatalError # for proxy connection failures
         ]
-
-        # does not exist in Ruby 1.9.3
-        if OpenSSL::SSL.const_defined?(:SSLErrorWaitReadable)
-          NETWORK_ERRORS << OpenSSL::SSL::SSLErrorWaitReadable
-        end
 
         # @api private
         DNS_ERROR_MESSAGES = [
