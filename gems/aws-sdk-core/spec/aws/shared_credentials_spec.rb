@@ -142,8 +142,6 @@ module Aws
       refresh_interval = 2 # Short interval for testing
       creds = SharedCredentials.new(path: mock_credential_file, refresh_interval: refresh_interval,
                                     enable_refresh: true)
-
-      initial_access_key = creds.credentials.access_key_id
       allow(creds).to receive(:refresh).and_call_original
 
       # Mock expiration logic by setting expiration time in the past
@@ -165,8 +163,6 @@ module Aws
       # Check credentials before expiration
       initial_access_key = creds.credentials.access_key_id
 
-      sleep(2)
-
       # Mock expiration logic by ensuring it's not near expiration
       allow(creds).to receive(:near_expiration?).and_return(false)
 
@@ -177,6 +173,20 @@ module Aws
 
       expect(creds).to have_received(:refresh).once  # Ensure refresh was called only once (during initialization)
       expect(initial_access_key).to eq(refreshed_access_key)
+    end
+
+    it 'does not refresh credentials when enable_refresh is false' do
+      refresh_interval = 2
+      creds = SharedCredentials.new(path: mock_credential_file, refresh_interval: refresh_interval,
+                                    enable_refresh: false)
+
+      allow(creds).to receive(:refresh).and_call_original
+
+      # Mock expiration logic by setting expiration time in the past
+      allow(creds).to receive(:near_expiration?).and_return(true)
+
+      creds.refresh!
+      expect(creds).to have_received(:refresh).once  # Ensure refresh was called only once (during initialization)
     end
   end
 end
