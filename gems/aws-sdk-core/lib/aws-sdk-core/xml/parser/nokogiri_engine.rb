@@ -12,8 +12,8 @@ module Aws
         end
 
         def parse(xml)
-          p = Nokogiri::XML::SAX::Parser.new(self)
-          p.parse(xml) do |ctx|
+          parser = Nokogiri::XML::SAX::Parser.new(self)
+          parser.parse(xml) do |ctx|
             ctx.recovery = true
           end
         end
@@ -41,7 +41,11 @@ module Aws
         end
 
         def error(msg)
-          @stack.error(msg)
+          if msg =~ /PCDATA invalid Char value (\d+)/
+            @stack.text([Regexp.last_match(1).to_i].pack('U*'))
+          else
+            @stack.error(msg)
+          end
         end
 
       end
