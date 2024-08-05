@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Support parsing not well-formed text characters with the Nokogiri parser.
+
 3.201.3 (2024-07-23)
 ------------------
 
