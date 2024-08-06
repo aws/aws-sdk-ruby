@@ -29,7 +29,7 @@ module Aws
       # * `:retry`   - The waiter may be retried.
       # * `:error`   - The waiter encountered an un-expected error.
       #
-      # @example A trival (bad) example of a waiter that polls indefinetly.
+      # @example A trivial (bad) example of a waiter that polls indefinetly.
       #
       #   loop do
       #
