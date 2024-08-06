@@ -1,16 +1,8 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2016-03-11",
     "endpointPrefix":"restjson",
-    "jsonVersion":"1.1",
-    "protocol":"rest-json",
-    "serviceAbbreviation":"RestJsonProtocolTests",
-    "serviceFullName":"AWS DR Tools Rest JSON Protocol Tests",
-    "serviceId":"RestJsonWithWaiters",
-    "signatureVersion":"v4",
-    "targetPrefix":"ProtocolTestsService",
-    "uid":"restjson-2016-03-11"
+    "protocol":"rest-json"
   },
   "operations": {
     "WaiterOperation": {
@@ -38,11 +30,6 @@
         "TableList":{"shape":"TableList"}
       }
     },
-    "TableArn":{
-      "type":"string",
-      "max":1024,
-      "min":1
-    },
     "TableDescription":{
       "type":"structure",
       "members":{
@@ -54,11 +41,8 @@
       "enum":[
         "CREATING",
         "UPDATING",
-        "DELETING",
         "ACTIVE",
-        "FAILED",
-        "ARCHIVING",
-        "ARCHIVED"
+        "FAILED"
       ]
     },
     "TableList":{
