@@ -32,6 +32,7 @@ module Aws::ElasticLoadBalancingV2
   # * {AvailabilityZoneNotSupportedException}
   # * {CaCertificatesBundleNotFoundException}
   # * {CertificateNotFoundException}
+  # * {DeleteAssociationSameAccountException}
   # * {DuplicateListenerException}
   # * {DuplicateLoadBalancerNameException}
   # * {DuplicateTagKeysException}
@@ -52,6 +53,7 @@ module Aws::ElasticLoadBalancingV2
   # * {OperationNotPermittedException}
   # * {PriorityInUseException}
   # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
   # * {RevocationContentNotFoundException}
   # * {RevocationIdNotFoundException}
   # * {RuleNotFoundException}
@@ -71,6 +73,7 @@ module Aws::ElasticLoadBalancingV2
   # * {TooManyTrustStoreRevocationEntriesException}
   # * {TooManyTrustStoresException}
   # * {TooManyUniqueTargetGroupsPerLoadBalancerException}
+  # * {TrustStoreAssociationNotFoundException}
   # * {TrustStoreInUseException}
   # * {TrustStoreNotFoundException}
   # * {TrustStoreNotReadyException}
@@ -127,6 +130,16 @@ module Aws::ElasticLoadBalancingV2
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElasticLoadBalancingV2::Types::CertificateNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DeleteAssociationSameAccountException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElasticLoadBalancingV2::Types::DeleteAssociationSameAccountException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -332,6 +345,16 @@ module Aws::ElasticLoadBalancingV2
       end
     end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElasticLoadBalancingV2::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class RevocationContentNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -517,6 +540,16 @@ module Aws::ElasticLoadBalancingV2
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElasticLoadBalancingV2::Types::TooManyUniqueTargetGroupsPerLoadBalancerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TrustStoreAssociationNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElasticLoadBalancingV2::Types::TrustStoreAssociationNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

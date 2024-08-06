@@ -612,12 +612,16 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BlueGreenDeployment AWS API Documentation
@@ -1184,12 +1188,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroupMessage AWS API Documentation
@@ -1352,12 +1360,16 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] source_region
@@ -1431,12 +1443,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroupMessage AWS API Documentation
@@ -1538,12 +1554,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] copy_tags
@@ -1719,12 +1739,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroupMessage AWS API Documentation
@@ -1973,12 +1997,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] source_custom_db_engine_version_identifier
@@ -4861,12 +4889,16 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -5646,12 +5678,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyEndpointRequest AWS API Documentation
@@ -5852,6 +5888,11 @@ module Aws::RDS
     #   (ACUs).
     #   @return [Float]
     #
+    # @!attribute [rw] min_acu
+    #   The minimum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
     # @!attribute [rw] publicly_accessible
     #   Specifies whether the DB shard group is publicly accessible.
     #
@@ -5896,6 +5937,7 @@ module Aws::RDS
       :db_cluster_identifier,
       :compute_redundancy,
       :max_acu,
+      :min_acu,
       :publicly_accessible)
       SENSITIVE = []
       include Aws::Structure
@@ -5929,12 +5971,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshotMessage AWS API Documentation
@@ -6104,12 +6150,16 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscriptionMessage AWS API Documentation
@@ -6316,12 +6366,16 @@ module Aws::RDS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] data_filter
@@ -6484,12 +6538,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateTenantDatabaseMessage AWS API Documentation
@@ -6913,12 +6971,16 @@ module Aws::RDS
     #   @return [Array<Types::DomainMembership>]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] global_write_forwarding_status
@@ -8037,12 +8099,16 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] db_system_id
@@ -8373,12 +8439,16 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] supports_babelfish
@@ -8915,12 +8985,16 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] db_instance_automated_backups_replications
@@ -10464,6 +10538,11 @@ module Aws::RDS
     #   (ACUs).
     #   @return [Float]
     #
+    # @!attribute [rw] min_acu
+    #   The minimum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
     # @!attribute [rw] compute_redundancy
     #   Specifies whether to create standby instances for the DB shard
     #   group. Valid values are the following:
@@ -10514,6 +10593,7 @@ module Aws::RDS
       :db_shard_group_identifier,
       :db_cluster_identifier,
       :max_acu,
+      :min_acu,
       :compute_redundancy,
       :status,
       :publicly_accessible,
@@ -10674,12 +10754,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] original_snapshot_create_time
@@ -10917,12 +11001,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotTenantDatabase AWS API Documentation
@@ -11236,14 +11324,14 @@ module Aws::RDS
     #
     # @!attribute [rw] skip_final_snapshot
     #   Specifies whether to skip the creation of a final DB cluster
-    #   snapshot before the DB cluster is deleted. If skip is specified, no
-    #   DB cluster snapshot is created. If skip isn't specified, a DB
-    #   cluster snapshot is created before the DB cluster is deleted. By
-    #   default, skip isn't specified, and the DB cluster snapshot is
-    #   created. By default, this parameter is disabled.
+    #   snapshot before RDS deletes the DB cluster. If you set this value to
+    #   `true`, RDS doesn't create a final DB cluster snapshot. If you set
+    #   this value to `false` or don't specify it, RDS creates a DB cluster
+    #   snapshot before it deletes the DB cluster. By default, this
+    #   parameter is disabled, so RDS creates a final DB cluster snapshot.
     #
-    #   <note markdown="1"> You must specify a `FinalDBSnapshotIdentifier` parameter if
-    #   `SkipFinalSnapshot` is disabled.
+    #   <note markdown="1"> If `SkipFinalSnapshot` is disabled, you must specify a value for the
+    #   `FinalDBSnapshotIdentifier` parameter.
     #
     #    </note>
     #   @return [Boolean]
@@ -11252,9 +11340,9 @@ module Aws::RDS
     #   The DB cluster snapshot identifier of the new DB cluster snapshot
     #   created when `SkipFinalSnapshot` is disabled.
     #
-    #   <note markdown="1"> Specifying this parameter and also skipping the creation of a final
-    #   DB cluster snapshot with the `SkipFinalShapshot` parameter results
-    #   in an error.
+    #   <note markdown="1"> If you specify this parameter and also skip the creation of a final
+    #   DB cluster snapshot with the `SkipFinalShapshot` parameter, the
+    #   request results in an error.
     #
     #    </note>
     #
@@ -11272,16 +11360,6 @@ module Aws::RDS
     #   DB cluster is deleted. This parameter isn't case-sensitive. The
     #   default is to remove automated backups immediately after the DB
     #   cluster is deleted.
-    #
-    #   <note markdown="1"> You must delete automated backups for Amazon RDS Multi-AZ DB
-    #   clusters. For more information about managing automated backups for
-    #   RDS Multi-AZ DB clusters, see [Managing automated backups][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ManagingAutomatedBackups.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage AWS API Documentation
@@ -12245,7 +12323,7 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `user`
+    #   * `customer`
     #
     #   * `engine`
     #
@@ -16217,12 +16295,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] create_time
@@ -19422,11 +19504,17 @@ module Aws::RDS
     #   (ACUs).
     #   @return [Float]
     #
+    # @!attribute [rw] min_acu
+    #   The minimum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBShardGroupMessage AWS API Documentation
     #
     class ModifyDBShardGroupMessage < Struct.new(
       :db_shard_group_identifier,
-      :max_acu)
+      :max_acu,
+      :min_acu)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19998,7 +20086,7 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # A list of all available options
+    # A list of all available options for an option group.
     #
     # @!attribute [rw] option_name
     #   The configuration of options to include in a group.
@@ -20013,13 +20101,11 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_security_group_memberships
-    #   A list of DBSecurityGroupMembership name strings used for this
-    #   option.
+    #   A list of DB security groups used for this option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_security_group_memberships
-    #   A list of VpcSecurityGroupMembership name strings used for this
-    #   option.
+    #   A list of VPC security group names used for this option.
     #   @return [Array<String>]
     #
     # @!attribute [rw] option_settings
@@ -21416,12 +21502,16 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOfferingMessage AWS API Documentation
@@ -22463,12 +22553,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] storage_encrypted
@@ -23496,12 +23590,16 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
@@ -24152,12 +24250,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] storage_type
@@ -25560,12 +25662,16 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] storage_type
@@ -27252,9 +27358,9 @@ module Aws::RDS
     # Metadata assigned to an Amazon RDS resource consisting of a key-value
     # pair.
     #
-    # For more information, see [Tagging Amazon RDS Resources][1] in the
+    # For more information, see [Tagging Amazon RDS resources][1] in the
     # *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
-    # Resources][2] in the *Amazon Aurora User Guide*.
+    # resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -27385,12 +27491,16 @@ module Aws::RDS
     #   @return [Types::TenantDatabasePendingModifiedValues]
     #
     # @!attribute [rw] tag_list
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabase AWS API Documentation

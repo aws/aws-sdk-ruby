@@ -47,6 +47,8 @@ module Aws
         @caching = options.delete(:caching) != false
         @s3_control_clients = {}
         @bucket_region_cache = Aws::S3.bucket_region_cache
+        @head_bucket_mutex = Mutex.new
+        @head_bucket_call = false
         return unless @caching
 
         @credentials_cache = Aws::S3.access_grants_credentials_cache
@@ -195,9 +197,16 @@ module Aws
       end
 
       def new_bucket_region_for(bucket)
-        @s3_client.head_bucket(bucket: bucket).bucket_region
-      rescue Aws::S3::Errors::Http301Error => e
-        e.data.region
+        @head_bucket_mutex.synchronize do
+          begin
+            @head_bucket_call = true
+            @s3_client.head_bucket(bucket: bucket).bucket_region
+          rescue Aws::S3::Errors::Http301Error => e
+            e.data.region
+          ensure
+            @head_bucket_call = false
+          end
+        end
       end
 
       # returns the account id for the configured credentials

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2024-08-01)
+------------------
+
+* Feature - This release adds support for Amazon EMR Serverless applications in SageMaker Studio for running data processing jobs.
+
 1.254.0 (2024-07-18)
 ------------------
 

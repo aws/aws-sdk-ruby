@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-07-30)
+------------------
+
+* Feature - AWS CodePipeline V2 type pipelines now support stage level conditions to enable development teams to safely release changes that meet quality and compliance requirements.
+
 1.77.0 (2024-07-02)
 ------------------
 

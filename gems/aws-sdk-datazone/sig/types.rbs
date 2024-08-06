@@ -105,6 +105,13 @@ module Aws::DataZone
       SENSITIVE: [:description, :name]
     end
 
+    class AssetInDataProductListingItem
+      attr_accessor entity_id: ::String
+      attr_accessor entity_revision: ::String
+      attr_accessor entity_type: ::String
+      SENSITIVE: []
+    end
+
     class AssetItem
       attr_accessor additional_attributes: Types::AssetItemAdditionalAttributes
       attr_accessor created_at: ::Time
@@ -404,6 +411,66 @@ module Aws::DataZone
       SENSITIVE: [:description]
     end
 
+    class CreateDataProductInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor forms_input: ::Array[Types::FormInput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor items: ::Array[Types::DataProductItem]
+      attr_accessor name: ::String
+      attr_accessor owning_project_identifier: ::String
+      SENSITIVE: [:description, :forms_input, :name]
+    end
+
+    class CreateDataProductOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor items: ::Array[Types::DataProductItem]
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor status: ("CREATED" | "CREATING" | "CREATE_FAILED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateDataProductRevisionInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor forms_input: ::Array[Types::FormInput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor identifier: ::String
+      attr_accessor items: ::Array[Types::DataProductItem]
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :forms_input, :name]
+    end
+
+    class CreateDataProductRevisionOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor items: ::Array[Types::DataProductItem]
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor status: ("CREATED" | "CREATING" | "CREATE_FAILED")
+      SENSITIVE: [:description, :name]
+    end
+
     class CreateDataSourceInput
       attr_accessor asset_forms_input: ::Array[Types::FormInput]
       attr_accessor client_token: ::String
@@ -642,7 +709,7 @@ module Aws::DataZone
       attr_accessor domain_identifier: ::String
       attr_accessor entity_identifier: ::String
       attr_accessor entity_revision: ::String
-      attr_accessor entity_type: ("ASSET")
+      attr_accessor entity_type: ("ASSET" | "DATA_PRODUCT")
       SENSITIVE: []
     end
 
@@ -796,6 +863,70 @@ module Aws::DataZone
       SENSITIVE: [:description]
     end
 
+    class DataProductItem
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor identifier: ::String
+      attr_accessor item_type: ("ASSET")
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class DataProductListing
+      attr_accessor created_at: ::Time
+      attr_accessor data_product_id: ::String
+      attr_accessor data_product_revision: ::String
+      attr_accessor forms: ::String
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor items: ::Array[Types::ListingSummary]
+      attr_accessor owning_project_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataProductListingItem
+      attr_accessor additional_attributes: Types::DataProductListingItemAdditionalAttributes
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_revision: ::String
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor items: ::Array[Types::ListingSummaryItem]
+      attr_accessor listing_created_by: ::String
+      attr_accessor listing_id: ::String
+      attr_accessor listing_revision: ::String
+      attr_accessor listing_updated_by: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class DataProductListingItemAdditionalAttributes
+      attr_accessor forms: ::String
+      SENSITIVE: []
+    end
+
+    class DataProductResultItem
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class DataProductRevision
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
     class DataSourceConfigurationInput
       attr_accessor glue_run_configuration: Types::GlueRunConfigurationInput
       attr_accessor redshift_run_configuration: Types::RedshiftRunConfigurationInput
@@ -900,6 +1031,15 @@ module Aws::DataZone
     end
 
     class DeleteAssetTypeOutput < Aws::EmptyStructure
+    end
+
+    class DeleteDataProductInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataProductOutput < Aws::EmptyStructure
     end
 
     class DeleteDataSourceInput
@@ -1360,6 +1500,31 @@ module Aws::DataZone
       SENSITIVE: [:description]
     end
 
+    class GetDataProductInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataProductOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor first_revision_created_at: ::Time
+      attr_accessor first_revision_created_by: ::String
+      attr_accessor forms_output: ::Array[Types::FormOutput]
+      attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor items: ::Array[Types::DataProductItem]
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor revision: ::String
+      attr_accessor status: ("CREATED" | "CREATING" | "CREATE_FAILED")
+      SENSITIVE: [:description, :name]
+    end
+
     class GetDataSourceInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -1490,6 +1655,20 @@ module Aws::DataZone
       attr_accessor updated_at: ::Time
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       SENSITIVE: [:description]
+    end
+
+    class GetEnvironmentCredentialsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentCredentialsOutput
+      attr_accessor access_key_id: ::String
+      attr_accessor expiration: ::Time
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      SENSITIVE: []
     end
 
     class GetEnvironmentInput
@@ -2063,6 +2242,20 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ListDataProductRevisionsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataProductRevisionsOutput
+      attr_accessor items: ::Array[Types::DataProductRevision]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDataSourceRunActivitiesInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -2293,6 +2486,7 @@ module Aws::DataZone
       attr_accessor environment_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor owning_project_id: ::String
       attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor subscribed_listing_id: ::String
@@ -2392,10 +2586,13 @@ module Aws::DataZone
 
     class ListingItem
       attr_accessor asset_listing: Types::AssetListing
+      attr_accessor data_product_listing: Types::DataProductListing
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AssetListing < ListingItem
+      end
+      class DataProductListing < ListingItem
       end
       class Unknown < ListingItem
       end
@@ -2410,6 +2607,20 @@ module Aws::DataZone
     class ListingRevisionInput
       attr_accessor identifier: ::String
       attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class ListingSummary
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor listing_id: ::String
+      attr_accessor listing_revision: ::String
+      SENSITIVE: []
+    end
+
+    class ListingSummaryItem
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor listing_id: ::String
+      attr_accessor listing_revision: ::String
       SENSITIVE: []
     end
 
@@ -2875,7 +3086,7 @@ module Aws::DataZone
       attr_accessor next_token: ::String
       attr_accessor owning_project_identifier: ::String
       attr_accessor search_in: ::Array[Types::SearchInItem]
-      attr_accessor search_scope: ("ASSET" | "GLOSSARY" | "GLOSSARY_TERM")
+      attr_accessor search_scope: ("ASSET" | "GLOSSARY" | "GLOSSARY_TERM" | "DATA_PRODUCT")
       attr_accessor search_text: ::String
       attr_accessor sort: Types::SearchSort
       SENSITIVE: []
@@ -2883,12 +3094,15 @@ module Aws::DataZone
 
     class SearchInventoryResultItem
       attr_accessor asset_item: Types::AssetItem
+      attr_accessor data_product_item: Types::DataProductResultItem
       attr_accessor glossary_item: Types::GlossaryItem
       attr_accessor glossary_term_item: Types::GlossaryTermItem
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AssetItem < SearchInventoryResultItem
+      end
+      class DataProductItem < SearchInventoryResultItem
       end
       class GlossaryItem < SearchInventoryResultItem
       end
@@ -2926,10 +3140,13 @@ module Aws::DataZone
 
     class SearchResultItem
       attr_accessor asset_listing: Types::AssetListingItem
+      attr_accessor data_product_listing: Types::DataProductListingItem
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AssetListing < SearchResultItem
+      end
+      class DataProductListing < SearchResultItem
       end
       class Unknown < SearchResultItem
       end
@@ -3115,10 +3332,13 @@ module Aws::DataZone
 
     class SubscribedListingItem
       attr_accessor asset_listing: Types::SubscribedAssetListing
+      attr_accessor product_listing: Types::SubscribedProductListing
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AssetListing < SubscribedListingItem
+      end
+      class ProductListing < SubscribedListingItem
       end
       class Unknown < SubscribedListingItem
       end
@@ -3144,6 +3364,16 @@ module Aws::DataZone
       end
       class Unknown < SubscribedPrincipalInput
       end
+    end
+
+    class SubscribedProductListing
+      attr_accessor asset_listings: ::Array[Types::AssetInDataProductListingItem]
+      attr_accessor description: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_revision: ::String
+      attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor name: ::String
+      SENSITIVE: []
     end
 
     class SubscribedProject

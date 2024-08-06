@@ -168,6 +168,7 @@ module Aws
         def service: () -> Types::Service
         def start_time: () -> ::Time
         def end_time: () -> ::Time
+        def log_group_references: () -> ::Array[::Hash[::String, ::String]]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#get_service-instance_method
       def get_service: (

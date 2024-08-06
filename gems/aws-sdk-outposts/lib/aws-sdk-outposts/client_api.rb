@@ -219,6 +219,7 @@ module Aws::Outposts
     UpdateSiteRackPhysicalPropertiesOutput = Shapes::StructureShape.new(name: 'UpdateSiteRackPhysicalPropertiesOutput')
     UplinkCount = Shapes::StringShape.new(name: 'UplinkCount')
     UplinkGbps = Shapes::StringShape.new(name: 'UplinkGbps')
+    VCPUCount = Shapes::IntegerShape.new(name: 'VCPUCount')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WireGuardPublicKey = Shapes::StringShape.new(name: 'WireGuardPublicKey')
     outpostListDefinition = Shapes::ListShape.new(name: 'outpostListDefinition')
@@ -459,6 +460,7 @@ module Aws::Outposts
     InstanceTypeCapacity.struct_class = Types::InstanceTypeCapacity
 
     InstanceTypeItem.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
+    InstanceTypeItem.add_member(:vcp_us, Shapes::ShapeRef.new(shape: VCPUCount, location_name: "VCPUs"))
     InstanceTypeItem.struct_class = Types::InstanceTypeItem
 
     InstanceTypeListDefinition.member = Shapes::ShapeRef.new(shape: InstanceTypeItem)

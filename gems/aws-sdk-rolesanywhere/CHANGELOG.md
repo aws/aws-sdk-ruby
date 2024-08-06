@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-07-30)
+------------------
+
+* Feature - IAM RolesAnywhere now supports custom role session name on the CreateSession. This release adds the acceptRoleSessionName option to a profile to control whether a role session name will be accepted in a session request with a given profile.
+
 1.22.0 (2024-07-18)
 ------------------
 

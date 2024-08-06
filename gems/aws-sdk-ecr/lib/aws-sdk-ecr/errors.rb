@@ -56,6 +56,8 @@ module Aws::ECR
   # * {ScanNotFoundException}
   # * {SecretNotFoundException}
   # * {ServerException}
+  # * {TemplateAlreadyExistsException}
+  # * {TemplateNotFoundException}
   # * {TooManyTagsException}
   # * {UnableToAccessSecretException}
   # * {UnableToDecryptSecretValueException}
@@ -522,6 +524,36 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::ServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TemplateAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::TemplateAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TemplateNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::TemplateNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

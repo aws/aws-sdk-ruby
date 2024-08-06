@@ -108,6 +108,58 @@ module Aws
           expect(provider.s3_client).to be_nil
         end
       end
+
+      context 'delete_objects' do
+        it 'key with no common ancestor' do
+          keys = %w[A/log.txt B/log.txt C/log.txt]
+          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+            .to receive(:access_grants_credentials_for)
+            .with(bucket: 'bucket', key: '', permission: 'WRITE', prefix: nil)
+          delete = { objects: keys.map { |key| { key: key } } }
+          client.delete_objects(bucket: 'bucket', delete: delete)
+        end
+
+        it 'key with root common ancestor' do
+          keys = %w[A/A/log.txt A/B/log.txt A/C/log.txt]
+          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+            .to receive(:access_grants_credentials_for)
+            .with(bucket: 'bucket', key: 'A/', permission: 'WRITE', prefix: nil)
+          delete = { objects: keys.map { |key| { key: key } } }
+          client.delete_objects(bucket: 'bucket', delete: delete)
+        end
+
+        it 'key with level next to root common ancestor' do
+          keys = %w[A/path12/log.txt A/path34/B/log.txt A/path56/C/log.txt]
+          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+            .to receive(:access_grants_credentials_for)
+            .with(bucket: 'bucket', key: 'A/path', permission: 'WRITE', prefix: nil)
+          delete = { objects: keys.map { |key| { key: key } } }
+          client.delete_objects(bucket: 'bucket', delete: delete)
+        end
+      end
+
+      context 'copy_source' do
+        it 'key with no common ancestor' do
+          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+            .to receive(:access_grants_credentials_for)
+            .with(bucket: 'bucket', key: '', permission: 'READWRITE', prefix: nil)
+          client.copy_object(bucket: 'bucket', key: 'A/log.txt', copy_source: 'bucket/B/log.txt')
+        end
+
+        it 'key with root common ancestor' do
+          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+            .to receive(:access_grants_credentials_for)
+            .with(bucket: 'bucket', key: 'A/', permission: 'READWRITE', prefix: nil)
+          client.copy_object(bucket: 'bucket', key: 'A/A/log.txt', copy_source: 'bucket/A/B/log.txt')
+        end
+
+        it 'key with level next to root common ancestor' do
+          expect_any_instance_of(Aws::S3::AccessGrantsCredentialsProvider)
+            .to receive(:access_grants_credentials_for)
+            .with(bucket: 'bucket', key: 'A/path', permission: 'READWRITE', prefix: nil)
+          client.copy_object(bucket: 'bucket', key: 'A/path12/log.txt', copy_source: 'bucket/A/path34/log.txt')
+        end
+      end
     end
   end
 end

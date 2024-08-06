@@ -87,7 +87,12 @@ module Aws
                                  key: ::String?,
                                  value: ::String?
                                },
-                             ]
+                             ],
+                             ?encryption_configuration: {
+                               kms_key_id: ::String?,
+                               kms_data_key_reuse_period_seconds: ::Integer?,
+                               type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+                             }
                            ) -> _CreateActivityResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateActivityResponseSuccess
 
@@ -124,7 +129,12 @@ module Aws
                                     enabled: bool?
                                   },
                                   ?publish: bool,
-                                  ?version_description: ::String
+                                  ?version_description: ::String,
+                                  ?encryption_configuration: {
+                                    kms_key_id: ::String?,
+                                    kms_data_key_reuse_period_seconds: ::Integer?,
+                                    type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+                                  }
                                 ) -> _CreateStateMachineResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStateMachineResponseSuccess
 
@@ -187,6 +197,7 @@ module Aws
         def activity_arn: () -> ::String
         def name: () -> ::String
         def creation_date: () -> ::Time
+        def encryption_configuration: () -> Types::EncryptionConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_activity-instance_method
       def describe_activity: (
@@ -218,7 +229,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_execution-instance_method
       def describe_execution: (
-                                execution_arn: ::String
+                                execution_arn: ::String,
+                                ?included_data: ("ALL_DATA" | "METADATA_ONLY")
                               ) -> _DescribeExecutionResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExecutionResponseSuccess
 
@@ -257,10 +269,12 @@ module Aws
         def label: () -> ::String
         def revision_id: () -> ::String
         def description: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_state_machine-instance_method
       def describe_state_machine: (
-                                    state_machine_arn: ::String
+                                    state_machine_arn: ::String,
+                                    ?included_data: ("ALL_DATA" | "METADATA_ONLY")
                                   ) -> _DescribeStateMachineResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStateMachineResponseSuccess
 
@@ -291,10 +305,12 @@ module Aws
         def map_run_arn: () -> ::String
         def label: () -> ::String
         def revision_id: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#describe_state_machine_for_execution-instance_method
       def describe_state_machine_for_execution: (
-                                                  execution_arn: ::String
+                                                  execution_arn: ::String,
+                                                  ?included_data: ("ALL_DATA" | "METADATA_ONLY")
                                                 ) -> _DescribeStateMachineForExecutionResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStateMachineForExecutionResponseSuccess
 
@@ -503,7 +519,8 @@ module Aws
                                   state_machine_arn: ::String,
                                   ?name: ::String,
                                   ?input: ::String,
-                                  ?trace_header: ::String
+                                  ?trace_header: ::String,
+                                  ?included_data: ("ALL_DATA" | "METADATA_ONLY")
                                 ) -> _StartSyncExecutionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSyncExecutionResponseSuccess
 
@@ -600,7 +617,12 @@ module Aws
                                     enabled: bool?
                                   },
                                   ?publish: bool,
-                                  ?version_description: ::String
+                                  ?version_description: ::String,
+                                  ?encryption_configuration: {
+                                    kms_key_id: ::String?,
+                                    kms_data_key_reuse_period_seconds: ::Integer?,
+                                    type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+                                  }
                                 ) -> _UpdateStateMachineResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStateMachineResponseSuccess
 

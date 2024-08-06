@@ -259,30 +259,10 @@ Simply downcase the service module name for the helper:
 The AWS SDK for Ruby has optional functionality that requires the 
 [AWS Common Runtime (CRT)](https://docs.aws.amazon.com/sdkref/latest/guide/common-runtime.html) 
 bindings to be included as a dependency with your application. This functionality includes:
-* [Amazon S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
 * CRC-32c support for [S3 Additional Checksums](https://aws.amazon.com/blogs/aws/new-additional-checksum-algorithms-for-amazon-s3/)
 
-If the required AWS Common Runtime dependency is not installed you will receive an error
-indicating that the required dependency is missing to use the associated functionality. To install this dependency follow
-the provided [instructions](#installing-the-aws-common-runtime-crt-dependency).
-
-### Installing the AWS Common Runtime (CRT) Dependency
 AWS CRT bindings are in developer preview and are available in the
-the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  You can install them
-by adding the `aws-crt` gem to your Gemfile. 
-
-[Sigv4a](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
-is an extension to Sigv4 that allows signatures that are valid in more than one region.
-Sigv4a is required to use some services/operations such as
-[S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
-and Amazon EventBridge Global Endpoints.
-Currently sigv4a requires the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  The `aws-sigv4` signers 
-will automatically use the CRT provided signers with support for `sigv4a` when the `aws-crt` gem is available.
-
-```ruby
-gem 'aws-sdk-s3', '~> 1'
-gem 'aws-sigv4', '1.4.1.crt'
-```
+the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  You can install them by adding the `aws-crt` gem to your Gemfile.
 
 ## Getting Help
 
@@ -477,6 +457,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Support App                                       | Aws::SupportApp                          | aws-sdk-supportapp                          | 2021-08-20  |
 | AWS Systems Manager Incident Manager                  | Aws::SSMIncidents                        | aws-sdk-ssmincidents                        | 2018-05-10  |
 | AWS Systems Manager Incident Manager Contacts         | Aws::SSMContacts                         | aws-sdk-ssmcontacts                         | 2021-05-03  |
+| AWS Systems Manager QuickSetup                        | Aws::SSMQuickSetup                       | aws-sdk-ssmquicksetup                       | 2018-05-10  |
 | AWS Systems Manager for SAP                           | Aws::SsmSap                              | aws-sdk-ssmsap                              | 2018-05-10  |
 | AWS Telco Network Builder                             | Aws::Tnb                                 | aws-sdk-tnb                                 | 2008-10-21  |
 | AWS Transfer Family                                   | Aws::Transfer                            | aws-sdk-transfer                            | 2018-11-05  |

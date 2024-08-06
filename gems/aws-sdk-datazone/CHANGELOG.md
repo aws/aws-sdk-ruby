@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-08-05)
+------------------
+
+* Feature - This releases Data Product feature. Data Products allow grouping data assets into cohesive, self-contained units for ease of publishing for data producers, and ease of finding and accessing for data consumers.
+
+1.17.0 (2024-07-25)
+------------------
+
+* Feature - Introduces GetEnvironmentCredentials operation to SDK
+
 1.16.0 (2024-07-23)
 ------------------
 

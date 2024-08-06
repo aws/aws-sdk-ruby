@@ -332,6 +332,7 @@ module Aws
   autoload :SSM, 'aws-sdk-ssm'
   autoload :SSMContacts, 'aws-sdk-ssmcontacts'
   autoload :SSMIncidents, 'aws-sdk-ssmincidents'
+  autoload :SSMQuickSetup, 'aws-sdk-ssmquicksetup'
   autoload :SSO, 'aws-sdk-core'
   autoload :SSOAdmin, 'aws-sdk-ssoadmin'
   autoload :SSOOIDC, 'aws-sdk-core'

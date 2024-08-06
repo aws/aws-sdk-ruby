@@ -1,0 +1,18 @@
+{
+    "version": 2,
+    "testCases": [
+        {
+            "id": "ListMetricsSuccess",
+            "operationName": "ListMetrics",
+            "input": {
+                "Namespace": "AWS\/EC2"
+            },
+            "expectation": {
+                "success": {}
+            },
+            "config": {
+                "region": "us-west-2"
+            }
+        }
+    ]
+}

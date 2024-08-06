@@ -318,6 +318,7 @@
         {"shape":"InvalidRepositoryNameException"},
         {"shape":"InvalidRepositoryDescriptionException"},
         {"shape":"RepositoryLimitExceededException"},
+        {"shape":"OperationNotAllowedException"},
         {"shape":"EncryptionIntegrityChecksFailedException"},
         {"shape":"EncryptionKeyAccessDeniedException"},
         {"shape":"EncryptionKeyDisabledException"},
@@ -4532,6 +4533,12 @@
         "destination":{"shape":"ObjectTypeEnum"},
         "base":{"shape":"ObjectTypeEnum"}
       }
+    },
+    "OperationNotAllowedException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
     },
     "OrderEnum":{
       "type":"string",

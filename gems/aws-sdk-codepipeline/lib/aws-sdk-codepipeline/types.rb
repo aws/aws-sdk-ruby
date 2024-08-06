@@ -1262,6 +1262,20 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The conditions for making checks for entry to a stage.
+    #
+    # @!attribute [rw] conditions
+    #   The conditions that are configured as entry conditions.
+    #   @return [Array<Types::Condition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/BeforeEntryConditions AWS API Documentation
+    #
+    class BeforeEntryConditions < Struct.new(
+      :conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Reserved for future use.
     #
     # @!attribute [rw] name
@@ -1303,6 +1317,83 @@ module Aws::CodePipeline
     #
     class ConcurrentPipelineExecutionsLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The condition for the stage. A condition is made up of the rules and
+    # the result for the condition.
+    #
+    # @!attribute [rw] result
+    #   The action to be done when the condition is met. For example,
+    #   rolling back an execution for a failure condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   The rules that make up the condition.
+    #   @return [Array<Types::RuleDeclaration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Condition AWS API Documentation
+    #
+    class Condition < Struct.new(
+      :result,
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The run of a condition.
+    #
+    # @!attribute [rw] status
+    #   The status of the run for a condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The summary of information about a run for a condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_status_change
+    #   The last status change of the condition.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ConditionExecution AWS API Documentation
+    #
+    class ConditionExecution < Struct.new(
+      :status,
+      :summary,
+      :last_status_change)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Unable to override because the condition does not allow overrides.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ConditionNotOverridableException AWS API Documentation
+    #
+    class ConditionNotOverridableException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the state of the condition.
+    #
+    # @!attribute [rw] latest_execution
+    #   The state of the latest run of the rule.
+    #   @return [Types::ConditionExecution]
+    #
+    # @!attribute [rw] rule_states
+    #   The state of the rules for the condition.
+    #   @return [Array<Types::RuleState>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ConditionState AWS API Documentation
+    #
+    class ConditionState < Struct.new(
+      :latest_execution,
+      :rule_states)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1761,10 +1852,15 @@ module Aws::CodePipeline
     #   as rolling back the stage.
     #   @return [String]
     #
+    # @!attribute [rw] conditions
+    #   The conditions that are configured as failure conditions.
+    #   @return [Array<Types::Condition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/FailureConditions AWS API Documentation
     #
     class FailureConditions < Struct.new(
-      :result)
+      :result,
+      :conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2743,6 +2839,88 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline for which you want to get execution summary
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Input information used to filter rule execution history.
+    #   @return [Types::RuleExecutionFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value. Pipeline history is limited to the most recent 12
+    #   months, based on pipeline execution start times. Default value is
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that was returned from the previous `ListRuleExecutions`
+    #   call, which can be used to return the next set of rule executions in
+    #   the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListRuleExecutionsInput AWS API Documentation
+    #
+    class ListRuleExecutionsInput < Struct.new(
+      :pipeline_name,
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_execution_details
+    #   Details about the output for listing rule executions.
+    #   @return [Array<Types::RuleExecutionDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used in the next `ListRuleExecutions` call. To
+    #   view all items in the list, continue to call this operation with
+    #   each subsequent token until no more nextToken values are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListRuleExecutionsOutput AWS API Documentation
+    #
+    class ListRuleExecutionsOutput < Struct.new(
+      :rule_execution_details,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_owner_filter
+    #   The rule owner to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_filter
+    #   The rule Region to filter on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListRuleTypesInput AWS API Documentation
+    #
+    class ListRuleTypesInput < Struct.new(
+      :rule_owner_filter,
+      :region_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_types
+    #   Lists the rules that are configured for the condition.
+    #   @return [Array<Types::RuleType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListRuleTypesOutput AWS API Documentation
+    #
+    class ListRuleTypesOutput < Struct.new(
+      :rule_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to get tags for.
     #   @return [String]
@@ -2918,6 +3096,35 @@ module Aws::CodePipeline
     #
     class OutputVariablesSizeExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline with the stage that will override the
+    #   condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage for the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The ID of the pipeline execution for the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_type
+    #   The type of condition to override for the stage, such as entry
+    #   conditions, failure conditions, or success conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OverrideStageConditionInput AWS API Documentation
+    #
+    class OverrideStageConditionInput < Struct.new(
+      :pipeline_name,
+      :stage_name,
+      :pipeline_execution_id,
+      :condition_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4011,6 +4218,536 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Represents information about a rule configuration property.
+    #
+    # @!attribute [rw] name
+    #   The name of the rule configuration property.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Whether the configuration property is a required value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key
+    #   Whether the configuration property is a key.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] secret
+    #   Whether the configuration property is secret.
+    #
+    #   When updating a pipeline, passing * * * * * without changing
+    #   any other values of the action preserves the previous value of the
+    #   secret.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] queryable
+    #   Indicates whether the property can be queried.
+    #
+    #   If you create a pipeline with a condition and rule, and that rule
+    #   contains a queryable property, the value for that configuration
+    #   property is subject to other restrictions. The value must be less
+    #   than or equal to twenty (20) characters. The value can contain only
+    #   alphanumeric characters, underscores, and hyphens.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the action configuration property that is
+    #   displayed to users.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the configuration property.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleConfigurationProperty AWS API Documentation
+    #
+    class RuleConfigurationProperty < Struct.new(
+      :name,
+      :required,
+      :key,
+      :secret,
+      :queryable,
+      :description,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents information about the rule to be created for an associated
+    # condition. An example would be creating a new rule for an entry
+    # condition, such as a rule that checks for a test result before
+    # allowing the run to enter the deployment stage.
+    #
+    # @!attribute [rw] name
+    #   The name of the rule that is created for the condition, such as
+    #   CheckAllResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_type_id
+    #   The ID for the rule type, which is made up of the combined values
+    #   for category, owner, provider, and version.
+    #   @return [Types::RuleTypeId]
+    #
+    # @!attribute [rw] configuration
+    #   The action configuration fields for the rule.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] input_artifacts
+    #   The input artifacts fields for the rule, such as specifying an input
+    #   file for the rule.
+    #   @return [Array<Types::InputArtifact>]
+    #
+    # @!attribute [rw] role_arn
+    #   The pipeline role ARN associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region for the condition associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_in_minutes
+    #   The action timeout for the rule.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleDeclaration AWS API Documentation
+    #
+    class RuleDeclaration < Struct.new(
+      :name,
+      :rule_type_id,
+      :configuration,
+      :input_artifacts,
+      :role_arn,
+      :region,
+      :timeout_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents information about each time a rule is run as part of the
+    # pipeline execution for a pipeline configured with conditions.
+    #
+    # @!attribute [rw] rule_execution_id
+    #   The execution ID for the run of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the run of the rule, such as FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   A summary of the run of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_status_change
+    #   The last status change of the rule.
+    #   @return [Time]
+    #
+    # @!attribute [rw] token
+    #   The system-generated token used to identify a unique request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The ARN of the user who last changed the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_id
+    #   The external ID of the run of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_url
+    #   The URL of a resource external to Amazon Web Services that is used
+    #   when running the rule (for example, an external repository URL).
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Represents information about an error in CodePipeline.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleExecution AWS API Documentation
+    #
+    class RuleExecution < Struct.new(
+      :rule_execution_id,
+      :status,
+      :summary,
+      :last_status_change,
+      :token,
+      :last_updated_by,
+      :external_execution_id,
+      :external_execution_url,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the runs for a rule and the results produced on an
+    # artifact as it passes through stages in the pipeline.
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The ID of the pipeline execution in the stage where the rule was
+    #   run. Use the GetPipelineState action to retrieve the current
+    #   pipelineExecutionId of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_execution_id
+    #   The ID of the run for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version
+    #   The version number of the pipeline with the stage where the rule was
+    #   run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage where the rule was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule that was run in the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the rule execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_time
+    #   The date and time of the last change to the rule execution, in
+    #   timestamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The ARN of the user who changed the rule execution details.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the rule execution. Status categories are
+    #   `InProgress`, `Succeeded`, and `Failed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   Input details for the rule execution, such as role ARN, Region, and
+    #   input artifacts.
+    #   @return [Types::RuleExecutionInput]
+    #
+    # @!attribute [rw] output
+    #   Output details for the rule execution, such as the rule execution
+    #   result.
+    #   @return [Types::RuleExecutionOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleExecutionDetail AWS API Documentation
+    #
+    class RuleExecutionDetail < Struct.new(
+      :pipeline_execution_id,
+      :rule_execution_id,
+      :pipeline_version,
+      :stage_name,
+      :rule_name,
+      :start_time,
+      :last_update_time,
+      :updated_by,
+      :status,
+      :input,
+      :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filter values for the rule execution.
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The pipeline execution ID used to filter rule execution history.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_in_pipeline_execution
+    #   The field that specifies to filter on the latest execution in the
+    #   pipeline.
+    #
+    #   <note markdown="1"> Filtering on the latest execution is available for executions run on
+    #   or after February 08, 2024.
+    #
+    #    </note>
+    #   @return [Types::LatestInPipelineExecutionFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleExecutionFilter AWS API Documentation
+    #
+    class RuleExecutionFilter < Struct.new(
+      :pipeline_execution_id,
+      :latest_in_pipeline_execution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input information used for a rule execution.
+    #
+    # @!attribute [rw] rule_type_id
+    #   The ID for the rule type, which is made up of the combined values
+    #   for category, owner, provider, and version.
+    #   @return [Types::RuleTypeId]
+    #
+    # @!attribute [rw] configuration
+    #   Configuration data for a rule execution, such as the resolved values
+    #   for that run.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resolved_configuration
+    #   Configuration data for a rule execution with all variable references
+    #   replaced with their real values for the execution.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM service role that performs the declared rule.
+    #   This is assumed through the roleArn for the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region for the rule, such as us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_artifacts
+    #   Details of input artifacts of the rule that correspond to the rule
+    #   execution.
+    #   @return [Array<Types::ArtifactDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleExecutionInput AWS API Documentation
+    #
+    class RuleExecutionInput < Struct.new(
+      :rule_type_id,
+      :configuration,
+      :resolved_configuration,
+      :role_arn,
+      :region,
+      :input_artifacts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output details listed for a rule execution, such as the rule execution
+    # result.
+    #
+    # @!attribute [rw] execution_result
+    #   Execution result information listed in the output details for a rule
+    #   execution.
+    #   @return [Types::RuleExecutionResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleExecutionOutput AWS API Documentation
+    #
+    class RuleExecutionOutput < Struct.new(
+      :execution_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Execution result information, such as the external execution ID.
+    #
+    # @!attribute [rw] external_execution_id
+    #   The external ID for the rule execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_summary
+    #   The external provider summary for the rule execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_execution_url
+    #   The deepest external link to the external resource (for example, a
+    #   repository URL or deployment endpoint) that is used when running the
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Represents information about an error in CodePipeline.
+    #   @return [Types::ErrorDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleExecutionResult AWS API Documentation
+    #
+    class RuleExecutionResult < Struct.new(
+      :external_execution_id,
+      :external_execution_summary,
+      :external_execution_url,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The change to a rule that creates a revision of the rule.
+    #
+    # @!attribute [rw] revision_id
+    #   The system-generated unique ID that identifies the revision number
+    #   of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_change_id
+    #   The unique identifier of the change that set the state to this
+    #   revision (for example, a deployment ID or timestamp).
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The date and time when the most recent version of the rule was
+    #   created, in timestamp format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleRevision AWS API Documentation
+    #
+    class RuleRevision < Struct.new(
+      :revision_id,
+      :revision_change_id,
+      :created)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the state of a rule.
+    #
+    # <note markdown="1"> Values returned in the `revisionId` field indicate the rule revision
+    # information, such as the commit ID, for the current state.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_revision
+    #   The ID of the current revision of the artifact successfully worked
+    #   on by the job.
+    #   @return [Types::RuleRevision]
+    #
+    # @!attribute [rw] latest_execution
+    #   Represents information about the latest run of an rule.
+    #   @return [Types::RuleExecution]
+    #
+    # @!attribute [rw] entity_url
+    #   A URL link for more information about the state of the action, such
+    #   as a details page.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_url
+    #   A URL link for more information about the revision, such as a commit
+    #   details page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleState AWS API Documentation
+    #
+    class RuleState < Struct.new(
+      :rule_name,
+      :current_revision,
+      :latest_execution,
+      :entity_url,
+      :revision_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The rule type, which is made up of the combined values for category,
+    # owner, provider, and version.
+    #
+    # @!attribute [rw] id
+    #   Represents information about a rule type.
+    #   @return [Types::RuleTypeId]
+    #
+    # @!attribute [rw] settings
+    #   Returns information about the settings for a rule type.
+    #   @return [Types::RuleTypeSettings]
+    #
+    # @!attribute [rw] rule_configuration_properties
+    #   The configuration properties for the rule type.
+    #   @return [Array<Types::RuleConfigurationProperty>]
+    #
+    # @!attribute [rw] input_artifact_details
+    #   Returns information about the details of an artifact.
+    #   @return [Types::ArtifactDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleType AWS API Documentation
+    #
+    class RuleType < Struct.new(
+      :id,
+      :settings,
+      :rule_configuration_properties,
+      :input_artifact_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ID for the rule type, which is made up of the combined values for
+    # category, owner, provider, and version.
+    #
+    # @!attribute [rw] category
+    #   A category defines what kind of rule can be run in the stage, and
+    #   constrains the provider type for the rule. Valid categories are
+    #   limited to one of the following values.
+    #
+    #   * INVOKE
+    #
+    #   * Approval
+    #
+    #   * Rule
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The creator of the rule being called. The valid value for the
+    #   `Owner` field in the rule category is `AWS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the service being called by the rule. Valid
+    #   providers are determined by the rulecategory. For example, a managed
+    #   rule in the Rule category type has an owner of AWS, which would be
+    #   specified as `AWS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   A string that describes the rule version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleTypeId AWS API Documentation
+    #
+    class RuleTypeId < Struct.new(
+      :category,
+      :owner,
+      :provider,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the settings for a rule type.
+    #
+    # @!attribute [rw] third_party_configuration_url
+    #   The URL of a sign-up page where users can sign up for an external
+    #   service and perform initial configuration of the action provided by
+    #   that service.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_url_template
+    #   The URL returned to the CodePipeline console that provides a deep
+    #   link to the resources of the external system, such as the
+    #   configuration page for a CodeDeploy deployment group. This link is
+    #   provided as part of the action display in the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_url_template
+    #   The URL returned to the CodePipeline console that contains a link to
+    #   the top-level landing page for the external system, such as the
+    #   console page for CodeDeploy. This link is shown on the pipeline view
+    #   page in the CodePipeline console and provides a link to the
+    #   execution entity of the external action.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_url_template
+    #   The URL returned to the CodePipeline console that contains a link to
+    #   the page where customers can update or change the configuration of
+    #   the external action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RuleTypeSettings AWS API Documentation
+    #
+    class RuleTypeSettings < Struct.new(
+      :third_party_configuration_url,
+      :entity_url_template,
+      :execution_url_template,
+      :revision_url_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The location of the S3 bucket that contains a revision.
     #
     # @!attribute [rw] bucket_name
@@ -4125,6 +4862,45 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The state of a run of a condition for a stage.
+    #
+    # @!attribute [rw] latest_execution
+    #   Represents information about the latest run of a condition for a
+    #   stage.
+    #   @return [Types::StageConditionsExecution]
+    #
+    # @!attribute [rw] condition_states
+    #   The states of the conditions for a run of a condition for a stage.
+    #   @return [Array<Types::ConditionState>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageConditionState AWS API Documentation
+    #
+    class StageConditionState < Struct.new(
+      :latest_execution,
+      :condition_states)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents information about the run of a condition for a stage.
+    #
+    # @!attribute [rw] status
+    #   The status of a run of a condition for a stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   A summary of the run of the condition for a stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageConditionsExecution AWS API Documentation
+    #
+    class StageConditionsExecution < Struct.new(
+      :status,
+      :summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents information about a stage to a job worker.
     #
     # @!attribute [rw] name
@@ -4160,13 +4936,27 @@ module Aws::CodePipeline
     #   stage.
     #   @return [Types::FailureConditions]
     #
+    # @!attribute [rw] on_success
+    #   The method to use when a stage has succeeded. For example,
+    #   configuring this field for conditions will allow the stage to
+    #   succeed when the conditions are met.
+    #   @return [Types::SuccessConditions]
+    #
+    # @!attribute [rw] before_entry
+    #   The method to use when a stage allows entry. For example,
+    #   configuring this field for conditions will allow entry to the stage
+    #   when the conditions are met.
+    #   @return [Types::BeforeEntryConditions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageDeclaration AWS API Documentation
     #
     class StageDeclaration < Struct.new(
       :name,
       :blockers,
       :actions,
-      :on_failure)
+      :on_failure,
+      :on_success,
+      :before_entry)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4244,6 +5034,18 @@ module Aws::CodePipeline
     #   ID and status.
     #   @return [Types::StageExecution]
     #
+    # @!attribute [rw] before_entry_condition_state
+    #   The state of the entry conditions for a stage.
+    #   @return [Types::StageConditionState]
+    #
+    # @!attribute [rw] on_success_condition_state
+    #   The state of the success conditions for a stage.
+    #   @return [Types::StageConditionState]
+    #
+    # @!attribute [rw] on_failure_condition_state
+    #   The state of the failure conditions for a stage.
+    #   @return [Types::StageConditionState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageState AWS API Documentation
     #
     class StageState < Struct.new(
@@ -4252,7 +5054,10 @@ module Aws::CodePipeline
       :inbound_executions,
       :inbound_transition_state,
       :action_states,
-      :latest_execution)
+      :latest_execution,
+      :before_entry_condition_state,
+      :on_success_condition_state,
+      :on_failure_condition_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4384,6 +5189,20 @@ module Aws::CodePipeline
     #
     class SucceededInStageFilter < Struct.new(
       :stage_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conditions for making checks that, if met, succeed a stage.
+    #
+    # @!attribute [rw] conditions
+    #   The conditions that are success conditions.
+    #   @return [Array<Types::Condition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SuccessConditions AWS API Documentation
+    #
+    class SuccessConditions < Struct.new(
+      :conditions)
       SENSITIVE = []
       include Aws::Structure
     end

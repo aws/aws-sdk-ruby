@@ -549,12 +549,16 @@ module Aws::RDS
       data[:max_allocated_storage]
     end
 
-    # A list of tags. For more information, see [Tagging Amazon RDS
-    # Resources][1] in the *Amazon RDS User Guide.*
+    # A list of tags.
+    #
+    # For more information, see [Tagging Amazon RDS resources][1] in the
+    # *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    # resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [Array<Types::Tag>]
     def tag_list
       data[:tag_list]
@@ -2395,12 +2399,16 @@ module Aws::RDS
     #
     #   For more information, see CreateDBInstance.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group for the DB instance. The new DB instance is created
     #   in the VPC associated with the DB subnet group. If no DB subnet group
@@ -2912,12 +2920,16 @@ module Aws::RDS
     #
     #   Example: `my-snapshot-id`
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [DBSnapshot]
     def create_snapshot(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -4452,12 +4464,16 @@ module Aws::RDS
     #   Specifies whether to copy all tags from the restored DB instance to
     #   snapshots of the DB instance. By default, tags are not copied.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @option options [String] :storage_type
     #   The storage type to associate with the DB instance.
     #

@@ -304,12 +304,16 @@ module Aws::RDS
     # @option options [required, String] :target_db_parameter_group_description
     #   A description for the copied DB parameter group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [DBParameterGroup]
     def copy(options = {})
       options = options.merge(source_db_parameter_group_identifier: @name)

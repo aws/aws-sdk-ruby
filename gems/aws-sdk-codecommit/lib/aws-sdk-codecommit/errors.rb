@@ -166,6 +166,7 @@ module Aws::CodeCommit
   # * {NoChangeException}
   # * {NumberOfRuleTemplatesExceededException}
   # * {NumberOfRulesExceededException}
+  # * {OperationNotAllowedException}
   # * {OverrideAlreadySetException}
   # * {OverrideStatusRequiredException}
   # * {ParentCommitDoesNotExistException}
@@ -1607,6 +1608,16 @@ module Aws::CodeCommit
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeCommit::Types::NumberOfRulesExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class OperationNotAllowedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeCommit::Types::OperationNotAllowedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

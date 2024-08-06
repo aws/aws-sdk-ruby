@@ -811,9 +811,6 @@ module Aws::ECR
     #   * Microsoft Azure Container Registry (`azure-container-registry`) -
     #     `<custom>.azurecr.io`
     #
-    #   * GitLab Container Registry (`gitlab-container-registry`) -
-    #     `registry.gitlab.com`
-    #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   create the pull through cache rule for. If you do not specify a
@@ -971,6 +968,184 @@ module Aws::ECR
     # @param [Hash] params ({})
     def create_repository(params = {}, options = {})
       req = build_request(:create_repository, params)
+      req.send_request(options)
+    end
+
+    # Creates a repository creation template. This template is used to
+    # define the settings for repositories created by Amazon ECR on your
+    # behalf. For example, repositories created through pull through cache
+    # actions. For more information, see [Private repository creation
+    # templates][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-creation-templates.html
+    #
+    # @option params [required, String] :prefix
+    #   The repository namespace prefix to associate with the template. All
+    #   repositories created using this namespace prefix will have the
+    #   settings defined in this template applied. For example, a prefix of
+    #   `prod` would apply to all repositories beginning with `prod/`.
+    #   Similarly, a prefix of `prod/team` would apply to all repositories
+    #   beginning with `prod/team/`.
+    #
+    #   To apply a template to all repositories in your registry that don't
+    #   have an associated creation template, you can use `ROOT` as the
+    #   prefix.
+    #
+    #   There is always an assumed `/` applied to the end of the prefix. If
+    #   you specify `ecr-public` as the prefix, Amazon ECR treats that as
+    #   `ecr-public/`. When using a pull through cache rule, the repository
+    #   prefix you specify during rule creation is what you should specify as
+    #   your repository creation template prefix as well.
+    #
+    # @option params [String] :description
+    #   A description for the repository creation template.
+    #
+    # @option params [Types::EncryptionConfigurationForRepositoryCreationTemplate] :encryption_configuration
+    #   The encryption configuration to use for repositories created using the
+    #   template.
+    #
+    # @option params [Array<Types::Tag>] :resource_tags
+    #   The metadata to apply to the repository to help you categorize and
+    #   organize. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
+    # @option params [String] :image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
+    #   image tags within the repository will be immutable which will prevent
+    #   them from being overwritten.
+    #
+    # @option params [String] :repository_policy
+    #   The repository policy to apply to repositories created using the
+    #   template. A repository policy is a permissions policy associated with
+    #   a repository to control access permissions.
+    #
+    # @option params [String] :lifecycle_policy
+    #   The lifecycle policy to use for repositories created using the
+    #   template.
+    #
+    # @option params [required, Array<String>] :applied_for
+    #   A list of enumerable strings representing the Amazon ECR repository
+    #   creation scenarios that this template will apply towards. The two
+    #   supported scenarios are `PULL_THROUGH_CACHE` and `REPLICATION`
+    #
+    # @option params [String] :custom_role_arn
+    #   The ARN of the role to be assumed by Amazon ECR. This role must be in
+    #   the same account as the registry that you are configuring. Amazon ECR
+    #   will assume your supplied role when the customRoleArn is specified.
+    #   When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
+    #
+    # @return [Types::CreateRepositoryCreationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRepositoryCreationTemplateResponse#registry_id #registry_id} => String
+    #   * {Types::CreateRepositoryCreationTemplateResponse#repository_creation_template #repository_creation_template} => Types::RepositoryCreationTemplate
+    #
+    #
+    # @example Example: Create a new repository creation template
+    #
+    #   # This example creates a repository creation template.
+    #
+    #   resp = client.create_repository_creation_template({
+    #     applied_for: [
+    #       "REPLICATION", 
+    #       "PULL_THROUGH_CACHE", 
+    #     ], 
+    #     description: "Repos for testing images", 
+    #     encryption_configuration: {
+    #       encryption_type: "AES256", 
+    #     }, 
+    #     image_tag_mutability: "MUTABLE", 
+    #     lifecycle_policy: "{\r\n    \"rules\": [\r\n        {\r\n            \"rulePriority\": 1,\r\n            \"description\": \"Expire images older than 14 days\",\r\n            \"selection\": {\r\n                \"tagStatus\": \"untagged\",\r\n                \"countType\": \"sinceImagePushed\",\r\n                \"countUnit\": \"days\",\r\n                \"countNumber\": 14\r\n            },\r\n            \"action\": {\r\n                \"type\": \"expire\"\r\n            }\r\n        }\r\n    ]\r\n}", 
+    #     prefix: "eng/test", 
+    #     repository_policy: "{\r\n  \"Version\": \"2012-10-17\",\r\n  \"Statement\": [\r\n    {\r\n      \"Sid\": \"LambdaECRPullPolicy\",\r\n      \"Effect\": \"Allow\",\r\n      \"Principal\": {\r\n        \"Service\": \"lambda.amazonaws.com\"\r\n      },\r\n      \"Action\": \"ecr:BatchGetImage\"\r\n    }\r\n  ]\r\n}", 
+    #     resource_tags: [
+    #       {
+    #         key: "environment", 
+    #         value: "test", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     registry_id: "012345678901", 
+    #     repository_creation_template: {
+    #       applied_for: [
+    #         "REPLICATION", 
+    #         "PULL_THROUGH_CACHE", 
+    #       ], 
+    #       created_at: Time.parse("2023-12-16T17:29:02-07:00"), 
+    #       description: "Repos for testing images", 
+    #       encryption_configuration: {
+    #         encryption_type: "AES256", 
+    #       }, 
+    #       image_tag_mutability: "MUTABLE", 
+    #       lifecycle_policy: "{\r\n    \"rules\": [\r\n        {\r\n            \"rulePriority\": 1,\r\n            \"description\": \"Expire images older than 14 days\",\r\n            \"selection\": {\r\n                \"tagStatus\": \"untagged\",\r\n                \"countType\": \"sinceImagePushed\",\r\n                \"countUnit\": \"days\",\r\n                \"countNumber\": 14\r\n            },\r\n            \"action\": {\r\n                \"type\": \"expire\"\r\n            }\r\n        }\r\n    ]\r\n}", 
+    #       prefix: "eng/test", 
+    #       repository_policy: "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Sid\" : \"LambdaECRPullPolicy\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"lambda.amazonaws.com\"\n    },\n    \"Action\" : \"ecr:BatchGetImage\"\n  } ]\n}", 
+    #       resource_tags: [
+    #         {
+    #           key: "environment", 
+    #           value: "test", 
+    #         }, 
+    #       ], 
+    #       updated_at: Time.parse("2023-12-16T17:29:02-07:00"), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_repository_creation_template({
+    #     prefix: "Prefix", # required
+    #     description: "RepositoryTemplateDescription",
+    #     encryption_configuration: {
+    #       encryption_type: "AES256", # required, accepts AES256, KMS
+    #       kms_key: "KmsKeyForRepositoryCreationTemplate",
+    #     },
+    #     resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
+    #     repository_policy: "RepositoryPolicyText",
+    #     lifecycle_policy: "LifecyclePolicyTextForRepositoryCreationTemplate",
+    #     applied_for: ["REPLICATION"], # required, accepts REPLICATION, PULL_THROUGH_CACHE
+    #     custom_role_arn: "CustomRoleArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_creation_template.prefix #=> String
+    #   resp.repository_creation_template.description #=> String
+    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_template.encryption_configuration.kms_key #=> String
+    #   resp.repository_creation_template.resource_tags #=> Array
+    #   resp.repository_creation_template.resource_tags[0].key #=> String
+    #   resp.repository_creation_template.resource_tags[0].value #=> String
+    #   resp.repository_creation_template.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository_creation_template.repository_policy #=> String
+    #   resp.repository_creation_template.lifecycle_policy #=> String
+    #   resp.repository_creation_template.applied_for #=> Array
+    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_template.custom_role_arn #=> String
+    #   resp.repository_creation_template.created_at #=> Time
+    #   resp.repository_creation_template.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryCreationTemplate AWS API Documentation
+    #
+    # @overload create_repository_creation_template(params = {})
+    # @param [Hash] params ({})
+    def create_repository_creation_template(params = {}, options = {})
+      req = build_request(:create_repository_creation_template, params)
       req.send_request(options)
     end
 
@@ -1146,6 +1321,74 @@ module Aws::ECR
     # @param [Hash] params ({})
     def delete_repository(params = {}, options = {})
       req = build_request(:delete_repository, params)
+      req.send_request(options)
+    end
+
+    # Deletes a repository creation template.
+    #
+    # @option params [required, String] :prefix
+    #   The repository namespace prefix associated with the repository
+    #   creation template.
+    #
+    # @return [Types::DeleteRepositoryCreationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRepositoryCreationTemplateResponse#registry_id #registry_id} => String
+    #   * {Types::DeleteRepositoryCreationTemplateResponse#repository_creation_template #repository_creation_template} => Types::RepositoryCreationTemplate
+    #
+    #
+    # @example Example: Delete a repository creation template
+    #
+    #   # This example deletes a repository creation template.
+    #
+    #   resp = client.delete_repository_creation_template({
+    #     prefix: "eng", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     registry_id: "012345678901", 
+    #     repository_creation_template: {
+    #       created_at: Time.parse("2023-12-03T16:27:57.933000-08:00"), 
+    #       encryption_configuration: {
+    #         encryption_type: "AES256", 
+    #       }, 
+    #       image_tag_mutability: "MUTABLE", 
+    #       prefix: "eng", 
+    #       updated_at: Time.parse("2023-12-03T16:27:57.933000-08:00"), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_repository_creation_template({
+    #     prefix: "Prefix", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_creation_template.prefix #=> String
+    #   resp.repository_creation_template.description #=> String
+    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_template.encryption_configuration.kms_key #=> String
+    #   resp.repository_creation_template.resource_tags #=> Array
+    #   resp.repository_creation_template.resource_tags[0].key #=> String
+    #   resp.repository_creation_template.resource_tags[0].value #=> String
+    #   resp.repository_creation_template.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository_creation_template.repository_policy #=> String
+    #   resp.repository_creation_template.lifecycle_policy #=> String
+    #   resp.repository_creation_template.applied_for #=> Array
+    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_template.custom_role_arn #=> String
+    #   resp.repository_creation_template.created_at #=> Time
+    #   resp.repository_creation_template.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryCreationTemplate AWS API Documentation
+    #
+    # @overload delete_repository_creation_template(params = {})
+    # @param [Hash] params ({})
+    def delete_repository_creation_template(params = {}, options = {})
+      req = build_request(:delete_repository_creation_template, params)
       req.send_request(options)
     end
 
@@ -1706,6 +1949,164 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Returns details about the repository creation templates in a registry.
+    # The `prefixes` request parameter can be used to return the details for
+    # a specific repository creation template.
+    #
+    # @option params [Array<String>] :prefixes
+    #   The repository namespace prefixes associated with the repository
+    #   creation templates to describe. If this value is not specified, all
+    #   repository creation templates are returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeRepositoryCreationTemplates` request where `maxResults` was
+    #   used and the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value. This value is `null` when there are no more results
+    #   to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of repository results returned by
+    #   `DescribeRepositoryCreationTemplatesRequest` in paginated output. When
+    #   this parameter is used, `DescribeRepositoryCreationTemplatesRequest`
+    #   only returns `maxResults` results in a single page along with a
+    #   `nextToken` response element. The remaining results of the initial
+    #   request can be seen by sending another
+    #   `DescribeRepositoryCreationTemplatesRequest` request with the returned
+    #   `nextToken` value. This value can be between 1 and 1000. If this
+    #   parameter is not used, then
+    #   `DescribeRepositoryCreationTemplatesRequest` returns up to 100 results
+    #   and a `nextToken` value, if applicable.
+    #
+    # @return [Types::DescribeRepositoryCreationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRepositoryCreationTemplatesResponse#registry_id #registry_id} => String
+    #   * {Types::DescribeRepositoryCreationTemplatesResponse#repository_creation_templates #repository_creation_templates} => Array&lt;Types::RepositoryCreationTemplate&gt;
+    #   * {Types::DescribeRepositoryCreationTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Describe a repository creation template
+    #
+    #   # This example describes the contents of a repository creation template.
+    #
+    #   resp = client.describe_repository_creation_templates({
+    #     max_results: 123, 
+    #     next_token: "", 
+    #     prefixes: [
+    #       "eng", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "", 
+    #     registry_id: "012345678901", 
+    #     repository_creation_templates: [
+    #       {
+    #         applied_for: [
+    #           "PULL_THROUGH_CACHE", 
+    #           "REPLICATION", 
+    #         ], 
+    #         created_at: Time.parse("2023-12-16T17:29:02-07:00"), 
+    #         encryption_configuration: {
+    #           encryption_type: "AES256", 
+    #         }, 
+    #         image_tag_mutability: "MUTABLE", 
+    #         prefix: "eng/test", 
+    #         updated_at: Time.parse("2023-12-16T19:55:02-07:00"), 
+    #       }, 
+    #       {
+    #         applied_for: [
+    #           "REPLICATION", 
+    #         ], 
+    #         created_at: Time.parse("2023-12-14T17:29:02-07:00"), 
+    #         encryption_configuration: {
+    #           encryption_type: "AES256", 
+    #         }, 
+    #         image_tag_mutability: "IMMUTABLE", 
+    #         prefix: "eng/replication-test", 
+    #         updated_at: Time.parse("2023-12-14T19:55:02-07:00"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_repository_creation_templates({
+    #     prefixes: ["Prefix"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_creation_templates #=> Array
+    #   resp.repository_creation_templates[0].prefix #=> String
+    #   resp.repository_creation_templates[0].description #=> String
+    #   resp.repository_creation_templates[0].encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_templates[0].encryption_configuration.kms_key #=> String
+    #   resp.repository_creation_templates[0].resource_tags #=> Array
+    #   resp.repository_creation_templates[0].resource_tags[0].key #=> String
+    #   resp.repository_creation_templates[0].resource_tags[0].value #=> String
+    #   resp.repository_creation_templates[0].image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository_creation_templates[0].repository_policy #=> String
+    #   resp.repository_creation_templates[0].lifecycle_policy #=> String
+    #   resp.repository_creation_templates[0].applied_for #=> Array
+    #   resp.repository_creation_templates[0].applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_templates[0].custom_role_arn #=> String
+    #   resp.repository_creation_templates[0].created_at #=> Time
+    #   resp.repository_creation_templates[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoryCreationTemplates AWS API Documentation
+    #
+    # @overload describe_repository_creation_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_repository_creation_templates(params = {}, options = {})
+      req = build_request(:describe_repository_creation_templates, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the basic scan type version name.
+    #
+    # @option params [required, String] :name
+    #   Basic scan type version name.
+    #
+    # @return [Types::GetAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountSettingResponse#name #name} => String
+    #   * {Types::GetAccountSettingResponse#value #value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_setting({
+    #     name: "AccountSettingName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSetting AWS API Documentation
+    #
+    # @overload get_account_setting(params = {})
+    # @param [Hash] params ({})
+    def get_account_setting(params = {}, options = {})
+      req = build_request(:get_account_setting, params)
+      req.send_request(options)
+    end
+
     # Retrieves an authorization token. An authorization token represents
     # your IAM authentication credentials and can be used to access any
     # Amazon ECR registry that your IAM principal has access to. The
@@ -2242,6 +2643,42 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Allows you to change the basic scan type version by setting the `name`
+    # parameter to either `CLAIR` to `AWS_NATIVE`.
+    #
+    # @option params [required, String] :name
+    #   Basic scan type version name.
+    #
+    # @option params [required, String] :value
+    #   Setting value that determines what basic scan type is being used:
+    #   `AWS_NATIVE` or `CLAIR`.
+    #
+    # @return [Types::PutAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountSettingResponse#name #name} => String
+    #   * {Types::PutAccountSettingResponse#value #value} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_setting({
+    #     name: "AccountSettingName", # required
+    #     value: "AccountSettingValue", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutAccountSetting AWS API Documentation
+    #
+    # @overload put_account_setting(params = {})
+    # @param [Hash] params ({})
+    def put_account_setting(params = {}, options = {})
+      req = build_request(:put_account_setting, params)
+      req.send_request(options)
+    end
+
     # Creates or updates the image manifest and tags associated with an
     # image.
     #
@@ -2578,7 +3015,9 @@ module Aws::ECR
     # PutReplicationConfiguration API is called, a service-linked IAM role
     # is created in your account for the replication process. For more
     # information, see [Using service-linked roles for Amazon ECR][1] in the
-    # *Amazon Elastic Container Registry User Guide*.
+    # *Amazon Elastic Container Registry User Guide*. For more information
+    # on the custom role for replication, see [Creating an IAM role for
+    # replication][2].
     #
     # <note markdown="1"> When configuring cross-account replication, the destination account
     # must grant the source account permission to replicate. This permission
@@ -2590,6 +3029,7 @@ module Aws::ECR
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html
+    # [2]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/replication-creation-templates.html#roles-creatingrole-user-console
     #
     # @option params [required, Types::ReplicationConfiguration] :replication_configuration
     #   An object representing the replication configuration for a registry.
@@ -2917,6 +3357,161 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Updates an existing repository creation template.
+    #
+    # @option params [required, String] :prefix
+    #   The repository namespace prefix that matches an existing repository
+    #   creation template in the registry. All repositories created using this
+    #   namespace prefix will have the settings defined in this template
+    #   applied. For example, a prefix of `prod` would apply to all
+    #   repositories beginning with `prod/`. This includes a repository named
+    #   `prod/team1` as well as a repository named `prod/repository1`.
+    #
+    #   To apply a template to all repositories in your registry that don't
+    #   have an associated creation template, you can use `ROOT` as the
+    #   prefix.
+    #
+    # @option params [String] :description
+    #   A description for the repository creation template.
+    #
+    # @option params [Types::EncryptionConfigurationForRepositoryCreationTemplate] :encryption_configuration
+    #   The encryption configuration to associate with the repository creation
+    #   template.
+    #
+    # @option params [Array<Types::Tag>] :resource_tags
+    #   The metadata to apply to the repository to help you categorize and
+    #   organize. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
+    # @option params [String] :image_tag_mutability
+    #   Updates the tag mutability setting for the repository. If this
+    #   parameter is omitted, the default setting of `MUTABLE` will be used
+    #   which will allow image tags to be overwritten. If `IMMUTABLE` is
+    #   specified, all image tags within the repository will be immutable
+    #   which will prevent them from being overwritten.
+    #
+    # @option params [String] :repository_policy
+    #   Updates the repository policy created using the template. A repository
+    #   policy is a permissions policy associated with a repository to control
+    #   access permissions.
+    #
+    # @option params [String] :lifecycle_policy
+    #   Updates the lifecycle policy associated with the specified repository
+    #   creation template.
+    #
+    # @option params [Array<String>] :applied_for
+    #   Updates the list of enumerable strings representing the Amazon ECR
+    #   repository creation scenarios that this template will apply towards.
+    #   The two supported scenarios are `PULL_THROUGH_CACHE` and `REPLICATION`
+    #
+    # @option params [String] :custom_role_arn
+    #   The ARN of the role to be assumed by Amazon ECR. This role must be in
+    #   the same account as the registry that you are configuring. Amazon ECR
+    #   will assume your supplied role when the customRoleArn is specified.
+    #   When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
+    #
+    # @return [Types::UpdateRepositoryCreationTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRepositoryCreationTemplateResponse#registry_id #registry_id} => String
+    #   * {Types::UpdateRepositoryCreationTemplateResponse#repository_creation_template #repository_creation_template} => Types::RepositoryCreationTemplate
+    #
+    #
+    # @example Example: Update a repository creation template
+    #
+    #   # This example updates a repository creation template.
+    #
+    #   resp = client.update_repository_creation_template({
+    #     applied_for: [
+    #       "REPLICATION", 
+    #     ], 
+    #     prefix: "eng/test", 
+    #     resource_tags: [
+    #       {
+    #         key: "environment", 
+    #         value: "test", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     registry_id: "012345678901", 
+    #     repository_creation_template: {
+    #       applied_for: [
+    #         "REPLICATION", 
+    #       ], 
+    #       created_at: Time.parse("2023-12-16T17:29:02-07:00"), 
+    #       description: "Repos for testing images", 
+    #       encryption_configuration: {
+    #         encryption_type: "AES256", 
+    #       }, 
+    #       image_tag_mutability: "MUTABLE", 
+    #       lifecycle_policy: "{\r\n    \"rules\": [\r\n        {\r\n            \"rulePriority\": 1,\r\n            \"description\": \"Expire images older than 14 days\",\r\n            \"selection\": {\r\n                \"tagStatus\": \"untagged\",\r\n                \"countType\": \"sinceImagePushed\",\r\n                \"countUnit\": \"days\",\r\n                \"countNumber\": 14\r\n            },\r\n            \"action\": {\r\n                \"type\": \"expire\"\r\n            }\r\n        }\r\n    ]\r\n}", 
+    #       prefix: "eng/test", 
+    #       repository_policy: "{\n  \"Version\" : \"2012-10-17\",\n  \"Statement\" : [ {\n    \"Sid\" : \"LambdaECRPullPolicy\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"Service\" : \"lambda.amazonaws.com\"\n    },\n    \"Action\" : \"ecr:BatchGetImage\"\n  } ]\n}", 
+    #       resource_tags: [
+    #         {
+    #           key: "environment", 
+    #           value: "test", 
+    #         }, 
+    #       ], 
+    #       updated_at: Time.parse("2023-12-16T19:55:02-07:00"), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_repository_creation_template({
+    #     prefix: "Prefix", # required
+    #     description: "RepositoryTemplateDescription",
+    #     encryption_configuration: {
+    #       encryption_type: "AES256", # required, accepts AES256, KMS
+    #       kms_key: "KmsKeyForRepositoryCreationTemplate",
+    #     },
+    #     resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
+    #     repository_policy: "RepositoryPolicyText",
+    #     lifecycle_policy: "LifecyclePolicyTextForRepositoryCreationTemplate",
+    #     applied_for: ["REPLICATION"], # accepts REPLICATION, PULL_THROUGH_CACHE
+    #     custom_role_arn: "CustomRoleArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_creation_template.prefix #=> String
+    #   resp.repository_creation_template.description #=> String
+    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_template.encryption_configuration.kms_key #=> String
+    #   resp.repository_creation_template.resource_tags #=> Array
+    #   resp.repository_creation_template.resource_tags[0].key #=> String
+    #   resp.repository_creation_template.resource_tags[0].value #=> String
+    #   resp.repository_creation_template.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository_creation_template.repository_policy #=> String
+    #   resp.repository_creation_template.lifecycle_policy #=> String
+    #   resp.repository_creation_template.applied_for #=> Array
+    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_template.custom_role_arn #=> String
+    #   resp.repository_creation_template.created_at #=> Time
+    #   resp.repository_creation_template.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdateRepositoryCreationTemplate AWS API Documentation
+    #
+    # @overload update_repository_creation_template(params = {})
+    # @param [Hash] params ({})
+    def update_repository_creation_template(params = {}, options = {})
+      req = build_request(:update_repository_creation_template, params)
+      req.send_request(options)
+    end
+
     # Uploads an image layer part to Amazon ECR.
     #
     # When an image is pushed, each new image layer is uploaded in parts.
@@ -3048,7 +3643,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

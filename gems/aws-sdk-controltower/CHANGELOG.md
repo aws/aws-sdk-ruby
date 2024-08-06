@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2024-08-01)
+------------------
+
+* Feature - Updated Control Tower service documentation for controlcatalog control ARN support with existing Control Tower public APIs
+
 1.26.0 (2024-07-02)
 ------------------
 

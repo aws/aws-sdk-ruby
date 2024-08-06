@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2024-07-30)
+------------------
+
+* Feature - Added support for Red Hat Enterprise Linux 8 on Amazon AppStream 2.0
+
 1.92.0 (2024-07-02)
 ------------------
 

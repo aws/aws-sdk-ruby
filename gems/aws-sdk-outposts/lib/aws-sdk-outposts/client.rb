@@ -1034,6 +1034,7 @@ module Aws::Outposts
     #
     #   resp.instance_types #=> Array
     #   resp.instance_types[0].instance_type #=> String
+    #   resp.instance_types[0].vcp_us #=> Integer
     #   resp.next_token #=> String
     #   resp.outpost_id #=> String
     #   resp.outpost_arn #=> String
@@ -1084,6 +1085,7 @@ module Aws::Outposts
     #
     #   resp.instance_types #=> Array
     #   resp.instance_types[0].instance_type #=> String
+    #   resp.instance_types[0].vcp_us #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostSupportedInstanceTypes AWS API Documentation
@@ -2127,7 +2129,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

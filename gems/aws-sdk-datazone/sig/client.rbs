@@ -377,6 +377,94 @@ module Aws
                              ) -> _CreateAssetTypeResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetTypeResponseSuccess
 
+      interface _CreateDataProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataProductOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def first_revision_created_at: () -> ::Time
+        def first_revision_created_by: () -> ::String
+        def forms_output: () -> ::Array[Types::FormOutput]
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def items: () -> ::Array[Types::DataProductItem]
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def revision: () -> ::String
+        def status: () -> ("CREATED" | "CREATING" | "CREATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_data_product-instance_method
+      def create_data_product: (
+                                 ?client_token: ::String,
+                                 ?description: ::String,
+                                 domain_identifier: ::String,
+                                 ?forms_input: Array[
+                                   {
+                                     content: ::String?,
+                                     form_name: ::String,
+                                     type_identifier: ::String?,
+                                     type_revision: ::String?
+                                   },
+                                 ],
+                                 ?glossary_terms: Array[::String],
+                                 ?items: Array[
+                                   {
+                                     glossary_terms: Array[::String]?,
+                                     identifier: ::String,
+                                     item_type: ("ASSET"),
+                                     revision: ::String?
+                                   },
+                                 ],
+                                 name: ::String,
+                                 owning_project_identifier: ::String
+                               ) -> _CreateDataProductResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataProductResponseSuccess
+
+      interface _CreateDataProductRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataProductRevisionOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def first_revision_created_at: () -> ::Time
+        def first_revision_created_by: () -> ::String
+        def forms_output: () -> ::Array[Types::FormOutput]
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def items: () -> ::Array[Types::DataProductItem]
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def revision: () -> ::String
+        def status: () -> ("CREATED" | "CREATING" | "CREATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_data_product_revision-instance_method
+      def create_data_product_revision: (
+                                          ?client_token: ::String,
+                                          ?description: ::String,
+                                          domain_identifier: ::String,
+                                          ?forms_input: Array[
+                                            {
+                                              content: ::String?,
+                                              form_name: ::String,
+                                              type_identifier: ::String?,
+                                              type_revision: ::String?
+                                            },
+                                          ],
+                                          ?glossary_terms: Array[::String],
+                                          identifier: ::String,
+                                          ?items: Array[
+                                            {
+                                              glossary_terms: Array[::String]?,
+                                              identifier: ::String,
+                                              item_type: ("ASSET"),
+                                              revision: ::String?
+                                            },
+                                          ],
+                                          name: ::String
+                                        ) -> _CreateDataProductRevisionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataProductRevisionResponseSuccess
+
       interface _CreateDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceOutput]
         def asset_forms_output: () -> ::Array[Types::FormOutput]
@@ -699,7 +787,7 @@ module Aws
                                        domain_identifier: ::String,
                                        entity_identifier: ::String,
                                        ?entity_revision: ::String,
-                                       entity_type: ("ASSET")
+                                       entity_type: ("ASSET" | "DATA_PRODUCT")
                                      ) -> _CreateListingChangeSetResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListingChangeSetResponseSuccess
 
@@ -892,6 +980,16 @@ module Aws
                                identifier: ::String
                              ) -> _DeleteAssetTypeResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetTypeResponseSuccess
+
+      interface _DeleteDataProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataProductOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_data_product-instance_method
+      def delete_data_product: (
+                                 domain_identifier: ::String,
+                                 identifier: ::String
+                               ) -> _DeleteDataProductResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataProductResponseSuccess
 
       interface _DeleteDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceOutput]
@@ -1169,6 +1267,31 @@ module Aws
                           ) -> _GetAssetTypeResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetTypeResponseSuccess
 
+      interface _GetDataProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataProductOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def first_revision_created_at: () -> ::Time
+        def first_revision_created_by: () -> ::String
+        def forms_output: () -> ::Array[Types::FormOutput]
+        def glossary_terms: () -> ::Array[::String]
+        def id: () -> ::String
+        def items: () -> ::Array[Types::DataProductItem]
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def revision: () -> ::String
+        def status: () -> ("CREATED" | "CREATING" | "CREATE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_data_product-instance_method
+      def get_data_product: (
+                              domain_identifier: ::String,
+                              identifier: ::String,
+                              ?revision: ::String
+                            ) -> _GetDataProductResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataProductResponseSuccess
+
       interface _GetDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceOutput]
         def asset_forms_output: () -> ::Array[Types::FormOutput]
@@ -1331,6 +1454,20 @@ module Aws
                                                      environment_blueprint_identifier: ::String
                                                    ) -> _GetEnvironmentBlueprintConfigurationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentBlueprintConfigurationResponseSuccess
+
+      interface _GetEnvironmentCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentCredentialsOutput]
+        def access_key_id: () -> ::String
+        def expiration: () -> ::Time
+        def secret_access_key: () -> ::String
+        def session_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_environment_credentials-instance_method
+      def get_environment_credentials: (
+                                         domain_identifier: ::String,
+                                         environment_identifier: ::String
+                                       ) -> _GetEnvironmentCredentialsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentCredentialsResponseSuccess
 
       interface _GetEnvironmentProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentProfileOutput]
@@ -1683,6 +1820,20 @@ module Aws
                                 ) -> _ListAssetRevisionsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetRevisionsResponseSuccess
 
+      interface _ListDataProductRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataProductRevisionsOutput]
+        def items: () -> ::Array[Types::DataProductRevision]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_data_product_revisions-instance_method
+      def list_data_product_revisions: (
+                                         domain_identifier: ::String,
+                                         identifier: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListDataProductRevisionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataProductRevisionsResponseSuccess
+
       interface _ListDataSourceRunActivitiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourceRunActivitiesOutput]
         def items: () -> ::Array[Types::DataSourceRunActivity]
@@ -1919,6 +2070,7 @@ module Aws
                                       ?environment_id: ::String,
                                       ?max_results: ::Integer,
                                       ?next_token: ::String,
+                                      ?owning_project_id: ::String,
                                       ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
                                       ?sort_order: ("ASCENDING" | "DESCENDING"),
                                       ?subscribed_listing_id: ::String,
@@ -2177,7 +2329,7 @@ module Aws
                         attribute: ::String
                       },
                     ],
-                    search_scope: ("ASSET" | "GLOSSARY" | "GLOSSARY_TERM"),
+                    search_scope: ("ASSET" | "GLOSSARY" | "GLOSSARY_TERM" | "DATA_PRODUCT"),
                     ?search_text: ::String,
                     ?sort: {
                       attribute: ::String,

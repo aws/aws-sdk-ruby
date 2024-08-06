@@ -289,6 +289,8 @@ module Aws
       end
       class NumberOfRulesExceededException < ::Aws::Errors::ServiceError
       end
+      class OperationNotAllowedException < ::Aws::Errors::ServiceError
+      end
       class OverrideAlreadySetException < ::Aws::Errors::ServiceError
       end
       class OverrideStatusRequiredException < ::Aws::Errors::ServiceError

@@ -527,8 +527,11 @@ module Aws::BedrockRuntime
     # Sends messages to the specified Amazon Bedrock model. `Converse`
     # provides a consistent interface that works with all models that
     # support messages. This allows you to write code once and use it with
-    # different models. Should a model have unique inference parameters, you
-    # can also pass those unique parameters to the model.
+    # different models. If a model has unique inference parameters, you can
+    # also pass those unique parameters to the model.
+    #
+    # Amazon Bedrock doesn't store any text, images, or documents that you
+    # provide as content. The data is only used to generate the response.
     #
     # For information about the Converse API, see *Use the Converse API* in
     # the *Amazon Bedrock User Guide*. To use a guardrail, see *Use a
@@ -861,6 +864,14 @@ module Aws::BedrockRuntime
     # [GetFoundationModel][1] and check the `responseStreamingSupported`
     # field in the response.
     #
+    # <note markdown="1"> The CLI doesn't support streaming operations in Amazon Bedrock,
+    # including `ConverseStream`.
+    #
+    #  </note>
+    #
+    # Amazon Bedrock doesn't store any text, images, or documents that you
+    # provide as content. The data is only used to generate the response.
+    #
     # For information about the Converse API, see *Use the Converse API* in
     # the *Amazon Bedrock User Guide*. To use a guardrail, see *Use a
     # guardrail with the Converse API* in the *Amazon Bedrock User Guide*.
@@ -1032,6 +1043,9 @@ module Aws::BedrockRuntime
     #       handler.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
     #       end
+    #       handler.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #       end
     #
     #     client.converse_stream( # params input #, event_stream_handler: handler)
     #
@@ -1069,6 +1083,9 @@ module Aws::BedrockRuntime
     #       stream.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
     #       end
+    #       stream.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #       end
     #     end
     #
     #     client.converse_stream( # params input #, event_stream_handler: handler)
@@ -1105,6 +1122,9 @@ module Aws::BedrockRuntime
     #       end
     #       handler.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
+    #       end
+    #       handler.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
     #       end
     #
     #     client.converse_stream( # params input #, event_stream_handler: handler) do |stream|
@@ -1241,7 +1261,7 @@ module Aws::BedrockRuntime
     #
     #   All events are available at resp.stream:
     #   resp.stream #=> Enumerator
-    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception]
+    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :service_unavailable_exception]
     #
     #   For :message_start event available at #on_message_start_event callback and response eventstream enumerator:
     #   event.role #=> String, one of "user", "assistant"
@@ -1343,6 +1363,9 @@ module Aws::BedrockRuntime
     #   event.message #=> String
     #
     #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStream AWS API Documentation
@@ -1486,7 +1509,8 @@ module Aws::BedrockRuntime
     # To see if a model supports streaming, call [GetFoundationModel][1] and
     # check the `responseStreamingSupported` field in the response.
     #
-    # <note markdown="1"> The CLI doesn't support `InvokeModelWithResponseStream`.
+    # <note markdown="1"> The CLI doesn't support streaming operations in Amazon Bedrock,
+    # including `InvokeModelWithResponseStream`.
     #
     #  </note>
     #
@@ -1632,6 +1656,9 @@ module Aws::BedrockRuntime
     #       handler.on_model_timeout_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
     #       end
+    #       handler.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #       end
     #
     #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler)
     #
@@ -1657,6 +1684,9 @@ module Aws::BedrockRuntime
     #       stream.on_model_timeout_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
     #       end
+    #       stream.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
+    #       end
     #     end
     #
     #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler)
@@ -1681,6 +1711,9 @@ module Aws::BedrockRuntime
     #       end
     #       handler.on_model_timeout_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #       end
+    #       handler.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::serviceUnavailableException
     #       end
     #
     #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler) do |stream|
@@ -1715,7 +1748,7 @@ module Aws::BedrockRuntime
     #
     #   All events are available at resp.body:
     #   resp.body #=> Enumerator
-    #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception]
+    #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception, :service_unavailable_exception]
     #
     #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
     #   event.bytes #=> String
@@ -1735,6 +1768,9 @@ module Aws::BedrockRuntime
     #   event.message #=> String
     #
     #   For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.content_type #=> String
@@ -1779,7 +1815,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

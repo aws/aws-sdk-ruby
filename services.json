@@ -1069,6 +1069,9 @@
   "SSMIncidents": {
     "models": "ssm-incidents/2018-05-10"
   },
+  "SSMQuickSetup": {
+    "models": "ssm-quicksetup/2018-05-10"
+  },
   "SSO": {
     "models": "sso/2019-06-10",
     "gemName": "aws-sdk-core"

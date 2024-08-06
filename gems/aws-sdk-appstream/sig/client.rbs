@@ -255,7 +255,7 @@ module Aws
                                 launch_path: ::String,
                                 ?working_directory: ::String,
                                 ?launch_parameters: ::String,
-                                platforms: Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")],
+                                platforms: Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8")],
                                 instance_families: Array[::String],
                                 app_block_arn: ::String,
                                 ?tags: Hash[::String, ::String]
@@ -332,7 +332,7 @@ module Aws
                           ?idle_disconnect_timeout_in_seconds: ::Integer,
                           ?iam_role_arn: ::String,
                           ?stream_view: ("APP" | "DESKTOP"),
-                          ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2"),
+                          ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8"),
                           ?max_concurrent_sessions: ::Integer,
                           ?usb_device_filter_strings: Array[::String],
                           ?session_script_s3_location: {
@@ -1022,7 +1022,7 @@ module Aws
                                       name: ::String,
                                       ?description: ::String,
                                       ?display_name: ::String,
-                                      ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2"),
+                                      ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8"),
                                       ?instance_type: ::String,
                                       ?vpc_config: {
                                         subnet_ids: Array[::String]?,
@@ -1131,7 +1131,7 @@ module Aws
                           ?attributes_to_delete: Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE")],
                           ?iam_role_arn: ::String,
                           ?stream_view: ("APP" | "DESKTOP"),
-                          ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2"),
+                          ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2" | "RHEL8"),
                           ?max_concurrent_sessions: ::Integer,
                           ?usb_device_filter_strings: Array[::String],
                           ?session_script_s3_location: {

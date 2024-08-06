@@ -1677,7 +1677,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryInput AWS API Documentation
@@ -5193,6 +5193,12 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The requested action is not allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/OperationNotAllowedException AWS API Documentation
+    #
+    class OperationNotAllowedException < Aws::EmptyStructure; end
+
     # Returns information about the template that created the approval rule
     # for a pull request.
     #
@@ -7147,7 +7153,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryEncryptionKeyInput AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.200.0 (2024-08-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssmquicksetup` gem.
+
 3.199.0 (2024-07-23)
 ------------------
 

@@ -425,6 +425,12 @@ module Aws::KinesisVideoWebRTCStorage
 
     # @!group API Operations
 
+    # <note markdown="1"> Before using this API, you must call the `GetSignalingChannelEndpoint`
+    # API to request the WEBRTC endpoint. You then specify the endpoint and
+    # region in your `JoinStorageSession` API request.
+    #
+    #  </note>
+    #
     # Join the ongoing one way-video and/or multi-way audio WebRTC session
     # as a video producing device for an input channel. If there’s no
     # existing session for the channel, a new streaming session needs to be
@@ -432,17 +438,33 @@ module Aws::KinesisVideoWebRTCStorage
     # must be provided.
     #
     # Currently for the `SINGLE_MASTER` type, a video producing device is
-    # able to ingest both audio and video media into a stream, while viewers
-    # can only ingest audio. Both a video producing device and viewers can
-    # join the session first, and wait for other participants.
+    # able to ingest both audio and video media into a stream. Only video
+    # producing devices can join the session and record media.
     #
-    # While participants are having peer to peer conversations through
-    # webRTC, the ingested media session will be stored into the Kinesis
-    # Video Stream. Multiple viewers are able to playback real-time media.
+    # Both audio and video tracks are currently required for WebRTC
+    # ingestion.
     #
-    # Customers can also use existing Kinesis Video Streams features like
-    # `HLS` or `DASH` playback, Image generation, and more with ingested
-    # WebRTC media.
+    #  Current requirements:
+    #
+    #  * Video track: H.264
+    #
+    # * Audio track: Opus
+    #
+    # The resulting ingested video in the Kinesis video stream will have the
+    # following parameters: H.264 video and AAC audio.
+    #
+    # Once a master participant has negotiated a connection through WebRTC,
+    # the ingested media session will be stored in the Kinesis video stream.
+    # Multiple viewers are then able to play back real-time media through
+    # our Playback APIs.
+    #
+    # You can also use existing Kinesis Video Streams features like `HLS` or
+    # `DASH` playback, image generation via [GetImages][1], and more with
+    # ingested WebRTC media.
+    #
+    # <note markdown="1"> S3 image delivery and notifications are not currently supported.
+    #
+    #  </note>
     #
     # <note markdown="1"> Assume that only one video producing device client can be associated
     # with a session for the channel. If more than one client joins the
@@ -450,6 +472,19 @@ module Aws::KinesisVideoWebRTCStorage
     # recent client request takes precedence.
     #
     #  </note>
+    #
+    # **Additional information**
+    #
+    # * **Idempotent** - This API is not idempotent.
+    #
+    # * **Retry behavior** - This is counted as a new API call.
+    #
+    # * **Concurrent calls** - Concurrent calls are allowed. An offer is
+    #   sent once per each call.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/gs-getImages.html
     #
     # @option params [required, String] :channel_arn
     #   The Amazon Resource Name (ARN) of the signaling channel.
@@ -471,6 +506,50 @@ module Aws::KinesisVideoWebRTCStorage
       req.send_request(options)
     end
 
+    # Join the ongoing one way-video and/or multi-way audio WebRTC session
+    # as a viewer for an input channel. If there’s no existing session for
+    # the channel, create a new streaming session and provide the Amazon
+    # Resource Name (ARN) of the signaling channel (`channelArn`) and client
+    # id (`clientId`).
+    #
+    # Currently for `SINGLE_MASTER` type, a video producing device is able
+    # to ingest both audio and video media into a stream, while viewers can
+    # only ingest audio. Both a video producing device and viewers can join
+    # a session first and wait for other participants. While participants
+    # are having peer to peer conversations through WebRTC, the ingested
+    # media session will be stored into the Kinesis Video Stream. Multiple
+    # viewers are able to playback real-time media.
+    #
+    # Customers can also use existing Kinesis Video Streams features like
+    # `HLS` or `DASH` playback, Image generation, and more with ingested
+    # WebRTC media. If there’s an existing session with the same `clientId`
+    # that's found in the join session request, the new request takes
+    # precedence.
+    #
+    # @option params [required, String] :channel_arn
+    #   The Amazon Resource Name (ARN) of the signaling channel.
+    #
+    # @option params [required, String] :client_id
+    #   The unique identifier for the sender client.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.join_storage_session_as_viewer({
+    #     channel_arn: "ChannelArn", # required
+    #     client_id: "ClientId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-webrtc-storage-2018-05-10/JoinStorageSessionAsViewer AWS API Documentation
+    #
+    # @overload join_storage_session_as_viewer(params = {})
+    # @param [Hash] params ({})
+    def join_storage_session_as_viewer(params = {}, options = {})
+      req = build_request(:join_storage_session_as_viewer, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -484,7 +563,7 @@ module Aws::KinesisVideoWebRTCStorage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideowebrtcstorage'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

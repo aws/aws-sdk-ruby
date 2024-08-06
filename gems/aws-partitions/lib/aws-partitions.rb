@@ -569,6 +569,7 @@ module Aws
             'SSM' => 'ssm',
             'SSMContacts' => 'ssm-contacts',
             'SSMIncidents' => 'ssm-incidents',
+            'SSMQuickSetup' => 'ssm-quicksetup',
             'SSO' => 'portal.sso',
             'SSOAdmin' => 'sso',
             'SSOOIDC' => 'oidc',

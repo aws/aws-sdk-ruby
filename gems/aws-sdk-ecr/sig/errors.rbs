@@ -103,6 +103,12 @@ module Aws
       class ServerException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class TemplateAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TemplateNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class TooManyTagsException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

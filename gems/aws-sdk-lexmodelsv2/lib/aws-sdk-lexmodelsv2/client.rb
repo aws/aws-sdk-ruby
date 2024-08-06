@@ -1050,6 +1050,12 @@ module Aws::LexModelsV2
     #           enabled: false, # required
     #           bedrock_model_specification: {
     #             model_arn: "BedrockModelArn", # required
+    #             guardrail: {
+    #               identifier: "BedrockGuardrailIdentifier", # required
+    #               version: "BedrockGuardrailVersion", # required
+    #             },
+    #             trace_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
     #       },
@@ -1058,12 +1064,24 @@ module Aws::LexModelsV2
     #           enabled: false, # required
     #           bedrock_model_specification: {
     #             model_arn: "BedrockModelArn", # required
+    #             guardrail: {
+    #               identifier: "BedrockGuardrailIdentifier", # required
+    #               version: "BedrockGuardrailVersion", # required
+    #             },
+    #             trace_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
     #         sample_utterance_generation: {
     #           enabled: false, # required
     #           bedrock_model_specification: {
     #             model_arn: "BedrockModelArn", # required
+    #             guardrail: {
+    #               identifier: "BedrockGuardrailIdentifier", # required
+    #               version: "BedrockGuardrailVersion", # required
+    #             },
+    #             trace_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
     #       },
@@ -1084,10 +1102,22 @@ module Aws::LexModelsV2
     #   resp.creation_date_time #=> Time
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocale AWS API Documentation
     #
@@ -1512,6 +1542,9 @@ module Aws::LexModelsV2
     #
     # You can't create a resource policy statement that allows
     # cross-account access.
+    #
+    # You need to add the `CreateResourcePolicy` or `UpdateResourcePolicy`
+    # action to the bot role in order to call the API.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the bot or bot alias that the
@@ -3083,6 +3116,9 @@ module Aws::LexModelsV2
     # alias doesn't have a policy attached, Amazon Lex returns an
     # exception.
     #
+    # You need to add the `DeleteResourcePolicy` or `UpdateResourcePolicy`
+    # action to the bot role in order to call the API.
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the bot or bot alias that the
     #   resource policy is attached to.
@@ -3511,10 +3547,22 @@ module Aws::LexModelsV2
     #   resp.recommended_actions[0] #=> String
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -9008,6 +9056,12 @@ module Aws::LexModelsV2
     #           enabled: false, # required
     #           bedrock_model_specification: {
     #             model_arn: "BedrockModelArn", # required
+    #             guardrail: {
+    #               identifier: "BedrockGuardrailIdentifier", # required
+    #               version: "BedrockGuardrailVersion", # required
+    #             },
+    #             trace_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
     #       },
@@ -9016,12 +9070,24 @@ module Aws::LexModelsV2
     #           enabled: false, # required
     #           bedrock_model_specification: {
     #             model_arn: "BedrockModelArn", # required
+    #             guardrail: {
+    #               identifier: "BedrockGuardrailIdentifier", # required
+    #               version: "BedrockGuardrailVersion", # required
+    #             },
+    #             trace_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
     #         sample_utterance_generation: {
     #           enabled: false, # required
     #           bedrock_model_specification: {
     #             model_arn: "BedrockModelArn", # required
+    #             guardrail: {
+    #               identifier: "BedrockGuardrailIdentifier", # required
+    #               version: "BedrockGuardrailVersion", # required
+    #             },
+    #             trace_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
     #       },
@@ -9047,10 +9113,22 @@ module Aws::LexModelsV2
     #   resp.recommended_actions[0] #=> String
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.custom_prompt #=> String
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.identifier #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.guardrail.version #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.custom_prompt #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocale AWS API Documentation
     #
@@ -10393,7 +10471,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

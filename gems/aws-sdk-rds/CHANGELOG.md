@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.241.0 (2024-08-01)
+------------------
+
+* Feature - This release adds support for specifying optional MinACU parameter in CreateDBShardGroup and ModifyDBShardGroup API. DBShardGroup response will contain MinACU if specified.
+
 1.240.0 (2024-07-18)
 ------------------
 

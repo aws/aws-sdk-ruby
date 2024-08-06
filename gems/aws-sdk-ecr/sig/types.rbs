@@ -119,6 +119,25 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class CreateRepositoryCreationTemplateRequest
+      attr_accessor prefix: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfigurationForRepositoryCreationTemplate
+      attr_accessor resource_tags: ::Array[Types::Tag]
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor repository_policy: ::String
+      attr_accessor lifecycle_policy: ::String
+      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
+      attr_accessor custom_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryCreationTemplateResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_creation_template: Types::RepositoryCreationTemplate
+      SENSITIVE: []
+    end
+
     class CreateRepositoryRequest
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
@@ -192,6 +211,17 @@ module Aws::ECR
     class DeleteRegistryPolicyResponse
       attr_accessor registry_id: ::String
       attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryCreationTemplateRequest
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryCreationTemplateResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_creation_template: Types::RepositoryCreationTemplate
       SENSITIVE: []
     end
 
@@ -311,12 +341,32 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class DescribeRepositoryCreationTemplatesRequest
+      attr_accessor prefixes: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoryCreationTemplatesResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_creation_templates: ::Array[Types::RepositoryCreationTemplate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class EmptyUploadException
       attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class EncryptionConfiguration
+      attr_accessor encryption_type: ("AES256" | "KMS")
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfigurationForRepositoryCreationTemplate
       attr_accessor encryption_type: ("AES256" | "KMS")
       attr_accessor kms_key: ::String
       SENSITIVE: []
@@ -338,6 +388,17 @@ module Aws::ECR
       attr_accessor title: ::String
       attr_accessor type: ::String
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingResponse
+      attr_accessor name: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -717,6 +778,18 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class PutAccountSettingRequest
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingResponse
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class PutImageRequest
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
@@ -873,6 +946,21 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class RepositoryCreationTemplate
+      attr_accessor prefix: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfigurationForRepositoryCreationTemplate
+      attr_accessor resource_tags: ::Array[Types::Tag]
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor repository_policy: ::String
+      attr_accessor lifecycle_policy: ::String
+      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
+      attr_accessor custom_role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class RepositoryFilter
       attr_accessor filter: ::String
       attr_accessor filter_type: ("PREFIX_MATCH")
@@ -1009,6 +1097,16 @@ module Aws::ECR
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TemplateAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class TooManyTagsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1065,6 +1163,25 @@ module Aws::ECR
       attr_accessor registry_id: ::String
       attr_accessor updated_at: ::Time
       attr_accessor credential_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryCreationTemplateRequest
+      attr_accessor prefix: ::String
+      attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfigurationForRepositoryCreationTemplate
+      attr_accessor resource_tags: ::Array[Types::Tag]
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor repository_policy: ::String
+      attr_accessor lifecycle_policy: ::String
+      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
+      attr_accessor custom_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryCreationTemplateResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_creation_template: Types::RepositoryCreationTemplate
       SENSITIVE: []
     end
 

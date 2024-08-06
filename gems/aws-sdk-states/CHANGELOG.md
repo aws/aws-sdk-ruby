@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-07-25)
+------------------
+
+* Feature - This release adds support to customer managed KMS key encryption in AWS Step Functions.
+
 1.72.0 (2024-07-02)
 ------------------
 

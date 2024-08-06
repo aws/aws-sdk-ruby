@@ -293,6 +293,11 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class BeforeEntryConditions
+      attr_accessor conditions: ::Array[Types::Condition]
+      SENSITIVE: []
+    end
+
     class BlockerDeclaration
       attr_accessor name: ::String
       attr_accessor type: ("Schedule")
@@ -306,6 +311,30 @@ module Aws::CodePipeline
 
     class ConcurrentPipelineExecutionsLimitExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor result: ("ROLLBACK" | "FAIL")
+      attr_accessor rules: ::Array[Types::RuleDeclaration]
+      SENSITIVE: []
+    end
+
+    class ConditionExecution
+      attr_accessor status: ("InProgress" | "Failed" | "Errored" | "Succeeded" | "Cancelled" | "Abandoned" | "Overridden")
+      attr_accessor summary: ::String
+      attr_accessor last_status_change: ::Time
+      SENSITIVE: []
+    end
+
+    class ConditionNotOverridableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConditionState
+      attr_accessor latest_execution: Types::ConditionExecution
+      attr_accessor rule_states: ::Array[Types::RuleState]
       SENSITIVE: []
     end
 
@@ -432,7 +461,8 @@ module Aws::CodePipeline
     end
 
     class FailureConditions
-      attr_accessor result: ("ROLLBACK")
+      attr_accessor result: ("ROLLBACK" | "FAIL")
+      attr_accessor conditions: ::Array[Types::Condition]
       SENSITIVE: []
     end
 
@@ -707,6 +737,31 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class ListRuleExecutionsInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor filter: Types::RuleExecutionFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuleExecutionsOutput
+      attr_accessor rule_execution_details: ::Array[Types::RuleExecutionDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuleTypesInput
+      attr_accessor rule_owner_filter: ("AWS")
+      attr_accessor region_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuleTypesOutput
+      attr_accessor rule_types: ::Array[Types::RuleType]
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceInput
       attr_accessor resource_arn: ::String
       attr_accessor next_token: ::String
@@ -753,6 +808,14 @@ module Aws::CodePipeline
 
     class OutputVariablesSizeExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OverrideStageConditionInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor condition_type: ("BEFORE_ENTRY" | "ON_SUCCESS")
       SENSITIVE: []
     end
 
@@ -1018,6 +1081,125 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class RuleConfigurationProperty
+      attr_accessor name: ::String
+      attr_accessor required: bool
+      attr_accessor key: bool
+      attr_accessor secret: bool
+      attr_accessor queryable: bool
+      attr_accessor description: ::String
+      attr_accessor type: ("String" | "Number" | "Boolean")
+      SENSITIVE: []
+    end
+
+    class RuleDeclaration
+      attr_accessor name: ::String
+      attr_accessor rule_type_id: Types::RuleTypeId
+      attr_accessor configuration: ::Hash[::String, ::String]
+      attr_accessor input_artifacts: ::Array[Types::InputArtifact]
+      attr_accessor role_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class RuleExecution
+      attr_accessor rule_execution_id: ::String
+      attr_accessor status: ("InProgress" | "Abandoned" | "Succeeded" | "Failed")
+      attr_accessor summary: ::String
+      attr_accessor last_status_change: ::Time
+      attr_accessor token: ::String
+      attr_accessor last_updated_by: ::String
+      attr_accessor external_execution_id: ::String
+      attr_accessor external_execution_url: ::String
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class RuleExecutionDetail
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor rule_execution_id: ::String
+      attr_accessor pipeline_version: ::Integer
+      attr_accessor stage_name: ::String
+      attr_accessor rule_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor status: ("InProgress" | "Abandoned" | "Succeeded" | "Failed")
+      attr_accessor input: Types::RuleExecutionInput
+      attr_accessor output: Types::RuleExecutionOutput
+      SENSITIVE: []
+    end
+
+    class RuleExecutionFilter
+      attr_accessor pipeline_execution_id: ::String
+      attr_accessor latest_in_pipeline_execution: Types::LatestInPipelineExecutionFilter
+      SENSITIVE: []
+    end
+
+    class RuleExecutionInput
+      attr_accessor rule_type_id: Types::RuleTypeId
+      attr_accessor configuration: ::Hash[::String, ::String]
+      attr_accessor resolved_configuration: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor input_artifacts: ::Array[Types::ArtifactDetail]
+      SENSITIVE: []
+    end
+
+    class RuleExecutionOutput
+      attr_accessor execution_result: Types::RuleExecutionResult
+      SENSITIVE: []
+    end
+
+    class RuleExecutionResult
+      attr_accessor external_execution_id: ::String
+      attr_accessor external_execution_summary: ::String
+      attr_accessor external_execution_url: ::String
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class RuleRevision
+      attr_accessor revision_id: ::String
+      attr_accessor revision_change_id: ::String
+      attr_accessor created: ::Time
+      SENSITIVE: []
+    end
+
+    class RuleState
+      attr_accessor rule_name: ::String
+      attr_accessor current_revision: Types::RuleRevision
+      attr_accessor latest_execution: Types::RuleExecution
+      attr_accessor entity_url: ::String
+      attr_accessor revision_url: ::String
+      SENSITIVE: []
+    end
+
+    class RuleType
+      attr_accessor id: Types::RuleTypeId
+      attr_accessor settings: Types::RuleTypeSettings
+      attr_accessor rule_configuration_properties: ::Array[Types::RuleConfigurationProperty]
+      attr_accessor input_artifact_details: Types::ArtifactDetails
+      SENSITIVE: []
+    end
+
+    class RuleTypeId
+      attr_accessor category: ("Rule")
+      attr_accessor owner: ("AWS")
+      attr_accessor provider: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class RuleTypeSettings
+      attr_accessor third_party_configuration_url: ::String
+      attr_accessor entity_url_template: ::String
+      attr_accessor execution_url_template: ::String
+      attr_accessor revision_url_template: ::String
+      SENSITIVE: []
+    end
+
     class S3ArtifactLocation
       attr_accessor bucket_name: ::String
       attr_accessor object_key: ::String
@@ -1045,6 +1227,18 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class StageConditionState
+      attr_accessor latest_execution: Types::StageConditionsExecution
+      attr_accessor condition_states: ::Array[Types::ConditionState]
+      SENSITIVE: []
+    end
+
+    class StageConditionsExecution
+      attr_accessor status: ("InProgress" | "Failed" | "Errored" | "Succeeded" | "Cancelled" | "Abandoned" | "Overridden")
+      attr_accessor summary: ::String
+      SENSITIVE: []
+    end
+
     class StageContext
       attr_accessor name: ::String
       SENSITIVE: []
@@ -1055,6 +1249,8 @@ module Aws::CodePipeline
       attr_accessor blockers: ::Array[Types::BlockerDeclaration]
       attr_accessor actions: ::Array[Types::ActionDeclaration]
       attr_accessor on_failure: Types::FailureConditions
+      attr_accessor on_success: Types::SuccessConditions
+      attr_accessor before_entry: Types::BeforeEntryConditions
       SENSITIVE: []
     end
 
@@ -1078,6 +1274,9 @@ module Aws::CodePipeline
       attr_accessor inbound_transition_state: Types::TransitionState
       attr_accessor action_states: ::Array[Types::ActionState]
       attr_accessor latest_execution: Types::StageExecution
+      attr_accessor before_entry_condition_state: Types::StageConditionState
+      attr_accessor on_success_condition_state: Types::StageConditionState
+      attr_accessor on_failure_condition_state: Types::StageConditionState
       SENSITIVE: []
     end
 
@@ -1114,6 +1313,11 @@ module Aws::CodePipeline
 
     class SucceededInStageFilter
       attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessConditions
+      attr_accessor conditions: ::Array[Types::Condition]
       SENSITIVE: []
     end
 

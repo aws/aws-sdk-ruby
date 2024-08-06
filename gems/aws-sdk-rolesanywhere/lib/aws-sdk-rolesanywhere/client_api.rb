@@ -123,6 +123,7 @@ module Aws::RolesAnywhere
 
     AttributeMappings.member = Shapes::ShapeRef.new(shape: AttributeMapping)
 
+    CreateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     CreateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CreateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
     CreateProfileRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CreateProfileRequest.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
@@ -246,6 +247,7 @@ module Aws::RolesAnywhere
 
     NotificationSettings.member = Shapes::ShapeRef.new(shape: NotificationSetting)
 
+    ProfileDetail.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     ProfileDetail.add_member(:attribute_mappings, Shapes::ShapeRef.new(shape: AttributeMappings, location_name: "attributeMappings"))
     ProfileDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     ProfileDetail.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
@@ -387,6 +389,7 @@ module Aws::RolesAnywhere
     UpdateCrlRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateCrlRequest.struct_class = Types::UpdateCrlRequest
 
+    UpdateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     UpdateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: UpdateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
     UpdateProfileRequest.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
     UpdateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -411,9 +414,11 @@ module Aws::RolesAnywhere
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rolesanywhere",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "IAM Roles Anywhere",
         "serviceId" => "RolesAnywhere",
         "signatureVersion" => "v4",

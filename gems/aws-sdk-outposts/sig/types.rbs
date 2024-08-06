@@ -300,6 +300,7 @@ module Aws::Outposts
 
     class InstanceTypeItem
       attr_accessor instance_type: ::String
+      attr_accessor vcp_us: ::Integer
       SENSITIVE: []
     end
 

@@ -33550,10 +33550,47 @@ module Aws::EC2
     #   @return [Types::InstanceRequirements]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI. An AMI is required to launch an instance. This
-    #   parameter is only available for fleets of type `instant`. For fleets
-    #   of type `maintain` and `request`, you must specify the AMI ID in the
-    #   launch template.
+    #   The ID of the AMI in the format `ami-17characters00000`.
+    #
+    #   Alternatively, you can specify a Systems Manager parameter, using
+    #   one of the following formats. The Systems Manager parameter will
+    #   resolve to an AMI ID on launch.
+    #
+    #   To reference a public parameter:
+    #
+    #   * `resolve:ssm:public-parameter `
+    #
+    #   ^
+    #
+    #   To reference a parameter stored in the same account:
+    #
+    #   * `resolve:ssm:parameter-name `
+    #
+    #   * `resolve:ssm:parameter-name:version-number `
+    #
+    #   * `resolve:ssm:parameter-name:label `
+    #
+    #   To reference a parameter shared from another Amazon Web Services
+    #   account:
+    #
+    #   * `resolve:ssm:parameter-ARN `
+    #
+    #   * `resolve:ssm:parameter-ARN:version-number `
+    #
+    #   * `resolve:ssm:parameter-ARN:label `
+    #
+    #   For more information, see [Use a Systems Manager parameter instead
+    #   of an AMI ID][1] in the *Amazon EC2 User Guide*.
+    #
+    #   <note markdown="1"> This parameter is only available for fleets of type `instant`. For
+    #   fleets of type `maintain` and `request`, you must specify the AMI ID
+    #   in the launch template.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
@@ -33661,10 +33698,47 @@ module Aws::EC2
     #   @return [Types::InstanceRequirementsRequest]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI. An AMI is required to launch an instance. This
-    #   parameter is only available for fleets of type `instant`. For fleets
-    #   of type `maintain` and `request`, you must specify the AMI ID in the
-    #   launch template.
+    #   The ID of the AMI in the format `ami-17characters00000`.
+    #
+    #   Alternatively, you can specify a Systems Manager parameter, using
+    #   one of the following formats. The Systems Manager parameter will
+    #   resolve to an AMI ID on launch.
+    #
+    #   To reference a public parameter:
+    #
+    #   * `resolve:ssm:public-parameter `
+    #
+    #   ^
+    #
+    #   To reference a parameter stored in the same account:
+    #
+    #   * `resolve:ssm:parameter-name `
+    #
+    #   * `resolve:ssm:parameter-name:version-number `
+    #
+    #   * `resolve:ssm:parameter-name:label `
+    #
+    #   To reference a parameter shared from another Amazon Web Services
+    #   account:
+    #
+    #   * `resolve:ssm:parameter-ARN `
+    #
+    #   * `resolve:ssm:parameter-ARN:version-number `
+    #
+    #   * `resolve:ssm:parameter-ARN:label `
+    #
+    #   For more information, see [Use a Systems Manager parameter instead
+    #   of an AMI ID][1] in the *Amazon EC2 User Guide*.
+    #
+    #   <note markdown="1"> This parameter is only available for fleets of type `instant`. For
+    #   fleets of type `maintain` and `request`, you must specify the AMI ID
+    #   in the launch template.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
@@ -56815,29 +56889,48 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI. Alternatively, you can specify a Systems Manager
-    #   parameter, which will resolve to an AMI ID on launch.
+    #   The ID of the AMI in the format `ami-17characters00000`.
     #
-    #   Valid formats:
+    #   Alternatively, you can specify a Systems Manager parameter, using
+    #   one of the following formats. The Systems Manager parameter will
+    #   resolve to an AMI ID on launch.
     #
-    #   * `ami-17characters00000`
+    #   To reference a public parameter:
     #
-    #   * `resolve:ssm:parameter-name`
+    #   * `resolve:ssm:public-parameter `
     #
-    #   * `resolve:ssm:parameter-name:version-number`
+    #   ^
     #
-    #   * `resolve:ssm:parameter-name:label`
+    #   To reference a parameter stored in the same account:
     #
-    #   * `resolve:ssm:public-parameter`
+    #   * `resolve:ssm:parameter-name `
     #
-    #   <note markdown="1"> Currently, EC2 Fleet and Spot Fleet do not support specifying a
-    #   Systems Manager parameter. If the launch template will be used by an
-    #   EC2 Fleet or Spot Fleet, you must specify the AMI ID.
+    #   * `resolve:ssm:parameter-name:version-number `
     #
-    #    </note>
+    #   * `resolve:ssm:parameter-name:label `
+    #
+    #   To reference a parameter shared from another Amazon Web Services
+    #   account:
+    #
+    #   * `resolve:ssm:parameter-ARN `
+    #
+    #   * `resolve:ssm:parameter-ARN:version-number `
+    #
+    #   * `resolve:ssm:parameter-ARN:label `
     #
     #   For more information, see [Use a Systems Manager parameter instead
     #   of an AMI ID][1] in the *Amazon EC2 User Guide*.
+    #
+    #   <note markdown="1"> If the launch template will be used for an EC2 Fleet or Spot Fleet,
+    #   note the following:
+    #
+    #    * Only EC2 Fleets of type `instant` support specifying a Systems
+    #     Manager parameter.
+    #
+    #   * For EC2 Fleets of type `maintain` or `request`, or for Spot
+    #     Fleets, you must specify the AMI ID.
+    #
+    #    </note>
     #
     #
     #

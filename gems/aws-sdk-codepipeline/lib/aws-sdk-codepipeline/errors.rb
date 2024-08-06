@@ -33,6 +33,7 @@ module Aws::CodePipeline
   # * {ApprovalAlreadyCompletedException}
   # * {ConcurrentModificationException}
   # * {ConcurrentPipelineExecutionsLimitExceededException}
+  # * {ConditionNotOverridableException}
   # * {ConflictException}
   # * {DuplicatedStopRequestException}
   # * {InvalidActionDeclarationException}
@@ -134,6 +135,21 @@ module Aws::CodePipeline
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodePipeline::Types::ConcurrentPipelineExecutionsLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConditionNotOverridableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::ConditionNotOverridableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

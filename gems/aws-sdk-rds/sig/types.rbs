@@ -619,6 +619,7 @@ module Aws::RDS
       attr_accessor db_cluster_identifier: ::String
       attr_accessor compute_redundancy: ::Integer
       attr_accessor max_acu: ::Float
+      attr_accessor min_acu: ::Float
       attr_accessor publicly_accessible: bool
       SENSITIVE: []
     end
@@ -1483,6 +1484,7 @@ module Aws::RDS
       attr_accessor db_shard_group_identifier: ::String
       attr_accessor db_cluster_identifier: ::String
       attr_accessor max_acu: ::Float
+      attr_accessor min_acu: ::Float
       attr_accessor compute_redundancy: ::Integer
       attr_accessor status: ::String
       attr_accessor publicly_accessible: bool
@@ -3008,6 +3010,7 @@ module Aws::RDS
     class ModifyDBShardGroupMessage
       attr_accessor db_shard_group_identifier: ::String
       attr_accessor max_acu: ::Float
+      attr_accessor min_acu: ::Float
       SENSITIVE: []
     end
 

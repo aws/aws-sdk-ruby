@@ -85,6 +85,20 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateModelCopyJobRequest
+      attr_accessor source_model_arn: ::String
+      attr_accessor target_model_name: ::String
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor target_model_tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelCopyJobResponse
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateModelCustomizationJobRequest
       attr_accessor job_name: ::String
       attr_accessor custom_model_name: ::String
@@ -130,6 +144,7 @@ module Aws::Bedrock
       attr_accessor base_model_arn: ::String
       attr_accessor base_model_name: ::String
       attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING")
+      attr_accessor owner_account_id: ::String
       SENSITIVE: []
     end
 
@@ -360,6 +375,26 @@ module Aws::Bedrock
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_arn: ::String
       SENSITIVE: [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
+    end
+
+    class GetModelCopyJobRequest
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelCopyJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      attr_accessor creation_time: ::Time
+      attr_accessor target_model_arn: ::String
+      attr_accessor target_model_name: ::String
+      attr_accessor source_account_id: ::String
+      attr_accessor source_model_arn: ::String
+      attr_accessor target_model_kms_key_arn: ::String
+      attr_accessor target_model_tags: ::Array[Types::Tag]
+      attr_accessor failure_message: ::String
+      attr_accessor source_model_name: ::String
+      SENSITIVE: []
     end
 
     class GetModelCustomizationJobRequest
@@ -613,6 +648,7 @@ module Aws::Bedrock
       attr_accessor next_token: ::String
       attr_accessor sort_by: ("CreationTime")
       attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor is_owned: bool
       SENSITIVE: []
     end
 
@@ -663,6 +699,26 @@ module Aws::Bedrock
     class ListGuardrailsResponse
       attr_accessor guardrails: ::Array[Types::GuardrailSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListModelCopyJobsRequest
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed")
+      attr_accessor source_account_equals: ::String
+      attr_accessor source_model_arn_equals: ::String
+      attr_accessor target_model_name_contains: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CreationTime")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListModelCopyJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor model_copy_job_summaries: ::Array[Types::ModelCopyJobSummary]
       SENSITIVE: []
     end
 
@@ -719,6 +775,21 @@ module Aws::Bedrock
       attr_accessor text_data_delivery_enabled: bool
       attr_accessor image_data_delivery_enabled: bool
       attr_accessor embedding_data_delivery_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ModelCopyJobSummary
+      attr_accessor job_arn: ::String
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      attr_accessor creation_time: ::Time
+      attr_accessor target_model_arn: ::String
+      attr_accessor target_model_name: ::String
+      attr_accessor source_account_id: ::String
+      attr_accessor source_model_arn: ::String
+      attr_accessor target_model_kms_key_arn: ::String
+      attr_accessor target_model_tags: ::Array[Types::Tag]
+      attr_accessor failure_message: ::String
+      attr_accessor source_model_name: ::String
       SENSITIVE: []
     end
 

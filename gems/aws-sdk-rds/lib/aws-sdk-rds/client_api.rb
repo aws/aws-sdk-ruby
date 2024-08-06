@@ -1267,6 +1267,7 @@ module Aws::RDS
     CreateDBShardGroupMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     CreateDBShardGroupMessage.add_member(:compute_redundancy, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ComputeRedundancy"))
     CreateDBShardGroupMessage.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, required: true, location_name: "MaxACU"))
+    CreateDBShardGroupMessage.add_member(:min_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinACU"))
     CreateDBShardGroupMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     CreateDBShardGroupMessage.struct_class = Types::CreateDBShardGroupMessage
 
@@ -2018,6 +2019,7 @@ module Aws::RDS
     DBShardGroup.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, location_name: "DBShardGroupIdentifier"))
     DBShardGroup.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
     DBShardGroup.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxACU"))
+    DBShardGroup.add_member(:min_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinACU"))
     DBShardGroup.add_member(:compute_redundancy, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ComputeRedundancy"))
     DBShardGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DBShardGroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
@@ -3212,6 +3214,7 @@ module Aws::RDS
 
     ModifyDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, required: true, location_name: "DBShardGroupIdentifier"))
     ModifyDBShardGroupMessage.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxACU"))
+    ModifyDBShardGroupMessage.add_member(:min_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinACU"))
     ModifyDBShardGroupMessage.struct_class = Types::ModifyDBShardGroupMessage
 
     ModifyDBSnapshotAttributeMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))

@@ -13,6 +13,10 @@ module Aws::ResilienceHub
 
     include Seahorse::Model
 
+    AcceptGroupingRecommendationEntries = Shapes::ListShape.new(name: 'AcceptGroupingRecommendationEntries')
+    AcceptGroupingRecommendationEntry = Shapes::StructureShape.new(name: 'AcceptGroupingRecommendationEntry')
+    AcceptResourceGroupingRecommendationsRequest = Shapes::StructureShape.new(name: 'AcceptResourceGroupingRecommendationsRequest')
+    AcceptResourceGroupingRecommendationsResponse = Shapes::StructureShape.new(name: 'AcceptResourceGroupingRecommendationsResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AddDraftAppVersionResourceMappingsRequest = Shapes::StructureShape.new(name: 'AddDraftAppVersionResourceMappingsRequest')
     AddDraftAppVersionResourceMappingsResponse = Shapes::StructureShape.new(name: 'AddDraftAppVersionResourceMappingsResponse')
@@ -45,8 +49,11 @@ module Aws::ResilienceHub
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssessmentCompliance = Shapes::MapShape.new(name: 'AssessmentCompliance')
     AssessmentInvoker = Shapes::StringShape.new(name: 'AssessmentInvoker')
+    AssessmentRiskRecommendation = Shapes::StructureShape.new(name: 'AssessmentRiskRecommendation')
+    AssessmentRiskRecommendationList = Shapes::ListShape.new(name: 'AssessmentRiskRecommendationList')
     AssessmentStatus = Shapes::StringShape.new(name: 'AssessmentStatus')
     AssessmentStatusList = Shapes::ListShape.new(name: 'AssessmentStatusList')
+    AssessmentSummary = Shapes::StructureShape.new(name: 'AssessmentSummary')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     BatchUpdateRecommendationStatusFailedEntries = Shapes::ListShape.new(name: 'BatchUpdateRecommendationStatusFailedEntries')
     BatchUpdateRecommendationStatusFailedEntry = Shapes::StructureShape.new(name: 'BatchUpdateRecommendationStatusFailedEntry')
@@ -113,6 +120,8 @@ module Aws::ResilienceHub
     DescribeDraftAppVersionResourcesImportStatusResponse = Shapes::StructureShape.new(name: 'DescribeDraftAppVersionResourcesImportStatusResponse')
     DescribeResiliencyPolicyRequest = Shapes::StructureShape.new(name: 'DescribeResiliencyPolicyRequest')
     DescribeResiliencyPolicyResponse = Shapes::StructureShape.new(name: 'DescribeResiliencyPolicyResponse')
+    DescribeResourceGroupingRecommendationTaskRequest = Shapes::StructureShape.new(name: 'DescribeResourceGroupingRecommendationTaskRequest')
+    DescribeResourceGroupingRecommendationTaskResponse = Shapes::StructureShape.new(name: 'DescribeResourceGroupingRecommendationTaskResponse')
     DifferenceType = Shapes::StringShape.new(name: 'DifferenceType')
     DisruptionCompliance = Shapes::StructureShape.new(name: 'DisruptionCompliance')
     DisruptionPolicy = Shapes::MapShape.new(name: 'DisruptionPolicy')
@@ -130,6 +139,7 @@ module Aws::ResilienceHub
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
+    EntityName255 = Shapes::StringShape.new(name: 'EntityName255')
     EntityNameList = Shapes::ListShape.new(name: 'EntityNameList')
     EntityVersion = Shapes::StringShape.new(name: 'EntityVersion')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -138,7 +148,17 @@ module Aws::ResilienceHub
     EventSubscriptionList = Shapes::ListShape.new(name: 'EventSubscriptionList')
     EventType = Shapes::StringShape.new(name: 'EventType')
     ExcludeRecommendationReason = Shapes::StringShape.new(name: 'ExcludeRecommendationReason')
+    FailedGroupingRecommendationEntries = Shapes::ListShape.new(name: 'FailedGroupingRecommendationEntries')
+    FailedGroupingRecommendationEntry = Shapes::StructureShape.new(name: 'FailedGroupingRecommendationEntry')
     FailurePolicy = Shapes::StructureShape.new(name: 'FailurePolicy')
+    GroupingAppComponent = Shapes::StructureShape.new(name: 'GroupingAppComponent')
+    GroupingRecommendation = Shapes::StructureShape.new(name: 'GroupingRecommendation')
+    GroupingRecommendationConfidenceLevel = Shapes::StringShape.new(name: 'GroupingRecommendationConfidenceLevel')
+    GroupingRecommendationList = Shapes::ListShape.new(name: 'GroupingRecommendationList')
+    GroupingRecommendationRejectionReason = Shapes::StringShape.new(name: 'GroupingRecommendationRejectionReason')
+    GroupingRecommendationStatusType = Shapes::StringShape.new(name: 'GroupingRecommendationStatusType')
+    GroupingResource = Shapes::StructureShape.new(name: 'GroupingResource')
+    GroupingResourceList = Shapes::ListShape.new(name: 'GroupingResourceList')
     HaArchitecture = Shapes::StringShape.new(name: 'HaArchitecture')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IamRoleArnList = Shapes::ListShape.new(name: 'IamRoleArnList')
@@ -176,6 +196,8 @@ module Aws::ResilienceHub
     ListRecommendationTemplatesResponse = Shapes::StructureShape.new(name: 'ListRecommendationTemplatesResponse')
     ListResiliencyPoliciesRequest = Shapes::StructureShape.new(name: 'ListResiliencyPoliciesRequest')
     ListResiliencyPoliciesResponse = Shapes::StructureShape.new(name: 'ListResiliencyPoliciesResponse')
+    ListResourceGroupingRecommendationsRequest = Shapes::StructureShape.new(name: 'ListResourceGroupingRecommendationsRequest')
+    ListResourceGroupingRecommendationsResponse = Shapes::StructureShape.new(name: 'ListResourceGroupingRecommendationsResponse')
     ListSopRecommendationsRequest = Shapes::StructureShape.new(name: 'ListSopRecommendationsRequest')
     ListSopRecommendationsResponse = Shapes::StructureShape.new(name: 'ListSopRecommendationsResponse')
     ListSuggestedResiliencyPoliciesRequest = Shapes::StructureShape.new(name: 'ListSuggestedResiliencyPoliciesRequest')
@@ -212,6 +234,10 @@ module Aws::ResilienceHub
     RecommendationTemplateList = Shapes::ListShape.new(name: 'RecommendationTemplateList')
     RecommendationTemplateStatus = Shapes::StringShape.new(name: 'RecommendationTemplateStatus')
     RecommendationTemplateStatusList = Shapes::ListShape.new(name: 'RecommendationTemplateStatusList')
+    RejectGroupingRecommendationEntries = Shapes::ListShape.new(name: 'RejectGroupingRecommendationEntries')
+    RejectGroupingRecommendationEntry = Shapes::StructureShape.new(name: 'RejectGroupingRecommendationEntry')
+    RejectResourceGroupingRecommendationsRequest = Shapes::StructureShape.new(name: 'RejectResourceGroupingRecommendationsRequest')
+    RejectResourceGroupingRecommendationsResponse = Shapes::StructureShape.new(name: 'RejectResourceGroupingRecommendationsResponse')
     RemoveDraftAppVersionResourceMappingsRequest = Shapes::StructureShape.new(name: 'RemoveDraftAppVersionResourceMappingsRequest')
     RemoveDraftAppVersionResourceMappingsResponse = Shapes::StructureShape.new(name: 'RemoveDraftAppVersionResourceMappingsResponse')
     RenderRecommendationType = Shapes::StringShape.new(name: 'RenderRecommendationType')
@@ -239,6 +265,7 @@ module Aws::ResilienceHub
     ResourceResolutionStatusType = Shapes::StringShape.new(name: 'ResourceResolutionStatusType')
     ResourceSourceType = Shapes::StringShape.new(name: 'ResourceSourceType')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourcesGroupingRecGenStatusType = Shapes::StringShape.new(name: 'ResourcesGroupingRecGenStatusType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3Url = Shapes::StringShape.new(name: 'S3Url')
@@ -252,6 +279,8 @@ module Aws::ResilienceHub
     SpecReferenceId = Shapes::StringShape.new(name: 'SpecReferenceId')
     StartAppAssessmentRequest = Shapes::StructureShape.new(name: 'StartAppAssessmentRequest')
     StartAppAssessmentResponse = Shapes::StructureShape.new(name: 'StartAppAssessmentResponse')
+    StartResourceGroupingRecommendationTaskRequest = Shapes::StructureShape.new(name: 'StartResourceGroupingRecommendationTaskRequest')
+    StartResourceGroupingRecommendationTaskResponse = Shapes::StructureShape.new(name: 'StartResourceGroupingRecommendationTaskResponse')
     String1024 = Shapes::StringShape.new(name: 'String1024')
     String128WithoutWhitespace = Shapes::StringShape.new(name: 'String128WithoutWhitespace')
     String2048 = Shapes::StringShape.new(name: 'String2048')
@@ -293,6 +322,19 @@ module Aws::ResilienceHub
     UpdateResiliencyPolicyResponse = Shapes::StructureShape.new(name: 'UpdateResiliencyPolicyResponse')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+
+    AcceptGroupingRecommendationEntries.member = Shapes::ShapeRef.new(shape: AcceptGroupingRecommendationEntry)
+
+    AcceptGroupingRecommendationEntry.add_member(:grouping_recommendation_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "groupingRecommendationId"))
+    AcceptGroupingRecommendationEntry.struct_class = Types::AcceptGroupingRecommendationEntry
+
+    AcceptResourceGroupingRecommendationsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    AcceptResourceGroupingRecommendationsRequest.add_member(:entries, Shapes::ShapeRef.new(shape: AcceptGroupingRecommendationEntries, required: true, location_name: "entries"))
+    AcceptResourceGroupingRecommendationsRequest.struct_class = Types::AcceptResourceGroupingRecommendationsRequest
+
+    AcceptResourceGroupingRecommendationsResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    AcceptResourceGroupingRecommendationsResponse.add_member(:failed_entries, Shapes::ShapeRef.new(shape: FailedGroupingRecommendationEntries, required: true, location_name: "failedEntries"))
+    AcceptResourceGroupingRecommendationsResponse.struct_class = Types::AcceptResourceGroupingRecommendationsResponse
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String500, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -363,6 +405,7 @@ module Aws::ResilienceHub
     AppAssessment.add_member(:resiliency_score, Shapes::ShapeRef.new(shape: ResiliencyScore, location_name: "resiliencyScore"))
     AppAssessment.add_member(:resource_errors_details, Shapes::ShapeRef.new(shape: ResourceErrorsDetails, location_name: "resourceErrorsDetails"))
     AppAssessment.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "startTime"))
+    AppAssessment.add_member(:summary, Shapes::ShapeRef.new(shape: AssessmentSummary, location_name: "summary"))
     AppAssessment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     AppAssessment.add_member(:version_name, Shapes::ShapeRef.new(shape: EntityVersion, location_name: "versionName"))
     AppAssessment.struct_class = Types::AppAssessment
@@ -386,8 +429,8 @@ module Aws::ResilienceHub
     AppAssessmentSummaryList.member = Shapes::ShapeRef.new(shape: AppAssessmentSummary)
 
     AppComponent.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
-    AppComponent.add_member(:id, Shapes::ShapeRef.new(shape: String255, location_name: "id"))
-    AppComponent.add_member(:name, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "name"))
+    AppComponent.add_member(:id, Shapes::ShapeRef.new(shape: EntityName255, location_name: "id"))
+    AppComponent.add_member(:name, Shapes::ShapeRef.new(shape: EntityName255, required: true, location_name: "name"))
     AppComponent.add_member(:type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "type"))
     AppComponent.struct_class = Types::AppComponent
 
@@ -442,7 +485,18 @@ module Aws::ResilienceHub
     AssessmentCompliance.key = Shapes::ShapeRef.new(shape: DisruptionType)
     AssessmentCompliance.value = Shapes::ShapeRef.new(shape: DisruptionCompliance)
 
+    AssessmentRiskRecommendation.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentNameList, location_name: "appComponents"))
+    AssessmentRiskRecommendation.add_member(:recommendation, Shapes::ShapeRef.new(shape: String255, location_name: "recommendation"))
+    AssessmentRiskRecommendation.add_member(:risk, Shapes::ShapeRef.new(shape: String255, location_name: "risk"))
+    AssessmentRiskRecommendation.struct_class = Types::AssessmentRiskRecommendation
+
+    AssessmentRiskRecommendationList.member = Shapes::ShapeRef.new(shape: AssessmentRiskRecommendation)
+
     AssessmentStatusList.member = Shapes::ShapeRef.new(shape: AssessmentStatus)
+
+    AssessmentSummary.add_member(:risk_recommendations, Shapes::ShapeRef.new(shape: AssessmentRiskRecommendationList, location_name: "riskRecommendations"))
+    AssessmentSummary.add_member(:summary, Shapes::ShapeRef.new(shape: String500, location_name: "summary"))
+    AssessmentSummary.struct_class = Types::AssessmentSummary
 
     BatchUpdateRecommendationStatusFailedEntries.member = Shapes::ShapeRef.new(shape: BatchUpdateRecommendationStatusFailedEntry)
 
@@ -731,6 +785,15 @@ module Aws::ResilienceHub
     DescribeResiliencyPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResiliencyPolicy, required: true, location_name: "policy"))
     DescribeResiliencyPolicyResponse.struct_class = Types::DescribeResiliencyPolicyResponse
 
+    DescribeResourceGroupingRecommendationTaskRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    DescribeResourceGroupingRecommendationTaskRequest.add_member(:grouping_id, Shapes::ShapeRef.new(shape: String255, location_name: "groupingId"))
+    DescribeResourceGroupingRecommendationTaskRequest.struct_class = Types::DescribeResourceGroupingRecommendationTaskRequest
+
+    DescribeResourceGroupingRecommendationTaskResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String500, location_name: "errorMessage"))
+    DescribeResourceGroupingRecommendationTaskResponse.add_member(:grouping_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "groupingId"))
+    DescribeResourceGroupingRecommendationTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourcesGroupingRecGenStatusType, required: true, location_name: "status"))
+    DescribeResourceGroupingRecommendationTaskResponse.struct_class = Types::DescribeResourceGroupingRecommendationTaskResponse
+
     DisruptionCompliance.add_member(:achievable_rpo_in_secs, Shapes::ShapeRef.new(shape: Seconds, location_name: "achievableRpoInSecs"))
     DisruptionCompliance.add_member(:achievable_rto_in_secs, Shapes::ShapeRef.new(shape: Seconds, location_name: "achievableRtoInSecs"))
     DisruptionCompliance.add_member(:compliance_status, Shapes::ShapeRef.new(shape: ComplianceStatus, required: true, location_name: "complianceStatus"))
@@ -770,9 +833,42 @@ module Aws::ResilienceHub
 
     EventSubscriptionList.member = Shapes::ShapeRef.new(shape: EventSubscription)
 
+    FailedGroupingRecommendationEntries.member = Shapes::ShapeRef.new(shape: FailedGroupingRecommendationEntry)
+
+    FailedGroupingRecommendationEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "errorMessage"))
+    FailedGroupingRecommendationEntry.add_member(:grouping_recommendation_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "groupingRecommendationId"))
+    FailedGroupingRecommendationEntry.struct_class = Types::FailedGroupingRecommendationEntry
+
     FailurePolicy.add_member(:rpo_in_secs, Shapes::ShapeRef.new(shape: Seconds, required: true, location_name: "rpoInSecs"))
     FailurePolicy.add_member(:rto_in_secs, Shapes::ShapeRef.new(shape: Seconds, required: true, location_name: "rtoInSecs"))
     FailurePolicy.struct_class = Types::FailurePolicy
+
+    GroupingAppComponent.add_member(:app_component_id, Shapes::ShapeRef.new(shape: EntityName255, required: true, location_name: "appComponentId"))
+    GroupingAppComponent.add_member(:app_component_name, Shapes::ShapeRef.new(shape: EntityName255, required: true, location_name: "appComponentName"))
+    GroupingAppComponent.add_member(:app_component_type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "appComponentType"))
+    GroupingAppComponent.struct_class = Types::GroupingAppComponent
+
+    GroupingRecommendation.add_member(:confidence_level, Shapes::ShapeRef.new(shape: GroupingRecommendationConfidenceLevel, required: true, location_name: "confidenceLevel"))
+    GroupingRecommendation.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimeStamp, required: true, location_name: "creationTime"))
+    GroupingRecommendation.add_member(:grouping_app_component, Shapes::ShapeRef.new(shape: GroupingAppComponent, required: true, location_name: "groupingAppComponent"))
+    GroupingRecommendation.add_member(:grouping_recommendation_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "groupingRecommendationId"))
+    GroupingRecommendation.add_member(:recommendation_reasons, Shapes::ShapeRef.new(shape: String255List, required: true, location_name: "recommendationReasons"))
+    GroupingRecommendation.add_member(:rejection_reason, Shapes::ShapeRef.new(shape: GroupingRecommendationRejectionReason, location_name: "rejectionReason"))
+    GroupingRecommendation.add_member(:resources, Shapes::ShapeRef.new(shape: GroupingResourceList, required: true, location_name: "resources"))
+    GroupingRecommendation.add_member(:score, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "score"))
+    GroupingRecommendation.add_member(:status, Shapes::ShapeRef.new(shape: GroupingRecommendationStatusType, required: true, location_name: "status"))
+    GroupingRecommendation.struct_class = Types::GroupingRecommendation
+
+    GroupingRecommendationList.member = Shapes::ShapeRef.new(shape: GroupingRecommendation)
+
+    GroupingResource.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "logicalResourceId"))
+    GroupingResource.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, required: true, location_name: "physicalResourceId"))
+    GroupingResource.add_member(:resource_name, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "resourceName"))
+    GroupingResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "resourceType"))
+    GroupingResource.add_member(:source_app_component_ids, Shapes::ShapeRef.new(shape: String255List, required: true, location_name: "sourceAppComponentIds"))
+    GroupingResource.struct_class = Types::GroupingResource
+
+    GroupingResourceList.member = Shapes::ShapeRef.new(shape: GroupingResource)
 
     IamRoleArnList.member = Shapes::ShapeRef.new(shape: IamRoleArn)
 
@@ -943,6 +1039,15 @@ module Aws::ResilienceHub
     ListResiliencyPoliciesResponse.add_member(:resiliency_policies, Shapes::ShapeRef.new(shape: ResiliencyPolicies, required: true, location_name: "resiliencyPolicies"))
     ListResiliencyPoliciesResponse.struct_class = Types::ListResiliencyPoliciesResponse
 
+    ListResourceGroupingRecommendationsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "appArn"))
+    ListResourceGroupingRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListResourceGroupingRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListResourceGroupingRecommendationsRequest.struct_class = Types::ListResourceGroupingRecommendationsRequest
+
+    ListResourceGroupingRecommendationsResponse.add_member(:grouping_recommendations, Shapes::ShapeRef.new(shape: GroupingRecommendationList, required: true, location_name: "groupingRecommendations"))
+    ListResourceGroupingRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListResourceGroupingRecommendationsResponse.struct_class = Types::ListResourceGroupingRecommendationsResponse
+
     ListSopRecommendationsRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentArn"))
     ListSopRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListSopRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1078,6 +1183,20 @@ module Aws::ResilienceHub
 
     RecommendationTemplateStatusList.member = Shapes::ShapeRef.new(shape: RecommendationTemplateStatus)
 
+    RejectGroupingRecommendationEntries.member = Shapes::ShapeRef.new(shape: RejectGroupingRecommendationEntry)
+
+    RejectGroupingRecommendationEntry.add_member(:grouping_recommendation_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "groupingRecommendationId"))
+    RejectGroupingRecommendationEntry.add_member(:rejection_reason, Shapes::ShapeRef.new(shape: GroupingRecommendationRejectionReason, location_name: "rejectionReason"))
+    RejectGroupingRecommendationEntry.struct_class = Types::RejectGroupingRecommendationEntry
+
+    RejectResourceGroupingRecommendationsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    RejectResourceGroupingRecommendationsRequest.add_member(:entries, Shapes::ShapeRef.new(shape: RejectGroupingRecommendationEntries, required: true, location_name: "entries"))
+    RejectResourceGroupingRecommendationsRequest.struct_class = Types::RejectResourceGroupingRecommendationsRequest
+
+    RejectResourceGroupingRecommendationsResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    RejectResourceGroupingRecommendationsResponse.add_member(:failed_entries, Shapes::ShapeRef.new(shape: FailedGroupingRecommendationEntries, required: true, location_name: "failedEntries"))
+    RejectResourceGroupingRecommendationsResponse.struct_class = Types::RejectResourceGroupingRecommendationsResponse
+
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:app_registry_app_names, Shapes::ShapeRef.new(shape: EntityNameList, location_name: "appRegistryAppNames"))
     RemoveDraftAppVersionResourceMappingsRequest.add_member(:eks_source_names, Shapes::ShapeRef.new(shape: String255List, location_name: "eksSourceNames"))
@@ -1200,6 +1319,15 @@ module Aws::ResilienceHub
 
     StartAppAssessmentResponse.add_member(:assessment, Shapes::ShapeRef.new(shape: AppAssessment, required: true, location_name: "assessment"))
     StartAppAssessmentResponse.struct_class = Types::StartAppAssessmentResponse
+
+    StartResourceGroupingRecommendationTaskRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    StartResourceGroupingRecommendationTaskRequest.struct_class = Types::StartResourceGroupingRecommendationTaskRequest
+
+    StartResourceGroupingRecommendationTaskResponse.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
+    StartResourceGroupingRecommendationTaskResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String500, location_name: "errorMessage"))
+    StartResourceGroupingRecommendationTaskResponse.add_member(:grouping_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "groupingId"))
+    StartResourceGroupingRecommendationTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourcesGroupingRecGenStatusType, required: true, location_name: "status"))
+    StartResourceGroupingRecommendationTaskResponse.struct_class = Types::StartResourceGroupingRecommendationTaskResponse
 
     String255List.member = Shapes::ShapeRef.new(shape: String255)
 
@@ -1341,6 +1469,7 @@ module Aws::ResilienceHub
 
       api.metadata = {
         "apiVersion" => "2020-04-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "resiliencehub",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
@@ -1352,6 +1481,19 @@ module Aws::ResilienceHub
         "uid" => "resiliencehub-2020-04-30",
       }
 
+      api.add_operation(:accept_resource_grouping_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptResourceGroupingRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/accept-resource-grouping-recommendations"
+        o.input = Shapes::ShapeRef.new(shape: AcceptResourceGroupingRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptResourceGroupingRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:add_draft_app_version_resource_mappings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddDraftAppVersionResourceMappings"
         o.http_method = "POST"
@@ -1361,6 +1503,7 @@ module Aws::ResilienceHub
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1668,6 +1811,19 @@ module Aws::ResilienceHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:describe_resource_grouping_recommendation_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourceGroupingRecommendationTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/describe-resource-grouping-recommendation-task"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourceGroupingRecommendationTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourceGroupingRecommendationTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:import_resources_to_draft_app_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportResourcesToDraftAppVersion"
         o.http_method = "POST"
@@ -1946,6 +2102,25 @@ module Aws::ResilienceHub
         )
       end)
 
+      api.add_operation(:list_resource_grouping_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceGroupingRecommendations"
+        o.http_method = "GET"
+        o.http_request_uri = "/list-resource-grouping-recommendations"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceGroupingRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceGroupingRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_sop_recommendations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSopRecommendations"
         o.http_method = "POST"
@@ -2066,6 +2241,19 @@ module Aws::ResilienceHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:reject_resource_grouping_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectResourceGroupingRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/reject-resource-grouping-recommendations"
+        o.input = Shapes::ShapeRef.new(shape: RejectResourceGroupingRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectResourceGroupingRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:remove_draft_app_version_resource_mappings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveDraftAppVersionResourceMappings"
         o.http_method = "POST"
@@ -2104,6 +2292,20 @@ module Aws::ResilienceHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_resource_grouping_recommendation_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartResourceGroupingRecommendationTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/start-resource-grouping-recommendation-task"
+        o.input = Shapes::ShapeRef.new(shape: StartResourceGroupingRecommendationTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartResourceGroupingRecommendationTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

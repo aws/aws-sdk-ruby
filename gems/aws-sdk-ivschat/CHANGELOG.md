@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-08-02)
+------------------
+
+* Feature - updates cloudtrail event source for SDKs
+
 1.28.0 (2024-07-18)
 ------------------
 

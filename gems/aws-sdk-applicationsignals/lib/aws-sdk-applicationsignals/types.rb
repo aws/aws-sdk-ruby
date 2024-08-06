@@ -224,12 +224,16 @@ module Aws::ApplicationSignals
     #   The start of the time period to retrieve information about. When
     #   used in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period to retrieve information about. When used
     #   in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] key_attributes
@@ -305,20 +309,41 @@ module Aws::ApplicationSignals
     #   The start time of the data included in the response. In a raw HTTP
     #   Query API, it is formatted as be epoch time in seconds. For example:
     #   `1698778057`.
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end time of the data included in the response. In a raw HTTP
     #   Query API, it is formatted as be epoch time in seconds. For example:
     #   `1698778057`.
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
+    #
+    # @!attribute [rw] log_group_references
+    #   An array of string-to-string maps that each contain information
+    #   about one log group associated with this service. Each
+    #   string-to-string map includes the following fields:
+    #
+    #   * `"Type": "AWS::Resource"`
+    #
+    #   * `"ResourceType": "AWS::Logs::LogGroup"`
+    #
+    #   * `"Identifier": "name-of-log-group"`
+    #   @return [Array<Hash<String,String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/GetServiceOutput AWS API Documentation
     #
     class GetServiceOutput < Struct.new(
       :service,
       :start_time,
-      :end_time)
+      :end_time,
+      :log_group_references)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -398,12 +423,16 @@ module Aws::ApplicationSignals
     #   The start of the time period to retrieve information about. When
     #   used in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period to retrieve information about. When used
     #   in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested end time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] key_attributes
@@ -457,12 +486,20 @@ module Aws::ApplicationSignals
     #   The start of the time period that the returned information applies
     #   to. When used in a raw HTTP Query API, it is formatted as be epoch
     #   time in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period that the returned information applies to.
     #   When used in a raw HTTP Query API, it is formatted as be epoch time
     #   in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] service_dependencies
@@ -490,12 +527,16 @@ module Aws::ApplicationSignals
     #   The start of the time period to retrieve information about. When
     #   used in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period to retrieve information about. When used
     #   in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] key_attributes
@@ -549,12 +590,20 @@ module Aws::ApplicationSignals
     #   The start of the time period that the returned information applies
     #   to. When used in a raw HTTP Query API, it is formatted as be epoch
     #   time in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period that the returned information applies to.
     #   When used in a raw HTTP Query API, it is formatted as be epoch time
     #   in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] service_dependents
@@ -650,12 +699,16 @@ module Aws::ApplicationSignals
     #   The start of the time period to retrieve information about. When
     #   used in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period to retrieve information about. When used
     #   in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested end time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] key_attributes
@@ -709,12 +762,20 @@ module Aws::ApplicationSignals
     #   The start of the time period that the returned information applies
     #   to. When used in a raw HTTP Query API, it is formatted as be epoch
     #   time in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period that the returned information applies to.
     #   When used in a raw HTTP Query API, it is formatted as be epoch time
     #   in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] service_operations
@@ -742,12 +803,16 @@ module Aws::ApplicationSignals
     #   The start of the time period to retrieve information about. When
     #   used in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period to retrieve information about. When used
     #   in a raw HTTP Query API, it is formatted as be epoch time in
     #   seconds. For example: `1698778057`
+    #
+    #   Your requested start time will be rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] max_results
@@ -775,12 +840,20 @@ module Aws::ApplicationSignals
     #   The start of the time period that the returned information applies
     #   to. When used in a raw HTTP Query API, it is formatted as be epoch
     #   time in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time period that the returned information applies to.
     #   When used in a raw HTTP Query API, it is formatted as be epoch time
     #   in seconds. For example: `1698778057`
+    #
+    #   This displays the time that Application Signals used for the
+    #   request. It might not match your request exactly, because it was
+    #   rounded to the nearest hour.
     #   @return [Time]
     #
     # @!attribute [rw] service_summaries
@@ -1105,7 +1178,7 @@ module Aws::ApplicationSignals
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Cannot find the resource id.
+    #   Can't find the resource id.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1225,12 +1298,25 @@ module Aws::ApplicationSignals
     #   metric associated with this service.
     #   @return [Array<Types::MetricReference>]
     #
+    # @!attribute [rw] log_group_references
+    #   An array of string-to-string maps that each contain information
+    #   about one log group associated with this service. Each
+    #   string-to-string map includes the following fields:
+    #
+    #   * `"Type": "AWS::Resource"`
+    #
+    #   * `"ResourceType": "AWS::Logs::LogGroup"`
+    #
+    #   * `"Identifier": "name-of-log-group"`
+    #   @return [Array<Hash<String,String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/Service AWS API Documentation
     #
     class Service < Struct.new(
       :key_attributes,
       :attribute_maps,
-      :metric_references)
+      :metric_references,
+      :log_group_references)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -239,6 +239,25 @@ module Aws
                                     ) -> _CreateGuardrailVersionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGuardrailVersionResponseSuccess
 
+      interface _CreateModelCopyJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelCopyJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_model_copy_job-instance_method
+      def create_model_copy_job: (
+                                   source_model_arn: ::String,
+                                   target_model_name: ::String,
+                                   ?model_kms_key_id: ::String,
+                                   ?target_model_tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?client_request_token: ::String
+                                 ) -> _CreateModelCopyJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelCopyJobResponseSuccess
+
       interface _CreateModelCustomizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelCustomizationJobResponse]
         def job_arn: () -> ::String
@@ -424,6 +443,26 @@ module Aws
                          ) -> _GetGuardrailResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGuardrailResponseSuccess
 
+      interface _GetModelCopyJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelCopyJobResponse]
+        def job_arn: () -> ::String
+        def status: () -> ("InProgress" | "Completed" | "Failed")
+        def creation_time: () -> ::Time
+        def target_model_arn: () -> ::String
+        def target_model_name: () -> ::String
+        def source_account_id: () -> ::String
+        def source_model_arn: () -> ::String
+        def target_model_kms_key_arn: () -> ::String
+        def target_model_tags: () -> ::Array[Types::Tag]
+        def failure_message: () -> ::String
+        def source_model_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_model_copy_job-instance_method
+      def get_model_copy_job: (
+                                job_arn: ::String
+                              ) -> _GetModelCopyJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelCopyJobResponseSuccess
+
       interface _GetModelCustomizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetModelCustomizationJobResponse]
         def job_arn: () -> ::String
@@ -500,7 +539,8 @@ module Aws
                                 ?max_results: ::Integer,
                                 ?next_token: ::String,
                                 ?sort_by: ("CreationTime"),
-                                ?sort_order: ("Ascending" | "Descending")
+                                ?sort_order: ("Ascending" | "Descending"),
+                                ?is_owned: bool
                               ) -> _ListCustomModelsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelsResponseSuccess
 
@@ -547,6 +587,26 @@ module Aws
                              ?next_token: ::String
                            ) -> _ListGuardrailsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGuardrailsResponseSuccess
+
+      interface _ListModelCopyJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelCopyJobsResponse]
+        def next_token: () -> ::String
+        def model_copy_job_summaries: () -> ::Array[Types::ModelCopyJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_model_copy_jobs-instance_method
+      def list_model_copy_jobs: (
+                                  ?creation_time_after: ::Time,
+                                  ?creation_time_before: ::Time,
+                                  ?status_equals: ("InProgress" | "Completed" | "Failed"),
+                                  ?source_account_equals: ::String,
+                                  ?source_model_arn_equals: ::String,
+                                  ?target_model_name_contains: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?sort_by: ("CreationTime"),
+                                  ?sort_order: ("Ascending" | "Descending")
+                                ) -> _ListModelCopyJobsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelCopyJobsResponseSuccess
 
       interface _ListModelCustomizationJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListModelCustomizationJobsResponse]

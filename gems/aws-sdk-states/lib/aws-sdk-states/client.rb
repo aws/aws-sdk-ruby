@@ -495,6 +495,9 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Settings to configure server-side encryption.
+    #
     # @return [Types::CreateActivityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateActivityOutput#activity_arn #activity_arn} => String
@@ -510,6 +513,11 @@ module Aws::States
     #         value: "TagValue",
     #       },
     #     ],
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId",
+    #       kms_data_key_reuse_period_seconds: 1,
+    #       type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -536,6 +544,13 @@ module Aws::States
     # If you set the `publish` parameter of this API action to `true`, it
     # publishes version `1` as the first revision of the state machine.
     #
+    # For additional control over security, you can encrypt your data using
+    # a **customer-managed key** for Step Functions state machines. You can
+    # configure a symmetric KMS key and data key reuse period when creating
+    # or updating a **State Machine**. The execution history and state
+    # machine definition will be encrypted with the key applied to the State
+    # Machine.
+    #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
     #
@@ -544,13 +559,13 @@ module Aws::States
     # <note markdown="1"> `CreateStateMachine` is an idempotent API. Subsequent requests won’t
     # create a duplicate resource if it was already created.
     # `CreateStateMachine`'s idempotency check is based on the state
-    # machine `name`, `definition`, `type`, `LoggingConfiguration`, and
-    # `TracingConfiguration`. The check is also based on the `publish` and
-    # `versionDescription` parameters. If a following request has a
-    # different `roleArn` or `tags`, Step Functions will ignore these
-    # differences and treat it as an idempotent request of the previous. In
-    # this case, `roleArn` and `tags` will not be updated, even if they are
-    # different.
+    # machine `name`, `definition`, `type`, `LoggingConfiguration`,
+    # `TracingConfiguration`, and `EncryptionConfiguration` The check is
+    # also based on the `publish` and `versionDescription` parameters. If a
+    # following request has a different `roleArn` or `tags`, Step Functions
+    # will ignore these differences and treat it as an idempotent request of
+    # the previous. In this case, `roleArn` and `tags` will not be updated,
+    # even if they are different.
     #
     #  </note>
     #
@@ -634,6 +649,9 @@ module Aws::States
     #   you set `versionDescription`, but `publish` to `false`, this API
     #   action throws `ValidationException`.
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Settings to configure server-side encryption.
+    #
     # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStateMachineOutput#state_machine_arn #state_machine_arn} => String
@@ -669,6 +687,11 @@ module Aws::States
     #     },
     #     publish: false,
     #     version_description: "VersionDescription",
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId",
+    #       kms_data_key_reuse_period_seconds: 1,
+    #       type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -960,6 +983,7 @@ module Aws::States
     #   * {Types::DescribeActivityOutput#activity_arn #activity_arn} => String
     #   * {Types::DescribeActivityOutput#name #name} => String
     #   * {Types::DescribeActivityOutput#creation_date #creation_date} => Time
+    #   * {Types::DescribeActivityOutput#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -972,6 +996,9 @@ module Aws::States
     #   resp.activity_arn #=> String
     #   resp.name #=> String
     #   resp.creation_date #=> Time
+    #   resp.encryption_configuration.kms_key_id #=> String
+    #   resp.encryption_configuration.kms_data_key_reuse_period_seconds #=> Integer
+    #   resp.encryption_configuration.type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivity AWS API Documentation
     #
@@ -1008,6 +1035,13 @@ module Aws::States
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
     #
+    # @option params [String] :included_data
+    #   If your state machine definition is encrypted with a KMS key, callers
+    #   must have `kms:Decrypt` permission to decrypt the definition.
+    #   Alternatively, you can call DescribeStateMachine API with
+    #   `includedData = METADATA_ONLY` to get a successful response without
+    #   the encrypted definition.
+    #
     # @return [Types::DescribeExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeExecutionOutput#execution_arn #execution_arn} => String
@@ -1035,6 +1069,7 @@ module Aws::States
     #
     #   resp = client.describe_execution({
     #     execution_arn: "Arn", # required
+    #     included_data: "ALL_DATA", # accepts ALL_DATA, METADATA_ONLY
     #   })
     #
     # @example Response structure
@@ -1200,6 +1235,21 @@ module Aws::States
     #   ARN and the version number separated by a colon (:). For example,
     #   `stateMachineARN:1`.
     #
+    # @option params [String] :included_data
+    #   If your state machine definition is encrypted with a KMS key, callers
+    #   must have `kms:Decrypt` permission to decrypt the definition.
+    #   Alternatively, you can call the API with `includedData =
+    #   METADATA_ONLY` to get a successful response without the encrypted
+    #   definition.
+    #
+    #   <note markdown="1"> When calling a labelled ARN for an encrypted state machine, the
+    #   `includedData = METADATA_ONLY` parameter will not apply because Step
+    #   Functions needs to decrypt the entire state machine definition to get
+    #   the Distributed Map state’s definition. In this case, the API caller
+    #   needs to have `kms:Decrypt` permission.
+    #
+    #    </note>
+    #
     # @return [Types::DescribeStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeStateMachineOutput#state_machine_arn #state_machine_arn} => String
@@ -1214,11 +1264,13 @@ module Aws::States
     #   * {Types::DescribeStateMachineOutput#label #label} => String
     #   * {Types::DescribeStateMachineOutput#revision_id #revision_id} => String
     #   * {Types::DescribeStateMachineOutput#description #description} => String
+    #   * {Types::DescribeStateMachineOutput#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_state_machine({
     #     state_machine_arn: "Arn", # required
+    #     included_data: "ALL_DATA", # accepts ALL_DATA, METADATA_ONLY
     #   })
     #
     # @example Response structure
@@ -1238,6 +1290,9 @@ module Aws::States
     #   resp.label #=> String
     #   resp.revision_id #=> String
     #   resp.description #=> String
+    #   resp.encryption_configuration.kms_key_id #=> String
+    #   resp.encryption_configuration.kms_data_key_reuse_period_seconds #=> Integer
+    #   resp.encryption_configuration.type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine AWS API Documentation
     #
@@ -1319,6 +1374,13 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the execution you want state machine
     #   information for.
     #
+    # @option params [String] :included_data
+    #   If your state machine definition is encrypted with a KMS key, callers
+    #   must have `kms:Decrypt` permission to decrypt the definition.
+    #   Alternatively, you can call the API with `includedData =
+    #   METADATA_ONLY` to get a successful response without the encrypted
+    #   definition.
+    #
     # @return [Types::DescribeStateMachineForExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeStateMachineForExecutionOutput#state_machine_arn #state_machine_arn} => String
@@ -1331,11 +1393,13 @@ module Aws::States
     #   * {Types::DescribeStateMachineForExecutionOutput#map_run_arn #map_run_arn} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#label #label} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#revision_id #revision_id} => String
+    #   * {Types::DescribeStateMachineForExecutionOutput#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_state_machine_for_execution({
     #     execution_arn: "Arn", # required
+    #     included_data: "ALL_DATA", # accepts ALL_DATA, METADATA_ONLY
     #   })
     #
     # @example Response structure
@@ -1353,6 +1417,9 @@ module Aws::States
     #   resp.map_run_arn #=> String
     #   resp.label #=> String
     #   resp.revision_id #=> String
+    #   resp.encryption_configuration.kms_key_id #=> String
+    #   resp.encryption_configuration.kms_data_key_reuse_period_seconds #=> Integer
+    #   resp.encryption_configuration.type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecution AWS API Documentation
     #
@@ -2279,6 +2346,13 @@ module Aws::States
     # and optionally Task states using the [job run][2] pattern to report
     # that the task identified by the `taskToken` failed.
     #
+    # For an execution with encryption enabled, Step Functions will encrypt
+    # the error and cause fields using the KMS key for the execution role.
+    #
+    # A caller can mark a task as fail without using any KMS permissions in
+    # the execution role if the caller provides a null value for both
+    # `error` and `cause` fields because no data needs to be encrypted.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
@@ -2621,6 +2695,13 @@ module Aws::States
     #   Passes the X-Ray trace header. The trace header can also be passed in
     #   the request payload.
     #
+    # @option params [String] :included_data
+    #   If your state machine definition is encrypted with a KMS key, callers
+    #   must have `kms:Decrypt` permission to decrypt the definition.
+    #   Alternatively, you can call the API with `includedData =
+    #   METADATA_ONLY` to get a successful response without the encrypted
+    #   definition.
+    #
     # @return [Types::StartSyncExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartSyncExecutionOutput#execution_arn #execution_arn} => String
@@ -2645,6 +2726,7 @@ module Aws::States
     #     name: "Name",
     #     input: "SensitiveData",
     #     trace_header: "TraceHeader",
+    #     included_data: "ALL_DATA", # accepts ALL_DATA, METADATA_ONLY
     #   })
     #
     # @example Response structure
@@ -2677,6 +2759,13 @@ module Aws::States
     # Stops an execution.
     #
     # This API action is not supported by `EXPRESS` state machines.
+    #
+    # For an execution with encryption enabled, Step Functions will encrypt
+    # the error and cause fields using the KMS key for the execution role.
+    #
+    # A caller can stop an execution without using any KMS permissions in
+    # the execution role if the caller provides a null value for both
+    # `error` and `cause` fields because no data needs to be encrypted.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to stop.
@@ -2981,10 +3070,10 @@ module Aws::States
     end
 
     # Updates an existing state machine by modifying its `definition`,
-    # `roleArn`, or `loggingConfiguration`. Running executions will continue
-    # to use the previous `definition` and `roleArn`. You must include at
-    # least one of `definition` or `roleArn` or you will receive a
-    # `MissingRequiredParameter` error.
+    # `roleArn`, `loggingConfiguration`, or `EncryptionConfiguration`.
+    # Running executions will continue to use the previous `definition` and
+    # `roleArn`. You must include at least one of `definition` or `roleArn`
+    # or you will receive a `MissingRequiredParameter` error.
     #
     # A qualified state machine ARN refers to a *Distributed Map state*
     # defined within a state machine. For example, the qualified state
@@ -3079,6 +3168,9 @@ module Aws::States
     #   You can only specify the `versionDescription` parameter if you've set
     #   `publish` to `true`.
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Settings to configure server-side encryption.
+    #
     # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStateMachineOutput#update_date #update_date} => Time
@@ -3107,6 +3199,11 @@ module Aws::States
     #     },
     #     publish: false,
     #     version_description: "VersionDescription",
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId",
+    #       kms_data_key_reuse_period_seconds: 1,
+    #       type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -3284,7 +3381,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

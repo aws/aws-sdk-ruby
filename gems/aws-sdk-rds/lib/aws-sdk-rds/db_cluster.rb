@@ -455,12 +455,16 @@ module Aws::RDS
       data[:domain_memberships]
     end
 
-    # A list of tags. For more information, see [Tagging Amazon RDS
-    # Resources][1] in the *Amazon RDS User Guide.*
+    # A list of tags.
+    #
+    # For more information, see [Tagging Amazon RDS resources][1] in the
+    # *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    # resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [Array<Types::Tag>]
     def tag_list
       data[:tag_list]
@@ -1822,23 +1826,23 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [Boolean] :skip_final_snapshot
     #   Specifies whether to skip the creation of a final DB cluster snapshot
-    #   before the DB cluster is deleted. If skip is specified, no DB cluster
-    #   snapshot is created. If skip isn't specified, a DB cluster snapshot
-    #   is created before the DB cluster is deleted. By default, skip isn't
-    #   specified, and the DB cluster snapshot is created. By default, this
-    #   parameter is disabled.
+    #   before RDS deletes the DB cluster. If you set this value to `true`,
+    #   RDS doesn't create a final DB cluster snapshot. If you set this value
+    #   to `false` or don't specify it, RDS creates a DB cluster snapshot
+    #   before it deletes the DB cluster. By default, this parameter is
+    #   disabled, so RDS creates a final DB cluster snapshot.
     #
-    #   <note markdown="1"> You must specify a `FinalDBSnapshotIdentifier` parameter if
-    #   `SkipFinalSnapshot` is disabled.
+    #   <note markdown="1"> If `SkipFinalSnapshot` is disabled, you must specify a value for the
+    #   `FinalDBSnapshotIdentifier` parameter.
     #
     #    </note>
     # @option options [String] :final_db_snapshot_identifier
     #   The DB cluster snapshot identifier of the new DB cluster snapshot
     #   created when `SkipFinalSnapshot` is disabled.
     #
-    #   <note markdown="1"> Specifying this parameter and also skipping the creation of a final DB
-    #   cluster snapshot with the `SkipFinalShapshot` parameter results in an
-    #   error.
+    #   <note markdown="1"> If you specify this parameter and also skip the creation of a final DB
+    #   cluster snapshot with the `SkipFinalShapshot` parameter, the request
+    #   results in an error.
     #
     #    </note>
     #
@@ -1854,16 +1858,6 @@ module Aws::RDS
     #   cluster is deleted. This parameter isn't case-sensitive. The default
     #   is to remove automated backups immediately after the DB cluster is
     #   deleted.
-    #
-    #   <note markdown="1"> You must delete automated backups for Amazon RDS Multi-AZ DB clusters.
-    #   For more information about managing automated backups for RDS Multi-AZ
-    #   DB clusters, see [Managing automated backups][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ManagingAutomatedBackups.html
     # @return [DBCluster]
     def delete(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -2755,12 +2749,16 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @option options [String] :kms_key_id
     #   The Amazon Web Services KMS key identifier to use when restoring an
     #   encrypted DB cluster from an encrypted DB cluster.

@@ -428,7 +428,7 @@ module Aws::Bedrock
     # API operation for creating and managing Amazon Bedrock automatic model
     # evaluation jobs and model evaluation jobs that use human workers. To
     # learn more about the requirements for creating a model evaluation job
-    # see, [Model evaluations][1].
+    # see, [Model evaluation][1].
     #
     #
     #
@@ -801,6 +801,78 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Copies a model to another region so that it can be used there. For
+    # more information, see [Copy models to be used in other regions][1] in
+    # the [Amazon Bedrock User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/copy-model.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :source_model_arn
+    #   The Amazon Resource Name (ARN) of the model to be copied.
+    #
+    # @option params [required, String] :target_model_name
+    #   A name for the copied model.
+    #
+    # @option params [String] :model_kms_key_id
+    #   The ARN of the KMS key that you use to encrypt the model copy.
+    #
+    # @option params [Array<Types::Tag>] :target_model_tags
+    #   Tags to associate with the target model. For more information, see
+    #   [Tag resources][1] in the [Amazon Bedrock User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateModelCopyJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelCopyJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_copy_job({
+    #     source_model_arn: "ModelArn", # required
+    #     target_model_name: "CustomModelName", # required
+    #     model_kms_key_id: "KmsKeyId",
+    #     target_model_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelCopyJob AWS API Documentation
+    #
+    # @overload create_model_copy_job(params = {})
+    # @param [Hash] params ({})
+    def create_model_copy_job(params = {}, options = {})
+      req = build_request(:create_model_copy_job, params)
+      req.send_request(options)
+    end
+
     # Creates a fine-tuning job to customize a base model.
     #
     # You specify the base foundation model and the location of the training
@@ -817,13 +889,14 @@ module Aws::Bedrock
     # monitor a job, use the `GetModelCustomizationJob` operation to
     # retrieve the job status.
     #
-    # For more information, see [Custom models][2] in the Amazon Bedrock
-    # User Guide.
+    # For more information, see [Custom models][2] in the [Amazon Bedrock
+    # User Guide][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html
     # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :job_name
     #   A name for the fine-tuning job.
@@ -953,12 +1026,13 @@ module Aws::Bedrock
     # Creates dedicated throughput for a base or custom model with the model
     # units and for the duration that you specify. For pricing details, see
     # [Amazon Bedrock Pricing][1]. For more information, see [Provisioned
-    # Throughput][2] in the Amazon Bedrock User Guide.
+    # Throughput][2] in the [Amazon Bedrock User Guide][3].
     #
     #
     #
     # [1]: http://aws.amazon.com/bedrock/pricing/
     # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [String] :client_request_token
     #   A unique, case-sensitive identifier to ensure that the API request
@@ -984,7 +1058,7 @@ module Aws::Bedrock
     #   center][1] to request MUs.
     #
     #   For model unit quotas, see [Provisioned Throughput quotas][2] in the
-    #   Amazon Bedrock User Guide.
+    #   [Amazon Bedrock User Guide][3].
     #
     #   For more information about what an MU specifies, contact your Amazon
     #   Web Services account manager.
@@ -993,6 +1067,7 @@ module Aws::Bedrock
     #
     #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html#prov-thru-quotas
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :provisioned_model_name
     #   The name for this Provisioned Throughput.
@@ -1001,12 +1076,13 @@ module Aws::Bedrock
     #   The Amazon Resource Name (ARN) or name of the model to associate with
     #   this Provisioned Throughput. For a list of models for which you can
     #   purchase Provisioned Throughput, see [Amazon Bedrock model IDs for
-    #   purchasing Provisioned Throughput][1] in the Amazon Bedrock User
-    #   Guide.
+    #   purchasing Provisioned Throughput][1] in the [Amazon Bedrock User
+    #   Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#prov-throughput-models
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [String] :commitment_duration
     #   The commitment duration requested for the Provisioned Throughput.
@@ -1015,11 +1091,12 @@ module Aws::Bedrock
     #
     #   Custom models support all levels of commitment. To see which base
     #   models support no commitment, see [Supported regions and models for
-    #   Provisioned Throughput][1] in the Amazon Bedrock User Guide
+    #   Provisioned Throughput][1] in the [Amazon Bedrock User Guide][2]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/pt-supported.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with this Provisioned Throughput.
@@ -1058,11 +1135,12 @@ module Aws::Bedrock
     end
 
     # Deletes a custom model that you created earlier. For more information,
-    # see [Custom models][1] in the Amazon Bedrock User Guide.
+    # see [Custom models][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :model_identifier
     #   Name of the model to delete.
@@ -1133,11 +1211,12 @@ module Aws::Bedrock
 
     # Deletes a Provisioned Throughput. You can't delete a Provisioned
     # Throughput before the commitment term is over. For more information,
-    # see [Provisioned Throughput][1] in the Amazon Bedrock User Guide.
+    # see [Provisioned Throughput][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :provisioned_model_id
     #   The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
@@ -1161,11 +1240,12 @@ module Aws::Bedrock
 
     # Get the properties associated with a Amazon Bedrock custom model that
     # you have created.For more information, see [Custom models][1] in the
-    # Amazon Bedrock User Guide.
+    # [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :model_identifier
     #   Name or Amazon Resource Name (ARN) of the custom model.
@@ -1224,11 +1304,11 @@ module Aws::Bedrock
 
     # Retrieves the properties associated with a model evaluation job,
     # including the status of the job. For more information, see [Model
-    # evaluations][1].
+    # evaluation][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/latest/userguide/model-evaluation.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
     #
     # @option params [required, String] :job_identifier
     #   The Amazon Resource Name (ARN) of the model evaluation job.
@@ -1433,13 +1513,71 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Retrieves information about a model copy job. For more information,
+    # see [Copy models to be used in other regions][1] in the [Amazon
+    # Bedrock User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/copy-model.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :job_arn
+    #   The Amazon Resource Name (ARN) of the model copy job.
+    #
+    # @return [Types::GetModelCopyJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetModelCopyJobResponse#job_arn #job_arn} => String
+    #   * {Types::GetModelCopyJobResponse#status #status} => String
+    #   * {Types::GetModelCopyJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetModelCopyJobResponse#target_model_arn #target_model_arn} => String
+    #   * {Types::GetModelCopyJobResponse#target_model_name #target_model_name} => String
+    #   * {Types::GetModelCopyJobResponse#source_account_id #source_account_id} => String
+    #   * {Types::GetModelCopyJobResponse#source_model_arn #source_model_arn} => String
+    #   * {Types::GetModelCopyJobResponse#target_model_kms_key_arn #target_model_kms_key_arn} => String
+    #   * {Types::GetModelCopyJobResponse#target_model_tags #target_model_tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetModelCopyJobResponse#failure_message #failure_message} => String
+    #   * {Types::GetModelCopyJobResponse#source_model_name #source_model_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_model_copy_job({
+    #     job_arn: "ModelCopyJobArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.creation_time #=> Time
+    #   resp.target_model_arn #=> String
+    #   resp.target_model_name #=> String
+    #   resp.source_account_id #=> String
+    #   resp.source_model_arn #=> String
+    #   resp.target_model_kms_key_arn #=> String
+    #   resp.target_model_tags #=> Array
+    #   resp.target_model_tags[0].key #=> String
+    #   resp.target_model_tags[0].value #=> String
+    #   resp.failure_message #=> String
+    #   resp.source_model_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelCopyJob AWS API Documentation
+    #
+    # @overload get_model_copy_job(params = {})
+    # @param [Hash] params ({})
+    def get_model_copy_job(params = {}, options = {})
+      req = build_request(:get_model_copy_job, params)
+      req.send_request(options)
+    end
+
     # Retrieves the properties associated with a model-customization job,
     # including the status of the job. For more information, see [Custom
-    # models][1] in the Amazon Bedrock User Guide.
+    # models][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :job_identifier
     #   Identifier for the customization job.
@@ -1541,11 +1679,12 @@ module Aws::Bedrock
     end
 
     # Returns details for a Provisioned Throughput. For more information,
-    # see [Provisioned Throughput][1] in the Amazon Bedrock User Guide.
+    # see [Provisioned Throughput][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :provisioned_model_id
     #   The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
@@ -1600,12 +1739,13 @@ module Aws::Bedrock
     # Returns a list of the custom models that you have created with the
     # `CreateModelCustomizationJob` operation.
     #
-    # For more information, see [Custom models][1] in the Amazon Bedrock
-    # User Guide.
+    # For more information, see [Custom models][1] in the [Amazon Bedrock
+    # User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
     #   Return custom models created before the specified time.
@@ -1625,17 +1765,26 @@ module Aws::Bedrock
     #   (ARN) matches this parameter.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in the response.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Amazon Bedrock to
-    #   list the next set of results.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @option params [String] :sort_by
     #   The field to sort by in the returned list of models.
     #
     # @option params [String] :sort_order
     #   The sort order of the results.
+    #
+    # @option params [Boolean] :is_owned
+    #   Return custom models depending on if the current account owns them
+    #   (`true`) or if they were shared with the current account (`false`).
     #
     # @return [Types::ListCustomModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1656,6 +1805,7 @@ module Aws::Bedrock
     #     next_token: "PaginationToken",
     #     sort_by: "CreationTime", # accepts CreationTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     is_owned: false,
     #   })
     #
     # @example Response structure
@@ -1668,6 +1818,7 @@ module Aws::Bedrock
     #   resp.model_summaries[0].base_model_arn #=> String
     #   resp.model_summaries[0].base_model_name #=> String
     #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
+    #   resp.model_summaries[0].owner_account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModels AWS API Documentation
     #
@@ -1752,35 +1903,38 @@ module Aws::Bedrock
 
     # Lists Amazon Bedrock foundation models that you can use. You can
     # filter the results with the request parameters. For more information,
-    # see [Foundation models][1] in the Amazon Bedrock User Guide.
+    # see [Foundation models][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [String] :by_provider
     #   Return models belonging to the model provider that you specify.
     #
     # @option params [String] :by_customization_type
     #   Return models that support the customization type that you specify.
-    #   For more information, see [Custom models][1] in the Amazon Bedrock
-    #   User Guide.
+    #   For more information, see [Custom models][1] in the [Amazon Bedrock
+    #   User Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [String] :by_output_modality
     #   Return models that support the output modality that you specify.
     #
     # @option params [String] :by_inference_type
     #   Return models that support the inference type that you specify. For
-    #   more information, see [Provisioned Throughput][1] in the Amazon
-    #   Bedrock User Guide.
+    #   more information, see [Provisioned Throughput][1] in the [Amazon
+    #   Bedrock User Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @return [Types::ListFoundationModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1880,15 +2034,116 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Returns a list of model copy jobs that you have submitted. You can
+    # filter the jobs to return based on one or more criteria. For more
+    # information, see [Copy models to be used in other regions][1] in the
+    # [Amazon Bedrock User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/copy-model.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Filters for model copy jobs created after the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Filters for model copy jobs created before the specified time.
+    #
+    # @option params [String] :status_equals
+    #   Filters for model copy jobs whose status matches the value that you
+    #   specify.
+    #
+    # @option params [String] :source_account_equals
+    #   Filters for model copy jobs in which the account that the source model
+    #   belongs to is equal to the value that you specify.
+    #
+    # @option params [String] :source_model_arn_equals
+    #   Filters for model copy jobs in which the Amazon Resource Name (ARN) of
+    #   the source model to is equal to the value that you specify.
+    #
+    # @option params [String] :target_model_name_contains
+    #   Filters for model copy jobs in which the name of the copied model
+    #   contains the string that you specify.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort by in the returned list of model copy jobs.
+    #
+    # @option params [String] :sort_order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #
+    # @return [Types::ListModelCopyJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelCopyJobsResponse#next_token #next_token} => String
+    #   * {Types::ListModelCopyJobsResponse#model_copy_job_summaries #model_copy_job_summaries} => Array&lt;Types::ModelCopyJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_copy_jobs({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed
+    #     source_account_equals: "AccountId",
+    #     source_model_arn_equals: "ModelArn",
+    #     target_model_name_contains: "CustomModelName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.model_copy_job_summaries #=> Array
+    #   resp.model_copy_job_summaries[0].job_arn #=> String
+    #   resp.model_copy_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.model_copy_job_summaries[0].creation_time #=> Time
+    #   resp.model_copy_job_summaries[0].target_model_arn #=> String
+    #   resp.model_copy_job_summaries[0].target_model_name #=> String
+    #   resp.model_copy_job_summaries[0].source_account_id #=> String
+    #   resp.model_copy_job_summaries[0].source_model_arn #=> String
+    #   resp.model_copy_job_summaries[0].target_model_kms_key_arn #=> String
+    #   resp.model_copy_job_summaries[0].target_model_tags #=> Array
+    #   resp.model_copy_job_summaries[0].target_model_tags[0].key #=> String
+    #   resp.model_copy_job_summaries[0].target_model_tags[0].value #=> String
+    #   resp.model_copy_job_summaries[0].failure_message #=> String
+    #   resp.model_copy_job_summaries[0].source_model_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCopyJobs AWS API Documentation
+    #
+    # @overload list_model_copy_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_model_copy_jobs(params = {}, options = {})
+      req = build_request(:list_model_copy_jobs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of model customization jobs that you have submitted.
     # You can filter the jobs to return based on one or more criteria.
     #
-    # For more information, see [Custom models][1] in the Amazon Bedrock
-    # User Guide.
+    # For more information, see [Custom models][1] in the [Amazon Bedrock
+    # User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
     #   Return customization jobs created after the specified time.
@@ -1904,11 +2159,16 @@ module Aws::Bedrock
     #   characters.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return in the response.
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Amazon Bedrock to
-    #   list the next set of results.
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
     #
     # @option params [String] :sort_by
     #   The field to sort by in the returned list of jobs.
@@ -1961,12 +2221,13 @@ module Aws::Bedrock
     end
 
     # Lists the Provisioned Throughputs in the account. For more
-    # information, see [Provisioned Throughput][1] in the Amazon Bedrock
-    # User Guide.
+    # information, see [Provisioned Throughput][1] in the [Amazon Bedrock
+    # User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
     #   A filter that returns Provisioned Throughputs created after the
@@ -2056,12 +2317,13 @@ module Aws::Bedrock
 
     # List the tags associated with the specified resource.
     #
-    # For more information, see [Tagging resources][1] in the Amazon Bedrock
-    # User Guide.
+    # For more information, see [Tagging resources][1] in the [Amazon
+    # Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2152,11 +2414,12 @@ module Aws::Bedrock
     end
 
     # Stops an active model customization job. For more information, see
-    # [Custom models][1] in the Amazon Bedrock User Guide.
+    # [Custom models][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :job_identifier
     #   Job identifier of the job to stop.
@@ -2179,11 +2442,12 @@ module Aws::Bedrock
     end
 
     # Associate tags with a resource. For more information, see [Tagging
-    # resources][1] in the Amazon Bedrock User Guide.
+    # resources][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to tag.
@@ -2215,11 +2479,12 @@ module Aws::Bedrock
     end
 
     # Remove one or more tags from a resource. For more information, see
-    # [Tagging resources][1] in the Amazon Bedrock User Guide.
+    # [Tagging resources][1] in the [Amazon Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to untag.
@@ -2411,12 +2676,13 @@ module Aws::Bedrock
     end
 
     # Updates the name or associated model for a Provisioned Throughput. For
-    # more information, see [Provisioned Throughput][1] in the Amazon
-    # Bedrock User Guide.
+    # more information, see [Provisioned Throughput][1] in the [Amazon
+    # Bedrock User Guide][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
     # @option params [required, String] :provisioned_model_id
     #   The Amazon Resource Name (ARN) or name of the Provisioned Throughput
@@ -2470,7 +2736,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

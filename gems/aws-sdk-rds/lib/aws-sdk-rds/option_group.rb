@@ -337,12 +337,16 @@ module Aws::RDS
     # @option options [required, String] :target_option_group_description
     #   The description for the copied option group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [OptionGroup]
     def copy(options = {})
       options = options.merge(source_option_group_identifier: @name)

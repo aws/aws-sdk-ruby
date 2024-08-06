@@ -72,6 +72,8 @@ module Aws::ECR
             Aws::ECR::Endpoints::CreatePullThroughCacheRule.build(context)
           when :create_repository
             Aws::ECR::Endpoints::CreateRepository.build(context)
+          when :create_repository_creation_template
+            Aws::ECR::Endpoints::CreateRepositoryCreationTemplate.build(context)
           when :delete_lifecycle_policy
             Aws::ECR::Endpoints::DeleteLifecyclePolicy.build(context)
           when :delete_pull_through_cache_rule
@@ -80,6 +82,8 @@ module Aws::ECR
             Aws::ECR::Endpoints::DeleteRegistryPolicy.build(context)
           when :delete_repository
             Aws::ECR::Endpoints::DeleteRepository.build(context)
+          when :delete_repository_creation_template
+            Aws::ECR::Endpoints::DeleteRepositoryCreationTemplate.build(context)
           when :delete_repository_policy
             Aws::ECR::Endpoints::DeleteRepositoryPolicy.build(context)
           when :describe_image_replication_status
@@ -94,6 +98,10 @@ module Aws::ECR
             Aws::ECR::Endpoints::DescribeRegistry.build(context)
           when :describe_repositories
             Aws::ECR::Endpoints::DescribeRepositories.build(context)
+          when :describe_repository_creation_templates
+            Aws::ECR::Endpoints::DescribeRepositoryCreationTemplates.build(context)
+          when :get_account_setting
+            Aws::ECR::Endpoints::GetAccountSetting.build(context)
           when :get_authorization_token
             Aws::ECR::Endpoints::GetAuthorizationToken.build(context)
           when :get_download_url_for_layer
@@ -114,6 +122,8 @@ module Aws::ECR
             Aws::ECR::Endpoints::ListImages.build(context)
           when :list_tags_for_resource
             Aws::ECR::Endpoints::ListTagsForResource.build(context)
+          when :put_account_setting
+            Aws::ECR::Endpoints::PutAccountSetting.build(context)
           when :put_image
             Aws::ECR::Endpoints::PutImage.build(context)
           when :put_image_scanning_configuration
@@ -140,6 +150,8 @@ module Aws::ECR
             Aws::ECR::Endpoints::UntagResource.build(context)
           when :update_pull_through_cache_rule
             Aws::ECR::Endpoints::UpdatePullThroughCacheRule.build(context)
+          when :update_repository_creation_template
+            Aws::ECR::Endpoints::UpdateRepositoryCreationTemplate.build(context)
           when :upload_layer_part
             Aws::ECR::Endpoints::UploadLayerPart.build(context)
           when :validate_pull_through_cache_rule

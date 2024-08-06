@@ -219,12 +219,16 @@ module Aws::RDS
       data[:dbi_resource_id]
     end
 
-    # A list of tags. For more information, see [Tagging Amazon RDS
-    # Resources][1] in the *Amazon RDS User Guide.*
+    # A list of tags.
+    #
+    # For more information, see [Tagging Amazon RDS resources][1] in the
+    # *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    # resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [Array<Types::Tag>]
     def tag_list
       data[:tag_list]
@@ -438,12 +442,16 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [DBSnapshot]
     def create(options = {})
       options = options.merge(
@@ -519,12 +527,16 @@ module Aws::RDS
     #   in, and you can't use KMS keys from one Amazon Web Services Region in
     #   another Amazon Web Services Region.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @option options [Boolean] :copy_tags
     #   Specifies whether to copy all tags from the source DB snapshot to the
     #   target DB snapshot. By default, tags aren't copied.
@@ -892,12 +904,16 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1] in the *Amazon RDS User Guide.*
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #

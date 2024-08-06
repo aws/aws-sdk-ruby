@@ -361,9 +361,6 @@ module Aws::ECR
     #
     #   * Microsoft Azure Container Registry (`azure-container-registry`) -
     #     `<custom>.azurecr.io`
-    #
-    #   * GitLab Container Registry (`gitlab-container-registry`) -
-    #     `registry.gitlab.com`
     #   @return [String]
     #
     # @!attribute [rw] registry_id
@@ -432,6 +429,109 @@ module Aws::ECR
       :registry_id,
       :upstream_registry,
       :credential_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix
+    #   The repository namespace prefix to associate with the template. All
+    #   repositories created using this namespace prefix will have the
+    #   settings defined in this template applied. For example, a prefix of
+    #   `prod` would apply to all repositories beginning with `prod/`.
+    #   Similarly, a prefix of `prod/team` would apply to all repositories
+    #   beginning with `prod/team/`.
+    #
+    #   To apply a template to all repositories in your registry that don't
+    #   have an associated creation template, you can use `ROOT` as the
+    #   prefix.
+    #
+    #   There is always an assumed `/` applied to the end of the prefix. If
+    #   you specify `ecr-public` as the prefix, Amazon ECR treats that as
+    #   `ecr-public/`. When using a pull through cache rule, the repository
+    #   prefix you specify during rule creation is what you should specify
+    #   as your repository creation template prefix as well.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the repository creation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration to use for repositories created using
+    #   the template.
+    #   @return [Types::EncryptionConfigurationForRepositoryCreationTemplate]
+    #
+    # @!attribute [rw] resource_tags
+    #   The metadata to apply to the repository to help you categorize and
+    #   organize. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys can have a maximum character length of
+    #   128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
+    #   image tags within the repository will be immutable which will
+    #   prevent them from being overwritten.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_policy
+    #   The repository policy to apply to repositories created using the
+    #   template. A repository policy is a permissions policy associated
+    #   with a repository to control access permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy
+    #   The lifecycle policy to use for repositories created using the
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] applied_for
+    #   A list of enumerable strings representing the Amazon ECR repository
+    #   creation scenarios that this template will apply towards. The two
+    #   supported scenarios are `PULL_THROUGH_CACHE` and `REPLICATION`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_role_arn
+    #   The ARN of the role to be assumed by Amazon ECR. This role must be
+    #   in the same account as the registry that you are configuring. Amazon
+    #   ECR will assume your supplied role when the customRoleArn is
+    #   specified. When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryCreationTemplateRequest AWS API Documentation
+    #
+    class CreateRepositoryCreationTemplateRequest < Struct.new(
+      :prefix,
+      :description,
+      :encryption_configuration,
+      :resource_tags,
+      :image_tag_mutability,
+      :repository_policy,
+      :lifecycle_policy,
+      :applied_for,
+      :custom_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_creation_template
+    #   The details of the repository creation template associated with the
+    #   request.
+    #   @return [Types::RepositoryCreationTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryCreationTemplateResponse AWS API Documentation
+    #
+    class CreateRepositoryCreationTemplateResponse < Struct.new(
+      :registry_id,
+      :repository_creation_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -708,6 +808,36 @@ module Aws::ECR
     class DeleteRegistryPolicyResponse < Struct.new(
       :registry_id,
       :policy_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix
+    #   The repository namespace prefix associated with the repository
+    #   creation template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryCreationTemplateRequest AWS API Documentation
+    #
+    class DeleteRepositoryCreationTemplateRequest < Struct.new(
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_creation_template
+    #   The details of the repository creation template that was deleted.
+    #   @return [Types::RepositoryCreationTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryCreationTemplateResponse AWS API Documentation
+    #
+    class DeleteRepositoryCreationTemplateResponse < Struct.new(
+      :registry_id,
+      :repository_creation_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1096,7 +1226,7 @@ module Aws::ECR
     class DescribeRegistryRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] registry_id
-    #   The ID of the registry.
+    #   The registry ID associated with the request.
     #   @return [String]
     #
     # @!attribute [rw] replication_configuration
@@ -1184,6 +1314,78 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @!attribute [rw] prefixes
+    #   The repository namespace prefixes associated with the repository
+    #   creation templates to describe. If this value is not specified, all
+    #   repository creation templates are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeRepositoryCreationTemplates` request where `maxResults` was
+    #   used and the results exceeded the value of that parameter.
+    #   Pagination continues from the end of the previous results that
+    #   returned the `nextToken` value. This value is `null` when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of repository results returned by
+    #   `DescribeRepositoryCreationTemplatesRequest` in paginated output.
+    #   When this parameter is used,
+    #   `DescribeRepositoryCreationTemplatesRequest` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another
+    #   `DescribeRepositoryCreationTemplatesRequest` request with the
+    #   returned `nextToken` value. This value can be between 1 and 1000. If
+    #   this parameter is not used, then
+    #   `DescribeRepositoryCreationTemplatesRequest` returns up to 100
+    #   results and a `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoryCreationTemplatesRequest AWS API Documentation
+    #
+    class DescribeRepositoryCreationTemplatesRequest < Struct.new(
+      :prefixes,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_creation_templates
+    #   The details of the repository creation templates.
+    #   @return [Array<Types::RepositoryCreationTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `DescribeRepositoryCreationTemplates` request. When the results of a
+    #   `DescribeRepositoryCreationTemplates` request exceed `maxResults`,
+    #   this value can be used to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoryCreationTemplatesResponse AWS API Documentation
+    #
+    class DescribeRepositoryCreationTemplatesResponse < Struct.new(
+      :registry_id,
+      :repository_creation_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified layer upload does not contain any layer parts.
     #
     # @!attribute [rw] message
@@ -1204,8 +1406,8 @@ module Aws::ECR
     # By default, when no encryption configuration is set or the `AES256`
     # encryption type is used, Amazon ECR uses server-side encryption with
     # Amazon S3-managed encryption keys which encrypts your data at rest
-    # using an AES-256 encryption algorithm. This does not require any
-    # action on your part.
+    # using an AES256 encryption algorithm. This does not require any action
+    # on your part.
     #
     # For more control over the encryption of the contents of your
     # repository, you can use server-side encryption with Key Management
@@ -1232,7 +1434,7 @@ module Aws::ECR
     #
     #   If you use the `AES256` encryption type, Amazon ECR uses server-side
     #   encryption with Amazon S3-managed encryption keys which encrypts the
-    #   images in the repository using an AES-256 encryption algorithm. For
+    #   images in the repository using an AES256 encryption algorithm. For
     #   more information, see [Protecting data using server-side encryption
     #   with Amazon S3-managed encryption keys (SSE-S3)][2] in the *Amazon
     #   Simple Storage Service Console Developer Guide*.
@@ -1254,6 +1456,52 @@ module Aws::ECR
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/EncryptionConfiguration AWS API Documentation
     #
     class EncryptionConfiguration < Struct.new(
+      :encryption_type,
+      :kms_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption configuration to associate with the repository creation
+    # template.
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption type to use.
+    #
+    #   If you use the `KMS` encryption type, the contents of the repository
+    #   will be encrypted using server-side encryption with Key Management
+    #   Service key stored in KMS. When you use KMS to encrypt your data,
+    #   you can either use the default Amazon Web Services managed KMS key
+    #   for Amazon ECR, or specify your own KMS key, which you already
+    #   created. For more information, see [Protecting data using
+    #   server-side encryption with an KMS key stored in Key Management
+    #   Service (SSE-KMS)][1] in the *Amazon Simple Storage Service Console
+    #   Developer Guide*.
+    #
+    #   If you use the `AES256` encryption type, Amazon ECR uses server-side
+    #   encryption with Amazon S3-managed encryption keys which encrypts the
+    #   images in the repository using an AES256 encryption algorithm. For
+    #   more information, see [Protecting data using server-side encryption
+    #   with Amazon S3-managed encryption keys (SSE-S3)][2] in the *Amazon
+    #   Simple Storage Service Console Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   If you use the `KMS` encryption type, specify the KMS key to use for
+    #   encryption. The full ARN of the KMS key must be specified. The key
+    #   must exist in the same Region as the repository. If no key is
+    #   specified, the default Amazon Web Services managed KMS key for
+    #   Amazon ECR will be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/EncryptionConfigurationForRepositoryCreationTemplate AWS API Documentation
+    #
+    class EncryptionConfigurationForRepositoryCreationTemplate < Struct.new(
       :encryption_type,
       :kms_key)
       SENSITIVE = []
@@ -1343,6 +1591,36 @@ module Aws::ECR
       :title,
       :type,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Basic scan type version name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSettingRequest AWS API Documentation
+    #
+    class GetAccountSettingRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Retrieves the basic scan type version name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Retrieves the value that specifies what basic scan type is being
+    #   used: `AWS_NATIVE` or `CLAIR`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAccountSettingResponse AWS API Documentation
+    #
+    class GetAccountSettingResponse < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1571,7 +1849,7 @@ module Aws::ECR
     class GetRegistryPolicyRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] registry_id
-    #   The ID of the registry.
+    #   The registry ID associated with the request.
     #   @return [String]
     #
     # @!attribute [rw] policy_text
@@ -1594,7 +1872,7 @@ module Aws::ECR
     class GetRegistryScanningConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] registry_id
-    #   The ID of the registry.
+    #   The registry ID associated with the request.
     #   @return [String]
     #
     # @!attribute [rw] scanning_configuration
@@ -2682,6 +2960,41 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   Basic scan type version name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Setting value that determines what basic scan type is being used:
+    #   `AWS_NATIVE` or `CLAIR`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutAccountSettingRequest AWS API Documentation
+    #
+    class PutAccountSettingRequest < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Retrieves the the basic scan type version name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Retrieves the basic scan type value, either `AWS_NATIVE` or `-`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutAccountSettingResponse AWS API Documentation
+    #
+    class PutAccountSettingResponse < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
     #   contains the repository in which to put the image. If you do not
@@ -2904,7 +3217,7 @@ module Aws::ECR
     end
 
     # @!attribute [rw] registry_id
-    #   The registry ID.
+    #   The registry ID associated with the request.
     #   @return [String]
     #
     # @!attribute [rw] policy_text
@@ -3220,6 +3533,91 @@ module Aws::ECR
     #
     class RepositoryAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the repository creation template associated with the
+    # request.
+    #
+    # @!attribute [rw] prefix
+    #   The repository namespace prefix associated with the repository
+    #   creation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description associated with the repository creation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration associated with the repository creation
+    #   template.
+    #   @return [Types::EncryptionConfigurationForRepositoryCreationTemplate]
+    #
+    # @!attribute [rw] resource_tags
+    #   The metadata to apply to the repository to help you categorize and
+    #   organize. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys can have a maximum character length of
+    #   128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of MUTABLE will be used which will
+    #   allow image tags to be overwritten. If IMMUTABLE is specified, all
+    #   image tags within the repository will be immutable which will
+    #   prevent them from being overwritten.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_policy
+    #   he repository policy to apply to repositories created using the
+    #   template. A repository policy is a permissions policy associated
+    #   with a repository to control access permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy
+    #   The lifecycle policy to use for repositories created using the
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] applied_for
+    #   A list of enumerable Strings representing the repository creation
+    #   scenarios that this template will apply towards. The two supported
+    #   scenarios are PULL\_THROUGH\_CACHE and REPLICATION
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_role_arn
+    #   The ARN of the role to be assumed by Amazon ECR. Amazon ECR will
+    #   assume your supplied role when the customRoleArn is specified. When
+    #   this field isn't specified, Amazon ECR will use the service-linked
+    #   role for the repository creation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time, in JavaScript date format, when the repository
+    #   creation template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in JavaScript date format, when the repository
+    #   creation template was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryCreationTemplate AWS API Documentation
+    #
+    class RepositoryCreationTemplate < Struct.new(
+      :prefix,
+      :description,
+      :encryption_configuration,
+      :resource_tags,
+      :image_tag_mutability,
+      :repository_policy,
+      :lifecycle_policy,
+      :applied_for,
+      :custom_role_arn,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3701,6 +4099,34 @@ module Aws::ECR
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The repository creation template already exists. Specify a unique
+    # prefix and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TemplateAlreadyExistsException AWS API Documentation
+    #
+    class TemplateAlreadyExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified repository creation template can't be found. Verify the
+    # registry ID and prefix and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TemplateNotFoundException AWS API Documentation
+    #
+    class TemplateNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The list of tags on the repository is over the limit. The maximum
     # number of tags that can be applied to a repository is 50.
     #
@@ -3875,6 +4301,104 @@ module Aws::ECR
       :registry_id,
       :updated_at,
       :credential_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix
+    #   The repository namespace prefix that matches an existing repository
+    #   creation template in the registry. All repositories created using
+    #   this namespace prefix will have the settings defined in this
+    #   template applied. For example, a prefix of `prod` would apply to all
+    #   repositories beginning with `prod/`. This includes a repository
+    #   named `prod/team1` as well as a repository named `prod/repository1`.
+    #
+    #   To apply a template to all repositories in your registry that don't
+    #   have an associated creation template, you can use `ROOT` as the
+    #   prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the repository creation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration to associate with the repository
+    #   creation template.
+    #   @return [Types::EncryptionConfigurationForRepositoryCreationTemplate]
+    #
+    # @!attribute [rw] resource_tags
+    #   The metadata to apply to the repository to help you categorize and
+    #   organize. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys can have a maximum character length of
+    #   128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] image_tag_mutability
+    #   Updates the tag mutability setting for the repository. If this
+    #   parameter is omitted, the default setting of `MUTABLE` will be used
+    #   which will allow image tags to be overwritten. If `IMMUTABLE` is
+    #   specified, all image tags within the repository will be immutable
+    #   which will prevent them from being overwritten.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_policy
+    #   Updates the repository policy created using the template. A
+    #   repository policy is a permissions policy associated with a
+    #   repository to control access permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_policy
+    #   Updates the lifecycle policy associated with the specified
+    #   repository creation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] applied_for
+    #   Updates the list of enumerable strings representing the Amazon ECR
+    #   repository creation scenarios that this template will apply towards.
+    #   The two supported scenarios are `PULL_THROUGH_CACHE` and
+    #   `REPLICATION`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_role_arn
+    #   The ARN of the role to be assumed by Amazon ECR. This role must be
+    #   in the same account as the registry that you are configuring. Amazon
+    #   ECR will assume your supplied role when the customRoleArn is
+    #   specified. When this field isn't specified, Amazon ECR will use the
+    #   service-linked role for the repository creation template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdateRepositoryCreationTemplateRequest AWS API Documentation
+    #
+    class UpdateRepositoryCreationTemplateRequest < Struct.new(
+      :prefix,
+      :description,
+      :encryption_configuration,
+      :resource_tags,
+      :image_tag_mutability,
+      :repository_policy,
+      :lifecycle_policy,
+      :applied_for,
+      :custom_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_creation_template
+    #   The details of the repository creation template associated with the
+    #   request.
+    #   @return [Types::RepositoryCreationTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdateRepositoryCreationTemplateResponse AWS API Documentation
+    #
+    class UpdateRepositoryCreationTemplateResponse < Struct.new(
+      :registry_id,
+      :repository_creation_template)
       SENSITIVE = []
       include Aws::Structure
     end

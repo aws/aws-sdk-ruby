@@ -767,7 +767,7 @@ module Aws::MemoryDB
     #   The name of the Access Control List to associate with the cluster.
     #
     # @option params [String] :engine_version
-    #   The version number of the Redis engine to be used for the cluster.
+    #   The version number of the Redis OSS engine to be used for the cluster.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   When set to true, the cluster will automatically receive minor engine
@@ -1179,6 +1179,12 @@ module Aws::MemoryDB
     # Deletes a cluster. It also deletes all associated nodes and node
     # endpoints
     #
+    # <note markdown="1"> `CreateSnapshot` permission is required to create a final snapshot.
+    # Without this permission, the API call will fail with an `Access
+    # Denied` exception.
+    #
+    #  </note>
+    #
     # @option params [required, String] :cluster_name
     #   The name of the cluster to be deleted
     #
@@ -1568,10 +1574,10 @@ module Aws::MemoryDB
       req.send_request(options)
     end
 
-    # Returns a list of the available Redis engine versions.
+    # Returns a list of the available Redis OSS engine versions.
     #
     # @option params [String] :engine_version
-    #   The Redis engine version
+    #   The Redis OSS engine version
     #
     # @option params [String] :parameter_group_family
     #   The name of a specific parameter group family to return details for.
@@ -2954,7 +2960,7 @@ module Aws::MemoryDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-memorydb'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

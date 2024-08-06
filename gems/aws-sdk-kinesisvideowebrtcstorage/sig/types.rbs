@@ -23,6 +23,12 @@ module Aws::KinesisVideoWebRTCStorage
       SENSITIVE: []
     end
 
+    class JoinStorageSessionAsViewerInput
+      attr_accessor channel_arn: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
     class JoinStorageSessionInput
       attr_accessor channel_arn: ::String
       SENSITIVE: []

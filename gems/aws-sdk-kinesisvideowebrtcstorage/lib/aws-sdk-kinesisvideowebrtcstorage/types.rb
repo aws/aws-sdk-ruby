@@ -54,6 +54,23 @@ module Aws::KinesisVideoWebRTCStorage
     #   The Amazon Resource Name (ARN) of the signaling channel.
     #   @return [String]
     #
+    # @!attribute [rw] client_id
+    #   The unique identifier for the sender client.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-webrtc-storage-2018-05-10/JoinStorageSessionAsViewerInput AWS API Documentation
+    #
+    class JoinStorageSessionAsViewerInput < Struct.new(
+      :channel_arn,
+      :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The Amazon Resource Name (ARN) of the signaling channel.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-webrtc-storage-2018-05-10/JoinStorageSessionInput AWS API Documentation
     #
     class JoinStorageSessionInput < Struct.new(

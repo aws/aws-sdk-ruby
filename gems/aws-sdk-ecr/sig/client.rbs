@@ -195,6 +195,33 @@ module Aws
                              ) -> _CreateRepositoryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryResponseSuccess
 
+      interface _CreateRepositoryCreationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRepositoryCreationTemplateResponse]
+        def registry_id: () -> ::String
+        def repository_creation_template: () -> Types::RepositoryCreationTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#create_repository_creation_template-instance_method
+      def create_repository_creation_template: (
+                                                 prefix: ::String,
+                                                 ?description: ::String,
+                                                 ?encryption_configuration: {
+                                                   encryption_type: ("AES256" | "KMS"),
+                                                   kms_key: ::String?
+                                                 },
+                                                 ?resource_tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ],
+                                                 ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE"),
+                                                 ?repository_policy: ::String,
+                                                 ?lifecycle_policy: ::String,
+                                                 applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],
+                                                 ?custom_role_arn: ::String
+                                               ) -> _CreateRepositoryCreationTemplateResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryCreationTemplateResponseSuccess
+
       interface _DeleteLifecyclePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLifecyclePolicyResponse]
         def registry_id: () -> ::String
@@ -245,6 +272,17 @@ module Aws
                                ?force: bool
                              ) -> _DeleteRepositoryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryResponseSuccess
+
+      interface _DeleteRepositoryCreationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryCreationTemplateResponse]
+        def registry_id: () -> ::String
+        def repository_creation_template: () -> Types::RepositoryCreationTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#delete_repository_creation_template-instance_method
+      def delete_repository_creation_template: (
+                                                 prefix: ::String
+                                               ) -> _DeleteRepositoryCreationTemplateResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryCreationTemplateResponseSuccess
 
       interface _DeleteRepositoryPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryPolicyResponse]
@@ -358,6 +396,31 @@ module Aws
                                    ?max_results: ::Integer
                                  ) -> _DescribeRepositoriesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRepositoriesResponseSuccess
+
+      interface _DescribeRepositoryCreationTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRepositoryCreationTemplatesResponse]
+        def registry_id: () -> ::String
+        def repository_creation_templates: () -> ::Array[Types::RepositoryCreationTemplate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#describe_repository_creation_templates-instance_method
+      def describe_repository_creation_templates: (
+                                                    ?prefixes: Array[::String],
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer
+                                                  ) -> _DescribeRepositoryCreationTemplatesResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRepositoryCreationTemplatesResponseSuccess
+
+      interface _GetAccountSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingResponse]
+        def name: () -> ::String
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#get_account_setting-instance_method
+      def get_account_setting: (
+                                 name: ::String
+                               ) -> _GetAccountSettingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingResponseSuccess
 
       interface _GetAuthorizationTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAuthorizationTokenResponse]
@@ -495,6 +558,18 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutAccountSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSettingResponse]
+        def name: () -> ::String
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#put_account_setting-instance_method
+      def put_account_setting: (
+                                 name: ::String,
+                                 value: ::String
+                               ) -> _PutAccountSettingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSettingResponseSuccess
 
       interface _PutImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutImageResponse]
@@ -701,6 +776,33 @@ module Aws
                                             credential_arn: ::String
                                           ) -> _UpdatePullThroughCacheRuleResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePullThroughCacheRuleResponseSuccess
+
+      interface _UpdateRepositoryCreationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRepositoryCreationTemplateResponse]
+        def registry_id: () -> ::String
+        def repository_creation_template: () -> Types::RepositoryCreationTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#update_repository_creation_template-instance_method
+      def update_repository_creation_template: (
+                                                 prefix: ::String,
+                                                 ?description: ::String,
+                                                 ?encryption_configuration: {
+                                                   encryption_type: ("AES256" | "KMS"),
+                                                   kms_key: ::String?
+                                                 },
+                                                 ?resource_tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ],
+                                                 ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE"),
+                                                 ?repository_policy: ::String,
+                                                 ?lifecycle_policy: ::String,
+                                                 ?applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],
+                                                 ?custom_role_arn: ::String
+                                               ) -> _UpdateRepositoryCreationTemplateResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRepositoryCreationTemplateResponseSuccess
 
       interface _UploadLayerPartResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UploadLayerPartResponse]

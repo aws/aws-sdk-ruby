@@ -4119,6 +4119,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class EmrSettings
+      attr_accessor assumable_role_arns: ::Array[::String]
+      attr_accessor execution_role_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class EnableSagemakerServicecatalogPortfolioInput < Aws::EmptyStructure
     end
 
@@ -5012,6 +5018,7 @@ module Aws::SageMaker
       attr_accessor custom_images: ::Array[Types::CustomImage]
       attr_accessor lifecycle_config_arns: ::Array[::String]
       attr_accessor code_repositories: ::Array[Types::CodeRepository]
+      attr_accessor emr_settings: Types::EmrSettings
       SENSITIVE: []
     end
 

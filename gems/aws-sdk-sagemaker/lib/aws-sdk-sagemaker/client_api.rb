@@ -91,6 +91,7 @@ module Aws::SageMaker
     AssociationEntityArn = Shapes::StringShape.new(name: 'AssociationEntityArn')
     AssociationSummaries = Shapes::ListShape.new(name: 'AssociationSummaries')
     AssociationSummary = Shapes::StructureShape.new(name: 'AssociationSummary')
+    AssumableRoleArns = Shapes::ListShape.new(name: 'AssumableRoleArns')
     AsyncInferenceClientConfig = Shapes::StructureShape.new(name: 'AsyncInferenceClientConfig')
     AsyncInferenceConfig = Shapes::StructureShape.new(name: 'AsyncInferenceConfig')
     AsyncInferenceNotificationConfig = Shapes::StructureShape.new(name: 'AsyncInferenceNotificationConfig')
@@ -808,6 +809,7 @@ module Aws::SageMaker
     EdgeVersion = Shapes::StringShape.new(name: 'EdgeVersion')
     Edges = Shapes::ListShape.new(name: 'Edges')
     EfsUid = Shapes::StringShape.new(name: 'EfsUid')
+    EmrSettings = Shapes::StructureShape.new(name: 'EmrSettings')
     EnableCapture = Shapes::BooleanShape.new(name: 'EnableCapture')
     EnableInfraCheck = Shapes::BooleanShape.new(name: 'EnableInfraCheck')
     EnableIotRoleAlias = Shapes::BooleanShape.new(name: 'EnableIotRoleAlias')
@@ -848,6 +850,7 @@ module Aws::SageMaker
     EnvironmentParameters = Shapes::ListShape.new(name: 'EnvironmentParameters')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
     ExcludeFeaturesAttribute = Shapes::StringShape.new(name: 'ExcludeFeaturesAttribute')
+    ExecutionRoleArns = Shapes::ListShape.new(name: 'ExecutionRoleArns')
     ExecutionRoleIdentityConfig = Shapes::StringShape.new(name: 'ExecutionRoleIdentityConfig')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExitMessage = Shapes::StringShape.new(name: 'ExitMessage')
@@ -2543,6 +2546,8 @@ module Aws::SageMaker
     AssociationSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     AssociationSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     AssociationSummary.struct_class = Types::AssociationSummary
+
+    AssumableRoleArns.member = Shapes::ShapeRef.new(shape: RoleArn)
 
     AsyncInferenceClientConfig.add_member(:max_concurrent_invocations_per_instance, Shapes::ShapeRef.new(shape: MaxConcurrentInvocationsPerInstance, location_name: "MaxConcurrentInvocationsPerInstance"))
     AsyncInferenceClientConfig.struct_class = Types::AsyncInferenceClientConfig
@@ -5646,6 +5651,10 @@ module Aws::SageMaker
 
     Edges.member = Shapes::ShapeRef.new(shape: Edge)
 
+    EmrSettings.add_member(:assumable_role_arns, Shapes::ShapeRef.new(shape: AssumableRoleArns, location_name: "AssumableRoleArns"))
+    EmrSettings.add_member(:execution_role_arns, Shapes::ShapeRef.new(shape: ExecutionRoleArns, location_name: "ExecutionRoleArns"))
+    EmrSettings.struct_class = Types::EmrSettings
+
     EnableSagemakerServicecatalogPortfolioInput.struct_class = Types::EnableSagemakerServicecatalogPortfolioInput
 
     EnableSagemakerServicecatalogPortfolioOutput.struct_class = Types::EnableSagemakerServicecatalogPortfolioOutput
@@ -5737,6 +5746,8 @@ module Aws::SageMaker
     EnvironmentParameterRanges.struct_class = Types::EnvironmentParameterRanges
 
     EnvironmentParameters.member = Shapes::ShapeRef.new(shape: EnvironmentParameter)
+
+    ExecutionRoleArns.member = Shapes::ShapeRef.new(shape: RoleArn)
 
     Experiment.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
     Experiment.add_member(:experiment_arn, Shapes::ShapeRef.new(shape: ExperimentArn, location_name: "ExperimentArn"))
@@ -6441,6 +6452,7 @@ module Aws::SageMaker
     JupyterLabAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     JupyterLabAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     JupyterLabAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
+    JupyterLabAppSettings.add_member(:emr_settings, Shapes::ShapeRef.new(shape: EmrSettings, location_name: "EmrSettings"))
     JupyterLabAppSettings.struct_class = Types::JupyterLabAppSettings
 
     JupyterServerAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))

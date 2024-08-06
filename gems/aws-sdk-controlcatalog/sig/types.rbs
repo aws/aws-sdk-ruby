@@ -32,12 +32,19 @@ module Aws::ControlCatalog
 
     class CommonControlSummary
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor domain: Types::AssociatedDomainSummary
-      attr_accessor last_update_time: ::Time
-      attr_accessor name: ::String
       attr_accessor objective: Types::AssociatedObjectiveSummary
+      attr_accessor create_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ControlSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -48,10 +55,24 @@ module Aws::ControlCatalog
 
     class DomainSummary
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
-      attr_accessor description: ::String
-      attr_accessor last_update_time: ::Time
       attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetControlRequest
+      attr_accessor control_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetControlResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor behavior: ("PREVENTIVE" | "PROACTIVE" | "DETECTIVE")
+      attr_accessor region_configuration: Types::RegionConfiguration
       SENSITIVE: []
     end
 
@@ -61,14 +82,26 @@ module Aws::ControlCatalog
     end
 
     class ListCommonControlsRequest
-      attr_accessor common_control_filter: Types::CommonControlFilter
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor common_control_filter: Types::CommonControlFilter
       SENSITIVE: []
     end
 
     class ListCommonControlsResponse
       attr_accessor common_controls: ::Array[Types::CommonControlSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListControlsResponse
+      attr_accessor controls: ::Array[Types::ControlSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -93,8 +126,8 @@ module Aws::ControlCatalog
     end
 
     class ListObjectivesResponse
-      attr_accessor next_token: ::String
       attr_accessor objectives: ::Array[Types::ObjectiveSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -110,11 +143,22 @@ module Aws::ControlCatalog
 
     class ObjectiveSummary
       attr_accessor arn: ::String
-      attr_accessor create_time: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor domain: Types::AssociatedDomainSummary
+      attr_accessor create_time: ::Time
       attr_accessor last_update_time: ::Time
-      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class RegionConfiguration
+      attr_accessor scope: ("GLOBAL" | "REGIONAL")
+      attr_accessor deployable_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

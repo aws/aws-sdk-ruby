@@ -837,6 +837,7 @@ module Aws::ElasticLoadBalancingV2
     #       mode: "Mode",
     #       trust_store_arn: "TrustStoreArn",
     #       ignore_client_certificate_expiry: false,
+    #       trust_store_association_status: "active", # accepts active, removed
     #     },
     #   })
     #
@@ -896,6 +897,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].mutual_authentication.mode #=> String
     #   resp.listeners[0].mutual_authentication.trust_store_arn #=> String
     #   resp.listeners[0].mutual_authentication.ignore_client_certificate_expiry #=> Boolean
+    #   resp.listeners[0].mutual_authentication.trust_store_association_status #=> String, one of "active", "removed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener AWS API Documentation
     #
@@ -1867,6 +1869,42 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
+    # Deletes a shared trust store association.
+    #
+    # @option params [required, String] :trust_store_arn
+    #   The Amazon Resource Name (ARN) of the trust store.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Delete a shared trust store association
+    #
+    #   # This example deletes the association between the specified trust store and the specified load balancer.
+    #
+    #   resp = client.delete_shared_trust_store_association({
+    #     resource_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/app/my-load-balancer/80233fa81d678c2c", 
+    #     trust_store_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:truststore/my-trust-store/73e2d6bc24d8a063", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_shared_trust_store_association({
+    #     trust_store_arn: "TrustStoreArn", # required
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteSharedTrustStoreAssociation AWS API Documentation
+    #
+    # @overload delete_shared_trust_store_association(params = {})
+    # @param [Hash] params ({})
+    def delete_shared_trust_store_association(params = {}, options = {})
+      req = build_request(:delete_shared_trust_store_association, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified target group.
     #
     # You can delete a target group if it is not referenced by any actions.
@@ -2228,6 +2266,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].mutual_authentication.mode #=> String
     #   resp.listeners[0].mutual_authentication.trust_store_arn #=> String
     #   resp.listeners[0].mutual_authentication.ignore_client_certificate_expiry #=> Boolean
+    #   resp.listeners[0].mutual_authentication.trust_store_association_status #=> String, one of "active", "removed"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners AWS API Documentation
@@ -3007,7 +3046,7 @@ module Aws::ElasticLoadBalancingV2
     #   The targets.
     #
     # @option params [Array<String>] :include
-    #   Used to inclue anomaly detection information.
+    #   Used to include anomaly detection information.
     #
     # @return [Types::DescribeTargetHealthOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3164,8 +3203,8 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Describes the revocation files in use by the specified trust store
-    # arn, or revocation ID.
+    # Describes the revocation files in use by the specified trust store or
+    # revocation files.
     #
     # @option params [required, String] :trust_store_arn
     #   The Amazon Resource Name (ARN) of the trust store.
@@ -3214,8 +3253,7 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Describes all trust stores for a given account by trust store arn’s or
-    # name.
+    # Describes all trust stores for the specified account.
     #
     # @option params [Array<String>] :trust_store_arns
     #   The Amazon Resource Name (ARN) of the trust store.
@@ -3262,6 +3300,43 @@ module Aws::ElasticLoadBalancingV2
     # @param [Hash] params ({})
     def describe_trust_stores(params = {}, options = {})
       req = build_request(:describe_trust_stores, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the resource policy for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @return [Types::GetResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyOutput#policy #policy} => String
+    #
+    #
+    # @example Example: Retrieve a resource policy
+    #
+    #   # This example retrieves the resource policy for the specified trust store.
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "arn:aws:elasticloadbalancing:us-east-1:123456789012:truststore/my-trust-store/73e2d6bc24d8a067", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -3557,6 +3632,7 @@ module Aws::ElasticLoadBalancingV2
     #       mode: "Mode",
     #       trust_store_arn: "TrustStoreArn",
     #       ignore_client_certificate_expiry: false,
+    #       trust_store_association_status: "active", # accepts active, removed
     #     },
     #   })
     #
@@ -3616,6 +3692,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].mutual_authentication.mode #=> String
     #   resp.listeners[0].mutual_authentication.trust_store_arn #=> String
     #   resp.listeners[0].mutual_authentication.ignore_client_certificate_expiry #=> Boolean
+    #   resp.listeners[0].mutual_authentication.trust_store_association_status #=> String, one of "active", "removed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener AWS API Documentation
     #
@@ -4257,7 +4334,7 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Update the ca certificate bundle for a given trust store.
+    # Update the ca certificate bundle for the specified trust store.
     #
     # @option params [required, String] :trust_store_arn
     #   The Amazon Resource Name (ARN) of the trust store.
@@ -4502,6 +4579,12 @@ module Aws::ElasticLoadBalancingV2
     #   values are `ipv4` (for only IPv4 addresses), `dualstack` (for IPv4 and
     #   IPv6 addresses), and `dualstack-without-public-ipv4` (for IPv6 only
     #   public addresses, with private IPv4 and IPv6 addresses).
+    #
+    #   Note: Application Load Balancer authentication only supports IPv4
+    #   addresses when connecting to an Identity Provider (IdP) or Amazon
+    #   Cognito endpoint. Without a public IPv4 address the load balancer
+    #   cannot complete the authentication process, resulting in HTTP 500
+    #   errors.
     #
     #   \[Network Load Balancers\] The IP address type. The possible values
     #   are `ipv4` (for only IPv4 addresses) and `dualstack` (for IPv4 and
@@ -4896,7 +4979,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

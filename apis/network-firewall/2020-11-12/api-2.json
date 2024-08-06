@@ -1512,7 +1512,8 @@
       "type":"string",
       "enum":[
         "ALERT",
-        "FLOW"
+        "FLOW",
+        "TLS"
       ]
     },
     "LoggingConfiguration":{

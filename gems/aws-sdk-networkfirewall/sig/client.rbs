@@ -815,7 +815,7 @@ module Aws
                                           ?logging_configuration: {
                                             log_destination_configs: Array[
                                               {
-                                                log_type: ("ALERT" | "FLOW"),
+                                                log_type: ("ALERT" | "FLOW" | "TLS"),
                                                 log_destination_type: ("S3" | "CloudWatchLogs" | "KinesisDataFirehose"),
                                                 log_destination: Hash[::String, ::String]
                                               },

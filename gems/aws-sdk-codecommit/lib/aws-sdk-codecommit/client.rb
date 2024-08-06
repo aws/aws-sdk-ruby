@@ -1248,7 +1248,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
     #
     # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5078,7 +5078,7 @@ module Aws::CodeCommit
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
     #
     # @return [Types::UpdateRepositoryEncryptionKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5156,7 +5156,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

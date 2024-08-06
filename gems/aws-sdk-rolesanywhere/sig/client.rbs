@@ -79,6 +79,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#create_profile-instance_method
       def create_profile: (
+                            ?accept_role_session_name: bool,
                             ?duration_seconds: ::Integer,
                             ?enabled: bool,
                             ?managed_policy_arns: Array[::String],
@@ -439,6 +440,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#update_profile-instance_method
       def update_profile: (
+                            ?accept_role_session_name: bool,
                             ?duration_seconds: ::Integer,
                             ?managed_policy_arns: Array[::String],
                             ?name: ::String,

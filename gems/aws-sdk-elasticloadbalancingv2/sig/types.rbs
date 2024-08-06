@@ -210,6 +210,9 @@ module Aws::ElasticLoadBalancingV2
       SENSITIVE: []
     end
 
+    class DeleteAssociationSameAccountException < Aws::EmptyStructure
+    end
+
     class DeleteListenerInput
       attr_accessor listener_arn: ::String
       SENSITIVE: []
@@ -232,6 +235,15 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class DeleteRuleOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSharedTrustStoreAssociationInput
+      attr_accessor trust_store_arn: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSharedTrustStoreAssociationOutput < Aws::EmptyStructure
     end
 
     class DeleteTargetGroupInput
@@ -474,6 +486,16 @@ module Aws::ElasticLoadBalancingV2
       SENSITIVE: []
     end
 
+    class GetResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
     class GetTrustStoreCaCertificatesBundleInput
       attr_accessor trust_store_arn: ::String
       SENSITIVE: []
@@ -697,6 +719,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor mode: ::String
       attr_accessor trust_store_arn: ::String
       attr_accessor ignore_client_certificate_expiry: bool
+      attr_accessor trust_store_association_status: ("active" | "removed")
       SENSITIVE: []
     end
 
@@ -769,6 +792,9 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class ResourceInUseException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
     end
 
     class RevocationContent
@@ -1018,6 +1044,9 @@ module Aws::ElasticLoadBalancingV2
     class TrustStoreAssociation
       attr_accessor resource_arn: ::String
       SENSITIVE: []
+    end
+
+    class TrustStoreAssociationNotFoundException < Aws::EmptyStructure
     end
 
     class TrustStoreInUseException < Aws::EmptyStructure

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2024-07-25)
+------------------
+
+* Feature - Adding default vCPU information to GetOutpostSupportedInstanceTypes and GetOutpostInstanceTypes responses
+
 1.62.0 (2024-07-02)
 ------------------
 

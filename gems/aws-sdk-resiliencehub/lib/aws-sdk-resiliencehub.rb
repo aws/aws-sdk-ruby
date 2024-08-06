@@ -32,7 +32,7 @@ require_relative 'aws-sdk-resiliencehub/customizations'
 # structure.
 #
 #     resilience_hub = Aws::ResilienceHub::Client.new
-#     resp = resilience_hub.add_draft_app_version_resource_mappings(params)
+#     resp = resilience_hub.accept_resource_grouping_recommendations(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-resiliencehub/customizations'
 # @!group service
 module Aws::ResilienceHub
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end

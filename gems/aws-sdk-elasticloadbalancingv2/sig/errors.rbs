@@ -21,6 +21,8 @@ module Aws
       end
       class CertificateNotFoundException < ::Aws::Errors::ServiceError
       end
+      class DeleteAssociationSameAccountException < ::Aws::Errors::ServiceError
+      end
       class DuplicateListenerException < ::Aws::Errors::ServiceError
       end
       class DuplicateLoadBalancerNameException < ::Aws::Errors::ServiceError
@@ -61,6 +63,8 @@ module Aws
       end
       class ResourceInUseException < ::Aws::Errors::ServiceError
       end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
       class RevocationContentNotFoundException < ::Aws::Errors::ServiceError
       end
       class RevocationIdNotFoundException < ::Aws::Errors::ServiceError
@@ -98,6 +102,8 @@ module Aws
       class TooManyTrustStoresException < ::Aws::Errors::ServiceError
       end
       class TooManyUniqueTargetGroupsPerLoadBalancerException < ::Aws::Errors::ServiceError
+      end
+      class TrustStoreAssociationNotFoundException < ::Aws::Errors::ServiceError
       end
       class TrustStoreInUseException < ::Aws::Errors::ServiceError
       end

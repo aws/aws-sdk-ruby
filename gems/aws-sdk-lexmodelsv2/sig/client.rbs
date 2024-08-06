@@ -288,7 +288,13 @@ module Aws
                                    slot_resolution_improvement: {
                                      enabled: bool,
                                      bedrock_model_specification: {
-                                       model_arn: ::String
+                                       model_arn: ::String,
+                                       guardrail: {
+                                         identifier: ::String,
+                                         version: ::String
+                                       }?,
+                                       trace_status: ("ENABLED" | "DISABLED")?,
+                                       custom_prompt: ::String?
                                      }?
                                    }?
                                  }?,
@@ -296,13 +302,25 @@ module Aws
                                    descriptive_bot_builder: {
                                      enabled: bool,
                                      bedrock_model_specification: {
-                                       model_arn: ::String
+                                       model_arn: ::String,
+                                       guardrail: {
+                                         identifier: ::String,
+                                         version: ::String
+                                       }?,
+                                       trace_status: ("ENABLED" | "DISABLED")?,
+                                       custom_prompt: ::String?
                                      }?
                                    }?,
                                    sample_utterance_generation: {
                                      enabled: bool,
                                      bedrock_model_specification: {
-                                       model_arn: ::String
+                                       model_arn: ::String,
+                                       guardrail: {
+                                         identifier: ::String,
+                                         version: ::String
+                                       }?,
+                                       trace_status: ("ENABLED" | "DISABLED")?,
+                                       custom_prompt: ::String?
                                      }?
                                    }?
                                  }?
@@ -3921,11 +3939,21 @@ module Aws
                                  exact_response: bool?
                                }?,
                                bedrock_knowledge_store_configuration: {
-                                 bedrock_knowledge_base_arn: ::String
+                                 bedrock_knowledge_base_arn: ::String,
+                                 exact_response: bool?,
+                                 exact_response_fields: {
+                                   answer_field: ::String?
+                                 }?
                                }?
                              }?,
                              bedrock_model_configuration: {
-                               model_arn: ::String
+                               model_arn: ::String,
+                               guardrail: {
+                                 identifier: ::String,
+                                 version: ::String
+                               }?,
+                               trace_status: ("ENABLED" | "DISABLED")?,
+                               custom_prompt: ::String?
                              }?
                            }
                          ) -> _CreateIntentResponseSuccess
@@ -7507,7 +7535,13 @@ module Aws
                                    slot_resolution_improvement: {
                                      enabled: bool,
                                      bedrock_model_specification: {
-                                       model_arn: ::String
+                                       model_arn: ::String,
+                                       guardrail: {
+                                         identifier: ::String,
+                                         version: ::String
+                                       }?,
+                                       trace_status: ("ENABLED" | "DISABLED")?,
+                                       custom_prompt: ::String?
                                      }?
                                    }?
                                  }?,
@@ -7515,13 +7549,25 @@ module Aws
                                    descriptive_bot_builder: {
                                      enabled: bool,
                                      bedrock_model_specification: {
-                                       model_arn: ::String
+                                       model_arn: ::String,
+                                       guardrail: {
+                                         identifier: ::String,
+                                         version: ::String
+                                       }?,
+                                       trace_status: ("ENABLED" | "DISABLED")?,
+                                       custom_prompt: ::String?
                                      }?
                                    }?,
                                    sample_utterance_generation: {
                                      enabled: bool,
                                      bedrock_model_specification: {
-                                       model_arn: ::String
+                                       model_arn: ::String,
+                                       guardrail: {
+                                         identifier: ::String,
+                                         version: ::String
+                                       }?,
+                                       trace_status: ("ENABLED" | "DISABLED")?,
+                                       custom_prompt: ::String?
                                      }?
                                    }?
                                  }?
@@ -11123,11 +11169,21 @@ module Aws
                                  exact_response: bool?
                                }?,
                                bedrock_knowledge_store_configuration: {
-                                 bedrock_knowledge_base_arn: ::String
+                                 bedrock_knowledge_base_arn: ::String,
+                                 exact_response: bool?,
+                                 exact_response_fields: {
+                                   answer_field: ::String?
+                                 }?
                                }?
                              }?,
                              bedrock_model_configuration: {
-                               model_arn: ::String
+                               model_arn: ::String,
+                               guardrail: {
+                                 identifier: ::String,
+                                 version: ::String
+                               }?,
+                               trace_status: ("ENABLED" | "DISABLED")?,
+                               custom_prompt: ::String?
                              }?
                            }
                          ) -> _UpdateIntentResponseSuccess

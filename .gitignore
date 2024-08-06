@@ -7,6 +7,7 @@
 /Gemfile.lock
 /coverage
 *.gem
+benchmark_report.json
 
 /scratchpad
 .idea

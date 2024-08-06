@@ -14,6 +14,7 @@ module Aws::Bedrock
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     AutomatedEvaluationConfig = Shapes::StructureShape.new(name: 'AutomatedEvaluationConfig')
     BaseModelIdentifier = Shapes::StringShape.new(name: 'BaseModelIdentifier')
     BedrockModelId = Shapes::StringShape.new(name: 'BedrockModelId')
@@ -29,6 +30,8 @@ module Aws::Bedrock
     CreateGuardrailResponse = Shapes::StructureShape.new(name: 'CreateGuardrailResponse')
     CreateGuardrailVersionRequest = Shapes::StructureShape.new(name: 'CreateGuardrailVersionRequest')
     CreateGuardrailVersionResponse = Shapes::StructureShape.new(name: 'CreateGuardrailVersionResponse')
+    CreateModelCopyJobRequest = Shapes::StructureShape.new(name: 'CreateModelCopyJobRequest')
+    CreateModelCopyJobResponse = Shapes::StructureShape.new(name: 'CreateModelCopyJobResponse')
     CreateModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'CreateModelCustomizationJobRequest')
     CreateModelCustomizationJobResponse = Shapes::StructureShape.new(name: 'CreateModelCustomizationJobResponse')
     CreateProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'CreateProvisionedModelThroughputRequest')
@@ -91,6 +94,8 @@ module Aws::Bedrock
     GetFoundationModelResponse = Shapes::StructureShape.new(name: 'GetFoundationModelResponse')
     GetGuardrailRequest = Shapes::StructureShape.new(name: 'GetGuardrailRequest')
     GetGuardrailResponse = Shapes::StructureShape.new(name: 'GetGuardrailResponse')
+    GetModelCopyJobRequest = Shapes::StructureShape.new(name: 'GetModelCopyJobRequest')
+    GetModelCopyJobResponse = Shapes::StructureShape.new(name: 'GetModelCopyJobResponse')
     GetModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'GetModelCustomizationJobRequest')
     GetModelCustomizationJobResponse = Shapes::StructureShape.new(name: 'GetModelCustomizationJobResponse')
     GetModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetModelInvocationLoggingConfigurationRequest')
@@ -193,6 +198,8 @@ module Aws::Bedrock
     ListFoundationModelsResponse = Shapes::StructureShape.new(name: 'ListFoundationModelsResponse')
     ListGuardrailsRequest = Shapes::StructureShape.new(name: 'ListGuardrailsRequest')
     ListGuardrailsResponse = Shapes::StructureShape.new(name: 'ListGuardrailsResponse')
+    ListModelCopyJobsRequest = Shapes::StructureShape.new(name: 'ListModelCopyJobsRequest')
+    ListModelCopyJobsResponse = Shapes::StructureShape.new(name: 'ListModelCopyJobsResponse')
     ListModelCustomizationJobsRequest = Shapes::StructureShape.new(name: 'ListModelCustomizationJobsRequest')
     ListModelCustomizationJobsResponse = Shapes::StructureShape.new(name: 'ListModelCustomizationJobsResponse')
     ListProvisionedModelThroughputsRequest = Shapes::StructureShape.new(name: 'ListProvisionedModelThroughputsRequest')
@@ -204,6 +211,10 @@ module Aws::Bedrock
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MetricFloat = Shapes::FloatShape.new(name: 'MetricFloat')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
+    ModelCopyJobArn = Shapes::StringShape.new(name: 'ModelCopyJobArn')
+    ModelCopyJobStatus = Shapes::StringShape.new(name: 'ModelCopyJobStatus')
+    ModelCopyJobSummaries = Shapes::ListShape.new(name: 'ModelCopyJobSummaries')
+    ModelCopyJobSummary = Shapes::StructureShape.new(name: 'ModelCopyJobSummary')
     ModelCustomization = Shapes::StringShape.new(name: 'ModelCustomization')
     ModelCustomizationHyperParameters = Shapes::MapShape.new(name: 'ModelCustomizationHyperParameters')
     ModelCustomizationJobArn = Shapes::StringShape.new(name: 'ModelCustomizationJobArn')
@@ -332,6 +343,16 @@ module Aws::Bedrock
     CreateGuardrailVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: GuardrailNumericalVersion, required: true, location_name: "version"))
     CreateGuardrailVersionResponse.struct_class = Types::CreateGuardrailVersionResponse
 
+    CreateModelCopyJobRequest.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "sourceModelArn"))
+    CreateModelCopyJobRequest.add_member(:target_model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "targetModelName"))
+    CreateModelCopyJobRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "modelKmsKeyId"))
+    CreateModelCopyJobRequest.add_member(:target_model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "targetModelTags"))
+    CreateModelCopyJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateModelCopyJobRequest.struct_class = Types::CreateModelCopyJobRequest
+
+    CreateModelCopyJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location_name: "jobArn"))
+    CreateModelCopyJobResponse.struct_class = Types::CreateModelCopyJobResponse
+
     CreateModelCustomizationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "jobName"))
     CreateModelCustomizationJobRequest.add_member(:custom_model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "customModelName"))
     CreateModelCustomizationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
@@ -368,6 +389,7 @@ module Aws::Bedrock
     CustomModelSummary.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "baseModelArn"))
     CustomModelSummary.add_member(:base_model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "baseModelName"))
     CustomModelSummary.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
+    CustomModelSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "ownerAccountId"))
     CustomModelSummary.struct_class = Types::CustomModelSummary
 
     CustomModelSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelSummary)
@@ -552,6 +574,22 @@ module Aws::Bedrock
     GetGuardrailResponse.add_member(:blocked_outputs_messaging, Shapes::ShapeRef.new(shape: GuardrailBlockedMessaging, required: true, location_name: "blockedOutputsMessaging"))
     GetGuardrailResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetGuardrailResponse.struct_class = Types::GetGuardrailResponse
+
+    GetModelCopyJobRequest.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location: "uri", location_name: "jobArn"))
+    GetModelCopyJobRequest.struct_class = Types::GetModelCopyJobRequest
+
+    GetModelCopyJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location_name: "jobArn"))
+    GetModelCopyJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelCopyJobStatus, required: true, location_name: "status"))
+    GetModelCopyJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    GetModelCopyJobResponse.add_member(:target_model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "targetModelArn"))
+    GetModelCopyJobResponse.add_member(:target_model_name, Shapes::ShapeRef.new(shape: CustomModelName, location_name: "targetModelName"))
+    GetModelCopyJobResponse.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "sourceAccountId"))
+    GetModelCopyJobResponse.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "sourceModelArn"))
+    GetModelCopyJobResponse.add_member(:target_model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "targetModelKmsKeyArn"))
+    GetModelCopyJobResponse.add_member(:target_model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "targetModelTags"))
+    GetModelCopyJobResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    GetModelCopyJobResponse.add_member(:source_model_name, Shapes::ShapeRef.new(shape: CustomModelName, location_name: "sourceModelName"))
+    GetModelCopyJobResponse.struct_class = Types::GetModelCopyJobResponse
 
     GetModelCustomizationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: ModelCustomizationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
     GetModelCustomizationJobRequest.struct_class = Types::GetModelCustomizationJobRequest
@@ -774,6 +812,7 @@ module Aws::Bedrock
     ListCustomModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListCustomModelsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortModelsBy, location: "querystring", location_name: "sortBy"))
     ListCustomModelsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListCustomModelsRequest.add_member(:is_owned, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "isOwned"))
     ListCustomModelsRequest.struct_class = Types::ListCustomModelsRequest
 
     ListCustomModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -811,6 +850,22 @@ module Aws::Bedrock
     ListGuardrailsResponse.add_member(:guardrails, Shapes::ShapeRef.new(shape: GuardrailSummaries, required: true, location_name: "guardrails"))
     ListGuardrailsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListGuardrailsResponse.struct_class = Types::ListGuardrailsResponse
+
+    ListModelCopyJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
+    ListModelCopyJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
+    ListModelCopyJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: ModelCopyJobStatus, location: "querystring", location_name: "statusEquals"))
+    ListModelCopyJobsRequest.add_member(:source_account_equals, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "sourceAccountEquals"))
+    ListModelCopyJobsRequest.add_member(:source_model_arn_equals, Shapes::ShapeRef.new(shape: ModelArn, location: "querystring", location_name: "sourceModelArnEquals"))
+    ListModelCopyJobsRequest.add_member(:target_model_name_contains, Shapes::ShapeRef.new(shape: CustomModelName, location: "querystring", location_name: "outputModelNameContains"))
+    ListModelCopyJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListModelCopyJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListModelCopyJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortJobsBy, location: "querystring", location_name: "sortBy"))
+    ListModelCopyJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListModelCopyJobsRequest.struct_class = Types::ListModelCopyJobsRequest
+
+    ListModelCopyJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListModelCopyJobsResponse.add_member(:model_copy_job_summaries, Shapes::ShapeRef.new(shape: ModelCopyJobSummaries, location_name: "modelCopyJobSummaries"))
+    ListModelCopyJobsResponse.struct_class = Types::ListModelCopyJobsResponse
 
     ListModelCustomizationJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
     ListModelCustomizationJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
@@ -853,6 +908,21 @@ module Aws::Bedrock
     LoggingConfig.add_member(:image_data_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "imageDataDeliveryEnabled"))
     LoggingConfig.add_member(:embedding_data_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "embeddingDataDeliveryEnabled"))
     LoggingConfig.struct_class = Types::LoggingConfig
+
+    ModelCopyJobSummaries.member = Shapes::ShapeRef.new(shape: ModelCopyJobSummary)
+
+    ModelCopyJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location_name: "jobArn"))
+    ModelCopyJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelCopyJobStatus, required: true, location_name: "status"))
+    ModelCopyJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    ModelCopyJobSummary.add_member(:target_model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, required: true, location_name: "targetModelArn"))
+    ModelCopyJobSummary.add_member(:target_model_name, Shapes::ShapeRef.new(shape: CustomModelName, location_name: "targetModelName"))
+    ModelCopyJobSummary.add_member(:source_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "sourceAccountId"))
+    ModelCopyJobSummary.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "sourceModelArn"))
+    ModelCopyJobSummary.add_member(:target_model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "targetModelKmsKeyArn"))
+    ModelCopyJobSummary.add_member(:target_model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "targetModelTags"))
+    ModelCopyJobSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    ModelCopyJobSummary.add_member(:source_model_name, Shapes::ShapeRef.new(shape: CustomModelName, location_name: "sourceModelName"))
+    ModelCopyJobSummary.struct_class = Types::ModelCopyJobSummary
 
     ModelCustomizationHyperParameters.key = Shapes::ShapeRef.new(shape: String)
     ModelCustomizationHyperParameters.value = Shapes::ShapeRef.new(shape: String)
@@ -1010,9 +1080,10 @@ module Aws::Bedrock
 
       api.metadata = {
         "apiVersion" => "2023-04-20",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "bedrock",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Bedrock",
         "serviceId" => "Bedrock",
         "signatureVersion" => "v4",
@@ -1064,6 +1135,18 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_model_copy_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateModelCopyJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/model-copy-jobs"
+        o.input = Shapes::ShapeRef.new(shape: CreateModelCopyJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateModelCopyJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_model_customization_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1202,6 +1285,19 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_model_copy_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetModelCopyJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-copy-jobs/{jobArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetModelCopyJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetModelCopyJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_model_customization_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetModelCustomizationJob"
         o.http_method = "GET"
@@ -1293,6 +1389,25 @@ module Aws::Bedrock
         o.http_request_uri = "/guardrails"
         o.input = Shapes::ShapeRef.new(shape: ListGuardrailsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListGuardrailsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_model_copy_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListModelCopyJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-copy-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListModelCopyJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListModelCopyJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

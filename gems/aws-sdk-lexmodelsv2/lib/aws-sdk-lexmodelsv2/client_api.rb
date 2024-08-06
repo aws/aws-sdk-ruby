@@ -145,10 +145,16 @@ module Aws::LexModelsV2
     BatchDeleteCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchDeleteCustomVocabularyItemResponse')
     BatchUpdateCustomVocabularyItemRequest = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemRequest')
     BatchUpdateCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemResponse')
+    BedrockGuardrailConfiguration = Shapes::StructureShape.new(name: 'BedrockGuardrailConfiguration')
+    BedrockGuardrailIdentifier = Shapes::StringShape.new(name: 'BedrockGuardrailIdentifier')
+    BedrockGuardrailVersion = Shapes::StringShape.new(name: 'BedrockGuardrailVersion')
     BedrockKnowledgeBaseArn = Shapes::StringShape.new(name: 'BedrockKnowledgeBaseArn')
     BedrockKnowledgeStoreConfiguration = Shapes::StructureShape.new(name: 'BedrockKnowledgeStoreConfiguration')
+    BedrockKnowledgeStoreExactResponseFields = Shapes::StructureShape.new(name: 'BedrockKnowledgeStoreExactResponseFields')
     BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
+    BedrockModelCustomPrompt = Shapes::StringShape.new(name: 'BedrockModelCustomPrompt')
     BedrockModelSpecification = Shapes::StructureShape.new(name: 'BedrockModelSpecification')
+    BedrockTraceStatus = Shapes::StringShape.new(name: 'BedrockTraceStatus')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotAliasHistoryEvent = Shapes::StructureShape.new(name: 'BotAliasHistoryEvent')
     BotAliasHistoryEventsList = Shapes::ListShape.new(name: 'BotAliasHistoryEventsList')
@@ -1136,10 +1142,22 @@ module Aws::LexModelsV2
     BatchUpdateCustomVocabularyItemResponse.add_member(:resources, Shapes::ShapeRef.new(shape: CustomVocabularyItems, location_name: "resources"))
     BatchUpdateCustomVocabularyItemResponse.struct_class = Types::BatchUpdateCustomVocabularyItemResponse
 
+    BedrockGuardrailConfiguration.add_member(:identifier, Shapes::ShapeRef.new(shape: BedrockGuardrailIdentifier, required: true, location_name: "identifier"))
+    BedrockGuardrailConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: BedrockGuardrailVersion, required: true, location_name: "version"))
+    BedrockGuardrailConfiguration.struct_class = Types::BedrockGuardrailConfiguration
+
     BedrockKnowledgeStoreConfiguration.add_member(:bedrock_knowledge_base_arn, Shapes::ShapeRef.new(shape: BedrockKnowledgeBaseArn, required: true, location_name: "bedrockKnowledgeBaseArn"))
+    BedrockKnowledgeStoreConfiguration.add_member(:exact_response, Shapes::ShapeRef.new(shape: Boolean, location_name: "exactResponse"))
+    BedrockKnowledgeStoreConfiguration.add_member(:exact_response_fields, Shapes::ShapeRef.new(shape: BedrockKnowledgeStoreExactResponseFields, location_name: "exactResponseFields"))
     BedrockKnowledgeStoreConfiguration.struct_class = Types::BedrockKnowledgeStoreConfiguration
 
+    BedrockKnowledgeStoreExactResponseFields.add_member(:answer_field, Shapes::ShapeRef.new(shape: AnswerField, location_name: "answerField"))
+    BedrockKnowledgeStoreExactResponseFields.struct_class = Types::BedrockKnowledgeStoreExactResponseFields
+
     BedrockModelSpecification.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
+    BedrockModelSpecification.add_member(:guardrail, Shapes::ShapeRef.new(shape: BedrockGuardrailConfiguration, location_name: "guardrail"))
+    BedrockModelSpecification.add_member(:trace_status, Shapes::ShapeRef.new(shape: BedrockTraceStatus, location_name: "traceStatus"))
+    BedrockModelSpecification.add_member(:custom_prompt, Shapes::ShapeRef.new(shape: BedrockModelCustomPrompt, location_name: "customPrompt"))
     BedrockModelSpecification.struct_class = Types::BedrockModelSpecification
 
     BotAliasHistoryEvent.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))

@@ -8,6 +8,23 @@
 module Aws::ResilienceHub
   module Types
 
+    class AcceptGroupingRecommendationEntry
+      attr_accessor grouping_recommendation_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptResourceGroupingRecommendationsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor entries: ::Array[Types::AcceptGroupingRecommendationEntry]
+      SENSITIVE: []
+    end
+
+    class AcceptResourceGroupingRecommendationsResponse
+      attr_accessor app_arn: ::String
+      attr_accessor failed_entries: ::Array[Types::FailedGroupingRecommendationEntry]
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -43,7 +60,7 @@ module Aws::ResilienceHub
     class App
       attr_accessor app_arn: ::String
       attr_accessor assessment_schedule: ("Disabled" | "Daily")
-      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected" | "NotApplicable" | "MissingPolicy")
       attr_accessor creation_time: ::Time
       attr_accessor description: ::String
       attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
@@ -69,7 +86,7 @@ module Aws::ResilienceHub
       attr_accessor assessment_name: ::String
       attr_accessor assessment_status: ("Pending" | "InProgress" | "Failed" | "Success")
       attr_accessor compliance: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::DisruptionCompliance]
-      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotApplicable" | "MissingPolicy")
       attr_accessor cost: Types::Cost
       attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
       attr_accessor end_time: ::Time
@@ -79,6 +96,7 @@ module Aws::ResilienceHub
       attr_accessor resiliency_score: Types::ResiliencyScore
       attr_accessor resource_errors_details: Types::ResourceErrorsDetails
       attr_accessor start_time: ::Time
+      attr_accessor summary: Types::AssessmentSummary
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor version_name: ::String
       SENSITIVE: [:tags]
@@ -90,7 +108,7 @@ module Aws::ResilienceHub
       attr_accessor assessment_arn: ::String
       attr_accessor assessment_name: ::String
       attr_accessor assessment_status: ("Pending" | "InProgress" | "Failed" | "Success")
-      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotApplicable" | "MissingPolicy")
       attr_accessor cost: Types::Cost
       attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
       attr_accessor end_time: ::Time
@@ -116,7 +134,7 @@ module Aws::ResilienceHub
       attr_accessor cost: Types::Cost
       attr_accessor message: ::String
       attr_accessor resiliency_score: Types::ResiliencyScore
-      attr_accessor status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor status: ("PolicyBreached" | "PolicyMet" | "NotApplicable" | "MissingPolicy")
       SENSITIVE: []
     end
 
@@ -133,7 +151,7 @@ module Aws::ResilienceHub
     class AppSummary
       attr_accessor app_arn: ::String
       attr_accessor assessment_schedule: ("Disabled" | "Daily")
-      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected" | "NotApplicable" | "MissingPolicy")
       attr_accessor creation_time: ::Time
       attr_accessor description: ::String
       attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
@@ -151,6 +169,19 @@ module Aws::ResilienceHub
       attr_accessor creation_time: ::Time
       attr_accessor identifier: ::Integer
       attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentRiskRecommendation
+      attr_accessor app_components: ::Array[::String]
+      attr_accessor recommendation: ::String
+      attr_accessor risk: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentSummary
+      attr_accessor risk_recommendations: ::Array[Types::AssessmentRiskRecommendation]
+      attr_accessor summary: ::String
       SENSITIVE: []
     end
 
@@ -199,7 +230,7 @@ module Aws::ResilienceHub
     class ComponentRecommendation
       attr_accessor app_component_name: ::String
       attr_accessor config_recommendations: ::Array[Types::ConfigRecommendation]
-      attr_accessor recommendation_status: ("BreachedUnattainable" | "BreachedCanMeet" | "MetCanImprove")
+      attr_accessor recommendation_status: ("BreachedUnattainable" | "BreachedCanMeet" | "MetCanImprove" | "MissingPolicy")
       SENSITIVE: []
     end
 
@@ -531,10 +562,23 @@ module Aws::ResilienceHub
       SENSITIVE: []
     end
 
+    class DescribeResourceGroupingRecommendationTaskRequest
+      attr_accessor app_arn: ::String
+      attr_accessor grouping_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceGroupingRecommendationTaskResponse
+      attr_accessor error_message: ::String
+      attr_accessor grouping_id: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
+      SENSITIVE: []
+    end
+
     class DisruptionCompliance
       attr_accessor achievable_rpo_in_secs: ::Integer
       attr_accessor achievable_rto_in_secs: ::Integer
-      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotApplicable" | "MissingPolicy")
       attr_accessor current_rpo_in_secs: ::Integer
       attr_accessor current_rto_in_secs: ::Integer
       attr_accessor message: ::String
@@ -564,9 +608,44 @@ module Aws::ResilienceHub
       SENSITIVE: []
     end
 
+    class FailedGroupingRecommendationEntry
+      attr_accessor error_message: ::String
+      attr_accessor grouping_recommendation_id: ::String
+      SENSITIVE: []
+    end
+
     class FailurePolicy
       attr_accessor rpo_in_secs: ::Integer
       attr_accessor rto_in_secs: ::Integer
+      SENSITIVE: []
+    end
+
+    class GroupingAppComponent
+      attr_accessor app_component_id: ::String
+      attr_accessor app_component_name: ::String
+      attr_accessor app_component_type: ::String
+      SENSITIVE: []
+    end
+
+    class GroupingRecommendation
+      attr_accessor confidence_level: ("High" | "Medium")
+      attr_accessor creation_time: ::Time
+      attr_accessor grouping_app_component: Types::GroupingAppComponent
+      attr_accessor grouping_recommendation_id: ::String
+      attr_accessor recommendation_reasons: ::Array[::String]
+      attr_accessor rejection_reason: ("DistinctBusinessPurpose" | "SeparateDataConcern" | "DistinctUserGroupHandling" | "Other")
+      attr_accessor resources: ::Array[Types::GroupingResource]
+      attr_accessor score: ::Float
+      attr_accessor status: ("Accepted" | "Rejected" | "PendingDecision")
+      SENSITIVE: []
+    end
+
+    class GroupingResource
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor physical_resource_id: Types::PhysicalResourceId
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor source_app_component_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -637,7 +716,7 @@ module Aws::ResilienceHub
       attr_accessor app_arn: ::String
       attr_accessor assessment_name: ::String
       attr_accessor assessment_status: ::Array[("Pending" | "InProgress" | "Failed" | "Success")]
-      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotApplicable" | "MissingPolicy")
       attr_accessor invoker: ("User" | "System")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -799,6 +878,19 @@ module Aws::ResilienceHub
       SENSITIVE: []
     end
 
+    class ListResourceGroupingRecommendationsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceGroupingRecommendationsResponse
+      attr_accessor grouping_recommendations: ::Array[Types::GroupingRecommendation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListSopRecommendationsRequest
       attr_accessor assessment_arn: ::String
       attr_accessor max_results: ::Integer
@@ -927,7 +1019,7 @@ module Aws::ResilienceHub
     end
 
     class RecommendationDisruptionCompliance
-      attr_accessor expected_compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor expected_compliance_status: ("PolicyBreached" | "PolicyMet" | "NotApplicable" | "MissingPolicy")
       attr_accessor expected_rpo_description: ::String
       attr_accessor expected_rpo_in_secs: ::Integer
       attr_accessor expected_rto_description: ::String
@@ -961,6 +1053,24 @@ module Aws::ResilienceHub
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor templates_location: Types::S3Location
       SENSITIVE: [:tags]
+    end
+
+    class RejectGroupingRecommendationEntry
+      attr_accessor grouping_recommendation_id: ::String
+      attr_accessor rejection_reason: ("DistinctBusinessPurpose" | "SeparateDataConcern" | "DistinctUserGroupHandling" | "Other")
+      SENSITIVE: []
+    end
+
+    class RejectResourceGroupingRecommendationsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor entries: ::Array[Types::RejectGroupingRecommendationEntry]
+      SENSITIVE: []
+    end
+
+    class RejectResourceGroupingRecommendationsResponse
+      attr_accessor app_arn: ::String
+      attr_accessor failed_entries: ::Array[Types::FailedGroupingRecommendationEntry]
+      SENSITIVE: []
     end
 
     class RemoveDraftAppVersionResourceMappingsRequest
@@ -1104,6 +1214,19 @@ module Aws::ResilienceHub
 
     class StartAppAssessmentResponse
       attr_accessor assessment: Types::AppAssessment
+      SENSITIVE: []
+    end
+
+    class StartResourceGroupingRecommendationTaskRequest
+      attr_accessor app_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartResourceGroupingRecommendationTaskResponse
+      attr_accessor app_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor grouping_id: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
       SENSITIVE: []
     end
 

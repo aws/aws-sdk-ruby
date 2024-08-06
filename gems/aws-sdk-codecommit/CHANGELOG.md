@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2024-07-25)
+------------------
+
+* Feature - CreateRepository API now throws OperationNotAllowedException when the account has been restricted from creating a repository.
+
 1.71.0 (2024-07-02)
 ------------------
 

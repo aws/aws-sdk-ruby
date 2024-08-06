@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2024-08-05)
+------------------
+
+* Feature - Added a description for the Dimension db.sql.tokenized_id on the DimensionGroup data type page.
+
 1.62.0 (2024-07-02)
 ------------------
 

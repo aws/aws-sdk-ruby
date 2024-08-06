@@ -220,12 +220,16 @@ module Aws::RDS
       data[:create_time]
     end
 
-    # A list of tags. For more information, see [Tagging Amazon RDS
-    # Resources][1] in the *Amazon RDS User Guide.*
+    # A list of tags.
+    #
+    # For more information, see [Tagging Amazon RDS resources][1] in the
+    # *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    # resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     # @return [Array<Types::Tag>]
     def tag_list
       data[:tag_list]

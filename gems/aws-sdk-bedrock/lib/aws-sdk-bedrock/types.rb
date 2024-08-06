@@ -325,6 +325,66 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_model_arn
+    #   The Amazon Resource Name (ARN) of the model to be copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_name
+    #   A name for the copied model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_kms_key_id
+    #   The ARN of the KMS key that you use to encrypt the model copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_tags
+    #   Tags to associate with the target model. For more information, see
+    #   [Tag resources][1] in the [Amazon Bedrock User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelCopyJobRequest AWS API Documentation
+    #
+    class CreateModelCopyJobRequest < Struct.new(
+      :source_model_arn,
+      :target_model_name,
+      :model_kms_key_id,
+      :target_model_tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the model copy job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelCopyJobResponse AWS API Documentation
+    #
+    class CreateModelCopyJobResponse < Struct.new(
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_name
     #   A name for the fine-tuning job.
     #   @return [String]
@@ -461,7 +521,7 @@ module Aws::Bedrock
     #   Services support center][1] to request MUs.
     #
     #   For model unit quotas, see [Provisioned Throughput quotas][2] in the
-    #   Amazon Bedrock User Guide.
+    #   [Amazon Bedrock User Guide][3].
     #
     #   For more information about what an MU specifies, contact your Amazon
     #   Web Services account manager.
@@ -470,6 +530,7 @@ module Aws::Bedrock
     #
     #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html#prov-thru-quotas
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #   @return [Integer]
     #
     # @!attribute [rw] provisioned_model_name
@@ -480,12 +541,13 @@ module Aws::Bedrock
     #   The Amazon Resource Name (ARN) or name of the model to associate
     #   with this Provisioned Throughput. For a list of models for which you
     #   can purchase Provisioned Throughput, see [Amazon Bedrock model IDs
-    #   for purchasing Provisioned Throughput][1] in the Amazon Bedrock User
-    #   Guide.
+    #   for purchasing Provisioned Throughput][1] in the [Amazon Bedrock
+    #   User Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#prov-throughput-models
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #   @return [String]
     #
     # @!attribute [rw] commitment_duration
@@ -495,11 +557,12 @@ module Aws::Bedrock
     #
     #   Custom models support all levels of commitment. To see which base
     #   models support no commitment, see [Supported regions and models for
-    #   Provisioned Throughput][1] in the Amazon Bedrock User Guide
+    #   Provisioned Throughput][1] in the [Amazon Bedrock User Guide][2]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/pt-supported.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -563,6 +626,10 @@ module Aws::Bedrock
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
     #   @return [String]
     #
+    # @!attribute [rw] owner_account_id
+    #   The unique identifier of the account that owns the model.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelSummary AWS API Documentation
     #
     class CustomModelSummary < Struct.new(
@@ -571,7 +638,8 @@ module Aws::Bedrock
       :creation_time,
       :base_model_arn,
       :base_model_name,
-      :customization_type)
+      :customization_type,
+      :owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1358,6 +1426,82 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the model copy job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelCopyJobRequest AWS API Documentation
+    #
+    class GetModelCopyJobRequest < Struct.new(
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the model copy job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the model copy job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the model copy job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_model_arn
+    #   The Amazon Resource Name (ARN) of the copied model.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_name
+    #   The name of the copied model.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_id
+    #   The unique identifier of the account that the model being copied
+    #   originated from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_model_arn
+    #   The Amazon Resource Name (ARN) of the original model being copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key encrypting the copied
+    #   model.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_tags
+    #   The tags associated with the copied model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] failure_message
+    #   An error message for why the model copy job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_model_name
+    #   The name of the original model being copied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelCopyJobResponse AWS API Documentation
+    #
+    class GetModelCopyJobResponse < Struct.new(
+      :job_arn,
+      :status,
+      :creation_time,
+      :target_model_arn,
+      :target_model_name,
+      :source_account_id,
+      :source_model_arn,
+      :target_model_kms_key_arn,
+      :target_model_tags,
+      :failure_message,
+      :source_model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_identifier
     #   Identifier for the customization job.
     #   @return [String]
@@ -1891,7 +2035,7 @@ module Aws::Bedrock
     # The PII entity configured for the guardrail.
     #
     # @!attribute [rw] type
-    #   The type of PII entity. For example, Social Security Number.
+    #   The type of PII entity. For exampvle, Social Security Number.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -2619,12 +2763,17 @@ module Aws::Bedrock
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in the response.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Continuation token from the previous response, for Amazon Bedrock to
-    #   list the next set of results.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -2634,6 +2783,11 @@ module Aws::Bedrock
     # @!attribute [rw] sort_order
     #   The sort order of the results.
     #   @return [String]
+    #
+    # @!attribute [rw] is_owned
+    #   Return custom models depending on if the current account owns them
+    #   (`true`) or if they were shared with the current account (`false`).
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelsRequest AWS API Documentation
     #
@@ -2646,13 +2800,16 @@ module Aws::Bedrock
       :max_results,
       :next_token,
       :sort_by,
-      :sort_order)
+      :sort_order,
+      :is_owned)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] next_token
-    #   Continuation token for the next request to list the next set of
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
     #   results.
     #   @return [String]
     #
@@ -2743,12 +2900,13 @@ module Aws::Bedrock
     #
     # @!attribute [rw] by_customization_type
     #   Return models that support the customization type that you specify.
-    #   For more information, see [Custom models][1] in the Amazon Bedrock
-    #   User Guide.
+    #   For more information, see [Custom models][1] in the [Amazon Bedrock
+    #   User Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #   @return [String]
     #
     # @!attribute [rw] by_output_modality
@@ -2757,12 +2915,13 @@ module Aws::Bedrock
     #
     # @!attribute [rw] by_inference_type
     #   Return models that support the inference type that you specify. For
-    #   more information, see [Provisioned Throughput][1] in the Amazon
-    #   Bedrock User Guide.
+    #   more information, see [Provisioned Throughput][1] in the [Amazon
+    #   Bedrock User Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelsRequest AWS API Documentation
@@ -2833,6 +2992,94 @@ module Aws::Bedrock
     end
 
     # @!attribute [rw] creation_time_after
+    #   Filters for model copy jobs created after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Filters for model copy jobs created before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_equals
+    #   Filters for model copy jobs whose status matches the value that you
+    #   specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_equals
+    #   Filters for model copy jobs in which the account that the source
+    #   model belongs to is equal to the value that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_model_arn_equals
+    #   Filters for model copy jobs in which the Amazon Resource Name (ARN)
+    #   of the source model to is equal to the value that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_name_contains
+    #   Filters for model copy jobs in which the name of the copied model
+    #   contains the string that you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by in the returned list of model copy jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCopyJobsRequest AWS API Documentation
+    #
+    class ListModelCopyJobsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :status_equals,
+      :source_account_equals,
+      :source_model_arn_equals,
+      :target_model_name_contains,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_copy_job_summaries
+    #   A list of information about each model copy job.
+    #   @return [Array<Types::ModelCopyJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCopyJobsResponse AWS API Documentation
+    #
+    class ListModelCopyJobsResponse < Struct.new(
+      :next_token,
+      :model_copy_job_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time_after
     #   Return customization jobs created after the specified time.
     #   @return [Time]
     #
@@ -2850,12 +3097,17 @@ module Aws::Bedrock
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return in the response.
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Continuation token from the previous response, for Amazon Bedrock to
-    #   list the next set of results.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -2882,7 +3134,10 @@ module Aws::Bedrock
     end
 
     # @!attribute [rw] next_token
-    #   Page continuation token to use in the next request.
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] model_customization_job_summaries
@@ -3037,6 +3292,83 @@ module Aws::Bedrock
       :text_data_delivery_enabled,
       :image_data_delivery_enabled,
       :embedding_data_delivery_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about each model copy job.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [ListModelCopyJobs response][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListModelCopyJobs.html#API_ListModelCopyJobs_ResponseSyntax
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resoource Name (ARN) of the model copy job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the model copy job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the model copy job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_model_arn
+    #   The Amazon Resource Name (ARN) of the copied model.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_name
+    #   The name of the copied model.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_id
+    #   The unique identifier of the account that the model being copied
+    #   originated from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_model_arn
+    #   The Amazon Resource Name (ARN) of the original model being copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   copied model.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_model_tags
+    #   Tags associated with the copied model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] failure_message
+    #   If a model fails to be copied, a message describing why the job
+    #   failed is included here.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_model_name
+    #   The name of the original model being copied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelCopyJobSummary AWS API Documentation
+    #
+    class ModelCopyJobSummary < Struct.new(
+      :job_arn,
+      :status,
+      :creation_time,
+      :target_model_arn,
+      :target_model_name,
+      :source_account_id,
+      :source_model_arn,
+      :target_model_kms_key_arn,
+      :target_model_tags,
+      :failure_message,
+      :source_model_name)
       SENSITIVE = []
       include Aws::Structure
     end

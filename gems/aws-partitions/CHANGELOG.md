@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.962.0 (2024-08-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.961.0 (2024-08-01)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SSMQuickSetup`.
+
+1.960.0 (2024-07-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.959.0 (2024-07-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.958.0 (2024-07-24)
 ------------------
 

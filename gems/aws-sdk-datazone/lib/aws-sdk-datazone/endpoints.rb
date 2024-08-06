@@ -129,6 +129,32 @@ module Aws::DataZone
       end
     end
 
+    class CreateDataProduct
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateDataProductRevision
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateDataSource
       def self.build(context)
         unless context.config.regional_endpoint
@@ -364,6 +390,19 @@ module Aws::DataZone
     end
 
     class DeleteAssetType
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteDataProduct
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -636,6 +675,19 @@ module Aws::DataZone
       end
     end
 
+    class GetDataProduct
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetDataSource
       def self.build(context)
         unless context.config.regional_endpoint
@@ -715,6 +767,19 @@ module Aws::DataZone
     end
 
     class GetEnvironmentBlueprintConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetEnvironmentCredentials
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -949,6 +1014,19 @@ module Aws::DataZone
     end
 
     class ListAssetRevisions
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListDataProductRevisions
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
