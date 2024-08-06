@@ -3325,7 +3325,9 @@ module Aws::WorkSpaces
     #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
     #     this time.
     #
-    #   * Windows 11 only supports `Microsoft_Office_2019`.
+    #   * During the image import process, non-GPU WSP WorkSpaces with Windows
+    #     11 support only `Microsoft_Office_2019`. GPU WSP WorkSpaces with
+    #     Windows 11 do not support Office installation.
     #
     #    </note>
     #
@@ -3341,7 +3343,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.import_workspace_image({
     #     ec2_image_id: "Ec2ImageId", # required
-    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_GRAPHICS_G4DN, BYOL_REGULAR_WSP, BYOL_REGULAR_BYOP, BYOL_GRAPHICS_G4DN_BYOP
+    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_GRAPHICS_G4DN, BYOL_REGULAR_WSP, BYOL_GRAPHICS_G4DN_WSP, BYOL_REGULAR_BYOP, BYOL_GRAPHICS_G4DN_BYOP
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
     #     tags: [
@@ -4751,7 +4753,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3032,7 +3032,9 @@ module Aws::WorkSpaces
     #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
     #     this time.
     #
-    #   * Windows 11 only supports `Microsoft_Office_2019`.
+    #   * During the image import process, non-GPU WSP WorkSpaces with
+    #     Windows 11 support only `Microsoft_Office_2019`. GPU WSP
+    #     WorkSpaces with Windows 11 do not support Office installation.
     #
     #    </note>
     #

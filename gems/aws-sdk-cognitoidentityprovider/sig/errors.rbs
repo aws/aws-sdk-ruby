@@ -74,6 +74,9 @@ module Aws
       class NotAuthorizedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class PasswordHistoryPolicyViolationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class PasswordResetRequiredException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

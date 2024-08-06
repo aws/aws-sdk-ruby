@@ -738,8 +738,8 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains information about an input into the flow and what to do with
-    # it.
+    # Contains information about an input into the prompt flow and where to
+    # send it.
     #
     # This data type is used in the following API operations:
     #
@@ -752,15 +752,16 @@ module Aws::BedrockAgentRuntime
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_RequestSyntax
     #
     # @!attribute [rw] content
-    #   Contains information about an input into the flow.
+    #   Contains information about an input into the prompt flow.
     #   @return [Types::FlowInputContent]
     #
     # @!attribute [rw] node_name
-    #   A name for the input of the flow input node.
+    #   The name of the flow input node that begins the prompt flow.
     #   @return [String]
     #
     # @!attribute [rw] node_output_name
-    #   A name for the output of the flow input node.
+    #   The name of the output from the flow input node that begins the
+    #   prompt flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowInput AWS API Documentation
@@ -788,7 +789,7 @@ module Aws::BedrockAgentRuntime
     # @note FlowInputContent is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] document
-    #   The input for the flow input node.
+    #   The input to send to the prompt flow input node.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowInputContent AWS API Documentation
@@ -804,7 +805,8 @@ module Aws::BedrockAgentRuntime
       class Unknown < FlowInputContent; end
     end
 
-    # Contains information about the output node.
+    # Contains information about the content in an output from prompt flow
+    # invocation.
     #
     # This data type is used in the following API operations:
     #
@@ -819,7 +821,7 @@ module Aws::BedrockAgentRuntime
     # @note FlowOutputContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowOutputContent corresponding to the set member.
     #
     # @!attribute [rw] document
-    #   A name for the output of the flow.
+    #   The content in the output.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowOutputContent AWS API Documentation
@@ -835,7 +837,7 @@ module Aws::BedrockAgentRuntime
       class Unknown < FlowOutputContent; end
     end
 
-    # Contains information about an output from flow invoction.
+    # Contains information about an output from prompt flow invoction.
     #
     # This data type is used in the following API operations:
     #
@@ -848,15 +850,15 @@ module Aws::BedrockAgentRuntime
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeFlow.html#API_agent_InvokeFlow_ResponseSyntax
     #
     # @!attribute [rw] content
-    #   The output of the node.
+    #   The content in the output.
     #   @return [Types::FlowOutputContent]
     #
     # @!attribute [rw] node_name
-    #   The name of the node to which input was provided.
+    #   The name of the flow output node that the output is from.
     #   @return [String]
     #
     # @!attribute [rw] node_type
-    #   The type of node to which input was provided.
+    #   The type of the node that the output is from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowOutputEvent AWS API Documentation
@@ -1472,7 +1474,7 @@ module Aws::BedrockAgentRuntime
     #   the following token at each point of generation. The value that you
     #   set for `Top P` determines the number of most-likely candidates from
     #   which the model chooses the next token in the sequence. For example,
-    #   if you set `topP` to 80, the model only selects the next token from
+    #   if you set `topP` to 0.8, the model only selects the next token from
     #   the top 80% of the probability distribution of next tokens.
     #   @return [Float]
     #
@@ -2103,6 +2105,20 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # Provides details of the foundation model.
+    #
+    # @!attribute [rw] usage
+    #   Contains details of the foundation model usage.
+    #   @return [Types::Usage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/Metadata AWS API Documentation
+    #
+    class Metadata < Struct.new(
+      :usage)
+      SENSITIVE = [:usage]
+      include Aws::Structure
+    end
+
     # The input for the pre-processing step.
     #
     # * The `type` matches the agent step.
@@ -2256,6 +2272,31 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
+    # The foundation model output from the orchestration step.
+    #
+    # @!attribute [rw] metadata
+    #   Contains information about the foundation model output.
+    #   @return [Types::Metadata]
+    #
+    # @!attribute [rw] raw_response
+    #   Contains details of the raw response from the foundation model
+    #   output.
+    #   @return [Types::RawResponse]
+    #
+    # @!attribute [rw] trace_id
+    #   The unique identifier of the trace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/OrchestrationModelInvocationOutput AWS API Documentation
+    #
+    class OrchestrationModelInvocationOutput < Struct.new(
+      :metadata,
+      :raw_response,
+      :trace_id)
+      SENSITIVE = [:metadata, :raw_response]
+      include Aws::Structure
+    end
+
     # Details about the orchestration step, in which the agent determines
     # the order in which actions are executed and which knowledge bases are
     # retrieved.
@@ -2283,6 +2324,11 @@ module Aws::BedrockAgentRuntime
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
     #   @return [Types::ModelInvocationInput]
     #
+    # @!attribute [rw] model_invocation_output
+    #   Contains information pertaining to the output from the foundation
+    #   model that is being invoked.
+    #   @return [Types::OrchestrationModelInvocationOutput]
+    #
     # @!attribute [rw] observation
     #   Details about the observation (the output of the action group Lambda
     #   or knowledge base) made by the agent.
@@ -2299,15 +2345,17 @@ module Aws::BedrockAgentRuntime
     class OrchestrationTrace < Struct.new(
       :invocation_input,
       :model_invocation_input,
+      :model_invocation_output,
       :observation,
       :rationale,
       :unknown)
-      SENSITIVE = [:invocation_input, :model_invocation_input, :observation, :rationale]
+      SENSITIVE = [:invocation_input, :model_invocation_input, :model_invocation_output, :observation, :rationale]
       include Aws::Structure
       include Aws::Structure::Union
 
       class InvocationInput < OrchestrationTrace; end
       class ModelInvocationInput < OrchestrationTrace; end
+      class ModelInvocationOutput < OrchestrationTrace; end
       class Observation < OrchestrationTrace; end
       class Rationale < OrchestrationTrace; end
       class Unknown < OrchestrationTrace; end
@@ -2629,6 +2677,20 @@ module Aws::BedrockAgentRuntime
       :text,
       :trace_id)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # Contains the raw output from the foundation model.
+    #
+    # @!attribute [rw] content
+    #   The foundation model's raw output content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RawResponse AWS API Documentation
+    #
+    class RawResponse < Struct.new(
+      :content)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3712,6 +3774,27 @@ module Aws::BedrockAgentRuntime
       :trace,
       :event_type)
       SENSITIVE = [:trace]
+      include Aws::Structure
+    end
+
+    # Contains information of the usage of the foundation model.
+    #
+    # @!attribute [rw] input_tokens
+    #   Contains information about the input tokens from the foundation
+    #   model usage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_tokens
+    #   Contains information about the output tokens from the foundation
+    #   model usage.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/Usage AWS API Documentation
+    #
+    class Usage < Struct.new(
+      :input_tokens,
+      :output_tokens)
+      SENSITIVE = []
       include Aws::Structure
     end
 

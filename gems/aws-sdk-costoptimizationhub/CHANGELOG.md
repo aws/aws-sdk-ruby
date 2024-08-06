@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-08-06)
+------------------
+
+* Feature - This release adds savings percentage support to the ListRecommendationSummaries API.
+
 1.10.0 (2024-07-02)
 ------------------
 

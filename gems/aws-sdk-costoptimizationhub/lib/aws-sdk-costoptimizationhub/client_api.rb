@@ -103,6 +103,9 @@ module Aws::CostOptimizationHub
     Source = Shapes::StringShape.new(name: 'Source')
     StorageConfiguration = Shapes::StructureShape.new(name: 'StorageConfiguration')
     String = Shapes::StringShape.new(name: 'String')
+    SummaryMetrics = Shapes::StringShape.new(name: 'SummaryMetrics')
+    SummaryMetricsList = Shapes::ListShape.new(name: 'SummaryMetricsList')
+    SummaryMetricsResult = Shapes::StructureShape.new(name: 'SummaryMetricsResult')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -320,6 +323,7 @@ module Aws::CostOptimizationHub
     ListRecommendationSummariesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
     ListRecommendationSummariesRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: String, required: true, location_name: "groupBy"))
     ListRecommendationSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationSummariesRequestMaxResultsInteger, location_name: "maxResults"))
+    ListRecommendationSummariesRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: SummaryMetricsList, location_name: "metrics"))
     ListRecommendationSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListRecommendationSummariesRequest.struct_class = Types::ListRecommendationSummariesRequest
 
@@ -327,6 +331,7 @@ module Aws::CostOptimizationHub
     ListRecommendationSummariesResponse.add_member(:items, Shapes::ShapeRef.new(shape: RecommendationSummariesList, location_name: "items"))
     ListRecommendationSummariesResponse.add_member(:group_by, Shapes::ShapeRef.new(shape: String, location_name: "groupBy"))
     ListRecommendationSummariesResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
+    ListRecommendationSummariesResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: SummaryMetricsResult, location_name: "metrics"))
     ListRecommendationSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListRecommendationSummariesResponse.struct_class = Types::ListRecommendationSummariesResponse
 
@@ -543,6 +548,11 @@ module Aws::CostOptimizationHub
     StorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     StorageConfiguration.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: Double, location_name: "sizeInGb"))
     StorageConfiguration.struct_class = Types::StorageConfiguration
+
+    SummaryMetricsList.member = Shapes::ShapeRef.new(shape: SummaryMetrics)
+
+    SummaryMetricsResult.add_member(:savings_percentage, Shapes::ShapeRef.new(shape: String, location_name: "savingsPercentage"))
+    SummaryMetricsResult.struct_class = Types::SummaryMetricsResult
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))

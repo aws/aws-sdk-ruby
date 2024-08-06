@@ -1123,6 +1123,10 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_input.text #=> String
     #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
     #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING"
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
     #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_error #=> String
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_output #=> String
@@ -1213,6 +1217,11 @@ module Aws::BedrockAgentRuntime
     # return the output of each node as a stream. If there's an error, the
     # error is returned. For more information, see [Test a flow in Amazon
     # Bedrock][1] in the Amazon Bedrock User Guide.
+    #
+    # <note markdown="1"> The CLI doesn't support streaming operations in Amazon Bedrock,
+    # including `InvokeFlow`.
+    #
+    #  </note>
     #
     #
     #
@@ -1854,7 +1863,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

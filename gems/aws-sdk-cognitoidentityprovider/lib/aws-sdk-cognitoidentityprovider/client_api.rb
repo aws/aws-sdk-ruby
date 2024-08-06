@@ -221,6 +221,7 @@ module Aws::CognitoIdentityProvider
     ExplicitAuthFlowsListType = Shapes::ListShape.new(name: 'ExplicitAuthFlowsListType')
     ExplicitAuthFlowsType = Shapes::StringShape.new(name: 'ExplicitAuthFlowsType')
     FeedbackValueType = Shapes::StringShape.new(name: 'FeedbackValueType')
+    FirehoseConfigurationType = Shapes::StructureShape.new(name: 'FirehoseConfigurationType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     ForceAliasCreation = Shapes::BooleanShape.new(name: 'ForceAliasCreation')
     ForgetDeviceRequest = Shapes::StructureShape.new(name: 'ForgetDeviceRequest')
@@ -321,6 +322,8 @@ module Aws::CognitoIdentityProvider
     OAuthFlowsType = Shapes::ListShape.new(name: 'OAuthFlowsType')
     PaginationKey = Shapes::StringShape.new(name: 'PaginationKey')
     PaginationKeyType = Shapes::StringShape.new(name: 'PaginationKeyType')
+    PasswordHistoryPolicyViolationException = Shapes::StructureShape.new(name: 'PasswordHistoryPolicyViolationException')
+    PasswordHistorySizeType = Shapes::IntegerShape.new(name: 'PasswordHistorySizeType')
     PasswordPolicyMinLengthType = Shapes::IntegerShape.new(name: 'PasswordPolicyMinLengthType')
     PasswordPolicyType = Shapes::StructureShape.new(name: 'PasswordPolicyType')
     PasswordResetRequiredException = Shapes::StructureShape.new(name: 'PasswordResetRequiredException')
@@ -366,7 +369,9 @@ module Aws::CognitoIdentityProvider
     RiskDecisionType = Shapes::StringShape.new(name: 'RiskDecisionType')
     RiskExceptionConfigurationType = Shapes::StructureShape.new(name: 'RiskExceptionConfigurationType')
     RiskLevelType = Shapes::StringShape.new(name: 'RiskLevelType')
+    S3ArnType = Shapes::StringShape.new(name: 'S3ArnType')
     S3BucketType = Shapes::StringShape.new(name: 'S3BucketType')
+    S3ConfigurationType = Shapes::StructureShape.new(name: 'S3ConfigurationType')
     SESConfigurationSet = Shapes::StringShape.new(name: 'SESConfigurationSet')
     SMSMfaSettingsType = Shapes::StructureShape.new(name: 'SMSMfaSettingsType')
     SchemaAttributeType = Shapes::StructureShape.new(name: 'SchemaAttributeType')
@@ -1149,6 +1154,9 @@ module Aws::CognitoIdentityProvider
 
     ExplicitAuthFlowsListType.member = Shapes::ShapeRef.new(shape: ExplicitAuthFlowsType)
 
+    FirehoseConfigurationType.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "StreamArn"))
+    FirehoseConfigurationType.struct_class = Types::FirehoseConfigurationType
+
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
@@ -1433,6 +1441,8 @@ module Aws::CognitoIdentityProvider
     LogConfigurationType.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
     LogConfigurationType.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "EventSource"))
     LogConfigurationType.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: CloudWatchLogsConfigurationType, location_name: "CloudWatchLogsConfiguration"))
+    LogConfigurationType.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3ConfigurationType, location_name: "S3Configuration"))
+    LogConfigurationType.add_member(:firehose_configuration, Shapes::ShapeRef.new(shape: FirehoseConfigurationType, location_name: "FirehoseConfiguration"))
     LogConfigurationType.struct_class = Types::LogConfigurationType
 
     LogDeliveryConfigurationType.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
@@ -1481,11 +1491,15 @@ module Aws::CognitoIdentityProvider
 
     OAuthFlowsType.member = Shapes::ShapeRef.new(shape: OAuthFlowType)
 
+    PasswordHistoryPolicyViolationException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    PasswordHistoryPolicyViolationException.struct_class = Types::PasswordHistoryPolicyViolationException
+
     PasswordPolicyType.add_member(:minimum_length, Shapes::ShapeRef.new(shape: PasswordPolicyMinLengthType, location_name: "MinimumLength"))
     PasswordPolicyType.add_member(:require_uppercase, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireUppercase"))
     PasswordPolicyType.add_member(:require_lowercase, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireLowercase"))
     PasswordPolicyType.add_member(:require_numbers, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireNumbers"))
     PasswordPolicyType.add_member(:require_symbols, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RequireSymbols"))
+    PasswordPolicyType.add_member(:password_history_size, Shapes::ShapeRef.new(shape: PasswordHistorySizeType, location_name: "PasswordHistorySize"))
     PasswordPolicyType.add_member(:temporary_password_validity_days, Shapes::ShapeRef.new(shape: TemporaryPasswordValidityDaysType, location_name: "TemporaryPasswordValidityDays"))
     PasswordPolicyType.struct_class = Types::PasswordPolicyType
 
@@ -1582,6 +1596,9 @@ module Aws::CognitoIdentityProvider
     RiskExceptionConfigurationType.add_member(:blocked_ip_range_list, Shapes::ShapeRef.new(shape: BlockedIPRangeListType, location_name: "BlockedIPRangeList"))
     RiskExceptionConfigurationType.add_member(:skipped_ip_range_list, Shapes::ShapeRef.new(shape: SkippedIPRangeListType, location_name: "SkippedIPRangeList"))
     RiskExceptionConfigurationType.struct_class = Types::RiskExceptionConfigurationType
+
+    S3ConfigurationType.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3ArnType, location_name: "BucketArn"))
+    S3ConfigurationType.struct_class = Types::S3ConfigurationType
 
     SMSMfaSettingsType.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled"))
     SMSMfaSettingsType.add_member(:preferred_mfa, Shapes::ShapeRef.new(shape: BooleanType, location_name: "PreferredMfa"))
@@ -2400,6 +2417,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: ExpiredCodeException)
         o.errors << Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: UserLambdaValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -2443,6 +2461,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
       end)
 
       api.add_operation(:admin_set_user_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -2551,6 +2570,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -2597,6 +2617,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserLambdaValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: CodeMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredCodeException)
@@ -3413,6 +3434,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
         o.errors << Shapes::ShapeRef.new(shape: UserLambdaValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: PasswordHistoryPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)

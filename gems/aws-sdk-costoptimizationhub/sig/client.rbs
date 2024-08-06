@@ -137,6 +137,7 @@ module Aws
         def items: () -> ::Array[Types::RecommendationSummary]
         def group_by: () -> ::String
         def currency_code: () -> ::String
+        def metrics: () -> Types::SummaryMetricsResult
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#list_recommendation_summaries-instance_method
@@ -161,6 +162,7 @@ module Aws
                                            },
                                            group_by: ::String,
                                            ?max_results: ::Integer,
+                                           ?metrics: Array[("SavingsPercentage")],
                                            ?next_token: ::String
                                          ) -> _ListRecommendationSummariesResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationSummariesResponseSuccess

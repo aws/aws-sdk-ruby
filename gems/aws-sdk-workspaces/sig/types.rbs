@@ -899,7 +899,7 @@ module Aws::WorkSpaces
 
     class ImportWorkspaceImageRequest
       attr_accessor ec2_image_id: ::String
-      attr_accessor ingestion_process: ("BYOL_REGULAR" | "BYOL_GRAPHICS" | "BYOL_GRAPHICSPRO" | "BYOL_GRAPHICS_G4DN" | "BYOL_REGULAR_WSP" | "BYOL_REGULAR_BYOP" | "BYOL_GRAPHICS_G4DN_BYOP")
+      attr_accessor ingestion_process: ("BYOL_REGULAR" | "BYOL_GRAPHICS" | "BYOL_GRAPHICSPRO" | "BYOL_GRAPHICS_G4DN" | "BYOL_REGULAR_WSP" | "BYOL_GRAPHICS_G4DN_WSP" | "BYOL_REGULAR_BYOP" | "BYOL_GRAPHICS_G4DN_BYOP")
       attr_accessor image_name: ::String
       attr_accessor image_description: ::String
       attr_accessor tags: ::Array[Types::Tag]

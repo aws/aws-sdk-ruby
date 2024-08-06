@@ -534,6 +534,11 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class Metadata
+      attr_accessor usage: Types::Usage
+      SENSITIVE: [:usage]
+    end
+
     class ModelInvocationInput
       attr_accessor inference_configuration: Types::InferenceConfiguration
       attr_accessor override_lambda: ::String
@@ -561,17 +566,27 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class OrchestrationModelInvocationOutput
+      attr_accessor metadata: Types::Metadata
+      attr_accessor raw_response: Types::RawResponse
+      attr_accessor trace_id: ::String
+      SENSITIVE: [:metadata, :raw_response]
+    end
+
     class OrchestrationTrace
       attr_accessor invocation_input: Types::InvocationInput
       attr_accessor model_invocation_input: Types::ModelInvocationInput
+      attr_accessor model_invocation_output: Types::OrchestrationModelInvocationOutput
       attr_accessor observation: Types::Observation
       attr_accessor rationale: Types::Rationale
       attr_accessor unknown: untyped
-      SENSITIVE: [:invocation_input, :model_invocation_input, :observation, :rationale]
+      SENSITIVE: [:invocation_input, :model_invocation_input, :model_invocation_output, :observation, :rationale]
 
       class InvocationInput < OrchestrationTrace
       end
       class ModelInvocationInput < OrchestrationTrace
+      end
+      class ModelInvocationOutput < OrchestrationTrace
       end
       class Observation < OrchestrationTrace
       end
@@ -672,6 +687,11 @@ module Aws::BedrockAgentRuntime
       attr_accessor text: ::String
       attr_accessor trace_id: ::String
       SENSITIVE: [:text]
+    end
+
+    class RawResponse
+      attr_accessor content: ::String
+      SENSITIVE: []
     end
 
     class RepromptResponse
@@ -927,6 +947,12 @@ module Aws::BedrockAgentRuntime
       attr_accessor trace: Types::Trace
       attr_accessor event_type: untyped
       SENSITIVE: [:trace]
+    end
+
+    class Usage
+      attr_accessor input_tokens: ::Integer
+      attr_accessor output_tokens: ::Integer
+      SENSITIVE: []
     end
 
     class ValidationException

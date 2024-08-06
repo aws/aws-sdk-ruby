@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-08-06)
+------------------
+
+* Feature - Introduce model invocation output traces for orchestration traces, which contain the model's raw response and usage.
+
 1.17.0 (2024-07-18)
 ------------------
 

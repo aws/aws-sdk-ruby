@@ -634,6 +634,7 @@ module Aws
                                   require_lowercase: bool?,
                                   require_numbers: bool?,
                                   require_symbols: bool?,
+                                  password_history_size: ::Integer?,
                                   temporary_password_validity_days: ::Integer?
                                 }?
                               },
@@ -1297,10 +1298,16 @@ module Aws
                                             user_pool_id: ::String,
                                             log_configurations: Array[
                                               {
-                                                log_level: ("ERROR"),
-                                                event_source: ("userNotification"),
+                                                log_level: ("ERROR" | "INFO"),
+                                                event_source: ("userNotification" | "userAuthEvents"),
                                                 cloud_watch_logs_configuration: {
                                                   log_group_arn: ::String?
+                                                }?,
+                                                s3_configuration: {
+                                                  bucket_arn: ::String?
+                                                }?,
+                                                firehose_configuration: {
+                                                  stream_arn: ::String?
                                                 }?
                                               },
                                             ]
@@ -1610,6 +1617,7 @@ module Aws
                                   require_lowercase: bool?,
                                   require_numbers: bool?,
                                   require_symbols: bool?,
+                                  password_history_size: ::Integer?,
                                   temporary_password_validity_days: ::Integer?
                                 }?
                               },

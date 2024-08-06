@@ -268,6 +268,7 @@ module Aws::CostOptimizationHub
       attr_accessor filter: Types::Filter
       attr_accessor group_by: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor metrics: ::Array[("SavingsPercentage")]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -277,6 +278,7 @@ module Aws::CostOptimizationHub
       attr_accessor items: ::Array[Types::RecommendationSummary]
       attr_accessor group_by: ::String
       attr_accessor currency_code: ::String
+      attr_accessor metrics: Types::SummaryMetricsResult
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -547,6 +549,11 @@ module Aws::CostOptimizationHub
     class StorageConfiguration
       attr_accessor type: ::String
       attr_accessor size_in_gb: ::Float
+      SENSITIVE: []
+    end
+
+    class SummaryMetricsResult
+      attr_accessor savings_percentage: ::String
       SENSITIVE: []
     end
 

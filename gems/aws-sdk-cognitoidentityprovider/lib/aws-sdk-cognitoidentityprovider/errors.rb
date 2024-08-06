@@ -48,6 +48,7 @@ module Aws::CognitoIdentityProvider
   # * {LimitExceededException}
   # * {MFAMethodNotFoundException}
   # * {NotAuthorizedException}
+  # * {PasswordHistoryPolicyViolationException}
   # * {PasswordResetRequiredException}
   # * {PreconditionNotMetException}
   # * {ResourceNotFoundException}
@@ -380,6 +381,21 @@ module Aws::CognitoIdentityProvider
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CognitoIdentityProvider::Types::NotAuthorizedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PasswordHistoryPolicyViolationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CognitoIdentityProvider::Types::PasswordHistoryPolicyViolationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

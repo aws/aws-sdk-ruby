@@ -165,6 +165,7 @@ module Aws::BedrockAgentRuntime
     MemoryId = Shapes::StringShape.new(name: 'MemoryId')
     MemorySessionSummary = Shapes::StructureShape.new(name: 'MemorySessionSummary')
     MemoryType = Shapes::StringShape.new(name: 'MemoryType')
+    Metadata = Shapes::StructureShape.new(name: 'Metadata')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     ModelInvocationInput = Shapes::StructureShape.new(name: 'ModelInvocationInput')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -174,6 +175,7 @@ module Aws::BedrockAgentRuntime
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     Observation = Shapes::StructureShape.new(name: 'Observation')
     OrchestrationConfiguration = Shapes::StructureShape.new(name: 'OrchestrationConfiguration')
+    OrchestrationModelInvocationOutput = Shapes::StructureShape.new(name: 'OrchestrationModelInvocationOutput')
     OrchestrationTrace = Shapes::UnionShape.new(name: 'OrchestrationTrace')
     OutputFile = Shapes::StructureShape.new(name: 'OutputFile')
     OutputFiles = Shapes::ListShape.new(name: 'OutputFiles')
@@ -200,6 +202,7 @@ module Aws::BedrockAgentRuntime
     RAGStopSequencesMemberString = Shapes::StringShape.new(name: 'RAGStopSequencesMemberString')
     Rationale = Shapes::StructureShape.new(name: 'Rationale')
     RationaleString = Shapes::StringShape.new(name: 'RationaleString')
+    RawResponse = Shapes::StructureShape.new(name: 'RawResponse')
     RepromptResponse = Shapes::StructureShape.new(name: 'RepromptResponse')
     RequestBody = Shapes::StructureShape.new(name: 'RequestBody')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -260,6 +263,7 @@ module Aws::BedrockAgentRuntime
     TraceKnowledgeBaseId = Shapes::StringShape.new(name: 'TraceKnowledgeBaseId')
     TracePart = Shapes::StructureShape.new(name: 'TracePart')
     Type = Shapes::StringShape.new(name: 'Type')
+    Usage = Shapes::StructureShape.new(name: 'Usage')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Verb = Shapes::StringShape.new(name: 'Verb')
 
@@ -681,6 +685,9 @@ module Aws::BedrockAgentRuntime
     MemorySessionSummary.add_member(:summary_text, Shapes::ShapeRef.new(shape: SummaryText, location_name: "summaryText"))
     MemorySessionSummary.struct_class = Types::MemorySessionSummary
 
+    Metadata.add_member(:usage, Shapes::ShapeRef.new(shape: Usage, location_name: "usage"))
+    Metadata.struct_class = Types::Metadata
+
     ModelInvocationInput.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfiguration"))
     ModelInvocationInput.add_member(:override_lambda, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "overrideLambda"))
     ModelInvocationInput.add_member(:parser_mode, Shapes::ShapeRef.new(shape: CreationMode, location_name: "parserMode"))
@@ -702,13 +709,20 @@ module Aws::BedrockAgentRuntime
     OrchestrationConfiguration.add_member(:query_transformation_configuration, Shapes::ShapeRef.new(shape: QueryTransformationConfiguration, required: true, location_name: "queryTransformationConfiguration"))
     OrchestrationConfiguration.struct_class = Types::OrchestrationConfiguration
 
+    OrchestrationModelInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    OrchestrationModelInvocationOutput.add_member(:raw_response, Shapes::ShapeRef.new(shape: RawResponse, location_name: "rawResponse"))
+    OrchestrationModelInvocationOutput.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
+    OrchestrationModelInvocationOutput.struct_class = Types::OrchestrationModelInvocationOutput
+
     OrchestrationTrace.add_member(:invocation_input, Shapes::ShapeRef.new(shape: InvocationInput, location_name: "invocationInput"))
     OrchestrationTrace.add_member(:model_invocation_input, Shapes::ShapeRef.new(shape: ModelInvocationInput, location_name: "modelInvocationInput"))
+    OrchestrationTrace.add_member(:model_invocation_output, Shapes::ShapeRef.new(shape: OrchestrationModelInvocationOutput, location_name: "modelInvocationOutput"))
     OrchestrationTrace.add_member(:observation, Shapes::ShapeRef.new(shape: Observation, location_name: "observation"))
     OrchestrationTrace.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, location_name: "rationale"))
     OrchestrationTrace.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     OrchestrationTrace.add_member_subclass(:invocation_input, Types::OrchestrationTrace::InvocationInput)
     OrchestrationTrace.add_member_subclass(:model_invocation_input, Types::OrchestrationTrace::ModelInvocationInput)
+    OrchestrationTrace.add_member_subclass(:model_invocation_output, Types::OrchestrationTrace::ModelInvocationOutput)
     OrchestrationTrace.add_member_subclass(:observation, Types::OrchestrationTrace::Observation)
     OrchestrationTrace.add_member_subclass(:rationale, Types::OrchestrationTrace::Rationale)
     OrchestrationTrace.add_member_subclass(:unknown, Types::OrchestrationTrace::Unknown)
@@ -782,6 +796,9 @@ module Aws::BedrockAgentRuntime
     Rationale.add_member(:text, Shapes::ShapeRef.new(shape: RationaleString, location_name: "text"))
     Rationale.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     Rationale.struct_class = Types::Rationale
+
+    RawResponse.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "content"))
+    RawResponse.struct_class = Types::RawResponse
 
     RepromptResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     RepromptResponse.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
@@ -980,6 +997,10 @@ module Aws::BedrockAgentRuntime
     TracePart.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "sessionId"))
     TracePart.add_member(:trace, Shapes::ShapeRef.new(shape: Trace, location_name: "trace"))
     TracePart.struct_class = Types::TracePart
+
+    Usage.add_member(:input_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "inputTokens"))
+    Usage.add_member(:output_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "outputTokens"))
+    Usage.struct_class = Types::Usage
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException

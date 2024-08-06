@@ -944,7 +944,7 @@ module Aws::CostOptimizationHub
     #
     # @!attribute [rw] include_member_accounts
     #   The enrollment status of all member accounts in the organization if
-    #   the account is the management account.
+    #   the account is the management account or delegated administrator.
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
@@ -971,9 +971,14 @@ module Aws::CostOptimizationHub
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of recommendations that are returned for the
+    #   The maximum number of recommendations to be returned for the
     #   request.
     #   @return [Integer]
+    #
+    # @!attribute [rw] metrics
+    #   Additional metrics to be returned for the request. The only valid
+    #   value is `savingsPercentage`.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
     #   The token to retrieve the next set of results.
@@ -985,6 +990,7 @@ module Aws::CostOptimizationHub
       :filter,
       :group_by,
       :max_results,
+      :metrics,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -995,7 +1001,7 @@ module Aws::CostOptimizationHub
     #   @return [Float]
     #
     # @!attribute [rw] items
-    #   List of all savings recommendations.
+    #   A list of all savings recommendations.
     #   @return [Array<Types::RecommendationSummary>]
     #
     # @!attribute [rw] group_by
@@ -1005,6 +1011,11 @@ module Aws::CostOptimizationHub
     # @!attribute [rw] currency_code
     #   The currency code used for the recommendation.
     #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The results or descriptions for the additional metrics, based on
+    #   whether the metrics were or were not requested.
+    #   @return [Types::SummaryMetricsResult]
     #
     # @!attribute [rw] next_token
     #   The token to retrieve the next set of results.
@@ -1017,6 +1028,7 @@ module Aws::CostOptimizationHub
       :items,
       :group_by,
       :currency_code,
+      :metrics,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1961,6 +1973,27 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
+    # The results or descriptions for the additional metrics, based on
+    # whether the metrics were or were not requested.
+    #
+    # @!attribute [rw] savings_percentage
+    #   The savings percentage based on your Amazon Web Services spend over
+    #   the past 30 days.
+    #
+    #   <note markdown="1"> Savings percentage is only supported when filtering by Region,
+    #   account ID, or tags.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/SummaryMetricsResult AWS API Documentation
+    #
+    class SummaryMetricsResult < Struct.new(
+      :savings_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The tag structure that contains a tag key and value.
     #
     # @!attribute [rw] key
@@ -1999,7 +2032,7 @@ module Aws::CostOptimizationHub
     #
     # @!attribute [rw] include_member_accounts
     #   Indicates whether to enroll member accounts of the organization if
-    #   the account is the management account.
+    #   the account is the management account or delegated administrator.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/UpdateEnrollmentStatusRequest AWS API Documentation

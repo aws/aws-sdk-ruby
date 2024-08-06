@@ -864,6 +864,11 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class FirehoseConfigurationType
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
     class ForbiddenException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1261,9 +1266,11 @@ module Aws::CognitoIdentityProvider
     end
 
     class LogConfigurationType
-      attr_accessor log_level: ("ERROR")
-      attr_accessor event_source: ("userNotification")
+      attr_accessor log_level: ("ERROR" | "INFO")
+      attr_accessor event_source: ("userNotification" | "userAuthEvents")
       attr_accessor cloud_watch_logs_configuration: Types::CloudWatchLogsConfigurationType
+      attr_accessor s3_configuration: Types::S3ConfigurationType
+      attr_accessor firehose_configuration: Types::FirehoseConfigurationType
       SENSITIVE: []
     end
 
@@ -1325,12 +1332,18 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class PasswordHistoryPolicyViolationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class PasswordPolicyType
       attr_accessor minimum_length: ::Integer
       attr_accessor require_uppercase: bool
       attr_accessor require_lowercase: bool
       attr_accessor require_numbers: bool
       attr_accessor require_symbols: bool
+      attr_accessor password_history_size: ::Integer
       attr_accessor temporary_password_validity_days: ::Integer
       SENSITIVE: []
     end
@@ -1448,6 +1461,11 @@ module Aws::CognitoIdentityProvider
     class RiskExceptionConfigurationType
       attr_accessor blocked_ip_range_list: ::Array[::String]
       attr_accessor skipped_ip_range_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3ConfigurationType
+      attr_accessor bucket_arn: ::String
       SENSITIVE: []
     end
 

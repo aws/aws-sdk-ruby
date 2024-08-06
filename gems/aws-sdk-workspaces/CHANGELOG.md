@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2024-08-06)
+------------------
+
+* Feature - Added support for BYOL_GRAPHICS_G4DN_WSP IngestionProcess
+
 1.111.0 (2024-07-30)
 ------------------
 

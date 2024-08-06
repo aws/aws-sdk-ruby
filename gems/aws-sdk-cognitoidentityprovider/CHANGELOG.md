@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-08-06)
+------------------
+
+* Feature - Advanced security feature updates to include password history and log export for Cognito user pools.
+
 1.97.0 (2024-07-02)
 ------------------
 

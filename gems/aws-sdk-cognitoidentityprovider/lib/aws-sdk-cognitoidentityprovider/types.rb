@@ -2257,8 +2257,9 @@ module Aws::CognitoIdentityProvider
     #
     class ChangePasswordResponse < Aws::EmptyStructure; end
 
-    # The CloudWatch logging destination of a user pool detailed activity
-    # logging configuration.
+    # Configuration for the CloudWatch log group destination of user pool
+    # detailed activity logging, or of user activity log export with
+    # advanced security features.
     #
     # @!attribute [rw] log_group_arn
     #   The Amazon Resource Name (arn) of a CloudWatch Logs log group where
@@ -3329,6 +3330,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * `LEGACY` - This represents the early behavior of Amazon Cognito
     #     where user existence related errors aren't prevented.
+    #
+    #   Defaults to `LEGACY` when you don't provide a value.
     #   @return [String]
     #
     # @!attribute [rw] enable_token_revocation
@@ -4598,6 +4601,22 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # Configuration for the Amazon Data Firehose stream destination of user
+    # activity log export with advanced security features.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of an Amazon Data Firehose stream that's the destination
+    #   for advanced security features log export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/FirehoseConfigurationType AWS API Documentation
+    #
+    class FirehoseConfigurationType < Struct.new(
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when WAF doesn't allow your request based on
     # a web ACL that's associated with your user pool.
     #
@@ -4864,8 +4883,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] user_pool_id
-    #   The ID of the user pool where you want to view detailed activity
-    #   logging configuration.
+    #   The ID of the user pool that has the logging configuration that you
+    #   want to view.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetLogDeliveryConfigurationRequest AWS API Documentation
@@ -4877,8 +4896,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] log_delivery_configuration
-    #   The detailed activity logging configuration of the requested user
-    #   pool.
+    #   The logging configuration of the requested user pool.
     #   @return [Types::LogDeliveryConfigurationType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetLogDeliveryConfigurationResponse AWS API Documentation
@@ -6487,37 +6505,73 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] log_level
     #   The `errorlevel` selection of logs that a user pool sends for
-    #   detailed activity logging.
+    #   detailed activity logging. To send `userNotification` activity with
+    #   [information about message delivery][1], choose `ERROR` with
+    #   `CloudWatchLogsConfiguration`. To send `userAuthEvents` activity
+    #   with user logs from advanced security features, choose `INFO` with
+    #   one of `CloudWatchLogsConfiguration`, `FirehoseConfiguration`, or
+    #   `S3Configuration`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/tracking-quotas-and-usage-in-cloud-watch-logs.html
     #   @return [String]
     #
     # @!attribute [rw] event_source
-    #   The source of events that your user pool sends for detailed activity
-    #   logging.
+    #   The source of events that your user pool sends for logging. To send
+    #   error-level logs about user notification activity, set to
+    #   `userNotification`. To send info-level logs about advanced security
+    #   features user activity, set to `userAuthEvents`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_configuration
-    #   The CloudWatch logging destination of a user pool.
+    #   The CloudWatch log group destination of user pool detailed activity
+    #   logs, or of user activity log export with advanced security
+    #   features.
     #   @return [Types::CloudWatchLogsConfigurationType]
+    #
+    # @!attribute [rw] s3_configuration
+    #   The Amazon S3 bucket destination of user activity log export with
+    #   advanced security features. To activate this setting, [ advanced
+    #   security features][1] must be active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Types::S3ConfigurationType]
+    #
+    # @!attribute [rw] firehose_configuration
+    #   The Amazon Data Firehose stream destination of user activity log
+    #   export with advanced security features. To activate this setting, [
+    #   advanced security features][1] must be active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Types::FirehoseConfigurationType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LogConfigurationType AWS API Documentation
     #
     class LogConfigurationType < Struct.new(
       :log_level,
       :event_source,
-      :cloud_watch_logs_configuration)
+      :cloud_watch_logs_configuration,
+      :s3_configuration,
+      :firehose_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The logging parameters of a user pool.
+    # The logging parameters of a user pool returned in response to
+    # `GetLogDeliveryConfiguration`.
     #
     # @!attribute [rw] user_pool_id
-    #   The ID of the user pool where you configured detailed activity
-    #   logging.
+    #   The ID of the user pool where you configured logging.
     #   @return [String]
     #
     # @!attribute [rw] log_configurations
-    #   The detailed activity logging destination of a user pool.
+    #   A logging destination of a user pool. User pools can have multiple
+    #   logging destinations for message-delivery and user-activity logs.
     #   @return [Array<Types::LogConfigurationType>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LogDeliveryConfigurationType AWS API Documentation
@@ -6727,6 +6781,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The message returned when a user's new password matches a previous
+    # password and doesn't comply with the password-history policy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/PasswordHistoryPolicyViolationException AWS API Documentation
+    #
+    class PasswordHistoryPolicyViolationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The password policy type.
     #
     # @!attribute [rw] minimum_length
@@ -6756,6 +6824,23 @@ module Aws::CognitoIdentityProvider
     #   required users to use at least one symbol in their password.
     #   @return [Boolean]
     #
+    # @!attribute [rw] password_history_size
+    #   The number of previous passwords that you want Amazon Cognito to
+    #   restrict each user from reusing. Users can't set a password that
+    #   matches any of `n` previous passwords, where `n` is the value of
+    #   `PasswordHistorySize`.
+    #
+    #   Password history isn't enforced and isn't displayed in
+    #   [DescribeUserPool][1] responses when you set this value to `0` or
+    #   don't provide it. To activate this setting, [ advanced security
+    #   features][2] must be active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Integer]
+    #
     # @!attribute [rw] temporary_password_validity_days
     #   The number of days a temporary password is valid in the password
     #   policy. If the user doesn't sign in during this time, an
@@ -6778,6 +6863,7 @@ module Aws::CognitoIdentityProvider
       :require_lowercase,
       :require_numbers,
       :require_symbols,
+      :password_history_size,
       :temporary_password_validity_days)
       SENSITIVE = []
       include Aws::Structure
@@ -7408,6 +7494,22 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # Configuration for the Amazon S3 bucket destination of user activity
+    # log export with advanced security features.
+    #
+    # @!attribute [rw] bucket_arn
+    #   The ARN of an Amazon S3 bucket that's the destination for advanced
+    #   security features log export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/S3ConfigurationType AWS API Documentation
+    #
+    class S3ConfigurationType < Struct.new(
+      :bucket_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The type used for enabling SMS multi-factor authentication (MFA) at
     # the user level. Phone numbers don't need to be verified to be used
     # for SMS MFA. If an MFA type is activated for a user, the user will be
@@ -7548,13 +7650,11 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] user_pool_id
-    #   The ID of the user pool where you want to configure detailed
-    #   activity logging .
+    #   The ID of the user pool where you want to configure logging.
     #   @return [String]
     #
     # @!attribute [rw] log_configurations
-    #   A collection of all of the detailed activity logging configurations
-    #   for a user pool.
+    #   A collection of the logging configurations for a user pool.
     #   @return [Array<Types::LogConfigurationType>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetLogDeliveryConfigurationRequest AWS API Documentation
@@ -7923,7 +8023,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::CodeDeliveryDetailsType]
     #
     # @!attribute [rw] user_sub
-    #   The UUID of the authenticated user. This isn't the same as
+    #   The 128-bit ID of the authenticated user. This isn't the same as
     #   `username`.
     #   @return [String]
     #
@@ -9156,6 +9256,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * `LEGACY` - This represents the early behavior of Amazon Cognito
     #     where user existence related errors aren't prevented.
+    #
+    #   Defaults to `LEGACY` when you don't provide a value.
     #   @return [String]
     #
     # @!attribute [rw] enable_token_revocation
@@ -10092,8 +10194,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `ENABLED` - This prevents user existence-related errors.
     #
-    #   * `LEGACY` - This represents the old behavior of Amazon Cognito
+    #   * `LEGACY` - This represents the early behavior of Amazon Cognito
     #     where user existence related errors aren't prevented.
+    #
+    #   Defaults to `LEGACY` when you don't provide a value.
     #   @return [String]
     #
     # @!attribute [rw] enable_token_revocation

@@ -547,18 +547,14 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # This IAM-authenticated API operation provides a code that Amazon
-    # Cognito sent to your user when they signed up in your user pool. After
-    # your user enters their code, they confirm ownership of the email
-    # address or phone number that they provided, and their user account
-    # becomes active. Depending on your user pool configuration, your users
-    # will receive their confirmation code in an email or SMS message.
+    # This IAM-authenticated API operation confirms user sign-up as an
+    # administrator. Unlike [ConfirmSignUp][1], your IAM credentials
+    # authorize user account confirmation. No confirmation code is required.
     #
-    # Local users who signed up in your user pool are the only type of user
-    # who can confirm sign-up with a code. Users who federate through an
-    # external identity provider (IdP) have already been confirmed by their
-    # IdP. Administrator-created users confirm their accounts when they
-    # respond to their invitation email message and choose a password.
+    # This request sets a user account active in a user pool that [requires
+    # confirmation of new user accounts][2] before they can sign in. You can
+    # configure your user pool to not send confirmation codes to new users
+    # and instead confirm them with this API operation on the back end.
     #
     # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
     # in requests for this API operation. For this operation, you must use
@@ -567,16 +563,18 @@ module Aws::CognitoIdentityProvider
     #
     #  **Learn more**
     #
-    #  * [Signing Amazon Web Services API Requests][1]
+    #  * [Signing Amazon Web Services API Requests][3]
     #
-    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][4]
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
-    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmSignUp.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#signing-up-users-in-your-app-and-confirming-them-as-admin
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [4]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for which you want to confirm user registration.
@@ -3084,7 +3082,7 @@ module Aws::CognitoIdentityProvider
     # require MFA, the user can then authenticate with user name and
     # password credentials alone. If your user pool requires TOTP MFA,
     # Amazon Cognito generates an `MFA_SETUP` or `SOFTWARE_TOKEN_SETUP`
-    # challenge each time your user signs. Complete setup with
+    # challenge each time your user signs in. Complete setup with
     # `AssociateSoftwareToken` and `VerifySoftwareToken`.
     #
     #  After you set up software token MFA for your user, Amazon Cognito
@@ -4636,6 +4634,7 @@ module Aws::CognitoIdentityProvider
     #         require_lowercase: false,
     #         require_numbers: false,
     #         require_symbols: false,
+    #         password_history_size: 1,
     #         temporary_password_validity_days: 1,
     #       },
     #     },
@@ -4754,6 +4753,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.require_lowercase #=> Boolean
     #   resp.user_pool.policies.password_policy.require_numbers #=> Boolean
     #   resp.user_pool.policies.password_policy.require_symbols #=> Boolean
+    #   resp.user_pool.policies.password_policy.password_history_size #=> Integer
     #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
     #   resp.user_pool.deletion_protection #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
@@ -5162,6 +5162,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * `LEGACY` - This represents the early behavior of Amazon Cognito
     #     where user existence related errors aren't prevented.
+    #
+    #   Defaults to `LEGACY` when you don't provide a value.
     #
     # @option params [Boolean] :enable_token_revocation
     #   Activates or deactivates token revocation. For more information about
@@ -5959,6 +5961,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.require_lowercase #=> Boolean
     #   resp.user_pool.policies.password_policy.require_numbers #=> Boolean
     #   resp.user_pool.policies.password_policy.require_symbols #=> Boolean
+    #   resp.user_pool.policies.password_policy.password_history_size #=> Integer
     #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
     #   resp.user_pool.deletion_protection #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
@@ -6548,11 +6551,11 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Gets the detailed activity logging configuration for a user pool.
+    # Gets the logging configuration of a user pool.
     #
     # @option params [required, String] :user_pool_id
-    #   The ID of the user pool where you want to view detailed activity
-    #   logging configuration.
+    #   The ID of the user pool that has the logging configuration that you
+    #   want to view.
     #
     # @return [Types::GetLogDeliveryConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6568,9 +6571,11 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.log_delivery_configuration.user_pool_id #=> String
     #   resp.log_delivery_configuration.log_configurations #=> Array
-    #   resp.log_delivery_configuration.log_configurations[0].log_level #=> String, one of "ERROR"
-    #   resp.log_delivery_configuration.log_configurations[0].event_source #=> String, one of "userNotification"
+    #   resp.log_delivery_configuration.log_configurations[0].log_level #=> String, one of "ERROR", "INFO"
+    #   resp.log_delivery_configuration.log_configurations[0].event_source #=> String, one of "userNotification", "userAuthEvents"
     #   resp.log_delivery_configuration.log_configurations[0].cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.log_delivery_configuration.log_configurations[0].s3_configuration.bucket_arn #=> String
+    #   resp.log_delivery_configuration.log_configurations[0].firehose_configuration.stream_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetLogDeliveryConfiguration AWS API Documentation
     #
@@ -8466,16 +8471,15 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Sets up or modifies the detailed activity logging configuration of a
-    # user pool.
+    # Sets up or modifies the logging configuration of a user pool. User
+    # pools can export user notification logs and advanced security features
+    # user activity logs.
     #
     # @option params [required, String] :user_pool_id
-    #   The ID of the user pool where you want to configure detailed activity
-    #   logging .
+    #   The ID of the user pool where you want to configure logging.
     #
     # @option params [required, Array<Types::LogConfigurationType>] :log_configurations
-    #   A collection of all of the detailed activity logging configurations
-    #   for a user pool.
+    #   A collection of the logging configurations for a user pool.
     #
     # @return [Types::SetLogDeliveryConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8487,10 +8491,16 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     log_configurations: [ # required
     #       {
-    #         log_level: "ERROR", # required, accepts ERROR
-    #         event_source: "userNotification", # required, accepts userNotification
+    #         log_level: "ERROR", # required, accepts ERROR, INFO
+    #         event_source: "userNotification", # required, accepts userNotification, userAuthEvents
     #         cloud_watch_logs_configuration: {
     #           log_group_arn: "ArnType",
+    #         },
+    #         s3_configuration: {
+    #           bucket_arn: "S3ArnType",
+    #         },
+    #         firehose_configuration: {
+    #           stream_arn: "ArnType",
     #         },
     #       },
     #     ],
@@ -8500,9 +8510,11 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.log_delivery_configuration.user_pool_id #=> String
     #   resp.log_delivery_configuration.log_configurations #=> Array
-    #   resp.log_delivery_configuration.log_configurations[0].log_level #=> String, one of "ERROR"
-    #   resp.log_delivery_configuration.log_configurations[0].event_source #=> String, one of "userNotification"
+    #   resp.log_delivery_configuration.log_configurations[0].log_level #=> String, one of "ERROR", "INFO"
+    #   resp.log_delivery_configuration.log_configurations[0].event_source #=> String, one of "userNotification", "userAuthEvents"
     #   resp.log_delivery_configuration.log_configurations[0].cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.log_delivery_configuration.log_configurations[0].s3_configuration.bucket_arn #=> String
+    #   resp.log_delivery_configuration.log_configurations[0].firehose_configuration.stream_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetLogDeliveryConfiguration AWS API Documentation
     #
@@ -10050,6 +10062,7 @@ module Aws::CognitoIdentityProvider
     #         require_lowercase: false,
     #         require_numbers: false,
     #         require_symbols: false,
+    #         password_history_size: 1,
     #         temporary_password_validity_days: 1,
     #       },
     #     },
@@ -10463,6 +10476,8 @@ module Aws::CognitoIdentityProvider
     #   * `LEGACY` - This represents the early behavior of Amazon Cognito
     #     where user existence related errors aren't prevented.
     #
+    #   Defaults to `LEGACY` when you don't provide a value.
+    #
     # @option params [Boolean] :enable_token_revocation
     #   Activates or deactivates token revocation. For more information about
     #   revoking tokens, see [RevokeToken][1].
@@ -10808,7 +10823,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

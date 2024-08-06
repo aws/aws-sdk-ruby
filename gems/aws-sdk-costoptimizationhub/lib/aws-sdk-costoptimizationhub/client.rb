@@ -1045,8 +1045,11 @@ module Aws::CostOptimizationHub
     #   The grouping of recommendations by a dimension.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of recommendations that are returned for the
-    #   request.
+    #   The maximum number of recommendations to be returned for the request.
+    #
+    # @option params [Array<String>] :metrics
+    #   Additional metrics to be returned for the request. The only valid
+    #   value is `savingsPercentage`.
     #
     # @option params [String] :next_token
     #   The token to retrieve the next set of results.
@@ -1057,6 +1060,7 @@ module Aws::CostOptimizationHub
     #   * {Types::ListRecommendationSummariesResponse#items #items} => Array&lt;Types::RecommendationSummary&gt;
     #   * {Types::ListRecommendationSummariesResponse#group_by #data.group_by} => String (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::ListRecommendationSummariesResponse#currency_code #currency_code} => String
+    #   * {Types::ListRecommendationSummariesResponse#metrics #metrics} => Types::SummaryMetricsResult
     #   * {Types::ListRecommendationSummariesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1084,6 +1088,7 @@ module Aws::CostOptimizationHub
     #     },
     #     group_by: "String", # required
     #     max_results: 1,
+    #     metrics: ["SavingsPercentage"], # accepts SavingsPercentage
     #     next_token: "String",
     #   })
     #
@@ -1096,6 +1101,7 @@ module Aws::CostOptimizationHub
     #   resp.items[0].recommendation_count #=> Integer
     #   resp.data.group_by #=> String
     #   resp.currency_code #=> String
+    #   resp.metrics.savings_percentage #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/ListRecommendationSummaries AWS API Documentation
@@ -1203,8 +1209,9 @@ module Aws::CostOptimizationHub
     # Updates the enrollment (opt in and opt out) status of an account to
     # the Cost Optimization Hub service.
     #
-    # If the account is a management account of an organization, this action
-    # can also be used to enroll member accounts of the organization.
+    # If the account is a management account or delegated administrator of
+    # an organization, this action can also be used to enroll member
+    # accounts of the organization.
     #
     # You must have the appropriate permissions to opt in to Cost
     # Optimization Hub and to view its recommendations. When you opt in,
@@ -1216,7 +1223,7 @@ module Aws::CostOptimizationHub
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to enroll member accounts of the organization if the
-    #   account is the management account.
+    #   account is the management account or delegated administrator.
     #
     # @return [Types::UpdateEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1291,7 +1298,7 @@ module Aws::CostOptimizationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

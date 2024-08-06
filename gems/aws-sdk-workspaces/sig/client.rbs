@@ -898,7 +898,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#import_workspace_image-instance_method
       def import_workspace_image: (
                                     ec2_image_id: ::String,
-                                    ingestion_process: ("BYOL_REGULAR" | "BYOL_GRAPHICS" | "BYOL_GRAPHICSPRO" | "BYOL_GRAPHICS_G4DN" | "BYOL_REGULAR_WSP" | "BYOL_REGULAR_BYOP" | "BYOL_GRAPHICS_G4DN_BYOP"),
+                                    ingestion_process: ("BYOL_REGULAR" | "BYOL_GRAPHICS" | "BYOL_GRAPHICSPRO" | "BYOL_GRAPHICS_G4DN" | "BYOL_REGULAR_WSP" | "BYOL_GRAPHICS_G4DN_WSP" | "BYOL_REGULAR_BYOP" | "BYOL_GRAPHICS_G4DN_BYOP"),
                                     image_name: ::String,
                                     image_description: ::String,
                                     ?tags: Array[
