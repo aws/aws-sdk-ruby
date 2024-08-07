@@ -8,13 +8,6 @@ module Aws
     include CredentialProvider
     include RefreshingCredentials
 
-    # @api private
-    KEY_MAP = {
-      'aws_access_key_id' => 'access_key_id',
-      'aws_secret_access_key' => 'secret_access_key',
-      'aws_session_token' => 'session_token'
-    }
-
     # Constructs a new SharedCredentials object. This will load static
     # (access_key_id, secret_access_key and session_token) AWS access
     # credentials from an ini file, which supports profiles. The default
@@ -26,26 +19,26 @@ module Aws
     # You may access the resolved credentials through
     # `client.config.credentials`.
     #
-    # @option [String] :path Path to the shared file. Defaults
+    # @option [String] :path Path to the shared file.  Defaults
     #   to "#{Dir.home}/.aws/credentials".
     #
     # @option [String] :profile_name Defaults to 'default' or
     #   `ENV['AWS_PROFILE']`.
     #
-    # @option [Integer] :refresh_interval The duration (in seconds) before the
-    #   credentials are considered near expiration and should be refreshed.
-    #   Defaults to 10 minutes (600 seconds).
-    #
-    # @option [Boolean] :enable_refresh If true, the credentials will be automatically
-    #   refreshed when they are near expiration. Defaults to false.
-    #
     def initialize(options = {})
+      shared_config = Aws.shared_config
       @enable_refresh = options[:enable_refresh] || false # Refresh disabled by default
       @refresh_interval = options[:refresh_interval] || 10 * 60 # Default refresh interval: 10 minutes
-      @path = options[:path] || Aws.shared_config.credentials_path
-      @profile_name = options[:profile_name] || ENV['AWS_PROFILE'] || Aws.shared_config.profile_name
+      @path = options[:path] || shared_config.credentials_path
+      @profile_name = options[:profile_name] || ENV['AWS_PROFILE'] || shared_config.profile_name
+      @next_refresh_time = nil # Internal variable to track refresh timing
 
-      super(options)
+      # Initialize the mutex for thread-safety
+      super(options) # Call super to initialize RefreshingCredentials
+
+      @credentials = load_credentials
+
+      refresh if @enable_refresh
     end
 
     # @return [String] The path to the credentials file
@@ -54,10 +47,12 @@ module Aws
     # @return [String] The name of the profile being used
     attr_reader :profile_name
 
-    # @return [Credentials] The loaded credentials
-    def credentials
-      refresh_if_necessary
-      @credentials
+    # Override of near_expiration to decide when to refresh
+    def near_expiration?(expiration_length = 0)
+      return false unless @enable_refresh
+
+      # Consider "near expiration" if the internal next_refresh_time has passed
+      @next_refresh_time.nil? || @next_refresh_time <= Time.now + expiration_length
     end
 
     # @api private
@@ -70,38 +65,26 @@ module Aws
       "#<#{parts.join(' ')}>"
     end
 
-    # Refreshes credentials from the shared credentials file.
     def refresh
-      shared_config = Aws.shared_config
+      @credentials = load_credentials
 
-      if @path && @path == shared_config.credentials_path
-        # Use credentials from shared config if paths match
-        @credentials = shared_config.credentials(profile: @profile_name)
-      else
-        # Load credentials from specified path and profile
-        config = SharedConfig.new(
-          credentials_path: @path,
-          profile_name: @profile_name
-        )
-        @credentials = config.credentials(profile: @profile_name)
-      end
-
-      # Set expiration time if credentials are present
-      @expiration = @credentials ? (Time.now + @refresh_interval) : nil
+      # Set next refresh time if credentials are present
+      # This is for internal tracking, and won't affect the actual credentials' expiration
+      @next_refresh_time = @credentials ? (Time.now + @refresh_interval) : nil
     end
 
     private
 
-    def refresh_if_necessary
-      refresh! if @enable_refresh && near_expiration?(@refresh_interval)
-    end
-
-    def sync_expiration_length
-      @refresh_interval || self.class::SYNC_EXPIRATION_LENGTH
-    end
-
-    def async_expiration_length
-      @refresh_interval || self.class::ASYNC_EXPIRATION_LENGTH
+    def load_credentials
+      if @path && @path == Aws.shared_config.credentials_path
+        Aws.shared_config.credentials(profile: @profile_name)
+      else
+        config = SharedConfig.new(
+          credentials_path: @path,
+          profile_name: @profile_name
+        )
+        config.credentials(profile: @profile_name)
+      end
     end
   end
 end
