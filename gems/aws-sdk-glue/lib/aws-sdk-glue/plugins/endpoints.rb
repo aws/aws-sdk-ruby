@@ -88,6 +88,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::BatchGetTriggers.build(context)
           when :batch_get_workflows
             Aws::Glue::Endpoints::BatchGetWorkflows.build(context)
+          when :batch_put_data_quality_statistic_annotation
+            Aws::Glue::Endpoints::BatchPutDataQualityStatisticAnnotation.build(context)
           when :batch_stop_job_run
             Aws::Glue::Endpoints::BatchStopJobRun.build(context)
           when :batch_update_partition
@@ -236,6 +238,10 @@ module Aws::Glue
             Aws::Glue::Endpoints::GetCustomEntityType.build(context)
           when :get_data_catalog_encryption_settings
             Aws::Glue::Endpoints::GetDataCatalogEncryptionSettings.build(context)
+          when :get_data_quality_model
+            Aws::Glue::Endpoints::GetDataQualityModel.build(context)
+          when :get_data_quality_model_result
+            Aws::Glue::Endpoints::GetDataQualityModelResult.build(context)
           when :get_data_quality_result
             Aws::Glue::Endpoints::GetDataQualityResult.build(context)
           when :get_data_quality_rule_recommendation_run
@@ -360,6 +366,10 @@ module Aws::Glue
             Aws::Glue::Endpoints::ListDataQualityRulesetEvaluationRuns.build(context)
           when :list_data_quality_rulesets
             Aws::Glue::Endpoints::ListDataQualityRulesets.build(context)
+          when :list_data_quality_statistic_annotations
+            Aws::Glue::Endpoints::ListDataQualityStatisticAnnotations.build(context)
+          when :list_data_quality_statistics
+            Aws::Glue::Endpoints::ListDataQualityStatistics.build(context)
           when :list_dev_endpoints
             Aws::Glue::Endpoints::ListDevEndpoints.build(context)
           when :list_jobs
@@ -386,6 +396,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::ListWorkflows.build(context)
           when :put_data_catalog_encryption_settings
             Aws::Glue::Endpoints::PutDataCatalogEncryptionSettings.build(context)
+          when :put_data_quality_profile_annotation
+            Aws::Glue::Endpoints::PutDataQualityProfileAnnotation.build(context)
           when :put_resource_policy
             Aws::Glue::Endpoints::PutResourcePolicy.build(context)
           when :put_schema_version_metadata

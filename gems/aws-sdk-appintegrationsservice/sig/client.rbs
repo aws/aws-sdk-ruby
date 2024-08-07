@@ -127,7 +127,7 @@ module Aws
                                      name: ::String,
                                      ?description: ::String,
                                      kms_key: ::String,
-                                     source_uri: ::String,
+                                     ?source_uri: ::String,
                                      ?schedule_config: {
                                        first_execution_from: ::String?,
                                        object: ::String?,
@@ -142,6 +142,34 @@ module Aws
                                      ?object_configuration: Hash[::String, Hash[::String, Array[::String]]]
                                    ) -> _CreateDataIntegrationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataIntegrationResponseSuccess
+
+      interface _CreateDataIntegrationAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataIntegrationAssociationResponse]
+        def data_integration_association_id: () -> ::String
+        def data_integration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#create_data_integration_association-instance_method
+      def create_data_integration_association: (
+                                                 data_integration_identifier: ::String,
+                                                 ?client_id: ::String,
+                                                 ?object_configuration: Hash[::String, Hash[::String, Array[::String]]],
+                                                 ?destination_uri: ::String,
+                                                 ?client_association_metadata: Hash[::String, ::String],
+                                                 ?client_token: ::String,
+                                                 ?execution_configuration: {
+                                                   execution_mode: ("ON_DEMAND" | "SCHEDULED"),
+                                                   on_demand_configuration: {
+                                                     start_time: ::String,
+                                                     end_time: ::String?
+                                                   }?,
+                                                   schedule_configuration: {
+                                                     first_execution_from: ::String?,
+                                                     object: ::String?,
+                                                     schedule_expression: ::String
+                                                   }?
+                                                 }
+                                               ) -> _CreateDataIntegrationAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataIntegrationAssociationResponseSuccess
 
       interface _CreateEventIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventIntegrationResponse]
@@ -388,6 +416,28 @@ module Aws
                                      ?description: ::String
                                    ) -> _UpdateDataIntegrationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataIntegrationResponseSuccess
+
+      interface _UpdateDataIntegrationAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataIntegrationAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#update_data_integration_association-instance_method
+      def update_data_integration_association: (
+                                                 data_integration_identifier: ::String,
+                                                 data_integration_association_identifier: ::String,
+                                                 execution_configuration: {
+                                                   execution_mode: ("ON_DEMAND" | "SCHEDULED"),
+                                                   on_demand_configuration: {
+                                                     start_time: ::String,
+                                                     end_time: ::String?
+                                                   }?,
+                                                   schedule_configuration: {
+                                                     first_execution_from: ::String?,
+                                                     object: ::String?,
+                                                     schedule_expression: ::String
+                                                   }?
+                                                 }
+                                               ) -> _UpdateDataIntegrationAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataIntegrationAssociationResponseSuccess
 
       interface _UpdateEventIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventIntegrationResponse]

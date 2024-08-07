@@ -54,6 +54,23 @@ module Aws::AppIntegrationsService
       SENSITIVE: []
     end
 
+    class CreateDataIntegrationAssociationRequest
+      attr_accessor data_integration_identifier: ::String
+      attr_accessor client_id: ::String
+      attr_accessor object_configuration: ::Hash[::String, ::Hash[::String, ::Array[::String]]]
+      attr_accessor destination_uri: ::String
+      attr_accessor client_association_metadata: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor execution_configuration: Types::ExecutionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateDataIntegrationAssociationResponse
+      attr_accessor data_integration_association_id: ::String
+      attr_accessor data_integration_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateDataIntegrationRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -101,6 +118,9 @@ module Aws::AppIntegrationsService
       attr_accessor data_integration_association_arn: ::String
       attr_accessor data_integration_arn: ::String
       attr_accessor client_id: ::String
+      attr_accessor destination_uri: ::String
+      attr_accessor last_execution_status: Types::LastExecutionStatus
+      attr_accessor execution_configuration: Types::ExecutionConfiguration
       SENSITIVE: []
     end
 
@@ -162,6 +182,13 @@ module Aws::AppIntegrationsService
       attr_accessor client_id: ::String
       attr_accessor event_bridge_rule_name: ::String
       attr_accessor client_association_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExecutionConfiguration
+      attr_accessor execution_mode: ("ON_DEMAND" | "SCHEDULED")
+      attr_accessor on_demand_configuration: Types::OnDemandConfiguration
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
       SENSITIVE: []
     end
 
@@ -239,6 +266,12 @@ module Aws::AppIntegrationsService
 
     class InvalidRequestException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LastExecutionStatus
+      attr_accessor execution_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_message: ::String
       SENSITIVE: []
     end
 
@@ -327,6 +360,12 @@ module Aws::AppIntegrationsService
       SENSITIVE: []
     end
 
+    class OnDemandConfiguration
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
     class Publication
       attr_accessor event: ::String
       attr_accessor schema: ::String
@@ -397,6 +436,16 @@ module Aws::AppIntegrationsService
     end
 
     class UpdateApplicationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDataIntegrationAssociationRequest
+      attr_accessor data_integration_identifier: ::String
+      attr_accessor data_integration_association_identifier: ::String
+      attr_accessor execution_configuration: Types::ExecutionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateDataIntegrationAssociationResponse < Aws::EmptyStructure
     end
 
     class UpdateDataIntegrationRequest

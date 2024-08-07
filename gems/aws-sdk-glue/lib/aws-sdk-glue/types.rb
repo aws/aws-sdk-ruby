@@ -368,6 +368,30 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A failed annotation.
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID for the failed annotation.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID for the failed annotation.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the annotation failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AnnotationError AWS API Documentation
+    #
+    class AnnotationError < Struct.new(
+      :profile_id,
+      :statistic_id,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a transform that maps data property keys in the data source
     # to data property keys in the data target. You can rename keys, modify
     # the data types for keys, and choose which keys to drop from the
@@ -1221,6 +1245,35 @@ module Aws::Glue
     class BatchGetWorkflowsResponse < Struct.new(
       :workflows,
       :missing_workflows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inclusion_annotations
+    #   A list of `DatapointInclusionAnnotation`'s.
+    #   @return [Array<Types::DatapointInclusionAnnotation>]
+    #
+    # @!attribute [rw] client_token
+    #   Client Token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchPutDataQualityStatisticAnnotationRequest AWS API Documentation
+    #
+    class BatchPutDataQualityStatisticAnnotationRequest < Struct.new(
+      :inclusion_annotations,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_inclusion_annotations
+    #   A list of `AnnotationError`'s.
+    #   @return [Array<Types::AnnotationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchPutDataQualityStatisticAnnotationResponse AWS API Documentation
+    #
+    class BatchPutDataQualityStatisticAnnotationResponse < Struct.new(
+      :failed_inclusion_annotations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4465,6 +4518,11 @@ module Aws::Glue
     #   A target table associated with the data quality ruleset.
     #   @return [Types::DataQualityTargetTable]
     #
+    # @!attribute [rw] data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Used for idempotency and is recommended to be set to a random ID
     #   (such as a UUID) to avoid creating or starting multiple instances of
@@ -4479,6 +4537,7 @@ module Aws::Glue
       :ruleset,
       :tags,
       :target_table,
+      :data_quality_security_configuration,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6456,7 +6515,7 @@ module Aws::Glue
       :description,
       :evaluation_message,
       :evaluated_metrics)
-      SENSITIVE = []
+      SENSITIVE = [:description, :evaluation_message, :evaluated_metrics]
       include Aws::Structure
     end
 
@@ -6535,7 +6594,7 @@ module Aws::Glue
     class DataQualityObservation < Struct.new(
       :description,
       :metric_based_observation)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -6543,6 +6602,10 @@ module Aws::Glue
     #
     # @!attribute [rw] result_id
     #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID for the data quality result.
     #   @return [String]
     #
     # @!attribute [rw] score
@@ -6605,6 +6668,7 @@ module Aws::Glue
     #
     class DataQualityResult < Struct.new(
       :result_id,
+      :profile_id,
       :score,
       :data_source,
       :ruleset_name,
@@ -6765,6 +6829,10 @@ module Aws::Glue
     #   A map of metrics associated with the evaluation of the rule.
     #   @return [Hash<String,Float>]
     #
+    # @!attribute [rw] evaluated_rule
+    #   The evaluated rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleResult AWS API Documentation
     #
     class DataQualityRuleResult < Struct.new(
@@ -6772,8 +6840,9 @@ module Aws::Glue
       :description,
       :evaluation_message,
       :result,
-      :evaluated_metrics)
-      SENSITIVE = []
+      :evaluated_metrics,
+      :evaluated_rule)
+      SENSITIVE = [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule]
       include Aws::Structure
     end
 
@@ -7092,6 +7161,30 @@ module Aws::Glue
       :create_table_default_permissions,
       :target_database,
       :federated_database)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Inclusion Annotation.
+    #
+    # @!attribute [rw] profile_id
+    #   The ID of the data quality profile the statistic belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] inclusion_annotation
+    #   The inclusion annotation value to apply to the statistic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DatapointInclusionAnnotation AWS API Documentation
+    #
+    class DatapointInclusionAnnotation < Struct.new(
+      :profile_id,
+      :statistic_id,
+      :inclusion_annotation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9862,6 +9955,84 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModelRequest AWS API Documentation
+    #
+    class GetDataQualityModelRequest < Struct.new(
+      :statistic_id,
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The training status of the data quality model.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The timestamp when the data quality model training started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_on
+    #   The timestamp when the data quality model training completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The training failure reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModelResponse AWS API Documentation
+    #
+    class GetDataQualityModelResponse < Struct.new(
+      :status,
+      :started_on,
+      :completed_on,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModelResultRequest AWS API Documentation
+    #
+    class GetDataQualityModelResultRequest < Struct.new(
+      :statistic_id,
+      :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] completed_on
+    #   The timestamp when the data quality model training completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model
+    #   A list of `StatisticModelResult`
+    #   @return [Array<Types::StatisticModelResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModelResultResponse AWS API Documentation
+    #
+    class GetDataQualityModelResultResponse < Struct.new(
+      :completed_on,
+      :model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] result_id
     #   A unique result ID for the data quality result.
     #   @return [String]
@@ -9876,6 +10047,10 @@ module Aws::Glue
 
     # @!attribute [rw] result_id
     #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID for the data quality result.
     #   @return [String]
     #
     # @!attribute [rw] score
@@ -9938,6 +10113,7 @@ module Aws::Glue
     #
     class GetDataQualityResultResponse < Struct.new(
       :result_id,
+      :profile_id,
       :score,
       :data_source,
       :ruleset_name,
@@ -10024,6 +10200,11 @@ module Aws::Glue
     #   The name of the ruleset that was created by the run.
     #   @return [String]
     #
+    # @!attribute [rw] data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRunResponse AWS API Documentation
     #
     class GetDataQualityRuleRecommendationRunResponse < Struct.new(
@@ -10039,7 +10220,8 @@ module Aws::Glue
       :completed_on,
       :execution_time,
       :recommended_ruleset,
-      :created_ruleset_name)
+      :created_ruleset_name,
+      :data_quality_security_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10188,6 +10370,11 @@ module Aws::Glue
     #   generated to link the two together.
     #   @return [String]
     #
+    # @!attribute [rw] data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRulesetResponse AWS API Documentation
     #
     class GetDataQualityRulesetResponse < Struct.new(
@@ -10197,7 +10384,8 @@ module Aws::Glue
       :target_table,
       :created_on,
       :last_modified_on,
-      :recommendation_run_id)
+      :recommendation_run_id,
+      :data_quality_security_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15496,6 +15684,104 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_filter
+    #   A timestamp filter.
+    #   @return [Types::TimestampFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatisticAnnotationsRequest AWS API Documentation
+    #
+    class ListDataQualityStatisticAnnotationsRequest < Struct.new(
+      :statistic_id,
+      :profile_id,
+      :timestamp_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] annotations
+    #   A list of `StatisticAnnotation` applied to the Statistic
+    #   @return [Array<Types::StatisticAnnotation>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatisticAnnotationsResponse AWS API Documentation
+    #
+    class ListDataQualityStatisticAnnotationsResponse < Struct.new(
+      :annotations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_filter
+    #   A timestamp filter.
+    #   @return [Types::TimestampFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatisticsRequest AWS API Documentation
+    #
+    class ListDataQualityStatisticsRequest < Struct.new(
+      :statistic_id,
+      :profile_id,
+      :timestamp_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statistics
+    #   A `StatisticSummaryList`.
+    #   @return [Array<Types::StatisticSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatisticsResponse AWS API Documentation
+    #
+    class ListDataQualityStatisticsResponse < Struct.new(
+      :statistics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation request.
     #   @return [String]
@@ -16509,6 +16795,10 @@ module Aws::Glue
     #   observation.
     #   @return [String]
     #
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
     # @!attribute [rw] metric_values
     #   An object of type `DataQualityMetricValues` representing the
     #   analysis of the data quality metric value.
@@ -16523,6 +16813,7 @@ module Aws::Glue
     #
     class MetricBasedObservation < Struct.new(
       :metric_name,
+      :statistic_id,
       :metric_values,
       :new_rules)
       SENSITIVE = []
@@ -17504,6 +17795,29 @@ module Aws::Glue
     #
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] profile_id
+    #   The ID of the data quality monitoring profile to annotate.
+    #   @return [String]
+    #
+    # @!attribute [rw] inclusion_annotation
+    #   The inclusion annotation value to apply to the profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataQualityProfileAnnotationRequest AWS API Documentation
+    #
+    class PutDataQualityProfileAnnotationRequest < Struct.new(
+      :profile_id,
+      :inclusion_annotation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Left blank.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataQualityProfileAnnotationResponse AWS API Documentation
+    #
+    class PutDataQualityProfileAnnotationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] policy_in_json
     #   Contains the policy document to set, in JSON format.
     #   @return [String]
@@ -18318,6 +18632,25 @@ module Aws::Glue
     class ResumeWorkflowRunResponse < Struct.new(
       :run_id,
       :node_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A run identifier.
+    #
+    # @!attribute [rw] run_id
+    #   The Run ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_run_id
+    #   The Job Run ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RunIdentifier AWS API Documentation
+    #
+    class RunIdentifier < Struct.new(
+      :run_id,
+      :job_run_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20587,6 +20920,11 @@ module Aws::Glue
     #   A name for the ruleset.
     #   @return [String]
     #
+    # @!attribute [rw] data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Used for idempotency and is recommended to be set to a random ID
     #   (such as a UUID) to avoid creating or starting multiple instances of
@@ -20601,6 +20939,7 @@ module Aws::Glue
       :number_of_workers,
       :timeout,
       :created_ruleset_name,
+      :data_quality_security_configuration,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -21176,6 +21515,140 @@ module Aws::Glue
     class StatementOutputData < Struct.new(
       :text_plain)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Statistic Annotation.
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic_recorded_on
+    #   The timestamp when the annotated statistic was recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inclusion_annotation
+    #   The inclusion annotation applied to the statistic.
+    #   @return [Types::TimestampedInclusionAnnotation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StatisticAnnotation AWS API Documentation
+    #
+    class StatisticAnnotation < Struct.new(
+      :profile_id,
+      :statistic_id,
+      :statistic_recorded_on,
+      :inclusion_annotation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The statistic model result.
+    #
+    # @!attribute [rw] lower_bound
+    #   The lower bound.
+    #   @return [Float]
+    #
+    # @!attribute [rw] upper_bound
+    #   The upper bound.
+    #   @return [Float]
+    #
+    # @!attribute [rw] predicted_value
+    #   The predicted value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] actual_value
+    #   The actual value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] date
+    #   The date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inclusion_annotation
+    #   The inclusion annotation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StatisticModelResult AWS API Documentation
+    #
+    class StatisticModelResult < Struct.new(
+      :lower_bound,
+      :upper_bound,
+      :predicted_value,
+      :actual_value,
+      :date,
+      :inclusion_annotation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a statistic.
+    #
+    # @!attribute [rw] statistic_id
+    #   The Statistic ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_identifier
+    #   The Run Identifier
+    #   @return [Types::RunIdentifier]
+    #
+    # @!attribute [rw] statistic_name
+    #   The name of the statistic.
+    #   @return [String]
+    #
+    # @!attribute [rw] double_value
+    #   The value of the statistic.
+    #   @return [Float]
+    #
+    # @!attribute [rw] evaluation_level
+    #   The evaluation level of the statistic. Possible values: `Dataset`,
+    #   `Column`, `Multicolumn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] columns_referenced
+    #   The list of columns referenced by the statistic.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] referenced_datasets
+    #   The list of datasets referenced by the statistic.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statistic_properties
+    #   A `StatisticPropertiesMap`, which contains a `NameString` and
+    #   `DescriptionString`
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] recorded_on
+    #   The timestamp when the statistic was recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inclusion_annotation
+    #   The inclusion annotation for the statistic.
+    #   @return [Types::TimestampedInclusionAnnotation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StatisticSummary AWS API Documentation
+    #
+    class StatisticSummary < Struct.new(
+      :statistic_id,
+      :profile_id,
+      :run_identifier,
+      :statistic_name,
+      :double_value,
+      :evaluation_level,
+      :columns_referenced,
+      :referenced_datasets,
+      :statistic_properties,
+      :recorded_on,
+      :inclusion_annotation)
+      SENSITIVE = [:statistic_properties]
       include Aws::Structure
     end
 
@@ -22079,6 +22552,46 @@ module Aws::Glue
     class TaskRunSortCriteria < Struct.new(
       :column,
       :sort_direction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A timestamp filter.
+    #
+    # @!attribute [rw] recorded_before
+    #   The timestamp before which statistics should be included in the
+    #   results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recorded_after
+    #   The timestamp after which statistics should be included in the
+    #   results.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TimestampFilter AWS API Documentation
+    #
+    class TimestampFilter < Struct.new(
+      :recorded_before,
+      :recorded_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A timestamped inclusion annotation.
+    #
+    # @!attribute [rw] value
+    #   The inclusion annotation value.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The timestamp when the inclusion annotation was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TimestampedInclusionAnnotation AWS API Documentation
+    #
+    class TimestampedInclusionAnnotation < Struct.new(
+      :value,
+      :last_modified_on)
       SENSITIVE = []
       include Aws::Structure
     end

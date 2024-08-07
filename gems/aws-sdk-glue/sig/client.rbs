@@ -320,6 +320,23 @@ module Aws
                                ) -> _BatchGetWorkflowsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetWorkflowsResponseSuccess
 
+      interface _BatchPutDataQualityStatisticAnnotationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutDataQualityStatisticAnnotationResponse]
+        def failed_inclusion_annotations: () -> ::Array[Types::AnnotationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#batch_put_data_quality_statistic_annotation-instance_method
+      def batch_put_data_quality_statistic_annotation: (
+                                                         inclusion_annotations: Array[
+                                                           {
+                                                             profile_id: ::String?,
+                                                             statistic_id: ::String?,
+                                                             inclusion_annotation: ("INCLUDE" | "EXCLUDE")?
+                                                           },
+                                                         ],
+                                                         ?client_token: ::String
+                                                       ) -> _BatchPutDataQualityStatisticAnnotationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutDataQualityStatisticAnnotationResponseSuccess
+
       interface _BatchStopJobRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchStopJobRunResponse]
         def successful_submissions: () -> ::Array[Types::BatchStopJobRunSuccessfulSubmission]
@@ -668,6 +685,7 @@ module Aws
                                            database_name: ::String,
                                            catalog_id: ::String?
                                          },
+                                         ?data_quality_security_configuration: ::String,
                                          ?client_token: ::String
                                        ) -> _CreateDataQualityRulesetResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataQualityRulesetResponseSuccess
@@ -2986,9 +3004,36 @@ module Aws
                                                 ) -> _GetDataCatalogEncryptionSettingsResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataCatalogEncryptionSettingsResponseSuccess
 
+      interface _GetDataQualityModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityModelResponse]
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED")
+        def started_on: () -> ::Time
+        def completed_on: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_model-instance_method
+      def get_data_quality_model: (
+                                    ?statistic_id: ::String,
+                                    profile_id: ::String
+                                  ) -> _GetDataQualityModelResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataQualityModelResponseSuccess
+
+      interface _GetDataQualityModelResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityModelResultResponse]
+        def completed_on: () -> ::Time
+        def model: () -> ::Array[Types::StatisticModelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_model_result-instance_method
+      def get_data_quality_model_result: (
+                                           statistic_id: ::String,
+                                           profile_id: ::String
+                                         ) -> _GetDataQualityModelResultResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataQualityModelResultResponseSuccess
+
       interface _GetDataQualityResultResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityResultResponse]
         def result_id: () -> ::String
+        def profile_id: () -> ::String
         def score: () -> ::Float
         def data_source: () -> Types::DataSource
         def ruleset_name: () -> ::String
@@ -3023,6 +3068,7 @@ module Aws
         def execution_time: () -> ::Integer
         def recommended_ruleset: () -> ::String
         def created_ruleset_name: () -> ::String
+        def data_quality_security_configuration: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_rule_recommendation_run-instance_method
       def get_data_quality_rule_recommendation_run: (
@@ -3039,6 +3085,7 @@ module Aws
         def created_on: () -> ::Time
         def last_modified_on: () -> ::Time
         def recommendation_run_id: () -> ::String
+        def data_quality_security_configuration: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_ruleset-instance_method
       def get_data_quality_ruleset: (
@@ -4103,6 +4150,42 @@ module Aws
                                       ) -> _ListDataQualityRulesetsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityRulesetsResponseSuccess
 
+      interface _ListDataQualityStatisticAnnotationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityStatisticAnnotationsResponse]
+        def annotations: () -> ::Array[Types::StatisticAnnotation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_data_quality_statistic_annotations-instance_method
+      def list_data_quality_statistic_annotations: (
+                                                     ?statistic_id: ::String,
+                                                     ?profile_id: ::String,
+                                                     ?timestamp_filter: {
+                                                       recorded_before: ::Time?,
+                                                       recorded_after: ::Time?
+                                                     },
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _ListDataQualityStatisticAnnotationsResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityStatisticAnnotationsResponseSuccess
+
+      interface _ListDataQualityStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityStatisticsResponse]
+        def statistics: () -> ::Array[Types::StatisticSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_data_quality_statistics-instance_method
+      def list_data_quality_statistics: (
+                                          ?statistic_id: ::String,
+                                          ?profile_id: ::String,
+                                          ?timestamp_filter: {
+                                            recorded_before: ::Time?,
+                                            recorded_after: ::Time?
+                                          },
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListDataQualityStatisticsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityStatisticsResponseSuccess
+
       interface _ListDevEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDevEndpointsResponse]
         def dev_endpoint_names: () -> ::Array[::String]
@@ -4311,6 +4394,16 @@ module Aws
                                                   }
                                                 ) -> _PutDataCatalogEncryptionSettingsResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataCatalogEncryptionSettingsResponseSuccess
+
+      interface _PutDataQualityProfileAnnotationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDataQualityProfileAnnotationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#put_data_quality_profile_annotation-instance_method
+      def put_data_quality_profile_annotation: (
+                                                 profile_id: ::String,
+                                                 inclusion_annotation: ("INCLUDE" | "EXCLUDE")
+                                               ) -> _PutDataQualityProfileAnnotationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataQualityProfileAnnotationResponseSuccess
 
       interface _PutResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
@@ -4572,6 +4665,7 @@ module Aws
                                                         ?number_of_workers: ::Integer,
                                                         ?timeout: ::Integer,
                                                         ?created_ruleset_name: ::String,
+                                                        ?data_quality_security_configuration: ::String,
                                                         ?client_token: ::String
                                                       ) -> _StartDataQualityRuleRecommendationRunResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataQualityRuleRecommendationRunResponseSuccess

@@ -961,6 +961,7 @@ module Aws::Glue
     #
     #   resp.results #=> Array
     #   resp.results[0].result_id #=> String
+    #   resp.results[0].profile_id #=> String
     #   resp.results[0].score #=> Float
     #   resp.results[0].data_source.glue_table.database_name #=> String
     #   resp.results[0].data_source.glue_table.table_name #=> String
@@ -982,6 +983,7 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
     #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].rule_results[0].evaluated_rule #=> String
     #   resp.results[0].analyzer_results #=> Array
     #   resp.results[0].analyzer_results[0].name #=> String
     #   resp.results[0].analyzer_results[0].description #=> String
@@ -991,6 +993,7 @@ module Aws::Glue
     #   resp.results[0].observations #=> Array
     #   resp.results[0].observations[0].description #=> String
     #   resp.results[0].observations[0].metric_based_observation.metric_name #=> String
+    #   resp.results[0].observations[0].metric_based_observation.statistic_id #=> String
     #   resp.results[0].observations[0].metric_based_observation.metric_values.actual_value #=> Float
     #   resp.results[0].observations[0].metric_based_observation.metric_values.expected_value #=> Float
     #   resp.results[0].observations[0].metric_based_observation.metric_values.lower_limit #=> Float
@@ -2422,6 +2425,47 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Annotate datapoints over time for a specific data quality statistic.
+    #
+    # @option params [required, Array<Types::DatapointInclusionAnnotation>] :inclusion_annotations
+    #   A list of `DatapointInclusionAnnotation`'s.
+    #
+    # @option params [String] :client_token
+    #   Client Token.
+    #
+    # @return [Types::BatchPutDataQualityStatisticAnnotationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutDataQualityStatisticAnnotationResponse#failed_inclusion_annotations #failed_inclusion_annotations} => Array&lt;Types::AnnotationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_data_quality_statistic_annotation({
+    #     inclusion_annotations: [ # required
+    #       {
+    #         profile_id: "HashString",
+    #         statistic_id: "HashString",
+    #         inclusion_annotation: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #       },
+    #     ],
+    #     client_token: "HashString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_inclusion_annotations #=> Array
+    #   resp.failed_inclusion_annotations[0].profile_id #=> String
+    #   resp.failed_inclusion_annotations[0].statistic_id #=> String
+    #   resp.failed_inclusion_annotations[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchPutDataQualityStatisticAnnotation AWS API Documentation
+    #
+    # @overload batch_put_data_quality_statistic_annotation(params = {})
+    # @param [Hash] params ({})
+    def batch_put_data_quality_statistic_annotation(params = {}, options = {})
+      req = build_request(:batch_put_data_quality_statistic_annotation, params)
+      req.send_request(options)
+    end
+
     # Stops one or more job runs for a specified job definition.
     #
     # @option params [required, String] :job_name
@@ -3165,6 +3209,10 @@ module Aws::Glue
     # @option params [Types::DataQualityTargetTable] :target_table
     #   A target table associated with the data quality ruleset.
     #
+    # @option params [String] :data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #
     # @option params [String] :client_token
     #   Used for idempotency and is recommended to be set to a random ID (such
     #   as a UUID) to avoid creating or starting multiple instances of the
@@ -3188,6 +3236,7 @@ module Aws::Glue
     #       database_name: "NameString", # required
     #       catalog_id: "NameString",
     #     },
+    #     data_quality_security_configuration: "NameString",
     #     client_token: "HashString",
     #   })
     #
@@ -6962,6 +7011,85 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieve the training status of the model along with more information
+    # (CompletedOn, StartedOn, FailureReason).
+    #
+    # @option params [String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [required, String] :profile_id
+    #   The Profile ID.
+    #
+    # @return [Types::GetDataQualityModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityModelResponse#status #status} => String
+    #   * {Types::GetDataQualityModelResponse#started_on #started_on} => Time
+    #   * {Types::GetDataQualityModelResponse#completed_on #completed_on} => Time
+    #   * {Types::GetDataQualityModelResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_model({
+    #     statistic_id: "HashString",
+    #     profile_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.started_on #=> Time
+    #   resp.completed_on #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModel AWS API Documentation
+    #
+    # @overload get_data_quality_model(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_model(params = {}, options = {})
+      req = build_request(:get_data_quality_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieve a statistic's predictions for a given Profile ID.
+    #
+    # @option params [required, String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [required, String] :profile_id
+    #   The Profile ID.
+    #
+    # @return [Types::GetDataQualityModelResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityModelResultResponse#completed_on #completed_on} => Time
+    #   * {Types::GetDataQualityModelResultResponse#model #model} => Array&lt;Types::StatisticModelResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_model_result({
+    #     statistic_id: "HashString", # required
+    #     profile_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.completed_on #=> Time
+    #   resp.model #=> Array
+    #   resp.model[0].lower_bound #=> Float
+    #   resp.model[0].upper_bound #=> Float
+    #   resp.model[0].predicted_value #=> Float
+    #   resp.model[0].actual_value #=> Float
+    #   resp.model[0].date #=> Time
+    #   resp.model[0].inclusion_annotation #=> String, one of "INCLUDE", "EXCLUDE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModelResult AWS API Documentation
+    #
+    # @overload get_data_quality_model_result(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_model_result(params = {}, options = {})
+      req = build_request(:get_data_quality_model_result, params)
+      req.send_request(options)
+    end
+
     # Retrieves the result of a data quality rule evaluation.
     #
     # @option params [required, String] :result_id
@@ -6970,6 +7098,7 @@ module Aws::Glue
     # @return [Types::GetDataQualityResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataQualityResultResponse#result_id #result_id} => String
+    #   * {Types::GetDataQualityResultResponse#profile_id #profile_id} => String
     #   * {Types::GetDataQualityResultResponse#score #score} => Float
     #   * {Types::GetDataQualityResultResponse#data_source #data_source} => Types::DataSource
     #   * {Types::GetDataQualityResultResponse#ruleset_name #ruleset_name} => String
@@ -6992,6 +7121,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.result_id #=> String
+    #   resp.profile_id #=> String
     #   resp.score #=> Float
     #   resp.data_source.glue_table.database_name #=> String
     #   resp.data_source.glue_table.table_name #=> String
@@ -7013,6 +7143,7 @@ module Aws::Glue
     #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.rule_results[0].evaluated_metrics #=> Hash
     #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.rule_results[0].evaluated_rule #=> String
     #   resp.analyzer_results #=> Array
     #   resp.analyzer_results[0].name #=> String
     #   resp.analyzer_results[0].description #=> String
@@ -7022,6 +7153,7 @@ module Aws::Glue
     #   resp.observations #=> Array
     #   resp.observations[0].description #=> String
     #   resp.observations[0].metric_based_observation.metric_name #=> String
+    #   resp.observations[0].metric_based_observation.statistic_id #=> String
     #   resp.observations[0].metric_based_observation.metric_values.actual_value #=> Float
     #   resp.observations[0].metric_based_observation.metric_values.expected_value #=> Float
     #   resp.observations[0].metric_based_observation.metric_values.lower_limit #=> Float
@@ -7058,6 +7190,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#execution_time #execution_time} => Integer
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#recommended_ruleset #recommended_ruleset} => String
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#created_ruleset_name #created_ruleset_name} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#data_quality_security_configuration #data_quality_security_configuration} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7085,6 +7218,7 @@ module Aws::Glue
     #   resp.execution_time #=> Integer
     #   resp.recommended_ruleset #=> String
     #   resp.created_ruleset_name #=> String
+    #   resp.data_quality_security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRun AWS API Documentation
     #
@@ -7109,6 +7243,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRulesetResponse#created_on #created_on} => Time
     #   * {Types::GetDataQualityRulesetResponse#last_modified_on #last_modified_on} => Time
     #   * {Types::GetDataQualityRulesetResponse#recommendation_run_id #recommendation_run_id} => String
+    #   * {Types::GetDataQualityRulesetResponse#data_quality_security_configuration #data_quality_security_configuration} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7127,6 +7262,7 @@ module Aws::Glue
     #   resp.created_on #=> Time
     #   resp.last_modified_on #=> Time
     #   resp.recommendation_run_id #=> String
+    #   resp.data_quality_security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleset AWS API Documentation
     #
@@ -13476,6 +13612,125 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieve annotations for a data quality statistic.
+    #
+    # @option params [String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [String] :profile_id
+    #   The Profile ID.
+    #
+    # @option params [Types::TimestampFilter] :timestamp_filter
+    #   A timestamp filter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to retrieve the next set of results.
+    #
+    # @return [Types::ListDataQualityStatisticAnnotationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityStatisticAnnotationsResponse#annotations #annotations} => Array&lt;Types::StatisticAnnotation&gt;
+    #   * {Types::ListDataQualityStatisticAnnotationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_statistic_annotations({
+    #     statistic_id: "HashString",
+    #     profile_id: "HashString",
+    #     timestamp_filter: {
+    #       recorded_before: Time.now,
+    #       recorded_after: Time.now,
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.annotations #=> Array
+    #   resp.annotations[0].profile_id #=> String
+    #   resp.annotations[0].statistic_id #=> String
+    #   resp.annotations[0].statistic_recorded_on #=> Time
+    #   resp.annotations[0].inclusion_annotation.value #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.annotations[0].inclusion_annotation.last_modified_on #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatisticAnnotations AWS API Documentation
+    #
+    # @overload list_data_quality_statistic_annotations(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_statistic_annotations(params = {}, options = {})
+      req = build_request(:list_data_quality_statistic_annotations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of data quality statistics.
+    #
+    # @option params [String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [String] :profile_id
+    #   The Profile ID.
+    #
+    # @option params [Types::TimestampFilter] :timestamp_filter
+    #   A timestamp filter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results.
+    #
+    # @return [Types::ListDataQualityStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityStatisticsResponse#statistics #statistics} => Array&lt;Types::StatisticSummary&gt;
+    #   * {Types::ListDataQualityStatisticsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_statistics({
+    #     statistic_id: "HashString",
+    #     profile_id: "HashString",
+    #     timestamp_filter: {
+    #       recorded_before: Time.now,
+    #       recorded_after: Time.now,
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statistics #=> Array
+    #   resp.statistics[0].statistic_id #=> String
+    #   resp.statistics[0].profile_id #=> String
+    #   resp.statistics[0].run_identifier.run_id #=> String
+    #   resp.statistics[0].run_identifier.job_run_id #=> String
+    #   resp.statistics[0].statistic_name #=> String
+    #   resp.statistics[0].double_value #=> Float
+    #   resp.statistics[0].evaluation_level #=> String, one of "Dataset", "Column", "Multicolumn"
+    #   resp.statistics[0].columns_referenced #=> Array
+    #   resp.statistics[0].columns_referenced[0] #=> String
+    #   resp.statistics[0].referenced_datasets #=> Array
+    #   resp.statistics[0].referenced_datasets[0] #=> String
+    #   resp.statistics[0].statistic_properties #=> Hash
+    #   resp.statistics[0].statistic_properties["NameString"] #=> String
+    #   resp.statistics[0].recorded_on #=> Time
+    #   resp.statistics[0].inclusion_annotation.value #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.statistics[0].inclusion_annotation.last_modified_on #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatistics AWS API Documentation
+    #
+    # @overload list_data_quality_statistics(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_statistics(params = {}, options = {})
+      req = build_request(:list_data_quality_statistics, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all `DevEndpoint` resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -14180,6 +14435,32 @@ module Aws::Glue
     # @param [Hash] params ({})
     def put_data_catalog_encryption_settings(params = {}, options = {})
       req = build_request(:put_data_catalog_encryption_settings, params)
+      req.send_request(options)
+    end
+
+    # Annotate all datapoints for a Profile.
+    #
+    # @option params [required, String] :profile_id
+    #   The ID of the data quality monitoring profile to annotate.
+    #
+    # @option params [required, String] :inclusion_annotation
+    #   The inclusion annotation value to apply to the profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_quality_profile_annotation({
+    #     profile_id: "HashString", # required
+    #     inclusion_annotation: "INCLUDE", # required, accepts INCLUDE, EXCLUDE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataQualityProfileAnnotation AWS API Documentation
+    #
+    # @overload put_data_quality_profile_annotation(params = {})
+    # @param [Hash] params ({})
+    def put_data_quality_profile_annotation(params = {}, options = {})
+      req = build_request(:put_data_quality_profile_annotation, params)
       req.send_request(options)
     end
 
@@ -15025,6 +15306,10 @@ module Aws::Glue
     # @option params [String] :created_ruleset_name
     #   A name for the ruleset.
     #
+    # @option params [String] :data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #
     # @option params [String] :client_token
     #   Used for idempotency and is recommended to be set to a random ID (such
     #   as a UUID) to avoid creating or starting multiple instances of the
@@ -15052,6 +15337,7 @@ module Aws::Glue
     #     number_of_workers: 1,
     #     timeout: 1,
     #     created_ruleset_name: "NameString",
+    #     data_quality_security_configuration: "NameString",
     #     client_token: "HashString",
     #   })
     #
@@ -17592,7 +17878,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.186.0'
+      context[:gem_version] = '1.187.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

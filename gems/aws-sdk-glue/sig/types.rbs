@@ -91,6 +91,13 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class AnnotationError
+      attr_accessor profile_id: ::String
+      attr_accessor statistic_id: ::String
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
     class ApplyMapping
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
@@ -344,6 +351,17 @@ module Aws::Glue
     class BatchGetWorkflowsResponse
       attr_accessor workflows: ::Array[Types::Workflow]
       attr_accessor missing_workflows: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchPutDataQualityStatisticAnnotationRequest
+      attr_accessor inclusion_annotations: ::Array[Types::DatapointInclusionAnnotation]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutDataQualityStatisticAnnotationResponse
+      attr_accessor failed_inclusion_annotations: ::Array[Types::AnnotationError]
       SENSITIVE: []
     end
 
@@ -1077,6 +1095,7 @@ module Aws::Glue
       attr_accessor ruleset: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor target_table: Types::DataQualityTargetTable
+      attr_accessor data_quality_security_configuration: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -1472,7 +1491,7 @@ module Aws::Glue
       attr_accessor description: ::String
       attr_accessor evaluation_message: ::String
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
-      SENSITIVE: []
+      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics]
     end
 
     class DataQualityEvaluationRunAdditionalRunOptions
@@ -1493,11 +1512,12 @@ module Aws::Glue
     class DataQualityObservation
       attr_accessor description: ::String
       attr_accessor metric_based_observation: Types::MetricBasedObservation
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class DataQualityResult
       attr_accessor result_id: ::String
+      attr_accessor profile_id: ::String
       attr_accessor score: ::Float
       attr_accessor data_source: Types::DataSource
       attr_accessor ruleset_name: ::String
@@ -1552,7 +1572,8 @@ module Aws::Glue
       attr_accessor evaluation_message: ::String
       attr_accessor result: ("PASS" | "FAIL" | "ERROR")
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
-      SENSITIVE: []
+      attr_accessor evaluated_rule: ::String
+      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule]
     end
 
     class DataQualityRulesetEvaluationRunDescription
@@ -1632,6 +1653,13 @@ module Aws::Glue
       attr_accessor create_table_default_permissions: ::Array[Types::PrincipalPermissions]
       attr_accessor target_database: Types::DatabaseIdentifier
       attr_accessor federated_database: Types::FederatedDatabase
+      SENSITIVE: []
+    end
+
+    class DatapointInclusionAnnotation
+      attr_accessor profile_id: ::String
+      attr_accessor statistic_id: ::String
+      attr_accessor inclusion_annotation: ("INCLUDE" | "EXCLUDE")
       SENSITIVE: []
     end
 
@@ -2443,6 +2471,32 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetDataQualityModelRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityModelResponse
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityModelResultRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityModelResultResponse
+      attr_accessor completed_on: ::Time
+      attr_accessor model: ::Array[Types::StatisticModelResult]
+      SENSITIVE: []
+    end
+
     class GetDataQualityResultRequest
       attr_accessor result_id: ::String
       SENSITIVE: []
@@ -2450,6 +2504,7 @@ module Aws::Glue
 
     class GetDataQualityResultResponse
       attr_accessor result_id: ::String
+      attr_accessor profile_id: ::String
       attr_accessor score: ::Float
       attr_accessor data_source: Types::DataSource
       attr_accessor ruleset_name: ::String
@@ -2484,6 +2539,7 @@ module Aws::Glue
       attr_accessor execution_time: ::Integer
       attr_accessor recommended_ruleset: ::String
       attr_accessor created_ruleset_name: ::String
+      attr_accessor data_quality_security_configuration: ::String
       SENSITIVE: []
     end
 
@@ -2524,6 +2580,7 @@ module Aws::Glue
       attr_accessor created_on: ::Time
       attr_accessor last_modified_on: ::Time
       attr_accessor recommendation_run_id: ::String
+      attr_accessor data_quality_security_configuration: ::String
       SENSITIVE: []
     end
 
@@ -3741,6 +3798,36 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ListDataQualityStatisticAnnotationsRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor timestamp_filter: Types::TimestampFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityStatisticAnnotationsResponse
+      attr_accessor annotations: ::Array[Types::StatisticAnnotation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityStatisticsRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor timestamp_filter: Types::TimestampFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityStatisticsResponse
+      attr_accessor statistics: ::Array[Types::StatisticSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDevEndpointsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -3997,6 +4084,7 @@ module Aws::Glue
 
     class MetricBasedObservation
       attr_accessor metric_name: ::String
+      attr_accessor statistic_id: ::String
       attr_accessor metric_values: Types::DataQualityMetricValues
       attr_accessor new_rules: ::Array[::String]
       SENSITIVE: []
@@ -4270,6 +4358,15 @@ module Aws::Glue
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure
     end
 
+    class PutDataQualityProfileAnnotationRequest
+      attr_accessor profile_id: ::String
+      attr_accessor inclusion_annotation: ("INCLUDE" | "EXCLUDE")
+      SENSITIVE: []
+    end
+
+    class PutDataQualityProfileAnnotationResponse < Aws::EmptyStructure
+    end
+
     class PutResourcePolicyRequest
       attr_accessor policy_in_json: ::String
       attr_accessor resource_arn: ::String
@@ -4492,6 +4589,12 @@ module Aws::Glue
     class ResumeWorkflowRunResponse
       attr_accessor run_id: ::String
       attr_accessor node_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RunIdentifier
+      attr_accessor run_id: ::String
+      attr_accessor job_run_id: ::String
       SENSITIVE: []
     end
 
@@ -5048,6 +5151,7 @@ module Aws::Glue
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor created_ruleset_name: ::String
+      attr_accessor data_quality_security_configuration: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -5189,6 +5293,39 @@ module Aws::Glue
     class StatementOutputData
       attr_accessor text_plain: ::String
       SENSITIVE: []
+    end
+
+    class StatisticAnnotation
+      attr_accessor profile_id: ::String
+      attr_accessor statistic_id: ::String
+      attr_accessor statistic_recorded_on: ::Time
+      attr_accessor inclusion_annotation: Types::TimestampedInclusionAnnotation
+      SENSITIVE: []
+    end
+
+    class StatisticModelResult
+      attr_accessor lower_bound: ::Float
+      attr_accessor upper_bound: ::Float
+      attr_accessor predicted_value: ::Float
+      attr_accessor actual_value: ::Float
+      attr_accessor date: ::Time
+      attr_accessor inclusion_annotation: ("INCLUDE" | "EXCLUDE")
+      SENSITIVE: []
+    end
+
+    class StatisticSummary
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor run_identifier: Types::RunIdentifier
+      attr_accessor statistic_name: ::String
+      attr_accessor double_value: ::Float
+      attr_accessor evaluation_level: ("Dataset" | "Column" | "Multicolumn")
+      attr_accessor columns_referenced: ::Array[::String]
+      attr_accessor referenced_datasets: ::Array[::String]
+      attr_accessor statistic_properties: ::Hash[::String, ::String]
+      attr_accessor recorded_on: ::Time
+      attr_accessor inclusion_annotation: Types::TimestampedInclusionAnnotation
+      SENSITIVE: [:statistic_properties]
     end
 
     class StopColumnStatisticsTaskRunRequest
@@ -5421,6 +5558,18 @@ module Aws::Glue
     class TaskRunSortCriteria
       attr_accessor column: ("TASK_RUN_TYPE" | "STATUS" | "STARTED")
       attr_accessor sort_direction: ("DESCENDING" | "ASCENDING")
+      SENSITIVE: []
+    end
+
+    class TimestampFilter
+      attr_accessor recorded_before: ::Time
+      attr_accessor recorded_after: ::Time
+      SENSITIVE: []
+    end
+
+    class TimestampedInclusionAnnotation
+      attr_accessor value: ("INCLUDE" | "EXCLUDE")
+      attr_accessor last_modified_on: ::Time
       SENSITIVE: []
     end
 
