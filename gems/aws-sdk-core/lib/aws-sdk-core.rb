@@ -113,14 +113,6 @@ require_relative 'aws-defaults'
 
 module Aws
 
-  # aws-sdk-sts is included to support Aws::AssumeRoleCredentials
-  puts "Setting up autoloads...."
-  autoload :STS, 'aws-sdk-sts'
-
-  # aws-sdk-sso is included to support Aws::SSOCredentials
-  autoload :SSO, 'aws-sdk-sso'
-  autoload :SSOOIDC, 'aws-sdk-ssooidc'
-
   CORE_GEM_VERSION = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 
   @config = {}
@@ -205,3 +197,11 @@ module Aws
 
   end
 end
+
+# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
+puts "Setting up autoloads...."
+Aws.autoload :STS, File.join(__dir__, 'aws-sdk-sts.rb')
+
+# aws-sdk-sso is included to support Aws::SSOCredentials
+Aws.autoload :SSO, File.join(__dir__, 'aws-sdk-sso.rb')
+Aws.autoload :SSOOIDC, File.join(__dir__, 'aws-sdk-ssooidc.rb')

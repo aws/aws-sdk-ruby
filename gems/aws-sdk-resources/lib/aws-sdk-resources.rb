@@ -336,6 +336,7 @@ module Aws
   autoload :SSO, 'aws-sdk-core'
   autoload :SSOAdmin, 'aws-sdk-ssoadmin'
   autoload :SSOOIDC, 'aws-sdk-core'
+  autoload :STS, 'aws-sdk-core'
   autoload :SWF, 'aws-sdk-swf'
   autoload :SageMaker, 'aws-sdk-sagemaker'
   autoload :SageMakerFeatureStoreRuntime, 'aws-sdk-sagemakerfeaturestoreruntime'
