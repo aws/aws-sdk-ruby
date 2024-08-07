@@ -109,17 +109,17 @@ require_relative 'aws-sdk-core/plugins/signature_v4'
 # defaults
 require_relative 'aws-defaults'
 
-# plugins
-# loaded through building STS or SSO ..
-
-# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
-require_relative 'aws-sdk-sts'
-
-# aws-sdk-sso is included to support Aws::SSOCredentials
-require_relative 'aws-sdk-sso'
-require_relative 'aws-sdk-ssooidc'
+# plugins - loaded through service clients as needed.
 
 module Aws
+
+  # aws-sdk-sts is included to support Aws::AssumeRoleCredentials
+  puts "Setting up autoloads...."
+  autoload :STS, 'aws-sdk-sts'
+
+  # aws-sdk-sso is included to support Aws::SSOCredentials
+  autoload :SSO, 'aws-sdk-sso'
+  autoload :SSOOIDC, 'aws-sdk-ssooidc'
 
   CORE_GEM_VERSION = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 

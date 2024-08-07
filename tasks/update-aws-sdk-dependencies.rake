@@ -19,11 +19,12 @@ task 'update-aws-sdk-dependencies' do
   )
 
   # update the module autoloads
+  autoload_services = BuildTools::Services.select { |service| svc.gem_name != 'aws-sdk-core' }
   BuildTools.replace_lines(
     filename: "#{$GEMS_DIR}/aws-sdk-resources/lib/aws-sdk-resources.rb",
     start: /# service gems/,
     stop: /# end service gems/,
-    new_lines: BuildTools::Services.map { |service|
+    new_lines: autoload_services.map { |service|
       "  autoload :#{service.name}, '#{service.gem_name}'\n"
     }
   )

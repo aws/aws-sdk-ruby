@@ -107,10 +107,11 @@ $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'aws-sdk-resources'
 
 # Finally load all of the gems. Core is loaded a second time because of STS.
+core_gems = [:STS, :SSO, :SSOOIDC]
 if File.directory?(File.expand_path('../../../../build_tools', __FILE__))
   gems = []
   Aws.constants.each do |const_name|
-    if Aws.autoload?(const_name)
+    if Aws.autoload?(const_name) && !core_gems.include?(const_name)
       gems << "aws-sdk-#{const_name.downcase}"
     end
   end
