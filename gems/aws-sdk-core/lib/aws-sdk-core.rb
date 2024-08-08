@@ -54,6 +54,9 @@ require_relative 'aws-sdk-core/log/formatter'
 require_relative 'aws-sdk-core/log/param_filter'
 require_relative 'aws-sdk-core/log/param_formatter'
 
+# telemetry
+require_relative 'aws-sdk-core/telemetry'
+
 # stubbing
 
 require_relative 'aws-sdk-core/stubbing/empty_stub'

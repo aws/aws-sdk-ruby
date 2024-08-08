@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 module Aws
-  module Plugin
-    class TelemetryPlugin < Seahorse::Client::Plugin
+  module Plugins
+    # TODO
+    class Telemetry < Seahorse::Client::Plugin
       # add config options
       option(
         :telemetry_provider,
-        default: 'TBD',
-        doc_type: 'TBD',
+        default: Aws::Telemetry::NoOpTelemetryProvider,
+        doc_type: Aws::Telemetry::TelemetryProviderBase,
         rbs_type: 'untyped',
         docstring: <<~DOCS) do |cfg|
           Allows you to provide a telemetry provider class. By default,
@@ -21,6 +22,7 @@ module Aws
       def self.resolve_provider(_cfg)
         # resolve based on whether there's otel
         # create an instance of NoOpTelemetryProvider
+        Telemetry::NoOpTelemetryProvider.new
       end
 
       # do we need handlers?
