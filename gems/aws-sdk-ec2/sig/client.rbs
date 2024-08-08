@@ -1726,7 +1726,8 @@ module Aws
                            },
                          ],
                          ?client_token: ::String,
-                         ?tier: ("free" | "advanced")
+                         ?tier: ("free" | "advanced"),
+                         ?enable_private_gua: bool
                        ) -> _CreateIpamResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIpamResponseSuccess
 
@@ -10218,7 +10219,8 @@ module Aws
                              region_name: ::String?
                            },
                          ],
-                         ?tier: ("free" | "advanced")
+                         ?tier: ("free" | "advanced"),
+                         ?enable_private_gua: bool
                        ) -> _ModifyIpamResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyIpamResponseSuccess
 

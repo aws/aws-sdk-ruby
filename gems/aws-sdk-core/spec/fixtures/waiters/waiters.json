@@ -1,0 +1,180 @@
+{
+  "version": 2,
+  "waiters": {
+    "GenericWaiter": {
+      "delay": 20,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "expected": "ACTIVE",
+          "matcher": "path",
+          "state": "success",
+          "argument": "Table.TableStatus"
+        },
+        {
+          "expected": "ResourceNotFoundException",
+          "matcher": "error",
+          "state": "retry"
+        }
+      ]
+    },
+    "StatusMatcherWaiter": {
+      "delay": 1,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "status",
+          "expected": 404,
+          "state": "success"
+        }
+      ]
+    },
+    "ErrorMatcherWithErrorCode": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "error",
+          "expected": "ResourceNotFoundException",
+          "state": "success"
+        }
+      ]
+    },
+    "ErrorMatcherWithTrue": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "error",
+          "expected": "true",
+          "state": "success"
+        }
+      ]
+    },
+    "ErrorMatcherWithFalse": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "error",
+          "expected": "ResourceNotFoundException",
+          "state": "retry"
+        },
+        {
+          "matcher": "error",
+          "expected": "false",
+          "state": "success"
+        }
+      ]
+    },
+    "ErrorMatcherWithFalseFails": {
+      "delay": 1,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "error",
+          "expected": "false",
+          "state": "failure"
+        }
+      ]
+    },
+    "ErrorMatcherWithFalseRetries": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher" : "error",
+          "expected" : "false",
+          "state" : "retry"
+        },
+        {
+          "matcher": "error",
+          "expected": "ResourceNotFoundException",
+          "state": "success"
+        }
+      ]
+    },
+    "PathMatcher": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "path",
+          "expected": "ACTIVE",
+          "state": "success",
+          "argument": "Table.TableStatus"
+        },
+        {
+          "matcher": "path",
+          "expected": "FAILED",
+          "state": "failure",
+          "argument": "Table.TableStatus"
+        },
+        {
+          "matcher": "path",
+          "expected": "UPDATING",
+          "state": "retry",
+          "argument": "Table.TableStatus"
+        }
+      ]
+    },
+    "PathAllMatcher": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAll",
+          "expected": "ACTIVE",
+          "state": "success",
+          "argument": "TableList[].TableStatus"
+        },
+        {
+          "matcher": "pathAll",
+          "expected": "FAILED",
+          "state": "failure",
+          "argument": "TableList[].TableStatus"
+        },
+        {
+          "matcher": "pathAll",
+          "expected": "UPDATING",
+          "state": "retry",
+          "argument": "TableList[].TableStatus"
+        }
+      ]
+    },
+    "PathAnyMatcher": {
+      "delay": 0,
+      "operation": "WaiterOperation",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "matcher": "pathAny",
+          "expected": "ACTIVE",
+          "state": "success",
+          "argument": "TableList[].TableStatus"
+        },
+        {
+          "matcher": "pathAny",
+          "expected": "FAILED",
+          "state": "failure",
+          "argument": "TableList[].TableStatus"
+        },
+        {
+          "matcher": "pathAny",
+          "expected": "UPDATING",
+          "state": "retry",
+          "argument": "TableList[].TableStatus"
+        }
+      ]
+    }
+  }
+}

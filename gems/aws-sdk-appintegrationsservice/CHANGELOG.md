@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-08-07)
+------------------
+
+* Feature - Updated CreateDataIntegration and CreateDataIntegrationAssociation API to support bulk data export from Amazon Connect Customer Profiles to the customer S3 bucket.
+
 1.36.0 (2024-07-02)
 ------------------
 

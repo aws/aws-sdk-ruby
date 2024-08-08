@@ -2386,6 +2386,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.ipv_6_cidr_block_association.ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.subnet_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlock AWS API Documentation
@@ -2742,6 +2744,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
     #   resp.ipv_6_cidr_block_association.network_border_group #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.ipv_6_cidr_block_association.ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.cidr_block_association.association_id #=> String
     #   resp.cidr_block_association.cidr_block #=> String
     #   resp.cidr_block_association.cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
@@ -5964,6 +5968,8 @@ module Aws::EC2
     #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.subnet.tags #=> Array
     #   resp.subnet.tags[0].key #=> String
     #   resp.subnet.tags[0].value #=> String
@@ -6028,6 +6034,8 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].network_border_group #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.vpc.cidr_block_association_set #=> Array
     #   resp.vpc.cidr_block_association_set[0].association_id #=> String
     #   resp.vpc.cidr_block_association_set[0].cidr_block #=> String
@@ -7592,6 +7600,10 @@ module Aws::EC2
     #
     #   [1]: http://aws.amazon.com/vpc/pricing/
     #
+    # @option params [Boolean] :enable_private_gua
+    #   Enable this option to use your own GUA ranges as private IPv6
+    #   addresses. This option is disabled by default.
+    #
     # @return [Types::CreateIpamResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIpamResult#ipam #ipam} => Types::Ipam
@@ -7619,6 +7631,7 @@ module Aws::EC2
     #     ],
     #     client_token: "String",
     #     tier: "free", # accepts free, advanced
+    #     enable_private_gua: false,
     #   })
     #
     # @example Response structure
@@ -7642,6 +7655,7 @@ module Aws::EC2
     #   resp.ipam.resource_discovery_association_count #=> Integer
     #   resp.ipam.state_message #=> String
     #   resp.ipam.tier #=> String, one of "free", "advanced"
+    #   resp.ipam.enable_private_gua #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpam AWS API Documentation
     #
@@ -12226,6 +12240,8 @@ module Aws::EC2
     #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.subnet.ipv_6_cidr_block_association_set[0].ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.subnet.tags #=> Array
     #   resp.subnet.tags[0].key #=> String
     #   resp.subnet.tags[0].value #=> String
@@ -14702,6 +14718,8 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].network_border_group #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.vpc.cidr_block_association_set #=> Array
     #   resp.vpc.cidr_block_association_set[0].association_id #=> String
     #   resp.vpc.cidr_block_association_set[0].cidr_block #=> String
@@ -16269,6 +16287,7 @@ module Aws::EC2
     #   resp.ipam.resource_discovery_association_count #=> Integer
     #   resp.ipam.state_message #=> String
     #   resp.ipam.tier #=> String, one of "free", "advanced"
+    #   resp.ipam.enable_private_gua #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpam AWS API Documentation
     #
@@ -26887,6 +26906,7 @@ module Aws::EC2
     #   resp.ipams[0].resource_discovery_association_count #=> Integer
     #   resp.ipams[0].state_message #=> String
     #   resp.ipams[0].tier #=> String, one of "free", "advanced"
+    #   resp.ipams[0].enable_private_gua #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpams AWS API Documentation
     #
@@ -34314,6 +34334,8 @@ module Aws::EC2
     #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.subnets[0].tags #=> Array
     #   resp.subnets[0].tags[0].key #=> String
     #   resp.subnets[0].tags[0].value #=> String
@@ -37930,6 +37952,8 @@ module Aws::EC2
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].network_border_group #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
+    #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.vpcs[0].cidr_block_association_set #=> Array
     #   resp.vpcs[0].cidr_block_association_set[0].association_id #=> String
     #   resp.vpcs[0].cidr_block_association_set[0].cidr_block #=> String
@@ -39887,6 +39911,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.ipv_6_cidr_block_association.ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.subnet_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlock AWS API Documentation
@@ -40120,6 +40146,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
     #   resp.ipv_6_cidr_block_association.network_border_group #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_address_attribute #=> String, one of "public", "private"
+    #   resp.ipv_6_cidr_block_association.ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.cidr_block_association.association_id #=> String
     #   resp.cidr_block_association.cidr_block #=> String
     #   resp.cidr_block_association.cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
@@ -42729,6 +42757,7 @@ module Aws::EC2
     #   resp.ipam_discovered_resource_cidrs[0].resource_id #=> String
     #   resp.ipam_discovered_resource_cidrs[0].resource_owner_id #=> String
     #   resp.ipam_discovered_resource_cidrs[0].resource_cidr #=> String
+    #   resp.ipam_discovered_resource_cidrs[0].ip_source #=> String, one of "amazon", "byoip", "none"
     #   resp.ipam_discovered_resource_cidrs[0].resource_type #=> String, one of "vpc", "subnet", "eip", "public-ipv4-pool", "ipv6-pool", "eni"
     #   resp.ipam_discovered_resource_cidrs[0].resource_tags #=> Array
     #   resp.ipam_discovered_resource_cidrs[0].resource_tags[0].key #=> String
@@ -48319,6 +48348,10 @@ module Aws::EC2
     #
     #   [1]: http://aws.amazon.com/vpc/pricing/
     #
+    # @option params [Boolean] :enable_private_gua
+    #   Enable this option to use your own GUA ranges as private IPv6
+    #   addresses. This option is disabled by default.
+    #
     # @return [Types::ModifyIpamResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyIpamResult#ipam #ipam} => Types::Ipam
@@ -48340,6 +48373,7 @@ module Aws::EC2
     #       },
     #     ],
     #     tier: "free", # accepts free, advanced
+    #     enable_private_gua: false,
     #   })
     #
     # @example Response structure
@@ -48363,6 +48397,7 @@ module Aws::EC2
     #   resp.ipam.resource_discovery_association_count #=> Integer
     #   resp.ipam.state_message #=> String
     #   resp.ipam.tier #=> String, one of "free", "advanced"
+    #   resp.ipam.enable_private_gua #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpam AWS API Documentation
     #
@@ -52663,7 +52698,8 @@ module Aws::EC2
     #
     # @option params [required, Integer] :netmask_length
     #   The netmask length of the CIDR you would like to allocate to the
-    #   public IPv4 pool.
+    #   public IPv4 pool. The least specific netmask length you can define is
+    #   24.
     #
     # @option params [String] :network_border_group
     #   The Availability Zone (AZ) or Local Zone (LZ) network border group
@@ -59774,7 +59810,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.467.0'
+      context[:gem_version] = '1.468.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

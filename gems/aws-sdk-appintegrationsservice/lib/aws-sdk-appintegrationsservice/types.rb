@@ -183,6 +183,77 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_integration_identifier
+    #   A unique identifier for the DataIntegration.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The identifier for the client that is associated with the
+    #   DataIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_configuration
+    #   The configuration for what data should be pulled from the source.
+    #   @return [Hash<String,Hash<String,Array<String>>>]
+    #
+    # @!attribute [rw] destination_uri
+    #   The URI of the data destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_association_metadata
+    #   The mapping of metadata to be extracted from the data.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_configuration
+    #   The configuration for how the files should be pulled from the
+    #   source.
+    #   @return [Types::ExecutionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateDataIntegrationAssociationRequest AWS API Documentation
+    #
+    class CreateDataIntegrationAssociationRequest < Struct.new(
+      :data_integration_identifier,
+      :client_id,
+      :object_configuration,
+      :destination_uri,
+      :client_association_metadata,
+      :client_token,
+      :execution_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_integration_association_id
+    #   A unique identifier. for the DataIntegrationAssociation.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_integration_arn
+    #   The Amazon Resource Name (ARN) for the DataIntegration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateDataIntegrationAssociationResponse AWS API Documentation
+    #
+    class CreateDataIntegrationAssociationResponse < Struct.new(
+      :data_integration_association_id,
+      :data_integration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the DataIntegration.
     #   @return [String]
@@ -192,7 +263,7 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The KMS key for the DataIntegration.
+    #   The KMS key ARN for the DataIntegration.
     #   @return [String]
     #
     # @!attribute [rw] source_uri
@@ -265,7 +336,7 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The KMS key for the DataIntegration.
+    #   The KMS key ARN for the DataIntegration.
     #   @return [String]
     #
     # @!attribute [rw] source_uri
@@ -396,12 +467,28 @@ module Aws::AppIntegrationsService
     #   DataIntegration association.
     #   @return [String]
     #
+    # @!attribute [rw] destination_uri
+    #   The URI of the data destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_execution_status
+    #   The execution status of the last job.
+    #   @return [Types::LastExecutionStatus]
+    #
+    # @!attribute [rw] execution_configuration
+    #   The configuration for how the files should be pulled from the
+    #   source.
+    #   @return [Types::ExecutionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DataIntegrationAssociationSummary AWS API Documentation
     #
     class DataIntegrationAssociationSummary < Struct.new(
       :data_integration_association_arn,
       :data_integration_arn,
-      :client_id)
+      :client_id,
+      :destination_uri,
+      :last_execution_status,
+      :execution_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -587,6 +674,31 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # The configuration for how the files should be pulled from the source.
+    #
+    # @!attribute [rw] execution_mode
+    #   The mode for data import/export execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_demand_configuration
+    #   The start and end time for data pull from the source.
+    #   @return [Types::OnDemandConfiguration]
+    #
+    # @!attribute [rw] schedule_configuration
+    #   The name of the data and how often it should be pulled from the
+    #   source.
+    #   @return [Types::ScheduleConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ExecutionConfiguration AWS API Documentation
+    #
+    class ExecutionConfiguration < Struct.new(
+      :execution_mode,
+      :on_demand_configuration,
+      :schedule_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The external URL source for the application.
     #
     # @!attribute [rw] access_url
@@ -733,11 +845,11 @@ module Aws::AppIntegrationsService
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The KMS key for the DataIntegration.
+    #   The KMS key ARN for the DataIntegration.
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The KMS key for the DataIntegration.
+    #   The KMS key ARN for the DataIntegration.
     #   @return [String]
     #
     # @!attribute [rw] source_uri
@@ -853,6 +965,25 @@ module Aws::AppIntegrationsService
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The execution status of the last job.
+    #
+    # @!attribute [rw] execution_status
+    #   The job status enum string.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message of a job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/LastExecutionStatus AWS API Documentation
+    #
+    class LastExecutionStatus < Struct.new(
+      :execution_status,
+      :status_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1119,6 +1250,27 @@ module Aws::AppIntegrationsService
       include Aws::Structure
     end
 
+    # The start and end time for data pull from the source.
+    #
+    # @!attribute [rw] start_time
+    #   The start time for data pull from the source as an Unix/epoch string
+    #   in milliseconds
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for data pull from the source as an Unix/epoch string
+    #   in milliseconds
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/OnDemandConfiguration AWS API Documentation
+    #
+    class OnDemandConfiguration < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of an event that the application publishes.
     #
     # @!attribute [rw] event
@@ -1330,6 +1482,33 @@ module Aws::AppIntegrationsService
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplicationResponse AWS API Documentation
     #
     class UpdateApplicationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] data_integration_identifier
+    #   A unique identifier for the DataIntegration.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_integration_association_identifier
+    #   A unique identifier. of the DataIntegrationAssociation resource
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_configuration
+    #   The configuration for how the files should be pulled from the
+    #   source.
+    #   @return [Types::ExecutionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateDataIntegrationAssociationRequest AWS API Documentation
+    #
+    class UpdateDataIntegrationAssociationRequest < Struct.new(
+      :data_integration_identifier,
+      :data_integration_association_identifier,
+      :execution_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateDataIntegrationAssociationResponse AWS API Documentation
+    #
+    class UpdateDataIntegrationAssociationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] identifier
     #   A unique identifier for the DataIntegration.

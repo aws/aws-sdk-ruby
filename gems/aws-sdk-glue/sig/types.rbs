@@ -91,6 +91,13 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class AnnotationError
+      attr_accessor profile_id: ::String
+      attr_accessor statistic_id: ::String
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
     class ApplyMapping
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
@@ -145,6 +152,7 @@ module Aws::Glue
     class BasicCatalogTarget
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor database: ::String
       attr_accessor table: ::String
       SENSITIVE: []
@@ -344,6 +352,17 @@ module Aws::Glue
     class BatchGetWorkflowsResponse
       attr_accessor workflows: ::Array[Types::Workflow]
       attr_accessor missing_workflows: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchPutDataQualityStatisticAnnotationRequest
+      attr_accessor inclusion_annotations: ::Array[Types::DatapointInclusionAnnotation]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutDataQualityStatisticAnnotationResponse
+      attr_accessor failed_inclusion_annotations: ::Array[Types::AnnotationError]
       SENSITIVE: []
     end
 
@@ -834,9 +853,9 @@ module Aws::Glue
     class Connection
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE")
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE" | "VIEW_VALIDATION_REDSHIFT" | "VIEW_VALIDATION_ATHENA")
       attr_accessor match_criteria: ::Array[::String]
-      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN"), ::String]
+      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN" | "REGION" | "WORKGROUP_NAME" | "CLUSTER_IDENTIFIER" | "DATABASE"), ::String]
       attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
       attr_accessor creation_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -851,9 +870,9 @@ module Aws::Glue
     class ConnectionInput
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE")
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE" | "VIEW_VALIDATION_REDSHIFT" | "VIEW_VALIDATION_ATHENA")
       attr_accessor match_criteria: ::Array[::String]
-      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN"), ::String]
+      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN" | "REGION" | "WORKGROUP_NAME" | "CLUSTER_IDENTIFIER" | "DATABASE"), ::String]
       attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
       attr_accessor authentication_configuration: Types::AuthenticationConfigurationInput
       attr_accessor validate_credentials: bool
@@ -1077,6 +1096,7 @@ module Aws::Glue
       attr_accessor ruleset: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor target_table: Types::DataQualityTargetTable
+      attr_accessor data_quality_security_configuration: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -1472,7 +1492,7 @@ module Aws::Glue
       attr_accessor description: ::String
       attr_accessor evaluation_message: ::String
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
-      SENSITIVE: []
+      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics]
     end
 
     class DataQualityEvaluationRunAdditionalRunOptions
@@ -1493,11 +1513,12 @@ module Aws::Glue
     class DataQualityObservation
       attr_accessor description: ::String
       attr_accessor metric_based_observation: Types::MetricBasedObservation
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class DataQualityResult
       attr_accessor result_id: ::String
+      attr_accessor profile_id: ::String
       attr_accessor score: ::Float
       attr_accessor data_source: Types::DataSource
       attr_accessor ruleset_name: ::String
@@ -1552,7 +1573,8 @@ module Aws::Glue
       attr_accessor evaluation_message: ::String
       attr_accessor result: ("PASS" | "FAIL" | "ERROR")
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
-      SENSITIVE: []
+      attr_accessor evaluated_rule: ::String
+      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule]
     end
 
     class DataQualityRulesetEvaluationRunDescription
@@ -1632,6 +1654,13 @@ module Aws::Glue
       attr_accessor create_table_default_permissions: ::Array[Types::PrincipalPermissions]
       attr_accessor target_database: Types::DatabaseIdentifier
       attr_accessor federated_database: Types::FederatedDatabase
+      SENSITIVE: []
+    end
+
+    class DatapointInclusionAnnotation
+      attr_accessor profile_id: ::String
+      attr_accessor statistic_id: ::String
+      attr_accessor inclusion_annotation: ("INCLUDE" | "EXCLUDE")
       SENSITIVE: []
     end
 
@@ -2367,7 +2396,7 @@ module Aws::Glue
 
     class GetConnectionsFilter
       attr_accessor match_criteria: ::Array[::String]
-      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE")
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE" | "VIEW_VALIDATION_REDSHIFT" | "VIEW_VALIDATION_ATHENA")
       SENSITIVE: []
     end
 
@@ -2443,6 +2472,32 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetDataQualityModelRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityModelResponse
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor started_on: ::Time
+      attr_accessor completed_on: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityModelResultRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityModelResultResponse
+      attr_accessor completed_on: ::Time
+      attr_accessor model: ::Array[Types::StatisticModelResult]
+      SENSITIVE: []
+    end
+
     class GetDataQualityResultRequest
       attr_accessor result_id: ::String
       SENSITIVE: []
@@ -2450,6 +2505,7 @@ module Aws::Glue
 
     class GetDataQualityResultResponse
       attr_accessor result_id: ::String
+      attr_accessor profile_id: ::String
       attr_accessor score: ::Float
       attr_accessor data_source: Types::DataSource
       attr_accessor ruleset_name: ::String
@@ -2484,6 +2540,7 @@ module Aws::Glue
       attr_accessor execution_time: ::Integer
       attr_accessor recommended_ruleset: ::String
       attr_accessor created_ruleset_name: ::String
+      attr_accessor data_quality_security_configuration: ::String
       SENSITIVE: []
     end
 
@@ -2524,6 +2581,7 @@ module Aws::Glue
       attr_accessor created_on: ::Time
       attr_accessor last_modified_on: ::Time
       attr_accessor recommendation_run_id: ::String
+      attr_accessor data_quality_security_configuration: ::String
       SENSITIVE: []
     end
 
@@ -2971,6 +3029,7 @@ module Aws::Glue
       attr_accessor name: ::String
       attr_accessor transaction_id: ::String
       attr_accessor query_as_of_time: ::Time
+      attr_accessor include_status_details: bool
       SENSITIVE: []
     end
 
@@ -3015,6 +3074,7 @@ module Aws::Glue
       attr_accessor max_results: ::Integer
       attr_accessor transaction_id: ::String
       attr_accessor query_as_of_time: ::Time
+      attr_accessor include_status_details: bool
       SENSITIVE: []
     end
 
@@ -3741,6 +3801,36 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ListDataQualityStatisticAnnotationsRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor timestamp_filter: Types::TimestampFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityStatisticAnnotationsResponse
+      attr_accessor annotations: ::Array[Types::StatisticAnnotation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityStatisticsRequest
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor timestamp_filter: Types::TimestampFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityStatisticsResponse
+      attr_accessor statistics: ::Array[Types::StatisticSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDevEndpointsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -3997,6 +4087,7 @@ module Aws::Glue
 
     class MetricBasedObservation
       attr_accessor metric_name: ::String
+      attr_accessor statistic_id: ::String
       attr_accessor metric_values: Types::DataQualityMetricValues
       attr_accessor new_rules: ::Array[::String]
       SENSITIVE: []
@@ -4270,6 +4361,15 @@ module Aws::Glue
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure
     end
 
+    class PutDataQualityProfileAnnotationRequest
+      attr_accessor profile_id: ::String
+      attr_accessor inclusion_annotation: ("INCLUDE" | "EXCLUDE")
+      SENSITIVE: []
+    end
+
+    class PutDataQualityProfileAnnotationResponse < Aws::EmptyStructure
+    end
+
     class PutResourcePolicyRequest
       attr_accessor policy_in_json: ::String
       attr_accessor resource_arn: ::String
@@ -4492,6 +4592,12 @@ module Aws::Glue
     class ResumeWorkflowRunResponse
       attr_accessor run_id: ::String
       attr_accessor node_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RunIdentifier
+      attr_accessor run_id: ::String
+      attr_accessor job_run_id: ::String
       SENSITIVE: []
     end
 
@@ -4809,6 +4915,7 @@ module Aws::Glue
       attr_accessor sort_criteria: ::Array[Types::SortCriterion]
       attr_accessor max_results: ::Integer
       attr_accessor resource_share_type: ("FOREIGN" | "ALL" | "FEDERATED")
+      attr_accessor include_status_details: bool
       SENSITIVE: []
     end
 
@@ -5048,6 +5155,7 @@ module Aws::Glue
       attr_accessor number_of_workers: ::Integer
       attr_accessor timeout: ::Integer
       attr_accessor created_ruleset_name: ::String
+      attr_accessor data_quality_security_configuration: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -5191,6 +5299,45 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class StatisticAnnotation
+      attr_accessor profile_id: ::String
+      attr_accessor statistic_id: ::String
+      attr_accessor statistic_recorded_on: ::Time
+      attr_accessor inclusion_annotation: Types::TimestampedInclusionAnnotation
+      SENSITIVE: []
+    end
+
+    class StatisticModelResult
+      attr_accessor lower_bound: ::Float
+      attr_accessor upper_bound: ::Float
+      attr_accessor predicted_value: ::Float
+      attr_accessor actual_value: ::Float
+      attr_accessor date: ::Time
+      attr_accessor inclusion_annotation: ("INCLUDE" | "EXCLUDE")
+      SENSITIVE: []
+    end
+
+    class StatisticSummary
+      attr_accessor statistic_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor run_identifier: Types::RunIdentifier
+      attr_accessor statistic_name: ::String
+      attr_accessor double_value: ::Float
+      attr_accessor evaluation_level: ("Dataset" | "Column" | "Multicolumn")
+      attr_accessor columns_referenced: ::Array[::String]
+      attr_accessor referenced_datasets: ::Array[::String]
+      attr_accessor statistic_properties: ::Hash[::String, ::String]
+      attr_accessor recorded_on: ::Time
+      attr_accessor inclusion_annotation: Types::TimestampedInclusionAnnotation
+      SENSITIVE: [:statistic_properties]
+    end
+
+    class StatusDetails
+      attr_accessor requested_change: Types::Table
+      attr_accessor view_validations: ::Array[Types::ViewValidation]
+      SENSITIVE: []
+    end
+
     class StopColumnStatisticsTaskRunRequest
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
@@ -5308,6 +5455,7 @@ module Aws::Glue
       attr_accessor federated_table: Types::FederatedTable
       attr_accessor view_definition: Types::ViewDefinition
       attr_accessor is_multi_dialect_view: bool
+      attr_accessor status: Types::TableStatus
       SENSITIVE: []
     end
 
@@ -5362,6 +5510,18 @@ module Aws::Glue
       attr_accessor end_timestamp: ::Time
       attr_accessor metrics: Types::RunMetrics
       attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class TableStatus
+      attr_accessor requested_by: ::String
+      attr_accessor updated_by: ::String
+      attr_accessor request_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor action: ("UPDATE" | "CREATE")
+      attr_accessor state: ("QUEUED" | "IN_PROGRESS" | "SUCCESS" | "STOPPED" | "FAILED")
+      attr_accessor error: Types::ErrorDetail
+      attr_accessor details: Types::StatusDetails
       SENSITIVE: []
     end
 
@@ -5421,6 +5581,18 @@ module Aws::Glue
     class TaskRunSortCriteria
       attr_accessor column: ("TASK_RUN_TYPE" | "STATUS" | "STARTED")
       attr_accessor sort_direction: ("DESCENDING" | "ASCENDING")
+      SENSITIVE: []
+    end
+
+    class TimestampFilter
+      attr_accessor recorded_before: ::Time
+      attr_accessor recorded_after: ::Time
+      SENSITIVE: []
+    end
+
+    class TimestampedInclusionAnnotation
+      attr_accessor value: ("INCLUDE" | "EXCLUDE")
+      attr_accessor last_modified_on: ::Time
       SENSITIVE: []
     end
 
@@ -5940,6 +6112,16 @@ module Aws::Glue
       attr_accessor view_original_text: ::String
       attr_accessor validation_connection: ::String
       attr_accessor view_expanded_text: ::String
+      SENSITIVE: []
+    end
+
+    class ViewValidation
+      attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
+      attr_accessor dialect_version: ::String
+      attr_accessor view_validation_text: ::String
+      attr_accessor update_time: ::Time
+      attr_accessor state: ("QUEUED" | "IN_PROGRESS" | "SUCCESS" | "STOPPED" | "FAILED")
+      attr_accessor error: Types::ErrorDetail
       SENSITIVE: []
     end
 

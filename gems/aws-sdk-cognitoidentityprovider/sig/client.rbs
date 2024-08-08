@@ -727,7 +727,10 @@ module Aws
                                 },
                               ],
                               ?user_pool_add_ons: {
-                                advanced_security_mode: ("OFF" | "AUDIT" | "ENFORCED")
+                                advanced_security_mode: ("OFF" | "AUDIT" | "ENFORCED"),
+                                advanced_security_additional_flows: {
+                                  custom_auth_mode: ("AUDIT" | "ENFORCED")?
+                                }?
                               },
                               ?username_configuration: {
                                 case_sensitive: bool
@@ -1691,7 +1694,10 @@ module Aws
                                 }?
                               },
                               ?user_pool_add_ons: {
-                                advanced_security_mode: ("OFF" | "AUDIT" | "ENFORCED")
+                                advanced_security_mode: ("OFF" | "AUDIT" | "ENFORCED"),
+                                advanced_security_additional_flows: {
+                                  custom_auth_mode: ("AUDIT" | "ENFORCED")?
+                                }?
                               },
                               ?account_recovery_setting: {
                                 recovery_mechanisms: Array[

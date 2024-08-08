@@ -425,8 +425,6 @@ module Aws::AppIntegrationsService
 
     # @!group API Operations
 
-    # This API is in preview release and subject to change.
-    #
     # Creates and persists an Application resource.
     #
     # @option params [required, String] :name
@@ -557,9 +555,9 @@ module Aws::AppIntegrationsService
     #   A description of the DataIntegration.
     #
     # @option params [required, String] :kms_key
-    #   The KMS key for the DataIntegration.
+    #   The KMS key ARN for the DataIntegration.
     #
-    # @option params [required, String] :source_uri
+    # @option params [String] :source_uri
     #   The URI of the data source.
     #
     # @option params [Types::ScheduleConfiguration] :schedule_config
@@ -610,7 +608,7 @@ module Aws::AppIntegrationsService
     #     name: "Name", # required
     #     description: "Description",
     #     kms_key: "NonBlankString", # required
-    #     source_uri: "SourceURI", # required
+    #     source_uri: "SourceURI",
     #     schedule_config: {
     #       first_execution_from: "NonBlankString",
     #       object: "Object",
@@ -663,6 +661,88 @@ module Aws::AppIntegrationsService
     # @param [Hash] params ({})
     def create_data_integration(params = {}, options = {})
       req = build_request(:create_data_integration, params)
+      req.send_request(options)
+    end
+
+    # Creates and persists a DataIntegrationAssociation resource.
+    #
+    # @option params [required, String] :data_integration_identifier
+    #   A unique identifier for the DataIntegration.
+    #
+    # @option params [String] :client_id
+    #   The identifier for the client that is associated with the
+    #   DataIntegration association.
+    #
+    # @option params [Hash<String,Hash>] :object_configuration
+    #   The configuration for what data should be pulled from the source.
+    #
+    # @option params [String] :destination_uri
+    #   The URI of the data destination.
+    #
+    # @option params [Hash<String,String>] :client_association_metadata
+    #   The mapping of metadata to be extracted from the data.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Types::ExecutionConfiguration] :execution_configuration
+    #   The configuration for how the files should be pulled from the source.
+    #
+    # @return [Types::CreateDataIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataIntegrationAssociationResponse#data_integration_association_id #data_integration_association_id} => String
+    #   * {Types::CreateDataIntegrationAssociationResponse#data_integration_arn #data_integration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_integration_association({
+    #     data_integration_identifier: "Identifier", # required
+    #     client_id: "ClientId",
+    #     object_configuration: {
+    #       "NonBlankString" => {
+    #         "NonBlankString" => ["Fields"],
+    #       },
+    #     },
+    #     destination_uri: "DestinationURI",
+    #     client_association_metadata: {
+    #       "NonBlankString" => "NonBlankString",
+    #     },
+    #     client_token: "IdempotencyToken",
+    #     execution_configuration: {
+    #       execution_mode: "ON_DEMAND", # required, accepts ON_DEMAND, SCHEDULED
+    #       on_demand_configuration: {
+    #         start_time: "NonBlankString", # required
+    #         end_time: "NonBlankString",
+    #       },
+    #       schedule_configuration: {
+    #         first_execution_from: "NonBlankString",
+    #         object: "Object",
+    #         schedule_expression: "NonBlankString", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_integration_association_id #=> String
+    #   resp.data_integration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateDataIntegrationAssociation AWS API Documentation
+    #
+    # @overload create_data_integration_association(params = {})
+    # @param [Hash] params ({})
+    def create_data_integration_association(params = {}, options = {})
+      req = build_request(:create_data_integration_association, params)
       req.send_request(options)
     end
 
@@ -829,8 +909,6 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
-    # This API is in preview release and subject to change.
-    #
     # Get an Application resource.
     #
     # @option params [required, String] :arn
@@ -1084,8 +1162,6 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
-    # This API is in preview release and subject to change.
-    #
     # Lists applications in the account.
     #
     # @option params [String] :next_token
@@ -1198,6 +1274,15 @@ module Aws::AppIntegrationsService
     #   resp.data_integration_associations[0].data_integration_association_arn #=> String
     #   resp.data_integration_associations[0].data_integration_arn #=> String
     #   resp.data_integration_associations[0].client_id #=> String
+    #   resp.data_integration_associations[0].destination_uri #=> String
+    #   resp.data_integration_associations[0].last_execution_status.execution_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED"
+    #   resp.data_integration_associations[0].last_execution_status.status_message #=> String
+    #   resp.data_integration_associations[0].execution_configuration.execution_mode #=> String, one of "ON_DEMAND", "SCHEDULED"
+    #   resp.data_integration_associations[0].execution_configuration.on_demand_configuration.start_time #=> String
+    #   resp.data_integration_associations[0].execution_configuration.on_demand_configuration.end_time #=> String
+    #   resp.data_integration_associations[0].execution_configuration.schedule_configuration.first_execution_from #=> String
+    #   resp.data_integration_associations[0].execution_configuration.schedule_configuration.object #=> String
+    #   resp.data_integration_associations[0].execution_configuration.schedule_configuration.schedule_expression #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListDataIntegrationAssociations AWS API Documentation
@@ -1441,8 +1526,6 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
-    # This API is in preview release and subject to change.
-    #
     # Updates and persists an Application resource.
     #
     # @option params [required, String] :arn
@@ -1561,6 +1644,52 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # Updates and persists a DataIntegrationAssociation resource.
+    #
+    # <note markdown="1"> Updating a DataIntegrationAssociation with ExecutionConfiguration will
+    # rerun the on-demand job.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :data_integration_identifier
+    #   A unique identifier for the DataIntegration.
+    #
+    # @option params [required, String] :data_integration_association_identifier
+    #   A unique identifier. of the DataIntegrationAssociation resource
+    #
+    # @option params [required, Types::ExecutionConfiguration] :execution_configuration
+    #   The configuration for how the files should be pulled from the source.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_integration_association({
+    #     data_integration_identifier: "Identifier", # required
+    #     data_integration_association_identifier: "Identifier", # required
+    #     execution_configuration: { # required
+    #       execution_mode: "ON_DEMAND", # required, accepts ON_DEMAND, SCHEDULED
+    #       on_demand_configuration: {
+    #         start_time: "NonBlankString", # required
+    #         end_time: "NonBlankString",
+    #       },
+    #       schedule_configuration: {
+    #         first_execution_from: "NonBlankString",
+    #         object: "Object",
+    #         schedule_expression: "NonBlankString", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateDataIntegrationAssociation AWS API Documentation
+    #
+    # @overload update_data_integration_association(params = {})
+    # @param [Hash] params ({})
+    def update_data_integration_association(params = {}, options = {})
+      req = build_request(:update_data_integration_association, params)
+      req.send_request(options)
+    end
+
     # Updates the description of an event integration.
     #
     # @option params [required, String] :name
@@ -1600,7 +1729,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

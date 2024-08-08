@@ -1,0 +1,61 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "endpointPrefix":"restjson",
+    "protocol":"rest-json"
+  },
+  "operations": {
+    "WaiterOperation": {
+      "name": "WaiterOperation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTableInput"},
+      "output":{"shape":"DescribeTableOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ]
+    }
+  },
+  "shapes": {
+    "DescribeTableInput":{
+      "type":"structure",
+      "members":{}
+    },
+    "DescribeTableOutput":{
+      "type":"structure",
+      "members":{
+        "Table":{"shape":"TableDescription"},
+        "TableList":{"shape":"TableList"}
+      }
+    },
+    "TableDescription":{
+      "type":"structure",
+      "members":{
+        "TableStatus":{"shape":"TableStatus"}
+      }
+    },
+    "TableStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "UPDATING",
+        "ACTIVE",
+        "FAILED"
+      ]
+    },
+    "TableList":{
+      "type":"list",
+      "member":{"shape":"TableDescription"}
+    },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
+    "ErrorMessage":{"type":"string"}
+  }
+}

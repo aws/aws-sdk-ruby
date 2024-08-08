@@ -961,6 +961,7 @@ module Aws::Glue
     #
     #   resp.results #=> Array
     #   resp.results[0].result_id #=> String
+    #   resp.results[0].profile_id #=> String
     #   resp.results[0].score #=> Float
     #   resp.results[0].data_source.glue_table.database_name #=> String
     #   resp.results[0].data_source.glue_table.table_name #=> String
@@ -982,6 +983,7 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
     #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].rule_results[0].evaluated_rule #=> String
     #   resp.results[0].analyzer_results #=> Array
     #   resp.results[0].analyzer_results[0].name #=> String
     #   resp.results[0].analyzer_results[0].description #=> String
@@ -991,6 +993,7 @@ module Aws::Glue
     #   resp.results[0].observations #=> Array
     #   resp.results[0].observations[0].description #=> String
     #   resp.results[0].observations[0].metric_based_observation.metric_name #=> String
+    #   resp.results[0].observations[0].metric_based_observation.statistic_id #=> String
     #   resp.results[0].observations[0].metric_based_observation.metric_values.actual_value #=> Float
     #   resp.results[0].observations[0].metric_based_observation.metric_values.expected_value #=> Float
     #   resp.results[0].observations[0].metric_based_observation.metric_values.lower_limit #=> Float
@@ -1280,6 +1283,9 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
@@ -2422,6 +2428,47 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Annotate datapoints over time for a specific data quality statistic.
+    #
+    # @option params [required, Array<Types::DatapointInclusionAnnotation>] :inclusion_annotations
+    #   A list of `DatapointInclusionAnnotation`'s.
+    #
+    # @option params [String] :client_token
+    #   Client Token.
+    #
+    # @return [Types::BatchPutDataQualityStatisticAnnotationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutDataQualityStatisticAnnotationResponse#failed_inclusion_annotations #failed_inclusion_annotations} => Array&lt;Types::AnnotationError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_data_quality_statistic_annotation({
+    #     inclusion_annotations: [ # required
+    #       {
+    #         profile_id: "HashString",
+    #         statistic_id: "HashString",
+    #         inclusion_annotation: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #       },
+    #     ],
+    #     client_token: "HashString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_inclusion_annotations #=> Array
+    #   resp.failed_inclusion_annotations[0].profile_id #=> String
+    #   resp.failed_inclusion_annotations[0].statistic_id #=> String
+    #   resp.failed_inclusion_annotations[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchPutDataQualityStatisticAnnotation AWS API Documentation
+    #
+    # @overload batch_put_data_quality_statistic_annotation(params = {})
+    # @param [Hash] params ({})
+    def batch_put_data_quality_statistic_annotation(params = {}, options = {})
+      req = build_request(:batch_put_data_quality_statistic_annotation, params)
+      req.send_request(options)
+    end
+
     # Stops one or more job runs for a specified job definition.
     #
     # @option params [required, String] :job_name
@@ -2856,7 +2903,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -3165,6 +3212,10 @@ module Aws::Glue
     # @option params [Types::DataQualityTargetTable] :target_table
     #   A target table associated with the data quality ruleset.
     #
+    # @option params [String] :data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #
     # @option params [String] :client_token
     #   Used for idempotency and is recommended to be set to a random ID (such
     #   as a UUID) to avoid creating or starting multiple instances of the
@@ -3188,6 +3239,7 @@ module Aws::Glue
     #       database_name: "NameString", # required
     #       catalog_id: "NameString",
     #     },
+    #     data_quality_security_configuration: "NameString",
     #     client_token: "HashString",
     #   })
     #
@@ -6513,7 +6565,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE", "VIEW_VALIDATION_REDSHIFT", "VIEW_VALIDATION_ATHENA"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -6582,7 +6634,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -6594,7 +6646,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE", "VIEW_VALIDATION_REDSHIFT", "VIEW_VALIDATION_ATHENA"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -6962,6 +7014,85 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieve the training status of the model along with more information
+    # (CompletedOn, StartedOn, FailureReason).
+    #
+    # @option params [String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [required, String] :profile_id
+    #   The Profile ID.
+    #
+    # @return [Types::GetDataQualityModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityModelResponse#status #status} => String
+    #   * {Types::GetDataQualityModelResponse#started_on #started_on} => Time
+    #   * {Types::GetDataQualityModelResponse#completed_on #completed_on} => Time
+    #   * {Types::GetDataQualityModelResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_model({
+    #     statistic_id: "HashString",
+    #     profile_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.started_on #=> Time
+    #   resp.completed_on #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModel AWS API Documentation
+    #
+    # @overload get_data_quality_model(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_model(params = {}, options = {})
+      req = build_request(:get_data_quality_model, params)
+      req.send_request(options)
+    end
+
+    # Retrieve a statistic's predictions for a given Profile ID.
+    #
+    # @option params [required, String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [required, String] :profile_id
+    #   The Profile ID.
+    #
+    # @return [Types::GetDataQualityModelResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityModelResultResponse#completed_on #completed_on} => Time
+    #   * {Types::GetDataQualityModelResultResponse#model #model} => Array&lt;Types::StatisticModelResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_model_result({
+    #     statistic_id: "HashString", # required
+    #     profile_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.completed_on #=> Time
+    #   resp.model #=> Array
+    #   resp.model[0].lower_bound #=> Float
+    #   resp.model[0].upper_bound #=> Float
+    #   resp.model[0].predicted_value #=> Float
+    #   resp.model[0].actual_value #=> Float
+    #   resp.model[0].date #=> Time
+    #   resp.model[0].inclusion_annotation #=> String, one of "INCLUDE", "EXCLUDE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityModelResult AWS API Documentation
+    #
+    # @overload get_data_quality_model_result(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_model_result(params = {}, options = {})
+      req = build_request(:get_data_quality_model_result, params)
+      req.send_request(options)
+    end
+
     # Retrieves the result of a data quality rule evaluation.
     #
     # @option params [required, String] :result_id
@@ -6970,6 +7101,7 @@ module Aws::Glue
     # @return [Types::GetDataQualityResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataQualityResultResponse#result_id #result_id} => String
+    #   * {Types::GetDataQualityResultResponse#profile_id #profile_id} => String
     #   * {Types::GetDataQualityResultResponse#score #score} => Float
     #   * {Types::GetDataQualityResultResponse#data_source #data_source} => Types::DataSource
     #   * {Types::GetDataQualityResultResponse#ruleset_name #ruleset_name} => String
@@ -6992,6 +7124,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.result_id #=> String
+    #   resp.profile_id #=> String
     #   resp.score #=> Float
     #   resp.data_source.glue_table.database_name #=> String
     #   resp.data_source.glue_table.table_name #=> String
@@ -7013,6 +7146,7 @@ module Aws::Glue
     #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.rule_results[0].evaluated_metrics #=> Hash
     #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.rule_results[0].evaluated_rule #=> String
     #   resp.analyzer_results #=> Array
     #   resp.analyzer_results[0].name #=> String
     #   resp.analyzer_results[0].description #=> String
@@ -7022,6 +7156,7 @@ module Aws::Glue
     #   resp.observations #=> Array
     #   resp.observations[0].description #=> String
     #   resp.observations[0].metric_based_observation.metric_name #=> String
+    #   resp.observations[0].metric_based_observation.statistic_id #=> String
     #   resp.observations[0].metric_based_observation.metric_values.actual_value #=> Float
     #   resp.observations[0].metric_based_observation.metric_values.expected_value #=> Float
     #   resp.observations[0].metric_based_observation.metric_values.lower_limit #=> Float
@@ -7058,6 +7193,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#execution_time #execution_time} => Integer
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#recommended_ruleset #recommended_ruleset} => String
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#created_ruleset_name #created_ruleset_name} => String
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#data_quality_security_configuration #data_quality_security_configuration} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7085,6 +7221,7 @@ module Aws::Glue
     #   resp.execution_time #=> Integer
     #   resp.recommended_ruleset #=> String
     #   resp.created_ruleset_name #=> String
+    #   resp.data_quality_security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRun AWS API Documentation
     #
@@ -7109,6 +7246,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRulesetResponse#created_on #created_on} => Time
     #   * {Types::GetDataQualityRulesetResponse#last_modified_on #last_modified_on} => Time
     #   * {Types::GetDataQualityRulesetResponse#recommendation_run_id #recommendation_run_id} => String
+    #   * {Types::GetDataQualityRulesetResponse#data_quality_security_configuration #data_quality_security_configuration} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7127,6 +7265,7 @@ module Aws::Glue
     #   resp.created_on #=> Time
     #   resp.last_modified_on #=> Time
     #   resp.recommendation_run_id #=> String
+    #   resp.data_quality_security_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleset AWS API Documentation
     #
@@ -7710,6 +7849,9 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0][0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
@@ -8825,6 +8967,9 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
@@ -11006,6 +11151,10 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Boolean] :include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTableResponse#table #table} => Types::Table
@@ -11018,6 +11167,7 @@ module Aws::Glue
     #     name: "NameString", # required
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     include_status_details: false,
     #   })
     #
     # @example Response structure
@@ -11101,6 +11251,23 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.status.requested_by #=> String
+    #   resp.table.status.updated_by #=> String
+    #   resp.table.status.request_time #=> Time
+    #   resp.table.status.update_time #=> Time
+    #   resp.table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.error.error_code #=> String
+    #   resp.table.status.error.error_message #=> String
+    #   resp.table.status.details.requested_change #=> Types::Table
+    #   resp.table.status.details.view_validations #=> Array
+    #   resp.table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table.status.details.view_validations[0].error.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -11280,6 +11447,23 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_version.table.is_multi_dialect_view #=> Boolean
+    #   resp.table_version.table.status.requested_by #=> String
+    #   resp.table_version.table.status.updated_by #=> String
+    #   resp.table_version.table.status.request_time #=> Time
+    #   resp.table_version.table.status.update_time #=> Time
+    #   resp.table_version.table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_version.table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_version.table.status.error.error_code #=> String
+    #   resp.table_version.table.status.error.error_message #=> String
+    #   resp.table_version.table.status.details.requested_change #=> Types::Table
+    #   resp.table_version.table.status.details.view_validations #=> Array
+    #   resp.table_version.table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_version.table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_version.table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_version.table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table_version.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_version.table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_version.table.status.details.view_validations[0].error.error_message #=> String
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -11411,6 +11595,23 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
+    #   resp.table_versions[0].table.status.requested_by #=> String
+    #   resp.table_versions[0].table.status.updated_by #=> String
+    #   resp.table_versions[0].table.status.request_time #=> Time
+    #   resp.table_versions[0].table.status.update_time #=> Time
+    #   resp.table_versions[0].table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_versions[0].table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_versions[0].table.status.error.error_code #=> String
+    #   resp.table_versions[0].table.status.error.error_message #=> String
+    #   resp.table_versions[0].table.status.details.requested_change #=> Types::Table
+    #   resp.table_versions[0].table.status.details.view_validations #=> Array
+    #   resp.table_versions[0].table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_versions[0].table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_versions[0].table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_versions[0].table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table_versions[0].table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_versions[0].table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_versions[0].table.status.details.view_validations[0].error.error_message #=> String
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -11452,6 +11653,10 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Boolean] :include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #
     # @return [Types::GetTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
@@ -11469,6 +11674,7 @@ module Aws::Glue
     #     max_results: 1,
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     include_status_details: false,
     #   })
     #
     # @example Response structure
@@ -11553,6 +11759,23 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].status.requested_by #=> String
+    #   resp.table_list[0].status.updated_by #=> String
+    #   resp.table_list[0].status.request_time #=> Time
+    #   resp.table_list[0].status.update_time #=> Time
+    #   resp.table_list[0].status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_list[0].status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.error.error_code #=> String
+    #   resp.table_list[0].status.error.error_message #=> String
+    #   resp.table_list[0].status.details.requested_change #=> Types::Table
+    #   resp.table_list[0].status.details.view_validations #=> Array
+    #   resp.table_list[0].status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_list[0].status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_list[0].status.details.view_validations[0].update_time #=> Time
+    #   resp.table_list[0].status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_list[0].status.details.view_validations[0].error.error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -12272,6 +12495,23 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.status.requested_by #=> String
+    #   resp.table.status.updated_by #=> String
+    #   resp.table.status.request_time #=> Time
+    #   resp.table.status.update_time #=> Time
+    #   resp.table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.error.error_code #=> String
+    #   resp.table.status.error.error_message #=> String
+    #   resp.table.status.details.requested_change #=> Types::Table
+    #   resp.table.status.details.view_validations #=> Array
+    #   resp.table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table.status.details.view_validations[0].error.error_message #=> String
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -13476,6 +13716,125 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieve annotations for a data quality statistic.
+    #
+    # @option params [String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [String] :profile_id
+    #   The Profile ID.
+    #
+    # @option params [Types::TimestampFilter] :timestamp_filter
+    #   A timestamp filter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to retrieve the next set of results.
+    #
+    # @return [Types::ListDataQualityStatisticAnnotationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityStatisticAnnotationsResponse#annotations #annotations} => Array&lt;Types::StatisticAnnotation&gt;
+    #   * {Types::ListDataQualityStatisticAnnotationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_statistic_annotations({
+    #     statistic_id: "HashString",
+    #     profile_id: "HashString",
+    #     timestamp_filter: {
+    #       recorded_before: Time.now,
+    #       recorded_after: Time.now,
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.annotations #=> Array
+    #   resp.annotations[0].profile_id #=> String
+    #   resp.annotations[0].statistic_id #=> String
+    #   resp.annotations[0].statistic_recorded_on #=> Time
+    #   resp.annotations[0].inclusion_annotation.value #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.annotations[0].inclusion_annotation.last_modified_on #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatisticAnnotations AWS API Documentation
+    #
+    # @overload list_data_quality_statistic_annotations(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_statistic_annotations(params = {}, options = {})
+      req = build_request(:list_data_quality_statistic_annotations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of data quality statistics.
+    #
+    # @option params [String] :statistic_id
+    #   The Statistic ID.
+    #
+    # @option params [String] :profile_id
+    #   The Profile ID.
+    #
+    # @option params [Types::TimestampFilter] :timestamp_filter
+    #   A timestamp filter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results.
+    #
+    # @return [Types::ListDataQualityStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityStatisticsResponse#statistics #statistics} => Array&lt;Types::StatisticSummary&gt;
+    #   * {Types::ListDataQualityStatisticsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_statistics({
+    #     statistic_id: "HashString",
+    #     profile_id: "HashString",
+    #     timestamp_filter: {
+    #       recorded_before: Time.now,
+    #       recorded_after: Time.now,
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statistics #=> Array
+    #   resp.statistics[0].statistic_id #=> String
+    #   resp.statistics[0].profile_id #=> String
+    #   resp.statistics[0].run_identifier.run_id #=> String
+    #   resp.statistics[0].run_identifier.job_run_id #=> String
+    #   resp.statistics[0].statistic_name #=> String
+    #   resp.statistics[0].double_value #=> Float
+    #   resp.statistics[0].evaluation_level #=> String, one of "Dataset", "Column", "Multicolumn"
+    #   resp.statistics[0].columns_referenced #=> Array
+    #   resp.statistics[0].columns_referenced[0] #=> String
+    #   resp.statistics[0].referenced_datasets #=> Array
+    #   resp.statistics[0].referenced_datasets[0] #=> String
+    #   resp.statistics[0].statistic_properties #=> Hash
+    #   resp.statistics[0].statistic_properties["NameString"] #=> String
+    #   resp.statistics[0].recorded_on #=> Time
+    #   resp.statistics[0].inclusion_annotation.value #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.statistics[0].inclusion_annotation.last_modified_on #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityStatistics AWS API Documentation
+    #
+    # @overload list_data_quality_statistics(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_statistics(params = {}, options = {})
+      req = build_request(:list_data_quality_statistics, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all `DevEndpoint` resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -14183,6 +14542,32 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Annotate all datapoints for a Profile.
+    #
+    # @option params [required, String] :profile_id
+    #   The ID of the data quality monitoring profile to annotate.
+    #
+    # @option params [required, String] :inclusion_annotation
+    #   The inclusion annotation value to apply to the profile.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_quality_profile_annotation({
+    #     profile_id: "HashString", # required
+    #     inclusion_annotation: "INCLUDE", # required, accepts INCLUDE, EXCLUDE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataQualityProfileAnnotation AWS API Documentation
+    #
+    # @overload put_data_quality_profile_annotation(params = {})
+    # @param [Hash] params ({})
+    def put_data_quality_profile_annotation(params = {}, options = {})
+      req = build_request(:put_data_quality_profile_annotation, params)
+      req.send_request(options)
+    end
+
     # Sets the Data Catalog resource policy for access control.
     #
     # @option params [required, String] :policy_in_json
@@ -14732,6 +15117,10 @@ module Aws::Glue
     #   * If set to `ALL`, will search the tables shared with your account, as
     #     well as the tables in yor local account.
     #
+    # @option params [Boolean] :include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #
     # @return [Types::SearchTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchTablesResponse#next_token #next_token} => String
@@ -14760,6 +15149,7 @@ module Aws::Glue
     #     ],
     #     max_results: 1,
     #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL, FEDERATED
+    #     include_status_details: false,
     #   })
     #
     # @example Response structure
@@ -14845,6 +15235,23 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].status.requested_by #=> String
+    #   resp.table_list[0].status.updated_by #=> String
+    #   resp.table_list[0].status.request_time #=> Time
+    #   resp.table_list[0].status.update_time #=> Time
+    #   resp.table_list[0].status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_list[0].status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.error.error_code #=> String
+    #   resp.table_list[0].status.error.error_message #=> String
+    #   resp.table_list[0].status.details.requested_change #=> Types::Table
+    #   resp.table_list[0].status.details.view_validations #=> Array
+    #   resp.table_list[0].status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_list[0].status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_list[0].status.details.view_validations[0].update_time #=> Time
+    #   resp.table_list[0].status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_list[0].status.details.view_validations[0].error.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -15025,6 +15432,10 @@ module Aws::Glue
     # @option params [String] :created_ruleset_name
     #   A name for the ruleset.
     #
+    # @option params [String] :data_quality_security_configuration
+    #   The name of the security configuration created with the data quality
+    #   encryption option.
+    #
     # @option params [String] :client_token
     #   Used for idempotency and is recommended to be set to a random ID (such
     #   as a UUID) to avoid creating or starting multiple instances of the
@@ -15052,6 +15463,7 @@ module Aws::Glue
     #     number_of_workers: 1,
     #     timeout: 1,
     #     created_ruleset_name: "NameString",
+    #     data_quality_security_configuration: "NameString",
     #     client_token: "HashString",
     #   })
     #
@@ -16229,7 +16641,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -17592,7 +18004,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.186.0'
+      context[:gem_version] = '1.188.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

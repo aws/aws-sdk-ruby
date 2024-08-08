@@ -1961,6 +1961,28 @@ module Aws::CognitoIdentityProvider
     #
     class AdminUserGlobalSignOutResponse < Aws::EmptyStructure; end
 
+    # Advanced security configuration options for additional authentication
+    # types in your user pool, including custom authentication and
+    # refresh-token authentication.
+    #
+    # @!attribute [rw] custom_auth_mode
+    #   The operating mode of advanced security features in custom
+    #   authentication with [ Custom authentication challenge Lambda
+    #   triggers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdvancedSecurityAdditionalFlowsType AWS API Documentation
+    #
+    class AdvancedSecurityAdditionalFlowsType < Struct.new(
+      :custom_auth_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when a user tries to confirm the account with
     # an email address or phone number that has already been supplied as an
     # alias for a different user profile. This exception indicates that an
@@ -9838,13 +9860,22 @@ module Aws::CognitoIdentityProvider
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #
     # @!attribute [rw] advanced_security_mode
-    #   The operating mode of advanced security features in your user pool.
+    #   The operating mode of advanced security features for standard
+    #   authentication types in your user pool, including username-password
+    #   and secure remote password (SRP) authentication.
     #   @return [String]
+    #
+    # @!attribute [rw] advanced_security_additional_flows
+    #   Advanced security configuration options for additional
+    #   authentication types in your user pool, including custom
+    #   authentication and refresh-token authentication.
+    #   @return [Types::AdvancedSecurityAdditionalFlowsType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolAddOnsType AWS API Documentation
     #
     class UserPoolAddOnsType < Struct.new(
-      :advanced_security_mode)
+      :advanced_security_mode,
+      :advanced_security_additional_flows)
       SENSITIVE = []
       include Aws::Structure
     end
