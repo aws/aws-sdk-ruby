@@ -199,7 +199,7 @@ module Aws
 end
 
 # Autoload bundled service gems used in credential providers
-# need to ensure that the files are the local files from aw-sdk-core
+# need to ensure that the files are the local files from aws-sdk-core
 # and not the installed, legacy/dummy service gems.
 
 # aws-sdk-sts is included to support Aws::AssumeRoleCredentials

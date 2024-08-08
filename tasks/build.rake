@@ -69,7 +69,6 @@ end
 # Only building source, but not gemspecs, version file, etc.
 task 'build:aws-sdk-ssooidc' do
   Aws::SSOOIDC if Aws.autoload?(:SSOOIDC) # force autoload from core
-
   ssooidc = BuildTools::Services.service('ssooidc')
   generator = AwsSdkCodeGenerator::CodeBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,
