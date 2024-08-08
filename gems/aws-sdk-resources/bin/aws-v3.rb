@@ -106,7 +106,8 @@ $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 # The Aws namespace used to check autoload requires aws-sdk-resources.
 require 'aws-sdk-resources'
 
-# Finally load all of the gems. Core is loaded a second time because of STS.
+# Finally load all of the gems.
+# Don't update the load path for gems bundled in core.
 core_gems = [:STS, :SSO, :SSOOIDC]
 if File.directory?(File.expand_path('../../../../build_tools', __FILE__))
   gems = []

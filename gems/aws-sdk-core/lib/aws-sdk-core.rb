@@ -200,7 +200,7 @@ end
 
 # Autoload bundled service gems used in credential providers
 # need to ensure that the files are the local files from aw-sdk-core
-# and not the install, legacy/dummy service gems.
+# and not the installed, legacy/dummy service gems.
 
 # aws-sdk-sts is included to support Aws::AssumeRoleCredentials
 Aws.autoload :STS, File.join(__dir__, 'aws-sdk-sts.rb')

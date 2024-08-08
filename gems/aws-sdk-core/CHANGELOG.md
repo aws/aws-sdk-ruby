@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Reduce initial memory usage by auto-loading bundled gems (STS, SSO, SSOOIDC).
+* Issue - Reduce initial memory usage by auto-loading bundled gems (STS, SSO, SSOOIDC).
 
 3.201.3 (2024-07-23)
 ------------------
