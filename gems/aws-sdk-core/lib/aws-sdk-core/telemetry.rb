@@ -9,18 +9,24 @@ require_relative 'telemetry/span_status'
 module Aws
   # TODO
   module Telemetry
-    # @api private
-    def self.otel_loaded?
-      if @use_otel.nil?
-        @use_otel =
-          begin
-            require 'opentelemetry-sdk'
-            true
-          rescue LoadError, NameError
-            false
-          end
+    class << self
+      def module_to_tracer_name(module_name)
+        "#{module_name.gsub('::', '.')}.client"
       end
-      @use_otel
+
+      # @api private
+      def otel_loaded?
+        if @use_otel.nil?
+          @use_otel =
+            begin
+              require 'opentelemetry-sdk'
+              true
+            rescue LoadError, NameError
+              false
+            end
+        end
+        @use_otel
+      end
     end
   end
 end
