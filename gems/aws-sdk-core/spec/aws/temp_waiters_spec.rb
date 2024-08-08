@@ -13,6 +13,14 @@ module Aws
 
       let(:client) { WaiterTest::Client.new(stub_responses: true) }
 
+      let(:setup_stub_resp) do
+        client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+      end
+
+      let(:setup_stub_resp_error) do
+        client.stub_responses(:waiter_operation, 'ResourceNotFoundException')
+      end
+
       describe 'unknown waiters' do
         it 'raises an error when attempting to wait for an unknown state' do
           expect do
@@ -65,7 +73,7 @@ module Aws
         end
 
         it 'triggers callbacks before sending and before waiting' do
-          client.stub_responses(:waiter_operation, 'ResourceNotFoundException')
+          setup_stub_resp_error
           yielded = []
           expect do
             client.wait_until(:generic_waiter) do |w|
@@ -89,19 +97,19 @@ module Aws
         end
 
         it 'returns when successful' do
-          client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+          setup_stub_resp
           expect { client.wait_until(:generic_waiter) }
             .not_to raise_error
         end
 
         it 'returns the client response' do
-          client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+          setup_stub_resp
           resp = client.wait_until(:generic_waiter)
           expect(resp.table.table_status).to eq('ACTIVE')
         end
 
         it 'raises an error when failed' do
-          client.stub_responses(:waiter_operation, 'ResourceNotFoundException')
+          setup_stub_resp_error
           expect do
             client.wait_until(:generic_waiter, {}, delay: 0)
           end.to raise_error(Errors::WaiterFailed)
@@ -207,7 +215,7 @@ module Aws
         describe 'error matcher' do
           context 'expected is an error code' do
             it 'succeeds when matched' do
-              client.stub_responses(:waiter_operation, 'ResourceNotFoundException')
+              setup_stub_resp_error
               expect { client.wait_until(:error_matcher_with_error_code) }
                 .not_to raise_error
             end
@@ -238,7 +246,7 @@ module Aws
             end
 
             it 'fails when matched' do
-              client.stub_responses(:waiter_operation, table: { table_status: 'ACTIVE' })
+              setup_stub_resp
               expect { client.wait_until(:error_matcher_with_false_fails) }
                 .to raise_error(Errors::WaiterFailed)
             end
