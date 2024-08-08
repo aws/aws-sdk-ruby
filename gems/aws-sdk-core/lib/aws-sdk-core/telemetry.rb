@@ -7,7 +7,7 @@ require_relative 'telemetry/span_kind'
 require_relative 'telemetry/span_status'
 
 module Aws
-  # TBD
+  # TODO
   module Telemetry
     # @api private
     def self.otel_loaded?
