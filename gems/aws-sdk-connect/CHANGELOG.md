@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2024-08-08)
+------------------
+
+* Feature - This release fixes a regression in number of access control tags that are allowed to be added to a security profile in Amazon Connect. You can now add up to four access control tags on a single security profile.
+
 1.169.0 (2024-07-23)
 ------------------
 

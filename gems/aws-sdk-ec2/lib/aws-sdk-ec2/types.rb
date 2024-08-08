@@ -8809,6 +8809,11 @@ module Aws::EC2
     #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [String]
     #
+    # @!attribute [rw] enable_private_gua
+    #   Enable this option to use your own GUA ranges as private IPv6
+    #   addresses. This option is disabled by default.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamRequest AWS API Documentation
     #
     class CreateIpamRequest < Struct.new(
@@ -8817,7 +8822,8 @@ module Aws::EC2
       :operating_regions,
       :tag_specifications,
       :client_token,
-      :tier)
+      :tier,
+      :enable_private_gua)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42610,6 +42616,11 @@ module Aws::EC2
     #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [String]
     #
+    # @!attribute [rw] enable_private_gua
+    #   Enable this option to use your own GUA ranges as private IPv6
+    #   addresses. This option is disabled by default.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipam AWS API Documentation
     #
     class Ipam < Struct.new(
@@ -42628,7 +42639,8 @@ module Aws::EC2
       :default_resource_discovery_association_id,
       :resource_discovery_association_count,
       :state_message,
-      :tier)
+      :tier,
+      :enable_private_gua)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42924,6 +42936,13 @@ module Aws::EC2
     #   The resource CIDR.
     #   @return [String]
     #
+    # @!attribute [rw] ip_source
+    #   The source that allocated the IP address space. `byoip` or `amazon`
+    #   indicates public IP address space allocated by Amazon or space that
+    #   you have allocated with Bring your own IP (BYOIP). `none` indicates
+    #   private space.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The resource type.
     #   @return [String]
@@ -42976,6 +42995,7 @@ module Aws::EC2
       :resource_id,
       :resource_owner_id,
       :resource_cidr,
+      :ip_source,
       :resource_type,
       :resource_tags,
       :ip_usage,
@@ -48990,6 +49010,11 @@ module Aws::EC2
     #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [String]
     #
+    # @!attribute [rw] enable_private_gua
+    #   Enable this option to use your own GUA ranges as private IPv6
+    #   addresses. This option is disabled by default.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamRequest AWS API Documentation
     #
     class ModifyIpamRequest < Struct.new(
@@ -48998,7 +49023,8 @@ module Aws::EC2
       :description,
       :add_operating_regions,
       :remove_operating_regions,
-      :tier)
+      :tier,
+      :enable_private_gua)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55002,7 +55028,8 @@ module Aws::EC2
     #
     # @!attribute [rw] netmask_length
     #   The netmask length of the CIDR you would like to allocate to the
-    #   public IPv4 pool.
+    #   public IPv4 pool. The least specific netmask length you can define
+    #   is 24.
     #   @return [Integer]
     #
     # @!attribute [rw] network_border_group
@@ -64088,12 +64115,27 @@ module Aws::EC2
     #   The state of the CIDR block.
     #   @return [Types::SubnetCidrBlockState]
     #
+    # @!attribute [rw] ipv_6_address_attribute
+    #   Public IPv6 addresses are those advertised on the internet from
+    #   Amazon Web Services. Private IP addresses are not and cannot be
+    #   advertised on the internet from Amazon Web Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_source
+    #   The source that allocated the IP address space. `byoip` or `amazon`
+    #   indicates public IP address space allocated by Amazon or space that
+    #   you have allocated with Bring your own IP (BYOIP). `none` indicates
+    #   private space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetIpv6CidrBlockAssociation AWS API Documentation
     #
     class SubnetIpv6CidrBlockAssociation < Struct.new(
       :association_id,
       :ipv_6_cidr_block,
-      :ipv_6_cidr_block_state)
+      :ipv_6_cidr_block_state,
+      :ipv_6_address_attribute,
+      :ip_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -68826,6 +68868,19 @@ module Aws::EC2
     #   allocated.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_address_attribute
+    #   Public IPv6 addresses are those advertised on the internet from
+    #   Amazon Web Services. Private IP addresses are not and cannot be
+    #   advertised on the internet from Amazon Web Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_source
+    #   The source that allocated the IP address space. `byoip` or `amazon`
+    #   indicates public IP address space allocated by Amazon or space that
+    #   you have allocated with Bring your own IP (BYOIP). `none` indicates
+    #   private space.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcIpv6CidrBlockAssociation AWS API Documentation
     #
     class VpcIpv6CidrBlockAssociation < Struct.new(
@@ -68833,7 +68888,9 @@ module Aws::EC2
       :ipv_6_cidr_block,
       :ipv_6_cidr_block_state,
       :network_border_group,
-      :ipv_6_pool)
+      :ipv_6_pool,
+      :ipv_6_address_attribute,
+      :ip_source)
       SENSITIVE = []
       include Aws::Structure
     end

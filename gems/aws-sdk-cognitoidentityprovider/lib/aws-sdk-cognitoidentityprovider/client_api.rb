@@ -73,6 +73,8 @@ module Aws::CognitoIdentityProvider
     AdminUpdateUserAttributesResponse = Shapes::StructureShape.new(name: 'AdminUpdateUserAttributesResponse')
     AdminUserGlobalSignOutRequest = Shapes::StructureShape.new(name: 'AdminUserGlobalSignOutRequest')
     AdminUserGlobalSignOutResponse = Shapes::StructureShape.new(name: 'AdminUserGlobalSignOutResponse')
+    AdvancedSecurityAdditionalFlowsType = Shapes::StructureShape.new(name: 'AdvancedSecurityAdditionalFlowsType')
+    AdvancedSecurityEnabledModeType = Shapes::StringShape.new(name: 'AdvancedSecurityEnabledModeType')
     AdvancedSecurityModeType = Shapes::StringShape.new(name: 'AdvancedSecurityModeType')
     AliasAttributeType = Shapes::StringShape.new(name: 'AliasAttributeType')
     AliasAttributesListType = Shapes::ListShape.new(name: 'AliasAttributesListType')
@@ -739,6 +741,9 @@ module Aws::CognitoIdentityProvider
     AdminUserGlobalSignOutRequest.struct_class = Types::AdminUserGlobalSignOutRequest
 
     AdminUserGlobalSignOutResponse.struct_class = Types::AdminUserGlobalSignOutResponse
+
+    AdvancedSecurityAdditionalFlowsType.add_member(:custom_auth_mode, Shapes::ShapeRef.new(shape: AdvancedSecurityEnabledModeType, location_name: "CustomAuthMode"))
+    AdvancedSecurityAdditionalFlowsType.struct_class = Types::AdvancedSecurityAdditionalFlowsType
 
     AliasAttributesListType.member = Shapes::ShapeRef.new(shape: AliasAttributeType)
 
@@ -1932,6 +1937,7 @@ module Aws::CognitoIdentityProvider
     UserPoolAddOnNotEnabledException.struct_class = Types::UserPoolAddOnNotEnabledException
 
     UserPoolAddOnsType.add_member(:advanced_security_mode, Shapes::ShapeRef.new(shape: AdvancedSecurityModeType, required: true, location_name: "AdvancedSecurityMode"))
+    UserPoolAddOnsType.add_member(:advanced_security_additional_flows, Shapes::ShapeRef.new(shape: AdvancedSecurityAdditionalFlowsType, location_name: "AdvancedSecurityAdditionalFlows"))
     UserPoolAddOnsType.struct_class = Types::UserPoolAddOnsType
 
     UserPoolClientDescription.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))

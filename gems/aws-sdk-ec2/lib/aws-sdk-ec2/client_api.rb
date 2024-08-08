@@ -1800,6 +1800,7 @@ module Aws::EC2
     IpRange = Shapes::StructureShape.new(name: 'IpRange')
     IpRangeList = Shapes::ListShape.new(name: 'IpRangeList')
     IpRanges = Shapes::ListShape.new(name: 'IpRanges')
+    IpSource = Shapes::StringShape.new(name: 'IpSource')
     Ipam = Shapes::StructureShape.new(name: 'Ipam')
     IpamAddressHistoryMaxResults = Shapes::IntegerShape.new(name: 'IpamAddressHistoryMaxResults')
     IpamAddressHistoryRecord = Shapes::StructureShape.new(name: 'IpamAddressHistoryRecord')
@@ -1858,6 +1859,7 @@ module Aws::EC2
     IpamPublicAddressTags = Shapes::StructureShape.new(name: 'IpamPublicAddressTags')
     IpamPublicAddressType = Shapes::StringShape.new(name: 'IpamPublicAddressType')
     IpamResourceCidr = Shapes::StructureShape.new(name: 'IpamResourceCidr')
+    IpamResourceCidrIpSource = Shapes::StringShape.new(name: 'IpamResourceCidrIpSource')
     IpamResourceCidrSet = Shapes::ListShape.new(name: 'IpamResourceCidrSet')
     IpamResourceDiscovery = Shapes::StructureShape.new(name: 'IpamResourceDiscovery')
     IpamResourceDiscoveryAssociation = Shapes::StructureShape.new(name: 'IpamResourceDiscoveryAssociation')
@@ -1887,6 +1889,7 @@ module Aws::EC2
     Ipv4PrefixSpecificationResponse = Shapes::StructureShape.new(name: 'Ipv4PrefixSpecificationResponse')
     Ipv4PrefixesList = Shapes::ListShape.new(name: 'Ipv4PrefixesList')
     Ipv6Address = Shapes::StringShape.new(name: 'Ipv6Address')
+    Ipv6AddressAttribute = Shapes::StringShape.new(name: 'Ipv6AddressAttribute')
     Ipv6AddressList = Shapes::ListShape.new(name: 'Ipv6AddressList')
     Ipv6CidrAssociation = Shapes::StructureShape.new(name: 'Ipv6CidrAssociation')
     Ipv6CidrAssociationSet = Shapes::ListShape.new(name: 'Ipv6CidrAssociationSet')
@@ -4833,6 +4836,7 @@ module Aws::EC2
     CreateIpamRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateIpamRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateIpamRequest.add_member(:tier, Shapes::ShapeRef.new(shape: IpamTier, location_name: "Tier"))
+    CreateIpamRequest.add_member(:enable_private_gua, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrivateGua"))
     CreateIpamRequest.struct_class = Types::CreateIpamRequest
 
     CreateIpamResourceDiscoveryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -10519,6 +10523,7 @@ module Aws::EC2
     Ipam.add_member(:resource_discovery_association_count, Shapes::ShapeRef.new(shape: Integer, location_name: "resourceDiscoveryAssociationCount"))
     Ipam.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
     Ipam.add_member(:tier, Shapes::ShapeRef.new(shape: IpamTier, location_name: "tier"))
+    Ipam.add_member(:enable_private_gua, Shapes::ShapeRef.new(shape: Boolean, location_name: "enablePrivateGua"))
     Ipam.struct_class = Types::Ipam
 
     IpamAddressHistoryRecord.add_member(:resource_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwnerId"))
@@ -10577,6 +10582,7 @@ module Aws::EC2
     IpamDiscoveredResourceCidr.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     IpamDiscoveredResourceCidr.add_member(:resource_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwnerId"))
     IpamDiscoveredResourceCidr.add_member(:resource_cidr, Shapes::ShapeRef.new(shape: String, location_name: "resourceCidr"))
+    IpamDiscoveredResourceCidr.add_member(:ip_source, Shapes::ShapeRef.new(shape: IpamResourceCidrIpSource, location_name: "ipSource"))
     IpamDiscoveredResourceCidr.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamResourceType, location_name: "resourceType"))
     IpamDiscoveredResourceCidr.add_member(:resource_tags, Shapes::ShapeRef.new(shape: IpamResourceTagList, location_name: "resourceTagSet"))
     IpamDiscoveredResourceCidr.add_member(:ip_usage, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "ipUsage"))
@@ -11685,6 +11691,7 @@ module Aws::EC2
     ModifyIpamRequest.add_member(:add_operating_regions, Shapes::ShapeRef.new(shape: AddIpamOperatingRegionSet, location_name: "AddOperatingRegion"))
     ModifyIpamRequest.add_member(:remove_operating_regions, Shapes::ShapeRef.new(shape: RemoveIpamOperatingRegionSet, location_name: "RemoveOperatingRegion"))
     ModifyIpamRequest.add_member(:tier, Shapes::ShapeRef.new(shape: IpamTier, location_name: "Tier"))
+    ModifyIpamRequest.add_member(:enable_private_gua, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrivateGua"))
     ModifyIpamRequest.struct_class = Types::ModifyIpamRequest
 
     ModifyIpamResourceCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -14512,6 +14519,8 @@ module Aws::EC2
     SubnetIpv6CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: SubnetCidrAssociationId, location_name: "associationId"))
     SubnetIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
     SubnetIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block_state, Shapes::ShapeRef.new(shape: SubnetCidrBlockState, location_name: "ipv6CidrBlockState"))
+    SubnetIpv6CidrBlockAssociation.add_member(:ipv_6_address_attribute, Shapes::ShapeRef.new(shape: Ipv6AddressAttribute, location_name: "ipv6AddressAttribute"))
+    SubnetIpv6CidrBlockAssociation.add_member(:ip_source, Shapes::ShapeRef.new(shape: IpSource, location_name: "ipSource"))
     SubnetIpv6CidrBlockAssociation.struct_class = Types::SubnetIpv6CidrBlockAssociation
 
     SubnetIpv6CidrBlockAssociationSet.member = Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "item")
@@ -15639,6 +15648,8 @@ module Aws::EC2
     VpcIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block_state, Shapes::ShapeRef.new(shape: VpcCidrBlockState, location_name: "ipv6CidrBlockState"))
     VpcIpv6CidrBlockAssociation.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "networkBorderGroup"))
     VpcIpv6CidrBlockAssociation.add_member(:ipv_6_pool, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Pool"))
+    VpcIpv6CidrBlockAssociation.add_member(:ipv_6_address_attribute, Shapes::ShapeRef.new(shape: Ipv6AddressAttribute, location_name: "ipv6AddressAttribute"))
+    VpcIpv6CidrBlockAssociation.add_member(:ip_source, Shapes::ShapeRef.new(shape: IpSource, location_name: "ipSource"))
     VpcIpv6CidrBlockAssociation.struct_class = Types::VpcIpv6CidrBlockAssociation
 
     VpcIpv6CidrBlockAssociationSet.member = Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociation, location_name: "item")

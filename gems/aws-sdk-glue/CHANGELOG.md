@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.188.0 (2024-08-08)
+------------------
+
+* Feature - This release adds support to retrieve the validation status when creating or updating Glue Data Catalog Views. Also added is support for BasicCatalogTarget partition keys.
+
 1.187.0 (2024-08-07)
 ------------------
 
