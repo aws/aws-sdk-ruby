@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2024-08-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - CodeStar has been removed from the SDK because it has been discontinued.
 
 1.58.0 (2024-07-18)
