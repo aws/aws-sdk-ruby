@@ -314,13 +314,7 @@ module ProtocolTestsHelper
         expected_data =
           if error_case?(test_case)
             error_shape = http_resp.context.operation.errors.find do |err|
-              shape =
-                if err.shape['error']
-                  err.shape['error']['code']
-                else
-                  err.shape.name
-                end
-              shape == test_case['errorCode']
+              err.shape.name == test_case['errorCode']
             end
             raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
 
