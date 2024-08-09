@@ -11,5 +11,14 @@
         "engines": ["nokogiri"]
       }
     }
+  },
+  "query": {
+    "input": {},
+    "output": {
+      "QueryCustomizedError": {
+        "description": "Under investigation",
+        "engines": ["ox", "nokogiri", "rexml", "libxml", "oga"]
+      }
+    }
   }
 }
