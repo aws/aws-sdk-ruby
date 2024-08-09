@@ -7,13 +7,13 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-if Aws.autoload?(:STS)
-  Aws.autoload(:STS, __FILE__)
-end
-
 unless Module.const_defined?(:Aws)
   require 'aws-sdk-core'
   require 'aws-sigv4'
+end
+
+if !defined?(JRUBY_VERSION) && Aws.autoload?(:STS)
+  Aws.autoload(:STS, __FILE__)
 end
 
 require_relative 'aws-sdk-sts/types'
