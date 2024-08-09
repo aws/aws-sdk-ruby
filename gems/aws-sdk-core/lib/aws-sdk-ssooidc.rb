@@ -7,6 +7,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+if Aws.autoload?(:SSOOIDC)
+  Aws.autoload(:SSOOIDC, __FILE__)
+end
 
 unless Module.const_defined?(:Aws)
   require 'aws-sdk-core'

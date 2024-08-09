@@ -7,6 +7,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+if Aws.autoload?(:SSO)
+  Aws.autoload(:SSO, __FILE__)
+end
 
 unless Module.const_defined?(:Aws)
   require 'aws-sdk-core'
