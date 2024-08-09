@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - CodeStar has been removed from the SDK because it has been discontinued.
+
 1.58.0 (2024-07-18)
 ------------------
 
