@@ -12,9 +12,7 @@ unless Module.const_defined?(:Aws)
   require 'aws-sigv4'
 end
 
-if Aws.autoload?(:SSO)
-  puts "Current autoload: \t#{Aws.autoload?(:SSO)}"
-  puts "And FILE: #{__FILE__}"
+if !defined?(JRUBY_VERSION) && Aws.autoload?(:SSO)
   Aws.autoload(:SSO, __FILE__)
 end
 
