@@ -2037,19 +2037,28 @@ module Aws::SSM
     #   The action for Patch Manager to take on patches included in the
     #   `RejectedPackages` list.
     #
-    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>: A package in the
-    #     `Rejected` patches list is installed only if it is a dependency of
-    #     another package. It is considered compliant with the patch baseline,
-    #     and its status is reported as `InstalledOther`. This is the default
-    #     action if no option is specified.
+    #   ALLOW\_AS\_DEPENDENCY
     #
-    #   * **BLOCK**: Packages in the **Rejected patches** list, and packages
+    #   : **Linux and macOS**: A package in the rejected patches list is
+    #     installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as `INSTALLED_OTHER`. This is the default action if no
+    #     option is specified.
+    #
+    #     **Windows Server**: Windows Server doesn't support the concept of
+    #     package dependencies. If a package in the rejected patches list and
+    #     already installed on the node, its status is reported as
+    #     `INSTALLED_OTHER`. Any package not already installed on the node is
+    #     skipped. This is the default action if no option is specified.
+    #
+    #   BLOCK
+    #
+    #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
     #     Manager under any circumstances. If a package was installed before
-    #     it was added to the **Rejected patches** list, or is installed
-    #     outside of Patch Manager afterward, it's considered noncompliant
-    #     with the patch baseline and its status is reported as
-    #     *InstalledRejected*.
+    #     it was added to the rejected patches list, or is installed outside
+    #     of Patch Manager afterward, it's considered noncompliant with the
+    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -3893,9 +3902,10 @@ module Aws::SSM
     # information for all your managed nodes. If you specify a node ID that
     # isn't valid or a node that you don't own, you receive an error.
     #
-    # <note markdown="1"> The `IamRole` field returned for this API operation is the Identity
-    # and Access Management (IAM) role assigned to on-premises managed
-    # nodes. This operation does not return the IAM role for EC2 instances.
+    # <note markdown="1"> The `IamRole` field returned for this API operation is the role
+    # assigned to an Amazon EC2 instance configured with a Systems Manager
+    # Quick Setup host management configuration or the role assigned to an
+    # on-premises managed node.
     #
     #  </note>
     #
@@ -5373,6 +5383,10 @@ module Aws::SSM
     #
     # : Valid properties: `PRODUCT` \| `CLASSIFICATION` \| `SEVERITY`
     #
+    # AMAZON\_LINUX\_2023
+    #
+    # : Valid properties: `PRODUCT` \| `CLASSIFICATION` \| `SEVERITY`
+    #
     # CENTOS
     #
     # : Valid properties: `PRODUCT` \| `CLASSIFICATION` \| `SEVERITY`
@@ -5796,7 +5810,12 @@ module Aws::SSM
     end
 
     # Returns detailed information about command execution for an invocation
-    # or plugin.
+    # or plugin. The Run Command API follows an eventual consistency model,
+    # due to the distributed nature of the system supporting the API. This
+    # means that the result of an API command you run that affects your
+    # resources might not be immediately visible to all subsequent commands
+    # you run. You should keep this in mind when you carry out an API
+    # command that immediately follows a previous API command.
     #
     # `GetCommandInvocation` only gives the execution status of a plugin in
     # a document. To get the command execution status on a specific managed
@@ -12280,19 +12299,28 @@ module Aws::SSM
     #   The action for Patch Manager to take on patches included in the
     #   `RejectedPackages` list.
     #
-    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>: A package in the
-    #     `Rejected` patches list is installed only if it is a dependency of
-    #     another package. It is considered compliant with the patch baseline,
-    #     and its status is reported as `InstalledOther`. This is the default
-    #     action if no option is specified.
+    #   ALLOW\_AS\_DEPENDENCY
     #
-    #   * **BLOCK**: Packages in the **Rejected patches** list, and packages
+    #   : **Linux and macOS**: A package in the rejected patches list is
+    #     installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as `INSTALLED_OTHER`. This is the default action if no
+    #     option is specified.
+    #
+    #     **Windows Server**: Windows Server doesn't support the concept of
+    #     package dependencies. If a package in the rejected patches list and
+    #     already installed on the node, its status is reported as
+    #     `INSTALLED_OTHER`. Any package not already installed on the node is
+    #     skipped. This is the default action if no option is specified.
+    #
+    #   BLOCK
+    #
+    #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
     #     Manager under any circumstances. If a package was installed before
-    #     it was added to the **Rejected patches** list, or is installed
-    #     outside of Patch Manager afterward, it's considered noncompliant
-    #     with the patch baseline and its status is reported as
-    #     *InstalledRejected*.
+    #     it was added to the rejected patches list, or is installed outside
+    #     of Patch Manager afterward, it's considered noncompliant with the
+    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -12576,7 +12604,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

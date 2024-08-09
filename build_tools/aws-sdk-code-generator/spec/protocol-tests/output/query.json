@@ -519,7 +519,7 @@
                     ]
                 },
                 "description": "Parses customized XML errors",
-                "errorCode": "CustomCodeError",
+                "errorCode": "Customized",
                 "errorMessage": "Hi",
                 "error": {
                     "Message": "Hi"

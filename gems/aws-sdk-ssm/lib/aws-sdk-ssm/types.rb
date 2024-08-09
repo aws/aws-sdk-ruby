@@ -3884,19 +3884,28 @@ module Aws::SSM
     #   The action for Patch Manager to take on patches included in the
     #   `RejectedPackages` list.
     #
-    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>: A package in the
-    #     `Rejected` patches list is installed only if it is a dependency of
-    #     another package. It is considered compliant with the patch
-    #     baseline, and its status is reported as `InstalledOther`. This is
-    #     the default action if no option is specified.
+    #   ALLOW\_AS\_DEPENDENCY
     #
-    #   * **BLOCK**: Packages in the **Rejected patches** list, and packages
+    #   : **Linux and macOS**: A package in the rejected patches list is
+    #     installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as `INSTALLED_OTHER`. This is the default action if no
+    #     option is specified.
+    #
+    #     **Windows Server**: Windows Server doesn't support the concept of
+    #     package dependencies. If a package in the rejected patches list
+    #     and already installed on the node, its status is reported as
+    #     `INSTALLED_OTHER`. Any package not already installed on the node
+    #     is skipped. This is the default action if no option is specified.
+    #
+    #   BLOCK
+    #
+    #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
     #     Manager under any circumstances. If a package was installed before
-    #     it was added to the **Rejected patches** list, or is installed
-    #     outside of Patch Manager afterward, it's considered noncompliant
-    #     with the patch baseline and its status is reported as
-    #     *InstalledRejected*.
+    #     it was added to the rejected patches list, or is installed outside
+    #     of Patch Manager afterward, it's considered noncompliant with the
+    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -8407,10 +8416,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) service role to use to publish Amazon Simple Notification
-    #   Service (Amazon SNS) notifications for maintenance window Run
-    #   Command tasks.
+    #   The Amazon Resource Name (ARN) of the IAM service role for Amazon
+    #   Web Services Systems Manager to assume when running a maintenance
+    #   window task. If you do not specify a service role ARN, Systems
+    #   Manager uses a service-linked role in your account. If no
+    #   appropriate service-linked role for Systems Manager exists in your
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
+    #
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -9450,11 +9473,14 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] iam_role
-    #   The Identity and Access Management (IAM) role assigned to the
-    #   on-premises Systems Manager managed node. This call doesn't return
-    #   the IAM role for Amazon Elastic Compute Cloud (Amazon EC2)
-    #   instances. To retrieve the IAM role for an EC2 instance, use the
-    #   Amazon EC2 `DescribeInstances` operation. For information, see
+    #   The role assigned to an Amazon EC2 instance configured with a
+    #   Systems Manager Quick Setup host management configuration or the
+    #   role assigned to an on-premises managed node.
+    #
+    #   This call doesn't return the IAM role for *unmanaged* Amazon EC2
+    #   instances (instances not configured for Systems Manager). To
+    #   retrieve the role for an unmanaged instance, use the Amazon EC2
+    #   `DescribeInstances` operation. For information, see
     #   [DescribeInstances][1] in the *Amazon EC2 API Reference* or
     #   [describe-instances][2] in the *Amazon Web Services CLI Command
     #   Reference*.
@@ -9899,7 +9925,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] architecture
-    #   The CPU architecture of the node. For example, x86\_64.
+    #   The CPU architecture of the node. For example, `x86_64`.
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -12539,10 +12565,24 @@ module Aws::SSM
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] service_role_arn
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) service role to use to publish Amazon Simple Notification
-    #   Service (Amazon SNS) notifications for maintenance window Run
-    #   Command tasks.
+    #   The Amazon Resource Name (ARN) of the IAM service role for Amazon
+    #   Web Services Systems Manager to assume when running a maintenance
+    #   window task. If you do not specify a service role ARN, Systems
+    #   Manager uses a service-linked role in your account. If no
+    #   appropriate service-linked role for Systems Manager exists in your
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
+    #
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #   @return [String]
     #
     # @!attribute [rw] timeout_seconds
@@ -12726,10 +12766,24 @@ module Aws::SSM
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] service_role_arn
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) service role to use to publish Amazon Simple Notification
-    #   Service (Amazon SNS) notifications for maintenance window Run
-    #   Command tasks.
+    #   The Amazon Resource Name (ARN) of the IAM service role for Amazon
+    #   Web Services Systems Manager to assume when running a maintenance
+    #   window task. If you do not specify a service role ARN, Systems
+    #   Manager uses a service-linked role in your account. If no
+    #   appropriate service-linked role for Systems Manager exists in your
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
+    #
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
@@ -14637,10 +14691,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] default_baseline
-    #   Whether this is the default baseline. Amazon Web Services Systems
-    #   Manager supports creating multiple default patch baselines. For
-    #   example, you can create a default patch baseline for each operating
-    #   system.
+    #   Indicates whether this is the default baseline. Amazon Web Services
+    #   Systems Manager supports creating multiple default patch baselines.
+    #   For example, you can create a default patch baseline for each
+    #   operating system.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchBaselineIdentity AWS API Documentation
@@ -14840,16 +14894,28 @@ module Aws::SSM
     #   The number of days after the release date of each patch matched by
     #   the rule that the patch is marked as approved in the patch baseline.
     #   For example, a value of `7` means that patches are approved seven
-    #   days after they are released. Not supported on Debian Server or
-    #   Ubuntu Server.
+    #   days after they are released.
+    #
+    #   <note markdown="1"> This parameter is marked as not required, but your request must
+    #   include a value for either `ApproveAfterDays` or `ApproveUntilDate`.
+    #
+    #    </note>
+    #
+    #   Not supported for Debian Server or Ubuntu Server.
     #   @return [Integer]
     #
     # @!attribute [rw] approve_until_date
     #   The cutoff date for auto approval of released patches. Any patches
-    #   released on or before this date are installed automatically. Not
-    #   supported on Debian Server or Ubuntu Server.
+    #   released on or before this date are installed automatically.
     #
     #   Enter dates in the format `YYYY-MM-DD`. For example, `2021-12-31`.
+    #
+    #   <note markdown="1"> This parameter is marked as not required, but your request must
+    #   include a value for either `ApproveUntilDate` or `ApproveAfterDays`.
+    #
+    #    </note>
+    #
+    #   Not supported for Debian Server or Ubuntu Server.
     #   @return [String]
     #
     # @!attribute [rw] enable_non_security
@@ -19256,10 +19322,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) service role to use to publish Amazon Simple Notification
-    #   Service (Amazon SNS) notifications for maintenance window Run
-    #   Command tasks.
+    #   The Amazon Resource Name (ARN) of the IAM service role for Amazon
+    #   Web Services Systems Manager to assume when running a maintenance
+    #   window task. If you do not specify a service role ARN, Systems
+    #   Manager uses a service-linked role in your account. If no
+    #   appropriate service-linked role for Systems Manager exists in your
+    #   account, it is created when you run
+    #   `RegisterTaskWithMaintenanceWindow`.
+    #
+    #   However, for an improved security posture, we strongly recommend
+    #   creating a custom policy and custom service role for running your
+    #   maintenance window tasks. The policy can be crafted to provide only
+    #   the permissions needed for your particular maintenance window tasks.
+    #   For more information, see [Setting up maintenance windows][1] in the
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
@@ -19612,19 +19692,28 @@ module Aws::SSM
     #   The action for Patch Manager to take on patches included in the
     #   `RejectedPackages` list.
     #
-    #   * <b> <code>ALLOW_AS_DEPENDENCY</code> </b>: A package in the
-    #     `Rejected` patches list is installed only if it is a dependency of
-    #     another package. It is considered compliant with the patch
-    #     baseline, and its status is reported as `InstalledOther`. This is
-    #     the default action if no option is specified.
+    #   ALLOW\_AS\_DEPENDENCY
     #
-    #   * **BLOCK**: Packages in the **Rejected patches** list, and packages
+    #   : **Linux and macOS**: A package in the rejected patches list is
+    #     installed only if it is a dependency of another package. It is
+    #     considered compliant with the patch baseline, and its status is
+    #     reported as `INSTALLED_OTHER`. This is the default action if no
+    #     option is specified.
+    #
+    #     **Windows Server**: Windows Server doesn't support the concept of
+    #     package dependencies. If a package in the rejected patches list
+    #     and already installed on the node, its status is reported as
+    #     `INSTALLED_OTHER`. Any package not already installed on the node
+    #     is skipped. This is the default action if no option is specified.
+    #
+    #   BLOCK
+    #
+    #   : **All OSs**: Packages in the rejected patches list, and packages
     #     that include them as dependencies, aren't installed by Patch
     #     Manager under any circumstances. If a package was installed before
-    #     it was added to the **Rejected patches** list, or is installed
-    #     outside of Patch Manager afterward, it's considered noncompliant
-    #     with the patch baseline and its status is reported as
-    #     *InstalledRejected*.
+    #     it was added to the rejected patches list, or is installed outside
+    #     of Patch Manager afterward, it's considered noncompliant with the
+    #     patch baseline and its status is reported as `INSTALLED_REJECTED`.
     #   @return [String]
     #
     # @!attribute [rw] description

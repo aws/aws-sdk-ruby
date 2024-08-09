@@ -3942,6 +3942,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class RoutingCriteriaInput
+      attr_accessor steps: ::Array[Types::RoutingCriteriaInputStep]
+      SENSITIVE: []
+    end
+
+    class RoutingCriteriaInputStep
+      attr_accessor expiry: Types::RoutingCriteriaInputStepExpiry
+      attr_accessor expression: Types::Expression
+      SENSITIVE: []
+    end
+
+    class RoutingCriteriaInputStepExpiry
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class RoutingProfile
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -5004,6 +5020,7 @@ module Aws::Connect
       attr_accessor contact_id: ::String
       attr_accessor queue_time_adjustment_seconds: ::Integer
       attr_accessor queue_priority: ::Integer
+      attr_accessor routing_criteria: Types::RoutingCriteriaInput
       SENSITIVE: []
     end
 

@@ -1962,8 +1962,7 @@ module Aws::CognitoIdentityProvider
     class AdminUserGlobalSignOutResponse < Aws::EmptyStructure; end
 
     # Advanced security configuration options for additional authentication
-    # types in your user pool, including custom authentication and
-    # refresh-token authentication.
+    # types in your user pool, including custom authentication.
     #
     # @!attribute [rw] custom_auth_mode
     #   The operating mode of advanced security features in custom
@@ -9868,7 +9867,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] advanced_security_additional_flows
     #   Advanced security configuration options for additional
     #   authentication types in your user pool, including custom
-    #   authentication and refresh-token authentication.
+    #   authentication.
     #   @return [Types::AdvancedSecurityAdditionalFlowsType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolAddOnsType AWS API Documentation

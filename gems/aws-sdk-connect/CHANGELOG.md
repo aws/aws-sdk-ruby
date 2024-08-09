@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2024-08-09)
+------------------
+
+* Feature - This release supports adding RoutingCriteria via UpdateContactRoutingData public API.
+
 1.170.0 (2024-08-08)
 ------------------
 
