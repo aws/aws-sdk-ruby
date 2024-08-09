@@ -456,11 +456,11 @@ module Aws::Connect
     end
 
     # Can be used to define a list of preferred agents to target the contact
-    # within the queue. Note that agents must have the queue in their
-    # routing profile in order to be offered the contact.
+    # to within the queue.  Note that agents must have the queue in their
+    # routing profile in order to be offered the  contact.
     #
     # @!attribute [rw] agent_ids
-    #   An object to specify a list of agents, by Agent ID.
+    #   An object to specify a list of agents, by user ID.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentsCriteria AWS API Documentation
@@ -14313,10 +14313,10 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # An object to define `AgentsCriteria`.
+    # An object to define AgentsCriteria.
     #
     # @!attribute [rw] agents_criteria
-    #   An object to define `AgentIds`.
+    #   An object to define agentIds.
     #   @return [Types::AgentsCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MatchCriteria AWS API Documentation
@@ -16773,6 +16773,61 @@ module Aws::Connect
       :steps,
       :activation_timestamp,
       :index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object to define the RoutingCriteria.
+    #
+    # @!attribute [rw] steps
+    #   When Amazon Connect does not find an available agent meeting the
+    #   requirements in a step for  a given step duration, the routing
+    #   criteria will move on to the next step sequentially until a  join is
+    #   completed with an agent. When all steps are exhausted, the contact
+    #   will be offered to any agent in the queue.
+    #   @return [Array<Types::RoutingCriteriaInputStep>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingCriteriaInput AWS API Documentation
+    #
+    class RoutingCriteriaInput < Struct.new(
+      :steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Step defines the list of agents to be routed or route based on the
+    # agent requirements such as ProficiencyLevel, Name, or Value.
+    #
+    # @!attribute [rw] expiry
+    #   An object to specify the expiration of a routing step.
+    #   @return [Types::RoutingCriteriaInputStepExpiry]
+    #
+    # @!attribute [rw] expression
+    #   A tagged union to specify expression for a routing step.
+    #   @return [Types::Expression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingCriteriaInputStep AWS API Documentation
+    #
+    class RoutingCriteriaInputStep < Struct.new(
+      :expiry,
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify whether this routing criteria step should apply for only a
+    # limited amount of time,  or if it should never expire.
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   The number of seconds that the contact will be routed only to agents
+    #   matching this routing  step, if expiry was configured for this
+    #   routing step.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingCriteriaInputStepExpiry AWS API Documentation
+    #
+    class RoutingCriteriaInputStepExpiry < Struct.new(
+      :duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21337,13 +21392,19 @@ module Aws::Connect
     #   such as 1 or 2.
     #   @return [Integer]
     #
+    # @!attribute [rw] routing_criteria
+    #   Updates the routing criteria on the contact. These properties can be
+    #   used to change how a  contact is routed within the queue.
+    #   @return [Types::RoutingCriteriaInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingDataRequest AWS API Documentation
     #
     class UpdateContactRoutingDataRequest < Struct.new(
       :instance_id,
       :contact_id,
       :queue_time_adjustment_seconds,
-      :queue_priority)
+      :queue_priority,
+      :routing_criteria)
       SENSITIVE = []
       include Aws::Structure
     end

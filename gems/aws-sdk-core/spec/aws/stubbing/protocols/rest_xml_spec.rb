@@ -88,11 +88,7 @@ module Aws
             operation = api.operation(:get_bucket_policy)
             resp = RestXml.new.stub_data(api, operation, params)
             expect(resp.status_code).to eq(200)
-            expect(normalize(resp.body.string)).to eq(normalize(<<-JSON))
-              {
-                "Policy": "policy-document"
-              }
-            JSON
+            expect(resp.body.string).to eq('policy-document')
           end
 
           it 'can stub errors' do
