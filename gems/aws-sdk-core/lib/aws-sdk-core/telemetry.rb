@@ -11,7 +11,7 @@ module Aws
   module Telemetry
     class << self
       def module_to_tracer_name(module_name)
-        "#{module_name.gsub('::', '.')}.client"
+        "#{module_name.gsub('::', '.')}.client".downcase
       end
 
       # @api private
