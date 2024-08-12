@@ -42,14 +42,16 @@ module Aws
         def call(context)
           # serviceId may not be present in older versions
           # do I need to retrieve legacy serviceId?
+          service_id = service_id(context)
+
           attributes = {
-            'rpc.service' => context.config.api.metadata['serviceId'],
+            'rpc.service' => service_id,
             'rpc.method' => context.operation.name,
             'code.function' => context.operation_name.to_s,
             'code.namespace' => 'AWS::Plugins::Telemetry'
           }
           context.tracer.in_span(
-            parent_span_name(context),
+            parent_span_name(context, service_id),
             attributes: attributes,
             kind: Aws::Telemetry::SpanKind::CLIENT
           ) do
@@ -59,8 +61,13 @@ module Aws
 
         private
 
-        def parent_span_name(context)
-          "#{context.config.api.metadata['serviceId']}.#{context.operation.name}".strip
+        def service_id(context)
+          context.config.api.metadata['serviceId'] ||
+            context.config.api.metadata['serviceAbbreviation']
+        end
+
+        def parent_span_name(context, service_id)
+          "#{service_id}.#{context.operation.name}".strip
         end
       end
 
