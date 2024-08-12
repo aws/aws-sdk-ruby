@@ -105,12 +105,13 @@ module {{module_name}}
         authorizer: authorizer,{{/authorizer?}}
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: config.telemetry_provider.tracer_provider.tracer(
+          Aws::Telemetry.module_to_tracer_name('{{module_name}}')
+        )
+      )
       context[:gem_name] = '{{gem_name}}'
       context[:gem_version] = '{{gem_version}}'
-      context[:tracer] = context.config.telemetry_provider.tracer_provider.tracer(
-        Aws::Telemetry.module_to_tracer_name('{{module_name}}')
-      )
       Seahorse::Client::Request.new(handlers, context)
     end
     {{#waiters?}}
