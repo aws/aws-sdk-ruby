@@ -42,7 +42,13 @@ module Seahorse
         # @param [RequestContext] context
         # @return [Response]
         def call(context)
-          transmit(context.config, context.http_request, context.http_response)
+          span_wrapper(context) do
+            transmit(
+              context.config,
+              context.http_request,
+              context.http_response
+            )
+          end
           Response.new(context: context)
         end
 
@@ -189,6 +195,47 @@ module Seahorse
           response.to_hash.inject({}) do |headers, (k, v)|
             headers[k] = v.first
             headers
+          end
+        end
+
+        def span_wrapper(context, &block)
+          context.tracer.in_span(
+            'Handler.NetHttp',
+            attributes: request_attrs(context)
+          ) do |span|
+            block.call
+            span.add_attributes(response_attrs(context))
+          end
+        end
+
+        def request_attrs(context)
+          {
+            'http.method' => context.http_request.http_method,
+            'net.protocol.name' => 'http',
+            'net.protocol.version' => Net::HTTP::HTTPVersion,
+            'net.peer.name' => context.http_request.endpoint.host,
+            'net.peer.port' => context.http_request.endpoint.port.to_s
+          }.tap do |h|
+            if context.http_request.headers.key?('Content-Length')
+              h['http.request_context_length'] =
+                context.request.headers['Content-Length']
+            end
+          end
+        end
+
+        def response_attrs(context)
+          {
+            'http.status_code' => context.http_response.status_code.to_s
+          }.tap do |h|
+            if context.http_response.headers.key?('Content-Length')
+              h['http.response.content_length'] =
+                context.http_response.headers['Content-Length']
+            end
+
+            if context.http_response.headers.key?('x-amz-request-id')
+              h['aws.request_id'] =
+                context.http_response.headers['x-amz-request-id']
+            end
           end
         end
 
