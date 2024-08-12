@@ -218,7 +218,7 @@ module Seahorse
           }.tap do |h|
             if context.http_request.headers.key?('Content-Length')
               h['http.request_context_length'] =
-                context.request.headers['Content-Length']
+                context.http_request.headers['Content-Length']
             end
           end
         end
