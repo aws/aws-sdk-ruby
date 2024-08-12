@@ -2,7 +2,7 @@
 
 module Aws
   module Plugins
-    # TODO
+    # @api private
     class Telemetry < Seahorse::Client::Plugin
       option(
         :telemetry_provider,
