@@ -24,6 +24,7 @@ module Seahorse
         @http_request = options[:http_request] || Http::Request.new
         @http_response = options[:http_response] || Http::Response.new
         @retries = 0
+        @tracer = options[:tracer]
         @metadata = {}
       end
 
@@ -53,6 +54,9 @@ module Seahorse
 
       # @return [Integer]
       attr_accessor :retries
+
+      # @return [TracerProvider::Tracer]
+      attr_accessor :tracer
 
       # @return [Hash]
       attr_reader :metadata
