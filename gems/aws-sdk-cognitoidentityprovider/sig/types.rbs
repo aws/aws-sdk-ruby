@@ -346,6 +346,11 @@ module Aws::CognitoIdentityProvider
     class AdminUserGlobalSignOutResponse < Aws::EmptyStructure
     end
 
+    class AdvancedSecurityAdditionalFlowsType
+      attr_accessor custom_auth_mode: ("AUDIT" | "ENFORCED")
+      SENSITIVE: []
+    end
+
     class AliasExistsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1915,6 +1920,7 @@ module Aws::CognitoIdentityProvider
 
     class UserPoolAddOnsType
       attr_accessor advanced_security_mode: ("OFF" | "AUDIT" | "ENFORCED")
+      attr_accessor advanced_security_additional_flows: Types::AdvancedSecurityAdditionalFlowsType
       SENSITIVE: []
     end
 

@@ -974,6 +974,10 @@ module Aws::Connect
     ResumeContactRequest = Shapes::StructureShape.new(name: 'ResumeContactRequest')
     ResumeContactResponse = Shapes::StructureShape.new(name: 'ResumeContactResponse')
     RoutingCriteria = Shapes::StructureShape.new(name: 'RoutingCriteria')
+    RoutingCriteriaInput = Shapes::StructureShape.new(name: 'RoutingCriteriaInput')
+    RoutingCriteriaInputStep = Shapes::StructureShape.new(name: 'RoutingCriteriaInputStep')
+    RoutingCriteriaInputStepExpiry = Shapes::StructureShape.new(name: 'RoutingCriteriaInputStepExpiry')
+    RoutingCriteriaInputSteps = Shapes::ListShape.new(name: 'RoutingCriteriaInputSteps')
     RoutingCriteriaStepStatus = Shapes::StringShape.new(name: 'RoutingCriteriaStepStatus')
     RoutingExpression = Shapes::StringShape.new(name: 'RoutingExpression')
     RoutingExpressions = Shapes::ListShape.new(name: 'RoutingExpressions')
@@ -4439,6 +4443,18 @@ module Aws::Connect
     RoutingCriteria.add_member(:index, Shapes::ShapeRef.new(shape: Index, location_name: "Index"))
     RoutingCriteria.struct_class = Types::RoutingCriteria
 
+    RoutingCriteriaInput.add_member(:steps, Shapes::ShapeRef.new(shape: RoutingCriteriaInputSteps, location_name: "Steps"))
+    RoutingCriteriaInput.struct_class = Types::RoutingCriteriaInput
+
+    RoutingCriteriaInputStep.add_member(:expiry, Shapes::ShapeRef.new(shape: RoutingCriteriaInputStepExpiry, location_name: "Expiry"))
+    RoutingCriteriaInputStep.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
+    RoutingCriteriaInputStep.struct_class = Types::RoutingCriteriaInputStep
+
+    RoutingCriteriaInputStepExpiry.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "DurationInSeconds"))
+    RoutingCriteriaInputStepExpiry.struct_class = Types::RoutingCriteriaInputStepExpiry
+
+    RoutingCriteriaInputSteps.member = Shapes::ShapeRef.new(shape: RoutingCriteriaInputStep)
+
     RoutingExpressions.member = Shapes::ShapeRef.new(shape: RoutingExpression)
 
     RoutingProfile.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
@@ -5306,6 +5322,7 @@ module Aws::Connect
     UpdateContactRoutingDataRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
     UpdateContactRoutingDataRequest.add_member(:queue_time_adjustment_seconds, Shapes::ShapeRef.new(shape: QueueTimeAdjustmentSeconds, location_name: "QueueTimeAdjustmentSeconds"))
     UpdateContactRoutingDataRequest.add_member(:queue_priority, Shapes::ShapeRef.new(shape: QueuePriority, location_name: "QueuePriority"))
+    UpdateContactRoutingDataRequest.add_member(:routing_criteria, Shapes::ShapeRef.new(shape: RoutingCriteriaInput, location_name: "RoutingCriteria"))
     UpdateContactRoutingDataRequest.struct_class = Types::UpdateContactRoutingDataRequest
 
     UpdateContactRoutingDataResponse.struct_class = Types::UpdateContactRoutingDataResponse

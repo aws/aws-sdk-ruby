@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.468.0 (2024-08-08)
+------------------
+
+* Feature - Launch of private IPv6 addressing for VPCs and Subnets. VPC IPAM supports the planning and monitoring of private IPv6 usage.
+
 1.467.0 (2024-07-25)
 ------------------
 

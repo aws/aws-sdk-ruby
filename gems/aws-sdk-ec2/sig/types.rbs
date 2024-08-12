@@ -1986,6 +1986,7 @@ module Aws::EC2
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor client_token: ::String
       attr_accessor tier: ("free" | "advanced")
+      attr_accessor enable_private_gua: bool
       SENSITIVE: []
     end
 
@@ -9348,6 +9349,7 @@ module Aws::EC2
       attr_accessor resource_discovery_association_count: ::Integer
       attr_accessor state_message: ::String
       attr_accessor tier: ("free" | "advanced")
+      attr_accessor enable_private_gua: bool
       SENSITIVE: []
     end
 
@@ -9410,6 +9412,7 @@ module Aws::EC2
       attr_accessor resource_id: ::String
       attr_accessor resource_owner_id: ::String
       attr_accessor resource_cidr: ::String
+      attr_accessor ip_source: ("amazon" | "byoip" | "none")
       attr_accessor resource_type: ("vpc" | "subnet" | "eip" | "public-ipv4-pool" | "ipv6-pool" | "eni")
       attr_accessor resource_tags: ::Array[Types::IpamResourceTag]
       attr_accessor ip_usage: ::Float
@@ -10676,6 +10679,7 @@ module Aws::EC2
       attr_accessor add_operating_regions: ::Array[Types::AddIpamOperatingRegion]
       attr_accessor remove_operating_regions: ::Array[Types::RemoveIpamOperatingRegion]
       attr_accessor tier: ("free" | "advanced")
+      attr_accessor enable_private_gua: bool
       SENSITIVE: []
     end
 
@@ -13935,6 +13939,8 @@ module Aws::EC2
       attr_accessor association_id: ::String
       attr_accessor ipv_6_cidr_block: ::String
       attr_accessor ipv_6_cidr_block_state: Types::SubnetCidrBlockState
+      attr_accessor ipv_6_address_attribute: ("public" | "private")
+      attr_accessor ip_source: ("amazon" | "byoip" | "none")
       SENSITIVE: []
     end
 
@@ -15118,6 +15124,8 @@ module Aws::EC2
       attr_accessor ipv_6_cidr_block_state: Types::VpcCidrBlockState
       attr_accessor network_border_group: ::String
       attr_accessor ipv_6_pool: ::String
+      attr_accessor ipv_6_address_attribute: ("public" | "private")
+      attr_accessor ip_source: ("amazon" | "byoip" | "none")
       SENSITIVE: []
     end
 

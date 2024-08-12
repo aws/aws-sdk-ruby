@@ -257,9 +257,6 @@
   "CodePipeline": {
     "models": "codepipeline/2015-07-09"
   },
-  "CodeStar": {
-    "models": "codestar/2017-04-19"
-  },
   "CodeStarNotifications": {
     "models": "codestar-notifications/2019-10-15"
   },

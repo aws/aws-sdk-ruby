@@ -1283,6 +1283,9 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
@@ -2900,7 +2903,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -6562,7 +6565,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE", "VIEW_VALIDATION_REDSHIFT", "VIEW_VALIDATION_ATHENA"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -6631,7 +6634,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -6643,7 +6646,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE", "VIEW_VALIDATION_REDSHIFT", "VIEW_VALIDATION_ATHENA"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -7846,6 +7849,9 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0][0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
@@ -8961,6 +8967,9 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].catalog_target.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].redshift_target.name #=> String
@@ -11142,6 +11151,10 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Boolean] :include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTableResponse#table #table} => Types::Table
@@ -11154,6 +11167,7 @@ module Aws::Glue
     #     name: "NameString", # required
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     include_status_details: false,
     #   })
     #
     # @example Response structure
@@ -11237,6 +11251,23 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.status.requested_by #=> String
+    #   resp.table.status.updated_by #=> String
+    #   resp.table.status.request_time #=> Time
+    #   resp.table.status.update_time #=> Time
+    #   resp.table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.error.error_code #=> String
+    #   resp.table.status.error.error_message #=> String
+    #   resp.table.status.details.requested_change #=> Types::Table
+    #   resp.table.status.details.view_validations #=> Array
+    #   resp.table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table.status.details.view_validations[0].error.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -11416,6 +11447,23 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_version.table.is_multi_dialect_view #=> Boolean
+    #   resp.table_version.table.status.requested_by #=> String
+    #   resp.table_version.table.status.updated_by #=> String
+    #   resp.table_version.table.status.request_time #=> Time
+    #   resp.table_version.table.status.update_time #=> Time
+    #   resp.table_version.table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_version.table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_version.table.status.error.error_code #=> String
+    #   resp.table_version.table.status.error.error_message #=> String
+    #   resp.table_version.table.status.details.requested_change #=> Types::Table
+    #   resp.table_version.table.status.details.view_validations #=> Array
+    #   resp.table_version.table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_version.table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_version.table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_version.table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table_version.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_version.table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_version.table.status.details.view_validations[0].error.error_message #=> String
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -11547,6 +11595,23 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
+    #   resp.table_versions[0].table.status.requested_by #=> String
+    #   resp.table_versions[0].table.status.updated_by #=> String
+    #   resp.table_versions[0].table.status.request_time #=> Time
+    #   resp.table_versions[0].table.status.update_time #=> Time
+    #   resp.table_versions[0].table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_versions[0].table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_versions[0].table.status.error.error_code #=> String
+    #   resp.table_versions[0].table.status.error.error_message #=> String
+    #   resp.table_versions[0].table.status.details.requested_change #=> Types::Table
+    #   resp.table_versions[0].table.status.details.view_validations #=> Array
+    #   resp.table_versions[0].table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_versions[0].table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_versions[0].table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_versions[0].table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table_versions[0].table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_versions[0].table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_versions[0].table.status.details.view_validations[0].error.error_message #=> String
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -11588,6 +11653,10 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Boolean] :include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #
     # @return [Types::GetTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
@@ -11605,6 +11674,7 @@ module Aws::Glue
     #     max_results: 1,
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     include_status_details: false,
     #   })
     #
     # @example Response structure
@@ -11689,6 +11759,23 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].status.requested_by #=> String
+    #   resp.table_list[0].status.updated_by #=> String
+    #   resp.table_list[0].status.request_time #=> Time
+    #   resp.table_list[0].status.update_time #=> Time
+    #   resp.table_list[0].status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_list[0].status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.error.error_code #=> String
+    #   resp.table_list[0].status.error.error_message #=> String
+    #   resp.table_list[0].status.details.requested_change #=> Types::Table
+    #   resp.table_list[0].status.details.view_validations #=> Array
+    #   resp.table_list[0].status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_list[0].status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_list[0].status.details.view_validations[0].update_time #=> Time
+    #   resp.table_list[0].status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_list[0].status.details.view_validations[0].error.error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -12408,6 +12495,23 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.status.requested_by #=> String
+    #   resp.table.status.updated_by #=> String
+    #   resp.table.status.request_time #=> Time
+    #   resp.table.status.update_time #=> Time
+    #   resp.table.status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table.status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.error.error_code #=> String
+    #   resp.table.status.error.error_message #=> String
+    #   resp.table.status.details.requested_change #=> Types::Table
+    #   resp.table.status.details.view_validations #=> Array
+    #   resp.table.status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.status.details.view_validations[0].dialect_version #=> String
+    #   resp.table.status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table.status.details.view_validations[0].update_time #=> Time
+    #   resp.table.status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table.status.details.view_validations[0].error.error_code #=> String
+    #   resp.table.status.details.view_validations[0].error.error_message #=> String
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -15013,6 +15117,10 @@ module Aws::Glue
     #   * If set to `ALL`, will search the tables shared with your account, as
     #     well as the tables in yor local account.
     #
+    # @option params [Boolean] :include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #
     # @return [Types::SearchTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchTablesResponse#next_token #next_token} => String
@@ -15041,6 +15149,7 @@ module Aws::Glue
     #     ],
     #     max_results: 1,
     #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL, FEDERATED
+    #     include_status_details: false,
     #   })
     #
     # @example Response structure
@@ -15126,6 +15235,23 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].status.requested_by #=> String
+    #   resp.table_list[0].status.updated_by #=> String
+    #   resp.table_list[0].status.request_time #=> Time
+    #   resp.table_list[0].status.update_time #=> Time
+    #   resp.table_list[0].status.action #=> String, one of "UPDATE", "CREATE"
+    #   resp.table_list[0].status.state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.error.error_code #=> String
+    #   resp.table_list[0].status.error.error_message #=> String
+    #   resp.table_list[0].status.details.requested_change #=> Types::Table
+    #   resp.table_list[0].status.details.view_validations #=> Array
+    #   resp.table_list[0].status.details.view_validations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].status.details.view_validations[0].dialect_version #=> String
+    #   resp.table_list[0].status.details.view_validations[0].view_validation_text #=> String
+    #   resp.table_list[0].status.details.view_validations[0].update_time #=> Time
+    #   resp.table_list[0].status.details.view_validations[0].state #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCESS", "STOPPED", "FAILED"
+    #   resp.table_list[0].status.details.view_validations[0].error.error_code #=> String
+    #   resp.table_list[0].status.details.view_validations[0].error.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -16515,7 +16641,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -17878,7 +18004,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.187.0'
+      context[:gem_version] = '1.188.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

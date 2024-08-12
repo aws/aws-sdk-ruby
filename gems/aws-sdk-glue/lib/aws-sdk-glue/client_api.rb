@@ -995,9 +995,11 @@ module Aws::Glue
     ReplaceBoolean = Shapes::BooleanShape.new(name: 'ReplaceBoolean')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
+    ResourceAction = Shapes::StringShape.new(name: 'ResourceAction')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     ResourceNumberLimitExceededException = Shapes::StructureShape.new(name: 'ResourceNumberLimitExceededException')
     ResourceShareType = Shapes::StringShape.new(name: 'ResourceShareType')
+    ResourceState = Shapes::StringShape.new(name: 'ResourceState')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceUri = Shapes::StructureShape.new(name: 'ResourceUri')
     ResourceUriList = Shapes::ListShape.new(name: 'ResourceUriList')
@@ -1143,6 +1145,7 @@ module Aws::Glue
     StatisticPropertiesMap = Shapes::MapShape.new(name: 'StatisticPropertiesMap')
     StatisticSummary = Shapes::StructureShape.new(name: 'StatisticSummary')
     StatisticSummaryList = Shapes::ListShape.new(name: 'StatisticSummaryList')
+    StatusDetails = Shapes::StructureShape.new(name: 'StatusDetails')
     StopColumnStatisticsTaskRunRequest = Shapes::StructureShape.new(name: 'StopColumnStatisticsTaskRunRequest')
     StopColumnStatisticsTaskRunResponse = Shapes::StructureShape.new(name: 'StopColumnStatisticsTaskRunResponse')
     StopCrawlerRequest = Shapes::StructureShape.new(name: 'StopCrawlerRequest')
@@ -1175,6 +1178,7 @@ module Aws::Glue
     TableOptimizerRuns = Shapes::ListShape.new(name: 'TableOptimizerRuns')
     TableOptimizerType = Shapes::StringShape.new(name: 'TableOptimizerType')
     TablePrefix = Shapes::StringShape.new(name: 'TablePrefix')
+    TableStatus = Shapes::StructureShape.new(name: 'TableStatus')
     TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
     TableVersion = Shapes::StructureShape.new(name: 'TableVersion')
     TableVersionError = Shapes::StructureShape.new(name: 'TableVersionError')
@@ -1317,6 +1321,8 @@ module Aws::Glue
     ViewSubObjectsList = Shapes::ListShape.new(name: 'ViewSubObjectsList')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
     ViewUpdateAction = Shapes::StringShape.new(name: 'ViewUpdateAction')
+    ViewValidation = Shapes::StructureShape.new(name: 'ViewValidation')
+    ViewValidationList = Shapes::ListShape.new(name: 'ViewValidationList')
     WorkerType = Shapes::StringShape.new(name: 'WorkerType')
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
     WorkflowGraph = Shapes::StructureShape.new(name: 'WorkflowGraph')
@@ -1468,6 +1474,7 @@ module Aws::Glue
 
     BasicCatalogTarget.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     BasicCatalogTarget.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    BasicCatalogTarget.add_member(:partition_keys, Shapes::ShapeRef.new(shape: GlueStudioPathList, location_name: "PartitionKeys"))
     BasicCatalogTarget.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
     BasicCatalogTarget.add_member(:table, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Table"))
     BasicCatalogTarget.struct_class = Types::BasicCatalogTarget
@@ -3770,6 +3777,7 @@ module Aws::Glue
     GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     GetTableRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
+    GetTableRequest.add_member(:include_status_details, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "IncludeStatusDetails"))
     GetTableRequest.struct_class = Types::GetTableRequest
 
     GetTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
@@ -3804,6 +3812,7 @@ module Aws::Glue
     GetTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetTablesRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     GetTablesRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
+    GetTablesRequest.add_member(:include_status_details, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "IncludeStatusDetails"))
     GetTablesRequest.struct_class = Types::GetTablesRequest
 
     GetTablesResponse.add_member(:table_list, Shapes::ShapeRef.new(shape: TableList, location_name: "TableList"))
@@ -5312,6 +5321,7 @@ module Aws::Glue
     SearchTablesRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
     SearchTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     SearchTablesRequest.add_member(:resource_share_type, Shapes::ShapeRef.new(shape: ResourceShareType, location_name: "ResourceShareType"))
+    SearchTablesRequest.add_member(:include_status_details, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "IncludeStatusDetails"))
     SearchTablesRequest.struct_class = Types::SearchTablesRequest
 
     SearchTablesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -5644,6 +5654,10 @@ module Aws::Glue
 
     StatisticSummaryList.member = Shapes::ShapeRef.new(shape: StatisticSummary)
 
+    StatusDetails.add_member(:requested_change, Shapes::ShapeRef.new(shape: Table, location_name: "RequestedChange"))
+    StatusDetails.add_member(:view_validations, Shapes::ShapeRef.new(shape: ViewValidationList, location_name: "ViewValidations"))
+    StatusDetails.struct_class = Types::StatusDetails
+
     StopColumnStatisticsTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
     StopColumnStatisticsTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     StopColumnStatisticsTaskRunRequest.struct_class = Types::StopColumnStatisticsTaskRunRequest
@@ -5734,6 +5748,7 @@ module Aws::Glue
     Table.add_member(:federated_table, Shapes::ShapeRef.new(shape: FederatedTable, location_name: "FederatedTable"))
     Table.add_member(:view_definition, Shapes::ShapeRef.new(shape: ViewDefinition, location_name: "ViewDefinition"))
     Table.add_member(:is_multi_dialect_view, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsMultiDialectView"))
+    Table.add_member(:status, Shapes::ShapeRef.new(shape: TableStatus, location_name: "Status"))
     Table.struct_class = Types::Table
 
     TableError.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
@@ -5783,6 +5798,16 @@ module Aws::Glue
     TableOptimizerRun.struct_class = Types::TableOptimizerRun
 
     TableOptimizerRuns.member = Shapes::ShapeRef.new(shape: TableOptimizerRun)
+
+    TableStatus.add_member(:requested_by, Shapes::ShapeRef.new(shape: NameString, location_name: "RequestedBy"))
+    TableStatus.add_member(:updated_by, Shapes::ShapeRef.new(shape: NameString, location_name: "UpdatedBy"))
+    TableStatus.add_member(:request_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RequestTime"))
+    TableStatus.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
+    TableStatus.add_member(:action, Shapes::ShapeRef.new(shape: ResourceAction, location_name: "Action"))
+    TableStatus.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
+    TableStatus.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "Error"))
+    TableStatus.add_member(:details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "Details"))
+    TableStatus.struct_class = Types::TableStatus
 
     TableVersion.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
     TableVersion.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
@@ -6263,6 +6288,16 @@ module Aws::Glue
     ViewRepresentationList.member = Shapes::ShapeRef.new(shape: ViewRepresentation)
 
     ViewSubObjectsList.member = Shapes::ShapeRef.new(shape: ArnString)
+
+    ViewValidation.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
+    ViewValidation.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
+    ViewValidation.add_member(:view_validation_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewValidationText"))
+    ViewValidation.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdateTime"))
+    ViewValidation.add_member(:state, Shapes::ShapeRef.new(shape: ResourceState, location_name: "State"))
+    ViewValidation.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "Error"))
+    ViewValidation.struct_class = Types::ViewValidation
+
+    ViewValidationList.member = Shapes::ShapeRef.new(shape: ViewValidation)
 
     Workflow.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     Workflow.add_member(:description, Shapes::ShapeRef.new(shape: GenericString, location_name: "Description"))

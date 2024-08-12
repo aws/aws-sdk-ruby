@@ -2007,12 +2007,19 @@ module Aws::Connect
     # Service (Amazon S3) or Amazon Kinesis. It also does not allow for any
     # configurations on features, such as Contact Lens for Amazon Connect.
     #
+    # For more information, see [Create an Amazon Connect instance][1] in
+    # the *Amazon Connect Administrator Guide*.
+    #
     # Amazon Connect enforces a limit on the total number of instances that
     # you can create or delete in 30 days. If you exceed this limit, you
     # will get an error message indicating there has been an excessive
     # number of attempts at creating or deleting instances. You must wait 30
     # days before you can restart creating and deleting instances in your
     # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html
     #
     # @option params [String] :client_token
     #   The idempotency token.
@@ -2339,7 +2346,14 @@ module Aws::Connect
     end
 
     # Creates a new predefined attribute for the specified Amazon Connect
-    # instance.
+    # instance. *Predefined attributes* are attributes in an Amazon Connect
+    # instance that can be used to route contacts to an agent or pools of
+    # agents within a queue. For more information, see [Create predefined
+    # attributes for routing contacts to agents][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -2853,6 +2867,16 @@ module Aws::Connect
     end
 
     # Creates a security profile.
+    #
+    # For information about security profiles, see [Security Profiles][1] in
+    # the *Amazon Connect Administrator Guide*. For a mapping of the API
+    # name and user interface name of the security profile permissions, see
+    # [List of security profile permissions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [required, String] :security_profile_name
     #   The name of the security profile.
@@ -3883,7 +3907,9 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
-    # Deletes the Amazon Connect instance.
+    # Deletes the Amazon Connect instance. For more information, see [Delete
+    # your Amazon Connect instance][1] in the *Amazon Connect Administrator
+    # Guide*.
     #
     # Amazon Connect enforces a limit on the total number of instances that
     # you can create or delete in 30 days. If you exceed this limit, you
@@ -3891,6 +3917,10 @@ module Aws::Connect
     # number of attempts at creating or deleting instances. You must wait 30
     # days before you can restart creating and deleting instances in your
     # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-connect-instance.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -4009,7 +4039,8 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes a queue.
+    # Deletes a queue. It isn't possible to delete a queue by using the
+    # Amazon Connect admin website.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -5242,7 +5273,14 @@ module Aws::Connect
     end
 
     # Describes a predefined attribute for the specified Amazon Connect
-    # instance.
+    # instance. *Predefined attributes* are attributes in an Amazon Connect
+    # instance that can be used to route contacts to an agent or pools of
+    # agents within a queue. For more information, see [Create predefined
+    # attributes for routing contacts to agents][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -5559,7 +5597,17 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Gets basic information about the security profle.
+    # Gets basic information about the security profile.
+    #
+    # For information about security profiles, see [Security Profiles][1] in
+    # the *Amazon Connect Administrator Guide*. For a mapping of the API
+    # name and user interface name of the security profile permissions, see
+    # [List of security profile permissions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [required, String] :security_profile_id
     #   The identifier for the security profle.
@@ -10477,6 +10525,14 @@ module Aws::Connect
     end
 
     # Lists predefined attributes for the specified Amazon Connect instance.
+    # *Predefined attributes* are attributes in an Amazon Connect instance
+    # that can be used to route contacts to an agent or pools of agents
+    # within a queue. For more information, see [Create predefined
+    # attributes for routing contacts to agents][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -11181,6 +11237,16 @@ module Aws::Connect
 
     # Lists the permissions granted to a security profile.
     #
+    # For information about security profiles, see [Security Profiles][1] in
+    # the *Amazon Connect Administrator Guide*. For a mapping of the API
+    # name and user interface name of the security profile permissions, see
+    # [List of security profile permissions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
+    #
     # @option params [required, String] :security_profile_id
     #   The identifier for the security profle.
     #
@@ -11239,11 +11305,14 @@ module Aws::Connect
     # specified Amazon Connect instance.
     #
     # For more information about security profiles, see [Security
-    # Profiles][1] in the *Amazon Connect Administrator Guide*.
+    # Profiles][1] in the *Amazon Connect Administrator Guide*. For a
+    # mapping of the API name and user interface name of the security
+    # profile permissions, see [List of security profile permissions][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -12809,7 +12878,15 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Predefined attributes that meet certain criteria.
+    # Searches predefined attributes that meet certain criteria. *Predefined
+    # attributes* are attributes in an Amazon Connect instance that can be
+    # used to route contacts to an agent or pools of agents within a queue.
+    # For more information, see [Create predefined attributes for routing
+    # contacts to agents][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -13413,6 +13490,16 @@ module Aws::Connect
 
     # Searches security profiles in an Amazon Connect instance, with
     # optional filtering.
+    #
+    # For information about security profiles, see [Security Profiles][1] in
+    # the *Amazon Connect Administrator Guide*. For a mapping of the API
+    # name and user interface name of the security profile permissions, see
+    # [List of security profile permissions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
@@ -16091,6 +16178,10 @@ module Aws::Connect
     #   other contacts in the queue by assigning them a higher priority, such
     #   as 1 or 2.
     #
+    # @option params [Types::RoutingCriteriaInput] :routing_criteria
+    #   Updates the routing criteria on the contact. These properties can be
+    #   used to change how a  contact is routed within the queue.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -16100,6 +16191,38 @@ module Aws::Connect
     #     contact_id: "ContactId", # required
     #     queue_time_adjustment_seconds: 1,
     #     queue_priority: 1,
+    #     routing_criteria: {
+    #       steps: [
+    #         {
+    #           expiry: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           expression: {
+    #             attribute_condition: {
+    #               name: "PredefinedAttributeName",
+    #               value: "ProficiencyValue",
+    #               proficiency_level: 1.0,
+    #               match_criteria: {
+    #                 agents_criteria: {
+    #                   agent_ids: ["AgentId"],
+    #                 },
+    #               },
+    #               comparison_operator: "ComparisonOperator",
+    #             },
+    #             and_expression: [
+    #               {
+    #                 # recursive Expression
+    #               },
+    #             ],
+    #             or_expression: [
+    #               {
+    #                 # recursive Expression
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingData AWS API Documentation
@@ -16666,7 +16789,14 @@ module Aws::Connect
     end
 
     # Updates a predefined attribute for the specified Amazon Connect
-    # instance.
+    # instance. *Predefined attributes* are attributes in an Amazon Connect
+    # instance that can be used to route contacts to an agent or pools of
+    # agents within a queue. For more information, see [Create predefined
+    # attributes for routing contacts to agents][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -17405,6 +17535,16 @@ module Aws::Connect
     end
 
     # Updates a security profile.
+    #
+    # For information about security profiles, see [Security Profiles][1] in
+    # the *Amazon Connect Administrator Guide*. For a mapping of the API
+    # name and user interface name of the security profile permissions, see
+    # [List of security profile permissions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
     #
     # @option params [String] :description
     #   The description of the security profile.
@@ -18145,7 +18285,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.169.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

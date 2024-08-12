@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.201.4 (2024-08-08)
+------------------
+
+* Issue - Update waiters to handle expected boolean values when matching errors.
+
 3.201.3 (2024-07-23)
 ------------------
 

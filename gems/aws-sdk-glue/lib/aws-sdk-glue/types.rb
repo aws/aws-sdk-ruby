@@ -617,6 +617,11 @@ module Aws::Glue
     #   The nodes that are inputs to the data target.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] partition_keys
+    #   The partition keys used to distribute data across multiple
+    #   partitions or shards based on a specific key or set of key.
+    #   @return [Array<Array<String>>]
+    #
     # @!attribute [rw] database
     #   The database that contains the table you want to use as the target.
     #   This database must already exist in the Data Catalog.
@@ -632,6 +637,7 @@ module Aws::Glue
     class BasicCatalogTarget < Struct.new(
       :name,
       :inputs,
+      :partition_keys,
       :database,
       :table)
       SENSITIVE = []
@@ -3359,6 +3365,20 @@ module Aws::Glue
     #     used by Glue. For more information, see [Kafka Documentation:
     #     Configuring Kafka Brokers][5].
     #
+    #   * `ROLE_ARN` - The role to be used for running queries.
+    #
+    #   * `REGION` - The Amazon Web Services Region where queries will be
+    #     run.
+    #
+    #   * `WORKGROUP_NAME` - The name of an Amazon Redshift serverless
+    #     workgroup or Amazon Athena workgroup in which queries will run.
+    #
+    #   * `CLUSTER_IDENTIFIER` - The cluster identifier of an Amazon
+    #     Redshift cluster in which queries will run.
+    #
+    #   * `DATABASE` - The Amazon Redshift database that you are connecting
+    #     to.
+    #
     #
     #
     #   [1]: https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
@@ -3499,6 +3519,12 @@ module Aws::Glue
     #       configured.
     #
     #     ^
+    #
+    #   * `VIEW_VALIDATION_REDSHIFT` - Designates a connection used for view
+    #     validation by Amazon Redshift.
+    #
+    #   * `VIEW_VALIDATION_ATHENA` - Designates a connection used for view
+    #     validation by Amazon Athena.
     #
     #   * `NETWORK` - Designates a network connection to a data source
     #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
@@ -12031,6 +12057,11 @@ module Aws::Glue
     #   along with `TransactionId`.
     #   @return [Time]
     #
+    # @!attribute [rw] include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableRequest AWS API Documentation
     #
     class GetTableRequest < Struct.new(
@@ -12038,7 +12069,8 @@ module Aws::Glue
       :database_name,
       :name,
       :transaction_id,
-      :query_as_of_time)
+      :query_as_of_time,
+      :include_status_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12186,6 +12218,11 @@ module Aws::Glue
     #   along with `TransactionId`.
     #   @return [Time]
     #
+    # @!attribute [rw] include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTablesRequest AWS API Documentation
     #
     class GetTablesRequest < Struct.new(
@@ -12195,7 +12232,8 @@ module Aws::Glue
       :next_token,
       :max_results,
       :transaction_id,
-      :query_as_of_time)
+      :query_as_of_time,
+      :include_status_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19978,6 +20016,11 @@ module Aws::Glue
     #     as well as the tables in yor local account.
     #   @return [String]
     #
+    # @!attribute [rw] include_status_details
+    #   Specifies whether to include status details related to a request to
+    #   create or update an Glue Data Catalog view.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTablesRequest AWS API Documentation
     #
     class SearchTablesRequest < Struct.new(
@@ -19987,7 +20030,8 @@ module Aws::Glue
       :search_text,
       :sort_criteria,
       :max_results,
-      :resource_share_type)
+      :resource_share_type,
+      :include_status_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21652,6 +21696,27 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing information about an asynchronous change to a
+    # table.
+    #
+    # @!attribute [rw] requested_change
+    #   A `Table` object representing the requested changes.
+    #   @return [Types::Table]
+    #
+    # @!attribute [rw] view_validations
+    #   A list of `ViewValidation` objects that contain information for an
+    #   analytical engine to validate a view.
+    #   @return [Array<Types::ViewValidation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StatusDetails AWS API Documentation
+    #
+    class StatusDetails < Struct.new(
+      :requested_change,
+      :view_validations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] database_name
     #   The name of the database where the table resides.
     #   @return [String]
@@ -22065,6 +22130,11 @@ module Aws::Glue
     #   different query engines and can therefore be read by those engines.
     #   @return [Boolean]
     #
+    # @!attribute [rw] status
+    #   A structure containing information about the state of an
+    #   asynchronous change to a table.
+    #   @return [Types::TableStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -22090,7 +22160,8 @@ module Aws::Glue
       :version_id,
       :federated_table,
       :view_definition,
-      :is_multi_dialect_view)
+      :is_multi_dialect_view,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22331,6 +22402,64 @@ module Aws::Glue
       :end_timestamp,
       :metrics,
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing information about the state of an asynchronous
+    # change to a table.
+    #
+    # @!attribute [rw] requested_by
+    #   The ARN of the user who requested the asynchronous change.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The ARN of the user to last manually alter the asynchronous change
+    #   (requesting cancellation, etc).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_time
+    #   An ISO 8601 formatted date string indicating the time that the
+    #   change was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   An ISO 8601 formatted date string indicating the time that the state
+    #   was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] action
+    #   Indicates which action was called on the table, currently only
+    #   `CREATE` or `UPDATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   A generic status for the change in progress, such as QUEUED,
+    #   IN\_PROGRESS, SUCCESS, or FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   An error that will only appear when the state is "FAILED". This is
+    #   a parent level exception message, there may be different `Error`s
+    #   for each dialect.
+    #   @return [Types::ErrorDetail]
+    #
+    # @!attribute [rw] details
+    #   A `StatusDetails` object with information about the requested
+    #   change.
+    #   @return [Types::StatusDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableStatus AWS API Documentation
+    #
+    class TableStatus < Struct.new(
+      :requested_by,
+      :updated_by,
+      :request_time,
+      :update_time,
+      :action,
+      :state,
+      :error,
+      :details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24577,6 +24706,48 @@ module Aws::Glue
       :view_original_text,
       :validation_connection,
       :view_expanded_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information for an analytical engine to
+    # validate a view, prior to persisting the view metadata. Used in the
+    # case of direct `UpdateTable` or `CreateTable` API calls.
+    #
+    # @!attribute [rw] dialect
+    #   The dialect of the query engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialect_version
+    #   The version of the dialect of the query engine. For example, 3.0.0.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_validation_text
+    #   The `SELECT` query that defines the view, as provided by the
+    #   customer.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_time
+    #   The time of the last update.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   An error associated with the validation.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewValidation AWS API Documentation
+    #
+    class ViewValidation < Struct.new(
+      :dialect,
+      :dialect_version,
+      :view_validation_text,
+      :update_time,
+      :state,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end

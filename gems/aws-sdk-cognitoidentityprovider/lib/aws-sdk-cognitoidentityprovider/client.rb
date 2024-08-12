@@ -658,8 +658,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -1456,8 +1456,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -2117,8 +2117,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -2248,8 +2248,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -2858,8 +2858,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -3952,8 +3952,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -4730,6 +4730,9 @@ module Aws::CognitoIdentityProvider
     #     ],
     #     user_pool_add_ons: {
     #       advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
+    #       advanced_security_additional_flows: {
+    #         custom_auth_mode: "AUDIT", # accepts AUDIT, ENFORCED
+    #       },
     #     },
     #     username_configuration: {
     #       case_sensitive: false, # required
@@ -4828,6 +4831,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
+    #   resp.user_pool.user_pool_add_ons.advanced_security_additional_flows.custom_auth_mode #=> String, one of "AUDIT", "ENFORCED"
     #   resp.user_pool.username_configuration.case_sensitive #=> Boolean
     #   resp.user_pool.arn #=> String
     #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
@@ -6036,6 +6040,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
+    #   resp.user_pool.user_pool_add_ons.advanced_security_additional_flows.custom_auth_mode #=> String, one of "AUDIT", "ENFORCED"
     #   resp.user_pool.username_configuration.case_sensitive #=> Boolean
     #   resp.user_pool.arn #=> String
     #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
@@ -6259,8 +6264,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -6747,8 +6752,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -6960,8 +6965,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -8050,8 +8055,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -8196,8 +8201,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -8785,8 +8790,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -8944,8 +8949,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -9755,8 +9760,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -9870,8 +9875,8 @@ module Aws::CognitoIdentityProvider
     # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
-    # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in the SMS sandbox. In <i> <a
+    # other Amazon Web Services service, Amazon Simple Notification Service
+    # might place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
     # mode</a> </i>, you can send messages only to verified phone numbers.
     # After you test your app while in the sandbox environment, you can move
@@ -10139,6 +10144,9 @@ module Aws::CognitoIdentityProvider
     #     },
     #     user_pool_add_ons: {
     #       advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
+    #       advanced_security_additional_flows: {
+    #         custom_auth_mode: "AUDIT", # accepts AUDIT, ENFORCED
+    #       },
     #     },
     #     account_recovery_setting: {
     #       recovery_mechanisms: [
@@ -10823,7 +10831,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

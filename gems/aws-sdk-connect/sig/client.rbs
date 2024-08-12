@@ -3800,7 +3800,35 @@ module Aws
                                          instance_id: ::String,
                                          contact_id: ::String,
                                          ?queue_time_adjustment_seconds: ::Integer,
-                                         ?queue_priority: ::Integer
+                                         ?queue_priority: ::Integer,
+                                         ?routing_criteria: {
+                                           steps: Array[
+                                             {
+                                               expiry: {
+                                                 duration_in_seconds: ::Integer?
+                                               }?,
+                                               expression: {
+                                                 attribute_condition: {
+                                                   name: ::String?,
+                                                   value: ::String?,
+                                                   proficiency_level: ::Float?,
+                                                   match_criteria: {
+                                                     agents_criteria: {
+                                                       agent_ids: Array[::String]?
+                                                     }?
+                                                   }?,
+                                                   comparison_operator: ::String?
+                                                 }?,
+                                                 and_expression: Array[
+                                                   untyped,
+                                                 ]?,
+                                                 or_expression: Array[
+                                                   untyped,
+                                                 ]?
+                                               }?
+                                             },
+                                           ]?
+                                         }
                                        ) -> _UpdateContactRoutingDataResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactRoutingDataResponseSuccess
 

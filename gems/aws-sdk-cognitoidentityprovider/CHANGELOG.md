@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-08-09)
+------------------
+
+* Feature - Fixed a description of AdvancedSecurityAdditionalFlows in Amazon Cognito user pool configuration.
+
+1.99.0 (2024-08-08)
+------------------
+
+* Feature - Added support for threat protection for custom authentication in Amazon Cognito user pools.
+
 1.98.0 (2024-08-06)
 ------------------
 
