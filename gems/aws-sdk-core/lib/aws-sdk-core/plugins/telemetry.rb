@@ -9,16 +9,31 @@ module Aws
         default: Aws::Telemetry::NoOpTelemetryProvider,
         doc_type: Aws::Telemetry::TelemetryProviderBase,
         rbs_type: 'untyped',
-        docstring: <<~DOCS) do |cfg|
+        docstring: <<-DOCS) do |cfg|
           Allows you to provide a telemetry provider. By default,
           will use the NoOpTelemetryProvider.
         DOCS
         resolve_provider(cfg)
       end
 
-      # do we need to validate if there is something
-      def self.resolve_provider(_cfg)
-        Aws::Telemetry::NoOpTelemetryProvider.new
+      def after_initialize(client)
+        validate_telemetry_provider(client.config)
+      end
+
+      def validate_telemetry_provider(config)
+        unless config.telemetry_provider.is_a?(Aws::Telemetry::TelemetryProviderBase)
+          raise ArgumentError,
+                'Must provide a telemetry provider for the '\
+                '`telemetry_provider` configuration option.'
+        end
+      end
+
+      class << self
+        private
+
+        def resolve_provider(_cfg)
+          Aws::Telemetry::NoOpTelemetryProvider.new
+        end
       end
 
       # this is the root parent handler
