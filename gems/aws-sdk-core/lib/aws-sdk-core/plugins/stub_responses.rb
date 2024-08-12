@@ -49,17 +49,21 @@ requests are made, and retries are disabled.
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          stub = context.client.next_stub(context)
-          resp = Seahorse::Client::Response.new(context: context)
-          async_mode = context.client.is_a? Seahorse::Client::AsyncBase
-          if Hash === stub && stub[:mutex]
-            stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
-          else
-            apply_stub(stub, resp, async_mode)
+          span_wrapper(context) do
+            stub = context.client.next_stub(context)
+            resp = Seahorse::Client::Response.new(context: context)
+            async_mode = context.client.is_a? Seahorse::Client::AsyncBase
+            if Hash === stub && stub[:mutex]
+              stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
+            else
+              apply_stub(stub, resp, async_mode)
+            end
+            async_mode ? Seahorse::Client::AsyncResponse.new(
+              context: context,
+              stream: context[:input_event_stream_handler].event_emitter.stream,
+              sync_queue: Queue.new
+            ) : resp
           end
-
-          async_mode ? Seahorse::Client::AsyncResponse.new(
-            context: context, stream: context[:input_event_stream_handler].event_emitter.stream, sync_queue: Queue.new) : resp
         end
 
         def apply_stub(stub, response, async_mode = false)
@@ -99,6 +103,45 @@ requests are made, and retries are disabled.
           http_resp.signal_done
         end
 
+        def span_wrapper(context, &block)
+          context.tracer.in_span(
+            'Handler.StubResponses',
+            attributes: request_attrs(context)
+          ) do |span|
+            block.call
+            span.add_attributes(response_attrs(context))
+            yield
+          end
+        end
+
+        def request_attrs(context)
+          {
+            'http.method' => context.http_request.http_method,
+            'net.protocol.name' => 'http',
+            'net.protocol.version' => Net::HTTP::HTTPVersion,
+          }.tap do |h|
+            if context.http_request.headers.key?('Content-Length')
+              h['http.request_context_length'] =
+                context.http_request.headers['Content-Length']
+            end
+          end
+        end
+
+        def response_attrs(context)
+          {
+            'http.status_code' => context.http_response.status_code.to_s
+          }.tap do |h|
+            if context.http_response.headers.key?('Content-Length')
+              h['http.response.content_length'] =
+                context.http_response.headers['Content-Length']
+            end
+
+            if context.http_response.headers.key?('x-amz-request-id')
+              h['aws.request_id'] =
+                context.http_response.headers['x-amz-request-id']
+            end
+          end
+        end
       end
     end
   end
