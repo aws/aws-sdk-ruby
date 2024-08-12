@@ -401,6 +401,8 @@ module Aws::EC2
     CpuManufacturerSet = Shapes::ListShape.new(name: 'CpuManufacturerSet')
     CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
     CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
+    CreateCapacityReservationBySplittingRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationBySplittingRequest')
+    CreateCapacityReservationBySplittingResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationBySplittingResult')
     CreateCapacityReservationFleetRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationFleetRequest')
     CreateCapacityReservationFleetResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationFleetResult')
     CreateCapacityReservationRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationRequest')
@@ -2235,6 +2237,8 @@ module Aws::EC2
     MoveAddressToVpcResult = Shapes::StructureShape.new(name: 'MoveAddressToVpcResult')
     MoveByoipCidrToIpamRequest = Shapes::StructureShape.new(name: 'MoveByoipCidrToIpamRequest')
     MoveByoipCidrToIpamResult = Shapes::StructureShape.new(name: 'MoveByoipCidrToIpamResult')
+    MoveCapacityReservationInstancesRequest = Shapes::StructureShape.new(name: 'MoveCapacityReservationInstancesRequest')
+    MoveCapacityReservationInstancesResult = Shapes::StructureShape.new(name: 'MoveCapacityReservationInstancesResult')
     MoveStatus = Shapes::StringShape.new(name: 'MoveStatus')
     MovingAddressStatus = Shapes::StructureShape.new(name: 'MovingAddressStatus')
     MovingAddressStatusSet = Shapes::ListShape.new(name: 'MovingAddressStatusSet')
@@ -4523,6 +4527,18 @@ module Aws::EC2
     CpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
     CpuOptionsRequest.add_member(:amd_sev_snp, Shapes::ShapeRef.new(shape: AmdSevSnpSpecification, location_name: "AmdSevSnp"))
     CpuOptionsRequest.struct_class = Types::CpuOptionsRequest
+
+    CreateCapacityReservationBySplittingRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateCapacityReservationBySplittingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCapacityReservationBySplittingRequest.add_member(:source_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "SourceCapacityReservationId"))
+    CreateCapacityReservationBySplittingRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
+    CreateCapacityReservationBySplittingRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateCapacityReservationBySplittingRequest.struct_class = Types::CreateCapacityReservationBySplittingRequest
+
+    CreateCapacityReservationBySplittingResult.add_member(:source_capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "sourceCapacityReservation"))
+    CreateCapacityReservationBySplittingResult.add_member(:destination_capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "destinationCapacityReservation"))
+    CreateCapacityReservationBySplittingResult.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+    CreateCapacityReservationBySplittingResult.struct_class = Types::CreateCapacityReservationBySplittingResult
 
     CreateCapacityReservationFleetRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "AllocationStrategy"))
     CreateCapacityReservationFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -11469,6 +11485,7 @@ module Aws::EC2
     ModifyCapacityReservationRequest.add_member(:accept, Shapes::ShapeRef.new(shape: Boolean, location_name: "Accept"))
     ModifyCapacityReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyCapacityReservationRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: String, location_name: "AdditionalInfo"))
+    ModifyCapacityReservationRequest.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: InstanceMatchCriteria, location_name: "InstanceMatchCriteria"))
     ModifyCapacityReservationRequest.struct_class = Types::ModifyCapacityReservationRequest
 
     ModifyCapacityReservationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -12219,6 +12236,18 @@ module Aws::EC2
 
     MoveByoipCidrToIpamResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
     MoveByoipCidrToIpamResult.struct_class = Types::MoveByoipCidrToIpamResult
+
+    MoveCapacityReservationInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    MoveCapacityReservationInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    MoveCapacityReservationInstancesRequest.add_member(:source_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "SourceCapacityReservationId"))
+    MoveCapacityReservationInstancesRequest.add_member(:destination_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "DestinationCapacityReservationId"))
+    MoveCapacityReservationInstancesRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
+    MoveCapacityReservationInstancesRequest.struct_class = Types::MoveCapacityReservationInstancesRequest
+
+    MoveCapacityReservationInstancesResult.add_member(:source_capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "sourceCapacityReservation"))
+    MoveCapacityReservationInstancesResult.add_member(:destination_capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "destinationCapacityReservation"))
+    MoveCapacityReservationInstancesResult.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+    MoveCapacityReservationInstancesResult.struct_class = Types::MoveCapacityReservationInstancesResult
 
     MovingAddressStatus.add_member(:move_status, Shapes::ShapeRef.new(shape: MoveStatus, location_name: "moveStatus"))
     MovingAddressStatus.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -16268,6 +16297,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationResult)
+      end)
+
+      api.add_operation(:create_capacity_reservation_by_splitting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCapacityReservationBySplitting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationBySplittingRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationBySplittingResult)
       end)
 
       api.add_operation(:create_capacity_reservation_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -21111,6 +21148,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: MoveByoipCidrToIpamRequest)
         o.output = Shapes::ShapeRef.new(shape: MoveByoipCidrToIpamResult)
+      end)
+
+      api.add_operation(:move_capacity_reservation_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "MoveCapacityReservationInstances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: MoveCapacityReservationInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: MoveCapacityReservationInstancesResult)
       end)
 
       api.add_operation(:provision_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|

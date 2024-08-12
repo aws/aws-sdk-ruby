@@ -2358,6 +2358,10 @@ module Aws::MediaLive
       attr_accessor scte_35_pid: ::Integer
       attr_accessor timed_metadata_pid: ::Integer
       attr_accessor video_pid: ::Integer
+      attr_accessor arib_captions_pid: ::Integer
+      attr_accessor dvb_teletext_pids: ::Array[::Integer]
+      attr_accessor ecm_pid: ::Integer
+      attr_accessor smpte_2038_pid: ::Integer
       SENSITIVE: []
     end
 
@@ -3318,6 +3322,7 @@ module Aws::MediaLive
     class UpdateMultiplex
       attr_accessor multiplex_settings: Types::MultiplexSettings
       attr_accessor name: ::String
+      attr_accessor packet_identifiers_mapping: ::Hash[::String, Types::MultiplexProgramPacketIdentifiersMap]
       SENSITIVE: []
     end
 
@@ -3347,6 +3352,7 @@ module Aws::MediaLive
       attr_accessor multiplex_id: ::String
       attr_accessor multiplex_settings: Types::MultiplexSettings
       attr_accessor name: ::String
+      attr_accessor packet_identifiers_mapping: ::Hash[::String, Types::MultiplexProgramPacketIdentifiersMap]
       SENSITIVE: []
     end
 

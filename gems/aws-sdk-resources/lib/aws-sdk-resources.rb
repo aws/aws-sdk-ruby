@@ -86,7 +86,6 @@ module Aws
   autoload :CodeGuruReviewer, 'aws-sdk-codegurureviewer'
   autoload :CodeGuruSecurity, 'aws-sdk-codegurusecurity'
   autoload :CodePipeline, 'aws-sdk-codepipeline'
-  autoload :CodeStar, 'aws-sdk-codestar'
   autoload :CodeStarNotifications, 'aws-sdk-codestarnotifications'
   autoload :CodeStarconnections, 'aws-sdk-codestarconnections'
   autoload :CognitoIdentity, 'aws-sdk-cognitoidentity'

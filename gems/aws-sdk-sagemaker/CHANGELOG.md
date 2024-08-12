@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.256.0 (2024-08-12)
+------------------
+
+* Feature - Releasing large data support as part of CreateAutoMLJobV2 in SageMaker Autopilot and CreateDomain API for SageMaker Canvas.
+
 1.255.0 (2024-08-01)
 ------------------
 

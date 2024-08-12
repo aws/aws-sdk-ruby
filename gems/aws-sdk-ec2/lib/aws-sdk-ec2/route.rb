@@ -48,7 +48,7 @@ module Aws::EC2
       data[:destination_ipv_6_cidr_block]
     end
 
-    # The prefix of the Amazon Web Service.
+    # The prefix of the Amazon Web Services service.
     # @return [String]
     def destination_prefix_list_id
       data[:destination_prefix_list_id]

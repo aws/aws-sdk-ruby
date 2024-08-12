@@ -678,6 +678,11 @@ module Aws
                                    },
                                    ?data_split_config: {
                                      validation_fraction: ::Float?
+                                   },
+                                   ?auto_ml_compute_config: {
+                                     emr_serverless_compute_config: {
+                                       execution_role_arn: ::String
+                                     }?
                                    }
                                  ) -> _CreateAutoMLJobV2ResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutoMLJobV2ResponseSuccess
@@ -1041,6 +1046,10 @@ module Aws
                                }?,
                                generative_ai_settings: {
                                  amazon_bedrock_role_arn: ::String?
+                               }?,
+                               emr_serverless_settings: {
+                                 execution_role_arn: ::String?,
+                                 status: ("ENABLED" | "DISABLED")?
                                }?
                              }?,
                              code_editor_app_settings: {
@@ -1107,7 +1116,7 @@ module Aws
                                },
                              ]?,
                              studio_web_portal_settings: {
-                               hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                               hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects" | "InferenceOptimization")]?,
                                hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
                              }?
                            },
@@ -3483,7 +3492,7 @@ module Aws
                                          output_name: ::String,
                                          s3_output: {
                                            s3_uri: ::String,
-                                           local_path: ::String,
+                                           local_path: ::String?,
                                            s3_upload_mode: ("Continuous" | "EndOfJob")
                                          }?,
                                          feature_store_output: {
@@ -4080,6 +4089,10 @@ module Aws
                                      }?,
                                      generative_ai_settings: {
                                        amazon_bedrock_role_arn: ::String?
+                                     }?,
+                                     emr_serverless_settings: {
+                                       execution_role_arn: ::String?,
+                                       status: ("ENABLED" | "DISABLED")?
                                      }?
                                    }?,
                                    code_editor_app_settings: {
@@ -4146,7 +4159,7 @@ module Aws
                                      },
                                    ]?,
                                    studio_web_portal_settings: {
-                                     hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                                     hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects" | "InferenceOptimization")]?,
                                      hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
                                    }?
                                  }
@@ -4806,6 +4819,7 @@ module Aws
         def model_deploy_result: () -> Types::ModelDeployResult
         def data_split_config: () -> Types::AutoMLDataSplitConfig
         def security_config: () -> Types::AutoMLSecurityConfig
+        def auto_ml_compute_config: () -> Types::AutoMLComputeConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_auto_ml_job_v2-instance_method
       def describe_auto_ml_job_v2: (
@@ -8182,6 +8196,10 @@ module Aws
                                }?,
                                generative_ai_settings: {
                                  amazon_bedrock_role_arn: ::String?
+                               }?,
+                               emr_serverless_settings: {
+                                 execution_role_arn: ::String?,
+                                 status: ("ENABLED" | "DISABLED")?
                                }?
                              }?,
                              code_editor_app_settings: {
@@ -8248,7 +8266,7 @@ module Aws
                                },
                              ]?,
                              studio_web_portal_settings: {
-                               hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                               hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects" | "InferenceOptimization")]?,
                                hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
                              }?
                            },
@@ -9257,6 +9275,10 @@ module Aws
                                      }?,
                                      generative_ai_settings: {
                                        amazon_bedrock_role_arn: ::String?
+                                     }?,
+                                     emr_serverless_settings: {
+                                       execution_role_arn: ::String?,
+                                       status: ("ENABLED" | "DISABLED")?
                                      }?
                                    }?,
                                    code_editor_app_settings: {
@@ -9323,7 +9345,7 @@ module Aws
                                      },
                                    ]?,
                                    studio_web_portal_settings: {
-                                     hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects")]?,
+                                     hidden_ml_tools: Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects" | "InferenceOptimization")]?,
                                      hidden_app_types: Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]?
                                    }?
                                  }

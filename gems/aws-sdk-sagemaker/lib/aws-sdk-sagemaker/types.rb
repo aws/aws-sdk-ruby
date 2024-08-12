@@ -2082,6 +2082,46 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # <note markdown="1"> This data type is intended for use exclusively by SageMaker Canvas and
+    # cannot be used in other contexts at the moment.
+    #
+    #  </note>
+    #
+    # Specifies the compute configuration for an AutoML job V2.
+    #
+    # @!attribute [rw] emr_serverless_compute_config
+    #   The configuration for using [ EMR Serverless][1] to run the AutoML
+    #   job V2.
+    #
+    #   To allow your AutoML job V2 to automatically initiate a remote job
+    #   on EMR Serverless when additional compute resources are needed to
+    #   process large datasets, you need to provide an
+    #   `EmrServerlessComputeConfig` object, which includes an
+    #   `ExecutionRoleARN` attribute, to the `AutoMLComputeConfig` of the
+    #   AutoML job V2 input request.
+    #
+    #   By seamlessly transitioning to EMR Serverless when required, the
+    #   AutoML job can handle datasets that would otherwise exceed the
+    #   initially provisioned resources, without any manual intervention
+    #   from you.
+    #
+    #   EMR Serverless is available for the tabular and time series problem
+    #   types. We recommend setting up this option for tabular datasets
+    #   larger than 5 GB and time series datasets larger than 30 GB.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html
+    #   @return [Types::EmrServerlessComputeConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLComputeConfig AWS API Documentation
+    #
+    class AutoMLComputeConfig < Struct.new(
+      :emr_serverless_compute_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of container definitions that describe the different containers
     # that make up an AutoML candidate. For more information, see [
     # ContainerDefinition][1].
@@ -2520,7 +2560,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
-    #   The Amazon S3 output path. Must be 128 characters or less.
+    #   The Amazon S3 output path. Must be 512 characters or less.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLOutputDataConfig AWS API Documentation
@@ -3331,6 +3371,11 @@ module Aws::SageMaker
     #   The generative AI settings for the SageMaker Canvas application.
     #   @return [Types::GenerativeAiSettings]
     #
+    # @!attribute [rw] emr_serverless_settings
+    #   The settings for running Amazon EMR Serverless data processing jobs
+    #   in SageMaker Canvas.
+    #   @return [Types::EmrServerlessSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CanvasAppSettings AWS API Documentation
     #
     class CanvasAppSettings < Struct.new(
@@ -3340,7 +3385,8 @@ module Aws::SageMaker
       :identity_provider_o_auth_settings,
       :direct_deploy_settings,
       :kendra_settings,
-      :generative_ai_settings)
+      :generative_ai_settings,
+      :emr_serverless_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5603,6 +5649,10 @@ module Aws::SageMaker
     #    </note>
     #   @return [Types::AutoMLDataSplitConfig]
     #
+    # @!attribute [rw] auto_ml_compute_config
+    #   Specifies the compute configuration for the AutoML job V2.
+    #   @return [Types::AutoMLComputeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAutoMLJobV2Request AWS API Documentation
     #
     class CreateAutoMLJobV2Request < Struct.new(
@@ -5615,7 +5665,8 @@ module Aws::SageMaker
       :security_config,
       :auto_ml_job_objective,
       :model_deploy_config,
-      :data_split_config)
+      :data_split_config,
+      :auto_ml_compute_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12620,6 +12671,10 @@ module Aws::SageMaker
     #   VPC settings.
     #   @return [Types::AutoMLSecurityConfig]
     #
+    # @!attribute [rw] auto_ml_compute_config
+    #   The compute configuration used for the AutoML job V2.
+    #   @return [Types::AutoMLComputeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2Response AWS API Documentation
     #
     class DescribeAutoMLJobV2Response < Struct.new(
@@ -12644,7 +12699,8 @@ module Aws::SageMaker
       :model_deploy_config,
       :model_deploy_result,
       :data_split_config,
-      :security_config)
+      :security_config,
+      :auto_ml_compute_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19298,6 +19354,61 @@ module Aws::SageMaker
       :artifact,
       :status,
       :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This data type is intended for use exclusively by SageMaker Canvas and
+    # cannot be used in other contexts at the moment.
+    #
+    #  </note>
+    #
+    # Specifies the compute configuration for the EMR Serverless job.
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM role granting the AutoML job V2 the necessary
+    #   permissions access policies to list, connect to, or manage EMR
+    #   Serverless jobs. For detailed information about the required
+    #   permissions of this role, see "How to configure AutoML to initiate
+    #   a remote job on EMR Serverless for large datasets" in [Create a
+    #   regression or classification job for tabular data using the AutoML
+    #   API][1] or [Create an AutoML job for time-series forecasting using
+    #   the API][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-timeseries-forecasting.html#timeseries-forecasting-api-optional-params
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EmrServerlessComputeConfig AWS API Documentation
+    #
+    class EmrServerlessComputeConfig < Struct.new(
+      :execution_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for running Amazon EMR Serverless jobs in SageMaker
+    # Canvas.
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM role
+    #   that is assumed for running Amazon EMR Serverless jobs in SageMaker
+    #   Canvas. This role should have the necessary permissions to read and
+    #   write data attached and a trust relationship with EMR Serverless.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes whether Amazon EMR Serverless job capabilities are enabled
+    #   or disabled in the SageMaker Canvas application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EmrServerlessSettings AWS API Documentation
+    #
+    class EmrServerlessSettings < Struct.new(
+      :execution_role_arn,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37013,6 +37124,18 @@ module Aws::SageMaker
     #   environment is compatible with specific software requirements, such
     #   as CUDA driver versions, Linux kernel versions, or Amazon Web
     #   Services Neuron driver versions.
+    #
+    #   The AMI version names, and their configurations, are the following:
+    #
+    #   al2-ami-sagemaker-inference-gpu-2
+    #   : * Accelerator: GPU
+    #
+    #     * NVIDIA driver version: 535.54.03
+    #
+    #     * CUDA driver version: 12.2
+    #
+    #     * Supported instance types: ml.g4dn.*, ml.g5.*, ml.g6.*,
+    #       ml.p3.*, ml.p4d.*, ml.p4de.*, ml.p5.*
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation

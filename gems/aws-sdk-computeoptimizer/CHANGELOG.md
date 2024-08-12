@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2024-08-12)
+------------------
+
+* Feature - Doc only update for Compute Optimizer that fixes several customer-reported issues relating to ECS finding classifications
+
 1.61.0 (2024-07-02)
 ------------------
 

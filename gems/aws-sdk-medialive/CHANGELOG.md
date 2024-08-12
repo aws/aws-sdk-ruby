@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2024-08-12)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports now supports editing the PID values for a Multiplex.
+
 1.127.0 (2024-07-18)
 ------------------
 

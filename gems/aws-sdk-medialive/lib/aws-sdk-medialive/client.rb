@@ -2016,6 +2016,11 @@ module Aws::MediaLive
     #   resp.multiplex_program.packet_identifiers_map.scte_35_pid #=> Integer
     #   resp.multiplex_program.packet_identifiers_map.timed_metadata_pid #=> Integer
     #   resp.multiplex_program.packet_identifiers_map.video_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.arib_captions_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.dvb_teletext_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.dvb_teletext_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.ecm_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.smpte_2038_pid #=> Integer
     #   resp.multiplex_program.pipeline_details #=> Array
     #   resp.multiplex_program.pipeline_details[0].active_channel_pipeline #=> String
     #   resp.multiplex_program.pipeline_details[0].pipeline_id #=> String
@@ -2995,6 +3000,11 @@ module Aws::MediaLive
     #   resp.packet_identifiers_map.scte_35_pid #=> Integer
     #   resp.packet_identifiers_map.timed_metadata_pid #=> Integer
     #   resp.packet_identifiers_map.video_pid #=> Integer
+    #   resp.packet_identifiers_map.arib_captions_pid #=> Integer
+    #   resp.packet_identifiers_map.dvb_teletext_pids #=> Array
+    #   resp.packet_identifiers_map.dvb_teletext_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.ecm_pid #=> Integer
+    #   resp.packet_identifiers_map.smpte_2038_pid #=> Integer
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_channel_pipeline #=> String
     #   resp.pipeline_details[0].pipeline_id #=> String
@@ -4238,6 +4248,11 @@ module Aws::MediaLive
     #   resp.packet_identifiers_map.scte_35_pid #=> Integer
     #   resp.packet_identifiers_map.timed_metadata_pid #=> Integer
     #   resp.packet_identifiers_map.video_pid #=> Integer
+    #   resp.packet_identifiers_map.arib_captions_pid #=> Integer
+    #   resp.packet_identifiers_map.dvb_teletext_pids #=> Array
+    #   resp.packet_identifiers_map.dvb_teletext_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.ecm_pid #=> Integer
+    #   resp.packet_identifiers_map.smpte_2038_pid #=> Integer
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_channel_pipeline #=> String
     #   resp.pipeline_details[0].pipeline_id #=> String
@@ -8770,6 +8785,8 @@ module Aws::MediaLive
     #
     # @option params [String] :name
     #
+    # @option params [Hash<String,Types::MultiplexProgramPacketIdentifiersMap>] :packet_identifiers_mapping
+    #
     # @return [Types::UpdateMultiplexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMultiplexResponse#multiplex #multiplex} => Types::Multiplex
@@ -8785,6 +8802,27 @@ module Aws::MediaLive
     #       transport_stream_reserved_bitrate: 1,
     #     },
     #     name: "__string",
+    #     packet_identifiers_mapping: {
+    #       "__string" => {
+    #         audio_pids: [1],
+    #         dvb_sub_pids: [1],
+    #         dvb_teletext_pid: 1,
+    #         etv_platform_pid: 1,
+    #         etv_signal_pid: 1,
+    #         klv_data_pids: [1],
+    #         pcr_pid: 1,
+    #         pmt_pid: 1,
+    #         private_metadata_pid: 1,
+    #         scte_27_pids: [1],
+    #         scte_35_pid: 1,
+    #         timed_metadata_pid: 1,
+    #         video_pid: 1,
+    #         arib_captions_pid: 1,
+    #         dvb_teletext_pids: [1],
+    #         ecm_pid: 1,
+    #         smpte_2038_pid: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -8879,6 +8917,11 @@ module Aws::MediaLive
     #   resp.multiplex_program.packet_identifiers_map.scte_35_pid #=> Integer
     #   resp.multiplex_program.packet_identifiers_map.timed_metadata_pid #=> Integer
     #   resp.multiplex_program.packet_identifiers_map.video_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.arib_captions_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.dvb_teletext_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.dvb_teletext_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.ecm_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.smpte_2038_pid #=> Integer
     #   resp.multiplex_program.pipeline_details #=> Array
     #   resp.multiplex_program.pipeline_details[0].active_channel_pipeline #=> String
     #   resp.multiplex_program.pipeline_details[0].pipeline_id #=> String
@@ -11246,7 +11289,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

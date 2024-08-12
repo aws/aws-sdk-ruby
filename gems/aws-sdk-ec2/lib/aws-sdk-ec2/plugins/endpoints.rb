@@ -170,6 +170,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::CopySnapshot.build(context)
           when :create_capacity_reservation
             Aws::EC2::Endpoints::CreateCapacityReservation.build(context)
+          when :create_capacity_reservation_by_splitting
+            Aws::EC2::Endpoints::CreateCapacityReservationBySplitting.build(context)
           when :create_capacity_reservation_fleet
             Aws::EC2::Endpoints::CreateCapacityReservationFleet.build(context)
           when :create_carrier_gateway
@@ -1174,6 +1176,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::MoveAddressToVpc.build(context)
           when :move_byoip_cidr_to_ipam
             Aws::EC2::Endpoints::MoveByoipCidrToIpam.build(context)
+          when :move_capacity_reservation_instances
+            Aws::EC2::Endpoints::MoveCapacityReservationInstances.build(context)
           when :provision_byoip_cidr
             Aws::EC2::Endpoints::ProvisionByoipCidr.build(context)
           when :provision_ipam_byoasn
