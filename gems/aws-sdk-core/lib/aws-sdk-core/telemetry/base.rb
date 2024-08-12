@@ -5,10 +5,10 @@ module Aws
     # Base for TelemetryProvider classes.
     # They are used to emit telemetry data. It needs the
     # following class instances to function:
-    # - +TracerProvider+ - A provider that returns a tracer
+    # - `TracerProvider` - A provider that returns a tracer
     #   instance. Then, a tracer will create spans and those
     #   spans will contain information in that given moment.
-    # - +ContextManager+ - Manages context and used to
+    # - `ContextManager` - Manages context and used to
     #   return the current context within a trace.
     class TelemetryProviderBase
       # @param [Class] tracer_provider A provider that returns
@@ -45,7 +45,7 @@ module Aws
       # @param [String] name Span name
       # @param [Object] with_parent Parent Context
       # @param [Hash] attributes Attributes to attach to the span
-      # @param [Hearth::Telemetry::SpanKind] kind Type of Span
+      # @param [Aws::Telemetry::SpanKind] kind Type of Span
       # @return [Span]
       def start_span(name, with_parent: nil, attributes: nil, kind: nil)
         raise NotImplementedError
@@ -59,7 +59,7 @@ module Aws
       #
       # @param [String] name Span name
       # @param [Hash] attributes Attributes to attach to the span
-      # @param [Hearth::Telemetry::SpanKind] kind Type of Span
+      # @param [Aws::Telemetry::SpanKind] kind Type of Span
       # @return [Span]
       def in_span(name, attributes: nil, kind: nil)
         raise NotImplementedError
@@ -108,7 +108,7 @@ module Aws
 
       # Sets the Span status.
       #
-      # @param [Hearth::Telemetry::Status] status The new status, which
+      # @param [Aws::Telemetry::SpanStatus] status The new status, which
       #   overrides the default Span status, which is OK.
       # @return [void]
       def status=(status)
