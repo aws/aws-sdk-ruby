@@ -3741,7 +3741,8 @@ module Aws
                         ?max_results: ::Integer,
                         ?transaction_id: ::String,
                         ?query_as_of_time: ::Time,
-                        ?include_status_details: bool
+                        ?include_status_details: bool,
+                        ?attributes_to_get: Array[("NAME" | "TABLE_TYPE")]
                       ) -> _GetTablesResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTablesResponseSuccess
 

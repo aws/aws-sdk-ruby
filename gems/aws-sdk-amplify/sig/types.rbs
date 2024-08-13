@@ -33,6 +33,7 @@ module Aws::Amplify
       attr_accessor auto_branch_creation_patterns: ::Array[::String]
       attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig
       attr_accessor repository_clone_method: ("SSH" | "TOKEN" | "SIGV4")
+      attr_accessor cache_config: Types::CacheConfig
       SENSITIVE: [:basic_auth_credentials, :build_spec]
     end
 
@@ -108,6 +109,11 @@ module Aws::Amplify
       SENSITIVE: [:basic_auth_credentials, :build_spec]
     end
 
+    class CacheConfig
+      attr_accessor type: ("AMPLIFY_MANAGED" | "AMPLIFY_MANAGED_NO_COOKIES")
+      SENSITIVE: []
+    end
+
     class Certificate
       attr_accessor type: ("AMPLIFY_MANAGED" | "CUSTOM")
       attr_accessor custom_certificate_arn: ::String
@@ -141,6 +147,7 @@ module Aws::Amplify
       attr_accessor enable_auto_branch_creation: bool
       attr_accessor auto_branch_creation_patterns: ::Array[::String]
       attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig
+      attr_accessor cache_config: Types::CacheConfig
       SENSITIVE: [:oauth_token, :access_token, :basic_auth_credentials, :build_spec]
     end
 
@@ -679,6 +686,7 @@ module Aws::Amplify
       attr_accessor repository: ::String
       attr_accessor oauth_token: ::String
       attr_accessor access_token: ::String
+      attr_accessor cache_config: Types::CacheConfig
       SENSITIVE: [:basic_auth_credentials, :build_spec, :oauth_token, :access_token]
     end
 

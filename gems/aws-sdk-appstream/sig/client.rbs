@@ -447,6 +447,32 @@ module Aws
                                 ) -> _CreateStreamingURLResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingURLResponseSuccess
 
+      interface _CreateThemeForStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateThemeForStackResult]
+        def theme: () -> Types::Theme
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_theme_for_stack-instance_method
+      def create_theme_for_stack: (
+                                    stack_name: ::String,
+                                    ?footer_links: Array[
+                                      {
+                                        display_name: ::String?,
+                                        footer_link_url: ::String?
+                                      },
+                                    ],
+                                    title_text: ::String,
+                                    theme_styling: ("LIGHT_BLUE" | "BLUE" | "PINK" | "RED"),
+                                    organization_logo_s3_location: {
+                                      s3_bucket: ::String,
+                                      s3_key: ::String?
+                                    },
+                                    favicon_s3_location: {
+                                      s3_bucket: ::String,
+                                      s3_key: ::String?
+                                    }
+                                  ) -> _CreateThemeForStackResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThemeForStackResponseSuccess
+
       interface _CreateUpdatedImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateUpdatedImageResult]
         def image: () -> Types::Image
@@ -579,6 +605,15 @@ module Aws
                           name: ::String
                         ) -> _DeleteStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStackResponseSuccess
+
+      interface _DeleteThemeForStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteThemeForStackResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_theme_for_stack-instance_method
+      def delete_theme_for_stack: (
+                                    stack_name: ::String
+                                  ) -> _DeleteThemeForStackResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteThemeForStackResponseSuccess
 
       interface _DeleteUsageReportSubscriptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUsageReportSubscriptionResult]
@@ -775,6 +810,16 @@ module Aws
                              ?next_token: ::String
                            ) -> _DescribeStacksResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStacksResponseSuccess
+
+      interface _DescribeThemeForStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeThemeForStackResult]
+        def theme: () -> Types::Theme
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_theme_for_stack-instance_method
+      def describe_theme_for_stack: (
+                                      stack_name: ::String
+                                    ) -> _DescribeThemeForStackResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeThemeForStackResponseSuccess
 
       interface _DescribeUsageReportSubscriptionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUsageReportSubscriptionsResult]
@@ -1199,6 +1244,34 @@ module Aws
                           }
                         ) -> _UpdateStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackResponseSuccess
+
+      interface _UpdateThemeForStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThemeForStackResult]
+        def theme: () -> Types::Theme
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_theme_for_stack-instance_method
+      def update_theme_for_stack: (
+                                    stack_name: ::String,
+                                    ?footer_links: Array[
+                                      {
+                                        display_name: ::String?,
+                                        footer_link_url: ::String?
+                                      },
+                                    ],
+                                    ?title_text: ::String,
+                                    ?theme_styling: ("LIGHT_BLUE" | "BLUE" | "PINK" | "RED"),
+                                    ?organization_logo_s3_location: {
+                                      s3_bucket: ::String,
+                                      s3_key: ::String?
+                                    },
+                                    ?favicon_s3_location: {
+                                      s3_bucket: ::String,
+                                      s3_key: ::String?
+                                    },
+                                    ?state: ("ENABLED" | "DISABLED"),
+                                    ?attributes_to_delete: Array[("FOOTER_LINKS")]
+                                  ) -> _UpdateThemeForStackResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThemeForStackResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#wait_until-instance_method
       def wait_until: (:fleet_started waiter_name, 

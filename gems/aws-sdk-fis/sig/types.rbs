@@ -176,6 +176,13 @@ module Aws::FIS
       SENSITIVE: []
     end
 
+    class ExperimentError
+      attr_accessor account_id: ::String
+      attr_accessor code: ::String
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
     class ExperimentLogConfiguration
       attr_accessor cloud_watch_logs_configuration: Types::ExperimentCloudWatchLogsLogConfiguration
       attr_accessor s3_configuration: Types::ExperimentS3LogConfiguration
@@ -199,6 +206,7 @@ module Aws::FIS
     class ExperimentState
       attr_accessor status: ("pending" | "initiating" | "running" | "completed" | "stopping" | "stopped" | "failed")
       attr_accessor reason: ::String
+      attr_accessor error: Types::ExperimentError
       SENSITIVE: []
     end
 

@@ -12223,6 +12223,18 @@ module Aws::Glue
     #   create or update an Glue Data Catalog view.
     #   @return [Boolean]
     #
+    # @!attribute [rw] attributes_to_get
+    #   Specifies the table fields returned by the `GetTables` call. This
+    #   parameter doesn’t accept an empty list. The request must include
+    #   `NAME`.
+    #
+    #   The following are the valid combinations of values:
+    #
+    #   * `NAME` - Names of all tables in the database.
+    #
+    #   * `NAME`, `TABLE_TYPE` - Names of all tables and the table types.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTablesRequest AWS API Documentation
     #
     class GetTablesRequest < Struct.new(
@@ -12233,7 +12245,8 @@ module Aws::Glue
       :max_results,
       :transaction_id,
       :query_as_of_time,
-      :include_status_details)
+      :include_status_details,
+      :attributes_to_get)
       SENSITIVE = []
       include Aws::Structure
     end

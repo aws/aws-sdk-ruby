@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.189.0 (2024-08-13)
+------------------
+
+* Feature - Add AttributesToGet parameter support for Glue GetTables
+
 1.188.0 (2024-08-08)
 ------------------
 

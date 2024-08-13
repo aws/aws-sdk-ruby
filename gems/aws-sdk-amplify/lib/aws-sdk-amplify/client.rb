@@ -539,6 +539,9 @@ module Aws::Amplify
     # @option params [Types::AutoBranchCreationConfig] :auto_branch_creation_config
     #   The automated branch creation configuration for an Amplify app.
     #
+    # @option params [Types::CacheConfig] :cache_config
+    #   The cache configuration for the Amplify app.
+    #
     # @return [Types::CreateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAppResult#app #app} => Types::App
@@ -589,6 +592,9 @@ module Aws::Amplify
     #       enable_pull_request_preview: false,
     #       pull_request_environment_name: "PullRequestEnvironmentName",
     #     },
+    #     cache_config: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES
+    #     },
     #   })
     #
     # @example Response structure
@@ -637,6 +643,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
+    #   resp.app.cache_config.type #=> String, one of "AMPLIFY_MANAGED", "AMPLIFY_MANAGED_NO_COOKIES"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateApp AWS API Documentation
     #
@@ -1089,6 +1096,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
+    #   resp.app.cache_config.type #=> String, one of "AMPLIFY_MANAGED", "AMPLIFY_MANAGED_NO_COOKIES"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteApp AWS API Documentation
     #
@@ -1436,6 +1444,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
+    #   resp.app.cache_config.type #=> String, one of "AMPLIFY_MANAGED", "AMPLIFY_MANAGED_NO_COOKIES"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp AWS API Documentation
     #
@@ -1793,6 +1802,7 @@ module Aws::Amplify
     #   resp.apps[0].auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.pull_request_environment_name #=> String
     #   resp.apps[0].repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
+    #   resp.apps[0].cache_config.type #=> String, one of "AMPLIFY_MANAGED", "AMPLIFY_MANAGED_NO_COOKIES"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps AWS API Documentation
@@ -2508,6 +2518,9 @@ module Aws::Amplify
     #
     #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
+    # @option params [Types::CacheConfig] :cache_config
+    #   The cache configuration for the Amplify app.
+    #
     # @return [Types::UpdateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAppResult#app #app} => Types::App
@@ -2556,6 +2569,9 @@ module Aws::Amplify
     #     repository: "Repository",
     #     oauth_token: "OauthToken",
     #     access_token: "AccessToken",
+    #     cache_config: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES
+    #     },
     #   })
     #
     # @example Response structure
@@ -2604,6 +2620,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
     #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
+    #   resp.app.cache_config.type #=> String, one of "AMPLIFY_MANAGED", "AMPLIFY_MANAGED_NO_COOKIES"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateApp AWS API Documentation
     #
@@ -2896,7 +2913,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -90,6 +90,8 @@ module Aws::AppStream
     CreateStackResult = Shapes::StructureShape.new(name: 'CreateStackResult')
     CreateStreamingURLRequest = Shapes::StructureShape.new(name: 'CreateStreamingURLRequest')
     CreateStreamingURLResult = Shapes::StructureShape.new(name: 'CreateStreamingURLResult')
+    CreateThemeForStackRequest = Shapes::StructureShape.new(name: 'CreateThemeForStackRequest')
+    CreateThemeForStackResult = Shapes::StructureShape.new(name: 'CreateThemeForStackResult')
     CreateUpdatedImageRequest = Shapes::StructureShape.new(name: 'CreateUpdatedImageRequest')
     CreateUpdatedImageResult = Shapes::StructureShape.new(name: 'CreateUpdatedImageResult')
     CreateUsageReportSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateUsageReportSubscriptionRequest')
@@ -116,6 +118,8 @@ module Aws::AppStream
     DeleteImageResult = Shapes::StructureShape.new(name: 'DeleteImageResult')
     DeleteStackRequest = Shapes::StructureShape.new(name: 'DeleteStackRequest')
     DeleteStackResult = Shapes::StructureShape.new(name: 'DeleteStackResult')
+    DeleteThemeForStackRequest = Shapes::StructureShape.new(name: 'DeleteThemeForStackRequest')
+    DeleteThemeForStackResult = Shapes::StructureShape.new(name: 'DeleteThemeForStackResult')
     DeleteUsageReportSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteUsageReportSubscriptionRequest')
     DeleteUsageReportSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteUsageReportSubscriptionResult')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
@@ -147,6 +151,8 @@ module Aws::AppStream
     DescribeSessionsResult = Shapes::StructureShape.new(name: 'DescribeSessionsResult')
     DescribeStacksRequest = Shapes::StructureShape.new(name: 'DescribeStacksRequest')
     DescribeStacksResult = Shapes::StructureShape.new(name: 'DescribeStacksResult')
+    DescribeThemeForStackRequest = Shapes::StructureShape.new(name: 'DescribeThemeForStackRequest')
+    DescribeThemeForStackResult = Shapes::StructureShape.new(name: 'DescribeThemeForStackResult')
     DescribeUsageReportSubscriptionsRequest = Shapes::StructureShape.new(name: 'DescribeUsageReportSubscriptionsRequest')
     DescribeUsageReportSubscriptionsResult = Shapes::StructureShape.new(name: 'DescribeUsageReportSubscriptionsResult')
     DescribeUserStackAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeUserStackAssociationsRequest')
@@ -172,6 +178,7 @@ module Aws::AppStream
     Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
+    DynamicAppProvidersEnabled = Shapes::StringShape.new(name: 'DynamicAppProvidersEnabled')
     EmbedHostDomain = Shapes::StringShape.new(name: 'EmbedHostDomain')
     EmbedHostDomains = Shapes::ListShape.new(name: 'EmbedHostDomains')
     EnableUserRequest = Shapes::StructureShape.new(name: 'EnableUserRequest')
@@ -207,6 +214,7 @@ module Aws::AppStream
     ImageBuilderStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageBuilderStateChangeReasonCode')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImagePermissions = Shapes::StructureShape.new(name: 'ImagePermissions')
+    ImageSharedWithOthers = Shapes::StringShape.new(name: 'ImageSharedWithOthers')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageStateChangeReason = Shapes::StructureShape.new(name: 'ImageStateChangeReason')
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
@@ -217,6 +225,7 @@ module Aws::AppStream
     InvalidRoleException = Shapes::StructureShape.new(name: 'InvalidRoleException')
     LastReportGenerationExecutionError = Shapes::StructureShape.new(name: 'LastReportGenerationExecutionError')
     LastReportGenerationExecutionErrors = Shapes::ListShape.new(name: 'LastReportGenerationExecutionErrors')
+    LatestAppstreamAgentVersion = Shapes::StringShape.new(name: 'LatestAppstreamAgentVersion')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAssociatedFleetsRequest = Shapes::StructureShape.new(name: 'ListAssociatedFleetsRequest')
     ListAssociatedFleetsResult = Shapes::StructureShape.new(name: 'ListAssociatedFleetsResult')
@@ -297,6 +306,16 @@ module Aws::AppStream
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    Theme = Shapes::StructureShape.new(name: 'Theme')
+    ThemeAttribute = Shapes::StringShape.new(name: 'ThemeAttribute')
+    ThemeAttributes = Shapes::ListShape.new(name: 'ThemeAttributes')
+    ThemeFooterLink = Shapes::StructureShape.new(name: 'ThemeFooterLink')
+    ThemeFooterLinkDisplayName = Shapes::StringShape.new(name: 'ThemeFooterLinkDisplayName')
+    ThemeFooterLinkURL = Shapes::StringShape.new(name: 'ThemeFooterLinkURL')
+    ThemeFooterLinks = Shapes::ListShape.new(name: 'ThemeFooterLinks')
+    ThemeState = Shapes::StringShape.new(name: 'ThemeState')
+    ThemeStyling = Shapes::StringShape.new(name: 'ThemeStyling')
+    ThemeTitleText = Shapes::StringShape.new(name: 'ThemeTitleText')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -314,6 +333,8 @@ module Aws::AppStream
     UpdateImagePermissionsResult = Shapes::StructureShape.new(name: 'UpdateImagePermissionsResult')
     UpdateStackRequest = Shapes::StructureShape.new(name: 'UpdateStackRequest')
     UpdateStackResult = Shapes::StructureShape.new(name: 'UpdateStackResult')
+    UpdateThemeForStackRequest = Shapes::StructureShape.new(name: 'UpdateThemeForStackRequest')
+    UpdateThemeForStackResult = Shapes::StructureShape.new(name: 'UpdateThemeForStackResult')
     UsageReportExecutionErrorCode = Shapes::StringShape.new(name: 'UsageReportExecutionErrorCode')
     UsageReportSchedule = Shapes::StringShape.new(name: 'UsageReportSchedule')
     UsageReportSubscription = Shapes::StructureShape.new(name: 'UsageReportSubscription')
@@ -648,6 +669,17 @@ module Aws::AppStream
     CreateStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateStreamingURLResult.struct_class = Types::CreateStreamingURLResult
 
+    CreateThemeForStackRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    CreateThemeForStackRequest.add_member(:footer_links, Shapes::ShapeRef.new(shape: ThemeFooterLinks, location_name: "FooterLinks"))
+    CreateThemeForStackRequest.add_member(:title_text, Shapes::ShapeRef.new(shape: ThemeTitleText, required: true, location_name: "TitleText"))
+    CreateThemeForStackRequest.add_member(:theme_styling, Shapes::ShapeRef.new(shape: ThemeStyling, required: true, location_name: "ThemeStyling"))
+    CreateThemeForStackRequest.add_member(:organization_logo_s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "OrganizationLogoS3Location"))
+    CreateThemeForStackRequest.add_member(:favicon_s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "FaviconS3Location"))
+    CreateThemeForStackRequest.struct_class = Types::CreateThemeForStackRequest
+
+    CreateThemeForStackResult.add_member(:theme, Shapes::ShapeRef.new(shape: Theme, location_name: "Theme"))
+    CreateThemeForStackResult.struct_class = Types::CreateThemeForStackResult
+
     CreateUpdatedImageRequest.add_member(:existing_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "existingImageName"))
     CreateUpdatedImageRequest.add_member(:new_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "newImageName"))
     CreateUpdatedImageRequest.add_member(:new_image_description, Shapes::ShapeRef.new(shape: Description, location_name: "newImageDescription"))
@@ -728,6 +760,11 @@ module Aws::AppStream
     DeleteStackRequest.struct_class = Types::DeleteStackRequest
 
     DeleteStackResult.struct_class = Types::DeleteStackResult
+
+    DeleteThemeForStackRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    DeleteThemeForStackRequest.struct_class = Types::DeleteThemeForStackRequest
+
+    DeleteThemeForStackResult.struct_class = Types::DeleteThemeForStackResult
 
     DeleteUsageReportSubscriptionRequest.struct_class = Types::DeleteUsageReportSubscriptionRequest
 
@@ -864,6 +901,12 @@ module Aws::AppStream
     DescribeStacksResult.add_member(:stacks, Shapes::ShapeRef.new(shape: StackList, location_name: "Stacks"))
     DescribeStacksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeStacksResult.struct_class = Types::DescribeStacksResult
+
+    DescribeThemeForStackRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    DescribeThemeForStackRequest.struct_class = Types::DescribeThemeForStackRequest
+
+    DescribeThemeForStackResult.add_member(:theme, Shapes::ShapeRef.new(shape: Theme, location_name: "Theme"))
+    DescribeThemeForStackResult.struct_class = Types::DescribeThemeForStackResult
 
     DescribeUsageReportSubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeUsageReportSubscriptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -1042,6 +1085,10 @@ module Aws::AppStream
     Image.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     Image.add_member(:image_permissions, Shapes::ShapeRef.new(shape: ImagePermissions, location_name: "ImagePermissions"))
     Image.add_member(:image_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "ImageErrors"))
+    Image.add_member(:latest_appstream_agent_version, Shapes::ShapeRef.new(shape: LatestAppstreamAgentVersion, location_name: "LatestAppstreamAgentVersion"))
+    Image.add_member(:supported_instance_families, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedInstanceFamilies"))
+    Image.add_member(:dynamic_app_providers_enabled, Shapes::ShapeRef.new(shape: DynamicAppProvidersEnabled, location_name: "DynamicAppProvidersEnabled"))
+    Image.add_member(:image_shared_with_others, Shapes::ShapeRef.new(shape: ImageSharedWithOthers, location_name: "ImageSharedWithOthers"))
     Image.struct_class = Types::Image
 
     ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -1062,6 +1109,7 @@ module Aws::AppStream
     ImageBuilder.add_member(:image_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "ImageBuilderErrors"))
     ImageBuilder.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     ImageBuilder.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, location_name: "AccessEndpoints"))
+    ImageBuilder.add_member(:latest_appstream_agent_version, Shapes::ShapeRef.new(shape: LatestAppstreamAgentVersion, location_name: "LatestAppstreamAgentVersion"))
     ImageBuilder.struct_class = Types::ImageBuilder
 
     ImageBuilderList.member = Shapes::ShapeRef.new(shape: ImageBuilder)
@@ -1292,6 +1340,24 @@ module Aws::AppStream
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
+    Theme.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, location_name: "StackName"))
+    Theme.add_member(:state, Shapes::ShapeRef.new(shape: ThemeState, location_name: "State"))
+    Theme.add_member(:theme_title_text, Shapes::ShapeRef.new(shape: ThemeTitleText, location_name: "ThemeTitleText"))
+    Theme.add_member(:theme_styling, Shapes::ShapeRef.new(shape: ThemeStyling, location_name: "ThemeStyling"))
+    Theme.add_member(:theme_footer_links, Shapes::ShapeRef.new(shape: ThemeFooterLinks, location_name: "ThemeFooterLinks"))
+    Theme.add_member(:theme_organization_logo_url, Shapes::ShapeRef.new(shape: String, location_name: "ThemeOrganizationLogoURL"))
+    Theme.add_member(:theme_favicon_url, Shapes::ShapeRef.new(shape: String, location_name: "ThemeFaviconURL"))
+    Theme.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Theme.struct_class = Types::Theme
+
+    ThemeAttributes.member = Shapes::ShapeRef.new(shape: ThemeAttribute)
+
+    ThemeFooterLink.add_member(:display_name, Shapes::ShapeRef.new(shape: ThemeFooterLinkDisplayName, location_name: "DisplayName"))
+    ThemeFooterLink.add_member(:footer_link_url, Shapes::ShapeRef.new(shape: ThemeFooterLinkURL, location_name: "FooterLinkURL"))
+    ThemeFooterLink.struct_class = Types::ThemeFooterLink
+
+    ThemeFooterLinks.member = Shapes::ShapeRef.new(shape: ThemeFooterLink)
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1397,6 +1463,19 @@ module Aws::AppStream
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
     UpdateStackResult.struct_class = Types::UpdateStackResult
+
+    UpdateThemeForStackRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    UpdateThemeForStackRequest.add_member(:footer_links, Shapes::ShapeRef.new(shape: ThemeFooterLinks, location_name: "FooterLinks"))
+    UpdateThemeForStackRequest.add_member(:title_text, Shapes::ShapeRef.new(shape: ThemeTitleText, location_name: "TitleText"))
+    UpdateThemeForStackRequest.add_member(:theme_styling, Shapes::ShapeRef.new(shape: ThemeStyling, location_name: "ThemeStyling"))
+    UpdateThemeForStackRequest.add_member(:organization_logo_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "OrganizationLogoS3Location"))
+    UpdateThemeForStackRequest.add_member(:favicon_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "FaviconS3Location"))
+    UpdateThemeForStackRequest.add_member(:state, Shapes::ShapeRef.new(shape: ThemeState, location_name: "State"))
+    UpdateThemeForStackRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: ThemeAttributes, location_name: "AttributesToDelete"))
+    UpdateThemeForStackRequest.struct_class = Types::UpdateThemeForStackRequest
+
+    UpdateThemeForStackResult.add_member(:theme, Shapes::ShapeRef.new(shape: Theme, location_name: "Theme"))
+    UpdateThemeForStackResult.struct_class = Types::UpdateThemeForStackResult
 
     UsageReportSubscription.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))
     UsageReportSubscription.add_member(:schedule, Shapes::ShapeRef.new(shape: UsageReportSchedule, location_name: "Schedule"))
@@ -1709,6 +1788,20 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
+      api.add_operation(:create_theme_for_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateThemeForStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateThemeForStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateThemeForStackResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
       api.add_operation(:create_updated_image, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUpdatedImage"
         o.http_method = "POST"
@@ -1860,6 +1953,17 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_theme_for_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteThemeForStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteThemeForStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteThemeForStackResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:delete_usage_report_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -2028,6 +2132,16 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: DescribeStacksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeStacksResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_theme_for_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeThemeForStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeThemeForStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeThemeForStackResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:describe_usage_report_subscriptions, Seahorse::Model::Operation.new.tap do |o|
@@ -2366,6 +2480,20 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:update_theme_for_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateThemeForStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateThemeForStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateThemeForStackResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
     end
 

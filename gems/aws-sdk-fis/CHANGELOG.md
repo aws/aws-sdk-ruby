@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-08-13)
+------------------
+
+* Feature - This release adds support for additional error information on experiment failure. It adds the error code, location, and account id on relevant failures to the GetExperiment and ListExperiment API responses.
+
 1.34.0 (2024-07-02)
 ------------------
 
