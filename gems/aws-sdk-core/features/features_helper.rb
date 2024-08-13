@@ -124,7 +124,7 @@ end
 
 Then(/I expect a '(.*?)' was raised/) do |error|
   error_class = Object.const_get(error)
-  expect(@error).to be_a(error_class)
+  expect(@last_error).to be_a(error_class)
 end
 
 Then(/I expect an error was raised/) do
