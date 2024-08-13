@@ -68,4 +68,6 @@ group :test do
 
   gem 'multipart-post'
   gem 'rspec'
+
+  gem 'opentelemetry-sdk'
 end
