@@ -217,7 +217,7 @@ module Seahorse
             'net.peer.port' => context.http_request.endpoint.port.to_s
           }.tap do |h|
             if context.http_request.headers.key?('Content-Length')
-              h['http.request_context_length'] =
+              h['http.request_content_length'] =
                 context.http_request.headers['Content-Length']
             end
           end
@@ -228,7 +228,7 @@ module Seahorse
             'http.status_code' => context.http_response.status_code.to_s
           }.tap do |h|
             if context.http_response.headers.key?('Content-Length')
-              h['http.response.content_length'] =
+              h['http.response_content_length'] =
                 context.http_response.headers['Content-Length']
             end
 

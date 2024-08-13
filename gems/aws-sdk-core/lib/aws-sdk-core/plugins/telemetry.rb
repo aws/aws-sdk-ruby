@@ -48,7 +48,7 @@ module Aws
             'rpc.service' => service_id,
             'rpc.method' => context.operation.name,
             'code.function' => context.operation_name.to_s,
-            'code.namespace' => 'AWS::Plugins::Telemetry'
+            'code.namespace' => 'Aws::Plugins::Telemetry'
           }
           context.tracer.in_span(
             parent_span_name(context, service_id),

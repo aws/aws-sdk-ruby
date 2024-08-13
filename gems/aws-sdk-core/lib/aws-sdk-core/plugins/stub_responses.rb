@@ -132,7 +132,7 @@ requests are made, and retries are disabled.
             'http.status_code' => context.http_response.status_code.to_s
           }.tap do |h|
             if context.http_response.headers.key?('Content-Length')
-              h['http.response.content_length'] =
+              h['http.response_content_length'] =
                 context.http_response.headers['Content-Length']
             end
 
