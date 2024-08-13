@@ -67,7 +67,7 @@ module Aws
         end
 
         def parent_span_name(context, service_id)
-          "#{service_id}.#{context.operation.name}".strip
+          "#{service_id}.#{context.operation.name}".delete(' ')
         end
       end
 
