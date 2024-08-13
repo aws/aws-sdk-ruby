@@ -108,9 +108,9 @@ requests are made, and retries are disabled.
             'Handler.StubResponses',
             attributes: request_attrs(context)
           ) do |span|
-            block.call
-            span.add_attributes(response_attrs(context))
-            yield
+            block.call.tap do
+              span.add_attributes(response_attrs(context))
+            end
           end
         end
 
@@ -118,7 +118,7 @@ requests are made, and retries are disabled.
           {
             'http.method' => context.http_request.http_method,
             'net.protocol.name' => 'http',
-            'net.protocol.version' => Net::HTTP::HTTPVersion,
+            'net.protocol.version' => Net::HTTP::HTTPVersion
           }.tap do |h|
             if context.http_request.headers.key?('Content-Length')
               h['http.request_context_length'] =
