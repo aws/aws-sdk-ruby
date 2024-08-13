@@ -28,11 +28,6 @@ module Aws
   module Telemetry
     class << self
       # @api private
-      def module_to_tracer_name(module_name)
-        "#{module_name.gsub('::', '.')}.client".downcase
-      end
-
-      # @api private
       def otel_loaded?
         if @use_otel.nil?
           @use_otel =
@@ -44,6 +39,11 @@ module Aws
             end
         end
         @use_otel
+      end
+
+      # @api private
+      def module_to_tracer_name(module_name)
+        "#{module_name.gsub('::', '.')}.client".downcase
       end
     end
   end
