@@ -397,6 +397,21 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class CreateThemeForStackRequest
+      attr_accessor stack_name: ::String
+      attr_accessor footer_links: ::Array[Types::ThemeFooterLink]
+      attr_accessor title_text: ::String
+      attr_accessor theme_styling: ("LIGHT_BLUE" | "BLUE" | "PINK" | "RED")
+      attr_accessor organization_logo_s3_location: Types::S3Location
+      attr_accessor favicon_s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class CreateThemeForStackResult
+      attr_accessor theme: Types::Theme
+      SENSITIVE: []
+    end
+
     class CreateUpdatedImageRequest
       attr_accessor existing_image_name: ::String
       attr_accessor new_image_name: ::String
@@ -518,6 +533,14 @@ module Aws::AppStream
     end
 
     class DeleteStackResult < Aws::EmptyStructure
+    end
+
+    class DeleteThemeForStackRequest
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteThemeForStackResult < Aws::EmptyStructure
     end
 
     class DeleteUsageReportSubscriptionRequest < Aws::EmptyStructure
@@ -710,6 +733,16 @@ module Aws::AppStream
     class DescribeStacksResult
       attr_accessor stacks: ::Array[Types::Stack]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThemeForStackRequest
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThemeForStackResult
+      attr_accessor theme: Types::Theme
       SENSITIVE: []
     end
 
@@ -922,6 +955,10 @@ module Aws::AppStream
       attr_accessor appstream_agent_version: ::String
       attr_accessor image_permissions: Types::ImagePermissions
       attr_accessor image_errors: ::Array[Types::ResourceError]
+      attr_accessor latest_appstream_agent_version: ("TRUE" | "FALSE")
+      attr_accessor supported_instance_families: ::Array[::String]
+      attr_accessor dynamic_app_providers_enabled: ("ENABLED" | "DISABLED")
+      attr_accessor image_shared_with_others: ("TRUE" | "FALSE")
       SENSITIVE: []
     end
 
@@ -944,6 +981,7 @@ module Aws::AppStream
       attr_accessor image_builder_errors: ::Array[Types::ResourceError]
       attr_accessor appstream_agent_version: ::String
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor latest_appstream_agent_version: ("TRUE" | "FALSE")
       SENSITIVE: []
     end
 
@@ -1230,6 +1268,24 @@ module Aws::AppStream
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class Theme
+      attr_accessor stack_name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor theme_title_text: ::String
+      attr_accessor theme_styling: ("LIGHT_BLUE" | "BLUE" | "PINK" | "RED")
+      attr_accessor theme_footer_links: ::Array[Types::ThemeFooterLink]
+      attr_accessor theme_organization_logo_url: ::String
+      attr_accessor theme_favicon_url: ::String
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ThemeFooterLink
+      attr_accessor display_name: ::String
+      attr_accessor footer_link_url: ::String
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -1363,6 +1419,23 @@ module Aws::AppStream
 
     class UpdateStackResult
       attr_accessor stack: Types::Stack
+      SENSITIVE: []
+    end
+
+    class UpdateThemeForStackRequest
+      attr_accessor stack_name: ::String
+      attr_accessor footer_links: ::Array[Types::ThemeFooterLink]
+      attr_accessor title_text: ::String
+      attr_accessor theme_styling: ("LIGHT_BLUE" | "BLUE" | "PINK" | "RED")
+      attr_accessor organization_logo_s3_location: Types::S3Location
+      attr_accessor favicon_s3_location: Types::S3Location
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor attributes_to_delete: ::Array[("FOOTER_LINKS")]
+      SENSITIVE: []
+    end
+
+    class UpdateThemeForStackResult
+      attr_accessor theme: Types::Theme
       SENSITIVE: []
     end
 

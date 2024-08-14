@@ -647,6 +647,31 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # Describes the error when an experiment has `failed`.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services Account ID where the experiment failure
+    #   occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the failed experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Context for the section of the experiment template that failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentError AWS API Documentation
+    #
+    class ExperimentError < Struct.new(
+      :account_id,
+      :code,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration for experiment logging.
     #
     # @!attribute [rw] cloud_watch_logs_configuration
@@ -725,11 +750,17 @@ module Aws::FIS
     #   The reason for the state.
     #   @return [String]
     #
+    # @!attribute [rw] error
+    #   The error information of the experiment when the action has
+    #   `failed`.
+    #   @return [Types::ExperimentError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentState AWS API Documentation
     #
     class ExperimentState < Struct.new(
       :status,
-      :reason)
+      :reason,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end

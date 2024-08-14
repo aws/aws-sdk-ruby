@@ -44,6 +44,8 @@ module Aws::Amplify
     BranchName = Shapes::StringShape.new(name: 'BranchName')
     Branches = Shapes::ListShape.new(name: 'Branches')
     BuildSpec = Shapes::StringShape.new(name: 'BuildSpec')
+    CacheConfig = Shapes::StructureShape.new(name: 'CacheConfig')
+    CacheConfigType = Shapes::StringShape.new(name: 'CacheConfigType')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
     CertificateSettings = Shapes::StructureShape.new(name: 'CertificateSettings')
@@ -255,6 +257,7 @@ module Aws::Amplify
     App.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     App.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))
     App.add_member(:repository_clone_method, Shapes::ShapeRef.new(shape: RepositoryCloneMethod, location_name: "repositoryCloneMethod"))
+    App.add_member(:cache_config, Shapes::ShapeRef.new(shape: CacheConfig, location_name: "cacheConfig"))
     App.struct_class = Types::App
 
     Apps.member = Shapes::ShapeRef.new(shape: App)
@@ -331,6 +334,9 @@ module Aws::Amplify
 
     Branches.member = Shapes::ShapeRef.new(shape: Branch)
 
+    CacheConfig.add_member(:type, Shapes::ShapeRef.new(shape: CacheConfigType, required: true, location_name: "type"))
+    CacheConfig.struct_class = Types::CacheConfig
+
     Certificate.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "type"))
     Certificate.add_member(:custom_certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "customCertificateArn"))
     Certificate.add_member(:certificate_verification_dns_record, Shapes::ShapeRef.new(shape: CertificateVerificationDNSRecord, location_name: "certificateVerificationDNSRecord"))
@@ -359,6 +365,7 @@ module Aws::Amplify
     CreateAppRequest.add_member(:enable_auto_branch_creation, Shapes::ShapeRef.new(shape: EnableAutoBranchCreation, location_name: "enableAutoBranchCreation"))
     CreateAppRequest.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     CreateAppRequest.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))
+    CreateAppRequest.add_member(:cache_config, Shapes::ShapeRef.new(shape: CacheConfig, location_name: "cacheConfig"))
     CreateAppRequest.struct_class = Types::CreateAppRequest
 
     CreateAppResult.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))
@@ -770,6 +777,7 @@ module Aws::Amplify
     UpdateAppRequest.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     UpdateAppRequest.add_member(:oauth_token, Shapes::ShapeRef.new(shape: OauthToken, location_name: "oauthToken"))
     UpdateAppRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
+    UpdateAppRequest.add_member(:cache_config, Shapes::ShapeRef.new(shape: CacheConfig, location_name: "cacheConfig"))
     UpdateAppRequest.struct_class = Types::UpdateAppRequest
 
     UpdateAppResult.add_member(:app, Shapes::ShapeRef.new(shape: App, required: true, location_name: "app"))

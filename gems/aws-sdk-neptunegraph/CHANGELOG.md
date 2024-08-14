@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2024-08-13)
+------------------
+
+* Feature - Amazon Neptune Analytics provides a new option for customers to load data into a graph using the RDF (Resource Description Framework) NTRIPLES format. When loading NTRIPLES files, use the value `convertToIri` for the `blankNodeHandling` parameter.
+
 1.14.0 (2024-07-22)
 ------------------
 

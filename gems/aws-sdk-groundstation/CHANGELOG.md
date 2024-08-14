@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-08-12)
+------------------
+
+* Feature - Updating documentation for OEMEphemeris to link to AWS Ground Station User Guide
+
 1.52.0 (2024-07-10)
 ------------------
 

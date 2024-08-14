@@ -115,6 +115,9 @@ module Aws
                           build_spec: ::String?,
                           enable_pull_request_preview: bool?,
                           pull_request_environment_name: ::String?
+                        },
+                        ?cache_config: {
+                          type: ("AMPLIFY_MANAGED" | "AMPLIFY_MANAGED_NO_COOKIES")
                         }
                       ) -> _CreateAppResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppResponseSuccess
@@ -574,7 +577,10 @@ module Aws
                         },
                         ?repository: ::String,
                         ?oauth_token: ::String,
-                        ?access_token: ::String
+                        ?access_token: ::String,
+                        ?cache_config: {
+                          type: ("AMPLIFY_MANAGED" | "AMPLIFY_MANAGED_NO_COOKIES")
+                        }
                       ) -> _UpdateAppResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppResponseSuccess
 

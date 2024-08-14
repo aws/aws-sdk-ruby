@@ -9393,6 +9393,18 @@ module Aws::MediaLive
     # @!attribute [rw] video_pid
     #   @return [Integer]
     #
+    # @!attribute [rw] arib_captions_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dvb_teletext_pids
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] ecm_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] smpte_2038_pid
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgramPacketIdentifiersMap AWS API Documentation
     #
     class MultiplexProgramPacketIdentifiersMap < Struct.new(
@@ -9408,7 +9420,11 @@ module Aws::MediaLive
       :scte_27_pids,
       :scte_35_pid,
       :timed_metadata_pid,
-      :video_pid)
+      :video_pid,
+      :arib_captions_pid,
+      :dvb_teletext_pids,
+      :ecm_pid,
+      :smpte_2038_pid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12831,11 +12847,15 @@ module Aws::MediaLive
     #   Name of the multiplex.
     #   @return [String]
     #
+    # @!attribute [rw] packet_identifiers_mapping
+    #   @return [Hash<String,Types::MultiplexProgramPacketIdentifiersMap>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplex AWS API Documentation
     #
     class UpdateMultiplex < Struct.new(
       :multiplex_settings,
-      :name)
+      :name,
+      :packet_identifiers_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12906,12 +12926,16 @@ module Aws::MediaLive
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] packet_identifiers_mapping
+    #   @return [Hash<String,Types::MultiplexProgramPacketIdentifiersMap>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexRequest AWS API Documentation
     #
     class UpdateMultiplexRequest < Struct.new(
       :multiplex_id,
       :multiplex_settings,
-      :name)
+      :name,
+      :packet_identifiers_mapping)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-08-13)
+------------------
+
+* Feature - This release includes following new APIs: CreateThemeForStack, DescribeThemeForStack, UpdateThemeForStack, DeleteThemeForStack to support custom branding programmatically.
+
 1.93.0 (2024-07-30)
 ------------------
 

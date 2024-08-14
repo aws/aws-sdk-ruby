@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.469.0 (2024-08-12)
+------------------
+
+* Feature - This release adds new capabilities to manage On-Demand Capacity Reservations including the ability to split your reservation, move capacity between reservations, and modify the instance eligibility of your reservation.
+
 1.468.0 (2024-08-08)
 ------------------
 

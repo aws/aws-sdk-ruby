@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2024-08-12)
+------------------
+
+* Feature - Documentation update for the OrganizationConfigRuleName regex pattern.
+
 1.113.0 (2024-07-02)
 ------------------
 

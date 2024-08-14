@@ -324,7 +324,6 @@ module Aws
             'CodeGuruReviewer' => 'codeguru-reviewer',
             'CodeGuruSecurity' => 'codeguru-security',
             'CodePipeline' => 'codepipeline',
-            'CodeStar' => 'codestar',
             'CodeStarNotifications' => 'codestar-notifications',
             'CodeStarconnections' => 'codestar-connections',
             'CognitoIdentity' => 'cognito-identity',

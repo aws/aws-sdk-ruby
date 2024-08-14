@@ -819,6 +819,9 @@ module Aws::FIS
     #   resp.experiment.role_arn #=> String
     #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
     #   resp.experiment.state.reason #=> String
+    #   resp.experiment.state.error.account_id #=> String
+    #   resp.experiment.state.error.code #=> String
+    #   resp.experiment.state.error.location #=> String
     #   resp.experiment.targets #=> Hash
     #   resp.experiment.targets["ExperimentTargetName"].resource_type #=> String
     #   resp.experiment.targets["ExperimentTargetName"].resource_arns #=> Array
@@ -1253,6 +1256,9 @@ module Aws::FIS
     #   resp.experiments[0].experiment_template_id #=> String
     #   resp.experiments[0].state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
     #   resp.experiments[0].state.reason #=> String
+    #   resp.experiments[0].state.error.account_id #=> String
+    #   resp.experiments[0].state.error.code #=> String
+    #   resp.experiments[0].state.error.location #=> String
     #   resp.experiments[0].creation_time #=> Time
     #   resp.experiments[0].tags #=> Hash
     #   resp.experiments[0].tags["TagKey"] #=> String
@@ -1428,6 +1434,9 @@ module Aws::FIS
     #   resp.experiment.role_arn #=> String
     #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
     #   resp.experiment.state.reason #=> String
+    #   resp.experiment.state.error.account_id #=> String
+    #   resp.experiment.state.error.code #=> String
+    #   resp.experiment.state.error.location #=> String
     #   resp.experiment.targets #=> Hash
     #   resp.experiment.targets["ExperimentTargetName"].resource_type #=> String
     #   resp.experiment.targets["ExperimentTargetName"].resource_arns #=> Array
@@ -1503,6 +1512,9 @@ module Aws::FIS
     #   resp.experiment.role_arn #=> String
     #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
     #   resp.experiment.state.reason #=> String
+    #   resp.experiment.state.error.account_id #=> String
+    #   resp.experiment.state.error.code #=> String
+    #   resp.experiment.state.error.location #=> String
     #   resp.experiment.targets #=> Hash
     #   resp.experiment.targets["ExperimentTargetName"].resource_type #=> String
     #   resp.experiment.targets["ExperimentTargetName"].resource_arns #=> Array
@@ -1807,7 +1819,7 @@ module Aws::FIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

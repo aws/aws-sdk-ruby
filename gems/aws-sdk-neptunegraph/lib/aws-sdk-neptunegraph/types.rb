@@ -445,6 +445,17 @@ module Aws::NeptuneGraph
     #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
     #   @return [String]
     #
+    # @!attribute [rw] blank_node_handling
+    #   The method to handle blank nodes in the dataset. Currently, only
+    #   `convertToIri` is supported, meaning blank nodes are converted to
+    #   unique IRIs at load time. Must be provided when format is
+    #   `ntriples`. For more information, see [Handling RDF values][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that will allow access to the data that is
     #   to be imported.
@@ -466,6 +477,7 @@ module Aws::NeptuneGraph
       :fail_on_error,
       :source,
       :format,
+      :blank_node_handling,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -487,13 +499,15 @@ module Aws::NeptuneGraph
     #
     # @!attribute [rw] format
     #   Specifies the format of S3 data to be imported. Valid values are
-    #   `CSV`, which identifies the [Gremlin CSV format][1] or `OPENCYPHER`,
-    #   which identies the [openCypher load format][2].
+    #   `CSV`, which identifies the [Gremlin CSV format][1], `OPENCYPHER`,
+    #   which identifies the [openCypher load format][2], or `ntriples`,
+    #   which identifies the [RDF n-triples][3] format.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
     #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
+    #   [3]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2315,6 +2329,17 @@ module Aws::NeptuneGraph
     #   which identies the openCypher load format.
     #   @return [String]
     #
+    # @!attribute [rw] blank_node_handling
+    #   The method to handle blank nodes in the dataset. Currently, only
+    #   `convertToIri` is supported, meaning blank nodes are converted to
+    #   unique IRIs at load time. Must be provided when format is
+    #   `ntriples`. For more information, see [Handling RDF values][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling
+    #   @return [String]
+    #
     # @!attribute [rw] graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
     #   @return [String]
@@ -2331,6 +2356,7 @@ module Aws::NeptuneGraph
       :fail_on_error,
       :source,
       :format,
+      :blank_node_handling,
       :graph_identifier,
       :role_arn)
       SENSITIVE = []

@@ -1786,8 +1786,8 @@ module Aws::EC2
     #     principal or service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an Amazon Web Service (for example, Amazon Web
-    #     Services Management Console, Auto Scaling, and so on).
+    #     being managed by an Amazon Web Services service (for example, Amazon
+    #     Web Services Management Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means

@@ -69,6 +69,10 @@ module Aws::FIS
     ExperimentActionTargetName = Shapes::StringShape.new(name: 'ExperimentActionTargetName')
     ExperimentCloudWatchLogsLogConfiguration = Shapes::StructureShape.new(name: 'ExperimentCloudWatchLogsLogConfiguration')
     ExperimentEndTime = Shapes::TimestampShape.new(name: 'ExperimentEndTime')
+    ExperimentError = Shapes::StructureShape.new(name: 'ExperimentError')
+    ExperimentErrorAccountId = Shapes::StringShape.new(name: 'ExperimentErrorAccountId')
+    ExperimentErrorCode = Shapes::StringShape.new(name: 'ExperimentErrorCode')
+    ExperimentErrorLocation = Shapes::StringShape.new(name: 'ExperimentErrorLocation')
     ExperimentId = Shapes::StringShape.new(name: 'ExperimentId')
     ExperimentLogConfiguration = Shapes::StructureShape.new(name: 'ExperimentLogConfiguration')
     ExperimentOptions = Shapes::StructureShape.new(name: 'ExperimentOptions')
@@ -380,6 +384,11 @@ module Aws::FIS
     ExperimentCloudWatchLogsLogConfiguration.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "logGroupArn"))
     ExperimentCloudWatchLogsLogConfiguration.struct_class = Types::ExperimentCloudWatchLogsLogConfiguration
 
+    ExperimentError.add_member(:account_id, Shapes::ShapeRef.new(shape: ExperimentErrorAccountId, location_name: "accountId"))
+    ExperimentError.add_member(:code, Shapes::ShapeRef.new(shape: ExperimentErrorCode, location_name: "code"))
+    ExperimentError.add_member(:location, Shapes::ShapeRef.new(shape: ExperimentErrorLocation, location_name: "location"))
+    ExperimentError.struct_class = Types::ExperimentError
+
     ExperimentLogConfiguration.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: ExperimentCloudWatchLogsLogConfiguration, location_name: "cloudWatchLogsConfiguration"))
     ExperimentLogConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: ExperimentS3LogConfiguration, location_name: "s3Configuration"))
     ExperimentLogConfiguration.add_member(:log_schema_version, Shapes::ShapeRef.new(shape: LogSchemaVersion, location_name: "logSchemaVersion"))
@@ -396,6 +405,7 @@ module Aws::FIS
 
     ExperimentState.add_member(:status, Shapes::ShapeRef.new(shape: ExperimentStatus, location_name: "status"))
     ExperimentState.add_member(:reason, Shapes::ShapeRef.new(shape: ExperimentStatusReason, location_name: "reason"))
+    ExperimentState.add_member(:error, Shapes::ShapeRef.new(shape: ExperimentError, location_name: "error"))
     ExperimentState.struct_class = Types::ExperimentState
 
     ExperimentStopCondition.add_member(:source, Shapes::ShapeRef.new(shape: StopConditionSource, location_name: "source"))

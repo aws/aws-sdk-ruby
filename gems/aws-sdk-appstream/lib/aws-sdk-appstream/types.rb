@@ -1204,6 +1204,20 @@ module Aws::AppStream
     #
     #   * stream.graphics.g4dn.16xlarge
     #
+    #   * stream.graphics.g5.xlarge
+    #
+    #   * stream.graphics.g5.2xlarge
+    #
+    #   * stream.graphics.g5.4xlarge
+    #
+    #   * stream.graphics.g5.8xlarge
+    #
+    #   * stream.graphics.g5.12xlarge
+    #
+    #   * stream.graphics.g5.16xlarge
+    #
+    #   * stream.graphics.g5.24xlarge
+    #
     #   * stream.graphics-pro.4xlarge
     #
     #   * stream.graphics-pro.8xlarge
@@ -1832,6 +1846,65 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @!attribute [rw] stack_name
+    #   The name of the stack for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] footer_links
+    #   The links that are displayed in the footer of the streaming
+    #   application catalog page. These links are helpful resources for
+    #   users, such as the organization's IT support and product marketing
+    #   sites.
+    #   @return [Array<Types::ThemeFooterLink>]
+    #
+    # @!attribute [rw] title_text
+    #   The title that is displayed at the top of the browser tab during
+    #   users' application streaming sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_styling
+    #   The color theme that is applied to website links, text, and buttons.
+    #   These colors are also applied as accents in the background for the
+    #   streaming application catalog page.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_logo_s3_location
+    #   The organization logo that appears on the streaming application
+    #   catalog page.
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] favicon_s3_location
+    #   The S3 location of the favicon. The favicon enables users to
+    #   recognize their application streaming site in a browser full of tabs
+    #   or bookmarks. It is displayed at the top of the browser tab for the
+    #   application streaming site during users' streaming sessions.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateThemeForStackRequest AWS API Documentation
+    #
+    class CreateThemeForStackRequest < Struct.new(
+      :stack_name,
+      :footer_links,
+      :title_text,
+      :theme_styling,
+      :organization_logo_s3_location,
+      :favicon_s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme
+    #   The theme object that contains the metadata of the custom branding.
+    #   @return [Types::Theme]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateThemeForStackResult AWS API Documentation
+    #
+    class CreateThemeForStackResult < Struct.new(
+      :theme)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] existing_image_name
     #   The name of the image to update.
     #   @return [String]
@@ -2179,6 +2252,22 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackResult AWS API Documentation
     #
     class DeleteStackResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] stack_name
+    #   The name of the stack for the theme.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteThemeForStackRequest AWS API Documentation
+    #
+    class DeleteThemeForStackRequest < Struct.new(
+      :stack_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteThemeForStackResult AWS API Documentation
+    #
+    class DeleteThemeForStackResult < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -2797,6 +2886,30 @@ module Aws::AppStream
     class DescribeStacksResult < Struct.new(
       :stacks,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_name
+    #   The name of the stack for the theme.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeThemeForStackRequest AWS API Documentation
+    #
+    class DescribeThemeForStackRequest < Struct.new(
+      :stack_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme
+    #   The theme object that contains the metadata of the custom branding.
+    #   @return [Types::Theme]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeThemeForStackResult AWS API Documentation
+    #
+    class DescribeThemeForStackResult < Struct.new(
+      :theme)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3687,6 +3800,42 @@ module Aws::AppStream
     #   created.
     #   @return [Array<Types::ResourceError>]
     #
+    # @!attribute [rw] latest_appstream_agent_version
+    #   Indicates whether the image is using the latest AppStream 2.0 agent
+    #   version or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_instance_families
+    #   The supported instances families that determine which image a
+    #   customer can use when the customer launches a fleet or image
+    #   builder. The following instances families are supported:
+    #
+    #   * General Purpose
+    #
+    #   * Compute Optimized
+    #
+    #   * Memory Optimized
+    #
+    #   * Graphics
+    #
+    #   * Graphics Design
+    #
+    #   * Graphics Pro
+    #
+    #   * Graphics G4
+    #
+    #   * Graphics G5
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dynamic_app_providers_enabled
+    #   Indicates whether dynamic app providers are enabled within an
+    #   AppStream 2.0 image or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_shared_with_others
+    #   Indicates whether the image is shared with another account ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -3706,7 +3855,11 @@ module Aws::AppStream
       :public_base_image_released_date,
       :appstream_agent_version,
       :image_permissions,
-      :image_errors)
+      :image_errors,
+      :latest_appstream_agent_version,
+      :supported_instance_families,
+      :dynamic_app_providers_enabled,
+      :image_shared_with_others)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3871,6 +4024,11 @@ module Aws::AppStream
     #   specified endpoints.
     #   @return [Array<Types::AccessEndpoint>]
     #
+    # @!attribute [rw] latest_appstream_agent_version
+    #   Indicates whether the image builder is using the latest AppStream
+    #   2.0 agent version or not.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
     class ImageBuilder < Struct.new(
@@ -3891,7 +4049,8 @@ module Aws::AppStream
       :network_access_configuration,
       :image_builder_errors,
       :appstream_agent_version,
-      :access_endpoints)
+      :access_endpoints,
+      :latest_appstream_agent_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4816,6 +4975,77 @@ module Aws::AppStream
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The custom branding theme, which might include a custom logo, website
+    # links, and other branding to display to users.
+    #
+    # @!attribute [rw] stack_name
+    #   The stack that has the custom branding theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_title_text
+    #   The browser tab page title.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_styling
+    #   The color that is used for the website links, text, buttons, and
+    #   catalog page background.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_footer_links
+    #   The website links that display in the catalog page footer.
+    #   @return [Array<Types::ThemeFooterLink>]
+    #
+    # @!attribute [rw] theme_organization_logo_url
+    #   The URL of the logo that displays in the catalog page header.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_favicon_url
+    #   The URL of the icon that displays at the top of a user's browser
+    #   tab during streaming sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time the theme was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Theme AWS API Documentation
+    #
+    class Theme < Struct.new(
+      :stack_name,
+      :state,
+      :theme_title_text,
+      :theme_styling,
+      :theme_footer_links,
+      :theme_organization_logo_url,
+      :theme_favicon_url,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The website links that display in the catalog page footer.
+    #
+    # @!attribute [rw] display_name
+    #   The name of the websites that display in the catalog page footer.
+    #   @return [String]
+    #
+    # @!attribute [rw] footer_link_url
+    #   The URL of the websites that display in the catalog page footer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ThemeFooterLink AWS API Documentation
+    #
+    class ThemeFooterLink < Struct.new(
+      :display_name,
+      :footer_link_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -5500,6 +5730,76 @@ module Aws::AppStream
     #
     class UpdateStackResult < Struct.new(
       :stack)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_name
+    #   The name of the stack for the theme.
+    #   @return [String]
+    #
+    # @!attribute [rw] footer_links
+    #   The links that are displayed in the footer of the streaming
+    #   application catalog page. These links are helpful resources for
+    #   users, such as the organization's IT support and product marketing
+    #   sites.
+    #   @return [Array<Types::ThemeFooterLink>]
+    #
+    # @!attribute [rw] title_text
+    #   The title that is displayed at the top of the browser tab during
+    #   users' application streaming sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_styling
+    #   The color theme that is applied to website links, text, and buttons.
+    #   These colors are also applied as accents in the background for the
+    #   streaming application catalog page.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_logo_s3_location
+    #   The organization logo that appears on the streaming application
+    #   catalog page.
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] favicon_s3_location
+    #   The S3 location of the favicon. The favicon enables users to
+    #   recognize their application streaming site in a browser full of tabs
+    #   or bookmarks. It is displayed at the top of the browser tab for the
+    #   application streaming site during users' streaming sessions.
+    #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] state
+    #   Specifies whether custom branding should be applied to catalog page
+    #   or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes_to_delete
+    #   The attributes to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateThemeForStackRequest AWS API Documentation
+    #
+    class UpdateThemeForStackRequest < Struct.new(
+      :stack_name,
+      :footer_links,
+      :title_text,
+      :theme_styling,
+      :organization_logo_s3_location,
+      :favicon_s3_location,
+      :state,
+      :attributes_to_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] theme
+    #   The theme object that contains the metadata of the custom branding.
+    #   @return [Types::Theme]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateThemeForStackResult AWS API Documentation
+    #
+    class UpdateThemeForStackResult < Struct.new(
+      :theme)
       SENSITIVE = []
       include Aws::Structure
     end

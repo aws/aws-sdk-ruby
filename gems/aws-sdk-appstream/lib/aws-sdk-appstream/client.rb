@@ -1288,6 +1288,20 @@ module Aws::AppStream
     #
     #   * stream.graphics.g4dn.16xlarge
     #
+    #   * stream.graphics.g5.xlarge
+    #
+    #   * stream.graphics.g5.2xlarge
+    #
+    #   * stream.graphics.g5.4xlarge
+    #
+    #   * stream.graphics.g5.8xlarge
+    #
+    #   * stream.graphics.g5.12xlarge
+    #
+    #   * stream.graphics.g5.16xlarge
+    #
+    #   * stream.graphics.g5.24xlarge
+    #
     #   * stream.graphics-pro.4xlarge
     #
     #   * stream.graphics-pro.8xlarge
@@ -1767,6 +1781,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
     #
@@ -2027,6 +2042,84 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates custom branding that customizes the appearance of the
+    # streaming application catalog page.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack for the theme.
+    #
+    # @option params [Array<Types::ThemeFooterLink>] :footer_links
+    #   The links that are displayed in the footer of the streaming
+    #   application catalog page. These links are helpful resources for users,
+    #   such as the organization's IT support and product marketing sites.
+    #
+    # @option params [required, String] :title_text
+    #   The title that is displayed at the top of the browser tab during
+    #   users' application streaming sessions.
+    #
+    # @option params [required, String] :theme_styling
+    #   The color theme that is applied to website links, text, and buttons.
+    #   These colors are also applied as accents in the background for the
+    #   streaming application catalog page.
+    #
+    # @option params [required, Types::S3Location] :organization_logo_s3_location
+    #   The organization logo that appears on the streaming application
+    #   catalog page.
+    #
+    # @option params [required, Types::S3Location] :favicon_s3_location
+    #   The S3 location of the favicon. The favicon enables users to recognize
+    #   their application streaming site in a browser full of tabs or
+    #   bookmarks. It is displayed at the top of the browser tab for the
+    #   application streaming site during users' streaming sessions.
+    #
+    # @return [Types::CreateThemeForStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateThemeForStackResult#theme #theme} => Types::Theme
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_theme_for_stack({
+    #     stack_name: "Name", # required
+    #     footer_links: [
+    #       {
+    #         display_name: "ThemeFooterLinkDisplayName",
+    #         footer_link_url: "ThemeFooterLinkURL",
+    #       },
+    #     ],
+    #     title_text: "ThemeTitleText", # required
+    #     theme_styling: "LIGHT_BLUE", # required, accepts LIGHT_BLUE, BLUE, PINK, RED
+    #     organization_logo_s3_location: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     favicon_s3_location: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme.stack_name #=> String
+    #   resp.theme.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.theme.theme_title_text #=> String
+    #   resp.theme.theme_styling #=> String, one of "LIGHT_BLUE", "BLUE", "PINK", "RED"
+    #   resp.theme.theme_footer_links #=> Array
+    #   resp.theme.theme_footer_links[0].display_name #=> String
+    #   resp.theme.theme_footer_links[0].footer_link_url #=> String
+    #   resp.theme.theme_organization_logo_url #=> String
+    #   resp.theme.theme_favicon_url #=> String
+    #   resp.theme.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateThemeForStack AWS API Documentation
+    #
+    # @overload create_theme_for_stack(params = {})
+    # @param [Hash] params ({})
+    def create_theme_for_stack(params = {}, options = {})
+      req = build_request(:create_theme_for_stack, params)
+      req.send_request(options)
+    end
+
     # Creates a new image with the latest Windows operating system updates,
     # driver updates, and AppStream 2.0 agent software.
     #
@@ -2139,6 +2232,11 @@ module Aws::AppStream
     #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image.image_errors[0].error_message #=> String
     #   resp.image.image_errors[0].error_timestamp #=> Time
+    #   resp.image.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image.supported_instance_families #=> Array
+    #   resp.image.supported_instance_families[0] #=> String
+    #   resp.image.dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.can_update_image #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImage AWS API Documentation
@@ -2427,6 +2525,11 @@ module Aws::AppStream
     #   resp.image.image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image.image_errors[0].error_message #=> String
     #   resp.image.image_errors[0].error_timestamp #=> Time
+    #   resp.image.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image.supported_instance_families #=> Array
+    #   resp.image.supported_instance_families[0] #=> String
+    #   resp.image.dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -2483,6 +2586,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
     #
@@ -2544,6 +2648,29 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def delete_stack(params = {}, options = {})
       req = build_request(:delete_stack, params)
+      req.send_request(options)
+    end
+
+    # Deletes custom branding that customizes the appearance of the
+    # streaming application catalog page.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack for the theme.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_theme_for_stack({
+    #     stack_name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteThemeForStack AWS API Documentation
+    #
+    # @overload delete_theme_for_stack(params = {})
+    # @param [Hash] params ({})
+    def delete_theme_for_stack(params = {}, options = {})
+      req = build_request(:delete_theme_for_stack, params)
       req.send_request(options)
     end
 
@@ -3116,6 +3243,7 @@ module Aws::AppStream
     #   resp.image_builders[0].access_endpoints #=> Array
     #   resp.image_builders[0].access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builders[0].access_endpoints[0].vpce_id #=> String
+    #   resp.image_builders[0].latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders AWS API Documentation
@@ -3261,6 +3389,11 @@ module Aws::AppStream
     #   resp.images[0].image_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.images[0].image_errors[0].error_message #=> String
     #   resp.images[0].image_errors[0].error_timestamp #=> Time
+    #   resp.images[0].latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.images[0].supported_instance_families #=> Array
+    #   resp.images[0].supported_instance_families[0] #=> String
+    #   resp.images[0].dynamic_app_providers_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.images[0].image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
@@ -3409,6 +3542,45 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def describe_stacks(params = {}, options = {})
       req = build_request(:describe_stacks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes the theme for a specified stack. A
+    # theme is custom branding that customizes the appearance of the
+    # streaming application catalog page.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack for the theme.
+    #
+    # @return [Types::DescribeThemeForStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThemeForStackResult#theme #theme} => Types::Theme
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_theme_for_stack({
+    #     stack_name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme.stack_name #=> String
+    #   resp.theme.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.theme.theme_title_text #=> String
+    #   resp.theme.theme_styling #=> String, one of "LIGHT_BLUE", "BLUE", "PINK", "RED"
+    #   resp.theme.theme_footer_links #=> Array
+    #   resp.theme.theme_footer_links[0].display_name #=> String
+    #   resp.theme.theme_footer_links[0].footer_link_url #=> String
+    #   resp.theme.theme_organization_logo_url #=> String
+    #   resp.theme.theme_favicon_url #=> String
+    #   resp.theme.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeThemeForStack AWS API Documentation
+    #
+    # @overload describe_theme_for_stack(params = {})
+    # @param [Hash] params ({})
+    def describe_theme_for_stack(params = {}, options = {})
+      req = build_request(:describe_theme_for_stack, params)
       req.send_request(options)
     end
 
@@ -4049,6 +4221,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
     #
@@ -4180,6 +4353,7 @@ module Aws::AppStream
     #   resp.image_builder.access_endpoints #=> Array
     #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
     #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
     #
@@ -5119,6 +5293,93 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Updates custom branding that customizes the appearance of the
+    # streaming application catalog page.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack for the theme.
+    #
+    # @option params [Array<Types::ThemeFooterLink>] :footer_links
+    #   The links that are displayed in the footer of the streaming
+    #   application catalog page. These links are helpful resources for users,
+    #   such as the organization's IT support and product marketing sites.
+    #
+    # @option params [String] :title_text
+    #   The title that is displayed at the top of the browser tab during
+    #   users' application streaming sessions.
+    #
+    # @option params [String] :theme_styling
+    #   The color theme that is applied to website links, text, and buttons.
+    #   These colors are also applied as accents in the background for the
+    #   streaming application catalog page.
+    #
+    # @option params [Types::S3Location] :organization_logo_s3_location
+    #   The organization logo that appears on the streaming application
+    #   catalog page.
+    #
+    # @option params [Types::S3Location] :favicon_s3_location
+    #   The S3 location of the favicon. The favicon enables users to recognize
+    #   their application streaming site in a browser full of tabs or
+    #   bookmarks. It is displayed at the top of the browser tab for the
+    #   application streaming site during users' streaming sessions.
+    #
+    # @option params [String] :state
+    #   Specifies whether custom branding should be applied to catalog page or
+    #   not.
+    #
+    # @option params [Array<String>] :attributes_to_delete
+    #   The attributes to delete.
+    #
+    # @return [Types::UpdateThemeForStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateThemeForStackResult#theme #theme} => Types::Theme
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_theme_for_stack({
+    #     stack_name: "Name", # required
+    #     footer_links: [
+    #       {
+    #         display_name: "ThemeFooterLinkDisplayName",
+    #         footer_link_url: "ThemeFooterLinkURL",
+    #       },
+    #     ],
+    #     title_text: "ThemeTitleText",
+    #     theme_styling: "LIGHT_BLUE", # accepts LIGHT_BLUE, BLUE, PINK, RED
+    #     organization_logo_s3_location: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     favicon_s3_location: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     attributes_to_delete: ["FOOTER_LINKS"], # accepts FOOTER_LINKS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.theme.stack_name #=> String
+    #   resp.theme.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.theme.theme_title_text #=> String
+    #   resp.theme.theme_styling #=> String, one of "LIGHT_BLUE", "BLUE", "PINK", "RED"
+    #   resp.theme.theme_footer_links #=> Array
+    #   resp.theme.theme_footer_links[0].display_name #=> String
+    #   resp.theme.theme_footer_links[0].footer_link_url #=> String
+    #   resp.theme.theme_organization_logo_url #=> String
+    #   resp.theme.theme_favicon_url #=> String
+    #   resp.theme.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateThemeForStack AWS API Documentation
+    #
+    # @overload update_theme_for_stack(params = {})
+    # @param [Hash] params ({})
+    def update_theme_for_stack(params = {}, options = {})
+      req = build_request(:update_theme_for_stack, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5132,7 +5393,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
