@@ -16,19 +16,5 @@ require 'aws-sdk-code-generator'
 require 'aws-sdk-core'
 
 Dir.glob("#{$REPO_ROOT}/tasks/**/*.rake").each do |task_file|
-  require(task_file)
+  load(task_file)
 end
-
-task 'a' do
-  puts "TASK A"
-end
-
-task 'b' => 'a' do
-  puts "TASK B"
-end
-
-task 'c' => 'a' do
-  puts "TASK C"
-end
-
-task 'd' => %w[c b a]
