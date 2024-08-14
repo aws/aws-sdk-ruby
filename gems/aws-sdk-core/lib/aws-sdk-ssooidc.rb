@@ -12,7 +12,8 @@ unless Module.const_defined?(:Aws)
   require 'aws-sigv4'
 end
 
-if !defined?(JRUBY_VERSION) && Aws.autoload?(:SSOOIDC)
+if Aws.autoload?(:SSOOIDC) &&
+  !(defined?(JRUBY_VERSION) && JRUBY_VERSION.start_with?('9.2'))
   Aws.autoload(:SSOOIDC, __FILE__)
 end
 
