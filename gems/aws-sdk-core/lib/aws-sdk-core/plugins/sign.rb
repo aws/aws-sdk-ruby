@@ -106,7 +106,7 @@ module Aws
                      auth_scheme['signingRegion']
                    end
           begin
-            @signer = Aws::Sigv4::Signer.new(
+            @signer = config.sigv4_signer || Aws::Sigv4::Signer.new(
               service: config.sigv4_name || auth_scheme['signingName'],
               region: sigv4_overrides[:region] || config.sigv4_region || region,
               credentials_provider: sigv4_overrides[:credentials] || config.credentials,
