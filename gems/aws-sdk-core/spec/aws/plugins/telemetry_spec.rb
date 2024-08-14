@@ -2,7 +2,6 @@
 
 require_relative '../../spec_helper'
 require 'opentelemetry-sdk'
-require 'webmock/rspec'
 
 module Aws
   module Plugins
