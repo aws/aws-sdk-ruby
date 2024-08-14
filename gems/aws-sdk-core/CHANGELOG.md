@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Consider sigv4a supported without crt check.
+
 3.201.4 (2024-08-08)
 ------------------
 
