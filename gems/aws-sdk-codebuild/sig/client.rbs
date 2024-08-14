@@ -204,7 +204,7 @@ module Aws
                               }?,
                               buildspec: ::String?,
                               auth: {
-                                type: ("OAUTH" | "CODECONNECTIONS"),
+                                type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                 resource: ::String?
                               }?,
                               report_build_status: bool?,
@@ -225,7 +225,7 @@ module Aws
                                 }?,
                                 buildspec: ::String?,
                                 auth: {
-                                  type: ("OAUTH" | "CODECONNECTIONS"),
+                                  type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                   resource: ::String?
                                 }?,
                                 report_build_status: bool?,
@@ -547,7 +547,7 @@ module Aws
                                        ?username: ::String,
                                        token: ::String,
                                        server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "GITLAB" | "GITLAB_SELF_MANAGED"),
-                                       auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS"),
+                                       auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                        ?should_overwrite: bool
                                      ) -> _ImportSourceCredentialsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportSourceCredentialsResponseSuccess
@@ -790,7 +790,7 @@ module Aws
                              }?,
                              buildspec: ::String?,
                              auth: {
-                               type: ("OAUTH" | "CODECONNECTIONS"),
+                               type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                resource: ::String?
                              }?,
                              report_build_status: bool?,
@@ -845,7 +845,7 @@ module Aws
                          ?source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "GITLAB" | "GITLAB_SELF_MANAGED" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
                          ?source_location_override: ::String,
                          ?source_auth_override: {
-                           type: ("OAUTH" | "CODECONNECTIONS"),
+                           type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                            resource: ::String?
                          },
                          ?git_clone_depth_override: ::Integer,
@@ -916,7 +916,7 @@ module Aws
                                    }?,
                                    buildspec: ::String?,
                                    auth: {
-                                     type: ("OAUTH" | "CODECONNECTIONS"),
+                                     type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                      resource: ::String?
                                    }?,
                                    report_build_status: bool?,
@@ -971,7 +971,7 @@ module Aws
                                ?source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "GITLAB" | "GITLAB_SELF_MANAGED" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
                                ?source_location_override: ::String,
                                ?source_auth_override: {
-                                 type: ("OAUTH" | "CODECONNECTIONS"),
+                                 type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                  resource: ::String?
                                },
                                ?git_clone_depth_override: ::Integer,
@@ -1101,7 +1101,7 @@ module Aws
                               }?,
                               buildspec: ::String?,
                               auth: {
-                                type: ("OAUTH" | "CODECONNECTIONS"),
+                                type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                 resource: ::String?
                               }?,
                               report_build_status: bool?,
@@ -1122,7 +1122,7 @@ module Aws
                                 }?,
                                 buildspec: ::String?,
                                 auth: {
-                                  type: ("OAUTH" | "CODECONNECTIONS"),
+                                  type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
                                   resource: ::String?
                                 }?,
                                 report_build_status: bool?,

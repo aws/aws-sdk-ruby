@@ -507,7 +507,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].source.git_clone_depth #=> Integer
     #   resp.build_batches[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batches[0].source.buildspec #=> String
-    #   resp.build_batches[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batches[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batches[0].source.auth.resource #=> String
     #   resp.build_batches[0].source.report_build_status #=> Boolean
     #   resp.build_batches[0].source.build_status_config.context #=> String
@@ -520,7 +520,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batches[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batches[0].secondary_sources[0].buildspec #=> String
-    #   resp.build_batches[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batches[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batches[0].secondary_sources[0].auth.resource #=> String
     #   resp.build_batches[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batches[0].secondary_sources[0].build_status_config.context #=> String
@@ -676,7 +676,7 @@ module Aws::CodeBuild
     #   resp.builds[0].source.git_clone_depth #=> Integer
     #   resp.builds[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].source.buildspec #=> String
-    #   resp.builds[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.builds[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.builds[0].source.auth.resource #=> String
     #   resp.builds[0].source.report_build_status #=> Boolean
     #   resp.builds[0].source.build_status_config.context #=> String
@@ -689,7 +689,7 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.builds[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].secondary_sources[0].buildspec #=> String
-    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.builds[0].secondary_sources[0].auth.resource #=> String
     #   resp.builds[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.builds[0].secondary_sources[0].build_status_config.context #=> String
@@ -870,7 +870,7 @@ module Aws::CodeBuild
     #   resp.projects[0].source.git_clone_depth #=> Integer
     #   resp.projects[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].source.buildspec #=> String
-    #   resp.projects[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.projects[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.projects[0].source.auth.resource #=> String
     #   resp.projects[0].source.report_build_status #=> Boolean
     #   resp.projects[0].source.build_status_config.context #=> String
@@ -883,7 +883,7 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.projects[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].secondary_sources[0].buildspec #=> String
-    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.projects[0].secondary_sources[0].auth.resource #=> String
     #   resp.projects[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.projects[0].secondary_sources[0].build_status_config.context #=> String
@@ -1470,7 +1470,7 @@ module Aws::CodeBuild
     #       },
     #       buildspec: "String",
     #       auth: {
-    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #         resource: "String",
     #       },
     #       report_build_status: false,
@@ -1491,7 +1491,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -1624,7 +1624,7 @@ module Aws::CodeBuild
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
-    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.build_status_config.context #=> String
@@ -1637,7 +1637,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
-    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].build_status_config.context #=> String
@@ -2423,8 +2423,8 @@ module Aws::CodeBuild
     end
 
     # Imports the source repository credentials for an CodeBuild project
-    # that has its source code stored in a GitHub, GitHub Enterprise, or
-    # Bitbucket repository.
+    # that has its source code stored in a GitHub, GitHub Enterprise,
+    # GitLab, GitLab Self Managed, or Bitbucket repository.
     #
     # @option params [String] :username
     #   The Bitbucket username when the `authType` is BASIC\_AUTH. This
@@ -2434,7 +2434,8 @@ module Aws::CodeBuild
     # @option params [required, String] :token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
     #   For Bitbucket, this is either the access token or the app password.
-    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`.
+    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`. For
+    #   the `authType` SECRETS\_MANAGER, this is the `secretArn`.
     #
     # @option params [required, String] :server_type
     #   The source provider used for this project.
@@ -2443,8 +2444,7 @@ module Aws::CodeBuild
     #   The type of authentication used to connect to a GitHub, GitHub
     #   Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An
     #   OAUTH connection is not supported by the API and must be created using
-    #   the CodeBuild console. Note that CODECONNECTIONS is only valid for
-    #   GitLab and GitLab Self Managed.
+    #   the CodeBuild console.
     #
     # @option params [Boolean] :should_overwrite
     #   Set to `false` to prevent overwriting the repository source
@@ -2461,7 +2461,7 @@ module Aws::CodeBuild
     #     username: "NonEmptyString",
     #     token: "SensitiveNonEmptyString", # required
     #     server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED
-    #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS
+    #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, SECRETS_MANAGER
     #     should_overwrite: false,
     #   })
     #
@@ -3214,7 +3214,7 @@ module Aws::CodeBuild
     #   resp.source_credentials_infos #=> Array
     #   resp.source_credentials_infos[0].arn #=> String
     #   resp.source_credentials_infos[0].server_type #=> String, one of "GITHUB", "BITBUCKET", "GITHUB_ENTERPRISE", "GITLAB", "GITLAB_SELF_MANAGED"
-    #   resp.source_credentials_infos[0].auth_type #=> String, one of "OAUTH", "BASIC_AUTH", "PERSONAL_ACCESS_TOKEN", "CODECONNECTIONS"
+    #   resp.source_credentials_infos[0].auth_type #=> String, one of "OAUTH", "BASIC_AUTH", "PERSONAL_ACCESS_TOKEN", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.source_credentials_infos[0].resource #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials AWS API Documentation
@@ -3316,7 +3316,7 @@ module Aws::CodeBuild
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -3329,7 +3329,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -3474,7 +3474,7 @@ module Aws::CodeBuild
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -3487,7 +3487,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -3868,7 +3868,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -3923,7 +3923,7 @@ module Aws::CodeBuild
     #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
-    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
@@ -4002,7 +4002,7 @@ module Aws::CodeBuild
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -4015,7 +4015,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -4342,7 +4342,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -4397,7 +4397,7 @@ module Aws::CodeBuild
     #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
-    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
@@ -4478,7 +4478,7 @@ module Aws::CodeBuild
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -4491,7 +4491,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -4643,7 +4643,7 @@ module Aws::CodeBuild
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -4656,7 +4656,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -4788,7 +4788,7 @@ module Aws::CodeBuild
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -4801,7 +4801,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -5281,7 +5281,7 @@ module Aws::CodeBuild
     #       },
     #       buildspec: "String",
     #       auth: {
-    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #         resource: "String",
     #       },
     #       report_build_status: false,
@@ -5302,7 +5302,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -5435,7 +5435,7 @@ module Aws::CodeBuild
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
-    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.build_status_config.context #=> String
@@ -5448,7 +5448,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
-    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].build_status_config.context #=> String
@@ -5816,7 +5816,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

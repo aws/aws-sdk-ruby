@@ -534,7 +534,7 @@ module Aws::CodeBuild
       attr_accessor username: ::String
       attr_accessor token: ::String
       attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "GITLAB" | "GITLAB_SELF_MANAGED")
-      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS")
+      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS" | "SECRETS_MANAGER")
       attr_accessor should_overwrite: bool
       SENSITIVE: [:token]
     end
@@ -1017,7 +1017,7 @@ module Aws::CodeBuild
     end
 
     class SourceAuth
-      attr_accessor type: ("OAUTH" | "CODECONNECTIONS")
+      attr_accessor type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER")
       attr_accessor resource: ::String
       SENSITIVE: []
     end
@@ -1025,7 +1025,7 @@ module Aws::CodeBuild
     class SourceCredentialsInfo
       attr_accessor arn: ::String
       attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "GITLAB" | "GITLAB_SELF_MANAGED")
-      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS")
+      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS" | "SECRETS_MANAGER")
       attr_accessor resource: ::String
       SENSITIVE: []
     end

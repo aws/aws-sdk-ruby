@@ -2750,7 +2750,8 @@ module Aws::CodeBuild
     # @!attribute [rw] token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
     #   For Bitbucket, this is either the access token or the app password.
-    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`.
+    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`. For
+    #   the `authType` SECRETS\_MANAGER, this is the `secretArn`.
     #   @return [String]
     #
     # @!attribute [rw] server_type
@@ -2761,8 +2762,7 @@ module Aws::CodeBuild
     #   The type of authentication used to connect to a GitHub, GitHub
     #   Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An
     #   OAUTH connection is not supported by the API and must be created
-    #   using the CodeBuild console. Note that CODECONNECTIONS is only valid
-    #   for GitLab and GitLab Self Managed.
+    #   using the CodeBuild console.
     #   @return [String]
     #
     # @!attribute [rw] should_overwrite
@@ -4727,9 +4727,6 @@ module Aws::CodeBuild
     # @!attribute [rw] auth
     #   Information about the authorization settings for CodeBuild to access
     #   the source code to be built.
-    #
-    #   This information is for the CodeBuild console's use only. Your code
-    #   should not get or set this information directly.
     #   @return [Types::SourceAuth]
     #
     # @!attribute [rw] report_build_status
@@ -5491,12 +5488,9 @@ module Aws::CodeBuild
     # Information about the authorization settings for CodeBuild to access
     # the source code to be built.
     #
-    # This information is for the CodeBuild console's use only. Your code
-    # should not get or set this information directly.
-    #
     # @!attribute [rw] type
-    #   The authorization type to use. Valid options are OAUTH or
-    #   CODECONNECTIONS.
+    #   The authorization type to use. Valid options are OAUTH,
+    #   CODECONNECTIONS, or SECRETS\_MANAGER.
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -5526,12 +5520,13 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] auth_type
     #   The type of authentication used by the credentials. Valid options
-    #   are OAUTH, BASIC\_AUTH, PERSONAL\_ACCESS\_TOKEN, or CODECONNECTIONS.
+    #   are OAUTH, BASIC\_AUTH, PERSONAL\_ACCESS\_TOKEN, CODECONNECTIONS, or
+    #   SECRETS\_MANAGER.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The connection ARN if your serverType type is GITLAB or
-    #   GITLAB\_SELF\_MANAGED and your authType is CODECONNECTIONS.
+    #   The connection ARN if your authType is CODECONNECTIONS or
+    #   SECRETS\_MANAGER.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceCredentialsInfo AWS API Documentation
