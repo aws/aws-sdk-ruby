@@ -13,8 +13,7 @@ module Aws
       option(:sigv4_region)
       option(:unsigned_operations, default: [])
 
-      supported_auth_types = %w[sigv4 bearer sigv4-s3express none]
-      supported_auth_types += ['sigv4a'] if Aws::Sigv4::Signer.use_crt?
+      supported_auth_types = %w[sigv4 bearer sigv4-s3express sigv4a none]
       SUPPORTED_AUTH_TYPES = supported_auth_types.freeze
 
       def add_handlers(handlers, cfg)
