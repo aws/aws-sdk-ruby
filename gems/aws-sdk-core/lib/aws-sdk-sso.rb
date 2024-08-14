@@ -13,7 +13,7 @@ unless Module.const_defined?(:Aws)
 end
 
 if Aws.autoload?(:SSO) &&
-  !(defined?(JRUBY_VERSION) && JRUBY_VERSION.start_with?('9.2'))
+   !(defined?(JRUBY_VERSION) && JRUBY_VERSION < '9.3')
   Aws.autoload(:SSO, __FILE__)
 end
 
