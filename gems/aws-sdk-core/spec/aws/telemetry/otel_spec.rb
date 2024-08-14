@@ -30,7 +30,7 @@ module Aws
       end
 
       describe OTelContextManager do
-        after { OpenTelemetry::Context.clear }
+        before { OpenTelemetry::Context.clear }
         let(:root_context) { OpenTelemetry::Context::ROOT }
         let(:new_context) do
           OpenTelemetry::Context.empty.set_value('new', 'context')
@@ -81,6 +81,8 @@ module Aws
               c.add_span_processor(processor)
             end
           end
+          after { SpecHelper.reset_opentelemetry_sdk }
+
           let(:finished_span) { otel_exporter.finished_spans[0] }
 
           describe '#start_span' do
@@ -100,6 +102,7 @@ module Aws
 
           describe '#in_span' do
             let(:error) { StandardError.new('foo') }
+
             it 'returns a valid span with supplied parameters' do
               tracer.in_span('foo') do |span|
                 span['meat'] = 'pie'

@@ -100,6 +100,8 @@ module Aws
             end
           end
 
+          after { SpecHelper.reset_opentelemetry_sdk }
+
           let(:finished_send_span) do
             otel_exporter
               .finished_spans
@@ -133,7 +135,6 @@ module Aws
             stub_request(:post, 'https://foo.com/some_operation')
             client.some_operation
 
-            # pp otel_exporter.finished_spans
             expect(finished_send_span).not_to be_nil
             expect(finished_op_span).not_to be_nil
             expect(finished_send_span.attributes)
