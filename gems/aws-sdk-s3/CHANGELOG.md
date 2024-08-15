@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2024-08-15)
+------------------
+
+* Feature - Amazon Simple Storage Service / Features  : Adds support for pagination in the S3 ListBuckets API.
+
 1.157.0 (2024-08-01)
 ------------------
 

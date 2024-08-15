@@ -174,6 +174,7 @@ module Aws::ECS
       attr_accessor links: ::Array[::String]
       attr_accessor port_mappings: ::Array[Types::PortMapping]
       attr_accessor essential: bool
+      attr_accessor restart_policy: Types::ContainerRestartPolicy
       attr_accessor entry_point: ::Array[::String]
       attr_accessor command: ::Array[::String]
       attr_accessor environment: ::Array[Types::KeyValuePair]
@@ -251,6 +252,13 @@ module Aws::ECS
       attr_accessor memory: ::Integer
       attr_accessor memory_reservation: ::Integer
       attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      SENSITIVE: []
+    end
+
+    class ContainerRestartPolicy
+      attr_accessor enabled: bool
+      attr_accessor ignored_exit_codes: ::Array[::Integer]
+      attr_accessor restart_attempt_period: ::Integer
       SENSITIVE: []
     end
 

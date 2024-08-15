@@ -783,6 +783,19 @@ module Aws::DocDB
       SENSITIVE: []
     end
 
+    class FailoverGlobalClusterMessage
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor target_db_cluster_identifier: ::String
+      attr_accessor allow_data_loss: bool
+      attr_accessor switchover: bool
+      SENSITIVE: []
+    end
+
+    class FailoverGlobalClusterResult
+      attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
     class Filter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::String]

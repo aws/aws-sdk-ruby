@@ -685,6 +685,19 @@ module Aws
                                ) -> _FailoverDBClusterResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FailoverDBClusterResponseSuccess
 
+      interface _FailoverGlobalClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FailoverGlobalClusterResult]
+        def global_cluster: () -> Types::GlobalCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#failover_global_cluster-instance_method
+      def failover_global_cluster: (
+                                     global_cluster_identifier: ::String,
+                                     target_db_cluster_identifier: ::String,
+                                     ?allow_data_loss: bool,
+                                     ?switchover: bool
+                                   ) -> _FailoverGlobalClusterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FailoverGlobalClusterResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagListMessage]
         def tag_list: () -> ::Array[Types::Tag]

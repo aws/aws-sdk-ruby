@@ -130,6 +130,8 @@ module Aws::DocDB
             Aws::DocDB::Endpoints::DescribePendingMaintenanceActions.build(context)
           when :failover_db_cluster
             Aws::DocDB::Endpoints::FailoverDBCluster.build(context)
+          when :failover_global_cluster
+            Aws::DocDB::Endpoints::FailoverGlobalCluster.build(context)
           when :list_tags_for_resource
             Aws::DocDB::Endpoints::ListTagsForResource.build(context)
           when :modify_db_cluster

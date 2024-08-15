@@ -544,12 +544,20 @@ module Aws::S3
     # for the part storage, you should call the [ListParts][1] API operation
     # and ensure that the parts list is empty.
     #
-    # <note markdown="1"> **Directory buckets** - For directory buckets, you must make requests
-    # for this API operation to the Zonal endpoint. These endpoints support
-    # virtual-hosted-style requests in the format
-    # `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name `.
-    # Path-style requests are not supported. For more information, see
-    # [Regional and Zonal endpoints][2] in the *Amazon S3 User Guide*.
+    # <note markdown="1"> * **Directory buckets** - If multipart uploads in a directory bucket
+    #   are in progress, you can't delete the bucket until all the
+    #   in-progress multipart uploads are aborted or completed. To delete
+    #   these in-progress multipart uploads, use the `ListMultipartUploads`
+    #   operation to list the in-progress multipart uploads in the bucket
+    #   and use the `AbortMultupartUpload` operation to abort all the
+    #   in-progress multipart uploads.
+    #
+    # * **Directory buckets** - For directory buckets, you must make
+    #   requests for this API operation to the Zonal endpoint. These
+    #   endpoints support virtual-hosted-style requests in the format
+    #   `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name
+    #   `. Path-style requests are not supported. For more information, see
+    #   [Regional and Zonal endpoints][2] in the *Amazon S3 User Guide*.
     #
     #  </note>
     #
@@ -1132,12 +1140,20 @@ module Aws::S3
     # between directory buckets, and between general purpose buckets and
     # directory buckets.
     #
-    # <note markdown="1"> <b>Directory buckets </b> - For directory buckets, you must make
-    # requests for this API operation to the Zonal endpoint. These endpoints
-    # support virtual-hosted-style requests in the format
-    # `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name `.
-    # Path-style requests are not supported. For more information, see
-    # [Regional and Zonal endpoints][2] in the *Amazon S3 User Guide*.
+    # <note markdown="1"> * Amazon S3 supports copy operations using Multi-Region Access Points
+    #   only as a destination when using the Multi-Region Access Point ARN.
+    #
+    # * <b>Directory buckets </b> - For directory buckets, you must make
+    #   requests for this API operation to the Zonal endpoint. These
+    #   endpoints support virtual-hosted-style requests in the format
+    #   `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name
+    #   `. Path-style requests are not supported. For more information, see
+    #   [Regional and Zonal endpoints][2] in the *Amazon S3 User Guide*.
+    #
+    # * VPC endpoints don't support cross-Region requests (including
+    #   copies). If you're using VPC endpoints, your source and destination
+    #   buckets should be in the same Amazon Web Services Region as your VPC
+    #   endpoint.
     #
     #  </note>
     #
@@ -4498,6 +4514,15 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -4510,15 +4535,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
-    #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -4618,6 +4634,21 @@ module Aws::S3
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
     #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To remove tag set from an object version
     #
     #   # The following example removes tag set associated with the specified object version. The request specifies both the
@@ -4632,21 +4663,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -7704,6 +7720,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -7725,28 +7763,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -8997,29 +9013,24 @@ module Aws::S3
     # have permission to access it. The action returns a `200 OK` if the
     # bucket exists and you have permission to access it.
     #
-    # If the bucket does not exist or you do not have permission to access
+    # <note markdown="1"> If the bucket does not exist or you do not have permission to access
     # it, the `HEAD` request returns a generic `400 Bad Request`, `403
     # Forbidden` or `404 Not Found` code. A message body is not included, so
     # you cannot determine the exception beyond these HTTP response codes.
-    #
-    # <note markdown="1"> <b>Directory buckets </b> - You must make requests for this API
-    # operation to the Zonal endpoint. These endpoints support
-    # virtual-hosted-style requests in the format
-    # `https://bucket_name.s3express-az_id.region.amazonaws.com`. Path-style
-    # requests are not supported. For more information, see [Regional and
-    # Zonal endpoints][1] in the *Amazon S3 User Guide*.
     #
     #  </note>
     #
     # Authentication and authorization
     #
-    # : All `HeadBucket` requests must be authenticated and signed by using
-    #   IAM credentials (access key ID and secret access key for the IAM
-    #   identities). All headers with the `x-amz-` prefix, including
+    # : **General purpose buckets** - Request to public buckets that grant
+    #   the s3:ListBucket permission publicly do not need to be signed. All
+    #   other `HeadBucket` requests must be authenticated and signed by
+    #   using IAM credentials (access key ID and secret access key for the
+    #   IAM identities). All headers with the `x-amz-` prefix, including
     #   `x-amz-copy-source`, must be signed. For more information, see [REST
-    #   Authentication][2].
+    #   Authentication][1].
     #
-    #   **Directory bucket** - You must use IAM credentials to authenticate
+    #   **Directory buckets** - You must use IAM credentials to authenticate
     #   and authorize your access to the `HeadBucket` API operation, instead
     #   of using the temporary security credentials through the
     #   `CreateSession` API operation.
@@ -9035,7 +9046,7 @@ module Aws::S3
     #     you must have permissions to perform the `s3:ListBucket` action.
     #     The bucket owner has this permission by default and can grant this
     #     permission to others. For more information about permissions, see
-    #     [Managing access permissions to your Amazon S3 resources][3] in
+    #     [Managing access permissions to your Amazon S3 resources][2] in
     #     the *Amazon S3 User Guide*.
     #
     #   * **Directory bucket permissions** - You must have the <b>
@@ -9046,9 +9057,9 @@ module Aws::S3
     #     `ReadOnly` on the bucket.
     #
     #     For more information about example bucket policies, see [Example
-    #     bucket policies for S3 Express One Zone][4] and [Amazon Web
+    #     bucket policies for S3 Express One Zone][3] and [Amazon Web
     #     Services Identity and Access Management (IAM) identity-based
-    #     policies for S3 Express One Zone][5] in the *Amazon S3 User
+    #     policies for S3 Express One Zone][4] in the *Amazon S3 User
     #     Guide*.
     #
     # HTTP Host header syntax
@@ -9056,13 +9067,21 @@ module Aws::S3
     # : <b>Directory buckets </b> - The HTTP Host header syntax is `
     #   Bucket_name.s3express-az_id.region.amazonaws.com`.
     #
+    #   <note markdown="1"> You must make requests for this API operation to the Zonal endpoint.
+    #   These endpoints support virtual-hosted-style requests in the format
+    #   `https://bucket_name.s3express-az_id.region.amazonaws.com`.
+    #   Path-style requests are not supported. For more information, see
+    #   [Regional and Zonal endpoints][5] in the *Amazon S3 User Guide*.
+    #
+    #    </note>
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     #
     # @option params [required, String] :bucket
     #   The bucket name.
@@ -9170,7 +9189,7 @@ module Aws::S3
     # returning the object itself. This operation is useful if you're
     # interested only in an object's metadata.
     #
-    # A `HEAD` request has the same options as a `GET` operation on an
+    # <note markdown="1"> A `HEAD` request has the same options as a `GET` operation on an
     # object. The response is identical to the `GET` response except that
     # there is no response body. Because of this, if the `HEAD` request
     # generates an error, it returns a generic code, such as `400 Bad
@@ -9178,17 +9197,10 @@ module Aws::S3
     # `412 Precondition Failed`, or `304 Not Modified`. It's not possible
     # to retrieve the exact exception of these error codes.
     #
+    #  </note>
+    #
     # Request headers are limited to 8 KB in size. For more information, see
     # [Common Request Headers][1].
-    #
-    # <note markdown="1"> **Directory buckets** - For directory buckets, you must make requests
-    # for this API operation to the Zonal endpoint. These endpoints support
-    # virtual-hosted-style requests in the format
-    # `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name `.
-    # Path-style requests are not supported. For more information, see
-    # [Regional and Zonal endpoints][2] in the *Amazon S3 User Guide*.
-    #
-    #  </note>
     #
     # Permissions
     #
@@ -9198,7 +9210,7 @@ module Aws::S3
     #     have the `s3:GetObject` permission. You need the relevant read
     #     object (or version) permission for this operation. For more
     #     information, see [Actions, resources, and condition keys for
-    #     Amazon S3][3] in the *Amazon S3 User Guide*.
+    #     Amazon S3][2] in the *Amazon S3 User Guide*.
     #
     #     If the object you request doesn't exist, the error that Amazon S3
     #     returns depends on whether you also have the `s3:ListBucket`
@@ -9212,7 +9224,7 @@ module Aws::S3
     #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
-    #     `CreateSession` ][4] API operation for session-based
+    #     `CreateSession` ][3] API operation for session-based
     #     authorization. Specifically, you grant the
     #     `s3express:CreateSession` permission to the directory bucket in a
     #     bucket policy or an IAM identity-based policy. Then, you make the
@@ -9223,7 +9235,7 @@ module Aws::S3
     #     token for use. Amazon Web Services CLI or SDKs create session and
     #     refresh the session token automatically to avoid service
     #     interruptions when a session expires. For more information about
-    #     authorization, see [ `CreateSession` ][4].
+    #     authorization, see [ `CreateSession` ][3].
     #
     # Encryption
     # : <note markdown="1"> Encryption request headers, like `x-amz-server-side-encryption`,
@@ -9255,7 +9267,7 @@ module Aws::S3
     #   * `x-amz-server-side-encryption-customer-key-MD5`
     #
     #   For more information about SSE-C, see [Server-Side Encryption (Using
-    #   Customer-Provided Encryption Keys)][5] in the *Amazon S3 User
+    #   Customer-Provided Encryption Keys)][4] in the *Amazon S3 User
     #   Guide*.
     #
     #   <note markdown="1"> **Directory bucket permissions** - For directory buckets, only
@@ -9289,6 +9301,15 @@ module Aws::S3
     # : <b>Directory buckets </b> - The HTTP Host header syntax is `
     #   Bucket_name.s3express-az_id.region.amazonaws.com`.
     #
+    #   <note markdown="1"> For directory buckets, you must make requests for this API operation
+    #   to the Zonal endpoint. These endpoints support virtual-hosted-style
+    #   requests in the format
+    #   `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name
+    #   `. Path-style requests are not supported. For more information, see
+    #   [Regional and Zonal endpoints][5] in the *Amazon S3 User Guide*.
+    #
+    #    </note>
+    #
     # The following actions are related to `HeadObject`:
     #
     # * [GetObject][6]
@@ -9298,10 +9319,10 @@ module Aws::S3
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html
     #
@@ -10076,10 +10097,28 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
     #
+    # @option params [Integer] :max_buckets
+    #   Maximum number of buckets to be returned in response. When the number
+    #   is more than the count of buckets that are owned by an Amazon Web
+    #   Services account, return all the buckets in response.
+    #
+    # @option params [String] :continuation_token
+    #   `ContinuationToken` indicates to Amazon S3 that the list is being
+    #   continued on this bucket with a token. `ContinuationToken` is
+    #   obfuscated and is not a real key. You can use this `ContinuationToken`
+    #   for pagination of the list results.
+    #
+    #   Length Constraints: Minimum length of 0. Maximum length of 1024.
+    #
+    #   Required: No.
+    #
     # @return [Types::ListBucketsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBucketsOutput#buckets #buckets} => Array&lt;Types::Bucket&gt;
     #   * {Types::ListBucketsOutput#owner #owner} => Types::Owner
+    #   * {Types::ListBucketsOutput#continuation_token #continuation_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list all buckets
@@ -10111,6 +10150,13 @@ module Aws::S3
     #     }, 
     #   }
     #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_buckets({
+    #     max_buckets: 1,
+    #     continuation_token: "Token",
+    #   })
+    #
     # @example Response structure
     #
     #   resp.buckets #=> Array
@@ -10118,6 +10164,7 @@ module Aws::S3
     #   resp.buckets[0].creation_date #=> Time
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
+    #   resp.continuation_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets AWS API Documentation
     #
@@ -10166,9 +10213,9 @@ module Aws::S3
     #
     # @option params [String] :continuation_token
     #   `ContinuationToken` indicates to Amazon S3 that the list is being
-    #   continued on this bucket with a token. `ContinuationToken` is
-    #   obfuscated and is not a real key. You can use this `ContinuationToken`
-    #   for pagination of the list results.
+    #   continued on buckets in this account with a token. `ContinuationToken`
+    #   is obfuscated and is not a real bucket name. You can use this
+    #   `ContinuationToken` for the pagination of the list results.
     #
     # @option params [Integer] :max_directory_buckets
     #   Maximum number of buckets to be returned in response. When the number
@@ -10212,7 +10259,11 @@ module Aws::S3
     #
     # <note markdown="1"> **Directory buckets** - If multipart uploads in a directory bucket are
     # in progress, you can't delete the bucket until all the in-progress
-    # multipart uploads are aborted or completed.
+    # multipart uploads are aborted or completed. To delete these
+    # in-progress multipart uploads, use the `ListMultipartUploads`
+    # operation to list the in-progress multipart uploads in the bucket and
+    # use the `AbortMultupartUpload` operation to abort all the in-progress
+    # multipart uploads.
     #
     #  </note>
     #
@@ -10378,12 +10429,26 @@ module Aws::S3
     #    </note>
     #
     # @option params [String] :encoding_type
-    #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key can contain any
-    #   Unicode character; however, the XML 1.0 parser cannot parse some
-    #   characters, such as characters with an ASCII value from 0 to 10. For
-    #   characters that are not supported in XML 1.0, you can add this
-    #   parameter to request that Amazon S3 encode the keys in the response.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
+    #   response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value from
+    #   0 to 10. For characters that aren't supported in XML 1.0, you can add
+    #   this parameter to request that Amazon S3 encode the keys in the
+    #   response. For more information about characters to avoid in object key
+    #   names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear as
+    #   `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #
     # @option params [String] :key_marker
     #   Specifies the multipart upload after which listing should begin.
@@ -10675,12 +10740,26 @@ module Aws::S3
     #   the response.
     #
     # @option params [String] :encoding_type
-    #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key can contain any
-    #   Unicode character; however, the XML 1.0 parser cannot parse some
-    #   characters, such as characters with an ASCII value from 0 to 10. For
-    #   characters that are not supported in XML 1.0, you can add this
-    #   parameter to request that Amazon S3 encode the keys in the response.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
+    #   response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value from
+    #   0 to 10. For characters that aren't supported in XML 1.0, you can add
+    #   this parameter to request that Amazon S3 encode the keys in the
+    #   response. For more information about characters to avoid in object key
+    #   names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear as
+    #   `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #
     # @option params [String] :key_marker
     #   Specifies the key to start with when listing objects in a bucket.
@@ -10934,12 +11013,26 @@ module Aws::S3
     #   A delimiter is a character that you use to group keys.
     #
     # @option params [String] :encoding_type
-    #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key can contain any
-    #   Unicode character; however, the XML 1.0 parser cannot parse some
-    #   characters, such as characters with an ASCII value from 0 to 10. For
-    #   characters that are not supported in XML 1.0, you can add this
-    #   parameter to request that Amazon S3 encode the keys in the response.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
+    #   response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value from
+    #   0 to 10. For characters that aren't supported in XML 1.0, you can add
+    #   this parameter to request that Amazon S3 encode the keys in the
+    #   response. For more information about characters to avoid in object key
+    #   names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear as
+    #   `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #
     # @option params [String] :marker
     #   Marker is where you want Amazon S3 to start listing from. Amazon S3
@@ -11081,12 +11174,20 @@ module Aws::S3
     # programmatically][1] in the *Amazon S3 User Guide*. To get a list of
     # your buckets, see [ListBuckets][2].
     #
-    # <note markdown="1"> **Directory buckets** - For directory buckets, you must make requests
-    # for this API operation to the Zonal endpoint. These endpoints support
-    # virtual-hosted-style requests in the format
-    # `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name `.
-    # Path-style requests are not supported. For more information, see
-    # [Regional and Zonal endpoints][3] in the *Amazon S3 User Guide*.
+    # <note markdown="1"> * **General purpose bucket** - For general purpose buckets,
+    #   `ListObjectsV2` doesn't return prefixes that are related only to
+    #   in-progress multipart uploads.
+    #
+    # * **Directory buckets** - For directory buckets, `ListObjectsV2`
+    #   response includes the prefixes that are related only to in-progress
+    #   multipart uploads.
+    #
+    # * **Directory buckets** - For directory buckets, you must make
+    #   requests for this API operation to the Zonal endpoint. These
+    #   endpoints support virtual-hosted-style requests in the format
+    #   `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name
+    #   `. Path-style requests are not supported. For more information, see
+    #   [Regional and Zonal endpoints][3] in the *Amazon S3 User Guide*.
     #
     #  </note>
     #
@@ -11215,10 +11316,26 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
     #
     # @option params [String] :encoding_type
-    #   Encoding type used by Amazon S3 to encode object keys in the response.
-    #   If using `url`, non-ASCII characters used in an object's key name
-    #   will be URL encoded. For example, the object `test_file(3).png` will
-    #   appear as `test_file%283%29.png`.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in the
+    #   response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value from
+    #   0 to 10. For characters that aren't supported in XML 1.0, you can add
+    #   this parameter to request that Amazon S3 encode the keys in the
+    #   response. For more information about characters to avoid in object key
+    #   names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear as
+    #   `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #
     # @option params [Integer] :max_keys
     #   Sets the maximum number of keys returned in the response. By default,
@@ -12437,9 +12554,15 @@ module Aws::S3
     # S3 does not validate the KMS key ID provided in PutBucketEncryption
     # requests.
     #
-    # This action requires Amazon Web Services Signature Version 4. For more
-    # information, see [ Authenticating Requests (Amazon Web Services
-    # Signature Version 4)][3].
+    # If you're specifying a customer managed KMS key, we recommend using a
+    # fully qualified KMS key ARN. If you use a KMS key alias instead, then
+    # KMS resolves the key within the requester’s account. This behavior can
+    # result in data that's encrypted with a KMS key that belongs to the
+    # requester, and not the bucket owner.
+    #
+    #  Also, this action requires Amazon Web Services Signature Version 4.
+    # For more information, see [ Authenticating Requests (Amazon Web
+    # Services Signature Version 4)][3].
     #
     # To use this operation, you must have permission to perform the
     # `s3:PutEncryptionConfiguration` action. The bucket owner has this
@@ -14507,6 +14630,14 @@ module Aws::S3
     #
     #  </note>
     #
+    # <note markdown="1"> When you enable versioning on a bucket for the first time, it might
+    # take a short amount of time for the change to be fully propagated. We
+    # recommend that you wait for 15 minutes after enabling versioning
+    # before issuing write operations (`PUT` or `DELETE`) on objects in the
+    # bucket.
+    #
+    #  </note>
+    #
     # Sets the versioning state of an existing bucket.
     #
     # You can set the versioning state with one of the following values:
@@ -15445,41 +15576,20 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object
+    # @example Example: To create an object.
     #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object and specify server-side encryption and object tags
-    #
-    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Example: To upload an object (specify optional headers)
@@ -15500,6 +15610,44 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
+    # @example Example: To upload an object and specify server-side encryption and object tags
+    #
+    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
     # @example Example: To upload object and specify user-defined metadata
@@ -15523,6 +15671,23 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
     # @example Example: To upload an object and specify optional tags
     #
     #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
@@ -15539,40 +15704,6 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
-    # @example Example: To create an object.
-    #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "objectkey", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Streaming a file from disk
@@ -18863,7 +18994,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.157.0'
+      context[:gem_version] = '1.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
