@@ -89,7 +89,11 @@ module {{module_name}}
         client: self,
         params: params,
         http_response: Seahorse::Client::Http::AsyncResponse.new,
-        config: config)
+        config: config,
+        tracer: config.telemetry_provider.tracer_provider.tracer(
+          Aws::Telemetry.module_to_tracer_name('{{module_name}}')
+        )
+      )
       context[:gem_name] = '{{gem_name}}'
       context[:gem_version] = '{{gem_version}}'
       Seahorse::Client::Request.new(handlers, context)
