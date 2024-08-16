@@ -24,7 +24,7 @@ module Seahorse
         @http_request = options[:http_request] || Http::Request.new
         @http_response = options[:http_response] || Http::Response.new
         @retries = 0
-        @tracer = options[:tracer]
+        @tracer = options[:tracer] || Aws::Telemetry::NoOpTracer.new
         @metadata = {}
       end
 
