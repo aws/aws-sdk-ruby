@@ -27,60 +27,80 @@ module Seahorse
       class Handler < Client::Handler
 
         def call(context)
-          stream = nil
-          begin
-            conn = context.client.connection
-            stream = conn.new_stream
+          span_wrapper(context) do
+            stream = nil
+            begin
+              conn = context.client.connection
+              stream = conn.new_stream
 
-            stream_mutex = Mutex.new
-            close_condition = ConditionVariable.new
-            sync_queue = Queue.new
+              stream_mutex = Mutex.new
+              close_condition = ConditionVariable.new
+              sync_queue = Queue.new
 
-            conn.connect(context.http_request.endpoint)
-            _register_callbacks(
-              context.http_response,
-              stream,
-              stream_mutex,
-              close_condition,
-              sync_queue
-            )
+              conn.connect(context.http_request.endpoint)
+              _register_callbacks(
+                context.http_response,
+                stream,
+                stream_mutex,
+                close_condition,
+                sync_queue
+              )
 
-            conn.debug_output("sending initial request ...")
-            if input_emitter = context[:input_event_emitter]
-              _send_initial_headers(context.http_request, stream)
+              conn.debug_output("sending initial request ...")
+              if input_emitter = context[:input_event_emitter]
+                _send_initial_headers(context.http_request, stream)
 
-              # prepare for sending events later
-              input_emitter.stream = stream
-              # request sigv4 serves as the initial #prior_signature
-              input_emitter.encoder.prior_signature =
-                context.http_request.headers['authorization'].split('Signature=').last
-              input_emitter.validate_event = context.config.validate_params
-            else
-              _send_initial_headers(context.http_request, stream)
-              _send_initial_data(context.http_request, stream)
+                # prepare for sending events later
+                input_emitter.stream = stream
+                # request sigv4 serves as the initial #prior_signature
+                input_emitter.encoder.prior_signature =
+                  context.http_request.headers['authorization'].split('Signature=').last
+                input_emitter.validate_event = context.config.validate_params
+              else
+                _send_initial_headers(context.http_request, stream)
+                _send_initial_data(context.http_request, stream)
+              end
+
+              conn.start(stream)
+            rescue *NETWORK_ERRORS => error
+              error = NetworkingError.new(
+                error, error_message(context.http_request, error))
+              context.http_response.signal_error(error)
+            rescue => error
+              conn.debug_output(error.inspect)
+              # not retryable
+              context.http_response.signal_error(error)
             end
 
-            conn.start(stream)
-          rescue *NETWORK_ERRORS => error
-            error = NetworkingError.new(
-              error, error_message(context.http_request, error))
-            context.http_response.signal_error(error)
-          rescue => error
-            conn.debug_output(error.inspect)
-            # not retryable
-            context.http_response.signal_error(error)
+            AsyncResponse.new(
+              context: context,
+              stream: stream,
+              stream_mutex: stream_mutex,
+              close_condition: close_condition,
+              sync_queue: sync_queue
+            )
           end
-
-          AsyncResponse.new(
-            context: context,
-            stream: stream,
-            stream_mutex: stream_mutex,
-            close_condition: close_condition,
-            sync_queue: sync_queue
-          )
         end
 
         private
+
+        def span_wrapper(context, &block)
+          context.tracer.in_span(
+            'Handler.H2',
+            attributes: request_attrs(context),
+            &block
+          )
+        end
+
+        def request_attrs(context)
+          {
+            'http.method' => context.http_request.http_method,
+            'net.protocol.name' => 'http',
+            'net.protocol.version' => '2',
+            'net.peer.name' => context.http_request.endpoint.host,
+            'net.peer.port' => context.http_request.endpoint.port.to_s
+          }
+        end
 
         def _register_callbacks(resp, stream, stream_mutex, close_condition, sync_queue)
           stream.on(:headers) do |headers|
