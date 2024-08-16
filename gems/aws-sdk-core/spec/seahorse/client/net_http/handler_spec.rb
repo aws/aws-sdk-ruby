@@ -19,7 +19,6 @@ module Seahorse
           RequestContext.new.tap do |context|
             context.config = config
             context.http_request.endpoint = endpoint
-            context.tracer = Aws::Telemetry::NoOpTracer.new
           end
         end
 

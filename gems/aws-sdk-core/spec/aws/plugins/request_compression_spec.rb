@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 require_relative '../../spec_helper'
+require 'aws-sdk-core/plugins/request_compression'
 
 module Aws
   module Plugins
     describe RequestCompression do
       let(:creds) { Aws::Credentials.new('akid', 'secret') }
-      let(:client_opts) { { credentials: creds, stub_responses: true } }
+       let(:client_opts) { { credentials: creds, stub_responses: true } }
 
       RequestCompressionClient = ApiHelper.sample_service(
         metadata: { 'protocol' => 'rest-xml' },
