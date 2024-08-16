@@ -71,6 +71,7 @@ module SpecHelper
     end
 
     # clears opentelemetry-sdk configuration state between specs
+    # https://github.com/open-telemetry/opentelemetry-ruby/blob/main/test_helpers/lib/opentelemetry/test_helpers.rb#L18
     def reset_opentelemetry_sdk
       OpenTelemetry.instance_variable_set(
         :@tracer_provider,
