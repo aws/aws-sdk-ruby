@@ -36,14 +36,9 @@ module Aws
         end
       end
 
-      # this is the root parent handler
-      # sets up initial attributes to emit
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # serviceId may not be present in older versions
-          # do I need to retrieve legacy serviceId?
           service_id = service_id(context)
-
           attributes = {
             'rpc.service' => service_id,
             'rpc.method' => context.operation.name,
@@ -63,7 +58,8 @@ module Aws
 
         def service_id(context)
           context.config.api.metadata['serviceId'] ||
-            context.config.api.metadata['serviceAbbreviation']
+            context.config.api.metadata['serviceAbbreviation'] ||
+            context.config.api.metadata['serviceFullName']
         end
 
         def parent_span_name(context, service_id)
