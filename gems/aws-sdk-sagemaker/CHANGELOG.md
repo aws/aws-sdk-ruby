@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.257.0 (2024-08-16)
+------------------
+
+* Feature - Introduce Endpoint and EndpointConfig Arns in sagemaker:ListPipelineExecutionSteps API response
+
 1.256.0 (2024-08-12)
 ------------------
 

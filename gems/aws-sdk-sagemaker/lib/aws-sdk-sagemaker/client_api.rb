@@ -827,6 +827,7 @@ module Aws::SageMaker
     EndpointConfigName = Shapes::StringShape.new(name: 'EndpointConfigName')
     EndpointConfigNameContains = Shapes::StringShape.new(name: 'EndpointConfigNameContains')
     EndpointConfigSortKey = Shapes::StringShape.new(name: 'EndpointConfigSortKey')
+    EndpointConfigStepMetadata = Shapes::StructureShape.new(name: 'EndpointConfigStepMetadata')
     EndpointConfigSummary = Shapes::StructureShape.new(name: 'EndpointConfigSummary')
     EndpointConfigSummaryList = Shapes::ListShape.new(name: 'EndpointConfigSummaryList')
     EndpointInfo = Shapes::StructureShape.new(name: 'EndpointInfo')
@@ -841,6 +842,7 @@ module Aws::SageMaker
     EndpointPerformances = Shapes::ListShape.new(name: 'EndpointPerformances')
     EndpointSortKey = Shapes::StringShape.new(name: 'EndpointSortKey')
     EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
+    EndpointStepMetadata = Shapes::StructureShape.new(name: 'EndpointStepMetadata')
     EndpointSummary = Shapes::StructureShape.new(name: 'EndpointSummary')
     EndpointSummaryList = Shapes::ListShape.new(name: 'EndpointSummaryList')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
@@ -5689,6 +5691,9 @@ module Aws::SageMaker
     Endpoint.add_member(:shadow_production_variants, Shapes::ShapeRef.new(shape: ProductionVariantSummaryList, location_name: "ShadowProductionVariants"))
     Endpoint.struct_class = Types::Endpoint
 
+    EndpointConfigStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointConfigArn, location_name: "Arn"))
+    EndpointConfigStepMetadata.struct_class = Types::EndpointConfigStepMetadata
+
     EndpointConfigSummary.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
     EndpointConfigSummary.add_member(:endpoint_config_arn, Shapes::ShapeRef.new(shape: EndpointConfigArn, required: true, location_name: "EndpointConfigArn"))
     EndpointConfigSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
@@ -5738,6 +5743,9 @@ module Aws::SageMaker
     EndpointPerformance.struct_class = Types::EndpointPerformance
 
     EndpointPerformances.member = Shapes::ShapeRef.new(shape: EndpointPerformance)
+
+    EndpointStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "Arn"))
+    EndpointStepMetadata.struct_class = Types::EndpointStepMetadata
 
     EndpointSummary.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     EndpointSummary.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, required: true, location_name: "EndpointArn"))
@@ -8579,6 +8587,8 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:clarify_check, Shapes::ShapeRef.new(shape: ClarifyCheckStepMetadata, location_name: "ClarifyCheck"))
     PipelineExecutionStepMetadata.add_member(:fail, Shapes::ShapeRef.new(shape: FailStepMetadata, location_name: "Fail"))
     PipelineExecutionStepMetadata.add_member(:auto_ml_job, Shapes::ShapeRef.new(shape: AutoMLJobStepMetadata, location_name: "AutoMLJob"))
+    PipelineExecutionStepMetadata.add_member(:endpoint, Shapes::ShapeRef.new(shape: EndpointStepMetadata, location_name: "Endpoint"))
+    PipelineExecutionStepMetadata.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfigStepMetadata, location_name: "EndpointConfig"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))

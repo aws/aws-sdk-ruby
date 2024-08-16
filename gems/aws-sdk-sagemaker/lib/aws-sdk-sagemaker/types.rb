@@ -19545,6 +19545,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Metadata for an endpoint configuration step.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the endpoint configuration used in
+    #   the step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointConfigStepMetadata AWS API Documentation
+    #
+    class EndpointConfigStepMetadata < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information for an endpoint configuration.
     #
     # @!attribute [rw] endpoint_config_name
@@ -19788,6 +19803,20 @@ module Aws::SageMaker
     class EndpointPerformance < Struct.new(
       :metrics,
       :endpoint_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for an endpoint step.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the endpoint in the step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointStepMetadata AWS API Documentation
+    #
+    class EndpointStepMetadata < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36343,6 +36372,15 @@ module Aws::SageMaker
     #   this step.
     #   @return [Types::AutoMLJobStepMetadata]
     #
+    # @!attribute [rw] endpoint
+    #   The endpoint that was invoked during this step execution.
+    #   @return [Types::EndpointStepMetadata]
+    #
+    # @!attribute [rw] endpoint_config
+    #   The endpoint configuration used to create an endpoint during this
+    #   step execution.
+    #   @return [Types::EndpointConfigStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -36359,7 +36397,9 @@ module Aws::SageMaker
       :quality_check,
       :clarify_check,
       :fail,
-      :auto_ml_job)
+      :auto_ml_job,
+      :endpoint,
+      :endpoint_config)
       SENSITIVE = []
       include Aws::Structure
     end

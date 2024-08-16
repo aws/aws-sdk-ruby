@@ -30,6 +30,7 @@ module Aws::QuickSight
   # * {AccessDeniedException}
   # * {ConcurrentUpdatingException}
   # * {ConflictException}
+  # * {CustomerManagedKeyUnavailableException}
   # * {DomainNotWhitelistedException}
   # * {IdentityTypeNotSupportedException}
   # * {InternalFailureException}
@@ -98,6 +99,26 @@ module Aws::QuickSight
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::QuickSight::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class CustomerManagedKeyUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QuickSight::Types::CustomerManagedKeyUnavailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
