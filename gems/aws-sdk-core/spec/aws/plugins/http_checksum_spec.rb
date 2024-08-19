@@ -43,7 +43,14 @@ module Aws
         HttpChecksumClient.new(credentials: creds, stub_responses: true)
       end
 
-      context 'checksum required operations' do
+      context 'checksum not required' do
+        it 'does not compute MD5 and does not send the content-md5 header' do
+          resp = client.operation(string: 'i am just a string')
+          expect(resp.context.http_request.headers['content-md5']).to be_nil
+        end
+      end
+
+      context 'httpChecksumRequired operations' do
         it 'computes MD5 of the http body and sends as content-md5 header' do
           resp = client.checksum_operation(string: 'md5 me captain')
           expect(resp.context.http_request.headers['content-md5']).to eq(
@@ -62,15 +69,8 @@ module Aws
         end
       end
 
-      context 'checksum not required operations' do
-        it 'does not compute MD5 and does not send the content-md5 header' do
-          resp = client.operation(string: 'i am just a string')
-          expect(resp.context.http_request.headers['content-md5']).to be_nil
-        end
-      end
-
       context 'httpChecksum operation' do
-        it 'computes the MD5 when another checksum has not been computed' do
+        it 'computes the MD5 when another checksum has not been selected' do
           resp = client.checksum_algorithm_operation(string: 'md5 me captain')
           expect(resp.context.http_request.headers['content-md5']).to eq(
             'rqd/0N8H2GgZWzmo3oY9tA=='

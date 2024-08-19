@@ -1,0 +1,62 @@
+[
+     {
+         "documentation": "CRC32 streaming checksum calculation works.",
+         "requestPayload": "Hello world",
+         "checksumAlgorithm": "Crc32",
+         "expectHeaders": {
+             "content-encoding": "aws-chunked",
+             "x-amz-trailer": "x-amz-checksum-crc32"
+         },
+         "expectTrailers": {
+             "x-amz-checksum-crc32": "i9aeUg=="
+         }
+     },
+     {
+         "documentation": "CRC32C streaming checksum calculation works.",
+         "requestPayload": "Hello world",
+         "checksumAlgorithm": "Crc32C",
+         "expectHeaders": {
+             "content-encoding": "aws-chunked",
+             "x-amz-trailer": "x-amz-checksum-crc32c"
+         },
+         "expectTrailers": {
+             "x-amz-checksum-crc32c": "crUfeA=="
+         }
+     },
+     {
+         "documentation": "CRC64NVME streaming checksum calculation works.",
+         "requestPayload": "Hello world",
+         "checksumAlgorithm": "Crc64Nvme",
+         "expectHeaders": {
+             "content-encoding": "aws-chunked",
+             "x-amz-trailer": "x-amz-checksum-crc64nvme"
+         },
+         "expectTrailers": {
+             "x-amz-checksum-crc64nvme": "uc8X9yrZrD4="
+         }
+     },
+     {
+         "documentation": "SHA1 streaming checksum calculation works.",
+         "requestPayload": "Hello world",
+         "checksumAlgorithm": "Sha1",
+         "expectHeaders": {
+             "content-encoding": "aws-chunked",
+             "x-amz-trailer": "x-amz-checksum-sha1"
+         },
+         "expectTrailers": {
+             "x-amz-checksum-sha1": "e1AsOh9IyGCa4hLN+2Od7jlnP14="
+         }
+     },
+     {
+         "documentation": "SHA256 streaming checksum calculation works.",
+         "requestPayload": "Hello world",
+         "checksumAlgorithm": "Sha256",
+         "expectHeaders": {
+             "content-encoding": "aws-chunked",
+             "x-amz-trailer": "x-amz-checksum-sha256"
+         },
+         "expectTrailers": {
+             "x-amz-checksum-sha256": "ZOyIygCyaOW6GjVnihtTFtIS9PNmskdyMlNKiuyjfzw="
+         }
+     }
+ ]

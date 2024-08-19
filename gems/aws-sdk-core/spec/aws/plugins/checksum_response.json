@@ -1,0 +1,107 @@
+[
+     {
+         "documentation": "Successful payload validation with CRC32 checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Crc32",
+         "responseHeaders": {
+             "x-amz-checksum-crc32": "i9aeUg=="
+         },
+         "expect": { "kind": "success" }
+     },
+     {
+         "documentation": "Successful payload validation with CRC32C checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Crc32C",
+         "responseHeaders": {
+             "x-amz-checksum-crc32c": "crUfeA=="
+         },
+         "expect": { "kind": "success" }
+     },
+     {
+         "documentation": "Successful payload validation with CRC64NVME checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Crc64Nvme",
+         "responseHeaders": {
+             "x-amz-checksum-crc64nvme": "uc8X9yrZrD4="
+         },
+         "expect": { "kind": "success" }
+     },
+     {
+         "documentation": "Successful payload validation with SHA1 checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Sha1",
+         "responseHeaders": {
+             "x-amz-checksum-sha1": "e1AsOh9IyGCa4hLN+2Od7jlnP14="
+         },
+         "expect": { "kind": "success" }
+     },
+     {
+         "documentation": "Successful payload validation with SHA256 checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Sha256",
+         "responseHeaders": {
+             "x-amz-checksum-sha256": "ZOyIygCyaOW6GjVnihtTFtIS9PNmskdyMlNKiuyjfzw="
+         },
+         "expect": { "kind": "success" }
+     },
+     {
+         "documentation": "Failed payload validation with CRC32 checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Crc32",
+         "responseHeaders": {
+             "x-amz-checksum-crc32": "bm90LWEtY2hlY2tzdW0="
+         },
+         "expect": {
+             "kind": "failure",
+             "calculatedChecksum": "i9aeUg=="
+         }
+     },
+     {
+         "documentation": "Failed payload validation with CRC32C checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Crc32C",
+         "responseHeaders": {
+             "x-amz-checksum-crc32c": "bm90LWEtY2hlY2tzdW0="
+         },
+         "expect": {
+             "kind": "failure",
+             "calculatedChecksum": "crUfeA=="
+         }
+     },
+     {
+         "documentation": "Failed payload validation with CRC64NVME checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Crc64Nvme",
+         "responseHeaders": {
+             "x-amz-checksum-crc64nvme": "bm90LWEtY2hlY2tzdW0="
+         },
+         "expect": {
+             "kind": "failure",
+             "calculatedChecksum": "uc8X9yrZrD4="
+         }
+     },
+     {
+         "documentation": "Failed payload validation with SHA1 checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Sha1",
+         "responseHeaders": {
+             "x-amz-checksum-sha1": "bm90LWEtY2hlY2tzdW0="
+         },
+         "expect": {
+             "kind": "failure",
+             "calculatedChecksum": "e1AsOh9IyGCa4hLN+2Od7jlnP14="
+         }
+     },
+     {
+         "documentation": "Failed payload validation with SHA256 checksum.",
+         "responsePayload": "Hello world",
+         "checksumAlgorithm": "Sha256",
+         "responseHeaders": {
+             "x-amz-checksum-sha256": "bm90LWEtY2hlY2tzdW0="
+         },
+         "expect": {
+             "kind": "failure",
+             "calculatedChecksum": "ZOyIygCyaOW6GjVnihtTFtIS9PNmskdyMlNKiuyjfzw="
+         }
+     }
+ ]

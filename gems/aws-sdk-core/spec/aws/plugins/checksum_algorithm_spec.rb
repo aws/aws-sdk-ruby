@@ -6,174 +6,238 @@ require 'aws-sdk-core/plugins/checksum_algorithm'
 module Aws
   module Plugins
     describe ChecksumAlgorithm do
-      let(:creds) { Aws::Credentials.new('akid', 'secret') }
-      let(:client_opts) { { credentials: creds, stub_responses: true } }
-
-      # Don't include CRC32C in these definitions - increases complexity of testing
-      # with and without CRT
-      ChecksumClient = ApiHelper.sample_service(
-        metadata: { 'protocol' => 'rest-xml' },
-        operations: {
-          'SomeOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'httpChecksumRequired' => 'true',
-            'input' => { 'shape' => 'SomeOperationRequest' },
-            'output' => { 'shape' => 'StructureShape' },
-            'httpChecksum' => {
-              "requestChecksumRequired" => true,
-              "requestAlgorithmMember" => "ChecksumAlgorithm",
-              "requestValidationModeMember" => "ChecksumMode",
-              "responseAlgorithms" => ["CRC32", "SHA256", "SHA1"]
+      let(:checksum_client) do
+        ApiHelper.sample_service(
+          metadata: { 'protocol' => 'rest-xml' },
+          operations: {
+            'SomeOperation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'SomeInput' },
+              'output' => { 'shape' => 'SomeOutput' },
+              'httpChecksum' => {
+                'requestChecksumRequired' => request_checksum_required,
+                'requestAlgorithmMember' => 'ChecksumAlgorithm',
+                'requestValidationModeMember' => 'ValidationMode',
+                'responseAlgorithms' => response_algorithms
+              }
+            },
+            'SomeOperationStreaming' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'unsignedPayload' => true,
+              'input' => { 'shape' => 'SomeStreamingInput' },
+              'output' => { 'shape' => 'SomeStreamingOutput' },
+              'httpChecksum' => {
+                'requestChecksumRequired' => request_checksum_required,
+                'requestAlgorithmMember' => 'ChecksumAlgorithm',
+                'requestValidationModeMember' => 'ValidationMode',
+                'responseAlgorithms' => response_algorithms
+              }
             }
           },
-          'SomeOperationStreaming' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'unsignedPayload' => true,
-            'input' => { 'shape' => 'SomeOperationRequest' },
-            'output' => { 'shape' => 'StructureShape' },
-            'httpChecksum' => {
-              "requestChecksumRequired" => true,
-              "requestAlgorithmMember" => "ChecksumAlgorithm",
-              "requestValidationModeMember" => "ChecksumMode",
-              "responseAlgorithms" => ["CRC32", "SHA256", "SHA1"]
-            }
-          },
-          'SomeOperationStreamingLegacyAuth' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'authtype' => 'v4-unsigned-body',
-            'input' => { 'shape' => 'SomeOperationRequest' },
-            'output' => { 'shape' => 'StructureShape' },
-            'httpChecksum' => {
-              "requestChecksumRequired" => true,
-              "requestAlgorithmMember" => "ChecksumAlgorithm",
-              "requestValidationModeMember" => "ChecksumMode",
-              "responseAlgorithms" => ["CRC32", "SHA256", "SHA1"]
+          shapes: {
+            'Body' => { 'type' => 'blob' },
+            'ChecksumAlgorithm' => {
+              'type' => 'string',
+               # SHA256 intentionally unmodeled for forwards compatibility test
+              'enum' => ['CRC32', 'CRC32C', 'CRC64NVME', 'SHA1']
+            },
+            'SomeInput' => {
+              'type' => 'structure',
+              'members' => {
+                'ChecksumAlgorithm' => {
+                  'shape' => 'ChecksumAlgorithm',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-request-algorithm'
+                },
+                'ValidationMode' => { 'shape' => 'ValidationMode' },
+                'Body' => { 'shape' => 'Body' }
+              },
+              'payload' => 'Body'
+            },
+            'SomeStreamingInput' => {
+              'type' => 'structure',
+              'members' => {
+                'ChecksumAlgorithm' => {
+                  'shape' => 'ChecksumAlgorithm',
+                  'location' => 'header',
+                  'locationName' => 'x-amz-request-algorithm'
+                },
+                'ValidationMode' => { 'shape' => 'ValidationMode' },
+                'Body' => { 'shape' => 'Body', 'streaming' => true }
+              },
+              'payload' => 'Body'
+            },
+            'SomeOutput' => {
+              'type' => 'structure',
+              'members' => {}
+            },
+            'SomeStreamingOutput' => {
+              'type' => 'structure',
+              'members' => {}
+            },
+            'ValidationMode' => {
+              'type' => 'string',
+              'enum' => ['ENABLED']
             }
           }
-        },
-        shapes: {
-          'StructureShape' => {
-            'type' => 'structure',
-            'members' => {
-              'String' => { 'shape' => 'StringShape' }
-            }
-          },
-          'StringShape' => { 'type' => 'string' },
-          'ChecksumAlgorithmShape' => {
-            'type' => 'string',
-            'enum' => %w[CRC32 SHA1]
-          },
-          'ChecksumModeEnum' => {
-            'type' => 'string',
-            'enum' => %w[ENABLED]
-          },
-          'SomeOperationRequest' => {
-            'type' => 'structure',
-            'members' => {
-              'ChecksumAlgorithm' => { 'shape' => 'ChecksumAlgorithmShape' },
-              'ChecksumMode' => { 'shape' => 'ChecksumModeEnum' },
-              'Body' => { 'shape' => 'Body', 'streaming' => true}
-            },
-            'payload' => 'Body'
-          },
-          'Body' => { 'type' => 'blob' }
-        }
-      ).const_get(:Client)
-      let(:client) { ChecksumClient.new(client_opts) }
+        ).const_get(:Client)
+      end
 
-      let(:default_algorithm_plugin) do
-        Class.new(Seahorse::Client::Plugin) do
-          class Handler < Seahorse::Client::Handler
-            def call(context)
-              context[:default_request_checksum_algorithm] = 'CRC32'
-              @handler.call(context)
-            end
-          end
-          handler(Handler)
+      let(:request_checksum_required) { true }
+      let(:response_algorithms) do
+        %w[CRC32 CRC32C CRC64NVME SHA1 SHA256]
+      end
+
+      let(:client) { checksum_client.new(stub_responses: true) }
+
+      describe 'request_checksum_calculation' do
+        it 'is configured to always compute by default' do
+          expect(client.config.request_checksum_calculation)
+            .to eq('WHEN_SUPPORTED')
+        end
+
+        it 'can be configured using shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:request_checksum_calculation)
+            .and_return('WHEN_REQUIRED')
+          expect(client.config.request_checksum_calculation)
+            .to eq('WHEN_REQUIRED')
+        end
+
+        it 'can be configured using ENV with precedence over shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:request_checksum_calculation)
+            .and_return('WHEN_SUPPORTED')
+          ENV['AWS_REQUEST_CHECKSUM_CALCULATION'] = 'WHEN_REQUIRED'
+          expect(client.config.request_checksum_calculation)
+            .to eq('WHEN_REQUIRED')
+        end
+
+        it 'raises when request_checksum_calculation is not valid' do
+          ENV['AWS_REQUEST_CHECKSUM_CALCULATION'] = 'peccy'
+          expect { client }.to raise_error(ArgumentError, /WHEN_SUPPORTED/)
         end
       end
 
-      context 'request algorithm selection' do
-        it 'uses crc32 in the header' do
-          resp = client.some_operation(checksum_algorithm: 'CRC32')
-          expect(resp.context.http_request.headers['x-amz-checksum-crc32']).to_not be_nil
+      describe 'response_checksum_calculation' do
+        it 'is configured to always verify by default' do
+          expect(client.config.response_checksum_calculation)
+            .to eq('WHEN_SUPPORTED')
         end
 
-        it 'uses crc32 in the trailer' do
-          resp = client.some_operation_streaming(checksum_algorithm: 'CRC32')
-          expect(resp.context.http_request.headers['x-amz-trailer']).to eq 'x-amz-checksum-crc32'
+        it 'can be configured using shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:response_checksum_calculation)
+            .and_return('WHEN_REQUIRED')
+          expect(client.config.response_checksum_calculation)
+            .to eq('WHEN_REQUIRED')
         end
 
-        it 'uses crc32 in the trailer using legacy auth' do
-          resp = client.some_operation_streaming_legacy_auth(checksum_algorithm: 'CRC32')
-          expect(resp.context.http_request.headers['x-amz-trailer']).to eq 'x-amz-checksum-crc32'
+        it 'can be configured using ENV with precedence over shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:response_checksum_calculation)
+            .and_return('WHEN_SUPPORTED')
+          ENV['AWS_RESPONSE_CHECKSUM_CALCULATION'] = 'WHEN_REQUIRED'
+          expect(client.config.response_checksum_calculation)
+            .to eq('WHEN_REQUIRED')
         end
 
-        it 'uses un-modeled sha256 in the header' do
-          resp = client.some_operation(checksum_algorithm: 'sha256')
-          expect(resp.context.http_request.headers['x-amz-checksum-sha256']).to_not be_nil
+        it 'raises when response_checksum_calculation is not valid' do
+          ENV['AWS_RESPONSE_CHECKSUM_CALCULATION'] = 'peccy'
+          expect { client }.to raise_error(ArgumentError, /WHEN_SUPPORTED/)
         end
+      end
 
-        it 'uses un-modeled sha256 in the trailer' do
-          resp = client.some_operation_streaming(checksum_algorithm: 'sha256')
-          expect(resp.context.http_request.headers['x-amz-trailer']).to eq 'x-amz-checksum-sha256'
-        end
-
-        # Additional behavior tests
-
-        it 'http_checksum_required; computes md5 when not configured' do
-          resp = client.some_operation
-          expect(resp.context.http_request.headers['Content-MD5']).to_not be_nil
-        end
-
-        it 'http_checksum_required; does not computes md5 when another checksum is computed' do
-          resp = client.some_operation(checksum_algorithm: 'sha256')
-          expect(resp.context.http_request.headers['Content-MD5']).to be_nil
-        end
-
+      context 'request checksum calculation' do
         it 'raises when request algorithm is not supported by the client' do
           expect do
             client.some_operation(checksum_algorithm: 'no-such-algorithm')
           end.to raise_error(ArgumentError)
         end
 
-        it 'will use a default algorithm from the context' do
-          ChecksumClient.add_plugin(default_algorithm_plugin)
+        it 'will use a CRC32 as a default' do
           resp = client.some_operation
-          expect(resp.context.http_request.headers['x-amz-checksum-crc32']).to_not be_nil
-          ChecksumClient.remove_plugin(default_algorithm_plugin)
+          header = resp.context.http_request.headers['x-amz-checksum-crc32']
+          expect(header).to eq('AAAAAA==')
+        end
+
+        file = File.expand_path('checksum_request.json', __dir__)
+        test_cases = JSON.load_file(file)
+
+        test_cases.each do |test_case|
+          it "passes test: #{test_case['documentation']}" do
+            algorithm = test_case['checksumAlgorithm'].upcase
+            unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
+              skip "Algorithm #{algorithm} not supported"
+            end
+
+            resp = client.some_operation(
+              checksum_algorithm: algorithm,
+              body: test_case['requestPayload']
+            )
+            headers = resp.context.http_request.headers
+            test_case['expectHeaders'].each do |key, value|
+              expect(headers[key]).to eq(value)
+            end
+          end
         end
       end
 
-      context 'response algorithm selection' do
-        let(:handler) { client.handlers.entries.find { |h| h.handler_class == Aws::Plugins::ChecksumAlgorithm::ChecksumHandler } }
+      context 'request streaming checksum calculation' do
+        file = File.expand_path('checksum_streaming_request.json', __dir__)
+        test_cases = JSON.load_file(file)
 
-        it 'skips response checksum when ChecksumMode is not set' do
-          expect(handler).not_to receive(:add_verify_response_checksum_handlers)
-          client.some_operation
+        test_cases.each do |test_case|
+          it "passes test: #{test_case['documentation']}" do
+            algorithm = test_case['checksumAlgorithm'].upcase
+            unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
+              skip "Algorithm #{algorithm} not supported"
+            end
+
+            body = test_case['requestPayload']
+            client.stub_responses(:some_operation_streaming, lambda do |context|
+              headers = context.http_request.headers
+
+              expect(headers['x-amz-content-sha256'])
+                .to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+              test_case['expectHeaders'].each do |key, value|
+                expect(headers[key]).to eq(value)
+              end
+
+              # capture the body by reading it into a new IO object
+              new_body = StringIO.new
+              # IO.copy_stream is the same method used by Net::Http to write our body to the socket
+              IO.copy_stream(context.http_request.body, new_body)
+              new_body.rewind
+
+              expect(headers['Content-Length'].to_i).to eq(new_body.size)
+              read_body = new_body.read
+              test_case['expectTrailers'].each do |key, value|
+                expect(read_body).to include("#{key}:#{value}")
+              end
+              context
+            end)
+
+            client.some_operation_streaming(
+              checksum_algorithm: algorithm,
+              body: body
+            )
+          end
+        end
+      end
+
+      context 'response checksum calculation' do
+        it 'computes a validation_list' do
+          resp = client.some_operation
+          expect(resp.context[:http_checksum][:validation_list])
+            .to include(*%w[SHA1 CRC32 SHA256])
         end
 
-        it 'computes validation_list when ChecksumMode is set' do
-          resp = client.some_operation(checksum_mode: 'ENABLED')
-          expect(resp.context[:http_checksum][:validation_list]).to eq %w[SHA1 CRC32 SHA256]
-        end
-
-        it 'validation_list does not include unsupported algorithms' do
-          expect(ChecksumAlgorithm).to receive(:operation_response_algorithms).and_return(%w[CRC64 CRC32])
-          resp = client.some_operation(checksum_mode: 'ENABLED')
+        it 'validation_list does not include unknown algorithms' do
+          expect_any_instance_of(ChecksumAlgorithm::ChecksumHandler)
+            .to receive(:operation_response_algorithms).and_return(%w[UNKNOWN CRC32])
+          resp = client.some_operation
           expect(resp.context[:http_checksum][:validation_list]).to eq %w[CRC32]
-        end
-
-        it 'validates a matched header' do
-          client.stub_responses(
-            :some_operation,
-            [{
-               body: '',
-               headers: {'x-amz-checksum-sha256' => '47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='},
-               status_code: 200
-             }])
-          resp = client.some_operation(checksum_mode: 'ENABLED')
-          expect(resp.context[:http_checksum][:validated]).to eq 'SHA256'
         end
 
         it 'validates the first matched header by priority' do
@@ -187,54 +251,135 @@ module Aws
                },
                status_code: 200
              }])
-          resp = client.some_operation(checksum_mode: 'ENABLED')
+          resp = client.some_operation
           expect(resp.context[:http_checksum][:validated]).to eq 'CRC32'
         end
 
-        it 'does not validate an unmodeled header' do
+        it 'does not validate unknown checksums' do
           client.stub_responses(
             :some_operation,
             [{
                body: '',
-               headers: {'x-amz-checksum-crc64' => 'crc64_value'},
+               headers: {'x-amz-checksum-unknown' => 'unknown'},
                status_code: 200
              }])
-          resp = client.some_operation(checksum_mode: 'ENABLED')
+          resp = client.some_operation
           expect(resp.context[:http_checksum][:validated]).to be_nil
+        end
+
+        file = File.expand_path('checksum_response.json', __dir__)
+        test_cases = JSON.load_file(file)
+
+        test_cases.each do |test_case|
+          it "passes test: #{test_case['documentation']}" do
+            algorithm = test_case['checksumAlgorithm'].upcase
+            unless ChecksumAlgorithm::CLIENT_ALGORITHMS.include?(algorithm)
+              skip "Algorithm #{algorithm} not supported"
+            end
+
+            expect = test_case['expect']
+            client.stub_responses(
+              :some_operation,
+              [{
+                 body: test_case['responsePayload'],
+                 headers: test_case['responseHeaders'],
+                 status_code: 200
+              }]
+            )
+            case expect['kind']
+            when 'success'
+              client.some_operation(validation_mode: 'ENABLED')
+            when 'failure'
+              expect do
+                client.some_operation(validation_mode: 'ENABLED')
+              end.to raise_error(Aws::Errors::ChecksumError, /#{expect['responseHeaders']}/)
+            else
+              raise 'Unsupported test kind'
+            end
+          end
         end
       end
 
-      context 'PUT requests' do
+      context 'when checksums are not required' do
+        let(:request_checksum_required) { false }
 
-        it 'handles unsigned-payload auth with checksum in trailer' do
-          client.stub_responses(:some_operation_streaming, -> (context) do
-            headers = context.http_request.headers
-
-            expect(headers['x-amz-content-sha256']).to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
-            expect(headers['x-amz-trailer']).to eq('x-amz-checksum-sha256')
-            expect(headers['content-encoding']).to eq('aws-chunked')
-            expect(headers['x-amz-decoded-content-length']).to eq('11')
-            # capture the body by reading it into a new IO object
-            body = StringIO.new
-            # IO.copy_stream is the same method used by Net::Http to write our body to the socket
-            IO.copy_stream(context.http_request.body, body)
-            body.rewind
-            expect(body.read).to eq "b\r\nHello World\r\n0\r\nx-amz-checksum-sha256:pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4=\r\n\r\n"
-          end)
-          client.some_operation_streaming(checksum_algorithm: 'sha256', body: 'Hello World')
-
+        it 'WHEN_SUPPORTED; no algorithm; includes a checksum' do
+          resp = client.some_operation(checksum_algorithm: 'CRC32')
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
+            .to eq('AAAAAA==')
         end
 
-        it 'handles header-based auth with checksum in header' do
-          client.stub_responses(:some_operation, -> (context) do
-            expect(context.http_request.headers['x-amz-checksum-sha256']).to eq('pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4=')
-            expect(context.http_request.body.read).to eq('Hello World')
-          end)
-          client.some_operation(checksum_algorithm: 'sha256', body: 'Hello World')
+        it 'WHEN_REQUIRED; no algorithm; does not include a checksum' do
+          client = checksum_client.new(
+            stub_responses: true,
+            request_checksum_calculation: 'WHEN_REQUIRED'
+          )
+          resp = client.some_operation
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
+            .to be_nil
+        end
+      end
+
+      context 'when checksums are required' do
+        let(:request_checksum_required) { true }
+
+        it 'WHEN_SUPPORTED; no algorithm; includes a checksum' do
+          resp = client.some_operation
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
+            .to eq('AAAAAA==')
         end
 
-        it 'handles sigv4-streaming auth with checksum in trailer' do
-          skip("sigv4 streaming is not supported")
+        it 'WHEN_REQUIRED; no algorithm; includes a checksum' do
+          client = checksum_client.new(
+            stub_responses: true,
+            request_checksum_calculation: 'WHEN_REQUIRED'
+          )
+          resp = client.some_operation
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
+            .to eq('AAAAAA==')
+        end
+      end
+
+      context 'when a response may be validated' do
+        let(:response_algorithms) { %w[CRC32] }
+
+        def stub_client(client)
+          client.stub_responses(
+            :some_operation,
+            [{
+               body: '',
+               headers: { 'x-amz-checksum-crc32' => 'AAAAAA==' },
+               status_code: 200
+            }]
+          )
+        end
+
+        it 'WHEN_SUPPORTED; not ENABLED; validates the checksum' do
+          stub_client(client)
+          resp = client.some_operation
+          expect(resp.context[:http_checksum][:validated]).to eq('CRC32')
+          # This needs to be set by the plugin in this case
+          expect(resp.context.params[:validation_mode]).to eq('ENABLED')
+        end
+
+        it 'WHEN_REQUIRED; not ENABLED; does not validate the checksum' do
+          client = checksum_client.new(
+            stub_responses: true,
+            response_checksum_calculation: 'WHEN_REQUIRED'
+          )
+          stub_client(client)
+          resp = client.some_operation
+          expect(resp.context[:http_checksum][:validated]).to be_nil
+        end
+
+        it 'WHEN_REQUIRED; ENABLED; validates the checksum' do
+          client = checksum_client.new(
+            stub_responses: true,
+            response_checksum_calculation: 'WHEN_REQUIRED'
+          )
+          stub_client(client)
+          resp = client.some_operation(validation_mode: 'ENABLED')
+          expect(resp.context[:http_checksum][:validated]).to eq('CRC32')
         end
       end
     end
