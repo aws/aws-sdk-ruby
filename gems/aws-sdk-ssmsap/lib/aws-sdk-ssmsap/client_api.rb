@@ -16,6 +16,7 @@ module Aws::SsmSap
     AllocationType = Shapes::StringShape.new(name: 'AllocationType')
     AppRegistryArn = Shapes::StringShape.new(name: 'AppRegistryArn')
     Application = Shapes::StructureShape.new(name: 'Application')
+    ApplicationArnList = Shapes::ListShape.new(name: 'ApplicationArnList')
     ApplicationCredential = Shapes::StructureShape.new(name: 'ApplicationCredential')
     ApplicationCredentialList = Shapes::ListShape.new(name: 'ApplicationCredentialList')
     ApplicationDiscoveryStatus = Shapes::StringShape.new(name: 'ApplicationDiscoveryStatus')
@@ -31,6 +32,7 @@ module Aws::SsmSap
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     Component = Shapes::StructureShape.new(name: 'Component')
+    ComponentArnList = Shapes::ListShape.new(name: 'ComponentArnList')
     ComponentId = Shapes::StringShape.new(name: 'ComponentId')
     ComponentIdList = Shapes::ListShape.new(name: 'ComponentIdList')
     ComponentStatus = Shapes::StringShape.new(name: 'ComponentStatus')
@@ -149,7 +151,10 @@ module Aws::SsmSap
     Application.add_member(:components, Shapes::ShapeRef.new(shape: ComponentIdList, location_name: "Components"))
     Application.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
     Application.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    Application.add_member(:associated_application_arns, Shapes::ShapeRef.new(shape: ApplicationArnList, location_name: "AssociatedApplicationArns"))
     Application.struct_class = Types::Application
+
+    ApplicationArnList.member = Shapes::ShapeRef.new(shape: SsmSapArn)
 
     ApplicationCredential.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
     ApplicationCredential.add_member(:credential_type, Shapes::ShapeRef.new(shape: CredentialType, required: true, location_name: "CredentialType"))
@@ -199,6 +204,8 @@ module Aws::SsmSap
     Component.add_member(:arn, Shapes::ShapeRef.new(shape: SsmSapArn, location_name: "Arn"))
     Component.struct_class = Types::Component
 
+    ComponentArnList.member = Shapes::ShapeRef.new(shape: SsmSapArn)
+
     ComponentIdList.member = Shapes::ShapeRef.new(shape: ComponentId)
 
     ComponentSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
@@ -224,6 +231,7 @@ module Aws::SsmSap
     Database.add_member(:primary_host, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryHost"))
     Database.add_member(:sql_port, Shapes::ShapeRef.new(shape: Integer, location_name: "SQLPort"))
     Database.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
+    Database.add_member(:connected_component_arns, Shapes::ShapeRef.new(shape: ComponentArnList, location_name: "ConnectedComponentArns"))
     Database.struct_class = Types::Database
 
     DatabaseConnection.add_member(:database_connection_method, Shapes::ShapeRef.new(shape: DatabaseConnectionMethod, location_name: "DatabaseConnectionMethod"))
@@ -506,9 +514,10 @@ module Aws::SsmSap
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ssm-sap",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "SsmSap",
         "serviceFullName" => "AWS Systems Manager for SAP",
         "serviceId" => "Ssm Sap",

@@ -523,6 +523,7 @@ module Aws::CodeBuild
     CreateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
     CreateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     CreateFleetInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    CreateFleetInput.add_member(:image_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "imageId"))
     CreateFleetInput.add_member(:fleet_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fleetServiceRole"))
     CreateFleetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateFleetInput.struct_class = Types::CreateFleetInput
@@ -696,6 +697,7 @@ module Aws::CodeBuild
     Fleet.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationOutput, location_name: "scalingConfiguration"))
     Fleet.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     Fleet.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Fleet.add_member(:image_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "imageId"))
     Fleet.add_member(:fleet_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fleetServiceRole"))
     Fleet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Fleet.struct_class = Types::Fleet
@@ -1266,6 +1268,7 @@ module Aws::CodeBuild
     UpdateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
     UpdateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     UpdateFleetInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    UpdateFleetInput.add_member(:image_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "imageId"))
     UpdateFleetInput.add_member(:fleet_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fleetServiceRole"))
     UpdateFleetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     UpdateFleetInput.struct_class = Types::UpdateFleetInput

@@ -496,6 +496,89 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_name
+    #   A name to give the batch inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service role with permissions
+    #   to carry out and manage batch inference. You can use the console to
+    #   create a default service role or follow the steps at [Create a
+    #   service role for batch inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The unique identifier of the foundation model to use for the batch
+    #   inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   Details about the location of the input to the batch inference job.
+    #   @return [Types::ModelInvocationJobInputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Details about the location of the output of the batch inference job.
+    #   @return [Types::ModelInvocationJobOutputDataConfig]
+    #
+    # @!attribute [rw] timeout_duration_in_hours
+    #   The number of hours after which to force the batch inference job to
+    #   time out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Any tags to associate with the batch inference job. For more
+    #   information, see [Tagging Amazon Bedrock resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelInvocationJobRequest AWS API Documentation
+    #
+    class CreateModelInvocationJobRequest < Struct.new(
+      :job_name,
+      :role_arn,
+      :client_request_token,
+      :model_id,
+      :input_data_config,
+      :output_data_config,
+      :timeout_duration_in_hours,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the batch inference job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelInvocationJobResponse AWS API Documentation
+    #
+    class CreateModelInvocationJobResponse < Struct.new(
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
@@ -1633,6 +1716,112 @@ module Aws::Bedrock
       :validation_metrics,
       :vpc_config)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_identifier
+    #   The Amazon Resource Name (ARN) of the batch inference job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationJobRequest AWS API Documentation
+    #
+    class GetModelInvocationJobRequest < Struct.new(
+      :job_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the batch inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the batch inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The unique identifier of the foundation model used for model
+    #   inference.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service role with permissions
+    #   to carry out and manage batch inference. You can use the console to
+    #   create a default service role or follow the steps at [Create a
+    #   service role for batch inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the batch inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If the batch inference job failed, this field contains a message
+    #   describing why the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time at which the batch inference job was submitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time at which the batch inference job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the batch inference job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   Details about the location of the input to the batch inference job.
+    #   @return [Types::ModelInvocationJobInputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Details about the location of the output of the batch inference job.
+    #   @return [Types::ModelInvocationJobOutputDataConfig]
+    #
+    # @!attribute [rw] timeout_duration_in_hours
+    #   The number of hours after which batch inference job was set to time
+    #   out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_expiration_time
+    #   The time at which the batch inference job times or timed out.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationJobResponse AWS API Documentation
+    #
+    class GetModelInvocationJobResponse < Struct.new(
+      :job_arn,
+      :job_name,
+      :model_id,
+      :client_request_token,
+      :role_arn,
+      :status,
+      :message,
+      :submit_time,
+      :last_modified_time,
+      :end_time,
+      :input_data_config,
+      :output_data_config,
+      :timeout_duration_in_hours,
+      :job_expiration_time)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -3153,6 +3342,85 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] submit_time_after
+    #   Specify a time to filter for batch inference jobs that were
+    #   submitted after the time you specify.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Specify a time to filter for batch inference jobs that were
+    #   submitted before the time you specify.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_equals
+    #   Specify a status to filter for batch inference jobs whose statuses
+    #   match the string you specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   Specify a string to filter for batch inference jobs whose names
+    #   contain the string.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. If there are more results
+    #   than the number that you specify, a `nextToken` value is returned.
+    #   Use the `nextToken` in a request to return the next batch of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If there were more results than the value you specified in the
+    #   `maxResults` field in a previous `ListModelInvocationJobs` request,
+    #   the response would have returned a `nextToken` value. To see the
+    #   next batch of results, send the `nextToken` value in another
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   An attribute by which to sort the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies whether to sort the results by ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelInvocationJobsRequest AWS API Documentation
+    #
+    class ListModelInvocationJobsRequest < Struct.new(
+      :submit_time_after,
+      :submit_time_before,
+      :status_equals,
+      :name_contains,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are more results than can fit in the response, a
+    #   `nextToken` is returned. Use the `nextToken` in a request to return
+    #   the next batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_job_summaries
+    #   A list of items, each of which contains a summary about a batch
+    #   inference job.
+    #   @return [Array<Types::ModelInvocationJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelInvocationJobsResponse AWS API Documentation
+    #
+    class ListModelInvocationJobsResponse < Struct.new(
+      :next_token,
+      :invocation_job_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] creation_time_after
     #   A filter that returns Provisioned Throughputs created after the
     #   specified time.
@@ -3438,6 +3706,187 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Details about the location of the input to the batch inference job.
+    #
+    # @note ModelInvocationJobInputDataConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ModelInvocationJobInputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ModelInvocationJobInputDataConfig corresponding to the set member.
+    #
+    # @!attribute [rw] s3_input_data_config
+    #   Contains the configuration of the S3 location of the input data.
+    #   @return [Types::ModelInvocationJobS3InputDataConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobInputDataConfig AWS API Documentation
+    #
+    class ModelInvocationJobInputDataConfig < Struct.new(
+      :s3_input_data_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3InputDataConfig < ModelInvocationJobInputDataConfig; end
+      class Unknown < ModelInvocationJobInputDataConfig; end
+    end
+
+    # Contains the configuration of the S3 location of the output data.
+    #
+    # @note ModelInvocationJobOutputDataConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ModelInvocationJobOutputDataConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ModelInvocationJobOutputDataConfig corresponding to the set member.
+    #
+    # @!attribute [rw] s3_output_data_config
+    #   Contains the configuration of the S3 location of the output data.
+    #   @return [Types::ModelInvocationJobS3OutputDataConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobOutputDataConfig AWS API Documentation
+    #
+    class ModelInvocationJobOutputDataConfig < Struct.new(
+      :s3_output_data_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3OutputDataConfig < ModelInvocationJobOutputDataConfig; end
+      class Unknown < ModelInvocationJobOutputDataConfig; end
+    end
+
+    # Contains the configuration of the S3 location of the output data.
+    #
+    # @!attribute [rw] s3_input_format
+    #   The format of the input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 location of the input data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobS3InputDataConfig AWS API Documentation
+    #
+    class ModelInvocationJobS3InputDataConfig < Struct.new(
+      :s3_input_format,
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration of the S3 location of the output data.
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 location of the output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_encryption_key_id
+    #   The unique identifier of the key that encrypts the S3 location of
+    #   the output data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobS3OutputDataConfig AWS API Documentation
+    #
+    class ModelInvocationJobS3OutputDataConfig < Struct.new(
+      :s3_uri,
+      :s3_encryption_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a batch inference job.
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the batch inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the batch inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   The unique identifier of the foundation model used for model
+    #   inference.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service role with permissions
+    #   to carry out and manage batch inference. You can use the console to
+    #   create a default service role or follow the steps at [Create a
+    #   service role for batch inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the batch inference job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If the batch inference job failed, this field contains a message
+    #   describing why the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time at which the batch inference job was submitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time at which the batch inference job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the batch inference job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   Details about the location of the input to the batch inference job.
+    #   @return [Types::ModelInvocationJobInputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Details about the location of the output of the batch inference job.
+    #   @return [Types::ModelInvocationJobOutputDataConfig]
+    #
+    # @!attribute [rw] timeout_duration_in_hours
+    #   The number of hours after which the batch inference job was set to
+    #   time out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_expiration_time
+    #   The time at which the batch inference job times or timed out.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobSummary AWS API Documentation
+    #
+    class ModelInvocationJobSummary < Struct.new(
+      :job_arn,
+      :job_name,
+      :model_id,
+      :client_request_token,
+      :role_arn,
+      :status,
+      :message,
+      :submit_time,
+      :last_modified_time,
+      :end_time,
+      :input_data_config,
+      :output_data_config,
+      :timeout_duration_in_hours,
+      :job_expiration_time)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
     # S3 Location of the output data.
     #
     # @!attribute [rw] s3_uri
@@ -3633,6 +4082,22 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopModelCustomizationJobResponse AWS API Documentation
     #
     class StopModelCustomizationJobResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] job_identifier
+    #   The Amazon Resource Name (ARN) of the batch inference job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopModelInvocationJobRequest AWS API Documentation
+    #
+    class StopModelInvocationJobRequest < Struct.new(
+      :job_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopModelInvocationJobResponse AWS API Documentation
+    #
+    class StopModelInvocationJobResponse < Aws::EmptyStructure; end
 
     # Definition of the key/value pair for a tag.
     #

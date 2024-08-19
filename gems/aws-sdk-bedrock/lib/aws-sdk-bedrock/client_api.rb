@@ -34,6 +34,8 @@ module Aws::Bedrock
     CreateModelCopyJobResponse = Shapes::StructureShape.new(name: 'CreateModelCopyJobResponse')
     CreateModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'CreateModelCustomizationJobRequest')
     CreateModelCustomizationJobResponse = Shapes::StructureShape.new(name: 'CreateModelCustomizationJobResponse')
+    CreateModelInvocationJobRequest = Shapes::StructureShape.new(name: 'CreateModelInvocationJobRequest')
+    CreateModelInvocationJobResponse = Shapes::StructureShape.new(name: 'CreateModelInvocationJobResponse')
     CreateProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'CreateProvisionedModelThroughputRequest')
     CreateProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'CreateProvisionedModelThroughputResponse')
     CustomModelArn = Shapes::StringShape.new(name: 'CustomModelArn')
@@ -98,6 +100,8 @@ module Aws::Bedrock
     GetModelCopyJobResponse = Shapes::StructureShape.new(name: 'GetModelCopyJobResponse')
     GetModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'GetModelCustomizationJobRequest')
     GetModelCustomizationJobResponse = Shapes::StructureShape.new(name: 'GetModelCustomizationJobResponse')
+    GetModelInvocationJobRequest = Shapes::StructureShape.new(name: 'GetModelInvocationJobRequest')
+    GetModelInvocationJobResponse = Shapes::StructureShape.new(name: 'GetModelInvocationJobResponse')
     GetModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetModelInvocationLoggingConfigurationRequest')
     GetModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetModelInvocationLoggingConfigurationResponse')
     GetProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'GetProvisionedModelThroughputRequest')
@@ -202,6 +206,8 @@ module Aws::Bedrock
     ListModelCopyJobsResponse = Shapes::StructureShape.new(name: 'ListModelCopyJobsResponse')
     ListModelCustomizationJobsRequest = Shapes::StructureShape.new(name: 'ListModelCustomizationJobsRequest')
     ListModelCustomizationJobsResponse = Shapes::StructureShape.new(name: 'ListModelCustomizationJobsResponse')
+    ListModelInvocationJobsRequest = Shapes::StructureShape.new(name: 'ListModelInvocationJobsRequest')
+    ListModelInvocationJobsResponse = Shapes::StructureShape.new(name: 'ListModelInvocationJobsResponse')
     ListProvisionedModelThroughputsRequest = Shapes::StructureShape.new(name: 'ListProvisionedModelThroughputsRequest')
     ListProvisionedModelThroughputsResponse = Shapes::StructureShape.new(name: 'ListProvisionedModelThroughputsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -209,6 +215,7 @@ module Aws::Bedrock
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    Message = Shapes::StringShape.new(name: 'Message')
     MetricFloat = Shapes::FloatShape.new(name: 'MetricFloat')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
     ModelCopyJobArn = Shapes::StringShape.new(name: 'ModelCopyJobArn')
@@ -223,7 +230,20 @@ module Aws::Bedrock
     ModelCustomizationJobSummaries = Shapes::ListShape.new(name: 'ModelCustomizationJobSummaries')
     ModelCustomizationJobSummary = Shapes::StructureShape.new(name: 'ModelCustomizationJobSummary')
     ModelCustomizationList = Shapes::ListShape.new(name: 'ModelCustomizationList')
+    ModelId = Shapes::StringShape.new(name: 'ModelId')
     ModelIdentifier = Shapes::StringShape.new(name: 'ModelIdentifier')
+    ModelInvocationIdempotencyToken = Shapes::StringShape.new(name: 'ModelInvocationIdempotencyToken')
+    ModelInvocationJobArn = Shapes::StringShape.new(name: 'ModelInvocationJobArn')
+    ModelInvocationJobIdentifier = Shapes::StringShape.new(name: 'ModelInvocationJobIdentifier')
+    ModelInvocationJobInputDataConfig = Shapes::UnionShape.new(name: 'ModelInvocationJobInputDataConfig')
+    ModelInvocationJobName = Shapes::StringShape.new(name: 'ModelInvocationJobName')
+    ModelInvocationJobOutputDataConfig = Shapes::UnionShape.new(name: 'ModelInvocationJobOutputDataConfig')
+    ModelInvocationJobS3InputDataConfig = Shapes::StructureShape.new(name: 'ModelInvocationJobS3InputDataConfig')
+    ModelInvocationJobS3OutputDataConfig = Shapes::StructureShape.new(name: 'ModelInvocationJobS3OutputDataConfig')
+    ModelInvocationJobStatus = Shapes::StringShape.new(name: 'ModelInvocationJobStatus')
+    ModelInvocationJobSummaries = Shapes::ListShape.new(name: 'ModelInvocationJobSummaries')
+    ModelInvocationJobSummary = Shapes::StructureShape.new(name: 'ModelInvocationJobSummary')
+    ModelInvocationJobTimeoutDurationInHours = Shapes::IntegerShape.new(name: 'ModelInvocationJobTimeoutDurationInHours')
     ModelModality = Shapes::StringShape.new(name: 'ModelModality')
     ModelModalityList = Shapes::ListShape.new(name: 'ModelModalityList')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
@@ -243,6 +263,7 @@ module Aws::Bedrock
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
+    S3InputFormat = Shapes::StringShape.new(name: 'S3InputFormat')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SageMakerFlowDefinitionArn = Shapes::StringShape.new(name: 'SageMakerFlowDefinitionArn')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
@@ -256,6 +277,8 @@ module Aws::Bedrock
     StopEvaluationJobResponse = Shapes::StructureShape.new(name: 'StopEvaluationJobResponse')
     StopModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'StopModelCustomizationJobRequest')
     StopModelCustomizationJobResponse = Shapes::StructureShape.new(name: 'StopModelCustomizationJobResponse')
+    StopModelInvocationJobRequest = Shapes::StructureShape.new(name: 'StopModelInvocationJobRequest')
+    StopModelInvocationJobResponse = Shapes::StructureShape.new(name: 'StopModelInvocationJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -371,6 +394,19 @@ module Aws::Bedrock
 
     CreateModelCustomizationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCustomizationJobArn, required: true, location_name: "jobArn"))
     CreateModelCustomizationJobResponse.struct_class = Types::CreateModelCustomizationJobResponse
+
+    CreateModelInvocationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: ModelInvocationJobName, required: true, location_name: "jobName"))
+    CreateModelInvocationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateModelInvocationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ModelInvocationIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateModelInvocationJobRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
+    CreateModelInvocationJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobInputDataConfig, required: true, location_name: "inputDataConfig"))
+    CreateModelInvocationJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    CreateModelInvocationJobRequest.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
+    CreateModelInvocationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateModelInvocationJobRequest.struct_class = Types::CreateModelInvocationJobRequest
+
+    CreateModelInvocationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelInvocationJobArn, required: true, location_name: "jobArn"))
+    CreateModelInvocationJobResponse.struct_class = Types::CreateModelInvocationJobResponse
 
     CreateProvisionedModelThroughputRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateProvisionedModelThroughputRequest.add_member(:model_units, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "modelUnits"))
@@ -616,6 +652,25 @@ module Aws::Bedrock
     GetModelCustomizationJobResponse.add_member(:validation_metrics, Shapes::ShapeRef.new(shape: ValidationMetrics, location_name: "validationMetrics"))
     GetModelCustomizationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     GetModelCustomizationJobResponse.struct_class = Types::GetModelCustomizationJobResponse
+
+    GetModelInvocationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: ModelInvocationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
+    GetModelInvocationJobRequest.struct_class = Types::GetModelInvocationJobRequest
+
+    GetModelInvocationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelInvocationJobArn, required: true, location_name: "jobArn"))
+    GetModelInvocationJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: ModelInvocationJobName, location_name: "jobName"))
+    GetModelInvocationJobResponse.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
+    GetModelInvocationJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ModelInvocationIdempotencyToken, location_name: "clientRequestToken"))
+    GetModelInvocationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    GetModelInvocationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelInvocationJobStatus, location_name: "status"))
+    GetModelInvocationJobResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    GetModelInvocationJobResponse.add_member(:submit_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "submitTime"))
+    GetModelInvocationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    GetModelInvocationJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    GetModelInvocationJobResponse.add_member(:input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobInputDataConfig, required: true, location_name: "inputDataConfig"))
+    GetModelInvocationJobResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    GetModelInvocationJobResponse.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
+    GetModelInvocationJobResponse.add_member(:job_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "jobExpirationTime"))
+    GetModelInvocationJobResponse.struct_class = Types::GetModelInvocationJobResponse
 
     GetModelInvocationLoggingConfigurationRequest.struct_class = Types::GetModelInvocationLoggingConfigurationRequest
 
@@ -881,6 +936,20 @@ module Aws::Bedrock
     ListModelCustomizationJobsResponse.add_member(:model_customization_job_summaries, Shapes::ShapeRef.new(shape: ModelCustomizationJobSummaries, location_name: "modelCustomizationJobSummaries"))
     ListModelCustomizationJobsResponse.struct_class = Types::ListModelCustomizationJobsResponse
 
+    ListModelInvocationJobsRequest.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "submitTimeAfter"))
+    ListModelInvocationJobsRequest.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "submitTimeBefore"))
+    ListModelInvocationJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: ModelInvocationJobStatus, location: "querystring", location_name: "statusEquals"))
+    ListModelInvocationJobsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ModelInvocationJobName, location: "querystring", location_name: "nameContains"))
+    ListModelInvocationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListModelInvocationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListModelInvocationJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortJobsBy, location: "querystring", location_name: "sortBy"))
+    ListModelInvocationJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListModelInvocationJobsRequest.struct_class = Types::ListModelInvocationJobsRequest
+
+    ListModelInvocationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListModelInvocationJobsResponse.add_member(:invocation_job_summaries, Shapes::ShapeRef.new(shape: ModelInvocationJobSummaries, location_name: "invocationJobSummaries"))
+    ListModelInvocationJobsResponse.struct_class = Types::ListModelInvocationJobsResponse
+
     ListProvisionedModelThroughputsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
     ListProvisionedModelThroughputsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
     ListProvisionedModelThroughputsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: ProvisionedModelStatus, location: "querystring", location_name: "statusEquals"))
@@ -943,6 +1012,44 @@ module Aws::Bedrock
 
     ModelCustomizationList.member = Shapes::ShapeRef.new(shape: ModelCustomization)
 
+    ModelInvocationJobInputDataConfig.add_member(:s3_input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobS3InputDataConfig, location_name: "s3InputDataConfig"))
+    ModelInvocationJobInputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ModelInvocationJobInputDataConfig.add_member_subclass(:s3_input_data_config, Types::ModelInvocationJobInputDataConfig::S3InputDataConfig)
+    ModelInvocationJobInputDataConfig.add_member_subclass(:unknown, Types::ModelInvocationJobInputDataConfig::Unknown)
+    ModelInvocationJobInputDataConfig.struct_class = Types::ModelInvocationJobInputDataConfig
+
+    ModelInvocationJobOutputDataConfig.add_member(:s3_output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobS3OutputDataConfig, location_name: "s3OutputDataConfig"))
+    ModelInvocationJobOutputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ModelInvocationJobOutputDataConfig.add_member_subclass(:s3_output_data_config, Types::ModelInvocationJobOutputDataConfig::S3OutputDataConfig)
+    ModelInvocationJobOutputDataConfig.add_member_subclass(:unknown, Types::ModelInvocationJobOutputDataConfig::Unknown)
+    ModelInvocationJobOutputDataConfig.struct_class = Types::ModelInvocationJobOutputDataConfig
+
+    ModelInvocationJobS3InputDataConfig.add_member(:s3_input_format, Shapes::ShapeRef.new(shape: S3InputFormat, location_name: "s3InputFormat"))
+    ModelInvocationJobS3InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    ModelInvocationJobS3InputDataConfig.struct_class = Types::ModelInvocationJobS3InputDataConfig
+
+    ModelInvocationJobS3OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    ModelInvocationJobS3OutputDataConfig.add_member(:s3_encryption_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "s3EncryptionKeyId"))
+    ModelInvocationJobS3OutputDataConfig.struct_class = Types::ModelInvocationJobS3OutputDataConfig
+
+    ModelInvocationJobSummaries.member = Shapes::ShapeRef.new(shape: ModelInvocationJobSummary)
+
+    ModelInvocationJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelInvocationJobArn, required: true, location_name: "jobArn"))
+    ModelInvocationJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: ModelInvocationJobName, required: true, location_name: "jobName"))
+    ModelInvocationJobSummary.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
+    ModelInvocationJobSummary.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ModelInvocationIdempotencyToken, location_name: "clientRequestToken"))
+    ModelInvocationJobSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    ModelInvocationJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelInvocationJobStatus, location_name: "status"))
+    ModelInvocationJobSummary.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ModelInvocationJobSummary.add_member(:submit_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "submitTime"))
+    ModelInvocationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    ModelInvocationJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    ModelInvocationJobSummary.add_member(:input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobInputDataConfig, required: true, location_name: "inputDataConfig"))
+    ModelInvocationJobSummary.add_member(:output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    ModelInvocationJobSummary.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
+    ModelInvocationJobSummary.add_member(:job_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "jobExpirationTime"))
+    ModelInvocationJobSummary.struct_class = Types::ModelInvocationJobSummary
+
     ModelModalityList.member = Shapes::ShapeRef.new(shape: ModelModality)
 
     OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
@@ -990,6 +1097,11 @@ module Aws::Bedrock
     StopModelCustomizationJobRequest.struct_class = Types::StopModelCustomizationJobRequest
 
     StopModelCustomizationJobResponse.struct_class = Types::StopModelCustomizationJobResponse
+
+    StopModelInvocationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: ModelInvocationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
+    StopModelInvocationJobRequest.struct_class = Types::StopModelInvocationJobRequest
+
+    StopModelInvocationJobResponse.struct_class = Types::StopModelInvocationJobResponse
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -1165,6 +1277,21 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_model_invocation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateModelInvocationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/model-invocation-job"
+        o.input = Shapes::ShapeRef.new(shape: CreateModelInvocationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateModelInvocationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_provisioned_model_throughput, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateProvisionedModelThroughput"
         o.http_method = "POST"
@@ -1311,6 +1438,19 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_model_invocation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetModelInvocationJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-invocation-job/{jobIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetModelInvocationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetModelInvocationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_model_invocation_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetModelInvocationLoggingConfiguration"
         o.http_method = "GET"
@@ -1439,6 +1579,24 @@ module Aws::Bedrock
         )
       end)
 
+      api.add_operation(:list_model_invocation_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListModelInvocationJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-invocation-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListModelInvocationJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListModelInvocationJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_provisioned_model_throughputs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListProvisionedModelThroughputs"
         o.http_method = "GET"
@@ -1502,6 +1660,20 @@ module Aws::Bedrock
         o.http_request_uri = "/model-customization-jobs/{jobIdentifier}/stop"
         o.input = Shapes::ShapeRef.new(shape: StopModelCustomizationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StopModelCustomizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:stop_model_invocation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopModelInvocationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/model-invocation-job/{jobIdentifier}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopModelInvocationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopModelInvocationJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2024-08-19)
+------------------
+
+* Feature - AWS CodeBuild now supports creating fleets with macOS platform for running builds.
+
 1.123.0 (2024-08-14)
 ------------------
 

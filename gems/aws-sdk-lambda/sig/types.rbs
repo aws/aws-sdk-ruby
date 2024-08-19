@@ -563,6 +563,16 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class GetFunctionRecursionConfigRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionRecursionConfigResponse
+      attr_accessor recursive_loop: ("Allow" | "Terminate")
+      SENSITIVE: []
+    end
+
     class GetFunctionRequest
       attr_accessor function_name: ::String
       attr_accessor qualifier: ::String
@@ -1121,6 +1131,17 @@ module Aws::Lambda
       attr_accessor maximum_retry_attempts: ::Integer
       attr_accessor maximum_event_age_in_seconds: ::Integer
       attr_accessor destination_config: Types::DestinationConfig
+      SENSITIVE: []
+    end
+
+    class PutFunctionRecursionConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor recursive_loop: ("Allow" | "Terminate")
+      SENSITIVE: []
+    end
+
+    class PutFunctionRecursionConfigResponse
+      attr_accessor recursive_loop: ("Allow" | "Terminate")
       SENSITIVE: []
     end
 

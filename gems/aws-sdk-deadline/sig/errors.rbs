@@ -12,47 +12,47 @@ module Aws
       end
 
       class AccessDeniedException < ::Aws::Errors::ServiceError
-        def context: () -> ::String
         def message: () -> ::String
+        def context: () -> ::String
       end
       class ConflictException < ::Aws::Errors::ServiceError
-        def context: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
+        def context: () -> ::String
       end
       class InternalServerErrorException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def retry_after_seconds: () -> ::String
       end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
-        def context: () -> ::String
         def message: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
+        def context: () -> ::String
       end
       class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
-        def context: () -> ::String
         def message: () -> ::String
-        def quota_code: () -> ::String
         def reason: () -> ::String
-        def resource_id: () -> ::String
         def resource_type: () -> ::String
         def service_code: () -> ::String
+        def quota_code: () -> ::String
+        def resource_id: () -> ::String
+        def context: () -> ::String
       end
       class ThrottlingException < ::Aws::Errors::ServiceError
-        def context: () -> ::String
         def message: () -> ::String
+        def service_code: () -> ::String
         def quota_code: () -> ::String
         def retry_after_seconds: () -> ::String
-        def service_code: () -> ::String
+        def context: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
-        def context: () -> ::String
-        def field_list: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
+        def field_list: () -> ::String
+        def context: () -> ::String
       end
     end
   end

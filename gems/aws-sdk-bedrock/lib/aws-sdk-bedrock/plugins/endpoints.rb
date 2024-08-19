@@ -68,6 +68,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::CreateModelCopyJob.build(context)
           when :create_model_customization_job
             Aws::Bedrock::Endpoints::CreateModelCustomizationJob.build(context)
+          when :create_model_invocation_job
+            Aws::Bedrock::Endpoints::CreateModelInvocationJob.build(context)
           when :create_provisioned_model_throughput
             Aws::Bedrock::Endpoints::CreateProvisionedModelThroughput.build(context)
           when :delete_custom_model
@@ -90,6 +92,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::GetModelCopyJob.build(context)
           when :get_model_customization_job
             Aws::Bedrock::Endpoints::GetModelCustomizationJob.build(context)
+          when :get_model_invocation_job
+            Aws::Bedrock::Endpoints::GetModelInvocationJob.build(context)
           when :get_model_invocation_logging_configuration
             Aws::Bedrock::Endpoints::GetModelInvocationLoggingConfiguration.build(context)
           when :get_provisioned_model_throughput
@@ -106,6 +110,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::ListModelCopyJobs.build(context)
           when :list_model_customization_jobs
             Aws::Bedrock::Endpoints::ListModelCustomizationJobs.build(context)
+          when :list_model_invocation_jobs
+            Aws::Bedrock::Endpoints::ListModelInvocationJobs.build(context)
           when :list_provisioned_model_throughputs
             Aws::Bedrock::Endpoints::ListProvisionedModelThroughputs.build(context)
           when :list_tags_for_resource
@@ -116,6 +122,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::StopEvaluationJob.build(context)
           when :stop_model_customization_job
             Aws::Bedrock::Endpoints::StopModelCustomizationJob.build(context)
+          when :stop_model_invocation_job
+            Aws::Bedrock::Endpoints::StopModelInvocationJob.build(context)
           when :tag_resource
             Aws::Bedrock::Endpoints::TagResource.build(context)
           when :untag_resource

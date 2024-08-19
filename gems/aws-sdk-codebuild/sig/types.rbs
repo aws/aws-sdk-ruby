@@ -264,11 +264,12 @@ module Aws::CodeBuild
     class CreateFleetInput
       attr_accessor name: ::String
       attr_accessor base_capacity: ::Integer
-      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "MAC_ARM")
       attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor scaling_configuration: Types::ScalingConfigurationInput
       attr_accessor overflow_behavior: ("QUEUE" | "ON_DEMAND")
       attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor image_id: ::String
       attr_accessor fleet_service_role: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -485,11 +486,12 @@ module Aws::CodeBuild
       attr_accessor last_modified: ::Time
       attr_accessor status: Types::FleetStatus
       attr_accessor base_capacity: ::Integer
-      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "MAC_ARM")
       attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor scaling_configuration: Types::ScalingConfigurationOutput
       attr_accessor overflow_behavior: ("QUEUE" | "ON_DEMAND")
       attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor image_id: ::String
       attr_accessor fleet_service_role: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -497,7 +499,7 @@ module Aws::CodeBuild
 
     class FleetStatus
       attr_accessor status_code: ("CREATING" | "UPDATING" | "ROTATING" | "PENDING_DELETION" | "DELETING" | "CREATE_FAILED" | "UPDATE_ROLLBACK_FAILED" | "ACTIVE")
-      attr_accessor context: ("CREATE_FAILED" | "UPDATE_FAILED" | "ACTION_REQUIRED")
+      attr_accessor context: ("CREATE_FAILED" | "UPDATE_FAILED" | "ACTION_REQUIRED" | "PENDING_DELETION" | "INSUFFICIENT_CAPACITY")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -825,7 +827,7 @@ module Aws::CodeBuild
     end
 
     class ProjectEnvironment
-      attr_accessor type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "MAC_ARM")
       attr_accessor image: ::String
       attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor fleet: Types::ProjectFleet
@@ -1046,7 +1048,7 @@ module Aws::CodeBuild
       attr_accessor buildspec_override: ::String
       attr_accessor insecure_ssl_override: bool
       attr_accessor report_build_batch_status_override: bool
-      attr_accessor environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "MAC_ARM")
       attr_accessor image_override: ::String
       attr_accessor compute_type_override: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor certificate_override: ::String
@@ -1087,7 +1089,7 @@ module Aws::CodeBuild
       attr_accessor insecure_ssl_override: bool
       attr_accessor report_build_status_override: bool
       attr_accessor build_status_config_override: Types::BuildStatusConfig
-      attr_accessor environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "MAC_ARM")
       attr_accessor image_override: ::String
       attr_accessor compute_type_override: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor certificate_override: ::String
@@ -1171,11 +1173,12 @@ module Aws::CodeBuild
     class UpdateFleetInput
       attr_accessor arn: ::String
       attr_accessor base_capacity: ::Integer
-      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "MAC_ARM")
       attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
       attr_accessor scaling_configuration: Types::ScalingConfigurationInput
       attr_accessor overflow_behavior: ("QUEUE" | "ON_DEMAND")
       attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor image_id: ::String
       attr_accessor fleet_service_role: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []

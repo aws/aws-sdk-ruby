@@ -1526,6 +1526,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] image_id
+    #   The Amazon Machine Image (AMI) of the compute fleet.
+    #   @return [String]
+    #
     # @!attribute [rw] fleet_service_role
     #   The service role associated with the compute fleet. For more
     #   information, see [ Allow a user to add a permission policy for a
@@ -1554,6 +1558,7 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :image_id,
       :fleet_service_role,
       :tags)
       SENSITIVE = []
@@ -2525,6 +2530,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] image_id
+    #   The Amazon Machine Image (AMI) of the compute fleet.
+    #   @return [String]
+    #
     # @!attribute [rw] fleet_service_role
     #   The service role associated with the compute fleet. For more
     #   information, see [ Allow a user to add a permission policy for a
@@ -2558,6 +2567,7 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :image_id,
       :fleet_service_role,
       :tags)
       SENSITIVE = []
@@ -6503,6 +6513,10 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] image_id
+    #   The Amazon Machine Image (AMI) of the compute fleet.
+    #   @return [String]
+    #
     # @!attribute [rw] fleet_service_role
     #   The service role associated with the compute fleet. For more
     #   information, see [ Allow a user to add a permission policy for a
@@ -6531,6 +6545,7 @@ module Aws::CodeBuild
       :scaling_configuration,
       :overflow_behavior,
       :vpc_config,
+      :image_id,
       :fleet_service_role,
       :tags)
       SENSITIVE = []

@@ -58,8 +58,8 @@ module Aws
 
         def wait: (
                     farm_id: ::String,
-                    fleet_id: ::String,
-                    queue_id: ::String
+                    queue_id: ::String,
+                    fleet_id: ::String
                   ) -> Client::_GetQueueFleetAssociationResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_GetQueueFleetAssociationResponseSuccess
       end

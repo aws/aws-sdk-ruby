@@ -522,6 +522,8 @@ module Aws::SsmSap
     #   resp.application.components[0] #=> String
     #   resp.application.last_updated #=> Time
     #   resp.application.status_message #=> String
+    #   resp.application.associated_application_arns #=> Array
+    #   resp.application.associated_application_arns[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -654,6 +656,8 @@ module Aws::SsmSap
     #   resp.database.primary_host #=> String
     #   resp.database.sql_port #=> Integer
     #   resp.database.last_updated #=> Time
+    #   resp.database.connected_component_arns #=> Array
+    #   resp.database.connected_component_arns[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1168,6 +1172,8 @@ module Aws::SsmSap
     #   resp.application.components[0] #=> String
     #   resp.application.last_updated #=> Time
     #   resp.application.status_message #=> String
+    #   resp.application.associated_application_arns #=> Array
+    #   resp.application.associated_application_arns[0] #=> String
     #   resp.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RegisterApplication AWS API Documentation
@@ -1413,7 +1419,7 @@ module Aws::SsmSap
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
