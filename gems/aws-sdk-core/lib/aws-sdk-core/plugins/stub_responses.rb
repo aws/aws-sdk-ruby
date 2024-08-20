@@ -106,39 +106,12 @@ requests are made, and retries are disabled.
         def span_wrapper(context, &block)
           context.tracer.in_span(
             'Handler.StubResponses',
-            attributes: request_attrs(context)
+            attributes: Aws::Telemetry.http_request_attrs(context)
           ) do |span|
             block.call.tap do
-              span.add_attributes(response_attrs(context))
-            end
-          end
-        end
-
-        def request_attrs(context)
-          {
-            'http.method' => context.http_request.http_method,
-            'net.protocol.name' => 'http',
-            'net.protocol.version' => Net::HTTP::HTTPVersion
-          }.tap do |h|
-            if context.http_request.headers.key?('Content-Length')
-              h['http.request_context_length'] =
-                context.http_request.headers['Content-Length']
-            end
-          end
-        end
-
-        def response_attrs(context)
-          {
-            'http.status_code' => context.http_response.status_code.to_s
-          }.tap do |h|
-            if context.http_response.headers.key?('Content-Length')
-              h['http.response_content_length'] =
-                context.http_response.headers['Content-Length']
-            end
-
-            if context.http_response.headers.key?('x-amz-request-id')
-              h['aws.request_id'] =
-                context.http_response.headers['x-amz-request-id']
+              span.add_attributes(
+                Aws::Telemetry.http_response_attrs(context)
+              )
             end
           end
         end

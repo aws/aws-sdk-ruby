@@ -87,19 +87,9 @@ module Seahorse
         def span_wrapper(context, &block)
           context.tracer.in_span(
             'Handler.H2',
-            attributes: request_attrs(context),
+            attributes: Aws::Telemetry.http_request_attrs(context),
             &block
           )
-        end
-
-        def request_attrs(context)
-          {
-            'http.method' => context.http_request.http_method,
-            'net.protocol.name' => 'http',
-            'net.protocol.version' => '2',
-            'net.peer.name' => context.http_request.endpoint.host,
-            'net.peer.port' => context.http_request.endpoint.port.to_s
-          }
         end
 
         def _register_callbacks(resp, stream, stream_mutex, close_condition, sync_queue)
