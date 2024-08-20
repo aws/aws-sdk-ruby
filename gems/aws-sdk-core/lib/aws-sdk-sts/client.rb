@@ -32,7 +32,6 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-sts/plugins/sts_regional_endpoints.rb'
@@ -85,7 +84,6 @@ module Aws::STS
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::STS::Plugins::STSRegionalEndpoints)
@@ -338,10 +336,6 @@ module Aws::STS
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
-    #
-    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
-    #               Allows you to provide a telemetry provider. By default,
-    #               will use the NoOpTelemetryProvider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -2393,11 +2387,7 @@ module Aws::STS
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config,
-        tracer: config.telemetry_provider.tracer_provider.tracer(
-          Aws::Telemetry.module_to_tracer_name('Aws::STS')
-        )
-      )
+        config: config)
       context[:gem_name] = 'aws-sdk-core'
       context[:gem_version] = '3.201.5'
       Seahorse::Client::Request.new(handlers, context)
