@@ -107,6 +107,7 @@ module Aws
                         ?checksum_sha1: ::String,
                         ?checksum_sha256: ::String,
                         ?expires: ::Time,
+                        ?if_none_match: ::String,
                         ?grant_full_control: ::String,
                         ?grant_read: ::String,
                         ?grant_read_acp: ::String,

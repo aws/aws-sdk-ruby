@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2024-08-20)
+------------------
+
+* Feature - Documentation only release to address various tickets
+
 1.153.0 (2024-08-15)
 ------------------
 

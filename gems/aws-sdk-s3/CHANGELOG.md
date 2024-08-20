@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Default to using `CRC32` checksum validation for S3 uploads and downloads.
 
+1.159.0 (2024-08-20)
+------------------
+
+* Feature - Amazon Simple Storage Service / Features : Add support for conditional writes for PutObject and CompleteMultipartUpload APIs.
+
 1.158.0 (2024-08-15)
 ------------------
 

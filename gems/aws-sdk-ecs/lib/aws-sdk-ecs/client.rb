@@ -538,23 +538,23 @@ module Aws::ECS
 
     # Creates a new Amazon ECS cluster. By default, your account receives a
     # `default` cluster when you launch your first container instance.
-    # However, you can create your own cluster with a unique name with the
-    # `CreateCluster` action.
+    # However, you can create your own cluster with a unique name.
     #
-    # <note markdown="1"> When you call the CreateCluster API operation, Amazon ECS attempts to
-    # create the Amazon ECS service-linked role for your account. This is so
-    # that it can manage required resources in other Amazon Web Services
-    # services on your behalf. However, if the user that makes the call
-    # doesn't have permissions to create the service-linked role, it isn't
-    # created. For more information, see [Using service-linked roles for
-    # Amazon ECS][1] in the *Amazon Elastic Container Service Developer
-    # Guide*.
+    # <note markdown="1"> When you call the [CreateCluster][1] API operation, Amazon ECS
+    # attempts to create the Amazon ECS service-linked role for your
+    # account. This is so that it can manage required resources in other
+    # Amazon Web Services services on your behalf. However, if the user that
+    # makes the call doesn't have permissions to create the service-linked
+    # role, it isn't created. For more information, see [Using
+    # service-linked roles for Amazon ECS][2] in the *Amazon Elastic
+    # Container Service Developer Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [String] :cluster_name
     #   The name of your cluster. If you don't specify a name for your
@@ -596,7 +596,12 @@ module Aws::ECS
     #   The setting to use when creating a cluster. This parameter is used to
     #   turn on CloudWatch Container Insights for a cluster. If this value is
     #   specified, it overrides the `containerInsights` value set with
-    #   PutAccountSetting or PutAccountSettingDefault.
+    #   [PutAccountSetting][1] or [PutAccountSettingDefault][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html
     #
     # @option params [Types::ClusterConfiguration] :configuration
     #   The `execute` command configuration for the cluster.
@@ -638,12 +643,13 @@ module Aws::ECS
     #
     #   If a default capacity provider strategy isn't defined for a cluster
     #   when it was created, it can be defined later with the
-    #   PutClusterCapacityProviders API operation.
+    #   [PutClusterCapacityProviders][3] API operation.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
     #
     # @option params [Types::ClusterServiceConnectDefaultsRequest] :service_connect_defaults
     #   Use this parameter to set a default Service Connect namespace. After
@@ -794,8 +800,8 @@ module Aws::ECS
     # Runs and maintains your desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
     # the `desiredCount`, Amazon ECS runs another copy of the task in the
-    # specified cluster. To update an existing service, see the
-    # UpdateService action.
+    # specified cluster. To update an existing service, use
+    # [UpdateService][1].
     #
     # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
     # revision before authorization. When a task definition revision is not
@@ -808,13 +814,13 @@ module Aws::ECS
     # you can optionally run your service behind one or more load balancers.
     # The load balancers distribute traffic across the tasks that are
     # associated with the service. For more information, see [Service load
-    # balancing][1] in the *Amazon Elastic Container Service Developer
+    # balancing][2] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
     # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
     # the volume when creating or updating a service. `volumeConfigurations`
     # is only supported for REPLICA service and not DAEMON service. For more
-    # infomation, see [Amazon EBS volumes][2] in the *Amazon Elastic
+    # infomation, see [Amazon EBS volumes][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
     # Tasks for services that don't use a load balancer are considered
@@ -829,7 +835,7 @@ module Aws::ECS
     #   service scheduler spreads tasks across Availability Zones. You can
     #   use task placement strategies and constraints to customize task
     #   placement decisions. For more information, see [Service scheduler
-    #   concepts][3] in the *Amazon Elastic Container Service Developer
+    #   concepts][4] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
@@ -840,16 +846,16 @@ module Aws::ECS
     #   constraints. When using this strategy, you don't need to specify a
     #   desired number of tasks, a task placement strategy, or use Service
     #   Auto Scaling policies. For more information, see [Service scheduler
-    #   concepts][3] in the *Amazon Elastic Container Service Developer
+    #   concepts][4] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # You can optionally specify a deployment configuration for your
     # service. The deployment is initiated by changing properties. For
     # example, the deployment might be initiated by the task definition or
-    # by your desired count of a service. This is done with an UpdateService
-    # operation. The default value for a replica service for
-    # `minimumHealthyPercent` is 100%. The default value for a daemon
-    # service for `minimumHealthyPercent` is 0%.
+    # by your desired count of a service. You can use [UpdateService][1].
+    # The default value for a replica service for `minimumHealthyPercent` is
+    # 100%. The default value for a daemon service for
+    # `minimumHealthyPercent` is 0%.
     #
     # If a service uses the `ECS` deployment controller, the minimum healthy
     # percent represents a lower limit on the number of tasks in a service
@@ -895,13 +901,13 @@ module Aws::ECS
     # When creating a service that uses the `EXTERNAL` deployment
     # controller, you can specify only parameters that aren't controlled at
     # the task set level. The only required parameter is the service name.
-    # You control your services using the CreateTaskSet operation. For more
-    # information, see [Amazon ECS deployment types][4] in the *Amazon
+    # You control your services using the [CreateTaskSet][5]. For more
+    # information, see [Amazon ECS deployment types][6] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement. For information about task placement and task placement
-    # strategies, see [Amazon ECS task placement][5] in the *Amazon Elastic
+    # strategies, see [Amazon ECS task placement][7] in the *Amazon Elastic
     # Container Service Developer Guide*
     #
     # Starting April 15, 2023, Amazon Web Services will not onboard new
@@ -915,11 +921,13 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
-    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
+    # [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -1811,8 +1819,8 @@ module Aws::ECS
     #   A capacity provider strategy consists of one or more capacity
     #   providers along with the `base` and `weight` to assign to them. A
     #   capacity provider must be associated with the cluster to be used in a
-    #   capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
+    #   capacity provider strategy. The [PutClusterCapacityProviders][1] API
+    #   is used to associate a capacity provider with a cluster. Only capacity
     #   providers with an `ACTIVE` or `UPDATING` status can be used.
     #
     #   If a `capacityProviderStrategy` is specified, the `launchType`
@@ -1822,16 +1830,21 @@ module Aws::ECS
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must already be created. New capacity providers can
-    #   be created with the CreateCapacityProvider API operation.
+    #   be created with the [CreateCapacityProviderProvider][2]API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
     #   available to all accounts and only need to be associated with a
     #   cluster to be used.
     #
-    #   The PutClusterCapacityProviders API operation is used to update the
-    #   list of available capacity providers for a cluster after the cluster
-    #   is created.
+    #   The [PutClusterCapacityProviders][1] API operation is used to update
+    #   the list of available capacity providers for a cluster after the
+    #   cluster is created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProviderProvider.html
     #
     # @option params [String] :platform_version
     #   The platform version that the tasks in the task set uses. A platform
@@ -2126,20 +2139,26 @@ module Aws::ECS
     #
     # <note markdown="1"> The `FARGATE` and `FARGATE_SPOT` capacity providers are reserved and
     # can't be deleted. You can disassociate them from a cluster using
-    # either the PutClusterCapacityProviders API or by deleting the cluster.
+    # either [PutCapacityProviderProviders][1] or by deleting the cluster.
     #
     #  </note>
     #
     # Prior to a capacity provider being deleted, the capacity provider must
     # be removed from the capacity provider strategy from all services. The
-    # UpdateService API can be used to remove a capacity provider from a
-    # service's capacity provider strategy. When updating a service, the
+    # [UpdateService][2] API can be used to remove a capacity provider from
+    # a service's capacity provider strategy. When updating a service, the
     # `forceNewDeployment` option can be used to ensure that any tasks using
     # the Amazon EC2 instance capacity provided by the capacity provider are
     # transitioned to use the capacity from the remaining capacity
     # providers. Only capacity providers that aren't associated with a
     # cluster can be deleted. To remove a capacity provider from a cluster,
-    # you can either use PutClusterCapacityProviders or delete the cluster.
+    # you can either use [PutCapacityProviderProviders][1] or delete the
+    # cluster.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProviderProviders.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
     #
     # @option params [required, String] :capacity_provider
     #   The short name or full Amazon Resource Name (ARN) of the capacity
@@ -2191,8 +2210,13 @@ module Aws::ECS
     #
     # You must deregister all container instances from this cluster before
     # you may delete it. You can list the container instances in a cluster
-    # with ListContainerInstances and deregister them with
-    # DeregisterContainerInstance.
+    # with [ListContainerInstances][1] and deregister them with
+    # [DeregisterContainerInstance][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html
     #
     # @option params [required, String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
@@ -2286,24 +2310,31 @@ module Aws::ECS
     # if you have no running tasks in it and the desired task count is zero.
     # If the service is actively maintaining tasks, you can't delete it,
     # and you must update the service to a desired task count of zero. For
-    # more information, see UpdateService.
+    # more information, see [UpdateService][1].
     #
     # <note markdown="1"> When you delete a service, if there are still running tasks that
     # require cleanup, the service status moves from `ACTIVE` to `DRAINING`,
     # and the service is no longer visible in the console or in the
-    # ListServices API operation. After all tasks have transitioned to
+    # [ListServices][2] API operation. After all tasks have transitioned to
     # either `STOPPING` or `STOPPED` status, the service status moves from
     # `DRAINING` to `INACTIVE`. Services in the `DRAINING` or `INACTIVE`
-    # status can still be viewed with the DescribeServices API operation.
-    # However, in the future, `INACTIVE` services may be cleaned up and
-    # purged from Amazon ECS record keeping, and DescribeServices calls on
-    # those services return a `ServiceNotFoundException` error.
+    # status can still be viewed with the [DescribeServices][3] API
+    # operation. However, in the future, `INACTIVE` services may be cleaned
+    # up and purged from Amazon ECS record keeping, and
+    # [DescribeServices][3] calls on those services return a
+    # `ServiceNotFoundException` error.
     #
     #  </note>
     #
     # If you attempt to create a new service with the same name as an
     # existing service in either `ACTIVE` or `DRAINING` status, you receive
     # an error.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServices.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -5021,9 +5052,14 @@ module Aws::ECS
     # @option params [String] :status
     #   Filters the container instances by status. For example, if you specify
     #   the `DRAINING` status, the results include only container instances
-    #   that have been set to `DRAINING` using UpdateContainerInstancesState.
-    #   If you don't specify this parameter, the default is to include
-    #   container instances set to all states other than `INACTIVE`.
+    #   that have been set to `DRAINING` using
+    #   [UpdateContainerInstancesState][1]. If you don't specify this
+    #   parameter, the default is to include container instances set to all
+    #   states other than `INACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerInstancesState.html
     #
     # @return [Types::ListContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6036,12 +6072,13 @@ module Aws::ECS
     # Create or update an attribute on an Amazon ECS resource. If the
     # attribute doesn't exist, it's created. If the attribute exists, its
     # value is replaced with the specified value. To delete an attribute,
-    # use DeleteAttributes. For more information, see [Attributes][1] in the
-    # *Amazon Elastic Container Service Developer Guide*.
+    # use [DeleteAttributes][1]. For more information, see [Attributes][2]
+    # in the *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -6096,16 +6133,20 @@ module Aws::ECS
     # has existing capacity providers associated with it, you must specify
     # all existing capacity providers in addition to any new ones you want
     # to add. Any existing capacity providers that are associated with a
-    # cluster that are omitted from a PutClusterCapacityProviders API call
-    # will be disassociated with the cluster. You can only disassociate an
-    # existing capacity provider from a cluster if it's not being used by
-    # any existing tasks.
+    # cluster that are omitted from a [PutClusterCapacityProviders][1] API
+    # call will be disassociated with the cluster. You can only disassociate
+    # an existing capacity provider from a cluster if it's not being used
+    # by any existing tasks.
     #
     # When creating a service or running a task on a cluster, if no capacity
     # provider or launch type is specified, then the cluster's default
     # capacity provider strategy is used. We recommend that you define a
     # default capacity provider strategy for your cluster. However, you must
     # specify an empty array (`[]`) to bypass defining a default strategy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
     #
     # @option params [required, String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
@@ -6118,12 +6159,16 @@ module Aws::ECS
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must already be created. New capacity providers can
-    #   be created with the CreateCapacityProvider API operation.
+    #   be created with the [CreateCapacityProvider][1] API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
     #   available to all accounts and only need to be associated with a
     #   cluster to be used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
     #
     # @option params [required, Array<Types::CapacityProviderStrategyItem>] :default_capacity_provider_strategy
     #   The capacity provider strategy to use by default for the cluster.
@@ -6135,18 +6180,23 @@ module Aws::ECS
     #   A capacity provider strategy consists of one or more capacity
     #   providers along with the `base` and `weight` to assign to them. A
     #   capacity provider must be associated with the cluster to be used in a
-    #   capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
+    #   capacity provider strategy. The [PutClusterCapacityProviders][1] API
+    #   is used to associate a capacity provider with a cluster. Only capacity
     #   providers with an `ACTIVE` or `UPDATING` status can be used.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must already be created. New capacity providers can
-    #   be created with the CreateCapacityProvider API operation.
+    #   be created with the [CreateCapacityProvider][2] API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
     #   available to all accounts and only need to be associated with a
     #   cluster to be used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
     #
     # @return [Types::PutClusterCapacityProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6419,16 +6469,17 @@ module Aws::ECS
     # You can specify a Docker networking mode for the containers in your
     # task definition with the `networkMode` parameter. If you specify the
     # `awsvpc` network mode, the task is allocated an elastic network
-    # interface, and you must specify a NetworkConfiguration when you create
-    # a service or run a task with the task definition. For more
-    # information, see [Task Networking][3] in the *Amazon Elastic Container
+    # interface, and you must specify a [NetworkConfiguration][3] when you
+    # create a service or run a task with the task definition. For more
+    # information, see [Task Networking][4] in the *Amazon Elastic Container
     # Service Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [required, String] :family
     #   You must specify a `family` for a task definition. You can use it
@@ -7260,7 +7311,7 @@ module Aws::ECS
     # strategies. For more information, see [Scheduling Tasks][1] in the
     # *Amazon Elastic Container Service Developer Guide*.
     #
-    # Alternatively, you can use StartTask to use your own scheduler or
+    # Alternatively, you can use `StartTask` to use your own scheduler or
     # place tasks manually on specific container instances.
     #
     # Starting April 15, 2023, Amazon Web Services will not onboard new
@@ -7429,12 +7480,16 @@ module Aws::ECS
     #   Specifies whether to propagate the tags from the task definition to
     #   the task. If no value is specified, the tags aren't propagated. Tags
     #   can only be propagated to the task during task creation. To add tags
-    #   to a task after task creation, use the TagResource API action.
+    #   to a task after task creation, use the[TagResource][1] API action.
     #
     #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
     #   running a task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
     #
     # @option params [String] :reference_id
     #   The reference ID to use for the task. The reference ID can have a
@@ -7844,7 +7899,7 @@ module Aws::ECS
     # at least once during the past 30-day period are considered current
     # customers and will be able to continue using the service.
     #
-    # Alternatively, you can use RunTask to place tasks for you. For more
+    # Alternatively, you can use`RunTask` to place tasks for you. For more
     # information, see [Scheduling Tasks][1] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
@@ -8208,7 +8263,7 @@ module Aws::ECS
     # Stops a running task. Any tags associated with the task will be
     # deleted.
     #
-    # When StopTask is called on a task, the equivalent of `docker stop` is
+    # When you call `StopTask` on a task, the equivalent of `docker stop` is
     # issued to the containers running in the task. This results in a
     # `SIGTERM` value and a default 30-second timeout, after which the
     # `SIGKILL` value is sent and the containers are forcibly stopped. If
@@ -8244,7 +8299,11 @@ module Aws::ECS
     #   An optional message specified when a task is stopped. For example, if
     #   you're using a custom scheduler, you can use this parameter to
     #   specify the reason for stopping the task here, and the message appears
-    #   in subsequent DescribeTasks API operations on this task.
+    #   in subsequent [DescribeTasks][1]&gt; API operations on this task.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
     #
     # @return [Types::StopTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8904,7 +8963,7 @@ module Aws::ECS
     #   The setting to use by default for a cluster. This parameter is used to
     #   turn on CloudWatch Container Insights for a cluster. If this value is
     #   specified, it overrides the `containerInsights` value set with
-    #   PutAccountSetting or PutAccountSettingDefault.
+    #   [PutAccountSetting][1] or [PutAccountSettingDefault][2].
     #
     #   Currently, if you delete an existing cluster that does not have
     #   Container Insights turned on, and then create a new cluster with the
@@ -8912,6 +8971,11 @@ module Aws::ECS
     #   not actually be turned on. If you want to preserve the same name for
     #   your existing cluster and turn on Container Insights, you must wait 7
     #   days before you can re-create it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html
     #
     # @return [Types::UpdateClusterSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9121,7 +9185,7 @@ module Aws::ECS
     # state are stopped and replaced according to the service's deployment
     # configuration parameters, `minimumHealthyPercent` and
     # `maximumPercent`. You can change the deployment configuration of your
-    # service using UpdateService.
+    # service using [UpdateService][1].
     #
     # * If `minimumHealthyPercent` is below 100%, the scheduler can ignore
     #   `desiredCount` temporarily during task replacement. For example,
@@ -9148,7 +9212,7 @@ module Aws::ECS
     # manually.
     #
     # A container instance has completed draining when it has no more
-    # `RUNNING` tasks. You can verify this using [ListTasks][1].
+    # `RUNNING` tasks. You can verify this using [ListTasks][2].
     #
     # When a container instance has been drained, you can set a container
     # instance to `ACTIVE` status and once it has reached that status the
@@ -9156,7 +9220,8 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -9298,7 +9363,7 @@ module Aws::ECS
     # propagate tags option, using this API. If the launch type, load
     # balancer, network configuration, platform version, or task definition
     # need to be updated, create a new task set For more information, see
-    # CreateTaskSet.
+    # [CreateTaskSet][3].
     #
     # You can add to or subtract from the number of instantiations of a task
     # definition in a service by specifying the cluster that the service is
@@ -9347,12 +9412,12 @@ module Aws::ECS
     #   the four older tasks (provided that the cluster resources required
     #   to do this are available).
     #
-    # When UpdateService stops a task during a deployment, the equivalent of
-    # `docker stop` is issued to the containers running in the task. This
-    # results in a `SIGTERM` and a 30-second timeout. After this, `SIGKILL`
-    # is sent and the containers are forcibly stopped. If the container
-    # handles the `SIGTERM` gracefully and exits within 30 seconds from
-    # receiving it, no `SIGKILL` is sent.
+    # When [UpdateService][4] stops a task during a deployment, the
+    # equivalent of `docker stop` is issued to the containers running in the
+    # task. This results in a `SIGTERM` and a 30-second timeout. After this,
+    # `SIGKILL` is sent and the containers are forcibly stopped. If the
+    # container handles the `SIGTERM` gracefully and exits within 30 seconds
+    # from receiving it, no `SIGKILL` is sent.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement in your cluster with the following logic.
@@ -9398,7 +9463,7 @@ module Aws::ECS
     # * `serviceRegistries`
     #
     #  For more information about the role see the `CreateService` request
-    # parameter [ `role` ][3].
+    # parameter [ `role` ][5].
     #
     #  </note>
     #
@@ -9406,7 +9471,9 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
     # [2]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -9441,22 +9508,29 @@ module Aws::ECS
     #   A capacity provider strategy consists of one or more capacity
     #   providers along with the `base` and `weight` to assign to them. A
     #   capacity provider must be associated with the cluster to be used in a
-    #   capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
+    #   capacity provider strategy. The [PutClusterCapacityProviders][1] API
+    #   is used to associate a capacity provider with a cluster. Only capacity
     #   providers with an `ACTIVE` or `UPDATING` status can be used.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must already be created. New capacity providers can
-    #   be created with the CreateCapacityProvider API operation.
+    #   be created with the [CreateClusterCapacityProvider][2] API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
     #   available to all accounts and only need to be associated with a
     #   cluster to be used.
     #
-    #   The PutClusterCapacityProviders API operation is used to update the
-    #   list of available capacity providers for a cluster after the cluster
-    #   is created.
+    #   The [PutClusterCapacityProviders][1]API operation is used to update
+    #   the list of available capacity providers for a cluster after the
+    #   cluster is created.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
@@ -10348,7 +10422,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.153.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

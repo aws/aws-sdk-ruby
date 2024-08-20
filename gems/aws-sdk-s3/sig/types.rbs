@@ -190,6 +190,7 @@ module Aws::S3
       attr_accessor checksum_sha256: ::String
       attr_accessor request_payer: ("requester")
       attr_accessor expected_bucket_owner: ::String
+      attr_accessor if_none_match: ::String
       attr_accessor sse_customer_algorithm: ::String
       attr_accessor sse_customer_key: ::String
       attr_accessor sse_customer_key_md5: ::String
@@ -2049,6 +2050,7 @@ module Aws::S3
       attr_accessor checksum_sha1: ::String
       attr_accessor checksum_sha256: ::String
       attr_accessor expires: ::Time
+      attr_accessor if_none_match: ::String
       attr_accessor grant_full_control: ::String
       attr_accessor grant_read: ::String
       attr_accessor grant_read_acp: ::String
