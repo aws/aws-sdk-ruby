@@ -9,11 +9,14 @@ module Seahorse
       # @option options [required,Symbol] :operation_name (nil)
       # @option options [required,Model::Operation] :operation (nil)
       # @option options [Model::Authorizer] :authorizer (nil)
+      # @option options [Client] :client (nil)
       # @option options [Hash] :params ({})
       # @option options [Configuration] :config (nil)
       # @option options [Http::Request] :http_request (Http::Request.new)
       # @option options [Http::Response] :http_response (Http::Response.new)
-      #   and #rewind.
+      # @option options [Integer] :retries (0)
+      # @option options [Aws::Telemetry::TracerBase] :tracer (Aws::Telemetry::NoOpTracer.new)
+      # @options options [Hash] :metadata ({})
       def initialize(options = {})
         @operation_name = options[:operation_name]
         @operation = options[:operation]
@@ -55,7 +58,7 @@ module Seahorse
       # @return [Integer]
       attr_accessor :retries
 
-      # @return [TracerProvider::Tracer]
+      # @return [Tracer]
       attr_accessor :tracer
 
       # @return [Hash]
