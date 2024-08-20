@@ -52,20 +52,18 @@ module Aws
           'http.method' => context.http_request.http_method,
           'net.protocol.name' => 'http'
         }.tap do |h|
-          # determine client to find out http version
           h['net.protocol.version'] =
             if context.client.is_a? Seahorse::Client::AsyncBase
               '2'
             else
               Net::HTTP::HTTPVersion
             end
-          # add endpoint attrs unless stub responses
+
           unless context.config.stub_responses
             h['net.peer.name'] = context.http_request.endpoint.host
             h['net.peer.port'] = context.http_request.endpoint.port.to_s
           end
 
-          # add content-length attr if it exists on request headers
           if context.http_request.headers.key?('Content-Length')
             h['http.request_content_length'] =
               context.http_request.headers['Content-Length']

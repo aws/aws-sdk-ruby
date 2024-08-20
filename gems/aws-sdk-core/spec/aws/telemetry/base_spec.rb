@@ -39,7 +39,7 @@ module Aws
         end.to raise_error(NotImplementedError)
 
         expect do
-          subject.status = 'foo'
+          subject.status = Aws::Telemetry::SpanStatus.error
         end.to raise_error(NotImplementedError)
 
         expect do

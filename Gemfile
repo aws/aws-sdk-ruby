@@ -65,9 +65,7 @@ group :test do
   gem 'addressable'
   gem 'cucumber'
   gem 'webmock'
-
   gem 'multipart-post'
   gem 'rspec'
-
   gem 'opentelemetry-sdk'
 end
