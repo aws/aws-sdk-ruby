@@ -51,13 +51,13 @@ module Aws::Deadline
       end
 
       # @return [String]
-      def context
-        @data[:context]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def context
+        @data[:context]
       end
     end
 
@@ -68,11 +68,6 @@ module Aws::Deadline
       # @param [Aws::Deadline::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
-      end
-
-      # @return [String]
-      def context
-        @data[:context]
       end
 
       # @return [String]
@@ -93,6 +88,11 @@ module Aws::Deadline
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+
+      # @return [String]
+      def context
+        @data[:context]
       end
     end
 
@@ -130,11 +130,6 @@ module Aws::Deadline
       end
 
       # @return [String]
-      def context
-        @data[:context]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -147,6 +142,11 @@ module Aws::Deadline
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+
+      # @return [String]
+      def context
+        @data[:context]
       end
     end
 
@@ -160,28 +160,13 @@ module Aws::Deadline
       end
 
       # @return [String]
-      def context
-        @data[:context]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
 
       # @return [String]
-      def quota_code
-        @data[:quota_code]
-      end
-
-      # @return [String]
       def reason
         @data[:reason]
-      end
-
-      # @return [String]
-      def resource_id
-        @data[:resource_id]
       end
 
       # @return [String]
@@ -192,6 +177,21 @@ module Aws::Deadline
       # @return [String]
       def service_code
         @data[:service_code]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def context
+        @data[:context]
       end
     end
 
@@ -205,13 +205,13 @@ module Aws::Deadline
       end
 
       # @return [String]
-      def context
-        @data[:context]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def service_code
+        @data[:service_code]
       end
 
       # @return [String]
@@ -225,8 +225,8 @@ module Aws::Deadline
       end
 
       # @return [String]
-      def service_code
-        @data[:service_code]
+      def context
+        @data[:context]
       end
 
       def retryable?
@@ -248,8 +248,13 @@ module Aws::Deadline
       end
 
       # @return [String]
-      def context
-        @data[:context]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
 
       # @return [String]
@@ -258,13 +263,8 @@ module Aws::Deadline
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-      # @return [String]
-      def reason
-        @data[:reason]
+      def context
+        @data[:context]
       end
     end
 

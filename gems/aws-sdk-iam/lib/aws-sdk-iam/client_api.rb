@@ -528,7 +528,7 @@ module Aws::IAM
     AccessKey.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
     AccessKey.struct_class = Types::AccessKey
 
-    AccessKeyLastUsed.add_member(:last_used_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "LastUsedDate"))
+    AccessKeyLastUsed.add_member(:last_used_date, Shapes::ShapeRef.new(shape: dateType, location_name: "LastUsedDate"))
     AccessKeyLastUsed.add_member(:service_name, Shapes::ShapeRef.new(shape: stringType, required: true, location_name: "ServiceName"))
     AccessKeyLastUsed.add_member(:region, Shapes::ShapeRef.new(shape: stringType, required: true, location_name: "Region"))
     AccessKeyLastUsed.struct_class = Types::AccessKeyLastUsed

@@ -128,7 +128,8 @@ module Aws
                                         ?eks_configuration: {
                                           eks_cluster_arn: ::String,
                                           kubernetes_namespace: ::String
-                                        }
+                                        },
+                                        ?context: ::String
                                       ) -> _CreateComputeEnvironmentResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComputeEnvironmentResponseSuccess
 
@@ -1328,7 +1329,8 @@ module Aws
                                         ?update_policy: {
                                           terminate_jobs_on_update: bool?,
                                           job_execution_timeout_minutes: ::Integer?
-                                        }
+                                        },
+                                        ?context: ::String
                                       ) -> _UpdateComputeEnvironmentResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComputeEnvironmentResponseSuccess
 

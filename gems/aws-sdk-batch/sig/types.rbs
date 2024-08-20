@@ -91,6 +91,7 @@ module Aws::Batch
       attr_accessor eks_configuration: Types::EksConfiguration
       attr_accessor container_orchestration_type: ("ECS" | "EKS")
       attr_accessor uuid: ::String
+      attr_accessor context: ::String
       SENSITIVE: []
     end
 
@@ -227,6 +228,7 @@ module Aws::Batch
       attr_accessor service_role: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor eks_configuration: Types::EksConfiguration
+      attr_accessor context: ::String
       SENSITIVE: []
     end
 
@@ -1118,6 +1120,7 @@ module Aws::Batch
       attr_accessor compute_resources: Types::ComputeResourceUpdate
       attr_accessor service_role: ::String
       attr_accessor update_policy: Types::UpdatePolicy
+      attr_accessor context: ::String
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2024-08-15)
+------------------
+
+* Feature - This release introduces a new ContainerDefinition configuration to support the customer-managed keys for ECS container restart feature.
+
 1.152.0 (2024-08-02)
 ------------------
 

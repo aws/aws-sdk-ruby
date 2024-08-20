@@ -7288,6 +7288,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The customer managed key that is registered to your Amazon QuickSight
+    # account is unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomerManagedKeyUnavailableException AWS API Documentation
+    #
+    class CustomerManagedKeyUnavailableException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Dashboard.
     #
     # @!attribute [rw] dashboard_id

@@ -855,7 +855,7 @@ module Aws::Inspector2
     #     targets: { # required
     #       account_ids: ["TargetAccount"], # required
     #       target_resource_tags: { # required
-    #         "NonEmptyString" => ["String"],
+    #         "TargetResourceTagsKey" => ["TargetResourceTagsValue"],
     #       },
     #     },
     #   })
@@ -2563,8 +2563,8 @@ module Aws::Inspector2
     #   resp.scan_configurations[0].targets.account_ids #=> Array
     #   resp.scan_configurations[0].targets.account_ids[0] #=> String
     #   resp.scan_configurations[0].targets.target_resource_tags #=> Hash
-    #   resp.scan_configurations[0].targets.target_resource_tags["NonEmptyString"] #=> Array
-    #   resp.scan_configurations[0].targets.target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.scan_configurations[0].targets.target_resource_tags["TargetResourceTagsKey"] #=> Array
+    #   resp.scan_configurations[0].targets.target_resource_tags["TargetResourceTagsKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanConfigurations AWS API Documentation
     #
@@ -2784,8 +2784,8 @@ module Aws::Inspector2
     #   resp.target_resource_aggregations[0].status_counts.skipped #=> Integer
     #   resp.target_resource_aggregations[0].target_resource_id #=> String
     #   resp.target_resource_aggregations[0].target_resource_tags #=> Hash
-    #   resp.target_resource_aggregations[0].target_resource_tags["NonEmptyString"] #=> Array
-    #   resp.target_resource_aggregations[0].target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.target_resource_aggregations[0].target_resource_tags["TargetResourceTagsKey"] #=> Array
+    #   resp.target_resource_aggregations[0].target_resource_tags["TargetResourceTagsKey"][0] #=> String
     #   resp.target_resource_aggregations[0].target_status #=> String, one of "TIMED_OUT", "CANCELLED", "COMPLETED"
     #   resp.target_resource_aggregations[0].target_status_reason #=> String, one of "SCAN_IN_PROGRESS", "UNSUPPORTED_OS", "SSM_UNMANAGED"
     #
@@ -2914,8 +2914,8 @@ module Aws::Inspector2
     #   resp.scans[0].targets.account_ids #=> Array
     #   resp.scans[0].targets.account_ids[0] #=> String
     #   resp.scans[0].targets.target_resource_tags #=> Hash
-    #   resp.scans[0].targets.target_resource_tags["NonEmptyString"] #=> Array
-    #   resp.scans[0].targets.target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.scans[0].targets.target_resource_tags["TargetResourceTagsKey"] #=> Array
+    #   resp.scans[0].targets.target_resource_tags["TargetResourceTagsKey"][0] #=> String
     #   resp.scans[0].total_checks #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScans AWS API Documentation
@@ -4780,7 +4780,7 @@ module Aws::Inspector2
     #     targets: {
     #       account_ids: ["TargetAccount"],
     #       target_resource_tags: {
-    #         "NonEmptyString" => ["String"],
+    #         "TargetResourceTagsKey" => ["TargetResourceTagsValue"],
     #       },
     #     },
     #   })
@@ -5320,7 +5320,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

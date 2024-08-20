@@ -1812,6 +1812,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class CustomerManagedKeyUnavailableException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class Dashboard
       attr_accessor dashboard_id: ::String
       attr_accessor arn: ::String

@@ -79,10 +79,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#associate_member_to_farm-instance_method
       def associate_member_to_farm: (
                                       farm_id: ::String,
-                                      identity_store_id: ::String,
-                                      membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER"),
                                       principal_id: ::String,
-                                      principal_type: ("USER" | "GROUP")
+                                      principal_type: ("USER" | "GROUP"),
+                                      identity_store_id: ::String,
+                                      membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER")
                                     ) -> _AssociateMemberToFarmResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMemberToFarmResponseSuccess
 
@@ -93,10 +93,10 @@ module Aws
       def associate_member_to_fleet: (
                                        farm_id: ::String,
                                        fleet_id: ::String,
-                                       identity_store_id: ::String,
-                                       membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER"),
                                        principal_id: ::String,
-                                       principal_type: ("USER" | "GROUP")
+                                       principal_type: ("USER" | "GROUP"),
+                                       identity_store_id: ::String,
+                                       membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER")
                                      ) -> _AssociateMemberToFleetResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMemberToFleetResponseSuccess
 
@@ -106,12 +106,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#associate_member_to_job-instance_method
       def associate_member_to_job: (
                                      farm_id: ::String,
-                                     identity_store_id: ::String,
+                                     queue_id: ::String,
                                      job_id: ::String,
-                                     membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER"),
                                      principal_id: ::String,
                                      principal_type: ("USER" | "GROUP"),
-                                     queue_id: ::String
+                                     identity_store_id: ::String,
+                                     membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER")
                                    ) -> _AssociateMemberToJobResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMemberToJobResponseSuccess
 
@@ -121,11 +121,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#associate_member_to_queue-instance_method
       def associate_member_to_queue: (
                                        farm_id: ::String,
-                                       identity_store_id: ::String,
-                                       membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER"),
+                                       queue_id: ::String,
                                        principal_id: ::String,
                                        principal_type: ("USER" | "GROUP"),
-                                       queue_id: ::String
+                                       identity_store_id: ::String,
+                                       membership_level: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "MANAGER")
                                      ) -> _AssociateMemberToQueueResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMemberToQueueResponseSuccess
 
@@ -182,8 +182,8 @@ module Aws
       def assume_queue_role_for_worker: (
                                           farm_id: ::String,
                                           fleet_id: ::String,
-                                          queue_id: ::String,
-                                          worker_id: ::String
+                                          worker_id: ::String,
+                                          queue_id: ::String
                                         ) -> _AssumeQueueRoleForWorkerResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssumeQueueRoleForWorkerResponseSuccess
 
@@ -196,25 +196,25 @@ module Aws
       def batch_get_job_entity: (
                                   farm_id: ::String,
                                   fleet_id: ::String,
+                                  worker_id: ::String,
                                   identifiers: Array[
                                     {
-                                      environment_details: {
-                                        environment_id: ::String,
+                                      job_details: {
                                         job_id: ::String
                                       }?,
                                       job_attachment_details: {
                                         job_id: ::String
                                       }?,
-                                      job_details: {
-                                        job_id: ::String
-                                      }?,
                                       step_details: {
                                         job_id: ::String,
                                         step_id: ::String
+                                      }?,
+                                      environment_details: {
+                                        job_id: ::String,
+                                        environment_id: ::String
                                       }?
                                     },
-                                  ],
-                                  worker_id: ::String
+                                  ]
                                 ) -> _BatchGetJobEntityResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetJobEntityResponseSuccess
 
@@ -240,26 +240,26 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_budget-instance_method
       def create_budget: (
-                           actions: Array[
-                             {
-                               description: ::String?,
-                               threshold_percentage: ::Float,
-                               type: ("STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS")
-                             },
-                           ],
-                           approximate_dollar_limit: ::Float,
                            ?client_token: ::String,
-                           ?description: ::String,
-                           display_name: ::String,
                            farm_id: ::String,
-                           schedule: {
-                             fixed: {
-                               end_time: ::Time,
-                               start_time: ::Time
-                             }?
-                           },
                            usage_tracking_resource: {
                              queue_id: ::String?
+                           },
+                           display_name: ::String,
+                           ?description: ::String,
+                           approximate_dollar_limit: ::Float,
+                           actions: Array[
+                             {
+                               type: ("STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS"),
+                               threshold_percentage: ::Float,
+                               description: ::String?
+                             },
+                           ],
+                           schedule: {
+                             fixed: {
+                               start_time: ::Time,
+                               end_time: ::Time
+                             }?
                            }
                          ) -> _CreateBudgetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBudgetResponseSuccess
@@ -271,8 +271,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_farm-instance_method
       def create_farm: (
                          ?client_token: ::String,
-                         ?description: ::String,
                          display_name: ::String,
+                         ?description: ::String,
                          ?kms_key_arn: ::String,
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateFarmResponseSuccess
@@ -285,26 +285,40 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_fleet-instance_method
       def create_fleet: (
                           ?client_token: ::String,
+                          farm_id: ::String,
+                          display_name: ::String,
+                          ?description: ::String,
+                          role_arn: ::String,
+                          ?min_worker_count: ::Integer,
+                          max_worker_count: ::Integer,
                           configuration: {
                             customer_managed: {
                               mode: ("NO_SCALING" | "EVENT_BASED_AUTO_SCALING"),
-                              storage_profile_id: ::String?,
                               worker_capabilities: {
+                                v_cpu_count: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                memory_mi_b: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                accelerator_types: Array[("gpu")]?,
                                 accelerator_count: {
-                                  max: ::Integer?,
-                                  min: ::Integer
+                                  min: ::Integer,
+                                  max: ::Integer?
                                 }?,
                                 accelerator_total_memory_mi_b: {
-                                  max: ::Integer?,
-                                  min: ::Integer
+                                  min: ::Integer,
+                                  max: ::Integer?
                                 }?,
-                                accelerator_types: Array[("gpu")]?,
+                                os_family: ("WINDOWS" | "LINUX" | "MACOS"),
                                 cpu_architecture_type: ("x86_64" | "arm64"),
                                 custom_amounts: Array[
                                   {
-                                    max: ::Float?,
+                                    name: ::String,
                                     min: ::Float,
-                                    name: ::String
+                                    max: ::Float?
                                   },
                                 ]?,
                                 custom_attributes: Array[
@@ -312,27 +326,34 @@ module Aws
                                     name: ::String,
                                     values: Array[::String]
                                   },
-                                ]?,
-                                memory_mi_b: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                },
-                                os_family: ("WINDOWS" | "LINUX" | "MACOS"),
-                                v_cpu_count: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                }
-                              }
+                                ]?
+                              },
+                              storage_profile_id: ::String?
                             }?,
                             service_managed_ec2: {
                               instance_capabilities: {
-                                allowed_instance_types: Array[::String]?,
+                                v_cpu_count: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                memory_mi_b: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                os_family: ("WINDOWS" | "LINUX"),
                                 cpu_architecture_type: ("x86_64" | "arm64"),
+                                root_ebs_volume: {
+                                  size_gi_b: ::Integer?,
+                                  iops: ::Integer?,
+                                  throughput_mi_b: ::Integer?
+                                }?,
+                                allowed_instance_types: Array[::String]?,
+                                excluded_instance_types: Array[::String]?,
                                 custom_amounts: Array[
                                   {
-                                    max: ::Float?,
+                                    name: ::String,
                                     min: ::Float,
-                                    name: ::String
+                                    max: ::Float?
                                   },
                                 ]?,
                                 custom_attributes: Array[
@@ -340,34 +361,13 @@ module Aws
                                     name: ::String,
                                     values: Array[::String]
                                   },
-                                ]?,
-                                excluded_instance_types: Array[::String]?,
-                                memory_mi_b: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                },
-                                os_family: ("WINDOWS" | "LINUX"),
-                                root_ebs_volume: {
-                                  iops: ::Integer?,
-                                  size_gi_b: ::Integer?,
-                                  throughput_mi_b: ::Integer?
-                                }?,
-                                v_cpu_count: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                }
+                                ]?
                               },
                               instance_market_options: {
                                 type: ("on-demand" | "spot")
                               }
                             }?
                           },
-                          ?description: ::String,
-                          display_name: ::String,
-                          farm_id: ::String,
-                          max_worker_count: ::Integer,
-                          ?min_worker_count: ::Integer,
-                          role_arn: ::String,
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
@@ -378,35 +378,35 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_job-instance_method
       def create_job: (
+                        farm_id: ::String,
+                        queue_id: ::String,
+                        ?client_token: ::String,
+                        template: ::String,
+                        template_type: ("JSON" | "YAML"),
+                        priority: ::Integer,
+                        ?parameters: Hash[::String, {
+                            int: ::String?,
+                            float: ::String?,
+                            string: ::String?,
+                            path: ::String?
+                          }],
                         ?attachments: {
-                          file_system: ("COPIED" | "VIRTUAL")?,
                           manifests: Array[
                             {
                               file_system_location_name: ::String?,
-                              input_manifest_hash: ::String?,
-                              input_manifest_path: ::String?,
-                              output_relative_directories: Array[::String]?,
                               root_path: ::String,
-                              root_path_format: ("windows" | "posix")
+                              root_path_format: ("windows" | "posix"),
+                              output_relative_directories: Array[::String]?,
+                              input_manifest_path: ::String?,
+                              input_manifest_hash: ::String?
                             },
-                          ]
+                          ],
+                          file_system: ("COPIED" | "VIRTUAL")?
                         },
-                        ?client_token: ::String,
-                        farm_id: ::String,
-                        ?max_failed_tasks_count: ::Integer,
-                        ?max_retries_per_task: ::Integer,
-                        ?parameters: Hash[::String, {
-                            float: ::String?,
-                            int: ::String?,
-                            path: ::String?,
-                            string: ::String?
-                          }],
-                        priority: ::Integer,
-                        queue_id: ::String,
                         ?storage_profile_id: ::String,
                         ?target_task_run_status: ("READY" | "SUSPENDED"),
-                        template: ::String,
-                        template_type: ("JSON" | "YAML")
+                        ?max_failed_tasks_count: ::Integer,
+                        ?max_retries_per_task: ::Integer
                       ) -> _CreateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
 
@@ -417,25 +417,25 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_license_endpoint-instance_method
       def create_license_endpoint: (
                                      ?client_token: ::String,
-                                     security_group_ids: Array[::String],
+                                     vpc_id: ::String,
                                      subnet_ids: Array[::String],
-                                     ?tags: Hash[::String, ::String],
-                                     vpc_id: ::String
+                                     security_group_ids: Array[::String],
+                                     ?tags: Hash[::String, ::String]
                                    ) -> _CreateLicenseEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseEndpointResponseSuccess
 
       interface _CreateMonitorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMonitorResponse]
-        def identity_center_application_arn: () -> ::String
         def monitor_id: () -> ::String
+        def identity_center_application_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_monitor-instance_method
       def create_monitor: (
                             ?client_token: ::String,
                             display_name: ::String,
                             identity_center_instance_arn: ::String,
-                            role_arn: ::String,
-                            subdomain: ::String
+                            subdomain: ::String,
+                            role_arn: ::String
                           ) -> _CreateMonitorResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMonitorResponseSuccess
 
@@ -445,29 +445,29 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_queue-instance_method
       def create_queue: (
-                          ?allowed_storage_profile_ids: Array[::String],
                           ?client_token: ::String,
-                          ?default_budget_action: ("NONE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS"),
-                          ?description: ::String,
-                          display_name: ::String,
                           farm_id: ::String,
+                          display_name: ::String,
+                          ?description: ::String,
+                          ?default_budget_action: ("NONE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS"),
                           ?job_attachment_settings: {
-                            root_prefix: ::String,
-                            s3_bucket_name: ::String
+                            s3_bucket_name: ::String,
+                            root_prefix: ::String
                           },
+                          ?role_arn: ::String,
                           ?job_run_as_user: {
                             posix: {
-                              group: ::String,
-                              user: ::String
+                              user: ::String,
+                              group: ::String
                             }?,
-                            run_as: ("QUEUE_CONFIGURED_USER" | "WORKER_AGENT_USER"),
                             windows: {
-                              password_arn: ::String,
-                              user: ::String
-                            }?
+                              user: ::String,
+                              password_arn: ::String
+                            }?,
+                            run_as: ("QUEUE_CONFIGURED_USER" | "WORKER_AGENT_USER")
                           },
                           ?required_file_system_location_names: Array[::String],
-                          ?role_arn: ::String,
+                          ?allowed_storage_profile_ids: Array[::String],
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateQueueResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueResponseSuccess
@@ -480,10 +480,10 @@ module Aws
       def create_queue_environment: (
                                       ?client_token: ::String,
                                       farm_id: ::String,
-                                      priority: ::Integer,
                                       queue_id: ::String,
-                                      template: ::String,
-                                      template_type: ("JSON" | "YAML")
+                                      priority: ::Integer,
+                                      template_type: ("JSON" | "YAML"),
+                                      template: ::String
                                     ) -> _CreateQueueEnvironmentResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueEnvironmentResponseSuccess
 
@@ -493,8 +493,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_queue_fleet_association-instance_method
       def create_queue_fleet_association: (
                                             farm_id: ::String,
-                                            fleet_id: ::String,
-                                            queue_id: ::String
+                                            queue_id: ::String,
+                                            fleet_id: ::String
                                           ) -> _CreateQueueFleetAssociationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueFleetAssociationResponseSuccess
 
@@ -505,16 +505,16 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_storage_profile-instance_method
       def create_storage_profile: (
                                     ?client_token: ::String,
-                                    display_name: ::String,
                                     farm_id: ::String,
+                                    display_name: ::String,
+                                    os_family: ("WINDOWS" | "LINUX" | "MACOS"),
                                     ?file_system_locations: Array[
                                       {
                                         name: ::String,
                                         path: ::String,
                                         type: ("SHARED" | "LOCAL")
                                       },
-                                    ],
-                                    os_family: ("WINDOWS" | "LINUX" | "MACOS")
+                                    ]
                                   ) -> _CreateStorageProfileResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorageProfileResponseSuccess
 
@@ -524,16 +524,16 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#create_worker-instance_method
       def create_worker: (
-                           ?client_token: ::String,
                            farm_id: ::String,
                            fleet_id: ::String,
                            ?host_properties: {
-                             host_name: ::String?,
                              ip_addresses: {
                                ip_v4_addresses: Array[::String]?,
                                ip_v6_addresses: Array[::String]?
-                             }?
-                           }
+                             }?,
+                             host_name: ::String?
+                           },
+                           ?client_token: ::String
                          ) -> _CreateWorkerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkerResponseSuccess
 
@@ -542,8 +542,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#delete_budget-instance_method
       def delete_budget: (
-                           budget_id: ::String,
-                           farm_id: ::String
+                           farm_id: ::String,
+                           budget_id: ::String
                          ) -> _DeleteBudgetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBudgetResponseSuccess
 
@@ -611,8 +611,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#delete_queue_environment-instance_method
       def delete_queue_environment: (
                                       farm_id: ::String,
-                                      queue_environment_id: ::String,
-                                      queue_id: ::String
+                                      queue_id: ::String,
+                                      queue_environment_id: ::String
                                     ) -> _DeleteQueueEnvironmentResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueueEnvironmentResponseSuccess
 
@@ -622,8 +622,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#delete_queue_fleet_association-instance_method
       def delete_queue_fleet_association: (
                                             farm_id: ::String,
-                                            fleet_id: ::String,
-                                            queue_id: ::String
+                                            queue_id: ::String,
+                                            fleet_id: ::String
                                           ) -> _DeleteQueueFleetAssociationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueueFleetAssociationResponseSuccess
 
@@ -675,9 +675,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#disassociate_member_from_job-instance_method
       def disassociate_member_from_job: (
                                           farm_id: ::String,
+                                          queue_id: ::String,
                                           job_id: ::String,
-                                          principal_id: ::String,
-                                          queue_id: ::String
+                                          principal_id: ::String
                                         ) -> _DisassociateMemberFromJobResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMemberFromJobResponseSuccess
 
@@ -687,43 +687,43 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#disassociate_member_from_queue-instance_method
       def disassociate_member_from_queue: (
                                             farm_id: ::String,
-                                            principal_id: ::String,
-                                            queue_id: ::String
+                                            queue_id: ::String,
+                                            principal_id: ::String
                                           ) -> _DisassociateMemberFromQueueResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMemberFromQueueResponseSuccess
 
       interface _GetBudgetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBudgetResponse]
-        def actions: () -> ::Array[Types::ResponseBudgetAction]
-        def approximate_dollar_limit: () -> ::Float
         def budget_id: () -> ::String
-        def created_at: () -> ::Time
-        def created_by: () -> ::String
-        def description: () -> ::String
-        def display_name: () -> ::String
-        def queue_stopped_at: () -> ::Time
-        def schedule: () -> Types::BudgetSchedule
-        def status: () -> ("ACTIVE" | "INACTIVE")
-        def updated_at: () -> ::Time
-        def updated_by: () -> ::String
         def usage_tracking_resource: () -> Types::UsageTrackingResource
+        def status: () -> ("ACTIVE" | "INACTIVE")
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def approximate_dollar_limit: () -> ::Float
         def usages: () -> Types::ConsumedUsages
+        def actions: () -> ::Array[Types::ResponseBudgetAction]
+        def schedule: () -> Types::BudgetSchedule
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def updated_by: () -> ::String
+        def updated_at: () -> ::Time
+        def queue_stopped_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_budget-instance_method
       def get_budget: (
-                        budget_id: ::String,
-                        farm_id: ::String
+                        farm_id: ::String,
+                        budget_id: ::String
                       ) -> _GetBudgetResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBudgetResponseSuccess
 
       interface _GetFarmResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFarmResponse]
+        def farm_id: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def kms_key_arn: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
-        def description: () -> ::String
-        def display_name: () -> ::String
-        def farm_id: () -> ::String
-        def kms_key_arn: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
       end
@@ -735,23 +735,23 @@ module Aws
 
       interface _GetFleetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFleetResponse]
+        def fleet_id: () -> ::String
+        def farm_id: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED")
         def auto_scaling_status: () -> ("GROWING" | "STEADY" | "SHRINKING")
-        def capabilities: () -> Types::FleetCapabilities
+        def target_worker_count: () -> ::Integer
+        def worker_count: () -> ::Integer
+        def min_worker_count: () -> ::Integer
+        def max_worker_count: () -> ::Integer
         def configuration: () -> Types::FleetConfiguration
+        def capabilities: () -> Types::FleetCapabilities
+        def role_arn: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
-        def description: () -> ::String
-        def display_name: () -> ::String
-        def farm_id: () -> ::String
-        def fleet_id: () -> ::String
-        def max_worker_count: () -> ::Integer
-        def min_worker_count: () -> ::Integer
-        def role_arn: () -> ::String
-        def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED")
-        def target_worker_count: () -> ::Integer
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
-        def worker_count: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_fleet-instance_method
       def get_fleet: (
@@ -762,26 +762,26 @@ module Aws
 
       interface _GetJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetJobResponse]
-        def attachments: () -> Types::Attachments
-        def created_at: () -> ::Time
-        def created_by: () -> ::String
-        def description: () -> ::String
-        def ended_at: () -> ::Time
         def job_id: () -> ::String
+        def name: () -> ::String
         def lifecycle_status: () -> ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "UPLOAD_IN_PROGRESS" | "UPLOAD_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_SUCCEEDED" | "ARCHIVED")
         def lifecycle_status_message: () -> ::String
-        def max_failed_tasks_count: () -> ::Integer
-        def max_retries_per_task: () -> ::Integer
-        def name: () -> ::String
-        def parameters: () -> ::Hash[::String, Types::JobParameter]
         def priority: () -> ::Integer
-        def started_at: () -> ::Time
-        def storage_profile_id: () -> ::String
-        def target_task_run_status: () -> ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
-        def task_run_status: () -> ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
-        def task_run_status_counts: () -> ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def task_run_status: () -> ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
+        def target_task_run_status: () -> ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
+        def task_run_status_counts: () -> ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+        def storage_profile_id: () -> ::String
+        def max_failed_tasks_count: () -> ::Integer
+        def max_retries_per_task: () -> ::Integer
+        def parameters: () -> ::Hash[::String, Types::JobParameter]
+        def attachments: () -> Types::Attachments
+        def description: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_job-instance_method
       def get_job: (
@@ -793,13 +793,13 @@ module Aws
 
       interface _GetLicenseEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseEndpointResponse]
-        def dns_name: () -> ::String
         def license_endpoint_id: () -> ::String
-        def security_group_ids: () -> ::Array[::String]
         def status: () -> ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "READY" | "NOT_READY")
         def status_message: () -> ::String
-        def subnet_ids: () -> ::Array[::String]
         def vpc_id: () -> ::String
+        def dns_name: () -> ::String
+        def subnet_ids: () -> ::Array[::String]
+        def security_group_ids: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_license_endpoint-instance_method
       def get_license_endpoint: (
@@ -809,17 +809,17 @@ module Aws
 
       interface _GetMonitorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMonitorResponse]
+        def monitor_id: () -> ::String
+        def display_name: () -> ::String
+        def subdomain: () -> ::String
+        def url: () -> ::String
+        def role_arn: () -> ::String
+        def identity_center_instance_arn: () -> ::String
+        def identity_center_application_arn: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
-        def display_name: () -> ::String
-        def identity_center_application_arn: () -> ::String
-        def identity_center_instance_arn: () -> ::String
-        def monitor_id: () -> ::String
-        def role_arn: () -> ::String
-        def subdomain: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
-        def url: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_monitor-instance_method
       def get_monitor: (
@@ -829,20 +829,20 @@ module Aws
 
       interface _GetQueueResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetQueueResponse]
-        def allowed_storage_profile_ids: () -> ::Array[::String]
+        def queue_id: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def farm_id: () -> ::String
+        def status: () -> ("IDLE" | "SCHEDULING" | "SCHEDULING_BLOCKED")
+        def default_budget_action: () -> ("NONE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS")
         def blocked_reason: () -> ("NO_BUDGET_CONFIGURED" | "BUDGET_THRESHOLD_REACHED")
+        def job_attachment_settings: () -> Types::JobAttachmentSettings
+        def role_arn: () -> ::String
+        def required_file_system_location_names: () -> ::Array[::String]
+        def allowed_storage_profile_ids: () -> ::Array[::String]
+        def job_run_as_user: () -> Types::JobRunAsUser
         def created_at: () -> ::Time
         def created_by: () -> ::String
-        def default_budget_action: () -> ("NONE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS")
-        def description: () -> ::String
-        def display_name: () -> ::String
-        def farm_id: () -> ::String
-        def job_attachment_settings: () -> Types::JobAttachmentSettings
-        def job_run_as_user: () -> Types::JobRunAsUser
-        def queue_id: () -> ::String
-        def required_file_system_location_names: () -> ::Array[::String]
-        def role_arn: () -> ::String
-        def status: () -> ("IDLE" | "SCHEDULING" | "SCHEDULING_BLOCKED")
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
       end
@@ -855,99 +855,99 @@ module Aws
 
       interface _GetQueueEnvironmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetQueueEnvironmentResponse]
-        def created_at: () -> ::Time
-        def created_by: () -> ::String
+        def queue_environment_id: () -> ::String
         def name: () -> ::String
         def priority: () -> ::Integer
-        def queue_environment_id: () -> ::String
-        def template: () -> ::String
         def template_type: () -> ("JSON" | "YAML")
+        def template: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_queue_environment-instance_method
       def get_queue_environment: (
                                    farm_id: ::String,
-                                   queue_environment_id: ::String,
-                                   queue_id: ::String
+                                   queue_id: ::String,
+                                   queue_environment_id: ::String
                                  ) -> _GetQueueEnvironmentResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueueEnvironmentResponseSuccess
 
       interface _GetQueueFleetAssociationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetQueueFleetAssociationResponse]
+        def queue_id: () -> ::String
+        def fleet_id: () -> ::String
+        def status: () -> ("ACTIVE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS" | "STOPPED")
         def created_at: () -> ::Time
         def created_by: () -> ::String
-        def fleet_id: () -> ::String
-        def queue_id: () -> ::String
-        def status: () -> ("ACTIVE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS" | "STOPPED")
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_queue_fleet_association-instance_method
       def get_queue_fleet_association: (
                                          farm_id: ::String,
-                                         fleet_id: ::String,
-                                         queue_id: ::String
+                                         queue_id: ::String,
+                                         fleet_id: ::String
                                        ) -> _GetQueueFleetAssociationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueueFleetAssociationResponseSuccess
 
       interface _GetSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
-        def ended_at: () -> ::Time
-        def fleet_id: () -> ::String
-        def host_properties: () -> Types::HostPropertiesResponse
-        def lifecycle_status: () -> ("STARTED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCEEDED" | "UPDATE_FAILED" | "ENDED")
-        def log: () -> Types::LogConfiguration
         def session_id: () -> ::String
+        def fleet_id: () -> ::String
+        def worker_id: () -> ::String
         def started_at: () -> ::Time
-        def target_lifecycle_status: () -> ("ENDED")
+        def log: () -> Types::LogConfiguration
+        def lifecycle_status: () -> ("STARTED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCEEDED" | "UPDATE_FAILED" | "ENDED")
+        def ended_at: () -> ::Time
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
-        def worker_id: () -> ::String
+        def target_lifecycle_status: () -> ("ENDED")
+        def host_properties: () -> Types::HostPropertiesResponse
         def worker_log: () -> Types::LogConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_session-instance_method
       def get_session: (
                          farm_id: ::String,
-                         job_id: ::String,
                          queue_id: ::String,
+                         job_id: ::String,
                          session_id: ::String
                        ) -> _GetSessionResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
 
       interface _GetSessionActionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionActionResponse]
-        def definition: () -> Types::SessionActionDefinition
+        def session_action_id: () -> ::String
+        def status: () -> ("ASSIGNED" | "RUNNING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "INTERRUPTED" | "CANCELED" | "NEVER_ATTEMPTED" | "SCHEDULED" | "RECLAIMING" | "RECLAIMED")
+        def started_at: () -> ::Time
         def ended_at: () -> ::Time
+        def worker_updated_at: () -> ::Time
+        def progress_percent: () -> ::Float
+        def session_id: () -> ::String
         def process_exit_code: () -> ::Integer
         def progress_message: () -> ::String
-        def progress_percent: () -> ::Float
-        def session_action_id: () -> ::String
-        def session_id: () -> ::String
-        def started_at: () -> ::Time
-        def status: () -> ("ASSIGNED" | "RUNNING" | "CANCELING" | "SUCCEEDED" | "FAILED" | "INTERRUPTED" | "CANCELED" | "NEVER_ATTEMPTED" | "SCHEDULED" | "RECLAIMING" | "RECLAIMED")
-        def worker_updated_at: () -> ::Time
+        def definition: () -> Types::SessionActionDefinition
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_session_action-instance_method
       def get_session_action: (
                                 farm_id: ::String,
-                                job_id: ::String,
                                 queue_id: ::String,
+                                job_id: ::String,
                                 session_action_id: ::String
                               ) -> _GetSessionActionResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionActionResponseSuccess
 
       interface _GetSessionsStatisticsAggregationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionsStatisticsAggregationResponse]
-        def next_token: () -> ::String
         def statistics: () -> ::Array[Types::Statistics]
+        def next_token: () -> ::String
         def status: () -> ("IN_PROGRESS" | "TIMEOUT" | "FAILED" | "COMPLETED")
         def status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_sessions_statistics_aggregation-instance_method
       def get_sessions_statistics_aggregation: (
-                                                 aggregation_id: ::String,
                                                  farm_id: ::String,
+                                                 aggregation_id: ::String,
                                                  ?max_results: ::Integer,
                                                  ?next_token: ::String
                                                ) -> _GetSessionsStatisticsAggregationResponseSuccess
@@ -955,43 +955,43 @@ module Aws
 
       interface _GetStepResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStepResponse]
-        def created_at: () -> ::Time
-        def created_by: () -> ::String
-        def dependency_counts: () -> Types::DependencyCounts
-        def description: () -> ::String
-        def ended_at: () -> ::Time
+        def step_id: () -> ::String
+        def name: () -> ::String
         def lifecycle_status: () -> ("CREATE_COMPLETE" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_SUCCEEDED")
         def lifecycle_status_message: () -> ::String
-        def name: () -> ::String
-        def parameter_space: () -> Types::ParameterSpace
-        def required_capabilities: () -> Types::StepRequiredCapabilities
-        def started_at: () -> ::Time
-        def step_id: () -> ::String
-        def target_task_run_status: () -> ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
         def task_run_status: () -> ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
         def task_run_status_counts: () -> ::Hash[("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE"), ::Integer]
+        def target_task_run_status: () -> ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def dependency_counts: () -> Types::DependencyCounts
+        def required_capabilities: () -> Types::StepRequiredCapabilities
+        def parameter_space: () -> Types::ParameterSpace
+        def description: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_step-instance_method
       def get_step: (
                       farm_id: ::String,
-                      job_id: ::String,
                       queue_id: ::String,
+                      job_id: ::String,
                       step_id: ::String
                     ) -> _GetStepResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStepResponseSuccess
 
       interface _GetStorageProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageProfileResponse]
+        def storage_profile_id: () -> ::String
+        def display_name: () -> ::String
+        def os_family: () -> ("WINDOWS" | "LINUX" | "MACOS")
         def created_at: () -> ::Time
         def created_by: () -> ::String
-        def display_name: () -> ::String
-        def file_system_locations: () -> ::Array[Types::FileSystemLocation]
-        def os_family: () -> ("WINDOWS" | "LINUX" | "MACOS")
-        def storage_profile_id: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
+        def file_system_locations: () -> ::Array[Types::FileSystemLocation]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_storage_profile-instance_method
       def get_storage_profile: (
@@ -1002,10 +1002,10 @@ module Aws
 
       interface _GetStorageProfileForQueueResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageProfileForQueueResponse]
-        def display_name: () -> ::String
-        def file_system_locations: () -> ::Array[Types::FileSystemLocation]
-        def os_family: () -> ("WINDOWS" | "LINUX" | "MACOS")
         def storage_profile_id: () -> ::String
+        def display_name: () -> ::String
+        def os_family: () -> ("WINDOWS" | "LINUX" | "MACOS")
+        def file_system_locations: () -> ::Array[Types::FileSystemLocation]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_storage_profile_for_queue-instance_method
       def get_storage_profile_for_queue: (
@@ -1017,24 +1017,24 @@ module Aws
 
       interface _GetTaskResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTaskResponse]
+        def task_id: () -> ::String
         def created_at: () -> ::Time
         def created_by: () -> ::String
-        def ended_at: () -> ::Time
-        def failure_retry_count: () -> ::Integer
-        def latest_session_action_id: () -> ::String
-        def parameters: () -> ::Hash[::String, Types::TaskParameterValue]
         def run_status: () -> ("PENDING" | "READY" | "ASSIGNED" | "STARTING" | "SCHEDULED" | "INTERRUPTING" | "RUNNING" | "SUSPENDED" | "CANCELED" | "FAILED" | "SUCCEEDED" | "NOT_COMPATIBLE")
-        def started_at: () -> ::Time
         def target_run_status: () -> ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
-        def task_id: () -> ::String
+        def failure_retry_count: () -> ::Integer
+        def parameters: () -> ::Hash[::String, Types::TaskParameterValue]
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
+        def latest_session_action_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_task-instance_method
       def get_task: (
                       farm_id: ::String,
-                      job_id: ::String,
                       queue_id: ::String,
+                      job_id: ::String,
                       step_id: ::String,
                       task_id: ::String
                     ) -> _GetTaskResponseSuccess
@@ -1042,16 +1042,16 @@ module Aws
 
       interface _GetWorkerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkerResponse]
-        def created_at: () -> ::Time
-        def created_by: () -> ::String
+        def worker_id: () -> ::String
         def farm_id: () -> ::String
         def fleet_id: () -> ::String
         def host_properties: () -> Types::HostPropertiesResponse
-        def log: () -> Types::LogConfiguration
         def status: () -> ("CREATED" | "STARTED" | "STOPPING" | "STOPPED" | "NOT_RESPONDING" | "NOT_COMPATIBLE" | "RUNNING" | "IDLE")
+        def log: () -> Types::LogConfiguration
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
-        def worker_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#get_worker-instance_method
       def get_worker: (
@@ -1068,21 +1068,21 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_available_metered_products-instance_method
       def list_available_metered_products: (
-                                             ?max_results: ::Integer,
-                                             ?next_token: ::String
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
                                            ) -> _ListAvailableMeteredProductsResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableMeteredProductsResponseSuccess
 
       interface _ListBudgetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBudgetsResponse]
-        def budgets: () -> ::Array[Types::BudgetSummary]
         def next_token: () -> ::String
+        def budgets: () -> ::Array[Types::BudgetSummary]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_budgets-instance_method
       def list_budgets: (
+                          ?next_token: ::String,
                           farm_id: ::String,
                           ?max_results: ::Integer,
-                          ?next_token: ::String,
                           ?status: ("ACTIVE" | "INACTIVE")
                         ) -> _ListBudgetsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBudgetsResponseSuccess
@@ -1095,21 +1095,21 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_farm_members-instance_method
       def list_farm_members: (
                                farm_id: ::String,
-                               ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
                              ) -> _ListFarmMembersResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFarmMembersResponseSuccess
 
       interface _ListFarmsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFarmsResponse]
-        def farms: () -> ::Array[Types::FarmSummary]
         def next_token: () -> ::String
+        def farms: () -> ::Array[Types::FarmSummary]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_farms-instance_method
       def list_farms: (
-                        ?max_results: ::Integer,
                         ?next_token: ::String,
-                        ?principal_id: ::String
+                        ?principal_id: ::String,
+                        ?max_results: ::Integer
                       ) -> _ListFarmsResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFarmsResponseSuccess
 
@@ -1122,8 +1122,8 @@ module Aws
       def list_fleet_members: (
                                 farm_id: ::String,
                                 fleet_id: ::String,
-                                ?max_results: ::Integer,
-                                ?next_token: ::String
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
                               ) -> _ListFleetMembersResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFleetMembersResponseSuccess
 
@@ -1134,12 +1134,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_fleets-instance_method
       def list_fleets: (
-                         ?display_name: ::String,
                          farm_id: ::String,
-                         ?max_results: ::Integer,
-                         ?next_token: ::String,
                          ?principal_id: ::String,
-                         ?status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED")
+                         ?display_name: ::String,
+                         ?status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED"),
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
                        ) -> _ListFleetsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFleetsResponseSuccess
 
@@ -1151,10 +1151,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_job_members-instance_method
       def list_job_members: (
                               farm_id: ::String,
+                              queue_id: ::String,
                               job_id: ::String,
-                              ?max_results: ::Integer,
                               ?next_token: ::String,
-                              queue_id: ::String
+                              ?max_results: ::Integer
                             ) -> _ListJobMembersResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobMembersResponseSuccess
 
@@ -1166,10 +1166,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_jobs-instance_method
       def list_jobs: (
                        farm_id: ::String,
-                       ?max_results: ::Integer,
-                       ?next_token: ::String,
                        ?principal_id: ::String,
-                       queue_id: ::String
+                       queue_id: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
                      ) -> _ListJobsResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
 
@@ -1180,8 +1180,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_license_endpoints-instance_method
       def list_license_endpoints: (
-                                    ?max_results: ::Integer,
-                                    ?next_token: ::String
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
                                   ) -> _ListLicenseEndpointsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseEndpointsResponseSuccess
 
@@ -1193,20 +1193,20 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_metered_products-instance_method
       def list_metered_products: (
                                    license_endpoint_id: ::String,
-                                   ?max_results: ::Integer,
-                                   ?next_token: ::String
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
                                  ) -> _ListMeteredProductsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMeteredProductsResponseSuccess
 
       interface _ListMonitorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMonitorsResponse]
-        def monitors: () -> ::Array[Types::MonitorSummary]
         def next_token: () -> ::String
+        def monitors: () -> ::Array[Types::MonitorSummary]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_monitors-instance_method
       def list_monitors: (
-                           ?max_results: ::Integer,
-                           ?next_token: ::String
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
                          ) -> _ListMonitorsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitorsResponseSuccess
 
@@ -1218,24 +1218,24 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_queue_environments-instance_method
       def list_queue_environments: (
                                      farm_id: ::String,
-                                     ?max_results: ::Integer,
+                                     queue_id: ::String,
                                      ?next_token: ::String,
-                                     queue_id: ::String
+                                     ?max_results: ::Integer
                                    ) -> _ListQueueEnvironmentsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueueEnvironmentsResponseSuccess
 
       interface _ListQueueFleetAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListQueueFleetAssociationsResponse]
-        def next_token: () -> ::String
         def queue_fleet_associations: () -> ::Array[Types::QueueFleetAssociationSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_queue_fleet_associations-instance_method
       def list_queue_fleet_associations: (
                                            farm_id: ::String,
+                                           ?queue_id: ::String,
                                            ?fleet_id: ::String,
-                                           ?max_results: ::Integer,
                                            ?next_token: ::String,
-                                           ?queue_id: ::String
+                                           ?max_results: ::Integer
                                          ) -> _ListQueueFleetAssociationsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueueFleetAssociationsResponseSuccess
 
@@ -1247,71 +1247,71 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_queue_members-instance_method
       def list_queue_members: (
                                 farm_id: ::String,
-                                ?max_results: ::Integer,
+                                queue_id: ::String,
                                 ?next_token: ::String,
-                                queue_id: ::String
+                                ?max_results: ::Integer
                               ) -> _ListQueueMembersResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueueMembersResponseSuccess
 
       interface _ListQueuesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListQueuesResponse]
-        def next_token: () -> ::String
         def queues: () -> ::Array[Types::QueueSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_queues-instance_method
       def list_queues: (
                          farm_id: ::String,
-                         ?max_results: ::Integer,
-                         ?next_token: ::String,
                          ?principal_id: ::String,
-                         ?status: ("IDLE" | "SCHEDULING" | "SCHEDULING_BLOCKED")
+                         ?status: ("IDLE" | "SCHEDULING" | "SCHEDULING_BLOCKED"),
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
                        ) -> _ListQueuesResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueuesResponseSuccess
 
       interface _ListSessionActionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionActionsResponse]
-        def next_token: () -> ::String
         def session_actions: () -> ::Array[Types::SessionActionSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_session_actions-instance_method
       def list_session_actions: (
                                   farm_id: ::String,
-                                  job_id: ::String,
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String,
                                   queue_id: ::String,
+                                  job_id: ::String,
                                   ?session_id: ::String,
-                                  ?task_id: ::String
+                                  ?task_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
                                 ) -> _ListSessionActionsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionActionsResponseSuccess
 
       interface _ListSessionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
-        def next_token: () -> ::String
         def sessions: () -> ::Array[Types::SessionSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_sessions-instance_method
       def list_sessions: (
                            farm_id: ::String,
+                           queue_id: ::String,
                            job_id: ::String,
-                           ?max_results: ::Integer,
                            ?next_token: ::String,
-                           queue_id: ::String
+                           ?max_results: ::Integer
                          ) -> _ListSessionsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
 
       interface _ListSessionsForWorkerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsForWorkerResponse]
-        def next_token: () -> ::String
         def sessions: () -> ::Array[Types::WorkerSessionSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_sessions_for_worker-instance_method
       def list_sessions_for_worker: (
                                       farm_id: ::String,
                                       fleet_id: ::String,
-                                      ?max_results: ::Integer,
+                                      worker_id: ::String,
                                       ?next_token: ::String,
-                                      worker_id: ::String
+                                      ?max_results: ::Integer
                                     ) -> _ListSessionsForWorkerResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsForWorkerResponseSuccess
 
@@ -1323,11 +1323,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_step_consumers-instance_method
       def list_step_consumers: (
                                  farm_id: ::String,
-                                 job_id: ::String,
-                                 ?max_results: ::Integer,
-                                 ?next_token: ::String,
                                  queue_id: ::String,
-                                 step_id: ::String
+                                 job_id: ::String,
+                                 step_id: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
                                ) -> _ListStepConsumersResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStepConsumersResponseSuccess
 
@@ -1339,53 +1339,53 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_step_dependencies-instance_method
       def list_step_dependencies: (
                                     farm_id: ::String,
-                                    job_id: ::String,
-                                    ?max_results: ::Integer,
-                                    ?next_token: ::String,
                                     queue_id: ::String,
-                                    step_id: ::String
+                                    job_id: ::String,
+                                    step_id: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
                                   ) -> _ListStepDependenciesResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStepDependenciesResponseSuccess
 
       interface _ListStepsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStepsResponse]
-        def next_token: () -> ::String
         def steps: () -> ::Array[Types::StepSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_steps-instance_method
       def list_steps: (
                         farm_id: ::String,
+                        queue_id: ::String,
                         job_id: ::String,
-                        ?max_results: ::Integer,
                         ?next_token: ::String,
-                        queue_id: ::String
+                        ?max_results: ::Integer
                       ) -> _ListStepsResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStepsResponseSuccess
 
       interface _ListStorageProfilesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageProfilesResponse]
-        def next_token: () -> ::String
         def storage_profiles: () -> ::Array[Types::StorageProfileSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_storage_profiles-instance_method
       def list_storage_profiles: (
                                    farm_id: ::String,
-                                   ?max_results: ::Integer,
-                                   ?next_token: ::String
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
                                  ) -> _ListStorageProfilesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageProfilesResponseSuccess
 
       interface _ListStorageProfilesForQueueResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageProfilesForQueueResponse]
-        def next_token: () -> ::String
         def storage_profiles: () -> ::Array[Types::StorageProfileSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_storage_profiles_for_queue-instance_method
       def list_storage_profiles_for_queue: (
                                              farm_id: ::String,
-                                             ?max_results: ::Integer,
+                                             queue_id: ::String,
                                              ?next_token: ::String,
-                                             queue_id: ::String
+                                             ?max_results: ::Integer
                                            ) -> _ListStorageProfilesForQueueResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageProfilesForQueueResponseSuccess
 
@@ -1401,17 +1401,17 @@ module Aws
 
       interface _ListTasksResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTasksResponse]
-        def next_token: () -> ::String
         def tasks: () -> ::Array[Types::TaskSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#list_tasks-instance_method
       def list_tasks: (
                         farm_id: ::String,
-                        job_id: ::String,
-                        ?max_results: ::Integer,
-                        ?next_token: ::String,
                         queue_id: ::String,
-                        step_id: ::String
+                        job_id: ::String,
+                        step_id: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
                       ) -> _ListTasksResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTasksResponseSuccess
 
@@ -1424,8 +1424,8 @@ module Aws
       def list_workers: (
                           farm_id: ::String,
                           fleet_id: ::String,
-                          ?max_results: ::Integer,
-                          ?next_token: ::String
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
                         ) -> _ListWorkersResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkersResponseSuccess
 
@@ -1448,15 +1448,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#search_jobs-instance_method
       def search_jobs: (
                          farm_id: ::String,
+                         queue_ids: Array[::String],
                          ?filter_expressions: {
                            filters: Array[
                              {
                                date_time_filter: {
-                                 date_time: ::Time,
                                  name: ::String,
-                                 operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN")
+                                 operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
+                                 date_time: ::Time
                                }?,
-                               group_filter: untyped?,
                                parameter_filter: {
                                  name: ::String,
                                  operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
@@ -1469,50 +1469,51 @@ module Aws
                                  name: ::String,
                                  operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
                                  value: ::String
-                               }?
+                               }?,
+                               group_filter: untyped?
                              },
                            ],
                            operator: ("AND" | "OR")
                          },
-                         item_offset: ::Integer,
-                         ?page_size: ::Integer,
-                         queue_ids: Array[::String],
                          ?sort_expressions: Array[
                            {
-                             field_sort: {
-                               name: ::String,
-                               sort_order: ("ASCENDING" | "DESCENDING")
-                             }?,
-                             parameter_sort: {
-                               name: ::String,
-                               sort_order: ("ASCENDING" | "DESCENDING")
-                             }?,
                              user_jobs_first: {
                                user_identity_id: ::String
+                             }?,
+                             field_sort: {
+                               sort_order: ("ASCENDING" | "DESCENDING"),
+                               name: ::String
+                             }?,
+                             parameter_sort: {
+                               sort_order: ("ASCENDING" | "DESCENDING"),
+                               name: ::String
                              }?
                            },
-                         ]
+                         ],
+                         item_offset: ::Integer,
+                         ?page_size: ::Integer
                        ) -> _SearchJobsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchJobsResponseSuccess
 
       interface _SearchStepsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchStepsResponse]
-        def next_item_offset: () -> ::Integer
         def steps: () -> ::Array[Types::StepSearchSummary]
+        def next_item_offset: () -> ::Integer
         def total_results: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#search_steps-instance_method
       def search_steps: (
                           farm_id: ::String,
+                          queue_ids: Array[::String],
+                          ?job_id: ::String,
                           ?filter_expressions: {
                             filters: Array[
                               {
                                 date_time_filter: {
-                                  date_time: ::Time,
                                   name: ::String,
-                                  operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN")
+                                  operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
+                                  date_time: ::Time
                                 }?,
-                                group_filter: untyped?,
                                 parameter_filter: {
                                   name: ::String,
                                   operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
@@ -1525,51 +1526,51 @@ module Aws
                                   name: ::String,
                                   operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
                                   value: ::String
-                                }?
+                                }?,
+                                group_filter: untyped?
                               },
                             ],
                             operator: ("AND" | "OR")
                           },
-                          item_offset: ::Integer,
-                          ?job_id: ::String,
-                          ?page_size: ::Integer,
-                          queue_ids: Array[::String],
                           ?sort_expressions: Array[
                             {
-                              field_sort: {
-                                name: ::String,
-                                sort_order: ("ASCENDING" | "DESCENDING")
-                              }?,
-                              parameter_sort: {
-                                name: ::String,
-                                sort_order: ("ASCENDING" | "DESCENDING")
-                              }?,
                               user_jobs_first: {
                                 user_identity_id: ::String
+                              }?,
+                              field_sort: {
+                                sort_order: ("ASCENDING" | "DESCENDING"),
+                                name: ::String
+                              }?,
+                              parameter_sort: {
+                                sort_order: ("ASCENDING" | "DESCENDING"),
+                                name: ::String
                               }?
                             },
-                          ]
+                          ],
+                          item_offset: ::Integer,
+                          ?page_size: ::Integer
                         ) -> _SearchStepsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchStepsResponseSuccess
 
       interface _SearchTasksResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchTasksResponse]
-        def next_item_offset: () -> ::Integer
         def tasks: () -> ::Array[Types::TaskSearchSummary]
+        def next_item_offset: () -> ::Integer
         def total_results: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#search_tasks-instance_method
       def search_tasks: (
                           farm_id: ::String,
+                          queue_ids: Array[::String],
+                          ?job_id: ::String,
                           ?filter_expressions: {
                             filters: Array[
                               {
                                 date_time_filter: {
-                                  date_time: ::Time,
                                   name: ::String,
-                                  operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN")
+                                  operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
+                                  date_time: ::Time
                                 }?,
-                                group_filter: untyped?,
                                 parameter_filter: {
                                   name: ::String,
                                   operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
@@ -1582,51 +1583,50 @@ module Aws
                                   name: ::String,
                                   operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
                                   value: ::String
-                                }?
+                                }?,
+                                group_filter: untyped?
                               },
                             ],
                             operator: ("AND" | "OR")
                           },
-                          item_offset: ::Integer,
-                          ?job_id: ::String,
-                          ?page_size: ::Integer,
-                          queue_ids: Array[::String],
                           ?sort_expressions: Array[
                             {
-                              field_sort: {
-                                name: ::String,
-                                sort_order: ("ASCENDING" | "DESCENDING")
-                              }?,
-                              parameter_sort: {
-                                name: ::String,
-                                sort_order: ("ASCENDING" | "DESCENDING")
-                              }?,
                               user_jobs_first: {
                                 user_identity_id: ::String
+                              }?,
+                              field_sort: {
+                                sort_order: ("ASCENDING" | "DESCENDING"),
+                                name: ::String
+                              }?,
+                              parameter_sort: {
+                                sort_order: ("ASCENDING" | "DESCENDING"),
+                                name: ::String
                               }?
                             },
-                          ]
+                          ],
+                          item_offset: ::Integer,
+                          ?page_size: ::Integer
                         ) -> _SearchTasksResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTasksResponseSuccess
 
       interface _SearchWorkersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchWorkersResponse]
+        def workers: () -> ::Array[Types::WorkerSearchSummary]
         def next_item_offset: () -> ::Integer
         def total_results: () -> ::Integer
-        def workers: () -> ::Array[Types::WorkerSearchSummary]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#search_workers-instance_method
       def search_workers: (
                             farm_id: ::String,
+                            fleet_ids: Array[::String],
                             ?filter_expressions: {
                               filters: Array[
                                 {
                                   date_time_filter: {
-                                    date_time: ::Time,
                                     name: ::String,
-                                    operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN")
+                                    operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
+                                    date_time: ::Time
                                   }?,
-                                  group_filter: untyped?,
                                   parameter_filter: {
                                     name: ::String,
                                     operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
@@ -1639,29 +1639,29 @@ module Aws
                                     name: ::String,
                                     operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN"),
                                     value: ::String
-                                  }?
+                                  }?,
+                                  group_filter: untyped?
                                 },
                               ],
                               operator: ("AND" | "OR")
                             },
-                            fleet_ids: Array[::String],
-                            item_offset: ::Integer,
-                            ?page_size: ::Integer,
                             ?sort_expressions: Array[
                               {
-                                field_sort: {
-                                  name: ::String,
-                                  sort_order: ("ASCENDING" | "DESCENDING")
-                                }?,
-                                parameter_sort: {
-                                  name: ::String,
-                                  sort_order: ("ASCENDING" | "DESCENDING")
-                                }?,
                                 user_jobs_first: {
                                   user_identity_id: ::String
+                                }?,
+                                field_sort: {
+                                  sort_order: ("ASCENDING" | "DESCENDING"),
+                                  name: ::String
+                                }?,
+                                parameter_sort: {
+                                  sort_order: ("ASCENDING" | "DESCENDING"),
+                                  name: ::String
                                 }?
                               },
-                            ]
+                            ],
+                            item_offset: ::Integer,
+                            ?page_size: ::Integer
                           ) -> _SearchWorkersResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchWorkersResponseSuccess
 
@@ -1671,17 +1671,17 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#start_sessions_statistics_aggregation-instance_method
       def start_sessions_statistics_aggregation: (
-                                                   end_time: ::Time,
                                                    farm_id: ::String,
-                                                   group_by: Array[("QUEUE_ID" | "FLEET_ID" | "JOB_ID" | "USER_ID" | "USAGE_TYPE" | "INSTANCE_TYPE" | "LICENSE_PRODUCT")],
-                                                   ?period: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY"),
                                                    resource_ids: {
-                                                     fleet_ids: Array[::String]?,
-                                                     queue_ids: Array[::String]?
+                                                     queue_ids: Array[::String]?,
+                                                     fleet_ids: Array[::String]?
                                                    },
                                                    start_time: ::Time,
-                                                   statistics: Array[("SUM" | "MIN" | "MAX" | "AVG")],
-                                                   ?timezone: ::String
+                                                   end_time: ::Time,
+                                                   ?timezone: ::String,
+                                                   ?period: ("HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY"),
+                                                   group_by: Array[("QUEUE_ID" | "FLEET_ID" | "JOB_ID" | "USER_ID" | "USAGE_TYPE" | "INSTANCE_TYPE" | "LICENSE_PRODUCT")],
+                                                   statistics: Array[("SUM" | "MIN" | "MAX" | "AVG")]
                                                  ) -> _StartSessionsStatisticsAggregationResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSessionsStatisticsAggregationResponseSuccess
 
@@ -1710,32 +1710,32 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_budget-instance_method
       def update_budget: (
+                           ?client_token: ::String,
+                           farm_id: ::String,
+                           budget_id: ::String,
+                           ?display_name: ::String,
+                           ?description: ::String,
+                           ?status: ("ACTIVE" | "INACTIVE"),
+                           ?approximate_dollar_limit: ::Float,
                            ?actions_to_add: Array[
                              {
-                               description: ::String?,
+                               type: ("STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS"),
                                threshold_percentage: ::Float,
-                               type: ("STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS")
+                               description: ::String?
                              },
                            ],
                            ?actions_to_remove: Array[
                              {
-                               threshold_percentage: ::Float,
-                               type: ("STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS")
+                               type: ("STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS"),
+                               threshold_percentage: ::Float
                              },
                            ],
-                           ?approximate_dollar_limit: ::Float,
-                           budget_id: ::String,
-                           ?client_token: ::String,
-                           ?description: ::String,
-                           ?display_name: ::String,
-                           farm_id: ::String,
                            ?schedule: {
                              fixed: {
-                               end_time: ::Time,
-                               start_time: ::Time
+                               start_time: ::Time,
+                               end_time: ::Time
                              }?
-                           },
-                           ?status: ("ACTIVE" | "INACTIVE")
+                           }
                          ) -> _UpdateBudgetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBudgetResponseSuccess
 
@@ -1744,9 +1744,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_farm-instance_method
       def update_farm: (
-                         ?description: ::String,
+                         farm_id: ::String,
                          ?display_name: ::String,
-                         farm_id: ::String
+                         ?description: ::String
                        ) -> _UpdateFarmResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFarmResponseSuccess
 
@@ -1756,26 +1756,41 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_fleet-instance_method
       def update_fleet: (
                           ?client_token: ::String,
+                          farm_id: ::String,
+                          fleet_id: ::String,
+                          ?display_name: ::String,
+                          ?description: ::String,
+                          ?role_arn: ::String,
+                          ?min_worker_count: ::Integer,
+                          ?max_worker_count: ::Integer,
                           ?configuration: {
                             customer_managed: {
                               mode: ("NO_SCALING" | "EVENT_BASED_AUTO_SCALING"),
-                              storage_profile_id: ::String?,
                               worker_capabilities: {
+                                v_cpu_count: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                memory_mi_b: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                accelerator_types: Array[("gpu")]?,
                                 accelerator_count: {
-                                  max: ::Integer?,
-                                  min: ::Integer
+                                  min: ::Integer,
+                                  max: ::Integer?
                                 }?,
                                 accelerator_total_memory_mi_b: {
-                                  max: ::Integer?,
-                                  min: ::Integer
+                                  min: ::Integer,
+                                  max: ::Integer?
                                 }?,
-                                accelerator_types: Array[("gpu")]?,
+                                os_family: ("WINDOWS" | "LINUX" | "MACOS"),
                                 cpu_architecture_type: ("x86_64" | "arm64"),
                                 custom_amounts: Array[
                                   {
-                                    max: ::Float?,
+                                    name: ::String,
                                     min: ::Float,
-                                    name: ::String
+                                    max: ::Float?
                                   },
                                 ]?,
                                 custom_attributes: Array[
@@ -1783,27 +1798,34 @@ module Aws
                                     name: ::String,
                                     values: Array[::String]
                                   },
-                                ]?,
-                                memory_mi_b: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                },
-                                os_family: ("WINDOWS" | "LINUX" | "MACOS"),
-                                v_cpu_count: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                }
-                              }
+                                ]?
+                              },
+                              storage_profile_id: ::String?
                             }?,
                             service_managed_ec2: {
                               instance_capabilities: {
-                                allowed_instance_types: Array[::String]?,
+                                v_cpu_count: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                memory_mi_b: {
+                                  min: ::Integer,
+                                  max: ::Integer?
+                                },
+                                os_family: ("WINDOWS" | "LINUX"),
                                 cpu_architecture_type: ("x86_64" | "arm64"),
+                                root_ebs_volume: {
+                                  size_gi_b: ::Integer?,
+                                  iops: ::Integer?,
+                                  throughput_mi_b: ::Integer?
+                                }?,
+                                allowed_instance_types: Array[::String]?,
+                                excluded_instance_types: Array[::String]?,
                                 custom_amounts: Array[
                                   {
-                                    max: ::Float?,
+                                    name: ::String,
                                     min: ::Float,
-                                    name: ::String
+                                    max: ::Float?
                                   },
                                 ]?,
                                 custom_attributes: Array[
@@ -1811,35 +1833,13 @@ module Aws
                                     name: ::String,
                                     values: Array[::String]
                                   },
-                                ]?,
-                                excluded_instance_types: Array[::String]?,
-                                memory_mi_b: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                },
-                                os_family: ("WINDOWS" | "LINUX"),
-                                root_ebs_volume: {
-                                  iops: ::Integer?,
-                                  size_gi_b: ::Integer?,
-                                  throughput_mi_b: ::Integer?
-                                }?,
-                                v_cpu_count: {
-                                  max: ::Integer?,
-                                  min: ::Integer
-                                }
+                                ]?
                               },
                               instance_market_options: {
                                 type: ("on-demand" | "spot")
                               }
                             }?
-                          },
-                          ?description: ::String,
-                          ?display_name: ::String,
-                          farm_id: ::String,
-                          fleet_id: ::String,
-                          ?max_worker_count: ::Integer,
-                          ?min_worker_count: ::Integer,
-                          ?role_arn: ::String
+                          }
                         ) -> _UpdateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
 
@@ -1850,13 +1850,13 @@ module Aws
       def update_job: (
                         ?client_token: ::String,
                         farm_id: ::String,
+                        queue_id: ::String,
                         job_id: ::String,
-                        ?lifecycle_status: ("ARCHIVED"),
+                        ?target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING"),
+                        ?priority: ::Integer,
                         ?max_failed_tasks_count: ::Integer,
                         ?max_retries_per_task: ::Integer,
-                        ?priority: ::Integer,
-                        queue_id: ::String,
-                        ?target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
+                        ?lifecycle_status: ("ARCHIVED")
                       ) -> _UpdateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobResponseSuccess
 
@@ -1865,10 +1865,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_monitor-instance_method
       def update_monitor: (
-                            ?display_name: ::String,
                             monitor_id: ::String,
-                            ?role_arn: ::String,
-                            ?subdomain: ::String
+                            ?subdomain: ::String,
+                            ?display_name: ::String,
+                            ?role_arn: ::String
                           ) -> _UpdateMonitorResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMonitorResponseSuccess
 
@@ -1877,32 +1877,32 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_queue-instance_method
       def update_queue: (
-                          ?allowed_storage_profile_ids_to_add: Array[::String],
-                          ?allowed_storage_profile_ids_to_remove: Array[::String],
                           ?client_token: ::String,
-                          ?default_budget_action: ("NONE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS"),
-                          ?description: ::String,
-                          ?display_name: ::String,
                           farm_id: ::String,
+                          queue_id: ::String,
+                          ?display_name: ::String,
+                          ?description: ::String,
+                          ?default_budget_action: ("NONE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS"),
                           ?job_attachment_settings: {
-                            root_prefix: ::String,
-                            s3_bucket_name: ::String
+                            s3_bucket_name: ::String,
+                            root_prefix: ::String
                           },
+                          ?role_arn: ::String,
                           ?job_run_as_user: {
                             posix: {
-                              group: ::String,
-                              user: ::String
+                              user: ::String,
+                              group: ::String
                             }?,
-                            run_as: ("QUEUE_CONFIGURED_USER" | "WORKER_AGENT_USER"),
                             windows: {
-                              password_arn: ::String,
-                              user: ::String
-                            }?
+                              user: ::String,
+                              password_arn: ::String
+                            }?,
+                            run_as: ("QUEUE_CONFIGURED_USER" | "WORKER_AGENT_USER")
                           },
-                          queue_id: ::String,
                           ?required_file_system_location_names_to_add: Array[::String],
                           ?required_file_system_location_names_to_remove: Array[::String],
-                          ?role_arn: ::String
+                          ?allowed_storage_profile_ids_to_add: Array[::String],
+                          ?allowed_storage_profile_ids_to_remove: Array[::String]
                         ) -> _UpdateQueueResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueResponseSuccess
 
@@ -1913,11 +1913,11 @@ module Aws
       def update_queue_environment: (
                                       ?client_token: ::String,
                                       farm_id: ::String,
-                                      ?priority: ::Integer,
-                                      queue_environment_id: ::String,
                                       queue_id: ::String,
-                                      ?template: ::String,
-                                      ?template_type: ("JSON" | "YAML")
+                                      queue_environment_id: ::String,
+                                      ?priority: ::Integer,
+                                      ?template_type: ("JSON" | "YAML"),
+                                      ?template: ::String
                                     ) -> _UpdateQueueEnvironmentResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueEnvironmentResponseSuccess
 
@@ -1927,8 +1927,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_queue_fleet_association-instance_method
       def update_queue_fleet_association: (
                                             farm_id: ::String,
-                                            fleet_id: ::String,
                                             queue_id: ::String,
+                                            fleet_id: ::String,
                                             status: ("ACTIVE" | "STOP_SCHEDULING_AND_COMPLETE_TASKS" | "STOP_SCHEDULING_AND_CANCEL_TASKS")
                                           ) -> _UpdateQueueFleetAssociationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueFleetAssociationResponseSuccess
@@ -1940,8 +1940,8 @@ module Aws
       def update_session: (
                             ?client_token: ::String,
                             farm_id: ::String,
-                            job_id: ::String,
                             queue_id: ::String,
+                            job_id: ::String,
                             session_id: ::String,
                             target_lifecycle_status: ("ENDED")
                           ) -> _UpdateSessionResponseSuccess
@@ -1954,8 +1954,8 @@ module Aws
       def update_step: (
                          ?client_token: ::String,
                          farm_id: ::String,
-                         job_id: ::String,
                          queue_id: ::String,
+                         job_id: ::String,
                          step_id: ::String,
                          target_task_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
                        ) -> _UpdateStepResponseSuccess
@@ -1967,8 +1967,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_storage_profile-instance_method
       def update_storage_profile: (
                                     ?client_token: ::String,
-                                    ?display_name: ::String,
                                     farm_id: ::String,
+                                    storage_profile_id: ::String,
+                                    ?display_name: ::String,
+                                    ?os_family: ("WINDOWS" | "LINUX" | "MACOS"),
                                     ?file_system_locations_to_add: Array[
                                       {
                                         name: ::String,
@@ -1982,9 +1984,7 @@ module Aws
                                         path: ::String,
                                         type: ("SHARED" | "LOCAL")
                                       },
-                                    ],
-                                    ?os_family: ("WINDOWS" | "LINUX" | "MACOS"),
-                                    storage_profile_id: ::String
+                                    ]
                                   ) -> _UpdateStorageProfileResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageProfileResponseSuccess
 
@@ -1995,11 +1995,11 @@ module Aws
       def update_task: (
                          ?client_token: ::String,
                          farm_id: ::String,
-                         job_id: ::String,
                          queue_id: ::String,
+                         job_id: ::String,
                          step_id: ::String,
-                         target_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING"),
-                         task_id: ::String
+                         task_id: ::String,
+                         target_run_status: ("READY" | "FAILED" | "SUCCEEDED" | "CANCELED" | "SUSPENDED" | "PENDING")
                        ) -> _UpdateTaskResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskResponseSuccess
 
@@ -2009,6 +2009,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Deadline/Client.html#update_worker-instance_method
       def update_worker: (
+                           farm_id: ::String,
+                           fleet_id: ::String,
+                           worker_id: ::String,
+                           ?status: ("STARTED" | "STOPPING" | "STOPPED"),
                            ?capabilities: {
                              amounts: Array[
                                {
@@ -2023,17 +2027,13 @@ module Aws
                                },
                              ]
                            },
-                           farm_id: ::String,
-                           fleet_id: ::String,
                            ?host_properties: {
-                             host_name: ::String?,
                              ip_addresses: {
                                ip_v4_addresses: Array[::String]?,
                                ip_v6_addresses: Array[::String]?
-                             }?
-                           },
-                           ?status: ("STARTED" | "STOPPING" | "STOPPED"),
-                           worker_id: ::String
+                             }?,
+                             host_name: ::String?
+                           }
                          ) -> _UpdateWorkerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkerResponseSuccess
 
@@ -2048,16 +2048,16 @@ module Aws
       def update_worker_schedule: (
                                     farm_id: ::String,
                                     fleet_id: ::String,
+                                    worker_id: ::String,
                                     ?updated_session_actions: Hash[::String, {
                                         completed_status: ("SUCCEEDED" | "FAILED" | "INTERRUPTED" | "CANCELED" | "NEVER_ATTEMPTED")?,
-                                        ended_at: ::Time?,
                                         process_exit_code: ::Integer?,
                                         progress_message: ::String?,
-                                        progress_percent: ::Float?,
                                         started_at: ::Time?,
-                                        updated_at: ::Time?
-                                      }],
-                                    worker_id: ::String
+                                        ended_at: ::Time?,
+                                        updated_at: ::Time?,
+                                        progress_percent: ::Float?
+                                      }]
                                   ) -> _UpdateWorkerScheduleResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkerScheduleResponseSuccess
 
@@ -2083,8 +2083,8 @@ module Aws
                     | (:license_endpoint_valid waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLicenseEndpointResponseSuccess
                     | (:queue_fleet_association_stopped waiter_name, 
                     farm_id: ::String,
-                    fleet_id: ::String,
-                    queue_id: ::String
+                    queue_id: ::String,
+                    fleet_id: ::String
                   ) -> Client::_GetQueueFleetAssociationResponseSuccess
                     | (:queue_fleet_association_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetQueueFleetAssociationResponseSuccess
                     | (:queue_scheduling waiter_name, 

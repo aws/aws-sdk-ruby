@@ -110,6 +110,8 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::GetFunctionConfiguration.build(context)
           when :get_function_event_invoke_config
             Aws::Lambda::Endpoints::GetFunctionEventInvokeConfig.build(context)
+          when :get_function_recursion_config
+            Aws::Lambda::Endpoints::GetFunctionRecursionConfig.build(context)
           when :get_function_url_config
             Aws::Lambda::Endpoints::GetFunctionUrlConfig.build(context)
           when :get_layer_version
@@ -164,6 +166,8 @@ module Aws::Lambda
             Aws::Lambda::Endpoints::PutFunctionConcurrency.build(context)
           when :put_function_event_invoke_config
             Aws::Lambda::Endpoints::PutFunctionEventInvokeConfig.build(context)
+          when :put_function_recursion_config
+            Aws::Lambda::Endpoints::PutFunctionRecursionConfig.build(context)
           when :put_provisioned_concurrency_config
             Aws::Lambda::Endpoints::PutProvisionedConcurrencyConfig.build(context)
           when :put_runtime_management_config

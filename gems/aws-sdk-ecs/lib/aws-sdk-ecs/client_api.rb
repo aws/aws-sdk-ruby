@@ -76,6 +76,7 @@ module Aws::ECS
     ContainerInstances = Shapes::ListShape.new(name: 'ContainerInstances')
     ContainerOverride = Shapes::StructureShape.new(name: 'ContainerOverride')
     ContainerOverrides = Shapes::ListShape.new(name: 'ContainerOverrides')
+    ContainerRestartPolicy = Shapes::StructureShape.new(name: 'ContainerRestartPolicy')
     ContainerStateChange = Shapes::StructureShape.new(name: 'ContainerStateChange')
     ContainerStateChanges = Shapes::ListShape.new(name: 'ContainerStateChanges')
     Containers = Shapes::ListShape.new(name: 'Containers')
@@ -185,6 +186,7 @@ module Aws::ECS
     InstanceHealthCheckState = Shapes::StringShape.new(name: 'InstanceHealthCheckState')
     InstanceHealthCheckType = Shapes::StringShape.new(name: 'InstanceHealthCheckType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerList = Shapes::ListShape.new(name: 'IntegerList')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     IpcMode = Shapes::StringShape.new(name: 'IpcMode')
     KernelCapabilities = Shapes::StructureShape.new(name: 'KernelCapabilities')
@@ -562,6 +564,7 @@ module Aws::ECS
     ContainerDefinition.add_member(:links, Shapes::ShapeRef.new(shape: StringList, location_name: "links"))
     ContainerDefinition.add_member(:port_mappings, Shapes::ShapeRef.new(shape: PortMappingList, location_name: "portMappings"))
     ContainerDefinition.add_member(:essential, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "essential"))
+    ContainerDefinition.add_member(:restart_policy, Shapes::ShapeRef.new(shape: ContainerRestartPolicy, location_name: "restartPolicy"))
     ContainerDefinition.add_member(:entry_point, Shapes::ShapeRef.new(shape: StringList, location_name: "entryPoint"))
     ContainerDefinition.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
@@ -642,6 +645,11 @@ module Aws::ECS
     ContainerOverride.struct_class = Types::ContainerOverride
 
     ContainerOverrides.member = Shapes::ShapeRef.new(shape: ContainerOverride)
+
+    ContainerRestartPolicy.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "enabled"))
+    ContainerRestartPolicy.add_member(:ignored_exit_codes, Shapes::ShapeRef.new(shape: IntegerList, location_name: "ignoredExitCodes"))
+    ContainerRestartPolicy.add_member(:restart_attempt_period, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "restartAttemptPeriod"))
+    ContainerRestartPolicy.struct_class = Types::ContainerRestartPolicy
 
     ContainerStateChange.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
     ContainerStateChange.add_member(:image_digest, Shapes::ShapeRef.new(shape: String, location_name: "imageDigest"))
@@ -1048,6 +1056,8 @@ module Aws::ECS
     InstanceHealthCheckResult.struct_class = Types::InstanceHealthCheckResult
 
     InstanceHealthCheckResultList.member = Shapes::ShapeRef.new(shape: InstanceHealthCheckResult)
+
+    IntegerList.member = Shapes::ShapeRef.new(shape: BoxedInteger)
 
     InvalidParameterException.struct_class = Types::InvalidParameterException
 

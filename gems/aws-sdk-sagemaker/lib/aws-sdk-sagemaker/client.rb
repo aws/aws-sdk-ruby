@@ -21854,6 +21854,8 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.clarify_check.register_new_baseline #=> Boolean
     #   resp.pipeline_execution_steps[0].metadata.fail.error_message #=> String
     #   resp.pipeline_execution_steps[0].metadata.auto_ml_job.arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.endpoint.arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.endpoint_config.arn #=> String
     #   resp.pipeline_execution_steps[0].attempt_count #=> Integer
     #   resp.pipeline_execution_steps[0].selective_execution_result.source_pipeline_execution_arn #=> String
     #   resp.next_token #=> String
@@ -27589,7 +27591,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.256.0'
+      context[:gem_version] = '1.257.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

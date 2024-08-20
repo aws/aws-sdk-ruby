@@ -1749,7 +1749,7 @@ module Aws::ECS
     #
     #  </note>
     #
-    # For information about the maximum number of task sets and otther
+    # For information about the maximum number of task sets and other
     # quotas, see [Amazon ECS service quotas][2] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
@@ -2596,6 +2596,10 @@ module Aws::ECS
     #   resp.task_definitions[0].container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
     #   resp.task_definitions[0].container_definitions[0].port_mappings[0].container_port_range #=> String
     #   resp.task_definitions[0].container_definitions[0].essential #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].restart_policy.enabled #=> Boolean
+    #   resp.task_definitions[0].container_definitions[0].restart_policy.ignored_exit_codes #=> Array
+    #   resp.task_definitions[0].container_definitions[0].restart_policy.ignored_exit_codes[0] #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].restart_policy.restart_attempt_period #=> Integer
     #   resp.task_definitions[0].container_definitions[0].entry_point #=> Array
     #   resp.task_definitions[0].container_definitions[0].entry_point[0] #=> String
     #   resp.task_definitions[0].container_definitions[0].command #=> Array
@@ -3053,6 +3057,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
     #   resp.task_definition.container_definitions[0].port_mappings[0].container_port_range #=> String
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
+    #   resp.task_definition.container_definitions[0].restart_policy.enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].restart_policy.ignored_exit_codes #=> Array
+    #   resp.task_definition.container_definitions[0].restart_policy.ignored_exit_codes[0] #=> Integer
+    #   resp.task_definition.container_definitions[0].restart_policy.restart_attempt_period #=> Integer
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
     #   resp.task_definition.container_definitions[0].command #=> Array
@@ -3999,6 +4007,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
     #   resp.task_definition.container_definitions[0].port_mappings[0].container_port_range #=> String
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
+    #   resp.task_definition.container_definitions[0].restart_policy.enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].restart_policy.ignored_exit_codes #=> Array
+    #   resp.task_definition.container_definitions[0].restart_policy.ignored_exit_codes[0] #=> Integer
+    #   resp.task_definition.container_definitions[0].restart_policy.restart_attempt_period #=> Integer
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
     #   resp.task_definition.container_definitions[0].command #=> Array
@@ -6405,21 +6417,18 @@ module Aws::ECS
     # Tasks][2] in the *Amazon Elastic Container Service Developer Guide*.
     #
     # You can specify a Docker networking mode for the containers in your
-    # task definition with the `networkMode` parameter. The available
-    # network modes correspond to those described in [Network settings][3]
-    # in the Docker run reference. If you specify the `awsvpc` network mode,
-    # the task is allocated an elastic network interface, and you must
-    # specify a NetworkConfiguration when you create a service or run a task
-    # with the task definition. For more information, see [Task
-    # Networking][4] in the *Amazon Elastic Container Service Developer
-    # Guide*.
+    # task definition with the `networkMode` parameter. If you specify the
+    # `awsvpc` network mode, the task is allocated an elastic network
+    # interface, and you must specify a NetworkConfiguration when you create
+    # a service or run a task with the task definition. For more
+    # information, see [Task Networking][3] in the *Amazon Elastic Container
+    # Service Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
-    # [3]: https://docs.docker.com/engine/reference/run/#/network-settings
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [required, String] :family
     #   You must specify a `family` for a task definition. You can use it
@@ -6441,14 +6450,13 @@ module Aws::ECS
     # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the task execution role that grants
     #   the Amazon ECS container agent permission to make Amazon Web Services
-    #   API calls on your behalf. The task execution IAM role is required
-    #   depending on the requirements of your task. For more information, see
-    #   [Amazon ECS task execution IAM role][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   API calls on your behalf. For informationabout the required IAM roles
+    #   for Amazon ECS, see [IAM roles for Amazon ECS][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-ecs-iam-role-overview.html
     #
     # @option params [String] :network_mode
     #   The Docker networking mode to use for the containers in the task. The
@@ -6477,22 +6485,19 @@ module Aws::ECS
     #   non-root user.
     #
     #   If the network mode is `awsvpc`, the task is allocated an elastic
-    #   network interface, and you must specify a NetworkConfiguration value
-    #   when you create a service or run a task with the task definition. For
-    #   more information, see [Task Networking][1] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   network interface, and you must specify a [NetworkConfiguration][1]
+    #   value when you create a service or run a task with the task
+    #   definition. For more information, see [Task Networking][2] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If the network mode is `host`, you cannot run multiple instantiations
     #   of the same task on a single container instance when port mappings are
     #   used.
     #
-    #   For more information, see [Network settings][2] in the *Docker run
-    #   reference*.
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-    #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
     #   A list of container definitions in JSON format that describe the
@@ -6655,12 +6660,10 @@ module Aws::ECS
     #   the same process namespace.
     #
     #   If no value is specified, the default is a private namespace for each
-    #   container. For more information, see [PID settings][1] in the *Docker
-    #   run reference*.
+    #   container.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
-    #   undesired process namespace exposure. For more information, see
-    #   [Docker security][2].
+    #   undesired process namespace exposure.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -6671,11 +6674,6 @@ module Aws::ECS
     #   isn't supported for Windows containers on Fargate.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
-    #   [2]: https://docs.docker.com/engine/security/security/
     #
     # @option params [String] :ipc_mode
     #   The IPC resource namespace to use for the containers in the task. The
@@ -6688,16 +6686,14 @@ module Aws::ECS
     #   private and not shared with other containers in a task or on the
     #   container instance. If no value is specified, then the IPC resource
     #   namespace sharing depends on the Docker daemon setting on the
-    #   container instance. For more information, see [IPC settings][1] in the
-    #   *Docker run reference*.
+    #   container instance.
     #
     #   If the `host` IPC mode is used, be aware that there is a heightened
-    #   risk of undesired IPC namespace expose. For more information, see
-    #   [Docker security][2].
+    #   risk of undesired IPC namespace expose.
     #
     #   If you are setting namespaced kernel parameters using `systemControls`
     #   for the containers in the task, the following will apply to your IPC
-    #   resource namespace. For more information, see [System Controls][3] in
+    #   resource namespace. For more information, see [System Controls][1] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #   * For tasks that use the `host` IPC mode, IPC namespace related
@@ -6713,9 +6709,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
-    #   [2]: https://docs.docker.com/engine/security/security/
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
     #
     # @option params [Types::ProxyConfiguration] :proxy_configuration
     #   The configuration details for the App Mesh proxy.
@@ -6852,6 +6846,11 @@ module Aws::ECS
     #           },
     #         ],
     #         essential: false,
+    #         restart_policy: {
+    #           enabled: false, # required
+    #           ignored_exit_codes: [1],
+    #           restart_attempt_period: 1,
+    #         },
     #         entry_point: ["String"],
     #         command: ["String"],
     #         environment: [
@@ -7084,6 +7083,10 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
     #   resp.task_definition.container_definitions[0].port_mappings[0].container_port_range #=> String
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
+    #   resp.task_definition.container_definitions[0].restart_policy.enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].restart_policy.ignored_exit_codes #=> Array
+    #   resp.task_definition.container_definitions[0].restart_policy.ignored_exit_codes[0] #=> Integer
+    #   resp.task_definition.container_definitions[0].restart_policy.restart_attempt_period #=> Integer
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
     #   resp.task_definition.container_definitions[0].command #=> Array
@@ -7442,12 +7445,17 @@ module Aws::ECS
     #   automatically trigger a task to run a batch process job, you could
     #   apply a unique identifier for that job to your task with the
     #   `startedBy` parameter. You can then identify which tasks belong to
-    #   that job by filtering the results of a ListTasks call with the
+    #   that job by filtering the results of a [ListTasks][1] call with the
     #   `startedBy` value. Up to 128 letters (uppercase and lowercase),
-    #   numbers, hyphens (-), and underscores (\_) are allowed.
+    #   numbers, hyphens (-), forward slash (/), and underscores (\_) are
+    #   allowed.
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
@@ -7912,12 +7920,17 @@ module Aws::ECS
     #   automatically trigger a task to run a batch process job, you could
     #   apply a unique identifier for that job to your task with the
     #   `startedBy` parameter. You can then identify which tasks belong to
-    #   that job by filtering the results of a ListTasks call with the
+    #   that job by filtering the results of a [ListTasks][1] call with the
     #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
-    #   numbers, hyphens (-), and underscores (\_) are allowed.
+    #   numbers, hyphens (-), forward slash (/), and underscores (\_) are
+    #   allowed.
     #
     #   If a task is started by an Amazon ECS service, the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task to help you categorize and
@@ -9135,11 +9148,15 @@ module Aws::ECS
     # manually.
     #
     # A container instance has completed draining when it has no more
-    # `RUNNING` tasks. You can verify this using ListTasks.
+    # `RUNNING` tasks. You can verify this using [ListTasks][1].
     #
     # When a container instance has been drained, you can set a container
     # instance to `ACTIVE` status and once it has reached that status the
     # Amazon ECS scheduler can begin scheduling tasks on the instance again.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -10331,7 +10348,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

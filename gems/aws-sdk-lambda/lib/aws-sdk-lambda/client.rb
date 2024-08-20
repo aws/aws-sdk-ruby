@@ -937,16 +937,17 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300
     #   seconds in increments of seconds.
     #
-    #   For streams and Amazon SQS event sources, the default batching window
-    #   is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ,
-    #   and DocumentDB event sources, the default batching window is 500 ms.
-    #   Note that because you can only change `MaximumBatchingWindowInSeconds`
-    #   in increments of seconds, you cannot revert back to the 500 ms default
-    #   batching window after you have changed it. To restore the default
-    #   batching window, you must create a new event source mapping.
+    #   For Kinesis, DynamoDB, and Amazon SQS event sources, the default
+    #   batching window is 0 seconds. For Amazon MSK, Self-managed Apache
+    #   Kafka, Amazon MQ, and DocumentDB event sources, the default batching
+    #   window is 500 ms. Note that because you can only change
+    #   `MaximumBatchingWindowInSeconds` in increments of seconds, you cannot
+    #   revert back to the 500 ms default batching window after you have
+    #   changed it. To restore the default batching window, you must create a
+    #   new event source mapping.
     #
-    #   Related setting: For streams and Amazon SQS event sources, when you
-    #   set `BatchSize` to a value greater than 10, you must set
+    #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources,
+    #   when you set `BatchSize` to a value greater than 10, you must set
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Integer] :parallelization_factor
@@ -1252,16 +1253,24 @@ module Aws::Lambda
     #   only the function name, it is limited to 64 characters in length.
     #
     # @option params [String] :runtime
-    #   The identifier of the function's [runtime][1]. Runtime is required if
-    #   the deployment package is a .zip file archive.
+    #   The identifier of the function's [ runtime][1]. Runtime is required
+    #   if the deployment package is a .zip file archive. Specifying a runtime
+    #   results in an error if you're deploying a function using a container
+    #   image.
     #
-    #   The following list includes deprecated runtimes. For more information,
-    #   see [Runtime deprecation policy][2].
+    #   The following list includes deprecated runtimes. Lambda blocks
+    #   creating new functions and updating existing functions shortly after
+    #   each runtime is deprecated. For more information, see [Runtime use
+    #   after deprecation][2].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #
     # @option params [required, String] :role
     #   The Amazon Resource Name (ARN) of the function's execution role.
@@ -2786,6 +2795,37 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns your function's [recursive loop detection][1] configuration.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html
+    #
+    # @option params [required, String] :function_name
+    #
+    # @return [Types::GetFunctionRecursionConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionRecursionConfigResponse#recursive_loop #recursive_loop} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_recursion_config({
+    #     function_name: "UnqualifiedFunctionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recursive_loop #=> String, one of "Allow", "Terminate"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRecursionConfig AWS API Documentation
+    #
+    # @overload get_function_recursion_config(params = {})
+    # @param [Hash] params ({})
+    def get_function_recursion_config(params = {}, options = {})
+      req = build_request(:get_function_recursion_config, params)
+      req.send_request(options)
+    end
+
     # Returns details about a Lambda function URL.
     #
     # @option params [required, String] :function_name
@@ -4136,14 +4176,18 @@ module Aws::Lambda
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     #
     # @option params [String] :compatible_runtime
-    #   A runtime identifier. For example, `java21`.
+    #   A runtime identifier.
     #
     #   The following list includes deprecated runtimes. For more information,
-    #   see [Runtime deprecation policy][1].
+    #   see [Runtime use after deprecation][1].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #
     # @option params [required, String] :layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
@@ -4214,14 +4258,18 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
     #
     # @option params [String] :compatible_runtime
-    #   A runtime identifier. For example, `java21`.
+    #   A runtime identifier.
     #
     #   The following list includes deprecated runtimes. For more information,
-    #   see [Runtime deprecation policy][1].
+    #   see [Runtime use after deprecation][1].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #
     # @option params [String] :marker
     #   A pagination token returned by a previous call.
@@ -4993,6 +5041,91 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Sets your function's [recursive loop detection][1] configuration.
+    #
+    # When you configure a Lambda function to output to the same service or
+    # resource that invokes the function, it's possible to create an
+    # infinite recursive loop. For example, a Lambda function might write a
+    # message to an Amazon Simple Queue Service (Amazon SQS) queue, which
+    # then invokes the same function. This invocation causes the function to
+    # write another message to the queue, which in turn invokes the function
+    # again.
+    #
+    # Lambda can detect certain types of recursive loops shortly after they
+    # occur. When Lambda detects a recursive loop and your function's
+    # recursive loop detection configuration is set to `Terminate`, it stops
+    # your function being invoked and notifies you.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html
+    #
+    # @option params [required, String] :function_name
+    #   The name or ARN of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** – `my-function`.
+    #
+    #   * **Function ARN** –
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** – `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [required, String] :recursive_loop
+    #   If you set your function's recursive loop detection configuration to
+    #   `Allow`, Lambda doesn't take any action when it detects your function
+    #   being invoked as part of a recursive loop. We recommend that you only
+    #   use this setting if your design intentionally uses a Lambda function
+    #   to write data back to the same Amazon Web Services resource that
+    #   invokes it.
+    #
+    #   If you set your function's recursive loop detection configuration to
+    #   `Terminate`, Lambda stops your function being invoked and notifies you
+    #   when it detects your function being invoked as part of a recursive
+    #   loop.
+    #
+    #   By default, Lambda sets your function's configuration to `Terminate`.
+    #
+    #   If your design intentionally uses a Lambda function to write data back
+    #   to the same Amazon Web Services resource that invokes the function,
+    #   then use caution and implement suitable guard rails to prevent
+    #   unexpected charges being billed to your Amazon Web Services account.
+    #   To learn more about best practices for using recursive invocation
+    #   patterns, see [Recursive patterns that cause run-away Lambda
+    #   functions][1] in Serverless Land.
+    #
+    #
+    #
+    #   [1]: https://serverlessland.com/content/service/lambda/guides/aws-lambda-operator-guide/recursive-runaway
+    #
+    # @return [Types::PutFunctionRecursionConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFunctionRecursionConfigResponse#recursive_loop #recursive_loop} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_function_recursion_config({
+    #     function_name: "UnqualifiedFunctionName", # required
+    #     recursive_loop: "Allow", # required, accepts Allow, Terminate
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recursive_loop #=> String, one of "Allow", "Terminate"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionRecursionConfig AWS API Documentation
+    #
+    # @overload put_function_recursion_config(params = {})
+    # @param [Hash] params ({})
+    def put_function_recursion_config(params = {}, options = {})
+      req = build_request(:put_function_recursion_config, params)
+      req.send_request(options)
+    end
+
     # Adds a provisioned concurrency configuration to a function's alias or
     # version.
     #
@@ -5579,16 +5712,17 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300
     #   seconds in increments of seconds.
     #
-    #   For streams and Amazon SQS event sources, the default batching window
-    #   is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ,
-    #   and DocumentDB event sources, the default batching window is 500 ms.
-    #   Note that because you can only change `MaximumBatchingWindowInSeconds`
-    #   in increments of seconds, you cannot revert back to the 500 ms default
-    #   batching window after you have changed it. To restore the default
-    #   batching window, you must create a new event source mapping.
+    #   For Kinesis, DynamoDB, and Amazon SQS event sources, the default
+    #   batching window is 0 seconds. For Amazon MSK, Self-managed Apache
+    #   Kafka, Amazon MQ, and DocumentDB event sources, the default batching
+    #   window is 500 ms. Note that because you can only change
+    #   `MaximumBatchingWindowInSeconds` in increments of seconds, you cannot
+    #   revert back to the 500 ms default batching window after you have
+    #   changed it. To restore the default batching window, you must create a
+    #   new event source mapping.
     #
-    #   Related setting: For streams and Amazon SQS event sources, when you
-    #   set `BatchSize` to a value greater than 10, you must set
+    #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources,
+    #   when you set `BatchSize` to a value greater than 10, you must set
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Types::DestinationConfig] :destination_config
@@ -6072,16 +6206,24 @@ module Aws::Lambda
     #   execution.
     #
     # @option params [String] :runtime
-    #   The identifier of the function's [runtime][1]. Runtime is required if
-    #   the deployment package is a .zip file archive.
+    #   The identifier of the function's [ runtime][1]. Runtime is required
+    #   if the deployment package is a .zip file archive. Specifying a runtime
+    #   results in an error if you're deploying a function using a container
+    #   image.
     #
-    #   The following list includes deprecated runtimes. For more information,
-    #   see [Runtime deprecation policy][2].
+    #   The following list includes deprecated runtimes. Lambda blocks
+    #   creating new functions and updating existing functions shortly after
+    #   each runtime is deprecated. For more information, see [Runtime use
+    #   after deprecation][2].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
     #   A dead-letter queue configuration that specifies the queue or topic
@@ -6543,7 +6685,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

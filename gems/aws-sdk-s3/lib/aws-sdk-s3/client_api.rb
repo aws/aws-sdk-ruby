@@ -334,6 +334,7 @@ module Aws::S3
     ListBucketMetricsConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketMetricsConfigurationsOutput')
     ListBucketMetricsConfigurationsRequest = Shapes::StructureShape.new(name: 'ListBucketMetricsConfigurationsRequest')
     ListBucketsOutput = Shapes::StructureShape.new(name: 'ListBucketsOutput')
+    ListBucketsRequest = Shapes::StructureShape.new(name: 'ListBucketsRequest')
     ListDirectoryBucketsOutput = Shapes::StructureShape.new(name: 'ListDirectoryBucketsOutput')
     ListDirectoryBucketsRequest = Shapes::StructureShape.new(name: 'ListDirectoryBucketsRequest')
     ListMultipartUploadsOutput = Shapes::StructureShape.new(name: 'ListMultipartUploadsOutput')
@@ -357,6 +358,7 @@ module Aws::S3
     MFADeleteStatus = Shapes::StringShape.new(name: 'MFADeleteStatus')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MaxAgeSeconds = Shapes::IntegerShape.new(name: 'MaxAgeSeconds')
+    MaxBuckets = Shapes::IntegerShape.new(name: 'MaxBuckets')
     MaxDirectoryBuckets = Shapes::IntegerShape.new(name: 'MaxDirectoryBuckets')
     MaxKeys = Shapes::IntegerShape.new(name: 'MaxKeys')
     MaxParts = Shapes::IntegerShape.new(name: 'MaxParts')
@@ -1707,7 +1709,12 @@ module Aws::S3
 
     ListBucketsOutput.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     ListBucketsOutput.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
+    ListBucketsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "ContinuationToken"))
     ListBucketsOutput.struct_class = Types::ListBucketsOutput
+
+    ListBucketsRequest.add_member(:max_buckets, Shapes::ShapeRef.new(shape: MaxBuckets, location: "querystring", location_name: "max-buckets"))
+    ListBucketsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
+    ListBucketsRequest.struct_class = Types::ListBucketsRequest
 
     ListDirectoryBucketsOutput.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     ListDirectoryBucketsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: DirectoryBucketToken, location_name: "ContinuationToken"))
@@ -3291,8 +3298,14 @@ module Aws::S3
         o.name = "ListBuckets"
         o.http_method = "GET"
         o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.input = Shapes::ShapeRef.new(shape: ListBucketsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBucketsOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_buckets",
+          tokens: {
+            "continuation_token" => "continuation_token"
+          }
+        )
       end)
 
       api.add_operation(:list_directory_buckets, Seahorse::Model::Operation.new.tap do |o|

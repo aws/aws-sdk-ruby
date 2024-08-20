@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2024-08-19)
+------------------
+
+* Feature - Amazon Bedrock Batch Inference/ Model Invocation is a feature which allows customers to asynchronously run inference on a large set of records/files stored in S3.
+
 1.14.0 (2024-08-01)
 ------------------
 

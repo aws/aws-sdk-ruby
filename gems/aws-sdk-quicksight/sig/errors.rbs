@@ -23,6 +23,10 @@ module Aws
         def message: () -> ::String
         def request_id: () -> ::String
       end
+      class CustomerManagedKeyUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
       class DomainNotWhitelistedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def request_id: () -> ::String

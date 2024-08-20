@@ -1044,9 +1044,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBucketsOutput]
         def buckets: () -> ::Array[Types::Bucket]
         def owner: () -> Types::Owner
+        def continuation_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#list_buckets-instance_method
-      def list_buckets: () -> _ListBucketsResponseSuccess
+      def list_buckets: (
+                          ?max_buckets: ::Integer,
+                          ?continuation_token: ::String
+                        ) -> _ListBucketsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBucketsResponseSuccess
 
       interface _ListDirectoryBucketsResponseSuccess

@@ -18,6 +18,7 @@ module Aws::SsmSap
       attr_accessor components: ::Array[::String]
       attr_accessor last_updated: ::Time
       attr_accessor status_message: ::String
+      attr_accessor associated_application_arns: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -101,6 +102,7 @@ module Aws::SsmSap
       attr_accessor primary_host: ::String
       attr_accessor sql_port: ::Integer
       attr_accessor last_updated: ::Time
+      attr_accessor connected_component_arns: ::Array[::String]
       SENSITIVE: []
     end
 

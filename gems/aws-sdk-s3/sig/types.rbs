@@ -1358,6 +1358,13 @@ module Aws::S3
     class ListBucketsOutput
       attr_accessor buckets: ::Array[Types::Bucket]
       attr_accessor owner: Types::Owner
+      attr_accessor continuation_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBucketsRequest
+      attr_accessor max_buckets: ::Integer
+      attr_accessor continuation_token: ::String
       SENSITIVE: []
     end
 

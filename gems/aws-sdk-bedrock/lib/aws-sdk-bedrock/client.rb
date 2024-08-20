@@ -1023,6 +1023,114 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Creates a job to invoke a model on multiple prompts (batch inference).
+    # Format your data according to [Format your inference data][1] and
+    # upload it to an Amazon S3 bucket. For more information, see [Create a
+    # batch inference job][2].
+    #
+    # The response returns a `jobArn` that you can use to stop or get
+    # details about the job. You can check the status of the job by sending
+    # a [GetModelCustomizationJob][3] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-prerq.html#batch-inference-data
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-create.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetModelCustomizationJob.html
+    #
+    # @option params [required, String] :job_name
+    #   A name to give the batch inference job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the service role with permissions to
+    #   carry out and manage batch inference. You can use the console to
+    #   create a default service role or follow the steps at [Create a service
+    #   role for batch inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :model_id
+    #   The unique identifier of the foundation model to use for the batch
+    #   inference job.
+    #
+    # @option params [required, Types::ModelInvocationJobInputDataConfig] :input_data_config
+    #   Details about the location of the input to the batch inference job.
+    #
+    # @option params [required, Types::ModelInvocationJobOutputDataConfig] :output_data_config
+    #   Details about the location of the output of the batch inference job.
+    #
+    # @option params [Integer] :timeout_duration_in_hours
+    #   The number of hours after which to force the batch inference job to
+    #   time out.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Any tags to associate with the batch inference job. For more
+    #   information, see [Tagging Amazon Bedrock resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #
+    # @return [Types::CreateModelInvocationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelInvocationJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_invocation_job({
+    #     job_name: "ModelInvocationJobName", # required
+    #     role_arn: "RoleArn", # required
+    #     client_request_token: "ModelInvocationIdempotencyToken",
+    #     model_id: "ModelId", # required
+    #     input_data_config: { # required
+    #       s3_input_data_config: {
+    #         s3_input_format: "JSONL", # accepts JSONL
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #     },
+    #     output_data_config: { # required
+    #       s3_output_data_config: {
+    #         s3_uri: "S3Uri", # required
+    #         s3_encryption_key_id: "KmsKeyId",
+    #       },
+    #     },
+    #     timeout_duration_in_hours: 1,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelInvocationJob AWS API Documentation
+    #
+    # @overload create_model_invocation_job(params = {})
+    # @param [Hash] params ({})
+    def create_model_invocation_job(params = {}, options = {})
+      req = build_request(:create_model_invocation_job, params)
+      req.send_request(options)
+    end
+
     # Creates dedicated throughput for a base or custom model with the model
     # units and for the duration that you specify. For pricing details, see
     # [Amazon Bedrock Pricing][1]. For more information, see [Provisioned
@@ -1651,6 +1759,67 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Gets details about a batch inference job. For more information, see
+    # [View details about a batch inference job][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-view
+    #
+    # @option params [required, String] :job_identifier
+    #   The Amazon Resource Name (ARN) of the batch inference job.
+    #
+    # @return [Types::GetModelInvocationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetModelInvocationJobResponse#job_arn #job_arn} => String
+    #   * {Types::GetModelInvocationJobResponse#job_name #job_name} => String
+    #   * {Types::GetModelInvocationJobResponse#model_id #model_id} => String
+    #   * {Types::GetModelInvocationJobResponse#client_request_token #client_request_token} => String
+    #   * {Types::GetModelInvocationJobResponse#role_arn #role_arn} => String
+    #   * {Types::GetModelInvocationJobResponse#status #status} => String
+    #   * {Types::GetModelInvocationJobResponse#message #message} => String
+    #   * {Types::GetModelInvocationJobResponse#submit_time #submit_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#end_time #end_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#input_data_config #input_data_config} => Types::ModelInvocationJobInputDataConfig
+    #   * {Types::GetModelInvocationJobResponse#output_data_config #output_data_config} => Types::ModelInvocationJobOutputDataConfig
+    #   * {Types::GetModelInvocationJobResponse#timeout_duration_in_hours #timeout_duration_in_hours} => Integer
+    #   * {Types::GetModelInvocationJobResponse#job_expiration_time #job_expiration_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_model_invocation_job({
+    #     job_identifier: "ModelInvocationJobIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_name #=> String
+    #   resp.model_id #=> String
+    #   resp.client_request_token #=> String
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "Submitted", "InProgress", "Completed", "Failed", "Stopping", "Stopped", "PartiallyCompleted", "Expired", "Validating", "Scheduled"
+    #   resp.message #=> String
+    #   resp.submit_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.input_data_config.s3_input_data_config.s3_input_format #=> String, one of "JSONL"
+    #   resp.input_data_config.s3_input_data_config.s3_uri #=> String
+    #   resp.output_data_config.s3_output_data_config.s3_uri #=> String
+    #   resp.output_data_config.s3_output_data_config.s3_encryption_key_id #=> String
+    #   resp.timeout_duration_in_hours #=> Integer
+    #   resp.job_expiration_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationJob AWS API Documentation
+    #
+    # @overload get_model_invocation_job(params = {})
+    # @param [Hash] params ({})
+    def get_model_invocation_job(params = {}, options = {})
+      req = build_request(:get_model_invocation_job, params)
+      req.send_request(options)
+    end
+
     # Get the current configuration values for model invocation logging.
     #
     # @return [Types::GetModelInvocationLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2220,6 +2389,97 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Lists all batch inference jobs in the account. For more information,
+    # see [View details about a batch inference job][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-view
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submit_time_after
+    #   Specify a time to filter for batch inference jobs that were submitted
+    #   after the time you specify.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submit_time_before
+    #   Specify a time to filter for batch inference jobs that were submitted
+    #   before the time you specify.
+    #
+    # @option params [String] :status_equals
+    #   Specify a status to filter for batch inference jobs whose statuses
+    #   match the string you specify.
+    #
+    # @option params [String] :name_contains
+    #   Specify a string to filter for batch inference jobs whose names
+    #   contain the string.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. If there are more results
+    #   than the number that you specify, a `nextToken` value is returned. Use
+    #   the `nextToken` in a request to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If there were more results than the value you specified in the
+    #   `maxResults` field in a previous `ListModelInvocationJobs` request,
+    #   the response would have returned a `nextToken` value. To see the next
+    #   batch of results, send the `nextToken` value in another request.
+    #
+    # @option params [String] :sort_by
+    #   An attribute by which to sort the results.
+    #
+    # @option params [String] :sort_order
+    #   Specifies whether to sort the results by ascending or descending
+    #   order.
+    #
+    # @return [Types::ListModelInvocationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelInvocationJobsResponse#next_token #next_token} => String
+    #   * {Types::ListModelInvocationJobsResponse#invocation_job_summaries #invocation_job_summaries} => Array&lt;Types::ModelInvocationJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_invocation_jobs({
+    #     submit_time_after: Time.now,
+    #     submit_time_before: Time.now,
+    #     status_equals: "Submitted", # accepts Submitted, InProgress, Completed, Failed, Stopping, Stopped, PartiallyCompleted, Expired, Validating, Scheduled
+    #     name_contains: "ModelInvocationJobName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.invocation_job_summaries #=> Array
+    #   resp.invocation_job_summaries[0].job_arn #=> String
+    #   resp.invocation_job_summaries[0].job_name #=> String
+    #   resp.invocation_job_summaries[0].model_id #=> String
+    #   resp.invocation_job_summaries[0].client_request_token #=> String
+    #   resp.invocation_job_summaries[0].role_arn #=> String
+    #   resp.invocation_job_summaries[0].status #=> String, one of "Submitted", "InProgress", "Completed", "Failed", "Stopping", "Stopped", "PartiallyCompleted", "Expired", "Validating", "Scheduled"
+    #   resp.invocation_job_summaries[0].message #=> String
+    #   resp.invocation_job_summaries[0].submit_time #=> Time
+    #   resp.invocation_job_summaries[0].last_modified_time #=> Time
+    #   resp.invocation_job_summaries[0].end_time #=> Time
+    #   resp.invocation_job_summaries[0].input_data_config.s3_input_data_config.s3_input_format #=> String, one of "JSONL"
+    #   resp.invocation_job_summaries[0].input_data_config.s3_input_data_config.s3_uri #=> String
+    #   resp.invocation_job_summaries[0].output_data_config.s3_output_data_config.s3_uri #=> String
+    #   resp.invocation_job_summaries[0].output_data_config.s3_output_data_config.s3_encryption_key_id #=> String
+    #   resp.invocation_job_summaries[0].timeout_duration_in_hours #=> Integer
+    #   resp.invocation_job_summaries[0].job_expiration_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelInvocationJobs AWS API Documentation
+    #
+    # @overload list_model_invocation_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_model_invocation_jobs(params = {}, options = {})
+      req = build_request(:list_model_invocation_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists the Provisioned Throughputs in the account. For more
     # information, see [Provisioned Throughput][1] in the [Amazon Bedrock
     # User Guide][2].
@@ -2438,6 +2698,34 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def stop_model_customization_job(params = {}, options = {})
       req = build_request(:stop_model_customization_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a batch inference job. You're only charged for tokens that were
+    # already processed. For more information, see [Stop a batch inference
+    # job][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-stop
+    #
+    # @option params [required, String] :job_identifier
+    #   The Amazon Resource Name (ARN) of the batch inference job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_model_invocation_job({
+    #     job_identifier: "ModelInvocationJobIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopModelInvocationJob AWS API Documentation
+    #
+    # @overload stop_model_invocation_job(params = {})
+    # @param [Hash] params ({})
+    def stop_model_invocation_job(params = {}, options = {})
+      req = build_request(:stop_model_invocation_job, params)
       req.send_request(options)
     end
 
@@ -2736,7 +3024,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

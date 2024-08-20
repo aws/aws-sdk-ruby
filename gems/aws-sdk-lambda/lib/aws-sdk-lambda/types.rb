@@ -735,18 +735,18 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300
     #   seconds in increments of seconds.
     #
-    #   For streams and Amazon SQS event sources, the default batching
-    #   window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka,
-    #   Amazon MQ, and DocumentDB event sources, the default batching window
-    #   is 500 ms. Note that because you can only change
+    #   For Kinesis, DynamoDB, and Amazon SQS event sources, the default
+    #   batching window is 0 seconds. For Amazon MSK, Self-managed Apache
+    #   Kafka, Amazon MQ, and DocumentDB event sources, the default batching
+    #   window is 500 ms. Note that because you can only change
     #   `MaximumBatchingWindowInSeconds` in increments of seconds, you
     #   cannot revert back to the 500 ms default batching window after you
     #   have changed it. To restore the default batching window, you must
     #   create a new event source mapping.
     #
-    #   Related setting: For streams and Amazon SQS event sources, when you
-    #   set `BatchSize` to a value greater than 10, you must set
-    #   `MaximumBatchingWindowInSeconds` to at least 1.
+    #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event
+    #   sources, when you set `BatchSize` to a value greater than 10, you
+    #   must set `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -889,16 +889,24 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The identifier of the function's [runtime][1]. Runtime is required
-    #   if the deployment package is a .zip file archive.
+    #   The identifier of the function's [ runtime][1]. Runtime is required
+    #   if the deployment package is a .zip file archive. Specifying a
+    #   runtime results in an error if you're deploying a function using a
+    #   container image.
     #
-    #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][2].
+    #   The following list includes deprecated runtimes. Lambda blocks
+    #   creating new functions and updating existing functions shortly after
+    #   each runtime is deprecated. For more information, see [Runtime use
+    #   after deprecation][2].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -2154,16 +2162,24 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The identifier of the function's [runtime][1]. Runtime is required
-    #   if the deployment package is a .zip file archive.
+    #   The identifier of the function's [ runtime][1]. Runtime is required
+    #   if the deployment package is a .zip file archive. Specifying a
+    #   runtime results in an error if you're deploying a function using a
+    #   container image.
     #
-    #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][2].
+    #   The following list includes deprecated runtimes. Lambda blocks
+    #   creating new functions and updating existing functions shortly after
+    #   each runtime is deprecated. For more information, see [Runtime use
+    #   after deprecation][2].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -2761,6 +2777,40 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] function_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRecursionConfigRequest AWS API Documentation
+    #
+    class GetFunctionRecursionConfigRequest < Struct.new(
+      :function_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recursive_loop
+    #   If your function's recursive loop detection configuration is
+    #   `Allow`, Lambda doesn't take any action when it detects your
+    #   function being invoked as part of a recursive loop.
+    #
+    #   If your function's recursive loop detection configuration is
+    #   `Terminate`, Lambda stops your function being invoked and notifies
+    #   you when it detects your function being invoked as part of a
+    #   recursive loop.
+    #
+    #   By default, Lambda sets your function's configuration to
+    #   `Terminate`. You can update this configuration using the
+    #   PutFunctionRecursionConfig action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRecursionConfigResponse AWS API Documentation
+    #
+    class GetFunctionRecursionConfigResponse < Struct.new(
+      :recursive_loop)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_name
     #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
@@ -3032,11 +3082,15 @@ module Aws::Lambda
     #   The layer's compatible runtimes.
     #
     #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][1].
+    #   information, see [Runtime use after deprecation][1].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -3939,11 +3993,15 @@ module Aws::Lambda
     #   The layer's compatible runtimes.
     #
     #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][1].
+    #   information, see [Runtime use after deprecation][1].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -4376,14 +4434,18 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] compatible_runtime
-    #   A runtime identifier. For example, `java21`.
+    #   A runtime identifier.
     #
     #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][1].
+    #   information, see [Runtime use after deprecation][1].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [String]
     #
     # @!attribute [rw] layer_name
@@ -4437,14 +4499,18 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] compatible_runtime
-    #   A runtime identifier. For example, `java21`.
+    #   A runtime identifier.
     #
     #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][1].
+    #   information, see [Runtime use after deprecation][1].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -4733,8 +4799,13 @@ module Aws::Lambda
     end
 
     # The RevisionId provided does not match the latest RevisionId for the
-    # Lambda function or alias. Call the `GetFunction` or the `GetAlias` API
-    # operation to retrieve the latest RevisionId for your resource.
+    # Lambda function or alias.
+    #
+    # * **For AddPermission and RemovePermission API operations:** Call
+    #   `GetPolicy` to retrieve the latest RevisionId for your resource.
+    #
+    # * **For all other API operations:** Call `GetFunction` or `GetAlias`
+    #   to retrieve the latest RevisionId for your resource.
     #
     # @!attribute [rw] type
     #   The exception type.
@@ -4918,11 +4989,15 @@ module Aws::Lambda
     #   The layer's compatible runtimes.
     #
     #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][1].
+    #   information, see [Runtime use after deprecation][1].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_info
@@ -5144,6 +5219,81 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_name
+    #   The name or ARN of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** – `my-function`.
+    #
+    #   * **Function ARN** –
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** – `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] recursive_loop
+    #   If you set your function's recursive loop detection configuration
+    #   to `Allow`, Lambda doesn't take any action when it detects your
+    #   function being invoked as part of a recursive loop. We recommend
+    #   that you only use this setting if your design intentionally uses a
+    #   Lambda function to write data back to the same Amazon Web Services
+    #   resource that invokes it.
+    #
+    #   If you set your function's recursive loop detection configuration
+    #   to `Terminate`, Lambda stops your function being invoked and
+    #   notifies you when it detects your function being invoked as part of
+    #   a recursive loop.
+    #
+    #   By default, Lambda sets your function's configuration to
+    #   `Terminate`.
+    #
+    #   If your design intentionally uses a Lambda function to write data
+    #   back to the same Amazon Web Services resource that invokes the
+    #   function, then use caution and implement suitable guard rails to
+    #   prevent unexpected charges being billed to your Amazon Web Services
+    #   account. To learn more about best practices for using recursive
+    #   invocation patterns, see [Recursive patterns that cause run-away
+    #   Lambda functions][1] in Serverless Land.
+    #
+    #
+    #
+    #   [1]: https://serverlessland.com/content/service/lambda/guides/aws-lambda-operator-guide/recursive-runaway
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionRecursionConfigRequest AWS API Documentation
+    #
+    class PutFunctionRecursionConfigRequest < Struct.new(
+      :function_name,
+      :recursive_loop)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recursive_loop
+    #   The status of your function's recursive loop detection
+    #   configuration.
+    #
+    #   When this value is set to `Allow`and Lambda detects your function
+    #   being invoked as part of a recursive loop, it doesn't take any
+    #   action.
+    #
+    #   When this value is set to `Terminate` and Lambda detects your
+    #   function being invoked as part of a recursive loop, it stops your
+    #   function being invoked and notifies you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionRecursionConfigResponse AWS API Documentation
+    #
+    class PutFunctionRecursionConfigResponse < Struct.new(
+      :recursive_loop)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6100,18 +6250,18 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300
     #   seconds in increments of seconds.
     #
-    #   For streams and Amazon SQS event sources, the default batching
-    #   window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka,
-    #   Amazon MQ, and DocumentDB event sources, the default batching window
-    #   is 500 ms. Note that because you can only change
+    #   For Kinesis, DynamoDB, and Amazon SQS event sources, the default
+    #   batching window is 0 seconds. For Amazon MSK, Self-managed Apache
+    #   Kafka, Amazon MQ, and DocumentDB event sources, the default batching
+    #   window is 500 ms. Note that because you can only change
     #   `MaximumBatchingWindowInSeconds` in increments of seconds, you
     #   cannot revert back to the 500 ms default batching window after you
     #   have changed it. To restore the default batching window, you must
     #   create a new event source mapping.
     #
-    #   Related setting: For streams and Amazon SQS event sources, when you
-    #   set `BatchSize` to a value greater than 10, you must set
-    #   `MaximumBatchingWindowInSeconds` to at least 1.
+    #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event
+    #   sources, when you set `BatchSize` to a value greater than 10, you
+    #   must set `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
@@ -6354,16 +6504,24 @@ module Aws::Lambda
     #   @return [Types::Environment]
     #
     # @!attribute [rw] runtime
-    #   The identifier of the function's [runtime][1]. Runtime is required
-    #   if the deployment package is a .zip file archive.
+    #   The identifier of the function's [ runtime][1]. Runtime is required
+    #   if the deployment package is a .zip file archive. Specifying a
+    #   runtime results in an error if you're deploying a function using a
+    #   container image.
     #
-    #   The following list includes deprecated runtimes. For more
-    #   information, see [Runtime deprecation policy][2].
+    #   The following list includes deprecated runtimes. Lambda blocks
+    #   creating new functions and updating existing functions shortly after
+    #   each runtime is deprecated. For more information, see [Runtime use
+    #   after deprecation][2].
+    #
+    #   For a list of all currently supported runtimes, see [Supported
+    #   runtimes][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
-    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-deprecation-levels
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_config

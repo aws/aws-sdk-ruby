@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-08-16)
+------------------
+
+* Feature - Update the correct format of key and values for resource tags
+
 1.34.0 (2024-07-02)
 ------------------
 

@@ -82,6 +82,20 @@ module Aws::Bedrock
       end
     end
 
+    class CreateModelInvocationJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateProvisionedModelThroughput
       def self.build(context)
         unless context.config.regional_endpoint
@@ -236,6 +250,20 @@ module Aws::Bedrock
       end
     end
 
+    class GetModelInvocationJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetModelInvocationLoggingConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
@@ -348,6 +376,20 @@ module Aws::Bedrock
       end
     end
 
+    class ListModelInvocationJobs
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListProvisionedModelThroughputs
       def self.build(context)
         unless context.config.regional_endpoint
@@ -405,6 +447,20 @@ module Aws::Bedrock
     end
 
     class StopModelCustomizationJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StopModelInvocationJob
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

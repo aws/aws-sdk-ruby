@@ -5,6 +5,13 @@ Unreleased Changes
 
 * Feature - Always validate checksums for operations that support or require it. Supported config options are `WHEN_SUPPORTED` and `WHEN_REQUIRED`. The default value is `WHEN_SUPPORTED`. This option is configured in code with `:response_checksum_calculation`, in the shared config file as `response_checksum_calculation`, and in the ENV as `ENV['AWS_RESPONSE_CHECKSUM_CALCULATION']`.
 
+3.201.5 (2024-08-15)
+------------------
+
+* Issue - Allow legacy/undocumented `sigv4_signer` configuration to override resolved signer.
+
+* Issue - Consider sigv4a supported without crt check.
+
 3.201.4 (2024-08-08)
 ------------------
 
