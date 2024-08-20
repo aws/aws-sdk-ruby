@@ -474,6 +474,8 @@ module Aws::OpenSearchServerless
     #   resp.collection_details[0].created_date #=> Integer
     #   resp.collection_details[0].dashboard_endpoint #=> String
     #   resp.collection_details[0].description #=> String
+    #   resp.collection_details[0].failure_code #=> String
+    #   resp.collection_details[0].failure_message #=> String
     #   resp.collection_details[0].id #=> String
     #   resp.collection_details[0].kms_key_arn #=> String
     #   resp.collection_details[0].last_modified_date #=> Integer
@@ -624,6 +626,8 @@ module Aws::OpenSearchServerless
     #
     #   resp.vpc_endpoint_details #=> Array
     #   resp.vpc_endpoint_details[0].created_date #=> Integer
+    #   resp.vpc_endpoint_details[0].failure_code #=> String
+    #   resp.vpc_endpoint_details[0].failure_message #=> String
     #   resp.vpc_endpoint_details[0].id #=> String
     #   resp.vpc_endpoint_details[0].name #=> String
     #   resp.vpc_endpoint_details[0].security_group_ids #=> Array
@@ -2355,7 +2359,7 @@ module Aws::OpenSearchServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -96,6 +96,8 @@ module Aws::OpenSearchServerless
       attr_accessor created_date: ::Integer
       attr_accessor dashboard_endpoint: ::String
       attr_accessor description: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
       attr_accessor id: ::String
       attr_accessor kms_key_arn: ::String
       attr_accessor last_modified_date: ::Integer
@@ -755,6 +757,8 @@ module Aws::OpenSearchServerless
 
     class VpcEndpointDetail
       attr_accessor created_date: ::Integer
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor security_group_ids: ::Array[::String]

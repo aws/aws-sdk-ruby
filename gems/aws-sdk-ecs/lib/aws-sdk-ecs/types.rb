@@ -125,8 +125,13 @@ module Aws::ECS
     end
 
     # You can apply up to 10 custom attributes for each resource. You can
-    # view the attributes of a resource with ListAttributes. You can remove
-    # existing attributes on a resource with DeleteAttributes.
+    # view the attributes of a resource with [ListAttributes][1]. You can
+    # remove existing attributes on a resource with [DeleteAttributes][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListAttributes.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AttributeLimitExceededException AWS API Documentation
     #
@@ -242,7 +247,7 @@ module Aws::ECS
     # @!attribute [rw] subnets
     #   The IDs of the subnets associated with the task or service. There's
     #   a limit of 16 subnets that can be specified per
-    #   `AwsVpcConfiguration`.
+    #   `awsvpcConfiguration`.
     #
     #   <note markdown="1"> All specified subnets must be from the same VPC.
     #
@@ -253,7 +258,7 @@ module Aws::ECS
     #   The IDs of the security groups associated with the task or service.
     #   If you don't specify a security group, the default security group
     #   for the VPC is used. There's a limit of 5 security groups that can
-    #   be specified per `AwsVpcConfiguration`.
+    #   be specified per `awsvpcConfiguration`.
     #
     #   <note markdown="1"> All specified security groups must be from the same VPC.
     #
@@ -377,19 +382,19 @@ module Aws::ECS
     end
 
     # The details of a capacity provider strategy. A capacity provider
-    # strategy can be set when using the RunTask or CreateCluster APIs or as
-    # the default capacity provider strategy for a cluster with the
-    # CreateCluster API.
+    # strategy can be set when using the [RunTask][1]or [CreateCluster][2]
+    # APIs or as the default capacity provider strategy for a cluster with
+    # the `CreateCluster` API.
     #
     # Only capacity providers that are already associated with a cluster and
     # have an `ACTIVE` or `UPDATING` status can be used in a capacity
-    # provider strategy. The PutClusterCapacityProviders API is used to
+    # provider strategy. The [PutClusterCapacityProviders][3] API is used to
     # associate a capacity provider with a cluster.
     #
     # If specifying a capacity provider that uses an Auto Scaling group, the
     # capacity provider must already be created. New Auto Scaling group
-    # capacity providers can be created with the CreateCapacityProvider API
-    # operation.
+    # capacity providers can be created with the
+    # [CreateClusterCapacityProvider][4] API operation.
     #
     # To use a Fargate capacity provider, specify either the `FARGATE` or
     # `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
@@ -405,6 +410,13 @@ module Aws::ECS
     #
     # A capacity provider strategy may contain a maximum of 6 capacity
     # providers.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
     #
     # @!attribute [rw] capacity_provider
     #   The short name of the capacity provider.
@@ -553,7 +565,11 @@ module Aws::ECS
     #
     # @!attribute [rw] active_services_count
     #   The number of services that are running on the cluster in an
-    #   `ACTIVE` state. You can view these services with ListServices.
+    #   `ACTIVE` state. You can view these services with [PListServices][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
     #   @return [Integer]
     #
     # @!attribute [rw] statistics
@@ -715,7 +731,11 @@ module Aws::ECS
 
     # You can't delete a cluster that has registered container instances.
     # First, deregister the container instances before you can delete the
-    # cluster. For more information, see DeregisterContainerInstance.
+    # cluster. For more information, see [DeregisterContainerInstance][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterContainsContainerInstancesException AWS API Documentation
     #
@@ -723,7 +743,13 @@ module Aws::ECS
 
     # You can't delete a cluster that contains services. First, update the
     # service to reduce its desired task count to 0, and then delete the
-    # service. For more information, see UpdateService and DeleteService.
+    # service. For more information, see [UpdateService][1] and
+    # [DeleteService][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterContainsServicesException AWS API Documentation
     #
@@ -736,7 +762,12 @@ module Aws::ECS
     class ClusterContainsTasksException < Aws::EmptyStructure; end
 
     # The specified cluster wasn't found. You can view your available
-    # clusters with ListClusters. Amazon ECS clusters are Region specific.
+    # clusters with [ListClusters][1]. Amazon ECS clusters are Region
+    # specific.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterNotFoundException AWS API Documentation
     #
@@ -1004,7 +1035,7 @@ module Aws::ECS
     #   entered in the `links` of another container to connect the
     #   containers. Up to 255 letters (uppercase and lowercase), numbers,
     #   underscores, and hyphens are allowed. This parameter maps to `name`
-    #   in tthe docker create-container command and the `--name` option to
+    #   in tthe docker conainer create command and the `--name` option to
     #   docker run.
     #   @return [String]
     #
@@ -1015,8 +1046,8 @@ module Aws::ECS
     #   repository-url/image:tag ` or ` repository-url/image@digest `. Up to
     #   255 letters (uppercase and lowercase), numbers, hyphens,
     #   underscores, colons, periods, forward slashes, and number signs are
-    #   allowed. This parameter maps to `Image` in the docker
-    #   create-container command and the `IMAGE` parameter of docker run.
+    #   allowed. This parameter maps to `Image` in the docker conainer
+    #   create command and the `IMAGE` parameter of docker run.
     #
     #   * When a new task starts, the Amazon ECS container agent pulls the
     #     latest version of the specified image and tag for the container to
@@ -1046,7 +1077,7 @@ module Aws::ECS
     #
     # @!attribute [rw] cpu
     #   The number of `cpu` units reserved for the container. This parameter
-    #   maps to `CpuShares` in the docker create-container commandand the
+    #   maps to `CpuShares` in the docker conainer create commandand the
     #   `--cpu-shares` option to docker run.
     #
     #   This field is optional for tasks using the Fargate launch type, and
@@ -1112,7 +1143,7 @@ module Aws::ECS
     #   container is killed. The total amount of memory reserved for all
     #   containers within a task must be lower than the task `memory` value,
     #   if one is specified. This parameter maps to `Memory` in thethe
-    #   docker create-container command and the `--memory` option to docker
+    #   docker conainer create command and the `--memory` option to docker
     #   run.
     #
     #   If using the Fargate launch type, this parameter is optional.
@@ -1142,7 +1173,7 @@ module Aws::ECS
     #   specified with the `memory` parameter (if applicable), or all of the
     #   available memory on the container instance, whichever comes first.
     #   This parameter maps to `MemoryReservation` in the the docker
-    #   create-container command and the `--memory-reservation` option to
+    #   conainer create command and the `--memory-reservation` option to
     #   docker run.
     #
     #   If a task-level memory value is not specified, you must specify a
@@ -1177,7 +1208,7 @@ module Aws::ECS
     #   `name:internalName` construct is analogous to `name:alias` in Docker
     #   links. Up to 255 letters (uppercase and lowercase), numbers,
     #   underscores, and hyphens are allowed.. This parameter maps to
-    #   `Links` in the docker create-container command and the `--link`
+    #   `Links` in the docker conainer create command and the `--link`
     #   option to docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1204,20 +1235,24 @@ module Aws::ECS
     #   so you can't access a container's mapped port from the host
     #   itself.
     #
-    #   This parameter maps to `PortBindings` in the the docker
-    #   create-container command and the `--publish` option to docker run.
-    #   If the network mode of a task definition is set to `none`, then you
-    #   can't specify port mappings. If the network mode of a task
-    #   definition is set to `host`, then host ports must either be
-    #   undefined or they must match the container port in the port mapping.
+    #   This parameter maps to `PortBindings` in the the docker conainer
+    #   create command and the `--publish` option to docker run. If the
+    #   network mode of a task definition is set to `none`, then you can't
+    #   specify port mappings. If the network mode of a task definition is
+    #   set to `host`, then host ports must either be undefined or they must
+    #   match the container port in the port mapping.
     #
     #   <note markdown="1"> After a task reaches the `RUNNING` status, manual and automatic host
     #   and container port assignments are visible in the **Network
     #   Bindings** section of a container description for a selected task in
     #   the Amazon ECS console. The assignments are also visible in the
-    #   `networkBindings` section DescribeTasks responses.
+    #   `networkBindings` section [DescribeTasks][1] responses.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
     #   @return [Array<Types::PortMapping>]
     #
     # @!attribute [rw] essential
@@ -1259,20 +1294,20 @@ module Aws::ECS
     #   arguments as `command` array items instead.
     #
     #   The entry point that's passed to the container. This parameter maps
-    #   to `Entrypoint` in tthe docker create-container command and the
+    #   to `Entrypoint` in tthe docker conainer create command and the
     #   `--entrypoint` option to docker run.
     #   @return [Array<String>]
     #
     # @!attribute [rw] command
     #   The command that's passed to the container. This parameter maps to
-    #   `Cmd` in the docker create-container command and the `COMMAND`
+    #   `Cmd` in the docker conainer create command and the `COMMAND`
     #   parameter to docker run. If there are multiple arguments, each
     #   argument is a separated string in the array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] environment
     #   The environment variables to pass to a container. This parameter
-    #   maps to `Env` in the docker create-container command and the `--env`
+    #   maps to `Env` in the docker conainer create command and the `--env`
     #   option to docker run.
     #
     #   We don't recommend that you use plaintext environment variables for
@@ -1306,7 +1341,7 @@ module Aws::ECS
     # @!attribute [rw] mount_points
     #   The mount points for data volumes in your container.
     #
-    #   This parameter maps to `Volumes` in the the docker create-container
+    #   This parameter maps to `Volumes` in the the docker conainer create
     #   command and the `--volume` option to docker run.
     #
     #   Windows containers can mount whole directories on the same drive as
@@ -1316,18 +1351,22 @@ module Aws::ECS
     #
     # @!attribute [rw] volumes_from
     #   Data volumes to mount from another container. This parameter maps to
-    #   `VolumesFrom` in tthe docker create-container command and the
+    #   `VolumesFrom` in tthe docker conainer create command and the
     #   `--volumes-from` option to docker run.
     #   @return [Array<Types::VolumeFrom>]
     #
     # @!attribute [rw] linux_parameters
     #   Linux-specific modifications that are applied to the container, such
     #   as Linux kernel capabilities. For more information see
-    #   KernelCapabilities.
+    #   [KernelCapabilities][1].
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html
     #   @return [Types::LinuxParameters]
     #
     # @!attribute [rw] secrets
@@ -1462,7 +1501,7 @@ module Aws::ECS
     #
     # @!attribute [rw] hostname
     #   The hostname to use for your container. This parameter maps to
-    #   `Hostname` in thethe docker create-container command and the
+    #   `Hostname` in thethe docker conainer create command and the
     #   `--hostname` option to docker run.
     #
     #   <note markdown="1"> The `hostname` parameter is not supported if you're using the
@@ -1473,7 +1512,7 @@ module Aws::ECS
     #
     # @!attribute [rw] user
     #   The user to use inside the container. This parameter maps to `User`
-    #   in the docker create-container command and the `--user` option to
+    #   in the docker conainer create command and the `--user` option to
     #   docker run.
     #
     #   When running tasks using the `host` network mode, don't run
@@ -1502,14 +1541,14 @@ module Aws::ECS
     #
     # @!attribute [rw] working_directory
     #   The working directory to run commands inside the container in. This
-    #   parameter maps to `WorkingDir` in the docker create-container
-    #   command and the `--workdir` option to docker run.
+    #   parameter maps to `WorkingDir` in the docker conainer create command
+    #   and the `--workdir` option to docker run.
     #   @return [String]
     #
     # @!attribute [rw] disable_networking
     #   When this parameter is true, networking is off within the container.
-    #   This parameter maps to `NetworkDisabled` in the docker
-    #   create-container command.
+    #   This parameter maps to `NetworkDisabled` in the docker conainer
+    #   create command.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
@@ -1520,7 +1559,7 @@ module Aws::ECS
     #   When this parameter is true, the container is given elevated
     #   privileges on the host container instance (similar to the `root`
     #   user). This parameter maps to `Privileged` in the the docker
-    #   create-container command and the `--privileged` option to docker run
+    #   conainer create command and the `--privileged` option to docker run
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers or tasks run
     #   on Fargate.
@@ -1531,7 +1570,7 @@ module Aws::ECS
     # @!attribute [rw] readonly_root_filesystem
     #   When this parameter is true, the container is given read-only access
     #   to its root file system. This parameter maps to `ReadonlyRootfs` in
-    #   the docker create-container command and the `--read-only` option to
+    #   the docker conainer create command and the `--read-only` option to
     #   docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1541,7 +1580,7 @@ module Aws::ECS
     #
     # @!attribute [rw] dns_servers
     #   A list of DNS servers that are presented to the container. This
-    #   parameter maps to `Dns` in the the docker create-container command
+    #   parameter maps to `Dns` in the the docker conainer create command
     #   and the `--dns` option to docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1551,7 +1590,7 @@ module Aws::ECS
     #
     # @!attribute [rw] dns_search_domains
     #   A list of DNS search domains that are presented to the container.
-    #   This parameter maps to `DnsSearch` in the docker create-container
+    #   This parameter maps to `DnsSearch` in the docker conainer create
     #   command and the `--dns-search` option to docker run.
     #
     #   <note markdown="1"> This parameter is not supported for Windows containers.
@@ -1562,7 +1601,7 @@ module Aws::ECS
     # @!attribute [rw] extra_hosts
     #   A list of hostnames and IP address mappings to append to the
     #   `/etc/hosts` file on the container. This parameter maps to
-    #   `ExtraHosts` in the docker create-container command and the
+    #   `ExtraHosts` in the docker conainer create command and the
     #   `--add-host` option to docker run.
     #
     #   <note markdown="1"> This parameter isn't supported for Windows containers or tasks that
@@ -1585,7 +1624,7 @@ module Aws::ECS
     #   Windows Containers][1] and [Using gMSAs for Linux Containers][2] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   This parameter maps to `SecurityOpt` in the docker create-container
+    #   This parameter maps to `SecurityOpt` in the docker conainer create
     #   command and the `--security-opt` option to docker run.
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
@@ -1610,19 +1649,19 @@ module Aws::ECS
     # @!attribute [rw] interactive
     #   When this parameter is `true`, you can deploy containerized
     #   applications that require `stdin` or a `tty` to be allocated. This
-    #   parameter maps to `OpenStdin` in the docker create-container command
+    #   parameter maps to `OpenStdin` in the docker conainer create command
     #   and the `--interactive` option to docker run.
     #   @return [Boolean]
     #
     # @!attribute [rw] pseudo_terminal
     #   When this parameter is `true`, a TTY is allocated. This parameter
-    #   maps to `Tty` in tthe docker create-container command and the
-    #   `--tty` option to docker run.
+    #   maps to `Tty` in tthe docker conainer create command and the `--tty`
+    #   option to docker run.
     #   @return [Boolean]
     #
     # @!attribute [rw] docker_labels
     #   A key/value map of labels to add to the container. This parameter
-    #   maps to `Labels` in the docker create-container command and the
+    #   maps to `Labels` in the docker conainer create command and the
     #   `--label` option to docker run. This parameter requires version 1.18
     #   of the Docker Remote API or greater on your container instance. To
     #   check the Docker Remote API version on your container instance, log
@@ -1633,9 +1672,9 @@ module Aws::ECS
     # @!attribute [rw] ulimits
     #   A list of `ulimits` to set in the container. If a `ulimit` value is
     #   specified in a task definition, it overrides the default values set
-    #   by Docker. This parameter maps to `Ulimits` in tthe docker
-    #   create-container command and the `--ulimit` option to docker run.
-    #   Valid naming values are displayed in the Ulimit data type.
+    #   by Docker. This parameter maps to `Ulimits` in tthe docker conainer
+    #   create command and the `--ulimit` option to docker run. Valid naming
+    #   values are displayed in the [Ulimit][1] data type.
     #
     #   Amazon ECS tasks hosted on Fargate use the default resource limit
     #   values set by the operating system with the exception of the
@@ -1653,12 +1692,16 @@ module Aws::ECS
     #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Ulimit.html
     #   @return [Array<Types::Ulimit>]
     #
     # @!attribute [rw] log_configuration
     #   The log configuration specification for the container.
     #
-    #   This parameter maps to `LogConfig` in the docker create-container
+    #   This parameter maps to `LogConfig` in the docker conainer create
     #   command and the `--log-driver` option to docker run. By default,
     #   containers use the same logging driver that the Docker daemon uses.
     #   However the container can use a different logging driver than the
@@ -1669,9 +1712,9 @@ module Aws::ECS
     #   options).
     #
     #   <note markdown="1"> Amazon ECS currently supports a subset of the logging drivers
-    #   available to the Docker daemon (shown in the LogConfiguration data
-    #   type). Additional log drivers may be available in future releases of
-    #   the Amazon ECS container agent.
+    #   available to the Docker daemon (shown in the [LogConfiguration][1]
+    #   data type). Additional log drivers may be available in future
+    #   releases of the Amazon ECS container agent.
     #
     #    </note>
     #
@@ -1686,26 +1729,27 @@ module Aws::ECS
     #   `ECS_AVAILABLE_LOGGING_DRIVERS` environment variable before
     #   containers placed on that instance can use these log configuration
     #   options. For more information, see [Amazon ECS Container Agent
-    #   Configuration][1] in the *Amazon Elastic Container Service Developer
+    #   Configuration][2] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LogConfiguration.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Types::LogConfiguration]
     #
     # @!attribute [rw] health_check
     #   The container health check command and associated configuration
     #   parameters for the container. This parameter maps to `HealthCheck`
-    #   in the docker create-container command and the `HEALTHCHECK`
+    #   in the docker conainer create command and the `HEALTHCHECK`
     #   parameter of docker run.
     #   @return [Types::HealthCheck]
     #
     # @!attribute [rw] system_controls
     #   A list of namespaced kernel parameters to set in the container. This
-    #   parameter maps to `Sysctls` in tthe docker create-container command
+    #   parameter maps to `Sysctls` in tthe docker conainer create command
     #   and the `--sysctl` option to docker run. For example, you can
     #   configure `net.ipv4.tcp_keepalive_time` setting to maintain longer
     #   lived connections.
@@ -2016,7 +2060,11 @@ module Aws::ECS
     # @!attribute [rw] attributes
     #   The attributes set for the container instance, either by the Amazon
     #   ECS container agent at instance registration or manually with the
-    #   PutAttributes operation.
+    #   [PutAttributes][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAttributes.html
     #   @return [Array<Types::Attribute>]
     #
     # @!attribute [rw] registered_at
@@ -2381,7 +2429,12 @@ module Aws::ECS
     #   The setting to use when creating a cluster. This parameter is used
     #   to turn on CloudWatch Container Insights for a cluster. If this
     #   value is specified, it overrides the `containerInsights` value set
-    #   with PutAccountSetting or PutAccountSettingDefault.
+    #   with [PutAccountSetting][1] or [PutAccountSettingDefault][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html
     #   @return [Array<Types::ClusterSetting>]
     #
     # @!attribute [rw] configuration
@@ -2426,12 +2479,13 @@ module Aws::ECS
     #
     #   If a default capacity provider strategy isn't defined for a cluster
     #   when it was created, it can be defined later with the
-    #   PutClusterCapacityProviders API operation.
+    #   [PutClusterCapacityProviders][3] API operation.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] service_connect_defaults
@@ -2997,9 +3051,10 @@ module Aws::ECS
     #   A capacity provider strategy consists of one or more capacity
     #   providers along with the `base` and `weight` to assign to them. A
     #   capacity provider must be associated with the cluster to be used in
-    #   a capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
-    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #   a capacity provider strategy. The [PutClusterCapacityProviders][1]
+    #   API is used to associate a capacity provider with a cluster. Only
+    #   capacity providers with an `ACTIVE` or `UPDATING` status can be
+    #   used.
     #
     #   If a `capacityProviderStrategy` is specified, the `launchType`
     #   parameter must be omitted. If no `capacityProviderStrategy` or
@@ -3008,17 +3063,22 @@ module Aws::ECS
     #
     #   If specifying a capacity provider that uses an Auto Scaling group,
     #   the capacity provider must already be created. New capacity
-    #   providers can be created with the CreateCapacityProvider API
-    #   operation.
+    #   providers can be created with the
+    #   [CreateCapacityProviderProvider][2]API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
     #   are available to all accounts and only need to be associated with a
     #   cluster to be used.
     #
-    #   The PutClusterCapacityProviders API operation is used to update the
-    #   list of available capacity providers for a cluster after the cluster
-    #   is created.
+    #   The [PutClusterCapacityProviders][1] API operation is used to update
+    #   the list of available capacity providers for a cluster after the
+    #   cluster is created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProviderProvider.html
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
@@ -3466,7 +3526,11 @@ module Aws::ECS
     #   state. If the service fails to reach a steady state and circuit
     #   breaker is turned on, the deployment transitions to a `FAILED`
     #   state. A deployment in `FAILED` state doesn't launch any new tasks.
-    #   For more information, see DeploymentCircuitBreaker.
+    #   For more information, see [DeploymentCircuitBreaker][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentCircuitBreaker.html
     #   @return [String]
     #
     # @!attribute [rw] rollout_state_reason
@@ -3780,7 +3844,8 @@ module Aws::ECS
     #     The number of containers Amazon ECS adds or removes from the
     #     service during a rolling update is controlled by adjusting the
     #     minimum and maximum number of healthy tasks allowed during a
-    #     service deployment, as specified in the DeploymentConfiguration.
+    #     service deployment, as specified in the
+    #     [DeploymentConfiguration][1].
     #
     #   CODE\_DEPLOY
     #
@@ -3794,6 +3859,10 @@ module Aws::ECS
     #   : The external (`EXTERNAL`) deployment type enables you to use any
     #     third-party deployment controller for full control over the
     #     deployment process for an Amazon ECS service.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentConfiguration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentController AWS API Documentation
@@ -4392,7 +4461,7 @@ module Aws::ECS
     #   use `docker plugin ls` to retrieve the driver name from your
     #   container instance. If the driver was installed using another
     #   method, use Docker plugin discovery to retrieve the driver name.
-    #   This parameter maps to `Driver` in the docker create-container
+    #   This parameter maps to `Driver` in the docker conainer create
     #   command and the `xxdriver` option to docker volume create.
     #   @return [String]
     #
@@ -4404,7 +4473,7 @@ module Aws::ECS
     #
     # @!attribute [rw] labels
     #   Custom metadata to add to your Docker volume. This parameter maps to
-    #   `Labels` in the docker create-container command and the `xxlabel`
+    #   `Labels` in the docker conainer create command and the `xxlabel`
     #   option to docker volume create.
     #   @return [Hash<String,String>]
     #
@@ -5134,7 +5203,7 @@ module Aws::ECS
     #
     #   An exit code of 0 indicates success, and non-zero exit code
     #   indicates failure. For more information, see `HealthCheck` in tthe
-    #   docker create-container command
+    #   docker conainer create command
     #   @return [Array<String>]
     #
     # @!attribute [rw] interval
@@ -5182,7 +5251,11 @@ module Aws::ECS
 
     # Hostnames and IP address entries that are added to the `/etc/hosts`
     # file of a container via the `extraHosts` parameter of its
-    # ContainerDefinition.
+    # [ContainerDefinition][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html
     #
     # @!attribute [rw] hostname
     #   The hostname to use in the `/etc/hosts` entry.
@@ -5337,7 +5410,7 @@ module Aws::ECS
     # @!attribute [rw] add
     #   The Linux capabilities for the container that have been added to the
     #   default configuration provided by Docker. This parameter maps to
-    #   `CapAdd` in the docker create-container command and the `--cap-add`
+    #   `CapAdd` in the docker conainer create command and the `--cap-add`
     #   option to docker run.
     #
     #   <note markdown="1"> Tasks launched on Fargate only support adding the `SYS_PTRACE`
@@ -5359,8 +5432,8 @@ module Aws::ECS
     # @!attribute [rw] drop
     #   The Linux capabilities for the container that have been removed from
     #   the default configuration provided by Docker. This parameter maps to
-    #   `CapDrop` in the docker create-container command and the
-    #   `--cap-drop` option to docker run.
+    #   `CapDrop` in the docker conainer create command and the `--cap-drop`
+    #   option to docker run.
     #
     #   Valid values: `"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
     #   "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
@@ -5429,7 +5502,7 @@ module Aws::ECS
     #
     # @!attribute [rw] devices
     #   Any host devices to expose to the container. This parameter maps to
-    #   `Devices` in tthe docker create-container command and the `--device`
+    #   `Devices` in tthe docker conainer create command and the `--device`
     #   option to docker run.
     #
     #   <note markdown="1"> If you're using tasks that use the Fargate launch type, the
@@ -5441,15 +5514,11 @@ module Aws::ECS
     # @!attribute [rw] init_process_enabled
     #   Run an `init` process inside the container that forwards signals and
     #   reaps processes. This parameter maps to the `--init` option to
-    #   [docker run][1]. This parameter requires version 1.25 of the Docker
+    #   docker run. This parameter requires version 1.25 of the Docker
     #   Remote API or greater on your container instance. To check the
     #   Docker Remote API version on your container instance, log in to your
     #   container instance and run the following command: `sudo docker
     #   version --format '\{\{.Server.APIVersion\}\}'`
-    #
-    #
-    #
-    #   [1]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Boolean]
     #
     # @!attribute [rw] shared_memory_size
@@ -5474,9 +5543,9 @@ module Aws::ECS
     #
     # @!attribute [rw] max_swap
     #   The total amount of swap memory (in MiB) a container can use. This
-    #   parameter will be translated to the `--memory-swap` option to
-    #   [docker run][1] where the value would be the sum of the container
-    #   memory plus the `maxSwap` value.
+    #   parameter will be translated to the `--memory-swap` option to docker
+    #   run where the value would be the sum of the container memory plus
+    #   the `maxSwap` value.
     #
     #   If a `maxSwap` value of `0` is specified, the container will not use
     #   swap. Accepted values are `0` or any positive integer. If the
@@ -5492,10 +5561,6 @@ module Aws::ECS
     #   parameter isn't supported.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.docker.com/engine/reference/run/#security-configuration
     #   @return [Integer]
     #
     # @!attribute [rw] swappiness
@@ -5795,9 +5860,13 @@ module Aws::ECS
     #   Filters the container instances by status. For example, if you
     #   specify the `DRAINING` status, the results include only container
     #   instances that have been set to `DRAINING` using
-    #   UpdateContainerInstancesState. If you don't specify this parameter,
-    #   the default is to include container instances set to all states
-    #   other than `INACTIVE`.
+    #   [UpdateContainerInstancesState][1]. If you don't specify this
+    #   parameter, the default is to include container instances set to all
+    #   states other than `INACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerInstancesState.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesRequest AWS API Documentation
@@ -6364,7 +6433,7 @@ module Aws::ECS
     end
 
     # The log configuration for the container. This parameter maps to
-    # `LogConfig` in the docker create-container command and the
+    # `LogConfig` in the docker conainer create command and the
     # `--log-driver` option to docker run.
     #
     # By default, containers use the same logging driver that the Docker
@@ -6580,9 +6649,8 @@ module Aws::ECS
     #
     # @!attribute [rw] maximum_scaling_step_size
     #   The maximum number of Amazon EC2 instances that Amazon ECS will
-    #   scale out at one time. The scale in process is not affected by this
-    #   parameter. If this parameter is omitted, the default value of
-    #   `10000` is used.
+    #   scale out at one time. If this parameter is omitted, the default
+    #   value of `10000` is used.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_warmup_period
@@ -6672,7 +6740,11 @@ module Aws::ECS
     # Details on the network bindings between a container and its host
     # container instance. After a task reaches the `RUNNING` status, manual
     # and automatic host and container port assignments are visible in the
-    # `networkBindings` section of DescribeTasks API responses.
+    # `networkBindings` section of [DescribeTasks][1] API responses.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
     #
     # @!attribute [rw] bind_ip
     #   The IP address that the container is bound to on the container
@@ -6950,7 +7022,7 @@ module Aws::ECS
     # can be left blank or it must be the same value as the `containerPort`.
     #
     # Most fields of this parameter (`containerPort`, `hostPort`,
-    # `protocol`) maps to `PortBindings` in the docker create-container
+    # `protocol`) maps to `PortBindings` in the docker conainer create
     # command and the `--publish` option to `docker run`. If the network
     # mode of a task definition is set to `host`, host ports must either be
     # undefined or match the container port in the port mapping.
@@ -6962,7 +7034,11 @@ module Aws::ECS
     #
     # After a task reaches the `RUNNING` status, manual and automatic host
     # and container port assignments are visible in the `networkBindings`
-    # section of DescribeTasks API responses.
+    # section of [DescribeTasks][1] API responses.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
     #
     # @!attribute [rw] container_port
     #   The port number on the container that's bound to the user-specified
@@ -7159,8 +7235,13 @@ module Aws::ECS
     end
 
     # An object representing the protection status details for a task. You
-    # can set the protection status with the UpdateTaskProtection API and
-    # get the status of tasks with the GetTaskProtection API.
+    # can set the protection status with the [UpdateTaskProtection][1] API
+    # and get the status of tasks with the [GetTaskProtection][2] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateTaskProtection.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_GetTaskProtection.html
     #
     # @!attribute [rw] task_arn
     #   The task ARN.
@@ -7580,13 +7661,17 @@ module Aws::ECS
     #
     #   If specifying a capacity provider that uses an Auto Scaling group,
     #   the capacity provider must already be created. New capacity
-    #   providers can be created with the CreateCapacityProvider API
+    #   providers can be created with the [CreateCapacityProvider][1] API
     #   operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
     #   are available to all accounts and only need to be associated with a
     #   cluster to be used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_capacity_provider_strategy
@@ -7599,19 +7684,25 @@ module Aws::ECS
     #   A capacity provider strategy consists of one or more capacity
     #   providers along with the `base` and `weight` to assign to them. A
     #   capacity provider must be associated with the cluster to be used in
-    #   a capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
-    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #   a capacity provider strategy. The [PutClusterCapacityProviders][1]
+    #   API is used to associate a capacity provider with a cluster. Only
+    #   capacity providers with an `ACTIVE` or `UPDATING` status can be
+    #   used.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group,
     #   the capacity provider must already be created. New capacity
-    #   providers can be created with the CreateCapacityProvider API
+    #   providers can be created with the [CreateCapacityProvider][2] API
     #   operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
     #   are available to all accounts and only need to be associated with a
     #   cluster to be used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutClusterCapacityProvidersRequest AWS API Documentation
@@ -8384,12 +8475,17 @@ module Aws::ECS
     #   Specifies whether to propagate the tags from the task definition to
     #   the task. If no value is specified, the tags aren't propagated.
     #   Tags can only be propagated to the task during task creation. To add
-    #   tags to a task after task creation, use the TagResource API action.
+    #   tags to a task after task creation, use the[TagResource][1] API
+    #   action.
     #
     #   <note markdown="1"> An error will be received if you specify the `SERVICE` option when
     #   running a task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
     #   @return [String]
     #
     # @!attribute [rw] reference_id
@@ -8720,8 +8816,13 @@ module Aws::ECS
     # @!attribute [rw] desired_count
     #   The desired number of instantiations of the task definition to keep
     #   running on the service. This value is specified when the service is
-    #   created with CreateService, and it can be modified with
-    #   UpdateService.
+    #   created with [CreateService][1] , and it can be modified with
+    #   [UpdateService][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
     #   @return [Integer]
     #
     # @!attribute [rw] running_count
@@ -8767,8 +8868,13 @@ module Aws::ECS
     #
     # @!attribute [rw] task_definition
     #   The task definition to use for tasks in the service. This value is
-    #   specified when the service is created with CreateService, and it can
-    #   be modified with UpdateService.
+    #   specified when the service is created with [CreateService][1], and
+    #   it can be modified with [UpdateService][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
     #   @return [String]
     #
     # @!attribute [rw] deployment_configuration
@@ -9069,7 +9175,7 @@ module Aws::ECS
     #
     # @!attribute [rw] log_configuration
     #   The log configuration for the container. This parameter maps to
-    #   `LogConfig` in the docker create-container command and the
+    #   `LogConfig` in the docker conainer create command and the
     #   `--log-driver` option to docker run.
     #
     #   By default, containers use the same logging driver that the Docker
@@ -9503,15 +9609,23 @@ module Aws::ECS
 
     # The specified service isn't active. You can't update a service
     # that's inactive. If you have previously deleted a service, you can
-    # re-create it with CreateService.
+    # re-create it with [CreateService][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceNotActiveException AWS API Documentation
     #
     class ServiceNotActiveException < Aws::EmptyStructure; end
 
     # The specified service wasn't found. You can view your available
-    # services with ListServices. Amazon ECS services are cluster specific
-    # and Region specific.
+    # services with [ListServices][1]. Amazon ECS services are cluster
+    # specific and Region specific.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceNotFoundException AWS API Documentation
     #
@@ -9851,7 +9965,12 @@ module Aws::ECS
     #   An optional message specified when a task is stopped. For example,
     #   if you're using a custom scheduler, you can use this parameter to
     #   specify the reason for stopping the task here, and the message
-    #   appears in subsequent DescribeTasks API operations on this task.
+    #   appears in subsequent [DescribeTasks][1]&gt; API operations on this
+    #   task.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskRequest AWS API Documentation
@@ -10039,10 +10158,10 @@ module Aws::ECS
     end
 
     # A list of namespaced kernel parameters to set in the container. This
-    # parameter maps to `Sysctls` in tthe docker create-container command
-    # and the `--sysctl` option to docker run. For example, you can
-    # configure `net.ipv4.tcp_keepalive_time` setting to maintain longer
-    # lived connections.
+    # parameter maps to `Sysctls` in tthe docker conainer create command and
+    # the `--sysctl` option to docker run. For example, you can configure
+    # `net.ipv4.tcp_keepalive_time` setting to maintain longer lived
+    # connections.
     #
     # We don't recommend that you specify network-related `systemControls`
     # parameters for multiple containers in a single task that also uses
@@ -10744,10 +10863,11 @@ module Aws::ECS
     #   Amazon EC2 instance is registered to your cluster, the Amazon ECS
     #   container agent assigns some standard attributes to the instance.
     #   You can apply custom attributes. These are specified as key-value
-    #   pairs using the Amazon ECS console or the PutAttributes API. These
-    #   attributes are used when determining task placement for tasks hosted
-    #   on Amazon EC2 instances. For more information, see [Attributes][1]
-    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #   pairs using the Amazon ECS console or the [PutAttributes][1] API.
+    #   These attributes are used when determining task placement for tasks
+    #   hosted on Amazon EC2 instances. For more information, see
+    #   [Attributes][2] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     #   <note markdown="1"> This parameter isn't supported for tasks run on Fargate.
     #
@@ -10755,7 +10875,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAttributes.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
     #   @return [Array<Types::Attribute>]
     #
     # @!attribute [rw] placement_constraints
@@ -11608,8 +11729,12 @@ module Aws::ECS
     end
 
     # The specified task set wasn't found. You can view your available task
-    # sets with DescribeTaskSets. Task sets are specific to each cluster,
-    # service and Region.
+    # sets with [DescribeTaskSets][1]. Task sets are specific to each
+    # cluster, service and Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskSets.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskSetNotFoundException AWS API Documentation
     #
@@ -11868,7 +11993,7 @@ module Aws::ECS
     #   The setting to use by default for a cluster. This parameter is used
     #   to turn on CloudWatch Container Insights for a cluster. If this
     #   value is specified, it overrides the `containerInsights` value set
-    #   with PutAccountSetting or PutAccountSettingDefault.
+    #   with [PutAccountSetting][1] or [PutAccountSettingDefault][2].
     #
     #   Currently, if you delete an existing cluster that does not have
     #   Container Insights turned on, and then create a new cluster with the
@@ -11876,6 +12001,11 @@ module Aws::ECS
     #   not actually be turned on. If you want to preserve the same name for
     #   your existing cluster and turn on Container Insights, you must wait
     #   7 days before you can re-create it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html
     #   @return [Array<Types::ClusterSetting>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettingsRequest AWS API Documentation
@@ -12065,23 +12195,31 @@ module Aws::ECS
     #   A capacity provider strategy consists of one or more capacity
     #   providers along with the `base` and `weight` to assign to them. A
     #   capacity provider must be associated with the cluster to be used in
-    #   a capacity provider strategy. The PutClusterCapacityProviders API is
-    #   used to associate a capacity provider with a cluster. Only capacity
-    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #   a capacity provider strategy. The [PutClusterCapacityProviders][1]
+    #   API is used to associate a capacity provider with a cluster. Only
+    #   capacity providers with an `ACTIVE` or `UPDATING` status can be
+    #   used.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group,
     #   the capacity provider must already be created. New capacity
-    #   providers can be created with the CreateCapacityProvider API
-    #   operation.
+    #   providers can be created with the [CreateClusterCapacityProvider][2]
+    #   API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
     #   are available to all accounts and only need to be associated with a
     #   cluster to be used.
     #
-    #   The PutClusterCapacityProviders API operation is used to update the
-    #   list of available capacity providers for a cluster after the cluster
-    #   is created.
+    #   The [PutClusterCapacityProviders][1]API operation is used to update
+    #   the list of available capacity providers for a cluster after the
+    #   cluster is created.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] deployment_configuration

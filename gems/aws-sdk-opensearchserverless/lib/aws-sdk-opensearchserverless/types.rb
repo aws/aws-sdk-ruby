@@ -311,6 +311,14 @@ module Aws::OpenSearchServerless
     #   A description of the collection.
     #   @return [String]
     #
+    # @!attribute [rw] failure_code
+    #   A failure code associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A message associated with the failure code.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   A unique identifier for the collection.
     #   @return [String]
@@ -348,6 +356,8 @@ module Aws::OpenSearchServerless
       :created_date,
       :dashboard_endpoint,
       :description,
+      :failure_code,
+      :failure_message,
       :id,
       :kms_key_arn,
       :last_modified_date,
@@ -2616,6 +2626,14 @@ module Aws::OpenSearchServerless
     #   The date the endpoint was created.
     #   @return [Integer]
     #
+    # @!attribute [rw] failure_code
+    #   A failure code associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A message associated with the failure code.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The unique identifier of the endpoint.
     #   @return [String]
@@ -2646,6 +2664,8 @@ module Aws::OpenSearchServerless
     #
     class VpcEndpointDetail < Struct.new(
       :created_date,
+      :failure_code,
+      :failure_message,
       :id,
       :name,
       :security_group_ids,

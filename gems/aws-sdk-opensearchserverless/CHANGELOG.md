@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2024-08-20)
+------------------
+
+* Feature - Added FailureCode and FailureMessage to BatchGetCollectionResponse for BatchGetVPCEResponse for non-Active Collection and VPCE.
+
 1.21.0 (2024-07-02)
 ------------------
 

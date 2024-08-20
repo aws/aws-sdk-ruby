@@ -81,6 +81,7 @@ module Aws
                       ?checksum_sha256: ::String,
                       ?request_payer: ("requester"),
                       ?expected_bucket_owner: ::String,
+                      ?if_none_match: ::String,
                       ?sse_customer_algorithm: ::String,
                       ?sse_customer_key: ::String,
                       ?sse_customer_key_md5: ::String

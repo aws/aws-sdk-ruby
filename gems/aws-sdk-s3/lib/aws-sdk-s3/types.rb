@@ -1061,6 +1061,27 @@ module Aws::S3
     #   denied).
     #   @return [String]
     #
+    # @!attribute [rw] if_none_match
+    #   Uploads the object only if the object key name does not already
+    #   exist in the bucket specified. Otherwise, Amazon S3 returns a `412
+    #   Precondition Failed` error.
+    #
+    #   If a conflicting operation occurs during the upload S3 returns a
+    #   `409 ConditionalRequestConflict` response. On a 409 failure you
+    #   should re-initiate the multipart upload with `CreateMultipartUpload`
+    #   and re-upload each part.
+    #
+    #   Expects the '*' (asterisk) character.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1],
+    #   or [Conditional requests][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html
+    #   @return [String]
+    #
     # @!attribute [rw] sse_customer_algorithm
     #   The server-side encryption (SSE) algorithm used to encrypt the
     #   object. This parameter is required only when the object was created
@@ -1120,6 +1141,7 @@ module Aws::S3
       :checksum_sha256,
       :request_payer,
       :expected_bucket_owner,
+      :if_none_match,
       :sse_customer_algorithm,
       :sse_customer_key,
       :sse_customer_key_md5)
@@ -7390,6 +7412,15 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_mode
     #   To retrieve the checksum, this mode must be enabled.
+    #
+    #   In addition, if you enable checksum mode and the object is uploaded
+    #   with a [checksum][1] and encrypted with an Key Management Service
+    #   (KMS) key, you must have permission to use the `kms:Decrypt` action
+    #   to retrieve the checksum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRequest AWS API Documentation
@@ -8556,10 +8587,14 @@ module Aws::S3
     # @!attribute [rw] checksum_mode
     #   To retrieve the checksum, this parameter must be enabled.
     #
-    #   In addition, if you enable `ChecksumMode` and the object is
-    #   encrypted with Amazon Web Services Key Management Service (Amazon
-    #   Web Services KMS), you must have permission to use the `kms:Decrypt`
-    #   action for the request to succeed.
+    #   In addition, if you enable checksum mode and the object is uploaded
+    #   with a [checksum][1] and encrypted with an Key Management Service
+    #   (KMS) key, you must have permission to use the `kms:Decrypt` action
+    #   to retrieve the checksum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectRequest AWS API Documentation
@@ -14157,6 +14192,26 @@ module Aws::S3
     #   [1]: https://www.rfc-editor.org/rfc/rfc7234#section-5.3
     #   @return [Time]
     #
+    # @!attribute [rw] if_none_match
+    #   Uploads the object only if the object key name does not already
+    #   exist in the bucket specified. Otherwise, Amazon S3 returns a `412
+    #   Precondition Failed` error.
+    #
+    #   If a conflicting operation occurs during the upload S3 returns a
+    #   `409 ConditionalRequestConflict` response. On a 409 failure you
+    #   should retry the upload.
+    #
+    #   Expects the '*' (asterisk) character.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1],
+    #   or [Conditional requests][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html
+    #   @return [String]
+    #
     # @!attribute [rw] grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
@@ -14443,6 +14498,7 @@ module Aws::S3
       :checksum_sha1,
       :checksum_sha256,
       :expires,
+      :if_none_match,
       :grant_full_control,
       :grant_read,
       :grant_read_acp,
@@ -15405,7 +15461,15 @@ module Aws::S3
     #   @return [Types::GlacierJobParameters]
     #
     # @!attribute [rw] type
+    #   Amazon S3 Select is no longer available to new customers. Existing
+    #   customers of Amazon S3 Select can continue to use the feature as
+    #   usual. [Learn more][1]
+    #
     #   Type of restore request.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [String]
     #
     # @!attribute [rw] tier
@@ -15417,7 +15481,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] select_parameters
+    #   Amazon S3 Select is no longer available to new customers. Existing
+    #   customers of Amazon S3 Select can continue to use the feature as
+    #   usual. [Learn more][1]
+    #
     #   Describes the parameters for Select job types.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [Types::SelectParameters]
     #
     # @!attribute [rw] output_location
@@ -15748,6 +15820,12 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # <note markdown="1"> Learn Amazon S3 Select is no longer available to new customers.
+    # Existing customers of Amazon S3 Select can continue to use the feature
+    # as usual. [Learn more][1]
+    #
+    #  </note>
+    #
     # Request to filter the contents of an Amazon S3 object based on a
     # simple Structured Query Language (SQL) statement. In the request,
     # along with the SQL expression, you must specify a data serialization
@@ -15755,11 +15833,12 @@ module Aws::S3
     # object data into records. It returns only records that match the
     # specified SQL expression. You must also specify the data serialization
     # format for the response. For more information, see [S3Select API
-    # Documentation][1].
+    # Documentation][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
     #
     # @!attribute [rw] bucket
     #   The S3 bucket.
@@ -15871,7 +15950,20 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Amazon S3 Select is no longer available to new customers. Existing
+    # customers of Amazon S3 Select can continue to use the feature as
+    # usual. [Learn more][1]
+    #
     # Describes the parameters for Select job types.
+    #
+    # Learn [How to optimize querying your data in Amazon S3][1] using
+    # [Amazon Athena][2], [S3 Object Lambda][3], or client-side filtering.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
+    # [2]: https://docs.aws.amazon.com/athena/latest/ug/what-is.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html
     #
     # @!attribute [rw] input_serialization
     #   Describes the serialization format of the object.
@@ -15882,7 +15974,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expression
+    #   Amazon S3 Select is no longer available to new customers. Existing
+    #   customers of Amazon S3 Select can continue to use the feature as
+    #   usual. [Learn more][1]
+    #
     #   The expression that is used to query the object.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [String]
     #
     # @!attribute [rw] output_serialization
