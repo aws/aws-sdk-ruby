@@ -10,7 +10,7 @@ module Aws
         ApiHelper.sample_service(
           metadata: { 'protocol' => 'rest-xml' },
           operations: {
-            'SomeOperation' => {
+            'HttpChecksumOperation' => {
               'http' => { 'method' => 'POST', 'requestUri' => '/' },
               'input' => { 'shape' => 'SomeInput' },
               'output' => { 'shape' => 'SomeOutput' },
@@ -21,7 +21,7 @@ module Aws
                 'responseAlgorithms' => response_algorithms
               }
             },
-            'SomeOperationStreaming' => {
+            'HttpChecksumStreamingOperation' => {
               'http' => { 'method' => 'POST', 'requestUri' => '/' },
               'unsignedPayload' => true,
               'input' => { 'shape' => 'SomeStreamingInput' },
@@ -31,6 +31,14 @@ module Aws
                 'requestAlgorithmMember' => 'ChecksumAlgorithm',
                 'requestValidationModeMember' => 'ValidationMode',
                 'responseAlgorithms' => response_algorithms
+              }
+            },
+            'ChecksumRequiredOperation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'SomeInput' },
+              'output' => { 'shape' => 'SomeOutput' },
+              'httpChecksum' => {
+                'requestChecksumRequired' => request_checksum_required,
               }
             }
           },
@@ -151,14 +159,20 @@ module Aws
       context 'request checksum calculation' do
         it 'raises when request algorithm is not supported by the client' do
           expect do
-            client.some_operation(checksum_algorithm: 'no-such-algorithm')
+            client.http_checksum_operation(checksum_algorithm: 'no-such-algorithm')
           end.to raise_error(ArgumentError)
         end
 
-        it 'will use a CRC32 as a default' do
-          resp = client.some_operation
+        it 'with requestAlgorithmMember; will use a CRC32 as a default' do
+          resp = client.http_checksum_operation
           header = resp.context.http_request.headers['x-amz-checksum-crc32']
           expect(header).to eq('AAAAAA==')
+        end
+
+        it 'without requestAlgorithmMember; will use a CRC32 as a default' do
+          resp = client.checksum_required_operation(body: 'crc32 me captain')
+          header = resp.context.http_request.headers['x-amz-checksum-crc32']
+          expect(header).to eq('nqtcGg==')
         end
 
         file = File.expand_path('checksum_request.json', __dir__)
@@ -171,7 +185,7 @@ module Aws
               skip "Algorithm #{algorithm} not supported"
             end
 
-            resp = client.some_operation(
+            resp = client.http_checksum_operation(
               checksum_algorithm: algorithm,
               body: test_case['requestPayload']
             )
@@ -195,7 +209,7 @@ module Aws
             end
 
             body = test_case['requestPayload']
-            client.stub_responses(:some_operation_streaming, lambda do |context|
+            client.stub_responses(:http_checksum_streaming_operation, lambda do |context|
               headers = context.http_request.headers
 
               expect(headers['x-amz-content-sha256'])
@@ -218,7 +232,7 @@ module Aws
               context
             end)
 
-            client.some_operation_streaming(
+            client.http_checksum_streaming_operation(
               checksum_algorithm: algorithm,
               body: body
             )
@@ -228,7 +242,7 @@ module Aws
 
       context 'response checksum calculation' do
         it 'computes a validation_list' do
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context[:http_checksum][:validation_list])
             .to include(*%w[SHA1 CRC32 SHA256])
         end
@@ -236,13 +250,13 @@ module Aws
         it 'validation_list does not include unknown algorithms' do
           expect_any_instance_of(ChecksumAlgorithm::ChecksumHandler)
             .to receive(:operation_response_algorithms).and_return(%w[UNKNOWN CRC32])
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context[:http_checksum][:validation_list]).to eq %w[CRC32]
         end
 
         it 'validates the first matched header by priority' do
           client.stub_responses(
-            :some_operation,
+            :http_checksum_operation,
             [{
                body: '',
                headers: {
@@ -251,19 +265,19 @@ module Aws
                },
                status_code: 200
              }])
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context[:http_checksum][:validated]).to eq 'CRC32'
         end
 
         it 'does not validate unknown checksums' do
           client.stub_responses(
-            :some_operation,
+            :http_checksum_operation,
             [{
                body: '',
                headers: {'x-amz-checksum-unknown' => 'unknown'},
                status_code: 200
              }])
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context[:http_checksum][:validated]).to be_nil
         end
 
@@ -279,7 +293,7 @@ module Aws
 
             expect = test_case['expect']
             client.stub_responses(
-              :some_operation,
+              :http_checksum_operation,
               [{
                  body: test_case['responsePayload'],
                  headers: test_case['responseHeaders'],
@@ -288,10 +302,10 @@ module Aws
             )
             case expect['kind']
             when 'success'
-              client.some_operation(validation_mode: 'ENABLED')
+              client.http_checksum_operation(validation_mode: 'ENABLED')
             when 'failure'
               expect do
-                client.some_operation(validation_mode: 'ENABLED')
+                client.http_checksum_operation(validation_mode: 'ENABLED')
               end.to raise_error(Aws::Errors::ChecksumError, /#{expect['responseHeaders']}/)
             else
               raise 'Unsupported test kind'
@@ -304,7 +318,7 @@ module Aws
         let(:request_checksum_required) { false }
 
         it 'WHEN_SUPPORTED; no algorithm; includes a checksum' do
-          resp = client.some_operation(checksum_algorithm: 'CRC32')
+          resp = client.http_checksum_operation(checksum_algorithm: 'CRC32')
           expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
             .to eq('AAAAAA==')
         end
@@ -314,7 +328,7 @@ module Aws
             stub_responses: true,
             request_checksum_calculation: 'WHEN_REQUIRED'
           )
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
             .to be_nil
         end
@@ -324,7 +338,7 @@ module Aws
         let(:request_checksum_required) { true }
 
         it 'WHEN_SUPPORTED; no algorithm; includes a checksum' do
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
             .to eq('AAAAAA==')
         end
@@ -334,7 +348,7 @@ module Aws
             stub_responses: true,
             request_checksum_calculation: 'WHEN_REQUIRED'
           )
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context.http_request.headers['x-amz-checksum-crc32'])
             .to eq('AAAAAA==')
         end
@@ -345,7 +359,7 @@ module Aws
 
         def stub_client(client)
           client.stub_responses(
-            :some_operation,
+            :http_checksum_operation,
             [{
                body: '',
                headers: { 'x-amz-checksum-crc32' => 'AAAAAA==' },
@@ -356,7 +370,7 @@ module Aws
 
         it 'WHEN_SUPPORTED; not ENABLED; validates the checksum' do
           stub_client(client)
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context[:http_checksum][:validated]).to eq('CRC32')
           # This needs to be set by the plugin in this case
           expect(resp.context.params[:validation_mode]).to eq('ENABLED')
@@ -368,7 +382,7 @@ module Aws
             response_checksum_calculation: 'WHEN_REQUIRED'
           )
           stub_client(client)
-          resp = client.some_operation
+          resp = client.http_checksum_operation
           expect(resp.context[:http_checksum][:validated]).to be_nil
         end
 
@@ -378,7 +392,7 @@ module Aws
             response_checksum_calculation: 'WHEN_REQUIRED'
           )
           stub_client(client)
-          resp = client.some_operation(validation_mode: 'ENABLED')
+          resp = client.http_checksum_operation(validation_mode: 'ENABLED')
           expect(resp.context[:http_checksum][:validated]).to eq('CRC32')
         end
       end

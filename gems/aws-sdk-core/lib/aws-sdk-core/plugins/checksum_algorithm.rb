@@ -28,9 +28,12 @@ module Aws
       CHECKSUM_SIZE = {
         'CRC32' => 16,
         'CRC32C' => 16,
+        'CRC64NVME' => 32,
         'SHA1' => 36,
         'SHA256' => 52
       }.freeze
+
+      DEFAULT_CHECKSUM = 'CRC32'
 
       option(:request_checksum_calculation,
              doc_default: 'WHEN_SUPPORTED',
@@ -163,7 +166,7 @@ module Aws
           default_request_algorithm_member(context)
           # Not modeled with httpChecksum
           if context.operation_name == :create_multipart_upload
-            context.params[:checksum_algorithm] ||= 'CRC32'
+            context.params[:checksum_algorithm] ||= DEFAULT_CHECKSUM
           end
 
           @handler.call(context)
@@ -253,7 +256,7 @@ module Aws
         end
 
         def choose_request_algorithm!(context)
-          algorithm = request_algorithm_selection(context)
+          algorithm = request_algorithm_selection(context) || DEFAULT_CHECKSUM
           return algorithm if CLIENT_ALGORITHMS.include?(algorithm)
 
           if algorithm == 'CRC32C'

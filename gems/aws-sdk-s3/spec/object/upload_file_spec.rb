@@ -131,37 +131,37 @@ module Aws
         context 'large objects' do
           it 'uses multipart APIs for objects >= 100MB' do
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
-            client.stub_responses(:upload_part, etag: 'etag')
+            client.stub_responses(:upload_part, etag: 'etag', checksum_crc32: 'checksum')
             expect(client).to receive(:complete_multipart_upload).with(
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               multipart_upload: {
                 parts: [
-                  { etag: 'etag', part_number: 1 },
-                  { etag: 'etag', part_number: 2 },
-                  { etag: 'etag', part_number: 3 },
-                  { etag: 'etag', part_number: 4 },
-                  { etag: 'etag', part_number: 5 },
-                  { etag: 'etag', part_number: 6 },
-                  { etag: 'etag', part_number: 7 },
-                  { etag: 'etag', part_number: 8 },
-                  { etag: 'etag', part_number: 9 },
-                  { etag: 'etag', part_number: 10 },
-                  { etag: 'etag', part_number: 11 },
-                  { etag: 'etag', part_number: 12 },
-                  { etag: 'etag', part_number: 13 },
-                  { etag: 'etag', part_number: 14 },
-                  { etag: 'etag', part_number: 15 },
-                  { etag: 'etag', part_number: 16 },
-                  { etag: 'etag', part_number: 17 },
-                  { etag: 'etag', part_number: 18 },
-                  { etag: 'etag', part_number: 19 },
-                  { etag: 'etag', part_number: 20 },
-                  { etag: 'etag', part_number: 21 },
-                  { etag: 'etag', part_number: 22 },
-                  { etag: 'etag', part_number: 23 },
-                  { etag: 'etag', part_number: 24 }
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 1 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 2 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 3 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 4 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 5 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 6 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 7 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 8 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 9 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 10 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 11 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 12 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 13 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 14 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 15 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 16 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 17 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 18 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 19 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 20 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 21 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 22 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 23 },
+                  { checksum_crc32: 'checksum', etag: 'etag', part_number: 24 }
                 ]
               }
             )
@@ -176,7 +176,11 @@ module Aws
             client.stub_responses(:complete_multipart_upload)
             expect(client).to receive(:upload_part).exactly(24).times do |args|
               args[:on_chunk_sent].call(args[:body], args[:body].size, args[:body].size)
-              double(etag: 'etag')
+              double(
+                context: double(params: { checksum_algorithm: 'crc32' }),
+                checksum_crc32: 'checksum',
+                etag: 'etag'
+              )
             end
             callback = proc do |bytes, totals|
               expect(bytes.size).to eq(24)

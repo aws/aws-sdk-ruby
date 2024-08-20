@@ -6,41 +6,33 @@ require 'stringio'
 module Aws
   module Plugins
     describe HttpChecksum do
-      HttpChecksumClient = ApiHelper.sample_service(
-        metadata: { 'protocol' => 'rest-xml' },
-        operations: {
-          'Operation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'StructureShape' },
-            'output' => { 'shape' => 'StructureShape' }
-          },
-          'ChecksumOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'StructureShape' },
-            'output' => { 'shape' => 'StructureShape' },
-            'httpChecksumRequired' => { 'required' => 'true' }
-          },
-          'ChecksumStreamingOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'PayloadStructureShape' },
-            'output' => { 'shape' => 'PayloadStructureShape' },
-            'httpChecksumRequired' => { 'required' => 'true' }
-          },
-          'ChecksumAlgorithmOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'StructureShape' },
-            'output' => { 'shape' => 'StructureShape' },
-            'httpChecksum' => {
-              "requestChecksumRequired" => true,
+      let(:http_checksum_client) do
+        ApiHelper.sample_service(
+          metadata: { 'protocol' => 'rest-xml' },
+          operations: {
+            'Operation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'StructureShape' },
+              'output' => { 'shape' => 'StructureShape' }
+            },
+            'ChecksumOperation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'StructureShape' },
+              'output' => { 'shape' => 'StructureShape' },
+              'httpChecksumRequired' => { 'required' => 'true' }
+            },
+            'ChecksumStreamingOperation' => {
+              'http' => { 'method' => 'POST', 'requestUri' => '/' },
+              'input' => { 'shape' => 'PayloadStructureShape' },
+              'output' => { 'shape' => 'PayloadStructureShape' },
+              'httpChecksumRequired' => { 'required' => 'true' }
             }
           }
-        }
-      ).const_get(:Client)
-
-      let(:creds) { Aws::Credentials.new('akid', 'secret') }
+        ).const_get(:Client)
+      end
 
       let(:client) do
-        HttpChecksumClient.new(credentials: creds, stub_responses: true)
+        http_checksum_client.new(stub_responses: true)
       end
 
       context 'checksum not required' do
@@ -65,15 +57,6 @@ module Aws
           resp = client.checksum_streaming_operation(streaming_blob: body)
           expect(resp.context.http_request.headers['content-md5']).to eq(
             '+kDD2/74SZx+Rz+/Dw7I1Q=='
-          )
-        end
-      end
-
-      context 'httpChecksum operation' do
-        it 'computes the MD5 when another checksum has not been selected' do
-          resp = client.checksum_algorithm_operation(string: 'md5 me captain')
-          expect(resp.context.http_request.headers['content-md5']).to eq(
-            'rqd/0N8H2GgZWzmo3oY9tA=='
           )
         end
       end
