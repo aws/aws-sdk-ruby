@@ -2,7 +2,7 @@
 
 module Aws
   module Telemetry
-    # No-op implementation for TelemetryProvider.
+    # No-op implementation for {TelemetryProviderBase}.
     class NoOpTelemetryProvider < TelemetryProviderBase
       def initialize
         super(
@@ -12,14 +12,14 @@ module Aws
       end
     end
 
-    # No-op implementation for TracerProvider.
+    # No-op implementation for {TracerProviderBase}.
     class NoOpTracerProvider < TracerProviderBase
       def tracer(name = nil)
         @tracer ||= NoOpTracer.new
       end
     end
 
-    # No-op implementation for Tracer.
+    # No-op implementation for {TracerBase}.
     class NoOpTracer < TracerBase
       def start_span(name, with_parent: nil, attributes: nil, kind: nil)
         NoOpSpan.new
@@ -30,7 +30,7 @@ module Aws
       end
     end
 
-    # No-op implementation for Span.
+    # No-op implementation for {SpanBase}.
     class NoOpSpan < SpanBase
       def set_attribute(key, value)
         self
@@ -54,7 +54,7 @@ module Aws
       def record_exception(exception, attributes: nil); end
     end
 
-    # No-op implementation for ContextManager.
+    # No-op implementation for {ContextManagerBase}.
     class NoOpContextManager < ContextManagerBase
       def current; end
 

@@ -7,7 +7,7 @@ module Aws
       class << self
         private :new
 
-        # Returns a newly created {SpanStatus} with code == +UNSET+
+        # Returns a newly created {SpanStatus} with code, +UNSET+
         # and an optional description.
         #
         # @param [optional String] description
@@ -16,7 +16,7 @@ module Aws
           new(UNSET, description: description)
         end
 
-        # Returns a newly created {SpanStatus} with code == +OK+
+        # Returns a newly created {SpanStatus} with code, +OK+
         # and an optional description.
         #
         # @param [optional String] description
@@ -25,7 +25,7 @@ module Aws
           new(OK, description: description)
         end
 
-        # Returns a newly created {SpanStatus} with code == +ERROR+
+        # Returns a newly created {SpanStatus} with code, +ERROR+
         # and an optional description.
         #
         # @param [optional String] description

@@ -2,42 +2,43 @@
 
 module Aws
   module Telemetry
-    # Base for TelemetryProvider classes.
+    # Base for `TelemetryProvider` classes.
     # They are used to emit telemetry data. It needs the
-    # following class instances to function:
-    # - `TracerProvider` - A provider that returns a tracer
+    # following class implementations to function:
+    # - {TracerProviderBase} - A provider that returns a tracer
     #   instance. Then, a tracer will create spans and those
     #   spans will contain information in that given moment.
-    # - `ContextManager` - Manages context and used to
+    # - {ContextManagerBase} - Manages context and used to
     #   return the current context within a trace.
     class TelemetryProviderBase
-      # @param [Class] tracer_provider A provider that returns
-      #  a tracer instance.
-      # @param [Class] context_manager Manages context and
-      #  used to return the current context.
+      # @param [Aws::Telemetry::TracerBase] tracer_provider A provider
+      #  that returns a tracer instance.
+      # @param [Aws::Telemetry::ContextManagerBase] context_manager Manages
+      #  context and used to return the current context.
       def initialize(tracer_provider: nil, context_manager: nil)
         @tracer_provider = tracer_provider
         @context_manager = context_manager
       end
-      # @return [TracerProvider]
+
+      # @return [Aws::Telemetry::TracerProviderBase]
       attr_reader :tracer_provider
 
-      # @return [ContextManager]
+      # @return [Aws::Telemetry::ContextManagerBase]
       attr_reader :context_manager
     end
 
-    # Base for TracerProvider classes.
+    # Base for `TracerProvider` classes.
     class TracerProviderBase
       # Returns a Tracer instance.
       #
       # @param [String] name Tracer name
-      # @return [Tracer]
+      # @return [Aws::Telemetry::TracerBase]
       def tracer(name = nil)
         raise NotImplementedError
       end
     end
 
-    # Base for Tracer classes.
+    # Base for `Tracer` classes.
     class TracerBase
       # Used when a caller wants to manage the activation/deactivation and
       # lifecycle of the Span and its parent manually.
@@ -46,7 +47,7 @@ module Aws
       # @param [Object] with_parent Parent Context
       # @param [Hash] attributes Attributes to attach to the span
       # @param [Aws::Telemetry::SpanKind] kind Type of Span
-      # @return [Span]
+      # @return [Aws::Telemetry::SpanBase]
       def start_span(name, with_parent: nil, attributes: nil, kind: nil)
         raise NotImplementedError
       end
@@ -60,13 +61,13 @@ module Aws
       # @param [String] name Span name
       # @param [Hash] attributes Attributes to attach to the span
       # @param [Aws::Telemetry::SpanKind] kind Type of Span
-      # @return [Span]
+      # @return [Aws::Telemetry::SpanBase]
       def in_span(name, attributes: nil, kind: nil)
         raise NotImplementedError
       end
     end
 
-    # Base for Span classes.
+    # Base for `Span` classes.
     class SpanBase
       # Set attribute.
       #
@@ -74,7 +75,7 @@ module Aws
       # @param [String, Boolean, Numeric, Array<String, Numeric, Boolean>] value
       #   Value must be non-nil and (array of) string, boolean or numeric type.
       #   Array values must not contain nil elements and all elements must be of
-      #   the same basic type (string, numeric, boolean).
+      #   the same basic type (string, numeric, boolean)
       # @return [self] returns itself
       def set_attribute(key, value)
         raise NotImplementedError
@@ -87,7 +88,7 @@ module Aws
       #   Boolean>}] attributes Values must be non-nil and (array of) string,
       #   boolean or numeric type. Array values must not contain nil elements
       #   and all elements must be of the same basic type (string, numeric,
-      #   boolean).
+      #   boolean)
       # @return [self] returns itself
       def add_attributes(attributes)
         raise NotImplementedError
@@ -95,12 +96,12 @@ module Aws
 
       # Add event to a Span.
       #
-      # @param [String] name Name of the event.
+      # @param [String] name Name of the event
       # @param [Hash{String => String, Numeric, Boolean, Array<String,
       #   Numeric, Boolean>}] attributes Values must be non-nil and (array of)
       #   string, boolean or numeric type. Array values must not contain nil
       #   elements and all elements must be of the same basic type (string,
-      #   numeric, boolean).
+      #   numeric, boolean)
       # @return [self] returns itself
       def add_event(name, attributes: nil)
         raise NotImplementedError
@@ -109,7 +110,7 @@ module Aws
       # Sets the Span status.
       #
       # @param [Aws::Telemetry::SpanStatus] status The new status, which
-      #   overrides the default Span status, which is OK.
+      #   overrides the default Span status, which is `OK`
       # @return [void]
       def status=(status)
         raise NotImplementedError
@@ -137,7 +138,7 @@ module Aws
       end
     end
 
-    # Base for all ContextManager classes.
+    # Base for all `ContextManager` classes.
     class ContextManagerBase
       # Returns current context.
       #
@@ -148,7 +149,7 @@ module Aws
 
       # Returns the current span from current context.
       #
-      # @return Span
+      # @return [Aws::Telemetry::SpanBase]
       def current_span
         raise NotImplementedError
       end
@@ -167,7 +168,7 @@ module Aws
       # specified Context.
       #
       # @param [Object] token The token provided by matching the call to attach
-      # @return [Boolean] True if the calls matched, False otherwise
+      # @return [Boolean] `True` if the calls matched, `False` otherwise
       def detach(token)
         raise NotImplementedError
       end

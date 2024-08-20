@@ -13,7 +13,7 @@ module Aws
   # a telemetry signal.
   #
   # A telemetry provider is used to emit telemetry data. By default, the
-  # `NoOpTelemetryProvider` will not record or emit any telemetry data.
+  # {NoOpTelemetryProvider} will not record or emit any telemetry data.
   # The SDK currently supports OpenTelemetry (OTel) as a provider. See
   # {OTelProvider} for more information.
   #

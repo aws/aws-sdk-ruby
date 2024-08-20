@@ -12,7 +12,7 @@ module Aws
       # Represents a request to some remote service.
       CLIENT = :client
 
-      # Represents a child of an asynchronous +PRODUCER+ request.
+      # Represents a child of an asynchronous `PRODUCER` request.
       CONSUMER = :consumer
 
       # Represents an asynchronous request.

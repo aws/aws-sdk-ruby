@@ -9,9 +9,10 @@ module Aws
         default: Aws::Telemetry::NoOpTelemetryProvider,
         doc_type: Aws::Telemetry::TelemetryProviderBase,
         rbs_type: 'untyped',
-        docstring: <<-DOCS) do |cfg|
-          Allows you to provide a telemetry provider. By default,
-          will use the NoOpTelemetryProvider.
+        docstring: <<~DOCS) do |cfg|
+          Allows you to provide a telemetry provider, which is used
+          to emit telemetry data. By default, will use `NoOpTelemetryProvider`
+          which will not record or emit any telemetry data.
         DOCS
         resolve_provider(cfg)
       end
