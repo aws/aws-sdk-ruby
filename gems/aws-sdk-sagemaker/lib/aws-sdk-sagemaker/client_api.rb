@@ -122,6 +122,7 @@ module Aws::SageMaker
     AutoMLCandidates = Shapes::ListShape.new(name: 'AutoMLCandidates')
     AutoMLChannel = Shapes::StructureShape.new(name: 'AutoMLChannel')
     AutoMLChannelType = Shapes::StringShape.new(name: 'AutoMLChannelType')
+    AutoMLComputeConfig = Shapes::StructureShape.new(name: 'AutoMLComputeConfig')
     AutoMLContainerDefinition = Shapes::StructureShape.new(name: 'AutoMLContainerDefinition')
     AutoMLContainerDefinitions = Shapes::ListShape.new(name: 'AutoMLContainerDefinitions')
     AutoMLDataSource = Shapes::StructureShape.new(name: 'AutoMLDataSource')
@@ -809,6 +810,8 @@ module Aws::SageMaker
     EdgeVersion = Shapes::StringShape.new(name: 'EdgeVersion')
     Edges = Shapes::ListShape.new(name: 'Edges')
     EfsUid = Shapes::StringShape.new(name: 'EfsUid')
+    EmrServerlessComputeConfig = Shapes::StructureShape.new(name: 'EmrServerlessComputeConfig')
+    EmrServerlessSettings = Shapes::StructureShape.new(name: 'EmrServerlessSettings')
     EmrSettings = Shapes::StructureShape.new(name: 'EmrSettings')
     EnableCapture = Shapes::BooleanShape.new(name: 'EnableCapture')
     EnableInfraCheck = Shapes::BooleanShape.new(name: 'EnableInfraCheck')
@@ -824,6 +827,7 @@ module Aws::SageMaker
     EndpointConfigName = Shapes::StringShape.new(name: 'EndpointConfigName')
     EndpointConfigNameContains = Shapes::StringShape.new(name: 'EndpointConfigNameContains')
     EndpointConfigSortKey = Shapes::StringShape.new(name: 'EndpointConfigSortKey')
+    EndpointConfigStepMetadata = Shapes::StructureShape.new(name: 'EndpointConfigStepMetadata')
     EndpointConfigSummary = Shapes::StructureShape.new(name: 'EndpointConfigSummary')
     EndpointConfigSummaryList = Shapes::ListShape.new(name: 'EndpointConfigSummaryList')
     EndpointInfo = Shapes::StructureShape.new(name: 'EndpointInfo')
@@ -838,6 +842,7 @@ module Aws::SageMaker
     EndpointPerformances = Shapes::ListShape.new(name: 'EndpointPerformances')
     EndpointSortKey = Shapes::StringShape.new(name: 'EndpointSortKey')
     EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
+    EndpointStepMetadata = Shapes::StructureShape.new(name: 'EndpointStepMetadata')
     EndpointSummary = Shapes::StructureShape.new(name: 'EndpointSummary')
     EndpointSummaryList = Shapes::ListShape.new(name: 'EndpointSummaryList')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
@@ -2624,6 +2629,9 @@ module Aws::SageMaker
     AutoMLChannel.add_member(:sample_weight_attribute_name, Shapes::ShapeRef.new(shape: SampleWeightAttributeName, location_name: "SampleWeightAttributeName"))
     AutoMLChannel.struct_class = Types::AutoMLChannel
 
+    AutoMLComputeConfig.add_member(:emr_serverless_compute_config, Shapes::ShapeRef.new(shape: EmrServerlessComputeConfig, location_name: "EmrServerlessComputeConfig"))
+    AutoMLComputeConfig.struct_class = Types::AutoMLComputeConfig
+
     AutoMLContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))
     AutoMLContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "ModelDataUrl"))
     AutoMLContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
@@ -2827,6 +2835,7 @@ module Aws::SageMaker
     CanvasAppSettings.add_member(:direct_deploy_settings, Shapes::ShapeRef.new(shape: DirectDeploySettings, location_name: "DirectDeploySettings"))
     CanvasAppSettings.add_member(:kendra_settings, Shapes::ShapeRef.new(shape: KendraSettings, location_name: "KendraSettings"))
     CanvasAppSettings.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAiSettings, location_name: "GenerativeAiSettings"))
+    CanvasAppSettings.add_member(:emr_serverless_settings, Shapes::ShapeRef.new(shape: EmrServerlessSettings, location_name: "EmrServerlessSettings"))
     CanvasAppSettings.struct_class = Types::CanvasAppSettings
 
     CapacitySize.add_member(:type, Shapes::ShapeRef.new(shape: CapacitySizeType, required: true, location_name: "Type"))
@@ -3221,6 +3230,7 @@ module Aws::SageMaker
     CreateAutoMLJobV2Request.add_member(:auto_ml_job_objective, Shapes::ShapeRef.new(shape: AutoMLJobObjective, location_name: "AutoMLJobObjective"))
     CreateAutoMLJobV2Request.add_member(:model_deploy_config, Shapes::ShapeRef.new(shape: ModelDeployConfig, location_name: "ModelDeployConfig"))
     CreateAutoMLJobV2Request.add_member(:data_split_config, Shapes::ShapeRef.new(shape: AutoMLDataSplitConfig, location_name: "DataSplitConfig"))
+    CreateAutoMLJobV2Request.add_member(:auto_ml_compute_config, Shapes::ShapeRef.new(shape: AutoMLComputeConfig, location_name: "AutoMLComputeConfig"))
     CreateAutoMLJobV2Request.struct_class = Types::CreateAutoMLJobV2Request
 
     CreateAutoMLJobV2Response.add_member(:auto_ml_job_arn, Shapes::ShapeRef.new(shape: AutoMLJobArn, required: true, location_name: "AutoMLJobArn"))
@@ -4426,6 +4436,7 @@ module Aws::SageMaker
     DescribeAutoMLJobV2Response.add_member(:model_deploy_result, Shapes::ShapeRef.new(shape: ModelDeployResult, location_name: "ModelDeployResult"))
     DescribeAutoMLJobV2Response.add_member(:data_split_config, Shapes::ShapeRef.new(shape: AutoMLDataSplitConfig, location_name: "DataSplitConfig"))
     DescribeAutoMLJobV2Response.add_member(:security_config, Shapes::ShapeRef.new(shape: AutoMLSecurityConfig, location_name: "SecurityConfig"))
+    DescribeAutoMLJobV2Response.add_member(:auto_ml_compute_config, Shapes::ShapeRef.new(shape: AutoMLComputeConfig, location_name: "AutoMLComputeConfig"))
     DescribeAutoMLJobV2Response.struct_class = Types::DescribeAutoMLJobV2Response
 
     DescribeClusterNodeRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
@@ -5651,6 +5662,13 @@ module Aws::SageMaker
 
     Edges.member = Shapes::ShapeRef.new(shape: Edge)
 
+    EmrServerlessComputeConfig.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleARN"))
+    EmrServerlessComputeConfig.struct_class = Types::EmrServerlessComputeConfig
+
+    EmrServerlessSettings.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
+    EmrServerlessSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
+    EmrServerlessSettings.struct_class = Types::EmrServerlessSettings
+
     EmrSettings.add_member(:assumable_role_arns, Shapes::ShapeRef.new(shape: AssumableRoleArns, location_name: "AssumableRoleArns"))
     EmrSettings.add_member(:execution_role_arns, Shapes::ShapeRef.new(shape: ExecutionRoleArns, location_name: "ExecutionRoleArns"))
     EmrSettings.struct_class = Types::EmrSettings
@@ -5672,6 +5690,9 @@ module Aws::SageMaker
     Endpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Endpoint.add_member(:shadow_production_variants, Shapes::ShapeRef.new(shape: ProductionVariantSummaryList, location_name: "ShadowProductionVariants"))
     Endpoint.struct_class = Types::Endpoint
+
+    EndpointConfigStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointConfigArn, location_name: "Arn"))
+    EndpointConfigStepMetadata.struct_class = Types::EndpointConfigStepMetadata
 
     EndpointConfigSummary.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
     EndpointConfigSummary.add_member(:endpoint_config_arn, Shapes::ShapeRef.new(shape: EndpointConfigArn, required: true, location_name: "EndpointConfigArn"))
@@ -5722,6 +5743,9 @@ module Aws::SageMaker
     EndpointPerformance.struct_class = Types::EndpointPerformance
 
     EndpointPerformances.member = Shapes::ShapeRef.new(shape: EndpointPerformance)
+
+    EndpointStepMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "Arn"))
+    EndpointStepMetadata.struct_class = Types::EndpointStepMetadata
 
     EndpointSummary.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     EndpointSummary.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, required: true, location_name: "EndpointArn"))
@@ -8563,6 +8587,8 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:clarify_check, Shapes::ShapeRef.new(shape: ClarifyCheckStepMetadata, location_name: "ClarifyCheck"))
     PipelineExecutionStepMetadata.add_member(:fail, Shapes::ShapeRef.new(shape: FailStepMetadata, location_name: "Fail"))
     PipelineExecutionStepMetadata.add_member(:auto_ml_job, Shapes::ShapeRef.new(shape: AutoMLJobStepMetadata, location_name: "AutoMLJob"))
+    PipelineExecutionStepMetadata.add_member(:endpoint, Shapes::ShapeRef.new(shape: EndpointStepMetadata, location_name: "Endpoint"))
+    PipelineExecutionStepMetadata.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfigStepMetadata, location_name: "EndpointConfig"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -8677,7 +8703,7 @@ module Aws::SageMaker
     ProcessingS3Input.struct_class = Types::ProcessingS3Input
 
     ProcessingS3Output.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
-    ProcessingS3Output.add_member(:local_path, Shapes::ShapeRef.new(shape: ProcessingLocalPath, required: true, location_name: "LocalPath"))
+    ProcessingS3Output.add_member(:local_path, Shapes::ShapeRef.new(shape: ProcessingLocalPath, location_name: "LocalPath"))
     ProcessingS3Output.add_member(:s3_upload_mode, Shapes::ShapeRef.new(shape: ProcessingS3UploadMode, required: true, location_name: "S3UploadMode"))
     ProcessingS3Output.struct_class = Types::ProcessingS3Output
 

@@ -78,7 +78,7 @@ module Aws
         def graph_id: () -> ::String
         def task_id: () -> ::String
         def source: () -> ::String
-        def format: () -> ("CSV" | "OPEN_CYPHER")
+        def format: () -> ("CSV" | "OPEN_CYPHER" | "NTRIPLES")
         def role_arn: () -> ::String
         def status: () -> ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
       end
@@ -151,7 +151,7 @@ module Aws
         def graph_id: () -> ::String
         def task_id: () -> ::String
         def source: () -> ::String
-        def format: () -> ("CSV" | "OPEN_CYPHER")
+        def format: () -> ("CSV" | "OPEN_CYPHER" | "NTRIPLES")
         def role_arn: () -> ::String
         def status: () -> ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
         def import_options: () -> Types::ImportOptions
@@ -179,7 +179,8 @@ module Aws
                                             ?min_provisioned_memory: ::Integer,
                                             ?fail_on_error: bool,
                                             source: ::String,
-                                            ?format: ("CSV" | "OPEN_CYPHER"),
+                                            ?format: ("CSV" | "OPEN_CYPHER" | "NTRIPLES"),
+                                            ?blank_node_handling: ("convertToIri"),
                                             role_arn: ::String
                                           ) -> _CreateGraphUsingImportTaskResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphUsingImportTaskResponseSuccess
@@ -330,7 +331,7 @@ module Aws
         def graph_id: () -> ::String
         def task_id: () -> ::String
         def source: () -> ::String
-        def format: () -> ("CSV" | "OPEN_CYPHER")
+        def format: () -> ("CSV" | "OPEN_CYPHER" | "NTRIPLES")
         def role_arn: () -> ::String
         def status: () -> ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
         def import_options: () -> Types::ImportOptions
@@ -505,7 +506,7 @@ module Aws
         def graph_id: () -> ::String
         def task_id: () -> ::String
         def source: () -> ::String
-        def format: () -> ("CSV" | "OPEN_CYPHER")
+        def format: () -> ("CSV" | "OPEN_CYPHER" | "NTRIPLES")
         def role_arn: () -> ::String
         def status: () -> ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED")
         def import_options: () -> Types::ImportOptions
@@ -522,7 +523,8 @@ module Aws
                                },
                                ?fail_on_error: bool,
                                source: ::String,
-                               ?format: ("CSV" | "OPEN_CYPHER"),
+                               ?format: ("CSV" | "OPEN_CYPHER" | "NTRIPLES"),
+                               ?blank_node_handling: ("convertToIri"),
                                graph_identifier: ::String,
                                role_arn: ::String
                              ) -> _StartImportTaskResponseSuccess

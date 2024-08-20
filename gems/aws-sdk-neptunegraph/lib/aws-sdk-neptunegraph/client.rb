@@ -450,7 +450,7 @@ module Aws::NeptuneGraph
     #   resp.graph_id #=> String
     #   resp.task_id #=> String
     #   resp.source #=> String
-    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER"
+    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER", "NTRIPLES"
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "INITIALIZING", "EXPORTING", "ANALYZING_DATA", "IMPORTING", "REPROVISIONING", "ROLLING_BACK", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"
     #
@@ -739,6 +739,16 @@ module Aws::NeptuneGraph
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
     #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
     #
+    # @option params [String] :blank_node_handling
+    #   The method to handle blank nodes in the dataset. Currently, only
+    #   `convertToIri` is supported, meaning blank nodes are converted to
+    #   unique IRIs at load time. Must be provided when format is `ntriples`.
+    #   For more information, see [Handling RDF values][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling
+    #
     # @option params [required, String] :role_arn
     #   The ARN of the IAM role that will allow access to the data that is to
     #   be imported.
@@ -779,7 +789,8 @@ module Aws::NeptuneGraph
     #     min_provisioned_memory: 1,
     #     fail_on_error: false,
     #     source: "String", # required
-    #     format: "CSV", # accepts CSV, OPEN_CYPHER
+    #     format: "CSV", # accepts CSV, OPEN_CYPHER, NTRIPLES
+    #     blank_node_handling: "convertToIri", # accepts convertToIri
     #     role_arn: "RoleArn", # required
     #   })
     #
@@ -788,7 +799,7 @@ module Aws::NeptuneGraph
     #   resp.graph_id #=> String
     #   resp.task_id #=> String
     #   resp.source #=> String
-    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER"
+    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER", "NTRIPLES"
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "INITIALIZING", "EXPORTING", "ANALYZING_DATA", "IMPORTING", "REPROVISIONING", "ROLLING_BACK", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"
     #   resp.import_options.neptune.s3_export_path #=> String
@@ -1276,7 +1287,7 @@ module Aws::NeptuneGraph
     #   resp.graph_id #=> String
     #   resp.task_id #=> String
     #   resp.source #=> String
-    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER"
+    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER", "NTRIPLES"
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "INITIALIZING", "EXPORTING", "ANALYZING_DATA", "IMPORTING", "REPROVISIONING", "ROLLING_BACK", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"
     #   resp.import_options.neptune.s3_export_path #=> String
@@ -1551,7 +1562,7 @@ module Aws::NeptuneGraph
     #   resp.tasks[0].graph_id #=> String
     #   resp.tasks[0].task_id #=> String
     #   resp.tasks[0].source #=> String
-    #   resp.tasks[0].format #=> String, one of "CSV", "OPEN_CYPHER"
+    #   resp.tasks[0].format #=> String, one of "CSV", "OPEN_CYPHER", "NTRIPLES"
     #   resp.tasks[0].role_arn #=> String
     #   resp.tasks[0].status #=> String, one of "INITIALIZING", "EXPORTING", "ANALYZING_DATA", "IMPORTING", "REPROVISIONING", "ROLLING_BACK", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"
     #   resp.next_token #=> String
@@ -1874,6 +1885,16 @@ module Aws::NeptuneGraph
     #   are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which
     #   identies the openCypher load format.
     #
+    # @option params [String] :blank_node_handling
+    #   The method to handle blank nodes in the dataset. Currently, only
+    #   `convertToIri` is supported, meaning blank nodes are converted to
+    #   unique IRIs at load time. Must be provided when format is `ntriples`.
+    #   For more information, see [Handling RDF values][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling
+    #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
     #
@@ -1904,7 +1925,8 @@ module Aws::NeptuneGraph
     #     },
     #     fail_on_error: false,
     #     source: "String", # required
-    #     format: "CSV", # accepts CSV, OPEN_CYPHER
+    #     format: "CSV", # accepts CSV, OPEN_CYPHER, NTRIPLES
+    #     blank_node_handling: "convertToIri", # accepts convertToIri
     #     graph_identifier: "GraphIdentifier", # required
     #     role_arn: "RoleArn", # required
     #   })
@@ -1914,7 +1936,7 @@ module Aws::NeptuneGraph
     #   resp.graph_id #=> String
     #   resp.task_id #=> String
     #   resp.source #=> String
-    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER"
+    #   resp.format #=> String, one of "CSV", "OPEN_CYPHER", "NTRIPLES"
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "INITIALIZING", "EXPORTING", "ANALYZING_DATA", "IMPORTING", "REPROVISIONING", "ROLLING_BACK", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"
     #   resp.import_options.neptune.s3_export_path #=> String
@@ -2087,7 +2109,7 @@ module Aws::NeptuneGraph
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

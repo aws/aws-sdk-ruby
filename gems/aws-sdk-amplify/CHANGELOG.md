@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2024-08-13)
+------------------
+
+* Feature - Add a new field "cacheConfig" that enables users to configure the CDN cache settings for an App
+
 1.65.0 (2024-07-02)
 ------------------
 

@@ -5132,6 +5132,135 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Create a new Capacity Reservation by splitting the available capacity
+    # of the source Capacity Reservation. The new Capacity Reservation will
+    # have the same attributes as the source Capacity Reservation except for
+    # tags. The source Capacity Reservation must be `active` and owned by
+    # your Amazon Web Services account.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :source_capacity_reservation_id
+    #   The ID of the Capacity Reservation from which you want to split the
+    #   available capacity.
+    #
+    # @option params [required, Integer] :instance_count
+    #   The number of instances to split from the source Capacity Reservation.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new Capacity Reservation.
+    #
+    # @return [Types::CreateCapacityReservationBySplittingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCapacityReservationBySplittingResult#source_capacity_reservation #source_capacity_reservation} => Types::CapacityReservation
+    #   * {Types::CreateCapacityReservationBySplittingResult#destination_capacity_reservation #destination_capacity_reservation} => Types::CapacityReservation
+    #   * {Types::CreateCapacityReservationBySplittingResult#instance_count #instance_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_capacity_reservation_by_splitting({
+    #     dry_run: false,
+    #     client_token: "String",
+    #     source_capacity_reservation_id: "CapacityReservationId", # required
+    #     instance_count: 1, # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, ipam-external-resource-verification-token
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_capacity_reservation.capacity_reservation_id #=> String
+    #   resp.source_capacity_reservation.owner_id #=> String
+    #   resp.source_capacity_reservation.capacity_reservation_arn #=> String
+    #   resp.source_capacity_reservation.availability_zone_id #=> String
+    #   resp.source_capacity_reservation.instance_type #=> String
+    #   resp.source_capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "RHEL with SQL Server Standard", "RHEL with SQL Server Enterprise", "RHEL with SQL Server Web", "RHEL with HA", "RHEL with HA and SQL Server Standard", "RHEL with HA and SQL Server Enterprise", "Ubuntu Pro"
+    #   resp.source_capacity_reservation.availability_zone #=> String
+    #   resp.source_capacity_reservation.tenancy #=> String, one of "default", "dedicated"
+    #   resp.source_capacity_reservation.total_instance_count #=> Integer
+    #   resp.source_capacity_reservation.available_instance_count #=> Integer
+    #   resp.source_capacity_reservation.ebs_optimized #=> Boolean
+    #   resp.source_capacity_reservation.ephemeral_storage #=> Boolean
+    #   resp.source_capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
+    #   resp.source_capacity_reservation.start_date #=> Time
+    #   resp.source_capacity_reservation.end_date #=> Time
+    #   resp.source_capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.source_capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.source_capacity_reservation.create_date #=> Time
+    #   resp.source_capacity_reservation.tags #=> Array
+    #   resp.source_capacity_reservation.tags[0].key #=> String
+    #   resp.source_capacity_reservation.tags[0].value #=> String
+    #   resp.source_capacity_reservation.outpost_arn #=> String
+    #   resp.source_capacity_reservation.capacity_reservation_fleet_id #=> String
+    #   resp.source_capacity_reservation.placement_group_arn #=> String
+    #   resp.source_capacity_reservation.capacity_allocations #=> Array
+    #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
+    #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
+    #   resp.destination_capacity_reservation.owner_id #=> String
+    #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
+    #   resp.destination_capacity_reservation.availability_zone_id #=> String
+    #   resp.destination_capacity_reservation.instance_type #=> String
+    #   resp.destination_capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "RHEL with SQL Server Standard", "RHEL with SQL Server Enterprise", "RHEL with SQL Server Web", "RHEL with HA", "RHEL with HA and SQL Server Standard", "RHEL with HA and SQL Server Enterprise", "Ubuntu Pro"
+    #   resp.destination_capacity_reservation.availability_zone #=> String
+    #   resp.destination_capacity_reservation.tenancy #=> String, one of "default", "dedicated"
+    #   resp.destination_capacity_reservation.total_instance_count #=> Integer
+    #   resp.destination_capacity_reservation.available_instance_count #=> Integer
+    #   resp.destination_capacity_reservation.ebs_optimized #=> Boolean
+    #   resp.destination_capacity_reservation.ephemeral_storage #=> Boolean
+    #   resp.destination_capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
+    #   resp.destination_capacity_reservation.start_date #=> Time
+    #   resp.destination_capacity_reservation.end_date #=> Time
+    #   resp.destination_capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.destination_capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.destination_capacity_reservation.create_date #=> Time
+    #   resp.destination_capacity_reservation.tags #=> Array
+    #   resp.destination_capacity_reservation.tags[0].key #=> String
+    #   resp.destination_capacity_reservation.tags[0].value #=> String
+    #   resp.destination_capacity_reservation.outpost_arn #=> String
+    #   resp.destination_capacity_reservation.capacity_reservation_fleet_id #=> String
+    #   resp.destination_capacity_reservation.placement_group_arn #=> String
+    #   resp.destination_capacity_reservation.capacity_allocations #=> Array
+    #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
+    #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.instance_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationBySplitting AWS API Documentation
+    #
+    # @overload create_capacity_reservation_by_splitting(params = {})
+    # @param [Hash] params ({})
+    def create_capacity_reservation_by_splitting(params = {}, options = {})
+      req = build_request(:create_capacity_reservation_by_splitting, params)
+      req.send_request(options)
+    end
+
     # Creates a Capacity Reservation Fleet. For more information, see
     # [Create a Capacity Reservation Fleet][1] in the *Amazon EC2 User
     # Guide*.
@@ -10723,7 +10852,7 @@ module Aws::EC2
     #   The Amazon Web Services account ID.
     #
     # @option params [String] :aws_service
-    #   The Amazon Web Service. Currently not supported.
+    #   The Amazon Web Services service. Currently not supported.
     #
     # @option params [required, String] :permission
     #   The type of permission to grant.
@@ -19779,8 +19908,8 @@ module Aws::EC2
     # days, the source account can view the pending transfer by using this
     # action. After seven days, the transfer expires and ownership of the
     # Elastic IP address returns to the source account. Accepted transfers
-    # are visible to the source account for three days after the transfers
-    # have been accepted.
+    # are visible to the source account for 14 days after the transfers have
+    # been accepted.
     #
     #
     #
@@ -30092,7 +30221,8 @@ module Aws::EC2
     #   * `network-interface-permission.aws-account-id` - The Amazon Web
     #     Services account ID.
     #
-    #   * `network-interface-permission.aws-service` - The Amazon Web Service.
+    #   * `network-interface-permission.aws-service` - The Amazon Web Services
+    #     service.
     #
     #   * `network-interface-permission.permission` - The type of permission
     #     (`INSTANCE-ATTACH` \| `EIP-ASSOCIATE`).
@@ -30251,8 +30381,8 @@ module Aws::EC2
     #     principal or service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an Amazon Web Service (for example, Amazon Web
-    #     Services Management Console, Auto Scaling, and so on).
+    #     being managed by an Amazon Web Services service (for example, Amazon
+    #     Web Services Management Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
@@ -31627,7 +31757,7 @@ module Aws::EC2
     #     in a route in the route table.
     #
     #   * `route.destination-prefix-list-id` - The ID (prefix) of the Amazon
-    #     Web Service specified in a route in the table.
+    #     Web Services service specified in a route in the table.
     #
     #   * `route.egress-only-internet-gateway-id` - The ID of an egress-only
     #     Internet gateway specified in a route in the route table.
@@ -46341,13 +46471,18 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies a Capacity Reservation's capacity and the conditions under
-    # which it is to be released. You cannot change a Capacity
-    # Reservation's instance type, EBS optimization, instance store
-    # settings, platform, Availability Zone, or instance eligibility. If you
-    # need to modify any of these attributes, we recommend that you cancel
-    # the Capacity Reservation, and then create a new one with the required
-    # attributes.
+    # Modifies a Capacity Reservation's capacity, instance eligibility, and
+    # the conditions under which it is to be released. You can't modify a
+    # Capacity Reservation's instance type, EBS optimization, platform,
+    # instance store settings, Availability Zone, or tenancy. If you need to
+    # modify any of these attributes, we recommend that you cancel the
+    # Capacity Reservation, and then create a new one with the required
+    # attributes. For more information, see [Modify an active Capacity
+    # Reservation][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html
     #
     # @option params [required, String] :capacity_reservation_id
     #   The ID of the Capacity Reservation.
@@ -46397,6 +46532,18 @@ module Aws::EC2
     # @option params [String] :additional_info
     #   Reserved for future use.
     #
+    # @option params [String] :instance_match_criteria
+    #   The matching criteria (instance eligibility) that you want to use in
+    #   the modified Capacity Reservation. If you change the instance
+    #   eligibility of an existing Capacity Reservation from `targeted` to
+    #   `open`, any running instances that match the attributes of the
+    #   Capacity Reservation, have the `CapacityReservationPreference` set to
+    #   `open`, and are not yet running in the Capacity Reservation, will
+    #   automatically use the modified Capacity Reservation.
+    #
+    #   To modify the instance eligibility, the Capacity Reservation must be
+    #   completely idle (zero usage).
+    #
     # @return [Types::ModifyCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyCapacityReservationResult#return #return} => Boolean
@@ -46411,6 +46558,7 @@ module Aws::EC2
     #     accept: false,
     #     dry_run: false,
     #     additional_info: "String",
+    #     instance_match_criteria: "open", # accepts open, targeted
     #   })
     #
     # @example Response structure
@@ -52384,6 +52532,138 @@ module Aws::EC2
     # @param [Hash] params ({})
     def move_byoip_cidr_to_ipam(params = {}, options = {})
       req = build_request(:move_byoip_cidr_to_ipam, params)
+      req.send_request(options)
+    end
+
+    # Move available capacity from a source Capacity Reservation to a
+    # destination Capacity Reservation. The source Capacity Reservation and
+    # the destination Capacity Reservation must be `active`, owned by your
+    # Amazon Web Services account, and share the following:
+    #
+    # * Instance type
+    #
+    # * Platform
+    #
+    # * Availability Zone
+    #
+    # * Tenancy
+    #
+    # * Placement group
+    #
+    # * Capacity Reservation end time - `At specific time` or `Manually`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :source_capacity_reservation_id
+    #   The ID of the Capacity Reservation from which you want to move
+    #   capacity.
+    #
+    # @option params [required, String] :destination_capacity_reservation_id
+    #   The ID of the Capacity Reservation that you want to move capacity
+    #   into.
+    #
+    # @option params [required, Integer] :instance_count
+    #   The number of instances that you want to move from the source Capacity
+    #   Reservation.
+    #
+    # @return [Types::MoveCapacityReservationInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MoveCapacityReservationInstancesResult#source_capacity_reservation #source_capacity_reservation} => Types::CapacityReservation
+    #   * {Types::MoveCapacityReservationInstancesResult#destination_capacity_reservation #destination_capacity_reservation} => Types::CapacityReservation
+    #   * {Types::MoveCapacityReservationInstancesResult#instance_count #instance_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.move_capacity_reservation_instances({
+    #     dry_run: false,
+    #     client_token: "String",
+    #     source_capacity_reservation_id: "CapacityReservationId", # required
+    #     destination_capacity_reservation_id: "CapacityReservationId", # required
+    #     instance_count: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_capacity_reservation.capacity_reservation_id #=> String
+    #   resp.source_capacity_reservation.owner_id #=> String
+    #   resp.source_capacity_reservation.capacity_reservation_arn #=> String
+    #   resp.source_capacity_reservation.availability_zone_id #=> String
+    #   resp.source_capacity_reservation.instance_type #=> String
+    #   resp.source_capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "RHEL with SQL Server Standard", "RHEL with SQL Server Enterprise", "RHEL with SQL Server Web", "RHEL with HA", "RHEL with HA and SQL Server Standard", "RHEL with HA and SQL Server Enterprise", "Ubuntu Pro"
+    #   resp.source_capacity_reservation.availability_zone #=> String
+    #   resp.source_capacity_reservation.tenancy #=> String, one of "default", "dedicated"
+    #   resp.source_capacity_reservation.total_instance_count #=> Integer
+    #   resp.source_capacity_reservation.available_instance_count #=> Integer
+    #   resp.source_capacity_reservation.ebs_optimized #=> Boolean
+    #   resp.source_capacity_reservation.ephemeral_storage #=> Boolean
+    #   resp.source_capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
+    #   resp.source_capacity_reservation.start_date #=> Time
+    #   resp.source_capacity_reservation.end_date #=> Time
+    #   resp.source_capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.source_capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.source_capacity_reservation.create_date #=> Time
+    #   resp.source_capacity_reservation.tags #=> Array
+    #   resp.source_capacity_reservation.tags[0].key #=> String
+    #   resp.source_capacity_reservation.tags[0].value #=> String
+    #   resp.source_capacity_reservation.outpost_arn #=> String
+    #   resp.source_capacity_reservation.capacity_reservation_fleet_id #=> String
+    #   resp.source_capacity_reservation.placement_group_arn #=> String
+    #   resp.source_capacity_reservation.capacity_allocations #=> Array
+    #   resp.source_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.source_capacity_reservation.capacity_allocations[0].count #=> Integer
+    #   resp.source_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.destination_capacity_reservation.capacity_reservation_id #=> String
+    #   resp.destination_capacity_reservation.owner_id #=> String
+    #   resp.destination_capacity_reservation.capacity_reservation_arn #=> String
+    #   resp.destination_capacity_reservation.availability_zone_id #=> String
+    #   resp.destination_capacity_reservation.instance_type #=> String
+    #   resp.destination_capacity_reservation.instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "RHEL with SQL Server Standard", "RHEL with SQL Server Enterprise", "RHEL with SQL Server Web", "RHEL with HA", "RHEL with HA and SQL Server Standard", "RHEL with HA and SQL Server Enterprise", "Ubuntu Pro"
+    #   resp.destination_capacity_reservation.availability_zone #=> String
+    #   resp.destination_capacity_reservation.tenancy #=> String, one of "default", "dedicated"
+    #   resp.destination_capacity_reservation.total_instance_count #=> Integer
+    #   resp.destination_capacity_reservation.available_instance_count #=> Integer
+    #   resp.destination_capacity_reservation.ebs_optimized #=> Boolean
+    #   resp.destination_capacity_reservation.ephemeral_storage #=> Boolean
+    #   resp.destination_capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed"
+    #   resp.destination_capacity_reservation.start_date #=> Time
+    #   resp.destination_capacity_reservation.end_date #=> Time
+    #   resp.destination_capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.destination_capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.destination_capacity_reservation.create_date #=> Time
+    #   resp.destination_capacity_reservation.tags #=> Array
+    #   resp.destination_capacity_reservation.tags[0].key #=> String
+    #   resp.destination_capacity_reservation.tags[0].value #=> String
+    #   resp.destination_capacity_reservation.outpost_arn #=> String
+    #   resp.destination_capacity_reservation.capacity_reservation_fleet_id #=> String
+    #   resp.destination_capacity_reservation.placement_group_arn #=> String
+    #   resp.destination_capacity_reservation.capacity_allocations #=> Array
+    #   resp.destination_capacity_reservation.capacity_allocations[0].allocation_type #=> String, one of "used"
+    #   resp.destination_capacity_reservation.capacity_allocations[0].count #=> Integer
+    #   resp.destination_capacity_reservation.reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.instance_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveCapacityReservationInstances AWS API Documentation
+    #
+    # @overload move_capacity_reservation_instances(params = {})
+    # @param [Hash] params ({})
+    def move_capacity_reservation_instances(params = {}, options = {})
+      req = build_request(:move_capacity_reservation_instances, params)
       req.send_request(options)
     end
 
@@ -59810,7 +60090,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.468.0'
+      context[:gem_version] = '1.469.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

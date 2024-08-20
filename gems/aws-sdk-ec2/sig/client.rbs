@@ -1048,6 +1048,32 @@ module Aws
                                        ) -> _CreateCapacityReservationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapacityReservationResponseSuccess
 
+      interface _CreateCapacityReservationBySplittingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCapacityReservationBySplittingResult]
+        def source_capacity_reservation: () -> Types::CapacityReservation
+        def destination_capacity_reservation: () -> Types::CapacityReservation
+        def instance_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#create_capacity_reservation_by_splitting-instance_method
+      def create_capacity_reservation_by_splitting: (
+                                                      ?dry_run: bool,
+                                                      ?client_token: ::String,
+                                                      source_capacity_reservation_id: ::String,
+                                                      instance_count: ::Integer,
+                                                      ?tag_specifications: Array[
+                                                        {
+                                                          resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "ipam-external-resource-verification-token")?,
+                                                          tags: Array[
+                                                            {
+                                                              key: ::String?,
+                                                              value: ::String?
+                                                            },
+                                                          ]?
+                                                        },
+                                                      ]
+                                                    ) -> _CreateCapacityReservationBySplittingResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapacityReservationBySplittingResponseSuccess
+
       interface _CreateCapacityReservationFleetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCapacityReservationFleetResult]
         def capacity_reservation_fleet_id: () -> ::String
@@ -9746,7 +9772,8 @@ module Aws
                                          ?end_date_type: ("unlimited" | "limited"),
                                          ?accept: bool,
                                          ?dry_run: bool,
-                                         ?additional_info: ::String
+                                         ?additional_info: ::String,
+                                         ?instance_match_criteria: ("open" | "targeted")
                                        ) -> _ModifyCapacityReservationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyCapacityReservationResponseSuccess
 
@@ -11176,6 +11203,22 @@ module Aws
                                      ipam_pool_owner: ::String
                                    ) -> _MoveByoipCidrToIpamResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MoveByoipCidrToIpamResponseSuccess
+
+      interface _MoveCapacityReservationInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MoveCapacityReservationInstancesResult]
+        def source_capacity_reservation: () -> Types::CapacityReservation
+        def destination_capacity_reservation: () -> Types::CapacityReservation
+        def instance_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#move_capacity_reservation_instances-instance_method
+      def move_capacity_reservation_instances: (
+                                                 ?dry_run: bool,
+                                                 ?client_token: ::String,
+                                                 source_capacity_reservation_id: ::String,
+                                                 destination_capacity_reservation_id: ::String,
+                                                 instance_count: ::Integer
+                                               ) -> _MoveCapacityReservationInstancesResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MoveCapacityReservationInstancesResponseSuccess
 
       interface _ProvisionByoipCidrResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ProvisionByoipCidrResult]

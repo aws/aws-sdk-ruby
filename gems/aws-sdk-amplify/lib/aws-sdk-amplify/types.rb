@@ -137,6 +137,12 @@ module Aws::Amplify
     #   for GitLab and Bitbucket repositories.
     #   @return [String]
     #
+    # @!attribute [rw] cache_config
+    #   The cache configuration for the Amplify app. If you don't specify
+    #   the cache configuration `type`, Amplify uses the default
+    #   `AMPLIFY_MANAGED` setting.
+    #   @return [Types::CacheConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/App AWS API Documentation
     #
     class App < Struct.new(
@@ -163,7 +169,8 @@ module Aws::Amplify
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config,
-      :repository_clone_method)
+      :repository_clone_method,
+      :cache_config)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
@@ -499,6 +506,37 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Describes the cache configuration for an Amplify app.
+    #
+    # For more information about how Amplify applies an optimal cache
+    # configuration for your app based on the type of content that is being
+    # served, see [Managing cache configuration][1] in the *Amplify User
+    # guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amplify/latest/userguide/managing-cache-configuration
+    #
+    # @!attribute [rw] type
+    #   The type of cache configuration to use for an Amplify app.
+    #
+    #   The `AMPLIFY_MANAGED` cache configuration automatically applies an
+    #   optimized cache configuration for your app based on its platform,
+    #   routing rules, and rewrite rules. This is the default setting.
+    #
+    #   The `AMPLIFY_MANAGED_NO_COOKIES` cache configuration type is the
+    #   same as `AMPLIFY_MANAGED`, except that it excludes all cookies from
+    #   the cache key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CacheConfig AWS API Documentation
+    #
+    class CacheConfig < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the current SSL/TLS certificate that is in use for the
     # domain. If you are using `CreateDomainAssociation` to create a new
     # domain association, `Certificate` describes the new certificate that
@@ -515,7 +553,7 @@ module Aws::Amplify
     #   Make sure you request (or import) the certificate in the US East (N.
     #   Virginia) Region (us-east-1). For more information about using ACM,
     #   see [Importing certificates into Certificate Manager][1] in the *ACM
-    #   User guide* .
+    #   User guide*.
     #
     #
     #
@@ -718,6 +756,10 @@ module Aws::Amplify
     #   The automated branch creation configuration for an Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
+    # @!attribute [rw] cache_config
+    #   The cache configuration for the Amplify app.
+    #   @return [Types::CacheConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppRequest AWS API Documentation
     #
     class CreateAppRequest < Struct.new(
@@ -739,7 +781,8 @@ module Aws::Amplify
       :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
-      :auto_branch_creation_config)
+      :auto_branch_creation_config,
+      :cache_config)
       SENSITIVE = [:oauth_token, :access_token, :basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
@@ -2725,6 +2768,10 @@ module Aws::Amplify
     #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
+    # @!attribute [rw] cache_config
+    #   The cache configuration for the Amplify app.
+    #   @return [Types::CacheConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppRequest AWS API Documentation
     #
     class UpdateAppRequest < Struct.new(
@@ -2746,7 +2793,8 @@ module Aws::Amplify
       :auto_branch_creation_config,
       :repository,
       :oauth_token,
-      :access_token)
+      :access_token,
+      :cache_config)
       SENSITIVE = [:basic_auth_credentials, :build_spec, :oauth_token, :access_token]
       include Aws::Structure
     end

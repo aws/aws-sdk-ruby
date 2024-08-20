@@ -3049,8 +3049,14 @@ module Aws::ComputeOptimizer
     #   of the Amazon Web Services resource are analyzed. When this preference
     #   isn't specified, we use the default value `DAYS_14`.
     #
-    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance and Auto
+    #   You can only set this preference for the Amazon EC2 instance and Auto
     #   Scaling group resource types.
+    #
+    #   <note markdown="1"> * Amazon EC2 instance lookback preferences can be set at the
+    #     organization, account, and resource levels.
+    #
+    #   * Auto Scaling group lookback preferences can only be set at the
+    #     resource level.
     #
     #    </note>
     #
@@ -3240,7 +3246,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

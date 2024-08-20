@@ -15,6 +15,7 @@ module Aws::NeptuneGraph
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BlankNodeHandling = Shapes::StringShape.new(name: 'BlankNodeHandling')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelImportTaskInput = Shapes::StructureShape.new(name: 'CancelImportTaskInput')
     CancelImportTaskOutput = Shapes::StructureShape.new(name: 'CancelImportTaskOutput')
@@ -229,6 +230,7 @@ module Aws::NeptuneGraph
     CreateGraphUsingImportTaskInput.add_member(:fail_on_error, Shapes::ShapeRef.new(shape: Boolean, location_name: "failOnError"))
     CreateGraphUsingImportTaskInput.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "source"))
     CreateGraphUsingImportTaskInput.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "format"))
+    CreateGraphUsingImportTaskInput.add_member(:blank_node_handling, Shapes::ShapeRef.new(shape: BlankNodeHandling, location_name: "blankNodeHandling"))
     CreateGraphUsingImportTaskInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateGraphUsingImportTaskInput.struct_class = Types::CreateGraphUsingImportTaskInput
 
@@ -622,6 +624,7 @@ module Aws::NeptuneGraph
     StartImportTaskInput.add_member(:fail_on_error, Shapes::ShapeRef.new(shape: Boolean, location_name: "failOnError"))
     StartImportTaskInput.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "source"))
     StartImportTaskInput.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "format"))
+    StartImportTaskInput.add_member(:blank_node_handling, Shapes::ShapeRef.new(shape: BlankNodeHandling, location_name: "blankNodeHandling"))
     StartImportTaskInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "uri", location_name: "graphIdentifier"))
     StartImportTaskInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     StartImportTaskInput.struct_class = Types::StartImportTaskInput

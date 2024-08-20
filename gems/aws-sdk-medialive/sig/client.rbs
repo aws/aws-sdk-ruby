@@ -3404,7 +3404,26 @@ module Aws
                                 transport_stream_id: ::Integer,
                                 transport_stream_reserved_bitrate: ::Integer?
                               },
-                              ?name: ::String
+                              ?name: ::String,
+                              ?packet_identifiers_mapping: Hash[::String, {
+                                  audio_pids: Array[::Integer]?,
+                                  dvb_sub_pids: Array[::Integer]?,
+                                  dvb_teletext_pid: ::Integer?,
+                                  etv_platform_pid: ::Integer?,
+                                  etv_signal_pid: ::Integer?,
+                                  klv_data_pids: Array[::Integer]?,
+                                  pcr_pid: ::Integer?,
+                                  pmt_pid: ::Integer?,
+                                  private_metadata_pid: ::Integer?,
+                                  scte_27_pids: Array[::Integer]?,
+                                  scte_35_pid: ::Integer?,
+                                  timed_metadata_pid: ::Integer?,
+                                  video_pid: ::Integer?,
+                                  arib_captions_pid: ::Integer?,
+                                  dvb_teletext_pids: Array[::Integer]?,
+                                  ecm_pid: ::Integer?,
+                                  smpte_2038_pid: ::Integer?
+                                }]
                             ) -> _UpdateMultiplexResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMultiplexResponseSuccess
 

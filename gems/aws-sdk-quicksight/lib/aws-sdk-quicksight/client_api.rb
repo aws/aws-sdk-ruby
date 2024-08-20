@@ -424,6 +424,7 @@ module Aws::QuickSight
     CustomSql = Shapes::StructureShape.new(name: 'CustomSql')
     CustomSqlName = Shapes::StringShape.new(name: 'CustomSqlName')
     CustomValuesConfiguration = Shapes::StructureShape.new(name: 'CustomValuesConfiguration')
+    CustomerManagedKeyUnavailableException = Shapes::StructureShape.new(name: 'CustomerManagedKeyUnavailableException')
     Dashboard = Shapes::StructureShape.new(name: 'Dashboard')
     DashboardBehavior = Shapes::StringShape.new(name: 'DashboardBehavior')
     DashboardError = Shapes::StructureShape.new(name: 'DashboardError')
@@ -3405,6 +3406,10 @@ module Aws::QuickSight
     CustomValuesConfiguration.add_member(:include_null_value, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "IncludeNullValue"))
     CustomValuesConfiguration.add_member(:custom_values, Shapes::ShapeRef.new(shape: CustomParameterValues, required: true, location_name: "CustomValues"))
     CustomValuesConfiguration.struct_class = Types::CustomValuesConfiguration
+
+    CustomerManagedKeyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    CustomerManagedKeyUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CustomerManagedKeyUnavailableException.struct_class = Types::CustomerManagedKeyUnavailableException
 
     Dashboard.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "DashboardId"))
     Dashboard.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -9251,6 +9256,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomerManagedKeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -11569,6 +11575,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomerManagedKeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

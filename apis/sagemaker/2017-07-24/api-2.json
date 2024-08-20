@@ -4779,6 +4779,12 @@
         "validation"
       ]
     },
+    "AutoMLComputeConfig":{
+      "type":"structure",
+      "members":{
+        "EmrServerlessComputeConfig":{"shape":"EmrServerlessComputeConfig"}
+      }
+    },
     "AutoMLContainerDefinition":{
       "type":"structure",
       "required":[
@@ -5430,7 +5436,8 @@
         "IdentityProviderOAuthSettings":{"shape":"IdentityProviderOAuthSettings"},
         "DirectDeploySettings":{"shape":"DirectDeploySettings"},
         "KendraSettings":{"shape":"KendraSettings"},
-        "GenerativeAiSettings":{"shape":"GenerativeAiSettings"}
+        "GenerativeAiSettings":{"shape":"GenerativeAiSettings"},
+        "EmrServerlessSettings":{"shape":"EmrServerlessSettings"}
       }
     },
     "CapacitySize":{
@@ -6751,7 +6758,8 @@
         "SecurityConfig":{"shape":"AutoMLSecurityConfig"},
         "AutoMLJobObjective":{"shape":"AutoMLJobObjective"},
         "ModelDeployConfig":{"shape":"ModelDeployConfig"},
-        "DataSplitConfig":{"shape":"AutoMLDataSplitConfig"}
+        "DataSplitConfig":{"shape":"AutoMLDataSplitConfig"},
+        "AutoMLComputeConfig":{"shape":"AutoMLComputeConfig"}
       }
     },
     "CreateAutoMLJobV2Response":{
@@ -9202,7 +9210,8 @@
         "ModelDeployConfig":{"shape":"ModelDeployConfig"},
         "ModelDeployResult":{"shape":"ModelDeployResult"},
         "DataSplitConfig":{"shape":"AutoMLDataSplitConfig"},
-        "SecurityConfig":{"shape":"AutoMLSecurityConfig"}
+        "SecurityConfig":{"shape":"AutoMLSecurityConfig"},
+        "AutoMLComputeConfig":{"shape":"AutoMLComputeConfig"}
       }
     },
     "DescribeClusterNodeRequest":{
@@ -11549,6 +11558,20 @@
       "max":10,
       "pattern":"\\d+"
     },
+    "EmrServerlessComputeConfig":{
+      "type":"structure",
+      "required":["ExecutionRoleARN"],
+      "members":{
+        "ExecutionRoleARN":{"shape":"RoleArn"}
+      }
+    },
+    "EmrServerlessSettings":{
+      "type":"structure",
+      "members":{
+        "ExecutionRoleArn":{"shape":"RoleArn"},
+        "Status":{"shape":"FeatureStatus"}
+      }
+    },
     "EmrSettings":{
       "type":"structure",
       "members":{
@@ -11631,6 +11654,12 @@
         "Name",
         "CreationTime"
       ]
+    },
+    "EndpointConfigStepMetadata":{
+      "type":"structure",
+      "members":{
+        "Arn":{"shape":"EndpointConfigArn"}
+      }
     },
     "EndpointConfigSummary":{
       "type":"structure",
@@ -11761,6 +11790,12 @@
         "Failed",
         "UpdateRollbackFailed"
       ]
+    },
+    "EndpointStepMetadata":{
+      "type":"structure",
+      "members":{
+        "Arn":{"shape":"EndpointArn"}
+      }
     },
     "EndpointSummary":{
       "type":"structure",
@@ -16629,7 +16664,8 @@
         "JumpStart",
         "InferenceRecommender",
         "Endpoints",
-        "Projects"
+        "Projects",
+        "InferenceOptimization"
       ]
     },
     "MlflowVersion":{
@@ -18958,7 +18994,9 @@
         "QualityCheck":{"shape":"QualityCheckStepMetadata"},
         "ClarifyCheck":{"shape":"ClarifyCheckStepMetadata"},
         "Fail":{"shape":"FailStepMetadata"},
-        "AutoMLJob":{"shape":"AutoMLJobStepMetadata"}
+        "AutoMLJob":{"shape":"AutoMLJobStepMetadata"},
+        "Endpoint":{"shape":"EndpointStepMetadata"},
+        "EndpointConfig":{"shape":"EndpointConfigStepMetadata"}
       }
     },
     "PipelineExecutionSummary":{
@@ -19344,7 +19382,6 @@
       "type":"structure",
       "required":[
         "S3Uri",
-        "LocalPath",
         "S3UploadMode"
       ],
       "members":{

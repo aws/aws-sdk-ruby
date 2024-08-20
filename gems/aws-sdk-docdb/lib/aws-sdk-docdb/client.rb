@@ -3664,6 +3664,107 @@ module Aws::DocDB
       req.send_request(options)
     end
 
+    # Promotes the specified secondary DB cluster to be the primary DB
+    # cluster in the global cluster when failing over a global cluster
+    # occurs.
+    #
+    # Use this operation to respond to an unplanned event, such as a
+    # regional disaster in the primary region. Failing over can result in a
+    # loss of write transaction data that wasn't replicated to the chosen
+    # secondary before the failover event occurred. However, the recovery
+    # process that promotes a DB instance on the chosen seconday DB cluster
+    # to be the primary writer DB instance guarantees that the data is in a
+    # transactionally consistent state.
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The identifier of the Amazon DocumentDB global cluster to apply this
+    #   operation. The identifier is the unique key assigned by the user when
+    #   the cluster is created. In other words, it's the name of the global
+    #   cluster.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing global cluster.
+    #
+    #   * Minimum length of 1. Maximum length of 255.
+    #
+    #   Pattern: `[A-Za-z][0-9A-Za-z-:._]*`
+    #
+    # @option params [required, String] :target_db_cluster_identifier
+    #   The identifier of the secondary Amazon DocumentDB cluster that you
+    #   want to promote to the primary for the global cluster. Use the Amazon
+    #   Resource Name (ARN) for the identifier so that Amazon DocumentDB can
+    #   locate the cluster in its Amazon Web Services region.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing secondary cluster.
+    #
+    #   * Minimum length of 1. Maximum length of 255.
+    #
+    #   Pattern: `[A-Za-z][0-9A-Za-z-:._]*`
+    #
+    # @option params [Boolean] :allow_data_loss
+    #   Specifies whether to allow data loss for this global cluster
+    #   operation. Allowing data loss triggers a global failover operation.
+    #
+    #   If you don't specify `AllowDataLoss`, the global cluster operation
+    #   defaults to a switchover.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified together with the `Switchover` parameter.
+    #
+    #   ^
+    #
+    # @option params [Boolean] :switchover
+    #   Specifies whether to switch over this global database cluster.
+    #
+    #   Constraints:
+    #
+    #   * Can't be specified together with the `AllowDataLoss` parameter.
+    #
+    #   ^
+    #
+    # @return [Types::FailoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FailoverGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.failover_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     target_db_cluster_identifier: "DBClusterIdentifier", # required
+    #     allow_data_loss: false,
+    #     switchover: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverGlobalCluster AWS API Documentation
+    #
+    # @overload failover_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def failover_global_cluster(params = {}, options = {})
+      req = build_request(:failover_global_cluster, params)
+      req.send_request(options)
+    end
+
     # Lists all tags on an Amazon DocumentDB resource.
     #
     # @option params [required, String] :resource_name
@@ -5435,7 +5536,7 @@ module Aws::DocDB
     #
     #   resp = client.switchover_global_cluster({
     #     global_cluster_identifier: "GlobalClusterIdentifier", # required
-    #     target_db_cluster_identifier: "String", # required
+    #     target_db_cluster_identifier: "DBClusterIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -5477,7 +5578,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

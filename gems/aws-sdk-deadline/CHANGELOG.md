@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2024-08-19)
+------------------
+
+* Feature - This release adds additional search fields and provides sorting by multiple fields.
+
 1.7.0 (2024-07-18)
 ------------------
 

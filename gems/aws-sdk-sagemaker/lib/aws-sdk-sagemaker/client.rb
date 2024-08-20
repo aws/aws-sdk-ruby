@@ -1309,8 +1309,27 @@ module Aws::SageMaker
     # Creates an Autopilot job also referred to as Autopilot experiment or
     # AutoML job.
     #
-    # <note markdown="1"> We recommend using the new versions [CreateAutoMLJobV2][1] and
-    # [DescribeAutoMLJobV2][2], which offer backward compatibility.
+    # An AutoML job in SageMaker is a fully automated process that allows
+    # you to build machine learning models with minimal effort and machine
+    # learning expertise. When initiating an AutoML job, you provide your
+    # data and optionally specify parameters tailored to your use case.
+    # SageMaker then automates the entire model development lifecycle,
+    # including data preprocessing, model training, tuning, and evaluation.
+    # AutoML jobs are designed to simplify and accelerate the model building
+    # process by automating various tasks and exploring different
+    # combinations of machine learning algorithms, data preprocessing
+    # techniques, and hyperparameter values. The output of an AutoML job
+    # comprises one or more trained models ready for deployment and
+    # inference. Additionally, SageMaker AutoML jobs generate a candidate
+    # model leaderboard, allowing you to select the best-performing model
+    # for deployment.
+    #
+    # For more information about AutoML jobs, see
+    # [https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html][1]
+    # in the SageMaker developer guide.
+    #
+    # <note markdown="1"> We recommend using the new versions [CreateAutoMLJobV2][2] and
+    # [DescribeAutoMLJobV2][3], which offer backward compatibility.
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
     # those of its previous version `CreateAutoMLJob`, as well as
@@ -1319,20 +1338,21 @@ module Aws::SageMaker
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
-    # CreateAutoMLJobV2][3].
+    # CreateAutoMLJobV2][4].
     #
     #  </note>
     #
     # You can find the best-performing model after you run an AutoML job by
-    # calling [DescribeAutoMLJobV2][2] (recommended) or
-    # [DescribeAutoMLJob][4].
+    # calling [DescribeAutoMLJobV2][3] (recommended) or
+    # [DescribeAutoMLJob][5].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2
-    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1488,8 +1508,32 @@ module Aws::SageMaker
     # Creates an Autopilot job also referred to as Autopilot experiment or
     # AutoML job V2.
     #
-    # <note markdown="1"> [CreateAutoMLJobV2][1] and [DescribeAutoMLJobV2][2] are new versions
-    # of [CreateAutoMLJob][3] and [DescribeAutoMLJob][4] which offer
+    # An AutoML job in SageMaker is a fully automated process that allows
+    # you to build machine learning models with minimal effort and machine
+    # learning expertise. When initiating an AutoML job, you provide your
+    # data and optionally specify parameters tailored to your use case.
+    # SageMaker then automates the entire model development lifecycle,
+    # including data preprocessing, model training, tuning, and evaluation.
+    # AutoML jobs are designed to simplify and accelerate the model building
+    # process by automating various tasks and exploring different
+    # combinations of machine learning algorithms, data preprocessing
+    # techniques, and hyperparameter values. The output of an AutoML job
+    # comprises one or more trained models ready for deployment and
+    # inference. Additionally, SageMaker AutoML jobs generate a candidate
+    # model leaderboard, allowing you to select the best-performing model
+    # for deployment.
+    #
+    # For more information about AutoML jobs, see
+    # [https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html][1]
+    # in the SageMaker developer guide.
+    #
+    # AutoML jobs V2 support various problem types such as regression,
+    # binary, and multiclass classification with tabular data, text and
+    # image classification, time-series forecasting, and fine-tuning of
+    # large language models (LLMs) for text generation.
+    #
+    # <note markdown="1"> [CreateAutoMLJobV2][2] and [DescribeAutoMLJobV2][3] are new versions
+    # of [CreateAutoMLJob][4] and [DescribeAutoMLJob][5] which offer
     # backward compatibility.
     #
     #  `CreateAutoMLJobV2` can manage tabular problem types identical to
@@ -1499,24 +1543,25 @@ module Aws::SageMaker
     #
     #  Find guidelines about how to migrate a `CreateAutoMLJob` to
     # `CreateAutoMLJobV2` in [Migrate a CreateAutoMLJob to
-    # CreateAutoMLJobV2][5].
+    # CreateAutoMLJobV2][6].
     #
     #  </note>
     #
     # For the list of available problem types supported by
-    # `CreateAutoMLJobV2`, see [AutoMLProblemTypeConfig][6].
+    # `CreateAutoMLJobV2`, see [AutoMLProblemTypeConfig][7].
     #
     # You can find the best-performing model after you run an AutoML job V2
-    # by calling [DescribeAutoMLJobV2][2].
+    # by calling [DescribeAutoMLJobV2][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
-    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
-    # [5]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2
-    # [6]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
+    # [5]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
+    # [6]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2
+    # [7]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html
     #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an Autopilot job. The name must be unique to your account
@@ -1613,6 +1658,9 @@ module Aws::SageMaker
     #   training and validation sets.
     #
     #    </note>
+    #
+    # @option params [Types::AutoMLComputeConfig] :auto_ml_compute_config
+    #   Specifies the compute configuration for the AutoML job V2.
     #
     # @return [Types::CreateAutoMLJobV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1754,6 +1802,11 @@ module Aws::SageMaker
     #     },
     #     data_split_config: {
     #       validation_fraction: 1.0,
+    #     },
+    #     auto_ml_compute_config: {
+    #       emr_serverless_compute_config: {
+    #         execution_role_arn: "RoleArn", # required
+    #       },
     #     },
     #   })
     #
@@ -2604,6 +2657,10 @@ module Aws::SageMaker
     #         generative_ai_settings: {
     #           amazon_bedrock_role_arn: "RoleArn",
     #         },
+    #         emr_serverless_settings: {
+    #           execution_role_arn: "RoleArn",
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #       code_editor_app_settings: {
     #         default_resource_spec: {
@@ -2669,7 +2726,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       studio_web_portal_settings: {
-    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
     #     },
@@ -7943,7 +8000,7 @@ module Aws::SageMaker
     #           output_name: "String", # required
     #           s3_output: {
     #             s3_uri: "S3Uri", # required
-    #             local_path: "ProcessingLocalPath", # required
+    #             local_path: "ProcessingLocalPath",
     #             s3_upload_mode: "Continuous", # required, accepts Continuous, EndOfJob
     #           },
     #           feature_store_output: {
@@ -9343,6 +9400,10 @@ module Aws::SageMaker
     #         generative_ai_settings: {
     #           amazon_bedrock_role_arn: "RoleArn",
     #         },
+    #         emr_serverless_settings: {
+    #           execution_role_arn: "RoleArn",
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #       code_editor_app_settings: {
     #         default_resource_spec: {
@@ -9408,7 +9469,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       studio_web_portal_settings: {
-    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
     #     },
@@ -11777,6 +11838,7 @@ module Aws::SageMaker
     #   * {Types::DescribeAutoMLJobV2Response#model_deploy_result #model_deploy_result} => Types::ModelDeployResult
     #   * {Types::DescribeAutoMLJobV2Response#data_split_config #data_split_config} => Types::AutoMLDataSplitConfig
     #   * {Types::DescribeAutoMLJobV2Response#security_config #security_config} => Types::AutoMLSecurityConfig
+    #   * {Types::DescribeAutoMLJobV2Response#auto_ml_compute_config #auto_ml_compute_config} => Types::AutoMLComputeConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -11909,6 +11971,7 @@ module Aws::SageMaker
     #   resp.security_config.vpc_config.security_group_ids[0] #=> String
     #   resp.security_config.vpc_config.subnets #=> Array
     #   resp.security_config.vpc_config.subnets[0] #=> String
+    #   resp.auto_ml_compute_config.emr_serverless_compute_config.execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobV2 AWS API Documentation
     #
@@ -12508,6 +12571,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.generative_ai_settings.amazon_bedrock_role_arn #=> String
+    #   resp.default_user_settings.canvas_app_settings.emr_serverless_settings.execution_role_arn #=> String
+    #   resp.default_user_settings.canvas_app_settings.emr_serverless_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
@@ -12546,7 +12611,7 @@ module Aws::SageMaker
     #   resp.default_user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_id #=> String
     #   resp.default_user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
     #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools #=> Array
-    #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects"
+    #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization"
     #   resp.default_user_settings.studio_web_portal_settings.hidden_app_types #=> Array
     #   resp.default_user_settings.studio_web_portal_settings.hidden_app_types[0] #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.domain_settings.security_group_ids #=> Array
@@ -16593,6 +16658,8 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.generative_ai_settings.amazon_bedrock_role_arn #=> String
+    #   resp.user_settings.canvas_app_settings.emr_serverless_settings.execution_role_arn #=> String
+    #   resp.user_settings.canvas_app_settings.emr_serverless_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
@@ -16631,7 +16698,7 @@ module Aws::SageMaker
     #   resp.user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_id #=> String
     #   resp.user_settings.custom_file_system_configs[0].efs_file_system_config.file_system_path #=> String
     #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools #=> Array
-    #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects"
+    #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization"
     #   resp.user_settings.studio_web_portal_settings.hidden_app_types #=> Array
     #   resp.user_settings.studio_web_portal_settings.hidden_app_types[0] #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #
@@ -21787,6 +21854,8 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.clarify_check.register_new_baseline #=> Boolean
     #   resp.pipeline_execution_steps[0].metadata.fail.error_message #=> String
     #   resp.pipeline_execution_steps[0].metadata.auto_ml_job.arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.endpoint.arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.endpoint_config.arn #=> String
     #   resp.pipeline_execution_steps[0].attempt_count #=> Integer
     #   resp.pipeline_execution_steps[0].selective_execution_result.source_pipeline_execution_arn #=> String
     #   resp.next_token #=> String
@@ -24952,6 +25021,10 @@ module Aws::SageMaker
     #         generative_ai_settings: {
     #           amazon_bedrock_role_arn: "RoleArn",
     #         },
+    #         emr_serverless_settings: {
+    #           execution_role_arn: "RoleArn",
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #       code_editor_app_settings: {
     #         default_resource_spec: {
@@ -25017,7 +25090,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       studio_web_portal_settings: {
-    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
     #     },
@@ -27167,6 +27240,10 @@ module Aws::SageMaker
     #         generative_ai_settings: {
     #           amazon_bedrock_role_arn: "RoleArn",
     #         },
+    #         emr_serverless_settings: {
+    #           execution_role_arn: "RoleArn",
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       },
     #       code_editor_app_settings: {
     #         default_resource_spec: {
@@ -27232,7 +27309,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       studio_web_portal_settings: {
-    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects
+    #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
     #     },
@@ -27514,7 +27591,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.255.0'
+      context[:gem_version] = '1.257.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

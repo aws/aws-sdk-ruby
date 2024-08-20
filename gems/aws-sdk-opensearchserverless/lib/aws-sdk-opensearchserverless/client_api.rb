@@ -266,6 +266,8 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
     CollectionDetail.add_member(:dashboard_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "dashboardEndpoint"))
     CollectionDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CollectionDetail.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
+    CollectionDetail.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
     CollectionDetail.add_member(:id, Shapes::ShapeRef.new(shape: CollectionId, location_name: "id"))
     CollectionDetail.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
     CollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
@@ -779,6 +781,8 @@ module Aws::OpenSearchServerless
     ValidationException.struct_class = Types::ValidationException
 
     VpcEndpointDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
+    VpcEndpointDetail.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
+    VpcEndpointDetail.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
     VpcEndpointDetail.add_member(:id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "id"))
     VpcEndpointDetail.add_member(:name, Shapes::ShapeRef.new(shape: VpcEndpointName, location_name: "name"))
     VpcEndpointDetail.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
@@ -816,9 +820,11 @@ module Aws::OpenSearchServerless
 
       api.metadata = {
         "apiVersion" => "2021-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "aoss",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "OpenSearch Service Serverless",
         "serviceId" => "OpenSearchServerless",
         "signatureVersion" => "v4",

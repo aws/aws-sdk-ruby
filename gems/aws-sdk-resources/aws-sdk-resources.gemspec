@@ -96,7 +96,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-codegurureviewer', '~> 1')
   spec.add_dependency('aws-sdk-codegurusecurity', '~> 1')
   spec.add_dependency('aws-sdk-codepipeline', '~> 1')
-  spec.add_dependency('aws-sdk-codestar', '~> 1')
   spec.add_dependency('aws-sdk-codestarnotifications', '~> 1')
   spec.add_dependency('aws-sdk-codestarconnections', '~> 1')
   spec.add_dependency('aws-sdk-cognitoidentity', '~> 1')

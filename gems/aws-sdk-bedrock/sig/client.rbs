@@ -304,6 +304,38 @@ module Aws
                                           ) -> _CreateModelCustomizationJobResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelCustomizationJobResponseSuccess
 
+      interface _CreateModelInvocationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelInvocationJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_model_invocation_job-instance_method
+      def create_model_invocation_job: (
+                                         job_name: ::String,
+                                         role_arn: ::String,
+                                         ?client_request_token: ::String,
+                                         model_id: ::String,
+                                         input_data_config: {
+                                           s3_input_data_config: {
+                                             s3_input_format: ("JSONL")?,
+                                             s3_uri: ::String
+                                           }?
+                                         },
+                                         output_data_config: {
+                                           s3_output_data_config: {
+                                             s3_uri: ::String,
+                                             s3_encryption_key_id: ::String?
+                                           }?
+                                         },
+                                         ?timeout_duration_in_hours: ::Integer,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateModelInvocationJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelInvocationJobResponseSuccess
+
       interface _CreateProvisionedModelThroughputResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateProvisionedModelThroughputResponse]
         def provisioned_model_arn: () -> ::String
@@ -493,6 +525,29 @@ module Aws
                                        ) -> _GetModelCustomizationJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelCustomizationJobResponseSuccess
 
+      interface _GetModelInvocationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelInvocationJobResponse]
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def model_id: () -> ::String
+        def client_request_token: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("Submitted" | "InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "PartiallyCompleted" | "Expired" | "Validating" | "Scheduled")
+        def message: () -> ::String
+        def submit_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def end_time: () -> ::Time
+        def input_data_config: () -> Types::ModelInvocationJobInputDataConfig
+        def output_data_config: () -> Types::ModelInvocationJobOutputDataConfig
+        def timeout_duration_in_hours: () -> ::Integer
+        def job_expiration_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_model_invocation_job-instance_method
+      def get_model_invocation_job: (
+                                      job_identifier: ::String
+                                    ) -> _GetModelInvocationJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelInvocationJobResponseSuccess
+
       interface _GetModelInvocationLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetModelInvocationLoggingConfigurationResponse]
         def logging_config: () -> Types::LoggingConfig
@@ -626,6 +681,24 @@ module Aws
                                          ) -> _ListModelCustomizationJobsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelCustomizationJobsResponseSuccess
 
+      interface _ListModelInvocationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelInvocationJobsResponse]
+        def next_token: () -> ::String
+        def invocation_job_summaries: () -> ::Array[Types::ModelInvocationJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_model_invocation_jobs-instance_method
+      def list_model_invocation_jobs: (
+                                        ?submit_time_after: ::Time,
+                                        ?submit_time_before: ::Time,
+                                        ?status_equals: ("Submitted" | "InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "PartiallyCompleted" | "Expired" | "Validating" | "Scheduled"),
+                                        ?name_contains: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?sort_by: ("CreationTime"),
+                                        ?sort_order: ("Ascending" | "Descending")
+                                      ) -> _ListModelInvocationJobsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelInvocationJobsResponseSuccess
+
       interface _ListProvisionedModelThroughputsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisionedModelThroughputsResponse]
         def next_token: () -> ::String
@@ -697,6 +770,15 @@ module Aws
                                           job_identifier: ::String
                                         ) -> _StopModelCustomizationJobResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopModelCustomizationJobResponseSuccess
+
+      interface _StopModelInvocationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopModelInvocationJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#stop_model_invocation_job-instance_method
+      def stop_model_invocation_job: (
+                                       job_identifier: ::String
+                                     ) -> _StopModelInvocationJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopModelInvocationJobResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

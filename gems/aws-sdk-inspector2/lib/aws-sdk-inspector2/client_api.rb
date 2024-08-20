@@ -546,6 +546,8 @@ module Aws::Inspector2
     TargetAccount = Shapes::StringShape.new(name: 'TargetAccount')
     TargetAccountList = Shapes::ListShape.new(name: 'TargetAccountList')
     TargetResourceTags = Shapes::MapShape.new(name: 'TargetResourceTags')
+    TargetResourceTagsKey = Shapes::StringShape.new(name: 'TargetResourceTagsKey')
+    TargetResourceTagsValue = Shapes::StringShape.new(name: 'TargetResourceTagsValue')
     TargetStatusFilterList = Shapes::ListShape.new(name: 'TargetStatusFilterList')
     TargetStatusReasonFilterList = Shapes::ListShape.new(name: 'TargetStatusReasonFilterList')
     Targets = Shapes::ListShape.new(name: 'Targets')
@@ -2153,11 +2155,11 @@ module Aws::Inspector2
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    TagValueList.member = Shapes::ShapeRef.new(shape: String)
+    TagValueList.member = Shapes::ShapeRef.new(shape: TargetResourceTagsValue)
 
     TargetAccountList.member = Shapes::ShapeRef.new(shape: TargetAccount)
 
-    TargetResourceTags.key = Shapes::ShapeRef.new(shape: NonEmptyString)
+    TargetResourceTags.key = Shapes::ShapeRef.new(shape: TargetResourceTagsKey)
     TargetResourceTags.value = Shapes::ShapeRef.new(shape: TagValueList)
 
     TargetStatusFilterList.member = Shapes::ShapeRef.new(shape: CisTargetStatusFilter)

@@ -1061,6 +1061,27 @@ module Aws::S3
     #   denied).
     #   @return [String]
     #
+    # @!attribute [rw] if_none_match
+    #   Uploads the object only if the object key name does not already
+    #   exist in the bucket specified. Otherwise, Amazon S3 returns a `412
+    #   Precondition Failed` error.
+    #
+    #   If a conflicting operation occurs during the upload S3 returns a
+    #   `409 ConditionalRequestConflict` response. On a 409 failure you
+    #   should re-initiate the multipart upload with `CreateMultipartUpload`
+    #   and re-upload each part.
+    #
+    #   Expects the '*' (asterisk) character.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1],
+    #   or [Conditional requests][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html
+    #   @return [String]
+    #
     # @!attribute [rw] sse_customer_algorithm
     #   The server-side encryption (SSE) algorithm used to encrypt the
     #   object. This parameter is required only when the object was created
@@ -1120,6 +1141,7 @@ module Aws::S3
       :checksum_sha256,
       :request_payer,
       :expected_bucket_owner,
+      :if_none_match,
       :sse_customer_algorithm,
       :sse_customer_key,
       :sse_customer_key_md5)
@@ -3333,8 +3355,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The container element for specifying the default Object Lock retention
-    # settings for new objects placed in the specified bucket.
+    # The container element for optionally specifying the default Object
+    # Lock retention settings for new objects placed in the specified
+    # bucket.
     #
     # <note markdown="1"> * The `DefaultRetention` settings require both a mode and a period.
     #
@@ -4389,6 +4412,14 @@ module Aws::S3
 
     # Specifies encryption-related information for an Amazon S3 bucket that
     # is a destination for replicated objects.
+    #
+    # <note markdown="1"> If you're specifying a customer managed KMS key, we recommend using a
+    # fully qualified KMS key ARN. If you use a KMS key alias instead, then
+    # KMS resolves the key within the requester’s account. This behavior can
+    # result in data that's encrypted with a KMS key that belongs to the
+    # requester, and not the bucket owner.
+    #
+    #  </note>
     #
     # @!attribute [rw] replica_kms_key_id
     #   Specifies the ID (Key ARN or Alias ARN) of the customer managed
@@ -7381,6 +7412,15 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_mode
     #   To retrieve the checksum, this mode must be enabled.
+    #
+    #   In addition, if you enable checksum mode and the object is uploaded
+    #   with a [checksum][1] and encrypted with an Key Management Service
+    #   (KMS) key, you must have permission to use the `kms:Decrypt` action
+    #   to retrieve the checksum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRequest AWS API Documentation
@@ -7802,17 +7842,13 @@ module Aws::S3
     #
     # @!attribute [rw] bucket_region
     #   The Region that the bucket is located.
-    #
-    #   <note markdown="1"> This functionality is not supported for directory buckets.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] access_point_alias
     #   Indicates whether the bucket name used in the request is an access
     #   point alias.
     #
-    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #   <note markdown="1"> For directory buckets, the value of this field is `false`.
     #
     #    </note>
     #   @return [Boolean]
@@ -8551,10 +8587,14 @@ module Aws::S3
     # @!attribute [rw] checksum_mode
     #   To retrieve the checksum, this parameter must be enabled.
     #
-    #   In addition, if you enable `ChecksumMode` and the object is
-    #   encrypted with Amazon Web Services Key Management Service (Amazon
-    #   Web Services KMS), you must have permission to use the `kms:Decrypt`
-    #   action for the request to succeed.
+    #   In addition, if you enable checksum mode and the object is uploaded
+    #   with a [checksum][1] and encrypted with an Key Management Service
+    #   (KMS) key, you must have permission to use the `kms:Decrypt` action
+    #   to retrieve the checksum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectRequest AWS API Documentation
@@ -9526,11 +9566,45 @@ module Aws::S3
     #   The owner of the buckets listed.
     #   @return [Types::Owner]
     #
+    # @!attribute [rw] continuation_token
+    #   `ContinuationToken` is included in the response when there are more
+    #   buckets that can be listed with pagination. The next `ListBuckets`
+    #   request to Amazon S3 can be continued with this `ContinuationToken`.
+    #   `ContinuationToken` is obfuscated and is not a real bucket.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketsOutput AWS API Documentation
     #
     class ListBucketsOutput < Struct.new(
       :buckets,
-      :owner)
+      :owner,
+      :continuation_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_buckets
+    #   Maximum number of buckets to be returned in response. When the
+    #   number is more than the count of buckets that are owned by an Amazon
+    #   Web Services account, return all the buckets in response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] continuation_token
+    #   `ContinuationToken` indicates to Amazon S3 that the list is being
+    #   continued on this bucket with a token. `ContinuationToken` is
+    #   obfuscated and is not a real key. You can use this
+    #   `ContinuationToken` for pagination of the list results.
+    #
+    #   Length Constraints: Minimum length of 0. Maximum length of 1024.
+    #
+    #   Required: No.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketsRequest AWS API Documentation
+    #
+    class ListBucketsRequest < Struct.new(
+      :max_buckets,
+      :continuation_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9556,9 +9630,10 @@ module Aws::S3
 
     # @!attribute [rw] continuation_token
     #   `ContinuationToken` indicates to Amazon S3 that the list is being
-    #   continued on this bucket with a token. `ContinuationToken` is
-    #   obfuscated and is not a real key. You can use this
-    #   `ContinuationToken` for pagination of the list results.
+    #   continued on buckets in this account with a token.
+    #   `ContinuationToken` is obfuscated and is not a real bucket name. You
+    #   can use this `ContinuationToken` for the pagination of the list
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_directory_buckets
@@ -9768,12 +9843,26 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
-    #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key can contain any
-    #   Unicode character; however, the XML 1.0 parser cannot parse some
-    #   characters, such as characters with an ASCII value from 0 to 10. For
-    #   characters that are not supported in XML 1.0, you can add this
-    #   parameter to request that Amazon S3 encode the keys in the response.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in
+    #   the response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value
+    #   from 0 to 10. For characters that aren't supported in XML 1.0, you
+    #   can add this parameter to request that Amazon S3 encode the keys in
+    #   the response. For more information about characters to avoid in
+    #   object key names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear
+    #   as `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #   @return [String]
     #
     # @!attribute [rw] key_marker
@@ -9998,12 +10087,26 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
-    #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key can contain any
-    #   Unicode character; however, the XML 1.0 parser cannot parse some
-    #   characters, such as characters with an ASCII value from 0 to 10. For
-    #   characters that are not supported in XML 1.0, you can add this
-    #   parameter to request that Amazon S3 encode the keys in the response.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in
+    #   the response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value
+    #   from 0 to 10. For characters that aren't supported in XML 1.0, you
+    #   can add this parameter to request that Amazon S3 encode the keys in
+    #   the response. For more information about characters to avoid in
+    #   object key names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear
+    #   as `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #   @return [String]
     #
     # @!attribute [rw] key_marker
@@ -10150,10 +10253,26 @@ module Aws::S3
     #   @return [Array<Types::CommonPrefix>]
     #
     # @!attribute [rw] encoding_type
-    #   Encoding type used by Amazon S3 to encode object keys in the
-    #   response. If using `url`, non-ASCII characters used in an object's
-    #   key name will be URL encoded. For example, the object
-    #   `test_file(3).png` will appear as `test_file%283%29.png`.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in
+    #   the response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value
+    #   from 0 to 10. For characters that aren't supported in XML 1.0, you
+    #   can add this parameter to request that Amazon S3 encode the keys in
+    #   the response. For more information about characters to avoid in
+    #   object key names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear
+    #   as `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -10233,12 +10352,26 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
-    #   Requests Amazon S3 to encode the object keys in the response and
-    #   specifies the encoding method to use. An object key can contain any
-    #   Unicode character; however, the XML 1.0 parser cannot parse some
-    #   characters, such as characters with an ASCII value from 0 to 10. For
-    #   characters that are not supported in XML 1.0, you can add this
-    #   parameter to request that Amazon S3 encode the keys in the response.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in
+    #   the response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value
+    #   from 0 to 10. For characters that aren't supported in XML 1.0, you
+    #   can add this parameter to request that Amazon S3 encode the keys in
+    #   the response. For more information about characters to avoid in
+    #   object key names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear
+    #   as `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -10506,10 +10639,26 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] encoding_type
-    #   Encoding type used by Amazon S3 to encode object keys in the
-    #   response. If using `url`, non-ASCII characters used in an object's
-    #   key name will be URL encoded. For example, the object
-    #   `test_file(3).png` will appear as `test_file%283%29.png`.
+    #   Encoding type used by Amazon S3 to encode the [object keys][1] in
+    #   the response. Responses are encoded only in UTF-8. An object key can
+    #   contain any Unicode character. However, the XML 1.0 parser can't
+    #   parse certain characters, such as characters with an ASCII value
+    #   from 0 to 10. For characters that aren't supported in XML 1.0, you
+    #   can add this parameter to request that Amazon S3 encode the keys in
+    #   the response. For more information about characters to avoid in
+    #   object key names, see [Object key naming guidelines][2].
+    #
+    #   <note markdown="1"> When using the URL encoding type, non-ASCII characters that are used
+    #   in an object's key name will be percent-encoded according to UTF-8
+    #   code values. For example, the object `test_file(3).png` will appear
+    #   as `test_file%283%29.png`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-guidelines
     #   @return [String]
     #
     # @!attribute [rw] max_keys
@@ -11963,7 +12112,15 @@ module Aws::S3
     #
     # @!attribute [rw] partition_date_source
     #   Specifies the partition date source for the partitioned prefix.
-    #   PartitionDateSource can be EventTime or DeliveryTime.
+    #   `PartitionDateSource` can be `EventTime` or `DeliveryTime`.
+    #
+    #   For `DeliveryTime`, the time in the log file names corresponds to
+    #   the delivery time for the log files.
+    #
+    #   For `EventTime`, The logs delivered are for a specific day only. The
+    #   year, month, and day correspond to the day on which the event
+    #   occurred, and the hour, minutes and seconds are set to 00 in the
+    #   key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PartitionedPrefix AWS API Documentation
@@ -12076,8 +12233,9 @@ module Aws::S3
     # @!attribute [rw] restrict_public_buckets
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for this bucket. Setting this element to `TRUE` restricts access to
-    #   this bucket to only Amazon Web Service principals and authorized
-    #   users within this account if the bucket has a public policy.
+    #   this bucket to only Amazon Web Servicesservice principals and
+    #   authorized users within this account if the bucket has a public
+    #   policy.
     #
     #   Enabling this setting doesn't affect previously stored bucket
     #   policies, except that public and cross-account access within any
@@ -14034,6 +14192,26 @@ module Aws::S3
     #   [1]: https://www.rfc-editor.org/rfc/rfc7234#section-5.3
     #   @return [Time]
     #
+    # @!attribute [rw] if_none_match
+    #   Uploads the object only if the object key name does not already
+    #   exist in the bucket specified. Otherwise, Amazon S3 returns a `412
+    #   Precondition Failed` error.
+    #
+    #   If a conflicting operation occurs during the upload S3 returns a
+    #   `409 ConditionalRequestConflict` response. On a 409 failure you
+    #   should retry the upload.
+    #
+    #   Expects the '*' (asterisk) character.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1],
+    #   or [Conditional requests][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html
+    #   @return [String]
+    #
     # @!attribute [rw] grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
@@ -14320,6 +14498,7 @@ module Aws::S3
       :checksum_sha1,
       :checksum_sha256,
       :expires,
+      :if_none_match,
       :grant_full_control,
       :grant_read,
       :grant_read_acp,
@@ -14730,7 +14909,15 @@ module Aws::S3
     # The container for the records event.
     #
     # @!attribute [rw] payload
-    #   The byte array of partial, one or more result records.
+    #   The byte array of partial, one or more result records. S3 Select
+    #   doesn't guarantee that a record will be self-contained in one
+    #   record frame. To ensure continuous streaming of data, S3 Select
+    #   might split the same record across multiple record frames instead of
+    #   aggregating the results in memory. Some S3 clients (for example, the
+    #   SDK for Java) handle this behavior by creating a `ByteStream` out of
+    #   the response by default. Other clients might not handle this
+    #   behavior by default. In those cases, you must aggregate the results
+    #   on the client side and parse the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RecordsEvent AWS API Documentation
@@ -15274,7 +15461,15 @@ module Aws::S3
     #   @return [Types::GlacierJobParameters]
     #
     # @!attribute [rw] type
+    #   Amazon S3 Select is no longer available to new customers. Existing
+    #   customers of Amazon S3 Select can continue to use the feature as
+    #   usual. [Learn more][1]
+    #
     #   Type of restore request.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [String]
     #
     # @!attribute [rw] tier
@@ -15286,7 +15481,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] select_parameters
+    #   Amazon S3 Select is no longer available to new customers. Existing
+    #   customers of Amazon S3 Select can continue to use the feature as
+    #   usual. [Learn more][1]
+    #
     #   Describes the parameters for Select job types.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [Types::SelectParameters]
     #
     # @!attribute [rw] output_location
@@ -15617,6 +15820,12 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # <note markdown="1"> Learn Amazon S3 Select is no longer available to new customers.
+    # Existing customers of Amazon S3 Select can continue to use the feature
+    # as usual. [Learn more][1]
+    #
+    #  </note>
+    #
     # Request to filter the contents of an Amazon S3 object based on a
     # simple Structured Query Language (SQL) statement. In the request,
     # along with the SQL expression, you must specify a data serialization
@@ -15624,11 +15833,12 @@ module Aws::S3
     # object data into records. It returns only records that match the
     # specified SQL expression. You must also specify the data serialization
     # format for the response. For more information, see [S3Select API
-    # Documentation][1].
+    # Documentation][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
     #
     # @!attribute [rw] bucket
     #   The S3 bucket.
@@ -15740,7 +15950,20 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Amazon S3 Select is no longer available to new customers. Existing
+    # customers of Amazon S3 Select can continue to use the feature as
+    # usual. [Learn more][1]
+    #
     # Describes the parameters for Select job types.
+    #
+    # Learn [How to optimize querying your data in Amazon S3][1] using
+    # [Amazon Athena][2], [S3 Object Lambda][3], or client-side filtering.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
+    # [2]: https://docs.aws.amazon.com/athena/latest/ug/what-is.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html
     #
     # @!attribute [rw] input_serialization
     #   Describes the serialization format of the object.
@@ -15751,7 +15974,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expression
+    #   Amazon S3 Select is no longer available to new customers. Existing
+    #   customers of Amazon S3 Select can continue to use the feature as
+    #   usual. [Learn more][1]
+    #
     #   The expression that is used to query the object.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/blogs/storage/how-to-optimize-querying-your-data-in-amazon-s3/
     #   @return [String]
     #
     # @!attribute [rw] output_serialization
@@ -15778,6 +16009,14 @@ module Aws::S3
     # with SSE-KMS to a bucket. By default, Amazon S3 uses this KMS key for
     # SSE-KMS. For more information, see [PUT Bucket encryption][1] in the
     # *Amazon S3 API Reference*.
+    #
+    # <note markdown="1"> If you're specifying a customer managed KMS key, we recommend using a
+    # fully qualified KMS key ARN. If you use a KMS key alias instead, then
+    # KMS resolves the key within the requester’s account. This behavior can
+    # result in data that's encrypted with a KMS key that belongs to the
+    # requester, and not the bucket owner.
+    #
+    #  </note>
     #
     #
     #
@@ -15846,6 +16085,14 @@ module Aws::S3
     end
 
     # Specifies the default server-side encryption configuration.
+    #
+    # <note markdown="1"> If you're specifying a customer managed KMS key, we recommend using a
+    # fully qualified KMS key ARN. If you use a KMS key alias instead, then
+    # KMS resolves the key within the requester’s account. This behavior can
+    # result in data that's encrypted with a KMS key that belongs to the
+    # requester, and not the bucket owner.
+    #
+    #  </note>
     #
     # @!attribute [rw] apply_server_side_encryption_by_default
     #   Specifies the default server-side encryption to apply to new objects

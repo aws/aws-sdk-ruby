@@ -608,6 +608,7 @@ module Aws::MediaLive
     MultiplexMediaConnectOutputDestinationSettings = Shapes::StructureShape.new(name: 'MultiplexMediaConnectOutputDestinationSettings')
     MultiplexOutputDestination = Shapes::StructureShape.new(name: 'MultiplexOutputDestination')
     MultiplexOutputSettings = Shapes::StructureShape.new(name: 'MultiplexOutputSettings')
+    MultiplexPacketIdentifiersMapping = Shapes::MapShape.new(name: 'MultiplexPacketIdentifiersMapping')
     MultiplexProgram = Shapes::StructureShape.new(name: 'MultiplexProgram')
     MultiplexProgramChannelDestinationSettings = Shapes::StructureShape.new(name: 'MultiplexProgramChannelDestinationSettings')
     MultiplexProgramPacketIdentifiersMap = Shapes::StructureShape.new(name: 'MultiplexProgramPacketIdentifiersMap')
@@ -3385,6 +3386,9 @@ module Aws::MediaLive
     MultiplexOutputSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     MultiplexOutputSettings.struct_class = Types::MultiplexOutputSettings
 
+    MultiplexPacketIdentifiersMapping.key = Shapes::ShapeRef.new(shape: __string)
+    MultiplexPacketIdentifiersMapping.value = Shapes::ShapeRef.new(shape: MultiplexProgramPacketIdentifiersMap)
+
     MultiplexProgram.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
     MultiplexProgram.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, location_name: "multiplexProgramSettings"))
     MultiplexProgram.add_member(:packet_identifiers_map, Shapes::ShapeRef.new(shape: MultiplexProgramPacketIdentifiersMap, location_name: "packetIdentifiersMap"))
@@ -3409,6 +3413,10 @@ module Aws::MediaLive
     MultiplexProgramPacketIdentifiersMap.add_member(:scte_35_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "scte35Pid"))
     MultiplexProgramPacketIdentifiersMap.add_member(:timed_metadata_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "timedMetadataPid"))
     MultiplexProgramPacketIdentifiersMap.add_member(:video_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "videoPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:arib_captions_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "aribCaptionsPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:dvb_teletext_pids, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "dvbTeletextPids"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:ecm_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "ecmPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:smpte_2038_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "smpte2038Pid"))
     MultiplexProgramPacketIdentifiersMap.struct_class = Types::MultiplexProgramPacketIdentifiersMap
 
     MultiplexProgramPipelineDetail.add_member(:active_channel_pipeline, Shapes::ShapeRef.new(shape: __string, location_name: "activeChannelPipeline"))
@@ -4500,6 +4508,7 @@ module Aws::MediaLive
 
     UpdateMultiplex.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
     UpdateMultiplex.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateMultiplex.add_member(:packet_identifiers_mapping, Shapes::ShapeRef.new(shape: MultiplexPacketIdentifiersMapping, location_name: "packetIdentifiersMapping"))
     UpdateMultiplex.struct_class = Types::UpdateMultiplex
 
     UpdateMultiplexProgram.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, location_name: "multiplexProgramSettings"))
@@ -4519,6 +4528,7 @@ module Aws::MediaLive
     UpdateMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
     UpdateMultiplexRequest.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
     UpdateMultiplexRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateMultiplexRequest.add_member(:packet_identifiers_mapping, Shapes::ShapeRef.new(shape: MultiplexPacketIdentifiersMapping, location_name: "packetIdentifiersMapping"))
     UpdateMultiplexRequest.struct_class = Types::UpdateMultiplexRequest
 
     UpdateMultiplexResponse.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))

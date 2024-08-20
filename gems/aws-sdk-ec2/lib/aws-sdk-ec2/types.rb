@@ -1413,7 +1413,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] destination_prefix_list_id
-    #   The prefix of the Amazon Web Service.
+    #   The prefix of the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
@@ -6707,6 +6707,76 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source_capacity_reservation_id
+    #   The ID of the Capacity Reservation from which you want to split the
+    #   available capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances to split from the source Capacity
+    #   Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new Capacity Reservation.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationBySplittingRequest AWS API Documentation
+    #
+    class CreateCapacityReservationBySplittingRequest < Struct.new(
+      :dry_run,
+      :client_token,
+      :source_capacity_reservation_id,
+      :instance_count,
+      :tag_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_capacity_reservation
+    #   Information about the source Capacity Reservation.
+    #   @return [Types::CapacityReservation]
+    #
+    # @!attribute [rw] destination_capacity_reservation
+    #   Information about the destination Capacity Reservation.
+    #   @return [Types::CapacityReservation]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances in the new Capacity Reservation. The number
+    #   of instances in the source Capacity Reservation was reduced by this
+    #   amount.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationBySplittingResult AWS API Documentation
+    #
+    class CreateCapacityReservationBySplittingResult < Struct.new(
+      :source_capacity_reservation,
+      :destination_capacity_reservation,
+      :instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] allocation_strategy
     #   The strategy used by the Capacity Reservation Fleet to determine
     #   which of the specified instance types to use. Currently, only the
@@ -9847,7 +9917,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] aws_service
-    #   The Amazon Web Service. Currently not supported.
+    #   The Amazon Web Services service. Currently not supported.
     #   @return [String]
     #
     # @!attribute [rw] permission
@@ -23114,7 +23184,7 @@ module Aws::EC2
     #     Services account ID.
     #
     #   * `network-interface-permission.aws-service` - The Amazon Web
-    #     Service.
+    #     Services service.
     #
     #   * `network-interface-permission.permission` - The type of permission
     #     (`INSTANCE-ATTACH` \| `EIP-ASSOCIATE`).
@@ -23259,8 +23329,8 @@ module Aws::EC2
     #     the principal or service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an Amazon Web Service (for example, Amazon Web
-    #     Services Management Console, Auto Scaling, and so on).
+    #     being managed by an Amazon Web Services service (for example,
+    #     Amazon Web Services Management Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
@@ -24153,7 +24223,7 @@ module Aws::EC2
     #     specified in a route in the route table.
     #
     #   * `route.destination-prefix-list-id` - The ID (prefix) of the Amazon
-    #     Web Service specified in a route in the table.
+    #     Web Services service specified in a route in the table.
     #
     #   * `route.egress-only-internet-gateway-id` - The ID of an egress-only
     #     Internet gateway specified in a route in the route table.
@@ -47551,6 +47621,19 @@ module Aws::EC2
     #   Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] instance_match_criteria
+    #   The matching criteria (instance eligibility) that you want to use in
+    #   the modified Capacity Reservation. If you change the instance
+    #   eligibility of an existing Capacity Reservation from `targeted` to
+    #   `open`, any running instances that match the attributes of the
+    #   Capacity Reservation, have the `CapacityReservationPreference` set
+    #   to `open`, and are not yet running in the Capacity Reservation, will
+    #   automatically use the modified Capacity Reservation.
+    #
+    #   To modify the instance eligibility, the Capacity Reservation must be
+    #   completely idle (zero usage).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationRequest AWS API Documentation
     #
     class ModifyCapacityReservationRequest < Struct.new(
@@ -47560,7 +47643,8 @@ module Aws::EC2
       :end_date_type,
       :accept,
       :dry_run,
-      :additional_info)
+      :additional_info,
+      :instance_match_criteria)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52000,6 +52084,76 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source_capacity_reservation_id
+    #   The ID of the Capacity Reservation from which you want to move
+    #   capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_capacity_reservation_id
+    #   The ID of the Capacity Reservation that you want to move capacity
+    #   into.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances that you want to move from the source
+    #   Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveCapacityReservationInstancesRequest AWS API Documentation
+    #
+    class MoveCapacityReservationInstancesRequest < Struct.new(
+      :dry_run,
+      :client_token,
+      :source_capacity_reservation_id,
+      :destination_capacity_reservation_id,
+      :instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_capacity_reservation
+    #   Information about the source Capacity Reservation.
+    #   @return [Types::CapacityReservation]
+    #
+    # @!attribute [rw] destination_capacity_reservation
+    #   Information about the destination Capacity Reservation.
+    #   @return [Types::CapacityReservation]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances that were moved from the source Capacity
+    #   Reservation to the destination Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveCapacityReservationInstancesResult AWS API Documentation
+    #
+    class MoveCapacityReservationInstancesResult < Struct.new(
+      :source_capacity_reservation,
+      :destination_capacity_reservation,
+      :instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # <note markdown="1"> This action is deprecated.
     #
     #  </note>
@@ -53168,7 +53322,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] aws_service
-    #   The Amazon Web Service.
+    #   The Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] permission
@@ -54382,7 +54536,7 @@ module Aws::EC2
     # Describes prefixes for Amazon Web Services services.
     #
     # @!attribute [rw] cidrs
-    #   The IP address range of the Amazon Web Service.
+    #   The IP address range of the Amazon Web Services service.
     #   @return [Array<String>]
     #
     # @!attribute [rw] prefix_list_id
@@ -59184,7 +59338,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] destination_prefix_list_id
-    #   The prefix of the Amazon Web Service.
+    #   The prefix of the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway_id

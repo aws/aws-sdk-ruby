@@ -94,6 +94,8 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::CreateStack.build(context)
           when :create_streaming_url
             Aws::AppStream::Endpoints::CreateStreamingURL.build(context)
+          when :create_theme_for_stack
+            Aws::AppStream::Endpoints::CreateThemeForStack.build(context)
           when :create_updated_image
             Aws::AppStream::Endpoints::CreateUpdatedImage.build(context)
           when :create_usage_report_subscription
@@ -120,6 +122,8 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::DeleteImagePermissions.build(context)
           when :delete_stack
             Aws::AppStream::Endpoints::DeleteStack.build(context)
+          when :delete_theme_for_stack
+            Aws::AppStream::Endpoints::DeleteThemeForStack.build(context)
           when :delete_usage_report_subscription
             Aws::AppStream::Endpoints::DeleteUsageReportSubscription.build(context)
           when :delete_user
@@ -150,6 +154,8 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::DescribeSessions.build(context)
           when :describe_stacks
             Aws::AppStream::Endpoints::DescribeStacks.build(context)
+          when :describe_theme_for_stack
+            Aws::AppStream::Endpoints::DescribeThemeForStack.build(context)
           when :describe_usage_report_subscriptions
             Aws::AppStream::Endpoints::DescribeUsageReportSubscriptions.build(context)
           when :describe_user_stack_associations
@@ -208,6 +214,8 @@ module Aws::AppStream
             Aws::AppStream::Endpoints::UpdateImagePermissions.build(context)
           when :update_stack
             Aws::AppStream::Endpoints::UpdateStack.build(context)
+          when :update_theme_for_stack
+            Aws::AppStream::Endpoints::UpdateThemeForStack.build(context)
           end
         end
       end

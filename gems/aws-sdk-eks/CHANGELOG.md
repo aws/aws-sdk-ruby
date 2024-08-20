@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2024-08-12)
+------------------
+
+* Feature - Added support for new AL2023 GPU AMIs to the supported AMITypes.
+
 1.111.0 (2024-07-25)
 ------------------
 

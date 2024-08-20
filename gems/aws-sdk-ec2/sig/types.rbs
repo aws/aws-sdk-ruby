@@ -1585,6 +1585,22 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateCapacityReservationBySplittingRequest
+      attr_accessor dry_run: bool
+      attr_accessor client_token: ::String
+      attr_accessor source_capacity_reservation_id: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      SENSITIVE: []
+    end
+
+    class CreateCapacityReservationBySplittingResult
+      attr_accessor source_capacity_reservation: Types::CapacityReservation
+      attr_accessor destination_capacity_reservation: Types::CapacityReservation
+      attr_accessor instance_count: ::Integer
+      SENSITIVE: []
+    end
+
     class CreateCapacityReservationFleetRequest
       attr_accessor allocation_strategy: ::String
       attr_accessor client_token: ::String
@@ -10385,6 +10401,7 @@ module Aws::EC2
       attr_accessor accept: bool
       attr_accessor dry_run: bool
       attr_accessor additional_info: ::String
+      attr_accessor instance_match_criteria: ("open" | "targeted")
       SENSITIVE: []
     end
 
@@ -11388,6 +11405,22 @@ module Aws::EC2
 
     class MoveByoipCidrToIpamResult
       attr_accessor byoip_cidr: Types::ByoipCidr
+      SENSITIVE: []
+    end
+
+    class MoveCapacityReservationInstancesRequest
+      attr_accessor dry_run: bool
+      attr_accessor client_token: ::String
+      attr_accessor source_capacity_reservation_id: ::String
+      attr_accessor destination_capacity_reservation_id: ::String
+      attr_accessor instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MoveCapacityReservationInstancesResult
+      attr_accessor source_capacity_reservation: Types::CapacityReservation
+      attr_accessor destination_capacity_reservation: Types::CapacityReservation
+      attr_accessor instance_count: ::Integer
       SENSITIVE: []
     end
 

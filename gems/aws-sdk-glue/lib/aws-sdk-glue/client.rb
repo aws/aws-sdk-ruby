@@ -11657,6 +11657,17 @@ module Aws::Glue
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
     #
+    # @option params [Array<String>] :attributes_to_get
+    #   Specifies the table fields returned by the `GetTables` call. This
+    #   parameter doesn’t accept an empty list. The request must include
+    #   `NAME`.
+    #
+    #   The following are the valid combinations of values:
+    #
+    #   * `NAME` - Names of all tables in the database.
+    #
+    #   * `NAME`, `TABLE_TYPE` - Names of all tables and the table types.
+    #
     # @return [Types::GetTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
@@ -11675,6 +11686,7 @@ module Aws::Glue
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
     #     include_status_details: false,
+    #     attributes_to_get: ["NAME"], # accepts NAME, TABLE_TYPE
     #   })
     #
     # @example Response structure
@@ -18004,7 +18016,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.188.0'
+      context[:gem_version] = '1.189.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

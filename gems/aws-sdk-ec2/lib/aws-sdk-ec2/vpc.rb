@@ -1750,8 +1750,8 @@ module Aws::EC2
     #     principal or service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
-    #     being managed by an Amazon Web Service (for example, Amazon Web
-    #     Services Management Console, Auto Scaling, and so on).
+    #     being managed by an Amazon Web Services service (for example, Amazon
+    #     Web Services Management Console, Auto Scaling, and so on).
     #
     #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
@@ -1942,7 +1942,7 @@ module Aws::EC2
     #     in a route in the route table.
     #
     #   * `route.destination-prefix-list-id` - The ID (prefix) of the Amazon
-    #     Web Service specified in a route in the table.
+    #     Web Services service specified in a route in the table.
     #
     #   * `route.egress-only-internet-gateway-id` - The ID of an egress-only
     #     Internet gateway specified in a route in the route table.

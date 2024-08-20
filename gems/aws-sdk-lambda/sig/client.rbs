@@ -633,6 +633,16 @@ module Aws
                                             ) -> _GetFunctionEventInvokeConfigResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionEventInvokeConfigResponseSuccess
 
+      interface _GetFunctionRecursionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionRecursionConfigResponse]
+        def recursive_loop: () -> ("Allow" | "Terminate")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_recursion_config-instance_method
+      def get_function_recursion_config: (
+                                           function_name: ::String
+                                         ) -> _GetFunctionRecursionConfigResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionRecursionConfigResponseSuccess
+
       interface _GetFunctionUrlConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionUrlConfigResponse]
         def function_url: () -> ::String
@@ -1069,6 +1079,17 @@ module Aws
                                               }
                                             ) -> _PutFunctionEventInvokeConfigResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionEventInvokeConfigResponseSuccess
+
+      interface _PutFunctionRecursionConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFunctionRecursionConfigResponse]
+        def recursive_loop: () -> ("Allow" | "Terminate")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#put_function_recursion_config-instance_method
+      def put_function_recursion_config: (
+                                           function_name: ::String,
+                                           recursive_loop: ("Allow" | "Terminate")
+                                         ) -> _PutFunctionRecursionConfigResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionRecursionConfigResponseSuccess
 
       interface _PutProvisionedConcurrencyConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutProvisionedConcurrencyConfigResponse]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-08-19)
+------------------
+
+* Feature - Add new attributes to the outputs of GetApplication and GetDatabase APIs.
+
 1.23.0 (2024-07-02)
 ------------------
 

@@ -339,7 +339,6 @@ RubyGems.org page under "LINKS" section.
 | AWS CodeConnections                                   | Aws::CodeConnections                     | aws-sdk-codeconnections                     | 2023-12-01  |
 | AWS CodeDeploy                                        | Aws::CodeDeploy                          | aws-sdk-codedeploy                          | 2014-10-06  |
 | AWS CodePipeline                                      | Aws::CodePipeline                        | aws-sdk-codepipeline                        | 2015-07-09  |
-| AWS CodeStar                                          | Aws::CodeStar                            | aws-sdk-codestar                            | 2017-04-19  |
 | AWS CodeStar Notifications                            | Aws::CodeStarNotifications               | aws-sdk-codestarnotifications               | 2019-10-15  |
 | AWS CodeStar connections                              | Aws::CodeStarconnections                 | aws-sdk-codestarconnections                 | 2019-12-01  |
 | AWS Comprehend Medical                                | Aws::ComprehendMedical                   | aws-sdk-comprehendmedical                   | 2018-10-30  |
