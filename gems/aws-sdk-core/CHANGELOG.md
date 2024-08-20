@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for Observability.
+
 3.201.5 (2024-08-15)
 ------------------
 
