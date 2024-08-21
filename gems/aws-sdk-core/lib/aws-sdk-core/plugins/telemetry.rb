@@ -41,6 +41,7 @@ which will not record or emit any telemetry data.
         def call(context)
           service_id = service_id(context)
           attributes = {
+            'rpc.system' => 'aws-api',
             'rpc.service' => service_id,
             'rpc.method' => context.operation.name,
             'code.function' => context.operation_name.to_s,
