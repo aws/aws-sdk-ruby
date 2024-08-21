@@ -8,13 +8,13 @@ module Aws
         :telemetry_provider,
         default: Aws::Telemetry::NoOpTelemetryProvider,
         doc_type: Aws::Telemetry::TelemetryProviderBase,
-        rbs_type: 'untyped',
+        rbs_type: Aws::Telemetry::TelemetryProviderBase,
         docstring: <<~DOCS) do |_cfg|
 Allows you to provide a telemetry provider, which is used
 to emit telemetry data. By default, will use `NoOpTelemetryProvider`
 which will not record or emit any telemetry data.
         DOCS
-        resolve_provider
+        Aws::Telemetry::NoOpTelemetryProvider.new
       end
 
       def after_initialize(client)
@@ -26,14 +26,6 @@ which will not record or emit any telemetry data.
           raise ArgumentError,
                 'Must provide a telemetry provider for the '\
                 '`telemetry_provider` configuration option.'
-        end
-      end
-
-      class << self
-        private
-
-        def resolve_provider
-          Aws::Telemetry::NoOpTelemetryProvider.new
         end
       end
 
