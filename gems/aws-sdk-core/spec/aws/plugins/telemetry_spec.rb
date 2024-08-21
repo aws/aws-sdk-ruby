@@ -17,17 +17,7 @@ module Aws
         operations: {
           'SomeOperation' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/some_operation' },
-            'input' => { 'shape' => 'OperationRequest' },
-            'requestcompression' => {
-              'encodings' => ['gzip']
-            }
-          },
-          'OperationStreaming' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'OperationStreamingRequest' },
-            'requestcompression' => {
-              'encodings' => ['gzip']
-            }
+            'input' => { 'shape' => 'OperationRequest' }
           }
         },
         shapes: {
@@ -35,13 +25,6 @@ module Aws
             'type' => 'structure',
             'members' => {
               'Body' => { 'shape' => 'Body', 'streaming' => false }
-            },
-            'payload' => 'Body'
-          },
-          'OperationStreamingRequest' => {
-            'type' => 'structure',
-            'members' => {
-              'Body' => { 'shape' => 'Body', 'streaming' => true }
             },
             'payload' => 'Body'
           },
@@ -147,6 +130,7 @@ module Aws
               )
             expect(finished_op_span.attributes)
               .to include(
+                'rpc.system' => 'aws-api',
                 'rpc.service' => 'Telemetry Service',
                 'rpc.method' => 'SomeOperation',
                 'code.function' => 'some_operation',
