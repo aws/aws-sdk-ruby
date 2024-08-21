@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.190.0 (2024-08-21)
+------------------
+
+* Feature - Add optional field JobRunQueuingEnabled to CreateJob and UpdateJob APIs.
+
 1.189.0 (2024-08-13)
 ------------------
 

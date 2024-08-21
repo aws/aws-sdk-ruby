@@ -6012,9 +6012,9 @@ module Aws::SecurityHub
 
     NumberFilter.add_member(:gte, Shapes::ShapeRef.new(shape: Double, location_name: "Gte"))
     NumberFilter.add_member(:lte, Shapes::ShapeRef.new(shape: Double, location_name: "Lte"))
+    NumberFilter.add_member(:eq, Shapes::ShapeRef.new(shape: Double, location_name: "Eq"))
     NumberFilter.add_member(:gt, Shapes::ShapeRef.new(shape: Double, location_name: "Gt"))
     NumberFilter.add_member(:lt, Shapes::ShapeRef.new(shape: Double, location_name: "Lt"))
-    NumberFilter.add_member(:eq, Shapes::ShapeRef.new(shape: Double, location_name: "Eq"))
     NumberFilter.struct_class = Types::NumberFilter
 
     NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilter)

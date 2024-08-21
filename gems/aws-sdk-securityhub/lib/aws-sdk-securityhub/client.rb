@@ -881,15 +881,15 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.confidence #=> Array
     #   resp.rules[0].criteria.confidence[0].gte #=> Float
     #   resp.rules[0].criteria.confidence[0].lte #=> Float
+    #   resp.rules[0].criteria.confidence[0].eq #=> Float
     #   resp.rules[0].criteria.confidence[0].gt #=> Float
     #   resp.rules[0].criteria.confidence[0].lt #=> Float
-    #   resp.rules[0].criteria.confidence[0].eq #=> Float
     #   resp.rules[0].criteria.criticality #=> Array
     #   resp.rules[0].criteria.criticality[0].gte #=> Float
     #   resp.rules[0].criteria.criticality[0].lte #=> Float
+    #   resp.rules[0].criteria.criticality[0].eq #=> Float
     #   resp.rules[0].criteria.criticality[0].gt #=> Float
     #   resp.rules[0].criteria.criticality[0].lt #=> Float
-    #   resp.rules[0].criteria.criticality[0].eq #=> Float
     #   resp.rules[0].criteria.title #=> Array
     #   resp.rules[0].criteria.title[0].value #=> String
     #   resp.rules[0].criteria.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -1589,18 +1589,18 @@ module Aws::SecurityHub
     #             {
     #               gte: 1.0,
     #               lte: 1.0,
+    #               eq: 1.0,
     #               gt: 1.0,
     #               lt: 1.0,
-    #               eq: 1.0,
     #             },
     #           ],
     #           criticality: [
     #             {
     #               gte: 1.0,
     #               lte: 1.0,
+    #               eq: 1.0,
     #               gt: 1.0,
     #               lt: 1.0,
-    #               eq: 1.0,
     #             },
     #           ],
     #           title: [
@@ -2400,18 +2400,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -2847,20 +2847,23 @@ module Aws::SecurityHub
     #
     #   The options are as follows:
     #
-    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
-    #     Regions where Security Hub is enabled. When you choose this option,
-    #     Security Hub also automatically aggregates findings from new Regions
-    #     as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
+    #     Security Hub is enabled. When you choose this option, Security Hub
+    #     also automatically aggregates findings from new Regions as Security
+    #     Hub supports them and you opt into them.
     #
-    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
-    #     from all of the Regions where Security Hub is enabled, except for
-    #     the Regions listed in the `Regions` parameter. When you choose this
-    #     option, Security Hub also automatically aggregates findings from new
-    #     Regions as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of the
+    #     Regions where Security Hub is enabled, except for the Regions listed
+    #     in the `Regions` parameter. When you choose this option, Security
+    #     Hub also automatically aggregates findings from new Regions as
+    #     Security Hub supports them and you opt into them.
     #
-    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from the
-    #     Regions listed in the `Regions` parameter. Security Hub does not
+    #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
+    #     listed in the `Regions` parameter. Security Hub does not
     #     automatically aggregate findings from new Regions.
+    #
+    #   * `NO_REGIONS` - Aggregates no data because no Regions are selected as
+    #     linked Regions.
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
@@ -2870,6 +2873,9 @@ module Aws::SecurityHub
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
     #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
+    #
+    #   An `InvalidInputException` error results if you populate this field
+    #   while `RegionLinkingMode` is `NO_REGIONS`.
     #
     # @return [Types::CreateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3066,18 +3072,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -3090,18 +3096,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -3204,9 +3210,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -3235,9 +3241,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -3262,18 +3268,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -3577,18 +3583,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -5751,18 +5757,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -5775,18 +5781,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -5889,9 +5895,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -5920,9 +5926,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -5947,18 +5953,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -6262,18 +6268,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -6560,30 +6566,30 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.severity_product #=> Array
     #   resp.insights[0].filters.severity_product[0].gte #=> Float
     #   resp.insights[0].filters.severity_product[0].lte #=> Float
+    #   resp.insights[0].filters.severity_product[0].eq #=> Float
     #   resp.insights[0].filters.severity_product[0].gt #=> Float
     #   resp.insights[0].filters.severity_product[0].lt #=> Float
-    #   resp.insights[0].filters.severity_product[0].eq #=> Float
     #   resp.insights[0].filters.severity_normalized #=> Array
     #   resp.insights[0].filters.severity_normalized[0].gte #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lte #=> Float
+    #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
     #   resp.insights[0].filters.severity_normalized[0].gt #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lt #=> Float
-    #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
     #   resp.insights[0].filters.severity_label #=> Array
     #   resp.insights[0].filters.severity_label[0].value #=> String
     #   resp.insights[0].filters.severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
     #   resp.insights[0].filters.confidence #=> Array
     #   resp.insights[0].filters.confidence[0].gte #=> Float
     #   resp.insights[0].filters.confidence[0].lte #=> Float
+    #   resp.insights[0].filters.confidence[0].eq #=> Float
     #   resp.insights[0].filters.confidence[0].gt #=> Float
     #   resp.insights[0].filters.confidence[0].lt #=> Float
-    #   resp.insights[0].filters.confidence[0].eq #=> Float
     #   resp.insights[0].filters.criticality #=> Array
     #   resp.insights[0].filters.criticality[0].gte #=> Float
     #   resp.insights[0].filters.criticality[0].lte #=> Float
+    #   resp.insights[0].filters.criticality[0].eq #=> Float
     #   resp.insights[0].filters.criticality[0].gt #=> Float
     #   resp.insights[0].filters.criticality[0].lt #=> Float
-    #   resp.insights[0].filters.criticality[0].eq #=> Float
     #   resp.insights[0].filters.title #=> Array
     #   resp.insights[0].filters.title[0].value #=> String
     #   resp.insights[0].filters.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6635,9 +6641,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_source_port #=> Array
     #   resp.insights[0].filters.network_source_port[0].gte #=> Float
     #   resp.insights[0].filters.network_source_port[0].lte #=> Float
+    #   resp.insights[0].filters.network_source_port[0].eq #=> Float
     #   resp.insights[0].filters.network_source_port[0].gt #=> Float
     #   resp.insights[0].filters.network_source_port[0].lt #=> Float
-    #   resp.insights[0].filters.network_source_port[0].eq #=> Float
     #   resp.insights[0].filters.network_source_domain #=> Array
     #   resp.insights[0].filters.network_source_domain[0].value #=> String
     #   resp.insights[0].filters.network_source_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6651,9 +6657,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_destination_port #=> Array
     #   resp.insights[0].filters.network_destination_port[0].gte #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lte #=> Float
+    #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
     #   resp.insights[0].filters.network_destination_port[0].gt #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lt #=> Float
-    #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
     #   resp.insights[0].filters.network_destination_domain #=> Array
     #   resp.insights[0].filters.network_destination_domain[0].value #=> String
     #   resp.insights[0].filters.network_destination_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6666,15 +6672,15 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.process_pid #=> Array
     #   resp.insights[0].filters.process_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_pid[0].lte #=> Float
+    #   resp.insights[0].filters.process_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_pid[0].gt #=> Float
     #   resp.insights[0].filters.process_pid[0].lt #=> Float
-    #   resp.insights[0].filters.process_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_parent_pid #=> Array
     #   resp.insights[0].filters.process_parent_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lte #=> Float
+    #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].gt #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lt #=> Float
-    #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_launched_at #=> Array
     #   resp.insights[0].filters.process_launched_at[0].start #=> String
     #   resp.insights[0].filters.process_launched_at[0].end #=> String
@@ -6826,15 +6832,15 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.finding_provider_fields_confidence #=> Array
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lt #=> Float
-    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality #=> Array
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lte #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lt #=> Float
-    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id #=> Array
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].value #=> String
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -8588,20 +8594,23 @@ module Aws::SecurityHub
     #
     #   The options are as follows:
     #
-    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
-    #     Regions where Security Hub is enabled. When you choose this option,
-    #     Security Hub also automatically aggregates findings from new Regions
-    #     as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
+    #     Security Hub is enabled. When you choose this option, Security Hub
+    #     also automatically aggregates findings from new Regions as Security
+    #     Hub supports them and you opt into them.
     #
-    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
-    #     from all of the Regions where Security Hub is enabled, except for
-    #     the Regions listed in the `Regions` parameter. When you choose this
-    #     option, Security Hub also automatically aggregates findings from new
-    #     Regions as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of the
+    #     Regions where Security Hub is enabled, except for the Regions listed
+    #     in the `Regions` parameter. When you choose this option, Security
+    #     Hub also automatically aggregates findings from new Regions as
+    #     Security Hub supports them and you opt into them.
     #
-    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from the
-    #     Regions listed in the `Regions` parameter. Security Hub does not
+    #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
+    #     listed in the `Regions` parameter. Security Hub does not
     #     automatically aggregate findings from new Regions.
+    #
+    #   * `NO_REGIONS` - Aggregates no data because no Regions are selected as
+    #     linked Regions.
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
@@ -8611,6 +8620,9 @@ module Aws::SecurityHub
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
     #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
+    #
+    #   An `InvalidInputException` error results if you populate this field
+    #   while `RegionLinkingMode` is `NO_REGIONS`.
     #
     # @return [Types::UpdateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8674,13 +8686,15 @@ module Aws::SecurityHub
     # `UpdateFindings` is a deprecated operation. Instead of
     # `UpdateFindings`, use the `BatchUpdateFindings` operation.
     #
-    # Updates the `Note` and `RecordState` of the Security Hub-aggregated
-    # findings that the filter attributes specify. Any member account that
-    # can view the finding also sees the update to the finding.
+    # The `UpdateFindings` operation updates the `Note` and `RecordState` of
+    # the Security Hub aggregated findings that the filter attributes
+    # specify. Any member account that can view the finding can also see the
+    # update to the finding.
     #
-    # Finding updates made with `UpdateFindings` might not be persisted if
-    # the same finding is later updated by the finding provider through the
-    # `BatchImportFindings` operation.
+    # Finding updates made with `UpdateFindings` aren't persisted if the
+    # same finding is later updated by the finding provider through the
+    # `BatchImportFindings` operation. In addition, Security Hub doesn't
+    # record updates made with `UpdateFindings` in the finding history.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
     #   A collection of attributes that specify which findings you want to
@@ -8778,18 +8792,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -8802,18 +8816,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -8916,9 +8930,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -8947,9 +8961,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -8974,18 +8988,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -9289,18 +9303,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -9536,18 +9550,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -9560,18 +9574,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -9674,9 +9688,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -9705,9 +9719,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -9732,18 +9746,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -10047,18 +10061,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
+    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
-    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -10419,7 +10433,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

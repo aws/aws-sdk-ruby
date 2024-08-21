@@ -6364,12 +6364,12 @@ module Aws::EC2
     #   snapshot, but you cannot create an unencrypted copy of an encrypted
     #   snapshot. The default KMS key for Amazon EBS is used unless you
     #   specify a non-default Key Management Service (KMS) KMS key using
-    #   `KmsKeyId`. For more information, see [Amazon EBS encryption][1] in
-    #   the *Amazon EBS User Guide*.
+    #   `KmsKeyId`. For more information, see [Use encryption with
+    #   EBS-backed AMIs][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
@@ -13516,8 +13516,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] metric
-    #   The metric, `aggregation-latency`, indicating that network latency
-    #   is aggregated for the query. This is the only supported metric.
+    #   The metric used for the network performance request.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -13561,9 +13560,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] metric
-    #   The metric used for the network performance request. Only
-    #   `aggregate-latency` is supported, which shows network latency during
-    #   a specified period.
+    #   The metric used for the network performance request.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -20122,6 +20119,10 @@ module Aws::EC2
     #   * `system-status.status` - The system status of the instance (`ok`
     #     \| `impaired` \| `initializing` \| `insufficient-data` \|
     #     `not-applicable`).
+    #
+    #   * `attached-ebs-status.status` - The status of the attached EBS
+    #     volume for the instance (`ok` \| `impaired` \| `initializing` \|
+    #     `insufficient-data` \| `not-applicable`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] instance_ids
@@ -30724,6 +30725,49 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the attached EBS status check for an instance.
+    #
+    # @!attribute [rw] impaired_since
+    #   The date and time when the attached EBS status check failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the attached EBS status check.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The result of the attached EBS status check.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsStatusDetails AWS API Documentation
+    #
+    class EbsStatusDetails < Struct.new(
+      :impaired_since,
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the attached EBS volume status for an instance.
+    #
+    # @!attribute [rw] details
+    #   Details about the attached EBS status check for an instance.
+    #   @return [Array<Types::EbsStatusDetails>]
+    #
+    # @!attribute [rw] status
+    #   The current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsStatusSummary AWS API Documentation
+    #
+    class EbsStatusSummary < Struct.new(
+      :details,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The EC2 Instance Connect Endpoint.
     #
     # @!attribute [rw] owner_id
@@ -31827,16 +31871,6 @@ module Aws::EC2
     #     new public sharing. Additionally, snapshots that are already
     #     publicly shared are treated as private and they are no longer
     #     publicly available.
-    #
-    #     <note markdown="1"> If you enable block public access for snapshots in
-    #     `block-all-sharing` mode, it does not change the permissions for
-    #     snapshots that are already publicly shared. Instead, it prevents
-    #     these snapshots from be publicly visible and publicly accessible.
-    #     Therefore, the attributes for these snapshots still indicate that
-    #     they are publicly shared, even though they are not publicly
-    #     available.
-    #
-    #      </note>
     #
     #   * `block-new-sharing` - Prevents only new public sharing of
     #     snapshots in the Region. Users in the account will no longer be
@@ -41991,6 +42025,12 @@ module Aws::EC2
     #   network connectivity problems.
     #   @return [Types::InstanceStatusSummary]
     #
+    # @!attribute [rw] attached_ebs_status
+    #   Reports impaired functionality that stems from an attached Amazon
+    #   EBS volume that is unreachable and unable to complete I/O
+    #   operations.
+    #   @return [Types::EbsStatusSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus AWS API Documentation
     #
     class InstanceStatus < Struct.new(
@@ -42000,7 +42040,8 @@ module Aws::EC2
       :instance_id,
       :instance_state,
       :instance_status,
-      :system_status)
+      :system_status,
+      :attached_ebs_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49877,6 +49918,18 @@ module Aws::EC2
     #   Indicates whether DNS queries made to the Amazon-provided DNS
     #   Resolver in this subnet should return synthetic IPv6 addresses for
     #   IPv4-only destinations.
+    #
+    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
+    #   from the subnet containing the IPv6-only workloads). For example,
+    #   the subnet containing the NAT gateway should have a `0.0.0.0/0`
+    #   route pointing to the internet gateway. For more information, see
+    #   [Configure DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] private_dns_hostname_type_on_launch
@@ -50214,10 +50267,19 @@ module Aws::EC2
     #   BGP session. The range is 64512 to 65534 for 16-bit ASNs and
     #   4200000000 to 4294967294 for 32-bit ASNs.
     #
-    #   The modify ASN operation is not allowed on a transit gateway with
-    #   active BGP sessions. You must first delete all transit gateway
-    #   attachments that have BGP configured prior to modifying the ASN on
-    #   the transit gateway.
+    #   The modify ASN operation is not allowed on a transit gateway if it
+    #   has the following attachments:
+    #
+    #   * Dynamic VPN
+    #
+    #   * Static VPN
+    #
+    #   * Direct Connect Gateway
+    #
+    #   * Connect
+    #
+    #   You must first delete all transit gateway attachments configured
+    #   prior to modifying the ASN on the transit gateway.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayOptions AWS API Documentation
@@ -57070,7 +57132,7 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI in the format `ami-17characters00000`.
+    #   The ID of the AMI in the format `ami-0ac394d6a3example`.
     #
     #   Alternatively, you can specify a Systems Manager parameter, using
     #   one of the following formats. The Systems Manager parameter will

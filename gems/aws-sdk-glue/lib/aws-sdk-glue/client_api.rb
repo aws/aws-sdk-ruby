@@ -892,6 +892,7 @@ module Aws::Glue
     OrchestrationArgumentsMap = Shapes::MapShape.new(name: 'OrchestrationArgumentsMap')
     OrchestrationArgumentsValue = Shapes::StringShape.new(name: 'OrchestrationArgumentsValue')
     OrchestrationIAMRoleArn = Shapes::StringShape.new(name: 'OrchestrationIAMRoleArn')
+    OrchestrationMessageString = Shapes::StringShape.new(name: 'OrchestrationMessageString')
     OrchestrationNameString = Shapes::StringShape.new(name: 'OrchestrationNameString')
     OrchestrationPageSize200 = Shapes::IntegerShape.new(name: 'OrchestrationPageSize200')
     OrchestrationPageSize25 = Shapes::IntegerShape.new(name: 'OrchestrationPageSize25')
@@ -2343,6 +2344,7 @@ module Aws::Glue
 
     CreateJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateJobRequest.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
+    CreateJobRequest.add_member(:job_run_queuing_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "JobRunQueuingEnabled"))
     CreateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateJobRequest.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     CreateJobRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, required: true, location_name: "Role"))
@@ -4115,6 +4117,7 @@ module Aws::Glue
 
     Job.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     Job.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
+    Job.add_member(:job_run_queuing_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "JobRunQueuingEnabled"))
     Job.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     Job.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     Job.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
@@ -4173,6 +4176,7 @@ module Aws::Glue
     JobRun.add_member(:trigger_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TriggerName"))
     JobRun.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     JobRun.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
+    JobRun.add_member(:job_run_queuing_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "JobRunQueuingEnabled"))
     JobRun.add_member(:started_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "StartedOn"))
     JobRun.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedOn"))
     JobRun.add_member(:completed_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CompletedOn"))
@@ -4194,11 +4198,13 @@ module Aws::Glue
     JobRun.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
     JobRun.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
     JobRun.add_member(:profile_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ProfileName"))
+    JobRun.add_member(:state_detail, Shapes::ShapeRef.new(shape: OrchestrationMessageString, location_name: "StateDetail"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
 
     JobUpdate.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
+    JobUpdate.add_member(:job_run_queuing_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "JobRunQueuingEnabled"))
     JobUpdate.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     JobUpdate.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     JobUpdate.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
@@ -5556,6 +5562,7 @@ module Aws::Glue
     StartImportLabelsTaskRunResponse.struct_class = Types::StartImportLabelsTaskRunResponse
 
     StartJobRunRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
+    StartJobRunRequest.add_member(:job_run_queuing_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "JobRunQueuingEnabled"))
     StartJobRunRequest.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
     StartJobRunRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
     StartJobRunRequest.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, deprecated: true, location_name: "AllocatedCapacity", metadata: {"deprecatedMessage"=>"This property is deprecated, use MaxCapacity instead."}))
