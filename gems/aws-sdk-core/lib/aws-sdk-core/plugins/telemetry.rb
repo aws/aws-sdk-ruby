@@ -11,8 +11,11 @@ module Aws
         rbs_type: Aws::Telemetry::TelemetryProviderBase,
         docstring: <<~DOCS) do |_cfg|
 Allows you to provide a telemetry provider, which is used
-to emit telemetry data. By default, will use `NoOpTelemetryProvider`
-which will not record or emit any telemetry data.
+to emit telemetry data. By default, uses `NoOpTelemetryProvider`
+which will not record or emit any telemetry data. The SDK currently supports
+OpenTelemetry (OTel) as a telemetry provider. To use the OTel provider, 
+require the`opentelemetry-sdk` gem and then, pass in an instance of a 
+`Aws::Telemetry::OTelProvider` for telemetry provider.
         DOCS
         Aws::Telemetry::NoOpTelemetryProvider.new
       end
