@@ -12,6 +12,20 @@ module Aws::Bedrock
   # @api private
   module Endpoints
 
+    class BatchDeleteEvaluationJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateEvaluationJob
       def self.build(context)
         unless context.config.regional_endpoint
@@ -82,6 +96,20 @@ module Aws::Bedrock
       end
     end
 
+    class CreateModelImportJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateModelInvocationJob
       def self.build(context)
         unless context.config.regional_endpoint
@@ -125,6 +153,20 @@ module Aws::Bedrock
     end
 
     class DeleteGuardrail
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteImportedModel
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -222,6 +264,20 @@ module Aws::Bedrock
       end
     end
 
+    class GetImportedModel
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetModelCopyJob
       def self.build(context)
         unless context.config.regional_endpoint
@@ -237,6 +293,20 @@ module Aws::Bedrock
     end
 
     class GetModelCustomizationJob
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetModelImportJob
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -348,6 +418,20 @@ module Aws::Bedrock
       end
     end
 
+    class ListImportedModels
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListModelCopyJobs
       def self.build(context)
         unless context.config.regional_endpoint
@@ -363,6 +447,20 @@ module Aws::Bedrock
     end
 
     class ListModelCustomizationJobs
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListModelImportJobs
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

@@ -33,6 +33,12 @@ module Aws::EMRContainers
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
             if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+              if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-east-1")
+                return Aws::Endpoints::Endpoint.new(url: "https://emr-containers.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?(region, "us-gov-west-1")
+                return Aws::Endpoints::Endpoint.new(url: "https://emr-containers.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://emr-containers-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

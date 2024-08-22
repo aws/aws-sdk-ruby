@@ -8100,6 +8100,13 @@ module Aws::QuickSight
     #     experience_configuration: { # required
     #       dashboard: {
     #         initial_dashboard_id: "ShortRestrictiveResourceId", # required
+    #         enabled_features: ["SHARED_VIEW"], # accepts SHARED_VIEW
+    #         disabled_features: ["SHARED_VIEW"], # accepts SHARED_VIEW
+    #         feature_configurations: {
+    #           shared_view: {
+    #             enabled: false, # required
+    #           },
+    #         },
     #       },
     #       dashboard_visual: {
     #         initial_dashboard_visual_id: { # required
@@ -8216,6 +8223,9 @@ module Aws::QuickSight
     #           state_persistence: {
     #             enabled: false, # required
     #           },
+    #           shared_view: {
+    #             enabled: false, # required
+    #           },
     #           bookmarks: {
     #             enabled: false, # required
     #           },
@@ -8225,6 +8235,9 @@ module Aws::QuickSight
     #         initial_path: "EntryPath",
     #         feature_configurations: {
     #           state_persistence: {
+    #             enabled: false, # required
+    #           },
+    #           shared_view: {
     #             enabled: false, # required
     #           },
     #         },
@@ -15242,7 +15255,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

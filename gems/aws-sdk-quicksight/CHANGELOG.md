@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-08-22)
+------------------
+
+* Feature - Explicit query for authors and dashboard viewing sharing for embedded users
+
 1.120.0 (2024-08-16)
 ------------------
 

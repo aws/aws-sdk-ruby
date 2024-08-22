@@ -18,6 +18,30 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class BatchDeleteEvaluationJobError
+      attr_accessor job_identifier: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:job_identifier]
+    end
+
+    class BatchDeleteEvaluationJobItem
+      attr_accessor job_identifier: ::String
+      attr_accessor job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
+      SENSITIVE: [:job_identifier]
+    end
+
+    class BatchDeleteEvaluationJobRequest
+      attr_accessor job_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteEvaluationJobResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteEvaluationJobError]
+      attr_accessor evaluation_jobs: ::Array[Types::BatchDeleteEvaluationJobItem]
+      SENSITIVE: []
+    end
+
     class CloudWatchConfig
       attr_accessor log_group_name: ::String
       attr_accessor role_arn: ::String
@@ -122,6 +146,24 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateModelImportJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor imported_model_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor model_data_source: Types::ModelDataSource
+      attr_accessor job_tags: ::Array[Types::Tag]
+      attr_accessor imported_model_tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor imported_model_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelImportJobResponse
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateModelInvocationJobRequest
       attr_accessor job_name: ::String
       attr_accessor role_arn: ::String
@@ -180,6 +222,14 @@ module Aws::Bedrock
     end
 
     class DeleteGuardrailResponse < Aws::EmptyStructure
+    end
+
+    class DeleteImportedModelRequest
+      attr_accessor model_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImportedModelResponse < Aws::EmptyStructure
     end
 
     class DeleteModelInvocationLoggingConfigurationRequest < Aws::EmptyStructure
@@ -270,7 +320,7 @@ module Aws::Bedrock
     class EvaluationSummary
       attr_accessor job_arn: ::String
       attr_accessor job_name: ::String
-      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor creation_time: ::Time
       attr_accessor job_type: ("Human" | "Automated")
       attr_accessor evaluation_task_types: ::Array[("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom")]
@@ -341,7 +391,7 @@ module Aws::Bedrock
 
     class GetEvaluationJobResponse
       attr_accessor job_name: ::String
-      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor job_arn: ::String
       attr_accessor job_description: ::String
       attr_accessor role_arn: ::String
@@ -394,6 +444,23 @@ module Aws::Bedrock
       SENSITIVE: [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
     end
 
+    class GetImportedModelRequest
+      attr_accessor model_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportedModelResponse
+      attr_accessor model_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor model_data_source: Types::ModelDataSource
+      attr_accessor creation_time: ::Time
+      attr_accessor model_architecture: ::String
+      attr_accessor model_kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
     class GetModelCopyJobRequest
       attr_accessor job_arn: ::String
       SENSITIVE: []
@@ -441,6 +508,28 @@ module Aws::Bedrock
       attr_accessor training_metrics: Types::TrainingMetrics
       attr_accessor validation_metrics: ::Array[Types::ValidatorMetric]
       attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class GetModelImportJobRequest
+      attr_accessor job_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelImportJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor imported_model_name: ::String
+      attr_accessor imported_model_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor model_data_source: Types::ModelDataSource
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      attr_accessor failure_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor imported_model_kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -673,6 +762,13 @@ module Aws::Bedrock
       SENSITIVE: [:instructions]
     end
 
+    class ImportedModelSummary
+      attr_accessor model_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -701,7 +797,7 @@ module Aws::Bedrock
     class ListEvaluationJobsRequest
       attr_accessor creation_time_after: ::Time
       attr_accessor creation_time_before: ::Time
-      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor name_contains: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -742,6 +838,23 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class ListImportedModelsRequest
+      attr_accessor creation_time_before: ::Time
+      attr_accessor creation_time_after: ::Time
+      attr_accessor name_contains: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CreationTime")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListImportedModelsResponse
+      attr_accessor next_token: ::String
+      attr_accessor model_summaries: ::Array[Types::ImportedModelSummary]
+      SENSITIVE: []
+    end
+
     class ListModelCopyJobsRequest
       attr_accessor creation_time_after: ::Time
       attr_accessor creation_time_before: ::Time
@@ -777,6 +890,24 @@ module Aws::Bedrock
     class ListModelCustomizationJobsResponse
       attr_accessor next_token: ::String
       attr_accessor model_customization_job_summaries: ::Array[Types::ModelCustomizationJobSummary]
+      SENSITIVE: []
+    end
+
+    class ListModelImportJobsRequest
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed")
+      attr_accessor name_contains: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("CreationTime")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListModelImportJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor model_import_job_summaries: ::Array[Types::ModelImportJobSummary]
       SENSITIVE: []
     end
 
@@ -862,6 +993,29 @@ module Aws::Bedrock
       attr_accessor custom_model_arn: ::String
       attr_accessor custom_model_name: ::String
       attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING")
+      SENSITIVE: []
+    end
+
+    class ModelDataSource
+      attr_accessor s3_data_source: Types::S3DataSource
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3DataSource < ModelDataSource
+      end
+      class Unknown < ModelDataSource
+      end
+    end
+
+    class ModelImportJobSummary
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor imported_model_arn: ::String
+      attr_accessor imported_model_name: ::String
       SENSITIVE: []
     end
 
@@ -954,6 +1108,11 @@ module Aws::Bedrock
     class S3Config
       attr_accessor bucket_name: ::String
       attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3DataSource
+      attr_accessor s3_uri: ::String
       SENSITIVE: []
     end
 

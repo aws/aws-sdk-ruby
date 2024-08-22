@@ -1037,10 +1037,10 @@ module Aws::AutoScaling
     # @!attribute [rw] health_check_type
     #   A comma-separated value string of one or more health check types.
     #
-    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
-    #   default health check and cannot be disabled. For more information,
-    #   see [Health checks for instances in an Auto Scaling group][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   The valid values are `EC2`, `EBS`, `ELB`, and `VPC_LATTICE`. `EC2`
+    #   is the default health check and cannot be disabled. For more
+    #   information, see [Health checks for instances in an Auto Scaling
+    #   group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously
     #   set.
@@ -7667,10 +7667,10 @@ module Aws::AutoScaling
     # @!attribute [rw] health_check_type
     #   A comma-separated value string of one or more health check types.
     #
-    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
-    #   default health check and cannot be disabled. For more information,
-    #   see [Health checks for instances in an Auto Scaling group][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   The valid values are `EC2`, `EBS`, `ELB`, and `VPC_LATTICE`. `EC2`
+    #   is the default health check and cannot be disabled. For more
+    #   information, see [Health checks for instances in an Auto Scaling
+    #   group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously
     #   set.

@@ -631,6 +631,8 @@ module Aws::Inspector2
     AccountAggregation.struct_class = Types::AccountAggregation
 
     AccountAggregationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    AccountAggregationResponse.add_member(:exploit_available_count, Shapes::ShapeRef.new(shape: Long, location_name: "exploitAvailableCount"))
+    AccountAggregationResponse.add_member(:fix_available_count, Shapes::ShapeRef.new(shape: Long, location_name: "fixAvailableCount"))
     AccountAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     AccountAggregationResponse.struct_class = Types::AccountAggregationResponse
 
@@ -1486,6 +1488,8 @@ module Aws::Inspector2
     FindingTypeAggregation.struct_class = Types::FindingTypeAggregation
 
     FindingTypeAggregationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    FindingTypeAggregationResponse.add_member(:exploit_available_count, Shapes::ShapeRef.new(shape: Long, location_name: "exploitAvailableCount"))
+    FindingTypeAggregationResponse.add_member(:fix_available_count, Shapes::ShapeRef.new(shape: Long, location_name: "fixAvailableCount"))
     FindingTypeAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     FindingTypeAggregationResponse.struct_class = Types::FindingTypeAggregationResponse
 
@@ -2342,6 +2346,7 @@ module Aws::Inspector2
 
       api.metadata = {
         "apiVersion" => "2020-06-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "inspector2",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -17,6 +17,12 @@ module Aws::Bedrock
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AutomatedEvaluationConfig = Shapes::StructureShape.new(name: 'AutomatedEvaluationConfig')
     BaseModelIdentifier = Shapes::StringShape.new(name: 'BaseModelIdentifier')
+    BatchDeleteEvaluationJobError = Shapes::StructureShape.new(name: 'BatchDeleteEvaluationJobError')
+    BatchDeleteEvaluationJobErrors = Shapes::ListShape.new(name: 'BatchDeleteEvaluationJobErrors')
+    BatchDeleteEvaluationJobItem = Shapes::StructureShape.new(name: 'BatchDeleteEvaluationJobItem')
+    BatchDeleteEvaluationJobItems = Shapes::ListShape.new(name: 'BatchDeleteEvaluationJobItems')
+    BatchDeleteEvaluationJobRequest = Shapes::StructureShape.new(name: 'BatchDeleteEvaluationJobRequest')
+    BatchDeleteEvaluationJobResponse = Shapes::StructureShape.new(name: 'BatchDeleteEvaluationJobResponse')
     BedrockModelId = Shapes::StringShape.new(name: 'BedrockModelId')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BrandedName = Shapes::StringShape.new(name: 'BrandedName')
@@ -34,6 +40,8 @@ module Aws::Bedrock
     CreateModelCopyJobResponse = Shapes::StructureShape.new(name: 'CreateModelCopyJobResponse')
     CreateModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'CreateModelCustomizationJobRequest')
     CreateModelCustomizationJobResponse = Shapes::StructureShape.new(name: 'CreateModelCustomizationJobResponse')
+    CreateModelImportJobRequest = Shapes::StructureShape.new(name: 'CreateModelImportJobRequest')
+    CreateModelImportJobResponse = Shapes::StructureShape.new(name: 'CreateModelImportJobResponse')
     CreateModelInvocationJobRequest = Shapes::StructureShape.new(name: 'CreateModelInvocationJobRequest')
     CreateModelInvocationJobResponse = Shapes::StructureShape.new(name: 'CreateModelInvocationJobResponse')
     CreateProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'CreateProvisionedModelThroughputRequest')
@@ -47,6 +55,8 @@ module Aws::Bedrock
     DeleteCustomModelResponse = Shapes::StructureShape.new(name: 'DeleteCustomModelResponse')
     DeleteGuardrailRequest = Shapes::StructureShape.new(name: 'DeleteGuardrailRequest')
     DeleteGuardrailResponse = Shapes::StructureShape.new(name: 'DeleteGuardrailResponse')
+    DeleteImportedModelRequest = Shapes::StructureShape.new(name: 'DeleteImportedModelRequest')
+    DeleteImportedModelResponse = Shapes::StructureShape.new(name: 'DeleteImportedModelResponse')
     DeleteModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteModelInvocationLoggingConfigurationRequest')
     DeleteModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteModelInvocationLoggingConfigurationResponse')
     DeleteProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'DeleteProvisionedModelThroughputRequest')
@@ -64,6 +74,7 @@ module Aws::Bedrock
     EvaluationJobArn = Shapes::StringShape.new(name: 'EvaluationJobArn')
     EvaluationJobDescription = Shapes::StringShape.new(name: 'EvaluationJobDescription')
     EvaluationJobIdentifier = Shapes::StringShape.new(name: 'EvaluationJobIdentifier')
+    EvaluationJobIdentifiers = Shapes::ListShape.new(name: 'EvaluationJobIdentifiers')
     EvaluationJobName = Shapes::StringShape.new(name: 'EvaluationJobName')
     EvaluationJobStatus = Shapes::StringShape.new(name: 'EvaluationJobStatus')
     EvaluationJobType = Shapes::StringShape.new(name: 'EvaluationJobType')
@@ -96,10 +107,14 @@ module Aws::Bedrock
     GetFoundationModelResponse = Shapes::StructureShape.new(name: 'GetFoundationModelResponse')
     GetGuardrailRequest = Shapes::StructureShape.new(name: 'GetGuardrailRequest')
     GetGuardrailResponse = Shapes::StructureShape.new(name: 'GetGuardrailResponse')
+    GetImportedModelRequest = Shapes::StructureShape.new(name: 'GetImportedModelRequest')
+    GetImportedModelResponse = Shapes::StructureShape.new(name: 'GetImportedModelResponse')
     GetModelCopyJobRequest = Shapes::StructureShape.new(name: 'GetModelCopyJobRequest')
     GetModelCopyJobResponse = Shapes::StructureShape.new(name: 'GetModelCopyJobResponse')
     GetModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'GetModelCustomizationJobRequest')
     GetModelCustomizationJobResponse = Shapes::StructureShape.new(name: 'GetModelCustomizationJobResponse')
+    GetModelImportJobRequest = Shapes::StructureShape.new(name: 'GetModelImportJobRequest')
+    GetModelImportJobResponse = Shapes::StructureShape.new(name: 'GetModelImportJobResponse')
     GetModelInvocationJobRequest = Shapes::StructureShape.new(name: 'GetModelInvocationJobRequest')
     GetModelInvocationJobResponse = Shapes::StructureShape.new(name: 'GetModelInvocationJobResponse')
     GetModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetModelInvocationLoggingConfigurationRequest')
@@ -187,6 +202,11 @@ module Aws::Bedrock
     HumanTaskInstructions = Shapes::StringShape.new(name: 'HumanTaskInstructions')
     HumanWorkflowConfig = Shapes::StructureShape.new(name: 'HumanWorkflowConfig')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    ImportedModelArn = Shapes::StringShape.new(name: 'ImportedModelArn')
+    ImportedModelIdentifier = Shapes::StringShape.new(name: 'ImportedModelIdentifier')
+    ImportedModelName = Shapes::StringShape.new(name: 'ImportedModelName')
+    ImportedModelSummary = Shapes::StructureShape.new(name: 'ImportedModelSummary')
+    ImportedModelSummaryList = Shapes::ListShape.new(name: 'ImportedModelSummaryList')
     InferenceType = Shapes::StringShape.new(name: 'InferenceType')
     InferenceTypeList = Shapes::ListShape.new(name: 'InferenceTypeList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -202,10 +222,14 @@ module Aws::Bedrock
     ListFoundationModelsResponse = Shapes::StructureShape.new(name: 'ListFoundationModelsResponse')
     ListGuardrailsRequest = Shapes::StructureShape.new(name: 'ListGuardrailsRequest')
     ListGuardrailsResponse = Shapes::StructureShape.new(name: 'ListGuardrailsResponse')
+    ListImportedModelsRequest = Shapes::StructureShape.new(name: 'ListImportedModelsRequest')
+    ListImportedModelsResponse = Shapes::StructureShape.new(name: 'ListImportedModelsResponse')
     ListModelCopyJobsRequest = Shapes::StructureShape.new(name: 'ListModelCopyJobsRequest')
     ListModelCopyJobsResponse = Shapes::StructureShape.new(name: 'ListModelCopyJobsResponse')
     ListModelCustomizationJobsRequest = Shapes::StructureShape.new(name: 'ListModelCustomizationJobsRequest')
     ListModelCustomizationJobsResponse = Shapes::StructureShape.new(name: 'ListModelCustomizationJobsResponse')
+    ListModelImportJobsRequest = Shapes::StructureShape.new(name: 'ListModelImportJobsRequest')
+    ListModelImportJobsResponse = Shapes::StructureShape.new(name: 'ListModelImportJobsResponse')
     ListModelInvocationJobsRequest = Shapes::StructureShape.new(name: 'ListModelInvocationJobsRequest')
     ListModelInvocationJobsResponse = Shapes::StructureShape.new(name: 'ListModelInvocationJobsResponse')
     ListProvisionedModelThroughputsRequest = Shapes::StructureShape.new(name: 'ListProvisionedModelThroughputsRequest')
@@ -230,8 +254,14 @@ module Aws::Bedrock
     ModelCustomizationJobSummaries = Shapes::ListShape.new(name: 'ModelCustomizationJobSummaries')
     ModelCustomizationJobSummary = Shapes::StructureShape.new(name: 'ModelCustomizationJobSummary')
     ModelCustomizationList = Shapes::ListShape.new(name: 'ModelCustomizationList')
+    ModelDataSource = Shapes::UnionShape.new(name: 'ModelDataSource')
     ModelId = Shapes::StringShape.new(name: 'ModelId')
     ModelIdentifier = Shapes::StringShape.new(name: 'ModelIdentifier')
+    ModelImportJobArn = Shapes::StringShape.new(name: 'ModelImportJobArn')
+    ModelImportJobIdentifier = Shapes::StringShape.new(name: 'ModelImportJobIdentifier')
+    ModelImportJobStatus = Shapes::StringShape.new(name: 'ModelImportJobStatus')
+    ModelImportJobSummaries = Shapes::ListShape.new(name: 'ModelImportJobSummaries')
+    ModelImportJobSummary = Shapes::StructureShape.new(name: 'ModelImportJobSummary')
     ModelInvocationIdempotencyToken = Shapes::StringShape.new(name: 'ModelInvocationIdempotencyToken')
     ModelInvocationJobArn = Shapes::StringShape.new(name: 'ModelInvocationJobArn')
     ModelInvocationJobIdentifier = Shapes::StringShape.new(name: 'ModelInvocationJobIdentifier')
@@ -263,6 +293,7 @@ module Aws::Bedrock
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
+    S3DataSource = Shapes::StructureShape.new(name: 'S3DataSource')
     S3InputFormat = Shapes::StringShape.new(name: 'S3InputFormat')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SageMakerFlowDefinitionArn = Shapes::StringShape.new(name: 'SageMakerFlowDefinitionArn')
@@ -314,6 +345,26 @@ module Aws::Bedrock
 
     AutomatedEvaluationConfig.add_member(:dataset_metric_configs, Shapes::ShapeRef.new(shape: EvaluationDatasetMetricConfigs, required: true, location_name: "datasetMetricConfigs"))
     AutomatedEvaluationConfig.struct_class = Types::AutomatedEvaluationConfig
+
+    BatchDeleteEvaluationJobError.add_member(:job_identifier, Shapes::ShapeRef.new(shape: EvaluationJobIdentifier, required: true, location_name: "jobIdentifier"))
+    BatchDeleteEvaluationJobError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchDeleteEvaluationJobError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BatchDeleteEvaluationJobError.struct_class = Types::BatchDeleteEvaluationJobError
+
+    BatchDeleteEvaluationJobErrors.member = Shapes::ShapeRef.new(shape: BatchDeleteEvaluationJobError)
+
+    BatchDeleteEvaluationJobItem.add_member(:job_identifier, Shapes::ShapeRef.new(shape: EvaluationJobIdentifier, required: true, location_name: "jobIdentifier"))
+    BatchDeleteEvaluationJobItem.add_member(:job_status, Shapes::ShapeRef.new(shape: EvaluationJobStatus, required: true, location_name: "jobStatus"))
+    BatchDeleteEvaluationJobItem.struct_class = Types::BatchDeleteEvaluationJobItem
+
+    BatchDeleteEvaluationJobItems.member = Shapes::ShapeRef.new(shape: BatchDeleteEvaluationJobItem)
+
+    BatchDeleteEvaluationJobRequest.add_member(:job_identifiers, Shapes::ShapeRef.new(shape: EvaluationJobIdentifiers, required: true, location_name: "jobIdentifiers"))
+    BatchDeleteEvaluationJobRequest.struct_class = Types::BatchDeleteEvaluationJobRequest
+
+    BatchDeleteEvaluationJobResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDeleteEvaluationJobErrors, required: true, location_name: "errors"))
+    BatchDeleteEvaluationJobResponse.add_member(:evaluation_jobs, Shapes::ShapeRef.new(shape: BatchDeleteEvaluationJobItems, required: true, location_name: "evaluationJobs"))
+    BatchDeleteEvaluationJobResponse.struct_class = Types::BatchDeleteEvaluationJobResponse
 
     CloudWatchConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     CloudWatchConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
@@ -395,6 +446,20 @@ module Aws::Bedrock
     CreateModelCustomizationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCustomizationJobArn, required: true, location_name: "jobArn"))
     CreateModelCustomizationJobResponse.struct_class = Types::CreateModelCustomizationJobResponse
 
+    CreateModelImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "jobName"))
+    CreateModelImportJobRequest.add_member(:imported_model_name, Shapes::ShapeRef.new(shape: ImportedModelName, required: true, location_name: "importedModelName"))
+    CreateModelImportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateModelImportJobRequest.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, required: true, location_name: "modelDataSource"))
+    CreateModelImportJobRequest.add_member(:job_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "jobTags"))
+    CreateModelImportJobRequest.add_member(:imported_model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "importedModelTags"))
+    CreateModelImportJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken"))
+    CreateModelImportJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    CreateModelImportJobRequest.add_member(:imported_model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "importedModelKmsKeyId"))
+    CreateModelImportJobRequest.struct_class = Types::CreateModelImportJobRequest
+
+    CreateModelImportJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelImportJobArn, required: true, location_name: "jobArn"))
+    CreateModelImportJobResponse.struct_class = Types::CreateModelImportJobResponse
+
     CreateModelInvocationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: ModelInvocationJobName, required: true, location_name: "jobName"))
     CreateModelInvocationJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateModelInvocationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ModelInvocationIdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -441,6 +506,11 @@ module Aws::Bedrock
 
     DeleteGuardrailResponse.struct_class = Types::DeleteGuardrailResponse
 
+    DeleteImportedModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ImportedModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
+    DeleteImportedModelRequest.struct_class = Types::DeleteImportedModelRequest
+
+    DeleteImportedModelResponse.struct_class = Types::DeleteImportedModelResponse
+
     DeleteModelInvocationLoggingConfigurationRequest.struct_class = Types::DeleteModelInvocationLoggingConfigurationRequest
 
     DeleteModelInvocationLoggingConfigurationResponse.struct_class = Types::DeleteModelInvocationLoggingConfigurationResponse
@@ -486,6 +556,8 @@ module Aws::Bedrock
     EvaluationInferenceConfig.add_member_subclass(:models, Types::EvaluationInferenceConfig::Models)
     EvaluationInferenceConfig.add_member_subclass(:unknown, Types::EvaluationInferenceConfig::Unknown)
     EvaluationInferenceConfig.struct_class = Types::EvaluationInferenceConfig
+
+    EvaluationJobIdentifiers.member = Shapes::ShapeRef.new(shape: EvaluationJobIdentifier)
 
     EvaluationMetricNames.member = Shapes::ShapeRef.new(shape: EvaluationMetricName)
 
@@ -611,6 +683,19 @@ module Aws::Bedrock
     GetGuardrailResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetGuardrailResponse.struct_class = Types::GetGuardrailResponse
 
+    GetImportedModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ImportedModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
+    GetImportedModelRequest.struct_class = Types::GetImportedModelRequest
+
+    GetImportedModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ImportedModelArn, location_name: "modelArn"))
+    GetImportedModelResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ImportedModelName, location_name: "modelName"))
+    GetImportedModelResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "jobName"))
+    GetImportedModelResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelImportJobArn, location_name: "jobArn"))
+    GetImportedModelResponse.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "modelDataSource"))
+    GetImportedModelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    GetImportedModelResponse.add_member(:model_architecture, Shapes::ShapeRef.new(shape: String, location_name: "modelArchitecture"))
+    GetImportedModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
+    GetImportedModelResponse.struct_class = Types::GetImportedModelResponse
+
     GetModelCopyJobRequest.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location: "uri", location_name: "jobArn"))
     GetModelCopyJobRequest.struct_class = Types::GetModelCopyJobRequest
 
@@ -652,6 +737,24 @@ module Aws::Bedrock
     GetModelCustomizationJobResponse.add_member(:validation_metrics, Shapes::ShapeRef.new(shape: ValidationMetrics, location_name: "validationMetrics"))
     GetModelCustomizationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     GetModelCustomizationJobResponse.struct_class = Types::GetModelCustomizationJobResponse
+
+    GetModelImportJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: ModelImportJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
+    GetModelImportJobRequest.struct_class = Types::GetModelImportJobRequest
+
+    GetModelImportJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelImportJobArn, location_name: "jobArn"))
+    GetModelImportJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "jobName"))
+    GetModelImportJobResponse.add_member(:imported_model_name, Shapes::ShapeRef.new(shape: ImportedModelName, location_name: "importedModelName"))
+    GetModelImportJobResponse.add_member(:imported_model_arn, Shapes::ShapeRef.new(shape: ImportedModelArn, location_name: "importedModelArn"))
+    GetModelImportJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    GetModelImportJobResponse.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "modelDataSource"))
+    GetModelImportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelImportJobStatus, location_name: "status"))
+    GetModelImportJobResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    GetModelImportJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    GetModelImportJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    GetModelImportJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    GetModelImportJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    GetModelImportJobResponse.add_member(:imported_model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "importedModelKmsKeyArn"))
+    GetModelImportJobResponse.struct_class = Types::GetModelImportJobResponse
 
     GetModelInvocationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: ModelInvocationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
     GetModelInvocationJobRequest.struct_class = Types::GetModelInvocationJobRequest
@@ -853,6 +956,13 @@ module Aws::Bedrock
     HumanWorkflowConfig.add_member(:instructions, Shapes::ShapeRef.new(shape: HumanTaskInstructions, location_name: "instructions"))
     HumanWorkflowConfig.struct_class = Types::HumanWorkflowConfig
 
+    ImportedModelSummary.add_member(:model_arn, Shapes::ShapeRef.new(shape: ImportedModelArn, required: true, location_name: "modelArn"))
+    ImportedModelSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ImportedModelName, required: true, location_name: "modelName"))
+    ImportedModelSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    ImportedModelSummary.struct_class = Types::ImportedModelSummary
+
+    ImportedModelSummaryList.member = Shapes::ShapeRef.new(shape: ImportedModelSummary)
+
     InferenceTypeList.member = Shapes::ShapeRef.new(shape: InferenceType)
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
@@ -906,6 +1016,19 @@ module Aws::Bedrock
     ListGuardrailsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListGuardrailsResponse.struct_class = Types::ListGuardrailsResponse
 
+    ListImportedModelsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
+    ListImportedModelsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
+    ListImportedModelsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: ImportedModelName, location: "querystring", location_name: "nameContains"))
+    ListImportedModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListImportedModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListImportedModelsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortModelsBy, location: "querystring", location_name: "sortBy"))
+    ListImportedModelsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListImportedModelsRequest.struct_class = Types::ListImportedModelsRequest
+
+    ListImportedModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImportedModelsResponse.add_member(:model_summaries, Shapes::ShapeRef.new(shape: ImportedModelSummaryList, location_name: "modelSummaries"))
+    ListImportedModelsResponse.struct_class = Types::ListImportedModelsResponse
+
     ListModelCopyJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
     ListModelCopyJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
     ListModelCopyJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: ModelCopyJobStatus, location: "querystring", location_name: "statusEquals"))
@@ -935,6 +1058,20 @@ module Aws::Bedrock
     ListModelCustomizationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListModelCustomizationJobsResponse.add_member(:model_customization_job_summaries, Shapes::ShapeRef.new(shape: ModelCustomizationJobSummaries, location_name: "modelCustomizationJobSummaries"))
     ListModelCustomizationJobsResponse.struct_class = Types::ListModelCustomizationJobsResponse
+
+    ListModelImportJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
+    ListModelImportJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
+    ListModelImportJobsRequest.add_member(:status_equals, Shapes::ShapeRef.new(shape: ModelImportJobStatus, location: "querystring", location_name: "statusEquals"))
+    ListModelImportJobsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: JobName, location: "querystring", location_name: "nameContains"))
+    ListModelImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListModelImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListModelImportJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortJobsBy, location: "querystring", location_name: "sortBy"))
+    ListModelImportJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListModelImportJobsRequest.struct_class = Types::ListModelImportJobsRequest
+
+    ListModelImportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListModelImportJobsResponse.add_member(:model_import_job_summaries, Shapes::ShapeRef.new(shape: ModelImportJobSummaries, location_name: "modelImportJobSummaries"))
+    ListModelImportJobsResponse.struct_class = Types::ListModelImportJobsResponse
 
     ListModelInvocationJobsRequest.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "submitTimeAfter"))
     ListModelInvocationJobsRequest.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "submitTimeBefore"))
@@ -1012,6 +1149,24 @@ module Aws::Bedrock
 
     ModelCustomizationList.member = Shapes::ShapeRef.new(shape: ModelCustomization)
 
+    ModelDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataSource, location_name: "s3DataSource"))
+    ModelDataSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ModelDataSource.add_member_subclass(:s3_data_source, Types::ModelDataSource::S3DataSource)
+    ModelDataSource.add_member_subclass(:unknown, Types::ModelDataSource::Unknown)
+    ModelDataSource.struct_class = Types::ModelDataSource
+
+    ModelImportJobSummaries.member = Shapes::ShapeRef.new(shape: ModelImportJobSummary)
+
+    ModelImportJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelImportJobArn, required: true, location_name: "jobArn"))
+    ModelImportJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "jobName"))
+    ModelImportJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelImportJobStatus, required: true, location_name: "status"))
+    ModelImportJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    ModelImportJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    ModelImportJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    ModelImportJobSummary.add_member(:imported_model_arn, Shapes::ShapeRef.new(shape: ImportedModelArn, location_name: "importedModelArn"))
+    ModelImportJobSummary.add_member(:imported_model_name, Shapes::ShapeRef.new(shape: ImportedModelName, location_name: "importedModelName"))
+    ModelImportJobSummary.struct_class = Types::ModelImportJobSummary
+
     ModelInvocationJobInputDataConfig.add_member(:s3_input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobS3InputDataConfig, location_name: "s3InputDataConfig"))
     ModelInvocationJobInputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ModelInvocationJobInputDataConfig.add_member_subclass(:s3_input_data_config, Types::ModelInvocationJobInputDataConfig::S3InputDataConfig)
@@ -1082,6 +1237,9 @@ module Aws::Bedrock
     S3Config.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
     S3Config.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "keyPrefix"))
     S3Config.struct_class = Types::S3Config
+
+    S3DataSource.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    S3DataSource.struct_class = Types::S3DataSource
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -1203,6 +1361,20 @@ module Aws::Bedrock
         "uid" => "bedrock-2023-04-20",
       }
 
+      api.add_operation(:batch_delete_evaluation_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteEvaluationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/evaluation-jobs/batch-delete"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteEvaluationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteEvaluationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_evaluation_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEvaluationJob"
         o.http_method = "POST"
@@ -1277,6 +1449,22 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_model_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateModelImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/model-import-jobs"
+        o.input = Shapes::ShapeRef.new(shape: CreateModelImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateModelImportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_model_invocation_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateModelInvocationJob"
         o.http_method = "POST"
@@ -1327,6 +1515,20 @@ module Aws::Bedrock
         o.http_request_uri = "/guardrails/{guardrailIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: DeleteGuardrailRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteGuardrailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_imported_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteImportedModel"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/imported-models/{modelIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteImportedModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteImportedModelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1412,6 +1614,19 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_imported_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetImportedModel"
+        o.http_method = "GET"
+        o.http_request_uri = "/imported-models/{modelIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetImportedModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetImportedModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_model_copy_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetModelCopyJob"
         o.http_method = "GET"
@@ -1431,6 +1646,19 @@ module Aws::Bedrock
         o.http_request_uri = "/model-customization-jobs/{jobIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetModelCustomizationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: GetModelCustomizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_model_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetModelImportJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-import-jobs/{jobIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetModelImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetModelImportJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1542,6 +1770,24 @@ module Aws::Bedrock
         )
       end)
 
+      api.add_operation(:list_imported_models, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImportedModels"
+        o.http_method = "GET"
+        o.http_request_uri = "/imported-models"
+        o.input = Shapes::ShapeRef.new(shape: ListImportedModelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImportedModelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_model_copy_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListModelCopyJobs"
         o.http_method = "GET"
@@ -1567,6 +1813,24 @@ module Aws::Bedrock
         o.http_request_uri = "/model-customization-jobs"
         o.input = Shapes::ShapeRef.new(shape: ListModelCustomizationJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListModelCustomizationJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_model_import_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListModelImportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/model-import-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListModelImportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListModelImportJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
