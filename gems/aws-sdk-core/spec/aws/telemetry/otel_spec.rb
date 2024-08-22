@@ -19,7 +19,8 @@ module Aws
 
       describe '#initialize' do
         it 'raises ArgumentError when otel dependency fails to load' do
-          allow(Aws::Telemetry).to receive(:otel_loaded?).and_return(false)
+          allow_any_instance_of(Aws::Telemetry::OTelProvider)
+            .to receive(:otel_loaded?).and_return(false)
           expect { otel_provider }.to raise_error(ArgumentError)
         end
 

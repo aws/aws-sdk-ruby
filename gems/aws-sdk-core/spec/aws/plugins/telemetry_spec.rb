@@ -105,7 +105,8 @@ module Aws
           end
 
           it 'raises error when an otel dependency is not required' do
-            allow(Aws::Telemetry).to receive(:otel_loaded?).and_return(false)
+            allow_any_instance_of(Aws::Telemetry::OTelProvider)
+              .to receive(:otel_loaded?).and_return(false)
             expect { otel_provider }
               .to raise_error(
                 ArgumentError,
