@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.470.0 (2024-08-21)
+------------------
+
+* Feature - DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances
+
 1.469.0 (2024-08-12)
 ------------------
 

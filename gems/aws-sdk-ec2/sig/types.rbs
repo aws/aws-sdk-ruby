@@ -6820,6 +6820,19 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class EbsStatusDetails
+      attr_accessor impaired_since: ::Time
+      attr_accessor name: ("reachability")
+      attr_accessor status: ("passed" | "failed" | "insufficient-data" | "initializing")
+      SENSITIVE: []
+    end
+
+    class EbsStatusSummary
+      attr_accessor details: ::Array[Types::EbsStatusDetails]
+      attr_accessor status: ("ok" | "impaired" | "insufficient-data" | "not-applicable" | "initializing")
+      SENSITIVE: []
+    end
+
     class Ec2InstanceConnectEndpoint
       attr_accessor owner_id: ::String
       attr_accessor instance_connect_endpoint_id: ::String
@@ -9210,6 +9223,7 @@ module Aws::EC2
       attr_accessor instance_state: Types::InstanceState
       attr_accessor instance_status: Types::InstanceStatusSummary
       attr_accessor system_status: Types::InstanceStatusSummary
+      attr_accessor attached_ebs_status: Types::EbsStatusSummary
       SENSITIVE: []
     end
 

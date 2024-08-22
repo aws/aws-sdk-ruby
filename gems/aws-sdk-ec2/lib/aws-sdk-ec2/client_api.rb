@@ -1255,6 +1255,9 @@ module Aws::EC2
     EbsNvmeSupport = Shapes::StringShape.new(name: 'EbsNvmeSupport')
     EbsOptimizedInfo = Shapes::StructureShape.new(name: 'EbsOptimizedInfo')
     EbsOptimizedSupport = Shapes::StringShape.new(name: 'EbsOptimizedSupport')
+    EbsStatusDetails = Shapes::StructureShape.new(name: 'EbsStatusDetails')
+    EbsStatusDetailsList = Shapes::ListShape.new(name: 'EbsStatusDetailsList')
+    EbsStatusSummary = Shapes::StructureShape.new(name: 'EbsStatusSummary')
     Ec2InstanceConnectEndpoint = Shapes::StructureShape.new(name: 'Ec2InstanceConnectEndpoint')
     Ec2InstanceConnectEndpointState = Shapes::StringShape.new(name: 'Ec2InstanceConnectEndpointState')
     EfaInfo = Shapes::StructureShape.new(name: 'EfaInfo')
@@ -8367,6 +8370,17 @@ module Aws::EC2
     EbsOptimizedInfo.add_member(:maximum_iops, Shapes::ShapeRef.new(shape: MaximumIops, location_name: "maximumIops"))
     EbsOptimizedInfo.struct_class = Types::EbsOptimizedInfo
 
+    EbsStatusDetails.add_member(:impaired_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "impairedSince"))
+    EbsStatusDetails.add_member(:name, Shapes::ShapeRef.new(shape: StatusName, location_name: "name"))
+    EbsStatusDetails.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "status"))
+    EbsStatusDetails.struct_class = Types::EbsStatusDetails
+
+    EbsStatusDetailsList.member = Shapes::ShapeRef.new(shape: EbsStatusDetails, location_name: "item")
+
+    EbsStatusSummary.add_member(:details, Shapes::ShapeRef.new(shape: EbsStatusDetailsList, location_name: "details"))
+    EbsStatusSummary.add_member(:status, Shapes::ShapeRef.new(shape: SummaryStatus, location_name: "status"))
+    EbsStatusSummary.struct_class = Types::EbsStatusSummary
+
     Ec2InstanceConnectEndpoint.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     Ec2InstanceConnectEndpoint.add_member(:instance_connect_endpoint_id, Shapes::ShapeRef.new(shape: InstanceConnectEndpointId, location_name: "instanceConnectEndpointId"))
     Ec2InstanceConnectEndpoint.add_member(:instance_connect_endpoint_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "instanceConnectEndpointArn"))
@@ -10376,6 +10390,7 @@ module Aws::EC2
     InstanceStatus.add_member(:instance_state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "instanceState"))
     InstanceStatus.add_member(:instance_status, Shapes::ShapeRef.new(shape: InstanceStatusSummary, location_name: "instanceStatus"))
     InstanceStatus.add_member(:system_status, Shapes::ShapeRef.new(shape: InstanceStatusSummary, location_name: "systemStatus"))
+    InstanceStatus.add_member(:attached_ebs_status, Shapes::ShapeRef.new(shape: EbsStatusSummary, location_name: "attachedEbsStatus"))
     InstanceStatus.struct_class = Types::InstanceStatus
 
     InstanceStatusDetails.add_member(:impaired_since, Shapes::ShapeRef.new(shape: DateTime, location_name: "impairedSince"))

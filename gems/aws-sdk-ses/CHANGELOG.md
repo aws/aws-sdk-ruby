@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2024-08-21)
+------------------
+
+* Feature - Enable email receiving customers to provide SES with access to their S3 buckets via an IAM role for "Deliver to S3 Action"
+
 1.68.0 (2024-07-08)
 ------------------
 

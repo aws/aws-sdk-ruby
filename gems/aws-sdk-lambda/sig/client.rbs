@@ -179,6 +179,8 @@ module Aws
         def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
         def scaling_config: () -> Types::ScalingConfig
         def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+        def kms_key_arn: () -> ::String
+        def filter_criteria_error: () -> Types::FilterCriteriaError
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_event_source_mapping-instance_method
       def create_event_source_mapping: (
@@ -234,7 +236,8 @@ module Aws
                                            database_name: ::String?,
                                            collection_name: ::String?,
                                            full_document: ("UpdateLookup" | "Default")?
-                                         }
+                                         },
+                                         ?kms_key_arn: ::String
                                        ) -> _CreateEventSourceMappingResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSourceMappingResponseSuccess
 
@@ -411,6 +414,8 @@ module Aws
         def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
         def scaling_config: () -> Types::ScalingConfig
         def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+        def kms_key_arn: () -> ::String
+        def filter_criteria_error: () -> Types::FilterCriteriaError
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_event_source_mapping-instance_method
       def delete_event_source_mapping: (
@@ -530,6 +535,8 @@ module Aws
         def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
         def scaling_config: () -> Types::ScalingConfig
         def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+        def kms_key_arn: () -> ::String
+        def filter_criteria_error: () -> Types::FilterCriteriaError
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_event_source_mapping-instance_method
       def get_event_source_mapping: (
@@ -1223,6 +1230,8 @@ module Aws
         def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
         def scaling_config: () -> Types::ScalingConfig
         def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+        def kms_key_arn: () -> ::String
+        def filter_criteria_error: () -> Types::FilterCriteriaError
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_event_source_mapping-instance_method
       def update_event_source_mapping: (
@@ -1265,7 +1274,8 @@ module Aws
                                            database_name: ::String?,
                                            collection_name: ::String?,
                                            full_document: ("UpdateLookup" | "Default")?
-                                         }
+                                         },
+                                         ?kms_key_arn: ::String
                                        ) -> _UpdateEventSourceMappingResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventSourceMappingResponseSuccess
 

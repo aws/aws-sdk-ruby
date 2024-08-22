@@ -178,6 +178,7 @@ module Aws::Lambda
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig
       attr_accessor scaling_config: Types::ScalingConfig
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -404,6 +405,8 @@ module Aws::Lambda
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig
       attr_accessor scaling_config: Types::ScalingConfig
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
+      attr_accessor kms_key_arn: ::String
+      attr_accessor filter_criteria_error: Types::FilterCriteriaError
       SENSITIVE: []
     end
 
@@ -420,6 +423,12 @@ module Aws::Lambda
 
     class FilterCriteria
       attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class FilterCriteriaError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -1379,6 +1388,7 @@ module Aws::Lambda
       attr_accessor function_response_types: ::Array[("ReportBatchItemFailures")]
       attr_accessor scaling_config: Types::ScalingConfig
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 

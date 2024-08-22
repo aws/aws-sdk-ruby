@@ -509,24 +509,24 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Grants an Amazon Web Service, Amazon Web Services account, or Amazon
-    # Web Services organization permission to use a function. You can apply
-    # the policy at the function level, or specify a qualifier to restrict
-    # access to a single version or alias. If you use a qualifier, the
-    # invoker must use the full Amazon Resource Name (ARN) of that version
-    # or alias to invoke the function. Note: Lambda does not support adding
-    # policies to version $LATEST.
+    # Grants an Amazon Web Servicesservice, Amazon Web Services account, or
+    # Amazon Web Services organization permission to use a function. You can
+    # apply the policy at the function level, or specify a qualifier to
+    # restrict access to a single version or alias. If you use a qualifier,
+    # the invoker must use the full Amazon Resource Name (ARN) of that
+    # version or alias to invoke the function. Note: Lambda does not support
+    # adding policies to version $LATEST.
     #
     # To grant permission to another account, specify the account ID as the
     # `Principal`. To grant permission to an organization defined in
     # Organizations, specify the organization ID as the `PrincipalOrgID`.
-    # For Amazon Web Services, the principal is a domain-style identifier
-    # that the service defines, such as `s3.amazonaws.com` or
-    # `sns.amazonaws.com`. For Amazon Web Services, you can also specify the
-    # ARN of the associated resource as the `SourceArn`. If you grant
-    # permission to a service principal without specifying the source, other
-    # accounts could potentially configure resources in their account to
-    # invoke your Lambda function.
+    # For Amazon Web Servicesservices, the principal is a domain-style
+    # identifier that the service defines, such as `s3.amazonaws.com` or
+    # `sns.amazonaws.com`. For Amazon Web Servicesservices, you can also
+    # specify the ARN of the associated resource as the `SourceArn`. If you
+    # grant permission to a service principal without specifying the source,
+    # other accounts could potentially configure resources in their account
+    # to invoke your Lambda function.
     #
     # This operation adds a statement to a resource-based permissions policy
     # for the function. For more information about function policies, see
@@ -562,23 +562,25 @@ module Aws::Lambda
     #   `lambda:InvokeFunction` or `lambda:GetFunction`.
     #
     # @option params [required, String] :principal
-    #   The Amazon Web Service or Amazon Web Services account that invokes the
-    #   function. If you specify a service, use `SourceArn` or `SourceAccount`
-    #   to limit who can invoke the function through that service.
+    #   The Amazon Web Servicesservice or Amazon Web Services account that
+    #   invokes the function. If you specify a service, use `SourceArn` or
+    #   `SourceAccount` to limit who can invoke the function through that
+    #   service.
     #
     # @option params [String] :source_arn
-    #   For Amazon Web Services, the ARN of the Amazon Web Services resource
-    #   that invokes the function. For example, an Amazon S3 bucket or Amazon
-    #   SNS topic.
+    #   For Amazon Web Servicesservices, the ARN of the Amazon Web Services
+    #   resource that invokes the function. For example, an Amazon S3 bucket
+    #   or Amazon SNS topic.
     #
     #   Note that Lambda configures the comparison using the `StringLike`
     #   operator.
     #
     # @option params [String] :source_account
-    #   For Amazon Web Service, the ID of the Amazon Web Services account that
-    #   owns the resource. Use this together with `SourceArn` to ensure that
-    #   the specified account owns the resource. It is possible for an Amazon
-    #   S3 bucket to be deleted by its owner and recreated by another account.
+    #   For Amazon Web Servicesservice, the ID of the Amazon Web Services
+    #   account that owns the resource. Use this together with `SourceArn` to
+    #   ensure that the specified account owns the resource. It is possible
+    #   for an Amazon S3 bucket to be deleted by its owner and recreated by
+    #   another account.
     #
     # @option params [String] :event_source_token
     #   For Alexa Smart Home functions, a token that the invoker must supply.
@@ -1025,6 +1027,16 @@ module Aws::Lambda
     # @option params [Types::DocumentDBEventSourceConfig] :document_db_event_source_config
     #   Specific configuration settings for a DocumentDB event source.
     #
+    # @option params [String] :kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key that
+    #   Lambda uses to encrypt your function's [filter criteria][1]. By
+    #   default, Lambda does not encrypt your filter criteria object. Specify
+    #   this property to encrypt data using your own customer managed key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -1054,6 +1066,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#kms_key_arn #kms_key_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #
     # @example Request syntax with placeholder values
     #
@@ -1113,6 +1127,7 @@ module Aws::Lambda
     #       collection_name: "CollectionName",
     #       full_document: "UpdateLookup", # accepts UpdateLookup, Default
     #     },
+    #     kms_key_arn: "KMSKeyArn",
     #   })
     #
     # @example Response structure
@@ -1155,6 +1170,9 @@ module Aws::Lambda
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
+    #   resp.kms_key_arn #=> String
+    #   resp.filter_criteria_error.error_code #=> String
+    #   resp.filter_criteria_error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping AWS API Documentation
     #
@@ -1169,8 +1187,8 @@ module Aws::Lambda
     # [deployment package][1] and an [execution role][2]. The deployment
     # package is a .zip file archive or container image that contains your
     # function code. The execution role grants the function permission to
-    # use Amazon Web Services, such as Amazon CloudWatch Logs for log
-    # streaming and X-Ray for request tracing.
+    # use Amazon Web Servicesservices, such as Amazon CloudWatch Logs for
+    # log streaming and X-Ray for request tracing.
     #
     # If the deployment package is a [container image][3], then you set the
     # package type to `Image`. For a container image, the code property must
@@ -1216,17 +1234,17 @@ module Aws::Lambda
     # configuration includes set of signing profiles, which define the
     # trusted publishers for this function.
     #
-    # If another Amazon Web Services account or an Amazon Web Service
-    # invokes your function, use AddPermission to grant permission by
-    # creating a resource-based Identity and Access Management (IAM) policy.
-    # You can grant permissions at the function level, on a version, or on
-    # an alias.
+    # If another Amazon Web Services account or an Amazon Web
+    # Servicesservice invokes your function, use AddPermission to grant
+    # permission by creating a resource-based Identity and Access Management
+    # (IAM) policy. You can grant permissions at the function level, on a
+    # version, or on an alias.
     #
     # To invoke your function directly, use Invoke. To invoke your function
-    # in response to events in other Amazon Web Services, create an event
-    # source mapping (CreateEventSourceMapping), or configure a function
-    # trigger in the other service. For more information, see [Invoking
-    # Lambda functions][6].
+    # in response to events in other Amazon Web Servicesservices, create an
+    # event source mapping (CreateEventSourceMapping), or configure a
+    # function trigger in the other service. For more information, see
+    # [Invoking Lambda functions][6].
     #
     #
     #
@@ -1823,6 +1841,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#kms_key_arn #kms_key_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #
     # @example Request syntax with placeholder values
     #
@@ -1870,6 +1890,9 @@ module Aws::Lambda
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
+    #   resp.kms_key_arn #=> String
+    #   resp.filter_criteria_error.error_code #=> String
+    #   resp.filter_criteria_error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping AWS API Documentation
     #
@@ -1886,9 +1909,9 @@ module Aws::Lambda
     # for DeleteAlias.
     #
     # To delete Lambda event source mappings that invoke a function, use
-    # DeleteEventSourceMapping. For Amazon Web Services and resources that
-    # invoke your function directly, delete the trigger in the service where
-    # you originally configured it.
+    # DeleteEventSourceMapping. For Amazon Web Servicesservices and
+    # resources that invoke your function directly, delete the trigger in
+    # the service where you originally configured it.
     #
     # @option params [required, String] :function_name
     #   The name or ARN of the Lambda function or version.
@@ -2310,6 +2333,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#kms_key_arn #kms_key_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #
     # @example Request syntax with placeholder values
     #
@@ -2357,6 +2382,9 @@ module Aws::Lambda
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
+    #   resp.kms_key_arn #=> String
+    #   resp.filter_criteria_error.error_code #=> String
+    #   resp.filter_criteria_error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping AWS API Documentation
     #
@@ -3849,6 +3877,9 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].document_db_event_source_config.database_name #=> String
     #   resp.event_source_mappings[0].document_db_event_source_config.collection_name #=> String
     #   resp.event_source_mappings[0].document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
+    #   resp.event_source_mappings[0].kms_key_arn #=> String
+    #   resp.event_source_mappings[0].filter_criteria_error.error_code #=> String
+    #   resp.event_source_mappings[0].filter_criteria_error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings AWS API Documentation
     #
@@ -5321,9 +5352,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Revokes function-use permission from an Amazon Web Service or another
-    # Amazon Web Services account. You can get the ID of the statement from
-    # the output of GetPolicy.
+    # Revokes function-use permission from an Amazon Web Servicesservice or
+    # another Amazon Web Services account. You can get the ID of the
+    # statement from the output of GetPolicy.
     #
     # @option params [required, String] :function_name
     #   The name or ARN of the Lambda function, version, or alias.
@@ -5773,6 +5804,16 @@ module Aws::Lambda
     # @option params [Types::DocumentDBEventSourceConfig] :document_db_event_source_config
     #   Specific configuration settings for a DocumentDB event source.
     #
+    # @option params [String] :kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key that
+    #   Lambda uses to encrypt your function's [filter criteria][1]. By
+    #   default, Lambda does not encrypt your filter criteria object. Specify
+    #   this property to encrypt data using your own customer managed key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
@@ -5802,6 +5843,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#self_managed_kafka_event_source_config #self_managed_kafka_event_source_config} => Types::SelfManagedKafkaEventSourceConfig
     #   * {Types::EventSourceMappingConfiguration#scaling_config #scaling_config} => Types::ScalingConfig
     #   * {Types::EventSourceMappingConfiguration#document_db_event_source_config #document_db_event_source_config} => Types::DocumentDBEventSourceConfig
+    #   * {Types::EventSourceMappingConfiguration#kms_key_arn #kms_key_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria_error #filter_criteria_error} => Types::FilterCriteriaError
     #
     # @example Request syntax with placeholder values
     #
@@ -5846,6 +5889,7 @@ module Aws::Lambda
     #       collection_name: "CollectionName",
     #       full_document: "UpdateLookup", # accepts UpdateLookup, Default
     #     },
+    #     kms_key_arn: "KMSKeyArn",
     #   })
     #
     # @example Response structure
@@ -5888,6 +5932,9 @@ module Aws::Lambda
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
+    #   resp.kms_key_arn #=> String
+    #   resp.filter_criteria_error.error_code #=> String
+    #   resp.filter_criteria_error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping AWS API Documentation
     #
@@ -6133,7 +6180,7 @@ module Aws::Lambda
     #
     # To configure function concurrency, use PutFunctionConcurrency. To
     # grant invoke permissions to an Amazon Web Services account or Amazon
-    # Web Service, use AddPermission.
+    # Web Servicesservice, use AddPermission.
     #
     #
     #
@@ -6685,7 +6732,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

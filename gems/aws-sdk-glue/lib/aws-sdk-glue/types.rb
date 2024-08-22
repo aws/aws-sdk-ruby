@@ -4946,6 +4946,18 @@ module Aws::Glue
     #   the default value.
     #   @return [String]
     #
+    # @!attribute [rw] job_run_queuing_enabled
+    #   Specifies whether job run queuing is enabled for the job runs for
+    #   this job.
+    #
+    #   A value of true means job run queuing is enabled for the job runs.
+    #   If false or not populated, the job runs will not be considered for
+    #   queueing.
+    #
+    #   If this field does not match the value set in the job run, then the
+    #   value from the job run field will be used.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   Description of the job being defined.
     #   @return [String]
@@ -5207,6 +5219,7 @@ module Aws::Glue
     class CreateJobRequest < Struct.new(
       :name,
       :job_mode,
+      :job_run_queuing_enabled,
       :description,
       :log_uri,
       :role,
@@ -13781,6 +13794,18 @@ module Aws::Glue
     #   the default value.
     #   @return [String]
     #
+    # @!attribute [rw] job_run_queuing_enabled
+    #   Specifies whether job run queuing is enabled for the job runs for
+    #   this job.
+    #
+    #   A value of true means job run queuing is enabled for the job runs.
+    #   If false or not populated, the job runs will not be considered for
+    #   queueing.
+    #
+    #   If this field does not match the value set in the job run, then the
+    #   value from the job run field will be used.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   A description of the job.
     #   @return [String]
@@ -14046,6 +14071,7 @@ module Aws::Glue
     class Job < Struct.new(
       :name,
       :job_mode,
+      :job_run_queuing_enabled,
       :description,
       :log_uri,
       :role,
@@ -14232,6 +14258,14 @@ module Aws::Glue
     #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
     #   the default value.
     #   @return [String]
+    #
+    # @!attribute [rw] job_run_queuing_enabled
+    #   Specifies whether job run queuing is enabled for the job run.
+    #
+    #   A value of true means job run queuing is enabled for the job run. If
+    #   false or not populated, the job run will not be considered for
+    #   queueing.
+    #   @return [Boolean]
     #
     # @!attribute [rw] started_on
     #   The date and time at which this job run was started.
@@ -14495,6 +14529,15 @@ module Aws::Glue
     #   The name of an Glue usage profile associated with the job run.
     #   @return [String]
     #
+    # @!attribute [rw] state_detail
+    #   This field holds details that pertain to the state of a job run. The
+    #   field is nullable.
+    #
+    #   For example, when a job run is in a WAITING state as a result of job
+    #   run queuing, the field has the reason why the job run is in that
+    #   state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -14504,6 +14547,7 @@ module Aws::Glue
       :trigger_name,
       :job_name,
       :job_mode,
+      :job_run_queuing_enabled,
       :started_on,
       :last_modified_on,
       :completed_on,
@@ -14524,7 +14568,8 @@ module Aws::Glue
       :dpu_seconds,
       :execution_class,
       :maintenance_window,
-      :profile_name)
+      :profile_name,
+      :state_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14547,6 +14592,18 @@ module Aws::Glue
     #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
     #   the default value.
     #   @return [String]
+    #
+    # @!attribute [rw] job_run_queuing_enabled
+    #   Specifies whether job run queuing is enabled for the job runs for
+    #   this job.
+    #
+    #   A value of true means job run queuing is enabled for the job runs.
+    #   If false or not populated, the job runs will not be considered for
+    #   queueing.
+    #
+    #   If this field does not match the value set in the job run, then the
+    #   value from the job run field will be used.
+    #   @return [Boolean]
     #
     # @!attribute [rw] description
     #   Description of the job being defined.
@@ -14798,6 +14855,7 @@ module Aws::Glue
     #
     class JobUpdate < Struct.new(
       :job_mode,
+      :job_run_queuing_enabled,
       :description,
       :log_uri,
       :role,
@@ -21147,6 +21205,14 @@ module Aws::Glue
     #   The name of the job definition to use.
     #   @return [String]
     #
+    # @!attribute [rw] job_run_queuing_enabled
+    #   Specifies whether job run queuing is enabled for the job run.
+    #
+    #   A value of true means job run queuing is enabled for the job run. If
+    #   false or not populated, the job run will not be considered for
+    #   queueing.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] job_run_id
     #   The ID of a previous `JobRun` to retry.
     #   @return [String]
@@ -21322,6 +21388,7 @@ module Aws::Glue
     #
     class StartJobRunRequest < Struct.new(
       :job_name,
+      :job_run_queuing_enabled,
       :job_run_id,
       :arguments,
       :allocated_capacity,
