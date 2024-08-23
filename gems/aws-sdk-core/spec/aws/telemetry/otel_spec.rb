@@ -6,21 +6,14 @@ require 'opentelemetry-sdk'
 module Aws
   module Telemetry
     describe OTelProvider do
-      before do
-        allow(Aws::Telemetry)
-          .to receive(:otel_loaded?)
-          .and_return(true)
-      end
-
       let(:otel_provider) { OTelProvider.new }
       let(:context_manager) { otel_provider.context_manager }
       let(:tracer_provider) { otel_provider.tracer_provider }
-      let(:tracer) { tracer_provider.tracer('some_tracer') }
 
       describe '#initialize' do
         it 'raises ArgumentError when otel dependency fails to load' do
           allow_any_instance_of(Aws::Telemetry::OTelProvider)
-            .to receive(:otel_loaded?).and_return(false)
+            .to receive(:require).with('opentelemetry-sdk').and_raise(LoadError)
           expect { otel_provider }.to raise_error(ArgumentError)
         end
 
@@ -43,14 +36,6 @@ module Aws
           end
         end
 
-        describe '#current_span' do
-          it 'returns the current span' do
-            wrapper_span = tracer.start_span('foo')
-            expect(context_manager.current_span.instance_variable_get(:@span))
-              .to eq(wrapper_span.instance_variable_get(:@span))
-          end
-        end
-
         describe '#attach' do
           it 'sets the current context' do
             context_manager.attach(new_context)
@@ -69,6 +54,8 @@ module Aws
       end
 
       describe 'OTelTracerProvider' do
+        let(:tracer) { tracer_provider.tracer('some_tracer') }
+
         it 'returns a tracer instance' do
           expect(tracer).to be_a(Aws::Telemetry::OTelTracer)
         end
@@ -76,6 +63,8 @@ module Aws
         context 'tracer' do
           let(:otel_export) { OpenTelemetry::SDK::Trace::Export }
           let(:otel_exporter) { otel_export::InMemorySpanExporter.new }
+          let(:finished_span) { otel_exporter.finished_spans[0] }
+
           before do
             processor = otel_export::SimpleSpanProcessor.new(otel_exporter)
             OpenTelemetry::SDK.configure do |c|
@@ -83,8 +72,6 @@ module Aws
             end
           end
           after { SpecHelper.reset_opentelemetry_sdk }
-
-          let(:finished_span) { otel_exporter.finished_spans[0] }
 
           describe '#start_span' do
             it 'returns a valid span with supplied parameters' do
@@ -122,6 +109,16 @@ module Aws
               expect(finished_span.events[0].attributes['exception.message'])
                 .to eq(error.message)
               expect(finished_span.events[0].attributes['burnt']).to eq('pie')
+            end
+          end
+
+          describe '#current_span' do
+            it 'returns the current span' do
+              tracer.in_span('foo') do |span|
+                span['blueberry'] = 'pie'
+                expect(tracer.current_span.instance_variable_get(:@span))
+                  .to eq(span.instance_variable_get(:@span))
+              end
             end
           end
         end

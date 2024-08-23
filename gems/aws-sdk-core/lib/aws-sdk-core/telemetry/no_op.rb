@@ -28,6 +28,10 @@ module Aws
       def in_span(name, attributes: nil, kind: nil)
         yield NoOpSpan.new
       end
+
+      def current_span
+        NoOpSpan.new
+      end
     end
 
     # No-op implementation for {SpanBase}.
@@ -57,8 +61,6 @@ module Aws
     # No-op implementation for {ContextManagerBase}.
     class NoOpContextManager < ContextManagerBase
       def current; end
-
-      def current_span; end
 
       def attach(context); end
 

@@ -65,6 +65,13 @@ module Aws
       def in_span(name, attributes: nil, kind: nil)
         raise NotImplementedError
       end
+
+      # Returns the current active span.
+      #
+      # @return [Aws::Telemetry::SpanBase]
+      def current_span
+        raise NotImplementedError
+      end
     end
 
     # Base for `Span` classes.
@@ -144,13 +151,6 @@ module Aws
       #
       # @return [Context]
       def current
-        raise NotImplementedError
-      end
-
-      # Returns the current span from current context.
-      #
-      # @return [Aws::Telemetry::SpanBase]
-      def current_span
         raise NotImplementedError
       end
 

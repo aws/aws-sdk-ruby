@@ -38,6 +38,13 @@ module Aws
           end
         end
       end
+
+      describe '#current_span' do
+        it 'returns an instance of no-op span' do
+          expect(subject.current_span)
+            .to be_an_instance_of(Aws::Telemetry::NoOpSpan)
+        end
+      end
     end
 
     describe NoOpSpan do

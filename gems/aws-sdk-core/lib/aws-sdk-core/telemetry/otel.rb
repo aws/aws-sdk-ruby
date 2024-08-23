@@ -45,7 +45,6 @@ module Aws
 
       private
 
-      # @api private
       def otel_loaded?
         if @use_otel.nil?
           @use_otel =
@@ -116,6 +115,13 @@ module Aws
         @tracer.in_span(name, attributes: attributes, kind: kind) do |span|
           block.call(OTelSpan.new(span))
         end
+      end
+
+      # Returns the current active span.
+      #
+      # @return [Aws::Telemetry::OTelSpan]
+      def current_span
+        OTelSpan.new(OpenTelemetry::Trace.current_span)
       end
     end
 
@@ -204,13 +210,6 @@ module Aws
       # @return [Context]
       def current
         OpenTelemetry::Context.current
-      end
-
-      # Returns the current span from current context.
-      #
-      # @return [Aws::Telemetry::OTelSpan]
-      def current_span
-        OTelSpan.new(OpenTelemetry::Trace.current_span)
       end
 
       # Associates a Context with the caller’s current execution unit.
