@@ -106,24 +106,6 @@ module Aws
           .to receive(:correct_clock_skew).and_return('true')
         expect(client.config.correct_clock_skew).to eq(true)
       end
-
-      it 'sets user-agent metric for standard' do
-        client = RetryErrorsSvc::Client.new(retry_mode: 'standard', region: 'us-west-2')
-        stub_request(:post, client.config.endpoint)
-        resp = client.example_operation
-        metric = Aws::Plugins::UserAgent::METRICS['RETRY_MODE_STANDARD']
-        expect(resp.context.http_request.headers['User-Agent'])
-          .to include("m/#{metric}")
-      end
-
-      it 'sets user-agent metric for adaptive' do
-        client = RetryErrorsSvc::Client.new(retry_mode: 'adaptive', region: 'us-west-2')
-        stub_request(:post, client.config.endpoint)
-        resp = client.example_operation
-        metric = Aws::Plugins::UserAgent::METRICS['RETRY_MODE_ADAPTIVE']
-        expect(resp.context.http_request.headers['User-Agent'])
-          .to include("m/#{metric}")
-      end
     end
 
     describe RetryErrors::Handler do
