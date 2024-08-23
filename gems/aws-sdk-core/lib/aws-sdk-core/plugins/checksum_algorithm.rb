@@ -157,17 +157,13 @@ module Aws
 
       class OptionHandler < Seahorse::Client::Handler
         def call(context)
-          # Enable validation on the service in all cases
+          # Set validation mode to enabled when supported.
           if context.config.response_checksum_calculation == 'WHEN_SUPPORTED'
             enable_request_validation_mode(context)
           end
 
           # Default checksum member to CRC32 if not set
           default_request_algorithm_member(context)
-          # Not modeled with httpChecksum
-          if context.operation_name == :create_multipart_upload
-            context.params[:checksum_algorithm] ||= DEFAULT_CHECKSUM
-          end
 
           @handler.call(context)
         end
@@ -178,21 +174,20 @@ module Aws
           return unless context.operation.http_checksum
 
           input_member = context.operation.http_checksum['requestValidationModeMember']
-          context.params[input_member.to_sym] = 'ENABLED' if input_member
+          context.params[input_member.to_sym] ||= 'ENABLED' if input_member
         end
 
         def default_request_algorithm_member(context)
           return unless context.operation.http_checksum
 
           input_member = context.operation.http_checksum['requestAlgorithmMember']
-          context.params[input_member.to_sym] ||= 'CRC32' if input_member
+          context.params[input_member.to_sym] ||= DEFAULT_CHECKSUM if input_member
         end
       end
 
       class ChecksumHandler < Seahorse::Client::Handler
         def call(context)
-          context[:http_checksum] ||= {}
-
+          algorithm = nil
           if should_calculate_request_checksum?(context)
             algorithm = choose_request_algorithm!(context)
             request_algorithm = {
@@ -201,6 +196,7 @@ module Aws
               name: "x-amz-checksum-#{algorithm.downcase}"
             }
 
+            context[:http_checksum] ||= {}
             context[:http_checksum][:request_algorithm] = request_algorithm
             calculate_request_checksum(context, request_algorithm)
           end
@@ -209,10 +205,55 @@ module Aws
             add_verify_response_checksum_handlers(context)
           end
 
-          @handler.call(context)
+          with_request_config_metric(context.config) do
+            with_response_config_metric(context.config) do
+              with_request_checksum_metrics(algorithm) do
+                @handler.call(context)
+              end
+            end
+          end
         end
 
         private
+
+        def with_request_config_metric(config, &block)
+          case config.request_checksum_calculation
+          when 'WHEN_SUPPORTED'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_WHEN_SUPPORTED', &block)
+          when 'WHEN_REQUIRED'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_WHEN_REQUIRED', &block)
+          else
+            block.call
+          end
+        end
+
+        def with_response_config_metric(config, &block)
+          case config.response_checksum_calculation
+          when 'WHEN_SUPPORTED'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED', &block)
+          when 'WHEN_REQUIRED'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_RES_WHEN_REQUIRED', &block)
+          else
+            block.call
+          end
+        end
+
+        def with_request_checksum_metrics(algorithm, &block)
+          case algorithm
+          when 'CRC32'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_CRC32', &block)
+          when 'CRC32C'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_CRC32C', &block)
+          when 'CRC64NVME'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_CRC64', &block)
+          when 'SHA1'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_SHA1', &block)
+          when 'SHA256'
+            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_SHA256', &block)
+          else
+            block.call
+          end
+        end
 
         def request_algorithm_selection(context)
           return unless context.operation.http_checksum

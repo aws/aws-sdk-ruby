@@ -17,7 +17,24 @@ module Aws
           "S3_CRYPTO_V2": "I",
           "S3_EXPRESS_BUCKET": "J",
           "S3_ACCESS_GRANTS": "K",
-          "GZIP_REQUEST_COMPRESSION": "L"
+          "GZIP_REQUEST_COMPRESSION": "L",
+          "PROTOCOL_RPC_V2_CBOR": "M",
+          "ENDPOINT_OVERRIDE": "N",
+          "ACCOUNT_ID_ENDPOINT": "O",
+          "ACCOUNT_ID_MODE_PREFERRED": "P",
+          "ACCOUNT_ID_MODE_DISABLED": "Q",
+          "ACCOUNT_ID_MODE_REQUIRED": "R",
+          "SIGV4A_SIGNING": "S",
+          "RESOLVED_ACCOUNT_ID": "T",
+          "FLEXIBLE_CHECKSUMS_REQ_CRC32" : "U",
+          "FLEXIBLE_CHECKSUMS_REQ_CRC32C" : "V",
+          "FLEXIBLE_CHECKSUMS_REQ_CRC64" : "W",
+          "FLEXIBLE_CHECKSUMS_REQ_SHA1" : "X",
+          "FLEXIBLE_CHECKSUMS_REQ_SHA256" : "Y",
+          "FLEXIBLE_CHECKSUMS_REQ_WHEN_SUPPORTED" : "Z",
+          "FLEXIBLE_CHECKSUMS_REQ_WHEN_REQUIRED" : "a",
+          "FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED" : "b",
+          "FLEXIBLE_CHECKSUMS_RES_WHEN_REQUIRED" : "c"
         }
       METRICS
 

@@ -1010,6 +1010,7 @@
       "Aws::S3::Plugins::ARN",
       "Aws::S3::Plugins::BucketDns",
       "Aws::S3::Plugins::BucketNameRestrictions",
+      "Aws::S3::Plugins::ChecksumAlgorithm",
       "Aws::S3::Plugins::Dualstack",
       "Aws::S3::Plugins::Expect100Continue",
       "Aws::S3::Plugins::ExpressSessionAuth",
@@ -1022,7 +1023,6 @@
       "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::SseCpk",
-      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums",
       "Aws::S3::Plugins::StreamingRetry",
       "Aws::S3::Plugins::UrlEncodedKeys"
     ]
