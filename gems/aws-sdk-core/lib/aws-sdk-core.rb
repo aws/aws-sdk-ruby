@@ -50,9 +50,6 @@ require_relative 'aws-sdk-core/log/formatter'
 require_relative 'aws-sdk-core/log/param_filter'
 require_relative 'aws-sdk-core/log/param_formatter'
 
-# telemetry
-require_relative 'aws-sdk-core/telemetry'
-
 # stubbing
 require_relative 'aws-sdk-core/stubbing/empty_stub'
 require_relative 'aws-sdk-core/stubbing/data_applicator'
@@ -84,9 +81,10 @@ require_relative 'aws-sdk-core/event_emitter'
 # endpoint discovery
 require_relative 'aws-sdk-core/endpoint_cache'
 
-# client metrics
+# client metrics / telemetry
 require_relative 'aws-sdk-core/client_side_monitoring/request_metrics'
 require_relative 'aws-sdk-core/client_side_monitoring/publisher'
+require_relative 'aws-sdk-core/telemetry'
 
 # utilities
 require_relative 'aws-sdk-core/arn'
