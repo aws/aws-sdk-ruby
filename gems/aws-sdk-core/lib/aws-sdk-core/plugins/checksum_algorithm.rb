@@ -157,6 +157,8 @@ module Aws
 
       class OptionHandler < Seahorse::Client::Handler
         def call(context)
+          context[:http_checksum] ||= {}
+
           # Set validation mode to enabled when supported.
           if context.config.response_checksum_calculation == 'WHEN_SUPPORTED'
             enable_request_validation_mode(context)
@@ -196,7 +198,6 @@ module Aws
               name: "x-amz-checksum-#{algorithm.downcase}"
             }
 
-            context[:http_checksum] ||= {}
             context[:http_checksum][:request_algorithm] = request_algorithm
             calculate_request_checksum(context, request_algorithm)
           end
