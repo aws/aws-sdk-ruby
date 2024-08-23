@@ -1426,6 +1426,14 @@ module Aws::CodeBuild
     #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
     #     Pacific (Sydney).
     #
+    #   * The environment type `MAC_ARM` is available for Medium fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), and EU (Frankfurt)
+    #
+    #   * The environment type `MAC_ARM` is available for Large fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), and Asia Pacific (Sydney).
+    #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia
@@ -2429,6 +2437,14 @@ module Aws::CodeBuild
     #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
     #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
     #     Pacific (Sydney).
+    #
+    #   * The environment type `MAC_ARM` is available for Medium fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), and EU (Frankfurt)
+    #
+    #   * The environment type `MAC_ARM` is available for Large fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), and Asia Pacific (Sydney).
     #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
@@ -6412,6 +6428,14 @@ module Aws::CodeBuild
     #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
     #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
     #     Pacific (Sydney).
+    #
+    #   * The environment type `MAC_ARM` is available for Medium fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), and EU (Frankfurt)
+    #
+    #   * The environment type `MAC_ARM` is available for Large fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), and Asia Pacific (Sydney).
     #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West

@@ -927,6 +927,7 @@ module Aws::BedrockAgentRuntime
     #           api_result: {
     #             action_group: "String", # required
     #             api_path: "ApiPath",
+    #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
     #             http_method: "String",
     #             http_status_code: 1,
     #             response_body: {
@@ -938,6 +939,7 @@ module Aws::BedrockAgentRuntime
     #           },
     #           function_result: {
     #             action_group: "String", # required
+    #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
     #             function: "String",
     #             response_body: {
     #               "String" => {
@@ -1006,6 +1008,7 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_id #=> String
     #   event.invocation_inputs #=> Array
     #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
     #   event.invocation_inputs[0].api_invocation_input.api_path #=> String
     #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   event.invocation_inputs[0].api_invocation_input.parameters #=> Array
@@ -1018,6 +1021,7 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
     #   event.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
     #   event.invocation_inputs[0].function_invocation_input.function #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
@@ -1863,7 +1867,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

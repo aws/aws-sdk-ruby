@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2024-08-23)
+------------------
+
+* Feature - Update API documentation to clarify the event SLA as well as the data model expectations
+
 1.8.0 (2024-07-02)
 ------------------
 

@@ -33,6 +33,7 @@ module Aws::BedrockAgentRuntime
 
     class ApiInvocationInput
       attr_accessor action_group: ::String
+      attr_accessor action_invocation_type: ("RESULT" | "USER_CONFIRMATION" | "USER_CONFIRMATION_AND_RESULT")
       attr_accessor api_path: ::String
       attr_accessor http_method: ::String
       attr_accessor parameters: ::Array[Types::ApiParameter]
@@ -55,6 +56,7 @@ module Aws::BedrockAgentRuntime
     class ApiResult
       attr_accessor action_group: ::String
       attr_accessor api_path: ::String
+      attr_accessor confirmation_state: ("CONFIRM" | "DENY")
       attr_accessor http_method: ::String
       attr_accessor http_status_code: ::Integer
       attr_accessor response_body: ::Hash[::String, Types::ContentBody]
@@ -232,6 +234,7 @@ module Aws::BedrockAgentRuntime
 
     class FunctionInvocationInput
       attr_accessor action_group: ::String
+      attr_accessor action_invocation_type: ("RESULT" | "USER_CONFIRMATION" | "USER_CONFIRMATION_AND_RESULT")
       attr_accessor function: ::String
       attr_accessor parameters: ::Array[Types::FunctionParameter]
       SENSITIVE: []
@@ -246,6 +249,7 @@ module Aws::BedrockAgentRuntime
 
     class FunctionResult
       attr_accessor action_group: ::String
+      attr_accessor confirmation_state: ("CONFIRM" | "DENY")
       attr_accessor function: ::String
       attr_accessor response_body: ::Hash[::String, Types::ContentBody]
       attr_accessor response_state: ("FAILURE" | "REPROMPT")

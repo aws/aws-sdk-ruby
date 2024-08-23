@@ -217,6 +217,7 @@ module Aws
                                 api_result: {
                                   action_group: ::String,
                                   api_path: ::String?,
+                                  confirmation_state: ("CONFIRM" | "DENY")?,
                                   http_method: ::String?,
                                   http_status_code: ::Integer?,
                                   response_body: Hash[::String, {
@@ -226,6 +227,7 @@ module Aws
                                 }?,
                                 function_result: {
                                   action_group: ::String,
+                                  confirmation_state: ("CONFIRM" | "DENY")?,
                                   function: ::String?,
                                   response_body: Hash[::String, {
                                       body: ::String?

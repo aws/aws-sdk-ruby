@@ -810,6 +810,7 @@ module Aws::BedrockAgent
     #               type: "string", # required, accepts string, number, integer, boolean, array
     #             },
     #           },
+    #           require_confirmation: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       ],
     #     },
@@ -838,6 +839,7 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
+    #   resp.agent_action_group.function_schema.functions[0].require_confirmation #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput", "AMAZON.CodeInterpreter"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -957,14 +959,16 @@ module Aws::BedrockAgent
     #
     #   You can set the data deletion policy to:
     #
-    #   * DELETE: Deletes all underlying data belonging to the data source
-    #     from the vector store upon deletion of a knowledge base or data
-    #     source resource. Note that the vector store itself is not deleted,
-    #     only the underlying data. This flag is ignored if an Amazon Web
-    #     Services account is deleted.
+    #   * DELETE: Deletes all data from your data source that’s converted into
+    #     vector embeddings upon deletion of a knowledge base or data source
+    #     resource. Note that the **vector store itself is not deleted**, only
+    #     the data. This flag is ignored if an Amazon Web Services account is
+    #     deleted.
     #
-    #   * RETAIN: Retains all underlying data in your vector store upon
-    #     deletion of a knowledge base or data source resource.
+    #   * RETAIN: Retains all data from your data source that’s converted into
+    #     vector embeddings upon deletion of a knowledge base or data source
+    #     resource. Note that the **vector store itself is not deleted** if
+    #     you delete a knowledge base or data source resource.
     #
     # @option params [required, Types::DataSourceConfiguration] :data_source_configuration
     #   The connection configuration for the data source.
@@ -2478,10 +2482,11 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Deletes a prompt or a prompt version from the Prompt management tool.
-    # For more information, see [Delete prompts from the Prompt management
-    # tool][1] and [Delete a version of a prompt from the Prompt management
-    # tool][2] in the Amazon Bedrock User Guide.
+    # Deletes a prompt or a version of it, depending on whether you include
+    # the `promptVersion` field or not. For more information, see [Delete
+    # prompts from the Prompt management tool][1] and [Delete a version of a
+    # prompt from the Prompt management tool][2] in the Amazon Bedrock User
+    # Guide.
     #
     #
     #
@@ -2492,7 +2497,8 @@ module Aws::BedrockAgent
     #   The unique identifier of the prompt.
     #
     # @option params [String] :prompt_version
-    #   The version of the prompt to delete.
+    #   The version of the prompt to delete. To delete the prompt, omit this
+    #   field.
     #
     # @return [Types::DeletePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2662,6 +2668,7 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
+    #   resp.agent_action_group.function_schema.functions[0].require_confirmation #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput", "AMAZON.CodeInterpreter"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -3315,10 +3322,12 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Retrieves information about a prompt or a version of it. For more
-    # information, see [View information about prompts using Prompt
-    # management][1] and [View information about a version of your
-    # prompt][2] in the Amazon Bedrock User Guide.
+    # Retrieves information about the working draft (`DRAFT` version) of a
+    # prompt or a version of it, depending on whether you include the
+    # `promptVersion` field or not. For more information, see [View
+    # information about prompts using Prompt management][1] and [View
+    # information about a version of your prompt][2] in the Amazon Bedrock
+    # User Guide.
     #
     #
     #
@@ -3330,7 +3339,8 @@ module Aws::BedrockAgent
     #
     # @option params [String] :prompt_version
     #   The version of the prompt about which you want to retrieve
-    #   information.
+    #   information. Omit this field to return information about the working
+    #   draft of the prompt.
     #
     # @return [Types::GetPromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4013,10 +4023,11 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Returns a list of prompts from the Prompt management tool and
-    # information about each prompt. For more information, see [View
-    # information about prompts using Prompt management][1] in the Amazon
-    # Bedrock User Guide.
+    # Returns either information about the working draft (`DRAFT` version)
+    # of each prompt in an account, or information about of all versions of
+    # a prompt, depending on whether you include the `promptIdentifier`
+    # field or not. For more information, see [View information about
+    # prompts using Prompt management][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -4035,7 +4046,9 @@ module Aws::BedrockAgent
     #   results.
     #
     # @option params [String] :prompt_identifier
-    #   The unique identifier of the prompt.
+    #   The unique identifier of the prompt for whose versions you want to
+    #   return information. Omit this field to list information about all
+    #   prompts in an account.
     #
     # @return [Types::ListPromptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4541,6 +4554,7 @@ module Aws::BedrockAgent
     #               type: "string", # required, accepts string, number, integer, boolean, array
     #             },
     #           },
+    #           require_confirmation: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #       ],
     #     },
@@ -4569,6 +4583,7 @@ module Aws::BedrockAgent
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].description #=> String
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].required #=> Boolean
     #   resp.agent_action_group.function_schema.functions[0].parameters["Name"].type #=> String, one of "string", "number", "integer", "boolean", "array"
+    #   resp.agent_action_group.function_schema.functions[0].require_confirmation #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent_action_group.parent_action_signature #=> String, one of "AMAZON.UserInput", "AMAZON.CodeInterpreter"
     #   resp.agent_action_group.updated_at #=> Time
     #
@@ -5233,13 +5248,13 @@ module Aws::BedrockAgent
     #   The unique identifier of the alias.
     #
     # @option params [String] :description
-    #   A description for the flow alias.
+    #   A description for the alias.
     #
     # @option params [required, String] :flow_identifier
     #   The unique identifier of the flow.
     #
     # @option params [required, String] :name
-    #   The name of the flow alias.
+    #   The name of the alias.
     #
     # @option params [required, Array<Types::FlowAliasRoutingConfigurationListItem>] :routing_configuration
     #   Contains information about the version to which to map the alias.
@@ -5603,7 +5618,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

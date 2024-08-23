@@ -819,6 +819,7 @@ module Aws::BedrockAgent
       attr_accessor description: ::String
       attr_accessor name: ::String
       attr_accessor parameters: ::Hash[::String, Types::ParameterDetail]
+      attr_accessor require_confirmation: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

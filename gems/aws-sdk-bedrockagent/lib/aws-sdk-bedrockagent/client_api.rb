@@ -362,6 +362,7 @@ module Aws::BedrockAgent
     RedisEnterpriseCloudEndpoint = Shapes::StringShape.new(name: 'RedisEnterpriseCloudEndpoint')
     RedisEnterpriseCloudFieldMapping = Shapes::StructureShape.new(name: 'RedisEnterpriseCloudFieldMapping')
     RedisEnterpriseCloudIndexName = Shapes::StringShape.new(name: 'RedisEnterpriseCloudIndexName')
+    RequireConfirmation = Shapes::StringShape.new(name: 'RequireConfirmation')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetrievalFlowNodeConfiguration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeConfiguration')
     RetrievalFlowNodeS3Configuration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeS3Configuration')
@@ -1107,6 +1108,7 @@ module Aws::BedrockAgent
     Function.add_member(:description, Shapes::ShapeRef.new(shape: FunctionDescription, location_name: "description"))
     Function.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     Function.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "parameters"))
+    Function.add_member(:require_confirmation, Shapes::ShapeRef.new(shape: RequireConfirmation, location_name: "requireConfirmation"))
     Function.struct_class = Types::Function
 
     FunctionSchema.add_member(:functions, Shapes::ShapeRef.new(shape: Functions, location_name: "functions"))
