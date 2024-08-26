@@ -32,6 +32,7 @@ module Aws::IoTSiteWise
   # * {InternalFailureException}
   # * {InvalidRequestException}
   # * {LimitExceededException}
+  # * {PreconditionFailedException}
   # * {QueryTimeoutException}
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
@@ -129,6 +130,31 @@ module Aws::IoTSiteWise
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class PreconditionFailedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTSiteWise::Types::PreconditionFailedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_arn
+        @data[:resource_arn]
       end
     end
 

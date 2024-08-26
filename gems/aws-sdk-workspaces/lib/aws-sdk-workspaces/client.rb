@@ -2476,6 +2476,9 @@ module Aws::WorkSpaces
     #   If you received a `NextToken` from a previous call that was paginated,
     #   provide this token to receive the next set of results.
     #
+    # @option params [Array<Types::DescribeWorkspaceDirectoriesFilter>] :filters
+    #   The filter condition for the WorkSpaces.
+    #
     # @return [Types::DescribeWorkspaceDirectoriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeWorkspaceDirectoriesResult#directories #directories} => Array&lt;Types::WorkspaceDirectory&gt;
@@ -2490,6 +2493,12 @@ module Aws::WorkSpaces
     #     workspace_directory_names: ["WorkspaceDirectoryName"],
     #     limit: 1,
     #     next_token: "PaginationToken",
+    #     filters: [
+    #       {
+    #         name: "USER_IDENTITY_TYPE", # required, accepts USER_IDENTITY_TYPE, WORKSPACE_TYPE
+    #         values: ["DescribeWorkspaceDirectoriesFilterValue"], # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2505,7 +2514,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].dns_ip_addresses[0] #=> String
     #   resp.directories[0].customer_user_name #=> String
     #   resp.directories[0].iam_role_id #=> String
-    #   resp.directories[0].directory_type #=> String, one of "SIMPLE_AD", "AD_CONNECTOR", "CUSTOMER_MANAGED"
+    #   resp.directories[0].directory_type #=> String, one of "SIMPLE_AD", "AD_CONNECTOR", "CUSTOMER_MANAGED", "AWS_IAM_IDENTITY_CENTER"
     #   resp.directories[0].workspace_security_group_id #=> String
     #   resp.directories[0].state #=> String, one of "REGISTERING", "REGISTERED", "DEREGISTERING", "DEREGISTERED", "ERROR"
     #   resp.directories[0].workspace_creation_properties.enable_work_docs #=> Boolean
@@ -2536,10 +2545,14 @@ module Aws::WorkSpaces
     #   resp.directories[0].saml_properties.relay_state_parameter_name #=> String
     #   resp.directories[0].certificate_based_auth_properties.status #=> String, one of "DISABLED", "ENABLED"
     #   resp.directories[0].certificate_based_auth_properties.certificate_authority_arn #=> String
+    #   resp.directories[0].microsoft_entra_config.tenant_id #=> String
+    #   resp.directories[0].microsoft_entra_config.application_config_secret_arn #=> String
     #   resp.directories[0].workspace_directory_name #=> String
     #   resp.directories[0].workspace_directory_description #=> String
-    #   resp.directories[0].user_identity_type #=> String, one of "CUSTOMER_MANAGED", "AWS_DIRECTORY_SERVICE"
+    #   resp.directories[0].user_identity_type #=> String, one of "CUSTOMER_MANAGED", "AWS_DIRECTORY_SERVICE", "AWS_IAM_IDENTITY_CENTER"
     #   resp.directories[0].workspace_type #=> String, one of "PERSONAL", "POOLS"
+    #   resp.directories[0].idc_config.instance_arn #=> String
+    #   resp.directories[0].idc_config.application_arn #=> String
     #   resp.directories[0].active_directory_config.domain_name #=> String
     #   resp.directories[0].active_directory_config.service_account_secret_arn #=> String
     #   resp.directories[0].streaming_properties.streaming_experience_preferred_protocol #=> String, one of "TCP", "UDP"
@@ -4047,6 +4060,12 @@ module Aws::WorkSpaces
     # @option params [String] :user_identity_type
     #   The type of identity management the user is using.
     #
+    # @option params [String] :idc_instance_arn
+    #   The Amazon Resource Name (ARN) of the identity center instance.
+    #
+    # @option params [Types::MicrosoftEntraConfig] :microsoft_entra_config
+    #   The details about Microsoft Entra config.
+    #
     # @option params [String] :workspace_type
     #   Indicates whether the directory's WorkSpace type is personal or
     #   pools.
@@ -4075,7 +4094,12 @@ module Aws::WorkSpaces
     #     ],
     #     workspace_directory_name: "WorkspaceDirectoryName",
     #     workspace_directory_description: "WorkspaceDirectoryDescription",
-    #     user_identity_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE
+    #     user_identity_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE, AWS_IAM_IDENTITY_CENTER
+    #     idc_instance_arn: "ARN",
+    #     microsoft_entra_config: {
+    #       tenant_id: "MicrosoftEntraConfigTenantId",
+    #       application_config_secret_arn: "SecretsManagerArn",
+    #     },
     #     workspace_type: "PERSONAL", # accepts PERSONAL, POOLS
     #     active_directory_config: {
     #       domain_name: "DomainName", # required
@@ -4753,7 +4777,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
