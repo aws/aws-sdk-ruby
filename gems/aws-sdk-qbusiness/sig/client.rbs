@@ -353,7 +353,10 @@ module Aws
       def create_application: (
                                 display_name: ::String,
                                 ?role_arn: ::String,
+                                ?identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC"),
+                                ?iam_identity_provider_arn: ::String,
                                 ?identity_center_instance_arn: ::String,
+                                ?client_ids_for_oidc: Array[::String],
                                 ?description: ::String,
                                 ?encryption_configuration: {
                                   kms_key_id: ::String?
@@ -615,7 +618,16 @@ module Aws
                                        value: ::String
                                      },
                                    ],
-                                   ?client_token: ::String
+                                   ?client_token: ::String,
+                                   ?identity_provider_configuration: {
+                                     saml_configuration: {
+                                       authentication_url: ::String
+                                     }?,
+                                     open_id_connect_configuration: {
+                                       secrets_arn: ::String,
+                                       secrets_role: ::String
+                                     }?
+                                   }
                                  ) -> _CreateWebExperienceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebExperienceResponseSuccess
 
@@ -726,6 +738,8 @@ module Aws
         def display_name: () -> ::String
         def application_id: () -> ::String
         def application_arn: () -> ::String
+        def identity_type: () -> ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC")
+        def iam_identity_provider_arn: () -> ::String
         def identity_center_application_arn: () -> ::String
         def role_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
@@ -736,6 +750,8 @@ module Aws
         def attachments_configuration: () -> Types::AppliedAttachmentsConfiguration
         def q_apps_configuration: () -> Types::QAppsConfiguration
         def personalization_configuration: () -> Types::PersonalizationConfiguration
+        def auto_subscription_configuration: () -> Types::AutoSubscriptionConfiguration
+        def client_ids_for_oidc: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_application-instance_method
       def get_application: (
@@ -888,6 +904,7 @@ module Aws
         def welcome_message: () -> ::String
         def sample_prompts_control_mode: () -> ("ENABLED" | "DISABLED")
         def role_arn: () -> ::String
+        def identity_provider_configuration: () -> Types::IdentityProviderConfiguration
         def authentication_configuration: () -> Types::WebExperienceAuthConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_web_experience-instance_method
@@ -1172,6 +1189,10 @@ module Aws
                                 },
                                 ?personalization_configuration: {
                                   personalization_control_mode: ("ENABLED" | "DISABLED")
+                                },
+                                ?auto_subscription_configuration: {
+                                  auto_subscribe: ("ENABLED" | "DISABLED"),
+                                  default_subscription_type: ("Q_LITE" | "Q_BUSINESS")?
                                 }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
@@ -1480,7 +1501,16 @@ module Aws
                                    ?title: ::String,
                                    ?subtitle: ::String,
                                    ?welcome_message: ::String,
-                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED")
+                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
+                                   ?identity_provider_configuration: {
+                                     saml_configuration: {
+                                       authentication_url: ::String
+                                     }?,
+                                     open_id_connect_configuration: {
+                                       secrets_arn: ::String,
+                                       secrets_role: ::String
+                                     }?
+                                   }
                                  ) -> _UpdateWebExperienceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebExperienceResponseSuccess
     end

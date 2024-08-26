@@ -493,6 +493,10 @@ module Aws::QuickSight
     #   An array of option definitions for an analysis.
     #   @return [Types::AssetOptions]
     #
+    # @!attribute [rw] query_execution_options
+    #   A structure that describes the query execution options.
+    #   @return [Types::QueryExecutionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisDefinition AWS API Documentation
     #
     class AnalysisDefinition < Struct.new(
@@ -503,7 +507,8 @@ module Aws::QuickSight
       :filter_groups,
       :column_configurations,
       :analysis_defaults,
-      :options)
+      :options,
+      :query_execution_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -739,10 +744,39 @@ module Aws::QuickSight
     #   fail with `InvalidParameterValueException`.
     #   @return [String]
     #
+    # @!attribute [rw] enabled_features
+    #   A list of all enabled features of a specified anonymous dashboard.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disabled_features
+    #   A list of all disabled features of a specified anonymous dashboard.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] feature_configurations
+    #   The feature configuration for an embedded dashboard.
+    #   @return [Types::AnonymousUserDashboardFeatureConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserDashboardEmbeddingConfiguration AWS API Documentation
     #
     class AnonymousUserDashboardEmbeddingConfiguration < Struct.new(
-      :initial_dashboard_id)
+      :initial_dashboard_id,
+      :enabled_features,
+      :disabled_features,
+      :feature_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The feature configuration for an embedded dashboard.
+    #
+    # @!attribute [rw] shared_view
+    #   The shared view settings of an embedded dashboard.
+    #   @return [Types::SharedViewConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserDashboardFeatureConfigurations AWS API Documentation
+    #
+    class AnonymousUserDashboardFeatureConfigurations < Struct.new(
+      :shared_view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7284,6 +7318,25 @@ module Aws::QuickSight
     class CustomValuesConfiguration < Struct.new(
       :include_null_value,
       :custom_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The customer managed key that is registered to your Amazon QuickSight
+    # account is unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomerManagedKeyUnavailableException AWS API Documentation
+    #
+    class CustomerManagedKeyUnavailableException < Struct.new(
+      :message,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23626,6 +23679,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that describes the query execution options.
+    #
+    # @!attribute [rw] query_execution_mode
+    #   A structure that describes the query execution mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/QueryExecutionOptions AWS API Documentation
+    #
+    class QueryExecutionOptions < Struct.new(
+      :query_execution_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a queued dataset SPICE ingestion.
     #
     # @!attribute [rw] waiting_on_ingestion
@@ -24618,10 +24685,15 @@ module Aws::QuickSight
     #   QuickSight console.
     #   @return [Types::StatePersistenceConfigurations]
     #
+    # @!attribute [rw] shared_view
+    #   The shared view settings of an embedded dashboard.
+    #   @return [Types::SharedViewConfigurations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserConsoleFeatureConfigurations AWS API Documentation
     #
     class RegisteredUserConsoleFeatureConfigurations < Struct.new(
-      :state_persistence)
+      :state_persistence,
+      :shared_view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24658,6 +24730,10 @@ module Aws::QuickSight
     #   The state persistence settings of an embedded dashboard.
     #   @return [Types::StatePersistenceConfigurations]
     #
+    # @!attribute [rw] shared_view
+    #   The shared view settings of an embedded dashboard.
+    #   @return [Types::SharedViewConfigurations]
+    #
     # @!attribute [rw] bookmarks
     #   The bookmarks configuration for an embedded dashboard in Amazon
     #   QuickSight.
@@ -24667,6 +24743,7 @@ module Aws::QuickSight
     #
     class RegisteredUserDashboardFeatureConfigurations < Struct.new(
       :state_persistence,
+      :shared_view,
       :bookmarks)
       SENSITIVE = []
       include Aws::Structure
@@ -26598,6 +26675,20 @@ module Aws::QuickSight
     #
     class ShapeConditionalFormat < Struct.new(
       :background_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The shared view settings of an embedded dashboard.
+    #
+    # @!attribute [rw] enabled
+    #   The shared view settings of an embedded dashboard.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SharedViewConfigurations AWS API Documentation
+    #
+    class SharedViewConfigurations < Struct.new(
+      :enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29141,6 +29232,10 @@ module Aws::QuickSight
     #   An array of option definitions for a template.
     #   @return [Types::AssetOptions]
     #
+    # @!attribute [rw] query_execution_options
+    #   A structure that describes the query execution options.
+    #   @return [Types::QueryExecutionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersionDefinition AWS API Documentation
     #
     class TemplateVersionDefinition < Struct.new(
@@ -29151,7 +29246,8 @@ module Aws::QuickSight
       :filter_groups,
       :column_configurations,
       :analysis_defaults,
-      :options)
+      :options,
+      :query_execution_options)
       SENSITIVE = []
       include Aws::Structure
     end

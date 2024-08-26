@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-08-16)
+------------------
+
+* Feature - Marking use case description field of account details as deprecated.
+
 1.55.0 (2024-07-18)
 ------------------
 

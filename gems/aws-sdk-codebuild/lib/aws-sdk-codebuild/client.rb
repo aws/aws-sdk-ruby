@@ -507,7 +507,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].source.git_clone_depth #=> Integer
     #   resp.build_batches[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batches[0].source.buildspec #=> String
-    #   resp.build_batches[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batches[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batches[0].source.auth.resource #=> String
     #   resp.build_batches[0].source.report_build_status #=> Boolean
     #   resp.build_batches[0].source.build_status_config.context #=> String
@@ -520,7 +520,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batches[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batches[0].secondary_sources[0].buildspec #=> String
-    #   resp.build_batches[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batches[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batches[0].secondary_sources[0].auth.resource #=> String
     #   resp.build_batches[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batches[0].secondary_sources[0].build_status_config.context #=> String
@@ -549,7 +549,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].cache.location #=> String
     #   resp.build_batches[0].cache.modes #=> Array
     #   resp.build_batches[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build_batches[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.build_batches[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.build_batches[0].environment.image #=> String
     #   resp.build_batches[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.build_batches[0].environment.fleet.fleet_arn #=> String
@@ -676,7 +676,7 @@ module Aws::CodeBuild
     #   resp.builds[0].source.git_clone_depth #=> Integer
     #   resp.builds[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].source.buildspec #=> String
-    #   resp.builds[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.builds[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.builds[0].source.auth.resource #=> String
     #   resp.builds[0].source.report_build_status #=> Boolean
     #   resp.builds[0].source.build_status_config.context #=> String
@@ -689,7 +689,7 @@ module Aws::CodeBuild
     #   resp.builds[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.builds[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].secondary_sources[0].buildspec #=> String
-    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.builds[0].secondary_sources[0].auth.resource #=> String
     #   resp.builds[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.builds[0].secondary_sources[0].build_status_config.context #=> String
@@ -718,7 +718,7 @@ module Aws::CodeBuild
     #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].cache.modes #=> Array
     #   resp.builds[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.builds[0].environment.fleet.fleet_arn #=> String
@@ -808,10 +808,10 @@ module Aws::CodeBuild
     #   resp.fleets[0].created #=> Time
     #   resp.fleets[0].last_modified #=> Time
     #   resp.fleets[0].status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
-    #   resp.fleets[0].status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED"
+    #   resp.fleets[0].status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED", "PENDING_DELETION", "INSUFFICIENT_CAPACITY"
     #   resp.fleets[0].status.message #=> String
     #   resp.fleets[0].base_capacity #=> Integer
-    #   resp.fleets[0].environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.fleets[0].environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.fleets[0].compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.fleets[0].scaling_configuration.scaling_type #=> String, one of "TARGET_TRACKING_SCALING"
     #   resp.fleets[0].scaling_configuration.target_tracking_scaling_configs #=> Array
@@ -825,6 +825,7 @@ module Aws::CodeBuild
     #   resp.fleets[0].vpc_config.subnets[0] #=> String
     #   resp.fleets[0].vpc_config.security_group_ids #=> Array
     #   resp.fleets[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.fleets[0].image_id #=> String
     #   resp.fleets[0].fleet_service_role #=> String
     #   resp.fleets[0].tags #=> Array
     #   resp.fleets[0].tags[0].key #=> String
@@ -870,7 +871,7 @@ module Aws::CodeBuild
     #   resp.projects[0].source.git_clone_depth #=> Integer
     #   resp.projects[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].source.buildspec #=> String
-    #   resp.projects[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.projects[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.projects[0].source.auth.resource #=> String
     #   resp.projects[0].source.report_build_status #=> Boolean
     #   resp.projects[0].source.build_status_config.context #=> String
@@ -883,7 +884,7 @@ module Aws::CodeBuild
     #   resp.projects[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.projects[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].secondary_sources[0].buildspec #=> String
-    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.projects[0].secondary_sources[0].auth.resource #=> String
     #   resp.projects[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.projects[0].secondary_sources[0].build_status_config.context #=> String
@@ -919,7 +920,7 @@ module Aws::CodeBuild
     #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].cache.modes #=> Array
     #   resp.projects[0].cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.projects[0].environment.fleet.fleet_arn #=> String
@@ -1133,6 +1134,14 @@ module Aws::CodeBuild
     #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific
     #     (Sydney).
     #
+    #   * The environment type `MAC_ARM` is available for Medium fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Asia Pacific (Sydney), and EU (Frankfurt)
+    #
+    #   * The environment type `MAC_ARM` is available for Large fleets only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon), and
+    #     Asia Pacific (Sydney).
+    #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific
@@ -1228,6 +1237,9 @@ module Aws::CodeBuild
     # @option params [Types::VpcConfig] :vpc_config
     #   Information about the VPC configuration that CodeBuild accesses.
     #
+    # @option params [String] :image_id
+    #   The Amazon Machine Image (AMI) of the compute fleet.
+    #
     # @option params [String] :fleet_service_role
     #   The service role associated with the compute fleet. For more
     #   information, see [ Allow a user to add a permission policy for a fleet
@@ -1252,7 +1264,7 @@ module Aws::CodeBuild
     #   resp = client.create_fleet({
     #     name: "FleetName", # required
     #     base_capacity: 1, # required
-    #     environment_type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #     environment_type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER, MAC_ARM
     #     compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
     #     scaling_configuration: {
     #       scaling_type: "TARGET_TRACKING_SCALING", # accepts TARGET_TRACKING_SCALING
@@ -1270,6 +1282,7 @@ module Aws::CodeBuild
     #       subnets: ["NonEmptyString"],
     #       security_group_ids: ["NonEmptyString"],
     #     },
+    #     image_id: "NonEmptyString",
     #     fleet_service_role: "NonEmptyString",
     #     tags: [
     #       {
@@ -1287,10 +1300,10 @@ module Aws::CodeBuild
     #   resp.fleet.created #=> Time
     #   resp.fleet.last_modified #=> Time
     #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
-    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED"
+    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED", "PENDING_DELETION", "INSUFFICIENT_CAPACITY"
     #   resp.fleet.status.message #=> String
     #   resp.fleet.base_capacity #=> Integer
-    #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.fleet.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.fleet.scaling_configuration.scaling_type #=> String, one of "TARGET_TRACKING_SCALING"
     #   resp.fleet.scaling_configuration.target_tracking_scaling_configs #=> Array
@@ -1304,6 +1317,7 @@ module Aws::CodeBuild
     #   resp.fleet.vpc_config.subnets[0] #=> String
     #   resp.fleet.vpc_config.security_group_ids #=> Array
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.image_id #=> String
     #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
     #   resp.fleet.tags[0].key #=> String
@@ -1470,7 +1484,7 @@ module Aws::CodeBuild
     #       },
     #       buildspec: "String",
     #       auth: {
-    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #         resource: "String",
     #       },
     #       report_build_status: false,
@@ -1491,7 +1505,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -1542,7 +1556,7 @@ module Aws::CodeBuild
     #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: { # required
-    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER, MAC_ARM
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
     #       fleet: {
@@ -1624,7 +1638,7 @@ module Aws::CodeBuild
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
-    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.build_status_config.context #=> String
@@ -1637,7 +1651,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
-    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].build_status_config.context #=> String
@@ -1673,7 +1687,7 @@ module Aws::CodeBuild
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
     #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.project.environment.fleet.fleet_arn #=> String
@@ -2423,8 +2437,8 @@ module Aws::CodeBuild
     end
 
     # Imports the source repository credentials for an CodeBuild project
-    # that has its source code stored in a GitHub, GitHub Enterprise, or
-    # Bitbucket repository.
+    # that has its source code stored in a GitHub, GitHub Enterprise,
+    # GitLab, GitLab Self Managed, or Bitbucket repository.
     #
     # @option params [String] :username
     #   The Bitbucket username when the `authType` is BASIC\_AUTH. This
@@ -2434,7 +2448,8 @@ module Aws::CodeBuild
     # @option params [required, String] :token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
     #   For Bitbucket, this is either the access token or the app password.
-    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`.
+    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`. For
+    #   the `authType` SECRETS\_MANAGER, this is the `secretArn`.
     #
     # @option params [required, String] :server_type
     #   The source provider used for this project.
@@ -2443,8 +2458,7 @@ module Aws::CodeBuild
     #   The type of authentication used to connect to a GitHub, GitHub
     #   Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An
     #   OAUTH connection is not supported by the API and must be created using
-    #   the CodeBuild console. Note that CODECONNECTIONS is only valid for
-    #   GitLab and GitLab Self Managed.
+    #   the CodeBuild console.
     #
     # @option params [Boolean] :should_overwrite
     #   Set to `false` to prevent overwriting the repository source
@@ -2461,7 +2475,7 @@ module Aws::CodeBuild
     #     username: "NonEmptyString",
     #     token: "SensitiveNonEmptyString", # required
     #     server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED
-    #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS
+    #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS, SECRETS_MANAGER
     #     should_overwrite: false,
     #   })
     #
@@ -3214,7 +3228,7 @@ module Aws::CodeBuild
     #   resp.source_credentials_infos #=> Array
     #   resp.source_credentials_infos[0].arn #=> String
     #   resp.source_credentials_infos[0].server_type #=> String, one of "GITHUB", "BITBUCKET", "GITHUB_ENTERPRISE", "GITLAB", "GITLAB_SELF_MANAGED"
-    #   resp.source_credentials_infos[0].auth_type #=> String, one of "OAUTH", "BASIC_AUTH", "PERSONAL_ACCESS_TOKEN", "CODECONNECTIONS"
+    #   resp.source_credentials_infos[0].auth_type #=> String, one of "OAUTH", "BASIC_AUTH", "PERSONAL_ACCESS_TOKEN", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.source_credentials_infos[0].resource #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials AWS API Documentation
@@ -3316,7 +3330,7 @@ module Aws::CodeBuild
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -3329,7 +3343,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -3358,7 +3372,7 @@ module Aws::CodeBuild
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
     #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.build.environment.fleet.fleet_arn #=> String
@@ -3474,7 +3488,7 @@ module Aws::CodeBuild
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -3487,7 +3501,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -3516,7 +3530,7 @@ module Aws::CodeBuild
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
     #   resp.build_batch.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.build_batch.environment.image #=> String
     #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.build_batch.environment.fleet.fleet_arn #=> String
@@ -3868,7 +3882,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -3923,7 +3937,7 @@ module Aws::CodeBuild
     #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
-    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
@@ -3937,7 +3951,7 @@ module Aws::CodeBuild
     #       context: "String",
     #       target_url: "String",
     #     },
-    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER, MAC_ARM
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
     #     certificate_override: "String",
@@ -4002,7 +4016,7 @@ module Aws::CodeBuild
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -4015,7 +4029,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -4044,7 +4058,7 @@ module Aws::CodeBuild
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
     #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.build.environment.fleet.fleet_arn #=> String
@@ -4342,7 +4356,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -4397,7 +4411,7 @@ module Aws::CodeBuild
     #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
-    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
@@ -4407,7 +4421,7 @@ module Aws::CodeBuild
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
     #     report_build_batch_status_override: false,
-    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER, MAC_ARM
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
     #     certificate_override: "String",
@@ -4478,7 +4492,7 @@ module Aws::CodeBuild
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -4491,7 +4505,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -4520,7 +4534,7 @@ module Aws::CodeBuild
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
     #   resp.build_batch.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.build_batch.environment.image #=> String
     #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.build_batch.environment.fleet.fleet_arn #=> String
@@ -4643,7 +4657,7 @@ module Aws::CodeBuild
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -4656,7 +4670,7 @@ module Aws::CodeBuild
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -4685,7 +4699,7 @@ module Aws::CodeBuild
     #   resp.build.cache.location #=> String
     #   resp.build.cache.modes #=> Array
     #   resp.build.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.build.environment.fleet.fleet_arn #=> String
@@ -4788,7 +4802,7 @@ module Aws::CodeBuild
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -4801,7 +4815,7 @@ module Aws::CodeBuild
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -4830,7 +4844,7 @@ module Aws::CodeBuild
     #   resp.build_batch.cache.location #=> String
     #   resp.build_batch.cache.modes #=> Array
     #   resp.build_batch.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.build_batch.environment.image #=> String
     #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.build_batch.environment.fleet.fleet_arn #=> String
@@ -4941,6 +4955,14 @@ module Aws::CodeBuild
     #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific
     #     (Sydney).
     #
+    #   * The environment type `MAC_ARM` is available for Medium fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Asia Pacific (Sydney), and EU (Frankfurt)
+    #
+    #   * The environment type `MAC_ARM` is available for Large fleets only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon), and
+    #     Asia Pacific (Sydney).
+    #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific
@@ -5036,6 +5058,9 @@ module Aws::CodeBuild
     # @option params [Types::VpcConfig] :vpc_config
     #   Information about the VPC configuration that CodeBuild accesses.
     #
+    # @option params [String] :image_id
+    #   The Amazon Machine Image (AMI) of the compute fleet.
+    #
     # @option params [String] :fleet_service_role
     #   The service role associated with the compute fleet. For more
     #   information, see [ Allow a user to add a permission policy for a fleet
@@ -5060,7 +5085,7 @@ module Aws::CodeBuild
     #   resp = client.update_fleet({
     #     arn: "NonEmptyString", # required
     #     base_capacity: 1,
-    #     environment_type: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #     environment_type: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER, MAC_ARM
     #     compute_type: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
     #     scaling_configuration: {
     #       scaling_type: "TARGET_TRACKING_SCALING", # accepts TARGET_TRACKING_SCALING
@@ -5078,6 +5103,7 @@ module Aws::CodeBuild
     #       subnets: ["NonEmptyString"],
     #       security_group_ids: ["NonEmptyString"],
     #     },
+    #     image_id: "NonEmptyString",
     #     fleet_service_role: "NonEmptyString",
     #     tags: [
     #       {
@@ -5095,10 +5121,10 @@ module Aws::CodeBuild
     #   resp.fleet.created #=> Time
     #   resp.fleet.last_modified #=> Time
     #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "PENDING_DELETION", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
-    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED"
+    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED", "ACTION_REQUIRED", "PENDING_DELETION", "INSUFFICIENT_CAPACITY"
     #   resp.fleet.status.message #=> String
     #   resp.fleet.base_capacity #=> Integer
-    #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.fleet.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.fleet.scaling_configuration.scaling_type #=> String, one of "TARGET_TRACKING_SCALING"
     #   resp.fleet.scaling_configuration.target_tracking_scaling_configs #=> Array
@@ -5112,6 +5138,7 @@ module Aws::CodeBuild
     #   resp.fleet.vpc_config.subnets[0] #=> String
     #   resp.fleet.vpc_config.security_group_ids #=> Array
     #   resp.fleet.vpc_config.security_group_ids[0] #=> String
+    #   resp.fleet.image_id #=> String
     #   resp.fleet.fleet_service_role #=> String
     #   resp.fleet.tags #=> Array
     #   resp.fleet.tags[0].key #=> String
@@ -5281,7 +5308,7 @@ module Aws::CodeBuild
     #       },
     #       buildspec: "String",
     #       auth: {
-    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #         resource: "String",
     #       },
     #       report_build_status: false,
@@ -5302,7 +5329,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS, SECRETS_MANAGER
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -5353,7 +5380,7 @@ module Aws::CodeBuild
     #       modes: ["LOCAL_DOCKER_LAYER_CACHE"], # accepts LOCAL_DOCKER_LAYER_CACHE, LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE
     #     },
     #     environment: {
-    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER, MAC_ARM
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
     #       fleet: {
@@ -5435,7 +5462,7 @@ module Aws::CodeBuild
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
-    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.build_status_config.context #=> String
@@ -5448,7 +5475,7 @@ module Aws::CodeBuild
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
-    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS", "SECRETS_MANAGER"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].build_status_config.context #=> String
@@ -5484,7 +5511,7 @@ module Aws::CodeBuild
     #   resp.project.cache.location #=> String
     #   resp.project.cache.modes #=> Array
     #   resp.project.cache.modes[0] #=> String, one of "LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"
-    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER", "MAC_ARM"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
     #   resp.project.environment.fleet.fleet_arn #=> String
@@ -5816,7 +5843,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

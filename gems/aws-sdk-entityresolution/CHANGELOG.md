@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-08-21)
+------------------
+
+* Feature - Increase the mapping attributes in Schema to 35.
+
 1.15.0 (2024-07-23)
 ------------------
 

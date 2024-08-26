@@ -773,6 +773,7 @@ module Aws
       def create_job: (
                         name: ::String,
                         ?job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK"),
+                        ?job_run_queuing_enabled: bool,
                         ?description: ::String,
                         ?log_uri: ::String,
                         role: ::String,
@@ -4744,6 +4745,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#start_job_run-instance_method
       def start_job_run: (
                            job_name: ::String,
+                           ?job_run_queuing_enabled: bool,
                            ?job_run_id: ::String,
                            ?arguments: Hash[::String, ::String],
                            ?allocated_capacity: ::Integer,
@@ -5287,6 +5289,7 @@ module Aws
                         job_name: ::String,
                         job_update: {
                           job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")?,
+                          job_run_queuing_enabled: bool?,
                           description: ::String?,
                           log_uri: ::String?,
                           role: ::String?,

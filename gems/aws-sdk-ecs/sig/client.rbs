@@ -888,6 +888,11 @@ module Aws
                                             },
                                           ]?,
                                           essential: bool?,
+                                          restart_policy: {
+                                            enabled: bool,
+                                            ignored_exit_codes: Array[::Integer]?,
+                                            restart_attempt_period: ::Integer?
+                                          }?,
                                           entry_point: Array[::String]?,
                                           command: Array[::String]?,
                                           environment: Array[

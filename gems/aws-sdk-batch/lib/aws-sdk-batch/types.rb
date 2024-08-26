@@ -392,6 +392,10 @@ module Aws::Batch
     #   Unique identifier for the compute environment.
     #   @return [String]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeEnvironmentDetail AWS API Documentation
     #
     class ComputeEnvironmentDetail < Struct.new(
@@ -409,7 +413,8 @@ module Aws::Batch
       :update_policy,
       :eks_configuration,
       :container_orchestration_type,
-      :uuid)
+      :uuid,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2212,6 +2217,10 @@ module Aws::Batch
     #   environment.
     #   @return [Types::EksConfiguration]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentRequest AWS API Documentation
     #
     class CreateComputeEnvironmentRequest < Struct.new(
@@ -2222,7 +2231,8 @@ module Aws::Batch
       :compute_resources,
       :service_role,
       :tags,
-      :eks_configuration)
+      :eks_configuration,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8072,6 +8082,10 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #   @return [Types::UpdatePolicy]
     #
+    # @!attribute [rw] context
+    #   Reserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest AWS API Documentation
     #
     class UpdateComputeEnvironmentRequest < Struct.new(
@@ -8080,7 +8094,8 @@ module Aws::Batch
       :unmanagedv_cpus,
       :compute_resources,
       :service_role,
-      :update_policy)
+      :update_policy,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end

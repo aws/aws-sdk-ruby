@@ -193,18 +193,20 @@ module Aws::S3
     # @return [Bucket::Collection]
     def buckets(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_buckets(options)
         end
-        resp.data.buckets.each do |b|
-          batch << Bucket.new(
-            name: b.name,
-            data: b,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.buckets.each do |b|
+            batch << Bucket.new(
+              name: b.name,
+              data: b,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Bucket::Collection.new(batches)
     end

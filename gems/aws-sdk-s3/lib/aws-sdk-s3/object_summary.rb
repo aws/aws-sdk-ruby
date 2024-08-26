@@ -1298,6 +1298,15 @@ module Aws::S3
     #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @option options [String] :checksum_mode
     #   To retrieve the checksum, this mode must be enabled.
+    #
+    #   In addition, if you enable checksum mode and the object is uploaded
+    #   with a [checksum][1] and encrypted with an Key Management Service
+    #   (KMS) key, you must have permission to use the `kms:Decrypt` action to
+    #   retrieve the checksum.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Checksum.html
     # @return [Types::GetObjectOutput]
     def get(options = {}, &block)
       options = options.merge(
@@ -1818,6 +1827,7 @@ module Aws::S3
     #     checksum_sha1: "ChecksumSHA1",
     #     checksum_sha256: "ChecksumSHA256",
     #     expires: Time.now,
+    #     if_none_match: "IfNoneMatch",
     #     grant_full_control: "GrantFullControl",
     #     grant_read: "GrantRead",
     #     grant_read_acp: "GrantReadACP",
@@ -2032,6 +2042,24 @@ module Aws::S3
     #
     #
     #   [1]: https://www.rfc-editor.org/rfc/rfc7234#section-5.3
+    # @option options [String] :if_none_match
+    #   Uploads the object only if the object key name does not already exist
+    #   in the bucket specified. Otherwise, Amazon S3 returns a `412
+    #   Precondition Failed` error.
+    #
+    #   If a conflicting operation occurs during the upload S3 returns a `409
+    #   ConditionalRequestConflict` response. On a 409 failure you should
+    #   retry the upload.
+    #
+    #   Expects the '*' (asterisk) character.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1], or
+    #   [Conditional requests][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.

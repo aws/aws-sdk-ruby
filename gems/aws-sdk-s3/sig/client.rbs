@@ -142,6 +142,7 @@ module Aws
                                        ?checksum_sha256: ::String,
                                        ?request_payer: ("requester"),
                                        ?expected_bucket_owner: ::String,
+                                       ?if_none_match: ::String,
                                        ?sse_customer_algorithm: ::String,
                                        ?sse_customer_key: ::String,
                                        ?sse_customer_key_md5: ::String
@@ -1044,9 +1045,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBucketsOutput]
         def buckets: () -> ::Array[Types::Bucket]
         def owner: () -> Types::Owner
+        def continuation_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#list_buckets-instance_method
-      def list_buckets: () -> _ListBucketsResponseSuccess
+      def list_buckets: (
+                          ?max_buckets: ::Integer,
+                          ?continuation_token: ::String
+                        ) -> _ListBucketsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBucketsResponseSuccess
 
       interface _ListDirectoryBucketsResponseSuccess
@@ -1882,6 +1887,7 @@ module Aws
                         ?checksum_sha1: ::String,
                         ?checksum_sha256: ::String,
                         ?expires: ::Time,
+                        ?if_none_match: ::String,
                         ?grant_full_control: ::String,
                         ?grant_read: ::String,
                         ?grant_read_acp: ::String,

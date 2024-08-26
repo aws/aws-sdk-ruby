@@ -557,8 +557,12 @@ module Aws::SupplyChain
       req.send_request(options)
     end
 
-    # Send transactional data events with real-time data for analysis or
-    # monitoring.
+    # Send the transactional data payload for the event with real-time data
+    # for analysis or monitoring. The real-time data events are stored in an
+    # Amazon Web Services service before being processed and stored in data
+    # lake. New data events are synced with data lake at 5 PM GMT everyday.
+    # The updated transactional data is available in data lake after
+    # ingestion.
     #
     # @option params [required, String] :instance_id
     #   The AWS Supply Chain instance identifier.
@@ -567,7 +571,12 @@ module Aws::SupplyChain
     #   The data event type.
     #
     # @option params [required, String] :data
-    #   The data payload of the event.
+    #   The data payload of the event. For more information on the data schema
+    #   to use, see [Data entities supported in AWS Supply Chain ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
     #
     # @option params [required, String] :event_group_id
     #   Event identifier (for example, orderId for InboundOrder) used for data
@@ -849,7 +858,7 @@ module Aws::SupplyChain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-supplychain'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

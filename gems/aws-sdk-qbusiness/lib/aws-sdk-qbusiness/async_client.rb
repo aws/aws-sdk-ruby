@@ -580,7 +580,7 @@ module Aws::QBusiness
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

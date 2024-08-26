@@ -369,6 +369,11 @@ module Aws::QBusiness
     #   ready to use when the status is `ACTIVE`.
     #   @return [String]
     #
+    # @!attribute [rw] identity_type
+    #   The authentication type being used by a Amazon Q Business
+    #   application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -376,7 +381,8 @@ module Aws::QBusiness
       :application_id,
       :created_at,
       :updated_at,
-      :status)
+      :status,
+      :identity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -664,6 +670,31 @@ module Aws::QBusiness
     class AuthChallengeResponseEvent < Struct.new(
       :response_map,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Subscription configuration information for an Amazon Q Business
+    # application using IAM identity federation for user management.
+    #
+    # @!attribute [rw] auto_subscribe
+    #   Describes whether automatic subscriptions are enabled for an Amazon
+    #   Q Business application using IAM identity federation for user
+    #   management.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_subscription_type
+    #   Describes the default subscription type assigned to an Amazon Q
+    #   Business application using IAM identity federation for user
+    #   management. If the value for `autoSubscribe` is set to `ENABLED` you
+    #   must select a value for this field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/AutoSubscriptionConfiguration AWS API Documentation
+    #
+    class AutoSubscriptionConfiguration < Struct.new(
+      :auto_subscribe,
+      :default_subscription_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1223,11 +1254,25 @@ module Aws::QBusiness
     #   access your Amazon CloudWatch logs and metrics.
     #   @return [String]
     #
+    # @!attribute [rw] identity_type
+    #   The authentication type being used by a Amazon Q Business
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_identity_provider_arn
+    #   The Amazon Resource Name (ARN) of an identity provider being used by
+    #   an Amazon Q Business application.
+    #   @return [String]
+    #
     # @!attribute [rw] identity_center_instance_arn
     #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
     #   you are either creating for—or connecting to—your Amazon Q Business
     #   application.
     #   @return [String]
+    #
+    # @!attribute [rw] client_ids_for_oidc
+    #   The OIDC client ID for a Amazon Q Business application.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] description
     #   A description for the Amazon Q Business application.
@@ -1277,7 +1322,10 @@ module Aws::QBusiness
     class CreateApplicationRequest < Struct.new(
       :display_name,
       :role_arn,
+      :identity_type,
+      :iam_identity_provider_arn,
       :identity_center_instance_arn,
+      :client_ids_for_oidc,
       :description,
       :encryption_configuration,
       :tags,
@@ -1321,13 +1369,33 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration information to connect to your data source repository.
-    #   For configuration templates for your specific data source, see
-    #   [Supported connectors][1].
+    #   Configuration information to connect your data source repository to
+    #   Amazon Q Business. Use this parameter to provide a JSON schema with
+    #   configuration information specific to your data source connector.
+    #
+    #   Each data source has a JSON schema provided by Amazon Q Business
+    #   that you must use. For example, the Amazon S3 and Web Crawler
+    #   connectors require the following JSON schemas:
+    #
+    #   * [Amazon S3 JSON schema][1]
+    #
+    #   * [Web Crawler JSON schema][2]
+    #
+    #   You can find configuration templates for your specific data source
+    #   using the following steps:
+    #
+    #   1.  Navigate to the [Supported connectors][3] page in the Amazon Q
+    #       Business User Guide, and select the data source of your choice.
+    #
+    #   2.  Then, from your specific data source connector page, select
+    #       **Using the API**. You will find the JSON schema for your data
+    #       source, including parameter descriptions, in this section.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/s3-api.html
+    #   [2]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/web-crawler-api.html
+    #   [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] vpc_configuration
@@ -1706,6 +1774,13 @@ module Aws::QBusiness
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the service role attached to your
     #   web experience.
+    #
+    #   <note markdown="1"> You must provide this value if you're using IAM Identity Center to
+    #   manage end user access to your application. If you're using legacy
+    #   identity management to manage user access, you don't need to
+    #   provide this value.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1724,6 +1799,11 @@ module Aws::QBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_configuration
+    #   Information about the identity provider (IdP) used to authenticate
+    #   end users of an Amazon Q Business web experience.
+    #   @return [Types::IdentityProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateWebExperienceRequest AWS API Documentation
     #
     class CreateWebExperienceRequest < Struct.new(
@@ -1734,7 +1814,8 @@ module Aws::QBusiness
       :sample_prompts_control_mode,
       :role_arn,
       :tags,
-      :client_token)
+      :client_token,
+      :identity_provider_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2858,6 +2939,16 @@ module Aws::QBusiness
     #   The Amazon Resource Name (ARN) of the Amazon Q Business application.
     #   @return [String]
     #
+    # @!attribute [rw] identity_type
+    #   The authentication type being used by a Amazon Q Business
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_identity_provider_arn
+    #   The Amazon Resource Name (ARN) of an identity provider being used by
+    #   an Amazon Q Business application.
+    #   @return [String]
+    #
     # @!attribute [rw] identity_center_application_arn
     #   The Amazon Resource Name (ARN) of the AWS IAM Identity Center
     #   instance attached to your Amazon Q Business application.
@@ -2917,12 +3008,23 @@ module Aws::QBusiness
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
     #   @return [Types::PersonalizationConfiguration]
     #
+    # @!attribute [rw] auto_subscription_configuration
+    #   Settings for auto-subscription behavior for this application. This
+    #   is only applicable to SAML and OIDC applications.
+    #   @return [Types::AutoSubscriptionConfiguration]
+    #
+    # @!attribute [rw] client_ids_for_oidc
+    #   The OIDC client ID for a Amazon Q Business application.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
       :display_name,
       :application_id,
       :application_arn,
+      :identity_type,
+      :iam_identity_provider_arn,
       :identity_center_application_arn,
       :role_arn,
       :status,
@@ -2933,7 +3035,9 @@ module Aws::QBusiness
       :error,
       :attachments_configuration,
       :q_apps_configuration,
-      :personalization_configuration)
+      :personalization_configuration,
+      :auto_subscription_configuration,
+      :client_ids_for_oidc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3544,6 +3648,11 @@ module Aws::QBusiness
     #   web experience.
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_configuration
+    #   Information about the identity provider (IdP) used to authenticate
+    #   end users of an Amazon Q Business web experience.
+    #   @return [Types::IdentityProviderConfiguration]
+    #
     # @!attribute [rw] authentication_configuration
     #   The authentication configuration information for your Amazon Q
     #   Business web experience.
@@ -3570,6 +3679,7 @@ module Aws::QBusiness
       :welcome_message,
       :sample_prompts_control_mode,
       :role_arn,
+      :identity_provider_configuration,
       :authentication_configuration,
       :error)
       SENSITIVE = []
@@ -3704,6 +3814,39 @@ module Aws::QBusiness
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Provides information about the identity provider (IdP) used to
+    # authenticate end users of an Amazon Q Business web experience.
+    #
+    # @note IdentityProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note IdentityProviderConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdentityProviderConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] saml_configuration
+    #   Information about the SAML 2.0-compliant identity provider (IdP)
+    #   used to authenticate end users of an Amazon Q Business web
+    #   experience.
+    #   @return [Types::SamlProviderConfiguration]
+    #
+    # @!attribute [rw] open_id_connect_configuration
+    #   Information about the OIDC-compliant identity provider (IdP) used to
+    #   authenticate end users of an Amazon Q Business web experience.
+    #   @return [Types::OpenIDConnectProviderConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/IdentityProviderConfiguration AWS API Documentation
+    #
+    class IdentityProviderConfiguration < Struct.new(
+      :saml_configuration,
+      :open_id_connect_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SamlConfiguration < IdentityProviderConfiguration; end
+      class OpenIdConnectConfiguration < IdentityProviderConfiguration; end
+      class Unknown < IdentityProviderConfiguration; end
     end
 
     # Summary information for your Amazon Q Business index.
@@ -4731,6 +4874,28 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Information about the OIDC-compliant identity provider (IdP) used to
+    # authenticate end users of an Amazon Q Business web experience.
+    #
+    # @!attribute [rw] secrets_arn
+    #   The Amazon Resource Name (ARN) of a Secrets Manager secret
+    #   containing the OIDC client secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_role
+    #   An IAM role with permissions to access KMS to decrypt the Secrets
+    #   Manager secret containing your OIDC client secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/OpenIDConnectProviderConfiguration AWS API Documentation
+    #
+    class OpenIDConnectProviderConfiguration < Struct.new(
+      :secrets_arn,
+      :secrets_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information about chat response personalization. For
     # more information, see [Personalizing chat responses][1].
     #
@@ -4993,12 +5158,6 @@ module Aws::QBusiness
     #   group. For example, the group "Company" includes the user "CEO"
     #   and the sub groups "Research", "Engineering", and "Sales and
     #   Marketing".
-    #
-    #   If you have more than 1000 users and/or sub groups for a single
-    #   group, you need to provide the path to the S3 file that lists your
-    #   users and sub groups for a group. Your sub groups can contain more
-    #   than 1000 users, but the list of sub groups that belong to a group
-    #   (and/or users) must be no more than 1000.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -5259,6 +5418,22 @@ module Aws::QBusiness
       :role_arn,
       :user_id_attribute,
       :user_group_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the SAML 2.0-compliant identity provider (IdP) used
+    # to authenticate end users of an Amazon Q Business web experience.
+    #
+    # @!attribute [rw] authentication_url
+    #   The URL where Amazon Q Business end users will be redirected for
+    #   authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/SamlProviderConfiguration AWS API Documentation
+    #
+    class SamlProviderConfiguration < Struct.new(
+      :authentication_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5739,6 +5914,12 @@ module Aws::QBusiness
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
     #   @return [Types::PersonalizationConfiguration]
     #
+    # @!attribute [rw] auto_subscription_configuration
+    #   An option to enable updating the default subscription type assigned
+    #   to an Amazon Q Business application using IAM identity federation
+    #   for user management.
+    #   @return [Types::AutoSubscriptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -5749,7 +5930,8 @@ module Aws::QBusiness
       :role_arn,
       :attachments_configuration,
       :q_apps_configuration,
-      :personalization_configuration)
+      :personalization_configuration,
+      :auto_subscription_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6107,6 +6289,11 @@ module Aws::QBusiness
     #   for an end user.
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_configuration
+    #   Information about the identity provider (IdP) used to authenticate
+    #   end users of an Amazon Q Business web experience.
+    #   @return [Types::IdentityProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/UpdateWebExperienceRequest AWS API Documentation
     #
     class UpdateWebExperienceRequest < Struct.new(
@@ -6117,7 +6304,8 @@ module Aws::QBusiness
       :title,
       :subtitle,
       :welcome_message,
-      :sample_prompts_control_mode)
+      :sample_prompts_control_mode,
+      :identity_provider_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

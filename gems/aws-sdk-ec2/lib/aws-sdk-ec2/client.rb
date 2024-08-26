@@ -4482,36 +4482,28 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Initiates the copy of an AMI. You can copy an AMI from one Region to
-    # another, or from a Region to an Outpost. You can't copy an AMI from
-    # an Outpost to a Region, from one Outpost to another, or within the
-    # same Outpost. To copy an AMI to another partition, see
+    # Initiates an AMI copy operation. You can copy an AMI from one Region
+    # to another, or from a Region to an Outpost. You can't copy an AMI
+    # from an Outpost to a Region, from one Outpost to another, or within
+    # the same Outpost. To copy an AMI to another partition, see
     # [CreateStoreImageTask][1].
     #
-    # To copy an AMI from one Region to another, specify the source Region
-    # using the **SourceRegion** parameter, and specify the destination
-    # Region using its endpoint. Copies of encrypted backing snapshots for
-    # the AMI are encrypted. Copies of unencrypted backing snapshots remain
-    # unencrypted, unless you set `Encrypted` during the copy operation. You
-    # cannot create an unencrypted copy of an encrypted backing snapshot.
+    # When you copy an AMI from one Region to another, the destination
+    # Region is the current Region.
     #
-    # To copy an AMI from a Region to an Outpost, specify the source Region
-    # using the **SourceRegion** parameter, and specify the ARN of the
-    # destination Outpost using **DestinationOutpostArn**. Backing snapshots
-    # copied to an Outpost are encrypted by default using the default
-    # encryption key for the Region, or a different key that you specify in
-    # the request using **KmsKeyId**. Outposts do not support unencrypted
-    # snapshots. For more information, [ Amazon EBS local snapshots on
-    # Outposts][2] in the *Amazon EBS User Guide*.
+    # When you copy an AMI from a Region to an Outpost, specify the ARN of
+    # the Outpost as the destination. Backing snapshots copied to an Outpost
+    # are encrypted by default using the default encryption key for the
+    # Region or the key that you specify. Outposts do not support
+    # unencrypted snapshots.
     #
-    # For more information about the prerequisites and limits when copying
-    # an AMI, see [Copy an AMI][3] in the *Amazon EC2 User Guide*.
+    # For information about the prerequisites when copying an AMI, see [Copy
+    # an AMI][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
-    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -4531,12 +4523,12 @@ module Aws::EC2
     #   you cannot create an unencrypted copy of an encrypted snapshot. The
     #   default KMS key for Amazon EBS is used unless you specify a
     #   non-default Key Management Service (KMS) KMS key using `KmsKeyId`. For
-    #   more information, see [Amazon EBS encryption][1] in the *Amazon EBS
-    #   User Guide*.
+    #   more information, see [Use encryption with EBS-backed AMIs][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html
     #
     # @option params [String] :kms_key_id
     #   The identifier of the symmetric Key Management Service (KMS) KMS key
@@ -17739,7 +17731,7 @@ module Aws::EC2
     #
     # If you attempt to delete a security group that is associated with an
     # instance or network interface or is referenced by another security
-    # group, the operation fails with `DependencyViolation`.
+    # group in the same VPC, the operation fails with `DependencyViolation`.
     #
     # @option params [String] :group_id
     #   The ID of the security group.
@@ -24923,6 +24915,10 @@ module Aws::EC2
     #     `impaired` \| `initializing` \| `insufficient-data` \|
     #     `not-applicable`).
     #
+    #   * `attached-ebs-status.status` - The status of the attached EBS volume
+    #     for the instance (`ok` \| `impaired` \| `initializing` \|
+    #     `insufficient-data` \| `not-applicable`).
+    #
     # @option params [Array<String>] :instance_ids
     #   The instance IDs.
     #
@@ -25049,6 +25045,11 @@ module Aws::EC2
     #   resp.instance_statuses[0].system_status.details[0].name #=> String, one of "reachability"
     #   resp.instance_statuses[0].system_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
     #   resp.instance_statuses[0].system_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
+    #   resp.instance_statuses[0].attached_ebs_status.details #=> Array
+    #   resp.instance_statuses[0].attached_ebs_status.details[0].impaired_since #=> Time
+    #   resp.instance_statuses[0].attached_ebs_status.details[0].name #=> String, one of "reachability"
+    #   resp.instance_statuses[0].attached_ebs_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instance_statuses[0].attached_ebs_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
     #   resp.next_token #=> String
     #
     #
@@ -34060,9 +34061,9 @@ module Aws::EC2
 
     # Describes the stale security group rules for security groups in a
     # specified VPC. Rules are stale when they reference a deleted security
-    # group in the same VPC or peered VPC. Rules can also be stale if they
-    # reference a security group in a peer VPC for which the VPC peering
-    # connection has been deleted.
+    # group in a peered VPC. Rules can also be stale if they reference a
+    # security group in a peer VPC for which the VPC peering connection has
+    # been deleted.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39308,10 +39309,15 @@ module Aws::EC2
     # disable block public access for snapshots in a Region, users can
     # publicly share snapshots in that Region.
     #
-    # If block public access is enabled in `block-all-sharing` mode, and you
-    # disable block public access, all snapshots that were previously
-    # publicly shared are no longer treated as private and they become
-    # publicly accessible again.
+    # Enabling block public access for snapshots in *block-all-sharing* mode
+    # does not change the permissions for snapshots that are already
+    # publicly shared. Instead, it prevents these snapshots from be publicly
+    # visible and publicly accessible. Therefore, the attributes for these
+    # snapshots still indicate that they are publicly shared, even though
+    # they are not publicly available.
+    #
+    #  If you disable block public access , these snapshots will become
+    # publicly available again.
     #
     # For more information, see [ Block public access for snapshots][1] in
     # the *Amazon EBS User Guide* .
@@ -40946,10 +40952,15 @@ module Aws::EC2
     # that are already publicly shared are either treated as private or they
     # remain publicly shared, depending on the **State** that you specify.
     #
-    # If block public access is enabled in `block-all-sharing` mode, and you
-    # change the mode to `block-new-sharing`, all snapshots that were
-    # previously publicly shared are no longer treated as private and they
-    # become publicly accessible again.
+    # Enabling block public access for snapshots in *block all sharing* mode
+    # does not change the permissions for snapshots that are already
+    # publicly shared. Instead, it prevents these snapshots from be publicly
+    # visible and publicly accessible. Therefore, the attributes for these
+    # snapshots still indicate that they are publicly shared, even though
+    # they are not publicly available.
+    #
+    #  If you later disable block public access or change the mode to *block
+    # new sharing*, these snapshots will become publicly available again.
     #
     # For more information, see [ Block public access for snapshots][1] in
     # the *Amazon EBS User Guide*.
@@ -40967,16 +40978,6 @@ module Aws::EC2
     #     new public sharing. Additionally, snapshots that are already
     #     publicly shared are treated as private and they are no longer
     #     publicly available.
-    #
-    #     <note markdown="1"> If you enable block public access for snapshots in
-    #     `block-all-sharing` mode, it does not change the permissions for
-    #     snapshots that are already publicly shared. Instead, it prevents
-    #     these snapshots from be publicly visible and publicly accessible.
-    #     Therefore, the attributes for these snapshots still indicate that
-    #     they are publicly shared, even though they are not publicly
-    #     available.
-    #
-    #      </note>
     #
     #   * `block-new-sharing` - Prevents only new public sharing of snapshots
     #     in the Region. Users in the account will no longer be able to
@@ -49895,6 +49896,18 @@ module Aws::EC2
     #   Indicates whether DNS queries made to the Amazon-provided DNS Resolver
     #   in this subnet should return synthetic IPv6 addresses for IPv4-only
     #   destinations.
+    #
+    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
+    #   from the subnet containing the IPv6-only workloads). For example, the
+    #   subnet containing the NAT gateway should have a `0.0.0.0/0` route
+    #   pointing to the internet gateway. For more information, see [Configure
+    #   DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough
     #
     # @option params [String] :private_dns_hostname_type_on_launch
     #   The type of hostname to assign to instances in the subnet at launch.
@@ -60090,7 +60103,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.469.0'
+      context[:gem_version] = '1.470.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

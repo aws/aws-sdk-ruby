@@ -121,6 +121,7 @@ module Aws::QuickSight
       attr_accessor column_configurations: ::Array[Types::ColumnConfiguration]
       attr_accessor analysis_defaults: Types::AnalysisDefaults
       attr_accessor options: Types::AssetOptions
+      attr_accessor query_execution_options: Types::QueryExecutionOptions
       SENSITIVE: []
     end
 
@@ -174,6 +175,14 @@ module Aws::QuickSight
 
     class AnonymousUserDashboardEmbeddingConfiguration
       attr_accessor initial_dashboard_id: ::String
+      attr_accessor enabled_features: ::Array[("SHARED_VIEW")]
+      attr_accessor disabled_features: ::Array[("SHARED_VIEW")]
+      attr_accessor feature_configurations: Types::AnonymousUserDashboardFeatureConfigurations
+      SENSITIVE: []
+    end
+
+    class AnonymousUserDashboardFeatureConfigurations
+      attr_accessor shared_view: Types::SharedViewConfigurations
       SENSITIVE: []
     end
 
@@ -1809,6 +1818,12 @@ module Aws::QuickSight
     class CustomValuesConfiguration
       attr_accessor include_null_value: bool
       attr_accessor custom_values: Types::CustomParameterValues
+      SENSITIVE: []
+    end
+
+    class CustomerManagedKeyUnavailableException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
       SENSITIVE: []
     end
 
@@ -6075,6 +6090,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class QueryExecutionOptions
+      attr_accessor query_execution_mode: ("AUTO" | "MANUAL")
+      SENSITIVE: []
+    end
+
     class QueueInfo
       attr_accessor waiting_on_ingestion: ::String
       attr_accessor queued_ingestion: ::String
@@ -6292,6 +6312,7 @@ module Aws::QuickSight
 
     class RegisteredUserConsoleFeatureConfigurations
       attr_accessor state_persistence: Types::StatePersistenceConfigurations
+      attr_accessor shared_view: Types::SharedViewConfigurations
       SENSITIVE: []
     end
 
@@ -6303,6 +6324,7 @@ module Aws::QuickSight
 
     class RegisteredUserDashboardFeatureConfigurations
       attr_accessor state_persistence: Types::StatePersistenceConfigurations
+      attr_accessor shared_view: Types::SharedViewConfigurations
       attr_accessor bookmarks: Types::BookmarksConfigurations
       SENSITIVE: []
     end
@@ -6784,6 +6806,11 @@ module Aws::QuickSight
 
     class ShapeConditionalFormat
       attr_accessor background_color: Types::ConditionalFormattingColor
+      SENSITIVE: []
+    end
+
+    class SharedViewConfigurations
+      attr_accessor enabled: bool
       SENSITIVE: []
     end
 
@@ -7451,6 +7478,7 @@ module Aws::QuickSight
       attr_accessor column_configurations: ::Array[Types::ColumnConfiguration]
       attr_accessor analysis_defaults: Types::AnalysisDefaults
       attr_accessor options: Types::AssetOptions
+      attr_accessor query_execution_options: Types::QueryExecutionOptions
       SENSITIVE: []
     end
 

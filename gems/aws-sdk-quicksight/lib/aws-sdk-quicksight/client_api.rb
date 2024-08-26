@@ -57,6 +57,11 @@ module Aws::QuickSight
     AnchorOption = Shapes::StringShape.new(name: 'AnchorOption')
     AnchorType = Shapes::StringShape.new(name: 'AnchorType')
     AnonymousUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardEmbeddingConfiguration')
+    AnonymousUserDashboardEmbeddingConfigurationDisabledFeature = Shapes::StringShape.new(name: 'AnonymousUserDashboardEmbeddingConfigurationDisabledFeature')
+    AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures = Shapes::ListShape.new(name: 'AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures')
+    AnonymousUserDashboardEmbeddingConfigurationEnabledFeature = Shapes::StringShape.new(name: 'AnonymousUserDashboardEmbeddingConfigurationEnabledFeature')
+    AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures = Shapes::ListShape.new(name: 'AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures')
+    AnonymousUserDashboardFeatureConfigurations = Shapes::StructureShape.new(name: 'AnonymousUserDashboardFeatureConfigurations')
     AnonymousUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardVisualEmbeddingConfiguration')
     AnonymousUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserEmbeddingExperienceConfiguration')
     AnonymousUserGenerativeQnAEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserGenerativeQnAEmbeddingConfiguration')
@@ -424,6 +429,7 @@ module Aws::QuickSight
     CustomSql = Shapes::StructureShape.new(name: 'CustomSql')
     CustomSqlName = Shapes::StringShape.new(name: 'CustomSqlName')
     CustomValuesConfiguration = Shapes::StructureShape.new(name: 'CustomValuesConfiguration')
+    CustomerManagedKeyUnavailableException = Shapes::StructureShape.new(name: 'CustomerManagedKeyUnavailableException')
     Dashboard = Shapes::StructureShape.new(name: 'Dashboard')
     DashboardBehavior = Shapes::StringShape.new(name: 'DashboardBehavior')
     DashboardError = Shapes::StructureShape.new(name: 'DashboardError')
@@ -1273,6 +1279,8 @@ module Aws::QuickSight
     PutDataSetRefreshPropertiesRequest = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesRequest')
     PutDataSetRefreshPropertiesResponse = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesResponse')
     Query = Shapes::StringShape.new(name: 'Query')
+    QueryExecutionMode = Shapes::StringShape.new(name: 'QueryExecutionMode')
+    QueryExecutionOptions = Shapes::StructureShape.new(name: 'QueryExecutionOptions')
     QueueInfo = Shapes::StructureShape.new(name: 'QueueInfo')
     QuickSightUserNotFoundException = Shapes::StructureShape.new(name: 'QuickSightUserNotFoundException')
     RadarChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'RadarChartAggregatedFieldWells')
@@ -1442,6 +1450,7 @@ module Aws::QuickSight
     SetParameterValueConfiguration = Shapes::StructureShape.new(name: 'SetParameterValueConfiguration')
     SetParameterValueConfigurationList = Shapes::ListShape.new(name: 'SetParameterValueConfigurationList')
     ShapeConditionalFormat = Shapes::StructureShape.new(name: 'ShapeConditionalFormat')
+    SharedViewConfigurations = Shapes::StructureShape.new(name: 'SharedViewConfigurations')
     SharingModel = Shapes::StringShape.new(name: 'SharingModel')
     Sheet = Shapes::StructureShape.new(name: 'Sheet')
     SheetContentType = Shapes::StringShape.new(name: 'SheetContentType')
@@ -2001,6 +2010,7 @@ module Aws::QuickSight
     AnalysisDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     AnalysisDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
     AnalysisDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
+    AnalysisDefinition.add_member(:query_execution_options, Shapes::ShapeRef.new(shape: QueryExecutionOptions, location_name: "QueryExecutionOptions"))
     AnalysisDefinition.struct_class = Types::AnalysisDefinition
 
     AnalysisError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisErrorType, location_name: "Type"))
@@ -2044,7 +2054,17 @@ module Aws::QuickSight
     AnchorDateConfiguration.struct_class = Types::AnchorDateConfiguration
 
     AnonymousUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
+    AnonymousUserDashboardEmbeddingConfiguration.add_member(:enabled_features, Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures, location_name: "EnabledFeatures"))
+    AnonymousUserDashboardEmbeddingConfiguration.add_member(:disabled_features, Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures, location_name: "DisabledFeatures"))
+    AnonymousUserDashboardEmbeddingConfiguration.add_member(:feature_configurations, Shapes::ShapeRef.new(shape: AnonymousUserDashboardFeatureConfigurations, location_name: "FeatureConfigurations"))
     AnonymousUserDashboardEmbeddingConfiguration.struct_class = Types::AnonymousUserDashboardEmbeddingConfiguration
+
+    AnonymousUserDashboardEmbeddingConfigurationDisabledFeatures.member = Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfigurationDisabledFeature)
+
+    AnonymousUserDashboardEmbeddingConfigurationEnabledFeatures.member = Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfigurationEnabledFeature)
+
+    AnonymousUserDashboardFeatureConfigurations.add_member(:shared_view, Shapes::ShapeRef.new(shape: SharedViewConfigurations, location_name: "SharedView"))
+    AnonymousUserDashboardFeatureConfigurations.struct_class = Types::AnonymousUserDashboardFeatureConfigurations
 
     AnonymousUserDashboardVisualEmbeddingConfiguration.add_member(:initial_dashboard_visual_id, Shapes::ShapeRef.new(shape: DashboardVisualId, required: true, location_name: "InitialDashboardVisualId"))
     AnonymousUserDashboardVisualEmbeddingConfiguration.struct_class = Types::AnonymousUserDashboardVisualEmbeddingConfiguration
@@ -3405,6 +3425,10 @@ module Aws::QuickSight
     CustomValuesConfiguration.add_member(:include_null_value, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "IncludeNullValue"))
     CustomValuesConfiguration.add_member(:custom_values, Shapes::ShapeRef.new(shape: CustomParameterValues, required: true, location_name: "CustomValues"))
     CustomValuesConfiguration.struct_class = Types::CustomValuesConfiguration
+
+    CustomerManagedKeyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    CustomerManagedKeyUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CustomerManagedKeyUnavailableException.struct_class = Types::CustomerManagedKeyUnavailableException
 
     Dashboard.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "DashboardId"))
     Dashboard.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -6754,6 +6778,9 @@ module Aws::QuickSight
     PutDataSetRefreshPropertiesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     PutDataSetRefreshPropertiesResponse.struct_class = Types::PutDataSetRefreshPropertiesResponse
 
+    QueryExecutionOptions.add_member(:query_execution_mode, Shapes::ShapeRef.new(shape: QueryExecutionMode, location_name: "QueryExecutionMode"))
+    QueryExecutionOptions.struct_class = Types::QueryExecutionOptions
+
     QueueInfo.add_member(:waiting_on_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "WaitingOnIngestion"))
     QueueInfo.add_member(:queued_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueuedIngestion"))
     QueueInfo.struct_class = Types::QueueInfo
@@ -6924,6 +6951,7 @@ module Aws::QuickSight
     RegisteredCustomerManagedKey.struct_class = Types::RegisteredCustomerManagedKey
 
     RegisteredUserConsoleFeatureConfigurations.add_member(:state_persistence, Shapes::ShapeRef.new(shape: StatePersistenceConfigurations, location_name: "StatePersistence"))
+    RegisteredUserConsoleFeatureConfigurations.add_member(:shared_view, Shapes::ShapeRef.new(shape: SharedViewConfigurations, location_name: "SharedView"))
     RegisteredUserConsoleFeatureConfigurations.struct_class = Types::RegisteredUserConsoleFeatureConfigurations
 
     RegisteredUserDashboardEmbeddingConfiguration.add_member(:initial_dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "InitialDashboardId"))
@@ -6931,6 +6959,7 @@ module Aws::QuickSight
     RegisteredUserDashboardEmbeddingConfiguration.struct_class = Types::RegisteredUserDashboardEmbeddingConfiguration
 
     RegisteredUserDashboardFeatureConfigurations.add_member(:state_persistence, Shapes::ShapeRef.new(shape: StatePersistenceConfigurations, location_name: "StatePersistence"))
+    RegisteredUserDashboardFeatureConfigurations.add_member(:shared_view, Shapes::ShapeRef.new(shape: SharedViewConfigurations, location_name: "SharedView"))
     RegisteredUserDashboardFeatureConfigurations.add_member(:bookmarks, Shapes::ShapeRef.new(shape: BookmarksConfigurations, location_name: "Bookmarks"))
     RegisteredUserDashboardFeatureConfigurations.struct_class = Types::RegisteredUserDashboardFeatureConfigurations
 
@@ -7311,6 +7340,9 @@ module Aws::QuickSight
 
     ShapeConditionalFormat.add_member(:background_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, required: true, location_name: "BackgroundColor"))
     ShapeConditionalFormat.struct_class = Types::ShapeConditionalFormat
+
+    SharedViewConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    SharedViewConfigurations.struct_class = Types::SharedViewConfigurations
 
     Sheet.add_member(:sheet_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location_name: "SheetId"))
     Sheet.add_member(:name, Shapes::ShapeRef.new(shape: SheetName, location_name: "Name"))
@@ -7855,6 +7887,7 @@ module Aws::QuickSight
     TemplateVersionDefinition.add_member(:column_configurations, Shapes::ShapeRef.new(shape: ColumnConfigurationList, location_name: "ColumnConfigurations"))
     TemplateVersionDefinition.add_member(:analysis_defaults, Shapes::ShapeRef.new(shape: AnalysisDefaults, location_name: "AnalysisDefaults"))
     TemplateVersionDefinition.add_member(:options, Shapes::ShapeRef.new(shape: AssetOptions, location_name: "Options"))
+    TemplateVersionDefinition.add_member(:query_execution_options, Shapes::ShapeRef.new(shape: QueryExecutionOptions, location_name: "QueryExecutionOptions"))
     TemplateVersionDefinition.struct_class = Types::TemplateVersionDefinition
 
     TemplateVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -9251,6 +9284,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomerManagedKeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -11569,6 +11603,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomerManagedKeyUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

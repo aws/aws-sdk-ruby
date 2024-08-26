@@ -486,24 +486,24 @@ module Aws::Inspector2
     #
     #   resp.accounts #=> Array
     #   resp.accounts[0].account_id #=> String
-    #   resp.accounts[0].resource_state.ec2.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.accounts[0].resource_state.ec2.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.accounts[0].resource_state.ec2.error_message #=> String
     #   resp.accounts[0].resource_state.ec2.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
-    #   resp.accounts[0].resource_state.ecr.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.accounts[0].resource_state.ecr.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.accounts[0].resource_state.ecr.error_message #=> String
     #   resp.accounts[0].resource_state.ecr.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
-    #   resp.accounts[0].resource_state.lambda.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.accounts[0].resource_state.lambda.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.accounts[0].resource_state.lambda.error_message #=> String
     #   resp.accounts[0].resource_state.lambda.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
-    #   resp.accounts[0].resource_state.lambda_code.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.accounts[0].resource_state.lambda_code.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.accounts[0].resource_state.lambda_code.error_message #=> String
     #   resp.accounts[0].resource_state.lambda_code.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
-    #   resp.accounts[0].state.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.accounts[0].state.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.accounts[0].state.error_message #=> String
     #   resp.accounts[0].state.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
-    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -855,7 +855,7 @@ module Aws::Inspector2
     #     targets: { # required
     #       account_ids: ["TargetAccount"], # required
     #       target_resource_tags: { # required
-    #         "NonEmptyString" => ["String"],
+    #         "TargetResourceTagsKey" => ["TargetResourceTagsValue"],
     #       },
     #     },
     #   })
@@ -1738,7 +1738,7 @@ module Aws::Inspector2
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
-    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -1854,7 +1854,7 @@ module Aws::Inspector2
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
-    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -2563,8 +2563,8 @@ module Aws::Inspector2
     #   resp.scan_configurations[0].targets.account_ids #=> Array
     #   resp.scan_configurations[0].targets.account_ids[0] #=> String
     #   resp.scan_configurations[0].targets.target_resource_tags #=> Hash
-    #   resp.scan_configurations[0].targets.target_resource_tags["NonEmptyString"] #=> Array
-    #   resp.scan_configurations[0].targets.target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.scan_configurations[0].targets.target_resource_tags["TargetResourceTagsKey"] #=> Array
+    #   resp.scan_configurations[0].targets.target_resource_tags["TargetResourceTagsKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanConfigurations AWS API Documentation
     #
@@ -2784,8 +2784,8 @@ module Aws::Inspector2
     #   resp.target_resource_aggregations[0].status_counts.skipped #=> Integer
     #   resp.target_resource_aggregations[0].target_resource_id #=> String
     #   resp.target_resource_aggregations[0].target_resource_tags #=> Hash
-    #   resp.target_resource_aggregations[0].target_resource_tags["NonEmptyString"] #=> Array
-    #   resp.target_resource_aggregations[0].target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.target_resource_aggregations[0].target_resource_tags["TargetResourceTagsKey"] #=> Array
+    #   resp.target_resource_aggregations[0].target_resource_tags["TargetResourceTagsKey"][0] #=> String
     #   resp.target_resource_aggregations[0].target_status #=> String, one of "TIMED_OUT", "CANCELLED", "COMPLETED"
     #   resp.target_resource_aggregations[0].target_status_reason #=> String, one of "SCAN_IN_PROGRESS", "UNSUPPORTED_OS", "SSM_UNMANAGED"
     #
@@ -2914,8 +2914,8 @@ module Aws::Inspector2
     #   resp.scans[0].targets.account_ids #=> Array
     #   resp.scans[0].targets.account_ids[0] #=> String
     #   resp.scans[0].targets.target_resource_tags #=> Hash
-    #   resp.scans[0].targets.target_resource_tags["NonEmptyString"] #=> Array
-    #   resp.scans[0].targets.target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.scans[0].targets.target_resource_tags["TargetResourceTagsKey"] #=> Array
+    #   resp.scans[0].targets.target_resource_tags["TargetResourceTagsKey"][0] #=> String
     #   resp.scans[0].total_checks #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScans AWS API Documentation
@@ -3078,7 +3078,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
     #   resp.covered_resources[0].scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_AGENTLESS"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE", "CODE"
     #   resp.next_token #=> String
@@ -3736,6 +3736,8 @@ module Aws::Inspector2
     #   resp.next_token #=> String
     #   resp.responses #=> Array
     #   resp.responses[0].account_aggregation.account_id #=> String
+    #   resp.responses[0].account_aggregation.exploit_available_count #=> Integer
+    #   resp.responses[0].account_aggregation.fix_available_count #=> Integer
     #   resp.responses[0].account_aggregation.severity_counts.all #=> Integer
     #   resp.responses[0].account_aggregation.severity_counts.critical #=> Integer
     #   resp.responses[0].account_aggregation.severity_counts.high #=> Integer
@@ -3770,6 +3772,8 @@ module Aws::Inspector2
     #   resp.responses[0].ec2_instance_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].ec2_instance_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].finding_type_aggregation.account_id #=> String
+    #   resp.responses[0].finding_type_aggregation.exploit_available_count #=> Integer
+    #   resp.responses[0].finding_type_aggregation.fix_available_count #=> Integer
     #   resp.responses[0].finding_type_aggregation.severity_counts.all #=> Integer
     #   resp.responses[0].finding_type_aggregation.severity_counts.critical #=> Integer
     #   resp.responses[0].finding_type_aggregation.severity_counts.high #=> Integer
@@ -4780,7 +4784,7 @@ module Aws::Inspector2
     #     targets: {
     #       account_ids: ["TargetAccount"],
     #       target_resource_tags: {
-    #         "NonEmptyString" => ["String"],
+    #         "TargetResourceTagsKey" => ["TargetResourceTagsValue"],
     #       },
     #     },
     #   })
@@ -5320,7 +5324,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

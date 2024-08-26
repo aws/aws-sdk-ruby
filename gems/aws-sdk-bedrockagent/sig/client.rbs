@@ -164,7 +164,8 @@ module Aws
                                                  description: ::String?,
                                                  required: bool?,
                                                  type: ("string" | "number" | "integer" | "boolean" | "array")
-                                               }]?
+                                               }]?,
+                                             require_confirmation: ("ENABLED" | "DISABLED")?
                                            },
                                          ]?
                                        },
@@ -1302,7 +1303,8 @@ module Aws
                                                  description: ::String?,
                                                  required: bool?,
                                                  type: ("string" | "number" | "integer" | "boolean" | "array")
-                                               }]?
+                                               }]?,
+                                             require_confirmation: ("ENABLED" | "DISABLED")?
                                            },
                                          ]?
                                        },

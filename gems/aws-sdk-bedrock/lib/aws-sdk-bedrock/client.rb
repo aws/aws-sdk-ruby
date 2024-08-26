@@ -425,6 +425,44 @@ module Aws::Bedrock
 
     # @!group API Operations
 
+    # Creates a batch deletion job. A model evaluation job can only be
+    # deleted if it has following status `FAILED`, `COMPLETED`, and
+    # `STOPPED`. You can request up to 25 model evaluation jobs be deleted
+    # in a single request.
+    #
+    # @option params [required, Array<String>] :job_identifiers
+    #   An array of model evaluation job ARNs to be deleted.
+    #
+    # @return [Types::BatchDeleteEvaluationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteEvaluationJobResponse#errors #errors} => Array&lt;Types::BatchDeleteEvaluationJobError&gt;
+    #   * {Types::BatchDeleteEvaluationJobResponse#evaluation_jobs #evaluation_jobs} => Array&lt;Types::BatchDeleteEvaluationJobItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_evaluation_job({
+    #     job_identifiers: ["EvaluationJobIdentifier"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].job_identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.evaluation_jobs #=> Array
+    #   resp.evaluation_jobs[0].job_identifier #=> String
+    #   resp.evaluation_jobs[0].job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped", "Deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteEvaluationJob AWS API Documentation
+    #
+    # @overload batch_delete_evaluation_job(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_evaluation_job(params = {}, options = {})
+      req = build_request(:batch_delete_evaluation_job, params)
+      req.send_request(options)
+    end
+
     # API operation for creating and managing Amazon Bedrock automatic model
     # evaluation jobs and model evaluation jobs that use human workers. To
     # learn more about the requirements for creating a model evaluation job
@@ -1023,6 +1061,205 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Creates a model import job to import model that you have customized in
+    # other environments, such as Amazon SageMaker. For more information,
+    # see [Import a customized model][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #
+    # @option params [required, String] :job_name
+    #   The name of the import job.
+    #
+    # @option params [required, String] :imported_model_name
+    #   The name of the imported model.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the model import job.
+    #
+    # @option params [required, Types::ModelDataSource] :model_data_source
+    #   The data source for the imported model.
+    #
+    # @option params [Array<Types::Tag>] :job_tags
+    #   Tags to attach to this import job.
+    #
+    # @option params [Array<Types::Tag>] :imported_model_tags
+    #   Tags to attach to the imported model.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   VPC configuration parameters for the private Virtual Private Cloud
+    #   (VPC) that contains the resources you are using for the import job.
+    #
+    # @option params [String] :imported_model_kms_key_id
+    #   The imported model is encrypted at rest using this key.
+    #
+    # @return [Types::CreateModelImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelImportJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_import_job({
+    #     job_name: "JobName", # required
+    #     imported_model_name: "ImportedModelName", # required
+    #     role_arn: "RoleArn", # required
+    #     model_data_source: { # required
+    #       s3_data_source: {
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #     },
+    #     job_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     imported_model_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #     vpc_config: {
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #     },
+    #     imported_model_kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelImportJob AWS API Documentation
+    #
+    # @overload create_model_import_job(params = {})
+    # @param [Hash] params ({})
+    def create_model_import_job(params = {}, options = {})
+      req = build_request(:create_model_import_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a job to invoke a model on multiple prompts (batch inference).
+    # Format your data according to [Format your inference data][1] and
+    # upload it to an Amazon S3 bucket. For more information, see [Create a
+    # batch inference job][2].
+    #
+    # The response returns a `jobArn` that you can use to stop or get
+    # details about the job. You can check the status of the job by sending
+    # a [GetModelCustomizationJob][3] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-prerq.html#batch-inference-data
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-create.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetModelCustomizationJob.html
+    #
+    # @option params [required, String] :job_name
+    #   A name to give the batch inference job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the service role with permissions to
+    #   carry out and manage batch inference. You can use the console to
+    #   create a default service role or follow the steps at [Create a service
+    #   role for batch inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :model_id
+    #   The unique identifier of the foundation model to use for the batch
+    #   inference job.
+    #
+    # @option params [required, Types::ModelInvocationJobInputDataConfig] :input_data_config
+    #   Details about the location of the input to the batch inference job.
+    #
+    # @option params [required, Types::ModelInvocationJobOutputDataConfig] :output_data_config
+    #   Details about the location of the output of the batch inference job.
+    #
+    # @option params [Integer] :timeout_duration_in_hours
+    #   The number of hours after which to force the batch inference job to
+    #   time out.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Any tags to associate with the batch inference job. For more
+    #   information, see [Tagging Amazon Bedrock resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #
+    # @return [Types::CreateModelInvocationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelInvocationJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_invocation_job({
+    #     job_name: "ModelInvocationJobName", # required
+    #     role_arn: "RoleArn", # required
+    #     client_request_token: "ModelInvocationIdempotencyToken",
+    #     model_id: "ModelId", # required
+    #     input_data_config: { # required
+    #       s3_input_data_config: {
+    #         s3_input_format: "JSONL", # accepts JSONL
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #     },
+    #     output_data_config: { # required
+    #       s3_output_data_config: {
+    #         s3_uri: "S3Uri", # required
+    #         s3_encryption_key_id: "KmsKeyId",
+    #       },
+    #     },
+    #     timeout_duration_in_hours: 1,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelInvocationJob AWS API Documentation
+    #
+    # @overload create_model_invocation_job(params = {})
+    # @param [Hash] params ({})
+    def create_model_invocation_job(params = {}, options = {})
+      req = build_request(:create_model_invocation_job, params)
+      req.send_request(options)
+    end
+
     # Creates dedicated throughput for a base or custom model with the model
     # units and for the duration that you specify. For pricing details, see
     # [Amazon Bedrock Pricing][1]. For more information, see [Provisioned
@@ -1196,6 +1433,35 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes a custom model that you imported earlier. For more
+    # information, see [Import a customized model][1] in the [Amazon Bedrock
+    # User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :model_identifier
+    #   Name of the imported model to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_imported_model({
+    #     model_identifier: "ImportedModelIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteImportedModel AWS API Documentation
+    #
+    # @overload delete_imported_model(params = {})
+    # @param [Hash] params ({})
+    def delete_imported_model(params = {}, options = {})
+      req = build_request(:delete_imported_model, params)
+      req.send_request(options)
+    end
+
     # Delete the invocation logging.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1338,7 +1604,7 @@ module Aws::Bedrock
     # @example Response structure
     #
     #   resp.job_name #=> String
-    #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped", "Deleting"
     #   resp.job_arn #=> String
     #   resp.job_description #=> String
     #   resp.role_arn #=> String
@@ -1513,6 +1779,48 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Gets properties associated with a customized model you imported.
+    #
+    # @option params [required, String] :model_identifier
+    #   Name or Amazon Resource Name (ARN) of the imported model.
+    #
+    # @return [Types::GetImportedModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImportedModelResponse#model_arn #model_arn} => String
+    #   * {Types::GetImportedModelResponse#model_name #model_name} => String
+    #   * {Types::GetImportedModelResponse#job_name #job_name} => String
+    #   * {Types::GetImportedModelResponse#job_arn #job_arn} => String
+    #   * {Types::GetImportedModelResponse#model_data_source #model_data_source} => Types::ModelDataSource
+    #   * {Types::GetImportedModelResponse#creation_time #creation_time} => Time
+    #   * {Types::GetImportedModelResponse#model_architecture #model_architecture} => String
+    #   * {Types::GetImportedModelResponse#model_kms_key_arn #model_kms_key_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_imported_model({
+    #     model_identifier: "ImportedModelIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_arn #=> String
+    #   resp.model_name #=> String
+    #   resp.job_name #=> String
+    #   resp.job_arn #=> String
+    #   resp.model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.creation_time #=> Time
+    #   resp.model_architecture #=> String
+    #   resp.model_kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModel AWS API Documentation
+    #
+    # @overload get_imported_model(params = {})
+    # @param [Hash] params ({})
+    def get_imported_model(params = {}, options = {})
+      req = build_request(:get_imported_model, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a model copy job. For more information,
     # see [Copy models to be used in other regions][1] in the [Amazon
     # Bedrock User Guide][2].
@@ -1648,6 +1956,129 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_model_customization_job(params = {}, options = {})
       req = build_request(:get_model_customization_job, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the properties associated with import model job, including
+    # the status of the job. For more information, see [Import a customized
+    # model][1] in the [Amazon Bedrock User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [required, String] :job_identifier
+    #   The identifier of the import job.
+    #
+    # @return [Types::GetModelImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetModelImportJobResponse#job_arn #job_arn} => String
+    #   * {Types::GetModelImportJobResponse#job_name #job_name} => String
+    #   * {Types::GetModelImportJobResponse#imported_model_name #imported_model_name} => String
+    #   * {Types::GetModelImportJobResponse#imported_model_arn #imported_model_arn} => String
+    #   * {Types::GetModelImportJobResponse#role_arn #role_arn} => String
+    #   * {Types::GetModelImportJobResponse#model_data_source #model_data_source} => Types::ModelDataSource
+    #   * {Types::GetModelImportJobResponse#status #status} => String
+    #   * {Types::GetModelImportJobResponse#failure_message #failure_message} => String
+    #   * {Types::GetModelImportJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetModelImportJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetModelImportJobResponse#end_time #end_time} => Time
+    #   * {Types::GetModelImportJobResponse#vpc_config #vpc_config} => Types::VpcConfig
+    #   * {Types::GetModelImportJobResponse#imported_model_kms_key_arn #imported_model_kms_key_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_model_import_job({
+    #     job_identifier: "ModelImportJobIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_name #=> String
+    #   resp.imported_model_name #=> String
+    #   resp.imported_model_arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.failure_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.vpc_config.subnet_ids #=> Array
+    #   resp.vpc_config.subnet_ids[0] #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.imported_model_kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelImportJob AWS API Documentation
+    #
+    # @overload get_model_import_job(params = {})
+    # @param [Hash] params ({})
+    def get_model_import_job(params = {}, options = {})
+      req = build_request(:get_model_import_job, params)
+      req.send_request(options)
+    end
+
+    # Gets details about a batch inference job. For more information, see
+    # [View details about a batch inference job][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-view
+    #
+    # @option params [required, String] :job_identifier
+    #   The Amazon Resource Name (ARN) of the batch inference job.
+    #
+    # @return [Types::GetModelInvocationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetModelInvocationJobResponse#job_arn #job_arn} => String
+    #   * {Types::GetModelInvocationJobResponse#job_name #job_name} => String
+    #   * {Types::GetModelInvocationJobResponse#model_id #model_id} => String
+    #   * {Types::GetModelInvocationJobResponse#client_request_token #client_request_token} => String
+    #   * {Types::GetModelInvocationJobResponse#role_arn #role_arn} => String
+    #   * {Types::GetModelInvocationJobResponse#status #status} => String
+    #   * {Types::GetModelInvocationJobResponse#message #message} => String
+    #   * {Types::GetModelInvocationJobResponse#submit_time #submit_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#end_time #end_time} => Time
+    #   * {Types::GetModelInvocationJobResponse#input_data_config #input_data_config} => Types::ModelInvocationJobInputDataConfig
+    #   * {Types::GetModelInvocationJobResponse#output_data_config #output_data_config} => Types::ModelInvocationJobOutputDataConfig
+    #   * {Types::GetModelInvocationJobResponse#timeout_duration_in_hours #timeout_duration_in_hours} => Integer
+    #   * {Types::GetModelInvocationJobResponse#job_expiration_time #job_expiration_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_model_invocation_job({
+    #     job_identifier: "ModelInvocationJobIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_name #=> String
+    #   resp.model_id #=> String
+    #   resp.client_request_token #=> String
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "Submitted", "InProgress", "Completed", "Failed", "Stopping", "Stopped", "PartiallyCompleted", "Expired", "Validating", "Scheduled"
+    #   resp.message #=> String
+    #   resp.submit_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.input_data_config.s3_input_data_config.s3_input_format #=> String, one of "JSONL"
+    #   resp.input_data_config.s3_input_data_config.s3_uri #=> String
+    #   resp.output_data_config.s3_output_data_config.s3_uri #=> String
+    #   resp.output_data_config.s3_output_data_config.s3_encryption_key_id #=> String
+    #   resp.timeout_duration_in_hours #=> Integer
+    #   resp.job_expiration_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationJob AWS API Documentation
+    #
+    # @overload get_model_invocation_job(params = {})
+    # @param [Hash] params ({})
+    def get_model_invocation_job(params = {}, options = {})
+      req = build_request(:get_model_invocation_job, params)
       req.send_request(options)
     end
 
@@ -1870,7 +2301,7 @@ module Aws::Bedrock
     #   resp = client.list_evaluation_jobs({
     #     creation_time_after: Time.now,
     #     creation_time_before: Time.now,
-    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped, Deleting
     #     name_contains: "EvaluationJobName",
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -1884,7 +2315,7 @@ module Aws::Bedrock
     #   resp.job_summaries #=> Array
     #   resp.job_summaries[0].job_arn #=> String
     #   resp.job_summaries[0].job_name #=> String
-    #   resp.job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped", "Deleting"
     #   resp.job_summaries[0].creation_time #=> Time
     #   resp.job_summaries[0].job_type #=> String, one of "Human", "Automated"
     #   resp.job_summaries[0].evaluation_task_types #=> Array
@@ -2031,6 +2462,80 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_guardrails(params = {}, options = {})
       req = build_request(:list_guardrails, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of models you've imported. You can filter the results
+    # to return based on one or more criteria. For more information, see
+    # [Import a customized model][1] in the [Amazon Bedrock User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Return imported models that created before the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Return imported models that were created after the specified time.
+    #
+    # @option params [String] :name_contains
+    #   Return imported models only if the model name contains these
+    #   characters.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort by in the returned list of imported models.
+    #
+    # @option params [String] :sort_order
+    #   Specifies whetehr to sort the results in ascending or descending
+    #   order.
+    #
+    # @return [Types::ListImportedModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportedModelsResponse#next_token #next_token} => String
+    #   * {Types::ListImportedModelsResponse#model_summaries #model_summaries} => Array&lt;Types::ImportedModelSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_imported_models({
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     name_contains: "ImportedModelName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.model_summaries #=> Array
+    #   resp.model_summaries[0].model_arn #=> String
+    #   resp.model_summaries[0].model_name #=> String
+    #   resp.model_summaries[0].creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListImportedModels AWS API Documentation
+    #
+    # @overload list_imported_models(params = {})
+    # @param [Hash] params ({})
+    def list_imported_models(params = {}, options = {})
+      req = build_request(:list_imported_models, params)
       req.send_request(options)
     end
 
@@ -2217,6 +2722,180 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_model_customization_jobs(params = {}, options = {})
       req = build_request(:list_model_customization_jobs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of import jobs you've submitted. You can filter the
+    # results to return based on one or more criteria. For more information,
+    # see [Import a customized model][1] in the [Amazon Bedrock User
+    # Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Return import jobs that were created after the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Return import jobs that were created before the specified time.
+    #
+    # @option params [String] :status_equals
+    #   Return imported jobs with the specified status.
+    #
+    # @option params [String] :name_contains
+    #   Return imported jobs only if the job name contains these characters.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort by in the returned list of imported jobs.
+    #
+    # @option params [String] :sort_order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #
+    # @return [Types::ListModelImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelImportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListModelImportJobsResponse#model_import_job_summaries #model_import_job_summaries} => Array&lt;Types::ModelImportJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_import_jobs({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed
+    #     name_contains: "JobName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.model_import_job_summaries #=> Array
+    #   resp.model_import_job_summaries[0].job_arn #=> String
+    #   resp.model_import_job_summaries[0].job_name #=> String
+    #   resp.model_import_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.model_import_job_summaries[0].last_modified_time #=> Time
+    #   resp.model_import_job_summaries[0].creation_time #=> Time
+    #   resp.model_import_job_summaries[0].end_time #=> Time
+    #   resp.model_import_job_summaries[0].imported_model_arn #=> String
+    #   resp.model_import_job_summaries[0].imported_model_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelImportJobs AWS API Documentation
+    #
+    # @overload list_model_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_model_import_jobs(params = {}, options = {})
+      req = build_request(:list_model_import_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all batch inference jobs in the account. For more information,
+    # see [View details about a batch inference job][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-view
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submit_time_after
+    #   Specify a time to filter for batch inference jobs that were submitted
+    #   after the time you specify.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :submit_time_before
+    #   Specify a time to filter for batch inference jobs that were submitted
+    #   before the time you specify.
+    #
+    # @option params [String] :status_equals
+    #   Specify a status to filter for batch inference jobs whose statuses
+    #   match the string you specify.
+    #
+    # @option params [String] :name_contains
+    #   Specify a string to filter for batch inference jobs whose names
+    #   contain the string.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. If there are more results
+    #   than the number that you specify, a `nextToken` value is returned. Use
+    #   the `nextToken` in a request to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If there were more results than the value you specified in the
+    #   `maxResults` field in a previous `ListModelInvocationJobs` request,
+    #   the response would have returned a `nextToken` value. To see the next
+    #   batch of results, send the `nextToken` value in another request.
+    #
+    # @option params [String] :sort_by
+    #   An attribute by which to sort the results.
+    #
+    # @option params [String] :sort_order
+    #   Specifies whether to sort the results by ascending or descending
+    #   order.
+    #
+    # @return [Types::ListModelInvocationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelInvocationJobsResponse#next_token #next_token} => String
+    #   * {Types::ListModelInvocationJobsResponse#invocation_job_summaries #invocation_job_summaries} => Array&lt;Types::ModelInvocationJobSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_invocation_jobs({
+    #     submit_time_after: Time.now,
+    #     submit_time_before: Time.now,
+    #     status_equals: "Submitted", # accepts Submitted, InProgress, Completed, Failed, Stopping, Stopped, PartiallyCompleted, Expired, Validating, Scheduled
+    #     name_contains: "ModelInvocationJobName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.invocation_job_summaries #=> Array
+    #   resp.invocation_job_summaries[0].job_arn #=> String
+    #   resp.invocation_job_summaries[0].job_name #=> String
+    #   resp.invocation_job_summaries[0].model_id #=> String
+    #   resp.invocation_job_summaries[0].client_request_token #=> String
+    #   resp.invocation_job_summaries[0].role_arn #=> String
+    #   resp.invocation_job_summaries[0].status #=> String, one of "Submitted", "InProgress", "Completed", "Failed", "Stopping", "Stopped", "PartiallyCompleted", "Expired", "Validating", "Scheduled"
+    #   resp.invocation_job_summaries[0].message #=> String
+    #   resp.invocation_job_summaries[0].submit_time #=> Time
+    #   resp.invocation_job_summaries[0].last_modified_time #=> Time
+    #   resp.invocation_job_summaries[0].end_time #=> Time
+    #   resp.invocation_job_summaries[0].input_data_config.s3_input_data_config.s3_input_format #=> String, one of "JSONL"
+    #   resp.invocation_job_summaries[0].input_data_config.s3_input_data_config.s3_uri #=> String
+    #   resp.invocation_job_summaries[0].output_data_config.s3_output_data_config.s3_uri #=> String
+    #   resp.invocation_job_summaries[0].output_data_config.s3_output_data_config.s3_encryption_key_id #=> String
+    #   resp.invocation_job_summaries[0].timeout_duration_in_hours #=> Integer
+    #   resp.invocation_job_summaries[0].job_expiration_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelInvocationJobs AWS API Documentation
+    #
+    # @overload list_model_invocation_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_model_invocation_jobs(params = {}, options = {})
+      req = build_request(:list_model_invocation_jobs, params)
       req.send_request(options)
     end
 
@@ -2438,6 +3117,34 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def stop_model_customization_job(params = {}, options = {})
       req = build_request(:stop_model_customization_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a batch inference job. You're only charged for tokens that were
+    # already processed. For more information, see [Stop a batch inference
+    # job][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-manage.html#batch-inference-stop
+    #
+    # @option params [required, String] :job_identifier
+    #   The Amazon Resource Name (ARN) of the batch inference job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_model_invocation_job({
+    #     job_identifier: "ModelInvocationJobIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopModelInvocationJob AWS API Documentation
+    #
+    # @overload stop_model_invocation_job(params = {})
+    # @param [Hash] params ({})
+    def stop_model_invocation_job(params = {}, options = {})
+      req = build_request(:stop_model_invocation_job, params)
       req.send_request(options)
     end
 
@@ -2736,7 +3443,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

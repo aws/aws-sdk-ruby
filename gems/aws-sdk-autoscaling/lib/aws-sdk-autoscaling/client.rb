@@ -1080,9 +1080,9 @@ module Aws::AutoScaling
     # @option params [String] :health_check_type
     #   A comma-separated value string of one or more health check types.
     #
-    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
-    #   default health check and cannot be disabled. For more information, see
-    #   [Health checks for instances in an Auto Scaling group][1] in the
+    #   The valid values are `EC2`, `EBS`, `ELB`, and `VPC_LATTICE`. `EC2` is
+    #   the default health check and cannot be disabled. For more information,
+    #   see [Health checks for instances in an Auto Scaling group][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously set.
@@ -6268,12 +6268,12 @@ module Aws::AutoScaling
 
     # Sets the health status of the specified instance.
     #
-    # For more information, see [Health checks for instances in an Auto
+    # For more information, see [Set up a custom health check for your Auto
     # Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/set-up-a-custom-health-check.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -6886,9 +6886,9 @@ module Aws::AutoScaling
     # @option params [String] :health_check_type
     #   A comma-separated value string of one or more health check types.
     #
-    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
-    #   default health check and cannot be disabled. For more information, see
-    #   [Health checks for instances in an Auto Scaling group][1] in the
+    #   The valid values are `EC2`, `EBS`, `ELB`, and `VPC_LATTICE`. `EC2` is
+    #   the default health check and cannot be disabled. For more information,
+    #   see [Health checks for instances in an Auto Scaling group][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously set.
@@ -7195,7 +7195,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

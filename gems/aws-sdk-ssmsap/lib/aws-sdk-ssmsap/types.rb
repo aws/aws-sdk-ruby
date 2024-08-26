@@ -48,6 +48,11 @@ module Aws::SsmSap
     #   The status message.
     #   @return [String]
     #
+    # @!attribute [rw] associated_application_arns
+    #   The Amazon Resource Names of the associated AWS Systems Manager for
+    #   SAP applications.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -59,7 +64,8 @@ module Aws::SsmSap
       :discovery_status,
       :components,
       :last_updated,
-      :status_message)
+      :status_message,
+      :associated_application_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -401,6 +407,11 @@ module Aws::SsmSap
     #   The time at which the database was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] connected_component_arns
+    #   The Amazon Resource Names of the connected AWS Systems Manager for
+    #   SAP components.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Database AWS API Documentation
     #
     class Database < Struct.new(
@@ -414,7 +425,8 @@ module Aws::SsmSap
       :status,
       :primary_host,
       :sql_port,
-      :last_updated)
+      :last_updated,
+      :connected_component_arns)
       SENSITIVE = []
       include Aws::Structure
     end

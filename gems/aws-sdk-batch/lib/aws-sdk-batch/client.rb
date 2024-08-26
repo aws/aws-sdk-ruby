@@ -425,9 +425,8 @@ module Aws::Batch
 
     # @!group API Operations
 
-    # Cancels a job in an Batch job queue. Jobs that are in the `SUBMITTED`
-    # or `PENDING` are canceled. A job in`RUNNABLE` remains in `RUNNABLE`
-    # until it reaches the head of the job queue. Then the job status is
+    # Cancels a job in an Batch job queue. Jobs that are in a `SUBMITTED`,
+    # `PENDING`, or `RUNNABLE` state are cancelled and the job status is
     # updated to `FAILED`.
     #
     # <note markdown="1"> A `PENDING` job is canceled after all dependency jobs are completed.
@@ -712,6 +711,9 @@ module Aws::Batch
     #   The details for the Amazon EKS cluster that supports the compute
     #   environment.
     #
+    # @option params [String] :context
+    #   Reserved.
+    #
     # @return [Types::CreateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
@@ -850,6 +852,7 @@ module Aws::Batch
     #       eks_cluster_arn: "String", # required
     #       kubernetes_namespace: "String", # required
     #     },
+    #     context: "String",
     #   })
     #
     # @example Response structure
@@ -1388,6 +1391,7 @@ module Aws::Batch
     #   resp.compute_environments[0].eks_configuration.kubernetes_namespace #=> String
     #   resp.compute_environments[0].container_orchestration_type #=> String, one of "ECS", "EKS"
     #   resp.compute_environments[0].uuid #=> String
+    #   resp.compute_environments[0].context #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments AWS API Documentation
@@ -4632,6 +4636,9 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
+    # @option params [String] :context
+    #   Reserved.
+    #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateComputeEnvironmentResponse#compute_environment_name #compute_environment_name} => String
@@ -4695,6 +4702,7 @@ module Aws::Batch
     #       terminate_jobs_on_update: false,
     #       job_execution_timeout_minutes: 1,
     #     },
+    #     context: "String",
     #   })
     #
     # @example Response structure
@@ -4867,7 +4875,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

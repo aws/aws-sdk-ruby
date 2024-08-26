@@ -3,6 +3,12 @@ Unreleased Changes
 
 * Issue - Reduce initial memory usage by auto-loading bundled gems (STS, SSO, SSOOIDC).
 
+3.201.5 (2024-08-15)
+------------------
+
+* Issue - Allow legacy/undocumented `sigv4_signer` configuration to override resolved signer.
+* Issue - Consider sigv4a supported without crt check.
+
 3.201.4 (2024-08-08)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-08-16)
+------------------
+
+* Feature - Improvements of integration between AWS Batch and EC2.
+
 1.94.0 (2024-07-10)
 ------------------
 

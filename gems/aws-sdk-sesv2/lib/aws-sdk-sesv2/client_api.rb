@@ -502,7 +502,7 @@ module Aws::SESV2
     AccountDetails.add_member(:mail_type, Shapes::ShapeRef.new(shape: MailType, location_name: "MailType"))
     AccountDetails.add_member(:website_url, Shapes::ShapeRef.new(shape: WebsiteURL, location_name: "WebsiteURL"))
     AccountDetails.add_member(:contact_language, Shapes::ShapeRef.new(shape: ContactLanguage, location_name: "ContactLanguage"))
-    AccountDetails.add_member(:use_case_description, Shapes::ShapeRef.new(shape: UseCaseDescription, location_name: "UseCaseDescription"))
+    AccountDetails.add_member(:use_case_description, Shapes::ShapeRef.new(shape: UseCaseDescription, deprecated: true, location_name: "UseCaseDescription"))
     AccountDetails.add_member(:additional_contact_email_addresses, Shapes::ShapeRef.new(shape: AdditionalContactEmailAddresses, location_name: "AdditionalContactEmailAddresses"))
     AccountDetails.add_member(:review_details, Shapes::ShapeRef.new(shape: ReviewDetails, location_name: "ReviewDetails"))
     AccountDetails.struct_class = Types::AccountDetails
@@ -1472,7 +1472,7 @@ module Aws::SESV2
     PutAccountDetailsRequest.add_member(:mail_type, Shapes::ShapeRef.new(shape: MailType, required: true, location_name: "MailType"))
     PutAccountDetailsRequest.add_member(:website_url, Shapes::ShapeRef.new(shape: WebsiteURL, required: true, location_name: "WebsiteURL"))
     PutAccountDetailsRequest.add_member(:contact_language, Shapes::ShapeRef.new(shape: ContactLanguage, location_name: "ContactLanguage"))
-    PutAccountDetailsRequest.add_member(:use_case_description, Shapes::ShapeRef.new(shape: UseCaseDescription, required: true, location_name: "UseCaseDescription"))
+    PutAccountDetailsRequest.add_member(:use_case_description, Shapes::ShapeRef.new(shape: UseCaseDescription, deprecated: true, location_name: "UseCaseDescription"))
     PutAccountDetailsRequest.add_member(:additional_contact_email_addresses, Shapes::ShapeRef.new(shape: AdditionalContactEmailAddresses, location_name: "AdditionalContactEmailAddresses"))
     PutAccountDetailsRequest.add_member(:production_access_enabled, Shapes::ShapeRef.new(shape: EnabledWrapper, location_name: "ProductionAccessEnabled"))
     PutAccountDetailsRequest.struct_class = Types::PutAccountDetailsRequest

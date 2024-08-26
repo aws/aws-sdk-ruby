@@ -4166,6 +4166,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class EndpointConfigStepMetadata
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class EndpointConfigSummary
       attr_accessor endpoint_config_name: ::String
       attr_accessor endpoint_config_arn: ::String
@@ -4221,6 +4226,11 @@ module Aws::SageMaker
     class EndpointPerformance
       attr_accessor metrics: Types::InferenceMetrics
       attr_accessor endpoint_info: Types::EndpointInfo
+      SENSITIVE: []
+    end
+
+    class EndpointStepMetadata
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -7648,6 +7658,8 @@ module Aws::SageMaker
       attr_accessor clarify_check: Types::ClarifyCheckStepMetadata
       attr_accessor fail: Types::FailStepMetadata
       attr_accessor auto_ml_job: Types::AutoMLJobStepMetadata
+      attr_accessor endpoint: Types::EndpointStepMetadata
+      attr_accessor endpoint_config: Types::EndpointConfigStepMetadata
       SENSITIVE: []
     end
 

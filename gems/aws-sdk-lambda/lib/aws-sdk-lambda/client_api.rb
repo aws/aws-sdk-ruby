@@ -109,6 +109,9 @@ module Aws::Lambda
     FileSystemConfigList = Shapes::ListShape.new(name: 'FileSystemConfigList')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
+    FilterCriteriaError = Shapes::StructureShape.new(name: 'FilterCriteriaError')
+    FilterCriteriaErrorCode = Shapes::StringShape.new(name: 'FilterCriteriaErrorCode')
+    FilterCriteriaErrorMessage = Shapes::StringShape.new(name: 'FilterCriteriaErrorMessage')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FullDocument = Shapes::StringShape.new(name: 'FullDocument')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
@@ -140,6 +143,8 @@ module Aws::Lambda
     GetFunctionConcurrencyResponse = Shapes::StructureShape.new(name: 'GetFunctionConcurrencyResponse')
     GetFunctionConfigurationRequest = Shapes::StructureShape.new(name: 'GetFunctionConfigurationRequest')
     GetFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'GetFunctionEventInvokeConfigRequest')
+    GetFunctionRecursionConfigRequest = Shapes::StructureShape.new(name: 'GetFunctionRecursionConfigRequest')
+    GetFunctionRecursionConfigResponse = Shapes::StructureShape.new(name: 'GetFunctionRecursionConfigResponse')
     GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
     GetFunctionResponse = Shapes::StructureShape.new(name: 'GetFunctionResponse')
     GetFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'GetFunctionUrlConfigRequest')
@@ -278,6 +283,8 @@ module Aws::Lambda
     PutFunctionCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'PutFunctionCodeSigningConfigResponse')
     PutFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'PutFunctionConcurrencyRequest')
     PutFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'PutFunctionEventInvokeConfigRequest')
+    PutFunctionRecursionConfigRequest = Shapes::StructureShape.new(name: 'PutFunctionRecursionConfigRequest')
+    PutFunctionRecursionConfigResponse = Shapes::StructureShape.new(name: 'PutFunctionRecursionConfigResponse')
     PutProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigRequest')
     PutProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigResponse')
     PutRuntimeManagementConfigRequest = Shapes::StructureShape.new(name: 'PutRuntimeManagementConfigRequest')
@@ -286,6 +293,7 @@ module Aws::Lambda
     Queue = Shapes::StringShape.new(name: 'Queue')
     Queues = Shapes::ListShape.new(name: 'Queues')
     RecursiveInvocationException = Shapes::StructureShape.new(name: 'RecursiveInvocationException')
+    RecursiveLoop = Shapes::StringShape.new(name: 'RecursiveLoop')
     RemoveLayerVersionPermissionRequest = Shapes::StructureShape.new(name: 'RemoveLayerVersionPermissionRequest')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RequestTooLargeException = Shapes::StructureShape.new(name: 'RequestTooLargeException')
@@ -349,6 +357,7 @@ module Aws::Lambda
     TracingMode = Shapes::StringShape.new(name: 'TracingMode')
     TumblingWindowInSeconds = Shapes::IntegerShape.new(name: 'TumblingWindowInSeconds')
     URI = Shapes::StringShape.new(name: 'URI')
+    UnqualifiedFunctionName = Shapes::StringShape.new(name: 'UnqualifiedFunctionName')
     UnreservedConcurrentExecutions = Shapes::IntegerShape.new(name: 'UnreservedConcurrentExecutions')
     UnsupportedMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedMediaTypeException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -515,6 +524,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     CreateEventSourceMappingRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
     CreateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
+    CreateEventSourceMappingRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -690,6 +700,8 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     EventSourceMappingConfiguration.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
     EventSourceMappingConfiguration.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
+    EventSourceMappingConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
+    EventSourceMappingConfiguration.add_member(:filter_criteria_error, Shapes::ShapeRef.new(shape: FilterCriteriaError, location_name: "FilterCriteriaError"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
@@ -705,6 +717,10 @@ module Aws::Lambda
 
     FilterCriteria.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     FilterCriteria.struct_class = Types::FilterCriteria
+
+    FilterCriteriaError.add_member(:error_code, Shapes::ShapeRef.new(shape: FilterCriteriaErrorCode, location_name: "ErrorCode"))
+    FilterCriteriaError.add_member(:message, Shapes::ShapeRef.new(shape: FilterCriteriaErrorMessage, location_name: "Message"))
+    FilterCriteriaError.struct_class = Types::FilterCriteriaError
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
@@ -824,6 +840,12 @@ module Aws::Lambda
     GetFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetFunctionEventInvokeConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     GetFunctionEventInvokeConfigRequest.struct_class = Types::GetFunctionEventInvokeConfigRequest
+
+    GetFunctionRecursionConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: UnqualifiedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetFunctionRecursionConfigRequest.struct_class = Types::GetFunctionRecursionConfigRequest
+
+    GetFunctionRecursionConfigResponse.add_member(:recursive_loop, Shapes::ShapeRef.new(shape: RecursiveLoop, location_name: "RecursiveLoop"))
+    GetFunctionRecursionConfigResponse.struct_class = Types::GetFunctionRecursionConfigResponse
 
     GetFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetFunctionRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
@@ -1250,6 +1272,13 @@ module Aws::Lambda
     PutFunctionEventInvokeConfigRequest.add_member(:destination_config, Shapes::ShapeRef.new(shape: DestinationConfig, location_name: "DestinationConfig"))
     PutFunctionEventInvokeConfigRequest.struct_class = Types::PutFunctionEventInvokeConfigRequest
 
+    PutFunctionRecursionConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: UnqualifiedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    PutFunctionRecursionConfigRequest.add_member(:recursive_loop, Shapes::ShapeRef.new(shape: RecursiveLoop, required: true, location_name: "RecursiveLoop"))
+    PutFunctionRecursionConfigRequest.struct_class = Types::PutFunctionRecursionConfigRequest
+
+    PutFunctionRecursionConfigResponse.add_member(:recursive_loop, Shapes::ShapeRef.new(shape: RecursiveLoop, location_name: "RecursiveLoop"))
+    PutFunctionRecursionConfigResponse.struct_class = Types::PutFunctionRecursionConfigResponse
+
     PutProvisionedConcurrencyConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     PutProvisionedConcurrencyConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, required: true, location: "querystring", location_name: "Qualifier"))
     PutProvisionedConcurrencyConfigRequest.add_member(:provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "ProvisionedConcurrentExecutions"))
@@ -1434,6 +1463,7 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
     UpdateEventSourceMappingRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
     UpdateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
+    UpdateEventSourceMappingRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     UpdateEventSourceMappingRequest.struct_class = Types::UpdateEventSourceMappingRequest
 
     UpdateFunctionCodeRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -1846,6 +1876,18 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_function_recursion_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFunctionRecursionConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2024-08-31/functions/{FunctionName}/recursion-config"
+        o.input = Shapes::ShapeRef.new(shape: GetFunctionRecursionConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFunctionRecursionConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
       api.add_operation(:get_function_url_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2294,6 +2336,19 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:put_function_recursion_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFunctionRecursionConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2024-08-31/functions/{FunctionName}/recursion-config"
+        o.input = Shapes::ShapeRef.new(shape: PutFunctionRecursionConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFunctionRecursionConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
       api.add_operation(:put_provisioned_concurrency_config, Seahorse::Model::Operation.new.tap do |o|

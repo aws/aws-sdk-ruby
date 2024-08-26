@@ -1003,7 +1003,7 @@ module Aws
                                  mail_type: ("MARKETING" | "TRANSACTIONAL"),
                                  website_url: ::String,
                                  ?contact_language: ("EN" | "JA"),
-                                 use_case_description: ::String,
+                                 ?use_case_description: ::String,
                                  ?additional_contact_email_addresses: Array[::String],
                                  ?production_access_enabled: bool
                                ) -> _PutAccountDetailsResponseSuccess

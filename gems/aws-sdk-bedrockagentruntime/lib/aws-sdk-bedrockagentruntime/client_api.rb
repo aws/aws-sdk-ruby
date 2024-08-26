@@ -18,6 +18,7 @@ module Aws::BedrockAgentRuntime
     ActionGroupInvocationOutput = Shapes::StructureShape.new(name: 'ActionGroupInvocationOutput')
     ActionGroupName = Shapes::StringShape.new(name: 'ActionGroupName')
     ActionGroupOutputString = Shapes::StringShape.new(name: 'ActionGroupOutputString')
+    ActionInvocationType = Shapes::StringShape.new(name: 'ActionInvocationType')
     AdditionalModelRequestFields = Shapes::MapShape.new(name: 'AdditionalModelRequestFields')
     AdditionalModelRequestFieldsKey = Shapes::StringShape.new(name: 'AdditionalModelRequestFieldsKey')
     AdditionalModelRequestFieldsValue = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFieldsValue', document: true)
@@ -42,6 +43,7 @@ module Aws::BedrockAgentRuntime
     Citations = Shapes::ListShape.new(name: 'Citations')
     CodeInterpreterInvocationInput = Shapes::StructureShape.new(name: 'CodeInterpreterInvocationInput')
     CodeInterpreterInvocationOutput = Shapes::StructureShape.new(name: 'CodeInterpreterInvocationOutput')
+    ConfirmationState = Shapes::StringShape.new(name: 'ConfirmationState')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentBody = Shapes::StructureShape.new(name: 'ContentBody')
     ContentMap = Shapes::MapShape.new(name: 'ContentMap')
@@ -290,6 +292,7 @@ module Aws::BedrockAgentRuntime
     ApiContentMap.value = Shapes::ShapeRef.new(shape: PropertyParameters)
 
     ApiInvocationInput.add_member(:action_group, Shapes::ShapeRef.new(shape: String, required: true, location_name: "actionGroup"))
+    ApiInvocationInput.add_member(:action_invocation_type, Shapes::ShapeRef.new(shape: ActionInvocationType, location_name: "actionInvocationType"))
     ApiInvocationInput.add_member(:api_path, Shapes::ShapeRef.new(shape: ApiPath, location_name: "apiPath"))
     ApiInvocationInput.add_member(:http_method, Shapes::ShapeRef.new(shape: String, location_name: "httpMethod"))
     ApiInvocationInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ApiParameters, location_name: "parameters"))
@@ -308,6 +311,7 @@ module Aws::BedrockAgentRuntime
 
     ApiResult.add_member(:action_group, Shapes::ShapeRef.new(shape: String, required: true, location_name: "actionGroup"))
     ApiResult.add_member(:api_path, Shapes::ShapeRef.new(shape: ApiPath, location_name: "apiPath"))
+    ApiResult.add_member(:confirmation_state, Shapes::ShapeRef.new(shape: ConfirmationState, location_name: "confirmationState"))
     ApiResult.add_member(:http_method, Shapes::ShapeRef.new(shape: String, location_name: "httpMethod"))
     ApiResult.add_member(:http_status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "httpStatusCode"))
     ApiResult.add_member(:response_body, Shapes::ShapeRef.new(shape: ResponseBody, location_name: "responseBody"))
@@ -446,6 +450,7 @@ module Aws::BedrockAgentRuntime
     FlowResponseStream.struct_class = Types::FlowResponseStream
 
     FunctionInvocationInput.add_member(:action_group, Shapes::ShapeRef.new(shape: String, required: true, location_name: "actionGroup"))
+    FunctionInvocationInput.add_member(:action_invocation_type, Shapes::ShapeRef.new(shape: ActionInvocationType, location_name: "actionInvocationType"))
     FunctionInvocationInput.add_member(:function, Shapes::ShapeRef.new(shape: String, location_name: "function"))
     FunctionInvocationInput.add_member(:parameters, Shapes::ShapeRef.new(shape: FunctionParameters, location_name: "parameters"))
     FunctionInvocationInput.struct_class = Types::FunctionInvocationInput
@@ -458,6 +463,7 @@ module Aws::BedrockAgentRuntime
     FunctionParameters.member = Shapes::ShapeRef.new(shape: FunctionParameter)
 
     FunctionResult.add_member(:action_group, Shapes::ShapeRef.new(shape: String, required: true, location_name: "actionGroup"))
+    FunctionResult.add_member(:confirmation_state, Shapes::ShapeRef.new(shape: ConfirmationState, location_name: "confirmationState"))
     FunctionResult.add_member(:function, Shapes::ShapeRef.new(shape: String, location_name: "function"))
     FunctionResult.add_member(:response_body, Shapes::ShapeRef.new(shape: ResponseBody, location_name: "responseBody"))
     FunctionResult.add_member(:response_state, Shapes::ShapeRef.new(shape: ResponseState, location_name: "responseState"))

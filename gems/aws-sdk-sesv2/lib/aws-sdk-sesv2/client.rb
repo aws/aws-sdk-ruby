@@ -3574,7 +3574,7 @@ module Aws::SESV2
     # @option params [String] :contact_language
     #   The language you would prefer to be contacted with.
     #
-    # @option params [required, String] :use_case_description
+    # @option params [String] :use_case_description
     #   A description of the types of email that you plan to send.
     #
     # @option params [Array<String>] :additional_contact_email_addresses
@@ -3602,7 +3602,7 @@ module Aws::SESV2
     #     mail_type: "MARKETING", # required, accepts MARKETING, TRANSACTIONAL
     #     website_url: "WebsiteURL", # required
     #     contact_language: "EN", # accepts EN, JA
-    #     use_case_description: "UseCaseDescription", # required
+    #     use_case_description: "UseCaseDescription",
     #     additional_contact_email_addresses: ["AdditionalContactEmailAddress"],
     #     production_access_enabled: false,
     #   })
@@ -5138,7 +5138,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

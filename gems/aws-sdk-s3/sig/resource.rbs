@@ -120,7 +120,8 @@ module Aws
       def bucket: (String name) -> Bucket
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Resource.html#buckets-instance_method
-      def buckets: () -> Bucket::Collection
+      def buckets: (
+                   ) -> Bucket::Collection
                  | (?Hash[Symbol, untyped]) -> Bucket::Collection
     end
   end

@@ -180,7 +180,8 @@ module Aws
                                          topic_arn: ::String?,
                                          bucket_name: ::String,
                                          object_key_prefix: ::String?,
-                                         kms_key_arn: ::String?
+                                         kms_key_arn: ::String?,
+                                         iam_role_arn: ::String?
                                        }?,
                                        bounce_action: {
                                          topic_arn: ::String?,
@@ -669,7 +670,7 @@ module Aws
                                        ],
                                        template: ::String,
                                        ?template_arn: ::String,
-                                       ?default_template_data: ::String,
+                                       default_template_data: ::String,
                                        destinations: Array[
                                          {
                                            destination: {
@@ -970,7 +971,8 @@ module Aws
                                          topic_arn: ::String?,
                                          bucket_name: ::String,
                                          object_key_prefix: ::String?,
-                                         kms_key_arn: ::String?
+                                         kms_key_arn: ::String?,
+                                         iam_role_arn: ::String?
                                        }?,
                                        bounce_action: {
                                          topic_arn: ::String?,

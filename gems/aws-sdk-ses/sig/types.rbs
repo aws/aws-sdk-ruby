@@ -795,6 +795,7 @@ module Aws::SES
       attr_accessor bucket_name: ::String
       attr_accessor object_key_prefix: ::String
       attr_accessor kms_key_arn: ::String
+      attr_accessor iam_role_arn: ::String
       SENSITIVE: []
     end
 

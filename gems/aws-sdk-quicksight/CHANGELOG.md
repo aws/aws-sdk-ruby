@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-08-22)
+------------------
+
+* Feature - Explicit query for authors and dashboard viewing sharing for embedded users
+
+1.120.0 (2024-08-16)
+------------------
+
+* Feature - Amazon QuickSight launches Customer Managed Key (CMK) encryption for Data Source metadata
+
 1.119.0 (2024-07-18)
 ------------------
 
