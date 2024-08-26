@@ -34,6 +34,12 @@ require the`opentelemetry-sdk` gem and then, pass in an instance of a
 
       class Handler < Seahorse::Client::Handler
         def call(context)
+          span_wrapper(context) { @handler.call(context) }
+        end
+
+        private
+
+        def span_wrapper(context, &block)
           service_id = service_id(context)
           attributes = {
             'rpc.system' => 'aws-api',
@@ -45,13 +51,10 @@ require the`opentelemetry-sdk` gem and then, pass in an instance of a
           context.tracer.in_span(
             parent_span_name(context, service_id),
             attributes: attributes,
-            kind: Aws::Telemetry::SpanKind::CLIENT
-          ) do
-            @handler.call(context)
-          end
+            kind: Aws::Telemetry::SpanKind::CLIENT,
+            &block
+          )
         end
-
-        private
 
         def service_id(context)
           context.config.api.metadata['serviceId'] ||
