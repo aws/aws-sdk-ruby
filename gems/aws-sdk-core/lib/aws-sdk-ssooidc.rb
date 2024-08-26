@@ -7,14 +7,10 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 unless Module.const_defined?(:Aws)
   require 'aws-sdk-core'
   require 'aws-sigv4'
-end
-
-if Aws.autoload?(:SSOOIDC) &&
-   !(defined?(JRUBY_VERSION) && JRUBY_VERSION < '9.3')
-  Aws.autoload(:SSOOIDC, __FILE__)
 end
 
 require_relative 'aws-sdk-ssooidc/types'
