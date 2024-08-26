@@ -50,37 +50,27 @@ requests are made, and retries are disabled.
 
         def call(context)
           span_wrapper(context) do
-            stub_responses(context)
-          end
-        end
-
-        private
-
-        def stub_responses(context)
-          stub = context.client.next_stub(context)
-          resp = Seahorse::Client::Response.new(context: context)
-          async_mode = context.client.is_a? Seahorse::Client::AsyncBase
-          if Hash === stub && stub[:mutex]
-            stub[:mutex].synchronize { apply_stub(stub, resp, async_mode: async_mode) }
-          else
-            apply_stub(stub, resp, async_mode: async_mode)
-          end
-          if async_mode
-            Seahorse::Client::AsyncResponse.new(
+            stub = context.client.next_stub(context)
+            resp = Seahorse::Client::Response.new(context: context)
+            async_mode = context.client.is_a? Seahorse::Client::AsyncBase
+            if Hash === stub && stub[:mutex]
+              stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
+            else
+              apply_stub(stub, resp, async_mode)
+            end
+            async_mode ? Seahorse::Client::AsyncResponse.new(
               context: context,
               stream: context[:input_event_stream_handler].event_emitter.stream,
               sync_queue: Queue.new
-            )
-          else
-            resp
+            ) : resp
           end
         end
 
-        def apply_stub(stub, response, async_mode: false)
+        def apply_stub(stub, response, async_mode = false)
           http_resp = response.context.http_response
           case
           when stub[:error] then signal_error(stub[:error], http_resp)
-          when stub[:http] then signal_http(stub[:http], http_resp, async_mode: async_mode)
+          when stub[:http] then signal_http(stub[:http], http_resp, async_mode)
           when stub[:data] then response.data = stub[:data]
           end
         end
@@ -96,17 +86,17 @@ requests are made, and retries are disabled.
         # @param [Seahorse::Client::Http::Response] stub
         # @param [Seahorse::Client::Http::Response | Seahorse::Client::Http::AsyncResponse] http_resp
         # @param [Boolean] async_mode
-        def signal_http(stub, http_resp, async_mode: false)
+        def signal_http(stub, http_resp, async_mode = false)
           if async_mode
             h2_headers = stub.headers.to_h.inject([]) do |arr, (k, v)|
               arr << [k, v]
             end
-            h2_headers << [':status', stub.status_code]
+            h2_headers << [":status", stub.status_code]
             http_resp.signal_headers(h2_headers)
           else
             http_resp.signal_headers(stub.status_code, stub.headers.to_h)
           end
-          while (chunk = stub.body.read(1024 * 1024))
+          while chunk = stub.body.read(1024 * 1024)
             http_resp.signal_data(chunk)
           end
           stub.body.rewind
