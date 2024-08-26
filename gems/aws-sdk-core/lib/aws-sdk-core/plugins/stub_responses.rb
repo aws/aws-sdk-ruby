@@ -50,20 +50,26 @@ requests are made, and retries are disabled.
 
         def call(context)
           span_wrapper(context) do
-            stub = context.client.next_stub(context)
-            resp = Seahorse::Client::Response.new(context: context)
-            async_mode = context.client.is_a? Seahorse::Client::AsyncBase
-            if Hash === stub && stub[:mutex]
-              stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
-            else
-              apply_stub(stub, resp, async_mode)
-            end
-            async_mode ? Seahorse::Client::AsyncResponse.new(
-              context: context,
-              stream: context[:input_event_stream_handler].event_emitter.stream,
-              sync_queue: Queue.new
-            ) : resp
+            stub_responses(context)
           end
+        end
+
+        private
+
+        def stub_responses(context)
+          stub = context.client.next_stub(context)
+          resp = Seahorse::Client::Response.new(context: context)
+          async_mode = context.client.is_a? Seahorse::Client::AsyncBase
+          if Hash === stub && stub[:mutex]
+            stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
+          else
+            apply_stub(stub, resp, async_mode)
+          end
+          async_mode ? Seahorse::Client::AsyncResponse.new(
+            context: context,
+            stream: context[:input_event_stream_handler].event_emitter.stream,
+            sync_queue: Queue.new
+          ) : resp
         end
 
         def apply_stub(stub, response, async_mode = false)
