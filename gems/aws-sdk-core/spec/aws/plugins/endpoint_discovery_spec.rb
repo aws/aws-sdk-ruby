@@ -275,8 +275,12 @@ module Aws
             ]
           }
         )
+        cache_thread_block = nil
+        allow(Thread).to receive(:new) do |&block|
+          cache_thread_block = block
+        end
         c.operation_not_required(foo: 'foo')
-        sleep(0.1)
+        cache_thread_block.call
         expect(c.api_requests.size).to eq(3)
         c.operation_not_required(foo: 'foo')
         expect(c.api_requests.size).to eq(4)
