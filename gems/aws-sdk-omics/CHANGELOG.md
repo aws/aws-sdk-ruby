@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2024-08-27)
+------------------
+
+* Feature - Adds data provenance to import jobs from read sets and references
+
 1.31.0 (2024-07-02)
 ------------------
 

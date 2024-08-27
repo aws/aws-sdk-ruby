@@ -7,14 +7,10 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 unless Module.const_defined?(:Aws)
   require 'aws-sdk-core'
   require 'aws-sigv4'
-end
-
-if Aws.autoload?(:SSO) &&
-   !(defined?(JRUBY_VERSION) && JRUBY_VERSION < '9.3')
-  Aws.autoload(:SSO, __FILE__)
 end
 
 require_relative 'aws-sdk-sso/types'
@@ -58,6 +54,6 @@ require_relative 'aws-sdk-sso/customizations'
 # @!group service
 module Aws::SSO
 
-  GEM_VERSION = '3.201.5'
+  GEM_VERSION = '3.202.0'
 
 end

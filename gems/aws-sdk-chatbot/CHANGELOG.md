@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2024-08-27)
+------------------
+
+* Feature - Update documentation to be consistent with the API docs
+
 1.9.0 (2024-07-02)
 ------------------
 

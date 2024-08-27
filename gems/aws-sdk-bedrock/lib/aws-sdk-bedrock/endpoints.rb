@@ -278,6 +278,20 @@ module Aws::Bedrock
       end
     end
 
+    class GetInferenceProfile
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetModelCopyJob
       def self.build(context)
         unless context.config.regional_endpoint
@@ -419,6 +433,20 @@ module Aws::Bedrock
     end
 
     class ListImportedModels
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Bedrock::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListInferenceProfiles
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

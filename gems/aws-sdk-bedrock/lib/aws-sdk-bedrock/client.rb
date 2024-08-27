@@ -1152,20 +1152,18 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Creates a job to invoke a model on multiple prompts (batch inference).
+    # Creates a batch inference job to invoke a model on multiple prompts.
     # Format your data according to [Format your inference data][1] and
-    # upload it to an Amazon S3 bucket. For more information, see [Create a
-    # batch inference job][2].
+    # upload it to an Amazon S3 bucket. For more information, see [Process
+    # multiple prompts with batch inference][2].
     #
     # The response returns a `jobArn` that you can use to stop or get
-    # details about the job. You can check the status of the job by sending
-    # a [GetModelCustomizationJob][3] request.
+    # details about the job.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-prerq.html#batch-inference-data
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-create.html
-    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetModelCustomizationJob.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference.html
     #
     # @option params [required, String] :job_name
     #   A name to give the batch inference job.
@@ -1818,6 +1816,52 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_imported_model(params = {}, options = {})
       req = build_request(:get_imported_model, params)
+      req.send_request(options)
+    end
+
+    # Gets information about an inference profile. For more information, see
+    # the Amazon Bedrock User Guide.
+    #
+    # @option params [required, String] :inference_profile_identifier
+    #   The unique identifier of the inference profile.
+    #
+    # @return [Types::GetInferenceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInferenceProfileResponse#inference_profile_name #inference_profile_name} => String
+    #   * {Types::GetInferenceProfileResponse#models #models} => Array&lt;Types::InferenceProfileModel&gt;
+    #   * {Types::GetInferenceProfileResponse#description #description} => String
+    #   * {Types::GetInferenceProfileResponse#created_at #created_at} => Time
+    #   * {Types::GetInferenceProfileResponse#updated_at #updated_at} => Time
+    #   * {Types::GetInferenceProfileResponse#inference_profile_arn #inference_profile_arn} => String
+    #   * {Types::GetInferenceProfileResponse#inference_profile_id #inference_profile_id} => String
+    #   * {Types::GetInferenceProfileResponse#status #status} => String
+    #   * {Types::GetInferenceProfileResponse#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_inference_profile({
+    #     inference_profile_identifier: "InferenceProfileIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_profile_name #=> String
+    #   resp.models #=> Array
+    #   resp.models[0].model_arn #=> String
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.inference_profile_arn #=> String
+    #   resp.inference_profile_id #=> String
+    #   resp.status #=> String, one of "ACTIVE"
+    #   resp.type #=> String, one of "SYSTEM_DEFINED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfile AWS API Documentation
+    #
+    # @overload get_inference_profile(params = {})
+    # @param [Hash] params ({})
+    def get_inference_profile(params = {}, options = {})
+      req = build_request(:get_inference_profile, params)
       req.send_request(options)
     end
 
@@ -2536,6 +2580,58 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_imported_models(params = {}, options = {})
       req = build_request(:list_imported_models, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of inference profiles that you can use.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListInferenceProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceProfilesResponse#inference_profile_summaries #inference_profile_summaries} => Array&lt;Types::InferenceProfileSummary&gt;
+    #   * {Types::ListInferenceProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_profiles({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_profile_summaries #=> Array
+    #   resp.inference_profile_summaries[0].inference_profile_name #=> String
+    #   resp.inference_profile_summaries[0].models #=> Array
+    #   resp.inference_profile_summaries[0].models[0].model_arn #=> String
+    #   resp.inference_profile_summaries[0].description #=> String
+    #   resp.inference_profile_summaries[0].created_at #=> Time
+    #   resp.inference_profile_summaries[0].updated_at #=> Time
+    #   resp.inference_profile_summaries[0].inference_profile_arn #=> String
+    #   resp.inference_profile_summaries[0].inference_profile_id #=> String
+    #   resp.inference_profile_summaries[0].status #=> String, one of "ACTIVE"
+    #   resp.inference_profile_summaries[0].type #=> String, one of "SYSTEM_DEFINED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfiles AWS API Documentation
+    #
+    # @overload list_inference_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_inference_profiles(params = {}, options = {})
+      req = build_request(:list_inference_profiles, params)
       req.send_request(options)
     end
 
@@ -3443,7 +3539,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

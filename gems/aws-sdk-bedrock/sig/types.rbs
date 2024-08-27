@@ -461,6 +461,24 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GetInferenceProfileRequest
+      attr_accessor inference_profile_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetInferenceProfileResponse
+      attr_accessor inference_profile_name: ::String
+      attr_accessor models: ::Array[Types::InferenceProfileModel]
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor inference_profile_arn: ::String
+      attr_accessor inference_profile_id: ::String
+      attr_accessor status: ("ACTIVE")
+      attr_accessor type: ("SYSTEM_DEFINED")
+      SENSITIVE: []
+    end
+
     class GetModelCopyJobRequest
       attr_accessor job_arn: ::String
       SENSITIVE: []
@@ -769,6 +787,24 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class InferenceProfileModel
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceProfileSummary
+      attr_accessor inference_profile_name: ::String
+      attr_accessor models: ::Array[Types::InferenceProfileModel]
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor inference_profile_arn: ::String
+      attr_accessor inference_profile_id: ::String
+      attr_accessor status: ("ACTIVE")
+      attr_accessor type: ("SYSTEM_DEFINED")
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -852,6 +888,18 @@ module Aws::Bedrock
     class ListImportedModelsResponse
       attr_accessor next_token: ::String
       attr_accessor model_summaries: ::Array[Types::ImportedModelSummary]
+      SENSITIVE: []
+    end
+
+    class ListInferenceProfilesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInferenceProfilesResponse
+      attr_accessor inference_profile_summaries: ::Array[Types::InferenceProfileSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 

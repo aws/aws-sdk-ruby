@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-08-27)
+------------------
+
+* Feature - Amazon Polly adds 2 new voices: Jitka (cs-CZ) and Sabrina (de-CH).
+
 1.90.0 (2024-07-02)
 ------------------
 

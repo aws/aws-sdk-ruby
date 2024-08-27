@@ -547,6 +547,24 @@ module Aws
                               ) -> _GetImportedModelResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportedModelResponseSuccess
 
+      interface _GetInferenceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInferenceProfileResponse]
+        def inference_profile_name: () -> ::String
+        def models: () -> ::Array[Types::InferenceProfileModel]
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def inference_profile_arn: () -> ::String
+        def inference_profile_id: () -> ::String
+        def status: () -> ("ACTIVE")
+        def type: () -> ("SYSTEM_DEFINED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_inference_profile-instance_method
+      def get_inference_profile: (
+                                   inference_profile_identifier: ::String
+                                 ) -> _GetInferenceProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInferenceProfileResponseSuccess
+
       interface _GetModelCopyJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetModelCopyJobResponse]
         def job_arn: () -> ::String
@@ -753,6 +771,18 @@ module Aws
                                   ?sort_order: ("Ascending" | "Descending")
                                 ) -> _ListImportedModelsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportedModelsResponseSuccess
+
+      interface _ListInferenceProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceProfilesResponse]
+        def inference_profile_summaries: () -> ::Array[Types::InferenceProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_inference_profiles-instance_method
+      def list_inference_profiles: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListInferenceProfilesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceProfilesResponseSuccess
 
       interface _ListModelCopyJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListModelCopyJobsResponse]

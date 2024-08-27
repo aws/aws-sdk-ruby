@@ -1731,6 +1731,72 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] inference_profile_identifier
+    #   The unique identifier of the inference profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfileRequest AWS API Documentation
+    #
+    class GetInferenceProfileRequest < Struct.new(
+      :inference_profile_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_profile_name
+    #   The name of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] models
+    #   A list of information about each model in the inference profile.
+    #   @return [Array<Types::InferenceProfileModel>]
+    #
+    # @!attribute [rw] description
+    #   The description of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the inference profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the inference profile was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inference_profile_arn
+    #   The Amazon Resource Name (ARN) of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_profile_id
+    #   The unique identifier of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference profile. `ACTIVE` means that the
+    #   inference profile is available to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the inference profile. `SYSTEM_DEFINED` means that the
+    #   inference profile is defined by Amazon Bedrock.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfileResponse AWS API Documentation
+    #
+    class GetInferenceProfileResponse < Struct.new(
+      :inference_profile_name,
+      :models,
+      :description,
+      :created_at,
+      :updated_at,
+      :inference_profile_arn,
+      :inference_profile_id,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the model copy job.
     #   @return [String]
@@ -3251,6 +3317,76 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Contains information about a model.
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/InferenceProfileModel AWS API Documentation
+    #
+    class InferenceProfileModel < Struct.new(
+      :model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an inference profile.
+    #
+    # @!attribute [rw] inference_profile_name
+    #   The name of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] models
+    #   A list of information about each model in the inference profile.
+    #   @return [Array<Types::InferenceProfileModel>]
+    #
+    # @!attribute [rw] description
+    #   The description of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the inference profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the inference profile was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inference_profile_arn
+    #   The Amazon Resource Name (ARN) of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_profile_id
+    #   The unique identifier of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference profile. `ACTIVE` means that the
+    #   inference profile is available to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the inference profile. `SYSTEM_DEFINED` means that the
+    #   inference profile is defined by Amazon Bedrock.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/InferenceProfileSummary AWS API Documentation
+    #
+    class InferenceProfileSummary < Struct.new(
+      :inference_profile_name,
+      :models,
+      :description,
+      :created_at,
+      :updated_at,
+      :inference_profile_arn,
+      :inference_profile_id,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal server error occurred. Retry your request.
     #
     # @!attribute [rw] message
@@ -3581,6 +3717,49 @@ module Aws::Bedrock
     class ListImportedModelsResponse < Struct.new(
       :next_token,
       :model_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfilesRequest AWS API Documentation
+    #
+    class ListInferenceProfilesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_profile_summaries
+    #   A list of information about each inference profile that you can use.
+    #   @return [Array<Types::InferenceProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfilesResponse AWS API Documentation
+    #
+    class ListInferenceProfilesResponse < Struct.new(
+      :inference_profile_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.202.0 (2024-08-27)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-core` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-core` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-core` gem.
+
 * Issue - Remove autoloads for service gems bundled in `aws-sdk-core` (STS, SSO, SSOOIDC).
 
 3.201.0 (2024-08-12)

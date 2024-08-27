@@ -10,24 +10,25 @@
 module Aws::Chatbot
   module Types
 
-    # Preferences which apply for AWS Chatbot usage in the calling AWS
-    # account.
+    # Preferences related to AWS Chatbot usage in the calling AWS account.
     #
     # @!attribute [rw] user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
     #   @return [Boolean]
     #
     # @!attribute [rw] training_data_collection_enabled
-    #   Turns on training data collection. This helps improve the AWS
-    #   Chatbot experience by allowing AWS Chatbot to store and use your
-    #   customer information, such as AWS Chatbot configurations,
-    #   notifications, user inputs, AWS Chatbot generated responses, and
-    #   interaction data. This data helps us to continuously improve and
-    #   develop Artificial Intelligence (AI) technologies. Your data is not
-    #   shared with any third parties and is protected using sophisticated
-    #   controls to prevent unauthorized access and misuse. AWS Chatbot does
-    #   not store or use interactions in chat channels with Amazon Q for
-    #   training AWS Chatbot’s AI technologies.
+    #   Turns on training data collection.
+    #
+    #   This helps improve the AWS Chatbot experience by allowing AWS
+    #   Chatbot to store and use your customer information, such as AWS
+    #   Chatbot configurations, notifications, user inputs, AWS Chatbot
+    #   generated responses, and interaction data. This data helps us to
+    #   continuously improve and develop Artificial Intelligence (AI)
+    #   technologies. Your data is not shared with any third parties and is
+    #   protected using sophisticated controls to prevent unauthorized
+    #   access and misuse. AWS Chatbot does not store or use interactions in
+    #   chat channels with Amazon Q for training AI technologies for AWS
+    #   Chatbot.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/AccountPreferences AWS API Documentation
@@ -42,25 +43,36 @@ module Aws::Chatbot
     # An AWS Chatbot configuration for Amazon Chime.
     #
     # @!attribute [rw] webhook_description
-    #   Description of the webhook. Recommend using the convention
-    #   `RoomName/WebhookName`. See Chime setup tutorial for more details:
-    #   https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+    #   A description of the webhook. We recommend using the convention
+    #   `RoomName/WebhookName`.
+    #
+    #   For more information, see [Tutorial: Get started with Amazon
+    #   Chime][1] in the <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
     #   @return [String]
     #
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the ChimeWebhookConfiguration.
+    #   The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration.
     #   @return [String]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS
-    #   Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] configuration_name
@@ -68,13 +80,12 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Specifies the logging level for this configuration. This property
-    #   affects the log entries pushed to Amazon CloudWatch Logs.Logging
-    #   levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags applied to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string
+    #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ChimeWebhookConfiguration AWS API Documentation
@@ -87,23 +98,28 @@ module Aws::Chatbot
       :configuration_name,
       :logging_level,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:webhook_description]
       include Aws::Structure
     end
 
-    # A Microsoft Teams team that has been authorized with AWS Chatbot.
+    # A Microsoft Teams team that is authorized with AWS Chatbot.
     #
     # @!attribute [rw] tenant_id
     #   The ID of the Microsoft Teams tenant.
     #   @return [String]
     #
     # @!attribute [rw] team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4
-    #   in Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy
+    #   and paste the team ID from the console. For more information, see
+    #   [Step 1: Configure a Microsoft Teams client][1] in the <i> AWS
+    #   Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #   @return [String]
     #
     # @!attribute [rw] team_name
@@ -122,36 +138,62 @@ module Aws::Chatbot
 
     # There was an issue processing your request.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ConflictException AWS API Documentation
     #
-    class ConflictException < Aws::EmptyStructure; end
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateChimeWebhookConfigurationException AWS API Documentation
     #
-    class CreateChimeWebhookConfigurationException < Aws::EmptyStructure; end
+    class CreateChimeWebhookConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] webhook_description
-    #   Description of the webhook. Recommend using the convention
-    #   `RoomName/WebhookName`. See Chime setup tutorial for more details:
-    #   https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+    #   A description of the webhook. We recommend using the convention
+    #   `RoomName/WebhookName`.
+    #
+    #   For more information, see [Tutorial: Get started with Amazon
+    #   Chime][1] in the <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
     #   @return [String]
     #
     # @!attribute [rw] webhook_url
-    #   URL for the Chime webhook.
+    #   The URL for the Amazon Chime webhook.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS
-    #   Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] iam_role_arn
-    #   This is a user-defined role that AWS Chatbot will assume. This is
-    #   not the service-linked role. For more information, see IAM Policies
-    #   for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_name
@@ -159,11 +201,12 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags to apply to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string
+    #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateChimeWebhookConfigurationRequest AWS API Documentation
@@ -176,12 +219,12 @@ module Aws::Chatbot
       :configuration_name,
       :logging_level,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:webhook_description, :webhook_url]
       include Aws::Structure
     end
 
     # @!attribute [rw] webhook_configuration
-    #   Chime webhook configuration.
+    #   An Amazon Chime webhook configuration.
     #   @return [Types::ChimeWebhookConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateChimeWebhookConfigurationResult AWS API Documentation
@@ -195,35 +238,48 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateSlackChannelConfigurationException AWS API Documentation
     #
-    class CreateSlackChannelConfigurationException < Aws::EmptyStructure; end
+    class CreateSlackChannelConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] slack_team_id
     #   The ID of the Slack workspace authorized with AWS Chatbot.
     #   @return [String]
     #
     # @!attribute [rw] slack_channel_id
-    #   The ID of the Slack channel. To get the ID, open Slack, right click
-    #   on the channel name in the left pane, then choose Copy Link. The
-    #   channel ID is the 9-character string at the end of the URL. For
-    #   example, ABCBBLZZZ.
+    #   The ID of the Slack channel.
+    #
+    #   To get this ID, open Slack, right click on the channel name in the
+    #   left pane, then choose Copy Link. The channel ID is the 9-character
+    #   string at the end of the URL. For example, ABCBBLZZZ.
     #   @return [String]
     #
     # @!attribute [rw] slack_channel_name
-    #   The name of the Slack Channel.
+    #   The name of the Slack channel.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS
-    #   Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_name
@@ -231,12 +287,12 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
+    #   The AWS managed `AdministratorAccess` policy is applied by default
     #   if this is not set.
     #   @return [Array<String>]
     #
@@ -245,7 +301,8 @@ module Aws::Chatbot
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags to apply to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string
+    #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateSlackChannelConfigurationRequest AWS API Documentation
@@ -261,7 +318,7 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:slack_channel_name]
       include Aws::Structure
     end
 
@@ -280,9 +337,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateTeamsChannelConfigurationException AWS API Documentation
     #
-    class CreateTeamsChannelConfigurationException < Aws::EmptyStructure; end
+    class CreateTeamsChannelConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] channel_id
     #   The ID of the Microsoft Teams channel.
@@ -293,12 +357,17 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4
-    #   in Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy
+    #   and paste the team ID from the console. For more information, see
+    #   [Step 1: Configure a Microsoft Teams client][1] in the <i> AWS
+    #   Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #   @return [String]
     #
     # @!attribute [rw] team_name
@@ -310,15 +379,20 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS
-    #   Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_name
@@ -326,12 +400,12 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
+    #   The AWS managed `AdministratorAccess` policy is applied by default
     #   if this is not set.
     #   @return [Array<String>]
     #
@@ -340,7 +414,8 @@ module Aws::Chatbot
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags to apply to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string
+    #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/CreateTeamsChannelConfigurationRequest AWS API Documentation
@@ -358,7 +433,7 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channel_name, :team_name]
       include Aws::Structure
     end
 
@@ -378,12 +453,20 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteChimeWebhookConfigurationException AWS API Documentation
     #
-    class DeleteChimeWebhookConfigurationException < Aws::EmptyStructure; end
+    class DeleteChimeWebhookConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the ChimeWebhookConfiguration to delete.
+    #   The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to
+    #   delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteChimeWebhookConfigurationRequest AWS API Documentation
@@ -401,9 +484,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteMicrosoftTeamsUserIdentityException AWS API Documentation
     #
-    class DeleteMicrosoftTeamsUserIdentityException < Aws::EmptyStructure; end
+    class DeleteMicrosoftTeamsUserIdentityException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
     #   The ARN of the MicrosoftTeamsChannelConfiguration associated with
@@ -411,7 +501,7 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   Id from Microsoft Teams for user.
+    #   The Microsoft Teams user ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteMicrosoftTeamsUserIdentityRequest AWS API Documentation
@@ -430,12 +520,20 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteSlackChannelConfigurationException AWS API Documentation
     #
-    class DeleteSlackChannelConfigurationException < Aws::EmptyStructure; end
+    class DeleteSlackChannelConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration to delete.
+    #   The Amazon Resource Name (ARN) of the SlackChannelConfiguration to
+    #   delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteSlackChannelConfigurationRequest AWS API Documentation
@@ -453,9 +551,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteSlackUserIdentityException AWS API Documentation
     #
-    class DeleteSlackUserIdentityException < Aws::EmptyStructure; end
+    class DeleteSlackUserIdentityException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
     #   The ARN of the SlackChannelConfiguration associated with the user
@@ -467,7 +572,7 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] slack_user_id
-    #   The ID of the user in Slack.
+    #   The ID of the user in Slack
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteSlackUserIdentityRequest AWS API Documentation
@@ -486,9 +591,16 @@ module Aws::Chatbot
 
     # There was an issue deleting your Slack workspace.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteSlackWorkspaceAuthorizationFault AWS API Documentation
     #
-    class DeleteSlackWorkspaceAuthorizationFault < Aws::EmptyStructure; end
+    class DeleteSlackWorkspaceAuthorizationFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] slack_team_id
     #   The ID of the Slack workspace authorized with AWS Chatbot.
@@ -509,12 +621,21 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteTeamsChannelConfigurationException AWS API Documentation
     #
-    class DeleteTeamsChannelConfigurationException < Aws::EmptyStructure; end
+    class DeleteTeamsChannelConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration to delete.
+    #   The Amazon Resource Name (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration associated with the user identity
+    #   to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteTeamsChannelConfigurationRequest AWS API Documentation
@@ -532,17 +653,29 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteTeamsConfiguredTeamException AWS API Documentation
     #
-    class DeleteTeamsConfiguredTeamException < Aws::EmptyStructure; end
+    class DeleteTeamsConfiguredTeamException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4
-    #   in Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams team authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy
+    #   and paste the team ID from the console. For more information, see
+    #   [Step 1: Configure a Microsoft Teams client][1] in the <i> AWS
+    #   Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DeleteTeamsConfiguredTeamRequest AWS API Documentation
@@ -560,9 +693,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeChimeWebhookConfigurationsException AWS API Documentation
     #
-    class DescribeChimeWebhookConfigurationsException < Aws::EmptyStructure; end
+    class DescribeChimeWebhookConfigurationsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
@@ -579,7 +719,8 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] chat_configuration_arn
-    #   An optional ARN of a ChimeWebhookConfiguration to describe.
+    #   An optional Amazon Resource Number (ARN) of a
+    #   ChimeWebhookConfiguration to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeChimeWebhookConfigurationsRequest AWS API Documentation
@@ -600,7 +741,7 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] webhook_configurations
-    #   A list of Chime webhooks associated with the account.
+    #   A list of Amazon Chime webhooks associated with the account.
     #   @return [Array<Types::ChimeWebhookConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeChimeWebhookConfigurationsResult AWS API Documentation
@@ -615,9 +756,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeSlackChannelConfigurationsException AWS API Documentation
     #
-    class DescribeSlackChannelConfigurationsException < Aws::EmptyStructure; end
+    class DescribeSlackChannelConfigurationsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
@@ -634,7 +782,8 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] chat_configuration_arn
-    #   An optional ARN of a SlackChannelConfiguration to describe.
+    #   An optional Amazon Resource Number (ARN) of a
+    #   SlackChannelConfiguration to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeSlackChannelConfigurationsRequest AWS API Documentation
@@ -670,13 +819,20 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeSlackUserIdentitiesException AWS API Documentation
     #
-    class DescribeSlackUserIdentitiesException < Aws::EmptyStructure; end
+    class DescribeSlackUserIdentitiesException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration associated with the user
-    #   identities to describe.
+    #   The Amazon Resource Number (ARN) of the SlackChannelConfiguration
+    #   associated with the user identities to describe.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -726,9 +882,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/DescribeSlackWorkspacesException AWS API Documentation
     #
-    class DescribeSlackWorkspacesException < Aws::EmptyStructure; end
+    class DescribeSlackWorkspacesException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
@@ -754,7 +917,7 @@ module Aws::Chatbot
     end
 
     # @!attribute [rw] slack_workspaces
-    #   A list of Slack Workspaces registered with AWS Chatbot.
+    #   A list of Slack workspaces registered with AWS Chatbot.
     #   @return [Array<Types::SlackWorkspace>]
     #
     # @!attribute [rw] next_token
@@ -776,9 +939,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/GetAccountPreferencesException AWS API Documentation
     #
-    class GetAccountPreferencesException < Aws::EmptyStructure; end
+    class GetAccountPreferencesException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @api private
     #
@@ -787,7 +957,7 @@ module Aws::Chatbot
     class GetAccountPreferencesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_preferences
-    #   Preferences which apply for AWS Chatbot usage in the calling AWS
+    #   The preferences related to AWS Chatbot usage in the calling AWS
     #   account.
     #   @return [Types::AccountPreferences]
     #
@@ -802,12 +972,20 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/GetTeamsChannelConfigurationException AWS API Documentation
     #
-    class GetTeamsChannelConfigurationException < Aws::EmptyStructure; end
+    class GetTeamsChannelConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration to retrieve.
+    #   The Amazon Resource Number (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/GetTeamsChannelConfigurationRequest AWS API Documentation
@@ -831,39 +1009,73 @@ module Aws::Chatbot
       include Aws::Structure
     end
 
-    # Customer/consumer-facing internal service exception.
-    # https://w.amazon.com/index.php/AWS/API\_Standards/Exceptions#InternalServiceError
+    # Unexpected error during processing of request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/InternalServiceError AWS API Documentation
     #
-    class InternalServiceError < Aws::EmptyStructure; end
+    class InternalServiceError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
-    # Your request input doesn't meet the constraints that AWS Chatbot
-    # requires.
+    # Your request input doesn't meet the constraints required by AWS
+    # Chatbot.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/InvalidParameterException AWS API Documentation
     #
-    class InvalidParameterException < Aws::EmptyStructure; end
+    class InvalidParameterException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
-    # Your request input doesn't meet the constraints that AWS Chatbot
-    # requires.
+    # Your request input doesn't meet the constraints required by AWS
+    # Chatbot.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/InvalidRequestException AWS API Documentation
     #
-    class InvalidRequestException < Aws::EmptyStructure; end
+    class InvalidRequestException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # You have exceeded a service limit for AWS Chatbot.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/LimitExceededException AWS API Documentation
     #
-    class LimitExceededException < Aws::EmptyStructure; end
+    class LimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListMicrosoftTeamsConfiguredTeamsException AWS API Documentation
     #
-    class ListMicrosoftTeamsConfiguredTeamsException < Aws::EmptyStructure; end
+    class ListMicrosoftTeamsConfiguredTeamsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
@@ -889,8 +1101,8 @@ module Aws::Chatbot
     end
 
     # @!attribute [rw] configured_teams
-    #   A list of teams in Microsoft Teams that have been configured with
-    #   AWS Chatbot.
+    #   A list of teams in Microsoft Teams that are configured with AWS
+    #   Chatbot.
     #   @return [Array<Types::ConfiguredTeam>]
     #
     # @!attribute [rw] next_token
@@ -912,13 +1124,21 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListMicrosoftTeamsUserIdentitiesException AWS API Documentation
     #
-    class ListMicrosoftTeamsUserIdentitiesException < Aws::EmptyStructure; end
+    class ListMicrosoftTeamsUserIdentitiesException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration associated with
-    #   the user identities to list.
+    #   The Amazon Resource Number (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration associated with the user
+    #   identities to list.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -966,7 +1186,7 @@ module Aws::Chatbot
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the configuration.
+    #   The ARN you specified to list the tags of.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListTagsForResourceRequest AWS API Documentation
@@ -978,7 +1198,9 @@ module Aws::Chatbot
     end
 
     # @!attribute [rw] tags
-    #   A list of tags applied to the configuration.
+    #   Key-value pairs that are assigned to a resource, usually for the
+    #   purpose of grouping and searching for items. Tags are metadata that
+    #   you define.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListTagsForResourceResponse AWS API Documentation
@@ -992,9 +1214,16 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListTeamsChannelConfigurationsException AWS API Documentation
     #
-    class ListTeamsChannelConfigurationsException < Aws::EmptyStructure; end
+    class ListTeamsChannelConfigurationsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
@@ -1011,12 +1240,17 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4
-    #   in Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy
+    #   and paste the team ID from the console. For more information, see
+    #   [Step 1: Configure a Microsoft Teams client][1] in the <i> AWS
+    #   Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ListTeamsChannelConfigurationsRequest AWS API Documentation
@@ -1049,49 +1283,69 @@ module Aws::Chatbot
       include Aws::Structure
     end
 
-    # We were not able to find the resource for your request.
+    # We were unable to find the resource for your request
+    #
+    # @!attribute [rw] message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ResourceNotFoundException AWS API Documentation
     #
-    class ResourceNotFoundException < Aws::EmptyStructure; end
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/ServiceUnavailableException AWS API Documentation
     #
-    class ServiceUnavailableException < Aws::EmptyStructure; end
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An AWS Chatbot configuration for Slack.
     #
     # @!attribute [rw] slack_team_name
-    #   Name of the Slack Workspace.
+    #   Name of the Slack workspace.
     #   @return [String]
     #
     # @!attribute [rw] slack_team_id
-    #   The ID of the Slack workspace authorized with AWS Chatbot.
+    #   The ID of the Slack workspace authorized with Amazon Chime.
     #   @return [String]
     #
     # @!attribute [rw] slack_channel_id
-    #   The ID of the Slack channel. To get the ID, open Slack, right click
-    #   on the channel name in the left pane, then choose Copy Link. The
-    #   channel ID is the 9-character string at the end of the URL. For
-    #   example, ABCBBLZZZ.
+    #   The ID of the Slack channel.
+    #
+    #   To get this ID, open Slack, right click on the channel name in the
+    #   left pane, then choose Copy Link. The channel ID is the 9-character
+    #   string at the end of the URL. For example, ABCBBLZZZ.
     #   @return [String]
     #
     # @!attribute [rw] slack_channel_name
-    #   The name of the Slack Channel.
+    #   The name of the Slack channel.
     #   @return [String]
     #
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration.
+    #   The Amazon Resource Number (ARN) of the SlackChannelConfiguration.
     #   @return [String]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
@@ -1104,12 +1358,12 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
+    #   The AWS managed `AdministratorAccess` policy is applied by default
     #   if this is not set.
     #   @return [Array<String>]
     #
@@ -1118,7 +1372,8 @@ module Aws::Chatbot
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags applied to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string
+    #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/SlackChannelConfiguration AWS API Documentation
@@ -1136,22 +1391,27 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:slack_channel_name]
       include Aws::Structure
     end
 
-    # Identifes a User level permission for a channel configuration.
+    # Identifes a user level permission for a channel configuration.
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration associated with the user
-    #   identity.
+    #   The Amazon Resource Number (ARN) of the SlackChannelConfiguration
+    #   associated with the user identity to delete.
     #   @return [String]
     #
     # @!attribute [rw] slack_team_id
@@ -1159,12 +1419,12 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] slack_user_id
-    #   The ID of the user in Slack.
+    #   The ID of the user in Slack
     #   @return [String]
     #
     # @!attribute [rw] aws_user_identity
-    #   The AWS user identity ARN used to associate a Slack User Identity
-    #   with an IAM Role.
+    #   The AWS user identity ARN used to associate a Slack user ID with an
+    #   IAM Role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/SlackUserIdentity AWS API Documentation
@@ -1179,14 +1439,14 @@ module Aws::Chatbot
       include Aws::Structure
     end
 
-    # A Slack Workspace.
+    # A Slack workspace.
     #
     # @!attribute [rw] slack_team_id
     #   The ID of the Slack workspace authorized with AWS Chatbot.
     #   @return [String]
     #
     # @!attribute [rw] slack_team_name
-    #   Name of the Slack Workspace.
+    #   The name of the Slack workspace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/SlackWorkspace AWS API Documentation
@@ -1198,14 +1458,25 @@ module Aws::Chatbot
       include Aws::Structure
     end
 
-    # A tag applied to the configuration.
+    # A key-value pair. A tag consists of a tag key and a tag value. Tag
+    # keys and tag values are both required, but tag values can be empty
+    # (null) strings.
+    #
+    # Do not include confidential or sensitive information in this field.
+    #
+    # For more information, see [User-Defined Tag Restrictions][1] in the
+    # *AWS Billing and Cost Management User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     #
     # @!attribute [rw] tag_key
-    #   The tag key.
+    #   The key of the tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_value
-    #   The tag value.
+    #   The value of the tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/Tag AWS API Documentation
@@ -1249,12 +1520,17 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4
-    #   in Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy
+    #   and paste the team ID from the console. For more information, see
+    #   [Step 1: Configure a Microsoft Teams client][1] in the <i> AWS
+    #   Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #   @return [String]
     #
     # @!attribute [rw] team_name
@@ -1266,19 +1542,26 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration.
+    #   The Amazon Resource Name (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration associated with the user identity
+    #   to delete.
     #   @return [String]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS
-    #   Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] configuration_name
@@ -1286,12 +1569,12 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
+    #   The AWS managed `AdministratorAccess` policy is applied by default
     #   if this is not set.
     #   @return [Array<String>]
     #
@@ -1300,7 +1583,8 @@ module Aws::Chatbot
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   A list of tags applied to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string
+    #   map of key-value pairs.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TeamsChannelConfiguration AWS API Documentation
@@ -1319,39 +1603,50 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:channel_name, :team_name]
       include Aws::Structure
     end
 
     # Identifes a user level permission for a channel configuration.
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration associated with
-    #   the user identity.
+    #   The Amazon Resource Name (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration associated with the user identity
+    #   to delete.
     #   @return [String]
     #
     # @!attribute [rw] team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4
-    #   in Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy
+    #   and paste the team ID from the console. For more information, see
+    #   [Step 1: Configure a Microsoft Teams client][1] in the <i> AWS
+    #   Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   Id from Microsoft Teams for user.
+    #   The Microsoft Teams user ID.
     #   @return [String]
     #
     # @!attribute [rw] aws_user_identity
-    #   The AWS user identity ARN used to associate a Microsoft Teams User
+    #   The AWS user identity ARN used to associate a Microsoft Teams user
     #   Identity with an IAM Role.
     #   @return [String]
     #
@@ -1379,16 +1674,27 @@ module Aws::Chatbot
 
     # The supplied list of tags contains too many tags.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/TooManyTagsException AWS API Documentation
     #
-    class TooManyTagsException < Aws::EmptyStructure; end
+    class TooManyTagsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] resource_arn
-    #   The ARN of the configuration.
+    #   The value of the resource that will have the tag removed. An Amazon
+    #   Resource Name (ARN) is an identifier for a specific AWS resource,
+    #   such as a server, user, or role.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   A list of tag keys to remove from the configuration.
+    #   TagKeys are key-value pairs assigned to ARNs that can be used to
+    #   group and search for resources by type. This metadata can be
+    #   attached to resources for any purpose.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UntagResourceRequest AWS API Documentation
@@ -1407,25 +1713,34 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateAccountPreferencesException AWS API Documentation
     #
-    class UpdateAccountPreferencesException < Aws::EmptyStructure; end
+    class UpdateAccountPreferencesException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
     #   @return [Boolean]
     #
     # @!attribute [rw] training_data_collection_enabled
-    #   Turns on training data collection. This helps improve the AWS
-    #   Chatbot experience by allowing AWS Chatbot to store and use your
-    #   customer information, such as AWS Chatbot configurations,
-    #   notifications, user inputs, AWS Chatbot generated responses, and
-    #   interaction data. This data helps us to continuously improve and
-    #   develop Artificial Intelligence (AI) technologies. Your data is not
-    #   shared with any third parties and is protected using sophisticated
-    #   controls to prevent unauthorized access and misuse. AWS Chatbot does
-    #   not store or use interactions in chat channels with Amazon Q for
-    #   training AWS Chatbot’s AI technologies.
+    #   Turns on training data collection.
+    #
+    #   This helps improve the AWS Chatbot experience by allowing AWS
+    #   Chatbot to store and use your customer information, such as AWS
+    #   Chatbot configurations, notifications, user inputs, AWS Chatbot
+    #   generated responses, and interaction data. This data helps us to
+    #   continuously improve and develop Artificial Intelligence (AI)
+    #   technologies. Your data is not shared with any third parties and is
+    #   protected using sophisticated controls to prevent unauthorized
+    #   access and misuse. AWS Chatbot does not store or use interactions in
+    #   chat channels with Amazon Q for training AI technologies for AWS
+    #   Chatbot.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateAccountPreferencesRequest AWS API Documentation
@@ -1438,8 +1753,7 @@ module Aws::Chatbot
     end
 
     # @!attribute [rw] account_preferences
-    #   Preferences which apply for AWS Chatbot usage in the calling AWS
-    #   account.
+    #   Preferences related to AWS Chatbot usage in the calling AWS account.
     #   @return [Types::AccountPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateAccountPreferencesResult AWS API Documentation
@@ -1453,22 +1767,36 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateChimeWebhookConfigurationException AWS API Documentation
     #
-    class UpdateChimeWebhookConfigurationException < Aws::EmptyStructure; end
+    class UpdateChimeWebhookConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the ChimeWebhookConfiguration to update.
+    #   The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] webhook_description
-    #   Description of the webhook. Recommend using the convention
-    #   `RoomName/WebhookName`. See Chime setup tutorial for more details:
-    #   https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+    #   A description of the webhook. We recommend using the convention
+    #   `RoomName/WebhookName`.
+    #
+    #   For more information, see [Tutorial: Get started with Amazon
+    #   Chime][1] in the <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
     #   @return [String]
     #
     # @!attribute [rw] webhook_url
-    #   URL for the Chime webhook.
+    #   The URL for the Amazon Chime webhook.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
@@ -1477,14 +1805,19 @@ module Aws::Chatbot
     #   @return [Array<String>]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateChimeWebhookConfigurationRequest AWS API Documentation
@@ -1496,12 +1829,12 @@ module Aws::Chatbot
       :sns_topic_arns,
       :iam_role_arn,
       :logging_level)
-      SENSITIVE = []
+      SENSITIVE = [:webhook_description, :webhook_url]
       include Aws::Structure
     end
 
     # @!attribute [rw] webhook_configuration
-    #   Chime webhook configuration.
+    #   A Amazon Chime webhook configuration.
     #   @return [Types::ChimeWebhookConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateChimeWebhookConfigurationResult AWS API Documentation
@@ -1515,44 +1848,58 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateSlackChannelConfigurationException AWS API Documentation
     #
-    class UpdateSlackChannelConfigurationException < Aws::EmptyStructure; end
+    class UpdateSlackChannelConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration to update.
+    #   The Amazon Resource Number (ARN) of the SlackChannelConfiguration to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] slack_channel_id
-    #   The ID of the Slack channel. To get the ID, open Slack, right click
-    #   on the channel name in the left pane, then choose Copy Link. The
-    #   channel ID is the 9-character string at the end of the URL. For
-    #   example, ABCBBLZZZ.
+    #   The ID of the Slack channel.
+    #
+    #   To get this ID, open Slack, right click on the channel name in the
+    #   left pane, then choose Copy Link. The channel ID is the 9-character
+    #   string at the end of the URL. For example, ABCBBLZZZ.
     #   @return [String]
     #
     # @!attribute [rw] slack_channel_name
-    #   The name of the Slack Channel.
+    #   The name of the Slack channel.
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS
-    #   Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
+    #   The AWS managed `AdministratorAccess` policy is applied by default
     #   if this is not set.
     #   @return [Array<String>]
     #
@@ -1571,7 +1918,7 @@ module Aws::Chatbot
       :logging_level,
       :guardrail_policy_arns,
       :user_authorization_required)
-      SENSITIVE = []
+      SENSITIVE = [:slack_channel_name]
       include Aws::Structure
     end
 
@@ -1590,12 +1937,20 @@ module Aws::Chatbot
     # We can’t process your request right now because of a server issue. Try
     # again later.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chatbot-2017-10-11/UpdateTeamsChannelConfigurationException AWS API Documentation
     #
-    class UpdateTeamsChannelConfigurationException < Aws::EmptyStructure; end
+    class UpdateTeamsChannelConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration to update.
+    #   The Amazon Resource Number (ARN) of the TeamsChannelConfiguration to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] channel_id
@@ -1607,24 +1962,29 @@ module Aws::Chatbot
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS
-    #   Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #   @return [Array<String>]
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS
-    #   Chatbot. This is a user-defined role that AWS Chatbot will assume.
-    #   This is not the service-linked role. For more information, see IAM
-    #   Policies for AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the
+    #   <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #   @return [String]
     #
     # @!attribute [rw] logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #   @return [String]
     #
     # @!attribute [rw] guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
+    #   The AWS managed `AdministratorAccess` policy is applied by default
     #   if this is not set.
     #   @return [Array<String>]
     #
@@ -1643,7 +2003,7 @@ module Aws::Chatbot
       :logging_level,
       :guardrail_policy_arns,
       :user_authorization_required)
-      SENSITIVE = []
+      SENSITIVE = [:channel_name]
       include Aws::Structure
     end
 

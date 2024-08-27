@@ -96,6 +96,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::GetGuardrail.build(context)
           when :get_imported_model
             Aws::Bedrock::Endpoints::GetImportedModel.build(context)
+          when :get_inference_profile
+            Aws::Bedrock::Endpoints::GetInferenceProfile.build(context)
           when :get_model_copy_job
             Aws::Bedrock::Endpoints::GetModelCopyJob.build(context)
           when :get_model_customization_job
@@ -118,6 +120,8 @@ module Aws::Bedrock
             Aws::Bedrock::Endpoints::ListGuardrails.build(context)
           when :list_imported_models
             Aws::Bedrock::Endpoints::ListImportedModels.build(context)
+          when :list_inference_profiles
+            Aws::Bedrock::Endpoints::ListInferenceProfiles.build(context)
           when :list_model_copy_jobs
             Aws::Bedrock::Endpoints::ListModelCopyJobs.build(context)
           when :list_model_customization_jobs

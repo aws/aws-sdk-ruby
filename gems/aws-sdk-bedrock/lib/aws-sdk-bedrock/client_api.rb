@@ -109,6 +109,8 @@ module Aws::Bedrock
     GetGuardrailResponse = Shapes::StructureShape.new(name: 'GetGuardrailResponse')
     GetImportedModelRequest = Shapes::StructureShape.new(name: 'GetImportedModelRequest')
     GetImportedModelResponse = Shapes::StructureShape.new(name: 'GetImportedModelResponse')
+    GetInferenceProfileRequest = Shapes::StructureShape.new(name: 'GetInferenceProfileRequest')
+    GetInferenceProfileResponse = Shapes::StructureShape.new(name: 'GetInferenceProfileResponse')
     GetModelCopyJobRequest = Shapes::StructureShape.new(name: 'GetModelCopyJobRequest')
     GetModelCopyJobResponse = Shapes::StructureShape.new(name: 'GetModelCopyJobResponse')
     GetModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'GetModelCustomizationJobRequest')
@@ -207,6 +209,17 @@ module Aws::Bedrock
     ImportedModelName = Shapes::StringShape.new(name: 'ImportedModelName')
     ImportedModelSummary = Shapes::StructureShape.new(name: 'ImportedModelSummary')
     ImportedModelSummaryList = Shapes::ListShape.new(name: 'ImportedModelSummaryList')
+    InferenceProfileArn = Shapes::StringShape.new(name: 'InferenceProfileArn')
+    InferenceProfileDescription = Shapes::StringShape.new(name: 'InferenceProfileDescription')
+    InferenceProfileId = Shapes::StringShape.new(name: 'InferenceProfileId')
+    InferenceProfileIdentifier = Shapes::StringShape.new(name: 'InferenceProfileIdentifier')
+    InferenceProfileModel = Shapes::StructureShape.new(name: 'InferenceProfileModel')
+    InferenceProfileModels = Shapes::ListShape.new(name: 'InferenceProfileModels')
+    InferenceProfileName = Shapes::StringShape.new(name: 'InferenceProfileName')
+    InferenceProfileStatus = Shapes::StringShape.new(name: 'InferenceProfileStatus')
+    InferenceProfileSummaries = Shapes::ListShape.new(name: 'InferenceProfileSummaries')
+    InferenceProfileSummary = Shapes::StructureShape.new(name: 'InferenceProfileSummary')
+    InferenceProfileType = Shapes::StringShape.new(name: 'InferenceProfileType')
     InferenceType = Shapes::StringShape.new(name: 'InferenceType')
     InferenceTypeList = Shapes::ListShape.new(name: 'InferenceTypeList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -224,6 +237,8 @@ module Aws::Bedrock
     ListGuardrailsResponse = Shapes::StructureShape.new(name: 'ListGuardrailsResponse')
     ListImportedModelsRequest = Shapes::StructureShape.new(name: 'ListImportedModelsRequest')
     ListImportedModelsResponse = Shapes::StructureShape.new(name: 'ListImportedModelsResponse')
+    ListInferenceProfilesRequest = Shapes::StructureShape.new(name: 'ListInferenceProfilesRequest')
+    ListInferenceProfilesResponse = Shapes::StructureShape.new(name: 'ListInferenceProfilesResponse')
     ListModelCopyJobsRequest = Shapes::StructureShape.new(name: 'ListModelCopyJobsRequest')
     ListModelCopyJobsResponse = Shapes::StructureShape.new(name: 'ListModelCopyJobsResponse')
     ListModelCustomizationJobsRequest = Shapes::StructureShape.new(name: 'ListModelCustomizationJobsRequest')
@@ -696,6 +711,20 @@ module Aws::Bedrock
     GetImportedModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
     GetImportedModelResponse.struct_class = Types::GetImportedModelResponse
 
+    GetInferenceProfileRequest.add_member(:inference_profile_identifier, Shapes::ShapeRef.new(shape: InferenceProfileIdentifier, required: true, location: "uri", location_name: "inferenceProfileIdentifier"))
+    GetInferenceProfileRequest.struct_class = Types::GetInferenceProfileRequest
+
+    GetInferenceProfileResponse.add_member(:inference_profile_name, Shapes::ShapeRef.new(shape: InferenceProfileName, required: true, location_name: "inferenceProfileName"))
+    GetInferenceProfileResponse.add_member(:models, Shapes::ShapeRef.new(shape: InferenceProfileModels, required: true, location_name: "models"))
+    GetInferenceProfileResponse.add_member(:description, Shapes::ShapeRef.new(shape: InferenceProfileDescription, location_name: "description"))
+    GetInferenceProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetInferenceProfileResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetInferenceProfileResponse.add_member(:inference_profile_arn, Shapes::ShapeRef.new(shape: InferenceProfileArn, required: true, location_name: "inferenceProfileArn"))
+    GetInferenceProfileResponse.add_member(:inference_profile_id, Shapes::ShapeRef.new(shape: InferenceProfileId, required: true, location_name: "inferenceProfileId"))
+    GetInferenceProfileResponse.add_member(:status, Shapes::ShapeRef.new(shape: InferenceProfileStatus, required: true, location_name: "status"))
+    GetInferenceProfileResponse.add_member(:type, Shapes::ShapeRef.new(shape: InferenceProfileType, required: true, location_name: "type"))
+    GetInferenceProfileResponse.struct_class = Types::GetInferenceProfileResponse
+
     GetModelCopyJobRequest.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCopyJobArn, required: true, location: "uri", location_name: "jobArn"))
     GetModelCopyJobRequest.struct_class = Types::GetModelCopyJobRequest
 
@@ -963,6 +992,24 @@ module Aws::Bedrock
 
     ImportedModelSummaryList.member = Shapes::ShapeRef.new(shape: ImportedModelSummary)
 
+    InferenceProfileModel.add_member(:model_arn, Shapes::ShapeRef.new(shape: FoundationModelArn, location_name: "modelArn"))
+    InferenceProfileModel.struct_class = Types::InferenceProfileModel
+
+    InferenceProfileModels.member = Shapes::ShapeRef.new(shape: InferenceProfileModel)
+
+    InferenceProfileSummaries.member = Shapes::ShapeRef.new(shape: InferenceProfileSummary)
+
+    InferenceProfileSummary.add_member(:inference_profile_name, Shapes::ShapeRef.new(shape: InferenceProfileName, required: true, location_name: "inferenceProfileName"))
+    InferenceProfileSummary.add_member(:models, Shapes::ShapeRef.new(shape: InferenceProfileModels, required: true, location_name: "models"))
+    InferenceProfileSummary.add_member(:description, Shapes::ShapeRef.new(shape: InferenceProfileDescription, location_name: "description"))
+    InferenceProfileSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    InferenceProfileSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    InferenceProfileSummary.add_member(:inference_profile_arn, Shapes::ShapeRef.new(shape: InferenceProfileArn, required: true, location_name: "inferenceProfileArn"))
+    InferenceProfileSummary.add_member(:inference_profile_id, Shapes::ShapeRef.new(shape: InferenceProfileId, required: true, location_name: "inferenceProfileId"))
+    InferenceProfileSummary.add_member(:status, Shapes::ShapeRef.new(shape: InferenceProfileStatus, required: true, location_name: "status"))
+    InferenceProfileSummary.add_member(:type, Shapes::ShapeRef.new(shape: InferenceProfileType, required: true, location_name: "type"))
+    InferenceProfileSummary.struct_class = Types::InferenceProfileSummary
+
     InferenceTypeList.member = Shapes::ShapeRef.new(shape: InferenceType)
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
@@ -1028,6 +1075,14 @@ module Aws::Bedrock
     ListImportedModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImportedModelsResponse.add_member(:model_summaries, Shapes::ShapeRef.new(shape: ImportedModelSummaryList, location_name: "modelSummaries"))
     ListImportedModelsResponse.struct_class = Types::ListImportedModelsResponse
+
+    ListInferenceProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListInferenceProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListInferenceProfilesRequest.struct_class = Types::ListInferenceProfilesRequest
+
+    ListInferenceProfilesResponse.add_member(:inference_profile_summaries, Shapes::ShapeRef.new(shape: InferenceProfileSummaries, location_name: "inferenceProfileSummaries"))
+    ListInferenceProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListInferenceProfilesResponse.struct_class = Types::ListInferenceProfilesResponse
 
     ListModelCopyJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
     ListModelCopyJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
@@ -1627,6 +1682,19 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_inference_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInferenceProfile"
+        o.http_method = "GET"
+        o.http_request_uri = "/inference-profiles/{inferenceProfileIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetInferenceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInferenceProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_model_copy_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetModelCopyJob"
         o.http_method = "GET"
@@ -1776,6 +1844,24 @@ module Aws::Bedrock
         o.http_request_uri = "/imported-models"
         o.input = Shapes::ShapeRef.new(shape: ListImportedModelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListImportedModelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_inference_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInferenceProfiles"
+        o.http_method = "GET"
+        o.http_request_uri = "/inference-profiles"
+        o.input = Shapes::ShapeRef.new(shape: ListInferenceProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInferenceProfilesResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
