@@ -28,6 +28,7 @@ end
 # It is need to provide session credentials and assume role support.
 # Only building source, but not gemspecs, version file, etc.
 task 'build:aws-sdk-sts' do
+  Aws::STS if Aws.autoload?(:STS) # force autoload from core
   sts = BuildTools::Services.service('sts')
   generator = AwsSdkCodeGenerator::CodeBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,
@@ -48,6 +49,7 @@ end
 # It is need to provide SSO Credentials.
 # Only building source, but not gemspecs, version file, etc.
 task 'build:aws-sdk-sso' do
+  Aws::SSO if Aws.autoload?(:SSO) # force autoload from core
   sso = BuildTools::Services.service('sso')
   generator = AwsSdkCodeGenerator::CodeBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,
@@ -66,6 +68,7 @@ end
 # Aws::SSOOIDC is generated directly into the `aws-sdk-core` gem.
 # Only building source, but not gemspecs, version file, etc.
 task 'build:aws-sdk-ssooidc' do
+  Aws::SSOOIDC if Aws.autoload?(:SSOOIDC) # force autoload from core
   ssooidc = BuildTools::Services.service('ssooidc')
   generator = AwsSdkCodeGenerator::CodeBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,

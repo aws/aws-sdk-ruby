@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove autoloads for service gems bundled in `aws-sdk-core` (STS, SSO, SSOOIDC).
+
 3.201.0 (2024-08-12)
 ------------------
 
