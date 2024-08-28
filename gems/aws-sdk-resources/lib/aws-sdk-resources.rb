@@ -273,6 +273,7 @@ module Aws
   autoload :OpsWorksCM, 'aws-sdk-opsworkscm'
   autoload :Organizations, 'aws-sdk-organizations'
   autoload :Outposts, 'aws-sdk-outposts'
+  autoload :PCS, 'aws-sdk-pcs'
   autoload :PI, 'aws-sdk-pi'
   autoload :Panorama, 'aws-sdk-panorama'
   autoload :PaymentCryptography, 'aws-sdk-paymentcryptography'

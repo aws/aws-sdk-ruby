@@ -969,6 +969,9 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the Elastic IP address.
     #
+    # @option params [String] :ipam_pool_id
+    #   The ID of an IPAM pool.
+    #
     # @return [Types::AllocateAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllocateAddressResult#public_ip #public_ip} => String
@@ -1017,6 +1020,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     ipam_pool_id: "IpamPoolId",
     #   })
     #
     # @example Response structure
@@ -1291,7 +1295,7 @@ module Aws::EC2
     #   resp.ipam_pool_allocation.ipam_pool_allocation_id #=> String
     #   resp.ipam_pool_allocation.description #=> String
     #   resp.ipam_pool_allocation.resource_id #=> String
-    #   resp.ipam_pool_allocation.resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet"
+    #   resp.ipam_pool_allocation.resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet", "eip"
     #   resp.ipam_pool_allocation.resource_region #=> String
     #   resp.ipam_pool_allocation.resource_owner #=> String
     #
@@ -42800,7 +42804,7 @@ module Aws::EC2
     #   resp.ipam_discovered_public_addresses[0].address_owner_id #=> String
     #   resp.ipam_discovered_public_addresses[0].address_allocation_id #=> String
     #   resp.ipam_discovered_public_addresses[0].association_status #=> String, one of "associated", "disassociated"
-    #   resp.ipam_discovered_public_addresses[0].address_type #=> String, one of "service-managed-ip", "service-managed-byoip", "amazon-owned-eip", "byoip", "ec2-public-ip"
+    #   resp.ipam_discovered_public_addresses[0].address_type #=> String, one of "service-managed-ip", "service-managed-byoip", "amazon-owned-eip", "amazon-owned-contig", "byoip", "ec2-public-ip"
     #   resp.ipam_discovered_public_addresses[0].service #=> String, one of "nat-gateway", "database-migration-service", "redshift", "elastic-container-service", "relational-database-service", "site-to-site-vpn", "load-balancer", "global-accelerator", "other"
     #   resp.ipam_discovered_public_addresses[0].service_resource #=> String
     #   resp.ipam_discovered_public_addresses[0].vpc_id #=> String
@@ -42981,7 +42985,7 @@ module Aws::EC2
     #   resp.ipam_pool_allocations[0].ipam_pool_allocation_id #=> String
     #   resp.ipam_pool_allocations[0].description #=> String
     #   resp.ipam_pool_allocations[0].resource_id #=> String
-    #   resp.ipam_pool_allocations[0].resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet"
+    #   resp.ipam_pool_allocations[0].resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet", "eip"
     #   resp.ipam_pool_allocations[0].resource_region #=> String
     #   resp.ipam_pool_allocations[0].resource_owner #=> String
     #   resp.next_token #=> String
@@ -53430,8 +53434,9 @@ module Aws::EC2
 
     # Registers an AMI. When you're creating an instance-store backed AMI,
     # registering the AMI is the final step in the creation process. For
-    # more information about creating AMIs, see [Create your own AMI][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # more information about creating AMIs, see [Create an AMI from a
+    # snapshot][1] and [Create an instance-store backed AMI][2] in the
+    # *Amazon EC2 User Guide*.
     #
     # <note markdown="1"> For Amazon EBS-backed instances, CreateImage creates and registers the
     # AMI in a single request, so you don't have to register the AMI
@@ -53454,28 +53459,28 @@ module Aws::EC2
     # encrypted, or encryption by default is enabled, the root volume of an
     # instance launched from the AMI is encrypted.
     #
-    # For more information, see [Create a Linux AMI from a snapshot][2] and
-    # [Use encryption with Amazon EBS-backed AMIs][3] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Create an AMI from a snapshot][1] and [Use
+    # encryption with Amazon EBS-backed AMIs][3] in the *Amazon EC2 User
+    # Guide*.
     #
     # **Amazon Web Services Marketplace product codes**
     #
     # If any snapshots have Amazon Web Services Marketplace product codes,
     # they are copied to the new AMI.
     #
-    # Windows and some Linux distributions, such as Red Hat Enterprise Linux
-    # (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2
-    # billing product code associated with an AMI to verify the subscription
-    # status for package updates. To create a new AMI for operating systems
-    # that require a billing product code, instead of registering the AMI,
-    # do the following to preserve the billing product code association:
-    #
-    # 1.  Launch an instance from an existing AMI with that billing product
-    #     code.
-    #
-    # 2.  Customize the instance.
-    #
-    # 3.  Create an AMI from the instance using CreateImage.
+    # In most cases, AMIs for Windows, RedHat, SUSE, and SQL Server require
+    # correct licensing information to be present on the AMI. For more
+    # information, see [Understand AMI billing information][4] in the
+    # *Amazon EC2 User Guide*. When creating an AMI from a snapshot, the
+    # `RegisterImage` operation derives the correct billing information from
+    # the snapshot's metadata, but this requires the appropriate metadata
+    # to be present. To verify if the correct billing information was
+    # applied, check the `PlatformDetails` field on the new AMI. If the
+    # field is empty or doesn't match the expected operating system code
+    # (for example, Windows, RedHat, SUSE, or SQL), the AMI creation was
+    # unsuccessful, and you should discard the AMI and instead create the
+    # AMI from an instance using CreateImage. For more information, see
+    # [Create an AMI from an instance ][5] in the *Amazon EC2 User Guide*.
     #
     # If you purchase a Reserved Instance to apply to an On-Demand Instance
     # that was launched from an AMI with a billing product code, make sure
@@ -53488,10 +53493,11 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-instance-store.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#how-to-create-ebs-ami
     #
     # @option params [String] :image_location
     #   The full path to your AMI manifest in Amazon S3 storage. The specified
@@ -60103,7 +60109,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.470.0'
+      context[:gem_version] = '1.471.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

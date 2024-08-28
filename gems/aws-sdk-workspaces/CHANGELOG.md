@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2024-08-28)
+------------------
+
+* Feature - Documentation-only update that clarifies the StartWorkspaces and StopWorkspaces actions, and a few other minor edits.
+
 1.113.0 (2024-08-26)
 ------------------
 

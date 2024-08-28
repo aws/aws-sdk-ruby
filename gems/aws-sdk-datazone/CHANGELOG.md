@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-08-28)
+------------------
+
+* Feature - Update regex to include dot character to be consistent with IAM role creation in the authorized principal field for create and update subscription target.
+
 1.18.0 (2024-08-05)
 ------------------
 

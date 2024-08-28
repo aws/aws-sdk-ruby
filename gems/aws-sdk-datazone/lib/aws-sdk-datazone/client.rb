@@ -2889,7 +2889,7 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Deletes an data product in Amazon DataZone.
+    # Deletes a data product in Amazon DataZone.
     #
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain in which the data product is
@@ -9583,7 +9583,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

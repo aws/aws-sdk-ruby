@@ -897,6 +897,10 @@ module Aws::EC2
     #   The tags to assign to the Elastic IP address.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] ipam_pool_id
+    #   The ID of an IPAM pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressRequest AWS API Documentation
     #
     class AllocateAddressRequest < Struct.new(
@@ -906,7 +910,8 @@ module Aws::EC2
       :network_border_group,
       :customer_owned_ipv_4_pool,
       :dry_run,
-      :tag_specifications)
+      :tag_specifications,
+      :ipam_pool_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.969.0 (2024-08-28)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::PCS`.
+
 1.968.0 (2024-08-22)
 ------------------
 

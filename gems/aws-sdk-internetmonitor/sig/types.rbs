@@ -368,7 +368,7 @@ module Aws::InternetMonitor
       attr_accessor monitor_name: ::String
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
-      attr_accessor query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS")
+      attr_accessor query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS" | "OVERALL_TRAFFIC_SUGGESTIONS" | "OVERALL_TRAFFIC_SUGGESTIONS_DETAILS")
       attr_accessor filter_parameters: ::Array[Types::FilterParameter]
       attr_accessor linked_account_id: ::String
       SENSITIVE: []

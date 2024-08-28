@@ -250,7 +250,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_configuration_profile-instance_method
       def delete_configuration_profile: (
                                           application_id: ::String,
-                                          configuration_profile_id: ::String
+                                          configuration_profile_id: ::String,
+                                          ?deletion_protection_check: ("ACCOUNT_DEFAULT" | "APPLY" | "BYPASS")
                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -262,8 +263,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_environment-instance_method
       def delete_environment: (
+                                environment_id: ::String,
                                 application_id: ::String,
-                                environment_id: ::String
+                                ?deletion_protection_check: ("ACCOUNT_DEFAULT" | "APPLY" | "BYPASS")
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -287,6 +289,14 @@ module Aws
                                                  version_number: ::Integer
                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AccountSettings]
+        def deletion_protection: () -> Types::DeletionProtectionSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_account_settings-instance_method
+      def get_account_settings: () -> _GetAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
 
       interface _GetApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Application]
@@ -656,6 +666,19 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AccountSettings]
+        def deletion_protection: () -> Types::DeletionProtectionSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_account_settings-instance_method
+      def update_account_settings: (
+                                     ?deletion_protection: {
+                                       enabled: bool?,
+                                       protection_period_in_minutes: ::Integer?
+                                     }
+                                   ) -> _UpdateAccountSettingsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
 
       interface _UpdateApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Application]

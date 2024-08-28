@@ -1108,7 +1108,14 @@ module Aws::AppConfig
     end
 
     # Creates a new configuration in the AppConfig hosted configuration
-    # store.
+    # store. If you're creating a feature flag, we recommend you
+    # familiarize yourself with the JSON schema for feature flag data. For
+    # more information, see [Type reference for
+    # AWS.AppConfig.FeatureFlags][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -1120,7 +1127,12 @@ module Aws::AppConfig
     #   A description of the configuration.
     #
     # @option params [required, String, StringIO, File] :content
-    #   The content of the configuration or the configuration data.
+    #   The configuration data, as bytes.
+    #
+    #   <note markdown="1"> AppConfig accepts any type of data, including text formats like JSON
+    #   or TOML, or binary formats like protocol buffers or compressed data.
+    #
+    #    </note>
     #
     # @option params [required, String] :content_type
     #   A standard MIME type describing the format of the configuration
@@ -1207,8 +1219,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Deletes an application. Deleting an application does not delete a
-    # configuration from a host.
+    # Deletes an application.
     #
     # @option params [required, String] :application_id
     #   The ID of the application to delete.
@@ -1239,8 +1250,14 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Deletes a configuration profile. Deleting a configuration profile does
-    # not delete a configuration from a host.
+    # Deletes a configuration profile.
+    #
+    # To prevent users from unintentionally deleting actively-used
+    # configuration profiles, enable [deletion protection][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html
     #
     # @option params [required, String] :application_id
     #   The application ID that includes the configuration profile you want to
@@ -1248,6 +1265,32 @@ module Aws::AppConfig
     #
     # @option params [required, String] :configuration_profile_id
     #   The ID of the configuration profile you want to delete.
+    #
+    # @option params [String] :deletion_protection_check
+    #   A parameter to configure deletion protection. If enabled, deletion
+    #   protection prevents a user from deleting a configuration profile if
+    #   your application has called either [GetLatestConfiguration][1] or for
+    #   the configuration profile during the specified interval.
+    #
+    #   This parameter supports the following values:
+    #
+    #   * `BYPASS`: Instructs AppConfig to bypass the deletion protection
+    #     check and delete a configuration profile even if deletion protection
+    #     would have otherwise prevented it.
+    #
+    #   * `APPLY`: Instructs the deletion protection check to run, even if
+    #     deletion protection is disabled at the account level. `APPLY` also
+    #     forces the deletion protection check to run against resources
+    #     created in the past hour, which are normally excluded from deletion
+    #     protection checks.
+    #
+    #   * `ACCOUNT_DEFAULT`: The default setting, which instructs AppConfig to
+    #     implement the deletion protection value specified in the
+    #     `UpdateAccountSettings` API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1266,6 +1309,7 @@ module Aws::AppConfig
     #   resp = client.delete_configuration_profile({
     #     application_id: "Id", # required
     #     configuration_profile_id: "Id", # required
+    #     deletion_protection_check: "ACCOUNT_DEFAULT", # accepts ACCOUNT_DEFAULT, APPLY, BYPASS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteConfigurationProfile AWS API Documentation
@@ -1277,8 +1321,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Deletes a deployment strategy. Deleting a deployment strategy does not
-    # delete a configuration from a host.
+    # Deletes a deployment strategy.
     #
     # @option params [required, String] :deployment_strategy_id
     #   The ID of the deployment strategy you want to delete.
@@ -1309,15 +1352,47 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Deletes an environment. Deleting an environment does not delete a
-    # configuration from a host.
+    # Deletes an environment.
+    #
+    # To prevent users from unintentionally deleting actively-used
+    # environments, enable [deletion protection][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html
+    #
+    # @option params [required, String] :environment_id
+    #   The ID of the environment that you want to delete.
     #
     # @option params [required, String] :application_id
     #   The application ID that includes the environment that you want to
     #   delete.
     #
-    # @option params [required, String] :environment_id
-    #   The ID of the environment that you want to delete.
+    # @option params [String] :deletion_protection_check
+    #   A parameter to configure deletion protection. If enabled, deletion
+    #   protection prevents a user from deleting an environment if your
+    #   application called either [GetLatestConfiguration][1] or in the
+    #   environment during the specified interval.
+    #
+    #   This parameter supports the following values:
+    #
+    #   * `BYPASS`: Instructs AppConfig to bypass the deletion protection
+    #     check and delete a configuration profile even if deletion protection
+    #     would have otherwise prevented it.
+    #
+    #   * `APPLY`: Instructs the deletion protection check to run, even if
+    #     deletion protection is disabled at the account level. `APPLY` also
+    #     forces the deletion protection check to run against resources
+    #     created in the past hour, which are normally excluded from deletion
+    #     protection checks.
+    #
+    #   * `ACCOUNT_DEFAULT`: The default setting, which instructs AppConfig to
+    #     implement the deletion protection value specified in the
+    #     `UpdateAccountSettings` API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1334,8 +1409,9 @@ module Aws::AppConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_environment({
-    #     application_id: "Id", # required
     #     environment_id: "Id", # required
+    #     application_id: "Id", # required
+    #     deletion_protection_check: "ACCOUNT_DEFAULT", # accepts ACCOUNT_DEFAULT, APPLY, BYPASS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteEnvironment AWS API Documentation
@@ -1442,6 +1518,27 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
+    # Returns information about the status of the `DeletionProtection`
+    # parameter.
+    #
+    # @return [Types::AccountSettings] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AccountSettings#deletion_protection #deletion_protection} => Types::DeletionProtectionSettings
+    #
+    # @example Response structure
+    #
+    #   resp.deletion_protection.enabled #=> Boolean
+    #   resp.deletion_protection.protection_period_in_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetAccountSettings AWS API Documentation
+    #
+    # @overload get_account_settings(params = {})
+    # @param [Hash] params ({})
+    def get_account_settings(params = {}, options = {})
+      req = build_request(:get_account_settings, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about an application.
     #
     # @option params [required, String] :application_id
@@ -1497,7 +1594,7 @@ module Aws::AppConfig
     #   should use the [StartConfigurationSession][1] and
     #   [GetLatestConfiguration][2] APIs instead.
     #
-    # * `GetConfiguration` is a priced call. For more information, see
+    # * GetConfiguration is a priced call. For more information, see
     #   [Pricing][3].
     #
     #
@@ -1525,24 +1622,24 @@ module Aws::AppConfig
     #   defined in the deployment strategy.
     #
     # @option params [String] :client_configuration_version
-    #   The configuration version returned in the most recent
-    #   `GetConfiguration` response.
+    #   The configuration version returned in the most recent GetConfiguration
+    #   response.
     #
     #   AppConfig uses the value of the `ClientConfigurationVersion` parameter
     #   to identify the configuration version on your clients. If you don’t
-    #   send `ClientConfigurationVersion` with each call to
-    #   `GetConfiguration`, your clients receive the current configuration.
-    #   You are charged each time your clients receive a configuration.
+    #   send `ClientConfigurationVersion` with each call to GetConfiguration,
+    #   your clients receive the current configuration. You are charged each
+    #   time your clients receive a configuration.
     #
     #    To avoid excess charges, we recommend you use the
     #   [StartConfigurationSession][1] and [GetLatestConfiguration][2] APIs,
     #   which track the client configuration version on your behalf. If you
-    #   choose to continue using `GetConfiguration`, we recommend that you
+    #   choose to continue using GetConfiguration, we recommend that you
     #   include the `ClientConfigurationVersion` value with every call to
-    #   `GetConfiguration`. The value to use for `ClientConfigurationVersion`
+    #   GetConfiguration. The value to use for `ClientConfigurationVersion`
     #   comes from the `ConfigurationVersion` attribute returned by
-    #   `GetConfiguration` when there is new or updated data, and should be
-    #   saved for subsequent calls to `GetConfiguration`.
+    #   GetConfiguration when there is new or updated data, and should be
+    #   saved for subsequent calls to GetConfiguration.
     #
     #   For more information about working with configurations, see
     #   [Retrieving the Configuration][3] in the *AppConfig User Guide*.
@@ -3155,6 +3252,47 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
+    # Updates the value of the `DeletionProtection` parameter.
+    #
+    # @option params [Types::DeletionProtectionSettings] :deletion_protection
+    #   A parameter to configure deletion protection. If enabled, deletion
+    #   protection prevents a user from deleting a configuration profile or an
+    #   environment if AppConfig has called either [GetLatestConfiguration][1]
+    #   or for the configuration profile or from the environment during the
+    #   specified interval. Deletion protection is disabled by default. The
+    #   default interval for `ProtectionPeriodInMinutes` is 60.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+    #
+    # @return [Types::AccountSettings] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AccountSettings#deletion_protection #deletion_protection} => Types::DeletionProtectionSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_settings({
+    #     deletion_protection: {
+    #       enabled: false,
+    #       protection_period_in_minutes: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deletion_protection.enabled #=> Boolean
+    #   resp.deletion_protection.protection_period_in_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateAccountSettings AWS API Documentation
+    #
+    # @overload update_account_settings(params = {})
+    # @param [Hash] params ({})
+    def update_account_settings(params = {}, options = {})
+      req = build_request(:update_account_settings, params)
+      req.send_request(options)
+    end
+
     # Updates an application.
     #
     # @option params [required, String] :application_id
@@ -3282,7 +3420,7 @@ module Aws::AppConfig
     #   resp = client.update_configuration_profile({
     #     application_id: "Id", # required
     #     configuration_profile_id: "Id", # required
-    #     name: "Name",
+    #     name: "LongName",
     #     description: "Description",
     #     retrieval_role_arn: "RoleArn",
     #     validators: [
@@ -3702,7 +3840,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-08-28)
+------------------
+
+* Feature - This release removed support for Calabash, UI Automation, Built-in Explorer, remote access record, remote access replay, and web performance profile framework in ScheduleRun API.
+
 1.72.0 (2024-07-08)
 ------------------
 

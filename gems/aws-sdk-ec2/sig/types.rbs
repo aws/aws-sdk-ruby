@@ -243,6 +243,7 @@ module Aws::EC2
       attr_accessor customer_owned_ipv_4_pool: ::String
       attr_accessor dry_run: bool
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor ipam_pool_id: ::String
       SENSITIVE: []
     end
 
@@ -9420,7 +9421,7 @@ module Aws::EC2
       attr_accessor address_owner_id: ::String
       attr_accessor address_allocation_id: ::String
       attr_accessor association_status: ("associated" | "disassociated")
-      attr_accessor address_type: ("service-managed-ip" | "service-managed-byoip" | "amazon-owned-eip" | "byoip" | "ec2-public-ip")
+      attr_accessor address_type: ("service-managed-ip" | "service-managed-byoip" | "amazon-owned-eip" | "amazon-owned-contig" | "byoip" | "ec2-public-ip")
       attr_accessor service: ("nat-gateway" | "database-migration-service" | "redshift" | "elastic-container-service" | "relational-database-service" | "site-to-site-vpn" | "load-balancer" | "global-accelerator" | "other")
       attr_accessor service_resource: ::String
       attr_accessor vpc_id: ::String
@@ -9512,7 +9513,7 @@ module Aws::EC2
       attr_accessor ipam_pool_allocation_id: ::String
       attr_accessor description: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("ipam-pool" | "vpc" | "ec2-public-ipv4-pool" | "custom" | "subnet")
+      attr_accessor resource_type: ("ipam-pool" | "vpc" | "ec2-public-ipv4-pool" | "custom" | "subnet" | "eip")
       attr_accessor resource_region: ::String
       attr_accessor resource_owner: ::String
       SENSITIVE: []

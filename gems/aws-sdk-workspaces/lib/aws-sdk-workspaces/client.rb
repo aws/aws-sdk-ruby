@@ -4221,7 +4221,7 @@ module Aws::WorkSpaces
     # Starts the specified WorkSpaces.
     #
     # You cannot start a WorkSpace unless it has a running mode of
-    # `AutoStop` and a state of `STOPPED`.
+    # `AutoStop` or `Manual` and a state of `STOPPED`.
     #
     # @option params [required, Array<Types::StartRequest>] :start_workspace_requests
     #   The WorkSpaces to start. You can specify up to 25 WorkSpaces.
@@ -4284,7 +4284,8 @@ module Aws::WorkSpaces
     # Stops the specified WorkSpaces.
     #
     # You cannot stop a WorkSpace unless it has a running mode of `AutoStop`
-    # and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or `ERROR`.
+    # or `Manual` and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or
+    # `ERROR`.
     #
     # @option params [required, Array<Types::StopRequest>] :stop_workspace_requests
     #   The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
@@ -4777,7 +4778,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.203.0 (2024-08-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pcs` gem.
+
 3.202.0 (2024-08-27)
 ------------------
 
