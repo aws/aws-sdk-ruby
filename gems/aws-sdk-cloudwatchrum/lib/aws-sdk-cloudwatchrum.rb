@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudwatchrum/types'
-require_relative 'aws-sdk-cloudwatchrum/client_api'
-require_relative 'aws-sdk-cloudwatchrum/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudwatchrum/client'
-require_relative 'aws-sdk-cloudwatchrum/errors'
-require_relative 'aws-sdk-cloudwatchrum/resource'
-require_relative 'aws-sdk-cloudwatchrum/endpoint_parameters'
-require_relative 'aws-sdk-cloudwatchrum/endpoint_provider'
-require_relative 'aws-sdk-cloudwatchrum/endpoints'
 require_relative 'aws-sdk-cloudwatchrum/customizations'
+require_relative 'aws-sdk-cloudwatchrum/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for CloudWatch RUM. This module is available in the
 # `aws-sdk-cloudwatchrum` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-cloudwatchrum/customizations'
 #
 # @!group service
 module Aws::CloudWatchRUM
+  autoload :Types, 'aws-sdk-cloudwatchrum/types'
+  autoload :ClientApi, 'aws-sdk-cloudwatchrum/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudwatchrum/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudwatchrum/client'
+  autoload :Errors, 'aws-sdk-cloudwatchrum/errors'
+  autoload :Resource, 'aws-sdk-cloudwatchrum/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudwatchrum/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudwatchrum/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudwatchrum/endpoints'
 
   GEM_VERSION = '1.27.0'
 

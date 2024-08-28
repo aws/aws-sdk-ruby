@@ -1394,3 +1394,6 @@ module Aws::IAM
 
   end
 end
+
+# Load customizations if they exist
+require 'aws-sdk-iam/customizations/resource'

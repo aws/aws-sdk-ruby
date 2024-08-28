@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-synthetics/types'
-require_relative 'aws-sdk-synthetics/client_api'
-require_relative 'aws-sdk-synthetics/plugins/endpoints.rb'
-require_relative 'aws-sdk-synthetics/client'
-require_relative 'aws-sdk-synthetics/errors'
-require_relative 'aws-sdk-synthetics/resource'
-require_relative 'aws-sdk-synthetics/endpoint_parameters'
-require_relative 'aws-sdk-synthetics/endpoint_provider'
-require_relative 'aws-sdk-synthetics/endpoints'
 require_relative 'aws-sdk-synthetics/customizations'
+require_relative 'aws-sdk-synthetics/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Synthetics. This module is available in the
 # `aws-sdk-synthetics` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-synthetics/customizations'
 #
 # @!group service
 module Aws::Synthetics
+  autoload :Types, 'aws-sdk-synthetics/types'
+  autoload :ClientApi, 'aws-sdk-synthetics/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-synthetics/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-synthetics/client'
+  autoload :Errors, 'aws-sdk-synthetics/errors'
+  autoload :Resource, 'aws-sdk-synthetics/resource'
+  autoload :EndpointParameters, 'aws-sdk-synthetics/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-synthetics/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-synthetics/endpoints'
 
   GEM_VERSION = '1.48.0'
 

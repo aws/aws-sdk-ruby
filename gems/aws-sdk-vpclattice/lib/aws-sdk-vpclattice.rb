@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-vpclattice/types'
-require_relative 'aws-sdk-vpclattice/client_api'
-require_relative 'aws-sdk-vpclattice/plugins/endpoints.rb'
-require_relative 'aws-sdk-vpclattice/client'
-require_relative 'aws-sdk-vpclattice/errors'
-require_relative 'aws-sdk-vpclattice/resource'
-require_relative 'aws-sdk-vpclattice/endpoint_parameters'
-require_relative 'aws-sdk-vpclattice/endpoint_provider'
-require_relative 'aws-sdk-vpclattice/endpoints'
 require_relative 'aws-sdk-vpclattice/customizations'
+require_relative 'aws-sdk-vpclattice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon VPC Lattice. This module is available in the
 # `aws-sdk-vpclattice` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-vpclattice/customizations'
 #
 # @!group service
 module Aws::VPCLattice
+  autoload :Types, 'aws-sdk-vpclattice/types'
+  autoload :ClientApi, 'aws-sdk-vpclattice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-vpclattice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-vpclattice/client'
+  autoload :Errors, 'aws-sdk-vpclattice/errors'
+  autoload :Resource, 'aws-sdk-vpclattice/resource'
+  autoload :EndpointParameters, 'aws-sdk-vpclattice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-vpclattice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-vpclattice/endpoints'
 
   GEM_VERSION = '1.18.0'
 

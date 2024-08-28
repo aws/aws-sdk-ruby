@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iotdeviceadvisor/types'
-require_relative 'aws-sdk-iotdeviceadvisor/client_api'
-require_relative 'aws-sdk-iotdeviceadvisor/plugins/endpoints.rb'
-require_relative 'aws-sdk-iotdeviceadvisor/client'
-require_relative 'aws-sdk-iotdeviceadvisor/errors'
-require_relative 'aws-sdk-iotdeviceadvisor/resource'
-require_relative 'aws-sdk-iotdeviceadvisor/endpoint_parameters'
-require_relative 'aws-sdk-iotdeviceadvisor/endpoint_provider'
-require_relative 'aws-sdk-iotdeviceadvisor/endpoints'
 require_relative 'aws-sdk-iotdeviceadvisor/customizations'
+require_relative 'aws-sdk-iotdeviceadvisor/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT Core Device Advisor. This module is available in the
 # `aws-sdk-iotdeviceadvisor` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iotdeviceadvisor/customizations'
 #
 # @!group service
 module Aws::IoTDeviceAdvisor
+  autoload :Types, 'aws-sdk-iotdeviceadvisor/types'
+  autoload :ClientApi, 'aws-sdk-iotdeviceadvisor/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iotdeviceadvisor/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iotdeviceadvisor/client'
+  autoload :Errors, 'aws-sdk-iotdeviceadvisor/errors'
+  autoload :Resource, 'aws-sdk-iotdeviceadvisor/resource'
+  autoload :EndpointParameters, 'aws-sdk-iotdeviceadvisor/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iotdeviceadvisor/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iotdeviceadvisor/endpoints'
 
   GEM_VERSION = '1.37.0'
 

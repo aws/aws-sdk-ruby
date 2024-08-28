@@ -13,16 +13,8 @@ unless Module.const_defined?(:Aws)
   require 'aws-sigv4'
 end
 
-require_relative 'aws-sdk-sts/types'
-require_relative 'aws-sdk-sts/client_api'
-require_relative 'aws-sdk-sts/plugins/endpoints.rb'
-require_relative 'aws-sdk-sts/client'
-require_relative 'aws-sdk-sts/errors'
-require_relative 'aws-sdk-sts/resource'
-require_relative 'aws-sdk-sts/endpoint_parameters'
-require_relative 'aws-sdk-sts/endpoint_provider'
-require_relative 'aws-sdk-sts/endpoints'
 require_relative 'aws-sdk-sts/customizations'
+require_relative 'aws-sdk-sts/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Security Token Service. This module is available in the
 # `aws-sdk-core` gem.
@@ -53,6 +45,17 @@ require_relative 'aws-sdk-sts/customizations'
 #
 # @!group service
 module Aws::STS
+  autoload :Types, 'aws-sdk-sts/types'
+  autoload :ClientApi, 'aws-sdk-sts/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-sts/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-sts/client'
+  autoload :Errors, 'aws-sdk-sts/errors'
+  autoload :Resource, 'aws-sdk-sts/resource'
+  autoload :EndpointParameters, 'aws-sdk-sts/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-sts/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-sts/endpoints'
 
   GEM_VERSION = '3.203.0'
 

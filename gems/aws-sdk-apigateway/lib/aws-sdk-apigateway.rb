@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-apigateway/types'
-require_relative 'aws-sdk-apigateway/client_api'
-require_relative 'aws-sdk-apigateway/plugins/endpoints.rb'
-require_relative 'aws-sdk-apigateway/client'
-require_relative 'aws-sdk-apigateway/errors'
-require_relative 'aws-sdk-apigateway/resource'
-require_relative 'aws-sdk-apigateway/endpoint_parameters'
-require_relative 'aws-sdk-apigateway/endpoint_provider'
-require_relative 'aws-sdk-apigateway/endpoints'
 require_relative 'aws-sdk-apigateway/customizations'
+require_relative 'aws-sdk-apigateway/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon API Gateway. This module is available in the
 # `aws-sdk-apigateway` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-apigateway/customizations'
 #
 # @!group service
 module Aws::APIGateway
+  autoload :Types, 'aws-sdk-apigateway/types'
+  autoload :ClientApi, 'aws-sdk-apigateway/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-apigateway/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-apigateway/client'
+  autoload :Errors, 'aws-sdk-apigateway/errors'
+  autoload :Resource, 'aws-sdk-apigateway/resource'
+  autoload :EndpointParameters, 'aws-sdk-apigateway/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-apigateway/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-apigateway/endpoints'
 
   GEM_VERSION = '1.102.0'
 

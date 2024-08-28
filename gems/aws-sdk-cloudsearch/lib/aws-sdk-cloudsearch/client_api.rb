@@ -7,6 +7,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
+require_relative 'types'
+
 module Aws::CloudSearch
   # @api private
   module ClientApi

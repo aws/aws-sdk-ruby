@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-amplifyuibuilder/types'
-require_relative 'aws-sdk-amplifyuibuilder/client_api'
-require_relative 'aws-sdk-amplifyuibuilder/plugins/endpoints.rb'
-require_relative 'aws-sdk-amplifyuibuilder/client'
-require_relative 'aws-sdk-amplifyuibuilder/errors'
-require_relative 'aws-sdk-amplifyuibuilder/waiters'
-require_relative 'aws-sdk-amplifyuibuilder/resource'
-require_relative 'aws-sdk-amplifyuibuilder/endpoint_parameters'
-require_relative 'aws-sdk-amplifyuibuilder/endpoint_provider'
-require_relative 'aws-sdk-amplifyuibuilder/endpoints'
 require_relative 'aws-sdk-amplifyuibuilder/customizations'
+require_relative 'aws-sdk-amplifyuibuilder/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Amplify UI Builder. This module is available in the
 # `aws-sdk-amplifyuibuilder` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-amplifyuibuilder/customizations'
 #
 # @!group service
 module Aws::AmplifyUIBuilder
+  autoload :Types, 'aws-sdk-amplifyuibuilder/types'
+  autoload :ClientApi, 'aws-sdk-amplifyuibuilder/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-amplifyuibuilder/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-amplifyuibuilder/client'
+  autoload :Errors, 'aws-sdk-amplifyuibuilder/errors'
+  autoload :Waiters, 'aws-sdk-amplifyuibuilder/waiters'
+  autoload :Resource, 'aws-sdk-amplifyuibuilder/resource'
+  autoload :EndpointParameters, 'aws-sdk-amplifyuibuilder/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-amplifyuibuilder/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-amplifyuibuilder/endpoints'
 
   GEM_VERSION = '1.31.0'
 

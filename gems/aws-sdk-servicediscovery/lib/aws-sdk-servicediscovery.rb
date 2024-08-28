@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-servicediscovery/types'
-require_relative 'aws-sdk-servicediscovery/client_api'
-require_relative 'aws-sdk-servicediscovery/plugins/endpoints.rb'
-require_relative 'aws-sdk-servicediscovery/client'
-require_relative 'aws-sdk-servicediscovery/errors'
-require_relative 'aws-sdk-servicediscovery/resource'
-require_relative 'aws-sdk-servicediscovery/endpoint_parameters'
-require_relative 'aws-sdk-servicediscovery/endpoint_provider'
-require_relative 'aws-sdk-servicediscovery/endpoints'
 require_relative 'aws-sdk-servicediscovery/customizations'
+require_relative 'aws-sdk-servicediscovery/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Cloud Map. This module is available in the
 # `aws-sdk-servicediscovery` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-servicediscovery/customizations'
 #
 # @!group service
 module Aws::ServiceDiscovery
+  autoload :Types, 'aws-sdk-servicediscovery/types'
+  autoload :ClientApi, 'aws-sdk-servicediscovery/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-servicediscovery/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-servicediscovery/client'
+  autoload :Errors, 'aws-sdk-servicediscovery/errors'
+  autoload :Resource, 'aws-sdk-servicediscovery/resource'
+  autoload :EndpointParameters, 'aws-sdk-servicediscovery/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-servicediscovery/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-servicediscovery/endpoints'
 
   GEM_VERSION = '1.70.0'
 

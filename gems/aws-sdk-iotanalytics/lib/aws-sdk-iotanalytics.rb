@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iotanalytics/types'
-require_relative 'aws-sdk-iotanalytics/client_api'
-require_relative 'aws-sdk-iotanalytics/plugins/endpoints.rb'
-require_relative 'aws-sdk-iotanalytics/client'
-require_relative 'aws-sdk-iotanalytics/errors'
-require_relative 'aws-sdk-iotanalytics/resource'
-require_relative 'aws-sdk-iotanalytics/endpoint_parameters'
-require_relative 'aws-sdk-iotanalytics/endpoint_provider'
-require_relative 'aws-sdk-iotanalytics/endpoints'
 require_relative 'aws-sdk-iotanalytics/customizations'
+require_relative 'aws-sdk-iotanalytics/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT Analytics. This module is available in the
 # `aws-sdk-iotanalytics` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iotanalytics/customizations'
 #
 # @!group service
 module Aws::IoTAnalytics
+  autoload :Types, 'aws-sdk-iotanalytics/types'
+  autoload :ClientApi, 'aws-sdk-iotanalytics/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iotanalytics/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iotanalytics/client'
+  autoload :Errors, 'aws-sdk-iotanalytics/errors'
+  autoload :Resource, 'aws-sdk-iotanalytics/resource'
+  autoload :EndpointParameters, 'aws-sdk-iotanalytics/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iotanalytics/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iotanalytics/endpoints'
 
   GEM_VERSION = '1.69.0'
 

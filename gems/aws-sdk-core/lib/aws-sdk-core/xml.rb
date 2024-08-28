@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
-require_relative 'xml/builder'
-require_relative 'xml/default_list'
-require_relative 'xml/default_map'
-require_relative 'xml/doc_builder'
-require_relative 'xml/error_handler'
-require_relative 'xml/parser'
-require_relative 'xml/parser/stack'
-require_relative 'xml/parser/frame'
-require_relative 'xml/parser/parsing_error'
+module Aws
+  module Xml
+    autoload :Builder, 'aws-sdk-core/xml/builder'
+    autoload :DefaultList, 'aws-sdk-core/xml/default_list'
+    autoload :DefaultMap, 'aws-sdk-core/xml/default_map'
+    autoload :DocBuilder, 'aws-sdk-core/xml/doc_builder'
+    autoload :ErrorHandler, 'aws-sdk-core/xml/error_handler'
+    autoload :Parser, 'aws-sdk-core/xml/parser'
+
+    class Parser
+      autoload :Stack, 'aws-sdk-core/xml/parser/stack'
+      autoload :Frame, 'aws-sdk-core/xml/parser/frame'
+      autoload :ParsingError, 'aws-sdk-core/xml/parser/parsing_error'
+    end
+  end
+end

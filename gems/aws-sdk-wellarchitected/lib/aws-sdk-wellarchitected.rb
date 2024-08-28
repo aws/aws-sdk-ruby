@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-wellarchitected/types'
-require_relative 'aws-sdk-wellarchitected/client_api'
-require_relative 'aws-sdk-wellarchitected/plugins/endpoints.rb'
-require_relative 'aws-sdk-wellarchitected/client'
-require_relative 'aws-sdk-wellarchitected/errors'
-require_relative 'aws-sdk-wellarchitected/resource'
-require_relative 'aws-sdk-wellarchitected/endpoint_parameters'
-require_relative 'aws-sdk-wellarchitected/endpoint_provider'
-require_relative 'aws-sdk-wellarchitected/endpoints'
 require_relative 'aws-sdk-wellarchitected/customizations'
+require_relative 'aws-sdk-wellarchitected/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Well-Architected Tool. This module is available in the
 # `aws-sdk-wellarchitected` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-wellarchitected/customizations'
 #
 # @!group service
 module Aws::WellArchitected
+  autoload :Types, 'aws-sdk-wellarchitected/types'
+  autoload :ClientApi, 'aws-sdk-wellarchitected/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-wellarchitected/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-wellarchitected/client'
+  autoload :Errors, 'aws-sdk-wellarchitected/errors'
+  autoload :Resource, 'aws-sdk-wellarchitected/resource'
+  autoload :EndpointParameters, 'aws-sdk-wellarchitected/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-wellarchitected/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-wellarchitected/endpoints'
 
   GEM_VERSION = '1.42.0'
 

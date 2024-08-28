@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ssoadmin/types'
-require_relative 'aws-sdk-ssoadmin/client_api'
-require_relative 'aws-sdk-ssoadmin/plugins/endpoints.rb'
-require_relative 'aws-sdk-ssoadmin/client'
-require_relative 'aws-sdk-ssoadmin/errors'
-require_relative 'aws-sdk-ssoadmin/resource'
-require_relative 'aws-sdk-ssoadmin/endpoint_parameters'
-require_relative 'aws-sdk-ssoadmin/endpoint_provider'
-require_relative 'aws-sdk-ssoadmin/endpoints'
 require_relative 'aws-sdk-ssoadmin/customizations'
+require_relative 'aws-sdk-ssoadmin/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Single Sign-On Admin. This module is available in the
 # `aws-sdk-ssoadmin` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-ssoadmin/customizations'
 #
 # @!group service
 module Aws::SSOAdmin
+  autoload :Types, 'aws-sdk-ssoadmin/types'
+  autoload :ClientApi, 'aws-sdk-ssoadmin/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ssoadmin/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ssoadmin/client'
+  autoload :Errors, 'aws-sdk-ssoadmin/errors'
+  autoload :Resource, 'aws-sdk-ssoadmin/resource'
+  autoload :EndpointParameters, 'aws-sdk-ssoadmin/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ssoadmin/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ssoadmin/endpoints'
 
   GEM_VERSION = '1.42.0'
 

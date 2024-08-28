@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iot1clickprojects/types'
-require_relative 'aws-sdk-iot1clickprojects/client_api'
-require_relative 'aws-sdk-iot1clickprojects/plugins/endpoints.rb'
-require_relative 'aws-sdk-iot1clickprojects/client'
-require_relative 'aws-sdk-iot1clickprojects/errors'
-require_relative 'aws-sdk-iot1clickprojects/resource'
-require_relative 'aws-sdk-iot1clickprojects/endpoint_parameters'
-require_relative 'aws-sdk-iot1clickprojects/endpoint_provider'
-require_relative 'aws-sdk-iot1clickprojects/endpoints'
 require_relative 'aws-sdk-iot1clickprojects/customizations'
+require_relative 'aws-sdk-iot1clickprojects/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT 1-Click Projects Service. This module is available in the
 # `aws-sdk-iot1clickprojects` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iot1clickprojects/customizations'
 #
 # @!group service
 module Aws::IoT1ClickProjects
+  autoload :Types, 'aws-sdk-iot1clickprojects/types'
+  autoload :ClientApi, 'aws-sdk-iot1clickprojects/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iot1clickprojects/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iot1clickprojects/client'
+  autoload :Errors, 'aws-sdk-iot1clickprojects/errors'
+  autoload :Resource, 'aws-sdk-iot1clickprojects/resource'
+  autoload :EndpointParameters, 'aws-sdk-iot1clickprojects/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iot1clickprojects/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iot1clickprojects/endpoints'
 
   GEM_VERSION = '1.57.0'
 

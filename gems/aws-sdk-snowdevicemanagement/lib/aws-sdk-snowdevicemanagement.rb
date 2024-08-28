@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-snowdevicemanagement/types'
-require_relative 'aws-sdk-snowdevicemanagement/client_api'
-require_relative 'aws-sdk-snowdevicemanagement/plugins/endpoints.rb'
-require_relative 'aws-sdk-snowdevicemanagement/client'
-require_relative 'aws-sdk-snowdevicemanagement/errors'
-require_relative 'aws-sdk-snowdevicemanagement/resource'
-require_relative 'aws-sdk-snowdevicemanagement/endpoint_parameters'
-require_relative 'aws-sdk-snowdevicemanagement/endpoint_provider'
-require_relative 'aws-sdk-snowdevicemanagement/endpoints'
 require_relative 'aws-sdk-snowdevicemanagement/customizations'
+require_relative 'aws-sdk-snowdevicemanagement/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Snow Device Management. This module is available in the
 # `aws-sdk-snowdevicemanagement` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-snowdevicemanagement/customizations'
 #
 # @!group service
 module Aws::SnowDeviceManagement
+  autoload :Types, 'aws-sdk-snowdevicemanagement/types'
+  autoload :ClientApi, 'aws-sdk-snowdevicemanagement/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-snowdevicemanagement/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-snowdevicemanagement/client'
+  autoload :Errors, 'aws-sdk-snowdevicemanagement/errors'
+  autoload :Resource, 'aws-sdk-snowdevicemanagement/resource'
+  autoload :EndpointParameters, 'aws-sdk-snowdevicemanagement/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-snowdevicemanagement/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-snowdevicemanagement/endpoints'
 
   GEM_VERSION = '1.26.0'
 

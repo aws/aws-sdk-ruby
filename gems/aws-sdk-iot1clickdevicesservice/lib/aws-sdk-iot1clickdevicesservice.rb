@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iot1clickdevicesservice/types'
-require_relative 'aws-sdk-iot1clickdevicesservice/client_api'
-require_relative 'aws-sdk-iot1clickdevicesservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-iot1clickdevicesservice/client'
-require_relative 'aws-sdk-iot1clickdevicesservice/errors'
-require_relative 'aws-sdk-iot1clickdevicesservice/resource'
-require_relative 'aws-sdk-iot1clickdevicesservice/endpoint_parameters'
-require_relative 'aws-sdk-iot1clickdevicesservice/endpoint_provider'
-require_relative 'aws-sdk-iot1clickdevicesservice/endpoints'
 require_relative 'aws-sdk-iot1clickdevicesservice/customizations'
+require_relative 'aws-sdk-iot1clickdevicesservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT 1-Click Devices Service. This module is available in the
 # `aws-sdk-iot1clickdevicesservice` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iot1clickdevicesservice/customizations'
 #
 # @!group service
 module Aws::IoT1ClickDevicesService
+  autoload :Types, 'aws-sdk-iot1clickdevicesservice/types'
+  autoload :ClientApi, 'aws-sdk-iot1clickdevicesservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iot1clickdevicesservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iot1clickdevicesservice/client'
+  autoload :Errors, 'aws-sdk-iot1clickdevicesservice/errors'
+  autoload :Resource, 'aws-sdk-iot1clickdevicesservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-iot1clickdevicesservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iot1clickdevicesservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iot1clickdevicesservice/endpoints'
 
   GEM_VERSION = '1.56.0'
 

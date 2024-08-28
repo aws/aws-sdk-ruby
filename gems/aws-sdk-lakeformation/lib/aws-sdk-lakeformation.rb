@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-lakeformation/types'
-require_relative 'aws-sdk-lakeformation/client_api'
-require_relative 'aws-sdk-lakeformation/plugins/endpoints.rb'
-require_relative 'aws-sdk-lakeformation/client'
-require_relative 'aws-sdk-lakeformation/errors'
-require_relative 'aws-sdk-lakeformation/resource'
-require_relative 'aws-sdk-lakeformation/endpoint_parameters'
-require_relative 'aws-sdk-lakeformation/endpoint_provider'
-require_relative 'aws-sdk-lakeformation/endpoints'
 require_relative 'aws-sdk-lakeformation/customizations'
+require_relative 'aws-sdk-lakeformation/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Lake Formation. This module is available in the
 # `aws-sdk-lakeformation` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-lakeformation/customizations'
 #
 # @!group service
 module Aws::LakeFormation
+  autoload :Types, 'aws-sdk-lakeformation/types'
+  autoload :ClientApi, 'aws-sdk-lakeformation/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-lakeformation/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-lakeformation/client'
+  autoload :Errors, 'aws-sdk-lakeformation/errors'
+  autoload :Resource, 'aws-sdk-lakeformation/resource'
+  autoload :EndpointParameters, 'aws-sdk-lakeformation/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-lakeformation/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-lakeformation/endpoints'
 
   GEM_VERSION = '1.57.0'
 

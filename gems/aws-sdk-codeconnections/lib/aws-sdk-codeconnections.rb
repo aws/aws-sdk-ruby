@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codeconnections/types'
-require_relative 'aws-sdk-codeconnections/client_api'
-require_relative 'aws-sdk-codeconnections/plugins/endpoints.rb'
-require_relative 'aws-sdk-codeconnections/client'
-require_relative 'aws-sdk-codeconnections/errors'
-require_relative 'aws-sdk-codeconnections/resource'
-require_relative 'aws-sdk-codeconnections/endpoint_parameters'
-require_relative 'aws-sdk-codeconnections/endpoint_provider'
-require_relative 'aws-sdk-codeconnections/endpoints'
 require_relative 'aws-sdk-codeconnections/customizations'
+require_relative 'aws-sdk-codeconnections/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS CodeConnections. This module is available in the
 # `aws-sdk-codeconnections` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-codeconnections/customizations'
 #
 # @!group service
 module Aws::CodeConnections
+  autoload :Types, 'aws-sdk-codeconnections/types'
+  autoload :ClientApi, 'aws-sdk-codeconnections/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-codeconnections/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-codeconnections/client'
+  autoload :Errors, 'aws-sdk-codeconnections/errors'
+  autoload :Resource, 'aws-sdk-codeconnections/resource'
+  autoload :EndpointParameters, 'aws-sdk-codeconnections/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-codeconnections/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-codeconnections/endpoints'
 
   GEM_VERSION = '1.8.0'
 

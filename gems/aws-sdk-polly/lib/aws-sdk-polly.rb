@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-polly/types'
-require_relative 'aws-sdk-polly/client_api'
-require_relative 'aws-sdk-polly/plugins/endpoints.rb'
-require_relative 'aws-sdk-polly/client'
-require_relative 'aws-sdk-polly/errors'
-require_relative 'aws-sdk-polly/resource'
-require_relative 'aws-sdk-polly/endpoint_parameters'
-require_relative 'aws-sdk-polly/endpoint_provider'
-require_relative 'aws-sdk-polly/endpoints'
 require_relative 'aws-sdk-polly/customizations'
+require_relative 'aws-sdk-polly/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Polly. This module is available in the
 # `aws-sdk-polly` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-polly/customizations'
 #
 # @!group service
 module Aws::Polly
+  autoload :Types, 'aws-sdk-polly/types'
+  autoload :ClientApi, 'aws-sdk-polly/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-polly/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-polly/client'
+  autoload :Errors, 'aws-sdk-polly/errors'
+  autoload :Resource, 'aws-sdk-polly/resource'
+  autoload :EndpointParameters, 'aws-sdk-polly/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-polly/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-polly/endpoints'
 
   GEM_VERSION = '1.92.0'
 

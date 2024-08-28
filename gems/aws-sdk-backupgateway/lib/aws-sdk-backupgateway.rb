@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-backupgateway/types'
-require_relative 'aws-sdk-backupgateway/client_api'
-require_relative 'aws-sdk-backupgateway/plugins/endpoints.rb'
-require_relative 'aws-sdk-backupgateway/client'
-require_relative 'aws-sdk-backupgateway/errors'
-require_relative 'aws-sdk-backupgateway/resource'
-require_relative 'aws-sdk-backupgateway/endpoint_parameters'
-require_relative 'aws-sdk-backupgateway/endpoint_provider'
-require_relative 'aws-sdk-backupgateway/endpoints'
 require_relative 'aws-sdk-backupgateway/customizations'
+require_relative 'aws-sdk-backupgateway/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Backup Gateway. This module is available in the
 # `aws-sdk-backupgateway` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-backupgateway/customizations'
 #
 # @!group service
 module Aws::BackupGateway
+  autoload :Types, 'aws-sdk-backupgateway/types'
+  autoload :ClientApi, 'aws-sdk-backupgateway/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-backupgateway/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-backupgateway/client'
+  autoload :Errors, 'aws-sdk-backupgateway/errors'
+  autoload :Resource, 'aws-sdk-backupgateway/resource'
+  autoload :EndpointParameters, 'aws-sdk-backupgateway/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-backupgateway/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-backupgateway/endpoints'
 
   GEM_VERSION = '1.25.0'
 

@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-fms/types'
-require_relative 'aws-sdk-fms/client_api'
-require_relative 'aws-sdk-fms/plugins/endpoints.rb'
-require_relative 'aws-sdk-fms/client'
-require_relative 'aws-sdk-fms/errors'
-require_relative 'aws-sdk-fms/resource'
-require_relative 'aws-sdk-fms/endpoint_parameters'
-require_relative 'aws-sdk-fms/endpoint_provider'
-require_relative 'aws-sdk-fms/endpoints'
 require_relative 'aws-sdk-fms/customizations'
+require_relative 'aws-sdk-fms/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Firewall Management Service. This module is available in the
 # `aws-sdk-fms` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-fms/customizations'
 #
 # @!group service
 module Aws::FMS
+  autoload :Types, 'aws-sdk-fms/types'
+  autoload :ClientApi, 'aws-sdk-fms/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-fms/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-fms/client'
+  autoload :Errors, 'aws-sdk-fms/errors'
+  autoload :Resource, 'aws-sdk-fms/resource'
+  autoload :EndpointParameters, 'aws-sdk-fms/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-fms/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-fms/endpoints'
 
   GEM_VERSION = '1.77.0'
 

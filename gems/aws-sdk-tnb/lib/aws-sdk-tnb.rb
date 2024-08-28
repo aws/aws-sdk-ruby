@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-tnb/types'
-require_relative 'aws-sdk-tnb/client_api'
-require_relative 'aws-sdk-tnb/plugins/endpoints.rb'
-require_relative 'aws-sdk-tnb/client'
-require_relative 'aws-sdk-tnb/errors'
-require_relative 'aws-sdk-tnb/resource'
-require_relative 'aws-sdk-tnb/endpoint_parameters'
-require_relative 'aws-sdk-tnb/endpoint_provider'
-require_relative 'aws-sdk-tnb/endpoints'
 require_relative 'aws-sdk-tnb/customizations'
+require_relative 'aws-sdk-tnb/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Telco Network Builder. This module is available in the
 # `aws-sdk-tnb` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-tnb/customizations'
 #
 # @!group service
 module Aws::Tnb
+  autoload :Types, 'aws-sdk-tnb/types'
+  autoload :ClientApi, 'aws-sdk-tnb/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-tnb/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-tnb/client'
+  autoload :Errors, 'aws-sdk-tnb/errors'
+  autoload :Resource, 'aws-sdk-tnb/resource'
+  autoload :EndpointParameters, 'aws-sdk-tnb/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-tnb/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-tnb/endpoints'
 
   GEM_VERSION = '1.19.0'
 

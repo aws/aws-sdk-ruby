@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iotevents/types'
-require_relative 'aws-sdk-iotevents/client_api'
-require_relative 'aws-sdk-iotevents/plugins/endpoints.rb'
-require_relative 'aws-sdk-iotevents/client'
-require_relative 'aws-sdk-iotevents/errors'
-require_relative 'aws-sdk-iotevents/resource'
-require_relative 'aws-sdk-iotevents/endpoint_parameters'
-require_relative 'aws-sdk-iotevents/endpoint_provider'
-require_relative 'aws-sdk-iotevents/endpoints'
 require_relative 'aws-sdk-iotevents/customizations'
+require_relative 'aws-sdk-iotevents/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT Events. This module is available in the
 # `aws-sdk-iotevents` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iotevents/customizations'
 #
 # @!group service
 module Aws::IoTEvents
+  autoload :Types, 'aws-sdk-iotevents/types'
+  autoload :ClientApi, 'aws-sdk-iotevents/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iotevents/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iotevents/client'
+  autoload :Errors, 'aws-sdk-iotevents/errors'
+  autoload :Resource, 'aws-sdk-iotevents/resource'
+  autoload :EndpointParameters, 'aws-sdk-iotevents/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iotevents/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iotevents/endpoints'
 
   GEM_VERSION = '1.54.0'
 

@@ -11,20 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-sns/types'
-require_relative 'aws-sdk-sns/client_api'
-require_relative 'aws-sdk-sns/plugins/endpoints.rb'
-require_relative 'aws-sdk-sns/client'
-require_relative 'aws-sdk-sns/errors'
-require_relative 'aws-sdk-sns/resource'
-require_relative 'aws-sdk-sns/endpoint_parameters'
-require_relative 'aws-sdk-sns/endpoint_provider'
-require_relative 'aws-sdk-sns/endpoints'
-require_relative 'aws-sdk-sns/platform_application'
-require_relative 'aws-sdk-sns/platform_endpoint'
-require_relative 'aws-sdk-sns/subscription'
-require_relative 'aws-sdk-sns/topic'
 require_relative 'aws-sdk-sns/customizations'
+require_relative 'aws-sdk-sns/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Simple Notification Service. This module is available in the
 # `aws-sdk-sns` gem.
@@ -55,6 +43,21 @@ require_relative 'aws-sdk-sns/customizations'
 #
 # @!group service
 module Aws::SNS
+  autoload :Types, 'aws-sdk-sns/types'
+  autoload :ClientApi, 'aws-sdk-sns/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-sns/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-sns/client'
+  autoload :Errors, 'aws-sdk-sns/errors'
+  autoload :Resource, 'aws-sdk-sns/resource'
+  autoload :EndpointParameters, 'aws-sdk-sns/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-sns/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-sns/endpoints'
+  autoload :PlatformApplication, 'aws-sdk-sns/platform_application'
+  autoload :PlatformEndpoint, 'aws-sdk-sns/platform_endpoint'
+  autoload :Subscription, 'aws-sdk-sns/subscription'
+  autoload :Topic, 'aws-sdk-sns/topic'
 
   GEM_VERSION = '1.83.0'
 

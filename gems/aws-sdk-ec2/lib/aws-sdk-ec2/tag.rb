@@ -333,3 +333,6 @@ module Aws::EC2
     end
   end
 end
+
+# Load customizations if they exist
+require 'aws-sdk-ec2/customizations/tag'

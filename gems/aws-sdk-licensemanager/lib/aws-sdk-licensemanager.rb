@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-licensemanager/types'
-require_relative 'aws-sdk-licensemanager/client_api'
-require_relative 'aws-sdk-licensemanager/plugins/endpoints.rb'
-require_relative 'aws-sdk-licensemanager/client'
-require_relative 'aws-sdk-licensemanager/errors'
-require_relative 'aws-sdk-licensemanager/resource'
-require_relative 'aws-sdk-licensemanager/endpoint_parameters'
-require_relative 'aws-sdk-licensemanager/endpoint_provider'
-require_relative 'aws-sdk-licensemanager/endpoints'
 require_relative 'aws-sdk-licensemanager/customizations'
+require_relative 'aws-sdk-licensemanager/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS License Manager. This module is available in the
 # `aws-sdk-licensemanager` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-licensemanager/customizations'
 #
 # @!group service
 module Aws::LicenseManager
+  autoload :Types, 'aws-sdk-licensemanager/types'
+  autoload :ClientApi, 'aws-sdk-licensemanager/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-licensemanager/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-licensemanager/client'
+  autoload :Errors, 'aws-sdk-licensemanager/errors'
+  autoload :Resource, 'aws-sdk-licensemanager/resource'
+  autoload :EndpointParameters, 'aws-sdk-licensemanager/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-licensemanager/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-licensemanager/endpoints'
 
   GEM_VERSION = '1.61.0'
 

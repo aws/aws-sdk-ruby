@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kinesisvideosignalingchannels/types'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/client_api'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/plugins/endpoints.rb'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/client'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/errors'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/resource'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/endpoint_parameters'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/endpoint_provider'
-require_relative 'aws-sdk-kinesisvideosignalingchannels/endpoints'
 require_relative 'aws-sdk-kinesisvideosignalingchannels/customizations'
+require_relative 'aws-sdk-kinesisvideosignalingchannels/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Kinesis Video Signaling Channels. This module is available in the
 # `aws-sdk-kinesisvideosignalingchannels` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-kinesisvideosignalingchannels/customizations'
 #
 # @!group service
 module Aws::KinesisVideoSignalingChannels
+  autoload :Types, 'aws-sdk-kinesisvideosignalingchannels/types'
+  autoload :ClientApi, 'aws-sdk-kinesisvideosignalingchannels/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-kinesisvideosignalingchannels/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-kinesisvideosignalingchannels/client'
+  autoload :Errors, 'aws-sdk-kinesisvideosignalingchannels/errors'
+  autoload :Resource, 'aws-sdk-kinesisvideosignalingchannels/resource'
+  autoload :EndpointParameters, 'aws-sdk-kinesisvideosignalingchannels/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-kinesisvideosignalingchannels/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-kinesisvideosignalingchannels/endpoints'
 
   GEM_VERSION = '1.39.0'
 

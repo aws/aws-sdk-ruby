@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-pinpointsmsvoice/types'
-require_relative 'aws-sdk-pinpointsmsvoice/client_api'
-require_relative 'aws-sdk-pinpointsmsvoice/plugins/endpoints.rb'
-require_relative 'aws-sdk-pinpointsmsvoice/client'
-require_relative 'aws-sdk-pinpointsmsvoice/errors'
-require_relative 'aws-sdk-pinpointsmsvoice/resource'
-require_relative 'aws-sdk-pinpointsmsvoice/endpoint_parameters'
-require_relative 'aws-sdk-pinpointsmsvoice/endpoint_provider'
-require_relative 'aws-sdk-pinpointsmsvoice/endpoints'
 require_relative 'aws-sdk-pinpointsmsvoice/customizations'
+require_relative 'aws-sdk-pinpointsmsvoice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Pinpoint SMS and Voice Service. This module is available in the
 # `aws-sdk-pinpointsmsvoice` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-pinpointsmsvoice/customizations'
 #
 # @!group service
 module Aws::PinpointSMSVoice
+  autoload :Types, 'aws-sdk-pinpointsmsvoice/types'
+  autoload :ClientApi, 'aws-sdk-pinpointsmsvoice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-pinpointsmsvoice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-pinpointsmsvoice/client'
+  autoload :Errors, 'aws-sdk-pinpointsmsvoice/errors'
+  autoload :Resource, 'aws-sdk-pinpointsmsvoice/resource'
+  autoload :EndpointParameters, 'aws-sdk-pinpointsmsvoice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-pinpointsmsvoice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-pinpointsmsvoice/endpoints'
 
   GEM_VERSION = '1.51.0'
 

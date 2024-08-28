@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-emr/types'
-require_relative 'aws-sdk-emr/client_api'
-require_relative 'aws-sdk-emr/plugins/endpoints.rb'
-require_relative 'aws-sdk-emr/client'
-require_relative 'aws-sdk-emr/errors'
-require_relative 'aws-sdk-emr/waiters'
-require_relative 'aws-sdk-emr/resource'
-require_relative 'aws-sdk-emr/endpoint_parameters'
-require_relative 'aws-sdk-emr/endpoint_provider'
-require_relative 'aws-sdk-emr/endpoints'
 require_relative 'aws-sdk-emr/customizations'
+require_relative 'aws-sdk-emr/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon EMR. This module is available in the
 # `aws-sdk-emr` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-emr/customizations'
 #
 # @!group service
 module Aws::EMR
+  autoload :Types, 'aws-sdk-emr/types'
+  autoload :ClientApi, 'aws-sdk-emr/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-emr/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-emr/client'
+  autoload :Errors, 'aws-sdk-emr/errors'
+  autoload :Waiters, 'aws-sdk-emr/waiters'
+  autoload :Resource, 'aws-sdk-emr/resource'
+  autoload :EndpointParameters, 'aws-sdk-emr/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-emr/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-emr/endpoints'
 
   GEM_VERSION = '1.93.0'
 

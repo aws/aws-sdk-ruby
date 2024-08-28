@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-inspectorscan/types'
-require_relative 'aws-sdk-inspectorscan/client_api'
-require_relative 'aws-sdk-inspectorscan/plugins/endpoints.rb'
-require_relative 'aws-sdk-inspectorscan/client'
-require_relative 'aws-sdk-inspectorscan/errors'
-require_relative 'aws-sdk-inspectorscan/resource'
-require_relative 'aws-sdk-inspectorscan/endpoint_parameters'
-require_relative 'aws-sdk-inspectorscan/endpoint_provider'
-require_relative 'aws-sdk-inspectorscan/endpoints'
 require_relative 'aws-sdk-inspectorscan/customizations'
+require_relative 'aws-sdk-inspectorscan/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Inspector Scan. This module is available in the
 # `aws-sdk-inspectorscan` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-inspectorscan/customizations'
 #
 # @!group service
 module Aws::InspectorScan
+  autoload :Types, 'aws-sdk-inspectorscan/types'
+  autoload :ClientApi, 'aws-sdk-inspectorscan/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-inspectorscan/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-inspectorscan/client'
+  autoload :Errors, 'aws-sdk-inspectorscan/errors'
+  autoload :Resource, 'aws-sdk-inspectorscan/resource'
+  autoload :EndpointParameters, 'aws-sdk-inspectorscan/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-inspectorscan/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-inspectorscan/endpoints'
 
   GEM_VERSION = '1.10.0'
 

@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-mainframemodernization/types'
-require_relative 'aws-sdk-mainframemodernization/client_api'
-require_relative 'aws-sdk-mainframemodernization/plugins/endpoints.rb'
-require_relative 'aws-sdk-mainframemodernization/client'
-require_relative 'aws-sdk-mainframemodernization/errors'
-require_relative 'aws-sdk-mainframemodernization/resource'
-require_relative 'aws-sdk-mainframemodernization/endpoint_parameters'
-require_relative 'aws-sdk-mainframemodernization/endpoint_provider'
-require_relative 'aws-sdk-mainframemodernization/endpoints'
 require_relative 'aws-sdk-mainframemodernization/customizations'
+require_relative 'aws-sdk-mainframemodernization/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWSMainframeModernization. This module is available in the
 # `aws-sdk-mainframemodernization` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-mainframemodernization/customizations'
 #
 # @!group service
 module Aws::MainframeModernization
+  autoload :Types, 'aws-sdk-mainframemodernization/types'
+  autoload :ClientApi, 'aws-sdk-mainframemodernization/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-mainframemodernization/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-mainframemodernization/client'
+  autoload :Errors, 'aws-sdk-mainframemodernization/errors'
+  autoload :Resource, 'aws-sdk-mainframemodernization/resource'
+  autoload :EndpointParameters, 'aws-sdk-mainframemodernization/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-mainframemodernization/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-mainframemodernization/endpoints'
 
   GEM_VERSION = '1.23.0'
 

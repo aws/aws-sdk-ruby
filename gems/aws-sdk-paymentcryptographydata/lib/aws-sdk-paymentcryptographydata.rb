@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-paymentcryptographydata/types'
-require_relative 'aws-sdk-paymentcryptographydata/client_api'
-require_relative 'aws-sdk-paymentcryptographydata/plugins/endpoints.rb'
-require_relative 'aws-sdk-paymentcryptographydata/client'
-require_relative 'aws-sdk-paymentcryptographydata/errors'
-require_relative 'aws-sdk-paymentcryptographydata/waiters'
-require_relative 'aws-sdk-paymentcryptographydata/resource'
-require_relative 'aws-sdk-paymentcryptographydata/endpoint_parameters'
-require_relative 'aws-sdk-paymentcryptographydata/endpoint_provider'
-require_relative 'aws-sdk-paymentcryptographydata/endpoints'
 require_relative 'aws-sdk-paymentcryptographydata/customizations'
+require_relative 'aws-sdk-paymentcryptographydata/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Payment Cryptography Data Plane. This module is available in the
 # `aws-sdk-paymentcryptographydata` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-paymentcryptographydata/customizations'
 #
 # @!group service
 module Aws::PaymentCryptographyData
+  autoload :Types, 'aws-sdk-paymentcryptographydata/types'
+  autoload :ClientApi, 'aws-sdk-paymentcryptographydata/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-paymentcryptographydata/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-paymentcryptographydata/client'
+  autoload :Errors, 'aws-sdk-paymentcryptographydata/errors'
+  autoload :Waiters, 'aws-sdk-paymentcryptographydata/waiters'
+  autoload :Resource, 'aws-sdk-paymentcryptographydata/resource'
+  autoload :EndpointParameters, 'aws-sdk-paymentcryptographydata/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-paymentcryptographydata/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-paymentcryptographydata/endpoints'
 
   GEM_VERSION = '1.19.0'
 

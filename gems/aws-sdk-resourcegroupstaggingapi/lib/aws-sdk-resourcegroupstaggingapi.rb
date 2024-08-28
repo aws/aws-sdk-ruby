@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-resourcegroupstaggingapi/types'
-require_relative 'aws-sdk-resourcegroupstaggingapi/client_api'
-require_relative 'aws-sdk-resourcegroupstaggingapi/plugins/endpoints.rb'
-require_relative 'aws-sdk-resourcegroupstaggingapi/client'
-require_relative 'aws-sdk-resourcegroupstaggingapi/errors'
-require_relative 'aws-sdk-resourcegroupstaggingapi/resource'
-require_relative 'aws-sdk-resourcegroupstaggingapi/endpoint_parameters'
-require_relative 'aws-sdk-resourcegroupstaggingapi/endpoint_provider'
-require_relative 'aws-sdk-resourcegroupstaggingapi/endpoints'
 require_relative 'aws-sdk-resourcegroupstaggingapi/customizations'
+require_relative 'aws-sdk-resourcegroupstaggingapi/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Resource Groups Tagging API. This module is available in the
 # `aws-sdk-resourcegroupstaggingapi` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-resourcegroupstaggingapi/customizations'
 #
 # @!group service
 module Aws::ResourceGroupsTaggingAPI
+  autoload :Types, 'aws-sdk-resourcegroupstaggingapi/types'
+  autoload :ClientApi, 'aws-sdk-resourcegroupstaggingapi/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-resourcegroupstaggingapi/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-resourcegroupstaggingapi/client'
+  autoload :Errors, 'aws-sdk-resourcegroupstaggingapi/errors'
+  autoload :Resource, 'aws-sdk-resourcegroupstaggingapi/resource'
+  autoload :EndpointParameters, 'aws-sdk-resourcegroupstaggingapi/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-resourcegroupstaggingapi/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-resourcegroupstaggingapi/endpoints'
 
   GEM_VERSION = '1.67.0'
 

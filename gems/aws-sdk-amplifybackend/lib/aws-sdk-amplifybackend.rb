@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-amplifybackend/types'
-require_relative 'aws-sdk-amplifybackend/client_api'
-require_relative 'aws-sdk-amplifybackend/plugins/endpoints.rb'
-require_relative 'aws-sdk-amplifybackend/client'
-require_relative 'aws-sdk-amplifybackend/errors'
-require_relative 'aws-sdk-amplifybackend/resource'
-require_relative 'aws-sdk-amplifybackend/endpoint_parameters'
-require_relative 'aws-sdk-amplifybackend/endpoint_provider'
-require_relative 'aws-sdk-amplifybackend/endpoints'
 require_relative 'aws-sdk-amplifybackend/customizations'
+require_relative 'aws-sdk-amplifybackend/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AmplifyBackend. This module is available in the
 # `aws-sdk-amplifybackend` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-amplifybackend/customizations'
 #
 # @!group service
 module Aws::AmplifyBackend
+  autoload :Types, 'aws-sdk-amplifybackend/types'
+  autoload :ClientApi, 'aws-sdk-amplifybackend/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-amplifybackend/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-amplifybackend/client'
+  autoload :Errors, 'aws-sdk-amplifybackend/errors'
+  autoload :Resource, 'aws-sdk-amplifybackend/resource'
+  autoload :EndpointParameters, 'aws-sdk-amplifybackend/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-amplifybackend/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-amplifybackend/endpoints'
 
   GEM_VERSION = '1.37.0'
 

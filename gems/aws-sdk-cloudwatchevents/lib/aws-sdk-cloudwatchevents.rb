@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudwatchevents/types'
-require_relative 'aws-sdk-cloudwatchevents/client_api'
-require_relative 'aws-sdk-cloudwatchevents/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudwatchevents/client'
-require_relative 'aws-sdk-cloudwatchevents/errors'
-require_relative 'aws-sdk-cloudwatchevents/resource'
-require_relative 'aws-sdk-cloudwatchevents/endpoint_parameters'
-require_relative 'aws-sdk-cloudwatchevents/endpoint_provider'
-require_relative 'aws-sdk-cloudwatchevents/endpoints'
 require_relative 'aws-sdk-cloudwatchevents/customizations'
+require_relative 'aws-sdk-cloudwatchevents/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CloudWatch Events. This module is available in the
 # `aws-sdk-cloudwatchevents` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-cloudwatchevents/customizations'
 #
 # @!group service
 module Aws::CloudWatchEvents
+  autoload :Types, 'aws-sdk-cloudwatchevents/types'
+  autoload :ClientApi, 'aws-sdk-cloudwatchevents/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudwatchevents/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudwatchevents/client'
+  autoload :Errors, 'aws-sdk-cloudwatchevents/errors'
+  autoload :Resource, 'aws-sdk-cloudwatchevents/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudwatchevents/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudwatchevents/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudwatchevents/endpoints'
 
   GEM_VERSION = '1.78.0'
 

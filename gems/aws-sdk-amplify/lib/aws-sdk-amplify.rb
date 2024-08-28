@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-amplify/types'
-require_relative 'aws-sdk-amplify/client_api'
-require_relative 'aws-sdk-amplify/plugins/endpoints.rb'
-require_relative 'aws-sdk-amplify/client'
-require_relative 'aws-sdk-amplify/errors'
-require_relative 'aws-sdk-amplify/resource'
-require_relative 'aws-sdk-amplify/endpoint_parameters'
-require_relative 'aws-sdk-amplify/endpoint_provider'
-require_relative 'aws-sdk-amplify/endpoints'
 require_relative 'aws-sdk-amplify/customizations'
+require_relative 'aws-sdk-amplify/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Amplify. This module is available in the
 # `aws-sdk-amplify` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-amplify/customizations'
 #
 # @!group service
 module Aws::Amplify
+  autoload :Types, 'aws-sdk-amplify/types'
+  autoload :ClientApi, 'aws-sdk-amplify/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-amplify/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-amplify/client'
+  autoload :Errors, 'aws-sdk-amplify/errors'
+  autoload :Resource, 'aws-sdk-amplify/resource'
+  autoload :EndpointParameters, 'aws-sdk-amplify/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-amplify/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-amplify/endpoints'
 
   GEM_VERSION = '1.67.0'
 

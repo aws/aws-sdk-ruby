@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudcontrolapi/types'
-require_relative 'aws-sdk-cloudcontrolapi/client_api'
-require_relative 'aws-sdk-cloudcontrolapi/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudcontrolapi/client'
-require_relative 'aws-sdk-cloudcontrolapi/errors'
-require_relative 'aws-sdk-cloudcontrolapi/waiters'
-require_relative 'aws-sdk-cloudcontrolapi/resource'
-require_relative 'aws-sdk-cloudcontrolapi/endpoint_parameters'
-require_relative 'aws-sdk-cloudcontrolapi/endpoint_provider'
-require_relative 'aws-sdk-cloudcontrolapi/endpoints'
 require_relative 'aws-sdk-cloudcontrolapi/customizations'
+require_relative 'aws-sdk-cloudcontrolapi/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Cloud Control API. This module is available in the
 # `aws-sdk-cloudcontrolapi` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-cloudcontrolapi/customizations'
 #
 # @!group service
 module Aws::CloudControlApi
+  autoload :Types, 'aws-sdk-cloudcontrolapi/types'
+  autoload :ClientApi, 'aws-sdk-cloudcontrolapi/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudcontrolapi/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudcontrolapi/client'
+  autoload :Errors, 'aws-sdk-cloudcontrolapi/errors'
+  autoload :Waiters, 'aws-sdk-cloudcontrolapi/waiters'
+  autoload :Resource, 'aws-sdk-cloudcontrolapi/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudcontrolapi/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudcontrolapi/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudcontrolapi/endpoints'
 
   GEM_VERSION = '1.27.0'
 

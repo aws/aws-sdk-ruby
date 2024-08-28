@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-identitystore/types'
-require_relative 'aws-sdk-identitystore/client_api'
-require_relative 'aws-sdk-identitystore/plugins/endpoints.rb'
-require_relative 'aws-sdk-identitystore/client'
-require_relative 'aws-sdk-identitystore/errors'
-require_relative 'aws-sdk-identitystore/resource'
-require_relative 'aws-sdk-identitystore/endpoint_parameters'
-require_relative 'aws-sdk-identitystore/endpoint_provider'
-require_relative 'aws-sdk-identitystore/endpoints'
 require_relative 'aws-sdk-identitystore/customizations'
+require_relative 'aws-sdk-identitystore/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS SSO Identity Store. This module is available in the
 # `aws-sdk-identitystore` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-identitystore/customizations'
 #
 # @!group service
 module Aws::IdentityStore
+  autoload :Types, 'aws-sdk-identitystore/types'
+  autoload :ClientApi, 'aws-sdk-identitystore/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-identitystore/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-identitystore/client'
+  autoload :Errors, 'aws-sdk-identitystore/errors'
+  autoload :Resource, 'aws-sdk-identitystore/resource'
+  autoload :EndpointParameters, 'aws-sdk-identitystore/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-identitystore/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-identitystore/endpoints'
 
   GEM_VERSION = '1.41.0'
 

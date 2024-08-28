@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-scheduler/types'
-require_relative 'aws-sdk-scheduler/client_api'
-require_relative 'aws-sdk-scheduler/plugins/endpoints.rb'
-require_relative 'aws-sdk-scheduler/client'
-require_relative 'aws-sdk-scheduler/errors'
-require_relative 'aws-sdk-scheduler/resource'
-require_relative 'aws-sdk-scheduler/endpoint_parameters'
-require_relative 'aws-sdk-scheduler/endpoint_provider'
-require_relative 'aws-sdk-scheduler/endpoints'
 require_relative 'aws-sdk-scheduler/customizations'
+require_relative 'aws-sdk-scheduler/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon EventBridge Scheduler. This module is available in the
 # `aws-sdk-scheduler` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-scheduler/customizations'
 #
 # @!group service
 module Aws::Scheduler
+  autoload :Types, 'aws-sdk-scheduler/types'
+  autoload :ClientApi, 'aws-sdk-scheduler/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-scheduler/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-scheduler/client'
+  autoload :Errors, 'aws-sdk-scheduler/errors'
+  autoload :Resource, 'aws-sdk-scheduler/resource'
+  autoload :EndpointParameters, 'aws-sdk-scheduler/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-scheduler/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-scheduler/endpoints'
 
   GEM_VERSION = '1.20.0'
 

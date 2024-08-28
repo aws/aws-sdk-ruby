@@ -7,6 +7,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
+require_relative 'types'
+
 module Aws::MigrationHubRefactorSpaces
   # @api private
   module ClientApi

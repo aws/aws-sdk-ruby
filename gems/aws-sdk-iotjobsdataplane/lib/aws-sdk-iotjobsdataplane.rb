@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iotjobsdataplane/types'
-require_relative 'aws-sdk-iotjobsdataplane/client_api'
-require_relative 'aws-sdk-iotjobsdataplane/plugins/endpoints.rb'
-require_relative 'aws-sdk-iotjobsdataplane/client'
-require_relative 'aws-sdk-iotjobsdataplane/errors'
-require_relative 'aws-sdk-iotjobsdataplane/resource'
-require_relative 'aws-sdk-iotjobsdataplane/endpoint_parameters'
-require_relative 'aws-sdk-iotjobsdataplane/endpoint_provider'
-require_relative 'aws-sdk-iotjobsdataplane/endpoints'
 require_relative 'aws-sdk-iotjobsdataplane/customizations'
+require_relative 'aws-sdk-iotjobsdataplane/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT Jobs Data Plane. This module is available in the
 # `aws-sdk-iotjobsdataplane` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iotjobsdataplane/customizations'
 #
 # @!group service
 module Aws::IoTJobsDataPlane
+  autoload :Types, 'aws-sdk-iotjobsdataplane/types'
+  autoload :ClientApi, 'aws-sdk-iotjobsdataplane/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iotjobsdataplane/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iotjobsdataplane/client'
+  autoload :Errors, 'aws-sdk-iotjobsdataplane/errors'
+  autoload :Resource, 'aws-sdk-iotjobsdataplane/resource'
+  autoload :EndpointParameters, 'aws-sdk-iotjobsdataplane/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iotjobsdataplane/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iotjobsdataplane/endpoints'
 
   GEM_VERSION = '1.56.0'
 

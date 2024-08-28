@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-health/types'
-require_relative 'aws-sdk-health/client_api'
-require_relative 'aws-sdk-health/plugins/endpoints.rb'
-require_relative 'aws-sdk-health/client'
-require_relative 'aws-sdk-health/errors'
-require_relative 'aws-sdk-health/resource'
-require_relative 'aws-sdk-health/endpoint_parameters'
-require_relative 'aws-sdk-health/endpoint_provider'
-require_relative 'aws-sdk-health/endpoints'
 require_relative 'aws-sdk-health/customizations'
+require_relative 'aws-sdk-health/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Health APIs and Notifications. This module is available in the
 # `aws-sdk-health` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-health/customizations'
 #
 # @!group service
 module Aws::Health
+  autoload :Types, 'aws-sdk-health/types'
+  autoload :ClientApi, 'aws-sdk-health/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-health/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-health/client'
+  autoload :Errors, 'aws-sdk-health/errors'
+  autoload :Resource, 'aws-sdk-health/resource'
+  autoload :EndpointParameters, 'aws-sdk-health/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-health/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-health/endpoints'
 
   GEM_VERSION = '1.68.0'
 

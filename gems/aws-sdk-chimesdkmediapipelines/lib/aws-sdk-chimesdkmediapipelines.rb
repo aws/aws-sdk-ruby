@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-chimesdkmediapipelines/types'
-require_relative 'aws-sdk-chimesdkmediapipelines/client_api'
-require_relative 'aws-sdk-chimesdkmediapipelines/plugins/endpoints.rb'
-require_relative 'aws-sdk-chimesdkmediapipelines/client'
-require_relative 'aws-sdk-chimesdkmediapipelines/errors'
-require_relative 'aws-sdk-chimesdkmediapipelines/resource'
-require_relative 'aws-sdk-chimesdkmediapipelines/endpoint_parameters'
-require_relative 'aws-sdk-chimesdkmediapipelines/endpoint_provider'
-require_relative 'aws-sdk-chimesdkmediapipelines/endpoints'
 require_relative 'aws-sdk-chimesdkmediapipelines/customizations'
+require_relative 'aws-sdk-chimesdkmediapipelines/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Chime SDK Media Pipelines. This module is available in the
 # `aws-sdk-chimesdkmediapipelines` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-chimesdkmediapipelines/customizations'
 #
 # @!group service
 module Aws::ChimeSDKMediaPipelines
+  autoload :Types, 'aws-sdk-chimesdkmediapipelines/types'
+  autoload :ClientApi, 'aws-sdk-chimesdkmediapipelines/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-chimesdkmediapipelines/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-chimesdkmediapipelines/client'
+  autoload :Errors, 'aws-sdk-chimesdkmediapipelines/errors'
+  autoload :Resource, 'aws-sdk-chimesdkmediapipelines/resource'
+  autoload :EndpointParameters, 'aws-sdk-chimesdkmediapipelines/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-chimesdkmediapipelines/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-chimesdkmediapipelines/endpoints'
 
   GEM_VERSION = '1.27.0'
 

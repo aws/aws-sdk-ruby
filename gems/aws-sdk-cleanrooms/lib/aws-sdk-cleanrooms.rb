@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cleanrooms/types'
-require_relative 'aws-sdk-cleanrooms/client_api'
-require_relative 'aws-sdk-cleanrooms/plugins/endpoints.rb'
-require_relative 'aws-sdk-cleanrooms/client'
-require_relative 'aws-sdk-cleanrooms/errors'
-require_relative 'aws-sdk-cleanrooms/waiters'
-require_relative 'aws-sdk-cleanrooms/resource'
-require_relative 'aws-sdk-cleanrooms/endpoint_parameters'
-require_relative 'aws-sdk-cleanrooms/endpoint_provider'
-require_relative 'aws-sdk-cleanrooms/endpoints'
 require_relative 'aws-sdk-cleanrooms/customizations'
+require_relative 'aws-sdk-cleanrooms/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Clean Rooms Service. This module is available in the
 # `aws-sdk-cleanrooms` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-cleanrooms/customizations'
 #
 # @!group service
 module Aws::CleanRooms
+  autoload :Types, 'aws-sdk-cleanrooms/types'
+  autoload :ClientApi, 'aws-sdk-cleanrooms/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cleanrooms/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cleanrooms/client'
+  autoload :Errors, 'aws-sdk-cleanrooms/errors'
+  autoload :Waiters, 'aws-sdk-cleanrooms/waiters'
+  autoload :Resource, 'aws-sdk-cleanrooms/resource'
+  autoload :EndpointParameters, 'aws-sdk-cleanrooms/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cleanrooms/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cleanrooms/endpoints'
 
   GEM_VERSION = '1.28.0'
 

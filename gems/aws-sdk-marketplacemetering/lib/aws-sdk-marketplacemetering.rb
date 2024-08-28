@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-marketplacemetering/types'
-require_relative 'aws-sdk-marketplacemetering/client_api'
-require_relative 'aws-sdk-marketplacemetering/plugins/endpoints.rb'
-require_relative 'aws-sdk-marketplacemetering/client'
-require_relative 'aws-sdk-marketplacemetering/errors'
-require_relative 'aws-sdk-marketplacemetering/resource'
-require_relative 'aws-sdk-marketplacemetering/endpoint_parameters'
-require_relative 'aws-sdk-marketplacemetering/endpoint_provider'
-require_relative 'aws-sdk-marketplacemetering/endpoints'
 require_relative 'aws-sdk-marketplacemetering/customizations'
+require_relative 'aws-sdk-marketplacemetering/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWSMarketplace Metering. This module is available in the
 # `aws-sdk-marketplacemetering` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-marketplacemetering/customizations'
 #
 # @!group service
 module Aws::MarketplaceMetering
+  autoload :Types, 'aws-sdk-marketplacemetering/types'
+  autoload :ClientApi, 'aws-sdk-marketplacemetering/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-marketplacemetering/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-marketplacemetering/client'
+  autoload :Errors, 'aws-sdk-marketplacemetering/errors'
+  autoload :Resource, 'aws-sdk-marketplacemetering/resource'
+  autoload :EndpointParameters, 'aws-sdk-marketplacemetering/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-marketplacemetering/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-marketplacemetering/endpoints'
 
   GEM_VERSION = '1.64.0'
 

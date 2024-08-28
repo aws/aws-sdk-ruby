@@ -7,6 +7,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
+require_relative 'types'
+
 module Aws::KinesisVideoWebRTCStorage
   # @api private
   module ClientApi

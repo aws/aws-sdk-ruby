@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-licensemanagerusersubscriptions/types'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/client_api'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/plugins/endpoints.rb'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/client'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/errors'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/resource'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/endpoint_parameters'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/endpoint_provider'
-require_relative 'aws-sdk-licensemanagerusersubscriptions/endpoints'
 require_relative 'aws-sdk-licensemanagerusersubscriptions/customizations'
+require_relative 'aws-sdk-licensemanagerusersubscriptions/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS License Manager User Subscriptions. This module is available in the
 # `aws-sdk-licensemanagerusersubscriptions` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-licensemanagerusersubscriptions/customizations'
 #
 # @!group service
 module Aws::LicenseManagerUserSubscriptions
+  autoload :Types, 'aws-sdk-licensemanagerusersubscriptions/types'
+  autoload :ClientApi, 'aws-sdk-licensemanagerusersubscriptions/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-licensemanagerusersubscriptions/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-licensemanagerusersubscriptions/client'
+  autoload :Errors, 'aws-sdk-licensemanagerusersubscriptions/errors'
+  autoload :Resource, 'aws-sdk-licensemanagerusersubscriptions/resource'
+  autoload :EndpointParameters, 'aws-sdk-licensemanagerusersubscriptions/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-licensemanagerusersubscriptions/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-licensemanagerusersubscriptions/endpoints'
 
   GEM_VERSION = '1.20.0'
 

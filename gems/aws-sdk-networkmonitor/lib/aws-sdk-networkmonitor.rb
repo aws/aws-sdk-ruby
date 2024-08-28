@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-networkmonitor/types'
-require_relative 'aws-sdk-networkmonitor/client_api'
-require_relative 'aws-sdk-networkmonitor/plugins/endpoints.rb'
-require_relative 'aws-sdk-networkmonitor/client'
-require_relative 'aws-sdk-networkmonitor/errors'
-require_relative 'aws-sdk-networkmonitor/waiters'
-require_relative 'aws-sdk-networkmonitor/resource'
-require_relative 'aws-sdk-networkmonitor/endpoint_parameters'
-require_relative 'aws-sdk-networkmonitor/endpoint_provider'
-require_relative 'aws-sdk-networkmonitor/endpoints'
 require_relative 'aws-sdk-networkmonitor/customizations'
+require_relative 'aws-sdk-networkmonitor/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CloudWatch Network Monitor. This module is available in the
 # `aws-sdk-networkmonitor` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-networkmonitor/customizations'
 #
 # @!group service
 module Aws::NetworkMonitor
+  autoload :Types, 'aws-sdk-networkmonitor/types'
+  autoload :ClientApi, 'aws-sdk-networkmonitor/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-networkmonitor/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-networkmonitor/client'
+  autoload :Errors, 'aws-sdk-networkmonitor/errors'
+  autoload :Waiters, 'aws-sdk-networkmonitor/waiters'
+  autoload :Resource, 'aws-sdk-networkmonitor/resource'
+  autoload :EndpointParameters, 'aws-sdk-networkmonitor/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-networkmonitor/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-networkmonitor/endpoints'
 
   GEM_VERSION = '1.9.0'
 

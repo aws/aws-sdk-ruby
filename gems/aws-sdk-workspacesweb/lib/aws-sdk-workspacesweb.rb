@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-workspacesweb/types'
-require_relative 'aws-sdk-workspacesweb/client_api'
-require_relative 'aws-sdk-workspacesweb/plugins/endpoints.rb'
-require_relative 'aws-sdk-workspacesweb/client'
-require_relative 'aws-sdk-workspacesweb/errors'
-require_relative 'aws-sdk-workspacesweb/resource'
-require_relative 'aws-sdk-workspacesweb/endpoint_parameters'
-require_relative 'aws-sdk-workspacesweb/endpoint_provider'
-require_relative 'aws-sdk-workspacesweb/endpoints'
 require_relative 'aws-sdk-workspacesweb/customizations'
+require_relative 'aws-sdk-workspacesweb/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon WorkSpaces Web. This module is available in the
 # `aws-sdk-workspacesweb` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-workspacesweb/customizations'
 #
 # @!group service
 module Aws::WorkSpacesWeb
+  autoload :Types, 'aws-sdk-workspacesweb/types'
+  autoload :ClientApi, 'aws-sdk-workspacesweb/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-workspacesweb/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-workspacesweb/client'
+  autoload :Errors, 'aws-sdk-workspacesweb/errors'
+  autoload :Resource, 'aws-sdk-workspacesweb/resource'
+  autoload :EndpointParameters, 'aws-sdk-workspacesweb/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-workspacesweb/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-workspacesweb/endpoints'
 
   GEM_VERSION = '1.27.0'
 

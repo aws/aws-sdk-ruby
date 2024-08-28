@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-datapipeline/types'
-require_relative 'aws-sdk-datapipeline/client_api'
-require_relative 'aws-sdk-datapipeline/plugins/endpoints.rb'
-require_relative 'aws-sdk-datapipeline/client'
-require_relative 'aws-sdk-datapipeline/errors'
-require_relative 'aws-sdk-datapipeline/resource'
-require_relative 'aws-sdk-datapipeline/endpoint_parameters'
-require_relative 'aws-sdk-datapipeline/endpoint_provider'
-require_relative 'aws-sdk-datapipeline/endpoints'
 require_relative 'aws-sdk-datapipeline/customizations'
+require_relative 'aws-sdk-datapipeline/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Data Pipeline. This module is available in the
 # `aws-sdk-datapipeline` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-datapipeline/customizations'
 #
 # @!group service
 module Aws::DataPipeline
+  autoload :Types, 'aws-sdk-datapipeline/types'
+  autoload :ClientApi, 'aws-sdk-datapipeline/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-datapipeline/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-datapipeline/client'
+  autoload :Errors, 'aws-sdk-datapipeline/errors'
+  autoload :Resource, 'aws-sdk-datapipeline/resource'
+  autoload :EndpointParameters, 'aws-sdk-datapipeline/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-datapipeline/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-datapipeline/endpoints'
 
   GEM_VERSION = '1.56.0'
 

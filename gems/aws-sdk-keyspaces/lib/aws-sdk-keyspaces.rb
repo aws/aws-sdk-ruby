@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-keyspaces/types'
-require_relative 'aws-sdk-keyspaces/client_api'
-require_relative 'aws-sdk-keyspaces/plugins/endpoints.rb'
-require_relative 'aws-sdk-keyspaces/client'
-require_relative 'aws-sdk-keyspaces/errors'
-require_relative 'aws-sdk-keyspaces/waiters'
-require_relative 'aws-sdk-keyspaces/resource'
-require_relative 'aws-sdk-keyspaces/endpoint_parameters'
-require_relative 'aws-sdk-keyspaces/endpoint_provider'
-require_relative 'aws-sdk-keyspaces/endpoints'
 require_relative 'aws-sdk-keyspaces/customizations'
+require_relative 'aws-sdk-keyspaces/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Keyspaces. This module is available in the
 # `aws-sdk-keyspaces` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-keyspaces/customizations'
 #
 # @!group service
 module Aws::Keyspaces
+  autoload :Types, 'aws-sdk-keyspaces/types'
+  autoload :ClientApi, 'aws-sdk-keyspaces/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-keyspaces/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-keyspaces/client'
+  autoload :Errors, 'aws-sdk-keyspaces/errors'
+  autoload :Waiters, 'aws-sdk-keyspaces/waiters'
+  autoload :Resource, 'aws-sdk-keyspaces/resource'
+  autoload :EndpointParameters, 'aws-sdk-keyspaces/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-keyspaces/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-keyspaces/endpoints'
 
   GEM_VERSION = '1.25.0'
 

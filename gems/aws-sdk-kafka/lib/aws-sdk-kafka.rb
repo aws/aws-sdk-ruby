@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kafka/types'
-require_relative 'aws-sdk-kafka/client_api'
-require_relative 'aws-sdk-kafka/plugins/endpoints.rb'
-require_relative 'aws-sdk-kafka/client'
-require_relative 'aws-sdk-kafka/errors'
-require_relative 'aws-sdk-kafka/resource'
-require_relative 'aws-sdk-kafka/endpoint_parameters'
-require_relative 'aws-sdk-kafka/endpoint_provider'
-require_relative 'aws-sdk-kafka/endpoints'
 require_relative 'aws-sdk-kafka/customizations'
+require_relative 'aws-sdk-kafka/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Managed Streaming for Kafka. This module is available in the
 # `aws-sdk-kafka` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-kafka/customizations'
 #
 # @!group service
 module Aws::Kafka
+  autoload :Types, 'aws-sdk-kafka/types'
+  autoload :ClientApi, 'aws-sdk-kafka/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-kafka/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-kafka/client'
+  autoload :Errors, 'aws-sdk-kafka/errors'
+  autoload :Resource, 'aws-sdk-kafka/resource'
+  autoload :EndpointParameters, 'aws-sdk-kafka/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-kafka/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-kafka/endpoints'
 
   GEM_VERSION = '1.78.0'
 

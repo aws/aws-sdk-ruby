@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iotsecuretunneling/types'
-require_relative 'aws-sdk-iotsecuretunneling/client_api'
-require_relative 'aws-sdk-iotsecuretunneling/plugins/endpoints.rb'
-require_relative 'aws-sdk-iotsecuretunneling/client'
-require_relative 'aws-sdk-iotsecuretunneling/errors'
-require_relative 'aws-sdk-iotsecuretunneling/resource'
-require_relative 'aws-sdk-iotsecuretunneling/endpoint_parameters'
-require_relative 'aws-sdk-iotsecuretunneling/endpoint_provider'
-require_relative 'aws-sdk-iotsecuretunneling/endpoints'
 require_relative 'aws-sdk-iotsecuretunneling/customizations'
+require_relative 'aws-sdk-iotsecuretunneling/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT Secure Tunneling. This module is available in the
 # `aws-sdk-iotsecuretunneling` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iotsecuretunneling/customizations'
 #
 # @!group service
 module Aws::IoTSecureTunneling
+  autoload :Types, 'aws-sdk-iotsecuretunneling/types'
+  autoload :ClientApi, 'aws-sdk-iotsecuretunneling/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iotsecuretunneling/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iotsecuretunneling/client'
+  autoload :Errors, 'aws-sdk-iotsecuretunneling/errors'
+  autoload :Resource, 'aws-sdk-iotsecuretunneling/resource'
+  autoload :EndpointParameters, 'aws-sdk-iotsecuretunneling/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iotsecuretunneling/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iotsecuretunneling/endpoints'
 
   GEM_VERSION = '1.41.0'
 

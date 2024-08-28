@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/types'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/client_api'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/plugins/endpoints.rb'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/client'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/errors'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/resource'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/endpoint_parameters'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/endpoint_provider'
-require_relative 'aws-sdk-sagemakerfeaturestoreruntime/endpoints'
 require_relative 'aws-sdk-sagemakerfeaturestoreruntime/customizations'
+require_relative 'aws-sdk-sagemakerfeaturestoreruntime/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon SageMaker Feature Store Runtime. This module is available in the
 # `aws-sdk-sagemakerfeaturestoreruntime` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-sagemakerfeaturestoreruntime/customizations'
 #
 # @!group service
 module Aws::SageMakerFeatureStoreRuntime
+  autoload :Types, 'aws-sdk-sagemakerfeaturestoreruntime/types'
+  autoload :ClientApi, 'aws-sdk-sagemakerfeaturestoreruntime/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-sagemakerfeaturestoreruntime/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-sagemakerfeaturestoreruntime/client'
+  autoload :Errors, 'aws-sdk-sagemakerfeaturestoreruntime/errors'
+  autoload :Resource, 'aws-sdk-sagemakerfeaturestoreruntime/resource'
+  autoload :EndpointParameters, 'aws-sdk-sagemakerfeaturestoreruntime/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-sagemakerfeaturestoreruntime/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-sagemakerfeaturestoreruntime/endpoints'
 
   GEM_VERSION = '1.37.0'
 

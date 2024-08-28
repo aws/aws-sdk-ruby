@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-support/types'
-require_relative 'aws-sdk-support/client_api'
-require_relative 'aws-sdk-support/plugins/endpoints.rb'
-require_relative 'aws-sdk-support/client'
-require_relative 'aws-sdk-support/errors'
-require_relative 'aws-sdk-support/resource'
-require_relative 'aws-sdk-support/endpoint_parameters'
-require_relative 'aws-sdk-support/endpoint_provider'
-require_relative 'aws-sdk-support/endpoints'
 require_relative 'aws-sdk-support/customizations'
+require_relative 'aws-sdk-support/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Support. This module is available in the
 # `aws-sdk-support` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-support/customizations'
 #
 # @!group service
 module Aws::Support
+  autoload :Types, 'aws-sdk-support/types'
+  autoload :ClientApi, 'aws-sdk-support/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-support/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-support/client'
+  autoload :Errors, 'aws-sdk-support/errors'
+  autoload :Resource, 'aws-sdk-support/resource'
+  autoload :EndpointParameters, 'aws-sdk-support/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-support/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-support/endpoints'
 
   GEM_VERSION = '1.65.0'
 

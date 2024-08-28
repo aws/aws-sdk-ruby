@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-applicationdiscoveryservice/types'
-require_relative 'aws-sdk-applicationdiscoveryservice/client_api'
-require_relative 'aws-sdk-applicationdiscoveryservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-applicationdiscoveryservice/client'
-require_relative 'aws-sdk-applicationdiscoveryservice/errors'
-require_relative 'aws-sdk-applicationdiscoveryservice/resource'
-require_relative 'aws-sdk-applicationdiscoveryservice/endpoint_parameters'
-require_relative 'aws-sdk-applicationdiscoveryservice/endpoint_provider'
-require_relative 'aws-sdk-applicationdiscoveryservice/endpoints'
 require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
+require_relative 'aws-sdk-applicationdiscoveryservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Application Discovery Service. This module is available in the
 # `aws-sdk-applicationdiscoveryservice` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 #
 # @!group service
 module Aws::ApplicationDiscoveryService
+  autoload :Types, 'aws-sdk-applicationdiscoveryservice/types'
+  autoload :ClientApi, 'aws-sdk-applicationdiscoveryservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-applicationdiscoveryservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-applicationdiscoveryservice/client'
+  autoload :Errors, 'aws-sdk-applicationdiscoveryservice/errors'
+  autoload :Resource, 'aws-sdk-applicationdiscoveryservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-applicationdiscoveryservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-applicationdiscoveryservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-applicationdiscoveryservice/endpoints'
 
   GEM_VERSION = '1.72.0'
 

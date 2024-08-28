@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-devopsguru/types'
-require_relative 'aws-sdk-devopsguru/client_api'
-require_relative 'aws-sdk-devopsguru/plugins/endpoints.rb'
-require_relative 'aws-sdk-devopsguru/client'
-require_relative 'aws-sdk-devopsguru/errors'
-require_relative 'aws-sdk-devopsguru/resource'
-require_relative 'aws-sdk-devopsguru/endpoint_parameters'
-require_relative 'aws-sdk-devopsguru/endpoint_provider'
-require_relative 'aws-sdk-devopsguru/endpoints'
 require_relative 'aws-sdk-devopsguru/customizations'
+require_relative 'aws-sdk-devopsguru/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon DevOps Guru. This module is available in the
 # `aws-sdk-devopsguru` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-devopsguru/customizations'
 #
 # @!group service
 module Aws::DevOpsGuru
+  autoload :Types, 'aws-sdk-devopsguru/types'
+  autoload :ClientApi, 'aws-sdk-devopsguru/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-devopsguru/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-devopsguru/client'
+  autoload :Errors, 'aws-sdk-devopsguru/errors'
+  autoload :Resource, 'aws-sdk-devopsguru/resource'
+  autoload :EndpointParameters, 'aws-sdk-devopsguru/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-devopsguru/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-devopsguru/endpoints'
 
   GEM_VERSION = '1.48.0'
 

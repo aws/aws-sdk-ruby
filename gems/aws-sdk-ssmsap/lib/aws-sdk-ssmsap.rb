@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ssmsap/types'
-require_relative 'aws-sdk-ssmsap/client_api'
-require_relative 'aws-sdk-ssmsap/plugins/endpoints.rb'
-require_relative 'aws-sdk-ssmsap/client'
-require_relative 'aws-sdk-ssmsap/errors'
-require_relative 'aws-sdk-ssmsap/resource'
-require_relative 'aws-sdk-ssmsap/endpoint_parameters'
-require_relative 'aws-sdk-ssmsap/endpoint_provider'
-require_relative 'aws-sdk-ssmsap/endpoints'
 require_relative 'aws-sdk-ssmsap/customizations'
+require_relative 'aws-sdk-ssmsap/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Systems Manager for SAP. This module is available in the
 # `aws-sdk-ssmsap` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-ssmsap/customizations'
 #
 # @!group service
 module Aws::SsmSap
+  autoload :Types, 'aws-sdk-ssmsap/types'
+  autoload :ClientApi, 'aws-sdk-ssmsap/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ssmsap/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ssmsap/client'
+  autoload :Errors, 'aws-sdk-ssmsap/errors'
+  autoload :Resource, 'aws-sdk-ssmsap/resource'
+  autoload :EndpointParameters, 'aws-sdk-ssmsap/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ssmsap/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ssmsap/endpoints'
 
   GEM_VERSION = '1.25.0'
 

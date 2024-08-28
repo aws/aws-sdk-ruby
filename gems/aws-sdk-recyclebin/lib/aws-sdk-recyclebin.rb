@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-recyclebin/types'
-require_relative 'aws-sdk-recyclebin/client_api'
-require_relative 'aws-sdk-recyclebin/plugins/endpoints.rb'
-require_relative 'aws-sdk-recyclebin/client'
-require_relative 'aws-sdk-recyclebin/errors'
-require_relative 'aws-sdk-recyclebin/resource'
-require_relative 'aws-sdk-recyclebin/endpoint_parameters'
-require_relative 'aws-sdk-recyclebin/endpoint_provider'
-require_relative 'aws-sdk-recyclebin/endpoints'
 require_relative 'aws-sdk-recyclebin/customizations'
+require_relative 'aws-sdk-recyclebin/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Recycle Bin. This module is available in the
 # `aws-sdk-recyclebin` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-recyclebin/customizations'
 #
 # @!group service
 module Aws::RecycleBin
+  autoload :Types, 'aws-sdk-recyclebin/types'
+  autoload :ClientApi, 'aws-sdk-recyclebin/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-recyclebin/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-recyclebin/client'
+  autoload :Errors, 'aws-sdk-recyclebin/errors'
+  autoload :Resource, 'aws-sdk-recyclebin/resource'
+  autoload :EndpointParameters, 'aws-sdk-recyclebin/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-recyclebin/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-recyclebin/endpoints'
 
   GEM_VERSION = '1.27.0'
 

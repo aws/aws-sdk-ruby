@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ecs/types'
-require_relative 'aws-sdk-ecs/client_api'
-require_relative 'aws-sdk-ecs/plugins/endpoints.rb'
-require_relative 'aws-sdk-ecs/client'
-require_relative 'aws-sdk-ecs/errors'
-require_relative 'aws-sdk-ecs/waiters'
-require_relative 'aws-sdk-ecs/resource'
-require_relative 'aws-sdk-ecs/endpoint_parameters'
-require_relative 'aws-sdk-ecs/endpoint_provider'
-require_relative 'aws-sdk-ecs/endpoints'
 require_relative 'aws-sdk-ecs/customizations'
+require_relative 'aws-sdk-ecs/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon EC2 Container Service. This module is available in the
 # `aws-sdk-ecs` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-ecs/customizations'
 #
 # @!group service
 module Aws::ECS
+  autoload :Types, 'aws-sdk-ecs/types'
+  autoload :ClientApi, 'aws-sdk-ecs/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ecs/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ecs/client'
+  autoload :Errors, 'aws-sdk-ecs/errors'
+  autoload :Waiters, 'aws-sdk-ecs/waiters'
+  autoload :Resource, 'aws-sdk-ecs/resource'
+  autoload :EndpointParameters, 'aws-sdk-ecs/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ecs/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ecs/endpoints'
 
   GEM_VERSION = '1.155.0'
 

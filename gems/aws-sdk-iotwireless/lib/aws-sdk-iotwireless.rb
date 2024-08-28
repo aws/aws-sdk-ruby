@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iotwireless/types'
-require_relative 'aws-sdk-iotwireless/client_api'
-require_relative 'aws-sdk-iotwireless/plugins/endpoints.rb'
-require_relative 'aws-sdk-iotwireless/client'
-require_relative 'aws-sdk-iotwireless/errors'
-require_relative 'aws-sdk-iotwireless/resource'
-require_relative 'aws-sdk-iotwireless/endpoint_parameters'
-require_relative 'aws-sdk-iotwireless/endpoint_provider'
-require_relative 'aws-sdk-iotwireless/endpoints'
 require_relative 'aws-sdk-iotwireless/customizations'
+require_relative 'aws-sdk-iotwireless/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT Wireless. This module is available in the
 # `aws-sdk-iotwireless` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-iotwireless/customizations'
 #
 # @!group service
 module Aws::IoTWireless
+  autoload :Types, 'aws-sdk-iotwireless/types'
+  autoload :ClientApi, 'aws-sdk-iotwireless/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-iotwireless/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-iotwireless/client'
+  autoload :Errors, 'aws-sdk-iotwireless/errors'
+  autoload :Resource, 'aws-sdk-iotwireless/resource'
+  autoload :EndpointParameters, 'aws-sdk-iotwireless/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-iotwireless/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-iotwireless/endpoints'
 
   GEM_VERSION = '1.54.0'
 

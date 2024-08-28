@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-ec2instanceconnect/types'
-require_relative 'aws-sdk-ec2instanceconnect/client_api'
-require_relative 'aws-sdk-ec2instanceconnect/plugins/endpoints.rb'
-require_relative 'aws-sdk-ec2instanceconnect/client'
-require_relative 'aws-sdk-ec2instanceconnect/errors'
-require_relative 'aws-sdk-ec2instanceconnect/resource'
-require_relative 'aws-sdk-ec2instanceconnect/endpoint_parameters'
-require_relative 'aws-sdk-ec2instanceconnect/endpoint_provider'
-require_relative 'aws-sdk-ec2instanceconnect/endpoints'
 require_relative 'aws-sdk-ec2instanceconnect/customizations'
+require_relative 'aws-sdk-ec2instanceconnect/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS EC2 Instance Connect. This module is available in the
 # `aws-sdk-ec2instanceconnect` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-ec2instanceconnect/customizations'
 #
 # @!group service
 module Aws::EC2InstanceConnect
+  autoload :Types, 'aws-sdk-ec2instanceconnect/types'
+  autoload :ClientApi, 'aws-sdk-ec2instanceconnect/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-ec2instanceconnect/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-ec2instanceconnect/client'
+  autoload :Errors, 'aws-sdk-ec2instanceconnect/errors'
+  autoload :Resource, 'aws-sdk-ec2instanceconnect/resource'
+  autoload :EndpointParameters, 'aws-sdk-ec2instanceconnect/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-ec2instanceconnect/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-ec2instanceconnect/endpoints'
 
   GEM_VERSION = '1.46.0'
 

@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-sagemakergeospatial/types'
-require_relative 'aws-sdk-sagemakergeospatial/client_api'
-require_relative 'aws-sdk-sagemakergeospatial/plugins/endpoints.rb'
-require_relative 'aws-sdk-sagemakergeospatial/client'
-require_relative 'aws-sdk-sagemakergeospatial/errors'
-require_relative 'aws-sdk-sagemakergeospatial/resource'
-require_relative 'aws-sdk-sagemakergeospatial/endpoint_parameters'
-require_relative 'aws-sdk-sagemakergeospatial/endpoint_provider'
-require_relative 'aws-sdk-sagemakergeospatial/endpoints'
 require_relative 'aws-sdk-sagemakergeospatial/customizations'
+require_relative 'aws-sdk-sagemakergeospatial/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon SageMaker geospatial capabilities. This module is available in the
 # `aws-sdk-sagemakergeospatial` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-sagemakergeospatial/customizations'
 #
 # @!group service
 module Aws::SageMakerGeospatial
+  autoload :Types, 'aws-sdk-sagemakergeospatial/types'
+  autoload :ClientApi, 'aws-sdk-sagemakergeospatial/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-sagemakergeospatial/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-sagemakergeospatial/client'
+  autoload :Errors, 'aws-sdk-sagemakergeospatial/errors'
+  autoload :Resource, 'aws-sdk-sagemakergeospatial/resource'
+  autoload :EndpointParameters, 'aws-sdk-sagemakergeospatial/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-sagemakergeospatial/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-sagemakergeospatial/endpoints'
 
   GEM_VERSION = '1.20.0'
 

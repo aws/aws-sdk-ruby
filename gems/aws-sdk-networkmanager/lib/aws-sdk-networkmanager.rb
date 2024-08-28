@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-networkmanager/types'
-require_relative 'aws-sdk-networkmanager/client_api'
-require_relative 'aws-sdk-networkmanager/plugins/endpoints.rb'
-require_relative 'aws-sdk-networkmanager/client'
-require_relative 'aws-sdk-networkmanager/errors'
-require_relative 'aws-sdk-networkmanager/resource'
-require_relative 'aws-sdk-networkmanager/endpoint_parameters'
-require_relative 'aws-sdk-networkmanager/endpoint_provider'
-require_relative 'aws-sdk-networkmanager/endpoints'
 require_relative 'aws-sdk-networkmanager/customizations'
+require_relative 'aws-sdk-networkmanager/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Network Manager. This module is available in the
 # `aws-sdk-networkmanager` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-networkmanager/customizations'
 #
 # @!group service
 module Aws::NetworkManager
+  autoload :Types, 'aws-sdk-networkmanager/types'
+  autoload :ClientApi, 'aws-sdk-networkmanager/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-networkmanager/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-networkmanager/client'
+  autoload :Errors, 'aws-sdk-networkmanager/errors'
+  autoload :Resource, 'aws-sdk-networkmanager/resource'
+  autoload :EndpointParameters, 'aws-sdk-networkmanager/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-networkmanager/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-networkmanager/endpoints'
 
   GEM_VERSION = '1.49.0'
 

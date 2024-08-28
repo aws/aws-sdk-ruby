@@ -19,16 +19,16 @@ module Aws
       TEMPFILE_PREIX = 'aws-sdk-s3-upload_stream'.freeze
 
       # @api private
-      CREATE_OPTIONS =
-        Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
+      CREATE_OPTIONS = []
+        # Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
 
       # @api private
-      UPLOAD_PART_OPTIONS =
-        Set.new(Client.api.operation(:upload_part).input.shape.member_names)
+      UPLOAD_PART_OPTIONS = []
+        # Set.new(Client.api.operation(:upload_part).input.shape.member_names)
 
       # @api private
-      COMPLETE_UPLOAD_OPTIONS =
-        Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
+      COMPLETE_UPLOAD_OPTIONS = []
+        # Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
 
       # @option options [Client] :client
       def initialize(options = {})

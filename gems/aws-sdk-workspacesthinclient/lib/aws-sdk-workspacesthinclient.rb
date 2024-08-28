@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-workspacesthinclient/types'
-require_relative 'aws-sdk-workspacesthinclient/client_api'
-require_relative 'aws-sdk-workspacesthinclient/plugins/endpoints.rb'
-require_relative 'aws-sdk-workspacesthinclient/client'
-require_relative 'aws-sdk-workspacesthinclient/errors'
-require_relative 'aws-sdk-workspacesthinclient/resource'
-require_relative 'aws-sdk-workspacesthinclient/endpoint_parameters'
-require_relative 'aws-sdk-workspacesthinclient/endpoint_provider'
-require_relative 'aws-sdk-workspacesthinclient/endpoints'
 require_relative 'aws-sdk-workspacesthinclient/customizations'
+require_relative 'aws-sdk-workspacesthinclient/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon WorkSpaces Thin Client. This module is available in the
 # `aws-sdk-workspacesthinclient` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-workspacesthinclient/customizations'
 #
 # @!group service
 module Aws::WorkSpacesThinClient
+  autoload :Types, 'aws-sdk-workspacesthinclient/types'
+  autoload :ClientApi, 'aws-sdk-workspacesthinclient/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-workspacesthinclient/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-workspacesthinclient/client'
+  autoload :Errors, 'aws-sdk-workspacesthinclient/errors'
+  autoload :Resource, 'aws-sdk-workspacesthinclient/resource'
+  autoload :EndpointParameters, 'aws-sdk-workspacesthinclient/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-workspacesthinclient/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-workspacesthinclient/endpoints'
 
   GEM_VERSION = '1.12.0'
 

@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-bedrockagent/types'
-require_relative 'aws-sdk-bedrockagent/client_api'
-require_relative 'aws-sdk-bedrockagent/plugins/endpoints.rb'
-require_relative 'aws-sdk-bedrockagent/client'
-require_relative 'aws-sdk-bedrockagent/errors'
-require_relative 'aws-sdk-bedrockagent/resource'
-require_relative 'aws-sdk-bedrockagent/endpoint_parameters'
-require_relative 'aws-sdk-bedrockagent/endpoint_provider'
-require_relative 'aws-sdk-bedrockagent/endpoints'
 require_relative 'aws-sdk-bedrockagent/customizations'
+require_relative 'aws-sdk-bedrockagent/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Agents for Amazon Bedrock. This module is available in the
 # `aws-sdk-bedrockagent` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-bedrockagent/customizations'
 #
 # @!group service
 module Aws::BedrockAgent
+  autoload :Types, 'aws-sdk-bedrockagent/types'
+  autoload :ClientApi, 'aws-sdk-bedrockagent/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-bedrockagent/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-bedrockagent/client'
+  autoload :Errors, 'aws-sdk-bedrockagent/errors'
+  autoload :Resource, 'aws-sdk-bedrockagent/resource'
+  autoload :EndpointParameters, 'aws-sdk-bedrockagent/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-bedrockagent/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-bedrockagent/endpoints'
 
   GEM_VERSION = '1.22.0'
 

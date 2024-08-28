@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-batch/types'
-require_relative 'aws-sdk-batch/client_api'
-require_relative 'aws-sdk-batch/plugins/endpoints.rb'
-require_relative 'aws-sdk-batch/client'
-require_relative 'aws-sdk-batch/errors'
-require_relative 'aws-sdk-batch/resource'
-require_relative 'aws-sdk-batch/endpoint_parameters'
-require_relative 'aws-sdk-batch/endpoint_provider'
-require_relative 'aws-sdk-batch/endpoints'
 require_relative 'aws-sdk-batch/customizations'
+require_relative 'aws-sdk-batch/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Batch. This module is available in the
 # `aws-sdk-batch` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-batch/customizations'
 #
 # @!group service
 module Aws::Batch
+  autoload :Types, 'aws-sdk-batch/types'
+  autoload :ClientApi, 'aws-sdk-batch/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-batch/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-batch/client'
+  autoload :Errors, 'aws-sdk-batch/errors'
+  autoload :Resource, 'aws-sdk-batch/resource'
+  autoload :EndpointParameters, 'aws-sdk-batch/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-batch/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-batch/endpoints'
 
   GEM_VERSION = '1.96.0'
 

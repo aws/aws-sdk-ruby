@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-directoryservice/types'
-require_relative 'aws-sdk-directoryservice/client_api'
-require_relative 'aws-sdk-directoryservice/plugins/endpoints.rb'
-require_relative 'aws-sdk-directoryservice/client'
-require_relative 'aws-sdk-directoryservice/errors'
-require_relative 'aws-sdk-directoryservice/resource'
-require_relative 'aws-sdk-directoryservice/endpoint_parameters'
-require_relative 'aws-sdk-directoryservice/endpoint_provider'
-require_relative 'aws-sdk-directoryservice/endpoints'
 require_relative 'aws-sdk-directoryservice/customizations'
+require_relative 'aws-sdk-directoryservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Directory Service. This module is available in the
 # `aws-sdk-directoryservice` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-directoryservice/customizations'
 #
 # @!group service
 module Aws::DirectoryService
+  autoload :Types, 'aws-sdk-directoryservice/types'
+  autoload :ClientApi, 'aws-sdk-directoryservice/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-directoryservice/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-directoryservice/client'
+  autoload :Errors, 'aws-sdk-directoryservice/errors'
+  autoload :Resource, 'aws-sdk-directoryservice/resource'
+  autoload :EndpointParameters, 'aws-sdk-directoryservice/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-directoryservice/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-directoryservice/endpoints'
 
   GEM_VERSION = '1.71.0'
 

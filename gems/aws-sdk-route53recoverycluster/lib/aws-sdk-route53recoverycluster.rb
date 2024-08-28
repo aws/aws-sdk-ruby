@@ -11,16 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-route53recoverycluster/types'
-require_relative 'aws-sdk-route53recoverycluster/client_api'
-require_relative 'aws-sdk-route53recoverycluster/plugins/endpoints.rb'
-require_relative 'aws-sdk-route53recoverycluster/client'
-require_relative 'aws-sdk-route53recoverycluster/errors'
-require_relative 'aws-sdk-route53recoverycluster/resource'
-require_relative 'aws-sdk-route53recoverycluster/endpoint_parameters'
-require_relative 'aws-sdk-route53recoverycluster/endpoint_provider'
-require_relative 'aws-sdk-route53recoverycluster/endpoints'
 require_relative 'aws-sdk-route53recoverycluster/customizations'
+require_relative 'aws-sdk-route53recoverycluster/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Route53 Recovery Cluster. This module is available in the
 # `aws-sdk-route53recoverycluster` gem.
@@ -51,6 +43,17 @@ require_relative 'aws-sdk-route53recoverycluster/customizations'
 #
 # @!group service
 module Aws::Route53RecoveryCluster
+  autoload :Types, 'aws-sdk-route53recoverycluster/types'
+  autoload :ClientApi, 'aws-sdk-route53recoverycluster/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-route53recoverycluster/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-route53recoverycluster/client'
+  autoload :Errors, 'aws-sdk-route53recoverycluster/errors'
+  autoload :Resource, 'aws-sdk-route53recoverycluster/resource'
+  autoload :EndpointParameters, 'aws-sdk-route53recoverycluster/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-route53recoverycluster/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-route53recoverycluster/endpoints'
 
   GEM_VERSION = '1.32.0'
 

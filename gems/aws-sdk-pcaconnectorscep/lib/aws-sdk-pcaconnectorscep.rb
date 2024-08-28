@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-pcaconnectorscep/types'
-require_relative 'aws-sdk-pcaconnectorscep/client_api'
-require_relative 'aws-sdk-pcaconnectorscep/plugins/endpoints.rb'
-require_relative 'aws-sdk-pcaconnectorscep/client'
-require_relative 'aws-sdk-pcaconnectorscep/errors'
-require_relative 'aws-sdk-pcaconnectorscep/waiters'
-require_relative 'aws-sdk-pcaconnectorscep/resource'
-require_relative 'aws-sdk-pcaconnectorscep/endpoint_parameters'
-require_relative 'aws-sdk-pcaconnectorscep/endpoint_provider'
-require_relative 'aws-sdk-pcaconnectorscep/endpoints'
 require_relative 'aws-sdk-pcaconnectorscep/customizations'
+require_relative 'aws-sdk-pcaconnectorscep/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Private CA Connector for SCEP. This module is available in the
 # `aws-sdk-pcaconnectorscep` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-pcaconnectorscep/customizations'
 #
 # @!group service
 module Aws::PcaConnectorScep
+  autoload :Types, 'aws-sdk-pcaconnectorscep/types'
+  autoload :ClientApi, 'aws-sdk-pcaconnectorscep/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-pcaconnectorscep/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-pcaconnectorscep/client'
+  autoload :Errors, 'aws-sdk-pcaconnectorscep/errors'
+  autoload :Waiters, 'aws-sdk-pcaconnectorscep/waiters'
+  autoload :Resource, 'aws-sdk-pcaconnectorscep/resource'
+  autoload :EndpointParameters, 'aws-sdk-pcaconnectorscep/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-pcaconnectorscep/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-pcaconnectorscep/endpoints'
 
   GEM_VERSION = '1.4.0'
 

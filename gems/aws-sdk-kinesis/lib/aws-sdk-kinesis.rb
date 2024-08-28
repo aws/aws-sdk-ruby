@@ -11,19 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-kinesis/types'
-require_relative 'aws-sdk-kinesis/client_api'
-require_relative 'aws-sdk-kinesis/plugins/endpoints.rb'
-require_relative 'aws-sdk-kinesis/client'
-require_relative 'aws-sdk-kinesis/errors'
-require_relative 'aws-sdk-kinesis/waiters'
-require_relative 'aws-sdk-kinesis/resource'
-require_relative 'aws-sdk-kinesis/endpoint_parameters'
-require_relative 'aws-sdk-kinesis/endpoint_provider'
-require_relative 'aws-sdk-kinesis/endpoints'
 require_relative 'aws-sdk-kinesis/customizations'
-require_relative 'aws-sdk-kinesis/async_client'
-require_relative 'aws-sdk-kinesis/event_streams'
+require_relative 'aws-sdk-kinesis/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Kinesis. This module is available in the
 # `aws-sdk-kinesis` gem.
@@ -54,6 +43,20 @@ require_relative 'aws-sdk-kinesis/event_streams'
 #
 # @!group service
 module Aws::Kinesis
+  autoload :Types, 'aws-sdk-kinesis/types'
+  autoload :ClientApi, 'aws-sdk-kinesis/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-kinesis/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-kinesis/client'
+  autoload :Errors, 'aws-sdk-kinesis/errors'
+  autoload :Waiters, 'aws-sdk-kinesis/waiters'
+  autoload :Resource, 'aws-sdk-kinesis/resource'
+  autoload :EndpointParameters, 'aws-sdk-kinesis/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-kinesis/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-kinesis/endpoints'
+  autoload :AsyncClient, 'aws-sdk-kinesis/async_client'
+  autoload :EventStreams, 'aws-sdk-kinesis/event_streams'
 
   GEM_VERSION = '1.64.0'
 

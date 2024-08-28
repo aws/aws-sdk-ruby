@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-cloudfront/types'
-require_relative 'aws-sdk-cloudfront/client_api'
-require_relative 'aws-sdk-cloudfront/plugins/endpoints.rb'
-require_relative 'aws-sdk-cloudfront/client'
-require_relative 'aws-sdk-cloudfront/errors'
-require_relative 'aws-sdk-cloudfront/waiters'
-require_relative 'aws-sdk-cloudfront/resource'
-require_relative 'aws-sdk-cloudfront/endpoint_parameters'
-require_relative 'aws-sdk-cloudfront/endpoint_provider'
-require_relative 'aws-sdk-cloudfront/endpoints'
 require_relative 'aws-sdk-cloudfront/customizations'
+require_relative 'aws-sdk-cloudfront/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CloudFront. This module is available in the
 # `aws-sdk-cloudfront` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-cloudfront/customizations'
 #
 # @!group service
 module Aws::CloudFront
+  autoload :Types, 'aws-sdk-cloudfront/types'
+  autoload :ClientApi, 'aws-sdk-cloudfront/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-cloudfront/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-cloudfront/client'
+  autoload :Errors, 'aws-sdk-cloudfront/errors'
+  autoload :Waiters, 'aws-sdk-cloudfront/waiters'
+  autoload :Resource, 'aws-sdk-cloudfront/resource'
+  autoload :EndpointParameters, 'aws-sdk-cloudfront/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-cloudfront/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-cloudfront/endpoints'
 
   GEM_VERSION = '1.97.0'
 

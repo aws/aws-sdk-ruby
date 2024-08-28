@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-docdb/types'
-require_relative 'aws-sdk-docdb/client_api'
-require_relative 'aws-sdk-docdb/plugins/endpoints.rb'
-require_relative 'aws-sdk-docdb/client'
-require_relative 'aws-sdk-docdb/errors'
-require_relative 'aws-sdk-docdb/waiters'
-require_relative 'aws-sdk-docdb/resource'
-require_relative 'aws-sdk-docdb/endpoint_parameters'
-require_relative 'aws-sdk-docdb/endpoint_provider'
-require_relative 'aws-sdk-docdb/endpoints'
 require_relative 'aws-sdk-docdb/customizations'
+require_relative 'aws-sdk-docdb/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon DocumentDB with MongoDB compatibility. This module is available in the
 # `aws-sdk-docdb` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-docdb/customizations'
 #
 # @!group service
 module Aws::DocDB
+  autoload :Types, 'aws-sdk-docdb/types'
+  autoload :ClientApi, 'aws-sdk-docdb/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-docdb/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-docdb/client'
+  autoload :Errors, 'aws-sdk-docdb/errors'
+  autoload :Waiters, 'aws-sdk-docdb/waiters'
+  autoload :Resource, 'aws-sdk-docdb/resource'
+  autoload :EndpointParameters, 'aws-sdk-docdb/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-docdb/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-docdb/endpoints'
 
   GEM_VERSION = '1.72.0'
 

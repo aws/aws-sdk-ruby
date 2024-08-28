@@ -11,17 +11,8 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-dataexchange/types'
-require_relative 'aws-sdk-dataexchange/client_api'
-require_relative 'aws-sdk-dataexchange/plugins/endpoints.rb'
-require_relative 'aws-sdk-dataexchange/client'
-require_relative 'aws-sdk-dataexchange/errors'
-require_relative 'aws-sdk-dataexchange/waiters'
-require_relative 'aws-sdk-dataexchange/resource'
-require_relative 'aws-sdk-dataexchange/endpoint_parameters'
-require_relative 'aws-sdk-dataexchange/endpoint_provider'
-require_relative 'aws-sdk-dataexchange/endpoints'
 require_relative 'aws-sdk-dataexchange/customizations'
+require_relative 'aws-sdk-dataexchange/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Data Exchange. This module is available in the
 # `aws-sdk-dataexchange` gem.
@@ -52,6 +43,18 @@ require_relative 'aws-sdk-dataexchange/customizations'
 #
 # @!group service
 module Aws::DataExchange
+  autoload :Types, 'aws-sdk-dataexchange/types'
+  autoload :ClientApi, 'aws-sdk-dataexchange/client_api'
+  module Plugins
+    autoload :Endpoints, 'aws-sdk-dataexchange/plugins/endpoints.rb'
+  end
+  autoload :Client, 'aws-sdk-dataexchange/client'
+  autoload :Errors, 'aws-sdk-dataexchange/errors'
+  autoload :Waiters, 'aws-sdk-dataexchange/waiters'
+  autoload :Resource, 'aws-sdk-dataexchange/resource'
+  autoload :EndpointParameters, 'aws-sdk-dataexchange/endpoint_parameters'
+  autoload :EndpointProvider, 'aws-sdk-dataexchange/endpoint_provider'
+  autoload :Endpoints, 'aws-sdk-dataexchange/endpoints'
 
   GEM_VERSION = '1.53.0'
 
