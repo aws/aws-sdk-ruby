@@ -5,10 +5,10 @@ module Aws
     # Base for `TelemetryProvider` classes.
     # They are used to emit telemetry data. It needs the
     # following class implementations to function:
-    # - {TracerProviderBase} - A provider that returns a tracer
+    # * {TracerProviderBase} - A provider that returns a tracer
     #   instance. Then, a tracer will create spans and those
     #   spans will contain information in that given moment.
-    # - {ContextManagerBase} - Manages context and used to
+    # * {ContextManagerBase} - Manages context and used to
     #   return the current context within a trace.
     class TelemetryProviderBase
       # @param [Aws::Telemetry::TracerBase] tracer_provider A provider
