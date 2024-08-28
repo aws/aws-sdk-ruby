@@ -898,15 +898,17 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] max_cpus
-    #   The maximum number of CPUs to use in the group.
+    #   The maximum number of CPUs that can run concurrently across all
+    #   active runs in the run group.
     #   @return [Integer]
     #
     # @!attribute [rw] max_runs
-    #   The maximum number of concurrent runs for the group.
+    #   The maximum number of runs that can be running at the same time.
     #   @return [Integer]
     #
     # @!attribute [rw] max_duration
-    #   A maximum run time for the group in minutes.
+    #   The maximum time for each run (in minutes). If a run exceeds the
+    #   maximum run time, the run fails automatically.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -922,7 +924,8 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] max_gpus
-    #   The maximum GPUs that can be used by a run group.
+    #   The maximum number of GPUs that can run concurrently across all
+    #   active runs in the run group.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateRunGroupRequest AWS API Documentation
@@ -1191,7 +1194,7 @@ module Aws::Omics
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity for the workflow in gibibytes.
+    #   The default storage capacity for the workflow runs, in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -2216,6 +2219,10 @@ module Aws::Omics
     #   semantic content.
     #   @return [Types::ETag]
     #
+    # @!attribute [rw] creation_job_id
+    #   The read set's creation job ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadataResponse AWS API Documentation
     #
     class GetReadSetMetadataResponse < Struct.new(
@@ -2234,7 +2241,8 @@ module Aws::Omics
       :files,
       :status_message,
       :creation_type,
-      :etag)
+      :etag,
+      :creation_job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2399,6 +2407,14 @@ module Aws::Omics
     #   The reference's files.
     #   @return [Types::ReferenceFiles]
     #
+    # @!attribute [rw] creation_type
+    #   The reference's creation type.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_job_id
+    #   The reference's creation job ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReferenceMetadataResponse AWS API Documentation
     #
     class GetReferenceMetadataResponse < Struct.new(
@@ -2411,7 +2427,9 @@ module Aws::Omics
       :description,
       :creation_time,
       :update_time,
-      :files)
+      :files,
+      :creation_type,
+      :creation_job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3159,7 +3177,7 @@ module Aws::Omics
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] storage_capacity
-    #   The workflow's storage capacity in gibibytes.
+    #   The workflow's default run storage capacity in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
@@ -3315,6 +3333,10 @@ module Aws::Omics
     #   The source's tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] read_set_id
+    #   The source's read set ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ImportReadSetSourceItem AWS API Documentation
     #
     class ImportReadSetSourceItem < Struct.new(
@@ -3328,7 +3350,8 @@ module Aws::Omics
       :reference_arn,
       :name,
       :description,
-      :tags)
+      :tags,
+      :read_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3422,6 +3445,10 @@ module Aws::Omics
     #   The source's tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] reference_id
+    #   The source's reference ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ImportReferenceSourceItem AWS API Documentation
     #
     class ImportReferenceSourceItem < Struct.new(
@@ -3430,7 +3457,8 @@ module Aws::Omics
       :status_message,
       :name,
       :description,
-      :tags)
+      :tags,
+      :reference_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1141,8 +1141,8 @@ module Aws::BedrockAgent
     #
     # @!attribute [rw] credentials_secret_arn
     #   The Amazon Resource Name of an Secrets Manager secret that stores
-    #   your authentication credentials for your SharePoint site/sites. For
-    #   more information on the key-value pairs that must be included in
+    #   your authentication credentials for your Confluence instance URL.
+    #   For more information on the key-value pairs that must be included in
     #   your secret, depending on your authentication type, see [Confluence
     #   connection configuration][1].
     #
@@ -1491,14 +1491,16 @@ module Aws::BedrockAgent
     #
     #   You can set the data deletion policy to:
     #
-    #   * DELETE: Deletes all underlying data belonging to the data source
-    #     from the vector store upon deletion of a knowledge base or data
-    #     source resource. Note that the vector store itself is not deleted,
-    #     only the underlying data. This flag is ignored if an Amazon Web
+    #   * DELETE: Deletes all data from your data source that’s converted
+    #     into vector embeddings upon deletion of a knowledge base or data
+    #     source resource. Note that the **vector store itself is not
+    #     deleted**, only the data. This flag is ignored if an Amazon Web
     #     Services account is deleted.
     #
-    #   * RETAIN: Retains all underlying data in your vector store upon
-    #     deletion of a knowledge base or data source resource.
+    #   * RETAIN: Retains all data from your data source that’s converted
+    #     into vector embeddings upon deletion of a knowledge base or data
+    #     source resource. Note that the **vector store itself is not
+    #     deleted** if you delete a knowledge base or data source resource.
     #   @return [String]
     #
     # @!attribute [rw] data_source_configuration
@@ -1840,7 +1842,7 @@ module Aws::BedrockAgent
     #   @return [Types::FlowDefinition]
     #
     # @!attribute [rw] description
-    #   The description of the flow version.
+    #   The description of the version.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -1858,7 +1860,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the flow version.
+    #   The name of the version.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2144,7 +2146,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the prompt version.
+    #   A description for the version.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2152,7 +2154,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the prompt version.
+    #   The name of the prompt.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
@@ -2735,7 +2737,8 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] prompt_version
-    #   The version of the prompt to delete.
+    #   The version of the prompt to delete. To delete the prompt, omit this
+    #   field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeletePromptRequest AWS API Documentation
@@ -2853,7 +2856,7 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowAliases.html#API_agent_ListFlowAliases_ResponseSyntax
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the flow alias.
+    #   The Amazon Resource Name (ARN) of the alias.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -3358,7 +3361,7 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
-    # Contains information about the flow version.
+    # Contains information about a version of a flow.
     #
     # This data type is used in the following API operations:
     #
@@ -3376,7 +3379,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time at the flow version was created.
+    #   The time at the version was created.
     #   @return [Time]
     #
     # @!attribute [rw] id
@@ -3439,12 +3442,18 @@ module Aws::BedrockAgent
     #   function.
     #   @return [Hash<String,Types::ParameterDetail>]
     #
+    # @!attribute [rw] require_confirmation
+    #   Contains information if user confirmation is required to invoke the
+    #   function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/Function AWS API Documentation
     #
     class Function < Struct.new(
       :description,
       :name,
-      :parameters)
+      :parameters,
+      :require_confirmation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3718,7 +3727,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the flow alias.
+    #   The name of the alias.
     #   @return [String]
     #
     # @!attribute [rw] routing_configuration
@@ -3726,7 +3735,7 @@ module Aws::BedrockAgent
     #   @return [Array<Types::FlowAliasRoutingConfigurationListItem>]
     #
     # @!attribute [rw] updated_at
-    #   The time at which the flow alias was last updated.
+    #   The time at which the alias was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetFlowAliasResponse AWS API Documentation
@@ -3907,7 +3916,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the flow version.
+    #   The name of the version.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4001,7 +4010,8 @@ module Aws::BedrockAgent
     #
     # @!attribute [rw] prompt_version
     #   The version of the prompt about which you want to retrieve
-    #   information.
+    #   information. Omit this field to return information about the working
+    #   draft of the prompt.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetPromptRequest AWS API Documentation
@@ -4014,7 +4024,8 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the prompt.
+    #   The Amazon Resource Name (ARN) of the prompt or the prompt version
+    #   (if you specified a version in the request).
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -5003,8 +5014,7 @@ module Aws::BedrockAgent
     end
 
     # @!attribute [rw] flow_alias_summaries
-    #   A list, each member of which contains information about a flow
-    #   alias.
+    #   A list, each member of which contains information about an alias.
     #   @return [Array<Types::FlowAliasSummary>]
     #
     # @!attribute [rw] next_token
@@ -5239,7 +5249,9 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] prompt_identifier
-    #   The unique identifier of the prompt.
+    #   The unique identifier of the prompt for whose versions you want to
+    #   return information. Omit this field to list information about all
+    #   prompts in an account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListPromptsRequest AWS API Documentation
@@ -6065,7 +6077,8 @@ module Aws::BedrockAgent
     # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListPrompts.html#API_agent_ListPrompts_ResponseSyntax
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the prompt.
+    #   The Amazon Resource Name (ARN) of the prompt or the prompt version
+    #   (if you specified a version in the request).
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -6495,8 +6508,8 @@ module Aws::BedrockAgent
     #
     # @!attribute [rw] credentials_secret_arn
     #   The Amazon Resource Name of an Secrets Manager secret that stores
-    #   your authentication credentials for your SharePoint site/sites. For
-    #   more information on the key-value pairs that must be included in
+    #   your authentication credentials for your Salesforce instance URL.
+    #   For more information on the key-value pairs that must be included in
     #   your secret, depending on your authentication type, see [Salesforce
     #   connection configuration][1].
     #
@@ -7327,7 +7340,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the flow alias.
+    #   A description for the alias.
     #   @return [String]
     #
     # @!attribute [rw] flow_identifier
@@ -7335,7 +7348,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the flow alias.
+    #   The name of the alias.
     #   @return [String]
     #
     # @!attribute [rw] routing_configuration
@@ -7375,7 +7388,7 @@ module Aws::BedrockAgent
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the flow alias.
+    #   The name of the alias.
     #   @return [String]
     #
     # @!attribute [rw] routing_configuration
@@ -7383,7 +7396,7 @@ module Aws::BedrockAgent
     #   @return [Array<Types::FlowAliasRoutingConfigurationListItem>]
     #
     # @!attribute [rw] updated_at
-    #   The time at which the flow alias was last updated.
+    #   The time at which the alias was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateFlowAliasResponse AWS API Documentation

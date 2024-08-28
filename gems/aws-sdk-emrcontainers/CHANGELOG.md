@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2024-08-22)
+------------------
+
+* Feature - Correct endpoint for FIPS is configured for US Gov Regions.
+
 1.41.0 (2024-07-18)
 ------------------
 

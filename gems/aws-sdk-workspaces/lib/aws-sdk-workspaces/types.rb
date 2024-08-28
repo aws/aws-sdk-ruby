@@ -2243,6 +2243,25 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes the filter conditions for the WorkSpaces to return.
+    #
+    # @!attribute [rw] name
+    #   The name of the WorkSpaces to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values for filtering WorkSpaces
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesFilter AWS API Documentation
+    #
+    class DescribeWorkspaceDirectoriesFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] directory_ids
     #   The identifiers of the directories. If the value is null, all
     #   directories are retrieved.
@@ -2261,13 +2280,18 @@ module Aws::WorkSpaces
     #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   The filter condition for the WorkSpaces.
+    #   @return [Array<Types::DescribeWorkspaceDirectoriesFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesRequest AWS API Documentation
     #
     class DescribeWorkspaceDirectoriesRequest < Struct.new(
       :directory_ids,
       :workspace_directory_names,
       :limit,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2833,6 +2857,25 @@ module Aws::WorkSpaces
     #
     class GetAccountLinkResult < Struct.new(
       :account_link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configurations of the identity center.
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the identity center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IDCConfig AWS API Documentation
+    #
+    class IDCConfig < Struct.new(
+      :instance_arn,
+      :application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3414,6 +3457,25 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Specifies the configurations of the Microsoft Entra.
+    #
+    # @!attribute [rw] tenant_id
+    #   The identifier of the tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_config_secret_arn
+    #   The Amazon Resource Name (ARN) of the application config.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/MicrosoftEntraConfig AWS API Documentation
+    #
+    class MicrosoftEntraConfig < Struct.new(
+      :tenant_id,
+      :application_config_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_workspace_id
     #   The identifier of the WorkSpace to migrate from.
     #   @return [String]
@@ -3960,6 +4022,14 @@ module Aws::WorkSpaces
     #   The type of identity management the user is using.
     #   @return [String]
     #
+    # @!attribute [rw] idc_instance_arn
+    #   The Amazon Resource Name (ARN) of the identity center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] microsoft_entra_config
+    #   The details about Microsoft Entra config.
+    #   @return [Types::MicrosoftEntraConfig]
+    #
     # @!attribute [rw] workspace_type
     #   Indicates whether the directory's WorkSpace type is personal or
     #   pools.
@@ -3981,6 +4051,8 @@ module Aws::WorkSpaces
       :workspace_directory_name,
       :workspace_directory_description,
       :user_identity_type,
+      :idc_instance_arn,
+      :microsoft_entra_config,
       :workspace_type,
       :active_directory_config)
       SENSITIVE = []
@@ -5569,6 +5641,10 @@ module Aws::WorkSpaces
     #   for WorkSpaces login.
     #   @return [Types::CertificateBasedAuthProperties]
     #
+    # @!attribute [rw] microsoft_entra_config
+    #   Specifies details about Microsoft Entra configurations.
+    #   @return [Types::MicrosoftEntraConfig]
+    #
     # @!attribute [rw] workspace_directory_name
     #   The name fo the WorkSpace directory.
     #   @return [String]
@@ -5585,6 +5661,10 @@ module Aws::WorkSpaces
     #   Indicates whether the directory's WorkSpace type is personal or
     #   pools.
     #   @return [String]
+    #
+    # @!attribute [rw] idc_config
+    #   Specifies details about identity center configurations.
+    #   @return [Types::IDCConfig]
     #
     # @!attribute [rw] active_directory_config
     #   Information about the Active Directory config.
@@ -5619,10 +5699,12 @@ module Aws::WorkSpaces
       :selfservice_permissions,
       :saml_properties,
       :certificate_based_auth_properties,
+      :microsoft_entra_config,
       :workspace_directory_name,
       :workspace_directory_description,
       :user_identity_type,
       :workspace_type,
+      :idc_config,
       :active_directory_config,
       :streaming_properties,
       :error_message)

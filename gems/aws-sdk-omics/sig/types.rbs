@@ -649,6 +649,7 @@ module Aws::Omics
       attr_accessor status_message: ::String
       attr_accessor creation_type: ("IMPORT" | "UPLOAD")
       attr_accessor etag: Types::ETag
+      attr_accessor creation_job_id: ::String
       SENSITIVE: []
     end
 
@@ -700,6 +701,8 @@ module Aws::Omics
       attr_accessor creation_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor files: Types::ReferenceFiles
+      attr_accessor creation_type: ("IMPORT")
+      attr_accessor creation_job_id: ::String
       SENSITIVE: []
     end
 
@@ -941,6 +944,7 @@ module Aws::Omics
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor read_set_id: ::String
       SENSITIVE: []
     end
 
@@ -968,6 +972,7 @@ module Aws::Omics
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor reference_id: ::String
       SENSITIVE: []
     end
 

@@ -83,6 +83,7 @@ module Aws::Omics
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
     CreateWorkflowRequestStorageCapacityInteger = Shapes::IntegerShape.new(name: 'CreateWorkflowRequestStorageCapacityInteger')
     CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
+    CreationJobId = Shapes::StringShape.new(name: 'CreationJobId')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime', timestampFormat: "iso8601")
     CreationType = Shapes::StringShape.new(name: 'CreationType')
     DeleteAnnotationStoreRequest = Shapes::StructureShape.new(name: 'DeleteAnnotationStoreRequest')
@@ -317,6 +318,7 @@ module Aws::Omics
     ReadSetUploadPartListItemPartSizeLong = Shapes::IntegerShape.new(name: 'ReadSetUploadPartListItemPartSizeLong')
     ReferenceArn = Shapes::StringShape.new(name: 'ReferenceArn')
     ReferenceArnFilter = Shapes::StringShape.new(name: 'ReferenceArnFilter')
+    ReferenceCreationType = Shapes::StringShape.new(name: 'ReferenceCreationType')
     ReferenceDescription = Shapes::StringShape.new(name: 'ReferenceDescription')
     ReferenceFile = Shapes::StringShape.new(name: 'ReferenceFile')
     ReferenceFiles = Shapes::StructureShape.new(name: 'ReferenceFiles')
@@ -1043,6 +1045,7 @@ module Aws::Omics
     GetReadSetMetadataResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: ReadSetStatusMessage, location_name: "statusMessage"))
     GetReadSetMetadataResponse.add_member(:creation_type, Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
     GetReadSetMetadataResponse.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "etag"))
+    GetReadSetMetadataResponse.add_member(:creation_job_id, Shapes::ShapeRef.new(shape: CreationJobId, location_name: "creationJobId"))
     GetReadSetMetadataResponse.struct_class = Types::GetReadSetMetadataResponse
 
     GetReadSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: ReadSetId, required: true, location: "uri", location_name: "id"))
@@ -1084,6 +1087,8 @@ module Aws::Omics
     GetReferenceMetadataResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     GetReferenceMetadataResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
     GetReferenceMetadataResponse.add_member(:files, Shapes::ShapeRef.new(shape: ReferenceFiles, location_name: "files"))
+    GetReferenceMetadataResponse.add_member(:creation_type, Shapes::ShapeRef.new(shape: ReferenceCreationType, location_name: "creationType"))
+    GetReferenceMetadataResponse.add_member(:creation_job_id, Shapes::ShapeRef.new(shape: CreationJobId, location_name: "creationJobId"))
     GetReferenceMetadataResponse.struct_class = Types::GetReferenceMetadataResponse
 
     GetReferenceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ReferenceId, required: true, location: "uri", location_name: "id"))
@@ -1283,6 +1288,7 @@ module Aws::Omics
     ImportReadSetSourceItem.add_member(:name, Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
     ImportReadSetSourceItem.add_member(:description, Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
     ImportReadSetSourceItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ImportReadSetSourceItem.add_member(:read_set_id, Shapes::ShapeRef.new(shape: ReadSetId, location_name: "readSetId"))
     ImportReadSetSourceItem.struct_class = Types::ImportReadSetSourceItem
 
     ImportReadSetSourceList.member = Shapes::ShapeRef.new(shape: ImportReadSetSourceItem)
@@ -1308,6 +1314,7 @@ module Aws::Omics
     ImportReferenceSourceItem.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceName, location_name: "name"))
     ImportReferenceSourceItem.add_member(:description, Shapes::ShapeRef.new(shape: ReferenceDescription, location_name: "description"))
     ImportReferenceSourceItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ImportReferenceSourceItem.add_member(:reference_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "referenceId"))
     ImportReferenceSourceItem.struct_class = Types::ImportReferenceSourceItem
 
     ImportReferenceSourceList.member = Shapes::ShapeRef.new(shape: ImportReferenceSourceItem)
@@ -2131,9 +2138,10 @@ module Aws::Omics
 
       api.metadata = {
         "apiVersion" => "2022-11-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "omics",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Omics",
         "serviceId" => "Omics",
         "signatureVersion" => "v4",
@@ -3694,6 +3702,7 @@ module Aws::Omics
         o.http_method = "PUT"
         o.http_request_uri = "/sequencestore/{sequenceStoreId}/upload/{uploadId}/part"
         o['authtype'] = "v4-unsigned-body"
+        o['unsignedPayload'] = true
         o.endpoint_pattern = {
           "hostPrefix" => "storage-",
         }

@@ -22,7 +22,7 @@ module Aws::Chatbot
       attr_accessor configuration_name: ::String
       attr_accessor logging_level: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:webhook_description]
     end
 
     class ConfiguredTeam
@@ -32,10 +32,14 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class ConflictException < Aws::EmptyStructure
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class CreateChimeWebhookConfigurationException < Aws::EmptyStructure
+    class CreateChimeWebhookConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class CreateChimeWebhookConfigurationRequest
@@ -46,7 +50,7 @@ module Aws::Chatbot
       attr_accessor configuration_name: ::String
       attr_accessor logging_level: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:webhook_description, :webhook_url]
     end
 
     class CreateChimeWebhookConfigurationResult
@@ -54,7 +58,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class CreateSlackChannelConfigurationException < Aws::EmptyStructure
+    class CreateSlackChannelConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class CreateSlackChannelConfigurationRequest
@@ -68,7 +74,7 @@ module Aws::Chatbot
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:slack_channel_name]
     end
 
     class CreateSlackChannelConfigurationResult
@@ -76,7 +82,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class CreateTeamsChannelConfigurationException < Aws::EmptyStructure
+    class CreateTeamsChannelConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class CreateTeamsChannelConfigurationRequest
@@ -92,7 +100,7 @@ module Aws::Chatbot
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:channel_name, :team_name]
     end
 
     class CreateTeamsChannelConfigurationResult
@@ -100,7 +108,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class DeleteChimeWebhookConfigurationException < Aws::EmptyStructure
+    class DeleteChimeWebhookConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteChimeWebhookConfigurationRequest
@@ -111,7 +121,9 @@ module Aws::Chatbot
     class DeleteChimeWebhookConfigurationResult < Aws::EmptyStructure
     end
 
-    class DeleteMicrosoftTeamsUserIdentityException < Aws::EmptyStructure
+    class DeleteMicrosoftTeamsUserIdentityException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteMicrosoftTeamsUserIdentityRequest
@@ -123,7 +135,9 @@ module Aws::Chatbot
     class DeleteMicrosoftTeamsUserIdentityResult < Aws::EmptyStructure
     end
 
-    class DeleteSlackChannelConfigurationException < Aws::EmptyStructure
+    class DeleteSlackChannelConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteSlackChannelConfigurationRequest
@@ -134,7 +148,9 @@ module Aws::Chatbot
     class DeleteSlackChannelConfigurationResult < Aws::EmptyStructure
     end
 
-    class DeleteSlackUserIdentityException < Aws::EmptyStructure
+    class DeleteSlackUserIdentityException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteSlackUserIdentityRequest
@@ -147,7 +163,9 @@ module Aws::Chatbot
     class DeleteSlackUserIdentityResult < Aws::EmptyStructure
     end
 
-    class DeleteSlackWorkspaceAuthorizationFault < Aws::EmptyStructure
+    class DeleteSlackWorkspaceAuthorizationFault
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteSlackWorkspaceAuthorizationRequest
@@ -158,7 +176,9 @@ module Aws::Chatbot
     class DeleteSlackWorkspaceAuthorizationResult < Aws::EmptyStructure
     end
 
-    class DeleteTeamsChannelConfigurationException < Aws::EmptyStructure
+    class DeleteTeamsChannelConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteTeamsChannelConfigurationRequest
@@ -169,7 +189,9 @@ module Aws::Chatbot
     class DeleteTeamsChannelConfigurationResult < Aws::EmptyStructure
     end
 
-    class DeleteTeamsConfiguredTeamException < Aws::EmptyStructure
+    class DeleteTeamsConfiguredTeamException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteTeamsConfiguredTeamRequest
@@ -180,7 +202,9 @@ module Aws::Chatbot
     class DeleteTeamsConfiguredTeamResult < Aws::EmptyStructure
     end
 
-    class DescribeChimeWebhookConfigurationsException < Aws::EmptyStructure
+    class DescribeChimeWebhookConfigurationsException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DescribeChimeWebhookConfigurationsRequest
@@ -196,7 +220,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class DescribeSlackChannelConfigurationsException < Aws::EmptyStructure
+    class DescribeSlackChannelConfigurationsException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DescribeSlackChannelConfigurationsRequest
@@ -212,7 +238,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class DescribeSlackUserIdentitiesException < Aws::EmptyStructure
+    class DescribeSlackUserIdentitiesException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DescribeSlackUserIdentitiesRequest
@@ -228,7 +256,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class DescribeSlackWorkspacesException < Aws::EmptyStructure
+    class DescribeSlackWorkspacesException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DescribeSlackWorkspacesRequest
@@ -243,7 +273,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class GetAccountPreferencesException < Aws::EmptyStructure
+    class GetAccountPreferencesException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class GetAccountPreferencesRequest < Aws::EmptyStructure
@@ -254,7 +286,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class GetTeamsChannelConfigurationException < Aws::EmptyStructure
+    class GetTeamsChannelConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class GetTeamsChannelConfigurationRequest
@@ -267,19 +301,29 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class InternalServiceError < Aws::EmptyStructure
+    class InternalServiceError
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class InvalidParameterException < Aws::EmptyStructure
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class InvalidRequestException < Aws::EmptyStructure
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class LimitExceededException < Aws::EmptyStructure
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ListMicrosoftTeamsConfiguredTeamsException < Aws::EmptyStructure
+    class ListMicrosoftTeamsConfiguredTeamsException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ListMicrosoftTeamsConfiguredTeamsRequest
@@ -294,7 +338,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class ListMicrosoftTeamsUserIdentitiesException < Aws::EmptyStructure
+    class ListMicrosoftTeamsUserIdentitiesException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ListMicrosoftTeamsUserIdentitiesRequest
@@ -320,7 +366,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class ListTeamsChannelConfigurationsException < Aws::EmptyStructure
+    class ListTeamsChannelConfigurationsException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class ListTeamsChannelConfigurationsRequest
@@ -336,10 +384,14 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class ResourceNotFoundException < Aws::EmptyStructure
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
-    class ServiceUnavailableException < Aws::EmptyStructure
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class SlackChannelConfiguration
@@ -355,7 +407,7 @@ module Aws::Chatbot
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:slack_channel_name]
     end
 
     class SlackUserIdentity
@@ -402,7 +454,7 @@ module Aws::Chatbot
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:channel_name, :team_name]
     end
 
     class TeamsUserIdentity
@@ -416,7 +468,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class TooManyTagsException < Aws::EmptyStructure
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class UntagResourceRequest
@@ -428,7 +482,9 @@ module Aws::Chatbot
     class UntagResourceResponse < Aws::EmptyStructure
     end
 
-    class UpdateAccountPreferencesException < Aws::EmptyStructure
+    class UpdateAccountPreferencesException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class UpdateAccountPreferencesRequest
@@ -442,7 +498,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class UpdateChimeWebhookConfigurationException < Aws::EmptyStructure
+    class UpdateChimeWebhookConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class UpdateChimeWebhookConfigurationRequest
@@ -452,7 +510,7 @@ module Aws::Chatbot
       attr_accessor sns_topic_arns: ::Array[::String]
       attr_accessor iam_role_arn: ::String
       attr_accessor logging_level: ::String
-      SENSITIVE: []
+      SENSITIVE: [:webhook_description, :webhook_url]
     end
 
     class UpdateChimeWebhookConfigurationResult
@@ -460,7 +518,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class UpdateSlackChannelConfigurationException < Aws::EmptyStructure
+    class UpdateSlackChannelConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class UpdateSlackChannelConfigurationRequest
@@ -472,7 +532,7 @@ module Aws::Chatbot
       attr_accessor logging_level: ::String
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
-      SENSITIVE: []
+      SENSITIVE: [:slack_channel_name]
     end
 
     class UpdateSlackChannelConfigurationResult
@@ -480,7 +540,9 @@ module Aws::Chatbot
       SENSITIVE: []
     end
 
-    class UpdateTeamsChannelConfigurationException < Aws::EmptyStructure
+    class UpdateTeamsChannelConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class UpdateTeamsChannelConfigurationRequest
@@ -492,7 +554,7 @@ module Aws::Chatbot
       attr_accessor logging_level: ::String
       attr_accessor guardrail_policy_arns: ::Array[::String]
       attr_accessor user_authorization_required: bool
-      SENSITIVE: []
+      SENSITIVE: [:channel_name]
     end
 
     class UpdateTeamsChannelConfigurationResult

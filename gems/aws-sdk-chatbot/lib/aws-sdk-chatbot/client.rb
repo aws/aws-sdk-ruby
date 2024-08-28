@@ -425,32 +425,46 @@ module Aws::Chatbot
 
     # @!group API Operations
 
-    # Creates Chime Webhook Configuration
+    # Creates an AWS Chatbot configuration for Amazon Chime.
     #
     # @option params [required, String] :webhook_description
-    #   Description of the webhook. Recommend using the convention
-    #   `RoomName/WebhookName`. See Chime setup tutorial for more details:
-    #   https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+    #   A description of the webhook. We recommend using the convention
+    #   `RoomName/WebhookName`.
+    #
+    #   For more information, see [Tutorial: Get started with Amazon Chime][1]
+    #   in the <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
     #
     # @option params [required, String] :webhook_url
-    #   URL for the Chime webhook.
+    #   The URL for the Amazon Chime webhook.
     #
     # @option params [required, Array<String>] :sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #
     # @option params [required, String] :iam_role_arn
-    #   This is a user-defined role that AWS Chatbot will assume. This is not
-    #   the service-linked role. For more information, see IAM Policies for
-    #   AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the <i>
+    #   AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #
     # @option params [required, String] :configuration_name
     #   The name of the configuration.
     #
     # @option params [String] :logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to apply to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string map
+    #   of key-value pairs.
     #
     # @return [Types::CreateChimeWebhookConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -495,7 +509,7 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Creates MS Teams Channel Configuration
+    # Creates an AWS Chatbot configuration for Microsoft Teams.
     #
     # @option params [required, String] :channel_id
     #   The ID of the Microsoft Teams channel.
@@ -504,12 +518,17 @@ module Aws::Chatbot
     #   The name of the Microsoft Teams channel.
     #
     # @option params [required, String] :team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4 in
-    #   Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy and
+    #   paste the team ID from the console. For more information, see [Step 1:
+    #   Configure a Microsoft Teams client][1] in the <i> AWS Chatbot
+    #   Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #
     # @option params [String] :team_name
     #   The name of the Microsoft Teams Team.
@@ -518,30 +537,37 @@ module Aws::Chatbot
     #   The ID of the Microsoft Teams tenant.
     #
     # @option params [Array<String>] :sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #
     # @option params [required, String] :iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS Chatbot.
-    #   This is a user-defined role that AWS Chatbot will assume. This is not
-    #   the service-linked role. For more information, see IAM Policies for
-    #   AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the <i>
+    #   AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #
     # @option params [required, String] :configuration_name
     #   The name of the configuration.
     #
     # @option params [String] :logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #
     # @option params [Array<String>] :guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
-    #   if this is not set.
+    #   The AWS managed `AdministratorAccess` policy is applied by default if
+    #   this is not set.
     #
     # @option params [Boolean] :user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to apply to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string map
+    #   of key-value pairs.
     #
     # @return [Types::CreateTeamsChannelConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -598,45 +624,53 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Creates Slack Channel Configuration
+    # Creates an AWS Chatbot confugration for Slack.
     #
     # @option params [required, String] :slack_team_id
     #   The ID of the Slack workspace authorized with AWS Chatbot.
     #
     # @option params [required, String] :slack_channel_id
-    #   The ID of the Slack channel. To get the ID, open Slack, right click on
-    #   the channel name in the left pane, then choose Copy Link. The channel
-    #   ID is the 9-character string at the end of the URL. For example,
-    #   ABCBBLZZZ.
+    #   The ID of the Slack channel.
+    #
+    #   To get this ID, open Slack, right click on the channel name in the
+    #   left pane, then choose Copy Link. The channel ID is the 9-character
+    #   string at the end of the URL. For example, ABCBBLZZZ.
     #
     # @option params [String] :slack_channel_name
-    #   The name of the Slack Channel.
+    #   The name of the Slack channel.
     #
     # @option params [Array<String>] :sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #
     # @option params [required, String] :iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS Chatbot.
-    #   This is a user-defined role that AWS Chatbot will assume. This is not
-    #   the service-linked role. For more information, see IAM Policies for
-    #   AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the <i>
+    #   AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #
     # @option params [required, String] :configuration_name
     #   The name of the configuration.
     #
     # @option params [String] :logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #
     # @option params [Array<String>] :guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
-    #   if this is not set.
+    #   The AWS managed `AdministratorAccess` policy is applied by default if
+    #   this is not set.
     #
     # @option params [Boolean] :user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to apply to the configuration.
+    #   A map of tags assigned to a resource. A tag is a string-to-string map
+    #   of key-value pairs.
     #
     # @return [Types::CreateSlackChannelConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -690,10 +724,11 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Deletes a Chime Webhook Configuration
+    # Deletes a Amazon Chime webhook configuration for AWS Chatbot.
     #
     # @option params [required, String] :chat_configuration_arn
-    #   The ARN of the ChimeWebhookConfiguration to delete.
+    #   The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to
+    #   delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -712,10 +747,12 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Deletes MS Teams Channel Configuration
+    # Deletes a Microsoft Teams channel configuration for AWS Chatbot
     #
     # @option params [required, String] :chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration to delete.
+    #   The Amazon Resource Name (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration associated with the user identity
+    #   to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -739,12 +776,17 @@ module Aws::Chatbot
     # Teams team must have no channels configured to remove it.
     #
     # @option params [required, String] :team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4 in
-    #   Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams team authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy and
+    #   paste the team ID from the console. For more information, see [Step 1:
+    #   Configure a Microsoft Teams client][1] in the <i> AWS Chatbot
+    #   Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -763,14 +805,14 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Deletes a Teams user identity
+    # Identifes a user level permission for a channel configuration.
     #
     # @option params [required, String] :chat_configuration_arn
     #   The ARN of the MicrosoftTeamsChannelConfiguration associated with the
     #   user identity to delete.
     #
     # @option params [required, String] :user_id
-    #   Id from Microsoft Teams for user.
+    #   The Microsoft Teams user ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -790,10 +832,11 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Deletes Slack Channel Configuration
+    # Deletes a Slack channel configuration for AWS Chatbot
     #
     # @option params [required, String] :chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration to delete.
+    #   The Amazon Resource Name (ARN) of the SlackChannelConfiguration to
+    #   delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -812,7 +855,7 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Deletes a Slack user identity
+    # Deletes a user level permission for a Slack channel configuration.
     #
     # @option params [required, String] :chat_configuration_arn
     #   The ARN of the SlackChannelConfiguration associated with the user
@@ -822,7 +865,7 @@ module Aws::Chatbot
     #   The ID of the Slack workspace authorized with AWS Chatbot.
     #
     # @option params [required, String] :slack_user_id
-    #   The ID of the user in Slack.
+    #   The ID of the user in Slack
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -867,7 +910,7 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Lists Chime Webhook Configurations optionally filtered by
+    # Lists Amazon Chime webhook configurations optionally filtered by
     # ChatConfigurationArn
     #
     # @option params [Integer] :max_results
@@ -882,7 +925,8 @@ module Aws::Chatbot
     #   the value specified by MaxResults.
     #
     # @option params [String] :chat_configuration_arn
-    #   An optional ARN of a ChimeWebhookConfiguration to describe.
+    #   An optional Amazon Resource Number (ARN) of a
+    #   ChimeWebhookConfiguration to describe.
     #
     # @return [Types::DescribeChimeWebhookConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -923,7 +967,7 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Lists Slack Channel Configurations optionally filtered by
+    # Lists Slack channel configurations optionally filtered by
     # ChatConfigurationArn
     #
     # @option params [Integer] :max_results
@@ -938,7 +982,8 @@ module Aws::Chatbot
     #   the value specified by MaxResults.
     #
     # @option params [String] :chat_configuration_arn
-    #   An optional ARN of a SlackChannelConfiguration to describe.
+    #   An optional Amazon Resource Number (ARN) of a
+    #   SlackChannelConfiguration to describe.
     #
     # @return [Types::DescribeSlackChannelConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -988,8 +1033,8 @@ module Aws::Chatbot
     # Lists all Slack user identities with a mapped role.
     #
     # @option params [String] :chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration associated with the user
-    #   identities to describe.
+    #   The Amazon Resource Number (ARN) of the SlackChannelConfiguration
+    #   associated with the user identities to describe.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
@@ -1036,7 +1081,8 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Lists all authorized Slack Workspaces for AWS Account
+    # List all authorized Slack workspaces connected to the AWS Account
+    # onboarded with AWS Chatbot.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
@@ -1079,7 +1125,7 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Get Chatbot account level preferences
+    # Returns AWS Chatbot account preferences.
     #
     # @return [Types::GetAccountPreferencesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1099,10 +1145,11 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Get a single MS Teams Channel Configurations
+    # Returns a Microsoft Teams channel configuration in an AWS account.
     #
     # @option params [required, String] :chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration to retrieve.
+    #   The Amazon Resource Number (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration to retrieve.
     #
     # @return [Types::GetTeamsChannelConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1143,7 +1190,8 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Lists MS Teams Channel Configurations optionally filtered by TeamId
+    # Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS
+    # account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
@@ -1157,12 +1205,17 @@ module Aws::Chatbot
     #   the value specified by MaxResults.
     #
     # @option params [String] :team_id
-    #   The ID of the Microsoft Team authorized with AWS Chatbot. To get the
-    #   team ID, you must perform the initial authorization flow with
-    #   Microsoft Teams in the AWS Chatbot console. Then you can copy and
-    #   paste the team ID from the console. For more details, see steps 1-4 in
-    #   Get started with Microsoft Teams in the AWS Chatbot Administrator
-    #   Guide.
+    #   The ID of the Microsoft Teams authorized with AWS Chatbot.
+    #
+    #   To get the team ID, you must perform the initial authorization flow
+    #   with Microsoft Teams in the AWS Chatbot console. Then you can copy and
+    #   paste the team ID from the console. For more information, see [Step 1:
+    #   Configure a Microsoft Teams client][1] in the <i> AWS Chatbot
+    #   Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup
     #
     # @return [Types::ListTeamsChannelConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1210,7 +1263,7 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Lists all authorized MS teams for AWS Account
+    # Lists all authorized Microsoft Teams for an AWS Account
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
@@ -1254,11 +1307,12 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Lists all Microsoft Teams user identities with a mapped role.
+    # A list all Microsoft Teams user identities with a mapped role.
     #
     # @option params [String] :chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration associated with the
-    #   user identities to list.
+    #   The Amazon Resource Number (ARN) of the
+    #   MicrosoftTeamsChannelConfiguration associated with the user identities
+    #   to list.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
@@ -1307,10 +1361,11 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Retrieves the list of tags applied to a configuration.
+    # Lists all of the tags associated with the Amazon Resource Name (ARN)
+    # that you specify. The resource can be a user, server, or role.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the configuration.
+    #   The ARN you specified to list the tags of.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1337,7 +1392,9 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Applies the supplied tags to a configuration.
+    # Attaches a key-value pair to a resource, as identified by its Amazon
+    # Resource Name (ARN). Resources are users, servers, roles, and other
+    # entities.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the configuration.
@@ -1368,13 +1425,19 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Removes the supplied tags from a configuration
+    # Detaches a key-value pair from a resource, as identified by its Amazon
+    # Resource Name (ARN). Resources are users, servers, roles, and other
+    # entities.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the configuration.
+    #   The value of the resource that will have the tag removed. An Amazon
+    #   Resource Name (ARN) is an identifier for a specific AWS resource, such
+    #   as a server, user, or role.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of tag keys to remove from the configuration.
+    #   TagKeys are key-value pairs assigned to ARNs that can be used to group
+    #   and search for resources by type. This metadata can be attached to
+    #   resources for any purpose.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1394,22 +1457,23 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Update Chatbot account level preferences
+    # Updates AWS Chatbot account preferences.
     #
     # @option params [Boolean] :user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
     #
     # @option params [Boolean] :training_data_collection_enabled
-    #   Turns on training data collection. This helps improve the AWS Chatbot
-    #   experience by allowing AWS Chatbot to store and use your customer
-    #   information, such as AWS Chatbot configurations, notifications, user
-    #   inputs, AWS Chatbot generated responses, and interaction data. This
-    #   data helps us to continuously improve and develop Artificial
-    #   Intelligence (AI) technologies. Your data is not shared with any third
-    #   parties and is protected using sophisticated controls to prevent
-    #   unauthorized access and misuse. AWS Chatbot does not store or use
-    #   interactions in chat channels with Amazon Q for training AWS Chatbot’s
-    #   AI technologies.
+    #   Turns on training data collection.
+    #
+    #   This helps improve the AWS Chatbot experience by allowing AWS Chatbot
+    #   to store and use your customer information, such as AWS Chatbot
+    #   configurations, notifications, user inputs, AWS Chatbot generated
+    #   responses, and interaction data. This data helps us to continuously
+    #   improve and develop Artificial Intelligence (AI) technologies. Your
+    #   data is not shared with any third parties and is protected using
+    #   sophisticated controls to prevent unauthorized access and misuse. AWS
+    #   Chatbot does not store or use interactions in chat channels with
+    #   Amazon Q for training AI technologies for AWS Chatbot.
     #
     # @return [Types::UpdateAccountPreferencesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1436,30 +1500,42 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Updates a Chime Webhook Configuration
+    # Updates a Amazon Chime webhook configuration.
     #
     # @option params [required, String] :chat_configuration_arn
-    #   The ARN of the ChimeWebhookConfiguration to update.
+    #   The Amazon Resource Number (ARN) of the ChimeWebhookConfiguration to
+    #   update.
     #
     # @option params [String] :webhook_description
-    #   Description of the webhook. Recommend using the convention
-    #   `RoomName/WebhookName`. See Chime setup tutorial for more details:
-    #   https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.
+    #   A description of the webhook. We recommend using the convention
+    #   `RoomName/WebhookName`.
+    #
+    #   For more information, see [Tutorial: Get started with Amazon Chime][1]
+    #   in the <i> AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html
     #
     # @option params [String] :webhook_url
-    #   URL for the Chime webhook.
+    #   The URL for the Amazon Chime webhook.
     #
     # @option params [Array<String>] :sns_topic_arns
     #   The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
     #
     # @option params [String] :iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS Chatbot.
-    #   This is a user-defined role that AWS Chatbot will assume. This is not
-    #   the service-linked role. For more information, see IAM Policies for
-    #   AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the <i>
+    #   AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #
     # @option params [String] :logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #
     # @return [Types::UpdateChimeWebhookConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1498,10 +1574,11 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Updates MS Teams Channel Configuration
+    # Updates an Microsoft Teams channel configuration.
     #
     # @option params [required, String] :chat_configuration_arn
-    #   The ARN of the MicrosoftTeamsChannelConfiguration to update.
+    #   The Amazon Resource Number (ARN) of the TeamsChannelConfiguration to
+    #   update.
     #
     # @option params [required, String] :channel_id
     #   The ID of the Microsoft Teams channel.
@@ -1510,21 +1587,27 @@ module Aws::Chatbot
     #   The name of the Microsoft Teams channel.
     #
     # @option params [Array<String>] :sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #
     # @option params [String] :iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS Chatbot.
-    #   This is a user-defined role that AWS Chatbot will assume. This is not
-    #   the service-linked role. For more information, see IAM Policies for
-    #   AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the <i>
+    #   AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #
     # @option params [String] :logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #
     # @option params [Array<String>] :guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
-    #   if this is not set.
+    #   The AWS managed `AdministratorAccess` policy is applied by default if
+    #   this is not set.
     #
     # @option params [Boolean] :user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
@@ -1575,36 +1658,44 @@ module Aws::Chatbot
       req.send_request(options)
     end
 
-    # Updates Slack Channel Configuration
+    # Updates a Slack channel configuration.
     #
     # @option params [required, String] :chat_configuration_arn
-    #   The ARN of the SlackChannelConfiguration to update.
+    #   The Amazon Resource Number (ARN) of the SlackChannelConfiguration to
+    #   update.
     #
     # @option params [required, String] :slack_channel_id
-    #   The ID of the Slack channel. To get the ID, open Slack, right click on
-    #   the channel name in the left pane, then choose Copy Link. The channel
-    #   ID is the 9-character string at the end of the URL. For example,
-    #   ABCBBLZZZ.
+    #   The ID of the Slack channel.
+    #
+    #   To get this ID, open Slack, right click on the channel name in the
+    #   left pane, then choose Copy Link. The channel ID is the 9-character
+    #   string at the end of the URL. For example, ABCBBLZZZ.
     #
     # @option params [String] :slack_channel_name
-    #   The name of the Slack Channel.
+    #   The name of the Slack channel.
     #
     # @option params [Array<String>] :sns_topic_arns
-    #   The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+    #   The Amazon Resource Names (ARNs) of the SNS topics that deliver
+    #   notifications to AWS Chatbot.
     #
     # @option params [String] :iam_role_arn
-    #   The ARN of the IAM role that defines the permissions for AWS Chatbot.
-    #   This is a user-defined role that AWS Chatbot will assume. This is not
-    #   the service-linked role. For more information, see IAM Policies for
-    #   AWS Chatbot.
+    #   A user-defined role that AWS Chatbot assumes. This is not the
+    #   service-linked role.
+    #
+    #   For more information, see [IAM policies for AWS Chatbot][1] in the <i>
+    #   AWS Chatbot Administrator Guide</i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html
     #
     # @option params [String] :logging_level
-    #   Logging levels include ERROR, INFO, or NONE.
+    #   Logging levels include `ERROR`, `INFO`, or `NONE`.
     #
     # @option params [Array<String>] :guardrail_policy_arns
     #   The list of IAM policy ARNs that are applied as channel guardrails.
-    #   The AWS managed 'AdministratorAccess' policy is applied by default
-    #   if this is not set.
+    #   The AWS managed `AdministratorAccess` policy is applied by default if
+    #   this is not set.
     #
     # @option params [Boolean] :user_authorization_required
     #   Enables use of a user role requirement in your chat configuration.
@@ -1667,7 +1758,7 @@ module Aws::Chatbot
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chatbot'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -677,11 +677,18 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class DescribeWorkspaceDirectoriesFilter
+      attr_accessor name: ("USER_IDENTITY_TYPE" | "WORKSPACE_TYPE")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DescribeWorkspaceDirectoriesRequest
       attr_accessor directory_ids: ::Array[::String]
       attr_accessor workspace_directory_names: ::Array[::String]
       attr_accessor limit: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::DescribeWorkspaceDirectoriesFilter]
       SENSITIVE: []
     end
 
@@ -860,6 +867,12 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class IDCConfig
+      attr_accessor instance_arn: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
     class ImagePermission
       attr_accessor shared_account_id: ::String
       SENSITIVE: []
@@ -981,6 +994,12 @@ module Aws::WorkSpaces
     class ListAvailableManagementCidrRangesResult
       attr_accessor management_cidr_ranges: ::Array[::String]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MicrosoftEntraConfig
+      attr_accessor tenant_id: ::String
+      attr_accessor application_config_secret_arn: ::String
       SENSITIVE: []
     end
 
@@ -1167,7 +1186,9 @@ module Aws::WorkSpaces
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor workspace_directory_name: ::String
       attr_accessor workspace_directory_description: ::String
-      attr_accessor user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE")
+      attr_accessor user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE" | "AWS_IAM_IDENTITY_CENTER")
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor microsoft_entra_config: Types::MicrosoftEntraConfig
       attr_accessor workspace_type: ("PERSONAL" | "POOLS")
       attr_accessor active_directory_config: Types::ActiveDirectoryConfig
       SENSITIVE: []
@@ -1592,7 +1613,7 @@ module Aws::WorkSpaces
       attr_accessor dns_ip_addresses: ::Array[::String]
       attr_accessor customer_user_name: ::String
       attr_accessor iam_role_id: ::String
-      attr_accessor directory_type: ("SIMPLE_AD" | "AD_CONNECTOR" | "CUSTOMER_MANAGED")
+      attr_accessor directory_type: ("SIMPLE_AD" | "AD_CONNECTOR" | "CUSTOMER_MANAGED" | "AWS_IAM_IDENTITY_CENTER")
       attr_accessor workspace_security_group_id: ::String
       attr_accessor state: ("REGISTERING" | "REGISTERED" | "DEREGISTERING" | "DEREGISTERED" | "ERROR")
       attr_accessor workspace_creation_properties: Types::DefaultWorkspaceCreationProperties
@@ -1602,10 +1623,12 @@ module Aws::WorkSpaces
       attr_accessor selfservice_permissions: Types::SelfservicePermissions
       attr_accessor saml_properties: Types::SamlProperties
       attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties
+      attr_accessor microsoft_entra_config: Types::MicrosoftEntraConfig
       attr_accessor workspace_directory_name: ::String
       attr_accessor workspace_directory_description: ::String
-      attr_accessor user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE")
+      attr_accessor user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE" | "AWS_IAM_IDENTITY_CENTER")
       attr_accessor workspace_type: ("PERSONAL" | "POOLS")
+      attr_accessor idc_config: Types::IDCConfig
       attr_accessor active_directory_config: Types::ActiveDirectoryConfig
       attr_accessor streaming_properties: Types::StreamingProperties
       attr_accessor error_message: ::String

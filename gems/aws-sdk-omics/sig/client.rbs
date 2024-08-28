@@ -612,6 +612,7 @@ module Aws
         def status_message: () -> ::String
         def creation_type: () -> ("IMPORT" | "UPLOAD")
         def etag: () -> Types::ETag
+        def creation_job_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_read_set_metadata-instance_method
       def get_read_set_metadata: (
@@ -664,6 +665,8 @@ module Aws
         def creation_time: () -> ::Time
         def update_time: () -> ::Time
         def files: () -> Types::ReferenceFiles
+        def creation_type: () -> ("IMPORT")
+        def creation_job_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_reference_metadata-instance_method
       def get_reference_metadata: (

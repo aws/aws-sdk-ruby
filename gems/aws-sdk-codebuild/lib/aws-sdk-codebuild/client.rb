@@ -1134,6 +1134,14 @@ module Aws::CodeBuild
     #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific
     #     (Sydney).
     #
+    #   * The environment type `MAC_ARM` is available for Medium fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Asia Pacific (Sydney), and EU (Frankfurt)
+    #
+    #   * The environment type `MAC_ARM` is available for Large fleets only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon), and
+    #     Asia Pacific (Sydney).
+    #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific
@@ -4947,6 +4955,14 @@ module Aws::CodeBuild
     #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific
     #     (Sydney).
     #
+    #   * The environment type `MAC_ARM` is available for Medium fleets only
+    #     in regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Asia Pacific (Sydney), and EU (Frankfurt)
+    #
+    #   * The environment type `MAC_ARM` is available for Large fleets only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon), and
+    #     Asia Pacific (Sydney).
+    #
     #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
     #     only in regions US East (N. Virginia), US East (Ohio), US West
     #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific
@@ -5827,7 +5843,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

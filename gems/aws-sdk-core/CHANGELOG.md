@@ -3,6 +3,17 @@ Unreleased Changes
 
 * Feature - Add support for Observability which includes a configuration, `telemetry_provider` and an OpenTelemetry-based telemetry provider.
 
+3.202.0 (2024-08-27)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Reduce initial memory usage by auto-loading bundled gems (STS, SSO, SSOOIDC).
+
 3.201.5 (2024-08-15)
 ------------------
 

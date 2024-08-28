@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2024-08-22)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now provides EBS health check to manage EC2 instance replacement
+
 1.114.0 (2024-07-30)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2024-08-23)
+------------------
+
+* Feature - Added support for the MAC_ARM environment type for CodeBuild fleets.
+
 1.124.0 (2024-08-19)
 ------------------
 

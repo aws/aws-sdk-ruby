@@ -73,6 +73,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class CreateChimeWebhookConfigurationException < ServiceError
@@ -82,6 +87,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::CreateChimeWebhookConfigurationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -93,6 +103,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class CreateTeamsChannelConfigurationException < ServiceError
@@ -102,6 +117,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::CreateTeamsChannelConfigurationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -113,6 +133,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class DeleteMicrosoftTeamsUserIdentityException < ServiceError
@@ -122,6 +147,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::DeleteMicrosoftTeamsUserIdentityException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -133,6 +163,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class DeleteSlackUserIdentityException < ServiceError
@@ -142,6 +177,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::DeleteSlackUserIdentityException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -153,6 +193,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class DeleteTeamsChannelConfigurationException < ServiceError
@@ -162,6 +207,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::DeleteTeamsChannelConfigurationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -173,6 +223,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class DescribeChimeWebhookConfigurationsException < ServiceError
@@ -182,6 +237,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::DescribeChimeWebhookConfigurationsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -193,6 +253,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class DescribeSlackUserIdentitiesException < ServiceError
@@ -202,6 +267,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::DescribeSlackUserIdentitiesException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -213,6 +283,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class GetAccountPreferencesException < ServiceError
@@ -222,6 +297,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::GetAccountPreferencesException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -233,6 +313,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class InternalServiceError < ServiceError
@@ -242,6 +327,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::InternalServiceError] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -253,6 +343,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class InvalidRequestException < ServiceError
@@ -262,6 +357,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::InvalidRequestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -273,6 +373,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ListMicrosoftTeamsConfiguredTeamsException < ServiceError
@@ -282,6 +387,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::ListMicrosoftTeamsConfiguredTeamsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -293,6 +403,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ListTeamsChannelConfigurationsException < ServiceError
@@ -302,6 +417,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::ListTeamsChannelConfigurationsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -313,6 +433,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ServiceUnavailableException < ServiceError
@@ -322,6 +447,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::ServiceUnavailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -333,6 +463,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class UpdateAccountPreferencesException < ServiceError
@@ -342,6 +477,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::UpdateAccountPreferencesException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 
@@ -353,6 +493,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class UpdateSlackChannelConfigurationException < ServiceError
@@ -363,6 +508,11 @@ module Aws::Chatbot
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class UpdateTeamsChannelConfigurationException < ServiceError
@@ -372,6 +522,11 @@ module Aws::Chatbot
       # @param [Aws::Chatbot::Types::UpdateTeamsChannelConfigurationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

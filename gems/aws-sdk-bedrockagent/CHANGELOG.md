@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-08-23)
+------------------
+
+* Feature - Releasing the support for Action User Confirmation.
+
 1.19.0 (2024-07-18)
 ------------------
 

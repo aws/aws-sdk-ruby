@@ -284,9 +284,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_asset_model-instance_method
       def create_asset_model: (
                                 asset_model_name: ::String,
+                                ?asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL"),
+                                ?asset_model_id: ::String,
+                                ?asset_model_external_id: ::String,
                                 ?asset_model_description: ::String,
                                 ?asset_model_properties: Array[
                                   {
+                                    id: ::String?,
+                                    external_id: ::String?,
                                     name: ::String,
                                     data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
                                     data_type_spec: ::String?,
@@ -353,26 +358,28 @@ module Aws
                                           compute_location: ("EDGE" | "CLOUD")
                                         }?
                                       }?
-                                    },
-                                    id: ::String?,
-                                    external_id: ::String?
+                                    }
                                   },
                                 ],
                                 ?asset_model_hierarchies: Array[
                                   {
-                                    name: ::String,
-                                    child_asset_model_id: ::String,
                                     id: ::String?,
-                                    external_id: ::String?
+                                    external_id: ::String?,
+                                    name: ::String,
+                                    child_asset_model_id: ::String
                                   },
                                 ],
                                 ?asset_model_composite_models: Array[
                                   {
+                                    id: ::String?,
+                                    external_id: ::String?,
                                     name: ::String,
                                     description: ::String?,
                                     type: ::String,
                                     properties: Array[
                                       {
+                                        id: ::String?,
+                                        external_id: ::String?,
                                         name: ::String,
                                         data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
                                         data_type_spec: ::String?,
@@ -439,20 +446,13 @@ module Aws
                                               compute_location: ("EDGE" | "CLOUD")
                                             }?
                                           }?
-                                        },
-                                        id: ::String?,
-                                        external_id: ::String?
+                                        }
                                       },
-                                    ]?,
-                                    id: ::String?,
-                                    external_id: ::String?
+                                    ]?
                                   },
                                 ],
                                 ?client_token: ::String,
-                                ?tags: Hash[::String, ::String],
-                                ?asset_model_id: ::String,
-                                ?asset_model_external_id: ::String,
-                                ?asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+                                ?tags: Hash[::String, ::String]
                               ) -> _CreateAssetModelResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetModelResponseSuccess
 
@@ -465,8 +465,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_asset_model_composite_model-instance_method
       def create_asset_model_composite_model: (
                                                 asset_model_id: ::String,
-                                                ?parent_asset_model_composite_model_id: ::String,
                                                 ?asset_model_composite_model_external_id: ::String,
+                                                ?parent_asset_model_composite_model_id: ::String,
                                                 ?asset_model_composite_model_id: ::String,
                                                 ?asset_model_composite_model_description: ::String,
                                                 asset_model_composite_model_name: ::String,
@@ -475,6 +475,8 @@ module Aws
                                                 ?composed_asset_model_id: ::String,
                                                 ?asset_model_composite_model_properties: Array[
                                                   {
+                                                    id: ::String?,
+                                                    external_id: ::String?,
                                                     name: ::String,
                                                     data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
                                                     data_type_spec: ::String?,
@@ -541,11 +543,12 @@ module Aws
                                                           compute_location: ("EDGE" | "CLOUD")
                                                         }?
                                                       }?
-                                                    },
-                                                    id: ::String?,
-                                                    external_id: ::String?
+                                                    }
                                                   },
-                                                ]
+                                                ],
+                                                ?if_match: ::String,
+                                                ?if_none_match: ::String,
+                                                ?match_for_version_type: ("LATEST" | "ACTIVE")
                                               ) -> _CreateAssetModelCompositeModelResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetModelCompositeModelResponseSuccess
 
@@ -695,7 +698,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset_model-instance_method
       def delete_asset_model: (
                                 asset_model_id: ::String,
-                                ?client_token: ::String
+                                ?client_token: ::String,
+                                ?if_match: ::String,
+                                ?if_none_match: ::String,
+                                ?match_for_version_type: ("LATEST" | "ACTIVE")
                               ) -> _DeleteAssetModelResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetModelResponseSuccess
 
@@ -707,7 +713,10 @@ module Aws
       def delete_asset_model_composite_model: (
                                                 asset_model_id: ::String,
                                                 asset_model_composite_model_id: ::String,
-                                                ?client_token: ::String
+                                                ?client_token: ::String,
+                                                ?if_match: ::String,
+                                                ?if_none_match: ::String,
+                                                ?match_for_version_type: ("LATEST" | "ACTIVE")
                                               ) -> _DeleteAssetModelCompositeModelResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetModelCompositeModelResponseSuccess
 
@@ -833,23 +842,26 @@ module Aws
       interface _DescribeAssetModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetModelResponse]
         def asset_model_id: () -> ::String
+        def asset_model_external_id: () -> ::String
         def asset_model_arn: () -> ::String
         def asset_model_name: () -> ::String
+        def asset_model_type: () -> ("ASSET_MODEL" | "COMPONENT_MODEL")
         def asset_model_description: () -> ::String
         def asset_model_properties: () -> ::Array[Types::AssetModelProperty]
         def asset_model_hierarchies: () -> ::Array[Types::AssetModelHierarchy]
         def asset_model_composite_models: () -> ::Array[Types::AssetModelCompositeModel]
+        def asset_model_composite_model_summaries: () -> ::Array[Types::AssetModelCompositeModelSummary]
         def asset_model_creation_date: () -> ::Time
         def asset_model_last_update_date: () -> ::Time
         def asset_model_status: () -> Types::AssetModelStatus
-        def asset_model_type: () -> ("ASSET_MODEL" | "COMPONENT_MODEL")
-        def asset_model_composite_model_summaries: () -> ::Array[Types::AssetModelCompositeModelSummary]
-        def asset_model_external_id: () -> ::String
+        def asset_model_version: () -> ::String
+        def e_tag: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_model-instance_method
       def describe_asset_model: (
                                   asset_model_id: ::String,
-                                  ?exclude_properties: bool
+                                  ?exclude_properties: bool,
+                                  ?asset_model_version: ::String
                                 ) -> _DescribeAssetModelResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetModelResponseSuccess
 
@@ -870,7 +882,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_model_composite_model-instance_method
       def describe_asset_model_composite_model: (
                                                   asset_model_id: ::String,
-                                                  asset_model_composite_model_id: ::String
+                                                  asset_model_composite_model_id: ::String,
+                                                  ?asset_model_version: ::String
                                                 ) -> _DescribeAssetModelCompositeModelResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetModelCompositeModelResponseSuccess
 
@@ -1217,7 +1230,8 @@ module Aws
       def list_asset_model_composite_models: (
                                                asset_model_id: ::String,
                                                ?next_token: ::String,
-                                               ?max_results: ::Integer
+                                               ?max_results: ::Integer,
+                                               ?asset_model_version: ::String
                                              ) -> _ListAssetModelCompositeModelsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetModelCompositeModelsResponseSuccess
 
@@ -1231,7 +1245,8 @@ module Aws
                                          asset_model_id: ::String,
                                          ?next_token: ::String,
                                          ?max_results: ::Integer,
-                                         ?filter: ("ALL" | "BASE")
+                                         ?filter: ("ALL" | "BASE"),
+                                         ?asset_model_version: ::String
                                        ) -> _ListAssetModelPropertiesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetModelPropertiesResponseSuccess
 
@@ -1242,9 +1257,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_asset_models-instance_method
       def list_asset_models: (
+                               ?asset_model_types: Array[("ASSET_MODEL" | "COMPONENT_MODEL")],
                                ?next_token: ::String,
                                ?max_results: ::Integer,
-                               ?asset_model_types: Array[("ASSET_MODEL" | "COMPONENT_MODEL")]
+                               ?asset_model_version: ::String
                              ) -> _ListAssetModelsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetModelsResponseSuccess
 
@@ -1549,11 +1565,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset_model-instance_method
       def update_asset_model: (
                                 asset_model_id: ::String,
+                                ?asset_model_external_id: ::String,
                                 asset_model_name: ::String,
                                 ?asset_model_description: ::String,
                                 ?asset_model_properties: Array[
                                   {
                                     id: ::String?,
+                                    external_id: ::String?,
                                     name: ::String,
                                     data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
                                     data_type_spec: ::String?,
@@ -1626,16 +1644,15 @@ module Aws
                                         id: ::String?,
                                         name: ::String?
                                       },
-                                    ]?,
-                                    external_id: ::String?
+                                    ]?
                                   },
                                 ],
                                 ?asset_model_hierarchies: Array[
                                   {
                                     id: ::String?,
+                                    external_id: ::String?,
                                     name: ::String,
-                                    child_asset_model_id: ::String,
-                                    external_id: ::String?
+                                    child_asset_model_id: ::String
                                   },
                                 ],
                                 ?asset_model_composite_models: Array[
@@ -1646,6 +1663,7 @@ module Aws
                                     properties: Array[
                                       {
                                         id: ::String?,
+                                        external_id: ::String?,
                                         name: ::String,
                                         data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
                                         data_type_spec: ::String?,
@@ -1718,8 +1736,7 @@ module Aws
                                             id: ::String?,
                                             name: ::String?
                                           },
-                                        ]?,
-                                        external_id: ::String?
+                                        ]?
                                       },
                                     ]?,
                                     id: ::String?,
@@ -1727,7 +1744,9 @@ module Aws
                                   },
                                 ],
                                 ?client_token: ::String,
-                                ?asset_model_external_id: ::String
+                                ?if_match: ::String,
+                                ?if_none_match: ::String,
+                                ?match_for_version_type: ("LATEST" | "ACTIVE")
                               ) -> _UpdateAssetModelResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetModelResponseSuccess
 
@@ -1747,6 +1766,7 @@ module Aws
                                                 ?asset_model_composite_model_properties: Array[
                                                   {
                                                     id: ::String?,
+                                                    external_id: ::String?,
                                                     name: ::String,
                                                     data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
                                                     data_type_spec: ::String?,
@@ -1819,10 +1839,12 @@ module Aws
                                                         id: ::String?,
                                                         name: ::String?
                                                       },
-                                                    ]?,
-                                                    external_id: ::String?
+                                                    ]?
                                                   },
-                                                ]
+                                                ],
+                                                ?if_match: ::String,
+                                                ?if_none_match: ::String,
+                                                ?match_for_version_type: ("LATEST" | "ACTIVE")
                                               ) -> _UpdateAssetModelCompositeModelResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetModelCompositeModelResponseSuccess
 
@@ -1917,12 +1939,14 @@ module Aws
                     | (:asset_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAssetResponseSuccess
                     | (:asset_model_active waiter_name, 
                     asset_model_id: ::String,
-                    ?exclude_properties: bool
+                    ?exclude_properties: bool,
+                    ?asset_model_version: ::String
                   ) -> Client::_DescribeAssetModelResponseSuccess
                     | (:asset_model_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAssetModelResponseSuccess
                     | (:asset_model_not_exists waiter_name, 
                     asset_model_id: ::String,
-                    ?exclude_properties: bool
+                    ?exclude_properties: bool,
+                    ?asset_model_version: ::String
                   ) -> Client::_DescribeAssetModelResponseSuccess
                     | (:asset_model_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAssetModelResponseSuccess
                     | (:asset_not_exists waiter_name, 

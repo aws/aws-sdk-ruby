@@ -183,7 +183,13 @@ module Aws::SupplyChain
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   The data payload of the event.
+    #   The data payload of the event. For more information on the data
+    #   schema to use, see [Data entities supported in AWS Supply Chain
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
     #   @return [String]
     #
     # @!attribute [rw] event_group_id

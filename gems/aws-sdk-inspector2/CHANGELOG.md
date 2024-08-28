@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2024-08-22)
+------------------
+
+* Feature - Add enums for Agentless scan statuses and EC2 enablement error states
+
 1.35.0 (2024-08-16)
 ------------------
 

@@ -73,6 +73,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchDeleteEvaluationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteEvaluationJobResponse]
+        def errors: () -> ::Array[Types::BatchDeleteEvaluationJobError]
+        def evaluation_jobs: () -> ::Array[Types::BatchDeleteEvaluationJobItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#batch_delete_evaluation_job-instance_method
+      def batch_delete_evaluation_job: (
+                                         job_identifiers: Array[::String]
+                                       ) -> _BatchDeleteEvaluationJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteEvaluationJobResponseSuccess
+
       interface _CreateEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEvaluationJobResponse]
         def job_arn: () -> ::String
@@ -304,6 +315,41 @@ module Aws
                                           ) -> _CreateModelCustomizationJobResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelCustomizationJobResponseSuccess
 
+      interface _CreateModelImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelImportJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_model_import_job-instance_method
+      def create_model_import_job: (
+                                     job_name: ::String,
+                                     imported_model_name: ::String,
+                                     role_arn: ::String,
+                                     model_data_source: {
+                                       s3_data_source: {
+                                         s3_uri: ::String
+                                       }?
+                                     },
+                                     ?job_tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?imported_model_tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?client_request_token: ::String,
+                                     ?vpc_config: {
+                                       subnet_ids: Array[::String],
+                                       security_group_ids: Array[::String]
+                                     },
+                                     ?imported_model_kms_key_id: ::String
+                                   ) -> _CreateModelImportJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelImportJobResponseSuccess
+
       interface _CreateModelInvocationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelInvocationJobResponse]
         def job_arn: () -> ::String
@@ -375,6 +421,15 @@ module Aws
                             ) -> _DeleteGuardrailResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGuardrailResponseSuccess
 
+      interface _DeleteImportedModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImportedModelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_imported_model-instance_method
+      def delete_imported_model: (
+                                   model_identifier: ::String
+                                 ) -> _DeleteImportedModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImportedModelResponseSuccess
+
       interface _DeleteModelInvocationLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteModelInvocationLoggingConfigurationResponse]
       end
@@ -418,7 +473,7 @@ module Aws
       interface _GetEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEvaluationJobResponse]
         def job_name: () -> ::String
-        def status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+        def status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
         def job_arn: () -> ::String
         def job_description: () -> ::String
         def role_arn: () -> ::String
@@ -475,6 +530,41 @@ module Aws
                          ) -> _GetGuardrailResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGuardrailResponseSuccess
 
+      interface _GetImportedModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImportedModelResponse]
+        def model_arn: () -> ::String
+        def model_name: () -> ::String
+        def job_name: () -> ::String
+        def job_arn: () -> ::String
+        def model_data_source: () -> Types::ModelDataSource
+        def creation_time: () -> ::Time
+        def model_architecture: () -> ::String
+        def model_kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_imported_model-instance_method
+      def get_imported_model: (
+                                model_identifier: ::String
+                              ) -> _GetImportedModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportedModelResponseSuccess
+
+      interface _GetInferenceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInferenceProfileResponse]
+        def inference_profile_name: () -> ::String
+        def models: () -> ::Array[Types::InferenceProfileModel]
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def inference_profile_arn: () -> ::String
+        def inference_profile_id: () -> ::String
+        def status: () -> ("ACTIVE")
+        def type: () -> ("SYSTEM_DEFINED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_inference_profile-instance_method
+      def get_inference_profile: (
+                                   inference_profile_identifier: ::String
+                                 ) -> _GetInferenceProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInferenceProfileResponseSuccess
+
       interface _GetModelCopyJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetModelCopyJobResponse]
         def job_arn: () -> ::String
@@ -524,6 +614,28 @@ module Aws
                                          job_identifier: ::String
                                        ) -> _GetModelCustomizationJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelCustomizationJobResponseSuccess
+
+      interface _GetModelImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelImportJobResponse]
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def imported_model_name: () -> ::String
+        def imported_model_arn: () -> ::String
+        def role_arn: () -> ::String
+        def model_data_source: () -> Types::ModelDataSource
+        def status: () -> ("InProgress" | "Completed" | "Failed")
+        def failure_message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def end_time: () -> ::Time
+        def vpc_config: () -> Types::VpcConfig
+        def imported_model_kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_model_import_job-instance_method
+      def get_model_import_job: (
+                                  job_identifier: ::String
+                                ) -> _GetModelImportJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelImportJobResponseSuccess
 
       interface _GetModelInvocationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetModelInvocationJobResponse]
@@ -608,7 +720,7 @@ module Aws
       def list_evaluation_jobs: (
                                   ?creation_time_after: ::Time,
                                   ?creation_time_before: ::Time,
-                                  ?status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped"),
+                                  ?status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting"),
                                   ?name_contains: ::String,
                                   ?max_results: ::Integer,
                                   ?next_token: ::String,
@@ -642,6 +754,35 @@ module Aws
                              ?next_token: ::String
                            ) -> _ListGuardrailsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGuardrailsResponseSuccess
+
+      interface _ListImportedModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportedModelsResponse]
+        def next_token: () -> ::String
+        def model_summaries: () -> ::Array[Types::ImportedModelSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_imported_models-instance_method
+      def list_imported_models: (
+                                  ?creation_time_before: ::Time,
+                                  ?creation_time_after: ::Time,
+                                  ?name_contains: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?sort_by: ("CreationTime"),
+                                  ?sort_order: ("Ascending" | "Descending")
+                                ) -> _ListImportedModelsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportedModelsResponseSuccess
+
+      interface _ListInferenceProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceProfilesResponse]
+        def inference_profile_summaries: () -> ::Array[Types::InferenceProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_inference_profiles-instance_method
+      def list_inference_profiles: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListInferenceProfilesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceProfilesResponseSuccess
 
       interface _ListModelCopyJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListModelCopyJobsResponse]
@@ -680,6 +821,24 @@ module Aws
                                            ?sort_order: ("Ascending" | "Descending")
                                          ) -> _ListModelCustomizationJobsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelCustomizationJobsResponseSuccess
+
+      interface _ListModelImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelImportJobsResponse]
+        def next_token: () -> ::String
+        def model_import_job_summaries: () -> ::Array[Types::ModelImportJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_model_import_jobs-instance_method
+      def list_model_import_jobs: (
+                                    ?creation_time_after: ::Time,
+                                    ?creation_time_before: ::Time,
+                                    ?status_equals: ("InProgress" | "Completed" | "Failed"),
+                                    ?name_contains: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?sort_by: ("CreationTime"),
+                                    ?sort_order: ("Ascending" | "Descending")
+                                  ) -> _ListModelImportJobsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelImportJobsResponseSuccess
 
       interface _ListModelInvocationJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListModelInvocationJobsResponse]

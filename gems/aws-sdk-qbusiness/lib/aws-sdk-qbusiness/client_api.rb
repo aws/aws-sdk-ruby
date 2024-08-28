@@ -62,6 +62,8 @@ module Aws::QBusiness
     AuthResponseKey = Shapes::StringShape.new(name: 'AuthResponseKey')
     AuthResponseValue = Shapes::StringShape.new(name: 'AuthResponseValue')
     AuthorizationResponseMap = Shapes::MapShape.new(name: 'AuthorizationResponseMap')
+    AutoSubscriptionConfiguration = Shapes::StructureShape.new(name: 'AutoSubscriptionConfiguration')
+    AutoSubscriptionStatus = Shapes::StringShape.new(name: 'AutoSubscriptionStatus')
     BasicAuthConfiguration = Shapes::StructureShape.new(name: 'BasicAuthConfiguration')
     BatchDeleteDocumentRequest = Shapes::StructureShape.new(name: 'BatchDeleteDocumentRequest')
     BatchDeleteDocumentResponse = Shapes::StructureShape.new(name: 'BatchDeleteDocumentResponse')
@@ -82,6 +84,8 @@ module Aws::QBusiness
     ChatOutputStream = Shapes::StructureShape.new(name: 'ChatOutputStream')
     ChatSyncInput = Shapes::StructureShape.new(name: 'ChatSyncInput')
     ChatSyncOutput = Shapes::StructureShape.new(name: 'ChatSyncOutput')
+    ClientIdForOIDC = Shapes::StringShape.new(name: 'ClientIdForOIDC')
+    ClientIdsForOIDC = Shapes::ListShape.new(name: 'ClientIdsForOIDC')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConfigurationEvent = Shapes::StructureShape.new(name: 'ConfigurationEvent')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -211,7 +215,10 @@ module Aws::QBusiness
     GroupSummary = Shapes::StructureShape.new(name: 'GroupSummary')
     GroupSummaryList = Shapes::ListShape.new(name: 'GroupSummaryList')
     HookConfiguration = Shapes::StructureShape.new(name: 'HookConfiguration')
+    IamIdentityProviderArn = Shapes::StringShape.new(name: 'IamIdentityProviderArn')
     IdcApplicationArn = Shapes::StringShape.new(name: 'IdcApplicationArn')
+    IdentityProviderConfiguration = Shapes::UnionShape.new(name: 'IdentityProviderConfiguration')
+    IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     Index = Shapes::StructureShape.new(name: 'Index')
     IndexArn = Shapes::StringShape.new(name: 'IndexArn')
     IndexCapacityConfiguration = Shapes::StructureShape.new(name: 'IndexCapacityConfiguration')
@@ -294,6 +301,7 @@ module Aws::QBusiness
     NumberAttributeBoostingConfiguration = Shapes::StructureShape.new(name: 'NumberAttributeBoostingConfiguration')
     NumberAttributeBoostingType = Shapes::StringShape.new(name: 'NumberAttributeBoostingType')
     OAuth2ClientCredentialConfiguration = Shapes::StructureShape.new(name: 'OAuth2ClientCredentialConfiguration')
+    OpenIDConnectProviderConfiguration = Shapes::StructureShape.new(name: 'OpenIDConnectProviderConfiguration')
     Payload = Shapes::StringShape.new(name: 'Payload')
     PersonalizationConfiguration = Shapes::StructureShape.new(name: 'PersonalizationConfiguration')
     PersonalizationControlMode = Shapes::StringShape.new(name: 'PersonalizationControlMode')
@@ -337,8 +345,10 @@ module Aws::QBusiness
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     SamlAttribute = Shapes::StringShape.new(name: 'SamlAttribute')
+    SamlAuthenticationUrl = Shapes::StringShape.new(name: 'SamlAuthenticationUrl')
     SamlConfiguration = Shapes::StructureShape.new(name: 'SamlConfiguration')
     SamlMetadataXML = Shapes::StringShape.new(name: 'SamlMetadataXML')
+    SamlProviderConfiguration = Shapes::StructureShape.new(name: 'SamlProviderConfiguration')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
@@ -359,6 +369,7 @@ module Aws::QBusiness
     StringListAttributeBoostingConfiguration = Shapes::StructureShape.new(name: 'StringListAttributeBoostingConfiguration')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
     SyncSchedule = Shapes::StringShape.new(name: 'SyncSchedule')
     SystemMessageId = Shapes::StringShape.new(name: 'SystemMessageId')
     SystemMessageOverride = Shapes::StringShape.new(name: 'SystemMessageOverride')
@@ -498,6 +509,7 @@ module Aws::QBusiness
     Application.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Application.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Application.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "status"))
+    Application.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "identityType"))
     Application.struct_class = Types::Application
 
     Applications.member = Shapes::ShapeRef.new(shape: Application)
@@ -555,6 +567,10 @@ module Aws::QBusiness
 
     AuthorizationResponseMap.key = Shapes::ShapeRef.new(shape: AuthResponseKey)
     AuthorizationResponseMap.value = Shapes::ShapeRef.new(shape: AuthResponseValue)
+
+    AutoSubscriptionConfiguration.add_member(:auto_subscribe, Shapes::ShapeRef.new(shape: AutoSubscriptionStatus, required: true, location_name: "autoSubscribe"))
+    AutoSubscriptionConfiguration.add_member(:default_subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, location_name: "defaultSubscriptionType"))
+    AutoSubscriptionConfiguration.struct_class = Types::AutoSubscriptionConfiguration
 
     BasicAuthConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "secretArn"))
     BasicAuthConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
@@ -652,6 +668,8 @@ module Aws::QBusiness
     ChatSyncOutput.add_member(:failed_attachments, Shapes::ShapeRef.new(shape: AttachmentsOutput, location_name: "failedAttachments"))
     ChatSyncOutput.struct_class = Types::ChatSyncOutput
 
+    ClientIdsForOIDC.member = Shapes::ShapeRef.new(shape: ClientIdForOIDC)
+
     ConfigurationEvent.add_member(:chat_mode, Shapes::ShapeRef.new(shape: ChatMode, location_name: "chatMode"))
     ConfigurationEvent.add_member(:chat_mode_configuration, Shapes::ShapeRef.new(shape: ChatModeConfiguration, location_name: "chatModeConfiguration"))
     ConfigurationEvent.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "attributeFilter"))
@@ -677,7 +695,10 @@ module Aws::QBusiness
 
     CreateApplicationRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "displayName"))
     CreateApplicationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    CreateApplicationRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "identityType"))
+    CreateApplicationRequest.add_member(:iam_identity_provider_arn, Shapes::ShapeRef.new(shape: IamIdentityProviderArn, location_name: "iamIdentityProviderArn"))
     CreateApplicationRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "identityCenterInstanceArn"))
+    CreateApplicationRequest.add_member(:client_ids_for_oidc, Shapes::ShapeRef.new(shape: ClientIdsForOIDC, location_name: "clientIdsForOIDC"))
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateApplicationRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -767,6 +788,7 @@ module Aws::QBusiness
     CreateWebExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateWebExperienceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateWebExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWebExperienceRequest.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "identityProviderConfiguration"))
     CreateWebExperienceRequest.struct_class = Types::CreateWebExperienceRequest
 
     CreateWebExperienceResponse.add_member(:web_experience_id, Shapes::ShapeRef.new(shape: WebExperienceId, location_name: "webExperienceId"))
@@ -1007,6 +1029,8 @@ module Aws::QBusiness
     GetApplicationResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "displayName"))
     GetApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
     GetApplicationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "applicationArn"))
+    GetApplicationResponse.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "identityType"))
+    GetApplicationResponse.add_member(:iam_identity_provider_arn, Shapes::ShapeRef.new(shape: IamIdentityProviderArn, location_name: "iamIdentityProviderArn"))
     GetApplicationResponse.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdcApplicationArn, location_name: "identityCenterApplicationArn"))
     GetApplicationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     GetApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "status"))
@@ -1018,6 +1042,8 @@ module Aws::QBusiness
     GetApplicationResponse.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AppliedAttachmentsConfiguration, location_name: "attachmentsConfiguration"))
     GetApplicationResponse.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
     GetApplicationResponse.add_member(:personalization_configuration, Shapes::ShapeRef.new(shape: PersonalizationConfiguration, location_name: "personalizationConfiguration"))
+    GetApplicationResponse.add_member(:auto_subscription_configuration, Shapes::ShapeRef.new(shape: AutoSubscriptionConfiguration, location_name: "autoSubscriptionConfiguration"))
+    GetApplicationResponse.add_member(:client_ids_for_oidc, Shapes::ShapeRef.new(shape: ClientIdsForOIDC, location_name: "clientIdsForOIDC"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
     GetChatControlsConfigurationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
@@ -1141,6 +1167,7 @@ module Aws::QBusiness
     GetWebExperienceResponse.add_member(:welcome_message, Shapes::ShapeRef.new(shape: WebExperienceWelcomeMessage, location_name: "welcomeMessage"))
     GetWebExperienceResponse.add_member(:sample_prompts_control_mode, Shapes::ShapeRef.new(shape: WebExperienceSamplePromptsControlMode, location_name: "samplePromptsControlMode"))
     GetWebExperienceResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    GetWebExperienceResponse.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "identityProviderConfiguration"))
     GetWebExperienceResponse.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: WebExperienceAuthConfiguration, deprecated: true, location_name: "authenticationConfiguration", metadata: {"deprecatedMessage"=>"Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."}))
     GetWebExperienceResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
     GetWebExperienceResponse.struct_class = Types::GetWebExperienceResponse
@@ -1166,6 +1193,14 @@ module Aws::QBusiness
     HookConfiguration.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "s3BucketName"))
     HookConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     HookConfiguration.struct_class = Types::HookConfiguration
+
+    IdentityProviderConfiguration.add_member(:saml_configuration, Shapes::ShapeRef.new(shape: SamlProviderConfiguration, location_name: "samlConfiguration"))
+    IdentityProviderConfiguration.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: OpenIDConnectProviderConfiguration, location_name: "openIDConnectConfiguration"))
+    IdentityProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IdentityProviderConfiguration.add_member_subclass(:saml_configuration, Types::IdentityProviderConfiguration::SamlConfiguration)
+    IdentityProviderConfiguration.add_member_subclass(:open_id_connect_configuration, Types::IdentityProviderConfiguration::OpenIdConnectConfiguration)
+    IdentityProviderConfiguration.add_member_subclass(:unknown, Types::IdentityProviderConfiguration::Unknown)
+    IdentityProviderConfiguration.struct_class = Types::IdentityProviderConfiguration
 
     Index.add_member(:display_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "displayName"))
     Index.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, location_name: "indexId"))
@@ -1367,6 +1402,10 @@ module Aws::QBusiness
     OAuth2ClientCredentialConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     OAuth2ClientCredentialConfiguration.struct_class = Types::OAuth2ClientCredentialConfiguration
 
+    OpenIDConnectProviderConfiguration.add_member(:secrets_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "secretsArn"))
+    OpenIDConnectProviderConfiguration.add_member(:secrets_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "secretsRole"))
+    OpenIDConnectProviderConfiguration.struct_class = Types::OpenIDConnectProviderConfiguration
+
     PersonalizationConfiguration.add_member(:personalization_control_mode, Shapes::ShapeRef.new(shape: PersonalizationControlMode, required: true, location_name: "personalizationControlMode"))
     PersonalizationConfiguration.struct_class = Types::PersonalizationConfiguration
 
@@ -1484,6 +1523,9 @@ module Aws::QBusiness
     SamlConfiguration.add_member(:user_group_attribute, Shapes::ShapeRef.new(shape: SamlAttribute, location_name: "userGroupAttribute"))
     SamlConfiguration.struct_class = Types::SamlConfiguration
 
+    SamlProviderConfiguration.add_member(:authentication_url, Shapes::ShapeRef.new(shape: SamlAuthenticationUrl, required: true, location_name: "authenticationUrl"))
+    SamlProviderConfiguration.struct_class = Types::SamlProviderConfiguration
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -1590,6 +1632,7 @@ module Aws::QBusiness
     UpdateApplicationRequest.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AttachmentsConfiguration, location_name: "attachmentsConfiguration"))
     UpdateApplicationRequest.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
     UpdateApplicationRequest.add_member(:personalization_configuration, Shapes::ShapeRef.new(shape: PersonalizationConfiguration, location_name: "personalizationConfiguration"))
+    UpdateApplicationRequest.add_member(:auto_subscription_configuration, Shapes::ShapeRef.new(shape: AutoSubscriptionConfiguration, location_name: "autoSubscriptionConfiguration"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
@@ -1668,6 +1711,7 @@ module Aws::QBusiness
     UpdateWebExperienceRequest.add_member(:subtitle, Shapes::ShapeRef.new(shape: WebExperienceSubtitle, location_name: "subtitle"))
     UpdateWebExperienceRequest.add_member(:welcome_message, Shapes::ShapeRef.new(shape: WebExperienceWelcomeMessage, location_name: "welcomeMessage"))
     UpdateWebExperienceRequest.add_member(:sample_prompts_control_mode, Shapes::ShapeRef.new(shape: WebExperienceSamplePromptsControlMode, location_name: "samplePromptsControlMode"))
+    UpdateWebExperienceRequest.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "identityProviderConfiguration"))
     UpdateWebExperienceRequest.struct_class = Types::UpdateWebExperienceRequest
 
     UpdateWebExperienceResponse.struct_class = Types::UpdateWebExperienceResponse

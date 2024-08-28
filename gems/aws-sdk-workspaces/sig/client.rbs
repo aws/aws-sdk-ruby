@@ -685,7 +685,13 @@ module Aws
                                             ?directory_ids: Array[::String],
                                             ?workspace_directory_names: Array[::String],
                                             ?limit: ::Integer,
-                                            ?next_token: ::String
+                                            ?next_token: ::String,
+                                            ?filters: Array[
+                                              {
+                                                name: ("USER_IDENTITY_TYPE" | "WORKSPACE_TYPE"),
+                                                values: Array[::String]
+                                              },
+                                            ]
                                           ) -> _DescribeWorkspaceDirectoriesResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceDirectoriesResponseSuccess
 
@@ -1156,7 +1162,12 @@ module Aws
                                           ],
                                           ?workspace_directory_name: ::String,
                                           ?workspace_directory_description: ::String,
-                                          ?user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE"),
+                                          ?user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE" | "AWS_IAM_IDENTITY_CENTER"),
+                                          ?idc_instance_arn: ::String,
+                                          ?microsoft_entra_config: {
+                                            tenant_id: ::String?,
+                                            application_config_secret_arn: ::String?
+                                          },
                                           ?workspace_type: ("PERSONAL" | "POOLS"),
                                           ?active_directory_config: {
                                             domain_name: ::String,
