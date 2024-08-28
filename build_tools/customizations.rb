@@ -67,9 +67,7 @@ module BuildTools
     api('CloudFront') do |api|
 
       api['shapes'].each do |_, shape|
-        if shape['members'] && shape['members']['MaxItems']
-          shape['members']['MaxItems']['shape'] = 'integer'
-        end
+        shape['members']['MaxItems']['shape'] = 'integer' if shape['members'] && shape['members']['MaxItems']
       end
 
       api['operations'].keys.each do |name|
@@ -107,7 +105,7 @@ module BuildTools
     end
 
     api('ImportExport') do |api|
-      api['metadata']['serviceId'] = 'importexport' if api['metadata']['serviceId'].nil?
+      api['metadata']['serviceId'] ||= 'importexport'
 
       api['operations'].each do |_, operation|
         operation['http']['requestUri'] = '/'
@@ -116,10 +114,8 @@ module BuildTools
 
     %w(Lambda LambdaPreview).each do |svc_name|
       api(svc_name) do |api|
+        api['metadata']['serviceId'] ||= 'Lambda Preview' if svc_name == 'LambdaPreview'
         api['shapes']['Timestamp']['type'] = 'timestamp'
-        if (svc_name == 'LambdaPreview') && api['metadata']['serviceId'].nil?
-          api['metadata']['serviceId'] = 'Lambda Preview'
-        end
       end
 
       doc('lambda') do |docs|
@@ -225,7 +221,7 @@ module BuildTools
     # uses both flattened and locationName. Query protocol is supposed to
     # ignore location name (xmlName) when flattened (xmlFlattened) is used.
     api('SimpleDB') do |api|
-      api['metadata']['serviceId'] = 'SimpleDB' if api['metadata']['serviceId'].nil?
+      api['metadata']['serviceId'] ||= 'SimpleDB'
 
       api['shapes'].each do |_, shape|
         next unless shape['type'] == 'structure'
