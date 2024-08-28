@@ -65,11 +65,16 @@ requests are made, and retries are disabled.
           else
             apply_stub(stub, resp, async_mode)
           end
-          async_mode ? Seahorse::Client::AsyncResponse.new(
-            context: context,
-            stream: context[:input_event_stream_handler].event_emitter.stream,
-            sync_queue: Queue.new
-          ) : resp
+
+          if async_mode
+            Seahorse::Client::AsyncResponse.new(
+              context: context,
+              stream: context[:input_event_stream_handler].event_emitter.stream,
+              sync_queue: Queue.new
+            )
+          else
+            resp
+          end
         end
 
         def apply_stub(stub, response, async_mode = false)
