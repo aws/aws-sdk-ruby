@@ -192,7 +192,7 @@ module AwsSdkCodeGenerator
               value: @service.api['metadata'][key].inspect
             }
           elsif METADATA_KEYS[key].nil?
-            raise "unhandled metadata key #{key.inspect}"
+            warn "unhandled metadata key #{key.inspect}"
           end
         end
         metadata
@@ -317,7 +317,7 @@ module AwsSdkCodeGenerator
 
             args << "#{key}: #{value.inspect}"
           elsif SHAPE_KEYS[key].nil?
-            raise "unhandled shape key #{key.inspect}"
+            warn "unhandled shape key #{key.inspect}"
           end
         end
         args.join(', ')
