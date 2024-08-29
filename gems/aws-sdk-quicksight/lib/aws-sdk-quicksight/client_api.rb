@@ -474,6 +474,7 @@ module Aws::QuickSight
     DataPointTooltipOption = Shapes::StructureShape.new(name: 'DataPointTooltipOption')
     DataSet = Shapes::StructureShape.new(name: 'DataSet')
     DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
+    DataSetCalculatedFieldExpression = Shapes::StringShape.new(name: 'DataSetCalculatedFieldExpression')
     DataSetConfiguration = Shapes::StructureShape.new(name: 'DataSetConfiguration')
     DataSetConfigurationList = Shapes::ListShape.new(name: 'DataSetConfigurationList')
     DataSetFilterAttribute = Shapes::StringShape.new(name: 'DataSetFilterAttribute')
@@ -2657,7 +2658,7 @@ module Aws::QuickSight
 
     CalculatedColumn.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "ColumnName"))
     CalculatedColumn.add_member(:column_id, Shapes::ShapeRef.new(shape: ColumnId, required: true, location_name: "ColumnId"))
-    CalculatedColumn.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    CalculatedColumn.add_member(:expression, Shapes::ShapeRef.new(shape: DataSetCalculatedFieldExpression, required: true, location_name: "Expression"))
     CalculatedColumn.struct_class = Types::CalculatedColumn
 
     CalculatedColumnList.member = Shapes::ShapeRef.new(shape: CalculatedColumn)

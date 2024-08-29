@@ -647,11 +647,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ValidateStateMachineDefinitionOutput]
         def result: () -> ("OK" | "FAIL")
         def diagnostics: () -> ::Array[Types::ValidateStateMachineDefinitionDiagnostic]
+        def truncated: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/States/Client.html#validate_state_machine_definition-instance_method
       def validate_state_machine_definition: (
                                                definition: ::String,
-                                               ?type: ("STANDARD" | "EXPRESS")
+                                               ?type: ("STANDARD" | "EXPRESS"),
+                                               ?severity: ("ERROR" | "WARNING"),
+                                               ?max_results: ::Integer
                                              ) -> _ValidateStateMachineDefinitionResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateStateMachineDefinitionResponseSuccess
     end

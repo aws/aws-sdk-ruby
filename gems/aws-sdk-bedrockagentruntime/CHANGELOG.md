@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-08-29)
+------------------
+
+* Feature - Lifting the maximum length on Bedrock KnowledgeBase RetrievalFilter array
+
 1.19.0 (2024-08-23)
 ------------------
 

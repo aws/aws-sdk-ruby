@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.202.1 (2024-08-29)
+------------------
+
 * Issue - require default plugins when loading aws-sdk-core.
 
 3.202.0 (2024-08-27)

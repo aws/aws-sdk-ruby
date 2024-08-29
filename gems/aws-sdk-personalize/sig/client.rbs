@@ -1065,6 +1065,22 @@ module Aws
                                 }
                               ) -> _UpdateRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommenderResponseSuccess
+
+      interface _UpdateSolutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSolutionResponse]
+        def solution_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#update_solution-instance_method
+      def update_solution: (
+                             solution_arn: ::String,
+                             ?perform_auto_training: bool,
+                             ?solution_update_config: {
+                               auto_training_config: {
+                                 scheduling_expression: ::String?
+                               }?
+                             }
+                           ) -> _UpdateSolutionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSolutionResponseSuccess
     end
   end
 end

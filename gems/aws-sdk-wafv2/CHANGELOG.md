@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-08-29)
+------------------
+
+* Feature - The minimum request rate for a rate-based rule is now 10. Before this, it was 100.
+
 1.88.0 (2024-07-02)
 ------------------
 

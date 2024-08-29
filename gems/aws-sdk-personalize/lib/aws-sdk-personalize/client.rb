@@ -1817,40 +1817,39 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # After you create a solution, you can’t change its configuration. By
-    # default, all new solutions use automatic training. With automatic
-    # training, you incur training costs while your solution is active. You
-    # can't stop automatic training for a solution. To avoid unnecessary
-    # costs, make sure to delete the solution when you are finished. For
-    # information about training costs, see [Amazon Personalize pricing][1].
+    # By default, all new solutions use automatic training. With automatic
+    # training, you incur training costs while your solution is active. To
+    # avoid unnecessary costs, when you are finished you can [update the
+    # solution][1] to turn off automatic training. For information about
+    # training costs, see [Amazon Personalize pricing][2].
     #
     # Creates the configuration for training a model (creating a solution
     # version). This configuration includes the recipe to use for model
     # training and optional training configuration, such as columns to use
     # in training and feature transformation parameters. For more
     # information about configuring a solution, see [Creating and
-    # configuring a solution][2].
+    # configuring a solution][3].
     #
     # By default, new solutions use automatic training to create solution
     # versions every 7 days. You can change the training frequency.
-    # Automatic solution version creation starts one hour after the solution
-    # is ACTIVE. If you manually create a solution version within the hour,
-    # the solution skips the first automatic training. For more information,
-    # see [Configuring automatic training][3].
+    # Automatic solution version creation starts within one hour after the
+    # solution is ACTIVE. If you manually create a solution version within
+    # the hour, the solution skips the first automatic training. For more
+    # information, see [Configuring automatic training][4].
     #
     # To turn off automatic training, set `performAutoTraining` to false. If
     # you turn off automatic training, you must manually create a solution
-    # version by calling the [CreateSolutionVersion][4] operation.
+    # version by calling the [CreateSolutionVersion][5] operation.
     #
     # After training starts, you can get the solution version's Amazon
-    # Resource Name (ARN) with the [ListSolutionVersions][5] API operation.
-    # To get its status, use the [DescribeSolutionVersion][6].
+    # Resource Name (ARN) with the [ListSolutionVersions][6] API operation.
+    # To get its status, use the [DescribeSolutionVersion][7].
     #
     # After training completes you can evaluate model accuracy by calling
-    # [GetSolutionMetrics][7]. When you are satisfied with the solution
-    # version, you deploy it using [CreateCampaign][8]. The campaign
+    # [GetSolutionMetrics][8]. When you are satisfied with the solution
+    # version, you deploy it using [CreateCampaign][9]. The campaign
     # provides recommendations to a client through the
-    # [GetRecommendations][9] API.
+    # [GetRecommendations][10] API.
     #
     # <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective` for
     # solution hyperparameter optimization at this time.
@@ -1866,39 +1865,42 @@ module Aws::Personalize
     #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
-    # To get the status of the solution, call [DescribeSolution][10]. If you
+    # To get the status of the solution, call [DescribeSolution][11]. If you
     # use manual training, the status must be ACTIVE before you call
     # `CreateSolutionVersion`.
     #
     # **Related APIs**
     #
-    # * [ListSolutions][11]
+    # * [UpdateSolution][1]
     #
-    # * [CreateSolutionVersion][4]
+    # * [ListSolutions][12]
     #
-    # * [DescribeSolution][10]
+    # * [CreateSolutionVersion][5]
     #
-    # * [DeleteSolution][12]
+    # * [DescribeSolution][11]
+    #
+    # * [DeleteSolution][13]
     # ^
     #
-    # * [ListSolutionVersions][5]
+    # * [ListSolutionVersions][6]
     #
-    # * [DescribeSolutionVersion][6]
+    # * [DescribeSolutionVersion][7]
     #
     #
     #
-    # [1]: https://aws.amazon.com/personalize/pricing/
-    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html
-    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
-    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html
-    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
-    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
-    # [7]: https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html
-    # [8]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
-    # [9]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
-    # [10]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
-    # [11]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html
-    # [12]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html
+    # [2]: https://aws.amazon.com/personalize/pricing/
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html
+    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
+    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html
+    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
+    # [7]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+    # [8]: https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html
+    # [9]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
+    # [10]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
+    # [11]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
+    # [12]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html
+    # [13]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
     #
     # @option params [required, String] :name
     #   The name for the solution.
@@ -1938,9 +1940,9 @@ module Aws::Personalize
     #   more information about automatic training, see [Configuring automatic
     #   training][1].
     #
-    #   Automatic solution version creation starts one hour after the solution
-    #   is ACTIVE. If you manually create a solution version within the hour,
-    #   the solution skips the first automatic training.
+    #   Automatic solution version creation starts within one hour after the
+    #   solution is ACTIVE. If you manually create a solution version within
+    #   the hour, the solution skips the first automatic training.
     #
     #   After training starts, you can get the solution version's Amazon
     #   Resource Name (ARN) with the [ListSolutionVersions][2] API operation.
@@ -1975,7 +1977,7 @@ module Aws::Personalize
     #   interactions for training with equal weight regardless of type.
     #
     # @option params [Types::SolutionConfig] :solution_config
-    #   The configuration to use with the solution. When `performAutoML` is
+    #   The configuration properties for the solution. When `performAutoML` is
     #   set to true, Amazon Personalize only evaluates the `autoMLConfig`
     #   section of the solution configuration.
     #
@@ -3271,6 +3273,12 @@ module Aws::Personalize
     #   resp.solution.latest_solution_version.creation_date_time #=> Time
     #   resp.solution.latest_solution_version.last_updated_date_time #=> Time
     #   resp.solution.latest_solution_version.failure_reason #=> String
+    #   resp.solution.latest_solution_update.solution_update_config.auto_training_config.scheduling_expression #=> String
+    #   resp.solution.latest_solution_update.status #=> String
+    #   resp.solution.latest_solution_update.perform_auto_training #=> Boolean
+    #   resp.solution.latest_solution_update.creation_date_time #=> Time
+    #   resp.solution.latest_solution_update.last_updated_date_time #=> Time
+    #   resp.solution.latest_solution_update.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeSolution AWS API Documentation
     #
@@ -4743,6 +4751,81 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Updates an Amazon Personalize solution to use a different automatic
+    # training configuration. When you update a solution, you can change
+    # whether the solution uses automatic training, and you can change the
+    # training frequency. For more information about updating a solution,
+    # see [Updating a solution][1].
+    #
+    # A solution update can be in one of the following states:
+    #
+    # CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE FAILED
+    #
+    # To get the status of a solution update, call the [DescribeSolution][2]
+    # API operation and find the status in the `latestSolutionUpdate`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/updating-solution.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
+    #
+    # @option params [required, String] :solution_arn
+    #   The Amazon Resource Name (ARN) of the solution to update.
+    #
+    # @option params [Boolean] :perform_auto_training
+    #   Whether the solution uses automatic training to create new solution
+    #   versions (trained models). You can change the training frequency by
+    #   specifying a `schedulingExpression` in the `AutoTrainingConfig` as
+    #   part of solution configuration.
+    #
+    #   If you turn on automatic training, the first automatic training starts
+    #   within one hour after the solution update completes. If you manually
+    #   create a solution version within the hour, the solution skips the
+    #   first automatic training. For more information about automatic
+    #   training, see [Configuring automatic training][1].
+    #
+    #   After training starts, you can get the solution version's Amazon
+    #   Resource Name (ARN) with the [ListSolutionVersions][2] API operation.
+    #   To get its status, use the [DescribeSolutionVersion][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
+    #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+    #
+    # @option params [Types::SolutionUpdateConfig] :solution_update_config
+    #   The new configuration details of the solution.
+    #
+    # @return [Types::UpdateSolutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSolutionResponse#solution_arn #solution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_solution({
+    #     solution_arn: "Arn", # required
+    #     perform_auto_training: false,
+    #     solution_update_config: {
+    #       auto_training_config: {
+    #         scheduling_expression: "SchedulingExpression",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.solution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateSolution AWS API Documentation
+    #
+    # @overload update_solution(params = {})
+    # @param [Hash] params ({})
+    def update_solution(params = {}, options = {})
+      req = build_request(:update_solution, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4756,7 +4839,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

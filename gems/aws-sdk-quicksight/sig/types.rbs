@@ -1022,7 +1022,7 @@ module Aws::QuickSight
 
     class ColumnDescription
       attr_accessor text: ::String
-      SENSITIVE: []
+      SENSITIVE: [:text]
     end
 
     class ColumnGroup
@@ -5663,7 +5663,7 @@ module Aws::QuickSight
       attr_accessor description: ::String
       attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class OverrideDatasetParameterOperation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-08-29)
+------------------
+
+* Feature - This release adds support for static analysis to ValidateStateMachineDefinition API, which can now return optional WARNING diagnostics for semantic errors on the definition of an Amazon States Language (ASL) state machine.
+
 1.73.0 (2024-07-25)
 ------------------
 

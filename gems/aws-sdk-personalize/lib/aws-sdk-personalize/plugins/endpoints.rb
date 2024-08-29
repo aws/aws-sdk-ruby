@@ -198,6 +198,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::UpdateMetricAttribution.build(context)
           when :update_recommender
             Aws::Personalize::Endpoints::UpdateRecommender.build(context)
+          when :update_solution
+            Aws::Personalize::Endpoints::UpdateSolution.build(context)
           end
         end
       end
