@@ -103,4 +103,13 @@ module AwsSdkCodeGenerator
 # WARNING ABOUT GENERATED CODE
   WARNING_TXT
 
+  @warnings = []
+
+  class << self
+    attr_reader :warnings
+    def warn(service, type, message)
+      Kernel.warn(message)
+      @warnings << { service: service, type: type, message: message }
+    end
+  end
 end
