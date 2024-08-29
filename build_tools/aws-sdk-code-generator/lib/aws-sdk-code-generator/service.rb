@@ -192,31 +192,6 @@ module AwsSdkCodeGenerator
       @deprecated
     end
 
-    # @return list of validation messages
-    def validate
-      errors = []
-      @api.fetch('metadata', {}).keys.sort.each do |key|
-        if AwsSdkCodeGenerator::Views::ClientApiModule::METADATA_KEYS[key].nil?
-          errors << {
-            type: :invalid_key,
-            message: "invalid/unsupported metadata key `#{key}`"
-          }
-        end
-      end
-
-      @api.fetch('shapes', {}).each do |shape_name, shape|
-        shape.each_pair do |key, _|
-          unless AwsSdkCodeGenerator::Views::ClientApiModule::SHAPE_KEYS.key?(key)
-            errors << {
-              type: :invalid_key,
-              message: "invalid/unsupported shape key `#{key}` on `#{shape_name}`"
-            }
-          end
-        end
-      end
-      errors
-    end
-
     # @api private
     def inspect
       "#<#{self.class.name}>"
