@@ -109,30 +109,7 @@ require_relative 'aws-sdk-core/plugins/signature_v4'
 # defaults
 require_relative 'aws-defaults'
 
-# require default plugins
-require_relative 'seahorse/client/plugins/content_length'
-require_relative 'aws-sdk-core/plugins/credentials_configuration'
-require_relative 'aws-sdk-core/plugins/logging'
-require_relative 'aws-sdk-core/plugins/param_converter'
-require_relative 'aws-sdk-core/plugins/param_validator'
-require_relative 'aws-sdk-core/plugins/user_agent'
-require_relative 'aws-sdk-core/plugins/helpful_socket_errors'
-require_relative 'aws-sdk-core/plugins/retry_errors'
-require_relative 'aws-sdk-core/plugins/global_configuration'
-require_relative 'aws-sdk-core/plugins/regional_endpoint'
-require_relative 'aws-sdk-core/plugins/endpoint_discovery'
-require_relative 'aws-sdk-core/plugins/endpoint_pattern'
-require_relative 'aws-sdk-core/plugins/response_paging'
-require_relative 'aws-sdk-core/plugins/stub_responses'
-require_relative 'aws-sdk-core/plugins/idempotency_token'
-require_relative 'aws-sdk-core/plugins/invocation_id'
-require_relative 'aws-sdk-core/plugins/transfer_encoding'
-require_relative 'aws-sdk-core/plugins/http_checksum'
-require_relative 'aws-sdk-core/plugins/checksum_algorithm'
-require_relative 'aws-sdk-core/plugins/request_compression'
-require_relative 'aws-sdk-core/plugins/defaults_mode'
-require_relative 'aws-sdk-core/plugins/recursion_detection'
-require_relative 'aws-sdk-core/plugins/sign'
+# plugins - loaded through service clients as needed.
 
 module Aws
 
