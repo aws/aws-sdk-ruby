@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.202.2 (2024-08-30)
+------------------
+
 * Issue - revert auto-loading of bundled gems.
 
 3.202.1 (2024-08-29)

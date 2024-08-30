@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-08-30)
+------------------
+
+* Feature - This release introduces a new optional parameter: Entity, in PutLogEvents request
+
 1.88.0 (2024-07-30)
 ------------------
 

@@ -119,6 +119,14 @@ module Aws::CloudWatchLogs
     Distribution = Shapes::StringShape.new(name: 'Distribution')
     DynamicTokenPosition = Shapes::IntegerShape.new(name: 'DynamicTokenPosition')
     EncryptionKey = Shapes::StringShape.new(name: 'EncryptionKey')
+    Entity = Shapes::StructureShape.new(name: 'Entity')
+    EntityAttributes = Shapes::MapShape.new(name: 'EntityAttributes')
+    EntityAttributesKey = Shapes::StringShape.new(name: 'EntityAttributesKey')
+    EntityAttributesValue = Shapes::StringShape.new(name: 'EntityAttributesValue')
+    EntityKeyAttributes = Shapes::MapShape.new(name: 'EntityKeyAttributes')
+    EntityKeyAttributesKey = Shapes::StringShape.new(name: 'EntityKeyAttributesKey')
+    EntityKeyAttributesValue = Shapes::StringShape.new(name: 'EntityKeyAttributesValue')
+    EntityRejectionErrorType = Shapes::StringShape.new(name: 'EntityRejectionErrorType')
     Enumerations = Shapes::MapShape.new(name: 'Enumerations')
     EpochMillis = Shapes::IntegerShape.new(name: 'EpochMillis')
     EvaluationFrequency = Shapes::StringShape.new(name: 'EvaluationFrequency')
@@ -283,6 +291,7 @@ module Aws::CloudWatchLogs
     QueryStatistics = Shapes::StructureShape.new(name: 'QueryStatistics')
     QueryStatus = Shapes::StringShape.new(name: 'QueryStatus')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
+    RejectedEntityInfo = Shapes::StructureShape.new(name: 'RejectedEntityInfo')
     RejectedLogEventsInfo = Shapes::StructureShape.new(name: 'RejectedLogEventsInfo')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
@@ -687,6 +696,16 @@ module Aws::CloudWatchLogs
     DisassociateKmsKeyRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     DisassociateKmsKeyRequest.struct_class = Types::DisassociateKmsKeyRequest
 
+    Entity.add_member(:key_attributes, Shapes::ShapeRef.new(shape: EntityKeyAttributes, location_name: "keyAttributes"))
+    Entity.add_member(:attributes, Shapes::ShapeRef.new(shape: EntityAttributes, location_name: "attributes"))
+    Entity.struct_class = Types::Entity
+
+    EntityAttributes.key = Shapes::ShapeRef.new(shape: EntityAttributesKey)
+    EntityAttributes.value = Shapes::ShapeRef.new(shape: EntityAttributesValue)
+
+    EntityKeyAttributes.key = Shapes::ShapeRef.new(shape: EntityKeyAttributesKey)
+    EntityKeyAttributes.value = Shapes::ShapeRef.new(shape: EntityKeyAttributesValue)
+
     Enumerations.key = Shapes::ShapeRef.new(shape: TokenString)
     Enumerations.value = Shapes::ShapeRef.new(shape: TokenValue)
 
@@ -1063,10 +1082,12 @@ module Aws::CloudWatchLogs
     PutLogEventsRequest.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, required: true, location_name: "logStreamName"))
     PutLogEventsRequest.add_member(:log_events, Shapes::ShapeRef.new(shape: InputLogEvents, required: true, location_name: "logEvents"))
     PutLogEventsRequest.add_member(:sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "sequenceToken"))
+    PutLogEventsRequest.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, location_name: "entity"))
     PutLogEventsRequest.struct_class = Types::PutLogEventsRequest
 
     PutLogEventsResponse.add_member(:next_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "nextSequenceToken"))
     PutLogEventsResponse.add_member(:rejected_log_events_info, Shapes::ShapeRef.new(shape: RejectedLogEventsInfo, location_name: "rejectedLogEventsInfo"))
+    PutLogEventsResponse.add_member(:rejected_entity_info, Shapes::ShapeRef.new(shape: RejectedEntityInfo, location_name: "rejectedEntityInfo"))
     PutLogEventsResponse.struct_class = Types::PutLogEventsResponse
 
     PutMetricFilterRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
@@ -1136,6 +1157,9 @@ module Aws::CloudWatchLogs
     QueryStatistics.add_member(:records_scanned, Shapes::ShapeRef.new(shape: StatsValue, location_name: "recordsScanned"))
     QueryStatistics.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: StatsValue, location_name: "bytesScanned"))
     QueryStatistics.struct_class = Types::QueryStatistics
+
+    RejectedEntityInfo.add_member(:error_type, Shapes::ShapeRef.new(shape: EntityRejectionErrorType, required: true, location_name: "errorType"))
+    RejectedEntityInfo.struct_class = Types::RejectedEntityInfo
 
     RejectedLogEventsInfo.add_member(:too_new_log_event_start_index, Shapes::ShapeRef.new(shape: LogEventIndex, location_name: "tooNewLogEventStartIndex"))
     RejectedLogEventsInfo.add_member(:too_old_log_event_end_index, Shapes::ShapeRef.new(shape: LogEventIndex, location_name: "tooOldLogEventEndIndex"))

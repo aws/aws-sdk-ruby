@@ -450,6 +450,12 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class Entity
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ExportTask
       attr_accessor task_id: ::String
       attr_accessor task_name: ::String
@@ -913,12 +919,14 @@ module Aws::CloudWatchLogs
       attr_accessor log_stream_name: ::String
       attr_accessor log_events: ::Array[Types::InputLogEvent]
       attr_accessor sequence_token: ::String
+      attr_accessor entity: Types::Entity
       SENSITIVE: []
     end
 
     class PutLogEventsResponse
       attr_accessor next_sequence_token: ::String
       attr_accessor rejected_log_events_info: Types::RejectedLogEventsInfo
+      attr_accessor rejected_entity_info: Types::RejectedEntityInfo
       SENSITIVE: []
     end
 
@@ -1005,6 +1013,11 @@ module Aws::CloudWatchLogs
       attr_accessor records_matched: ::Float
       attr_accessor records_scanned: ::Float
       attr_accessor bytes_scanned: ::Float
+      SENSITIVE: []
+    end
+
+    class RejectedEntityInfo
+      attr_accessor error_type: ("InvalidEntity" | "InvalidTypeValue" | "InvalidKeyAttributes" | "InvalidAttributes" | "EntitySizeTooLarge" | "UnsupportedLogGroupType" | "MissingRequiredFields")
       SENSITIVE: []
     end
 

@@ -27,11 +27,13 @@ module Aws::RedshiftDataAPIService
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ActiveSessionsExceededException}
   # * {ActiveStatementsExceededException}
   # * {BatchExecuteStatementException}
   # * {DatabaseConnectionException}
   # * {ExecuteStatementException}
   # * {InternalServerException}
+  # * {QueryTimeoutException}
   # * {ResourceNotFoundException}
   # * {ValidationException}
   #
@@ -40,6 +42,21 @@ module Aws::RedshiftDataAPIService
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ActiveSessionsExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RedshiftDataAPIService::Types::ActiveSessionsExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ActiveStatementsExceededException < ServiceError
 
@@ -116,6 +133,21 @@ module Aws::RedshiftDataAPIService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RedshiftDataAPIService::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class QueryTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RedshiftDataAPIService::Types::QueryTimeoutException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

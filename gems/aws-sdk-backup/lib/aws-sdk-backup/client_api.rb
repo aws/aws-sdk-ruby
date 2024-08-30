@@ -496,6 +496,8 @@ module Aws::Backup
 
     BackupVaultListMember.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     BackupVaultListMember.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    BackupVaultListMember.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
+    BackupVaultListMember.add_member(:vault_state, Shapes::ShapeRef.new(shape: VaultState, location_name: "VaultState"))
     BackupVaultListMember.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     BackupVaultListMember.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     BackupVaultListMember.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
@@ -798,6 +800,7 @@ module Aws::Backup
     DescribeBackupVaultOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, location_name: "BackupVaultName"))
     DescribeBackupVaultOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
     DescribeBackupVaultOutput.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
+    DescribeBackupVaultOutput.add_member(:vault_state, Shapes::ShapeRef.new(shape: VaultState, location_name: "VaultState"))
     DescribeBackupVaultOutput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     DescribeBackupVaultOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     DescribeBackupVaultOutput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))

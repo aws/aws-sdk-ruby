@@ -77,6 +77,43 @@ module Aws::DataZone
       end
     end
 
+    class AddEntityOwnerInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("DOMAIN_UNIT")
+      attr_accessor owner: Types::OwnerProperties
+      SENSITIVE: []
+    end
+
+    class AddEntityOwnerOutput < Aws::EmptyStructure
+    end
+
+    class AddPolicyGrantInput
+      attr_accessor client_token: ::String
+      attr_accessor detail: Types::PolicyGrantDetail
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE")
+      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT")
+      attr_accessor principal: Types::PolicyGrantPrincipal
+      SENSITIVE: []
+    end
+
+    class AddPolicyGrantOutput < Aws::EmptyStructure
+    end
+
+    class AddToProjectMemberPoolPolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
+    end
+
+    class AllDomainUnitsGrantFilter < Aws::EmptyStructure
+    end
+
+    class AllUsersGrantFilter < Aws::EmptyStructure
+    end
+
     class AssetFilterConfiguration
       attr_accessor column_configuration: Types::ColumnFilterConfiguration
       attr_accessor row_configuration: Types::RowFilterConfiguration
@@ -411,6 +448,11 @@ module Aws::DataZone
       SENSITIVE: [:description]
     end
 
+    class CreateAssetTypePolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
+    end
+
     class CreateDataProductInput
       attr_accessor client_token: ::String
       attr_accessor description: ::String
@@ -531,9 +573,37 @@ module Aws::DataZone
       attr_accessor kms_key_identifier: ::String
       attr_accessor name: ::String
       attr_accessor portal_url: ::String
+      attr_accessor root_domain_unit_id: ::String
       attr_accessor single_sign_on: Types::SingleSignOn
       attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDomainUnitInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor parent_domain_unit_identifier: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateDomainUnitOutput
+      attr_accessor ancestor_domain_unit_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owners: ::Array[Types::DomainUnitOwnerProperties]
+      attr_accessor parent_domain_unit_id: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class CreateDomainUnitPolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
       SENSITIVE: []
     end
 
@@ -623,6 +693,11 @@ module Aws::DataZone
       SENSITIVE: [:description, :name]
     end
 
+    class CreateEnvironmentProfilePolicyGrantDetail
+      attr_accessor domain_unit_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateFormTypeInput
       attr_accessor description: ::String
       attr_accessor domain_identifier: ::String
@@ -644,6 +719,11 @@ module Aws::DataZone
       SENSITIVE: [:description, :name]
     end
 
+    class CreateFormTypePolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
+    end
+
     class CreateGlossaryInput
       attr_accessor client_token: ::String
       attr_accessor description: ::String
@@ -662,6 +742,11 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor status: ("DISABLED" | "ENABLED")
       SENSITIVE: [:description, :name]
+    end
+
+    class CreateGlossaryPolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
     end
 
     class CreateGlossaryTermInput
@@ -723,6 +808,7 @@ module Aws::DataZone
     class CreateProjectInput
       attr_accessor description: ::String
       attr_accessor domain_identifier: ::String
+      attr_accessor domain_unit_id: ::String
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor name: ::String
       SENSITIVE: [:description, :name]
@@ -744,6 +830,7 @@ module Aws::DataZone
       attr_accessor created_by: ::String
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
       attr_accessor failure_reasons: ::Array[Types::ProjectDeletionError]
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor id: ::String
@@ -751,6 +838,11 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: [:description, :name]
+    end
+
+    class CreateProjectPolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
     end
 
     class CreateSubscriptionGrantInput
@@ -1087,6 +1179,15 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class DeleteDomainUnitInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainUnitOutput < Aws::EmptyStructure
+    end
+
     class DeleteEnvironmentActionInput
       attr_accessor domain_identifier: ::String
       attr_accessor environment_identifier: ::String
@@ -1260,6 +1361,60 @@ module Aws::DataZone
       attr_accessor portal_url: ::String
       attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
       SENSITIVE: [:description, :name]
+    end
+
+    class DomainUnitFilterForProject
+      attr_accessor domain_unit: ::String
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
+    end
+
+    class DomainUnitGrantFilter
+      attr_accessor all_domain_units_grant_filter: Types::AllDomainUnitsGrantFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AllDomainUnitsGrantFilter < DomainUnitGrantFilter
+      end
+      class Unknown < DomainUnitGrantFilter
+      end
+    end
+
+    class DomainUnitGroupProperties
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DomainUnitOwnerProperties
+      attr_accessor group: Types::DomainUnitGroupProperties
+      attr_accessor user: Types::DomainUnitUserProperties
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Group < DomainUnitOwnerProperties
+      end
+      class User < DomainUnitOwnerProperties
+      end
+      class Unknown < DomainUnitOwnerProperties
+      end
+    end
+
+    class DomainUnitPolicyGrantPrincipal
+      attr_accessor domain_unit_designation: ("OWNER")
+      attr_accessor domain_unit_grant_filter: Types::DomainUnitGrantFilter
+      attr_accessor domain_unit_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DomainUnitSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DomainUnitUserProperties
+      attr_accessor user_id: ::String
+      SENSITIVE: []
     end
 
     class EnvironmentActionSummary
@@ -1595,10 +1750,31 @@ module Aws::DataZone
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor portal_url: ::String
+      attr_accessor root_domain_unit_id: ::String
       attr_accessor single_sign_on: Types::SingleSignOn
       attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class GetDomainUnitInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainUnitOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor last_updated_by: ::String
+      attr_accessor name: ::String
+      attr_accessor owners: ::Array[Types::DomainUnitOwnerProperties]
+      attr_accessor parent_domain_unit_id: ::String
+      SENSITIVE: [:description, :name]
     end
 
     class GetEnvironmentActionInput
@@ -1891,6 +2067,7 @@ module Aws::DataZone
       attr_accessor created_by: ::String
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
       attr_accessor failure_reasons: ::Array[Types::ProjectDeletionError]
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor id: ::String
@@ -2114,6 +2291,17 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class GroupPolicyGrantPrincipal
+      attr_accessor group_identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GroupIdentifier < GroupPolicyGrantPrincipal
+      end
+      class Unknown < GroupPolicyGrantPrincipal
+      end
+    end
+
     class GroupProfileSummary
       attr_accessor domain_id: ::String
       attr_accessor group_name: ::String
@@ -2304,6 +2492,20 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ListDomainUnitsForParentInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor parent_domain_unit_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainUnitsForParentOutput
+      attr_accessor items: ::Array[Types::DomainUnitSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDomainsInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -2314,6 +2516,21 @@ module Aws::DataZone
     class ListDomainsOutput
       attr_accessor items: ::Array[Types::DomainSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntityOwnersInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("DOMAIN_UNIT")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntityOwnersOutput
+      attr_accessor next_token: ::String
+      attr_accessor owners: ::Array[Types::OwnerPropertiesOutput]
       SENSITIVE: []
     end
 
@@ -2446,6 +2663,22 @@ module Aws::DataZone
     class ListNotificationsOutput
       attr_accessor next_token: ::String
       attr_accessor notifications: ::Array[Types::NotificationOutput]
+      SENSITIVE: []
+    end
+
+    class ListPolicyGrantsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT")
+      SENSITIVE: []
+    end
+
+    class ListPolicyGrantsOutput
+      attr_accessor grant_list: ::Array[Types::PolicyGrantMember]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -2722,6 +2955,133 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class OverrideDomainUnitOwnersPolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
+    end
+
+    class OverrideProjectOwnersPolicyGrantDetail
+      attr_accessor include_child_domain_units: bool
+      SENSITIVE: []
+    end
+
+    class OwnerGroupProperties
+      attr_accessor group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class OwnerGroupPropertiesOutput
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class OwnerProperties
+      attr_accessor group: Types::OwnerGroupProperties
+      attr_accessor user: Types::OwnerUserProperties
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Group < OwnerProperties
+      end
+      class User < OwnerProperties
+      end
+      class Unknown < OwnerProperties
+      end
+    end
+
+    class OwnerPropertiesOutput
+      attr_accessor group: Types::OwnerGroupPropertiesOutput
+      attr_accessor user: Types::OwnerUserPropertiesOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Group < OwnerPropertiesOutput
+      end
+      class User < OwnerPropertiesOutput
+      end
+      class Unknown < OwnerPropertiesOutput
+      end
+    end
+
+    class OwnerUserProperties
+      attr_accessor user_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class OwnerUserPropertiesOutput
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyGrantDetail
+      attr_accessor add_to_project_member_pool: Types::AddToProjectMemberPoolPolicyGrantDetail
+      attr_accessor create_asset_type: Types::CreateAssetTypePolicyGrantDetail
+      attr_accessor create_domain_unit: Types::CreateDomainUnitPolicyGrantDetail
+      attr_accessor create_environment: Types::Unit
+      attr_accessor create_environment_profile: Types::CreateEnvironmentProfilePolicyGrantDetail
+      attr_accessor create_form_type: Types::CreateFormTypePolicyGrantDetail
+      attr_accessor create_glossary: Types::CreateGlossaryPolicyGrantDetail
+      attr_accessor create_project: Types::CreateProjectPolicyGrantDetail
+      attr_accessor delegate_create_environment_profile: Types::Unit
+      attr_accessor override_domain_unit_owners: Types::OverrideDomainUnitOwnersPolicyGrantDetail
+      attr_accessor override_project_owners: Types::OverrideProjectOwnersPolicyGrantDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AddToProjectMemberPool < PolicyGrantDetail
+      end
+      class CreateAssetType < PolicyGrantDetail
+      end
+      class CreateDomainUnit < PolicyGrantDetail
+      end
+      class CreateEnvironment < PolicyGrantDetail
+      end
+      class CreateEnvironmentProfile < PolicyGrantDetail
+      end
+      class CreateFormType < PolicyGrantDetail
+      end
+      class CreateGlossary < PolicyGrantDetail
+      end
+      class CreateProject < PolicyGrantDetail
+      end
+      class DelegateCreateEnvironmentProfile < PolicyGrantDetail
+      end
+      class OverrideDomainUnitOwners < PolicyGrantDetail
+      end
+      class OverrideProjectOwners < PolicyGrantDetail
+      end
+      class Unknown < PolicyGrantDetail
+      end
+    end
+
+    class PolicyGrantMember
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor detail: Types::PolicyGrantDetail
+      attr_accessor principal: Types::PolicyGrantPrincipal
+      SENSITIVE: []
+    end
+
+    class PolicyGrantPrincipal
+      attr_accessor domain_unit: Types::DomainUnitPolicyGrantPrincipal
+      attr_accessor group: Types::GroupPolicyGrantPrincipal
+      attr_accessor project: Types::ProjectPolicyGrantPrincipal
+      attr_accessor user: Types::UserPolicyGrantPrincipal
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DomainUnit < PolicyGrantPrincipal
+      end
+      class Group < PolicyGrantPrincipal
+      end
+      class Project < PolicyGrantPrincipal
+      end
+      class User < PolicyGrantPrincipal
+      end
+      class Unknown < PolicyGrantPrincipal
+      end
+    end
+
     class PostLineageEventInput
       attr_accessor client_token: ::String
       attr_accessor domain_identifier: ::String
@@ -2760,9 +3120,27 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ProjectGrantFilter
+      attr_accessor domain_unit_filter: Types::DomainUnitFilterForProject
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DomainUnitFilter < ProjectGrantFilter
+      end
+      class Unknown < ProjectGrantFilter
+      end
+    end
+
     class ProjectMember
       attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR")
       attr_accessor member_details: Types::MemberDetails
+      SENSITIVE: []
+    end
+
+    class ProjectPolicyGrantPrincipal
+      attr_accessor project_designation: ("OWNER" | "CONTRIBUTOR")
+      attr_accessor project_grant_filter: Types::ProjectGrantFilter
+      attr_accessor project_identifier: ::String
       SENSITIVE: []
     end
 
@@ -2771,6 +3149,7 @@ module Aws::DataZone
       attr_accessor created_by: ::String
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
       attr_accessor failure_reasons: ::Array[Types::ProjectDeletionError]
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -2939,6 +3318,31 @@ module Aws::DataZone
       attr_accessor filter_expressions: ::Array[Types::FilterExpression]
       attr_accessor schema_name: ::String
       SENSITIVE: []
+    end
+
+    class RemoveEntityOwnerInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("DOMAIN_UNIT")
+      attr_accessor owner: Types::OwnerProperties
+      SENSITIVE: []
+    end
+
+    class RemoveEntityOwnerOutput < Aws::EmptyStructure
+    end
+
+    class RemovePolicyGrantInput
+      attr_accessor client_token: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE")
+      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT")
+      attr_accessor principal: Types::PolicyGrantPrincipal
+      SENSITIVE: []
+    end
+
+    class RemovePolicyGrantOutput < Aws::EmptyStructure
     end
 
     class Resource
@@ -3519,6 +3923,9 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class Unit < Aws::EmptyStructure
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -3610,8 +4017,31 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
+      attr_accessor root_domain_unit_id: ::String
       attr_accessor single_sign_on: Types::SingleSignOn
       SENSITIVE: []
+    end
+
+    class UpdateDomainUnitInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :name]
+    end
+
+    class UpdateDomainUnitOutput
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor last_updated_by: ::String
+      attr_accessor name: ::String
+      attr_accessor owners: ::Array[Types::DomainUnitOwnerProperties]
+      attr_accessor parent_domain_unit_id: ::String
+      SENSITIVE: [:description, :name]
     end
 
     class UpdateEnvironmentActionInput
@@ -3768,6 +4198,7 @@ module Aws::DataZone
       attr_accessor created_by: ::String
       attr_accessor description: ::String
       attr_accessor domain_id: ::String
+      attr_accessor domain_unit_id: ::String
       attr_accessor failure_reasons: ::Array[Types::ProjectDeletionError]
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor id: ::String
@@ -3877,6 +4308,20 @@ module Aws::DataZone
     class UserDetails
       attr_accessor user_id: ::String
       SENSITIVE: []
+    end
+
+    class UserPolicyGrantPrincipal
+      attr_accessor all_users_grant_filter: Types::AllUsersGrantFilter
+      attr_accessor user_identifier: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AllUsersGrantFilter < UserPolicyGrantPrincipal
+      end
+      class UserIdentifier < UserPolicyGrantPrincipal
+      end
+      class Unknown < UserPolicyGrantPrincipal
+      end
     end
 
     class UserProfileDetails

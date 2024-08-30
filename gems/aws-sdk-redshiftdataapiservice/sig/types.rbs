@@ -8,6 +8,11 @@
 module Aws::RedshiftDataAPIService
   module Types
 
+    class ActiveSessionsExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ActiveStatementsExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -25,6 +30,8 @@ module Aws::RedshiftDataAPIService
       attr_accessor database: ::String
       attr_accessor db_user: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_keep_alive_seconds: ::Integer
       attr_accessor sqls: ::Array[::String]
       attr_accessor statement_name: ::String
       attr_accessor with_event: bool
@@ -36,9 +43,11 @@ module Aws::RedshiftDataAPIService
       attr_accessor cluster_identifier: ::String
       attr_accessor created_at: ::Time
       attr_accessor database: ::String
+      attr_accessor db_groups: ::Array[::String]
       attr_accessor db_user: ::String
       attr_accessor id: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor session_id: ::String
       attr_accessor workgroup_name: ::String
       SENSITIVE: []
     end
@@ -96,6 +105,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor result_rows: ::Integer
       attr_accessor result_size: ::Integer
       attr_accessor secret_arn: ::String
+      attr_accessor session_id: ::String
       attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
       attr_accessor sub_statements: ::Array[Types::SubStatementData]
       attr_accessor updated_at: ::Time
@@ -137,6 +147,8 @@ module Aws::RedshiftDataAPIService
       attr_accessor db_user: ::String
       attr_accessor parameters: ::Array[Types::SqlParameter]
       attr_accessor secret_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_keep_alive_seconds: ::Integer
       attr_accessor sql: ::String
       attr_accessor statement_name: ::String
       attr_accessor with_event: bool
@@ -148,9 +160,11 @@ module Aws::RedshiftDataAPIService
       attr_accessor cluster_identifier: ::String
       attr_accessor created_at: ::Time
       attr_accessor database: ::String
+      attr_accessor db_groups: ::Array[::String]
       attr_accessor db_user: ::String
       attr_accessor id: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor session_id: ::String
       attr_accessor workgroup_name: ::String
       SENSITIVE: []
     end
@@ -271,6 +285,11 @@ module Aws::RedshiftDataAPIService
       SENSITIVE: []
     end
 
+    class QueryTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -291,6 +310,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor query_string: ::String
       attr_accessor query_strings: ::Array[::String]
       attr_accessor secret_arn: ::String
+      attr_accessor session_id: ::String
       attr_accessor statement_name: ::String
       attr_accessor status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
       attr_accessor updated_at: ::Time

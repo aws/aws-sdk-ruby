@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-08-30)
+------------------
+
+* Feature - Amazon DataZone now adds new governance capabilities of Domain Units for organization within your Data Domains, and Authorization Policies for tighter controls.
+
 1.19.0 (2024-08-28)
 ------------------
 

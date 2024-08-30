@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.204.0 (2024-08-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-core` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-core` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-core` gem.
+
 3.203.0 (2024-08-28)
 ------------------
 

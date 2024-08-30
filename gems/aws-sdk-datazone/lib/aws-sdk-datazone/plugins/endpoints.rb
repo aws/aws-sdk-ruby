@@ -62,6 +62,10 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::AcceptPredictions.build(context)
           when :accept_subscription_request
             Aws::DataZone::Endpoints::AcceptSubscriptionRequest.build(context)
+          when :add_entity_owner
+            Aws::DataZone::Endpoints::AddEntityOwner.build(context)
+          when :add_policy_grant
+            Aws::DataZone::Endpoints::AddPolicyGrant.build(context)
           when :associate_environment_role
             Aws::DataZone::Endpoints::AssociateEnvironmentRole.build(context)
           when :cancel_metadata_generation_run
@@ -84,6 +88,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::CreateDataSource.build(context)
           when :create_domain
             Aws::DataZone::Endpoints::CreateDomain.build(context)
+          when :create_domain_unit
+            Aws::DataZone::Endpoints::CreateDomainUnit.build(context)
           when :create_environment
             Aws::DataZone::Endpoints::CreateEnvironment.build(context)
           when :create_environment_action
@@ -124,6 +130,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DeleteDataSource.build(context)
           when :delete_domain
             Aws::DataZone::Endpoints::DeleteDomain.build(context)
+          when :delete_domain_unit
+            Aws::DataZone::Endpoints::DeleteDomainUnit.build(context)
           when :delete_environment
             Aws::DataZone::Endpoints::DeleteEnvironment.build(context)
           when :delete_environment_action
@@ -168,6 +176,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetDataSourceRun.build(context)
           when :get_domain
             Aws::DataZone::Endpoints::GetDomain.build(context)
+          when :get_domain_unit
+            Aws::DataZone::Endpoints::GetDomainUnit.build(context)
           when :get_environment
             Aws::DataZone::Endpoints::GetEnvironment.build(context)
           when :get_environment_action
@@ -222,8 +232,12 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListDataSourceRuns.build(context)
           when :list_data_sources
             Aws::DataZone::Endpoints::ListDataSources.build(context)
+          when :list_domain_units_for_parent
+            Aws::DataZone::Endpoints::ListDomainUnitsForParent.build(context)
           when :list_domains
             Aws::DataZone::Endpoints::ListDomains.build(context)
+          when :list_entity_owners
+            Aws::DataZone::Endpoints::ListEntityOwners.build(context)
           when :list_environment_actions
             Aws::DataZone::Endpoints::ListEnvironmentActions.build(context)
           when :list_environment_blueprint_configurations
@@ -240,6 +254,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListMetadataGenerationRuns.build(context)
           when :list_notifications
             Aws::DataZone::Endpoints::ListNotifications.build(context)
+          when :list_policy_grants
+            Aws::DataZone::Endpoints::ListPolicyGrants.build(context)
           when :list_project_memberships
             Aws::DataZone::Endpoints::ListProjectMemberships.build(context)
           when :list_projects
@@ -266,6 +282,10 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::RejectPredictions.build(context)
           when :reject_subscription_request
             Aws::DataZone::Endpoints::RejectSubscriptionRequest.build(context)
+          when :remove_entity_owner
+            Aws::DataZone::Endpoints::RemoveEntityOwner.build(context)
+          when :remove_policy_grant
+            Aws::DataZone::Endpoints::RemovePolicyGrant.build(context)
           when :revoke_subscription
             Aws::DataZone::Endpoints::RevokeSubscription.build(context)
           when :search
@@ -292,6 +312,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::UpdateDataSource.build(context)
           when :update_domain
             Aws::DataZone::Endpoints::UpdateDomain.build(context)
+          when :update_domain_unit
+            Aws::DataZone::Endpoints::UpdateDomainUnit.build(context)
           when :update_environment
             Aws::DataZone::Endpoints::UpdateEnvironment.build(context)
           when :update_environment_action

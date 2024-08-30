@@ -425,19 +425,17 @@ module Aws::Backup
 
     # @!group API Operations
 
-    # This action removes the specified legal hold on a recovery point. This
-    # action can only be performed by a user with sufficient permissions.
+    # Removes the specified legal hold on a recovery point. This action can
+    # only be performed by a user with sufficient permissions.
     #
     # @option params [required, String] :legal_hold_id
-    #   Legal hold ID required to remove the specified legal hold on a
-    #   recovery point.
+    #   The ID of the legal hold.
     #
     # @option params [required, String] :cancel_description
-    #   String describing the reason for removing the legal hold.
+    #   A string the describes the reason for removing the legal hold.
     #
     # @option params [Integer] :retain_record_in_days
-    #   The integer amount in days specifying amount of days after this API
-    #   operation to remove legal hold.
+    #   The integer amount, in days, after which to remove legal hold.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -466,13 +464,11 @@ module Aws::Backup
     # receive an `AlreadyExistsException` exception.
     #
     # @option params [required, Types::BackupPlanInput] :backup_plan
-    #   Specifies the body of a backup plan. Includes a `BackupPlanName` and
-    #   one or more sets of `Rules`.
+    #   The body of a backup plan. Includes a `BackupPlanName` and one or more
+    #   sets of `Rules`.
     #
     # @option params [Hash<String,String>] :backup_plan_tags
-    #   To help organize your resources, you can assign your own metadata to
-    #   the resources that you create. Each tag is a key-value pair. The
-    #   specified tags are assigned to all backups created with this plan.
+    #   The tags to assign to the backup plan.
     #
     # @option params [String] :creator_request_id
     #   Identifies the request and allows failed requests to be retried
@@ -569,12 +565,10 @@ module Aws::Backup
     # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json
     #
     # @option params [required, String] :backup_plan_id
-    #   Uniquely identifies the backup plan to be associated with the
-    #   selection of resources.
+    #   The ID of the backup plan.
     #
     # @option params [required, Types::BackupSelection] :backup_selection
-    #   Specifies the body of a request to assign a set of resources to a
-    #   backup plan.
+    #   The body of a request to assign a set of resources to a backup plan.
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and allows failed requests
@@ -667,8 +661,7 @@ module Aws::Backup
     #   They consist of letters, numbers, and hyphens.
     #
     # @option params [Hash<String,String>] :backup_vault_tags
-    #   Metadata that you can assign to help organize the resources that you
-    #   create. Each tag is a key-value pair.
+    #   The tags to assign to the backup vault.
     #
     # @option params [String] :encryption_key_arn
     #   The server-side encryption key that is used to protect your backups;
@@ -731,8 +724,8 @@ module Aws::Backup
     #   characters.
     #
     # @option params [required, Array<Types::FrameworkControl>] :framework_controls
-    #   A list of the controls that make up the framework. Each control in the
-    #   list has a name, input parameters, and scope.
+    #   The controls that make up the framework. Each control in the list has
+    #   a name, input parameters, and scope.
     #
     # @option params [String] :idempotency_token
     #   A customer-chosen string that you can use to distinguish between
@@ -744,8 +737,7 @@ module Aws::Backup
     #   not need to pass this option.**
     #
     # @option params [Hash<String,String>] :framework_tags
-    #   Metadata that you can assign to help organize the frameworks that you
-    #   create. Each tag is a key-value pair.
+    #   The tags to assign to the framework.
     #
     # @return [Types::CreateFrameworkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -795,17 +787,17 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # This action creates a legal hold on a recovery point (backup). A legal
-    # hold is a restraint on altering or deleting a backup until an
-    # authorized user cancels the legal hold. Any actions to delete or
-    # disassociate a recovery point will fail with an error if one or more
-    # active legal holds are on the recovery point.
+    # Creates a legal hold on a recovery point (backup). A legal hold is a
+    # restraint on altering or deleting a backup until an authorized user
+    # cancels the legal hold. Any actions to delete or disassociate a
+    # recovery point will fail with an error if one or more active legal
+    # holds are on the recovery point.
     #
     # @option params [required, String] :title
-    #   This is the string title of the legal hold.
+    #   The title of the legal hold.
     #
     # @option params [required, String] :description
-    #   This is the string description of the legal hold.
+    #   The description of the legal hold.
     #
     # @option params [String] :idempotency_token
     #   This is a user-chosen string used to distinguish between otherwise
@@ -813,8 +805,8 @@ module Aws::Backup
     #   idempotency token results in a success message with no action taken.
     #
     # @option params [Types::RecoveryPointSelection] :recovery_point_selection
-    #   This specifies criteria to assign a set of resources, such as resource
-    #   types or backup vaults.
+    #   The criteria to assign a set of resources, such as resource types or
+    #   backup vaults.
     #
     # @option params [Hash<String,String>] :tags
     #   Optional tags to include. A tag is a key-value pair you can use to
@@ -875,8 +867,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # This request creates a logical container to where backups may be
-    # copied.
+    # Creates a logical container to where backups may be copied.
     #
     # This request includes a name, the Region, the maximum number of
     # retention days, the minimum number of retention days, and optionally
@@ -888,41 +879,28 @@ module Aws::Backup
     #  </note>
     #
     # @option params [required, String] :backup_vault_name
-    #   This is the name of the vault that is being created.
+    #   The name of a logical container where backups are stored. Logically
+    #   air-gapped backup vaults are identified by names that are unique to
+    #   the account used to create them and the Region where they are created.
     #
     # @option params [Hash<String,String>] :backup_vault_tags
-    #   These are the tags that will be included in the newly-created vault.
+    #   The tags to assign to the vault.
     #
     # @option params [String] :creator_request_id
-    #   This is the ID of the creation request.
+    #   The ID of the creation request.
     #
     #   This parameter is optional. If used, this parameter must contain 1 to
     #   50 alphanumeric or '-\_.' characters.
     #
     # @option params [required, Integer] :min_retention_days
     #   This setting specifies the minimum retention period that the vault
-    #   retains its recovery points. If this parameter is not specified, no
-    #   minimum retention period is enforced.
+    #   retains its recovery points.
     #
-    #   If specified, any backup or copy job to the vault must have a
-    #   lifecycle policy with a retention period equal to or longer than the
-    #   minimum retention period. If a job retention period is shorter than
-    #   that minimum retention period, then the vault fails the backup or copy
-    #   job, and you should either modify your lifecycle settings or use a
-    #   different vault.
+    #   The minimum value accepted is 7 days.
     #
     # @option params [required, Integer] :max_retention_days
-    #   This is the setting that specifies the maximum retention period that
-    #   the vault retains its recovery points. If this parameter is not
-    #   specified, Backup does not enforce a maximum retention period on the
-    #   recovery points in the vault (allowing indefinite storage).
-    #
-    #   If specified, any backup or copy job to the vault must have a
-    #   lifecycle policy with a retention period equal to or shorter than the
-    #   maximum retention period. If the job retention period is longer than
-    #   that maximum retention period, then the vault fails the backup or copy
-    #   job, and you should either modify your lifecycle settings or use a
-    #   different vault.
+    #   The maximum retention period that the vault retains its recovery
+    #   points.
     #
     # @return [Types::CreateLogicallyAirGappedBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -992,8 +970,7 @@ module Aws::Backup
     #   report coverage by Amazon Web Services Regions and frameworks.
     #
     # @option params [Hash<String,String>] :report_plan_tags
-    #   Metadata that you can assign to help organize the report plans that
-    #   you create. Each tag is a key-value pair.
+    #   The tags to assign to the report plan.
     #
     # @option params [String] :idempotency_token
     #   A customer-chosen string that you can use to distinguish between
@@ -1049,12 +1026,11 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # This is the first of two steps to create a restore testing plan; once
-    # this request is successful, finish the procedure with request
-    # CreateRestoreTestingSelection.
+    # Creates a restore testing plan.
     #
-    # You must include the parameter RestoreTestingPlan. You may optionally
-    # include CreatorRequestId and Tags.
+    # The first of two steps to create a restore testing plan. After this
+    # request is successful, finish the procedure using
+    # CreateRestoreTestingSelection.
     #
     # @option params [String] :creator_request_id
     #   This is a unique string that identifies the request and allows failed
@@ -1073,10 +1049,7 @@ module Aws::Backup
     #   it must consist of only alphanumeric characters and underscores.
     #
     # @option params [Hash<String,String>] :tags
-    #   Optional tags to include. A tag is a key-value pair you can use to
-    #   manage, filter, and search for your resources. Allowed characters
-    #   include UTF-8 letters,numbers, spaces, and the following characters: +
-    #   - = . \_ : /.
+    #   The tags to assign to the restore testing plan.
     #
     # @return [Types::CreateRestoreTestingPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1293,7 +1266,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1375,8 +1347,7 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and the Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   create them and the Region where they are created.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1444,7 +1415,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -1639,16 +1609,16 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [String] :backup_vault_account_id
-    #   This is the account ID of the specified backup vault.
+    #   The account ID of the specified backup vault.
     #
     # @return [Types::DescribeBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeBackupVaultOutput#backup_vault_name #backup_vault_name} => String
     #   * {Types::DescribeBackupVaultOutput#backup_vault_arn #backup_vault_arn} => String
     #   * {Types::DescribeBackupVaultOutput#vault_type #vault_type} => String
+    #   * {Types::DescribeBackupVaultOutput#vault_state #vault_state} => String
     #   * {Types::DescribeBackupVaultOutput#encryption_key_arn #encryption_key_arn} => String
     #   * {Types::DescribeBackupVaultOutput#creation_date #creation_date} => Time
     #   * {Types::DescribeBackupVaultOutput#creator_request_id #creator_request_id} => String
@@ -1670,6 +1640,7 @@ module Aws::Backup
     #   resp.backup_vault_name #=> String
     #   resp.backup_vault_arn #=> String
     #   resp.vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+    #   resp.vault_state #=> String, one of "CREATING", "AVAILABLE", "FAILED"
     #   resp.encryption_key_arn #=> String
     #   resp.creation_date #=> Time
     #   resp.creator_request_id #=> String
@@ -1872,7 +1843,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -1880,7 +1850,7 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #
     # @option params [String] :backup_vault_account_id
-    #   This is the account ID of the specified backup vault.
+    #   The account ID of the specified backup vault.
     #
     # @return [Types::DescribeRecoveryPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2178,15 +2148,14 @@ module Aws::Backup
     # (composite) recovery point.
     #
     # @option params [required, String] :backup_vault_name
-    #   This is the name of a logical container where the child (nested)
-    #   recovery point is stored. Backup vaults are identified by names that
-    #   are unique to the account used to create them and the Amazon Web
-    #   Services Region where they are created. They consist of lowercase
-    #   letters, numbers, and hyphens.
+    #   The name of a logical container where the child (nested) recovery
+    #   point is stored. Backup vaults are identified by names that are unique
+    #   to the account used to create them and the Amazon Web Services Region
+    #   where they are created.
     #
     # @option params [required, String] :recovery_point_arn
-    #   This is the Amazon Resource Name (ARN) that uniquely identifies the
-    #   child (nested) recovery point; for example,
+    #   The Amazon Resource Name (ARN) that uniquely identifies the child
+    #   (nested) recovery point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2485,7 +2454,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Types::GetBackupVaultAccessPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2520,7 +2488,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @return [Types::GetBackupVaultNotificationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2556,8 +2523,7 @@ module Aws::Backup
     # are the body of a legal hold in JSON format, in addition to metadata.
     #
     # @option params [required, String] :legal_hold_id
-    #   This is the ID required to use `GetLegalHold`. This unique ID is
-    #   associated with a specific legal hold.
+    #   The ID of the legal hold.
     #
     # @return [Types::GetLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2612,7 +2578,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -2620,7 +2585,7 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #
     # @option params [String] :backup_vault_account_id
-    #   This is the account ID of the specified backup vault.
+    #   The account ID of the specified backup vault.
     #
     # @return [Types::GetRecoveryPointRestoreMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2691,7 +2656,7 @@ module Aws::Backup
     # is an optional parameter.
     #
     # @option params [String] :backup_vault_account_id
-    #   This is the account ID of the specified backup vault.
+    #   The account ID of the specified backup vault.
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
@@ -2921,18 +2886,16 @@ module Aws::Backup
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
     #
     # @option params [String] :aggregation_period
-    #   This is the period that sets the boundaries for returned results.
+    #   The period for the returned results.
     #
-    #   Acceptable values include
+    #   * `ONE_DAY` - The daily job count for the prior 14 days.
     #
-    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #   * `SEVEN_DAYS` - The aggregated job count for the prior 7 days.
     #
-    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
-    #
-    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   * `FOURTEEN_DAYS` - The aggregated job count for prior 14 days.
     #
     # @option params [Integer] :max_results
-    #   This parameter sets the maximum number of items to be returned.
+    #   The maximum number of items to be returned.
     #
     #   The value is an integer. Range of accepted values is from 1 to 500.
     #
@@ -3025,8 +2988,7 @@ module Aws::Backup
     #   Returns only backup jobs that will be stored in the specified backup
     #   vault. Backup vaults are identified by names that are unique to the
     #   account used to create them and the Amazon Web Services Region where
-    #   they are created. They consist of lowercase letters, numbers, and
-    #   hyphens.
+    #   they are created.
     #
     # @option params [Time,DateTime,Date,Integer,String] :by_created_before
     #   Returns only backup jobs that were created before the specified date.
@@ -3055,19 +3017,20 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
-    #   * `Redshift` for Amazon Redshift
-    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `S3` for Amazon Simple Storage Service (Amazon S3)
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases on Amazon Elastic
+    #     Compute Cloud instances
     #
     #   * `Storage Gateway` for Storage Gateway
     #
-    #   * `S3` for Amazon S3
-    #
     #   * `Timestream` for Amazon Timestream
     #
-    #   * `VirtualMachine` for virtual machines
+    #   * `VirtualMachine` for VMware virtual machines
     #
     # @option params [String] :by_account_id
     #   The account ID to list the jobs from. Returns only backup jobs
@@ -3173,8 +3136,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns metadata of your saved backup plan templates, including the
-    # template ID, name, and the creation and deletion dates.
+    # Lists the backup plan templates.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -3183,7 +3145,7 @@ module Aws::Backup
     #   the location pointed to by the next token.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to be returned.
+    #   The maximum number of items to return.
     #
     # @return [Types::ListBackupPlanTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3272,10 +3234,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns a list of all active backup plans for an authenticated
-    # account. The list contains information such as Amazon Resource Names
-    # (ARNs), plan IDs, creation and deletion dates, version IDs, plan
-    # names, and creator request IDs.
+    # Lists the active backup plans for the account.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -3420,6 +3379,8 @@ module Aws::Backup
     #   resp.backup_vault_list #=> Array
     #   resp.backup_vault_list[0].backup_vault_name #=> String
     #   resp.backup_vault_list[0].backup_vault_arn #=> String
+    #   resp.backup_vault_list[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+    #   resp.backup_vault_list[0].vault_state #=> String, one of "CREATING", "AVAILABLE", "FAILED"
     #   resp.backup_vault_list[0].creation_date #=> Time
     #   resp.backup_vault_list[0].encryption_key_arn #=> String
     #   resp.backup_vault_list[0].creator_request_id #=> String
@@ -3502,13 +3463,13 @@ module Aws::Backup
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
     #
     # @option params [String] :aggregation_period
-    #   This is the period that sets the boundaries for returned results.
+    #   The period for the returned results.
     #
-    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #   * `ONE_DAY` - The daily job count for the prior 14 days.
     #
-    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
+    #   * `SEVEN_DAYS` - The aggregated job count for the prior 7 days.
     #
-    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   * `FOURTEEN_DAYS` - The aggregated job count for prior 14 days.
     #
     # @option params [Integer] :max_results
     #   This parameter sets the maximum number of items to be returned.
@@ -3609,24 +3570,25 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
-    #   * `Redshift` for Amazon Redshift
-    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `S3` for Amazon Simple Storage Service (Amazon S3)
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases on Amazon Elastic
+    #     Compute Cloud instances
     #
     #   * `Storage Gateway` for Storage Gateway
     #
-    #   * `S3` for Amazon S3
-    #
     #   * `Timestream` for Amazon Timestream
     #
-    #   * `VirtualMachine` for virtual machines
+    #   * `VirtualMachine` for VMware virtual machines
     #
     # @option params [String] :by_destination_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a source backup
     #   vault to copy from; for example,
-    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #   `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
     #
     # @option params [String] :by_account_id
     #   The account ID to list the jobs from. Returns only copy jobs
@@ -3869,12 +3831,12 @@ module Aws::Backup
     # backup vault.
     #
     # @option params [required, String] :backup_vault_name
-    #   This is the list of protected resources by backup vault within the
-    #   vault(s) you specify by name.
+    #   The list of protected resources by backup vault within the vault(s)
+    #   you specify by name.
     #
     # @option params [String] :backup_vault_account_id
-    #   This is the list of protected resources by backup vault within the
-    #   vault(s) you specify by account ID.
+    #   The list of protected resources by backup vault within the vault(s)
+    #   you specify by account ID.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -3928,7 +3890,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     #   <note markdown="1"> Backup vault name might not be available when a supported service
     #   creates the backup.
@@ -3973,19 +3934,20 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
-    #   * `Redshift` for Amazon Redshift
-    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `S3` for Amazon Simple Storage Service (Amazon S3)
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases on Amazon Elastic
+    #     Compute Cloud instances
     #
     #   * `Storage Gateway` for Storage Gateway
     #
-    #   * `S3` for Amazon S3
-    #
     #   * `Timestream` for Amazon Timestream
     #
-    #   * `VirtualMachine` for virtual machines
+    #   * `VirtualMachine` for VMware virtual machines
     #
     # @option params [String] :by_backup_plan_id
     #   Returns only recovery points that match the specified backup plan ID.
@@ -4071,16 +4033,16 @@ module Aws::Backup
     # specified legal hold.
     #
     # @option params [required, String] :legal_hold_id
-    #   This is the ID of the legal hold.
+    #   The ID of the legal hold.
     #
     # @option params [String] :next_token
-    #   This is the next item following a partial list of returned resources.
-    #   For example, if a request is made to return `MaxResults` number of
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `MaxResults` number of
     #   resources, `NextToken` allows you to return more items in your list
     #   starting at the location pointed to by the next token.
     #
     # @option params [Integer] :max_results
-    #   This is the maximum number of resource list items to be returned.
+    #   The maximum number of resource list items to be returned.
     #
     # @return [Types::ListRecoveryPointsByLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4115,8 +4077,8 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns detailed information about all the recovery points of the type
-    # specified by a resource Amazon Resource Name (ARN).
+    # The information about the recovery points of the type specified by a
+    # resource Amazon Resource Name (ARN).
     #
     # <note markdown="1"> For Amazon EFS and Amazon EC2, this action only lists recovery points
     # created by Backup.
@@ -4373,15 +4335,13 @@ module Aws::Backup
     #   Relational Database Service (Amazon RDS) database.
     #
     # @option params [String] :aggregation_period
-    #   This is the period that sets the boundaries for returned results.
+    #   The period for the returned results.
     #
-    #   Acceptable values include
+    #   * `ONE_DAY` - The daily job count for the prior 14 days.
     #
-    #   * `ONE_DAY` for daily job count for the prior 14 days.
+    #   * `SEVEN_DAYS` - The aggregated job count for the prior 7 days.
     #
-    #   * `SEVEN_DAYS` for the aggregated job count for the prior 7 days.
-    #
-    #   * `FOURTEEN_DAYS` for aggregated job count for prior 14 days.
+    #   * `FOURTEEN_DAYS` - The aggregated job count for prior 14 days.
     #
     # @option params [Integer] :max_results
     #   This parameter sets the maximum number of items to be returned.
@@ -4473,19 +4433,20 @@ module Aws::Backup
     #
     #   * `Neptune` for Amazon Neptune
     #
-    #   * `Redshift` for Amazon Redshift
-    #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `SAP HANA on Amazon EC2` for SAP HANA databases
+    #   * `Redshift` for Amazon Redshift
+    #
+    #   * `S3` for Amazon Simple Storage Service (Amazon S3)
+    #
+    #   * `SAP HANA on Amazon EC2` for SAP HANA databases on Amazon Elastic
+    #     Compute Cloud instances
     #
     #   * `Storage Gateway` for Storage Gateway
     #
-    #   * `S3` for Amazon S3
-    #
     #   * `Timestream` for Amazon Timestream
     #
-    #   * `VirtualMachine` for virtual machines
+    #   * `VirtualMachine` for VMware virtual machines
     #
     # @option params [Time,DateTime,Date,Integer,String] :by_created_before
     #   Returns only restore jobs that were created before the specified date.
@@ -4744,17 +4705,8 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns a list of key-value pairs assigned to a target recovery point,
-    # backup plan, or backup vault.
-    #
-    # `ListTags` only works for resource types that support full Backup
-    # management of their backups. Those resource types are listed in the
-    # "Full Backup management" section of the [ Feature availability by
-    # resource][1] table.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+    # Returns the tags assigned to the resource, such as a target recovery
+    # point, backup plan, or backup vault.
     #
     # @option params [required, String] :resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource. The
@@ -4808,7 +4760,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [String] :policy
     #   The backup vault access policy document in JSON format.
@@ -4843,9 +4794,16 @@ module Aws::Backup
     # environments that are subject to SEC 17a-4, CFTC, and FINRA
     # regulations. For more information about how Backup Vault Lock relates
     # to these regulations, see the [Cohasset Associates Compliance
-    # Assessment.](samples/cohassetreport.zip)
+    # Assessment.][1]
     #
     #  </note>
+    #
+    # For more information, see [Backup Vault Lock][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/samples/cohassetreport.zip
+    # [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html
     #
     # @option params [required, String] :backup_vault_name
     #   The Backup Vault Lock configuration that specifies the name of the
@@ -4858,8 +4816,10 @@ module Aws::Backup
     #   require you to retain certain data for at least seven years (2555
     #   days).
     #
-    #   If this parameter is not specified, Vault Lock will not enforce a
-    #   minimum retention period.
+    #   This parameter is required when a vault lock is created through
+    #   CloudFormation; otherwise, this parameter is optional. If this
+    #   parameter is not specified, Vault Lock will not enforce a minimum
+    #   retention period.
     #
     #   If this parameter is specified, any backup or copy job to the vault
     #   must have a lifecycle policy with a retention period equal to or
@@ -4940,7 +4900,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) that specifies the topic for a backup
@@ -4965,9 +4924,9 @@ module Aws::Backup
     #
     #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
     #
-    #   <note markdown="1"> The list below shows items that are deprecated events (for reference)
-    #   and are no longer in use. They are no longer supported and will not
-    #   return statuses or notifications. Refer to the list above for current
+    #   <note markdown="1"> The list below includes both supported events and deprecated events
+    #   that are no longer in use (for reference). Deprecated events do not
+    #   return statuses or notifications. Refer to the list above for the
     #   supported events.
     #
     #    </note>
@@ -5003,7 +4962,7 @@ module Aws::Backup
     #   This is a unique identifier of a restore job within Backup.
     #
     # @option params [required, String] :validation_status
-    #   This is the status of your restore validation.
+    #   The status of your restore validation.
     #
     # @option params [String] :validation_status_message
     #   This is an optional message string you can input to describe the
@@ -5034,7 +4993,6 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource. The
@@ -5088,25 +5046,22 @@ module Aws::Backup
     #   “transition to cold after days” setting cannot be changed after a
     #   backup has been transitioned to cold.
     #
-    #   Resource types that are able to be transitioned to cold storage are
-    #   listed in the "Lifecycle to cold storage" section of the [ Feature
-    #   availability by resource][1] table. Backup ignores this expression for
-    #   other resource types.
+    #   Resource types that can transition to cold storage are listed in the
+    #   [Feature availability by resource][1] table. Backup ignores this
+    #   expression for other resource types.
     #
     #   This parameter has a maximum value of 100 years (36,500 days).
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
     #
     # @option params [Hash<String,String>] :recovery_point_tags
-    #   To help organize your resources, you can assign your own metadata to
-    #   the resources that you create. Each tag is a key-value pair.
+    #   The tags to assign to the resources.
     #
     # @option params [Hash<String,String>] :backup_options
-    #   Specifies the backup option for a selected resource. This option is
-    #   only available for Windows Volume Shadow Copy Service (VSS) backup
-    #   jobs.
+    #   The backup option for a selected resource. This option is only
+    #   available for Windows Volume Shadow Copy Service (VSS) backup jobs.
     #
     #   Valid values: Set to `"WindowsVSS":"enabled"` to enable the
     #   `WindowsVSS` backup option and create a Windows VSS backup. Set to
@@ -5171,12 +5126,12 @@ module Aws::Backup
     #   The name of a logical source container where backups are stored.
     #   Backup vaults are identified by names that are unique to the account
     #   used to create them and the Amazon Web Services Region where they are
-    #   created. They consist of lowercase letters, numbers, and hyphens.
+    #   created.
     #
     # @option params [required, String] :destination_backup_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a destination
     #   backup vault to copy to; for example,
-    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #   `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
     #
     # @option params [required, String] :iam_role_arn
     #   Specifies the IAM role ARN used to copy the target recovery point; for
@@ -5189,23 +5144,26 @@ module Aws::Backup
     #   with no action taken.
     #
     # @option params [Types::Lifecycle] :lifecycle
-    #   Contains an array of `Transition` objects specifying how long in days
-    #   before a recovery point transitions to cold storage or is deleted.
+    #   Specifies the time period, in days, before a recovery point
+    #   transitions to cold storage or is deleted.
     #
     #   Backups transitioned to cold storage must be stored in cold storage
-    #   for a minimum of 90 days. Therefore, on the console, the “retention”
-    #   setting must be 90 days greater than the “transition to cold after
-    #   days” setting. The “transition to cold after days” setting cannot be
-    #   changed after a backup has been transitioned to cold.
+    #   for a minimum of 90 days. Therefore, on the console, the retention
+    #   setting must be 90 days greater than the transition to cold after days
+    #   setting. The transition to cold after days setting can't be changed
+    #   after a backup has been transitioned to cold.
     #
-    #   Resource types that are able to be transitioned to cold storage are
-    #   listed in the "Lifecycle to cold storage" section of the [ Feature
-    #   availability by resource][1] table. Backup ignores this expression for
-    #   other resource types.
+    #   Resource types that can transition to cold storage are listed in the
+    #   [Feature availability by resource][1] table. Backup ignores this
+    #   expression for other resource types.
+    #
+    #   To remove the existing lifecycle and retention periods and keep your
+    #   recovery points indefinitely, specify -1 for
+    #   `MoveToColdStorageAfterDays` and `DeleteAfterDays`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
     #
     # @return [Types::StartCopyJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5289,8 +5247,7 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #
     # @option params [required, Hash<String,String>] :metadata
-    #   A set of metadata key-value pairs. Contains information, such as a
-    #   resource name, required to restore a recovery point.
+    #   A set of metadata key-value pairs.
     #
     #   You can get configuration metadata about a resource at the time it was
     #   backed up by calling `GetRecoveryPointRestoreMetadata`. However,
@@ -5299,33 +5256,56 @@ module Aws::Backup
     #   resource. For example, you might need to provide a new resource name
     #   if the original already exists.
     #
-    #   You need to specify specific metadata to restore an Amazon Elastic
-    #   File System (Amazon EFS) instance:
+    #   For more information about the metadata for each resource, see the
+    #   following:
     #
-    #   * `file-system-id`: The ID of the Amazon EFS file system that is
-    #     backed up by Backup. Returned in `GetRecoveryPointRestoreMetadata`.
+    #   * [Metadata for Amazon Aurora][1]
     #
-    #   * `Encrypted`: A Boolean value that, if true, specifies that the file
-    #     system is encrypted. If `KmsKeyId` is specified, `Encrypted` must be
-    #     set to `true`.
+    #   * [Metadata for Amazon DocumentDB][2]
     #
-    #   * `KmsKeyId`: Specifies the Amazon Web Services KMS key that is used
-    #     to encrypt the restored file system. You can specify a key from
-    #     another Amazon Web Services account provided that key it is properly
-    #     shared with your account via Amazon Web Services KMS.
+    #   * [Metadata for CloudFormation][3]
     #
-    #   * `PerformanceMode`: Specifies the throughput mode of the file system.
+    #   * [Metadata for Amazon DynamoDB][4]
     #
-    #   * `CreationToken`: A user-supplied value that ensures the uniqueness
-    #     (idempotency) of the request.
+    #   * [ Metadata for Amazon EBS][5]
     #
-    #   * `newFileSystem`: A Boolean value that, if true, specifies that the
-    #     recovery point is restored to a new Amazon EFS file system.
+    #   * [Metadata for Amazon EC2][6]
     #
-    #   * `ItemsToRestore`: An array of one to five strings where each string
-    #     is a file path. Use `ItemsToRestore` to restore specific files or
-    #     directories rather than the entire file system. This parameter is
-    #     optional. For example, `"itemsToRestore":"["/my.test"]"`.
+    #   * [Metadata for Amazon EFS][7]
+    #
+    #   * [Metadata for Amazon FSx][8]
+    #
+    #   * [Metadata for Amazon Neptune][9]
+    #
+    #   * [Metadata for Amazon RDS][10]
+    #
+    #   * [Metadata for Amazon Redshift][11]
+    #
+    #   * [Metadata for Storage Gateway][12]
+    #
+    #   * [Metadata for Amazon S3][13]
+    #
+    #   * [Metadata for Amazon Timestream][14]
+    #
+    #   * [Metadata for virtual machines][15]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-aur.html#aur-restore-cli
+    #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-docdb.html#docdb-restore-cli
+    #   [3]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-application-stacks.html#restoring-cfn-cli
+    #   [4]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-dynamodb.html#ddb-restore-cli
+    #   [5]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-ebs.html#ebs-restore-cli
+    #   [6]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-ec2.html#restoring-ec2-cli
+    #   [7]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-efs.html#efs-restore-cli
+    #   [8]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-fsx.html#fsx-restore-cli
+    #   [9]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-nep.html#nep-restore-cli
+    #   [10]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-rds.html#rds-restore-cli
+    #   [11]: https://docs.aws.amazon.com/aws-backup/latest/devguide/redshift-restores.html#redshift-restore-api
+    #   [12]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-storage-gateway.html#restoring-sgw-cli
+    #   [13]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-s3.html#s3-restore-cli
+    #   [14]: https://docs.aws.amazon.com/aws-backup/latest/devguide/timestream-restore.html#timestream-restore-api
+    #   [15]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-vm.html#vm-restore-cli
     #
     # @option params [String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Backup uses to
@@ -5342,35 +5322,35 @@ module Aws::Backup
     #   Starts a job to restore a recovery point for one of the following
     #   resources:
     #
-    #   * `Aurora` for Amazon Aurora
+    #   * `Aurora` - Amazon Aurora
     #
-    #   * `DocumentDB` for Amazon DocumentDB (with MongoDB compatibility)
+    #   * `DocumentDB` - Amazon DocumentDB
     #
-    #   * `CloudFormation` for CloudFormation
+    #   * `CloudFormation` - CloudFormation
     #
-    #   * `DynamoDB` for Amazon DynamoDB
+    #   * `DynamoDB` - Amazon DynamoDB
     #
-    #   * `EBS` for Amazon Elastic Block Store
+    #   * `EBS` - Amazon Elastic Block Store
     #
-    #   * `EC2` for Amazon Elastic Compute Cloud
+    #   * `EC2` - Amazon Elastic Compute Cloud
     #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `EFS` - Amazon Elastic File System
     #
-    #   * `FSx` for Amazon FSx
+    #   * `FSx` - Amazon FSx
     #
-    #   * `Neptune` for Amazon Neptune
+    #   * `Neptune` - Amazon Neptune
     #
-    #   * `RDS` for Amazon Relational Database Service
+    #   * `RDS` - Amazon Relational Database Service
     #
-    #   * `Redshift` for Amazon Redshift
+    #   * `Redshift` - Amazon Redshift
     #
-    #   * `Storage Gateway` for Storage Gateway
+    #   * `Storage Gateway` - Storage Gateway
     #
-    #   * `S3` for Amazon S3
+    #   * `S3` - Amazon Simple Storage Service
     #
-    #   * `Timestream` for Amazon Timestream
+    #   * `Timestream` - Amazon Timestream
     #
-    #   * `VirtualMachine` for virtual machines
+    #   * `VirtualMachine` - Virtual machines
     #
     # @option params [Boolean] :copy_source_tags_to_restored_resource
     #   This is an optional parameter. If this equals `True`, tags included in
@@ -5412,7 +5392,7 @@ module Aws::Backup
     #
     # This action is not supported for the following services: Amazon FSx
     # for Windows File Server, Amazon FSx for Lustre, Amazon FSx for NetApp
-    # ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB
+    # ONTAP, Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB
     # compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
     #
     # @option params [required, String] :backup_job_id
@@ -5438,9 +5418,18 @@ module Aws::Backup
     # Assigns a set of key-value pairs to a recovery point, backup plan, or
     # backup vault identified by an Amazon Resource Name (ARN).
     #
+    # This API is supported for recovery points for resource types including
+    # Aurora, Amazon DocumentDB. Amazon EBS, Amazon FSx, Neptune, and Amazon
+    # RDS.
+    #
     # @option params [required, String] :resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the type of the tagged resource.
+    #
+    #   ARNs that do not include `backup` are incompatible with tagging.
+    #   `TagResource` and `UntagResource` with invalid ARNs will result in an
+    #   error. Acceptable ARN content can include `arn:aws:backup:us-east`.
+    #   Invalid ARN content may look like `arn:aws:ec2:us-east`.
     #
     # @option params [required, Hash<String,String>] :tags
     #   Key-value pairs that are used to help organize your resources. You can
@@ -5471,13 +5460,21 @@ module Aws::Backup
     # Removes a set of key-value pairs from a recovery point, backup plan,
     # or backup vault identified by an Amazon Resource Name (ARN)
     #
+    # This API is not supported for recovery points for resource types
+    # including Aurora, Amazon DocumentDB. Amazon EBS, Amazon FSx, Neptune,
+    # and Amazon RDS.
+    #
     # @option params [required, String] :resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the type of the tagged resource.
     #
+    #   ARNs that do not include `backup` are incompatible with tagging.
+    #   `TagResource` and `UntagResource` with invalid ARNs will result in an
+    #   error. Acceptable ARN content can include `arn:aws:backup:us-east`.
+    #   Invalid ARN content may look like `arn:aws:ec2:us-east`.
+    #
     # @option params [required, Array<String>] :tag_key_list
-    #   A list of keys to identify which key-value tags to remove from a
-    #   resource.
+    #   The keys to identify which key-value tags to remove from a resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5497,16 +5494,15 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates an existing backup plan identified by its `backupPlanId` with
-    # the input document in JSON format. The new version is uniquely
-    # identified by a `VersionId`.
+    # Updates the specified backup plan. The new version is uniquely
+    # identified by its ID.
     #
     # @option params [required, String] :backup_plan_id
-    #   Uniquely identifies a backup plan.
+    #   The ID of the backup plan.
     #
     # @option params [required, Types::BackupPlanInput] :backup_plan
-    #   Specifies the body of a backup plan. Includes a `BackupPlanName` and
-    #   one or more sets of `Rules`.
+    #   The body of a backup plan. Includes a `BackupPlanName` and one or more
+    #   sets of `Rules`.
     #
     # @return [Types::UpdateBackupPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5582,8 +5578,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates an existing framework identified by its `FrameworkName` with
-    # the input document in JSON format.
+    # Updates the specified framework.
     #
     # @option params [required, String] :framework_name
     #   The unique name of a framework. This name is between 1 and 256
@@ -5595,8 +5590,8 @@ module Aws::Backup
     #   characters.
     #
     # @option params [Array<Types::FrameworkControl>] :framework_controls
-    #   A list of the controls that make up the framework. Each control in the
-    #   list has a name, input parameters, and scope.
+    #   The controls that make up the framework. Each control in the list has
+    #   a name, input parameters, and scope.
     #
     # @option params [String] :idempotency_token
     #   A customer-chosen string that you can use to distinguish between
@@ -5689,28 +5684,31 @@ module Aws::Backup
     # cold storage and when it expires. Backup transitions and expires
     # backups automatically according to the lifecycle that you define.
     #
+    # Resource types that can transition to cold storage are listed in the
+    # [Feature availability by resource][1] table. Backup ignores this
+    # expression for other resource types.
+    #
     # Backups transitioned to cold storage must be stored in cold storage
     # for a minimum of 90 days. Therefore, the “retention” setting must be
     # 90 days greater than the “transition to cold after days” setting. The
     # “transition to cold after days” setting cannot be changed after a
     # backup has been transitioned to cold.
     #
-    # Resource types that are able to be transitioned to cold storage are
-    # listed in the "Lifecycle to cold storage" section of the [ Feature
-    # availability by resource][1] table. Backup ignores this expression for
-    # other resource types.
+    # If your lifecycle currently uses the parameters `DeleteAfterDays` and
+    # `MoveToColdStorageAfterDays`, include these parameters and their
+    # values when you call this operation. Not including them may result in
+    # your plan updating with null values.
     #
     # This operation does not support continuous backups.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the Amazon Web Services Region where they are created.
-    #   They consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :recovery_point_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a recovery
@@ -5817,8 +5815,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates an existing report plan identified by its `ReportPlanName`
-    # with the input document in JSON format.
+    # Updates the specified report plan.
     #
     # @option params [required, String] :report_plan_name
     #   The unique name of the report plan. This name is between 1 and 256
@@ -5830,13 +5827,12 @@ module Aws::Backup
     #   characters.
     #
     # @option params [Types::ReportDeliveryChannel] :report_delivery_channel
-    #   A structure that contains information about where to deliver your
-    #   reports, specifically your Amazon S3 bucket name, S3 key prefix, and
-    #   the formats of your reports.
+    #   The information about where to deliver your reports, specifically your
+    #   Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
     #
     # @option params [Types::ReportSetting] :report_setting
-    #   Identifies the report template for the report. Reports are built using
-    #   a report template. The report templates are:
+    #   The report template for the report. Reports are built using a report
+    #   template. The report templates are:
     #
     #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
     #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
@@ -5915,7 +5911,7 @@ module Aws::Backup
     #   Specifies the body of a restore testing plan.
     #
     # @option params [required, String] :restore_testing_plan_name
-    #   This is the restore testing plan name you wish to update.
+    #   The name of the restore testing plan name.
     #
     # @return [Types::UpdateRestoreTestingPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5958,13 +5954,13 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Updates the specified restore testing selection.
+    #
     # Most elements except the `RestoreTestingSelectionName` can be updated
     # with this request.
     #
-    # `RestoreTestingSelection` can use either protected resource ARNs or
-    # conditions, but not both. That is, if your selection has
-    # `ProtectedResourceArns`, requesting an update with the parameter
-    # `ProtectedResourceConditions` will be unsuccessful.
+    # You can use either protected resource ARNs or conditions, but not
+    # both.
     #
     # @option params [required, String] :restore_testing_plan_name
     #   The restore testing plan name is required to update the indicated
@@ -5977,8 +5973,8 @@ module Aws::Backup
     #   `ProtectedResourceConditions` will be unsuccessful.
     #
     # @option params [required, String] :restore_testing_selection_name
-    #   This is the required restore testing selection name of the restore
-    #   testing selection you wish to update.
+    #   The required restore testing selection name of the restore testing
+    #   selection you wish to update.
     #
     # @return [Types::UpdateRestoreTestingSelectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6047,7 +6043,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
