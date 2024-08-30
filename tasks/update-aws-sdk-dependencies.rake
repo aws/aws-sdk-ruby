@@ -19,13 +19,11 @@ task 'update-aws-sdk-dependencies' do
   )
 
   # update the module autoloads
-  # Remove service gems bundled in core (eg, sts) that have gem_name of aws-sdk-core.
-  autoload_services = BuildTools::Services.select { |svc| svc.gem_name != 'aws-sdk-core' }
   BuildTools.replace_lines(
     filename: "#{$GEMS_DIR}/aws-sdk-resources/lib/aws-sdk-resources.rb",
     start: /# service gems/,
     stop: /# end service gems/,
-    new_lines: autoload_services.map { |service|
+    new_lines: BuildTools::Services.map { |service|
       "  autoload :#{service.name}, '#{service.gem_name}'\n"
     }
   )

@@ -17,7 +17,6 @@ Unreleased Changes
 
 * Issue - Remove autoloads for service gems bundled in `aws-sdk-core` (STS, SSO, SSOOIDC).
 
-3.201.0 (2024-08-12)
 ------------------
 
 * Feature - Removed a dependency on the deprecated `aws-sdk-codestar` gem.
