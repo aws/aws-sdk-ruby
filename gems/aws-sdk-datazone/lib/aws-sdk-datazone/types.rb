@@ -260,6 +260,127 @@ module Aws::DataZone
       class Unknown < ActionParameters; end
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain in which you want to add the entity owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the entity to which you want to add an owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of an entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner that you want to add to the entity.
+    #   @return [Types::OwnerProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AddEntityOwnerInput AWS API Documentation
+    #
+    class AddEntityOwnerInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AddEntityOwnerOutput AWS API Documentation
+    #
+    class AddEntityOwnerOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   The details of the policy grant.
+    #   @return [Types::PolicyGrantDetail]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to add a policy grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the entity (resource) to which you want to add a policy
+    #   grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of entity (resource) to which the grant is added.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy that you want to grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The principal to whom the permissions are granted.
+    #   @return [Types::PolicyGrantPrincipal]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AddPolicyGrantInput AWS API Documentation
+    #
+    class AddPolicyGrantInput < Struct.new(
+      :client_token,
+      :detail,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :policy_type,
+      :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AddPolicyGrantOutput AWS API Documentation
+    #
+    class AddPolicyGrantOutput < Aws::EmptyStructure; end
+
+    # The details of the policy grant.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy grant is applied to child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AddToProjectMemberPoolPolicyGrantDetail AWS API Documentation
+    #
+    class AddToProjectMemberPoolPolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The grant filter for all domain units.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AllDomainUnitsGrantFilter AWS API Documentation
+    #
+    class AllDomainUnitsGrantFilter < Aws::EmptyStructure; end
+
+    # The all users grant filter.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AllUsersGrantFilter AWS API Documentation
+    #
+    class AllUsersGrantFilter < Aws::EmptyStructure; end
+
     # The configuration details of the asset filter.
     #
     # @note AssetFilterConfiguration is a union - when making an API calls you must set exactly one of the members.
@@ -1582,6 +1703,20 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of the policy grant.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy grant is applied to child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateAssetTypePolicyGrantDetail AWS API Documentation
+    #
+    class CreateAssetTypePolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that is provided to ensure the
     #   idempotency of the request.
@@ -2121,6 +2256,10 @@ module Aws::DataZone
     #   The URL of the data portal for this Amazon DataZone domain.
     #   @return [String]
     #
+    # @!attribute [rw] root_domain_unit_id
+    #   The ID of the root domain unit.
+    #   @return [String]
+    #
     # @!attribute [rw] single_sign_on
     #   The single-sign on configuration of the Amazon DataZone domain.
     #   @return [Types::SingleSignOn]
@@ -2143,9 +2282,112 @@ module Aws::DataZone
       :kms_key_identifier,
       :name,
       :portal_url,
+      :root_domain_unit_id,
       :single_sign_on,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to crate a domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_domain_unit_identifier
+    #   The ID of the parent domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDomainUnitInput AWS API Documentation
+    #
+    class CreateDomainUnitInput < Struct.new(
+      :client_token,
+      :description,
+      :domain_identifier,
+      :name,
+      :parent_domain_unit_identifier)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ancestor_domain_unit_ids
+    #   The IDs of the ancestor domain units.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the domain unit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the domain unit was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] owners
+    #   The owners of the domain unit.
+    #   @return [Array<Types::DomainUnitOwnerProperties>]
+    #
+    # @!attribute [rw] parent_domain_unit_id
+    #   The ID of the parent domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDomainUnitOutput AWS API Documentation
+    #
+    class CreateDomainUnitOutput < Struct.new(
+      :ancestor_domain_unit_ids,
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :id,
+      :name,
+      :owners,
+      :parent_domain_unit_id)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The details of the policy grant.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy grant is applied to child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDomainUnitPolicyGrantDetail AWS API Documentation
+    #
+    class CreateDomainUnitPolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2527,6 +2769,20 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of the policy grant.
+    #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentProfilePolicyGrantDetail AWS API Documentation
+    #
+    class CreateEnvironmentProfilePolicyGrantDetail < Struct.new(
+      :domain_unit_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] description
     #   The description of this Amazon DataZone metadata form type.
     #   @return [String]
@@ -2612,6 +2868,20 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of the policy grant.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy grant is applied to child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateFormTypePolicyGrantDetail AWS API Documentation
+    #
+    class CreateFormTypePolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that is provided to ensure the
     #   idempotency of the request.
@@ -2689,6 +2959,20 @@ module Aws::DataZone
       :owning_project_id,
       :status)
       SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The details of the policy grant.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy grant is applied to child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateGlossaryPolicyGrantDetail AWS API Documentation
+    #
+    class CreateGlossaryPolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2919,6 +3203,12 @@ module Aws::DataZone
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit. This parameter is not required and if it
+    #   is not specified, then the project is created at the root domain
+    #   unit level.
+    #   @return [String]
+    #
     # @!attribute [rw] glossary_terms
     #   The glossary terms that can be used in this Amazon DataZone project.
     #   @return [Array<String>]
@@ -2932,6 +3222,7 @@ module Aws::DataZone
     class CreateProjectInput < Struct.new(
       :description,
       :domain_identifier,
+      :domain_unit_id,
       :glossary_terms,
       :name)
       SENSITIVE = [:description, :name]
@@ -2987,6 +3278,10 @@ module Aws::DataZone
     #   was created.
     #   @return [String]
     #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
     # @!attribute [rw] failure_reasons
     #   Specifies the error message that is returned if the operation cannot
     #   be successfully completed.
@@ -3019,6 +3314,7 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :domain_unit_id,
       :failure_reasons,
       :glossary_terms,
       :id,
@@ -3026,6 +3322,20 @@ module Aws::DataZone
       :name,
       :project_status)
       SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The details of the policy grant.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy grant is applied to child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectPolicyGrantDetail AWS API Documentation
+    #
+    class CreateProjectPolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4316,6 +4626,27 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to delete a domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the domain unit that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDomainUnitInput AWS API Documentation
+    #
+    class DeleteDomainUnitInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDomainUnitOutput AWS API Documentation
+    #
+    class DeleteDomainUnitOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_identifier
     #   The ID of the Amazon DataZone domain in which an environment action
     #   is deleted.
     #   @return [String]
@@ -4869,6 +5200,148 @@ module Aws::DataZone
       :portal_url,
       :status)
       SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The domain unit filter of the project grant filter.
+    #
+    # @!attribute [rw] domain_unit
+    #   The domain unit ID to use in the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether to include child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DomainUnitFilterForProject AWS API Documentation
+    #
+    class DomainUnitFilterForProject < Struct.new(
+      :domain_unit,
+      :include_child_domain_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The grant filter for the domain unit. In the current release of Amazon
+    # DataZone, the only supported filter is the
+    # `allDomainUnitsGrantFilter`.
+    #
+    # @note DomainUnitGrantFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DomainUnitGrantFilter is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DomainUnitGrantFilter corresponding to the set member.
+    #
+    # @!attribute [rw] all_domain_units_grant_filter
+    #   Specifies a grant filter containing all domain units.
+    #   @return [Types::AllDomainUnitsGrantFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DomainUnitGrantFilter AWS API Documentation
+    #
+    class DomainUnitGrantFilter < Struct.new(
+      :all_domain_units_grant_filter,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AllDomainUnitsGrantFilter < DomainUnitGrantFilter; end
+      class Unknown < DomainUnitGrantFilter; end
+    end
+
+    # The properties of a domain unit group.
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the domain unit group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DomainUnitGroupProperties AWS API Documentation
+    #
+    class DomainUnitGroupProperties < Struct.new(
+      :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of the domain unit owner.
+    #
+    # @note DomainUnitOwnerProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DomainUnitOwnerProperties corresponding to the set member.
+    #
+    # @!attribute [rw] group
+    #   Indicates that the domain unit owner is a group.
+    #   @return [Types::DomainUnitGroupProperties]
+    #
+    # @!attribute [rw] user
+    #   Indicates that the domain unit owner is a user.
+    #   @return [Types::DomainUnitUserProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DomainUnitOwnerProperties AWS API Documentation
+    #
+    class DomainUnitOwnerProperties < Struct.new(
+      :group,
+      :user,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Group < DomainUnitOwnerProperties; end
+      class User < DomainUnitOwnerProperties; end
+      class Unknown < DomainUnitOwnerProperties; end
+    end
+
+    # The domain unit principal to whom the policy is granted.
+    #
+    # @!attribute [rw] domain_unit_designation
+    #   Specifes the designation of the domain unit users.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_unit_grant_filter
+    #   The grant filter for the domain unit.
+    #   @return [Types::DomainUnitGrantFilter]
+    #
+    # @!attribute [rw] domain_unit_identifier
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DomainUnitPolicyGrantPrincipal AWS API Documentation
+    #
+    class DomainUnitPolicyGrantPrincipal < Struct.new(
+      :domain_unit_designation,
+      :domain_unit_grant_filter,
+      :domain_unit_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the domain unit.
+    #
+    # @!attribute [rw] id
+    #   The ID of the domain unit summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain unit summary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DomainUnitSummary AWS API Documentation
+    #
+    class DomainUnitSummary < Struct.new(
+      :id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of the domain unit user.
+    #
+    # @!attribute [rw] user_id
+    #   The ID of teh domain unit user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DomainUnitUserProperties AWS API Documentation
+    #
+    class DomainUnitUserProperties < Struct.new(
+      :user_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6163,6 +6636,10 @@ module Aws::DataZone
     #   The URL of the data portal for this Amazon DataZone domain.
     #   @return [String]
     #
+    # @!attribute [rw] root_domain_unit_id
+    #   The ID of the root domain in Amazon Datazone.
+    #   @return [String]
+    #
     # @!attribute [rw] single_sign_on
     #   The single sing-on option of the specified Amazon DataZone domain.
     #   @return [Types::SingleSignOn]
@@ -6187,10 +6664,85 @@ module Aws::DataZone
       :last_updated_at,
       :name,
       :portal_url,
+      :root_domain_unit_id,
       :single_sign_on,
       :status,
       :tags)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to get a domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the domain unit that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDomainUnitInput AWS API Documentation
+    #
+    class GetDomainUnitInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The time stamp at which the domain unit was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain in which the domain unit lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp at which the domain unit was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The user who last updated the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] owners
+    #   The owners of the domain unit.
+    #   @return [Array<Types::DomainUnitOwnerProperties>]
+    #
+    # @!attribute [rw] parent_domain_unit_id
+    #   The ID of the parent domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDomainUnitOutput AWS API Documentation
+    #
+    class GetDomainUnitOutput < Struct.new(
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :id,
+      :last_updated_at,
+      :last_updated_by,
+      :name,
+      :owners,
+      :parent_domain_unit_id)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -7293,6 +7845,10 @@ module Aws::DataZone
     #   The ID of the Amazon DataZone domain in which the project exists.
     #   @return [String]
     #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
     # @!attribute [rw] failure_reasons
     #   Specifies the error message that is returned if the operation cannot
     #   be successfully completed.
@@ -7325,6 +7881,7 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :domain_unit_id,
       :failure_reasons,
       :glossary_terms,
       :id,
@@ -8123,6 +8680,29 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The group principal to whom the policy is granted.
+    #
+    # @note GroupPolicyGrantPrincipal is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GroupPolicyGrantPrincipal is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GroupPolicyGrantPrincipal corresponding to the set member.
+    #
+    # @!attribute [rw] group_identifier
+    #   The ID Of the group of the group principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GroupPolicyGrantPrincipal AWS API Documentation
+    #
+    class GroupPolicyGrantPrincipal < Struct.new(
+      :group_identifier,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GroupIdentifier < GroupPolicyGrantPrincipal; end
+      class Unknown < GroupPolicyGrantPrincipal; end
+    end
+
     # The details of a group profile.
     #
     # @!attribute [rw] domain_id
@@ -8857,6 +9437,65 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain in which you want to list domain units for a
+    #   parent domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of domain units to return in a single call to
+    #   ListDomainUnitsForParent. When the number of domain units to be
+    #   listed is greater than the value of MaxResults, the response
+    #   contains a NextToken value that you can use in a subsequent call to
+    #   ListDomainUnitsForParent to list the next set of domain units.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of domain units is greater than the default value
+    #   for the MaxResults parameter, or if you explicitly specify a value
+    #   for MaxResults that is less than the number of domain units, the
+    #   response includes a pagination token named NextToken. You can
+    #   specify this NextToken value in a subsequent call to
+    #   ListDomainUnitsForParent to list the next set of domain units.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_domain_unit_identifier
+    #   The ID of the parent domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDomainUnitsForParentInput AWS API Documentation
+    #
+    class ListDomainUnitsForParentInput < Struct.new(
+      :domain_identifier,
+      :max_results,
+      :next_token,
+      :parent_domain_unit_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results returned by this action.
+    #   @return [Array<Types::DomainUnitSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of domain units is greater than the default value
+    #   for the MaxResults parameter, or if you explicitly specify a value
+    #   for MaxResults that is less than the number of domain units, the
+    #   response includes a pagination token named NextToken. You can
+    #   specify this NextToken value in a subsequent call to
+    #   ListDomainUnitsForParent to list the next set of domain units.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDomainUnitsForParentOutput AWS API Documentation
+    #
+    class ListDomainUnitsForParentOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of domains to return in a single call to
     #   `ListDomains`. When the number of domains to be listed is greater
@@ -8906,6 +9545,69 @@ module Aws::DataZone
     class ListDomainsOutput < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to list entity owners.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the entity that you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the entity that you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of entities to return in a single call to
+    #   `ListEntityOwners`. When the number of entities to be listed is
+    #   greater than the value of `MaxResults`, the response contains a
+    #   `NextToken` value that you can use in a subsequent call to
+    #   `ListEntityOwners` to list the next set of entities.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of entities is greater than the default value for
+    #   the `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of entities, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListEntityOwners` to list
+    #   the next set of entities.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEntityOwnersInput AWS API Documentation
+    #
+    class ListEntityOwnersInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When the number of entities is greater than the default value for
+    #   the `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of entities, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListEntityOwners` to list
+    #   the next set of entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] owners
+    #   The owners of the entity.
+    #   @return [Array<Types::OwnerPropertiesOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEntityOwnersOutput AWS API Documentation
+    #
+    class ListEntityOwnersOutput < Struct.new(
+      :next_token,
+      :owners)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9496,6 +10198,74 @@ module Aws::DataZone
     class ListNotificationsOutput < Struct.new(
       :next_token,
       :notifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to list policy grants.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the entity for which you want to list policy grants.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of entity for which you want to list policy grants.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of grants to return in a single call to
+    #   `ListPolicyGrants`. When the number of grants to be listed is
+    #   greater than the value of `MaxResults`, the response contains a
+    #   `NextToken` value that you can use in a subsequent call to
+    #   `ListPolicyGrants` to list the next set of grants.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of grants is greater than the default value for the
+    #   `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of grants, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListPolicyGrants` to list
+    #   the next set of grants.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy that you want to list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListPolicyGrantsInput AWS API Documentation
+    #
+    class ListPolicyGrantsInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :max_results,
+      :next_token,
+      :policy_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] grant_list
+    #   The results of this action - the listed grants.
+    #   @return [Array<Types::PolicyGrantMember>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of grants is greater than the default value for the
+    #   `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of grants, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListPolicyGrants` to list
+    #   the next set of grants.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListPolicyGrantsOutput AWS API Documentation
+    #
+    class ListPolicyGrantsOutput < Struct.new(
+      :grant_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10511,6 +11281,299 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The grant details of the override domain unit owners policy.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy is inherited by child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OverrideDomainUnitOwnersPolicyGrantDetail AWS API Documentation
+    #
+    class OverrideDomainUnitOwnersPolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the override project owners policy grant.
+    #
+    # @!attribute [rw] include_child_domain_units
+    #   Specifies whether the policy is inherited by child domain units.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OverrideProjectOwnersPolicyGrantDetail AWS API Documentation
+    #
+    class OverrideProjectOwnersPolicyGrantDetail < Struct.new(
+      :include_child_domain_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of the domain unit owners group.
+    #
+    # @!attribute [rw] group_identifier
+    #   The ID of the domain unit owners group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OwnerGroupProperties AWS API Documentation
+    #
+    class OwnerGroupProperties < Struct.new(
+      :group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of the domain unit owners group.
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the domain unit owners group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OwnerGroupPropertiesOutput AWS API Documentation
+    #
+    class OwnerGroupPropertiesOutput < Struct.new(
+      :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a domain unit's owner.
+    #
+    # @note OwnerProperties is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] group
+    #   Specifies that the domain unit owner is a group.
+    #   @return [Types::OwnerGroupProperties]
+    #
+    # @!attribute [rw] user
+    #   Specifies that the domain unit owner is a user.
+    #   @return [Types::OwnerUserProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OwnerProperties AWS API Documentation
+    #
+    class OwnerProperties < Struct.new(
+      :group,
+      :user,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Group < OwnerProperties; end
+      class User < OwnerProperties; end
+      class Unknown < OwnerProperties; end
+    end
+
+    # The ID of the domain unit owners group.
+    #
+    # @note OwnerPropertiesOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OwnerPropertiesOutput corresponding to the set member.
+    #
+    # @!attribute [rw] group
+    #   Specifies that the domain unit owner is a group.
+    #   @return [Types::OwnerGroupPropertiesOutput]
+    #
+    # @!attribute [rw] user
+    #   Specifies that the domain unit owner is a user.
+    #   @return [Types::OwnerUserPropertiesOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OwnerPropertiesOutput AWS API Documentation
+    #
+    class OwnerPropertiesOutput < Struct.new(
+      :group,
+      :user,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Group < OwnerPropertiesOutput; end
+      class User < OwnerPropertiesOutput; end
+      class Unknown < OwnerPropertiesOutput; end
+    end
+
+    # The properties of the owner user.
+    #
+    # @!attribute [rw] user_identifier
+    #   The ID of the owner user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OwnerUserProperties AWS API Documentation
+    #
+    class OwnerUserProperties < Struct.new(
+      :user_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of the owner user.
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the owner user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OwnerUserPropertiesOutput AWS API Documentation
+    #
+    class OwnerUserPropertiesOutput < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the policy grant.
+    #
+    # @note PolicyGrantDetail is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PolicyGrantDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PolicyGrantDetail corresponding to the set member.
+    #
+    # @!attribute [rw] add_to_project_member_pool
+    #   Specifies that the policy grant is to be added to the members of the
+    #   project.
+    #   @return [Types::AddToProjectMemberPoolPolicyGrantDetail]
+    #
+    # @!attribute [rw] create_asset_type
+    #   Specifies that this is a create asset type policy.
+    #   @return [Types::CreateAssetTypePolicyGrantDetail]
+    #
+    # @!attribute [rw] create_domain_unit
+    #   Specifies that this is a create domain unit policy.
+    #   @return [Types::CreateDomainUnitPolicyGrantDetail]
+    #
+    # @!attribute [rw] create_environment
+    #   Specifies that this is a create environment policy.
+    #   @return [Types::Unit]
+    #
+    # @!attribute [rw] create_environment_profile
+    #   Specifies that this is a create environment profile policy.
+    #   @return [Types::CreateEnvironmentProfilePolicyGrantDetail]
+    #
+    # @!attribute [rw] create_form_type
+    #   Specifies that this is a create form type policy.
+    #   @return [Types::CreateFormTypePolicyGrantDetail]
+    #
+    # @!attribute [rw] create_glossary
+    #   Specifies that this is a create glossary policy.
+    #   @return [Types::CreateGlossaryPolicyGrantDetail]
+    #
+    # @!attribute [rw] create_project
+    #   Specifies that this is a create project policy.
+    #   @return [Types::CreateProjectPolicyGrantDetail]
+    #
+    # @!attribute [rw] delegate_create_environment_profile
+    #   Specifies that this is the delegation of the create environment
+    #   profile policy.
+    #   @return [Types::Unit]
+    #
+    # @!attribute [rw] override_domain_unit_owners
+    #   Specifies whether to override domain unit owners.
+    #   @return [Types::OverrideDomainUnitOwnersPolicyGrantDetail]
+    #
+    # @!attribute [rw] override_project_owners
+    #   Specifies whether to override project owners.
+    #   @return [Types::OverrideProjectOwnersPolicyGrantDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PolicyGrantDetail AWS API Documentation
+    #
+    class PolicyGrantDetail < Struct.new(
+      :add_to_project_member_pool,
+      :create_asset_type,
+      :create_domain_unit,
+      :create_environment,
+      :create_environment_profile,
+      :create_form_type,
+      :create_glossary,
+      :create_project,
+      :delegate_create_environment_profile,
+      :override_domain_unit_owners,
+      :override_project_owners,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AddToProjectMemberPool < PolicyGrantDetail; end
+      class CreateAssetType < PolicyGrantDetail; end
+      class CreateDomainUnit < PolicyGrantDetail; end
+      class CreateEnvironment < PolicyGrantDetail; end
+      class CreateEnvironmentProfile < PolicyGrantDetail; end
+      class CreateFormType < PolicyGrantDetail; end
+      class CreateGlossary < PolicyGrantDetail; end
+      class CreateProject < PolicyGrantDetail; end
+      class DelegateCreateEnvironmentProfile < PolicyGrantDetail; end
+      class OverrideDomainUnitOwners < PolicyGrantDetail; end
+      class OverrideProjectOwners < PolicyGrantDetail; end
+      class Unknown < PolicyGrantDetail; end
+    end
+
+    # A member of the policy grant list.
+    #
+    # @!attribute [rw] created_at
+    #   Specifies the timestamp at which policy grant member was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Specifies the user who created the policy grant member.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   The details of the policy grant member.
+    #   @return [Types::PolicyGrantDetail]
+    #
+    # @!attribute [rw] principal
+    #   The principal of the policy grant member.
+    #   @return [Types::PolicyGrantPrincipal]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PolicyGrantMember AWS API Documentation
+    #
+    class PolicyGrantMember < Struct.new(
+      :created_at,
+      :created_by,
+      :detail,
+      :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The policy grant principal.
+    #
+    # @note PolicyGrantPrincipal is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PolicyGrantPrincipal is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PolicyGrantPrincipal corresponding to the set member.
+    #
+    # @!attribute [rw] domain_unit
+    #   The domain unit of the policy grant principal.
+    #   @return [Types::DomainUnitPolicyGrantPrincipal]
+    #
+    # @!attribute [rw] group
+    #   The group of the policy grant principal.
+    #   @return [Types::GroupPolicyGrantPrincipal]
+    #
+    # @!attribute [rw] project
+    #   The project of the policy grant principal.
+    #   @return [Types::ProjectPolicyGrantPrincipal]
+    #
+    # @!attribute [rw] user
+    #   The user of the policy grant principal.
+    #   @return [Types::UserPolicyGrantPrincipal]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PolicyGrantPrincipal AWS API Documentation
+    #
+    class PolicyGrantPrincipal < Struct.new(
+      :domain_unit,
+      :group,
+      :project,
+      :user,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DomainUnit < PolicyGrantPrincipal; end
+      class Group < PolicyGrantPrincipal; end
+      class Project < PolicyGrantPrincipal; end
+      class User < PolicyGrantPrincipal; end
+      class Unknown < PolicyGrantPrincipal; end
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that is provided to ensure the
     #   idempotency of the request.
@@ -10643,6 +11706,29 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The project grant filter.
+    #
+    # @note ProjectGrantFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProjectGrantFilter is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProjectGrantFilter corresponding to the set member.
+    #
+    # @!attribute [rw] domain_unit_filter
+    #   The domain unit filter of the project grant filter.
+    #   @return [Types::DomainUnitFilterForProject]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectGrantFilter AWS API Documentation
+    #
+    class ProjectGrantFilter < Struct.new(
+      :domain_unit_filter,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DomainUnitFilter < ProjectGrantFilter; end
+      class Unknown < ProjectGrantFilter; end
+    end
+
     # The details of a project member.
     #
     # @!attribute [rw] designation
@@ -10658,6 +11744,30 @@ module Aws::DataZone
     class ProjectMember < Struct.new(
       :designation,
       :member_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The project policy grant principal.
+    #
+    # @!attribute [rw] project_designation
+    #   The project designation of the project policy grant principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_grant_filter
+    #   The project grant filter of the project policy grant principal.
+    #   @return [Types::ProjectGrantFilter]
+    #
+    # @!attribute [rw] project_identifier
+    #   The project ID of the project policy grant principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectPolicyGrantPrincipal AWS API Documentation
+    #
+    class ProjectPolicyGrantPrincipal < Struct.new(
+      :project_designation,
+      :project_grant_filter,
+      :project_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10678,6 +11788,10 @@ module Aws::DataZone
     #
     # @!attribute [rw] domain_id
     #   The identifier of a Amazon DataZone domain where the project exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit.
     #   @return [String]
     #
     # @!attribute [rw] failure_reasons
@@ -10708,6 +11822,7 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :domain_unit_id,
       :failure_reasons,
       :id,
       :name,
@@ -11266,6 +12381,92 @@ module Aws::DataZone
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to remove an owner from an
+    #   entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the entity from which you want to remove an owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the entity from which you want to remove an owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner that you want to remove from an entity.
+    #   @return [Types::OwnerProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RemoveEntityOwnerInput AWS API Documentation
+    #
+    class RemoveEntityOwnerInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RemoveEntityOwnerOutput AWS API Documentation
+    #
+    class RemoveEntityOwnerOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to remove a policy grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the entity from which you want to remove a policy grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the entity from which you want to remove a policy grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of the policy that you want to remove.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The principal from which you want to remove a policy grant.
+    #   @return [Types::PolicyGrantPrincipal]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RemovePolicyGrantInput AWS API Documentation
+    #
+    class RemovePolicyGrantInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :policy_type,
+      :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RemovePolicyGrantOutput AWS API Documentation
+    #
+    class RemovePolicyGrantOutput < Aws::EmptyStructure; end
 
     # The details of a provisioned resource of this Amazon DataZone
     # environment.
@@ -13229,6 +14430,14 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of the policy of creating an environment.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/Unit AWS API Documentation
+    #
+    class Unit < Aws::EmptyStructure; end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to be untagged in Amazon DataZone.
     #   @return [String]
@@ -13610,6 +14819,10 @@ module Aws::DataZone
     #   The name to be updated as part of the `UpdateDomain` action.
     #   @return [String]
     #
+    # @!attribute [rw] root_domain_unit_id
+    #   The ID of the root domain unit.
+    #   @return [String]
+    #
     # @!attribute [rw] single_sign_on
     #   The single sign-on option of the Amazon DataZone domain.
     #   @return [Types::SingleSignOn]
@@ -13622,8 +14835,94 @@ module Aws::DataZone
       :id,
       :last_updated_at,
       :name,
+      :root_domain_unit_id,
       :single_sign_on)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the domain unit that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to update a domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the domain unit that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain unit that you want to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDomainUnitInput AWS API Documentation
+    #
+    class UpdateDomainUnitInput < Struct.new(
+      :description,
+      :domain_identifier,
+      :identifier,
+      :name)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The time stamp at which the domain unit that you want to update was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the domain unit that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain unit that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where you want to update the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the domain unit that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp at which the domain unit was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The user who last updated the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the domain unit that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] owners
+    #   The owners of the domain unit that you want to update.
+    #   @return [Array<Types::DomainUnitOwnerProperties>]
+    #
+    # @!attribute [rw] parent_domain_unit_id
+    #   The ID of the parent domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDomainUnitOutput AWS API Documentation
+    #
+    class UpdateDomainUnitOutput < Struct.new(
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :id,
+      :last_updated_at,
+      :last_updated_by,
+      :name,
+      :owners,
+      :parent_domain_unit_id)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -14223,8 +15522,8 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] domain_identifier
-    #   The identifier of the Amazon DataZone domain in which a project is
-    #   to be updated.
+    #   The ID of the Amazon DataZone domain where a project is being
+    #   updated.
     #   @return [String]
     #
     # @!attribute [rw] glossary_terms
@@ -14269,6 +15568,10 @@ module Aws::DataZone
     #   updated.
     #   @return [String]
     #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
     # @!attribute [rw] failure_reasons
     #   Specifies the error message that is returned if the operation cannot
     #   be successfully completed.
@@ -14301,6 +15604,7 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :domain_unit_id,
       :failure_reasons,
       :glossary_terms,
       :id,
@@ -14740,6 +16044,35 @@ module Aws::DataZone
       :user_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The user policy grant principal.
+    #
+    # @note UserPolicyGrantPrincipal is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note UserPolicyGrantPrincipal is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UserPolicyGrantPrincipal corresponding to the set member.
+    #
+    # @!attribute [rw] all_users_grant_filter
+    #   The all users grant filter of the user policy grant principal.
+    #   @return [Types::AllUsersGrantFilter]
+    #
+    # @!attribute [rw] user_identifier
+    #   The user ID of the user policy grant principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UserPolicyGrantPrincipal AWS API Documentation
+    #
+    class UserPolicyGrantPrincipal < Struct.new(
+      :all_users_grant_filter,
+      :user_identifier,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AllUsersGrantFilter < UserPolicyGrantPrincipal; end
+      class UserIdentifier < UserPolicyGrantPrincipal; end
+      class Unknown < UserPolicyGrantPrincipal; end
     end
 
     # The details of the user profile in Amazon DataZone.

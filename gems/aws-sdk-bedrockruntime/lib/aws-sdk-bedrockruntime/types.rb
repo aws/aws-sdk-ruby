@@ -312,26 +312,36 @@ module Aws::BedrockRuntime
     # @!attribute [rw] model_id
     #   The identifier for the model that you want to call.
     #
-    #   The `modelId` to provide depends on the type of model that you use:
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
     #
     #   * If you use a base model, specify the model ID or its ARN. For a
     #     list of model IDs for base models, see [Amazon Bedrock base model
     #     IDs (on-demand throughput)][1] in the Amazon Bedrock User Guide.
     #
+    #   * If you use an inference profile, specify the inference profile ID
+    #     or its ARN. For a list of inference profile IDs, see [Supported
+    #     Regions and models for cross-region inference][2] in the Amazon
+    #     Bedrock User Guide.
+    #
     #   * If you use a provisioned model, specify the ARN of the Provisioned
     #     Throughput. For more information, see [Run inference using a
-    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
     #
     #   * If you use a custom model, first purchase Provisioned Throughput
     #     for it. Then specify the ARN of the resulting provisioned model.
     #     For more information, see [Use a custom model in Amazon
-    #     Bedrock][3] in the Amazon Bedrock User Guide.
+    #     Bedrock][4] in the Amazon Bedrock User Guide.
+    #
+    #   The Converse API doesn't support [imported models][5].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
-    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
-    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
     #   @return [String]
     #
     # @!attribute [rw] messages
@@ -498,26 +508,36 @@ module Aws::BedrockRuntime
     # @!attribute [rw] model_id
     #   The ID for the model.
     #
-    #   The `modelId` to provide depends on the type of model that you use:
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
     #
     #   * If you use a base model, specify the model ID or its ARN. For a
     #     list of model IDs for base models, see [Amazon Bedrock base model
     #     IDs (on-demand throughput)][1] in the Amazon Bedrock User Guide.
     #
+    #   * If you use an inference profile, specify the inference profile ID
+    #     or its ARN. For a list of inference profile IDs, see [Supported
+    #     Regions and models for cross-region inference][2] in the Amazon
+    #     Bedrock User Guide.
+    #
     #   * If you use a provisioned model, specify the ARN of the Provisioned
     #     Throughput. For more information, see [Run inference using a
-    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
     #
     #   * If you use a custom model, first purchase Provisioned Throughput
     #     for it. Then specify the ARN of the resulting provisioned model.
     #     For more information, see [Use a custom model in Amazon
-    #     Bedrock][3] in the Amazon Bedrock User Guide.
+    #     Bedrock][4] in the Amazon Bedrock User Guide.
+    #
+    #   The Converse API doesn't support [imported models][5].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
-    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
-    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
     #   @return [String]
     #
     # @!attribute [rw] messages
@@ -1399,11 +1419,18 @@ module Aws::BedrockRuntime
     #     For more information, see [Use a custom model in Amazon
     #     Bedrock][3] in the Amazon Bedrock User Guide.
     #
+    #   * If you use an [imported model][4], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][5] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
     #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #   @return [String]
     #
     # @!attribute [rw] trace
@@ -1510,11 +1537,18 @@ module Aws::BedrockRuntime
     #     For more information, see [Use a custom model in Amazon
     #     Bedrock][3] in the Amazon Bedrock User Guide.
     #
+    #   * If you use an [imported model][4], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][5] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
     #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #   @return [String]
     #
     # @!attribute [rw] trace
@@ -1675,7 +1709,13 @@ module Aws::BedrockRuntime
     end
 
     # The model specified in the request is not ready to serve inference
-    # requests.
+    # requests. The AWS SDK will automatically retry the operation up to 5
+    # times. For information about configuring automatic retries, see [Retry
+    # behavior][1] in the *AWS SDKs and Tools* reference guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
     #
     # @!attribute [rw] message
     #   @return [String]

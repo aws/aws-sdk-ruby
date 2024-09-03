@@ -8,6 +8,11 @@
 module Aws::AppConfig
   module Types
 
+    class AccountSettings
+      attr_accessor deletion_protection: Types::DeletionProtectionSettings
+      SENSITIVE: []
+    end
+
     class Action
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -187,6 +192,7 @@ module Aws::AppConfig
     class DeleteConfigurationProfileRequest
       attr_accessor application_id: ::String
       attr_accessor configuration_profile_id: ::String
+      attr_accessor deletion_protection_check: ("ACCOUNT_DEFAULT" | "APPLY" | "BYPASS")
       SENSITIVE: []
     end
 
@@ -196,8 +202,9 @@ module Aws::AppConfig
     end
 
     class DeleteEnvironmentRequest
-      attr_accessor application_id: ::String
       attr_accessor environment_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor deletion_protection_check: ("ACCOUNT_DEFAULT" | "APPLY" | "BYPASS")
       SENSITIVE: []
     end
 
@@ -216,6 +223,12 @@ module Aws::AppConfig
       attr_accessor application_id: ::String
       attr_accessor configuration_profile_id: ::String
       attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeletionProtectionSettings
+      attr_accessor enabled: bool
+      attr_accessor protection_period_in_minutes: ::Integer
       SENSITIVE: []
     end
 
@@ -589,6 +602,11 @@ module Aws::AppConfig
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsRequest
+      attr_accessor deletion_protection: Types::DeletionProtectionSettings
       SENSITIVE: []
     end
 

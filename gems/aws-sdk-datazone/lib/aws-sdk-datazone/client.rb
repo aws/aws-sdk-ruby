@@ -581,6 +581,167 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Adds the owner of an entity (a domain unit).
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain in which you want to add the entity owner.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the entity to which you want to add an owner.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of an entity.
+    #
+    # @option params [required, Types::OwnerProperties] :owner
+    #   The owner that you want to add to the entity.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_entity_owner({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "String", # required
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT
+    #     owner: { # required
+    #       group: {
+    #         group_identifier: "GroupIdentifier", # required
+    #       },
+    #       user: {
+    #         user_identifier: "UserIdentifier", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AddEntityOwner AWS API Documentation
+    #
+    # @overload add_entity_owner(params = {})
+    # @param [Hash] params ({})
+    def add_entity_owner(params = {}, options = {})
+      req = build_request(:add_entity_owner, params)
+      req.send_request(options)
+    end
+
+    # Adds a policy grant (an authorization policy) to a specified entity,
+    # including domain units, environment blueprint configurations, or
+    # environment profiles.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::PolicyGrantDetail] :detail
+    #   The details of the policy grant.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to add a policy grant.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the entity (resource) to which you want to add a policy
+    #   grant.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of entity (resource) to which the grant is added.
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy that you want to grant.
+    #
+    # @option params [required, Types::PolicyGrantPrincipal] :principal
+    #   The principal to whom the permissions are granted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_policy_grant({
+    #     client_token: "ClientToken",
+    #     detail: { # required
+    #       add_to_project_member_pool: {
+    #         include_child_domain_units: false,
+    #       },
+    #       create_asset_type: {
+    #         include_child_domain_units: false,
+    #       },
+    #       create_domain_unit: {
+    #         include_child_domain_units: false,
+    #       },
+    #       create_environment: {
+    #       },
+    #       create_environment_profile: {
+    #         domain_unit_id: "DomainUnitId",
+    #       },
+    #       create_form_type: {
+    #         include_child_domain_units: false,
+    #       },
+    #       create_glossary: {
+    #         include_child_domain_units: false,
+    #       },
+    #       create_project: {
+    #         include_child_domain_units: false,
+    #       },
+    #       delegate_create_environment_profile: {
+    #       },
+    #       override_domain_unit_owners: {
+    #         include_child_domain_units: false,
+    #       },
+    #       override_project_owners: {
+    #         include_child_domain_units: false,
+    #       },
+    #     },
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "String", # required
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT
+    #     principal: { # required
+    #       domain_unit: {
+    #         domain_unit_designation: "OWNER", # required, accepts OWNER
+    #         domain_unit_grant_filter: {
+    #           all_domain_units_grant_filter: {
+    #           },
+    #         },
+    #         domain_unit_identifier: "DomainUnitId",
+    #       },
+    #       group: {
+    #         group_identifier: "GroupIdentifier",
+    #       },
+    #       project: {
+    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR
+    #         project_grant_filter: {
+    #           domain_unit_filter: {
+    #             domain_unit: "DomainUnitId", # required
+    #             include_child_domain_units: false,
+    #           },
+    #         },
+    #         project_identifier: "ProjectId",
+    #       },
+    #       user: {
+    #         all_users_grant_filter: {
+    #         },
+    #         user_identifier: "UserIdentifier",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AddPolicyGrant AWS API Documentation
+    #
+    # @overload add_policy_grant(params = {})
+    # @param [Hash] params ({})
+    def add_policy_grant(params = {}, options = {})
+      req = build_request(:add_policy_grant, params)
+      req.send_request(options)
+    end
+
     # Associates the environment role in Amazon DataZone.
     #
     # @option params [required, String] :domain_identifier
@@ -1696,6 +1857,7 @@ module Aws::DataZone
     #   * {Types::CreateDomainOutput#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::CreateDomainOutput#name #name} => String
     #   * {Types::CreateDomainOutput#portal_url #portal_url} => String
+    #   * {Types::CreateDomainOutput#root_domain_unit_id #root_domain_unit_id} => String
     #   * {Types::CreateDomainOutput#single_sign_on #single_sign_on} => Types::SingleSignOn
     #   * {Types::CreateDomainOutput#status #status} => String
     #   * {Types::CreateDomainOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -1726,6 +1888,7 @@ module Aws::DataZone
     #   resp.kms_key_identifier #=> String
     #   resp.name #=> String
     #   resp.portal_url #=> String
+    #   resp.root_domain_unit_id #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "CREATION_FAILED", "DELETING", "DELETED", "DELETION_FAILED"
@@ -1738,6 +1901,73 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def create_domain(params = {}, options = {})
       req = build_request(:create_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates a domain unit in Amazon DataZone.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   The description of the domain unit.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to crate a domain unit.
+    #
+    # @option params [required, String] :name
+    #   The name of the domain unit.
+    #
+    # @option params [required, String] :parent_domain_unit_identifier
+    #   The ID of the parent domain unit.
+    #
+    # @return [Types::CreateDomainUnitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDomainUnitOutput#ancestor_domain_unit_ids #ancestor_domain_unit_ids} => Array&lt;String&gt;
+    #   * {Types::CreateDomainUnitOutput#created_at #created_at} => Time
+    #   * {Types::CreateDomainUnitOutput#created_by #created_by} => String
+    #   * {Types::CreateDomainUnitOutput#description #description} => String
+    #   * {Types::CreateDomainUnitOutput#domain_id #domain_id} => String
+    #   * {Types::CreateDomainUnitOutput#id #id} => String
+    #   * {Types::CreateDomainUnitOutput#name #name} => String
+    #   * {Types::CreateDomainUnitOutput#owners #owners} => Array&lt;Types::DomainUnitOwnerProperties&gt;
+    #   * {Types::CreateDomainUnitOutput#parent_domain_unit_id #parent_domain_unit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_domain_unit({
+    #     client_token: "ClientToken",
+    #     description: "DomainUnitDescription",
+    #     domain_identifier: "DomainId", # required
+    #     name: "DomainUnitName", # required
+    #     parent_domain_unit_identifier: "DomainUnitId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ancestor_domain_unit_ids #=> Array
+    #   resp.ancestor_domain_unit_ids[0] #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.owners #=> Array
+    #   resp.owners[0].group.group_id #=> String
+    #   resp.owners[0].user.user_id #=> String
+    #   resp.parent_domain_unit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDomainUnit AWS API Documentation
+    #
+    # @overload create_domain_unit(params = {})
+    # @param [Hash] params ({})
+    def create_domain_unit(params = {}, options = {})
+      req = build_request(:create_domain_unit, params)
       req.send_request(options)
     end
 
@@ -2353,6 +2583,11 @@ module Aws::DataZone
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain in which this project is created.
     #
+    # @option params [String] :domain_unit_id
+    #   The ID of the domain unit. This parameter is not required and if it is
+    #   not specified, then the project is created at the root domain unit
+    #   level.
+    #
     # @option params [Array<String>] :glossary_terms
     #   The glossary terms that can be used in this Amazon DataZone project.
     #
@@ -2365,6 +2600,7 @@ module Aws::DataZone
     #   * {Types::CreateProjectOutput#created_by #created_by} => String
     #   * {Types::CreateProjectOutput#description #description} => String
     #   * {Types::CreateProjectOutput#domain_id #domain_id} => String
+    #   * {Types::CreateProjectOutput#domain_unit_id #domain_unit_id} => String
     #   * {Types::CreateProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::CreateProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateProjectOutput#id #id} => String
@@ -2377,6 +2613,7 @@ module Aws::DataZone
     #   resp = client.create_project({
     #     description: "Description",
     #     domain_identifier: "DomainId", # required
+    #     domain_unit_id: "DomainUnitId",
     #     glossary_terms: ["GlossaryTermId"],
     #     name: "ProjectName", # required
     #   })
@@ -2387,6 +2624,7 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.domain_unit_id #=> String
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0].code #=> String
     #   resp.failure_reasons[0].message #=> String
@@ -2889,7 +3127,7 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Deletes an data product in Amazon DataZone.
+    # Deletes a data product in Amazon DataZone.
     #
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain in which the data product is
@@ -3078,6 +3316,32 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def delete_domain(params = {}, options = {})
       req = build_request(:delete_domain, params)
+      req.send_request(options)
+    end
+
+    # Deletes a domain unit.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to delete a domain unit.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the domain unit that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_domain_unit({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DomainUnitId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDomainUnit AWS API Documentation
+    #
+    # @overload delete_domain_unit(params = {})
+    # @param [Hash] params ({})
+    def delete_domain_unit(params = {}, options = {})
+      req = build_request(:delete_domain_unit, params)
       req.send_request(options)
     end
 
@@ -4055,6 +4319,7 @@ module Aws::DataZone
     #   * {Types::GetDomainOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::GetDomainOutput#name #name} => String
     #   * {Types::GetDomainOutput#portal_url #portal_url} => String
+    #   * {Types::GetDomainOutput#root_domain_unit_id #root_domain_unit_id} => String
     #   * {Types::GetDomainOutput#single_sign_on #single_sign_on} => Types::SingleSignOn
     #   * {Types::GetDomainOutput#status #status} => String
     #   * {Types::GetDomainOutput#tags #tags} => Hash&lt;String,String&gt;
@@ -4076,6 +4341,7 @@ module Aws::DataZone
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
     #   resp.portal_url #=> String
+    #   resp.root_domain_unit_id #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.status #=> String, one of "CREATING", "AVAILABLE", "CREATION_FAILED", "DELETING", "DELETED", "DELETION_FAILED"
@@ -4088,6 +4354,58 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_domain(params = {}, options = {})
       req = build_request(:get_domain, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of the specified domain unit.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to get a domain unit.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the domain unit that you want to get.
+    #
+    # @return [Types::GetDomainUnitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainUnitOutput#created_at #created_at} => Time
+    #   * {Types::GetDomainUnitOutput#created_by #created_by} => String
+    #   * {Types::GetDomainUnitOutput#description #description} => String
+    #   * {Types::GetDomainUnitOutput#domain_id #domain_id} => String
+    #   * {Types::GetDomainUnitOutput#id #id} => String
+    #   * {Types::GetDomainUnitOutput#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetDomainUnitOutput#last_updated_by #last_updated_by} => String
+    #   * {Types::GetDomainUnitOutput#name #name} => String
+    #   * {Types::GetDomainUnitOutput#owners #owners} => Array&lt;Types::DomainUnitOwnerProperties&gt;
+    #   * {Types::GetDomainUnitOutput#parent_domain_unit_id #parent_domain_unit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_unit({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DomainUnitId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.last_updated_by #=> String
+    #   resp.name #=> String
+    #   resp.owners #=> Array
+    #   resp.owners[0].group.group_id #=> String
+    #   resp.owners[0].user.user_id #=> String
+    #   resp.parent_domain_unit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDomainUnit AWS API Documentation
+    #
+    # @overload get_domain_unit(params = {})
+    # @param [Hash] params ({})
+    def get_domain_unit(params = {}, options = {})
+      req = build_request(:get_domain_unit, params)
       req.send_request(options)
     end
 
@@ -4914,6 +5232,7 @@ module Aws::DataZone
     #   * {Types::GetProjectOutput#created_by #created_by} => String
     #   * {Types::GetProjectOutput#description #description} => String
     #   * {Types::GetProjectOutput#domain_id #domain_id} => String
+    #   * {Types::GetProjectOutput#domain_unit_id #domain_unit_id} => String
     #   * {Types::GetProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::GetProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::GetProjectOutput#id #id} => String
@@ -4934,6 +5253,7 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.domain_unit_id #=> String
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0].code #=> String
     #   resp.failure_reasons[0].message #=> String
@@ -5764,6 +6084,62 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Lists child domain units for the specified parent domain unit.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain in which you want to list domain units for a
+    #   parent domain unit.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of domain units to return in a single call to
+    #   ListDomainUnitsForParent. When the number of domain units to be listed
+    #   is greater than the value of MaxResults, the response contains a
+    #   NextToken value that you can use in a subsequent call to
+    #   ListDomainUnitsForParent to list the next set of domain units.
+    #
+    # @option params [String] :next_token
+    #   When the number of domain units is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of domain units, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListDomainUnitsForParent to
+    #   list the next set of domain units.
+    #
+    # @option params [required, String] :parent_domain_unit_identifier
+    #   The ID of the parent domain unit.
+    #
+    # @return [Types::ListDomainUnitsForParentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainUnitsForParentOutput#items #items} => Array&lt;Types::DomainUnitSummary&gt;
+    #   * {Types::ListDomainUnitsForParentOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_units_for_parent({
+    #     domain_identifier: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     parent_domain_unit_identifier: "DomainUnitId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDomainUnitsForParent AWS API Documentation
+    #
+    # @overload list_domain_units_for_parent(params = {})
+    # @param [Hash] params ({})
+    def list_domain_units_for_parent(params = {}, options = {})
+      req = build_request(:list_domain_units_for_parent, params)
+      req.send_request(options)
+    end
+
     # Lists Amazon DataZone domains.
     #
     # @option params [Integer] :max_results
@@ -5819,6 +6195,65 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def list_domains(params = {}, options = {})
       req = build_request(:list_domains, params)
+      req.send_request(options)
+    end
+
+    # Lists the entity (domain units) owners.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to list entity owners.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the entity that you want to list.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the entity that you want to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of entities to return in a single call to
+    #   `ListEntityOwners`. When the number of entities to be listed is
+    #   greater than the value of `MaxResults`, the response contains a
+    #   `NextToken` value that you can use in a subsequent call to
+    #   `ListEntityOwners` to list the next set of entities.
+    #
+    # @option params [String] :next_token
+    #   When the number of entities is greater than the default value for the
+    #   `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of entities, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListEntityOwners` to list
+    #   the next set of entities.
+    #
+    # @return [Types::ListEntityOwnersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntityOwnersOutput#next_token #next_token} => String
+    #   * {Types::ListEntityOwnersOutput#owners #owners} => Array&lt;Types::OwnerPropertiesOutput&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_owners({
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "String", # required
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.owners #=> Array
+    #   resp.owners[0].group.group_id #=> String
+    #   resp.owners[0].user.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEntityOwners AWS API Documentation
+    #
+    # @overload list_entity_owners(params = {})
+    # @param [Hash] params ({})
+    def list_entity_owners(params = {}, options = {})
+      req = build_request(:list_entity_owners, params)
       req.send_request(options)
     end
 
@@ -6434,6 +6869,86 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Lists policy grants.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to list policy grants.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the entity for which you want to list policy grants.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of entity for which you want to list policy grants.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of grants to return in a single call to
+    #   `ListPolicyGrants`. When the number of grants to be listed is greater
+    #   than the value of `MaxResults`, the response contains a `NextToken`
+    #   value that you can use in a subsequent call to `ListPolicyGrants` to
+    #   list the next set of grants.
+    #
+    # @option params [String] :next_token
+    #   When the number of grants is greater than the default value for the
+    #   `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of grants, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListPolicyGrants` to list
+    #   the next set of grants.
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy that you want to list.
+    #
+    # @return [Types::ListPolicyGrantsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPolicyGrantsOutput#grant_list #grant_list} => Array&lt;Types::PolicyGrantMember&gt;
+    #   * {Types::ListPolicyGrantsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_policy_grants({
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "String", # required
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grant_list #=> Array
+    #   resp.grant_list[0].created_at #=> Time
+    #   resp.grant_list[0].created_by #=> String
+    #   resp.grant_list[0].detail.add_to_project_member_pool.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.create_asset_type.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.create_domain_unit.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.create_environment_profile.domain_unit_id #=> String
+    #   resp.grant_list[0].detail.create_form_type.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.create_glossary.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.create_project.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.override_domain_unit_owners.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.override_project_owners.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].principal.domain_unit.domain_unit_designation #=> String, one of "OWNER"
+    #   resp.grant_list[0].principal.domain_unit.domain_unit_identifier #=> String
+    #   resp.grant_list[0].principal.group.group_identifier #=> String
+    #   resp.grant_list[0].principal.project.project_designation #=> String, one of "OWNER", "CONTRIBUTOR"
+    #   resp.grant_list[0].principal.project.project_grant_filter.domain_unit_filter.domain_unit #=> String
+    #   resp.grant_list[0].principal.project.project_grant_filter.domain_unit_filter.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].principal.project.project_identifier #=> String
+    #   resp.grant_list[0].principal.user.user_identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListPolicyGrants AWS API Documentation
+    #
+    # @overload list_policy_grants(params = {})
+    # @param [Hash] params ({})
+    def list_policy_grants(params = {}, options = {})
+      req = build_request(:list_policy_grants, params)
+      req.send_request(options)
+    end
+
     # Lists all members of the specified project.
     #
     # @option params [required, String] :domain_identifier
@@ -6553,6 +7068,7 @@ module Aws::DataZone
     #   resp.items[0].created_by #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].domain_id #=> String
+    #   resp.items[0].domain_unit_id #=> String
     #   resp.items[0].failure_reasons #=> Array
     #   resp.items[0].failure_reasons[0].code #=> String
     #   resp.items[0].failure_reasons[0].message #=> String
@@ -7437,6 +7953,128 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def reject_subscription_request(params = {}, options = {})
       req = build_request(:reject_subscription_request, params)
+      req.send_request(options)
+    end
+
+    # Removes an owner from an entity.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to remove an owner from an entity.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the entity from which you want to remove an owner.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the entity from which you want to remove an owner.
+    #
+    # @option params [required, Types::OwnerProperties] :owner
+    #   The owner that you want to remove from an entity.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_entity_owner({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "String", # required
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT
+    #     owner: { # required
+    #       group: {
+    #         group_identifier: "GroupIdentifier", # required
+    #       },
+    #       user: {
+    #         user_identifier: "UserIdentifier", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RemoveEntityOwner AWS API Documentation
+    #
+    # @overload remove_entity_owner(params = {})
+    # @param [Hash] params ({})
+    def remove_entity_owner(params = {}, options = {})
+      req = build_request(:remove_entity_owner, params)
+      req.send_request(options)
+    end
+
+    # Removes a policy grant.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to remove a policy grant.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the entity from which you want to remove a policy grant.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the entity from which you want to remove a policy grant.
+    #
+    # @option params [required, String] :policy_type
+    #   The type of the policy that you want to remove.
+    #
+    # @option params [required, Types::PolicyGrantPrincipal] :principal
+    #   The principal from which you want to remove a policy grant.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_policy_grant({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "String", # required
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT
+    #     principal: { # required
+    #       domain_unit: {
+    #         domain_unit_designation: "OWNER", # required, accepts OWNER
+    #         domain_unit_grant_filter: {
+    #           all_domain_units_grant_filter: {
+    #           },
+    #         },
+    #         domain_unit_identifier: "DomainUnitId",
+    #       },
+    #       group: {
+    #         group_identifier: "GroupIdentifier",
+    #       },
+    #       project: {
+    #         project_designation: "OWNER", # required, accepts OWNER, CONTRIBUTOR
+    #         project_grant_filter: {
+    #           domain_unit_filter: {
+    #             domain_unit: "DomainUnitId", # required
+    #             include_child_domain_units: false,
+    #           },
+    #         },
+    #         project_identifier: "ProjectId",
+    #       },
+    #       user: {
+    #         all_users_grant_filter: {
+    #         },
+    #         user_identifier: "UserIdentifier",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RemovePolicyGrant AWS API Documentation
+    #
+    # @overload remove_policy_grant(params = {})
+    # @param [Hash] params ({})
+    def remove_policy_grant(params = {}, options = {})
+      req = build_request(:remove_policy_grant, params)
       req.send_request(options)
     end
 
@@ -8690,6 +9328,7 @@ module Aws::DataZone
     #   * {Types::UpdateDomainOutput#id #id} => String
     #   * {Types::UpdateDomainOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateDomainOutput#name #name} => String
+    #   * {Types::UpdateDomainOutput#root_domain_unit_id #root_domain_unit_id} => String
     #   * {Types::UpdateDomainOutput#single_sign_on #single_sign_on} => Types::SingleSignOn
     #
     # @example Request syntax with placeholder values
@@ -8713,6 +9352,7 @@ module Aws::DataZone
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.root_domain_unit_id #=> String
     #   resp.single_sign_on.type #=> String, one of "IAM_IDC", "DISABLED"
     #   resp.single_sign_on.user_assignment #=> String, one of "AUTOMATIC", "MANUAL"
     #
@@ -8722,6 +9362,66 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def update_domain(params = {}, options = {})
       req = build_request(:update_domain, params)
+      req.send_request(options)
+    end
+
+    # Updates the domain unit.
+    #
+    # @option params [String] :description
+    #   The description of the domain unit that you want to update.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to update a domain unit.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the domain unit that you want to update.
+    #
+    # @option params [String] :name
+    #   The name of the domain unit that you want to update.
+    #
+    # @return [Types::UpdateDomainUnitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDomainUnitOutput#created_at #created_at} => Time
+    #   * {Types::UpdateDomainUnitOutput#created_by #created_by} => String
+    #   * {Types::UpdateDomainUnitOutput#description #description} => String
+    #   * {Types::UpdateDomainUnitOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateDomainUnitOutput#id #id} => String
+    #   * {Types::UpdateDomainUnitOutput#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdateDomainUnitOutput#last_updated_by #last_updated_by} => String
+    #   * {Types::UpdateDomainUnitOutput#name #name} => String
+    #   * {Types::UpdateDomainUnitOutput#owners #owners} => Array&lt;Types::DomainUnitOwnerProperties&gt;
+    #   * {Types::UpdateDomainUnitOutput#parent_domain_unit_id #parent_domain_unit_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain_unit({
+    #     description: "DomainUnitDescription",
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "DomainUnitId", # required
+    #     name: "DomainUnitName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.last_updated_by #=> String
+    #   resp.name #=> String
+    #   resp.owners #=> Array
+    #   resp.owners[0].group.group_id #=> String
+    #   resp.owners[0].user.user_id #=> String
+    #   resp.parent_domain_unit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDomainUnit AWS API Documentation
+    #
+    # @overload update_domain_unit(params = {})
+    # @param [Hash] params ({})
+    def update_domain_unit(params = {}, options = {})
+      req = build_request(:update_domain_unit, params)
       req.send_request(options)
     end
 
@@ -9182,8 +9882,7 @@ module Aws::DataZone
     #   The description to be updated as part of the `UpdateProject` action.
     #
     # @option params [required, String] :domain_identifier
-    #   The identifier of the Amazon DataZone domain in which a project is to
-    #   be updated.
+    #   The ID of the Amazon DataZone domain where a project is being updated.
     #
     # @option params [Array<String>] :glossary_terms
     #   The glossary terms to be updated as part of the `UpdateProject`
@@ -9201,6 +9900,7 @@ module Aws::DataZone
     #   * {Types::UpdateProjectOutput#created_by #created_by} => String
     #   * {Types::UpdateProjectOutput#description #description} => String
     #   * {Types::UpdateProjectOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateProjectOutput#domain_unit_id #domain_unit_id} => String
     #   * {Types::UpdateProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::UpdateProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::UpdateProjectOutput#id #id} => String
@@ -9224,6 +9924,7 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.domain_unit_id #=> String
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0].code #=> String
     #   resp.failure_reasons[0].message #=> String
@@ -9583,7 +10284,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

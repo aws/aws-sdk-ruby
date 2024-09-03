@@ -1896,6 +1896,25 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # Reserved for future use.
+    #
+    # @!attribute [rw] key_attributes
+    #   Reserved for future use.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] attributes
+    #   Reserved for future use.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Entity AWS API Documentation
+    #
+    class Entity < Struct.new(
+      :key_attributes,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an export task.
     #
     # @!attribute [rw] task_id
@@ -2018,9 +2037,9 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_stream_names
     #   Filters the results to only logs from the log streams in this list.
     #
-    #   If you specify a value for both `logStreamNamePrefix` and
-    #   `logStreamNames`, the action returns an `InvalidParameterException`
-    #   error.
+    #   If you specify a value for both `logStreamNames` and
+    #   `logStreamNamePrefix`, the action returns an
+    #   `InvalidParameterException` error.
     #   @return [Array<String>]
     #
     # @!attribute [rw] log_stream_name_prefix
@@ -2028,9 +2047,8 @@ module Aws::CloudWatchLogs
     #   have names starting with this prefix.
     #
     #   If you specify a value for both `logStreamNamePrefix` and
-    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
-    #   match any log stream names specified in `logStreamNames`, the action
-    #   returns an `InvalidParameterException` error.
+    #   `logStreamNames`, the action returns an `InvalidParameterException`
+    #   error.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3434,7 +3452,7 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # A tructures that contains information about one pattern token related
+    # A structure that contains information about one pattern token related
     # to an anomaly.
     #
     # For more information about patterns and tokens, see
@@ -3567,7 +3585,7 @@ module Aws::CloudWatchLogs
     #   * **FilterPattern** A filter pattern for subscribing to a filtered
     #     stream of log events.
     #
-    #   * **Distribution**The method used to distribute log data to the
+    #   * **Distribution** The method used to distribute log data to the
     #     destination. By default, log data is grouped by log stream, but
     #     the grouping can be set to `Random` for a more even distribution.
     #     This property is only applicable when the destination is an
@@ -3805,9 +3823,11 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_type
     #   Defines the type of log that the source is sending.
     #
+    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS`.
+    #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
-    #   * For IAM Identity Centerr, the valid value is `ERROR_LOGS`.
+    #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`, and
@@ -3959,13 +3979,18 @@ module Aws::CloudWatchLogs
     #   even if the sequence token is not valid.
     #   @return [String]
     #
+    # @!attribute [rw] entity
+    #   Reserved for future use.
+    #   @return [Types::Entity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest AWS API Documentation
     #
     class PutLogEventsRequest < Struct.new(
       :log_group_name,
       :log_stream_name,
       :log_events,
-      :sequence_token)
+      :sequence_token,
+      :entity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3987,11 +4012,16 @@ module Aws::CloudWatchLogs
     #   The rejected events.
     #   @return [Types::RejectedLogEventsInfo]
     #
+    # @!attribute [rw] rejected_entity_info
+    #   Reserved for future use.
+    #   @return [Types::RejectedEntityInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsResponse AWS API Documentation
     #
     class PutLogEventsResponse < Struct.new(
       :next_sequence_token,
-      :rejected_log_events_info)
+      :rejected_log_events_info,
+      :rejected_entity_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4397,6 +4427,20 @@ module Aws::CloudWatchLogs
       :records_matched,
       :records_scanned,
       :bytes_scanned)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] error_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/RejectedEntityInfo AWS API Documentation
+    #
+    class RejectedEntityInfo < Struct.new(
+      :error_type)
       SENSITIVE = []
       include Aws::Structure
     end

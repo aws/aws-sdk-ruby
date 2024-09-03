@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.970.0 (2024-08-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.969.0 (2024-08-28)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::PCS`.
+
 1.968.0 (2024-08-22)
 ------------------
 

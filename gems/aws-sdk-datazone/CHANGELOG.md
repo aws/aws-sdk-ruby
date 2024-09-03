@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-08-30)
+------------------
+
+* Feature - Amazon DataZone now adds new governance capabilities of Domain Units for organization within your Data Domains, and Authorization Policies for tighter controls.
+
+1.19.0 (2024-08-28)
+------------------
+
+* Feature - Update regex to include dot character to be consistent with IAM role creation in the authorized principal field for create and update subscription target.
+
 1.18.0 (2024-08-05)
 ------------------
 

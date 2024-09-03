@@ -720,6 +720,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::PutLogEventsResponse]
         def next_sequence_token: () -> ::String
         def rejected_log_events_info: () -> Types::RejectedLogEventsInfo
+        def rejected_entity_info: () -> Types::RejectedEntityInfo
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_log_events-instance_method
       def put_log_events: (
@@ -731,7 +732,11 @@ module Aws
                                 message: ::String
                               },
                             ],
-                            ?sequence_token: ::String
+                            ?sequence_token: ::String,
+                            ?entity: {
+                              key_attributes: Hash[::String, ::String]?,
+                              attributes: Hash[::String, ::String]?
+                            }
                           ) -> _PutLogEventsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLogEventsResponseSuccess
 

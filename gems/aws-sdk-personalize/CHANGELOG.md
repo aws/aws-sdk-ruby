@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2024-08-29)
+------------------
+
+* Feature - This releases ability to update automatic training scheduler for customer solutions
+
 1.68.0 (2024-07-02)
 ------------------
 

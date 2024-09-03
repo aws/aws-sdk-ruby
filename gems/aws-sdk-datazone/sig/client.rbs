@@ -122,6 +122,100 @@ module Aws
                                        ) -> _AcceptSubscriptionRequestResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptSubscriptionRequestResponseSuccess
 
+      interface _AddEntityOwnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddEntityOwnerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#add_entity_owner-instance_method
+      def add_entity_owner: (
+                              ?client_token: ::String,
+                              domain_identifier: ::String,
+                              entity_identifier: ::String,
+                              entity_type: ("DOMAIN_UNIT"),
+                              owner: {
+                                group: {
+                                  group_identifier: ::String
+                                }?,
+                                user: {
+                                  user_identifier: ::String
+                                }?
+                              }
+                            ) -> _AddEntityOwnerResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddEntityOwnerResponseSuccess
+
+      interface _AddPolicyGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddPolicyGrantOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#add_policy_grant-instance_method
+      def add_policy_grant: (
+                              ?client_token: ::String,
+                              detail: {
+                                add_to_project_member_pool: {
+                                  include_child_domain_units: bool?
+                                }?,
+                                create_asset_type: {
+                                  include_child_domain_units: bool?
+                                }?,
+                                create_domain_unit: {
+                                  include_child_domain_units: bool?
+                                }?,
+                                create_environment: {
+                                }?,
+                                create_environment_profile: {
+                                  domain_unit_id: ::String?
+                                }?,
+                                create_form_type: {
+                                  include_child_domain_units: bool?
+                                }?,
+                                create_glossary: {
+                                  include_child_domain_units: bool?
+                                }?,
+                                create_project: {
+                                  include_child_domain_units: bool?
+                                }?,
+                                delegate_create_environment_profile: {
+                                }?,
+                                override_domain_unit_owners: {
+                                  include_child_domain_units: bool?
+                                }?,
+                                override_project_owners: {
+                                  include_child_domain_units: bool?
+                                }?
+                              },
+                              domain_identifier: ::String,
+                              entity_identifier: ::String,
+                              entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE"),
+                              policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT"),
+                              principal: {
+                                domain_unit: {
+                                  domain_unit_designation: ("OWNER"),
+                                  domain_unit_grant_filter: {
+                                    all_domain_units_grant_filter: {
+                                    }?
+                                  }?,
+                                  domain_unit_identifier: ::String?
+                                }?,
+                                group: {
+                                  group_identifier: ::String?
+                                }?,
+                                project: {
+                                  project_designation: ("OWNER" | "CONTRIBUTOR"),
+                                  project_grant_filter: {
+                                    domain_unit_filter: {
+                                      domain_unit: ::String,
+                                      include_child_domain_units: bool?
+                                    }?
+                                  }?,
+                                  project_identifier: ::String?
+                                }?,
+                                user: {
+                                  all_users_grant_filter: {
+                                  }?,
+                                  user_identifier: ::String?
+                                }?
+                              }
+                            ) -> _AddPolicyGrantResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddPolicyGrantResponseSuccess
+
       interface _AssociateEnvironmentRoleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateEnvironmentRoleOutput]
       end
@@ -570,6 +664,7 @@ module Aws
         def kms_key_identifier: () -> ::String
         def name: () -> ::String
         def portal_url: () -> ::String
+        def root_domain_unit_id: () -> ::String
         def single_sign_on: () -> Types::SingleSignOn
         def status: () -> ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
         def tags: () -> ::Hash[::String, ::String]
@@ -588,6 +683,28 @@ module Aws
                            ?tags: Hash[::String, ::String]
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateDomainUnitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainUnitOutput]
+        def ancestor_domain_unit_ids: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def owners: () -> ::Array[Types::DomainUnitOwnerProperties]
+        def parent_domain_unit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_domain_unit-instance_method
+      def create_domain_unit: (
+                                ?client_token: ::String,
+                                ?description: ::String,
+                                domain_identifier: ::String,
+                                name: ::String,
+                                parent_domain_unit_identifier: ::String
+                              ) -> _CreateDomainUnitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainUnitResponseSuccess
 
       interface _CreateEnvironmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentOutput]
@@ -797,6 +914,7 @@ module Aws
         def created_by: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
+        def domain_unit_id: () -> ::String
         def failure_reasons: () -> ::Array[Types::ProjectDeletionError]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
@@ -808,6 +926,7 @@ module Aws
       def create_project: (
                             ?description: ::String,
                             domain_identifier: ::String,
+                            ?domain_unit_id: ::String,
                             ?glossary_terms: Array[::String],
                             name: ::String
                           ) -> _CreateProjectResponseSuccess
@@ -1035,6 +1154,16 @@ module Aws
                            ?skip_deletion_check: bool
                          ) -> _DeleteDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteDomainUnitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainUnitOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_domain_unit-instance_method
+      def delete_domain_unit: (
+                                domain_identifier: ::String,
+                                identifier: ::String
+                              ) -> _DeleteDomainUnitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainUnitResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_environment-instance_method
       def delete_environment: (
@@ -1358,6 +1487,7 @@ module Aws
         def last_updated_at: () -> ::Time
         def name: () -> ::String
         def portal_url: () -> ::String
+        def root_domain_unit_id: () -> ::String
         def single_sign_on: () -> Types::SingleSignOn
         def status: () -> ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
         def tags: () -> ::Hash[::String, ::String]
@@ -1367,6 +1497,26 @@ module Aws
                         identifier: ::String
                       ) -> _GetDomainResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetDomainUnitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainUnitOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def last_updated_by: () -> ::String
+        def name: () -> ::String
+        def owners: () -> ::Array[Types::DomainUnitOwnerProperties]
+        def parent_domain_unit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_domain_unit-instance_method
+      def get_domain_unit: (
+                             domain_identifier: ::String,
+                             identifier: ::String
+                           ) -> _GetDomainUnitResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainUnitResponseSuccess
 
       interface _GetEnvironmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentOutput]
@@ -1653,6 +1803,7 @@ module Aws
         def created_by: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
+        def domain_unit_id: () -> ::String
         def failure_reasons: () -> ::Array[Types::ProjectDeletionError]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String
@@ -1882,6 +2033,20 @@ module Aws
                              ) -> _ListDataSourcesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
 
+      interface _ListDomainUnitsForParentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainUnitsForParentOutput]
+        def items: () -> ::Array[Types::DomainUnitSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_domain_units_for_parent-instance_method
+      def list_domain_units_for_parent: (
+                                          domain_identifier: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String,
+                                          parent_domain_unit_identifier: ::String
+                                        ) -> _ListDomainUnitsForParentResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainUnitsForParentResponseSuccess
+
       interface _ListDomainsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsOutput]
         def items: () -> ::Array[Types::DomainSummary]
@@ -1894,6 +2059,21 @@ module Aws
                           ?status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
                         ) -> _ListDomainsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListEntityOwnersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntityOwnersOutput]
+        def next_token: () -> ::String
+        def owners: () -> ::Array[Types::OwnerPropertiesOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_entity_owners-instance_method
+      def list_entity_owners: (
+                                domain_identifier: ::String,
+                                entity_identifier: ::String,
+                                entity_type: ("DOMAIN_UNIT"),
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListEntityOwnersResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntityOwnersResponseSuccess
 
       interface _ListEnvironmentActionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentActionsOutput]
@@ -2026,6 +2206,22 @@ module Aws
                                 type: ("TASK" | "EVENT")
                               ) -> _ListNotificationsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationsResponseSuccess
+
+      interface _ListPolicyGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyGrantsOutput]
+        def grant_list: () -> ::Array[Types::PolicyGrantMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_policy_grants-instance_method
+      def list_policy_grants: (
+                                domain_identifier: ::String,
+                                entity_identifier: ::String,
+                                entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE"),
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT")
+                              ) -> _ListPolicyGrantsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyGrantsResponseSuccess
 
       interface _ListProjectMembershipsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectMembershipsOutput]
@@ -2276,6 +2472,67 @@ module Aws
                                          identifier: ::String
                                        ) -> _RejectSubscriptionRequestResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectSubscriptionRequestResponseSuccess
+
+      interface _RemoveEntityOwnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveEntityOwnerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#remove_entity_owner-instance_method
+      def remove_entity_owner: (
+                                 ?client_token: ::String,
+                                 domain_identifier: ::String,
+                                 entity_identifier: ::String,
+                                 entity_type: ("DOMAIN_UNIT"),
+                                 owner: {
+                                   group: {
+                                     group_identifier: ::String
+                                   }?,
+                                   user: {
+                                     user_identifier: ::String
+                                   }?
+                                 }
+                               ) -> _RemoveEntityOwnerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveEntityOwnerResponseSuccess
+
+      interface _RemovePolicyGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemovePolicyGrantOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#remove_policy_grant-instance_method
+      def remove_policy_grant: (
+                                 ?client_token: ::String,
+                                 domain_identifier: ::String,
+                                 entity_identifier: ::String,
+                                 entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE"),
+                                 policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT"),
+                                 principal: {
+                                   domain_unit: {
+                                     domain_unit_designation: ("OWNER"),
+                                     domain_unit_grant_filter: {
+                                       all_domain_units_grant_filter: {
+                                       }?
+                                     }?,
+                                     domain_unit_identifier: ::String?
+                                   }?,
+                                   group: {
+                                     group_identifier: ::String?
+                                   }?,
+                                   project: {
+                                     project_designation: ("OWNER" | "CONTRIBUTOR"),
+                                     project_grant_filter: {
+                                       domain_unit_filter: {
+                                         domain_unit: ::String,
+                                         include_child_domain_units: bool?
+                                       }?
+                                     }?,
+                                     project_identifier: ::String?
+                                   }?,
+                                   user: {
+                                     all_users_grant_filter: {
+                                     }?,
+                                     user_identifier: ::String?
+                                   }?
+                                 }
+                               ) -> _RemovePolicyGrantResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemovePolicyGrantResponseSuccess
 
       interface _RevokeSubscriptionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RevokeSubscriptionOutput]
@@ -2702,6 +2959,7 @@ module Aws
         def id: () -> ::String
         def last_updated_at: () -> ::Time
         def name: () -> ::String
+        def root_domain_unit_id: () -> ::String
         def single_sign_on: () -> Types::SingleSignOn
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_domain-instance_method
@@ -2717,6 +2975,28 @@ module Aws
                            }
                          ) -> _UpdateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainResponseSuccess
+
+      interface _UpdateDomainUnitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainUnitOutput]
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def last_updated_by: () -> ::String
+        def name: () -> ::String
+        def owners: () -> ::Array[Types::DomainUnitOwnerProperties]
+        def parent_domain_unit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_domain_unit-instance_method
+      def update_domain_unit: (
+                                ?description: ::String,
+                                domain_identifier: ::String,
+                                identifier: ::String,
+                                ?name: ::String
+                              ) -> _UpdateDomainUnitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainUnitResponseSuccess
 
       interface _UpdateEnvironmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentOutput]
@@ -2876,6 +3156,7 @@ module Aws
         def created_by: () -> ::String
         def description: () -> ::String
         def domain_id: () -> ::String
+        def domain_unit_id: () -> ::String
         def failure_reasons: () -> ::Array[Types::ProjectDeletionError]
         def glossary_terms: () -> ::Array[::String]
         def id: () -> ::String

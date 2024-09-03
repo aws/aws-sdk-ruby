@@ -548,26 +548,36 @@ module Aws::BedrockRuntime
     # @option params [required, String] :model_id
     #   The identifier for the model that you want to call.
     #
-    #   The `modelId` to provide depends on the type of model that you use:
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
     #
     #   * If you use a base model, specify the model ID or its ARN. For a list
     #     of model IDs for base models, see [Amazon Bedrock base model IDs
     #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
     #
+    #   * If you use an inference profile, specify the inference profile ID or
+    #     its ARN. For a list of inference profile IDs, see [Supported Regions
+    #     and models for cross-region inference][2] in the Amazon Bedrock User
+    #     Guide.
+    #
     #   * If you use a provisioned model, specify the ARN of the Provisioned
     #     Throughput. For more information, see [Run inference using a
-    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
     #
     #   * If you use a custom model, first purchase Provisioned Throughput for
     #     it. Then specify the ARN of the resulting provisioned model. For
-    #     more information, see [Use a custom model in Amazon Bedrock][3] in
+    #     more information, see [Use a custom model in Amazon Bedrock][4] in
     #     the Amazon Bedrock User Guide.
+    #
+    #   The Converse API doesn't support [imported models][5].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
-    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
-    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
     #
     # @option params [required, Array<Types::Message>] :messages
     #   The messages that you want to send to the model.
@@ -891,26 +901,36 @@ module Aws::BedrockRuntime
     # @option params [required, String] :model_id
     #   The ID for the model.
     #
-    #   The `modelId` to provide depends on the type of model that you use:
+    #   The `modelId` to provide depends on the type of model or throughput
+    #   that you use:
     #
     #   * If you use a base model, specify the model ID or its ARN. For a list
     #     of model IDs for base models, see [Amazon Bedrock base model IDs
     #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
     #
+    #   * If you use an inference profile, specify the inference profile ID or
+    #     its ARN. For a list of inference profile IDs, see [Supported Regions
+    #     and models for cross-region inference][2] in the Amazon Bedrock User
+    #     Guide.
+    #
     #   * If you use a provisioned model, specify the ARN of the Provisioned
     #     Throughput. For more information, see [Run inference using a
-    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #     Provisioned Throughput][3] in the Amazon Bedrock User Guide.
     #
     #   * If you use a custom model, first purchase Provisioned Throughput for
     #     it. Then specify the ARN of the resulting provisioned model. For
-    #     more information, see [Use a custom model in Amazon Bedrock][3] in
+    #     more information, see [Use a custom model in Amazon Bedrock][4] in
     #     the Amazon Bedrock User Guide.
+    #
+    #   The Converse API doesn't support [imported models][5].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
-    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
-    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
     #
     # @option params [required, Array<Types::Message>] :messages
     #   The messages that you want to send to the model.
@@ -1443,11 +1463,18 @@ module Aws::BedrockRuntime
     #     more information, see [Use a custom model in Amazon Bedrock][3] in
     #     the Amazon Bedrock User Guide.
     #
+    #   * If you use an [imported model][4], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][5] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
     #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #
     # @option params [String] :trace
     #   Specifies whether to enable or disable the Bedrock trace. If enabled,
@@ -1562,11 +1589,18 @@ module Aws::BedrockRuntime
     #     more information, see [Use a custom model in Amazon Bedrock][3] in
     #     the Amazon Bedrock User Guide.
     #
+    #   * If you use an [imported model][4], specify the ARN of the imported
+    #     model. You can get the model ARN from a successful call to
+    #     [CreateModelImportJob][5] or from the Imported models page in the
+    #     Amazon Bedrock console.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
     #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #   [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+    #   [5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
     #
     # @option params [String] :trace
     #   Specifies whether to enable or disable the Bedrock trace. If enabled,
@@ -1815,7 +1849,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

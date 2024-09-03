@@ -113,6 +113,10 @@ module Aws::BedrockRuntime
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class ModelStreamErrorException < ServiceError

@@ -1019,9 +1019,11 @@ module Aws::BedrockAgentRuntime
 
       api.metadata = {
         "apiVersion" => "2023-07-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "bedrock-agent-runtime",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Agents for Amazon Bedrock Runtime",
         "serviceId" => "Bedrock Agent Runtime",
         "signatureVersion" => "v4",

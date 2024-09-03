@@ -851,6 +851,9 @@
   "Outposts": {
     "models": "outposts/2019-12-03"
   },
+  "PCS": {
+    "models": "pcs/2023-02-10"
+  },
   "PI": {
     "models": "pi/2018-02-27"
   },

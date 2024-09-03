@@ -483,6 +483,7 @@ module Aws
         def backup_vault_name: () -> ::String
         def backup_vault_arn: () -> ::String
         def vault_type: () -> ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+        def vault_state: () -> ("CREATING" | "AVAILABLE" | "FAILED")
         def encryption_key_arn: () -> ::String
         def creation_date: () -> ::Time
         def creator_request_id: () -> ::String

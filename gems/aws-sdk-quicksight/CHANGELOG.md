@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2024-08-29)
+------------------
+
+* Feature - Increased Character Limit for Dataset Calculation Field expressions
+
 1.121.0 (2024-08-22)
 ------------------
 

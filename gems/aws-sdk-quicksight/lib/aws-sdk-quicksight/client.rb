@@ -2059,7 +2059,7 @@ module Aws::QuickSight
     #                 {
     #                   column_name: "ColumnName", # required
     #                   column_id: "ColumnId", # required
-    #                   expression: "Expression", # required
+    #                   expression: "DataSetCalculatedFieldExpression", # required
     #                 },
     #               ],
     #             },
@@ -12987,7 +12987,7 @@ module Aws::QuickSight
     #                 {
     #                   column_name: "ColumnName", # required
     #                   column_id: "ColumnId", # required
-    #                   expression: "Expression", # required
+    #                   expression: "DataSetCalculatedFieldExpression", # required
     #                 },
     #               ],
     #             },
@@ -15255,7 +15255,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

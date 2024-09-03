@@ -5931,6 +5931,12 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] workspace_name
     #   The name of the user-decoupled WorkSpace.
+    #
+    #   <note markdown="1"> `WorkspaceName` is required if `UserName` is `[UNDEFINED]` for
+    #   user-decoupled WorkSpaces. `WorkspaceName` is not applicable if
+    #   `UserName` is specified for user-assigned WorkSpaces.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation

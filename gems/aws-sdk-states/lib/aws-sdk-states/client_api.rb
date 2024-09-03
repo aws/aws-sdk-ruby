@@ -254,10 +254,12 @@ module Aws::States
     ValidateStateMachineDefinitionDiagnosticList = Shapes::ListShape.new(name: 'ValidateStateMachineDefinitionDiagnosticList')
     ValidateStateMachineDefinitionInput = Shapes::StructureShape.new(name: 'ValidateStateMachineDefinitionInput')
     ValidateStateMachineDefinitionLocation = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionLocation')
+    ValidateStateMachineDefinitionMaxResult = Shapes::IntegerShape.new(name: 'ValidateStateMachineDefinitionMaxResult')
     ValidateStateMachineDefinitionMessage = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionMessage')
     ValidateStateMachineDefinitionOutput = Shapes::StructureShape.new(name: 'ValidateStateMachineDefinitionOutput')
     ValidateStateMachineDefinitionResultCode = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionResultCode')
     ValidateStateMachineDefinitionSeverity = Shapes::StringShape.new(name: 'ValidateStateMachineDefinitionSeverity')
+    ValidateStateMachineDefinitionTruncated = Shapes::BooleanShape.new(name: 'ValidateStateMachineDefinitionTruncated')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
@@ -1089,10 +1091,13 @@ module Aws::States
 
     ValidateStateMachineDefinitionInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     ValidateStateMachineDefinitionInput.add_member(:type, Shapes::ShapeRef.new(shape: StateMachineType, location_name: "type"))
+    ValidateStateMachineDefinitionInput.add_member(:severity, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionSeverity, location_name: "severity"))
+    ValidateStateMachineDefinitionInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionMaxResult, location_name: "maxResults"))
     ValidateStateMachineDefinitionInput.struct_class = Types::ValidateStateMachineDefinitionInput
 
     ValidateStateMachineDefinitionOutput.add_member(:result, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionResultCode, required: true, location_name: "result"))
     ValidateStateMachineDefinitionOutput.add_member(:diagnostics, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionDiagnosticList, required: true, location_name: "diagnostics"))
+    ValidateStateMachineDefinitionOutput.add_member(:truncated, Shapes::ShapeRef.new(shape: ValidateStateMachineDefinitionTruncated, location_name: "truncated"))
     ValidateStateMachineDefinitionOutput.struct_class = Types::ValidateStateMachineDefinitionOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))

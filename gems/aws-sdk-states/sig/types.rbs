@@ -1111,7 +1111,7 @@ module Aws::States
     end
 
     class ValidateStateMachineDefinitionDiagnostic
-      attr_accessor severity: ("ERROR")
+      attr_accessor severity: ("ERROR" | "WARNING")
       attr_accessor code: ::String
       attr_accessor message: ::String
       attr_accessor location: ::String
@@ -1121,12 +1121,15 @@ module Aws::States
     class ValidateStateMachineDefinitionInput
       attr_accessor definition: ::String
       attr_accessor type: ("STANDARD" | "EXPRESS")
+      attr_accessor severity: ("ERROR" | "WARNING")
+      attr_accessor max_results: ::Integer
       SENSITIVE: [:definition]
     end
 
     class ValidateStateMachineDefinitionOutput
       attr_accessor result: ("OK" | "FAIL")
       attr_accessor diagnostics: ::Array[Types::ValidateStateMachineDefinitionDiagnostic]
+      attr_accessor truncated: bool
       SENSITIVE: []
     end
 

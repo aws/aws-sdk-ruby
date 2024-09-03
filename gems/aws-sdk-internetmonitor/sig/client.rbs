@@ -271,7 +271,7 @@ module Aws
                          monitor_name: ::String,
                          start_time: ::Time,
                          end_time: ::Time,
-                         query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS"),
+                         query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS" | "OVERALL_TRAFFIC_SUGGESTIONS" | "OVERALL_TRAFFIC_SUGGESTIONS_DETAILS"),
                          ?filter_parameters: Array[
                            {
                              field: ::String?,

@@ -352,9 +352,9 @@ module Aws
       def get_device_pool_compatibility: (
                                            device_pool_arn: ::String,
                                            ?app_arn: ::String,
-                                           ?test_type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY"),
+                                           ?test_type: ("BUILTIN_FUZZ" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "INSTRUMENTATION" | "XCTEST" | "XCTEST_UI"),
                                            ?test: {
-                                             type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY"),
+                                             type: ("BUILTIN_FUZZ" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "INSTRUMENTATION" | "XCTEST" | "XCTEST_UI"),
                                              test_package_arn: ::String?,
                                              test_spec_arn: ::String?,
                                              filter: ::String?,
@@ -878,7 +878,7 @@ module Aws
                           },
                           ?name: ::String,
                           test: {
-                            type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY"),
+                            type: ("BUILTIN_FUZZ" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "INSTRUMENTATION" | "XCTEST" | "XCTEST_UI"),
                             test_package_arn: ::String?,
                             test_spec_arn: ::String?,
                             filter: ::String?,

@@ -3941,7 +3941,7 @@ module Aws::QuickSight
     #
     class ColumnDescription < Struct.new(
       :text)
-      SENSITIVE = []
+      SENSITIVE = [:text]
       include Aws::Structure
     end
 
@@ -22040,7 +22040,7 @@ module Aws::QuickSight
       :description,
       :type,
       :sub_type)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

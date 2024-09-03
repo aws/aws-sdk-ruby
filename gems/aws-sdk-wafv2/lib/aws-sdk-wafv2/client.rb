@@ -6640,10 +6640,10 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Attaches an IAM policy to the specified resource. Use this to share a
-    # rule group across accounts.
+    # Use this to share a rule group with other accounts.
     #
-    # You must be the owner of the rule group to perform this operation.
+    # This action attaches an IAM policy to the specified resource. You must
+    # be the owner of the rule group to perform this operation.
     #
     # This action is subject to the following restrictions:
     #
@@ -6654,6 +6654,11 @@ module Aws::WAFV2
     #   rule group must exist in the same Region.
     #
     # * The user making the request must be the owner of the rule group.
+    #
+    # If a rule group has been shared with your account, you can access it
+    # through the call `GetRuleGroup`, and you can reference it in
+    # `CreateWebACL` and `UpdateWebACL`. Rule groups that are shared with
+    # you don't appear in your WAF console rule groups listing.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
@@ -9193,7 +9198,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

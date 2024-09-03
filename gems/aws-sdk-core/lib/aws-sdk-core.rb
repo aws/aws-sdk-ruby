@@ -99,7 +99,15 @@ require_relative 'aws-sdk-core/plugins/signature_v4'
 # defaults
 require_relative 'aws-defaults'
 
-# plugins - loaded through service clients as needed.
+# plugins
+# loaded through building STS or SSO ..
+
+# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
+require_relative 'aws-sdk-sts'
+
+# aws-sdk-sso is included to support Aws::SSOCredentials
+require_relative 'aws-sdk-sso'
+require_relative 'aws-sdk-ssooidc'
 
 module Aws
 
@@ -187,14 +195,3 @@ module Aws
 
   end
 end
-
-# Autoload bundled service gems used in credential providers
-# need to ensure that the files are the local files from aws-sdk-core
-# and not the installed, legacy/dummy service gems.
-
-# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
-Aws.autoload :STS, File.join(__dir__, 'aws-sdk-sts.rb')
-
-# aws-sdk-sso is included to support Aws::SSOCredentials
-Aws.autoload :SSO, File.join(__dir__, 'aws-sdk-sso.rb')
-Aws.autoload :SSOOIDC, File.join(__dir__, 'aws-sdk-ssooidc.rb')

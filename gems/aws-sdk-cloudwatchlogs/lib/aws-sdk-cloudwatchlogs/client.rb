@@ -2463,18 +2463,17 @@ module Aws::CloudWatchLogs
     # @option params [Array<String>] :log_stream_names
     #   Filters the results to only logs from the log streams in this list.
     #
-    #   If you specify a value for both `logStreamNamePrefix` and
-    #   `logStreamNames`, the action returns an `InvalidParameterException`
-    #   error.
+    #   If you specify a value for both `logStreamNames` and
+    #   `logStreamNamePrefix`, the action returns an
+    #   `InvalidParameterException` error.
     #
     # @option params [String] :log_stream_name_prefix
     #   Filters the results to include only events from log streams that have
     #   names starting with this prefix.
     #
     #   If you specify a value for both `logStreamNamePrefix` and
-    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
-    #   match any log stream names specified in `logStreamNames`, the action
-    #   returns an `InvalidParameterException` error.
+    #   `logStreamNames`, the action returns an `InvalidParameterException`
+    #   error.
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
@@ -3400,11 +3399,11 @@ module Aws::CloudWatchLogs
     #   [PutDestination][5], for cross-account delivery. Kinesis Data
     #   Streams and Firehose are supported as logical destinations.
     #
-    # Each account can have one account-level subscription filter policy. If
-    # you are updating an existing filter, you must specify the correct name
-    # in `PolicyName`. To perform a `PutAccountPolicy` subscription filter
-    # operation for any destination except a Lambda function, you must also
-    # have the `iam:PassRole` permission.
+    # Each account can have one account-level subscription filter policy per
+    # Region. If you are updating an existing filter, you must specify the
+    # correct name in `PolicyName`. To perform a `PutAccountPolicy`
+    # subscription filter operation for any destination except a Lambda
+    # function, you must also have the `iam:PassRole` permission.
     #
     #
     #
@@ -3489,7 +3488,7 @@ module Aws::CloudWatchLogs
     #   * **FilterPattern** A filter pattern for subscribing to a filtered
     #     stream of log events.
     #
-    #   * **Distribution**The method used to distribute log data to the
+    #   * **Distribution** The method used to distribute log data to the
     #     destination. By default, log data is grouped by log stream, but the
     #     grouping can be set to `Random` for a more even distribution. This
     #     property is only applicable when the destination is an Kinesis Data
@@ -3896,9 +3895,11 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :log_type
     #   Defines the type of log that the source is sending.
     #
+    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS`.
+    #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
-    #   * For IAM Identity Centerr, the valid value is `ERROR_LOGS`.
+    #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`, and
@@ -4142,10 +4143,14 @@ module Aws::CloudWatchLogs
     #   `InvalidSequenceTokenException` or `DataAlreadyAcceptedException` even
     #   if the sequence token is not valid.
     #
+    # @option params [Types::Entity] :entity
+    #   Reserved for future use.
+    #
     # @return [Types::PutLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutLogEventsResponse#next_sequence_token #next_sequence_token} => String
     #   * {Types::PutLogEventsResponse#rejected_log_events_info #rejected_log_events_info} => Types::RejectedLogEventsInfo
+    #   * {Types::PutLogEventsResponse#rejected_entity_info #rejected_entity_info} => Types::RejectedEntityInfo
     #
     # @example Request syntax with placeholder values
     #
@@ -4159,6 +4164,14 @@ module Aws::CloudWatchLogs
     #       },
     #     ],
     #     sequence_token: "SequenceToken",
+    #     entity: {
+    #       key_attributes: {
+    #         "EntityKeyAttributesKey" => "EntityKeyAttributesValue",
+    #       },
+    #       attributes: {
+    #         "EntityAttributesKey" => "EntityAttributesValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -4167,6 +4180,7 @@ module Aws::CloudWatchLogs
     #   resp.rejected_log_events_info.too_new_log_event_start_index #=> Integer
     #   resp.rejected_log_events_info.too_old_log_event_end_index #=> Integer
     #   resp.rejected_log_events_info.expired_log_event_end_index #=> Integer
+    #   resp.rejected_entity_info.error_type #=> String, one of "InvalidEntity", "InvalidTypeValue", "InvalidKeyAttributes", "InvalidAttributes", "EntitySizeTooLarge", "UnsupportedLogGroupType", "MissingRequiredFields"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents AWS API Documentation
     #
@@ -4185,6 +4199,14 @@ module Aws::CloudWatchLogs
     # The maximum number of metric filters that can be associated with a log
     # group is 100.
     #
+    # Using regular expressions to create metric filters is supported. For
+    # these filters, there is a quotas of quota of two regular expression
+    # patterns within a single filter pattern. There is also a quota of five
+    # regular expression patterns per log group. For more information about
+    # using regular expressions in metric filters, see [ Filter pattern
+    # syntax for metric filters, subscription filters, filter log events,
+    # and Live Tail][2].
+    #
     # When you create a metric filter, you can also optionally assign a unit
     # and dimensions to the metric that is created.
     #
@@ -4200,12 +4222,13 @@ module Aws::CloudWatchLogs
     #
     #  You can also set up a billing alarm to alert you if your charges are
     # higher than expected. For more information, see [ Creating a Billing
-    # Alarm to Monitor Your Estimated Amazon Web Services Charges][2].
+    # Alarm to Monitor Your Estimated Amazon Web Services Charges][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -4497,6 +4520,14 @@ module Aws::CloudWatchLogs
     # it. If you are updating an existing filter, you must specify the
     # correct name in `filterName`.
     #
+    # Using regular expressions to create subscription filters is supported.
+    # For these filters, there is a quotas of quota of two regular
+    # expression patterns within a single filter pattern. There is also a
+    # quota of five regular expression patterns per log group. For more
+    # information about using regular expressions in subscription filters,
+    # see [ Filter pattern syntax for metric filters, subscription filters,
+    # filter log events, and Live Tail][3].
+    #
     # To perform a `PutSubscriptionFilter` operation for any destination
     # except a Lambda function, you must also have the `iam:PassRole`
     # permission.
@@ -4505,6 +4536,7 @@ module Aws::CloudWatchLogs
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -4630,8 +4662,8 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionStart.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionUpdate.html
-    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionStreamingException.html
-    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionTimeoutException.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTailResponseStream.html#CWL-Type-StartLiveTailResponseStream-SessionStreamingException
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTailResponseStream.html#CWL-Type-StartLiveTailResponseStream-SessionTimeoutException
     # [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html
     #
     # @option params [required, Array<String>] :log_group_identifiers
@@ -5382,7 +5414,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

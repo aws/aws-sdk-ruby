@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-08-29)
+------------------
+
+* Feature - Add support for imported-model in invokeModel and InvokeModelWithResponseStream.
+
 1.18.0 (2024-08-27)
 ------------------
 

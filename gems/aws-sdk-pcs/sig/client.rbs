@@ -1,0 +1,359 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PCS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            cluster_name: ::String,
+                            scheduler: {
+                              type: ("SLURM"),
+                              version: ::String
+                            },
+                            size: ("SMALL" | "MEDIUM" | "LARGE"),
+                            networking: {
+                              subnet_ids: Array[::String]?,
+                              security_group_ids: Array[::String]?
+                            },
+                            ?slurm_configuration: {
+                              scale_down_idle_time_in_seconds: ::Integer?,
+                              slurm_custom_settings: Array[
+                                {
+                                  parameter_name: ::String,
+                                  parameter_value: ::String
+                                },
+                              ]?
+                            },
+                            ?client_token: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateComputeNodeGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComputeNodeGroupResponse]
+        def compute_node_group: () -> Types::ComputeNodeGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#create_compute_node_group-instance_method
+      def create_compute_node_group: (
+                                       cluster_identifier: ::String,
+                                       compute_node_group_name: ::String,
+                                       ?ami_id: ::String,
+                                       subnet_ids: Array[::String],
+                                       ?purchase_option: ("ONDEMAND" | "SPOT"),
+                                       custom_launch_template: {
+                                         id: ::String,
+                                         version: ::String
+                                       },
+                                       iam_instance_profile_arn: ::String,
+                                       scaling_configuration: {
+                                         min_instance_count: ::Integer,
+                                         max_instance_count: ::Integer
+                                       },
+                                       instance_configs: Array[
+                                         {
+                                           instance_type: ::String?
+                                         },
+                                       ],
+                                       ?spot_options: {
+                                         allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")?
+                                       },
+                                       ?slurm_configuration: {
+                                         slurm_custom_settings: Array[
+                                           {
+                                             parameter_name: ::String,
+                                             parameter_value: ::String
+                                           },
+                                         ]?
+                                       },
+                                       ?client_token: ::String,
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateComputeNodeGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComputeNodeGroupResponseSuccess
+
+      interface _CreateQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQueueResponse]
+        def queue: () -> Types::Queue
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#create_queue-instance_method
+      def create_queue: (
+                          cluster_identifier: ::String,
+                          queue_name: ::String,
+                          ?compute_node_group_configurations: Array[
+                            {
+                              compute_node_group_id: ::String?
+                            },
+                          ],
+                          ?client_token: ::String,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateQueueResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_identifier: ::String,
+                            ?client_token: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteComputeNodeGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComputeNodeGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#delete_compute_node_group-instance_method
+      def delete_compute_node_group: (
+                                       cluster_identifier: ::String,
+                                       compute_node_group_identifier: ::String,
+                                       ?client_token: ::String
+                                     ) -> _DeleteComputeNodeGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteComputeNodeGroupResponseSuccess
+
+      interface _DeleteQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQueueResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#delete_queue-instance_method
+      def delete_queue: (
+                          cluster_identifier: ::String,
+                          queue_identifier: ::String,
+                          ?client_token: ::String
+                        ) -> _DeleteQueueResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueueResponseSuccess
+
+      interface _GetClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#get_cluster-instance_method
+      def get_cluster: (
+                         cluster_identifier: ::String
+                       ) -> _GetClusterResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterResponseSuccess
+
+      interface _GetComputeNodeGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComputeNodeGroupResponse]
+        def compute_node_group: () -> Types::ComputeNodeGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#get_compute_node_group-instance_method
+      def get_compute_node_group: (
+                                    cluster_identifier: ::String,
+                                    compute_node_group_identifier: ::String
+                                  ) -> _GetComputeNodeGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComputeNodeGroupResponseSuccess
+
+      interface _GetQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueueResponse]
+        def queue: () -> Types::Queue
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#get_queue-instance_method
+      def get_queue: (
+                       cluster_identifier: ::String,
+                       queue_identifier: ::String
+                     ) -> _GetQueueResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueueResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResponse]
+        def clusters: () -> ::Array[Types::ClusterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListComputeNodeGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComputeNodeGroupsResponse]
+        def compute_node_groups: () -> ::Array[Types::ComputeNodeGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#list_compute_node_groups-instance_method
+      def list_compute_node_groups: (
+                                      cluster_identifier: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListComputeNodeGroupsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComputeNodeGroupsResponseSuccess
+
+      interface _ListQueuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueuesResponse]
+        def queues: () -> ::Array[Types::QueueSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#list_queues-instance_method
+      def list_queues: (
+                         cluster_identifier: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListQueuesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueuesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterComputeNodeGroupInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterComputeNodeGroupInstanceResponse]
+        def node_id: () -> ::String
+        def shared_secret: () -> ::String
+        def endpoints: () -> ::Array[Types::Endpoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#register_compute_node_group_instance-instance_method
+      def register_compute_node_group_instance: (
+                                                  cluster_identifier: ::String,
+                                                  bootstrap_id: ::String
+                                                ) -> _RegisterComputeNodeGroupInstanceResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterComputeNodeGroupInstanceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateComputeNodeGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComputeNodeGroupResponse]
+        def compute_node_group: () -> Types::ComputeNodeGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#update_compute_node_group-instance_method
+      def update_compute_node_group: (
+                                       cluster_identifier: ::String,
+                                       compute_node_group_identifier: ::String,
+                                       ?ami_id: ::String,
+                                       ?subnet_ids: Array[::String],
+                                       ?custom_launch_template: {
+                                         id: ::String,
+                                         version: ::String
+                                       },
+                                       ?purchase_option: ("ONDEMAND" | "SPOT"),
+                                       ?spot_options: {
+                                         allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")?
+                                       },
+                                       ?scaling_configuration: {
+                                         min_instance_count: ::Integer,
+                                         max_instance_count: ::Integer
+                                       },
+                                       ?iam_instance_profile_arn: ::String,
+                                       ?slurm_configuration: {
+                                         slurm_custom_settings: Array[
+                                           {
+                                             parameter_name: ::String,
+                                             parameter_value: ::String
+                                           },
+                                         ]?
+                                       },
+                                       ?client_token: ::String
+                                     ) -> _UpdateComputeNodeGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComputeNodeGroupResponseSuccess
+
+      interface _UpdateQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQueueResponse]
+        def queue: () -> Types::Queue
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#update_queue-instance_method
+      def update_queue: (
+                          cluster_identifier: ::String,
+                          queue_identifier: ::String,
+                          ?compute_node_group_configurations: Array[
+                            {
+                              compute_node_group_id: ::String?
+                            },
+                          ],
+                          ?client_token: ::String
+                        ) -> _UpdateQueueResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueResponseSuccess
+    end
+  end
+end
+
