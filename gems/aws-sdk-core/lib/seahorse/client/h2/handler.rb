@@ -27,6 +27,12 @@ module Seahorse
       class Handler < Client::Handler
 
         def call(context)
+          span_wrapper(context) { _call(context) }
+        end
+
+        private
+
+        def _call(context)
           stream = nil
           begin
             conn = context.client.connection
@@ -79,8 +85,6 @@ module Seahorse
             sync_queue: sync_queue
           )
         end
-
-        private
 
         def _register_callbacks(resp, stream, stream_mutex, close_condition, sync_queue)
           stream.on(:headers) do |headers|
@@ -146,8 +150,14 @@ module Seahorse
           end
         end
 
+        def span_wrapper(context, &block)
+          context.tracer.in_span(
+            'Handler.H2',
+            attributes: Aws::Telemetry.http_request_attrs(context),
+            &block
+          )
+        end
       end
-
     end
   end
 end

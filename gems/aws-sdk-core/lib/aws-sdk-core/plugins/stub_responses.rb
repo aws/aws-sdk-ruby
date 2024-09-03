@@ -49,6 +49,14 @@ requests are made, and retries are disabled.
       class Handler < Seahorse::Client::Handler
 
         def call(context)
+          span_wrapper(context) do
+            stub_responses(context)
+          end
+        end
+
+        private
+
+        def stub_responses(context)
           stub = context.client.next_stub(context)
           resp = Seahorse::Client::Response.new(context: context)
           async_mode = context.client.is_a? Seahorse::Client::AsyncBase
@@ -58,8 +66,15 @@ requests are made, and retries are disabled.
             apply_stub(stub, resp, async_mode)
           end
 
-          async_mode ? Seahorse::Client::AsyncResponse.new(
-            context: context, stream: context[:input_event_stream_handler].event_emitter.stream, sync_queue: Queue.new) : resp
+          if async_mode
+            Seahorse::Client::AsyncResponse.new(
+              context: context,
+              stream: context[:input_event_stream_handler].event_emitter.stream,
+              sync_queue: Queue.new
+            )
+          else
+            resp
+          end
         end
 
         def apply_stub(stub, response, async_mode = false)
@@ -99,6 +114,18 @@ requests are made, and retries are disabled.
           http_resp.signal_done
         end
 
+        def span_wrapper(context, &block)
+          context.tracer.in_span(
+            'Handler.StubResponses',
+            attributes: Aws::Telemetry.http_request_attrs(context)
+          ) do |span|
+            block.call.tap do
+              span.add_attributes(
+                Aws::Telemetry.http_response_attrs(context)
+              )
+            end
+          end
+        end
       end
     end
   end

@@ -107,6 +107,8 @@ module BuildTools
     end
 
     api('ImportExport') do |api|
+      api['metadata']['serviceId'] ||= 'importexport'
+
       api['operations'].each do |_, operation|
         operation['http']['requestUri'] = '/'
       end
@@ -114,6 +116,7 @@ module BuildTools
 
     %w(Lambda LambdaPreview).each do |svc_name|
       api(svc_name) do |api|
+        api['metadata']['serviceId'] ||= 'Lambda Preview' if svc_name == 'LambdaPreview'
         api['shapes']['Timestamp']['type'] = 'timestamp'
       end
 
@@ -220,6 +223,8 @@ module BuildTools
     # uses both flattened and locationName. Query protocol is supposed to
     # ignore location name (xmlName) when flattened (xmlFlattened) is used.
     api('SimpleDB') do |api|
+      api['metadata']['serviceId'] ||= 'SimpleDB'
+
       api['shapes'].each do |_, shape|
         next unless shape['type'] == 'structure'
 

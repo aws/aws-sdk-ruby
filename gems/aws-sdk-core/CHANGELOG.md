@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for Observability which includes a configuration, `telemetry_provider` and an OpenTelemetry-based telemetry provider.
+
 3.202.2 (2024-08-30)
 ------------------
 
