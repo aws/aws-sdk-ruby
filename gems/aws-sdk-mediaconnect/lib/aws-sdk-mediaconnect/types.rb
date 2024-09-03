@@ -609,9 +609,9 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # A Bridge is the connection between your datacenter's Instances and
+    # A Bridge is the connection between your data center's Instances and
     # the AWS cloud. A bridge can be used to send video from the AWS cloud
-    # to your datacenter or from your datacenter to the AWS cloud.
+    # to your data center or from your data center to the AWS cloud.
     #
     # @!attribute [rw] bridge_arn
     #   The Amazon Resource Number (ARN) of the bridge.
@@ -919,9 +919,9 @@ module Aws::MediaConnect
     # The result of a successful CreateBridge request.
     #
     # @!attribute [rw] bridge
-    #   A Bridge is the connection between your datacenter's Instances and
+    #   A Bridge is the connection between your data center's Instances and
     #   the AWS cloud. A bridge can be used to send video from the AWS cloud
-    #   to your datacenter or from your datacenter to the AWS cloud.
+    #   to your data center or from your data center to the AWS cloud.
     #   @return [Types::Bridge]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateBridgeResponse AWS API Documentation
@@ -992,6 +992,10 @@ module Aws::MediaConnect
     #   Create maintenance setting for a flow
     #   @return [Types::AddMaintenance]
     #
+    # @!attribute [rw] source_monitoring_config
+    #   The settings for source monitoring.
+    #   @return [Types::MonitoringConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest AWS API Documentation
     #
     class CreateFlowRequest < Struct.new(
@@ -1004,7 +1008,8 @@ module Aws::MediaConnect
       :source_failover_config,
       :sources,
       :vpc_interfaces,
-      :maintenance)
+      :maintenance,
+      :source_monitoring_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1207,9 +1212,9 @@ module Aws::MediaConnect
     # The result of a successful DescribeBridge request.
     #
     # @!attribute [rw] bridge
-    #   A Bridge is the connection between your datacenter's Instances and
+    #   A Bridge is the connection between your data center's Instances and
     #   the AWS cloud. A bridge can be used to send video from the AWS cloud
-    #   to your datacenter or from your datacenter to the AWS cloud.
+    #   to your data center or from your data center to the AWS cloud.
     #   @return [Types::Bridge]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeBridgeResponse AWS API Documentation
@@ -1290,6 +1295,32 @@ module Aws::MediaConnect
       :messages,
       :timestamp,
       :transport_media_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceThumbnailRequest AWS API Documentation
+    #
+    class DescribeFlowSourceThumbnailRequest < Struct.new(
+      :flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful DescribeFlowSourceThumbnail request.
+    #
+    # @!attribute [rw] thumbnail_details
+    #   The details of the thumbnail, including thumbnail base64 string,
+    #   timecode and the time when thumbnail was generated.
+    #   @return [Types::ThumbnailDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceThumbnailResponse AWS API Documentation
+    #
+    class DescribeFlowSourceThumbnailResponse < Struct.new(
+      :thumbnail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1753,6 +1784,10 @@ module Aws::MediaConnect
     #   The maintenance setting of a flow
     #   @return [Types::Maintenance]
     #
+    # @!attribute [rw] source_monitoring_config
+    #   The settings for source monitoring.
+    #   @return [Types::MonitoringConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Flow AWS API Documentation
     #
     class Flow < Struct.new(
@@ -1769,7 +1804,8 @@ module Aws::MediaConnect
       :sources,
       :status,
       :vpc_interfaces,
-      :maintenance)
+      :maintenance,
+      :source_monitoring_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3045,6 +3081,20 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The settings for source monitoring.
+    #
+    # @!attribute [rw] thumbnail_state
+    #   The state of thumbnail monitoring.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MonitoringConfig AWS API Documentation
+    #
+    class MonitoringConfig < Struct.new(
+      :thumbnail_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Exception raised by AWS Elemental MediaConnect. See the error message
     # and documentation for the operation for more information on the cause
     # of this exception.
@@ -4003,6 +4053,42 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The details of the thumbnail, including thumbnail base64 string,
+    # timecode and the time when thumbnail was generated.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that DescribeFlowSourceThumbnail was performed
+    #   on.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail
+    #   Thumbnail Base64 string.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_messages
+    #   Status code and messages about the flow source thumbnail.
+    #   @return [Array<Types::MessageDetail>]
+    #
+    # @!attribute [rw] timecode
+    #   Timecode of thumbnail.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of when thumbnail was generated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ThumbnailDetails AWS API Documentation
+    #
+    class ThumbnailDetails < Struct.new(
+      :flow_arn,
+      :thumbnail,
+      :thumbnail_messages,
+      :timecode,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Exception raised by AWS Elemental MediaConnect. See the error message
     # and documentation for the operation for more information on the cause
     # of this exception.
@@ -4376,9 +4462,9 @@ module Aws::MediaConnect
     # The bridge has been successfully updated.
     #
     # @!attribute [rw] bridge
-    #   A Bridge is the connection between your datacenter's Instances and
+    #   A Bridge is the connection between your data center's Instances and
     #   the AWS cloud. A bridge can be used to send video from the AWS cloud
-    #   to your datacenter or from your datacenter to the AWS cloud.
+    #   to your data center or from your data center to the AWS cloud.
     #   @return [Types::Bridge]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeResponse AWS API Documentation
@@ -4868,12 +4954,17 @@ module Aws::MediaConnect
     #   Update maintenance setting for a flow
     #   @return [Types::UpdateMaintenance]
     #
+    # @!attribute [rw] source_monitoring_config
+    #   The settings for source monitoring.
+    #   @return [Types::MonitoringConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
     #
     class UpdateFlowRequest < Struct.new(
       :flow_arn,
       :source_failover_config,
-      :maintenance)
+      :maintenance,
+      :source_monitoring_config)
       SENSITIVE = []
       include Aws::Structure
     end

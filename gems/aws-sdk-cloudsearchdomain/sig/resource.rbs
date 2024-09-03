@@ -41,6 +41,7 @@ module Aws
                         ?session_token: String,
                         ?sigv4_region: String,
                         ?stub_responses: untyped,
+                        ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                         ?token_provider: untyped,
                         ?validate_params: bool,
                         ?http_proxy: String,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-09-03)
+------------------
+
+* Feature - Add support to let data publisher specify a subset of the data asset that a subscriber will have access to based on the asset filters provided, when accepting a subscription request.
+
 1.20.0 (2024-08-30)
 ------------------
 

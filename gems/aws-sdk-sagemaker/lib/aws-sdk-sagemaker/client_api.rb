@@ -163,6 +163,7 @@ module Aws::SageMaker
     AutoMLSecurityConfig = Shapes::StructureShape.new(name: 'AutoMLSecurityConfig')
     AutoMLSortBy = Shapes::StringShape.new(name: 'AutoMLSortBy')
     AutoMLSortOrder = Shapes::StringShape.new(name: 'AutoMLSortOrder')
+    AutoMountHomeEFS = Shapes::StringShape.new(name: 'AutoMountHomeEFS')
     AutoParameter = Shapes::StructureShape.new(name: 'AutoParameter')
     AutoParameters = Shapes::ListShape.new(name: 'AutoParameters')
     AutoRollbackConfig = Shapes::StructureShape.new(name: 'AutoRollbackConfig')
@@ -10300,6 +10301,7 @@ module Aws::SageMaker
     UserSettings.add_member(:custom_posix_user_config, Shapes::ShapeRef.new(shape: CustomPosixUserConfig, location_name: "CustomPosixUserConfig"))
     UserSettings.add_member(:custom_file_system_configs, Shapes::ShapeRef.new(shape: CustomFileSystemConfigs, location_name: "CustomFileSystemConfigs"))
     UserSettings.add_member(:studio_web_portal_settings, Shapes::ShapeRef.new(shape: StudioWebPortalSettings, location_name: "StudioWebPortalSettings"))
+    UserSettings.add_member(:auto_mount_home_efs, Shapes::ShapeRef.new(shape: AutoMountHomeEFS, location_name: "AutoMountHomeEFS"))
     UserSettings.struct_class = Types::UserSettings
 
     VariantProperty.add_member(:variant_property_type, Shapes::ShapeRef.new(shape: VariantPropertyType, required: true, location_name: "VariantPropertyType"))

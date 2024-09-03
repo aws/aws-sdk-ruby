@@ -52,6 +52,6 @@ require_relative 'aws-sdk-iotdeviceadvisor/customizations'
 # @!group service
 module Aws::IoTDeviceAdvisor
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end

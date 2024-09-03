@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -83,6 +84,7 @@ module Aws::ElasticLoadBalancingV2
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::ElasticLoadBalancingV2::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::ElasticLoadBalancingV2
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -2092,6 +2104,49 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
+    # Describes the attributes for the specified listener.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #
+    # @return [Types::DescribeListenerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeListenerAttributesOutput#attributes #attributes} => Array&lt;Types::ListenerAttribute&gt;
+    #
+    #
+    # @example Example: Describe listener attributes
+    #
+    #   # This example describes the attributes of the specified listener.
+    #
+    #   resp = client.describe_listener_attributes({
+    #     listener_arn: "aws:elasticloadbalancing:us-east-1:123456789012:listener/net/my-listener/73e2d6bc24d8a067/d5dc06411fa5bcea", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_listener_attributes({
+    #     listener_arn: "ListenerArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].key #=> String
+    #   resp.attributes[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerAttributes AWS API Documentation
+    #
+    # @overload describe_listener_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_listener_attributes(params = {}, options = {})
+      req = build_request(:describe_listener_attributes, params)
+      req.send_request(options)
+    end
+
     # Describes the default certificate and the certificate list for the
     # specified HTTPS or TLS listener.
     #
@@ -3703,6 +3758,45 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
+    # Modifies the specified attributes of the specified listener.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #
+    # @option params [required, Array<Types::ListenerAttribute>] :attributes
+    #   The listener attributes.
+    #
+    # @return [Types::ModifyListenerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyListenerAttributesOutput#attributes #attributes} => Array&lt;Types::ListenerAttribute&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_listener_attributes({
+    #     listener_arn: "ListenerArn", # required
+    #     attributes: [ # required
+    #       {
+    #         key: "ListenerAttributeKey",
+    #         value: "ListenerAttributeValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].key #=> String
+    #   resp.attributes[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerAttributes AWS API Documentation
+    #
+    # @overload modify_listener_attributes(params = {})
+    # @param [Hash] params ({})
+    def modify_listener_attributes(params = {}, options = {})
+      req = build_request(:modify_listener_attributes, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified attributes of the specified Application Load
     # Balancer, Network Load Balancer, or Gateway Load Balancer.
     #
@@ -4264,7 +4358,7 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the target group.
     #
     # @option params [required, Array<Types::TargetGroupAttribute>] :attributes
-    #   The attributes.
+    #   The target group attributes.
     #
     # @return [Types::ModifyTargetGroupAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4972,14 +5066,19 @@ module Aws::ElasticLoadBalancingV2
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::ElasticLoadBalancingV2')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

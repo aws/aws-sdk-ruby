@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -83,6 +84,7 @@ module Aws::TimestreamInfluxDB
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::TimestreamInfluxDB::Plugins::Endpoints)
@@ -337,6 +339,16 @@ module Aws::TimestreamInfluxDB
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
+    #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
     #     following classes:
@@ -565,7 +577,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
@@ -696,7 +708,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
@@ -759,7 +771,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
@@ -860,7 +872,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.items[0].db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
@@ -1019,6 +1031,13 @@ module Aws::TimestreamInfluxDB
     #   parameter groups specify how the database is configured. For example,
     #   DB parameter groups can specify the limit for query concurrency.
     #
+    # @option params [String] :db_instance_type
+    #   The Timestream for InfluxDB DB instance type to run InfluxDB on.
+    #
+    # @option params [String] :deployment_type
+    #   Specifies whether the DB instance will be deployed as a standalone
+    #   instance or with a Multi-AZ standby for high availability.
+    #
     # @return [Types::UpdateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDbInstanceOutput#id #id} => String
@@ -1050,6 +1069,8 @@ module Aws::TimestreamInfluxDB
     #       },
     #     },
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
+    #     db_instance_type: "db.influx.medium", # accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge
+    #     deployment_type: "SINGLE_AZ", # accepts SINGLE_AZ, WITH_MULTIAZ_STANDBY
     #   })
     #
     # @example Response structure
@@ -1057,7 +1078,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
     #   resp.endpoint #=> String
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
     #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
@@ -1090,14 +1111,19 @@ module Aws::TimestreamInfluxDB
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::TimestreamInfluxDB')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

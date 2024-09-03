@@ -277,6 +277,7 @@ module Aws::MediaConnect
       attr_accessor sources: ::Array[Types::SetSourceRequest]
       attr_accessor vpc_interfaces: ::Array[Types::VpcInterfaceRequest]
       attr_accessor maintenance: Types::AddMaintenance
+      attr_accessor source_monitoring_config: Types::MonitoringConfig
       SENSITIVE: []
     end
 
@@ -376,6 +377,16 @@ module Aws::MediaConnect
       attr_accessor messages: ::Array[Types::MessageDetail]
       attr_accessor timestamp: ::Time
       attr_accessor transport_media_info: Types::TransportMediaInfo
+      SENSITIVE: []
+    end
+
+    class DescribeFlowSourceThumbnailRequest
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowSourceThumbnailResponse
+      attr_accessor thumbnail_details: Types::ThumbnailDetails
       SENSITIVE: []
     end
 
@@ -499,6 +510,7 @@ module Aws::MediaConnect
       attr_accessor status: ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
       attr_accessor vpc_interfaces: ::Array[Types::VpcInterface]
       attr_accessor maintenance: Types::Maintenance
+      attr_accessor source_monitoring_config: Types::MonitoringConfig
       SENSITIVE: []
     end
 
@@ -843,6 +855,11 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class MonitoringConfig
+      attr_accessor thumbnail_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class NotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1091,6 +1108,15 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class ThumbnailDetails
+      attr_accessor flow_arn: ::String
+      attr_accessor thumbnail: ::String
+      attr_accessor thumbnail_messages: ::Array[Types::MessageDetail]
+      attr_accessor timecode: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class TooManyRequestsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1311,6 +1337,7 @@ module Aws::MediaConnect
       attr_accessor flow_arn: ::String
       attr_accessor source_failover_config: Types::UpdateFailoverConfig
       attr_accessor maintenance: Types::UpdateMaintenance
+      attr_accessor source_monitoring_config: Types::MonitoringConfig
       SENSITIVE: []
     end
 

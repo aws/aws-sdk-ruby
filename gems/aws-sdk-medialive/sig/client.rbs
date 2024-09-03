@@ -50,6 +50,7 @@ module Aws
                       ?session_token: String,
                       ?sigv4a_signing_region_set: Array[String],
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
@@ -1100,7 +1101,8 @@ module Aws
                                         font_size: ("EXTRA_SMALL_10" | "LARGE_48" | "MEDIUM_32" | "SMALL_16"),
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
-                                      }?
+                                      }?,
+                                      min_qp: ::Integer?
                                     }?,
                                     h265_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "HIGHER" | "LOW" | "MAX" | "MEDIUM" | "OFF")?,
@@ -1160,7 +1162,8 @@ module Aws
                                       tile_height: ::Integer?,
                                       tile_padding: ("NONE" | "PADDED")?,
                                       tile_width: ::Integer?,
-                                      treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?
+                                      treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?,
+                                      min_qp: ::Integer?
                                     }?,
                                     mpeg_2_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "LOW" | "MEDIUM" | "OFF")?,
@@ -2969,7 +2972,8 @@ module Aws
                                         font_size: ("EXTRA_SMALL_10" | "LARGE_48" | "MEDIUM_32" | "SMALL_16"),
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
-                                      }?
+                                      }?,
+                                      min_qp: ::Integer?
                                     }?,
                                     h265_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "HIGHER" | "LOW" | "MAX" | "MEDIUM" | "OFF")?,
@@ -3029,7 +3033,8 @@ module Aws
                                       tile_height: ::Integer?,
                                       tile_padding: ("NONE" | "PADDED")?,
                                       tile_width: ::Integer?,
-                                      treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?
+                                      treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?,
+                                      min_qp: ::Integer?
                                     }?,
                                     mpeg_2_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "LOW" | "MEDIUM" | "OFF")?,

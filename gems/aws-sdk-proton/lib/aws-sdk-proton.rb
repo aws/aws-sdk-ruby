@@ -53,6 +53,6 @@ require_relative 'aws-sdk-proton/customizations'
 # @!group service
 module Aws::Proton
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end

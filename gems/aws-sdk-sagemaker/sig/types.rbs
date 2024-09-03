@@ -9803,6 +9803,7 @@ module Aws::SageMaker
       attr_accessor custom_posix_user_config: Types::CustomPosixUserConfig
       attr_accessor custom_file_system_configs: ::Array[Types::CustomFileSystemConfig]
       attr_accessor studio_web_portal_settings: Types::StudioWebPortalSettings
+      attr_accessor auto_mount_home_efs: ("Enabled" | "Disabled" | "DefaultAsDomain")
       SENSITIVE: []
     end
 

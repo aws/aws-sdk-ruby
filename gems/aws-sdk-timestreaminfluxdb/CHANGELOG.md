@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2024-09-03)
+------------------
+
+* Feature - Timestream for InfluxDB now supports compute scaling and deployment type conversion. This release adds the DbInstanceType and DeploymentType parameters to the UpdateDbInstance API.
+
 1.6.0 (2024-07-02)
 ------------------
 

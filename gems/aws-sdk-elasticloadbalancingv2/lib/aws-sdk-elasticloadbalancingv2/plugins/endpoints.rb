@@ -90,6 +90,8 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::DeregisterTargets.build(context)
           when :describe_account_limits
             Aws::ElasticLoadBalancingV2::Endpoints::DescribeAccountLimits.build(context)
+          when :describe_listener_attributes
+            Aws::ElasticLoadBalancingV2::Endpoints::DescribeListenerAttributes.build(context)
           when :describe_listener_certificates
             Aws::ElasticLoadBalancingV2::Endpoints::DescribeListenerCertificates.build(context)
           when :describe_listeners
@@ -124,6 +126,8 @@ module Aws::ElasticLoadBalancingV2
             Aws::ElasticLoadBalancingV2::Endpoints::GetTrustStoreRevocationContent.build(context)
           when :modify_listener
             Aws::ElasticLoadBalancingV2::Endpoints::ModifyListener.build(context)
+          when :modify_listener_attributes
+            Aws::ElasticLoadBalancingV2::Endpoints::ModifyListenerAttributes.build(context)
           when :modify_load_balancer_attributes
             Aws::ElasticLoadBalancingV2::Endpoints::ModifyLoadBalancerAttributes.build(context)
           when :modify_rule

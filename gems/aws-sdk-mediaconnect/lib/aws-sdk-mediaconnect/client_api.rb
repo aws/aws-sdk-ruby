@@ -73,6 +73,8 @@ module Aws::MediaConnect
     DescribeFlowResponse = Shapes::StructureShape.new(name: 'DescribeFlowResponse')
     DescribeFlowSourceMetadataRequest = Shapes::StructureShape.new(name: 'DescribeFlowSourceMetadataRequest')
     DescribeFlowSourceMetadataResponse = Shapes::StructureShape.new(name: 'DescribeFlowSourceMetadataResponse')
+    DescribeFlowSourceThumbnailRequest = Shapes::StructureShape.new(name: 'DescribeFlowSourceThumbnailRequest')
+    DescribeFlowSourceThumbnailResponse = Shapes::StructureShape.new(name: 'DescribeFlowSourceThumbnailResponse')
     DescribeGatewayInstanceRequest = Shapes::StructureShape.new(name: 'DescribeGatewayInstanceRequest')
     DescribeGatewayInstanceResponse = Shapes::StructureShape.new(name: 'DescribeGatewayInstanceResponse')
     DescribeGatewayRequest = Shapes::StructureShape.new(name: 'DescribeGatewayRequest')
@@ -151,6 +153,7 @@ module Aws::MediaConnect
     MediaStreamType = Shapes::StringShape.new(name: 'MediaStreamType')
     MessageDetail = Shapes::StructureShape.new(name: 'MessageDetail')
     Messages = Shapes::StructureShape.new(name: 'Messages')
+    MonitoringConfig = Shapes::StructureShape.new(name: 'MonitoringConfig')
     NetworkInterfaceType = Shapes::StringShape.new(name: 'NetworkInterfaceType')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Offering = Shapes::StructureShape.new(name: 'Offering')
@@ -195,6 +198,8 @@ module Aws::MediaConnect
     StopFlowResponse = Shapes::StructureShape.new(name: 'StopFlowResponse')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tcs = Shapes::StringShape.new(name: 'Tcs')
+    ThumbnailDetails = Shapes::StructureShape.new(name: 'ThumbnailDetails')
+    ThumbnailState = Shapes::StringShape.new(name: 'ThumbnailState')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     Transport = Shapes::StructureShape.new(name: 'Transport')
     TransportMediaInfo = Shapes::StructureShape.new(name: 'TransportMediaInfo')
@@ -473,6 +478,7 @@ module Aws::MediaConnect
     CreateFlowRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSetSourceRequest, location_name: "sources"))
     CreateFlowRequest.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterfaceRequest, location_name: "vpcInterfaces"))
     CreateFlowRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: AddMaintenance, location_name: "maintenance"))
+    CreateFlowRequest.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -537,6 +543,12 @@ module Aws::MediaConnect
     DescribeFlowSourceMetadataResponse.add_member(:timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "timestamp"))
     DescribeFlowSourceMetadataResponse.add_member(:transport_media_info, Shapes::ShapeRef.new(shape: TransportMediaInfo, location_name: "transportMediaInfo"))
     DescribeFlowSourceMetadataResponse.struct_class = Types::DescribeFlowSourceMetadataResponse
+
+    DescribeFlowSourceThumbnailRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
+    DescribeFlowSourceThumbnailRequest.struct_class = Types::DescribeFlowSourceThumbnailRequest
+
+    DescribeFlowSourceThumbnailResponse.add_member(:thumbnail_details, Shapes::ShapeRef.new(shape: ThumbnailDetails, location_name: "thumbnailDetails"))
+    DescribeFlowSourceThumbnailResponse.struct_class = Types::DescribeFlowSourceThumbnailResponse
 
     DescribeGatewayInstanceRequest.add_member(:gateway_instance_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "gatewayInstanceArn", metadata: {"pattern"=>"^arn:.+:mediaconnect.+:gateway:.+:instance:.+$"}))
     DescribeGatewayInstanceRequest.struct_class = Types::DescribeGatewayInstanceRequest
@@ -625,6 +637,7 @@ module Aws::MediaConnect
     Flow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     Flow.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterface, location_name: "vpcInterfaces"))
     Flow.add_member(:maintenance, Shapes::ShapeRef.new(shape: Maintenance, location_name: "maintenance"))
+    Flow.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     Flow.struct_class = Types::Flow
 
     Fmtp.add_member(:channel_order, Shapes::ShapeRef.new(shape: __string, location_name: "channelOrder"))
@@ -870,6 +883,9 @@ module Aws::MediaConnect
     Messages.add_member(:errors, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "errors"))
     Messages.struct_class = Types::Messages
 
+    MonitoringConfig.add_member(:thumbnail_state, Shapes::ShapeRef.new(shape: ThumbnailState, location_name: "thumbnailState"))
+    MonitoringConfig.struct_class = Types::MonitoringConfig
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -1054,6 +1070,13 @@ module Aws::MediaConnect
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
+    ThumbnailDetails.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "flowArn"))
+    ThumbnailDetails.add_member(:thumbnail, Shapes::ShapeRef.new(shape: __string, location_name: "thumbnail"))
+    ThumbnailDetails.add_member(:thumbnail_messages, Shapes::ShapeRef.new(shape: __listOfMessageDetail, required: true, location_name: "thumbnailMessages"))
+    ThumbnailDetails.add_member(:timecode, Shapes::ShapeRef.new(shape: __string, location_name: "timecode"))
+    ThumbnailDetails.add_member(:timestamp, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "timestamp"))
+    ThumbnailDetails.struct_class = Types::ThumbnailDetails
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
@@ -1221,6 +1244,7 @@ module Aws::MediaConnect
     UpdateFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn", metadata: {"pattern"=>"^arn:.+:mediaconnect.+:flow:.+$"}))
     UpdateFlowRequest.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: UpdateFailoverConfig, location_name: "sourceFailoverConfig"))
     UpdateFlowRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: UpdateMaintenance, location_name: "maintenance"))
+    UpdateFlowRequest.add_member(:source_monitoring_config, Shapes::ShapeRef.new(shape: MonitoringConfig, location_name: "sourceMonitoringConfig"))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
 
     UpdateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -1608,6 +1632,20 @@ module Aws::MediaConnect
         o.http_request_uri = "/v1/flows/{flowArn}/source-metadata"
         o.input = Shapes::ShapeRef.new(shape: DescribeFlowSourceMetadataRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFlowSourceMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_flow_source_thumbnail, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFlowSourceThumbnail"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/flows/{flowArn}/source-thumbnail"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFlowSourceThumbnailRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFlowSourceThumbnailResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

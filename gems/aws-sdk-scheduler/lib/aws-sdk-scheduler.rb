@@ -52,6 +52,6 @@ require_relative 'aws-sdk-scheduler/customizations'
 # @!group service
 module Aws::Scheduler
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

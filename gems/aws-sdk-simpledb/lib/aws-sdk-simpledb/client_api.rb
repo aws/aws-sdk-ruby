@@ -232,6 +232,7 @@ module Aws::SimpleDB
         "endpointPrefix" => "sdb",
         "protocol" => "query",
         "serviceFullName" => "Amazon SimpleDB",
+        "serviceId" => "SimpleDB",
         "signatureVersion" => "v2",
         "uid" => "sdb-2009-04-15",
         "xmlNamespace" => "http://sdb.amazonaws.com/doc/2009-04-15/",

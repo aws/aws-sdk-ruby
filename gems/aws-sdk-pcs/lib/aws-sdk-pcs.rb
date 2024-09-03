@@ -53,6 +53,6 @@ require_relative 'aws-sdk-pcs/customizations'
 # @!group service
 module Aws::PCS
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

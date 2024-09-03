@@ -53,6 +53,6 @@ require_relative 'aws-sdk-cloudfront/customizations'
 # @!group service
 module Aws::CloudFront
 
-  GEM_VERSION = '1.96.0'
+  GEM_VERSION = '1.97.0'
 
 end

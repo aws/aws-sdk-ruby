@@ -23,6 +23,8 @@ module Aws::DataZone
     AcceptSubscriptionRequestOutput = Shapes::StructureShape.new(name: 'AcceptSubscriptionRequestOutput')
     AcceptSubscriptionRequestOutputSubscribedListingsList = Shapes::ListShape.new(name: 'AcceptSubscriptionRequestOutputSubscribedListingsList')
     AcceptSubscriptionRequestOutputSubscribedPrincipalsList = Shapes::ListShape.new(name: 'AcceptSubscriptionRequestOutputSubscribedPrincipalsList')
+    AcceptedAssetScope = Shapes::StructureShape.new(name: 'AcceptedAssetScope')
+    AcceptedAssetScopes = Shapes::ListShape.new(name: 'AcceptedAssetScopes')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ActionLink = Shapes::StringShape.new(name: 'ActionLink')
     ActionParameters = Shapes::UnionShape.new(name: 'ActionParameters')
@@ -50,6 +52,7 @@ module Aws::DataZone
     AssetName = Shapes::StringShape.new(name: 'AssetName')
     AssetRevision = Shapes::StructureShape.new(name: 'AssetRevision')
     AssetRevisions = Shapes::ListShape.new(name: 'AssetRevisions')
+    AssetScope = Shapes::StructureShape.new(name: 'AssetScope')
     AssetTargetNameMap = Shapes::StructureShape.new(name: 'AssetTargetNameMap')
     AssetTargetNames = Shapes::ListShape.new(name: 'AssetTargetNames')
     AssetTypeIdentifier = Shapes::StringShape.new(name: 'AssetTypeIdentifier')
@@ -283,6 +286,7 @@ module Aws::DataZone
     FilterExpressionType = Shapes::StringShape.new(name: 'FilterExpressionType')
     FilterExpressions = Shapes::ListShape.new(name: 'FilterExpressions')
     FilterId = Shapes::StringShape.new(name: 'FilterId')
+    FilterIds = Shapes::ListShape.new(name: 'FilterIds')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterStatus = Shapes::StringShape.new(name: 'FilterStatus')
@@ -783,6 +787,7 @@ module Aws::DataZone
     AcceptRule.add_member(:threshold, Shapes::ShapeRef.new(shape: Float, location_name: "threshold"))
     AcceptRule.struct_class = Types::AcceptRule
 
+    AcceptSubscriptionRequestInput.add_member(:asset_scopes, Shapes::ShapeRef.new(shape: AcceptedAssetScopes, location_name: "assetScopes"))
     AcceptSubscriptionRequestInput.add_member(:decision_comment, Shapes::ShapeRef.new(shape: DecisionComment, location_name: "decisionComment"))
     AcceptSubscriptionRequestInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     AcceptSubscriptionRequestInput.add_member(:identifier, Shapes::ShapeRef.new(shape: SubscriptionRequestId, required: true, location: "uri", location_name: "identifier"))
@@ -805,6 +810,12 @@ module Aws::DataZone
     AcceptSubscriptionRequestOutputSubscribedListingsList.member = Shapes::ShapeRef.new(shape: SubscribedListing)
 
     AcceptSubscriptionRequestOutputSubscribedPrincipalsList.member = Shapes::ShapeRef.new(shape: SubscribedPrincipal)
+
+    AcceptedAssetScope.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
+    AcceptedAssetScope.add_member(:filter_ids, Shapes::ShapeRef.new(shape: FilterIds, required: true, location_name: "filterIds"))
+    AcceptedAssetScope.struct_class = Types::AcceptedAssetScope
+
+    AcceptedAssetScopes.member = Shapes::ShapeRef.new(shape: AcceptedAssetScope)
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -935,6 +946,12 @@ module Aws::DataZone
     AssetRevision.struct_class = Types::AssetRevision
 
     AssetRevisions.member = Shapes::ShapeRef.new(shape: AssetRevision)
+
+    AssetScope.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
+    AssetScope.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    AssetScope.add_member(:filter_ids, Shapes::ShapeRef.new(shape: FilterIds, required: true, location_name: "filterIds"))
+    AssetScope.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "status"))
+    AssetScope.struct_class = Types::AssetScope
 
     AssetTargetNameMap.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
     AssetTargetNameMap.add_member(:target_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetName"))
@@ -2016,6 +2033,8 @@ module Aws::DataZone
     FilterExpression.struct_class = Types::FilterExpression
 
     FilterExpressions.member = Shapes::ShapeRef.new(shape: FilterExpression)
+
+    FilterIds.member = Shapes::ShapeRef.new(shape: FilterId)
 
     FilterList.member = Shapes::ShapeRef.new(shape: FilterClause)
 
@@ -3708,6 +3727,7 @@ module Aws::DataZone
 
     SubscribedAsset.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "assetId"))
     SubscribedAsset.add_member(:asset_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "assetRevision"))
+    SubscribedAsset.add_member(:asset_scope, Shapes::ShapeRef.new(shape: AssetScope, location_name: "assetScope"))
     SubscribedAsset.add_member(:failure_cause, Shapes::ShapeRef.new(shape: FailureCause, location_name: "failureCause"))
     SubscribedAsset.add_member(:failure_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "failureTimestamp"))
     SubscribedAsset.add_member(:granted_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "grantedTimestamp"))
@@ -3715,6 +3735,7 @@ module Aws::DataZone
     SubscribedAsset.add_member(:target_name, Shapes::ShapeRef.new(shape: String, location_name: "targetName"))
     SubscribedAsset.struct_class = Types::SubscribedAsset
 
+    SubscribedAssetListing.add_member(:asset_scope, Shapes::ShapeRef.new(shape: AssetScope, location_name: "assetScope"))
     SubscribedAssetListing.add_member(:entity_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "entityId"))
     SubscribedAssetListing.add_member(:entity_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "entityRevision"))
     SubscribedAssetListing.add_member(:entity_type, Shapes::ShapeRef.new(shape: TypeName, location_name: "entityType"))

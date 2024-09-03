@@ -5228,6 +5228,12 @@ module Aws::MediaLive
     #   Timecode burn-in settings
     #   @return [Types::TimecodeBurninSettings]
     #
+    # @!attribute [rw] min_qp
+    #   Sets the minimum QP. If you aren't familiar with quantization
+    #   adjustment, leave the field empty. MediaLive will apply an
+    #   appropriate value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264Settings AWS API Documentation
     #
     class H264Settings < Struct.new(
@@ -5272,7 +5278,8 @@ module Aws::MediaLive
       :syntax,
       :temporal_aq,
       :timecode_insertion,
-      :timecode_burnin_settings)
+      :timecode_burnin_settings,
+      :min_qp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5548,6 +5555,12 @@ module Aws::MediaLive
     #   configurations, you typically enter "auto".
     #   @return [String]
     #
+    # @!attribute [rw] min_qp
+    #   Sets the minimum QP. If you aren't familiar with quantization
+    #   adjustment, leave the field empty. MediaLive will apply an
+    #   appropriate value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
     #
     class H265Settings < Struct.new(
@@ -5586,7 +5599,8 @@ module Aws::MediaLive
       :tile_height,
       :tile_padding,
       :tile_width,
-      :treeblock_size)
+      :treeblock_size,
+      :min_qp)
       SENSITIVE = []
       include Aws::Structure
     end

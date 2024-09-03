@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.172.0 (2024-09-03)
+------------------
+
+* Feature - Release ReplicaConfiguration as part of DescribeInstance
+
 1.171.0 (2024-08-09)
 ------------------
 

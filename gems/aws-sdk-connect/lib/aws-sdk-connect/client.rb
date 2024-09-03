@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::Connect
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Connect::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::Connect
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -1005,7 +1017,7 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :key
-    #   A valid security key in PEM format.
+    #   A valid security key in PEM format as a String.
     #
     # @return [Types::AssociateSecurityKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5091,6 +5103,7 @@ module Aws::Connect
     # @return [Types::DescribeInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeInstanceResponse#instance #instance} => Types::Instance
+    #   * {Types::DescribeInstanceResponse#replication_configuration #replication_configuration} => Types::ReplicationConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -5113,6 +5126,12 @@ module Aws::Connect
     #   resp.instance.instance_access_url #=> String
     #   resp.instance.tags #=> Hash
     #   resp.instance.tags["TagKey"] #=> String
+    #   resp.replication_configuration.replication_status_summary_list #=> Array
+    #   resp.replication_configuration.replication_status_summary_list[0].region #=> String
+    #   resp.replication_configuration.replication_status_summary_list[0].replication_status #=> String, one of "INSTANCE_REPLICATION_COMPLETE", "INSTANCE_REPLICATION_IN_PROGRESS", "INSTANCE_REPLICATION_FAILED", "INSTANCE_REPLICA_DELETING", "INSTANCE_REPLICATION_DELETION_FAILED", "RESOURCE_REPLICATION_NOT_STARTED"
+    #   resp.replication_configuration.replication_status_summary_list[0].replication_status_reason #=> String
+    #   resp.replication_configuration.source_region #=> String
+    #   resp.replication_configuration.global_sign_in_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstance AWS API Documentation
     #
@@ -8549,7 +8568,7 @@ module Aws::Connect
     #
     #      </note>
     #
-    #   SUM\_CONTACTS\_ABANDONED
+    #   CONTACTS\_ABANDONED
     #
     #   : Unit: Count
     #
@@ -18278,14 +18297,19 @@ module Aws::Connect
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::Connect')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.171.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

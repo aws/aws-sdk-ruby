@@ -296,6 +296,8 @@ module Aws::TimestreamInfluxDB
     UpdateDbInstanceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbInstanceIdentifier, required: true, location_name: "identifier"))
     UpdateDbInstanceInput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
     UpdateDbInstanceInput.add_member(:db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "dbParameterGroupIdentifier"))
+    UpdateDbInstanceInput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
+    UpdateDbInstanceInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "deploymentType"))
     UpdateDbInstanceInput.struct_class = Types::UpdateDbInstanceInput
 
     UpdateDbInstanceOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbInstanceId, required: true, location_name: "id"))

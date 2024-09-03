@@ -4906,7 +4906,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AdditionalModelDataSource>]
     #
     # @!attribute [rw] environment
-    #   The environment variables to set in the Docker container.
+    #   The environment variables to set in the Docker container. Don't
+    #   include any sensitive data in your environment variables.
     #
     #   The maximum length of each key and value in the `Environment` map is
     #   1024 bytes. The maximum length of all keys and values in the map,
@@ -9742,7 +9743,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] environment
-    #   The environment variables to set in the Docker container. We support
+    #   The environment variables to set in the Docker container. Don't
+    #   include any sensitive data in your environment variables. We support
     #   up to 16 key and values entries in the map.
     #   @return [Hash<String,String>]
     #
@@ -46825,6 +46827,13 @@ module Aws::SageMaker
     #   take priority over the settings applied on a domain level.
     #   @return [Types::StudioWebPortalSettings]
     #
+    # @!attribute [rw] auto_mount_home_efs
+    #   Indicates whether auto-mounting of an EFS volume is supported for
+    #   the user profile. The `DefaultAsDomain` value is only supported for
+    #   user profiles. Do not use the `DefaultAsDomain` value when setting
+    #   this parameter for a domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
@@ -46844,7 +46853,8 @@ module Aws::SageMaker
       :studio_web_portal,
       :custom_posix_user_config,
       :custom_file_system_configs,
-      :studio_web_portal_settings)
+      :studio_web_portal_settings,
+      :auto_mount_home_efs)
       SENSITIVE = []
       include Aws::Structure
     end

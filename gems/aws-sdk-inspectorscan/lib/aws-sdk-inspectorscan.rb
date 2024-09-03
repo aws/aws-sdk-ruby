@@ -52,6 +52,6 @@ require_relative 'aws-sdk-inspectorscan/customizations'
 # @!group service
 module Aws::InspectorScan
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

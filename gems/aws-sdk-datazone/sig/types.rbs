@@ -39,6 +39,7 @@ module Aws::DataZone
     end
 
     class AcceptSubscriptionRequestInput
+      attr_accessor asset_scopes: ::Array[Types::AcceptedAssetScope]
       attr_accessor decision_comment: ::String
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -59,6 +60,12 @@ module Aws::DataZone
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       SENSITIVE: [:decision_comment, :request_reason]
+    end
+
+    class AcceptedAssetScope
+      attr_accessor asset_id: ::String
+      attr_accessor filter_ids: ::Array[::String]
+      SENSITIVE: []
     end
 
     class AccessDeniedException
@@ -221,6 +228,14 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor id: ::String
       attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class AssetScope
+      attr_accessor asset_id: ::String
+      attr_accessor error_message: ::String
+      attr_accessor filter_ids: ::Array[::String]
+      attr_accessor status: ::String
       SENSITIVE: []
     end
 
@@ -3701,6 +3716,7 @@ module Aws::DataZone
     class SubscribedAsset
       attr_accessor asset_id: ::String
       attr_accessor asset_revision: ::String
+      attr_accessor asset_scope: Types::AssetScope
       attr_accessor failure_cause: Types::FailureCause
       attr_accessor failure_timestamp: ::Time
       attr_accessor granted_timestamp: ::Time
@@ -3710,6 +3726,7 @@ module Aws::DataZone
     end
 
     class SubscribedAssetListing
+      attr_accessor asset_scope: Types::AssetScope
       attr_accessor entity_id: ::String
       attr_accessor entity_revision: ::String
       attr_accessor entity_type: ::String

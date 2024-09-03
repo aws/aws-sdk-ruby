@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -83,6 +84,7 @@ module Aws::SageMaker
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::SageMaker::Plugins::Endpoints)
@@ -336,6 +338,16 @@ module Aws::SageMaker
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -2729,6 +2741,7 @@ module Aws::SageMaker
     #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
+    #       auto_mount_home_efs: "Enabled", # accepts Enabled, Disabled, DefaultAsDomain
     #     },
     #     domain_settings: {
     #       security_group_ids: ["SecurityGroupId"],
@@ -8904,7 +8917,8 @@ module Aws::SageMaker
     #   `SplitType` to `Line`.
     #
     # @option params [Hash<String,String>] :environment
-    #   The environment variables to set in the Docker container. We support
+    #   The environment variables to set in the Docker container. Don't
+    #   include any sensitive data in your environment variables. We support
     #   up to 16 key and values entries in the map.
     #
     # @option params [required, Types::TransformInput] :transform_input
@@ -9472,6 +9486,7 @@ module Aws::SageMaker
     #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
+    #       auto_mount_home_efs: "Enabled", # accepts Enabled, Disabled, DefaultAsDomain
     #     },
     #   })
     #
@@ -12614,6 +12629,7 @@ module Aws::SageMaker
     #   resp.default_user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization"
     #   resp.default_user_settings.studio_web_portal_settings.hidden_app_types #=> Array
     #   resp.default_user_settings.studio_web_portal_settings.hidden_app_types[0] #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
+    #   resp.default_user_settings.auto_mount_home_efs #=> String, one of "Enabled", "Disabled", "DefaultAsDomain"
     #   resp.domain_settings.security_group_ids #=> Array
     #   resp.domain_settings.security_group_ids[0] #=> String
     #   resp.domain_settings.r_studio_server_pro_domain_settings.domain_execution_role_arn #=> String
@@ -16701,6 +16717,7 @@ module Aws::SageMaker
     #   resp.user_settings.studio_web_portal_settings.hidden_ml_tools[0] #=> String, one of "DataWrangler", "FeatureStore", "EmrClusters", "AutoMl", "Experiments", "Training", "ModelEvaluation", "Pipelines", "Models", "JumpStart", "InferenceRecommender", "Endpoints", "Projects", "InferenceOptimization"
     #   resp.user_settings.studio_web_portal_settings.hidden_app_types #=> Array
     #   resp.user_settings.studio_web_portal_settings.hidden_app_types[0] #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
+    #   resp.user_settings.auto_mount_home_efs #=> String, one of "Enabled", "Disabled", "DefaultAsDomain"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -25093,6 +25110,7 @@ module Aws::SageMaker
     #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
+    #       auto_mount_home_efs: "Enabled", # accepts Enabled, Disabled, DefaultAsDomain
     #     },
     #     domain_settings_for_update: {
     #       r_studio_server_pro_domain_settings_for_update: {
@@ -27312,6 +27330,7 @@ module Aws::SageMaker
     #         hidden_ml_tools: ["DataWrangler"], # accepts DataWrangler, FeatureStore, EmrClusters, AutoMl, Experiments, Training, ModelEvaluation, Pipelines, Models, JumpStart, InferenceRecommender, Endpoints, Projects, InferenceOptimization
     #         hidden_app_types: ["JupyterServer"], # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       },
+    #       auto_mount_home_efs: "Enabled", # accepts Enabled, Disabled, DefaultAsDomain
     #     },
     #   })
     #
@@ -27584,14 +27603,19 @@ module Aws::SageMaker
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::SageMaker')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.257.0'
+      context[:gem_version] = '1.258.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

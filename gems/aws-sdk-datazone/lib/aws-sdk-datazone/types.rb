@@ -126,6 +126,10 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] asset_scopes
+    #   The asset scopes of the accept subscription request.
+    #   @return [Array<Types::AcceptedAssetScope>]
+    #
     # @!attribute [rw] decision_comment
     #   A description that specifies the reason for accepting the specified
     #   subscription request.
@@ -144,6 +148,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AcceptSubscriptionRequestInput AWS API Documentation
     #
     class AcceptSubscriptionRequestInput < Struct.new(
+      :asset_scopes,
       :decision_comment,
       :domain_identifier,
       :identifier)
@@ -221,6 +226,25 @@ module Aws::DataZone
       :updated_at,
       :updated_by)
       SENSITIVE = [:decision_comment, :request_reason]
+      include Aws::Structure
+    end
+
+    # The accepted asset scope.
+    #
+    # @!attribute [rw] asset_id
+    #   The asset ID of the accepted asset scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_ids
+    #   The filter IDs of the accepted asset scope.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AcceptedAssetScope AWS API Documentation
+    #
+    class AcceptedAssetScope < Struct.new(
+      :asset_id,
+      :filter_ids)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -807,6 +831,35 @@ module Aws::DataZone
       :domain_id,
       :id,
       :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The asset scope.
+    #
+    # @!attribute [rw] asset_id
+    #   The asset ID of the asset scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message of the asset scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_ids
+    #   The filter IDs of the asset scope.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the asset scope.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetScope AWS API Documentation
+    #
+    class AssetScope < Struct.new(
+      :asset_id,
+      :error_message,
+      :filter_ids,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13637,6 +13690,10 @@ module Aws::DataZone
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] asset_scope
+    #   The asset scope of the subscribed asset.
+    #   @return [Types::AssetScope]
+    #
     # @!attribute [rw] failure_cause
     #   The failure cause included in the details of the asset for which the
     #   subscription grant is created.
@@ -13666,6 +13723,7 @@ module Aws::DataZone
     class SubscribedAsset < Struct.new(
       :asset_id,
       :asset_revision,
+      :asset_scope,
       :failure_cause,
       :failure_timestamp,
       :granted_timestamp,
@@ -13677,6 +13735,10 @@ module Aws::DataZone
 
     # The details of the published asset for which the subscription grant is
     # created.
+    #
+    # @!attribute [rw] asset_scope
+    #   The asset scope of the subscribed asset listing.
+    #   @return [Types::AssetScope]
     #
     # @!attribute [rw] entity_id
     #   The identifier of the published asset for which the subscription
@@ -13706,6 +13768,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedAssetListing AWS API Documentation
     #
     class SubscribedAssetListing < Struct.new(
+      :asset_scope,
       :entity_id,
       :entity_revision,
       :entity_type,

@@ -1474,6 +1474,7 @@ module Aws::Connect
 
     class DescribeInstanceResponse
       attr_accessor instance: Types::Instance
+      attr_accessor replication_configuration: Types::ReplicationConfiguration
       SENSITIVE: []
     end
 
@@ -3880,6 +3881,20 @@ module Aws::Connect
     class ReplicateInstanceResponse
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationConfiguration
+      attr_accessor replication_status_summary_list: ::Array[Types::ReplicationStatusSummary]
+      attr_accessor source_region: ::String
+      attr_accessor global_sign_in_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationStatusSummary
+      attr_accessor region: ::String
+      attr_accessor replication_status: ("INSTANCE_REPLICATION_COMPLETE" | "INSTANCE_REPLICATION_IN_PROGRESS" | "INSTANCE_REPLICATION_FAILED" | "INSTANCE_REPLICA_DELETING" | "INSTANCE_REPLICATION_DELETION_FAILED" | "RESOURCE_REPLICATION_NOT_STARTED")
+      attr_accessor replication_status_reason: ::String
       SENSITIVE: []
     end
 

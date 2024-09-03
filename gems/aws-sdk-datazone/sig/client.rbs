@@ -50,6 +50,7 @@ module Aws
                       ?session_token: String,
                       ?sigv4a_signing_region_set: Array[String],
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
@@ -116,6 +117,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#accept_subscription_request-instance_method
       def accept_subscription_request: (
+                                         ?asset_scopes: Array[
+                                           {
+                                             asset_id: ::String,
+                                             filter_ids: Array[::String]
+                                           },
+                                         ],
                                          ?decision_comment: ::String,
                                          domain_identifier: ::String,
                                          identifier: ::String

@@ -53,6 +53,6 @@ require_relative 'aws-sdk-neptunegraph/customizations'
 # @!group service
 module Aws::NeptuneGraph
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

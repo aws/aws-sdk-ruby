@@ -193,6 +193,7 @@ module Aws::LambdaPreview
         "endpointPrefix" => "lambda",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS Lambda",
+        "serviceId" => "Lambda Preview",
         "signatureVersion" => "v4",
         "uid" => "lambda-2014-11-11",
       }

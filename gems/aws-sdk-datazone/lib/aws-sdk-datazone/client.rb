@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::DataZone
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::DataZone::Plugins::Endpoints)
@@ -330,6 +332,16 @@ module Aws::DataZone
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
+    #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
     #     following classes:
@@ -496,6 +508,9 @@ module Aws::DataZone
 
     # Accepts a subscription request to a specific asset.
     #
+    # @option params [Array<Types::AcceptedAssetScope>] :asset_scopes
+    #   The asset scopes of the accept subscription request.
+    #
     # @option params [String] :decision_comment
     #   A description that specifies the reason for accepting the specified
     #   subscription request.
@@ -526,6 +541,12 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_subscription_request({
+    #     asset_scopes: [
+    #       {
+    #         asset_id: "AssetId", # required
+    #         filter_ids: ["FilterId"], # required
+    #       },
+    #     ],
     #     decision_comment: "DecisionComment",
     #     domain_identifier: "DomainId", # required
     #     identifier: "SubscriptionRequestId", # required
@@ -544,6 +565,11 @@ module Aws::DataZone
     #   resp.subscribed_listings #=> Array
     #   resp.subscribed_listings[0].description #=> String
     #   resp.subscribed_listings[0].id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_id #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_type #=> String
@@ -840,6 +866,11 @@ module Aws::DataZone
     #   resp.status #=> String, one of "APPROVED", "REVOKED", "CANCELLED"
     #   resp.subscribed_listing.description #=> String
     #   resp.subscribed_listing.id #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_id #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_type #=> String
@@ -2748,6 +2779,11 @@ module Aws::DataZone
     #   resp.assets #=> Array
     #   resp.assets[0].asset_id #=> String
     #   resp.assets[0].asset_revision #=> String
+    #   resp.assets[0].asset_scope.asset_id #=> String
+    #   resp.assets[0].asset_scope.error_message #=> String
+    #   resp.assets[0].asset_scope.filter_ids #=> Array
+    #   resp.assets[0].asset_scope.filter_ids[0] #=> String
+    #   resp.assets[0].asset_scope.status #=> String
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
@@ -2845,6 +2881,11 @@ module Aws::DataZone
     #   resp.subscribed_listings #=> Array
     #   resp.subscribed_listings[0].description #=> String
     #   resp.subscribed_listings[0].id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_id #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_type #=> String
@@ -3666,6 +3707,11 @@ module Aws::DataZone
     #   resp.assets #=> Array
     #   resp.assets[0].asset_id #=> String
     #   resp.assets[0].asset_revision #=> String
+    #   resp.assets[0].asset_scope.asset_id #=> String
+    #   resp.assets[0].asset_scope.error_message #=> String
+    #   resp.assets[0].asset_scope.filter_ids #=> Array
+    #   resp.assets[0].asset_scope.filter_ids[0] #=> String
+    #   resp.assets[0].asset_scope.status #=> String
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
@@ -5312,6 +5358,11 @@ module Aws::DataZone
     #   resp.status #=> String, one of "APPROVED", "REVOKED", "CANCELLED"
     #   resp.subscribed_listing.description #=> String
     #   resp.subscribed_listing.id #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_id #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_type #=> String
@@ -5384,6 +5435,11 @@ module Aws::DataZone
     #   resp.assets #=> Array
     #   resp.assets[0].asset_id #=> String
     #   resp.assets[0].asset_revision #=> String
+    #   resp.assets[0].asset_scope.asset_id #=> String
+    #   resp.assets[0].asset_scope.error_message #=> String
+    #   resp.assets[0].asset_scope.filter_ids #=> Array
+    #   resp.assets[0].asset_scope.filter_ids[0] #=> String
+    #   resp.assets[0].asset_scope.status #=> String
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
@@ -5455,6 +5511,11 @@ module Aws::DataZone
     #   resp.subscribed_listings #=> Array
     #   resp.subscribed_listings[0].description #=> String
     #   resp.subscribed_listings[0].id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_id #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_type #=> String
@@ -7156,6 +7217,11 @@ module Aws::DataZone
     #   resp.items[0].assets #=> Array
     #   resp.items[0].assets[0].asset_id #=> String
     #   resp.items[0].assets[0].asset_revision #=> String
+    #   resp.items[0].assets[0].asset_scope.asset_id #=> String
+    #   resp.items[0].assets[0].asset_scope.error_message #=> String
+    #   resp.items[0].assets[0].asset_scope.filter_ids #=> Array
+    #   resp.items[0].assets[0].asset_scope.filter_ids[0] #=> String
+    #   resp.items[0].assets[0].asset_scope.status #=> String
     #   resp.items[0].assets[0].failure_cause.message #=> String
     #   resp.items[0].assets[0].failure_timestamp #=> Time
     #   resp.items[0].assets[0].granted_timestamp #=> Time
@@ -7263,6 +7329,11 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listings #=> Array
     #   resp.items[0].subscribed_listings[0].description #=> String
     #   resp.items[0].subscribed_listings[0].id #=> String
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.entity_id #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.entity_revision #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.entity_type #=> String
@@ -7468,6 +7539,11 @@ module Aws::DataZone
     #   resp.items[0].status #=> String, one of "APPROVED", "REVOKED", "CANCELLED"
     #   resp.items[0].subscribed_listing.description #=> String
     #   resp.items[0].subscribed_listing.id #=> String
+    #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
+    #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.items[0].subscribed_listing.item.asset_listing.asset_scope.status #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.entity_id #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.entity_revision #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.entity_type #=> String
@@ -7919,6 +7995,11 @@ module Aws::DataZone
     #   resp.subscribed_listings #=> Array
     #   resp.subscribed_listings[0].description #=> String
     #   resp.subscribed_listings[0].id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_id #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_type #=> String
@@ -8123,6 +8204,11 @@ module Aws::DataZone
     #   resp.status #=> String, one of "APPROVED", "REVOKED", "CANCELLED"
     #   resp.subscribed_listing.description #=> String
     #   resp.subscribed_listing.id #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listing.item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_id #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listing.item.asset_listing.entity_type #=> String
@@ -10003,6 +10089,11 @@ module Aws::DataZone
     #   resp.assets #=> Array
     #   resp.assets[0].asset_id #=> String
     #   resp.assets[0].asset_revision #=> String
+    #   resp.assets[0].asset_scope.asset_id #=> String
+    #   resp.assets[0].asset_scope.error_message #=> String
+    #   resp.assets[0].asset_scope.filter_ids #=> Array
+    #   resp.assets[0].asset_scope.filter_ids[0] #=> String
+    #   resp.assets[0].asset_scope.status #=> String
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
@@ -10077,6 +10168,11 @@ module Aws::DataZone
     #   resp.subscribed_listings #=> Array
     #   resp.subscribed_listings[0].description #=> String
     #   resp.subscribed_listings[0].id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.asset_id #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.error_message #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.filter_ids[0] #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.asset_scope.status #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_id #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_revision #=> String
     #   resp.subscribed_listings[0].item.asset_listing.entity_type #=> String
@@ -10277,14 +10373,19 @@ module Aws::DataZone
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::DataZone')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

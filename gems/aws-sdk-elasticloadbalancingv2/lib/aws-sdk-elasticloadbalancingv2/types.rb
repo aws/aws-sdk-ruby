@@ -1128,6 +1128,30 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerAttributesInput AWS API Documentation
+    #
+    class DescribeListenerAttributesInput < Struct.new(
+      :listener_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   Information about the listener attributes.
+    #   @return [Array<Types::ListenerAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerAttributesOutput AWS API Documentation
+    #
+    class DescribeListenerAttributesOutput < Struct.new(
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] listener_arn
     #   The Amazon Resource Names (ARN) of the listener.
     #   @return [String]
     #
@@ -2106,6 +2130,34 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about a listener attribute.
+    #
+    # @!attribute [rw] key
+    #   The name of the attribute.
+    #
+    #   The following attribute is supported by Network Load Balancers, and
+    #   Gateway Load Balancers.
+    #
+    #   * `tcp.idle_timeout.seconds` - The tcp idle timeout value, in
+    #     seconds. The valid range is 60-6000 seconds. The default is 350
+    #     seconds.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ListenerAttribute AWS API Documentation
+    #
+    class ListenerAttribute < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified listener does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ListenerNotFoundException AWS API Documentation
@@ -2463,6 +2515,35 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
     #
+    # @!attribute [rw] attributes
+    #   The listener attributes.
+    #   @return [Array<Types::ListenerAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerAttributesInput AWS API Documentation
+    #
+    class ModifyListenerAttributesInput < Struct.new(
+      :listener_arn,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   Information about the listener attributes.
+    #   @return [Array<Types::ListenerAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerAttributesOutput AWS API Documentation
+    #
+    class ModifyListenerAttributesOutput < Struct.new(
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] listener_arn
+    #   The Amazon Resource Name (ARN) of the listener.
+    #   @return [String]
+    #
     # @!attribute [rw] port
     #   The port for connections from clients to the load balancer. You
     #   cannot specify a port for a Gateway Load Balancer.
@@ -2623,7 +2704,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   The attributes.
+    #   The target group attributes.
     #   @return [Array<Types::TargetGroupAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupAttributesInput AWS API Documentation
@@ -2636,7 +2717,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] attributes
-    #   Information about the attributes.
+    #   Information about the target group attributes.
     #   @return [Array<Types::TargetGroupAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupAttributesOutput AWS API Documentation

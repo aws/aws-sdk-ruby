@@ -51,6 +51,7 @@ module Aws
                       ?sigv4a_signing_region_set: Array[String],
                       ?simple_json: bool,
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
@@ -79,7 +80,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
@@ -151,7 +152,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
@@ -177,7 +178,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
@@ -265,7 +266,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
         def endpoint: () -> ::String
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge")
         def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
@@ -289,7 +290,9 @@ module Aws
                                     enabled: bool
                                   }
                                 },
-                                ?db_parameter_group_identifier: ::String
+                                ?db_parameter_group_identifier: ::String,
+                                ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge"),
+                                ?deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
                               ) -> _UpdateDbInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDbInstanceResponseSuccess
     end

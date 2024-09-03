@@ -90,6 +90,8 @@ module Aws::MediaConnect
             Aws::MediaConnect::Endpoints::DescribeFlow.build(context)
           when :describe_flow_source_metadata
             Aws::MediaConnect::Endpoints::DescribeFlowSourceMetadata.build(context)
+          when :describe_flow_source_thumbnail
+            Aws::MediaConnect::Endpoints::DescribeFlowSourceThumbnail.build(context)
           when :describe_gateway
             Aws::MediaConnect::Endpoints::DescribeGateway.build(context)
           when :describe_gateway_instance
