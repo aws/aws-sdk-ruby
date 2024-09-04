@@ -3575,12 +3575,13 @@ module Aws::AppSync
     # The Amazon CloudWatch Logs configuration.
     #
     # @!attribute [rw] field_log_level
-    #   The field logging level. Values can be NONE, ERROR, or ALL.
+    #   The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or
+    #   ALL.
     #
     #   * **NONE**: No field-level logs are captured.
     #
-    #   * **ERROR**: Logs the following information only for the fields that
-    #     are in error:
+    #   * **ERROR**: Logs the following information **only** for the fields
+    #     that are in the error category:
     #
     #     * The error section in the server response.
     #
@@ -3589,12 +3590,32 @@ module Aws::AppSync
     #     * The generated request/response functions that got resolved for
     #       error fields.
     #
+    #   * **INFO**: Logs the following information **only** for the fields
+    #     that are in the info and error categories:
+    #
+    #     * Info-level messages.
+    #
+    #     * The user messages sent through `$util.log.info` and
+    #       `console.log`.
+    #
+    #     * Field-level tracing and mapping logs are not shown.
+    #
+    #   * **DEBUG**: Logs the following information **only** for the fields
+    #     that are in the debug, info, and error categories:
+    #
+    #     * Debug-level messages.
+    #
+    #     * The user messages sent through `$util.log.info`,
+    #       `$util.log.debug`, `console.log`, and `console.debug`.
+    #
+    #     * Field-level tracing and mapping logs are not shown.
+    #
     #   * **ALL**: The following information is logged for all fields in the
     #     query:
     #
     #     * Field-level tracing information.
     #
-    #     * The generated request/response functions that got resolved for
+    #     * The generated request/response functions that were resolved for
     #       each field.
     #   @return [String]
     #

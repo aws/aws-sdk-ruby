@@ -652,6 +652,12 @@ module Aws
                                    top_p: ::Float?
                                  }?
                                }?,
+                               metadata: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]?,
                                model_id: ::String?,
                                name: ::String,
                                template_configuration: {
@@ -1779,6 +1785,12 @@ module Aws
                                    top_p: ::Float?
                                  }?
                                }?,
+                               metadata: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]?,
                                model_id: ::String?,
                                name: ::String,
                                template_configuration: {

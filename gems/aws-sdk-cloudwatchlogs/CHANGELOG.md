@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-09-04)
+------------------
+
+* Feature - Update to support new APIs for delivery of logs from AWS services.
+
 1.90.0 (2024-09-03)
 ------------------
 

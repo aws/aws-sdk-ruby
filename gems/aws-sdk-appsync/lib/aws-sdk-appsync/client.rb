@@ -1155,7 +1155,7 @@ module Aws::AppSync
     #   resp = client.create_graphql_api({
     #     name: "String", # required
     #     log_config: {
-    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL, INFO, DEBUG
     #       cloud_watch_logs_role_arn: "String", # required
     #       exclude_verbose_content: false,
     #     },
@@ -1221,7 +1221,7 @@ module Aws::AppSync
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
-    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
@@ -2201,7 +2201,7 @@ module Aws::AppSync
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
-    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
@@ -2760,7 +2760,7 @@ module Aws::AppSync
     #   resp.graphql_apis[0].name #=> String
     #   resp.graphql_apis[0].api_id #=> String
     #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
-    #   resp.graphql_apis[0].log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_apis[0].log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
     #   resp.graphql_apis[0].log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_apis[0].log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_apis[0].user_pool_config.user_pool_id #=> String
@@ -3938,7 +3938,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "String", # required
     #     log_config: {
-    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL, INFO, DEBUG
     #       cloud_watch_logs_role_arn: "String", # required
     #       exclude_verbose_content: false,
     #     },
@@ -3999,7 +3999,7 @@ module Aws::AppSync
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
     #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT", "AWS_LAMBDA"
-    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL", "INFO", "DEBUG"
     #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.log_config.exclude_verbose_content #=> Boolean
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
@@ -4317,7 +4317,7 @@ module Aws::AppSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

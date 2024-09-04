@@ -1475,6 +1475,12 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class PromptMetadataEntry
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
     class PromptModelInferenceConfiguration
       attr_accessor max_tokens: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
@@ -1514,11 +1520,12 @@ module Aws::BedrockAgent
 
     class PromptVariant
       attr_accessor inference_configuration: Types::PromptInferenceConfiguration
+      attr_accessor metadata: ::Array[Types::PromptMetadataEntry]
       attr_accessor model_id: ::String
       attr_accessor name: ::String
       attr_accessor template_configuration: Types::PromptTemplateConfiguration
       attr_accessor template_type: ("TEXT")
-      SENSITIVE: []
+      SENSITIVE: [:metadata]
     end
 
     class RdsConfiguration

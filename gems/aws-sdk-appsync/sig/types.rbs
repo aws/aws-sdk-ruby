@@ -921,7 +921,7 @@ module Aws::AppSync
     end
 
     class LogConfig
-      attr_accessor field_log_level: ("NONE" | "ERROR" | "ALL")
+      attr_accessor field_log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG")
       attr_accessor cloud_watch_logs_role_arn: ::String
       attr_accessor exclude_verbose_content: bool
       SENSITIVE: []

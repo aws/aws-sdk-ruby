@@ -203,6 +203,16 @@ module Aws
                                    ) -> _GetExperimentTemplateResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentTemplateResponseSuccess
 
+      interface _GetSafetyLeverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSafetyLeverResponse]
+        def safety_lever: () -> Types::SafetyLever
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#get_safety_lever-instance_method
+      def get_safety_lever: (
+                              id: ::String
+                            ) -> _GetSafetyLeverResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSafetyLeverResponseSuccess
+
       interface _GetTargetAccountConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTargetAccountConfigurationResponse]
         def target_account_configuration: () -> Types::TargetAccountConfiguration
@@ -417,6 +427,20 @@ module Aws
                                         }
                                       ) -> _UpdateExperimentTemplateResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExperimentTemplateResponseSuccess
+
+      interface _UpdateSafetyLeverStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSafetyLeverStateResponse]
+        def safety_lever: () -> Types::SafetyLever
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FIS/Client.html#update_safety_lever_state-instance_method
+      def update_safety_lever_state: (
+                                       id: ::String,
+                                       state: {
+                                         status: ("disengaged" | "engaged"),
+                                         reason: ::String
+                                       }
+                                     ) -> _UpdateSafetyLeverStateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSafetyLeverStateResponseSuccess
 
       interface _UpdateTargetAccountConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTargetAccountConfigurationResponse]

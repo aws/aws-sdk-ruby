@@ -204,7 +204,7 @@ module Aws::FIS
     end
 
     class ExperimentState
-      attr_accessor status: ("pending" | "initiating" | "running" | "completed" | "stopping" | "stopped" | "failed")
+      attr_accessor status: ("pending" | "initiating" | "running" | "completed" | "stopping" | "stopped" | "failed" | "cancelled")
       attr_accessor reason: ::String
       attr_accessor error: Types::ExperimentError
       SENSITIVE: []
@@ -397,6 +397,16 @@ module Aws::FIS
       SENSITIVE: []
     end
 
+    class GetSafetyLeverRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSafetyLeverResponse
+      attr_accessor safety_lever: Types::SafetyLever
+      SENSITIVE: []
+    end
+
     class GetTargetAccountConfigurationRequest
       attr_accessor experiment_template_id: ::String
       attr_accessor account_id: ::String
@@ -525,6 +535,19 @@ module Aws::FIS
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SafetyLever
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor state: Types::SafetyLeverState
+      SENSITIVE: []
+    end
+
+    class SafetyLeverState
+      attr_accessor status: ("disengaged" | "engaged" | "engaging")
+      attr_accessor reason: ::String
       SENSITIVE: []
     end
 
@@ -663,6 +686,23 @@ module Aws::FIS
       attr_accessor filters: ::Array[Types::ExperimentTemplateTargetInputFilter]
       attr_accessor selection_mode: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSafetyLeverStateInput
+      attr_accessor status: ("disengaged" | "engaged")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSafetyLeverStateRequest
+      attr_accessor id: ::String
+      attr_accessor state: Types::UpdateSafetyLeverStateInput
+      SENSITIVE: []
+    end
+
+    class UpdateSafetyLeverStateResponse
+      attr_accessor safety_lever: Types::SafetyLever
       SENSITIVE: []
     end
 

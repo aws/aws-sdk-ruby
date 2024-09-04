@@ -71,12 +71,36 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class ConfigurationTemplate
+      attr_accessor service: ::String
+      attr_accessor log_type: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor default_delivery_config_values: Types::ConfigurationTemplateDeliveryConfigValues
+      attr_accessor allowed_fields: ::Array[Types::RecordField]
+      attr_accessor allowed_output_formats: ::Array[("json" | "plain" | "w3c" | "raw" | "parquet")]
+      attr_accessor allowed_action_for_allow_vended_logs_delivery_for_resource: ::String
+      attr_accessor allowed_field_delimiters: ::Array[::String]
+      attr_accessor allowed_suffix_path_fields: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfigurationTemplateDeliveryConfigValues
+      attr_accessor record_fields: ::Array[::String]
+      attr_accessor field_delimiter: ::String
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration
+      SENSITIVE: []
+    end
+
     class ConflictException < Aws::EmptyStructure
     end
 
     class CreateDeliveryRequest
       attr_accessor delivery_source_name: ::String
       attr_accessor delivery_destination_arn: ::String
+      attr_accessor record_fields: ::Array[::String]
+      attr_accessor field_delimiter: ::String
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -227,6 +251,9 @@ module Aws::CloudWatchLogs
       attr_accessor delivery_source_name: ::String
       attr_accessor delivery_destination_arn: ::String
       attr_accessor delivery_destination_type: ("S3" | "CWL" | "FH")
+      attr_accessor record_fields: ::Array[::String]
+      attr_accessor field_delimiter: ::String
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -265,6 +292,22 @@ module Aws::CloudWatchLogs
 
     class DescribeAccountPoliciesResponse
       attr_accessor account_policies: ::Array[Types::AccountPolicy]
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationTemplatesRequest
+      attr_accessor service: ::String
+      attr_accessor log_types: ::Array[::String]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor delivery_destination_types: ::Array[("S3" | "CWL" | "FH")]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationTemplatesResponse
+      attr_accessor configuration_templates: ::Array[Types::ConfigurationTemplate]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1016,6 +1059,12 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class RecordField
+      attr_accessor name: ::String
+      attr_accessor mandatory: bool
+      SENSITIVE: []
+    end
+
     class RejectedEntityInfo
       attr_accessor error_type: ("InvalidEntity" | "InvalidTypeValue" | "InvalidKeyAttributes" | "InvalidAttributes" | "EntitySizeTooLarge" | "UnsupportedLogGroupType" | "MissingRequiredFields")
       SENSITIVE: []
@@ -1044,6 +1093,12 @@ module Aws::CloudWatchLogs
     class ResultField
       attr_accessor field: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class S3DeliveryConfiguration
+      attr_accessor suffix_path: ::String
+      attr_accessor enable_hive_compatible_path: bool
       SENSITIVE: []
     end
 
@@ -1181,6 +1236,17 @@ module Aws::CloudWatchLogs
       attr_accessor suppression_type: ("LIMITED" | "INFINITE")
       attr_accessor suppression_period: Types::SuppressionPeriod
       SENSITIVE: []
+    end
+
+    class UpdateDeliveryConfigurationRequest
+      attr_accessor id: ::String
+      attr_accessor record_fields: ::Array[::String]
+      attr_accessor field_delimiter: ::String
+      attr_accessor s3_delivery_configuration: Types::S3DeliveryConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateDeliveryConfigurationResponse < Aws::EmptyStructure
     end
 
     class UpdateLogAnomalyDetectorRequest

@@ -1249,6 +1249,15 @@ module Aws::Finspace
     #
     #   You can add one of the following values:
     #
+    #   * `kx.sg.large` – The host type with a configuration of 16 GiB memory
+    #     and 2 vCPUs.
+    #
+    #   * `kx.sg.xlarge` – The host type with a configuration of 32 GiB memory
+    #     and 4 vCPUs.
+    #
+    #   * `kx.sg.2xlarge` – The host type with a configuration of 64 GiB
+    #     memory and 8 vCPUs.
+    #
     #   * `kx.sg.4xlarge` – The host type with a configuration of 108 GiB
     #     memory and 16 vCPUs.
     #
@@ -3776,7 +3785,7 @@ module Aws::Finspace
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

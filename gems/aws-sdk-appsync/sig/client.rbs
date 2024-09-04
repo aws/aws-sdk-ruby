@@ -252,7 +252,7 @@ module Aws
       def create_graphql_api: (
                                 name: ::String,
                                 ?log_config: {
-                                  field_log_level: ("NONE" | "ERROR" | "ALL"),
+                                  field_log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG"),
                                   cloud_watch_logs_role_arn: ::String,
                                   exclude_verbose_content: bool?
                                 },
@@ -1005,7 +1005,7 @@ module Aws
                                 api_id: ::String,
                                 name: ::String,
                                 ?log_config: {
-                                  field_log_level: ("NONE" | "ERROR" | "ALL"),
+                                  field_log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG"),
                                   cloud_watch_logs_role_arn: ::String,
                                   exclude_verbose_content: bool?
                                 },

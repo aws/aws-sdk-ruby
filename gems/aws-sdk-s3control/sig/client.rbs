@@ -123,6 +123,8 @@ module Aws
         def access_grants_instance_id: () -> ::String
         def access_grants_instance_arn: () -> ::String
         def identity_center_arn: () -> ::String
+        def identity_center_instance_arn: () -> ::String
+        def identity_center_application_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_access_grants_instance-instance_method
       def create_access_grants_instance: (
@@ -698,6 +700,8 @@ module Aws
         def access_grants_instance_arn: () -> ::String
         def access_grants_instance_id: () -> ::String
         def identity_center_arn: () -> ::String
+        def identity_center_instance_arn: () -> ::String
+        def identity_center_application_arn: () -> ::String
         def created_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_grants_instance-instance_method
@@ -1089,6 +1093,21 @@ module Aws
                                                   ?max_results: ::Integer
                                                 ) -> _ListAccessPointsForObjectLambdaResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPointsForObjectLambdaResponseSuccess
+
+      interface _ListCallerAccessGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCallerAccessGrantsResult]
+        def next_token: () -> ::String
+        def caller_access_grants_list: () -> ::Array[Types::ListCallerAccessGrantsEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_caller_access_grants-instance_method
+      def list_caller_access_grants: (
+                                       ?account_id: ::String,
+                                       ?grant_scope: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?allowed_by_application: bool
+                                     ) -> _ListCallerAccessGrantsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCallerAccessGrantsResponseSuccess
 
       interface _ListJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResult]

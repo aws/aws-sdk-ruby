@@ -337,6 +337,10 @@ module Aws::BedrockAgent
     PromptInputVariable = Shapes::StructureShape.new(name: 'PromptInputVariable')
     PromptInputVariableName = Shapes::StringShape.new(name: 'PromptInputVariableName')
     PromptInputVariablesList = Shapes::ListShape.new(name: 'PromptInputVariablesList')
+    PromptMetadataEntry = Shapes::StructureShape.new(name: 'PromptMetadataEntry')
+    PromptMetadataKey = Shapes::StringShape.new(name: 'PromptMetadataKey')
+    PromptMetadataList = Shapes::ListShape.new(name: 'PromptMetadataList')
+    PromptMetadataValue = Shapes::StringShape.new(name: 'PromptMetadataValue')
     PromptModelIdentifier = Shapes::StringShape.new(name: 'PromptModelIdentifier')
     PromptModelInferenceConfiguration = Shapes::StructureShape.new(name: 'PromptModelInferenceConfiguration')
     PromptName = Shapes::StringShape.new(name: 'PromptName')
@@ -1589,6 +1593,12 @@ module Aws::BedrockAgent
 
     PromptInputVariablesList.member = Shapes::ShapeRef.new(shape: PromptInputVariable)
 
+    PromptMetadataEntry.add_member(:key, Shapes::ShapeRef.new(shape: PromptMetadataKey, required: true, location_name: "key"))
+    PromptMetadataEntry.add_member(:value, Shapes::ShapeRef.new(shape: PromptMetadataValue, required: true, location_name: "value"))
+    PromptMetadataEntry.struct_class = Types::PromptMetadataEntry
+
+    PromptMetadataList.member = Shapes::ShapeRef.new(shape: PromptMetadataEntry)
+
     PromptModelInferenceConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maxTokens"))
     PromptModelInferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
     PromptModelInferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
@@ -1618,6 +1628,7 @@ module Aws::BedrockAgent
     PromptTemplateConfiguration.struct_class = Types::PromptTemplateConfiguration
 
     PromptVariant.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: PromptInferenceConfiguration, location_name: "inferenceConfiguration"))
+    PromptVariant.add_member(:metadata, Shapes::ShapeRef.new(shape: PromptMetadataList, location_name: "metadata"))
     PromptVariant.add_member(:model_id, Shapes::ShapeRef.new(shape: PromptModelIdentifier, location_name: "modelId"))
     PromptVariant.add_member(:name, Shapes::ShapeRef.new(shape: PromptVariantName, required: true, location_name: "name"))
     PromptVariant.add_member(:template_configuration, Shapes::ShapeRef.new(shape: PromptTemplateConfiguration, location_name: "templateConfiguration"))

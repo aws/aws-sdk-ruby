@@ -523,9 +523,13 @@ module Aws::BedrockAgent
     #   to use advanced prompts, include a `promptOverrideConfiguration`
     #   object. For more information, see [Advanced prompts][2].
     #
-    # * If you agent fails to be created, the response returns a list of
+    # * If your agent fails to be created, the response returns a list of
     #   `failureReasons` alongside a list of `recommendedActions` for you to
     #   troubleshoot.
+    #
+    # * The agent instructions will not be honored if your agent has only
+    #   one knowledge base, uses default prompts, has no action group, and
+    #   user input is disabled.
     #
     #
     #
@@ -2017,6 +2021,12 @@ module Aws::BedrockAgent
     #             top_p: 1.0,
     #           },
     #         },
+    #         metadata: [
+    #           {
+    #             key: "PromptMetadataKey", # required
+    #             value: "PromptMetadataValue", # required
+    #           },
+    #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
     #         template_configuration: {
@@ -2051,6 +2061,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -2145,6 +2158,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -3391,6 +3407,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -5566,6 +5585,12 @@ module Aws::BedrockAgent
     #             top_p: 1.0,
     #           },
     #         },
+    #         metadata: [
+    #           {
+    #             key: "PromptMetadataKey", # required
+    #             value: "PromptMetadataValue", # required
+    #           },
+    #         ],
     #         model_id: "PromptModelIdentifier",
     #         name: "PromptVariantName", # required
     #         template_configuration: {
@@ -5600,6 +5625,9 @@ module Aws::BedrockAgent
     #   resp.variants[0].inference_configuration.text.temperature #=> Float
     #   resp.variants[0].inference_configuration.text.top_k #=> Integer
     #   resp.variants[0].inference_configuration.text.top_p #=> Float
+    #   resp.variants[0].metadata #=> Array
+    #   resp.variants[0].metadata[0].key #=> String
+    #   resp.variants[0].metadata[0].value #=> String
     #   resp.variants[0].model_id #=> String
     #   resp.variants[0].name #=> String
     #   resp.variants[0].template_configuration.text.input_variables #=> Array
@@ -5635,7 +5663,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

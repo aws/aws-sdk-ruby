@@ -351,6 +351,147 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # A structure containing information about the deafult settings and
+    # available settings that you can use to configure a [delivery][1] or a
+    # [delivery destination][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Delivery.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeliveryDestination.html
+    #
+    # @!attribute [rw] service
+    #   A string specifying which service this configuration template
+    #   applies to. For more information about supported services see
+    #   [Enable logging from Amazon Web Services services.][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] log_type
+    #   A string specifying which log type this configuration template
+    #   applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A string specifying which resource type this configuration template
+    #   applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] delivery_destination_type
+    #   A string specifying which destination type this configuration
+    #   template applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_delivery_config_values
+    #   A mapping that displays the default value of each property within a
+    #   delivery’s configuration, if it is not specified in the request.
+    #   @return [Types::ConfigurationTemplateDeliveryConfigValues]
+    #
+    # @!attribute [rw] allowed_fields
+    #   The allowed fields that a caller can use in the `recordFields`
+    #   parameter of a [CreateDelivery][1] or
+    #   [UpdateDeliveryConfiguration][2] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
+    #   @return [Array<Types::RecordField>]
+    #
+    # @!attribute [rw] allowed_output_formats
+    #   The list of delivery destination output formats that are supported
+    #   by this log source.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_action_for_allow_vended_logs_delivery_for_resource
+    #   The action permissions that a caller needs to have to be able to
+    #   successfully create a delivery source on the desired resource type
+    #   when calling [PutDeliverySource][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_field_delimiters
+    #   The valid values that a caller can use as field delimiters when
+    #   calling [CreateDelivery][1] or [UpdateDeliveryConfiguration][2] on a
+    #   delivery that delivers in `Plain`, `W3C`, or `Raw` format.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_suffix_path_fields
+    #   The list of variable fields that can be used in the suffix path of a
+    #   delivery that delivers to an S3 bucket.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ConfigurationTemplate AWS API Documentation
+    #
+    class ConfigurationTemplate < Struct.new(
+      :service,
+      :log_type,
+      :resource_type,
+      :delivery_destination_type,
+      :default_delivery_config_values,
+      :allowed_fields,
+      :allowed_output_formats,
+      :allowed_action_for_allow_vended_logs_delivery_for_resource,
+      :allowed_field_delimiters,
+      :allowed_suffix_path_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains the default values that are used for each
+    # configuration parameter when you use [CreateDelivery][1] to create a
+    # deliver under the current service type, resource type, and log type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #
+    # @!attribute [rw] record_fields
+    #   The default record fields that will be delivered when a list of
+    #   record fields is not provided in a [CreateDelivery][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_delimiter
+    #   The default field delimiter that is used in a [CreateDelivery][1]
+    #   operation when the field delimiter is not specified in that
+    #   operation. The field delimiter is used only when the final output
+    #   delivery is in `Plain`, `W3C`, or `Raw` format.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_delivery_configuration
+    #   The delivery parameters that are used when you create a delivery to
+    #   a delivery destination that is an S3 Bucket.
+    #   @return [Types::S3DeliveryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ConfigurationTemplateDeliveryConfigValues AWS API Documentation
+    #
+    class ConfigurationTemplateDeliveryConfigValues < Struct.new(
+      :record_fields,
+      :field_delimiter,
+      :s3_delivery_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This operation attempted to create a resource that already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ConflictException AWS API Documentation
@@ -364,6 +505,22 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] delivery_destination_arn
     #   The ARN of the delivery destination to use for this delivery.
     #   @return [String]
+    #
+    # @!attribute [rw] record_fields
+    #   The list of record fields to be delivered to the destination, in
+    #   order. If the delivery’s log source has mandatory fields, they must
+    #   be included in this list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_delimiter
+    #   The field delimiter to use between record fields when the final
+    #   output format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_delivery_configuration
+    #   This structure contains parameters that are valid only when the
+    #   delivery’s delivery destination is an S3 bucket.
+    #   @return [Types::S3DeliveryConfiguration]
     #
     # @!attribute [rw] tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -381,6 +538,9 @@ module Aws::CloudWatchLogs
     class CreateDeliveryRequest < Struct.new(
       :delivery_source_name,
       :delivery_destination_arn,
+      :record_fields,
+      :field_delimiter,
+      :s3_delivery_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -928,6 +1088,21 @@ module Aws::CloudWatchLogs
     #   delivery is CloudWatch Logs, Amazon S3, or Firehose.
     #   @return [String]
     #
+    # @!attribute [rw] record_fields
+    #   The record fields used in this delivery.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_delimiter
+    #   The field delimiter that is used between record fields when the
+    #   final output format of a delivery is in `Plain`, `W3C`, or `Raw`
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_delivery_configuration
+    #   This structure contains delivery configurations that apply only when
+    #   the delivery destination resource is an S3 bucket.
+    #   @return [Types::S3DeliveryConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags that have been assigned to this delivery.
     #   @return [Hash<String,String>]
@@ -940,6 +1115,9 @@ module Aws::CloudWatchLogs
       :delivery_source_name,
       :delivery_destination_arn,
       :delivery_destination_type,
+      :record_fields,
+      :field_delimiter,
+      :s3_delivery_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1161,6 +1339,72 @@ module Aws::CloudWatchLogs
     #
     class DescribeAccountPoliciesResponse < Struct.new(
       :account_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the Amazon Web Services
+    #   service that you specify here.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the log types that you specify
+    #   here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the resource types that you
+    #   specify here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] delivery_destination_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the delivery destination types
+    #   that you specify here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Use this parameter to limit the number of configuration templates
+    #   that are returned in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeConfigurationTemplatesRequest AWS API Documentation
+    #
+    class DescribeConfigurationTemplatesRequest < Struct.new(
+      :service,
+      :log_types,
+      :resource_types,
+      :delivery_destination_types,
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_templates
+    #   An array of objects, where each object describes one configuration
+    #   template that matches the filters that you specified in the request.
+    #   @return [Array<Types::ConfigurationTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeConfigurationTemplatesResponse AWS API Documentation
+    #
+    class DescribeConfigurationTemplatesResponse < Struct.new(
+      :configuration_templates,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1896,14 +2140,14 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # Reserved for internal use.
     #
     # @!attribute [rw] key_attributes
-    #   Reserved for future use.
+    #   Reserved for internal use.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attributes
-    #   Reserved for future use.
+    #   Reserved for internal use.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Entity AWS API Documentation
@@ -3980,7 +4224,7 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] entity
-    #   Reserved for future use.
+    #   Reserved for internal use.
     #   @return [Types::Entity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest AWS API Documentation
@@ -4013,7 +4257,7 @@ module Aws::CloudWatchLogs
     #   @return [Types::RejectedLogEventsInfo]
     #
     # @!attribute [rw] rejected_entity_info
-    #   Reserved for future use.
+    #   Reserved for internal use.
     #   @return [Types::RejectedEntityInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsResponse AWS API Documentation
@@ -4431,10 +4675,43 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Reserved for future use.
+    # A structure that represents a valid record field header and whether it
+    # is mandatory.
+    #
+    # @!attribute [rw] name
+    #   The name to use when specifying this record field in a
+    #   [CreateDelivery][1] or [UpdateDeliveryConfiguration][2] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
+    #   @return [String]
+    #
+    # @!attribute [rw] mandatory
+    #   If this is `true`, the record field must be present in the
+    #   `recordFields` parameter provided to a [CreateDelivery][1] or
+    #   [UpdateDeliveryConfiguration][2] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/RecordField AWS API Documentation
+    #
+    class RecordField < Struct.new(
+      :name,
+      :mandatory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reserved for internal use.
     #
     # @!attribute [rw] error_type
-    #   Reserved for future use.
+    #   Reserved for internal use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/RejectedEntityInfo AWS API Documentation
@@ -4532,6 +4809,31 @@ module Aws::CloudWatchLogs
     class ResultField < Struct.new(
       :field,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains delivery configurations that apply only when
+    # the delivery destination resource is an S3 bucket.
+    #
+    # @!attribute [rw] suffix_path
+    #   This string allows re-configuring the S3 object prefix to contain
+    #   either static or variable sections. The valid variables to use in
+    #   the suffix path will vary by each log source. See
+    #   ConfigurationTemplate$allowedSuffixPathFields for more info on what
+    #   values are supported in the suffix path for each log source.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_hive_compatible_path
+    #   This parameter causes the S3 objects that contain delivered logs to
+    #   use a prefix structure that allows for integration with Apache Hive.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/S3DeliveryConfiguration AWS API Documentation
+    #
+    class S3DeliveryConfiguration < Struct.new(
+      :suffix_path,
+      :enable_hive_compatible_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5068,6 +5370,41 @@ module Aws::CloudWatchLogs
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] id
+    #   The ID of the delivery to be updated by this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_fields
+    #   The list of record fields to be delivered to the destination, in
+    #   order. If the delivery’s log source has mandatory fields, they must
+    #   be included in this list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_delimiter
+    #   The field delimiter to use between record fields when the final
+    #   output format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_delivery_configuration
+    #   This structure contains parameters that are valid only when the
+    #   delivery’s delivery destination is an S3 bucket.
+    #   @return [Types::S3DeliveryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateDeliveryConfigurationRequest AWS API Documentation
+    #
+    class UpdateDeliveryConfigurationRequest < Struct.new(
+      :id,
+      :record_fields,
+      :field_delimiter,
+      :s3_delivery_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateDeliveryConfigurationResponse AWS API Documentation
+    #
+    class UpdateDeliveryConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] anomaly_detector_arn
     #   The ARN of the anomaly detector that you want to update.

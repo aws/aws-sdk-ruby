@@ -657,6 +657,19 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :delivery_destination_arn
     #   The ARN of the delivery destination to use for this delivery.
     #
+    # @option params [Array<String>] :record_fields
+    #   The list of record fields to be delivered to the destination, in
+    #   order. If the delivery’s log source has mandatory fields, they must be
+    #   included in this list.
+    #
+    # @option params [String] :field_delimiter
+    #   The field delimiter to use between record fields when the final output
+    #   format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+    #
+    # @option params [Types::S3DeliveryConfiguration] :s3_delivery_configuration
+    #   This structure contains parameters that are valid only when the
+    #   delivery’s delivery destination is an S3 bucket.
+    #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
     #
@@ -676,6 +689,12 @@ module Aws::CloudWatchLogs
     #   resp = client.create_delivery({
     #     delivery_source_name: "DeliverySourceName", # required
     #     delivery_destination_arn: "Arn", # required
+    #     record_fields: ["FieldHeader"],
+    #     field_delimiter: "FieldDelimiter",
+    #     s3_delivery_configuration: {
+    #       suffix_path: "DeliverySuffixPath",
+    #       enable_hive_compatible_path: false,
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -688,6 +707,11 @@ module Aws::CloudWatchLogs
     #   resp.delivery.delivery_source_name #=> String
     #   resp.delivery.delivery_destination_arn #=> String
     #   resp.delivery.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery.record_fields #=> Array
+    #   resp.delivery.record_fields[0] #=> String
+    #   resp.delivery.field_delimiter #=> String
+    #   resp.delivery.s3_delivery_configuration.suffix_path #=> String
+    #   resp.delivery.s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
     #   resp.delivery.tags #=> Hash
     #   resp.delivery.tags["TagKey"] #=> String
     #
@@ -1564,6 +1588,94 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Use this operation to return the valid and default values that are
+    # used when creating delivery sources, delivery destinations, and
+    # deliveries. For more information about deliveries, see
+    # [CreateDelivery][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #
+    # @option params [String] :service
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the Amazon Web Services service
+    #   that you specify here.
+    #
+    # @option params [Array<String>] :log_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the log types that you specify
+    #   here.
+    #
+    # @option params [Array<String>] :resource_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the resource types that you
+    #   specify here.
+    #
+    # @option params [Array<String>] :delivery_destination_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the delivery destination types
+    #   that you specify here.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   Use this parameter to limit the number of configuration templates that
+    #   are returned in the response.
+    #
+    # @return [Types::DescribeConfigurationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConfigurationTemplatesResponse#configuration_templates #configuration_templates} => Array&lt;Types::ConfigurationTemplate&gt;
+    #   * {Types::DescribeConfigurationTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_configuration_templates({
+    #     service: "Service",
+    #     log_types: ["LogType"],
+    #     resource_types: ["ResourceType"],
+    #     delivery_destination_types: ["S3"], # accepts S3, CWL, FH
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_templates #=> Array
+    #   resp.configuration_templates[0].service #=> String
+    #   resp.configuration_templates[0].log_type #=> String
+    #   resp.configuration_templates[0].resource_type #=> String
+    #   resp.configuration_templates[0].delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.configuration_templates[0].default_delivery_config_values.record_fields #=> Array
+    #   resp.configuration_templates[0].default_delivery_config_values.record_fields[0] #=> String
+    #   resp.configuration_templates[0].default_delivery_config_values.field_delimiter #=> String
+    #   resp.configuration_templates[0].default_delivery_config_values.s3_delivery_configuration.suffix_path #=> String
+    #   resp.configuration_templates[0].default_delivery_config_values.s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
+    #   resp.configuration_templates[0].allowed_fields #=> Array
+    #   resp.configuration_templates[0].allowed_fields[0].name #=> String
+    #   resp.configuration_templates[0].allowed_fields[0].mandatory #=> Boolean
+    #   resp.configuration_templates[0].allowed_output_formats #=> Array
+    #   resp.configuration_templates[0].allowed_output_formats[0] #=> String, one of "json", "plain", "w3c", "raw", "parquet"
+    #   resp.configuration_templates[0].allowed_action_for_allow_vended_logs_delivery_for_resource #=> String
+    #   resp.configuration_templates[0].allowed_field_delimiters #=> Array
+    #   resp.configuration_templates[0].allowed_field_delimiters[0] #=> String
+    #   resp.configuration_templates[0].allowed_suffix_path_fields #=> Array
+    #   resp.configuration_templates[0].allowed_suffix_path_fields[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeConfigurationTemplates AWS API Documentation
+    #
+    # @overload describe_configuration_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_configuration_templates(params = {}, options = {})
+      req = build_request(:describe_configuration_templates, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of the deliveries that have been created in the
     # account.
     #
@@ -1612,6 +1724,11 @@ module Aws::CloudWatchLogs
     #   resp.deliveries[0].delivery_source_name #=> String
     #   resp.deliveries[0].delivery_destination_arn #=> String
     #   resp.deliveries[0].delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.deliveries[0].record_fields #=> Array
+    #   resp.deliveries[0].record_fields[0] #=> String
+    #   resp.deliveries[0].field_delimiter #=> String
+    #   resp.deliveries[0].s3_delivery_configuration.suffix_path #=> String
+    #   resp.deliveries[0].s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
     #   resp.deliveries[0].tags #=> Hash
     #   resp.deliveries[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -2652,6 +2769,11 @@ module Aws::CloudWatchLogs
     #   resp.delivery.delivery_source_name #=> String
     #   resp.delivery.delivery_destination_arn #=> String
     #   resp.delivery.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery.record_fields #=> Array
+    #   resp.delivery.record_fields[0] #=> String
+    #   resp.delivery.field_delimiter #=> String
+    #   resp.delivery.s3_delivery_configuration.suffix_path #=> String
+    #   resp.delivery.s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
     #   resp.delivery.tags #=> Hash
     #   resp.delivery.tags["TagKey"] #=> String
     #
@@ -4156,7 +4278,7 @@ module Aws::CloudWatchLogs
     #   if the sequence token is not valid.
     #
     # @option params [Types::Entity] :entity
-    #   Reserved for future use.
+    #   Reserved for internal use.
     #
     # @return [Types::PutLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5363,6 +5485,54 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Use this operation to update the configuration of a [delivery][1] to
+    # change either the S3 path pattern or the format of the delivered logs.
+    # You can't use this operation to change the source or destination of
+    # the delivery.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Delivery.html
+    #
+    # @option params [required, String] :id
+    #   The ID of the delivery to be updated by this request.
+    #
+    # @option params [Array<String>] :record_fields
+    #   The list of record fields to be delivered to the destination, in
+    #   order. If the delivery’s log source has mandatory fields, they must be
+    #   included in this list.
+    #
+    # @option params [String] :field_delimiter
+    #   The field delimiter to use between record fields when the final output
+    #   format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+    #
+    # @option params [Types::S3DeliveryConfiguration] :s3_delivery_configuration
+    #   This structure contains parameters that are valid only when the
+    #   delivery’s delivery destination is an S3 bucket.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_delivery_configuration({
+    #     id: "DeliveryId", # required
+    #     record_fields: ["FieldHeader"],
+    #     field_delimiter: "FieldDelimiter",
+    #     s3_delivery_configuration: {
+    #       suffix_path: "DeliverySuffixPath",
+    #       enable_hive_compatible_path: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateDeliveryConfiguration AWS API Documentation
+    #
+    # @overload update_delivery_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_delivery_configuration(params = {}, options = {})
+      req = build_request(:update_delivery_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates an existing log anomaly detector.
     #
     # @option params [required, String] :anomaly_detector_arn
@@ -5431,7 +5601,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

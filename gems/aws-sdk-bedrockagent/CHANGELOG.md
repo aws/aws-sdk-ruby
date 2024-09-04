@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2024-09-04)
+------------------
+
+* Feature - Add support for user metadata inside PromptVariant.
+
 1.21.0 (2024-09-03)
 ------------------
 

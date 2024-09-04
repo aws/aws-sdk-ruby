@@ -5545,8 +5545,13 @@ module Aws::BedrockAgent
     #
     # * Anthropic Claude 3 Haiku - `anthropic.claude-3-haiku-20240307-v1:0`
     #
-    # You can get the ARN of a model with the action. Standard model usage
-    # charges apply for the foundation model parsing strategy.
+    # You can get the ARN of a model with the [ListFoundationModels][1]
+    # action. Standard model usage charges apply for the foundation model
+    # parsing strategy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html
     #
     # @!attribute [rw] bedrock_foundation_model_configuration
     #   Settings for a foundation model used to parse documents for a data
@@ -5982,6 +5987,31 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Contains a key-value pair that defines a metadata tag and value to
+    # attach to a prompt variant. For more information, see [Create a prompt
+    # using Prompt management][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #
+    # @!attribute [rw] key
+    #   The key of a metadata tag for a prompt variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a metadata tag for a prompt variant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/PromptMetadataEntry AWS API Documentation
+    #
+    class PromptMetadataEntry < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = [:key, :value]
+      include Aws::Structure
+    end
+
     # Contains inference configurations related to model inference for a
     # prompt. For more information, see [Inference parameters][1].
     #
@@ -6153,6 +6183,16 @@ module Aws::BedrockAgent
     #   Contains inference configurations for the prompt variant.
     #   @return [Types::PromptInferenceConfiguration]
     #
+    # @!attribute [rw] metadata
+    #   An array of objects, each containing a key-value pair that defines a
+    #   metadata tag and value to attach to a prompt variant. For more
+    #   information, see [Create a prompt using Prompt management][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+    #   @return [Array<Types::PromptMetadataEntry>]
+    #
     # @!attribute [rw] model_id
     #   The unique identifier of the model with which to run inference on
     #   the prompt.
@@ -6174,11 +6214,12 @@ module Aws::BedrockAgent
     #
     class PromptVariant < Struct.new(
       :inference_configuration,
+      :metadata,
       :model_id,
       :name,
       :template_configuration,
       :template_type)
-      SENSITIVE = []
+      SENSITIVE = [:metadata]
       include Aws::Structure
     end
 

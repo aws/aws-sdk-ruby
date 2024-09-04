@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-09-04)
+------------------
+
+* Feature - Adds new logging levels (INFO and DEBUG) for additional log output control
+
 1.83.0 (2024-09-03)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2024-09-04)
+------------------
+
+* Feature - Updates Finspace documentation for smaller instances.
+
 1.39.0 (2024-09-03)
 ------------------
 

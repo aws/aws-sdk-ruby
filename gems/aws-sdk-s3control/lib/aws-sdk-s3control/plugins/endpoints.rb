@@ -188,6 +188,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::ListAccessPoints.build(context)
           when :list_access_points_for_object_lambda
             Aws::S3Control::Endpoints::ListAccessPointsForObjectLambda.build(context)
+          when :list_caller_access_grants
+            Aws::S3Control::Endpoints::ListCallerAccessGrants.build(context)
           when :list_jobs
             Aws::S3Control::Endpoints::ListJobs.build(context)
           when :list_multi_region_access_points
