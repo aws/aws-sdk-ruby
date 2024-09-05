@@ -18,6 +18,7 @@ module AwsSdkCodeGenerator
           paginators: options.fetch(:paginators)
         )
         @custom = options.fetch(:custom)
+        @name = @module_name.split('::').last.downcase
       end
 
       # @return [String]
@@ -51,6 +52,16 @@ module AwsSdkCodeGenerator
       # @return [Boolean]
       def documentation?
         actions? || associations?
+      end
+
+      # @return [Boolean]
+      def customization_file_exists?
+        File.exist?("gems/aws-sdk-#{@name}/lib/aws-sdk-#{@name}/customizations/resource.rb")
+      end
+
+      # @return [String]
+      def customization_file_path
+        "aws-sdk-#{@name}/customizations/resource"
       end
 
     end

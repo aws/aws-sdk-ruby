@@ -23,10 +23,27 @@ module AwsSdkCodeGenerator
         GENERATED_SRC_WARNING
       end
 
+      # @return [String]
       def module_name
         @service.module_name
       end
 
+      # @return [Boolean]
+      def customization_file_exists?
+        File.exist?("gems/aws-sdk-#{gem_name}/lib/aws-sdk-#{gem_name}/customizations/errors.rb")
+      end
+
+      # @return [String]
+      def customization_file_path
+        "aws-sdk-#{gem_name}/customizations/errors"
+      end
+
+      private
+
+      # @return [String]
+      def gem_name
+        module_name.split('::').last.downcase
+      end
     end
   end
 end
