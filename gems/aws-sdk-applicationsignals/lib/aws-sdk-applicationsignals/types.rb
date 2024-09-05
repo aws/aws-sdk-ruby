@@ -125,14 +125,24 @@ module Aws::ApplicationSignals
     #   @return [String]
     #
     # @!attribute [rw] sli_config
-    #   A structure that contains information about what service and what
-    #   performance metric that this SLO will monitor.
+    #   If this SLO is a period-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
+    #
+    #   You can't specify both `RequestBasedSliConfig` and `SliConfig` in
+    #   the same operation.
     #   @return [Types::ServiceLevelIndicatorConfig]
     #
+    # @!attribute [rw] request_based_sli_config
+    #   If this SLO is a request-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
+    #
+    #   You can't specify both `RequestBasedSliConfig` and `SliConfig` in
+    #   the same operation.
+    #   @return [Types::RequestBasedServiceLevelIndicatorConfig]
+    #
     # @!attribute [rw] goal
-    #   A structure that contains the attributes that determine the goal of
-    #   the SLO. This includes the time period for evaluation and the
-    #   attainment threshold.
+    #   This structure contains the attributes that determine the goal of
+    #   the SLO.
     #   @return [Types::Goal]
     #
     # @!attribute [rw] tags
@@ -153,6 +163,7 @@ module Aws::ApplicationSignals
       :name,
       :description,
       :sli_config,
+      :request_based_sli_config,
       :goal,
       :tags)
       SENSITIVE = []
@@ -360,12 +371,17 @@ module Aws::ApplicationSignals
     #   @return [Types::Interval]
     #
     # @!attribute [rw] attainment_goal
-    #   The threshold that determines if the goal is being met. An
-    #   *attainment goal* is the ratio of good periods that meet the
-    #   threshold requirements to the total periods within the interval. For
-    #   example, an attainment goal of 99.9% means that within your
-    #   interval, you are targeting 99.9% of the periods to be in healthy
-    #   state.
+    #   The threshold that determines if the goal is being met.
+    #
+    #   If this is a period-based SLO, the attainment goal is the percentage
+    #   of good periods that meet the threshold requirements to the total
+    #   periods within the interval. For example, an attainment goal of
+    #   99.9% means that within your interval, you are targeting 99.9% of
+    #   the periods to be in healthy state.
+    #
+    #   If this is a request-based SLO, the attainment goal is the
+    #   percentage of requests that must be successful to meet the
+    #   attainment goal.
     #
     #   If you omit this parameter, 99 is used to represent 99% as the
     #   attainment goal.
@@ -1063,7 +1079,7 @@ module Aws::ApplicationSignals
     #
     # @!attribute [rw] account_id
     #   The ID of the account where this metric is located. If you are
-    #   performing this operatiion in a monitoring account, use this to
+    #   performing this operation in a monitoring account, use this to
     #   specify which source account to retrieve this metric from.
     #   @return [String]
     #
@@ -1171,6 +1187,233 @@ module Aws::ApplicationSignals
       include Aws::Structure
     end
 
+    # This structure defines the metric that is used as the "good request"
+    # or "bad request" value for a request-based SLO. This value observed
+    # for the metric defined in `TotalRequestCountMetric` is divided by the
+    # number found for `MonitoredRequestCountMetric` to determine the
+    # percentage of successful requests that this SLO tracks.
+    #
+    # @note MonitoredRequestCountMetricDataQueries is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MonitoredRequestCountMetricDataQueries is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MonitoredRequestCountMetricDataQueries corresponding to the set member.
+    #
+    # @!attribute [rw] good_count_metric
+    #   If you want to count "good requests" to determine the percentage
+    #   of successful requests for this request-based SLO, specify the
+    #   metric to use as "good requests" in this structure.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @!attribute [rw] bad_count_metric
+    #   If you want to count "bad requests" to determine the percentage of
+    #   successful requests for this request-based SLO, specify the metric
+    #   to use as "bad requests" in this structure.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/MonitoredRequestCountMetricDataQueries AWS API Documentation
+    #
+    class MonitoredRequestCountMetricDataQueries < Struct.new(
+      :good_count_metric,
+      :bad_count_metric,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GoodCountMetric < MonitoredRequestCountMetricDataQueries; end
+      class BadCountMetric < MonitoredRequestCountMetricDataQueries; end
+      class Unknown < MonitoredRequestCountMetricDataQueries; end
+    end
+
+    # This structure contains information about the performance metric that
+    # a request-based SLO monitors.
+    #
+    # @!attribute [rw] request_based_sli_metric
+    #   A structure that contains information about the metric that the SLO
+    #   monitors.
+    #   @return [Types::RequestBasedServiceLevelIndicatorMetric]
+    #
+    # @!attribute [rw] metric_threshold
+    #   This value is the threshold that the observed metric values of the
+    #   SLI metric are compared to.
+    #   @return [Float]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The arithmetic operation used when comparing the specified metric to
+    #   the threshold.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/RequestBasedServiceLevelIndicator AWS API Documentation
+    #
+    class RequestBasedServiceLevelIndicator < Struct.new(
+      :request_based_sli_metric,
+      :metric_threshold,
+      :comparison_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure specifies the information about the service and the
+    # performance metric that a request-based SLO is to monitor.
+    #
+    # @!attribute [rw] request_based_sli_metric_config
+    #   Use this structure to specify the metric to be used for the SLO.
+    #   @return [Types::RequestBasedServiceLevelIndicatorMetricConfig]
+    #
+    # @!attribute [rw] metric_threshold
+    #   The value that the SLI metric is compared to. This parameter is
+    #   required if this SLO is tracking the `Latency` metric.
+    #   @return [Float]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The arithmetic operation to use when comparing the specified metric
+    #   to the threshold. This parameter is required if this SLO is tracking
+    #   the `Latency` metric.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/RequestBasedServiceLevelIndicatorConfig AWS API Documentation
+    #
+    class RequestBasedServiceLevelIndicatorConfig < Struct.new(
+      :request_based_sli_metric_config,
+      :metric_threshold,
+      :comparison_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains the information about the metric that is used
+    # for a request-based SLO.
+    #
+    # @!attribute [rw] key_attributes
+    #   This is a string-to-string map that contains information about the
+    #   type of object that this SLO is related to. It can include the
+    #   following fields.
+    #
+    #   * `Type` designates the type of object that this SLO is related to.
+    #
+    #   * `ResourceType` specifies the type of the resource. This field is
+    #     used only when the value of the `Type` field is `Resource` or
+    #     `AWS::Resource`.
+    #
+    #   * `Name` specifies the name of the object. This is used only if the
+    #     value of the `Type` field is `Service`, `RemoteService`, or
+    #     `AWS::Service`.
+    #
+    #   * `Identifier` identifies the resource objects of this resource.
+    #     This is used only if the value of the `Type` field is `Resource`
+    #     or `AWS::Resource`.
+    #
+    #   * `Environment` specifies the location where this object is hosted,
+    #     or what it belongs to.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] operation_name
+    #   If the SLO monitors a specific operation of the service, this field
+    #   displays that operation name.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_type
+    #   If the SLO monitors either the `LATENCY` or `AVAILABILITY` metric
+    #   that Application Signals collects, this field displays which of
+    #   those metrics is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_request_count_metric
+    #   This structure defines the metric that is used as the "total
+    #   requests" number for a request-based SLO. The number observed for
+    #   this metric is divided by the number of "good requests" or "bad
+    #   requests" that is observed for the metric defined in
+    #   `MonitoredRequestCountMetric`.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @!attribute [rw] monitored_request_count_metric
+    #   This structure defines the metric that is used as the "good
+    #   request" or "bad request" value for a request-based SLO. This
+    #   value observed for the metric defined in `TotalRequestCountMetric`
+    #   is divided by the number found for `MonitoredRequestCountMetric` to
+    #   determine the percentage of successful requests that this SLO
+    #   tracks.
+    #   @return [Types::MonitoredRequestCountMetricDataQueries]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/RequestBasedServiceLevelIndicatorMetric AWS API Documentation
+    #
+    class RequestBasedServiceLevelIndicatorMetric < Struct.new(
+      :key_attributes,
+      :operation_name,
+      :metric_type,
+      :total_request_count_metric,
+      :monitored_request_count_metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use this structure to specify the information for the metric that a
+    # period-based SLO will monitor.
+    #
+    # @!attribute [rw] key_attributes
+    #   If this SLO is related to a metric collected by Application Signals,
+    #   you must use this field to specify which service the SLO metric is
+    #   related to. To do so, you must specify at least the `Type`, `Name`,
+    #   and `Environment` attributes.
+    #
+    #   This is a string-to-string map. It can include the following fields.
+    #
+    #   * `Type` designates the type of object this is.
+    #
+    #   * `ResourceType` specifies the type of the resource. This field is
+    #     used only when the value of the `Type` field is `Resource` or
+    #     `AWS::Resource`.
+    #
+    #   * `Name` specifies the name of the object. This is used only if the
+    #     value of the `Type` field is `Service`, `RemoteService`, or
+    #     `AWS::Service`.
+    #
+    #   * `Identifier` identifies the resource objects of this resource.
+    #     This is used only if the value of the `Type` field is `Resource`
+    #     or `AWS::Resource`.
+    #
+    #   * `Environment` specifies the location where this object is hosted,
+    #     or what it belongs to.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] operation_name
+    #   If the SLO is to monitor a specific operation of the service, use
+    #   this field to specify the name of that operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_type
+    #   If the SLO is to monitor either the `LATENCY` or `AVAILABILITY`
+    #   metric that Application Signals collects, use this field to specify
+    #   which of those metrics is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_request_count_metric
+    #   Use this structure to define the metric that you want to use as the
+    #   "total requests" number for a request-based SLO. This result will
+    #   be divided by the "good request" or "bad request" value defined
+    #   in `MonitoredRequestCountMetric`.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @!attribute [rw] monitored_request_count_metric
+    #   Use this structure to define the metric that you want to use as the
+    #   "good request" or "bad request" value for a request-based SLO.
+    #   This value observed for the metric defined in
+    #   `TotalRequestCountMetric` will be divided by the number found for
+    #   `MonitoredRequestCountMetric` to determine the percentage of
+    #   successful requests that this SLO tracks.
+    #   @return [Types::MonitoredRequestCountMetricDataQueries]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/RequestBasedServiceLevelIndicatorMetricConfig AWS API Documentation
+    #
+    class RequestBasedServiceLevelIndicatorMetricConfig < Struct.new(
+      :key_attributes,
+      :operation_name,
+      :metric_type,
+      :total_request_count_metric,
+      :monitored_request_count_metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Resource not found.
     #
     # @!attribute [rw] resource_type
@@ -1272,7 +1515,7 @@ module Aws::ApplicationSignals
     #
     #   * `Host` is the name of the host, for all platform types.
     #
-    #   Applciation attributes contain information about the application.
+    #   Application attributes contain information about the application.
     #
     #   * `AWS.Application` is the application's name in Amazon Web
     #     Services Service Catalog AppRegistry.
@@ -1425,7 +1668,7 @@ module Aws::ApplicationSignals
     end
 
     # This structure contains information about the performance metric that
-    # an SLO monitors.
+    # a period-based SLO monitors.
     #
     # @!attribute [rw] sli_metric
     #   A structure that contains information about the metric that the SLO
@@ -1452,14 +1695,16 @@ module Aws::ApplicationSignals
     end
 
     # This structure specifies the information about the service and the
-    # performance metric that an SLO is to monitor.
+    # performance metric that a period-based SLO is to monitor.
     #
     # @!attribute [rw] sli_metric_config
     #   Use this structure to specify the metric to be used for the SLO.
     #   @return [Types::ServiceLevelIndicatorMetricConfig]
     #
     # @!attribute [rw] metric_threshold
-    #   The value that the SLI metric is compared to.
+    #   This parameter is used only when a request-based SLO tracks the
+    #   `Latency` metric. Specify the threshold value that the observed
+    #   `Latency` metric values are to be compared to.
     #   @return [Float]
     #
     # @!attribute [rw] comparison_operator
@@ -1478,7 +1723,7 @@ module Aws::ApplicationSignals
     end
 
     # This structure contains the information about the metric that is used
-    # for the SLO.
+    # for a period-based SLO.
     #
     # @!attribute [rw] key_attributes
     #   This is a string-to-string map that contains information about the
@@ -1531,8 +1776,8 @@ module Aws::ApplicationSignals
       include Aws::Structure
     end
 
-    # Use this structure to specify the information for the metric that the
-    # SLO will monitor.
+    # Use this structure to specify the information for the metric that a
+    # period-based SLO will monitor.
     #
     # @!attribute [rw] key_attributes
     #   If this SLO is related to a metric collected by Application Signals,
@@ -1642,8 +1887,17 @@ module Aws::ApplicationSignals
     #
     # @!attribute [rw] sli
     #   A structure containing information about the performance metric that
-    #   this SLO monitors.
+    #   this SLO monitors, if this is a period-based SLO.
     #   @return [Types::ServiceLevelIndicator]
+    #
+    # @!attribute [rw] request_based_sli
+    #   A structure containing information about the performance metric that
+    #   this SLO monitors, if this is a request-based SLO.
+    #   @return [Types::RequestBasedServiceLevelIndicator]
+    #
+    # @!attribute [rw] evaluation_type
+    #   Displays whether this is a period-based SLO or a request-based SLO.
+    #   @return [String]
     #
     # @!attribute [rw] goal
     #   This structure contains the attributes that determine the goal of an
@@ -1660,6 +1914,8 @@ module Aws::ApplicationSignals
       :created_time,
       :last_updated_time,
       :sli,
+      :request_based_sli,
+      :evaluation_type,
       :goal)
       SENSITIVE = []
       include Aws::Structure
@@ -1673,6 +1929,11 @@ module Aws::ApplicationSignals
     #
     # @!attribute [rw] name
     #   The name of the SLO that this report is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_type
+    #   Displays whether this budget report is for a period-based SLO or a
+    #   request-based SLO.
     #   @return [String]
     #
     # @!attribute [rw] budget_status
@@ -1689,19 +1950,28 @@ module Aws::ApplicationSignals
     #   * `BREACHED` means that the SLO's budget was exhausted, as of the
     #     time that you specified in `TimeStamp`.
     #
-    #   * `INSUFFICIENT_DATA` means that the specifed start and end times
+    #   * `INSUFFICIENT_DATA` means that the specified start and end times
     #     were before the SLO was created, or that attainment data is
     #     missing.
     #   @return [String]
     #
     # @!attribute [rw] attainment
-    #   A number between 0 and 100 that represents the percentage of time
+    #   A number between 0 and 100 that represents the success percentage of
+    #   your application compared to the goal set by the SLO.
+    #
+    #   If this is a period-based SLO, the number is the percentage of time
     #   periods that the service has attained the SLO's attainment goal, as
     #   of the time of the request.
+    #
+    #   If this is a request-based SLO, the number is the number of
+    #   successful requests divided by the number of total requests,
+    #   multiplied by 100, during the time range that you specified in your
+    #   request.
     #   @return [Float]
     #
     # @!attribute [rw] total_budget_seconds
     #   The total number of seconds in the error budget for the interval.
+    #   This field is included only if the SLO is a period-based SLO.
     #   @return [Integer]
     #
     # @!attribute [rw] budget_seconds_remaining
@@ -1709,12 +1979,43 @@ module Aws::ApplicationSignals
     #   `BREACHING`, at the time specified in the `Timestemp` parameter of
     #   the request. If this value is negative, then the SLO is already in
     #   `BREACHING` status.
+    #
+    #   This field is included only if the SLO is a period-based SLO.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_budget_requests
+    #   This field is displayed only for request-based SLOs. It displays the
+    #   total number of failed requests that can be tolerated during the
+    #   time range between the start of the interval and the time stamp
+    #   supplied in the budget report request. It is based on the total
+    #   number of requests that occurred, and the percentage specified in
+    #   the attainment goal. If the number of failed requests matches this
+    #   number or is higher, then this SLO is currently breaching.
+    #
+    #   This number can go up and down between reports with different time
+    #   stamps, based on both how many total requests occur.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget_requests_remaining
+    #   This field is displayed only for request-based SLOs. It displays the
+    #   number of failed requests that can be tolerated before any more
+    #   successful requests occur, and still have the application meet its
+    #   SLO goal.
+    #
+    #   This number can go up and down between different reports, based on
+    #   both how many successful requests and how many failed requests occur
+    #   in that time.
     #   @return [Integer]
     #
     # @!attribute [rw] sli
     #   A structure that contains information about the performance metric
     #   that this SLO monitors.
     #   @return [Types::ServiceLevelIndicator]
+    #
+    # @!attribute [rw] request_based_sli
+    #   This structure contains information about the performance metric
+    #   that a request-based SLO monitors.
+    #   @return [Types::RequestBasedServiceLevelIndicator]
     #
     # @!attribute [rw] goal
     #   This structure contains the attributes that determine the goal of an
@@ -1727,11 +2028,15 @@ module Aws::ApplicationSignals
     class ServiceLevelObjectiveBudgetReport < Struct.new(
       :arn,
       :name,
+      :evaluation_type,
       :budget_status,
       :attainment,
       :total_budget_seconds,
       :budget_seconds_remaining,
+      :total_budget_requests,
+      :budget_requests_remaining,
       :sli,
+      :request_based_sli,
       :goal)
       SENSITIVE = []
       include Aws::Structure
@@ -1865,7 +2170,7 @@ module Aws::ApplicationSignals
     end
 
     # This structure contains information about one of your services that
-    # was discoverd by Application Signals
+    # was discovered by Application Signals
     #
     # @!attribute [rw] key_attributes
     #   This is a string-to-string map that help identify the objects
@@ -1922,7 +2227,7 @@ module Aws::ApplicationSignals
     #
     #   * `Host` is the name of the host, for all platform types.
     #
-    #   Applciation attributes contain information about the application.
+    #   Application attributes contain information about the application.
     #
     #   * `AWS.Application` is the application's name in Amazon Web
     #     Services Service Catalog AppRegistry.
@@ -2078,9 +2383,17 @@ module Aws::ApplicationSignals
     #   @return [String]
     #
     # @!attribute [rw] sli_config
-    #   A structure that contains information about what performance metric
-    #   this SLO will monitor.
+    #   If this SLO is a period-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
     #   @return [Types::ServiceLevelIndicatorConfig]
+    #
+    # @!attribute [rw] request_based_sli_config
+    #   If this SLO is a request-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
+    #
+    #   You can't specify both `SliConfig` and `RequestBasedSliConfig` in
+    #   the same operation.
+    #   @return [Types::RequestBasedServiceLevelIndicatorConfig]
     #
     # @!attribute [rw] goal
     #   A structure that contains the attributes that determine the goal of
@@ -2094,6 +2407,7 @@ module Aws::ApplicationSignals
       :id,
       :description,
       :sli_config,
+      :request_based_sli_config,
       :goal)
       SENSITIVE = []
       include Aws::Structure

@@ -1396,6 +1396,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Settings that are used to configure and manage the lifecycle of Amazon
+    # SageMaker Studio applications.
+    #
+    # @!attribute [rw] idle_settings
+    #   Settings related to idle shutdown of Studio applications.
+    #   @return [Types::IdleSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AppLifecycleManagement AWS API Documentation
+    #
+    class AppLifecycleManagement < Struct.new(
+      :idle_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration to run a processing job in a specified container image.
     #
     # @!attribute [rw] image_uri
@@ -4496,12 +4511,18 @@ module Aws::SageMaker
     #   lifecycle configuration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] app_lifecycle_management
+    #   Settings that are used to configure and manage the lifecycle of
+    #   CodeEditor applications.
+    #   @return [Types::AppLifecycleManagement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeEditorAppSettings AWS API Documentation
     #
     class CodeEditorAppSettings < Struct.new(
       :default_resource_spec,
       :custom_images,
-      :lifecycle_config_arns)
+      :lifecycle_config_arns,
+      :app_lifecycle_management)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23723,6 +23744,39 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Settings related to idle shutdown of Studio applications.
+    #
+    # @!attribute [rw] lifecycle_management
+    #   Indicates whether idle shutdown is activated for the application
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] idle_timeout_in_minutes
+    #   The time that SageMaker waits after the application becomes idle
+    #   before shutting it down.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_idle_timeout_in_minutes
+    #   The minimum value in minutes that custom idle shutdown can be set to
+    #   by the user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_idle_timeout_in_minutes
+    #   The maximum value in minutes that custom idle shutdown can be set to
+    #   by the user.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IdleSettings AWS API Documentation
+    #
+    class IdleSettings < Struct.new(
+      :lifecycle_management,
+      :idle_timeout_in_minutes,
+      :min_idle_timeout_in_minutes,
+      :max_idle_timeout_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A SageMaker image. A SageMaker image represents a set of container
     # images that are derived from a common base container image. Each of
     # these container images is represented by a SageMaker `ImageVersion`.
@@ -25021,6 +25075,11 @@ module Aws::SageMaker
     #   users for cloning in the JupyterLab application.
     #   @return [Array<Types::CodeRepository>]
     #
+    # @!attribute [rw] app_lifecycle_management
+    #   Indicates whether idle shutdown is activated for JupyterLab
+    #   applications.
+    #   @return [Types::AppLifecycleManagement]
+    #
     # @!attribute [rw] emr_settings
     #   The configuration parameters that specify the IAM roles assumed by
     #   the execution role of SageMaker (assumable roles) and the cluster
@@ -25036,6 +25095,7 @@ module Aws::SageMaker
       :custom_images,
       :lifecycle_config_arns,
       :code_repositories,
+      :app_lifecycle_management,
       :emr_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -40913,6 +40973,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Settings that are used to configure and manage the lifecycle of Amazon
+    # SageMaker Studio applications in a space.
+    #
+    # @!attribute [rw] idle_settings
+    #   Settings related to idle shutdown of Studio applications.
+    #   @return [Types::SpaceIdleSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceAppLifecycleManagement AWS API Documentation
+    #
+    class SpaceAppLifecycleManagement < Struct.new(
+      :idle_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The application settings for a Code Editor space.
     #
     # @!attribute [rw] default_resource_spec
@@ -40920,10 +40995,16 @@ module Aws::SageMaker
     #   version, and the instance type that the version runs on.
     #   @return [Types::ResourceSpec]
     #
+    # @!attribute [rw] app_lifecycle_management
+    #   Settings that are used to configure and manage the lifecycle of
+    #   CodeEditor applications in a space.
+    #   @return [Types::SpaceAppLifecycleManagement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceCodeEditorAppSettings AWS API Documentation
     #
     class SpaceCodeEditorAppSettings < Struct.new(
-      :default_resource_spec)
+      :default_resource_spec,
+      :app_lifecycle_management)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40982,6 +41063,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Settings related to idle shutdown of Studio applications in a space.
+    #
+    # @!attribute [rw] idle_timeout_in_minutes
+    #   The time that SageMaker waits after the application becomes idle
+    #   before shutting it down.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceIdleSettings AWS API Documentation
+    #
+    class SpaceIdleSettings < Struct.new(
+      :idle_timeout_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings for the JupyterLab application within a space.
     #
     # @!attribute [rw] default_resource_spec
@@ -40994,11 +41090,17 @@ module Aws::SageMaker
     #   users for cloning in the JupyterLab application.
     #   @return [Array<Types::CodeRepository>]
     #
+    # @!attribute [rw] app_lifecycle_management
+    #   Settings that are used to configure and manage the lifecycle of
+    #   JupyterLab applications in a space.
+    #   @return [Types::SpaceAppLifecycleManagement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SpaceJupyterLabAppSettings AWS API Documentation
     #
     class SpaceJupyterLabAppSettings < Struct.new(
       :default_resource_spec,
-      :code_repositories)
+      :code_repositories,
+      :app_lifecycle_management)
       SENSITIVE = []
       include Aws::Structure
     end

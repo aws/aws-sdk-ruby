@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-09-05)
+------------------
+
+* Feature - Amazon GameLift provides additional events for tracking the fleet creation process.
+
 1.86.0 (2024-09-03)
 ------------------
 

@@ -440,12 +440,12 @@ module Aws::ApplicationSignals
     # Use this operation to retrieve one or more *service level objective
     # (SLO) budget reports*.
     #
-    # An *error budget* is the amount of time in unhealthy periods that your
-    # service can accumulate during an interval before your overall SLO
-    # budget health is breached and the SLO is considered to be unmet. For
-    # example, an SLO with a threshold of 99.95% and a monthly interval
-    # translates to an error budget of 21.9 minutes of downtime in a 30-day
-    # month.
+    # An *error budget* is the amount of time or requests in an unhealthy
+    # state that your service can accumulate during an interval before your
+    # overall SLO budget health is breached and the SLO is considered to be
+    # unmet. For example, an SLO with a threshold of 99.95% and a monthly
+    # interval translates to an error budget of 21.9 minutes of downtime in
+    # a 30-day month.
     #
     # Budget reports include a health indicator, the attainment value, and
     # remaining budget.
@@ -483,10 +483,13 @@ module Aws::ApplicationSignals
     #   resp.reports #=> Array
     #   resp.reports[0].arn #=> String
     #   resp.reports[0].name #=> String
+    #   resp.reports[0].evaluation_type #=> String, one of "PeriodBased", "RequestBased"
     #   resp.reports[0].budget_status #=> String, one of "OK", "WARNING", "BREACHED", "INSUFFICIENT_DATA"
     #   resp.reports[0].attainment #=> Float
     #   resp.reports[0].total_budget_seconds #=> Integer
     #   resp.reports[0].budget_seconds_remaining #=> Integer
+    #   resp.reports[0].total_budget_requests #=> Integer
+    #   resp.reports[0].budget_requests_remaining #=> Integer
     #   resp.reports[0].sli.sli_metric.key_attributes #=> Hash
     #   resp.reports[0].sli.sli_metric.key_attributes["KeyAttributeName"] #=> String
     #   resp.reports[0].sli.sli_metric.operation_name #=> String
@@ -508,10 +511,61 @@ module Aws::ApplicationSignals
     #   resp.reports[0].sli.sli_metric.metric_data_queries[0].account_id #=> String
     #   resp.reports[0].sli.metric_threshold #=> Float
     #   resp.reports[0].sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
-    #   resp.reports[0].goal.interval.rolling_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.key_attributes #=> Hash
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.key_attributes["KeyAttributeName"] #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.operation_name #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.metric_type #=> String, one of "LATENCY", "AVAILABILITY"
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric #=> Array
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].id #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.period #=> Integer
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.stat #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].expression #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].label #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].return_data #=> Boolean
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].period #=> Integer
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.total_request_count_metric[0].account_id #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric #=> Array
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].id #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.period #=> Integer
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.stat #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].expression #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].label #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].return_data #=> Boolean
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].period #=> Integer
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].account_id #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric #=> Array
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].id #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.period #=> Integer
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.stat #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].expression #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].label #=> String
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].return_data #=> Boolean
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].period #=> Integer
+    #   resp.reports[0].request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].account_id #=> String
+    #   resp.reports[0].request_based_sli.metric_threshold #=> Float
+    #   resp.reports[0].request_based_sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
+    #   resp.reports[0].goal.interval.rolling_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.reports[0].goal.interval.rolling_interval.duration #=> Integer
     #   resp.reports[0].goal.interval.calendar_interval.start_time #=> Time
-    #   resp.reports[0].goal.interval.calendar_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.reports[0].goal.interval.calendar_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.reports[0].goal.interval.calendar_interval.duration #=> Integer
     #   resp.reports[0].goal.attainment_goal #=> Float
     #   resp.reports[0].goal.warning_threshold #=> Float
@@ -541,21 +595,60 @@ module Aws::ApplicationSignals
     # availability or latency. CloudWatch measures this target frequently
     # you can find whether it has been breached.
     #
-    # When you create an SLO, you set an *attainment goal* for it. An
-    # *attainment goal* is the ratio of good periods that meet the threshold
-    # requirements to the total periods within the interval. For example, an
-    # attainment goal of 99.9% means that within your interval, you are
-    # targeting 99.9% of the periods to be in healthy state.
+    # The target performance quality that is defined for an SLO is the
+    # *attainment goal*.
+    #
+    # You can set SLO targets for your applications that are discovered by
+    # Application Signals, using critical metrics such as latency and
+    # availability. You can also set SLOs against any CloudWatch metric or
+    # math expression that produces a time series.
+    #
+    # When you create an SLO, you specify whether it is a *period-based SLO*
+    # or a *request-based SLO*. Each type of SLO has a different way of
+    # evaluating your application's performance against its attainment
+    # goal.
+    #
+    # * A *period-based SLO* uses defined *periods* of time within a
+    #   specified total time interval. For each period of time, Application
+    #   Signals determines whether the application met its goal. The
+    #   attainment rate is calculated as the `number of good periods/number
+    #   of total periods`.
+    #
+    #   For example, for a period-based SLO, meeting an attainment goal of
+    #   99.9% means that within your interval, your application must meet
+    #   its performance goal during at least 99.9% of the time periods.
+    #
+    # * A *request-based SLO* doesn't use pre-defined periods of time.
+    #   Instead, the SLO measures `number of good requests/number of total
+    #   requests` during the interval. At any time, you can find the ratio
+    #   of good requests to total requests for the interval up to the time
+    #   stamp that you specify, and measure that ratio against the goal set
+    #   in your SLO.
     #
     # After you have created an SLO, you can retrieve error budget reports
-    # for it. An *error budget* is the number of periods or amount of time
-    # that your service can accumulate during an interval before your
-    # overall SLO budget health is breached and the SLO is considered to be
-    # unmet. for example, an SLO with a threshold that 99.95% of requests
-    # must be completed under 2000ms every month translates to an error
-    # budget of 21.9 minutes of downtime per month.
+    # for it. An *error budget* is the amount of time or amount of requests
+    # that your application can be non-compliant with the SLO's goal, and
+    # still have your application meet the goal.
     #
-    # When you call this operation, Application Signals creates the
+    # * For a period-based SLO, the error budget starts at a number defined
+    #   by the highest number of periods that can fail to meet the
+    #   threshold, while still meeting the overall goal. The *remaining
+    #   error budget* decreases with every failed period that is recorded.
+    #   The error budget within one interval can never increase.
+    #
+    #   For example, an SLO with a threshold that 99.95% of requests must be
+    #   completed under 2000ms every month translates to an error budget of
+    #   21.9 minutes of downtime per month.
+    #
+    # * For a request-based SLO, the remaining error budget is dynamic and
+    #   can increase or decrease, depending on the ratio of good requests to
+    #   total requests.
+    #
+    # For more information about SLOs, see [ Service level objectives
+    # (SLOs)][1].
+    #
+    # When you perform a `CreateServiceLevelObjective` operation,
+    # Application Signals creates the
     # *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role,
     # if it doesn't already exist in your account. This service- linked
     # role has the following permissions:
@@ -574,14 +667,6 @@ module Aws::ApplicationSignals
     #
     # * `autoscaling:DescribeAutoScalingGroups`
     #
-    # You can easily set SLO targets for your applications that are
-    # discovered by Application Signals, using critical metrics such as
-    # latency and availability. You can also set SLOs against any CloudWatch
-    # metric or math expression that produces a time series.
-    #
-    # For more information about SLOs, see [ Service level objectives
-    # (SLOs)][1].
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html
@@ -592,14 +677,23 @@ module Aws::ApplicationSignals
     # @option params [String] :description
     #   An optional description for this SLO.
     #
-    # @option params [required, Types::ServiceLevelIndicatorConfig] :sli_config
-    #   A structure that contains information about what service and what
-    #   performance metric that this SLO will monitor.
+    # @option params [Types::ServiceLevelIndicatorConfig] :sli_config
+    #   If this SLO is a period-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
+    #
+    #   You can't specify both `RequestBasedSliConfig` and `SliConfig` in the
+    #   same operation.
+    #
+    # @option params [Types::RequestBasedServiceLevelIndicatorConfig] :request_based_sli_config
+    #   If this SLO is a request-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
+    #
+    #   You can't specify both `RequestBasedSliConfig` and `SliConfig` in the
+    #   same operation.
     #
     # @option params [Types::Goal] :goal
-    #   A structure that contains the attributes that determine the goal of
-    #   the SLO. This includes the time period for evaluation and the
-    #   attainment threshold.
+    #   This structure contains the attributes that determine the goal of the
+    #   SLO.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs to associate with the SLO. You can associate
@@ -620,7 +714,7 @@ module Aws::ApplicationSignals
     #   resp = client.create_service_level_objective({
     #     name: "ServiceLevelObjectiveName", # required
     #     description: "ServiceLevelObjectiveDescription",
-    #     sli_config: { # required
+    #     sli_config: {
     #       sli_metric_config: { # required
     #         key_attributes: {
     #           "KeyAttributeName" => "KeyAttributeValue",
@@ -658,15 +752,103 @@ module Aws::ApplicationSignals
     #       metric_threshold: 1.0, # required
     #       comparison_operator: "GreaterThanOrEqualTo", # required, accepts GreaterThanOrEqualTo, GreaterThan, LessThan, LessThanOrEqualTo
     #     },
+    #     request_based_sli_config: {
+    #       request_based_sli_metric_config: { # required
+    #         key_attributes: {
+    #           "KeyAttributeName" => "KeyAttributeValue",
+    #         },
+    #         operation_name: "OperationName",
+    #         metric_type: "LATENCY", # accepts LATENCY, AVAILABILITY
+    #         total_request_count_metric: [
+    #           {
+    #             id: "MetricId", # required
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "Namespace",
+    #                 metric_name: "MetricName",
+    #                 dimensions: [
+    #                   {
+    #                     name: "DimensionName", # required
+    #                     value: "DimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               period: 1, # required
+    #               stat: "Stat", # required
+    #               unit: "Microseconds", # accepts Microseconds, Milliseconds, Seconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #             },
+    #             expression: "MetricExpression",
+    #             label: "MetricLabel",
+    #             return_data: false,
+    #             period: 1,
+    #             account_id: "AccountId",
+    #           },
+    #         ],
+    #         monitored_request_count_metric: {
+    #           good_count_metric: [
+    #             {
+    #               id: "MetricId", # required
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "Namespace",
+    #                   metric_name: "MetricName",
+    #                   dimensions: [
+    #                     {
+    #                       name: "DimensionName", # required
+    #                       value: "DimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 period: 1, # required
+    #                 stat: "Stat", # required
+    #                 unit: "Microseconds", # accepts Microseconds, Milliseconds, Seconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #               },
+    #               expression: "MetricExpression",
+    #               label: "MetricLabel",
+    #               return_data: false,
+    #               period: 1,
+    #               account_id: "AccountId",
+    #             },
+    #           ],
+    #           bad_count_metric: [
+    #             {
+    #               id: "MetricId", # required
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "Namespace",
+    #                   metric_name: "MetricName",
+    #                   dimensions: [
+    #                     {
+    #                       name: "DimensionName", # required
+    #                       value: "DimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 period: 1, # required
+    #                 stat: "Stat", # required
+    #                 unit: "Microseconds", # accepts Microseconds, Milliseconds, Seconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #               },
+    #               expression: "MetricExpression",
+    #               label: "MetricLabel",
+    #               return_data: false,
+    #               period: 1,
+    #               account_id: "AccountId",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       metric_threshold: 1.0,
+    #       comparison_operator: "GreaterThanOrEqualTo", # accepts GreaterThanOrEqualTo, GreaterThan, LessThan, LessThanOrEqualTo
+    #     },
     #     goal: {
     #       interval: {
     #         rolling_interval: {
-    #           duration_unit: "DAY", # required, accepts DAY, MONTH
+    #           duration_unit: "MINUTE", # required, accepts MINUTE, HOUR, DAY, MONTH
     #           duration: 1, # required
     #         },
     #         calendar_interval: {
     #           start_time: Time.now, # required
-    #           duration_unit: "DAY", # required, accepts DAY, MONTH
+    #           duration_unit: "MINUTE", # required, accepts MINUTE, HOUR, DAY, MONTH
     #           duration: 1, # required
     #         },
     #       },
@@ -709,10 +891,62 @@ module Aws::ApplicationSignals
     #   resp.slo.sli.sli_metric.metric_data_queries[0].account_id #=> String
     #   resp.slo.sli.metric_threshold #=> Float
     #   resp.slo.sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
-    #   resp.slo.goal.interval.rolling_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.slo.request_based_sli.request_based_sli_metric.key_attributes #=> Hash
+    #   resp.slo.request_based_sli.request_based_sli_metric.key_attributes["KeyAttributeName"] #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.operation_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.metric_type #=> String, one of "LATENCY", "AVAILABILITY"
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.metric_threshold #=> Float
+    #   resp.slo.request_based_sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
+    #   resp.slo.evaluation_type #=> String, one of "PeriodBased", "RequestBased"
+    #   resp.slo.goal.interval.rolling_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.slo.goal.interval.rolling_interval.duration #=> Integer
     #   resp.slo.goal.interval.calendar_interval.start_time #=> Time
-    #   resp.slo.goal.interval.calendar_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.slo.goal.interval.calendar_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.slo.goal.interval.calendar_interval.duration #=> Integer
     #   resp.slo.goal.attainment_goal #=> Float
     #   resp.slo.goal.warning_threshold #=> Float
@@ -886,10 +1120,62 @@ module Aws::ApplicationSignals
     #   resp.slo.sli.sli_metric.metric_data_queries[0].account_id #=> String
     #   resp.slo.sli.metric_threshold #=> Float
     #   resp.slo.sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
-    #   resp.slo.goal.interval.rolling_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.slo.request_based_sli.request_based_sli_metric.key_attributes #=> Hash
+    #   resp.slo.request_based_sli.request_based_sli_metric.key_attributes["KeyAttributeName"] #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.operation_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.metric_type #=> String, one of "LATENCY", "AVAILABILITY"
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.metric_threshold #=> Float
+    #   resp.slo.request_based_sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
+    #   resp.slo.evaluation_type #=> String, one of "PeriodBased", "RequestBased"
+    #   resp.slo.goal.interval.rolling_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.slo.goal.interval.rolling_interval.duration #=> Integer
     #   resp.slo.goal.interval.calendar_interval.start_time #=> Time
-    #   resp.slo.goal.interval.calendar_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.slo.goal.interval.calendar_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.slo.goal.interval.calendar_interval.duration #=> Integer
     #   resp.slo.goal.attainment_goal #=> Float
     #   resp.slo.goal.warning_threshold #=> Float
@@ -1522,6 +1808,9 @@ module Aws::ApplicationSignals
     # Updates an existing service level objective (SLO). If you omit
     # parameters, the previous values of those parameters are retained.
     #
+    # You cannot change from a period-based SLO to a request-based SLO, or
+    # change from a request-based SLO to a period-based SLO.
+    #
     # @option params [required, String] :id
     #   The Amazon Resource Name (ARN) or name of the service level objective
     #   that you want to update.
@@ -1530,8 +1819,15 @@ module Aws::ApplicationSignals
     #   An optional description for the SLO.
     #
     # @option params [Types::ServiceLevelIndicatorConfig] :sli_config
-    #   A structure that contains information about what performance metric
-    #   this SLO will monitor.
+    #   If this SLO is a period-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
+    #
+    # @option params [Types::RequestBasedServiceLevelIndicatorConfig] :request_based_sli_config
+    #   If this SLO is a request-based SLO, this structure defines the
+    #   information about what performance metric this SLO will monitor.
+    #
+    #   You can't specify both `SliConfig` and `RequestBasedSliConfig` in the
+    #   same operation.
     #
     # @option params [Types::Goal] :goal
     #   A structure that contains the attributes that determine the goal of
@@ -1585,15 +1881,103 @@ module Aws::ApplicationSignals
     #       metric_threshold: 1.0, # required
     #       comparison_operator: "GreaterThanOrEqualTo", # required, accepts GreaterThanOrEqualTo, GreaterThan, LessThan, LessThanOrEqualTo
     #     },
+    #     request_based_sli_config: {
+    #       request_based_sli_metric_config: { # required
+    #         key_attributes: {
+    #           "KeyAttributeName" => "KeyAttributeValue",
+    #         },
+    #         operation_name: "OperationName",
+    #         metric_type: "LATENCY", # accepts LATENCY, AVAILABILITY
+    #         total_request_count_metric: [
+    #           {
+    #             id: "MetricId", # required
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "Namespace",
+    #                 metric_name: "MetricName",
+    #                 dimensions: [
+    #                   {
+    #                     name: "DimensionName", # required
+    #                     value: "DimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               period: 1, # required
+    #               stat: "Stat", # required
+    #               unit: "Microseconds", # accepts Microseconds, Milliseconds, Seconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #             },
+    #             expression: "MetricExpression",
+    #             label: "MetricLabel",
+    #             return_data: false,
+    #             period: 1,
+    #             account_id: "AccountId",
+    #           },
+    #         ],
+    #         monitored_request_count_metric: {
+    #           good_count_metric: [
+    #             {
+    #               id: "MetricId", # required
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "Namespace",
+    #                   metric_name: "MetricName",
+    #                   dimensions: [
+    #                     {
+    #                       name: "DimensionName", # required
+    #                       value: "DimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 period: 1, # required
+    #                 stat: "Stat", # required
+    #                 unit: "Microseconds", # accepts Microseconds, Milliseconds, Seconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #               },
+    #               expression: "MetricExpression",
+    #               label: "MetricLabel",
+    #               return_data: false,
+    #               period: 1,
+    #               account_id: "AccountId",
+    #             },
+    #           ],
+    #           bad_count_metric: [
+    #             {
+    #               id: "MetricId", # required
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "Namespace",
+    #                   metric_name: "MetricName",
+    #                   dimensions: [
+    #                     {
+    #                       name: "DimensionName", # required
+    #                       value: "DimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 period: 1, # required
+    #                 stat: "Stat", # required
+    #                 unit: "Microseconds", # accepts Microseconds, Milliseconds, Seconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #               },
+    #               expression: "MetricExpression",
+    #               label: "MetricLabel",
+    #               return_data: false,
+    #               period: 1,
+    #               account_id: "AccountId",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       metric_threshold: 1.0,
+    #       comparison_operator: "GreaterThanOrEqualTo", # accepts GreaterThanOrEqualTo, GreaterThan, LessThan, LessThanOrEqualTo
+    #     },
     #     goal: {
     #       interval: {
     #         rolling_interval: {
-    #           duration_unit: "DAY", # required, accepts DAY, MONTH
+    #           duration_unit: "MINUTE", # required, accepts MINUTE, HOUR, DAY, MONTH
     #           duration: 1, # required
     #         },
     #         calendar_interval: {
     #           start_time: Time.now, # required
-    #           duration_unit: "DAY", # required, accepts DAY, MONTH
+    #           duration_unit: "MINUTE", # required, accepts MINUTE, HOUR, DAY, MONTH
     #           duration: 1, # required
     #         },
     #       },
@@ -1630,10 +2014,62 @@ module Aws::ApplicationSignals
     #   resp.slo.sli.sli_metric.metric_data_queries[0].account_id #=> String
     #   resp.slo.sli.metric_threshold #=> Float
     #   resp.slo.sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
-    #   resp.slo.goal.interval.rolling_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.slo.request_based_sli.request_based_sli_metric.key_attributes #=> Hash
+    #   resp.slo.request_based_sli.request_based_sli_metric.key_attributes["KeyAttributeName"] #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.operation_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.metric_type #=> String, one of "LATENCY", "AVAILABILITY"
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.total_request_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].id #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.namespace #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.metric_name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions #=> Array
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.stat #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].metric_stat.unit #=> String, one of "Microseconds", "Milliseconds", "Seconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].expression #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].label #=> String
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].return_data #=> Boolean
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].period #=> Integer
+    #   resp.slo.request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric[0].account_id #=> String
+    #   resp.slo.request_based_sli.metric_threshold #=> Float
+    #   resp.slo.request_based_sli.comparison_operator #=> String, one of "GreaterThanOrEqualTo", "GreaterThan", "LessThan", "LessThanOrEqualTo"
+    #   resp.slo.evaluation_type #=> String, one of "PeriodBased", "RequestBased"
+    #   resp.slo.goal.interval.rolling_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.slo.goal.interval.rolling_interval.duration #=> Integer
     #   resp.slo.goal.interval.calendar_interval.start_time #=> Time
-    #   resp.slo.goal.interval.calendar_interval.duration_unit #=> String, one of "DAY", "MONTH"
+    #   resp.slo.goal.interval.calendar_interval.duration_unit #=> String, one of "MINUTE", "HOUR", "DAY", "MONTH"
     #   resp.slo.goal.interval.calendar_interval.duration #=> Integer
     #   resp.slo.goal.attainment_goal #=> Float
     #   resp.slo.goal.warning_threshold #=> Float
@@ -1665,7 +2101,7 @@ module Aws::ApplicationSignals
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationsignals'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

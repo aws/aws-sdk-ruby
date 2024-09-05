@@ -28,7 +28,7 @@ module Aws::ApplicationSignals
 
     class CalendarInterval
       attr_accessor start_time: ::Time
-      attr_accessor duration_unit: ("DAY" | "MONTH")
+      attr_accessor duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH")
       attr_accessor duration: ::Integer
       SENSITIVE: []
     end
@@ -42,6 +42,7 @@ module Aws::ApplicationSignals
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor sli_config: Types::ServiceLevelIndicatorConfig
+      attr_accessor request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig
       attr_accessor goal: Types::Goal
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -237,6 +238,52 @@ module Aws::ApplicationSignals
       SENSITIVE: []
     end
 
+    class MonitoredRequestCountMetricDataQueries
+      attr_accessor good_count_metric: ::Array[Types::MetricDataQuery]
+      attr_accessor bad_count_metric: ::Array[Types::MetricDataQuery]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GoodCountMetric < MonitoredRequestCountMetricDataQueries
+      end
+      class BadCountMetric < MonitoredRequestCountMetricDataQueries
+      end
+      class Unknown < MonitoredRequestCountMetricDataQueries
+      end
+    end
+
+    class RequestBasedServiceLevelIndicator
+      attr_accessor request_based_sli_metric: Types::RequestBasedServiceLevelIndicatorMetric
+      attr_accessor metric_threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
+      SENSITIVE: []
+    end
+
+    class RequestBasedServiceLevelIndicatorConfig
+      attr_accessor request_based_sli_metric_config: Types::RequestBasedServiceLevelIndicatorMetricConfig
+      attr_accessor metric_threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
+      SENSITIVE: []
+    end
+
+    class RequestBasedServiceLevelIndicatorMetric
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor operation_name: ::String
+      attr_accessor metric_type: ("LATENCY" | "AVAILABILITY")
+      attr_accessor total_request_count_metric: ::Array[Types::MetricDataQuery]
+      attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries
+      SENSITIVE: []
+    end
+
+    class RequestBasedServiceLevelIndicatorMetricConfig
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor operation_name: ::String
+      attr_accessor metric_type: ("LATENCY" | "AVAILABILITY")
+      attr_accessor total_request_count_metric: ::Array[Types::MetricDataQuery]
+      attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor resource_type: ::String
       attr_accessor resource_id: ::String
@@ -245,7 +292,7 @@ module Aws::ApplicationSignals
     end
 
     class RollingInterval
-      attr_accessor duration_unit: ("DAY" | "MONTH")
+      attr_accessor duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH")
       attr_accessor duration: ::Integer
       SENSITIVE: []
     end
@@ -313,6 +360,8 @@ module Aws::ApplicationSignals
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor sli: Types::ServiceLevelIndicator
+      attr_accessor request_based_sli: Types::RequestBasedServiceLevelIndicator
+      attr_accessor evaluation_type: ("PeriodBased" | "RequestBased")
       attr_accessor goal: Types::Goal
       SENSITIVE: []
     end
@@ -320,11 +369,15 @@ module Aws::ApplicationSignals
     class ServiceLevelObjectiveBudgetReport
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor evaluation_type: ("PeriodBased" | "RequestBased")
       attr_accessor budget_status: ("OK" | "WARNING" | "BREACHED" | "INSUFFICIENT_DATA")
       attr_accessor attainment: ::Float
       attr_accessor total_budget_seconds: ::Integer
       attr_accessor budget_seconds_remaining: ::Integer
+      attr_accessor total_budget_requests: ::Integer
+      attr_accessor budget_requests_remaining: ::Integer
       attr_accessor sli: Types::ServiceLevelIndicator
+      attr_accessor request_based_sli: Types::RequestBasedServiceLevelIndicator
       attr_accessor goal: Types::Goal
       SENSITIVE: []
     end
@@ -403,6 +456,7 @@ module Aws::ApplicationSignals
       attr_accessor id: ::String
       attr_accessor description: ::String
       attr_accessor sli_config: Types::ServiceLevelIndicatorConfig
+      attr_accessor request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig
       attr_accessor goal: Types::Goal
       SENSITIVE: []
     end

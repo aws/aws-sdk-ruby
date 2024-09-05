@@ -783,12 +783,18 @@ module Aws::GameLift
     #   in this request. There is no default value. You can't change a
     #   build's operating system later.
     #
-    #   <note markdown="1"> If you have active fleets using the Windows Server 2012 operating
-    #   system, you can continue to create new builds using this OS until
-    #   October 10, 2023, when Microsoft ends its support. All others must use
-    #   Windows Server 2016 when creating new Windows-based builds.
+    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more
+    #   details in the [Amazon Linux 2 FAQs][1]. For game servers that are
+    #   hosted on AL2 and use Amazon GameLift server SDK 4.x., first update
+    #   the game server build to server SDK 5.x, and then deploy to AL2023
+    #   instances. See [ Migrate to Amazon GameLift server SDK version 5.][2]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/amazon-linux-2/faqs/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new build resource. Tags are
@@ -974,6 +980,19 @@ module Aws::GameLift
     #   The platform that is used by containers in the container group
     #   definition. All containers in a group must run on the same operating
     #   system.
+    #
+    #   <note markdown="1"> Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more
+    #   details in the [Amazon Linux 2 FAQs][1]. For game servers that are
+    #   hosted on AL2 and use Amazon GameLift server SDK 4.x., first update
+    #   the game server build to server SDK 5.x, and then deploy to AL2023
+    #   instances. See [ Migrate to Amazon GameLift server SDK version 5.][2]
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/amazon-linux-2/faqs/
+    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the container group definition resource.
@@ -1395,15 +1414,19 @@ module Aws::GameLift
     #
     # @option params [Array<Types::LocationConfiguration>] :locations
     #   A set of remote locations to deploy additional instances to and manage
-    #   as part of the fleet. This parameter can only be used when creating
-    #   fleets in Amazon Web Services Regions that support multiple locations.
-    #   You can add any Amazon GameLift-supported Amazon Web Services Region
-    #   as a remote location, in the form of an Amazon Web Services Region
-    #   code, such as `us-west-2` or Local Zone code. To create a fleet with
-    #   instances in the home Region only, don't set this parameter.
+    #   as a multi-location fleet. Use this parameter when creating a fleet in
+    #   Amazon Web Services Regions that support multiple locations. You can
+    #   add any Amazon Web Services Region or Local Zone that's supported by
+    #   Amazon GameLift. Provide a list of one or more Amazon Web Services
+    #   Region codes, such as `us-west-2`, or Local Zone names. When using
+    #   this parameter, Amazon GameLift requires you to include your home
+    #   location in the request. For a list of supported Regions and Local
+    #   Zones, see [ Amazon GameLift service locations][1] for managed
+    #   hosting.
     #
-    #   When using this parameter, Amazon GameLift requires you to include
-    #   your home location in the request.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of labels to assign to the new fleet resource. Tags are
@@ -1610,12 +1633,16 @@ module Aws::GameLift
     #
     # [Setting up fleets][2]
     #
-    # [Multi-location fleets][2]
+    # [Update fleet locations][3]
+    #
+    # [ Amazon GameLift service locations][4] for managed hosting.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html
     # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-editing.html#fleets-update-locations
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to add locations to. You can use
@@ -2287,11 +2314,11 @@ module Aws::GameLift
     #   A descriptive name for the custom location.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of labels to assign to the new matchmaking configuration
-    #   resource. Tags are developer-defined key-value pairs. Tagging Amazon
-    #   Web Services resources are useful for resource management, access
-    #   management and cost allocation. For more information, see [ Tagging
-    #   Amazon Web Services Resources][1] in the *Amazon Web Services General
+    #   A list of labels to assign to the new resource. Tags are
+    #   developer-defined key-value pairs. Tagging Amazon Web Services
+    #   resources are useful for resource management, access management, and
+    #   cost allocation. For more information, see [ Tagging Amazon Web
+    #   Services Resources][1] in the *Amazon Web Services General
     #   Rareference*.
     #
     #
@@ -4451,7 +4478,7 @@ module Aws::GameLift
     #   resp.events #=> Array
     #   resp.events[0].event_id #=> String
     #   resp.events[0].resource_id #=> String
-    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "GAME_SESSION_ACTIVATION_TIMEOUT", "FLEET_CREATION_EXTRACTING_BUILD", "FLEET_CREATION_RUNNING_INSTALLER", "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG", "FLEET_VPC_PEERING_SUCCEEDED", "FLEET_VPC_PEERING_FAILED", "FLEET_VPC_PEERING_DELETED", "INSTANCE_INTERRUPTED", "INSTANCE_RECYCLED"
+    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "GAME_SESSION_ACTIVATION_TIMEOUT", "FLEET_CREATION_EXTRACTING_BUILD", "FLEET_CREATION_RUNNING_INSTALLER", "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG", "FLEET_VPC_PEERING_SUCCEEDED", "FLEET_VPC_PEERING_FAILED", "FLEET_VPC_PEERING_DELETED", "INSTANCE_INTERRUPTED", "INSTANCE_RECYCLED", "FLEET_CREATION_COMPLETED_INSTALLER", "FLEET_CREATION_FAILED_INSTALLER"
     #   resp.events[0].message #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].pre_signed_log_url #=> String
@@ -4492,9 +4519,12 @@ module Aws::GameLift
     #
     # [Setting up Amazon GameLift fleets][1]
     #
+    # [ Amazon GameLift service locations][2] for managed hosting
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to retrieve remote locations for.
@@ -4574,12 +4604,15 @@ module Aws::GameLift
     #
     # [Setting up Amazon GameLift fleets][1]
     #
-    # [GameLift metrics for fleets][2]
+    # [ Amazon GameLift service locations][2] for managed hosting
+    #
+    # [GameLift metrics for fleets][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to request location capacity for.
@@ -4643,12 +4676,15 @@ module Aws::GameLift
     #
     # [Setting up Amazon GameLift fleets][1]
     #
-    # [GameLift metrics for fleets][2]
+    # [ Amazon GameLift service locations][2] for managed hosting
+    #
+    # [GameLift metrics for fleets][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to request location utilization for.
@@ -6246,14 +6282,11 @@ module Aws::GameLift
     #
     # * [Debug fleet issues][3]
     #
-    # * [ Remotely connect to a container fleet][4]
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli
     # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
     # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
-    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet that holds the compute resource that
@@ -7551,11 +7584,13 @@ module Aws::GameLift
     #
     # @option params [String] :ip_address
     #   The IP address of the compute resource. Amazon GameLift requires
-    #   either a DNS name or IP address.
+    #   either a DNS name or IP address. When registering an Anywhere fleet,
+    #   an IP address is required.
     #
     # @option params [String] :location
     #   The name of a custom location to associate with the compute resource
-    #   being registered.
+    #   being registered. This parameter is required when registering a
+    #   compute for an Anywhere fleet.
     #
     # @return [Types::RegisterComputeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10251,7 +10286,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

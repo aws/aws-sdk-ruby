@@ -650,7 +650,7 @@ module Aws::Connect
     #
     #   resp = client.associate_default_vocabulary({
     #     instance_id: "InstanceId", # required
-    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
+    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA, ca-ES, da-DK, fi-FI, id-ID, ms-MY, nl-NL, no-NO, pl-PL, sv-SE, tl-PH
     #     vocabulary_id: "VocabularyId",
     #   })
     #
@@ -3636,7 +3636,7 @@ module Aws::Connect
     #     client_token: "ClientToken",
     #     instance_id: "InstanceId", # required
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
+    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA, ca-ES, da-DK, fi-FI, id-ID, ms-MY, nl-NL, no-NO, pl-PL, sv-SE, tl-PH
     #     content: "VocabularyContent", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -5999,7 +5999,7 @@ module Aws::Connect
     #   resp.vocabulary.name #=> String
     #   resp.vocabulary.id #=> String
     #   resp.vocabulary.arn #=> String
-    #   resp.vocabulary.language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA"
+    #   resp.vocabulary.language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA", "ca-ES", "da-DK", "fi-FI", "id-ID", "ms-MY", "nl-NL", "no-NO", "pl-PL", "sv-SE", "tl-PH"
     #   resp.vocabulary.state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
     #   resp.vocabulary.last_modified_time #=> Time
     #   resp.vocabulary.failure_reason #=> String
@@ -9740,7 +9740,7 @@ module Aws::Connect
     #
     #   resp = client.list_default_vocabularies({
     #     instance_id: "InstanceId", # required
-    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
+    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA, ca-ES, da-DK, fi-FI, id-ID, ms-MY, nl-NL, no-NO, pl-PL, sv-SE, tl-PH
     #     max_results: 1,
     #     next_token: "VocabularyNextToken",
     #   })
@@ -9749,7 +9749,7 @@ module Aws::Connect
     #
     #   resp.default_vocabulary_list #=> Array
     #   resp.default_vocabulary_list[0].instance_id #=> String
-    #   resp.default_vocabulary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA"
+    #   resp.default_vocabulary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA", "ca-ES", "da-DK", "fi-FI", "id-ID", "ms-MY", "nl-NL", "no-NO", "pl-PL", "sv-SE", "tl-PH"
     #   resp.default_vocabulary_list[0].vocabulary_id #=> String
     #   resp.default_vocabulary_list[0].vocabulary_name #=> String
     #   resp.next_token #=> String
@@ -13994,7 +13994,7 @@ module Aws::Connect
     #     next_token: "VocabularyNextToken",
     #     state: "CREATION_IN_PROGRESS", # accepts CREATION_IN_PROGRESS, ACTIVE, CREATION_FAILED, DELETE_IN_PROGRESS
     #     name_starts_with: "VocabularyName",
-    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA
+    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN, en-NZ, en-ZA, ca-ES, da-DK, fi-FI, id-ID, ms-MY, nl-NL, no-NO, pl-PL, sv-SE, tl-PH
     #   })
     #
     # @example Response structure
@@ -14003,7 +14003,7 @@ module Aws::Connect
     #   resp.vocabulary_summary_list[0].name #=> String
     #   resp.vocabulary_summary_list[0].id #=> String
     #   resp.vocabulary_summary_list[0].arn #=> String
-    #   resp.vocabulary_summary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA"
+    #   resp.vocabulary_summary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN", "en-NZ", "en-ZA", "ca-ES", "da-DK", "fi-FI", "id-ID", "ms-MY", "nl-NL", "no-NO", "pl-PL", "sv-SE", "tl-PH"
     #   resp.vocabulary_summary_list[0].state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
     #   resp.vocabulary_summary_list[0].last_modified_time #=> Time
     #   resp.vocabulary_summary_list[0].failure_reason #=> String
@@ -18309,7 +18309,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.172.0'
+      context[:gem_version] = '1.173.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

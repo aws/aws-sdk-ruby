@@ -2232,6 +2232,10 @@ module Aws::CodePipeline
     # for this account. The output lists all webhooks and includes the
     # webhook URL and ARN and the configuration for each webhook.
     #
+    # <note markdown="1"> If a secret token was provided, it will be redacted in the response.
+    #
+    #  </note>
+    #
     # @option params [String] :next_token
     #   The token that was returned from the previous ListWebhooks call, which
     #   can be used to return the next set of webhooks in the list.
@@ -2751,6 +2755,19 @@ module Aws::CodePipeline
     # webhook. RegisterWebhookWithThirdParty and
     # DeregisterWebhookWithThirdParty APIs can be used to automatically
     # configure supported third parties to call the generated webhook URL.
+    #
+    # When creating CodePipeline webhooks, do not use your own credentials
+    # or reuse the same secret token across multiple webhooks. For optimal
+    # security, generate a unique secret token for each webhook you create.
+    # The secret token is an arbitrary string that you provide, which GitHub
+    # uses to compute and sign the webhook payloads sent to CodePipeline,
+    # for protecting the integrity and authenticity of the webhook payloads.
+    # Using your own credentials or reusing the same token across multiple
+    # webhooks can lead to security vulnerabilities.
+    #
+    # <note markdown="1"> If a secret token was provided, it will be redacted in the response.
+    #
+    #  </note>
     #
     # @option params [required, Types::WebhookDefinition] :webhook
     #   The detail provided in an input file to create the webhook, such as
@@ -3537,7 +3554,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

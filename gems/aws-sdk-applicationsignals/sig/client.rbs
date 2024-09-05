@@ -95,7 +95,7 @@ module Aws
       def create_service_level_objective: (
                                             name: ::String,
                                             ?description: ::String,
-                                            sli_config: {
+                                            ?sli_config: {
                                               sli_metric_config: {
                                                 key_attributes: Hash[::String, ::String]?,
                                                 operation_name: ::String?,
@@ -131,15 +131,101 @@ module Aws
                                               metric_threshold: ::Float,
                                               comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
                                             },
+                                            ?request_based_sli_config: {
+                                              request_based_sli_metric_config: {
+                                                key_attributes: Hash[::String, ::String]?,
+                                                operation_name: ::String?,
+                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
+                                                total_request_count_metric: Array[
+                                                  {
+                                                    id: ::String,
+                                                    metric_stat: {
+                                                      metric: {
+                                                        namespace: ::String?,
+                                                        metric_name: ::String?,
+                                                        dimensions: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: ::String
+                                                          },
+                                                        ]?
+                                                      },
+                                                      period: ::Integer,
+                                                      stat: ::String,
+                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                    }?,
+                                                    expression: ::String?,
+                                                    label: ::String?,
+                                                    return_data: bool?,
+                                                    period: ::Integer?,
+                                                    account_id: ::String?
+                                                  },
+                                                ]?,
+                                                monitored_request_count_metric: {
+                                                  good_count_metric: Array[
+                                                    {
+                                                      id: ::String,
+                                                      metric_stat: {
+                                                        metric: {
+                                                          namespace: ::String?,
+                                                          metric_name: ::String?,
+                                                          dimensions: Array[
+                                                            {
+                                                              name: ::String,
+                                                              value: ::String
+                                                            },
+                                                          ]?
+                                                        },
+                                                        period: ::Integer,
+                                                        stat: ::String,
+                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                      }?,
+                                                      expression: ::String?,
+                                                      label: ::String?,
+                                                      return_data: bool?,
+                                                      period: ::Integer?,
+                                                      account_id: ::String?
+                                                    },
+                                                  ]?,
+                                                  bad_count_metric: Array[
+                                                    {
+                                                      id: ::String,
+                                                      metric_stat: {
+                                                        metric: {
+                                                          namespace: ::String?,
+                                                          metric_name: ::String?,
+                                                          dimensions: Array[
+                                                            {
+                                                              name: ::String,
+                                                              value: ::String
+                                                            },
+                                                          ]?
+                                                        },
+                                                        period: ::Integer,
+                                                        stat: ::String,
+                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                      }?,
+                                                      expression: ::String?,
+                                                      label: ::String?,
+                                                      return_data: bool?,
+                                                      period: ::Integer?,
+                                                      account_id: ::String?
+                                                    },
+                                                  ]?
+                                                }?
+                                              },
+                                              metric_threshold: ::Float?,
+                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
+                                            },
                                             ?goal: {
                                               interval: {
                                                 rolling_interval: {
-                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
                                                   duration: ::Integer
                                                 }?,
                                                 calendar_interval: {
                                                   start_time: ::Time,
-                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
                                                   duration: ::Integer
                                                 }?
                                               }?,
@@ -357,15 +443,101 @@ module Aws
                                               metric_threshold: ::Float,
                                               comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
                                             },
+                                            ?request_based_sli_config: {
+                                              request_based_sli_metric_config: {
+                                                key_attributes: Hash[::String, ::String]?,
+                                                operation_name: ::String?,
+                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
+                                                total_request_count_metric: Array[
+                                                  {
+                                                    id: ::String,
+                                                    metric_stat: {
+                                                      metric: {
+                                                        namespace: ::String?,
+                                                        metric_name: ::String?,
+                                                        dimensions: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: ::String
+                                                          },
+                                                        ]?
+                                                      },
+                                                      period: ::Integer,
+                                                      stat: ::String,
+                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                    }?,
+                                                    expression: ::String?,
+                                                    label: ::String?,
+                                                    return_data: bool?,
+                                                    period: ::Integer?,
+                                                    account_id: ::String?
+                                                  },
+                                                ]?,
+                                                monitored_request_count_metric: {
+                                                  good_count_metric: Array[
+                                                    {
+                                                      id: ::String,
+                                                      metric_stat: {
+                                                        metric: {
+                                                          namespace: ::String?,
+                                                          metric_name: ::String?,
+                                                          dimensions: Array[
+                                                            {
+                                                              name: ::String,
+                                                              value: ::String
+                                                            },
+                                                          ]?
+                                                        },
+                                                        period: ::Integer,
+                                                        stat: ::String,
+                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                      }?,
+                                                      expression: ::String?,
+                                                      label: ::String?,
+                                                      return_data: bool?,
+                                                      period: ::Integer?,
+                                                      account_id: ::String?
+                                                    },
+                                                  ]?,
+                                                  bad_count_metric: Array[
+                                                    {
+                                                      id: ::String,
+                                                      metric_stat: {
+                                                        metric: {
+                                                          namespace: ::String?,
+                                                          metric_name: ::String?,
+                                                          dimensions: Array[
+                                                            {
+                                                              name: ::String,
+                                                              value: ::String
+                                                            },
+                                                          ]?
+                                                        },
+                                                        period: ::Integer,
+                                                        stat: ::String,
+                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                      }?,
+                                                      expression: ::String?,
+                                                      label: ::String?,
+                                                      return_data: bool?,
+                                                      period: ::Integer?,
+                                                      account_id: ::String?
+                                                    },
+                                                  ]?
+                                                }?
+                                              },
+                                              metric_threshold: ::Float?,
+                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
+                                            },
                                             ?goal: {
                                               interval: {
                                                 rolling_interval: {
-                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
                                                   duration: ::Integer
                                                 }?,
                                                 calendar_interval: {
                                                   start_time: ::Time,
-                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
                                                   duration: ::Integer
                                                 }?
                                               }?,

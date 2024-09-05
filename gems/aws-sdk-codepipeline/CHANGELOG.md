@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2024-09-05)
+------------------
+
+* Feature - Updates to add recent notes to APIs and to replace example S3 bucket names globally.
+
 1.79.0 (2024-09-03)
 ------------------
 

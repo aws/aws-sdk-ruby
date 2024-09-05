@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.259.0 (2024-09-05)
+------------------
+
+* Feature - Amazon SageMaker now supports idle shutdown of JupyterLab and CodeEditor applications on SageMaker Studio.
+
 1.258.0 (2024-09-03)
 ------------------
 

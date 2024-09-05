@@ -4671,14 +4671,8 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] category
     #   A category defines what kind of rule can be run in the stage, and
-    #   constrains the provider type for the rule. Valid categories are
-    #   limited to one of the following values.
-    #
-    #   * INVOKE
-    #
-    #   * Approval
-    #
-    #   * Rule
+    #   constrains the provider type for the rule. The valid category is
+    #   `Rule`.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -4687,10 +4681,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The provider of the service being called by the rule. Valid
-    #   providers are determined by the rulecategory. For example, a managed
-    #   rule in the Rule category type has an owner of AWS, which would be
-    #   specified as `AWS`.
+    #   The rule provider, such as the `DeploymentWindow` rule.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -5504,6 +5495,19 @@ module Aws::CodePipeline
     # @!attribute [rw] secret_token
     #   The property used to configure GitHub authentication. For
     #   GITHUB\_HMAC, only the `SecretToken` property must be set.
+    #
+    #   When creating CodePipeline webhooks, do not use your own credentials
+    #   or reuse the same secret token across multiple webhooks. For optimal
+    #   security, generate a unique secret token for each webhook you
+    #   create. The secret token is an arbitrary string that you provide,
+    #   which GitHub uses to compute and sign the webhook payloads sent to
+    #   CodePipeline, for protecting the integrity and authenticity of the
+    #   webhook payloads. Using your own credentials or reusing the same
+    #   token across multiple webhooks can lead to security vulnerabilities.
+    #
+    #   <note markdown="1"> If a secret token was provided, it will be redacted in the response.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookAuthConfiguration AWS API Documentation
@@ -5539,6 +5543,19 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] authentication
     #   Supported options are GITHUB\_HMAC, IP, and UNAUTHENTICATED.
+    #
+    #   When creating CodePipeline webhooks, do not use your own credentials
+    #   or reuse the same secret token across multiple webhooks. For optimal
+    #   security, generate a unique secret token for each webhook you
+    #   create. The secret token is an arbitrary string that you provide,
+    #   which GitHub uses to compute and sign the webhook payloads sent to
+    #   CodePipeline, for protecting the integrity and authenticity of the
+    #   webhook payloads. Using your own credentials or reusing the same
+    #   token across multiple webhooks can lead to security vulnerabilities.
+    #
+    #   <note markdown="1"> If a secret token was provided, it will be redacted in the response.
+    #
+    #    </note>
     #
     #   * For information about the authentication scheme implemented by
     #     GITHUB\_HMAC, see [Securing your webhooks][1] on the GitHub

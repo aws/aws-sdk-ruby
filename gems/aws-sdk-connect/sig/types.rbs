@@ -184,7 +184,7 @@ module Aws::Connect
 
     class AssociateDefaultVocabularyRequest
       attr_accessor instance_id: ::String
-      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
       attr_accessor vocabulary_id: ::String
       SENSITIVE: []
     end
@@ -1089,7 +1089,7 @@ module Aws::Connect
       attr_accessor client_token: ::String
       attr_accessor instance_id: ::String
       attr_accessor vocabulary_name: ::String
-      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
       attr_accessor content: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -1192,7 +1192,7 @@ module Aws::Connect
 
     class DefaultVocabulary
       attr_accessor instance_id: ::String
-      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
       attr_accessor vocabulary_id: ::String
       attr_accessor vocabulary_name: ::String
       SENSITIVE: []
@@ -2763,7 +2763,7 @@ module Aws::Connect
 
     class ListDefaultVocabulariesRequest
       attr_accessor instance_id: ::String
-      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -4359,7 +4359,7 @@ module Aws::Connect
       attr_accessor next_token: ::String
       attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
       attr_accessor name_starts_with: ::String
-      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
       SENSITIVE: []
     end
 
@@ -5606,7 +5606,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor id: ::String
       attr_accessor arn: ::String
-      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
       attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
       attr_accessor last_modified_time: ::Time
       attr_accessor failure_reason: ::String
@@ -5619,7 +5619,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor id: ::String
       attr_accessor arn: ::String
-      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA")
+      attr_accessor language_code: ("ar-AE" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fr-CA" | "fr-FR" | "hi-IN" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "pt-PT" | "zh-CN" | "en-NZ" | "en-ZA" | "ca-ES" | "da-DK" | "fi-FI" | "id-ID" | "ms-MY" | "nl-NL" | "no-NO" | "pl-PL" | "sv-SE" | "tl-PH")
       attr_accessor state: ("CREATION_IN_PROGRESS" | "ACTIVE" | "CREATION_FAILED" | "DELETE_IN_PROGRESS")
       attr_accessor last_modified_time: ::Time
       attr_accessor failure_reason: ::String

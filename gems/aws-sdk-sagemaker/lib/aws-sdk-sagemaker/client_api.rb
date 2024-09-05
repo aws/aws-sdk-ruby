@@ -63,6 +63,7 @@ module Aws::SageMaker
     AppImageConfigName = Shapes::StringShape.new(name: 'AppImageConfigName')
     AppImageConfigSortKey = Shapes::StringShape.new(name: 'AppImageConfigSortKey')
     AppInstanceType = Shapes::StringShape.new(name: 'AppInstanceType')
+    AppLifecycleManagement = Shapes::StructureShape.new(name: 'AppLifecycleManagement')
     AppList = Shapes::ListShape.new(name: 'AppList')
     AppManaged = Shapes::BooleanShape.new(name: 'AppManaged')
     AppName = Shapes::StringShape.new(name: 'AppName')
@@ -1047,11 +1048,14 @@ module Aws::SageMaker
     HyperbandStrategyConfig = Shapes::StructureShape.new(name: 'HyperbandStrategyConfig')
     HyperbandStrategyMaxResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMaxResource')
     HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
+    IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
     IamPolicyConstraints = Shapes::StructureShape.new(name: 'IamPolicyConstraints')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentityProviderOAuthSetting = Shapes::StructureShape.new(name: 'IdentityProviderOAuthSetting')
     IdentityProviderOAuthSettings = Shapes::ListShape.new(name: 'IdentityProviderOAuthSettings')
+    IdleSettings = Shapes::StructureShape.new(name: 'IdleSettings')
+    IdleTimeoutInMinutes = Shapes::IntegerShape.new(name: 'IdleTimeoutInMinutes')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
     ImageBaseImage = Shapes::StringShape.new(name: 'ImageBaseImage')
@@ -1195,6 +1199,7 @@ module Aws::SageMaker
     LastUpdateStatus = Shapes::StructureShape.new(name: 'LastUpdateStatus')
     LastUpdateStatusValue = Shapes::StringShape.new(name: 'LastUpdateStatusValue')
     LifecycleConfigArns = Shapes::ListShape.new(name: 'LifecycleConfigArns')
+    LifecycleManagement = Shapes::StringShape.new(name: 'LifecycleManagement')
     LineageEntityParameters = Shapes::MapShape.new(name: 'LineageEntityParameters')
     LineageGroupArn = Shapes::StringShape.new(name: 'LineageGroupArn')
     LineageGroupNameOrArn = Shapes::StringShape.new(name: 'LineageGroupNameOrArn')
@@ -2000,10 +2005,12 @@ module Aws::SageMaker
     SourceIpConfig = Shapes::StructureShape.new(name: 'SourceIpConfig')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     SourceUri = Shapes::StringShape.new(name: 'SourceUri')
+    SpaceAppLifecycleManagement = Shapes::StructureShape.new(name: 'SpaceAppLifecycleManagement')
     SpaceArn = Shapes::StringShape.new(name: 'SpaceArn')
     SpaceCodeEditorAppSettings = Shapes::StructureShape.new(name: 'SpaceCodeEditorAppSettings')
     SpaceDetails = Shapes::StructureShape.new(name: 'SpaceDetails')
     SpaceEbsVolumeSizeInGb = Shapes::IntegerShape.new(name: 'SpaceEbsVolumeSizeInGb')
+    SpaceIdleSettings = Shapes::StructureShape.new(name: 'SpaceIdleSettings')
     SpaceJupyterLabAppSettings = Shapes::StructureShape.new(name: 'SpaceJupyterLabAppSettings')
     SpaceList = Shapes::ListShape.new(name: 'SpaceList')
     SpaceName = Shapes::StringShape.new(name: 'SpaceName')
@@ -2502,6 +2509,9 @@ module Aws::SageMaker
 
     AppImageConfigList.member = Shapes::ShapeRef.new(shape: AppImageConfigDetails)
 
+    AppLifecycleManagement.add_member(:idle_settings, Shapes::ShapeRef.new(shape: IdleSettings, location_name: "IdleSettings"))
+    AppLifecycleManagement.struct_class = Types::AppLifecycleManagement
+
     AppList.member = Shapes::ShapeRef.new(shape: AppDetails)
 
     AppSpecification.add_member(:image_uri, Shapes::ShapeRef.new(shape: ImageUri, required: true, location_name: "ImageUri"))
@@ -2952,7 +2962,7 @@ module Aws::SageMaker
     ClusterInstanceGroupDetails.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, location_name: "InstanceGroupName"))
     ClusterInstanceGroupDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, location_name: "InstanceType"))
     ClusterInstanceGroupDetails.add_member(:life_cycle_config, Shapes::ShapeRef.new(shape: ClusterLifeCycleConfig, location_name: "LifeCycleConfig"))
-    ClusterInstanceGroupDetails.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
+    ClusterInstanceGroupDetails.add_member(:execution_role, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "ExecutionRole"))
     ClusterInstanceGroupDetails.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
     ClusterInstanceGroupDetails.add_member(:instance_storage_configs, Shapes::ShapeRef.new(shape: ClusterInstanceStorageConfigs, location_name: "InstanceStorageConfigs"))
     ClusterInstanceGroupDetails.struct_class = Types::ClusterInstanceGroupDetails
@@ -2963,7 +2973,7 @@ module Aws::SageMaker
     ClusterInstanceGroupSpecification.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, required: true, location_name: "InstanceGroupName"))
     ClusterInstanceGroupSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, required: true, location_name: "InstanceType"))
     ClusterInstanceGroupSpecification.add_member(:life_cycle_config, Shapes::ShapeRef.new(shape: ClusterLifeCycleConfig, required: true, location_name: "LifeCycleConfig"))
-    ClusterInstanceGroupSpecification.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRole"))
+    ClusterInstanceGroupSpecification.add_member(:execution_role, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "ExecutionRole"))
     ClusterInstanceGroupSpecification.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
     ClusterInstanceGroupSpecification.add_member(:instance_storage_configs, Shapes::ShapeRef.new(shape: ClusterInstanceStorageConfigs, location_name: "InstanceStorageConfigs"))
     ClusterInstanceGroupSpecification.struct_class = Types::ClusterInstanceGroupSpecification
@@ -3027,6 +3037,7 @@ module Aws::SageMaker
     CodeEditorAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
     CodeEditorAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     CodeEditorAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
+    CodeEditorAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: AppLifecycleManagement, location_name: "AppLifecycleManagement"))
     CodeEditorAppSettings.struct_class = Types::CodeEditorAppSettings
 
     CodeRepositories.member = Shapes::ShapeRef.new(shape: CodeRepository)
@@ -6255,6 +6266,12 @@ module Aws::SageMaker
 
     IdentityProviderOAuthSettings.member = Shapes::ShapeRef.new(shape: IdentityProviderOAuthSetting)
 
+    IdleSettings.add_member(:lifecycle_management, Shapes::ShapeRef.new(shape: LifecycleManagement, location_name: "LifecycleManagement"))
+    IdleSettings.add_member(:idle_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleTimeoutInMinutes, location_name: "IdleTimeoutInMinutes"))
+    IdleSettings.add_member(:min_idle_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleTimeoutInMinutes, location_name: "MinIdleTimeoutInMinutes"))
+    IdleSettings.add_member(:max_idle_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleTimeoutInMinutes, location_name: "MaxIdleTimeoutInMinutes"))
+    IdleSettings.struct_class = Types::IdleSettings
+
     Image.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescription, location_name: "Description"))
     Image.add_member(:display_name, Shapes::ShapeRef.new(shape: ImageDisplayName, location_name: "DisplayName"))
@@ -6477,6 +6494,7 @@ module Aws::SageMaker
     JupyterLabAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     JupyterLabAppSettings.add_member(:lifecycle_config_arns, Shapes::ShapeRef.new(shape: LifecycleConfigArns, location_name: "LifecycleConfigArns"))
     JupyterLabAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
+    JupyterLabAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: AppLifecycleManagement, location_name: "AppLifecycleManagement"))
     JupyterLabAppSettings.add_member(:emr_settings, Shapes::ShapeRef.new(shape: EmrSettings, location_name: "EmrSettings"))
     JupyterLabAppSettings.struct_class = Types::JupyterLabAppSettings
 
@@ -9300,7 +9318,11 @@ module Aws::SageMaker
     SourceIpConfig.add_member(:cidrs, Shapes::ShapeRef.new(shape: Cidrs, required: true, location_name: "Cidrs"))
     SourceIpConfig.struct_class = Types::SourceIpConfig
 
+    SpaceAppLifecycleManagement.add_member(:idle_settings, Shapes::ShapeRef.new(shape: SpaceIdleSettings, location_name: "IdleSettings"))
+    SpaceAppLifecycleManagement.struct_class = Types::SpaceAppLifecycleManagement
+
     SpaceCodeEditorAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    SpaceCodeEditorAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: SpaceAppLifecycleManagement, location_name: "AppLifecycleManagement"))
     SpaceCodeEditorAppSettings.struct_class = Types::SpaceCodeEditorAppSettings
 
     SpaceDetails.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
@@ -9314,8 +9336,12 @@ module Aws::SageMaker
     SpaceDetails.add_member(:space_display_name, Shapes::ShapeRef.new(shape: NonEmptyString64, location_name: "SpaceDisplayName"))
     SpaceDetails.struct_class = Types::SpaceDetails
 
+    SpaceIdleSettings.add_member(:idle_timeout_in_minutes, Shapes::ShapeRef.new(shape: IdleTimeoutInMinutes, location_name: "IdleTimeoutInMinutes"))
+    SpaceIdleSettings.struct_class = Types::SpaceIdleSettings
+
     SpaceJupyterLabAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
     SpaceJupyterLabAppSettings.add_member(:code_repositories, Shapes::ShapeRef.new(shape: CodeRepositories, location_name: "CodeRepositories"))
+    SpaceJupyterLabAppSettings.add_member(:app_lifecycle_management, Shapes::ShapeRef.new(shape: SpaceAppLifecycleManagement, location_name: "AppLifecycleManagement"))
     SpaceJupyterLabAppSettings.struct_class = Types::SpaceJupyterLabAppSettings
 
     SpaceList.member = Shapes::ShapeRef.new(shape: SpaceDetails)

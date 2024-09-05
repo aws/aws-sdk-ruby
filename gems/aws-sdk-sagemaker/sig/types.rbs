@@ -166,6 +166,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AppLifecycleManagement
+      attr_accessor idle_settings: Types::IdleSettings
+      SENSITIVE: []
+    end
+
     class AppSpecification
       attr_accessor image_uri: ::String
       attr_accessor container_entrypoint: ::Array[::String]
@@ -790,6 +795,7 @@ module Aws::SageMaker
       attr_accessor default_resource_spec: Types::ResourceSpec
       attr_accessor custom_images: ::Array[Types::CustomImage]
       attr_accessor lifecycle_config_arns: ::Array[::String]
+      attr_accessor app_lifecycle_management: Types::AppLifecycleManagement
       SENSITIVE: []
     end
 
@@ -4788,6 +4794,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class IdleSettings
+      attr_accessor lifecycle_management: ("ENABLED" | "DISABLED")
+      attr_accessor idle_timeout_in_minutes: ::Integer
+      attr_accessor min_idle_timeout_in_minutes: ::Integer
+      attr_accessor max_idle_timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class Image
       attr_accessor creation_time: ::Time
       attr_accessor description: ::String
@@ -5047,6 +5061,7 @@ module Aws::SageMaker
       attr_accessor custom_images: ::Array[Types::CustomImage]
       attr_accessor lifecycle_config_arns: ::Array[::String]
       attr_accessor code_repositories: ::Array[Types::CodeRepository]
+      attr_accessor app_lifecycle_management: Types::AppLifecycleManagement
       attr_accessor emr_settings: Types::EmrSettings
       SENSITIVE: []
     end
@@ -8512,8 +8527,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class SpaceAppLifecycleManagement
+      attr_accessor idle_settings: Types::SpaceIdleSettings
+      SENSITIVE: []
+    end
+
     class SpaceCodeEditorAppSettings
       attr_accessor default_resource_spec: Types::ResourceSpec
+      attr_accessor app_lifecycle_management: Types::SpaceAppLifecycleManagement
       SENSITIVE: []
     end
 
@@ -8530,9 +8551,15 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class SpaceIdleSettings
+      attr_accessor idle_timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class SpaceJupyterLabAppSettings
       attr_accessor default_resource_spec: Types::ResourceSpec
       attr_accessor code_repositories: ::Array[Types::CodeRepository]
+      attr_accessor app_lifecycle_management: Types::SpaceAppLifecycleManagement
       SENSITIVE: []
     end
 
