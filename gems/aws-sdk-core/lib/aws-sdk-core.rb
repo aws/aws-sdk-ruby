@@ -111,7 +111,99 @@ require_relative 'aws-sdk-ssooidc'
 
 module Aws
 
-  CORE_GEM_VERSION = File.read(File.expand_path('../../VERSION', __FILE__)).strip
+  # tokens and token providers
+  autoload :Token, 'aws-sdk-core/token'
+  autoload :TokenProvider, 'aws-sdk-core/token_provider'
+  autoload :StaticTokenProvider, 'aws-sdk-core/static_token_provider'
+  autoload :RefreshingToken, 'aws-sdk-core/refreshing_token'
+  autoload :SSOTokenProvider, 'aws-sdk-core/sso_token_provider'
+  autoload :TokenProviderChain, 'aws-sdk-core/token_provider_chain'
+
+  module Plugins
+    autoload :BearerAuthorization, 'aws-sdk-core/plugins/bearer_authorization'
+  end
+
+  # client modules
+  autoload :ClientStubs, 'aws-sdk-core/client_stubs'
+  autoload :AsyncClientStubs, 'aws-sdk-core/async_client_stubs'
+  autoload :EagerLoader, 'aws-sdk-core/eager_loader'
+  autoload :Errors, 'aws-sdk-core/errors'
+  autoload :PageableResponse, 'aws-sdk-core/pageable_response'
+  autoload :Pager, 'aws-sdk-core/pager'
+  autoload :ParamConverter, 'aws-sdk-core/param_converter'
+  autoload :ParamValidator, 'aws-sdk-core/param_validator'
+  autoload :SharedConfig, 'aws-sdk-core/shared_config'
+  autoload :Structure, 'aws-sdk-core/structure'
+  autoload :EmptyStructure, 'aws-sdk-core/structure'
+  autoload :TypeBuilder, 'aws-sdk-core/type_builder'
+  autoload :Util, 'aws-sdk-core/util'
+
+  # resource classes
+  module Resources
+    autoload :Collection, 'aws-sdk-core/resources/collection'
+  end
+
+  # logging
+  module Log
+    autoload :Formatter, 'aws-sdk-core/log/formatter'
+    autoload :ParamFilter, 'aws-sdk-core/log/param_filter'
+    autoload :ParamFormatter, 'aws-sdk-core/log/param_formatter'
+  end
+
+  # stubbing
+  module Stubbing
+    autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
+    autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'
+    autoload :StubData, 'aws-sdk-core/stubbing/stub_data'
+    autoload :XmlError, 'aws-sdk-core/stubbing/xml_error'
+
+    module Protocols
+      autoload :Json, 'aws-sdk-core/stubbing/protocols/json'
+      autoload :Rest, 'aws-sdk-core/stubbing/protocols/rest'
+      autoload :RestJson, 'aws-sdk-core/stubbing/protocols/rest_json'
+      autoload :RestXml, 'aws-sdk-core/stubbing/protocols/rest_xml'
+      autoload :Query, 'aws-sdk-core/stubbing/protocols/query'
+      autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
+      autoload :RpcV2, 'aws-sdk-core/stubbing/protocols/rpc_v2'
+      autoload :ApiGateway, 'aws-sdk-core/stubbing/protocols/api_gateway'
+    end
+  end
+
+  # protocols
+  autoload :ErrorHandler, 'aws-sdk-core/error_handler'
+  autoload :Rest, 'aws-sdk-core/rest'
+  autoload :Xml, 'aws-sdk-core/xml'
+  autoload :Json, 'aws-sdk-core/json'
+  autoload :Query, 'aws-sdk-core/query'
+  autoload :RpcV2, 'aws-sdk-core/rpc_v2'
+
+  # event stream
+  autoload :Binary, 'aws-sdk-core/binary'
+  autoload :EventEmitter, 'aws-sdk-core/event_emitter'
+
+  # endpoint discovery
+  autoload :EndpointCache, 'aws-sdk-core/endpoint_cache'
+
+  # client metrics
+  module ClientSideMonitoring
+    autoload :RequestMetrics, 'aws-sdk-core/client_side_monitoring/request_metrics'
+    autoload :Publisher, 'aws-sdk-core/client_side_monitoring/publisher'
+  end
+
+  # utilities
+  autoload :ARN, 'aws-sdk-core/arn'
+  autoload :ARNParser, 'aws-sdk-core/arn_parser'
+  autoload :EC2Metadata, 'aws-sdk-core/ec2_metadata'
+  autoload :LRUCache, 'aws-sdk-core/lru_cache'
+
+  # dynamic endpoints
+  autoload :Endpoints, 'aws-sdk-core/endpoints'
+
+  module Plugins
+    autoload :SignatureV4, 'aws-sdk-core/plugins/signature_v4'
+  end
+
+  CORE_GEM_VERSION = File.read(File.expand_path('../VERSION', __dir__)).strip
 
   @config = {}
 

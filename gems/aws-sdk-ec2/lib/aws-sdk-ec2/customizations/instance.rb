@@ -15,6 +15,23 @@ module Aws
         private_key.private_decrypt(decoded)
       end
 
+      class Collection < Aws::Resources::Collection
+          extend Aws::Deprecations
+
+        {
+          create_tags: :batch_create_tags,
+          monitor: :batch_create_tags,
+          reboot: :batch_reboot,
+          start: :batch_start,
+          stop: :batch_stop,
+          terminate: :batch_terminate!,
+          unmonitor: :batch_unmonitor
+        }.each do |old_method, new_method|
+          alias_method old_method, new_method
+          deprecated old_method, use: new_method
+        end
+      end
+
       private
 
       def encrypted_password

@@ -80,6 +80,11 @@ module Aws
         object.download_file(destination, options)
       end
 
+      class Collection < Aws::Resources::Collection
+        alias_method :delete, :batch_delete!
+        extend Aws::Deprecations
+        deprecated :delete, use: :batch_delete!
+      end
     end
   end
 end

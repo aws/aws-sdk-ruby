@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
 # utility classes
-require 'aws-sdk-sqs/queue_poller'
+module Aws
+  module SQS
+    autoload :QueuePoller, 'aws-sdk-sqs/queue_poller'
+  end
+end
