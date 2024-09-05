@@ -114,16 +114,8 @@ module BuildTools
       end
     end
 
-    %w(Lambda LambdaPreview).each do |svc_name|
-      api(svc_name) do |api|
-        api['metadata']['serviceId'] ||= 'Lambda Preview' if svc_name == 'LambdaPreview'
-        api['shapes']['Timestamp']['type'] = 'timestamp'
-      end
-
-      doc('lambda') do |docs|
-        docs['shapes']['Blob']['refs']['UpdateFunctionCodeRequest$ZipFile'] =
-          "<p>.zip file containing your packaged source code.</p>"
-      end
+    api('Lambda') do |api|
+      api['shapes']['Timestamp']['type'] = 'timestamp'
     end
 
     smoke('MTurk') do |smoke|

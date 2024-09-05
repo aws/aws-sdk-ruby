@@ -656,9 +656,6 @@
   "Lambda": {
     "models": "lambda/2015-03-31"
   },
-  "LambdaPreview": {
-    "models": "lambda/2014-11-11"
-  },
   "LaunchWizard": {
     "models": "launch-wizard/2018-05-10"
   },
