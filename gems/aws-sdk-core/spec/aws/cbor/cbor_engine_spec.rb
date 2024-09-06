@@ -1,4 +1,5 @@
 require_relative '../../spec_helper'
+require 'aws-sdk-core/cbor/cbor_engine'
 
 module Aws
   module Cbor

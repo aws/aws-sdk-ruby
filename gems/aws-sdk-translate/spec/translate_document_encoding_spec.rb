@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
+require_relative '../lib/aws-sdk-translate/plugins/translate_document_encoding'
 
 module Aws::Translate
   module Plugins
