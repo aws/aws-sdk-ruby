@@ -52,7 +52,7 @@ module {{module_name}}
         def with_metric(params, &block)
           return block.call unless params && params[:endpoint]
 
-          Aws::Endpoints.with_metric('ENDPOINT_OVERRIDE', &block)
+          Aws::Plugins::UserAgent.metric('ENDPOINT_OVERRIDE', &block)
         end
 
         def apply_endpoint_headers(context, headers)
