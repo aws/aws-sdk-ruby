@@ -44,15 +44,25 @@ module {{module_name}}
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          with_metric(context[:endpoint_params]) { @handler.call(context) }
+          with_endpoint_metric(context[:endpoint_params]) do
+            with_sigv4a_metric(context[:auth_scheme]) do
+              @handler.call(context)
+            end
+          end
         end
 
         private
 
-        def with_metric(params, &block)
-          return block.call unless params && params[:endpoint]
+        def with_endpoint_metric(endpoint_params, &block)
+          return block.call unless endpoint_params && endpoint_params[:endpoint]
 
           Aws::Plugins::UserAgent.metric('ENDPOINT_OVERRIDE', &block)
+        end
+
+        def with_sigv4a_metric(auth_scheme, &block)
+          return block.call unless auth_scheme && auth_scheme['name'] == 'sigv4a'
+
+          Aws::Plugins::UserAgent.metric('SIGV4A_SIGNING', &block)
         end
 
         def apply_endpoint_headers(context, headers)
