@@ -17,7 +17,10 @@ module Aws
           "S3_CRYPTO_V2": "I",
           "S3_EXPRESS_BUCKET": "J",
           "S3_ACCESS_GRANTS": "K",
-          "GZIP_REQUEST_COMPRESSION": "L"
+          "GZIP_REQUEST_COMPRESSION": "L",
+          "PROTOCOL_RPC_V2_CBOR": "M",
+          "ENDPOINT_OVERRIDE": "N",
+          "SIGV4A_SIGNING": "S"
         }
       METRICS
 

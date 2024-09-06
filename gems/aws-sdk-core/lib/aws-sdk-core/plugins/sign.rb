@@ -50,10 +50,16 @@ module Aws
             )
             signer.sign(context)
           end
-          @handler.call(context)
+          with_metric(context[:auth_scheme]) { @handler.call(context) }
         end
 
         private
+
+        def with_metric(auth_scheme, &block)
+          return block.call unless auth_scheme && auth_scheme['name'] == 'sigv4a'
+
+          Aws::Plugins::UserAgent.metric('SIGV4A_SIGNING', &block)
+        end
 
         def v2_signing?(config)
           # 's3' is legacy signing, 'v4' is default
