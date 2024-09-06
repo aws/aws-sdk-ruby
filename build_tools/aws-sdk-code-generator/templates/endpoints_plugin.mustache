@@ -50,7 +50,7 @@ module {{module_name}}
         private
 
         def with_metric(params, &block)
-          return block.call unless params && params.endpoint
+          return block.call unless params && params[:endpoint]
 
           Aws::Endpoints.with_metric('ENDPOINT_OVERRIDE', &block)
         end
