@@ -7,9 +7,6 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-
-require_relative 'types'
-
 module Aws::Route53Resolver
   # @api private
   module ClientApi

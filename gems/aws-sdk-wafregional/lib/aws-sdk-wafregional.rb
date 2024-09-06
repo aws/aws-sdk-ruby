@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-wafregional/types'
+require_relative 'aws-sdk-wafregional/client_api'
+require_relative 'aws-sdk-wafregional/plugins/endpoints.rb'
+require_relative 'aws-sdk-wafregional/client'
+require_relative 'aws-sdk-wafregional/errors'
+require_relative 'aws-sdk-wafregional/resource'
+require_relative 'aws-sdk-wafregional/endpoint_parameters'
+require_relative 'aws-sdk-wafregional/endpoint_provider'
+require_relative 'aws-sdk-wafregional/endpoints'
 require_relative 'aws-sdk-wafregional/customizations'
-require_relative 'aws-sdk-wafregional/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS WAF Regional. This module is available in the
 # `aws-sdk-wafregional` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-wafregional/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::WAFRegional
-  autoload :Types, 'aws-sdk-wafregional/types'
-  autoload :ClientApi, 'aws-sdk-wafregional/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-wafregional/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-wafregional/client'
-  autoload :Errors, 'aws-sdk-wafregional/errors'
-  autoload :Resource, 'aws-sdk-wafregional/resource'
-  autoload :EndpointParameters, 'aws-sdk-wafregional/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-wafregional/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-wafregional/endpoints'
 
   GEM_VERSION = '1.69.0'
 

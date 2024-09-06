@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-bedrockagentruntime/types'
+require_relative 'aws-sdk-bedrockagentruntime/client_api'
+require_relative 'aws-sdk-bedrockagentruntime/plugins/endpoints.rb'
+require_relative 'aws-sdk-bedrockagentruntime/client'
+require_relative 'aws-sdk-bedrockagentruntime/errors'
+require_relative 'aws-sdk-bedrockagentruntime/resource'
+require_relative 'aws-sdk-bedrockagentruntime/endpoint_parameters'
+require_relative 'aws-sdk-bedrockagentruntime/endpoint_provider'
+require_relative 'aws-sdk-bedrockagentruntime/endpoints'
 require_relative 'aws-sdk-bedrockagentruntime/customizations'
-require_relative 'aws-sdk-bedrockagentruntime/railtie' if defined?(Rails::Railtie)
+require_relative 'aws-sdk-bedrockagentruntime/event_streams'
 
 # This module provides support for Agents for Amazon Bedrock Runtime. This module is available in the
 # `aws-sdk-bedrockagentruntime` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-bedrockagentruntime/railtie' if defined?(Rails::Railti
 #
 # @!group service
 module Aws::BedrockAgentRuntime
-  autoload :Types, 'aws-sdk-bedrockagentruntime/types'
-  autoload :ClientApi, 'aws-sdk-bedrockagentruntime/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-bedrockagentruntime/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-bedrockagentruntime/client'
-  autoload :Errors, 'aws-sdk-bedrockagentruntime/errors'
-  autoload :Resource, 'aws-sdk-bedrockagentruntime/resource'
-  autoload :EndpointParameters, 'aws-sdk-bedrockagentruntime/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-bedrockagentruntime/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-bedrockagentruntime/endpoints'
-  autoload :EventStreams, 'aws-sdk-bedrockagentruntime/event_streams'
 
   GEM_VERSION = '1.21.0'
 

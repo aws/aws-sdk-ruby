@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-redshiftserverless/types'
+require_relative 'aws-sdk-redshiftserverless/client_api'
+require_relative 'aws-sdk-redshiftserverless/plugins/endpoints.rb'
+require_relative 'aws-sdk-redshiftserverless/client'
+require_relative 'aws-sdk-redshiftserverless/errors'
+require_relative 'aws-sdk-redshiftserverless/resource'
+require_relative 'aws-sdk-redshiftserverless/endpoint_parameters'
+require_relative 'aws-sdk-redshiftserverless/endpoint_provider'
+require_relative 'aws-sdk-redshiftserverless/endpoints'
 require_relative 'aws-sdk-redshiftserverless/customizations'
-require_relative 'aws-sdk-redshiftserverless/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Redshift Serverless. This module is available in the
 # `aws-sdk-redshiftserverless` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-redshiftserverless/railtie' if defined?(Rails::Railtie
 #
 # @!group service
 module Aws::RedshiftServerless
-  autoload :Types, 'aws-sdk-redshiftserverless/types'
-  autoload :ClientApi, 'aws-sdk-redshiftserverless/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-redshiftserverless/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-redshiftserverless/client'
-  autoload :Errors, 'aws-sdk-redshiftserverless/errors'
-  autoload :Resource, 'aws-sdk-redshiftserverless/resource'
-  autoload :EndpointParameters, 'aws-sdk-redshiftserverless/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-redshiftserverless/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-redshiftserverless/endpoints'
 
   GEM_VERSION = '1.34.0'
 

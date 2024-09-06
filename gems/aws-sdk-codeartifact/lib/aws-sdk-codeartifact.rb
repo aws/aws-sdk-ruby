@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-codeartifact/types'
+require_relative 'aws-sdk-codeartifact/client_api'
+require_relative 'aws-sdk-codeartifact/plugins/endpoints.rb'
+require_relative 'aws-sdk-codeartifact/client'
+require_relative 'aws-sdk-codeartifact/errors'
+require_relative 'aws-sdk-codeartifact/resource'
+require_relative 'aws-sdk-codeartifact/endpoint_parameters'
+require_relative 'aws-sdk-codeartifact/endpoint_provider'
+require_relative 'aws-sdk-codeartifact/endpoints'
 require_relative 'aws-sdk-codeartifact/customizations'
-require_relative 'aws-sdk-codeartifact/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for CodeArtifact. This module is available in the
 # `aws-sdk-codeartifact` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-codeartifact/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::CodeArtifact
-  autoload :Types, 'aws-sdk-codeartifact/types'
-  autoload :ClientApi, 'aws-sdk-codeartifact/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-codeartifact/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-codeartifact/client'
-  autoload :Errors, 'aws-sdk-codeartifact/errors'
-  autoload :Resource, 'aws-sdk-codeartifact/resource'
-  autoload :EndpointParameters, 'aws-sdk-codeartifact/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-codeartifact/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-codeartifact/endpoints'
 
   GEM_VERSION = '1.48.0'
 

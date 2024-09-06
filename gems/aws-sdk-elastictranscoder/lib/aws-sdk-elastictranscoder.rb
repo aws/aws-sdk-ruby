@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-elastictranscoder/types'
+require_relative 'aws-sdk-elastictranscoder/client_api'
+require_relative 'aws-sdk-elastictranscoder/plugins/endpoints.rb'
+require_relative 'aws-sdk-elastictranscoder/client'
+require_relative 'aws-sdk-elastictranscoder/errors'
+require_relative 'aws-sdk-elastictranscoder/waiters'
+require_relative 'aws-sdk-elastictranscoder/resource'
+require_relative 'aws-sdk-elastictranscoder/endpoint_parameters'
+require_relative 'aws-sdk-elastictranscoder/endpoint_provider'
+require_relative 'aws-sdk-elastictranscoder/endpoints'
 require_relative 'aws-sdk-elastictranscoder/customizations'
-require_relative 'aws-sdk-elastictranscoder/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Elastic Transcoder. This module is available in the
 # `aws-sdk-elastictranscoder` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-elastictranscoder/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::ElasticTranscoder
-  autoload :Types, 'aws-sdk-elastictranscoder/types'
-  autoload :ClientApi, 'aws-sdk-elastictranscoder/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-elastictranscoder/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-elastictranscoder/client'
-  autoload :Errors, 'aws-sdk-elastictranscoder/errors'
-  autoload :Waiters, 'aws-sdk-elastictranscoder/waiters'
-  autoload :Resource, 'aws-sdk-elastictranscoder/resource'
-  autoload :EndpointParameters, 'aws-sdk-elastictranscoder/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-elastictranscoder/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-elastictranscoder/endpoints'
 
   GEM_VERSION = '1.58.0'
 

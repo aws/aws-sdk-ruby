@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-transfer/types'
+require_relative 'aws-sdk-transfer/client_api'
+require_relative 'aws-sdk-transfer/plugins/endpoints.rb'
+require_relative 'aws-sdk-transfer/client'
+require_relative 'aws-sdk-transfer/errors'
+require_relative 'aws-sdk-transfer/waiters'
+require_relative 'aws-sdk-transfer/resource'
+require_relative 'aws-sdk-transfer/endpoint_parameters'
+require_relative 'aws-sdk-transfer/endpoint_provider'
+require_relative 'aws-sdk-transfer/endpoints'
 require_relative 'aws-sdk-transfer/customizations'
-require_relative 'aws-sdk-transfer/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Transfer Family. This module is available in the
 # `aws-sdk-transfer` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-transfer/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Transfer
-  autoload :Types, 'aws-sdk-transfer/types'
-  autoload :ClientApi, 'aws-sdk-transfer/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-transfer/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-transfer/client'
-  autoload :Errors, 'aws-sdk-transfer/errors'
-  autoload :Waiters, 'aws-sdk-transfer/waiters'
-  autoload :Resource, 'aws-sdk-transfer/resource'
-  autoload :EndpointParameters, 'aws-sdk-transfer/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-transfer/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-transfer/endpoints'
 
   GEM_VERSION = '1.99.0'
 

@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-mwaa/types'
+require_relative 'aws-sdk-mwaa/client_api'
+require_relative 'aws-sdk-mwaa/plugins/endpoints.rb'
+require_relative 'aws-sdk-mwaa/client'
+require_relative 'aws-sdk-mwaa/errors'
+require_relative 'aws-sdk-mwaa/resource'
+require_relative 'aws-sdk-mwaa/endpoint_parameters'
+require_relative 'aws-sdk-mwaa/endpoint_provider'
+require_relative 'aws-sdk-mwaa/endpoints'
 require_relative 'aws-sdk-mwaa/customizations'
-require_relative 'aws-sdk-mwaa/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AmazonMWAA. This module is available in the
 # `aws-sdk-mwaa` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-mwaa/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::MWAA
-  autoload :Types, 'aws-sdk-mwaa/types'
-  autoload :ClientApi, 'aws-sdk-mwaa/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-mwaa/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-mwaa/client'
-  autoload :Errors, 'aws-sdk-mwaa/errors'
-  autoload :Resource, 'aws-sdk-mwaa/resource'
-  autoload :EndpointParameters, 'aws-sdk-mwaa/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-mwaa/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-mwaa/endpoints'
 
   GEM_VERSION = '1.43.0'
 

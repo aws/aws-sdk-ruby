@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-serverlessapplicationrepository/types'
+require_relative 'aws-sdk-serverlessapplicationrepository/client_api'
+require_relative 'aws-sdk-serverlessapplicationrepository/plugins/endpoints.rb'
+require_relative 'aws-sdk-serverlessapplicationrepository/client'
+require_relative 'aws-sdk-serverlessapplicationrepository/errors'
+require_relative 'aws-sdk-serverlessapplicationrepository/resource'
+require_relative 'aws-sdk-serverlessapplicationrepository/endpoint_parameters'
+require_relative 'aws-sdk-serverlessapplicationrepository/endpoint_provider'
+require_relative 'aws-sdk-serverlessapplicationrepository/endpoints'
 require_relative 'aws-sdk-serverlessapplicationrepository/customizations'
-require_relative 'aws-sdk-serverlessapplicationrepository/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWSServerlessApplicationRepository. This module is available in the
 # `aws-sdk-serverlessapplicationrepository` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-serverlessapplicationrepository/railtie' if defined?(R
 #
 # @!group service
 module Aws::ServerlessApplicationRepository
-  autoload :Types, 'aws-sdk-serverlessapplicationrepository/types'
-  autoload :ClientApi, 'aws-sdk-serverlessapplicationrepository/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-serverlessapplicationrepository/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-serverlessapplicationrepository/client'
-  autoload :Errors, 'aws-sdk-serverlessapplicationrepository/errors'
-  autoload :Resource, 'aws-sdk-serverlessapplicationrepository/resource'
-  autoload :EndpointParameters, 'aws-sdk-serverlessapplicationrepository/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-serverlessapplicationrepository/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-serverlessapplicationrepository/endpoints'
 
   GEM_VERSION = '1.63.0'
 

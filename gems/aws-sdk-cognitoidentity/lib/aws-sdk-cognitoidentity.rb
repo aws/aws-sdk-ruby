@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-cognitoidentity/types'
+require_relative 'aws-sdk-cognitoidentity/client_api'
+require_relative 'aws-sdk-cognitoidentity/plugins/endpoints.rb'
+require_relative 'aws-sdk-cognitoidentity/client'
+require_relative 'aws-sdk-cognitoidentity/errors'
+require_relative 'aws-sdk-cognitoidentity/resource'
+require_relative 'aws-sdk-cognitoidentity/endpoint_parameters'
+require_relative 'aws-sdk-cognitoidentity/endpoint_provider'
+require_relative 'aws-sdk-cognitoidentity/endpoints'
 require_relative 'aws-sdk-cognitoidentity/customizations'
-require_relative 'aws-sdk-cognitoidentity/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Cognito Identity. This module is available in the
 # `aws-sdk-cognitoidentity` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-cognitoidentity/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::CognitoIdentity
-  autoload :Types, 'aws-sdk-cognitoidentity/types'
-  autoload :ClientApi, 'aws-sdk-cognitoidentity/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-cognitoidentity/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-cognitoidentity/client'
-  autoload :Errors, 'aws-sdk-cognitoidentity/errors'
-  autoload :Resource, 'aws-sdk-cognitoidentity/resource'
-  autoload :EndpointParameters, 'aws-sdk-cognitoidentity/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-cognitoidentity/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-cognitoidentity/endpoints'
 
   GEM_VERSION = '1.61.0'
 

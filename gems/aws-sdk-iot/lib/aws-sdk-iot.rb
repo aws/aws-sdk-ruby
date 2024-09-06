@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-iot/types'
+require_relative 'aws-sdk-iot/client_api'
+require_relative 'aws-sdk-iot/plugins/endpoints.rb'
+require_relative 'aws-sdk-iot/client'
+require_relative 'aws-sdk-iot/errors'
+require_relative 'aws-sdk-iot/resource'
+require_relative 'aws-sdk-iot/endpoint_parameters'
+require_relative 'aws-sdk-iot/endpoint_provider'
+require_relative 'aws-sdk-iot/endpoints'
 require_relative 'aws-sdk-iot/customizations'
-require_relative 'aws-sdk-iot/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT. This module is available in the
 # `aws-sdk-iot` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-iot/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::IoT
-  autoload :Types, 'aws-sdk-iot/types'
-  autoload :ClientApi, 'aws-sdk-iot/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-iot/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-iot/client'
-  autoload :Errors, 'aws-sdk-iot/errors'
-  autoload :Resource, 'aws-sdk-iot/resource'
-  autoload :EndpointParameters, 'aws-sdk-iot/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-iot/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-iot/endpoints'
 
   GEM_VERSION = '1.129.0'
 

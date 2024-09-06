@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-entityresolution/types'
+require_relative 'aws-sdk-entityresolution/client_api'
+require_relative 'aws-sdk-entityresolution/plugins/endpoints.rb'
+require_relative 'aws-sdk-entityresolution/client'
+require_relative 'aws-sdk-entityresolution/errors'
+require_relative 'aws-sdk-entityresolution/resource'
+require_relative 'aws-sdk-entityresolution/endpoint_parameters'
+require_relative 'aws-sdk-entityresolution/endpoint_provider'
+require_relative 'aws-sdk-entityresolution/endpoints'
 require_relative 'aws-sdk-entityresolution/customizations'
-require_relative 'aws-sdk-entityresolution/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS EntityResolution. This module is available in the
 # `aws-sdk-entityresolution` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-entityresolution/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::EntityResolution
-  autoload :Types, 'aws-sdk-entityresolution/types'
-  autoload :ClientApi, 'aws-sdk-entityresolution/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-entityresolution/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-entityresolution/client'
-  autoload :Errors, 'aws-sdk-entityresolution/errors'
-  autoload :Resource, 'aws-sdk-entityresolution/resource'
-  autoload :EndpointParameters, 'aws-sdk-entityresolution/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-entityresolution/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-entityresolution/endpoints'
 
   GEM_VERSION = '1.17.0'
 

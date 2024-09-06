@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-connectwisdomservice/types'
+require_relative 'aws-sdk-connectwisdomservice/client_api'
+require_relative 'aws-sdk-connectwisdomservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-connectwisdomservice/client'
+require_relative 'aws-sdk-connectwisdomservice/errors'
+require_relative 'aws-sdk-connectwisdomservice/resource'
+require_relative 'aws-sdk-connectwisdomservice/endpoint_parameters'
+require_relative 'aws-sdk-connectwisdomservice/endpoint_provider'
+require_relative 'aws-sdk-connectwisdomservice/endpoints'
 require_relative 'aws-sdk-connectwisdomservice/customizations'
-require_relative 'aws-sdk-connectwisdomservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Connect Wisdom Service. This module is available in the
 # `aws-sdk-connectwisdomservice` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-connectwisdomservice/railtie' if defined?(Rails::Railt
 #
 # @!group service
 module Aws::ConnectWisdomService
-  autoload :Types, 'aws-sdk-connectwisdomservice/types'
-  autoload :ClientApi, 'aws-sdk-connectwisdomservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-connectwisdomservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-connectwisdomservice/client'
-  autoload :Errors, 'aws-sdk-connectwisdomservice/errors'
-  autoload :Resource, 'aws-sdk-connectwisdomservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-connectwisdomservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-connectwisdomservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-connectwisdomservice/endpoints'
 
   GEM_VERSION = '1.35.0'
 

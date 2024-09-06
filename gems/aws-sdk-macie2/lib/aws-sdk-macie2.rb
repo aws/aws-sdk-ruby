@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-macie2/types'
+require_relative 'aws-sdk-macie2/client_api'
+require_relative 'aws-sdk-macie2/plugins/endpoints.rb'
+require_relative 'aws-sdk-macie2/client'
+require_relative 'aws-sdk-macie2/errors'
+require_relative 'aws-sdk-macie2/waiters'
+require_relative 'aws-sdk-macie2/resource'
+require_relative 'aws-sdk-macie2/endpoint_parameters'
+require_relative 'aws-sdk-macie2/endpoint_provider'
+require_relative 'aws-sdk-macie2/endpoints'
 require_relative 'aws-sdk-macie2/customizations'
-require_relative 'aws-sdk-macie2/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Macie 2. This module is available in the
 # `aws-sdk-macie2` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-macie2/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Macie2
-  autoload :Types, 'aws-sdk-macie2/types'
-  autoload :ClientApi, 'aws-sdk-macie2/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-macie2/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-macie2/client'
-  autoload :Errors, 'aws-sdk-macie2/errors'
-  autoload :Waiters, 'aws-sdk-macie2/waiters'
-  autoload :Resource, 'aws-sdk-macie2/resource'
-  autoload :EndpointParameters, 'aws-sdk-macie2/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-macie2/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-macie2/endpoints'
 
   GEM_VERSION = '1.74.0'
 

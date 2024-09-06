@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-chime/types'
+require_relative 'aws-sdk-chime/client_api'
+require_relative 'aws-sdk-chime/plugins/endpoints.rb'
+require_relative 'aws-sdk-chime/client'
+require_relative 'aws-sdk-chime/errors'
+require_relative 'aws-sdk-chime/resource'
+require_relative 'aws-sdk-chime/endpoint_parameters'
+require_relative 'aws-sdk-chime/endpoint_provider'
+require_relative 'aws-sdk-chime/endpoints'
 require_relative 'aws-sdk-chime/customizations'
-require_relative 'aws-sdk-chime/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Chime. This module is available in the
 # `aws-sdk-chime` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-chime/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Chime
-  autoload :Types, 'aws-sdk-chime/types'
-  autoload :ClientApi, 'aws-sdk-chime/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-chime/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-chime/client'
-  autoload :Errors, 'aws-sdk-chime/errors'
-  autoload :Resource, 'aws-sdk-chime/resource'
-  autoload :EndpointParameters, 'aws-sdk-chime/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-chime/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-chime/endpoints'
 
   GEM_VERSION = '1.90.0'
 

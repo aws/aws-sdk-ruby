@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-freetier/types'
+require_relative 'aws-sdk-freetier/client_api'
+require_relative 'aws-sdk-freetier/plugins/endpoints.rb'
+require_relative 'aws-sdk-freetier/client'
+require_relative 'aws-sdk-freetier/errors'
+require_relative 'aws-sdk-freetier/resource'
+require_relative 'aws-sdk-freetier/endpoint_parameters'
+require_relative 'aws-sdk-freetier/endpoint_provider'
+require_relative 'aws-sdk-freetier/endpoints'
 require_relative 'aws-sdk-freetier/customizations'
-require_relative 'aws-sdk-freetier/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Free Tier. This module is available in the
 # `aws-sdk-freetier` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-freetier/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::FreeTier
-  autoload :Types, 'aws-sdk-freetier/types'
-  autoload :ClientApi, 'aws-sdk-freetier/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-freetier/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-freetier/client'
-  autoload :Errors, 'aws-sdk-freetier/errors'
-  autoload :Resource, 'aws-sdk-freetier/resource'
-  autoload :EndpointParameters, 'aws-sdk-freetier/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-freetier/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-freetier/endpoints'
 
   GEM_VERSION = '1.9.0'
 

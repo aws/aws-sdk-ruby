@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-ecr/types'
+require_relative 'aws-sdk-ecr/client_api'
+require_relative 'aws-sdk-ecr/plugins/endpoints.rb'
+require_relative 'aws-sdk-ecr/client'
+require_relative 'aws-sdk-ecr/errors'
+require_relative 'aws-sdk-ecr/waiters'
+require_relative 'aws-sdk-ecr/resource'
+require_relative 'aws-sdk-ecr/endpoint_parameters'
+require_relative 'aws-sdk-ecr/endpoint_provider'
+require_relative 'aws-sdk-ecr/endpoints'
 require_relative 'aws-sdk-ecr/customizations'
-require_relative 'aws-sdk-ecr/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon EC2 Container Registry. This module is available in the
 # `aws-sdk-ecr` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-ecr/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::ECR
-  autoload :Types, 'aws-sdk-ecr/types'
-  autoload :ClientApi, 'aws-sdk-ecr/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-ecr/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-ecr/client'
-  autoload :Errors, 'aws-sdk-ecr/errors'
-  autoload :Waiters, 'aws-sdk-ecr/waiters'
-  autoload :Resource, 'aws-sdk-ecr/resource'
-  autoload :EndpointParameters, 'aws-sdk-ecr/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-ecr/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-ecr/endpoints'
 
   GEM_VERSION = '1.81.0'
 

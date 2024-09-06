@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-marketplacecommerceanalytics/types'
+require_relative 'aws-sdk-marketplacecommerceanalytics/client_api'
+require_relative 'aws-sdk-marketplacecommerceanalytics/plugins/endpoints.rb'
+require_relative 'aws-sdk-marketplacecommerceanalytics/client'
+require_relative 'aws-sdk-marketplacecommerceanalytics/errors'
+require_relative 'aws-sdk-marketplacecommerceanalytics/resource'
+require_relative 'aws-sdk-marketplacecommerceanalytics/endpoint_parameters'
+require_relative 'aws-sdk-marketplacecommerceanalytics/endpoint_provider'
+require_relative 'aws-sdk-marketplacecommerceanalytics/endpoints'
 require_relative 'aws-sdk-marketplacecommerceanalytics/customizations'
-require_relative 'aws-sdk-marketplacecommerceanalytics/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Marketplace Commerce Analytics. This module is available in the
 # `aws-sdk-marketplacecommerceanalytics` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-marketplacecommerceanalytics/railtie' if defined?(Rail
 #
 # @!group service
 module Aws::MarketplaceCommerceAnalytics
-  autoload :Types, 'aws-sdk-marketplacecommerceanalytics/types'
-  autoload :ClientApi, 'aws-sdk-marketplacecommerceanalytics/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-marketplacecommerceanalytics/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-marketplacecommerceanalytics/client'
-  autoload :Errors, 'aws-sdk-marketplacecommerceanalytics/errors'
-  autoload :Resource, 'aws-sdk-marketplacecommerceanalytics/resource'
-  autoload :EndpointParameters, 'aws-sdk-marketplacecommerceanalytics/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-marketplacecommerceanalytics/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-marketplacecommerceanalytics/endpoints'
 
   GEM_VERSION = '1.62.0'
 

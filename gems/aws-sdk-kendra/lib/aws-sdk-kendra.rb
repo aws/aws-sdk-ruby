@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-kendra/types'
+require_relative 'aws-sdk-kendra/client_api'
+require_relative 'aws-sdk-kendra/plugins/endpoints.rb'
+require_relative 'aws-sdk-kendra/client'
+require_relative 'aws-sdk-kendra/errors'
+require_relative 'aws-sdk-kendra/resource'
+require_relative 'aws-sdk-kendra/endpoint_parameters'
+require_relative 'aws-sdk-kendra/endpoint_provider'
+require_relative 'aws-sdk-kendra/endpoints'
 require_relative 'aws-sdk-kendra/customizations'
-require_relative 'aws-sdk-kendra/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWSKendraFrontendService. This module is available in the
 # `aws-sdk-kendra` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-kendra/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Kendra
-  autoload :Types, 'aws-sdk-kendra/types'
-  autoload :ClientApi, 'aws-sdk-kendra/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-kendra/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-kendra/client'
-  autoload :Errors, 'aws-sdk-kendra/errors'
-  autoload :Resource, 'aws-sdk-kendra/resource'
-  autoload :EndpointParameters, 'aws-sdk-kendra/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-kendra/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-kendra/endpoints'
 
   GEM_VERSION = '1.86.0'
 

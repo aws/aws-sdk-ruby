@@ -10,8 +10,17 @@
 
 require 'aws-sdk-core'
 
+require_relative 'aws-sdk-codecatalyst/types'
+require_relative 'aws-sdk-codecatalyst/client_api'
+require_relative 'aws-sdk-codecatalyst/plugins/endpoints.rb'
+require_relative 'aws-sdk-codecatalyst/client'
+require_relative 'aws-sdk-codecatalyst/errors'
+require_relative 'aws-sdk-codecatalyst/waiters'
+require_relative 'aws-sdk-codecatalyst/resource'
+require_relative 'aws-sdk-codecatalyst/endpoint_parameters'
+require_relative 'aws-sdk-codecatalyst/endpoint_provider'
+require_relative 'aws-sdk-codecatalyst/endpoints'
 require_relative 'aws-sdk-codecatalyst/customizations'
-require_relative 'aws-sdk-codecatalyst/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CodeCatalyst. This module is available in the
 # `aws-sdk-codecatalyst` gem.
@@ -42,18 +51,6 @@ require_relative 'aws-sdk-codecatalyst/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::CodeCatalyst
-  autoload :Types, 'aws-sdk-codecatalyst/types'
-  autoload :ClientApi, 'aws-sdk-codecatalyst/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-codecatalyst/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-codecatalyst/client'
-  autoload :Errors, 'aws-sdk-codecatalyst/errors'
-  autoload :Waiters, 'aws-sdk-codecatalyst/waiters'
-  autoload :Resource, 'aws-sdk-codecatalyst/resource'
-  autoload :EndpointParameters, 'aws-sdk-codecatalyst/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-codecatalyst/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-codecatalyst/endpoints'
 
   GEM_VERSION = '1.24.0'
 

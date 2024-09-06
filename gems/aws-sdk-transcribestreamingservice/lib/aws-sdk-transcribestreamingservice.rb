@@ -11,8 +11,18 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-transcribestreamingservice/types'
+require_relative 'aws-sdk-transcribestreamingservice/client_api'
+require_relative 'aws-sdk-transcribestreamingservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-transcribestreamingservice/client'
+require_relative 'aws-sdk-transcribestreamingservice/errors'
+require_relative 'aws-sdk-transcribestreamingservice/resource'
+require_relative 'aws-sdk-transcribestreamingservice/endpoint_parameters'
+require_relative 'aws-sdk-transcribestreamingservice/endpoint_provider'
+require_relative 'aws-sdk-transcribestreamingservice/endpoints'
 require_relative 'aws-sdk-transcribestreamingservice/customizations'
-require_relative 'aws-sdk-transcribestreamingservice/railtie' if defined?(Rails::Railtie)
+require_relative 'aws-sdk-transcribestreamingservice/async_client'
+require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 
 # This module provides support for Amazon Transcribe Streaming Service. This module is available in the
 # `aws-sdk-transcribestreamingservice` gem.
@@ -43,19 +53,6 @@ require_relative 'aws-sdk-transcribestreamingservice/railtie' if defined?(Rails:
 #
 # @!group service
 module Aws::TranscribeStreamingService
-  autoload :Types, 'aws-sdk-transcribestreamingservice/types'
-  autoload :ClientApi, 'aws-sdk-transcribestreamingservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-transcribestreamingservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-transcribestreamingservice/client'
-  autoload :Errors, 'aws-sdk-transcribestreamingservice/errors'
-  autoload :Resource, 'aws-sdk-transcribestreamingservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-transcribestreamingservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-transcribestreamingservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-transcribestreamingservice/endpoints'
-  autoload :AsyncClient, 'aws-sdk-transcribestreamingservice/async_client'
-  autoload :EventStreams, 'aws-sdk-transcribestreamingservice/event_streams'
 
   GEM_VERSION = '1.65.0'
 

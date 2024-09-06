@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-deadline/types'
+require_relative 'aws-sdk-deadline/client_api'
+require_relative 'aws-sdk-deadline/plugins/endpoints.rb'
+require_relative 'aws-sdk-deadline/client'
+require_relative 'aws-sdk-deadline/errors'
+require_relative 'aws-sdk-deadline/waiters'
+require_relative 'aws-sdk-deadline/resource'
+require_relative 'aws-sdk-deadline/endpoint_parameters'
+require_relative 'aws-sdk-deadline/endpoint_provider'
+require_relative 'aws-sdk-deadline/endpoints'
 require_relative 'aws-sdk-deadline/customizations'
-require_relative 'aws-sdk-deadline/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWSDeadlineCloud. This module is available in the
 # `aws-sdk-deadline` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-deadline/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Deadline
-  autoload :Types, 'aws-sdk-deadline/types'
-  autoload :ClientApi, 'aws-sdk-deadline/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-deadline/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-deadline/client'
-  autoload :Errors, 'aws-sdk-deadline/errors'
-  autoload :Waiters, 'aws-sdk-deadline/waiters'
-  autoload :Resource, 'aws-sdk-deadline/resource'
-  autoload :EndpointParameters, 'aws-sdk-deadline/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-deadline/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-deadline/endpoints'
 
   GEM_VERSION = '1.9.0'
 

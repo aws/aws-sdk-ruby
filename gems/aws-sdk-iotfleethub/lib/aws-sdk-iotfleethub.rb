@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-iotfleethub/types'
+require_relative 'aws-sdk-iotfleethub/client_api'
+require_relative 'aws-sdk-iotfleethub/plugins/endpoints.rb'
+require_relative 'aws-sdk-iotfleethub/client'
+require_relative 'aws-sdk-iotfleethub/errors'
+require_relative 'aws-sdk-iotfleethub/resource'
+require_relative 'aws-sdk-iotfleethub/endpoint_parameters'
+require_relative 'aws-sdk-iotfleethub/endpoint_provider'
+require_relative 'aws-sdk-iotfleethub/endpoints'
 require_relative 'aws-sdk-iotfleethub/customizations'
-require_relative 'aws-sdk-iotfleethub/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS IoT Fleet Hub. This module is available in the
 # `aws-sdk-iotfleethub` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-iotfleethub/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::IoTFleetHub
-  autoload :Types, 'aws-sdk-iotfleethub/types'
-  autoload :ClientApi, 'aws-sdk-iotfleethub/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-iotfleethub/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-iotfleethub/client'
-  autoload :Errors, 'aws-sdk-iotfleethub/errors'
-  autoload :Resource, 'aws-sdk-iotfleethub/resource'
-  autoload :EndpointParameters, 'aws-sdk-iotfleethub/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-iotfleethub/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-iotfleethub/endpoints'
 
   GEM_VERSION = '1.32.0'
 

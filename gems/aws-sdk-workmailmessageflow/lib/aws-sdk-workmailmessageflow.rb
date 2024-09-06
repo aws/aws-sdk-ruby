@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-workmailmessageflow/types'
+require_relative 'aws-sdk-workmailmessageflow/client_api'
+require_relative 'aws-sdk-workmailmessageflow/plugins/endpoints.rb'
+require_relative 'aws-sdk-workmailmessageflow/client'
+require_relative 'aws-sdk-workmailmessageflow/errors'
+require_relative 'aws-sdk-workmailmessageflow/resource'
+require_relative 'aws-sdk-workmailmessageflow/endpoint_parameters'
+require_relative 'aws-sdk-workmailmessageflow/endpoint_provider'
+require_relative 'aws-sdk-workmailmessageflow/endpoints'
 require_relative 'aws-sdk-workmailmessageflow/customizations'
-require_relative 'aws-sdk-workmailmessageflow/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon WorkMail Message Flow. This module is available in the
 # `aws-sdk-workmailmessageflow` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-workmailmessageflow/railtie' if defined?(Rails::Railti
 #
 # @!group service
 module Aws::WorkMailMessageFlow
-  autoload :Types, 'aws-sdk-workmailmessageflow/types'
-  autoload :ClientApi, 'aws-sdk-workmailmessageflow/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-workmailmessageflow/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-workmailmessageflow/client'
-  autoload :Errors, 'aws-sdk-workmailmessageflow/errors'
-  autoload :Resource, 'aws-sdk-workmailmessageflow/resource'
-  autoload :EndpointParameters, 'aws-sdk-workmailmessageflow/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-workmailmessageflow/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-workmailmessageflow/endpoints'
 
   GEM_VERSION = '1.41.0'
 

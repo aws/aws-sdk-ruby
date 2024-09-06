@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/types'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/client_api'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/plugins/endpoints.rb'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/client'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/errors'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/resource'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/endpoint_parameters'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/endpoint_provider'
+require_relative 'aws-sdk-cloudfrontkeyvaluestore/endpoints'
 require_relative 'aws-sdk-cloudfrontkeyvaluestore/customizations'
-require_relative 'aws-sdk-cloudfrontkeyvaluestore/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CloudFront KeyValueStore. This module is available in the
 # `aws-sdk-cloudfrontkeyvaluestore` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-cloudfrontkeyvaluestore/railtie' if defined?(Rails::Ra
 #
 # @!group service
 module Aws::CloudFrontKeyValueStore
-  autoload :Types, 'aws-sdk-cloudfrontkeyvaluestore/types'
-  autoload :ClientApi, 'aws-sdk-cloudfrontkeyvaluestore/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-cloudfrontkeyvaluestore/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-cloudfrontkeyvaluestore/client'
-  autoload :Errors, 'aws-sdk-cloudfrontkeyvaluestore/errors'
-  autoload :Resource, 'aws-sdk-cloudfrontkeyvaluestore/resource'
-  autoload :EndpointParameters, 'aws-sdk-cloudfrontkeyvaluestore/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-cloudfrontkeyvaluestore/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-cloudfrontkeyvaluestore/endpoints'
 
   GEM_VERSION = '1.11.0'
 

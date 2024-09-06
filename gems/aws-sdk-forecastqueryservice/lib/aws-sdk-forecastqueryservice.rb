@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-forecastqueryservice/types'
+require_relative 'aws-sdk-forecastqueryservice/client_api'
+require_relative 'aws-sdk-forecastqueryservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-forecastqueryservice/client'
+require_relative 'aws-sdk-forecastqueryservice/errors'
+require_relative 'aws-sdk-forecastqueryservice/resource'
+require_relative 'aws-sdk-forecastqueryservice/endpoint_parameters'
+require_relative 'aws-sdk-forecastqueryservice/endpoint_provider'
+require_relative 'aws-sdk-forecastqueryservice/endpoints'
 require_relative 'aws-sdk-forecastqueryservice/customizations'
-require_relative 'aws-sdk-forecastqueryservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Forecast Query Service. This module is available in the
 # `aws-sdk-forecastqueryservice` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-forecastqueryservice/railtie' if defined?(Rails::Railt
 #
 # @!group service
 module Aws::ForecastQueryService
-  autoload :Types, 'aws-sdk-forecastqueryservice/types'
-  autoload :ClientApi, 'aws-sdk-forecastqueryservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-forecastqueryservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-forecastqueryservice/client'
-  autoload :Errors, 'aws-sdk-forecastqueryservice/errors'
-  autoload :Resource, 'aws-sdk-forecastqueryservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-forecastqueryservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-forecastqueryservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-forecastqueryservice/endpoints'
 
   GEM_VERSION = '1.42.0'
 

@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-marketplacecatalog/types'
+require_relative 'aws-sdk-marketplacecatalog/client_api'
+require_relative 'aws-sdk-marketplacecatalog/plugins/endpoints.rb'
+require_relative 'aws-sdk-marketplacecatalog/client'
+require_relative 'aws-sdk-marketplacecatalog/errors'
+require_relative 'aws-sdk-marketplacecatalog/resource'
+require_relative 'aws-sdk-marketplacecatalog/endpoint_parameters'
+require_relative 'aws-sdk-marketplacecatalog/endpoint_provider'
+require_relative 'aws-sdk-marketplacecatalog/endpoints'
 require_relative 'aws-sdk-marketplacecatalog/customizations'
-require_relative 'aws-sdk-marketplacecatalog/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Marketplace Catalog Service. This module is available in the
 # `aws-sdk-marketplacecatalog` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-marketplacecatalog/railtie' if defined?(Rails::Railtie
 #
 # @!group service
 module Aws::MarketplaceCatalog
-  autoload :Types, 'aws-sdk-marketplacecatalog/types'
-  autoload :ClientApi, 'aws-sdk-marketplacecatalog/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-marketplacecatalog/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-marketplacecatalog/client'
-  autoload :Errors, 'aws-sdk-marketplacecatalog/errors'
-  autoload :Resource, 'aws-sdk-marketplacecatalog/resource'
-  autoload :EndpointParameters, 'aws-sdk-marketplacecatalog/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-marketplacecatalog/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-marketplacecatalog/endpoints'
 
   GEM_VERSION = '1.48.0'
 

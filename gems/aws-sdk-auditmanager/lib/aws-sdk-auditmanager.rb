@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-auditmanager/types'
+require_relative 'aws-sdk-auditmanager/client_api'
+require_relative 'aws-sdk-auditmanager/plugins/endpoints.rb'
+require_relative 'aws-sdk-auditmanager/client'
+require_relative 'aws-sdk-auditmanager/errors'
+require_relative 'aws-sdk-auditmanager/resource'
+require_relative 'aws-sdk-auditmanager/endpoint_parameters'
+require_relative 'aws-sdk-auditmanager/endpoint_provider'
+require_relative 'aws-sdk-auditmanager/endpoints'
 require_relative 'aws-sdk-auditmanager/customizations'
-require_relative 'aws-sdk-auditmanager/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Audit Manager. This module is available in the
 # `aws-sdk-auditmanager` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-auditmanager/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::AuditManager
-  autoload :Types, 'aws-sdk-auditmanager/types'
-  autoload :ClientApi, 'aws-sdk-auditmanager/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-auditmanager/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-auditmanager/client'
-  autoload :Errors, 'aws-sdk-auditmanager/errors'
-  autoload :Resource, 'aws-sdk-auditmanager/resource'
-  autoload :EndpointParameters, 'aws-sdk-auditmanager/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-auditmanager/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-auditmanager/endpoints'
 
   GEM_VERSION = '1.52.0'
 

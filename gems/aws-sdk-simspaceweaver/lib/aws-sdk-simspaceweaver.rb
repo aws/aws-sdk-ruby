@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-simspaceweaver/types'
+require_relative 'aws-sdk-simspaceweaver/client_api'
+require_relative 'aws-sdk-simspaceweaver/plugins/endpoints.rb'
+require_relative 'aws-sdk-simspaceweaver/client'
+require_relative 'aws-sdk-simspaceweaver/errors'
+require_relative 'aws-sdk-simspaceweaver/resource'
+require_relative 'aws-sdk-simspaceweaver/endpoint_parameters'
+require_relative 'aws-sdk-simspaceweaver/endpoint_provider'
+require_relative 'aws-sdk-simspaceweaver/endpoints'
 require_relative 'aws-sdk-simspaceweaver/customizations'
-require_relative 'aws-sdk-simspaceweaver/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS SimSpace Weaver. This module is available in the
 # `aws-sdk-simspaceweaver` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-simspaceweaver/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::SimSpaceWeaver
-  autoload :Types, 'aws-sdk-simspaceweaver/types'
-  autoload :ClientApi, 'aws-sdk-simspaceweaver/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-simspaceweaver/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-simspaceweaver/client'
-  autoload :Errors, 'aws-sdk-simspaceweaver/errors'
-  autoload :Resource, 'aws-sdk-simspaceweaver/resource'
-  autoload :EndpointParameters, 'aws-sdk-simspaceweaver/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-simspaceweaver/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-simspaceweaver/endpoints'
 
   GEM_VERSION = '1.21.0'
 

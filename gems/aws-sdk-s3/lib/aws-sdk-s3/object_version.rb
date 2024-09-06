@@ -911,6 +911,3 @@ module Aws::S3
     end
   end
 end
-
-# Load customizations if they exist
-require 'aws-sdk-s3/customizations/object_version'

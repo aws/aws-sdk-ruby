@@ -134,6 +134,3 @@ module Aws::S3
 
   end
 end
-
-# Load customizations if they exist
-require 'aws-sdk-s3/customizations/errors'

@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-lightsail/types'
+require_relative 'aws-sdk-lightsail/client_api'
+require_relative 'aws-sdk-lightsail/plugins/endpoints.rb'
+require_relative 'aws-sdk-lightsail/client'
+require_relative 'aws-sdk-lightsail/errors'
+require_relative 'aws-sdk-lightsail/resource'
+require_relative 'aws-sdk-lightsail/endpoint_parameters'
+require_relative 'aws-sdk-lightsail/endpoint_provider'
+require_relative 'aws-sdk-lightsail/endpoints'
 require_relative 'aws-sdk-lightsail/customizations'
-require_relative 'aws-sdk-lightsail/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Lightsail. This module is available in the
 # `aws-sdk-lightsail` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-lightsail/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Lightsail
-  autoload :Types, 'aws-sdk-lightsail/types'
-  autoload :ClientApi, 'aws-sdk-lightsail/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-lightsail/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-lightsail/client'
-  autoload :Errors, 'aws-sdk-lightsail/errors'
-  autoload :Resource, 'aws-sdk-lightsail/resource'
-  autoload :EndpointParameters, 'aws-sdk-lightsail/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-lightsail/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-lightsail/endpoints'
 
   GEM_VERSION = '1.97.0'
 

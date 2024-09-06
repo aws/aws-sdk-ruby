@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-costoptimizationhub/types'
+require_relative 'aws-sdk-costoptimizationhub/client_api'
+require_relative 'aws-sdk-costoptimizationhub/plugins/endpoints.rb'
+require_relative 'aws-sdk-costoptimizationhub/client'
+require_relative 'aws-sdk-costoptimizationhub/errors'
+require_relative 'aws-sdk-costoptimizationhub/waiters'
+require_relative 'aws-sdk-costoptimizationhub/resource'
+require_relative 'aws-sdk-costoptimizationhub/endpoint_parameters'
+require_relative 'aws-sdk-costoptimizationhub/endpoint_provider'
+require_relative 'aws-sdk-costoptimizationhub/endpoints'
 require_relative 'aws-sdk-costoptimizationhub/customizations'
-require_relative 'aws-sdk-costoptimizationhub/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Cost Optimization Hub. This module is available in the
 # `aws-sdk-costoptimizationhub` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-costoptimizationhub/railtie' if defined?(Rails::Railti
 #
 # @!group service
 module Aws::CostOptimizationHub
-  autoload :Types, 'aws-sdk-costoptimizationhub/types'
-  autoload :ClientApi, 'aws-sdk-costoptimizationhub/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-costoptimizationhub/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-costoptimizationhub/client'
-  autoload :Errors, 'aws-sdk-costoptimizationhub/errors'
-  autoload :Waiters, 'aws-sdk-costoptimizationhub/waiters'
-  autoload :Resource, 'aws-sdk-costoptimizationhub/resource'
-  autoload :EndpointParameters, 'aws-sdk-costoptimizationhub/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-costoptimizationhub/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-costoptimizationhub/endpoints'
 
   GEM_VERSION = '1.12.0'
 

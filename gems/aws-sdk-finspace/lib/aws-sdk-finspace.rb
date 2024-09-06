@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-finspace/types'
+require_relative 'aws-sdk-finspace/client_api'
+require_relative 'aws-sdk-finspace/plugins/endpoints.rb'
+require_relative 'aws-sdk-finspace/client'
+require_relative 'aws-sdk-finspace/errors'
+require_relative 'aws-sdk-finspace/resource'
+require_relative 'aws-sdk-finspace/endpoint_parameters'
+require_relative 'aws-sdk-finspace/endpoint_provider'
+require_relative 'aws-sdk-finspace/endpoints'
 require_relative 'aws-sdk-finspace/customizations'
-require_relative 'aws-sdk-finspace/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for FinSpace User Environment Management service. This module is available in the
 # `aws-sdk-finspace` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-finspace/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Finspace
-  autoload :Types, 'aws-sdk-finspace/types'
-  autoload :ClientApi, 'aws-sdk-finspace/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-finspace/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-finspace/client'
-  autoload :Errors, 'aws-sdk-finspace/errors'
-  autoload :Resource, 'aws-sdk-finspace/resource'
-  autoload :EndpointParameters, 'aws-sdk-finspace/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-finspace/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-finspace/endpoints'
 
   GEM_VERSION = '1.40.0'
 

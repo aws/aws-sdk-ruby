@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-neptunedata/types'
+require_relative 'aws-sdk-neptunedata/client_api'
+require_relative 'aws-sdk-neptunedata/plugins/endpoints.rb'
+require_relative 'aws-sdk-neptunedata/client'
+require_relative 'aws-sdk-neptunedata/errors'
+require_relative 'aws-sdk-neptunedata/resource'
+require_relative 'aws-sdk-neptunedata/endpoint_parameters'
+require_relative 'aws-sdk-neptunedata/endpoint_provider'
+require_relative 'aws-sdk-neptunedata/endpoints'
 require_relative 'aws-sdk-neptunedata/customizations'
-require_relative 'aws-sdk-neptunedata/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon NeptuneData. This module is available in the
 # `aws-sdk-neptunedata` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-neptunedata/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Neptunedata
-  autoload :Types, 'aws-sdk-neptunedata/types'
-  autoload :ClientApi, 'aws-sdk-neptunedata/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-neptunedata/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-neptunedata/client'
-  autoload :Errors, 'aws-sdk-neptunedata/errors'
-  autoload :Resource, 'aws-sdk-neptunedata/resource'
-  autoload :EndpointParameters, 'aws-sdk-neptunedata/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-neptunedata/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-neptunedata/endpoints'
 
   GEM_VERSION = '1.15.0'
 

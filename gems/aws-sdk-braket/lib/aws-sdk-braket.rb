@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-braket/types'
+require_relative 'aws-sdk-braket/client_api'
+require_relative 'aws-sdk-braket/plugins/endpoints.rb'
+require_relative 'aws-sdk-braket/client'
+require_relative 'aws-sdk-braket/errors'
+require_relative 'aws-sdk-braket/resource'
+require_relative 'aws-sdk-braket/endpoint_parameters'
+require_relative 'aws-sdk-braket/endpoint_provider'
+require_relative 'aws-sdk-braket/endpoints'
 require_relative 'aws-sdk-braket/customizations'
-require_relative 'aws-sdk-braket/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Braket. This module is available in the
 # `aws-sdk-braket` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-braket/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Braket
-  autoload :Types, 'aws-sdk-braket/types'
-  autoload :ClientApi, 'aws-sdk-braket/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-braket/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-braket/client'
-  autoload :Errors, 'aws-sdk-braket/errors'
-  autoload :Resource, 'aws-sdk-braket/resource'
-  autoload :EndpointParameters, 'aws-sdk-braket/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-braket/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-braket/endpoints'
 
   GEM_VERSION = '1.41.0'
 

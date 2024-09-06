@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-qconnect/types'
+require_relative 'aws-sdk-qconnect/client_api'
+require_relative 'aws-sdk-qconnect/plugins/endpoints.rb'
+require_relative 'aws-sdk-qconnect/client'
+require_relative 'aws-sdk-qconnect/errors'
+require_relative 'aws-sdk-qconnect/resource'
+require_relative 'aws-sdk-qconnect/endpoint_parameters'
+require_relative 'aws-sdk-qconnect/endpoint_provider'
+require_relative 'aws-sdk-qconnect/endpoints'
 require_relative 'aws-sdk-qconnect/customizations'
-require_relative 'aws-sdk-qconnect/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Q Connect. This module is available in the
 # `aws-sdk-qconnect` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-qconnect/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::QConnect
-  autoload :Types, 'aws-sdk-qconnect/types'
-  autoload :ClientApi, 'aws-sdk-qconnect/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-qconnect/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-qconnect/client'
-  autoload :Errors, 'aws-sdk-qconnect/errors'
-  autoload :Resource, 'aws-sdk-qconnect/resource'
-  autoload :EndpointParameters, 'aws-sdk-qconnect/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-qconnect/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-qconnect/endpoints'
 
   GEM_VERSION = '1.15.0'
 

@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-datazone/types'
+require_relative 'aws-sdk-datazone/client_api'
+require_relative 'aws-sdk-datazone/plugins/endpoints.rb'
+require_relative 'aws-sdk-datazone/client'
+require_relative 'aws-sdk-datazone/errors'
+require_relative 'aws-sdk-datazone/resource'
+require_relative 'aws-sdk-datazone/endpoint_parameters'
+require_relative 'aws-sdk-datazone/endpoint_provider'
+require_relative 'aws-sdk-datazone/endpoints'
 require_relative 'aws-sdk-datazone/customizations'
-require_relative 'aws-sdk-datazone/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon DataZone. This module is available in the
 # `aws-sdk-datazone` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-datazone/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::DataZone
-  autoload :Types, 'aws-sdk-datazone/types'
-  autoload :ClientApi, 'aws-sdk-datazone/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-datazone/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-datazone/client'
-  autoload :Errors, 'aws-sdk-datazone/errors'
-  autoload :Resource, 'aws-sdk-datazone/resource'
-  autoload :EndpointParameters, 'aws-sdk-datazone/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-datazone/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-datazone/endpoints'
 
   GEM_VERSION = '1.21.0'
 

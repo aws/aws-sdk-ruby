@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-connectcontactlens/types'
+require_relative 'aws-sdk-connectcontactlens/client_api'
+require_relative 'aws-sdk-connectcontactlens/plugins/endpoints.rb'
+require_relative 'aws-sdk-connectcontactlens/client'
+require_relative 'aws-sdk-connectcontactlens/errors'
+require_relative 'aws-sdk-connectcontactlens/resource'
+require_relative 'aws-sdk-connectcontactlens/endpoint_parameters'
+require_relative 'aws-sdk-connectcontactlens/endpoint_provider'
+require_relative 'aws-sdk-connectcontactlens/endpoints'
 require_relative 'aws-sdk-connectcontactlens/customizations'
-require_relative 'aws-sdk-connectcontactlens/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Connect Contact Lens. This module is available in the
 # `aws-sdk-connectcontactlens` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-connectcontactlens/railtie' if defined?(Rails::Railtie
 #
 # @!group service
 module Aws::ConnectContactLens
-  autoload :Types, 'aws-sdk-connectcontactlens/types'
-  autoload :ClientApi, 'aws-sdk-connectcontactlens/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-connectcontactlens/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-connectcontactlens/client'
-  autoload :Errors, 'aws-sdk-connectcontactlens/errors'
-  autoload :Resource, 'aws-sdk-connectcontactlens/resource'
-  autoload :EndpointParameters, 'aws-sdk-connectcontactlens/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-connectcontactlens/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-connectcontactlens/endpoints'
 
   GEM_VERSION = '1.32.0'
 

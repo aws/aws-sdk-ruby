@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-kinesisanalytics/types'
+require_relative 'aws-sdk-kinesisanalytics/client_api'
+require_relative 'aws-sdk-kinesisanalytics/plugins/endpoints.rb'
+require_relative 'aws-sdk-kinesisanalytics/client'
+require_relative 'aws-sdk-kinesisanalytics/errors'
+require_relative 'aws-sdk-kinesisanalytics/resource'
+require_relative 'aws-sdk-kinesisanalytics/endpoint_parameters'
+require_relative 'aws-sdk-kinesisanalytics/endpoint_provider'
+require_relative 'aws-sdk-kinesisanalytics/endpoints'
 require_relative 'aws-sdk-kinesisanalytics/customizations'
-require_relative 'aws-sdk-kinesisanalytics/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Kinesis Analytics. This module is available in the
 # `aws-sdk-kinesisanalytics` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-kinesisanalytics/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::KinesisAnalytics
-  autoload :Types, 'aws-sdk-kinesisanalytics/types'
-  autoload :ClientApi, 'aws-sdk-kinesisanalytics/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-kinesisanalytics/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-kinesisanalytics/client'
-  autoload :Errors, 'aws-sdk-kinesisanalytics/errors'
-  autoload :Resource, 'aws-sdk-kinesisanalytics/resource'
-  autoload :EndpointParameters, 'aws-sdk-kinesisanalytics/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-kinesisanalytics/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-kinesisanalytics/endpoints'
 
   GEM_VERSION = '1.60.0'
 

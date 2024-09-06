@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-codedeploy/types'
+require_relative 'aws-sdk-codedeploy/client_api'
+require_relative 'aws-sdk-codedeploy/plugins/endpoints.rb'
+require_relative 'aws-sdk-codedeploy/client'
+require_relative 'aws-sdk-codedeploy/errors'
+require_relative 'aws-sdk-codedeploy/waiters'
+require_relative 'aws-sdk-codedeploy/resource'
+require_relative 'aws-sdk-codedeploy/endpoint_parameters'
+require_relative 'aws-sdk-codedeploy/endpoint_provider'
+require_relative 'aws-sdk-codedeploy/endpoints'
 require_relative 'aws-sdk-codedeploy/customizations'
-require_relative 'aws-sdk-codedeploy/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS CodeDeploy. This module is available in the
 # `aws-sdk-codedeploy` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-codedeploy/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::CodeDeploy
-  autoload :Types, 'aws-sdk-codedeploy/types'
-  autoload :ClientApi, 'aws-sdk-codedeploy/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-codedeploy/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-codedeploy/client'
-  autoload :Errors, 'aws-sdk-codedeploy/errors'
-  autoload :Waiters, 'aws-sdk-codedeploy/waiters'
-  autoload :Resource, 'aws-sdk-codedeploy/resource'
-  autoload :EndpointParameters, 'aws-sdk-codedeploy/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-codedeploy/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-codedeploy/endpoints'
 
   GEM_VERSION = '1.73.0'
 

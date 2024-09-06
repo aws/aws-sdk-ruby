@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-pipes/types'
+require_relative 'aws-sdk-pipes/client_api'
+require_relative 'aws-sdk-pipes/plugins/endpoints.rb'
+require_relative 'aws-sdk-pipes/client'
+require_relative 'aws-sdk-pipes/errors'
+require_relative 'aws-sdk-pipes/waiters'
+require_relative 'aws-sdk-pipes/resource'
+require_relative 'aws-sdk-pipes/endpoint_parameters'
+require_relative 'aws-sdk-pipes/endpoint_provider'
+require_relative 'aws-sdk-pipes/endpoints'
 require_relative 'aws-sdk-pipes/customizations'
-require_relative 'aws-sdk-pipes/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon EventBridge Pipes. This module is available in the
 # `aws-sdk-pipes` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-pipes/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Pipes
-  autoload :Types, 'aws-sdk-pipes/types'
-  autoload :ClientApi, 'aws-sdk-pipes/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-pipes/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-pipes/client'
-  autoload :Errors, 'aws-sdk-pipes/errors'
-  autoload :Waiters, 'aws-sdk-pipes/waiters'
-  autoload :Resource, 'aws-sdk-pipes/resource'
-  autoload :EndpointParameters, 'aws-sdk-pipes/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-pipes/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-pipes/endpoints'
 
   GEM_VERSION = '1.25.0'
 

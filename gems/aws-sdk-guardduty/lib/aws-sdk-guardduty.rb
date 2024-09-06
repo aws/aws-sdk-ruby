@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-guardduty/types'
+require_relative 'aws-sdk-guardduty/client_api'
+require_relative 'aws-sdk-guardduty/plugins/endpoints.rb'
+require_relative 'aws-sdk-guardduty/client'
+require_relative 'aws-sdk-guardduty/errors'
+require_relative 'aws-sdk-guardduty/resource'
+require_relative 'aws-sdk-guardduty/endpoint_parameters'
+require_relative 'aws-sdk-guardduty/endpoint_provider'
+require_relative 'aws-sdk-guardduty/endpoints'
 require_relative 'aws-sdk-guardduty/customizations'
-require_relative 'aws-sdk-guardduty/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon GuardDuty. This module is available in the
 # `aws-sdk-guardduty` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-guardduty/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::GuardDuty
-  autoload :Types, 'aws-sdk-guardduty/types'
-  autoload :ClientApi, 'aws-sdk-guardduty/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-guardduty/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-guardduty/client'
-  autoload :Errors, 'aws-sdk-guardduty/errors'
-  autoload :Resource, 'aws-sdk-guardduty/resource'
-  autoload :EndpointParameters, 'aws-sdk-guardduty/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-guardduty/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-guardduty/endpoints'
 
   GEM_VERSION = '1.97.0'
 

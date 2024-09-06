@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-chimesdkidentity/types'
+require_relative 'aws-sdk-chimesdkidentity/client_api'
+require_relative 'aws-sdk-chimesdkidentity/plugins/endpoints.rb'
+require_relative 'aws-sdk-chimesdkidentity/client'
+require_relative 'aws-sdk-chimesdkidentity/errors'
+require_relative 'aws-sdk-chimesdkidentity/resource'
+require_relative 'aws-sdk-chimesdkidentity/endpoint_parameters'
+require_relative 'aws-sdk-chimesdkidentity/endpoint_provider'
+require_relative 'aws-sdk-chimesdkidentity/endpoints'
 require_relative 'aws-sdk-chimesdkidentity/customizations'
-require_relative 'aws-sdk-chimesdkidentity/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Chime SDK Identity. This module is available in the
 # `aws-sdk-chimesdkidentity` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-chimesdkidentity/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::ChimeSDKIdentity
-  autoload :Types, 'aws-sdk-chimesdkidentity/types'
-  autoload :ClientApi, 'aws-sdk-chimesdkidentity/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-chimesdkidentity/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-chimesdkidentity/client'
-  autoload :Errors, 'aws-sdk-chimesdkidentity/errors'
-  autoload :Resource, 'aws-sdk-chimesdkidentity/resource'
-  autoload :EndpointParameters, 'aws-sdk-chimesdkidentity/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-chimesdkidentity/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-chimesdkidentity/endpoints'
 
   GEM_VERSION = '1.31.0'
 

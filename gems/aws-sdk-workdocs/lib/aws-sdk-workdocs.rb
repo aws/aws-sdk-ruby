@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-workdocs/types'
+require_relative 'aws-sdk-workdocs/client_api'
+require_relative 'aws-sdk-workdocs/plugins/endpoints.rb'
+require_relative 'aws-sdk-workdocs/client'
+require_relative 'aws-sdk-workdocs/errors'
+require_relative 'aws-sdk-workdocs/resource'
+require_relative 'aws-sdk-workdocs/endpoint_parameters'
+require_relative 'aws-sdk-workdocs/endpoint_provider'
+require_relative 'aws-sdk-workdocs/endpoints'
 require_relative 'aws-sdk-workdocs/customizations'
-require_relative 'aws-sdk-workdocs/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon WorkDocs. This module is available in the
 # `aws-sdk-workdocs` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-workdocs/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::WorkDocs
-  autoload :Types, 'aws-sdk-workdocs/types'
-  autoload :ClientApi, 'aws-sdk-workdocs/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-workdocs/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-workdocs/client'
-  autoload :Errors, 'aws-sdk-workdocs/errors'
-  autoload :Resource, 'aws-sdk-workdocs/resource'
-  autoload :EndpointParameters, 'aws-sdk-workdocs/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-workdocs/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-workdocs/endpoints'
 
   GEM_VERSION = '1.63.0'
 

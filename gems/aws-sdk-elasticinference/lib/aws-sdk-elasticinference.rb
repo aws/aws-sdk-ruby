@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-elasticinference/types'
+require_relative 'aws-sdk-elasticinference/client_api'
+require_relative 'aws-sdk-elasticinference/plugins/endpoints.rb'
+require_relative 'aws-sdk-elasticinference/client'
+require_relative 'aws-sdk-elasticinference/errors'
+require_relative 'aws-sdk-elasticinference/resource'
+require_relative 'aws-sdk-elasticinference/endpoint_parameters'
+require_relative 'aws-sdk-elasticinference/endpoint_provider'
+require_relative 'aws-sdk-elasticinference/endpoints'
 require_relative 'aws-sdk-elasticinference/customizations'
-require_relative 'aws-sdk-elasticinference/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Elastic  Inference. This module is available in the
 # `aws-sdk-elasticinference` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-elasticinference/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::ElasticInference
-  autoload :Types, 'aws-sdk-elasticinference/types'
-  autoload :ClientApi, 'aws-sdk-elasticinference/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-elasticinference/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-elasticinference/client'
-  autoload :Errors, 'aws-sdk-elasticinference/errors'
-  autoload :Resource, 'aws-sdk-elasticinference/resource'
-  autoload :EndpointParameters, 'aws-sdk-elasticinference/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-elasticinference/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-elasticinference/endpoints'
 
   GEM_VERSION = '1.42.0'
 

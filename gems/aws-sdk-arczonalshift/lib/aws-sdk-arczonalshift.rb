@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-arczonalshift/types'
+require_relative 'aws-sdk-arczonalshift/client_api'
+require_relative 'aws-sdk-arczonalshift/plugins/endpoints.rb'
+require_relative 'aws-sdk-arczonalshift/client'
+require_relative 'aws-sdk-arczonalshift/errors'
+require_relative 'aws-sdk-arczonalshift/resource'
+require_relative 'aws-sdk-arczonalshift/endpoint_parameters'
+require_relative 'aws-sdk-arczonalshift/endpoint_provider'
+require_relative 'aws-sdk-arczonalshift/endpoints'
 require_relative 'aws-sdk-arczonalshift/customizations'
-require_relative 'aws-sdk-arczonalshift/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS ARC - Zonal Shift. This module is available in the
 # `aws-sdk-arczonalshift` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-arczonalshift/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::ARCZonalShift
-  autoload :Types, 'aws-sdk-arczonalshift/types'
-  autoload :ClientApi, 'aws-sdk-arczonalshift/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-arczonalshift/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-arczonalshift/client'
-  autoload :Errors, 'aws-sdk-arczonalshift/errors'
-  autoload :Resource, 'aws-sdk-arczonalshift/resource'
-  autoload :EndpointParameters, 'aws-sdk-arczonalshift/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-arczonalshift/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-arczonalshift/endpoints'
 
   GEM_VERSION = '1.20.0'
 

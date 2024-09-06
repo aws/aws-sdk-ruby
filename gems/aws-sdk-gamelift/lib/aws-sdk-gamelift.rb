@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-gamelift/types'
+require_relative 'aws-sdk-gamelift/client_api'
+require_relative 'aws-sdk-gamelift/plugins/endpoints.rb'
+require_relative 'aws-sdk-gamelift/client'
+require_relative 'aws-sdk-gamelift/errors'
+require_relative 'aws-sdk-gamelift/resource'
+require_relative 'aws-sdk-gamelift/endpoint_parameters'
+require_relative 'aws-sdk-gamelift/endpoint_provider'
+require_relative 'aws-sdk-gamelift/endpoints'
 require_relative 'aws-sdk-gamelift/customizations'
-require_relative 'aws-sdk-gamelift/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon GameLift. This module is available in the
 # `aws-sdk-gamelift` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-gamelift/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::GameLift
-  autoload :Types, 'aws-sdk-gamelift/types'
-  autoload :ClientApi, 'aws-sdk-gamelift/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-gamelift/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-gamelift/client'
-  autoload :Errors, 'aws-sdk-gamelift/errors'
-  autoload :Resource, 'aws-sdk-gamelift/resource'
-  autoload :EndpointParameters, 'aws-sdk-gamelift/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-gamelift/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-gamelift/endpoints'
 
   GEM_VERSION = '1.87.0'
 

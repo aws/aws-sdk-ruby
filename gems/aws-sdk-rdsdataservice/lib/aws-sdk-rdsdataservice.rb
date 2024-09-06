@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-rdsdataservice/types'
+require_relative 'aws-sdk-rdsdataservice/client_api'
+require_relative 'aws-sdk-rdsdataservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-rdsdataservice/client'
+require_relative 'aws-sdk-rdsdataservice/errors'
+require_relative 'aws-sdk-rdsdataservice/resource'
+require_relative 'aws-sdk-rdsdataservice/endpoint_parameters'
+require_relative 'aws-sdk-rdsdataservice/endpoint_provider'
+require_relative 'aws-sdk-rdsdataservice/endpoints'
 require_relative 'aws-sdk-rdsdataservice/customizations'
-require_relative 'aws-sdk-rdsdataservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS RDS DataService. This module is available in the
 # `aws-sdk-rdsdataservice` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-rdsdataservice/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::RDSDataService
-  autoload :Types, 'aws-sdk-rdsdataservice/types'
-  autoload :ClientApi, 'aws-sdk-rdsdataservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-rdsdataservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-rdsdataservice/client'
-  autoload :Errors, 'aws-sdk-rdsdataservice/errors'
-  autoload :Resource, 'aws-sdk-rdsdataservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-rdsdataservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-rdsdataservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-rdsdataservice/endpoints'
 
   GEM_VERSION = '1.58.0'
 

@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-medicalimaging/types'
+require_relative 'aws-sdk-medicalimaging/client_api'
+require_relative 'aws-sdk-medicalimaging/plugins/endpoints.rb'
+require_relative 'aws-sdk-medicalimaging/client'
+require_relative 'aws-sdk-medicalimaging/errors'
+require_relative 'aws-sdk-medicalimaging/waiters'
+require_relative 'aws-sdk-medicalimaging/resource'
+require_relative 'aws-sdk-medicalimaging/endpoint_parameters'
+require_relative 'aws-sdk-medicalimaging/endpoint_provider'
+require_relative 'aws-sdk-medicalimaging/endpoints'
 require_relative 'aws-sdk-medicalimaging/customizations'
-require_relative 'aws-sdk-medicalimaging/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Health Imaging. This module is available in the
 # `aws-sdk-medicalimaging` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-medicalimaging/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::MedicalImaging
-  autoload :Types, 'aws-sdk-medicalimaging/types'
-  autoload :ClientApi, 'aws-sdk-medicalimaging/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-medicalimaging/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-medicalimaging/client'
-  autoload :Errors, 'aws-sdk-medicalimaging/errors'
-  autoload :Waiters, 'aws-sdk-medicalimaging/waiters'
-  autoload :Resource, 'aws-sdk-medicalimaging/resource'
-  autoload :EndpointParameters, 'aws-sdk-medicalimaging/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-medicalimaging/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-medicalimaging/endpoints'
 
   GEM_VERSION = '1.16.0'
 

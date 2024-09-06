@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-mailmanager/types'
+require_relative 'aws-sdk-mailmanager/client_api'
+require_relative 'aws-sdk-mailmanager/plugins/endpoints.rb'
+require_relative 'aws-sdk-mailmanager/client'
+require_relative 'aws-sdk-mailmanager/errors'
+require_relative 'aws-sdk-mailmanager/resource'
+require_relative 'aws-sdk-mailmanager/endpoint_parameters'
+require_relative 'aws-sdk-mailmanager/endpoint_provider'
+require_relative 'aws-sdk-mailmanager/endpoints'
 require_relative 'aws-sdk-mailmanager/customizations'
-require_relative 'aws-sdk-mailmanager/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for MailManager. This module is available in the
 # `aws-sdk-mailmanager` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-mailmanager/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::MailManager
-  autoload :Types, 'aws-sdk-mailmanager/types'
-  autoload :ClientApi, 'aws-sdk-mailmanager/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-mailmanager/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-mailmanager/client'
-  autoload :Errors, 'aws-sdk-mailmanager/errors'
-  autoload :Resource, 'aws-sdk-mailmanager/resource'
-  autoload :EndpointParameters, 'aws-sdk-mailmanager/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-mailmanager/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-mailmanager/endpoints'
 
   GEM_VERSION = '1.6.0'
 

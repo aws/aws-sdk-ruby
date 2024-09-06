@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-migrationhubrefactorspaces/types'
+require_relative 'aws-sdk-migrationhubrefactorspaces/client_api'
+require_relative 'aws-sdk-migrationhubrefactorspaces/plugins/endpoints.rb'
+require_relative 'aws-sdk-migrationhubrefactorspaces/client'
+require_relative 'aws-sdk-migrationhubrefactorspaces/errors'
+require_relative 'aws-sdk-migrationhubrefactorspaces/resource'
+require_relative 'aws-sdk-migrationhubrefactorspaces/endpoint_parameters'
+require_relative 'aws-sdk-migrationhubrefactorspaces/endpoint_provider'
+require_relative 'aws-sdk-migrationhubrefactorspaces/endpoints'
 require_relative 'aws-sdk-migrationhubrefactorspaces/customizations'
-require_relative 'aws-sdk-migrationhubrefactorspaces/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Migration Hub Refactor Spaces. This module is available in the
 # `aws-sdk-migrationhubrefactorspaces` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-migrationhubrefactorspaces/railtie' if defined?(Rails:
 #
 # @!group service
 module Aws::MigrationHubRefactorSpaces
-  autoload :Types, 'aws-sdk-migrationhubrefactorspaces/types'
-  autoload :ClientApi, 'aws-sdk-migrationhubrefactorspaces/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-migrationhubrefactorspaces/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-migrationhubrefactorspaces/client'
-  autoload :Errors, 'aws-sdk-migrationhubrefactorspaces/errors'
-  autoload :Resource, 'aws-sdk-migrationhubrefactorspaces/resource'
-  autoload :EndpointParameters, 'aws-sdk-migrationhubrefactorspaces/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-migrationhubrefactorspaces/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-migrationhubrefactorspaces/endpoints'
 
   GEM_VERSION = '1.29.0'
 

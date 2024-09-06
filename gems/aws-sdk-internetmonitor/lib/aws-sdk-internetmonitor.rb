@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-internetmonitor/types'
+require_relative 'aws-sdk-internetmonitor/client_api'
+require_relative 'aws-sdk-internetmonitor/plugins/endpoints.rb'
+require_relative 'aws-sdk-internetmonitor/client'
+require_relative 'aws-sdk-internetmonitor/errors'
+require_relative 'aws-sdk-internetmonitor/waiters'
+require_relative 'aws-sdk-internetmonitor/resource'
+require_relative 'aws-sdk-internetmonitor/endpoint_parameters'
+require_relative 'aws-sdk-internetmonitor/endpoint_provider'
+require_relative 'aws-sdk-internetmonitor/endpoints'
 require_relative 'aws-sdk-internetmonitor/customizations'
-require_relative 'aws-sdk-internetmonitor/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CloudWatch Internet Monitor. This module is available in the
 # `aws-sdk-internetmonitor` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-internetmonitor/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::InternetMonitor
-  autoload :Types, 'aws-sdk-internetmonitor/types'
-  autoload :ClientApi, 'aws-sdk-internetmonitor/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-internetmonitor/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-internetmonitor/client'
-  autoload :Errors, 'aws-sdk-internetmonitor/errors'
-  autoload :Waiters, 'aws-sdk-internetmonitor/waiters'
-  autoload :Resource, 'aws-sdk-internetmonitor/resource'
-  autoload :EndpointParameters, 'aws-sdk-internetmonitor/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-internetmonitor/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-internetmonitor/endpoints'
 
   GEM_VERSION = '1.25.0'
 

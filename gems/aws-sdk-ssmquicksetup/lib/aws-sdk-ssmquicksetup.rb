@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-ssmquicksetup/types'
+require_relative 'aws-sdk-ssmquicksetup/client_api'
+require_relative 'aws-sdk-ssmquicksetup/plugins/endpoints.rb'
+require_relative 'aws-sdk-ssmquicksetup/client'
+require_relative 'aws-sdk-ssmquicksetup/errors'
+require_relative 'aws-sdk-ssmquicksetup/resource'
+require_relative 'aws-sdk-ssmquicksetup/endpoint_parameters'
+require_relative 'aws-sdk-ssmquicksetup/endpoint_provider'
+require_relative 'aws-sdk-ssmquicksetup/endpoints'
 require_relative 'aws-sdk-ssmquicksetup/customizations'
-require_relative 'aws-sdk-ssmquicksetup/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Systems Manager QuickSetup. This module is available in the
 # `aws-sdk-ssmquicksetup` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-ssmquicksetup/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::SSMQuickSetup
-  autoload :Types, 'aws-sdk-ssmquicksetup/types'
-  autoload :ClientApi, 'aws-sdk-ssmquicksetup/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-ssmquicksetup/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-ssmquicksetup/client'
-  autoload :Errors, 'aws-sdk-ssmquicksetup/errors'
-  autoload :Resource, 'aws-sdk-ssmquicksetup/resource'
-  autoload :EndpointParameters, 'aws-sdk-ssmquicksetup/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-ssmquicksetup/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-ssmquicksetup/endpoints'
 
   GEM_VERSION = '1.1.0'
 

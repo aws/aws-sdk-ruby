@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-applicationinsights/types'
+require_relative 'aws-sdk-applicationinsights/client_api'
+require_relative 'aws-sdk-applicationinsights/plugins/endpoints.rb'
+require_relative 'aws-sdk-applicationinsights/client'
+require_relative 'aws-sdk-applicationinsights/errors'
+require_relative 'aws-sdk-applicationinsights/resource'
+require_relative 'aws-sdk-applicationinsights/endpoint_parameters'
+require_relative 'aws-sdk-applicationinsights/endpoint_provider'
+require_relative 'aws-sdk-applicationinsights/endpoints'
 require_relative 'aws-sdk-applicationinsights/customizations'
-require_relative 'aws-sdk-applicationinsights/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CloudWatch Application Insights. This module is available in the
 # `aws-sdk-applicationinsights` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-applicationinsights/railtie' if defined?(Rails::Railti
 #
 # @!group service
 module Aws::ApplicationInsights
-  autoload :Types, 'aws-sdk-applicationinsights/types'
-  autoload :ClientApi, 'aws-sdk-applicationinsights/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-applicationinsights/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-applicationinsights/client'
-  autoload :Errors, 'aws-sdk-applicationinsights/errors'
-  autoload :Resource, 'aws-sdk-applicationinsights/resource'
-  autoload :EndpointParameters, 'aws-sdk-applicationinsights/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-applicationinsights/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-applicationinsights/endpoints'
 
   GEM_VERSION = '1.52.0'
 

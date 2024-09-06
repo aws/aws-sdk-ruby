@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-connectparticipant/types'
+require_relative 'aws-sdk-connectparticipant/client_api'
+require_relative 'aws-sdk-connectparticipant/plugins/endpoints.rb'
+require_relative 'aws-sdk-connectparticipant/client'
+require_relative 'aws-sdk-connectparticipant/errors'
+require_relative 'aws-sdk-connectparticipant/resource'
+require_relative 'aws-sdk-connectparticipant/endpoint_parameters'
+require_relative 'aws-sdk-connectparticipant/endpoint_provider'
+require_relative 'aws-sdk-connectparticipant/endpoints'
 require_relative 'aws-sdk-connectparticipant/customizations'
-require_relative 'aws-sdk-connectparticipant/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Connect Participant Service. This module is available in the
 # `aws-sdk-connectparticipant` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-connectparticipant/railtie' if defined?(Rails::Railtie
 #
 # @!group service
 module Aws::ConnectParticipant
-  autoload :Types, 'aws-sdk-connectparticipant/types'
-  autoload :ClientApi, 'aws-sdk-connectparticipant/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-connectparticipant/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-connectparticipant/client'
-  autoload :Errors, 'aws-sdk-connectparticipant/errors'
-  autoload :Resource, 'aws-sdk-connectparticipant/resource'
-  autoload :EndpointParameters, 'aws-sdk-connectparticipant/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-connectparticipant/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-connectparticipant/endpoints'
 
   GEM_VERSION = '1.50.0'
 

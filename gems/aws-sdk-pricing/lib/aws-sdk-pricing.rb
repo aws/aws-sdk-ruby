@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-pricing/types'
+require_relative 'aws-sdk-pricing/client_api'
+require_relative 'aws-sdk-pricing/plugins/endpoints.rb'
+require_relative 'aws-sdk-pricing/client'
+require_relative 'aws-sdk-pricing/errors'
+require_relative 'aws-sdk-pricing/waiters'
+require_relative 'aws-sdk-pricing/resource'
+require_relative 'aws-sdk-pricing/endpoint_parameters'
+require_relative 'aws-sdk-pricing/endpoint_provider'
+require_relative 'aws-sdk-pricing/endpoints'
 require_relative 'aws-sdk-pricing/customizations'
-require_relative 'aws-sdk-pricing/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Price List Service. This module is available in the
 # `aws-sdk-pricing` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-pricing/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Pricing
-  autoload :Types, 'aws-sdk-pricing/types'
-  autoload :ClientApi, 'aws-sdk-pricing/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-pricing/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-pricing/client'
-  autoload :Errors, 'aws-sdk-pricing/errors'
-  autoload :Waiters, 'aws-sdk-pricing/waiters'
-  autoload :Resource, 'aws-sdk-pricing/resource'
-  autoload :EndpointParameters, 'aws-sdk-pricing/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-pricing/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-pricing/endpoints'
 
   GEM_VERSION = '1.63.0'
 

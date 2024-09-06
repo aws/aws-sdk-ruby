@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-s3outposts/types'
+require_relative 'aws-sdk-s3outposts/client_api'
+require_relative 'aws-sdk-s3outposts/plugins/endpoints.rb'
+require_relative 'aws-sdk-s3outposts/client'
+require_relative 'aws-sdk-s3outposts/errors'
+require_relative 'aws-sdk-s3outposts/resource'
+require_relative 'aws-sdk-s3outposts/endpoint_parameters'
+require_relative 'aws-sdk-s3outposts/endpoint_provider'
+require_relative 'aws-sdk-s3outposts/endpoints'
 require_relative 'aws-sdk-s3outposts/customizations'
-require_relative 'aws-sdk-s3outposts/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon S3 on Outposts. This module is available in the
 # `aws-sdk-s3outposts` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-s3outposts/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::S3Outposts
-  autoload :Types, 'aws-sdk-s3outposts/types'
-  autoload :ClientApi, 'aws-sdk-s3outposts/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-s3outposts/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-s3outposts/client'
-  autoload :Errors, 'aws-sdk-s3outposts/errors'
-  autoload :Resource, 'aws-sdk-s3outposts/resource'
-  autoload :EndpointParameters, 'aws-sdk-s3outposts/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-s3outposts/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-s3outposts/endpoints'
 
   GEM_VERSION = '1.36.0'
 

@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-costandusagereportservice/types'
+require_relative 'aws-sdk-costandusagereportservice/client_api'
+require_relative 'aws-sdk-costandusagereportservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-costandusagereportservice/client'
+require_relative 'aws-sdk-costandusagereportservice/errors'
+require_relative 'aws-sdk-costandusagereportservice/resource'
+require_relative 'aws-sdk-costandusagereportservice/endpoint_parameters'
+require_relative 'aws-sdk-costandusagereportservice/endpoint_provider'
+require_relative 'aws-sdk-costandusagereportservice/endpoints'
 require_relative 'aws-sdk-costandusagereportservice/customizations'
-require_relative 'aws-sdk-costandusagereportservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Cost and Usage Report Service. This module is available in the
 # `aws-sdk-costandusagereportservice` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-costandusagereportservice/railtie' if defined?(Rails::
 #
 # @!group service
 module Aws::CostandUsageReportService
-  autoload :Types, 'aws-sdk-costandusagereportservice/types'
-  autoload :ClientApi, 'aws-sdk-costandusagereportservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-costandusagereportservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-costandusagereportservice/client'
-  autoload :Errors, 'aws-sdk-costandusagereportservice/errors'
-  autoload :Resource, 'aws-sdk-costandusagereportservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-costandusagereportservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-costandusagereportservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-costandusagereportservice/endpoints'
 
   GEM_VERSION = '1.62.0'
 

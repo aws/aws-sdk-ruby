@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-codecommit/types'
+require_relative 'aws-sdk-codecommit/client_api'
+require_relative 'aws-sdk-codecommit/plugins/endpoints.rb'
+require_relative 'aws-sdk-codecommit/client'
+require_relative 'aws-sdk-codecommit/errors'
+require_relative 'aws-sdk-codecommit/resource'
+require_relative 'aws-sdk-codecommit/endpoint_parameters'
+require_relative 'aws-sdk-codecommit/endpoint_provider'
+require_relative 'aws-sdk-codecommit/endpoints'
 require_relative 'aws-sdk-codecommit/customizations'
-require_relative 'aws-sdk-codecommit/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS CodeCommit. This module is available in the
 # `aws-sdk-codecommit` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-codecommit/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::CodeCommit
-  autoload :Types, 'aws-sdk-codecommit/types'
-  autoload :ClientApi, 'aws-sdk-codecommit/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-codecommit/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-codecommit/client'
-  autoload :Errors, 'aws-sdk-codecommit/errors'
-  autoload :Resource, 'aws-sdk-codecommit/resource'
-  autoload :EndpointParameters, 'aws-sdk-codecommit/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-codecommit/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-codecommit/endpoints'
 
   GEM_VERSION = '1.73.0'
 

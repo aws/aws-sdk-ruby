@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-qldbsession/types'
+require_relative 'aws-sdk-qldbsession/client_api'
+require_relative 'aws-sdk-qldbsession/plugins/endpoints.rb'
+require_relative 'aws-sdk-qldbsession/client'
+require_relative 'aws-sdk-qldbsession/errors'
+require_relative 'aws-sdk-qldbsession/resource'
+require_relative 'aws-sdk-qldbsession/endpoint_parameters'
+require_relative 'aws-sdk-qldbsession/endpoint_provider'
+require_relative 'aws-sdk-qldbsession/endpoints'
 require_relative 'aws-sdk-qldbsession/customizations'
-require_relative 'aws-sdk-qldbsession/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon QLDB Session. This module is available in the
 # `aws-sdk-qldbsession` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-qldbsession/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::QLDBSession
-  autoload :Types, 'aws-sdk-qldbsession/types'
-  autoload :ClientApi, 'aws-sdk-qldbsession/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-qldbsession/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-qldbsession/client'
-  autoload :Errors, 'aws-sdk-qldbsession/errors'
-  autoload :Resource, 'aws-sdk-qldbsession/resource'
-  autoload :EndpointParameters, 'aws-sdk-qldbsession/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-qldbsession/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-qldbsession/endpoints'
 
   GEM_VERSION = '1.42.0'
 

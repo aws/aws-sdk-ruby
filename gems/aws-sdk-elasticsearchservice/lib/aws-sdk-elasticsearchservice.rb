@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-elasticsearchservice/types'
+require_relative 'aws-sdk-elasticsearchservice/client_api'
+require_relative 'aws-sdk-elasticsearchservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-elasticsearchservice/client'
+require_relative 'aws-sdk-elasticsearchservice/errors'
+require_relative 'aws-sdk-elasticsearchservice/resource'
+require_relative 'aws-sdk-elasticsearchservice/endpoint_parameters'
+require_relative 'aws-sdk-elasticsearchservice/endpoint_provider'
+require_relative 'aws-sdk-elasticsearchservice/endpoints'
 require_relative 'aws-sdk-elasticsearchservice/customizations'
-require_relative 'aws-sdk-elasticsearchservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Elasticsearch Service. This module is available in the
 # `aws-sdk-elasticsearchservice` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-elasticsearchservice/railtie' if defined?(Rails::Railt
 #
 # @!group service
 module Aws::ElasticsearchService
-  autoload :Types, 'aws-sdk-elasticsearchservice/types'
-  autoload :ClientApi, 'aws-sdk-elasticsearchservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-elasticsearchservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-elasticsearchservice/client'
-  autoload :Errors, 'aws-sdk-elasticsearchservice/errors'
-  autoload :Resource, 'aws-sdk-elasticsearchservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-elasticsearchservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-elasticsearchservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-elasticsearchservice/endpoints'
 
   GEM_VERSION = '1.90.0'
 

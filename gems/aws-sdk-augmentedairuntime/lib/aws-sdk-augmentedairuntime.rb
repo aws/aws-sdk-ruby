@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-augmentedairuntime/types'
+require_relative 'aws-sdk-augmentedairuntime/client_api'
+require_relative 'aws-sdk-augmentedairuntime/plugins/endpoints.rb'
+require_relative 'aws-sdk-augmentedairuntime/client'
+require_relative 'aws-sdk-augmentedairuntime/errors'
+require_relative 'aws-sdk-augmentedairuntime/resource'
+require_relative 'aws-sdk-augmentedairuntime/endpoint_parameters'
+require_relative 'aws-sdk-augmentedairuntime/endpoint_provider'
+require_relative 'aws-sdk-augmentedairuntime/endpoints'
 require_relative 'aws-sdk-augmentedairuntime/customizations'
-require_relative 'aws-sdk-augmentedairuntime/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Augmented AI Runtime. This module is available in the
 # `aws-sdk-augmentedairuntime` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-augmentedairuntime/railtie' if defined?(Rails::Railtie
 #
 # @!group service
 module Aws::AugmentedAIRuntime
-  autoload :Types, 'aws-sdk-augmentedairuntime/types'
-  autoload :ClientApi, 'aws-sdk-augmentedairuntime/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-augmentedairuntime/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-augmentedairuntime/client'
-  autoload :Errors, 'aws-sdk-augmentedairuntime/errors'
-  autoload :Resource, 'aws-sdk-augmentedairuntime/resource'
-  autoload :EndpointParameters, 'aws-sdk-augmentedairuntime/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-augmentedairuntime/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-augmentedairuntime/endpoints'
 
   GEM_VERSION = '1.43.0'
 

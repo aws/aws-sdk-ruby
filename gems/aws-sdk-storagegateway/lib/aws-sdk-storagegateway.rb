@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-storagegateway/types'
+require_relative 'aws-sdk-storagegateway/client_api'
+require_relative 'aws-sdk-storagegateway/plugins/endpoints.rb'
+require_relative 'aws-sdk-storagegateway/client'
+require_relative 'aws-sdk-storagegateway/errors'
+require_relative 'aws-sdk-storagegateway/resource'
+require_relative 'aws-sdk-storagegateway/endpoint_parameters'
+require_relative 'aws-sdk-storagegateway/endpoint_provider'
+require_relative 'aws-sdk-storagegateway/endpoints'
 require_relative 'aws-sdk-storagegateway/customizations'
-require_relative 'aws-sdk-storagegateway/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Storage Gateway. This module is available in the
 # `aws-sdk-storagegateway` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-storagegateway/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::StorageGateway
-  autoload :Types, 'aws-sdk-storagegateway/types'
-  autoload :ClientApi, 'aws-sdk-storagegateway/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-storagegateway/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-storagegateway/client'
-  autoload :Errors, 'aws-sdk-storagegateway/errors'
-  autoload :Resource, 'aws-sdk-storagegateway/resource'
-  autoload :EndpointParameters, 'aws-sdk-storagegateway/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-storagegateway/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-storagegateway/endpoints'
 
   GEM_VERSION = '1.92.0'
 

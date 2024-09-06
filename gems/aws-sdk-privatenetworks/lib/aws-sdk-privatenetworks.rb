@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-privatenetworks/types'
+require_relative 'aws-sdk-privatenetworks/client_api'
+require_relative 'aws-sdk-privatenetworks/plugins/endpoints.rb'
+require_relative 'aws-sdk-privatenetworks/client'
+require_relative 'aws-sdk-privatenetworks/errors'
+require_relative 'aws-sdk-privatenetworks/resource'
+require_relative 'aws-sdk-privatenetworks/endpoint_parameters'
+require_relative 'aws-sdk-privatenetworks/endpoint_provider'
+require_relative 'aws-sdk-privatenetworks/endpoints'
 require_relative 'aws-sdk-privatenetworks/customizations'
-require_relative 'aws-sdk-privatenetworks/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Private 5G. This module is available in the
 # `aws-sdk-privatenetworks` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-privatenetworks/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::PrivateNetworks
-  autoload :Types, 'aws-sdk-privatenetworks/types'
-  autoload :ClientApi, 'aws-sdk-privatenetworks/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-privatenetworks/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-privatenetworks/client'
-  autoload :Errors, 'aws-sdk-privatenetworks/errors'
-  autoload :Resource, 'aws-sdk-privatenetworks/resource'
-  autoload :EndpointParameters, 'aws-sdk-privatenetworks/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-privatenetworks/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-privatenetworks/endpoints'
 
   GEM_VERSION = '1.21.0'
 

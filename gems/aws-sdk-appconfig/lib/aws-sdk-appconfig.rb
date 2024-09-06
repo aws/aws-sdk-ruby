@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-appconfig/types'
+require_relative 'aws-sdk-appconfig/client_api'
+require_relative 'aws-sdk-appconfig/plugins/endpoints.rb'
+require_relative 'aws-sdk-appconfig/client'
+require_relative 'aws-sdk-appconfig/errors'
+require_relative 'aws-sdk-appconfig/resource'
+require_relative 'aws-sdk-appconfig/endpoint_parameters'
+require_relative 'aws-sdk-appconfig/endpoint_provider'
+require_relative 'aws-sdk-appconfig/endpoints'
 require_relative 'aws-sdk-appconfig/customizations'
-require_relative 'aws-sdk-appconfig/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon AppConfig. This module is available in the
 # `aws-sdk-appconfig` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-appconfig/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::AppConfig
-  autoload :Types, 'aws-sdk-appconfig/types'
-  autoload :ClientApi, 'aws-sdk-appconfig/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-appconfig/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-appconfig/client'
-  autoload :Errors, 'aws-sdk-appconfig/errors'
-  autoload :Resource, 'aws-sdk-appconfig/resource'
-  autoload :EndpointParameters, 'aws-sdk-appconfig/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-appconfig/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-appconfig/endpoints'
 
   GEM_VERSION = '1.53.0'
 

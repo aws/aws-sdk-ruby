@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-forecastservice/types'
+require_relative 'aws-sdk-forecastservice/client_api'
+require_relative 'aws-sdk-forecastservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-forecastservice/client'
+require_relative 'aws-sdk-forecastservice/errors'
+require_relative 'aws-sdk-forecastservice/resource'
+require_relative 'aws-sdk-forecastservice/endpoint_parameters'
+require_relative 'aws-sdk-forecastservice/endpoint_provider'
+require_relative 'aws-sdk-forecastservice/endpoints'
 require_relative 'aws-sdk-forecastservice/customizations'
-require_relative 'aws-sdk-forecastservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Forecast Service. This module is available in the
 # `aws-sdk-forecastservice` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-forecastservice/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::ForecastService
-  autoload :Types, 'aws-sdk-forecastservice/types'
-  autoload :ClientApi, 'aws-sdk-forecastservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-forecastservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-forecastservice/client'
-  autoload :Errors, 'aws-sdk-forecastservice/errors'
-  autoload :Resource, 'aws-sdk-forecastservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-forecastservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-forecastservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-forecastservice/endpoints'
 
   GEM_VERSION = '1.59.0'
 

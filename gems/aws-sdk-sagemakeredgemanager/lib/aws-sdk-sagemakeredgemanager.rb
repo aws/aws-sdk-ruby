@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-sagemakeredgemanager/types'
+require_relative 'aws-sdk-sagemakeredgemanager/client_api'
+require_relative 'aws-sdk-sagemakeredgemanager/plugins/endpoints.rb'
+require_relative 'aws-sdk-sagemakeredgemanager/client'
+require_relative 'aws-sdk-sagemakeredgemanager/errors'
+require_relative 'aws-sdk-sagemakeredgemanager/resource'
+require_relative 'aws-sdk-sagemakeredgemanager/endpoint_parameters'
+require_relative 'aws-sdk-sagemakeredgemanager/endpoint_provider'
+require_relative 'aws-sdk-sagemakeredgemanager/endpoints'
 require_relative 'aws-sdk-sagemakeredgemanager/customizations'
-require_relative 'aws-sdk-sagemakeredgemanager/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Sagemaker Edge Manager. This module is available in the
 # `aws-sdk-sagemakeredgemanager` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-sagemakeredgemanager/railtie' if defined?(Rails::Railt
 #
 # @!group service
 module Aws::SagemakerEdgeManager
-  autoload :Types, 'aws-sdk-sagemakeredgemanager/types'
-  autoload :ClientApi, 'aws-sdk-sagemakeredgemanager/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-sagemakeredgemanager/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-sagemakeredgemanager/client'
-  autoload :Errors, 'aws-sdk-sagemakeredgemanager/errors'
-  autoload :Resource, 'aws-sdk-sagemakeredgemanager/resource'
-  autoload :EndpointParameters, 'aws-sdk-sagemakeredgemanager/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-sagemakeredgemanager/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-sagemakeredgemanager/endpoints'
 
   GEM_VERSION = '1.32.0'
 

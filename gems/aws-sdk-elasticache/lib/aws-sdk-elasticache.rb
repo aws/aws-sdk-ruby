@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-elasticache/types'
+require_relative 'aws-sdk-elasticache/client_api'
+require_relative 'aws-sdk-elasticache/plugins/endpoints.rb'
+require_relative 'aws-sdk-elasticache/client'
+require_relative 'aws-sdk-elasticache/errors'
+require_relative 'aws-sdk-elasticache/waiters'
+require_relative 'aws-sdk-elasticache/resource'
+require_relative 'aws-sdk-elasticache/endpoint_parameters'
+require_relative 'aws-sdk-elasticache/endpoint_provider'
+require_relative 'aws-sdk-elasticache/endpoints'
 require_relative 'aws-sdk-elasticache/customizations'
-require_relative 'aws-sdk-elasticache/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon ElastiCache. This module is available in the
 # `aws-sdk-elasticache` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-elasticache/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::ElastiCache
-  autoload :Types, 'aws-sdk-elasticache/types'
-  autoload :ClientApi, 'aws-sdk-elasticache/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-elasticache/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-elasticache/client'
-  autoload :Errors, 'aws-sdk-elasticache/errors'
-  autoload :Waiters, 'aws-sdk-elasticache/waiters'
-  autoload :Resource, 'aws-sdk-elasticache/resource'
-  autoload :EndpointParameters, 'aws-sdk-elasticache/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-elasticache/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-elasticache/endpoints'
 
   GEM_VERSION = '1.110.0'
 

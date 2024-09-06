@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-mediapackagevod/types'
+require_relative 'aws-sdk-mediapackagevod/client_api'
+require_relative 'aws-sdk-mediapackagevod/plugins/endpoints.rb'
+require_relative 'aws-sdk-mediapackagevod/client'
+require_relative 'aws-sdk-mediapackagevod/errors'
+require_relative 'aws-sdk-mediapackagevod/resource'
+require_relative 'aws-sdk-mediapackagevod/endpoint_parameters'
+require_relative 'aws-sdk-mediapackagevod/endpoint_provider'
+require_relative 'aws-sdk-mediapackagevod/endpoints'
 require_relative 'aws-sdk-mediapackagevod/customizations'
-require_relative 'aws-sdk-mediapackagevod/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for AWS Elemental MediaPackage VOD. This module is available in the
 # `aws-sdk-mediapackagevod` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-mediapackagevod/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::MediaPackageVod
-  autoload :Types, 'aws-sdk-mediapackagevod/types'
-  autoload :ClientApi, 'aws-sdk-mediapackagevod/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-mediapackagevod/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-mediapackagevod/client'
-  autoload :Errors, 'aws-sdk-mediapackagevod/errors'
-  autoload :Resource, 'aws-sdk-mediapackagevod/resource'
-  autoload :EndpointParameters, 'aws-sdk-mediapackagevod/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-mediapackagevod/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-mediapackagevod/endpoints'
 
   GEM_VERSION = '1.59.0'
 

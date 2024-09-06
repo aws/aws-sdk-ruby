@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-codeguruprofiler/types'
+require_relative 'aws-sdk-codeguruprofiler/client_api'
+require_relative 'aws-sdk-codeguruprofiler/plugins/endpoints.rb'
+require_relative 'aws-sdk-codeguruprofiler/client'
+require_relative 'aws-sdk-codeguruprofiler/errors'
+require_relative 'aws-sdk-codeguruprofiler/resource'
+require_relative 'aws-sdk-codeguruprofiler/endpoint_parameters'
+require_relative 'aws-sdk-codeguruprofiler/endpoint_provider'
+require_relative 'aws-sdk-codeguruprofiler/endpoints'
 require_relative 'aws-sdk-codeguruprofiler/customizations'
-require_relative 'aws-sdk-codeguruprofiler/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon CodeGuru Profiler. This module is available in the
 # `aws-sdk-codeguruprofiler` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-codeguruprofiler/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::CodeGuruProfiler
-  autoload :Types, 'aws-sdk-codeguruprofiler/types'
-  autoload :ClientApi, 'aws-sdk-codeguruprofiler/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-codeguruprofiler/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-codeguruprofiler/client'
-  autoload :Errors, 'aws-sdk-codeguruprofiler/errors'
-  autoload :Resource, 'aws-sdk-codeguruprofiler/resource'
-  autoload :EndpointParameters, 'aws-sdk-codeguruprofiler/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-codeguruprofiler/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-codeguruprofiler/endpoints'
 
   GEM_VERSION = '1.43.0'
 

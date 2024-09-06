@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-detective/types'
+require_relative 'aws-sdk-detective/client_api'
+require_relative 'aws-sdk-detective/plugins/endpoints.rb'
+require_relative 'aws-sdk-detective/client'
+require_relative 'aws-sdk-detective/errors'
+require_relative 'aws-sdk-detective/resource'
+require_relative 'aws-sdk-detective/endpoint_parameters'
+require_relative 'aws-sdk-detective/endpoint_provider'
+require_relative 'aws-sdk-detective/endpoints'
 require_relative 'aws-sdk-detective/customizations'
-require_relative 'aws-sdk-detective/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Detective. This module is available in the
 # `aws-sdk-detective` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-detective/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Detective
-  autoload :Types, 'aws-sdk-detective/types'
-  autoload :ClientApi, 'aws-sdk-detective/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-detective/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-detective/client'
-  autoload :Errors, 'aws-sdk-detective/errors'
-  autoload :Resource, 'aws-sdk-detective/resource'
-  autoload :EndpointParameters, 'aws-sdk-detective/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-detective/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-detective/endpoints'
 
   GEM_VERSION = '1.54.0'
 

@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-appstream/types'
+require_relative 'aws-sdk-appstream/client_api'
+require_relative 'aws-sdk-appstream/plugins/endpoints.rb'
+require_relative 'aws-sdk-appstream/client'
+require_relative 'aws-sdk-appstream/errors'
+require_relative 'aws-sdk-appstream/waiters'
+require_relative 'aws-sdk-appstream/resource'
+require_relative 'aws-sdk-appstream/endpoint_parameters'
+require_relative 'aws-sdk-appstream/endpoint_provider'
+require_relative 'aws-sdk-appstream/endpoints'
 require_relative 'aws-sdk-appstream/customizations'
-require_relative 'aws-sdk-appstream/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon AppStream. This module is available in the
 # `aws-sdk-appstream` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-appstream/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::AppStream
-  autoload :Types, 'aws-sdk-appstream/types'
-  autoload :ClientApi, 'aws-sdk-appstream/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-appstream/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-appstream/client'
-  autoload :Errors, 'aws-sdk-appstream/errors'
-  autoload :Waiters, 'aws-sdk-appstream/waiters'
-  autoload :Resource, 'aws-sdk-appstream/resource'
-  autoload :EndpointParameters, 'aws-sdk-appstream/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-appstream/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-appstream/endpoints'
 
   GEM_VERSION = '1.95.0'
 

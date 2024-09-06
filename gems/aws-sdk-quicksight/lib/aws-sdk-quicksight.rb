@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-quicksight/types'
+require_relative 'aws-sdk-quicksight/client_api'
+require_relative 'aws-sdk-quicksight/plugins/endpoints.rb'
+require_relative 'aws-sdk-quicksight/client'
+require_relative 'aws-sdk-quicksight/errors'
+require_relative 'aws-sdk-quicksight/resource'
+require_relative 'aws-sdk-quicksight/endpoint_parameters'
+require_relative 'aws-sdk-quicksight/endpoint_provider'
+require_relative 'aws-sdk-quicksight/endpoints'
 require_relative 'aws-sdk-quicksight/customizations'
-require_relative 'aws-sdk-quicksight/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon QuickSight. This module is available in the
 # `aws-sdk-quicksight` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-quicksight/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::QuickSight
-  autoload :Types, 'aws-sdk-quicksight/types'
-  autoload :ClientApi, 'aws-sdk-quicksight/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-quicksight/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-quicksight/client'
-  autoload :Errors, 'aws-sdk-quicksight/errors'
-  autoload :Resource, 'aws-sdk-quicksight/resource'
-  autoload :EndpointParameters, 'aws-sdk-quicksight/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-quicksight/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-quicksight/endpoints'
 
   GEM_VERSION = '1.123.0'
 

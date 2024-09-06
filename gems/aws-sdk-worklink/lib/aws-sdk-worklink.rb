@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-worklink/types'
+require_relative 'aws-sdk-worklink/client_api'
+require_relative 'aws-sdk-worklink/plugins/endpoints.rb'
+require_relative 'aws-sdk-worklink/client'
+require_relative 'aws-sdk-worklink/errors'
+require_relative 'aws-sdk-worklink/resource'
+require_relative 'aws-sdk-worklink/endpoint_parameters'
+require_relative 'aws-sdk-worklink/endpoint_provider'
+require_relative 'aws-sdk-worklink/endpoints'
 require_relative 'aws-sdk-worklink/customizations'
-require_relative 'aws-sdk-worklink/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon WorkLink. This module is available in the
 # `aws-sdk-worklink` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-worklink/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::WorkLink
-  autoload :Types, 'aws-sdk-worklink/types'
-  autoload :ClientApi, 'aws-sdk-worklink/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-worklink/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-worklink/client'
-  autoload :Errors, 'aws-sdk-worklink/errors'
-  autoload :Resource, 'aws-sdk-worklink/resource'
-  autoload :EndpointParameters, 'aws-sdk-worklink/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-worklink/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-worklink/endpoints'
 
   GEM_VERSION = '1.53.0'
 

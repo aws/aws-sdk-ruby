@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-pinpoint/types'
+require_relative 'aws-sdk-pinpoint/client_api'
+require_relative 'aws-sdk-pinpoint/plugins/endpoints.rb'
+require_relative 'aws-sdk-pinpoint/client'
+require_relative 'aws-sdk-pinpoint/errors'
+require_relative 'aws-sdk-pinpoint/resource'
+require_relative 'aws-sdk-pinpoint/endpoint_parameters'
+require_relative 'aws-sdk-pinpoint/endpoint_provider'
+require_relative 'aws-sdk-pinpoint/endpoints'
 require_relative 'aws-sdk-pinpoint/customizations'
-require_relative 'aws-sdk-pinpoint/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Pinpoint. This module is available in the
 # `aws-sdk-pinpoint` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-pinpoint/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Pinpoint
-  autoload :Types, 'aws-sdk-pinpoint/types'
-  autoload :ClientApi, 'aws-sdk-pinpoint/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-pinpoint/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-pinpoint/client'
-  autoload :Errors, 'aws-sdk-pinpoint/errors'
-  autoload :Resource, 'aws-sdk-pinpoint/resource'
-  autoload :EndpointParameters, 'aws-sdk-pinpoint/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-pinpoint/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-pinpoint/endpoints'
 
   GEM_VERSION = '1.96.0'
 

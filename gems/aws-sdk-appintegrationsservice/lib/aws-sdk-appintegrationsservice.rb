@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-appintegrationsservice/types'
+require_relative 'aws-sdk-appintegrationsservice/client_api'
+require_relative 'aws-sdk-appintegrationsservice/plugins/endpoints.rb'
+require_relative 'aws-sdk-appintegrationsservice/client'
+require_relative 'aws-sdk-appintegrationsservice/errors'
+require_relative 'aws-sdk-appintegrationsservice/resource'
+require_relative 'aws-sdk-appintegrationsservice/endpoint_parameters'
+require_relative 'aws-sdk-appintegrationsservice/endpoint_provider'
+require_relative 'aws-sdk-appintegrationsservice/endpoints'
 require_relative 'aws-sdk-appintegrationsservice/customizations'
-require_relative 'aws-sdk-appintegrationsservice/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon AppIntegrations Service. This module is available in the
 # `aws-sdk-appintegrationsservice` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-appintegrationsservice/railtie' if defined?(Rails::Rai
 #
 # @!group service
 module Aws::AppIntegrationsService
-  autoload :Types, 'aws-sdk-appintegrationsservice/types'
-  autoload :ClientApi, 'aws-sdk-appintegrationsservice/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-appintegrationsservice/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-appintegrationsservice/client'
-  autoload :Errors, 'aws-sdk-appintegrationsservice/errors'
-  autoload :Resource, 'aws-sdk-appintegrationsservice/resource'
-  autoload :EndpointParameters, 'aws-sdk-appintegrationsservice/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-appintegrationsservice/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-appintegrationsservice/endpoints'
 
   GEM_VERSION = '1.38.0'
 

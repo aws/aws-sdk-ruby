@@ -11,8 +11,16 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-drs/types'
+require_relative 'aws-sdk-drs/client_api'
+require_relative 'aws-sdk-drs/plugins/endpoints.rb'
+require_relative 'aws-sdk-drs/client'
+require_relative 'aws-sdk-drs/errors'
+require_relative 'aws-sdk-drs/resource'
+require_relative 'aws-sdk-drs/endpoint_parameters'
+require_relative 'aws-sdk-drs/endpoint_provider'
+require_relative 'aws-sdk-drs/endpoints'
 require_relative 'aws-sdk-drs/customizations'
-require_relative 'aws-sdk-drs/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Elastic Disaster Recovery Service. This module is available in the
 # `aws-sdk-drs` gem.
@@ -43,17 +51,6 @@ require_relative 'aws-sdk-drs/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::Drs
-  autoload :Types, 'aws-sdk-drs/types'
-  autoload :ClientApi, 'aws-sdk-drs/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-drs/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-drs/client'
-  autoload :Errors, 'aws-sdk-drs/errors'
-  autoload :Resource, 'aws-sdk-drs/resource'
-  autoload :EndpointParameters, 'aws-sdk-drs/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-drs/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-drs/endpoints'
 
   GEM_VERSION = '1.37.0'
 

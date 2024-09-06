@@ -11,8 +11,17 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
+require_relative 'aws-sdk-ssm/types'
+require_relative 'aws-sdk-ssm/client_api'
+require_relative 'aws-sdk-ssm/plugins/endpoints.rb'
+require_relative 'aws-sdk-ssm/client'
+require_relative 'aws-sdk-ssm/errors'
+require_relative 'aws-sdk-ssm/waiters'
+require_relative 'aws-sdk-ssm/resource'
+require_relative 'aws-sdk-ssm/endpoint_parameters'
+require_relative 'aws-sdk-ssm/endpoint_provider'
+require_relative 'aws-sdk-ssm/endpoints'
 require_relative 'aws-sdk-ssm/customizations'
-require_relative 'aws-sdk-ssm/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for Amazon Simple Systems Manager (SSM). This module is available in the
 # `aws-sdk-ssm` gem.
@@ -43,18 +52,6 @@ require_relative 'aws-sdk-ssm/railtie' if defined?(Rails::Railtie)
 #
 # @!group service
 module Aws::SSM
-  autoload :Types, 'aws-sdk-ssm/types'
-  autoload :ClientApi, 'aws-sdk-ssm/client_api'
-  module Plugins
-    autoload :Endpoints, 'aws-sdk-ssm/plugins/endpoints.rb'
-  end
-  autoload :Client, 'aws-sdk-ssm/client'
-  autoload :Errors, 'aws-sdk-ssm/errors'
-  autoload :Waiters, 'aws-sdk-ssm/waiters'
-  autoload :Resource, 'aws-sdk-ssm/resource'
-  autoload :EndpointParameters, 'aws-sdk-ssm/endpoint_parameters'
-  autoload :EndpointProvider, 'aws-sdk-ssm/endpoint_provider'
-  autoload :Endpoints, 'aws-sdk-ssm/endpoints'
 
   GEM_VERSION = '1.176.0'
 
