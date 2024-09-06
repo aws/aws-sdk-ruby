@@ -10,6 +10,20 @@
 module Aws::RedshiftDataAPIService
   module Types
 
+    # The Amazon Redshift Data API operation failed because the maximum
+    # number of active sessions exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ActiveSessionsExceededException AWS API Documentation
+    #
+    class ActiveSessionsExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The number of active statements exceeds the limit.
     #
     # @!attribute [rw] message
@@ -73,6 +87,17 @@ module Aws::RedshiftDataAPIService
     #   Manager.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The session identifier of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_keep_alive_seconds
+    #   The number of seconds to keep the session alive after the query
+    #   finishes. The maximum time a session can keep alive is 24 hours.
+    #   After 24 hours, the session is forced closed and the query is
+    #   terminated.
+    #   @return [Integer]
+    #
     # @!attribute [rw] sqls
     #   One or more SQL statements to run.      The SQL statements are run
     #   as a single transaction. They run serially in the order of the
@@ -107,6 +132,8 @@ module Aws::RedshiftDataAPIService
       :database,
       :db_user,
       :secret_arn,
+      :session_id,
+      :session_keep_alive_seconds,
       :sqls,
       :statement_name,
       :with_event,
@@ -128,6 +155,10 @@ module Aws::RedshiftDataAPIService
     #   The name of the database.
     #   @return [String]
     #
+    # @!attribute [rw] db_groups
+    #   A list of colon (:) separated names of database groups.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] db_user
     #   The database user name.
     #   @return [String]
@@ -143,6 +174,10 @@ module Aws::RedshiftDataAPIService
     #   The name or ARN of the secret that enables access to the database.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The session identifier of the query.
+    #   @return [String]
+    #
     # @!attribute [rw] workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
     #   element is not returned when connecting to a provisioned cluster.
@@ -154,9 +189,11 @@ module Aws::RedshiftDataAPIService
       :cluster_identifier,
       :created_at,
       :database,
+      :db_groups,
       :db_user,
       :id,
       :secret_arn,
+      :session_id,
       :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
@@ -369,6 +406,10 @@ module Aws::RedshiftDataAPIService
     #   access to the database.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The session identifier of the query.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the SQL statement being described. Status values are
     #   defined as follows:
@@ -420,6 +461,7 @@ module Aws::RedshiftDataAPIService
       :result_rows,
       :result_size,
       :secret_arn,
+      :session_id,
       :status,
       :sub_statements,
       :updated_at,
@@ -590,6 +632,17 @@ module Aws::RedshiftDataAPIService
     #   Manager.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The session identifier of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_keep_alive_seconds
+    #   The number of seconds to keep the session alive after the query
+    #   finishes. The maximum time a session can keep alive is 24 hours.
+    #   After 24 hours, the session is forced closed and the query is
+    #   terminated.
+    #   @return [Integer]
+    #
     # @!attribute [rw] sql
     #   The SQL statement text to run.
     #   @return [String]
@@ -620,6 +673,8 @@ module Aws::RedshiftDataAPIService
       :db_user,
       :parameters,
       :secret_arn,
+      :session_id,
+      :session_keep_alive_seconds,
       :sql,
       :statement_name,
       :with_event,
@@ -641,6 +696,10 @@ module Aws::RedshiftDataAPIService
     #   The name of the database.
     #   @return [String]
     #
+    # @!attribute [rw] db_groups
+    #   A list of colon (:) separated names of database groups.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] db_user
     #   The database user name.
     #   @return [String]
@@ -655,6 +714,10 @@ module Aws::RedshiftDataAPIService
     #   The name or ARN of the secret that enables access to the database.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The session identifier of the query.
+    #   @return [String]
+    #
     # @!attribute [rw] workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
     #   element is not returned when connecting to a provisioned cluster.
@@ -666,9 +729,11 @@ module Aws::RedshiftDataAPIService
       :cluster_identifier,
       :created_at,
       :database,
+      :db_groups,
       :db_user,
       :id,
       :secret_arn,
+      :session_id,
       :workgroup_name)
       SENSITIVE = []
       include Aws::Structure
@@ -1175,6 +1240,19 @@ module Aws::RedshiftDataAPIService
       include Aws::Structure
     end
 
+    # The Amazon Redshift Data API operation failed due to timeout.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/QueryTimeoutException AWS API Documentation
+    #
+    class QueryTimeoutException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Redshift Data API operation failed due to a missing
     # resource.
     #
@@ -1254,6 +1332,10 @@ module Aws::RedshiftDataAPIService
     #   access to the database.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The session identifier of the query.
+    #   @return [String]
+    #
     # @!attribute [rw] statement_name
     #   The name of the SQL statement.
     #   @return [String]
@@ -1278,6 +1360,7 @@ module Aws::RedshiftDataAPIService
       :query_string,
       :query_strings,
       :secret_arn,
+      :session_id,
       :statement_name,
       :status,
       :updated_at)

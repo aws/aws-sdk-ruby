@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2024-09-03)
+------------------
+
+* Feature - Added MinQP as a Rate Control option for H264 and H265 encodes.
+
 1.128.0 (2024-08-12)
 ------------------
 

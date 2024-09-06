@@ -865,9 +865,9 @@ module Aws::SecurityHub
     #   The identifier for the given resource type. For Amazon Web Services
     #   resources that are identified by Amazon Resource Names (ARNs), this
     #   is the ARN. For Amazon Web Services resources that lack ARNs, this
-    #   is the identifier as defined by the Amazon Web Service that created
-    #   the resource. For non-Amazon Web Services resources, this is a
-    #   unique identifier that is associated with the resource.
+    #   is the identifier as defined by the Amazon Web Servicesservice that
+    #   created the resource. For non-Amazon Web Services resources, this is
+    #   a unique identifier that is associated with the resource.
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 100
     #   items.
@@ -20647,8 +20647,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] compliance_security_control_id
     #   The unique identifier of a control across standards. Values for this
-    #   field typically consist of an Amazon Web Service and a number, such
-    #   as APIGateway.5.
+    #   field typically consist of an Amazon Web Servicesservice and a
+    #   number, such as APIGateway.5.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] compliance_associated_standards_id
@@ -23162,8 +23162,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   The unique identifier of a control across standards. Values for this
-    #   field typically consist of an Amazon Web Service and a number, such
-    #   as APIGateway.5.
+    #   field typically consist of an Amazon Web Servicesservice and a
+    #   number, such as APIGateway.5.
     #   @return [String]
     #
     # @!attribute [rw] associated_standards
@@ -23683,21 +23683,23 @@ module Aws::SecurityHub
     #
     #   The options are as follows:
     #
-    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
-    #     Regions where Security Hub is enabled. When you choose this
-    #     option, Security Hub also automatically aggregates findings from
-    #     new Regions as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
+    #     Security Hub is enabled. When you choose this option, Security Hub
+    #     also automatically aggregates findings from new Regions as
+    #     Security Hub supports them and you opt into them.
     #
-    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
-    #     from all of the Regions where Security Hub is enabled, except for
-    #     the Regions listed in the `Regions` parameter. When you choose
-    #     this option, Security Hub also automatically aggregates findings
-    #     from new Regions as Security Hub supports them and you opt into
-    #     them.
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of
+    #     the Regions where Security Hub is enabled, except for the Regions
+    #     listed in the `Regions` parameter. When you choose this option,
+    #     Security Hub also automatically aggregates findings from new
+    #     Regions as Security Hub supports them and you opt into them.
     #
-    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from
-    #     the Regions listed in the `Regions` parameter. Security Hub does
-    #     not automatically aggregate findings from new Regions.
+    #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
+    #     listed in the `Regions` parameter. Security Hub does not
+    #     automatically aggregate findings from new Regions.
+    #
+    #   * `NO_REGIONS` - Aggregates no data because no Regions are selected
+    #     as linked Regions.
     #   @return [String]
     #
     # @!attribute [rw] regions
@@ -23708,6 +23710,9 @@ module Aws::SecurityHub
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
     #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
+    #
+    #   An `InvalidInputException` error results if you populate this field
+    #   while `RegionLinkingMode` is `NO_REGIONS`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateFindingAggregatorRequest AWS API Documentation
@@ -24835,9 +24840,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] update_source
     #   Identifies the source of the event that changed the finding. For
-    #   example, an integrated Amazon Web Service or third-party partner
-    #   integration may call [ `BatchImportFindings` ][1], or an Security
-    #   Hub customer may call [ `BatchUpdateFindings` ][2].
+    #   example, an integrated Amazon Web Servicesservice or third-party
+    #   partner integration may call [ `BatchImportFindings` ][1], or an
+    #   Security Hub customer may call [ `BatchUpdateFindings` ][2].
     #
     #
     #
@@ -24913,9 +24918,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   Describes the type of finding change event, such as a call to [
-    #   `BatchImportFindings` ][1] (by an integrated Amazon Web Service or
-    #   third party partner integration) or [ `BatchUpdateFindings` ][2] (by
-    #   a Security Hub customer).
+    #   `BatchImportFindings` ][1] (by an integrated Amazon Web
+    #   Servicesservice or third party partner integration) or [
+    #   `BatchUpdateFindings` ][2] (by a Security Hub customer).
     #
     #
     #
@@ -27228,6 +27233,11 @@ module Aws::SecurityHub
     #   querying for findings.
     #   @return [Float]
     #
+    # @!attribute [rw] eq
+    #   The equal-to condition to be applied to a single field when querying
+    #   for findings.
+    #   @return [Float]
+    #
     # @!attribute [rw] gt
     #   The greater-than condition to be applied to a single field when
     #   querying for findings.
@@ -27238,19 +27248,14 @@ module Aws::SecurityHub
     #   querying for findings.
     #   @return [Float]
     #
-    # @!attribute [rw] eq
-    #   The equal-to condition to be applied to a single field when querying
-    #   for findings.
-    #   @return [Float]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NumberFilter AWS API Documentation
     #
     class NumberFilter < Struct.new(
       :gte,
       :lte,
+      :eq,
       :gt,
-      :lt,
-      :eq)
+      :lt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27633,7 +27638,8 @@ module Aws::SecurityHub
     # @note Policy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Policy corresponding to the set member.
     #
     # @!attribute [rw] security_hub
-    #   The Amazon Web Service that the configuration policy applies to.
+    #   The Amazon Web Servicesservice that the configuration policy applies
+    #   to.
     #   @return [Types::SecurityHubPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Policy AWS API Documentation
@@ -28767,7 +28773,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] destination_prefix_list_id
-    #   The prefix of the destination Amazon Web Service.
+    #   The prefix of the destination Amazon Web Servicesservice.
     #   @return [String]
     #
     # @!attribute [rw] egress_only_internet_gateway_id
@@ -29282,8 +29288,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   The unique identifier of a security control across standards. Values
-    #   for this field typically consist of an Amazon Web Service name and a
-    #   number, such as APIGateway.3.
+    #   for this field typically consist of an Amazon Web Servicesservice
+    #   name and a number, such as APIGateway.3.
     #   @return [String]
     #
     # @!attribute [rw] security_control_arn
@@ -29326,8 +29332,9 @@ module Aws::SecurityHub
     # @!attribute [rw] update_status
     #   Identifies whether customizable properties of a security control are
     #   reflected in Security Hub findings. A status of `READY` indicates
-    #   findings include the current parameter values. A status of
-    #   `UPDATING` indicates that all findings may not include the current
+    #   that Security Hub uses the current control parameter values when
+    #   running security checks of the control. A status of `UPDATING`
+    #   indicates that all security checks might not use the current
     #   parameter values.
     #   @return [String]
     #
@@ -29394,11 +29401,11 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   The unique identifier of a security control across standards. Values
-    #   for this field typically consist of an Amazon Web Service name and a
-    #   number (for example, APIGateway.3). This parameter differs from
-    #   `SecurityControlArn`, which is a unique Amazon Resource Name (ARN)
-    #   assigned to a control. The ARN references the security control ID
-    #   (for example,
+    #   for this field typically consist of an Amazon Web Servicesservice
+    #   name and a number (for example, APIGateway.3). This parameter
+    #   differs from `SecurityControlArn`, which is a unique Amazon Resource
+    #   Name (ARN) assigned to a control. The ARN references the security
+    #   control ID (for example,
     #   arn:aws:securityhub:eu-central-1:123456789012:security-control/APIGateway.3).
     #   @return [String]
     #
@@ -29941,8 +29948,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   The unique identifier of a security control across standards. Values
-    #   for this field typically consist of an Amazon Web Service name and a
-    #   number, such as APIGateway.3.
+    #   for this field typically consist of an Amazon Web Servicesservice
+    #   name and a number, such as APIGateway.3.
     #   @return [String]
     #
     # @!attribute [rw] security_control_arn
@@ -30042,8 +30049,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] security_control_id
     #   A unique standard-agnostic identifier for a control. Values for this
-    #   field typically consist of an Amazon Web Service and a number, such
-    #   as APIGateway.5. This field doesn't reference a specific standard.
+    #   field typically consist of an Amazon Web Servicesservice and a
+    #   number, such as APIGateway.5. This field doesn't reference a
+    #   specific standard.
     #   @return [String]
     #
     # @!attribute [rw] security_control_arn
@@ -31128,21 +31136,23 @@ module Aws::SecurityHub
     #
     #   The options are as follows:
     #
-    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
-    #     Regions where Security Hub is enabled. When you choose this
-    #     option, Security Hub also automatically aggregates findings from
-    #     new Regions as Security Hub supports them and you opt into them.
+    #   * `ALL_REGIONS` - Aggregates findings from all of the Regions where
+    #     Security Hub is enabled. When you choose this option, Security Hub
+    #     also automatically aggregates findings from new Regions as
+    #     Security Hub supports them and you opt into them.
     #
-    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
-    #     from all of the Regions where Security Hub is enabled, except for
-    #     the Regions listed in the `Regions` parameter. When you choose
-    #     this option, Security Hub also automatically aggregates findings
-    #     from new Regions as Security Hub supports them and you opt into
-    #     them.
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of
+    #     the Regions where Security Hub is enabled, except for the Regions
+    #     listed in the `Regions` parameter. When you choose this option,
+    #     Security Hub also automatically aggregates findings from new
+    #     Regions as Security Hub supports them and you opt into them.
     #
-    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from
-    #     the Regions listed in the `Regions` parameter. Security Hub does
-    #     not automatically aggregate findings from new Regions.
+    #   * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions
+    #     listed in the `Regions` parameter. Security Hub does not
+    #     automatically aggregate findings from new Regions.
+    #
+    #   * `NO_REGIONS` - Aggregates no data because no Regions are selected
+    #     as linked Regions.
     #   @return [String]
     #
     # @!attribute [rw] regions
@@ -31153,6 +31163,9 @@ module Aws::SecurityHub
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
     #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
+    #
+    #   An `InvalidInputException` error results if you populate this field
+    #   while `RegionLinkingMode` is `NO_REGIONS`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateFindingAggregatorRequest AWS API Documentation

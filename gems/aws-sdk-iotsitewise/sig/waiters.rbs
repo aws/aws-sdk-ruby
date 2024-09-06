@@ -26,7 +26,8 @@ module Aws
 
         def wait: (
                     asset_model_id: ::String,
-                    ?exclude_properties: bool
+                    ?exclude_properties: bool,
+                    ?asset_model_version: ::String
                   ) -> Client::_DescribeAssetModelResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeAssetModelResponseSuccess
       end
@@ -37,7 +38,8 @@ module Aws
 
         def wait: (
                     asset_model_id: ::String,
-                    ?exclude_properties: bool
+                    ?exclude_properties: bool,
+                    ?asset_model_version: ::String
                   ) -> Client::_DescribeAssetModelResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeAssetModelResponseSuccess
       end

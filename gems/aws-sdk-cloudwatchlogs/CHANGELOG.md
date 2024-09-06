@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2024-09-04)
+------------------
+
+* Feature - Update to support new APIs for delivery of logs from AWS services.
+
+1.90.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2024-08-30)
+------------------
+
+* Feature - This release introduces a new optional parameter: Entity, in PutLogEvents request
+
 1.88.0 (2024-07-30)
 ------------------
 

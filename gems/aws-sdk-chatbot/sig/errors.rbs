@@ -12,66 +12,97 @@ module Aws
       end
 
       class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class CreateChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class CreateSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class CreateTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DeleteChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DeleteMicrosoftTeamsUserIdentityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DeleteSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DeleteSlackUserIdentityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DeleteSlackWorkspaceAuthorizationFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DeleteTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DeleteTeamsConfiguredTeamException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DescribeChimeWebhookConfigurationsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DescribeSlackChannelConfigurationsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DescribeSlackUserIdentitiesException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class DescribeSlackWorkspacesException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class GetAccountPreferencesException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class GetTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class InternalServiceError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class ListMicrosoftTeamsConfiguredTeamsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class ListMicrosoftTeamsUserIdentitiesException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class ListTeamsChannelConfigurationsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class UpdateAccountPreferencesException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class UpdateChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class UpdateSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
       class UpdateTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
       end
     end
   end

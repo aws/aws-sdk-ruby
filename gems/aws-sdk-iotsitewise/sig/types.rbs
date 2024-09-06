@@ -122,12 +122,12 @@ module Aws::IoTSiteWise
     end
 
     class AssetModelCompositeModelDefinition
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor type: ::String
       attr_accessor properties: ::Array[Types::AssetModelPropertyDefinition]
-      attr_accessor id: ::String
-      attr_accessor external_id: ::String
       SENSITIVE: []
     end
 
@@ -149,40 +149,40 @@ module Aws::IoTSiteWise
 
     class AssetModelHierarchy
       attr_accessor id: ::String
+      attr_accessor external_id: ::String
       attr_accessor name: ::String
       attr_accessor child_asset_model_id: ::String
-      attr_accessor external_id: ::String
       SENSITIVE: []
     end
 
     class AssetModelHierarchyDefinition
-      attr_accessor name: ::String
-      attr_accessor child_asset_model_id: ::String
       attr_accessor id: ::String
       attr_accessor external_id: ::String
+      attr_accessor name: ::String
+      attr_accessor child_asset_model_id: ::String
       SENSITIVE: []
     end
 
     class AssetModelProperty
       attr_accessor id: ::String
+      attr_accessor external_id: ::String
       attr_accessor name: ::String
       attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
       attr_accessor data_type_spec: ::String
       attr_accessor unit: ::String
       attr_accessor type: Types::PropertyType
       attr_accessor path: ::Array[Types::AssetModelPropertyPathSegment]
-      attr_accessor external_id: ::String
       SENSITIVE: []
     end
 
     class AssetModelPropertyDefinition
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
       attr_accessor name: ::String
       attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
       attr_accessor data_type_spec: ::String
       attr_accessor unit: ::String
       attr_accessor type: Types::PropertyType
-      attr_accessor id: ::String
-      attr_accessor external_id: ::String
       SENSITIVE: []
     end
 
@@ -194,6 +194,7 @@ module Aws::IoTSiteWise
 
     class AssetModelPropertySummary
       attr_accessor id: ::String
+      attr_accessor external_id: ::String
       attr_accessor name: ::String
       attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
       attr_accessor data_type_spec: ::String
@@ -201,7 +202,6 @@ module Aws::IoTSiteWise
       attr_accessor type: Types::PropertyType
       attr_accessor asset_model_composite_model_id: ::String
       attr_accessor path: ::Array[Types::AssetModelPropertyPathSegment]
-      attr_accessor external_id: ::String
       SENSITIVE: []
     end
 
@@ -213,14 +213,15 @@ module Aws::IoTSiteWise
 
     class AssetModelSummary
       attr_accessor id: ::String
+      attr_accessor external_id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
       attr_accessor description: ::String
       attr_accessor creation_date: ::Time
       attr_accessor last_update_date: ::Time
       attr_accessor status: Types::AssetModelStatus
-      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
-      attr_accessor external_id: ::String
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 
@@ -598,8 +599,8 @@ module Aws::IoTSiteWise
 
     class CreateAssetModelCompositeModelRequest
       attr_accessor asset_model_id: ::String
-      attr_accessor parent_asset_model_composite_model_id: ::String
       attr_accessor asset_model_composite_model_external_id: ::String
+      attr_accessor parent_asset_model_composite_model_id: ::String
       attr_accessor asset_model_composite_model_id: ::String
       attr_accessor asset_model_composite_model_description: ::String
       attr_accessor asset_model_composite_model_name: ::String
@@ -607,6 +608,9 @@ module Aws::IoTSiteWise
       attr_accessor client_token: ::String
       attr_accessor composed_asset_model_id: ::String
       attr_accessor asset_model_composite_model_properties: ::Array[Types::AssetModelPropertyDefinition]
+      attr_accessor if_match: ::String
+      attr_accessor if_none_match: ::String
+      attr_accessor match_for_version_type: ("LATEST" | "ACTIVE")
       SENSITIVE: []
     end
 
@@ -619,15 +623,15 @@ module Aws::IoTSiteWise
 
     class CreateAssetModelRequest
       attr_accessor asset_model_name: ::String
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_external_id: ::String
       attr_accessor asset_model_description: ::String
       attr_accessor asset_model_properties: ::Array[Types::AssetModelPropertyDefinition]
       attr_accessor asset_model_hierarchies: ::Array[Types::AssetModelHierarchyDefinition]
       attr_accessor asset_model_composite_models: ::Array[Types::AssetModelCompositeModelDefinition]
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor asset_model_id: ::String
-      attr_accessor asset_model_external_id: ::String
-      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
       SENSITIVE: []
     end
 
@@ -782,6 +786,9 @@ module Aws::IoTSiteWise
       attr_accessor asset_model_id: ::String
       attr_accessor asset_model_composite_model_id: ::String
       attr_accessor client_token: ::String
+      attr_accessor if_match: ::String
+      attr_accessor if_none_match: ::String
+      attr_accessor match_for_version_type: ("LATEST" | "ACTIVE")
       SENSITIVE: []
     end
 
@@ -793,6 +800,9 @@ module Aws::IoTSiteWise
     class DeleteAssetModelRequest
       attr_accessor asset_model_id: ::String
       attr_accessor client_token: ::String
+      attr_accessor if_match: ::String
+      attr_accessor if_none_match: ::String
+      attr_accessor match_for_version_type: ("LATEST" | "ACTIVE")
       SENSITIVE: []
     end
 
@@ -907,6 +917,7 @@ module Aws::IoTSiteWise
     class DescribeAssetModelCompositeModelRequest
       attr_accessor asset_model_id: ::String
       attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor asset_model_version: ::String
       SENSITIVE: []
     end
 
@@ -928,23 +939,26 @@ module Aws::IoTSiteWise
     class DescribeAssetModelRequest
       attr_accessor asset_model_id: ::String
       attr_accessor exclude_properties: bool
+      attr_accessor asset_model_version: ::String
       SENSITIVE: []
     end
 
     class DescribeAssetModelResponse
       attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_external_id: ::String
       attr_accessor asset_model_arn: ::String
       attr_accessor asset_model_name: ::String
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
       attr_accessor asset_model_description: ::String
       attr_accessor asset_model_properties: ::Array[Types::AssetModelProperty]
       attr_accessor asset_model_hierarchies: ::Array[Types::AssetModelHierarchy]
       attr_accessor asset_model_composite_models: ::Array[Types::AssetModelCompositeModel]
+      attr_accessor asset_model_composite_model_summaries: ::Array[Types::AssetModelCompositeModelSummary]
       attr_accessor asset_model_creation_date: ::Time
       attr_accessor asset_model_last_update_date: ::Time
       attr_accessor asset_model_status: Types::AssetModelStatus
-      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
-      attr_accessor asset_model_composite_model_summaries: ::Array[Types::AssetModelCompositeModelSummary]
-      attr_accessor asset_model_external_id: ::String
+      attr_accessor asset_model_version: ::String
+      attr_accessor e_tag: ::String
       SENSITIVE: []
     end
 
@@ -1450,6 +1464,7 @@ module Aws::IoTSiteWise
       attr_accessor asset_model_id: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor asset_model_version: ::String
       SENSITIVE: []
     end
 
@@ -1464,6 +1479,7 @@ module Aws::IoTSiteWise
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor filter: ("ALL" | "BASE")
+      attr_accessor asset_model_version: ::String
       SENSITIVE: []
     end
 
@@ -1474,9 +1490,10 @@ module Aws::IoTSiteWise
     end
 
     class ListAssetModelsRequest
+      attr_accessor asset_model_types: ::Array[("ASSET_MODEL" | "COMPONENT_MODEL")]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor asset_model_types: ::Array[("ASSET_MODEL" | "COMPONENT_MODEL")]
+      attr_accessor asset_model_version: ::String
       SENSITIVE: []
     end
 
@@ -1727,6 +1744,13 @@ module Aws::IoTSiteWise
       SENSITIVE: []
     end
 
+    class PreconditionFailedException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
     class ProjectResource
       attr_accessor id: ::String
       SENSITIVE: []
@@ -1960,6 +1984,9 @@ module Aws::IoTSiteWise
       attr_accessor asset_model_composite_model_name: ::String
       attr_accessor client_token: ::String
       attr_accessor asset_model_composite_model_properties: ::Array[Types::AssetModelProperty]
+      attr_accessor if_match: ::String
+      attr_accessor if_none_match: ::String
+      attr_accessor match_for_version_type: ("LATEST" | "ACTIVE")
       SENSITIVE: []
     end
 
@@ -1971,13 +1998,16 @@ module Aws::IoTSiteWise
 
     class UpdateAssetModelRequest
       attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_external_id: ::String
       attr_accessor asset_model_name: ::String
       attr_accessor asset_model_description: ::String
       attr_accessor asset_model_properties: ::Array[Types::AssetModelProperty]
       attr_accessor asset_model_hierarchies: ::Array[Types::AssetModelHierarchy]
       attr_accessor asset_model_composite_models: ::Array[Types::AssetModelCompositeModel]
       attr_accessor client_token: ::String
-      attr_accessor asset_model_external_id: ::String
+      attr_accessor if_match: ::String
+      attr_accessor if_none_match: ::String
+      attr_accessor match_for_version_type: ("LATEST" | "ACTIVE")
       SENSITIVE: []
     end
 

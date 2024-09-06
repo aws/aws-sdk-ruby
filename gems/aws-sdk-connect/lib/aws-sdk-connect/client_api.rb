@@ -534,6 +534,7 @@ module Aws::Connect
     GetTaskTemplateResponse = Shapes::StructureShape.new(name: 'GetTaskTemplateResponse')
     GetTrafficDistributionRequest = Shapes::StructureShape.new(name: 'GetTrafficDistributionRequest')
     GetTrafficDistributionResponse = Shapes::StructureShape.new(name: 'GetTrafficDistributionResponse')
+    GlobalSignInEndpoint = Shapes::StringShape.new(name: 'GlobalSignInEndpoint')
     Grouping = Shapes::StringShape.new(name: 'Grouping')
     GroupingV2 = Shapes::StringShape.new(name: 'GroupingV2')
     Groupings = Shapes::ListShape.new(name: 'Groupings')
@@ -594,6 +595,7 @@ module Aws::Connect
     InstanceAttributeValue = Shapes::StringShape.new(name: 'InstanceAttributeValue')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceIdOrArn = Shapes::StringShape.new(name: 'InstanceIdOrArn')
+    InstanceReplicationStatus = Shapes::StringShape.new(name: 'InstanceReplicationStatus')
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     InstanceStatusReason = Shapes::StructureShape.new(name: 'InstanceStatusReason')
     InstanceStorageConfig = Shapes::StructureShape.new(name: 'InstanceStorageConfig')
@@ -957,6 +959,10 @@ module Aws::Connect
     ReleasePhoneNumberRequest = Shapes::StructureShape.new(name: 'ReleasePhoneNumberRequest')
     ReplicateInstanceRequest = Shapes::StructureShape.new(name: 'ReplicateInstanceRequest')
     ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
+    ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
+    ReplicationStatusReason = Shapes::StringShape.new(name: 'ReplicationStatusReason')
+    ReplicationStatusSummary = Shapes::StructureShape.new(name: 'ReplicationStatusSummary')
+    ReplicationStatusSummaryList = Shapes::ListShape.new(name: 'ReplicationStatusSummaryList')
     RequestIdentifier = Shapes::StringShape.new(name: 'RequestIdentifier')
     RequiredFieldInfo = Shapes::StructureShape.new(name: 'RequiredFieldInfo')
     RequiredTaskTemplateFields = Shapes::ListShape.new(name: 'RequiredTaskTemplateFields')
@@ -2515,6 +2521,7 @@ module Aws::Connect
     DescribeInstanceRequest.struct_class = Types::DescribeInstanceRequest
 
     DescribeInstanceResponse.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, location_name: "Instance"))
+    DescribeInstanceResponse.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "ReplicationConfiguration"))
     DescribeInstanceResponse.struct_class = Types::DescribeInstanceResponse
 
     DescribeInstanceStorageConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -4399,6 +4406,18 @@ module Aws::Connect
     ReplicateInstanceResponse.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
     ReplicateInstanceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ReplicateInstanceResponse.struct_class = Types::ReplicateInstanceResponse
+
+    ReplicationConfiguration.add_member(:replication_status_summary_list, Shapes::ShapeRef.new(shape: ReplicationStatusSummaryList, location_name: "ReplicationStatusSummaryList"))
+    ReplicationConfiguration.add_member(:source_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "SourceRegion"))
+    ReplicationConfiguration.add_member(:global_sign_in_endpoint, Shapes::ShapeRef.new(shape: GlobalSignInEndpoint, location_name: "GlobalSignInEndpoint"))
+    ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
+
+    ReplicationStatusSummary.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
+    ReplicationStatusSummary.add_member(:replication_status, Shapes::ShapeRef.new(shape: InstanceReplicationStatus, location_name: "ReplicationStatus"))
+    ReplicationStatusSummary.add_member(:replication_status_reason, Shapes::ShapeRef.new(shape: ReplicationStatusReason, location_name: "ReplicationStatusReason"))
+    ReplicationStatusSummary.struct_class = Types::ReplicationStatusSummary
+
+    ReplicationStatusSummaryList.member = Shapes::ShapeRef.new(shape: ReplicationStatusSummary)
 
     RequiredFieldInfo.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateFieldIdentifier, location_name: "Id"))
     RequiredFieldInfo.struct_class = Types::RequiredFieldInfo

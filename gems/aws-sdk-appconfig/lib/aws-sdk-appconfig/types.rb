@@ -10,6 +10,28 @@
 module Aws::AppConfig
   module Types
 
+    # @!attribute [rw] deletion_protection
+    #   A parameter to configure deletion protection. If enabled, deletion
+    #   protection prevents a user from deleting a configuration profile or
+    #   an environment if AppConfig has called either
+    #   [GetLatestConfiguration][1] or for the configuration profile or from
+    #   the environment during the specified interval. Deletion protection
+    #   is disabled by default. The default interval for
+    #   `ProtectionPeriodInMinutes` is 60.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+    #   @return [Types::DeletionProtectionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/AccountSettings AWS API Documentation
+    #
+    class AccountSettings < Struct.new(
+      :deletion_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An action defines the tasks that the extension performs during the
     # AppConfig workflow. Each action includes an action point such as
     # `ON_CREATE_HOSTED_CONFIGURATION`, `PRE_DEPLOYMENT`, or
@@ -753,7 +775,12 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   The content of the configuration or the configuration data.
+    #   The configuration data, as bytes.
+    #
+    #   <note markdown="1"> AppConfig accepts any type of data, including text formats like JSON
+    #   or TOML, or binary formats like protocol buffers or compressed data.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -814,11 +841,39 @@ module Aws::AppConfig
     #   The ID of the configuration profile you want to delete.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_check
+    #   A parameter to configure deletion protection. If enabled, deletion
+    #   protection prevents a user from deleting a configuration profile if
+    #   your application has called either [GetLatestConfiguration][1] or
+    #   for the configuration profile during the specified interval.
+    #
+    #   This parameter supports the following values:
+    #
+    #   * `BYPASS`: Instructs AppConfig to bypass the deletion protection
+    #     check and delete a configuration profile even if deletion
+    #     protection would have otherwise prevented it.
+    #
+    #   * `APPLY`: Instructs the deletion protection check to run, even if
+    #     deletion protection is disabled at the account level. `APPLY` also
+    #     forces the deletion protection check to run against resources
+    #     created in the past hour, which are normally excluded from
+    #     deletion protection checks.
+    #
+    #   * `ACCOUNT_DEFAULT`: The default setting, which instructs AppConfig
+    #     to implement the deletion protection value specified in the
+    #     `UpdateAccountSettings` API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteConfigurationProfileRequest AWS API Documentation
     #
     class DeleteConfigurationProfileRequest < Struct.new(
       :application_id,
-      :configuration_profile_id)
+      :configuration_profile_id,
+      :deletion_protection_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -835,20 +890,48 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @!attribute [rw] environment_id
+    #   The ID of the environment that you want to delete.
+    #   @return [String]
+    #
     # @!attribute [rw] application_id
     #   The application ID that includes the environment that you want to
     #   delete.
     #   @return [String]
     #
-    # @!attribute [rw] environment_id
-    #   The ID of the environment that you want to delete.
+    # @!attribute [rw] deletion_protection_check
+    #   A parameter to configure deletion protection. If enabled, deletion
+    #   protection prevents a user from deleting an environment if your
+    #   application called either [GetLatestConfiguration][1] or in the
+    #   environment during the specified interval.
+    #
+    #   This parameter supports the following values:
+    #
+    #   * `BYPASS`: Instructs AppConfig to bypass the deletion protection
+    #     check and delete a configuration profile even if deletion
+    #     protection would have otherwise prevented it.
+    #
+    #   * `APPLY`: Instructs the deletion protection check to run, even if
+    #     deletion protection is disabled at the account level. `APPLY` also
+    #     forces the deletion protection check to run against resources
+    #     created in the past hour, which are normally excluded from
+    #     deletion protection checks.
+    #
+    #   * `ACCOUNT_DEFAULT`: The default setting, which instructs AppConfig
+    #     to implement the deletion protection value specified in the
+    #     `UpdateAccountSettings` API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteEnvironmentRequest AWS API Documentation
     #
     class DeleteEnvironmentRequest < Struct.new(
+      :environment_id,
       :application_id,
-      :environment_id)
+      :deletion_protection_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -902,6 +985,51 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       :version_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A parameter to configure deletion protection. If enabled, deletion
+    # protection prevents a user from deleting a configuration profile or an
+    # environment if AppConfig has called either [GetLatestConfiguration][1]
+    # or for the configuration profile or from the environment during the
+    # specified interval.
+    #
+    # This setting uses the following default values:
+    #
+    # * Deletion protection is disabled by default.
+    #
+    # * The default interval specified by `ProtectionPeriodInMinutes` is 60.
+    #
+    # * `DeletionProtectionCheck` skips configuration profiles and
+    #   environments that were created in the past hour.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+    #
+    # @!attribute [rw] enabled
+    #   A parameter that indicates if deletion protection is enabled or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] protection_period_in_minutes
+    #   The time interval during which AppConfig monitors for calls to
+    #   [GetLatestConfiguration][1] or for a configuration profile or from
+    #   an environment. AppConfig returns an error if a user calls or for
+    #   the designated configuration profile or environment. To bypass the
+    #   error and delete a configuration profile or an environment, specify
+    #   `BYPASS` for the `DeletionProtectionCheck` parameter for either or .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeletionProtectionSettings AWS API Documentation
+    #
+    class DeletionProtectionSettings < Struct.new(
+      :enabled,
+      :protection_period_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1540,24 +1668,23 @@ module Aws::AppConfig
     #
     # @!attribute [rw] client_configuration_version
     #   The configuration version returned in the most recent
-    #   `GetConfiguration` response.
+    #   GetConfiguration response.
     #
     #   AppConfig uses the value of the `ClientConfigurationVersion`
     #   parameter to identify the configuration version on your clients. If
     #   you don’t send `ClientConfigurationVersion` with each call to
-    #   `GetConfiguration`, your clients receive the current configuration.
+    #   GetConfiguration, your clients receive the current configuration.
     #   You are charged each time your clients receive a configuration.
     #
     #    To avoid excess charges, we recommend you use the
     #   [StartConfigurationSession][1] and [GetLatestConfiguration][2] APIs,
     #   which track the client configuration version on your behalf. If you
-    #   choose to continue using `GetConfiguration`, we recommend that you
+    #   choose to continue using GetConfiguration, we recommend that you
     #   include the `ClientConfigurationVersion` value with every call to
-    #   `GetConfiguration`. The value to use for
-    #   `ClientConfigurationVersion` comes from the `ConfigurationVersion`
-    #   attribute returned by `GetConfiguration` when there is new or
-    #   updated data, and should be saved for subsequent calls to
-    #   `GetConfiguration`.
+    #   GetConfiguration. The value to use for `ClientConfigurationVersion`
+    #   comes from the `ConfigurationVersion` attribute returned by
+    #   GetConfiguration when there is new or updated data, and should be
+    #   saved for subsequent calls to GetConfiguration.
     #
     #   For more information about working with configurations, see
     #   [Retrieving the Configuration][3] in the *AppConfig User Guide*.
@@ -2367,6 +2494,28 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # @!attribute [rw] deletion_protection
+    #   A parameter to configure deletion protection. If enabled, deletion
+    #   protection prevents a user from deleting a configuration profile or
+    #   an environment if AppConfig has called either
+    #   [GetLatestConfiguration][1] or for the configuration profile or from
+    #   the environment during the specified interval. Deletion protection
+    #   is disabled by default. The default interval for
+    #   `ProtectionPeriodInMinutes` is 60.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
+    #   @return [Types::DeletionProtectionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateAccountSettingsRequest AWS API Documentation
+    #
+    class UpdateAccountSettingsRequest < Struct.new(
+      :deletion_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The application ID.
     #   @return [String]
@@ -2614,7 +2763,12 @@ module Aws::AppConfig
     # validate your application configuration data, you provide a schema or
     # an Amazon Web Services Lambda function that runs against the
     # configuration. The configuration deployment or update can only proceed
-    # when the configuration data is valid.
+    # when the configuration data is valid. For more information, see [About
+    # validators][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-profile.html#appconfig-creating-configuration-and-profile-validators
     #
     # @!attribute [rw] type
     #   AppConfig supports validators of type `JSON_SCHEMA` and `LAMBDA`

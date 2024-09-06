@@ -70,6 +70,8 @@ module Aws::IoTSiteWise
     AssetModelSummaries = Shapes::ListShape.new(name: 'AssetModelSummaries')
     AssetModelSummary = Shapes::StructureShape.new(name: 'AssetModelSummary')
     AssetModelType = Shapes::StringShape.new(name: 'AssetModelType')
+    AssetModelVersionFilter = Shapes::StringShape.new(name: 'AssetModelVersionFilter')
+    AssetModelVersionType = Shapes::StringShape.new(name: 'AssetModelVersionType')
     AssetProperties = Shapes::ListShape.new(name: 'AssetProperties')
     AssetProperty = Shapes::StructureShape.new(name: 'AssetProperty')
     AssetPropertyAlias = Shapes::StringShape.new(name: 'AssetPropertyAlias')
@@ -253,6 +255,7 @@ module Aws::IoTSiteWise
     DisassociateAssetsRequest = Shapes::StructureShape.new(name: 'DisassociateAssetsRequest')
     DisassociateTimeSeriesFromAssetPropertyRequest = Shapes::StructureShape.new(name: 'DisassociateTimeSeriesFromAssetPropertyRequest')
     DisassociatedDataStorageState = Shapes::StringShape.new(name: 'DisassociatedDataStorageState')
+    ETag = Shapes::StringShape.new(name: 'ETag')
     Email = Shapes::StringShape.new(name: 'Email')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EntryId = Shapes::StringShape.new(name: 'EntryId')
@@ -393,6 +396,7 @@ module Aws::IoTSiteWise
     PortalStatus = Shapes::StructureShape.new(name: 'PortalStatus')
     PortalSummaries = Shapes::ListShape.new(name: 'PortalSummaries')
     PortalSummary = Shapes::StructureShape.new(name: 'PortalSummary')
+    PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     ProjectResource = Shapes::StructureShape.new(name: 'ProjectResource')
     ProjectSummaries = Shapes::ListShape.new(name: 'ProjectSummaries')
     ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
@@ -433,6 +437,7 @@ module Aws::IoTSiteWise
     SSOApplicationId = Shapes::StringShape.new(name: 'SSOApplicationId')
     ScalarType = Shapes::StringShape.new(name: 'ScalarType')
     ScalarValue = Shapes::StringShape.new(name: 'ScalarValue')
+    SelectAll = Shapes::StringShape.new(name: 'SelectAll')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SiemensIE = Shapes::StructureShape.new(name: 'SiemensIE')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
@@ -488,6 +493,7 @@ module Aws::IoTSiteWise
     VariableName = Shapes::StringShape.new(name: 'VariableName')
     VariableValue = Shapes::StructureShape.new(name: 'VariableValue')
     Variant = Shapes::StructureShape.new(name: 'Variant')
+    Version = Shapes::StringShape.new(name: 'Version')
     WarmTierRetentionPeriod = Shapes::StructureShape.new(name: 'WarmTierRetentionPeriod')
     WarmTierState = Shapes::StringShape.new(name: 'WarmTierState')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
@@ -595,12 +601,12 @@ module Aws::IoTSiteWise
     AssetModelCompositeModel.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelCompositeModel.struct_class = Types::AssetModelCompositeModel
 
+    AssetModelCompositeModelDefinition.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
+    AssetModelCompositeModelDefinition.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelCompositeModelDefinition.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetModelCompositeModelDefinition.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AssetModelCompositeModelDefinition.add_member(:type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "type"))
     AssetModelCompositeModelDefinition.add_member(:properties, Shapes::ShapeRef.new(shape: AssetModelPropertyDefinitions, location_name: "properties"))
-    AssetModelCompositeModelDefinition.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
-    AssetModelCompositeModelDefinition.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelCompositeModelDefinition.struct_class = Types::AssetModelCompositeModelDefinition
 
     AssetModelCompositeModelDefinitions.member = Shapes::ShapeRef.new(shape: AssetModelCompositeModelDefinition)
@@ -626,15 +632,15 @@ module Aws::IoTSiteWise
     AssetModelHierarchies.member = Shapes::ShapeRef.new(shape: AssetModelHierarchy)
 
     AssetModelHierarchy.add_member(:id, Shapes::ShapeRef.new(shape: CustomID, location_name: "id"))
+    AssetModelHierarchy.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelHierarchy.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetModelHierarchy.add_member(:child_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "childAssetModelId"))
-    AssetModelHierarchy.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelHierarchy.struct_class = Types::AssetModelHierarchy
 
-    AssetModelHierarchyDefinition.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    AssetModelHierarchyDefinition.add_member(:child_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "childAssetModelId"))
     AssetModelHierarchyDefinition.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
     AssetModelHierarchyDefinition.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
+    AssetModelHierarchyDefinition.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AssetModelHierarchyDefinition.add_member(:child_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "childAssetModelId"))
     AssetModelHierarchyDefinition.struct_class = Types::AssetModelHierarchyDefinition
 
     AssetModelHierarchyDefinitions.member = Shapes::ShapeRef.new(shape: AssetModelHierarchyDefinition)
@@ -642,22 +648,22 @@ module Aws::IoTSiteWise
     AssetModelProperties.member = Shapes::ShapeRef.new(shape: AssetModelProperty)
 
     AssetModelProperty.add_member(:id, Shapes::ShapeRef.new(shape: CustomID, location_name: "id"))
+    AssetModelProperty.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelProperty.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetModelProperty.add_member(:data_type, Shapes::ShapeRef.new(shape: PropertyDataType, required: true, location_name: "dataType"))
     AssetModelProperty.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
     AssetModelProperty.add_member(:unit, Shapes::ShapeRef.new(shape: PropertyUnit, location_name: "unit"))
     AssetModelProperty.add_member(:type, Shapes::ShapeRef.new(shape: PropertyType, required: true, location_name: "type"))
     AssetModelProperty.add_member(:path, Shapes::ShapeRef.new(shape: AssetModelPropertyPath, location_name: "path"))
-    AssetModelProperty.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelProperty.struct_class = Types::AssetModelProperty
 
+    AssetModelPropertyDefinition.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
+    AssetModelPropertyDefinition.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelPropertyDefinition.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetModelPropertyDefinition.add_member(:data_type, Shapes::ShapeRef.new(shape: PropertyDataType, required: true, location_name: "dataType"))
     AssetModelPropertyDefinition.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
     AssetModelPropertyDefinition.add_member(:unit, Shapes::ShapeRef.new(shape: PropertyUnit, location_name: "unit"))
     AssetModelPropertyDefinition.add_member(:type, Shapes::ShapeRef.new(shape: PropertyType, required: true, location_name: "type"))
-    AssetModelPropertyDefinition.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
-    AssetModelPropertyDefinition.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelPropertyDefinition.struct_class = Types::AssetModelPropertyDefinition
 
     AssetModelPropertyDefinitions.member = Shapes::ShapeRef.new(shape: AssetModelPropertyDefinition)
@@ -671,6 +677,7 @@ module Aws::IoTSiteWise
     AssetModelPropertySummaries.member = Shapes::ShapeRef.new(shape: AssetModelPropertySummary)
 
     AssetModelPropertySummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
+    AssetModelPropertySummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelPropertySummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     AssetModelPropertySummary.add_member(:data_type, Shapes::ShapeRef.new(shape: PropertyDataType, required: true, location_name: "dataType"))
     AssetModelPropertySummary.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
@@ -678,7 +685,6 @@ module Aws::IoTSiteWise
     AssetModelPropertySummary.add_member(:type, Shapes::ShapeRef.new(shape: PropertyType, required: true, location_name: "type"))
     AssetModelPropertySummary.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetModelCompositeModelId"))
     AssetModelPropertySummary.add_member(:path, Shapes::ShapeRef.new(shape: AssetModelPropertyPath, location_name: "path"))
-    AssetModelPropertySummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelPropertySummary.struct_class = Types::AssetModelPropertySummary
 
     AssetModelStatus.add_member(:state, Shapes::ShapeRef.new(shape: AssetModelState, required: true, location_name: "state"))
@@ -688,14 +694,15 @@ module Aws::IoTSiteWise
     AssetModelSummaries.member = Shapes::ShapeRef.new(shape: AssetModelSummary)
 
     AssetModelSummary.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    AssetModelSummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     AssetModelSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "arn"))
     AssetModelSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AssetModelSummary.add_member(:asset_model_type, Shapes::ShapeRef.new(shape: AssetModelType, location_name: "assetModelType"))
     AssetModelSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     AssetModelSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     AssetModelSummary.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateDate"))
     AssetModelSummary.add_member(:status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "status"))
-    AssetModelSummary.add_member(:asset_model_type, Shapes::ShapeRef.new(shape: AssetModelType, location_name: "assetModelType"))
-    AssetModelSummary.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
+    AssetModelSummary.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     AssetModelSummary.struct_class = Types::AssetModelSummary
 
     AssetProperties.member = Shapes::ShapeRef.new(shape: AssetProperty)
@@ -1025,8 +1032,8 @@ module Aws::IoTSiteWise
     CreateAccessPolicyResponse.struct_class = Types::CreateAccessPolicyResponse
 
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
-    CreateAssetModelCompositeModelRequest.add_member(:parent_asset_model_composite_model_id, Shapes::ShapeRef.new(shape: CustomID, location_name: "parentAssetModelCompositeModelId"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelCompositeModelExternalId"))
+    CreateAssetModelCompositeModelRequest.add_member(:parent_asset_model_composite_model_id, Shapes::ShapeRef.new(shape: CustomID, location_name: "parentAssetModelCompositeModelId"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetModelCompositeModelId"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetModelCompositeModelDescription"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelCompositeModelName"))
@@ -1034,6 +1041,9 @@ module Aws::IoTSiteWise
     CreateAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAssetModelCompositeModelRequest.add_member(:composed_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, location_name: "composedAssetModelId"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_properties, Shapes::ShapeRef.new(shape: AssetModelPropertyDefinitions, location_name: "assetModelCompositeModelProperties"))
+    CreateAssetModelCompositeModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
+    CreateAssetModelCompositeModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
+    CreateAssetModelCompositeModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
     CreateAssetModelCompositeModelRequest.struct_class = Types::CreateAssetModelCompositeModelRequest
 
     CreateAssetModelCompositeModelResponse.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelCompositeModelId"))
@@ -1042,15 +1052,15 @@ module Aws::IoTSiteWise
     CreateAssetModelCompositeModelResponse.struct_class = Types::CreateAssetModelCompositeModelResponse
 
     CreateAssetModelRequest.add_member(:asset_model_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelName"))
+    CreateAssetModelRequest.add_member(:asset_model_type, Shapes::ShapeRef.new(shape: AssetModelType, location_name: "assetModelType"))
+    CreateAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetModelId"))
+    CreateAssetModelRequest.add_member(:asset_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelExternalId"))
     CreateAssetModelRequest.add_member(:asset_model_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetModelDescription"))
     CreateAssetModelRequest.add_member(:asset_model_properties, Shapes::ShapeRef.new(shape: AssetModelPropertyDefinitions, location_name: "assetModelProperties"))
     CreateAssetModelRequest.add_member(:asset_model_hierarchies, Shapes::ShapeRef.new(shape: AssetModelHierarchyDefinitions, location_name: "assetModelHierarchies"))
     CreateAssetModelRequest.add_member(:asset_model_composite_models, Shapes::ShapeRef.new(shape: AssetModelCompositeModelDefinitions, location_name: "assetModelCompositeModels"))
     CreateAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateAssetModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetModelId"))
-    CreateAssetModelRequest.add_member(:asset_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelExternalId"))
-    CreateAssetModelRequest.add_member(:asset_model_type, Shapes::ShapeRef.new(shape: AssetModelType, location_name: "assetModelType"))
     CreateAssetModelRequest.struct_class = Types::CreateAssetModelRequest
 
     CreateAssetModelResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
@@ -1170,6 +1180,9 @@ module Aws::IoTSiteWise
     DeleteAssetModelCompositeModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     DeleteAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelCompositeModelId"))
     DeleteAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAssetModelCompositeModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
+    DeleteAssetModelCompositeModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
+    DeleteAssetModelCompositeModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
     DeleteAssetModelCompositeModelRequest.struct_class = Types::DeleteAssetModelCompositeModelRequest
 
     DeleteAssetModelCompositeModelResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
@@ -1177,6 +1190,9 @@ module Aws::IoTSiteWise
 
     DeleteAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     DeleteAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAssetModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
+    DeleteAssetModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
+    DeleteAssetModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
     DeleteAssetModelRequest.struct_class = Types::DeleteAssetModelRequest
 
     DeleteAssetModelResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
@@ -1257,6 +1273,7 @@ module Aws::IoTSiteWise
 
     DescribeAssetModelCompositeModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     DescribeAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelCompositeModelId"))
+    DescribeAssetModelCompositeModelRequest.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: AssetModelVersionFilter, location: "querystring", location_name: "assetModelVersion"))
     DescribeAssetModelCompositeModelRequest.struct_class = Types::DescribeAssetModelCompositeModelRequest
 
     DescribeAssetModelCompositeModelResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
@@ -1274,21 +1291,24 @@ module Aws::IoTSiteWise
 
     DescribeAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     DescribeAssetModelRequest.add_member(:exclude_properties, Shapes::ShapeRef.new(shape: ExcludeProperties, location: "querystring", location_name: "excludeProperties"))
+    DescribeAssetModelRequest.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: AssetModelVersionFilter, location: "querystring", location_name: "assetModelVersion"))
     DescribeAssetModelRequest.struct_class = Types::DescribeAssetModelRequest
 
     DescribeAssetModelResponse.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetModelId"))
+    DescribeAssetModelResponse.add_member(:asset_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelExternalId"))
     DescribeAssetModelResponse.add_member(:asset_model_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "assetModelArn"))
     DescribeAssetModelResponse.add_member(:asset_model_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelName"))
+    DescribeAssetModelResponse.add_member(:asset_model_type, Shapes::ShapeRef.new(shape: AssetModelType, location_name: "assetModelType"))
     DescribeAssetModelResponse.add_member(:asset_model_description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "assetModelDescription"))
     DescribeAssetModelResponse.add_member(:asset_model_properties, Shapes::ShapeRef.new(shape: AssetModelProperties, required: true, location_name: "assetModelProperties"))
     DescribeAssetModelResponse.add_member(:asset_model_hierarchies, Shapes::ShapeRef.new(shape: AssetModelHierarchies, required: true, location_name: "assetModelHierarchies"))
     DescribeAssetModelResponse.add_member(:asset_model_composite_models, Shapes::ShapeRef.new(shape: AssetModelCompositeModels, location_name: "assetModelCompositeModels"))
+    DescribeAssetModelResponse.add_member(:asset_model_composite_model_summaries, Shapes::ShapeRef.new(shape: AssetModelCompositeModelSummaries, location_name: "assetModelCompositeModelSummaries"))
     DescribeAssetModelResponse.add_member(:asset_model_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "assetModelCreationDate"))
     DescribeAssetModelResponse.add_member(:asset_model_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "assetModelLastUpdateDate"))
     DescribeAssetModelResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
-    DescribeAssetModelResponse.add_member(:asset_model_type, Shapes::ShapeRef.new(shape: AssetModelType, location_name: "assetModelType"))
-    DescribeAssetModelResponse.add_member(:asset_model_composite_model_summaries, Shapes::ShapeRef.new(shape: AssetModelCompositeModelSummaries, location_name: "assetModelCompositeModelSummaries"))
-    DescribeAssetModelResponse.add_member(:asset_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelExternalId"))
+    DescribeAssetModelResponse.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: Version, location_name: "assetModelVersion"))
+    DescribeAssetModelResponse.add_member(:e_tag, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "ETag"))
     DescribeAssetModelResponse.struct_class = Types::DescribeAssetModelResponse
 
     DescribeAssetPropertyRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
@@ -1677,6 +1697,7 @@ module Aws::IoTSiteWise
     ListAssetModelCompositeModelsRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     ListAssetModelCompositeModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAssetModelCompositeModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAssetModelCompositeModelsRequest.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: AssetModelVersionFilter, location: "querystring", location_name: "assetModelVersion"))
     ListAssetModelCompositeModelsRequest.struct_class = Types::ListAssetModelCompositeModelsRequest
 
     ListAssetModelCompositeModelsResponse.add_member(:asset_model_composite_model_summaries, Shapes::ShapeRef.new(shape: AssetModelCompositeModelSummaries, required: true, location_name: "assetModelCompositeModelSummaries"))
@@ -1687,15 +1708,17 @@ module Aws::IoTSiteWise
     ListAssetModelPropertiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAssetModelPropertiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAssetModelPropertiesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListAssetModelPropertiesFilter, location: "querystring", location_name: "filter"))
+    ListAssetModelPropertiesRequest.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: AssetModelVersionFilter, location: "querystring", location_name: "assetModelVersion"))
     ListAssetModelPropertiesRequest.struct_class = Types::ListAssetModelPropertiesRequest
 
     ListAssetModelPropertiesResponse.add_member(:asset_model_property_summaries, Shapes::ShapeRef.new(shape: AssetModelPropertySummaries, required: true, location_name: "assetModelPropertySummaries"))
     ListAssetModelPropertiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAssetModelPropertiesResponse.struct_class = Types::ListAssetModelPropertiesResponse
 
+    ListAssetModelsRequest.add_member(:asset_model_types, Shapes::ShapeRef.new(shape: ListAssetModelsTypeFilter, location: "querystring", location_name: "assetModelTypes"))
     ListAssetModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListAssetModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListAssetModelsRequest.add_member(:asset_model_types, Shapes::ShapeRef.new(shape: ListAssetModelsTypeFilter, location: "querystring", location_name: "assetModelTypes"))
+    ListAssetModelsRequest.add_member(:asset_model_version, Shapes::ShapeRef.new(shape: AssetModelVersionFilter, location: "querystring", location_name: "assetModelVersion"))
     ListAssetModelsRequest.struct_class = Types::ListAssetModelsRequest
 
     ListAssetModelsResponse.add_member(:asset_model_summaries, Shapes::ShapeRef.new(shape: AssetModelSummaries, required: true, location_name: "assetModelSummaries"))
@@ -1871,6 +1894,11 @@ module Aws::IoTSiteWise
     PortalSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "roleArn"))
     PortalSummary.add_member(:status, Shapes::ShapeRef.new(shape: PortalStatus, required: true, location_name: "status"))
     PortalSummary.struct_class = Types::PortalSummary
+
+    PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    PreconditionFailedException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    PreconditionFailedException.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
     ProjectResource.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
     ProjectResource.struct_class = Types::ProjectResource
@@ -2055,6 +2083,9 @@ module Aws::IoTSiteWise
     UpdateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelCompositeModelName"))
     UpdateAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_properties, Shapes::ShapeRef.new(shape: AssetModelProperties, location_name: "assetModelCompositeModelProperties"))
+    UpdateAssetModelCompositeModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
+    UpdateAssetModelCompositeModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
+    UpdateAssetModelCompositeModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
     UpdateAssetModelCompositeModelRequest.struct_class = Types::UpdateAssetModelCompositeModelRequest
 
     UpdateAssetModelCompositeModelResponse.add_member(:asset_model_composite_model_path, Shapes::ShapeRef.new(shape: AssetModelCompositeModelPath, required: true, location_name: "assetModelCompositeModelPath"))
@@ -2062,13 +2093,16 @@ module Aws::IoTSiteWise
     UpdateAssetModelCompositeModelResponse.struct_class = Types::UpdateAssetModelCompositeModelResponse
 
     UpdateAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
+    UpdateAssetModelRequest.add_member(:asset_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelExternalId"))
     UpdateAssetModelRequest.add_member(:asset_model_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelName"))
     UpdateAssetModelRequest.add_member(:asset_model_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetModelDescription"))
     UpdateAssetModelRequest.add_member(:asset_model_properties, Shapes::ShapeRef.new(shape: AssetModelProperties, location_name: "assetModelProperties"))
     UpdateAssetModelRequest.add_member(:asset_model_hierarchies, Shapes::ShapeRef.new(shape: AssetModelHierarchies, location_name: "assetModelHierarchies"))
     UpdateAssetModelRequest.add_member(:asset_model_composite_models, Shapes::ShapeRef.new(shape: AssetModelCompositeModels, location_name: "assetModelCompositeModels"))
     UpdateAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    UpdateAssetModelRequest.add_member(:asset_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelExternalId"))
+    UpdateAssetModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
+    UpdateAssetModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
+    UpdateAssetModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
     UpdateAssetModelRequest.struct_class = Types::UpdateAssetModelRequest
 
     UpdateAssetModelResponse.add_member(:asset_model_status, Shapes::ShapeRef.new(shape: AssetModelStatus, required: true, location_name: "assetModelStatus"))
@@ -2384,6 +2418,7 @@ module Aws::IoTSiteWise
         o.input = Shapes::ShapeRef.new(shape: CreateAssetModelCompositeModelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAssetModelCompositeModelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
@@ -2519,6 +2554,7 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
       api.add_operation(:delete_asset_model_composite_model, Seahorse::Model::Operation.new.tap do |o|
@@ -2535,6 +2571,7 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
       api.add_operation(:delete_dashboard, Seahorse::Model::Operation.new.tap do |o|
@@ -3529,6 +3566,7 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
       end)
 
       api.add_operation(:update_asset_model_composite_model, Seahorse::Model::Operation.new.tap do |o|
@@ -3541,6 +3579,7 @@ module Aws::IoTSiteWise
         o.input = Shapes::ShapeRef.new(shape: UpdateAssetModelCompositeModelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAssetModelCompositeModelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)

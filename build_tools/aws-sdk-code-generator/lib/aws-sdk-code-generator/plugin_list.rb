@@ -63,7 +63,8 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::ChecksumAlgorithm' => "#{core_plugins}/checksum_algorithm.rb",
         'Aws::Plugins::RequestCompression' => "#{core_plugins}/request_compression.rb",
         'Aws::Plugins::DefaultsMode' => "#{core_plugins}/defaults_mode.rb",
-        'Aws::Plugins::RecursionDetection' => "#{core_plugins}/recursion_detection.rb"
+        'Aws::Plugins::RecursionDetection' => "#{core_plugins}/recursion_detection.rb",
+        'Aws::Plugins::Telemetry' => "#{core_plugins}/telemetry.rb"
       }
     end
 

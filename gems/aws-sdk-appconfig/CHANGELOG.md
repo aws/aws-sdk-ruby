@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2024-08-28)
+------------------
+
+* Feature - This release adds support for deletion protection, which is a safety guardrail to prevent the unintentional deletion of a recently used AWS AppConfig Configuration Profile or Environment. This also includes a change to increase the maximum length of the Name parameter in UpdateConfigurationProfile.
+
 1.51.0 (2024-07-02)
 ------------------
 

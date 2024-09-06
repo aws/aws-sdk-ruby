@@ -38,6 +38,32 @@ module Aws::DataZone
       end
     end
 
+    class AddEntityOwner
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class AddPolicyGrant
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class AssociateEnvironmentRole
       def self.build(context)
         unless context.config.regional_endpoint
@@ -169,6 +195,19 @@ module Aws::DataZone
     end
 
     class CreateDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateDomainUnit
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -429,6 +468,19 @@ module Aws::DataZone
     end
 
     class DeleteDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteDomainUnit
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -715,6 +767,19 @@ module Aws::DataZone
     end
 
     class GetDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetDomainUnit
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1078,7 +1143,33 @@ module Aws::DataZone
       end
     end
 
+    class ListDomainUnitsForParent
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListDomains
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListEntityOwners
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1183,6 +1274,19 @@ module Aws::DataZone
     end
 
     class ListNotifications
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListPolicyGrants
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1364,6 +1468,32 @@ module Aws::DataZone
       end
     end
 
+    class RemoveEntityOwner
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class RemovePolicyGrant
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class RevokeSubscription
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1521,6 +1651,19 @@ module Aws::DataZone
     end
 
     class UpdateDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateDomainUnit
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

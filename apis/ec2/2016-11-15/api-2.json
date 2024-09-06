@@ -6296,7 +6296,8 @@
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
-        }
+        },
+        "IpamPoolId":{"shape":"IpamPoolId"}
       }
     },
     "AllocateAddressResult":{
@@ -21144,6 +21145,43 @@
         "default"
       ]
     },
+    "EbsStatusDetails":{
+      "type":"structure",
+      "members":{
+        "ImpairedSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"impairedSince"
+        },
+        "Name":{
+          "shape":"StatusName",
+          "locationName":"name"
+        },
+        "Status":{
+          "shape":"StatusType",
+          "locationName":"status"
+        }
+      }
+    },
+    "EbsStatusDetailsList":{
+      "type":"list",
+      "member":{
+        "shape":"EbsStatusDetails",
+        "locationName":"item"
+      }
+    },
+    "EbsStatusSummary":{
+      "type":"structure",
+      "members":{
+        "Details":{
+          "shape":"EbsStatusDetailsList",
+          "locationName":"details"
+        },
+        "Status":{
+          "shape":"SummaryStatus",
+          "locationName":"status"
+        }
+      }
+    },
     "Ec2InstanceConnectEndpoint":{
       "type":"structure",
       "members":{
@@ -27949,6 +27987,10 @@
         "SystemStatus":{
           "shape":"InstanceStatusSummary",
           "locationName":"systemStatus"
+        },
+        "AttachedEbsStatus":{
+          "shape":"EbsStatusSummary",
+          "locationName":"attachedEbsStatus"
         }
       }
     },
@@ -29991,7 +30033,8 @@
         "vpc",
         "ec2-public-ipv4-pool",
         "custom",
-        "subnet"
+        "subnet",
+        "eip"
       ]
     },
     "IpamPoolAllocationSet":{
@@ -30213,6 +30256,7 @@
         "service-managed-ip",
         "service-managed-byoip",
         "amazon-owned-eip",
+        "amazon-owned-contig",
         "byoip",
         "ec2-public-ip"
       ]

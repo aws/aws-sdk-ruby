@@ -167,27 +167,27 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The Amazon Web Service or Amazon Web Services account that invokes
-    #   the function. If you specify a service, use `SourceArn` or
+    #   The Amazon Web Servicesservice or Amazon Web Services account that
+    #   invokes the function. If you specify a service, use `SourceArn` or
     #   `SourceAccount` to limit who can invoke the function through that
     #   service.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   For Amazon Web Services, the ARN of the Amazon Web Services resource
-    #   that invokes the function. For example, an Amazon S3 bucket or
-    #   Amazon SNS topic.
+    #   For Amazon Web Servicesservices, the ARN of the Amazon Web Services
+    #   resource that invokes the function. For example, an Amazon S3 bucket
+    #   or Amazon SNS topic.
     #
     #   Note that Lambda configures the comparison using the `StringLike`
     #   operator.
     #   @return [String]
     #
     # @!attribute [rw] source_account
-    #   For Amazon Web Service, the ID of the Amazon Web Services account
-    #   that owns the resource. Use this together with `SourceArn` to ensure
-    #   that the specified account owns the resource. It is possible for an
-    #   Amazon S3 bucket to be deleted by its owner and recreated by another
-    #   account.
+    #   For Amazon Web Servicesservice, the ID of the Amazon Web Services
+    #   account that owns the resource. Use this together with `SourceArn`
+    #   to ensure that the specified account owns the resource. It is
+    #   possible for an Amazon S3 bucket to be deleted by its owner and
+    #   recreated by another account.
     #   @return [String]
     #
     # @!attribute [rw] event_source_token
@@ -842,6 +842,18 @@ module Aws::Lambda
     #   Specific configuration settings for a DocumentDB event source.
     #   @return [Types::DocumentDBEventSourceConfig]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that Lambda uses to encrypt your function's [filter criteria][1].
+    #   By default, Lambda does not encrypt your filter criteria object.
+    #   Specify this property to encrypt data using your own customer
+    #   managed key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
     class CreateEventSourceMappingRequest < Struct.new(
@@ -867,7 +879,8 @@ module Aws::Lambda
       :amazon_managed_kafka_event_source_config,
       :self_managed_kafka_event_source_config,
       :scaling_config,
-      :document_db_event_source_config)
+      :document_db_event_source_config,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1870,6 +1883,12 @@ module Aws::Lambda
     #   Lambda should process an event. For more information, see [Lambda
     #   event filtering][1].
     #
+    #   If filter criteria is encrypted, this field shows up as `null` in
+    #   the response of ListEventSourceMapping API calls. You can view this
+    #   field in plaintext in the response of GetEventSourceMapping and
+    #   DeleteEventSourceMapping calls if you have `kms:Decrypt` permissions
+    #   for the correct KMS key.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
@@ -1984,6 +2003,20 @@ module Aws::Lambda
     #   Specific configuration settings for a DocumentDB event source.
     #   @return [Types::DocumentDBEventSourceConfig]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that Lambda uses to encrypt your function's [filter criteria][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_criteria_error
+    #   An object that contains details about an error related to filter
+    #   criteria encryption.
+    #   @return [Types::FilterCriteriaError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
     #
     class EventSourceMappingConfiguration < Struct.new(
@@ -2013,7 +2046,9 @@ module Aws::Lambda
       :amazon_managed_kafka_event_source_config,
       :self_managed_kafka_event_source_config,
       :scaling_config,
-      :document_db_event_source_config)
+      :document_db_event_source_config,
+      :kms_key_arn,
+      :filter_criteria_error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2074,6 +2109,27 @@ module Aws::Lambda
     #
     class FilterCriteria < Struct.new(
       :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about an error related to filter
+    # criteria encryption.
+    #
+    # @!attribute [rw] error_code
+    #   The KMS exception that resulted from filter criteria encryption or
+    #   decryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FilterCriteriaError AWS API Documentation
+    #
+    class FilterCriteriaError < Struct.new(
+      :error_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6322,6 +6378,18 @@ module Aws::Lambda
     #   Specific configuration settings for a DocumentDB event source.
     #   @return [Types::DocumentDBEventSourceConfig]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the Key Management Service (KMS) customer managed key
+    #   that Lambda uses to encrypt your function's [filter criteria][1].
+    #   By default, Lambda does not encrypt your filter criteria object.
+    #   Specify this property to encrypt data using your own customer
+    #   managed key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
     #
     class UpdateEventSourceMappingRequest < Struct.new(
@@ -6340,7 +6408,8 @@ module Aws::Lambda
       :tumbling_window_in_seconds,
       :function_response_types,
       :scaling_config,
-      :document_db_event_source_config)
+      :document_db_event_source_config,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end

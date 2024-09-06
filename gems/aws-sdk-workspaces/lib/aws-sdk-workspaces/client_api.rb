@@ -191,6 +191,11 @@ module Aws::WorkSpaces
     DescribeWorkspaceAssociationsResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceAssociationsResult')
     DescribeWorkspaceBundlesRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceBundlesRequest')
     DescribeWorkspaceBundlesResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceBundlesResult')
+    DescribeWorkspaceDirectoriesFilter = Shapes::StructureShape.new(name: 'DescribeWorkspaceDirectoriesFilter')
+    DescribeWorkspaceDirectoriesFilterList = Shapes::ListShape.new(name: 'DescribeWorkspaceDirectoriesFilterList')
+    DescribeWorkspaceDirectoriesFilterName = Shapes::StringShape.new(name: 'DescribeWorkspaceDirectoriesFilterName')
+    DescribeWorkspaceDirectoriesFilterValue = Shapes::StringShape.new(name: 'DescribeWorkspaceDirectoriesFilterValue')
+    DescribeWorkspaceDirectoriesFilterValues = Shapes::ListShape.new(name: 'DescribeWorkspaceDirectoriesFilterValues')
     DescribeWorkspaceDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceDirectoriesRequest')
     DescribeWorkspaceDirectoriesResult = Shapes::StructureShape.new(name: 'DescribeWorkspaceDirectoriesResult')
     DescribeWorkspaceImagePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceImagePermissionsRequest')
@@ -247,6 +252,7 @@ module Aws::WorkSpaces
     FailedWorkspaceChangeRequest = Shapes::StructureShape.new(name: 'FailedWorkspaceChangeRequest')
     GetAccountLinkRequest = Shapes::StructureShape.new(name: 'GetAccountLinkRequest')
     GetAccountLinkResult = Shapes::StructureShape.new(name: 'GetAccountLinkResult')
+    IDCConfig = Shapes::StructureShape.new(name: 'IDCConfig')
     IdleDisconnectTimeoutInSeconds = Shapes::IntegerShape.new(name: 'IdleDisconnectTimeoutInSeconds')
     ImageAssociatedResourceType = Shapes::StringShape.new(name: 'ImageAssociatedResourceType')
     ImageAssociatedResourceTypeList = Shapes::ListShape.new(name: 'ImageAssociatedResourceTypeList')
@@ -292,6 +298,8 @@ module Aws::WorkSpaces
     ManagementCidrRangeMaxResults = Shapes::IntegerShape.new(name: 'ManagementCidrRangeMaxResults')
     MaxUserDurationInSeconds = Shapes::IntegerShape.new(name: 'MaxUserDurationInSeconds')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
+    MicrosoftEntraConfig = Shapes::StructureShape.new(name: 'MicrosoftEntraConfig')
+    MicrosoftEntraConfigTenantId = Shapes::StringShape.new(name: 'MicrosoftEntraConfigTenantId')
     MigrateWorkspaceRequest = Shapes::StructureShape.new(name: 'MigrateWorkspaceRequest')
     MigrateWorkspaceResult = Shapes::StructureShape.new(name: 'MigrateWorkspaceResult')
     ModificationResourceEnum = Shapes::StringShape.new(name: 'ModificationResourceEnum')
@@ -1013,10 +1021,19 @@ module Aws::WorkSpaces
     DescribeWorkspaceBundlesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeWorkspaceBundlesResult.struct_class = Types::DescribeWorkspaceBundlesResult
 
+    DescribeWorkspaceDirectoriesFilter.add_member(:name, Shapes::ShapeRef.new(shape: DescribeWorkspaceDirectoriesFilterName, required: true, location_name: "Name"))
+    DescribeWorkspaceDirectoriesFilter.add_member(:values, Shapes::ShapeRef.new(shape: DescribeWorkspaceDirectoriesFilterValues, required: true, location_name: "Values"))
+    DescribeWorkspaceDirectoriesFilter.struct_class = Types::DescribeWorkspaceDirectoriesFilter
+
+    DescribeWorkspaceDirectoriesFilterList.member = Shapes::ShapeRef.new(shape: DescribeWorkspaceDirectoriesFilter)
+
+    DescribeWorkspaceDirectoriesFilterValues.member = Shapes::ShapeRef.new(shape: DescribeWorkspaceDirectoriesFilterValue)
+
     DescribeWorkspaceDirectoriesRequest.add_member(:directory_ids, Shapes::ShapeRef.new(shape: DirectoryIdList, location_name: "DirectoryIds"))
     DescribeWorkspaceDirectoriesRequest.add_member(:workspace_directory_names, Shapes::ShapeRef.new(shape: WorkspaceDirectoryNameList, location_name: "WorkspaceDirectoryNames"))
     DescribeWorkspaceDirectoriesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DescribeWorkspaceDirectoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeWorkspaceDirectoriesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeWorkspaceDirectoriesFilterList, location_name: "Filters"))
     DescribeWorkspaceDirectoriesRequest.struct_class = Types::DescribeWorkspaceDirectoriesRequest
 
     DescribeWorkspaceDirectoriesResult.add_member(:directories, Shapes::ShapeRef.new(shape: DirectoryList, location_name: "Directories"))
@@ -1166,6 +1183,10 @@ module Aws::WorkSpaces
     GetAccountLinkResult.add_member(:account_link, Shapes::ShapeRef.new(shape: AccountLink, location_name: "AccountLink"))
     GetAccountLinkResult.struct_class = Types::GetAccountLinkResult
 
+    IDCConfig.add_member(:instance_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "InstanceArn"))
+    IDCConfig.add_member(:application_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ApplicationArn"))
+    IDCConfig.struct_class = Types::IDCConfig
+
     ImageAssociatedResourceTypeList.member = Shapes::ShapeRef.new(shape: ImageAssociatedResourceType)
 
     ImagePermission.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "SharedAccountId"))
@@ -1273,6 +1294,10 @@ module Aws::WorkSpaces
 
     LoginMessage.key = Shapes::ShapeRef.new(shape: ClientLocale)
     LoginMessage.value = Shapes::ShapeRef.new(shape: ClientLoginMessage)
+
+    MicrosoftEntraConfig.add_member(:tenant_id, Shapes::ShapeRef.new(shape: MicrosoftEntraConfigTenantId, location_name: "TenantId"))
+    MicrosoftEntraConfig.add_member(:application_config_secret_arn, Shapes::ShapeRef.new(shape: SecretsManagerArn, location_name: "ApplicationConfigSecretArn"))
+    MicrosoftEntraConfig.struct_class = Types::MicrosoftEntraConfig
 
     MigrateWorkspaceRequest.add_member(:source_workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "SourceWorkspaceId"))
     MigrateWorkspaceRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, required: true, location_name: "BundleId"))
@@ -1410,6 +1435,8 @@ module Aws::WorkSpaces
     RegisterWorkspaceDirectoryRequest.add_member(:workspace_directory_name, Shapes::ShapeRef.new(shape: WorkspaceDirectoryName, location_name: "WorkspaceDirectoryName"))
     RegisterWorkspaceDirectoryRequest.add_member(:workspace_directory_description, Shapes::ShapeRef.new(shape: WorkspaceDirectoryDescription, location_name: "WorkspaceDirectoryDescription"))
     RegisterWorkspaceDirectoryRequest.add_member(:user_identity_type, Shapes::ShapeRef.new(shape: UserIdentityType, location_name: "UserIdentityType"))
+    RegisterWorkspaceDirectoryRequest.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "IdcInstanceArn"))
+    RegisterWorkspaceDirectoryRequest.add_member(:microsoft_entra_config, Shapes::ShapeRef.new(shape: MicrosoftEntraConfig, location_name: "MicrosoftEntraConfig"))
     RegisterWorkspaceDirectoryRequest.add_member(:workspace_type, Shapes::ShapeRef.new(shape: WorkspaceType, location_name: "WorkspaceType"))
     RegisterWorkspaceDirectoryRequest.add_member(:active_directory_config, Shapes::ShapeRef.new(shape: ActiveDirectoryConfig, location_name: "ActiveDirectoryConfig"))
     RegisterWorkspaceDirectoryRequest.struct_class = Types::RegisterWorkspaceDirectoryRequest
@@ -1753,10 +1780,12 @@ module Aws::WorkSpaces
     WorkspaceDirectory.add_member(:selfservice_permissions, Shapes::ShapeRef.new(shape: SelfservicePermissions, location_name: "SelfservicePermissions"))
     WorkspaceDirectory.add_member(:saml_properties, Shapes::ShapeRef.new(shape: SamlProperties, location_name: "SamlProperties"))
     WorkspaceDirectory.add_member(:certificate_based_auth_properties, Shapes::ShapeRef.new(shape: CertificateBasedAuthProperties, location_name: "CertificateBasedAuthProperties"))
+    WorkspaceDirectory.add_member(:microsoft_entra_config, Shapes::ShapeRef.new(shape: MicrosoftEntraConfig, location_name: "MicrosoftEntraConfig"))
     WorkspaceDirectory.add_member(:workspace_directory_name, Shapes::ShapeRef.new(shape: WorkspaceDirectoryName, location_name: "WorkspaceDirectoryName"))
     WorkspaceDirectory.add_member(:workspace_directory_description, Shapes::ShapeRef.new(shape: WorkspaceDirectoryDescription, location_name: "WorkspaceDirectoryDescription"))
     WorkspaceDirectory.add_member(:user_identity_type, Shapes::ShapeRef.new(shape: UserIdentityType, location_name: "UserIdentityType"))
     WorkspaceDirectory.add_member(:workspace_type, Shapes::ShapeRef.new(shape: WorkspaceType, location_name: "WorkspaceType"))
+    WorkspaceDirectory.add_member(:idc_config, Shapes::ShapeRef.new(shape: IDCConfig, location_name: "IDCConfig"))
     WorkspaceDirectory.add_member(:active_directory_config, Shapes::ShapeRef.new(shape: ActiveDirectoryConfig, location_name: "ActiveDirectoryConfig"))
     WorkspaceDirectory.add_member(:streaming_properties, Shapes::ShapeRef.new(shape: StreamingProperties, location_name: "StreamingProperties"))
     WorkspaceDirectory.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-09-03)
+------------------
+
+* Feature - This release adds support for configuring TCP idle timeout on NLB and GWLB listeners.
+
 1.109.0 (2024-07-25)
 ------------------
 

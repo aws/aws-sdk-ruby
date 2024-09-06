@@ -52,6 +52,6 @@ require_relative 'aws-sdk-appregistry/customizations'
 # @!group service
 module Aws::AppRegistry
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end

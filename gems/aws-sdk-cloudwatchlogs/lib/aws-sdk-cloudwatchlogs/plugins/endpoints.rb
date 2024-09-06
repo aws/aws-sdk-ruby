@@ -104,6 +104,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DeleteSubscriptionFilter.build(context)
           when :describe_account_policies
             Aws::CloudWatchLogs::Endpoints::DescribeAccountPolicies.build(context)
+          when :describe_configuration_templates
+            Aws::CloudWatchLogs::Endpoints::DescribeConfigurationTemplates.build(context)
           when :describe_deliveries
             Aws::CloudWatchLogs::Endpoints::DescribeDeliveries.build(context)
           when :describe_delivery_destinations
@@ -204,6 +206,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::UntagResource.build(context)
           when :update_anomaly
             Aws::CloudWatchLogs::Endpoints::UpdateAnomaly.build(context)
+          when :update_delivery_configuration
+            Aws::CloudWatchLogs::Endpoints::UpdateDeliveryConfiguration.build(context)
           when :update_log_anomaly_detector
             Aws::CloudWatchLogs::Endpoints::UpdateLogAnomalyDetector.build(context)
           end

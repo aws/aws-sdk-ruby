@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-finspace/plugins/content_type.rb'
@@ -84,6 +85,7 @@ module Aws::Finspace
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Finspace::Plugins::ContentType)
@@ -331,6 +333,16 @@ module Aws::Finspace
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -1236,6 +1248,15 @@ module Aws::Finspace
     #   FinSpace Managed kdb clusters will be placed.
     #
     #   You can add one of the following values:
+    #
+    #   * `kx.sg.large` – The host type with a configuration of 16 GiB memory
+    #     and 2 vCPUs.
+    #
+    #   * `kx.sg.xlarge` – The host type with a configuration of 32 GiB memory
+    #     and 4 vCPUs.
+    #
+    #   * `kx.sg.2xlarge` – The host type with a configuration of 64 GiB
+    #     memory and 8 vCPUs.
     #
     #   * `kx.sg.4xlarge` – The host type with a configuration of 108 GiB
     #     memory and 16 vCPUs.
@@ -3752,14 +3773,19 @@ module Aws::Finspace
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::Finspace')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

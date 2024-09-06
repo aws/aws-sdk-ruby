@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -83,6 +84,7 @@ module Aws::WAFV2
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::WAFV2::Plugins::Endpoints)
@@ -336,6 +338,16 @@ module Aws::WAFV2
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -6640,10 +6652,10 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Attaches an IAM policy to the specified resource. Use this to share a
-    # rule group across accounts.
+    # Use this to share a rule group with other accounts.
     #
-    # You must be the owner of the rule group to perform this operation.
+    # This action attaches an IAM policy to the specified resource. You must
+    # be the owner of the rule group to perform this operation.
     #
     # This action is subject to the following restrictions:
     #
@@ -6654,6 +6666,11 @@ module Aws::WAFV2
     #   rule group must exist in the same Region.
     #
     # * The user making the request must be the owner of the rule group.
+    #
+    # If a rule group has been shared with your account, you can access it
+    # through the call `GetRuleGroup`, and you can reference it in
+    # `CreateWebACL` and `UpdateWebACL`. Rule groups that are shared with
+    # you don't appear in your WAF console rule groups listing.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
@@ -9186,14 +9203,19 @@ module Aws::WAFV2
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::WAFV2')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

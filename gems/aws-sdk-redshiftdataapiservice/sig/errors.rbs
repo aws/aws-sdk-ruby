@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class ActiveSessionsExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ActiveStatementsExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -26,6 +29,9 @@ module Aws
         def statement_id: () -> ::String
       end
       class InternalServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class QueryTimeoutException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError

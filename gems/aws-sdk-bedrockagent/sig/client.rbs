@@ -50,6 +50,7 @@ module Aws
                       ?session_token: String,
                       ?sigv4a_signing_region_set: Array[String],
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
@@ -164,7 +165,8 @@ module Aws
                                                  description: ::String?,
                                                  required: bool?,
                                                  type: ("string" | "number" | "integer" | "boolean" | "array")
-                                               }]?
+                                               }]?,
+                                             require_confirmation: ("ENABLED" | "DISABLED")?
                                            },
                                          ]?
                                        },
@@ -650,6 +652,12 @@ module Aws
                                    top_p: ::Float?
                                  }?
                                }?,
+                               metadata: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]?,
                                model_id: ::String?,
                                name: ::String,
                                template_configuration: {
@@ -1302,7 +1310,8 @@ module Aws
                                                  description: ::String?,
                                                  required: bool?,
                                                  type: ("string" | "number" | "integer" | "boolean" | "array")
-                                               }]?
+                                               }]?,
+                                             require_confirmation: ("ENABLED" | "DISABLED")?
                                            },
                                          ]?
                                        },
@@ -1776,6 +1785,12 @@ module Aws
                                    top_p: ::Float?
                                  }?
                                }?,
+                               metadata: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]?,
                                model_id: ::String?,
                                name: ::String,
                                template_configuration: {

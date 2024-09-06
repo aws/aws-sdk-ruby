@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.125.0 (2024-08-23)
+------------------
+
+* Feature - Added support for the MAC_ARM environment type for CodeBuild fleets.
+
 1.124.0 (2024-08-19)
 ------------------
 

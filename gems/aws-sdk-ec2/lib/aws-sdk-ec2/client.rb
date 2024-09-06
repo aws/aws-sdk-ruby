@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
@@ -85,6 +86,7 @@ module Aws::EC2
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
@@ -333,6 +335,16 @@ module Aws::EC2
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -969,6 +981,9 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the Elastic IP address.
     #
+    # @option params [String] :ipam_pool_id
+    #   The ID of an IPAM pool.
+    #
     # @return [Types::AllocateAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllocateAddressResult#public_ip #public_ip} => String
@@ -1017,6 +1032,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     ipam_pool_id: "IpamPoolId",
     #   })
     #
     # @example Response structure
@@ -1291,7 +1307,7 @@ module Aws::EC2
     #   resp.ipam_pool_allocation.ipam_pool_allocation_id #=> String
     #   resp.ipam_pool_allocation.description #=> String
     #   resp.ipam_pool_allocation.resource_id #=> String
-    #   resp.ipam_pool_allocation.resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet"
+    #   resp.ipam_pool_allocation.resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet", "eip"
     #   resp.ipam_pool_allocation.resource_region #=> String
     #   resp.ipam_pool_allocation.resource_owner #=> String
     #
@@ -4482,36 +4498,28 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Initiates the copy of an AMI. You can copy an AMI from one Region to
-    # another, or from a Region to an Outpost. You can't copy an AMI from
-    # an Outpost to a Region, from one Outpost to another, or within the
-    # same Outpost. To copy an AMI to another partition, see
+    # Initiates an AMI copy operation. You can copy an AMI from one Region
+    # to another, or from a Region to an Outpost. You can't copy an AMI
+    # from an Outpost to a Region, from one Outpost to another, or within
+    # the same Outpost. To copy an AMI to another partition, see
     # [CreateStoreImageTask][1].
     #
-    # To copy an AMI from one Region to another, specify the source Region
-    # using the **SourceRegion** parameter, and specify the destination
-    # Region using its endpoint. Copies of encrypted backing snapshots for
-    # the AMI are encrypted. Copies of unencrypted backing snapshots remain
-    # unencrypted, unless you set `Encrypted` during the copy operation. You
-    # cannot create an unencrypted copy of an encrypted backing snapshot.
+    # When you copy an AMI from one Region to another, the destination
+    # Region is the current Region.
     #
-    # To copy an AMI from a Region to an Outpost, specify the source Region
-    # using the **SourceRegion** parameter, and specify the ARN of the
-    # destination Outpost using **DestinationOutpostArn**. Backing snapshots
-    # copied to an Outpost are encrypted by default using the default
-    # encryption key for the Region, or a different key that you specify in
-    # the request using **KmsKeyId**. Outposts do not support unencrypted
-    # snapshots. For more information, [ Amazon EBS local snapshots on
-    # Outposts][2] in the *Amazon EBS User Guide*.
+    # When you copy an AMI from a Region to an Outpost, specify the ARN of
+    # the Outpost as the destination. Backing snapshots copied to an Outpost
+    # are encrypted by default using the default encryption key for the
+    # Region or the key that you specify. Outposts do not support
+    # unencrypted snapshots.
     #
-    # For more information about the prerequisites and limits when copying
-    # an AMI, see [Copy an AMI][3] in the *Amazon EC2 User Guide*.
+    # For information about the prerequisites when copying an AMI, see [Copy
+    # an AMI][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
-    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -4531,12 +4539,12 @@ module Aws::EC2
     #   you cannot create an unencrypted copy of an encrypted snapshot. The
     #   default KMS key for Amazon EBS is used unless you specify a
     #   non-default Key Management Service (KMS) KMS key using `KmsKeyId`. For
-    #   more information, see [Amazon EBS encryption][1] in the *Amazon EBS
-    #   User Guide*.
+    #   more information, see [Use encryption with EBS-backed AMIs][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html
     #
     # @option params [String] :kms_key_id
     #   The identifier of the symmetric Key Management Service (KMS) KMS key
@@ -17739,7 +17747,7 @@ module Aws::EC2
     #
     # If you attempt to delete a security group that is associated with an
     # instance or network interface or is referenced by another security
-    # group, the operation fails with `DependencyViolation`.
+    # group in the same VPC, the operation fails with `DependencyViolation`.
     #
     # @option params [String] :group_id
     #   The ID of the security group.
@@ -24923,6 +24931,10 @@ module Aws::EC2
     #     `impaired` \| `initializing` \| `insufficient-data` \|
     #     `not-applicable`).
     #
+    #   * `attached-ebs-status.status` - The status of the attached EBS volume
+    #     for the instance (`ok` \| `impaired` \| `initializing` \|
+    #     `insufficient-data` \| `not-applicable`).
+    #
     # @option params [Array<String>] :instance_ids
     #   The instance IDs.
     #
@@ -25049,6 +25061,11 @@ module Aws::EC2
     #   resp.instance_statuses[0].system_status.details[0].name #=> String, one of "reachability"
     #   resp.instance_statuses[0].system_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
     #   resp.instance_statuses[0].system_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
+    #   resp.instance_statuses[0].attached_ebs_status.details #=> Array
+    #   resp.instance_statuses[0].attached_ebs_status.details[0].impaired_since #=> Time
+    #   resp.instance_statuses[0].attached_ebs_status.details[0].name #=> String, one of "reachability"
+    #   resp.instance_statuses[0].attached_ebs_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instance_statuses[0].attached_ebs_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
     #   resp.next_token #=> String
     #
     #
@@ -34060,9 +34077,9 @@ module Aws::EC2
 
     # Describes the stale security group rules for security groups in a
     # specified VPC. Rules are stale when they reference a deleted security
-    # group in the same VPC or peered VPC. Rules can also be stale if they
-    # reference a security group in a peer VPC for which the VPC peering
-    # connection has been deleted.
+    # group in a peered VPC. Rules can also be stale if they reference a
+    # security group in a peer VPC for which the VPC peering connection has
+    # been deleted.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39308,10 +39325,15 @@ module Aws::EC2
     # disable block public access for snapshots in a Region, users can
     # publicly share snapshots in that Region.
     #
-    # If block public access is enabled in `block-all-sharing` mode, and you
-    # disable block public access, all snapshots that were previously
-    # publicly shared are no longer treated as private and they become
-    # publicly accessible again.
+    # Enabling block public access for snapshots in *block-all-sharing* mode
+    # does not change the permissions for snapshots that are already
+    # publicly shared. Instead, it prevents these snapshots from be publicly
+    # visible and publicly accessible. Therefore, the attributes for these
+    # snapshots still indicate that they are publicly shared, even though
+    # they are not publicly available.
+    #
+    #  If you disable block public access , these snapshots will become
+    # publicly available again.
     #
     # For more information, see [ Block public access for snapshots][1] in
     # the *Amazon EBS User Guide* .
@@ -40946,10 +40968,15 @@ module Aws::EC2
     # that are already publicly shared are either treated as private or they
     # remain publicly shared, depending on the **State** that you specify.
     #
-    # If block public access is enabled in `block-all-sharing` mode, and you
-    # change the mode to `block-new-sharing`, all snapshots that were
-    # previously publicly shared are no longer treated as private and they
-    # become publicly accessible again.
+    # Enabling block public access for snapshots in *block all sharing* mode
+    # does not change the permissions for snapshots that are already
+    # publicly shared. Instead, it prevents these snapshots from be publicly
+    # visible and publicly accessible. Therefore, the attributes for these
+    # snapshots still indicate that they are publicly shared, even though
+    # they are not publicly available.
+    #
+    #  If you later disable block public access or change the mode to *block
+    # new sharing*, these snapshots will become publicly available again.
     #
     # For more information, see [ Block public access for snapshots][1] in
     # the *Amazon EBS User Guide*.
@@ -40967,16 +40994,6 @@ module Aws::EC2
     #     new public sharing. Additionally, snapshots that are already
     #     publicly shared are treated as private and they are no longer
     #     publicly available.
-    #
-    #     <note markdown="1"> If you enable block public access for snapshots in
-    #     `block-all-sharing` mode, it does not change the permissions for
-    #     snapshots that are already publicly shared. Instead, it prevents
-    #     these snapshots from be publicly visible and publicly accessible.
-    #     Therefore, the attributes for these snapshots still indicate that
-    #     they are publicly shared, even though they are not publicly
-    #     available.
-    #
-    #      </note>
     #
     #   * `block-new-sharing` - Prevents only new public sharing of snapshots
     #     in the Region. Users in the account will no longer be able to
@@ -42799,7 +42816,7 @@ module Aws::EC2
     #   resp.ipam_discovered_public_addresses[0].address_owner_id #=> String
     #   resp.ipam_discovered_public_addresses[0].address_allocation_id #=> String
     #   resp.ipam_discovered_public_addresses[0].association_status #=> String, one of "associated", "disassociated"
-    #   resp.ipam_discovered_public_addresses[0].address_type #=> String, one of "service-managed-ip", "service-managed-byoip", "amazon-owned-eip", "byoip", "ec2-public-ip"
+    #   resp.ipam_discovered_public_addresses[0].address_type #=> String, one of "service-managed-ip", "service-managed-byoip", "amazon-owned-eip", "amazon-owned-contig", "byoip", "ec2-public-ip"
     #   resp.ipam_discovered_public_addresses[0].service #=> String, one of "nat-gateway", "database-migration-service", "redshift", "elastic-container-service", "relational-database-service", "site-to-site-vpn", "load-balancer", "global-accelerator", "other"
     #   resp.ipam_discovered_public_addresses[0].service_resource #=> String
     #   resp.ipam_discovered_public_addresses[0].vpc_id #=> String
@@ -42980,7 +42997,7 @@ module Aws::EC2
     #   resp.ipam_pool_allocations[0].ipam_pool_allocation_id #=> String
     #   resp.ipam_pool_allocations[0].description #=> String
     #   resp.ipam_pool_allocations[0].resource_id #=> String
-    #   resp.ipam_pool_allocations[0].resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet"
+    #   resp.ipam_pool_allocations[0].resource_type #=> String, one of "ipam-pool", "vpc", "ec2-public-ipv4-pool", "custom", "subnet", "eip"
     #   resp.ipam_pool_allocations[0].resource_region #=> String
     #   resp.ipam_pool_allocations[0].resource_owner #=> String
     #   resp.next_token #=> String
@@ -49896,6 +49913,18 @@ module Aws::EC2
     #   in this subnet should return synthetic IPv6 addresses for IPv4-only
     #   destinations.
     #
+    #   <note markdown="1"> You must first configure a NAT gateway in a public subnet (separate
+    #   from the subnet containing the IPv6-only workloads). For example, the
+    #   subnet containing the NAT gateway should have a `0.0.0.0/0` route
+    #   pointing to the internet gateway. For more information, see [Configure
+    #   DNS64 and NAT64][1] in the *Amazon VPC User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough
+    #
     # @option params [String] :private_dns_hostname_type_on_launch
     #   The type of hostname to assign to instances in the subnet at launch.
     #   For IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS
@@ -53417,8 +53446,9 @@ module Aws::EC2
 
     # Registers an AMI. When you're creating an instance-store backed AMI,
     # registering the AMI is the final step in the creation process. For
-    # more information about creating AMIs, see [Create your own AMI][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # more information about creating AMIs, see [Create an AMI from a
+    # snapshot][1] and [Create an instance-store backed AMI][2] in the
+    # *Amazon EC2 User Guide*.
     #
     # <note markdown="1"> For Amazon EBS-backed instances, CreateImage creates and registers the
     # AMI in a single request, so you don't have to register the AMI
@@ -53441,28 +53471,28 @@ module Aws::EC2
     # encrypted, or encryption by default is enabled, the root volume of an
     # instance launched from the AMI is encrypted.
     #
-    # For more information, see [Create a Linux AMI from a snapshot][2] and
-    # [Use encryption with Amazon EBS-backed AMIs][3] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Create an AMI from a snapshot][1] and [Use
+    # encryption with Amazon EBS-backed AMIs][3] in the *Amazon EC2 User
+    # Guide*.
     #
     # **Amazon Web Services Marketplace product codes**
     #
     # If any snapshots have Amazon Web Services Marketplace product codes,
     # they are copied to the new AMI.
     #
-    # Windows and some Linux distributions, such as Red Hat Enterprise Linux
-    # (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2
-    # billing product code associated with an AMI to verify the subscription
-    # status for package updates. To create a new AMI for operating systems
-    # that require a billing product code, instead of registering the AMI,
-    # do the following to preserve the billing product code association:
-    #
-    # 1.  Launch an instance from an existing AMI with that billing product
-    #     code.
-    #
-    # 2.  Customize the instance.
-    #
-    # 3.  Create an AMI from the instance using CreateImage.
+    # In most cases, AMIs for Windows, RedHat, SUSE, and SQL Server require
+    # correct licensing information to be present on the AMI. For more
+    # information, see [Understand AMI billing information][4] in the
+    # *Amazon EC2 User Guide*. When creating an AMI from a snapshot, the
+    # `RegisterImage` operation derives the correct billing information from
+    # the snapshot's metadata, but this requires the appropriate metadata
+    # to be present. To verify if the correct billing information was
+    # applied, check the `PlatformDetails` field on the new AMI. If the
+    # field is empty or doesn't match the expected operating system code
+    # (for example, Windows, RedHat, SUSE, or SQL), the AMI creation was
+    # unsuccessful, and you should discard the AMI and instead create the
+    # AMI from an instance using CreateImage. For more information, see
+    # [Create an AMI from an instance ][5] in the *Amazon EC2 User Guide*.
     #
     # If you purchase a Reserved Instance to apply to an On-Demand Instance
     # that was launched from an AMI with a billing product code, make sure
@@ -53475,10 +53505,11 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-instance-store.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html
     # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#how-to-create-ebs-ami
     #
     # @option params [String] :image_location
     #   The full path to your AMI manifest in Amazon S3 storage. The specified
@@ -60083,14 +60114,19 @@ module Aws::EC2
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::EC2')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.469.0'
+      context[:gem_version] = '1.472.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -54,6 +54,7 @@ module Aws
                       ?sigv4a_signing_region_set: Array[String],
                       ?simple_json: bool,
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
@@ -99,6 +100,12 @@ module Aws
       def create_delivery: (
                              delivery_source_name: ::String,
                              delivery_destination_arn: ::String,
+                             ?record_fields: Array[::String],
+                             ?field_delimiter: ::String,
+                             ?s3_delivery_configuration: {
+                               suffix_path: ::String?,
+                               enable_hive_compatible_path: bool?
+                             },
                              ?tags: Hash[::String, ::String]
                            ) -> _CreateDeliveryResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeliveryResponseSuccess
@@ -260,6 +267,22 @@ module Aws
                                        ?account_identifiers: Array[::String]
                                      ) -> _DescribeAccountPoliciesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountPoliciesResponseSuccess
+
+      interface _DescribeConfigurationTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationTemplatesResponse]
+        def configuration_templates: () -> ::Array[Types::ConfigurationTemplate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_configuration_templates-instance_method
+      def describe_configuration_templates: (
+                                              ?service: ::String,
+                                              ?log_types: Array[::String],
+                                              ?resource_types: Array[::String],
+                                              ?delivery_destination_types: Array[("S3" | "CWL" | "FH")],
+                                              ?next_token: ::String,
+                                              ?limit: ::Integer
+                                            ) -> _DescribeConfigurationTemplatesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationTemplatesResponseSuccess
 
       interface _DescribeDeliveriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeliveriesResponse]
@@ -720,6 +743,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::PutLogEventsResponse]
         def next_sequence_token: () -> ::String
         def rejected_log_events_info: () -> Types::RejectedLogEventsInfo
+        def rejected_entity_info: () -> Types::RejectedEntityInfo
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_log_events-instance_method
       def put_log_events: (
@@ -731,7 +755,11 @@ module Aws
                                 message: ::String
                               },
                             ],
-                            ?sequence_token: ::String
+                            ?sequence_token: ::String,
+                            ?entity: {
+                              key_attributes: Hash[::String, ::String]?,
+                              attributes: Hash[::String, ::String]?
+                            }
                           ) -> _PutLogEventsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLogEventsResponseSuccess
 
@@ -886,6 +914,21 @@ module Aws
                             }
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateDeliveryConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeliveryConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#update_delivery_configuration-instance_method
+      def update_delivery_configuration: (
+                                           id: ::String,
+                                           ?record_fields: Array[::String],
+                                           ?field_delimiter: ::String,
+                                           ?s3_delivery_configuration: {
+                                             suffix_path: ::String?,
+                                             enable_hive_compatible_path: bool?
+                                           }
+                                         ) -> _UpdateDeliveryConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeliveryConfigurationResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#update_log_anomaly_detector-instance_method
       def update_log_anomaly_detector: (

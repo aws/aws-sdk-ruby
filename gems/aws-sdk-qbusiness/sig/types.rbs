@@ -103,6 +103,7 @@ module Aws::QBusiness
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC")
       SENSITIVE: []
     end
 
@@ -173,6 +174,12 @@ module Aws::QBusiness
     class AuthChallengeResponseEvent
       attr_accessor response_map: ::Hash[::String, ::String]
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class AutoSubscriptionConfiguration
+      attr_accessor auto_subscribe: ("ENABLED" | "DISABLED")
+      attr_accessor default_subscription_type: ("Q_LITE" | "Q_BUSINESS")
       SENSITIVE: []
     end
 
@@ -313,7 +320,10 @@ module Aws::QBusiness
     class CreateApplicationRequest
       attr_accessor display_name: ::String
       attr_accessor role_arn: ::String
+      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC")
+      attr_accessor iam_identity_provider_arn: ::String
       attr_accessor identity_center_instance_arn: ::String
+      attr_accessor client_ids_for_oidc: ::Array[::String]
       attr_accessor description: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor tags: ::Array[Types::Tag]
@@ -424,6 +434,7 @@ module Aws::QBusiness
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
       SENSITIVE: []
     end
 
@@ -739,6 +750,8 @@ module Aws::QBusiness
       attr_accessor display_name: ::String
       attr_accessor application_id: ::String
       attr_accessor application_arn: ::String
+      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC")
+      attr_accessor iam_identity_provider_arn: ::String
       attr_accessor identity_center_application_arn: ::String
       attr_accessor role_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
@@ -750,6 +763,8 @@ module Aws::QBusiness
       attr_accessor attachments_configuration: Types::AppliedAttachmentsConfiguration
       attr_accessor q_apps_configuration: Types::QAppsConfiguration
       attr_accessor personalization_configuration: Types::PersonalizationConfiguration
+      attr_accessor auto_subscription_configuration: Types::AutoSubscriptionConfiguration
+      attr_accessor client_ids_for_oidc: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -905,6 +920,7 @@ module Aws::QBusiness
       attr_accessor welcome_message: ::String
       attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
       attr_accessor role_arn: ::String
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
       attr_accessor authentication_configuration: Types::WebExperienceAuthConfiguration
       attr_accessor error: Types::ErrorDetail
       SENSITIVE: []
@@ -934,6 +950,20 @@ module Aws::QBusiness
       attr_accessor s3_bucket_name: ::String
       attr_accessor role_arn: ::String
       SENSITIVE: []
+    end
+
+    class IdentityProviderConfiguration
+      attr_accessor saml_configuration: Types::SamlProviderConfiguration
+      attr_accessor open_id_connect_configuration: Types::OpenIDConnectProviderConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SamlConfiguration < IdentityProviderConfiguration
+      end
+      class OpenIdConnectConfiguration < IdentityProviderConfiguration
+      end
+      class Unknown < IdentityProviderConfiguration
+      end
     end
 
     class Index
@@ -1206,6 +1236,12 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class OpenIDConnectProviderConfiguration
+      attr_accessor secrets_arn: ::String
+      attr_accessor secrets_role: ::String
+      SENSITIVE: []
+    end
+
     class PersonalizationConfiguration
       attr_accessor personalization_control_mode: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -1367,6 +1403,11 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class SamlProviderConfiguration
+      attr_accessor authentication_url: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -1496,6 +1537,7 @@ module Aws::QBusiness
       attr_accessor attachments_configuration: Types::AttachmentsConfiguration
       attr_accessor q_apps_configuration: Types::QAppsConfiguration
       attr_accessor personalization_configuration: Types::PersonalizationConfiguration
+      attr_accessor auto_subscription_configuration: Types::AutoSubscriptionConfiguration
       SENSITIVE: []
     end
 
@@ -1596,6 +1638,7 @@ module Aws::QBusiness
       attr_accessor subtitle: ::String
       attr_accessor welcome_message: ::String
       attr_accessor sample_prompts_control_mode: ("ENABLED" | "DISABLED")
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
       SENSITIVE: []
     end
 

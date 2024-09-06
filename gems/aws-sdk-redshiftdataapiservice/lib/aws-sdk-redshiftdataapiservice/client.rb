@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -83,6 +84,7 @@ module Aws::RedshiftDataAPIService
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::RedshiftDataAPIService::Plugins::Endpoints)
@@ -337,6 +339,16 @@ module Aws::RedshiftDataAPIService
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
+    #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
     #     following classes:
@@ -487,7 +499,7 @@ module Aws::RedshiftDataAPIService
     #   a cluster and authenticating using either Secrets Manager or temporary
     #   credentials.
     #
-    # @option params [required, String] :database
+    # @option params [String] :database
     #   The name of the database. This parameter is required when
     #   authenticating using either Secrets Manager or temporary credentials.
     #
@@ -499,6 +511,14 @@ module Aws::RedshiftDataAPIService
     # @option params [String] :secret_arn
     #   The name or ARN of the secret that enables access to the database.
     #   This parameter is required when authenticating using Secrets Manager.
+    #
+    # @option params [String] :session_id
+    #   The session identifier of the query.
+    #
+    # @option params [Integer] :session_keep_alive_seconds
+    #   The number of seconds to keep the session alive after the query
+    #   finishes. The maximum time a session can keep alive is 24 hours. After
+    #   24 hours, the session is forced closed and the query is terminated.
     #
     # @option params [required, Array<String>] :sqls
     #   One or more SQL statements to run.      The SQL statements are run as
@@ -525,19 +545,23 @@ module Aws::RedshiftDataAPIService
     #   * {Types::BatchExecuteStatementOutput#cluster_identifier #cluster_identifier} => String
     #   * {Types::BatchExecuteStatementOutput#created_at #created_at} => Time
     #   * {Types::BatchExecuteStatementOutput#database #database} => String
+    #   * {Types::BatchExecuteStatementOutput#db_groups #db_groups} => Array&lt;String&gt;
     #   * {Types::BatchExecuteStatementOutput#db_user #db_user} => String
     #   * {Types::BatchExecuteStatementOutput#id #id} => String
     #   * {Types::BatchExecuteStatementOutput#secret_arn #secret_arn} => String
+    #   * {Types::BatchExecuteStatementOutput#session_id #session_id} => String
     #   * {Types::BatchExecuteStatementOutput#workgroup_name #workgroup_name} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_execute_statement({
     #     client_token: "ClientToken",
-    #     cluster_identifier: "Location",
-    #     database: "String", # required
+    #     cluster_identifier: "ClusterIdentifierString",
+    #     database: "String",
     #     db_user: "String",
     #     secret_arn: "SecretArn",
+    #     session_id: "UUID",
+    #     session_keep_alive_seconds: 1,
     #     sqls: ["StatementString"], # required
     #     statement_name: "StatementNameString",
     #     with_event: false,
@@ -549,9 +573,12 @@ module Aws::RedshiftDataAPIService
     #   resp.cluster_identifier #=> String
     #   resp.created_at #=> Time
     #   resp.database #=> String
+    #   resp.db_groups #=> Array
+    #   resp.db_groups[0] #=> String
     #   resp.db_user #=> String
     #   resp.id #=> String
     #   resp.secret_arn #=> String
+    #   resp.session_id #=> String
     #   resp.workgroup_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatement AWS API Documentation
@@ -586,7 +613,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_statement({
-    #     id: "StatementId", # required
+    #     id: "UUID", # required
     #   })
     #
     # @example Response structure
@@ -641,6 +668,7 @@ module Aws::RedshiftDataAPIService
     #   * {Types::DescribeStatementResponse#result_rows #result_rows} => Integer
     #   * {Types::DescribeStatementResponse#result_size #result_size} => Integer
     #   * {Types::DescribeStatementResponse#secret_arn #secret_arn} => String
+    #   * {Types::DescribeStatementResponse#session_id #session_id} => String
     #   * {Types::DescribeStatementResponse#status #status} => String
     #   * {Types::DescribeStatementResponse#sub_statements #sub_statements} => Array&lt;Types::SubStatementData&gt;
     #   * {Types::DescribeStatementResponse#updated_at #updated_at} => Time
@@ -649,7 +677,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_statement({
-    #     id: "StatementId", # required
+    #     id: "UUID", # required
     #   })
     #
     # @example Response structure
@@ -671,6 +699,7 @@ module Aws::RedshiftDataAPIService
     #   resp.result_rows #=> Integer
     #   resp.result_size #=> Integer
     #   resp.secret_arn #=> String
+    #   resp.session_id #=> String
     #   resp.status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
     #   resp.sub_statements #=> Array
     #   resp.sub_statements[0].created_at #=> Time
@@ -800,7 +829,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_table({
-    #     cluster_identifier: "Location",
+    #     cluster_identifier: "ClusterIdentifierString",
     #     connected_database: "String",
     #     database: "String", # required
     #     db_user: "String",
@@ -895,7 +924,7 @@ module Aws::RedshiftDataAPIService
     #   a cluster and authenticating using either Secrets Manager or temporary
     #   credentials.
     #
-    # @option params [required, String] :database
+    # @option params [String] :database
     #   The name of the database. This parameter is required when
     #   authenticating using either Secrets Manager or temporary credentials.
     #
@@ -910,6 +939,14 @@ module Aws::RedshiftDataAPIService
     # @option params [String] :secret_arn
     #   The name or ARN of the secret that enables access to the database.
     #   This parameter is required when authenticating using Secrets Manager.
+    #
+    # @option params [String] :session_id
+    #   The session identifier of the query.
+    #
+    # @option params [Integer] :session_keep_alive_seconds
+    #   The number of seconds to keep the session alive after the query
+    #   finishes. The maximum time a session can keep alive is 24 hours. After
+    #   24 hours, the session is forced closed and the query is terminated.
     #
     # @option params [required, String] :sql
     #   The SQL statement text to run.
@@ -932,17 +969,19 @@ module Aws::RedshiftDataAPIService
     #   * {Types::ExecuteStatementOutput#cluster_identifier #cluster_identifier} => String
     #   * {Types::ExecuteStatementOutput#created_at #created_at} => Time
     #   * {Types::ExecuteStatementOutput#database #database} => String
+    #   * {Types::ExecuteStatementOutput#db_groups #db_groups} => Array&lt;String&gt;
     #   * {Types::ExecuteStatementOutput#db_user #db_user} => String
     #   * {Types::ExecuteStatementOutput#id #id} => String
     #   * {Types::ExecuteStatementOutput#secret_arn #secret_arn} => String
+    #   * {Types::ExecuteStatementOutput#session_id #session_id} => String
     #   * {Types::ExecuteStatementOutput#workgroup_name #workgroup_name} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.execute_statement({
     #     client_token: "ClientToken",
-    #     cluster_identifier: "Location",
-    #     database: "String", # required
+    #     cluster_identifier: "ClusterIdentifierString",
+    #     database: "String",
     #     db_user: "String",
     #     parameters: [
     #       {
@@ -951,6 +990,8 @@ module Aws::RedshiftDataAPIService
     #       },
     #     ],
     #     secret_arn: "SecretArn",
+    #     session_id: "UUID",
+    #     session_keep_alive_seconds: 1,
     #     sql: "StatementString", # required
     #     statement_name: "StatementNameString",
     #     with_event: false,
@@ -962,9 +1003,12 @@ module Aws::RedshiftDataAPIService
     #   resp.cluster_identifier #=> String
     #   resp.created_at #=> Time
     #   resp.database #=> String
+    #   resp.db_groups #=> Array
+    #   resp.db_groups[0] #=> String
     #   resp.db_user #=> String
     #   resp.id #=> String
     #   resp.secret_arn #=> String
+    #   resp.session_id #=> String
     #   resp.workgroup_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatement AWS API Documentation
@@ -1016,7 +1060,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_statement_result({
-    #     id: "StatementId", # required
+    #     id: "UUID", # required
     #     next_token: "String",
     #   })
     #
@@ -1144,7 +1188,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_databases({
-    #     cluster_identifier: "Location",
+    #     cluster_identifier: "ClusterIdentifierString",
     #     database: "String", # required
     #     db_user: "String",
     #     max_results: 1,
@@ -1267,7 +1311,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_schemas({
-    #     cluster_identifier: "Location",
+    #     cluster_identifier: "ClusterIdentifierString",
     #     connected_database: "String",
     #     database: "String", # required
     #     db_user: "String",
@@ -1382,6 +1426,7 @@ module Aws::RedshiftDataAPIService
     #   resp.statements[0].query_strings #=> Array
     #   resp.statements[0].query_strings[0] #=> String
     #   resp.statements[0].secret_arn #=> String
+    #   resp.statements[0].session_id #=> String
     #   resp.statements[0].statement_name #=> String
     #   resp.statements[0].status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
     #   resp.statements[0].updated_at #=> Time
@@ -1508,7 +1553,7 @@ module Aws::RedshiftDataAPIService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tables({
-    #     cluster_identifier: "Location",
+    #     cluster_identifier: "ClusterIdentifierString",
     #     connected_database: "String",
     #     database: "String", # required
     #     db_user: "String",
@@ -1543,14 +1588,19 @@ module Aws::RedshiftDataAPIService
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::RedshiftDataAPIService')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

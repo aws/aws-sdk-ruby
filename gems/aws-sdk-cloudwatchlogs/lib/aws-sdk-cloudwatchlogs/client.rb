@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
@@ -84,6 +85,7 @@ module Aws::CloudWatchLogs
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
@@ -347,6 +349,16 @@ module Aws::CloudWatchLogs
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -645,6 +657,19 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :delivery_destination_arn
     #   The ARN of the delivery destination to use for this delivery.
     #
+    # @option params [Array<String>] :record_fields
+    #   The list of record fields to be delivered to the destination, in
+    #   order. If the delivery’s log source has mandatory fields, they must be
+    #   included in this list.
+    #
+    # @option params [String] :field_delimiter
+    #   The field delimiter to use between record fields when the final output
+    #   format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+    #
+    # @option params [Types::S3DeliveryConfiguration] :s3_delivery_configuration
+    #   This structure contains parameters that are valid only when the
+    #   delivery’s delivery destination is an S3 bucket.
+    #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
     #
@@ -664,6 +689,12 @@ module Aws::CloudWatchLogs
     #   resp = client.create_delivery({
     #     delivery_source_name: "DeliverySourceName", # required
     #     delivery_destination_arn: "Arn", # required
+    #     record_fields: ["FieldHeader"],
+    #     field_delimiter: "FieldDelimiter",
+    #     s3_delivery_configuration: {
+    #       suffix_path: "DeliverySuffixPath",
+    #       enable_hive_compatible_path: false,
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -676,6 +707,11 @@ module Aws::CloudWatchLogs
     #   resp.delivery.delivery_source_name #=> String
     #   resp.delivery.delivery_destination_arn #=> String
     #   resp.delivery.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery.record_fields #=> Array
+    #   resp.delivery.record_fields[0] #=> String
+    #   resp.delivery.field_delimiter #=> String
+    #   resp.delivery.s3_delivery_configuration.suffix_path #=> String
+    #   resp.delivery.s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
     #   resp.delivery.tags #=> Hash
     #   resp.delivery.tags["TagKey"] #=> String
     #
@@ -1552,6 +1588,94 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Use this operation to return the valid and default values that are
+    # used when creating delivery sources, delivery destinations, and
+    # deliveries. For more information about deliveries, see
+    # [CreateDelivery][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html
+    #
+    # @option params [String] :service
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the Amazon Web Services service
+    #   that you specify here.
+    #
+    # @option params [Array<String>] :log_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the log types that you specify
+    #   here.
+    #
+    # @option params [Array<String>] :resource_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the resource types that you
+    #   specify here.
+    #
+    # @option params [Array<String>] :delivery_destination_types
+    #   Use this parameter to filter the response to include only the
+    #   configuration templates that apply to the delivery destination types
+    #   that you specify here.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   Use this parameter to limit the number of configuration templates that
+    #   are returned in the response.
+    #
+    # @return [Types::DescribeConfigurationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConfigurationTemplatesResponse#configuration_templates #configuration_templates} => Array&lt;Types::ConfigurationTemplate&gt;
+    #   * {Types::DescribeConfigurationTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_configuration_templates({
+    #     service: "Service",
+    #     log_types: ["LogType"],
+    #     resource_types: ["ResourceType"],
+    #     delivery_destination_types: ["S3"], # accepts S3, CWL, FH
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_templates #=> Array
+    #   resp.configuration_templates[0].service #=> String
+    #   resp.configuration_templates[0].log_type #=> String
+    #   resp.configuration_templates[0].resource_type #=> String
+    #   resp.configuration_templates[0].delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.configuration_templates[0].default_delivery_config_values.record_fields #=> Array
+    #   resp.configuration_templates[0].default_delivery_config_values.record_fields[0] #=> String
+    #   resp.configuration_templates[0].default_delivery_config_values.field_delimiter #=> String
+    #   resp.configuration_templates[0].default_delivery_config_values.s3_delivery_configuration.suffix_path #=> String
+    #   resp.configuration_templates[0].default_delivery_config_values.s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
+    #   resp.configuration_templates[0].allowed_fields #=> Array
+    #   resp.configuration_templates[0].allowed_fields[0].name #=> String
+    #   resp.configuration_templates[0].allowed_fields[0].mandatory #=> Boolean
+    #   resp.configuration_templates[0].allowed_output_formats #=> Array
+    #   resp.configuration_templates[0].allowed_output_formats[0] #=> String, one of "json", "plain", "w3c", "raw", "parquet"
+    #   resp.configuration_templates[0].allowed_action_for_allow_vended_logs_delivery_for_resource #=> String
+    #   resp.configuration_templates[0].allowed_field_delimiters #=> Array
+    #   resp.configuration_templates[0].allowed_field_delimiters[0] #=> String
+    #   resp.configuration_templates[0].allowed_suffix_path_fields #=> Array
+    #   resp.configuration_templates[0].allowed_suffix_path_fields[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeConfigurationTemplates AWS API Documentation
+    #
+    # @overload describe_configuration_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_configuration_templates(params = {}, options = {})
+      req = build_request(:describe_configuration_templates, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of the deliveries that have been created in the
     # account.
     #
@@ -1600,6 +1724,11 @@ module Aws::CloudWatchLogs
     #   resp.deliveries[0].delivery_source_name #=> String
     #   resp.deliveries[0].delivery_destination_arn #=> String
     #   resp.deliveries[0].delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.deliveries[0].record_fields #=> Array
+    #   resp.deliveries[0].record_fields[0] #=> String
+    #   resp.deliveries[0].field_delimiter #=> String
+    #   resp.deliveries[0].s3_delivery_configuration.suffix_path #=> String
+    #   resp.deliveries[0].s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
     #   resp.deliveries[0].tags #=> Hash
     #   resp.deliveries[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -2463,18 +2592,17 @@ module Aws::CloudWatchLogs
     # @option params [Array<String>] :log_stream_names
     #   Filters the results to only logs from the log streams in this list.
     #
-    #   If you specify a value for both `logStreamNamePrefix` and
-    #   `logStreamNames`, the action returns an `InvalidParameterException`
-    #   error.
+    #   If you specify a value for both `logStreamNames` and
+    #   `logStreamNamePrefix`, the action returns an
+    #   `InvalidParameterException` error.
     #
     # @option params [String] :log_stream_name_prefix
     #   Filters the results to include only events from log streams that have
     #   names starting with this prefix.
     #
     #   If you specify a value for both `logStreamNamePrefix` and
-    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
-    #   match any log stream names specified in `logStreamNames`, the action
-    #   returns an `InvalidParameterException` error.
+    #   `logStreamNames`, the action returns an `InvalidParameterException`
+    #   error.
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
@@ -2641,6 +2769,11 @@ module Aws::CloudWatchLogs
     #   resp.delivery.delivery_source_name #=> String
     #   resp.delivery.delivery_destination_arn #=> String
     #   resp.delivery.delivery_destination_type #=> String, one of "S3", "CWL", "FH"
+    #   resp.delivery.record_fields #=> Array
+    #   resp.delivery.record_fields[0] #=> String
+    #   resp.delivery.field_delimiter #=> String
+    #   resp.delivery.s3_delivery_configuration.suffix_path #=> String
+    #   resp.delivery.s3_delivery_configuration.enable_hive_compatible_path #=> Boolean
     #   resp.delivery.tags #=> Hash
     #   resp.delivery.tags["TagKey"] #=> String
     #
@@ -3400,11 +3533,11 @@ module Aws::CloudWatchLogs
     #   [PutDestination][5], for cross-account delivery. Kinesis Data
     #   Streams and Firehose are supported as logical destinations.
     #
-    # Each account can have one account-level subscription filter policy. If
-    # you are updating an existing filter, you must specify the correct name
-    # in `PolicyName`. To perform a `PutAccountPolicy` subscription filter
-    # operation for any destination except a Lambda function, you must also
-    # have the `iam:PassRole` permission.
+    # Each account can have one account-level subscription filter policy per
+    # Region. If you are updating an existing filter, you must specify the
+    # correct name in `PolicyName`. To perform a `PutAccountPolicy`
+    # subscription filter operation for any destination except a Lambda
+    # function, you must also have the `iam:PassRole` permission.
     #
     #
     #
@@ -3489,7 +3622,7 @@ module Aws::CloudWatchLogs
     #   * **FilterPattern** A filter pattern for subscribing to a filtered
     #     stream of log events.
     #
-    #   * **Distribution**The method used to distribute log data to the
+    #   * **Distribution** The method used to distribute log data to the
     #     destination. By default, log data is grouped by log stream, but the
     #     grouping can be set to `Random` for a more even distribution. This
     #     property is only applicable when the destination is an Kinesis Data
@@ -3896,9 +4029,11 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :log_type
     #   Defines the type of log that the source is sending.
     #
+    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS`.
+    #
     #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
-    #   * For IAM Identity Centerr, the valid value is `ERROR_LOGS`.
+    #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`, and
@@ -4142,10 +4277,14 @@ module Aws::CloudWatchLogs
     #   `InvalidSequenceTokenException` or `DataAlreadyAcceptedException` even
     #   if the sequence token is not valid.
     #
+    # @option params [Types::Entity] :entity
+    #   Reserved for internal use.
+    #
     # @return [Types::PutLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutLogEventsResponse#next_sequence_token #next_sequence_token} => String
     #   * {Types::PutLogEventsResponse#rejected_log_events_info #rejected_log_events_info} => Types::RejectedLogEventsInfo
+    #   * {Types::PutLogEventsResponse#rejected_entity_info #rejected_entity_info} => Types::RejectedEntityInfo
     #
     # @example Request syntax with placeholder values
     #
@@ -4159,6 +4298,14 @@ module Aws::CloudWatchLogs
     #       },
     #     ],
     #     sequence_token: "SequenceToken",
+    #     entity: {
+    #       key_attributes: {
+    #         "EntityKeyAttributesKey" => "EntityKeyAttributesValue",
+    #       },
+    #       attributes: {
+    #         "EntityAttributesKey" => "EntityAttributesValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -4167,6 +4314,7 @@ module Aws::CloudWatchLogs
     #   resp.rejected_log_events_info.too_new_log_event_start_index #=> Integer
     #   resp.rejected_log_events_info.too_old_log_event_end_index #=> Integer
     #   resp.rejected_log_events_info.expired_log_event_end_index #=> Integer
+    #   resp.rejected_entity_info.error_type #=> String, one of "InvalidEntity", "InvalidTypeValue", "InvalidKeyAttributes", "InvalidAttributes", "EntitySizeTooLarge", "UnsupportedLogGroupType", "MissingRequiredFields"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents AWS API Documentation
     #
@@ -4185,6 +4333,14 @@ module Aws::CloudWatchLogs
     # The maximum number of metric filters that can be associated with a log
     # group is 100.
     #
+    # Using regular expressions to create metric filters is supported. For
+    # these filters, there is a quotas of quota of two regular expression
+    # patterns within a single filter pattern. There is also a quota of five
+    # regular expression patterns per log group. For more information about
+    # using regular expressions in metric filters, see [ Filter pattern
+    # syntax for metric filters, subscription filters, filter log events,
+    # and Live Tail][2].
+    #
     # When you create a metric filter, you can also optionally assign a unit
     # and dimensions to the metric that is created.
     #
@@ -4200,12 +4356,13 @@ module Aws::CloudWatchLogs
     #
     #  You can also set up a billing alarm to alert you if your charges are
     # higher than expected. For more information, see [ Creating a Billing
-    # Alarm to Monitor Your Estimated Amazon Web Services Charges][2].
+    # Alarm to Monitor Your Estimated Amazon Web Services Charges][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -4497,6 +4654,14 @@ module Aws::CloudWatchLogs
     # it. If you are updating an existing filter, you must specify the
     # correct name in `filterName`.
     #
+    # Using regular expressions to create subscription filters is supported.
+    # For these filters, there is a quotas of quota of two regular
+    # expression patterns within a single filter pattern. There is also a
+    # quota of five regular expression patterns per log group. For more
+    # information about using regular expressions in subscription filters,
+    # see [ Filter pattern syntax for metric filters, subscription filters,
+    # filter log events, and Live Tail][3].
+    #
     # To perform a `PutSubscriptionFilter` operation for any destination
     # except a Lambda function, you must also have the `iam:PassRole`
     # permission.
@@ -4505,6 +4670,7 @@ module Aws::CloudWatchLogs
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -4630,8 +4796,8 @@ module Aws::CloudWatchLogs
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionStart.html
     # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionUpdate.html
-    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionStreamingException.html
-    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionTimeoutException.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTailResponseStream.html#CWL-Type-StartLiveTailResponseStream-SessionStreamingException
+    # [5]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTailResponseStream.html#CWL-Type-StartLiveTailResponseStream-SessionTimeoutException
     # [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html
     #
     # @option params [required, Array<String>] :log_group_identifiers
@@ -5319,6 +5485,54 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Use this operation to update the configuration of a [delivery][1] to
+    # change either the S3 path pattern or the format of the delivered logs.
+    # You can't use this operation to change the source or destination of
+    # the delivery.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Delivery.html
+    #
+    # @option params [required, String] :id
+    #   The ID of the delivery to be updated by this request.
+    #
+    # @option params [Array<String>] :record_fields
+    #   The list of record fields to be delivered to the destination, in
+    #   order. If the delivery’s log source has mandatory fields, they must be
+    #   included in this list.
+    #
+    # @option params [String] :field_delimiter
+    #   The field delimiter to use between record fields when the final output
+    #   format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+    #
+    # @option params [Types::S3DeliveryConfiguration] :s3_delivery_configuration
+    #   This structure contains parameters that are valid only when the
+    #   delivery’s delivery destination is an S3 bucket.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_delivery_configuration({
+    #     id: "DeliveryId", # required
+    #     record_fields: ["FieldHeader"],
+    #     field_delimiter: "FieldDelimiter",
+    #     s3_delivery_configuration: {
+    #       suffix_path: "DeliverySuffixPath",
+    #       enable_hive_compatible_path: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateDeliveryConfiguration AWS API Documentation
+    #
+    # @overload update_delivery_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_delivery_configuration(params = {}, options = {})
+      req = build_request(:update_delivery_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates an existing log anomaly detector.
     #
     # @option params [required, String] :anomaly_detector_arn
@@ -5375,14 +5589,19 @@ module Aws::CloudWatchLogs
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::CloudWatchLogs')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

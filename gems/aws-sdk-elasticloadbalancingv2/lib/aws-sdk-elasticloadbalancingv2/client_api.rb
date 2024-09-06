@@ -101,6 +101,8 @@ module Aws::ElasticLoadBalancingV2
     DeregisterTargetsOutput = Shapes::StructureShape.new(name: 'DeregisterTargetsOutput')
     DescribeAccountLimitsInput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsInput')
     DescribeAccountLimitsOutput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsOutput')
+    DescribeListenerAttributesInput = Shapes::StructureShape.new(name: 'DescribeListenerAttributesInput')
+    DescribeListenerAttributesOutput = Shapes::StructureShape.new(name: 'DescribeListenerAttributesOutput')
     DescribeListenerCertificatesInput = Shapes::StructureShape.new(name: 'DescribeListenerCertificatesInput')
     DescribeListenerCertificatesOutput = Shapes::StructureShape.new(name: 'DescribeListenerCertificatesOutput')
     DescribeListenersInput = Shapes::StructureShape.new(name: 'DescribeListenersInput')
@@ -182,6 +184,10 @@ module Aws::ElasticLoadBalancingV2
     Listener = Shapes::StructureShape.new(name: 'Listener')
     ListenerArn = Shapes::StringShape.new(name: 'ListenerArn')
     ListenerArns = Shapes::ListShape.new(name: 'ListenerArns')
+    ListenerAttribute = Shapes::StructureShape.new(name: 'ListenerAttribute')
+    ListenerAttributeKey = Shapes::StringShape.new(name: 'ListenerAttributeKey')
+    ListenerAttributeValue = Shapes::StringShape.new(name: 'ListenerAttributeValue')
+    ListenerAttributes = Shapes::ListShape.new(name: 'ListenerAttributes')
     ListenerNotFoundException = Shapes::StructureShape.new(name: 'ListenerNotFoundException', error: {"code"=>"ListenerNotFound", "httpStatusCode"=>400, "senderFault"=>true})
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     LoadBalancer = Shapes::StructureShape.new(name: 'LoadBalancer')
@@ -207,6 +213,8 @@ module Aws::ElasticLoadBalancingV2
     Max = Shapes::StringShape.new(name: 'Max')
     MitigationInEffectEnum = Shapes::StringShape.new(name: 'MitigationInEffectEnum')
     Mode = Shapes::StringShape.new(name: 'Mode')
+    ModifyListenerAttributesInput = Shapes::StructureShape.new(name: 'ModifyListenerAttributesInput')
+    ModifyListenerAttributesOutput = Shapes::StructureShape.new(name: 'ModifyListenerAttributesOutput')
     ModifyListenerInput = Shapes::StructureShape.new(name: 'ModifyListenerInput')
     ModifyListenerOutput = Shapes::StructureShape.new(name: 'ModifyListenerOutput')
     ModifyLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesInput')
@@ -586,6 +594,12 @@ module Aws::ElasticLoadBalancingV2
     DescribeAccountLimitsOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     DescribeAccountLimitsOutput.struct_class = Types::DescribeAccountLimitsOutput
 
+    DescribeListenerAttributesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
+    DescribeListenerAttributesInput.struct_class = Types::DescribeListenerAttributesInput
+
+    DescribeListenerAttributesOutput.add_member(:attributes, Shapes::ShapeRef.new(shape: ListenerAttributes, location_name: "Attributes"))
+    DescribeListenerAttributesOutput.struct_class = Types::DescribeListenerAttributesOutput
+
     DescribeListenerCertificatesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
     DescribeListenerCertificatesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     DescribeListenerCertificatesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
@@ -800,6 +814,12 @@ module Aws::ElasticLoadBalancingV2
 
     ListenerArns.member = Shapes::ShapeRef.new(shape: ListenerArn)
 
+    ListenerAttribute.add_member(:key, Shapes::ShapeRef.new(shape: ListenerAttributeKey, location_name: "Key"))
+    ListenerAttribute.add_member(:value, Shapes::ShapeRef.new(shape: ListenerAttributeValue, location_name: "Value"))
+    ListenerAttribute.struct_class = Types::ListenerAttribute
+
+    ListenerAttributes.member = Shapes::ShapeRef.new(shape: ListenerAttribute)
+
     ListenerNotFoundException.struct_class = Types::ListenerNotFoundException
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
@@ -849,6 +869,13 @@ module Aws::ElasticLoadBalancingV2
     Matcher.add_member(:http_code, Shapes::ShapeRef.new(shape: HttpCode, location_name: "HttpCode"))
     Matcher.add_member(:grpc_code, Shapes::ShapeRef.new(shape: GrpcCode, location_name: "GrpcCode"))
     Matcher.struct_class = Types::Matcher
+
+    ModifyListenerAttributesInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
+    ModifyListenerAttributesInput.add_member(:attributes, Shapes::ShapeRef.new(shape: ListenerAttributes, required: true, location_name: "Attributes"))
+    ModifyListenerAttributesInput.struct_class = Types::ModifyListenerAttributesInput
+
+    ModifyListenerAttributesOutput.add_member(:attributes, Shapes::ShapeRef.new(shape: ListenerAttributes, location_name: "Attributes"))
+    ModifyListenerAttributesOutput.struct_class = Types::ModifyListenerAttributesOutput
 
     ModifyListenerInput.add_member(:listener_arn, Shapes::ShapeRef.new(shape: ListenerArn, required: true, location_name: "ListenerArn"))
     ModifyListenerInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
@@ -1452,6 +1479,15 @@ module Aws::ElasticLoadBalancingV2
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountLimitsOutput)
       end)
 
+      api.add_operation(:describe_listener_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeListenerAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeListenerAttributesInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeListenerAttributesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+      end)
+
       api.add_operation(:describe_listener_certificates, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeListenerCertificates"
         o.http_method = "POST"
@@ -1667,6 +1703,16 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: ALPNPolicyNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: TrustStoreNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TrustStoreNotReadyException)
+      end)
+
+      api.add_operation(:modify_listener_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyListenerAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyListenerAttributesInput)
+        o.output = Shapes::ShapeRef.new(shape: ModifyListenerAttributesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
       end)
 
       api.add_operation(:modify_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|

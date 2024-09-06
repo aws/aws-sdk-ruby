@@ -53,6 +53,6 @@ require_relative 'aws-sdk-ivschat/customizations'
 # @!group service
 module Aws::Ivschat
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

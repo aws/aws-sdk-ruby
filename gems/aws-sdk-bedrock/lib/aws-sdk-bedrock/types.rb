@@ -40,6 +40,81 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # A JSON array that provides the status of the model evaluation jobs
+    # being deleted.
+    #
+    # @!attribute [rw] job_identifier
+    #   The ARN of the model evaluation job being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   A HTTP status code of the model evaluation job being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A status message about the model evaluation job deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteEvaluationJobError AWS API Documentation
+    #
+    class BatchDeleteEvaluationJobError < Struct.new(
+      :job_identifier,
+      :code,
+      :message)
+      SENSITIVE = [:job_identifier]
+      include Aws::Structure
+    end
+
+    # An array of model evaluation jobs to be deleted, and their associated
+    # statuses.
+    #
+    # @!attribute [rw] job_identifier
+    #   The ARN of model evaluation job to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the job's deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteEvaluationJobItem AWS API Documentation
+    #
+    class BatchDeleteEvaluationJobItem < Struct.new(
+      :job_identifier,
+      :job_status)
+      SENSITIVE = [:job_identifier]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_identifiers
+    #   An array of model evaluation job ARNs to be deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteEvaluationJobRequest AWS API Documentation
+    #
+    class BatchDeleteEvaluationJobRequest < Struct.new(
+      :job_identifiers)
+      SENSITIVE = [:job_identifiers]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A JSON object containing the HTTP status codes and the ARNs of model
+    #   evaluation jobs that failed to be deleted.
+    #   @return [Array<Types::BatchDeleteEvaluationJobError>]
+    #
+    # @!attribute [rw] evaluation_jobs
+    #   The list of model evaluation jobs to be deleted.
+    #   @return [Array<Types::BatchDeleteEvaluationJobItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteEvaluationJobResponse AWS API Documentation
+    #
+    class BatchDeleteEvaluationJobResponse < Struct.new(
+      :errors,
+      :evaluation_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # CloudWatch logging configuration.
     #
     # @!attribute [rw] log_group_name
@@ -497,6 +572,78 @@ module Aws::Bedrock
     end
 
     # @!attribute [rw] job_name
+    #   The name of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_model_name
+    #   The name of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the model import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_data_source
+    #   The data source for the imported model.
+    #   @return [Types::ModelDataSource]
+    #
+    # @!attribute [rw] job_tags
+    #   Tags to attach to this import job.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] imported_model_tags
+    #   Tags to attach to the imported model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   VPC configuration parameters for the private Virtual Private Cloud
+    #   (VPC) that contains the resources you are using for the import job.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] imported_model_kms_key_id
+    #   The imported model is encrypted at rest using this key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelImportJobRequest AWS API Documentation
+    #
+    class CreateModelImportJobRequest < Struct.new(
+      :job_name,
+      :imported_model_name,
+      :role_arn,
+      :model_data_source,
+      :job_tags,
+      :imported_model_tags,
+      :client_request_token,
+      :vpc_config,
+      :imported_model_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the model import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelImportJobResponse AWS API Documentation
+    #
+    class CreateModelImportJobResponse < Struct.new(
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
     #   A name to give the batch inference job.
     #   @return [String]
     #
@@ -765,6 +912,22 @@ module Aws::Bedrock
     #
     class DeleteGuardrailResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] model_identifier
+    #   Name of the imported model to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteImportedModelRequest AWS API Documentation
+    #
+    class DeleteImportedModelRequest < Struct.new(
+      :model_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteImportedModelResponse AWS API Documentation
+    #
+    class DeleteImportedModelResponse < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteModelInvocationLoggingConfigurationRequest AWS API Documentation
@@ -806,7 +969,7 @@ module Aws::Bedrock
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets-custom.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
     #
     # @!attribute [rw] model_identifier
     #   The ARN of the Amazon Bedrock model specified.
@@ -865,7 +1028,7 @@ module Aws::Bedrock
     #   Used to specify supported built-in prompt datasets. Valid values are
     #   `Builtin.Bold`, `Builtin.BoolQ`, `Builtin.NaturalQuestions`,
     #   `Builtin.Gigaword`, `Builtin.RealToxicityPrompts`,
-    #   `Builtin.TriviaQa`, `Builtin.T-Rex`,
+    #   `Builtin.TriviaQA`, `Builtin.T-Rex`,
     #   `Builtin.WomensEcommerceClothingReviews` and `Builtin.Wikitext2`.
     #   @return [String]
     #
@@ -1509,6 +1672,131 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_identifier
+    #   Name or Amazon Resource Name (ARN) of the imported model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModelRequest AWS API Documentation
+    #
+    class GetImportedModelRequest < Struct.new(
+      :model_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) associated with this imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   Job name associated with the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   Job Amazon Resource Name (ARN) associated with the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_data_source
+    #   The data source for this imported model.
+    #   @return [Types::ModelDataSource]
+    #
+    # @!attribute [rw] creation_time
+    #   Creation time of the imported model.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model_architecture
+    #   The architecture of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_kms_key_arn
+    #   The imported model is encrypted at rest using this key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetImportedModelResponse AWS API Documentation
+    #
+    class GetImportedModelResponse < Struct.new(
+      :model_arn,
+      :model_name,
+      :job_name,
+      :job_arn,
+      :model_data_source,
+      :creation_time,
+      :model_architecture,
+      :model_kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_profile_identifier
+    #   The unique identifier of the inference profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfileRequest AWS API Documentation
+    #
+    class GetInferenceProfileRequest < Struct.new(
+      :inference_profile_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_profile_name
+    #   The name of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] models
+    #   A list of information about each model in the inference profile.
+    #   @return [Array<Types::InferenceProfileModel>]
+    #
+    # @!attribute [rw] description
+    #   The description of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the inference profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the inference profile was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inference_profile_arn
+    #   The Amazon Resource Name (ARN) of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_profile_id
+    #   The unique identifier of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference profile. `ACTIVE` means that the
+    #   inference profile is available to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the inference profile. `SYSTEM_DEFINED` means that the
+    #   inference profile is defined by Amazon Bedrock.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetInferenceProfileResponse AWS API Documentation
+    #
+    class GetInferenceProfileResponse < Struct.new(
+      :inference_profile_name,
+      :models,
+      :description,
+      :created_at,
+      :updated_at,
+      :inference_profile_arn,
+      :inference_profile_id,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_arn
     #   The Amazon Resource Name (ARN) of the model copy job.
     #   @return [String]
@@ -1715,6 +2003,95 @@ module Aws::Bedrock
       :training_metrics,
       :validation_metrics,
       :vpc_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_identifier
+    #   The identifier of the import job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelImportJobRequest AWS API Documentation
+    #
+    class GetModelImportJobRequest < Struct.new(
+      :job_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_model_name
+    #   The name of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_model_arn
+    #   The Amazon Resource Name (ARN) of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with this
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_data_source
+    #   The data source for the imported model.
+    #   @return [Types::ModelDataSource]
+    #
+    # @!attribute [rw] status
+    #   The status of the job. A successful job transitions from in-progress
+    #   to completed when the imported model is ready to use. If the job
+    #   failed, the failure message contains information about why the job
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   Information about why the import job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Time the resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Time that the resource transitioned to terminal state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vpc_config
+    #   The Virtual Private Cloud (VPC) configuration of the import model
+    #   job.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] imported_model_kms_key_arn
+    #   The imported model is encrypted at rest using this key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelImportJobResponse AWS API Documentation
+    #
+    class GetModelImportJobResponse < Struct.new(
+      :job_arn,
+      :job_name,
+      :imported_model_name,
+      :imported_model_arn,
+      :role_arn,
+      :model_data_source,
+      :status,
+      :failure_message,
+      :creation_time,
+      :last_modified_time,
+      :end_time,
+      :vpc_config,
+      :imported_model_kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2916,6 +3293,100 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Information about tne imported model.
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   Name of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Creation time of the imported model.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ImportedModelSummary AWS API Documentation
+    #
+    class ImportedModelSummary < Struct.new(
+      :model_arn,
+      :model_name,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a model.
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/InferenceProfileModel AWS API Documentation
+    #
+    class InferenceProfileModel < Struct.new(
+      :model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an inference profile.
+    #
+    # @!attribute [rw] inference_profile_name
+    #   The name of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] models
+    #   A list of information about each model in the inference profile.
+    #   @return [Array<Types::InferenceProfileModel>]
+    #
+    # @!attribute [rw] description
+    #   The description of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the inference profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the inference profile was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inference_profile_arn
+    #   The Amazon Resource Name (ARN) of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_profile_id
+    #   The unique identifier of the inference profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference profile. `ACTIVE` means that the
+    #   inference profile is available to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the inference profile. `SYSTEM_DEFINED` means that the
+    #   inference profile is defined by Amazon Bedrock.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/InferenceProfileSummary AWS API Documentation
+    #
+    class InferenceProfileSummary < Struct.new(
+      :inference_profile_name,
+      :models,
+      :description,
+      :created_at,
+      :updated_at,
+      :inference_profile_arn,
+      :inference_profile_id,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal server error occurred. Retry your request.
     #
     # @!attribute [rw] message
@@ -3180,6 +3651,119 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] creation_time_before
+    #   Return imported models that created before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Return imported models that were created after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   Return imported models only if the model name contains these
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by in the returned list of imported models.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies whetehr to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListImportedModelsRequest AWS API Documentation
+    #
+    class ListImportedModelsRequest < Struct.new(
+      :creation_time_before,
+      :creation_time_after,
+      :name_contains,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_summaries
+    #   Model summaries.
+    #   @return [Array<Types::ImportedModelSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListImportedModelsResponse AWS API Documentation
+    #
+    class ListImportedModelsResponse < Struct.new(
+      :next_token,
+      :model_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfilesRequest AWS API Documentation
+    #
+    class ListInferenceProfilesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_profile_summaries
+    #   A list of information about each inference profile that you can use.
+    #   @return [Array<Types::InferenceProfileSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListInferenceProfilesResponse AWS API Documentation
+    #
+    class ListInferenceProfilesResponse < Struct.new(
+      :inference_profile_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] creation_time_after
     #   Filters for model copy jobs created after the specified time.
     #   @return [Time]
@@ -3338,6 +3922,80 @@ module Aws::Bedrock
     class ListModelCustomizationJobsResponse < Struct.new(
       :next_token,
       :model_customization_job_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time_after
+    #   Return import jobs that were created after the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Return import jobs that were created before the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_equals
+    #   Return imported jobs with the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   Return imported jobs only if the job name contains these characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by in the returned list of imported jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies whether to sort the results in ascending or descending
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelImportJobsRequest AWS API Documentation
+    #
+    class ListModelImportJobsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :status_equals,
+      :name_contains,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_import_job_summaries
+    #   Import job summaries.
+    #   @return [Array<Types::ModelImportJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelImportJobsResponse AWS API Documentation
+    #
+    class ListModelImportJobsResponse < Struct.new(
+      :next_token,
+      :model_import_job_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3706,6 +4364,78 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Data source for the imported model.
+    #
+    # @note ModelDataSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ModelDataSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ModelDataSource corresponding to the set member.
+    #
+    # @!attribute [rw] s3_data_source
+    #   The Amazon S3 data source of the imported model.
+    #   @return [Types::S3DataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelDataSource AWS API Documentation
+    #
+    class ModelDataSource < Struct.new(
+      :s3_data_source,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3DataSource < ModelDataSource; end
+      class Unknown < ModelDataSource; end
+    end
+
+    # Information about the import job.
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the imported job.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the import job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time import job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when import job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] imported_model_arn
+    #   The Amazon resource Name (ARN) of the imported model.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_model_name
+    #   The name of the imported model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelImportJobSummary AWS API Documentation
+    #
+    class ModelImportJobSummary < Struct.new(
+      :job_arn,
+      :job_name,
+      :status,
+      :last_modified_time,
+      :creation_time,
+      :end_time,
+      :imported_model_arn,
+      :imported_model_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the location of the input to the batch inference job.
     #
     # @note ModelInvocationJobInputDataConfig is a union - when making an API calls you must set exactly one of the members.
@@ -4033,6 +4763,20 @@ module Aws::Bedrock
     class S3Config < Struct.new(
       :bucket_name,
       :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 data source of the imported job.
+    #
+    # @!attribute [rw] s3_uri
+    #   The URI of the Amazon S3 data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/S3DataSource AWS API Documentation
+    #
+    class S3DataSource < Struct.new(
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end

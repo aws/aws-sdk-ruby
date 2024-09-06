@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -83,6 +84,7 @@ module Aws::States
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::States::Plugins::Endpoints)
@@ -336,6 +338,16 @@ module Aws::States
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -3338,26 +3350,44 @@ module Aws::States
     #   The target type of state machine for this definition. The default is
     #   `STANDARD`.
     #
+    # @option params [String] :severity
+    #   Minimum level of diagnostics to return. `ERROR` returns only `ERROR`
+    #   diagnostics, whereas `WARNING` returns both `WARNING` and `ERROR`
+    #   diagnostics. The default is `ERROR`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of diagnostics that are returned per call. The
+    #   default and maximum value is 100. Setting the value to 0 will also use
+    #   the default of 100.
+    #
+    #   If the number of diagnostics returned in the response exceeds
+    #   `maxResults`, the value of the `truncated` field in the response will
+    #   be set to `true`.
+    #
     # @return [Types::ValidateStateMachineDefinitionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ValidateStateMachineDefinitionOutput#result #result} => String
     #   * {Types::ValidateStateMachineDefinitionOutput#diagnostics #diagnostics} => Array&lt;Types::ValidateStateMachineDefinitionDiagnostic&gt;
+    #   * {Types::ValidateStateMachineDefinitionOutput#truncated #truncated} => Boolean
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.validate_state_machine_definition({
     #     definition: "Definition", # required
     #     type: "STANDARD", # accepts STANDARD, EXPRESS
+    #     severity: "ERROR", # accepts ERROR, WARNING
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.result #=> String, one of "OK", "FAIL"
     #   resp.diagnostics #=> Array
-    #   resp.diagnostics[0].severity #=> String, one of "ERROR"
+    #   resp.diagnostics[0].severity #=> String, one of "ERROR", "WARNING"
     #   resp.diagnostics[0].code #=> String
     #   resp.diagnostics[0].message #=> String
     #   resp.diagnostics[0].location #=> String
+    #   resp.truncated #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinition AWS API Documentation
     #
@@ -3374,14 +3404,19 @@ module Aws::States
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::States')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

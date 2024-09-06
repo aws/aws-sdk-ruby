@@ -50,6 +50,7 @@ module Aws
                       ?session_token: String,
                       ?sigv4a_signing_region_set: Array[String],
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
@@ -479,6 +480,16 @@ module Aws
                                    ) -> _DescribeAccountLimitsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountLimitsResponseSuccess
 
+      interface _DescribeListenerAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeListenerAttributesOutput]
+        def attributes: () -> ::Array[Types::ListenerAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#describe_listener_attributes-instance_method
+      def describe_listener_attributes: (
+                                          listener_arn: ::String
+                                        ) -> _DescribeListenerAttributesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeListenerAttributesResponseSuccess
+
       interface _DescribeListenerCertificatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeListenerCertificatesOutput]
         def certificates: () -> ::Array[Types::Certificate]
@@ -764,6 +775,22 @@ module Aws
                              }
                            ) -> _ModifyListenerResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyListenerResponseSuccess
+
+      interface _ModifyListenerAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyListenerAttributesOutput]
+        def attributes: () -> ::Array[Types::ListenerAttribute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_listener_attributes-instance_method
+      def modify_listener_attributes: (
+                                        listener_arn: ::String,
+                                        attributes: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _ModifyListenerAttributesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyListenerAttributesResponseSuccess
 
       interface _ModifyLoadBalancerAttributesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyLoadBalancerAttributesOutput]

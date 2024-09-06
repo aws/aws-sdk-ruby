@@ -109,6 +109,9 @@ module Aws::Lambda
     FileSystemConfigList = Shapes::ListShape.new(name: 'FileSystemConfigList')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
+    FilterCriteriaError = Shapes::StructureShape.new(name: 'FilterCriteriaError')
+    FilterCriteriaErrorCode = Shapes::StringShape.new(name: 'FilterCriteriaErrorCode')
+    FilterCriteriaErrorMessage = Shapes::StringShape.new(name: 'FilterCriteriaErrorMessage')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FullDocument = Shapes::StringShape.new(name: 'FullDocument')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
@@ -521,6 +524,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     CreateEventSourceMappingRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
     CreateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
+    CreateEventSourceMappingRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -696,6 +700,8 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     EventSourceMappingConfiguration.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
     EventSourceMappingConfiguration.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
+    EventSourceMappingConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
+    EventSourceMappingConfiguration.add_member(:filter_criteria_error, Shapes::ShapeRef.new(shape: FilterCriteriaError, location_name: "FilterCriteriaError"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
@@ -711,6 +717,10 @@ module Aws::Lambda
 
     FilterCriteria.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     FilterCriteria.struct_class = Types::FilterCriteria
+
+    FilterCriteriaError.add_member(:error_code, Shapes::ShapeRef.new(shape: FilterCriteriaErrorCode, location_name: "ErrorCode"))
+    FilterCriteriaError.add_member(:message, Shapes::ShapeRef.new(shape: FilterCriteriaErrorMessage, location_name: "Message"))
+    FilterCriteriaError.struct_class = Types::FilterCriteriaError
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
@@ -1453,6 +1463,7 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
     UpdateEventSourceMappingRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
     UpdateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
+    UpdateEventSourceMappingRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     UpdateEventSourceMappingRequest.struct_class = Types::UpdateEventSourceMappingRequest
 
     UpdateFunctionCodeRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

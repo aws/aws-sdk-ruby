@@ -146,6 +146,8 @@ module Aws::FIS
     GetExperimentTargetAccountConfigurationResponse = Shapes::StructureShape.new(name: 'GetExperimentTargetAccountConfigurationResponse')
     GetExperimentTemplateRequest = Shapes::StructureShape.new(name: 'GetExperimentTemplateRequest')
     GetExperimentTemplateResponse = Shapes::StructureShape.new(name: 'GetExperimentTemplateResponse')
+    GetSafetyLeverRequest = Shapes::StructureShape.new(name: 'GetSafetyLeverRequest')
+    GetSafetyLeverResponse = Shapes::StructureShape.new(name: 'GetSafetyLeverResponse')
     GetTargetAccountConfigurationRequest = Shapes::StructureShape.new(name: 'GetTargetAccountConfigurationRequest')
     GetTargetAccountConfigurationResponse = Shapes::StructureShape.new(name: 'GetTargetAccountConfigurationResponse')
     GetTargetResourceTypeRequest = Shapes::StructureShape.new(name: 'GetTargetResourceTypeRequest')
@@ -183,6 +185,12 @@ module Aws::FIS
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
+    SafetyLever = Shapes::StructureShape.new(name: 'SafetyLever')
+    SafetyLeverId = Shapes::StringShape.new(name: 'SafetyLeverId')
+    SafetyLeverState = Shapes::StructureShape.new(name: 'SafetyLeverState')
+    SafetyLeverStatus = Shapes::StringShape.new(name: 'SafetyLeverStatus')
+    SafetyLeverStatusInput = Shapes::StringShape.new(name: 'SafetyLeverStatusInput')
+    SafetyLeverStatusReason = Shapes::StringShape.new(name: 'SafetyLeverStatusReason')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartExperimentExperimentOptionsInput = Shapes::StructureShape.new(name: 'StartExperimentExperimentOptionsInput')
     StartExperimentRequest = Shapes::StructureShape.new(name: 'StartExperimentRequest')
@@ -229,6 +237,9 @@ module Aws::FIS
     UpdateExperimentTemplateStopConditionInputList = Shapes::ListShape.new(name: 'UpdateExperimentTemplateStopConditionInputList')
     UpdateExperimentTemplateTargetInput = Shapes::StructureShape.new(name: 'UpdateExperimentTemplateTargetInput')
     UpdateExperimentTemplateTargetInputMap = Shapes::MapShape.new(name: 'UpdateExperimentTemplateTargetInputMap')
+    UpdateSafetyLeverStateInput = Shapes::StructureShape.new(name: 'UpdateSafetyLeverStateInput')
+    UpdateSafetyLeverStateRequest = Shapes::StructureShape.new(name: 'UpdateSafetyLeverStateRequest')
+    UpdateSafetyLeverStateResponse = Shapes::StructureShape.new(name: 'UpdateSafetyLeverStateResponse')
     UpdateTargetAccountConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateTargetAccountConfigurationRequest')
     UpdateTargetAccountConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateTargetAccountConfigurationResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -584,6 +595,12 @@ module Aws::FIS
     GetExperimentTemplateResponse.add_member(:experiment_template, Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))
     GetExperimentTemplateResponse.struct_class = Types::GetExperimentTemplateResponse
 
+    GetSafetyLeverRequest.add_member(:id, Shapes::ShapeRef.new(shape: SafetyLeverId, required: true, location: "uri", location_name: "id"))
+    GetSafetyLeverRequest.struct_class = Types::GetSafetyLeverRequest
+
+    GetSafetyLeverResponse.add_member(:safety_lever, Shapes::ShapeRef.new(shape: SafetyLever, location_name: "safetyLever"))
+    GetSafetyLeverResponse.struct_class = Types::GetSafetyLeverResponse
+
     GetTargetAccountConfigurationRequest.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, required: true, location: "uri", location_name: "id"))
     GetTargetAccountConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: TargetAccountId, required: true, location: "uri", location_name: "accountId"))
     GetTargetAccountConfigurationRequest.struct_class = Types::GetTargetAccountConfigurationRequest
@@ -674,6 +691,15 @@ module Aws::FIS
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SafetyLever.add_member(:id, Shapes::ShapeRef.new(shape: SafetyLeverId, location_name: "id"))
+    SafetyLever.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
+    SafetyLever.add_member(:state, Shapes::ShapeRef.new(shape: SafetyLeverState, location_name: "state"))
+    SafetyLever.struct_class = Types::SafetyLever
+
+    SafetyLeverState.add_member(:status, Shapes::ShapeRef.new(shape: SafetyLeverStatus, location_name: "status"))
+    SafetyLeverState.add_member(:reason, Shapes::ShapeRef.new(shape: SafetyLeverStatusReason, location_name: "reason"))
+    SafetyLeverState.struct_class = Types::SafetyLeverState
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -794,6 +820,17 @@ module Aws::FIS
     UpdateExperimentTemplateTargetInputMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
     UpdateExperimentTemplateTargetInputMap.value = Shapes::ShapeRef.new(shape: UpdateExperimentTemplateTargetInput)
 
+    UpdateSafetyLeverStateInput.add_member(:status, Shapes::ShapeRef.new(shape: SafetyLeverStatusInput, required: true, location_name: "status"))
+    UpdateSafetyLeverStateInput.add_member(:reason, Shapes::ShapeRef.new(shape: SafetyLeverStatusReason, required: true, location_name: "reason"))
+    UpdateSafetyLeverStateInput.struct_class = Types::UpdateSafetyLeverStateInput
+
+    UpdateSafetyLeverStateRequest.add_member(:id, Shapes::ShapeRef.new(shape: SafetyLeverId, required: true, location: "uri", location_name: "id"))
+    UpdateSafetyLeverStateRequest.add_member(:state, Shapes::ShapeRef.new(shape: UpdateSafetyLeverStateInput, required: true, location_name: "state"))
+    UpdateSafetyLeverStateRequest.struct_class = Types::UpdateSafetyLeverStateRequest
+
+    UpdateSafetyLeverStateResponse.add_member(:safety_lever, Shapes::ShapeRef.new(shape: SafetyLever, location_name: "safetyLever"))
+    UpdateSafetyLeverStateResponse.struct_class = Types::UpdateSafetyLeverStateResponse
+
     UpdateTargetAccountConfigurationRequest.add_member(:experiment_template_id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, required: true, location: "uri", location_name: "id"))
     UpdateTargetAccountConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: TargetAccountId, required: true, location: "uri", location_name: "accountId"))
     UpdateTargetAccountConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
@@ -908,6 +945,15 @@ module Aws::FIS
         o.input = Shapes::ShapeRef.new(shape: GetExperimentTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetExperimentTemplateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_safety_lever, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSafetyLever"
+        o.http_method = "GET"
+        o.http_request_uri = "/safetyLevers/{id}"
+        o.input = Shapes::ShapeRef.new(shape: GetSafetyLeverRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSafetyLeverResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -1088,6 +1134,17 @@ module Aws::FIS
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:update_safety_lever_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSafetyLeverState"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/safetyLevers/{id}/state"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSafetyLeverStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSafetyLeverStateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_target_account_configuration, Seahorse::Model::Operation.new.tap do |o|

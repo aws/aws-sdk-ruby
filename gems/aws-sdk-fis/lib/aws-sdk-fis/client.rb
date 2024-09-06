@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::FIS
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::FIS::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::FIS
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -817,7 +829,7 @@ module Aws::FIS
     #   resp.experiment.arn #=> String
     #   resp.experiment.experiment_template_id #=> String
     #   resp.experiment.role_arn #=> String
-    #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
+    #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed", "cancelled"
     #   resp.experiment.state.reason #=> String
     #   resp.experiment.state.error.account_id #=> String
     #   resp.experiment.state.error.code #=> String
@@ -973,6 +985,37 @@ module Aws::FIS
     # @param [Hash] params ({})
     def get_experiment_template(params = {}, options = {})
       req = build_request(:get_experiment_template, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified safety lever.
+    #
+    # @option params [required, String] :id
+    #   The ID of the safety lever.
+    #
+    # @return [Types::GetSafetyLeverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSafetyLeverResponse#safety_lever #safety_lever} => Types::SafetyLever
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_safety_lever({
+    #     id: "SafetyLeverId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.safety_lever.id #=> String
+    #   resp.safety_lever.arn #=> String
+    #   resp.safety_lever.state.status #=> String, one of "disengaged", "engaged", "engaging"
+    #   resp.safety_lever.state.reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetSafetyLever AWS API Documentation
+    #
+    # @overload get_safety_lever(params = {})
+    # @param [Hash] params ({})
+    def get_safety_lever(params = {}, options = {})
+      req = build_request(:get_safety_lever, params)
       req.send_request(options)
     end
 
@@ -1254,7 +1297,7 @@ module Aws::FIS
     #   resp.experiments[0].id #=> String
     #   resp.experiments[0].arn #=> String
     #   resp.experiments[0].experiment_template_id #=> String
-    #   resp.experiments[0].state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
+    #   resp.experiments[0].state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed", "cancelled"
     #   resp.experiments[0].state.reason #=> String
     #   resp.experiments[0].state.error.account_id #=> String
     #   resp.experiments[0].state.error.code #=> String
@@ -1432,7 +1475,7 @@ module Aws::FIS
     #   resp.experiment.arn #=> String
     #   resp.experiment.experiment_template_id #=> String
     #   resp.experiment.role_arn #=> String
-    #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
+    #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed", "cancelled"
     #   resp.experiment.state.reason #=> String
     #   resp.experiment.state.error.account_id #=> String
     #   resp.experiment.state.error.code #=> String
@@ -1510,7 +1553,7 @@ module Aws::FIS
     #   resp.experiment.arn #=> String
     #   resp.experiment.experiment_template_id #=> String
     #   resp.experiment.role_arn #=> String
-    #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed"
+    #   resp.experiment.state.status #=> String, one of "pending", "initiating", "running", "completed", "stopping", "stopped", "failed", "cancelled"
     #   resp.experiment.state.reason #=> String
     #   resp.experiment.state.error.account_id #=> String
     #   resp.experiment.state.error.code #=> String
@@ -1763,6 +1806,44 @@ module Aws::FIS
       req.send_request(options)
     end
 
+    # Updates the specified safety lever state.
+    #
+    # @option params [required, String] :id
+    #   The ID of the safety lever.
+    #
+    # @option params [required, Types::UpdateSafetyLeverStateInput] :state
+    #   The state of the safety lever.
+    #
+    # @return [Types::UpdateSafetyLeverStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSafetyLeverStateResponse#safety_lever #safety_lever} => Types::SafetyLever
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_safety_lever_state({
+    #     id: "SafetyLeverId", # required
+    #     state: { # required
+    #       status: "disengaged", # required, accepts disengaged, engaged
+    #       reason: "SafetyLeverStatusReason", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.safety_lever.id #=> String
+    #   resp.safety_lever.arn #=> String
+    #   resp.safety_lever.state.status #=> String, one of "disengaged", "engaged", "engaging"
+    #   resp.safety_lever.state.reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateSafetyLeverState AWS API Documentation
+    #
+    # @overload update_safety_lever_state(params = {})
+    # @param [Hash] params ({})
+    def update_safety_lever_state(params = {}, options = {})
+      req = build_request(:update_safety_lever_state, params)
+      req.send_request(options)
+    end
+
     # Updates the target account configuration for the specified experiment
     # template.
     #
@@ -1812,14 +1893,19 @@ module Aws::FIS
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::FIS')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

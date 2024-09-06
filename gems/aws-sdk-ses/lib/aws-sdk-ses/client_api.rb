@@ -149,6 +149,7 @@ module Aws::SES
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
     HtmlPart = Shapes::StringShape.new(name: 'HtmlPart')
+    IAMRoleARN = Shapes::StringShape.new(name: 'IAMRoleARN')
     Identity = Shapes::StringShape.new(name: 'Identity')
     IdentityDkimAttributes = Shapes::StructureShape.new(name: 'IdentityDkimAttributes')
     IdentityList = Shapes::ListShape.new(name: 'IdentityList')
@@ -905,6 +906,7 @@ module Aws::SES
     S3Action.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "BucketName"))
     S3Action.add_member(:object_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "ObjectKeyPrefix"))
     S3Action.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "KmsKeyArn"))
+    S3Action.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleARN, location_name: "IamRoleArn"))
     S3Action.struct_class = Types::S3Action
 
     SNSAction.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "TopicArn"))
@@ -934,7 +936,7 @@ module Aws::SES
     SendBulkTemplatedEmailRequest.add_member(:default_tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "DefaultTags"))
     SendBulkTemplatedEmailRequest.add_member(:template, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "Template"))
     SendBulkTemplatedEmailRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TemplateArn"))
-    SendBulkTemplatedEmailRequest.add_member(:default_template_data, Shapes::ShapeRef.new(shape: TemplateData, location_name: "DefaultTemplateData"))
+    SendBulkTemplatedEmailRequest.add_member(:default_template_data, Shapes::ShapeRef.new(shape: TemplateData, required: true, location_name: "DefaultTemplateData"))
     SendBulkTemplatedEmailRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: BulkEmailDestinationList, required: true, location_name: "Destinations"))
     SendBulkTemplatedEmailRequest.struct_class = Types::SendBulkTemplatedEmailRequest
 

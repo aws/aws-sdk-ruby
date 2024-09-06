@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3control/plugins/arn.rb'
@@ -86,6 +87,7 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3Control::Plugins::ARN)
@@ -342,6 +344,16 @@ module Aws::S3Control
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
+    #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
     #     following classes:
@@ -456,7 +468,7 @@ module Aws::S3Control
     #   `sso:PutApplicationAuthenticationMethod`.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :identity_center_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity
@@ -516,7 +528,7 @@ module Aws::S3Control
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsLocation.html
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :access_grants_location_id
     #   The ID of the registered location to which you are granting access. S3
@@ -643,7 +655,7 @@ module Aws::S3Control
     #   `sso:PutApplicationAuthenticationMethod` permissions.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [String] :identity_center_arn
     #   If you would like to associate your S3 Access Grants instance with an
@@ -671,6 +683,8 @@ module Aws::S3Control
     #   * {Types::CreateAccessGrantsInstanceResult#access_grants_instance_id #access_grants_instance_id} => String
     #   * {Types::CreateAccessGrantsInstanceResult#access_grants_instance_arn #access_grants_instance_arn} => String
     #   * {Types::CreateAccessGrantsInstanceResult#identity_center_arn #identity_center_arn} => String
+    #   * {Types::CreateAccessGrantsInstanceResult#identity_center_instance_arn #identity_center_instance_arn} => String
+    #   * {Types::CreateAccessGrantsInstanceResult#identity_center_application_arn #identity_center_application_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -691,6 +705,8 @@ module Aws::S3Control
     #   resp.access_grants_instance_id #=> String
     #   resp.access_grants_instance_arn #=> String
     #   resp.identity_center_arn #=> String
+    #   resp.identity_center_instance_arn #=> String
+    #   resp.identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsInstance AWS API Documentation
     #
@@ -732,7 +748,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :location_scope
     #   The S3 path to the location that you are registering. The location
@@ -1658,7 +1674,7 @@ module Aws::S3Control
     #   operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :access_grant_id
     #   The ID of the access grant. S3 Access Grants auto-generates this ID
@@ -1705,7 +1721,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1735,7 +1751,7 @@ module Aws::S3Control
     #   permission to use this operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1771,7 +1787,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :access_grants_location_id
     #   The ID of the registered location that you are deregistering from your
@@ -2991,7 +3007,7 @@ module Aws::S3Control
     #   operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3019,7 +3035,7 @@ module Aws::S3Control
     #   operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :access_grant_id
     #   The ID of the access grant. S3 Access Grants auto-generates this ID
@@ -3073,14 +3089,22 @@ module Aws::S3Control
     # : You must have the `s3:GetAccessGrantsInstance` permission to use
     #   this operation.
     #
+    # <note markdown="1"> `GetAccessGrantsInstance` is not supported for cross-account access.
+    # You can only call the API from the account that owns the S3 Access
+    # Grants instance.
+    #
+    #  </note>
+    #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @return [Types::GetAccessGrantsInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAccessGrantsInstanceResult#access_grants_instance_arn #access_grants_instance_arn} => String
     #   * {Types::GetAccessGrantsInstanceResult#access_grants_instance_id #access_grants_instance_id} => String
     #   * {Types::GetAccessGrantsInstanceResult#identity_center_arn #identity_center_arn} => String
+    #   * {Types::GetAccessGrantsInstanceResult#identity_center_instance_arn #identity_center_instance_arn} => String
+    #   * {Types::GetAccessGrantsInstanceResult#identity_center_application_arn #identity_center_application_arn} => String
     #   * {Types::GetAccessGrantsInstanceResult#created_at #created_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -3094,6 +3118,8 @@ module Aws::S3Control
     #   resp.access_grants_instance_arn #=> String
     #   resp.access_grants_instance_id #=> String
     #   resp.identity_center_arn #=> String
+    #   resp.identity_center_instance_arn #=> String
+    #   resp.identity_center_application_arn #=> String
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstance AWS API Documentation
@@ -3159,7 +3185,7 @@ module Aws::S3Control
     #   permission to use this operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @return [Types::GetAccessGrantsInstanceResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3197,7 +3223,7 @@ module Aws::S3Control
     #   this operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :access_grants_location_id
     #   The ID of the registered location that you are retrieving. S3 Access
@@ -4270,7 +4296,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :target
     #   The S3 URI path of the data to which you are requesting temporary
@@ -4949,7 +4975,7 @@ module Aws::S3Control
     #   operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [String] :next_token
     #   A pagination token to request the next page of results. Pass this
@@ -5061,7 +5087,7 @@ module Aws::S3Control
     #   this operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [String] :next_token
     #   A pagination token to request the next page of results. Pass this
@@ -5097,6 +5123,8 @@ module Aws::S3Control
     #   resp.access_grants_instances_list[0].access_grants_instance_arn #=> String
     #   resp.access_grants_instances_list[0].created_at #=> Time
     #   resp.access_grants_instances_list[0].identity_center_arn #=> String
+    #   resp.access_grants_instances_list[0].identity_center_instance_arn #=> String
+    #   resp.access_grants_instances_list[0].identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsInstances AWS API Documentation
     #
@@ -5116,7 +5144,7 @@ module Aws::S3Control
     #   this operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [String] :next_token
     #   A pagination token to request the next page of results. Pass this
@@ -5352,6 +5380,75 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def list_access_points_for_object_lambda(params = {}, options = {})
       req = build_request(:list_access_points_for_object_lambda, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the access grants that were given to the caller
+    # using S3 Access Grants and that allow the caller to access the S3 data
+    # of the Amazon Web Services account specified in the request.
+    #
+    # Permissions
+    #
+    # : You must have the `s3:ListCallerAccessGrants` permission to use this
+    #   operation.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
+    #
+    # @option params [String] :grant_scope
+    #   The S3 path of the data that you would like to access. Must start with
+    #   `s3://`. You can optionally pass only the beginning characters of a
+    #   path, and S3 Access Grants will search for all applicable grants for
+    #   the path fragment.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Caller Access Grants` request in order
+    #   to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Caller Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the `NextToken`
+    #   to determine if there are more results.
+    #
+    # @option params [Boolean] :allowed_by_application
+    #   If this optional parameter is passed in the request, a filter is
+    #   applied to the results. The results will include only the access
+    #   grants for the caller's Identity Center application or for any other
+    #   applications (`ALL`).
+    #
+    # @return [Types::ListCallerAccessGrantsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCallerAccessGrantsResult#next_token #next_token} => String
+    #   * {Types::ListCallerAccessGrantsResult#caller_access_grants_list #caller_access_grants_list} => Array&lt;Types::ListCallerAccessGrantsEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_caller_access_grants({
+    #     account_id: "AccountId",
+    #     grant_scope: "S3Prefix",
+    #     next_token: "ContinuationToken",
+    #     max_results: 1,
+    #     allowed_by_application: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.caller_access_grants_list #=> Array
+    #   resp.caller_access_grants_list[0].permission #=> String, one of "READ", "WRITE", "READWRITE"
+    #   resp.caller_access_grants_list[0].grant_scope #=> String
+    #   resp.caller_access_grants_list[0].application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListCallerAccessGrants AWS API Documentation
+    #
+    # @overload list_caller_access_grants(params = {})
+    # @param [Hash] params ({})
+    def list_caller_access_grants(params = {}, options = {})
+      req = build_request(:list_caller_access_grants, params)
       req.send_request(options)
     end
 
@@ -5780,7 +5877,7 @@ module Aws::S3Control
     #   permission to use this operation.
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :policy
     #   The resource policy of the S3 Access Grants instance that you are
@@ -7307,7 +7404,7 @@ module Aws::S3Control
     # : You must also have the following permission: `iam:PassRole`
     #
     # @option params [String] :account_id
-    #   The ID of the Amazon Web Services account that is making this request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #
     # @option params [required, String] :access_grants_location_id
     #   The ID of the registered location that you are updating. S3 Access
@@ -7604,14 +7701,19 @@ module Aws::S3Control
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::S3Control')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

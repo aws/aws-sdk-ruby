@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::SupplyChain
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::SupplyChain::Plugins::Endpoints)
@@ -330,6 +332,16 @@ module Aws::SupplyChain
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
+    #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
     #     following classes:
@@ -557,8 +569,12 @@ module Aws::SupplyChain
       req.send_request(options)
     end
 
-    # Send transactional data events with real-time data for analysis or
-    # monitoring.
+    # Send the transactional data payload for the event with real-time data
+    # for analysis or monitoring. The real-time data events are stored in an
+    # Amazon Web Services service before being processed and stored in data
+    # lake. New data events are synced with data lake at 5 PM GMT everyday.
+    # The updated transactional data is available in data lake after
+    # ingestion.
     #
     # @option params [required, String] :instance_id
     #   The AWS Supply Chain instance identifier.
@@ -567,7 +583,12 @@ module Aws::SupplyChain
     #   The data event type.
     #
     # @option params [required, String] :data
-    #   The data payload of the event.
+    #   The data payload of the event. For more information on the data schema
+    #   to use, see [Data entities supported in AWS Supply Chain ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
     #
     # @option params [required, String] :event_group_id
     #   Event identifier (for example, orderId for InboundOrder) used for data
@@ -842,14 +863,19 @@ module Aws::SupplyChain
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::SupplyChain')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-supplychain'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

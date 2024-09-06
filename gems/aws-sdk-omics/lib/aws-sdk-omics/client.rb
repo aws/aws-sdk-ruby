@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::Omics
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Omics::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::Omics
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -945,19 +957,22 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Creates a run group.
+    # You can optionally create a run group to limit the compute resources
+    # for the runs that you add to the group.
     #
     # @option params [String] :name
     #   A name for the group.
     #
     # @option params [Integer] :max_cpus
-    #   The maximum number of CPUs to use in the group.
+    #   The maximum number of CPUs that can run concurrently across all active
+    #   runs in the run group.
     #
     # @option params [Integer] :max_runs
-    #   The maximum number of concurrent runs for the group.
+    #   The maximum number of runs that can be running at the same time.
     #
     # @option params [Integer] :max_duration
-    #   A maximum run time for the group in minutes.
+    #   The maximum time for each run (in minutes). If a run exceeds the
+    #   maximum run time, the run fails automatically.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the group.
@@ -970,7 +985,8 @@ module Aws::Omics
     #   not need to pass this option.**
     #
     # @option params [Integer] :max_gpus
-    #   The maximum GPUs that can be used by a run group.
+    #   The maximum number of GPUs that can run concurrently across all active
+    #   runs in the run group.
     #
     # @return [Types::CreateRunGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1088,9 +1104,9 @@ module Aws::Omics
     #
     # The following resources support cross-account sharing:
     #
-    # * Healthomics variant stores
+    # * HealthOmics variant stores
     #
-    # * Healthomics annotation stores
+    # * HealthOmics annotation stores
     #
     # * Private workflows
     #
@@ -1216,7 +1232,7 @@ module Aws::Omics
     #   A parameter template for the workflow.
     #
     # @option params [Integer] :storage_capacity
-    #   The storage capacity for the workflow in gibibytes.
+    #   The default storage capacity for the workflow runs, in gibibytes.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the workflow.
@@ -1952,6 +1968,7 @@ module Aws::Omics
     #   resp.sources[0].description #=> String
     #   resp.sources[0].tags #=> Hash
     #   resp.sources[0].tags["TagKey"] #=> String
+    #   resp.sources[0].read_set_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1993,6 +2010,7 @@ module Aws::Omics
     #   * {Types::GetReadSetMetadataResponse#status_message #status_message} => String
     #   * {Types::GetReadSetMetadataResponse#creation_type #creation_type} => String
     #   * {Types::GetReadSetMetadataResponse#etag #etag} => Types::ETag
+    #   * {Types::GetReadSetMetadataResponse#creation_job_id #creation_job_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2035,6 +2053,7 @@ module Aws::Omics
     #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up", "FASTQ_SHA256up", "BAM_SHA256up", "CRAM_SHA256up", "FASTQ_SHA512up", "BAM_SHA512up", "CRAM_SHA512up"
     #   resp.etag.source1 #=> String
     #   resp.etag.source2 #=> String
+    #   resp.creation_job_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReadSetMetadata AWS API Documentation
     #
@@ -2132,6 +2151,7 @@ module Aws::Omics
     #   resp.sources[0].description #=> String
     #   resp.sources[0].tags #=> Hash
     #   resp.sources[0].tags["TagKey"] #=> String
+    #   resp.sources[0].reference_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2167,6 +2187,8 @@ module Aws::Omics
     #   * {Types::GetReferenceMetadataResponse#creation_time #creation_time} => Time
     #   * {Types::GetReferenceMetadataResponse#update_time #update_time} => Time
     #   * {Types::GetReferenceMetadataResponse#files #files} => Types::ReferenceFiles
+    #   * {Types::GetReferenceMetadataResponse#creation_type #creation_type} => String
+    #   * {Types::GetReferenceMetadataResponse#creation_job_id #creation_job_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2194,6 +2216,8 @@ module Aws::Omics
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
     #   resp.files.index.s3_access.s3_uri #=> String
+    #   resp.creation_type #=> String, one of "IMPORT"
+    #   resp.creation_job_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReferenceMetadata AWS API Documentation
     #
@@ -4735,14 +4759,19 @@ module Aws::Omics
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::Omics')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

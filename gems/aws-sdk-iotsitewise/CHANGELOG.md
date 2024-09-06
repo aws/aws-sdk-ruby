@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2024-08-26)
+------------------
+
+* Feature - AWS IoT SiteWise now supports versioning for asset models. It enables users to retrieve active version of their asset model and perform asset model writes with optimistic lock.
+
 1.68.0 (2024-07-24)
 ------------------
 

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-kendraranking/customizations'
 # @!group service
 module Aws::KendraRanking
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

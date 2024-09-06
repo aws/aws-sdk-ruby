@@ -1408,6 +1408,30 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the safety lever.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetSafetyLeverRequest AWS API Documentation
+    #
+    class GetSafetyLeverRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] safety_lever
+    #   Information about the safety lever.
+    #   @return [Types::SafetyLever]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetSafetyLeverResponse AWS API Documentation
+    #
+    class GetSafetyLeverResponse < Struct.new(
+      :safety_lever)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] experiment_template_id
     #   The ID of the experiment template.
     #   @return [String]
@@ -1795,6 +1819,49 @@ module Aws::FIS
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a safety lever.
+    #
+    # @!attribute [rw] id
+    #   The ID of the safety lever.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the safety lever.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the safety lever.
+    #   @return [Types::SafetyLeverState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/SafetyLever AWS API Documentation
+    #
+    class SafetyLever < Struct.new(
+      :id,
+      :arn,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the state of the safety lever.
+    #
+    # @!attribute [rw] status
+    #   The state of the safety lever.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the state of the safety lever.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/SafetyLeverState AWS API Documentation
+    #
+    class SafetyLeverState < Struct.new(
+      :status,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2243,6 +2310,54 @@ module Aws::FIS
       :filters,
       :selection_mode,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a state for a safety lever.
+    #
+    # @!attribute [rw] status
+    #   The updated state of the safety lever.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for updating the state of the safety lever.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateSafetyLeverStateInput AWS API Documentation
+    #
+    class UpdateSafetyLeverStateInput < Struct.new(
+      :status,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the safety lever.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the safety lever.
+    #   @return [Types::UpdateSafetyLeverStateInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateSafetyLeverStateRequest AWS API Documentation
+    #
+    class UpdateSafetyLeverStateRequest < Struct.new(
+      :id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] safety_lever
+    #   Information about the safety lever.
+    #   @return [Types::SafetyLever]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateSafetyLeverStateResponse AWS API Documentation
+    #
+    class UpdateSafetyLeverStateResponse < Struct.new(
+      :safety_lever)
       SENSITIVE = []
       include Aws::Structure
     end

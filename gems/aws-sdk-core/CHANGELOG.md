@@ -5,6 +5,38 @@ Unreleased Changes
 
 * Feature - Always validate response checksums for operations that support or require it. Supported config options are `WHEN_SUPPORTED` and `WHEN_REQUIRED`. The default value is `WHEN_SUPPORTED`. This option is configured in code with `:response_checksum_calculation`, in the shared config file as `response_checksum_calculation`, and in the ENV as `ENV['AWS_RESPONSE_CHECKSUM_CALCULATION']`.
 
+3.203.0 (2024-09-03)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add support for Observability which includes a configuration, `telemetry_provider` and an OpenTelemetry-based telemetry provider.
+
+3.202.2 (2024-08-30)
+------------------
+
+* Issue - revert auto-loading of bundled gems.
+
+3.202.1 (2024-08-29)
+------------------
+
+* Issue - require default plugins when loading aws-sdk-core.
+
+3.202.0 (2024-08-27)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Reduce initial memory usage by auto-loading bundled gems (STS, SSO, SSOOIDC).
+
 3.201.5 (2024-08-15)
 ------------------
 

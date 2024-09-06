@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
@@ -84,6 +85,7 @@ module Aws::BedrockAgentRuntime
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
@@ -340,6 +342,16 @@ module Aws::BedrockAgentRuntime
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -927,6 +939,7 @@ module Aws::BedrockAgentRuntime
     #           api_result: {
     #             action_group: "String", # required
     #             api_path: "ApiPath",
+    #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
     #             http_method: "String",
     #             http_status_code: 1,
     #             response_body: {
@@ -938,6 +951,7 @@ module Aws::BedrockAgentRuntime
     #           },
     #           function_result: {
     #             action_group: "String", # required
+    #             confirmation_state: "CONFIRM", # accepts CONFIRM, DENY
     #             function: "String",
     #             response_body: {
     #               "String" => {
@@ -1006,6 +1020,7 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_id #=> String
     #   event.invocation_inputs #=> Array
     #   event.invocation_inputs[0].api_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].api_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
     #   event.invocation_inputs[0].api_invocation_input.api_path #=> String
     #   event.invocation_inputs[0].api_invocation_input.http_method #=> String
     #   event.invocation_inputs[0].api_invocation_input.parameters #=> Array
@@ -1018,6 +1033,7 @@ module Aws::BedrockAgentRuntime
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].type #=> String
     #   event.invocation_inputs[0].api_invocation_input.request_body.content["String"].properties[0].value #=> String
     #   event.invocation_inputs[0].function_invocation_input.action_group #=> String
+    #   event.invocation_inputs[0].function_invocation_input.action_invocation_type #=> String, one of "RESULT", "USER_CONFIRMATION", "USER_CONFIRMATION_AND_RESULT"
     #   event.invocation_inputs[0].function_invocation_input.function #=> String
     #   event.invocation_inputs[0].function_invocation_input.parameters #=> Array
     #   event.invocation_inputs[0].function_invocation_input.parameters[0].name #=> String
@@ -1856,14 +1872,19 @@ module Aws::BedrockAgentRuntime
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::BedrockAgentRuntime')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

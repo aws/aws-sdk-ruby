@@ -93,7 +93,8 @@ module Aws::S3Control
     #   if one exists.
     #
     #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
-    #   Outposts access point that is used by other Amazon Web Services.
+    #   Outposts access point that is used by other Amazon Web
+    #   Servicesservices.
     #
     #    </note>
     #   @return [Types::VpcConfiguration]
@@ -267,8 +268,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] identity_center_arn
@@ -541,8 +541,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] access_grants_location_id
@@ -697,8 +696,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] identity_center_arn
@@ -743,16 +741,47 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] access_grants_instance_arn
-    #   The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM
+    #   Identity Center instance that you are associating with your S3
+    #   Access Grants instance. An IAM Identity Center instance is your
+    #   corporate identity directory that you added to the IAM Identity
+    #   Center. You can use the [ListInstances][1] API operation to retrieve
+    #   a list of your Identity Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
     #   @return [String]
     #
     # @!attribute [rw] identity_center_arn
     #   If you associated your S3 Access Grants instance with an Amazon Web
     #   Services IAM Identity Center instance, this field returns the Amazon
     #   Resource Name (ARN) of the IAM Identity Center instance application;
-    #   a subresource of the original Identity Center instance passed in the
-    #   request. S3 Access Grants creates this Identity Center application
-    #   for this specific S3 Access Grants instance.
+    #   a subresource of the original Identity Center instance. S3 Access
+    #   Grants creates this Identity Center application for the specific S3
+    #   Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM
+    #   Identity Center instance that you are associating with your S3
+    #   Access Grants instance. An IAM Identity Center instance is your
+    #   corporate identity directory that you added to the IAM Identity
+    #   Center. You can use the [ListInstances][1] API operation to retrieve
+    #   a list of your Identity Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_application_arn
+    #   If you associated your S3 Access Grants instance with an Amazon Web
+    #   Services IAM Identity Center instance, this field returns the Amazon
+    #   Resource Name (ARN) of the IAM Identity Center instance application;
+    #   a subresource of the original Identity Center instance. S3 Access
+    #   Grants creates this Identity Center application for the specific S3
+    #   Access Grants instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessGrantsInstanceResult AWS API Documentation
@@ -761,14 +790,15 @@ module Aws::S3Control
       :created_at,
       :access_grants_instance_id,
       :access_grants_instance_arn,
-      :identity_center_arn)
+      :identity_center_arn,
+      :identity_center_instance_arn,
+      :identity_center_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] location_scope
@@ -1373,8 +1403,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] access_grant_id
@@ -1392,8 +1421,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsInstanceRequest AWS API Documentation
@@ -1405,8 +1433,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessGrantsInstanceResourcePolicyRequest AWS API Documentation
@@ -1418,8 +1445,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] access_grants_location_id
@@ -2046,8 +2072,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DissociateAccessGrantsIdentityCenterRequest AWS API Documentation
@@ -2059,7 +2084,12 @@ module Aws::S3Control
     end
 
     # Specifies encryption-related information for an Amazon S3 bucket that
-    # is a destination for replicated objects.
+    # is a destination for replicated objects. If you're specifying a
+    # customer managed KMS key, we recommend using a fully qualified KMS key
+    # ARN. If you use a KMS key alias instead, then KMS resolves the key
+    # within the requester’s account. This behavior can result in data
+    # that's encrypted with a KMS key that belongs to the requester, and
+    # not the bucket owner.
     #
     # <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
     #
@@ -2168,8 +2198,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] access_grant_id
@@ -2296,8 +2325,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceRequest AWS API Documentation
@@ -2309,8 +2337,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessGrantsInstanceResourcePolicyRequest AWS API Documentation
@@ -2357,10 +2384,32 @@ module Aws::S3Control
     # @!attribute [rw] identity_center_arn
     #   If you associated your S3 Access Grants instance with an Amazon Web
     #   Services IAM Identity Center instance, this field returns the Amazon
-    #   Resource Name (ARN) of the Amazon Web Services IAM Identity Center
-    #   instance application; a subresource of the original Identity Center
-    #   instance. S3 Access Grants creates this Identity Center application
-    #   for the specific S3 Access Grants instance.
+    #   Resource Name (ARN) of the IAM Identity Center instance application;
+    #   a subresource of the original Identity Center instance. S3 Access
+    #   Grants creates this Identity Center application for the specific S3
+    #   Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM
+    #   Identity Center instance that you are associating with your S3
+    #   Access Grants instance. An IAM Identity Center instance is your
+    #   corporate identity directory that you added to the IAM Identity
+    #   Center. You can use the [ListInstances][1] API operation to retrieve
+    #   a list of your Identity Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_application_arn
+    #   If you associated your S3 Access Grants instance with an Amazon Web
+    #   Services IAM Identity Center instance, this field returns the Amazon
+    #   Resource Name (ARN) of the IAM Identity Center instance application;
+    #   a subresource of the original Identity Center instance. S3 Access
+    #   Grants creates this Identity Center application for the specific S3
+    #   Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2373,14 +2422,15 @@ module Aws::S3Control
       :access_grants_instance_arn,
       :access_grants_instance_id,
       :identity_center_arn,
+      :identity_center_instance_arn,
+      :identity_center_application_arn,
       :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] access_grants_location_id
@@ -2716,7 +2766,8 @@ module Aws::S3Control
     #   specified access point.
     #
     #   <note markdown="1"> This element is empty if this access point is an Amazon S3 on
-    #   Outposts access point that is used by other Amazon Web Services.
+    #   Outposts access point that is used by other Amazon Web
+    #   Servicesservices.
     #
     #    </note>
     #   @return [Types::VpcConfiguration]
@@ -3032,8 +3083,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -4110,17 +4160,23 @@ module Aws::S3Control
     #
     # @!attribute [rw] match_any_prefix
     #   If provided, the generated manifest includes objects where the
-    #   specified string appears at the start of the object key string.
+    #   specified string appears at the start of the object key string. Each
+    #   KeyNameConstraint filter accepts an array of strings with a length
+    #   of 1 string.
     #   @return [Array<String>]
     #
     # @!attribute [rw] match_any_suffix
     #   If provided, the generated manifest includes objects where the
-    #   specified string appears at the end of the object key string.
+    #   specified string appears at the end of the object key string. Each
+    #   KeyNameConstraint filter accepts an array of strings with a length
+    #   of 1 string.
     #   @return [Array<String>]
     #
     # @!attribute [rw] match_any_substring
     #   If provided, the generated manifest includes objects where the
-    #   specified string appears anywhere within the object key string.
+    #   specified string appears anywhere within the object key string. Each
+    #   KeyNameConstraint filter accepts an array of strings with a length
+    #   of 1 string.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/KeyNameConstraint AWS API Documentation
@@ -4483,20 +4539,43 @@ module Aws::S3Control
     #   Access Grants instance.
     #   @return [String]
     #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services IAM
+    #   Identity Center instance that you are associating with your S3
+    #   Access Grants instance. An IAM Identity Center instance is your
+    #   corporate identity directory that you added to the IAM Identity
+    #   Center. You can use the [ListInstances][1] API operation to retrieve
+    #   a list of your Identity Center instances and their ARNs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_application_arn
+    #   If you associated your S3 Access Grants instance with an Amazon Web
+    #   Services IAM Identity Center instance, this field returns the Amazon
+    #   Resource Name (ARN) of the IAM Identity Center instance application;
+    #   a subresource of the original Identity Center instance. S3 Access
+    #   Grants creates this Identity Center application for the specific S3
+    #   Access Grants instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessGrantsInstanceEntry AWS API Documentation
     #
     class ListAccessGrantsInstanceEntry < Struct.new(
       :access_grants_instance_id,
       :access_grants_instance_arn,
       :created_at,
-      :identity_center_arn)
+      :identity_center_arn,
+      :identity_center_instance_arn,
+      :identity_center_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4589,8 +4668,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4649,8 +4727,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4866,6 +4943,107 @@ module Aws::S3Control
     class ListAccessPointsResult < Struct.new(
       :access_point_list,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Part of `ListCallerAccessGrantsResult`. Each entry includes the
+    # permission level (READ, WRITE, or READWRITE) and the grant scope of
+    # the access grant. If the grant also includes an application ARN, the
+    # grantee can only access the S3 data through this application.
+    #
+    # @!attribute [rw] permission
+    #   The type of permission granted, which can be one of the following
+    #   values:
+    #
+    #   * `READ` - Grants read-only access to the S3 data.
+    #
+    #   * `WRITE` - Grants write-only access to the S3 data.
+    #
+    #   * `READWRITE` - Grants both read and write access to the S3 data.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_scope
+    #   The S3 path of the data to which you have been granted access.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Web Services IAM
+    #   Identity Center application associated with your Identity Center
+    #   instance. If the grant includes an application ARN, the grantee can
+    #   only access the S3 data through this application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListCallerAccessGrantsEntry AWS API Documentation
+    #
+    class ListCallerAccessGrantsEntry < Struct.new(
+      :permission,
+      :grant_scope,
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_scope
+    #   The S3 path of the data that you would like to access. Must start
+    #   with `s3://`. You can optionally pass only the beginning characters
+    #   of a path, and S3 Access Grants will search for all applicable
+    #   grants for the path fragment.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to request the next page of results. Pass this
+    #   value into a subsequent `List Caller Access Grants` request in order
+    #   to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access grants that you would like returned in
+    #   the `List Caller Access Grants` response. If the results include the
+    #   pagination token `NextToken`, make another call using the
+    #   `NextToken` to determine if there are more results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allowed_by_application
+    #   If this optional parameter is passed in the request, a filter is
+    #   applied to the results. The results will include only the access
+    #   grants for the caller's Identity Center application or for any
+    #   other applications (`ALL`).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListCallerAccessGrantsRequest AWS API Documentation
+    #
+    class ListCallerAccessGrantsRequest < Struct.new(
+      :account_id,
+      :grant_scope,
+      :next_token,
+      :max_results,
+      :allowed_by_application)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token that you can use to request the next page of
+    #   results. Pass this value into a subsequent `List Caller Access
+    #   Grants` request in order to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] caller_access_grants_list
+    #   A list of the caller's access grants that were created using S3
+    #   Access Grants and that grant the caller access to the S3 data of the
+    #   Amazon Web Services account ID that was specified in the request.
+    #   @return [Array<Types::ListCallerAccessGrantsEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListCallerAccessGrantsResult AWS API Documentation
+    #
+    class ListCallerAccessGrantsResult < Struct.new(
+      :next_token,
+      :caller_access_grants_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5789,7 +5967,7 @@ module Aws::S3Control
     #   Specifies whether Amazon S3 should restrict public bucket policies
     #   for buckets in this account. Setting this element to `TRUE`
     #   restricts access to buckets with public policies to only Amazon Web
-    #   Service principals and authorized users within this account.
+    #   Servicesservice principals and authorized users within this account.
     #
     #   Enabling this setting doesn't affect previously stored bucket
     #   policies, except that public and cross-account access within any
@@ -5811,8 +5989,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -7048,7 +7225,7 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] source_bucket
-    #   The source bucket used by the ManifestGenerator.
+    #   The ARN of the source bucket used by the ManifestGenerator.
     #
     #   <note markdown="1"> **Directory buckets** - Directory buckets aren't supported as the
     #   source buckets used by `S3JobManifestGenerator` to generate the job
@@ -8071,8 +8248,7 @@ module Aws::S3Control
     class UntagResourceResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_id
-    #   The ID of the Amazon Web Services account that is making this
-    #   request.
+    #   The Amazon Web Services account ID of the S3 Access Grants instance.
     #   @return [String]
     #
     # @!attribute [rw] access_grants_location_id

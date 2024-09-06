@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2024-08-22)
+------------------
+
+* Feature - Correct endpoint for FIPS is configured for US Gov Regions.
+
 1.41.0 (2024-07-18)
 ------------------
 

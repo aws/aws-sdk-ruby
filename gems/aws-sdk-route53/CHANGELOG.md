@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2024-08-22)
+------------------
+
+* Feature - Amazon Route 53 now supports the Asia Pacific (Malaysia) Region (ap-southeast-5) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 1.95.0 (2024-08-02)
 ------------------
 

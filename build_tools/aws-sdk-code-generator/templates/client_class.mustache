@@ -99,13 +99,18 @@ module {{module_name}}
         end
       end
       {{/authorizer?}}
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('{{module_name}}')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),{{#authorizer?}}
         authorizer: authorizer,{{/authorizer?}}
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = '{{gem_name}}'
       context[:gem_version] = '{{gem_version}}'
       Seahorse::Client::Request.new(handlers, context)

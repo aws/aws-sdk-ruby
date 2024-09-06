@@ -28,6 +28,11 @@ module Aws
       class LimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class PreconditionFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_arn: () -> ::String
+      end
       class QueryTimeoutException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

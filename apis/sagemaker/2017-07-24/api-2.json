@@ -3997,7 +3997,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
+      "pattern":"^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
     },
     "AlgorithmImage":{
       "type":"string",
@@ -4330,6 +4330,12 @@
         "ml.r6id.24xlarge",
         "ml.r6id.32xlarge"
       ]
+    },
+    "AppLifecycleManagement":{
+      "type":"structure",
+      "members":{
+        "IdleSettings":{"shape":"IdleSettings"}
+      }
     },
     "AppList":{
       "type":"list",
@@ -5145,6 +5151,14 @@
         "Descending"
       ]
     },
+    "AutoMountHomeEFS":{
+      "type":"string",
+      "enum":[
+        "Enabled",
+        "Disabled",
+        "DefaultAsDomain"
+      ]
+    },
     "AutoParameter":{
       "type":"structure",
       "required":[
@@ -5916,7 +5930,7 @@
         "InstanceGroupName":{"shape":"ClusterInstanceGroupName"},
         "InstanceType":{"shape":"ClusterInstanceType"},
         "LifeCycleConfig":{"shape":"ClusterLifeCycleConfig"},
-        "ExecutionRole":{"shape":"RoleArn"},
+        "ExecutionRole":{"shape":"IAMRoleArn"},
         "ThreadsPerCore":{"shape":"ClusterThreadsPerCore"},
         "InstanceStorageConfigs":{"shape":"ClusterInstanceStorageConfigs"}
       }
@@ -5945,7 +5959,7 @@
         "InstanceGroupName":{"shape":"ClusterInstanceGroupName"},
         "InstanceType":{"shape":"ClusterInstanceType"},
         "LifeCycleConfig":{"shape":"ClusterLifeCycleConfig"},
-        "ExecutionRole":{"shape":"RoleArn"},
+        "ExecutionRole":{"shape":"IAMRoleArn"},
         "ThreadsPerCore":{"shape":"ClusterThreadsPerCore"},
         "InstanceStorageConfigs":{"shape":"ClusterInstanceStorageConfigs"}
       }
@@ -5953,7 +5967,7 @@
     "ClusterInstanceGroupSpecifications":{
       "type":"list",
       "member":{"shape":"ClusterInstanceGroupSpecification"},
-      "max":20,
+      "max":100,
       "min":1
     },
     "ClusterInstancePlacement":{
@@ -6174,7 +6188,8 @@
       "members":{
         "DefaultResourceSpec":{"shape":"ResourceSpec"},
         "CustomImages":{"shape":"CustomImages"},
-        "LifecycleConfigArns":{"shape":"LifecycleConfigArns"}
+        "LifecycleConfigArns":{"shape":"LifecycleConfigArns"},
+        "AppLifecycleManagement":{"shape":"AppLifecycleManagement"}
       }
     },
     "CodeRepositories":{
@@ -6193,7 +6208,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
+      "pattern":"^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
     },
     "CodeRepositoryContains":{
       "type":"string",
@@ -13357,6 +13372,12 @@
       "type":"integer",
       "min":1
     },
+    "IAMRoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"^arn:aws[a-z\\-]*:iam::\\d{12}:role/[\\w+=,.@-]{1,64}$"
+    },
     "IamIdentity":{
       "type":"structure",
       "members":{
@@ -13390,6 +13411,20 @@
       "member":{"shape":"IdentityProviderOAuthSetting"},
       "max":20
     },
+    "IdleSettings":{
+      "type":"structure",
+      "members":{
+        "LifecycleManagement":{"shape":"LifecycleManagement"},
+        "IdleTimeoutInMinutes":{"shape":"IdleTimeoutInMinutes"},
+        "MinIdleTimeoutInMinutes":{"shape":"IdleTimeoutInMinutes"},
+        "MaxIdleTimeoutInMinutes":{"shape":"IdleTimeoutInMinutes"}
+      }
+    },
+    "IdleTimeoutInMinutes":{
+      "type":"integer",
+      "max":525600,
+      "min":60
+    },
     "Image":{
       "type":"structure",
       "required":[
@@ -13413,7 +13448,7 @@
     "ImageArn":{
       "type":"string",
       "max":256,
-      "pattern":"^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"
+      "pattern":"^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$"
     },
     "ImageBaseImage":{
       "type":"string",
@@ -14329,6 +14364,7 @@
         "CustomImages":{"shape":"CustomImages"},
         "LifecycleConfigArns":{"shape":"LifecycleConfigArns"},
         "CodeRepositories":{"shape":"CodeRepositories"},
+        "AppLifecycleManagement":{"shape":"AppLifecycleManagement"},
         "EmrSettings":{"shape":"EmrSettings"}
       }
     },
@@ -14617,6 +14653,13 @@
     "LifecycleConfigArns":{
       "type":"list",
       "member":{"shape":"StudioLifecycleConfigArn"}
+    },
+    "LifecycleManagement":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "LineageEntityParameters":{
       "type":"map",
@@ -17254,7 +17297,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
+      "pattern":"^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
     },
     "ModelPackageArnList":{
       "type":"list",
@@ -17308,7 +17351,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
+      "pattern":"^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
     },
     "ModelPackageGroupSortBy":{
       "type":"string",
@@ -19850,7 +19893,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
+      "pattern":"^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
     },
     "ProjectEntityName":{
       "type":"string",
@@ -21443,6 +21486,12 @@
       "min":1,
       "pattern":".*"
     },
+    "SpaceAppLifecycleManagement":{
+      "type":"structure",
+      "members":{
+        "IdleSettings":{"shape":"SpaceIdleSettings"}
+      }
+    },
     "SpaceArn":{
       "type":"string",
       "max":256,
@@ -21451,7 +21500,8 @@
     "SpaceCodeEditorAppSettings":{
       "type":"structure",
       "members":{
-        "DefaultResourceSpec":{"shape":"ResourceSpec"}
+        "DefaultResourceSpec":{"shape":"ResourceSpec"},
+        "AppLifecycleManagement":{"shape":"SpaceAppLifecycleManagement"}
       }
     },
     "SpaceDetails":{
@@ -21473,11 +21523,18 @@
       "max":16384,
       "min":5
     },
+    "SpaceIdleSettings":{
+      "type":"structure",
+      "members":{
+        "IdleTimeoutInMinutes":{"shape":"IdleTimeoutInMinutes"}
+      }
+    },
     "SpaceJupyterLabAppSettings":{
       "type":"structure",
       "members":{
         "DefaultResourceSpec":{"shape":"ResourceSpec"},
-        "CodeRepositories":{"shape":"CodeRepositories"}
+        "CodeRepositories":{"shape":"CodeRepositories"},
+        "AppLifecycleManagement":{"shape":"SpaceAppLifecycleManagement"}
       }
     },
     "SpaceList":{
@@ -21917,7 +21974,7 @@
     "StudioLifecycleConfigArn":{
       "type":"string",
       "max":256,
-      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"
+      "pattern":"^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"
     },
     "StudioLifecycleConfigContent":{
       "type":"string",
@@ -24136,7 +24193,8 @@
         "StudioWebPortal":{"shape":"StudioWebPortal"},
         "CustomPosixUserConfig":{"shape":"CustomPosixUserConfig"},
         "CustomFileSystemConfigs":{"shape":"CustomFileSystemConfigs"},
-        "StudioWebPortalSettings":{"shape":"StudioWebPortalSettings"}
+        "StudioWebPortalSettings":{"shape":"StudioWebPortalSettings"},
+        "AutoMountHomeEFS":{"shape":"AutoMountHomeEFS"}
       }
     },
     "UsersPerStep":{

@@ -959,7 +959,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   A valid security key in PEM format.
+    #   A valid security key in PEM format as a String.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateSecurityKeyRequest AWS API Documentation
@@ -5967,10 +5967,25 @@ module Aws::Connect
     #   The name of the instance.
     #   @return [Types::Instance]
     #
+    # @!attribute [rw] replication_configuration
+    #   Status information about the replication process. This field is
+    #   included only when you are using the [ReplicateInstance][1] API to
+    #   replicate an Amazon Connect instance across Amazon Web Services
+    #   Regions. For information about replicating Amazon Connect instances,
+    #   see [Create a replica of your existing Amazon Connect instance][2]
+    #   in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html
+    #   @return [Types::ReplicationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceResponse AWS API Documentation
     #
     class DescribeInstanceResponse < Struct.new(
-      :instance)
+      :instance,
+      :replication_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10117,7 +10132,7 @@ module Aws::Connect
     #
     #      </note>
     #
-    #   SUM\_CONTACTS\_ABANDONED
+    #   CONTACTS\_ABANDONED
     #
     #   : Unit: Count
     #
@@ -16590,6 +16605,92 @@ module Aws::Connect
     class ReplicateInstanceResponse < Struct.new(
       :id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the status of the replication of a source Amazon Connect
+    # instance across Amazon Web Services Regions. Use these details to
+    # understand the general status of a given replication. For information
+    # about why a replication process may fail, see [Why a ReplicateInstance
+    # call fails][1] in the *Create a replica of your existing Amazon
+    # Connect instance* topic in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html#why-replicateinstance-fails
+    #
+    # @!attribute [rw] replication_status_summary_list
+    #   A list of replication status summaries. The summaries contain
+    #   details about the replication of configuration information for
+    #   Amazon Connect resources, for each Amazon Web Services Region.
+    #   @return [Array<Types::ReplicationStatusSummary>]
+    #
+    # @!attribute [rw] source_region
+    #   The Amazon Web Services Region where the source Amazon Connect
+    #   instance was created. This is the Region where the
+    #   [ReplicateInstance][1] API was called to start the replication
+    #   process.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html
+    #   @return [String]
+    #
+    # @!attribute [rw] global_sign_in_endpoint
+    #   The URL that is used to sign-in to your Amazon Connect instance
+    #   according to your traffic distribution group configuration. For more
+    #   information about sign-in and traffic distribution groups, see
+    #   [Important things to know][1] in the *Create traffic distribution
+    #   groups* topic in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReplicationConfiguration AWS API Documentation
+    #
+    class ReplicationConfiguration < Struct.new(
+      :replication_status_summary_list,
+      :source_region,
+      :global_sign_in_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Status information about the replication process, where you use the
+    # [ReplicateInstance][1] API to create a replica of your Amazon Connect
+    # instance in another Amazon Web Services Region. For more information,
+    # see [Set up Amazon Connect Global Resiliency][2] in the *Amazon
+    # Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region. This can be either the source or the
+    #   replica Region, depending where it appears in the summary list.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_status
+    #   The state of the replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_status_reason
+    #   A description of the replication status. Use this information to
+    #   resolve any issues that are preventing the successful replication of
+    #   your Amazon Connect instance to another Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReplicationStatusSummary AWS API Documentation
+    #
+    class ReplicationStatusSummary < Struct.new(
+      :region,
+      :replication_status,
+      :replication_status_reason)
       SENSITIVE = []
       include Aws::Structure
     end

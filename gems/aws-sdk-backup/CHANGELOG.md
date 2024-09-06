@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2024-08-30)
+------------------
+
+* Feature - The latest update introduces two new attributes, VaultType and VaultState, to the DescribeBackupVault and ListBackupVaults APIs. The VaultState attribute reflects the current status of the vault, while the VaultType attribute indicates the specific category of the vault.
+
 1.73.0 (2024-07-02)
 ------------------
 

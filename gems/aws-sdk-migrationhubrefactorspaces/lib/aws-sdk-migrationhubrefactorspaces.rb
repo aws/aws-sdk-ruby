@@ -52,6 +52,6 @@ require_relative 'aws-sdk-migrationhubrefactorspaces/customizations'
 # @!group service
 module Aws::MigrationHubRefactorSpaces
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

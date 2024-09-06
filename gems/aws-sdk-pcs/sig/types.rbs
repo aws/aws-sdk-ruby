@@ -1,0 +1,475 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PCS
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor scheduler: Types::Scheduler
+      attr_accessor size: ("SMALL" | "MEDIUM" | "LARGE")
+      attr_accessor slurm_configuration: Types::ClusterSlurmConfiguration
+      attr_accessor networking: Types::Networking
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor error_info: ::Array[Types::ErrorInfo]
+      SENSITIVE: []
+    end
+
+    class ClusterSlurmConfiguration
+      attr_accessor scale_down_idle_time_in_seconds: ::Integer
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor auth_key: Types::SlurmAuthKey
+      SENSITIVE: []
+    end
+
+    class ClusterSlurmConfigurationRequest
+      attr_accessor scale_down_idle_time_in_seconds: ::Integer
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class ClusterSummary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ComputeNodeGroup
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor cluster_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor ami_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor purchase_option: ("ONDEMAND" | "SPOT")
+      attr_accessor custom_launch_template: Types::CustomLaunchTemplate
+      attr_accessor iam_instance_profile_arn: ::String
+      attr_accessor scaling_configuration: Types::ScalingConfiguration
+      attr_accessor instance_configs: ::Array[Types::InstanceConfig]
+      attr_accessor spot_options: Types::SpotOptions
+      attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration
+      attr_accessor error_info: ::Array[Types::ErrorInfo]
+      SENSITIVE: []
+    end
+
+    class ComputeNodeGroupConfiguration
+      attr_accessor compute_node_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ComputeNodeGroupSlurmConfiguration
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class ComputeNodeGroupSlurmConfigurationRequest
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class ComputeNodeGroupSummary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor cluster_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor scheduler: Types::SchedulerRequest
+      attr_accessor size: ("SMALL" | "MEDIUM" | "LARGE")
+      attr_accessor networking: Types::NetworkingRequest
+      attr_accessor slurm_configuration: Types::ClusterSlurmConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateComputeNodeGroupRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor compute_node_group_name: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor purchase_option: ("ONDEMAND" | "SPOT")
+      attr_accessor custom_launch_template: Types::CustomLaunchTemplate
+      attr_accessor iam_instance_profile_arn: ::String
+      attr_accessor scaling_configuration: Types::ScalingConfigurationRequest
+      attr_accessor instance_configs: ::Array[Types::InstanceConfig]
+      attr_accessor spot_options: Types::SpotOptions
+      attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateComputeNodeGroupResponse
+      attr_accessor compute_node_group: Types::ComputeNodeGroup
+      SENSITIVE: []
+    end
+
+    class CreateQueueRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor queue_name: ::String
+      attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQueueResponse
+      attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class CustomLaunchTemplate
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteComputeNodeGroupRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor compute_node_group_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComputeNodeGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteQueueRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor queue_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueueResponse < Aws::EmptyStructure
+    end
+
+    class Endpoint
+      attr_accessor type: ("SLURMCTLD" | "SLURMDBD")
+      attr_accessor private_ip_address: ::String
+      attr_accessor public_ip_address: ::String
+      attr_accessor port: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorInfo
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterRequest
+      attr_accessor cluster_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class GetComputeNodeGroupRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor compute_node_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetComputeNodeGroupResponse
+      attr_accessor compute_node_group: Types::ComputeNodeGroup
+      SENSITIVE: []
+    end
+
+    class GetQueueRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor queue_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueueResponse
+      attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class InstanceConfig
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListClustersResponse
+      attr_accessor clusters: ::Array[Types::ClusterSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComputeNodeGroupsRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComputeNodeGroupsResponse
+      attr_accessor compute_node_groups: ::Array[Types::ComputeNodeGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueuesRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueuesResponse
+      attr_accessor queues: ::Array[Types::QueueSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Networking
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NetworkingRequest
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Queue
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor cluster_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor error_info: ::Array[Types::ErrorInfo]
+      SENSITIVE: []
+    end
+
+    class QueueSummary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor cluster_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class RegisterComputeNodeGroupInstanceRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor bootstrap_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterComputeNodeGroupInstanceResponse
+      attr_accessor node_id: ::String
+      attr_accessor shared_secret: ::String
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      SENSITIVE: [:shared_secret]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ScalingConfiguration
+      attr_accessor min_instance_count: ::Integer
+      attr_accessor max_instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScalingConfigurationRequest
+      attr_accessor min_instance_count: ::Integer
+      attr_accessor max_instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Scheduler
+      attr_accessor type: ("SLURM")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SchedulerRequest
+      attr_accessor type: ("SLURM")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class SlurmAuthKey
+      attr_accessor secret_arn: ::String
+      attr_accessor secret_version: ::String
+      SENSITIVE: []
+    end
+
+    class SlurmCustomSetting
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class SpotOptions
+      attr_accessor allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateComputeNodeGroupRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor compute_node_group_identifier: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor custom_launch_template: Types::CustomLaunchTemplate
+      attr_accessor purchase_option: ("ONDEMAND" | "SPOT")
+      attr_accessor spot_options: Types::SpotOptions
+      attr_accessor scaling_configuration: Types::ScalingConfigurationRequest
+      attr_accessor iam_instance_profile_arn: ::String
+      attr_accessor slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateComputeNodeGroupResponse
+      attr_accessor compute_node_group: Types::ComputeNodeGroup
+      SENSITIVE: []
+    end
+
+    class UpdateComputeNodeGroupSlurmConfigurationRequest
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class UpdateQueueRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor queue_identifier: ::String
+      attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQueueResponse
+      attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

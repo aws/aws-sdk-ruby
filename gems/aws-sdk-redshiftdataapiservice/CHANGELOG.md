@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2024-08-30)
+------------------
+
+* Feature - The release include the new Redshift DataAPI feature for session use, customer execute query with --session-keep-alive-seconds parameter and can submit follow-up queries to same sessions with returned`session-id`
+
 1.41.0 (2024-07-02)
 ------------------
 

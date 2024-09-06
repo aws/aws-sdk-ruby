@@ -107,20 +107,15 @@ module BuildTools
     end
 
     api('ImportExport') do |api|
+      api['metadata']['serviceId'] ||= 'importexport'
+
       api['operations'].each do |_, operation|
         operation['http']['requestUri'] = '/'
       end
     end
 
-    %w(Lambda LambdaPreview).each do |svc_name|
-      api(svc_name) do |api|
-        api['shapes']['Timestamp']['type'] = 'timestamp'
-      end
-
-      doc('lambda') do |docs|
-        docs['shapes']['Blob']['refs']['UpdateFunctionCodeRequest$ZipFile'] =
-          "<p>.zip file containing your packaged source code.</p>"
-      end
+    api('Lambda') do |api|
+      api['shapes']['Timestamp']['type'] = 'timestamp'
     end
 
     smoke('MTurk') do |smoke|
@@ -220,6 +215,8 @@ module BuildTools
     # uses both flattened and locationName. Query protocol is supposed to
     # ignore location name (xmlName) when flattened (xmlFlattened) is used.
     api('SimpleDB') do |api|
+      api['metadata']['serviceId'] ||= 'SimpleDB'
+
       api['shapes'].each do |_, shape|
         next unless shape['type'] == 'structure'
 

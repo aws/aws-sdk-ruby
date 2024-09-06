@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.472.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.471.0 (2024-08-28)
+------------------
+
+* Feature - Amazon VPC IP Address Manager (IPAM) now allows customers to provision IPv4 CIDR blocks and allocate Elastic IP Addresses directly from IPAM pools with public IPv4 space
+
+1.470.0 (2024-08-21)
+------------------
+
+* Feature - DescribeInstanceStatus now returns health information on EBS volumes attached to Nitro instances
+
 1.469.0 (2024-08-12)
 ------------------
 

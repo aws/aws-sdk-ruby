@@ -283,6 +283,16 @@ module Aws::ElasticLoadBalancingV2
       SENSITIVE: []
     end
 
+    class DescribeListenerAttributesInput
+      attr_accessor listener_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeListenerAttributesOutput
+      attr_accessor attributes: ::Array[Types::ListenerAttribute]
+      SENSITIVE: []
+    end
+
     class DescribeListenerCertificatesInput
       attr_accessor listener_arn: ::String
       attr_accessor marker: ::String
@@ -582,6 +592,12 @@ module Aws::ElasticLoadBalancingV2
       SENSITIVE: []
     end
 
+    class ListenerAttribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class ListenerNotFoundException < Aws::EmptyStructure
     end
 
@@ -629,6 +645,17 @@ module Aws::ElasticLoadBalancingV2
     class Matcher
       attr_accessor http_code: ::String
       attr_accessor grpc_code: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyListenerAttributesInput
+      attr_accessor listener_arn: ::String
+      attr_accessor attributes: ::Array[Types::ListenerAttribute]
+      SENSITIVE: []
+    end
+
+    class ModifyListenerAttributesOutput
+      attr_accessor attributes: ::Array[Types::ListenerAttribute]
       SENSITIVE: []
     end
 

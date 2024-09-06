@@ -1312,6 +1312,7 @@ module Aws::Personalize
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
       attr_accessor latest_solution_version: Types::SolutionVersionSummary
+      attr_accessor latest_solution_update: Types::SolutionUpdateSummary
       SENSITIVE: []
     end
 
@@ -1334,6 +1335,21 @@ module Aws::Personalize
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
       attr_accessor recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SolutionUpdateConfig
+      attr_accessor auto_training_config: Types::AutoTrainingConfig
+      SENSITIVE: []
+    end
+
+    class SolutionUpdateSummary
+      attr_accessor solution_update_config: Types::SolutionUpdateConfig
+      attr_accessor status: ::String
+      attr_accessor perform_auto_training: bool
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -1488,6 +1504,18 @@ module Aws::Personalize
 
     class UpdateRecommenderResponse
       attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSolutionRequest
+      attr_accessor solution_arn: ::String
+      attr_accessor perform_auto_training: bool
+      attr_accessor solution_update_config: Types::SolutionUpdateConfig
+      SENSITIVE: []
+    end
+
+    class UpdateSolutionResponse
+      attr_accessor solution_arn: ::String
       SENSITIVE: []
     end
   end

@@ -50,6 +50,7 @@ module Aws
                         ?session_token: String,
                         ?sigv4a_signing_region_set: Array[String],
                         ?stub_responses: untyped,
+                        ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                         ?token_provider: untyped,
                         ?use_dualstack_endpoint: bool,
                         ?use_fips_endpoint: bool,

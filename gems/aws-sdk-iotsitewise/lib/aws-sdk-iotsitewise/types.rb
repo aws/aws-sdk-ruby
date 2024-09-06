@@ -459,23 +459,6 @@ module Aws::IoTSiteWise
     # composite model definition is applied to all assets created from the
     # asset model.
     #
-    # @!attribute [rw] name
-    #   The name of the composite model.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description of the composite model.
-    #   @return [String]
-    #
-    # @!attribute [rw] type
-    #   The type of the composite model. For alarm composite models, this
-    #   type is `AWS/ALARM`.
-    #   @return [String]
-    #
-    # @!attribute [rw] properties
-    #   The asset property definitions for this composite model.
-    #   @return [Array<Types::AssetModelPropertyDefinition>]
-    #
     # @!attribute [rw] id
     #   The ID to assign to the composite model, if desired. IoT SiteWise
     #   automatically generates a unique ID for you, so this parameter is
@@ -495,13 +478,30 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the composite model. For alarm composite models, this
+    #   type is `AWS/ALARM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The asset property definitions for this composite model.
+    #   @return [Array<Types::AssetModelPropertyDefinition>]
+    #
     class AssetModelCompositeModelDefinition < Struct.new(
+      :id,
+      :external_id,
       :name,
       :description,
       :type,
-      :properties,
-      :id,
-      :external_id)
+      :properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -595,6 +595,21 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external ID (if any) provided in the [CreateAssetModel][1] or
+    #   [UpdateAssetModel][2] operation. You can assign an external ID by
+    #   specifying this value as part of a call to [UpdateAssetModel][2].
+    #   However, you can't change the external ID if one is already
+    #   assigned. For more information, see [Using external IDs][3] in the
+    #   *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html
+    #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the asset model hierarchy that you specify by using the
     #   [CreateAssetModel][1] or [UpdateAssetModel][2] API operation.
@@ -621,26 +636,11 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
     #   @return [String]
     #
-    # @!attribute [rw] external_id
-    #   The external ID (if any) provided in the [CreateAssetModel][1] or
-    #   [UpdateAssetModel][2] operation. You can assign an external ID by
-    #   specifying this value as part of a call to [UpdateAssetModel][2].
-    #   However, you can't change the external ID if one is already
-    #   assigned. For more information, see [Using external IDs][3] in the
-    #   *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html
-    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html
-    #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetModelHierarchy < Struct.new(
       :id,
+      :external_id,
       :name,
-      :child_asset_model_id,
-      :external_id)
+      :child_asset_model_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -648,6 +648,25 @@ module Aws::IoTSiteWise
     # Contains an asset model hierarchy used in asset model creation. An
     # asset model hierarchy determines the kind (or type) of asset that can
     # belong to a hierarchy.
+    #
+    # @!attribute [rw] id
+    #   The ID to assign to the asset model hierarchy, if desired. IoT
+    #   SiteWise automatically generates a unique ID for you, so this
+    #   parameter is never required. However, if you prefer to supply your
+    #   own ID instead, you can specify it here in UUID format. If you
+    #   specify your own ID, it must be globally unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   An external ID to assign to the asset model hierarchy. The external
+    #   ID must be unique among asset model hierarchies within this asset
+    #   model. For more information, see [Using external IDs][1] in the *IoT
+    #   SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the asset model hierarchy definition (as specified in
@@ -670,30 +689,11 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #   @return [String]
     #
-    # @!attribute [rw] id
-    #   The ID to assign to the asset model hierarchy, if desired. IoT
-    #   SiteWise automatically generates a unique ID for you, so this
-    #   parameter is never required. However, if you prefer to supply your
-    #   own ID instead, you can specify it here in UUID format. If you
-    #   specify your own ID, it must be globally unique.
-    #   @return [String]
-    #
-    # @!attribute [rw] external_id
-    #   An external ID to assign to the asset model hierarchy. The external
-    #   ID must be unique among asset model hierarchies within this asset
-    #   model. For more information, see [Using external IDs][1] in the *IoT
-    #   SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetModelHierarchyDefinition < Struct.new(
-      :name,
-      :child_asset_model_id,
       :id,
-      :external_id)
+      :external_id,
+      :name,
+      :child_asset_model_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -722,6 +722,21 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external ID (if any) provided in the [CreateAssetModel][1] or
+    #   [UpdateAssetModel][2] operation. You can assign an external ID by
+    #   specifying this value as part of a call to [UpdateAssetModel][2].
+    #   However, you can't change the external ID if one is already
+    #   assigned. For more information, see [Using external IDs][3] in the
+    #   *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html
+    #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the asset model property.
     #   @return [String]
@@ -748,36 +763,40 @@ module Aws::IoTSiteWise
     #   model.
     #   @return [Array<Types::AssetModelPropertyPathSegment>]
     #
-    # @!attribute [rw] external_id
-    #   The external ID (if any) provided in the [CreateAssetModel][1] or
-    #   [UpdateAssetModel][2] operation. You can assign an external ID by
-    #   specifying this value as part of a call to [UpdateAssetModel][2].
-    #   However, you can't change the external ID if one is already
-    #   assigned. For more information, see [Using external IDs][3] in the
-    #   *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html
-    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html
-    #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetModelProperty < Struct.new(
       :id,
+      :external_id,
       :name,
       :data_type,
       :data_type_spec,
       :unit,
       :type,
-      :path,
-      :external_id)
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains an asset model property definition. This property definition
     # is applied to all assets created from the asset model.
+    #
+    # @!attribute [rw] id
+    #   The ID to assign to the asset model property, if desired. IoT
+    #   SiteWise automatically generates a unique ID for you, so this
+    #   parameter is never required. However, if you prefer to supply your
+    #   own ID instead, you can specify it here in UUID format. If you
+    #   specify your own ID, it must be globally unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   An external ID to assign to the property definition. The external ID
+    #   must be unique among property definitions within this asset model.
+    #   For more information, see [Using external IDs][1] in the *IoT
+    #   SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the property definition.
@@ -808,33 +827,14 @@ module Aws::IoTSiteWise
     #   specify one type in a property definition.
     #   @return [Types::PropertyType]
     #
-    # @!attribute [rw] id
-    #   The ID to assign to the asset model property, if desired. IoT
-    #   SiteWise automatically generates a unique ID for you, so this
-    #   parameter is never required. However, if you prefer to supply your
-    #   own ID instead, you can specify it here in UUID format. If you
-    #   specify your own ID, it must be globally unique.
-    #   @return [String]
-    #
-    # @!attribute [rw] external_id
-    #   An external ID to assign to the property definition. The external ID
-    #   must be unique among property definitions within this asset model.
-    #   For more information, see [Using external IDs][1] in the *IoT
-    #   SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetModelPropertyDefinition < Struct.new(
+      :id,
+      :external_id,
       :name,
       :data_type,
       :data_type_spec,
       :unit,
-      :type,
-      :id,
-      :external_id)
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -861,6 +861,15 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] id
     #   The ID of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID of the property. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -895,25 +904,16 @@ module Aws::IoTSiteWise
     #   model.
     #   @return [Array<Types::AssetModelPropertyPathSegment>]
     #
-    # @!attribute [rw] external_id
-    #   The external ID of the property. For more information, see [Using
-    #   external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
     class AssetModelPropertySummary < Struct.new(
       :id,
+      :external_id,
       :name,
       :data_type,
       :data_type_spec,
       :unit,
       :type,
       :asset_model_composite_model_id,
-      :path,
-      :external_id)
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -947,6 +947,15 @@ module Aws::IoTSiteWise
     #   The ID of the asset model (used with IoT SiteWise API operations).
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external ID of the asset model. For more information, see [Using
+    #   external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The [ARN][1] of the asset model, which has the following format.
     #
@@ -959,6 +968,18 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] name
     #   The name of the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_type
+    #   The type of asset model.
+    #
+    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
+    #     create assets. Can't be included as a component in another asset
+    #     model.
+    #
+    #   * **COMPONENT\_MODEL** – A reusable component that you can include
+    #     in the composite models of other asset models. You can't create
+    #     assets directly from this type of asset model.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -977,37 +998,21 @@ module Aws::IoTSiteWise
     #   The current status of the asset model.
     #   @return [Types::AssetModelStatus]
     #
-    # @!attribute [rw] asset_model_type
-    #   The type of asset model.
-    #
-    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
-    #     create assets. Can't be included as a component in another asset
-    #     model.
-    #
-    #   * **COMPONENT\_MODEL** – A reusable component that you can include
-    #     in the composite models of other asset models. You can't create
-    #     assets directly from this type of asset model.
-    #   @return [String]
-    #
-    # @!attribute [rw] external_id
-    #   The external ID of the asset model. For more information, see [Using
-    #   external IDs][1] in the *IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    # @!attribute [rw] version
+    #   The version number of the asset model.
     #   @return [String]
     #
     class AssetModelSummary < Struct.new(
       :id,
+      :external_id,
       :arn,
       :name,
+      :asset_model_type,
       :description,
       :creation_date,
       :last_update_date,
       :status,
-      :asset_model_type,
-      :external_id)
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2550,11 +2555,6 @@ module Aws::IoTSiteWise
     #   The ID of the asset model this composite model is a part of.
     #   @return [String]
     #
-    # @!attribute [rw] parent_asset_model_composite_model_id
-    #   The ID of the parent composite model in this asset model
-    #   relationship.
-    #   @return [String]
-    #
     # @!attribute [rw] asset_model_composite_model_external_id
     #   An external ID to assign to the composite model.
     #
@@ -2562,6 +2562,11 @@ module Aws::IoTSiteWise
     #   inside a component model, you can only set the external ID using
     #   `UpdateAssetModelCompositeModel` and specifying the derived ID of
     #   the model or property from the created model it's a part of.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_asset_model_composite_model_id
+    #   The ID of the parent composite model in this asset model
+    #   relationship.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_composite_model_id
@@ -2613,17 +2618,44 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #   @return [Array<Types::AssetModelPropertyDefinition>]
     #
+    # @!attribute [rw] if_match
+    #   The expected current entity tag (ETag) for the asset model’s latest
+    #   or active version (specified using `matchForVersionType`). The
+    #   create request is rejected if the tag does not match the latest or
+    #   active version's current entity tag. See [Optimistic locking for
+    #   asset model writes][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
+    #   @return [String]
+    #
+    # @!attribute [rw] if_none_match
+    #   Accepts ***** to reject the create request if an active version
+    #   (specified using `matchForVersionType` as `ACTIVE`) already exists
+    #   for the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_for_version_type
+    #   Specifies the asset model version type (`LATEST` or `ACTIVE`) used
+    #   in conjunction with `If-Match` or `If-None-Match` headers to
+    #   determine the target ETag for the create operation.
+    #   @return [String]
+    #
     class CreateAssetModelCompositeModelRequest < Struct.new(
       :asset_model_id,
-      :parent_asset_model_composite_model_id,
       :asset_model_composite_model_external_id,
+      :parent_asset_model_composite_model_id,
       :asset_model_composite_model_id,
       :asset_model_composite_model_description,
       :asset_model_composite_model_name,
       :asset_model_composite_model_type,
       :client_token,
       :composed_asset_model_id,
-      :asset_model_composite_model_properties)
+      :asset_model_composite_model_properties,
+      :if_match,
+      :if_none_match,
+      :match_for_version_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2657,6 +2689,37 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_model_name
     #   A unique name for the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_type
+    #   The type of asset model.
+    #
+    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
+    #     create assets. Can't be included as a component in another asset
+    #     model.
+    #
+    #   * **COMPONENT\_MODEL** – A reusable component that you can include
+    #     in the composite models of other asset models. You can't create
+    #     assets directly from this type of asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_id
+    #   The ID to assign to the asset model, if desired. IoT SiteWise
+    #   automatically generates a unique ID for you, so this parameter is
+    #   never required. However, if you prefer to supply your own ID
+    #   instead, you can specify it here in UUID format. If you specify your
+    #   own ID, it must be globally unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_external_id
+    #   An external ID to assign to the asset model. The external ID must be
+    #   unique within your Amazon Web Services account. For more
+    #   information, see [Using external IDs][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
     #   @return [String]
     #
     # @!attribute [rw] asset_model_description
@@ -2731,48 +2794,17 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] asset_model_id
-    #   The ID to assign to the asset model, if desired. IoT SiteWise
-    #   automatically generates a unique ID for you, so this parameter is
-    #   never required. However, if you prefer to supply your own ID
-    #   instead, you can specify it here in UUID format. If you specify your
-    #   own ID, it must be globally unique.
-    #   @return [String]
-    #
-    # @!attribute [rw] asset_model_external_id
-    #   An external ID to assign to the asset model. The external ID must be
-    #   unique within your Amazon Web Services account. For more
-    #   information, see [Using external IDs][1] in the *IoT SiteWise User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
-    #   @return [String]
-    #
-    # @!attribute [rw] asset_model_type
-    #   The type of asset model.
-    #
-    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
-    #     create assets. Can't be included as a component in another asset
-    #     model.
-    #
-    #   * **COMPONENT\_MODEL** – A reusable component that you can include
-    #     in the composite models of other asset models. You can't create
-    #     assets directly from this type of asset model.
-    #   @return [String]
-    #
     class CreateAssetModelRequest < Struct.new(
       :asset_model_name,
+      :asset_model_type,
+      :asset_model_id,
+      :asset_model_external_id,
       :asset_model_description,
       :asset_model_properties,
       :asset_model_hierarchies,
       :asset_model_composite_models,
       :client_token,
-      :tags,
-      :asset_model_id,
-      :asset_model_external_id,
-      :asset_model_type)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3471,10 +3503,37 @@ module Aws::IoTSiteWise
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] if_match
+    #   The expected current entity tag (ETag) for the asset model’s latest
+    #   or active version (specified using `matchForVersionType`). The
+    #   delete request is rejected if the tag does not match the latest or
+    #   active version's current entity tag. See [Optimistic locking for
+    #   asset model writes][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
+    #   @return [String]
+    #
+    # @!attribute [rw] if_none_match
+    #   Accepts ***** to reject the delete request if an active version
+    #   (specified using `matchForVersionType` as `ACTIVE`) already exists
+    #   for the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_for_version_type
+    #   Specifies the asset model version type (`LATEST` or `ACTIVE`) used
+    #   in conjunction with `If-Match` or `If-None-Match` headers to
+    #   determine the target ETag for the delete operation.
+    #   @return [String]
+    #
     class DeleteAssetModelCompositeModelRequest < Struct.new(
       :asset_model_id,
       :asset_model_composite_model_id,
-      :client_token)
+      :client_token,
+      :if_match,
+      :if_none_match,
+      :match_for_version_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3515,9 +3574,36 @@ module Aws::IoTSiteWise
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] if_match
+    #   The expected current entity tag (ETag) for the asset model’s latest
+    #   or active version (specified using `matchForVersionType`). The
+    #   delete request is rejected if the tag does not match the latest or
+    #   active version's current entity tag. See [Optimistic locking for
+    #   asset model writes][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
+    #   @return [String]
+    #
+    # @!attribute [rw] if_none_match
+    #   Accepts ***** to reject the delete request if an active version
+    #   (specified using `matchForVersionType` as `ACTIVE`) already exists
+    #   for the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_for_version_type
+    #   Specifies the asset model version type (`LATEST` or `ACTIVE`) used
+    #   in conjunction with `If-Match` or `If-None-Match` headers to
+    #   determine the target ETag for the delete operation.
+    #   @return [String]
+    #
     class DeleteAssetModelRequest < Struct.new(
       :asset_model_id,
-      :client_token)
+      :client_token,
+      :if_match,
+      :if_none_match,
+      :match_for_version_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3915,9 +4001,21 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
     #   @return [String]
     #
+    # @!attribute [rw] asset_model_version
+    #   The version alias that specifies the latest or active version of the
+    #   asset model. The details are returned in the response. The default
+    #   value is `LATEST`. See [ Asset model versions][1] in the *IoT
+    #   SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+    #   @return [String]
+    #
     class DescribeAssetModelCompositeModelRequest < Struct.new(
       :asset_model_id,
-      :asset_model_composite_model_id)
+      :asset_model_composite_model_id,
+      :asset_model_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4005,15 +4103,31 @@ module Aws::IoTSiteWise
     #   Whether or not to exclude asset model properties from the response.
     #   @return [Boolean]
     #
+    # @!attribute [rw] asset_model_version
+    #   The version alias that specifies the latest or active version of the
+    #   asset model. The details are returned in the response. The default
+    #   value is `LATEST`. See [ Asset model versions][1] in the *IoT
+    #   SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+    #   @return [String]
+    #
     class DescribeAssetModelRequest < Struct.new(
       :asset_model_id,
-      :exclude_properties)
+      :exclude_properties,
+      :asset_model_version)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model, in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_external_id
+    #   The external ID of the asset model, if any.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_arn
@@ -4028,6 +4142,18 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_name
     #   The name of the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_type
+    #   The type of asset model.
+    #
+    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
+    #     create assets. Can't be included as a component in another asset
+    #     model.
+    #
+    #   * **COMPONENT\_MODEL** – A reusable component that you can include
+    #     in the composite models of other asset models. You can't create
+    #     assets directly from this type of asset model.
     #   @return [String]
     #
     # @!attribute [rw] asset_model_description
@@ -4054,6 +4180,11 @@ module Aws::IoTSiteWise
     #   those with those of type `AWS/ALARMS`.
     #   @return [Array<Types::AssetModelCompositeModel>]
     #
+    # @!attribute [rw] asset_model_composite_model_summaries
+    #   The list of the immediate child custom composite model summaries for
+    #   the asset model.
+    #   @return [Array<Types::AssetModelCompositeModelSummary>]
+    #
     # @!attribute [rw] asset_model_creation_date
     #   The date the asset model was created, in Unix epoch time.
     #   @return [Time]
@@ -4067,41 +4198,45 @@ module Aws::IoTSiteWise
     #   any error message.
     #   @return [Types::AssetModelStatus]
     #
-    # @!attribute [rw] asset_model_type
-    #   The type of asset model.
+    # @!attribute [rw] asset_model_version
+    #   The version of the asset model. See [ Asset model versions][1] in
+    #   the *IoT SiteWise User Guide*.
     #
-    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
-    #     create assets. Can't be included as a component in another asset
-    #     model.
     #
-    #   * **COMPONENT\_MODEL** – A reusable component that you can include
-    #     in the composite models of other asset models. You can't create
-    #     assets directly from this type of asset model.
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
     #   @return [String]
     #
-    # @!attribute [rw] asset_model_composite_model_summaries
-    #   The list of the immediate child custom composite model summaries for
-    #   the asset model.
-    #   @return [Array<Types::AssetModelCompositeModelSummary>]
+    # @!attribute [rw] e_tag
+    #   The entity tag (ETag) is a hash of the retrieved version of the
+    #   asset model. It's used to make concurrent updates safely to the
+    #   resource. See [Optimistic locking for asset model writes][1] in the
+    #   *IoT SiteWise User Guide*.
     #
-    # @!attribute [rw] asset_model_external_id
-    #   The external ID of the asset model, if any.
+    #   See [ Optimistic locking for asset model writes][1] in the *IoT
+    #   SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
     #   @return [String]
     #
     class DescribeAssetModelResponse < Struct.new(
       :asset_model_id,
+      :asset_model_external_id,
       :asset_model_arn,
       :asset_model_name,
+      :asset_model_type,
       :asset_model_description,
       :asset_model_properties,
       :asset_model_hierarchies,
       :asset_model_composite_models,
+      :asset_model_composite_model_summaries,
       :asset_model_creation_date,
       :asset_model_last_update_date,
       :asset_model_status,
-      :asset_model_type,
-      :asset_model_composite_model_summaries,
-      :asset_model_external_id)
+      :asset_model_version,
+      :e_tag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6204,10 +6339,22 @@ module Aws::IoTSiteWise
     #   Default: 50
     #   @return [Integer]
     #
+    # @!attribute [rw] asset_model_version
+    #   The version alias that specifies the latest or active version of the
+    #   asset model. The details are returned in the response. The default
+    #   value is `LATEST`. See [ Asset model versions][1] in the *IoT
+    #   SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+    #   @return [String]
+    #
     class ListAssetModelCompositeModelsRequest < Struct.new(
       :asset_model_id,
       :next_token,
-      :max_results)
+      :max_results,
+      :asset_model_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6261,11 +6408,23 @@ module Aws::IoTSiteWise
     #   Default: `BASE`
     #   @return [String]
     #
+    # @!attribute [rw] asset_model_version
+    #   The version alias that specifies the latest or active version of the
+    #   asset model. The details are returned in the response. The default
+    #   value is `LATEST`. See [ Asset model versions][1] in the *IoT
+    #   SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+    #   @return [String]
+    #
     class ListAssetModelPropertiesRequest < Struct.new(
       :asset_model_id,
       :next_token,
       :max_results,
-      :filter)
+      :filter,
+      :asset_model_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6287,6 +6446,18 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @!attribute [rw] asset_model_types
+    #   The type of asset model. If you don't provide an `assetModelTypes`,
+    #   all types of asset models are returned.
+    #
+    #   * **ASSET\_MODEL** – An asset model that you can use to create
+    #     assets. Can't be included as a component in another asset model.
+    #
+    #   * **COMPONENT\_MODEL** – A reusable component that you can include
+    #     in the composite models of other asset models. You can't create
+    #     assets directly from this type of asset model.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] next_token
     #   The token to be used for the next set of paginated results.
     #   @return [String]
@@ -6297,22 +6468,22 @@ module Aws::IoTSiteWise
     #   Default: 50
     #   @return [Integer]
     #
-    # @!attribute [rw] asset_model_types
-    #   The type of asset model.
+    # @!attribute [rw] asset_model_version
+    #   The version alias that specifies the latest or active version of the
+    #   asset model. The details are returned in the response. The default
+    #   value is `LATEST`. See [ Asset model versions][1] in the *IoT
+    #   SiteWise User Guide*.
     #
-    #   * **ASSET\_MODEL** – (default) An asset model that you can use to
-    #     create assets. Can't be included as a component in another asset
-    #     model.
     #
-    #   * **COMPONENT\_MODEL** – A reusable component that you can include
-    #     in the composite models of other asset models. You can't create
-    #     assets directly from this type of asset model.
-    #   @return [Array<String>]
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html
+    #   @return [String]
     #
     class ListAssetModelsRequest < Struct.new(
+      :asset_model_types,
       :next_token,
       :max_results,
-      :asset_model_types)
+      :asset_model_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6521,24 +6692,22 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] hierarchy_id
+    #   (Optional) If you don't provide a `hierarchyId`, all the immediate
+    #   assets in the `traversalDirection` will be returned.
+    #
     #   The ID of the hierarchy by which child assets are associated to the
     #   asset. (This can be either the actual ID in UUID format, or else
     #   `externalId:` followed by the external ID, if it has one. For more
     #   information, see [Referencing objects with external IDs][1] in the
-    #   *IoT SiteWise User Guide*.) To find a hierarchy ID, use the
-    #   [DescribeAsset][2] or [DescribeAssetModel][3] operations. This
-    #   parameter is required if you choose `CHILD` for
-    #   `traversalDirection`.
+    #   *IoT SiteWise User Guide*.)
     #
-    #   For more information, see [Asset hierarchies][4] in the *IoT
+    #   For more information, see [Asset hierarchies][2] in the *IoT
     #   SiteWise User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
-    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html
-    #   [3]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
-    #   [4]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+    #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #   @return [String]
     #
     # @!attribute [rw] traversal_direction
@@ -6546,8 +6715,7 @@ module Aws::IoTSiteWise
     #   options:
     #
     #   * `CHILD` – The list includes all child assets associated to the
-    #     asset. The `hierarchyId` parameter is required if you choose
-    #     `CHILD`.
+    #     asset.
     #
     #   * `PARENT` – The list includes the asset's parent asset.
     #
@@ -7192,6 +7360,30 @@ module Aws::IoTSiteWise
       :last_update_date,
       :role_arn,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The precondition in one or more of the request-header fields evaluated
+    # to `FALSE`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource on which precondition failed with this
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource on which precondition failed with this
+    #   operation.
+    #   @return [String]
+    #
+    class PreconditionFailedException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8181,6 +8373,30 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #   @return [Array<Types::AssetModelProperty>]
     #
+    # @!attribute [rw] if_match
+    #   The expected current entity tag (ETag) for the asset model’s latest
+    #   or active version (specified using `matchForVersionType`). The
+    #   update request is rejected if the tag does not match the latest or
+    #   active version's current entity tag. See [Optimistic locking for
+    #   asset model writes][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
+    #   @return [String]
+    #
+    # @!attribute [rw] if_none_match
+    #   Accepts ***** to reject the update request if an active version
+    #   (specified using `matchForVersionType` as `ACTIVE`) already exists
+    #   for the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_for_version_type
+    #   Specifies the asset model version type (`LATEST` or `ACTIVE`) used
+    #   in conjunction with `If-Match` or `If-None-Match` headers to
+    #   determine the target ETag for the update operation.
+    #   @return [String]
+    #
     class UpdateAssetModelCompositeModelRequest < Struct.new(
       :asset_model_id,
       :asset_model_composite_model_id,
@@ -8188,7 +8404,10 @@ module Aws::IoTSiteWise
       :asset_model_composite_model_description,
       :asset_model_composite_model_name,
       :client_token,
-      :asset_model_composite_model_properties)
+      :asset_model_composite_model_properties,
+      :if_match,
+      :if_none_match,
+      :match_for_version_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8223,6 +8442,17 @@ module Aws::IoTSiteWise
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_model_external_id
+    #   An external ID to assign to the asset model. The asset model must
+    #   not already have an external ID. The external ID must be unique
+    #   within your Amazon Web Services account. For more information, see
+    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
     #   @return [String]
     #
     # @!attribute [rw] asset_model_name
@@ -8292,26 +8522,42 @@ module Aws::IoTSiteWise
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] asset_model_external_id
-    #   An external ID to assign to the asset model. The asset model must
-    #   not already have an external ID. The external ID must be unique
-    #   within your Amazon Web Services account. For more information, see
-    #   [Using external IDs][1] in the *IoT SiteWise User Guide*.
+    # @!attribute [rw] if_match
+    #   The expected current entity tag (ETag) for the asset model’s latest
+    #   or active version (specified using `matchForVersionType`). The
+    #   update request is rejected if the tag does not match the latest or
+    #   active version's current entity tag. See [Optimistic locking for
+    #   asset model writes][1] in the *IoT SiteWise User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html
+    #   @return [String]
+    #
+    # @!attribute [rw] if_none_match
+    #   Accepts ***** to reject the update request if an active version
+    #   (specified using `matchForVersionType` as `ACTIVE`) already exists
+    #   for the asset model.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_for_version_type
+    #   Specifies the asset model version type (`LATEST` or `ACTIVE`) used
+    #   in conjunction with `If-Match` or `If-None-Match` headers to
+    #   determine the target ETag for the update operation.
     #   @return [String]
     #
     class UpdateAssetModelRequest < Struct.new(
       :asset_model_id,
+      :asset_model_external_id,
       :asset_model_name,
       :asset_model_description,
       :asset_model_properties,
       :asset_model_hierarchies,
       :asset_model_composite_models,
       :client_token,
-      :asset_model_external_id)
+      :if_match,
+      :if_none_match,
+      :match_for_version_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -283,6 +283,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-opsworkscm', '~> 1')
   spec.add_dependency('aws-sdk-organizations', '~> 1')
   spec.add_dependency('aws-sdk-outposts', '~> 1')
+  spec.add_dependency('aws-sdk-pcs', '~> 1')
   spec.add_dependency('aws-sdk-pi', '~> 1')
   spec.add_dependency('aws-sdk-panorama', '~> 1')
   spec.add_dependency('aws-sdk-paymentcryptography', '~> 1')

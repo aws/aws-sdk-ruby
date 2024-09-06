@@ -53,6 +53,6 @@ require_relative 'aws-sdk-cleanroomsml/customizations'
 # @!group service
 module Aws::CleanRoomsML
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

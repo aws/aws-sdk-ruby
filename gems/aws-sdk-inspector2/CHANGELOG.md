@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2024-08-22)
+------------------
+
+* Feature - Add enums for Agentless scan statuses and EC2 enablement error states
+
 1.35.0 (2024-08-16)
 ------------------
 

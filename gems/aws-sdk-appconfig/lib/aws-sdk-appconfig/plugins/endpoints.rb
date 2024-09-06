@@ -86,6 +86,8 @@ module Aws::AppConfig
             Aws::AppConfig::Endpoints::DeleteExtensionAssociation.build(context)
           when :delete_hosted_configuration_version
             Aws::AppConfig::Endpoints::DeleteHostedConfigurationVersion.build(context)
+          when :get_account_settings
+            Aws::AppConfig::Endpoints::GetAccountSettings.build(context)
           when :get_application
             Aws::AppConfig::Endpoints::GetApplication.build(context)
           when :get_configuration
@@ -130,6 +132,8 @@ module Aws::AppConfig
             Aws::AppConfig::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::AppConfig::Endpoints::UntagResource.build(context)
+          when :update_account_settings
+            Aws::AppConfig::Endpoints::UpdateAccountSettings.build(context)
           when :update_application
             Aws::AppConfig::Endpoints::UpdateApplication.build(context)
           when :update_configuration_profile

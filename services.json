@@ -656,9 +656,6 @@
   "Lambda": {
     "models": "lambda/2015-03-31"
   },
-  "LambdaPreview": {
-    "models": "lambda/2014-11-11"
-  },
   "LaunchWizard": {
     "models": "launch-wizard/2018-05-10"
   },
@@ -850,6 +847,9 @@
   },
   "Outposts": {
     "models": "outposts/2019-12-03"
+  },
+  "PCS": {
+    "models": "pcs/2023-02-10"
   },
   "PI": {
     "models": "pi/2018-02-27"

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2024-08-29)
+------------------
+
+* Feature - Increased Character Limit for Dataset Calculation Field expressions
+
+1.121.0 (2024-08-22)
+------------------
+
+* Feature - Explicit query for authors and dashboard viewing sharing for embedded users
+
 1.120.0 (2024-08-16)
 ------------------
 

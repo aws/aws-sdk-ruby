@@ -1213,7 +1213,8 @@
         "applicationId":{"shape":"ApplicationId"},
         "createdAt":{"shape":"Timestamp"},
         "updatedAt":{"shape":"Timestamp"},
-        "status":{"shape":"ApplicationStatus"}
+        "status":{"shape":"ApplicationStatus"},
+        "identityType":{"shape":"IdentityType"}
       }
     },
     "ApplicationArn":{
@@ -1399,6 +1400,21 @@
       "type":"map",
       "key":{"shape":"AuthResponseKey"},
       "value":{"shape":"AuthResponseValue"}
+    },
+    "AutoSubscriptionConfiguration":{
+      "type":"structure",
+      "required":["autoSubscribe"],
+      "members":{
+        "autoSubscribe":{"shape":"AutoSubscriptionStatus"},
+        "defaultSubscriptionType":{"shape":"SubscriptionType"}
+      }
+    },
+    "AutoSubscriptionStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "BasicAuthConfiguration":{
       "type":"structure",
@@ -1637,6 +1653,15 @@
         "failedAttachments":{"shape":"AttachmentsOutput"}
       }
     },
+    "ClientIdForOIDC":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "ClientIdsForOIDC":{
+      "type":"list",
+      "member":{"shape":"ClientIdForOIDC"}
+    },
     "ClientToken":{
       "type":"string",
       "max":100,
@@ -1723,7 +1748,10 @@
       "members":{
         "displayName":{"shape":"ApplicationName"},
         "roleArn":{"shape":"RoleArn"},
+        "identityType":{"shape":"IdentityType"},
+        "iamIdentityProviderArn":{"shape":"IamIdentityProviderArn"},
         "identityCenterInstanceArn":{"shape":"InstanceArn"},
+        "clientIdsForOIDC":{"shape":"ClientIdsForOIDC"},
         "description":{"shape":"Description"},
         "encryptionConfiguration":{"shape":"EncryptionConfiguration"},
         "tags":{"shape":"Tags"},
@@ -1928,7 +1956,8 @@
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true
-        }
+        },
+        "identityProviderConfiguration":{"shape":"IdentityProviderConfiguration"}
       }
     },
     "CreateWebExperienceResponse":{
@@ -2648,6 +2677,8 @@
         "displayName":{"shape":"ApplicationName"},
         "applicationId":{"shape":"ApplicationId"},
         "applicationArn":{"shape":"ApplicationArn"},
+        "identityType":{"shape":"IdentityType"},
+        "iamIdentityProviderArn":{"shape":"IamIdentityProviderArn"},
         "identityCenterApplicationArn":{"shape":"IdcApplicationArn"},
         "roleArn":{"shape":"RoleArn"},
         "status":{"shape":"ApplicationStatus"},
@@ -2658,7 +2689,9 @@
         "error":{"shape":"ErrorDetail"},
         "attachmentsConfiguration":{"shape":"AppliedAttachmentsConfiguration"},
         "qAppsConfiguration":{"shape":"QAppsConfiguration"},
-        "personalizationConfiguration":{"shape":"PersonalizationConfiguration"}
+        "personalizationConfiguration":{"shape":"PersonalizationConfiguration"},
+        "autoSubscriptionConfiguration":{"shape":"AutoSubscriptionConfiguration"},
+        "clientIdsForOIDC":{"shape":"ClientIdsForOIDC"}
       }
     },
     "GetChatControlsConfigurationRequest":{
@@ -2941,6 +2974,7 @@
         "welcomeMessage":{"shape":"WebExperienceWelcomeMessage"},
         "samplePromptsControlMode":{"shape":"WebExperienceSamplePromptsControlMode"},
         "roleArn":{"shape":"RoleArn"},
+        "identityProviderConfiguration":{"shape":"IdentityProviderConfiguration"},
         "authenticationConfiguration":{
           "shape":"WebExperienceAuthConfiguration",
           "deprecated":true,
@@ -3003,11 +3037,33 @@
         "roleArn":{"shape":"RoleArn"}
       }
     },
+    "IamIdentityProviderArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+"
+    },
     "IdcApplicationArn":{
       "type":"string",
       "max":1224,
       "min":10,
       "pattern":"arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}"
+    },
+    "IdentityProviderConfiguration":{
+      "type":"structure",
+      "members":{
+        "samlConfiguration":{"shape":"SamlProviderConfiguration"},
+        "openIDConnectConfiguration":{"shape":"OpenIDConnectProviderConfiguration"}
+      },
+      "union":true
+    },
+    "IdentityType":{
+      "type":"string",
+      "enum":[
+        "AWS_IAM_IDP_SAML",
+        "AWS_IAM_IDP_OIDC",
+        "AWS_IAM_IDC"
+      ]
     },
     "Index":{
       "type":"structure",
@@ -3818,6 +3874,17 @@
         "roleArn":{"shape":"RoleArn"}
       }
     },
+    "OpenIDConnectProviderConfiguration":{
+      "type":"structure",
+      "required":[
+        "secretsArn",
+        "secretsRole"
+      ],
+      "members":{
+        "secretsArn":{"shape":"SecretArn"},
+        "secretsRole":{"shape":"RoleArn"}
+      }
+    },
     "Payload":{
       "type":"string",
       "sensitive":true
@@ -4179,6 +4246,12 @@
       "max":256,
       "min":1
     },
+    "SamlAuthenticationUrl":{
+      "type":"string",
+      "max":1284,
+      "min":1,
+      "pattern":"https://.*"
+    },
     "SamlConfiguration":{
       "type":"structure",
       "required":[
@@ -4198,6 +4271,13 @@
       "max":10000000,
       "min":1000,
       "pattern":".*"
+    },
+    "SamlProviderConfiguration":{
+      "type":"structure",
+      "required":["authenticationUrl"],
+      "members":{
+        "authenticationUrl":{"shape":"SamlAuthenticationUrl"}
+      }
     },
     "SecretArn":{
       "type":"string",
@@ -4370,6 +4450,13 @@
     "SubnetIds":{
       "type":"list",
       "member":{"shape":"SubnetId"}
+    },
+    "SubscriptionType":{
+      "type":"string",
+      "enum":[
+        "Q_LITE",
+        "Q_BUSINESS"
+      ]
     },
     "SyncSchedule":{
       "type":"string",
@@ -4567,7 +4654,8 @@
         "roleArn":{"shape":"RoleArn"},
         "attachmentsConfiguration":{"shape":"AttachmentsConfiguration"},
         "qAppsConfiguration":{"shape":"QAppsConfiguration"},
-        "personalizationConfiguration":{"shape":"PersonalizationConfiguration"}
+        "personalizationConfiguration":{"shape":"PersonalizationConfiguration"},
+        "autoSubscriptionConfiguration":{"shape":"AutoSubscriptionConfiguration"}
       }
     },
     "UpdateApplicationResponse":{
@@ -4776,7 +4864,8 @@
         "title":{"shape":"WebExperienceTitle"},
         "subtitle":{"shape":"WebExperienceSubtitle"},
         "welcomeMessage":{"shape":"WebExperienceWelcomeMessage"},
-        "samplePromptsControlMode":{"shape":"WebExperienceSamplePromptsControlMode"}
+        "samplePromptsControlMode":{"shape":"WebExperienceSamplePromptsControlMode"},
+        "identityProviderConfiguration":{"shape":"IdentityProviderConfiguration"}
       }
     },
     "UpdateWebExperienceResponse":{

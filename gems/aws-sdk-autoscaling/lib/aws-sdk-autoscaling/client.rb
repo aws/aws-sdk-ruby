@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -83,6 +84,7 @@ module Aws::AutoScaling
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::AutoScaling::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::AutoScaling
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -1080,9 +1092,9 @@ module Aws::AutoScaling
     # @option params [String] :health_check_type
     #   A comma-separated value string of one or more health check types.
     #
-    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
-    #   default health check and cannot be disabled. For more information, see
-    #   [Health checks for instances in an Auto Scaling group][1] in the
+    #   The valid values are `EC2`, `EBS`, `ELB`, and `VPC_LATTICE`. `EC2` is
+    #   the default health check and cannot be disabled. For more information,
+    #   see [Health checks for instances in an Auto Scaling group][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously set.
@@ -6268,12 +6280,12 @@ module Aws::AutoScaling
 
     # Sets the health status of the specified instance.
     #
-    # For more information, see [Health checks for instances in an Auto
+    # For more information, see [Set up a custom health check for your Auto
     # Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/set-up-a-custom-health-check.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -6886,9 +6898,9 @@ module Aws::AutoScaling
     # @option params [String] :health_check_type
     #   A comma-separated value string of one or more health check types.
     #
-    #   The valid values are `EC2`, `ELB`, and `VPC_LATTICE`. `EC2` is the
-    #   default health check and cannot be disabled. For more information, see
-    #   [Health checks for instances in an Auto Scaling group][1] in the
+    #   The valid values are `EC2`, `EBS`, `ELB`, and `VPC_LATTICE`. `EC2` is
+    #   the default health check and cannot be disabled. For more information,
+    #   see [Health checks for instances in an Auto Scaling group][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Only specify `EC2` if you must clear a value that was previously set.
@@ -7188,14 +7200,19 @@ module Aws::AutoScaling
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::AutoScaling')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

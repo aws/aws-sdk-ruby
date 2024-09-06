@@ -74,6 +74,8 @@ module Aws::FIS
             Aws::FIS::Endpoints::GetExperimentTargetAccountConfiguration.build(context)
           when :get_experiment_template
             Aws::FIS::Endpoints::GetExperimentTemplate.build(context)
+          when :get_safety_lever
+            Aws::FIS::Endpoints::GetSafetyLever.build(context)
           when :get_target_account_configuration
             Aws::FIS::Endpoints::GetTargetAccountConfiguration.build(context)
           when :get_target_resource_type
@@ -104,6 +106,8 @@ module Aws::FIS
             Aws::FIS::Endpoints::UntagResource.build(context)
           when :update_experiment_template
             Aws::FIS::Endpoints::UpdateExperimentTemplate.build(context)
+          when :update_safety_lever_state
+            Aws::FIS::Endpoints::UpdateSafetyLeverState.build(context)
           when :update_target_account_configuration
             Aws::FIS::Endpoints::UpdateTargetAccountConfiguration.build(context)
           end

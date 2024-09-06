@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.259.0 (2024-09-05)
+------------------
+
+* Feature - Amazon SageMaker now supports idle shutdown of JupyterLab and CodeEditor applications on SageMaker Studio.
+
+1.258.0 (2024-09-03)
+------------------
+
+* Feature - Amazon SageMaker now supports automatic mounting of a user's home folder in the Amazon Elastic File System (EFS) associated with the SageMaker Studio domain to their Studio Spaces to enable users to share data between their own private spaces.
+
 1.257.0 (2024-08-16)
 ------------------
 

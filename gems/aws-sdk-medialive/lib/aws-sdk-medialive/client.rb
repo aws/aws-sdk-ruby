@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::MediaLive
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::MediaLive::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::MediaLive
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -1526,6 +1538,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -1566,6 +1579,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -2688,6 +2702,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -2728,6 +2743,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -3709,6 +3725,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -3749,6 +3766,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -5882,6 +5900,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -5922,6 +5941,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -6710,6 +6730,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -6750,6 +6771,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -7566,6 +7588,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -7606,6 +7629,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -8302,6 +8326,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -8342,6 +8367,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -9560,6 +9586,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.alternative_transfer_function #=> String, one of "INSERT", "OMIT"
@@ -9600,6 +9627,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.tile_width #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.treeblock_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.min_qp #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "AUTO", "HIGH", "LOW", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.mpeg_2_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
@@ -11282,14 +11310,19 @@ module Aws::MediaLive
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::MediaLive')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

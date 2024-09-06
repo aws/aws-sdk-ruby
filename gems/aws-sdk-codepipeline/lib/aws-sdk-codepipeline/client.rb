@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -83,6 +84,7 @@ module Aws::CodePipeline
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::CodePipeline::Plugins::Endpoints)
@@ -336,6 +338,16 @@ module Aws::CodePipeline
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -2220,6 +2232,10 @@ module Aws::CodePipeline
     # for this account. The output lists all webhooks and includes the
     # webhook URL and ARN and the configuration for each webhook.
     #
+    # <note markdown="1"> If a secret token was provided, it will be redacted in the response.
+    #
+    #  </note>
+    #
     # @option params [String] :next_token
     #   The token that was returned from the previous ListWebhooks call, which
     #   can be used to return the next set of webhooks in the list.
@@ -2739,6 +2755,19 @@ module Aws::CodePipeline
     # webhook. RegisterWebhookWithThirdParty and
     # DeregisterWebhookWithThirdParty APIs can be used to automatically
     # configure supported third parties to call the generated webhook URL.
+    #
+    # When creating CodePipeline webhooks, do not use your own credentials
+    # or reuse the same secret token across multiple webhooks. For optimal
+    # security, generate a unique secret token for each webhook you create.
+    # The secret token is an arbitrary string that you provide, which GitHub
+    # uses to compute and sign the webhook payloads sent to CodePipeline,
+    # for protecting the integrity and authenticity of the webhook payloads.
+    # Using your own credentials or reusing the same token across multiple
+    # webhooks can lead to security vulnerabilities.
+    #
+    # <note markdown="1"> If a secret token was provided, it will be redacted in the response.
+    #
+    #  </note>
     #
     # @option params [required, Types::WebhookDefinition] :webhook
     #   The detail provided in an input file to create the webhook, such as
@@ -3513,14 +3542,19 @@ module Aws::CodePipeline
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::CodePipeline')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

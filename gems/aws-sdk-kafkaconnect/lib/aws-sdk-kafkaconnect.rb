@@ -52,6 +52,6 @@ require_relative 'aws-sdk-kafkaconnect/customizations'
 # @!group service
 module Aws::KafkaConnect
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

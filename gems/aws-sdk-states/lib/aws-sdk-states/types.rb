@@ -4632,11 +4632,29 @@ module Aws::States
     #   `STANDARD`.
     #   @return [String]
     #
+    # @!attribute [rw] severity
+    #   Minimum level of diagnostics to return. `ERROR` returns only `ERROR`
+    #   diagnostics, whereas `WARNING` returns both `WARNING` and `ERROR`
+    #   diagnostics. The default is `ERROR`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of diagnostics that are returned per call. The
+    #   default and maximum value is 100. Setting the value to 0 will also
+    #   use the default of 100.
+    #
+    #   If the number of diagnostics returned in the response exceeds
+    #   `maxResults`, the value of the `truncated` field in the response
+    #   will be set to `true`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionInput AWS API Documentation
     #
     class ValidateStateMachineDefinitionInput < Struct.new(
       :definition,
-      :type)
+      :type,
+      :severity,
+      :max_results)
       SENSITIVE = [:definition]
       include Aws::Structure
     end
@@ -4652,11 +4670,18 @@ module Aws::States
     #   to help you troubleshoot.
     #   @return [Array<Types::ValidateStateMachineDefinitionDiagnostic>]
     #
+    # @!attribute [rw] truncated
+    #   The result value will be `true` if the number of diagnostics found
+    #   in the workflow definition exceeds `maxResults`. When all
+    #   diagnostics results are returned, the value will be `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionOutput AWS API Documentation
     #
     class ValidateStateMachineDefinitionOutput < Struct.new(
       :result,
-      :diagnostics)
+      :diagnostics,
+      :truncated)
       SENSITIVE = []
       include Aws::Structure
     end

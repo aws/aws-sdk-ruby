@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Default to using `CRC32` checksum validation for S3 uploads and downloads.
 
+1.160.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.159.0 (2024-08-20)
 ------------------
 

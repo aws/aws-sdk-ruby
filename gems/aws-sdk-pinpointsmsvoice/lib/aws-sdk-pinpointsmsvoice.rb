@@ -52,6 +52,6 @@ require_relative 'aws-sdk-pinpointsmsvoice/customizations'
 # @!group service
 module Aws::PinpointSMSVoice
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end

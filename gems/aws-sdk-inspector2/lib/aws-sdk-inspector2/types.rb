@@ -12,6 +12,9 @@ module Aws::Inspector2
 
     # You do not have sufficient access to perform this action.
     #
+    # For `Enable`, you receive this error if you attempt to use a feature
+    # in an unsupported Amazon Web Services Region.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -84,6 +87,14 @@ module Aws::Inspector2
     #   The Amazon Web Services account ID.
     #   @return [String]
     #
+    # @!attribute [rw] exploit_available_count
+    #   The number of findings that have an exploit available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fix_available_count
+    #   Details about the number of fixes.
+    #   @return [Integer]
+    #
     # @!attribute [rw] severity_counts
     #   The number of findings by severity.
     #   @return [Types::SeverityCounts]
@@ -92,6 +103,8 @@ module Aws::Inspector2
     #
     class AccountAggregationResponse < Struct.new(
       :account_id,
+      :exploit_available_count,
+      :fix_available_count,
       :severity_counts)
       SENSITIVE = []
       include Aws::Structure
@@ -3764,6 +3777,14 @@ module Aws::Inspector2
     #   findings.
     #   @return [String]
     #
+    # @!attribute [rw] exploit_available_count
+    #   The number of findings that have an exploit available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fix_available_count
+    #   Details about the number of fixes.
+    #   @return [Integer]
+    #
     # @!attribute [rw] severity_counts
     #   The value to sort results by.
     #   @return [Types::SeverityCounts]
@@ -3772,6 +3793,8 @@ module Aws::Inspector2
     #
     class FindingTypeAggregationResponse < Struct.new(
       :account_id,
+      :exploit_available_count,
+      :fix_available_count,
       :severity_counts)
       SENSITIVE = []
       include Aws::Structure

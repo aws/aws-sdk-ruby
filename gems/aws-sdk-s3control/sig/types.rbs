@@ -164,6 +164,8 @@ module Aws::S3Control
       attr_accessor access_grants_instance_id: ::String
       attr_accessor access_grants_instance_arn: ::String
       attr_accessor identity_center_arn: ::String
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor identity_center_application_arn: ::String
       SENSITIVE: []
     end
 
@@ -547,6 +549,8 @@ module Aws::S3Control
       attr_accessor access_grants_instance_arn: ::String
       attr_accessor access_grants_instance_id: ::String
       attr_accessor identity_center_arn: ::String
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor identity_center_application_arn: ::String
       attr_accessor created_at: ::Time
       SENSITIVE: []
     end
@@ -1067,6 +1071,8 @@ module Aws::S3Control
       attr_accessor access_grants_instance_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor identity_center_arn: ::String
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor identity_center_application_arn: ::String
       SENSITIVE: []
     end
 
@@ -1148,6 +1154,28 @@ module Aws::S3Control
     class ListAccessPointsResult
       attr_accessor access_point_list: ::Array[Types::AccessPoint]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCallerAccessGrantsEntry
+      attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
+      attr_accessor grant_scope: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListCallerAccessGrantsRequest
+      attr_accessor account_id: ::String
+      attr_accessor grant_scope: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor allowed_by_application: bool
+      SENSITIVE: []
+    end
+
+    class ListCallerAccessGrantsResult
+      attr_accessor next_token: ::String
+      attr_accessor caller_access_grants_list: ::Array[Types::ListCallerAccessGrantsEntry]
       SENSITIVE: []
     end
 

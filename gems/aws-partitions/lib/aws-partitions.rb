@@ -510,6 +510,7 @@ module Aws
             'OpsWorksCM' => 'opsworks-cm',
             'Organizations' => 'organizations',
             'Outposts' => 'outposts',
+            'PCS' => 'pcs',
             'PI' => 'pi',
             'Panorama' => 'panorama',
             'PaymentCryptography' => 'controlplane.payment-cryptography',

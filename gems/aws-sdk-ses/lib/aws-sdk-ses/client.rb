@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -83,6 +84,7 @@ module Aws::SES
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::SES::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::SES
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -808,6 +820,7 @@ module Aws::SES
     #             bucket_name: "S3BucketName", # required
     #             object_key_prefix: "S3KeyPrefix",
     #             kms_key_arn: "AmazonResourceName",
+    #             iam_role_arn: "IAMRoleARN",
     #           },
     #           bounce_action: {
     #             topic_arn: "AmazonResourceName",
@@ -1418,6 +1431,7 @@ module Aws::SES
     #   resp.rules[0].actions[0].s3_action.bucket_name #=> String
     #   resp.rules[0].actions[0].s3_action.object_key_prefix #=> String
     #   resp.rules[0].actions[0].s3_action.kms_key_arn #=> String
+    #   resp.rules[0].actions[0].s3_action.iam_role_arn #=> String
     #   resp.rules[0].actions[0].bounce_action.topic_arn #=> String
     #   resp.rules[0].actions[0].bounce_action.smtp_reply_code #=> String
     #   resp.rules[0].actions[0].bounce_action.status_code #=> String
@@ -1574,6 +1588,7 @@ module Aws::SES
     #   resp.rule.actions[0].s3_action.bucket_name #=> String
     #   resp.rule.actions[0].s3_action.object_key_prefix #=> String
     #   resp.rule.actions[0].s3_action.kms_key_arn #=> String
+    #   resp.rule.actions[0].s3_action.iam_role_arn #=> String
     #   resp.rule.actions[0].bounce_action.topic_arn #=> String
     #   resp.rule.actions[0].bounce_action.smtp_reply_code #=> String
     #   resp.rule.actions[0].bounce_action.status_code #=> String
@@ -1674,6 +1689,7 @@ module Aws::SES
     #   resp.rules[0].actions[0].s3_action.bucket_name #=> String
     #   resp.rules[0].actions[0].s3_action.object_key_prefix #=> String
     #   resp.rules[0].actions[0].s3_action.kms_key_arn #=> String
+    #   resp.rules[0].actions[0].s3_action.iam_role_arn #=> String
     #   resp.rules[0].actions[0].bounce_action.topic_arn #=> String
     #   resp.rules[0].actions[0].bounce_action.smtp_reply_code #=> String
     #   resp.rules[0].actions[0].bounce_action.status_code #=> String
@@ -3159,7 +3175,7 @@ module Aws::SES
     # @option params [String] :template_arn
     #   The ARN of the template to use when sending this email.
     #
-    # @option params [String] :default_template_data
+    # @option params [required, String] :default_template_data
     #   A list of replacement values to apply to the template when replacement
     #   data is not specified in a Destination object. These values act as a
     #   default or fallback option when no other data is available.
@@ -3194,7 +3210,7 @@ module Aws::SES
     #     ],
     #     template: "TemplateName", # required
     #     template_arn: "AmazonResourceName",
-    #     default_template_data: "TemplateData",
+    #     default_template_data: "TemplateData", # required
     #     destinations: [ # required
     #       {
     #         destination: { # required
@@ -4855,6 +4871,7 @@ module Aws::SES
     #             bucket_name: "S3BucketName", # required
     #             object_key_prefix: "S3KeyPrefix",
     #             kms_key_arn: "AmazonResourceName",
+    #             iam_role_arn: "IAMRoleARN",
     #           },
     #           bounce_action: {
     #             topic_arn: "AmazonResourceName",
@@ -5144,14 +5161,19 @@ module Aws::SES
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::SES')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

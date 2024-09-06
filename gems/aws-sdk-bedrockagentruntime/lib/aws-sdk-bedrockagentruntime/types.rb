@@ -119,6 +119,10 @@ module Aws::BedrockAgentRuntime
     #   The action group that the API operation belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] action_invocation_type
+    #   Contains information about the API operation to invoke.
+    #   @return [String]
+    #
     # @!attribute [rw] api_path
     #   The path to the API operation.
     #   @return [String]
@@ -141,6 +145,7 @@ module Aws::BedrockAgentRuntime
     #
     class ApiInvocationInput < Struct.new(
       :action_group,
+      :action_invocation_type,
       :api_path,
       :http_method,
       :parameters,
@@ -231,6 +236,11 @@ module Aws::BedrockAgentRuntime
     #   The path to the API operation.
     #   @return [String]
     #
+    # @!attribute [rw] confirmation_state
+    #   Controls the API operations or functions to invoke based on the user
+    #   confirmation.
+    #   @return [String]
+    #
     # @!attribute [rw] http_method
     #   The HTTP method for the API operation.
     #   @return [String]
@@ -259,6 +269,7 @@ module Aws::BedrockAgentRuntime
     class ApiResult < Struct.new(
       :action_group,
       :api_path,
+      :confirmation_state,
       :http_method,
       :http_status_code,
       :response_body,
@@ -332,9 +343,8 @@ module Aws::BedrockAgentRuntime
     # attributes.
     #
     # @!attribute [rw] data
-    #   The byte value of the file to attach, encoded as Base-64 string. The
-    #   maximum size of all files that is attached is 10MB. You can attach a
-    #   maximum of 5 files.
+    #   The raw bytes of the file to attach. The maximum size of all files
+    #   that is attached is 10MB. You can attach a maximum of 5 files.
     #   @return [String]
     #
     # @!attribute [rw] media_type
@@ -889,6 +899,10 @@ module Aws::BedrockAgentRuntime
     #   The action group that the function belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] action_invocation_type
+    #   Contains information about the function to invoke,
+    #   @return [String]
+    #
     # @!attribute [rw] function
     #   The name of the function.
     #   @return [String]
@@ -901,6 +915,7 @@ module Aws::BedrockAgentRuntime
     #
     class FunctionInvocationInput < Struct.new(
       :action_group,
+      :action_invocation_type,
       :function,
       :parameters)
       SENSITIVE = []
@@ -959,6 +974,11 @@ module Aws::BedrockAgentRuntime
     #   The action group that the function belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] confirmation_state
+    #   Contains the user confirmation information about the function that
+    #   was called.
+    #   @return [String]
+    #
     # @!attribute [rw] function
     #   The name of the function that was called.
     #   @return [String]
@@ -982,6 +1002,7 @@ module Aws::BedrockAgentRuntime
     #
     class FunctionResult < Struct.new(
       :action_group,
+      :confirmation_state,
       :function,
       :response_body,
       :response_state)

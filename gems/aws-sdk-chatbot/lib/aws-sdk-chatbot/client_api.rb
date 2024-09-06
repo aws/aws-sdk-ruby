@@ -70,6 +70,7 @@ module Aws::Chatbot
     DescribeSlackWorkspacesException = Shapes::StructureShape.new(name: 'DescribeSlackWorkspacesException')
     DescribeSlackWorkspacesRequest = Shapes::StructureShape.new(name: 'DescribeSlackWorkspacesRequest')
     DescribeSlackWorkspacesResult = Shapes::StructureShape.new(name: 'DescribeSlackWorkspacesResult')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GetAccountPreferencesException = Shapes::StructureShape.new(name: 'GetAccountPreferencesException')
     GetAccountPreferencesRequest = Shapes::StructureShape.new(name: 'GetAccountPreferencesRequest')
     GetAccountPreferencesResult = Shapes::StructureShape.new(name: 'GetAccountPreferencesResult')
@@ -109,7 +110,6 @@ module Aws::Chatbot
     SlackWorkspace = Shapes::StructureShape.new(name: 'SlackWorkspace')
     SlackWorkspacesList = Shapes::ListShape.new(name: 'SlackWorkspacesList')
     SnsTopicArnList = Shapes::ListShape.new(name: 'SnsTopicArnList')
-    String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -159,13 +159,15 @@ module Aws::Chatbot
 
     ConfiguredTeam.add_member(:tenant_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TenantId"))
     ConfiguredTeam.add_member(:team_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TeamId"))
-    ConfiguredTeam.add_member(:team_name, Shapes::ShapeRef.new(shape: UUID, location_name: "TeamName", metadata: {"box"=>true}))
+    ConfiguredTeam.add_member(:team_name, Shapes::ShapeRef.new(shape: UUID, location_name: "TeamName"))
     ConfiguredTeam.struct_class = Types::ConfiguredTeam
 
     ConfiguredTeamsList.member = Shapes::ShapeRef.new(shape: ConfiguredTeam)
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateChimeWebhookConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     CreateChimeWebhookConfigurationException.struct_class = Types::CreateChimeWebhookConfigurationException
 
     CreateChimeWebhookConfigurationRequest.add_member(:webhook_description, Shapes::ShapeRef.new(shape: ChimeWebhookDescription, required: true, location_name: "WebhookDescription"))
@@ -180,6 +182,7 @@ module Aws::Chatbot
     CreateChimeWebhookConfigurationResult.add_member(:webhook_configuration, Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration, location_name: "WebhookConfiguration"))
     CreateChimeWebhookConfigurationResult.struct_class = Types::CreateChimeWebhookConfigurationResult
 
+    CreateSlackChannelConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     CreateSlackChannelConfigurationException.struct_class = Types::CreateSlackChannelConfigurationException
 
     CreateSlackChannelConfigurationRequest.add_member(:slack_team_id, Shapes::ShapeRef.new(shape: SlackTeamId, required: true, location_name: "SlackTeamId"))
@@ -197,6 +200,7 @@ module Aws::Chatbot
     CreateSlackChannelConfigurationResult.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: SlackChannelConfiguration, location_name: "ChannelConfiguration"))
     CreateSlackChannelConfigurationResult.struct_class = Types::CreateSlackChannelConfigurationResult
 
+    CreateTeamsChannelConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     CreateTeamsChannelConfigurationException.struct_class = Types::CreateTeamsChannelConfigurationException
 
     CreateTeamsChannelConfigurationRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: TeamsChannelId, required: true, location_name: "ChannelId"))
@@ -216,6 +220,7 @@ module Aws::Chatbot
     CreateTeamsChannelConfigurationResult.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: TeamsChannelConfiguration, location_name: "ChannelConfiguration"))
     CreateTeamsChannelConfigurationResult.struct_class = Types::CreateTeamsChannelConfigurationResult
 
+    DeleteChimeWebhookConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeleteChimeWebhookConfigurationException.struct_class = Types::DeleteChimeWebhookConfigurationException
 
     DeleteChimeWebhookConfigurationRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -223,6 +228,7 @@ module Aws::Chatbot
 
     DeleteChimeWebhookConfigurationResult.struct_class = Types::DeleteChimeWebhookConfigurationResult
 
+    DeleteMicrosoftTeamsUserIdentityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeleteMicrosoftTeamsUserIdentityException.struct_class = Types::DeleteMicrosoftTeamsUserIdentityException
 
     DeleteMicrosoftTeamsUserIdentityRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -231,6 +237,7 @@ module Aws::Chatbot
 
     DeleteMicrosoftTeamsUserIdentityResult.struct_class = Types::DeleteMicrosoftTeamsUserIdentityResult
 
+    DeleteSlackChannelConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeleteSlackChannelConfigurationException.struct_class = Types::DeleteSlackChannelConfigurationException
 
     DeleteSlackChannelConfigurationRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -238,6 +245,7 @@ module Aws::Chatbot
 
     DeleteSlackChannelConfigurationResult.struct_class = Types::DeleteSlackChannelConfigurationResult
 
+    DeleteSlackUserIdentityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeleteSlackUserIdentityException.struct_class = Types::DeleteSlackUserIdentityException
 
     DeleteSlackUserIdentityRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -247,6 +255,7 @@ module Aws::Chatbot
 
     DeleteSlackUserIdentityResult.struct_class = Types::DeleteSlackUserIdentityResult
 
+    DeleteSlackWorkspaceAuthorizationFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeleteSlackWorkspaceAuthorizationFault.struct_class = Types::DeleteSlackWorkspaceAuthorizationFault
 
     DeleteSlackWorkspaceAuthorizationRequest.add_member(:slack_team_id, Shapes::ShapeRef.new(shape: SlackTeamId, required: true, location_name: "SlackTeamId"))
@@ -254,6 +263,7 @@ module Aws::Chatbot
 
     DeleteSlackWorkspaceAuthorizationResult.struct_class = Types::DeleteSlackWorkspaceAuthorizationResult
 
+    DeleteTeamsChannelConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeleteTeamsChannelConfigurationException.struct_class = Types::DeleteTeamsChannelConfigurationException
 
     DeleteTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -261,6 +271,7 @@ module Aws::Chatbot
 
     DeleteTeamsChannelConfigurationResult.struct_class = Types::DeleteTeamsChannelConfigurationResult
 
+    DeleteTeamsConfiguredTeamException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DeleteTeamsConfiguredTeamException.struct_class = Types::DeleteTeamsConfiguredTeamException
 
     DeleteTeamsConfiguredTeamRequest.add_member(:team_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TeamId"))
@@ -268,28 +279,31 @@ module Aws::Chatbot
 
     DeleteTeamsConfiguredTeamResult.struct_class = Types::DeleteTeamsConfiguredTeamResult
 
+    DescribeChimeWebhookConfigurationsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DescribeChimeWebhookConfigurationsException.struct_class = Types::DescribeChimeWebhookConfigurationsException
 
-    DescribeChimeWebhookConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    DescribeChimeWebhookConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken", metadata: {"box"=>true}))
-    DescribeChimeWebhookConfigurationsRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", metadata: {"box"=>true}))
+    DescribeChimeWebhookConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeChimeWebhookConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeChimeWebhookConfigurationsRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
     DescribeChimeWebhookConfigurationsRequest.struct_class = Types::DescribeChimeWebhookConfigurationsRequest
 
     DescribeChimeWebhookConfigurationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeChimeWebhookConfigurationsResult.add_member(:webhook_configurations, Shapes::ShapeRef.new(shape: ChimeWebhookConfigurationList, location_name: "WebhookConfigurations"))
     DescribeChimeWebhookConfigurationsResult.struct_class = Types::DescribeChimeWebhookConfigurationsResult
 
+    DescribeSlackChannelConfigurationsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DescribeSlackChannelConfigurationsException.struct_class = Types::DescribeSlackChannelConfigurationsException
 
-    DescribeSlackChannelConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    DescribeSlackChannelConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken", metadata: {"box"=>true}))
-    DescribeSlackChannelConfigurationsRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn", metadata: {"box"=>true}))
+    DescribeSlackChannelConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSlackChannelConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeSlackChannelConfigurationsRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
     DescribeSlackChannelConfigurationsRequest.struct_class = Types::DescribeSlackChannelConfigurationsRequest
 
     DescribeSlackChannelConfigurationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeSlackChannelConfigurationsResult.add_member(:slack_channel_configurations, Shapes::ShapeRef.new(shape: SlackChannelConfigurationList, location_name: "SlackChannelConfigurations"))
     DescribeSlackChannelConfigurationsResult.struct_class = Types::DescribeSlackChannelConfigurationsResult
 
+    DescribeSlackUserIdentitiesException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DescribeSlackUserIdentitiesException.struct_class = Types::DescribeSlackUserIdentitiesException
 
     DescribeSlackUserIdentitiesRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
@@ -301,6 +315,7 @@ module Aws::Chatbot
     DescribeSlackUserIdentitiesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeSlackUserIdentitiesResult.struct_class = Types::DescribeSlackUserIdentitiesResult
 
+    DescribeSlackWorkspacesException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DescribeSlackWorkspacesException.struct_class = Types::DescribeSlackWorkspacesException
 
     DescribeSlackWorkspacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -311,6 +326,7 @@ module Aws::Chatbot
     DescribeSlackWorkspacesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeSlackWorkspacesResult.struct_class = Types::DescribeSlackWorkspacesResult
 
+    GetAccountPreferencesException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     GetAccountPreferencesException.struct_class = Types::GetAccountPreferencesException
 
     GetAccountPreferencesRequest.struct_class = Types::GetAccountPreferencesRequest
@@ -318,6 +334,7 @@ module Aws::Chatbot
     GetAccountPreferencesResult.add_member(:account_preferences, Shapes::ShapeRef.new(shape: AccountPreferences, location_name: "AccountPreferences"))
     GetAccountPreferencesResult.struct_class = Types::GetAccountPreferencesResult
 
+    GetTeamsChannelConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     GetTeamsChannelConfigurationException.struct_class = Types::GetTeamsChannelConfigurationException
 
     GetTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -328,14 +345,19 @@ module Aws::Chatbot
 
     GuardrailPolicyArnList.member = Shapes::ShapeRef.new(shape: GuardrailPolicyArn)
 
+    InternalServiceError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServiceError.struct_class = Types::InternalServiceError
 
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListMicrosoftTeamsConfiguredTeamsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ListMicrosoftTeamsConfiguredTeamsException.struct_class = Types::ListMicrosoftTeamsConfiguredTeamsException
 
     ListMicrosoftTeamsConfiguredTeamsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -346,6 +368,7 @@ module Aws::Chatbot
     ListMicrosoftTeamsConfiguredTeamsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListMicrosoftTeamsConfiguredTeamsResult.struct_class = Types::ListMicrosoftTeamsConfiguredTeamsResult
 
+    ListMicrosoftTeamsUserIdentitiesException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ListMicrosoftTeamsUserIdentitiesException.struct_class = Types::ListMicrosoftTeamsUserIdentitiesException
 
     ListMicrosoftTeamsUserIdentitiesRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, location_name: "ChatConfigurationArn"))
@@ -363,19 +386,22 @@ module Aws::Chatbot
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListTeamsChannelConfigurationsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ListTeamsChannelConfigurationsException.struct_class = Types::ListTeamsChannelConfigurationsException
 
-    ListTeamsChannelConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
-    ListTeamsChannelConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken", metadata: {"box"=>true}))
-    ListTeamsChannelConfigurationsRequest.add_member(:team_id, Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId", metadata: {"box"=>true}))
+    ListTeamsChannelConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListTeamsChannelConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListTeamsChannelConfigurationsRequest.add_member(:team_id, Shapes::ShapeRef.new(shape: UUID, location_name: "TeamId"))
     ListTeamsChannelConfigurationsRequest.struct_class = Types::ListTeamsChannelConfigurationsRequest
 
     ListTeamsChannelConfigurationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListTeamsChannelConfigurationsResult.add_member(:team_channel_configurations, Shapes::ShapeRef.new(shape: TeamChannelConfigurationsList, location_name: "TeamChannelConfigurations"))
     ListTeamsChannelConfigurationsResult.struct_class = Types::ListTeamsChannelConfigurationsResult
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SlackChannelConfiguration.add_member(:slack_team_name, Shapes::ShapeRef.new(shape: SlackTeamName, required: true, location_name: "SlackTeamName"))
@@ -384,7 +410,7 @@ module Aws::Chatbot
     SlackChannelConfiguration.add_member(:slack_channel_name, Shapes::ShapeRef.new(shape: SlackChannelDisplayName, required: true, location_name: "SlackChannelName"))
     SlackChannelConfiguration.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
     SlackChannelConfiguration.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "IamRoleArn"))
-    SlackChannelConfiguration.add_member(:sns_topic_arns, Shapes::ShapeRef.new(shape: SnsTopicArnList, required: true, location_name: "SnsTopicArns", metadata: {"box"=>true}))
+    SlackChannelConfiguration.add_member(:sns_topic_arns, Shapes::ShapeRef.new(shape: SnsTopicArnList, required: true, location_name: "SnsTopicArns"))
     SlackChannelConfiguration.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName"))
     SlackChannelConfiguration.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
     SlackChannelConfiguration.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
@@ -432,11 +458,11 @@ module Aws::Chatbot
     TeamsChannelConfiguration.add_member(:channel_id, Shapes::ShapeRef.new(shape: TeamsChannelId, required: true, location_name: "ChannelId"))
     TeamsChannelConfiguration.add_member(:channel_name, Shapes::ShapeRef.new(shape: TeamsChannelName, location_name: "ChannelName"))
     TeamsChannelConfiguration.add_member(:team_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TeamId"))
-    TeamsChannelConfiguration.add_member(:team_name, Shapes::ShapeRef.new(shape: String, location_name: "TeamName"))
+    TeamsChannelConfiguration.add_member(:team_name, Shapes::ShapeRef.new(shape: TeamName, location_name: "TeamName"))
     TeamsChannelConfiguration.add_member(:tenant_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "TenantId"))
     TeamsChannelConfiguration.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
     TeamsChannelConfiguration.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "IamRoleArn"))
-    TeamsChannelConfiguration.add_member(:sns_topic_arns, Shapes::ShapeRef.new(shape: SnsTopicArnList, required: true, location_name: "SnsTopicArns", metadata: {"box"=>true}))
+    TeamsChannelConfiguration.add_member(:sns_topic_arns, Shapes::ShapeRef.new(shape: SnsTopicArnList, required: true, location_name: "SnsTopicArns"))
     TeamsChannelConfiguration.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "ConfigurationName"))
     TeamsChannelConfiguration.add_member(:logging_level, Shapes::ShapeRef.new(shape: CustomerCwLogLevel, location_name: "LoggingLevel"))
     TeamsChannelConfiguration.add_member(:guardrail_policy_arns, Shapes::ShapeRef.new(shape: GuardrailPolicyArnList, location_name: "GuardrailPolicyArns"))
@@ -455,6 +481,7 @@ module Aws::Chatbot
     TeamsUserIdentity.add_member(:teams_tenant_id, Shapes::ShapeRef.new(shape: UUID, location_name: "TeamsTenantId"))
     TeamsUserIdentity.struct_class = Types::TeamsUserIdentity
 
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
@@ -463,6 +490,7 @@ module Aws::Chatbot
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateAccountPreferencesException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UpdateAccountPreferencesException.struct_class = Types::UpdateAccountPreferencesException
 
     UpdateAccountPreferencesRequest.add_member(:user_authorization_required, Shapes::ShapeRef.new(shape: BooleanAccountPreference, location_name: "UserAuthorizationRequired"))
@@ -472,6 +500,7 @@ module Aws::Chatbot
     UpdateAccountPreferencesResult.add_member(:account_preferences, Shapes::ShapeRef.new(shape: AccountPreferences, location_name: "AccountPreferences"))
     UpdateAccountPreferencesResult.struct_class = Types::UpdateAccountPreferencesResult
 
+    UpdateChimeWebhookConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UpdateChimeWebhookConfigurationException.struct_class = Types::UpdateChimeWebhookConfigurationException
 
     UpdateChimeWebhookConfigurationRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -485,6 +514,7 @@ module Aws::Chatbot
     UpdateChimeWebhookConfigurationResult.add_member(:webhook_configuration, Shapes::ShapeRef.new(shape: ChimeWebhookConfiguration, location_name: "WebhookConfiguration"))
     UpdateChimeWebhookConfigurationResult.struct_class = Types::UpdateChimeWebhookConfigurationResult
 
+    UpdateSlackChannelConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UpdateSlackChannelConfigurationException.struct_class = Types::UpdateSlackChannelConfigurationException
 
     UpdateSlackChannelConfigurationRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -500,6 +530,7 @@ module Aws::Chatbot
     UpdateSlackChannelConfigurationResult.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: SlackChannelConfiguration, location_name: "ChannelConfiguration"))
     UpdateSlackChannelConfigurationResult.struct_class = Types::UpdateSlackChannelConfigurationResult
 
+    UpdateTeamsChannelConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UpdateTeamsChannelConfigurationException.struct_class = Types::UpdateTeamsChannelConfigurationException
 
     UpdateTeamsChannelConfigurationRequest.add_member(:chat_configuration_arn, Shapes::ShapeRef.new(shape: ChatConfigurationArn, required: true, location_name: "ChatConfigurationArn"))
@@ -525,12 +556,12 @@ module Aws::Chatbot
         "apiVersion" => "2017-10-11",
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "chatbot",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Chatbot",
         "serviceId" => "chatbot",
         "signatureVersion" => "v4",
+        "signingName" => "chatbot",
         "uid" => "chatbot-2017-10-11",
       }
 
@@ -541,10 +572,10 @@ module Aws::Chatbot
         o.input = Shapes::ShapeRef.new(shape: CreateChimeWebhookConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChimeWebhookConfigurationResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: CreateChimeWebhookConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CreateChimeWebhookConfigurationException)
       end)
 
       api.add_operation(:create_microsoft_teams_channel_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -554,10 +585,10 @@ module Aws::Chatbot
         o.input = Shapes::ShapeRef.new(shape: CreateTeamsChannelConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTeamsChannelConfigurationResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: CreateTeamsChannelConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CreateTeamsChannelConfigurationException)
       end)
 
       api.add_operation(:create_slack_channel_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -567,10 +598,10 @@ module Aws::Chatbot
         o.input = Shapes::ShapeRef.new(shape: CreateSlackChannelConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSlackChannelConfigurationResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: CreateSlackChannelConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CreateSlackChannelConfigurationException)
       end)
 
       api.add_operation(:delete_chime_webhook_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -579,9 +610,9 @@ module Aws::Chatbot
         o.http_request_uri = "/delete-chime-webhook-configuration"
         o.input = Shapes::ShapeRef.new(shape: DeleteChimeWebhookConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteChimeWebhookConfigurationResult)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteChimeWebhookConfigurationException)
       end)
 
@@ -591,9 +622,9 @@ module Aws::Chatbot
         o.http_request_uri = "/delete-ms-teams-channel-configuration"
         o.input = Shapes::ShapeRef.new(shape: DeleteTeamsChannelConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTeamsChannelConfigurationResult)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteTeamsChannelConfigurationException)
       end)
 
@@ -624,10 +655,10 @@ module Aws::Chatbot
         o.http_request_uri = "/delete-slack-channel-configuration"
         o.input = Shapes::ShapeRef.new(shape: DeleteSlackChannelConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSlackChannelConfigurationResult)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteSlackChannelConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_slack_user_identity, Seahorse::Model::Operation.new.tap do |o|
@@ -637,8 +668,8 @@ module Aws::Chatbot
         o.input = Shapes::ShapeRef.new(shape: DeleteSlackUserIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteSlackUserIdentityResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteSlackUserIdentityException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_slack_workspace_authorization, Seahorse::Model::Operation.new.tap do |o|
@@ -657,9 +688,9 @@ module Aws::Chatbot
         o.http_request_uri = "/describe-chime-webhook-configurations"
         o.input = Shapes::ShapeRef.new(shape: DescribeChimeWebhookConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeChimeWebhookConfigurationsResult)
-        o.errors << Shapes::ShapeRef.new(shape: DescribeChimeWebhookConfigurationsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: DescribeChimeWebhookConfigurationsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -674,9 +705,9 @@ module Aws::Chatbot
         o.http_request_uri = "/describe-slack-channel-configurations"
         o.input = Shapes::ShapeRef.new(shape: DescribeSlackChannelConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSlackChannelConfigurationsResult)
-        o.errors << Shapes::ShapeRef.new(shape: DescribeSlackChannelConfigurationsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: DescribeSlackChannelConfigurationsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -708,9 +739,9 @@ module Aws::Chatbot
         o.http_request_uri = "/describe-slack-workspaces"
         o.input = Shapes::ShapeRef.new(shape: DescribeSlackWorkspacesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSlackWorkspacesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DescribeSlackWorkspacesException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -725,8 +756,8 @@ module Aws::Chatbot
         o.http_request_uri = "/get-account-preferences"
         o.input = Shapes::ShapeRef.new(shape: GetAccountPreferencesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccountPreferencesResult)
-        o.errors << Shapes::ShapeRef.new(shape: GetAccountPreferencesException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: GetAccountPreferencesException)
       end)
 
       api.add_operation(:get_microsoft_teams_channel_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -735,9 +766,9 @@ module Aws::Chatbot
         o.http_request_uri = "/get-ms-teams-channel-configuration"
         o.input = Shapes::ShapeRef.new(shape: GetTeamsChannelConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTeamsChannelConfigurationResult)
-        o.errors << Shapes::ShapeRef.new(shape: GetTeamsChannelConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: GetTeamsChannelConfigurationException)
       end)
 
       api.add_operation(:list_microsoft_teams_channel_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -746,8 +777,8 @@ module Aws::Chatbot
         o.http_request_uri = "/list-ms-teams-channel-configurations"
         o.input = Shapes::ShapeRef.new(shape: ListTeamsChannelConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTeamsChannelConfigurationsResult)
-        o.errors << Shapes::ShapeRef.new(shape: ListTeamsChannelConfigurationsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ListTeamsChannelConfigurationsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -763,9 +794,9 @@ module Aws::Chatbot
         o.http_request_uri = "/list-ms-teams-configured-teams"
         o.input = Shapes::ShapeRef.new(shape: ListMicrosoftTeamsConfiguredTeamsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMicrosoftTeamsConfiguredTeamsResult)
-        o.errors << Shapes::ShapeRef.new(shape: ListMicrosoftTeamsConfiguredTeamsException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ListMicrosoftTeamsConfiguredTeamsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -780,9 +811,9 @@ module Aws::Chatbot
         o.http_request_uri = "/list-ms-teams-user-identities"
         o.input = Shapes::ShapeRef.new(shape: ListMicrosoftTeamsUserIdentitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMicrosoftTeamsUserIdentitiesResult)
-        o.errors << Shapes::ShapeRef.new(shape: ListMicrosoftTeamsUserIdentitiesException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ListMicrosoftTeamsUserIdentitiesException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -797,9 +828,9 @@ module Aws::Chatbot
         o.http_request_uri = "/list-tags-for-resource"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -808,9 +839,9 @@ module Aws::Chatbot
         o.http_request_uri = "/tag-resource"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
@@ -820,9 +851,9 @@ module Aws::Chatbot
         o.http_request_uri = "/untag-resource"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
       end)
 
       api.add_operation(:update_account_preferences, Seahorse::Model::Operation.new.tap do |o|
@@ -831,9 +862,9 @@ module Aws::Chatbot
         o.http_request_uri = "/update-account-preferences"
         o.input = Shapes::ShapeRef.new(shape: UpdateAccountPreferencesRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAccountPreferencesResult)
-        o.errors << Shapes::ShapeRef.new(shape: UpdateAccountPreferencesException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UpdateAccountPreferencesException)
       end)
 
       api.add_operation(:update_chime_webhook_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -842,10 +873,10 @@ module Aws::Chatbot
         o.http_request_uri = "/update-chime-webhook-configuration"
         o.input = Shapes::ShapeRef.new(shape: UpdateChimeWebhookConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateChimeWebhookConfigurationResult)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UpdateChimeWebhookConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_microsoft_teams_channel_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -854,9 +885,9 @@ module Aws::Chatbot
         o.http_request_uri = "/update-ms-teams-channel-configuration"
         o.input = Shapes::ShapeRef.new(shape: UpdateTeamsChannelConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTeamsChannelConfigurationResult)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UpdateTeamsChannelConfigurationException)
       end)
 
@@ -866,9 +897,9 @@ module Aws::Chatbot
         o.http_request_uri = "/update-slack-channel-configuration"
         o.input = Shapes::ShapeRef.new(shape: UpdateSlackChannelConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSlackChannelConfigurationResult)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UpdateSlackChannelConfigurationException)
       end)
     end

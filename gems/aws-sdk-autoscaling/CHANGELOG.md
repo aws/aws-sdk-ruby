@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.115.0 (2024-08-22)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now provides EBS health check to manage EC2 instance replacement
+
 1.114.0 (2024-07-30)
 ------------------
 

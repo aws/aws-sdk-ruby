@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2024-08-29)
+------------------
+
+* Feature - The minimum request rate for a rate-based rule is now 10. Before this, it was 100.
+
 1.88.0 (2024-07-02)
 ------------------
 

@@ -473,9 +473,10 @@ module Aws::InternetMonitor
 
       api.metadata = {
         "apiVersion" => "2021-06-03",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "internetmonitor",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon CloudWatch Internet Monitor",
         "serviceId" => "InternetMonitor",
         "signatureVersion" => "v4",

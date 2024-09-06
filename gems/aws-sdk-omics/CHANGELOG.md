@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2024-08-27)
+------------------
+
+* Feature - Adds data provenance to import jobs from read sets and references
+
 1.31.0 (2024-07-02)
 ------------------
 

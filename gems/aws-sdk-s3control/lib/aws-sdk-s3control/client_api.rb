@@ -58,6 +58,7 @@ module Aws::S3Control
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketVersioningStatus = Shapes::StringShape.new(name: 'BucketVersioningStatus')
     Buckets = Shapes::ListShape.new(name: 'Buckets')
+    CallerAccessGrantsList = Shapes::ListShape.new(name: 'CallerAccessGrantsList')
     CloudWatchMetrics = Shapes::StructureShape.new(name: 'CloudWatchMetrics')
     ConfigId = Shapes::StringShape.new(name: 'ConfigId')
     ConfirmRemoveSelfBucketAccess = Shapes::BooleanShape.new(name: 'ConfirmRemoveSelfBucketAccess')
@@ -266,6 +267,9 @@ module Aws::S3Control
     ListAccessPointsForObjectLambdaResult = Shapes::StructureShape.new(name: 'ListAccessPointsForObjectLambdaResult')
     ListAccessPointsRequest = Shapes::StructureShape.new(name: 'ListAccessPointsRequest')
     ListAccessPointsResult = Shapes::StructureShape.new(name: 'ListAccessPointsResult')
+    ListCallerAccessGrantsEntry = Shapes::StructureShape.new(name: 'ListCallerAccessGrantsEntry')
+    ListCallerAccessGrantsRequest = Shapes::StructureShape.new(name: 'ListCallerAccessGrantsRequest')
+    ListCallerAccessGrantsResult = Shapes::StructureShape.new(name: 'ListCallerAccessGrantsResult')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
     ListMultiRegionAccessPointsRequest = Shapes::StructureShape.new(name: 'ListMultiRegionAccessPointsRequest')
@@ -612,6 +616,8 @@ module Aws::S3Control
 
     Buckets.member = Shapes::ShapeRef.new(shape: S3BucketArnString, location_name: "Arn")
 
+    CallerAccessGrantsList.member = Shapes::ShapeRef.new(shape: ListCallerAccessGrantsEntry, location_name: "AccessGrant")
+
     CloudWatchMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
     CloudWatchMetrics.struct_class = Types::CloudWatchMetrics
 
@@ -644,7 +650,9 @@ module Aws::S3Control
     CreateAccessGrantsInstanceResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
     CreateAccessGrantsInstanceResult.add_member(:access_grants_instance_id, Shapes::ShapeRef.new(shape: AccessGrantsInstanceId, location_name: "AccessGrantsInstanceId"))
     CreateAccessGrantsInstanceResult.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
-    CreateAccessGrantsInstanceResult.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterArn"))
+    CreateAccessGrantsInstanceResult.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, deprecated: true, location_name: "IdentityCenterArn", metadata: {"deprecatedMessage"=>"IdentityCenterArn has been deprecated. Use IdentityCenterInstanceArn or IdentityCenterApplicationArn."}))
+    CreateAccessGrantsInstanceResult.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterInstanceArn"))
+    CreateAccessGrantsInstanceResult.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "IdentityCenterApplicationArn"))
     CreateAccessGrantsInstanceResult.struct_class = Types::CreateAccessGrantsInstanceResult
 
     CreateAccessGrantsLocationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
@@ -914,7 +922,9 @@ module Aws::S3Control
 
     GetAccessGrantsInstanceResult.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
     GetAccessGrantsInstanceResult.add_member(:access_grants_instance_id, Shapes::ShapeRef.new(shape: AccessGrantsInstanceId, location_name: "AccessGrantsInstanceId"))
-    GetAccessGrantsInstanceResult.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterArn"))
+    GetAccessGrantsInstanceResult.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, deprecated: true, location_name: "IdentityCenterArn", metadata: {"deprecatedMessage"=>"IdentityCenterArn has been deprecated. Use IdentityCenterInstanceArn or IdentityCenterApplicationArn."}))
+    GetAccessGrantsInstanceResult.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterInstanceArn"))
+    GetAccessGrantsInstanceResult.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "IdentityCenterApplicationArn"))
     GetAccessGrantsInstanceResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
     GetAccessGrantsInstanceResult.struct_class = Types::GetAccessGrantsInstanceResult
 
@@ -1295,7 +1305,9 @@ module Aws::S3Control
     ListAccessGrantsInstanceEntry.add_member(:access_grants_instance_id, Shapes::ShapeRef.new(shape: AccessGrantsInstanceId, location_name: "AccessGrantsInstanceId"))
     ListAccessGrantsInstanceEntry.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
     ListAccessGrantsInstanceEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
-    ListAccessGrantsInstanceEntry.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterArn"))
+    ListAccessGrantsInstanceEntry.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, deprecated: true, location_name: "IdentityCenterArn", metadata: {"deprecatedMessage"=>"IdentityCenterArn has been deprecated. Use IdentityCenterInstanceArn or IdentityCenterApplicationArn."}))
+    ListAccessGrantsInstanceEntry.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterInstanceArn"))
+    ListAccessGrantsInstanceEntry.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "IdentityCenterApplicationArn"))
     ListAccessGrantsInstanceEntry.struct_class = Types::ListAccessGrantsInstanceEntry
 
     ListAccessGrantsInstancesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
@@ -1356,6 +1368,22 @@ module Aws::S3Control
     ListAccessPointsResult.add_member(:access_point_list, Shapes::ShapeRef.new(shape: AccessPointList, location_name: "AccessPointList"))
     ListAccessPointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
     ListAccessPointsResult.struct_class = Types::ListAccessPointsResult
+
+    ListCallerAccessGrantsEntry.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
+    ListCallerAccessGrantsEntry.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "GrantScope"))
+    ListCallerAccessGrantsEntry.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
+    ListCallerAccessGrantsEntry.struct_class = Types::ListCallerAccessGrantsEntry
+
+    ListCallerAccessGrantsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    ListCallerAccessGrantsRequest.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location: "querystring", location_name: "grantscope"))
+    ListCallerAccessGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
+    ListCallerAccessGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCallerAccessGrantsRequest.add_member(:allowed_by_application, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "allowedByApplication"))
+    ListCallerAccessGrantsRequest.struct_class = Types::ListCallerAccessGrantsRequest
+
+    ListCallerAccessGrantsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
+    ListCallerAccessGrantsResult.add_member(:caller_access_grants_list, Shapes::ShapeRef.new(shape: CallerAccessGrantsList, location_name: "CallerAccessGrantsList"))
+    ListCallerAccessGrantsResult.struct_class = Types::ListCallerAccessGrantsResult
 
     ListJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     ListJobsRequest.add_member(:job_statuses, Shapes::ShapeRef.new(shape: JobStatusList, location: "querystring", location_name: "jobStatuses"))
@@ -2786,6 +2814,23 @@ module Aws::S3Control
         }
         o.input = Shapes::ShapeRef.new(shape: ListAccessPointsForObjectLambdaRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccessPointsForObjectLambdaResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_caller_access_grants, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCallerAccessGrants"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/caller/grants"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListCallerAccessGrantsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCallerAccessGrantsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

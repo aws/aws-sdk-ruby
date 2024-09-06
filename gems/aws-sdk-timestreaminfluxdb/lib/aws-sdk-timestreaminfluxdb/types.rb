@@ -1046,12 +1046,23 @@ module Aws::TimestreamInfluxDB
     #   concurrency.
     #   @return [String]
     #
+    # @!attribute [rw] db_instance_type
+    #   The Timestream for InfluxDB DB instance type to run InfluxDB on.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies whether the DB instance will be deployed as a standalone
+    #   instance or with a Multi-AZ standby for high availability.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstanceInput AWS API Documentation
     #
     class UpdateDbInstanceInput < Struct.new(
       :identifier,
       :log_delivery_configuration,
-      :db_parameter_group_identifier)
+      :db_parameter_group_identifier,
+      :db_instance_type,
+      :deployment_type)
       SENSITIVE = []
       include Aws::Structure
     end

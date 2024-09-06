@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.127.0 (2024-08-21)
+------------------
+
+* Feature - Release FilterCriteria encryption for Lambda EventSourceMapping,  enabling customers to encrypt their filter criteria using a customer-owned KMS key.
+
 1.126.0 (2024-08-19)
 ------------------
 

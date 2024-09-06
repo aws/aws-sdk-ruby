@@ -52,6 +52,7 @@ module Aws
                       ?simple_attributes: bool,
                       ?simple_json: bool,
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,

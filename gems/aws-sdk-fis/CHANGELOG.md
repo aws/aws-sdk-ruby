@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-09-04)
+------------------
+
+* Feature - This release adds safety levers, a new mechanism to stop all running experiments and prevent new experiments from starting.
+
+1.36.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.35.0 (2024-08-13)
 ------------------
 

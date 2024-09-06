@@ -275,6 +275,8 @@ module Aws::Personalize
     Solution = Shapes::StructureShape.new(name: 'Solution')
     SolutionConfig = Shapes::StructureShape.new(name: 'SolutionConfig')
     SolutionSummary = Shapes::StructureShape.new(name: 'SolutionSummary')
+    SolutionUpdateConfig = Shapes::StructureShape.new(name: 'SolutionUpdateConfig')
+    SolutionUpdateSummary = Shapes::StructureShape.new(name: 'SolutionUpdateSummary')
     SolutionVersion = Shapes::StructureShape.new(name: 'SolutionVersion')
     SolutionVersionSummary = Shapes::StructureShape.new(name: 'SolutionVersionSummary')
     SolutionVersions = Shapes::ListShape.new(name: 'SolutionVersions')
@@ -314,6 +316,8 @@ module Aws::Personalize
     UpdateMetricAttributionResponse = Shapes::StructureShape.new(name: 'UpdateMetricAttributionResponse')
     UpdateRecommenderRequest = Shapes::StructureShape.new(name: 'UpdateRecommenderRequest')
     UpdateRecommenderResponse = Shapes::StructureShape.new(name: 'UpdateRecommenderResponse')
+    UpdateSolutionRequest = Shapes::StructureShape.new(name: 'UpdateSolutionRequest')
+    UpdateSolutionResponse = Shapes::StructureShape.new(name: 'UpdateSolutionResponse')
 
     Algorithm.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Algorithm.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "algorithmArn"))
@@ -1324,6 +1328,7 @@ module Aws::Personalize
     Solution.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     Solution.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     Solution.add_member(:latest_solution_version, Shapes::ShapeRef.new(shape: SolutionVersionSummary, location_name: "latestSolutionVersion"))
+    Solution.add_member(:latest_solution_update, Shapes::ShapeRef.new(shape: SolutionUpdateSummary, location_name: "latestSolutionUpdate"))
     Solution.struct_class = Types::Solution
 
     SolutionConfig.add_member(:event_value_threshold, Shapes::ShapeRef.new(shape: EventValueThreshold, location_name: "eventValueThreshold"))
@@ -1343,6 +1348,17 @@ module Aws::Personalize
     SolutionSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     SolutionSummary.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     SolutionSummary.struct_class = Types::SolutionSummary
+
+    SolutionUpdateConfig.add_member(:auto_training_config, Shapes::ShapeRef.new(shape: AutoTrainingConfig, location_name: "autoTrainingConfig"))
+    SolutionUpdateConfig.struct_class = Types::SolutionUpdateConfig
+
+    SolutionUpdateSummary.add_member(:solution_update_config, Shapes::ShapeRef.new(shape: SolutionUpdateConfig, location_name: "solutionUpdateConfig"))
+    SolutionUpdateSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    SolutionUpdateSummary.add_member(:perform_auto_training, Shapes::ShapeRef.new(shape: PerformAutoTraining, location_name: "performAutoTraining"))
+    SolutionUpdateSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    SolutionUpdateSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    SolutionUpdateSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    SolutionUpdateSummary.struct_class = Types::SolutionUpdateSummary
 
     SolutionVersion.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     SolutionVersion.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
@@ -1457,6 +1473,14 @@ module Aws::Personalize
 
     UpdateRecommenderResponse.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
     UpdateRecommenderResponse.struct_class = Types::UpdateRecommenderResponse
+
+    UpdateSolutionRequest.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionArn"))
+    UpdateSolutionRequest.add_member(:perform_auto_training, Shapes::ShapeRef.new(shape: PerformAutoTraining, location_name: "performAutoTraining"))
+    UpdateSolutionRequest.add_member(:solution_update_config, Shapes::ShapeRef.new(shape: SolutionUpdateConfig, location_name: "solutionUpdateConfig"))
+    UpdateSolutionRequest.struct_class = Types::UpdateSolutionRequest
+
+    UpdateSolutionResponse.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionArn"))
+    UpdateSolutionResponse.struct_class = Types::UpdateSolutionResponse
 
 
     # @api private
@@ -2348,6 +2372,19 @@ module Aws::Personalize
         o.output = Shapes::ShapeRef.new(shape: UpdateRecommenderResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:update_solution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSolution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSolutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSolutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
     end

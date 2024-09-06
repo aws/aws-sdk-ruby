@@ -930,6 +930,7 @@ module Aws::MediaLive
     __integerMin1Max3600000 = Shapes::IntegerShape.new(name: '__integerMin1Max3600000')
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
     __integerMin1Max5 = Shapes::IntegerShape.new(name: '__integerMin1Max5')
+    __integerMin1Max51 = Shapes::IntegerShape.new(name: '__integerMin1Max51')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
     __integerMin1Max8 = Shapes::IntegerShape.new(name: '__integerMin1Max8')
     __integerMin256Max3840 = Shapes::IntegerShape.new(name: '__integerMin256Max3840')
@@ -2557,6 +2558,7 @@ module Aws::MediaLive
     H264Settings.add_member(:temporal_aq, Shapes::ShapeRef.new(shape: H264TemporalAq, location_name: "temporalAq"))
     H264Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: H264TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
     H264Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
+    H264Settings.add_member(:min_qp, Shapes::ShapeRef.new(shape: __integerMin1Max51, location_name: "minQp"))
     H264Settings.struct_class = Types::H264Settings
 
     H265ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
@@ -2605,6 +2607,7 @@ module Aws::MediaLive
     H265Settings.add_member(:tile_padding, Shapes::ShapeRef.new(shape: H265TilePadding, location_name: "tilePadding"))
     H265Settings.add_member(:tile_width, Shapes::ShapeRef.new(shape: __integerMin256Max3840, location_name: "tileWidth"))
     H265Settings.add_member(:treeblock_size, Shapes::ShapeRef.new(shape: H265TreeblockSize, location_name: "treeblockSize"))
+    H265Settings.add_member(:min_qp, Shapes::ShapeRef.new(shape: __integerMin1Max51, location_name: "minQp"))
     H265Settings.struct_class = Types::H265Settings
 
     Hdr10Settings.add_member(:max_cll, Shapes::ShapeRef.new(shape: __integerMin0Max32768, location_name: "maxCll"))

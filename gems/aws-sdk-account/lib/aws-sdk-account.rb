@@ -52,6 +52,6 @@ require_relative 'aws-sdk-account/customizations'
 # @!group service
 module Aws::Account
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

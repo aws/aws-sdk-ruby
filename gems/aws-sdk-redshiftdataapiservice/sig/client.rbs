@@ -51,6 +51,7 @@ module Aws
                       ?sigv4a_signing_region_set: Array[String],
                       ?simple_json: bool,
                       ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
                       ?token_provider: untyped,
                       ?use_dualstack_endpoint: bool,
                       ?use_fips_endpoint: bool,
@@ -79,18 +80,22 @@ module Aws
         def cluster_identifier: () -> ::String
         def created_at: () -> ::Time
         def database: () -> ::String
+        def db_groups: () -> ::Array[::String]
         def db_user: () -> ::String
         def id: () -> ::String
         def secret_arn: () -> ::String
+        def session_id: () -> ::String
         def workgroup_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#batch_execute_statement-instance_method
       def batch_execute_statement: (
                                      ?client_token: ::String,
                                      ?cluster_identifier: ::String,
-                                     database: ::String,
+                                     ?database: ::String,
                                      ?db_user: ::String,
                                      ?secret_arn: ::String,
+                                     ?session_id: ::String,
+                                     ?session_keep_alive_seconds: ::Integer,
                                      sqls: Array[::String],
                                      ?statement_name: ::String,
                                      ?with_event: bool,
@@ -124,6 +129,7 @@ module Aws
         def result_rows: () -> ::Integer
         def result_size: () -> ::Integer
         def secret_arn: () -> ::String
+        def session_id: () -> ::String
         def status: () -> ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
         def sub_statements: () -> ::Array[Types::SubStatementData]
         def updated_at: () -> ::Time
@@ -161,16 +167,18 @@ module Aws
         def cluster_identifier: () -> ::String
         def created_at: () -> ::Time
         def database: () -> ::String
+        def db_groups: () -> ::Array[::String]
         def db_user: () -> ::String
         def id: () -> ::String
         def secret_arn: () -> ::String
+        def session_id: () -> ::String
         def workgroup_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#execute_statement-instance_method
       def execute_statement: (
                                ?client_token: ::String,
                                ?cluster_identifier: ::String,
-                               database: ::String,
+                               ?database: ::String,
                                ?db_user: ::String,
                                ?parameters: Array[
                                  {
@@ -179,6 +187,8 @@ module Aws
                                  },
                                ],
                                ?secret_arn: ::String,
+                               ?session_id: ::String,
+                               ?session_keep_alive_seconds: ::Integer,
                                sql: ::String,
                                ?statement_name: ::String,
                                ?with_event: bool,

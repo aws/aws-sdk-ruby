@@ -1673,7 +1673,7 @@ module Aws::Personalize
     #   more information about automatic training, see [Configuring
     #   automatic training][1].
     #
-    #   Automatic solution version creation starts one hour after the
+    #   Automatic solution version creation starts within one hour after the
     #   solution is ACTIVE. If you manually create a solution version within
     #   the hour, the solution skips the first automatic training.
     #
@@ -1714,8 +1714,8 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] solution_config
-    #   The configuration to use with the solution. When `performAutoML` is
-    #   set to true, Amazon Personalize only evaluates the `autoMLConfig`
+    #   The configuration properties for the solution. When `performAutoML`
+    #   is set to true, Amazon Personalize only evaluates the `autoMLConfig`
     #   section of the solution configuration.
     #
     #   <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective`
@@ -5116,17 +5116,11 @@ module Aws::Personalize
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the recommender update.
+    #   The status of the recommender update. A recommender update can be in
+    #   one of the following states:
     #
-    #   A recommender can be in one of the following states:
-    #
-    #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
-    #     FAILED
-    #
-    #   * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START
-    #     PENDING &gt; START IN\_PROGRESS &gt; ACTIVE
-    #
-    #   * DELETE PENDING &gt; DELETE IN\_PROGRESS
+    #   CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #   FAILED
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -5205,12 +5199,11 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # After you create a solution, you can’t change its configuration. By
-    # default, all new solutions use automatic training. With automatic
-    # training, you incur training costs while your solution is active. You
-    # can't stop automatic training for a solution. To avoid unnecessary
-    # costs, make sure to delete the solution when you are finished. For
-    # information about training costs, see [Amazon Personalize pricing][1].
+    # By default, all new solutions use automatic training. With automatic
+    # training, you incur training costs while your solution is active. To
+    # avoid unnecessary costs, when you are finished you can [update the
+    # solution][1] to turn off automatic training. For information about
+    # training costs, see [Amazon Personalize pricing][2].
     #
     # An object that provides information about a solution. A solution
     # includes the custom recipe, customized parameters, and trained models
@@ -5218,13 +5211,14 @@ module Aws::Personalize
     # recommendations.
     #
     # After you create a solution, you can’t change its configuration. If
-    # you need to make changes, you can [clone the solution][2] with the
+    # you need to make changes, you can [clone the solution][3] with the
     # Amazon Personalize console or create a new one.
     #
     #
     #
-    # [1]: https://aws.amazon.com/personalize/pricing/
-    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateSolution.html
+    # [2]: https://aws.amazon.com/personalize/pricing/
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html
     #
     # @!attribute [rw] name
     #   The name of the solution.
@@ -5316,6 +5310,10 @@ module Aws::Personalize
     #   and the ARN.
     #   @return [Types::SolutionVersionSummary]
     #
+    # @!attribute [rw] latest_solution_update
+    #   Provides a summary of the latest updates to the solution.
+    #   @return [Types::SolutionUpdateSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Solution AWS API Documentation
     #
     class Solution < Struct.new(
@@ -5332,7 +5330,8 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time,
-      :latest_solution_version)
+      :latest_solution_version,
+      :latest_solution_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5446,6 +5445,71 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :recipe_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details of the solution update.
+    #
+    # @!attribute [rw] auto_training_config
+    #   The automatic training configuration to use when
+    #   `performAutoTraining` is true.
+    #   @return [Types::AutoTrainingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionUpdateConfig AWS API Documentation
+    #
+    class SolutionUpdateConfig < Struct.new(
+      :auto_training_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the properties of a solution update. For a
+    # complete listing, call the [DescribeSolution][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
+    #
+    # @!attribute [rw] solution_update_config
+    #   The configuration details of the solution.
+    #   @return [Types::SolutionUpdateConfig]
+    #
+    # @!attribute [rw] status
+    #   The status of the solution update. A solution update can be in one
+    #   of the following states:
+    #
+    #   CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
+    #   FAILED
+    #   @return [String]
+    #
+    # @!attribute [rw] perform_auto_training
+    #   Whether the solution automatically creates solution versions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time (in Unix format) that the solution update was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time (in Unix time) that the solution update was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If a solution update fails, the reason behind the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionUpdateSummary AWS API Documentation
+    #
+    class SolutionUpdateSummary < Struct.new(
+      :solution_update_config,
+      :status,
+      :perform_auto_training,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6010,6 +6074,60 @@ module Aws::Personalize
     #
     class UpdateRecommenderResponse < Struct.new(
       :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] solution_arn
+    #   The Amazon Resource Name (ARN) of the solution to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] perform_auto_training
+    #   Whether the solution uses automatic training to create new solution
+    #   versions (trained models). You can change the training frequency by
+    #   specifying a `schedulingExpression` in the `AutoTrainingConfig` as
+    #   part of solution configuration.
+    #
+    #   If you turn on automatic training, the first automatic training
+    #   starts within one hour after the solution update completes. If you
+    #   manually create a solution version within the hour, the solution
+    #   skips the first automatic training. For more information about
+    #   automatic training, see [Configuring automatic training][1].
+    #
+    #   After training starts, you can get the solution version's Amazon
+    #   Resource Name (ARN) with the [ListSolutionVersions][2] API
+    #   operation. To get its status, use the [DescribeSolutionVersion][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
+    #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] solution_update_config
+    #   The new configuration details of the solution.
+    #   @return [Types::SolutionUpdateConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateSolutionRequest AWS API Documentation
+    #
+    class UpdateSolutionRequest < Struct.new(
+      :solution_arn,
+      :perform_auto_training,
+      :solution_update_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] solution_arn
+    #   The same solution Amazon Resource Name (ARN) as given in the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateSolutionResponse AWS API Documentation
+    #
+    class UpdateSolutionResponse < Struct.new(
+      :solution_arn)
       SENSITIVE = []
       include Aws::Structure
     end

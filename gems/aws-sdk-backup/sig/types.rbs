@@ -150,6 +150,8 @@ module Aws::Backup
     class BackupVaultListMember
       attr_accessor backup_vault_name: ::String
       attr_accessor backup_vault_arn: ::String
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor vault_state: ("CREATING" | "AVAILABLE" | "FAILED")
       attr_accessor creation_date: ::Time
       attr_accessor encryption_key_arn: ::String
       attr_accessor creator_request_id: ::String
@@ -532,6 +534,7 @@ module Aws::Backup
       attr_accessor backup_vault_name: ::String
       attr_accessor backup_vault_arn: ::String
       attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor vault_state: ("CREATING" | "AVAILABLE" | "FAILED")
       attr_accessor encryption_key_arn: ::String
       attr_accessor creation_date: ::Time
       attr_accessor creator_request_id: ::String

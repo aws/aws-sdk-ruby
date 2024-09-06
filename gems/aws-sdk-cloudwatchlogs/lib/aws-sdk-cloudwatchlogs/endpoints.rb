@@ -334,6 +334,20 @@ module Aws::CloudWatchLogs
       end
     end
 
+    class DescribeConfigurationTemplates
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudWatchLogs::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeDeliveries
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1021,6 +1035,20 @@ module Aws::CloudWatchLogs
     end
 
     class UpdateAnomaly
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CloudWatchLogs::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateDeliveryConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

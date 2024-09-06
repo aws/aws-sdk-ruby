@@ -1169,6 +1169,7 @@ module Aws::Glue
     class CreateJobRequest
       attr_accessor name: ::String
       attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
+      attr_accessor job_run_queuing_enabled: bool
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -3458,6 +3459,7 @@ module Aws::Glue
     class Job
       attr_accessor name: ::String
       attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
+      attr_accessor job_run_queuing_enabled: bool
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -3522,6 +3524,7 @@ module Aws::Glue
       attr_accessor trigger_name: ::String
       attr_accessor job_name: ::String
       attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
+      attr_accessor job_run_queuing_enabled: bool
       attr_accessor started_on: ::Time
       attr_accessor last_modified_on: ::Time
       attr_accessor completed_on: ::Time
@@ -3543,11 +3546,13 @@ module Aws::Glue
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor maintenance_window: ::String
       attr_accessor profile_name: ::String
+      attr_accessor state_detail: ::String
       SENSITIVE: []
     end
 
     class JobUpdate
       attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
+      attr_accessor job_run_queuing_enabled: bool
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -5208,6 +5213,7 @@ module Aws::Glue
 
     class StartJobRunRequest
       attr_accessor job_name: ::String
+      attr_accessor job_run_queuing_enabled: bool
       attr_accessor job_run_id: ::String
       attr_accessor arguments: ::Hash[::String, ::String]
       attr_accessor allocated_capacity: ::Integer

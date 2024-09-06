@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2024-09-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2024-08-28)
+------------------
+
+* Feature - Documentation-only update that clarifies the StartWorkspaces and StopWorkspaces actions, and a few other minor edits.
+
+1.113.0 (2024-08-26)
+------------------
+
+* Feature - This release adds support for creating and managing directories that use AWS IAM Identity Center as user identity source. Such directories can be used to create non-Active Directory domain joined WorkSpaces Personal.Updated RegisterWorkspaceDirectory and DescribeWorkspaceDirectories APIs.
+
 1.112.0 (2024-08-06)
 ------------------
 

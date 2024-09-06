@@ -99,9 +99,10 @@ module Aws::SupplyChain
 
       api.metadata = {
         "apiVersion" => "2024-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "scn",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Supply Chain",
         "serviceId" => "SupplyChain",
         "signatureVersion" => "v4",

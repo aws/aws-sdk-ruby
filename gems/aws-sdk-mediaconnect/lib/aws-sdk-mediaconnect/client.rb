@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -83,6 +84,7 @@ module Aws::MediaConnect
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::MediaConnect::Plugins::Endpoints)
@@ -329,6 +331,16 @@ module Aws::MediaConnect
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -1081,6 +1093,9 @@ module Aws::MediaConnect
     # @option params [Types::AddMaintenance] :maintenance
     #   Create maintenance setting for a flow
     #
+    # @option params [Types::MonitoringConfig] :source_monitoring_config
+    #   The settings for source monitoring.
+    #
     # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowResponse#flow #flow} => Types::Flow
@@ -1303,6 +1318,9 @@ module Aws::MediaConnect
     #       maintenance_day: "Monday", # required, accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
     #       maintenance_start_hour: "__string", # required
     #     },
+    #     source_monitoring_config: {
+    #       thumbnail_state: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -1498,6 +1516,7 @@ module Aws::MediaConnect
     #   resp.flow.maintenance.maintenance_deadline #=> String
     #   resp.flow.maintenance.maintenance_scheduled_date #=> String
     #   resp.flow.maintenance.maintenance_start_hour #=> String
+    #   resp.flow.source_monitoring_config.thumbnail_state #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow AWS API Documentation
     #
@@ -1958,6 +1977,7 @@ module Aws::MediaConnect
     #   resp.flow.maintenance.maintenance_deadline #=> String
     #   resp.flow.maintenance.maintenance_scheduled_date #=> String
     #   resp.flow.maintenance.maintenance_start_hour #=> String
+    #   resp.flow.source_monitoring_config.thumbnail_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.messages.errors #=> Array
     #   resp.messages.errors[0] #=> String
     #
@@ -2025,6 +2045,40 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def describe_flow_source_metadata(params = {}, options = {})
       req = build_request(:describe_flow_source_metadata, params)
+      req.send_request(options)
+    end
+
+    # Displays the thumbnail details of a flow's source stream.
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @return [Types::DescribeFlowSourceThumbnailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFlowSourceThumbnailResponse#thumbnail_details #thumbnail_details} => Types::ThumbnailDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_flow_source_thumbnail({
+    #     flow_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thumbnail_details.flow_arn #=> String
+    #   resp.thumbnail_details.thumbnail #=> String
+    #   resp.thumbnail_details.thumbnail_messages #=> Array
+    #   resp.thumbnail_details.thumbnail_messages[0].code #=> String
+    #   resp.thumbnail_details.thumbnail_messages[0].message #=> String
+    #   resp.thumbnail_details.thumbnail_messages[0].resource_name #=> String
+    #   resp.thumbnail_details.timecode #=> String
+    #   resp.thumbnail_details.timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceThumbnail AWS API Documentation
+    #
+    # @overload describe_flow_source_thumbnail(params = {})
+    # @param [Hash] params ({})
+    def describe_flow_source_thumbnail(params = {}, options = {})
+      req = build_request(:describe_flow_source_thumbnail, params)
       req.send_request(options)
     end
 
@@ -3227,6 +3281,9 @@ module Aws::MediaConnect
     # @option params [Types::UpdateMaintenance] :maintenance
     #   Update maintenance setting for a flow
     #
+    # @option params [Types::MonitoringConfig] :source_monitoring_config
+    #   The settings for source monitoring.
+    #
     # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowResponse#flow #flow} => Types::Flow
@@ -3247,6 +3304,9 @@ module Aws::MediaConnect
     #       maintenance_day: "Monday", # accepts Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
     #       maintenance_scheduled_date: "__string",
     #       maintenance_start_hour: "__string",
+    #     },
+    #     source_monitoring_config: {
+    #       thumbnail_state: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -3443,6 +3503,7 @@ module Aws::MediaConnect
     #   resp.flow.maintenance.maintenance_deadline #=> String
     #   resp.flow.maintenance.maintenance_scheduled_date #=> String
     #   resp.flow.maintenance.maintenance_start_hour #=> String
+    #   resp.flow.source_monitoring_config.thumbnail_state #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlow AWS API Documentation
     #
@@ -4039,14 +4100,19 @@ module Aws::MediaConnect
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::MediaConnect')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

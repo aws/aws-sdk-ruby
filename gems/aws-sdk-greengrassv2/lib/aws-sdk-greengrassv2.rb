@@ -52,6 +52,6 @@ require_relative 'aws-sdk-greengrassv2/customizations'
 # @!group service
 module Aws::GreengrassV2
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end

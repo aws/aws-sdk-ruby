@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/telemetry.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -83,6 +84,7 @@ module Aws::Glue
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::Glue::Plugins::Endpoints)
@@ -336,6 +338,16 @@ module Aws::Glue
     #
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
     #
     #   @option options [Aws::TokenProvider] :token_provider
     #     A Bearer Token Provider. This can be an instance of any one of the
@@ -1102,6 +1114,7 @@ module Aws::Glue
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
     #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.jobs[0].job_run_queuing_enabled #=> Boolean
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -2308,6 +2321,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_run_queuing_enabled #=> Boolean
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -2332,6 +2346,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -2379,6 +2394,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_run_queuing_enabled #=> Boolean
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -2403,6 +2419,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].state_detail #=> String
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -3530,6 +3547,17 @@ module Aws::Glue
     #
     #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
     #   the default value.
+    #
+    # @option params [Boolean] :job_run_queuing_enabled
+    #   Specifies whether job run queuing is enabled for the job runs for this
+    #   job.
+    #
+    #   A value of true means job run queuing is enabled for the job runs. If
+    #   false or not populated, the job runs will not be considered for
+    #   queueing.
+    #
+    #   If this field does not match the value set in the job run, then the
+    #   value from the job run field will be used.
     #
     # @option params [String] :description
     #   Description of the job being defined.
@@ -7668,6 +7696,7 @@ module Aws::Glue
     #
     #   resp.job.name #=> String
     #   resp.job.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.job.job_run_queuing_enabled #=> Boolean
     #   resp.job.description #=> String
     #   resp.job.log_uri #=> String
     #   resp.job.role #=> String
@@ -8655,6 +8684,7 @@ module Aws::Glue
     #   resp.job_run.trigger_name #=> String
     #   resp.job_run.job_name #=> String
     #   resp.job_run.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.job_run.job_run_queuing_enabled #=> Boolean
     #   resp.job_run.started_on #=> Time
     #   resp.job_run.last_modified_on #=> Time
     #   resp.job_run.completed_on #=> Time
@@ -8679,6 +8709,7 @@ module Aws::Glue
     #   resp.job_run.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job_run.maintenance_window #=> String
     #   resp.job_run.profile_name #=> String
+    #   resp.job_run.state_detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -8724,6 +8755,7 @@ module Aws::Glue
     #   resp.job_runs[0].trigger_name #=> String
     #   resp.job_runs[0].job_name #=> String
     #   resp.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.job_runs[0].job_run_queuing_enabled #=> Boolean
     #   resp.job_runs[0].started_on #=> Time
     #   resp.job_runs[0].last_modified_on #=> Time
     #   resp.job_runs[0].completed_on #=> Time
@@ -8748,6 +8780,7 @@ module Aws::Glue
     #   resp.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job_runs[0].maintenance_window #=> String
     #   resp.job_runs[0].profile_name #=> String
+    #   resp.job_runs[0].state_detail #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -8786,6 +8819,7 @@ module Aws::Glue
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
     #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.jobs[0].job_run_queuing_enabled #=> Boolean
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -12784,6 +12818,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_run_queuing_enabled #=> Boolean
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12808,6 +12843,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -12855,6 +12891,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_run_queuing_enabled #=> Boolean
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12879,6 +12916,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -12980,6 +13018,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_run_queuing_enabled #=> Boolean
     #   resp.run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -13004,6 +13043,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].state_detail #=> String
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -13144,6 +13184,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_run_queuing_enabled #=> Boolean
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -13168,6 +13209,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].state_detail #=> String
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -15694,6 +15736,13 @@ module Aws::Glue
     # @option params [required, String] :job_name
     #   The name of the job definition to use.
     #
+    # @option params [Boolean] :job_run_queuing_enabled
+    #   Specifies whether job run queuing is enabled for the job run.
+    #
+    #   A value of true means job run queuing is enabled for the job run. If
+    #   false or not populated, the job run will not be considered for
+    #   queueing.
+    #
     # @option params [String] :job_run_id
     #   The ID of a previous `JobRun` to retry.
     #
@@ -15859,6 +15908,7 @@ module Aws::Glue
     #
     #   resp = client.start_job_run({
     #     job_name: "NameString", # required
+    #     job_run_queuing_enabled: false,
     #     job_run_id: "IdString",
     #     arguments: {
     #       "GenericString" => "GenericString",
@@ -18009,14 +18059,19 @@ module Aws::Glue
     # @api private
     def build_request(operation_name, params = {})
       handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::Glue')
+      )
       context = Seahorse::Client::RequestContext.new(
         operation_name: operation_name,
         operation: config.api.operation(operation_name),
         client: self,
         params: params,
-        config: config)
+        config: config,
+        tracer: tracer
+      )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.189.0'
+      context[:gem_version] = '1.191.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
