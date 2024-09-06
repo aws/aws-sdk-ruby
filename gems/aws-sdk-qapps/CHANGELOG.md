@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2024-09-06)
+------------------
+
+* Feature - Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item.
+
 1.1.0 (2024-09-03)
 ------------------
 

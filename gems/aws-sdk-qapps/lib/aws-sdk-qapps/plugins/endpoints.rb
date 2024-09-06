@@ -100,6 +100,8 @@ module Aws::QApps
             Aws::QApps::Endpoints::UntagResource.build(context)
           when :update_library_item
             Aws::QApps::Endpoints::UpdateLibraryItem.build(context)
+          when :update_library_item_metadata
+            Aws::QApps::Endpoints::UpdateLibraryItemMetadata.build(context)
           when :update_q_app
             Aws::QApps::Endpoints::UpdateQApp.build(context)
           when :update_q_app_session

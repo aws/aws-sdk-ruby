@@ -472,6 +472,10 @@ module Aws::QApps
     #   The number of ratings the library item has received from users.
     #   @return [Integer]
     #
+    # @!attribute [rw] is_verified
+    #   Indicates whether the library item has been verified.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/CreateLibraryItemOutput AWS API Documentation
     #
     class CreateLibraryItemOutput < Struct.new(
@@ -481,7 +485,8 @@ module Aws::QApps
       :created_by,
       :updated_at,
       :updated_by,
-      :rating_count)
+      :rating_count,
+      :is_verified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -885,6 +890,10 @@ module Aws::QApps
     #   account.
     #   @return [Integer]
     #
+    # @!attribute [rw] is_verified
+    #   Indicates whether the library item has been verified.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/GetLibraryItemOutput AWS API Documentation
     #
     class GetLibraryItemOutput < Struct.new(
@@ -899,7 +908,8 @@ module Aws::QApps
       :updated_by,
       :rating_count,
       :is_rated_by_user,
-      :user_count)
+      :user_count,
+      :is_verified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1168,6 +1178,10 @@ module Aws::QApps
     #   The number of users who have the associated Q App.
     #   @return [Integer]
     #
+    # @!attribute [rw] is_verified
+    #   Indicates whether the library item has been verified.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/LibraryItemMember AWS API Documentation
     #
     class LibraryItemMember < Struct.new(
@@ -1182,7 +1196,8 @@ module Aws::QApps
       :updated_by,
       :rating_count,
       :is_rated_by_user,
-      :user_count)
+      :user_count,
+      :is_verified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1865,6 +1880,29 @@ module Aws::QApps
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The unique identifier of the Amazon Q Business application
+    #   environment instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] library_item_id
+    #   The unique identifier of the updated library item.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_verified
+    #   The verification status of the library item
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/UpdateLibraryItemMetadataInput AWS API Documentation
+    #
+    class UpdateLibraryItemMetadataInput < Struct.new(
+      :instance_id,
+      :library_item_id,
+      :is_verified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] library_item_id
     #   The unique identifier of the updated library item.
     #   @return [String]
@@ -1913,6 +1951,10 @@ module Aws::QApps
     #   The number of users who have the associated Q App.
     #   @return [Integer]
     #
+    # @!attribute [rw] is_verified
+    #   Indicates whether the library item has been verified.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/UpdateLibraryItemOutput AWS API Documentation
     #
     class UpdateLibraryItemOutput < Struct.new(
@@ -1927,7 +1969,8 @@ module Aws::QApps
       :updated_by,
       :rating_count,
       :is_rated_by_user,
-      :user_count)
+      :user_count,
+      :is_verified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2105,6 +2148,10 @@ module Aws::QApps
     #   The status of the user's association with the Q App.
     #   @return [String]
     #
+    # @!attribute [rw] is_verified
+    #   Indicates whether the Q App has been verified.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/UserAppItem AWS API Documentation
     #
     class UserAppItem < Struct.new(
@@ -2114,7 +2161,8 @@ module Aws::QApps
       :description,
       :created_at,
       :can_edit,
-      :status)
+      :status,
+      :is_verified)
       SENSITIVE = []
       include Aws::Structure
     end

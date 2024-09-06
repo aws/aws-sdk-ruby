@@ -210,7 +210,6 @@ module Aws
   autoload :KinesisVideoWebRTCStorage, 'aws-sdk-kinesisvideowebrtcstorage'
   autoload :LakeFormation, 'aws-sdk-lakeformation'
   autoload :Lambda, 'aws-sdk-lambda'
-  autoload :LambdaPreview, 'aws-sdk-lambdapreview'
   autoload :LaunchWizard, 'aws-sdk-launchwizard'
   autoload :Lex, 'aws-sdk-lex'
   autoload :LexModelBuildingService, 'aws-sdk-lexmodelbuildingservice'

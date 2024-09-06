@@ -447,7 +447,6 @@ module Aws
             'KinesisVideoWebRTCStorage' => 'kinesisvideo',
             'LakeFormation' => 'lakeformation',
             'Lambda' => 'lambda',
-            'LambdaPreview' => 'lambda',
             'LaunchWizard' => 'launchwizard',
             'Lex' => 'runtime.lex',
             'LexModelBuildingService' => 'models.lex',

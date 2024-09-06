@@ -130,6 +130,7 @@ module Aws::QApps
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateLibraryItemInput = Shapes::StructureShape.new(name: 'UpdateLibraryItemInput')
+    UpdateLibraryItemMetadataInput = Shapes::StructureShape.new(name: 'UpdateLibraryItemMetadataInput')
     UpdateLibraryItemOutput = Shapes::StructureShape.new(name: 'UpdateLibraryItemOutput')
     UpdateQAppInput = Shapes::StructureShape.new(name: 'UpdateQAppInput')
     UpdateQAppOutput = Shapes::StructureShape.new(name: 'UpdateQAppOutput')
@@ -251,6 +252,7 @@ module Aws::QApps
     CreateLibraryItemOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: QAppsTimestamp, location_name: "updatedAt"))
     CreateLibraryItemOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: String, location_name: "updatedBy"))
     CreateLibraryItemOutput.add_member(:rating_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ratingCount"))
+    CreateLibraryItemOutput.add_member(:is_verified, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVerified"))
     CreateLibraryItemOutput.struct_class = Types::CreateLibraryItemOutput
 
     CreateQAppInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
@@ -344,6 +346,7 @@ module Aws::QApps
     GetLibraryItemOutput.add_member(:rating_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ratingCount"))
     GetLibraryItemOutput.add_member(:is_rated_by_user, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRatedByUser"))
     GetLibraryItemOutput.add_member(:user_count, Shapes::ShapeRef.new(shape: Integer, location_name: "userCount"))
+    GetLibraryItemOutput.add_member(:is_verified, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVerified"))
     GetLibraryItemOutput.struct_class = Types::GetLibraryItemOutput
 
     GetQAppInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
@@ -405,6 +408,7 @@ module Aws::QApps
     LibraryItemMember.add_member(:rating_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ratingCount"))
     LibraryItemMember.add_member(:is_rated_by_user, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRatedByUser"))
     LibraryItemMember.add_member(:user_count, Shapes::ShapeRef.new(shape: Integer, location_name: "userCount"))
+    LibraryItemMember.add_member(:is_verified, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVerified"))
     LibraryItemMember.struct_class = Types::LibraryItemMember
 
     ListLibraryItemsInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
@@ -565,6 +569,11 @@ module Aws::QApps
     UpdateLibraryItemInput.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryIdList, location_name: "categories"))
     UpdateLibraryItemInput.struct_class = Types::UpdateLibraryItemInput
 
+    UpdateLibraryItemMetadataInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
+    UpdateLibraryItemMetadataInput.add_member(:library_item_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "libraryItemId"))
+    UpdateLibraryItemMetadataInput.add_member(:is_verified, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVerified"))
+    UpdateLibraryItemMetadataInput.struct_class = Types::UpdateLibraryItemMetadataInput
+
     UpdateLibraryItemOutput.add_member(:library_item_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "libraryItemId"))
     UpdateLibraryItemOutput.add_member(:app_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "appId"))
     UpdateLibraryItemOutput.add_member(:app_version, Shapes::ShapeRef.new(shape: AppVersion, required: true, location_name: "appVersion"))
@@ -577,6 +586,7 @@ module Aws::QApps
     UpdateLibraryItemOutput.add_member(:rating_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ratingCount"))
     UpdateLibraryItemOutput.add_member(:is_rated_by_user, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRatedByUser"))
     UpdateLibraryItemOutput.add_member(:user_count, Shapes::ShapeRef.new(shape: Integer, location_name: "userCount"))
+    UpdateLibraryItemOutput.add_member(:is_verified, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVerified"))
     UpdateLibraryItemOutput.struct_class = Types::UpdateLibraryItemOutput
 
     UpdateQAppInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "header", location_name: "instance-id"))
@@ -616,6 +626,7 @@ module Aws::QApps
     UserAppItem.add_member(:created_at, Shapes::ShapeRef.new(shape: QAppsTimestamp, required: true, location_name: "createdAt"))
     UserAppItem.add_member(:can_edit, Shapes::ShapeRef.new(shape: Boolean, location_name: "canEdit"))
     UserAppItem.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    UserAppItem.add_member(:is_verified, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVerified"))
     UserAppItem.struct_class = Types::UserAppItem
 
     UserAppsList.member = Shapes::ShapeRef.new(shape: UserAppItem)
@@ -650,6 +661,7 @@ module Aws::QApps
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -740,6 +752,7 @@ module Aws::QApps
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -950,6 +963,22 @@ module Aws::QApps
         o.output = Shapes::ShapeRef.new(shape: UpdateLibraryItemOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_library_item_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLibraryItemMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/catalog.updateItemMetadata"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLibraryItemMetadataInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

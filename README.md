@@ -396,7 +396,6 @@ RubyGems.org page under "LINKS" section.
 | AWS Key Management Service                            | Aws::KMS                                 | aws-sdk-kms                                 | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                       | aws-sdk-lakeformation                       | 2017-03-31  |
 | AWS Lambda                                            | Aws::Lambda                              | aws-sdk-lambda                              | 2015-03-31  |
-| AWS Lambda                                            | Aws::LambdaPreview                       | aws-sdk-lambdapreview                       | 2014-11-11  |
 | AWS Launch Wizard                                     | Aws::LaunchWizard                        | aws-sdk-launchwizard                        | 2018-05-10  |
 | AWS License Manager                                   | Aws::LicenseManager                      | aws-sdk-licensemanager                      | 2018-08-01  |
 | AWS License Manager Linux Subscriptions               | Aws::LicenseManagerLinuxSubscriptions    | aws-sdk-licensemanagerlinuxsubscriptions    | 2018-05-10  |
