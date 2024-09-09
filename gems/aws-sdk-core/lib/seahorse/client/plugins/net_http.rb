@@ -70,6 +70,15 @@ Sets the X509::Store to verify peer certificate.
           resolve_ssl_timeout(cfg)
         end
 
+        option(:http_client_cert, default: nil, doc_type: OpenSSL::X509::Certificate, docstring: <<-DOCS)
+Sets a client certificate when creating http connections.
+        DOCS
+
+
+        option(:http_client_key, default: nil, doc_type: OpenSSL::PKey, docstring: <<-DOCS)
+Sets a client key when creating http connections.
+        DOCS
+
         option(:logger) # for backwards compat
 
         handler(Client::NetHttp::Handler, step: :send)

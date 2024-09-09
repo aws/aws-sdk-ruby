@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add support for Http client cert and key to support mTLS.
+
 3.203.0 (2024-09-03)
 ------------------
 

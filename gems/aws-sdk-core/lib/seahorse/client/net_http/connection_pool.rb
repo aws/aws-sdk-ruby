@@ -34,7 +34,9 @@ module Seahorse
           ssl_ca_bundle: nil,
           ssl_ca_directory: nil,
           ssl_ca_store: nil,
-          ssl_timeout: nil
+          ssl_timeout: nil,
+          http_client_cert: nil,
+          http_client_key: nil
         }
 
         # @api private
@@ -246,7 +248,9 @@ module Seahorse
               :ssl_ca_bundle => options[:ssl_ca_bundle],
               :ssl_ca_directory => options[:ssl_ca_directory],
               :ssl_ca_store => options[:ssl_ca_store],
-              :ssl_timeout => options[:ssl_timeout]
+              :ssl_timeout => options[:ssl_timeout],
+              :http_client_cert => options[:http_client_cert],
+              :http_client_key => options[:http_client_key]
             }
           end
 
@@ -291,6 +295,11 @@ module Seahorse
               http.ca_file = ssl_ca_bundle if ssl_ca_bundle
               http.ca_path = ssl_ca_directory if ssl_ca_directory
               http.cert_store = ssl_ca_store if ssl_ca_store
+              http.cert = http_client_cert if http_client_cert
+              http.key = http_client_key if http_client_key
+
+              puts "Set stuff"
+              puts http.cert
             else
               http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             end
