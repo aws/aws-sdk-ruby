@@ -297,9 +297,6 @@ module Seahorse
               http.cert_store = ssl_ca_store if ssl_ca_store
               http.cert = http_client_cert if http_client_cert
               http.key = http_client_key if http_client_key
-
-              puts "Set stuff"
-              puts http.cert
             else
               http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             end
