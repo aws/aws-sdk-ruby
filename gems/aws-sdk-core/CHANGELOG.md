@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add support for `ssl_cert` and `ssl_key` configuration options to support mTLS.
+
 3.203.0 (2024-09-03)
 ------------------
 
