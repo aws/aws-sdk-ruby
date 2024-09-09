@@ -2178,6 +2178,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeListenerCertificatesOutput#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::DescribeListenerCertificatesOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_listener_certificates({
@@ -2554,6 +2556,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::DescribeRulesOutput#rules #rules} => Array&lt;Types::Rule&gt;
     #   * {Types::DescribeRulesOutput#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe a rule
@@ -5078,7 +5082,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

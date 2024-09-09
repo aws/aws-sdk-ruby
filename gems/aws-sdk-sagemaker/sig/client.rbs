@@ -712,7 +712,8 @@ module Aws
                                       volume_size_in_gb: ::Integer
                                     }?
                                   },
-                                ]?
+                                ]?,
+                                on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?
                               },
                             ],
                             ?vpc_config: {
@@ -724,7 +725,13 @@ module Aws
                                 key: ::String,
                                 value: ::String
                               },
-                            ]
+                            ],
+                            ?orchestrator: {
+                              eks: {
+                                cluster_arn: ::String
+                              }
+                            },
+                            ?node_recovery: ("Automatic" | "None")
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
@@ -4889,6 +4896,8 @@ module Aws
         def failure_message: () -> ::String
         def instance_groups: () -> ::Array[Types::ClusterInstanceGroupDetails]
         def vpc_config: () -> Types::VpcConfig
+        def orchestrator: () -> Types::ClusterOrchestrator
+        def node_recovery: () -> ("Automatic" | "None")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster-instance_method
       def describe_cluster: (
@@ -8075,9 +8084,11 @@ module Aws
                                       volume_size_in_gb: ::Integer
                                     }?
                                   },
-                                ]?
+                                ]?,
+                                on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?
                               },
-                            ]
+                            ],
+                            ?node_recovery: ("Automatic" | "None")
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
 

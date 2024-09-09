@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.260.0 (2024-09-09)
+------------------
+
+* Feature - Amazon Sagemaker supports orchestrating SageMaker HyperPod clusters with Amazon EKS
+
 1.259.0 (2024-09-05)
 ------------------
 

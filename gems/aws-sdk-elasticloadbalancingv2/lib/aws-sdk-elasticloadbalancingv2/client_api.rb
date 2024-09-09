@@ -1495,6 +1495,11 @@ module Aws::ElasticLoadBalancingV2
         o.input = Shapes::ShapeRef.new(shape: DescribeListenerCertificatesInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeListenerCertificatesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_listeners, Seahorse::Model::Operation.new.tap do |o|
@@ -1545,6 +1550,11 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RuleNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_ssl_policies, Seahorse::Model::Operation.new.tap do |o|

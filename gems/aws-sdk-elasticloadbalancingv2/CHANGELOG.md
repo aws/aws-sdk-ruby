@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2024-09-09)
+------------------
+
+* Feature - Add paginators for the ELBv2 DescribeListenerCertificates and DescribeRules APIs. Fix broken waiter for the ELBv2 DescribeLoadBalancers API.
+
 1.110.0 (2024-09-03)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-09-09)
+------------------
+
+* Feature - Amazon MSK Replicator can now replicate data to identically named topics between MSK clusters within the same AWS Region or across different AWS Regions.
+
 1.78.0 (2024-09-03)
 ------------------
 

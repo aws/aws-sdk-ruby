@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2024-09-09)
+------------------
+
+* Feature - Doc-only update for DynamoDB. Added information about async behavior for TagResource and UntagResource APIs and updated the description of ResourceInUseException.
+
 1.119.0 (2024-09-03)
 ------------------
 

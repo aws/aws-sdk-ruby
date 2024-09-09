@@ -262,6 +262,25 @@ module Aws::SageMakerRuntime
     #   parameter specifies the name of inference component to invoke.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   Creates a stateful session or identifies an existing one. You can do
+    #   one of the following:
+    #
+    #   * Create a stateful session by specifying the value `NEW_SESSION`.
+    #
+    #   * Send your request to an existing stateful session by specifying
+    #     the ID of that session.
+    #
+    #   With a stateful session, you can send multiple requests to a
+    #   stateful model. When you create a session with a stateful model, the
+    #   model must create the session ID and set the expiration time. The
+    #   model must also provide that information in the response to your
+    #   request. You can get the ID and timestamp from the `NewSessionId`
+    #   response parameter. For any subsequent request where you specify
+    #   that session ID, SageMaker routes the request to the same instance
+    #   that supports the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
     #
     class InvokeEndpointInput < Struct.new(
@@ -275,7 +294,8 @@ module Aws::SageMakerRuntime
       :target_container_hostname,
       :inference_id,
       :enable_explanations,
-      :inference_component_name)
+      :inference_component_name,
+      :session_id)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
@@ -331,13 +351,25 @@ module Aws::SageMakerRuntime
     #   [1]: https://tools.ietf.org/html/rfc7230#section-3.2.6
     #   @return [String]
     #
+    # @!attribute [rw] new_session_id
+    #   If you created a stateful session with your request, the ID and
+    #   expiration time that the model assigns to that session.
+    #   @return [String]
+    #
+    # @!attribute [rw] closed_session_id
+    #   If you closed a stateful session with your request, the ID of that
+    #   session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointOutput AWS API Documentation
     #
     class InvokeEndpointOutput < Struct.new(
       :body,
       :content_type,
       :invoked_production_variant,
-      :custom_attributes)
+      :custom_attributes,
+      :new_session_id,
+      :closed_session_id)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
@@ -429,6 +461,17 @@ module Aws::SageMakerRuntime
     #   streaming response.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The ID of a stateful session to handle your request.
+    #
+    #   You can't create a stateful session by using the
+    #   `InvokeEndpointWithResponseStream` action. Instead, you can create
+    #   one by using the ` InvokeEndpoint ` action. In your request, you
+    #   specify `NEW_SESSION` for the `SessionId` request parameter. The
+    #   response to that request provides the session ID for the
+    #   `NewSessionId` response parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointWithResponseStreamInput AWS API Documentation
     #
     class InvokeEndpointWithResponseStreamInput < Struct.new(
@@ -440,7 +483,8 @@ module Aws::SageMakerRuntime
       :target_variant,
       :target_container_hostname,
       :inference_id,
-      :inference_component_name)
+      :inference_component_name,
+      :session_id)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end

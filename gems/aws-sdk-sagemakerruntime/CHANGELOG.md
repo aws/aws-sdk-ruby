@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-09-09)
+------------------
+
+* Feature - AWS SageMaker Runtime feature: Add sticky routing to support stateful inference models.
+
 1.69.0 (2024-09-03)
 ------------------
 
