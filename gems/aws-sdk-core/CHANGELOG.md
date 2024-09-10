@@ -5,6 +5,17 @@ Unreleased Changes
 
 * Feature - Always validate response checksums for operations that support or require it. Supported config options are `WHEN_SUPPORTED` and `WHEN_REQUIRED`. The default value is `WHEN_SUPPORTED`. This option is configured in code with `:response_checksum_calculation`, in the shared config file as `response_checksum_calculation`, and in the ENV as `ENV['AWS_RESPONSE_CHECKSUM_CALCULATION']`.
 
+3.204.0 (2024-09-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Add support for `ssl_cert` and `ssl_key` configuration options to support mTLS.
+
 3.203.0 (2024-09-03)
 ------------------
 

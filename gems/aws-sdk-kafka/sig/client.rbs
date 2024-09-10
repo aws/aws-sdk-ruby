@@ -379,6 +379,9 @@ module Aws
                                      starting_position: {
                                        type: ("LATEST" | "EARLIEST")?
                                      }?,
+                                     topic_name_configuration: {
+                                       type: ("PREFIXED_WITH_SOURCE_CLUSTER_ALIAS" | "IDENTICAL")?
+                                     }?,
                                      topics_to_exclude: Array[::String]?,
                                      topics_to_replicate: Array[::String]
                                    }

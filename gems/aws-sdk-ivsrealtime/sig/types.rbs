@@ -65,6 +65,22 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class CreateIngestConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor stage_arn: ::String
+      attr_accessor user_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor ingest_protocol: ("RTMP" | "RTMPS")
+      attr_accessor insecure_ingest: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateIngestConfigurationResponse
+      attr_accessor ingest_configuration: Types::IngestConfiguration
+      SENSITIVE: []
+    end
+
     class CreateParticipantTokenRequest
       attr_accessor stage_arn: ::String
       attr_accessor duration: ::Integer
@@ -111,6 +127,15 @@ module Aws::IVSRealTime
     end
 
     class DeleteEncoderConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIngestConfigurationRequest
+      attr_accessor arn: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteIngestConfigurationResponse < Aws::EmptyStructure
     end
 
     class DeletePublicKeyRequest
@@ -197,7 +222,7 @@ module Aws::IVSRealTime
       attr_accessor participant_id: ::String
       attr_accessor event_time: ::Time
       attr_accessor remote_participant_id: ::String
-      attr_accessor error_code: ("INSUFFICIENT_CAPABILITIES" | "QUOTA_EXCEEDED" | "PUBLISHER_NOT_FOUND")
+      attr_accessor error_code: ("INSUFFICIENT_CAPABILITIES" | "QUOTA_EXCEEDED" | "PUBLISHER_NOT_FOUND" | "BITRATE_EXCEEDED" | "RESOLUTION_EXCEEDED" | "STREAM_DURATION_EXCEEDED" | "INVALID_AUDIO_CODEC" | "INVALID_VIDEO_CODEC" | "INVALID_PROTOCOL" | "INVALID_STREAM_KEY" | "REUSE_OF_STREAM_KEY")
       SENSITIVE: []
     end
 
@@ -218,6 +243,16 @@ module Aws::IVSRealTime
 
     class GetEncoderConfigurationResponse
       attr_accessor encoder_configuration: Types::EncoderConfiguration
+      SENSITIVE: []
+    end
+
+    class GetIngestConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngestConfigurationResponse
+      attr_accessor ingest_configuration: Types::IngestConfiguration
       SENSITIVE: []
     end
 
@@ -295,6 +330,31 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class IngestConfiguration
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor ingest_protocol: ("RTMP" | "RTMPS")
+      attr_accessor stream_key: ::String
+      attr_accessor stage_arn: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor state: ("ACTIVE" | "INACTIVE")
+      attr_accessor user_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:stream_key]
+    end
+
+    class IngestConfigurationSummary
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor ingest_protocol: ("RTMP" | "RTMPS")
+      attr_accessor stage_arn: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor state: ("ACTIVE" | "INACTIVE")
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor exception_message: ::String
       SENSITIVE: []
@@ -328,6 +388,20 @@ module Aws::IVSRealTime
 
     class ListEncoderConfigurationsResponse
       attr_accessor encoder_configurations: ::Array[Types::EncoderConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestConfigurationsRequest
+      attr_accessor filter_by_stage_arn: ::String
+      attr_accessor filter_by_state: ("ACTIVE" | "INACTIVE")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIngestConfigurationsResponse
+      attr_accessor ingest_configurations: ::Array[Types::IngestConfigurationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -440,6 +514,7 @@ module Aws::IVSRealTime
       attr_accessor recording_s3_bucket_name: ::String
       attr_accessor recording_s3_prefix: ::String
       attr_accessor recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED" | "DISABLED")
+      attr_accessor protocol: ("UNKNOWN" | "WHIP" | "RTMP" | "RTMPS")
       SENSITIVE: []
     end
 
@@ -552,6 +627,8 @@ module Aws::IVSRealTime
     class StageEndpoints
       attr_accessor events: ::String
       attr_accessor whip: ::String
+      attr_accessor rtmp: ::String
+      attr_accessor rtmps: ::String
       SENSITIVE: []
     end
 
@@ -631,6 +708,17 @@ module Aws::IVSRealTime
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateIngestConfigurationRequest
+      attr_accessor arn: ::String
+      attr_accessor stage_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIngestConfigurationResponse
+      attr_accessor ingest_configuration: Types::IngestConfiguration
+      SENSITIVE: []
     end
 
     class UpdateStageRequest

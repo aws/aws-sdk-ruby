@@ -5469,7 +5469,7 @@
         ]
     },
     {
-        "description": "Test cases for TestNoInputNoPayload operation",
+        "description": "Test cases for TestGetNoInputNoPayload operation",
         "metadata": {
             "protocol": "rest-json",
             "protocols": [
@@ -5480,15 +5480,15 @@
         "shapes": {},
         "cases": [
             {
-                "id": "RestJsonHttpWithNoInput",
+                "id": "RestJsonHttpGetWithNoInput",
                 "given": {
-                    "name": "TestNoInputNoPayload",
+                    "name": "TestGetNoInputNoPayload",
                     "http": {
                         "method": "GET",
                         "requestUri": "/no_input_no_payload",
                         "responseCode": 200
                     },
-                    "documentation": "<p>This example operation has no input and serializes a request without an HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
+                    "documentation": "<p>This example GET operation has no input and serializes a request without a HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
                 },
                 "description": "Serializes a GET request for an operation with no input, and therefore no modeled body",
                 "params": {},
@@ -5497,15 +5497,15 @@
                     "uri": "/no_input_no_payload",
                     "body": "",
                     "forbidHeaders": [
-                        "Content-Length",
-                        "Content-Type"
+                        "Content-Type",
+                        "Content-Length"
                     ]
                 }
             }
         ]
     },
     {
-        "description": "Test cases for TestNoPayload operation",
+        "description": "Test cases for TestGetNoPayload operation",
         "metadata": {
             "protocol": "rest-json",
             "protocols": [
@@ -5530,9 +5530,9 @@
         },
         "cases": [
             {
-                "id": "RestJsonHttpWithNoModeledBody",
+                "id": "RestJsonHttpGetWithNoModeledBody",
                 "given": {
-                    "name": "TestNoPayload",
+                    "name": "TestGetNoPayload",
                     "http": {
                         "method": "GET",
                         "requestUri": "/no_payload",
@@ -5541,7 +5541,7 @@
                     "input": {
                         "shape": "TestNoPayloadInputOutput"
                     },
-                    "documentation": "<p>This example operation serializes a request without an HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
+                    "documentation": "<p>This example GET operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
                 },
                 "description": "Serializes a GET request with no modeled body",
                 "params": {},
@@ -5556,9 +5556,9 @@
                 }
             },
             {
-                "id": "RestJsonHttpWithHeaderMemberNoModeledBody",
+                "id": "RestJsonHttpGetWithHeaderMemberNoModeledBody",
                 "given": {
-                    "name": "TestNoPayload",
+                    "name": "TestGetNoPayload",
                     "http": {
                         "method": "GET",
                         "requestUri": "/no_payload",
@@ -5567,7 +5567,7 @@
                     "input": {
                         "shape": "TestNoPayloadInputOutput"
                     },
-                    "documentation": "<p>This example operation serializes a request without an HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
+                    "documentation": "<p>This example GET operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Length, Content-Type) to operations that semantically cannot produce an HTTP body.</p>"
                 },
                 "description": "Serializes a GET request with header member but no modeled body",
                 "params": {
@@ -5640,10 +5640,7 @@
                 "serialized": {
                     "method": "POST",
                     "uri": "/blob_payload",
-                    "body": "",
-                    "headers": {
-                        "Content-Type": "application/octet-stream"
-                    }
+                    "body": ""
                 }
             },
             {
@@ -5812,6 +5809,123 @@
                     },
                     "requireHeaders": [
                         "Content-Length"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for TestPostNoInputNoPayload operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {},
+        "cases": [
+            {
+                "id": "RestJsonHttpPostWithNoInput",
+                "given": {
+                    "name": "TestPostNoInputNoPayload",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/no_input_no_payload",
+                        "responseCode": 200
+                    },
+                    "documentation": "<p>This example POST operation has no input and serializes a request without a HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Type) to a POST operation with no modeled input.</p>"
+                },
+                "description": "Serializes a POST request for an operation with no input, and therefore no modeled body",
+                "params": {},
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/no_input_no_payload",
+                    "body": "",
+                    "forbidHeaders": [
+                        "Content-Type"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for TestPostNoPayload operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "TestNoPayloadInputOutput": {
+                "type": "structure",
+                "members": {
+                    "testId": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Amz-Test-Id"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonHttpPostWithNoModeledBody",
+                "given": {
+                    "name": "TestPostNoPayload",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/no_payload",
+                        "responseCode": 200
+                    },
+                    "input": {
+                        "shape": "TestNoPayloadInputOutput"
+                    },
+                    "documentation": "<p>This example POST operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Type) to a POST operation with no modeled payload.</p>"
+                },
+                "description": "Serializes a POST request with no modeled body",
+                "params": {},
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/no_payload",
+                    "body": "",
+                    "forbidHeaders": [
+                        "Content-Type"
+                    ]
+                }
+            },
+            {
+                "id": "RestJsonHttpWithPostHeaderMemberNoModeledBody",
+                "given": {
+                    "name": "TestPostNoPayload",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/no_payload",
+                        "responseCode": 200
+                    },
+                    "input": {
+                        "shape": "TestNoPayloadInputOutput"
+                    },
+                    "documentation": "<p>This example POST operation serializes a request without a modeled HTTP body.</p> <p>These tests are to ensure we do not attach a body or related headers (Content-Type) to a POST operation with no modeled payload.</p>"
+                },
+                "description": "Serializes a POST request with header member but no modeled body",
+                "params": {
+                    "testId": "t-12345"
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/no_payload",
+                    "body": "",
+                    "headers": {
+                        "X-Amz-Test-Id": "t-12345"
+                    },
+                    "forbidHeaders": [
+                        "Content-Type"
                     ]
                 }
             }

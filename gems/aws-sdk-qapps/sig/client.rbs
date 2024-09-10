@@ -97,6 +97,7 @@ module Aws
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
         def rating_count: () -> ::Integer
+        def is_verified: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#create_library_item-instance_method
       def create_library_item: (
@@ -281,6 +282,7 @@ module Aws
         def rating_count: () -> ::Integer
         def is_rated_by_user: () -> bool
         def user_count: () -> ::Integer
+        def is_verified: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#get_library_item-instance_method
       def get_library_item: (
@@ -461,6 +463,7 @@ module Aws
         def rating_count: () -> ::Integer
         def is_rated_by_user: () -> bool
         def user_count: () -> ::Integer
+        def is_verified: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#update_library_item-instance_method
       def update_library_item: (
@@ -470,6 +473,14 @@ module Aws
                                  ?categories: Array[::String]
                                ) -> _UpdateLibraryItemResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLibraryItemResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QApps/Client.html#update_library_item_metadata-instance_method
+      def update_library_item_metadata: (
+                                          instance_id: ::String,
+                                          library_item_id: ::String,
+                                          ?is_verified: bool
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UpdateQAppResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQAppOutput]

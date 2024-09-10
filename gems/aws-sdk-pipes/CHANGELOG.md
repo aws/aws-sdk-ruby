@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-09-10)
+------------------
+
+* Feature - This release adds support for customer managed KMS keys in Amazon EventBridge Pipe
+
 1.25.0 (2024-09-03)
 ------------------
 

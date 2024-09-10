@@ -496,6 +496,23 @@ module Aws::Pipes
     #   The logging configuration settings for the pipe.
     #   @return [Types::PipeLogConfigurationParameters]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use, if you choose to use a customer managed key to encrypt pipe
+    #   data. The identifier can be the key Amazon Resource Name (ARN),
+    #   KeyId, key alias, or key alias ARN.
+    #
+    #   If you do not specify a customer managed key identifier, EventBridge
+    #   uses an Amazon Web Services owned key to encrypt pipe data.
+    #
+    #   For more information, see [Managing keys][1] in the *Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CreatePipeRequest AWS API Documentation
     #
     class CreatePipeRequest < Struct.new(
@@ -510,7 +527,8 @@ module Aws::Pipes
       :target_parameters,
       :role_arn,
       :tags,
-      :log_configuration)
+      :log_configuration,
+      :kms_key_identifier)
       SENSITIVE = [:description, :tags]
       include Aws::Structure
     end
@@ -722,6 +740,18 @@ module Aws::Pipes
     #   The logging configuration settings for the pipe.
     #   @return [Types::PipeLogConfiguration]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use to encrypt pipe data, if one has been specified.
+    #
+    #   For more information, see [Data encryption in EventBridge][1] in the
+    #   *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DescribePipeResponse AWS API Documentation
     #
     class DescribePipeResponse < Struct.new(
@@ -741,7 +771,8 @@ module Aws::Pipes
       :tags,
       :creation_time,
       :last_modified_time,
-      :log_configuration)
+      :log_configuration,
+      :kms_key_identifier)
       SENSITIVE = [:description, :tags]
       include Aws::Structure
     end
@@ -2807,15 +2838,7 @@ module Aws::Pipes
     # @!attribute [rw] output_format
     #   The format EventBridge uses for the log records.
     #
-    #   * `json`: JSON
-    #
-    #   * `plain`: Plain text
-    #
-    #   * `w3c`: [W3C extended logging file format][1]
-    #
-    #
-    #
-    #   [1]: https://www.w3.org/TR/WD-logfile
+    #   EventBridge currently only supports `json` formatting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/S3LogDestination AWS API Documentation
@@ -2844,15 +2867,7 @@ module Aws::Pipes
     # @!attribute [rw] output_format
     #   How EventBridge should format the log records.
     #
-    #   * `json`: JSON
-    #
-    #   * `plain`: Plain text
-    #
-    #   * `w3c`: [W3C extended logging file format][1]
-    #
-    #
-    #
-    #   [1]: https://www.w3.org/TR/WD-logfile
+    #   EventBridge currently only supports `json` formatting.
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -2956,8 +2971,7 @@ module Aws::Pipes
     # @!attribute [rw] security_group
     #   Specifies the security groups associated with the stream. These
     #   security groups must all be in the same VPC. You can specify as many
-    #   as five security groups. If you do not specify a security group, the
-    #   default security group for the VPC is used.
+    #   as five security groups.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/SelfManagedKafkaAccessConfigurationVpc AWS API Documentation
@@ -3284,6 +3298,28 @@ module Aws::Pipes
     #   The logging configuration settings for the pipe.
     #   @return [Types::PipeLogConfigurationParameters]
     #
+    # @!attribute [rw] kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to
+    #   use, if you choose to use a customer managed key to encrypt pipe
+    #   data. The identifier can be the key Amazon Resource Name (ARN),
+    #   KeyId, key alias, or key alias ARN.
+    #
+    #   To update a pipe that is using the default Amazon Web Services owned
+    #   key to use a customer managed key instead, or update a pipe that is
+    #   using a customer managed key to use a different customer managed
+    #   key, specify a customer managed key identifier.
+    #
+    #   To update a pipe that is using a customer managed key to use the
+    #   default Amazon Web Services owned key, specify an empty string.
+    #
+    #   For more information, see [Managing keys][1] in the *Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeRequest AWS API Documentation
     #
     class UpdatePipeRequest < Struct.new(
@@ -3296,7 +3332,8 @@ module Aws::Pipes
       :target,
       :target_parameters,
       :role_arn,
-      :log_configuration)
+      :log_configuration,
+      :kms_key_identifier)
       SENSITIVE = [:description]
       include Aws::Structure
     end

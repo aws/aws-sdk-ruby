@@ -55,6 +55,7 @@ module Aws::SageMakerRuntime
       attr_accessor inference_id: ::String
       attr_accessor enable_explanations: ::String
       attr_accessor inference_component_name: ::String
+      attr_accessor session_id: ::String
       SENSITIVE: [:body, :custom_attributes]
     end
 
@@ -63,6 +64,8 @@ module Aws::SageMakerRuntime
       attr_accessor content_type: ::String
       attr_accessor invoked_production_variant: ::String
       attr_accessor custom_attributes: ::String
+      attr_accessor new_session_id: ::String
+      attr_accessor closed_session_id: ::String
       SENSITIVE: [:body, :custom_attributes]
     end
 
@@ -76,6 +79,7 @@ module Aws::SageMakerRuntime
       attr_accessor target_container_hostname: ::String
       attr_accessor inference_id: ::String
       attr_accessor inference_component_name: ::String
+      attr_accessor session_id: ::String
       SENSITIVE: [:body, :custom_attributes]
     end
 

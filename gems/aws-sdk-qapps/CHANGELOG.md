@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2024-09-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.2.0 (2024-09-06)
+------------------
+
+* Feature - Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item.
+
 1.1.0 (2024-09-03)
 ------------------
 

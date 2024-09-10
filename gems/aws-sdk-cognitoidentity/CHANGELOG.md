@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2024-09-10)
+------------------
+
+* Feature - This release adds sensitive trait to some required shapes.
+
 1.61.0 (2024-09-03)
 ------------------
 
