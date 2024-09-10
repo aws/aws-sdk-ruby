@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-09-10)
+------------------
+
+* Feature - Documentation-only update that clarifies the ValidateE911Address action of the Amazon Chime SDK Voice APIs.
+
 1.27.0 (2024-09-03)
 ------------------
 

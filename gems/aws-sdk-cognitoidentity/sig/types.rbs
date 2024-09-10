@@ -38,7 +38,7 @@ module Aws::CognitoIdentity
       attr_accessor secret_key: ::String
       attr_accessor session_token: ::String
       attr_accessor expiration: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:secret_key]
     end
 
     class DeleteIdentitiesInput
@@ -125,7 +125,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenForDeveloperIdentityResponse
       attr_accessor identity_id: ::String
       attr_accessor token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:token]
     end
 
     class GetOpenIdTokenInput
@@ -137,7 +137,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenResponse
       attr_accessor identity_id: ::String
       attr_accessor token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:token]
     end
 
     class GetPrincipalTagAttributeMapInput

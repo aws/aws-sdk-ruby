@@ -425,6 +425,12 @@ module Aws::ChimeSDKVoice
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -2310,7 +2316,7 @@ module Aws::ChimeSDKVoice
     #   The Voice Connector ID.
     #
     # @option params [required, String] :voice_tone_analysis_task_id
-    #   The ID of the voice tone anlysis task.
+    #   The ID of the voice tone analysis task.
     #
     # @option params [required, Boolean] :is_caller
     #   Specifies whether the voice being analyzed is the caller (originator)
@@ -4189,7 +4195,13 @@ module Aws::ChimeSDKVoice
     #   The address state, such as `ME`.
     #
     # @option params [required, String] :country
-    #   The country in the address being validated.
+    #   The country in the address being validated as two-letter country code
+    #   in ISO 3166-1 alpha-2 format, such as `US`. For more information, see
+    #   [ISO 3166-1 alpha-2][1] in Wikipedia.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     #
     # @option params [required, String] :postal_code
     #   The dress postal code, such `04352`.
@@ -4263,7 +4275,7 @@ module Aws::ChimeSDKVoice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkvoice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

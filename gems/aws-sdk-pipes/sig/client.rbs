@@ -400,7 +400,8 @@ module Aws
                            }?,
                            level: ("OFF" | "ERROR" | "INFO" | "TRACE"),
                            include_execution_data: Array[("ALL")]?
-                         }
+                         },
+                         ?kms_key_identifier: ::String
                        ) -> _CreatePipeResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipeResponseSuccess
 
@@ -438,6 +439,7 @@ module Aws
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
         def log_configuration: () -> Types::PipeLogConfiguration
+        def kms_key_identifier: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Pipes/Client.html#describe_pipe-instance_method
       def describe_pipe: (
@@ -833,7 +835,8 @@ module Aws
                            }?,
                            level: ("OFF" | "ERROR" | "INFO" | "TRACE"),
                            include_execution_data: Array[("ALL")]?
-                         }
+                         },
+                         ?kms_key_identifier: ::String
                        ) -> _UpdatePipeResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipeResponseSuccess
     end

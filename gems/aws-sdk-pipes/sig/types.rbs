@@ -88,6 +88,7 @@ module Aws::Pipes
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_configuration: Types::PipeLogConfigurationParameters
+      attr_accessor kms_key_identifier: ::String
       SENSITIVE: [:description]
     end
 
@@ -144,6 +145,7 @@ module Aws::Pipes
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor log_configuration: Types::PipeLogConfiguration
+      attr_accessor kms_key_identifier: ::String
       SENSITIVE: [:description]
     end
 
@@ -701,6 +703,7 @@ module Aws::Pipes
       attr_accessor target_parameters: Types::PipeTargetParameters
       attr_accessor role_arn: ::String
       attr_accessor log_configuration: Types::PipeLogConfigurationParameters
+      attr_accessor kms_key_identifier: ::String
       SENSITIVE: [:description]
     end
 
