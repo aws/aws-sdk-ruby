@@ -52,6 +52,6 @@ require_relative 'aws-sdk-kinesisvideowebrtcstorage/customizations'
 # @!group service
 module Aws::KinesisVideoWebRTCStorage
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end

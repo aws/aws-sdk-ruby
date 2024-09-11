@@ -99,6 +99,7 @@ module Aws::Pipes
     KafkaTopicName = Shapes::StringShape.new(name: 'KafkaTopicName')
     KinesisPartitionKey = Shapes::StringShape.new(name: 'KinesisPartitionKey')
     KinesisStreamStartPosition = Shapes::StringShape.new(name: 'KinesisStreamStartPosition')
+    KmsKeyIdentifier = Shapes::StringShape.new(name: 'KmsKeyIdentifier')
     LaunchType = Shapes::StringShape.new(name: 'LaunchType')
     LimitMax10 = Shapes::IntegerShape.new(name: 'LimitMax10')
     LimitMax100 = Shapes::IntegerShape.new(name: 'LimitMax100')
@@ -319,6 +320,7 @@ module Aws::Pipes
     CreatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreatePipeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreatePipeRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfigurationParameters, location_name: "LogConfiguration"))
+    CreatePipeRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     CreatePipeRequest.struct_class = Types::CreatePipeRequest
 
     CreatePipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
@@ -363,6 +365,7 @@ module Aws::Pipes
     DescribePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribePipeResponse.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfiguration, location_name: "LogConfiguration"))
+    DescribePipeResponse.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     DescribePipeResponse.struct_class = Types::DescribePipeResponse
 
     DimensionMapping.add_member(:dimension_value, Shapes::ShapeRef.new(shape: DimensionValue, required: true, location_name: "DimensionValue"))
@@ -832,6 +835,7 @@ module Aws::Pipes
     UpdatePipeRequest.add_member(:target_parameters, Shapes::ShapeRef.new(shape: PipeTargetParameters, location_name: "TargetParameters"))
     UpdatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     UpdatePipeRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfigurationParameters, location_name: "LogConfiguration"))
+    UpdatePipeRequest.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
     UpdatePipeRequest.struct_class = Types::UpdatePipeRequest
 
     UpdatePipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
@@ -914,6 +918,7 @@ module Aws::Pipes
 
       api.metadata = {
         "apiVersion" => "2015-10-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "pipes",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

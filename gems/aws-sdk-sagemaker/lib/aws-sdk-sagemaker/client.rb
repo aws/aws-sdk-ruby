@@ -432,6 +432,12 @@ module Aws::SageMaker
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -1873,6 +1879,18 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
     #
+    # @option params [Types::ClusterOrchestrator] :orchestrator
+    #   The type of orchestrator to use for the SageMaker HyperPod cluster.
+    #   Currently, the only supported value is `"eks"`, which is to use an
+    #   Amazon Elastic Kubernetes Service (EKS) cluster as the orchestrator.
+    #
+    # @option params [String] :node_recovery
+    #   The node recovery mode for the SageMaker HyperPod cluster. When set to
+    #   `Automatic`, SageMaker HyperPod will automatically reboot or replace
+    #   faulty nodes when issues are detected. When set to `None`, cluster
+    #   administrators will need to manually manage any faulty cluster
+    #   instances.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster_arn #cluster_arn} => String
@@ -1890,7 +1908,7 @@ module Aws::SageMaker
     #           source_s3_uri: "S3Uri", # required
     #           on_create: "ClusterLifeCycleConfigFileName", # required
     #         },
-    #         execution_role: "IAMRoleArn", # required
+    #         execution_role: "RoleArn", # required
     #         threads_per_core: 1,
     #         instance_storage_configs: [
     #           {
@@ -1899,6 +1917,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
     #       },
     #     ],
     #     vpc_config: {
@@ -1911,6 +1930,12 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     orchestrator: {
+    #       eks: { # required
+    #         cluster_arn: "EksClusterArn", # required
+    #       },
+    #     },
+    #     node_recovery: "Automatic", # accepts Automatic, None
     #   })
     #
     # @example Response structure
@@ -12062,6 +12087,8 @@ module Aws::SageMaker
     #   * {Types::DescribeClusterResponse#failure_message #failure_message} => String
     #   * {Types::DescribeClusterResponse#instance_groups #instance_groups} => Array&lt;Types::ClusterInstanceGroupDetails&gt;
     #   * {Types::DescribeClusterResponse#vpc_config #vpc_config} => Types::VpcConfig
+    #   * {Types::DescribeClusterResponse#orchestrator #orchestrator} => Types::ClusterOrchestrator
+    #   * {Types::DescribeClusterResponse#node_recovery #node_recovery} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -12087,10 +12114,14 @@ module Aws::SageMaker
     #   resp.instance_groups[0].threads_per_core #=> Integer
     #   resp.instance_groups[0].instance_storage_configs #=> Array
     #   resp.instance_groups[0].instance_storage_configs[0].ebs_volume_config.volume_size_in_gb #=> Integer
+    #   resp.instance_groups[0].on_start_deep_health_checks #=> Array
+    #   resp.instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity"
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnets #=> Array
     #   resp.vpc_config.subnets[0] #=> String
+    #   resp.orchestrator.eks.cluster_arn #=> String
+    #   resp.node_recovery #=> String, one of "Automatic", "None"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCluster AWS API Documentation
     #
@@ -12126,7 +12157,7 @@ module Aws::SageMaker
     #
     #   resp.node_details.instance_group_name #=> String
     #   resp.node_details.instance_id #=> String
-    #   resp.node_details.instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating"
+    #   resp.node_details.instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress"
     #   resp.node_details.instance_status.message #=> String
     #   resp.node_details.instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge"
     #   resp.node_details.launch_time #=> Time
@@ -18137,7 +18168,7 @@ module Aws::SageMaker
     #   resp.cluster_node_summaries[0].instance_id #=> String
     #   resp.cluster_node_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge"
     #   resp.cluster_node_summaries[0].launch_time #=> Time
-    #   resp.cluster_node_summaries[0].instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating"
+    #   resp.cluster_node_summaries[0].instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress"
     #   resp.cluster_node_summaries[0].instance_status.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterNodes AWS API Documentation
@@ -24719,6 +24750,10 @@ module Aws::SageMaker
     # @option params [required, Array<Types::ClusterInstanceGroupSpecification>] :instance_groups
     #   Specify the instance groups to update.
     #
+    # @option params [String] :node_recovery
+    #   The node recovery mode to be applied to the SageMaker HyperPod
+    #   cluster.
+    #
     # @return [Types::UpdateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateClusterResponse#cluster_arn #cluster_arn} => String
@@ -24736,7 +24771,7 @@ module Aws::SageMaker
     #           source_s3_uri: "S3Uri", # required
     #           on_create: "ClusterLifeCycleConfigFileName", # required
     #         },
-    #         execution_role: "IAMRoleArn", # required
+    #         execution_role: "RoleArn", # required
     #         threads_per_core: 1,
     #         instance_storage_configs: [
     #           {
@@ -24745,8 +24780,10 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
     #       },
     #     ],
+    #     node_recovery: "Automatic", # accepts Automatic, None
     #   })
     #
     # @example Response structure
@@ -27737,7 +27774,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.259.0'
+      context[:gem_version] = '1.261.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

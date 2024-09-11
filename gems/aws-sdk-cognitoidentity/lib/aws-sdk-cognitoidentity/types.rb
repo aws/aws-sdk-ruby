@@ -154,7 +154,7 @@ module Aws::CognitoIdentity
       :secret_key,
       :session_token,
       :expiration)
-      SENSITIVE = []
+      SENSITIVE = [:secret_key]
       include Aws::Structure
     end
 
@@ -297,7 +297,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       :custom_role_arn)
-      SENSITIVE = []
+      SENSITIVE = [:logins]
       include Aws::Structure
     end
 
@@ -358,7 +358,7 @@ module Aws::CognitoIdentity
       :account_id,
       :identity_pool_id,
       :logins)
-      SENSITIVE = []
+      SENSITIVE = [:logins]
       include Aws::Structure
     end
 
@@ -471,7 +471,7 @@ module Aws::CognitoIdentity
       :logins,
       :principal_tags,
       :token_duration)
-      SENSITIVE = []
+      SENSITIVE = [:logins]
       include Aws::Structure
     end
 
@@ -491,7 +491,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenForDeveloperIdentityResponse < Struct.new(
       :identity_id,
       :token)
-      SENSITIVE = []
+      SENSITIVE = [:token]
       include Aws::Structure
     end
 
@@ -514,7 +514,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenInput < Struct.new(
       :identity_id,
       :logins)
-      SENSITIVE = []
+      SENSITIVE = [:logins]
       include Aws::Structure
     end
 
@@ -534,7 +534,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenResponse < Struct.new(
       :identity_id,
       :token)
-      SENSITIVE = []
+      SENSITIVE = [:token]
       include Aws::Structure
     end
 
@@ -1312,7 +1312,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       :logins_to_remove)
-      SENSITIVE = []
+      SENSITIVE = [:logins]
       include Aws::Structure
     end
 

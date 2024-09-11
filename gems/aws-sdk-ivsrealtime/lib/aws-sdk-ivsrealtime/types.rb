@@ -93,14 +93,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] start_time
@@ -148,14 +149,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] start_time
@@ -205,14 +207,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateEncoderConfigurationRequest AWS API Documentation
@@ -233,6 +236,81 @@ module Aws::IVSRealTime
     #
     class CreateEncoderConfigurationResponse < Struct.new(
       :encoder_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Optional name that can be specified for the IngestConfiguration
+    #   being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage with which the IngestConfiguration is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   Customer-assigned name to help identify the participant using the
+    #   IngestConfiguration; this can be used to link a participant to a
+    #   user in the customer’s own systems. This can be any UTF-8 encoded
+    #   text. *This field is exposed to all stage participants and should
+    #   not be used for personally identifying, confidential, or sensitive
+    #   information.*
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Application-provided attributes to store in the IngestConfiguration
+    #   and attach to a stage. Map keys and values can contain UTF-8 encoded
+    #   text. The maximum length of this field is 1 KB total. *This field is
+    #   exposed to all stage participants and should not be used for
+    #   personally identifying, confidential, or sensitive information.*
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ingest_protocol
+    #   Type of ingest protocol that the user employs to broadcast. If this
+    #   is set to `RTMP`, `insecureIngest` must be set to `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] insecure_ingest
+    #   Whether the stage allows insecure RTMP ingest. This must be set to
+    #   `true`, if `ingestProtocol` is set to `RTMP`. Default: `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateIngestConfigurationRequest AWS API Documentation
+    #
+    class CreateIngestConfigurationRequest < Struct.new(
+      :name,
+      :stage_arn,
+      :user_id,
+      :attributes,
+      :ingest_protocol,
+      :insecure_ingest,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingest_configuration
+    #   The IngestConfiguration that was created.
+    #   @return [Types::IngestConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateIngestConfigurationResponse AWS API Documentation
+    #
+    class CreateIngestConfigurationResponse < Struct.new(
+      :ingest_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -301,14 +379,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] auto_participant_recording_configuration
@@ -356,14 +435,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStorageConfigurationRequest AWS API Documentation
@@ -403,6 +483,30 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteEncoderConfigurationResponse AWS API Documentation
     #
     class DeleteEncoderConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] arn
+    #   ARN of the IngestConfiguration.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Optional field to force deletion of the IngestConfiguration. If this
+    #   is set to `true` when a participant is actively publishing, the
+    #   participant is disconnected from the stage, followed by deletion of
+    #   the IngestConfiguration. Default: `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteIngestConfigurationRequest AWS API Documentation
+    #
+    class DeleteIngestConfigurationRequest < Struct.new(
+      :arn,
+      :force)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteIngestConfigurationResponse AWS API Documentation
+    #
+    class DeleteIngestConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
     #   ARN of the public key to be deleted.
@@ -569,8 +673,10 @@ module Aws::IVSRealTime
     #   @return [String]
     #
     # @!attribute [rw] participant_id
-    #   Identifier of the participant to be disconnected. This is assigned
-    #   by IVS and returned by CreateParticipantToken.
+    #   Identifier of the participant to be disconnected. IVS assigns this;
+    #   it is returned by CreateParticipantToken (for streams using WebRTC
+    #   ingest) or CreateIngestConfiguration (for streams using RTMP
+    #   ingest).
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -608,14 +714,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/EncoderConfiguration AWS API Documentation
@@ -641,14 +748,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/EncoderConfigurationSummary AWS API Documentation
@@ -757,6 +865,30 @@ module Aws::IVSRealTime
     #
     class GetEncoderConfigurationResponse < Struct.new(
       :encoder_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the ingest for which the information is to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetIngestConfigurationRequest AWS API Documentation
+    #
+    class GetIngestConfigurationRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingest_configuration
+    #   The IngestConfiguration that was returned.
+    #   @return [Types::IngestConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetIngestConfigurationResponse AWS API Documentation
+    #
+    class GetIngestConfigurationResponse < Struct.new(
+      :ingest_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -956,14 +1088,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ImportPublicKeyRequest AWS API Documentation
@@ -984,6 +1117,137 @@ module Aws::IVSRealTime
     #
     class ImportPublicKeyResponse < Struct.new(
       :public_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying an ingest configuration.
+    #
+    # @!attribute [rw] name
+    #   Ingest name
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   Ingest configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingest_protocol
+    #   Type of ingest protocol that the user employs for broadcasting.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_key
+    #   Ingest-key value for the RTMP(S) protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage with which the IngestConfiguration is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   ID of the participant within the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   State of the ingest configuration. It is `ACTIVE` if a publisher
+    #   currently is publishing to the stage associated with the ingest
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   Customer-assigned name to help identify the participant using the
+    #   IngestConfiguration; this can be used to link a participant to a
+    #   user in the customer’s own systems. This can be any UTF-8 encoded
+    #   text. *This field is exposed to all stage participants and should
+    #   not be used for personally identifying, confidential, or sensitive
+    #   information.*
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Application-provided attributes to to store in the
+    #   IngestConfiguration and attach to a stage. Map keys and values can
+    #   contain UTF-8 encoded text. The maximum length of this field is 1 KB
+    #   total. *This field is exposed to all stage participants and should
+    #   not be used for personally identifying, confidential, or sensitive
+    #   information.*
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/IngestConfiguration AWS API Documentation
+    #
+    class IngestConfiguration < Struct.new(
+      :name,
+      :arn,
+      :ingest_protocol,
+      :stream_key,
+      :stage_arn,
+      :participant_id,
+      :state,
+      :user_id,
+      :attributes,
+      :tags)
+      SENSITIVE = [:stream_key]
+      include Aws::Structure
+    end
+
+    # Summary information about an IngestConfiguration.
+    #
+    # @!attribute [rw] name
+    #   Ingest name.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   Ingest configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingest_protocol
+    #   Type of ingest protocol that the user employs for broadcasting.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage with which the IngestConfiguration is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   ID of the participant within the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   State of the ingest configuration. It is `ACTIVE` if a publisher
+    #   currently is publishing to the stage associated with the ingest
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   Customer-assigned name to help identify the participant using the
+    #   IngestConfiguration; this can be used to link a participant to a
+    #   user in the customer’s own systems. This can be any UTF-8 encoded
+    #   text. *This field is exposed to all stage participants and should
+    #   not be used for personally identifying, confidential, or sensitive
+    #   information.*
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/IngestConfigurationSummary AWS API Documentation
+    #
+    class IngestConfigurationSummary < Struct.new(
+      :name,
+      :arn,
+      :ingest_protocol,
+      :stage_arn,
+      :participant_id,
+      :state,
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1099,6 +1363,55 @@ module Aws::IVSRealTime
     #
     class ListEncoderConfigurationsResponse < Struct.new(
       :encoder_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_by_stage_arn
+    #   Filters the response list to match the specified stage ARN. Only one
+    #   filter (by stage ARN or by state) can be used at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_by_state
+    #   Filters the response list to match the specified state. Only one
+    #   filter (by stage ARN or by state) can be used at a time.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The first IngestConfiguration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 50.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListIngestConfigurationsRequest AWS API Documentation
+    #
+    class ListIngestConfigurationsRequest < Struct.new(
+      :filter_by_stage_arn,
+      :filter_by_state,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingest_configurations
+    #   List of the matching ingest configurations (summary information
+    #   only).
+    #   @return [Array<Types::IngestConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more IngestConfigurations than `maxResults`, use
+    #   `nextToken` in the request to get the next set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListIngestConfigurationsResponse AWS API Documentation
+    #
+    class ListIngestConfigurationsResponse < Struct.new(
+      :ingest_configurations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1487,6 +1800,11 @@ module Aws::IVSRealTime
     #   The participant’s recording state.
     #   @return [String]
     #
+    # @!attribute [rw] protocol
+    #   Type of ingest protocol that the participant employs for
+    #   broadcasting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Participant AWS API Documentation
     #
     class Participant < Struct.new(
@@ -1504,7 +1822,8 @@ module Aws::IVSRealTime
       :sdk_version,
       :recording_s3_bucket_name,
       :recording_s3_prefix,
-      :recording_state)
+      :recording_state,
+      :protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1767,14 +2086,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/PublicKey AWS API Documentation
@@ -1801,14 +2121,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/PublicKeySummary AWS API Documentation
@@ -1935,14 +2256,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] auto_participant_recording_configuration
@@ -1967,21 +2289,36 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # Summary information about various endpoints for a stage.
+    # Summary information about various endpoints for a stage. We recommend
+    # that you cache these values at stage creation; the values can be
+    # cached for up to 14 days.
     #
     # @!attribute [rw] events
     #   Events endpoint.
     #   @return [String]
     #
     # @!attribute [rw] whip
-    #   WHIP endpoint.
+    #   The endpoint to be used for IVS real-time streaming using the WHIP
+    #   protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] rtmp
+    #   The endpoint to be used for IVS real-time streaming using the RTMP
+    #   protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] rtmps
+    #   The endpoint to be used for IVS real-time streaming using the RTMPS
+    #   protocol.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StageEndpoints AWS API Documentation
     #
     class StageEndpoints < Struct.new(
       :events,
-      :whip)
+      :whip,
+      :rtmp,
+      :rtmps)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2058,14 +2395,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StageSummary AWS API Documentation
@@ -2100,14 +2438,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartCompositionRequest AWS API Documentation
@@ -2168,14 +2507,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StorageConfiguration AWS API Documentation
@@ -2206,14 +2546,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StorageConfigurationSummary AWS API Documentation
@@ -2233,14 +2574,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tags
     #   Array of tags to be added or updated. Array of maps, each of the
-    #   form `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   form `string:string (key:value)`. See [Best practices and
+    #   strategies][1] in *Tagging AWS Resources and Tag Editor* for
     #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints beyond what
-    #   is documented there.
+    #   limits and requirements"; Amazon IVS has no constraints on tags
+    #   beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/TagResourceRequest AWS API Documentation
@@ -2262,14 +2604,15 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints beyond what
-    #   is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UntagResourceRequest AWS API Documentation
@@ -2284,6 +2627,36 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] arn
+    #   ARN of the IngestConfiguration, for which the related stage ARN
+    #   needs to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_arn
+    #   Stage ARN that needs to be updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateIngestConfigurationRequest AWS API Documentation
+    #
+    class UpdateIngestConfigurationRequest < Struct.new(
+      :arn,
+      :stage_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingest_configuration
+    #   The updated IngestConfiguration.
+    #   @return [Types::IngestConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateIngestConfigurationResponse AWS API Documentation
+    #
+    class UpdateIngestConfigurationResponse < Struct.new(
+      :ingest_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] arn
     #   ARN of the stage to be updated.

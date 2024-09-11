@@ -425,6 +425,12 @@ module Aws::IVSRealTime
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -448,14 +454,15 @@ module Aws::IVSRealTime
     #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::CreateEncoderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -493,6 +500,95 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def create_encoder_configuration(params = {}, options = {})
       req = build_request(:create_encoder_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a new IngestConfiguration resource, used to specify the ingest
+    # protocol for a stage.
+    #
+    # @option params [String] :name
+    #   Optional name that can be specified for the IngestConfiguration being
+    #   created.
+    #
+    # @option params [String] :stage_arn
+    #   ARN of the stage with which the IngestConfiguration is associated.
+    #
+    # @option params [String] :user_id
+    #   Customer-assigned name to help identify the participant using the
+    #   IngestConfiguration; this can be used to link a participant to a user
+    #   in the customer’s own systems. This can be any UTF-8 encoded text.
+    #   *This field is exposed to all stage participants and should not be
+    #   used for personally identifying, confidential, or sensitive
+    #   information.*
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   Application-provided attributes to store in the IngestConfiguration
+    #   and attach to a stage. Map keys and values can contain UTF-8 encoded
+    #   text. The maximum length of this field is 1 KB total. *This field is
+    #   exposed to all stage participants and should not be used for
+    #   personally identifying, confidential, or sensitive information.*
+    #
+    # @option params [required, String] :ingest_protocol
+    #   Type of ingest protocol that the user employs to broadcast. If this is
+    #   set to `RTMP`, `insecureIngest` must be set to `true`.
+    #
+    # @option params [Boolean] :insecure_ingest
+    #   Whether the stage allows insecure RTMP ingest. This must be set to
+    #   `true`, if `ingestProtocol` is set to `RTMP`. Default: `false`.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags attached to the resource. Array of maps, each of the form
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+    #
+    # @return [Types::CreateIngestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIngestConfigurationResponse#ingest_configuration #ingest_configuration} => Types::IngestConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ingest_configuration({
+    #     name: "IngestConfigurationName",
+    #     stage_arn: "IngestConfigurationStageArn",
+    #     user_id: "UserId",
+    #     attributes: {
+    #       "String" => "String",
+    #     },
+    #     ingest_protocol: "RTMP", # required, accepts RTMP, RTMPS
+    #     insecure_ingest: false,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingest_configuration.name #=> String
+    #   resp.ingest_configuration.arn #=> String
+    #   resp.ingest_configuration.ingest_protocol #=> String, one of "RTMP", "RTMPS"
+    #   resp.ingest_configuration.stream_key #=> String
+    #   resp.ingest_configuration.stage_arn #=> String
+    #   resp.ingest_configuration.participant_id #=> String
+    #   resp.ingest_configuration.state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.ingest_configuration.user_id #=> String
+    #   resp.ingest_configuration.attributes #=> Hash
+    #   resp.ingest_configuration.attributes["String"] #=> String
+    #   resp.ingest_configuration.tags #=> Hash
+    #   resp.ingest_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateIngestConfiguration AWS API Documentation
+    #
+    # @overload create_ingest_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_ingest_configuration(params = {}, options = {})
+      req = build_request(:create_ingest_configuration, params)
       req.send_request(options)
     end
 
@@ -575,14 +671,15 @@ module Aws::IVSRealTime
     #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @option params [Types::AutoParticipantRecordingConfiguration] :auto_participant_recording_configuration
     #   Configuration object for individual participant recording, to attach
@@ -628,6 +725,8 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
     #   resp.stage.endpoints.events #=> String
     #   resp.stage.endpoints.whip #=> String
+    #   resp.stage.endpoints.rtmp #=> String
+    #   resp.stage.endpoints.rtmps #=> String
     #   resp.participant_tokens #=> Array
     #   resp.participant_tokens[0].participant_id #=> String
     #   resp.participant_tokens[0].token #=> String
@@ -662,14 +761,15 @@ module Aws::IVSRealTime
     #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::CreateStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -727,6 +827,38 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Deletes a specified IngestConfiguration, so it can no longer be used
+    # to broadcast. An IngestConfiguration cannot be deleted if the
+    # publisher is actively streaming to a stage, unless `force` is set to
+    # `true`.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the IngestConfiguration.
+    #
+    # @option params [Boolean] :force
+    #   Optional field to force deletion of the IngestConfiguration. If this
+    #   is set to `true` when a participant is actively publishing, the
+    #   participant is disconnected from the stage, followed by deletion of
+    #   the IngestConfiguration. Default: `false`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ingest_configuration({
+    #     arn: "IngestConfigurationArn", # required
+    #     force: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DeleteIngestConfiguration AWS API Documentation
+    #
+    # @overload delete_ingest_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_ingest_configuration(params = {}, options = {})
+      req = build_request(:delete_ingest_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified public key used to sign stage participant
     # tokens. This invalidates future participant tokens generated using the
     # key pair’s private key.
@@ -752,7 +884,9 @@ module Aws::IVSRealTime
     end
 
     # Shuts down and deletes the specified stage (disconnecting all
-    # participants).
+    # participants). This operation also removes the `stageArn` from the
+    # associated IngestConfiguration, if there are participants using the
+    # IngestConfiguration to publish to the stage.
     #
     # @option params [required, String] :arn
     #   ARN of the stage to be deleted.
@@ -802,15 +936,18 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
-    # Disconnects a specified participant and revokes the participant
-    # permanently from a specified stage.
+    # Disconnects a specified participant from a specified stage. If the
+    # participant is publishing using an IngestConfiguration,
+    # DisconnectParticipant also updates the `stageArn` in the
+    # IngestConfiguration to be an empty string.
     #
     # @option params [required, String] :stage_arn
     #   ARN of the stage to which the participant is attached.
     #
     # @option params [required, String] :participant_id
-    #   Identifier of the participant to be disconnected. This is assigned by
-    #   IVS and returned by CreateParticipantToken.
+    #   Identifier of the participant to be disconnected. IVS assigns this; it
+    #   is returned by CreateParticipantToken (for streams using WebRTC
+    #   ingest) or CreateIngestConfiguration (for streams using RTMP ingest).
     #
     # @option params [String] :reason
     #   Description of why this participant is being disconnected.
@@ -931,6 +1068,45 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Gets information about the specified IngestConfiguration.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the ingest for which the information is to be retrieved.
+    #
+    # @return [Types::GetIngestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIngestConfigurationResponse#ingest_configuration #ingest_configuration} => Types::IngestConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ingest_configuration({
+    #     arn: "IngestConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingest_configuration.name #=> String
+    #   resp.ingest_configuration.arn #=> String
+    #   resp.ingest_configuration.ingest_protocol #=> String, one of "RTMP", "RTMPS"
+    #   resp.ingest_configuration.stream_key #=> String
+    #   resp.ingest_configuration.stage_arn #=> String
+    #   resp.ingest_configuration.participant_id #=> String
+    #   resp.ingest_configuration.state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.ingest_configuration.user_id #=> String
+    #   resp.ingest_configuration.attributes #=> Hash
+    #   resp.ingest_configuration.attributes["String"] #=> String
+    #   resp.ingest_configuration.tags #=> Hash
+    #   resp.ingest_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetIngestConfiguration AWS API Documentation
+    #
+    # @overload get_ingest_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_ingest_configuration(params = {}, options = {})
+      req = build_request(:get_ingest_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified participant token.
     #
     # @option params [required, String] :stage_arn
@@ -973,6 +1149,7 @@ module Aws::IVSRealTime
     #   resp.participant.recording_s3_bucket_name #=> String
     #   resp.participant.recording_s3_prefix #=> String
     #   resp.participant.recording_state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "STOPPED", "FAILED", "DISABLED"
+    #   resp.participant.protocol #=> String, one of "UNKNOWN", "WHIP", "RTMP", "RTMPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetParticipant AWS API Documentation
     #
@@ -1043,6 +1220,8 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
     #   resp.stage.endpoints.events #=> String
     #   resp.stage.endpoints.whip #=> String
+    #   resp.stage.endpoints.rtmp #=> String
+    #   resp.stage.endpoints.rtmps #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStage AWS API Documentation
     #
@@ -1129,14 +1308,15 @@ module Aws::IVSRealTime
     #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::ImportPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1271,6 +1451,61 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Lists all IngestConfigurations in your account, in the AWS region
+    # where the API request is processed.
+    #
+    # @option params [String] :filter_by_stage_arn
+    #   Filters the response list to match the specified stage ARN. Only one
+    #   filter (by stage ARN or by state) can be used at a time.
+    #
+    # @option params [String] :filter_by_state
+    #   Filters the response list to match the specified state. Only one
+    #   filter (by stage ARN or by state) can be used at a time.
+    #
+    # @option params [String] :next_token
+    #   The first IngestConfiguration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
+    #
+    # @return [Types::ListIngestConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIngestConfigurationsResponse#ingest_configurations #ingest_configurations} => Array&lt;Types::IngestConfigurationSummary&gt;
+    #   * {Types::ListIngestConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ingest_configurations({
+    #     filter_by_stage_arn: "StageArn",
+    #     filter_by_state: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingest_configurations #=> Array
+    #   resp.ingest_configurations[0].name #=> String
+    #   resp.ingest_configurations[0].arn #=> String
+    #   resp.ingest_configurations[0].ingest_protocol #=> String, one of "RTMP", "RTMPS"
+    #   resp.ingest_configurations[0].stage_arn #=> String
+    #   resp.ingest_configurations[0].participant_id #=> String
+    #   resp.ingest_configurations[0].state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.ingest_configurations[0].user_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListIngestConfigurations AWS API Documentation
+    #
+    # @overload list_ingest_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_ingest_configurations(params = {}, options = {})
+      req = build_request(:list_ingest_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists events for a specified participant that occurred during a
     # specified stage session.
     #
@@ -1315,7 +1550,7 @@ module Aws::IVSRealTime
     #   resp.events[0].participant_id #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].remote_participant_id #=> String
-    #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES", "QUOTA_EXCEEDED", "PUBLISHER_NOT_FOUND"
+    #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES", "QUOTA_EXCEEDED", "PUBLISHER_NOT_FOUND", "BITRATE_EXCEEDED", "RESOLUTION_EXCEEDED", "STREAM_DURATION_EXCEEDED", "INVALID_AUDIO_CODEC", "INVALID_VIDEO_CODEC", "INVALID_PROTOCOL", "INVALID_STREAM_KEY", "REUSE_OF_STREAM_KEY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantEvents AWS API Documentation
@@ -1612,8 +1847,9 @@ module Aws::IVSRealTime
     # Starts a Composition from a stage based on the configuration provided
     # in the request.
     #
-    # A Composition is an ephemeral resource that exists after this endpoint
-    # returns successfully. Composition stops and the resource is deleted:
+    # A Composition is an ephemeral resource that exists after this
+    # operation returns successfully. Composition stops and the resource is
+    # deleted:
     #
     # * When StopComposition is called.
     #
@@ -1646,14 +1882,15 @@ module Aws::IVSRealTime
     #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::StartCompositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1783,14 +2020,15 @@ module Aws::IVSRealTime
     #
     # @option params [required, Hash<String,String>] :tags
     #   Array of tags to be added or updated. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints beyond what
-    #   is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1819,14 +2057,15 @@ module Aws::IVSRealTime
     #
     # @option params [required, Array<String>] :tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS has no constraints beyond what
-    #   is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging AWS Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no constraints on tags beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1843,6 +2082,52 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a specified IngestConfiguration. Only the stage ARN attached
+    # to the IngestConfiguration can be updated. An IngestConfiguration that
+    # is active cannot be updated.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the IngestConfiguration, for which the related stage ARN needs
+    #   to be updated.
+    #
+    # @option params [String] :stage_arn
+    #   Stage ARN that needs to be updated.
+    #
+    # @return [Types::UpdateIngestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIngestConfigurationResponse#ingest_configuration #ingest_configuration} => Types::IngestConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ingest_configuration({
+    #     arn: "IngestConfigurationArn", # required
+    #     stage_arn: "IngestConfigurationStageArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ingest_configuration.name #=> String
+    #   resp.ingest_configuration.arn #=> String
+    #   resp.ingest_configuration.ingest_protocol #=> String, one of "RTMP", "RTMPS"
+    #   resp.ingest_configuration.stream_key #=> String
+    #   resp.ingest_configuration.stage_arn #=> String
+    #   resp.ingest_configuration.participant_id #=> String
+    #   resp.ingest_configuration.state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.ingest_configuration.user_id #=> String
+    #   resp.ingest_configuration.attributes #=> Hash
+    #   resp.ingest_configuration.attributes["String"] #=> String
+    #   resp.ingest_configuration.tags #=> Hash
+    #   resp.ingest_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateIngestConfiguration AWS API Documentation
+    #
+    # @overload update_ingest_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_ingest_configuration(params = {}, options = {})
+      req = build_request(:update_ingest_configuration, params)
       req.send_request(options)
     end
 
@@ -1886,6 +2171,8 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
     #   resp.stage.endpoints.events #=> String
     #   resp.stage.endpoints.whip #=> String
+    #   resp.stage.endpoints.rtmp #=> String
+    #   resp.stage.endpoints.rtmps #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateStage AWS API Documentation
     #
@@ -1914,7 +2201,7 @@ module Aws::IVSRealTime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

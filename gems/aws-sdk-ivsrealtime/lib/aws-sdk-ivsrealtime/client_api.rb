@@ -18,6 +18,7 @@ module Aws::IVSRealTime
     AutoParticipantRecordingConfiguration = Shapes::StructureShape.new(name: 'AutoParticipantRecordingConfiguration')
     AutoParticipantRecordingStorageConfigurationArn = Shapes::StringShape.new(name: 'AutoParticipantRecordingStorageConfigurationArn')
     Bitrate = Shapes::IntegerShape.new(name: 'Bitrate')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
     ChannelDestinationConfiguration = Shapes::StructureShape.new(name: 'ChannelDestinationConfiguration')
     Composition = Shapes::StructureShape.new(name: 'Composition')
@@ -29,6 +30,8 @@ module Aws::IVSRealTime
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateEncoderConfigurationRequest = Shapes::StructureShape.new(name: 'CreateEncoderConfigurationRequest')
     CreateEncoderConfigurationResponse = Shapes::StructureShape.new(name: 'CreateEncoderConfigurationResponse')
+    CreateIngestConfigurationRequest = Shapes::StructureShape.new(name: 'CreateIngestConfigurationRequest')
+    CreateIngestConfigurationResponse = Shapes::StructureShape.new(name: 'CreateIngestConfigurationResponse')
     CreateParticipantTokenRequest = Shapes::StructureShape.new(name: 'CreateParticipantTokenRequest')
     CreateParticipantTokenResponse = Shapes::StructureShape.new(name: 'CreateParticipantTokenResponse')
     CreateStageRequest = Shapes::StructureShape.new(name: 'CreateStageRequest')
@@ -37,6 +40,8 @@ module Aws::IVSRealTime
     CreateStorageConfigurationResponse = Shapes::StructureShape.new(name: 'CreateStorageConfigurationResponse')
     DeleteEncoderConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEncoderConfigurationRequest')
     DeleteEncoderConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteEncoderConfigurationResponse')
+    DeleteIngestConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteIngestConfigurationRequest')
+    DeleteIngestConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteIngestConfigurationResponse')
     DeletePublicKeyRequest = Shapes::StructureShape.new(name: 'DeletePublicKeyRequest')
     DeletePublicKeyResponse = Shapes::StructureShape.new(name: 'DeletePublicKeyResponse')
     DeleteStageRequest = Shapes::StructureShape.new(name: 'DeleteStageRequest')
@@ -70,6 +75,8 @@ module Aws::IVSRealTime
     GetCompositionResponse = Shapes::StructureShape.new(name: 'GetCompositionResponse')
     GetEncoderConfigurationRequest = Shapes::StructureShape.new(name: 'GetEncoderConfigurationRequest')
     GetEncoderConfigurationResponse = Shapes::StructureShape.new(name: 'GetEncoderConfigurationResponse')
+    GetIngestConfigurationRequest = Shapes::StructureShape.new(name: 'GetIngestConfigurationRequest')
+    GetIngestConfigurationResponse = Shapes::StructureShape.new(name: 'GetIngestConfigurationResponse')
     GetParticipantRequest = Shapes::StructureShape.new(name: 'GetParticipantRequest')
     GetParticipantResponse = Shapes::StructureShape.new(name: 'GetParticipantResponse')
     GetPublicKeyRequest = Shapes::StructureShape.new(name: 'GetPublicKeyRequest')
@@ -85,12 +92,23 @@ module Aws::IVSRealTime
     Height = Shapes::IntegerShape.new(name: 'Height')
     ImportPublicKeyRequest = Shapes::StructureShape.new(name: 'ImportPublicKeyRequest')
     ImportPublicKeyResponse = Shapes::StructureShape.new(name: 'ImportPublicKeyResponse')
+    IngestConfiguration = Shapes::StructureShape.new(name: 'IngestConfiguration')
+    IngestConfigurationArn = Shapes::StringShape.new(name: 'IngestConfigurationArn')
+    IngestConfigurationList = Shapes::ListShape.new(name: 'IngestConfigurationList')
+    IngestConfigurationName = Shapes::StringShape.new(name: 'IngestConfigurationName')
+    IngestConfigurationStageArn = Shapes::StringShape.new(name: 'IngestConfigurationStageArn')
+    IngestConfigurationState = Shapes::StringShape.new(name: 'IngestConfigurationState')
+    IngestConfigurationSummary = Shapes::StructureShape.new(name: 'IngestConfigurationSummary')
+    IngestProtocol = Shapes::StringShape.new(name: 'IngestProtocol')
+    InsecureIngest = Shapes::BooleanShape.new(name: 'InsecureIngest')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LayoutConfiguration = Shapes::StructureShape.new(name: 'LayoutConfiguration')
     ListCompositionsRequest = Shapes::StructureShape.new(name: 'ListCompositionsRequest')
     ListCompositionsResponse = Shapes::StructureShape.new(name: 'ListCompositionsResponse')
     ListEncoderConfigurationsRequest = Shapes::StructureShape.new(name: 'ListEncoderConfigurationsRequest')
     ListEncoderConfigurationsResponse = Shapes::StructureShape.new(name: 'ListEncoderConfigurationsResponse')
+    ListIngestConfigurationsRequest = Shapes::StructureShape.new(name: 'ListIngestConfigurationsRequest')
+    ListIngestConfigurationsResponse = Shapes::StructureShape.new(name: 'ListIngestConfigurationsResponse')
     ListParticipantEventsRequest = Shapes::StructureShape.new(name: 'ListParticipantEventsRequest')
     ListParticipantEventsResponse = Shapes::StructureShape.new(name: 'ListParticipantEventsResponse')
     ListParticipantsRequest = Shapes::StructureShape.new(name: 'ListParticipantsRequest')
@@ -107,6 +125,7 @@ module Aws::IVSRealTime
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxCompositionResults = Shapes::IntegerShape.new(name: 'MaxCompositionResults')
     MaxEncoderConfigurationResults = Shapes::IntegerShape.new(name: 'MaxEncoderConfigurationResults')
+    MaxIngestConfigurationResults = Shapes::IntegerShape.new(name: 'MaxIngestConfigurationResults')
     MaxParticipantEventResults = Shapes::IntegerShape.new(name: 'MaxParticipantEventResults')
     MaxParticipantResults = Shapes::IntegerShape.new(name: 'MaxParticipantResults')
     MaxPublicKeyResults = Shapes::IntegerShape.new(name: 'MaxPublicKeyResults')
@@ -120,6 +139,7 @@ module Aws::IVSRealTime
     ParticipantClientAttribute = Shapes::StringShape.new(name: 'ParticipantClientAttribute')
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
     ParticipantList = Shapes::ListShape.new(name: 'ParticipantList')
+    ParticipantProtocol = Shapes::StringShape.new(name: 'ParticipantProtocol')
     ParticipantRecordingFilterByRecordingState = Shapes::StringShape.new(name: 'ParticipantRecordingFilterByRecordingState')
     ParticipantRecordingMediaType = Shapes::StringShape.new(name: 'ParticipantRecordingMediaType')
     ParticipantRecordingMediaTypeList = Shapes::ListShape.new(name: 'ParticipantRecordingMediaTypeList')
@@ -184,6 +204,7 @@ module Aws::IVSRealTime
     StorageConfigurationName = Shapes::StringShape.new(name: 'StorageConfigurationName')
     StorageConfigurationSummary = Shapes::StructureShape.new(name: 'StorageConfigurationSummary')
     StorageConfigurationSummaryList = Shapes::ListShape.new(name: 'StorageConfigurationSummaryList')
+    StreamKey = Shapes::StringShape.new(name: 'StreamKey')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -194,6 +215,8 @@ module Aws::IVSRealTime
     Time = Shapes::TimestampShape.new(name: 'Time', timestampFormat: "iso8601")
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateIngestConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateIngestConfigurationRequest')
+    UpdateIngestConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateIngestConfigurationResponse')
     UpdateStageRequest = Shapes::StructureShape.new(name: 'UpdateStageRequest')
     UpdateStageResponse = Shapes::StructureShape.new(name: 'UpdateStageResponse')
     UserId = Shapes::StringShape.new(name: 'UserId')
@@ -247,6 +270,18 @@ module Aws::IVSRealTime
     CreateEncoderConfigurationResponse.add_member(:encoder_configuration, Shapes::ShapeRef.new(shape: EncoderConfiguration, location_name: "encoderConfiguration"))
     CreateEncoderConfigurationResponse.struct_class = Types::CreateEncoderConfigurationResponse
 
+    CreateIngestConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: IngestConfigurationName, location_name: "name"))
+    CreateIngestConfigurationRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: IngestConfigurationStageArn, location_name: "stageArn"))
+    CreateIngestConfigurationRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    CreateIngestConfigurationRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
+    CreateIngestConfigurationRequest.add_member(:ingest_protocol, Shapes::ShapeRef.new(shape: IngestProtocol, required: true, location_name: "ingestProtocol"))
+    CreateIngestConfigurationRequest.add_member(:insecure_ingest, Shapes::ShapeRef.new(shape: InsecureIngest, location_name: "insecureIngest"))
+    CreateIngestConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateIngestConfigurationRequest.struct_class = Types::CreateIngestConfigurationRequest
+
+    CreateIngestConfigurationResponse.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
+    CreateIngestConfigurationResponse.struct_class = Types::CreateIngestConfigurationResponse
+
     CreateParticipantTokenRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     CreateParticipantTokenRequest.add_member(:duration, Shapes::ShapeRef.new(shape: ParticipantTokenDurationMinutes, location_name: "duration"))
     CreateParticipantTokenRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ParticipantTokenUserId, location_name: "userId"))
@@ -279,6 +314,12 @@ module Aws::IVSRealTime
     DeleteEncoderConfigurationRequest.struct_class = Types::DeleteEncoderConfigurationRequest
 
     DeleteEncoderConfigurationResponse.struct_class = Types::DeleteEncoderConfigurationResponse
+
+    DeleteIngestConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, required: true, location_name: "arn"))
+    DeleteIngestConfigurationRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
+    DeleteIngestConfigurationRequest.struct_class = Types::DeleteIngestConfigurationRequest
+
+    DeleteIngestConfigurationResponse.struct_class = Types::DeleteIngestConfigurationResponse
 
     DeletePublicKeyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PublicKeyArn, required: true, location_name: "arn"))
     DeletePublicKeyRequest.struct_class = Types::DeletePublicKeyRequest
@@ -366,6 +407,12 @@ module Aws::IVSRealTime
     GetEncoderConfigurationResponse.add_member(:encoder_configuration, Shapes::ShapeRef.new(shape: EncoderConfiguration, location_name: "encoderConfiguration"))
     GetEncoderConfigurationResponse.struct_class = Types::GetEncoderConfigurationResponse
 
+    GetIngestConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, required: true, location_name: "arn"))
+    GetIngestConfigurationRequest.struct_class = Types::GetIngestConfigurationRequest
+
+    GetIngestConfigurationResponse.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
+    GetIngestConfigurationResponse.struct_class = Types::GetIngestConfigurationResponse
+
     GetParticipantRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     GetParticipantRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
     GetParticipantRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
@@ -414,6 +461,29 @@ module Aws::IVSRealTime
     ImportPublicKeyResponse.add_member(:public_key, Shapes::ShapeRef.new(shape: PublicKey, location_name: "publicKey"))
     ImportPublicKeyResponse.struct_class = Types::ImportPublicKeyResponse
 
+    IngestConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: IngestConfigurationName, location_name: "name"))
+    IngestConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, required: true, location_name: "arn"))
+    IngestConfiguration.add_member(:ingest_protocol, Shapes::ShapeRef.new(shape: IngestProtocol, required: true, location_name: "ingestProtocol"))
+    IngestConfiguration.add_member(:stream_key, Shapes::ShapeRef.new(shape: StreamKey, required: true, location_name: "streamKey"))
+    IngestConfiguration.add_member(:stage_arn, Shapes::ShapeRef.new(shape: IngestConfigurationStageArn, required: true, location_name: "stageArn"))
+    IngestConfiguration.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
+    IngestConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: IngestConfigurationState, required: true, location_name: "state"))
+    IngestConfiguration.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    IngestConfiguration.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
+    IngestConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    IngestConfiguration.struct_class = Types::IngestConfiguration
+
+    IngestConfigurationList.member = Shapes::ShapeRef.new(shape: IngestConfigurationSummary)
+
+    IngestConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: IngestConfigurationName, location_name: "name"))
+    IngestConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, required: true, location_name: "arn"))
+    IngestConfigurationSummary.add_member(:ingest_protocol, Shapes::ShapeRef.new(shape: IngestProtocol, required: true, location_name: "ingestProtocol"))
+    IngestConfigurationSummary.add_member(:stage_arn, Shapes::ShapeRef.new(shape: IngestConfigurationStageArn, required: true, location_name: "stageArn"))
+    IngestConfigurationSummary.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
+    IngestConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: IngestConfigurationState, required: true, location_name: "state"))
+    IngestConfigurationSummary.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    IngestConfigurationSummary.struct_class = Types::IngestConfigurationSummary
+
     InternalServerException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -438,6 +508,16 @@ module Aws::IVSRealTime
     ListEncoderConfigurationsResponse.add_member(:encoder_configurations, Shapes::ShapeRef.new(shape: EncoderConfigurationSummaryList, required: true, location_name: "encoderConfigurations"))
     ListEncoderConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEncoderConfigurationsResponse.struct_class = Types::ListEncoderConfigurationsResponse
+
+    ListIngestConfigurationsRequest.add_member(:filter_by_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "filterByStageArn"))
+    ListIngestConfigurationsRequest.add_member(:filter_by_state, Shapes::ShapeRef.new(shape: IngestConfigurationState, location_name: "filterByState"))
+    ListIngestConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListIngestConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxIngestConfigurationResults, location_name: "maxResults"))
+    ListIngestConfigurationsRequest.struct_class = Types::ListIngestConfigurationsRequest
+
+    ListIngestConfigurationsResponse.add_member(:ingest_configurations, Shapes::ShapeRef.new(shape: IngestConfigurationList, required: true, location_name: "ingestConfigurations"))
+    ListIngestConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListIngestConfigurationsResponse.struct_class = Types::ListIngestConfigurationsResponse
 
     ListParticipantEventsRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     ListParticipantEventsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
@@ -518,6 +598,7 @@ module Aws::IVSRealTime
     Participant.add_member(:recording_s3_bucket_name, Shapes::ShapeRef.new(shape: ParticipantRecordingS3BucketName, location_name: "recordingS3BucketName"))
     Participant.add_member(:recording_s3_prefix, Shapes::ShapeRef.new(shape: ParticipantRecordingS3Prefix, location_name: "recordingS3Prefix"))
     Participant.add_member(:recording_state, Shapes::ShapeRef.new(shape: ParticipantRecordingState, location_name: "recordingState"))
+    Participant.add_member(:protocol, Shapes::ShapeRef.new(shape: ParticipantProtocol, location_name: "protocol"))
     Participant.struct_class = Types::Participant
 
     ParticipantAttributes.key = Shapes::ShapeRef.new(shape: String)
@@ -618,6 +699,8 @@ module Aws::IVSRealTime
 
     StageEndpoints.add_member(:events, Shapes::ShapeRef.new(shape: StageEndpoint, location_name: "events"))
     StageEndpoints.add_member(:whip, Shapes::ShapeRef.new(shape: StageEndpoint, location_name: "whip"))
+    StageEndpoints.add_member(:rtmp, Shapes::ShapeRef.new(shape: StageEndpoint, location_name: "rtmp"))
+    StageEndpoints.add_member(:rtmps, Shapes::ShapeRef.new(shape: StageEndpoint, location_name: "rtmps"))
     StageEndpoints.struct_class = Types::StageEndpoints
 
     StageSession.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sessionId"))
@@ -686,6 +769,13 @@ module Aws::IVSRealTime
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateIngestConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: IngestConfigurationArn, required: true, location_name: "arn"))
+    UpdateIngestConfigurationRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: IngestConfigurationStageArn, location_name: "stageArn"))
+    UpdateIngestConfigurationRequest.struct_class = Types::UpdateIngestConfigurationRequest
+
+    UpdateIngestConfigurationResponse.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
+    UpdateIngestConfigurationResponse.struct_class = Types::UpdateIngestConfigurationResponse
+
     UpdateStageRequest.add_member(:arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "arn"))
     UpdateStageRequest.add_member(:name, Shapes::ShapeRef.new(shape: StageName, location_name: "name"))
     UpdateStageRequest.add_member(:auto_participant_recording_configuration, Shapes::ShapeRef.new(shape: AutoParticipantRecordingConfiguration, location_name: "autoParticipantRecordingConfiguration"))
@@ -712,8 +802,8 @@ module Aws::IVSRealTime
       api.metadata = {
         "apiVersion" => "2020-07-14",
         "endpointPrefix" => "ivsrealtime",
+        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
-        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "ivsrealtime",
         "serviceFullName" => "Amazon Interactive Video Service RealTime",
         "serviceId" => "IVS RealTime",
@@ -734,6 +824,18 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+      end)
+
+      api.add_operation(:create_ingest_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIngestConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateIngestConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: CreateIngestConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIngestConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
@@ -789,6 +891,19 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_ingest_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIngestConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteIngestConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIngestConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIngestConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:delete_public_key, Seahorse::Model::Operation.new.tap do |o|
@@ -869,6 +984,17 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_ingest_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIngestConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetIngestConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: GetIngestConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIngestConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_participant, Seahorse::Model::Operation.new.tap do |o|
@@ -972,6 +1098,22 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ingest_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIngestConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListIngestConfigurations"
+        o.input = Shapes::ShapeRef.new(shape: ListIngestConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIngestConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1140,6 +1282,19 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_ingest_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIngestConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateIngestConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIngestConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIngestConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
       api.add_operation(:update_stage, Seahorse::Model::Operation.new.tap do |o|

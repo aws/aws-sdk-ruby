@@ -53,6 +53,6 @@ require_relative 'aws-sdk-keyspaces/customizations'
 # @!group service
 module Aws::Keyspaces
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

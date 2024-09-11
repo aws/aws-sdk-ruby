@@ -146,6 +146,7 @@ module Aws::QApps
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       attr_accessor rating_count: ::Integer
+      attr_accessor is_verified: bool
       SENSITIVE: []
     end
 
@@ -265,6 +266,7 @@ module Aws::QApps
       attr_accessor rating_count: ::Integer
       attr_accessor is_rated_by_user: bool
       attr_accessor user_count: ::Integer
+      attr_accessor is_verified: bool
       SENSITIVE: []
     end
 
@@ -340,6 +342,7 @@ module Aws::QApps
       attr_accessor rating_count: ::Integer
       attr_accessor is_rated_by_user: bool
       attr_accessor user_count: ::Integer
+      attr_accessor is_verified: bool
       SENSITIVE: []
     end
 
@@ -549,6 +552,13 @@ module Aws::QApps
       SENSITIVE: []
     end
 
+    class UpdateLibraryItemMetadataInput
+      attr_accessor instance_id: ::String
+      attr_accessor library_item_id: ::String
+      attr_accessor is_verified: bool
+      SENSITIVE: []
+    end
+
     class UpdateLibraryItemOutput
       attr_accessor library_item_id: ::String
       attr_accessor app_id: ::String
@@ -562,6 +572,7 @@ module Aws::QApps
       attr_accessor rating_count: ::Integer
       attr_accessor is_rated_by_user: bool
       attr_accessor user_count: ::Integer
+      attr_accessor is_verified: bool
       SENSITIVE: []
     end
 
@@ -611,6 +622,7 @@ module Aws::QApps
       attr_accessor created_at: ::Time
       attr_accessor can_edit: bool
       attr_accessor status: ::String
+      attr_accessor is_verified: bool
       SENSITIVE: []
     end
 

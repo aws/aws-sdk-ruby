@@ -167,6 +167,8 @@ module Aws::Kafka
     ReplicationStartingPosition = Shapes::StructureShape.new(name: 'ReplicationStartingPosition')
     ReplicationStartingPositionType = Shapes::StringShape.new(name: 'ReplicationStartingPositionType')
     ReplicationStateInfo = Shapes::StructureShape.new(name: 'ReplicationStateInfo')
+    ReplicationTopicNameConfiguration = Shapes::StructureShape.new(name: 'ReplicationTopicNameConfiguration')
+    ReplicationTopicNameConfigurationType = Shapes::StringShape.new(name: 'ReplicationTopicNameConfigurationType')
     ReplicatorState = Shapes::StringShape.new(name: 'ReplicatorState')
     ReplicatorSummary = Shapes::StructureShape.new(name: 'ReplicatorSummary')
     S3 = Shapes::StructureShape.new(name: 'S3')
@@ -1001,6 +1003,9 @@ module Aws::Kafka
     ReplicationStateInfo.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ReplicationStateInfo.struct_class = Types::ReplicationStateInfo
 
+    ReplicationTopicNameConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ReplicationTopicNameConfigurationType, location_name: "type"))
+    ReplicationTopicNameConfiguration.struct_class = Types::ReplicationTopicNameConfiguration
+
     ReplicatorSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     ReplicatorSummary.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, location_name: "currentVersion"))
     ReplicatorSummary.add_member(:is_replicator_reference, Shapes::ShapeRef.new(shape: __boolean, location_name: "isReplicatorReference"))
@@ -1065,6 +1070,7 @@ module Aws::Kafka
     TopicReplication.add_member(:copy_topic_configurations, Shapes::ShapeRef.new(shape: __boolean, location_name: "copyTopicConfigurations"))
     TopicReplication.add_member(:detect_and_copy_new_topics, Shapes::ShapeRef.new(shape: __boolean, location_name: "detectAndCopyNewTopics"))
     TopicReplication.add_member(:starting_position, Shapes::ShapeRef.new(shape: ReplicationStartingPosition, location_name: "startingPosition"))
+    TopicReplication.add_member(:topic_name_configuration, Shapes::ShapeRef.new(shape: ReplicationTopicNameConfiguration, location_name: "topicNameConfiguration"))
     TopicReplication.add_member(:topics_to_exclude, Shapes::ShapeRef.new(shape: __listOf__stringMax249, location_name: "topicsToExclude"))
     TopicReplication.add_member(:topics_to_replicate, Shapes::ShapeRef.new(shape: __listOf__stringMax249, required: true, location_name: "topicsToReplicate"))
     TopicReplication.struct_class = Types::TopicReplication
@@ -1318,6 +1324,7 @@ module Aws::Kafka
 
       api.metadata = {
         "apiVersion" => "2018-11-14",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kafka",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

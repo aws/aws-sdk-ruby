@@ -1536,7 +1536,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] remote_ip_details
-    #   Provided if `CallerType` is `remoteIp`. Provides information about
+    #   Provided if `CallerType` is `remoteip`. Provides information about
     #   the remote IP address that the API call originated from.
     #   @return [Types::ActionRemoteIpDetails]
     #
@@ -23118,13 +23118,16 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Contains finding details that are specific to control-based findings.
-    # Only returned for findings generated from controls.
+    # This object typically provides details about a control finding, such
+    # as applicable standards and the status of control checks. While
+    # finding providers can add custom content in `Compliance` object
+    # fields, they are typically used to review details of Security Hub
+    # control findings.
     #
     # @!attribute [rw] status
-    #   The result of a standards check.
+    #   Typically summarizes the result of a control check.
     #
-    #   The valid values for `Status` are as follows.
+    #   For Security Hub controls, valid values for `Status` are as follows.
     #
     #   * * `PASSED` - Standards check passed for all evaluated resources.
     #
@@ -23142,37 +23145,33 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
-    #   For a control, the industry or regulatory framework requirements
-    #   that are related to the control. The check for that control is
-    #   aligned with these requirements.
+    #   Typically provides the industry or regulatory framework requirements
+    #   that are related to a control. The check for that control is aligned
+    #   with these requirements.
     #
     #   Array Members: Maximum number of 32 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status_reasons
-    #   For findings generated from controls, a list of reasons behind the
-    #   value of `Status`. For the list of status reason codes and their
-    #   meanings, see [Standards-related information in the ASFF][1] in the
-    #   *Security Hub User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
+    #   Typically used to provide a list of reasons for the value of
+    #   `Status`.
     #   @return [Array<Types::StatusReason>]
     #
     # @!attribute [rw] security_control_id
-    #   The unique identifier of a control across standards. Values for this
-    #   field typically consist of an Amazon Web Servicesservice and a
-    #   number, such as APIGateway.5.
+    #   Typically provides the unique identifier of a control across
+    #   standards. For Security Hub controls, this field consists of an
+    #   Amazon Web Servicesservice and a unique number, such as
+    #   `APIGateway.5`.
     #   @return [String]
     #
     # @!attribute [rw] associated_standards
-    #   The enabled security standards in which a security control is
-    #   currently enabled.
+    #   Typically provides an array of enabled security standards in which a
+    #   security control is currently enabled.
     #   @return [Array<Types::AssociatedStandard>]
     #
     # @!attribute [rw] security_control_parameters
-    #   An object that includes security control parameter names and values.
+    #   Typically an object that includes security control parameter names
+    #   and values.
     #   @return [Array<Types::SecurityControlParameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance AWS API Documentation
