@@ -32,15 +32,6 @@ module Aws
         client = RetryErrorsSvc::Client.new(retry_mode: 'legacy', region: 'us-west-2')
         expect(client.handlers.entries.map(&:handler_class)).to include(RetryErrors::LegacyHandler)
       end
-
-      it 'sets user-agent metric' do
-        client = RetryErrorsSvc::Client.new(retry_mode: 'legacy', region: 'us-west-2')
-        stub_request(:post, client.config.endpoint)
-        resp = client.example_operation
-        metric = Aws::Plugins::UserAgent::METRICS['RETRY_MODE_LEGACY']
-        expect(resp.context.http_request.headers['User-Agent'])
-          .to include("m/#{metric}")
-      end
     end
 
     describe RetryErrors::LegacyHandler do

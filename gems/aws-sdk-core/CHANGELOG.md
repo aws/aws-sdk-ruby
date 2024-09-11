@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Additional metrics collection in the User-Agent plugin.
+
 3.204.0 (2024-09-10)
 ------------------
 

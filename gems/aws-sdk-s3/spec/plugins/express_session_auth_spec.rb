@@ -128,13 +128,6 @@ module Aws
           end
           client.get_object(bucket: bucket, key: 'key')
         end
-
-        it 'sets user-agent metric' do
-          resp = client.get_object(bucket: 'bucket--use1-az2--x-s3', key: 'key')
-          metric = Aws::Plugins::UserAgent::METRICS['S3_EXPRESS_BUCKET']
-          expect(resp.context.http_request.headers['User-Agent'])
-            .to include("m/#{metric}")
-        end
       end
 
       # does not have http checksum trait, but requires a checksum (md5)

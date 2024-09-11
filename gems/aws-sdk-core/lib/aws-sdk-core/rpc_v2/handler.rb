@@ -7,13 +7,17 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         build_request(context)
-        response = @handler.call(context)
+        response = with_metric { @handler.call(context) }
         response.on(200..299) { |resp| resp.data = parse_body(context) }
         response.on(200..599) { |_resp| apply_request_id(context) }
         response
       end
 
       private
+
+      def with_metric(&block)
+        Aws::Plugins::UserAgent.metric('PROTOCOL_RPC_V2_CBOR', &block)
+      end
 
       def build_request(context)
         context.http_request.headers['smithy-protocol'] = 'rpc-v2-cbor'

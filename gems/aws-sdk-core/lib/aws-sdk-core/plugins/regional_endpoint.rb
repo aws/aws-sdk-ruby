@@ -205,6 +205,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
             cfg.override_config(:region, new_region)
           end
         end
+
         # set a default endpoint in config using legacy (endpoints.json) resolver
         def resolve_legacy_endpoint(cfg)
           endpoint_prefix = cfg.api.metadata['endpointPrefix']
