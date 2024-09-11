@@ -48,15 +48,13 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         block.call
       end
 
-      def self.metric(metric, &block)
+      def self.metric(*metrics, &block)
         Thread.current[:aws_sdk_core_user_agent_metric] ||= []
-        Thread.current[:aws_sdk_core_user_agent_metric] << METRICS[metric]
+        metrics = metrics.map { |metric| METRICS[metric] }
+        Thread.current[:aws_sdk_core_user_agent_metric].concat(metrics)
         block.call
       ensure
-        Thread.current[:aws_sdk_core_user_agent_metric].pop
-        if Thread.current[:aws_sdk_core_user_agent_metric].empty?
-          Thread.current[:aws_sdk_core_user_agent_metric] = nil
-        end
+        Thread.current[:aws_sdk_core_user_agent_metric].pop(metrics.size)
       end
 
       # @api private
@@ -169,7 +167,10 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
           end
 
           def metric_metadata
-            return unless Thread.current[:aws_sdk_core_user_agent_metric]
+            if Thread.current[:aws_sdk_core_user_agent_metric].nil? ||
+               Thread.current[:aws_sdk_core_user_agent_metric].empty?
+              return
+            end
 
             metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
             # Metric metadata is limited to 1024 bytes
