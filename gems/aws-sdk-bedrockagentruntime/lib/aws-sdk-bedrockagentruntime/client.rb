@@ -1657,8 +1657,13 @@ module Aws::BedrockAgentRuntime
     end
 
     # Queries a knowledge base and generates responses based on the
-    # retrieved results. The response only cites sources that are relevant
-    # to the query.
+    # retrieved results and using the specified foundation model or
+    # [inference profile][1]. The response only cites sources that are
+    # relevant to the query.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #
     # @option params [required, Types::RetrieveAndGenerateInput] :input
     #   Contains the query to be made to the knowledge base.
@@ -1890,7 +1895,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

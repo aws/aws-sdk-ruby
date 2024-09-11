@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2024-09-11)
+------------------
+
+* Feature - Added KMS_DSSE to EncryptionType
+
 1.82.0 (2024-09-10)
 ------------------
 

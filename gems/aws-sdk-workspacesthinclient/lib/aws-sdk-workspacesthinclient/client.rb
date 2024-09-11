@@ -1306,7 +1306,7 @@ module Aws::WorkSpacesThinClient
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesthinclient'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

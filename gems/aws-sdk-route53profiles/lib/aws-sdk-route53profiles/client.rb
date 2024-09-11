@@ -1195,7 +1195,7 @@ module Aws::Route53Profiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53profiles'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

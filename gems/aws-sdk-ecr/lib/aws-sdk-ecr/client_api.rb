@@ -1321,7 +1321,7 @@ module Aws::ECR
         "protocol" => "json",
         "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon ECR",
-        "serviceFullName" => "Amazon EC2 Container Registry",
+        "serviceFullName" => "Amazon Elastic Container Registry",
         "serviceId" => "ECR",
         "signatureVersion" => "v4",
         "signingName" => "ecr",

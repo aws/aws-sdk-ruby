@@ -2412,7 +2412,7 @@ module Aws::STS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.204.0'
+      context[:gem_version] = '3.205.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

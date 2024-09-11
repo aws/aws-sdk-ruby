@@ -963,7 +963,7 @@ module Aws::ECR
     #       scan_on_push: false,
     #     },
     #     encryption_configuration: {
-    #       encryption_type: "AES256", # required, accepts AES256, KMS
+    #       encryption_type: "AES256", # required, accepts AES256, KMS, KMS_DSSE
     #       kms_key: "KmsKey",
     #     },
     #   })
@@ -977,7 +977,7 @@ module Aws::ECR
     #   resp.repository.created_at #=> Time
     #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
-    #   resp.repository.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS", "KMS_DSSE"
     #   resp.repository.encryption_configuration.kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository AWS API Documentation
@@ -1123,7 +1123,7 @@ module Aws::ECR
     #     prefix: "Prefix", # required
     #     description: "RepositoryTemplateDescription",
     #     encryption_configuration: {
-    #       encryption_type: "AES256", # required, accepts AES256, KMS
+    #       encryption_type: "AES256", # required, accepts AES256, KMS, KMS_DSSE
     #       kms_key: "KmsKeyForRepositoryCreationTemplate",
     #     },
     #     resource_tags: [
@@ -1144,7 +1144,7 @@ module Aws::ECR
     #   resp.registry_id #=> String
     #   resp.repository_creation_template.prefix #=> String
     #   resp.repository_creation_template.description #=> String
-    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS", "KMS_DSSE"
     #   resp.repository_creation_template.encryption_configuration.kms_key #=> String
     #   resp.repository_creation_template.resource_tags #=> Array
     #   resp.repository_creation_template.resource_tags[0].key #=> String
@@ -1330,7 +1330,7 @@ module Aws::ECR
     #   resp.repository.created_at #=> Time
     #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
-    #   resp.repository.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS", "KMS_DSSE"
     #   resp.repository.encryption_configuration.kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository AWS API Documentation
@@ -1387,7 +1387,7 @@ module Aws::ECR
     #   resp.registry_id #=> String
     #   resp.repository_creation_template.prefix #=> String
     #   resp.repository_creation_template.description #=> String
-    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS", "KMS_DSSE"
     #   resp.repository_creation_template.encryption_configuration.kms_key #=> String
     #   resp.repository_creation_template.resource_tags #=> Array
     #   resp.repository_creation_template.resource_tags[0].key #=> String
@@ -1954,7 +1954,7 @@ module Aws::ECR
     #   resp.repositories[0].created_at #=> Time
     #   resp.repositories[0].image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
     #   resp.repositories[0].image_scanning_configuration.scan_on_push #=> Boolean
-    #   resp.repositories[0].encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repositories[0].encryption_configuration.encryption_type #=> String, one of "AES256", "KMS", "KMS_DSSE"
     #   resp.repositories[0].encryption_configuration.kms_key #=> String
     #   resp.next_token #=> String
     #
@@ -2071,7 +2071,7 @@ module Aws::ECR
     #   resp.repository_creation_templates #=> Array
     #   resp.repository_creation_templates[0].prefix #=> String
     #   resp.repository_creation_templates[0].description #=> String
-    #   resp.repository_creation_templates[0].encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_templates[0].encryption_configuration.encryption_type #=> String, one of "AES256", "KMS", "KMS_DSSE"
     #   resp.repository_creation_templates[0].encryption_configuration.kms_key #=> String
     #   resp.repository_creation_templates[0].resource_tags #=> Array
     #   resp.repository_creation_templates[0].resource_tags[0].key #=> String
@@ -3486,7 +3486,7 @@ module Aws::ECR
     #     prefix: "Prefix", # required
     #     description: "RepositoryTemplateDescription",
     #     encryption_configuration: {
-    #       encryption_type: "AES256", # required, accepts AES256, KMS
+    #       encryption_type: "AES256", # required, accepts AES256, KMS, KMS_DSSE
     #       kms_key: "KmsKeyForRepositoryCreationTemplate",
     #     },
     #     resource_tags: [
@@ -3507,7 +3507,7 @@ module Aws::ECR
     #   resp.registry_id #=> String
     #   resp.repository_creation_template.prefix #=> String
     #   resp.repository_creation_template.description #=> String
-    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS"
+    #   resp.repository_creation_template.encryption_configuration.encryption_type #=> String, one of "AES256", "KMS", "KMS_DSSE"
     #   resp.repository_creation_template.encryption_configuration.kms_key #=> String
     #   resp.repository_creation_template.resource_tags #=> Array
     #   resp.repository_creation_template.resource_tags[0].key #=> String
@@ -3666,7 +3666,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

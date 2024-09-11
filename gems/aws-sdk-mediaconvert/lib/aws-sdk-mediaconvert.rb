@@ -52,6 +52,6 @@ require_relative 'aws-sdk-mediaconvert/customizations'
 # @!group service
 module Aws::MediaConvert
 
-  GEM_VERSION = '1.136.0'
+  GEM_VERSION = '1.137.0'
 
 end

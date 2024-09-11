@@ -14,7 +14,7 @@ module Aws::RedshiftServerless
   describe EndpointProvider do
     subject { Aws::RedshiftServerless::EndpointProvider.new }
 
-    context 'For region ap-northeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.ap-northeast-1.amazonaws.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region ap-northeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.ap-northeast-2.amazonaws.com"}}
       end
@@ -42,7 +42,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.ap-southeast-1.amazonaws.com"}}
       end
@@ -56,7 +56,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region ap-southeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.ap-southeast-2.amazonaws.com"}}
       end
@@ -70,7 +70,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region eu-central-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.eu-central-1.amazonaws.com"}}
       end
@@ -84,7 +84,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region eu-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.eu-north-1.amazonaws.com"}}
       end
@@ -98,7 +98,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.eu-west-1.amazonaws.com"}}
       end
@@ -112,7 +112,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region eu-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.eu-west-2.amazonaws.com"}}
       end
@@ -126,7 +126,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-east-1.amazonaws.com"}}
       end
@@ -140,7 +140,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-east-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-east-2.amazonaws.com"}}
       end
@@ -154,7 +154,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-west-2.amazonaws.com"}}
       end
@@ -168,7 +168,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.us-east-1.api.aws"}}
       end
@@ -182,7 +182,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.us-east-1.amazonaws.com"}}
       end
@@ -196,7 +196,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-east-1.api.aws"}}
       end
@@ -210,7 +210,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -224,7 +224,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.cn-north-1.amazonaws.com.cn"}}
       end
@@ -238,7 +238,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -252,7 +252,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.cn-north-1.amazonaws.com.cn"}}
       end
@@ -266,7 +266,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.us-gov-east-1.api.aws"}}
       end
@@ -280,7 +280,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.us-gov-east-1.amazonaws.com"}}
       end
@@ -294,7 +294,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-gov-east-1.api.aws"}}
       end
@@ -308,7 +308,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-gov-east-1.amazonaws.com"}}
       end
@@ -322,7 +322,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -335,7 +335,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -349,7 +349,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -362,7 +362,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -376,7 +376,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -389,7 +389,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -403,7 +403,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -416,7 +416,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://redshift-serverless.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -430,7 +430,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -444,7 +444,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -458,7 +458,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For custom endpoint with fips enabled and dualstack disabled' do
+    context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -471,7 +471,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack enabled' do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
@@ -484,7 +484,7 @@ module Aws::RedshiftServerless
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

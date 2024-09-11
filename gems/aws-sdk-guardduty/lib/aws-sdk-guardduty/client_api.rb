@@ -27,6 +27,7 @@ module Aws::GuardDuty
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
     AccountLevelPermissions = Shapes::StructureShape.new(name: 'AccountLevelPermissions')
+    AccountStatistics = Shapes::StructureShape.new(name: 'AccountStatistics')
     Action = Shapes::StructureShape.new(name: 'Action')
     AddonDetails = Shapes::StructureShape.new(name: 'AddonDetails')
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
@@ -109,6 +110,7 @@ module Aws::GuardDuty
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceStatus = Shapes::StringShape.new(name: 'DataSourceStatus')
     DataSourcesFreeTrial = Shapes::StructureShape.new(name: 'DataSourcesFreeTrial')
+    DateStatistics = Shapes::StructureShape.new(name: 'DateStatistics')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
     DefaultServerSideEncryption = Shapes::StructureShape.new(name: 'DefaultServerSideEncryption')
@@ -198,6 +200,7 @@ module Aws::GuardDuty
     FindingStatisticTypes = Shapes::ListShape.new(name: 'FindingStatisticTypes')
     FindingStatistics = Shapes::StructureShape.new(name: 'FindingStatistics')
     FindingType = Shapes::StringShape.new(name: 'FindingType')
+    FindingTypeStatistics = Shapes::StructureShape.new(name: 'FindingTypeStatistics')
     FindingTypes = Shapes::ListShape.new(name: 'FindingTypes')
     Findings = Shapes::ListShape.new(name: 'Findings')
     FlagsList = Shapes::ListShape.new(name: 'FlagsList')
@@ -239,6 +242,12 @@ module Aws::GuardDuty
     GetThreatIntelSetResponse = Shapes::StructureShape.new(name: 'GetThreatIntelSetResponse')
     GetUsageStatisticsRequest = Shapes::StructureShape.new(name: 'GetUsageStatisticsRequest')
     GetUsageStatisticsResponse = Shapes::StructureShape.new(name: 'GetUsageStatisticsResponse')
+    GroupByType = Shapes::StringShape.new(name: 'GroupByType')
+    GroupedByAccount = Shapes::ListShape.new(name: 'GroupedByAccount')
+    GroupedByDate = Shapes::ListShape.new(name: 'GroupedByDate')
+    GroupedByFindingType = Shapes::ListShape.new(name: 'GroupedByFindingType')
+    GroupedByResource = Shapes::ListShape.new(name: 'GroupedByResource')
+    GroupedBySeverity = Shapes::ListShape.new(name: 'GroupedBySeverity')
     Groups = Shapes::ListShape.new(name: 'Groups')
     GuardDutyArn = Shapes::StringShape.new(name: 'GuardDutyArn')
     HighestSeverityThreatDetails = Shapes::StructureShape.new(name: 'HighestSeverityThreatDetails')
@@ -324,6 +333,7 @@ module Aws::GuardDuty
     MapEquals = Shapes::ListShape.new(name: 'MapEquals')
     Master = Shapes::StructureShape.new(name: 'Master')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxResults100 = Shapes::IntegerShape.new(name: 'MaxResults100')
     Member = Shapes::StructureShape.new(name: 'Member')
     MemberAdditionalConfiguration = Shapes::StructureShape.new(name: 'MemberAdditionalConfiguration')
     MemberAdditionalConfigurationResult = Shapes::StructureShape.new(name: 'MemberAdditionalConfigurationResult')
@@ -405,6 +415,7 @@ module Aws::GuardDuty
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceStatistics = Shapes::StructureShape.new(name: 'ResourceStatistics')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RuntimeContext = Shapes::StructureShape.new(name: 'RuntimeContext')
     RuntimeDetails = Shapes::StructureShape.new(name: 'RuntimeDetails')
@@ -439,6 +450,7 @@ module Aws::GuardDuty
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceAdditionalInfo = Shapes::StructureShape.new(name: 'ServiceAdditionalInfo')
     SessionNameList = Shapes::ListShape.new(name: 'SessionNameList')
+    SeverityStatistics = Shapes::StructureShape.new(name: 'SeverityStatistics')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     SourceIps = Shapes::ListShape.new(name: 'SourceIps')
     Sources = Shapes::ListShape.new(name: 'Sources')
@@ -569,6 +581,11 @@ module Aws::GuardDuty
 
     AccountLevelPermissions.add_member(:block_public_access, Shapes::ShapeRef.new(shape: BlockPublicAccess, location_name: "blockPublicAccess"))
     AccountLevelPermissions.struct_class = Types::AccountLevelPermissions
+
+    AccountStatistics.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    AccountStatistics.add_member(:last_generated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastGeneratedAt"))
+    AccountStatistics.add_member(:total_findings, Shapes::ShapeRef.new(shape: Integer, location_name: "totalFindings"))
+    AccountStatistics.struct_class = Types::AccountStatistics
 
     Action.add_member(:action_type, Shapes::ShapeRef.new(shape: String, location_name: "actionType"))
     Action.add_member(:aws_api_call_action, Shapes::ShapeRef.new(shape: AwsApiCallAction, location_name: "awsApiCallAction"))
@@ -897,6 +914,12 @@ module Aws::GuardDuty
     DataSourcesFreeTrial.add_member(:malware_protection, Shapes::ShapeRef.new(shape: MalwareProtectionDataSourceFreeTrial, location_name: "malwareProtection"))
     DataSourcesFreeTrial.struct_class = Types::DataSourcesFreeTrial
 
+    DateStatistics.add_member(:date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "date"))
+    DateStatistics.add_member(:last_generated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastGeneratedAt"))
+    DateStatistics.add_member(:severity, Shapes::ShapeRef.new(shape: Double, location_name: "severity"))
+    DateStatistics.add_member(:total_findings, Shapes::ShapeRef.new(shape: Integer, location_name: "totalFindings"))
+    DateStatistics.struct_class = Types::DateStatistics
+
     DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     DeclineInvitationsRequest.struct_class = Types::DeclineInvitationsRequest
 
@@ -1167,8 +1190,18 @@ module Aws::GuardDuty
 
     FindingStatisticTypes.member = Shapes::ShapeRef.new(shape: FindingStatisticType)
 
-    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: CountBySeverity, location_name: "countBySeverity"))
+    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: CountBySeverity, deprecated: true, location_name: "countBySeverity", metadata: {"deprecatedMessage"=>"This parameter is deprecated. Please set GroupBy to 'SEVERITY' to return GroupedBySeverity instead."}))
+    FindingStatistics.add_member(:grouped_by_account, Shapes::ShapeRef.new(shape: GroupedByAccount, location_name: "groupedByAccount"))
+    FindingStatistics.add_member(:grouped_by_date, Shapes::ShapeRef.new(shape: GroupedByDate, location_name: "groupedByDate"))
+    FindingStatistics.add_member(:grouped_by_finding_type, Shapes::ShapeRef.new(shape: GroupedByFindingType, location_name: "groupedByFindingType"))
+    FindingStatistics.add_member(:grouped_by_resource, Shapes::ShapeRef.new(shape: GroupedByResource, location_name: "groupedByResource"))
+    FindingStatistics.add_member(:grouped_by_severity, Shapes::ShapeRef.new(shape: GroupedBySeverity, location_name: "groupedBySeverity"))
     FindingStatistics.struct_class = Types::FindingStatistics
+
+    FindingTypeStatistics.add_member(:finding_type, Shapes::ShapeRef.new(shape: String, location_name: "findingType"))
+    FindingTypeStatistics.add_member(:last_generated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastGeneratedAt"))
+    FindingTypeStatistics.add_member(:total_findings, Shapes::ShapeRef.new(shape: Integer, location_name: "totalFindings"))
+    FindingTypeStatistics.struct_class = Types::FindingTypeStatistics
 
     FindingTypes.member = Shapes::ShapeRef.new(shape: FindingType)
 
@@ -1237,11 +1270,15 @@ module Aws::GuardDuty
     GetFindingsResponse.struct_class = Types::GetFindingsResponse
 
     GetFindingsStatisticsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
-    GetFindingsStatisticsRequest.add_member(:finding_statistic_types, Shapes::ShapeRef.new(shape: FindingStatisticTypes, required: true, location_name: "findingStatisticTypes"))
+    GetFindingsStatisticsRequest.add_member(:finding_statistic_types, Shapes::ShapeRef.new(shape: FindingStatisticTypes, deprecated: true, location_name: "findingStatisticTypes", metadata: {"deprecatedMessage"=>"This parameter is deprecated, please use GroupBy instead"}))
     GetFindingsStatisticsRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
+    GetFindingsStatisticsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupByType, location_name: "groupBy"))
+    GetFindingsStatisticsRequest.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
+    GetFindingsStatisticsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults100, location_name: "maxResults"))
     GetFindingsStatisticsRequest.struct_class = Types::GetFindingsStatisticsRequest
 
     GetFindingsStatisticsResponse.add_member(:finding_statistics, Shapes::ShapeRef.new(shape: FindingStatistics, required: true, location_name: "findingStatistics"))
+    GetFindingsStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetFindingsStatisticsResponse.struct_class = Types::GetFindingsStatisticsResponse
 
     GetIPSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
@@ -1335,6 +1372,16 @@ module Aws::GuardDuty
     GetUsageStatisticsResponse.add_member(:usage_statistics, Shapes::ShapeRef.new(shape: UsageStatistics, location_name: "usageStatistics"))
     GetUsageStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetUsageStatisticsResponse.struct_class = Types::GetUsageStatisticsResponse
+
+    GroupedByAccount.member = Shapes::ShapeRef.new(shape: AccountStatistics)
+
+    GroupedByDate.member = Shapes::ShapeRef.new(shape: DateStatistics)
+
+    GroupedByFindingType.member = Shapes::ShapeRef.new(shape: FindingTypeStatistics)
+
+    GroupedByResource.member = Shapes::ShapeRef.new(shape: ResourceStatistics)
+
+    GroupedBySeverity.member = Shapes::ShapeRef.new(shape: SeverityStatistics)
 
     Groups.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1946,6 +1993,13 @@ module Aws::GuardDuty
     ResourceNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "__type"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceStatistics.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    ResourceStatistics.add_member(:last_generated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastGeneratedAt"))
+    ResourceStatistics.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    ResourceStatistics.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    ResourceStatistics.add_member(:total_findings, Shapes::ShapeRef.new(shape: Integer, location_name: "totalFindings"))
+    ResourceStatistics.struct_class = Types::ResourceStatistics
+
     RuntimeContext.add_member(:modifying_process, Shapes::ShapeRef.new(shape: ProcessDetails, location_name: "modifyingProcess"))
     RuntimeContext.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
     RuntimeContext.add_member(:script_path, Shapes::ShapeRef.new(shape: String, location_name: "scriptPath"))
@@ -2105,6 +2159,11 @@ module Aws::GuardDuty
     ServiceAdditionalInfo.struct_class = Types::ServiceAdditionalInfo
 
     SessionNameList.member = Shapes::ShapeRef.new(shape: String)
+
+    SeverityStatistics.add_member(:last_generated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastGeneratedAt"))
+    SeverityStatistics.add_member(:severity, Shapes::ShapeRef.new(shape: Double, location_name: "severity"))
+    SeverityStatistics.add_member(:total_findings, Shapes::ShapeRef.new(shape: Integer, location_name: "totalFindings"))
+    SeverityStatistics.struct_class = Types::SeverityStatistics
 
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))

@@ -14,14 +14,11 @@ module Aws::STS
 
     class AssumeRole
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -29,14 +26,11 @@ module Aws::STS
 
     class AssumeRoleWithSAML
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -44,14 +38,11 @@ module Aws::STS
 
     class AssumeRoleWithWebIdentity
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -59,14 +50,11 @@ module Aws::STS
 
     class DecodeAuthorizationMessage
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -74,14 +62,11 @@ module Aws::STS
 
     class GetAccessKeyInfo
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -89,14 +74,11 @@ module Aws::STS
 
     class GetCallerIdentity
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -104,14 +86,11 @@ module Aws::STS
 
     class GetFederationToken
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end
@@ -119,14 +98,11 @@ module Aws::STS
 
     class GetSessionToken
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::STS::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           use_global_endpoint: context.config.sts_regional_endpoints == 'legacy',
         )
       end

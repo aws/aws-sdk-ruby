@@ -67,23 +67,30 @@ module Aws::MediaLive
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                 | params                      | :delay   | :max_attempts |
-  # | --------------------------- | --------------------------- | -------- | ------------- |
-  # | channel_created             | {Client#describe_channel}   | 3        | 5             |
-  # | channel_deleted             | {Client#describe_channel}   | 5        | 84            |
-  # | channel_running             | {Client#describe_channel}   | 5        | 120           |
-  # | channel_stopped             | {Client#describe_channel}   | 5        | 60            |
-  # | input_attached              | {Client#describe_input}     | 5        | 20            |
-  # | input_deleted               | {Client#describe_input}     | 5        | 20            |
-  # | input_detached              | {Client#describe_input}     | 5        | 84            |
-  # | multiplex_created           | {Client#describe_multiplex} | 3        | 5             |
-  # | multiplex_deleted           | {Client#describe_multiplex} | 5        | 20            |
-  # | multiplex_running           | {Client#describe_multiplex} | 5        | 120           |
-  # | multiplex_stopped           | {Client#describe_multiplex} | 5        | 28            |
-  # | signal_map_created          | {Client#get_signal_map}     | 5        | 60            |
-  # | signal_map_monitor_deleted  | {Client#get_signal_map}     | 5        | 120           |
-  # | signal_map_monitor_deployed | {Client#get_signal_map}     | 5        | 120           |
-  # | signal_map_updated          | {Client#get_signal_map}     | 5        | 60            |
+  # | waiter_name                        | params                                    | :delay   | :max_attempts |
+  # | ---------------------------------- | ----------------------------------------- | -------- | ------------- |
+  # | channel_created                    | {Client#describe_channel}                 | 3        | 5             |
+  # | channel_deleted                    | {Client#describe_channel}                 | 5        | 84            |
+  # | channel_placement_group_assigned   | {Client#describe_channel_placement_group} | 3        | 5             |
+  # | channel_placement_group_deleted    | {Client#describe_channel_placement_group} | 5        | 20            |
+  # | channel_placement_group_unassigned | {Client#describe_channel_placement_group} | 5        | 20            |
+  # | channel_running                    | {Client#describe_channel}                 | 5        | 120           |
+  # | channel_stopped                    | {Client#describe_channel}                 | 5        | 60            |
+  # | cluster_created                    | {Client#describe_cluster}                 | 3        | 5             |
+  # | cluster_deleted                    | {Client#describe_cluster}                 | 5        | 20            |
+  # | input_attached                     | {Client#describe_input}                   | 5        | 20            |
+  # | input_deleted                      | {Client#describe_input}                   | 5        | 20            |
+  # | input_detached                     | {Client#describe_input}                   | 5        | 84            |
+  # | multiplex_created                  | {Client#describe_multiplex}               | 3        | 5             |
+  # | multiplex_deleted                  | {Client#describe_multiplex}               | 5        | 20            |
+  # | multiplex_running                  | {Client#describe_multiplex}               | 5        | 120           |
+  # | multiplex_stopped                  | {Client#describe_multiplex}               | 5        | 28            |
+  # | node_deregistered                  | {Client#describe_node}                    | 5        | 20            |
+  # | node_registered                    | {Client#describe_node}                    | 3        | 5             |
+  # | signal_map_created                 | {Client#get_signal_map}                   | 5        | 60            |
+  # | signal_map_monitor_deleted         | {Client#get_signal_map}                   | 5        | 120           |
+  # | signal_map_monitor_deployed        | {Client#get_signal_map}                   | 5        | 120           |
+  # | signal_map_updated                 | {Client#get_signal_map}                   | 5        | 60            |
   #
   module Waiters
 
@@ -193,6 +200,156 @@ module Aws::MediaLive
 
     end
 
+    # Wait until the channel placement group has been assigned
+    class ChannelPlacementGroupAssigned
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (5)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 5,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_channel_placement_group,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "ASSIGNED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "ASSIGNING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_channel_placement_group)
+      # @return (see Client#describe_channel_placement_group)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the channel placement group has been deleted
+    class ChannelPlacementGroupDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_channel_placement_group,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_channel_placement_group)
+      # @return (see Client#describe_channel_placement_group)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the channel placement group has been unassigned
+    class ChannelPlacementGroupUnassigned
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_channel_placement_group,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "UNASSIGNED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "UNASSIGNING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_channel_placement_group)
+      # @return (see Client#describe_channel_placement_group)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
     # Wait until a channel is running
     class ChannelRunning
 
@@ -284,6 +441,112 @@ module Aws::MediaLive
 
       # @option (see Client#describe_channel)
       # @return (see Client#describe_channel)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a cluster has been created
+    class ClusterCreated
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (5)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 5,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_cluster,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "ACTIVE"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "CREATING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "CREATE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_cluster)
+      # @return (see Client#describe_cluster)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a cluster has been deleted
+    class ClusterDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_cluster,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_cluster)
+      # @return (see Client#describe_cluster)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end
@@ -646,6 +909,123 @@ module Aws::MediaLive
 
       # @option (see Client#describe_multiplex)
       # @return (see Client#describe_multiplex)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a node has been deregistered
+    class NodeDeregistered
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_node,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DEREGISTERED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DEREGISTERING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DRAINING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_node)
+      # @return (see Client#describe_node)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a node has been registered
+    class NodeRegistered
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (5)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 5,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_node,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "ACTIVE"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "REGISTERING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 404
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "REGISTRATION_FAILED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_node)
+      # @return (see Client#describe_node)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

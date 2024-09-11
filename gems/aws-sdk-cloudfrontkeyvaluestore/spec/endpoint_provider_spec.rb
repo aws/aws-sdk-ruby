@@ -14,7 +14,7 @@ module Aws::CloudFrontKeyValueStore
   describe EndpointProvider do
     subject { Aws::CloudFrontKeyValueStore::EndpointProvider.new }
 
-    context 'FIPS should error' do
+    context "FIPS should error" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."}
       end
@@ -27,7 +27,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'KVS ARN must be provided to use this service' do
+    context "KVS ARN must be provided to use this service" do
       let(:expected) do
         {"error"=>"KVS ARN must be provided to use this service"}
       end
@@ -40,7 +40,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'KVS ARN must be a valid ARN' do
+    context "KVS ARN must be a valid ARN" do
       let(:expected) do
         {"error"=>"KVS ARN must be a valid ARN"}
       end
@@ -53,7 +53,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Provided ARN was not a valid CloudFront Service ARN. Found: `notcloudfront`' do
+    context "Provided ARN was not a valid CloudFront Service ARN. Found: `notcloudfront`" do
       let(:expected) do
         {"error"=>"Provided ARN is not a valid CloudFront Service ARN. Found: `notcloudfront`"}
       end
@@ -66,7 +66,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Provided ARN must be a global resource ARN. Found: `us-west-2`' do
+    context "Provided ARN must be a global resource ARN. Found: `us-west-2`" do
       let(:expected) do
         {"error"=>"Provided ARN must be a global resource ARN. Found: `us-west-2`"}
       end
@@ -79,7 +79,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`' do
+    context "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`" do
       let(:expected) do
         {"error"=>"ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`"}
       end
@@ -92,7 +92,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'CloudFront-KeyValueStore is not supported in partition `aws-cn`' do
+    context "CloudFront-KeyValueStore is not supported in partition `aws-cn`" do
       let(:expected) do
         {"error"=>"CloudFront-KeyValueStore is not supported in partition `aws-cn`"}
       end
@@ -105,7 +105,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'CloudFront-KeyValueStore is not supported in partition `aws-us-gov`' do
+    context "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`" do
       let(:expected) do
         {"error"=>"CloudFront-KeyValueStore is not supported in partition `aws-us-gov`"}
       end
@@ -118,7 +118,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Valid account based endpoint' do
+    context "Valid account based endpoint" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"cloudfront-keyvaluestore", "name"=>"sigv4a", "signingRegionSet"=>["*"]}]}, "url"=>"https://123456789012.cloudfront-kvs.global.api.aws"}}
       end
@@ -132,7 +132,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Valid account based endpoint, with SDK region' do
+    context "Valid account based endpoint, with SDK region" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"cloudfront-keyvaluestore", "name"=>"sigv4a", "signingRegionSet"=>["*"]}]}, "url"=>"https://123456789012.cloudfront-kvs.global.api.aws"}}
       end
@@ -146,7 +146,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Valid ARN, different partition, should error' do
+    context "Valid ARN, different partition, should error" do
       let(:expected) do
         {"error"=>"Client was configured for partition `aws-cn` but Kvs ARN has `aws`"}
       end
@@ -159,7 +159,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Valid account based endpoint with FIPS, should error' do
+    context "Valid account based endpoint with FIPS, should error" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."}
       end
@@ -172,7 +172,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Custom sdk endpoint override' do
+    context "Custom sdk endpoint override" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"cloudfront-keyvaluestore", "name"=>"sigv4a", "signingRegionSet"=>["*"]}]}, "url"=>"https://123456789012.my-override.example.com"}}
       end
@@ -186,7 +186,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Custom sdk endpoint override with path and http' do
+    context "Custom sdk endpoint override with path and http" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"cloudfront-keyvaluestore", "name"=>"sigv4a", "signingRegionSet"=>["*"]}]}, "url"=>"http://123456789012.my-override.example.com/custom-path"}}
       end
@@ -200,7 +200,7 @@ module Aws::CloudFrontKeyValueStore
       end
     end
 
-    context 'Custom override with different partition should error' do
+    context "Custom override with different partition should error" do
       let(:expected) do
         {"error"=>"Client was configured for partition `aws-us-gov` but Kvs ARN has `aws`"}
       end

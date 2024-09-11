@@ -14,7 +14,7 @@ module Aws::BCMDataExports
   describe EndpointProvider do
     subject { Aws::BCMDataExports::EndpointProvider.new }
 
-    context 'For region aws-global with FIPS disabled and DualStack enabled' do
+    context "For region aws-global with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"bcm-data-exports", "signingRegion"=>"us-east-1"}]}, "url"=>"https://bcm-data-exports.us-east-1.api.aws"}}
       end
@@ -28,7 +28,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://bcm-data-exports-fips.us-east-1.api.aws"}}
       end
@@ -42,7 +42,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"bcm-data-exports", "signingRegion"=>"us-east-1"}]}, "url"=>"https://bcm-data-exports.us-east-1.api.aws"}}
       end
@@ -56,7 +56,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://bcm-data-exports-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -70,7 +70,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://bcm-data-exports.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -84,7 +84,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://bcm-data-exports-fips.us-gov-east-1.api.aws"}}
       end
@@ -98,7 +98,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://bcm-data-exports.us-gov-east-1.api.aws"}}
       end
@@ -112,7 +112,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -126,7 +126,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -140,7 +140,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'For custom endpoint with fips enabled and dualstack disabled' do
+    context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -153,7 +153,7 @@ module Aws::BCMDataExports
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

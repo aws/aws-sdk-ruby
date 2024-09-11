@@ -14,7 +14,7 @@ module Aws::EventBridge
   describe EndpointProvider do
     subject { Aws::EventBridge::EndpointProvider.new }
 
-    context 'For region af-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region af-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.af-south-1.amazonaws.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-east-1.amazonaws.com"}}
       end
@@ -42,7 +42,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-northeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-northeast-1.amazonaws.com"}}
       end
@@ -56,7 +56,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-northeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-northeast-2.amazonaws.com"}}
       end
@@ -70,7 +70,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-northeast-3 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-3 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-northeast-3.amazonaws.com"}}
       end
@@ -84,7 +84,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-south-1.amazonaws.com"}}
       end
@@ -98,7 +98,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-southeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-southeast-1.amazonaws.com"}}
       end
@@ -112,7 +112,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-southeast-2 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-southeast-2.amazonaws.com"}}
       end
@@ -126,7 +126,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ap-southeast-3 with FIPS disabled and DualStack disabled' do
+    context "For region ap-southeast-3 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ap-southeast-3.amazonaws.com"}}
       end
@@ -140,7 +140,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region ca-central-1 with FIPS disabled and DualStack disabled' do
+    context "For region ca-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.ca-central-1.amazonaws.com"}}
       end
@@ -154,7 +154,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region eu-central-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-central-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.eu-central-1.amazonaws.com"}}
       end
@@ -168,7 +168,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region eu-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.eu-north-1.amazonaws.com"}}
       end
@@ -182,7 +182,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region eu-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.eu-south-1.amazonaws.com"}}
       end
@@ -196,7 +196,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.eu-west-1.amazonaws.com"}}
       end
@@ -210,7 +210,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region eu-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.eu-west-2.amazonaws.com"}}
       end
@@ -224,7 +224,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region eu-west-3 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-3 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.eu-west-3.amazonaws.com"}}
       end
@@ -238,7 +238,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region me-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region me-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.me-south-1.amazonaws.com"}}
       end
@@ -252,7 +252,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region sa-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region sa-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.sa-east-1.amazonaws.com"}}
       end
@@ -266,7 +266,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-east-1.amazonaws.com"}}
       end
@@ -280,7 +280,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-east-1.amazonaws.com"}}
       end
@@ -294,7 +294,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-east-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-east-2.amazonaws.com"}}
       end
@@ -308,7 +308,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-east-2 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-2 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-east-2.amazonaws.com"}}
       end
@@ -322,7 +322,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-west-1.amazonaws.com"}}
       end
@@ -336,7 +336,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-west-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-west-1.amazonaws.com"}}
       end
@@ -350,7 +350,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-west-2.amazonaws.com"}}
       end
@@ -364,7 +364,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-west-2 with FIPS enabled and DualStack disabled' do
+    context "For region us-west-2 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-west-2.amazonaws.com"}}
       end
@@ -378,7 +378,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-east-1.api.aws"}}
       end
@@ -392,7 +392,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-east-1.api.aws"}}
       end
@@ -406,7 +406,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.cn-north-1.amazonaws.com.cn"}}
       end
@@ -420,7 +420,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.cn-northwest-1.amazonaws.com.cn"}}
       end
@@ -434,7 +434,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -448,7 +448,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.cn-north-1.amazonaws.com.cn"}}
       end
@@ -462,7 +462,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -476,7 +476,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-gov-east-1.amazonaws.com"}}
       end
@@ -490,7 +490,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-gov-east-1.amazonaws.com"}}
       end
@@ -504,7 +504,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-gov-west-1.amazonaws.com"}}
       end
@@ -518,7 +518,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-gov-west-1.amazonaws.com"}}
       end
@@ -532,7 +532,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-gov-east-1.api.aws"}}
       end
@@ -546,7 +546,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-gov-east-1.api.aws"}}
       end
@@ -560,7 +560,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -574,7 +574,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-iso-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-iso-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-iso-west-1.c2s.ic.gov"}}
       end
@@ -588,7 +588,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -601,7 +601,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -615,7 +615,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -628,7 +628,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -642,7 +642,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -655,7 +655,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://events-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -669,7 +669,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -682,7 +682,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -696,7 +696,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -710,7 +710,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For custom endpoint with fips enabled and dualstack disabled' do
+    context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -723,7 +723,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack enabled' do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
@@ -736,7 +736,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end
@@ -749,7 +749,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Valid endpointId with fips disabled and dualstack disabled' do
+    context "Valid endpointId with fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"events", "name"=>"sigv4a", "signingRegionSet"=>["*"]}]}, "url"=>"https://abc123.456def.endpoint.events.amazonaws.com"}}
       end
@@ -779,7 +779,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Valid EndpointId with dualstack disabled and fips enabled' do
+    context "Valid EndpointId with dualstack disabled and fips enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS is not supported with EventBridge multi-region endpoints."}
       end
@@ -792,7 +792,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Valid EndpointId with dualstack enabled and fips enabled' do
+    context "Valid EndpointId with dualstack enabled and fips enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS is not supported with EventBridge multi-region endpoints."}
       end
@@ -805,7 +805,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Invalid EndpointId' do
+    context "Invalid EndpointId" do
       let(:expected) do
         {"error"=>"EndpointId must be a valid host label."}
       end
@@ -818,7 +818,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Invalid EndpointId (empty)' do
+    context "Invalid EndpointId (empty)" do
       let(:expected) do
         {"error"=>"EndpointId must be a valid host label."}
       end
@@ -831,7 +831,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Valid endpointId with fips disabled and dualstack true' do
+    context "Valid endpointId with fips disabled and dualstack true" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"events", "name"=>"sigv4a", "signingRegionSet"=>["*"]}]}, "url"=>"https://abc123.456def.endpoint.events.api.aws"}}
       end
@@ -845,7 +845,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Valid endpointId with custom sdk endpoint' do
+    context "Valid endpointId with custom sdk endpoint" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"signingName"=>"events", "name"=>"sigv4a", "signingRegionSet"=>["*"]}]}, "url"=>"https://example.com"}}
       end
@@ -859,7 +859,7 @@ module Aws::EventBridge
       end
     end
 
-    context 'Valid EndpointId with DualStack enabled and partition does not support DualStack' do
+    context "Valid EndpointId with DualStack enabled and partition does not support DualStack" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end

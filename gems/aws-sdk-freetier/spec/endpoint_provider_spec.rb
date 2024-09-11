@@ -14,7 +14,7 @@ module Aws::FreeTier
   describe EndpointProvider do
     subject { Aws::FreeTier::EndpointProvider.new }
 
-    context 'For region aws-global with FIPS disabled and DualStack enabled' do
+    context "For region aws-global with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"freetier", "signingRegion"=>"us-east-1"}]}, "url"=>"https://freetier.us-east-1.api.aws"}}
       end
@@ -28,7 +28,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://freetier-fips.us-east-1.api.aws"}}
       end
@@ -42,7 +42,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"freetier", "signingRegion"=>"us-east-1"}]}, "url"=>"https://freetier.us-east-1.api.aws"}}
       end
@@ -56,7 +56,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For region aws-cn-global with FIPS disabled and DualStack enabled' do
+    context "For region aws-cn-global with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"freetier", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://freetier.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
@@ -70,7 +70,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://freetier-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -84,7 +84,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://freetier.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -98,7 +98,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://freetier-fips.us-gov-east-1.api.aws"}}
       end
@@ -112,7 +112,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://freetier.us-gov-east-1.api.aws"}}
       end
@@ -126,7 +126,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -140,7 +140,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -154,7 +154,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'For custom endpoint with fips enabled and dualstack disabled' do
+    context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -167,7 +167,7 @@ module Aws::FreeTier
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

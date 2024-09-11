@@ -1993,7 +1993,7 @@ module Aws::SecurityLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

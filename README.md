@@ -527,7 +527,6 @@ RubyGems.org page under "LINKS" section.
 | Amazon DynamoDB                                       | Aws::DynamoDB                            | aws-sdk-dynamodb                            | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | Aws::DAX                                 | aws-sdk-dax                                 | 2017-04-19  |
 | Amazon DynamoDB Streams                               | Aws::DynamoDBStreams                     | aws-sdk-dynamodbstreams                     | 2012-08-10  |
-| Amazon EC2 Container Registry                         | Aws::ECR                                 | aws-sdk-ecr                                 | 2015-09-21  |
 | Amazon EC2 Container Service                          | Aws::ECS                                 | aws-sdk-ecs                                 | 2014-11-13  |
 | Amazon EKS Auth                                       | Aws::EKSAuth                             | aws-sdk-eksauth                             | 2023-11-26  |
 | Amazon EMR                                            | Aws::EMR                                 | aws-sdk-emr                                 | 2009-03-31  |
@@ -536,6 +535,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Elastic  Inference                             | Aws::ElasticInference                    | aws-sdk-elasticinference                    | 2017-07-25  |
 | Amazon Elastic Block Store                            | Aws::EBS                                 | aws-sdk-ebs                                 | 2019-11-02  |
 | Amazon Elastic Compute Cloud                          | Aws::EC2                                 | aws-sdk-ec2                                 | 2016-11-15  |
+| Amazon Elastic Container Registry                     | Aws::ECR                                 | aws-sdk-ecr                                 | 2015-09-21  |
 | Amazon Elastic Container Registry Public              | Aws::ECRPublic                           | aws-sdk-ecrpublic                           | 2020-10-30  |
 | Amazon Elastic File System                            | Aws::EFS                                 | aws-sdk-efs                                 | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | Aws::EKS                                 | aws-sdk-eks                                 | 2017-11-01  |

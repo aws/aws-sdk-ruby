@@ -331,6 +331,13 @@ module Aws
                                     url: ::String?,
                                     username: ::String?
                                   },
+                                ]?,
+                                srt_settings: Array[
+                                  {
+                                    encryption_passphrase_secret_arn: ::String?,
+                                    stream_id: ::String?,
+                                    url: ::String?
+                                  },
                                 ]?
                               },
                             ],
@@ -797,6 +804,9 @@ module Aws
                                       segment_length: ::Integer?,
                                       segment_length_units: ("MILLISECONDS" | "SECONDS")?,
                                       send_delay_ms: ::Integer?
+                                    }?,
+                                    srt_group_settings: {
+                                      input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?
                                     }?
                                   },
                                   outputs: Array[
@@ -1020,6 +1030,77 @@ module Aws
                                         }?,
                                         cmaf_ingest_output_settings: {
                                           name_modifier: ::String?
+                                        }?,
+                                        srt_output_settings: {
+                                          buffer_msec: ::Integer?,
+                                          container_settings: {
+                                            m2ts_settings: {
+                                              absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")?,
+                                              arib: ("DISABLED" | "ENABLED")?,
+                                              arib_captions_pid: ::String?,
+                                              arib_captions_pid_control: ("AUTO" | "USE_CONFIGURED")?,
+                                              audio_buffer_model: ("ATSC" | "DVB")?,
+                                              audio_frames_per_pes: ::Integer?,
+                                              audio_pids: ::String?,
+                                              audio_stream_type: ("ATSC" | "DVB")?,
+                                              bitrate: ::Integer?,
+                                              buffer_model: ("MULTIPLEX" | "NONE")?,
+                                              cc_descriptor: ("DISABLED" | "ENABLED")?,
+                                              dvb_nit_settings: {
+                                                network_id: ::Integer,
+                                                network_name: ::String,
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_sdt_settings: {
+                                                output_sdt: ("SDT_FOLLOW" | "SDT_FOLLOW_IF_PRESENT" | "SDT_MANUAL" | "SDT_NONE")?,
+                                                rep_interval: ::Integer?,
+                                                service_name: ::String?,
+                                                service_provider_name: ::String?
+                                              }?,
+                                              dvb_sub_pids: ::String?,
+                                              dvb_tdt_settings: {
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_teletext_pid: ::String?,
+                                              ebif: ("NONE" | "PASSTHROUGH")?,
+                                              ebp_audio_interval: ("VIDEO_AND_FIXED_INTERVALS" | "VIDEO_INTERVAL")?,
+                                              ebp_lookahead_ms: ::Integer?,
+                                              ebp_placement: ("VIDEO_AND_AUDIO_PIDS" | "VIDEO_PID")?,
+                                              ecm_pid: ::String?,
+                                              es_rate_in_pes: ("EXCLUDE" | "INCLUDE")?,
+                                              etv_platform_pid: ::String?,
+                                              etv_signal_pid: ::String?,
+                                              fragment_time: ::Float?,
+                                              klv: ("NONE" | "PASSTHROUGH")?,
+                                              klv_data_pids: ::String?,
+                                              nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              null_packet_bitrate: ::Float?,
+                                              pat_interval: ::Integer?,
+                                              pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")?,
+                                              pcr_period: ::Integer?,
+                                              pcr_pid: ::String?,
+                                              pmt_interval: ::Integer?,
+                                              pmt_pid: ::String?,
+                                              program_num: ::Integer?,
+                                              rate_mode: ("CBR" | "VBR")?,
+                                              scte_27_pids: ::String?,
+                                              scte_35_control: ("NONE" | "PASSTHROUGH")?,
+                                              scte_35_pid: ::String?,
+                                              scte_35_preroll_pullup_milliseconds: ::Float?,
+                                              segmentation_markers: ("EBP" | "EBP_LEGACY" | "NONE" | "PSI_SEGSTART" | "RAI_ADAPT" | "RAI_SEGSTART")?,
+                                              segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")?,
+                                              segmentation_time: ::Float?,
+                                              timed_metadata_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              timed_metadata_pid: ::String?,
+                                              transport_stream_id: ::Integer?,
+                                              video_pid: ::String?
+                                            }?
+                                          },
+                                          destination: {
+                                            destination_ref_id: ::String?
+                                          },
+                                          encryption_type: ("AES128" | "AES192" | "AES256")?,
+                                          latency: ::Integer?
                                         }?
                                       },
                                       video_description_name: ::String?
@@ -1192,6 +1273,40 @@ module Aws
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
                                       }?
+                                    }?,
+                                    av_1_settings: {
+                                      afd_signaling: ("AUTO" | "FIXED" | "NONE")?,
+                                      buf_size: ::Integer?,
+                                      color_space_settings: {
+                                        color_space_passthrough_settings: {
+                                        }?,
+                                        hdr_10_settings: {
+                                          max_cll: ::Integer?,
+                                          max_fall: ::Integer?
+                                        }?,
+                                        rec_601_settings: {
+                                        }?,
+                                        rec_709_settings: {
+                                        }?
+                                      }?,
+                                      fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,
+                                      framerate_denominator: ::Integer,
+                                      framerate_numerator: ::Integer,
+                                      gop_size: ::Float?,
+                                      gop_size_units: ("FRAMES" | "SECONDS")?,
+                                      level: ("AV1_LEVEL_2" | "AV1_LEVEL_2_1" | "AV1_LEVEL_3" | "AV1_LEVEL_3_1" | "AV1_LEVEL_4" | "AV1_LEVEL_4_1" | "AV1_LEVEL_5" | "AV1_LEVEL_5_1" | "AV1_LEVEL_5_2" | "AV1_LEVEL_5_3" | "AV1_LEVEL_6" | "AV1_LEVEL_6_1" | "AV1_LEVEL_6_2" | "AV1_LEVEL_6_3" | "AV1_LEVEL_AUTO")?,
+                                      look_ahead_rate_control: ("HIGH" | "LOW" | "MEDIUM")?,
+                                      max_bitrate: ::Integer?,
+                                      min_i_interval: ::Integer?,
+                                      par_denominator: ::Integer?,
+                                      par_numerator: ::Integer?,
+                                      qvbr_quality_level: ::Integer?,
+                                      scene_change_detect: ("DISABLED" | "ENABLED")?,
+                                      timecode_burnin_settings: {
+                                        font_size: ("EXTRA_SMALL_10" | "LARGE_48" | "MEDIUM_32" | "SMALL_16"),
+                                        position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
+                                        prefix: ::String?
+                                      }?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -1322,7 +1437,10 @@ module Aws
                                       retry_interval: ::Integer?,
                                       scte_35_source: ("MANIFEST" | "SEGMENTS")?
                                     }?,
-                                    server_validation: ("CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" | "CHECK_CRYPTOGRAPHY_ONLY")?
+                                    server_validation: ("CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" | "CHECK_CRYPTOGRAPHY_ONLY")?,
+                                    multicast_input_settings: {
+                                      source_ip_address: ::String?
+                                    }?
                                   }?,
                                   scte_35_pid: ::Integer?,
                                   smpte_2038_data_preference: ("IGNORE" | "PREFER")?,
@@ -1345,7 +1463,8 @@ module Aws
                                       }?
                                     }?
                                   }?
-                                }?
+                                }?,
+                                logical_interface_names: Array[::String]?
                               },
                             ],
                             ?input_specification: {
@@ -1367,6 +1486,10 @@ module Aws
                               public_address_allocation_ids: Array[::String]?,
                               security_group_ids: Array[::String]?,
                               subnet_ids: Array[::String]
+                            },
+                            ?anywhere_settings: {
+                              channel_placement_group_id: ::String?,
+                              cluster_id: ::String?
                             }
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
@@ -1379,7 +1502,15 @@ module Aws
       def create_input: (
                           ?destinations: Array[
                             {
-                              stream_name: ::String?
+                              stream_name: ::String?,
+                              network: ::String?,
+                              network_routes: Array[
+                                {
+                                  cidr: ::String?,
+                                  gateway: ::String?
+                                },
+                              ]?,
+                              static_ip_address: ::String?
                             },
                           ],
                           ?input_devices: Array[
@@ -1404,7 +1535,7 @@ module Aws
                             },
                           ],
                           ?tags: Hash[::String, ::String],
-                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER"),
+                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST"),
                           ?vpc: {
                             security_group_ids: Array[::String]?,
                             subnet_ids: Array[::String]
@@ -1420,6 +1551,15 @@ module Aws
                                 srt_listener_address: ::String?,
                                 srt_listener_port: ::String?,
                                 stream_id: ::String?
+                              },
+                            ]?
+                          },
+                          ?input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES"),
+                          ?multicast_settings: {
+                            sources: Array[
+                              {
+                                source_ip: ::String?,
+                                url: ::String
                               },
                             ]?
                           }
@@ -1527,6 +1667,7 @@ module Aws
         def state: () -> ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
         def tags: () -> ::Hash[::String, ::String]
         def vpc: () -> Types::VpcOutputSettingsDescription
+        def anywhere_settings: () -> Types::DescribeAnywhereSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_channel-instance_method
       def delete_channel: (
@@ -1659,6 +1800,7 @@ module Aws
         def state: () -> ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
         def tags: () -> ::Hash[::String, ::String]
         def vpc: () -> Types::VpcOutputSettingsDescription
+        def anywhere_settings: () -> Types::DescribeAnywhereSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_channel-instance_method
       def describe_channel: (
@@ -1683,8 +1825,10 @@ module Aws
         def sources: () -> ::Array[Types::InputSource]
         def state: () -> ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
         def tags: () -> ::Hash[::String, ::String]
-        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
         def srt_settings: () -> Types::SrtSettings
+        def input_network_location: () -> ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+        def multicast_settings: () -> Types::MulticastSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_input-instance_method
       def describe_input: (
@@ -2050,6 +2194,7 @@ module Aws
         def state: () -> ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
         def tags: () -> ::Hash[::String, ::String]
         def vpc: () -> Types::VpcOutputSettingsDescription
+        def anywhere_settings: () -> Types::DescribeAnywhereSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_channel-instance_method
       def start_channel: (
@@ -2114,6 +2259,7 @@ module Aws
         def state: () -> ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
         def tags: () -> ::Hash[::String, ::String]
         def vpc: () -> Types::VpcOutputSettingsDescription
+        def anywhere_settings: () -> Types::DescribeAnywhereSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#stop_channel-instance_method
       def stop_channel: (
@@ -2201,6 +2347,13 @@ module Aws
                                     stream_name: ::String?,
                                     url: ::String?,
                                     username: ::String?
+                                  },
+                                ]?,
+                                srt_settings: Array[
+                                  {
+                                    encryption_passphrase_secret_arn: ::String?,
+                                    stream_id: ::String?,
+                                    url: ::String?
                                   },
                                 ]?
                               },
@@ -2668,6 +2821,9 @@ module Aws
                                       segment_length: ::Integer?,
                                       segment_length_units: ("MILLISECONDS" | "SECONDS")?,
                                       send_delay_ms: ::Integer?
+                                    }?,
+                                    srt_group_settings: {
+                                      input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?
                                     }?
                                   },
                                   outputs: Array[
@@ -2891,6 +3047,77 @@ module Aws
                                         }?,
                                         cmaf_ingest_output_settings: {
                                           name_modifier: ::String?
+                                        }?,
+                                        srt_output_settings: {
+                                          buffer_msec: ::Integer?,
+                                          container_settings: {
+                                            m2ts_settings: {
+                                              absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")?,
+                                              arib: ("DISABLED" | "ENABLED")?,
+                                              arib_captions_pid: ::String?,
+                                              arib_captions_pid_control: ("AUTO" | "USE_CONFIGURED")?,
+                                              audio_buffer_model: ("ATSC" | "DVB")?,
+                                              audio_frames_per_pes: ::Integer?,
+                                              audio_pids: ::String?,
+                                              audio_stream_type: ("ATSC" | "DVB")?,
+                                              bitrate: ::Integer?,
+                                              buffer_model: ("MULTIPLEX" | "NONE")?,
+                                              cc_descriptor: ("DISABLED" | "ENABLED")?,
+                                              dvb_nit_settings: {
+                                                network_id: ::Integer,
+                                                network_name: ::String,
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_sdt_settings: {
+                                                output_sdt: ("SDT_FOLLOW" | "SDT_FOLLOW_IF_PRESENT" | "SDT_MANUAL" | "SDT_NONE")?,
+                                                rep_interval: ::Integer?,
+                                                service_name: ::String?,
+                                                service_provider_name: ::String?
+                                              }?,
+                                              dvb_sub_pids: ::String?,
+                                              dvb_tdt_settings: {
+                                                rep_interval: ::Integer?
+                                              }?,
+                                              dvb_teletext_pid: ::String?,
+                                              ebif: ("NONE" | "PASSTHROUGH")?,
+                                              ebp_audio_interval: ("VIDEO_AND_FIXED_INTERVALS" | "VIDEO_INTERVAL")?,
+                                              ebp_lookahead_ms: ::Integer?,
+                                              ebp_placement: ("VIDEO_AND_AUDIO_PIDS" | "VIDEO_PID")?,
+                                              ecm_pid: ::String?,
+                                              es_rate_in_pes: ("EXCLUDE" | "INCLUDE")?,
+                                              etv_platform_pid: ::String?,
+                                              etv_signal_pid: ::String?,
+                                              fragment_time: ::Float?,
+                                              klv: ("NONE" | "PASSTHROUGH")?,
+                                              klv_data_pids: ::String?,
+                                              nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              null_packet_bitrate: ::Float?,
+                                              pat_interval: ::Integer?,
+                                              pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")?,
+                                              pcr_period: ::Integer?,
+                                              pcr_pid: ::String?,
+                                              pmt_interval: ::Integer?,
+                                              pmt_pid: ::String?,
+                                              program_num: ::Integer?,
+                                              rate_mode: ("CBR" | "VBR")?,
+                                              scte_27_pids: ::String?,
+                                              scte_35_control: ("NONE" | "PASSTHROUGH")?,
+                                              scte_35_pid: ::String?,
+                                              scte_35_preroll_pullup_milliseconds: ::Float?,
+                                              segmentation_markers: ("EBP" | "EBP_LEGACY" | "NONE" | "PSI_SEGSTART" | "RAI_ADAPT" | "RAI_SEGSTART")?,
+                                              segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")?,
+                                              segmentation_time: ::Float?,
+                                              timed_metadata_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              timed_metadata_pid: ::String?,
+                                              transport_stream_id: ::Integer?,
+                                              video_pid: ::String?
+                                            }?
+                                          },
+                                          destination: {
+                                            destination_ref_id: ::String?
+                                          },
+                                          encryption_type: ("AES128" | "AES192" | "AES256")?,
+                                          latency: ::Integer?
                                         }?
                                       },
                                       video_description_name: ::String?
@@ -3063,6 +3290,40 @@ module Aws
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
                                       }?
+                                    }?,
+                                    av_1_settings: {
+                                      afd_signaling: ("AUTO" | "FIXED" | "NONE")?,
+                                      buf_size: ::Integer?,
+                                      color_space_settings: {
+                                        color_space_passthrough_settings: {
+                                        }?,
+                                        hdr_10_settings: {
+                                          max_cll: ::Integer?,
+                                          max_fall: ::Integer?
+                                        }?,
+                                        rec_601_settings: {
+                                        }?,
+                                        rec_709_settings: {
+                                        }?
+                                      }?,
+                                      fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,
+                                      framerate_denominator: ::Integer,
+                                      framerate_numerator: ::Integer,
+                                      gop_size: ::Float?,
+                                      gop_size_units: ("FRAMES" | "SECONDS")?,
+                                      level: ("AV1_LEVEL_2" | "AV1_LEVEL_2_1" | "AV1_LEVEL_3" | "AV1_LEVEL_3_1" | "AV1_LEVEL_4" | "AV1_LEVEL_4_1" | "AV1_LEVEL_5" | "AV1_LEVEL_5_1" | "AV1_LEVEL_5_2" | "AV1_LEVEL_5_3" | "AV1_LEVEL_6" | "AV1_LEVEL_6_1" | "AV1_LEVEL_6_2" | "AV1_LEVEL_6_3" | "AV1_LEVEL_AUTO")?,
+                                      look_ahead_rate_control: ("HIGH" | "LOW" | "MEDIUM")?,
+                                      max_bitrate: ::Integer?,
+                                      min_i_interval: ::Integer?,
+                                      par_denominator: ::Integer?,
+                                      par_numerator: ::Integer?,
+                                      qvbr_quality_level: ::Integer?,
+                                      scene_change_detect: ("DISABLED" | "ENABLED")?,
+                                      timecode_burnin_settings: {
+                                        font_size: ("EXTRA_SMALL_10" | "LARGE_48" | "MEDIUM_32" | "SMALL_16"),
+                                        position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
+                                        prefix: ::String?
+                                      }?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -3193,7 +3454,10 @@ module Aws
                                       retry_interval: ::Integer?,
                                       scte_35_source: ("MANIFEST" | "SEGMENTS")?
                                     }?,
-                                    server_validation: ("CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" | "CHECK_CRYPTOGRAPHY_ONLY")?
+                                    server_validation: ("CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" | "CHECK_CRYPTOGRAPHY_ONLY")?,
+                                    multicast_input_settings: {
+                                      source_ip_address: ::String?
+                                    }?
                                   }?,
                                   scte_35_pid: ::Integer?,
                                   smpte_2038_data_preference: ("IGNORE" | "PREFER")?,
@@ -3216,7 +3480,8 @@ module Aws
                                       }?
                                     }?
                                   }?
-                                }?
+                                }?,
+                                logical_interface_names: Array[::String]?
                               },
                             ],
                             ?input_specification: {
@@ -3262,6 +3527,13 @@ module Aws
                                           url: ::String?,
                                           username: ::String?
                                         },
+                                      ]?,
+                                      srt_settings: Array[
+                                        {
+                                          encryption_passphrase_secret_arn: ::String?,
+                                          stream_id: ::String?,
+                                          url: ::String?
+                                        },
                                       ]?
                                     },
                                   ]
@@ -3276,7 +3548,15 @@ module Aws
       def update_input: (
                           ?destinations: Array[
                             {
-                              stream_name: ::String?
+                              stream_name: ::String?,
+                              network: ::String?,
+                              network_routes: Array[
+                                {
+                                  cidr: ::String?,
+                                  gateway: ::String?
+                                },
+                              ]?,
+                              static_ip_address: ::String?
                             },
                           ],
                           ?input_devices: Array[
@@ -3311,6 +3591,14 @@ module Aws
                                 srt_listener_address: ::String?,
                                 srt_listener_port: ::String?,
                                 stream_id: ::String?
+                              },
+                            ]?
+                          },
+                          ?multicast_settings: {
+                            sources: Array[
+                              {
+                                source_ip: ::String?,
+                                url: ::String
                               },
                             ]?
                           }
@@ -3495,6 +3783,7 @@ module Aws
         def state: () -> ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
         def tags: () -> ::Hash[::String, ::String]
         def vpc: () -> Types::VpcOutputSettingsDescription
+        def anywhere_settings: () -> Types::DescribeAnywhereSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#restart_channel_pipelines-instance_method
       def restart_channel_pipelines: (
@@ -4029,6 +4318,442 @@ module Aws
                                                    ) -> _UpdateEventBridgeRuleTemplateGroupResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventBridgeRuleTemplateGroupResponseSuccess
 
+      interface _CreateChannelPlacementGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelPlacementGroupResponse]
+        def arn: () -> ::String
+        def channels: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def nodes: () -> ::Array[::String]
+        def state: () -> ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_channel_placement_group-instance_method
+      def create_channel_placement_group: (
+                                            cluster_id: ::String,
+                                            ?name: ::String,
+                                            ?nodes: Array[::String],
+                                            ?request_id: ::String,
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreateChannelPlacementGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelPlacementGroupResponseSuccess
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
+        def arn: () -> ::String
+        def channel_ids: () -> ::Array[::String]
+        def cluster_type: () -> ("ON_PREMISES")
+        def id: () -> ::String
+        def instance_role_arn: () -> ::String
+        def name: () -> ::String
+        def network_settings: () -> Types::ClusterNetworkSettings
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            ?cluster_type: ("ON_PREMISES"),
+                            ?instance_role_arn: ::String,
+                            ?name: ::String,
+                            ?network_settings: {
+                              default_route: ::String?,
+                              interface_mappings: Array[
+                                {
+                                  logical_interface_name: ::String?,
+                                  network_id: ::String?
+                                },
+                              ]?
+                            },
+                            ?request_id: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateClusterResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkResponse]
+        def arn: () -> ::String
+        def associated_cluster_ids: () -> ::Array[::String]
+        def id: () -> ::String
+        def ip_pools: () -> ::Array[Types::IpPool]
+        def name: () -> ::String
+        def routes: () -> ::Array[Types::Route]
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_network-instance_method
+      def create_network: (
+                            ?ip_pools: Array[
+                              {
+                                cidr: ::String?
+                              },
+                            ],
+                            ?name: ::String,
+                            ?request_id: ::String,
+                            ?routes: Array[
+                              {
+                                cidr: ::String?,
+                                gateway: ::String?
+                              },
+                            ],
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateNetworkResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkResponseSuccess
+
+      interface _CreateNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNodeResponse]
+        def arn: () -> ::String
+        def channel_placement_groups: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def connection_state: () -> ("CONNECTED" | "DISCONNECTED")
+        def id: () -> ::String
+        def instance_arn: () -> ::String
+        def name: () -> ::String
+        def node_interface_mappings: () -> ::Array[Types::NodeInterfaceMapping]
+        def role: () -> ("BACKUP" | "ACTIVE")
+        def state: () -> ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_node-instance_method
+      def create_node: (
+                         cluster_id: ::String,
+                         ?name: ::String,
+                         ?node_interface_mappings: Array[
+                           {
+                             logical_interface_name: ::String?,
+                             network_interface_mode: ("NAT" | "BRIDGE")?,
+                             physical_interface_name: ::String?
+                           },
+                         ],
+                         ?request_id: ::String,
+                         ?role: ("BACKUP" | "ACTIVE"),
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreateNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNodeResponseSuccess
+
+      interface _CreateNodeRegistrationScriptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNodeRegistrationScriptResponse]
+        def node_registration_script: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#create_node_registration_script-instance_method
+      def create_node_registration_script: (
+                                             cluster_id: ::String,
+                                             ?id: ::String,
+                                             ?name: ::String,
+                                             ?node_interface_mappings: Array[
+                                               {
+                                                 logical_interface_name: ::String?,
+                                                 network_interface_mode: ("NAT" | "BRIDGE")?,
+                                                 physical_interface_name: ::String?
+                                               },
+                                             ],
+                                             ?request_id: ::String,
+                                             ?role: ("BACKUP" | "ACTIVE")
+                                           ) -> _CreateNodeRegistrationScriptResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNodeRegistrationScriptResponseSuccess
+
+      interface _DeleteChannelPlacementGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChannelPlacementGroupResponse]
+        def arn: () -> ::String
+        def channels: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def nodes: () -> ::Array[::String]
+        def state: () -> ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_channel_placement_group-instance_method
+      def delete_channel_placement_group: (
+                                            channel_placement_group_id: ::String,
+                                            cluster_id: ::String
+                                          ) -> _DeleteChannelPlacementGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelPlacementGroupResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
+        def arn: () -> ::String
+        def channel_ids: () -> ::Array[::String]
+        def cluster_type: () -> ("ON_PREMISES")
+        def id: () -> ::String
+        def instance_role_arn: () -> ::String
+        def name: () -> ::String
+        def network_settings: () -> Types::ClusterNetworkSettings
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_id: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkResponse]
+        def arn: () -> ::String
+        def associated_cluster_ids: () -> ::Array[::String]
+        def id: () -> ::String
+        def ip_pools: () -> ::Array[Types::IpPool]
+        def name: () -> ::String
+        def routes: () -> ::Array[Types::Route]
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_network-instance_method
+      def delete_network: (
+                            network_id: ::String
+                          ) -> _DeleteNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkResponseSuccess
+
+      interface _DeleteNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNodeResponse]
+        def arn: () -> ::String
+        def channel_placement_groups: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def connection_state: () -> ("CONNECTED" | "DISCONNECTED")
+        def id: () -> ::String
+        def instance_arn: () -> ::String
+        def name: () -> ::String
+        def node_interface_mappings: () -> ::Array[Types::NodeInterfaceMapping]
+        def role: () -> ("BACKUP" | "ACTIVE")
+        def state: () -> ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_node-instance_method
+      def delete_node: (
+                         cluster_id: ::String,
+                         node_id: ::String
+                       ) -> _DeleteNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNodeResponseSuccess
+
+      interface _DescribeChannelPlacementGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelPlacementGroupResponse]
+        def arn: () -> ::String
+        def channels: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def nodes: () -> ::Array[::String]
+        def state: () -> ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_channel_placement_group-instance_method
+      def describe_channel_placement_group: (
+                                              channel_placement_group_id: ::String,
+                                              cluster_id: ::String
+                                            ) -> _DescribeChannelPlacementGroupResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelPlacementGroupResponseSuccess
+
+      interface _DescribeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
+        def arn: () -> ::String
+        def channel_ids: () -> ::Array[::String]
+        def cluster_type: () -> ("ON_PREMISES")
+        def id: () -> ::String
+        def instance_role_arn: () -> ::String
+        def name: () -> ::String
+        def network_settings: () -> Types::ClusterNetworkSettings
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_cluster-instance_method
+      def describe_cluster: (
+                              cluster_id: ::String
+                            ) -> _DescribeClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterResponseSuccess
+
+      interface _DescribeNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNetworkResponse]
+        def arn: () -> ::String
+        def associated_cluster_ids: () -> ::Array[::String]
+        def id: () -> ::String
+        def ip_pools: () -> ::Array[Types::IpPool]
+        def name: () -> ::String
+        def routes: () -> ::Array[Types::Route]
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_network-instance_method
+      def describe_network: (
+                              network_id: ::String
+                            ) -> _DescribeNetworkResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNetworkResponseSuccess
+
+      interface _DescribeNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNodeResponse]
+        def arn: () -> ::String
+        def channel_placement_groups: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def connection_state: () -> ("CONNECTED" | "DISCONNECTED")
+        def id: () -> ::String
+        def instance_arn: () -> ::String
+        def name: () -> ::String
+        def node_interface_mappings: () -> ::Array[Types::NodeInterfaceMapping]
+        def role: () -> ("BACKUP" | "ACTIVE")
+        def state: () -> ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_node-instance_method
+      def describe_node: (
+                           cluster_id: ::String,
+                           node_id: ::String
+                         ) -> _DescribeNodeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNodeResponseSuccess
+
+      interface _ListChannelPlacementGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelPlacementGroupsResponse]
+        def channel_placement_groups: () -> ::Array[Types::DescribeChannelPlacementGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_channel_placement_groups-instance_method
+      def list_channel_placement_groups: (
+                                           cluster_id: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListChannelPlacementGroupsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelPlacementGroupsResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResponse]
+        def clusters: () -> ::Array[Types::DescribeClusterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworksResponse]
+        def networks: () -> ::Array[Types::DescribeNetworkSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_networks-instance_method
+      def list_networks: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListNetworksResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworksResponseSuccess
+
+      interface _ListNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNodesResponse]
+        def next_token: () -> ::String
+        def nodes: () -> ::Array[Types::DescribeNodeSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_nodes-instance_method
+      def list_nodes: (
+                        cluster_id: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListNodesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNodesResponseSuccess
+
+      interface _UpdateChannelPlacementGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelPlacementGroupResponse]
+        def arn: () -> ::String
+        def channels: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def nodes: () -> ::Array[::String]
+        def state: () -> ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_channel_placement_group-instance_method
+      def update_channel_placement_group: (
+                                            channel_placement_group_id: ::String,
+                                            cluster_id: ::String,
+                                            ?name: ::String,
+                                            ?nodes: Array[::String]
+                                          ) -> _UpdateChannelPlacementGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelPlacementGroupResponseSuccess
+
+      interface _UpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterResponse]
+        def arn: () -> ::String
+        def channel_ids: () -> ::Array[::String]
+        def cluster_type: () -> ("ON_PREMISES")
+        def id: () -> ::String
+        def name: () -> ::String
+        def network_settings: () -> Types::ClusterNetworkSettings
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_cluster-instance_method
+      def update_cluster: (
+                            cluster_id: ::String,
+                            ?name: ::String,
+                            ?network_settings: {
+                              default_route: ::String?,
+                              interface_mappings: Array[
+                                {
+                                  logical_interface_name: ::String?,
+                                  network_id: ::String?
+                                },
+                              ]?
+                            }
+                          ) -> _UpdateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+
+      interface _UpdateNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkResponse]
+        def arn: () -> ::String
+        def associated_cluster_ids: () -> ::Array[::String]
+        def id: () -> ::String
+        def ip_pools: () -> ::Array[Types::IpPool]
+        def name: () -> ::String
+        def routes: () -> ::Array[Types::Route]
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_network-instance_method
+      def update_network: (
+                            ?ip_pools: Array[
+                              {
+                                cidr: ::String?
+                              },
+                            ],
+                            ?name: ::String,
+                            network_id: ::String,
+                            ?routes: Array[
+                              {
+                                cidr: ::String?,
+                                gateway: ::String?
+                              },
+                            ]
+                          ) -> _UpdateNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkResponseSuccess
+
+      interface _UpdateNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNodeResponse]
+        def arn: () -> ::String
+        def channel_placement_groups: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def connection_state: () -> ("CONNECTED" | "DISCONNECTED")
+        def id: () -> ::String
+        def instance_arn: () -> ::String
+        def name: () -> ::String
+        def node_interface_mappings: () -> ::Array[Types::NodeInterfaceMapping]
+        def role: () -> ("BACKUP" | "ACTIVE")
+        def state: () -> ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_node-instance_method
+      def update_node: (
+                         cluster_id: ::String,
+                         ?name: ::String,
+                         node_id: ::String,
+                         ?role: ("BACKUP" | "ACTIVE")
+                       ) -> _UpdateNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNodeResponseSuccess
+
+      interface _UpdateNodeStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNodeStateResponse]
+        def arn: () -> ::String
+        def channel_placement_groups: () -> ::Array[::String]
+        def cluster_id: () -> ::String
+        def connection_state: () -> ("CONNECTED" | "DISCONNECTED")
+        def id: () -> ::String
+        def instance_arn: () -> ::String
+        def name: () -> ::String
+        def node_interface_mappings: () -> ::Array[Types::NodeInterfaceMapping]
+        def role: () -> ("BACKUP" | "ACTIVE")
+        def state: () -> ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#update_node_state-instance_method
+      def update_node_state: (
+                               cluster_id: ::String,
+                               node_id: ::String,
+                               ?state: ("ACTIVE" | "DRAINING")
+                             ) -> _UpdateNodeStateResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNodeStateResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#wait_until-instance_method
       def wait_until: (:channel_created waiter_name, 
                     channel_id: ::String
@@ -4038,6 +4763,21 @@ module Aws
                     channel_id: ::String
                   ) -> Client::_DescribeChannelResponseSuccess
                     | (:channel_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeChannelResponseSuccess
+                    | (:channel_placement_group_assigned waiter_name, 
+                    channel_placement_group_id: ::String,
+                    cluster_id: ::String
+                  ) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                    | (:channel_placement_group_assigned waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                    | (:channel_placement_group_deleted waiter_name, 
+                    channel_placement_group_id: ::String,
+                    cluster_id: ::String
+                  ) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                    | (:channel_placement_group_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                    | (:channel_placement_group_unassigned waiter_name, 
+                    channel_placement_group_id: ::String,
+                    cluster_id: ::String
+                  ) -> Client::_DescribeChannelPlacementGroupResponseSuccess
+                    | (:channel_placement_group_unassigned waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeChannelPlacementGroupResponseSuccess
                     | (:channel_running waiter_name, 
                     channel_id: ::String
                   ) -> Client::_DescribeChannelResponseSuccess
@@ -4046,6 +4786,14 @@ module Aws
                     channel_id: ::String
                   ) -> Client::_DescribeChannelResponseSuccess
                     | (:channel_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeChannelResponseSuccess
+                    | (:cluster_created waiter_name, 
+                    cluster_id: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_deleted waiter_name, 
+                    cluster_id: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
                     | (:input_attached waiter_name, 
                     input_id: ::String
                   ) -> Client::_DescribeInputResponseSuccess
@@ -4074,6 +4822,16 @@ module Aws
                     multiplex_id: ::String
                   ) -> Client::_DescribeMultiplexResponseSuccess
                     | (:multiplex_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMultiplexResponseSuccess
+                    | (:node_deregistered waiter_name, 
+                    cluster_id: ::String,
+                    node_id: ::String
+                  ) -> Client::_DescribeNodeResponseSuccess
+                    | (:node_deregistered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeNodeResponseSuccess
+                    | (:node_registered waiter_name, 
+                    cluster_id: ::String,
+                    node_id: ::String
+                  ) -> Client::_DescribeNodeResponseSuccess
+                    | (:node_registered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeNodeResponseSuccess
                     | (:signal_map_created waiter_name, 
                     identifier: ::String
                   ) -> Client::_GetSignalMapResponseSuccess

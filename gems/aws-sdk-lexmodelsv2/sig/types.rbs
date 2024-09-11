@@ -3685,7 +3685,7 @@ module Aws::LexModelsV2
 
     class VoiceSettings
       attr_accessor voice_id: ::String
-      attr_accessor engine: ("standard" | "neural")
+      attr_accessor engine: ("standard" | "neural" | "long-form" | "generative")
       SENSITIVE: []
     end
 

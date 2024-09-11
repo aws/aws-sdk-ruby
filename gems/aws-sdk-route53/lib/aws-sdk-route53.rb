@@ -53,6 +53,6 @@ require_relative 'aws-sdk-route53/customizations'
 # @!group service
 module Aws::Route53
 
-  GEM_VERSION = '1.98.0'
+  GEM_VERSION = '1.99.0'
 
 end

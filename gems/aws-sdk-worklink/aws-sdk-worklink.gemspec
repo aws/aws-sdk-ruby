@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-worklink'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - WorkLink'
-  spec.description   = 'Official AWS Ruby gem for Amazon WorkLink (WorkLink). This gem is part of the AWS SDK for Ruby.'
+  spec.description   = '[DEPRECATED] Official AWS Ruby gem for Amazon WorkLink (WorkLink). This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
@@ -25,8 +25,9 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-worklink/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.203.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.205.0')
   spec.add_dependency('aws-sigv4', '~> 1.5')
 
   spec.required_ruby_version = '>= 2.5'
+  spec.post_install_message = '*** aws-sdk-worklink is deprecated ***'
 end

@@ -14,7 +14,7 @@ module Aws::S3Control
   describe EndpointProvider do
     subject { Aws::S3Control::EndpointProvider.new }
 
-    context 'Vanilla outposts without ARN region + access point ARN@us-west-2' do
+    context "Vanilla outposts without ARN region + access point ARN@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
       end
@@ -64,7 +64,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Vanilla outposts with ARN region + access point ARN@us-west-2' do
+    context "Vanilla outposts with ARN region + access point ARN@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-1.amazonaws.com"}}
       end
@@ -114,7 +114,7 @@ module Aws::S3Control
       end
     end
 
-    context 'accept an access point ARN@us-west-2' do
+    context "accept an access point ARN@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
       end
@@ -164,7 +164,7 @@ module Aws::S3Control
       end
     end
 
-    context 'vanilla outposts china@cn-north-1' do
+    context "vanilla outposts china@cn-north-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.cn-north-1.amazonaws.com.cn"}}
       end
@@ -214,7 +214,7 @@ module Aws::S3Control
       end
     end
 
-    context 'gov region@us-west-2' do
+    context "gov region@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
       end
@@ -264,7 +264,7 @@ module Aws::S3Control
       end
     end
 
-    context 'gov cloud with fips@us-west-2' do
+    context "gov cloud with fips@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-west-2.amazonaws.com"}}
       end
@@ -316,7 +316,7 @@ module Aws::S3Control
       end
     end
 
-    context 'govcloud with fips + arn region@us-gov-west-1' do
+    context "govcloud with fips + arn region@us-gov-west-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-gov-east-1.amazonaws.com"}}
       end
@@ -368,7 +368,7 @@ module Aws::S3Control
       end
     end
 
-    context 'gov region@cn-north-1' do
+    context "gov region@cn-north-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.cn-north-1.amazonaws.com.cn"}}
       end
@@ -418,7 +418,7 @@ module Aws::S3Control
       end
     end
 
-    context 'gov cloud with fips@cn-north-1' do
+    context "gov cloud with fips@cn-north-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.cn-north-1.amazonaws.com.cn"}}
       end
@@ -470,7 +470,7 @@ module Aws::S3Control
       end
     end
 
-    context 'govcloud with fips + arn region@us-gov-west-1' do
+    context "govcloud with fips + arn region@us-gov-west-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-gov-east-1.amazonaws.com"}}
       end
@@ -522,7 +522,7 @@ module Aws::S3Control
       end
     end
 
-    context 'gov region@af-south-1' do
+    context "gov region@af-south-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.af-south-1.amazonaws.com"}}
       end
@@ -572,7 +572,7 @@ module Aws::S3Control
       end
     end
 
-    context 'gov cloud with fips@af-south-1' do
+    context "gov cloud with fips@af-south-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.af-south-1.amazonaws.com"}}
       end
@@ -624,7 +624,7 @@ module Aws::S3Control
       end
     end
 
-    context 'govcloud with fips + arn region@us-gov-west-1' do
+    context "govcloud with fips + arn region@us-gov-west-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-gov-east-1.amazonaws.com"}}
       end
@@ -676,7 +676,7 @@ module Aws::S3Control
       end
     end
 
-    context 'CreateBucket + OutpostId = outposts endpoint@us-east-2' do
+    context "CreateBucket + OutpostId = outposts endpoint@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-2.amazonaws.com"}}
       end
@@ -706,7 +706,7 @@ module Aws::S3Control
       end
     end
 
-    context 'CreateBucket + OutpostId with fips = outposts endpoint@us-east-2' do
+    context "CreateBucket + OutpostId with fips = outposts endpoint@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.amazonaws.com"}}
       end
@@ -737,7 +737,7 @@ module Aws::S3Control
       end
     end
 
-    context 'CreateBucket without OutpostId = regular endpoint@us-east-2' do
+    context "CreateBucket without OutpostId = regular endpoint@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-control.us-east-2.amazonaws.com"}}
       end
@@ -766,7 +766,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBuckets + OutpostId = outposts endpoint@us-east-2' do
+    context "ListRegionalBuckets + OutpostId = outposts endpoint@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-2.amazonaws.com"}}
       end
@@ -796,7 +796,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBuckets without OutpostId = regular endpoint@us-east-2' do
+    context "ListRegionalBuckets without OutpostId = regular endpoint@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control.us-east-2.amazonaws.com"}}
       end
@@ -825,7 +825,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBucket + OutpostId with fips = outposts endpoint@us-east-2' do
+    context "ListRegionalBucket + OutpostId with fips = outposts endpoint@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.amazonaws.com"}}
       end
@@ -856,7 +856,7 @@ module Aws::S3Control
       end
     end
 
-    context 'outpost access points support dualstack@us-west-2' do
+    context "outpost access points support dualstack@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.api.aws"}}
       end
@@ -908,7 +908,7 @@ module Aws::S3Control
       end
     end
 
-    context 'outpost access points support dualstack@af-south-1' do
+    context "outpost access points support dualstack@af-south-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.af-south-1.api.aws"}}
       end
@@ -960,7 +960,7 @@ module Aws::S3Control
       end
     end
 
-    context 'outpost access points support fips + dualstack@af-south-1' do
+    context "outpost access points support fips + dualstack@af-south-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.af-south-1.api.aws"}}
       end
@@ -1014,7 +1014,7 @@ module Aws::S3Control
       end
     end
 
-    context 'invalid ARN: must be include outpost ID@us-west-2' do
+    context "invalid ARN: must be include outpost ID@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: The Outpost Id was not set"}
       end
@@ -1027,7 +1027,7 @@ module Aws::S3Control
       end
     end
 
-    context 'invalid ARN: must specify access point@us-west-2' do
+    context "invalid ARN: must specify access point@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: Expected a 4-component resource"}
       end
@@ -1040,7 +1040,7 @@ module Aws::S3Control
       end
     end
 
-    context 'invalid ARN@us-west-2' do
+    context "invalid ARN@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: Expected a 4-component resource"}
       end
@@ -1053,7 +1053,7 @@ module Aws::S3Control
       end
     end
 
-    context 'when set, AccountId drives AP construction@us-west-2' do
+    context "when set, AccountId drives AP construction@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://myid-1234.s3-control.us-west-2.amazonaws.com"}}
       end
@@ -1067,7 +1067,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Account ID set inline and in ARN but they both match@us-west-2' do
+    context "Account ID set inline and in ARN but they both match@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
       end
@@ -1100,7 +1100,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Account ID set inline and in ARN and they do not match@us-west-2' do
+    context "Account ID set inline and in ARN and they do not match@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: the accountId specified in the ARN (`123456789012`) does not match the parameter (`999999999999`)"}
       end
@@ -1127,7 +1127,7 @@ module Aws::S3Control
       end
     end
 
-    context 'get access point prefixed with account id using endpoint url@us-west-2' do
+    context "get access point prefixed with account id using endpoint url@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com"}}
       end
@@ -1158,7 +1158,7 @@ module Aws::S3Control
       end
     end
 
-    context 'endpoint url with s3-outposts@us-west-2' do
+    context "endpoint url with s3-outposts@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
       end
@@ -1191,7 +1191,7 @@ module Aws::S3Control
       end
     end
 
-    context 'access point name with a bucket arn@us-west-2' do
+    context "access point name with a bucket arn@us-west-2" do
       let(:expected) do
         {"error"=>"Expected an outpost type `accesspoint`, found `bucket`"}
       end
@@ -1204,7 +1204,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket arn with access point name@us-west-2' do
+    context "bucket arn with access point name@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: Expected an outpost type `bucket`, found `accesspoint`"}
       end
@@ -1217,7 +1217,7 @@ module Aws::S3Control
       end
     end
 
-    context 'create bucket with outposts@us-west-2' do
+    context "create bucket with outposts@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
       end
@@ -1231,7 +1231,7 @@ module Aws::S3Control
       end
     end
 
-    context 'get bucket with endpoint_url@us-west-2' do
+    context "get bucket with endpoint_url@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
       end
@@ -1264,7 +1264,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBucket + OutpostId endpoint url@us-east-2' do
+    context "ListRegionalBucket + OutpostId endpoint url@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
       end
@@ -1295,7 +1295,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBucket + OutpostId + fips + endpoint url@us-east-2' do
+    context "ListRegionalBucket + OutpostId + fips + endpoint url@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
       end
@@ -1327,7 +1327,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBucket + OutpostId + fips + dualstack@us-east-2' do
+    context "ListRegionalBucket + OutpostId + fips + dualstack@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.api.aws"}}
       end
@@ -1359,7 +1359,7 @@ module Aws::S3Control
       end
     end
 
-    context 'CreateBucket + OutpostId endpoint url@us-east-2' do
+    context "CreateBucket + OutpostId endpoint url@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
       end
@@ -1391,7 +1391,7 @@ module Aws::S3Control
       end
     end
 
-    context 'dualstack cannot be used with outposts when an endpoint URL is set@us-west-2.' do
+    context "dualstack cannot be used with outposts when an endpoint URL is set@us-west-2." do
       let(:expected) do
         {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
@@ -1404,7 +1404,7 @@ module Aws::S3Control
       end
     end
 
-    context 'vanilla bucket arn requires account id@us-west-2' do
+    context "vanilla bucket arn requires account id@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
       end
@@ -1437,7 +1437,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket arn with UseArnRegion = true (arn region supercedes client configured region)@us-west-2' do
+    context "bucket arn with UseArnRegion = true (arn region supercedes client configured region)@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-1.amazonaws.com"}}
       end
@@ -1469,7 +1469,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in gov partition (non-fips)@us-gov-east-1' do
+    context "bucket ARN in gov partition (non-fips)@us-gov-east-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-gov-east-1.amazonaws.com"}}
       end
@@ -1501,7 +1501,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in gov partition with FIPS@us-gov-west-1' do
+    context "bucket ARN in gov partition with FIPS@us-gov-west-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-gov-west-1.amazonaws.com"}}
       end
@@ -1534,7 +1534,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in aws partition with FIPS@us-east-2' do
+    context "bucket ARN in aws partition with FIPS@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.amazonaws.com"}}
       end
@@ -1567,7 +1567,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in aws partition with fips + dualstack@us-east-2' do
+    context "bucket ARN in aws partition with fips + dualstack@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.api.aws"}}
       end
@@ -1601,7 +1601,7 @@ module Aws::S3Control
       end
     end
 
-    context 'vanilla bucket arn requires account id@cn-north-1' do
+    context "vanilla bucket arn requires account id@cn-north-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.cn-north-1.amazonaws.com.cn"}}
       end
@@ -1634,7 +1634,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket arn with UseArnRegion = true (arn region supercedes client configured region)@us-west-2' do
+    context "bucket arn with UseArnRegion = true (arn region supercedes client configured region)@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-1.amazonaws.com"}}
       end
@@ -1666,7 +1666,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in gov partition (non-fips)@us-gov-east-1' do
+    context "bucket ARN in gov partition (non-fips)@us-gov-east-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-gov-east-1.amazonaws.com"}}
       end
@@ -1698,7 +1698,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in gov partition with FIPS@us-gov-west-1' do
+    context "bucket ARN in gov partition with FIPS@us-gov-west-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-gov-west-1.amazonaws.com"}}
       end
@@ -1731,7 +1731,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in aws partition with FIPS@us-east-2' do
+    context "bucket ARN in aws partition with FIPS@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.amazonaws.com"}}
       end
@@ -1764,7 +1764,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Outposts support dualstack @us-west-2' do
+    context "Outposts support dualstack @us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.api.aws"}}
       end
@@ -1797,7 +1797,7 @@ module Aws::S3Control
       end
     end
 
-    context 'vanilla bucket arn requires account id@af-south-1' do
+    context "vanilla bucket arn requires account id@af-south-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"af-south-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.af-south-1.amazonaws.com"}}
       end
@@ -1830,7 +1830,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket arn with UseArnRegion = true (arn region supercedes client configured region)@us-west-2' do
+    context "bucket arn with UseArnRegion = true (arn region supercedes client configured region)@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-1.amazonaws.com"}}
       end
@@ -1862,7 +1862,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in gov partition (non-fips)@us-gov-east-1' do
+    context "bucket ARN in gov partition (non-fips)@us-gov-east-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-gov-east-1.amazonaws.com"}}
       end
@@ -1894,7 +1894,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in gov partition with FIPS@us-gov-west-1' do
+    context "bucket ARN in gov partition with FIPS@us-gov-west-1" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-gov-west-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-gov-west-1.amazonaws.com"}}
       end
@@ -1927,7 +1927,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN in aws partition with FIPS@us-east-2' do
+    context "bucket ARN in aws partition with FIPS@us-east-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts-fips.us-east-2.amazonaws.com"}}
       end
@@ -1960,7 +1960,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Invalid ARN: missing outpost id and bucket@us-west-2' do
+    context "Invalid ARN: missing outpost id and bucket@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: The Outpost Id was not set"}
       end
@@ -1973,7 +1973,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Invalid ARN: missing bucket@us-west-2' do
+    context "Invalid ARN: missing bucket@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: Expected a 4-component resource"}
       end
@@ -1986,7 +1986,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Invalid ARN: missing outpost and bucket ids@us-west-2' do
+    context "Invalid ARN: missing outpost and bucket ids@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: Expected a 4-component resource"}
       end
@@ -1999,7 +1999,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Invalid ARN: missing bucket id@us-west-2' do
+    context "Invalid ARN: missing bucket id@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid ARN: expected a bucket name"}
       end
@@ -2012,7 +2012,7 @@ module Aws::S3Control
       end
     end
 
-    context 'account id inserted into hostname@us-west-2' do
+    context "account id inserted into hostname@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890.s3-control.us-west-2.amazonaws.com"}}
       end
@@ -2026,7 +2026,7 @@ module Aws::S3Control
       end
     end
 
-    context 'account id prefix with dualstack@us-east-1' do
+    context "account id prefix with dualstack@us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890.s3-control.dualstack.us-east-1.amazonaws.com"}}
       end
@@ -2040,7 +2040,7 @@ module Aws::S3Control
       end
     end
 
-    context 'account id prefix with fips@us-east-1' do
+    context "account id prefix with fips@us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://1234567890.s3-control-fips.us-east-1.amazonaws.com"}}
       end
@@ -2054,7 +2054,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom account id prefix with fips@us-east-1' do
+    context "custom account id prefix with fips@us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control-fips.us-east-1.amazonaws.com"}}
       end
@@ -2068,7 +2068,7 @@ module Aws::S3Control
       end
     end
 
-    context 'standard url @ us-east-1' do
+    context "standard url @ us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-control.us-east-1.amazonaws.com"}}
       end
@@ -2082,7 +2082,7 @@ module Aws::S3Control
       end
     end
 
-    context 'fips url @ us-east-1' do
+    context "fips url @ us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-control-fips.us-east-1.amazonaws.com"}}
       end
@@ -2096,7 +2096,7 @@ module Aws::S3Control
       end
     end
 
-    context 'dualstack url @ us-east-1' do
+    context "dualstack url @ us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-control.dualstack.us-east-1.amazonaws.com"}}
       end
@@ -2110,7 +2110,7 @@ module Aws::S3Control
       end
     end
 
-    context 'fips,dualstack url @ us-east-1' do
+    context "fips,dualstack url @ us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-control-fips.dualstack.us-east-1.amazonaws.com"}}
       end
@@ -2124,7 +2124,7 @@ module Aws::S3Control
       end
     end
 
-    context 'standard url @ cn-north-1' do
+    context "standard url @ cn-north-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"cn-north-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-control.cn-north-1.amazonaws.com.cn"}}
       end
@@ -2138,7 +2138,7 @@ module Aws::S3Control
       end
     end
 
-    context 'fips @ cn-north-1' do
+    context "fips @ cn-north-1" do
       let(:expected) do
         {"error"=>"Partition does not support FIPS"}
       end
@@ -2151,7 +2151,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom account id prefix @us-east-1' do
+    context "custom account id prefix @us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control.us-east-1.amazonaws.com"}}
       end
@@ -2180,7 +2180,7 @@ module Aws::S3Control
       end
     end
 
-    context 'invalid account id prefix @us-east-1' do
+    context "invalid account id prefix @us-east-1" do
       let(:expected) do
         {"error"=>"AccountId must only contain a-z, A-Z, 0-9 and `-`."}
       end
@@ -2205,7 +2205,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom account id prefix with fips@us-east-1' do
+    context "custom account id prefix with fips@us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control-fips.us-east-1.amazonaws.com"}}
       end
@@ -2235,7 +2235,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom account id prefix with dualstack,fips@us-east-1' do
+    context "custom account id prefix with dualstack,fips@us-east-1" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.s3-control-fips.dualstack.us-east-1.amazonaws.com"}}
       end
@@ -2266,7 +2266,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom account id with custom endpoint' do
+    context "custom account id with custom endpoint" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.example.com"}}
       end
@@ -2296,7 +2296,7 @@ module Aws::S3Control
       end
     end
 
-    context 'RequiresAccountId with AccountId unset' do
+    context "RequiresAccountId with AccountId unset" do
       let(:expected) do
         {"error"=>"AccountId is required but not set"}
       end
@@ -2309,7 +2309,7 @@ module Aws::S3Control
       end
     end
 
-    context 'RequiresAccountId with AccountId unset and custom endpoint' do
+    context "RequiresAccountId with AccountId unset and custom endpoint" do
       let(:expected) do
         {"error"=>"AccountId is required but not set"}
       end
@@ -2322,7 +2322,7 @@ module Aws::S3Control
       end
     end
 
-    context 'RequiresAccountId with invalid AccountId and custom endpoint' do
+    context "RequiresAccountId with invalid AccountId and custom endpoint" do
       let(:expected) do
         {"error"=>"AccountId must only contain a-z, A-Z, 0-9 and `-`."}
       end
@@ -2348,7 +2348,7 @@ module Aws::S3Control
       end
     end
 
-    context 'account id with custom endpoint, fips' do
+    context "account id with custom endpoint, fips" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.example.com"}}
       end
@@ -2379,7 +2379,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom endpoint, fips' do
+    context "custom endpoint, fips" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://example.com"}}
       end
@@ -2393,7 +2393,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom endpoint, fips' do
+    context "custom endpoint, fips" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://example.com"}}
       end
@@ -2407,7 +2407,7 @@ module Aws::S3Control
       end
     end
 
-    context 'custom endpoint, DualStack' do
+    context "custom endpoint, DualStack" do
       let(:expected) do
         {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
@@ -2420,7 +2420,7 @@ module Aws::S3Control
       end
     end
 
-    context 'region not set' do
+    context "region not set" do
       let(:expected) do
         {"error"=>"Region must be set"}
       end
@@ -2433,7 +2433,7 @@ module Aws::S3Control
       end
     end
 
-    context 'invalid partition' do
+    context "invalid partition" do
       let(:expected) do
         {"error"=>"Invalid region: region was not a valid DNS name."}
       end
@@ -2446,7 +2446,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBuckets + OutpostId without accountId set.' do
+    context "ListRegionalBuckets + OutpostId without accountId set." do
       let(:expected) do
         {"error"=>"AccountId is required but not set"}
       end
@@ -2459,7 +2459,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBuckets + OutpostId with invalid accountId set.' do
+    context "ListRegionalBuckets + OutpostId with invalid accountId set." do
       let(:expected) do
         {"error"=>"AccountId must only contain a-z, A-Z, 0-9 and `-`."}
       end
@@ -2485,7 +2485,7 @@ module Aws::S3Control
       end
     end
 
-    context 'accesspoint set but missing accountId' do
+    context "accesspoint set but missing accountId" do
       let(:expected) do
         {"error"=>"AccountId is required but not set"}
       end
@@ -2498,7 +2498,7 @@ module Aws::S3Control
       end
     end
 
-    context 'outpost accesspoint ARN with missing accountId' do
+    context "outpost accesspoint ARN with missing accountId" do
       let(:expected) do
         {"error"=>"Invalid ARN: missing account ID"}
       end
@@ -2511,7 +2511,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN with missing accountId' do
+    context "bucket ARN with missing accountId" do
       let(:expected) do
         {"error"=>"Invalid ARN: missing account ID"}
       end
@@ -2524,7 +2524,7 @@ module Aws::S3Control
       end
     end
 
-    context 'endpoint url with accesspoint (non-arn)' do
+    context "endpoint url with accesspoint (non-arn)" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://123456789012.beta.example.com"}}
       end
@@ -2555,7 +2555,7 @@ module Aws::S3Control
       end
     end
 
-    context 'access point name with an accesspoint arn@us-west-2' do
+    context "access point name with an accesspoint arn@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://beta.example.com"}}
       end
@@ -2569,7 +2569,7 @@ module Aws::S3Control
       end
     end
 
-    context 'DualStack + Custom endpoint is not supported(non-arn)' do
+    context "DualStack + Custom endpoint is not supported(non-arn)" do
       let(:expected) do
         {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
@@ -2597,7 +2597,7 @@ module Aws::S3Control
       end
     end
 
-    context 'get bucket with custom endpoint and dualstack is not supported@us-west-2' do
+    context "get bucket with custom endpoint and dualstack is not supported@us-west-2" do
       let(:expected) do
         {"error"=>"Invalid Configuration: DualStack and custom endpoint are not supported"}
       end
@@ -2625,7 +2625,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBuckets + OutpostId with fips in CN.' do
+    context "ListRegionalBuckets + OutpostId with fips in CN." do
       let(:expected) do
         {"error"=>"Partition does not support FIPS"}
       end
@@ -2652,7 +2652,7 @@ module Aws::S3Control
       end
     end
 
-    context 'ListRegionalBuckets + invalid OutpostId.' do
+    context "ListRegionalBuckets + invalid OutpostId." do
       let(:expected) do
         {"error"=>"OutpostId must only contain a-z, A-Z, 0-9 and `-`."}
       end
@@ -2678,7 +2678,7 @@ module Aws::S3Control
       end
     end
 
-    context 'bucket ARN with mismatched accountId' do
+    context "bucket ARN with mismatched accountId" do
       let(:expected) do
         {"error"=>"Invalid ARN: the accountId specified in the ARN (`999999`) does not match the parameter (`0123456789012`)"}
       end
@@ -2691,7 +2691,7 @@ module Aws::S3Control
       end
     end
 
-    context 'OutpostId with invalid region' do
+    context "OutpostId with invalid region" do
       let(:expected) do
         {"error"=>"Invalid region: region was not a valid DNS name."}
       end
@@ -2704,7 +2704,7 @@ module Aws::S3Control
       end
     end
 
-    context 'OutpostId with RequireAccountId unset' do
+    context "OutpostId with RequireAccountId unset" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
       end
@@ -2718,7 +2718,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Outpost Accesspoint ARN with arn region and client region mismatch with UseArnRegion=false' do
+    context "Outpost Accesspoint ARN with arn region and client region mismatch with UseArnRegion=false" do
       let(:expected) do
         {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
       end
@@ -2759,7 +2759,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Outpost Bucket ARN with arn region and client region mismatch with UseArnRegion=false' do
+    context "Outpost Bucket ARN with arn region and client region mismatch with UseArnRegion=false" do
       let(:expected) do
         {"error"=>"Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
       end
@@ -2787,7 +2787,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Accesspoint ARN with region mismatch and UseArnRegion unset' do
+    context "Accesspoint ARN with region mismatch and UseArnRegion unset" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-1.amazonaws.com"}}
       end
@@ -2837,7 +2837,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Bucket ARN with region mismatch and UseArnRegion unset' do
+    context "Bucket ARN with region mismatch and UseArnRegion unset" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-east-1", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-east-1.amazonaws.com"}}
       end
@@ -2869,7 +2869,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Outpost Bucket ARN with partition mismatch with UseArnRegion=true' do
+    context "Outpost Bucket ARN with partition mismatch with UseArnRegion=true" do
       let(:expected) do
         {"error"=>"Client was configured for partition `aws` but ARN has `aws-cn`"}
       end
@@ -2896,7 +2896,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Accesspoint ARN with partition mismatch and UseArnRegion=true' do
+    context "Accesspoint ARN with partition mismatch and UseArnRegion=true" do
       let(:expected) do
         {"error"=>"Client was configured for partition `aws` but ARN has `aws-cn`"}
       end
@@ -2937,7 +2937,7 @@ module Aws::S3Control
       end
     end
 
-    context 'Accesspoint ARN with region mismatch, UseArnRegion=false and custom endpoint' do
+    context "Accesspoint ARN with region mismatch, UseArnRegion=false and custom endpoint" do
       let(:expected) do
         {"error"=>"Invalid configuration: region from ARN `cn-north-1` does not match client region `us-west-2` and UseArnRegion is `false`"}
       end
@@ -2950,7 +2950,7 @@ module Aws::S3Control
       end
     end
 
-    context 'outpost bucket arn@us-west-2' do
+    context "outpost bucket arn@us-west-2" do
       let(:expected) do
         {"endpoint"=>{"headers"=>{"x-amz-account-id"=>["123456789012"], "x-amz-outpost-id"=>["op-01234567890123456"]}, "properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"us-west-2", "disableDoubleEncoding"=>true}]}, "url"=>"https://s3-outposts.us-west-2.amazonaws.com"}}
       end
@@ -3001,7 +3001,7 @@ module Aws::S3Control
       end
     end
 
-    context 'S3 Snow Control with bucket' do
+    context "S3 Snow Control with bucket" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://10.0.1.12:433"}}
       end
@@ -3015,7 +3015,7 @@ module Aws::S3Control
       end
     end
 
-    context 'S3 Snow Control without bucket' do
+    context "S3 Snow Control without bucket" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://10.0.1.12:433"}}
       end
@@ -3029,7 +3029,7 @@ module Aws::S3Control
       end
     end
 
-    context 'S3 Snow Control with bucket and without port' do
+    context "S3 Snow Control with bucket and without port" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"https://10.0.1.12"}}
       end
@@ -3043,7 +3043,7 @@ module Aws::S3Control
       end
     end
 
-    context 'S3 Snow Control with bucket and with DNS' do
+    context "S3 Snow Control with bucket and with DNS" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"s3", "signingRegion"=>"snow", "disableDoubleEncoding"=>true}]}, "url"=>"http://s3snow.com"}}
       end
@@ -3057,7 +3057,7 @@ module Aws::S3Control
       end
     end
 
-    context 'S3 Snow Control with FIPS enabled' do
+    context "S3 Snow Control with FIPS enabled" do
       let(:expected) do
         {"error"=>"S3 Snow does not support FIPS"}
       end
@@ -3070,7 +3070,7 @@ module Aws::S3Control
       end
     end
 
-    context 'S3 Snow Control with Dualstack enabled' do
+    context "S3 Snow Control with Dualstack enabled" do
       let(:expected) do
         {"error"=>"S3 Snow does not support DualStack"}
       end

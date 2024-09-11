@@ -14,7 +14,7 @@ module Aws::IoTDeviceAdvisor
   describe EndpointProvider do
     subject { Aws::IoTDeviceAdvisor::EndpointProvider.new }
 
-    context 'For region ap-northeast-1 with FIPS disabled and DualStack disabled' do
+    context "For region ap-northeast-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.ap-northeast-1.amazonaws.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region eu-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.eu-west-1.amazonaws.com"}}
       end
@@ -42,7 +42,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.us-east-1.amazonaws.com"}}
       end
@@ -56,7 +56,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-west-2 with FIPS disabled and DualStack disabled' do
+    context "For region us-west-2 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.us-west-2.amazonaws.com"}}
       end
@@ -70,7 +70,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.us-east-1.api.aws"}}
       end
@@ -84,7 +84,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.us-east-1.amazonaws.com"}}
       end
@@ -98,7 +98,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.us-east-1.api.aws"}}
       end
@@ -112,7 +112,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -126,7 +126,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region cn-north-1 with FIPS enabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.cn-north-1.amazonaws.com.cn"}}
       end
@@ -140,7 +140,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.cn-north-1.api.amazonwebservices.com.cn"}}
       end
@@ -154,7 +154,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region cn-north-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-north-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.cn-north-1.amazonaws.com.cn"}}
       end
@@ -168,7 +168,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.us-gov-east-1.api.aws"}}
       end
@@ -182,7 +182,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.us-gov-east-1.amazonaws.com"}}
       end
@@ -196,7 +196,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.us-gov-east-1.api.aws"}}
       end
@@ -210,7 +210,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-gov-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.us-gov-east-1.amazonaws.com"}}
       end
@@ -224,7 +224,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -237,7 +237,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -251,7 +251,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -264,7 +264,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -278,7 +278,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -291,7 +291,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -305,7 +305,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -318,7 +318,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://api.iotdeviceadvisor.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -332,7 +332,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -346,7 +346,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For custom endpoint with region not set and fips disabled and dualstack disabled' do
+    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -360,7 +360,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For custom endpoint with fips enabled and dualstack disabled' do
+    context "For custom endpoint with fips enabled and dualstack disabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -373,7 +373,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack enabled' do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
@@ -386,7 +386,7 @@ module Aws::IoTDeviceAdvisor
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

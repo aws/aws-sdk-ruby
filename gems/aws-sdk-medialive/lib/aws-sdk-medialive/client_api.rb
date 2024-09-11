@@ -37,6 +37,7 @@ module Aws::MediaLive
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
+    AnywhereSettings = Shapes::StructureShape.new(name: 'AnywhereSettings')
     ArchiveCdnSettings = Shapes::StructureShape.new(name: 'ArchiveCdnSettings')
     ArchiveContainerSettings = Shapes::StructureShape.new(name: 'ArchiveContainerSettings')
     ArchiveGroupSettings = Shapes::StructureShape.new(name: 'ArchiveGroupSettings')
@@ -70,6 +71,12 @@ module Aws::MediaLive
     AudioWatermarkSettings = Shapes::StructureShape.new(name: 'AudioWatermarkSettings')
     AuthenticationScheme = Shapes::StringShape.new(name: 'AuthenticationScheme')
     AutomaticInputFailoverSettings = Shapes::StructureShape.new(name: 'AutomaticInputFailoverSettings')
+    Av1ColorSpaceSettings = Shapes::StructureShape.new(name: 'Av1ColorSpaceSettings')
+    Av1GopSizeUnits = Shapes::StringShape.new(name: 'Av1GopSizeUnits')
+    Av1Level = Shapes::StringShape.new(name: 'Av1Level')
+    Av1LookAheadRateControl = Shapes::StringShape.new(name: 'Av1LookAheadRateControl')
+    Av1SceneChangeDetect = Shapes::StringShape.new(name: 'Av1SceneChangeDetect')
+    Av1Settings = Shapes::StructureShape.new(name: 'Av1Settings')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     AvailBlankingState = Shapes::StringShape.new(name: 'AvailBlankingState')
     AvailConfiguration = Shapes::StructureShape.new(name: 'AvailConfiguration')
@@ -123,6 +130,7 @@ module Aws::MediaLive
     ChannelConfigurationValidationError = Shapes::StructureShape.new(name: 'ChannelConfigurationValidationError')
     ChannelEgressEndpoint = Shapes::StructureShape.new(name: 'ChannelEgressEndpoint')
     ChannelPipelineIdToRestart = Shapes::StringShape.new(name: 'ChannelPipelineIdToRestart')
+    ChannelPlacementGroupState = Shapes::StringShape.new(name: 'ChannelPlacementGroupState')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ClaimDeviceRequest = Shapes::StructureShape.new(name: 'ClaimDeviceRequest')
@@ -133,6 +141,11 @@ module Aws::MediaLive
     CloudWatchAlarmTemplateSummary = Shapes::StructureShape.new(name: 'CloudWatchAlarmTemplateSummary')
     CloudWatchAlarmTemplateTargetResourceType = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateTargetResourceType')
     CloudWatchAlarmTemplateTreatMissingData = Shapes::StringShape.new(name: 'CloudWatchAlarmTemplateTreatMissingData')
+    ClusterNetworkSettings = Shapes::StructureShape.new(name: 'ClusterNetworkSettings')
+    ClusterNetworkSettingsCreateRequest = Shapes::StructureShape.new(name: 'ClusterNetworkSettingsCreateRequest')
+    ClusterNetworkSettingsUpdateRequest = Shapes::StructureShape.new(name: 'ClusterNetworkSettingsUpdateRequest')
+    ClusterState = Shapes::StringShape.new(name: 'ClusterState')
+    ClusterType = Shapes::StringShape.new(name: 'ClusterType')
     CmafIngestGroupSettings = Shapes::StructureShape.new(name: 'CmafIngestGroupSettings')
     CmafIngestOutputSettings = Shapes::StructureShape.new(name: 'CmafIngestOutputSettings')
     CmafIngestSegmentLengthUnits = Shapes::StringShape.new(name: 'CmafIngestSegmentLengthUnits')
@@ -145,6 +158,8 @@ module Aws::MediaLive
     ConflictExceptionResponseContent = Shapes::StructureShape.new(name: 'ConflictExceptionResponseContent')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateChannel = Shapes::StructureShape.new(name: 'CreateChannel')
+    CreateChannelPlacementGroupRequest = Shapes::StructureShape.new(name: 'CreateChannelPlacementGroupRequest')
+    CreateChannelPlacementGroupResponse = Shapes::StructureShape.new(name: 'CreateChannelPlacementGroupResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreateChannelResultModel = Shapes::StructureShape.new(name: 'CreateChannelResultModel')
@@ -156,6 +171,8 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateRequestContent = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateRequestContent')
     CreateCloudWatchAlarmTemplateResponse = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateResponse')
     CreateCloudWatchAlarmTemplateResponseContent = Shapes::StructureShape.new(name: 'CreateCloudWatchAlarmTemplateResponseContent')
+    CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
+    CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateEventBridgeRuleTemplateGroupRequest = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateGroupRequest')
     CreateEventBridgeRuleTemplateGroupRequestContent = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateGroupRequestContent')
     CreateEventBridgeRuleTemplateGroupResponse = Shapes::StructureShape.new(name: 'CreateEventBridgeRuleTemplateGroupResponse')
@@ -179,6 +196,13 @@ module Aws::MediaLive
     CreateMultiplexRequest = Shapes::StructureShape.new(name: 'CreateMultiplexRequest')
     CreateMultiplexResponse = Shapes::StructureShape.new(name: 'CreateMultiplexResponse')
     CreateMultiplexResultModel = Shapes::StructureShape.new(name: 'CreateMultiplexResultModel')
+    CreateNetworkRequest = Shapes::StructureShape.new(name: 'CreateNetworkRequest')
+    CreateNetworkResponse = Shapes::StructureShape.new(name: 'CreateNetworkResponse')
+    CreateNodeRegistrationScriptRequest = Shapes::StructureShape.new(name: 'CreateNodeRegistrationScriptRequest')
+    CreateNodeRegistrationScriptResponse = Shapes::StructureShape.new(name: 'CreateNodeRegistrationScriptResponse')
+    CreateNodeRegistrationScriptResult = Shapes::StructureShape.new(name: 'CreateNodeRegistrationScriptResult')
+    CreateNodeRequest = Shapes::StructureShape.new(name: 'CreateNodeRequest')
+    CreateNodeResponse = Shapes::StructureShape.new(name: 'CreateNodeResponse')
     CreatePartnerInput = Shapes::StructureShape.new(name: 'CreatePartnerInput')
     CreatePartnerInputRequest = Shapes::StructureShape.new(name: 'CreatePartnerInputRequest')
     CreatePartnerInputResponse = Shapes::StructureShape.new(name: 'CreatePartnerInputResponse')
@@ -190,10 +214,14 @@ module Aws::MediaLive
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     DashRoleAudio = Shapes::StringShape.new(name: 'DashRoleAudio')
     DashRoleCaption = Shapes::StringShape.new(name: 'DashRoleCaption')
+    DeleteChannelPlacementGroupRequest = Shapes::StructureShape.new(name: 'DeleteChannelPlacementGroupRequest')
+    DeleteChannelPlacementGroupResponse = Shapes::StructureShape.new(name: 'DeleteChannelPlacementGroupResponse')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
     DeleteCloudWatchAlarmTemplateGroupRequest = Shapes::StructureShape.new(name: 'DeleteCloudWatchAlarmTemplateGroupRequest')
     DeleteCloudWatchAlarmTemplateRequest = Shapes::StructureShape.new(name: 'DeleteCloudWatchAlarmTemplateRequest')
+    DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
+    DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DeleteEventBridgeRuleTemplateGroupRequest = Shapes::StructureShape.new(name: 'DeleteEventBridgeRuleTemplateGroupRequest')
     DeleteEventBridgeRuleTemplateRequest = Shapes::StructureShape.new(name: 'DeleteEventBridgeRuleTemplateRequest')
     DeleteInputRequest = Shapes::StructureShape.new(name: 'DeleteInputRequest')
@@ -204,6 +232,10 @@ module Aws::MediaLive
     DeleteMultiplexProgramResponse = Shapes::StructureShape.new(name: 'DeleteMultiplexProgramResponse')
     DeleteMultiplexRequest = Shapes::StructureShape.new(name: 'DeleteMultiplexRequest')
     DeleteMultiplexResponse = Shapes::StructureShape.new(name: 'DeleteMultiplexResponse')
+    DeleteNetworkRequest = Shapes::StructureShape.new(name: 'DeleteNetworkRequest')
+    DeleteNetworkResponse = Shapes::StructureShape.new(name: 'DeleteNetworkResponse')
+    DeleteNodeRequest = Shapes::StructureShape.new(name: 'DeleteNodeRequest')
+    DeleteNodeResponse = Shapes::StructureShape.new(name: 'DeleteNodeResponse')
     DeleteReservationRequest = Shapes::StructureShape.new(name: 'DeleteReservationRequest')
     DeleteReservationResponse = Shapes::StructureShape.new(name: 'DeleteReservationResponse')
     DeleteScheduleRequest = Shapes::StructureShape.new(name: 'DeleteScheduleRequest')
@@ -213,8 +245,17 @@ module Aws::MediaLive
     DescribeAccountConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationRequest')
     DescribeAccountConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationResponse')
     DescribeAccountConfigurationResultModel = Shapes::StructureShape.new(name: 'DescribeAccountConfigurationResultModel')
+    DescribeAnywhereSettings = Shapes::StructureShape.new(name: 'DescribeAnywhereSettings')
+    DescribeChannelPlacementGroupRequest = Shapes::StructureShape.new(name: 'DescribeChannelPlacementGroupRequest')
+    DescribeChannelPlacementGroupResponse = Shapes::StructureShape.new(name: 'DescribeChannelPlacementGroupResponse')
+    DescribeChannelPlacementGroupResult = Shapes::StructureShape.new(name: 'DescribeChannelPlacementGroupResult')
+    DescribeChannelPlacementGroupSummary = Shapes::StructureShape.new(name: 'DescribeChannelPlacementGroupSummary')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
+    DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
+    DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
+    DescribeClusterResult = Shapes::StructureShape.new(name: 'DescribeClusterResult')
+    DescribeClusterSummary = Shapes::StructureShape.new(name: 'DescribeClusterSummary')
     DescribeInputDeviceRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceRequest')
     DescribeInputDeviceResponse = Shapes::StructureShape.new(name: 'DescribeInputDeviceResponse')
     DescribeInputDeviceThumbnailRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceThumbnailRequest')
@@ -227,6 +268,14 @@ module Aws::MediaLive
     DescribeMultiplexProgramResponse = Shapes::StructureShape.new(name: 'DescribeMultiplexProgramResponse')
     DescribeMultiplexRequest = Shapes::StructureShape.new(name: 'DescribeMultiplexRequest')
     DescribeMultiplexResponse = Shapes::StructureShape.new(name: 'DescribeMultiplexResponse')
+    DescribeNetworkRequest = Shapes::StructureShape.new(name: 'DescribeNetworkRequest')
+    DescribeNetworkResponse = Shapes::StructureShape.new(name: 'DescribeNetworkResponse')
+    DescribeNetworkResult = Shapes::StructureShape.new(name: 'DescribeNetworkResult')
+    DescribeNetworkSummary = Shapes::StructureShape.new(name: 'DescribeNetworkSummary')
+    DescribeNodeRequest = Shapes::StructureShape.new(name: 'DescribeNodeRequest')
+    DescribeNodeResponse = Shapes::StructureShape.new(name: 'DescribeNodeResponse')
+    DescribeNodeResult = Shapes::StructureShape.new(name: 'DescribeNodeResult')
+    DescribeNodeSummary = Shapes::StructureShape.new(name: 'DescribeNodeSummary')
     DescribeOfferingRequest = Shapes::StructureShape.new(name: 'DescribeOfferingRequest')
     DescribeOfferingResponse = Shapes::StructureShape.new(name: 'DescribeOfferingResponse')
     DescribeReservationRequest = Shapes::StructureShape.new(name: 'DescribeReservationRequest')
@@ -434,6 +483,7 @@ module Aws::MediaLive
     InputDenoiseFilter = Shapes::StringShape.new(name: 'InputDenoiseFilter')
     InputDestination = Shapes::StructureShape.new(name: 'InputDestination')
     InputDestinationRequest = Shapes::StructureShape.new(name: 'InputDestinationRequest')
+    InputDestinationRoute = Shapes::StructureShape.new(name: 'InputDestinationRoute')
     InputDestinationVpc = Shapes::StructureShape.new(name: 'InputDestinationVpc')
     InputDevice = Shapes::StructureShape.new(name: 'InputDevice')
     InputDeviceActiveInput = Shapes::StringShape.new(name: 'InputDeviceActiveInput')
@@ -471,8 +521,10 @@ module Aws::MediaLive
     InputLossFailoverSettings = Shapes::StructureShape.new(name: 'InputLossFailoverSettings')
     InputLossImageType = Shapes::StringShape.new(name: 'InputLossImageType')
     InputMaximumBitrate = Shapes::StringShape.new(name: 'InputMaximumBitrate')
+    InputNetworkLocation = Shapes::StringShape.new(name: 'InputNetworkLocation')
     InputPreference = Shapes::StringShape.new(name: 'InputPreference')
     InputPrepareScheduleActionSettings = Shapes::StructureShape.new(name: 'InputPrepareScheduleActionSettings')
+    InputRequestDestinationRoute = Shapes::StructureShape.new(name: 'InputRequestDestinationRoute')
     InputResolution = Shapes::StringShape.new(name: 'InputResolution')
     InputSecurityGroup = Shapes::StructureShape.new(name: 'InputSecurityGroup')
     InputSecurityGroupState = Shapes::StringShape.new(name: 'InputSecurityGroupState')
@@ -490,13 +542,22 @@ module Aws::MediaLive
     InputVpcRequest = Shapes::StructureShape.new(name: 'InputVpcRequest')
     InputWhitelistRule = Shapes::StructureShape.new(name: 'InputWhitelistRule')
     InputWhitelistRuleCidr = Shapes::StructureShape.new(name: 'InputWhitelistRuleCidr')
+    InterfaceMapping = Shapes::StructureShape.new(name: 'InterfaceMapping')
+    InterfaceMappingCreateRequest = Shapes::StructureShape.new(name: 'InterfaceMappingCreateRequest')
+    InterfaceMappingUpdateRequest = Shapes::StructureShape.new(name: 'InterfaceMappingUpdateRequest')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     InternalServerErrorExceptionResponseContent = Shapes::StructureShape.new(name: 'InternalServerErrorExceptionResponseContent')
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidRequest = Shapes::StructureShape.new(name: 'InvalidRequest')
+    IpPool = Shapes::StructureShape.new(name: 'IpPool')
+    IpPoolCreateRequest = Shapes::StructureShape.new(name: 'IpPoolCreateRequest')
+    IpPoolUpdateRequest = Shapes::StructureShape.new(name: 'IpPoolUpdateRequest')
     KeyProviderSettings = Shapes::StructureShape.new(name: 'KeyProviderSettings')
     LastFrameClippingBehavior = Shapes::StringShape.new(name: 'LastFrameClippingBehavior')
     LimitExceeded = Shapes::StructureShape.new(name: 'LimitExceeded')
+    ListChannelPlacementGroupsRequest = Shapes::StructureShape.new(name: 'ListChannelPlacementGroupsRequest')
+    ListChannelPlacementGroupsResponse = Shapes::StructureShape.new(name: 'ListChannelPlacementGroupsResponse')
+    ListChannelPlacementGroupsResult = Shapes::StructureShape.new(name: 'ListChannelPlacementGroupsResult')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListChannelsResultModel = Shapes::StructureShape.new(name: 'ListChannelsResultModel')
@@ -506,6 +567,9 @@ module Aws::MediaLive
     ListCloudWatchAlarmTemplatesRequest = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesRequest')
     ListCloudWatchAlarmTemplatesResponse = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesResponse')
     ListCloudWatchAlarmTemplatesResponseContent = Shapes::StructureShape.new(name: 'ListCloudWatchAlarmTemplatesResponseContent')
+    ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
+    ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
+    ListClustersResult = Shapes::StructureShape.new(name: 'ListClustersResult')
     ListEventBridgeRuleTemplateGroupsRequest = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplateGroupsRequest')
     ListEventBridgeRuleTemplateGroupsResponse = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplateGroupsResponse')
     ListEventBridgeRuleTemplateGroupsResponseContent = Shapes::StructureShape.new(name: 'ListEventBridgeRuleTemplateGroupsResponseContent')
@@ -530,6 +594,12 @@ module Aws::MediaLive
     ListMultiplexesRequest = Shapes::StructureShape.new(name: 'ListMultiplexesRequest')
     ListMultiplexesResponse = Shapes::StructureShape.new(name: 'ListMultiplexesResponse')
     ListMultiplexesResultModel = Shapes::StructureShape.new(name: 'ListMultiplexesResultModel')
+    ListNetworksRequest = Shapes::StructureShape.new(name: 'ListNetworksRequest')
+    ListNetworksResponse = Shapes::StructureShape.new(name: 'ListNetworksResponse')
+    ListNetworksResult = Shapes::StructureShape.new(name: 'ListNetworksResult')
+    ListNodesRequest = Shapes::StructureShape.new(name: 'ListNodesRequest')
+    ListNodesResponse = Shapes::StructureShape.new(name: 'ListNodesResponse')
+    ListNodesResult = Shapes::StructureShape.new(name: 'ListNodesResult')
     ListOfferingsRequest = Shapes::StructureShape.new(name: 'ListOfferingsRequest')
     ListOfferingsResponse = Shapes::StructureShape.new(name: 'ListOfferingsResponse')
     ListOfferingsResultModel = Shapes::StructureShape.new(name: 'ListOfferingsResultModel')
@@ -602,6 +672,13 @@ module Aws::MediaLive
     MsSmoothGroupSettings = Shapes::StructureShape.new(name: 'MsSmoothGroupSettings')
     MsSmoothH265PackagingType = Shapes::StringShape.new(name: 'MsSmoothH265PackagingType')
     MsSmoothOutputSettings = Shapes::StructureShape.new(name: 'MsSmoothOutputSettings')
+    MulticastInputSettings = Shapes::StructureShape.new(name: 'MulticastInputSettings')
+    MulticastSettings = Shapes::StructureShape.new(name: 'MulticastSettings')
+    MulticastSettingsCreateRequest = Shapes::StructureShape.new(name: 'MulticastSettingsCreateRequest')
+    MulticastSettingsUpdateRequest = Shapes::StructureShape.new(name: 'MulticastSettingsUpdateRequest')
+    MulticastSource = Shapes::StructureShape.new(name: 'MulticastSource')
+    MulticastSourceCreateRequest = Shapes::StructureShape.new(name: 'MulticastSourceCreateRequest')
+    MulticastSourceUpdateRequest = Shapes::StructureShape.new(name: 'MulticastSourceUpdateRequest')
     Multiplex = Shapes::StructureShape.new(name: 'Multiplex')
     MultiplexConfigurationValidationError = Shapes::StructureShape.new(name: 'MultiplexConfigurationValidationError')
     MultiplexGroupSettings = Shapes::StructureShape.new(name: 'MultiplexGroupSettings')
@@ -624,6 +701,8 @@ module Aws::MediaLive
     MultiplexVideoSettings = Shapes::StructureShape.new(name: 'MultiplexVideoSettings')
     NetworkInputServerValidation = Shapes::StringShape.new(name: 'NetworkInputServerValidation')
     NetworkInputSettings = Shapes::StructureShape.new(name: 'NetworkInputSettings')
+    NetworkInterfaceMode = Shapes::StringShape.new(name: 'NetworkInterfaceMode')
+    NetworkState = Shapes::StringShape.new(name: 'NetworkState')
     NielsenCBET = Shapes::StructureShape.new(name: 'NielsenCBET')
     NielsenConfiguration = Shapes::StructureShape.new(name: 'NielsenConfiguration')
     NielsenNaesIiNw = Shapes::StructureShape.new(name: 'NielsenNaesIiNw')
@@ -632,6 +711,12 @@ module Aws::MediaLive
     NielsenWatermarksCbetStepaside = Shapes::StringShape.new(name: 'NielsenWatermarksCbetStepaside')
     NielsenWatermarksDistributionTypes = Shapes::StringShape.new(name: 'NielsenWatermarksDistributionTypes')
     NielsenWatermarksSettings = Shapes::StructureShape.new(name: 'NielsenWatermarksSettings')
+    NodeConfigurationValidationError = Shapes::StructureShape.new(name: 'NodeConfigurationValidationError')
+    NodeConnectionState = Shapes::StringShape.new(name: 'NodeConnectionState')
+    NodeInterfaceMapping = Shapes::StructureShape.new(name: 'NodeInterfaceMapping')
+    NodeInterfaceMappingCreateRequest = Shapes::StructureShape.new(name: 'NodeInterfaceMappingCreateRequest')
+    NodeRole = Shapes::StringShape.new(name: 'NodeRole')
+    NodeState = Shapes::StringShape.new(name: 'NodeState')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotFoundExceptionResponseContent = Shapes::StructureShape.new(name: 'NotFoundExceptionResponseContent')
     Offering = Shapes::StructureShape.new(name: 'Offering')
@@ -682,6 +767,9 @@ module Aws::MediaLive
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     RestartChannelPipelinesRequest = Shapes::StructureShape.new(name: 'RestartChannelPipelinesRequest')
     RestartChannelPipelinesResponse = Shapes::StructureShape.new(name: 'RestartChannelPipelinesResponse')
+    Route = Shapes::StructureShape.new(name: 'Route')
+    RouteCreateRequest = Shapes::StructureShape.new(name: 'RouteCreateRequest')
+    RouteUpdateRequest = Shapes::StructureShape.new(name: 'RouteUpdateRequest')
     RtmpAdMarkers = Shapes::StringShape.new(name: 'RtmpAdMarkers')
     RtmpCacheFullBehavior = Shapes::StringShape.new(name: 'RtmpCacheFullBehavior')
     RtmpCaptionData = Shapes::StringShape.new(name: 'RtmpCaptionData')
@@ -740,6 +828,10 @@ module Aws::MediaLive
     SrtCallerDecryptionRequest = Shapes::StructureShape.new(name: 'SrtCallerDecryptionRequest')
     SrtCallerSource = Shapes::StructureShape.new(name: 'SrtCallerSource')
     SrtCallerSourceRequest = Shapes::StructureShape.new(name: 'SrtCallerSourceRequest')
+    SrtEncryptionType = Shapes::StringShape.new(name: 'SrtEncryptionType')
+    SrtGroupSettings = Shapes::StructureShape.new(name: 'SrtGroupSettings')
+    SrtOutputDestinationSettings = Shapes::StructureShape.new(name: 'SrtOutputDestinationSettings')
+    SrtOutputSettings = Shapes::StructureShape.new(name: 'SrtOutputSettings')
     SrtSettings = Shapes::StructureShape.new(name: 'SrtSettings')
     SrtSettingsRequest = Shapes::StructureShape.new(name: 'SrtSettingsRequest')
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
@@ -817,6 +909,8 @@ module Aws::MediaLive
     UpdateChannelClass = Shapes::StructureShape.new(name: 'UpdateChannelClass')
     UpdateChannelClassRequest = Shapes::StructureShape.new(name: 'UpdateChannelClassRequest')
     UpdateChannelClassResponse = Shapes::StructureShape.new(name: 'UpdateChannelClassResponse')
+    UpdateChannelPlacementGroupRequest = Shapes::StructureShape.new(name: 'UpdateChannelPlacementGroupRequest')
+    UpdateChannelPlacementGroupResponse = Shapes::StructureShape.new(name: 'UpdateChannelPlacementGroupResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateChannelResultModel = Shapes::StructureShape.new(name: 'UpdateChannelResultModel')
@@ -828,6 +922,9 @@ module Aws::MediaLive
     UpdateCloudWatchAlarmTemplateRequestContent = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateRequestContent')
     UpdateCloudWatchAlarmTemplateResponse = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateResponse')
     UpdateCloudWatchAlarmTemplateResponseContent = Shapes::StructureShape.new(name: 'UpdateCloudWatchAlarmTemplateResponseContent')
+    UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
+    UpdateClusterResponse = Shapes::StructureShape.new(name: 'UpdateClusterResponse')
+    UpdateClusterResult = Shapes::StructureShape.new(name: 'UpdateClusterResult')
     UpdateEventBridgeRuleTemplateGroupRequest = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateGroupRequest')
     UpdateEventBridgeRuleTemplateGroupRequestContent = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateGroupRequestContent')
     UpdateEventBridgeRuleTemplateGroupResponse = Shapes::StructureShape.new(name: 'UpdateEventBridgeRuleTemplateGroupResponse')
@@ -854,6 +951,14 @@ module Aws::MediaLive
     UpdateMultiplexRequest = Shapes::StructureShape.new(name: 'UpdateMultiplexRequest')
     UpdateMultiplexResponse = Shapes::StructureShape.new(name: 'UpdateMultiplexResponse')
     UpdateMultiplexResultModel = Shapes::StructureShape.new(name: 'UpdateMultiplexResultModel')
+    UpdateNetworkRequest = Shapes::StructureShape.new(name: 'UpdateNetworkRequest')
+    UpdateNetworkResponse = Shapes::StructureShape.new(name: 'UpdateNetworkResponse')
+    UpdateNetworkResult = Shapes::StructureShape.new(name: 'UpdateNetworkResult')
+    UpdateNodeRequest = Shapes::StructureShape.new(name: 'UpdateNodeRequest')
+    UpdateNodeResponse = Shapes::StructureShape.new(name: 'UpdateNodeResponse')
+    UpdateNodeState = Shapes::StringShape.new(name: 'UpdateNodeState')
+    UpdateNodeStateRequest = Shapes::StructureShape.new(name: 'UpdateNodeStateRequest')
+    UpdateNodeStateResponse = Shapes::StructureShape.new(name: 'UpdateNodeStateResponse')
     UpdateReservation = Shapes::StructureShape.new(name: 'UpdateReservation')
     UpdateReservationRequest = Shapes::StructureShape.new(name: 'UpdateReservationRequest')
     UpdateReservationResponse = Shapes::StructureShape.new(name: 'UpdateReservationResponse')
@@ -939,7 +1044,10 @@ module Aws::MediaLive
     __integerMin3 = Shapes::IntegerShape.new(name: '__integerMin3')
     __integerMin30 = Shapes::IntegerShape.new(name: '__integerMin30')
     __integerMin32Max8191 = Shapes::IntegerShape.new(name: '__integerMin32Max8191')
+    __integerMin40Max16000 = Shapes::IntegerShape.new(name: '__integerMin40Max16000')
     __integerMin4Max20 = Shapes::IntegerShape.new(name: '__integerMin4Max20')
+    __integerMin50000Max16000000 = Shapes::IntegerShape.new(name: '__integerMin50000Max16000000')
+    __integerMin50000Max8000000 = Shapes::IntegerShape.new(name: '__integerMin50000Max8000000')
     __integerMin64Max2160 = Shapes::IntegerShape.new(name: '__integerMin64Max2160')
     __integerMin800Max3000 = Shapes::IntegerShape.new(name: '__integerMin800Max3000')
     __integerMin96Max600 = Shapes::IntegerShape.new(name: '__integerMin96Max600')
@@ -964,6 +1072,10 @@ module Aws::MediaLive
     __listOfColorCorrection = Shapes::ListShape.new(name: '__listOfColorCorrection')
     __listOfDashRoleAudio = Shapes::ListShape.new(name: '__listOfDashRoleAudio')
     __listOfDashRoleCaption = Shapes::ListShape.new(name: '__listOfDashRoleCaption')
+    __listOfDescribeChannelPlacementGroupSummary = Shapes::ListShape.new(name: '__listOfDescribeChannelPlacementGroupSummary')
+    __listOfDescribeClusterSummary = Shapes::ListShape.new(name: '__listOfDescribeClusterSummary')
+    __listOfDescribeNetworkSummary = Shapes::ListShape.new(name: '__listOfDescribeNetworkSummary')
+    __listOfDescribeNodeSummary = Shapes::ListShape.new(name: '__listOfDescribeNodeSummary')
     __listOfEventBridgeRuleTemplateGroupSummary = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateGroupSummary')
     __listOfEventBridgeRuleTemplateSummary = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateSummary')
     __listOfEventBridgeRuleTemplateTarget = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateTarget')
@@ -974,24 +1086,37 @@ module Aws::MediaLive
     __listOfInputChannelLevel = Shapes::ListShape.new(name: '__listOfInputChannelLevel')
     __listOfInputDestination = Shapes::ListShape.new(name: '__listOfInputDestination')
     __listOfInputDestinationRequest = Shapes::ListShape.new(name: '__listOfInputDestinationRequest')
+    __listOfInputDestinationRoute = Shapes::ListShape.new(name: '__listOfInputDestinationRoute')
     __listOfInputDeviceConfigurableAudioChannelPairConfig = Shapes::ListShape.new(name: '__listOfInputDeviceConfigurableAudioChannelPairConfig')
     __listOfInputDeviceRequest = Shapes::ListShape.new(name: '__listOfInputDeviceRequest')
     __listOfInputDeviceSettings = Shapes::ListShape.new(name: '__listOfInputDeviceSettings')
     __listOfInputDeviceSummary = Shapes::ListShape.new(name: '__listOfInputDeviceSummary')
     __listOfInputDeviceUhdAudioChannelPairConfig = Shapes::ListShape.new(name: '__listOfInputDeviceUhdAudioChannelPairConfig')
+    __listOfInputRequestDestinationRoute = Shapes::ListShape.new(name: '__listOfInputRequestDestinationRoute')
     __listOfInputSecurityGroup = Shapes::ListShape.new(name: '__listOfInputSecurityGroup')
     __listOfInputSource = Shapes::ListShape.new(name: '__listOfInputSource')
     __listOfInputSourceRequest = Shapes::ListShape.new(name: '__listOfInputSourceRequest')
     __listOfInputWhitelistRule = Shapes::ListShape.new(name: '__listOfInputWhitelistRule')
     __listOfInputWhitelistRuleCidr = Shapes::ListShape.new(name: '__listOfInputWhitelistRuleCidr')
+    __listOfInterfaceMapping = Shapes::ListShape.new(name: '__listOfInterfaceMapping')
+    __listOfInterfaceMappingCreateRequest = Shapes::ListShape.new(name: '__listOfInterfaceMappingCreateRequest')
+    __listOfInterfaceMappingUpdateRequest = Shapes::ListShape.new(name: '__listOfInterfaceMappingUpdateRequest')
+    __listOfIpPool = Shapes::ListShape.new(name: '__listOfIpPool')
+    __listOfIpPoolCreateRequest = Shapes::ListShape.new(name: '__listOfIpPoolCreateRequest')
+    __listOfIpPoolUpdateRequest = Shapes::ListShape.new(name: '__listOfIpPoolUpdateRequest')
     __listOfMediaConnectFlow = Shapes::ListShape.new(name: '__listOfMediaConnectFlow')
     __listOfMediaConnectFlowRequest = Shapes::ListShape.new(name: '__listOfMediaConnectFlowRequest')
     __listOfMediaPackageOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfMediaPackageOutputDestinationSettings')
     __listOfMediaResourceNeighbor = Shapes::ListShape.new(name: '__listOfMediaResourceNeighbor')
+    __listOfMulticastSource = Shapes::ListShape.new(name: '__listOfMulticastSource')
+    __listOfMulticastSourceCreateRequest = Shapes::ListShape.new(name: '__listOfMulticastSourceCreateRequest')
+    __listOfMulticastSourceUpdateRequest = Shapes::ListShape.new(name: '__listOfMulticastSourceUpdateRequest')
     __listOfMultiplexOutputDestination = Shapes::ListShape.new(name: '__listOfMultiplexOutputDestination')
     __listOfMultiplexProgramPipelineDetail = Shapes::ListShape.new(name: '__listOfMultiplexProgramPipelineDetail')
     __listOfMultiplexProgramSummary = Shapes::ListShape.new(name: '__listOfMultiplexProgramSummary')
     __listOfMultiplexSummary = Shapes::ListShape.new(name: '__listOfMultiplexSummary')
+    __listOfNodeInterfaceMapping = Shapes::ListShape.new(name: '__listOfNodeInterfaceMapping')
+    __listOfNodeInterfaceMappingCreateRequest = Shapes::ListShape.new(name: '__listOfNodeInterfaceMappingCreateRequest')
     __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
@@ -1000,12 +1125,16 @@ module Aws::MediaLive
     __listOfPipelineDetail = Shapes::ListShape.new(name: '__listOfPipelineDetail')
     __listOfPipelinePauseStateSettings = Shapes::ListShape.new(name: '__listOfPipelinePauseStateSettings')
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
+    __listOfRoute = Shapes::ListShape.new(name: '__listOfRoute')
+    __listOfRouteCreateRequest = Shapes::ListShape.new(name: '__listOfRouteCreateRequest')
+    __listOfRouteUpdateRequest = Shapes::ListShape.new(name: '__listOfRouteUpdateRequest')
     __listOfRtmpAdMarkers = Shapes::ListShape.new(name: '__listOfRtmpAdMarkers')
     __listOfScheduleAction = Shapes::ListShape.new(name: '__listOfScheduleAction')
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
     __listOfSignalMapSummary = Shapes::ListShape.new(name: '__listOfSignalMapSummary')
     __listOfSrtCallerSource = Shapes::ListShape.new(name: '__listOfSrtCallerSource')
     __listOfSrtCallerSourceRequest = Shapes::ListShape.new(name: '__listOfSrtCallerSourceRequest')
+    __listOfSrtOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfSrtOutputDestinationSettings')
     __listOfThumbnail = Shapes::ListShape.new(name: '__listOfThumbnail')
     __listOfThumbnailDetail = Shapes::ListShape.new(name: '__listOfThumbnailDetail')
     __listOfTransferringInputDeviceSummary = Shapes::ListShape.new(name: '__listOfTransferringInputDeviceSummary')
@@ -1087,6 +1216,10 @@ module Aws::MediaLive
 
     AncillarySourceSettings.add_member(:source_ancillary_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "sourceAncillaryChannelNumber"))
     AncillarySourceSettings.struct_class = Types::AncillarySourceSettings
+
+    AnywhereSettings.add_member(:channel_placement_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelPlacementGroupId"))
+    AnywhereSettings.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    AnywhereSettings.struct_class = Types::AnywhereSettings
 
     ArchiveCdnSettings.add_member(:archive_s3_settings, Shapes::ShapeRef.new(shape: ArchiveS3Settings, location_name: "archiveS3Settings"))
     ArchiveCdnSettings.struct_class = Types::ArchiveCdnSettings
@@ -1194,6 +1327,31 @@ module Aws::MediaLive
     AutomaticInputFailoverSettings.add_member(:input_preference, Shapes::ShapeRef.new(shape: InputPreference, location_name: "inputPreference"))
     AutomaticInputFailoverSettings.add_member(:secondary_input_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secondaryInputId"))
     AutomaticInputFailoverSettings.struct_class = Types::AutomaticInputFailoverSettings
+
+    Av1ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
+    Av1ColorSpaceSettings.add_member(:hdr_10_settings, Shapes::ShapeRef.new(shape: Hdr10Settings, location_name: "hdr10Settings"))
+    Av1ColorSpaceSettings.add_member(:rec_601_settings, Shapes::ShapeRef.new(shape: Rec601Settings, location_name: "rec601Settings"))
+    Av1ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
+    Av1ColorSpaceSettings.struct_class = Types::Av1ColorSpaceSettings
+
+    Av1Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
+    Av1Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin50000Max16000000, location_name: "bufSize"))
+    Av1Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: Av1ColorSpaceSettings, location_name: "colorSpaceSettings"))
+    Av1Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
+    Av1Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max3003, required: true, location_name: "framerateDenominator"))
+    Av1Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "framerateNumerator"))
+    Av1Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "gopSize"))
+    Av1Settings.add_member(:gop_size_units, Shapes::ShapeRef.new(shape: Av1GopSizeUnits, location_name: "gopSizeUnits"))
+    Av1Settings.add_member(:level, Shapes::ShapeRef.new(shape: Av1Level, location_name: "level"))
+    Av1Settings.add_member(:look_ahead_rate_control, Shapes::ShapeRef.new(shape: Av1LookAheadRateControl, location_name: "lookAheadRateControl"))
+    Av1Settings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max8000000, location_name: "maxBitrate"))
+    Av1Settings.add_member(:min_i_interval, Shapes::ShapeRef.new(shape: __integerMin0Max30, location_name: "minIInterval"))
+    Av1Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parDenominator"))
+    Av1Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parNumerator"))
+    Av1Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
+    Av1Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: Av1SceneChangeDetect, location_name: "sceneChangeDetect"))
+    Av1Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
+    Av1Settings.struct_class = Types::Av1Settings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "availBlankingImage"))
     AvailBlanking.add_member(:state, Shapes::ShapeRef.new(shape: AvailBlankingState, location_name: "state"))
@@ -1407,6 +1565,7 @@ module Aws::MediaLive
     Channel.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Channel.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    Channel.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: DescribeAnywhereSettings, location_name: "anywhereSettings"))
     Channel.struct_class = Types::Channel
 
     ChannelConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1432,6 +1591,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    ChannelSummary.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: DescribeAnywhereSettings, location_name: "anywhereSettings"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     ClaimDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -1467,6 +1627,18 @@ module Aws::MediaLive
     CloudWatchAlarmTemplateSummary.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
     CloudWatchAlarmTemplateSummary.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
     CloudWatchAlarmTemplateSummary.struct_class = Types::CloudWatchAlarmTemplateSummary
+
+    ClusterNetworkSettings.add_member(:default_route, Shapes::ShapeRef.new(shape: __string, location_name: "defaultRoute"))
+    ClusterNetworkSettings.add_member(:interface_mappings, Shapes::ShapeRef.new(shape: __listOfInterfaceMapping, location_name: "interfaceMappings"))
+    ClusterNetworkSettings.struct_class = Types::ClusterNetworkSettings
+
+    ClusterNetworkSettingsCreateRequest.add_member(:default_route, Shapes::ShapeRef.new(shape: __string, location_name: "defaultRoute"))
+    ClusterNetworkSettingsCreateRequest.add_member(:interface_mappings, Shapes::ShapeRef.new(shape: __listOfInterfaceMappingCreateRequest, location_name: "interfaceMappings"))
+    ClusterNetworkSettingsCreateRequest.struct_class = Types::ClusterNetworkSettingsCreateRequest
+
+    ClusterNetworkSettingsUpdateRequest.add_member(:default_route, Shapes::ShapeRef.new(shape: __string, location_name: "defaultRoute"))
+    ClusterNetworkSettingsUpdateRequest.add_member(:interface_mappings, Shapes::ShapeRef.new(shape: __listOfInterfaceMappingUpdateRequest, location_name: "interfaceMappings"))
+    ClusterNetworkSettingsUpdateRequest.struct_class = Types::ClusterNetworkSettingsUpdateRequest
 
     CmafIngestGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     CmafIngestGroupSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: CmafNielsenId3Behavior, location_name: "nielsenId3Behavior"))
@@ -1509,7 +1681,24 @@ module Aws::MediaLive
     CreateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateChannel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannel.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    CreateChannel.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: AnywhereSettings, location_name: "anywhereSettings"))
     CreateChannel.struct_class = Types::CreateChannel
+
+    CreateChannelPlacementGroupRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    CreateChannelPlacementGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateChannelPlacementGroupRequest.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    CreateChannelPlacementGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateChannelPlacementGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateChannelPlacementGroupRequest.struct_class = Types::CreateChannelPlacementGroupRequest
+
+    CreateChannelPlacementGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateChannelPlacementGroupResponse.add_member(:channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channels"))
+    CreateChannelPlacementGroupResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    CreateChannelPlacementGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateChannelPlacementGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateChannelPlacementGroupResponse.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    CreateChannelPlacementGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelPlacementGroupState, location_name: "state"))
+    CreateChannelPlacementGroupResponse.struct_class = Types::CreateChannelPlacementGroupResponse
 
     CreateChannelRequest.add_member(:cdi_input_specification, Shapes::ShapeRef.new(shape: CdiInputSpecification, location_name: "cdiInputSpecification"))
     CreateChannelRequest.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
@@ -1525,6 +1714,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettings, location_name: "vpc"))
+    CreateChannelRequest.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: AnywhereSettings, location_name: "anywhereSettings"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -1629,6 +1819,24 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateResponseContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
     CreateCloudWatchAlarmTemplateResponseContent.struct_class = Types::CreateCloudWatchAlarmTemplateResponseContent
 
+    CreateClusterRequest.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    CreateClusterRequest.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceRoleArn"))
+    CreateClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateClusterRequest.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettingsCreateRequest, location_name: "networkSettings"))
+    CreateClusterRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateClusterRequest.struct_class = Types::CreateClusterRequest
+
+    CreateClusterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateClusterResponse.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    CreateClusterResponse.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    CreateClusterResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateClusterResponse.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceRoleArn"))
+    CreateClusterResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateClusterResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettings, location_name: "networkSettings"))
+    CreateClusterResponse.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    CreateClusterResponse.struct_class = Types::CreateClusterResponse
+
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1709,6 +1917,8 @@ module Aws::MediaLive
     CreateInput.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInput.add_member(:vpc, Shapes::ShapeRef.new(shape: InputVpcRequest, location_name: "vpc"))
     CreateInput.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
+    CreateInput.add_member(:input_network_location, Shapes::ShapeRef.new(shape: InputNetworkLocation, location_name: "inputNetworkLocation"))
+    CreateInput.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsCreateRequest, location_name: "multicastSettings"))
     CreateInput.struct_class = Types::CreateInput
 
     CreateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
@@ -1723,6 +1933,8 @@ module Aws::MediaLive
     CreateInputRequest.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     CreateInputRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: InputVpcRequest, location_name: "vpc"))
     CreateInputRequest.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
+    CreateInputRequest.add_member(:input_network_location, Shapes::ShapeRef.new(shape: InputNetworkLocation, location_name: "inputNetworkLocation"))
+    CreateInputRequest.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsCreateRequest, location_name: "multicastSettings"))
     CreateInputRequest.struct_class = Types::CreateInputRequest
 
     CreateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
@@ -1777,6 +1989,56 @@ module Aws::MediaLive
 
     CreateMultiplexResultModel.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))
     CreateMultiplexResultModel.struct_class = Types::CreateMultiplexResultModel
+
+    CreateNetworkRequest.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPoolCreateRequest, location_name: "ipPools"))
+    CreateNetworkRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateNetworkRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkRequest.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRouteCreateRequest, location_name: "routes"))
+    CreateNetworkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateNetworkRequest.struct_class = Types::CreateNetworkRequest
+
+    CreateNetworkResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateNetworkResponse.add_member(:associated_cluster_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "associatedClusterIds"))
+    CreateNetworkResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateNetworkResponse.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPool, location_name: "ipPools"))
+    CreateNetworkResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateNetworkResponse.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "routes"))
+    CreateNetworkResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkState, location_name: "state"))
+    CreateNetworkResponse.struct_class = Types::CreateNetworkResponse
+
+    CreateNodeRegistrationScriptRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    CreateNodeRegistrationScriptRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateNodeRegistrationScriptRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateNodeRegistrationScriptRequest.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    CreateNodeRegistrationScriptRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateNodeRegistrationScriptRequest.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    CreateNodeRegistrationScriptRequest.struct_class = Types::CreateNodeRegistrationScriptRequest
+
+    CreateNodeRegistrationScriptResponse.add_member(:node_registration_script, Shapes::ShapeRef.new(shape: __string, location_name: "nodeRegistrationScript"))
+    CreateNodeRegistrationScriptResponse.struct_class = Types::CreateNodeRegistrationScriptResponse
+
+    CreateNodeRegistrationScriptResult.add_member(:node_registration_script, Shapes::ShapeRef.new(shape: __string, location_name: "nodeRegistrationScript"))
+    CreateNodeRegistrationScriptResult.struct_class = Types::CreateNodeRegistrationScriptResult
+
+    CreateNodeRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    CreateNodeRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateNodeRequest.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMappingCreateRequest, location_name: "nodeInterfaceMappings"))
+    CreateNodeRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateNodeRequest.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    CreateNodeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateNodeRequest.struct_class = Types::CreateNodeRequest
+
+    CreateNodeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateNodeResponse.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelPlacementGroups"))
+    CreateNodeResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    CreateNodeResponse.add_member(:connection_state, Shapes::ShapeRef.new(shape: NodeConnectionState, location_name: "connectionState"))
+    CreateNodeResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateNodeResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceArn"))
+    CreateNodeResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    CreateNodeResponse.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    CreateNodeResponse.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    CreateNodeResponse.add_member(:state, Shapes::ShapeRef.new(shape: NodeState, location_name: "state"))
+    CreateNodeResponse.struct_class = Types::CreateNodeResponse
 
     CreatePartnerInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreatePartnerInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -1853,6 +2115,19 @@ module Aws::MediaLive
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
 
+    DeleteChannelPlacementGroupRequest.add_member(:channel_placement_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelPlacementGroupId"))
+    DeleteChannelPlacementGroupRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    DeleteChannelPlacementGroupRequest.struct_class = Types::DeleteChannelPlacementGroupRequest
+
+    DeleteChannelPlacementGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteChannelPlacementGroupResponse.add_member(:channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channels"))
+    DeleteChannelPlacementGroupResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DeleteChannelPlacementGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DeleteChannelPlacementGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteChannelPlacementGroupResponse.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    DeleteChannelPlacementGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelPlacementGroupState, location_name: "state"))
+    DeleteChannelPlacementGroupResponse.struct_class = Types::DeleteChannelPlacementGroupResponse
+
     DeleteChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
 
@@ -1874,6 +2149,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     DeleteChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeleteChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    DeleteChannelResponse.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: DescribeAnywhereSettings, location_name: "anywhereSettings"))
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
 
     DeleteCloudWatchAlarmTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
@@ -1881,6 +2157,19 @@ module Aws::MediaLive
 
     DeleteCloudWatchAlarmTemplateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
     DeleteCloudWatchAlarmTemplateRequest.struct_class = Types::DeleteCloudWatchAlarmTemplateRequest
+
+    DeleteClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    DeleteClusterRequest.struct_class = Types::DeleteClusterRequest
+
+    DeleteClusterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteClusterResponse.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    DeleteClusterResponse.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    DeleteClusterResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DeleteClusterResponse.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceRoleArn"))
+    DeleteClusterResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteClusterResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettings, location_name: "networkSettings"))
+    DeleteClusterResponse.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    DeleteClusterResponse.struct_class = Types::DeleteClusterResponse
 
     DeleteEventBridgeRuleTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
     DeleteEventBridgeRuleTemplateGroupRequest.struct_class = Types::DeleteEventBridgeRuleTemplateGroupRequest
@@ -1923,6 +2212,34 @@ module Aws::MediaLive
     DeleteMultiplexResponse.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
     DeleteMultiplexResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeleteMultiplexResponse.struct_class = Types::DeleteMultiplexResponse
+
+    DeleteNetworkRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "networkId"))
+    DeleteNetworkRequest.struct_class = Types::DeleteNetworkRequest
+
+    DeleteNetworkResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteNetworkResponse.add_member(:associated_cluster_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "associatedClusterIds"))
+    DeleteNetworkResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DeleteNetworkResponse.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPool, location_name: "ipPools"))
+    DeleteNetworkResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteNetworkResponse.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "routes"))
+    DeleteNetworkResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkState, location_name: "state"))
+    DeleteNetworkResponse.struct_class = Types::DeleteNetworkResponse
+
+    DeleteNodeRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    DeleteNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "nodeId"))
+    DeleteNodeRequest.struct_class = Types::DeleteNodeRequest
+
+    DeleteNodeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteNodeResponse.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelPlacementGroups"))
+    DeleteNodeResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DeleteNodeResponse.add_member(:connection_state, Shapes::ShapeRef.new(shape: NodeConnectionState, location_name: "connectionState"))
+    DeleteNodeResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DeleteNodeResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceArn"))
+    DeleteNodeResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteNodeResponse.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    DeleteNodeResponse.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    DeleteNodeResponse.add_member(:state, Shapes::ShapeRef.new(shape: NodeState, location_name: "state"))
+    DeleteNodeResponse.struct_class = Types::DeleteNodeResponse
 
     DeleteReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
     DeleteReservationRequest.struct_class = Types::DeleteReservationRequest
@@ -1968,6 +2285,41 @@ module Aws::MediaLive
     DescribeAccountConfigurationResultModel.add_member(:account_configuration, Shapes::ShapeRef.new(shape: AccountConfiguration, location_name: "accountConfiguration"))
     DescribeAccountConfigurationResultModel.struct_class = Types::DescribeAccountConfigurationResultModel
 
+    DescribeAnywhereSettings.add_member(:channel_placement_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelPlacementGroupId"))
+    DescribeAnywhereSettings.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DescribeAnywhereSettings.struct_class = Types::DescribeAnywhereSettings
+
+    DescribeChannelPlacementGroupRequest.add_member(:channel_placement_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelPlacementGroupId"))
+    DescribeChannelPlacementGroupRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    DescribeChannelPlacementGroupRequest.struct_class = Types::DescribeChannelPlacementGroupRequest
+
+    DescribeChannelPlacementGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeChannelPlacementGroupResponse.add_member(:channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channels"))
+    DescribeChannelPlacementGroupResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DescribeChannelPlacementGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeChannelPlacementGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeChannelPlacementGroupResponse.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    DescribeChannelPlacementGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelPlacementGroupState, location_name: "state"))
+    DescribeChannelPlacementGroupResponse.struct_class = Types::DescribeChannelPlacementGroupResponse
+
+    DescribeChannelPlacementGroupResult.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeChannelPlacementGroupResult.add_member(:channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channels"))
+    DescribeChannelPlacementGroupResult.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DescribeChannelPlacementGroupResult.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeChannelPlacementGroupResult.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeChannelPlacementGroupResult.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    DescribeChannelPlacementGroupResult.add_member(:state, Shapes::ShapeRef.new(shape: ChannelPlacementGroupState, location_name: "state"))
+    DescribeChannelPlacementGroupResult.struct_class = Types::DescribeChannelPlacementGroupResult
+
+    DescribeChannelPlacementGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeChannelPlacementGroupSummary.add_member(:channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channels"))
+    DescribeChannelPlacementGroupSummary.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DescribeChannelPlacementGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeChannelPlacementGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeChannelPlacementGroupSummary.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    DescribeChannelPlacementGroupSummary.add_member(:state, Shapes::ShapeRef.new(shape: ChannelPlacementGroupState, location_name: "state"))
+    DescribeChannelPlacementGroupSummary.struct_class = Types::DescribeChannelPlacementGroupSummary
+
     DescribeChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
@@ -1989,7 +2341,41 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    DescribeChannelResponse.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: DescribeAnywhereSettings, location_name: "anywhereSettings"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
+
+    DescribeClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    DescribeClusterRequest.struct_class = Types::DescribeClusterRequest
+
+    DescribeClusterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeClusterResponse.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    DescribeClusterResponse.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    DescribeClusterResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeClusterResponse.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceRoleArn"))
+    DescribeClusterResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeClusterResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettings, location_name: "networkSettings"))
+    DescribeClusterResponse.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
+
+    DescribeClusterResult.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeClusterResult.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    DescribeClusterResult.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    DescribeClusterResult.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeClusterResult.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceRoleArn"))
+    DescribeClusterResult.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeClusterResult.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettings, location_name: "networkSettings"))
+    DescribeClusterResult.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    DescribeClusterResult.struct_class = Types::DescribeClusterResult
+
+    DescribeClusterSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeClusterSummary.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    DescribeClusterSummary.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    DescribeClusterSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeClusterSummary.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceRoleArn"))
+    DescribeClusterSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeClusterSummary.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettings, location_name: "networkSettings"))
+    DescribeClusterSummary.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    DescribeClusterSummary.struct_class = Types::DescribeClusterSummary
 
     DescribeInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
     DescribeInputDeviceRequest.struct_class = Types::DescribeInputDeviceRequest
@@ -2045,6 +2431,8 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeInputResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     DescribeInputResponse.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettings, location_name: "srtSettings"))
+    DescribeInputResponse.add_member(:input_network_location, Shapes::ShapeRef.new(shape: InputNetworkLocation, location_name: "inputNetworkLocation"))
+    DescribeInputResponse.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettings, location_name: "multicastSettings"))
     DescribeInputResponse.struct_class = Types::DescribeInputResponse
 
     DescribeInputSecurityGroupRequest.add_member(:input_security_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputSecurityGroupId"))
@@ -2083,6 +2471,77 @@ module Aws::MediaLive
     DescribeMultiplexResponse.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
     DescribeMultiplexResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeMultiplexResponse.struct_class = Types::DescribeMultiplexResponse
+
+    DescribeNetworkRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "networkId"))
+    DescribeNetworkRequest.struct_class = Types::DescribeNetworkRequest
+
+    DescribeNetworkResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeNetworkResponse.add_member(:associated_cluster_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "associatedClusterIds"))
+    DescribeNetworkResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeNetworkResponse.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPool, location_name: "ipPools"))
+    DescribeNetworkResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeNetworkResponse.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "routes"))
+    DescribeNetworkResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkState, location_name: "state"))
+    DescribeNetworkResponse.struct_class = Types::DescribeNetworkResponse
+
+    DescribeNetworkResult.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeNetworkResult.add_member(:associated_cluster_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "associatedClusterIds"))
+    DescribeNetworkResult.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeNetworkResult.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPool, location_name: "ipPools"))
+    DescribeNetworkResult.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeNetworkResult.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "routes"))
+    DescribeNetworkResult.add_member(:state, Shapes::ShapeRef.new(shape: NetworkState, location_name: "state"))
+    DescribeNetworkResult.struct_class = Types::DescribeNetworkResult
+
+    DescribeNetworkSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeNetworkSummary.add_member(:associated_cluster_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "associatedClusterIds"))
+    DescribeNetworkSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeNetworkSummary.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPool, location_name: "ipPools"))
+    DescribeNetworkSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeNetworkSummary.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "routes"))
+    DescribeNetworkSummary.add_member(:state, Shapes::ShapeRef.new(shape: NetworkState, location_name: "state"))
+    DescribeNetworkSummary.struct_class = Types::DescribeNetworkSummary
+
+    DescribeNodeRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    DescribeNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "nodeId"))
+    DescribeNodeRequest.struct_class = Types::DescribeNodeRequest
+
+    DescribeNodeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeNodeResponse.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelPlacementGroups"))
+    DescribeNodeResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DescribeNodeResponse.add_member(:connection_state, Shapes::ShapeRef.new(shape: NodeConnectionState, location_name: "connectionState"))
+    DescribeNodeResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeNodeResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceArn"))
+    DescribeNodeResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeNodeResponse.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    DescribeNodeResponse.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    DescribeNodeResponse.add_member(:state, Shapes::ShapeRef.new(shape: NodeState, location_name: "state"))
+    DescribeNodeResponse.struct_class = Types::DescribeNodeResponse
+
+    DescribeNodeResult.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeNodeResult.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelPlacementGroups"))
+    DescribeNodeResult.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DescribeNodeResult.add_member(:connection_state, Shapes::ShapeRef.new(shape: NodeConnectionState, location_name: "connectionState"))
+    DescribeNodeResult.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeNodeResult.add_member(:instance_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceArn"))
+    DescribeNodeResult.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeNodeResult.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    DescribeNodeResult.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    DescribeNodeResult.add_member(:state, Shapes::ShapeRef.new(shape: NodeState, location_name: "state"))
+    DescribeNodeResult.struct_class = Types::DescribeNodeResult
+
+    DescribeNodeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeNodeSummary.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelPlacementGroups"))
+    DescribeNodeSummary.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    DescribeNodeSummary.add_member(:connection_state, Shapes::ShapeRef.new(shape: NodeConnectionState, location_name: "connectionState"))
+    DescribeNodeSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeNodeSummary.add_member(:instance_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceArn"))
+    DescribeNodeSummary.add_member(:managed_instance_id, Shapes::ShapeRef.new(shape: __string, location_name: "managedInstanceId"))
+    DescribeNodeSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeNodeSummary.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    DescribeNodeSummary.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    DescribeNodeSummary.add_member(:state, Shapes::ShapeRef.new(shape: NodeState, location_name: "state"))
+    DescribeNodeSummary.struct_class = Types::DescribeNodeSummary
 
     DescribeOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
     DescribeOfferingRequest.struct_class = Types::DescribeOfferingRequest
@@ -2745,12 +3204,15 @@ module Aws::MediaLive
     Input.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Input.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     Input.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettings, location_name: "srtSettings"))
+    Input.add_member(:input_network_location, Shapes::ShapeRef.new(shape: InputNetworkLocation, location_name: "inputNetworkLocation"))
+    Input.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettings, location_name: "multicastSettings"))
     Input.struct_class = Types::Input
 
     InputAttachment.add_member(:automatic_input_failover_settings, Shapes::ShapeRef.new(shape: AutomaticInputFailoverSettings, location_name: "automaticInputFailoverSettings"))
     InputAttachment.add_member(:input_attachment_name, Shapes::ShapeRef.new(shape: __string, location_name: "inputAttachmentName"))
     InputAttachment.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, location_name: "inputId"))
     InputAttachment.add_member(:input_settings, Shapes::ShapeRef.new(shape: InputSettings, location_name: "inputSettings"))
+    InputAttachment.add_member(:logical_interface_names, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "logicalInterfaceNames"))
     InputAttachment.struct_class = Types::InputAttachment
 
     InputChannelLevel.add_member(:gain, Shapes::ShapeRef.new(shape: __integerMinNegative60Max6, required: true, location_name: "gain"))
@@ -2766,10 +3228,19 @@ module Aws::MediaLive
     InputDestination.add_member(:port, Shapes::ShapeRef.new(shape: __string, location_name: "port"))
     InputDestination.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     InputDestination.add_member(:vpc, Shapes::ShapeRef.new(shape: InputDestinationVpc, location_name: "vpc"))
+    InputDestination.add_member(:network, Shapes::ShapeRef.new(shape: __string, location_name: "network"))
+    InputDestination.add_member(:network_routes, Shapes::ShapeRef.new(shape: __listOfInputDestinationRoute, location_name: "networkRoutes"))
     InputDestination.struct_class = Types::InputDestination
 
     InputDestinationRequest.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
+    InputDestinationRequest.add_member(:network, Shapes::ShapeRef.new(shape: __string, location_name: "network"))
+    InputDestinationRequest.add_member(:network_routes, Shapes::ShapeRef.new(shape: __listOfInputRequestDestinationRoute, location_name: "networkRoutes"))
+    InputDestinationRequest.add_member(:static_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "staticIpAddress"))
     InputDestinationRequest.struct_class = Types::InputDestinationRequest
+
+    InputDestinationRoute.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    InputDestinationRoute.add_member(:gateway, Shapes::ShapeRef.new(shape: __string, location_name: "gateway"))
+    InputDestinationRoute.struct_class = Types::InputDestinationRoute
 
     InputDestinationVpc.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZone"))
     InputDestinationVpc.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: __string, location_name: "networkInterfaceId"))
@@ -2901,6 +3372,10 @@ module Aws::MediaLive
     InputPrepareScheduleActionSettings.add_member(:url_path, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "urlPath"))
     InputPrepareScheduleActionSettings.struct_class = Types::InputPrepareScheduleActionSettings
 
+    InputRequestDestinationRoute.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    InputRequestDestinationRoute.add_member(:gateway, Shapes::ShapeRef.new(shape: __string, location_name: "gateway"))
+    InputRequestDestinationRoute.struct_class = Types::InputRequestDestinationRoute
+
     InputSecurityGroup.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     InputSecurityGroup.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     InputSecurityGroup.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputs"))
@@ -2956,6 +3431,18 @@ module Aws::MediaLive
     InputWhitelistRuleCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
     InputWhitelistRuleCidr.struct_class = Types::InputWhitelistRuleCidr
 
+    InterfaceMapping.add_member(:logical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "logicalInterfaceName"))
+    InterfaceMapping.add_member(:network_id, Shapes::ShapeRef.new(shape: __string, location_name: "networkId"))
+    InterfaceMapping.struct_class = Types::InterfaceMapping
+
+    InterfaceMappingCreateRequest.add_member(:logical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "logicalInterfaceName"))
+    InterfaceMappingCreateRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: __string, location_name: "networkId"))
+    InterfaceMappingCreateRequest.struct_class = Types::InterfaceMappingCreateRequest
+
+    InterfaceMappingUpdateRequest.add_member(:logical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "logicalInterfaceName"))
+    InterfaceMappingUpdateRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: __string, location_name: "networkId"))
+    InterfaceMappingUpdateRequest.struct_class = Types::InterfaceMappingUpdateRequest
+
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
@@ -2968,11 +3455,33 @@ module Aws::MediaLive
     InvalidRequest.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InvalidRequest.struct_class = Types::InvalidRequest
 
+    IpPool.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    IpPool.struct_class = Types::IpPool
+
+    IpPoolCreateRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    IpPoolCreateRequest.struct_class = Types::IpPoolCreateRequest
+
+    IpPoolUpdateRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    IpPoolUpdateRequest.struct_class = Types::IpPoolUpdateRequest
+
     KeyProviderSettings.add_member(:static_key_settings, Shapes::ShapeRef.new(shape: StaticKeySettings, location_name: "staticKeySettings"))
     KeyProviderSettings.struct_class = Types::KeyProviderSettings
 
     LimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     LimitExceeded.struct_class = Types::LimitExceeded
+
+    ListChannelPlacementGroupsRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    ListChannelPlacementGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListChannelPlacementGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListChannelPlacementGroupsRequest.struct_class = Types::ListChannelPlacementGroupsRequest
+
+    ListChannelPlacementGroupsResponse.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOfDescribeChannelPlacementGroupSummary, location_name: "channelPlacementGroups"))
+    ListChannelPlacementGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListChannelPlacementGroupsResponse.struct_class = Types::ListChannelPlacementGroupsResponse
+
+    ListChannelPlacementGroupsResult.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOfDescribeChannelPlacementGroupSummary, location_name: "channelPlacementGroups"))
+    ListChannelPlacementGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListChannelPlacementGroupsResult.struct_class = Types::ListChannelPlacementGroupsResult
 
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -3014,6 +3523,18 @@ module Aws::MediaLive
     ListCloudWatchAlarmTemplatesResponseContent.add_member(:cloud_watch_alarm_templates, Shapes::ShapeRef.new(shape: __listOfCloudWatchAlarmTemplateSummary, required: true, location_name: "cloudWatchAlarmTemplates"))
     ListCloudWatchAlarmTemplatesResponseContent.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "nextToken"))
     ListCloudWatchAlarmTemplatesResponseContent.struct_class = Types::ListCloudWatchAlarmTemplatesResponseContent
+
+    ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListClustersRequest.struct_class = Types::ListClustersRequest
+
+    ListClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: __listOfDescribeClusterSummary, location_name: "clusters"))
+    ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListClustersResponse.struct_class = Types::ListClustersResponse
+
+    ListClustersResult.add_member(:clusters, Shapes::ShapeRef.new(shape: __listOfDescribeClusterSummary, location_name: "clusters"))
+    ListClustersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListClustersResult.struct_class = Types::ListClustersResult
 
     ListEventBridgeRuleTemplateGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListEventBridgeRuleTemplateGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -3115,6 +3636,31 @@ module Aws::MediaLive
     ListMultiplexesResultModel.add_member(:multiplexes, Shapes::ShapeRef.new(shape: __listOfMultiplexSummary, location_name: "multiplexes"))
     ListMultiplexesResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListMultiplexesResultModel.struct_class = Types::ListMultiplexesResultModel
+
+    ListNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListNetworksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListNetworksRequest.struct_class = Types::ListNetworksRequest
+
+    ListNetworksResponse.add_member(:networks, Shapes::ShapeRef.new(shape: __listOfDescribeNetworkSummary, location_name: "networks"))
+    ListNetworksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListNetworksResponse.struct_class = Types::ListNetworksResponse
+
+    ListNetworksResult.add_member(:networks, Shapes::ShapeRef.new(shape: __listOfDescribeNetworkSummary, location_name: "networks"))
+    ListNetworksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListNetworksResult.struct_class = Types::ListNetworksResult
+
+    ListNodesRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    ListNodesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListNodesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListNodesRequest.struct_class = Types::ListNodesRequest
+
+    ListNodesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListNodesResponse.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOfDescribeNodeSummary, location_name: "nodes"))
+    ListNodesResponse.struct_class = Types::ListNodesResponse
+
+    ListNodesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListNodesResult.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOfDescribeNodeSummary, location_name: "nodes"))
+    ListNodesResult.struct_class = Types::ListNodesResult
 
     ListOfferingsRequest.add_member(:channel_class, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelClass"))
     ListOfferingsRequest.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelConfiguration"))
@@ -3362,6 +3908,30 @@ module Aws::MediaLive
     MsSmoothOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     MsSmoothOutputSettings.struct_class = Types::MsSmoothOutputSettings
 
+    MulticastInputSettings.add_member(:source_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIpAddress"))
+    MulticastInputSettings.struct_class = Types::MulticastInputSettings
+
+    MulticastSettings.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfMulticastSource, location_name: "sources"))
+    MulticastSettings.struct_class = Types::MulticastSettings
+
+    MulticastSettingsCreateRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfMulticastSourceCreateRequest, location_name: "sources"))
+    MulticastSettingsCreateRequest.struct_class = Types::MulticastSettingsCreateRequest
+
+    MulticastSettingsUpdateRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfMulticastSourceUpdateRequest, location_name: "sources"))
+    MulticastSettingsUpdateRequest.struct_class = Types::MulticastSettingsUpdateRequest
+
+    MulticastSource.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
+    MulticastSource.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSource.struct_class = Types::MulticastSource
+
+    MulticastSourceCreateRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
+    MulticastSourceCreateRequest.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSourceCreateRequest.struct_class = Types::MulticastSourceCreateRequest
+
+    MulticastSourceUpdateRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
+    MulticastSourceUpdateRequest.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSourceUpdateRequest.struct_class = Types::MulticastSourceUpdateRequest
+
     Multiplex.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Multiplex.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
     Multiplex.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMultiplexOutputDestination, location_name: "destinations"))
@@ -3471,6 +4041,7 @@ module Aws::MediaLive
 
     NetworkInputSettings.add_member(:hls_input_settings, Shapes::ShapeRef.new(shape: HlsInputSettings, location_name: "hlsInputSettings"))
     NetworkInputSettings.add_member(:server_validation, Shapes::ShapeRef.new(shape: NetworkInputServerValidation, location_name: "serverValidation"))
+    NetworkInputSettings.add_member(:multicast_input_settings, Shapes::ShapeRef.new(shape: MulticastInputSettings, location_name: "multicastInputSettings"))
     NetworkInputSettings.struct_class = Types::NetworkInputSettings
 
     NielsenCBET.add_member(:cbet_check_digit_string, Shapes::ShapeRef.new(shape: __stringMin2Max2, required: true, location_name: "cbetCheckDigitString"))
@@ -3491,6 +4062,20 @@ module Aws::MediaLive
     NielsenWatermarksSettings.add_member(:nielsen_distribution_type, Shapes::ShapeRef.new(shape: NielsenWatermarksDistributionTypes, location_name: "nielsenDistributionType"))
     NielsenWatermarksSettings.add_member(:nielsen_naes_ii_nw_settings, Shapes::ShapeRef.new(shape: NielsenNaesIiNw, location_name: "nielsenNaesIiNwSettings"))
     NielsenWatermarksSettings.struct_class = Types::NielsenWatermarksSettings
+
+    NodeConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    NodeConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
+    NodeConfigurationValidationError.struct_class = Types::NodeConfigurationValidationError
+
+    NodeInterfaceMapping.add_member(:logical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "logicalInterfaceName"))
+    NodeInterfaceMapping.add_member(:network_interface_mode, Shapes::ShapeRef.new(shape: NetworkInterfaceMode, location_name: "networkInterfaceMode"))
+    NodeInterfaceMapping.add_member(:physical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "physicalInterfaceName"))
+    NodeInterfaceMapping.struct_class = Types::NodeInterfaceMapping
+
+    NodeInterfaceMappingCreateRequest.add_member(:logical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "logicalInterfaceName"))
+    NodeInterfaceMappingCreateRequest.add_member(:network_interface_mode, Shapes::ShapeRef.new(shape: NetworkInterfaceMode, location_name: "networkInterfaceMode"))
+    NodeInterfaceMappingCreateRequest.add_member(:physical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "physicalInterfaceName"))
+    NodeInterfaceMappingCreateRequest.struct_class = Types::NodeInterfaceMappingCreateRequest
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
@@ -3522,6 +4107,7 @@ module Aws::MediaLive
     OutputDestination.add_member(:media_package_settings, Shapes::ShapeRef.new(shape: __listOfMediaPackageOutputDestinationSettings, location_name: "mediaPackageSettings"))
     OutputDestination.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexProgramChannelDestinationSettings, location_name: "multiplexSettings"))
     OutputDestination.add_member(:settings, Shapes::ShapeRef.new(shape: __listOfOutputDestinationSettings, location_name: "settings"))
+    OutputDestination.add_member(:srt_settings, Shapes::ShapeRef.new(shape: __listOfSrtOutputDestinationSettings, location_name: "srtSettings"))
     OutputDestination.struct_class = Types::OutputDestination
 
     OutputDestinationSettings.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
@@ -3544,6 +4130,7 @@ module Aws::MediaLive
     OutputGroupSettings.add_member(:rtmp_group_settings, Shapes::ShapeRef.new(shape: RtmpGroupSettings, location_name: "rtmpGroupSettings"))
     OutputGroupSettings.add_member(:udp_group_settings, Shapes::ShapeRef.new(shape: UdpGroupSettings, location_name: "udpGroupSettings"))
     OutputGroupSettings.add_member(:cmaf_ingest_group_settings, Shapes::ShapeRef.new(shape: CmafIngestGroupSettings, location_name: "cmafIngestGroupSettings"))
+    OutputGroupSettings.add_member(:srt_group_settings, Shapes::ShapeRef.new(shape: SrtGroupSettings, location_name: "srtGroupSettings"))
     OutputGroupSettings.struct_class = Types::OutputGroupSettings
 
     OutputLocationRef.add_member(:destination_ref_id, Shapes::ShapeRef.new(shape: __string, location_name: "destinationRefId"))
@@ -3562,6 +4149,7 @@ module Aws::MediaLive
     OutputSettings.add_member(:rtmp_output_settings, Shapes::ShapeRef.new(shape: RtmpOutputSettings, location_name: "rtmpOutputSettings"))
     OutputSettings.add_member(:udp_output_settings, Shapes::ShapeRef.new(shape: UdpOutputSettings, location_name: "udpOutputSettings"))
     OutputSettings.add_member(:cmaf_ingest_output_settings, Shapes::ShapeRef.new(shape: CmafIngestOutputSettings, location_name: "cmafIngestOutputSettings"))
+    OutputSettings.add_member(:srt_output_settings, Shapes::ShapeRef.new(shape: SrtOutputSettings, location_name: "srtOutputSettings"))
     OutputSettings.struct_class = Types::OutputSettings
 
     PassThroughSettings.struct_class = Types::PassThroughSettings
@@ -3693,7 +4281,20 @@ module Aws::MediaLive
     RestartChannelPipelinesResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     RestartChannelPipelinesResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RestartChannelPipelinesResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    RestartChannelPipelinesResponse.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: DescribeAnywhereSettings, location_name: "anywhereSettings"))
     RestartChannelPipelinesResponse.struct_class = Types::RestartChannelPipelinesResponse
+
+    Route.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    Route.add_member(:gateway, Shapes::ShapeRef.new(shape: __string, location_name: "gateway"))
+    Route.struct_class = Types::Route
+
+    RouteCreateRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    RouteCreateRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: __string, location_name: "gateway"))
+    RouteCreateRequest.struct_class = Types::RouteCreateRequest
+
+    RouteUpdateRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
+    RouteUpdateRequest.add_member(:gateway, Shapes::ShapeRef.new(shape: __string, location_name: "gateway"))
+    RouteUpdateRequest.struct_class = Types::RouteUpdateRequest
 
     RtmpCaptionInfoDestinationSettings.struct_class = Types::RtmpCaptionInfoDestinationSettings
 
@@ -3842,6 +4443,21 @@ module Aws::MediaLive
     SrtCallerSourceRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
     SrtCallerSourceRequest.struct_class = Types::SrtCallerSourceRequest
 
+    SrtGroupSettings.add_member(:input_loss_action, Shapes::ShapeRef.new(shape: InputLossActionForUdpOut, location_name: "inputLossAction"))
+    SrtGroupSettings.struct_class = Types::SrtGroupSettings
+
+    SrtOutputDestinationSettings.add_member(:encryption_passphrase_secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "encryptionPassphraseSecretArn"))
+    SrtOutputDestinationSettings.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
+    SrtOutputDestinationSettings.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
+    SrtOutputDestinationSettings.struct_class = Types::SrtOutputDestinationSettings
+
+    SrtOutputSettings.add_member(:buffer_msec, Shapes::ShapeRef.new(shape: __integerMin0Max10000, location_name: "bufferMsec"))
+    SrtOutputSettings.add_member(:container_settings, Shapes::ShapeRef.new(shape: UdpContainerSettings, required: true, location_name: "containerSettings"))
+    SrtOutputSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    SrtOutputSettings.add_member(:encryption_type, Shapes::ShapeRef.new(shape: SrtEncryptionType, location_name: "encryptionType"))
+    SrtOutputSettings.add_member(:latency, Shapes::ShapeRef.new(shape: __integerMin40Max16000, location_name: "latency"))
+    SrtOutputSettings.struct_class = Types::SrtOutputSettings
+
     SrtSettings.add_member(:srt_caller_sources, Shapes::ShapeRef.new(shape: __listOfSrtCallerSource, location_name: "srtCallerSources"))
     SrtSettings.struct_class = Types::SrtSettings
 
@@ -3873,6 +4489,7 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     StartChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StartChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    StartChannelResponse.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: DescribeAnywhereSettings, location_name: "anywhereSettings"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
     StartDeleteMonitorDeploymentRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
@@ -4109,6 +4726,7 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
     StopChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StopChannelResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    StopChannelResponse.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: DescribeAnywhereSettings, location_name: "anywhereSettings"))
     StopChannelResponse.struct_class = Types::StopChannelResponse
 
     StopInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -4266,6 +4884,21 @@ module Aws::MediaLive
     UpdateChannelClassResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     UpdateChannelClassResponse.struct_class = Types::UpdateChannelClassResponse
 
+    UpdateChannelPlacementGroupRequest.add_member(:channel_placement_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelPlacementGroupId"))
+    UpdateChannelPlacementGroupRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    UpdateChannelPlacementGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateChannelPlacementGroupRequest.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    UpdateChannelPlacementGroupRequest.struct_class = Types::UpdateChannelPlacementGroupRequest
+
+    UpdateChannelPlacementGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateChannelPlacementGroupResponse.add_member(:channels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channels"))
+    UpdateChannelPlacementGroupResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    UpdateChannelPlacementGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateChannelPlacementGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateChannelPlacementGroupResponse.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
+    UpdateChannelPlacementGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelPlacementGroupState, location_name: "state"))
+    UpdateChannelPlacementGroupResponse.struct_class = Types::UpdateChannelPlacementGroupResponse
+
     UpdateChannelRequest.add_member(:cdi_input_specification, Shapes::ShapeRef.new(shape: CdiInputSpecification, location_name: "cdiInputSpecification"))
     UpdateChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     UpdateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -4376,6 +5009,29 @@ module Aws::MediaLive
     UpdateCloudWatchAlarmTemplateResponseContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
     UpdateCloudWatchAlarmTemplateResponseContent.struct_class = Types::UpdateCloudWatchAlarmTemplateResponseContent
 
+    UpdateClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    UpdateClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateClusterRequest.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettingsUpdateRequest, location_name: "networkSettings"))
+    UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
+
+    UpdateClusterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateClusterResponse.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    UpdateClusterResponse.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    UpdateClusterResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateClusterResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateClusterResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettings, location_name: "networkSettings"))
+    UpdateClusterResponse.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    UpdateClusterResponse.struct_class = Types::UpdateClusterResponse
+
+    UpdateClusterResult.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateClusterResult.add_member(:channel_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelIds"))
+    UpdateClusterResult.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    UpdateClusterResult.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateClusterResult.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateClusterResult.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettings, location_name: "networkSettings"))
+    UpdateClusterResult.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    UpdateClusterResult.struct_class = Types::UpdateClusterResult
+
     UpdateEventBridgeRuleTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     UpdateEventBridgeRuleTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
     UpdateEventBridgeRuleTemplateGroupRequest.struct_class = Types::UpdateEventBridgeRuleTemplateGroupRequest
@@ -4448,6 +5104,7 @@ module Aws::MediaLive
     UpdateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     UpdateInput.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
+    UpdateInput.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsUpdateRequest, location_name: "multicastSettings"))
     UpdateInput.struct_class = Types::UpdateInput
 
     UpdateInputDevice.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "hdDeviceSettings"))
@@ -4490,6 +5147,7 @@ module Aws::MediaLive
     UpdateInputRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     UpdateInputRequest.add_member(:srt_settings, Shapes::ShapeRef.new(shape: SrtSettingsRequest, location_name: "srtSettings"))
+    UpdateInputRequest.add_member(:multicast_settings, Shapes::ShapeRef.new(shape: MulticastSettingsUpdateRequest, location_name: "multicastSettings"))
     UpdateInputRequest.struct_class = Types::UpdateInputRequest
 
     UpdateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
@@ -4540,6 +5198,65 @@ module Aws::MediaLive
     UpdateMultiplexResultModel.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))
     UpdateMultiplexResultModel.struct_class = Types::UpdateMultiplexResultModel
 
+    UpdateNetworkRequest.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPoolUpdateRequest, location_name: "ipPools"))
+    UpdateNetworkRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateNetworkRequest.add_member(:network_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "networkId"))
+    UpdateNetworkRequest.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRouteUpdateRequest, location_name: "routes"))
+    UpdateNetworkRequest.struct_class = Types::UpdateNetworkRequest
+
+    UpdateNetworkResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateNetworkResponse.add_member(:associated_cluster_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "associatedClusterIds"))
+    UpdateNetworkResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateNetworkResponse.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPool, location_name: "ipPools"))
+    UpdateNetworkResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateNetworkResponse.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "routes"))
+    UpdateNetworkResponse.add_member(:state, Shapes::ShapeRef.new(shape: NetworkState, location_name: "state"))
+    UpdateNetworkResponse.struct_class = Types::UpdateNetworkResponse
+
+    UpdateNetworkResult.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateNetworkResult.add_member(:associated_cluster_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "associatedClusterIds"))
+    UpdateNetworkResult.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateNetworkResult.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPool, location_name: "ipPools"))
+    UpdateNetworkResult.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateNetworkResult.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "routes"))
+    UpdateNetworkResult.add_member(:state, Shapes::ShapeRef.new(shape: NetworkState, location_name: "state"))
+    UpdateNetworkResult.struct_class = Types::UpdateNetworkResult
+
+    UpdateNodeRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    UpdateNodeRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "nodeId"))
+    UpdateNodeRequest.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    UpdateNodeRequest.struct_class = Types::UpdateNodeRequest
+
+    UpdateNodeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateNodeResponse.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelPlacementGroups"))
+    UpdateNodeResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    UpdateNodeResponse.add_member(:connection_state, Shapes::ShapeRef.new(shape: NodeConnectionState, location_name: "connectionState"))
+    UpdateNodeResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateNodeResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceArn"))
+    UpdateNodeResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateNodeResponse.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    UpdateNodeResponse.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    UpdateNodeResponse.add_member(:state, Shapes::ShapeRef.new(shape: NodeState, location_name: "state"))
+    UpdateNodeResponse.struct_class = Types::UpdateNodeResponse
+
+    UpdateNodeStateRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
+    UpdateNodeStateRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "nodeId"))
+    UpdateNodeStateRequest.add_member(:state, Shapes::ShapeRef.new(shape: UpdateNodeState, location_name: "state"))
+    UpdateNodeStateRequest.struct_class = Types::UpdateNodeStateRequest
+
+    UpdateNodeStateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateNodeStateResponse.add_member(:channel_placement_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelPlacementGroups"))
+    UpdateNodeStateResponse.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, location_name: "clusterId"))
+    UpdateNodeStateResponse.add_member(:connection_state, Shapes::ShapeRef.new(shape: NodeConnectionState, location_name: "connectionState"))
+    UpdateNodeStateResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateNodeStateResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceArn"))
+    UpdateNodeStateResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateNodeStateResponse.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
+    UpdateNodeStateResponse.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
+    UpdateNodeStateResponse.add_member(:state, Shapes::ShapeRef.new(shape: NodeState, location_name: "state"))
+    UpdateNodeStateResponse.struct_class = Types::UpdateNodeStateResponse
+
     UpdateReservation.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateReservation.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
     UpdateReservation.struct_class = Types::UpdateReservation
@@ -4567,6 +5284,7 @@ module Aws::MediaLive
     VideoCodecSettings.add_member(:h264_settings, Shapes::ShapeRef.new(shape: H264Settings, location_name: "h264Settings"))
     VideoCodecSettings.add_member(:h265_settings, Shapes::ShapeRef.new(shape: H265Settings, location_name: "h265Settings"))
     VideoCodecSettings.add_member(:mpeg_2_settings, Shapes::ShapeRef.new(shape: Mpeg2Settings, location_name: "mpeg2Settings"))
+    VideoCodecSettings.add_member(:av_1_settings, Shapes::ShapeRef.new(shape: Av1Settings, location_name: "av1Settings"))
     VideoCodecSettings.struct_class = Types::VideoCodecSettings
 
     VideoDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: VideoCodecSettings, location_name: "codecSettings"))
@@ -4650,6 +5368,14 @@ module Aws::MediaLive
 
     __listOfDashRoleCaption.member = Shapes::ShapeRef.new(shape: DashRoleCaption)
 
+    __listOfDescribeChannelPlacementGroupSummary.member = Shapes::ShapeRef.new(shape: DescribeChannelPlacementGroupSummary)
+
+    __listOfDescribeClusterSummary.member = Shapes::ShapeRef.new(shape: DescribeClusterSummary)
+
+    __listOfDescribeNetworkSummary.member = Shapes::ShapeRef.new(shape: DescribeNetworkSummary)
+
+    __listOfDescribeNodeSummary.member = Shapes::ShapeRef.new(shape: DescribeNodeSummary)
+
     __listOfEventBridgeRuleTemplateGroupSummary.member = Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateGroupSummary)
 
     __listOfEventBridgeRuleTemplateSummary.member = Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateSummary)
@@ -4670,6 +5396,8 @@ module Aws::MediaLive
 
     __listOfInputDestinationRequest.member = Shapes::ShapeRef.new(shape: InputDestinationRequest)
 
+    __listOfInputDestinationRoute.member = Shapes::ShapeRef.new(shape: InputDestinationRoute)
+
     __listOfInputDeviceConfigurableAudioChannelPairConfig.member = Shapes::ShapeRef.new(shape: InputDeviceConfigurableAudioChannelPairConfig)
 
     __listOfInputDeviceRequest.member = Shapes::ShapeRef.new(shape: InputDeviceRequest)
@@ -4679,6 +5407,8 @@ module Aws::MediaLive
     __listOfInputDeviceSummary.member = Shapes::ShapeRef.new(shape: InputDeviceSummary)
 
     __listOfInputDeviceUhdAudioChannelPairConfig.member = Shapes::ShapeRef.new(shape: InputDeviceUhdAudioChannelPairConfig)
+
+    __listOfInputRequestDestinationRoute.member = Shapes::ShapeRef.new(shape: InputRequestDestinationRoute)
 
     __listOfInputSecurityGroup.member = Shapes::ShapeRef.new(shape: InputSecurityGroup)
 
@@ -4690,6 +5420,18 @@ module Aws::MediaLive
 
     __listOfInputWhitelistRuleCidr.member = Shapes::ShapeRef.new(shape: InputWhitelistRuleCidr)
 
+    __listOfInterfaceMapping.member = Shapes::ShapeRef.new(shape: InterfaceMapping)
+
+    __listOfInterfaceMappingCreateRequest.member = Shapes::ShapeRef.new(shape: InterfaceMappingCreateRequest)
+
+    __listOfInterfaceMappingUpdateRequest.member = Shapes::ShapeRef.new(shape: InterfaceMappingUpdateRequest)
+
+    __listOfIpPool.member = Shapes::ShapeRef.new(shape: IpPool)
+
+    __listOfIpPoolCreateRequest.member = Shapes::ShapeRef.new(shape: IpPoolCreateRequest)
+
+    __listOfIpPoolUpdateRequest.member = Shapes::ShapeRef.new(shape: IpPoolUpdateRequest)
+
     __listOfMediaConnectFlow.member = Shapes::ShapeRef.new(shape: MediaConnectFlow)
 
     __listOfMediaConnectFlowRequest.member = Shapes::ShapeRef.new(shape: MediaConnectFlowRequest)
@@ -4698,6 +5440,12 @@ module Aws::MediaLive
 
     __listOfMediaResourceNeighbor.member = Shapes::ShapeRef.new(shape: MediaResourceNeighbor)
 
+    __listOfMulticastSource.member = Shapes::ShapeRef.new(shape: MulticastSource)
+
+    __listOfMulticastSourceCreateRequest.member = Shapes::ShapeRef.new(shape: MulticastSourceCreateRequest)
+
+    __listOfMulticastSourceUpdateRequest.member = Shapes::ShapeRef.new(shape: MulticastSourceUpdateRequest)
+
     __listOfMultiplexOutputDestination.member = Shapes::ShapeRef.new(shape: MultiplexOutputDestination)
 
     __listOfMultiplexProgramPipelineDetail.member = Shapes::ShapeRef.new(shape: MultiplexProgramPipelineDetail)
@@ -4705,6 +5453,10 @@ module Aws::MediaLive
     __listOfMultiplexProgramSummary.member = Shapes::ShapeRef.new(shape: MultiplexProgramSummary)
 
     __listOfMultiplexSummary.member = Shapes::ShapeRef.new(shape: MultiplexSummary)
+
+    __listOfNodeInterfaceMapping.member = Shapes::ShapeRef.new(shape: NodeInterfaceMapping)
+
+    __listOfNodeInterfaceMappingCreateRequest.member = Shapes::ShapeRef.new(shape: NodeInterfaceMappingCreateRequest)
 
     __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
 
@@ -4722,6 +5474,12 @@ module Aws::MediaLive
 
     __listOfReservation.member = Shapes::ShapeRef.new(shape: Reservation)
 
+    __listOfRoute.member = Shapes::ShapeRef.new(shape: Route)
+
+    __listOfRouteCreateRequest.member = Shapes::ShapeRef.new(shape: RouteCreateRequest)
+
+    __listOfRouteUpdateRequest.member = Shapes::ShapeRef.new(shape: RouteUpdateRequest)
+
     __listOfRtmpAdMarkers.member = Shapes::ShapeRef.new(shape: RtmpAdMarkers)
 
     __listOfScheduleAction.member = Shapes::ShapeRef.new(shape: ScheduleAction)
@@ -4733,6 +5491,8 @@ module Aws::MediaLive
     __listOfSrtCallerSource.member = Shapes::ShapeRef.new(shape: SrtCallerSource)
 
     __listOfSrtCallerSourceRequest.member = Shapes::ShapeRef.new(shape: SrtCallerSourceRequest)
+
+    __listOfSrtOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: SrtOutputDestinationSettings)
 
     __listOfThumbnail.member = Shapes::ShapeRef.new(shape: Thumbnail)
 
@@ -6219,6 +6979,362 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_channel_placement_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateChannelPlacementGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/clusters/{clusterId}/channelplacementgroups"
+        o.input = Shapes::ShapeRef.new(shape: CreateChannelPlacementGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateChannelPlacementGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/clusters"
+        o.input = Shapes::ShapeRef.new(shape: CreateClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNetwork"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/networks"
+        o.input = Shapes::ShapeRef.new(shape: CreateNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNetworkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNode"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/clusters/{clusterId}/nodes"
+        o.input = Shapes::ShapeRef.new(shape: CreateNodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_node_registration_script, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNodeRegistrationScript"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/clusters/{clusterId}/nodeRegistrationScript"
+        o.input = Shapes::ShapeRef.new(shape: CreateNodeRegistrationScriptRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNodeRegistrationScriptResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_channel_placement_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteChannelPlacementGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/clusters/{clusterId}/channelplacementgroups/{channelPlacementGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteChannelPlacementGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteChannelPlacementGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCluster"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/clusters/{clusterId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNetwork"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/networks/{networkId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNetworkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNode"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/clusters/{clusterId}/nodes/{nodeId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:describe_channel_placement_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeChannelPlacementGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/clusters/{clusterId}/channelplacementgroups/{channelPlacementGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeChannelPlacementGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeChannelPlacementGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCluster"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/clusters/{clusterId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNetwork"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/networks/{networkId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNetworkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNode"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/clusters/{clusterId}/nodes/{nodeId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:list_channel_placement_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListChannelPlacementGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/clusters/{clusterId}/channelplacementgroups"
+        o.input = Shapes::ShapeRef.new(shape: ListChannelPlacementGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListChannelPlacementGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_clusters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClusters"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/clusters"
+        o.input = Shapes::ShapeRef.new(shape: ListClustersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListClustersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_networks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNetworks"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/networks"
+        o.input = Shapes::ShapeRef.new(shape: ListNetworksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNetworksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_nodes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNodes"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/clusters/{clusterId}/nodes"
+        o.input = Shapes::ShapeRef.new(shape: ListNodesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNodesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:update_channel_placement_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannelPlacementGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/clusters/{clusterId}/channelplacementgroups/{channelPlacementGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelPlacementGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelPlacementGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCluster"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/clusters/{clusterId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_network, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNetwork"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/networks/{networkId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNetworkRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNetworkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNode"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/clusters/{clusterId}/nodes/{nodeId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_node_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNodeState"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/clusters/{clusterId}/nodes/{nodeId}/state"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNodeStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNodeStateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)

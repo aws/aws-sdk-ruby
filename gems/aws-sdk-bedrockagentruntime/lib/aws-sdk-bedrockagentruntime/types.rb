@@ -1985,12 +1985,16 @@ module Aws::BedrockAgentRuntime
     #   @return [Types::GenerationConfiguration]
     #
     # @!attribute [rw] knowledge_base_id
-    #   The unique identifier of the knowledge base that is queried and the
-    #   foundation model used for generation.
+    #   The unique identifier of the knowledge base that is queried.
     #   @return [String]
     #
     # @!attribute [rw] model_arn
-    #   The ARN of the foundation model used to generate a response.
+    #   The ARN of the foundation model or [inference profile][1] used to
+    #   generate a response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
     #   @return [String]
     #
     # @!attribute [rw] orchestration_configuration
