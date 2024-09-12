@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-09-12)
+------------------
+
+* Feature - Added email MFA option to user pools with advanced security features.
+
 1.103.0 (2024-09-11)
 ------------------
 

@@ -108,6 +108,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionDestinationType = Shapes::StringShape.new(name: 'CaptionDestinationType')
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
+    CaptionSourceByteRateLimit = Shapes::StringShape.new(name: 'CaptionSourceByteRateLimit')
     CaptionSourceConvertPaintOnToPopOn = Shapes::StringShape.new(name: 'CaptionSourceConvertPaintOnToPopOn')
     CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
     CaptionSourceSettings = Shapes::StructureShape.new(name: 'CaptionSourceSettings')
@@ -302,6 +303,7 @@ module Aws::MediaConvert
     H264QvbrSettings = Shapes::StructureShape.new(name: 'H264QvbrSettings')
     H264RateControlMode = Shapes::StringShape.new(name: 'H264RateControlMode')
     H264RepeatPps = Shapes::StringShape.new(name: 'H264RepeatPps')
+    H264SaliencyAwareEncoding = Shapes::StringShape.new(name: 'H264SaliencyAwareEncoding')
     H264ScanTypeConversionMode = Shapes::StringShape.new(name: 'H264ScanTypeConversionMode')
     H264SceneChangeDetect = Shapes::StringShape.new(name: 'H264SceneChangeDetect')
     H264Settings = Shapes::StructureShape.new(name: 'H264Settings')
@@ -399,6 +401,7 @@ module Aws::MediaConvert
     InsertableImage = Shapes::StructureShape.new(name: 'InsertableImage')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     Job = Shapes::StructureShape.new(name: 'Job')
+    JobEngineVersion = Shapes::StructureShape.new(name: 'JobEngineVersion')
     JobMessages = Shapes::StructureShape.new(name: 'JobMessages')
     JobPhase = Shapes::StringShape.new(name: 'JobPhase')
     JobSettings = Shapes::StructureShape.new(name: 'JobSettings')
@@ -418,6 +421,8 @@ module Aws::MediaConvert
     ListQueuesResponse = Shapes::StructureShape.new(name: 'ListQueuesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListVersionsRequest = Shapes::StructureShape.new(name: 'ListVersionsRequest')
+    ListVersionsResponse = Shapes::StructureShape.new(name: 'ListVersionsResponse')
     M2tsAudioBufferModel = Shapes::StringShape.new(name: 'M2tsAudioBufferModel')
     M2tsAudioDuration = Shapes::StringShape.new(name: 'M2tsAudioDuration')
     M2tsBufferModel = Shapes::StringShape.new(name: 'M2tsBufferModel')
@@ -630,6 +635,10 @@ module Aws::MediaConvert
     VideoOverlay = Shapes::StructureShape.new(name: 'VideoOverlay')
     VideoOverlayInput = Shapes::StructureShape.new(name: 'VideoOverlayInput')
     VideoOverlayInputClipping = Shapes::StructureShape.new(name: 'VideoOverlayInputClipping')
+    VideoOverlayPlayBackMode = Shapes::StringShape.new(name: 'VideoOverlayPlayBackMode')
+    VideoOverlayPosition = Shapes::StructureShape.new(name: 'VideoOverlayPosition')
+    VideoOverlayTransition = Shapes::StructureShape.new(name: 'VideoOverlayTransition')
+    VideoOverlayUnit = Shapes::StringShape.new(name: 'VideoOverlayUnit')
     VideoPreprocessor = Shapes::StructureShape.new(name: 'VideoPreprocessor')
     VideoSelector = Shapes::StructureShape.new(name: 'VideoSelector')
     VideoTimecodeInsertion = Shapes::StringShape.new(name: 'VideoTimecodeInsertion')
@@ -785,6 +794,7 @@ module Aws::MediaConvert
     __integerMinNegative1000Max1000 = Shapes::IntegerShape.new(name: '__integerMinNegative1000Max1000')
     __integerMinNegative180Max180 = Shapes::IntegerShape.new(name: '__integerMinNegative180Max180')
     __integerMinNegative1Max10 = Shapes::IntegerShape.new(name: '__integerMinNegative1Max10')
+    __integerMinNegative1Max2147483647 = Shapes::IntegerShape.new(name: '__integerMinNegative1Max2147483647')
     __integerMinNegative1Max3 = Shapes::IntegerShape.new(name: '__integerMinNegative1Max3')
     __integerMinNegative2147483648Max2147483647 = Shapes::IntegerShape.new(name: '__integerMinNegative2147483648Max2147483647')
     __integerMinNegative2Max3 = Shapes::IntegerShape.new(name: '__integerMinNegative2Max3')
@@ -813,6 +823,7 @@ module Aws::MediaConvert
     __listOfInputTemplate = Shapes::ListShape.new(name: '__listOfInputTemplate')
     __listOfInsertableImage = Shapes::ListShape.new(name: '__listOfInsertableImage')
     __listOfJob = Shapes::ListShape.new(name: '__listOfJob')
+    __listOfJobEngineVersion = Shapes::ListShape.new(name: '__listOfJobEngineVersion')
     __listOfJobTemplate = Shapes::ListShape.new(name: '__listOfJobTemplate')
     __listOfMsSmoothAdditionalManifest = Shapes::ListShape.new(name: '__listOfMsSmoothAdditionalManifest')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
@@ -826,6 +837,7 @@ module Aws::MediaConvert
     __listOfTeletextPageType = Shapes::ListShape.new(name: '__listOfTeletextPageType')
     __listOfVideoOverlay = Shapes::ListShape.new(name: '__listOfVideoOverlay')
     __listOfVideoOverlayInputClipping = Shapes::ListShape.new(name: '__listOfVideoOverlayInputClipping')
+    __listOfVideoOverlayTransition = Shapes::ListShape.new(name: '__listOfVideoOverlayTransition')
     __listOfWarningGroup = Shapes::ListShape.new(name: '__listOfWarningGroup')
     __listOf__doubleMinNegative60Max6 = Shapes::ListShape.new(name: '__listOf__doubleMinNegative60Max6')
     __listOf__integerMin1Max2147483647 = Shapes::ListShape.new(name: '__listOf__integerMin1Max2147483647')
@@ -1251,6 +1263,7 @@ module Aws::MediaConvert
     CreateJobRequest.add_member(:billing_tags_source, Shapes::ShapeRef.new(shape: BillingTagsSource, location_name: "billingTagsSource"))
     CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateJobRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
+    CreateJobRequest.add_member(:job_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "jobEngineVersion"))
     CreateJobRequest.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
     CreateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
     CreateJobRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
@@ -1522,6 +1535,7 @@ module Aws::MediaConvert
     FileGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
     FileGroupSettings.struct_class = Types::FileGroupSettings
 
+    FileSourceSettings.add_member(:byte_rate_limit, Shapes::ShapeRef.new(shape: CaptionSourceByteRateLimit, location_name: "byteRateLimit"))
     FileSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: FileSourceConvert608To708, location_name: "convert608To708"))
     FileSourceSettings.add_member(:convert_paint_to_pop, Shapes::ShapeRef.new(shape: CaptionSourceConvertPaintOnToPopOn, location_name: "convertPaintToPop"))
     FileSourceSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: CaptionSourceFramerate, location_name: "framerate"))
@@ -1615,6 +1629,7 @@ module Aws::MediaConvert
     H264Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: H264QvbrSettings, location_name: "qvbrSettings"))
     H264Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H264RateControlMode, location_name: "rateControlMode"))
     H264Settings.add_member(:repeat_pps, Shapes::ShapeRef.new(shape: H264RepeatPps, location_name: "repeatPps"))
+    H264Settings.add_member(:saliency_aware_encoding, Shapes::ShapeRef.new(shape: H264SaliencyAwareEncoding, location_name: "saliencyAwareEncoding"))
     H264Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: H264ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     H264Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: H264SceneChangeDetect, location_name: "sceneChangeDetect"))
     H264Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
@@ -1881,6 +1896,8 @@ module Aws::MediaConvert
     Job.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     Job.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     Job.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Job.add_member(:job_engine_version_requested, Shapes::ShapeRef.new(shape: __string, location_name: "jobEngineVersionRequested"))
+    Job.add_member(:job_engine_version_used, Shapes::ShapeRef.new(shape: __string, location_name: "jobEngineVersionUsed"))
     Job.add_member(:job_percent_complete, Shapes::ShapeRef.new(shape: __integer, location_name: "jobPercentComplete"))
     Job.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
     Job.add_member(:messages, Shapes::ShapeRef.new(shape: JobMessages, location_name: "messages"))
@@ -1898,6 +1915,10 @@ module Aws::MediaConvert
     Job.add_member(:user_metadata, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "userMetadata"))
     Job.add_member(:warnings, Shapes::ShapeRef.new(shape: __listOfWarningGroup, location_name: "warnings"))
     Job.struct_class = Types::Job
+
+    JobEngineVersion.add_member(:expiration_date, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "expirationDate"))
+    JobEngineVersion.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "version"))
+    JobEngineVersion.struct_class = Types::JobEngineVersion
 
     JobMessages.add_member(:info, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "info"))
     JobMessages.add_member(:warning, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "warning"))
@@ -2013,6 +2034,14 @@ module Aws::MediaConvert
 
     ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTags, location_name: "resourceTags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max20, location: "querystring", location_name: "maxResults"))
+    ListVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListVersionsRequest.struct_class = Types::ListVersionsRequest
+
+    ListVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: __listOfJobEngineVersion, location_name: "versions"))
+    ListVersionsResponse.struct_class = Types::ListVersionsResponse
 
     M2tsScte35Esam.add_member(:scte_35_esam_pid, Shapes::ShapeRef.new(shape: __integerMin32Max8182, location_name: "scte35EsamPid"))
     M2tsScte35Esam.struct_class = Types::M2tsScte35Esam
@@ -2581,8 +2610,11 @@ module Aws::MediaConvert
     VideoDetail.struct_class = Types::VideoDetail
 
     VideoOverlay.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
+    VideoOverlay.add_member(:initial_position, Shapes::ShapeRef.new(shape: VideoOverlayPosition, location_name: "initialPosition"))
     VideoOverlay.add_member(:input, Shapes::ShapeRef.new(shape: VideoOverlayInput, location_name: "input"))
+    VideoOverlay.add_member(:playback, Shapes::ShapeRef.new(shape: VideoOverlayPlayBackMode, location_name: "playback"))
     VideoOverlay.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
+    VideoOverlay.add_member(:transitions, Shapes::ShapeRef.new(shape: __listOfVideoOverlayTransition, location_name: "transitions"))
     VideoOverlay.struct_class = Types::VideoOverlay
 
     VideoOverlayInput.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringPatternS3Https, location_name: "fileInput"))
@@ -2591,9 +2623,21 @@ module Aws::MediaConvert
     VideoOverlayInput.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
     VideoOverlayInput.struct_class = Types::VideoOverlayInput
 
-    VideoOverlayInputClipping.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
-    VideoOverlayInputClipping.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
+    VideoOverlayInputClipping.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092090909, location_name: "endTimecode"))
+    VideoOverlayInputClipping.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092090909, location_name: "startTimecode"))
     VideoOverlayInputClipping.struct_class = Types::VideoOverlayInputClipping
+
+    VideoOverlayPosition.add_member(:height, Shapes::ShapeRef.new(shape: __integerMinNegative1Max2147483647, location_name: "height"))
+    VideoOverlayPosition.add_member(:unit, Shapes::ShapeRef.new(shape: VideoOverlayUnit, location_name: "unit"))
+    VideoOverlayPosition.add_member(:width, Shapes::ShapeRef.new(shape: __integerMinNegative1Max2147483647, location_name: "width"))
+    VideoOverlayPosition.add_member(:x_position, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "xPosition"))
+    VideoOverlayPosition.add_member(:y_position, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "yPosition"))
+    VideoOverlayPosition.struct_class = Types::VideoOverlayPosition
+
+    VideoOverlayTransition.add_member(:end_position, Shapes::ShapeRef.new(shape: VideoOverlayPosition, location_name: "endPosition"))
+    VideoOverlayTransition.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
+    VideoOverlayTransition.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
+    VideoOverlayTransition.struct_class = Types::VideoOverlayTransition
 
     VideoPreprocessor.add_member(:color_corrector, Shapes::ShapeRef.new(shape: ColorCorrector, location_name: "colorCorrector"))
     VideoPreprocessor.add_member(:deinterlacer, Shapes::ShapeRef.new(shape: Deinterlacer, location_name: "deinterlacer"))
@@ -2762,6 +2806,8 @@ module Aws::MediaConvert
 
     __listOfJob.member = Shapes::ShapeRef.new(shape: Job)
 
+    __listOfJobEngineVersion.member = Shapes::ShapeRef.new(shape: JobEngineVersion)
+
     __listOfJobTemplate.member = Shapes::ShapeRef.new(shape: JobTemplate)
 
     __listOfMsSmoothAdditionalManifest.member = Shapes::ShapeRef.new(shape: MsSmoothAdditionalManifest)
@@ -2787,6 +2833,8 @@ module Aws::MediaConvert
     __listOfVideoOverlay.member = Shapes::ShapeRef.new(shape: VideoOverlay)
 
     __listOfVideoOverlayInputClipping.member = Shapes::ShapeRef.new(shape: VideoOverlayInputClipping)
+
+    __listOfVideoOverlayTransition.member = Shapes::ShapeRef.new(shape: VideoOverlayTransition)
 
     __listOfWarningGroup.member = Shapes::ShapeRef.new(shape: WarningGroup)
 
@@ -3177,6 +3225,26 @@ module Aws::MediaConvert
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:list_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/2017-08-29/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_policy, Seahorse::Model::Operation.new.tap do |o|

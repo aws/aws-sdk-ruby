@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2024-09-12)
+------------------
+
+* Feature - The S3 File Gateway now supports DSSE-KMS encryption. A new parameter EncryptionType is added to these APIs: CreateSmbFileShare, CreateNfsFileShare, UpdateSmbFileShare, UpdateNfsFileShare, DescribeSmbFileShares, DescribeNfsFileShares. Also, in favor of EncryptionType, KmsEncrypted is deprecated.
+
 1.94.0 (2024-09-11)
 ------------------
 

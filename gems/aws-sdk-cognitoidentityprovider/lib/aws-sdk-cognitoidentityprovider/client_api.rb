@@ -202,6 +202,10 @@ module Aws::CognitoIdentityProvider
     DuplicateProviderException = Shapes::StructureShape.new(name: 'DuplicateProviderException')
     EmailAddressType = Shapes::StringShape.new(name: 'EmailAddressType')
     EmailConfigurationType = Shapes::StructureShape.new(name: 'EmailConfigurationType')
+    EmailMfaConfigType = Shapes::StructureShape.new(name: 'EmailMfaConfigType')
+    EmailMfaMessageType = Shapes::StringShape.new(name: 'EmailMfaMessageType')
+    EmailMfaSettingsType = Shapes::StructureShape.new(name: 'EmailMfaSettingsType')
+    EmailMfaSubjectType = Shapes::StringShape.new(name: 'EmailMfaSubjectType')
     EmailNotificationBodyType = Shapes::StringShape.new(name: 'EmailNotificationBodyType')
     EmailNotificationSubjectType = Shapes::StringShape.new(name: 'EmailNotificationSubjectType')
     EmailSendingAccountType = Shapes::StringShape.new(name: 'EmailSendingAccountType')
@@ -691,6 +695,7 @@ module Aws::CognitoIdentityProvider
 
     AdminSetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, Shapes::ShapeRef.new(shape: SMSMfaSettingsType, location_name: "SMSMfaSettings"))
     AdminSetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, Shapes::ShapeRef.new(shape: SoftwareTokenMfaSettingsType, location_name: "SoftwareTokenMfaSettings"))
+    AdminSetUserMFAPreferenceRequest.add_member(:email_mfa_settings, Shapes::ShapeRef.new(shape: EmailMfaSettingsType, location_name: "EmailMfaSettings"))
     AdminSetUserMFAPreferenceRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
     AdminSetUserMFAPreferenceRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     AdminSetUserMFAPreferenceRequest.struct_class = Types::AdminSetUserMFAPreferenceRequest
@@ -1132,6 +1137,14 @@ module Aws::CognitoIdentityProvider
     EmailConfigurationType.add_member(:configuration_set, Shapes::ShapeRef.new(shape: SESConfigurationSet, location_name: "ConfigurationSet"))
     EmailConfigurationType.struct_class = Types::EmailConfigurationType
 
+    EmailMfaConfigType.add_member(:message, Shapes::ShapeRef.new(shape: EmailMfaMessageType, location_name: "Message"))
+    EmailMfaConfigType.add_member(:subject, Shapes::ShapeRef.new(shape: EmailMfaSubjectType, location_name: "Subject"))
+    EmailMfaConfigType.struct_class = Types::EmailMfaConfigType
+
+    EmailMfaSettingsType.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled"))
+    EmailMfaSettingsType.add_member(:preferred_mfa, Shapes::ShapeRef.new(shape: BooleanType, location_name: "PreferredMfa"))
+    EmailMfaSettingsType.struct_class = Types::EmailMfaSettingsType
+
     EnableSoftwareTokenMFAException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     EnableSoftwareTokenMFAException.struct_class = Types::EnableSoftwareTokenMFAException
 
@@ -1240,6 +1253,7 @@ module Aws::CognitoIdentityProvider
 
     GetUserPoolMfaConfigResponse.add_member(:sms_mfa_configuration, Shapes::ShapeRef.new(shape: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
     GetUserPoolMfaConfigResponse.add_member(:software_token_mfa_configuration, Shapes::ShapeRef.new(shape: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
+    GetUserPoolMfaConfigResponse.add_member(:email_mfa_configuration, Shapes::ShapeRef.new(shape: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
     GetUserPoolMfaConfigResponse.add_member(:mfa_configuration, Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
     GetUserPoolMfaConfigResponse.struct_class = Types::GetUserPoolMfaConfigResponse
 
@@ -1655,6 +1669,7 @@ module Aws::CognitoIdentityProvider
 
     SetUserMFAPreferenceRequest.add_member(:sms_mfa_settings, Shapes::ShapeRef.new(shape: SMSMfaSettingsType, location_name: "SMSMfaSettings"))
     SetUserMFAPreferenceRequest.add_member(:software_token_mfa_settings, Shapes::ShapeRef.new(shape: SoftwareTokenMfaSettingsType, location_name: "SoftwareTokenMfaSettings"))
+    SetUserMFAPreferenceRequest.add_member(:email_mfa_settings, Shapes::ShapeRef.new(shape: EmailMfaSettingsType, location_name: "EmailMfaSettings"))
     SetUserMFAPreferenceRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     SetUserMFAPreferenceRequest.struct_class = Types::SetUserMFAPreferenceRequest
 
@@ -1663,11 +1678,13 @@ module Aws::CognitoIdentityProvider
     SetUserPoolMfaConfigRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     SetUserPoolMfaConfigRequest.add_member(:sms_mfa_configuration, Shapes::ShapeRef.new(shape: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
     SetUserPoolMfaConfigRequest.add_member(:software_token_mfa_configuration, Shapes::ShapeRef.new(shape: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
+    SetUserPoolMfaConfigRequest.add_member(:email_mfa_configuration, Shapes::ShapeRef.new(shape: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
     SetUserPoolMfaConfigRequest.add_member(:mfa_configuration, Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
     SetUserPoolMfaConfigRequest.struct_class = Types::SetUserPoolMfaConfigRequest
 
     SetUserPoolMfaConfigResponse.add_member(:sms_mfa_configuration, Shapes::ShapeRef.new(shape: SmsMfaConfigType, location_name: "SmsMfaConfiguration"))
     SetUserPoolMfaConfigResponse.add_member(:software_token_mfa_configuration, Shapes::ShapeRef.new(shape: SoftwareTokenMfaConfigType, location_name: "SoftwareTokenMfaConfiguration"))
+    SetUserPoolMfaConfigResponse.add_member(:email_mfa_configuration, Shapes::ShapeRef.new(shape: EmailMfaConfigType, location_name: "EmailMfaConfiguration"))
     SetUserPoolMfaConfigResponse.add_member(:mfa_configuration, Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
     SetUserPoolMfaConfigResponse.struct_class = Types::SetUserPoolMfaConfigResponse
 
@@ -2298,6 +2315,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
         o.errors << Shapes::ShapeRef.new(shape: MFAMethodNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
         o.errors << Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
@@ -2430,6 +2448,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: MFAMethodNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
         o.errors << Shapes::ShapeRef.new(shape: AliasExistsException)
@@ -3217,6 +3236,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
@@ -3450,6 +3470,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: AliasExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: SoftwareTokenMFANotFoundException)

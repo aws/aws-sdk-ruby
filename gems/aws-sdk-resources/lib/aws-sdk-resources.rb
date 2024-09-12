@@ -385,7 +385,6 @@ module Aws
   autoload :WAFV2, 'aws-sdk-wafv2'
   autoload :WellArchitected, 'aws-sdk-wellarchitected'
   autoload :WorkDocs, 'aws-sdk-workdocs'
-  autoload :WorkLink, 'aws-sdk-worklink'
   autoload :WorkMail, 'aws-sdk-workmail'
   autoload :WorkMailMessageFlow, 'aws-sdk-workmailmessageflow'
   autoload :WorkSpaces, 'aws-sdk-workspaces'

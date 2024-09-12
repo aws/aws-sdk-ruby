@@ -254,6 +254,17 @@ module Aws::MediaConvert
       end
     end
 
+    class ListVersions
+      def self.build(context)
+        Aws::MediaConvert::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class PutPolicy
       def self.build(context)
         Aws::MediaConvert::EndpointParameters.new(

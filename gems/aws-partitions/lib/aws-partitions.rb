@@ -622,7 +622,6 @@ module Aws
             'WAFV2' => 'wafv2',
             'WellArchitected' => 'wellarchitected',
             'WorkDocs' => 'workdocs',
-            'WorkLink' => 'worklink',
             'WorkMail' => 'workmail',
             'WorkMailMessageFlow' => 'workmailmessageflow',
             'WorkSpaces' => 'workspaces',

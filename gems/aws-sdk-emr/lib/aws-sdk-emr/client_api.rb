@@ -798,6 +798,7 @@ module Aws::EMR
     InstanceFleetModifyConfig.add_member(:target_on_demand_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetOnDemandCapacity"))
     InstanceFleetModifyConfig.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
     InstanceFleetModifyConfig.add_member(:resize_specifications, Shapes::ShapeRef.new(shape: InstanceFleetResizingSpecifications, location_name: "ResizeSpecifications"))
+    InstanceFleetModifyConfig.add_member(:instance_type_configs, Shapes::ShapeRef.new(shape: InstanceTypeConfigList, location_name: "InstanceTypeConfigs"))
     InstanceFleetModifyConfig.struct_class = Types::InstanceFleetModifyConfig
 
     InstanceFleetProvisioningSpecifications.add_member(:spot_specification, Shapes::ShapeRef.new(shape: SpotProvisioningSpecification, location_name: "SpotSpecification"))
@@ -1228,7 +1229,9 @@ module Aws::EMR
     OnDemandProvisioningSpecification.add_member(:capacity_reservation_options, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationOptions, location_name: "CapacityReservationOptions"))
     OnDemandProvisioningSpecification.struct_class = Types::OnDemandProvisioningSpecification
 
-    OnDemandResizingSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "TimeoutDurationMinutes"))
+    OnDemandResizingSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutDurationMinutes"))
+    OnDemandResizingSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandProvisioningAllocationStrategy, location_name: "AllocationStrategy"))
+    OnDemandResizingSpecification.add_member(:capacity_reservation_options, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationOptions, location_name: "CapacityReservationOptions"))
     OnDemandResizingSpecification.struct_class = Types::OnDemandResizingSpecification
 
     OutputNotebookS3LocationForOutput.add_member(:bucket, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Bucket"))
@@ -1433,7 +1436,8 @@ module Aws::EMR
     SpotProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotProvisioningAllocationStrategy, location_name: "AllocationStrategy"))
     SpotProvisioningSpecification.struct_class = Types::SpotProvisioningSpecification
 
-    SpotResizingSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "TimeoutDurationMinutes"))
+    SpotResizingSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutDurationMinutes"))
+    SpotResizingSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotProvisioningAllocationStrategy, location_name: "AllocationStrategy"))
     SpotResizingSpecification.struct_class = Types::SpotResizingSpecification
 
     StartNotebookExecutionInput.add_member(:editor_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "EditorId"))

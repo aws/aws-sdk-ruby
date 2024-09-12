@@ -108,7 +108,7 @@ module Aws::ElasticLoadBalancingV2
               {
                 "state" => "retry",
                 "matcher" => "error",
-                "expected" => "LoadBalancerNotFoundException"
+                "expected" => "LoadBalancerNotFound"
               }
             ]
           )
@@ -149,7 +149,7 @@ module Aws::ElasticLoadBalancingV2
               },
               {
                 "matcher" => "error",
-                "expected" => "LoadBalancerNotFoundException",
+                "expected" => "LoadBalancerNotFound",
                 "state" => "retry"
               }
             ]
@@ -192,7 +192,7 @@ module Aws::ElasticLoadBalancingV2
               },
               {
                 "matcher" => "error",
-                "expected" => "LoadBalancerNotFoundException",
+                "expected" => "LoadBalancerNotFound",
                 "state" => "success"
               }
             ]

@@ -292,7 +292,7 @@ module Aws
                                            catalog_id: ::String?,
                                            database_name: ::String?,
                                            table_name: ::String?,
-                                           type: ("compaction")?
+                                           type: ("compaction" | "retention" | "orphan_file_deletion")?
                                          },
                                        ]
                                      ) -> _BatchGetTableOptimizerResponseSuccess
@@ -2390,10 +2390,23 @@ module Aws
                                     catalog_id: ::String,
                                     database_name: ::String,
                                     table_name: ::String,
-                                    type: ("compaction"),
+                                    type: ("compaction" | "retention" | "orphan_file_deletion"),
                                     table_optimizer_configuration: {
                                       role_arn: ::String?,
-                                      enabled: bool?
+                                      enabled: bool?,
+                                      retention_configuration: {
+                                        iceberg_configuration: {
+                                          snapshot_retention_period_in_days: ::Integer?,
+                                          number_of_snapshots_to_retain: ::Integer?,
+                                          clean_expired_files: bool?
+                                        }?
+                                      }?,
+                                      orphan_file_deletion_configuration: {
+                                        iceberg_configuration: {
+                                          orphan_file_retention_period_in_days: ::Integer?,
+                                          location: ::String?
+                                        }?
+                                      }?
                                     }
                                   ) -> _CreateTableOptimizerResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableOptimizerResponseSuccess
@@ -2745,7 +2758,7 @@ module Aws
                                     catalog_id: ::String,
                                     database_name: ::String,
                                     table_name: ::String,
-                                    type: ("compaction")
+                                    type: ("compaction" | "retention" | "orphan_file_deletion")
                                   ) -> _DeleteTableOptimizerResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTableOptimizerResponseSuccess
 
@@ -3697,7 +3710,7 @@ module Aws
                                  catalog_id: ::String,
                                  database_name: ::String,
                                  table_name: ::String,
-                                 type: ("compaction")
+                                 type: ("compaction" | "retention" | "orphan_file_deletion")
                                ) -> _GetTableOptimizerResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableOptimizerResponseSuccess
 
@@ -4339,7 +4352,7 @@ module Aws
                                        catalog_id: ::String,
                                        database_name: ::String,
                                        table_name: ::String,
-                                       type: ("compaction"),
+                                       type: ("compaction" | "retention" | "orphan_file_deletion"),
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
                                      ) -> _ListTableOptimizerRunsResponseSuccess
@@ -6806,10 +6819,23 @@ module Aws
                                     catalog_id: ::String,
                                     database_name: ::String,
                                     table_name: ::String,
-                                    type: ("compaction"),
+                                    type: ("compaction" | "retention" | "orphan_file_deletion"),
                                     table_optimizer_configuration: {
                                       role_arn: ::String?,
-                                      enabled: bool?
+                                      enabled: bool?,
+                                      retention_configuration: {
+                                        iceberg_configuration: {
+                                          snapshot_retention_period_in_days: ::Integer?,
+                                          number_of_snapshots_to_retain: ::Integer?,
+                                          clean_expired_files: bool?
+                                        }?
+                                      }?,
+                                      orphan_file_deletion_configuration: {
+                                        iceberg_configuration: {
+                                          orphan_file_retention_period_in_days: ::Integer?,
+                                          location: ::String?
+                                        }?
+                                      }?
                                     }
                                   ) -> _UpdateTableOptimizerResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableOptimizerResponseSuccess

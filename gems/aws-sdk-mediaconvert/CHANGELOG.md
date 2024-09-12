@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2024-09-12)
+------------------
+
+* Feature - This release includes support for dynamic video overlay workflows, including picture-in-picture and squeezeback
+
 1.137.0 (2024-09-11)
 ------------------
 

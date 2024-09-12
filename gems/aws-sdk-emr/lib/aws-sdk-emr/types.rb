@@ -2507,20 +2507,30 @@ module Aws::EMR
     #   The resize specification for the instance fleet.
     #   @return [Types::InstanceFleetResizingSpecifications]
     #
+    # @!attribute [rw] instance_type_configs
+    #   An array of InstanceTypeConfig objects that specify how Amazon EMR
+    #   provisions Amazon EC2 instances when it fulfills On-Demand and Spot
+    #   capacities. For more information, see [InstanceTypeConfig][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/APIReference/API_InstanceTypeConfig.html
+    #   @return [Array<Types::InstanceTypeConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetModifyConfig AWS API Documentation
     #
     class InstanceFleetModifyConfig < Struct.new(
       :instance_fleet_id,
       :target_on_demand_capacity,
       :target_spot_capacity,
-      :resize_specifications)
+      :resize_specifications,
+      :instance_type_configs)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The launch specification for Spot Instances in the fleet, which
-    # determines the defined duration, provisioning timeout behavior, and
-    # allocation strategy.
+    # The launch specification for On-Demand and Spot Instances in the
+    # fleet.
     #
     # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     # releases 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot
@@ -2531,13 +2541,14 @@ module Aws::EMR
     #
     # @!attribute [rw] spot_specification
     #   The launch specification for Spot instances in the fleet, which
-    #   determines the defined duration, provisioning timeout behavior, and
-    #   allocation strategy.
+    #   determines the allocation strategy, defined duration, and
+    #   provisioning timeout behavior.
     #   @return [Types::SpotProvisioningSpecification]
     #
     # @!attribute [rw] on_demand_specification
     #   The launch specification for On-Demand Instances in the instance
-    #   fleet, which determines the allocation strategy.
+    #   fleet, which determines the allocation strategy and capacity
+    #   reservation options.
     #
     #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
     #   releases 4.8.0 and later, excluding 5.0.x versions. On-Demand
@@ -2561,12 +2572,14 @@ module Aws::EMR
     #
     # @!attribute [rw] spot_resize_specification
     #   The resize specification for Spot Instances in the instance fleet,
-    #   which contains the resize timeout period.
+    #   which contains the allocation strategy and the resize timeout
+    #   period.
     #   @return [Types::SpotResizingSpecification]
     #
     # @!attribute [rw] on_demand_resize_specification
     #   The resize specification for On-Demand Instances in the instance
-    #   fleet, which contains the resize timeout period.
+    #   fleet, which contains the allocation strategy, capacity reservation
+    #   options, and the resize timeout period.
     #   @return [Types::OnDemandResizingSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetResizingSpecifications AWS API Documentation
@@ -4921,10 +4934,22 @@ module Aws::EMR
     #   by Amazon EMR due to Amazon EC2 Spot Reclamation.
     #   @return [Integer]
     #
+    # @!attribute [rw] allocation_strategy
+    #   Specifies the allocation strategy to use to launch On-Demand
+    #   instances during a resize. The default is `lowest-price`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_options
+    #   Describes the strategy for using unused Capacity Reservations for
+    #   fulfilling On-Demand capacity.
+    #   @return [Types::OnDemandCapacityReservationOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandResizingSpecification AWS API Documentation
     #
     class OnDemandResizingSpecification < Struct.new(
-      :timeout_duration_minutes)
+      :timeout_duration_minutes,
+      :allocation_strategy,
+      :capacity_reservation_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6164,10 +6189,18 @@ module Aws::EMR
     #   Spot Reclamation.
     #   @return [Integer]
     #
+    # @!attribute [rw] allocation_strategy
+    #   Specifies the allocation strategy to use to launch Spot instances
+    #   during a resize. If you run Amazon EMR releases 6.9.0 or higher, the
+    #   default is `price-capacity-optimized`. If you run Amazon EMR
+    #   releases 6.8.0 or lower, the default is `capacity-optimized`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotResizingSpecification AWS API Documentation
     #
     class SpotResizingSpecification < Struct.new(
-      :timeout_duration_minutes)
+      :timeout_duration_minutes,
+      :allocation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end

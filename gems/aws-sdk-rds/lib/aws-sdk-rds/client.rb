@@ -721,8 +721,25 @@ module Aws::RDS
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid Values: `system-update`, `db-upgrade`, `hardware-maintenance`,
-    #   `ca-certificate-rotation`
+    #   Valid Values:
+    #
+    #   * `ca-certificate-rotation`
+    #
+    #   * `db-upgrade`
+    #
+    #   * `hardware-maintenance`
+    #
+    #   * `os-upgrade`
+    #
+    #   * `system-update`
+    #
+    #   For more information about these actions, see [Maintenance actions for
+    #   Amazon Aurora][1] or [Maintenance actions for Amazon RDS][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
     #
     # @option params [required, String] :opt_in_type
     #   A value that specifies the type of opt-in request, or undoes an opt-in
@@ -4593,6 +4610,8 @@ module Aws::RDS
     #
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
     #
+    #   * `custom-sqlserver-dev` (for RDS Custom for SQL Server DB instances)
+    #
     #   * `db2-ae`
     #
     #   * `db2-se`
@@ -4716,7 +4735,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #
@@ -6296,9 +6315,6 @@ module Aws::RDS
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
     #   operation that can run in the source Amazon Web Services Region.
-    #
-    #    `SourceRegion` isn't supported for SQL Server, because Amazon RDS for
-    #   SQL Server doesn't support cross-Region read replicas.
     #
     #    </note>
     #
@@ -31381,7 +31397,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.244.0'
+      context[:gem_version] = '1.245.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

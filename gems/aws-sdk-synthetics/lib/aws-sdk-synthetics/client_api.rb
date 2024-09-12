@@ -106,7 +106,9 @@ module Aws::Synthetics
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     RequestEntityTooLargeException = Shapes::StructureShape.new(name: 'RequestEntityTooLargeException')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceToTag = Shapes::StringShape.new(name: 'ResourceToTag')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RuntimeVersion = Shapes::StructureShape.new(name: 'RuntimeVersion')
     RuntimeVersionList = Shapes::ListShape.new(name: 'RuntimeVersionList')
@@ -266,6 +268,7 @@ module Aws::Synthetics
     CreateCanaryRequest.add_member(:failure_retention_period_in_days, Shapes::ShapeRef.new(shape: MaxSize1024, location_name: "FailureRetentionPeriodInDays"))
     CreateCanaryRequest.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RuntimeVersion"))
     CreateCanaryRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: "VpcConfig"))
+    CreateCanaryRequest.add_member(:resources_to_replicate_tags, Shapes::ShapeRef.new(shape: ResourceList, location_name: "ResourcesToReplicateTags"))
     CreateCanaryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateCanaryRequest.add_member(:artifact_config, Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: "ArtifactConfig"))
     CreateCanaryRequest.struct_class = Types::CreateCanaryRequest
@@ -409,6 +412,8 @@ module Aws::Synthetics
 
     RequestEntityTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     RequestEntityTooLargeException.struct_class = Types::RequestEntityTooLargeException
+
+    ResourceList.member = Shapes::ShapeRef.new(shape: ResourceToTag)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException

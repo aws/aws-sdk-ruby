@@ -1298,6 +1298,8 @@ module Aws::RDS
     #
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
     #
+    #   * `custom-sqlserver-dev` (for RDS Custom for SQL Server DB instances)
+    #
     #   * `db2-ae`
     #
     #   * `db2-se`
@@ -1415,7 +1417,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     # @option options [String] :preferred_maintenance_window
@@ -2570,9 +2572,6 @@ module Aws::RDS
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
     #   operation that can run in the source Amazon Web Services Region.
-    #
-    #    `SourceRegion` isn't supported for SQL Server, because Amazon RDS for
-    #   SQL Server doesn't support cross-Region read replicas.
     #
     #    </note>
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2024-09-12)
+------------------
+
+* Feature - Update APIs to allow modification of ODCR options, allocation strategy, and InstanceTypeConfigs on running InstanceFleet clusters.
+
 1.95.0 (2024-09-11)
 ------------------
 

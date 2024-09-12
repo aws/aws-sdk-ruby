@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2024-09-12)
+------------------
+
+* Feature - AWS Glue is introducing two new optimizers for Apache Iceberg tables: snapshot retention and orphan file deletion. Customers can enable these optimizers and customize their configurations to perform daily maintenance tasks on their Iceberg tables based on their specific requirements.
+
 1.193.0 (2024-09-11)
 ------------------
 

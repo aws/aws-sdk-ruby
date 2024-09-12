@@ -111,6 +111,8 @@ module Aws::MediaConvert
             Aws::MediaConvert::Endpoints::ListQueues.build(context)
           when :list_tags_for_resource
             Aws::MediaConvert::Endpoints::ListTagsForResource.build(context)
+          when :list_versions
+            Aws::MediaConvert::Endpoints::ListVersions.build(context)
           when :put_policy
             Aws::MediaConvert::Endpoints::PutPolicy.build(context)
           when :search_jobs

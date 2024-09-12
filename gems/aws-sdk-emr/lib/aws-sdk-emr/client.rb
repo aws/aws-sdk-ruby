@@ -531,10 +531,17 @@ module Aws::EMR
     #       },
     #       resize_specifications: {
     #         spot_resize_specification: {
-    #           timeout_duration_minutes: 1, # required
+    #           timeout_duration_minutes: 1,
+    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified, capacity-optimized-prioritized
     #         },
     #         on_demand_resize_specification: {
-    #           timeout_duration_minutes: 1, # required
+    #           timeout_duration_minutes: 1,
+    #           allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #           capacity_reservation_options: {
+    #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #             capacity_reservation_preference: "open", # accepts open, none
+    #             capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #           },
     #         },
     #       },
     #     },
@@ -2048,7 +2055,12 @@ module Aws::EMR
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_resource_group_arn #=> String
     #   resp.instance_fleets[0].resize_specifications.spot_resize_specification.timeout_duration_minutes #=> Integer
+    #   resp.instance_fleets[0].resize_specifications.spot_resize_specification.allocation_strategy #=> String, one of "capacity-optimized", "price-capacity-optimized", "lowest-price", "diversified", "capacity-optimized-prioritized"
     #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.timeout_duration_minutes #=> Integer
+    #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.allocation_strategy #=> String, one of "lowest-price", "prioritized"
+    #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
+    #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.instance_fleets[0].resize_specifications.on_demand_resize_specification.capacity_reservation_options.capacity_reservation_resource_group_arn #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets AWS API Documentation
@@ -2716,12 +2728,54 @@ module Aws::EMR
     #       target_spot_capacity: 1,
     #       resize_specifications: {
     #         spot_resize_specification: {
-    #           timeout_duration_minutes: 1, # required
+    #           timeout_duration_minutes: 1,
+    #           allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified, capacity-optimized-prioritized
     #         },
     #         on_demand_resize_specification: {
-    #           timeout_duration_minutes: 1, # required
+    #           timeout_duration_minutes: 1,
+    #           allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #           capacity_reservation_options: {
+    #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #             capacity_reservation_preference: "open", # accepts open, none
+    #             capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #           },
     #         },
     #       },
+    #       instance_type_configs: [
+    #         {
+    #           instance_type: "InstanceType", # required
+    #           weighted_capacity: 1,
+    #           bid_price: "XmlStringMaxLen256",
+    #           bid_price_as_percentage_of_on_demand_price: 1.0,
+    #           ebs_configuration: {
+    #             ebs_block_device_configs: [
+    #               {
+    #                 volume_specification: { # required
+    #                   volume_type: "String", # required
+    #                   iops: 1,
+    #                   size_in_gb: 1, # required
+    #                   throughput: 1,
+    #                 },
+    #                 volumes_per_instance: 1,
+    #               },
+    #             ],
+    #             ebs_optimized: false,
+    #           },
+    #           configurations: [
+    #             {
+    #               classification: "String",
+    #               configurations: {
+    #                 # recursive ConfigurationList
+    #               },
+    #               properties: {
+    #                 "String" => "String",
+    #               },
+    #             },
+    #           ],
+    #           custom_ami_id: "XmlStringMaxLen256",
+    #           priority: 1.0,
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -3584,10 +3638,17 @@ module Aws::EMR
     #           },
     #           resize_specifications: {
     #             spot_resize_specification: {
-    #               timeout_duration_minutes: 1, # required
+    #               timeout_duration_minutes: 1,
+    #               allocation_strategy: "capacity-optimized", # accepts capacity-optimized, price-capacity-optimized, lowest-price, diversified, capacity-optimized-prioritized
     #             },
     #             on_demand_resize_specification: {
-    #               timeout_duration_minutes: 1, # required
+    #               timeout_duration_minutes: 1,
+    #               allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #               capacity_reservation_options: {
+    #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                 capacity_reservation_preference: "open", # accepts open, none
+    #                 capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
+    #               },
     #             },
     #           },
     #         },
@@ -4207,7 +4268,7 @@ module Aws::EMR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -308,7 +308,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       SENSITIVE: []
     end
 
@@ -317,7 +317,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       SENSITIVE: []
     end
 
@@ -795,6 +795,11 @@ module Aws::Glue
 
     class ColumnStatisticsTaskStoppingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CompactionMetrics
+      attr_accessor iceberg_metrics: Types::IcebergCompactionMetrics
       SENSITIVE: []
     end
 
@@ -1347,7 +1352,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       attr_accessor table_optimizer_configuration: Types::TableOptimizerConfiguration
       SENSITIVE: []
     end
@@ -1895,7 +1900,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       SENSITIVE: []
     end
 
@@ -3012,7 +3017,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       SENSITIVE: []
     end
 
@@ -3348,9 +3353,46 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IcebergCompactionMetrics
+      attr_accessor number_of_bytes_compacted: ::Integer
+      attr_accessor number_of_files_compacted: ::Integer
+      attr_accessor number_of_dpus: ::Integer
+      attr_accessor job_duration_in_hour: ::Float
+      SENSITIVE: []
+    end
+
     class IcebergInput
       attr_accessor metadata_operation: ("CREATE")
       attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class IcebergOrphanFileDeletionConfiguration
+      attr_accessor orphan_file_retention_period_in_days: ::Integer
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class IcebergOrphanFileDeletionMetrics
+      attr_accessor number_of_orphan_files_deleted: ::Integer
+      attr_accessor number_of_dpus: ::Integer
+      attr_accessor job_duration_in_hour: ::Float
+      SENSITIVE: []
+    end
+
+    class IcebergRetentionConfiguration
+      attr_accessor snapshot_retention_period_in_days: ::Integer
+      attr_accessor number_of_snapshots_to_retain: ::Integer
+      attr_accessor clean_expired_files: bool
+      SENSITIVE: []
+    end
+
+    class IcebergRetentionMetrics
+      attr_accessor number_of_data_files_deleted: ::Integer
+      attr_accessor number_of_manifest_files_deleted: ::Integer
+      attr_accessor number_of_manifest_lists_deleted: ::Integer
+      attr_accessor number_of_dpus: ::Integer
+      attr_accessor job_duration_in_hour: ::Float
       SENSITIVE: []
     end
 
@@ -3948,7 +3990,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -4232,6 +4274,16 @@ module Aws::Glue
     class Order
       attr_accessor column: ::String
       attr_accessor sort_order: ::Integer
+      SENSITIVE: []
+    end
+
+    class OrphanFileDeletionConfiguration
+      attr_accessor iceberg_configuration: Types::IcebergOrphanFileDeletionConfiguration
+      SENSITIVE: []
+    end
+
+    class OrphanFileDeletionMetrics
+      attr_accessor iceberg_metrics: Types::IcebergOrphanFileDeletionMetrics
       SENSITIVE: []
     end
 
@@ -4598,6 +4650,16 @@ module Aws::Glue
     class ResumeWorkflowRunResponse
       attr_accessor run_id: ::String
       attr_accessor node_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RetentionConfiguration
+      attr_accessor iceberg_configuration: Types::IcebergRetentionConfiguration
+      SENSITIVE: []
+    end
+
+    class RetentionMetrics
+      attr_accessor iceberg_metrics: Types::IcebergRetentionMetrics
       SENSITIVE: []
     end
 
@@ -5499,7 +5561,7 @@ module Aws::Glue
     end
 
     class TableOptimizer
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       attr_accessor configuration: Types::TableOptimizerConfiguration
       attr_accessor last_run: Types::TableOptimizerRun
       SENSITIVE: []
@@ -5508,6 +5570,8 @@ module Aws::Glue
     class TableOptimizerConfiguration
       attr_accessor role_arn: ::String
       attr_accessor enabled: bool
+      attr_accessor retention_configuration: Types::RetentionConfiguration
+      attr_accessor orphan_file_deletion_configuration: Types::OrphanFileDeletionConfiguration
       SENSITIVE: []
     end
 
@@ -5517,6 +5581,9 @@ module Aws::Glue
       attr_accessor end_timestamp: ::Time
       attr_accessor metrics: Types::RunMetrics
       attr_accessor error: ::String
+      attr_accessor compaction_metrics: Types::CompactionMetrics
+      attr_accessor retention_metrics: Types::RetentionMetrics
+      attr_accessor orphan_file_deletion_metrics: Types::OrphanFileDeletionMetrics
       SENSITIVE: []
     end
 
@@ -5588,6 +5655,11 @@ module Aws::Glue
     class TaskRunSortCriteria
       attr_accessor column: ("TASK_RUN_TYPE" | "STATUS" | "STARTED")
       attr_accessor sort_direction: ("DESCENDING" | "ASCENDING")
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -5964,7 +6036,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor table_name: ::String
-      attr_accessor type: ("compaction")
+      attr_accessor type: ("compaction" | "retention" | "orphan_file_deletion")
       attr_accessor table_optimizer_configuration: Types::TableOptimizerConfiguration
       SENSITIVE: []
     end
