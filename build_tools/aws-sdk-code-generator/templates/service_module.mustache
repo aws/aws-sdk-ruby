@@ -17,8 +17,6 @@ require '{{.}}'
 {{/requires}}
 {{/require_core_guard?}}
 
-require_relative '{{service_identifier}}/customizations'
-
 # This module provides support for {{full_name}}. This module is available in the
 # `{{gem_name}}` gem.
 #
@@ -64,3 +62,5 @@ module {{module_name}}
   GEM_VERSION = '{{gem_version}}'
 
 end
+
+require_relative '{{service_identifier}}/customizations'

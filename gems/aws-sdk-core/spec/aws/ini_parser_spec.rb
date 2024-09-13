@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'aws-sdk-core/ini_parser'
-
 
 module Aws
   describe IniParser do
@@ -40,10 +38,10 @@ s3 =
    endpoint_url = https://localhost:8000
 
 [profile blank-property]
-aws_session_token =
-s3 =
+aws_session_token = 
+s3 = 
    region = ap-southeast-1
-   blank_sub_property =
+   blank_sub_property = 
 
       FILE
     }
