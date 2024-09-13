@@ -20,7 +20,6 @@ module Aws
 
         {
           create_tags: :batch_create_tags,
-          delete: :batch_delete!,
           monitor: :batch_create_tags,
           reboot: :batch_reboot,
           start: :batch_start,

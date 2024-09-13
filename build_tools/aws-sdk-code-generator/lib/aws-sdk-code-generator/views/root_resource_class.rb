@@ -56,7 +56,7 @@ module AwsSdkCodeGenerator
 
       # @return [Boolean]
       def customization_file_exists?
-        File.exist?("gems/aws-sdk-#{@name}/lib/aws-sdk-#{@name}/customizations/resource.rb")
+        File.exist?(File.join(__dir__, "../../../../../gems/aws-sdk-#{@name}/lib/aws-sdk-#{@name}/customizations/resource.rb"))
       end
 
       # @return [String]

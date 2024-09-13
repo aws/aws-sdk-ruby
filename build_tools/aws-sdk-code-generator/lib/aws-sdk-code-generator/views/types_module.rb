@@ -82,7 +82,7 @@ module AwsSdkCodeGenerator
 
       # @return [Array<String>]
       def types_customizations
-        Dir.glob(File.join("gems/#{gem_name}/lib/#{gem_name}/customizations/types", '*.rb')).map do |file|
+        Dir.glob(File.join(__dir__, "../../../../../gems/#{gem_name}/lib/#{gem_name}/customizations/types", '*.rb')).map do |file|
           filename = File.basename(file, '.rb')
           "#{gem_name}/customizations/types/#{filename}"
         end
