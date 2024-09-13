@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2024-09-13)
+------------------
+
+* Feature - Updates to all tags descriptions.
+
 1.57.0 (2024-09-11)
 ------------------
 

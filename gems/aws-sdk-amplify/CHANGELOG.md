@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-09-13)
+------------------
+
+* Feature - Doc only update to Amplify to explain platform setting for Next.js 14 SSG only applications
+
 1.69.0 (2024-09-11)
 ------------------
 

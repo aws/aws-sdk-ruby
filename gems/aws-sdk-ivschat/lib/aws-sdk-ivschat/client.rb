@@ -530,14 +530,15 @@ module Aws::Ivschat
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to attach to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS Chat has no constraints on tags
-    #   beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging Amazon Web Services Resources and Tag Editor* for details,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS Chat has no constraints on tags beyond what
+    #   is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Types::CreateLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -612,14 +613,15 @@ module Aws::Ivschat
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to attach to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS Chat has no constraints beyond
-    #   what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging Amazon Web Services Resources and Tag Editor* for details,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS Chat has no constraints beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @option params [Array<String>] :logging_configuration_identifiers
     #   Array of logging-configuration identifiers attached to the room.
@@ -1094,14 +1096,15 @@ module Aws::Ivschat
     #
     # @option params [required, Hash<String,String>] :tags
     #   Array of tags to be added or updated. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS Chat has no constraints beyond
-    #   what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging Amazon Web Services Resources and Tag Editor* for details,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS Chat has no constraints beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1130,14 +1133,15 @@ module Aws::Ivschat
     #
     # @option params [required, Array<String>] :tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS Chat has no constraints beyond
-    #   what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1] in
+    #   *Tagging Amazon Web Services Resources and Tag Editor* for details,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS Chat has no constraints beyond what is
+    #   documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1318,7 +1322,7 @@ module Aws::Ivschat
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivschat'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

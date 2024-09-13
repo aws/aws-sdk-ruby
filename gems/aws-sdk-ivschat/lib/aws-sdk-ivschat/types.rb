@@ -132,14 +132,15 @@ module Aws::Ivschat
     #
     # @!attribute [rw] tags
     #   Tags to attach to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
     #   details, including restrictions that apply to tags and "Tag naming
     #   limits and requirements"; Amazon IVS Chat has no constraints on
     #   tags beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/CreateLoggingConfigurationRequest AWS API Documentation
@@ -229,14 +230,15 @@ module Aws::Ivschat
     #
     # @!attribute [rw] tags
     #   Tags to attach to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
     #   details, including restrictions that apply to tags and "Tag naming
     #   limits and requirements"; Amazon IVS Chat has no constraints beyond
     #   what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] logging_configuration_identifiers
@@ -777,14 +779,15 @@ module Aws::Ivschat
     #
     # @!attribute [rw] tags
     #   Tags to attach to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
     #   details, including restrictions that apply to tags and "Tag naming
     #   limits and requirements"; Amazon IVS Chat has no constraints on
     #   tags beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/LoggingConfigurationSummary AWS API Documentation
@@ -892,14 +895,15 @@ module Aws::Ivschat
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
     #   details, including restrictions that apply to tags and "Tag naming
     #   limits and requirements"; Amazon IVS Chat has no constraints beyond
     #   what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] logging_configuration_identifiers
@@ -1002,14 +1006,15 @@ module Aws::Ivschat
     #
     # @!attribute [rw] tags
     #   Array of tags to be added or updated. Array of maps, each of the
-    #   form `string:string (key:value)`. See [Tagging AWS Resources][1] for
-    #   details, including restrictions that apply to tags and "Tag naming
-    #   limits and requirements"; Amazon IVS Chat has no constraints beyond
-    #   what is documented there.
+    #   form `string:string (key:value)`. See [Best practices and
+    #   strategies][1] in *Tagging Amazon Web Services Resources and Tag
+    #   Editor* for details, including restrictions that apply to tags and
+    #   "Tag naming limits and requirements"; Amazon IVS Chat has no
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/TagResourceRequest AWS API Documentation
@@ -1054,14 +1059,15 @@ module Aws::Ivschat
     #
     # @!attribute [rw] tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
     #   details, including restrictions that apply to tags and "Tag naming
     #   limits and requirements"; Amazon IVS Chat has no constraints beyond
     #   what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivschat-2020-07-14/UntagResourceRequest AWS API Documentation
