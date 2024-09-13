@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Use autoloading at the service level to load service clients and resources.
+
 3.205.0 (2024-09-11)
 ------------------
 
