@@ -18,7 +18,6 @@ require '{{.}}'
 {{/require_core_guard?}}
 
 require_relative '{{service_identifier}}/customizations'
-require_relative '{{service_identifier}}/railtie' if defined?(Rails::Railtie)
 
 # This module provides support for {{full_name}}. This module is available in the
 # `{{gem_name}}` gem.
