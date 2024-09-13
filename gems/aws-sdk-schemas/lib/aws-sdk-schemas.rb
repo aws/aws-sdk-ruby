@@ -53,6 +53,6 @@ require_relative 'aws-sdk-schemas/customizations'
 # @!group service
 module Aws::Schemas
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.44.0'
 
 end

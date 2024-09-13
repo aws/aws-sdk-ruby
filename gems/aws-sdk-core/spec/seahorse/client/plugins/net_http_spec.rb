@@ -102,6 +102,14 @@ module Seahorse
           it 'adds a :ssl_ca_store option without default' do
             expect(config.ssl_ca_store).to eq(nil)
           end
+
+          it 'adds a :ssl_cert option with no default' do
+            expect(config.ssl_cert).to eq(nil)
+          end
+
+          it 'adds a :ssl_key option with no default' do
+            expect(config.ssl_key).to eq(nil)
+          end
         end
 
         describe '#add_handlers' do

@@ -283,9 +283,12 @@ module Aws::SageMaker
     ClusterNameOrArn = Shapes::StringShape.new(name: 'ClusterNameOrArn')
     ClusterNodeDetails = Shapes::StructureShape.new(name: 'ClusterNodeDetails')
     ClusterNodeId = Shapes::StringShape.new(name: 'ClusterNodeId')
+    ClusterNodeRecovery = Shapes::StringShape.new(name: 'ClusterNodeRecovery')
     ClusterNodeSummaries = Shapes::ListShape.new(name: 'ClusterNodeSummaries')
     ClusterNodeSummary = Shapes::StructureShape.new(name: 'ClusterNodeSummary')
     ClusterNonNegativeInstanceCount = Shapes::IntegerShape.new(name: 'ClusterNonNegativeInstanceCount')
+    ClusterOrchestrator = Shapes::StructureShape.new(name: 'ClusterOrchestrator')
+    ClusterOrchestratorEksConfig = Shapes::StructureShape.new(name: 'ClusterOrchestratorEksConfig')
     ClusterPrivateDnsHostname = Shapes::StringShape.new(name: 'ClusterPrivateDnsHostname')
     ClusterPrivatePrimaryIp = Shapes::StringShape.new(name: 'ClusterPrivatePrimaryIp')
     ClusterSortBy = Shapes::StringShape.new(name: 'ClusterSortBy')
@@ -510,6 +513,7 @@ module Aws::SageMaker
     DebugRuleConfigurations = Shapes::ListShape.new(name: 'DebugRuleConfigurations')
     DebugRuleEvaluationStatus = Shapes::StructureShape.new(name: 'DebugRuleEvaluationStatus')
     DebugRuleEvaluationStatuses = Shapes::ListShape.new(name: 'DebugRuleEvaluationStatuses')
+    DeepHealthCheckType = Shapes::StringShape.new(name: 'DeepHealthCheckType')
     DefaultEbsStorageSettings = Shapes::StructureShape.new(name: 'DefaultEbsStorageSettings')
     DefaultGid = Shapes::IntegerShape.new(name: 'DefaultGid')
     DefaultSpaceSettings = Shapes::StructureShape.new(name: 'DefaultSpaceSettings')
@@ -812,6 +816,7 @@ module Aws::SageMaker
     EdgeVersion = Shapes::StringShape.new(name: 'EdgeVersion')
     Edges = Shapes::ListShape.new(name: 'Edges')
     EfsUid = Shapes::StringShape.new(name: 'EfsUid')
+    EksClusterArn = Shapes::StringShape.new(name: 'EksClusterArn')
     EmrServerlessComputeConfig = Shapes::StructureShape.new(name: 'EmrServerlessComputeConfig')
     EmrServerlessSettings = Shapes::StructureShape.new(name: 'EmrServerlessSettings')
     EmrSettings = Shapes::StructureShape.new(name: 'EmrSettings')
@@ -1048,7 +1053,6 @@ module Aws::SageMaker
     HyperbandStrategyConfig = Shapes::StructureShape.new(name: 'HyperbandStrategyConfig')
     HyperbandStrategyMaxResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMaxResource')
     HyperbandStrategyMinResource = Shapes::IntegerShape.new(name: 'HyperbandStrategyMinResource')
-    IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     IamIdentity = Shapes::StructureShape.new(name: 'IamIdentity')
     IamPolicyConstraints = Shapes::StructureShape.new(name: 'IamPolicyConstraints')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
@@ -1638,6 +1642,7 @@ module Aws::SageMaker
     OidcConfigForResponse = Shapes::StructureShape.new(name: 'OidcConfigForResponse')
     OidcEndpoint = Shapes::StringShape.new(name: 'OidcEndpoint')
     OidcMemberDefinition = Shapes::StructureShape.new(name: 'OidcMemberDefinition')
+    OnStartDeepHealthChecks = Shapes::ListShape.new(name: 'OnStartDeepHealthChecks')
     OnlineStoreConfig = Shapes::StructureShape.new(name: 'OnlineStoreConfig')
     OnlineStoreConfigUpdate = Shapes::StructureShape.new(name: 'OnlineStoreConfigUpdate')
     OnlineStoreSecurityConfig = Shapes::StructureShape.new(name: 'OnlineStoreSecurityConfig')
@@ -2962,9 +2967,10 @@ module Aws::SageMaker
     ClusterInstanceGroupDetails.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, location_name: "InstanceGroupName"))
     ClusterInstanceGroupDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, location_name: "InstanceType"))
     ClusterInstanceGroupDetails.add_member(:life_cycle_config, Shapes::ShapeRef.new(shape: ClusterLifeCycleConfig, location_name: "LifeCycleConfig"))
-    ClusterInstanceGroupDetails.add_member(:execution_role, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "ExecutionRole"))
+    ClusterInstanceGroupDetails.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
     ClusterInstanceGroupDetails.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
     ClusterInstanceGroupDetails.add_member(:instance_storage_configs, Shapes::ShapeRef.new(shape: ClusterInstanceStorageConfigs, location_name: "InstanceStorageConfigs"))
+    ClusterInstanceGroupDetails.add_member(:on_start_deep_health_checks, Shapes::ShapeRef.new(shape: OnStartDeepHealthChecks, location_name: "OnStartDeepHealthChecks"))
     ClusterInstanceGroupDetails.struct_class = Types::ClusterInstanceGroupDetails
 
     ClusterInstanceGroupDetailsList.member = Shapes::ShapeRef.new(shape: ClusterInstanceGroupDetails)
@@ -2973,9 +2979,10 @@ module Aws::SageMaker
     ClusterInstanceGroupSpecification.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: ClusterInstanceGroupName, required: true, location_name: "InstanceGroupName"))
     ClusterInstanceGroupSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: ClusterInstanceType, required: true, location_name: "InstanceType"))
     ClusterInstanceGroupSpecification.add_member(:life_cycle_config, Shapes::ShapeRef.new(shape: ClusterLifeCycleConfig, required: true, location_name: "LifeCycleConfig"))
-    ClusterInstanceGroupSpecification.add_member(:execution_role, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "ExecutionRole"))
+    ClusterInstanceGroupSpecification.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRole"))
     ClusterInstanceGroupSpecification.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
     ClusterInstanceGroupSpecification.add_member(:instance_storage_configs, Shapes::ShapeRef.new(shape: ClusterInstanceStorageConfigs, location_name: "InstanceStorageConfigs"))
+    ClusterInstanceGroupSpecification.add_member(:on_start_deep_health_checks, Shapes::ShapeRef.new(shape: OnStartDeepHealthChecks, location_name: "OnStartDeepHealthChecks"))
     ClusterInstanceGroupSpecification.struct_class = Types::ClusterInstanceGroupSpecification
 
     ClusterInstanceGroupSpecifications.member = Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecification)
@@ -3021,6 +3028,12 @@ module Aws::SageMaker
     ClusterNodeSummary.add_member(:launch_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LaunchTime"))
     ClusterNodeSummary.add_member(:instance_status, Shapes::ShapeRef.new(shape: ClusterInstanceStatusDetails, required: true, location_name: "InstanceStatus"))
     ClusterNodeSummary.struct_class = Types::ClusterNodeSummary
+
+    ClusterOrchestrator.add_member(:eks, Shapes::ShapeRef.new(shape: ClusterOrchestratorEksConfig, required: true, location_name: "Eks"))
+    ClusterOrchestrator.struct_class = Types::ClusterOrchestrator
+
+    ClusterOrchestratorEksConfig.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: EksClusterArn, required: true, location_name: "ClusterArn"))
+    ClusterOrchestratorEksConfig.struct_class = Types::ClusterOrchestratorEksConfig
 
     ClusterSummaries.member = Shapes::ShapeRef.new(shape: ClusterSummary)
 
@@ -3252,6 +3265,8 @@ module Aws::SageMaker
     CreateClusterRequest.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecifications, required: true, location_name: "InstanceGroups"))
     CreateClusterRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateClusterRequest.add_member(:orchestrator, Shapes::ShapeRef.new(shape: ClusterOrchestrator, location_name: "Orchestrator"))
+    CreateClusterRequest.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
@@ -4468,6 +4483,8 @@ module Aws::SageMaker
     DescribeClusterResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     DescribeClusterResponse.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupDetailsList, required: true, location_name: "InstanceGroups"))
     DescribeClusterResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    DescribeClusterResponse.add_member(:orchestrator, Shapes::ShapeRef.new(shape: ClusterOrchestrator, location_name: "Orchestrator"))
+    DescribeClusterResponse.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
 
     DescribeCodeRepositoryInput.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
@@ -8389,6 +8406,8 @@ module Aws::SageMaker
     OidcMemberDefinition.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
     OidcMemberDefinition.struct_class = Types::OidcMemberDefinition
 
+    OnStartDeepHealthChecks.member = Shapes::ShapeRef.new(shape: DeepHealthCheckType)
+
     OnlineStoreConfig.add_member(:security_config, Shapes::ShapeRef.new(shape: OnlineStoreSecurityConfig, location_name: "SecurityConfig"))
     OnlineStoreConfig.add_member(:enable_online_store, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableOnlineStore"))
     OnlineStoreConfig.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
@@ -9968,6 +9987,7 @@ module Aws::SageMaker
 
     UpdateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     UpdateClusterRequest.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecifications, required: true, location_name: "InstanceGroups"))
+    UpdateClusterRequest.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
     UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
 
     UpdateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))

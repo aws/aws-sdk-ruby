@@ -14,14 +14,11 @@ module Aws::Kinesis
 
     class AddTagsToStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -32,14 +29,11 @@ module Aws::Kinesis
 
     class CreateStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: nil,
           operation_type: nil,
           consumer_arn: nil,
@@ -50,14 +44,11 @@ module Aws::Kinesis
 
     class DecreaseStreamRetentionPeriod
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -68,14 +59,11 @@ module Aws::Kinesis
 
     class DeleteResourcePolicy
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: nil,
           operation_type: "control",
           consumer_arn: nil,
@@ -86,14 +74,11 @@ module Aws::Kinesis
 
     class DeleteStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -104,14 +89,11 @@ module Aws::Kinesis
 
     class DeregisterStreamConsumer
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: context.params[:consumer_arn],
@@ -122,14 +104,11 @@ module Aws::Kinesis
 
     class DescribeLimits
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: nil,
           operation_type: nil,
           consumer_arn: nil,
@@ -140,14 +119,11 @@ module Aws::Kinesis
 
     class DescribeStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -158,14 +134,11 @@ module Aws::Kinesis
 
     class DescribeStreamConsumer
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: context.params[:consumer_arn],
@@ -176,14 +149,11 @@ module Aws::Kinesis
 
     class DescribeStreamSummary
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -194,14 +164,11 @@ module Aws::Kinesis
 
     class DisableEnhancedMonitoring
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -212,14 +179,11 @@ module Aws::Kinesis
 
     class EnableEnhancedMonitoring
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -230,14 +194,11 @@ module Aws::Kinesis
 
     class GetRecords
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
@@ -248,14 +209,11 @@ module Aws::Kinesis
 
     class GetResourcePolicy
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: nil,
           operation_type: "control",
           consumer_arn: nil,
@@ -266,14 +224,11 @@ module Aws::Kinesis
 
     class GetShardIterator
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
@@ -284,14 +239,11 @@ module Aws::Kinesis
 
     class IncreaseStreamRetentionPeriod
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -302,14 +254,11 @@ module Aws::Kinesis
 
     class ListShards
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -320,14 +269,11 @@ module Aws::Kinesis
 
     class ListStreamConsumers
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -338,14 +284,11 @@ module Aws::Kinesis
 
     class ListStreams
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: nil,
           operation_type: nil,
           consumer_arn: nil,
@@ -356,14 +299,11 @@ module Aws::Kinesis
 
     class ListTagsForStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -374,14 +314,11 @@ module Aws::Kinesis
 
     class MergeShards
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -392,14 +329,11 @@ module Aws::Kinesis
 
     class PutRecord
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
@@ -410,14 +344,11 @@ module Aws::Kinesis
 
     class PutRecords
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "data",
           consumer_arn: nil,
@@ -428,14 +359,11 @@ module Aws::Kinesis
 
     class PutResourcePolicy
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: nil,
           operation_type: "control",
           consumer_arn: nil,
@@ -446,14 +374,11 @@ module Aws::Kinesis
 
     class RegisterStreamConsumer
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -464,14 +389,11 @@ module Aws::Kinesis
 
     class RemoveTagsFromStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -482,14 +404,11 @@ module Aws::Kinesis
 
     class SplitShard
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -500,14 +419,11 @@ module Aws::Kinesis
 
     class StartStreamEncryption
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -518,14 +434,11 @@ module Aws::Kinesis
 
     class StopStreamEncryption
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -536,14 +449,11 @@ module Aws::Kinesis
 
     class SubscribeToShard
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: nil,
           operation_type: "data",
           consumer_arn: context.params[:consumer_arn],
@@ -554,14 +464,11 @@ module Aws::Kinesis
 
     class UpdateShardCount
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,
@@ -572,14 +479,11 @@ module Aws::Kinesis
 
     class UpdateStreamMode
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Kinesis::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           stream_arn: context.params[:stream_arn],
           operation_type: "control",
           consumer_arn: nil,

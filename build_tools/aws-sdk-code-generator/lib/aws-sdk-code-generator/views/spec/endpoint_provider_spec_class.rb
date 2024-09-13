@@ -51,9 +51,9 @@ module AwsSdkCodeGenerator
                 operation_name: Underscore.underscore(
                   operation_inputs_test['operationName']
                 ),
-                operation_params: operation_inputs_test['operationParams'] || [],
-                built_in_params: operation_inputs_test['builtInParams'] || [],
-                client_params: operation_inputs_test['clientParams'] || []
+                operation_params: operation_inputs_test['operationParams'] || {},
+                built_in_params: operation_inputs_test['builtInParams'] || {},
+                client_params: operation_inputs_test['clientParams'] || {}
               )
             end
           end
@@ -117,12 +117,13 @@ module AwsSdkCodeGenerator
             @client_params = options[:client_params].map do |k,v|
               Param.new(Underscore.underscore(k), v)
             end
-
             @client_params += options[:built_in_params].map do |k,v|
               built_in_to_param(k, v)
             end
-            # the expected default of UseGlobalEndpoint does not match the SDK's default value
-            if @service.identifier == 's3' && !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
+            # the expected default of UseGlobalEndpoint in rules
+            # does not match the Ruby SDK's default value
+            if @service.identifier == 's3' &&
+               !options[:built_in_params].include?('AWS::S3::UseGlobalEndpoint')
               @client_params << built_in_to_param('AWS::S3::UseGlobalEndpoint', false)
             end
           end

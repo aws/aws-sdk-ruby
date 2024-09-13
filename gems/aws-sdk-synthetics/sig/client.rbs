@@ -117,6 +117,7 @@ module Aws
                              subnet_ids: Array[::String]?,
                              security_group_ids: Array[::String]?
                            },
+                           ?resources_to_replicate_tags: Array[("lambda-function")],
                            ?tags: Hash[::String, ::String],
                            ?artifact_config: {
                              s3_encryption: {

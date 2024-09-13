@@ -124,7 +124,7 @@ module Aws::MediaConvert
     end
 
     class AudioSelector
-      attr_accessor audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME")
+      attr_accessor audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME" | "FORCE")
       attr_accessor custom_language_code: ::String
       attr_accessor default_selection: ("DEFAULT" | "NOT_DEFAULT")
       attr_accessor external_audio_file_input: ::String
@@ -438,7 +438,7 @@ module Aws::MediaConvert
 
     class ContainerSettings
       attr_accessor cmfc_settings: Types::CmfcSettings
-      attr_accessor container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "WEBM" | "RAW" | "Y4M")
+      attr_accessor container: ("F4V" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "OGG" | "WEBM" | "RAW" | "Y4M")
       attr_accessor f4v_settings: Types::F4vSettings
       attr_accessor m2ts_settings: Types::M2tsSettings
       attr_accessor m3u_8_settings: Types::M3u8Settings
@@ -454,6 +454,7 @@ module Aws::MediaConvert
       attr_accessor billing_tags_source: ("QUEUE" | "PRESET" | "JOB_TEMPLATE" | "JOB")
       attr_accessor client_request_token: ::String
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
+      attr_accessor job_engine_version: ::String
       attr_accessor job_template: ::String
       attr_accessor priority: ::Integer
       attr_accessor queue: ::String
@@ -809,6 +810,7 @@ module Aws::MediaConvert
     end
 
     class FileSourceSettings
+      attr_accessor byte_rate_limit: ("ENABLED" | "DISABLED")
       attr_accessor convert_608_to_708: ("UPCONVERT" | "DISABLED")
       attr_accessor convert_paint_to_pop: ("ENABLED" | "DISABLED")
       attr_accessor framerate: Types::CaptionSourceFramerate
@@ -933,6 +935,7 @@ module Aws::MediaConvert
       attr_accessor qvbr_settings: Types::H264QvbrSettings
       attr_accessor rate_control_mode: ("VBR" | "CBR" | "QVBR")
       attr_accessor repeat_pps: ("DISABLED" | "ENABLED")
+      attr_accessor saliency_aware_encoding: ("DISABLED" | "PREFERRED")
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")
       attr_accessor slices: ::Integer
@@ -1245,6 +1248,8 @@ module Aws::MediaConvert
       attr_accessor error_message: ::String
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor id: ::String
+      attr_accessor job_engine_version_requested: ::String
+      attr_accessor job_engine_version_used: ::String
       attr_accessor job_percent_complete: ::Integer
       attr_accessor job_template: ::String
       attr_accessor messages: Types::JobMessages
@@ -1261,6 +1266,12 @@ module Aws::MediaConvert
       attr_accessor timing: Types::Timing
       attr_accessor user_metadata: ::Hash[::String, ::String]
       attr_accessor warnings: ::Array[Types::WarningGroup]
+      SENSITIVE: []
+    end
+
+    class JobEngineVersion
+      attr_accessor expiration_date: ::Time
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 
@@ -1406,6 +1417,18 @@ module Aws::MediaConvert
 
     class ListTagsForResourceResponse
       attr_accessor resource_tags: Types::ResourceTags
+      SENSITIVE: []
+    end
+
+    class ListVersionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::JobEngineVersion]
       SENSITIVE: []
     end
 
@@ -2141,8 +2164,11 @@ module Aws::MediaConvert
 
     class VideoOverlay
       attr_accessor end_timecode: ::String
+      attr_accessor initial_position: Types::VideoOverlayPosition
       attr_accessor input: Types::VideoOverlayInput
+      attr_accessor playback: ("ONCE" | "REPEAT")
       attr_accessor start_timecode: ::String
+      attr_accessor transitions: ::Array[Types::VideoOverlayTransition]
       SENSITIVE: []
     end
 
@@ -2155,6 +2181,22 @@ module Aws::MediaConvert
     end
 
     class VideoOverlayInputClipping
+      attr_accessor end_timecode: ::String
+      attr_accessor start_timecode: ::String
+      SENSITIVE: []
+    end
+
+    class VideoOverlayPosition
+      attr_accessor height: ::Integer
+      attr_accessor unit: ("PIXELS" | "PERCENTAGE")
+      attr_accessor width: ::Integer
+      attr_accessor x_position: ::Integer
+      attr_accessor y_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoOverlayTransition
+      attr_accessor end_position: Types::VideoOverlayPosition
       attr_accessor end_timecode: ::String
       attr_accessor start_timecode: ::String
       SENSITIVE: []

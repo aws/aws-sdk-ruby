@@ -14,238 +14,187 @@ module Aws::CognitoSync
 
     class BulkPublish
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DeleteDataset
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DescribeDataset
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DescribeIdentityPoolUsage
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DescribeIdentityUsage
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetBulkPublishDetails
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetCognitoEvents
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetIdentityPoolConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListDatasets
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListIdentityPoolUsage
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListRecords
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class RegisterDevice
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class SetCognitoEvents
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class SetIdentityPoolConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class SubscribeToDataset
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UnsubscribeFromDataset
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UpdateRecords
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::CognitoSync::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end

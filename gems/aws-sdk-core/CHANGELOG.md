@@ -1,6 +1,28 @@
 Unreleased Changes
 ------------------
 
+3.205.0 (2024-09-11)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Additional metrics collection in the User-Agent plugin.
+
+3.204.0 (2024-09-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Issue - Add support for `ssl_cert` and `ssl_key` configuration options to support mTLS.
+
 3.203.0 (2024-09-03)
 ------------------
 

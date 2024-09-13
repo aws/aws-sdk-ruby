@@ -14,7 +14,7 @@ module Aws::ApplicationSignals
   describe EndpointProvider do
     subject { Aws::ApplicationSignals::EndpointProvider.new }
 
-    context 'For custom endpoint with region not set and fips disabled' do
+    context "For custom endpoint with region not set and fips disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For custom endpoint with fips enabled' do
+    context "For custom endpoint with fips enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -41,7 +41,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals-fips.us-east-1.api.aws"}}
       end
@@ -55,7 +55,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals.us-east-1.api.aws"}}
       end
@@ -69,7 +69,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
@@ -83,7 +83,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
@@ -97,7 +97,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals-fips.us-gov-west-1.api.aws"}}
       end
@@ -111,7 +111,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals.us-gov-west-1.api.aws"}}
       end
@@ -125,7 +125,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals-fips.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -139,7 +139,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -153,7 +153,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -167,7 +167,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -181,7 +181,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region eu-isoe-west-1 with FIPS enabled and DualStack enabled' do
+    context "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals-fips.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
@@ -195,7 +195,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region eu-isoe-west-1 with FIPS disabled and DualStack enabled' do
+    context "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
@@ -209,7 +209,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-isof-south-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isof-south-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals-fips.us-isof-south-1.csp.hci.ic.gov"}}
       end
@@ -223,7 +223,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'For region us-isof-south-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isof-south-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://application-signals.us-isof-south-1.csp.hci.ic.gov"}}
       end
@@ -237,7 +237,7 @@ module Aws::ApplicationSignals
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

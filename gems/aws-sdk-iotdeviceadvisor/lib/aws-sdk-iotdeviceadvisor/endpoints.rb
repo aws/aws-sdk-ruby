@@ -14,196 +14,154 @@ module Aws::IoTDeviceAdvisor
 
     class CreateSuiteDefinition
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DeleteSuiteDefinition
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetEndpoint
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetSuiteDefinition
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetSuiteRun
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetSuiteRunReport
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListSuiteDefinitions
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListSuiteRuns
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListTagsForResource
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class StartSuiteRun
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class StopSuiteRun
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class TagResource
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UntagResource
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UpdateSuiteDefinition
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::IoTDeviceAdvisor::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end

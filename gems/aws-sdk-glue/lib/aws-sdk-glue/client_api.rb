@@ -204,6 +204,7 @@ module Aws::Glue
     ColumnValuesString = Shapes::StringShape.new(name: 'ColumnValuesString')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
     CommitIdString = Shapes::StringShape.new(name: 'CommitIdString')
+    CompactionMetrics = Shapes::StructureShape.new(name: 'CompactionMetrics')
     Comparator = Shapes::StringShape.new(name: 'Comparator')
     Compatibility = Shapes::StringShape.new(name: 'Compatibility')
     CompressionType = Shapes::StringShape.new(name: 'CompressionType')
@@ -689,7 +690,12 @@ module Aws::Glue
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
     HudiTargetList = Shapes::ListShape.new(name: 'HudiTargetList')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    IcebergCompactionMetrics = Shapes::StructureShape.new(name: 'IcebergCompactionMetrics')
     IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
+    IcebergOrphanFileDeletionConfiguration = Shapes::StructureShape.new(name: 'IcebergOrphanFileDeletionConfiguration')
+    IcebergOrphanFileDeletionMetrics = Shapes::StructureShape.new(name: 'IcebergOrphanFileDeletionMetrics')
+    IcebergRetentionConfiguration = Shapes::StructureShape.new(name: 'IcebergRetentionConfiguration')
+    IcebergRetentionMetrics = Shapes::StructureShape.new(name: 'IcebergRetentionMetrics')
     IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
     IdString = Shapes::StringShape.new(name: 'IdString')
@@ -903,6 +909,8 @@ module Aws::Glue
     OrchestrationToken = Shapes::StringShape.new(name: 'OrchestrationToken')
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderList = Shapes::ListShape.new(name: 'OrderList')
+    OrphanFileDeletionConfiguration = Shapes::StructureShape.new(name: 'OrphanFileDeletionConfiguration')
+    OrphanFileDeletionMetrics = Shapes::StructureShape.new(name: 'OrphanFileDeletionMetrics')
     OtherMetadataValueList = Shapes::ListShape.new(name: 'OtherMetadataValueList')
     OtherMetadataValueListItem = Shapes::StructureShape.new(name: 'OtherMetadataValueListItem')
     PIIDetection = Shapes::StructureShape.new(name: 'PIIDetection')
@@ -1006,6 +1014,8 @@ module Aws::Glue
     ResourceUriList = Shapes::ListShape.new(name: 'ResourceUriList')
     ResumeWorkflowRunRequest = Shapes::StructureShape.new(name: 'ResumeWorkflowRunRequest')
     ResumeWorkflowRunResponse = Shapes::StructureShape.new(name: 'ResumeWorkflowRunResponse')
+    RetentionConfiguration = Shapes::StructureShape.new(name: 'RetentionConfiguration')
+    RetentionMetrics = Shapes::StructureShape.new(name: 'RetentionMetrics')
     Role = Shapes::StringShape.new(name: 'Role')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
@@ -1202,6 +1212,7 @@ module Aws::Glue
     TaskRunSortCriteria = Shapes::StructureShape.new(name: 'TaskRunSortCriteria')
     TaskStatusType = Shapes::StringShape.new(name: 'TaskStatusType')
     TaskType = Shapes::StringShape.new(name: 'TaskType')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampFilter = Shapes::StructureShape.new(name: 'TimestampFilter')
@@ -1339,6 +1350,9 @@ module Aws::Glue
     XMLClassifier = Shapes::StructureShape.new(name: 'XMLClassifier')
     databaseNameString = Shapes::StringShape.new(name: 'databaseNameString')
     double = Shapes::FloatShape.new(name: 'double')
+    dpuCounts = Shapes::IntegerShape.new(name: 'dpuCounts')
+    dpuDurationInHour = Shapes::FloatShape.new(name: 'dpuDurationInHour')
+    metricCounts = Shapes::IntegerShape.new(name: 'metricCounts')
     tableNameString = Shapes::StringShape.new(name: 'tableNameString')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
@@ -2025,6 +2039,9 @@ module Aws::Glue
     ColumnStatisticsTaskStoppingException.struct_class = Types::ColumnStatisticsTaskStoppingException
 
     ColumnValueStringList.member = Shapes::ShapeRef.new(shape: ColumnValuesString)
+
+    CompactionMetrics.add_member(:iceberg_metrics, Shapes::ShapeRef.new(shape: IcebergCompactionMetrics, location_name: "IcebergMetrics"))
+    CompactionMetrics.struct_class = Types::CompactionMetrics
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
@@ -4029,9 +4046,36 @@ module Aws::Glue
 
     HudiTargetList.member = Shapes::ShapeRef.new(shape: HudiTarget)
 
+    IcebergCompactionMetrics.add_member(:number_of_bytes_compacted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfBytesCompacted"))
+    IcebergCompactionMetrics.add_member(:number_of_files_compacted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfFilesCompacted"))
+    IcebergCompactionMetrics.add_member(:number_of_dpus, Shapes::ShapeRef.new(shape: dpuCounts, location_name: "NumberOfDpus"))
+    IcebergCompactionMetrics.add_member(:job_duration_in_hour, Shapes::ShapeRef.new(shape: dpuDurationInHour, location_name: "JobDurationInHour"))
+    IcebergCompactionMetrics.struct_class = Types::IcebergCompactionMetrics
+
     IcebergInput.add_member(:metadata_operation, Shapes::ShapeRef.new(shape: MetadataOperation, required: true, location_name: "MetadataOperation"))
     IcebergInput.add_member(:version, Shapes::ShapeRef.new(shape: VersionString, location_name: "Version"))
     IcebergInput.struct_class = Types::IcebergInput
+
+    IcebergOrphanFileDeletionConfiguration.add_member(:orphan_file_retention_period_in_days, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "orphanFileRetentionPeriodInDays"))
+    IcebergOrphanFileDeletionConfiguration.add_member(:location, Shapes::ShapeRef.new(shape: MessageString, location_name: "location"))
+    IcebergOrphanFileDeletionConfiguration.struct_class = Types::IcebergOrphanFileDeletionConfiguration
+
+    IcebergOrphanFileDeletionMetrics.add_member(:number_of_orphan_files_deleted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfOrphanFilesDeleted"))
+    IcebergOrphanFileDeletionMetrics.add_member(:number_of_dpus, Shapes::ShapeRef.new(shape: dpuCounts, location_name: "NumberOfDpus"))
+    IcebergOrphanFileDeletionMetrics.add_member(:job_duration_in_hour, Shapes::ShapeRef.new(shape: dpuDurationInHour, location_name: "JobDurationInHour"))
+    IcebergOrphanFileDeletionMetrics.struct_class = Types::IcebergOrphanFileDeletionMetrics
+
+    IcebergRetentionConfiguration.add_member(:snapshot_retention_period_in_days, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "snapshotRetentionPeriodInDays"))
+    IcebergRetentionConfiguration.add_member(:number_of_snapshots_to_retain, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "numberOfSnapshotsToRetain"))
+    IcebergRetentionConfiguration.add_member(:clean_expired_files, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "cleanExpiredFiles"))
+    IcebergRetentionConfiguration.struct_class = Types::IcebergRetentionConfiguration
+
+    IcebergRetentionMetrics.add_member(:number_of_data_files_deleted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfDataFilesDeleted"))
+    IcebergRetentionMetrics.add_member(:number_of_manifest_files_deleted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfManifestFilesDeleted"))
+    IcebergRetentionMetrics.add_member(:number_of_manifest_lists_deleted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfManifestListsDeleted"))
+    IcebergRetentionMetrics.add_member(:number_of_dpus, Shapes::ShapeRef.new(shape: dpuCounts, location_name: "NumberOfDpus"))
+    IcebergRetentionMetrics.add_member(:job_duration_in_hour, Shapes::ShapeRef.new(shape: dpuDurationInHour, location_name: "JobDurationInHour"))
+    IcebergRetentionMetrics.struct_class = Types::IcebergRetentionMetrics
 
     IcebergTarget.add_member(:paths, Shapes::ShapeRef.new(shape: PathList, location_name: "Paths"))
     IcebergTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
@@ -4764,6 +4808,12 @@ module Aws::Glue
 
     OrderList.member = Shapes::ShapeRef.new(shape: Order)
 
+    OrphanFileDeletionConfiguration.add_member(:iceberg_configuration, Shapes::ShapeRef.new(shape: IcebergOrphanFileDeletionConfiguration, location_name: "icebergConfiguration"))
+    OrphanFileDeletionConfiguration.struct_class = Types::OrphanFileDeletionConfiguration
+
+    OrphanFileDeletionMetrics.add_member(:iceberg_metrics, Shapes::ShapeRef.new(shape: IcebergOrphanFileDeletionMetrics, location_name: "IcebergMetrics"))
+    OrphanFileDeletionMetrics.struct_class = Types::OrphanFileDeletionMetrics
+
     OtherMetadataValueList.member = Shapes::ShapeRef.new(shape: OtherMetadataValueListItem)
 
     OtherMetadataValueListItem.add_member(:metadata_value, Shapes::ShapeRef.new(shape: MetadataValueString, location_name: "MetadataValue"))
@@ -5066,6 +5116,12 @@ module Aws::Glue
     ResumeWorkflowRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "RunId"))
     ResumeWorkflowRunResponse.add_member(:node_ids, Shapes::ShapeRef.new(shape: NodeIdList, location_name: "NodeIds"))
     ResumeWorkflowRunResponse.struct_class = Types::ResumeWorkflowRunResponse
+
+    RetentionConfiguration.add_member(:iceberg_configuration, Shapes::ShapeRef.new(shape: IcebergRetentionConfiguration, location_name: "icebergConfiguration"))
+    RetentionConfiguration.struct_class = Types::RetentionConfiguration
+
+    RetentionMetrics.add_member(:iceberg_metrics, Shapes::ShapeRef.new(shape: IcebergRetentionMetrics, location_name: "IcebergMetrics"))
+    RetentionMetrics.struct_class = Types::RetentionMetrics
 
     RulesetNames.member = Shapes::ShapeRef.new(shape: NameString)
 
@@ -5800,13 +5856,18 @@ module Aws::Glue
 
     TableOptimizerConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "roleArn"))
     TableOptimizerConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enabled"))
+    TableOptimizerConfiguration.add_member(:retention_configuration, Shapes::ShapeRef.new(shape: RetentionConfiguration, location_name: "retentionConfiguration"))
+    TableOptimizerConfiguration.add_member(:orphan_file_deletion_configuration, Shapes::ShapeRef.new(shape: OrphanFileDeletionConfiguration, location_name: "orphanFileDeletionConfiguration"))
     TableOptimizerConfiguration.struct_class = Types::TableOptimizerConfiguration
 
     TableOptimizerRun.add_member(:event_type, Shapes::ShapeRef.new(shape: TableOptimizerEventType, location_name: "eventType"))
     TableOptimizerRun.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: TableOptimizerRunTimestamp, location_name: "startTimestamp"))
     TableOptimizerRun.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: TableOptimizerRunTimestamp, location_name: "endTimestamp"))
-    TableOptimizerRun.add_member(:metrics, Shapes::ShapeRef.new(shape: RunMetrics, location_name: "metrics"))
+    TableOptimizerRun.add_member(:metrics, Shapes::ShapeRef.new(shape: RunMetrics, deprecated: true, location_name: "metrics", metadata: {"deprecatedMessage"=>"Metrics has been replaced by optimizer type specific metrics such as IcebergCompactionMetrics"}))
     TableOptimizerRun.add_member(:error, Shapes::ShapeRef.new(shape: MessageString, location_name: "error"))
+    TableOptimizerRun.add_member(:compaction_metrics, Shapes::ShapeRef.new(shape: CompactionMetrics, location_name: "compactionMetrics"))
+    TableOptimizerRun.add_member(:retention_metrics, Shapes::ShapeRef.new(shape: RetentionMetrics, location_name: "retentionMetrics"))
+    TableOptimizerRun.add_member(:orphan_file_deletion_metrics, Shapes::ShapeRef.new(shape: OrphanFileDeletionMetrics, location_name: "orphanFileDeletionMetrics"))
     TableOptimizerRun.struct_class = Types::TableOptimizerRun
 
     TableOptimizerRuns.member = Shapes::ShapeRef.new(shape: TableOptimizerRun)
@@ -5873,6 +5934,9 @@ module Aws::Glue
     TaskRunSortCriteria.add_member(:column, Shapes::ShapeRef.new(shape: TaskRunSortColumnType, required: true, location_name: "Column"))
     TaskRunSortCriteria.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirectionType, required: true, location_name: "SortDirection"))
     TaskRunSortCriteria.struct_class = Types::TaskRunSortCriteria
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     TimestampFilter.add_member(:recorded_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RecordedBefore"))
     TimestampFilter.add_member(:recorded_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RecordedAfter"))
@@ -6537,7 +6601,11 @@ module Aws::Glue
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: BatchGetTableOptimizerRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchGetTableOptimizerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:batch_get_triggers, Seahorse::Model::Operation.new.tap do |o|
@@ -6921,10 +6989,12 @@ module Aws::Glue
         o.input = Shapes::ShapeRef.new(shape: CreateTableOptimizerRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateTableOptimizerResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -7253,6 +7323,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -8067,6 +8138,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -8640,7 +8712,9 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -9384,7 +9458,10 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_trigger, Seahorse::Model::Operation.new.tap do |o|

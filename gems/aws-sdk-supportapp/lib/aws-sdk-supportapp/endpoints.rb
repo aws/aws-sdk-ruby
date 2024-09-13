@@ -14,140 +14,110 @@ module Aws::SupportApp
 
     class CreateSlackChannelConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DeleteAccountAlias
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DeleteSlackChannelConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DeleteSlackWorkspaceConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class GetAccountAlias
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListSlackChannelConfigurations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListSlackWorkspaceConfigurations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class PutAccountAlias
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class RegisterSlackWorkspaceForOrganization
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UpdateSlackChannelConfiguration
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::SupportApp::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end

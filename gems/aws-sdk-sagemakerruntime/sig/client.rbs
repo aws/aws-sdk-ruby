@@ -83,6 +83,8 @@ module Aws
         def content_type: () -> ::String
         def invoked_production_variant: () -> ::String
         def custom_attributes: () -> ::String
+        def new_session_id: () -> ::String
+        def closed_session_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerRuntime/Client.html#invoke_endpoint-instance_method
       def invoke_endpoint: (
@@ -96,7 +98,8 @@ module Aws
                              ?target_container_hostname: ::String,
                              ?inference_id: ::String,
                              ?enable_explanations: ::String,
-                             ?inference_component_name: ::String
+                             ?inference_component_name: ::String,
+                             ?session_id: ::String
                            ) -> _InvokeEndpointResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeEndpointResponseSuccess
 
@@ -136,7 +139,8 @@ module Aws
                                                   ?target_variant: ::String,
                                                   ?target_container_hostname: ::String,
                                                   ?inference_id: ::String,
-                                                  ?inference_component_name: ::String
+                                                  ?inference_component_name: ::String,
+                                                  ?session_id: ::String
                                                 ) ?{ (*untyped) -> void } -> _InvokeEndpointWithResponseStreamResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeEndpointWithResponseStreamResponseSuccess
     end

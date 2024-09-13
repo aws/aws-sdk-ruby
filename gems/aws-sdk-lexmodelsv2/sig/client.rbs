@@ -282,7 +282,7 @@ module Aws
                                nlu_intent_confidence_threshold: ::Float,
                                ?voice_settings: {
                                  voice_id: ::String,
-                                 engine: ("standard" | "neural")?
+                                 engine: ("standard" | "neural" | "long-form" | "generative")?
                                },
                                ?generative_ai_settings: {
                                  runtime_settings: {
@@ -7275,7 +7275,7 @@ module Aws
                               nlu_intent_confidence_threshold: ::Float?,
                               voice_settings: {
                                 voice_id: ::String,
-                                engine: ("standard" | "neural")?
+                                engine: ("standard" | "neural" | "long-form" | "generative")?
                               }?
                             }?,
                             custom_vocabulary_import_specification: {
@@ -7529,7 +7529,7 @@ module Aws
                                nlu_intent_confidence_threshold: ::Float,
                                ?voice_settings: {
                                  voice_id: ::String,
-                                 engine: ("standard" | "neural")?
+                                 engine: ("standard" | "neural" | "long-form" | "generative")?
                                },
                                ?generative_ai_settings: {
                                  runtime_settings: {

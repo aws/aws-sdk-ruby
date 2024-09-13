@@ -117,6 +117,9 @@ module Aws
       class SchedulerTransitioningException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

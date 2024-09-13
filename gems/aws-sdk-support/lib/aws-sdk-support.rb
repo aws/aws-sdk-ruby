@@ -52,6 +52,6 @@ require_relative 'aws-sdk-support/customizations'
 # @!group service
 module Aws::Support
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.67.0'
 
 end

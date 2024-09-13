@@ -250,6 +250,23 @@ module Aws::Synthetics
     # script was passed into the canary directly, the script code is
     # contained in the value of `Zipfile`.
     #
+    # If you are uploading your canary scripts with an Amazon S3 bucket,
+    # your zip file should include your script in a certain folder
+    # structure.
+    #
+    # * For Node.js canaries, the folder structure must be
+    #   `nodejs/node_modules/myCanaryFilename.js ` For more information, see
+    #   [Packaging your Node.js canary files][1]
+    #
+    # * For Python canaries, the folder structure must be
+    #   `python/myCanaryFilename.p ` or `python/myFolder/myCanaryFilename.py
+    #   ` For more information, see [Packaging your Python canary files][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Nodejs.html#CloudWatch_Synthetics_Canaries_package
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Python.html#CloudWatch_Synthetics_Canaries_WritingCanary_Python_package
+    #
     # @!attribute [rw] s3_bucket
     #   If your canary script is located in S3, specify the bucket name
     #   here. Do not include `s3://` as the start of the bucket name.
@@ -761,6 +778,15 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
     #   @return [Types::VpcConfigInput]
     #
+    # @!attribute [rw] resources_to_replicate_tags
+    #   To have the tags that you apply to this canary also be applied to
+    #   the Lambda function that the canary uses, specify this parameter
+    #   with the value `lambda-function`.
+    #
+    #   If you specify this parameter and don't specify any tags in the
+    #   `Tags` parameter, the canary creation fails.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tags
     #   A list of key-value pairs to associate with the canary. You can
     #   associate as many as 50 tags with a canary.
@@ -769,6 +795,10 @@ module Aws::Synthetics
     #   also use them to scope user permissions, by granting a user
     #   permission to access or change only the resources that have certain
     #   tag values.
+    #
+    #   To have the tags that you apply to this canary also be applied to
+    #   the Lambda function that the canary uses, specify this parameter
+    #   with the value `lambda-function`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] artifact_config
@@ -790,6 +820,7 @@ module Aws::Synthetics
       :failure_retention_period_in_days,
       :runtime_version,
       :vpc_config,
+      :resources_to_replicate_tags,
       :tags,
       :artifact_config)
       SENSITIVE = []
@@ -963,7 +994,7 @@ module Aws::Synthetics
     # @!attribute [rw] max_results
     #   Specify this parameter to limit how many canaries are returned each
     #   time you use the `DescribeCanaries` operation. If you omit this
-    #   parameter, the default of 100 is used.
+    #   parameter, the default of 20 is used.
     #   @return [Integer]
     #
     # @!attribute [rw] names

@@ -48,6 +48,6 @@ require_relative 'aws-sdk-importexport/customizations'
 # @!group service
 module Aws::ImportExport
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.52.0'
 
 end

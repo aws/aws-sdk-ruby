@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2024-09-12)
+------------------
+
+* Feature - Correct incorrectly mapped error in ELBv2 waiters
+
+1.113.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2024-09-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2024-09-09)
+------------------
+
+* Feature - Add paginators for the ELBv2 DescribeListenerCertificates and DescribeRules APIs. Fix broken waiter for the ELBv2 DescribeLoadBalancers API.
+
 1.110.0 (2024-09-03)
 ------------------
 

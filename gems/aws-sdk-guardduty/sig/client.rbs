@@ -553,11 +553,12 @@ module Aws
       interface _GetFindingsStatisticsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsStatisticsResponse]
         def finding_statistics: () -> Types::FindingStatistics
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_findings_statistics-instance_method
       def get_findings_statistics: (
                                      detector_id: ::String,
-                                     finding_statistic_types: Array[("COUNT_BY_SEVERITY")],
+                                     ?finding_statistic_types: Array[("COUNT_BY_SEVERITY")],
                                      ?finding_criteria: {
                                        criterion: Hash[::String, {
                                            eq: Array[::String]?,
@@ -573,7 +574,10 @@ module Aws
                                            less_than: ::Integer?,
                                            less_than_or_equal: ::Integer?
                                          }]?
-                                     }
+                                     },
+                                     ?group_by: ("ACCOUNT" | "DATE" | "FINDING_TYPE" | "RESOURCE" | "SEVERITY"),
+                                     ?order_by: ("ASC" | "DESC"),
+                                     ?max_results: ::Integer
                                    ) -> _GetFindingsStatisticsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsStatisticsResponseSuccess
 

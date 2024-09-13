@@ -53,6 +53,6 @@ require_relative 'aws-sdk-appfabric/customizations'
 # @!group service
 module Aws::AppFabric
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.17.0'
 
 end

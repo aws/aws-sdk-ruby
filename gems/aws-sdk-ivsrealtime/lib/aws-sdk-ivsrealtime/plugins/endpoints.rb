@@ -40,10 +40,19 @@ module Aws::IVSRealTime
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -60,6 +69,8 @@ module Aws::IVSRealTime
           case context.operation_name
           when :create_encoder_configuration
             Aws::IVSRealTime::Endpoints::CreateEncoderConfiguration.build(context)
+          when :create_ingest_configuration
+            Aws::IVSRealTime::Endpoints::CreateIngestConfiguration.build(context)
           when :create_participant_token
             Aws::IVSRealTime::Endpoints::CreateParticipantToken.build(context)
           when :create_stage
@@ -68,6 +79,8 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::CreateStorageConfiguration.build(context)
           when :delete_encoder_configuration
             Aws::IVSRealTime::Endpoints::DeleteEncoderConfiguration.build(context)
+          when :delete_ingest_configuration
+            Aws::IVSRealTime::Endpoints::DeleteIngestConfiguration.build(context)
           when :delete_public_key
             Aws::IVSRealTime::Endpoints::DeletePublicKey.build(context)
           when :delete_stage
@@ -80,6 +93,8 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::GetComposition.build(context)
           when :get_encoder_configuration
             Aws::IVSRealTime::Endpoints::GetEncoderConfiguration.build(context)
+          when :get_ingest_configuration
+            Aws::IVSRealTime::Endpoints::GetIngestConfiguration.build(context)
           when :get_participant
             Aws::IVSRealTime::Endpoints::GetParticipant.build(context)
           when :get_public_key
@@ -96,6 +111,8 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::ListCompositions.build(context)
           when :list_encoder_configurations
             Aws::IVSRealTime::Endpoints::ListEncoderConfigurations.build(context)
+          when :list_ingest_configurations
+            Aws::IVSRealTime::Endpoints::ListIngestConfigurations.build(context)
           when :list_participant_events
             Aws::IVSRealTime::Endpoints::ListParticipantEvents.build(context)
           when :list_participants
@@ -118,6 +135,8 @@ module Aws::IVSRealTime
             Aws::IVSRealTime::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::IVSRealTime::Endpoints::UntagResource.build(context)
+          when :update_ingest_configuration
+            Aws::IVSRealTime::Endpoints::UpdateIngestConfiguration.build(context)
           when :update_stage
             Aws::IVSRealTime::Endpoints::UpdateStage.build(context)
           end

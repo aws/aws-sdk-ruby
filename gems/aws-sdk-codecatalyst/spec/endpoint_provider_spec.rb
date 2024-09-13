@@ -14,7 +14,7 @@ module Aws::CodeCatalyst
   describe EndpointProvider do
     subject { Aws::CodeCatalyst::EndpointProvider.new }
 
-    context 'Override endpoint' do
+    context "Override endpoint" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://test.codecatalyst.global.api.aws"}}
       end
@@ -28,7 +28,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default endpoint (region not set)' do
+    context "Default endpoint (region not set)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
       end
@@ -42,7 +42,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default FIPS endpoint (region not set)' do
+    context "Default FIPS endpoint (region not set)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
       end
@@ -56,7 +56,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default endpoint (region: aws-global)' do
+    context "Default endpoint (region: aws-global)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
       end
@@ -70,7 +70,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default FIPS endpoint (region: aws-global)' do
+    context "Default FIPS endpoint (region: aws-global)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
       end
@@ -84,7 +84,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default endpoint for a valid home region (region: us-west-2)' do
+    context "Default endpoint for a valid home region (region: us-west-2)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
       end
@@ -98,7 +98,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default FIPS endpoint for a valid home region (region: us-west-2)' do
+    context "Default FIPS endpoint for a valid home region (region: us-west-2)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
       end
@@ -112,7 +112,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default endpoint for an unavailable home region (region: us-east-1)' do
+    context "Default endpoint for an unavailable home region (region: us-east-1)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst.global.api.aws"}}
       end
@@ -126,7 +126,7 @@ module Aws::CodeCatalyst
       end
     end
 
-    context 'Default FIPS endpoint for an unavailable home region (region: us-east-1)' do
+    context "Default FIPS endpoint for an unavailable home region (region: us-east-1)" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://codecatalyst-fips.global.api.aws"}}
       end

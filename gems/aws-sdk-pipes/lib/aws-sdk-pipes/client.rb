@@ -425,6 +425,12 @@ module Aws::Pipes
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -484,6 +490,22 @@ module Aws::Pipes
     #
     # @option params [Types::PipeLogConfigurationParameters] :log_configuration
     #   The logging configuration settings for the pipe.
+    #
+    # @option params [String] :kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to use,
+    #   if you choose to use a customer managed key to encrypt pipe data. The
+    #   identifier can be the key Amazon Resource Name (ARN), KeyId, key
+    #   alias, or key alias ARN.
+    #
+    #   If you do not specify a customer managed key identifier, EventBridge
+    #   uses an Amazon Web Services owned key to encrypt pipe data.
+    #
+    #   For more information, see [Managing keys][1] in the *Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
     #
     # @return [Types::CreatePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -825,6 +847,7 @@ module Aws::Pipes
     #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
     #       include_execution_data: ["ALL"], # accepts ALL
     #     },
+    #     kms_key_identifier: "KmsKeyIdentifier",
     #   })
     #
     # @example Response structure
@@ -918,6 +941,7 @@ module Aws::Pipes
     #   * {Types::DescribePipeResponse#creation_time #creation_time} => Time
     #   * {Types::DescribePipeResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribePipeResponse#log_configuration #log_configuration} => Types::PipeLogConfiguration
+    #   * {Types::DescribePipeResponse#kms_key_identifier #kms_key_identifier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1128,6 +1152,7 @@ module Aws::Pipes
     #   resp.log_configuration.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
     #   resp.log_configuration.include_execution_data #=> Array
     #   resp.log_configuration.include_execution_data[0] #=> String, one of "ALL"
+    #   resp.kms_key_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DescribePipe AWS API Documentation
     #
@@ -1446,6 +1471,27 @@ module Aws::Pipes
     #
     # @option params [Types::PipeLogConfigurationParameters] :log_configuration
     #   The logging configuration settings for the pipe.
+    #
+    # @option params [String] :kms_key_identifier
+    #   The identifier of the KMS customer managed key for EventBridge to use,
+    #   if you choose to use a customer managed key to encrypt pipe data. The
+    #   identifier can be the key Amazon Resource Name (ARN), KeyId, key
+    #   alias, or key alias ARN.
+    #
+    #   To update a pipe that is using the default Amazon Web Services owned
+    #   key to use a customer managed key instead, or update a pipe that is
+    #   using a customer managed key to use a different customer managed key,
+    #   specify a customer managed key identifier.
+    #
+    #   To update a pipe that is using a customer managed key to use the
+    #   default Amazon Web Services owned key, specify an empty string.
+    #
+    #   For more information, see [Managing keys][1] in the *Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
     #
     # @return [Types::UpdatePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1770,6 +1816,7 @@ module Aws::Pipes
     #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
     #       include_execution_data: ["ALL"], # accepts ALL
     #     },
+    #     kms_key_identifier: "KmsKeyIdentifier",
     #   })
     #
     # @example Response structure
@@ -1808,7 +1855,7 @@ module Aws::Pipes
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pipes'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

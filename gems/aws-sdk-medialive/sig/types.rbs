@@ -490,6 +490,7 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       SENSITIVE: []
     end
 
@@ -521,6 +522,7 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       SENSITIVE: []
     end
 
@@ -567,6 +569,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettings
+      attr_accessor anywhere_settings: Types::AnywhereSettings
       SENSITIVE: []
     end
 
@@ -585,6 +588,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettings
+      attr_accessor anywhere_settings: Types::AnywhereSettings
       SENSITIVE: []
     end
 
@@ -608,9 +612,11 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       SENSITIVE: []
     end
 
@@ -624,9 +630,11 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       SENSITIVE: []
     end
 
@@ -762,6 +770,7 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       SENSITIVE: []
     end
 
@@ -894,6 +903,7 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       SENSITIVE: []
     end
 
@@ -958,8 +968,10 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor srt_settings: Types::SrtSettings
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor multicast_settings: Types::MulticastSettings
       SENSITIVE: []
     end
 
@@ -1605,8 +1617,10 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor srt_settings: Types::SrtSettings
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor multicast_settings: Types::MulticastSettings
       SENSITIVE: []
     end
 
@@ -1615,6 +1629,7 @@ module Aws::MediaLive
       attr_accessor input_attachment_name: ::String
       attr_accessor input_id: ::String
       attr_accessor input_settings: Types::InputSettings
+      attr_accessor logical_interface_names: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1636,11 +1651,16 @@ module Aws::MediaLive
       attr_accessor port: ::String
       attr_accessor url: ::String
       attr_accessor vpc: Types::InputDestinationVpc
+      attr_accessor network: ::String
+      attr_accessor network_routes: ::Array[Types::InputDestinationRoute]
       SENSITIVE: []
     end
 
     class InputDestinationRequest
       attr_accessor stream_name: ::String
+      attr_accessor network: ::String
+      attr_accessor network_routes: ::Array[Types::InputRequestDestinationRoute]
+      attr_accessor static_ip_address: ::String
       SENSITIVE: []
     end
 
@@ -2435,6 +2455,7 @@ module Aws::MediaLive
     class NetworkInputSettings
       attr_accessor hls_input_settings: Types::HlsInputSettings
       attr_accessor server_validation: ("CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" | "CHECK_CRYPTOGRAPHY_ONLY")
+      attr_accessor multicast_input_settings: Types::MulticastInputSettings
       SENSITIVE: []
     end
 
@@ -2499,6 +2520,7 @@ module Aws::MediaLive
       attr_accessor media_package_settings: ::Array[Types::MediaPackageOutputDestinationSettings]
       attr_accessor multiplex_settings: Types::MultiplexProgramChannelDestinationSettings
       attr_accessor settings: ::Array[Types::OutputDestinationSettings]
+      attr_accessor srt_settings: ::Array[Types::SrtOutputDestinationSettings]
       SENSITIVE: []
     end
 
@@ -2527,6 +2549,7 @@ module Aws::MediaLive
       attr_accessor rtmp_group_settings: Types::RtmpGroupSettings
       attr_accessor udp_group_settings: Types::UdpGroupSettings
       attr_accessor cmaf_ingest_group_settings: Types::CmafIngestGroupSettings
+      attr_accessor srt_group_settings: Types::SrtGroupSettings
       SENSITIVE: []
     end
 
@@ -2551,6 +2574,7 @@ module Aws::MediaLive
       attr_accessor rtmp_output_settings: Types::RtmpOutputSettings
       attr_accessor udp_output_settings: Types::UdpOutputSettings
       attr_accessor cmaf_ingest_output_settings: Types::CmafIngestOutputSettings
+      attr_accessor srt_output_settings: Types::SrtOutputSettings
       SENSITIVE: []
     end
 
@@ -2679,7 +2703,7 @@ module Aws::MediaLive
 
     class ReservationResourceSpecification
       attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
-      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "AUDIO" | "LINK")
+      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "AUDIO" | "LINK" | "AV1")
       attr_accessor maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS")
       attr_accessor maximum_framerate: ("MAX_30_FPS" | "MAX_60_FPS")
       attr_accessor resolution: ("SD" | "HD" | "FHD" | "UHD")
@@ -2884,6 +2908,7 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       SENSITIVE: []
     end
 
@@ -2999,6 +3024,7 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       SENSITIVE: []
     end
 
@@ -3241,6 +3267,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor srt_settings: Types::SrtSettingsRequest
+      attr_accessor multicast_settings: Types::MulticastSettingsUpdateRequest
       SENSITIVE: []
     end
 
@@ -3291,6 +3318,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor srt_settings: Types::SrtSettingsRequest
+      attr_accessor multicast_settings: Types::MulticastSettingsUpdateRequest
       SENSITIVE: []
     end
 
@@ -3408,6 +3436,7 @@ module Aws::MediaLive
       attr_accessor h264_settings: Types::H264Settings
       attr_accessor h265_settings: Types::H265Settings
       attr_accessor mpeg_2_settings: Types::Mpeg2Settings
+      attr_accessor av_1_settings: Types::Av1Settings
       SENSITIVE: []
     end
 
@@ -3516,6 +3545,7 @@ module Aws::MediaLive
       attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor vpc: Types::VpcOutputSettingsDescription
+      attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       SENSITIVE: []
     end
 
@@ -4629,6 +4659,745 @@ module Aws::MediaLive
 
     class SrtSettingsRequest
       attr_accessor srt_caller_sources: ::Array[Types::SrtCallerSourceRequest]
+      SENSITIVE: []
+    end
+
+    class AnywhereSettings
+      attr_accessor channel_placement_group_id: ::String
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class Av1ColorSpaceSettings
+      attr_accessor color_space_passthrough_settings: Types::ColorSpacePassthroughSettings
+      attr_accessor hdr_10_settings: Types::Hdr10Settings
+      attr_accessor rec_601_settings: Types::Rec601Settings
+      attr_accessor rec_709_settings: Types::Rec709Settings
+      SENSITIVE: []
+    end
+
+    class Av1Settings
+      attr_accessor afd_signaling: ("AUTO" | "FIXED" | "NONE")
+      attr_accessor buf_size: ::Integer
+      attr_accessor color_space_settings: Types::Av1ColorSpaceSettings
+      attr_accessor fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS")
+      attr_accessor level: ("AV1_LEVEL_2" | "AV1_LEVEL_2_1" | "AV1_LEVEL_3" | "AV1_LEVEL_3_1" | "AV1_LEVEL_4" | "AV1_LEVEL_4_1" | "AV1_LEVEL_5" | "AV1_LEVEL_5_1" | "AV1_LEVEL_5_2" | "AV1_LEVEL_5_3" | "AV1_LEVEL_6" | "AV1_LEVEL_6_1" | "AV1_LEVEL_6_2" | "AV1_LEVEL_6_3" | "AV1_LEVEL_AUTO")
+      attr_accessor look_ahead_rate_control: ("HIGH" | "LOW" | "MEDIUM")
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor min_i_interval: ::Integer
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor qvbr_quality_level: ::Integer
+      attr_accessor scene_change_detect: ("DISABLED" | "ENABLED")
+      attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
+      SENSITIVE: []
+    end
+
+    class ClusterNetworkSettings
+      attr_accessor default_route: ::String
+      attr_accessor interface_mappings: ::Array[Types::InterfaceMapping]
+      SENSITIVE: []
+    end
+
+    class ClusterNetworkSettingsCreateRequest
+      attr_accessor default_route: ::String
+      attr_accessor interface_mappings: ::Array[Types::InterfaceMappingCreateRequest]
+      SENSITIVE: []
+    end
+
+    class ClusterNetworkSettingsUpdateRequest
+      attr_accessor default_route: ::String
+      attr_accessor interface_mappings: ::Array[Types::InterfaceMappingUpdateRequest]
+      SENSITIVE: []
+    end
+
+    class CreateChannelPlacementGroupRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor request_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChannelPlacementGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor channels: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor state: ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor instance_role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettingsCreateRequest
+      attr_accessor request_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor id: ::String
+      attr_accessor instance_role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettings
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class CreateNetworkRequest
+      attr_accessor ip_pools: ::Array[Types::IpPoolCreateRequest]
+      attr_accessor name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor routes: ::Array[Types::RouteCreateRequest]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateNetworkResponse
+      attr_accessor arn: ::String
+      attr_accessor associated_cluster_ids: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor ip_pools: ::Array[Types::IpPool]
+      attr_accessor name: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class CreateNodeRegistrationScriptRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor request_id: ::String
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class CreateNodeRegistrationScriptResponse
+      attr_accessor node_registration_script: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNodeRegistrationScriptResult
+      attr_accessor node_registration_script: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNodeRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMappingCreateRequest]
+      attr_accessor request_id: ::String
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateNodeResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_placement_groups: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      SENSITIVE: []
+    end
+
+    class DeleteChannelPlacementGroupRequest
+      attr_accessor channel_placement_group_id: ::String
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelPlacementGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor channels: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor state: ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor id: ::String
+      attr_accessor instance_role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettings
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkResponse
+      attr_accessor arn: ::String
+      attr_accessor associated_cluster_ids: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor ip_pools: ::Array[Types::IpPool]
+      attr_accessor name: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeleteNodeRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNodeResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_placement_groups: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      SENSITIVE: []
+    end
+
+    class DescribeAnywhereSettings
+      attr_accessor channel_placement_group_id: ::String
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelPlacementGroupRequest
+      attr_accessor channel_placement_group_id: ::String
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelPlacementGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor channels: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor state: ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      SENSITIVE: []
+    end
+
+    class DescribeChannelPlacementGroupResult
+      attr_accessor arn: ::String
+      attr_accessor channels: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor state: ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      SENSITIVE: []
+    end
+
+    class DescribeChannelPlacementGroupSummary
+      attr_accessor arn: ::String
+      attr_accessor channels: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor state: ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      SENSITIVE: []
+    end
+
+    class DescribeClusterRequest
+      attr_accessor cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor id: ::String
+      attr_accessor instance_role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettings
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DescribeClusterResult
+      attr_accessor arn: ::String
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor id: ::String
+      attr_accessor instance_role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettings
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DescribeClusterSummary
+      attr_accessor arn: ::String
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor id: ::String
+      attr_accessor instance_role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettings
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DescribeNetworkRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNetworkResponse
+      attr_accessor arn: ::String
+      attr_accessor associated_cluster_ids: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor ip_pools: ::Array[Types::IpPool]
+      attr_accessor name: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DescribeNetworkResult
+      attr_accessor arn: ::String
+      attr_accessor associated_cluster_ids: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor ip_pools: ::Array[Types::IpPool]
+      attr_accessor name: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DescribeNetworkSummary
+      attr_accessor arn: ::String
+      attr_accessor associated_cluster_ids: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor ip_pools: ::Array[Types::IpPool]
+      attr_accessor name: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DescribeNodeRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNodeResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_placement_groups: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      SENSITIVE: []
+    end
+
+    class DescribeNodeResult
+      attr_accessor arn: ::String
+      attr_accessor channel_placement_groups: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      SENSITIVE: []
+    end
+
+    class DescribeNodeSummary
+      attr_accessor arn: ::String
+      attr_accessor channel_placement_groups: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor managed_instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      SENSITIVE: []
+    end
+
+    class InputDestinationRoute
+      attr_accessor cidr: ::String
+      attr_accessor gateway: ::String
+      SENSITIVE: []
+    end
+
+    class InputRequestDestinationRoute
+      attr_accessor cidr: ::String
+      attr_accessor gateway: ::String
+      SENSITIVE: []
+    end
+
+    class InterfaceMapping
+      attr_accessor logical_interface_name: ::String
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class InterfaceMappingCreateRequest
+      attr_accessor logical_interface_name: ::String
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class InterfaceMappingUpdateRequest
+      attr_accessor logical_interface_name: ::String
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class IpPool
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class IpPoolCreateRequest
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class IpPoolUpdateRequest
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelPlacementGroupsRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelPlacementGroupsResponse
+      attr_accessor channel_placement_groups: ::Array[Types::DescribeChannelPlacementGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelPlacementGroupsResult
+      attr_accessor channel_placement_groups: ::Array[Types::DescribeChannelPlacementGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersResponse
+      attr_accessor clusters: ::Array[Types::DescribeClusterSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersResult
+      attr_accessor clusters: ::Array[Types::DescribeClusterSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksResponse
+      attr_accessor networks: ::Array[Types::DescribeNetworkSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksResult
+      attr_accessor networks: ::Array[Types::DescribeNetworkSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodesRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodesResponse
+      attr_accessor next_token: ::String
+      attr_accessor nodes: ::Array[Types::DescribeNodeSummary]
+      SENSITIVE: []
+    end
+
+    class ListNodesResult
+      attr_accessor next_token: ::String
+      attr_accessor nodes: ::Array[Types::DescribeNodeSummary]
+      SENSITIVE: []
+    end
+
+    class MulticastInputSettings
+      attr_accessor source_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class MulticastSettings
+      attr_accessor sources: ::Array[Types::MulticastSource]
+      SENSITIVE: []
+    end
+
+    class MulticastSettingsCreateRequest
+      attr_accessor sources: ::Array[Types::MulticastSourceCreateRequest]
+      SENSITIVE: []
+    end
+
+    class MulticastSettingsUpdateRequest
+      attr_accessor sources: ::Array[Types::MulticastSourceUpdateRequest]
+      SENSITIVE: []
+    end
+
+    class MulticastSource
+      attr_accessor source_ip: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class MulticastSourceCreateRequest
+      attr_accessor source_ip: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class MulticastSourceUpdateRequest
+      attr_accessor source_ip: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class NodeConfigurationValidationError
+      attr_accessor message: ::String
+      attr_accessor validation_errors: ::Array[Types::ValidationError]
+      SENSITIVE: []
+    end
+
+    class NodeInterfaceMapping
+      attr_accessor logical_interface_name: ::String
+      attr_accessor network_interface_mode: ("NAT" | "BRIDGE")
+      attr_accessor physical_interface_name: ::String
+      SENSITIVE: []
+    end
+
+    class NodeInterfaceMappingCreateRequest
+      attr_accessor logical_interface_name: ::String
+      attr_accessor network_interface_mode: ("NAT" | "BRIDGE")
+      attr_accessor physical_interface_name: ::String
+      SENSITIVE: []
+    end
+
+    class Route
+      attr_accessor cidr: ::String
+      attr_accessor gateway: ::String
+      SENSITIVE: []
+    end
+
+    class RouteCreateRequest
+      attr_accessor cidr: ::String
+      attr_accessor gateway: ::String
+      SENSITIVE: []
+    end
+
+    class RouteUpdateRequest
+      attr_accessor cidr: ::String
+      attr_accessor gateway: ::String
+      SENSITIVE: []
+    end
+
+    class SrtGroupSettings
+      attr_accessor input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")
+      SENSITIVE: []
+    end
+
+    class SrtOutputDestinationSettings
+      attr_accessor encryption_passphrase_secret_arn: ::String
+      attr_accessor stream_id: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class SrtOutputSettings
+      attr_accessor buffer_msec: ::Integer
+      attr_accessor container_settings: Types::UdpContainerSettings
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor encryption_type: ("AES128" | "AES192" | "AES256")
+      attr_accessor latency: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateChannelPlacementGroupRequest
+      attr_accessor channel_placement_group_id: ::String
+      attr_accessor cluster_id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelPlacementGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor channels: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor state: ("UNASSIGNED" | "ASSIGNING" | "ASSIGNED" | "DELETING" | "DELETE_FAILED" | "DELETED" | "UNASSIGNING")
+      SENSITIVE: []
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettingsUpdateRequest
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettings
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResult
+      attr_accessor arn: ::String
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor cluster_type: ("ON_PREMISES")
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::ClusterNetworkSettings
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkRequest
+      attr_accessor ip_pools: ::Array[Types::IpPoolUpdateRequest]
+      attr_accessor name: ::String
+      attr_accessor network_id: ::String
+      attr_accessor routes: ::Array[Types::RouteUpdateRequest]
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkResponse
+      attr_accessor arn: ::String
+      attr_accessor associated_cluster_ids: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor ip_pools: ::Array[Types::IpPool]
+      attr_accessor name: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkResult
+      attr_accessor arn: ::String
+      attr_accessor associated_cluster_ids: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor ip_pools: ::Array[Types::IpPool]
+      attr_accessor name: ::String
+      attr_accessor routes: ::Array[Types::Route]
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "IDLE" | "IN_USE" | "UPDATING" | "DELETE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class UpdateNodeRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor name: ::String
+      attr_accessor node_id: ::String
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class UpdateNodeResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_placement_groups: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
+      SENSITIVE: []
+    end
+
+    class UpdateNodeStateRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor node_id: ::String
+      attr_accessor state: ("ACTIVE" | "DRAINING")
+      SENSITIVE: []
+    end
+
+    class UpdateNodeStateResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_placement_groups: ::Array[::String]
+      attr_accessor cluster_id: ::String
+      attr_accessor connection_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor node_interface_mappings: ::Array[Types::NodeInterfaceMapping]
+      attr_accessor role: ("BACKUP" | "ACTIVE")
+      attr_accessor state: ("CREATED" | "REGISTERING" | "READY_TO_ACTIVATE" | "REGISTRATION_FAILED" | "ACTIVATION_FAILED" | "ACTIVE" | "READY" | "IN_USE" | "DEREGISTERING" | "DRAINING" | "DEREGISTRATION_FAILED" | "DEREGISTERED")
       SENSITIVE: []
     end
   end

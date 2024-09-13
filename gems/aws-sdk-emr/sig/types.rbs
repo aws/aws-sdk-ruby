@@ -579,6 +579,7 @@ module Aws::EMR
       attr_accessor target_on_demand_capacity: ::Integer
       attr_accessor target_spot_capacity: ::Integer
       attr_accessor resize_specifications: Types::InstanceFleetResizingSpecifications
+      attr_accessor instance_type_configs: ::Array[Types::InstanceTypeConfig]
       SENSITIVE: []
     end
 
@@ -1105,6 +1106,8 @@ module Aws::EMR
 
     class OnDemandResizingSpecification
       attr_accessor timeout_duration_minutes: ::Integer
+      attr_accessor allocation_strategy: ("lowest-price" | "prioritized")
+      attr_accessor capacity_reservation_options: Types::OnDemandCapacityReservationOptions
       SENSITIVE: []
     end
 
@@ -1371,6 +1374,7 @@ module Aws::EMR
 
     class SpotResizingSpecification
       attr_accessor timeout_duration_minutes: ::Integer
+      attr_accessor allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified" | "capacity-optimized-prioritized")
       SENSITIVE: []
     end
 

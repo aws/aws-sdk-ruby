@@ -762,7 +762,7 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] user_mfa_setting_list
     #   The MFA options that are activated for the user. The possible values
-    #   in this list are `SMS_MFA` and `SOFTWARE_TOKEN_MFA`.
+    #   in this list are `SMS_MFA`, `EMAIL_OTP`, and `SOFTWARE_TOKEN_MFA`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserResponse AWS API Documentation
@@ -960,11 +960,15 @@ module Aws::CognitoIdentityProvider
     #     to authenticate.
     #
     #   * `SELECT_MFA_TYPE`: Selects the MFA type. Valid MFA options are
-    #     `SMS_MFA` for text SMS MFA, and `SOFTWARE_TOKEN_MFA` for
-    #     time-based one-time password (TOTP) software token MFA.
+    #     `SMS_MFA` for SMS message MFA, `EMAIL_OTP` for email message MFA,
+    #     and `SOFTWARE_TOKEN_MFA` for time-based one-time password (TOTP)
+    #     software token MFA.
     #
-    #   * `SMS_MFA`: Next challenge is to supply an `SMS_MFA_CODE`,
-    #     delivered via SMS.
+    #   * `SMS_MFA`: Next challenge is to supply an `SMS_MFA_CODE`that your
+    #     user pool delivered in an SMS message.
+    #
+    #   * `EMAIL_OTP`: Next challenge is to supply an `EMAIL_OTP_CODE` that
+    #     your user pool delivered in an email message.
     #
     #   * `PASSWORD_VERIFIER`: Next challenge is to supply
     #     `PASSWORD_CLAIM_SIGNATURE`, `PASSWORD_CLAIM_SECRET_BLOCK`, and
@@ -1430,11 +1434,21 @@ module Aws::CognitoIdentityProvider
     #   SMS\_MFA
     #
     #   : `"ChallengeName": "SMS_MFA", "ChallengeResponses":
-    #     \{"SMS_MFA_CODE": "[SMS_code]", "USERNAME": "[username]"\}`
+    #     \{"SMS_MFA_CODE": "[code]", "USERNAME": "[username]"\}`
+    #
+    #   EMAIL\_OTP
+    #
+    #   : `"ChallengeName": "EMAIL_OTP", "ChallengeResponses":
+    #     \{"EMAIL_OTP_CODE": "[code]", "USERNAME": "[username]"\}`
     #
     #   PASSWORD\_VERIFIER
     #
-    #   : `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
+    #   : This challenge response is part of the SRP flow. Amazon Cognito
+    #     requires that your application respond to this challenge within a
+    #     few seconds. When the response time exceeds this period, your user
+    #     pool returns a `NotAuthorizedException` error.
+    #
+    #     `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
     #     \{"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
     #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
     #     [timestamp], "USERNAME": "[username]"\}`
@@ -1648,12 +1662,27 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] sms_mfa_settings
-    #   The SMS text message MFA settings.
+    #   User preferences for SMS message MFA. Activates or deactivates SMS
+    #   MFA and sets it as the preferred MFA method when multiple methods
+    #   are available.
     #   @return [Types::SMSMfaSettingsType]
     #
     # @!attribute [rw] software_token_mfa_settings
-    #   The time-based one-time password software token MFA settings.
+    #   User preferences for time-based one-time password (TOTP) MFA.
+    #   Activates or deactivates TOTP MFA and sets it as the preferred MFA
+    #   method when multiple methods are available.
     #   @return [Types::SoftwareTokenMfaSettingsType]
+    #
+    # @!attribute [rw] email_mfa_settings
+    #   User preferences for email message MFA. Activates or deactivates
+    #   email MFA and sets it as the preferred MFA method when multiple
+    #   methods are available. To activate this setting, [ advanced security
+    #   features][1] must be active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Types::EmailMfaSettingsType]
     #
     # @!attribute [rw] username
     #   The username of the user that you want to query or modify. The value
@@ -1664,7 +1693,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] user_pool_id
-    #   The user pool ID.
+    #   The ID of the user pool where you want to set a user's MFA
+    #   preferences.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreferenceRequest AWS API Documentation
@@ -1672,6 +1702,7 @@ module Aws::CognitoIdentityProvider
     class AdminSetUserMFAPreferenceRequest < Struct.new(
       :sms_mfa_settings,
       :software_token_mfa_settings,
+      :email_mfa_settings,
       :username,
       :user_pool_id)
       SENSITIVE = [:username]
@@ -3115,20 +3146,21 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] read_attributes
     #   The list of user attributes that you want your app client to have
-    #   read-only access to. After your user authenticates in your app,
-    #   their access token authorizes them to read their own attribute value
-    #   for any attribute in this list. An example of this kind of activity
-    #   is when your user selects a link to view their profile information.
+    #   read access to. After your user authenticates in your app, their
+    #   access token authorizes them to read their own attribute value for
+    #   any attribute in this list. An example of this kind of activity is
+    #   when your user selects a link to view their profile information.
     #   Your app makes a [GetUser][1] API request to retrieve and display
     #   your user's profile data.
     #
     #   When you don't specify the `ReadAttributes` for your app client,
     #   your app can read the values of `email_verified`,
     #   `phone_number_verified`, and the Standard attributes of your user
-    #   pool. When your user pool has read access to these default
-    #   attributes, `ReadAttributes` doesn't return any information. Amazon
-    #   Cognito only populates `ReadAttributes` in the API response if you
-    #   have specified your own custom set of read attributes.
+    #   pool. When your user pool app client has read access to these
+    #   default attributes, `ReadAttributes` doesn't return any
+    #   information. Amazon Cognito only populates `ReadAttributes` in the
+    #   API response if you have specified your own custom set of read
+    #   attributes.
     #
     #
     #
@@ -4503,6 +4535,66 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # Sets or shows user pool email message configuration for MFA. Includes
+    # the subject and body of the email message template for MFA messages.
+    # To activate this setting, [ advanced security features][1] must be
+    # active in your user pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #
+    # @!attribute [rw] message
+    #   The template for the email message that your user pool sends to
+    #   users with an MFA code. The message must contain the `\{####\}`
+    #   placeholder. In the message, Amazon Cognito replaces this
+    #   placeholder with the code. If you don't provide this parameter,
+    #   Amazon Cognito sends messages in the default format.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject of the email message that your user pool sends to users
+    #   with an MFA code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailMfaConfigType AWS API Documentation
+    #
+    class EmailMfaConfigType < Struct.new(
+      :message,
+      :subject)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # User preferences for multi-factor authentication with email messages.
+    # Activates or deactivates email MFA and sets it as the preferred MFA
+    # method when multiple methods are available. To activate this setting,
+    # [ advanced security features][1] must be active in your user pool.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether email message MFA is active for a user. When the
+    #   value of this parameter is `Enabled`, the user will be prompted for
+    #   MFA during all sign-in attempts, unless device tracking is turned on
+    #   and the device has been trusted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] preferred_mfa
+    #   Specifies whether email message MFA is the user's preferred method.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailMfaSettingsType AWS API Documentation
+    #
+    class EmailMfaSettingsType < Struct.new(
+      :enabled,
+      :preferred_mfa)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when there is a code mismatch and the service
     # fails to configure the software token TOTP multi-factor authentication
     # (MFA).
@@ -5074,13 +5166,26 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] sms_mfa_configuration
-    #   The SMS text message multi-factor authentication (MFA)
-    #   configuration.
+    #   Shows user pool SMS message configuration for MFA. Includes the
+    #   message template and the SMS message sending configuration for
+    #   Amazon SNS.
     #   @return [Types::SmsMfaConfigType]
     #
     # @!attribute [rw] software_token_mfa_configuration
-    #   The software token multi-factor authentication (MFA) configuration.
+    #   Shows user pool configuration for time-based one-time password
+    #   (TOTP) MFA. Includes TOTP enabled or disabled state.
     #   @return [Types::SoftwareTokenMfaConfigType]
+    #
+    # @!attribute [rw] email_mfa_configuration
+    #   Shows user pool email message configuration for MFA. Includes the
+    #   subject and body of the email message template for MFA messages. To
+    #   activate this setting, [ advanced security features][1] must be
+    #   active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Types::EmailMfaConfigType]
     #
     # @!attribute [rw] mfa_configuration
     #   The multi-factor authentication (MFA) configuration. Valid values
@@ -5099,6 +5204,7 @@ module Aws::CognitoIdentityProvider
     class GetUserPoolMfaConfigResponse < Struct.new(
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
+      :email_mfa_configuration,
       :mfa_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -5147,7 +5253,7 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] user_mfa_setting_list
     #   The MFA options that are activated for the user. The possible values
-    #   in this list are `SMS_MFA` and `SOFTWARE_TOKEN_MFA`.
+    #   in this list are `SMS_MFA`, `EMAIL_OTP`, and `SOFTWARE_TOKEN_MFA`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserResponse AWS API Documentation
@@ -5629,8 +5735,11 @@ module Aws::CognitoIdentityProvider
     #
     #    </note>
     #
-    #   * `SMS_MFA`: Next challenge is to supply an `SMS_MFA_CODE`,
-    #     delivered via SMS.
+    #   * `SMS_MFA`: Next challenge is to supply an `SMS_MFA_CODE`that your
+    #     user pool delivered in an SMS message.
+    #
+    #   * `EMAIL_OTP`: Next challenge is to supply an `EMAIL_OTP_CODE` that
+    #     your user pool delivered in an email message.
     #
     #   * `PASSWORD_VERIFIER`: Next challenge is to supply
     #     `PASSWORD_CLAIM_SIGNATURE`, `PASSWORD_CLAIM_SECRET_BLOCK`, and
@@ -7231,11 +7340,21 @@ module Aws::CognitoIdentityProvider
     #   SMS\_MFA
     #
     #   : `"ChallengeName": "SMS_MFA", "ChallengeResponses":
-    #     \{"SMS_MFA_CODE": "[SMS_code]", "USERNAME": "[username]"\}`
+    #     \{"SMS_MFA_CODE": "[code]", "USERNAME": "[username]"\}`
+    #
+    #   EMAIL\_OTP
+    #
+    #   : `"ChallengeName": "EMAIL_OTP", "ChallengeResponses":
+    #     \{"EMAIL_OTP_CODE": "[code]", "USERNAME": "[username]"\}`
     #
     #   PASSWORD\_VERIFIER
     #
-    #   : `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
+    #   : This challenge response is part of the SRP flow. Amazon Cognito
+    #     requires that your application respond to this challenge within a
+    #     few seconds. When the response time exceeds this period, your user
+    #     pool returns a `NotAuthorizedException` error.
+    #
+    #     `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
     #     \{"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
     #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
     #     [timestamp], "USERNAME": "[username]"\}`
@@ -7541,10 +7660,10 @@ module Aws::CognitoIdentityProvider
     # for the user pool.
     #
     # @!attribute [rw] enabled
-    #   Specifies whether SMS text message MFA is activated. If an MFA type
-    #   is activated for a user, the user will be prompted for MFA during
-    #   all sign-in attempts, unless device tracking is turned on and the
-    #   device has been trusted.
+    #   Specifies whether SMS message MFA is activated. If an MFA type is
+    #   activated for a user, the user will be prompted for MFA during all
+    #   sign-in attempts, unless device tracking is turned on and the device
+    #   has been trusted.
     #   @return [Boolean]
     #
     # @!attribute [rw] preferred_mfa
@@ -7791,12 +7910,27 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] sms_mfa_settings
-    #   The SMS text message multi-factor authentication (MFA) settings.
+    #   User preferences for SMS message MFA. Activates or deactivates SMS
+    #   MFA and sets it as the preferred MFA method when multiple methods
+    #   are available.
     #   @return [Types::SMSMfaSettingsType]
     #
     # @!attribute [rw] software_token_mfa_settings
-    #   The time-based one-time password (TOTP) software token MFA settings.
+    #   User preferences for time-based one-time password (TOTP) MFA.
+    #   Activates or deactivates TOTP MFA and sets it as the preferred MFA
+    #   method when multiple methods are available.
     #   @return [Types::SoftwareTokenMfaSettingsType]
+    #
+    # @!attribute [rw] email_mfa_settings
+    #   User preferences for email message MFA. Activates or deactivates
+    #   email MFA and sets it as the preferred MFA method when multiple
+    #   methods are available. To activate this setting, [ advanced security
+    #   features][1] must be active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Types::EmailMfaSettingsType]
     #
     # @!attribute [rw] access_token
     #   A valid access token that Amazon Cognito issued to the user whose
@@ -7808,6 +7942,7 @@ module Aws::CognitoIdentityProvider
     class SetUserMFAPreferenceRequest < Struct.new(
       :sms_mfa_settings,
       :software_token_mfa_settings,
+      :email_mfa_settings,
       :access_token)
       SENSITIVE = [:access_token]
       include Aws::Structure
@@ -7822,12 +7957,25 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] sms_mfa_configuration
-    #   The SMS text message MFA configuration.
+    #   Configures user pool SMS messages for MFA. Sets the message template
+    #   and the SMS message sending configuration for Amazon SNS.
     #   @return [Types::SmsMfaConfigType]
     #
     # @!attribute [rw] software_token_mfa_configuration
-    #   The software token MFA configuration.
+    #   Configures a user pool for time-based one-time password (TOTP) MFA.
+    #   Enables or disables TOTP.
     #   @return [Types::SoftwareTokenMfaConfigType]
+    #
+    # @!attribute [rw] email_mfa_configuration
+    #   Configures user pool email messages for MFA. Sets the subject and
+    #   body of the email message template for MFA messages. To activate
+    #   this setting, [ advanced security features][1] must be active in
+    #   your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Types::EmailMfaConfigType]
     #
     # @!attribute [rw] mfa_configuration
     #   The MFA configuration. If you set the MfaConfiguration value to
@@ -7853,18 +8001,33 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
+      :email_mfa_configuration,
       :mfa_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] sms_mfa_configuration
-    #   The SMS text message MFA configuration.
+    #   Shows user pool SMS message configuration for MFA. Includes the
+    #   message template and the SMS message sending configuration for
+    #   Amazon SNS.
     #   @return [Types::SmsMfaConfigType]
     #
     # @!attribute [rw] software_token_mfa_configuration
-    #   The software token MFA configuration.
+    #   Shows user pool configuration for time-based one-time password
+    #   (TOTP) MFA. Includes TOTP enabled or disabled state.
     #   @return [Types::SoftwareTokenMfaConfigType]
+    #
+    # @!attribute [rw] email_mfa_configuration
+    #   Shows user pool email message configuration for MFA. Includes the
+    #   subject and body of the email message template for MFA messages. To
+    #   activate this setting, [ advanced security features][1] must be
+    #   active in your user pool.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #   @return [Types::EmailMfaConfigType]
     #
     # @!attribute [rw] mfa_configuration
     #   The MFA configuration. Valid values include:
@@ -7882,6 +8045,7 @@ module Aws::CognitoIdentityProvider
     class SetUserPoolMfaConfigResponse < Struct.new(
       :sms_mfa_configuration,
       :software_token_mfa_configuration,
+      :email_mfa_configuration,
       :mfa_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -8122,14 +8286,16 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The SMS text message multi-factor authentication (MFA) configuration
-    # type.
+    # Configures user pool SMS messages for multi-factor authentication
+    # (MFA). Sets the message template and the SMS message sending
+    # configuration for Amazon SNS.
     #
     # @!attribute [rw] sms_authentication_message
-    #   The SMS authentication message that will be sent to users with the
-    #   code they must sign in. The message must contain the ‘\\\{####\\}’
-    #   placeholder, which is replaced with the code. If the message isn't
-    #   included, and default message will be used.
+    #   The SMS message that your user pool sends to users with an MFA code.
+    #   The message must contain the `\{####\}` placeholder. In the message,
+    #   Amazon Cognito replaces this placeholder with the code. If you
+    #   don't provide this parameter, Amazon Cognito sends messages in the
+    #   default format.
     #   @return [String]
     #
     # @!attribute [rw] sms_configuration
@@ -8165,7 +8331,8 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The type used for enabling software token MFA at the user pool level.
+    # Configures a user pool for time-based one-time password (TOTP)
+    # multi-factor authentication (MFA). Enables or disables TOTP.
     #
     # @!attribute [rw] enabled
     #   Specifies whether software token MFA is activated.
@@ -9046,20 +9213,21 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] read_attributes
     #   The list of user attributes that you want your app client to have
-    #   read-only access to. After your user authenticates in your app,
-    #   their access token authorizes them to read their own attribute value
-    #   for any attribute in this list. An example of this kind of activity
-    #   is when your user selects a link to view their profile information.
+    #   read access to. After your user authenticates in your app, their
+    #   access token authorizes them to read their own attribute value for
+    #   any attribute in this list. An example of this kind of activity is
+    #   when your user selects a link to view their profile information.
     #   Your app makes a [GetUser][1] API request to retrieve and display
     #   your user's profile data.
     #
     #   When you don't specify the `ReadAttributes` for your app client,
     #   your app can read the values of `email_verified`,
     #   `phone_number_verified`, and the Standard attributes of your user
-    #   pool. When your user pool has read access to these default
-    #   attributes, `ReadAttributes` doesn't return any information. Amazon
-    #   Cognito only populates `ReadAttributes` in the API response if you
-    #   have specified your own custom set of read attributes.
+    #   pool. When your user pool app client has read access to these
+    #   default attributes, `ReadAttributes` doesn't return any
+    #   information. Amazon Cognito only populates `ReadAttributes` in the
+    #   API response if you have specified your own custom set of read
+    #   attributes.
     #
     #
     #
@@ -9996,20 +10164,21 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] read_attributes
     #   The list of user attributes that you want your app client to have
-    #   read-only access to. After your user authenticates in your app,
-    #   their access token authorizes them to read their own attribute value
-    #   for any attribute in this list. An example of this kind of activity
-    #   is when your user selects a link to view their profile information.
+    #   read access to. After your user authenticates in your app, their
+    #   access token authorizes them to read their own attribute value for
+    #   any attribute in this list. An example of this kind of activity is
+    #   when your user selects a link to view their profile information.
     #   Your app makes a [GetUser][1] API request to retrieve and display
     #   your user's profile data.
     #
     #   When you don't specify the `ReadAttributes` for your app client,
     #   your app can read the values of `email_verified`,
     #   `phone_number_verified`, and the Standard attributes of your user
-    #   pool. When your user pool has read access to these default
-    #   attributes, `ReadAttributes` doesn't return any information. Amazon
-    #   Cognito only populates `ReadAttributes` in the API response if you
-    #   have specified your own custom set of read attributes.
+    #   pool. When your user pool app client has read access to these
+    #   default attributes, `ReadAttributes` doesn't return any
+    #   information. Amazon Cognito only populates `ReadAttributes` in the
+    #   API response if you have specified your own custom set of read
+    #   attributes.
     #
     #
     #

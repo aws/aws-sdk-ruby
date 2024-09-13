@@ -425,6 +425,12 @@ module Aws::MediaConvert
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -512,6 +518,13 @@ module Aws::MediaConvert
     #   and the maximum time that your job will wait in the initial queue
     #   before hopping. For more information about this feature, see the AWS
     #   Elemental MediaConvert User Guide.
+    #
+    # @option params [String] :job_engine_version
+    #   Use Job engine versions to run jobs for your production workflow on
+    #   one version, while you test and validate the latest version. To
+    #   specify a Job engine version: Enter a date in a YYYY-MM-DD format. For
+    #   a list of valid Job engine versions, submit a ListVersions request. To
+    #   not specify a Job engine version: Leave blank.
     #
     # @option params [String] :job_template
     #   Optional. When you create a job, you can either specify a job template
@@ -929,7 +942,7 @@ module Aws::MediaConvert
     #           timed_metadata_scheme_id_uri: "__stringMax1000",
     #           timed_metadata_value: "__stringMax1000",
     #         },
-    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW, Y4M
+    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, OGG, WEBM, RAW, Y4M
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         },
@@ -1135,6 +1148,7 @@ module Aws::MediaConvert
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #             saliency_aware_encoding: "DISABLED", # accepts DISABLED, PREFERRED
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
@@ -1676,7 +1690,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_value #=> String
-    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW", "Y4M"
+    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "OGG", "WEBM", "RAW", "Y4M"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -1843,6 +1857,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.saliency_aware_encoding #=> String, one of "DISABLED", "PREFERRED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -2634,7 +2649,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_value #=> String
-    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW", "Y4M"
+    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "OGG", "WEBM", "RAW", "Y4M"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -2801,6 +2816,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.saliency_aware_encoding #=> String, one of "DISABLED", "PREFERRED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -3469,7 +3485,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
     #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata_value #=> String
-    #   resp.presets[0].settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW", "Y4M"
+    #   resp.presets[0].settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "OGG", "WEBM", "RAW", "Y4M"
     #   resp.presets[0].settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -3636,6 +3652,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.saliency_aware_encoding #=> String, one of "DISABLED", "PREFERRED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -4002,6 +4019,47 @@ module Aws::MediaConvert
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Retrieve a JSON array of all available Job engine versions and the
+    # date they expire.
+    #
+    # @option params [Integer] :max_results
+    #   Optional. Number of valid Job engine versions, up to twenty, that will
+    #   be returned at one time.
+    #
+    # @option params [String] :next_token
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of Job engine versions.
+    #
+    # @return [Types::ListVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVersionsResponse#next_token #next_token} => String
+    #   * {Types::ListVersionsResponse#versions #versions} => Array&lt;Types::JobEngineVersion&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_versions({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.versions #=> Array
+    #   resp.versions[0].expiration_date #=> Time
+    #   resp.versions[0].version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListVersions AWS API Documentation
+    #
+    # @overload list_versions(params = {})
+    # @param [Hash] params ({})
+    def list_versions(params = {}, options = {})
+      req = build_request(:list_versions, params)
       req.send_request(options)
     end
 
@@ -4497,7 +4555,7 @@ module Aws::MediaConvert
     #           timed_metadata_scheme_id_uri: "__stringMax1000",
     #           timed_metadata_value: "__stringMax1000",
     #         },
-    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW, Y4M
+    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, OGG, WEBM, RAW, Y4M
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         },
@@ -4703,6 +4761,7 @@ module Aws::MediaConvert
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #             saliency_aware_encoding: "DISABLED", # accepts DISABLED, PREFERRED
     #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
@@ -5241,7 +5300,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_scheme_id_uri #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_value #=> String
-    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "WEBM", "RAW", "Y4M"
+    #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "OGG", "WEBM", "RAW", "Y4M"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -5408,6 +5467,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.saliency_aware_encoding #=> String, one of "DISABLED", "PREFERRED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scan_type_conversion_mode #=> String, one of "INTERLACED", "INTERLACED_OPTIMIZE"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.slices #=> Integer
@@ -5763,7 +5823,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

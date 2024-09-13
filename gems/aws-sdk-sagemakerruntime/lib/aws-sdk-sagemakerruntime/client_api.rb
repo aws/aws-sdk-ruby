@@ -37,11 +37,14 @@ module Aws::SageMakerRuntime
     ModelError = Shapes::StructureShape.new(name: 'ModelError')
     ModelNotReadyException = Shapes::StructureShape.new(name: 'ModelNotReadyException')
     ModelStreamError = Shapes::StructureShape.new(name: 'ModelStreamError')
+    NewSessionResponseHeader = Shapes::StringShape.new(name: 'NewSessionResponseHeader')
     PartBlob = Shapes::BlobShape.new(name: 'PartBlob')
     PayloadPart = Shapes::StructureShape.new(name: 'PayloadPart')
     RequestTTLSecondsHeader = Shapes::IntegerShape.new(name: 'RequestTTLSecondsHeader')
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
+    SessionIdHeader = Shapes::StringShape.new(name: 'SessionIdHeader')
+    SessionIdOrNewSessionConstantHeader = Shapes::StringShape.new(name: 'SessionIdOrNewSessionConstantHeader')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     TargetContainerHostnameHeader = Shapes::StringShape.new(name: 'TargetContainerHostnameHeader')
     TargetModelHeader = Shapes::StringShape.new(name: 'TargetModelHeader')
@@ -83,6 +86,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
     InvokeEndpointInput.add_member(:enable_explanations, Shapes::ShapeRef.new(shape: EnableExplanationsHeader, location: "header", location_name: "X-Amzn-SageMaker-Enable-Explanations"))
     InvokeEndpointInput.add_member(:inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentHeader, location: "header", location_name: "X-Amzn-SageMaker-Inference-Component"))
+    InvokeEndpointInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionIdOrNewSessionConstantHeader, location: "header", location_name: "X-Amzn-SageMaker-Session-Id"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body
     InvokeEndpointInput[:payload_member] = InvokeEndpointInput.member(:body)
@@ -91,6 +95,8 @@ module Aws::SageMakerRuntime
     InvokeEndpointOutput.add_member(:content_type, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "Content-Type"))
     InvokeEndpointOutput.add_member(:invoked_production_variant, Shapes::ShapeRef.new(shape: Header, location: "header", location_name: "x-Amzn-Invoked-Production-Variant"))
     InvokeEndpointOutput.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesHeader, location: "header", location_name: "X-Amzn-SageMaker-Custom-Attributes"))
+    InvokeEndpointOutput.add_member(:new_session_id, Shapes::ShapeRef.new(shape: NewSessionResponseHeader, location: "header", location_name: "X-Amzn-SageMaker-New-Session-Id"))
+    InvokeEndpointOutput.add_member(:closed_session_id, Shapes::ShapeRef.new(shape: SessionIdHeader, location: "header", location_name: "X-Amzn-SageMaker-Closed-Session-Id"))
     InvokeEndpointOutput.struct_class = Types::InvokeEndpointOutput
     InvokeEndpointOutput[:payload] = :body
     InvokeEndpointOutput[:payload_member] = InvokeEndpointOutput.member(:body)
@@ -104,6 +110,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointWithResponseStreamInput.add_member(:target_container_hostname, Shapes::ShapeRef.new(shape: TargetContainerHostnameHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Container-Hostname"))
     InvokeEndpointWithResponseStreamInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
     InvokeEndpointWithResponseStreamInput.add_member(:inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentHeader, location: "header", location_name: "X-Amzn-SageMaker-Inference-Component"))
+    InvokeEndpointWithResponseStreamInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionIdHeader, location: "header", location_name: "X-Amzn-SageMaker-Session-Id"))
     InvokeEndpointWithResponseStreamInput.struct_class = Types::InvokeEndpointWithResponseStreamInput
     InvokeEndpointWithResponseStreamInput[:payload] = :body
     InvokeEndpointWithResponseStreamInput[:payload_member] = InvokeEndpointWithResponseStreamInput.member(:body)

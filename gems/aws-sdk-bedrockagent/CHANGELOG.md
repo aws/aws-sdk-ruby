@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-09-11)
+------------------
+
+* Feature - Amazon Bedrock Knowledge Bases now supports using inference profiles to increase throughput and improve resilience.
+
+1.23.0 (2024-09-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.22.0 (2024-09-04)
 ------------------
 

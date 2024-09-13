@@ -14,12 +14,9 @@ module Aws::ApplicationSignals
 
     class BatchGetServiceLevelObjectiveBudgetReport
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -27,12 +24,9 @@ module Aws::ApplicationSignals
 
     class CreateServiceLevelObjective
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -40,12 +34,9 @@ module Aws::ApplicationSignals
 
     class DeleteServiceLevelObjective
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -53,12 +44,9 @@ module Aws::ApplicationSignals
 
     class GetService
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -66,12 +54,9 @@ module Aws::ApplicationSignals
 
     class GetServiceLevelObjective
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -79,12 +64,9 @@ module Aws::ApplicationSignals
 
     class ListServiceDependencies
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -92,12 +74,9 @@ module Aws::ApplicationSignals
 
     class ListServiceDependents
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -105,12 +84,9 @@ module Aws::ApplicationSignals
 
     class ListServiceLevelObjectives
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -118,12 +94,9 @@ module Aws::ApplicationSignals
 
     class ListServiceOperations
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -131,12 +104,9 @@ module Aws::ApplicationSignals
 
     class ListServices
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -144,12 +114,9 @@ module Aws::ApplicationSignals
 
     class ListTagsForResource
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -157,12 +124,9 @@ module Aws::ApplicationSignals
 
     class StartDiscovery
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -170,12 +134,9 @@ module Aws::ApplicationSignals
 
     class TagResource
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -183,12 +144,9 @@ module Aws::ApplicationSignals
 
     class UntagResource
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end
@@ -196,12 +154,9 @@ module Aws::ApplicationSignals
 
     class UpdateServiceLevelObjective
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::ApplicationSignals::EndpointParameters.new(
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
           region: context.config.region,
         )
       end

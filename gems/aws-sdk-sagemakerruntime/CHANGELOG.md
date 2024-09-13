@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2024-09-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2024-09-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2024-09-09)
+------------------
+
+* Feature - AWS SageMaker Runtime feature: Add sticky routing to support stateful inference models.
+
 1.69.0 (2024-09-03)
 ------------------
 

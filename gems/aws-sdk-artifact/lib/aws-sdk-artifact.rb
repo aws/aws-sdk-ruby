@@ -53,6 +53,6 @@ require_relative 'aws-sdk-artifact/customizations'
 # @!group service
 module Aws::Artifact
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.10.0'
 
 end

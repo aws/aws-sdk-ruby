@@ -3483,6 +3483,22 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Configuration for specifying replicated topic names should be the same
+    # as their corresponding upstream topics or prefixed with source cluster
+    # alias.
+    #
+    # @!attribute [rw] type
+    #   The type of replicated topic name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ReplicationTopicNameConfiguration AWS API Documentation
+    #
+    class ReplicationTopicNameConfiguration < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the state of a replicator
     #
     # @!attribute [rw] code
@@ -3727,6 +3743,11 @@ module Aws::Kafka
     #   replicating from.
     #   @return [Types::ReplicationStartingPosition]
     #
+    # @!attribute [rw] topic_name_configuration
+    #   Configuration for specifying replicated topic names same as their
+    #   corresponding upstream topics or prefixed with source cluster alias.
+    #   @return [Types::ReplicationTopicNameConfiguration]
+    #
     # @!attribute [rw] topics_to_exclude
     #   List of regular expression patterns indicating the topics that
     #   should not be replicated.
@@ -3743,6 +3764,7 @@ module Aws::Kafka
       :copy_topic_configurations,
       :detect_and_copy_new_topics,
       :starting_position,
+      :topic_name_configuration,
       :topics_to_exclude,
       :topics_to_replicate)
       SENSITIVE = []

@@ -1383,7 +1383,7 @@ module Aws::Glue
     #
     # @!attribute [rw] table_optimizer
     #   A `TableOptimizer` object that contains details on the configuration
-    #   and last run of a table optimzer.
+    #   and last run of a table optimizer.
     #   @return [Types::TableOptimizer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchTableOptimizer AWS API Documentation
@@ -2996,6 +2996,21 @@ module Aws::Glue
     #
     class ColumnStatisticsTaskStoppingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains compaction metrics for the optimizer run.
+    #
+    # @!attribute [rw] iceberg_metrics
+    #   A structure containing the Iceberg compaction metrics for the
+    #   optimizer run.
+    #   @return [Types::IcebergCompactionMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CompactionMetrics AWS API Documentation
+    #
+    class CompactionMetrics < Struct.new(
+      :iceberg_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13361,6 +13376,35 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Compaction metrics for Iceberg for the optimizer run.
+    #
+    # @!attribute [rw] number_of_bytes_compacted
+    #   The number of bytes removed by the compaction job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_files_compacted
+    #   The number of files removed by the compaction job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_dpus
+    #   The number of DPU hours consumed by the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_duration_in_hour
+    #   The duration of the job in hours.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergCompactionMetrics AWS API Documentation
+    #
+    class IcebergCompactionMetrics < Struct.new(
+      :number_of_bytes_compacted,
+      :number_of_files_compacted,
+      :number_of_dpus,
+      :job_duration_in_hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that defines an Apache Iceberg metadata table to create in
     # the catalog.
     #
@@ -13377,6 +13421,118 @@ module Aws::Glue
     class IcebergInput < Struct.new(
       :metadata_operation,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Iceberg orphan file deletion optimizer.
+    #
+    # @!attribute [rw] orphan_file_retention_period_in_days
+    #   The number of days that orphan files should be retained before file
+    #   deletion. If an input is not provided, the default value 3 will be
+    #   used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] location
+    #   Specifies a directory in which to look for files (defaults to the
+    #   table's location). You may choose a sub-directory rather than the
+    #   top-level table location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergOrphanFileDeletionConfiguration AWS API Documentation
+    #
+    class IcebergOrphanFileDeletionConfiguration < Struct.new(
+      :orphan_file_retention_period_in_days,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Orphan file deletion metrics for Iceberg for the optimizer run.
+    #
+    # @!attribute [rw] number_of_orphan_files_deleted
+    #   The number of orphan files deleted by the orphan file deletion job
+    #   run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_dpus
+    #   The number of DPU hours consumed by the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_duration_in_hour
+    #   The duration of the job in hours.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergOrphanFileDeletionMetrics AWS API Documentation
+    #
+    class IcebergOrphanFileDeletionMetrics < Struct.new(
+      :number_of_orphan_files_deleted,
+      :number_of_dpus,
+      :job_duration_in_hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Iceberg snapshot retention optimizer.
+    #
+    # @!attribute [rw] snapshot_retention_period_in_days
+    #   The number of days to retain the Iceberg snapshots. If an input is
+    #   not provided, the corresponding Iceberg table configuration field
+    #   will be used or if not present, the default value 5 will be used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_snapshots_to_retain
+    #   The number of Iceberg snapshots to retain within the retention
+    #   period. If an input is not provided, the corresponding Iceberg table
+    #   configuration field will be used or if not present, the default
+    #   value 1 will be used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] clean_expired_files
+    #   If set to false, snapshots are only deleted from table metadata, and
+    #   the underlying data and metadata files are not deleted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergRetentionConfiguration AWS API Documentation
+    #
+    class IcebergRetentionConfiguration < Struct.new(
+      :snapshot_retention_period_in_days,
+      :number_of_snapshots_to_retain,
+      :clean_expired_files)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Snapshot retention metrics for Iceberg for the optimizer run.
+    #
+    # @!attribute [rw] number_of_data_files_deleted
+    #   The number of data files deleted by the retention job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_manifest_files_deleted
+    #   The number of manifest files deleted by the retention job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_manifest_lists_deleted
+    #   The number of manifest lists deleted by the retention job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_dpus
+    #   The number of DPU hours consumed by the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_duration_in_hour
+    #   The duration of the job in hours.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergRetentionMetrics AWS API Documentation
+    #
+    class IcebergRetentionMetrics < Struct.new(
+      :number_of_data_files_deleted,
+      :number_of_manifest_files_deleted,
+      :number_of_manifest_lists_deleted,
+      :number_of_dpus,
+      :job_duration_in_hour)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17414,6 +17570,36 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The configuration for an orphan file deletion optimizer.
+    #
+    # @!attribute [rw] iceberg_configuration
+    #   The configuration for an Iceberg orphan file deletion optimizer.
+    #   @return [Types::IcebergOrphanFileDeletionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OrphanFileDeletionConfiguration AWS API Documentation
+    #
+    class OrphanFileDeletionConfiguration < Struct.new(
+      :iceberg_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains orphan file deletion metrics for the
+    # optimizer run.
+    #
+    # @!attribute [rw] iceberg_metrics
+    #   A structure containing the Iceberg orphan file deletion metrics for
+    #   the optimizer run.
+    #   @return [Types::IcebergOrphanFileDeletionMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OrphanFileDeletionMetrics AWS API Documentation
+    #
+    class OrphanFileDeletionMetrics < Struct.new(
+      :iceberg_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing other metadata for a schema version belonging
     # to the same metadata key.
     #
@@ -18745,6 +18931,35 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The configuration for a snapshot retention optimizer.
+    #
+    # @!attribute [rw] iceberg_configuration
+    #   The configuration for an Iceberg snapshot retention optimizer.
+    #   @return [Types::IcebergRetentionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RetentionConfiguration AWS API Documentation
+    #
+    class RetentionConfiguration < Struct.new(
+      :iceberg_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains retention metrics for the optimizer run.
+    #
+    # @!attribute [rw] iceberg_metrics
+    #   A structure containing the Iceberg retention metrics for the
+    #   optimizer run.
+    #   @return [Types::IcebergRetentionMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RetentionMetrics AWS API Documentation
+    #
+    class RetentionMetrics < Struct.new(
+      :iceberg_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A run identifier.
     #
     # @!attribute [rw] run_id
@@ -18765,6 +18980,9 @@ module Aws::Glue
     end
 
     # Metrics for the optimizer run.
+    #
+    # This structure is deprecated. See the individual metric members for
+    # compaction, retention, and orphan file deletion.
     #
     # @!attribute [rw] number_of_bytes_compacted
     #   The number of bytes removed by the compaction job run.
@@ -22405,8 +22623,15 @@ module Aws::Glue
     # Contains details about an optimizer associated with a table.
     #
     # @!attribute [rw] type
-    #   The type of table optimizer. Currently, the only valid value is
-    #   `compaction`.
+    #   The type of table optimizer. The valid values are:
+    #
+    #   * `compaction`: for managing compaction with a table optimizer.
+    #
+    #   * `retention`: for managing the retention of snapshot with a table
+    #     optimizer.
+    #
+    #   * `orphan_file_deletion`: for managing the deletion of orphan files
+    #     with a table optimizer.
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -22442,11 +22667,21 @@ module Aws::Glue
     #   Whether table optimization is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] retention_configuration
+    #   The configuration for a snapshot retention optimizer.
+    #   @return [Types::RetentionConfiguration]
+    #
+    # @!attribute [rw] orphan_file_deletion_configuration
+    #   The configuration for an orphan file deletion optimizer.
+    #   @return [Types::OrphanFileDeletionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableOptimizerConfiguration AWS API Documentation
     #
     class TableOptimizerConfiguration < Struct.new(
       :role_arn,
-      :enabled)
+      :enabled,
+      :retention_configuration,
+      :orphan_file_deletion_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22468,11 +22703,29 @@ module Aws::Glue
     #
     # @!attribute [rw] metrics
     #   A `RunMetrics` object containing metrics for the optimizer run.
+    #
+    #   This member is deprecated. See the individual metric members for
+    #   compaction, retention, and orphan file deletion.
     #   @return [Types::RunMetrics]
     #
     # @!attribute [rw] error
     #   An error that occured during the optimizer run.
     #   @return [String]
+    #
+    # @!attribute [rw] compaction_metrics
+    #   A `CompactionMetrics` object containing metrics for the optimizer
+    #   run.
+    #   @return [Types::CompactionMetrics]
+    #
+    # @!attribute [rw] retention_metrics
+    #   A `RetentionMetrics` object containing metrics for the optimizer
+    #   run.
+    #   @return [Types::RetentionMetrics]
+    #
+    # @!attribute [rw] orphan_file_deletion_metrics
+    #   An `OrphanFileDeletionMetrics` object containing metrics for the
+    #   optimizer run.
+    #   @return [Types::OrphanFileDeletionMetrics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableOptimizerRun AWS API Documentation
     #
@@ -22481,7 +22734,10 @@ module Aws::Glue
       :start_timestamp,
       :end_timestamp,
       :metrics,
-      :error)
+      :error,
+      :compaction_metrics,
+      :retention_metrics,
+      :orphan_file_deletion_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22761,6 +23017,20 @@ module Aws::Glue
     class TaskRunSortCriteria < Struct.new(
       :column,
       :sort_direction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The throttling threshhold was exceeded.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

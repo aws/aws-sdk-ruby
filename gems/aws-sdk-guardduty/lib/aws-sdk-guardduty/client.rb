@@ -425,6 +425,12 @@ module Aws::GuardDuty
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -664,8 +670,8 @@ module Aws::GuardDuty
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector belonging to the GuardDuty account that you
-    #   want to create a filter for.
+    #   The detector ID associated with the GuardDuty account for which you
+    #   want to create a filter.
     #
     # @option params [required, String] :name
     #   The name of the filter. Valid characters include period (.),
@@ -971,8 +977,8 @@ module Aws::GuardDuty
     # can use this operation.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to create an IPSet for.
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create an IPSet.
     #
     # @option params [required, String] :name
     #   The user-friendly name to identify the IPSet.
@@ -1048,8 +1054,8 @@ module Aws::GuardDuty
     #   not need to pass this option.**
     #
     # @option params [required, String] :role
-    #   IAM role with permissions required to scan and add tags to the
-    #   associated protected resource.
+    #   Amazon Resource Name (ARN) of the IAM role that has the permissions to
+    #   scan and add tags to the associated protected resource.
     #
     # @option params [required, Types::CreateProtectedResource] :protected_resource
     #   Information about the protected resource that is associated with the
@@ -1138,8 +1144,8 @@ module Aws::GuardDuty
     # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to associate member accounts with.
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to associate member accounts.
     #
     # @option params [required, Array<Types::AccountDetail>] :account_details
     #   A list of account ID and email address pairs of the accounts that you
@@ -1176,8 +1182,9 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Creates a publishing destination to export findings to. The resource
-    # to export findings to must exist before you use this operation.
+    # Creates a publishing destination where you can export your GuardDuty
+    # findings. Before you start exporting the findings, the destination
+    # resource must exist.
     #
     # @option params [required, String] :detector_id
     #   The ID of the GuardDuty detector associated with the publishing
@@ -1231,7 +1238,7 @@ module Aws::GuardDuty
     # sample findings of all supported finding types.
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector to create sample findings for.
+    #   The ID of the detector for which you need to create sample findings.
     #
     # @option params [Array<String>] :finding_types
     #   The types of sample findings to generate.
@@ -1260,8 +1267,8 @@ module Aws::GuardDuty
     # operation.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to create a threatIntelSet for.
+    #   The unique ID of the detector of the GuardDuty account for which you
+    #   want to create a `ThreatIntelSet`.
     #
     # @option params [required, String] :name
     #   A user-friendly ThreatIntelSet name displayed in all findings that are
@@ -1377,7 +1384,7 @@ module Aws::GuardDuty
     # Deletes the filter specified by the filter name.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the filter is associated with.
+    #   The unique ID of the detector that is associated with the filter.
     #
     # @option params [required, String] :filter_name
     #   The name of the filter that you want to delete.
@@ -1555,8 +1562,8 @@ module Aws::GuardDuty
     # Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the threatIntelSet is associated
-    #   with.
+    #   The unique ID of the detector that is associated with the
+    #   threatIntelSet.
     #
     # @option params [required, String] :threat_intel_set_id
     #   The unique ID of the threatIntelSet that you want to delete.
@@ -1700,8 +1707,8 @@ module Aws::GuardDuty
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector to retrieve information about the delegated
-    #   administrator from.
+    #   The detector ID of the delegated administrator for which you need to
+    #   retrieve the information.
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items
@@ -2045,11 +2052,10 @@ module Aws::GuardDuty
     # GuardDuty security agent running on their resources.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the GuardDuty detector associated to the coverage
-    #   statistics.
+    #   The unique ID of the GuardDuty detector.
     #
     # @option params [Types::CoverageFilterCriteria] :filter_criteria
-    #   Represents the criteria used to filter the coverage statistics
+    #   Represents the criteria used to filter the coverage statistics.
     #
     # @option params [required, Array<String>] :statistics_type
     #   Represents the statistics type used to aggregate the coverage details.
@@ -2092,7 +2098,7 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Retrieves an Amazon GuardDuty detector specified by the detectorId.
+    # Retrieves a GuardDuty detector specified by the detectorId.
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where
@@ -2161,7 +2167,7 @@ module Aws::GuardDuty
     # Returns the details of the filter specified by the filter name.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the filter is associated with.
+    #   The unique ID of the detector that is associated with this filter.
     #
     # @option params [required, String] :filter_name
     #   The name of the filter you want to get.
@@ -2730,8 +2736,11 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists Amazon GuardDuty findings statistics for the specified detector
-    # ID.
+    # Lists GuardDuty findings statistics for the specified detector ID.
+    #
+    # You must provide either `findingStatisticTypes` or `groupBy`
+    # parameter, and not both. You can use the `maxResults` and `orderBy`
+    # parameters only when using `groupBy`.
     #
     # There might be regional differences because some flags might not be
     # available in all the Regions where GuardDuty is currently supported.
@@ -2742,24 +2751,40 @@ module Aws::GuardDuty
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector that specifies the GuardDuty service whose
-    #   findings' statistics you want to retrieve.
+    #   The ID of the detector whose findings statistics you want to retrieve.
     #
-    # @option params [required, Array<String>] :finding_statistic_types
+    # @option params [Array<String>] :finding_statistic_types
     #   The types of finding statistics to retrieve.
     #
     # @option params [Types::FindingCriteria] :finding_criteria
     #   Represents the criteria that is used for querying findings.
     #
+    # @option params [String] :group_by
+    #   Displays the findings statistics grouped by one of the listed valid
+    #   values.
+    #
+    # @option params [String] :order_by
+    #   Displays the sorted findings in the requested order. The default value
+    #   of `orderBy` is `DESC`.
+    #
+    #   You can use this parameter only with the `groupBy` parameter.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned in the response. The
+    #   default value is 25.
+    #
+    #   You can use this parameter only with the `groupBy` parameter.
+    #
     # @return [Types::GetFindingsStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFindingsStatisticsResponse#finding_statistics #finding_statistics} => Types::FindingStatistics
+    #   * {Types::GetFindingsStatisticsResponse#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_findings_statistics({
     #     detector_id: "DetectorId", # required
-    #     finding_statistic_types: ["COUNT_BY_SEVERITY"], # required, accepts COUNT_BY_SEVERITY
+    #     finding_statistic_types: ["COUNT_BY_SEVERITY"], # accepts COUNT_BY_SEVERITY
     #     finding_criteria: {
     #       criterion: {
     #         "String" => {
@@ -2778,12 +2803,39 @@ module Aws::GuardDuty
     #         },
     #       },
     #     },
+    #     group_by: "ACCOUNT", # accepts ACCOUNT, DATE, FINDING_TYPE, RESOURCE, SEVERITY
+    #     order_by: "ASC", # accepts ASC, DESC
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.finding_statistics.count_by_severity #=> Hash
     #   resp.finding_statistics.count_by_severity["String"] #=> Integer
+    #   resp.finding_statistics.grouped_by_account #=> Array
+    #   resp.finding_statistics.grouped_by_account[0].account_id #=> String
+    #   resp.finding_statistics.grouped_by_account[0].last_generated_at #=> Time
+    #   resp.finding_statistics.grouped_by_account[0].total_findings #=> Integer
+    #   resp.finding_statistics.grouped_by_date #=> Array
+    #   resp.finding_statistics.grouped_by_date[0].date #=> Time
+    #   resp.finding_statistics.grouped_by_date[0].last_generated_at #=> Time
+    #   resp.finding_statistics.grouped_by_date[0].severity #=> Float
+    #   resp.finding_statistics.grouped_by_date[0].total_findings #=> Integer
+    #   resp.finding_statistics.grouped_by_finding_type #=> Array
+    #   resp.finding_statistics.grouped_by_finding_type[0].finding_type #=> String
+    #   resp.finding_statistics.grouped_by_finding_type[0].last_generated_at #=> Time
+    #   resp.finding_statistics.grouped_by_finding_type[0].total_findings #=> Integer
+    #   resp.finding_statistics.grouped_by_resource #=> Array
+    #   resp.finding_statistics.grouped_by_resource[0].account_id #=> String
+    #   resp.finding_statistics.grouped_by_resource[0].last_generated_at #=> Time
+    #   resp.finding_statistics.grouped_by_resource[0].resource_id #=> String
+    #   resp.finding_statistics.grouped_by_resource[0].resource_type #=> String
+    #   resp.finding_statistics.grouped_by_resource[0].total_findings #=> Integer
+    #   resp.finding_statistics.grouped_by_severity #=> Array
+    #   resp.finding_statistics.grouped_by_severity[0].last_generated_at #=> Time
+    #   resp.finding_statistics.grouped_by_severity[0].severity #=> Float
+    #   resp.finding_statistics.grouped_by_severity[0].total_findings #=> Integer
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics AWS API Documentation
     #
@@ -2797,7 +2849,7 @@ module Aws::GuardDuty
     # Retrieves the IPSet specified by the `ipSetId`.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the IPSet is associated with.
+    #   The unique ID of the detector that is associated with the IPSet.
     #
     # @option params [required, String] :ip_set_id
     #   The unique ID of the IPSet to retrieve.
@@ -2916,8 +2968,7 @@ module Aws::GuardDuty
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the scan setting is associated
-    #   with.
+    #   The unique ID of the detector that is associated with this scan.
     #
     # @return [Types::GetMalwareScanSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2999,7 +3050,7 @@ module Aws::GuardDuty
     #   The detector ID for the administrator account.
     #
     # @option params [required, Array<String>] :account_ids
-    #   The account ID of the member account.
+    #   A list of member account IDs.
     #
     # @return [Types::GetMemberDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3178,8 +3229,8 @@ module Aws::GuardDuty
     # ID.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the threatIntelSet is associated
-    #   with.
+    #   The unique ID of the detector that is associated with the
+    #   threatIntelSet.
     #
     # @option params [required, String] :threat_intel_set_id
     #   The unique ID of the threatIntelSet that you want to get.
@@ -3361,8 +3412,8 @@ module Aws::GuardDuty
     # [6]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to invite members with.
+    #   The unique ID of the detector of the GuardDuty account with which you
+    #   want to invite members.
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the accounts that you want to invite to
@@ -3547,7 +3598,7 @@ module Aws::GuardDuty
     # Returns a paginated list of the current filters.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the filter is associated with.
+    #   The unique ID of the detector that is associated with the filter.
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items
@@ -3704,6 +3755,8 @@ module Aws::GuardDuty
     #     listed. When this attribute is not set, all existing findings are
     #     listed.
     #
+    #   * service.ebsVolumeScanDetails.scanId
+    #
     #   * service.resourceRole
     #
     #   * severity
@@ -3786,7 +3839,7 @@ module Aws::GuardDuty
     # returned are the IPSets from the associated administrator account.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the IPSet is associated with.
+    #   The unique ID of the detector that is associated with IPSet.
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items you
@@ -3917,7 +3970,7 @@ module Aws::GuardDuty
     # administrator account.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector the member is associated with.
+    #   The unique ID of the detector that is associated with the member.
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items you
@@ -4028,7 +4081,8 @@ module Aws::GuardDuty
     # specified `detectorId`.
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector to retrieve publishing destinations for.
+    #   The detector ID for which you want to retrieve the publishing
+    #   destination.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -4110,8 +4164,8 @@ module Aws::GuardDuty
     # returned.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector that the threatIntelSet is associated
-    #   with.
+    #   The unique ID of the detector that is associated with the
+    #   threatIntelSet.
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items
@@ -4524,8 +4578,8 @@ module Aws::GuardDuty
     # Marks the specified GuardDuty findings as useful or not useful.
     #
     # @option params [required, String] :detector_id
-    #   The ID of the detector associated with the findings to update feedback
-    #   for.
+    #   The ID of the detector that is associated with the findings for which
+    #   you want to update the feedback.
     #
     # @option params [required, Array<String>] :finding_ids
     #   The IDs of the findings that you want to mark as useful or not useful.
@@ -4602,8 +4656,8 @@ module Aws::GuardDuty
     #   A unique identifier associated with the Malware Protection plan.
     #
     # @option params [String] :role
-    #   IAM role with permissions required to scan and add tags to the
-    #   associated protected resource.
+    #   Amazon Resource Name (ARN) of the IAM role with permissions to scan
+    #   and add tags to the associated protected resource.
     #
     # @option params [Types::MalwareProtectionPlanActions] :actions
     #   Information about whether the tags will be added to the S3 object
@@ -5000,7 +5054,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -14,168 +14,132 @@ module Aws::Firehose
 
     class CreateDeliveryStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DeleteDeliveryStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class DescribeDeliveryStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListDeliveryStreams
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class ListTagsForDeliveryStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class PutRecord
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class PutRecordBatch
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class StartDeliveryStreamEncryption
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class StopDeliveryStreamEncryption
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class TagDeliveryStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UntagDeliveryStream
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end
 
     class UpdateDestination
       def self.build(context)
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
         Aws::Firehose::EndpointParameters.new(
           region: context.config.region,
           use_dual_stack: context.config.use_dualstack_endpoint,
           use_fips: context.config.use_fips_endpoint,
-          endpoint: endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
         )
       end
     end

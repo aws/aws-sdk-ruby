@@ -425,6 +425,12 @@ module Aws::Synthetics
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -578,6 +584,14 @@ module Aws::Synthetics
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
     #
+    # @option params [Array<String>] :resources_to_replicate_tags
+    #   To have the tags that you apply to this canary also be applied to the
+    #   Lambda function that the canary uses, specify this parameter with the
+    #   value `lambda-function`.
+    #
+    #   If you specify this parameter and don't specify any tags in the
+    #   `Tags` parameter, the canary creation fails.
+    #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs to associate with the canary. You can
     #   associate as many as 50 tags with a canary.
@@ -585,6 +599,10 @@ module Aws::Synthetics
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions, by granting a user permission to
     #   access or change only the resources that have certain tag values.
+    #
+    #   To have the tags that you apply to this canary also be applied to the
+    #   Lambda function that the canary uses, specify this parameter with the
+    #   value `lambda-function`.
     #
     # @option params [Types::ArtifactConfigInput] :artifact_config
     #   A structure that contains the configuration for canary artifacts,
@@ -627,6 +645,7 @@ module Aws::Synthetics
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
     #     },
+    #     resources_to_replicate_tags: ["lambda-function"], # accepts lambda-function
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -767,17 +786,20 @@ module Aws::Synthetics
     # again, you should also delete the following:
     #
     # * The CloudWatch alarms created for this canary. These alarms have a
-    #   name of `Synthetics-SharpDrop-Alarm-MyCanaryName `.
+    #   name of
+    #   `Synthetics-Alarm-first-198-characters-of-canary-name-canaryId-alarm
+    #   number `
     #
     # * Amazon S3 objects and buckets, such as the canary's artifact
     #   location.
     #
     # * IAM roles created for the canary. If they were created in the
     #   console, these roles have the name `
-    #   role/service-role/CloudWatchSyntheticsRole-MyCanaryName `.
+    #   role/service-role/CloudWatchSyntheticsRole-First-21-Characters-of-CanaryName
+    #   `
     #
     # * CloudWatch Logs log groups created for the canary. These logs groups
-    #   have the name `/aws/lambda/cwsyn-MyCanaryName `.
+    #   have the name `/aws/lambda/cwsyn-First-21-Characters-of-CanaryName `
     #
     # Before you delete a canary, you might want to use `GetCanary` to
     # display the information about this canary. Make note of the
@@ -872,7 +894,7 @@ module Aws::Synthetics
     # @option params [Integer] :max_results
     #   Specify this parameter to limit how many canaries are returned each
     #   time you use the `DescribeCanaries` operation. If you omit this
-    #   parameter, the default of 100 is used.
+    #   parameter, the default of 20 is used.
     #
     # @option params [Array<String>] :names
     #   Use this parameter to return only canaries that match the names that
@@ -1784,7 +1806,7 @@ module Aws::Synthetics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

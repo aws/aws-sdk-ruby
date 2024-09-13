@@ -285,8 +285,25 @@ module Aws::RDS
     # @!attribute [rw] apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid Values: `system-update`, `db-upgrade`, `hardware-maintenance`,
-    #   `ca-certificate-rotation`
+    #   Valid Values:
+    #
+    #   * `ca-certificate-rotation`
+    #
+    #   * `db-upgrade`
+    #
+    #   * `hardware-maintenance`
+    #
+    #   * `os-upgrade`
+    #
+    #   * `system-update`
+    #
+    #   For more information about these actions, see [Maintenance actions
+    #   for Amazon Aurora][1] or [Maintenance actions for Amazon RDS][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
     #   @return [String]
     #
     # @!attribute [rw] opt_in_type
@@ -1027,8 +1044,7 @@ module Aws::RDS
     #   The number of seconds for a proxy to wait for a connection to become
     #   available in the connection pool. This setting only applies when the
     #   proxy has opened its maximum number of connections and all
-    #   connections are busy with client sessions. For an unlimited wait
-    #   time, specify `0`.
+    #   connections are busy with client sessions.
     #
     #   Default: `120`
     #
@@ -3601,6 +3617,9 @@ module Aws::RDS
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB
     #     instances)
     #
+    #   * `custom-sqlserver-dev` (for RDS Custom for SQL Server DB
+    #     instances)
+    #
     #   * `db2-ae`
     #
     #   * `db2-se`
@@ -3730,7 +3749,7 @@ module Aws::RDS
     #
     #   * Must match the name of an existing DB subnet group.
     #
-    #   * Must not be `default`.
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #   @return [String]
@@ -5081,9 +5100,6 @@ module Aws::RDS
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
     #   autogenerates a presigned URL that is a valid request for the
     #   operation that can run in the source Amazon Web Services Region.
-    #
-    #    `SourceRegion` isn't supported for SQL Server, because Amazon RDS
-    #   for SQL Server doesn't support cross-Region read replicas.
     #
     #    </note>
     #
@@ -9779,7 +9795,21 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] parameter_apply_status
-    #   The status of parameter updates.
+    #   The status of parameter updates. Valid values are:
+    #
+    #   * `applying`: The parameter group change is being applied to the
+    #     database.
+    #
+    #   * `failed-to-apply`: The parameter group is in an invalid state.
+    #
+    #   * `in-sync`: The parameter group change is synchronized with the
+    #     database.
+    #
+    #   * `pending-database-upgrade`: The parameter group change will be
+    #     applied after the DB instance is upgraded.
+    #
+    #   * `pending-reboot`: The parameter group change will be applied after
+    #     the DB instance reboots.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupStatus AWS API Documentation
@@ -20899,12 +20929,26 @@ module Aws::RDS
     #   For more information about maintenance actions, see [Maintaining a
     #   DB instance][1].
     #
-    #   Valid Values:` system-update | db-upgrade | hardware-maintenance |
-    #   ca-certificate-rotation`
+    #   Valid Values:
+    #
+    #   * `ca-certificate-rotation`
+    #
+    #   * `db-upgrade`
+    #
+    #   * `hardware-maintenance`
+    #
+    #   * `os-upgrade`
+    #
+    #   * `system-update`
+    #
+    #   For more information about these actions, see [Maintenance actions
+    #   for Amazon Aurora][2] or [Maintenance actions for Amazon RDS][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date

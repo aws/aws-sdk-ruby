@@ -425,6 +425,12 @@ module Aws::QApps
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -539,6 +545,7 @@ module Aws::QApps
     #   * {Types::CreateLibraryItemOutput#updated_at #updated_at} => Time
     #   * {Types::CreateLibraryItemOutput#updated_by #updated_by} => String
     #   * {Types::CreateLibraryItemOutput#rating_count #rating_count} => Integer
+    #   * {Types::CreateLibraryItemOutput#is_verified #is_verified} => Boolean
     #
     #
     # @example Example: Create a Library Item
@@ -556,6 +563,7 @@ module Aws::QApps
     #   {
     #     created_at: Time.parse("2024-05-21T23:17:27.350Z"), 
     #     created_by: "a841e300-40c1-7062-fa34-5b46dadbbaac", 
+    #     is_verified: false, 
     #     library_item_id: "cb9ecf72-8563-450d-9db9-994f98297316", 
     #     rating_count: 0, 
     #     status: "PUBLISHED", 
@@ -581,6 +589,7 @@ module Aws::QApps
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
     #   resp.rating_count #=> Integer
+    #   resp.is_verified #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/CreateLibraryItem AWS API Documentation
     #
@@ -994,6 +1003,7 @@ module Aws::QApps
     #   * {Types::GetLibraryItemOutput#rating_count #rating_count} => Integer
     #   * {Types::GetLibraryItemOutput#is_rated_by_user #is_rated_by_user} => Boolean
     #   * {Types::GetLibraryItemOutput#user_count #user_count} => Integer
+    #   * {Types::GetLibraryItemOutput#is_verified #is_verified} => Boolean
     #
     #
     # @example Example: Retrieve a library item
@@ -1024,6 +1034,7 @@ module Aws::QApps
     #     created_at: Time.parse("2024-05-08T16:09:56.080Z"), 
     #     created_by: "a841e300-40c1-7062-fa34-5b46dadbbaac", 
     #     is_rated_by_user: false, 
+    #     is_verified: false, 
     #     library_item_id: "18cbebaa-196a-4aa5-a840-88d548e07f8f", 
     #     rating_count: 0, 
     #     status: "PUBLISHED", 
@@ -1056,6 +1067,7 @@ module Aws::QApps
     #   resp.rating_count #=> Integer
     #   resp.is_rated_by_user #=> Boolean
     #   resp.user_count #=> Integer
+    #   resp.is_verified #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/GetLibraryItem AWS API Documentation
     #
@@ -1462,6 +1474,7 @@ module Aws::QApps
     #         created_at: Time.parse("2024-05-21T23:17:27.350Z"), 
     #         created_by: "a841e300-40c1-7062-fa34-5b46dadbbaac", 
     #         is_rated_by_user: true, 
+    #         is_verified: false, 
     #         library_item_id: "cb9ecf72-8563-450d-9db9-994f98297316", 
     #         rating_count: 3, 
     #         status: "PUBLISHED", 
@@ -1481,6 +1494,7 @@ module Aws::QApps
     #         created_at: Time.parse("2024-05-08T16:09:56.080Z"), 
     #         created_by: "a841e300-40c1-7062-fa34-5b46dadbbaac", 
     #         is_rated_by_user: false, 
+    #         is_verified: false, 
     #         library_item_id: "18cbebaa-196a-4aa5-a840-88d548e07f8f", 
     #         rating_count: 5, 
     #         status: "PUBLISHED", 
@@ -1500,6 +1514,7 @@ module Aws::QApps
     #         created_at: Time.parse("2024-05-07T22:57:59.327Z"), 
     #         created_by: "a841e300-40c1-7062-fa34-5b46dadbbaac", 
     #         is_rated_by_user: false, 
+    #         is_verified: false, 
     #         library_item_id: "549abfe0-f5c4-45a2-bb9b-c05987a49c6d", 
     #         rating_count: 8, 
     #         status: "PUBLISHED", 
@@ -1537,6 +1552,7 @@ module Aws::QApps
     #   resp.library_items[0].rating_count #=> Integer
     #   resp.library_items[0].is_rated_by_user #=> Boolean
     #   resp.library_items[0].user_count #=> Integer
+    #   resp.library_items[0].is_verified #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/ListLibraryItems AWS API Documentation
@@ -1586,6 +1602,7 @@ module Aws::QApps
     #         app_id: "7b9fe303-18bb-4643-952c-bfcf9f4c427f", 
     #         created_at: Time.parse("2024-05-21T04:09:10.401Z"), 
     #         description: "Description 1", 
+    #         is_verified: false, 
     #         status: "DRAFT", 
     #         title: "App 1", 
     #       }, 
@@ -1594,6 +1611,7 @@ module Aws::QApps
     #         app_id: "dd178fd6-ad3d-49b3-a32d-e915cf423e37", 
     #         created_at: Time.parse("2024-05-21T04:09:10.401Z"), 
     #         description: "Description 2", 
+    #         is_verified: true, 
     #         status: "PUBLISHED", 
     #         title: "App 2", 
     #       }, 
@@ -1602,6 +1620,7 @@ module Aws::QApps
     #         app_id: "3274b744-1a13-4aad-953f-eda2e4149e6e", 
     #         created_at: Time.parse("2024-05-21T04:09:10.401Z"), 
     #         description: "Description 3", 
+    #         is_verified: false, 
     #         status: "DRAFT", 
     #         title: "App 3", 
     #       }, 
@@ -1625,6 +1644,7 @@ module Aws::QApps
     #         app_id: "bec8ee64-2635-41e8-aace-e1e418f4f295", 
     #         created_at: Time.parse("2024-05-21T04:09:10.401Z"), 
     #         description: "Description 4", 
+    #         is_verified: true, 
     #         status: "PUBLISHED", 
     #         title: "App 4", 
     #       }, 
@@ -1633,6 +1653,7 @@ module Aws::QApps
     #         app_id: "c380a45d-bd77-45b0-a0e5-8a266c1d8bc4", 
     #         created_at: Time.parse("2024-05-21T04:09:10.401Z"), 
     #         description: "Description 5", 
+    #         is_verified: false, 
     #         status: "PUBLISHED", 
     #         title: "App 5", 
     #       }, 
@@ -1641,6 +1662,7 @@ module Aws::QApps
     #         app_id: "afc4ee80-9722-4396-85a6-7aeaff52c177", 
     #         created_at: Time.parse("2024-05-21T04:09:10.401Z"), 
     #         description: "Description 6", 
+    #         is_verified: false, 
     #         status: "PUBLISHED", 
     #         title: "App 6", 
     #       }, 
@@ -1666,6 +1688,7 @@ module Aws::QApps
     #   resp.apps[0].created_at #=> Time
     #   resp.apps[0].can_edit #=> Boolean
     #   resp.apps[0].status #=> String
+    #   resp.apps[0].is_verified #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/ListQApps AWS API Documentation
@@ -2024,7 +2047,7 @@ module Aws::QApps
       req.send_request(options)
     end
 
-    # Updates the metadata and status of a library item for an Amazon Q App.
+    # Updates the library item for an Amazon Q App.
     #
     # @option params [required, String] :instance_id
     #   The unique identifier of the Amazon Q Business application environment
@@ -2054,6 +2077,7 @@ module Aws::QApps
     #   * {Types::UpdateLibraryItemOutput#rating_count #rating_count} => Integer
     #   * {Types::UpdateLibraryItemOutput#is_rated_by_user #is_rated_by_user} => Boolean
     #   * {Types::UpdateLibraryItemOutput#user_count #user_count} => Integer
+    #   * {Types::UpdateLibraryItemOutput#is_verified #is_verified} => Boolean
     #
     #
     # @example Example: Sets the status of a library item to DISABLED
@@ -2084,6 +2108,7 @@ module Aws::QApps
     #     ], 
     #     created_at: Time.parse("2024-05-21T23:17:27.350Z"), 
     #     created_by: "a841e300-40c1-7062-fa34-5b46dadbbaac", 
+    #     is_verified: false, 
     #     library_item_id: "cb9ecf72-8563-450d-9db9-994f98297316", 
     #     rating_count: 24, 
     #     status: "DISABLED", 
@@ -2116,6 +2141,7 @@ module Aws::QApps
     #   resp.rating_count #=> Integer
     #   resp.is_rated_by_user #=> Boolean
     #   resp.user_count #=> Integer
+    #   resp.is_verified #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/UpdateLibraryItem AWS API Documentation
     #
@@ -2123,6 +2149,46 @@ module Aws::QApps
     # @param [Hash] params ({})
     def update_library_item(params = {}, options = {})
       req = build_request(:update_library_item, params)
+      req.send_request(options)
+    end
+
+    # Updates the verification status of a library item for an Amazon Q App.
+    #
+    # @option params [required, String] :instance_id
+    #   The unique identifier of the Amazon Q Business application environment
+    #   instance.
+    #
+    # @option params [required, String] :library_item_id
+    #   The unique identifier of the updated library item.
+    #
+    # @option params [Boolean] :is_verified
+    #   The verification status of the library item
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Update a library item to be verified
+    #
+    #   resp = client.update_library_item_metadata({
+    #     instance_id: "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f", 
+    #     is_verified: true, 
+    #     library_item_id: "cb9ecf72-8563-450d-9db9-994f98297316", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_library_item_metadata({
+    #     instance_id: "InstanceId", # required
+    #     library_item_id: "UUID", # required
+    #     is_verified: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qapps-2023-11-27/UpdateLibraryItemMetadata AWS API Documentation
+    #
+    # @overload update_library_item_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_library_item_metadata(params = {}, options = {})
+      req = build_request(:update_library_item_metadata, params)
       req.send_request(options)
     end
 
@@ -2435,7 +2501,7 @@ module Aws::QApps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qapps'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

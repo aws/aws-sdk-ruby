@@ -61,6 +61,7 @@ module Aws::Glue
   # * {SchedulerNotRunningException}
   # * {SchedulerRunningException}
   # * {SchedulerTransitioningException}
+  # * {ThrottlingException}
   # * {ValidationException}
   # * {VersionMismatchException}
   #
@@ -590,6 +591,21 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::SchedulerTransitioningException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

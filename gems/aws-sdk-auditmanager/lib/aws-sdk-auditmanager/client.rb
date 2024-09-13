@@ -425,6 +425,12 @@ module Aws::AuditManager
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -4025,7 +4031,7 @@ module Aws::AuditManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

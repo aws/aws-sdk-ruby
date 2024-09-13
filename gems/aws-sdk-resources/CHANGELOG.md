@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.206.0 (2024-09-12)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-worklink` gem.
+
+3.205.0 (2024-09-06)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-lambdapreview` gem.
+
 3.204.0 (2024-08-30)
 ------------------
 

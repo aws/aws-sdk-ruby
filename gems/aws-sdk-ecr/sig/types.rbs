@@ -361,13 +361,13 @@ module Aws::ECR
     end
 
     class EncryptionConfiguration
-      attr_accessor encryption_type: ("AES256" | "KMS")
+      attr_accessor encryption_type: ("AES256" | "KMS" | "KMS_DSSE")
       attr_accessor kms_key: ::String
       SENSITIVE: []
     end
 
     class EncryptionConfigurationForRepositoryCreationTemplate
-      attr_accessor encryption_type: ("AES256" | "KMS")
+      attr_accessor encryption_type: ("AES256" | "KMS" | "KMS_DSSE")
       attr_accessor kms_key: ::String
       SENSITIVE: []
     end

@@ -425,6 +425,12 @@ module Aws::Kafka
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -913,6 +919,9 @@ module Aws::Kafka
     #           detect_and_copy_new_topics: false,
     #           starting_position: {
     #             type: "LATEST", # accepts LATEST, EARLIEST
+    #           },
+    #           topic_name_configuration: {
+    #             type: "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS", # accepts PREFIXED_WITH_SOURCE_CLUSTER_ALIAS, IDENTICAL
     #           },
     #           topics_to_exclude: ["__stringMax249"],
     #           topics_to_replicate: ["__stringMax249"], # required
@@ -1673,6 +1682,7 @@ module Aws::Kafka
     #   resp.replication_info_list[0].topic_replication.copy_topic_configurations #=> Boolean
     #   resp.replication_info_list[0].topic_replication.detect_and_copy_new_topics #=> Boolean
     #   resp.replication_info_list[0].topic_replication.starting_position.type #=> String, one of "LATEST", "EARLIEST"
+    #   resp.replication_info_list[0].topic_replication.topic_name_configuration.type #=> String, one of "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS", "IDENTICAL"
     #   resp.replication_info_list[0].topic_replication.topics_to_exclude #=> Array
     #   resp.replication_info_list[0].topic_replication.topics_to_exclude[0] #=> String
     #   resp.replication_info_list[0].topic_replication.topics_to_replicate #=> Array
@@ -1779,7 +1789,13 @@ module Aws::Kafka
       req.send_request(options)
     end
 
-    # A list of brokers that a client application can use to bootstrap.
+    # A list of brokers that a client application can use to bootstrap. This
+    # list doesn't necessarily include all of the brokers in the cluster.
+    # The following Python 3.6 example shows how you can use the Amazon
+    # Resource Name (ARN) of a cluster to get its bootstrap brokers. If you
+    # don't know the ARN of your cluster, you can use the `ListClusters`
+    # operation to get the ARNs of all the clusters in this account and
+    # Region.
     #
     # @option params [required, String] :cluster_arn
     #
@@ -3380,7 +3396,7 @@ module Aws::Kafka
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

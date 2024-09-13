@@ -425,6 +425,12 @@ module Aws::ElasticLoadBalancingV2
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -2178,6 +2184,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeListenerCertificatesOutput#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #   * {Types::DescribeListenerCertificatesOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_listener_certificates({
@@ -2554,6 +2562,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::DescribeRulesOutput#rules #rules} => Array&lt;Types::Rule&gt;
     #   * {Types::DescribeRulesOutput#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe a rule
@@ -5078,7 +5088,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

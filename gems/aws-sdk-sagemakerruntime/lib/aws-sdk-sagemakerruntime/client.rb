@@ -436,6 +436,12 @@ module Aws::SageMakerRuntime
     #   @option options [String] :ssl_ca_store
     #     Sets the X509::Store to verify peer certificate.
     #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
     #   @option options [Float] :ssl_timeout
     #     Sets the SSL timeout in seconds
     #
@@ -577,12 +583,31 @@ module Aws::SageMakerRuntime
     #   If the endpoint hosts one or more inference components, this parameter
     #   specifies the name of inference component to invoke.
     #
+    # @option params [String] :session_id
+    #   Creates a stateful session or identifies an existing one. You can do
+    #   one of the following:
+    #
+    #   * Create a stateful session by specifying the value `NEW_SESSION`.
+    #
+    #   * Send your request to an existing stateful session by specifying the
+    #     ID of that session.
+    #
+    #   With a stateful session, you can send multiple requests to a stateful
+    #   model. When you create a session with a stateful model, the model must
+    #   create the session ID and set the expiration time. The model must also
+    #   provide that information in the response to your request. You can get
+    #   the ID and timestamp from the `NewSessionId` response parameter. For
+    #   any subsequent request where you specify that session ID, SageMaker
+    #   routes the request to the same instance that supports the session.
+    #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointOutput#body #body} => String
     #   * {Types::InvokeEndpointOutput#content_type #content_type} => String
     #   * {Types::InvokeEndpointOutput#invoked_production_variant #invoked_production_variant} => String
     #   * {Types::InvokeEndpointOutput#custom_attributes #custom_attributes} => String
+    #   * {Types::InvokeEndpointOutput#new_session_id #new_session_id} => String
+    #   * {Types::InvokeEndpointOutput#closed_session_id #closed_session_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -598,6 +623,7 @@ module Aws::SageMakerRuntime
     #     inference_id: "InferenceId",
     #     enable_explanations: "EnableExplanationsHeader",
     #     inference_component_name: "InferenceComponentHeader",
+    #     session_id: "SessionIdOrNewSessionConstantHeader",
     #   })
     #
     # @example Response structure
@@ -606,6 +632,8 @@ module Aws::SageMakerRuntime
     #   resp.content_type #=> String
     #   resp.invoked_production_variant #=> String
     #   resp.custom_attributes #=> String
+    #   resp.new_session_id #=> String
+    #   resp.closed_session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpoint AWS API Documentation
     #
@@ -843,6 +871,16 @@ module Aws::SageMakerRuntime
     #   specifies the name of inference component to invoke for a streaming
     #   response.
     #
+    # @option params [String] :session_id
+    #   The ID of a stateful session to handle your request.
+    #
+    #   You can't create a stateful session by using the
+    #   `InvokeEndpointWithResponseStream` action. Instead, you can create one
+    #   by using the ` InvokeEndpoint ` action. In your request, you specify
+    #   `NEW_SESSION` for the `SessionId` request parameter. The response to
+    #   that request provides the session ID for the `NewSessionId` response
+    #   parameter.
+    #
     # @return [Types::InvokeEndpointWithResponseStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeEndpointWithResponseStreamOutput#body #body} => Types::ResponseStream
@@ -963,6 +1001,7 @@ module Aws::SageMakerRuntime
     #     target_container_hostname: "TargetContainerHostnameHeader",
     #     inference_id: "InferenceId",
     #     inference_component_name: "InferenceComponentHeader",
+    #     session_id: "SessionIdHeader",
     #   })
     #
     # @example Response structure
@@ -1030,7 +1069,7 @@ module Aws::SageMakerRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

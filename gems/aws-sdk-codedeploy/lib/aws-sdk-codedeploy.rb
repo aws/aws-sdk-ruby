@@ -53,6 +53,6 @@ require_relative 'aws-sdk-codedeploy/customizations'
 # @!group service
 module Aws::CodeDeploy
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.75.0'
 
 end

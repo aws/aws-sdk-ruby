@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2024-09-11)
+------------------
+
+* Feature - Added KMS_DSSE to EncryptionType
+
+1.82.0 (2024-09-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.81.0 (2024-09-03)
 ------------------
 

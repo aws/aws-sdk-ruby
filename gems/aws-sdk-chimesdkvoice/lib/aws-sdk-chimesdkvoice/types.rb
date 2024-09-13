@@ -1492,7 +1492,7 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     #
     # @!attribute [rw] voice_tone_analysis_task_id
-    #   The ID of the voice tone anlysis task.
+    #   The ID of the voice tone analysis task.
     #   @return [String]
     #
     # @!attribute [rw] is_caller
@@ -1985,7 +1985,7 @@ module Aws::ChimeSDKVoice
     # The configuration for a call analytics task.
     #
     # @!attribute [rw] disabled
-    #   Denotes the configration as enabled or disabled.
+    #   Denotes the configuration as enabled or disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] configuration_arn
@@ -3846,7 +3846,13 @@ module Aws::ChimeSDKVoice
     #   @return [String]
     #
     # @!attribute [rw] country
-    #   The country in the address being validated.
+    #   The country in the address being validated as two-letter country
+    #   code in ISO 3166-1 alpha-2 format, such as `US`. For more
+    #   information, see [ISO 3166-1 alpha-2][1] in Wikipedia.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     #   @return [String]
     #
     # @!attribute [rw] postal_code
@@ -3868,10 +3874,18 @@ module Aws::ChimeSDKVoice
     end
 
     # @!attribute [rw] validation_result
-    #   Number indicating the result of address validation. `0` means the
-    #   address was perfect as-is and successfully validated. `1` means the
-    #   address was corrected. `2` means the address sent was not close
-    #   enough and was not validated.
+    #   Number indicating the result of address validation.
+    #
+    #   Each possible result is defined as follows:
+    #
+    #   * `0` - Address validation succeeded.
+    #
+    #   * `1` - Address validation succeeded. The address was a close enough
+    #     match and has been corrected as part of the address object.
+    #
+    #   * `2` - Address validation failed. You should re-submit the
+    #     validation request with candidates from the `CandidateAddressList`
+    #     result, if it's a close match.
     #   @return [Integer]
     #
     # @!attribute [rw] address_external_id

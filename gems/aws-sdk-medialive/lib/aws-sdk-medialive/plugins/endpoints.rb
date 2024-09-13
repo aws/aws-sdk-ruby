@@ -40,10 +40,19 @@ module Aws::MediaLive
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
-          @handler.call(context)
+          with_metrics(context) { @handler.call(context) }
         end
 
         private
+
+        def with_metrics(context, &block)
+          metrics = []
+          metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
+          if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
+            metrics << 'SIGV4A_SIGNING'
+          end
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, values|
@@ -242,6 +251,50 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::UpdateEventBridgeRuleTemplate.build(context)
           when :update_event_bridge_rule_template_group
             Aws::MediaLive::Endpoints::UpdateEventBridgeRuleTemplateGroup.build(context)
+          when :create_channel_placement_group
+            Aws::MediaLive::Endpoints::CreateChannelPlacementGroup.build(context)
+          when :create_cluster
+            Aws::MediaLive::Endpoints::CreateCluster.build(context)
+          when :create_network
+            Aws::MediaLive::Endpoints::CreateNetwork.build(context)
+          when :create_node
+            Aws::MediaLive::Endpoints::CreateNode.build(context)
+          when :create_node_registration_script
+            Aws::MediaLive::Endpoints::CreateNodeRegistrationScript.build(context)
+          when :delete_channel_placement_group
+            Aws::MediaLive::Endpoints::DeleteChannelPlacementGroup.build(context)
+          when :delete_cluster
+            Aws::MediaLive::Endpoints::DeleteCluster.build(context)
+          when :delete_network
+            Aws::MediaLive::Endpoints::DeleteNetwork.build(context)
+          when :delete_node
+            Aws::MediaLive::Endpoints::DeleteNode.build(context)
+          when :describe_channel_placement_group
+            Aws::MediaLive::Endpoints::DescribeChannelPlacementGroup.build(context)
+          when :describe_cluster
+            Aws::MediaLive::Endpoints::DescribeCluster.build(context)
+          when :describe_network
+            Aws::MediaLive::Endpoints::DescribeNetwork.build(context)
+          when :describe_node
+            Aws::MediaLive::Endpoints::DescribeNode.build(context)
+          when :list_channel_placement_groups
+            Aws::MediaLive::Endpoints::ListChannelPlacementGroups.build(context)
+          when :list_clusters
+            Aws::MediaLive::Endpoints::ListClusters.build(context)
+          when :list_networks
+            Aws::MediaLive::Endpoints::ListNetworks.build(context)
+          when :list_nodes
+            Aws::MediaLive::Endpoints::ListNodes.build(context)
+          when :update_channel_placement_group
+            Aws::MediaLive::Endpoints::UpdateChannelPlacementGroup.build(context)
+          when :update_cluster
+            Aws::MediaLive::Endpoints::UpdateCluster.build(context)
+          when :update_network
+            Aws::MediaLive::Endpoints::UpdateNetwork.build(context)
+          when :update_node
+            Aws::MediaLive::Endpoints::UpdateNode.build(context)
+          when :update_node_state
+            Aws::MediaLive::Endpoints::UpdateNodeState.build(context)
           end
         end
       end

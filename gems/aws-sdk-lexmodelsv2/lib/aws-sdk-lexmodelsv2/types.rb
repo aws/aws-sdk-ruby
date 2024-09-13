@@ -2319,6 +2319,16 @@ module Aws::LexModelsV2
     # @!attribute [rw] voice_settings
     #   Defines settings for using an Amazon Polly voice to communicate with
     #   a user.
+    #
+    #   Valid values include:
+    #
+    #   * `standard`
+    #
+    #   * `neural`
+    #
+    #   * `long-form`
+    #
+    #   * `generative`
     #   @return [Types::VoiceSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleImportSpecification AWS API Documentation
@@ -15927,6 +15937,16 @@ module Aws::LexModelsV2
 
     # Defines settings for using an Amazon Polly voice to communicate with a
     # user.
+    #
+    # Valid values include:
+    #
+    # * `standard`
+    #
+    # * `neural`
+    #
+    # * `long-form`
+    #
+    # * `generative`
     #
     # @!attribute [rw] voice_id
     #   The identifier of the Amazon Polly voice to use.

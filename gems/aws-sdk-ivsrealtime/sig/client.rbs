@@ -91,6 +91,22 @@ module Aws
                                         ) -> _CreateEncoderConfigurationResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEncoderConfigurationResponseSuccess
 
+      interface _CreateIngestConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngestConfigurationResponse]
+        def ingest_configuration: () -> Types::IngestConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_ingest_configuration-instance_method
+      def create_ingest_configuration: (
+                                         ?name: ::String,
+                                         ?stage_arn: ::String,
+                                         ?user_id: ::String,
+                                         ?attributes: Hash[::String, ::String],
+                                         ingest_protocol: ("RTMP" | "RTMPS"),
+                                         ?insecure_ingest: bool,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateIngestConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestConfigurationResponseSuccess
+
       interface _CreateParticipantTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateParticipantTokenResponse]
         def participant_token: () -> Types::ParticipantToken
@@ -152,6 +168,16 @@ module Aws
                                         ) -> _DeleteEncoderConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEncoderConfigurationResponseSuccess
 
+      interface _DeleteIngestConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIngestConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#delete_ingest_configuration-instance_method
+      def delete_ingest_configuration: (
+                                         arn: ::String,
+                                         ?force: bool
+                                       ) -> _DeleteIngestConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIngestConfigurationResponseSuccess
+
       interface _DeletePublicKeyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePublicKeyResponse]
       end
@@ -209,6 +235,16 @@ module Aws
                                        arn: ::String
                                      ) -> _GetEncoderConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncoderConfigurationResponseSuccess
+
+      interface _GetIngestConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestConfigurationResponse]
+        def ingest_configuration: () -> Types::IngestConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_ingest_configuration-instance_method
+      def get_ingest_configuration: (
+                                      arn: ::String
+                                    ) -> _GetIngestConfigurationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestConfigurationResponseSuccess
 
       interface _GetParticipantResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetParticipantResponse]
@@ -300,6 +336,20 @@ module Aws
                                          ?max_results: ::Integer
                                        ) -> _ListEncoderConfigurationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEncoderConfigurationsResponseSuccess
+
+      interface _ListIngestConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestConfigurationsResponse]
+        def ingest_configurations: () -> ::Array[Types::IngestConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_ingest_configurations-instance_method
+      def list_ingest_configurations: (
+                                        ?filter_by_stage_arn: ::String,
+                                        ?filter_by_state: ("ACTIVE" | "INACTIVE"),
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListIngestConfigurationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestConfigurationsResponseSuccess
 
       interface _ListParticipantEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListParticipantEventsResponse]
@@ -470,6 +520,17 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateIngestConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIngestConfigurationResponse]
+        def ingest_configuration: () -> Types::IngestConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#update_ingest_configuration-instance_method
+      def update_ingest_configuration: (
+                                         arn: ::String,
+                                         ?stage_arn: ::String
+                                       ) -> _UpdateIngestConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngestConfigurationResponseSuccess
 
       interface _UpdateStageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStageResponse]

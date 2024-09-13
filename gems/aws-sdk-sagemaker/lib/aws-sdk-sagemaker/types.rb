@@ -4157,6 +4157,11 @@ module Aws::SageMaker
     #   SageMaker HyperPod cluster instance group.
     #   @return [Array<Types::ClusterInstanceStorageConfig>]
     #
+    # @!attribute [rw] on_start_deep_health_checks
+    #   A flag indicating whether deep health checks should be performed
+    #   when the cluster instance group is created or updated.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupDetails AWS API Documentation
     #
     class ClusterInstanceGroupDetails < Struct.new(
@@ -4167,7 +4172,8 @@ module Aws::SageMaker
       :life_cycle_config,
       :execution_role,
       :threads_per_core,
-      :instance_storage_configs)
+      :instance_storage_configs,
+      :on_start_deep_health_checks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4214,6 +4220,11 @@ module Aws::SageMaker
     #   the SageMaker HyperPod cluster instance group.
     #   @return [Array<Types::ClusterInstanceStorageConfig>]
     #
+    # @!attribute [rw] on_start_deep_health_checks
+    #   A flag indicating whether deep health checks should be performed
+    #   when the cluster instance group is created or updated.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupSpecification AWS API Documentation
     #
     class ClusterInstanceGroupSpecification < Struct.new(
@@ -4223,7 +4234,8 @@ module Aws::SageMaker
       :life_cycle_config,
       :execution_role,
       :threads_per_core,
-      :instance_storage_configs)
+      :instance_storage_configs,
+      :on_start_deep_health_checks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4432,6 +4444,37 @@ module Aws::SageMaker
       :instance_type,
       :launch_time,
       :instance_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of orchestrator used for the SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] eks
+    #   The Amazon EKS cluster used as the orchestrator for the SageMaker
+    #   HyperPod cluster.
+    #   @return [Types::ClusterOrchestratorEksConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOrchestrator AWS API Documentation
+    #
+    class ClusterOrchestrator < Struct.new(
+      :eks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for the Amazon EKS cluster used as the
+    # orchestrator for the SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EKS cluster associated
+    #   with the SageMaker HyperPod cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOrchestratorEksConfig AWS API Documentation
+    #
+    class ClusterOrchestratorEksConfig < Struct.new(
+      :cluster_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5738,13 +5781,29 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] orchestrator
+    #   The type of orchestrator to use for the SageMaker HyperPod cluster.
+    #   Currently, the only supported value is `"eks"`, which is to use an
+    #   Amazon Elastic Kubernetes Service (EKS) cluster as the orchestrator.
+    #   @return [Types::ClusterOrchestrator]
+    #
+    # @!attribute [rw] node_recovery
+    #   The node recovery mode for the SageMaker HyperPod cluster. When set
+    #   to `Automatic`, SageMaker HyperPod will automatically reboot or
+    #   replace faulty nodes when issues are detected. When set to `None`,
+    #   cluster administrators will need to manually manage any faulty
+    #   cluster instances.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
       :cluster_name,
       :instance_groups,
       :vpc_config,
-      :tags)
+      :tags,
+      :orchestrator,
+      :node_recovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12807,6 +12866,15 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] orchestrator
+    #   The type of orchestrator used for the SageMaker HyperPod cluster.
+    #   @return [Types::ClusterOrchestrator]
+    #
+    # @!attribute [rw] node_recovery
+    #   The node recovery mode configured for the SageMaker HyperPod
+    #   cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterResponse AWS API Documentation
     #
     class DescribeClusterResponse < Struct.new(
@@ -12816,7 +12884,9 @@ module Aws::SageMaker
       :creation_time,
       :failure_message,
       :instance_groups,
-      :vpc_config)
+      :vpc_config,
+      :orchestrator,
+      :node_recovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44979,11 +45049,17 @@ module Aws::SageMaker
     #   Specify the instance groups to update.
     #   @return [Array<Types::ClusterInstanceGroupSpecification>]
     #
+    # @!attribute [rw] node_recovery
+    #   The node recovery mode to be applied to the SageMaker HyperPod
+    #   cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterRequest AWS API Documentation
     #
     class UpdateClusterRequest < Struct.new(
       :cluster_name,
-      :instance_groups)
+      :instance_groups,
+      :node_recovery)
       SENSITIVE = []
       include Aws::Structure
     end

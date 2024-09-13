@@ -14,7 +14,7 @@ module Aws::TaxSettings
   describe EndpointProvider do
     subject { Aws::TaxSettings::EndpointProvider.new }
 
-    context 'For custom endpoint with region not set and fips disabled' do
+    context "For custom endpoint with region not set and fips disabled" do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}
       end
@@ -28,7 +28,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For custom endpoint with fips enabled' do
+    context "For custom endpoint with fips enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
@@ -41,7 +41,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For custom endpoint with fips disabled and dualstack enabled' do
+    context "For custom endpoint with fips disabled and dualstack enabled" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Dualstack and custom endpoint are not supported"}
       end
@@ -54,7 +54,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://tax-fips.us-east-1.api.aws"}}
       end
@@ -68,7 +68,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://tax-fips.us-east-1.amazonaws.com"}}
       end
@@ -82,7 +82,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://tax.us-east-1.api.aws"}}
       end
@@ -96,7 +96,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-east-1"}]}, "url"=>"https://tax.us-east-1.amazonaws.com"}}
       end
@@ -110,7 +110,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS enabled and DualStack enabled' do
+    context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://tax-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
@@ -124,7 +124,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS enabled and DualStack disabled' do
+    context "For region cn-northwest-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://tax-fips.cn-northwest-1.amazonaws.com.cn"}}
       end
@@ -138,7 +138,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS disabled and DualStack enabled' do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://tax.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
@@ -152,7 +152,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region cn-northwest-1 with FIPS disabled and DualStack disabled' do
+    context "For region cn-northwest-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"cn-northwest-1"}]}, "url"=>"https://tax.cn-northwest-1.amazonaws.com.cn"}}
       end
@@ -166,7 +166,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1"}]}, "url"=>"https://tax-fips.us-gov-west-1.api.aws"}}
       end
@@ -180,7 +180,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1"}]}, "url"=>"https://tax-fips.us-gov-west-1.amazonaws.com"}}
       end
@@ -194,7 +194,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1"}]}, "url"=>"https://tax.us-gov-west-1.api.aws"}}
       end
@@ -208,7 +208,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-gov-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-gov-west-1"}]}, "url"=>"https://tax.us-gov-west-1.amazonaws.com"}}
       end
@@ -222,7 +222,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -235,7 +235,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-iso-east-1"}]}, "url"=>"https://tax-fips.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -249,7 +249,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -262,7 +262,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-iso-east-1"}]}, "url"=>"https://tax.us-iso-east-1.c2s.ic.gov"}}
       end
@@ -276,7 +276,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -289,7 +289,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-isob-east-1"}]}, "url"=>"https://tax-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -303,7 +303,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -316,7 +316,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isob-east-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-isob-east-1"}]}, "url"=>"https://tax.us-isob-east-1.sc2s.sgov.gov"}}
       end
@@ -330,7 +330,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region eu-isoe-west-1 with FIPS enabled and DualStack enabled' do
+    context "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -343,7 +343,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region eu-isoe-west-1 with FIPS enabled and DualStack disabled' do
+    context "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"eu-isoe-west-1"}]}, "url"=>"https://tax-fips.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
@@ -357,7 +357,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region eu-isoe-west-1 with FIPS disabled and DualStack enabled' do
+    context "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -370,7 +370,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region eu-isoe-west-1 with FIPS disabled and DualStack disabled' do
+    context "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"eu-isoe-west-1"}]}, "url"=>"https://tax.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
@@ -384,7 +384,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isof-south-1 with FIPS enabled and DualStack enabled' do
+    context "For region us-isof-south-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
       end
@@ -397,7 +397,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isof-south-1 with FIPS enabled and DualStack disabled' do
+    context "For region us-isof-south-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-isof-south-1"}]}, "url"=>"https://tax-fips.us-isof-south-1.csp.hci.ic.gov"}}
       end
@@ -411,7 +411,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isof-south-1 with FIPS disabled and DualStack enabled' do
+    context "For region us-isof-south-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
         {"error"=>"DualStack is enabled but this partition does not support DualStack"}
       end
@@ -424,7 +424,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'For region us-isof-south-1 with FIPS disabled and DualStack disabled' do
+    context "For region us-isof-south-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingRegion"=>"us-isof-south-1"}]}, "url"=>"https://tax.us-isof-south-1.csp.hci.ic.gov"}}
       end
@@ -438,7 +438,7 @@ module Aws::TaxSettings
       end
     end
 
-    context 'Missing region' do
+    context "Missing region" do
       let(:expected) do
         {"error"=>"Invalid Configuration: Missing Region"}
       end

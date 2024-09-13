@@ -1241,9 +1241,6 @@
   "WorkDocs": {
     "models": "workdocs/2016-05-01"
   },
-  "WorkLink": {
-    "models": "worklink/2018-09-25"
-  },
   "WorkMail": {
     "models": "workmail/2017-10-01"
   },
