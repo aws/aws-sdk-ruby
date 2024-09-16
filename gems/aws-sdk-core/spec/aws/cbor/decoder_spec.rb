@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../spec_helper'
+require 'aws-sdk-core/cbor/decoder'
 
 module Aws
   module Cbor

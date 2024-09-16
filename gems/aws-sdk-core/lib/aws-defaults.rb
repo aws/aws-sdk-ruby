@@ -1,3 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'aws-defaults/default_configuration'
+module Aws
+  autoload :DefaultsModeConfiguration, 'aws-defaults/default_configuration'
+  autoload :DefaultsModeConfigResolver, 'aws-defaults/defaults_mode_config_resolver'
+end
