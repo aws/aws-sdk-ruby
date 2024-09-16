@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Remove CRT `sigv4a` signing capability.
+
 1.9.1 (2024-07-29)
 ------------------
 

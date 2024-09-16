@@ -464,10 +464,6 @@ When(/^I select it with query "([^"]*)" with handler and block$/) do |query|
 end
 
 When(/I have access to an MRAP bucket and CRT/) do
-  unless Aws::Sigv4::Signer.use_crt?
-    pending("CRT is not available")
-  end
-
   begin
     @client.head_bucket(bucket: 'ruby-sdk-integtest-mrap-bucket')
   rescue

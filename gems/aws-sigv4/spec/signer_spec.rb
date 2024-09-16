@@ -357,8 +357,6 @@ module Aws
         end
 
         it 'escapes path for the canonical request by default' do
-          skip("CRT does not provide canonical request") if Signer.use_crt?
-
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
             url: 'https://domain.com/foo%bar'
@@ -367,8 +365,6 @@ module Aws
         end
 
         it 'escapes path for the canonical request if :uri_escape_path is true' do
-          skip("CRT does not provide canonical request") if Signer.use_crt?
-
           options[:uri_escape_path] = true
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -378,8 +374,6 @@ module Aws
         end
 
         it 'does not escape path for the canonical request if :uri_escape_path is false' do
-          skip("CRT does not provide canonical request") if Signer.use_crt?
-
           options[:uri_escape_path] = false
           signature = Signer.new(options).sign_request(
             http_method: 'GET',
@@ -427,9 +421,6 @@ module Aws
       end
 
       context ':canonical_request' do
-
-        before { skip("CRT Signer does not expose canonical request") if Signer.use_crt? }
-
         it 'lower-cases and sort all header keys except authorization' do
           signature = Signer.new(options).sign_request(
             http_method: 'PUT',
