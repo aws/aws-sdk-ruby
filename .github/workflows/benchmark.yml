@@ -51,6 +51,7 @@ jobs:
         run: bundle exec rake benchmark:run
 
       - name: Configure AWS credentials
+        if: github.repository == 'aws/aws-sdk-ruby'
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::373952703873:role/BenchmarkReporter
@@ -58,7 +59,9 @@ jobs:
           aws-region: us-east-1
 
       - name: Upload benchmark report
+        if: github.repository == 'aws/aws-sdk-ruby'
         run: bundle exec rake benchmark:upload-report
 
       - name: Put benchmark metrics
+        if: github.repository == 'aws/aws-sdk-ruby'
         run: bundle exec rake benchmark:put-metrics
