@@ -1915,7 +1915,7 @@ module Aws::MediaLive
     #         },
     #       ],
     #     },
-    #     input_network_location: "AWS", # accepts AWS, ON_PREMISE, ON_PREMISES
+    #     input_network_location: "AWS", # accepts AWS, ON_PREMISES
     #     multicast_settings: {
     #       sources: [
     #         {
@@ -1969,7 +1969,7 @@ module Aws::MediaLive
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
-    #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISE", "ON_PREMISES"
+    #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
     #   resp.input.multicast_settings.sources[0].url #=> String
@@ -2246,7 +2246,7 @@ module Aws::MediaLive
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
-    #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISE", "ON_PREMISES"
+    #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
     #   resp.input.multicast_settings.sources[0].url #=> String
@@ -4294,7 +4294,7 @@ module Aws::MediaLive
     #   resp.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.srt_settings.srt_caller_sources[0].stream_id #=> String
-    #   resp.input_network_location #=> String, one of "AWS", "ON_PREMISE", "ON_PREMISES"
+    #   resp.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.multicast_settings.sources #=> Array
     #   resp.multicast_settings.sources[0].source_ip #=> String
     #   resp.multicast_settings.sources[0].url #=> String
@@ -5263,7 +5263,7 @@ module Aws::MediaLive
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.inputs[0].srt_settings.srt_caller_sources[0].stream_id #=> String
-    #   resp.inputs[0].input_network_location #=> String, one of "AWS", "ON_PREMISE", "ON_PREMISES"
+    #   resp.inputs[0].input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.inputs[0].multicast_settings.sources #=> Array
     #   resp.inputs[0].multicast_settings.sources[0].source_ip #=> String
     #   resp.inputs[0].multicast_settings.sources[0].url #=> String
@@ -9331,7 +9331,7 @@ module Aws::MediaLive
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_address #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].srt_listener_port #=> String
     #   resp.input.srt_settings.srt_caller_sources[0].stream_id #=> String
-    #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISE", "ON_PREMISES"
+    #   resp.input.input_network_location #=> String, one of "AWS", "ON_PREMISES"
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
     #   resp.input.multicast_settings.sources[0].url #=> String
@@ -13431,7 +13431,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

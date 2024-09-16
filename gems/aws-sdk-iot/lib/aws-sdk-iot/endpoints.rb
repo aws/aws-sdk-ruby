@@ -45,6 +45,17 @@ module Aws::IoT
       end
     end
 
+    class AssociateSbomWithPackageVersion
+      def self.build(context)
+        Aws::IoT::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class AssociateTargetsWithJob
       def self.build(context)
         Aws::IoT::EndpointParameters.new(
@@ -1343,6 +1354,17 @@ module Aws::IoT
       end
     end
 
+    class DisassociateSbomFromPackageVersion
+      def self.build(context)
+        Aws::IoT::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class EnableTopicRule
       def self.build(context)
         Aws::IoT::EndpointParameters.new(
@@ -1993,6 +2015,17 @@ module Aws::IoT
     end
 
     class ListRoleAliases
+      def self.build(context)
+        Aws::IoT::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListSbomValidationResults
       def self.build(context)
         Aws::IoT::EndpointParameters.new(
           region: context.config.region,

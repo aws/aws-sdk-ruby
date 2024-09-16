@@ -605,9 +605,9 @@ module Aws::Organizations
     #   for this account.
     #
     # * WAIT\_PERIOD\_ACTIVE: After you create an Amazon Web Services
-    #   account, there is a waiting period before you can remove it from the
-    #   organization. If you get an error that indicates that a wait period
-    #   is required, try again in a few days.
+    #   account, you must wait until at least seven days after the account
+    #   was created. Invited accounts aren't subject to this waiting
+    #   period.
     #
     #
     #
@@ -1598,7 +1598,8 @@ module Aws::Organizations
     #
     #   The `AvailablePolicyTypes` part of the response is deprecated, and
     #   you shouldn't use it in your apps. It doesn't include any policy
-    #   type supported by Organizations other than SCPs. To determine which
+    #   type supported by Organizations other than SCPs. In the China
+    #   (Ningxia) Region, no policy type is included. To determine which
     #   policy types are enabled in your organization, use the ` ListRoots `
     #   operation.
     #   @return [Types::Organization]

@@ -248,6 +248,7 @@ module Aws::PcaConnectorScep
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "pca-connector-scep",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

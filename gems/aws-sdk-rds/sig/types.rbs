@@ -674,6 +674,7 @@ module Aws::RDS
       attr_accessor deletion_protection: bool
       attr_accessor database_name: ::String
       attr_accessor storage_encrypted: bool
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -2522,6 +2523,7 @@ module Aws::RDS
       attr_accessor deletion_protection: bool
       attr_accessor global_cluster_members: ::Array[Types::GlobalClusterMember]
       attr_accessor failover_state: Types::FailoverState
+      attr_accessor tag_list: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
