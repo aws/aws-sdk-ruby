@@ -90,51 +90,45 @@ module Aws
             end
 
             context 'header' do
-              # CRT does not provide canonical request
-              unless Signer.use_crt?
-                it 'verifies canonical request' do
-                  skip_if_test_missing(path, 'header-canonical-request.txt')
+              it 'verifies canonical request' do
+                skip_if_test_missing(path, 'header-canonical-request.txt')
 
-                  signature = signer.sign_request(request)
+                signature = signer.sign_request(request)
 
-                  computed = signature.canonical_request
-                  SpecHelper.debug("COMPUTED CANONICAL_REQUEST: |#{computed}|")
-                  expected = File.read(
-                    File.join(path, 'header-canonical-request.txt'),
-                    encoding: 'utf-8'
-                  )
-                  SpecHelper.debug("EXPECTED CANONICAL_REQUEST: |#{expected}|")
+                computed = signature.canonical_request
+                SpecHelper.debug("COMPUTED CANONICAL_REQUEST: |#{computed}|")
+                expected = File.read(
+                  File.join(path, 'header-canonical-request.txt'),
+                  encoding: 'utf-8'
+                )
+                SpecHelper.debug("EXPECTED CANONICAL_REQUEST: |#{expected}|")
 
-                  expect(computed).to eq(expected)
-                end
+                expect(computed).to eq(expected)
               end
 
-              # CRT does not provide signature or pk
-              unless Signer.use_crt?
-                it 'computes the public key' do
-                  skip_if_test_missing(path, 'public-key.json')
-                  expected_pk = JSON.parse(File.read(File.join(path, 'public-key.json')))
+              it 'computes the public key' do
+                skip_if_test_missing(path, 'public-key.json')
+                expected_pk = JSON.parse(File.read(File.join(path, 'public-key.json')))
 
-                  expect(extra[:pk_x].to_s(16)).to eq expected_pk['X']
-                  expect(extra[:pk_y].to_s(16)).to eq expected_pk['Y']
-                end
+                expect(extra[:pk_x].to_s(16)).to eq expected_pk['X']
+                expect(extra[:pk_y].to_s(16)).to eq expected_pk['Y']
+              end
 
-                it 'verifies signature' do
-                  skip_if_test_missing(path, 'header-signature.txt')
+              it 'verifies signature' do
+                skip_if_test_missing(path, 'header-signature.txt')
 
-                  signature = signer.sign_request(request)
+                signature = signer.sign_request(request)
 
-                  computed = signature.signature
-                  SpecHelper.debug("COMPUTED SIGNATURE: |#{computed}|")
-                  expected = File.read(
-                    File.join(path, 'header-signature.txt'),
-                    encoding: 'utf-8'
-                  )
-                  SpecHelper.debug("EXPECTED SIGNATURE: |#{expected}|")
+                computed = signature.signature
+                SpecHelper.debug("COMPUTED SIGNATURE: |#{computed}|")
+                expected = File.read(
+                  File.join(path, 'header-signature.txt'),
+                  encoding: 'utf-8'
+                )
+                SpecHelper.debug("EXPECTED SIGNATURE: |#{expected}|")
 
-                  sts_digest = OpenSSL::Digest::SHA256.digest(signature.string_to_sign)
-                  verify_signature(computed, expected, extra, sts_digest)
-                end
+                sts_digest = OpenSSL::Digest::SHA256.digest(signature.string_to_sign)
+                verify_signature(computed, expected, extra, sts_digest)
               end
 
               it 'verifies signed request' do
@@ -174,23 +168,20 @@ module Aws
                 end
               end
 
-              # CRT does not provide string to sign
-              unless Signer.use_crt?
-                it 'verifies string to sign' do
-                  skip_if_test_missing(path, 'header-string-to-sign.txt')
+              it 'verifies string to sign' do
+                skip_if_test_missing(path, 'header-string-to-sign.txt')
 
-                  signature = signer.sign_request(request)
+                signature = signer.sign_request(request)
 
-                  computed = signature.string_to_sign
-                  SpecHelper.debug("COMPUTED STRING TO SIGN: |#{computed}|")
-                  expected = File.read(
-                    File.join(path, 'header-string-to-sign.txt'),
-                    encoding: 'utf-8'
-                  )
-                  SpecHelper.debug("EXPECTED STRING TO SIGN: |#{expected}|")
+                computed = signature.string_to_sign
+                SpecHelper.debug("COMPUTED STRING TO SIGN: |#{computed}|")
+                expected = File.read(
+                  File.join(path, 'header-string-to-sign.txt'),
+                  encoding: 'utf-8'
+                )
+                SpecHelper.debug("EXPECTED STRING TO SIGN: |#{expected}|")
 
-                  expect(computed).to eq(expected)
-                end
+                expect(computed).to eq(expected)
               end
             end
 
