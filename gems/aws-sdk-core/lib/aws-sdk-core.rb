@@ -5,20 +5,8 @@ require 'seahorse'
 require 'jmespath'
 
 require_relative 'aws-sdk-core/deprecations'
-
-
 # defaults
 require_relative 'aws-defaults'
-
-# plugins
-# loaded through building STS or SSO ..
-
-# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
-require_relative 'aws-sdk-sts'
-
-# aws-sdk-sso is included to support Aws::SSOCredentials
-require_relative 'aws-sdk-sso'
-require_relative 'aws-sdk-ssooidc'
 
 module Aws
 
@@ -216,3 +204,10 @@ module Aws
 
   end
 end
+
+# aws-sdk-sts is included to support Aws::AssumeRoleCredentials
+require_relative 'aws-sdk-sts'
+
+# aws-sdk-sso is included to support Aws::SSOCredentials
+require_relative 'aws-sdk-sso'
+require_relative 'aws-sdk-ssooidc'
