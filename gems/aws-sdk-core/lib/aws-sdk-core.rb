@@ -161,12 +161,12 @@ module Aws
 end
 
 # Setup additional autoloads/modules
-require_relative 'aws-sdk-core/waiters'
-require_relative 'aws-sdk-core/stubbing'
-require_relative 'aws-sdk-core/log'
-require_relative 'aws-sdk-core/resources'
 require_relative 'aws-sdk-core/client_side_monitoring'
+require_relative 'aws-sdk-core/log'
 require_relative 'aws-sdk-core/plugins'
+require_relative 'aws-sdk-core/resources'
+require_relative 'aws-sdk-core/stubbing'
+require_relative 'aws-sdk-core/waiters'
 
 # aws-sdk-sts is included to support Aws::AssumeRoleCredentials
 require_relative 'aws-sdk-sts'
