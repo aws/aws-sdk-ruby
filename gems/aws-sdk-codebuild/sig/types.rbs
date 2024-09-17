@@ -1014,7 +1014,7 @@ module Aws::CodeBuild
     class ScopeConfiguration
       attr_accessor name: ::String
       attr_accessor domain: ::String
-      attr_accessor scope: ("GITHUB_ORGANIZATION" | "GITHUB_GLOBAL")
+      attr_accessor scope: ("GITHUB_ORGANIZATION" | "GITHUB_GLOBAL" | "GITLAB_GROUP")
       SENSITIVE: []
     end
 

@@ -5486,19 +5486,19 @@ module Aws::CodeBuild
     # Contains configuration information about the scope for a webhook.
     #
     # @!attribute [rw] name
-    #   The name of either the enterprise or organization that will send
-    #   webhook events to CodeBuild, depending on if the webhook is a global
-    #   or organization webhook respectively.
+    #   The name of either the group, enterprise, or organization that will
+    #   send webhook events to CodeBuild, depending on the type of webhook.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The domain of the GitHub Enterprise organization. Note that this
-    #   parameter is only required if your project's source type is
-    #   GITHUB\_ENTERPRISE
+    #   The domain of the GitHub Enterprise organization or the GitLab Self
+    #   Managed group. Note that this parameter is only required if your
+    #   project's source type is GITHUB\_ENTERPRISE or
+    #   GITLAB\_SELF\_MANAGED.
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   The type of scope for a GitHub webhook.
+    #   The type of scope for a GitHub or GitLab webhook.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ScopeConfiguration AWS API Documentation

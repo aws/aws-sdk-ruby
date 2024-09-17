@@ -199,6 +199,17 @@ module Aws::Lambda
       end
     end
 
+    class DeleteResourcePolicy
+      def self.build(context)
+        Aws::Lambda::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class GetAccountSettings
       def self.build(context)
         Aws::Lambda::EndpointParameters.new(
@@ -365,6 +376,28 @@ module Aws::Lambda
     end
 
     class GetProvisionedConcurrencyConfig
+      def self.build(context)
+        Aws::Lambda::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class GetPublicAccessBlockConfig
+      def self.build(context)
+        Aws::Lambda::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class GetResourcePolicy
       def self.build(context)
         Aws::Lambda::EndpointParameters.new(
           region: context.config.region,
@@ -618,6 +651,28 @@ module Aws::Lambda
     end
 
     class PutProvisionedConcurrencyConfig
+      def self.build(context)
+        Aws::Lambda::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class PutPublicAccessBlockConfig
+      def self.build(context)
+        Aws::Lambda::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class PutResourcePolicy
       def self.build(context)
         Aws::Lambda::EndpointParameters.new(
           region: context.config.region,

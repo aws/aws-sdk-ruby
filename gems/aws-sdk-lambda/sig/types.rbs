@@ -293,6 +293,12 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
     class DestinationConfig
       attr_accessor on_success: Types::OnSuccess
       attr_accessor on_failure: Types::OnFailure
@@ -674,6 +680,27 @@ module Aws::Lambda
       attr_accessor status: ("IN_PROGRESS" | "READY" | "FAILED")
       attr_accessor status_reason: ::String
       attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetPublicAccessBlockConfigRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicAccessBlockConfigResponse
+      attr_accessor public_access_block_config: Types::PublicAccessBlockConfig
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
@@ -1085,6 +1112,18 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class PublicAccessBlockConfig
+      attr_accessor block_public_policy: bool
+      attr_accessor restrict_public_resource: bool
+      SENSITIVE: []
+    end
+
+    class PublicPolicyException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class PublishLayerVersionRequest
       attr_accessor layer_name: ::String
       attr_accessor description: ::String
@@ -1168,6 +1207,30 @@ module Aws::Lambda
       attr_accessor status: ("IN_PROGRESS" | "READY" | "FAILED")
       attr_accessor status_reason: ::String
       attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class PutPublicAccessBlockConfigRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor public_access_block_config: Types::PublicAccessBlockConfig
+      SENSITIVE: []
+    end
+
+    class PutPublicAccessBlockConfigResponse
+      attr_accessor public_access_block_config: Types::PublicAccessBlockConfig
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 

@@ -1532,6 +1532,28 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to delete
+    #   the policy from. You can use either a qualified or an unqualified
+    #   ARN, but the value you specify must be a complete ARN and wildcard
+    #   characters are not accepted.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   Delete the existing policy only if its revision ID matches the
+    #   string you specify. To find the revision ID of the policy currently
+    #   attached to your function, use the GetResourcePolicy action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A configuration object that specifies the destination of an event
     # after Lambda processes it.
     #
@@ -3300,6 +3322,63 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to retrieve
+    #   public-access settings for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPublicAccessBlockConfigRequest AWS API Documentation
+    #
+    class GetPublicAccessBlockConfigRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_access_block_config
+    #   The public-access settings configured for the function you specified
+    #   @return [Types::PublicAccessBlockConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPublicAccessBlockConfigResponse AWS API Documentation
+    #
+    class GetPublicAccessBlockConfigResponse < Struct.new(
+      :public_access_block_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to retrieve
+    #   the policy for. You can use either a qualified or an unqualified
+    #   ARN, but the value you specify must be a complete ARN and wildcard
+    #   characters are not accepted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy attached to the function you specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] function_name
     #   The name or ARN of the Lambda function.
     #
@@ -4951,6 +5030,52 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # An object that defines the public-access settings for a function.
+    #
+    # @!attribute [rw] block_public_policy
+    #   To block the creation of resource-based policies that would grant
+    #   public access to your function, set `BlockPublicPolicy` to `true`.
+    #   To allow the creation of resource-based policies that would grant
+    #   public access to your function, set `BlockPublicPolicy` to `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrict_public_resource
+    #   To block public access to your function, even if its resource-based
+    #   policy allows it, set `RestrictPublicResource` to `true`. To allow
+    #   public access to a function with a resource-based policy that
+    #   permits it, set `RestrictPublicResource` to `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublicAccessBlockConfig AWS API Documentation
+    #
+    class PublicAccessBlockConfig < Struct.new(
+      :block_public_policy,
+      :restrict_public_resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lambda prevented your policy from being created because it would grant
+    # public access to your function. If you intended to create a public
+    # policy, use the PutPublicAccessBlockConfig API action to configure
+    # your function's public-access settings to allow public policies.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublicPolicyException AWS API Documentation
+    #
+    class PublicPolicyException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] layer_name
     #   The name or Amazon Resource Name (ARN) of the layer.
     #   @return [String]
@@ -5431,6 +5556,103 @@ module Aws::Lambda
       :status,
       :status_reason,
       :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to configure
+    #   public-access settings for. Public-access settings are applied at
+    #   the function level, so you can't apply different settings to
+    #   function versions or aliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_config
+    #   An object defining the public-access settings you want to apply.
+    #
+    #   To block the creation of resource-based policies that would grant
+    #   public access to your function, set `BlockPublicPolicy` to `true`.
+    #   To allow the creation of resource-based policies that would grant
+    #   public access to your function, set `BlockPublicPolicy` to `false`.
+    #
+    #   To block public access to your function, even if its resource-based
+    #   policy allows it, set `RestrictPublicResource` to `true`. To allow
+    #   public access to a function with a resource-based policy that
+    #   permits it, set `RestrictPublicResource` to `false`.
+    #
+    #   The default setting for both `BlockPublicPolicy` and
+    #   `RestrictPublicResource` is `true`.
+    #   @return [Types::PublicAccessBlockConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutPublicAccessBlockConfigRequest AWS API Documentation
+    #
+    class PutPublicAccessBlockConfigRequest < Struct.new(
+      :resource_arn,
+      :public_access_block_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_access_block_config
+    #   The public-access settings Lambda applied to your function.
+    #   @return [Types::PublicAccessBlockConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutPublicAccessBlockConfigResponse AWS API Documentation
+    #
+    class PutPublicAccessBlockConfigResponse < Struct.new(
+      :public_access_block_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to add the
+    #   policy to. You can use either a qualified or an unqualified ARN, but
+    #   the value you specify must be a complete ARN and wildcard characters
+    #   are not accepted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The JSON resource-based policy you want to add to your function.
+    #
+    #   To learn more about creating resource-based policies for controlling
+    #   access to Lambda, see [Working with resource-based IAM policies in
+    #   Lambda][1] in the *Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   Replace the existing policy only if its revision ID matches the
+    #   string you specify. To find the revision ID of the policy currently
+    #   attached to your function, use the GetResourcePolicy action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The policy Lambda added to your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy Lambda added to your function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end

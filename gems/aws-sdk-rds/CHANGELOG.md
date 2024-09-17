@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2024-09-17)
+------------------
+
+* Feature - Updates Amazon RDS documentation with configuration information about the BYOL model for RDS for Db2.
+
 1.246.0 (2024-09-16)
 ------------------
 

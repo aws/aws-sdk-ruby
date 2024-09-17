@@ -296,6 +296,7 @@ module Aws::SSM
       attr_accessor progress_counters: Types::ProgressCounters
       attr_accessor alarm_configuration: Types::AlarmConfiguration
       attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      attr_accessor target_locations_url: ::String
       attr_accessor automation_subtype: ("ChangeRequest")
       attr_accessor scheduled_time: ::Time
       attr_accessor runbooks: ::Array[Types::Runbook]
@@ -342,6 +343,7 @@ module Aws::SSM
       attr_accessor automation_type: ("CrossAccount" | "Local")
       attr_accessor alarm_configuration: Types::AlarmConfiguration
       attr_accessor triggered_alarms: ::Array[Types::AlarmStateInformation]
+      attr_accessor target_locations_url: ::String
       attr_accessor automation_subtype: ("ChangeRequest")
       attr_accessor scheduled_time: ::Time
       attr_accessor runbooks: ::Array[Types::Runbook]
@@ -3841,6 +3843,7 @@ module Aws::SSM
       attr_accessor target_locations: ::Array[Types::TargetLocation]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor alarm_configuration: Types::AlarmConfiguration
+      attr_accessor target_locations_url: ::String
       SENSITIVE: []
     end
 
@@ -3959,6 +3962,11 @@ module Aws::SSM
       attr_accessor target_location_max_errors: ::String
       attr_accessor execution_role_name: ::String
       attr_accessor target_location_alarm_configuration: Types::AlarmConfiguration
+      attr_accessor include_child_organization_units: bool
+      attr_accessor exclude_accounts: ::Array[::String]
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor targets_max_concurrency: ::String
+      attr_accessor targets_max_errors: ::String
       SENSITIVE: []
     end
 

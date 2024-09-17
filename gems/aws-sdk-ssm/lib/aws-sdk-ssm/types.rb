@@ -1124,12 +1124,12 @@ module Aws::SSM
     #   * For the key *SourceUrl*, the value is an S3 bucket location. For
     #     example:
     #
-    #     `"Values": [ "s3://doc-example-bucket/my-folder" ]`
+    #     `"Values": [ "s3://amzn-s3-demo-bucket/my-prefix" ]`
     #
     #   * For the key *S3FileUrl*, the value is a file in an S3 bucket. For
     #     example:
     #
-    #     `"Values": [ "s3://doc-example-bucket/my-folder/my-file.py" ]`
+    #     `"Values": [ "s3://amzn-s3-demo-bucket/my-prefix/my-file.py" ]`
     #
     #   * For the key *AttachmentReference*, the value is constructed from
     #     the name of another SSM document in your account, a version number
@@ -1326,6 +1326,12 @@ module Aws::SSM
     #   The CloudWatch alarm that was invoked by the automation.
     #   @return [Array<Types::AlarmStateInformation>]
     #
+    # @!attribute [rw] target_locations_url
+    #   A publicly accessible URL for a file that contains the
+    #   `TargetLocations` body. Currently, only files in presigned Amazon S3
+    #   buckets are supported
+    #   @return [String]
+    #
     # @!attribute [rw] automation_subtype
     #   The subtype of the Automation operation. Currently, the only
     #   supported value is `ChangeRequest`.
@@ -1394,6 +1400,7 @@ module Aws::SSM
       :progress_counters,
       :alarm_configuration,
       :triggered_alarms,
+      :target_locations_url,
       :automation_subtype,
       :scheduled_time,
       :runbooks,
@@ -1534,9 +1541,9 @@ module Aws::SSM
     #   Use this filter with DescribeAutomationExecutions. Specify either
     #   Local or CrossAccount. CrossAccount is an Automation that runs in
     #   multiple Amazon Web Services Regions and Amazon Web Services
-    #   accounts. For more information, see [Running Automation workflows in
-    #   multiple Amazon Web Services Regions and accounts][1] in the *Amazon
-    #   Web Services Systems Manager User Guide*.
+    #   accounts. For more information, see [Running automations in multiple
+    #   Amazon Web Services Regions and accounts][1] in the *Amazon Web
+    #   Services Systems Manager User Guide*.
     #
     #
     #
@@ -1550,6 +1557,12 @@ module Aws::SSM
     # @!attribute [rw] triggered_alarms
     #   The CloudWatch alarm that was invoked by the automation.
     #   @return [Array<Types::AlarmStateInformation>]
+    #
+    # @!attribute [rw] target_locations_url
+    #   A publicly accessible URL for a file that contains the
+    #   `TargetLocations` body. Currently, only files in presigned Amazon S3
+    #   buckets are supported
+    #   @return [String]
     #
     # @!attribute [rw] automation_subtype
     #   The subtype of the Automation operation. Currently, the only
@@ -1612,6 +1625,7 @@ module Aws::SSM
       :automation_type,
       :alarm_configuration,
       :triggered_alarms,
+      :target_locations_url,
       :automation_subtype,
       :scheduled_time,
       :runbooks,
@@ -1668,9 +1682,9 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved
-    #   and rejected patch lists][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   and rejected patches, see [Package name formats for approved and
+    #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -1687,9 +1701,9 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved
-    #   and rejected patch lists][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   and rejected patches, see [Package name formats for approved and
+    #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -2055,11 +2069,11 @@ module Aws::SSM
     #   The filter value. Valid values for each filter key are as follows:
     #
     #   * **InvokedAfter**: Specify a timestamp to limit your results. For
-    #     example, specify `2021-07-07T00:00:00Z` to see a list of command
+    #     example, specify `2024-07-07T00:00:00Z` to see a list of command
     #     executions occurring July 7, 2021, and later.
     #
     #   * **InvokedBefore**: Specify a timestamp to limit your results. For
-    #     example, specify `2021-07-07T00:00:00Z` to see a list of command
+    #     example, specify `2024-07-07T00:00:00Z` to see a list of command
     #     executions from before July 7, 2021.
     #
     #   * **Status**: Specify a valid command status to see a list of all
@@ -2413,12 +2427,11 @@ module Aws::SSM
     #   be stored. This was requested when issuing the command. For example,
     #   in the following response:
     #
-    #   `doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript`
+    #   `amzn-s3-demo-bucket/my-prefix/i-02573cafcfEXAMPLE/awsrunShellScript`
     #
-    #   `doc-example-bucket` is the name of the S3 bucket;
+    #   `amzn-s3-demo-bucket` is the name of the S3 bucket;
     #
-    #   `ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix` is the name of the S3
-    #   prefix;
+    #   `my-prefix` is the name of the S3 prefix;
     #
     #   `i-02573cafcfEXAMPLE` is the managed node ID;
     #
@@ -2430,12 +2443,11 @@ module Aws::SSM
     #   command executions should be stored. This was requested when issuing
     #   the command. For example, in the following response:
     #
-    #   `doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript`
+    #   `amzn-s3-demo-bucket/my-prefix/i-02573cafcfEXAMPLE/awsrunShellScript`
     #
-    #   `doc-example-bucket` is the name of the S3 bucket;
+    #   `amzn-s3-demo-bucket` is the name of the S3 bucket;
     #
-    #   `ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix` is the name of the S3
-    #   prefix;
+    #   `my-prefix` is the name of the S3 prefix;
     #
     #   `i-02573cafcfEXAMPLE` is the managed node ID;
     #
@@ -2707,9 +2719,9 @@ module Aws::SSM
     #   want to assign to the managed node. This IAM role must provide
     #   AssumeRole permissions for the Amazon Web Services Systems Manager
     #   service principal `ssm.amazonaws.com`. For more information, see
-    #   [Create an IAM service role for a hybrid and multicloud
-    #   environment][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   [Create the IAM service role required for Systems Manager in a
+    #   hybrid and multicloud environments][1] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
     #
     #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter.
     #   You must create a unique role.
@@ -2718,7 +2730,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html
     #   @return [String]
     #
     # @!attribute [rw] registration_limit
@@ -2728,7 +2740,7 @@ module Aws::SSM
     #
     # @!attribute [rw] expiration_date
     #   The date by which this activation request should expire, in
-    #   timestamp format, such as "2021-07-07T00:00:00". You can specify a
+    #   timestamp format, such as "2024-07-07T00:00:00". You can specify a
     #   date up to 30 days in advance. If you don't provide an expiration
     #   date, the activation code expires in 24 hours.
     #   @return [Time]
@@ -3099,9 +3111,10 @@ module Aws::SSM
     #   in an Amazon Web Services account, or individual managed node IDs.
     #   You can target all managed nodes in an Amazon Web Services account
     #   by specifying the `InstanceIds` key with a value of `*`. For more
-    #   information about choosing targets for an association, see [About
-    #   targets and rate controls in State Manager associations][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   information about choosing targets for an association, see
+    #   [Understanding targets and rate controls in State Manager
+    #   associations][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -3846,9 +3859,9 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved
-    #   and rejected patch lists][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   and rejected patches, see [Package name formats for approved and
+    #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -3871,9 +3884,9 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved
-    #   and rejected patch lists][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   and rejected patches, see [Package name formats for approved and
+    #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -4178,12 +4191,12 @@ module Aws::SSM
     #
     # @!attribute [rw] deletion_summary
     #   A summary of the delete operation. For more information about this
-    #   summary, see [Understanding the delete inventory summary][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   summary, see [Deleting custom inventory][1] in the *Amazon Web
+    #   Services Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-custom.html#delete-custom-inventory-summary
     #   @return [Types::InventoryDeletionSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteInventoryResult AWS API Documentation
@@ -5372,9 +5385,9 @@ module Aws::SSM
     #     Sample values: `Installed` \| `InstalledOther` \|
     #     `InstalledPendingReboot`
     #
-    #     For lists of all `State` values, see [Understanding patch
-    #     compliance state values][1] in the *Amazon Web Services Systems
-    #     Manager User Guide*.
+    #     For lists of all `State` values, see [Patch compliance state
+    #     values][1] in the *Amazon Web Services Systems Manager User
+    #     Guide*.
     #
     #
     #
@@ -5647,7 +5660,7 @@ module Aws::SSM
     #
     #   * Values. An array of strings, each between 1 and 256 characters.
     #     Supported values are date/time strings in a valid ISO 8601
-    #     date/time format, such as `2021-11-04T05:00:00Z`.
+    #     date/time format, such as `2024-11-04T05:00:00Z`.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
     # @!attribute [rw] max_results
@@ -8428,7 +8441,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -8749,7 +8762,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html
     #   @return [String]
     #
     # @!attribute [rw] with_decryption
@@ -9507,19 +9520,18 @@ module Aws::SSM
     #   The name is specified as the `DefaultInstanceName` property using
     #   the CreateActivation command. It is applied to the managed node by
     #   specifying the Activation Code and Activation ID when you install
-    #   SSM Agent on the node, as explained in [Install SSM Agent for a
-    #   hybrid and multicloud environment (Linux)][1] and [Install SSM Agent
-    #   for a hybrid and multicloud environment (Windows)][2]. To retrieve
-    #   the `Name` tag of an EC2 instance, use the Amazon EC2
-    #   `DescribeInstances` operation. For information, see
-    #   [DescribeInstances][3] in the *Amazon EC2 API Reference* or
-    #   [describe-instances][4] in the *Amazon Web Services CLI Command
-    #   Reference*.
+    #   SSM Agent on the node, as explained in [How to install SSM Agent on
+    #   hybrid Linux nodes][1] and [How to install SSM Agent on hybrid
+    #   Windows Server nodes][2]. To retrieve the `Name` tag of an EC2
+    #   instance, use the Amazon EC2 `DescribeInstances` operation. For
+    #   information, see [DescribeInstances][3] in the *Amazon EC2 API
+    #   Reference* or [describe-instances][4] in the *Amazon Web Services
+    #   CLI Command Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-ssm-agent-install-linux.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-ssm-agent-install-windows.html
     #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
     #   [4]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
     #   @return [String]
@@ -9685,8 +9697,8 @@ module Aws::SSM
     #   the patches specified by the default patch baseline.
     #
     #   For more information about the `InstallOverrideList` parameter, see
-    #   [About the `AWS-RunPatchBaseline SSM document` ][1] in the *Amazon
-    #   Web Services Systems Manager User Guide*.
+    #   [SSM Command document for patching: `AWS-RunPatchBaseline` ][1] in
+    #   the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -10822,7 +10834,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-custom.html#delete-custom-inventory
     #   @return [Types::InventoryDeletionSummary]
     #
     # @!attribute [rw] last_status_update_time
@@ -10918,7 +10930,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-aggregate.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-aggregate.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryFilter AWS API Documentation
@@ -12577,7 +12589,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -12778,7 +12790,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -13246,9 +13258,8 @@ module Aws::SSM
     #   @return [Array<Types::RelatedOpsItem>]
     #
     # @!attribute [rw] status
-    #   The OpsItem status. Status can be `Open`, `In Progress`, or
-    #   `Resolved`. For more information, see [Editing OpsItem details][1]
-    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #   The OpsItem status. For more information, see [Editing OpsItem
+    #   details][1] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -13768,8 +13779,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The OpsItem status. Status can be `Open`, `In Progress`, or
-    #   `Resolved`.
+    #   The OpsItem status.
     #   @return [String]
     #
     # @!attribute [rw] ops_item_id
@@ -14740,7 +14750,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/compliance-about.html#compliance-monitor-patch
     #   @return [String]
     #
     # @!attribute [rw] installed_time
@@ -14896,26 +14906,46 @@ module Aws::SSM
     #   For example, a value of `7` means that patches are approved seven
     #   days after they are released.
     #
-    #   <note markdown="1"> This parameter is marked as not required, but your request must
+    #   This parameter is marked as `Required: No`, but your request must
     #   include a value for either `ApproveAfterDays` or `ApproveUntilDate`.
     #
-    #    </note>
-    #
     #   Not supported for Debian Server or Ubuntu Server.
+    #
+    #   Use caution when setting this value for Windows Server patch
+    #   baselines. Because patch updates that are replaced by later updates
+    #   are removed, setting too broad a value for this parameter can result
+    #   in crucial patches not being installed. For more information, see
+    #   the **Windows Server** tab in the topic [How security patches are
+    #   selected][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html
     #   @return [Integer]
     #
     # @!attribute [rw] approve_until_date
     #   The cutoff date for auto approval of released patches. Any patches
     #   released on or before this date are installed automatically.
     #
-    #   Enter dates in the format `YYYY-MM-DD`. For example, `2021-12-31`.
+    #   Enter dates in the format `YYYY-MM-DD`. For example, `2024-12-31`.
     #
-    #   <note markdown="1"> This parameter is marked as not required, but your request must
+    #   This parameter is marked as `Required: No`, but your request must
     #   include a value for either `ApproveUntilDate` or `ApproveAfterDays`.
     #
-    #    </note>
-    #
     #   Not supported for Debian Server or Ubuntu Server.
+    #
+    #   Use caution when setting this value for Windows Server patch
+    #   baselines. Because patch updates that are replaced by later updates
+    #   are removed, setting too broad a value for this parameter can result
+    #   in crucial patches not being installed. For more information, see
+    #   the **Windows Server** tab in the topic [How security patches are
+    #   selected][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html
     #   @return [String]
     #
     # @!attribute [rw] enable_non_security
@@ -15772,7 +15802,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -17289,12 +17319,12 @@ module Aws::SSM
     #   The filter value. Valid values for each filter key are as follows:
     #
     #   * InvokedAfter: Specify a timestamp to limit your results. For
-    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
-    #     August 29, 2018, and later.
+    #     example, specify 2024-08-29T00:00:00Z to see sessions that started
+    #     August 29, 2024, and later.
     #
     #   * InvokedBefore: Specify a timestamp to limit your results. For
-    #     example, specify 2018-08-29T00:00:00Z to see sessions that started
-    #     before August 29, 2018.
+    #     example, specify 2024-08-29T00:00:00Z to see sessions that started
+    #     before August 29, 2024.
     #
     #   * Target: Specify a managed node to which session connections have
     #     been made.
@@ -17457,6 +17487,9 @@ module Aws::SSM
     # @!attribute [rw] targets
     #   A key-value mapping to target resources. Required if you specify
     #   TargetParameterName.
+    #
+    #   If both this parameter and the `TargetLocation:Targets` parameter
+    #   are supplied, `TargetLocation:Targets` takes precedence.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] target_maps
@@ -17468,6 +17501,10 @@ module Aws::SSM
     #   The maximum number of targets allowed to run this task in parallel.
     #   You can specify a number, such as 10, or a percentage, such as 10%.
     #   The default value is `10`.
+    #
+    #   If both this parameter and the
+    #   `TargetLocation:TargetsMaxConcurrency` are supplied,
+    #   `TargetLocation:TargetsMaxConcurrency` takes precedence.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -17487,6 +17524,10 @@ module Aws::SSM
     #   fail as well. If you need to ensure that there won't be more than
     #   max-errors failed executions, set max-concurrency to 1 so the
     #   executions proceed one at a time.
+    #
+    #   If this parameter and the `TargetLocation:TargetsMaxErrors`
+    #   parameter are both supplied, `TargetLocation:TargetsMaxErrors` takes
+    #   precedence.
     #   @return [String]
     #
     # @!attribute [rw] target_locations
@@ -17494,9 +17535,9 @@ module Aws::SSM
     #   Amazon Web Services accounts where you want to run the automation.
     #   Use this operation to start an automation in multiple Amazon Web
     #   Services Regions and multiple Amazon Web Services accounts. For more
-    #   information, see [Running Automation workflows in multiple Amazon
-    #   Web Services Regions and Amazon Web Services accounts][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   information, see [Running automations in multiple Amazon Web
+    #   Services Regions and accounts][1] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
     #
     #
     #
@@ -17525,6 +17566,12 @@ module Aws::SSM
     #   The CloudWatch alarm you want to apply to your automation.
     #   @return [Types::AlarmConfiguration]
     #
+    # @!attribute [rw] target_locations_url
+    #   Specify a publicly accessible URL for a file that contains the
+    #   `TargetLocations` body. Currently, only files in presigned Amazon S3
+    #   buckets are supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
     #
     class StartAutomationExecutionRequest < Struct.new(
@@ -17540,7 +17587,8 @@ module Aws::SSM
       :max_errors,
       :target_locations,
       :tags,
-      :alarm_configuration)
+      :alarm_configuration,
+      :target_locations_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18130,6 +18178,39 @@ module Aws::SSM
     #   automation or command.
     #   @return [Types::AlarmConfiguration]
     #
+    # @!attribute [rw] include_child_organization_units
+    #   Indicates whether to include child organizational units (OUs) that
+    #   are children of the targeted OUs. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_accounts
+    #   Amazon Web Services accounts or organizational units to exclude as
+    #   expanded targets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] targets
+    #   A list of key-value mappings to target resources. If you specify
+    #   values for this data type, you must also specify a value for
+    #   `TargetParameterName`.
+    #
+    #   This `Targets` parameter takes precedence over the
+    #   `StartAutomationExecution:Targets` parameter if both are supplied.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] targets_max_concurrency
+    #   The maximum number of targets allowed to run this task in parallel.
+    #   This `TargetsMaxConcurrency` takes precedence over the
+    #   `StartAutomationExecution:MaxConcurrency` parameter if both are
+    #   supplied.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets_max_errors
+    #   The maximum number of errors that are allowed before the system
+    #   stops running the automation on additional targets. This
+    #   `TargetsMaxErrors` parameter takes precedence over the
+    #   `StartAutomationExecution:MaxErrors` parameter if both are supplied.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetLocation AWS API Documentation
     #
     class TargetLocation < Struct.new(
@@ -18138,17 +18219,22 @@ module Aws::SSM
       :target_location_max_concurrency,
       :target_location_max_errors,
       :execution_role_name,
-      :target_location_alarm_configuration)
+      :target_location_alarm_configuration,
+      :include_child_organization_units,
+      :exclude_accounts,
+      :targets,
+      :targets_max_concurrency,
+      :targets_max_errors)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The specified target managed node for the session isn't fully
     # configured for use with Session Manager. For more information, see
-    # [Getting started with Session Manager][1] in the *Amazon Web Services
-    # Systems Manager User Guide*. This error is also returned if you
-    # attempt to start a session on a managed node that is located in a
-    # different account or Region
+    # [Setting up Session Manager][1] in the *Amazon Web Services Systems
+    # Manager User Guide*. This error is also returned if you attempt to
+    # start a session on a managed node that is located in a different
+    # account or Region
     #
     #
     #
@@ -19134,7 +19220,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -19334,7 +19420,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -19433,9 +19519,9 @@ module Aws::SSM
     #   want to assign to the managed node. This IAM role must provide
     #   AssumeRole permissions for the Amazon Web Services Systems Manager
     #   service principal `ssm.amazonaws.com`. For more information, see
-    #   [Create an IAM service role for a hybrid and multicloud
-    #   environment][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   [Create the IAM service role required for Systems Manager in hybrid
+    #   and multicloud environments][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
     #
     #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter.
     #   You must create a unique role.
@@ -19444,7 +19530,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRoleRequest AWS API Documentation
@@ -19521,9 +19607,8 @@ module Aws::SSM
     #   @return [Array<Types::RelatedOpsItem>]
     #
     # @!attribute [rw] status
-    #   The OpsItem status. Status can be `Open`, `In Progress`, or
-    #   `Resolved`. For more information, see [Editing OpsItem details][1]
-    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #   The OpsItem status. For more information, see [Editing OpsItem
+    #   details][1] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -19655,9 +19740,9 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved
-    #   and rejected patch lists][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   and rejected patches, see [Package name formats for approved and
+    #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -19679,9 +19764,9 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved
-    #   and rejected patch lists][1] in the *Amazon Web Services Systems
-    #   Manager User Guide*.
+    #   and rejected patches, see [Package name formats for approved and
+    #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
     #
     #
     #

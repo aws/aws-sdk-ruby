@@ -197,7 +197,17 @@ module Aws
                                           name: ::String
                                         },
                                       ]
-                                    }?
+                                    }?,
+                                    include_child_organization_units: bool?,
+                                    exclude_accounts: Array[::String]?,
+                                    targets: Array[
+                                      {
+                                        key: ::String?,
+                                        values: Array[::String]?
+                                      },
+                                    ]?,
+                                    targets_max_concurrency: ::String?,
+                                    targets_max_errors: ::String?
                                   },
                                 ],
                                 ?schedule_offset: ::Integer,
@@ -271,7 +281,17 @@ module Aws
                                                     name: ::String
                                                   },
                                                 ]
-                                              }?
+                                              }?,
+                                              include_child_organization_units: bool?,
+                                              exclude_accounts: Array[::String]?,
+                                              targets: Array[
+                                                {
+                                                  key: ::String?,
+                                                  values: Array[::String]?
+                                                },
+                                              ]?,
+                                              targets_max_concurrency: ::String?,
+                                              targets_max_errors: ::String?
                                             },
                                           ]?,
                                           schedule_offset: ::Integer?,
@@ -2462,7 +2482,17 @@ module Aws
                                                   name: ::String
                                                 },
                                               ]
-                                            }?
+                                            }?,
+                                            include_child_organization_units: bool?,
+                                            exclude_accounts: Array[::String]?,
+                                            targets: Array[
+                                              {
+                                                key: ::String?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?,
+                                            targets_max_concurrency: ::String?,
+                                            targets_max_errors: ::String?
                                           },
                                         ],
                                         ?tags: Array[
@@ -2478,7 +2508,8 @@ module Aws
                                               name: ::String
                                             },
                                           ]
-                                        }
+                                        },
+                                        ?target_locations_url: ::String
                                       ) -> _StartAutomationExecutionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutomationExecutionResponseSuccess
 
@@ -2526,7 +2557,17 @@ module Aws
                                                           name: ::String
                                                         },
                                                       ]
-                                                    }?
+                                                    }?,
+                                                    include_child_organization_units: bool?,
+                                                    exclude_accounts: Array[::String]?,
+                                                    targets: Array[
+                                                      {
+                                                        key: ::String?,
+                                                        values: Array[::String]?
+                                                      },
+                                                    ]?,
+                                                    targets_max_concurrency: ::String?,
+                                                    targets_max_errors: ::String?
                                                   },
                                                 ]?
                                               },
@@ -2637,7 +2678,17 @@ module Aws
                                           name: ::String
                                         },
                                       ]
-                                    }?
+                                    }?,
+                                    include_child_organization_units: bool?,
+                                    exclude_accounts: Array[::String]?,
+                                    targets: Array[
+                                      {
+                                        key: ::String?,
+                                        values: Array[::String]?
+                                      },
+                                    ]?,
+                                    targets_max_concurrency: ::String?,
+                                    targets_max_errors: ::String?
                                   },
                                 ],
                                 ?schedule_offset: ::Integer,

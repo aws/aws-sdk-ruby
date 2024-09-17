@@ -678,9 +678,9 @@ module Aws::SSM
     # capabilities. You use the activation code and ID when installing SSM
     # Agent on machines in your hybrid environment. For more information
     # about requirements for managing on-premises machines using Systems
-    # Manager, see [Setting up Amazon Web Services Systems Manager for
-    # hybrid and multicloud environments][1] in the *Amazon Web Services
-    # Systems Manager User Guide*.
+    # Manager, see [Using Amazon Web Services Systems Manager in hybrid and
+    # multicloud environments][1] in the *Amazon Web Services Systems
+    # Manager User Guide*.
     #
     # <note markdown="1"> Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and
     # on-premises servers and VMs that are configured for Systems Manager
@@ -690,7 +690,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html
     #
     # @option params [String] :description
     #   A user-defined description of the resource that you want to register
@@ -710,9 +710,9 @@ module Aws::SSM
     #   want to assign to the managed node. This IAM role must provide
     #   AssumeRole permissions for the Amazon Web Services Systems Manager
     #   service principal `ssm.amazonaws.com`. For more information, see
-    #   [Create an IAM service role for a hybrid and multicloud
-    #   environment][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   [Create the IAM service role required for Systems Manager in a hybrid
+    #   and multicloud environments][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
     #
     #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter. You
     #   must create a unique role.
@@ -721,7 +721,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html
     #
     # @option params [Integer] :registration_limit
     #   Specify the maximum number of managed nodes you want to register. The
@@ -729,7 +729,7 @@ module Aws::SSM
     #
     # @option params [Time,DateTime,Date,Integer,String] :expiration_date
     #   The date by which this activation request should expire, in timestamp
-    #   format, such as "2021-07-07T00:00:00". You can specify a date up to
+    #   format, such as "2024-07-07T00:00:00". You can specify a date up to
     #   30 days in advance. If you don't provide an expiration date, the
     #   activation code expires in 24 hours.
     #
@@ -876,9 +876,10 @@ module Aws::SSM
     #   Amazon Web Services account, or individual managed node IDs. You can
     #   target all managed nodes in an Amazon Web Services account by
     #   specifying the `InstanceIds` key with a value of `*`. For more
-    #   information about choosing targets for an association, see [About
-    #   targets and rate controls in State Manager associations][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   information about choosing targets for an association, see
+    #   [Understanding targets and rate controls in State Manager
+    #   associations][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -1072,6 +1073,16 @@ module Aws::SSM
     #             },
     #           ],
     #         },
+    #         include_child_organization_units: false,
+    #         exclude_accounts: ["ExcludeAccount"],
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         targets_max_concurrency: "MaxConcurrency",
+    #         targets_max_errors: "MaxErrors",
     #       },
     #     ],
     #     schedule_offset: 1,
@@ -1147,6 +1158,15 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.association_description.target_locations[0].exclude_accounts #=> Array
+    #   resp.association_description.target_locations[0].exclude_accounts[0] #=> String
+    #   resp.association_description.target_locations[0].targets #=> Array
+    #   resp.association_description.target_locations[0].targets[0].key #=> String
+    #   resp.association_description.target_locations[0].targets[0].values #=> Array
+    #   resp.association_description.target_locations[0].targets[0].values[0] #=> String
+    #   resp.association_description.target_locations[0].targets_max_concurrency #=> String
+    #   resp.association_description.target_locations[0].targets_max_errors #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
@@ -1237,6 +1257,16 @@ module Aws::SSM
     #                 },
     #               ],
     #             },
+    #             include_child_organization_units: false,
+    #             exclude_accounts: ["ExcludeAccount"],
+    #             targets: [
+    #               {
+    #                 key: "TargetKey",
+    #                 values: ["TargetValue"],
+    #               },
+    #             ],
+    #             targets_max_concurrency: "MaxConcurrency",
+    #             targets_max_errors: "MaxErrors",
     #           },
     #         ],
     #         schedule_offset: 1,
@@ -1309,6 +1339,15 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.successful[0].target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.successful[0].target_locations[0].exclude_accounts #=> Array
+    #   resp.successful[0].target_locations[0].exclude_accounts[0] #=> String
+    #   resp.successful[0].target_locations[0].targets #=> Array
+    #   resp.successful[0].target_locations[0].targets[0].key #=> String
+    #   resp.successful[0].target_locations[0].targets[0].values #=> Array
+    #   resp.successful[0].target_locations[0].targets[0].values[0] #=> String
+    #   resp.successful[0].target_locations[0].targets_max_concurrency #=> String
+    #   resp.successful[0].target_locations[0].targets_max_errors #=> String
     #   resp.successful[0].schedule_offset #=> Integer
     #   resp.successful[0].duration #=> Integer
     #   resp.successful[0].target_maps #=> Array
@@ -1356,6 +1395,15 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.failed[0].entry.target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.failed[0].entry.target_locations[0].exclude_accounts #=> Array
+    #   resp.failed[0].entry.target_locations[0].exclude_accounts[0] #=> String
+    #   resp.failed[0].entry.target_locations[0].targets #=> Array
+    #   resp.failed[0].entry.target_locations[0].targets[0].key #=> String
+    #   resp.failed[0].entry.target_locations[0].targets[0].values #=> Array
+    #   resp.failed[0].entry.target_locations[0].targets[0].values[0] #=> String
+    #   resp.failed[0].entry.target_locations[0].targets_max_concurrency #=> String
+    #   resp.failed[0].entry.target_locations[0].targets_max_errors #=> String
     #   resp.failed[0].entry.schedule_offset #=> Integer
     #   resp.failed[0].entry.duration #=> Integer
     #   resp.failed[0].entry.target_maps #=> Array
@@ -1386,7 +1434,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html
     #
     # @option params [required, String] :content
     #   The content for the new SSM document in JSON or YAML format. The
@@ -2021,7 +2069,7 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved and
+    #   and rejected patches, see [Package name formats for approved and
     #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
     #   User Guide*.
     #
@@ -2043,7 +2091,7 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved and
+    #   and rejected patches, see [Package name formats for approved and
     #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
     #   User Guide*.
     #
@@ -2186,7 +2234,7 @@ module Aws::SSM
     # You can configure Systems Manager Inventory to use the
     # `SyncToDestination` type to synchronize Inventory data from multiple
     # Amazon Web Services Regions to a single Amazon Simple Storage Service
-    # (Amazon S3) bucket. For more information, see [Configuring resource
+    # (Amazon S3) bucket. For more information, see [Creatinga a resource
     # data sync for Inventory][1] in the *Amazon Web Services Systems
     # Manager User Guide*.
     #
@@ -2214,7 +2262,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-create-resource-data-sync.html
     # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html
     #
     # @option params [required, String] :sync_name
@@ -3022,6 +3070,15 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.association_description.target_locations[0].exclude_accounts #=> Array
+    #   resp.association_description.target_locations[0].exclude_accounts[0] #=> String
+    #   resp.association_description.target_locations[0].targets #=> Array
+    #   resp.association_description.target_locations[0].targets[0].key #=> String
+    #   resp.association_description.target_locations[0].targets[0].values #=> Array
+    #   resp.association_description.target_locations[0].targets[0].values[0] #=> String
+    #   resp.association_description.target_locations[0].targets_max_concurrency #=> String
+    #   resp.association_description.target_locations[0].targets_max_errors #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
@@ -3270,6 +3327,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].triggered_alarms #=> Array
     #   resp.automation_execution_metadata_list[0].triggered_alarms[0].name #=> String
     #   resp.automation_execution_metadata_list[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.automation_execution_metadata_list[0].target_locations_url #=> String
     #   resp.automation_execution_metadata_list[0].automation_subtype #=> String, one of "ChangeRequest"
     #   resp.automation_execution_metadata_list[0].scheduled_time #=> Time
     #   resp.automation_execution_metadata_list[0].runbooks #=> Array
@@ -3300,6 +3358,15 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].exclude_accounts #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].exclude_accounts[0] #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].targets #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].targets[0].key #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].targets[0].values #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].targets[0].values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].targets_max_concurrency #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].targets_max_errors #=> String
     #   resp.automation_execution_metadata_list[0].ops_item_id #=> String
     #   resp.automation_execution_metadata_list[0].association_id #=> String
     #   resp.automation_execution_metadata_list[0].change_request_name #=> String
@@ -3407,6 +3474,15 @@ module Aws::SSM
     #   resp.step_executions[0].target_location.target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.step_executions[0].target_location.target_location_alarm_configuration.alarms #=> Array
     #   resp.step_executions[0].target_location.target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.step_executions[0].target_location.include_child_organization_units #=> Boolean
+    #   resp.step_executions[0].target_location.exclude_accounts #=> Array
+    #   resp.step_executions[0].target_location.exclude_accounts[0] #=> String
+    #   resp.step_executions[0].target_location.targets #=> Array
+    #   resp.step_executions[0].target_location.targets[0].key #=> String
+    #   resp.step_executions[0].target_location.targets[0].values #=> Array
+    #   resp.step_executions[0].target_location.targets[0].values[0] #=> String
+    #   resp.step_executions[0].target_location.targets_max_concurrency #=> String
+    #   resp.step_executions[0].target_location.targets_max_errors #=> String
     #   resp.step_executions[0].triggered_alarms #=> Array
     #   resp.step_executions[0].triggered_alarms[0].name #=> String
     #   resp.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
@@ -4191,9 +4267,8 @@ module Aws::SSM
     #     Sample values: `Installed` \| `InstalledOther` \|
     #     `InstalledPendingReboot`
     #
-    #     For lists of all `State` values, see [Understanding patch compliance
-    #     state values][1] in the *Amazon Web Services Systems Manager User
-    #     Guide*.
+    #     For lists of all `State` values, see [Patch compliance state
+    #     values][1] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -4551,7 +4626,7 @@ module Aws::SSM
     #
     #   * Values. An array of strings, each between 1 and 256 characters.
     #     Supported values are date/time strings in a valid ISO 8601 date/time
-    #     format, such as `2021-11-04T05:00:00Z`.
+    #     format, such as `2024-11-04T05:00:00Z`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -5659,6 +5734,15 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].target_location.target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.automation_execution.step_executions[0].target_location.target_location_alarm_configuration.alarms #=> Array
     #   resp.automation_execution.step_executions[0].target_location.target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.automation_execution.step_executions[0].target_location.include_child_organization_units #=> Boolean
+    #   resp.automation_execution.step_executions[0].target_location.exclude_accounts #=> Array
+    #   resp.automation_execution.step_executions[0].target_location.exclude_accounts[0] #=> String
+    #   resp.automation_execution.step_executions[0].target_location.targets #=> Array
+    #   resp.automation_execution.step_executions[0].target_location.targets[0].key #=> String
+    #   resp.automation_execution.step_executions[0].target_location.targets[0].values #=> Array
+    #   resp.automation_execution.step_executions[0].target_location.targets[0].values[0] #=> String
+    #   resp.automation_execution.step_executions[0].target_location.targets_max_concurrency #=> String
+    #   resp.automation_execution.step_executions[0].target_location.targets_max_errors #=> String
     #   resp.automation_execution.step_executions[0].triggered_alarms #=> Array
     #   resp.automation_execution.step_executions[0].triggered_alarms[0].name #=> String
     #   resp.automation_execution.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
@@ -5706,6 +5790,15 @@ module Aws::SSM
     #   resp.automation_execution.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.automation_execution.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.automation_execution.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.automation_execution.target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.automation_execution.target_locations[0].exclude_accounts #=> Array
+    #   resp.automation_execution.target_locations[0].exclude_accounts[0] #=> String
+    #   resp.automation_execution.target_locations[0].targets #=> Array
+    #   resp.automation_execution.target_locations[0].targets[0].key #=> String
+    #   resp.automation_execution.target_locations[0].targets[0].values #=> Array
+    #   resp.automation_execution.target_locations[0].targets[0].values[0] #=> String
+    #   resp.automation_execution.target_locations[0].targets_max_concurrency #=> String
+    #   resp.automation_execution.target_locations[0].targets_max_errors #=> String
     #   resp.automation_execution.progress_counters.total_steps #=> Integer
     #   resp.automation_execution.progress_counters.success_steps #=> Integer
     #   resp.automation_execution.progress_counters.failed_steps #=> Integer
@@ -5717,6 +5810,7 @@ module Aws::SSM
     #   resp.automation_execution.triggered_alarms #=> Array
     #   resp.automation_execution.triggered_alarms[0].name #=> String
     #   resp.automation_execution.triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.automation_execution.target_locations_url #=> String
     #   resp.automation_execution.automation_subtype #=> String, one of "ChangeRequest"
     #   resp.automation_execution.scheduled_time #=> Time
     #   resp.automation_execution.runbooks #=> Array
@@ -5747,6 +5841,15 @@ module Aws::SSM
     #   resp.automation_execution.runbooks[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.automation_execution.runbooks[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.automation_execution.runbooks[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.automation_execution.runbooks[0].target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.automation_execution.runbooks[0].target_locations[0].exclude_accounts #=> Array
+    #   resp.automation_execution.runbooks[0].target_locations[0].exclude_accounts[0] #=> String
+    #   resp.automation_execution.runbooks[0].target_locations[0].targets #=> Array
+    #   resp.automation_execution.runbooks[0].target_locations[0].targets[0].key #=> String
+    #   resp.automation_execution.runbooks[0].target_locations[0].targets[0].values #=> Array
+    #   resp.automation_execution.runbooks[0].target_locations[0].targets[0].values[0] #=> String
+    #   resp.automation_execution.runbooks[0].target_locations[0].targets_max_concurrency #=> String
+    #   resp.automation_execution.runbooks[0].target_locations[0].targets_max_errors #=> String
     #   resp.automation_execution.ops_item_id #=> String
     #   resp.automation_execution.association_id #=> String
     #   resp.automation_execution.change_request_name #=> String
@@ -6894,7 +6997,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted values for secure string parameters. This flag is
@@ -7554,6 +7657,15 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.association_versions[0].target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.association_versions[0].target_locations[0].exclude_accounts #=> Array
+    #   resp.association_versions[0].target_locations[0].exclude_accounts[0] #=> String
+    #   resp.association_versions[0].target_locations[0].targets #=> Array
+    #   resp.association_versions[0].target_locations[0].targets[0].key #=> String
+    #   resp.association_versions[0].target_locations[0].targets[0].values #=> Array
+    #   resp.association_versions[0].target_locations[0].targets[0].values[0] #=> String
+    #   resp.association_versions[0].target_locations[0].targets_max_concurrency #=> String
+    #   resp.association_versions[0].target_locations[0].targets_max_errors #=> String
     #   resp.association_versions[0].schedule_offset #=> Integer
     #   resp.association_versions[0].duration #=> Integer
     #   resp.association_versions[0].target_maps #=> Array
@@ -9500,7 +9612,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -10254,6 +10366,9 @@ module Aws::SSM
     #   A key-value mapping to target resources. Required if you specify
     #   TargetParameterName.
     #
+    #   If both this parameter and the `TargetLocation:Targets` parameter are
+    #   supplied, `TargetLocation:Targets` takes precedence.
+    #
     # @option params [Array<Hash>] :target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -10262,6 +10377,9 @@ module Aws::SSM
     #   The maximum number of targets allowed to run this task in parallel.
     #   You can specify a number, such as 10, or a percentage, such as 10%.
     #   The default value is `10`.
+    #
+    #   If both this parameter and the `TargetLocation:TargetsMaxConcurrency`
+    #   are supplied, `TargetLocation:TargetsMaxConcurrency` takes precedence.
     #
     # @option params [String] :max_errors
     #   The number of errors that are allowed before the system stops running
@@ -10281,14 +10399,17 @@ module Aws::SSM
     #   max-errors failed executions, set max-concurrency to 1 so the
     #   executions proceed one at a time.
     #
+    #   If this parameter and the `TargetLocation:TargetsMaxErrors` parameter
+    #   are both supplied, `TargetLocation:TargetsMaxErrors` takes precedence.
+    #
     # @option params [Array<Types::TargetLocation>] :target_locations
     #   A location is a combination of Amazon Web Services Regions and/or
     #   Amazon Web Services accounts where you want to run the automation. Use
     #   this operation to start an automation in multiple Amazon Web Services
     #   Regions and multiple Amazon Web Services accounts. For more
-    #   information, see [Running Automation workflows in multiple Amazon Web
-    #   Services Regions and Amazon Web Services accounts][1] in the *Amazon
-    #   Web Services Systems Manager User Guide*.
+    #   information, see [Running automations in multiple Amazon Web Services
+    #   Regions and accounts][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -10313,6 +10434,11 @@ module Aws::SSM
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   The CloudWatch alarm you want to apply to your automation.
+    #
+    # @option params [String] :target_locations_url
+    #   Specify a publicly accessible URL for a file that contains the
+    #   `TargetLocations` body. Currently, only files in presigned Amazon S3
+    #   buckets are supported.
     #
     # @return [Types::StartAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10357,6 +10483,16 @@ module Aws::SSM
     #             },
     #           ],
     #         },
+    #         include_child_organization_units: false,
+    #         exclude_accounts: ["ExcludeAccount"],
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         targets_max_concurrency: "MaxConcurrency",
+    #         targets_max_errors: "MaxErrors",
     #       },
     #     ],
     #     tags: [
@@ -10373,6 +10509,7 @@ module Aws::SSM
     #         },
     #       ],
     #     },
+    #     target_locations_url: "TargetLocationsURL",
     #   })
     #
     # @example Response structure
@@ -10522,6 +10659,16 @@ module Aws::SSM
     #                 },
     #               ],
     #             },
+    #             include_child_organization_units: false,
+    #             exclude_accounts: ["ExcludeAccount"],
+    #             targets: [
+    #               {
+    #                 key: "TargetKey",
+    #                 values: ["TargetValue"],
+    #               },
+    #             ],
+    #             targets_max_concurrency: "MaxConcurrency",
+    #             targets_max_errors: "MaxErrors",
     #           },
     #         ],
     #       },
@@ -11005,6 +11152,16 @@ module Aws::SSM
     #             },
     #           ],
     #         },
+    #         include_child_organization_units: false,
+    #         exclude_accounts: ["ExcludeAccount"],
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         targets_max_concurrency: "MaxConcurrency",
+    #         targets_max_errors: "MaxErrors",
     #       },
     #     ],
     #     schedule_offset: 1,
@@ -11074,6 +11231,15 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.association_description.target_locations[0].exclude_accounts #=> Array
+    #   resp.association_description.target_locations[0].exclude_accounts[0] #=> String
+    #   resp.association_description.target_locations[0].targets #=> Array
+    #   resp.association_description.target_locations[0].targets[0].key #=> String
+    #   resp.association_description.target_locations[0].targets[0].values #=> Array
+    #   resp.association_description.target_locations[0].targets[0].values[0] #=> String
+    #   resp.association_description.target_locations[0].targets_max_concurrency #=> String
+    #   resp.association_description.target_locations[0].targets_max_errors #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
@@ -11180,6 +11346,15 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.association_description.target_locations[0].include_child_organization_units #=> Boolean
+    #   resp.association_description.target_locations[0].exclude_accounts #=> Array
+    #   resp.association_description.target_locations[0].exclude_accounts[0] #=> String
+    #   resp.association_description.target_locations[0].targets #=> Array
+    #   resp.association_description.target_locations[0].targets[0].key #=> String
+    #   resp.association_description.target_locations[0].targets[0].values #=> Array
+    #   resp.association_description.target_locations[0].targets[0].values[0] #=> String
+    #   resp.association_description.target_locations[0].targets_max_concurrency #=> String
+    #   resp.association_description.target_locations[0].targets_max_errors #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
@@ -11728,7 +11903,7 @@ module Aws::SSM
     #   creating a custom policy and custom service role for running your
     #   maintenance window tasks. The policy can be crafted to provide only
     #   the permissions needed for your particular maintenance window tasks.
-    #   For more information, see [Setting up maintenance windows][1] in the
+    #   For more information, see [Setting up Maintenance Windows][1] in the
     #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -12032,9 +12207,9 @@ module Aws::SSM
     #   want to assign to the managed node. This IAM role must provide
     #   AssumeRole permissions for the Amazon Web Services Systems Manager
     #   service principal `ssm.amazonaws.com`. For more information, see
-    #   [Create an IAM service role for a hybrid and multicloud
-    #   environment][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   [Create the IAM service role required for Systems Manager in hybrid
+    #   and multicloud environments][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
     #
     #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter. You
     #   must create a unique role.
@@ -12043,7 +12218,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -12134,9 +12309,8 @@ module Aws::SSM
     #   impacted resource.
     #
     # @option params [String] :status
-    #   The OpsItem status. Status can be `Open`, `In Progress`, or
-    #   `Resolved`. For more information, see [Editing OpsItem details][1] in
-    #   the *Amazon Web Services Systems Manager User Guide*.
+    #   The OpsItem status. For more information, see [Editing OpsItem
+    #   details][1] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -12285,7 +12459,7 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved and
+    #   and rejected patches, see [Package name formats for approved and
     #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
     #   User Guide*.
     #
@@ -12305,7 +12479,7 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [About package name formats for approved and
+    #   and rejected patches, see [Package name formats for approved and
     #   rejected patch lists][1] in the *Amazon Web Services Systems Manager
     #   User Guide*.
     #
@@ -12627,7 +12801,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

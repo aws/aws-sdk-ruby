@@ -2192,6 +2192,41 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Deletes a [resource-based policy][1] from a function.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to delete the
+    #   policy from. You can use either a qualified or an unqualified ARN, but
+    #   the value you specify must be a complete ARN and wildcard characters
+    #   are not accepted.
+    #
+    # @option params [String] :revision_id
+    #   Delete the existing policy only if its revision ID matches the string
+    #   you specify. To find the revision ID of the policy currently attached
+    #   to your function, use the GetResourcePolicy action.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "PolicyResourceArn", # required
+    #     revision_id: "RevisionId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves details about your account's [limits][1] and usage in an
     # Amazon Web Services Region.
     #
@@ -3195,6 +3230,73 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_provisioned_concurrency_config(params = {}, options = {})
       req = build_request(:get_provisioned_concurrency_config, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the public-access settings for a function.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to retrieve
+    #   public-access settings for.
+    #
+    # @return [Types::GetPublicAccessBlockConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPublicAccessBlockConfigResponse#public_access_block_config #public_access_block_config} => Types::PublicAccessBlockConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_public_access_block_config({
+    #     resource_arn: "PublicAccessBlockResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_access_block_config.block_public_policy #=> Boolean
+    #   resp.public_access_block_config.restrict_public_resource #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPublicAccessBlockConfig AWS API Documentation
+    #
+    # @overload get_public_access_block_config(params = {})
+    # @param [Hash] params ({})
+    def get_public_access_block_config(params = {}, options = {})
+      req = build_request(:get_public_access_block_config, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the [resource-based policy][1] attached to a function.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to retrieve
+    #   the policy for. You can use either a qualified or an unqualified ARN,
+    #   but the value you specify must be a complete ARN and wildcard
+    #   characters are not accepted.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy #policy} => String
+    #   * {Types::GetResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "PolicyResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -5235,6 +5337,135 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Configure your function's public-access settings.
+    #
+    # To control public access to a Lambda function, you can choose whether
+    # to allow the creation of [resource-based policies][1] that allow
+    # public access to that function. You can also block public access to a
+    # function, even if it has an existing resource-based policy that allows
+    # it.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to configure
+    #   public-access settings for. Public-access settings are applied at the
+    #   function level, so you can't apply different settings to function
+    #   versions or aliases.
+    #
+    # @option params [required, Types::PublicAccessBlockConfig] :public_access_block_config
+    #   An object defining the public-access settings you want to apply.
+    #
+    #   To block the creation of resource-based policies that would grant
+    #   public access to your function, set `BlockPublicPolicy` to `true`. To
+    #   allow the creation of resource-based policies that would grant public
+    #   access to your function, set `BlockPublicPolicy` to `false`.
+    #
+    #   To block public access to your function, even if its resource-based
+    #   policy allows it, set `RestrictPublicResource` to `true`. To allow
+    #   public access to a function with a resource-based policy that permits
+    #   it, set `RestrictPublicResource` to `false`.
+    #
+    #   The default setting for both `BlockPublicPolicy` and
+    #   `RestrictPublicResource` is `true`.
+    #
+    # @return [Types::PutPublicAccessBlockConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutPublicAccessBlockConfigResponse#public_access_block_config #public_access_block_config} => Types::PublicAccessBlockConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_public_access_block_config({
+    #     resource_arn: "PublicAccessBlockResourceArn", # required
+    #     public_access_block_config: { # required
+    #       block_public_policy: false,
+    #       restrict_public_resource: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_access_block_config.block_public_policy #=> Boolean
+    #   resp.public_access_block_config.restrict_public_resource #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutPublicAccessBlockConfig AWS API Documentation
+    #
+    # @overload put_public_access_block_config(params = {})
+    # @param [Hash] params ({})
+    def put_public_access_block_config(params = {}, options = {})
+      req = build_request(:put_public_access_block_config, params)
+      req.send_request(options)
+    end
+
+    # Adds a [resource-based policy][1] to a function. You can use
+    # resource-based policies to grant access to other [Amazon Web Services
+    # accounts][2], [organizations][3], or [services][4]. Resource-based
+    # policies apply to a single function, version, or alias.
+    #
+    # Adding a resource-based policy using this API action replaces any
+    # existing policy you've previously created. This means that if you've
+    # previously added resource-based permissions to a function using the
+    # AddPermission action, those permissions will be overwritten by your
+    # new policy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-cross-account.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-organization.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-services.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the function you want to add the
+    #   policy to. You can use either a qualified or an unqualified ARN, but
+    #   the value you specify must be a complete ARN and wildcard characters
+    #   are not accepted.
+    #
+    # @option params [required, String] :policy
+    #   The JSON resource-based policy you want to add to your function.
+    #
+    #   To learn more about creating resource-based policies for controlling
+    #   access to Lambda, see [Working with resource-based IAM policies in
+    #   Lambda][1] in the *Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/
+    #
+    # @option params [String] :revision_id
+    #   Replace the existing policy only if its revision ID matches the string
+    #   you specify. To find the revision ID of the policy currently attached
+    #   to your function, use the GetResourcePolicy action.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#policy #policy} => String
+    #   * {Types::PutResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "PolicyResourceArn", # required
+    #     policy: "ResourcePolicy", # required
+    #     revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Sets the runtime management configuration for a function's version.
     # For more information, see [Runtime updates][1].
     #
@@ -6755,7 +6986,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

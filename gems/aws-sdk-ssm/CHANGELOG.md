@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2024-09-17)
+------------------
+
+* Feature - Support for additional levels of cross-account, cross-Region organizational units in Automation. Various documentation updates.
+
 1.178.0 (2024-09-11)
 ------------------
 
