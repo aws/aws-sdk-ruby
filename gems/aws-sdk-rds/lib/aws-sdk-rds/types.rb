@@ -285,25 +285,8 @@ module Aws::RDS
     # @!attribute [rw] apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid Values:
-    #
-    #   * `ca-certificate-rotation`
-    #
-    #   * `db-upgrade`
-    #
-    #   * `hardware-maintenance`
-    #
-    #   * `os-upgrade`
-    #
-    #   * `system-update`
-    #
-    #   For more information about these actions, see [Maintenance actions
-    #   for Amazon Aurora][1] or [Maintenance actions for Amazon RDS][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
+    #   Valid Values: `system-update`, `db-upgrade`, `hardware-maintenance`,
+    #   `ca-certificate-rotation`
     #   @return [String]
     #
     # @!attribute [rw] opt_in_type
@@ -6319,6 +6302,10 @@ module Aws::RDS
     #   ^
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   Tags to assign to the global cluster.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalClusterMessage AWS API Documentation
     #
     class CreateGlobalClusterMessage < Struct.new(
@@ -6329,7 +6316,8 @@ module Aws::RDS
       :engine_lifecycle_support,
       :deletion_protection,
       :database_name,
-      :storage_encrypted)
+      :storage_encrypted,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16111,6 +16099,19 @@ module Aws::RDS
     #   called on this global cluster.
     #   @return [Types::FailoverState]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalCluster AWS API Documentation
     #
     class GlobalCluster < Struct.new(
@@ -16125,7 +16126,8 @@ module Aws::RDS
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members,
-      :failover_state)
+      :failover_state,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20929,26 +20931,12 @@ module Aws::RDS
     #   For more information about maintenance actions, see [Maintaining a
     #   DB instance][1].
     #
-    #   Valid Values:
-    #
-    #   * `ca-certificate-rotation`
-    #
-    #   * `db-upgrade`
-    #
-    #   * `hardware-maintenance`
-    #
-    #   * `os-upgrade`
-    #
-    #   * `system-update`
-    #
-    #   For more information about these actions, see [Maintenance actions
-    #   for Amazon Aurora][2] or [Maintenance actions for Amazon RDS][3].
+    #   Valid Values:` system-update | db-upgrade | hardware-maintenance |
+    #   ca-certificate-rotation`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date

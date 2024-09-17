@@ -63,6 +63,8 @@ module Aws::IoT
     AssetPropertyValue = Shapes::StructureShape.new(name: 'AssetPropertyValue')
     AssetPropertyValueList = Shapes::ListShape.new(name: 'AssetPropertyValueList')
     AssetPropertyVariant = Shapes::StructureShape.new(name: 'AssetPropertyVariant')
+    AssociateSbomWithPackageVersionRequest = Shapes::StructureShape.new(name: 'AssociateSbomWithPackageVersionRequest')
+    AssociateSbomWithPackageVersionResponse = Shapes::StructureShape.new(name: 'AssociateSbomWithPackageVersionResponse')
     AssociateTargetsWithJobRequest = Shapes::StructureShape.new(name: 'AssociateTargetsWithJobRequest')
     AssociateTargetsWithJobResponse = Shapes::StructureShape.new(name: 'AssociateTargetsWithJobResponse')
     AttachPolicyRequest = Shapes::StructureShape.new(name: 'AttachPolicyRequest')
@@ -145,6 +147,7 @@ module Aws::IoT
     AwsJobTimeoutConfig = Shapes::StructureShape.new(name: 'AwsJobTimeoutConfig')
     AwsJobTimeoutInProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'AwsJobTimeoutInProgressTimeoutInMinutes')
     BatchMode = Shapes::BooleanShape.new(name: 'BatchMode')
+    BeforeSubstitutionFlag = Shapes::BooleanShape.new(name: 'BeforeSubstitutionFlag')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
     BehaviorCriteria = Shapes::StructureShape.new(name: 'BehaviorCriteria')
     BehaviorCriteriaType = Shapes::StringShape.new(name: 'BehaviorCriteriaType')
@@ -490,6 +493,8 @@ module Aws::IoT
     DimensionValueOperator = Shapes::StringShape.new(name: 'DimensionValueOperator')
     DisableAllLogs = Shapes::BooleanShape.new(name: 'DisableAllLogs')
     DisableTopicRuleRequest = Shapes::StructureShape.new(name: 'DisableTopicRuleRequest')
+    DisassociateSbomFromPackageVersionRequest = Shapes::StructureShape.new(name: 'DisassociateSbomFromPackageVersionRequest')
+    DisassociateSbomFromPackageVersionResponse = Shapes::StructureShape.new(name: 'DisassociateSbomFromPackageVersionResponse')
     DisconnectReason = Shapes::StringShape.new(name: 'DisconnectReason')
     DocumentParameter = Shapes::StructureShape.new(name: 'DocumentParameter')
     DocumentParameters = Shapes::ListShape.new(name: 'DocumentParameters')
@@ -782,6 +787,8 @@ module Aws::IoT
     ListRelatedResourcesForAuditFindingResponse = Shapes::StructureShape.new(name: 'ListRelatedResourcesForAuditFindingResponse')
     ListRoleAliasesRequest = Shapes::StructureShape.new(name: 'ListRoleAliasesRequest')
     ListRoleAliasesResponse = Shapes::StructureShape.new(name: 'ListRoleAliasesResponse')
+    ListSbomValidationResultsRequest = Shapes::StructureShape.new(name: 'ListSbomValidationResultsRequest')
+    ListSbomValidationResultsResponse = Shapes::StructureShape.new(name: 'ListSbomValidationResultsResponse')
     ListScheduledAuditsRequest = Shapes::StructureShape.new(name: 'ListScheduledAuditsRequest')
     ListScheduledAuditsResponse = Shapes::StructureShape.new(name: 'ListScheduledAuditsResponse')
     ListSecurityProfilesForTargetRequest = Shapes::StructureShape.new(name: 'ListSecurityProfilesForTargetRequest')
@@ -919,7 +926,9 @@ module Aws::IoT
     PackageSummaryList = Shapes::ListShape.new(name: 'PackageSummaryList')
     PackageVersionAction = Shapes::StringShape.new(name: 'PackageVersionAction')
     PackageVersionArn = Shapes::StringShape.new(name: 'PackageVersionArn')
+    PackageVersionArtifact = Shapes::StructureShape.new(name: 'PackageVersionArtifact')
     PackageVersionErrorReason = Shapes::StringShape.new(name: 'PackageVersionErrorReason')
+    PackageVersionRecipe = Shapes::StringShape.new(name: 'PackageVersionRecipe')
     PackageVersionStatus = Shapes::StringShape.new(name: 'PackageVersionStatus')
     PackageVersionSummary = Shapes::StructureShape.new(name: 'PackageVersionSummary')
     PackageVersionSummaryList = Shapes::ListShape.new(name: 'PackageVersionSummaryList')
@@ -1068,6 +1077,13 @@ module Aws::IoT
     SalesforceAction = Shapes::StructureShape.new(name: 'SalesforceAction')
     SalesforceEndpoint = Shapes::StringShape.new(name: 'SalesforceEndpoint')
     SalesforceToken = Shapes::StringShape.new(name: 'SalesforceToken')
+    Sbom = Shapes::StructureShape.new(name: 'Sbom')
+    SbomValidationErrorCode = Shapes::StringShape.new(name: 'SbomValidationErrorCode')
+    SbomValidationErrorMessage = Shapes::StringShape.new(name: 'SbomValidationErrorMessage')
+    SbomValidationResult = Shapes::StringShape.new(name: 'SbomValidationResult')
+    SbomValidationResultSummary = Shapes::StructureShape.new(name: 'SbomValidationResultSummary')
+    SbomValidationResultSummaryList = Shapes::ListShape.new(name: 'SbomValidationResultSummaryList')
+    SbomValidationStatus = Shapes::StringShape.new(name: 'SbomValidationStatus')
     ScheduledAuditArn = Shapes::StringShape.new(name: 'ScheduledAuditArn')
     ScheduledAuditMetadata = Shapes::StructureShape.new(name: 'ScheduledAuditMetadata')
     ScheduledAuditMetadataList = Shapes::ListShape.new(name: 'ScheduledAuditMetadataList')
@@ -1493,6 +1509,18 @@ module Aws::IoT
     AssetPropertyVariant.add_member(:double_value, Shapes::ShapeRef.new(shape: AssetPropertyDoubleValue, location_name: "doubleValue"))
     AssetPropertyVariant.add_member(:boolean_value, Shapes::ShapeRef.new(shape: AssetPropertyBooleanValue, location_name: "booleanValue"))
     AssetPropertyVariant.struct_class = Types::AssetPropertyVariant
+
+    AssociateSbomWithPackageVersionRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
+    AssociateSbomWithPackageVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
+    AssociateSbomWithPackageVersionRequest.add_member(:sbom, Shapes::ShapeRef.new(shape: Sbom, required: true, location_name: "sbom"))
+    AssociateSbomWithPackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateSbomWithPackageVersionRequest.struct_class = Types::AssociateSbomWithPackageVersionRequest
+
+    AssociateSbomWithPackageVersionResponse.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "packageName"))
+    AssociateSbomWithPackageVersionResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName"))
+    AssociateSbomWithPackageVersionResponse.add_member(:sbom, Shapes::ShapeRef.new(shape: Sbom, location_name: "sbom"))
+    AssociateSbomWithPackageVersionResponse.add_member(:sbom_validation_status, Shapes::ShapeRef.new(shape: SbomValidationStatus, location_name: "sbomValidationStatus"))
+    AssociateSbomWithPackageVersionResponse.struct_class = Types::AssociateSbomWithPackageVersionResponse
 
     AssociateTargetsWithJobRequest.add_member(:targets, Shapes::ShapeRef.new(shape: JobTargets, required: true, location_name: "targets"))
     AssociateTargetsWithJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
@@ -2120,6 +2148,8 @@ module Aws::IoT
     CreatePackageVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
     CreatePackageVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreatePackageVersionRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ResourceAttributes, location_name: "attributes"))
+    CreatePackageVersionRequest.add_member(:artifact, Shapes::ShapeRef.new(shape: PackageVersionArtifact, location_name: "artifact"))
+    CreatePackageVersionRequest.add_member(:recipe, Shapes::ShapeRef.new(shape: PackageVersionRecipe, location_name: "recipe"))
     CreatePackageVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreatePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreatePackageVersionRequest.struct_class = Types::CreatePackageVersionRequest
@@ -2660,6 +2690,7 @@ module Aws::IoT
     DescribeJobExecutionResponse.struct_class = Types::DescribeJobExecutionResponse
 
     DescribeJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    DescribeJobRequest.add_member(:before_substitution, Shapes::ShapeRef.new(shape: BeforeSubstitutionFlag, location: "querystring", location_name: "beforeSubstitution"))
     DescribeJobRequest.struct_class = Types::DescribeJobRequest
 
     DescribeJobResponse.add_member(:document_source, Shapes::ShapeRef.new(shape: JobDocumentSource, location_name: "documentSource"))
@@ -2904,6 +2935,13 @@ module Aws::IoT
     DisableTopicRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location: "uri", location_name: "ruleName"))
     DisableTopicRuleRequest.struct_class = Types::DisableTopicRuleRequest
 
+    DisassociateSbomFromPackageVersionRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
+    DisassociateSbomFromPackageVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
+    DisassociateSbomFromPackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateSbomFromPackageVersionRequest.struct_class = Types::DisassociateSbomFromPackageVersionRequest
+
+    DisassociateSbomFromPackageVersionResponse.struct_class = Types::DisassociateSbomFromPackageVersionResponse
+
     DocumentParameter.add_member(:key, Shapes::ShapeRef.new(shape: ParameterKey, location_name: "key"))
     DocumentParameter.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
     DocumentParameter.add_member(:regex, Shapes::ShapeRef.new(shape: Regex, location_name: "regex"))
@@ -3048,6 +3086,7 @@ module Aws::IoT
     GetIndexingConfigurationResponse.struct_class = Types::GetIndexingConfigurationResponse
 
     GetJobDocumentRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    GetJobDocumentRequest.add_member(:before_substitution, Shapes::ShapeRef.new(shape: BeforeSubstitutionFlag, location: "querystring", location_name: "beforeSubstitution"))
     GetJobDocumentRequest.struct_class = Types::GetJobDocumentRequest
 
     GetJobDocumentResponse.add_member(:document, Shapes::ShapeRef.new(shape: JobDocument, location_name: "document"))
@@ -3090,10 +3129,14 @@ module Aws::IoT
     GetPackageVersionResponse.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName"))
     GetPackageVersionResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     GetPackageVersionResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: ResourceAttributes, location_name: "attributes"))
+    GetPackageVersionResponse.add_member(:artifact, Shapes::ShapeRef.new(shape: PackageVersionArtifact, location_name: "artifact"))
     GetPackageVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: PackageVersionStatus, location_name: "status"))
     GetPackageVersionResponse.add_member(:error_reason, Shapes::ShapeRef.new(shape: PackageVersionErrorReason, location_name: "errorReason"))
     GetPackageVersionResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
     GetPackageVersionResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: LastModifiedDate, location_name: "lastModifiedDate"))
+    GetPackageVersionResponse.add_member(:sbom, Shapes::ShapeRef.new(shape: Sbom, location_name: "sbom"))
+    GetPackageVersionResponse.add_member(:sbom_validation_status, Shapes::ShapeRef.new(shape: SbomValidationStatus, location_name: "sbomValidationStatus"))
+    GetPackageVersionResponse.add_member(:recipe, Shapes::ShapeRef.new(shape: PackageVersionRecipe, location_name: "recipe"))
     GetPackageVersionResponse.struct_class = Types::GetPackageVersionResponse
 
     GetPercentilesRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
@@ -3785,6 +3828,17 @@ module Aws::IoT
     ListRoleAliasesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "nextMarker"))
     ListRoleAliasesResponse.struct_class = Types::ListRoleAliasesResponse
 
+    ListSbomValidationResultsRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
+    ListSbomValidationResultsRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
+    ListSbomValidationResultsRequest.add_member(:validation_result, Shapes::ShapeRef.new(shape: SbomValidationResult, location: "querystring", location_name: "validationResult"))
+    ListSbomValidationResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PackageCatalogMaxResults, location: "querystring", location_name: "maxResults"))
+    ListSbomValidationResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSbomValidationResultsRequest.struct_class = Types::ListSbomValidationResultsRequest
+
+    ListSbomValidationResultsResponse.add_member(:validation_result_summaries, Shapes::ShapeRef.new(shape: SbomValidationResultSummaryList, location_name: "validationResultSummaries"))
+    ListSbomValidationResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSbomValidationResultsResponse.struct_class = Types::ListSbomValidationResultsResponse
+
     ListScheduledAuditsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListScheduledAuditsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListScheduledAuditsRequest.struct_class = Types::ListScheduledAuditsRequest
@@ -4167,6 +4221,9 @@ module Aws::IoT
 
     PackageSummaryList.member = Shapes::ShapeRef.new(shape: PackageSummary)
 
+    PackageVersionArtifact.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    PackageVersionArtifact.struct_class = Types::PackageVersionArtifact
+
     PackageVersionSummary.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "packageName"))
     PackageVersionSummary.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "versionName"))
     PackageVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: PackageVersionStatus, location_name: "status"))
@@ -4435,6 +4492,17 @@ module Aws::IoT
     SalesforceAction.add_member(:token, Shapes::ShapeRef.new(shape: SalesforceToken, required: true, location_name: "token"))
     SalesforceAction.add_member(:url, Shapes::ShapeRef.new(shape: SalesforceEndpoint, required: true, location_name: "url"))
     SalesforceAction.struct_class = Types::SalesforceAction
+
+    Sbom.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    Sbom.struct_class = Types::Sbom
+
+    SbomValidationResultSummary.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
+    SbomValidationResultSummary.add_member(:validation_result, Shapes::ShapeRef.new(shape: SbomValidationResult, location_name: "validationResult"))
+    SbomValidationResultSummary.add_member(:error_code, Shapes::ShapeRef.new(shape: SbomValidationErrorCode, location_name: "errorCode"))
+    SbomValidationResultSummary.add_member(:error_message, Shapes::ShapeRef.new(shape: SbomValidationErrorMessage, location_name: "errorMessage"))
+    SbomValidationResultSummary.struct_class = Types::SbomValidationResultSummary
+
+    SbomValidationResultSummaryList.member = Shapes::ShapeRef.new(shape: SbomValidationResultSummary)
 
     ScheduledAuditMetadata.add_member(:scheduled_audit_name, Shapes::ShapeRef.new(shape: ScheduledAuditName, location_name: "scheduledAuditName"))
     ScheduledAuditMetadata.add_member(:scheduled_audit_arn, Shapes::ShapeRef.new(shape: ScheduledAuditArn, location_name: "scheduledAuditArn"))
@@ -5092,7 +5160,9 @@ module Aws::IoT
     UpdatePackageVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
     UpdatePackageVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     UpdatePackageVersionRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ResourceAttributes, location_name: "attributes"))
+    UpdatePackageVersionRequest.add_member(:artifact, Shapes::ShapeRef.new(shape: PackageVersionArtifact, location_name: "artifact"))
     UpdatePackageVersionRequest.add_member(:action, Shapes::ShapeRef.new(shape: PackageVersionAction, location_name: "action"))
+    UpdatePackageVersionRequest.add_member(:recipe, Shapes::ShapeRef.new(shape: PackageVersionRecipe, location_name: "recipe"))
     UpdatePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdatePackageVersionRequest.struct_class = Types::UpdatePackageVersionRequest
 
@@ -5323,6 +5393,20 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:associate_sbom_with_package_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSbomWithPackageVersion"
+        o.http_method = "PUT"
+        o.http_request_uri = "/packages/{packageName}/versions/{versionName}/sbom"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSbomWithPackageVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSbomWithPackageVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -6904,6 +6988,19 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
       end)
 
+      api.add_operation(:disassociate_sbom_from_package_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSbomFromPackageVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/packages/{packageName}/versions/{versionName}/sbom"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSbomFromPackageVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSbomFromPackageVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:enable_topic_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableTopicRule"
         o.http_method = "POST"
@@ -7895,6 +7992,24 @@ module Aws::IoT
           limit_key: "page_size",
           tokens: {
             "next_marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sbom_validation_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSbomValidationResults"
+        o.http_method = "GET"
+        o.http_request_uri = "/packages/{packageName}/versions/{versionName}/sbom-validation-results"
+        o.input = Shapes::ShapeRef.new(shape: ListSbomValidationResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSbomValidationResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
           }
         )
       end)
@@ -8917,6 +9032,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdateStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

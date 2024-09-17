@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2024-09-16)
+------------------
+
+* Feature - Removing the ON_PREMISE enum from the input settings field.
+
 1.131.0 (2024-09-11)
 ------------------
 

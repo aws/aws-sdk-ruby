@@ -3,6 +3,9 @@ Unreleased Changes
 
 * Feature - Use autoloading at the service level to load service clients and resources.
 
+* Feature - Support `sigv4a` endpoint auth without CRT.
+
+
 3.205.0 (2024-09-11)
 ------------------
 

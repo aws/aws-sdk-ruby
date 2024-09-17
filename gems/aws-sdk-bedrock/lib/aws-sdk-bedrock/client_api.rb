@@ -481,6 +481,7 @@ module Aws::Bedrock
     CreateModelInvocationJobRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
     CreateModelInvocationJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobInputDataConfig, required: true, location_name: "inputDataConfig"))
     CreateModelInvocationJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    CreateModelInvocationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     CreateModelInvocationJobRequest.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
     CreateModelInvocationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateModelInvocationJobRequest.struct_class = Types::CreateModelInvocationJobRequest
@@ -800,6 +801,7 @@ module Aws::Bedrock
     GetModelInvocationJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     GetModelInvocationJobResponse.add_member(:input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobInputDataConfig, required: true, location_name: "inputDataConfig"))
     GetModelInvocationJobResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    GetModelInvocationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     GetModelInvocationJobResponse.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
     GetModelInvocationJobResponse.add_member(:job_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "jobExpirationTime"))
     GetModelInvocationJobResponse.struct_class = Types::GetModelInvocationJobResponse
@@ -1236,10 +1238,12 @@ module Aws::Bedrock
 
     ModelInvocationJobS3InputDataConfig.add_member(:s3_input_format, Shapes::ShapeRef.new(shape: S3InputFormat, location_name: "s3InputFormat"))
     ModelInvocationJobS3InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    ModelInvocationJobS3InputDataConfig.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "s3BucketOwner"))
     ModelInvocationJobS3InputDataConfig.struct_class = Types::ModelInvocationJobS3InputDataConfig
 
     ModelInvocationJobS3OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
     ModelInvocationJobS3OutputDataConfig.add_member(:s3_encryption_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "s3EncryptionKeyId"))
+    ModelInvocationJobS3OutputDataConfig.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "s3BucketOwner"))
     ModelInvocationJobS3OutputDataConfig.struct_class = Types::ModelInvocationJobS3OutputDataConfig
 
     ModelInvocationJobSummaries.member = Shapes::ShapeRef.new(shape: ModelInvocationJobSummary)
@@ -1256,6 +1260,7 @@ module Aws::Bedrock
     ModelInvocationJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     ModelInvocationJobSummary.add_member(:input_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobInputDataConfig, required: true, location_name: "inputDataConfig"))
     ModelInvocationJobSummary.add_member(:output_data_config, Shapes::ShapeRef.new(shape: ModelInvocationJobOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    ModelInvocationJobSummary.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     ModelInvocationJobSummary.add_member(:timeout_duration_in_hours, Shapes::ShapeRef.new(shape: ModelInvocationJobTimeoutDurationInHours, location_name: "timeoutDurationInHours"))
     ModelInvocationJobSummary.add_member(:job_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "jobExpirationTime"))
     ModelInvocationJobSummary.struct_class = Types::ModelInvocationJobSummary

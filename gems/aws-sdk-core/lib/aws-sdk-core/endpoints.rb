@@ -19,9 +19,12 @@ require 'aws-sigv4'
 module Aws
   # @api private
   module Endpoints
-    supported_auth_traits = %w[aws.auth#sigv4 smithy.api#httpBearerAuth smithy.api#noAuth]
-    supported_auth_traits += ['aws.auth#sigv4a'] if Aws::Sigv4::Signer.use_crt?
-    SUPPORTED_AUTH_TRAITS = supported_auth_traits.freeze
+    SUPPORTED_AUTH_TRAITS = %w[
+      aws.auth#sigv4
+      aws.auth#sigv4a
+      smithy.api#httpBearerAuth
+      smithy.api#noAuth
+    ].freeze
 
     class << self
       def resolve_auth_scheme(context, endpoint)

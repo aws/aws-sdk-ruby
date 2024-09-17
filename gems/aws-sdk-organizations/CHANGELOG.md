@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-09-16)
+------------------
+
+* Feature - Doc only update for AWS Organizations that fixes several customer-reported issues
+
 1.99.0 (2024-09-11)
 ------------------
 

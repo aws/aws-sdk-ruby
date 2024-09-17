@@ -533,9 +533,13 @@ module Aws::Bedrock
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc_config
-    #   VPC configuration (optional). Configuration parameters for the
-    #   private Virtual Private Cloud (VPC) that contains the resources you
-    #   are using for this job.
+    #   The configuration of the Virtual Private Cloud (VPC) that contains
+    #   the resources that you're using for this job. For more information,
+    #   see [Protect your model customization jobs using a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/vpc-model-customization.html
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateModelCustomizationJobRequest AWS API Documentation
@@ -685,6 +689,16 @@ module Aws::Bedrock
     #   Details about the location of the output of the batch inference job.
     #   @return [Types::ModelInvocationJobOutputDataConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   The configuration of the Virtual Private Cloud (VPC) for the data in
+    #   the batch inference job. For more information, see [Protect batch
+    #   inference jobs using a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+    #   @return [Types::VpcConfig]
+    #
     # @!attribute [rw] timeout_duration_in_hours
     #   The number of hours after which to force the batch inference job to
     #   time out.
@@ -708,6 +722,7 @@ module Aws::Bedrock
       :model_id,
       :input_data_config,
       :output_data_config,
+      :vpc_config,
       :timeout_duration_in_hours,
       :tags)
       SENSITIVE = []
@@ -2172,6 +2187,16 @@ module Aws::Bedrock
     #   Details about the location of the output of the batch inference job.
     #   @return [Types::ModelInvocationJobOutputDataConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   The configuration of the Virtual Private Cloud (VPC) for the data in
+    #   the batch inference job. For more information, see [Protect batch
+    #   inference jobs using a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+    #   @return [Types::VpcConfig]
+    #
     # @!attribute [rw] timeout_duration_in_hours
     #   The number of hours after which batch inference job was set to time
     #   out.
@@ -2196,6 +2221,7 @@ module Aws::Bedrock
       :end_time,
       :input_data_config,
       :output_data_config,
+      :vpc_config,
       :timeout_duration_in_hours,
       :job_expiration_time)
       SENSITIVE = [:message]
@@ -4482,7 +4508,7 @@ module Aws::Bedrock
       class Unknown < ModelInvocationJobOutputDataConfig; end
     end
 
-    # Contains the configuration of the S3 location of the output data.
+    # Contains the configuration of the S3 location of the input data.
     #
     # @!attribute [rw] s3_input_format
     #   The format of the input data.
@@ -4492,11 +4518,17 @@ module Aws::Bedrock
     #   The S3 location of the input data.
     #   @return [String]
     #
+    # @!attribute [rw] s3_bucket_owner
+    #   The ID of the Amazon Web Services account that owns the S3 bucket
+    #   containing the input data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobS3InputDataConfig AWS API Documentation
     #
     class ModelInvocationJobS3InputDataConfig < Struct.new(
       :s3_input_format,
-      :s3_uri)
+      :s3_uri,
+      :s3_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4512,11 +4544,17 @@ module Aws::Bedrock
     #   the output data.
     #   @return [String]
     #
+    # @!attribute [rw] s3_bucket_owner
+    #   The ID of the Amazon Web Services account that owns the S3 bucket
+    #   containing the output data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelInvocationJobS3OutputDataConfig AWS API Documentation
     #
     class ModelInvocationJobS3OutputDataConfig < Struct.new(
       :s3_uri,
-      :s3_encryption_key_id)
+      :s3_encryption_key_id,
+      :s3_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4587,6 +4625,16 @@ module Aws::Bedrock
     #   Details about the location of the output of the batch inference job.
     #   @return [Types::ModelInvocationJobOutputDataConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   The configuration of the Virtual Private Cloud (VPC) for the data in
+    #   the batch inference job. For more information, see [Protect batch
+    #   inference jobs using a VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+    #   @return [Types::VpcConfig]
+    #
     # @!attribute [rw] timeout_duration_in_hours
     #   The number of hours after which the batch inference job was set to
     #   time out.
@@ -4611,6 +4659,7 @@ module Aws::Bedrock
       :end_time,
       :input_data_config,
       :output_data_config,
+      :vpc_config,
       :timeout_duration_in_hours,
       :job_expiration_time)
       SENSITIVE = [:message]
@@ -5149,14 +5198,20 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # VPC configuration.
+    # The configuration of a virtual private cloud (VPC). For more
+    # information, see [Protect your data using Amazon Virtual Private Cloud
+    # and Amazon Web Services PrivateLink][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/usingVPC.html
     #
     # @!attribute [rw] subnet_ids
-    #   VPC configuration subnets.
+    #   An array of IDs for each subnet in the VPC to use.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   VPC configuration security group Ids.
+    #   An array of IDs for each security group in the VPC to use.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/VpcConfig AWS API Documentation

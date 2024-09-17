@@ -73,6 +73,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::AddThingToBillingGroup.build(context)
           when :add_thing_to_thing_group
             Aws::IoT::Endpoints::AddThingToThingGroup.build(context)
+          when :associate_sbom_with_package_version
+            Aws::IoT::Endpoints::AssociateSbomWithPackageVersion.build(context)
           when :associate_targets_with_job
             Aws::IoT::Endpoints::AssociateTargetsWithJob.build(context)
           when :attach_policy
@@ -309,6 +311,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::DetachThingPrincipal.build(context)
           when :disable_topic_rule
             Aws::IoT::Endpoints::DisableTopicRule.build(context)
+          when :disassociate_sbom_from_package_version
+            Aws::IoT::Endpoints::DisassociateSbomFromPackageVersion.build(context)
           when :enable_topic_rule
             Aws::IoT::Endpoints::EnableTopicRule.build(context)
           when :get_behavior_model_training_summaries
@@ -429,6 +433,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::ListRelatedResourcesForAuditFinding.build(context)
           when :list_role_aliases
             Aws::IoT::Endpoints::ListRoleAliases.build(context)
+          when :list_sbom_validation_results
+            Aws::IoT::Endpoints::ListSbomValidationResults.build(context)
           when :list_scheduled_audits
             Aws::IoT::Endpoints::ListScheduledAudits.build(context)
           when :list_security_profiles

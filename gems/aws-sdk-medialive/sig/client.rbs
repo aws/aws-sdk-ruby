@@ -1554,7 +1554,7 @@ module Aws
                               },
                             ]?
                           },
-                          ?input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES"),
+                          ?input_network_location: ("AWS" | "ON_PREMISES"),
                           ?multicast_settings: {
                             sources: Array[
                               {
@@ -1827,7 +1827,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
         def srt_settings: () -> Types::SrtSettings
-        def input_network_location: () -> ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+        def input_network_location: () -> ("AWS" | "ON_PREMISES")
         def multicast_settings: () -> Types::MulticastSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_input-instance_method

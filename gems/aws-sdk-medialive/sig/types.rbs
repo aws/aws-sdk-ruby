@@ -615,7 +615,7 @@ module Aws::MediaLive
       attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
-      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       SENSITIVE: []
     end
@@ -633,7 +633,7 @@ module Aws::MediaLive
       attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
-      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       SENSITIVE: []
     end
@@ -970,7 +970,7 @@ module Aws::MediaLive
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor srt_settings: Types::SrtSettings
-      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettings
       SENSITIVE: []
     end
@@ -1619,7 +1619,7 @@ module Aws::MediaLive
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST")
       attr_accessor srt_settings: Types::SrtSettings
-      attr_accessor input_network_location: ("AWS" | "ON_PREMISE" | "ON_PREMISES")
+      attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettings
       SENSITIVE: []
     end

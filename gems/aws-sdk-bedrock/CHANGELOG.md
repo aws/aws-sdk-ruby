@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-09-16)
+------------------
+
+* Feature - This feature adds cross account s3 bucket and VPC support to ModelInvocation jobs. To use a cross account bucket, pass in the accountId of the bucket to s3BucketOwner in the ModelInvocationJobInputDataConfig or ModelInvocationJobOutputDataConfig.
+
 1.20.0 (2024-09-11)
 ------------------
 

@@ -267,14 +267,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] insecure_ingest
@@ -361,14 +362,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] insecure_ingest
@@ -463,14 +465,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   See [Best practices and strategies][1] in *Tagging Amazon Web
+    #   Services Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints
     #   beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] insecure_ingest
@@ -556,14 +559,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   See [Best practices and strategies][1] in *Tagging Amazon Web
+    #   Services Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints
     #   beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreatePlaybackRestrictionPolicyRequest AWS API Documentation
@@ -600,14 +604,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   See [Best practices and strategies][1] in *Tagging Amazon Web
+    #   Services Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints
     #   beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] thumbnail_configuration
@@ -660,14 +665,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
-    #   See [Tagging Amazon Web Services Resources][1] for more information,
-    #   including restrictions that apply to tags and "Tag naming limits
-    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   See [Best practices and strategies][1] in *Tagging Amazon Web
+    #   Services Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints
     #   beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateStreamKeyRequest AWS API Documentation
@@ -961,14 +967,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Any tags provided with the request are added to the playback key
-    #   pair tags. See [Tagging Amazon Web Services Resources][1] for more
-    #   information, including restrictions that apply to tags and "Tag
-    #   naming limits and requirements"; Amazon IVS has no service-specific
-    #   constraints beyond what is documented there.
+    #   pair tags. See [Best practices and strategies][1] in *Tagging Amazon
+    #   Web Services Resources and Tag Editor* for details, including
+    #   restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPairRequest AWS API Documentation
@@ -1363,14 +1370,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackKeyPair AWS API Documentation
@@ -1396,14 +1404,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackKeyPairSummary AWS API Documentation
@@ -1456,14 +1465,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackRestrictionPolicy AWS API Documentation
@@ -1518,14 +1528,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackRestrictionPolicySummary AWS API Documentation
@@ -1582,14 +1593,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] thumbnail_configuration
@@ -1647,14 +1659,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/RecordingConfigurationSummary AWS API Documentation
@@ -1922,14 +1935,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamKey AWS API Documentation
@@ -1955,14 +1969,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamKeySummary AWS API Documentation
@@ -2131,14 +2146,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tags
     #   Array of tags to be added or updated. Array of maps, each of the
-    #   form `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   form `string:string (key:value)`. See [Best practices and
+    #   strategies][1] in *Tagging Amazon Web Services Resources and Tag
+    #   Editor* for details, including restrictions that apply to tags and
+    #   "Tag naming limits and requirements"; Amazon IVS has no
+    #   service-specific constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/TagResourceRequest AWS API Documentation
@@ -2233,14 +2249,15 @@ module Aws::IVS
     #
     # @!attribute [rw] tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   `string:string (key:value)`. See [Tagging Amazon Web Services
-    #   Resources][1] for more information, including restrictions that
-    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
-    #   has no service-specific constraints beyond what is documented there.
+    #   `string:string (key:value)`. See [Best practices and strategies][1]
+    #   in *Tagging Amazon Web Services Resources and Tag Editor* for
+    #   details, including restrictions that apply to tags and "Tag naming
+    #   limits and requirements"; Amazon IVS has no service-specific
+    #   constraints beyond what is documented there.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UntagResourceRequest AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.246.0 (2024-09-16)
+------------------
+
+* Feature - Launching Global Cluster tagging.
+
 1.245.0 (2024-09-12)
 ------------------
 

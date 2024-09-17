@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2024-09-16)
+------------------
+
+* Feature - This release adds additional enhancements to AWS IoT Device Management Software Package Catalog and Jobs. It also adds SBOM support in Software Package Version.
+
 1.131.0 (2024-09-11)
 ------------------
 

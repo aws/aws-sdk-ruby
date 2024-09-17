@@ -364,14 +364,20 @@ module Aws
                                          input_data_config: {
                                            s3_input_data_config: {
                                              s3_input_format: ("JSONL")?,
-                                             s3_uri: ::String
+                                             s3_uri: ::String,
+                                             s3_bucket_owner: ::String?
                                            }?
                                          },
                                          output_data_config: {
                                            s3_output_data_config: {
                                              s3_uri: ::String,
-                                             s3_encryption_key_id: ::String?
+                                             s3_encryption_key_id: ::String?,
+                                             s3_bucket_owner: ::String?
                                            }?
+                                         },
+                                         ?vpc_config: {
+                                           subnet_ids: Array[::String],
+                                           security_group_ids: Array[::String]
                                          },
                                          ?timeout_duration_in_hours: ::Integer,
                                          ?tags: Array[
@@ -652,6 +658,7 @@ module Aws
         def end_time: () -> ::Time
         def input_data_config: () -> Types::ModelInvocationJobInputDataConfig
         def output_data_config: () -> Types::ModelInvocationJobOutputDataConfig
+        def vpc_config: () -> Types::VpcConfig
         def timeout_duration_in_hours: () -> ::Integer
         def job_expiration_time: () -> ::Time
       end
