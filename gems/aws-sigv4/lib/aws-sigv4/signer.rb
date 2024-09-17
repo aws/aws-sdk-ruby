@@ -779,6 +779,13 @@ module Aws
       end
 
       class << self
+
+        # Kept for backwards compatability
+        # Always return false since we are not using crt signing functionality
+        def use_crt?
+          false
+        end
+
         # @api private
         def uri_escape_path(path)
           path.gsub(/[^\/]+/) { |part| uri_escape(part) }
