@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
-require 'aws-sdk-cloudfront/customizations'
 
 module Aws
   module CloudFront

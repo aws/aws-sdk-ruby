@@ -175,8 +175,18 @@ module AwsSdkCodeGenerator
       str.gsub(/(.{1,#{width}})(\s+|\Z)/, "#{indent}\\1\n").chomp
     end
 
+    def gem_lib_path(gem_name)
+      File.expand_path(
+        File.join(
+          __dir__,
+          "../../../../gems/#{gem_name}/lib/"
+        )
+      )
+    end
+
     module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string, :apig_prefix,
-      :eventstream_output?, :eventstream_input?, :operation_eventstreaming?, :pascal_case
+      :eventstream_output?, :eventstream_input?, :operation_eventstreaming?, :pascal_case,
+      :gem_lib_path
 
   end
 end

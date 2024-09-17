@@ -34,10 +34,6 @@ module Aws
   autoload :SSOTokenProvider, 'aws-sdk-core/sso_token_provider'
   autoload :TokenProviderChain, 'aws-sdk-core/token_provider_chain'
 
-  module Plugins
-    autoload :BearerAuthorization, 'aws-sdk-core/plugins/bearer_authorization'
-  end
-
   # client modules
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :AsyncClientStubs, 'aws-sdk-core/async_client_stubs'
@@ -52,37 +48,6 @@ module Aws
   autoload :EmptyStructure, 'aws-sdk-core/structure'
   autoload :TypeBuilder, 'aws-sdk-core/type_builder'
   autoload :Util, 'aws-sdk-core/util'
-
-  # resource classes
-  module Resources
-    autoload :Collection, 'aws-sdk-core/resources/collection'
-  end
-
-  # logging
-  module Log
-    autoload :Formatter, 'aws-sdk-core/log/formatter'
-    autoload :ParamFilter, 'aws-sdk-core/log/param_filter'
-    autoload :ParamFormatter, 'aws-sdk-core/log/param_formatter'
-  end
-
-  # stubbing
-  module Stubbing
-    autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
-    autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'
-    autoload :StubData, 'aws-sdk-core/stubbing/stub_data'
-    autoload :XmlError, 'aws-sdk-core/stubbing/xml_error'
-
-    module Protocols
-      autoload :Json, 'aws-sdk-core/stubbing/protocols/json'
-      autoload :Rest, 'aws-sdk-core/stubbing/protocols/rest'
-      autoload :RestJson, 'aws-sdk-core/stubbing/protocols/rest_json'
-      autoload :RestXml, 'aws-sdk-core/stubbing/protocols/rest_xml'
-      autoload :Query, 'aws-sdk-core/stubbing/protocols/query'
-      autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
-      autoload :RpcV2, 'aws-sdk-core/stubbing/protocols/rpc_v2'
-      autoload :ApiGateway, 'aws-sdk-core/stubbing/protocols/api_gateway'
-    end
-  end
 
   # protocols
   autoload :ErrorHandler, 'aws-sdk-core/error_handler'
@@ -99,13 +64,7 @@ module Aws
   # endpoint discovery
   autoload :EndpointCache, 'aws-sdk-core/endpoint_cache'
 
-  # client metrics
-  module ClientSideMonitoring
-    autoload :RequestMetrics, 'aws-sdk-core/client_side_monitoring/request_metrics'
-    autoload :Publisher, 'aws-sdk-core/client_side_monitoring/publisher'
-  end
   autoload :Telemetry, 'aws-sdk-core/telemetry'
-
 
   # utilities
   autoload :ARN, 'aws-sdk-core/arn'
@@ -115,10 +74,6 @@ module Aws
 
   # dynamic endpoints
   autoload :Endpoints, 'aws-sdk-core/endpoints'
-
-  module Plugins
-    autoload :SignatureV4, 'aws-sdk-core/plugins/signature_v4'
-  end
 
   CORE_GEM_VERSION = File.read(File.expand_path('../VERSION', __dir__)).strip
 
@@ -204,6 +159,14 @@ module Aws
 
   end
 end
+
+# Setup additional autoloads/modules
+require_relative 'aws-sdk-core/waiters'
+require_relative 'aws-sdk-core/stubbing'
+require_relative 'aws-sdk-core/log'
+require_relative 'aws-sdk-core/resources'
+require_relative 'aws-sdk-core/client_side_monitoring'
+require_relative 'aws-sdk-core/plugins'
 
 # aws-sdk-sts is included to support Aws::AssumeRoleCredentials
 require_relative 'aws-sdk-sts'
