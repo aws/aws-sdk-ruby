@@ -112,6 +112,10 @@ module Aws
         def type: () -> ::String
         def message: () -> ::String
       end
+      class PublicPolicyException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
       class RecursiveInvocationException < ::Aws::Errors::ServiceError
         def type: () -> ::String
         def message: () -> ::String

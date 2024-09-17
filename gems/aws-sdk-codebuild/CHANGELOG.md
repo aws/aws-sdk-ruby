@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2024-09-17)
+------------------
+
+* Feature - GitLab Enhancements - Add support for Self-Hosted GitLab runners in CodeBuild. Add group webhooks
+
 1.128.0 (2024-09-11)
 ------------------
 

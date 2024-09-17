@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2024-09-17)
+------------------
+
+* Feature - Support for JSON resource-based policies and block public access
+
 1.130.0 (2024-09-11)
 ------------------
 

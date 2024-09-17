@@ -1623,6 +1623,7 @@ module Aws::ECR
     #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
     #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].source_layer_hash #=> String
     #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].version #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].fixed_in_version #=> String
     #   resp.image_scan_findings.enhanced_findings[0].remediation.recommendation.url #=> String
     #   resp.image_scan_findings.enhanced_findings[0].remediation.recommendation.text #=> String
     #   resp.image_scan_findings.enhanced_findings[0].resources #=> Array
@@ -1652,6 +1653,8 @@ module Aws::ECR
     #   resp.image_scan_findings.enhanced_findings[0].title #=> String
     #   resp.image_scan_findings.enhanced_findings[0].type #=> String
     #   resp.image_scan_findings.enhanced_findings[0].updated_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].fix_available #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].exploit_available #=> String
     #   resp.next_token #=> String
     #
     #
@@ -3666,7 +3669,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

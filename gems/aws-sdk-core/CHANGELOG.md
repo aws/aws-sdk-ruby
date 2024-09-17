@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.206.0 (2024-09-17)
+------------------
+
 * Feature - Support `sigv4a` endpoint auth without CRT.
 
 3.205.0 (2024-09-11)

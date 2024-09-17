@@ -401,7 +401,7 @@ module Aws
                             ?scope_configuration: {
                               name: ::String,
                               domain: ::String?,
-                              scope: ("GITHUB_ORGANIZATION" | "GITHUB_GLOBAL")
+                              scope: ("GITHUB_ORGANIZATION" | "GITHUB_GLOBAL" | "GITLAB_GROUP")
                             }
                           ) -> _CreateWebhookResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebhookResponseSuccess
