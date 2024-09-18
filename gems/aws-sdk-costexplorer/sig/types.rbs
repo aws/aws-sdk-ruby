@@ -317,6 +317,12 @@ module Aws::CostExplorer
       SENSITIVE: []
     end
 
+    class DynamoDBCapacityDetails
+      attr_accessor capacity_units: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
     class EBSResourceUtilization
       attr_accessor ebs_read_ops_per_second: ::String
       attr_accessor ebs_write_ops_per_second: ::String
@@ -1025,6 +1031,11 @@ module Aws::CostExplorer
       attr_accessor estimated_reservation_cost_for_lookback_period: ::String
       attr_accessor upfront_cost: ::String
       attr_accessor recurring_standard_monthly_cost: ::String
+      attr_accessor reserved_capacity_details: Types::ReservedCapacityDetails
+      attr_accessor recommended_number_of_capacity_units_to_purchase: ::String
+      attr_accessor minimum_number_of_capacity_units_used_per_hour: ::String
+      attr_accessor maximum_number_of_capacity_units_used_per_hour: ::String
+      attr_accessor average_number_of_capacity_units_used_per_hour: ::String
       SENSITIVE: []
     end
 
@@ -1047,6 +1058,11 @@ module Aws::CostExplorer
       attr_accessor value: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor utilization: Types::ReservationAggregates
+      SENSITIVE: []
+    end
+
+    class ReservedCapacityDetails
+      attr_accessor dynamo_db_capacity_details: Types::DynamoDBCapacityDetails
       SENSITIVE: []
     end
 

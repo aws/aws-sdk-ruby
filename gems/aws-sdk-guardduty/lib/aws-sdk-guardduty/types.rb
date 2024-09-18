@@ -2907,6 +2907,11 @@ module Aws::GuardDuty
     #   The name of the task group that's associated with the task.
     #   @return [String]
     #
+    # @!attribute [rw] launch_type
+    #   A capacity on which the task is running. For example, `Fargate` and
+    #   `EC2`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EcsTaskDetails AWS API Documentation
     #
     class EcsTaskDetails < Struct.new(
@@ -2919,7 +2924,8 @@ module Aws::GuardDuty
       :tags,
       :volumes,
       :containers,
-      :group)
+      :group,
+      :launch_type)
       SENSITIVE = []
       include Aws::Structure
     end

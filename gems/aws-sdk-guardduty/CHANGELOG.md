@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-09-18)
+------------------
+
+* Feature - Add `launchType` and `sourceIPs` fields to GuardDuty findings.
+
 1.99.0 (2024-09-11)
 ------------------
 

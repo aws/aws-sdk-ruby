@@ -26719,10 +26719,23 @@ module Aws::RDS
     # If you are restoring from a shared manual DB snapshot, the
     # `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
     #
+    # To restore from a DB snapshot with an unsupported engine version, you
+    # must first upgrade the engine version of the snapshot. For more
+    # information about upgrading a RDS for MySQL DB snapshot engine
+    # version, see [Upgrading a MySQL DB snapshot engine version][1]. For
+    # more information about upgrading a RDS for PostgreSQL DB snapshot
+    # engine version, [Upgrading a PostgreSQL DB snapshot engine
+    # version][2].
+    #
     # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
     # Aurora, use `RestoreDBClusterFromSnapshot`.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
+    # [2]: https://docs.aws.amazon.com/USER_UpgradeDBSnapshot.PostgreSQL.html
     #
     # @option params [required, String] :db_instance_identifier
     #   The name of the DB instance to create from the DB snapshot. This
@@ -31420,7 +31433,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.247.0'
+      context[:gem_version] = '1.248.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

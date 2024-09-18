@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-09-18)
+------------------
+
+* Feature - This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon DynamoDB reservations.
+
 1.108.0 (2024-09-11)
 ------------------
 

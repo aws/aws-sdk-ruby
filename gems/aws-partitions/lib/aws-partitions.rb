@@ -358,6 +358,7 @@ module Aws
             'DeviceFarm' => 'devicefarm',
             'DirectConnect' => 'directconnect',
             'DirectoryService' => 'ds',
+            'DirectoryServiceData' => 'ds-data',
             'DocDB' => 'rds',
             'DocDBElastic' => 'docdb-elastic',
             'Drs' => 'drs',

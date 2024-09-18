@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2024-09-18)
+------------------
+
+* Feature - Added SSE-KMS support for directory buckets.
+
 1.162.0 (2024-09-11)
 ------------------
 

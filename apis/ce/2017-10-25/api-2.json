@@ -1274,6 +1274,13 @@
         "DiskWriteBytesPerSecond":{"shape":"GenericString"}
       }
     },
+    "DynamoDBCapacityDetails":{
+      "type":"structure",
+      "members":{
+        "CapacityUnits":{"shape":"GenericString"},
+        "Region":{"shape":"GenericString"}
+      }
+    },
     "EBSResourceUtilization":{
       "type":"structure",
       "members":{
@@ -2439,7 +2446,12 @@
         "EstimatedMonthlyOnDemandCost":{"shape":"GenericString"},
         "EstimatedReservationCostForLookbackPeriod":{"shape":"GenericString"},
         "UpfrontCost":{"shape":"GenericString"},
-        "RecurringStandardMonthlyCost":{"shape":"GenericString"}
+        "RecurringStandardMonthlyCost":{"shape":"GenericString"},
+        "ReservedCapacityDetails":{"shape":"ReservedCapacityDetails"},
+        "RecommendedNumberOfCapacityUnitsToPurchase":{"shape":"GenericString"},
+        "MinimumNumberOfCapacityUnitsUsedPerHour":{"shape":"GenericString"},
+        "MaximumNumberOfCapacityUnitsUsedPerHour":{"shape":"GenericString"},
+        "AverageNumberOfCapacityUnitsUsedPerHour":{"shape":"GenericString"}
       }
     },
     "ReservationPurchaseRecommendationDetails":{
@@ -2478,6 +2490,12 @@
     "ReservationUtilizationGroups":{
       "type":"list",
       "member":{"shape":"ReservationUtilizationGroup"}
+    },
+    "ReservedCapacityDetails":{
+      "type":"structure",
+      "members":{
+        "DynamoDBCapacityDetails":{"shape":"DynamoDBCapacityDetails"}
+      }
     },
     "ReservedHours":{"type":"string"},
     "ReservedNormalizedUnits":{"type":"string"},

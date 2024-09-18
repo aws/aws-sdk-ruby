@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.248.0 (2024-09-18)
+------------------
+
+* Feature - Updates Amazon RDS documentation with information upgrading snapshots with unsupported engine versions for RDS for MySQL and RDS for PostgreSQL.
+
 1.247.0 (2024-09-17)
 ------------------
 

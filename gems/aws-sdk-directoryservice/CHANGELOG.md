@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-09-18)
+------------------
+
+* Feature - Added new APIs for enabling, disabling, and describing access to the AWS Directory Service Data API
+
 1.73.0 (2024-09-11)
 ------------------
 

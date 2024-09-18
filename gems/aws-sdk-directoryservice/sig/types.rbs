@@ -386,6 +386,16 @@ module Aws::DirectoryService
       SENSITIVE: []
     end
 
+    class DescribeDirectoryDataAccessRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectoryDataAccessResult
+      attr_accessor data_access_status: ("Disabled" | "Disabling" | "Enabled" | "Enabling" | "Failed")
+      SENSITIVE: []
+    end
+
     class DescribeDomainControllersRequest
       attr_accessor directory_id: ::String
       attr_accessor domain_controller_ids: ::Array[::String]
@@ -548,7 +558,7 @@ module Aws::DirectoryService
       attr_accessor access_url: ::String
       attr_accessor description: ::String
       attr_accessor dns_ip_addrs: ::Array[::String]
-      attr_accessor stage: ("Requested" | "Creating" | "Created" | "Active" | "Inoperable" | "Impaired" | "Restoring" | "RestoreFailed" | "Deleting" | "Deleted" | "Failed")
+      attr_accessor stage: ("Requested" | "Creating" | "Created" | "Active" | "Inoperable" | "Impaired" | "Restoring" | "RestoreFailed" | "Deleting" | "Deleted" | "Failed" | "Updating")
       attr_accessor share_status: ("Shared" | "PendingAcceptance" | "Rejected" | "Rejecting" | "RejectFailed" | "Sharing" | "ShareFailed" | "Deleted" | "Deleting")
       attr_accessor share_method: ("ORGANIZATIONS" | "HANDSHAKE")
       attr_accessor share_notes: ::String
@@ -634,6 +644,14 @@ module Aws::DirectoryService
     class DisableClientAuthenticationResult < Aws::EmptyStructure
     end
 
+    class DisableDirectoryDataAccessRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableDirectoryDataAccessResult < Aws::EmptyStructure
+    end
+
     class DisableLDAPSRequest
       attr_accessor directory_id: ::String
       attr_accessor type: ("Client")
@@ -668,7 +686,7 @@ module Aws::DirectoryService
       attr_accessor vpc_id: ::String
       attr_accessor subnet_id: ::String
       attr_accessor availability_zone: ::String
-      attr_accessor status: ("Creating" | "Active" | "Impaired" | "Restoring" | "Deleting" | "Deleted" | "Failed")
+      attr_accessor status: ("Creating" | "Active" | "Impaired" | "Restoring" | "Deleting" | "Deleted" | "Failed" | "Updating")
       attr_accessor status_reason: ::String
       attr_accessor launch_time: ::Time
       attr_accessor status_last_updated_date_time: ::Time
@@ -688,6 +706,14 @@ module Aws::DirectoryService
     end
 
     class EnableClientAuthenticationResult < Aws::EmptyStructure
+    end
+
+    class EnableDirectoryDataAccessRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableDirectoryDataAccessResult < Aws::EmptyStructure
     end
 
     class EnableLDAPSRequest
@@ -955,7 +981,7 @@ module Aws::DirectoryService
       attr_accessor directory_id: ::String
       attr_accessor region_name: ::String
       attr_accessor region_type: ("Primary" | "Additional")
-      attr_accessor status: ("Requested" | "Creating" | "Created" | "Active" | "Inoperable" | "Impaired" | "Restoring" | "RestoreFailed" | "Deleting" | "Deleted" | "Failed")
+      attr_accessor status: ("Requested" | "Creating" | "Created" | "Active" | "Inoperable" | "Impaired" | "Restoring" | "RestoreFailed" | "Deleting" | "Deleted" | "Failed" | "Updating")
       attr_accessor vpc_settings: Types::DirectoryVpcSettings
       attr_accessor desired_number_of_domain_controllers: ::Integer
       attr_accessor launch_time: ::Time

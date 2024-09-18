@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.207.0 (2024-09-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-directoryservicedata` gem.
+
 3.206.0 (2024-09-12)
 ------------------
 

@@ -287,6 +287,17 @@ module Aws::DirectoryService
       end
     end
 
+    class DescribeDirectoryDataAccess
+      def self.build(context)
+        Aws::DirectoryService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DescribeDomainControllers
       def self.build(context)
         Aws::DirectoryService::EndpointParameters.new(
@@ -397,6 +408,17 @@ module Aws::DirectoryService
       end
     end
 
+    class DisableDirectoryDataAccess
+      def self.build(context)
+        Aws::DirectoryService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class DisableLDAPS
       def self.build(context)
         Aws::DirectoryService::EndpointParameters.new(
@@ -431,6 +453,17 @@ module Aws::DirectoryService
     end
 
     class EnableClientAuthentication
+      def self.build(context)
+        Aws::DirectoryService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class EnableDirectoryDataAccess
       def self.build(context)
         Aws::DirectoryService::EndpointParameters.new(
           region: context.config.region,

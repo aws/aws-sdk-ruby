@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.977.0 (2024-09-18)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::DirectoryServiceData`.
+
 1.976.0 (2024-09-16)
 ------------------
 

@@ -2417,6 +2417,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.ecs_cluster_details.task_details.containers[0].security_context.privileged #=> Boolean
     #   resp.findings[0].resource.ecs_cluster_details.task_details.containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.findings[0].resource.ecs_cluster_details.task_details.group #=> String
+    #   resp.findings[0].resource.ecs_cluster_details.task_details.launch_type #=> String
     #   resp.findings[0].resource.container_details.container_runtime #=> String
     #   resp.findings[0].resource.container_details.id #=> String
     #   resp.findings[0].resource.container_details.name #=> String
@@ -5054,7 +5055,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

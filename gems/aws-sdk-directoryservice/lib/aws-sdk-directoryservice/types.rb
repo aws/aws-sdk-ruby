@@ -36,7 +36,7 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Client authentication is not available in this region at this time.
+    # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
     #   The descriptive message for the exception.
@@ -73,50 +73,56 @@ module Aws::DirectoryService
     #
     #   Inbound:
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source:
-    #     0.0.0.0/0
+    #   * Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
     #   * Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
-    #     0.0.0.0/0
+    #     Managed Microsoft AD VPC IPv4 CIDR
     #
     #   * Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
-    #     0.0.0.0/0
+    #     Managed Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0
+    #   * Type: DNS (UDP), Protocol: UDP, Range: 53, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0
+    #   * Type: DNS (TCP), Protocol: TCP, Range: 53, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
-    #   * Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0
+    #   * Type: LDAP, Protocol: TCP, Range: 389, Source: Managed Microsoft
+    #     AD VPC IPv4 CIDR
     #
-    #   * Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0
+    #   * Type: All ICMP, Protocol: All, Range: N/A, Source: Managed
+    #     Microsoft AD VPC IPv4 CIDR
     #
     #
     #
@@ -978,8 +984,9 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] trust_password
-    #   The trust password. The must be the same password that was used when
-    #   creating the trust relationship on the external domain.
+    #   The trust password. The trust password must be the same password
+    #   that was used when creating the trust relationship on the external
+    #   domain.
     #   @return [String]
     #
     # @!attribute [rw] trust_direction
@@ -1387,6 +1394,31 @@ module Aws::DirectoryService
     class DescribeDirectoriesResult < Struct.new(
       :directory_descriptions,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] directory_id
+    #   The directory identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectoryDataAccessRequest AWS API Documentation
+    #
+    class DescribeDirectoryDataAccessRequest < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_access_status
+    #   The current status of data access through the Directory Service Data
+    #   API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectoryDataAccessResult AWS API Documentation
+    #
+    class DescribeDirectoryDataAccessResult < Struct.new(
+      :data_access_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2044,7 +2076,7 @@ module Aws::DirectoryService
     #   @return [Time]
     #
     # @!attribute [rw] type
-    #   The directory size.
+    #   The directory type.
     #   @return [String]
     #
     # @!attribute [rw] vpc_settings
@@ -2264,7 +2296,7 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # The specified directory is unavailable or could not be found.
+    # The specified directory is unavailable.
     #
     # @!attribute [rw] message
     #   The descriptive message for the exception.
@@ -2340,8 +2372,8 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of client authentication to disable. Currently, only the
-    #   parameter, `SmartCard` is supported.
+    #   The type of client authentication to disable. Currently the only
+    #   parameter `"SmartCard"` is supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthenticationRequest AWS API Documentation
@@ -2356,6 +2388,22 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthenticationResult AWS API Documentation
     #
     class DisableClientAuthenticationResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] directory_id
+    #   The directory identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableDirectoryDataAccessRequest AWS API Documentation
+    #
+    class DisableDirectoryDataAccessRequest < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableDirectoryDataAccessResult AWS API Documentation
+    #
+    class DisableDirectoryDataAccessResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
@@ -2544,6 +2592,22 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthenticationResult AWS API Documentation
     #
     class EnableClientAuthenticationResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] directory_id
+    #   The directory identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableDirectoryDataAccessRequest AWS API Documentation
+    #
+    class EnableDirectoryDataAccessRequest < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableDirectoryDataAccessResult AWS API Documentation
+    #
+    class EnableDirectoryDataAccessResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
@@ -3402,7 +3466,7 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] radius_retries
     #   The maximum number of times that communication with the RADIUS
-    #   server is attempted.
+    #   server is retried after the initial attempt.
     #   @return [Integer]
     #
     # @!attribute [rw] shared_secret
@@ -4196,15 +4260,15 @@ module Aws::DirectoryService
     #   Required name of the tag. The string value can be Unicode characters
     #   and cannot be prefixed with "aws:". The string can contain only
     #   the set of Unicode letters, digits, white-space, '\_', '.',
-    #   '/', '=', '+', '-' (Java regex:
+    #   '/', '=', '+', '-', ':', '@'(Java regex:
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The optional value of the tag. The string value can be Unicode
     #   characters. The string can contain only the set of Unicode letters,
-    #   digits, white-space, '\_', '.', '/', '=', '+', '-' (Java
-    #   regex:
+    #   digits, white-space, '\_', '.', '/', '=', '+', '-',
+    #   ':', '@' (Java regex:
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #

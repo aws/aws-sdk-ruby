@@ -2972,16 +2972,23 @@ module Aws::MailManager
     #   The email attribute to evaluate in a string condition expression.
     #   @return [String]
     #
+    # @!attribute [rw] mime_header_attribute
+    #   The email MIME X-Header attribute to evaluate in a string condition
+    #   expression.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mailmanager-2023-10-17/RuleStringToEvaluate AWS API Documentation
     #
     class RuleStringToEvaluate < Struct.new(
       :attribute,
+      :mime_header_attribute,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Attribute < RuleStringToEvaluate; end
+      class MimeHeaderAttribute < RuleStringToEvaluate; end
       class Unknown < RuleStringToEvaluate; end
     end
 

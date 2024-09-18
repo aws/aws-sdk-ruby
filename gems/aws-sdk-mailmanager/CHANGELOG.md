@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2024-09-18)
+------------------
+
+* Feature - Introduce a new RuleSet condition evaluation, where customers can set up a StringExpression with a MimeHeader condition. This condition will perform the necessary validation based on the X-header provided by customers.
+
 1.8.0 (2024-09-11)
 ------------------
 

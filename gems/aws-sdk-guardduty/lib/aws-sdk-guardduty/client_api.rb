@@ -1122,6 +1122,7 @@ module Aws::GuardDuty
     EcsTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     EcsTaskDetails.add_member(:containers, Shapes::ShapeRef.new(shape: Containers, location_name: "containers"))
     EcsTaskDetails.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
+    EcsTaskDetails.add_member(:launch_type, Shapes::ShapeRef.new(shape: String, location_name: "launchType"))
     EcsTaskDetails.struct_class = Types::EcsTaskDetails
 
     EksClusterDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -1451,7 +1452,7 @@ module Aws::GuardDuty
 
     KubernetesApiCallAction.add_member(:request_uri, Shapes::ShapeRef.new(shape: String, location_name: "requestUri"))
     KubernetesApiCallAction.add_member(:verb, Shapes::ShapeRef.new(shape: String, location_name: "verb"))
-    KubernetesApiCallAction.add_member(:source_ips, Shapes::ShapeRef.new(shape: SourceIps, location_name: "sourceIps"))
+    KubernetesApiCallAction.add_member(:source_ips, Shapes::ShapeRef.new(shape: SourceIps, location_name: "sourceIPs"))
     KubernetesApiCallAction.add_member(:user_agent, Shapes::ShapeRef.new(shape: String, location_name: "userAgent"))
     KubernetesApiCallAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     KubernetesApiCallAction.add_member(:status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "statusCode"))
