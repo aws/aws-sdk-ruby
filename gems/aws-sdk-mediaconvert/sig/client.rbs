@@ -472,6 +472,10 @@ module Aws
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
                                       dash_signaled_system_ids: Array[::String]?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       hls_signaled_system_ids: Array[::String]?,
                                       resource_id: ::String?,
                                       url: ::String?
@@ -540,6 +544,10 @@ module Aws
                                     playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       resource_id: ::String?,
                                       system_ids: Array[::String]?,
                                       url: ::String?
@@ -627,6 +635,10 @@ module Aws
                                     offline_encrypted: ("ENABLED" | "DISABLED")?,
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       resource_id: ::String?,
                                       system_ids: Array[::String]?,
                                       url: ::String?
@@ -691,6 +703,10 @@ module Aws
                                   encryption: {
                                     speke_key_provider: {
                                       certificate_arn: ::String?,
+                                      encryption_contract_configuration: {
+                                        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                      }?,
                                       resource_id: ::String?,
                                       system_ids: Array[::String]?,
                                       url: ::String?
@@ -1902,6 +1918,10 @@ module Aws
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
                                                dash_signaled_system_ids: Array[::String]?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                hls_signaled_system_ids: Array[::String]?,
                                                resource_id: ::String?,
                                                url: ::String?
@@ -1970,6 +1990,10 @@ module Aws
                                              playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -2057,6 +2081,10 @@ module Aws
                                              offline_encrypted: ("ENABLED" | "DISABLED")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -2121,6 +2149,10 @@ module Aws
                                            encryption: {
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -4395,6 +4427,10 @@ module Aws
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
                                                dash_signaled_system_ids: Array[::String]?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                hls_signaled_system_ids: Array[::String]?,
                                                resource_id: ::String?,
                                                url: ::String?
@@ -4463,6 +4499,10 @@ module Aws
                                              playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -4550,6 +4590,10 @@ module Aws
                                              offline_encrypted: ("ENABLED" | "DISABLED")?,
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?
@@ -4614,6 +4658,10 @@ module Aws
                                            encryption: {
                                              speke_key_provider: {
                                                certificate_arn: ::String?,
+                                               encryption_contract_configuration: {
+                                                 speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+                                                 speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+                                               }?,
                                                resource_id: ::String?,
                                                system_ids: Array[::String]?,
                                                url: ::String?

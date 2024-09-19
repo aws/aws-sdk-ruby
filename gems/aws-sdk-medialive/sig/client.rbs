@@ -944,7 +944,25 @@ module Aws
                                         multiplex_output_settings: {
                                           destination: {
                                             destination_ref_id: ::String?
-                                          }
+                                          },
+                                          container_settings: {
+                                            multiplex_m2ts_settings: {
+                                              absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")?,
+                                              arib: ("DISABLED" | "ENABLED")?,
+                                              audio_buffer_model: ("ATSC" | "DVB")?,
+                                              audio_frames_per_pes: ::Integer?,
+                                              audio_stream_type: ("ATSC" | "DVB")?,
+                                              cc_descriptor: ("DISABLED" | "ENABLED")?,
+                                              ebif: ("NONE" | "PASSTHROUGH")?,
+                                              es_rate_in_pes: ("EXCLUDE" | "INCLUDE")?,
+                                              klv: ("NONE" | "PASSTHROUGH")?,
+                                              nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")?,
+                                              pcr_period: ::Integer?,
+                                              scte_35_control: ("NONE" | "PASSTHROUGH")?,
+                                              scte_35_preroll_pullup_milliseconds: ::Float?
+                                            }?
+                                          }?
                                         }?,
                                         rtmp_output_settings: {
                                           certificate_mode: ("SELF_SIGNED" | "VERIFY_AUTHENTICITY")?,
@@ -1144,6 +1162,10 @@ module Aws
                                         temporal_filter_settings: {
                                           post_filter_sharpening: ("AUTO" | "DISABLED" | "ENABLED")?,
                                           strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4" | "STRENGTH_5" | "STRENGTH_6" | "STRENGTH_7" | "STRENGTH_8" | "STRENGTH_9" | "STRENGTH_10" | "STRENGTH_11" | "STRENGTH_12" | "STRENGTH_13" | "STRENGTH_14" | "STRENGTH_15" | "STRENGTH_16")?
+                                        }?,
+                                        bandwidth_reduction_filter_settings: {
+                                          post_filter_sharpening: ("DISABLED" | "SHARPENING_1" | "SHARPENING_2" | "SHARPENING_3")?,
+                                          strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4")?
                                         }?
                                       }?,
                                       fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,
@@ -1210,6 +1232,10 @@ module Aws
                                         temporal_filter_settings: {
                                           post_filter_sharpening: ("AUTO" | "DISABLED" | "ENABLED")?,
                                           strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4" | "STRENGTH_5" | "STRENGTH_6" | "STRENGTH_7" | "STRENGTH_8" | "STRENGTH_9" | "STRENGTH_10" | "STRENGTH_11" | "STRENGTH_12" | "STRENGTH_13" | "STRENGTH_14" | "STRENGTH_15" | "STRENGTH_16")?
+                                        }?,
+                                        bandwidth_reduction_filter_settings: {
+                                          post_filter_sharpening: ("DISABLED" | "SHARPENING_1" | "SHARPENING_2" | "SHARPENING_3")?,
+                                          strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4")?
                                         }?
                                       }?,
                                       fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,
@@ -2961,7 +2987,25 @@ module Aws
                                         multiplex_output_settings: {
                                           destination: {
                                             destination_ref_id: ::String?
-                                          }
+                                          },
+                                          container_settings: {
+                                            multiplex_m2ts_settings: {
+                                              absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")?,
+                                              arib: ("DISABLED" | "ENABLED")?,
+                                              audio_buffer_model: ("ATSC" | "DVB")?,
+                                              audio_frames_per_pes: ::Integer?,
+                                              audio_stream_type: ("ATSC" | "DVB")?,
+                                              cc_descriptor: ("DISABLED" | "ENABLED")?,
+                                              ebif: ("NONE" | "PASSTHROUGH")?,
+                                              es_rate_in_pes: ("EXCLUDE" | "INCLUDE")?,
+                                              klv: ("NONE" | "PASSTHROUGH")?,
+                                              nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                              pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")?,
+                                              pcr_period: ::Integer?,
+                                              scte_35_control: ("NONE" | "PASSTHROUGH")?,
+                                              scte_35_preroll_pullup_milliseconds: ::Float?
+                                            }?
+                                          }?
                                         }?,
                                         rtmp_output_settings: {
                                           certificate_mode: ("SELF_SIGNED" | "VERIFY_AUTHENTICITY")?,
@@ -3161,6 +3205,10 @@ module Aws
                                         temporal_filter_settings: {
                                           post_filter_sharpening: ("AUTO" | "DISABLED" | "ENABLED")?,
                                           strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4" | "STRENGTH_5" | "STRENGTH_6" | "STRENGTH_7" | "STRENGTH_8" | "STRENGTH_9" | "STRENGTH_10" | "STRENGTH_11" | "STRENGTH_12" | "STRENGTH_13" | "STRENGTH_14" | "STRENGTH_15" | "STRENGTH_16")?
+                                        }?,
+                                        bandwidth_reduction_filter_settings: {
+                                          post_filter_sharpening: ("DISABLED" | "SHARPENING_1" | "SHARPENING_2" | "SHARPENING_3")?,
+                                          strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4")?
                                         }?
                                       }?,
                                       fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,
@@ -3227,6 +3275,10 @@ module Aws
                                         temporal_filter_settings: {
                                           post_filter_sharpening: ("AUTO" | "DISABLED" | "ENABLED")?,
                                           strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4" | "STRENGTH_5" | "STRENGTH_6" | "STRENGTH_7" | "STRENGTH_8" | "STRENGTH_9" | "STRENGTH_10" | "STRENGTH_11" | "STRENGTH_12" | "STRENGTH_13" | "STRENGTH_14" | "STRENGTH_15" | "STRENGTH_16")?
+                                        }?,
+                                        bandwidth_reduction_filter_settings: {
+                                          post_filter_sharpening: ("DISABLED" | "SHARPENING_1" | "SHARPENING_2" | "SHARPENING_3")?,
+                                          strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4")?
                                         }?
                                       }?,
                                       fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")?,

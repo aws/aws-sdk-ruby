@@ -258,6 +258,7 @@ module Aws::MediaConvert
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
     EmbeddedTerminateCaptions = Shapes::StringShape.new(name: 'EmbeddedTerminateCaptions')
     EmbeddedTimecodeOverride = Shapes::StringShape.new(name: 'EmbeddedTimecodeOverride')
+    EncryptionContractConfiguration = Shapes::StructureShape.new(name: 'EncryptionContractConfiguration')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EsamManifestConfirmConditionNotification = Shapes::StructureShape.new(name: 'EsamManifestConfirmConditionNotification')
     EsamSettings = Shapes::StructureShape.new(name: 'EsamSettings')
@@ -539,6 +540,8 @@ module Aws::MediaConvert
     Preset = Shapes::StructureShape.new(name: 'Preset')
     PresetListBy = Shapes::StringShape.new(name: 'PresetListBy')
     PresetSettings = Shapes::StructureShape.new(name: 'PresetSettings')
+    PresetSpeke20Audio = Shapes::StringShape.new(name: 'PresetSpeke20Audio')
+    PresetSpeke20Video = Shapes::StringShape.new(name: 'PresetSpeke20Video')
     PricingPlan = Shapes::StringShape.new(name: 'PricingPlan')
     ProresChromaSampling = Shapes::StringShape.new(name: 'ProresChromaSampling')
     ProresCodecProfile = Shapes::StringShape.new(name: 'ProresCodecProfile')
@@ -1507,6 +1510,10 @@ module Aws::MediaConvert
     EmbeddedSourceSettings.add_member(:terminate_captions, Shapes::ShapeRef.new(shape: EmbeddedTerminateCaptions, location_name: "terminateCaptions"))
     EmbeddedSourceSettings.struct_class = Types::EmbeddedSourceSettings
 
+    EncryptionContractConfiguration.add_member(:speke_audio_preset, Shapes::ShapeRef.new(shape: PresetSpeke20Audio, location_name: "spekeAudioPreset"))
+    EncryptionContractConfiguration.add_member(:speke_video_preset, Shapes::ShapeRef.new(shape: PresetSpeke20Video, location_name: "spekeVideoPreset"))
+    EncryptionContractConfiguration.struct_class = Types::EncryptionContractConfiguration
+
     Endpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     Endpoint.struct_class = Types::Endpoint
 
@@ -2451,6 +2458,7 @@ module Aws::MediaConvert
     SearchJobsResponse.struct_class = Types::SearchJobsResponse
 
     SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: __stringPatternArnAwsUsGovAcm, location_name: "certificateArn"))
+    SpekeKeyProvider.add_member(:encryption_contract_configuration, Shapes::ShapeRef.new(shape: EncryptionContractConfiguration, location_name: "encryptionContractConfiguration"))
     SpekeKeyProvider.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     SpekeKeyProvider.add_member(:system_ids, Shapes::ShapeRef.new(shape: __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12, location_name: "systemIds"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: __stringPatternHttpsD, location_name: "url"))
@@ -2458,6 +2466,7 @@ module Aws::MediaConvert
 
     SpekeKeyProviderCmaf.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: __stringPatternArnAwsUsGovAcm, location_name: "certificateArn"))
     SpekeKeyProviderCmaf.add_member(:dash_signaled_system_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12, location_name: "dashSignaledSystemIds"))
+    SpekeKeyProviderCmaf.add_member(:encryption_contract_configuration, Shapes::ShapeRef.new(shape: EncryptionContractConfiguration, location_name: "encryptionContractConfiguration"))
     SpekeKeyProviderCmaf.add_member(:hls_signaled_system_ids, Shapes::ShapeRef.new(shape: __listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12, location_name: "hlsSignaledSystemIds"))
     SpekeKeyProviderCmaf.add_member(:resource_id, Shapes::ShapeRef.new(shape: __stringPatternW, location_name: "resourceId"))
     SpekeKeyProviderCmaf.add_member(:url, Shapes::ShapeRef.new(shape: __stringPatternHttpsD, location_name: "url"))

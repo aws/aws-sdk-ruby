@@ -467,6 +467,8 @@ module Aws::Glue
             Aws::Glue::Endpoints::StopWorkflowRun.build(context)
           when :tag_resource
             Aws::Glue::Endpoints::TagResource.build(context)
+          when :test_connection
+            Aws::Glue::Endpoints::TestConnection.build(context)
           when :untag_resource
             Aws::Glue::Endpoints::UntagResource.build(context)
           when :update_blueprint

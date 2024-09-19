@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.263.0 (2024-09-19)
+------------------
+
+* Feature - Introduced support for G6e instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+
 1.262.0 (2024-09-11)
 ------------------
 

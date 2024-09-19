@@ -320,6 +320,17 @@ module Aws::WorkSpacesWeb
       end
     end
 
+    class ExpireSession
+      def self.build(context)
+        Aws::WorkSpacesWeb::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
     class GetBrowserSettings
       def self.build(context)
         Aws::WorkSpacesWeb::EndpointParameters.new(
@@ -376,6 +387,17 @@ module Aws::WorkSpacesWeb
     end
 
     class GetPortalServiceProviderMetadata
+      def self.build(context)
+        Aws::WorkSpacesWeb::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class GetSession
       def self.build(context)
         Aws::WorkSpacesWeb::EndpointParameters.new(
           region: context.config.region,
@@ -475,6 +497,17 @@ module Aws::WorkSpacesWeb
     end
 
     class ListPortals
+      def self.build(context)
+        Aws::WorkSpacesWeb::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: context.config.regional_endpoint ? nil : context.config.endpoint.to_s,
+        )
+      end
+    end
+
+    class ListSessions
       def self.build(context)
         Aws::WorkSpacesWeb::EndpointParameters.new(
           region: context.config.region,

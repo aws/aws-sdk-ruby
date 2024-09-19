@@ -765,6 +765,12 @@ module Aws::MediaConvert
       SENSITIVE: []
     end
 
+    class EncryptionContractConfiguration
+      attr_accessor speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")
+      attr_accessor speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")
+      SENSITIVE: []
+    end
+
     class Endpoint
       attr_accessor url: ::String
       SENSITIVE: []
@@ -1951,6 +1957,7 @@ module Aws::MediaConvert
 
     class SpekeKeyProvider
       attr_accessor certificate_arn: ::String
+      attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration
       attr_accessor resource_id: ::String
       attr_accessor system_ids: ::Array[::String]
       attr_accessor url: ::String
@@ -1960,6 +1967,7 @@ module Aws::MediaConvert
     class SpekeKeyProviderCmaf
       attr_accessor certificate_arn: ::String
       attr_accessor dash_signaled_system_ids: ::Array[::String]
+      attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration
       attr_accessor hls_signaled_system_ids: ::Array[::String]
       attr_accessor resource_id: ::String
       attr_accessor url: ::String

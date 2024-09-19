@@ -123,6 +123,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::DisassociateUserAccessLoggingSettings.build(context)
           when :disassociate_user_settings
             Aws::WorkSpacesWeb::Endpoints::DisassociateUserSettings.build(context)
+          when :expire_session
+            Aws::WorkSpacesWeb::Endpoints::ExpireSession.build(context)
           when :get_browser_settings
             Aws::WorkSpacesWeb::Endpoints::GetBrowserSettings.build(context)
           when :get_identity_provider
@@ -135,6 +137,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::GetPortal.build(context)
           when :get_portal_service_provider_metadata
             Aws::WorkSpacesWeb::Endpoints::GetPortalServiceProviderMetadata.build(context)
+          when :get_session
+            Aws::WorkSpacesWeb::Endpoints::GetSession.build(context)
           when :get_trust_store
             Aws::WorkSpacesWeb::Endpoints::GetTrustStore.build(context)
           when :get_trust_store_certificate
@@ -153,6 +157,8 @@ module Aws::WorkSpacesWeb
             Aws::WorkSpacesWeb::Endpoints::ListNetworkSettings.build(context)
           when :list_portals
             Aws::WorkSpacesWeb::Endpoints::ListPortals.build(context)
+          when :list_sessions
+            Aws::WorkSpacesWeb::Endpoints::ListSessions.build(context)
           when :list_tags_for_resource
             Aws::WorkSpacesWeb::Endpoints::ListTagsForResource.build(context)
           when :list_trust_store_certificates

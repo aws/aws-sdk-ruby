@@ -2424,8 +2424,8 @@ module Aws::MediaLive
     #   @return [Types::SrtSettingsRequest]
     #
     # @!attribute [rw] input_network_location
-    #   With the introduction of MediaLive OnPrem, a MediaLive input can now
-    #   exist in two different places: AWS or inside an on-premise
+    #   With the introduction of MediaLive Anywhere, a MediaLive input can
+    #   now exist in two different places: AWS or inside an on-premises
     #   datacenter. By default all inputs will continue to be AWS inputs.
     #   @return [String]
     #
@@ -3464,8 +3464,8 @@ module Aws::MediaLive
     #   @return [Types::SrtSettings]
     #
     # @!attribute [rw] input_network_location
-    #   With the introduction of MediaLive OnPrem, a MediaLive input can now
-    #   exist in two different places: AWS or inside an on-premise
+    #   With the introduction of MediaLive Anywhere, a MediaLive input can
+    #   now exist in two different places: AWS or inside an on-premises
     #   datacenter. By default all inputs will continue to be AWS inputs.
     #   @return [String]
     #
@@ -4977,10 +4977,15 @@ module Aws::MediaLive
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
     #
+    # @!attribute [rw] bandwidth_reduction_filter_settings
+    #   Bandwidth Reduction Filter Settings
+    #   @return [Types::BandwidthReductionFilterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264FilterSettings AWS API Documentation
     #
     class H264FilterSettings < Struct.new(
-      :temporal_filter_settings)
+      :temporal_filter_settings,
+      :bandwidth_reduction_filter_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5391,10 +5396,15 @@ module Aws::MediaLive
     #   Temporal Filter Settings
     #   @return [Types::TemporalFilterSettings]
     #
+    # @!attribute [rw] bandwidth_reduction_filter_settings
+    #   Bandwidth Reduction Filter Settings
+    #   @return [Types::BandwidthReductionFilterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265FilterSettings AWS API Documentation
     #
     class H265FilterSettings < Struct.new(
-      :temporal_filter_settings)
+      :temporal_filter_settings,
+      :bandwidth_reduction_filter_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9411,10 +9421,15 @@ module Aws::MediaLive
     #   Destination is a Multiplex.
     #   @return [Types::OutputLocationRef]
     #
+    # @!attribute [rw] container_settings
+    #   Multiplex Container Settings
+    #   @return [Types::MultiplexContainerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexOutputSettings AWS API Documentation
     #
     class MultiplexOutputSettings < Struct.new(
-      :destination)
+      :destination,
+      :container_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20597,6 +20612,147 @@ module Aws::MediaLive
       :node_interface_mappings,
       :role,
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Bandwidth Reduction Filter Settings
+    #
+    # @!attribute [rw] post_filter_sharpening
+    #   Configures the sharpening control, which is available when the
+    #   bandwidth reduction filter is enabled. This control sharpens edges
+    #   and contours, which produces a specific artistic effect that you
+    #   might want. We recommend that you test each of the values (including
+    #   DISABLED) to observe the sharpening effect on the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] strength
+    #   Enables the bandwidth reduction filter. The filter strengths range
+    #   from 1 to 4. We recommend that you always enable this filter and use
+    #   AUTO, to let MediaLive apply the optimum filtering for the context.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BandwidthReductionFilterSettings AWS API Documentation
+    #
+    class BandwidthReductionFilterSettings < Struct.new(
+      :post_filter_sharpening,
+      :strength)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Multiplex Container Settings
+    #
+    # @!attribute [rw] multiplex_m2ts_settings
+    #   Multiplex M2ts Settings
+    #   @return [Types::MultiplexM2tsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexContainerSettings AWS API Documentation
+    #
+    class MultiplexContainerSettings < Struct.new(
+      :multiplex_m2ts_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Multiplex M2ts Settings
+    #
+    # @!attribute [rw] absent_input_audio_behavior
+    #   When set to drop, output audio streams will be removed from the
+    #   program if the selected input audio stream is removed from the
+    #   input. This allows the output audio configuration to dynamically
+    #   change based on input configuration. If this is set to
+    #   encodeSilence, all output audio streams will output encoded silence
+    #   when not connected to an active input stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arib
+    #   When set to enabled, uses ARIB-compliant field muxing and removes
+    #   video descriptor.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_buffer_model
+    #   When set to dvb, uses DVB buffer model for Dolby Digital audio. When
+    #   set to atsc, the ATSC model is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_frames_per_pes
+    #   The number of audio frames to insert for each PES packet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audio_stream_type
+    #   When set to atsc, uses stream type = 0x81 for AC3 and stream type =
+    #   0x87 for EAC3. When set to dvb, uses stream type = 0x06.
+    #   @return [String]
+    #
+    # @!attribute [rw] cc_descriptor
+    #   When set to enabled, generates captionServiceDescriptor in PMT.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebif
+    #   If set to passthrough, passes any EBIF data from the input source to
+    #   this output.
+    #   @return [String]
+    #
+    # @!attribute [rw] es_rate_in_pes
+    #   Include or exclude the ES Rate field in the PES header.
+    #   @return [String]
+    #
+    # @!attribute [rw] klv
+    #   If set to passthrough, passes any KLV data from the input source to
+    #   this output.
+    #   @return [String]
+    #
+    # @!attribute [rw] nielsen_id_3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking
+    #   will be detected in the input audio and an equivalent ID3 tag will
+    #   be inserted in the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] pcr_control
+    #   When set to pcrEveryPesPacket, a Program Clock Reference value is
+    #   inserted for every Packetized Elementary Stream (PES) header. This
+    #   parameter is effective only when the PCR PID is the same as the
+    #   video or audio elementary stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] pcr_period
+    #   Maximum time in milliseconds between Program Clock Reference (PCRs)
+    #   inserted into the transport stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scte_35_control
+    #   Optionally pass SCTE-35 signals from the input source to this
+    #   output.
+    #   @return [String]
+    #
+    # @!attribute [rw] scte_35_preroll_pullup_milliseconds
+    #   Defines the amount SCTE-35 preroll will be increased (in
+    #   milliseconds) on the output. Preroll is the amount of time between
+    #   the presence of a SCTE-35 indication in a transport stream and the
+    #   PTS of the video frame it references. Zero means don't add pullup
+    #   (it doesn't mean set the preroll to zero). Negative pullup is not
+    #   supported, which means that you can't make the preroll shorter. Be
+    #   aware that latency in the output will increase by the pullup amount.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexM2tsSettings AWS API Documentation
+    #
+    class MultiplexM2tsSettings < Struct.new(
+      :absent_input_audio_behavior,
+      :arib,
+      :audio_buffer_model,
+      :audio_frames_per_pes,
+      :audio_stream_type,
+      :cc_descriptor,
+      :ebif,
+      :es_rate_in_pes,
+      :klv,
+      :nielsen_id_3_behavior,
+      :pcr_control,
+      :pcr_period,
+      :scte_35_control,
+      :scte_35_preroll_pullup_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end

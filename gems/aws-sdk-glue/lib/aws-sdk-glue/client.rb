@@ -16352,6 +16352,66 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Tests a connection to a service to validate the service credentials
+    # that you provide.
+    #
+    # You can either provide an existing connection name or a
+    # `TestConnectionInput` for testing a non-existing connection input.
+    # Providing both at the same time will cause an error.
+    #
+    # If the action is successful, the service sends back an HTTP 200
+    # response.
+    #
+    # @option params [String] :connection_name
+    #   Optional. The name of the connection to test. If only name is
+    #   provided, the operation will get the connection and use that for
+    #   testing.
+    #
+    # @option params [Types::TestConnectionInput] :test_connection_input
+    #   A structure that is used to specify testing a connection to a service.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_connection({
+    #     connection_name: "NameString",
+    #     test_connection_input: {
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE, VIEW_VALIDATION_REDSHIFT, VIEW_VALIDATION_ATHENA
+    #       connection_properties: { # required
+    #         "HOST" => "ValueString",
+    #       },
+    #       authentication_configuration: {
+    #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
+    #         secret_arn: "SecretArn",
+    #         o_auth_2_properties: {
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_client_application: {
+    #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
+    #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
+    #           },
+    #           token_url: "TokenUrl",
+    #           token_url_parameters_map: {
+    #             "TokenUrlParameterKey" => "TokenUrlParameterValue",
+    #           },
+    #           authorization_code_properties: {
+    #             authorization_code: "AuthorizationCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TestConnection AWS API Documentation
+    #
+    # @overload test_connection(params = {})
+    # @param [Hash] params ({})
+    def test_connection(params = {}, options = {})
+      req = build_request(:test_connection, params)
+      req.send_request(options)
+    end
+
     # Removes tags from a resource.
     #
     # @option params [required, String] :resource_arn
@@ -18149,7 +18209,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.194.0'
+      context[:gem_version] = '1.195.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

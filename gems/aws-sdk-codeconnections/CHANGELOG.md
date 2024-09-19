@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-09-19)
+------------------
+
+* Feature - This release adds the PullRequestComment field to CreateSyncConfiguration API input, UpdateSyncConfiguration API input, GetSyncConfiguration API output and ListSyncConfiguration API output
+
 1.10.0 (2024-09-11)
 ------------------
 

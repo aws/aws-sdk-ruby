@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2024-09-19)
+------------------
+
+* Feature - Tagging support for Lambda event source mapping, and code signing configuration resources.
+
 1.131.0 (2024-09-17)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2024-09-19)
+------------------
+
+* Feature - Adds Bandwidth Reduction Filtering for HD AVC and HEVC encodes, multiplex container settings.
+
 1.132.0 (2024-09-16)
 ------------------
 

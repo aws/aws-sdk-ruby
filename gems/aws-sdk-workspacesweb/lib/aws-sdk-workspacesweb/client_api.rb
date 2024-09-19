@@ -100,6 +100,8 @@ module Aws::WorkSpacesWeb
     EnabledType = Shapes::StringShape.new(name: 'EnabledType')
     EncryptionContextMap = Shapes::MapShape.new(name: 'EncryptionContextMap')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
+    ExpireSessionResponse = Shapes::StructureShape.new(name: 'ExpireSessionResponse')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
     GetBrowserSettingsRequest = Shapes::StructureShape.new(name: 'GetBrowserSettingsRequest')
     GetBrowserSettingsResponse = Shapes::StructureShape.new(name: 'GetBrowserSettingsResponse')
@@ -113,6 +115,8 @@ module Aws::WorkSpacesWeb
     GetPortalResponse = Shapes::StructureShape.new(name: 'GetPortalResponse')
     GetPortalServiceProviderMetadataRequest = Shapes::StructureShape.new(name: 'GetPortalServiceProviderMetadataRequest')
     GetPortalServiceProviderMetadataResponse = Shapes::StructureShape.new(name: 'GetPortalServiceProviderMetadataResponse')
+    GetSessionRequest = Shapes::StructureShape.new(name: 'GetSessionRequest')
+    GetSessionResponse = Shapes::StructureShape.new(name: 'GetSessionResponse')
     GetTrustStoreCertificateRequest = Shapes::StructureShape.new(name: 'GetTrustStoreCertificateRequest')
     GetTrustStoreCertificateResponse = Shapes::StructureShape.new(name: 'GetTrustStoreCertificateResponse')
     GetTrustStoreRequest = Shapes::StructureShape.new(name: 'GetTrustStoreRequest')
@@ -133,6 +137,8 @@ module Aws::WorkSpacesWeb
     IpAccessSettings = Shapes::StructureShape.new(name: 'IpAccessSettings')
     IpAccessSettingsList = Shapes::ListShape.new(name: 'IpAccessSettingsList')
     IpAccessSettingsSummary = Shapes::StructureShape.new(name: 'IpAccessSettingsSummary')
+    IpAddress = Shapes::StringShape.new(name: 'IpAddress')
+    IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
     IpRange = Shapes::StringShape.new(name: 'IpRange')
     IpRule = Shapes::StructureShape.new(name: 'IpRule')
     IpRuleList = Shapes::ListShape.new(name: 'IpRuleList')
@@ -147,6 +153,8 @@ module Aws::WorkSpacesWeb
     ListNetworkSettingsResponse = Shapes::StructureShape.new(name: 'ListNetworkSettingsResponse')
     ListPortalsRequest = Shapes::StructureShape.new(name: 'ListPortalsRequest')
     ListPortalsResponse = Shapes::StructureShape.new(name: 'ListPortalsResponse')
+    ListSessionsRequest = Shapes::StructureShape.new(name: 'ListSessionsRequest')
+    ListSessionsResponse = Shapes::StructureShape.new(name: 'ListSessionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTrustStoreCertificatesRequest = Shapes::StructureShape.new(name: 'ListTrustStoreCertificatesRequest')
@@ -165,6 +173,7 @@ module Aws::WorkSpacesWeb
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Portal = Shapes::StructureShape.new(name: 'Portal')
     PortalEndpoint = Shapes::StringShape.new(name: 'PortalEndpoint')
+    PortalId = Shapes::StringShape.new(name: 'PortalId')
     PortalList = Shapes::ListShape.new(name: 'PortalList')
     PortalStatus = Shapes::StringShape.new(name: 'PortalStatus')
     PortalSummary = Shapes::StructureShape.new(name: 'PortalSummary')
@@ -179,6 +188,12 @@ module Aws::WorkSpacesWeb
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Session = Shapes::StructureShape.new(name: 'Session')
+    SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SessionSortBy = Shapes::StringShape.new(name: 'SessionSortBy')
+    SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
+    SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
+    SessionSummaryList = Shapes::ListShape.new(name: 'SessionSummaryList')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     StringType = Shapes::StringShape.new(name: 'StringType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -222,6 +237,7 @@ module Aws::WorkSpacesWeb
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     UserSettingsList = Shapes::ListShape.new(name: 'UserSettingsList')
     UserSettingsSummary = Shapes::StructureShape.new(name: 'UserSettingsSummary')
+    Username = Shapes::StringShape.new(name: 'Username')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -495,6 +511,12 @@ module Aws::WorkSpacesWeb
     EncryptionContextMap.key = Shapes::ShapeRef.new(shape: StringType)
     EncryptionContextMap.value = Shapes::ShapeRef.new(shape: StringType)
 
+    ExpireSessionRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: PortalId, required: true, location: "uri", location_name: "portalId"))
+    ExpireSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
+    ExpireSessionRequest.struct_class = Types::ExpireSessionRequest
+
+    ExpireSessionResponse.struct_class = Types::ExpireSessionResponse
+
     GetBrowserSettingsRequest.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "browserSettingsArn"))
     GetBrowserSettingsRequest.struct_class = Types::GetBrowserSettingsRequest
 
@@ -531,6 +553,13 @@ module Aws::WorkSpacesWeb
     GetPortalServiceProviderMetadataResponse.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "portalArn"))
     GetPortalServiceProviderMetadataResponse.add_member(:service_provider_saml_metadata, Shapes::ShapeRef.new(shape: SamlMetadata, location_name: "serviceProviderSamlMetadata"))
     GetPortalServiceProviderMetadataResponse.struct_class = Types::GetPortalServiceProviderMetadataResponse
+
+    GetSessionRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: PortalId, required: true, location: "uri", location_name: "portalId"))
+    GetSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
+    GetSessionRequest.struct_class = Types::GetSessionRequest
+
+    GetSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "session"))
+    GetSessionResponse.struct_class = Types::GetSessionResponse
 
     GetTrustStoreCertificateRequest.add_member(:thumbprint, Shapes::ShapeRef.new(shape: CertificateThumbprint, required: true, location: "querystring", location_name: "thumbprint"))
     GetTrustStoreCertificateRequest.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "trustStoreArn"))
@@ -596,6 +625,8 @@ module Aws::WorkSpacesWeb
     IpAccessSettingsSummary.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ipAccessSettingsArn"))
     IpAccessSettingsSummary.struct_class = Types::IpAccessSettingsSummary
 
+    IpAddressList.member = Shapes::ShapeRef.new(shape: IpAddress)
+
     IpRule.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     IpRule.add_member(:ip_range, Shapes::ShapeRef.new(shape: IpRange, required: true, location_name: "ipRange"))
     IpRule.struct_class = Types::IpRule
@@ -642,6 +673,19 @@ module Aws::WorkSpacesWeb
     ListPortalsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPortalsResponse.add_member(:portals, Shapes::ShapeRef.new(shape: PortalList, location_name: "portals"))
     ListPortalsResponse.struct_class = Types::ListPortalsResponse
+
+    ListSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListSessionsRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: PortalId, required: true, location: "uri", location_name: "portalId"))
+    ListSessionsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location: "querystring", location_name: "sessionId"))
+    ListSessionsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SessionSortBy, location: "querystring", location_name: "sortBy"))
+    ListSessionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location: "querystring", location_name: "status"))
+    ListSessionsRequest.add_member(:username, Shapes::ShapeRef.new(shape: Username, location: "querystring", location_name: "username"))
+    ListSessionsRequest.struct_class = Types::ListSessionsRequest
+
+    ListSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSessionsResponse.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionSummaryList, required: true, location_name: "sessions"))
+    ListSessionsResponse.struct_class = Types::ListSessionsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -750,6 +794,25 @@ module Aws::WorkSpacesWeb
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    Session.add_member(:client_ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, location_name: "clientIpAddresses"))
+    Session.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    Session.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "portalArn"))
+    Session.add_member(:session_id, Shapes::ShapeRef.new(shape: StringType, location_name: "sessionId"))
+    Session.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    Session.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "status"))
+    Session.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "username"))
+    Session.struct_class = Types::Session
+
+    SessionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    SessionSummary.add_member(:portal_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "portalArn"))
+    SessionSummary.add_member(:session_id, Shapes::ShapeRef.new(shape: StringType, location_name: "sessionId"))
+    SessionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    SessionSummary.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "status"))
+    SessionSummary.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "username"))
+    SessionSummary.struct_class = Types::SessionSummary
+
+    SessionSummaryList.member = Shapes::ShapeRef.new(shape: SessionSummary)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -933,9 +996,11 @@ module Aws::WorkSpacesWeb
 
       api.metadata = {
         "apiVersion" => "2020-07-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "workspaces-web",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon WorkSpaces Web",
         "serviceId" => "WorkSpaces Web",
         "signatureVersion" => "v4",
@@ -1330,6 +1395,19 @@ module Aws::WorkSpacesWeb
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:expire_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExpireSession"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/portals/{portalId}/sessions/{sessionId}"
+        o.input = Shapes::ShapeRef.new(shape: ExpireSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExpireSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_browser_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBrowserSettings"
         o.http_method = "GET"
@@ -1401,6 +1479,19 @@ module Aws::WorkSpacesWeb
         o.http_request_uri = "/portalIdp/{portalArn+}"
         o.input = Shapes::ShapeRef.new(shape: GetPortalServiceProviderMetadataRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPortalServiceProviderMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSession"
+        o.http_method = "GET"
+        o.http_request_uri = "/portals/{portalId}/sessions/{sessionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSessionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1539,6 +1630,25 @@ module Aws::WorkSpacesWeb
         o.input = Shapes::ShapeRef.new(shape: ListPortalsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPortalsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSessions"
+        o.http_method = "GET"
+        o.http_request_uri = "/portals/{portalId}/sessions"
+        o.input = Shapes::ShapeRef.new(shape: ListSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSessionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2024-09-19)
+------------------
+
+* Feature - This release provides support for additional DRM configurations per SPEKE Version 2.0.
+
 1.138.0 (2024-09-12)
 ------------------
 

@@ -595,7 +595,8 @@
         "RoleArn":{"shape":"IamRoleArn"},
         "SyncType":{"shape":"SyncConfigurationType"},
         "PublishDeploymentStatus":{"shape":"PublishDeploymentStatus"},
-        "TriggerResourceUpdateOn":{"shape":"TriggerResourceUpdateOn"}
+        "TriggerResourceUpdateOn":{"shape":"TriggerResourceUpdateOn"},
+        "PullRequestComment":{"shape":"PullRequestComment"}
       }
     },
     "CreateSyncConfigurationOutput":{
@@ -996,6 +997,13 @@
         "DISABLED"
       ]
     },
+    "PullRequestComment":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "RepositoryLinkArn":{
       "type":"string",
       "pattern":"^arn:aws(?:-[a-z]+)*:(codestar-connections|codeconnections):[a-z\\-0-9]+:\\d{12}:repository-link\\/[a-zA-Z0-9\\-:/]+"
@@ -1309,7 +1317,8 @@
         "RoleArn":{"shape":"IamRoleArn"},
         "SyncType":{"shape":"SyncConfigurationType"},
         "PublishDeploymentStatus":{"shape":"PublishDeploymentStatus"},
-        "TriggerResourceUpdateOn":{"shape":"TriggerResourceUpdateOn"}
+        "TriggerResourceUpdateOn":{"shape":"TriggerResourceUpdateOn"},
+        "PullRequestComment":{"shape":"PullRequestComment"}
       }
     },
     "SyncConfigurationList":{
@@ -1509,7 +1518,8 @@
         "RoleArn":{"shape":"IamRoleArn"},
         "SyncType":{"shape":"SyncConfigurationType"},
         "PublishDeploymentStatus":{"shape":"PublishDeploymentStatus"},
-        "TriggerResourceUpdateOn":{"shape":"TriggerResourceUpdateOn"}
+        "TriggerResourceUpdateOn":{"shape":"TriggerResourceUpdateOn"},
+        "PullRequestComment":{"shape":"PullRequestComment"}
       }
     },
     "UpdateSyncConfigurationOutput":{

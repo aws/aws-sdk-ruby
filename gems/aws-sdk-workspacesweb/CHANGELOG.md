@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-09-19)
+------------------
+
+* Feature - WorkSpaces Secure Browser now enables Administrators to view and manage end-user browsing sessions via Session Management APIs.
+
 1.29.0 (2024-09-11)
 ------------------
 

@@ -1436,6 +1436,20 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -1574,6 +1588,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -1620,6 +1636,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -1844,9 +1862,9 @@ module Aws::MediaLive
     #   standard-pipeline input, include two srtCallerSource.
     #
     # @option params [String] :input_network_location
-    #   With the introduction of MediaLive OnPrem, a MediaLive input can now
-    #   exist in two different places: AWS or inside an on-premise datacenter.
-    #   By default all inputs will continue to be AWS inputs.
+    #   With the introduction of MediaLive Anywhere, a MediaLive input can now
+    #   exist in two different places: AWS or inside an on-premises
+    #   datacenter. By default all inputs will continue to be AWS inputs.
     #
     # @option params [Types::MulticastSettingsCreateRequest] :multicast_settings
     #   Settings for a Multicast input. Contains a list of multicast Urls and
@@ -2730,6 +2748,20 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -2868,6 +2900,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -2914,6 +2948,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -3841,6 +3877,20 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -3979,6 +4029,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -4025,6 +4077,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -6131,6 +6185,20 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -6269,6 +6337,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -6315,6 +6385,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -7049,6 +7121,20 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -7187,6 +7273,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -7233,6 +7321,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -7994,6 +8084,20 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -8132,6 +8236,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -8178,6 +8284,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -8826,6 +8934,20 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -8964,6 +9086,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -9010,6 +9134,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -10202,6 +10328,20 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.absent_input_audio_behavior #=> String, one of "DROP", "ENCODE_SILENCE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.arib #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_buffer_model #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_frames_per_pes #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.audio_stream_type #=> String, one of "ATSC", "DVB"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.cc_descriptor #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.ebif #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.es_rate_in_pes #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.pcr_period #=> Integer
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_control #=> String, one of "NONE", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.container_settings.multiplex_m2ts_settings.scte_35_preroll_pullup_milliseconds #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -10340,6 +10480,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
@@ -10386,6 +10528,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.color_space_settings.hdr_10_settings.max_fall #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.post_filter_sharpening #=> String, one of "DISABLED", "SHARPENING_1", "SHARPENING_2", "SHARPENING_3"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.filter_settings.bandwidth_reduction_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.framerate_denominator #=> Integer
@@ -13431,7 +13575,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

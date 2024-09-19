@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2024-09-19)
+------------------
+
+* Feature - QuickSight: 1. Add new API - ListFoldersForResource. 2. Commit mode adds visibility configuration of Apply button on multi-select controls for authors.
+
 1.125.0 (2024-09-11)
 ------------------
 

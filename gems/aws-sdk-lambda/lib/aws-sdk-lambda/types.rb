@@ -167,10 +167,10 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The Amazon Web Servicesservice or Amazon Web Services account that
-    #   invokes the function. If you specify a service, use `SourceArn` or
-    #   `SourceAccount` to limit who can invoke the function through that
-    #   service.
+    #   The Amazon Web Servicesservice, Amazon Web Services account, IAM
+    #   user, or IAM role that invokes the function. If you specify a
+    #   service, use `SourceArn` or `SourceAccount` to limit who can invoke
+    #   the function through that service.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -625,12 +625,17 @@ module Aws::Lambda
     #   validation checks fail.
     #   @return [Types::CodeSigningPolicies]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the code signing configuration.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateCodeSigningConfigRequest AWS API Documentation
     #
     class CreateCodeSigningConfigRequest < Struct.new(
       :description,
       :allowed_publishers,
-      :code_signing_policies)
+      :code_signing_policies,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -790,6 +795,10 @@ module Aws::Lambda
     #   record expires.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the event source mapping.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] tumbling_window_in_seconds
     #   (Kinesis and DynamoDB Streams only) The duration in seconds of a
     #   processing window for DynamoDB and Kinesis Streams event sources. A
@@ -870,6 +879,7 @@ module Aws::Lambda
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts,
+      :tags,
       :tumbling_window_in_seconds,
       :topics,
       :queues,
@@ -2039,6 +2049,10 @@ module Aws::Lambda
     #   criteria encryption.
     #   @return [Types::FilterCriteriaError]
     #
+    # @!attribute [rw] event_source_mapping_arn
+    #   The Amazon Resource Name (ARN) of the event source mapping.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
     #
     class EventSourceMappingConfiguration < Struct.new(
@@ -2070,7 +2084,8 @@ module Aws::Lambda
       :scaling_config,
       :document_db_event_source_config,
       :kms_key_arn,
-      :filter_criteria_error)
+      :filter_criteria_error,
+      :event_source_mapping_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4746,8 +4761,8 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] resource
-    #   The function's Amazon Resource Name (ARN). Note: Lambda does not
-    #   support adding tags to aliases or versions.
+    #   The resource's Amazon Resource Name (ARN). Note: Lambda does not
+    #   support adding tags to function aliases or versions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsRequest AWS API Documentation
@@ -6250,11 +6265,11 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] resource
-    #   The function's Amazon Resource Name (ARN).
+    #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags to apply to the function.
+    #   A list of tags to apply to the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceRequest AWS API Documentation
@@ -6348,11 +6363,11 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] resource
-    #   The function's Amazon Resource Name (ARN).
+    #   The resource's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   A list of tag keys to remove from the function.
+    #   A list of tag keys to remove from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceRequest AWS API Documentation

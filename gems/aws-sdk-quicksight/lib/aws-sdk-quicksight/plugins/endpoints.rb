@@ -281,6 +281,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListFolderMembers.build(context)
           when :list_folders
             Aws::QuickSight::Endpoints::ListFolders.build(context)
+          when :list_folders_for_resource
+            Aws::QuickSight::Endpoints::ListFoldersForResource.build(context)
           when :list_group_memberships
             Aws::QuickSight::Endpoints::ListGroupMemberships.build(context)
           when :list_groups

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2024-09-19)
+------------------
+
+* Feature - This change is for releasing TestConnection api SDK model
+
 1.194.0 (2024-09-12)
 ------------------
 
