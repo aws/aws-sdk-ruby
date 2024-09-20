@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # updates the table of supported services in the repo README
-task 'update-readme' do
+task 'update-readme' => 'require-build-tools' do
 
   # insert one row for each supported service
   table = []
