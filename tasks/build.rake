@@ -3,7 +3,7 @@
 require 'set'
 
 desc 'Generates the code for every service'
-task 'build' do
+task 'build' => 'require-build-tools' do
   BuildTools::Services.each do |service|
     Rake::Task["build:aws-sdk-#{service.identifier}"].invoke
   end
