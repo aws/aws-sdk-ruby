@@ -8339,6 +8339,7 @@ module Aws::SageMaker
       attr_accessor compression_type: ("None" | "Gzip")
       attr_accessor model_access_config: Types::ModelAccessConfig
       attr_accessor hub_access_config: Types::InferenceHubAccessConfig
+      attr_accessor manifest_s3_uri: ::String
       SENSITIVE: []
     end
 

@@ -15,6 +15,7 @@ module Aws
                       ?credentials: untyped,
                       ?region: String,
                       ?access_key_id: String,
+                      ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
                       ?client_side_monitoring: bool,
@@ -239,7 +240,8 @@ module Aws
                                         }?,
                                         hub_access_config: {
                                           hub_content_arn: ::String
-                                        }?
+                                        }?,
+                                        manifest_s3_uri: ::String?
                                       }?
                                     }?,
                                     product_id: ::String?,
@@ -2453,7 +2455,8 @@ module Aws
                                 }?,
                                 hub_access_config: {
                                   hub_content_arn: ::String
-                                }?
+                                }?,
+                                manifest_s3_uri: ::String?
                               }?
                             }?,
                             additional_model_data_sources: Array[
@@ -2468,7 +2471,8 @@ module Aws
                                   }?,
                                   hub_access_config: {
                                     hub_content_arn: ::String
-                                  }?
+                                  }?,
+                                  manifest_s3_uri: ::String?
                                 }
                               },
                             ]?,
@@ -2501,7 +2505,8 @@ module Aws
                                   }?,
                                   hub_access_config: {
                                     hub_content_arn: ::String
-                                  }?
+                                  }?,
+                                  manifest_s3_uri: ::String?
                                 }?
                               }?,
                               additional_model_data_sources: Array[
@@ -2516,7 +2521,8 @@ module Aws
                                     }?,
                                     hub_access_config: {
                                       hub_content_arn: ::String
-                                    }?
+                                    }?,
+                                    manifest_s3_uri: ::String?
                                   }
                                 },
                               ]?,
@@ -2805,7 +2811,8 @@ module Aws
                                             }?,
                                             hub_access_config: {
                                               hub_content_arn: ::String
-                                            }?
+                                            }?,
+                                            manifest_s3_uri: ::String?
                                           }?
                                         }?,
                                         product_id: ::String?,
@@ -2878,7 +2885,8 @@ module Aws
                                             }?,
                                             hub_access_config: {
                                               hub_content_arn: ::String
-                                            }?
+                                            }?,
+                                            manifest_s3_uri: ::String?
                                           }?
                                         }?,
                                         algorithm_name: ::String
@@ -3029,7 +3037,8 @@ module Aws
                                               }?,
                                               hub_access_config: {
                                                 hub_content_arn: ::String
-                                              }?
+                                              }?,
+                                              manifest_s3_uri: ::String?
                                             }?
                                           }?,
                                           product_id: ::String?,
@@ -8799,7 +8808,8 @@ module Aws
                                               }?,
                                               hub_access_config: {
                                                 hub_content_arn: ::String
-                                              }?
+                                              }?,
+                                              manifest_s3_uri: ::String?
                                             }?
                                           }?,
                                           product_id: ::String?,
@@ -8840,7 +8850,8 @@ module Aws
                                             }?,
                                             hub_access_config: {
                                               hub_content_arn: ::String
-                                            }?
+                                            }?,
+                                            manifest_s3_uri: ::String?
                                           }?
                                         }?,
                                         product_id: ::String?,

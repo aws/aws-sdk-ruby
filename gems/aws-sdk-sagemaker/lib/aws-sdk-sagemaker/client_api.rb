@@ -9177,6 +9177,7 @@ module Aws::SageMaker
     S3ModelDataSource.add_member(:compression_type, Shapes::ShapeRef.new(shape: ModelCompressionType, required: true, location_name: "CompressionType"))
     S3ModelDataSource.add_member(:model_access_config, Shapes::ShapeRef.new(shape: ModelAccessConfig, location_name: "ModelAccessConfig"))
     S3ModelDataSource.add_member(:hub_access_config, Shapes::ShapeRef.new(shape: InferenceHubAccessConfig, location_name: "HubAccessConfig"))
+    S3ModelDataSource.add_member(:manifest_s3_uri, Shapes::ShapeRef.new(shape: S3ModelUri, location_name: "ManifestS3Uri"))
     S3ModelDataSource.struct_class = Types::S3ModelDataSource
 
     S3Presign.add_member(:iam_policy_constraints, Shapes::ShapeRef.new(shape: IamPolicyConstraints, location_name: "IamPolicyConstraints"))

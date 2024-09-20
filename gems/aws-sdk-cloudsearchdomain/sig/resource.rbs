@@ -14,6 +14,7 @@ module Aws
                         ?client: Client,
                         ?credentials: untyped,
                         ?access_key_id: String,
+                        ?account_id: String,
                         ?adaptive_retry_wait_to_fill: bool,
                         ?client_side_monitoring: bool,
                         ?client_side_monitoring_client_id: String,

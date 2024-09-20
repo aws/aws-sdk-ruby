@@ -8,6 +8,16 @@
 module Aws::SageMakerMetrics
   module Types
 
+    class BatchGetMetricsRequest
+      attr_accessor metric_queries: ::Array[Types::MetricQuery]
+      SENSITIVE: []
+    end
+
+    class BatchGetMetricsResponse
+      attr_accessor metric_query_results: ::Array[Types::MetricQueryResult]
+      SENSITIVE: []
+    end
+
     class BatchPutMetricsError
       attr_accessor code: ("METRIC_LIMIT_EXCEEDED" | "INTERNAL_ERROR" | "VALIDATION_ERROR" | "CONFLICT_ERROR")
       attr_accessor metric_index: ::Integer
@@ -22,6 +32,25 @@ module Aws::SageMakerMetrics
 
     class BatchPutMetricsResponse
       attr_accessor errors: ::Array[Types::BatchPutMetricsError]
+      SENSITIVE: []
+    end
+
+    class MetricQuery
+      attr_accessor metric_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor metric_stat: ("Min" | "Max" | "Avg" | "Count" | "StdDev" | "Last")
+      attr_accessor period: ("OneMinute" | "FiveMinute" | "OneHour" | "IterationNumber")
+      attr_accessor x_axis_type: ("IterationNumber" | "Timestamp")
+      attr_accessor start: ::Integer
+      attr_accessor end: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetricQueryResult
+      attr_accessor status: ("Complete" | "Truncated" | "InternalError" | "ValidationError")
+      attr_accessor message: ::String
+      attr_accessor x_axis_values: ::Array[::Integer]
+      attr_accessor metric_values: ::Array[::Float]
       SENSITIVE: []
     end
 

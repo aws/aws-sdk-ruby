@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2024-09-20)
+------------------
+
+* Feature - Releasing new ErrorCodes for SysPrep failures during ImageImport and CreateImage process
+
 1.117.0 (2024-09-11)
 ------------------
 

@@ -39979,6 +39979,11 @@ module Aws::SageMaker
     #   Configuration information for hub access.
     #   @return [Types::InferenceHubAccessConfig]
     #
+    # @!attribute [rw] manifest_s3_uri
+    #   The Amazon S3 URI of the manifest file. The manifest file is a CSV
+    #   file that stores the artifact locations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3ModelDataSource AWS API Documentation
     #
     class S3ModelDataSource < Struct.new(
@@ -39986,7 +39991,8 @@ module Aws::SageMaker
       :s3_data_type,
       :compression_type,
       :model_access_config,
-      :hub_access_config)
+      :hub_access_config,
+      :manifest_s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end

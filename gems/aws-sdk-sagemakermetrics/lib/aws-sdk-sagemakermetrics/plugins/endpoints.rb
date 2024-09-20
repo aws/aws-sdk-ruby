@@ -15,11 +15,11 @@ module Aws::SageMakerMetrics
         :endpoint_provider,
         doc_type: 'Aws::SageMakerMetrics::EndpointProvider',
         rbs_type: 'untyped',
-        docstring: 'The endpoint provider used to resolve endpoints. Any '\
-                   'object that responds to `#resolve_endpoint(parameters)` '\
-                   'where `parameters` is a Struct similar to '\
-                   '`Aws::SageMakerMetrics::EndpointParameters`'
-      ) do |cfg|
+        docstring: <<~DOCS) do |_cfg|
+The endpoint provider used to resolve endpoints. Any object that responds to
+`#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+`Aws::SageMakerMetrics::EndpointParameters`.
+        DOCS
         Aws::SageMakerMetrics::EndpointProvider.new
       end
 
@@ -51,6 +51,9 @@ module Aws::SageMakerMetrics
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
           end
+          if context.config.credentials&.credentials&.account_id
+            metrics << 'RESOLVED_ACCOUNT_ID'
+          end
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end
 
@@ -67,6 +70,8 @@ module Aws::SageMakerMetrics
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_get_metrics
+            Aws::SageMakerMetrics::Endpoints::BatchGetMetrics.build(context)
           when :batch_put_metrics
             Aws::SageMakerMetrics::Endpoints::BatchPutMetrics.build(context)
           end

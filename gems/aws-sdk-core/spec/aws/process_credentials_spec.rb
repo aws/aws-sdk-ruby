@@ -10,11 +10,12 @@ module Aws
     end
 
     it 'will read credentials from a process' do
-      process = %w[echo {"Version":1,"AccessKeyId":"AK_PROC1","SecretAccessKey":"SECRET_AK_PROC1","SessionToken":"TOKEN_PROC1"}]
+      process = %w[echo {"Version":1,"AccessKeyId":"AK_PROC1","SecretAccessKey":"SECRET_AK_PROC1","SessionToken":"TOKEN_PROC1","AccountId":"ACCOUNT_ID_PROC1"}]
       creds = ProcessCredentials.new(process).credentials
       expect(creds.access_key_id).to eq('AK_PROC1')
       expect(creds.secret_access_key).to eq('SECRET_AK_PROC1')
       expect(creds.session_token).to eq('TOKEN_PROC1')
+      expect(creds.account_id).to eq('ACCOUNT_ID_PROC1')
     end
 
     it 'will throw an error when invalid JSON is returned' do

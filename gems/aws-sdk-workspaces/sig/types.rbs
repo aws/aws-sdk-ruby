@@ -830,7 +830,7 @@ module Aws::WorkSpaces
     end
 
     class ErrorDetails
-      attr_accessor error_code: ("OutdatedPowershellVersion" | "OfficeInstalled" | "PCoIPAgentInstalled" | "WindowsUpdatesEnabled" | "AutoMountDisabled" | "WorkspacesBYOLAccountNotFound" | "WorkspacesBYOLAccountDisabled" | "DHCPDisabled" | "DiskFreeSpace" | "AdditionalDrivesAttached" | "OSNotSupported" | "DomainJoined" | "AzureDomainJoined" | "FirewallEnabled" | "VMWareToolsInstalled" | "DiskSizeExceeded" | "IncompatiblePartitioning" | "PendingReboot" | "AutoLogonEnabled" | "RealTimeUniversalDisabled" | "MultipleBootPartition" | "Requires64BitOS" | "ZeroRearmCount" | "InPlaceUpgrade" | "AntiVirusInstalled" | "UEFINotSupported")
+      attr_accessor error_code: ("OutdatedPowershellVersion" | "OfficeInstalled" | "PCoIPAgentInstalled" | "WindowsUpdatesEnabled" | "AutoMountDisabled" | "WorkspacesBYOLAccountNotFound" | "WorkspacesBYOLAccountDisabled" | "DHCPDisabled" | "DiskFreeSpace" | "AdditionalDrivesAttached" | "OSNotSupported" | "DomainJoined" | "AzureDomainJoined" | "FirewallEnabled" | "VMWareToolsInstalled" | "DiskSizeExceeded" | "IncompatiblePartitioning" | "PendingReboot" | "AutoLogonEnabled" | "RealTimeUniversalDisabled" | "MultipleBootPartition" | "Requires64BitOS" | "ZeroRearmCount" | "InPlaceUpgrade" | "AntiVirusInstalled" | "UEFINotSupported" | "UnknownError" | "AppXPackagesInstalled" | "ReservedStorageInUse")
       attr_accessor error_message: ::String
       SENSITIVE: []
     end

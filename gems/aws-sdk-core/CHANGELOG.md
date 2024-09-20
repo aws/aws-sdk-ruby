@@ -5,6 +5,19 @@ Unreleased Changes
 
 * Feature - Always validate response checksums for operations that support or require it. Supported config options are `WHEN_SUPPORTED` and `WHEN_REQUIRED`. The default value is `WHEN_SUPPORTED`. This option is configured in code with `:response_checksum_calculation`, in the shared config file as `response_checksum_calculation`, and in the ENV as `ENV['AWS_RESPONSE_CHECKSUM_CALCULATION']`.
 
+3.207.0 (2024-09-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Support Account ID credentials using `ENV['AWS_ACCOUNT_ID']`, `aws_account_id` shared config, or the `account_id` Client configuration option.
+
+* Feature - Support Account ID endpoint mode using `ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE']`, `aws_account_id_endpoint_mode` shared config, or the `account_id_endpoint_mode` Client configuration option. Defaults to `preferred`, which will use the account id endpoint if available. Set to `disabled` to disable account id endpoints. Set to `required` to require account id endpoint usage; an error is raised if credentials do not have an account id.
+
 3.206.0 (2024-09-17)
 ------------------
 

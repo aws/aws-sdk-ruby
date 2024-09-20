@@ -52,6 +52,6 @@ require_relative 'aws-sdk-directoryservicedata/customizations'
 # @!group service
 module Aws::DirectoryServiceData
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

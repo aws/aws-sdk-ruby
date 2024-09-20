@@ -138,7 +138,7 @@ module AwsSdkCodeGenerator
           grouped = buffer.group_by { |name, _| name }
           grouped.transform_values(&:count).find_all { |_, c| 1 < c }.each do |name,|
             case name
-            when :endpoint, :endpoint_provider, :retry_limit, :disable_s3_express_session_auth
+            when :endpoint, :endpoint_provider, :retry_limit, :disable_s3_express_session_auth, :account_id_endpoint_mode
               # ok
             else
               warn("Duplicate client option in #{@service_name}: `#{grouped[name].map { |g| g.values_at(0, 2) }}`", uplevel: 0)

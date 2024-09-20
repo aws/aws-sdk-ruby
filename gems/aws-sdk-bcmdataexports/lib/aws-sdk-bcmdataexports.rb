@@ -52,6 +52,6 @@ require_relative 'aws-sdk-bcmdataexports/customizations'
 # @!group service
 module Aws::BCMDataExports
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

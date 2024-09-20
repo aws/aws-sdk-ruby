@@ -15,6 +15,7 @@ module Aws
                       ?credentials: untyped,
                       ?region: String,
                       ?access_key_id: String,
+                      ?account_id: String,
                       ?active_endpoint_cache: bool,
                       ?adaptive_retry_wait_to_fill: bool,
                       ?client_side_monitoring: bool,
@@ -73,6 +74,26 @@ module Aws
                     ) -> instance
                   | (?Hash[Symbol, untyped]) -> instance
 
+
+      interface _BatchGetMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetMetricsResponse]
+        def metric_query_results: () -> ::Array[Types::MetricQueryResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerMetrics/Client.html#batch_get_metrics-instance_method
+      def batch_get_metrics: (
+                               metric_queries: Array[
+                                 {
+                                   metric_name: ::String,
+                                   resource_arn: ::String,
+                                   metric_stat: ("Min" | "Max" | "Avg" | "Count" | "StdDev" | "Last"),
+                                   period: ("OneMinute" | "FiveMinute" | "OneHour" | "IterationNumber"),
+                                   x_axis_type: ("IterationNumber" | "Timestamp"),
+                                   start: ::Integer?,
+                                   end: ::Integer?
+                                 },
+                               ]
+                             ) -> _BatchGetMetricsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetMetricsResponseSuccess
 
       interface _BatchPutMetricsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutMetricsResponse]

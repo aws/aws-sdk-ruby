@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-09-20)
+------------------
+
+* Feature - This release introduces support for the SageMaker Metrics BatchGetMetrics API.
+
 1.22.0 (2024-09-11)
 ------------------
 
