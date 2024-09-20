@@ -23,7 +23,7 @@
         "checksumAlgorithm": "Crc64Nvme",
         "expectHeaders": {
             "x-amz-request-algorithm": "CRC64NVME",
-            "x-amz-checksum-crc64nvme": "uc8X9yrZrD4="
+            "x-amz-checksum-crc64nvme": "OOJZ0D8xKts="
         }
     },
     {

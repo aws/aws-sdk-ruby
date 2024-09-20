@@ -169,12 +169,6 @@ module Aws
           expect(header).to eq('AAAAAA==')
         end
 
-        it 'without requestAlgorithmMember; will use a CRC32 as a default' do
-          resp = client.checksum_required_operation(body: 'crc32 me captain')
-          header = resp.context.http_request.headers['x-amz-checksum-crc32']
-          expect(header).to eq('nqtcGg==')
-        end
-
         file = File.expand_path('checksum_request.json', __dir__)
         test_cases = JSON.load_file(file)
 
@@ -306,7 +300,7 @@ module Aws
             when 'failure'
               expect do
                 client.http_checksum_operation(validation_mode: 'ENABLED')
-              end.to raise_error(Aws::Errors::ChecksumError, /#{expect['responseHeaders']}/)
+              end.to raise_error(Aws::Errors::ChecksumError, include(expect['calculatedChecksum']))
             else
               raise 'Unsupported test kind'
             end

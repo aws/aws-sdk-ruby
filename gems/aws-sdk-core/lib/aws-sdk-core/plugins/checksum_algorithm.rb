@@ -13,6 +13,7 @@ module Aws
         begin
           require 'aws-crt'
           supported << 'CRC32C'
+          supported << 'CRC64NVME' if Aws::Crt::GEM_VERSION >= '0.3.0'
         rescue LoadError
           # Ignored
         end
@@ -28,7 +29,7 @@ module Aws
       CHECKSUM_SIZE = {
         'CRC32' => 16,
         'CRC32C' => 16,
-        'CRC64NVME' => 32,
+        'CRC64NVME' => 20,
         'SHA1' => 36,
         'SHA256' => 52
       }.freeze
@@ -74,14 +75,15 @@ module Aws
         def digest_for_algorithm(algorithm)
           case algorithm
           when 'CRC32'
-            Digest32.new(Zlib.method(:crc32))
+            Digest.new(Zlib.method(:crc32), 'N')
           when 'CRC32C'
-            # this will only be used if input algorithm is CRC32C AND client supports it (crt available)
-            Digest32.new(Aws::Crt::Checksums.method(:crc32c))
+            Digest.new(Aws::Crt::Checksums.method(:crc32c), 'N')
+          when 'CRC64NVME'
+            Digest.new(Aws::Crt::Checksums.method(:crc64nvme), 'Q>')
           when 'SHA1'
-            Digest::SHA1.new
+            ::Digest::SHA1.new
           when 'SHA256'
-            Digest::SHA256.new
+            ::Digest::SHA256.new
           else
             raise ArgumentError,
                   "#{algorithm} is not a supported checksum algorithm."
@@ -126,16 +128,16 @@ module Aws
       end
 
       # Interface for computing digests on request/response bodies
-      # which may be files, strings or IO like objects
-      # Applies only to digest functions that produce 32 bit integer checksums
-      # (eg CRC32)
-      class Digest32
-
+      # which may be files, strings or IO like objects.
+      # Applies only to digest functions that produce 32 or 64 bit
+      # integer checksums (eg CRC32 or CRC64).
+      class Digest
         attr_reader :value
 
         # @param [Object] digest_fn
-        def initialize(digest_fn)
+        def initialize(digest_fn, directive)
           @digest_fn = digest_fn
+          @directive = directive
           @value = 0
         end
 
@@ -144,7 +146,7 @@ module Aws
         end
 
         def base64digest
-          Base64.encode64([@value].pack('N')).chomp
+          Base64.encode64([@value].pack(@directive)).chomp
         end
       end
 
@@ -206,53 +208,49 @@ module Aws
             add_verify_response_checksum_handlers(context)
           end
 
-          with_request_config_metric(context.config) do
-            with_response_config_metric(context.config) do
-              with_request_checksum_metrics(algorithm) do
-                @handler.call(context)
-              end
-            end
-          end
+          with_metrics(context.config, algorithm) { @handler.call(context) }
         end
 
         private
 
-        def with_request_config_metric(config, &block)
+        def with_metrics(config, algorithm, &block)
+          metrics = []
+          add_request_config_metric(config, metrics)
+          add_response_config_metric(config, metrics)
+          add_request_checksum_metrics(algorithm, metrics)
+          Aws::Plugins::UserAgent.metric(*metrics, &block)
+        end
+
+        def add_request_config_metric(config, metrics)
           case config.request_checksum_calculation
           when 'WHEN_SUPPORTED'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_WHEN_SUPPORTED', &block)
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_WHEN_SUPPORTED'
           when 'WHEN_REQUIRED'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_WHEN_REQUIRED', &block)
-          else
-            block.call
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_WHEN_REQUIRED'
           end
         end
 
-        def with_response_config_metric(config, &block)
+        def add_response_config_metric(config, metrics)
           case config.response_checksum_calculation
           when 'WHEN_SUPPORTED'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED', &block)
+            metrics << 'FLEXIBLE_CHECKSUMS_RES_WHEN_SUPPORTED'
           when 'WHEN_REQUIRED'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_RES_WHEN_REQUIRED', &block)
-          else
-            block.call
+            metrics << 'FLEXIBLE_CHECKSUMS_RES_WHEN_REQUIRED'
           end
         end
 
-        def with_request_checksum_metrics(algorithm, &block)
+        def add_request_checksum_metrics(algorithm, metrics)
           case algorithm
           when 'CRC32'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_CRC32', &block)
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_CRC32'
           when 'CRC32C'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_CRC32C', &block)
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_CRC32C'
           when 'CRC64NVME'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_CRC64', &block)
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_CRC64'
           when 'SHA1'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_SHA1', &block)
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_SHA1'
           when 'SHA256'
-            Aws::Plugins::UserAgent.metric('FLEXIBLE_CHECKSUMS_REQ_SHA256', &block)
-          else
-            block.call
+            metrics << 'FLEXIBLE_CHECKSUMS_REQ_SHA256'
           end
         end
 
@@ -283,8 +281,7 @@ module Aws
         end
 
         def checksum_optional?(context)
-          (http_checksum = context.operation.http_checksum) &&
-            !http_checksum['requestChecksumRequired'].nil? &&
+          context.operation.http_checksum &&
             context.config.request_checksum_calculation == 'WHEN_SUPPORTED'
         end
 
@@ -293,17 +290,21 @@ module Aws
         end
 
         def should_calculate_request_checksum?(context)
-          (checksum_required?(context) || checksum_optional?(context)) &&
-            !checksum_provided_as_header?(context.http_request.headers)
+          # requestAlgorithmMember must be present on the model - guaranteed
+          # a default from OptionHandler
+          request_algorithm_selection(context) &&
+            !checksum_provided_as_header?(context.http_request.headers) &&
+            (checksum_required?(context) || checksum_optional?(context))
         end
 
         def choose_request_algorithm!(context)
-          algorithm = request_algorithm_selection(context) || DEFAULT_CHECKSUM
+          algorithm = request_algorithm_selection(context)
           return algorithm if CLIENT_ALGORITHMS.include?(algorithm)
 
-          if algorithm == 'CRC32C'
+          if %w[CRC32C CRC64NVME].include?(algorithm)
             raise ArgumentError,
-                  'CRC32C requires CRT support - install the aws-crt gem'
+                  'CRC32C and CRC64NVME requires CRT support ' \
+                  '- install the aws-crt gem'
           end
 
           raise ArgumentError,
