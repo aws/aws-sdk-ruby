@@ -18,7 +18,3 @@ end
 Dir.glob("#{$REPO_ROOT}/tasks/**/*.rake").each do |task_file|
   load(task_file)
 end
-
-task 'bob' do
-  Rake::Task['bobby'].invoke if Rake::Task.task_defined?('bobby')
-end
