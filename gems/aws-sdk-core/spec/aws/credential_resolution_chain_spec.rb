@@ -68,7 +68,7 @@ module Aws
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
         assume_role_stub(
-          'arn:aws:iam:123456789012:role/foo',
+          'arn:aws:iam::123456789012:role/foo',
           'ACCESS_KEY_1', # from 'fooprofile'
           'AR_AKID',
           'AR_SECRET',
@@ -82,7 +82,7 @@ module Aws
 
       it 'prefers assume role web identity over sso' do
         assume_role_web_identity_stub(
-          'arn:aws:iam:123456789012:role/foo',
+          'arn:aws:iam::123456789012:role/foo',
           'AR_AKID',
           'AR_SECRET',
           'AR_TOKEN'
@@ -216,7 +216,7 @@ module Aws
 
       it 'prefers assume role over shared config' do
         assume_role_stub(
-          'arn:aws:iam:123456789012:role/bar',
+          'arn:aws:iam::123456789012:role/bar',
           'ACCESS_KEY_1', # from 'fooprofile'
           'AR_AKID',
           'AR_SECRET',
@@ -347,13 +347,13 @@ module Aws
 
         it 'supports :source_profile from assume_role_web_identity' do
           assume_role_web_identity_stub(
-            'arn:aws:iam:123456789012:role/foo',
+            'arn:aws:iam::123456789012:role/foo',
             'AR_AKID_WEB',
             'AR_SECRET',
             'AR_TOKEN'
           )
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/bar',
+            'arn:aws:iam::123456789012:role/bar',
             'AR_AKID_WEB', # from web_only
             'AR_AKID',
             'AR_SECRET',
@@ -374,7 +374,7 @@ module Aws
 
         it 'supports :source_profile from process credentials' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/foo',
+            'arn:aws:iam::123456789012:role/foo',
             'AK_PROC1',
             'AK_PROC1',
             'SECRET_AK_PROC1',
@@ -408,7 +408,7 @@ module Aws
            .and_return(double('SSOToken', set?: true))
 
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/foo',
+            'arn:aws:iam::123456789012:role/foo',
             'SSO_AKID',
             'AR_AKID',
             'SECRET_AK',
@@ -425,7 +425,7 @@ module Aws
 
         it 'supports assume role chaining' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/role_b',
+            'arn:aws:iam::123456789012:role/role_b',
             'ACCESS_KEY_BASE',
             'AK_1',
             'SECRET_AK_1',
@@ -433,7 +433,7 @@ module Aws
           )
 
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/role_a',
+            'arn:aws:iam::123456789012:role/role_a',
             'AK_1',
             'AK_2',
             'SECRET_AK_2',
@@ -450,7 +450,7 @@ module Aws
 
         it 'uses source credentials when source and static are both set' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/role_a',
+            'arn:aws:iam::123456789012:role/role_a',
             'ACCESS_KEY_BASE',
             'AK_2',
             'SECRET_AK_2',
@@ -467,7 +467,7 @@ module Aws
 
         it 'uses static credentials when the profile self references' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/role_a',
+            'arn:aws:iam::123456789012:role/role_a',
             'ACCESS_KEY_SELF',
             'AK_2',
             'SECRET_AK_2',
@@ -509,7 +509,7 @@ module Aws
 
         it 'will assume a role from shared credentials before shared config' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/bar',
+            'arn:aws:iam::123456789012:role/bar',
             'ACCESS_KEY_1', # from 'fooprofile'
             'AR_AKID',
             'AR_SECRET',
@@ -525,7 +525,7 @@ module Aws
 
         it 'will then try to assume a role from shared config' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/bar',
+            'arn:aws:iam::123456789012:role/bar',
             'ACCESS_KEY_ARPC', # from 'ar_from_self'
             'AR_AKID',
             'AR_SECRET',
@@ -541,7 +541,7 @@ module Aws
 
         it 'assumes a role from config using source in shared credentials' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/foo',
+            'arn:aws:iam::123456789012:role/foo',
             'ACCESS_KEY_1', # from 'creds_from_sc'
             'AR_AKID',
             'AR_SECRET',
@@ -557,7 +557,7 @@ module Aws
 
         it 'allows region to be resolved when unspecified' do
           assume_role_stub(
-            'arn:aws:iam:123456789012:role/bar',
+            'arn:aws:iam::123456789012:role/bar',
             'ACCESS_KEY_ARPC',
             'AR_AKID',
             'AR_SECRET',
@@ -592,7 +592,7 @@ module Aws
           }
         JSON
         assume_role_stub(
-          'arn:aws:iam:123456789012:role/foo',
+          'arn:aws:iam::123456789012:role/foo',
           'ACCESS_KEY_EC2',
           'AR_AKID',
           'AR_SECRET',
@@ -636,7 +636,7 @@ module Aws
         stub_request(:get, "http://169.254.170.2#{path}")
           .to_return(status: 200, body: resp)
         assume_role_stub(
-          'arn:aws:iam:123456789012:role/foo',
+          'arn:aws:iam::123456789012:role/foo',
           'ACCESS_KEY_ECS',
           'AR_AKID',
           'AR_SECRET',

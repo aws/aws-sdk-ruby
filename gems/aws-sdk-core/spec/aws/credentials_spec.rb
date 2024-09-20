@@ -13,13 +13,28 @@ module Aws
       expect(Credentials.new('akid', 'secret').secret_access_key).to eq('secret')
     end
 
-    it 'provides access to the session tokey' do
+    it 'provides access to the session token' do
       creds = Credentials.new('akid', 'secret', 'token')
       expect(creds.session_token).to eq('token')
     end
 
     it 'defaults the session token to nil' do
       expect(Credentials.new('akid', 'secret').session_token).to be(nil)
+    end
+
+    it 'takes extra properties after session token' do
+      expect do
+        Credentials.new('akid', 'secret', nil, foo: 'bar')
+      end.to_not raise_error
+    end
+
+    it 'provides access to the account id' do
+      creds = Credentials.new('akid', 'secret', account_id: 'account_id')
+      expect(creds.account_id).to eq('account_id')
+    end
+
+    it 'defaults the account id to nil' do
+      expect(Credentials.new('akid', 'secret').account_id).to be(nil)
     end
 
     describe '#set?' do

@@ -159,6 +159,14 @@ module AwsSdkCodeGenerator
               Param.new('use_fips_endpoint', value)
             when 'AWS::UseDualStack'
               Param.new('use_dualstack_endpoint', value)
+            when 'AWS::Auth::AccountId'
+              Param.new(
+                'credentials',
+                "Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '#{value}')",
+                true
+              )
+            when 'AWS::Auth::AccountIdEndpointMode'
+              Param.new('account_id_endpoint_mode', value)
             when 'AWS::STS::UseGlobalEndpoint'
               Param.new('sts_regional_endpoints', value ? 'legacy' : 'regional')
             when 'AWS::S3::UseGlobalEndpoint'
@@ -167,9 +175,7 @@ module AwsSdkCodeGenerator
               Param.new('use_accelerate_endpoint', value)
             when 'AWS::S3::ForcePathStyle'
               Param.new('force_path_style', value)
-            when 'AWS::S3::UseArnRegion'
-              Param.new('s3_use_arn_region', value)
-            when 'AWS::S3Control::UseArnRegion'
+            when 'AWS::S3::UseArnRegion', 'AWS::S3Control::UseArnRegion'
               Param.new('s3_use_arn_region', value)
             when 'AWS::S3::DisableMultiRegionAccessPoints'
               Param.new('s3_disable_multiregion_access_points', value)
@@ -182,14 +188,16 @@ module AwsSdkCodeGenerator
         end
 
         class Param
-          def initialize(param, value)
+          def initialize(param, value, literal = false)
             @param = param
             @value = value
+            @literal = literal
           end
+
           attr_accessor :param
 
           def value
-            if @value.is_a? String
+            if @value.is_a?(String) && !@literal
               "'#{@value}'"
             else
               @value

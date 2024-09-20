@@ -11,11 +11,11 @@ module {{module_name}}
         :endpoint_provider,
         doc_type: '{{module_name}}::EndpointProvider',
         rbs_type: 'untyped',
-        docstring: 'The endpoint provider used to resolve endpoints. Any '\
-                   'object that responds to `#resolve_endpoint(parameters)` '\
-                   'where `parameters` is a Struct similar to '\
-                   '`{{module_name}}::EndpointParameters`'
-      ) do |cfg|
+        docstring: <<~DOCS) do |_cfg|
+The endpoint provider used to resolve endpoints. Any object that responds to
+`#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+`{{module_name}}::EndpointParameters`.
+        DOCS
         {{module_name}}::EndpointProvider.new
       end
 
@@ -23,8 +23,11 @@ module {{module_name}}
       option(
         :{{name}},
         doc_type: '{{doc_type}}',
-        default: {{{default}}},
-        docstring: "{{{docstring}}}")
+        docstring: <<~DOCS) do |cfg|
+{{{docstring}}}
+        DOCS
+        {{{default}}}
+      end
 
       {{/endpoint_options}}
       # @api private
@@ -54,6 +57,19 @@ module {{module_name}}
           metrics << 'ENDPOINT_OVERRIDE' unless context.config.regional_endpoint
           if context[:auth_scheme] && context[:auth_scheme]['name'] == 'sigv4a'
             metrics << 'SIGV4A_SIGNING'
+          end
+          {{#has_account_id_endpoint_mode?}}
+          case context.config.account_id_endpoint_mode
+          when 'preferred'
+            metrics << 'ACCOUNT_ID_MODE_PREFERRED'
+          when 'disabled'
+            metrics << 'ACCOUNT_ID_MODE_DISABLED'
+          when 'required'
+            metrics << 'ACCOUNT_ID_MODE_REQUIRED'
+          end
+          {{/has_account_id_endpoint_mode?}}
+          if context.config.credentials&.credentials&.account_id
+            metrics << 'RESOLVED_ACCOUNT_ID'
           end
           Aws::Plugins::UserAgent.metric(*metrics, &block)
         end

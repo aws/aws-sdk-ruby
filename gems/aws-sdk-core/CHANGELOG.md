@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support Account ID credentials using `ENV['AWS_ACCOUNT_ID']`, `aws_account_id` shared config, or the `account_id` Client configuration option.
+
+* Feature - Support Account ID endpoint mode using `ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE']`, `aws_account_id_endpoint_mode` shared config, or the `account_id_endpoint_mode` Client configuration option. Defaults to `preferred`, which will use the account id endpoint if available. Set to `disabled` to disable account id endpoints. Set to `required` to require account id endpoint usage; an error is raised if credentials do not have an account id.
+
 3.206.0 (2024-09-17)
 ------------------
 
@@ -64,6 +68,7 @@ Unreleased Changes
 ------------------
 
 * Issue - Allow legacy/undocumented `sigv4_signer` configuration to override resolved signer.
+
 * Issue - Consider sigv4a supported without crt check.
 
 3.201.4 (2024-08-08)
